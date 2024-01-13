@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Devrate - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Welcome to the frontend repository of our Deverate App! This application is designed to assist in identifying and evaluating developer levels during interviews with experts. This README provides essential information for frontend developers contributing to or exploring this project.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Developer Level Assessment**: The application facilitates the assessment of developers based on their skills, experience, and expertise.
+- **User-Friendly Interface**: An intuitive and user-friendly interface for smooth navigation and interaction.
+- **Real-time Feedback**: Instantaneous feedback and scoring mechanisms to aid in the evaluation process.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Developer Levels
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The app utilizes a structured system to identify and categorize developers into different levels based on their skills and experience. The levels include:
 
-### `npm test`
+- Junior Developer
+- Intermediate Developer
+- Senior Developer
+- Lead Developer
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+The frontend of the application is built using modern web technologies and frameworks, including:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [React](https://reactjs.org/)
+- [React DevTools](https://reactjs.org/blog/2019/08/15/new-react-devtools.html)
+- [react-dom](https://reactjs.org/docs/react-dom.html)
+- [react-router-dom](https://reactrouter.com/web/guides/quick-start)
+- [Redux](https://redux.js.org/)
+- [react-redux](https://react-redux.js.org/)
+- [@reduxjs/toolkit](https://redux-toolkit.js.org/)
+- [rtk-query](https://rtk-query-docs.netlify.app/)
+- [redux-logger](https://www.npmjs.com/package/redux-logger)
+- [redux-persist](https://github.com/rt2zz/redux-persist)
+- [prop-types](https://www.npmjs.com/package/prop-types)
+- [uuid](https://www.npmjs.com/package/uuid)
+- [formik](https://formik.org/)
+- [yup](https://github.com/jquense/yup)
+- [Jest](https://jestjs.io/)
+- [Prettier](https://prettier.io/)
+- [Styled Components](https://styled-components.com/)
+- [react-toastify](https://fkhadra.github.io/react-toastify/introduction)
+- [@mui/material](https://mui.com/getting-started/installation/)
+- [i18next](https://www.i18next.com/)
+- [moment](https://momentjs.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How to Contribute
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Make your modifications and improvements.
+4. Test thoroughly to ensure your changes work as expected.
+5. Submit a pull request.
 
-### `npm run eject`
+## Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To run the application locally, follow these steps
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Resources
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+to be added later
