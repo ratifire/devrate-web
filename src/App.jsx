@@ -3,7 +3,7 @@ function App() {
   return (
     <div className="App">
       <main>
-        <p>Hello DEVRATE</p>
+        <p>Hello DEVRATE main</p>
       </main>
     </div>
   );
