@@ -1,12 +1,8 @@
 import "./App.css";
+import SignupForm from "./SignupForm/SignupForm";
+
 function App() {
-  return (
-    <div className="App">
-      <main>
-        <p>Hello DEVRATE main</p>
-      </main>
-    </div>
-  );
+  return <SignupForm />;
 }
 
 export default App;
