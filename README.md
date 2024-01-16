@@ -44,6 +44,7 @@ The frontend of the application is built using modern web technologies and frame
 - [@mui/material](https://mui.com/getting-started/installation/)
 - [i18next](https://www.i18next.com/)
 - [moment](https://momentjs.com/)
+- [classnames](https://github.com/JedWatson/classnames#readme/)
 
 ## How to Contribute
 
