@@ -1,8 +1,15 @@
 import "./App.css";
-import SignupForm from "./SignupForm/SignupForm";
+import SignupForm from "./components/SignupForm/SignupForm";
+import { Suspense } from "react";
 
 function App() {
   return <SignupForm />;
 }
 
-export default App;
+export default function WrapperApp() {
+  return (
+      <Suspense fallback="...loading">
+        <App/>
+      </Suspense>
+  )
+}
