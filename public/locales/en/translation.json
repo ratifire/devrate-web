@@ -1,0 +1,13 @@
+{
+  "main": {
+    "header": "Welcome to the devrate!",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email_address": "Email Address",
+    "submit": "Submit",
+    "required": "Required",
+    "must_characters_20": "Must be 20 characters or less",
+    "must_characters_15": "Must be 15 characters or less",
+    "invalid_mail_address": "Invalid mail address"
+  }
+}

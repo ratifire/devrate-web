@@ -1,5 +1,6 @@
 import "./App.css";
 import SignupForm from "./components/SignupForm/SignupForm";
+import { Suspense } from "react";
 import {
     createBrowserRouter,
     RouterProvider,
@@ -25,11 +26,17 @@ const router = createBrowserRouter([
         ]
     },
 ]);
-
+ 
 function App() {
     return (
         <RouterProvider router={router}/>
     )
 }
 
-export default App;
+export default function WrapperApp() {
+  return (
+      <Suspense fallback="...loading">
+        <App/>
+      </Suspense>
+  )
+}
