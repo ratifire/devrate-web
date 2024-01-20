@@ -1,7 +1,18 @@
-.App {
+.home {
     font-size: 20px;
+    margin: 200px auto;
+    text-align: center;
+}
+
+.navList {
+    display: flex;
+    gap: 40px;
+}
+
+.error {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
