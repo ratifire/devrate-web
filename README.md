@@ -2,17 +2,21 @@
 
 ## Overview
 
-Welcome to the frontend repository of our Deverate App! This application is designed to assist in identifying and evaluating developer levels during interviews with experts. This README provides essential information for frontend developers contributing to or exploring this project.
+Welcome to the frontend repository of our Deverate App! This application is designed to assist in identifying and
+evaluating developer levels during interviews with experts. This README provides essential information for frontend
+developers contributing to or exploring this project.
 
 ## Features
 
-- **Developer Level Assessment**: The application facilitates the assessment of developers based on their skills, experience, and expertise.
+- **Developer Level Assessment**: The application facilitates the assessment of developers based on their skills,
+  experience, and expertise.
 - **User-Friendly Interface**: An intuitive and user-friendly interface for smooth navigation and interaction.
 - **Real-time Feedback**: Instantaneous feedback and scoring mechanisms to aid in the evaluation process.
 
 ## Developer Levels
 
-The app utilizes a structured system to identify and categorize developers into different levels based on their skills and experience. The levels include:
+The app utilizes a structured system to identify and categorize developers into different levels based on their skills
+and experience. The levels include:
 
 - Junior Developer
 - Intermediate Developer
