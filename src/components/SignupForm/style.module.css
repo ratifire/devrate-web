@@ -1,22 +1,22 @@
 .form {
-  width: 500px;
-  height: 300px;
-  margin: 100px auto;
-  border: 1px solid #000;
-  padding: 30px;
-  border-radius: 10px;
+    width: 500px;
+    height: 300px;
+    margin: 100px auto;
+    border: 1px solid #000;
+    padding: 30px;
+    border-radius: 10px;
 }
 
 .form_inputWrap {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .form_input {
-  margin-left: 15px;
+    margin-left: 15px;
 }
 
 .form_error {
-  color: red;
+    color: red;
 }
