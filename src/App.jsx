@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import {redirect} from "react-router-dom";
 import {store} from "./redux/store/store";
 
+
 export const authorizedRouteLoader = () => {
     const token = store.getState().auth.token;
     if (!token) {
