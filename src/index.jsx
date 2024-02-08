@@ -6,9 +6,10 @@ import {store, persistor} from './redux/store/store';
 import {App} from './App';
 import './i18n';
 import './index.css';
-import theme from "./utils/theme/theme";
-import {ThemeProvider} from "@mui/material";
+import {createTheme, ThemeProvider} from "@mui/material";
+import getDesignTokens from "./utils/theme/theme";
 
+const darkModeTheme = createTheme(getDesignTokens('dark'))
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
@@ -16,8 +17,8 @@ root.render(
         <Suspense fallback='loading'>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <ThemeProvider theme={theme}>
-                        <App/>
+                    <ThemeProvider theme={darkModeTheme}>
+                    <App/>
                     </ThemeProvider>
                 </PersistGate>
             </Provider>
