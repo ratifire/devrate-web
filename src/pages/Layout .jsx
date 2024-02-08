@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 const Layout = () => {
     return (
         <Container maxWidth='xl' minWidth='xs'
-                   sx={{backgroundColor: 'background.default', height: '100vh', textAlign:'center'}}>
+                   sx={{backgroundColor: 'background.default', height: '100vh'}}>
             <ToastContainer
                 position='top-right'
                 autoClose={5000}
