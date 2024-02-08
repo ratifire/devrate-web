@@ -1,19 +1,15 @@
 import React from 'react';
-import {Button, Typography} from "@mui/material";
+import { HomeSection } from '../components/HomeSection/HomeSection';
 
 const HomePage = () => {
-    return (
-        <div className={'home'}>
-            <Typography variant={'title'}> Мультифункціональна платформа</Typography>
-            <br/>
-            <Typography variant={'title'}>від айтішників для айтішників</Typography>
-            <br/>
-            <Typography color={'error'}>error</Typography>
-            <Typography variant={'aboutTitle'}> Як це працює</Typography>
-            <Typography variant={'subtitle'}> Привет</Typography>
-            <Button variant="contained" color={'primary'}>Outlined</Button>
-        </div>
-    );
+  return (
+    <div className={'home'}>
+      {/*Header section*/}
+      <HomeSection />
+      {/*Main Section*/}
+      {/*Footer Section*/}
+    </div>
+  );
 };
 
 export default HomePage;
