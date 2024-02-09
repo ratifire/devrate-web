@@ -2,15 +2,13 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import Container from '@mui/material/Container';
+import Footer from '../components/Footer/Footer';
 
 const Layout = () => {
   return (
-    <Container
-      maxWidth='xl'
-      minWidth='xs'
-      sx={{ backgroundColor: 'background.default', height: '100vh', padding: '0 96px' }}
-    >
+    <Container maxWidth='xl' minWidth='xs' sx={{ paddingX: '12px' }}>
       <ToastContainer
         position='top-right'
         autoClose={5000}
@@ -26,6 +24,7 @@ const Layout = () => {
         transition={Zoom}
       />
       <Outlet />
+      <Footer />
     </Container>
   );
 };
