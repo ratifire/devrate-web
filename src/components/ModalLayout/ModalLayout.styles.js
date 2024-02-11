@@ -8,16 +8,16 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '55px 78px',
+    padding: '22px 16px',
     backgroundColor: '#1D1D1D',
-    width: 526,
-    minHeight: 660,
+    borderRadius: '6px',
+    width: '95%',
+    '@media (min-width: 580px)': {
+      width: 526,
+      padding: '55px 78px',
+    },
   }),
   iconContainer: () => ({
-    width: 147,
-    height: 18,
-  }),
-  icon: () => ({
     width: 147,
     height: 18,
   }),

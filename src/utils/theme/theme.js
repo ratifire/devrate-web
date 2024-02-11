@@ -1,6 +1,7 @@
 const getDesignTokens = (mode) => ({
   spacing: 1,
   typography: {
+    fontFamily: 'inherit',
     title: {
       fontSize: 60,
       fontWeight: 700,
@@ -68,6 +69,7 @@ const getDesignTokens = (mode) => ({
           },
           action: {
             disabled: '#FFFFFF66',
+            error: '#DD3350CC',
             disabledBackground: '#7D66F566',
           },
           text: {

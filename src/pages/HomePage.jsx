@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { HomeSection } from '../components/HomeSection/HomeSection';
 import { Button } from '@mui/material';
-import { createPortal } from 'react-dom';
-import RegistrationModal from '../components/SignupForm/RegistrationModal';
+// import ModalLayout from '../components/ModalLayout/ModalLayout';
+import ResetPasswordModal from '../components/SignupForm/ResetPasswordModal/ResetPasswordModal';
 
 const HomePage = () => {
   const [open, setOpen] = useState(false);
@@ -11,7 +11,7 @@ const HomePage = () => {
   return (
     <div className={'home'}>
       <Button onClick={handleOpen}>Push me</Button>
-      {open && createPortal(<RegistrationModal open={open} setOpen={handleClose} />, document.getElementById('modal'))}
+      {open && <ResetPasswordModal open={open} setOpen={handleClose} />}
       <HomeSection />
     </div>
   );

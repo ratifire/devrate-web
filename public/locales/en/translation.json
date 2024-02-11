@@ -5,5 +5,19 @@
     "privacy_policy": "Privacy Policy",
     "copyright": "© 2023 Devrate, Inc. All rights reserved.",
     "trademarks": "All trademarks, logos, and brand names are the <br/> property of their respective owners."
+  },
+  "modal": {
+    "title_enter_email": "Please enter an email address, which you used during registration.<br/>An email will be sent to you with instructions on how to reset your password.",
+    "text_b_privacy": "By continuing, you agree to our privacy policy and terms of use.",
+    "return_on": "Return to ",
+    "home_page": "Home page",
+    "required": "This is a required field",
+    "must_match": "Passwords must match",
+    "password": "Password",
+    "password_repeat": "Repeat password",
+    "password_reset": "Reset password",
+    "password_tooltip": "Passwords must contain 7+ characters, at least 1 number, at least 1 letter and no spaces.",
+    "password_long": "Password too long",
+    "password_short": "Password too short"
   }
 }
