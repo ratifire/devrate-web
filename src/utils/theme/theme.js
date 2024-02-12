@@ -1,39 +1,39 @@
 const getDesignTokens = (mode) => ({
-  spacing: 1,
-  typography: {
-    fontFamily: 'inherit',
-    title: {
-      fontSize: 60,
-      fontWeight: 700,
-      background: 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
-      backgroundClip: 'text',
-      color: 'transparent',
-      '&-webkit-background-clip': 'text',
-      '&-webkit-text-fill-color': 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
+    typography: {
+        fontFamily: 'inherit',
+        title: {
+            fontSize: 60,
+            fontWeight: 700,
+            background: 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
+            backgroundClip: 'text',
+            color: 'transparent',
+            '&-webkit-background-clip': 'text',
+            '&-webkit-text-fill-color': 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)'
+        },
+        aboutTitle: {
+            fontSize: 46,
+            fontWeight: 500,
+            background: 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
+            backgroundClip: 'text',
+            color: 'transparent',
+            '&-webkit-background-clip': 'text',
+            '&-webkit-text-fill-color': 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)'
+        },
+        list: {
+            fontSize: 18,
+            fontWeight: 500,
+            lineHeight: '30px'
+        },
+        subtitle: {
+            fontSize: 22,
+            fontWeight: 500,
+        },
+        subtitle1: {
+            fontSize: 16,
+            fontWeight: 500,
+        },
+
     },
-    aboutTitle: {
-      fontSize: 46,
-      fontWeight: 500,
-      background: 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
-      backgroundClip: 'text',
-      color: 'transparent',
-      '&-webkit-background-clip': 'text',
-      '&-webkit-text-fill-color': 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
-    },
-    list: {
-      fontSize: 18,
-      fontWeight: 500,
-      lineHeight: '30px',
-    },
-    subtitle: {
-      fontSize: 22,
-      fontWeight: 500,
-    },
-    subtitle1: {
-      fontSize: 16,
-      fontWeight: 500,
-    },
-  },
   palette: {
     mode,
     ...(mode === 'light'
@@ -82,4 +82,4 @@ const getDesignTokens = (mode) => ({
   },
 });
 
-export default getDesignTokens;
+export default getDesignTokens

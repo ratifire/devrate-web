@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HomeSection } from '../components/HomeSection/HomeSection';
+import AboutSection from "../components/HomeSection/AboutSection/AboutSection";
 import { Button } from '@mui/material';
 // import ModalLayout from '../components/ModalLayout/ModalLayout';
 import ResetPasswordModal from '../components/SignupForm/ResetPasswordModal/ResetPasswordModal';
@@ -13,8 +14,8 @@ const HomePage = () => {
       <Button onClick={handleOpen}>Push me</Button>
       {open && <ResetPasswordModal open={open} setOpen={handleClose} />}
       <HomeSection />
+        <AboutSection/>
     </div>
   );
-};
-
+ };
 export default HomePage;
