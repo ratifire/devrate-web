@@ -12,7 +12,6 @@ export const ModalLayout = ({ open, setOpen, children }) => {
       open={open}
       onClose={setOpen}
       closeAfterTransition
-      transitionDuration={500}
       sx={styles.modal}
     >
       <Slide direction='left' in={open}>

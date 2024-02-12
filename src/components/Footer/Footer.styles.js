@@ -17,7 +17,7 @@ const styles = {
   }),
   copyright: (theme) => ({
     marginBottom: 10,
-    fontsize: 14,
+    fontSize: 14,
     fontWeight: 600,
     lineHeight: '20px',
     color: theme.palette.text.secondary,
@@ -27,7 +27,7 @@ const styles = {
     },
   }),
   trademarks: (theme) => ({
-    fontsize: 14,
+    fontSize: 14,
     fontWeight: 600,
     lineHeight: '20px',
     color: theme.palette.text.grey,

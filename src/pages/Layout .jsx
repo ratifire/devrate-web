@@ -7,12 +7,8 @@ import Footer from "../components/Footer/Footer";
 
 const Layout = () => {
   return (
-    <Container
-      maxWidth='xl'
-      minWidth='xs'
-      sx={{ backgroundColor: 'background.default', minHeight: '100vh', padding: '0 96px' }}
-    >
-      {/*<Header/>*/}
+
+    <Container maxWidth='xl' sx={{ '@media (min-width: 600px)': { paddingX: '12px' } }}>
       <ToastContainer
         position='top-right'
         autoClose={5000}
