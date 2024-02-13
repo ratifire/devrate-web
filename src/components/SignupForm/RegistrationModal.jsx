@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
+
 import ModalLayout from '../ModalLayout/ModalLayout';
 import {
   Button,
@@ -13,22 +16,14 @@ import {
   InputLabel,
   FormControlLabel,
   Checkbox,
+  Link,
+  InputAdornment,
+  IconButton,
+  Tooltip,
 } from '@mui/material';
-
-const ValidationSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('This is a required field'),
-  country: Yup.string().min(6, 'Password too short').max(50, 'Password too long').required('This is a required field'),
-  firstName: Yup.string()
-    .min(2, 'FirstName too short')
-    .max(50, 'FirstName too long')
-    .required('This is a required field'),
-  lastName: Yup.string().min(2, 'LastName too short').max(50, 'LastName too long').required('This is a required field'),
-  password: Yup.string().min(6, 'Password too short').max(50, 'Password too long').required('This is a required field'),
-  password2: Yup.string()
-    .min(6, 'Password too short')
-    .max(50, 'Password too long')
-    .required('This is a required field'),
-});
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import styles from './ResetPasswordModal/ResetPasswordModal.styles';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 const initialValues = {
   email: '',
@@ -36,45 +31,82 @@ const initialValues = {
   firstName: '',
   lastName: '',
   password: '',
-  password2: '',
-  promo: false,
+  repeatPassword: '',
+  news: false,
   agreement: false,
 };
 
 // eslint-disable-next-line react/prop-types
 const RegistrationModal = ({ open, setOpen }) => {
-  // const WithMaterialUI = () => {
-  //   const formik = useFormik({
-  //     initialValues: initialValues,
-  //     validationSchema: validationSchema,
-  //     onSubmit: (values) => {
-  //       alert(JSON.stringify(values, null, 2));
-  //     },
-  //   });
-  // };
-  const onSubmit = () => {
-    console.log('submit');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { t } = useTranslation();
+
+  const ValidationSchema = Yup.object().shape({
+    email: Yup.string().email(t('modal.invalid_email')).required(t('modal.required')),
+    country: Yup.string().required(t('modal.required')),
+    firstName: Yup.string()
+      .min(2, t('modal.firstName_short'))
+      .max(50, t('modal.firstName_long'))
+      .required(t('modal.required')),
+    lastName: Yup.string()
+      .min(2, t('modal.lastName_short'))
+      .max(50, t('modal.lastName_long'))
+      .required(t('modal.required')),
+    password: Yup.string()
+      .min(6, t('modal.password_long'))
+      .max(50, t('modal.password_long'))
+      .required(t('modal.required')),
+    repeatPassword: Yup.string()
+      .min(6, t('modal.password_long'))
+      .max(50, t('modal.password_long'))
+      .required(t('modal.required')),
+  });
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => event.preventDefault();
+  const onSubmit = (values) => {
+    console.log(values);
   };
   return (
     <ModalLayout open={open} setOpen={setOpen}>
-      <Typography sx={{ marginTop: 50, marginBottom: 30, color: '#F1F1F1', fontSize: 16 }}>Реєстрація</Typography>
-      <Formik initialValues={initialValues} onSubmit={() => onSubmit()} validationSchema={ValidationSchema}>
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, handleReset }) => (
+      <Typography
+        sx={{
+          marginTop: 50,
+          marginBottom: 30,
+          color: '#F1F1F1',
+          fontSize: 16,
+        }}
+      >
+        {t('modal.registration')}
+      </Typography>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values, { resetForm }) => {
+          onSubmit(values);
+          resetForm();
+        }}
+        validationSchema={ValidationSchema}
+      >
+        {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
           <Form autoComplete='off' onSubmit={handleSubmit} style={{ width: '100%' }}>
             <TextField
               fullWidth
-              label='Електронна пошта'
+              label={t('modal.email')}
               variant='outlined'
               id='email'
               name='email'
               value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              sx={{ width: '100%', marginBottom: 24 }}
+              sx={{ width: '100%', marginBottom: 24, borderColor: 'green' }}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+              FormHelperTextProps={{
+                sx: { position: 'absolute', bottom: '-20px' },
+              }}
             />
-            <div style={{ position: 'absolute' }}>{errors.email && touched.email && errors.email}</div>
             <FormControl fullWidth variant='outlined' sx={{ marginBottom: 24 }}>
-              <InputLabel id='country-label'>Країна</InputLabel>
+              <InputLabel id='country-label'>{t('modal.country')}</InputLabel>
               <Select
                 id='country'
                 labelId='country-label'
@@ -82,17 +114,28 @@ const RegistrationModal = ({ open, setOpen }) => {
                 value={values.country}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                label='Країна'
+                label={t('modal.country')}
+                error={touched.country && Boolean(errors.country)}
+                helperText={touched.country && errors.country}
+                FormHelperTextProps={{
+                  sx: { position: 'absolute', bottom: '-20px' },
+                }}
               >
-                <MenuItem value={10}>Ukrain</MenuItem>
-                <MenuItem value={20}>Poland</MenuItem>
-                <MenuItem value={30}>USA</MenuItem>
+                <MenuItem value={'ukraine'}>{t('modal.ukraine')}</MenuItem>
+                <MenuItem value={'poland'}>{t('modal.poland')}</MenuItem>
+                <MenuItem value={'usa'}>{t('modal.usa')}</MenuItem>
               </Select>
             </FormControl>
-            <Box sx={{ display: 'flex', justifyContent: 'spaceBetween', marginBottom: 24 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'spaceBetween',
+                marginBottom: 24,
+              }}
+            >
               <TextField
                 fullWidth
-                label='Імʼя'
+                label={t('modal.firstName')}
                 variant='outlined'
                 id='firstName'
                 name='firstName'
@@ -100,22 +143,32 @@ const RegistrationModal = ({ open, setOpen }) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 sx={{ marginRight: 10 }}
+                error={touched.firstName && Boolean(errors.firstName)}
+                helperText={touched.firstName && errors.firstName}
+                FormHelperTextProps={{
+                  sx: { position: 'absolute', bottom: '-20px' },
+                }}
               />
               <TextField
                 fullWidth
-                label='Прізвище'
+                label={t('modal.lastName')}
                 variant='outlined'
                 id='lastName'
                 name='lastName'
                 value={values.lastName}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                error={touched.lastName && Boolean(errors.lastName)}
+                helperText={touched.lastName && errors.lastName}
+                FormHelperTextProps={{
+                  sx: { position: 'absolute', bottom: '-20px' },
+                }}
               />
             </Box>
             <TextField
-              type='password'
+              type={showPassword ? 'text' : 'password'}
               fullWidth
-              label='Пароль'
+              label={t('modal.password')}
               variant='outlined'
               id='password'
               name='password'
@@ -123,52 +176,143 @@ const RegistrationModal = ({ open, setOpen }) => {
               onChange={handleChange}
               onBlur={handleBlur}
               sx={{ width: '100%', marginBottom: 24 }}
+              error={touched.password && Boolean(errors.password)}
+              helperText={touched.password && errors.password}
+              FormHelperTextProps={{
+                sx: { position: 'absolute', bottom: '-20px' },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <>
+                    <InputAdornment position='end'>
+                      <IconButton
+                        aria-label='toggle password visibility'
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge='end'
+                        sx={{ marginRight: -12 }}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                    <InputAdornment position='end'>
+                      <Tooltip title={<Typography sx={styles.tooltip}>{t('modal.password_tooltip')}</Typography>}>
+                        <IconButton sx={{ marginRight: 0 }}>
+                          <InfoOutlinedIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornment>
+                  </>
+                ),
+              }}
             />
             <TextField
-              type='password'
+              type={showPassword ? 'text' : 'password'}
               fullWidth
-              label='Повторити пароль'
+              label={t('modal.repeatPassword')}
               variant='outlined'
-              id='password'
-              name='password'
-              value={values.password2}
+              id='repeatPassword'
+              name='repeatPassword'
+              value={values.repeatPassword}
               onChange={handleChange}
               onBlur={handleBlur}
               sx={{ width: '100%', marginBottom: 24 }}
+              error={touched.repeatPassword && Boolean(errors.repeatPassword)}
+              helperText={touched.repeatPassword && errors.repeatPassword}
+              FormHelperTextProps={{
+                sx: { position: 'absolute', bottom: '-20px' },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <>
+                    <InputAdornment position='end'>
+                      <IconButton
+                        aria-label='toggle password visibility'
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge='end'
+                        sx={{ marginRight: 0 }}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  </>
+                ),
+              }}
             />
             <FormControlLabel
-              control={<Checkbox checked={values.promo} onChange={handleChange} name='promo' />}
+              control={
+                <Checkbox
+                  checked={values.newsletter}
+                  onChange={handleChange}
+                  name='promo'
+                  sx={{
+                    color: '#F1F1F1',
+                    '&.Mui-checked': {
+                      color: '#F1F1F1',
+                    },
+                  }}
+                />
+              }
               label={
                 <Typography color='#f1f1f1' fontWeight={300} fontSize={14} lineHeight={1.28}>
-                  Надсилати мені новини, опитування та спіціальні пропозиції від DEVERATE
+                  {t('modal.newsletter')}
                 </Typography>
               }
-            />{' '}
-            <FormControlLabel
-              control={<Checkbox checked={values.promo} onChange={handleChange} name='promo' />}
-              label={
-                <Typography color='#f1f1f1' fontWeight={300} fontSize={14} lineHeight={1.28}>
-                  Я прочитав (ла) та погоджуюсь з умовами користування
-                </Typography>
-              }
+              helperText={touched.news && errors.news}
+              FormHelperTextProps={{
+                sx: { position: 'absolute', bottom: '-20px' },
+              }}
             />
-            <Button
-              onClick={() => handleReset()}
-              sx={(theme) => ({
-                margin: '0 auto',
-                paddingX: 32,
-                paddingY: 16,
-                fontsize: 16,
-                fontWeight: 500,
-                backgroundColor: theme.palette.primary.main,
-                color: theme.palette.common.white,
-                '&:hover': {
-                  backgroundColor: theme.palette.primary.dark,
-                },
-              })}
-            >
-              Попередній перегляд
-            </Button>
+
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={values.agreement}
+                  onChange={handleChange}
+                  name='agreement'
+                  sx={{
+                    color: '#F1F1F1',
+                    '&.Mui-checked': {
+                      color: '#F1F1F1',
+                    },
+                  }}
+                />
+              }
+              label={
+                <Typography color='#f1f1f1' fontWeight={300} fontSize={14} lineHeight={1.28}>
+                  {t('modal.agreement')}
+                </Typography>
+              }
+              sx={{ marginBottom: 24 }}
+            />
+            <Box sx={{ textAlign: 'center', marginBottom: 50 }}>
+              <Button
+                disabled={(!values.promo && true) || (!values.agreement && true)}
+                type='submit'
+                sx={(theme) => ({
+                  paddingX: 32,
+                  paddingY: 16,
+                  fontsize: 16,
+                  fontWeight: 500,
+                  backgroundColor: theme.palette.primary.main,
+                  color: theme.palette.common.white,
+                  '&:hover': {
+                    backgroundColor: theme.palette.primary.dark,
+                  },
+                })}
+              >
+                {t('modal.register')}
+              </Button>
+            </Box>
+            <Box sx={{ textAlign: 'center', fontSize: 14, lineHeight: 1.43 }}>
+              <Link href='#' color='#F1F1F1' sx={{ marginRight: 10 }}>
+                {t('modal.privacy_policy')}
+              </Link>
+              <Link href='#' color='#F1F1F1'>
+                {t('modal.terms_and_conditions')}
+              </Link>
+            </Box>
           </Form>
         )}
       </Formik>
