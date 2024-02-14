@@ -4,7 +4,8 @@ import AboutSection from '../components/HomeSection/AboutSection/AboutSection';
 import { Button } from '@mui/material';
 // import ModalLayout from '../components/ModalLayout/ModalLayout';
 // import ResetPasswordModal from '../components/SignupForm/ResetPasswordModal/ResetPasswordModal';
-import RegistrationModal from '../components/SignupForm/RegistrationModal';
+// import RegistrationModal from '../components/SignupForm/RegistrationModal';
+import CheckEmailResetPasswordModal from '../components/SignupForm/CheckEmailResetPasswordModal/CheckEmailResetPasswordModal';
 
 const HomePage = () => {
   const [open, setOpen] = useState(false);
@@ -13,7 +14,7 @@ const HomePage = () => {
   return (
     <div className={'home'}>
       <Button onClick={handleOpen}>Push me</Button>
-      {open && <RegistrationModal open={open} setOpen={handleClose} />}
+      {open && <CheckEmailResetPasswordModal open={open} setOpen={handleClose} />}
       <HomeSection />
       <AboutSection />
     </div>
