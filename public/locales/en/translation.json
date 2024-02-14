@@ -8,8 +8,9 @@
   "hero": {
     "heroTitle": "Multi-functional platform from developers for developers",
     "heroText": "Interview. Ratings. Resume",
-    "heroButtonText": "PREVIEW"
+    "heroButtonText": "Register"
   },
+  "main": {},
   "footer": {
     "terms_and_conditions": "Terms and conditions",
     "privacy_policy": "Privacy Policy",
@@ -28,6 +29,25 @@
     "password_reset": "Reset password",
     "password_tooltip": "Passwords must contain 7+ characters, at least 1 number, at least 1 letter and no spaces.",
     "password_long": "Password too long",
-    "password_short": "Password too short"
+    "password_short": "Password too short",
+    "invalid_email": "Invalid email",
+    "firstName_long": "First name too long",
+    "firstName_short": "First name too long",
+    "lastName_long": "Last name too long",
+    "lastName_short": "Last name too long",
+    "registration": "Registration",
+    "email": "Email",
+    "country": "Country",
+    "ukraine": "Ukraine",
+    "poland": "Poland",
+    "usa": "USA",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "repeatPassword": "Repeat password",
+    "newsletter": "Send me news, surveys and special offers from DEVERATE",
+    "agreement": "I have read and agree to the terms of use",
+    "register":"Register",
+    "terms_and_conditions": "Terms and conditions",
+    "privacy_policy": "Privacy Policy"
   }
 }
