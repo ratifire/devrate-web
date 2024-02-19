@@ -4,9 +4,10 @@ import AboutSection from '../components/Home/AboutSection/AboutSection';
 import { Button } from '@mui/material';
 // import ModalLayout from '../components/ModalLayout/ModalLayout';
 // import ResetPasswordModal from '../components/Modals/ResetPasswordModal/ResetPasswordModal';
-import RegistrationModal from '../components/Modals/RegistrationModal/RegistrationModal';
+// import RegistrationModal from '../components/Modals/RegistrationModal/RegistrationModal';
 // import LoginModal from '../components/Modals/LoginModal/LoginModal';
-
+   import CheckEmailResetPasswordModal from '../components/SignupForm/CheckEmailResetPasswordModal/CheckEmailResetPasswordModal';
+ 
 const HomePage = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -14,9 +15,9 @@ const HomePage = () => {
   return (
     <div className={'home'}>
       <Button onClick={handleOpen}>Push me</Button>
-      {open && <RegistrationModal open={open} setOpen={handleClose} />}
+       {open && <CheckEmailResetPasswordModal open={open} setOpen={handleClose} />}
       <HeroSection />
-      <AboutSection />
+       <AboutSection />
     </div>
   );
 };
