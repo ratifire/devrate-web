@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import { styles } from './HomeSection.styles';
+import { styles } from './HeroSection.styles';
 import { useTranslation } from 'react-i18next';
 
-export const HomeSection = () => {
+export const HeroSection = () => {
   const { t } = useTranslation();
 
   return (

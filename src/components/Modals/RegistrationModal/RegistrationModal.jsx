@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-
-import ModalLayout from '../ModalLayout/ModalLayout';
+import ModalLayout from '../../ModalLayout/ModalLayout';
 import {
   Button,
   MenuItem,
@@ -22,9 +20,8 @@ import {
   Tooltip,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import styles from './ResetPasswordModal/ResetPasswordModal.styles';
+import styles from '../RegistrationModal/RegistrationModal.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-
 const initialValues = {
   email: '',
   country: '',
@@ -35,13 +32,10 @@ const initialValues = {
   news: false,
   agreement: false,
 };
-
 // eslint-disable-next-line react/prop-types
 const RegistrationModal = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
-
   const { t } = useTranslation();
-
   const ValidationSchema = Yup.object().shape({
     email: Yup.string().email(t('modal.invalid_email')).required(t('modal.required')),
     country: Yup.string().required(t('modal.required')),
@@ -60,6 +54,7 @@ const RegistrationModal = ({ open, setOpen }) => {
     repeatPassword: Yup.string()
       .min(6, t('modal.password_long'))
       .max(50, t('modal.password_long'))
+      .oneOf([Yup.ref('password'), null], t('modal.must_match'))
       .required(t('modal.required')),
   });
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -69,16 +64,7 @@ const RegistrationModal = ({ open, setOpen }) => {
   };
   return (
     <ModalLayout open={open} setOpen={setOpen}>
-      <Typography
-        sx={{
-          marginTop: 50,
-          marginBottom: 30,
-          color: '#F1F1F1',
-          fontSize: 16,
-        }}
-      >
-        {t('modal.registration')}
-      </Typography>
+      <Typography sx={styles.title}>{t('modal.registration')}</Typography>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { resetForm }) => {
@@ -126,13 +112,7 @@ const RegistrationModal = ({ open, setOpen }) => {
                 <MenuItem value={'usa'}>{t('modal.usa')}</MenuItem>
               </Select>
             </FormControl>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'spaceBetween',
-                marginBottom: 24,
-              }}
-            >
+            <Box sx={styles.inputNameContainer}>
               <TextField
                 fullWidth
                 label={t('modal.firstName')}
@@ -231,7 +211,7 @@ const RegistrationModal = ({ open, setOpen }) => {
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
                         edge='end'
-                        sx={{ marginRight: 0 }}
+                        // sx={{ marginRight: 0 }}
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
@@ -254,17 +234,12 @@ const RegistrationModal = ({ open, setOpen }) => {
                   }}
                 />
               }
-              label={
-                <Typography color='#f1f1f1' fontWeight={300} fontSize={14} lineHeight={1.28}>
-                  {t('modal.newsletter')}
-                </Typography>
-              }
+              label={<Typography sx={styles.newsAgreementText}>{t('modal.newsletter')}</Typography>}
               helperText={touched.news && errors.news}
               FormHelperTextProps={{
                 sx: { position: 'absolute', bottom: '-20px' },
               }}
             />
-
             <FormControlLabel
               control={
                 <Checkbox
@@ -279,37 +254,17 @@ const RegistrationModal = ({ open, setOpen }) => {
                   }}
                 />
               }
-              label={
-                <Typography color='#f1f1f1' fontWeight={300} fontSize={14} lineHeight={1.28}>
-                  {t('modal.agreement')}
-                </Typography>
-              }
+              label={<Typography sx={styles.newsAgreementText}>{t('modal.agreement')}</Typography>}
               sx={{ marginBottom: 24 }}
             />
-            <Box sx={{ textAlign: 'center', marginBottom: 50 }}>
-              <Button
-                disabled={(!values.promo && true) || (!values.agreement && true)}
-                type='submit'
-                sx={(theme) => ({
-                  paddingX: 32,
-                  paddingY: 16,
-                  fontsize: 16,
-                  fontWeight: 500,
-                  backgroundColor: theme.palette.primary.main,
-                  color: theme.palette.common.white,
-                  '&:hover': {
-                    backgroundColor: theme.palette.primary.dark,
-                  },
-                })}
-              >
-                {t('modal.register')}
-              </Button>
-            </Box>
-            <Box sx={{ textAlign: 'center', fontSize: 14, lineHeight: 1.43 }}>
-              <Link href='#' color='#F1F1F1' sx={{ marginRight: 10 }}>
+            <Button disabled={(!values.promo && true) || (!values.agreement && true)} type='submit' sx={styles.btn}>
+              {t('modal.register')}
+            </Button>
+            <Box sx={styles.policyTermsContainer}>
+              <Link href='#' sx={styles.policyTermsLink}>
                 {t('modal.privacy_policy')}
               </Link>
-              <Link href='#' color='#F1F1F1'>
+              <Link href='#' sx={styles.policyTermsLink}>
                 {t('modal.terms_and_conditions')}
               </Link>
             </Box>

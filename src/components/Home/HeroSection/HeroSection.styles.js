@@ -31,6 +31,7 @@ export const styles = {
     paddingX: 32,
     paddingY: 16,
     fontsize: 16,
+    width: 190,
     lineHeight: '16px',
     fontWeight: 500,
     backgroundColor: theme.palette.primary.main,
