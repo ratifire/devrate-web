@@ -1,27 +1,27 @@
 import * as React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 
-import ModalLayout from '../../ModalLayout/ModalLayout';
+import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
 import styles from './ResetPasswordModal.styles';
 
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
-import { Formik, Form, useFormik } from 'formik';
+import {Form, Formik, useFormik} from 'formik';
 import * as Yup from 'yup';
 
 import {
   Button,
-  Typography,
-  Link,
   FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-  Tooltip,
   FormHelperText,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  Link,
+  OutlinedInput,
+  Tooltip,
+  Typography,
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import {Visibility, VisibilityOff} from '@mui/icons-material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 // eslint-disable-next-line react/prop-types

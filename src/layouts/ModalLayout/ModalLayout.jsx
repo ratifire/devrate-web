@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Modal, Slide } from '@mui/material';
-import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
-import { styles } from './ModalLayout.styles';
+import {Box, Modal, Slide} from '@mui/material';
+import {ReactComponent as Logo} from '../../assets/icons/logo.svg';
+import {styles} from './ModalLayout.styles';
 
 // eslint-disable-next-line react/prop-types
 export const ModalLayout = ({ open, setOpen, children }) => {

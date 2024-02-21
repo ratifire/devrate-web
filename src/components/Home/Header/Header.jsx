@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { AppBar, Box, Toolbar, IconButton, Drawer, Divider, Link, Container } from '@mui/material';
+import { AppBar, Box, Container, Divider, Drawer, IconButton, Link, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import logo from '../../assets/icons/logo.svg';
+import logo from '../../../assets/icons/logo.svg';
 import styles from './Header.styles';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';

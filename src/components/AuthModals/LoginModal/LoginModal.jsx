@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import { Formik, Form } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
-import ModalLayout from '../../ModalLayout/ModalLayout';
-import { Button, TextField, Typography, Box, Link, InputAdornment, IconButton, Tooltip } from '@mui/material';
+import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
+import { Box, Button, IconButton, InputAdornment, Link, TextField, Tooltip, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from '../LoginModal/LoginModal.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
