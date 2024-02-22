@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import ModalLayout from '../../ModalLayout/ModalLayout';
+import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
 import {
+  Box,
   Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  Link,
   MenuItem,
   Select,
   TextField,
-  Typography,
-  Box,
-  FormControl,
-  InputLabel,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  InputAdornment,
-  IconButton,
   Tooltip,
+  Typography,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from '../RegistrationModal/RegistrationModal.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+
 const initialValues = {
   email: '',
   country: '',

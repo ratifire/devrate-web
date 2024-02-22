@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 
-import ModalLayout from '../../ModalLayout/ModalLayout';
+import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
 import styles from './CheckEmailResetPasswordModal.styles';
 
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
-import { Formik, Form, useFormik } from 'formik';
+import {Form, Formik, useFormik} from 'formik';
 import * as Yup from 'yup';
 
-import { Button, Typography, Link, FormControl, InputLabel, OutlinedInput, FormHelperText, Box } from '@mui/material';
+import {Box, Button, FormControl, FormHelperText, InputLabel, Link, OutlinedInput, Typography} from '@mui/material';
 
 // eslint-disable-next-line react/prop-types
 const ResetPasswordModal = ({ open, setOpen }) => {

@@ -3,7 +3,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { styles } from './HeroSection.styles';
 import { useTranslation } from 'react-i18next';
 
-export const HeroSection = () => {
+const HeroSection = () => {
   const { t } = useTranslation();
 
   return (
@@ -14,3 +14,5 @@ export const HeroSection = () => {
     </Box>
   );
 };
+
+export default HeroSection;

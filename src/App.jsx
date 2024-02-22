@@ -1,12 +1,10 @@
 import React from 'react';
-import SignupForm from './components/Modals/SignupForm';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
-import Layout from './pages/Layout ';
 import ProfilePage from './pages/ProfilePage';
-import { redirect } from 'react-router-dom';
 import { store } from './redux/store/store';
+import BaseLayout from './layouts/BaseLayout/BaseLayout';
 
 export const authorizedRouteLoader = () => {
   const token = store.getState().auth.token;
@@ -18,7 +16,7 @@ export const authorizedRouteLoader = () => {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <BaseLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -27,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'signup',
-        element: <SignupForm />,
+        element: <HomePage />,
       },
       {
         path: 'profile',
@@ -37,6 +35,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 export function App() {
   return <RouterProvider router={router} />;
 }

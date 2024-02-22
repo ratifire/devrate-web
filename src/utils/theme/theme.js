@@ -90,6 +90,25 @@ const getDesignTokens = (mode) => ({
           },
         }),
   },
+  baseStyles: {
+    body: {
+      margin: 0,
+      fontFamily: 'Inter, sans-serif',
+      fontOpticalSizing: 'auto',
+      fontStyle: 'normal',
+      fontVariationSettings: "'slnt' 0",
+      WebkitFontSmoothing: 'antialiased',
+      MozOsxFontSmoothing: 'grayscale',
+      backgroundColor: '#1D1D1D',
+      backgroundImage: 'linear-gradient(180deg, #1d1d1d 0%, #090909 100%)',
+    },
+    code: {
+      fontFamily: 'Inter, sans-serif',
+    },
+    '*': {
+      boxSizing: 'border-box',
+    },
+  },
 });
 
 export default getDesignTokens;
