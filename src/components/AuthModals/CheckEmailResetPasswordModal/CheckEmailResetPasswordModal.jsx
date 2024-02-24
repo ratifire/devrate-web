@@ -1,18 +1,19 @@
 import * as React from 'react';
-import {Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
 import styles from './CheckEmailResetPasswordModal.styles';
 
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
-import {Form, Formik, useFormik} from 'formik';
+import { Form, Formik, useFormik } from 'formik';
 
-import {Box, Button, FormControl, FormHelperText, InputLabel, Link, OutlinedInput, Typography} from '@mui/material';
-import {
-  CheckEmailResetPasswordModalValidationSchema
-} from '../../../utils/validationSchemas/CheckEmailResetPasswordModalValidationSchema'; // eslint-disable-next-line react/prop-types
+import { Box, Button, FormControl, FormHelperText, InputLabel, Link, OutlinedInput, Typography } from '@mui/material';
+import { CheckEmailResetPasswordModalValidationSchema } from '../../../utils/validationSchemas/CheckEmailResetPasswordModalValidationSchema'; // eslint-disable-next-line react/prop-types
 
+const initialValues = {
+  email: '',
+};
 // eslint-disable-next-line react/prop-types
 const ResetPasswordModal = ({ open, setOpen }) => {
   const { t } = useTranslation();
@@ -22,10 +23,7 @@ const ResetPasswordModal = ({ open, setOpen }) => {
     resetForm();
   };
   const formik = useFormik({
-    initialValues: {
-      email: '',
-    },
-
+    initialValues,
     validationSchema: CheckEmailResetPasswordModalValidationSchema,
     onSubmit: Submit,
   });
