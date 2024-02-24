@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { AppBar, Box, Container, Divider, Drawer, IconButton, Link, Toolbar } from '@mui/material';
+import { AppBar, Box, Container, Divider, Drawer, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../../../assets/icons/logo.svg';
 import styles from './Header.styles';
-import { useTranslation } from 'react-i18next';
-import { Link as RouterLink } from 'react-router-dom';
+import LinkList from './LinkList';
+import navLinks from '../../../utils/constants/navLinks';
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { t } = useTranslation();
 
   const handlerDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const navLinks = [t('header.about_platform'), t('header.community'), t('header.contacts'), t('header.log_in')];
 
   const drawer = (
     <Box onClick={handlerDrawerToggle} sx={styles.drawer}>
@@ -22,11 +20,7 @@ function Header() {
       </Box>
       <Divider />
       <Box sx={styles.headerNavMobile}>
-        {navLinks.map((link) => (
-          <Link key={link} to={`/`} component={RouterLink} sx={styles.link}>
-            {link}
-          </Link>
-        ))}
+        <LinkList links={navLinks} />
       </Box>
     </Box>
   );
@@ -51,11 +45,7 @@ function Header() {
               <img src={logo} alt='logo' width={'187'} height={'22.7'} />
             </Box>
             <Box sx={styles.headerNav}>
-              {navLinks.map((link) => (
-                <Link key={link} to={`/`} component={RouterLink} sx={styles.link}>
-                  {link}
-                </Link>
-              ))}
+              <LinkList links={navLinks} />
             </Box>
           </Toolbar>
           <Box component='nav'>
