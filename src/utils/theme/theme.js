@@ -10,7 +10,7 @@ const getDesignTokens = (mode) => ({
     },
   },
   typography: {
-    fontFamily: 'inherit',
+    fontFamily: 'Inter, sans-serif',
     title: {
       fontSize: 60,
       fontWeight: 700,
