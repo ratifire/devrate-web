@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFormik } from 'formik';
+import { Form, useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
 import { Box, Button, IconButton, InputAdornment, Link, TextField, Tooltip, Typography } from '@mui/material';
@@ -35,7 +35,7 @@ const LoginModal = ({ open, setOpen }) => {
   return (
     <ModalLayout open={open} setOpen={setOpen}>
       <Typography sx={styles.title}>{t('modal.login')}</Typography>
-      <form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+      <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <TextField
           fullWidth
           label={t('modal.email')}
@@ -113,7 +113,7 @@ const LoginModal = ({ open, setOpen }) => {
             {t('modal.loginToMainPage')}
           </Link>
         </Box>
-      </form>
+      </Form>
     </ModalLayout>
   );
 };

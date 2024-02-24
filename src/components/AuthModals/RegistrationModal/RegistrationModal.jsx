@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFormik } from 'formik';
+import { Form, useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
 import {
@@ -56,7 +56,7 @@ const RegistrationModal = ({ open, setOpen }) => {
   return (
     <ModalLayout open={open} setOpen={setOpen}>
       <Typography sx={styles.title}>{t('modal.registration')}</Typography>
-      <form onSubmit={formik.handleSubmit} autoComplete='off' style={{ width: '100%' }}>
+      <Form onSubmit={formik.handleSubmit} autoComplete='off' style={{ width: '100%' }}>
         <TextField
           fullWidth
           label={t('modal.email')}
@@ -254,7 +254,7 @@ const RegistrationModal = ({ open, setOpen }) => {
             {t('modal.terms_and_conditions')}
           </Link>
         </Box>
-      </form>
+      </Form>
     </ModalLayout>
   );
 };
