@@ -7,54 +7,57 @@ import styles from './CheckEmailResetPasswordModal.styles';
 import {useTranslation} from 'react-i18next';
 
 import {Form, Formik, useFormik} from 'formik';
-import * as Yup from 'yup';
 
 import {Box, Button, FormControl, FormHelperText, InputLabel, Link, OutlinedInput, Typography} from '@mui/material';
+import {
+  CheckEmailResetPasswordModalValidationSchema
+} from '../../../utils/validationSchemas/CheckEmailResetPasswordModalValidationSchema'; // eslint-disable-next-line react/prop-types
 
 // eslint-disable-next-line react/prop-types
 const ResetPasswordModal = ({ open, setOpen }) => {
   const { t } = useTranslation();
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email(t('modal.invalid_email')).required(t('modal.required')),
-  });
-  const Submit = (values) => {
+  const Submit = (values, { resetForm }) => {
     alert(JSON.stringify(values, null, 2));
+    resetForm();
   };
   const formik = useFormik({
     initialValues: {
       email: '',
     },
-    validationSchema: validationSchema,
+
+    validationSchema: CheckEmailResetPasswordModalValidationSchema,
     onSubmit: Submit,
   });
 
   return (
     <ModalLayout open={open} setOpen={setOpen}>
       <Typography sx={styles.title}>{t('modal.send_letter_title')}</Typography>
-      <Formik initialValues={formik.initialValues} onSubmit={Submit} validationSchema={validationSchema}>
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
-          <Form autoComplete='off' onSubmit={handleSubmit} style={{ width: '100%' }}>
-            <FormControl variant='outlined' sx={styles.input} error={touched.email && Boolean(errors.email)}>
-              <InputLabel htmlFor='outlined-adornment-email'>{t('modal.email')}</InputLabel>
-              <OutlinedInput
-                id='email'
-                name='email'
-                type='email'
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                label={t('modal.email')}
-              />
-              <FormHelperText id='component-error-text' sx={styles.textHelper}>
-                {touched.email && errors.email}
-              </FormHelperText>
-            </FormControl>
-            <Button onClick={handleSubmit} sx={styles.btn} disabled={touched.email && errors.email}>
-              {t('modal.send_letter')}
-            </Button>
-          </Form>
-        )}
+      <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit}>
+        <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+          <FormControl
+            variant='outlined'
+            sx={styles.input}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+          >
+            <InputLabel htmlFor='outlined-adornment-email'>{t('modal.email')}</InputLabel>
+            <OutlinedInput
+              id='email'
+              name='email'
+              type='email'
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              label={t('modal.email')}
+            />
+            <FormHelperText id='component-error-text' sx={styles.textHelper}>
+              {formik.touched.email && formik.errors.email}
+            </FormHelperText>
+          </FormControl>
+          <Button onClick={formik.handleSubmit} sx={styles.btn} disabled={formik.touched.email && formik.errors.email}>
+            {t('modal.send_letter')}
+          </Button>
+        </Form>
       </Formik>
       <Box sx={styles.box}>
         <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
