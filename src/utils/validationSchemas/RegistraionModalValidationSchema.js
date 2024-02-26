@@ -5,24 +5,22 @@ export const RegistrationModalValidationSchema = () => {
   const { t } = useTranslation();
 
   return Yup.object().shape({
-    email: Yup.string().email(t('modal.invalid_email')).required(t('modal.required')),
-    country: Yup.string().required(t('modal.required')),
+    email: Yup.string().email(t('inputs_errors.email_invalid')).required(t('inputs_errors.required')),
+    country: Yup.string().required(t('inputs_errors.required')),
     firstName: Yup.string()
-      .min(2, t('modal.firstName_short'))
-      .max(50, t('modal.firstName_long'))
-      .required(t('modal.required')),
+      .min(2, t('inputs_errors.first_name_short'))
+      .max(50, t('inputs_errors.first_name_long'))
+      .required(t('inputs_errors.required')),
     lastName: Yup.string()
-      .min(2, t('modal.lastName_short'))
-      .max(50, t('modal.lastName_long'))
-      .required(t('modal.required')),
+      .min(2, t('inputs_errors.last_name_short'))
+      .max(50, t('inputs_errors.last_name_long'))
+      .required(t('inputs_errors.required')),
     password: Yup.string()
-      .min(6, t('modal.password_long'))
-      .max(50, t('modal.password_long'))
-      .required(t('modal.required')),
+      .min(6, t('inputs_errors.password_short'))
+      .max(50, t('inputs_errors.password_long'))
+      .required(t('inputs_errors.required')),
     repeatPassword: Yup.string()
-      .min(6, t('modal.password_long'))
-      .max(50, t('modal.password_long'))
-      .oneOf([Yup.ref('password'), null], t('modal.must_match'))
-      .required(t('modal.required')),
+      .oneOf([Yup.ref('password'), null], t('inputs_errors.password_must_match'))
+      .required(t('inputs_errors.required')),
   });
 };

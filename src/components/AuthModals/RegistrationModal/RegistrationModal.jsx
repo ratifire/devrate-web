@@ -55,11 +55,11 @@ const RegistrationModal = ({ open, setOpen }) => {
 
   return (
     <ModalLayout open={open} setOpen={setOpen}>
-      <Typography sx={styles.title}>{t('modal.registration')}</Typography>
+      <Typography sx={styles.title}>{t('general.registration')}</Typography>
       <Form onSubmit={formik.handleSubmit} autoComplete='off' style={{ width: '100%' }}>
         <TextField
           fullWidth
-          label={t('modal.email')}
+          label={t('inputs.email')}
           variant='outlined'
           id='email'
           name='email'
@@ -74,7 +74,7 @@ const RegistrationModal = ({ open, setOpen }) => {
           }}
         />
         <FormControl fullWidth variant='outlined' sx={{ marginBottom: 24 }}>
-          <InputLabel id='country-label'>{t('modal.country')}</InputLabel>
+          <InputLabel id='country-label'>{t('country.country')}</InputLabel>
           <Select
             id='country'
             labelId='country-label'
@@ -82,22 +82,22 @@ const RegistrationModal = ({ open, setOpen }) => {
             value={formik.values.country}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            label={t('modal.country')}
+            label={t('inputs.country')}
             error={formik.touched.country && Boolean(formik.errors.country)}
             helperText={formik.touched.country && formik.errors.country}
             FormHelperTextProps={{
               sx: { position: 'absolute', bottom: '-20px' },
             }}
           >
-            <MenuItem value={'ukraine'}>{t('modal.ukraine')}</MenuItem>
-            <MenuItem value={'poland'}>{t('modal.poland')}</MenuItem>
-            <MenuItem value={'usa'}>{t('modal.usa')}</MenuItem>
+            <MenuItem value={'ukraine'}>{t('countries.ukraine')}</MenuItem>
+            <MenuItem value={'poland'}>{t('countries.poland')}</MenuItem>
+            <MenuItem value={'usa'}>{t('countries.usa')}</MenuItem>
           </Select>
         </FormControl>
         <Box sx={styles.inputNameContainer}>
           <TextField
             fullWidth
-            label={t('modal.firstName')}
+            label={t('inputs.first_name')}
             variant='outlined'
             id='firstName'
             name='firstName'
@@ -113,7 +113,7 @@ const RegistrationModal = ({ open, setOpen }) => {
           />
           <TextField
             fullWidth
-            label={t('modal.lastName')}
+            label={t('inputs.last_name')}
             variant='outlined'
             id='lastName'
             name='lastName'
@@ -130,7 +130,7 @@ const RegistrationModal = ({ open, setOpen }) => {
         <TextField
           type={showPassword ? 'text' : 'password'}
           fullWidth
-          label={t('modal.password')}
+          label={t('inputs.password')}
           variant='outlined'
           id='password'
           name='password'
@@ -158,7 +158,7 @@ const RegistrationModal = ({ open, setOpen }) => {
                   </IconButton>
                 </InputAdornment>
                 <InputAdornment position='end'>
-                  <Tooltip title={<Typography sx={styles.tooltip}>{t('modal.password_tooltip')}</Typography>}>
+                  <Tooltip title={<Typography sx={styles.tooltip}>{t('inputs.password_tooltip')}</Typography>}>
                     <IconButton sx={{ marginRight: 0 }}>
                       <InfoOutlinedIcon />
                     </IconButton>
@@ -171,7 +171,7 @@ const RegistrationModal = ({ open, setOpen }) => {
         <TextField
           type={showPassword ? 'text' : 'password'}
           fullWidth
-          label={t('modal.repeatPassword')}
+          label={t('inputs.password_repeat')}
           variant='outlined'
           id='repeatPassword'
           name='repeatPassword'
@@ -216,7 +216,7 @@ const RegistrationModal = ({ open, setOpen }) => {
               }}
             />
           }
-          label={<Typography sx={styles.newsAgreementText}>{t('modal.newsletter')}</Typography>}
+          label={<Typography sx={styles.newsAgreementText}>{t('modal.news_letter')}</Typography>}
           helperText={formik.touched.news && formik.errors.news}
           FormHelperTextProps={{
             sx: { position: 'absolute', bottom: '-20px' },
@@ -244,14 +244,14 @@ const RegistrationModal = ({ open, setOpen }) => {
           type='submit'
           sx={styles.btn}
         >
-          {t('modal.register')}
+          {t('buttons.btn_register')}
         </Button>
         <Box sx={styles.policyTermsContainer}>
           <Link href='#' sx={styles.policyTermsLink}>
-            {t('modal.privacy_policy')}
+            {t('links.privacy_policy')}
           </Link>
           <Link href='#' sx={styles.policyTermsLink}>
-            {t('modal.terms_and_conditions')}
+            {t('links.terms_and_conditions')}
           </Link>
         </Box>
       </Form>

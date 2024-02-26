@@ -8,9 +8,9 @@ const HeroSection = () => {
 
   return (
     <Box sx={styles.container}>
-      <Typography sx={styles.title}>{t('hero.heroTitle')}</Typography>
-      <Typography sx={styles.text}>{t('hero.heroText')}</Typography>
-      <Button sx={styles.button}>{t('hero.heroButtonText')}</Button>
+      <Typography sx={styles.title}>{t('hero.title')}</Typography>
+      <Typography sx={styles.text}>{t('hero.text')}</Typography>
+      <Button sx={styles.button}>{t('general.registration')}</Button>
     </Box>
   );
 };

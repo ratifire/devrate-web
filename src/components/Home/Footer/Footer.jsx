@@ -24,10 +24,10 @@ const Footer = () => {
             <LogoBoy />
           </Icon>
           <Link to={`/`} component={RouterLink} sx={styles.link}>
-            {t('footer.terms_and_conditions')}
+            {t('links.terms_and_conditions')}
           </Link>
           <Link to={`/`} component={RouterLink} sx={styles.link}>
-            {t('footer.privacy_policy')}
+            {t('links.privacy_policy')}
           </Link>
           <Box sx={styles.socialGroup}>
             <Link to={`https://www.instagram.com/`} component={RouterLink} sx={styles.link} target='_blank'>

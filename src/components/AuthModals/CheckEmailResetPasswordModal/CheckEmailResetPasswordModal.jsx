@@ -38,7 +38,7 @@ const ResetPasswordModal = ({ open, setOpen }) => {
             sx={styles.input}
             error={formik.touched.email && Boolean(formik.errors.email)}
           >
-            <InputLabel htmlFor='outlined-adornment-email'>{t('modal.email')}</InputLabel>
+            <InputLabel htmlFor='outlined-adornment-email'>{t('inputs.email')}</InputLabel>
             <OutlinedInput
               id='email'
               name='email'
@@ -46,29 +46,29 @@ const ResetPasswordModal = ({ open, setOpen }) => {
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              label={t('modal.email')}
+              label={t('inputs.email')}
             />
             <FormHelperText id='component-error-text' sx={styles.textHelper}>
               {formik.touched.email && formik.errors.email}
             </FormHelperText>
           </FormControl>
           <Button onClick={formik.handleSubmit} sx={styles.btn} disabled={formik.touched.email && formik.errors.email}>
-            {t('modal.send_letter')}
+            {t('buttons.btn_send_letter')}
           </Button>
         </Form>
       </Formik>
       <Box sx={styles.box}>
         <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
-          {t('modal.privacy_policy')}
+          {t('links.privacy_policy')}
         </Link>
         <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
-          {t('modal.terms_and_conditions')}
+          {t('links.terms_and_conditions')}
         </Link>
       </Box>
       <Typography sx={styles.textLink}>
         {t('modal.return_on')}
         <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
-          {t('modal.home_page')}
+          {t('links.home_page')}
         </Link>
       </Typography>
     </ModalLayout>

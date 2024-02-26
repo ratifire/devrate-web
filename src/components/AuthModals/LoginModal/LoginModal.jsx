@@ -38,7 +38,7 @@ const LoginModal = ({ open, setOpen }) => {
       <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <TextField
           fullWidth
-          label={t('modal.email')}
+          label={t('inputs.email')}
           variant='outlined'
           id='email'
           name='email'
@@ -56,7 +56,7 @@ const LoginModal = ({ open, setOpen }) => {
         <TextField
           type={showPassword ? 'text' : 'password'}
           fullWidth
-          label={t('modal.password')}
+          label={t('inputs.password')}
           variant='outlined'
           id='password'
           name='password'
@@ -84,7 +84,7 @@ const LoginModal = ({ open, setOpen }) => {
                   </IconButton>
                 </InputAdornment>
                 <InputAdornment position='end'>
-                  <Tooltip title={<Typography sx={styles.tooltip}>{t('modal.password_tooltip')}</Typography>}>
+                  <Tooltip title={<Typography sx={styles.tooltip}>{t('inputs.password_tooltip')}</Typography>}>
                     <IconButton>
                       <InfoOutlinedIcon />
                     </IconButton>
@@ -96,21 +96,21 @@ const LoginModal = ({ open, setOpen }) => {
         />
         <Box sx={styles.textLink}>
           <Link href='#' sx={styles.link}>
-            {t('modal.forgotYourPassword')}
+            {t('links.forgot_your_password')}
           </Link>
         </Box>
         <Button type='submit' sx={styles.btn}>
-          {t('modal.loginButtonText').toUpperCase()}
+          {t('buttons.btn_login').toUpperCase()}
         </Button>
         <Typography href='#' sx={styles.policyText}>
-          {t('modal.loginAgreementText')}
+          {t('modal.text_privacy')}
         </Typography>
         <Box sx={styles.turnBackContainer}>
           <Typography href='#' sx={styles.turnBackText}>
-            {t('modal.loginTurnTo')}
+            {t('modal.return_on')}
           </Typography>
           <Link href='#' sx={styles.turnBackLink}>
-            {t('modal.loginToMainPage')}
+            {t('links.home_page')}
           </Link>
         </Box>
       </Form>
