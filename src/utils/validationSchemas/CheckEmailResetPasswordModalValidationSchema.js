@@ -5,6 +5,6 @@ export const CheckEmailResetPasswordModalValidationSchema = () => {
   const { t } = useTranslation();
 
   return Yup.object().shape({
-    email: Yup.string().email(t('modal.invalid_email')).required(t('modal.required')),
+    email: Yup.string().email(t('inputs_errors.email_invalid')).required(t('inputs_errors.required')),
   });
 };

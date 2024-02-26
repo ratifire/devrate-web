@@ -48,7 +48,7 @@ const ResetPasswordModal = ({ open, setOpen }) => {
 
   return (
     <ModalLayout open={open} setOpen={setOpen}>
-      <Typography sx={styles.title}>{t('modal.password_reset')}</Typography>
+      <Typography sx={styles.title}>{t('modal.title_reset')}</Typography>
       <Formik initialValues={formik.initialValues} onSubmit={Submit}>
         <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
           <FormControl
@@ -56,7 +56,7 @@ const ResetPasswordModal = ({ open, setOpen }) => {
             sx={styles.input}
             error={formik.touched.password && Boolean(formik.errors.password)}
           >
-            <InputLabel htmlFor='outlined-adornment-password'>{t('modal.password')}</InputLabel>
+            <InputLabel htmlFor='outlined-adornment-password'>{t('inputs.password')}</InputLabel>
             <OutlinedInput
               id='password'
               name='password'
@@ -78,7 +78,7 @@ const ResetPasswordModal = ({ open, setOpen }) => {
                     </IconButton>
                   </InputAdornment>
                   <InputAdornment position='end'>
-                    <Tooltip title={<Typography sx={styles.tooltip}>{t('modal.password_tooltip')}</Typography>}>
+                    <Tooltip title={<Typography sx={styles.tooltip}>{t('inputs.password_tooltip')}</Typography>}>
                       <IconButton sx={{ marginRight: 0 }}>
                         <InfoOutlinedIcon />
                       </IconButton>
@@ -86,7 +86,7 @@ const ResetPasswordModal = ({ open, setOpen }) => {
                   </InputAdornment>
                 </>
               }
-              label={t('modal.password')}
+              label={t('inputs.password')}
             />
             <FormHelperText id='component-error-text'>
               {formik.touched.password && formik.errors.password}
@@ -97,7 +97,7 @@ const ResetPasswordModal = ({ open, setOpen }) => {
             sx={styles.input}
             error={formik.touched.repeat_password && Boolean(formik.errors.repeat_password)}
           >
-            <InputLabel htmlFor='outlined-adornment-password'>{t('modal.password_repeat')}</InputLabel>
+            <InputLabel htmlFor='outlined-adornment-password'>{t('inputs.password_repeat')}</InputLabel>
             <OutlinedInput
               id='repeat_password'
               name='repeat_password'
@@ -118,7 +118,7 @@ const ResetPasswordModal = ({ open, setOpen }) => {
                   </IconButton>
                 </InputAdornment>
               }
-              label={t('modal.password_repeat')}
+              label={t('inputs.password_repeat')}
             />
             <FormHelperText id='component-error-text'>
               {formik.touched.repeat_password && formik.errors.repeat_password}
@@ -132,15 +132,15 @@ const ResetPasswordModal = ({ open, setOpen }) => {
               (formik.touched.password && formik.errors.password)
             }
           >
-            {t('modal.password_reset')}
+            {t('buttons.btn_change_password')}
           </Button>
         </Form>
       </Formik>
-      <Typography sx={styles.text}>{t('modal.text_b_privacy')}</Typography>
+      <Typography sx={styles.text}>{t('modal.text_privacy')}</Typography>
       <Typography sx={styles.textLink}>
         {t('modal.return_on')}
         <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
-          {t('modal.home_page')}
+          {t('links.home_page')}
         </Link>
       </Typography>
     </ModalLayout>

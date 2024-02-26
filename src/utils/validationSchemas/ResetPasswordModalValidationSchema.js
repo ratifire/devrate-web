@@ -6,13 +6,11 @@ export const ResetPasswordModalValidationSchema = () => {
 
   return Yup.object().shape({
     password: Yup.string()
-      .min(6, t('modal.password_short'))
-      .max(50, t('modal.password_long'))
-      .required(t('modal.required')),
+      .min(6, t('inputs_errors.password_short'))
+      .max(50, t('inputs_errors.password_long'))
+      .required(t('inputs_errors.required')),
     repeat_password: Yup.string()
-      .min(6, t('modal.password_short'))
-      .max(50, t('modal.password_long'))
-      .oneOf([Yup.ref('password'), null], t('modal.must_match'))
-      .required(t('modal.required')),
+      .oneOf([Yup.ref('password'), null], t('inputs_errors.must_match'))
+      .required(t('inputs_errors.required')),
   });
 };
