@@ -7,6 +7,7 @@ import styles from './ResetPasswordModal.styles';
 import { useTranslation } from 'react-i18next';
 
 import { Form, Formik, useFormik } from 'formik';
+import PropTypes from 'prop-types';
 
 import {
   Button,
@@ -146,4 +147,10 @@ const ResetPasswordModal = ({ open, setOpen }) => {
     </ModalLayout>
   );
 };
+
+ResetPasswordModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+};
+
 export default ResetPasswordModal;
