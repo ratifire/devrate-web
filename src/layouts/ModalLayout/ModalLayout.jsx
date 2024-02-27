@@ -2,6 +2,7 @@ import React from 'react';
 import {Box, Modal, Slide} from '@mui/material';
 import {ReactComponent as Logo} from '../../assets/icons/logo.svg';
 import {styles} from './ModalLayout.styles';
+import PropTypes from 'prop-types';
 
 // eslint-disable-next-line react/prop-types
 export const ModalLayout = ({ open, setOpen, children }) => {
@@ -30,4 +31,11 @@ export const ModalLayout = ({ open, setOpen, children }) => {
     </Modal>
   );
 };
+
+ModalLayout.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
 export default ModalLayout;
