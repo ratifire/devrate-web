@@ -22,6 +22,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from '../RegistrationModal/RegistrationModal.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { RegistrationModalValidationSchema } from '../../../utils/validationSchemas/RegistraionModalValidationSchema';
+import PropTypes from 'prop-types';
 
 const initialValues = {
   email: '',
@@ -257,6 +258,11 @@ const RegistrationModal = ({ open, setOpen }) => {
       </Form>
     </ModalLayout>
   );
+};
+
+RegistrationModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
 };
 
 export default RegistrationModal;

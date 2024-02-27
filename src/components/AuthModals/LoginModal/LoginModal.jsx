@@ -7,6 +7,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from '../LoginModal/LoginModal.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { LoginModalValidationSchema } from '../../../utils/validationSchemas/LoginModalValidationSchema';
+import PropTypes from 'prop-types';
+
 
 const initialValues = {
   email: '',
@@ -117,5 +119,11 @@ const LoginModal = ({ open, setOpen }) => {
     </ModalLayout>
   );
 };
+
+LoginModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+};
+
 
 export default LoginModal;

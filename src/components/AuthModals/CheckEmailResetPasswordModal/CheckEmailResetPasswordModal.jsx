@@ -10,6 +10,7 @@ import { Form, Formik, useFormik } from 'formik';
 
 import { Box, Button, FormControl, FormHelperText, InputLabel, Link, OutlinedInput, Typography } from '@mui/material';
 import { CheckEmailResetPasswordModalValidationSchema } from '../../../utils/validationSchemas/CheckEmailResetPasswordModalValidationSchema'; // eslint-disable-next-line react/prop-types
+import PropTypes from 'prop-types';
 
 const initialValues = {
   email: '',
@@ -74,4 +75,10 @@ const ResetPasswordModal = ({ open, setOpen }) => {
     </ModalLayout>
   );
 };
+
+ResetPasswordModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+};
+
 export default ResetPasswordModal;
