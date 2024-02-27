@@ -16,7 +16,7 @@ const initialValues = {
   email: '',
 };
 // eslint-disable-next-line react/prop-types
-const ResetPasswordModal = ({ open, setOpen }) => {
+const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
   const { t } = useTranslation();
 
   const Submit = (values, { resetForm }) => {
@@ -76,9 +76,9 @@ const ResetPasswordModal = ({ open, setOpen }) => {
   );
 };
 
-ResetPasswordModal.propTypes = {
+CheckEmailResetPasswordModal.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
 };
 
-export default ResetPasswordModal;
+export default CheckEmailResetPasswordModal;
