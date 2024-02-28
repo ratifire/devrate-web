@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
 import {
@@ -23,6 +23,7 @@ import styles from '../RegistrationModal/RegistrationModal.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { RegistrationModalValidationSchema } from '../../../utils/validationSchemas/RegistraionModalValidationSchema';
 import PropTypes from 'prop-types';
+import InputText from '../../Inputs';
 
 const initialValues = {
   email: '',
@@ -39,16 +40,14 @@ const initialValues = {
 const RegistrationModal = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
-
-  const ValidationSchema = RegistrationModalValidationSchema;
-
+  const onSubmit = (values, { resetForm }) => {
+    alert(JSON.stringify(values, null, 2));
+    resetForm();
+  };
   const formik = useFormik({
     initialValues,
-    validationSchema: ValidationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
-    },
+    validationSchema: RegistrationModalValidationSchema,
+    onSubmit,
   });
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -57,22 +56,17 @@ const RegistrationModal = ({ open, setOpen }) => {
   return (
     <ModalLayout open={open} setOpen={setOpen}>
       <Typography sx={styles.title}>{t('general.registration')}</Typography>
-      <Form onSubmit={formik.handleSubmit} autoComplete='off' style={{ width: '100%' }}>
-        <TextField
-          fullWidth
-          label={t('inputs.email')}
-          variant='outlined'
-          id='email'
-          name='email'
+      <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+        <InputText
+          id={'email'}
+          name={'email'}
           value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ width: '100%', marginBottom: 24, borderColor: 'green' }}
-          error={formik.touched.email && Boolean(formik.errors.email)}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          type={'email'}
+          label={t('inputs.email')}
           helperText={formik.touched.email && formik.errors.email}
-          FormHelperTextProps={{
-            sx: { position: 'absolute', bottom: '-20px' },
-          }}
+          error={formik.touched.email && Boolean(formik.errors.email)}
         />
         <FormControl fullWidth variant='outlined' sx={{ marginBottom: 24 }}>
           <InputLabel id='country-label'>{t('country.country')}</InputLabel>
@@ -96,36 +90,25 @@ const RegistrationModal = ({ open, setOpen }) => {
           </Select>
         </FormControl>
         <Box sx={styles.inputNameContainer}>
-          <TextField
-            fullWidth
-            label={t('inputs.first_name')}
-            variant='outlined'
-            id='firstName'
-            name='firstName'
+          <InputText
+            id={'firstName'}
+            name={'firstName'}
             value={formik.values.firstName}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            sx={{ marginRight: 10 }}
-            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            label={t('inputs.first_name')}
             helperText={formik.touched.firstName && formik.errors.firstName}
-            FormHelperTextProps={{
-              sx: { position: 'absolute', bottom: '-20px' },
-            }}
+            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           />
-          <TextField
-            fullWidth
-            label={t('inputs.last_name')}
-            variant='outlined'
-            id='lastName'
-            name='lastName'
+          <InputText
+            id={'lastName'}
+            name={'lastName'}
             value={formik.values.lastName}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            label={t('inputs.last_name')}
             helperText={formik.touched.lastName && formik.errors.lastName}
-            FormHelperTextProps={{
-              sx: { position: 'absolute', bottom: '-20px' },
-            }}
+            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           />
         </Box>
         <TextField
@@ -194,7 +177,6 @@ const RegistrationModal = ({ open, setOpen }) => {
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge='end'
-                    // sx={{ marginRight: 0 }}
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -255,7 +237,7 @@ const RegistrationModal = ({ open, setOpen }) => {
             {t('links.terms_and_conditions')}
           </Link>
         </Box>
-      </Form>
+      </form>
     </ModalLayout>
   );
 };
