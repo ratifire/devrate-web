@@ -32,14 +32,6 @@ const styles = {
     textAlign: 'center',
     textDecoration: 'underline',
   }),
-  input: () => ({
-    width: '100%',
-    marginBottom: 24,
-  }),
-  textHelper: () => ({
-    position: 'absolute',
-    bottom: '-23px',
-  }),
   btn: (theme) => ({
     fontSize: 16,
     fontWeight: 500,
