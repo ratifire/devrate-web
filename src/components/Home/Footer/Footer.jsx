@@ -9,7 +9,8 @@ import { Trans, useTranslation } from 'react-i18next';
 import { ReactComponent as Instagram } from '../../../assets/icons/instagram.svg';
 import { ReactComponent as Linkedin } from '../../../assets/icons/linkedin.svg';
 import { ReactComponent as LogoBoy } from '../../../assets/icons/logo-boy.svg';
-import { ReactComponent as Logo } from '../../../assets/icons/logo.svg';
+// import { ReactComponent as Logo } from '../../../assets/icons/logo.svg';
+import Logo from '../../UI/Logo/Logo';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -17,7 +18,7 @@ const Footer = () => {
     <Box component='footer' sx={styles.footer}>
       <Box sx={styles.wrapper}>
         <Link to={`/`} component={RouterLink}>
-          <Logo />
+          <Logo width={'187'} height={'22'} />
         </Link>
         <Box sx={styles.wrapperNav}>
           <Icon sx={styles.logoBoy}>
