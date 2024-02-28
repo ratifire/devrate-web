@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
 import { Box, Button, IconButton, InputAdornment, Link, TextField, Tooltip, Typography } from '@mui/material';
@@ -8,7 +8,7 @@ import styles from '../LoginModal/LoginModal.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { LoginModalValidationSchema } from '../../../utils/validationSchemas/LoginModalValidationSchema';
 import PropTypes from 'prop-types';
-
+import InputText from '../../Inputs';
 
 const initialValues = {
   email: '',
@@ -20,11 +20,9 @@ const LoginModal = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
 
-  const ValidationSchema = LoginModalValidationSchema;
-
   const formik = useFormik({
     initialValues,
-    validationSchema: ValidationSchema,
+    validationSchema: LoginModalValidationSchema,
     onSubmit: (values, { resetForm }) => {
       console.log(values);
       resetForm();
@@ -37,24 +35,18 @@ const LoginModal = ({ open, setOpen }) => {
   return (
     <ModalLayout open={open} setOpen={setOpen}>
       <Typography sx={styles.title}>{t('modal.login')}</Typography>
-      <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-        <TextField
-          fullWidth
-          label={t('inputs.email')}
-          variant='outlined'
-          id='email'
-          name='email'
+      <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+        <InputText
+          id={'email'}
+          name={'email'}
           value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={styles.input}
-          error={formik.touched.email && Boolean(formik.errors.email)}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          type={'email'}
+          label={t('inputs.email')}
           helperText={formik.touched.email && formik.errors.email}
-          FormHelperTextProps={{
-            sx: { position: 'absolute', bottom: '-20px' },
-          }}
+          error={formik.touched.email && Boolean(formik.errors.email)}
         />
-
         <TextField
           type={showPassword ? 'text' : 'password'}
           fullWidth
@@ -115,7 +107,7 @@ const LoginModal = ({ open, setOpen }) => {
             {t('links.home_page')}
           </Link>
         </Box>
-      </Form>
+      </form>
     </ModalLayout>
   );
 };
@@ -124,6 +116,5 @@ LoginModal.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
 };
-
 
 export default LoginModal;
