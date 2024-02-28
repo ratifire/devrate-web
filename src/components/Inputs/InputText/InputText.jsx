@@ -1,9 +1,11 @@
-import { styles } from './InputText.styles';
-import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { styles } from './InputText.styles';
+import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
 
-const InputText = ({ id, name, value, handleChange, handleBlur, type, label, helperText, error }) => {
+// TODO: Use uuid lib to create id for input, label, FormHelperText
+const InputText = ({id, name, value, handleChange, handleBlur, type, label, helperText, error }) => {
+
   return (
     <FormControl variant='outlined' sx={styles.input} error={error}>
       <InputLabel htmlFor={id}>{label}</InputLabel>
@@ -16,7 +18,7 @@ const InputText = ({ id, name, value, handleChange, handleBlur, type, label, hel
         type={type}
         label={label}
       />
-      <FormHelperText id='component-error-text' sx={styles.textHelper}>
+      <FormHelperText id={id + 'inp-text'} sx={styles.textHelper}>
         {helperText}
       </FormHelperText>
     </FormControl>
@@ -34,7 +36,7 @@ InputText.propTypes = {
   error: PropTypes.bool.isRequired,
 };
 InputText.defaultProps = {
-  id: '',
+  id: 'uuid()',
   name: '',
   value: '',
   handleChange: null,

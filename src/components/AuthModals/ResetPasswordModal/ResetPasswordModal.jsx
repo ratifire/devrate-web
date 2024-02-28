@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
+import ModalLayout from '../../../layouts/ModalLayout';
 import styles from './ResetPasswordModal.styles';
 
 import { useTranslation } from 'react-i18next';
@@ -29,7 +29,7 @@ const initialValues = {
   password: '',
   repeat_password: '',
 };
-// eslint-disable-next-line react/prop-types
+
 const ResetPasswordModal = ({ open, setOpen }) => {
   const { t } = useTranslation();
 
@@ -37,20 +37,20 @@ const ResetPasswordModal = ({ open, setOpen }) => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
 
-  const Submit = (values, { resetForm }) => {
+  const onSubmit = (values, { resetForm }) => {
     alert(JSON.stringify(values, null, 2));
     resetForm();
   };
   const formik = useFormik({
     initialValues,
     validationSchema: ResetPasswordModalValidationSchema,
-    onSubmit: Submit,
+    onSubmit: onSubmit,
   });
 
   return (
     <ModalLayout open={open} setOpen={setOpen}>
       <Typography sx={styles.title}>{t('modal.title_reset')}</Typography>
-      <Formik initialValues={formik.initialValues} onSubmit={Submit}>
+      <Formik initialValues={formik.initialValues} onSubmit={onSubmit}>
         <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
           <FormControl
             variant='outlined'

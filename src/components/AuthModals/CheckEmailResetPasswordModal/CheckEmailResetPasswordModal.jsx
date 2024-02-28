@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
+import ModalLayout from '../../../layouts/ModalLayout';
 import styles from './CheckEmailResetPasswordModal.styles';
 
 import { useTranslation } from 'react-i18next';
@@ -13,11 +13,12 @@ import { CheckEmailResetPasswordModalValidationSchema } from '../../../utils/val
 import InputText from '../../Inputs';
 import PropTypes from 'prop-types';
 
+const initialValues = {
+    email: '',
+};
 const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
   const { t } = useTranslation();
-  const initialValues = {
-    email: '',
-  };
+
   const onSubmit = (values, { resetForm }) => {
     alert(JSON.stringify(values, null, 2));
     resetForm();

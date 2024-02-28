@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
+import ModalLayout from '../../../layouts/ModalLayout';
 import {
   Box,
   Button,
@@ -129,6 +129,7 @@ const RegistrationModal = ({ open, setOpen }) => {
           }}
           InputProps={{
             endAdornment: (
+              // TODO: move to separate component
               <>
                 <InputAdornment position='end'>
                   <IconButton
@@ -170,6 +171,7 @@ const RegistrationModal = ({ open, setOpen }) => {
           }}
           InputProps={{
             endAdornment: (
+                // TODO: move to separate component
               <>
                 <InputAdornment position='end'>
                   <IconButton

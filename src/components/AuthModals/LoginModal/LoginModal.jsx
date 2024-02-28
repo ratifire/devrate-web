@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import ModalLayout from '../../../layouts/ModalLayout/ModalLayout';
+import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, Button, IconButton, InputAdornment, Link, TextField, Tooltip, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from '../LoginModal/LoginModal.styles';
@@ -14,8 +14,6 @@ const initialValues = {
   email: '',
   password: '',
 };
-
-// eslint-disable-next-line react/prop-types
 const LoginModal = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
@@ -65,6 +63,7 @@ const LoginModal = ({ open, setOpen }) => {
           }}
           InputProps={{
             endAdornment: (
+              // TODO: move to separate component
               <>
                 <InputAdornment position='end'>
                   <IconButton

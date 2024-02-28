@@ -1,13 +1,8 @@
 import React from 'react';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import ListItem from '@mui/material/ListItem';
-// import CardMedia from "@mui/material/CardMedia";
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
+import { Box, Card, Grid, ListItem, Typography, List } from '@mui/material';
 import { styles } from './AboutSection.styles';
 
+// TODO: add translations
 const AboutSection = () => {
   return (
     <Box sx={styles.container}>
@@ -42,6 +37,7 @@ const AboutSection = () => {
             {/*    autoPlay*/}
             {/*    controls*/}
             {/*/>*/}
+            {/* TODO: move to separate component */}
             <iframe
               width='100%'
               height='100%'

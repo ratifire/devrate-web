@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@mui/material';
 
 import { CheckEmailResetPasswordModal } from '../components/AuthModals';
-import { AboutSection, Footer, Header, HeroSection } from '../components/Home';
+import { AboutSection, Footer, Header, HeroSection } from '../components/Sections';
 
 const HomePage = () => {
   const [open, setOpen] = useState(false);
