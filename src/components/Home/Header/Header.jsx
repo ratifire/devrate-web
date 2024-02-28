@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { AppBar, Box, Container, Divider, Drawer, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import logo from '../../../assets/icons/logo.svg';
 import styles from './Header.styles';
 import LinkList from './LinkList';
 import navLinks from '../../../utils/constants/navLinks';
+import Logo from '../../UI/Logo/Logo';
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -16,7 +16,7 @@ function Header() {
   const drawer = (
     <Box onClick={handlerDrawerToggle} sx={styles.drawer}>
       <Box sx={styles.logoMobileBox}>
-        <img src={logo} alt='logo' width={'187'} height={'22.7'} />
+        <Logo />
       </Box>
       <Divider />
       <Box sx={styles.headerNavMobile}>
@@ -42,7 +42,7 @@ function Header() {
               <MenuIcon />
             </IconButton>
             <Box sx={styles.logoBox}>
-              <img src={logo} alt='logo' width={'187'} height={'22.7'} />
+              <Logo />
             </Box>
             <Box sx={styles.headerNav}>
               <LinkList links={navLinks} />
