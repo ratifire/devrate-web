@@ -16,7 +16,7 @@ function Header() {
   const drawer = (
     <Box onClick={handlerDrawerToggle} sx={styles.drawer}>
       <Box sx={styles.logoMobileBox}>
-        <Logo />
+        <Logo width={'187'} height={'22'} />
       </Box>
       <Divider />
       <Box sx={styles.headerNavMobile}>
@@ -42,7 +42,7 @@ function Header() {
               <MenuIcon />
             </IconButton>
             <Box sx={styles.logoBox}>
-              <Logo />
+              <Logo width={'187'} height={'22'} />
             </Box>
             <Box sx={styles.headerNav}>
               <LinkList links={navLinks} />

@@ -18,7 +18,7 @@ const Footer = () => {
     <Box component='footer' sx={styles.footer}>
       <Box sx={styles.wrapper}>
         <Link to={`/`} component={RouterLink}>
-          <Logo />
+          <Logo width={'187'} height={'22'} />
         </Link>
         <Box sx={styles.wrapperNav}>
           <Icon sx={styles.logoBoy}>

@@ -1,8 +1,8 @@
 import React from 'react';
-import {Box, Modal, Slide} from '@mui/material';
-import {ReactComponent as Logo} from '../../assets/icons/logo.svg';
-import {styles} from './ModalLayout.styles';
+import { Box, Modal, Slide } from '@mui/material';
+import { styles } from './ModalLayout.styles';
 import PropTypes from 'prop-types';
+import Logo from '../../components/UI/Logo/Logo';
 
 // eslint-disable-next-line react/prop-types
 export const ModalLayout = ({ open, setOpen, children }) => {
@@ -18,12 +18,7 @@ export const ModalLayout = ({ open, setOpen, children }) => {
       <Slide direction='left' in={open}>
         <Box sx={styles.modalContainer}>
           <Box sx={styles.iconContainer}>
-            <Logo
-              style={{
-                width: 147,
-                height: 18,
-              }}
-            />
+            <Logo width={'147'} height={'18'} />
           </Box>
           {children}
         </Box>
