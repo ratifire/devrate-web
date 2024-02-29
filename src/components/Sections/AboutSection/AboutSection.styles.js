@@ -1,7 +1,10 @@
 export const styles = {
-  container: (theme) => ({
+  wrapper: (theme) => ({
     background: theme.palette.background.gradient,
+  }),
+  container: () => ({
     paddingY: 58,
+    '@media (min-width: 600px)': { paddingX: '12px' },
   }),
   gridContainer: () => ({
     maxWidth: 1248,
