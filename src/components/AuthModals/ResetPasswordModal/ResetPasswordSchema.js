@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import i18n from 'i18next';
 
-export const ResetPasswordModalValidationSchema = () => {
+export const ResetPasswordSchema = () => {
   return Yup.object().shape({
     password: Yup.string()
       .min(6, i18n.t('inputs_errors.password_short'))

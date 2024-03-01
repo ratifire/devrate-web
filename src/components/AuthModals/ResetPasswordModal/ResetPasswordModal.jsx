@@ -23,7 +23,7 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { ResetPasswordModalValidationSchema } from '../../../utils/validationSchemas/ResetPasswordModalValidationSchema';
+import { ResetPasswordSchema } from './ResetPasswordSchema';
 
 const initialValues = {
   password: '',
@@ -43,7 +43,7 @@ const ResetPasswordModal = ({ open, setOpen }) => {
   };
   const formik = useFormik({
     initialValues,
-    validationSchema: ResetPasswordModalValidationSchema,
+    validationSchema: ResetPasswordSchema,
     onSubmit: onSubmit,
   });
 

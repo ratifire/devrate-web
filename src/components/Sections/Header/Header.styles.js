@@ -1,6 +1,6 @@
 const styles = {
   container: () => ({
-    maxWidth: 1248,
+    '@media (min-width: 600px)': { paddingX: '12px' },
   }),
   header: () => ({
     background: 'none',
