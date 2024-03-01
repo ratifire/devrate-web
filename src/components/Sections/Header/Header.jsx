@@ -26,7 +26,7 @@ function Header() {
   );
   return (
     <AppBar component='header' position={'static'} sx={styles.header}>
-      <Container maxWidth='xl' sx={{ '@media (min-width: 600px)': { paddingX: '12px' } }}>
+      <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.wrapper}>
           <Toolbar disableGutters sx={styles.toolbar}>
             <IconButton

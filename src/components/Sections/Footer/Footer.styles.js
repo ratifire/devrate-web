@@ -1,4 +1,7 @@
 const styles = {
+  container: () => ({
+    '@media (min-width: 600px)': { paddingX: '12px' },
+  }),
   link: (theme) => ({
     marginLeft: 0,
     fontWeight: 500,

@@ -21,7 +21,7 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from '../RegistrationModal/RegistrationModal.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { RegistrationModalValidationSchema } from '../../../utils/validationSchemas/RegistraionModalValidationSchema';
+import { RegistrationSchema } from './RegistraionSchema';
 import PropTypes from 'prop-types';
 import InputText from '../../Inputs';
 
@@ -46,7 +46,7 @@ const RegistrationModal = ({ open, setOpen }) => {
   };
   const formik = useFormik({
     initialValues,
-    validationSchema: RegistrationModalValidationSchema,
+    validationSchema: RegistrationSchema,
     onSubmit,
   });
 
@@ -171,7 +171,7 @@ const RegistrationModal = ({ open, setOpen }) => {
           }}
           InputProps={{
             endAdornment: (
-                // TODO: move to separate component
+              // TODO: move to separate component
               <>
                 <InputAdornment position='end'>
                   <IconButton

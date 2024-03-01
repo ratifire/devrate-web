@@ -1,5 +1,8 @@
 export const styles = {
   container: () => ({
+    '@media (min-width: 600px)': { paddingX: '12px' },
+  }),
+  contentWrapper: () => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

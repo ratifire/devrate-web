@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import styles from './Footer.styles';
 
-import { Box, Icon, Link, Typography, Container } from '@mui/material';
+import { Box, Container, Icon, Link, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { ReactComponent as Instagram } from '../../../assets/icons/instagram.svg';
@@ -15,7 +15,7 @@ import Logo from '../../UI/Logo/Logo';
 const Footer = () => {
   const { t } = useTranslation();
   return (
-    <Container maxWidth='xl' sx={{ '@media (min-width: 600px)': { paddingX: '12px' } }}>
+    <Container maxWidth='xl' sx={styles.container}>
       <Box component='footer' sx={styles.footer}>
         <Box sx={styles.wrapper}>
           <Link to={`/`} component={RouterLink}>

@@ -6,7 +6,7 @@ import { Box, Button, IconButton, InputAdornment, Link, TextField, Tooltip, Typo
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from '../LoginModal/LoginModal.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { LoginModalValidationSchema } from '../../../utils/validationSchemas/LoginModalValidationSchema';
+import { LoginSchema } from './LoginSchema';
 import PropTypes from 'prop-types';
 import InputText from '../../Inputs';
 
@@ -20,7 +20,7 @@ const LoginModal = ({ open, setOpen }) => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: LoginModalValidationSchema,
+    validationSchema: LoginSchema,
     onSubmit: (values, { resetForm }) => {
       console.log(values);
       resetForm();

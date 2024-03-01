@@ -9,12 +9,12 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 
 import { Box, Button, Link, Typography } from '@mui/material';
-import { CheckEmailResetPasswordModalValidationSchema } from '../../../utils/validationSchemas/CheckEmailResetPasswordModalValidationSchema';
+import { CheckEmailResetPasswordSchema } from './CheckEmailResetPasswordSchema';
 import InputText from '../../Inputs';
 import PropTypes from 'prop-types';
 
 const initialValues = {
-    email: '',
+  email: '',
 };
 const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
   const { t } = useTranslation();
@@ -25,7 +25,7 @@ const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
   };
   const formik = useFormik({
     initialValues,
-    validationSchema: CheckEmailResetPasswordModalValidationSchema,
+    validationSchema: CheckEmailResetPasswordSchema,
     onSubmit,
   });
   return (
