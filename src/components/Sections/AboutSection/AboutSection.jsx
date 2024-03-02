@@ -2,28 +2,28 @@ import React from 'react';
 import {Box, Card, Container, Grid, List, ListItem, Typography} from '@mui/material';
 import {styles} from './AboutSection.styles';
 import {YoutubeEmbed} from '../../UI/YoutubeEmbed/YoutubeEmbed';
+import {useTranslation} from 'react-i18next';
 
 // TODO: add translations
 const AboutSection = () => {
+  const { t } = useTranslation();
+
   return (
     <Box sx={styles.wrapper}>
       <Container maxWidth='xl' sx={styles.container}>
         <Grid container alignItems='center' justifyContent='center' sx={styles.gridContainer}>
           <Grid item xs={12} md={6}>
             <Box sx={styles.textBox}>
-              <Typography sx={styles.title}>Як це працює</Typography>
+              <Typography sx={styles.title}>{t('about.title')}</Typography>
               <List sx={styles.list}>
                 <ListItem disablePadding sx={styles.listItem}>
-                  <Typography sx={styles.text}>Замовляйте співбесіди, коли захочете.</Typography>
+                  <Typography sx={styles.text}>{t('about.text1')}</Typography>
                 </ListItem>
                 <ListItem disablePadding sx={styles.listItem}>
-                  <Typography sx={styles.text}>Проведіть співдесіду зі своїм інтерв’юером чи респондентом.</Typography>
+                  <Typography sx={styles.text}>{t('about.text2')}</Typography>
                 </ListItem>
                 <ListItem disablePadding sx={styles.listItem}>
-                  <Typography sx={styles.text}>
-                    Отримайте докладний, дієвий відгук про те, над чим саме вам потрібно працювати, щоб отримати роботу,
-                    на яку ви заслуговуєте.
-                  </Typography>
+                  <Typography sx={styles.text}>{t('about.text3')}</Typography>
                 </ListItem>
               </List>
             </Box>
