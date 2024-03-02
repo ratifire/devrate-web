@@ -32,7 +32,7 @@ const LoginModal = ({ open, setOpen }) => {
 
   return (
     <ModalLayout open={open} setOpen={setOpen}>
-      <Typography sx={styles.title}>{t('modal.login')}</Typography>
+      <Typography sx={styles.title}>{t('modal.login.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <InputText
           id={'email'}
@@ -41,14 +41,14 @@ const LoginModal = ({ open, setOpen }) => {
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           type={'email'}
-          label={t('inputs.email')}
+          label={t('modal.login.email')}
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
         <TextField
           type={showPassword ? 'text' : 'password'}
           fullWidth
-          label={t('inputs.password')}
+          label={t('modal.login.password')}
           variant='outlined'
           id='password'
           name='password'
@@ -77,7 +77,7 @@ const LoginModal = ({ open, setOpen }) => {
                   </IconButton>
                 </InputAdornment>
                 <InputAdornment position='end'>
-                  <Tooltip title={<Typography sx={styles.tooltip}>{t('inputs.password_tooltip')}</Typography>}>
+                  <Tooltip title={<Typography sx={styles.tooltip}>{t('modal.login.password_tooltip')}</Typography>}>
                     <IconButton>
                       <InfoOutlinedIcon />
                     </IconButton>
@@ -89,21 +89,21 @@ const LoginModal = ({ open, setOpen }) => {
         />
         <Box sx={styles.textLink}>
           <Link href='#' sx={styles.link}>
-            {t('links.forgot_your_password')}
+            {t('modal.login.forgot_your_password')}
           </Link>
         </Box>
         <Button type='submit' sx={styles.btn}>
-          {t('buttons.btn_login').toUpperCase()}
+          {t('modal.login.btn_login').toUpperCase()}
         </Button>
         <Typography href='#' sx={styles.policyText}>
-          {t('modal.text_privacy')}
+          {t('modal.login.text_privacy')}
         </Typography>
         <Box sx={styles.turnBackContainer}>
           <Typography href='#' sx={styles.turnBackText}>
-            {t('modal.return_on')}
+            {t('modal.login.return_on')}
           </Typography>
           <Link href='#' sx={styles.turnBackLink}>
-            {t('links.home_page')}
+            {t('modal.login.home_page')}
           </Link>
         </Box>
       </form>

@@ -36,7 +36,6 @@ const initialValues = {
   agreement: false,
 };
 
-// eslint-disable-next-line react/prop-types
 const RegistrationModal = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
@@ -55,7 +54,7 @@ const RegistrationModal = ({ open, setOpen }) => {
 
   return (
     <ModalLayout open={open} setOpen={setOpen}>
-      <Typography sx={styles.title}>{t('general.registration')}</Typography>
+      <Typography sx={styles.title}>{t('modal.registration.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <InputText
           id={'email'}
@@ -64,12 +63,12 @@ const RegistrationModal = ({ open, setOpen }) => {
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           type={'email'}
-          label={t('inputs.email')}
+          label={t('modal.registration.email')}
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
         <FormControl fullWidth variant='outlined' sx={{ marginBottom: 24 }}>
-          <InputLabel id='country-label'>{t('country.country')}</InputLabel>
+          <InputLabel id='country-label'>{t('modal.registration.country')}</InputLabel>
           <Select
             id='country'
             labelId='country-label'
@@ -77,16 +76,16 @@ const RegistrationModal = ({ open, setOpen }) => {
             value={formik.values.country}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            label={t('inputs.country')}
+            label={t('modal.registration.country')}
             error={formik.touched.country && Boolean(formik.errors.country)}
             helperText={formik.touched.country && formik.errors.country}
             FormHelperTextProps={{
               sx: { position: 'absolute', bottom: '-20px' },
             }}
           >
-            <MenuItem value={'ukraine'}>{t('countries.ukraine')}</MenuItem>
-            <MenuItem value={'poland'}>{t('countries.poland')}</MenuItem>
-            <MenuItem value={'usa'}>{t('countries.usa')}</MenuItem>
+            <MenuItem value={'ukraine'}>{t('modal.registration.countries.ukraine')}</MenuItem>
+            <MenuItem value={'poland'}>{t('modal.registration.countries.poland')}</MenuItem>
+            <MenuItem value={'usa'}>{t('modal.registration.countries.usa')}</MenuItem>
           </Select>
         </FormControl>
         <Box sx={styles.inputNameContainer}>
@@ -96,7 +95,7 @@ const RegistrationModal = ({ open, setOpen }) => {
             value={formik.values.firstName}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            label={t('inputs.first_name')}
+            label={t('modal.registration.first_name')}
             helperText={formik.touched.firstName && formik.errors.firstName}
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           />
@@ -106,7 +105,7 @@ const RegistrationModal = ({ open, setOpen }) => {
             value={formik.values.lastName}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            label={t('inputs.last_name')}
+            label={t('modal.registration.last_name')}
             helperText={formik.touched.lastName && formik.errors.lastName}
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           />
@@ -114,7 +113,7 @@ const RegistrationModal = ({ open, setOpen }) => {
         <TextField
           type={showPassword ? 'text' : 'password'}
           fullWidth
-          label={t('inputs.password')}
+          label={t('modal.registration.password')}
           variant='outlined'
           id='password'
           name='password'
@@ -143,7 +142,9 @@ const RegistrationModal = ({ open, setOpen }) => {
                   </IconButton>
                 </InputAdornment>
                 <InputAdornment position='end'>
-                  <Tooltip title={<Typography sx={styles.tooltip}>{t('inputs.password_tooltip')}</Typography>}>
+                  <Tooltip
+                    title={<Typography sx={styles.tooltip}>{t('modal.registration.password_tooltip')}</Typography>}
+                  >
                     <IconButton sx={{ marginRight: 0 }}>
                       <InfoOutlinedIcon />
                     </IconButton>
@@ -156,7 +157,7 @@ const RegistrationModal = ({ open, setOpen }) => {
         <TextField
           type={showPassword ? 'text' : 'password'}
           fullWidth
-          label={t('inputs.password_repeat')}
+          label={t('modal.registration.password_repeat')}
           variant='outlined'
           id='repeatPassword'
           name='repeatPassword'
@@ -201,7 +202,7 @@ const RegistrationModal = ({ open, setOpen }) => {
               }}
             />
           }
-          label={<Typography sx={styles.newsAgreementText}>{t('modal.news_letter')}</Typography>}
+          label={<Typography sx={styles.newsAgreementText}>{t('modal.registration.news_letter')}</Typography>}
           helperText={formik.touched.news && formik.errors.news}
           FormHelperTextProps={{
             sx: { position: 'absolute', bottom: '-20px' },
@@ -221,7 +222,7 @@ const RegistrationModal = ({ open, setOpen }) => {
               }}
             />
           }
-          label={<Typography sx={styles.newsAgreementText}>{t('modal.agreement')}</Typography>}
+          label={<Typography sx={styles.newsAgreementText}>{t('modal.registration.agreement')}</Typography>}
           sx={{ marginBottom: 24 }}
         />
         <Button
@@ -229,14 +230,14 @@ const RegistrationModal = ({ open, setOpen }) => {
           type='submit'
           sx={styles.btn}
         >
-          {t('buttons.btn_register')}
+          {t('modal.registration.btn_register')}
         </Button>
         <Box sx={styles.policyTermsContainer}>
           <Link href='#' sx={styles.policyTermsLink}>
-            {t('links.privacy_policy')}
+            {t('modal.registration.privacy_policy')}
           </Link>
           <Link href='#' sx={styles.policyTermsLink}>
-            {t('links.terms_and_conditions')}
+            {t('modal.registration.terms_and_conditions')}
           </Link>
         </Box>
       </form>

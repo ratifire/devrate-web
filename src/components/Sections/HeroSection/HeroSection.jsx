@@ -9,9 +9,9 @@ const HeroSection = () => {
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
-        <Typography sx={styles.title}>{t('hero.title')}</Typography>
-        <Typography sx={styles.text}>{t('hero.text')}</Typography>
-        <Button sx={styles.button}>{t('general.registration')}</Button>
+        <Typography sx={styles.title}>{t('home.hero.title')}</Typography>
+        <Typography sx={styles.text}>{t('home.hero.text')}</Typography>
+        <Button sx={styles.button}>{t('home.hero.button_text')}</Button>
       </Box>
     </Container>
   );

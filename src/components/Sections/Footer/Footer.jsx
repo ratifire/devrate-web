@@ -26,10 +26,10 @@ const Footer = () => {
               <LogoBoy />
             </Icon>
             <Link to={`/`} component={RouterLink} sx={styles.link}>
-              {t('links.terms_and_conditions')}
+              {t('home.links.terms_and_conditions')}
             </Link>
             <Link to={`/`} component={RouterLink} sx={styles.link}>
-              {t('links.privacy_policy')}
+              {t('home.links.privacy_policy')}
             </Link>
             <Box sx={styles.socialGroup}>
               <Link to={`https://www.instagram.com/`} component={RouterLink} sx={styles.link} target='_blank'>
@@ -43,10 +43,10 @@ const Footer = () => {
         </Box>
         <Box>
           <Typography level='body-md' sx={styles.copyright}>
-            {t('footer.copyright')}
+            {t('home.footer.copyright')}
           </Typography>
           <Typography level='body-md' sx={styles.trademarks}>
-            <Trans i18nKey='multiline'>{t('footer.trademarks')}</Trans>
+            <Trans i18nKey='multiline'>{t('home.footer.trademarks')}</Trans>
           </Typography>
         </Box>
       </Box>
