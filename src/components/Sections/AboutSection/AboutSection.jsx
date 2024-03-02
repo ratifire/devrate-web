@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Card, Grid, ListItem, Typography, List, Container } from '@mui/material';
-import { styles } from './AboutSection.styles';
+import {Box, Card, Container, Grid, List, ListItem, Typography} from '@mui/material';
+import {styles} from './AboutSection.styles';
+import {YoutubeEmbed} from '../../UI/YoutubeEmbed/YoutubeEmbed';
 
 // TODO: add translations
 const AboutSection = () => {
@@ -29,25 +30,10 @@ const AboutSection = () => {
           </Grid>
           <Grid item xs={12} md={6} sx={styles.videoBox}>
             <Card sx={styles.card}>
-              {/*<CardMedia*/}
-              {/*    component="video"*/}
-              {/*    height="100%"*/}
-              {/*    width={'auto'}*/}
-              {/*    image="../assets/videos/....."*/}
-              {/*    title="Contemplative Reptile"*/}
-              {/*    autoPlay*/}
-              {/*    controls*/}
-              {/*/>*/}
-              {/* TODO: move to separate component */}
-              <iframe
-                width='100%'
-                height='100%'
-                src='https://www.youtube.com/embed/j942wKiXFu8?si=9TUX9p6tlF3izLa6'
+              <YoutubeEmbed
                 title='YouTube video player'
-                frameBorder='0'
-                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                allowFullScreen
-              ></iframe>
+                link='https://www.youtube.com/embed/j942wKiXFu8?si=9TUX9p6tlF3izLa6'
+              />
             </Card>
           </Grid>
         </Grid>
