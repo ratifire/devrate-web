@@ -10,7 +10,7 @@ import { useFormik } from 'formik';
 
 import { Box, Button, Link, Typography } from '@mui/material';
 import { CheckEmailResetPasswordSchema } from './CheckEmailResetPasswordSchema';
-import { InputText } from '../../Inputs';
+import { FormInput } from '../../Inputs';
 import PropTypes from 'prop-types';
 
 const initialValues = {
@@ -32,7 +32,7 @@ const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
     <ModalLayout open={open} setOpen={setOpen}>
       <Typography sx={styles.title}>{t('modal.checkEmailResetPassword.send_letter_title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-        <InputText
+        <FormInput
           id={'email'}
           name={'email'}
           value={formik.values.email}

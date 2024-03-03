@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import i18n from 'i18next';
 
+console.log(i18n.t('modal.registration.email_invalid'));
 export const RegistrationSchema = Yup.object().shape({
   email: Yup.string().email(i18n.t('modal.registration.email_invalid')).required(i18n.t('modal.registration.required')),
   country: Yup.string().required(i18n.t('modal.registration.required')),

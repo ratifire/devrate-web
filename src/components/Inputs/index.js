@@ -1,3 +1,6 @@
 import InputText from './InputText';
-// TODO: return object with inputs
-export { InputText };
+import CountrySelect from './CountrySelect';
+import FormCheckbox from './FormCheckbox';
+import FormInput from './FormInput';
+
+export { InputText, CountrySelect, FormCheckbox, FormInput };
