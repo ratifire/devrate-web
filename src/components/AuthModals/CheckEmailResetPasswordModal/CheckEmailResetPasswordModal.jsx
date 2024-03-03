@@ -10,7 +10,7 @@ import { useFormik } from 'formik';
 
 import { Box, Button, Link, Typography } from '@mui/material';
 import { CheckEmailResetPasswordSchema } from './CheckEmailResetPasswordSchema';
-import InputText from '../../Inputs';
+import { InputText } from '../../Inputs';
 import PropTypes from 'prop-types';
 
 const initialValues = {

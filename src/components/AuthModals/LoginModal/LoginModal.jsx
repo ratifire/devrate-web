@@ -6,7 +6,7 @@ import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import styles from '../LoginModal/LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
 import PropTypes from 'prop-types';
-import InputText from '../../Inputs';
+import { InputText } from '../../Inputs';
 import { PasswordVisibilityToggle } from '../../PasswordVisibilityToggle/PasswordVisibilityToggle';
 
 const initialValues = {
