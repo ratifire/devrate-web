@@ -18,7 +18,7 @@ import {
 import styles from '../RegistrationModal/RegistrationModal.styles';
 import { RegistrationSchema } from './RegistraionSchema';
 import PropTypes from 'prop-types';
-import InputText from '../../Inputs';
+import { InputText } from '../../Inputs';
 import { PasswordVisibilityToggle } from '../../PasswordVisibilityToggle/PasswordVisibilityToggle';
 
 const initialValues = {
@@ -31,7 +31,6 @@ const initialValues = {
   news: false,
   agreement: false,
 };
-//eslint-disable-next-line react/prop-types
 
 const RegistrationModal = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
