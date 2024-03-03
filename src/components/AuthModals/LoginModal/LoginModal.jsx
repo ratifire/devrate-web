@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import { Box, Button, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, Link, Typography } from '@mui/material';
 import styles from '../LoginModal/LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
 import PropTypes from 'prop-types';
-import { InputText } from '../../Inputs';
-import { PasswordVisibilityToggle } from '../../PasswordVisibilityToggle/PasswordVisibilityToggle';
+import { InputPassword, InputText } from '../../Inputs';
 
 const initialValues = {
   email: '',
   password: '',
 };
 const LoginModal = ({ open, setOpen }) => {
-  const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
 
   const formik = useFormik({
@@ -25,9 +23,6 @@ const LoginModal = ({ open, setOpen }) => {
       resetForm();
     },
   });
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => event.preventDefault();
 
   return (
     <ModalLayout open={open} setOpen={setOpen}>
@@ -44,33 +39,17 @@ const LoginModal = ({ open, setOpen }) => {
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
-        <TextField
-          type={showPassword ? 'text' : 'password'}
-          fullWidth
-          label={t('modal.login.password')}
-          variant='outlined'
-          id='password'
+        <InputPassword
           name='password'
           value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ ...styles.input, marginBottom: 32 }}
-          error={formik.touched.password && Boolean(formik.errors.password)}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          type='password'
+          label={t('modal.resetPassword.password')}
           helperText={formik.touched.password && formik.errors.password}
-          FormHelperTextProps={{
-            sx: { position: 'absolute', bottom: '-20px' },
-          }}
-          InputProps={{
-            endAdornment: (
-              <PasswordVisibilityToggle
-                showPassword={showPassword}
-                clickHandler={handleClickShowPassword}
-                mouseDownHandler={handleMouseDownPassword}
-                tooltip={true}
-                textContent='modal.login.password_tooltip'
-              />
-            ),
-          }}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          toolTipOn={true}
+          toolTipText={t('modal.resetPassword.password_tooltip')}
         />
         <Box sx={styles.textLink}>
           <Link href='#' sx={styles.link}>

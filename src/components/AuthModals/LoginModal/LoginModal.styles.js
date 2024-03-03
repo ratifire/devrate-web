@@ -16,6 +16,11 @@ const styles = {
     textAlign: 'center',
     lineHeight: 1.5,
     marginBottom: 32,
+    textTransform: 'capitalize',
+    '&:hover': {
+      backgroundColor: 'transparent',
+      textDecoration: 'underline',
+    },
   }),
   link: (theme) => ({
     marginRight: 10,

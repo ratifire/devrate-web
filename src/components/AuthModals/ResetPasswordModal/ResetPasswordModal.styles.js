@@ -34,10 +34,6 @@ const styles = {
     textDecoration: 'underline',
     marginTop: 36,
   }),
-  input: () => ({
-    width: '100%',
-    marginBottom: 24,
-  }),
   btn: (theme) => ({
     fontSize: 16,
     fontWeight: 500,
@@ -57,12 +53,6 @@ const styles = {
       backgroundColor: '#7D66F566',
       color: '#FFFFFF80',
     },
-  }),
-  tooltip: (theme) => ({
-    fontSize: 14,
-    fontWeight: 300,
-    lineHeight: '18px',
-    color: theme.palette.text.primary,
   }),
 };
 export default styles;

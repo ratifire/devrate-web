@@ -33,12 +33,11 @@ const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
       <Typography sx={styles.title}>{t('modal.checkEmailResetPassword.send_letter_title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <InputText
-          id={'email'}
-          name={'email'}
+          name='email'
           value={formik.values.email}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          type={'email'}
+          type='email'
           label={t('modal.checkEmailResetPassword.email')}
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
@@ -12,14 +12,12 @@ import {
   Link,
   MenuItem,
   Select,
-  TextField,
   Typography,
 } from '@mui/material';
 import styles from '../RegistrationModal/RegistrationModal.styles';
 import { RegistrationSchema } from './RegistraionSchema';
 import PropTypes from 'prop-types';
-import { InputText } from '../../Inputs';
-import { PasswordVisibilityToggle } from '../../PasswordVisibilityToggle/PasswordVisibilityToggle';
+import { InputPassword, InputText } from '../../Inputs';
 
 const initialValues = {
   email: '',
@@ -33,7 +31,6 @@ const initialValues = {
 };
 
 const RegistrationModal = ({ open, setOpen }) => {
-  const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
   const onSubmit = (values, { resetForm }) => {
     alert(JSON.stringify(values, null, 2));
@@ -44,9 +41,6 @@ const RegistrationModal = ({ open, setOpen }) => {
     validationSchema: RegistrationSchema,
     onSubmit,
   });
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => event.preventDefault();
 
   return (
     <ModalLayout open={open} setOpen={setOpen}>
@@ -106,60 +100,27 @@ const RegistrationModal = ({ open, setOpen }) => {
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           />
         </Box>
-        <TextField
-          type={showPassword ? 'text' : 'password'}
-          fullWidth
-          label={t('modal.registration.password')}
-          variant='outlined'
-          id='password'
+        <InputPassword
           name='password'
           value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ width: '100%', marginBottom: 24 }}
-          error={formik.touched.password && Boolean(formik.errors.password)}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          type='password'
+          label={t('modal.resetPassword.password')}
           helperText={formik.touched.password && formik.errors.password}
-          FormHelperTextProps={{
-            sx: { position: 'absolute', bottom: '-20px' },
-          }}
-          InputProps={{
-            endAdornment: (
-              <PasswordVisibilityToggle
-                showPassword={showPassword}
-                clickHandler={handleClickShowPassword}
-                mouseDownHandler={handleMouseDownPassword}
-                tooltip={true}
-                textContent='modal.registration.password_tooltip'
-              />
-            ),
-          }}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          toolTipOn={true}
+          toolTipText={t('modal.resetPassword.password_tooltip')}
         />
-        <TextField
-          type={showPassword ? 'text' : 'password'}
-          fullWidth
-          label={t('modal.registration.password_repeat')}
-          variant='outlined'
-          id='repeatPassword'
+        <InputPassword
           name='repeatPassword'
           value={formik.values.repeatPassword}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ width: '100%', marginBottom: 24 }}
-          error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          type='password'
+          label={t('modal.resetPassword.password_repeat')}
           helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
-          FormHelperTextProps={{
-            sx: { position: 'absolute', bottom: '-20px' },
-          }}
-          InputProps={{
-            endAdornment: (
-              <PasswordVisibilityToggle
-                showPassword={showPassword}
-                clickHandler={handleClickShowPassword}
-                mouseDownHandler={handleMouseDownPassword}
-                tooltip={false}
-              />
-            ),
-          }}
+          error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
         />
         <FormControlLabel
           control={

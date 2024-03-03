@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { IconButton, InputAdornment, Tooltip, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from '../PasswordVisibilityToggle/PasswordVisibilityToggle.styles';
@@ -6,9 +5,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const PasswordVisibilityToggle = ({ showPassword, clickHandler, mouseDownHandler, tooltip, textContent }) => {
-  const { t } = useTranslation();
-
+const PasswordVisibilityToggle = ({ showPassword, clickHandler, mouseDownHandler, tooltip, textContent }) => {
   return (
     <>
       <InputAdornment position='end'>
@@ -24,7 +21,7 @@ export const PasswordVisibilityToggle = ({ showPassword, clickHandler, mouseDown
       </InputAdornment>
       {tooltip && (
         <InputAdornment position='end'>
-          <Tooltip title={<Typography sx={styles.tooltip}>{t(textContent)}</Typography>}>
+          <Tooltip title={<Typography sx={styles.tooltip}>{textContent}</Typography>}>
             <IconButton sx={{ marginRight: 0 }}>
               <InfoOutlinedIcon />
             </IconButton>
@@ -42,3 +39,11 @@ PasswordVisibilityToggle.propTypes = {
   tooltip: PropTypes.bool.isRequired,
   textContent: PropTypes.string,
 };
+PasswordVisibilityToggle.defaultProps = {
+  showPassword: false,
+  clickHandler: null,
+  mouseDownHandler: null,
+  tooltip: false,
+  textContent: '',
+};
+export default PasswordVisibilityToggle;
