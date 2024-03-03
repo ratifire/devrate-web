@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import { Box, Button, IconButton, InputAdornment, Link, TextField, Tooltip, Typography } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import styles from '../LoginModal/LoginModal.styles';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { LoginSchema } from './LoginSchema';
 import PropTypes from 'prop-types';
 import InputText from '../../Inputs';
+import { PasswordVisibilityToggle } from '../../PasswordVisibilityToggle/PasswordVisibilityToggle';
 
 const initialValues = {
   email: '',
@@ -63,27 +62,13 @@ const LoginModal = ({ open, setOpen }) => {
           }}
           InputProps={{
             endAdornment: (
-              // TODO: move to separate component
-              <>
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='toggle password visibility'
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge='end'
-                    sx={{ marginRight: -12 }}
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-                <InputAdornment position='end'>
-                  <Tooltip title={<Typography sx={styles.tooltip}>{t('modal.login.password_tooltip')}</Typography>}>
-                    <IconButton>
-                      <InfoOutlinedIcon />
-                    </IconButton>
-                  </Tooltip>
-                </InputAdornment>
-              </>
+              <PasswordVisibilityToggle
+                showPassword={showPassword}
+                clickHandler={handleClickShowPassword}
+                mouseDownHandler={handleMouseDownPassword}
+                tooltip={true}
+                textContent='modal.login.password_tooltip'
+              />
             ),
           }}
         />
