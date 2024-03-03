@@ -1,9 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 // to be replaced by devrateAPI
 
-export const API_BASE_URL = 'https://lms-back-ccq8.onrender.com/api/';
-export const lmsBackApi = createApi({
-  reducerPath: 'lmsBackApi',
+export const API_BASE_URL = '';
+export const devrateServiceApi = createApi({
+  reducerPath: 'devrateServiceApi',
   tagTypes: ['Auth'],
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
@@ -34,4 +34,4 @@ export const lmsBackApi = createApi({
   }),
 });
 
-export const { useCreateUserMutation, useLoginUserMutation } = lmsBackApi;
+export const { useCreateUserMutation, useLoginUserMutation } = devrateServiceApi;
