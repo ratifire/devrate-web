@@ -8,22 +8,18 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
-  IconButton,
-  InputAdornment,
   InputLabel,
   Link,
   MenuItem,
   Select,
   TextField,
-  Tooltip,
   Typography,
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from '../RegistrationModal/RegistrationModal.styles';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { RegistrationSchema } from './RegistraionSchema';
 import PropTypes from 'prop-types';
 import InputText from '../../Inputs';
+import { PasswordVisibilityToggle } from '../../PasswordVisibilityToggle/PasswordVisibilityToggle';
 
 const initialValues = {
   email: '',
@@ -35,6 +31,7 @@ const initialValues = {
   news: false,
   agreement: false,
 };
+//eslint-disable-next-line react/prop-types
 
 const RegistrationModal = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -128,29 +125,13 @@ const RegistrationModal = ({ open, setOpen }) => {
           }}
           InputProps={{
             endAdornment: (
-              // TODO: move to separate component
-              <>
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='toggle password visibility'
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge='end'
-                    sx={{ marginRight: -12 }}
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-                <InputAdornment position='end'>
-                  <Tooltip
-                    title={<Typography sx={styles.tooltip}>{t('modal.registration.password_tooltip')}</Typography>}
-                  >
-                    <IconButton sx={{ marginRight: 0 }}>
-                      <InfoOutlinedIcon />
-                    </IconButton>
-                  </Tooltip>
-                </InputAdornment>
-              </>
+              <PasswordVisibilityToggle
+                showPassword={showPassword}
+                clickHandler={handleClickShowPassword}
+                mouseDownHandler={handleMouseDownPassword}
+                tooltip={true}
+                textContent='modal.registration.password_tooltip'
+              />
             ),
           }}
         />
@@ -172,19 +153,12 @@ const RegistrationModal = ({ open, setOpen }) => {
           }}
           InputProps={{
             endAdornment: (
-              // TODO: move to separate component
-              <>
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='toggle password visibility'
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge='end'
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              </>
+              <PasswordVisibilityToggle
+                showPassword={showPassword}
+                clickHandler={handleClickShowPassword}
+                mouseDownHandler={handleMouseDownPassword}
+                tooltip={false}
+              />
             ),
           }}
         />
