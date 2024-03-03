@@ -2,10 +2,10 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { styles } from './InputText.styles';
 import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
+import { v4 as uuid } from 'uuid';
 
-// TODO: Use uuid lib to create id for input, label, FormHelperText
-const InputText = ({id, name, value, handleChange, handleBlur, type, label, helperText, error }) => {
-
+const InputText = ({ name, value, handleChange, handleBlur, type, label, helperText, error }) => {
+  const id = uuid();
   return (
     <FormControl variant='outlined' sx={styles.input} error={error}>
       <InputLabel htmlFor={id}>{label}</InputLabel>
@@ -25,7 +25,6 @@ const InputText = ({id, name, value, handleChange, handleBlur, type, label, help
   );
 };
 InputText.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
@@ -36,7 +35,6 @@ InputText.propTypes = {
   error: PropTypes.bool.isRequired,
 };
 InputText.defaultProps = {
-  id: 'uuid()',
   name: '',
   value: '',
   handleChange: null,

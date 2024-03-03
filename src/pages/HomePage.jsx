@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-
-import { CheckEmailResetPasswordModal } from '../components/AuthModals';
 import { AboutSection, Footer, Header, HeroSection } from '../components/Sections';
+import { LoginModal } from '../components/AuthModals';
 
 const HomePage = () => {
   const [open, setOpen] = useState(false);
@@ -12,7 +11,7 @@ const HomePage = () => {
     <div className={'home'}>
       <Header />
       <Button onClick={handleOpen}>Push me</Button>
-      {open && <CheckEmailResetPasswordModal open={open} setOpen={handleClose} />}
+      {open && <LoginModal open={open} setOpen={handleClose} />}
       <HeroSection />
       <AboutSection />
       <Footer />

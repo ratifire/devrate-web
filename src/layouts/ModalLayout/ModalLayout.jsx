@@ -4,7 +4,6 @@ import { styles } from './ModalLayout.styles';
 import PropTypes from 'prop-types';
 import Logo from '../../components/UI/Logo/Logo';
 
-// eslint-disable-next-line react/prop-types
 export const ModalLayout = ({ open, setOpen, children }) => {
   return (
     <Modal
