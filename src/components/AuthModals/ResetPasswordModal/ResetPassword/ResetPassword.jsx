@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-import ModalLayout from '../../../layouts/ModalLayout';
-import styles from './ResetPasswordModal.styles';
+import ModalLayout from '../../../../layouts/ModalLayout';
+import styles from './ResetPassword.styles';
 
 import { useTranslation } from 'react-i18next';
 
@@ -11,14 +11,14 @@ import PropTypes from 'prop-types';
 
 import { Button, Link, Typography } from '@mui/material';
 import { ResetPasswordSchema } from './ResetPasswordSchema';
-import FormInput from '../../Inputs/FormInput';
+import FormInput from '../../../Inputs/FormInput';
 
 const initialValues = {
   password: '',
   repeat_password: '',
 };
 
-const ResetPasswordModal = ({ open, setOpen }) => {
+const ResetPassword = ({ open, setOpen }) => {
   const { t } = useTranslation();
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -89,9 +89,9 @@ const ResetPasswordModal = ({ open, setOpen }) => {
   );
 };
 
-ResetPasswordModal.propTypes = {
+ResetPassword.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
 };
 
-export default ResetPasswordModal;
+export default ResetPassword;

@@ -3,13 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
+import { styles } from './ContrySelect.styles';
 
 const CountrySelect = ({ name, value, handleChange, handleBlur, label, error, helperText, countries, itemsText }) => {
   const id = uuid();
   const { t } = useTranslation();
 
   return (
-    <FormControl fullWidth variant='outlined' sx={{ marginBottom: 24 }}>
+    <FormControl fullWidth variant='outlined' sx={styles.input}>
       <InputLabel htmlFor={id}>{label}</InputLabel>
       <Select
         id={id}
@@ -19,9 +20,7 @@ const CountrySelect = ({ name, value, handleChange, handleBlur, label, error, he
         onBlur={handleBlur}
         error={error}
         helperText={helperText}
-        FormHelperTextProps={{
-          sx: { position: 'absolute', bottom: '-20px' },
-        }}
+        FormHelperTextProps={styles.textHelper}
       >
         {countries.map(({ id, country }) => {
           return (
@@ -57,6 +56,6 @@ CountrySelect.defaultProps = {
   helperText: '',
   error: false,
   countries: [],
-  itemsText: 'PropTypes.string.isRequired',
+  itemsText: '',
 };
 export default CountrySelect;

@@ -47,7 +47,7 @@ The frontend of the application is built using modern web technologies and frame
 - [react-toastify](https://fkhadra.github.io/react-toastify/introduction)
 - [@mui/material](https://mui.com/getting-started/installation/)
 - [i18next](https://www.i18next.com/)
-- [moment](https://momentjs.com/)
+- [luxon](https://moment.github.io/luxon/#/)
 - [classnames](https://github.com/JedWatson/classnames#readme/)
 
 ## How to Contribute

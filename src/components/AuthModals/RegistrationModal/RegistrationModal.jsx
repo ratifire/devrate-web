@@ -42,8 +42,7 @@ const RegistrationModal = ({ open, setOpen }) => {
       <Typography sx={styles.title}>{t('modal.registration.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
-          id={'email'}
-          name={'email'}
+          name='email'
           value={formik.values.email}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
@@ -53,8 +52,7 @@ const RegistrationModal = ({ open, setOpen }) => {
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
         <CountrySelect
-          id={'contry'}
-          name={'country'}
+          name='country'
           value={formik.values.country}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
@@ -66,8 +64,7 @@ const RegistrationModal = ({ open, setOpen }) => {
         />
         <Box sx={styles.inputNameContainer}>
           <FormInput
-            id={'firstName'}
-            name={'firstName'}
+            name='firstName'
             value={formik.values.firstName}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
@@ -77,8 +74,7 @@ const RegistrationModal = ({ open, setOpen }) => {
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           />
           <FormInput
-            id={'lastName'}
-            name={'lastName'}
+            name='lastName'
             value={formik.values.lastName}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}

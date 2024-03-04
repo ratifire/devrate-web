@@ -6,14 +6,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const PasswordVisibilityToggle = ({
-  name,
-  showPassword,
-  clickHandler,
-  mouseDownHandler,
-  tooltip,
-  textContent,
-}) => {
+const PasswordVisibilityToggle = ({ name, showPassword, clickHandler, mouseDownHandler, tooltip, textContent }) => {
   const { t } = useTranslation();
 
   return (
@@ -50,3 +43,12 @@ PasswordVisibilityToggle.propTypes = {
   tooltip: PropTypes.bool.isRequired,
   textContent: PropTypes.string,
 };
+PasswordVisibilityToggle.defaultProps = {
+  name: '',
+  showPassword: false,
+  clickHandler: null,
+  mouseDownHandler: null,
+  tooltip: false,
+  textContent: '',
+};
+export default PasswordVisibilityToggle;

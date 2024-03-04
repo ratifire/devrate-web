@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-import ModalLayout from '../../../layouts/ModalLayout';
-import styles from './CheckEmailResetPasswordModal.styles';
+import ModalLayout from '../../../../layouts/ModalLayout';
+import styles from './CheckEmail.styles';
 
 import { useTranslation } from 'react-i18next';
 
 import { useFormik } from 'formik';
 
 import { Box, Button, Link, Typography } from '@mui/material';
-import { CheckEmailResetPasswordSchema } from './CheckEmailResetPasswordSchema';
-import { FormInput } from '../../Inputs';
+import { CheckEmailSchema } from './CheckEmailSchema';
+import { FormInput } from '../../../Inputs';
 import PropTypes from 'prop-types';
 
 const initialValues = {
   email: '',
 };
-const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
+const CheckEmail = ({ open, setOpen }) => {
   const { t } = useTranslation();
 
   const onSubmit = (values, { resetForm }) => {
@@ -25,7 +25,7 @@ const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
   };
   const formik = useFormik({
     initialValues,
-    validationSchema: CheckEmailResetPasswordSchema,
+    validationSchema: CheckEmailSchema,
     onSubmit,
   });
   return (
@@ -33,12 +33,11 @@ const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
       <Typography sx={styles.title}>{t('modal.checkEmailResetPassword.send_letter_title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
-          id={'email'}
-          name={'email'}
+          name='email'
           value={formik.values.email}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          type={'email'}
+          type='email'
           label={t('modal.checkEmailResetPassword.email')}
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
@@ -65,9 +64,9 @@ const CheckEmailResetPasswordModal = ({ open, setOpen }) => {
   );
 };
 
-CheckEmailResetPasswordModal.propTypes = {
+CheckEmail.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
 };
 
-export default CheckEmailResetPasswordModal;
+export default CheckEmail;
