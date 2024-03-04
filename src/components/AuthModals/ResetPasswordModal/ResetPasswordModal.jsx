@@ -9,21 +9,9 @@ import { useTranslation } from 'react-i18next';
 import { Form, Formik, useFormik } from 'formik';
 import PropTypes from 'prop-types';
 
-import {
-  Button,
-  FormControl,
-  FormHelperText,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  Link,
-  OutlinedInput,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { Button, Link, Typography } from '@mui/material';
 import { ResetPasswordSchema } from './ResetPasswordSchema';
+import FormInput from '../../Inputs/FormInput';
 
 const initialValues = {
   password: '',
@@ -52,81 +40,32 @@ const ResetPasswordModal = ({ open, setOpen }) => {
       <Typography sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
       <Formik initialValues={formik.initialValues} onSubmit={onSubmit}>
         <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-          <FormControl
-            variant='outlined'
-            sx={styles.input}
+          <FormInput
+            showPassword={showPassword}
+            type='password'
+            name='password'
+            value={formik.values.password}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            label={t('modal.resetPassword.password')}
             error={formik.touched.password && Boolean(formik.errors.password)}
-          >
-            <InputLabel htmlFor='outlined-adornment-password'>{t('modal.resetPassword.password')}</InputLabel>
-            <OutlinedInput
-              id='password'
-              name='password'
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              type={showPassword ? 'text' : 'password'}
-              endAdornment={
-                <>
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='toggle password visibility'
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge='end'
-                      sx={{ marginRight: -12 }}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                  <InputAdornment position='end'>
-                    <Tooltip
-                      title={<Typography sx={styles.tooltip}>{t('modal.resetPassword.password_tooltip')}</Typography>}
-                    >
-                      <IconButton sx={{ marginRight: 0 }}>
-                        <InfoOutlinedIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </InputAdornment>
-                </>
-              }
-              label={t('modal.passwordReset.password')}
-            />
-            <FormHelperText id='component-error-text'>
-              {formik.touched.password && formik.errors.password}
-            </FormHelperText>
-          </FormControl>
-          <FormControl
-            variant='outlined'
-            sx={styles.input}
-            error={formik.touched.repeat_password && Boolean(formik.errors.repeat_password)}
-          >
-            <InputLabel htmlFor='outlined-adornment-password'>{t('modal.resetPassword.password_repeat')}</InputLabel>
-            <OutlinedInput
-              id='repeat_password'
-              name='repeat_password'
-              value={formik.values.repeat_password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              type={showPassword ? 'text' : 'password'}
-              endAdornment={
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='toggle password visibility'
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge='end'
-                    sx={{ marginRight: 0 }}
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label={t('modal.passwordReset.password_repeat')}
-            />
-            <FormHelperText id='component-error-text'>
-              {formik.touched.repeat_password && formik.errors.repeat_password}
-            </FormHelperText>
-          </FormControl>
+            helperText={formik.touched.password && formik.errors.password}
+            clickHandler={handleClickShowPassword}
+            mouseDownHandler={handleMouseDownPassword}
+          />
+          <FormInput
+            showPassword={showPassword}
+            type='password'
+            name='repeatPassword'
+            value={formik.values.repeatPassword}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            label={t('modal.resetPassword.password_repeat')}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+            clickHandler={handleClickShowPassword}
+            mouseDownHandler={handleMouseDownPassword}
+          />
           <Button
             onClick={formik.handleSubmit}
             sx={styles.btn}

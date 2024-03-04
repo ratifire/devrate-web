@@ -18,7 +18,7 @@ const InputText = ({ name, value, handleChange, handleBlur, type, label, helperT
         type={type}
         label={label}
       />
-      <FormHelperText id={id + 'inp-text'} sx={styles.textHelper}>
+      <FormHelperText id={id} sx={styles.textHelper}>
         {helperText}
       </FormHelperText>
     </FormControl>

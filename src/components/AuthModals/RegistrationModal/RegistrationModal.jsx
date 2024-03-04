@@ -2,24 +2,13 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  Link,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Link, Typography } from '@mui/material';
 import styles from '../RegistrationModal/RegistrationModal.styles';
-import { RegistrationSchema } from './RegistraionSchema';
+import { RegistrationSchema } from './RegistrationSchema';
 import PropTypes from 'prop-types';
-import { InputText } from '../../Inputs';
-import { PasswordVisibilityToggle } from '../../PasswordVisibilityToggle/PasswordVisibilityToggle';
+import { CountrySelect, FormCheckbox } from '../../Inputs';
+import { userCountries } from '../../../utils/constants/userCountries';
+import FormInput from '../../Inputs/FormInput/FormInput';
 
 const initialValues = {
   email: '',
@@ -52,50 +41,42 @@ const RegistrationModal = ({ open, setOpen }) => {
     <ModalLayout open={open} setOpen={setOpen}>
       <Typography sx={styles.title}>{t('modal.registration.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-        <InputText
+        <FormInput
           id={'email'}
           name={'email'}
           value={formik.values.email}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          type={'email'}
+          type='email'
           label={t('modal.registration.email')}
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
-        <FormControl fullWidth variant='outlined' sx={{ marginBottom: 24 }}>
-          <InputLabel id='country-label'>{t('modal.registration.country')}</InputLabel>
-          <Select
-            id='country'
-            labelId='country-label'
-            name='country'
-            value={formik.values.country}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            label={t('modal.registration.country')}
-            error={formik.touched.country && Boolean(formik.errors.country)}
-            helperText={formik.touched.country && formik.errors.country}
-            FormHelperTextProps={{
-              sx: { position: 'absolute', bottom: '-20px' },
-            }}
-          >
-            <MenuItem value={'ukraine'}>{t('modal.registration.countries.ukraine')}</MenuItem>
-            <MenuItem value={'poland'}>{t('modal.registration.countries.poland')}</MenuItem>
-            <MenuItem value={'usa'}>{t('modal.registration.countries.usa')}</MenuItem>
-          </Select>
-        </FormControl>
+        <CountrySelect
+          id={'contry'}
+          name={'country'}
+          value={formik.values.country}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          label={t('modal.registration.country')}
+          error={formik.touched.country && Boolean(formik.errors.country)}
+          helperText={formik.touched.country && formik.errors.country}
+          countries={userCountries}
+          itemsText={'modal.registration.countries'}
+        />
         <Box sx={styles.inputNameContainer}>
-          <InputText
+          <FormInput
             id={'firstName'}
             name={'firstName'}
             value={formik.values.firstName}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
+            type='text'
             label={t('modal.registration.first_name')}
             helperText={formik.touched.firstName && formik.errors.firstName}
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           />
-          <InputText
+          <FormInput
             id={'lastName'}
             name={'lastName'}
             value={formik.values.lastName}
@@ -106,98 +87,47 @@ const RegistrationModal = ({ open, setOpen }) => {
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           />
         </Box>
-        <TextField
-          type={showPassword ? 'text' : 'password'}
-          fullWidth
-          label={t('modal.registration.password')}
-          variant='outlined'
-          id='password'
+        <FormInput
+          showPassword={showPassword}
+          type='password'
           name='password'
           value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ width: '100%', marginBottom: 24 }}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          label={t('modal.registration.password')}
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
-          FormHelperTextProps={{
-            sx: { position: 'absolute', bottom: '-20px' },
-          }}
-          InputProps={{
-            endAdornment: (
-              <PasswordVisibilityToggle
-                showPassword={showPassword}
-                clickHandler={handleClickShowPassword}
-                mouseDownHandler={handleMouseDownPassword}
-                tooltip={true}
-                textContent='modal.registration.password_tooltip'
-              />
-            ),
-          }}
+          clickHandler={handleClickShowPassword}
+          mouseDownHandler={handleMouseDownPassword}
         />
-        <TextField
-          type={showPassword ? 'text' : 'password'}
-          fullWidth
-          label={t('modal.registration.password_repeat')}
-          variant='outlined'
-          id='repeatPassword'
+        <FormInput
+          showPassword={showPassword}
+          type='password'
           name='repeatPassword'
           value={formik.values.repeatPassword}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ width: '100%', marginBottom: 24 }}
-          error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
-          helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
-          FormHelperTextProps={{
-            sx: { position: 'absolute', bottom: '-20px' },
-          }}
-          InputProps={{
-            endAdornment: (
-              <PasswordVisibilityToggle
-                showPassword={showPassword}
-                clickHandler={handleClickShowPassword}
-                mouseDownHandler={handleMouseDownPassword}
-                tooltip={false}
-              />
-            ),
-          }}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          label={t('modal.registration.password')}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+          clickHandler={handleClickShowPassword}
+          mouseDownHandler={handleMouseDownPassword}
         />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={formik.values.newsletter}
-              onChange={formik.handleChange}
-              name='promo'
-              sx={{
-                color: '#F1F1F1',
-                '&.Mui-checked': {
-                  color: '#F1F1F1',
-                },
-              }}
-            />
-          }
-          label={<Typography sx={styles.newsAgreementText}>{t('modal.registration.news_letter')}</Typography>}
+        <FormCheckbox
+          checked={formik.values.newsletter}
+          changeHandler={formik.handleChange}
+          name='promo'
           helperText={formik.touched.news && formik.errors.news}
-          FormHelperTextProps={{
-            sx: { position: 'absolute', bottom: '-20px' },
-          }}
+          label={t('modal.registration.news_letter')}
         />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={formik.values.agreement}
-              onChange={formik.handleChange}
-              name='agreement'
-              sx={{
-                color: '#F1F1F1',
-                '&.Mui-checked': {
-                  color: '#F1F1F1',
-                },
-              }}
-            />
-          }
-          label={<Typography sx={styles.newsAgreementText}>{t('modal.registration.agreement')}</Typography>}
-          sx={{ marginBottom: 24 }}
+        <FormCheckbox
+          checked={formik.values.agreement}
+          changeHandler={formik.handleChange}
+          name='agreement'
+          helperText={formik.touched.news && formik.errors.news}
+          label={t('modal.registration.agreement')}
         />
+
         <Button
           disabled={(!formik.values.promo && true) || (!formik.values.agreement && true)}
           type='submit'

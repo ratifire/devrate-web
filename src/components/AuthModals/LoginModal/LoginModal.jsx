@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import { Box, Button, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, Link, Typography } from '@mui/material';
 import styles from '../LoginModal/LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
 import PropTypes from 'prop-types';
-import { InputText } from '../../Inputs';
-import { PasswordVisibilityToggle } from '../../PasswordVisibilityToggle/PasswordVisibilityToggle';
+import FormInput from '../../Inputs/FormInput';
 
 const initialValues = {
   email: '',
@@ -33,44 +32,29 @@ const LoginModal = ({ open, setOpen }) => {
     <ModalLayout open={open} setOpen={setOpen}>
       <Typography sx={styles.title}>{t('modal.login.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-        <InputText
+        <FormInput
           id={'email'}
           name={'email'}
           value={formik.values.email}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          type={'email'}
-          label={t('modal.login.email')}
+          type='email'
+          label={t('modal.registration.email')}
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
-        <TextField
-          type={showPassword ? 'text' : 'password'}
-          fullWidth
-          label={t('modal.login.password')}
-          variant='outlined'
-          id='password'
+        <FormInput
+          showPassword={showPassword}
+          type='password'
           name='password'
           value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ ...styles.input, marginBottom: 32 }}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          label={t('modal.registration.password')}
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
-          FormHelperTextProps={{
-            sx: { position: 'absolute', bottom: '-20px' },
-          }}
-          InputProps={{
-            endAdornment: (
-              <PasswordVisibilityToggle
-                showPassword={showPassword}
-                clickHandler={handleClickShowPassword}
-                mouseDownHandler={handleMouseDownPassword}
-                tooltip={true}
-                textContent='modal.login.password_tooltip'
-              />
-            ),
-          }}
+          clickHandler={handleClickShowPassword}
+          mouseDownHandler={handleMouseDownPassword}
         />
         <Box sx={styles.textLink}>
           <Link href='#' sx={styles.link}>

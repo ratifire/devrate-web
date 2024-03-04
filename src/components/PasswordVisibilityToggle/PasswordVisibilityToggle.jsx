@@ -6,7 +6,14 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const PasswordVisibilityToggle = ({ showPassword, clickHandler, mouseDownHandler, tooltip, textContent }) => {
+export const PasswordVisibilityToggle = ({
+  name,
+  showPassword,
+  clickHandler,
+  mouseDownHandler,
+  tooltip,
+  textContent,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -17,12 +24,12 @@ export const PasswordVisibilityToggle = ({ showPassword, clickHandler, mouseDown
           onClick={clickHandler}
           onMouseDown={mouseDownHandler}
           edge='end'
-          sx={{ marginRight: -12 }}
+          sx={{ marginRight: name !== 'repeatPassword' ? -12 : 0 }}
         >
           {showPassword ? <VisibilityOff /> : <Visibility />}
         </IconButton>
       </InputAdornment>
-      {tooltip && (
+      {tooltip && name !== 'repeatPassword' && (
         <InputAdornment position='end'>
           <Tooltip title={<Typography sx={styles.tooltip}>{t(textContent)}</Typography>}>
             <IconButton sx={{ marginRight: 0 }}>
@@ -36,6 +43,7 @@ export const PasswordVisibilityToggle = ({ showPassword, clickHandler, mouseDown
 };
 
 PasswordVisibilityToggle.propTypes = {
+  name: PropTypes.string,
   showPassword: PropTypes.bool.isRequired,
   clickHandler: PropTypes.func.isRequired,
   mouseDownHandler: PropTypes.func.isRequired,
