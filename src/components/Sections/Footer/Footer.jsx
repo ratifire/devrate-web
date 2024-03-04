@@ -6,14 +6,18 @@ import styles from './Footer.styles';
 import { Box, Container, Icon, Link, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { ReactComponent as Instagram } from '../../../assets/icons/instagram.svg';
-import { ReactComponent as Linkedin } from '../../../assets/icons/linkedin.svg';
 import { ReactComponent as LogoBoy } from '../../../assets/icons/logo-boy.svg';
 
 import Logo from '../../UI/Logo/Logo';
+import socials from '../../../utils/constants/socials';
 
 const Footer = () => {
   const { t } = useTranslation();
+  const socialLinks = socials.map((social, index) => (
+    <Link key={index} to={social.url} component={RouterLink} sx={styles.link} target={social.target}>
+      <social.icon />
+    </Link>
+  ))
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box component='footer' sx={styles.footer}>
@@ -32,12 +36,7 @@ const Footer = () => {
               {t('home.links.privacy_policy')}
             </Link>
             <Box sx={styles.socialGroup}>
-              <Link to={`https://www.instagram.com/`} component={RouterLink} sx={styles.link} target='_blank'>
-                <Instagram />
-              </Link>
-              <Link to={`https://www.linkedin.com/`} component={RouterLink} sx={styles.link} target='_blank'>
-                <Linkedin />
-              </Link>
+              {socialLinks}
             </Box>
           </Box>
         </Box>
