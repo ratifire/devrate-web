@@ -33,8 +33,7 @@ const LoginModal = ({ open, setOpen }) => {
       <Typography sx={styles.title}>{t('modal.login.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
-          id={'email'}
-          name={'email'}
+          name='email'
           value={formik.values.email}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}

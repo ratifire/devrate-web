@@ -1,11 +1,5 @@
-import CheckEmailResetPasswordModal from './CheckEmailResetPasswordModal/CheckEmailResetPasswordModal';
-import LoginModal from './LoginModal/LoginModal';
-import RegistrationModal from './RegistrationModal/RegistrationModal';
-import ResetPasswordModal from './ResetPasswordModal/ResetPasswordModal';
+import LoginModal from './LoginModal';
+import RegistrationModal from './RegistrationModal';
+import { CheckEmail, ResetPassword } from './ResetPasswordModal';
 
-export {
-    CheckEmailResetPasswordModal,
-    LoginModal,
-    RegistrationModal,
-    ResetPasswordModal
-};
+export { LoginModal, RegistrationModal, ResetPassword, CheckEmail };

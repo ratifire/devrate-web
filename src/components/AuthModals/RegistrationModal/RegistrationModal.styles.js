@@ -36,12 +36,6 @@ const styles = {
     fontSize: 14,
     lineHeight: 1.43,
   },
-  turnBackText: {
-    marginRight: 10,
-    fontSize: 14,
-    lineHeight: 1.43,
-    color: '#F1F1F14D',
-  },
   policyTermsLink: (theme) => ({
     marginRight: 10,
     color: theme.palette.text.primary,

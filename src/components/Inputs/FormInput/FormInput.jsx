@@ -1,9 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { styles } from '../FormInput/FormInput.styles';
+import { styles } from './FormInput.styles';
 import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
 import { v4 as uuid } from 'uuid';
-import { PasswordVisibilityToggle } from '../../PasswordVisibilityToggle/PasswordVisibilityToggle';
+import PasswordVisibilityToggle from '../../PasswordVisibilityToggle';
 
 const FormInput = ({
   name,
