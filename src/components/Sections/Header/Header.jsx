@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import styles from './Header.styles';
 import LinkList from './LinkList';
 import navLinks from '../../../utils/constants/navLinks';
-import Logo from '../../UI/Logo/Logo';
+import Logo from '../../UI/Logo';
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);

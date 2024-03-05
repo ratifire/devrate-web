@@ -32,7 +32,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:css": "stylelint src",
-    "lint:css:fix": "npm run lint:css -- --fix"
+    "lint:css:fix": "npm run lint:css -- --fix",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
@@ -53,12 +55,24 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.17",
+    "@storybook/addon-interactions": "^7.6.17",
+    "@storybook/addon-links": "^7.6.17",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^7.6.17",
+    "@storybook/preset-create-react-app": "^7.6.17",
+    "@storybook/react": "^7.6.17",
+    "@storybook/react-webpack5": "^7.6.17",
+    "@storybook/test": "^7.6.17",
     "eslint": "^8.56.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-storybook": "^0.8.0",
     "prettier": "3.2.4",
+    "storybook": "^7.6.17",
     "stylelint": "^16.2.0",
     "stylelint-config-standard": "^36.0.0",
-    "stylelint-config-standard-scss": "^13.0.0"
+    "stylelint-config-standard-scss": "^13.0.0",
+    "webpack": "^5.90.3"
   }
 }

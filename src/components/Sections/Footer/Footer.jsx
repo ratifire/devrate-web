@@ -8,7 +8,7 @@ import { Trans, useTranslation } from 'react-i18next';
 
 import { ReactComponent as LogoBoy } from '../../../assets/icons/logo-boy.svg';
 
-import Logo from '../../UI/Logo/Logo';
+import Logo from '../../UI/Logo';
 import socials from '../../../utils/constants/socials';
 
 const Footer = () => {
@@ -17,7 +17,7 @@ const Footer = () => {
     <Link key={index} to={social.url} component={RouterLink} sx={styles.link} target={social.target}>
       <social.icon />
     </Link>
-  ))
+  ));
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box component='footer' sx={styles.footer}>
@@ -35,9 +35,7 @@ const Footer = () => {
             <Link to={`/`} component={RouterLink} sx={styles.link}>
               {t('home.links.privacy_policy')}
             </Link>
-            <Box sx={styles.socialGroup}>
-              {socialLinks}
-            </Box>
+            <Box sx={styles.socialGroup}>{socialLinks}</Box>
           </Box>
         </Box>
         <Box>
