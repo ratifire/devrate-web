@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Modal, Slide } from '@mui/material';
 import { styles } from './ModalLayout.styles';
 import PropTypes from 'prop-types';
-import Logo from '../../components/UI/Logo/Logo';
+import Logo from '../../components/UI/Logo';
 
 export const ModalLayout = ({ open, setOpen, children }) => {
   return (
