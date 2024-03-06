@@ -103,29 +103,31 @@ const RegistrationModal = ({ open, setOpen }) => {
           value={formik.values.repeatPassword}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          label={t('modal.registration.password')}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
+          label={t('modal.registration.password_repeat')}
+          error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
+          helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
         />
         <FormCheckbox
-          checked={formik.values.newsletter}
+          checked={formik.values.news}
           changeHandler={formik.handleChange}
-          name='promo'
+          name='news'
           helperText={formik.touched.news && formik.errors.news}
           label={t('modal.registration.news_letter')}
+          error={formik.touched.news && Boolean(formik.errors.news)}
         />
         <FormCheckbox
           checked={formik.values.agreement}
           changeHandler={formik.handleChange}
           name='agreement'
-          helperText={formik.touched.news && formik.errors.news}
+          helperText={formik.touched.agreement && formik.errors.agreement}
           label={t('modal.registration.agreement')}
+          error={formik.touched.agreement && Boolean(formik.errors.agreement)}
         />
 
         <Button
-          disabled={(!formik.values.promo && true) || (!formik.values.agreement && true)}
+          // disabled={(!formik.values.news && true) || (!formik.values.agreement && true)}
           type='submit'
           sx={styles.btn}
         >

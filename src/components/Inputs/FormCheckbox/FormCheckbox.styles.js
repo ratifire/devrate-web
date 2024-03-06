@@ -11,8 +11,4 @@ export const styles = {
       color: '#F1F1F1',
     },
   }),
-  textHelper: () => ({
-    position: 'absolute',
-    bottom: '-23px',
-  }),
 };
