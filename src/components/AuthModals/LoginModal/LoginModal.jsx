@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import { Box, Button, Link, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import styles from '../LoginModal/LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
 import PropTypes from 'prop-types';
 import FormInput from '../../Inputs/FormInput';
+import { ButtonDef } from '../../Buttons';
 
 const initialValues = {
   email: '',
@@ -56,13 +57,26 @@ const LoginModal = ({ open, setOpen }) => {
           mouseDownHandler={handleMouseDownPassword}
         />
         <Box sx={styles.textLink}>
-          <Link href='#' sx={styles.link}>
-            {t('modal.login.forgot_your_password')}
-          </Link>
+          <ButtonDef
+            variant='text'
+            correctStyle={styles.turnBackLink}
+            type='button'
+            label={t('modal.login.forgot_your_password')}
+          />
         </Box>
-        <Button type='submit' sx={styles.btn}>
-          {t('modal.login.btn_login').toUpperCase()}
-        </Button>
+        <Box sx={styles.wrapperBtn}>
+          <ButtonDef
+            variant='contained'
+            type='submit'
+            handlerClick={formik.handleSubmit}
+            disabled={
+              (formik.touched.email && Boolean(formik.errors.email)) ||
+              (formik.touched.password && Boolean(formik.errors.password))
+            }
+            label={t('modal.login.btn_login')}
+          />
+        </Box>
+
         <Typography href='#' sx={styles.policyText}>
           {t('modal.login.text_privacy')}
         </Typography>

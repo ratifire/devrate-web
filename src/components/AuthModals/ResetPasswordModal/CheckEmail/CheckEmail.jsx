@@ -8,10 +8,11 @@ import { useTranslation } from 'react-i18next';
 
 import { useFormik } from 'formik';
 
-import { Box, Button, Link, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import { CheckEmailSchema } from './CheckEmailSchema';
 import { FormInput } from '../../../Inputs';
 import PropTypes from 'prop-types';
+import { ButtonDef } from '../../../Buttons';
 
 const initialValues = {
   email: '',
@@ -42,9 +43,15 @@ const CheckEmail = ({ open, setOpen }) => {
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
-        <Button type='submit' sx={styles.btn}>
-          {t('modal.checkEmailResetPassword.btn_send_letter')}
-        </Button>
+        <Box sx={styles.wrapperBtn}>
+          <ButtonDef
+            variant='contained'
+            type='submit'
+            handlerClick={formik.handleSubmit}
+            disabled={formik.touched.email && Boolean(formik.errors.email)}
+            label={t('modal.checkEmailResetPassword.btn_send_letter')}
+          />
+        </Box>
       </form>
       <Box sx={styles.box}>
         <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>

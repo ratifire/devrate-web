@@ -17,20 +17,13 @@ const styles = {
     justifyContent: 'spaceBetween',
     marginBottom: 24,
   },
+   wrapperBtn: () => ({
+    marginTop: 37,
+ }),
   btn: (theme) => ({
     marginTop: 20,
+ 
     marginBottom: 50,
-    paddingX: 32,
-    paddingY: 16,
-    fontsize: 16,
-    width: '100%',
-    lineHeight: '16px',
-    fontWeight: 500,
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-    },
   }),
   policyTermsContainer: {
     textAlign: 'center',

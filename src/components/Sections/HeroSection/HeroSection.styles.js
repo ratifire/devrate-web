@@ -30,17 +30,9 @@ export const styles = {
     rowHeight: '150%',
     color: theme.palette.text.secondary,
   }),
-  button: (theme) => ({
-    paddingX: 32,
+  button: () => ({
+    paddingX: 0,
     paddingY: 16,
-    fontsize: 16,
     width: 190,
-    lineHeight: '16px',
-    fontWeight: 500,
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-    },
   }),
 };

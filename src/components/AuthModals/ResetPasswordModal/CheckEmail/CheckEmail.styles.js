@@ -17,7 +17,6 @@ const styles = {
     marginTop: 36,
   }),
   box: () => ({
-    marginTop: 50,
     display: 'flex',
     gridGap: 14,
     justifyContent: 'center',
@@ -32,25 +31,9 @@ const styles = {
     textAlign: 'center',
     textDecoration: 'underline',
   }),
-  btn: (theme) => ({
-    fontSize: 16,
-    fontWeight: 500,
-    lineHeight: '16px',
-    color: theme.palette.text.primary,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    marginTop: 20,
-    paddingY: 20,
-    paddingX: 12,
-    width: '100%',
-    backgroundColor: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-    },
-    '&:disabled': {
-      backgroundColor: '#7D66F566',
-      color: '#FFFFFF80',
-    },
+  wrapperBtn: () => ({
+    marginTop: 40,
+    marginBottom: 50,
   }),
 };
 export default styles;

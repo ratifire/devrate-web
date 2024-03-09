@@ -5,8 +5,11 @@ import styles from './Header.styles';
 import LinkList from './LinkList';
 import navLinks from '../../../utils/constants/navLinks';
 import Logo from '../../UI/Logo';
+import { ButtonDef } from '../../Buttons';
+import { useTranslation } from 'react-i18next';
 
 function Header() {
+  const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handlerDrawerToggle = () => {
@@ -46,6 +49,7 @@ function Header() {
             </Box>
             <Box sx={styles.headerNav}>
               <LinkList links={navLinks} />
+              <ButtonDef variant='text' type='button' label={t('home.links.login')} />
             </Box>
           </Toolbar>
           <Box component='nav'>
