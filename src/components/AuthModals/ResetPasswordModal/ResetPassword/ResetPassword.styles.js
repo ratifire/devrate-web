@@ -38,25 +38,9 @@ const styles = {
     width: '100%',
     marginBottom: 24,
   }),
-  btn: (theme) => ({
-    fontSize: 16,
-    fontWeight: 500,
-    lineHeight: '16px',
-    color: theme.palette.text.primary,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    marginTop: 20,
-    paddingY: 20,
-    paddingX: 12,
-    width: '100%',
-    backgroundColor: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-    },
-    '&:disabled': {
-      backgroundColor: '#7D66F566',
-      color: '#FFFFFF80',
-    },
+  wrapperBtn: () => ({
+    marginTop: 44,
+    marginBottom: 50,
   }),
   tooltip: (theme) => ({
     fontSize: 14,

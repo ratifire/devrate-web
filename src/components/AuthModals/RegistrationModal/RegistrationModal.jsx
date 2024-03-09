@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import { Box, Button, Link, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import styles from '../RegistrationModal/RegistrationModal.styles';
 import { RegistrationSchema } from './RegistrationSchema';
 import PropTypes from 'prop-types';
 import { CountrySelect, FormCheckbox } from '../../Inputs';
 import { userCountries } from '../../../utils/constants/userCountries';
 import FormInput from '../../Inputs/FormInput/FormInput';
+import { ButtonDef } from '../../Buttons';
 
 const initialValues = {
   email: '',
@@ -123,14 +124,15 @@ const RegistrationModal = ({ open, setOpen }) => {
           helperText={formik.touched.news && formik.errors.news}
           label={t('modal.registration.agreement')}
         />
-
-        <Button
-          disabled={(!formik.values.promo && true) || (!formik.values.agreement && true)}
-          type='submit'
-          sx={styles.btn}
-        >
-          {t('modal.registration.btn_register')}
-        </Button>
+        <Box sx={styles.wrapperBtn}>
+          <ButtonDef
+            variant='contained'
+            type='submit'
+            handlerClick={formik.handleSubmit}
+            disabled={(!formik.values.news && true) || (!formik.values.agreement && true)}
+            label={t('modal.registration.btn_register')}
+          />
+        </Box>
         <Box sx={styles.policyTermsContainer}>
           <Link href='#' sx={styles.policyTermsLink}>
             {t('modal.registration.privacy_policy')}
