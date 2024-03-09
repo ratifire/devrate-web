@@ -1,10 +1,11 @@
 import React from 'react';
+import { ProfileTemplate } from '../Templates';
 
 const ProfilePage = () => {
   return (
-    <div>
+    <ProfileTemplate>
       <h2>Protected profile page</h2>
-    </div>
+    </ProfileTemplate>
   );
 };
 

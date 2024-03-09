@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { AboutSection, Footer, Header, HeroSection } from '../components/Sections';
-// import { ResetPassword } from '../components/AuthModals';
-// import CheckEmail from '../components/AuthModals/ResetPasswordModal/CheckEmail';
-// import RegistrationModal from '../components/AuthModals/RegistrationModal';
 import LoginModal from '../components/AuthModals/LoginModal';
+ 
 
+import { ResetPassword } from '../components/AuthModals';
+import { HomeTemplate } from '../Templates';
+ 
 const HomePage = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div className={'home'}>
+    <HomeTemplate>
       <Header />
       <Button onClick={handleOpen}>Push me</Button>
-      {open && <LoginModal open={open} setOpen={handleClose} />}
+       {open && <LoginModal open={open} setOpen={handleClose} />}
+ 
       <HeroSection />
       <AboutSection />
       <Footer />
-    </div>
+    </HomeTemplate>
   );
 };
 export default HomePage;
