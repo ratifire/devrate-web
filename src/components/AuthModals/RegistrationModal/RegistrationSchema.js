@@ -20,4 +20,7 @@ export const RegistrationSchema = Yup.object().shape({
   repeatPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], i18n.t('modal.registration.password_must_match'))
     .required(i18n.t('modal.registration.required')),
+  agreement: Yup.boolean()
+    .oneOf([true], i18n.t('modal.registration.agreement_error'))
+    .required(i18n.t('modal.registration.agreement_error')),
 });

@@ -18,6 +18,7 @@ const styles = {
     marginBottom: 24,
   },
   btn: (theme) => ({
+    marginTop: 20,
     marginBottom: 50,
     paddingX: 32,
     paddingY: 16,

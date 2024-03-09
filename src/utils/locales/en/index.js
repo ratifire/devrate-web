@@ -70,6 +70,7 @@ export const en = {
         password_tooltip: 'Passwords must contain 7 + characters, at least 1 number, at least 1 letter and no spaces.',
         news_letter: 'Send me news, surveys and special offers from DEVRATE',
         agreement: 'I have read and agree to the terms of use',
+        agreement_error: 'To use our service, you must agree to the terms of use',
         btn_register: 'Sign Up',
         privacy_policy: 'Privacy Policy',
         terms_and_conditions: 'Terms and Conditions',
