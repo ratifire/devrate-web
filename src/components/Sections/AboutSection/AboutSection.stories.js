@@ -1,7 +1,7 @@
 import AboutSection from './AboutSection';
 
 export default {
-  title: 'Example/AboutSection',
+  title: 'Sections/AboutSection',
   component: AboutSection,
   parameters: {
     layout: 'fullscreen',
