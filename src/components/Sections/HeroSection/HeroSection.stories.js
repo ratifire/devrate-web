@@ -1,4 +1,3 @@
-// import React from 'react';
 import HeroSection from './HeroSection';
 
 export default {
@@ -8,9 +7,3 @@ export default {
 };
 
 export const Default = {};
-
-// const Template = () => <HeroSection/> 
-
-// export const Default = Template.bind({});
-
-// Default.args = {};
