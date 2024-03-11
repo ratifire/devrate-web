@@ -3,12 +3,12 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, Link, Typography } from '@mui/material';
-import styles from '../RegistrationModal/RegistrationModal.styles';
+import styles from './RegistrationModal.styles';
 import { RegistrationSchema } from './RegistrationSchema';
 import PropTypes from 'prop-types';
 import { CountrySelect, FormCheckbox } from '../../Inputs';
 import { userCountries } from '../../../utils/constants/userCountries';
-import FormInput from '../../Inputs/FormInput/FormInput';
+import FormInput from '../../Inputs/FormInput';
 import { ButtonDef } from '../../Buttons';
 
 const initialValues = {
@@ -126,7 +126,7 @@ const RegistrationModal = ({ open, setOpen }) => {
           label={t('modal.registration.agreement')}
           error={formik.touched.agreement && Boolean(formik.errors.agreement)}
         />
-         <Box sx={styles.wrapperBtn}>
+        <Box sx={styles.wrapperBtn}>
           <ButtonDef
             variant='contained'
             type='submit'
