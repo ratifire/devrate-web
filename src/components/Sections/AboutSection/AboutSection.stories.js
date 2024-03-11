@@ -4,7 +4,7 @@ export default {
   title: 'Sections/AboutSection',
   component: AboutSection,
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
     backgrounds: {
       default: 'dark',
     },
