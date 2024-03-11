@@ -10,6 +10,5 @@ export default {
     },
   },
   tags: ['autodocs'],
-  argTypes: {},
 };
 export const Default = {};
