@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import { Box, Button, Link, Typography } from '@mui/material';
-import styles from '../RegistrationModal/RegistrationModal.styles';
+import { Box, Link, Typography } from '@mui/material';
+import styles from './RegistrationModal.styles';
 import { RegistrationSchema } from './RegistrationSchema';
 import PropTypes from 'prop-types';
 import { CountrySelect, FormCheckbox } from '../../Inputs';
 import { userCountries } from '../../../utils/constants/userCountries';
-import FormInput from '../../Inputs/FormInput/FormInput';
+import FormInput from '../../Inputs/FormInput';
+import { ButtonDef } from '../../Buttons';
 
 const initialValues = {
   email: '',
@@ -103,34 +104,38 @@ const RegistrationModal = ({ open, setOpen }) => {
           value={formik.values.repeatPassword}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          label={t('modal.registration.password')}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
+          label={t('modal.registration.password_repeat')}
+          error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
+          helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
         />
         <FormCheckbox
-          checked={formik.values.newsletter}
+          checked={formik.values.news}
           changeHandler={formik.handleChange}
-          name='promo'
+          name='news'
           helperText={formik.touched.news && formik.errors.news}
           label={t('modal.registration.news_letter')}
+          error={formik.touched.news && Boolean(formik.errors.news)}
         />
         <FormCheckbox
           checked={formik.values.agreement}
           changeHandler={formik.handleChange}
           name='agreement'
-          helperText={formik.touched.news && formik.errors.news}
+          helperText={formik.touched.agreement && formik.errors.agreement}
           label={t('modal.registration.agreement')}
+          error={formik.touched.agreement && Boolean(formik.errors.agreement)}
         />
+        <Box sx={styles.wrapperBtn}>
+          <ButtonDef
+            variant='contained'
+            type='submit'
+            handlerClick={formik.handleSubmit}
+            disabled={(!formik.values.news && true) || (!formik.values.agreement && true)}
+            label={t('modal.registration.btn_register')}
+          />
+        </Box>
 
-        <Button
-          disabled={(!formik.values.promo && true) || (!formik.values.agreement && true)}
-          type='submit'
-          sx={styles.btn}
-        >
-          {t('modal.registration.btn_register')}
-        </Button>
         <Box sx={styles.policyTermsContainer}>
           <Link href='#' sx={styles.policyTermsLink}>
             {t('modal.registration.privacy_policy')}

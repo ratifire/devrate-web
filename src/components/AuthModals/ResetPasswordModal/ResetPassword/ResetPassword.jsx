@@ -9,13 +9,14 @@ import { useTranslation } from 'react-i18next';
 import { Form, Formik, useFormik } from 'formik';
 import PropTypes from 'prop-types';
 
-import { Button, Link, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import { ResetPasswordSchema } from './ResetPasswordSchema';
 import FormInput from '../../../Inputs/FormInput';
+import { ButtonDef } from '../../../Buttons';
 
 const initialValues = {
   password: '',
-  repeat_password: '',
+  repeatPassword: '',
 };
 
 const ResetPassword = ({ open, setOpen }) => {
@@ -61,21 +62,23 @@ const ResetPassword = ({ open, setOpen }) => {
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
             label={t('modal.resetPassword.password_repeat')}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
+            error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
+            helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
             clickHandler={handleClickShowPassword}
             mouseDownHandler={handleMouseDownPassword}
           />
-          <Button
-            onClick={formik.handleSubmit}
-            sx={styles.btn}
-            disabled={
-              (formik.touched.repeat_password && formik.errors.repeat_password) ||
-              (formik.touched.password && formik.errors.password)
-            }
-          >
-            {t('modal.resetPassword.btn_change_password')}
-          </Button>
+          <Box sx={styles.wrapperBtn}>
+            <ButtonDef
+              variant='contained'
+              type='submit'
+              handlerClick={formik.handleSubmit}
+              disabled={
+                (formik.touched.repeatPassword && formik.errors.repeatPassword) ||
+                (formik.touched.password && formik.errors.password)
+              }
+              label={t('modal.resetPassword.btn_change_password')}
+            />
+          </Box>
         </Form>
       </Formik>
       <Typography sx={styles.text}>{t('modal.resetPassword.text_privacy')}</Typography>

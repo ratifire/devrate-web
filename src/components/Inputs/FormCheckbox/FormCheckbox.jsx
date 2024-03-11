@@ -1,16 +1,17 @@
-import { Checkbox, FormControlLabel, Typography } from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, FormHelperText, Typography } from '@mui/material';
 import { styles } from './FormCheckbox.styles';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FormCheckbox = ({ checked, changeHandler, name, label, helperText }) => {
+const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error }) => {
   return (
-    <FormControlLabel
-      control={<Checkbox checked={checked} onChange={changeHandler} name={name} sx={styles.checkBox} />}
-      label={<Typography sx={styles.newsAgreementText}>{label}</Typography>}
-      helperText={helperText}
-      FormHelperTextProps={styles.textHelper}
-    />
+    <FormControl error={error} variant='standard'>
+      <FormControlLabel
+        control={<Checkbox checked={checked} onChange={changeHandler} name={name} sx={styles.checkBox} />}
+        label={<Typography sx={styles.newsAgreementText}>{label}</Typography>}
+      />
+      <FormHelperText>{helperText}</FormHelperText>
+    </FormControl>
   );
 };
 
@@ -20,6 +21,7 @@ FormCheckbox.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   helperText: PropTypes.string.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 FormCheckbox.defaultProps = {
   checked: false,
@@ -27,6 +29,7 @@ FormCheckbox.defaultProps = {
   name: '',
   label: '',
   helperText: '',
+  error: false,
 };
 
 export default FormCheckbox;
