@@ -1,7 +1,7 @@
 import HeroSection from './HeroSection';
 
 export default {
-  title: 'Example/HeroSection',
+  title: 'Sections/HeroSection',
   component: HeroSection,
   tags: ['autodocs'],
 };
