@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const YoutubeEmbed = ({ link, title }) => {
+const YoutubeEmbed = ({ link, title }) => {
   return (
     <iframe
       width='100%'
@@ -19,3 +19,5 @@ YoutubeEmbed.propTypes = {
   link: PropTypes.string,
   title: PropTypes.string,
 };
+
+export default YoutubeEmbed;
