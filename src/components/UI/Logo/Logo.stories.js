@@ -1,7 +1,7 @@
 import Logo from './Logo';
 
 export default {
-  title: 'Example/Logo',
+  title: 'UI/Logo',
   component: Logo,
   parameters: {
     layout: 'centered',

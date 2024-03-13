@@ -1,4 +1,5 @@
 import AboutSection from './AboutSection';
+import { decorators } from '../../../../.storybook/preview';
 
 export default {
   title: 'Sections/AboutSection',
@@ -10,5 +11,7 @@ export default {
     },
   },
   tags: ['autodocs'],
+  decorators: decorators,
 };
+
 export const Default = {};
