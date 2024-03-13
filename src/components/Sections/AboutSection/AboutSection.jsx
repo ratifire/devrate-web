@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Card, Container, Grid, List, ListItem, Typography } from '@mui/material';
 import { styles } from './AboutSection.styles';
-import { YoutubeEmbed } from '../../UI/YoutubeEmbed/YoutubeEmbed';
+import YoutubeEmbed from '../../UI/YoutubeEmbed/YoutubeEmbed';
 import { useTranslation } from 'react-i18next';
 
 const AboutSection = () => {
