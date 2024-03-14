@@ -1,23 +1,18 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-
 import styles from './Footer.styles';
-
 import { Box, Container, Icon, Link, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
-
 import { ReactComponent as LogoBoy } from '../../../assets/icons/logo-boy.svg';
-
 import Logo from '../../UI/Logo';
 import socials from '../../../utils/constants/socials';
+import LinkList from '../../UI/LinkList';
+import legalInfoLinks from '../../../utils/constants/legalInfoLinks';
+import SocialsLinkList from '../../UI/SocialsLinkList';
 
 const Footer = () => {
   const { t } = useTranslation();
-  const socialLinks = socials.map((social, index) => (
-    <Link key={index} to={social.url} component={RouterLink} sx={styles.link} target={social.target}>
-      <social.icon />
-    </Link>
-  ));
+
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box component='footer' sx={styles.footer}>
@@ -29,13 +24,10 @@ const Footer = () => {
             <Icon sx={styles.logoBoy}>
               <LogoBoy />
             </Icon>
-            <Link to={`/`} component={RouterLink} sx={styles.link}>
-              {t('home.links.terms_and_conditions')}
-            </Link>
-            <Link to={`/`} component={RouterLink} sx={styles.link}>
-              {t('home.links.privacy_policy')}
-            </Link>
-            <Box sx={styles.socialGroup}>{socialLinks}</Box>
+            <LinkList links={legalInfoLinks} componentStyles={styles} />
+            <Box sx={styles.socialGroup}>
+              <SocialsLinkList socials={socials} componentStyles={styles} />
+            </Box>
           </Box>
         </Box>
         <Box>
