@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AppBar, Box, Container, Divider, Drawer, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './Header.styles';
-import LinkList from './LinkList';
+import LinkList from '../../UI/LinkList';
 import navLinks from '../../../utils/constants/navLinks';
 import Logo from '../../UI/Logo';
 import { ButtonDef } from '../../Buttons';
@@ -23,7 +23,7 @@ function Header() {
       </Box>
       <Divider />
       <Box sx={styles.headerNavMobile}>
-        <LinkList links={navLinks} />
+        <LinkList links={navLinks} componentStyles={styles} />
       </Box>
     </Box>
   );
@@ -48,7 +48,7 @@ function Header() {
               <Logo width={'187'} height={'22'} />
             </Box>
             <Box sx={styles.headerNav}>
-              <LinkList links={navLinks} />
+              <LinkList links={navLinks} componentStyles={styles} />
               <ButtonDef variant='text' type='button' label={t('home.links.login')} />
             </Box>
           </Toolbar>
