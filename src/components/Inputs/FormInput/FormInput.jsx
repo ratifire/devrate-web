@@ -57,7 +57,7 @@ FormInput.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
   showPassword: PropTypes.bool,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'email', 'password']).isRequired,
   label: PropTypes.string.isRequired,
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
