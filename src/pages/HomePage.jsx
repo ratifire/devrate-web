@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { AboutSection, Footer, Header, HeroSection } from '../components/Sections';
-import LoginModal from '../components/AuthModals/LoginModal';
 
 import { HomeTemplate } from '../Templates';
+import ConfirmationModal from '../components/AuthModals/ConfirmationModal';
 
 const HomePage = () => {
   const [open, setOpen] = useState(false);
@@ -13,7 +13,7 @@ const HomePage = () => {
     <HomeTemplate>
       <Header />
       <Button onClick={handleOpen}>Push me</Button>
-      {open && <LoginModal open={open} setOpen={handleClose} />}
+      {open && <ConfirmationModal open={open} setOpen={handleClose} />}
 
       <HeroSection />
       <AboutSection />

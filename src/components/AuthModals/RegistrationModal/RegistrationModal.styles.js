@@ -17,12 +17,11 @@ const styles = {
     justifyContent: 'spaceBetween',
     marginBottom: 24,
   },
-   wrapperBtn: () => ({
+  wrapperBtn: () => ({
     marginTop: 37,
- }),
-  btn: (theme) => ({
+  }),
+  btn: () => ({
     marginTop: 20,
- 
     marginBottom: 50,
   }),
   policyTermsContainer: {
