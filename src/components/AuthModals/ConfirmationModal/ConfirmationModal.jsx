@@ -8,6 +8,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import PropTypes from 'prop-types';
 import { ButtonDef } from '../../Buttons';
 import { ConfirmationSchema } from './ConfirmationSchema';
+import { Link as RouterLink } from 'react-router-dom';
 
 const initialValues = {};
 
@@ -15,17 +16,18 @@ const ConfirmationModal = ({ open, setOpen }) => {
   const { t } = useTranslation();
   const [codeError] = useState(true);
   const inputRefs = useRef([]);
+  const handleSubmut = (values, { resetForm }) => {
+    console.log(values);
+    resetForm({});
+    inputRefs.current.forEach((ref) => {
+      ref.value = ''; // Очищення рефа
+    });
+  };
 
   const formik = useFormik({
     initialValues,
     validationSchema: ConfirmationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm({});
-      inputRefs.current.forEach((ref) => {
-        ref.value = ''; // Очищення рефа
-      });
-    },
+    onSubmit: handleSubmut,
   });
 
   const handleChange = (event, index) => {
@@ -104,10 +106,10 @@ const ConfirmationModal = ({ open, setOpen }) => {
             {t('modal.confirmation.spam_check_text')}
           </Typography>
           <Typography href='#' sx={{ textAlign: 'center' }}>
-            <Link href='#' sx={styles.link}>
+            <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
               {t('modal.confirmation.repeat_request_link')}
             </Link>
-            <Typography component='span' href='#'>
+            <Typography component='span' hr ef='#'>
               {' '}
               {t('modal.confirmation.repeat_request_text1')}
             </Typography>
@@ -116,7 +118,7 @@ const ConfirmationModal = ({ open, setOpen }) => {
             <Typography component='span' href='#'>
               {t('modal.confirmation.repeat_request_text2')}{' '}
             </Typography>
-            <Link href='#' sx={styles.link}>
+            <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
               {t('modal.confirmation.change_email_link')}
             </Link>
           </Typography>
@@ -125,7 +127,7 @@ const ConfirmationModal = ({ open, setOpen }) => {
           <Typography href='#' sx={styles.turnBackText}>
             {t('modal.confirmation.return_on')}
           </Typography>
-          <Link href='#' sx={styles.link}>
+          <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
             {t('modal.confirmation.home_page')}
           </Link>
         </Box>
