@@ -5,6 +5,8 @@ import { devrateServiceApi } from '../services/authAPI';
 
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 
+import modalSliceReducer from '../auth/modal';
+
 const authPersistConfig = {
   key: 'auth',
   storage,
@@ -14,6 +16,7 @@ const authReducer = () => [];
 
 export const store = configureStore({
   reducer: {
+    modal: modalSliceReducer,
     [devrateServiceApi.reducerPath]: devrateServiceApi.reducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },

@@ -7,20 +7,24 @@ import styles from './ResetPassword.styles';
 import { useTranslation } from 'react-i18next';
 
 import { Form, Formik, useFormik } from 'formik';
-import PropTypes from 'prop-types';
 
 import { Box, Link, Typography } from '@mui/material';
 import { ResetPasswordSchema } from './ResetPasswordSchema';
 import FormInput from '../../../Inputs/FormInput';
 import { ButtonDef } from '../../../Buttons';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal } from '../../../../redux/auth/modal';
 
 const initialValues = {
   password: '',
   repeatPassword: '',
 };
 
-const ResetPassword = ({ open, setOpen }) => {
+const ResetPassword = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const openResetPassword = useSelector((state) => state.modal.openResetPassword);
+  const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -37,7 +41,7 @@ const ResetPassword = ({ open, setOpen }) => {
   });
 
   return (
-    <ModalLayout open={open} setOpen={setOpen}>
+    <ModalLayout open={openResetPassword} setOpen={handleClose}>
       <Typography sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
       <Formik initialValues={formik.initialValues} onSubmit={onSubmit}>
         <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
@@ -84,17 +88,12 @@ const ResetPassword = ({ open, setOpen }) => {
       <Typography sx={styles.text}>{t('modal.resetPassword.text_privacy')}</Typography>
       <Typography sx={styles.textLink}>
         {t('modal.resetPassword.return_on')}
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
+        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
           {t('modal.resetPassword.home_page')}
         </Link>
       </Typography>
     </ModalLayout>
   );
-};
-
-ResetPassword.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
 };
 
 export default ResetPassword;

@@ -11,14 +11,18 @@ import { useFormik } from 'formik';
 import { Box, Link, Typography } from '@mui/material';
 import { CheckEmailSchema } from './CheckEmailSchema';
 import { FormInput } from '../../../Inputs';
-import PropTypes from 'prop-types';
 import { ButtonDef } from '../../../Buttons';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal } from '../../../../redux/auth/modal';
 
 const initialValues = {
   email: '',
 };
-const CheckEmail = ({ open, setOpen }) => {
+const CheckEmail = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const openCheckEmail = useSelector((state) => state.modal.openCheckEmail);
+  const handleClose = () => dispatch(closeModal({ modalName: 'openCheckEmail' }));
 
   const onSubmit = (values, { resetForm }) => {
     alert(JSON.stringify(values, null, 2));
@@ -29,8 +33,9 @@ const CheckEmail = ({ open, setOpen }) => {
     validationSchema: CheckEmailSchema,
     onSubmit,
   });
+
   return (
-    <ModalLayout open={open} setOpen={setOpen}>
+    <ModalLayout open={openCheckEmail} setOpen={handleClose}>
       <Typography sx={styles.title}>{t('modal.checkEmailResetPassword.send_letter_title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
@@ -54,26 +59,21 @@ const CheckEmail = ({ open, setOpen }) => {
         </Box>
       </form>
       <Box sx={styles.box}>
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
+        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
           {t('modal.checkEmailResetPassword.privacy_policy')}
         </Link>
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
+        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
           {t('modal.checkEmailResetPassword.terms_and_conditions')}
         </Link>
       </Box>
       <Typography sx={styles.textLink}>
         {t('modal.checkEmailResetPassword.return_on')}
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
+        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
           {t('modal.checkEmailResetPassword.home_page')}
         </Link>
       </Typography>
     </ModalLayout>
   );
-};
-
-CheckEmail.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
 };
 
 export default CheckEmail;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 import { styles } from './ButtonDef.styles';
 
-const ButtonDef = ({ variant, correctStyle, type, handlerClick, disabled, label, startIcon, endIcon }) => {
+const ButtonDef = ({ variant, type, correctStyle, handlerClick, disabled, label, startIcon, endIcon }) => {
   const style = variant === 'contained' ? styles.contained : variant === 'text' ? styles.text : styles.outlined;
 
   return (
@@ -22,8 +22,8 @@ const ButtonDef = ({ variant, correctStyle, type, handlerClick, disabled, label,
 };
 ButtonDef.propTypes = {
   variant: PropTypes.oneOf(['contained', 'text', 'outlined']).isRequired,
-  correctStyle: PropTypes.object,
   type: PropTypes.oneOf(['button', 'submit', 'reset']).isRequired,
+  correctStyle: PropTypes.object,
   handlerClick: PropTypes.func,
   disabled: PropTypes.bool,
   label: PropTypes.string.isRequired,
@@ -32,9 +32,9 @@ ButtonDef.propTypes = {
 };
 ButtonDef.defaultProps = {
   variant: 'contained',
-  correctStyle: null,
   type: 'submit',
-  handlerClick: null,
+  correctStyle: {},
+  handlerClick: () => {},
   disabled: false,
   label: '',
   startIcon: null,

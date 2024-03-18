@@ -5,11 +5,12 @@ import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, Link, Typography } from '@mui/material';
 import styles from './RegistrationModal.styles';
 import { RegistrationSchema } from './RegistrationSchema';
-import PropTypes from 'prop-types';
 import { CountrySelect, FormCheckbox } from '../../Inputs';
 import { userCountries } from '../../../utils/constants/userCountries';
 import FormInput from '../../Inputs/FormInput';
 import { ButtonDef } from '../../Buttons';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal } from '../../../redux/auth/modal';
 
 const initialValues = {
   email: '',
@@ -22,9 +23,13 @@ const initialValues = {
   agreement: false,
 };
 
-const RegistrationModal = ({ open, setOpen }) => {
+const RegistrationModal = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const openRegistration = useSelector((state) => state.modal.openRegistration);
+  const handleClose = () => dispatch(closeModal({ modalName: 'openRegistration' }));
+
   const onSubmit = (values, { resetForm }) => {
     alert(JSON.stringify(values, null, 2));
     resetForm();
@@ -39,7 +44,7 @@ const RegistrationModal = ({ open, setOpen }) => {
   const handleMouseDownPassword = (event) => event.preventDefault();
 
   return (
-    <ModalLayout open={open} setOpen={setOpen}>
+    <ModalLayout open={openRegistration} setOpen={handleClose}>
       <Typography sx={styles.title}>{t('modal.registration.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
@@ -137,21 +142,16 @@ const RegistrationModal = ({ open, setOpen }) => {
         </Box>
 
         <Box sx={styles.policyTermsContainer}>
-          <Link href='#' sx={styles.policyTermsLink}>
+          <Link href='#' sx={styles.policyTermsLink} onClick={handleClose}>
             {t('modal.registration.privacy_policy')}
           </Link>
-          <Link href='#' sx={styles.policyTermsLink}>
+          <Link href='#' sx={styles.policyTermsLink} onClick={handleClose}>
             {t('modal.registration.terms_and_conditions')}
           </Link>
         </Box>
       </form>
     </ModalLayout>
   );
-};
-
-RegistrationModal.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
 };
 
 export default RegistrationModal;
