@@ -5,9 +5,8 @@ import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, Link, Typography } from '@mui/material';
 import styles from './RegistrationModal.styles';
 import { RegistrationSchema } from './RegistrationSchema';
-import { CountrySelect, FormCheckbox } from '../../Inputs';
+import { FormCheckbox, FormSelect, FormInput } from '../../Inputs';
 import { userCountries } from '../../../utils/constants/userCountries';
-import FormInput from '../../Inputs/FormInput';
 import { ButtonDef } from '../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/auth/modal';
@@ -57,12 +56,13 @@ const RegistrationModal = () => {
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
-        <CountrySelect
+        <FormSelect
+          variant='outlined'
           name='country'
           value={formik.values.country}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          label={t('modal.registration.country')}
+          label={'modal.registration.country'}
           error={formik.touched.country && Boolean(formik.errors.country)}
           helperText={formik.touched.country && formik.errors.country}
           countries={userCountries}

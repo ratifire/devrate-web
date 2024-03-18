@@ -1,3 +1,3 @@
-import CountrySelect from './CountrySelect';
+import FormSelect from './FormSelect';
 
-export default CountrySelect;
+export default FormSelect;
