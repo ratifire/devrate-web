@@ -7,9 +7,13 @@ import navLinks from '../../../utils/constants/navLinks';
 import Logo from '../../UI/Logo';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
+import { openModal } from '../../../redux/auth/modal';
+import { useDispatch } from 'react-redux';
 
 function Header() {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const handleOpen = () => dispatch(openModal({ modalName: 'openLogin' }));
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handlerDrawerToggle = () => {
@@ -49,7 +53,7 @@ function Header() {
             </Box>
             <Box sx={styles.headerNav}>
               <LinkList links={navLinks} componentStyles={styles} />
-              <ButtonDef variant='text' type='button' label={t('home.links.login')} />
+              <ButtonDef variant='text' handlerClick={handleOpen} type='button' label={t('home.links.login')} />
             </Box>
           </Toolbar>
           <Box component='nav'>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Logo from '../../components/UI/Logo';
 
 export const ModalLayout = ({ open, setOpen, children }) => {
+  console.log(open, '333333333333333333333333333333333333333333333');
   return (
     <Modal
       aria-labelledby='transition-modal-title'

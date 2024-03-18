@@ -5,32 +5,38 @@ import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, Link, Typography } from '@mui/material';
 import styles from '../LoginModal/LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
-import PropTypes from 'prop-types';
 import FormInput from '../../Inputs/FormInput';
 import { ButtonDef } from '../../Buttons';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal, openModal } from '../../../redux/auth/modal';
 
 const initialValues = {
   email: '',
   password: '',
 };
-const LoginModal = ({ open, setOpen }) => {
+const LoginModal = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const openLogin = useSelector((state) => state.modal.openLogin);
+  const handleClose = () => dispatch(closeModal({ modalName: 'openLogin' }));
+  const handleOpen = () => dispatch(openModal({ modalName: 'openCheckEmail' }));
 
+  const onSubmit = (values, { resetForm }) => {
+    alert(JSON.stringify(values, null, 2));
+    resetForm();
+  };
   const formik = useFormik({
     initialValues,
     validationSchema: LoginSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
-    },
+    onSubmit,
   });
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
 
   return (
-    <ModalLayout open={open} setOpen={setOpen}>
+    <ModalLayout open={openLogin} setOpen={handleClose}>
       <Typography sx={styles.title}>{t('modal.login.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
@@ -60,6 +66,7 @@ const LoginModal = ({ open, setOpen }) => {
           <ButtonDef
             variant='text'
             correctStyle={styles.turnBackLink}
+            handlerClick={handleOpen}
             type='button'
             label={t('modal.login.forgot_your_password')}
           />
@@ -84,18 +91,13 @@ const LoginModal = ({ open, setOpen }) => {
           <Typography href='#' sx={styles.turnBackText}>
             {t('modal.login.return_on')}
           </Typography>
-          <Link href='#' sx={styles.turnBackLink}>
+          <Link href='#' sx={styles.turnBackLink} onClick={handleClose}>
             {t('modal.login.home_page')}
           </Link>
         </Box>
       </form>
     </ModalLayout>
   );
-};
-
-LoginModal.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
 };
 
 export default LoginModal;
