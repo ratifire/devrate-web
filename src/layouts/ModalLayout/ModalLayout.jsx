@@ -1,11 +1,10 @@
 import React from 'react';
-import { Box, Modal, Slide } from '@mui/material';
+import { Box, Modal, Zoom } from '@mui/material';
 import { styles } from './ModalLayout.styles';
 import PropTypes from 'prop-types';
 import Logo from '../../components/UI/Logo';
 
 export const ModalLayout = ({ open, setOpen, children }) => {
-  console.log(open, '333333333333333333333333333333333333333333333');
   return (
     <Modal
       aria-labelledby='transition-modal-title'
@@ -15,14 +14,14 @@ export const ModalLayout = ({ open, setOpen, children }) => {
       closeAfterTransition
       sx={styles.modal}
     >
-      <Slide direction='left' in={open}>
+      <Zoom in={open}>
         <Box sx={styles.modalContainer}>
           <Box sx={styles.iconContainer}>
             <Logo width={'147'} height={'18'} />
           </Box>
           {children}
         </Box>
-      </Slide>
+      </Zoom>
     </Modal>
   );
 };

@@ -15,7 +15,7 @@ const styles = {
   inputNameContainer: {
     display: 'flex',
     justifyContent: 'spaceBetween',
-    marginBottom: 24,
+    gridGap: 10,
   },
   wrapperBtn: {
     marginTop: 37,
@@ -29,6 +29,10 @@ const styles = {
   policyTermsLink: (theme) => ({
     marginRight: 10,
     color: theme.palette.text.primary,
+    textDecoration: 'underline',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   }),
   tooltip: (theme) => ({
     fontSize: 14,

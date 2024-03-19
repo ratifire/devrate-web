@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, FormControl, FormHelperText, Link, OutlinedInput, Typography } from '@mui/material';
-import styles from '../ConfirmationModal/ConfirmationModal.styles';
+import styles from './ConfirmationModal.styles';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PropTypes from 'prop-types';
 import { ButtonDef } from '../../Buttons';
@@ -16,8 +16,8 @@ const ConfirmationModal = ({ open, setOpen }) => {
   const { t } = useTranslation();
   const [codeError] = useState(true);
   const inputRefs = useRef([]);
-  const handleSubmut = (values, { resetForm }) => {
-    console.log(values);
+  const onSubmit = (values, { resetForm }) => {
+    alert(JSON.stringify(values, null, 2));
     resetForm({});
     inputRefs.current.forEach((ref) => {
       ref.value = ''; // Очищення рефа
@@ -27,7 +27,7 @@ const ConfirmationModal = ({ open, setOpen }) => {
   const formik = useFormik({
     initialValues,
     validationSchema: ConfirmationSchema,
-    onSubmit: handleSubmut,
+    onSubmit,
   });
 
   const handleChange = (event, index) => {
