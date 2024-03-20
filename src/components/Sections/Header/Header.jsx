@@ -7,7 +7,7 @@ import navLinks from '../../../utils/constants/navLinks';
 import Logo from '../../UI/Logo';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
-import { openModal } from '../../../redux/auth/modal';
+import { openModal } from '../../../redux/auth/modalSlice';
 import { useDispatch } from 'react-redux';
 
 function Header() {
@@ -34,7 +34,7 @@ function Header() {
   return (
     <AppBar component='header' position={'static'} sx={styles.header}>
       <Container maxWidth='xl' sx={styles.container}>
-        <Box sx={styles.wrapper}>
+        <Box>
           <Toolbar disableGutters sx={styles.toolbar}>
             <IconButton
               color='primary'

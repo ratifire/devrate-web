@@ -10,10 +10,10 @@ import { Form, Formik, useFormik } from 'formik';
 
 import { Box, Link, Typography } from '@mui/material';
 import { ResetPasswordSchema } from './ResetPasswordSchema';
-import FormInput from '../../../Inputs/FormInput';
+import { FormInput } from '../../../Inputs';
 import { ButtonDef } from '../../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../redux/auth/modal';
+import { closeModal } from '../../../../redux/auth/modalSlice';
 
 const initialValues = {
   password: '',

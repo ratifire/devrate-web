@@ -5,11 +5,12 @@ import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, Link, Typography } from '@mui/material';
 import styles from './RegistrationModal.styles';
 import { RegistrationSchema } from './RegistrationSchema';
-import { FormCheckbox, FormSelect, FormInput } from '../../Inputs';
+import { FormCheckbox, FormInput, FormSelect } from '../../Inputs';
 import { userCountries } from '../../../utils/constants/userCountries';
 import { ButtonDef } from '../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../redux/auth/modal';
+import { closeModal } from '../../../redux/auth/modalSlice';
+import { Link as RouterLink } from 'react-router-dom';
 
 const initialValues = {
   email: '',
@@ -142,10 +143,10 @@ const RegistrationModal = () => {
         </Box>
 
         <Box sx={styles.policyTermsContainer}>
-          <Link href='#' sx={styles.policyTermsLink} onClick={handleClose}>
+          <Link to={'/'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
             {t('modal.registration.privacy_policy')}
           </Link>
-          <Link href='#' sx={styles.policyTermsLink} onClick={handleClose}>
+          <Link to={'/'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
             {t('modal.registration.terms_and_conditions')}
           </Link>
         </Box>

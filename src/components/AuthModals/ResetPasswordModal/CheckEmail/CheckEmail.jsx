@@ -13,16 +13,21 @@ import { CheckEmailSchema } from './CheckEmailSchema';
 import { FormInput } from '../../../Inputs';
 import { ButtonDef } from '../../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../redux/auth/modal';
+import { closeModal } from '../../../../redux/auth/modalSlice';
 
 const initialValues = {
   email: '',
 };
+
 const CheckEmail = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openCheckEmail = useSelector((state) => state.modal.openCheckEmail);
   const handleClose = () => dispatch(closeModal({ modalName: 'openCheckEmail' }));
+  const handleCloseAllModal = () => {
+    dispatch(closeModal({ modalName: 'openLogin' }));
+    dispatch(closeModal({ modalName: 'openCheckEmail' }));
+  };
 
   const onSubmit = (values, { resetForm }) => {
     alert(JSON.stringify(values, null, 2));
@@ -59,16 +64,16 @@ const CheckEmail = () => {
         </Box>
       </form>
       <Box sx={styles.box}>
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
+        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
           {t('modal.checkEmailResetPassword.privacy_policy')}
         </Link>
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
+        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
           {t('modal.checkEmailResetPassword.terms_and_conditions')}
         </Link>
       </Box>
       <Typography sx={styles.textLink}>
         {t('modal.checkEmailResetPassword.return_on')}
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
+        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
           {t('modal.checkEmailResetPassword.home_page')}
         </Link>
       </Typography>

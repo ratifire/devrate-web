@@ -3,17 +3,19 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, Link, Typography } from '@mui/material';
-import styles from '../LoginModal/LoginModal.styles';
+import styles from './LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
-import FormInput from '../../Inputs/FormInput';
+import { FormInput } from '../../Inputs';
 import { ButtonDef } from '../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal, openModal } from '../../../redux/auth/modal';
+import { closeModal, openModal } from '../../../redux/auth/modalSlice';
+import { Link as RouterLink } from 'react-router-dom';
 
 const initialValues = {
   email: '',
   password: '',
 };
+
 const LoginModal = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
@@ -91,7 +93,7 @@ const LoginModal = () => {
           <Typography href='#' sx={styles.turnBackText}>
             {t('modal.login.return_on')}
           </Typography>
-          <Link href='#' sx={styles.turnBackLink} onClick={handleClose}>
+          <Link to={'/'} component={RouterLink} sx={styles.turnBackLink} onClick={handleClose}>
             {t('modal.login.home_page')}
           </Link>
         </Box>

@@ -4,7 +4,7 @@ import { styles } from './HeroSection.styles';
 import { useTranslation } from 'react-i18next';
 import { ButtonDef } from '../../Buttons';
 import { useDispatch } from 'react-redux';
-import { openModal } from '../../../redux/auth/modal';
+import { openModal } from '../../../redux/auth/modalSlice';
 
 const HeroSection = () => {
   const { t } = useTranslation();

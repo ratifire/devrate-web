@@ -5,7 +5,7 @@ import { devrateServiceApi } from '../services/authAPI';
 
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 
-import modalSliceReducer from '../auth/modal';
+import modalSliceReducer from '../auth/modalSlice';
 
 const authPersistConfig = {
   key: 'auth',
