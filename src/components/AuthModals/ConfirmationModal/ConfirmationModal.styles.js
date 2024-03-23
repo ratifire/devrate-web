@@ -9,29 +9,29 @@ const styles = {
     marginTop: 48,
     marginBottom: 30,
   }),
-  codeErrorWrapper: () => ({ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 32 }),
-  codeErrorIcon: () => ({
+  codeErrorWrapper: { display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 32 },
+  codeErrorIcon: {
     width: '20px',
     height: '20px',
     color: '#B72F46CC',
-  }),
-  codeErrorText: () => ({
+  },
+  codeErrorText: {
     marginLeft: 17,
     color: '#B72F46CC',
     fontSize: 15,
     lineHeight: 1.5,
     fontWeight: 400,
     letterSpacing: '1.1%',
-  }),
-  mainTextWrapper: () => ({ display: 'flex', flexDirection: 'column', marginBottom: 32 }),
-  mainText: () => ({
+  },
+  mainTextWrapper: { display: 'flex', flexDirection: 'column', marginBottom: 32 },
+  mainText: {
     display: 'inline',
     fontSize: 14,
     fontWeight: 500,
     lineHeight: 1.5,
     color: '#F1F1F14D',
     letterSpacing: '-1.1%',
-  }),
+  },
   userEmail: (theme) => ({
     fontSize: 14,
     fontWeight: 500,
@@ -39,11 +39,11 @@ const styles = {
     color: theme.palette.text.primary,
     letterSpacing: '-1.1%',
   }),
-  wrapperBtn: () => ({
+  wrapperBtn: {
     marginTop: 44,
     marginBottom: 37,
-  }),
-  spamCheckContainer: () => ({
+  },
+  spamCheckContainer: {
     marginBottom: '80px',
     fontSize: 14,
     fontWeight: 500,
@@ -51,7 +51,7 @@ const styles = {
     color: '#F1F1F14D',
     textAlign: 'center',
     letterSpacing: '-1.1%',
-  }),
+  },
   turnBackContainer: {
     display: 'flex',
     flexDirection: 'row',

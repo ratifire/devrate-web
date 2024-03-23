@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { IconButton, InputAdornment, Tooltip, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import styles from '../PasswordVisibilityToggle/PasswordVisibilityToggle.styles';
+import styles from './PasswordVisibilityToggle.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import React from 'react';
 import PropTypes from 'prop-types';

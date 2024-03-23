@@ -8,21 +8,21 @@ const styles = {
     marginTop: 48,
     marginBottom: 30,
   }),
-  textLink: () => ({
+  textLink: {
     fontSize: 14,
     fontWeight: 300,
     lineHeight: '20px',
     color: '#f1f1f180',
     textAlign: 'center',
     marginTop: 36,
-  }),
-  box: () => ({
+  },
+  box: {
     display: 'flex',
     gridGap: 14,
     justifyContent: 'center',
     fontSize: 14,
     lineHeight: 1.43,
-  }),
+  },
   link: (theme) => ({
     fontSize: 14,
     fontWeight: 300,
@@ -31,9 +31,9 @@ const styles = {
     textAlign: 'center',
     textDecoration: 'underline',
   }),
-  wrapperBtn: () => ({
+  wrapperBtn: {
     marginTop: 40,
     marginBottom: 50,
-  }),
+  },
 };
 export default styles;

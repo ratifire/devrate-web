@@ -9,27 +9,27 @@ const styles = {
     marginTop: 48,
     marginBottom: 30,
   }),
-  textLink: () => ({
+  textLink: {
     fontSize: 14,
     fontWeight: 400,
     color: '#f1f1f180',
     textAlign: 'center',
     lineHeight: 1.5,
     marginBottom: 32,
-  }),
+  },
   link: (theme) => ({
     marginRight: 10,
     textDecoration: 'underline',
     color: theme.palette.text.primary,
   }),
-  input: () => ({
+  input: {
     width: '100%',
     marginBottom: 24,
-  }),
-  wrapperBtn: () => ({
+  },
+  wrapperBtn: {
     marginTop: 32,
     marginBottom: 50,
-  }),
+  },
   policyText: (theme) => ({
     width: '100%',
     fontSize: 14,

@@ -1,10 +1,10 @@
 export const styles = {
-  modal: () => ({
+  modal: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  }),
-  modalContainer: () => ({
+  },
+  modalContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -16,9 +16,9 @@ export const styles = {
       width: 526,
       padding: '55px 78px',
     },
-  }),
-  iconContainer: () => ({
+  },
+  iconContainer: {
     width: 147,
     height: 18,
-  }),
+  },
 };
