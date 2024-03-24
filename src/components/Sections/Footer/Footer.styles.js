@@ -1,7 +1,7 @@
 const styles = {
-  container: () => ({
+  container: {
     '@media (min-width: 600px)': { paddingX: '12px' },
-  }),
+  },
   link: (theme) => ({
     marginLeft: 0,
     fontWeight: 500,
@@ -39,7 +39,7 @@ const styles = {
       textAlign: 'left',
     },
   }),
-  wrapperNav: () => ({
+  wrapperNav: {
     marginTop: 20,
     marginLeft: 0,
     display: 'flex',
@@ -51,8 +51,8 @@ const styles = {
     '@media (min-width: 520px)': {
       display: 'block',
     },
-  }),
-  wrapper: () => ({
+  },
+  wrapper: {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
@@ -61,20 +61,20 @@ const styles = {
       alignItems: 'flex-end',
       flexDirection: 'row',
     },
-  }),
-  footer: () => ({
+  },
+  footer: {
     paddingTop: 170,
     paddingBottom: 60,
-  }),
-  logoBoy: () => ({
+  },
+  logoBoy: {
     width: 30,
     height: 47,
     display: 'none',
     '@media (min-width: 768px)': {
       display: 'inline-block',
     },
-  }),
-  socialGroup: () => ({
+  },
+  socialGroup: {
     margin: '0 auto',
     maxWidth: 200,
     display: 'flex',
@@ -82,6 +82,6 @@ const styles = {
     '@media (min-width: 520px)': {
       display: 'inline-block',
     },
-  }),
+  },
 };
 export default styles;

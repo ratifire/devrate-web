@@ -17,14 +17,14 @@ const styles = {
     textAlign: 'center',
     marginTop: 50,
   }),
-  textLink: () => ({
+  textLink: {
     fontSize: 14,
     fontWeight: 300,
     lineHeight: '20px',
     color: '#f1f1f180',
     textAlign: 'center',
     marginTop: 36,
-  }),
+  },
   link: (theme) => ({
     fontSize: 14,
     fontWeight: 300,
@@ -34,14 +34,14 @@ const styles = {
     textDecoration: 'underline',
     marginTop: 36,
   }),
-  input: () => ({
+  input: {
     width: '100%',
     marginBottom: 24,
-  }),
-  wrapperBtn: () => ({
+  },
+  wrapperBtn: {
     marginTop: 44,
     marginBottom: 50,
-  }),
+  },
   tooltip: (theme) => ({
     fontSize: 14,
     fontWeight: 300,

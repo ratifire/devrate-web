@@ -27,7 +27,7 @@ const AboutSection = () => {
               </List>
             </Box>
           </Grid>
-          <Grid item xs={12} md={6} sx={styles.videoBox}>
+          <Grid item xs={12} md={6}>
             <Card sx={styles.card}>
               <YoutubeEmbed
                 title='YouTube video player'

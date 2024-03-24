@@ -1,11 +1,11 @@
 export const styles = {
-  input: () => ({
+  input: {
     width: '100%',
     minWidth: 100,
     marginBottom: 24,
-  }),
-  textHelper: () => ({
+  },
+  textHelper: {
     position: 'absolute',
     bottom: '-23px',
-  }),
+  },
 };

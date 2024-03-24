@@ -2,21 +2,19 @@ export const styles = {
   wrapper: (theme) => ({
     background: theme.palette.background.gradient,
   }),
-  container: () => ({
+  container: {
     paddingY: 58,
     '@media (min-width: 600px)': { paddingX: '12px' },
-  }),
-  gridContainer: () => ({
+  },
+  gridContainer: {
     maxWidth: 1248,
     margin: '0 auto',
-  }),
-  textBox: () => ({
+  },
+  textBox: {
     maxWidth: 405,
     margin: '0 auto',
-  }),
-  videoBox: () => ({
-    // paddingLeft: 13,
-  }),
+  },
+
   title: (theme) => ({
     marginBottom: 20,
     fontSize: 46,
@@ -28,11 +26,11 @@ export const styles = {
     '&-webkit-background-clip': 'text',
     '&-webkit-text-fill-color': 'linear-gradient(90.00deg, rgb(117, 98, 228),rgb(251, 147, 166)',
   }),
-  list: () => ({
+  list: {
     listStyle: 'decimal',
     paddingY: 0,
     paddingX: 20,
-  }),
+  },
   listItem: (theme) => ({
     display: 'list-item',
     fontSize: 18,
@@ -46,7 +44,7 @@ export const styles = {
     letterSpacing: '1.62%',
     color: theme.palette.text.primary,
   }),
-  card: () => ({
+  card: {
     height: 483,
     width: 611,
     borderRadius: '20px',
@@ -54,5 +52,5 @@ export const styles = {
       height: 483,
       width: 611,
     },
-  }),
+  },
 };

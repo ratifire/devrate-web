@@ -1,14 +1,14 @@
 export const styles = {
-  container: () => ({
+  container: {
     '@media (min-width: 600px)': { paddingX: '12px' },
-  }),
-  contentWrapper: () => ({
+  },
+  contentWrapper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     paddingTop: 149,
     paddingBottom: 204,
-  }),
+  },
   title: (theme) => ({
     maxWidth: 1100,
     textAlign: 'center',
@@ -30,9 +30,9 @@ export const styles = {
     rowHeight: '150%',
     color: theme.palette.text.secondary,
   }),
-  button: () => ({
+  button: {
     paddingX: 0,
     paddingY: 16,
     width: 190,
-  }),
+  },
 };
