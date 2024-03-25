@@ -7,7 +7,6 @@ import PasswordVisibilityToggle from '../../PasswordVisibilityToggle';
 import { useTranslation } from 'react-i18next';
 
 const FormInput = ({
-  variant,
   name,
   value,
   type,
@@ -23,7 +22,7 @@ const FormInput = ({
   const id = uuid();
   const { t } = useTranslation();
   return (
-    <FormControl variant={variant} sx={styles.input} error={error}>
+    <FormControl variant='outlined' sx={styles.input} error={error}>
       <InputLabel htmlFor={id}>{t(label)}</InputLabel>
       <OutlinedInput
         id={id}
@@ -55,7 +54,6 @@ const FormInput = ({
   );
 };
 FormInput.propTypes = {
-  variant: PropTypes.oneOf(['outlined', 'filled', 'standard']),
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
@@ -69,7 +67,6 @@ FormInput.propTypes = {
   mouseDownHandler: PropTypes.func,
 };
 FormInput.defaultProps = {
-  variant: 'outlined',
   name: '',
   value: '',
   handleChange: () => {},

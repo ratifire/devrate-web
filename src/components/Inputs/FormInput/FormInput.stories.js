@@ -4,7 +4,7 @@ import FormInput from './FormInput';
 import { decorators } from '../../../../.storybook/preview';
 
 export default {
-  title: 'Example/FormInput',
+  title: 'Form/Inputs/FormInput',
   component: FormInput,
   parameters: {
     layout: 'centered',
@@ -23,21 +23,34 @@ export default {
 };
 
 const Template = (args) => <FormInput {...args} />;
-export const EmailInput = Template.bind({});
-EmailInput.args = {
+export const TextInput = Template.bind({});
+TextInput.args = {
+  name: 'text',
+  value: '',
+  handleChange: action('handleChange'),
+  handleBlur: action('handleBlur'),
+  showPassword: false,
+  type: 'email',
+  label: 'modal.checkEmailResetPassword.email',
+  helperText: '',
+  error: false,
+  clickHandler: action('clickHandler'),
+  mouseDownHandler: action('mouseDownHandler'),
+};
+export const TextInputError = Template.bind({});
+TextInputError.args = {
   name: 'email',
   value: '',
   handleChange: action('handleChange'),
   handleBlur: action('handleBlur'),
   showPassword: false,
   type: 'email',
-  label: 'Email',
-  helperText: 'Please enter your email',
-  error: false,
+  label: 'modal.checkEmailResetPassword.email',
+  helperText: 'modal.registration.required',
+  error: true,
   clickHandler: action('clickHandler'),
   mouseDownHandler: action('mouseDownHandler'),
 };
-
 export const PasswordInput = Template.bind({});
 PasswordInput.args = {
   name: 'password',
@@ -46,9 +59,23 @@ PasswordInput.args = {
   handleBlur: action('handleBlur'),
   showPassword: false,
   type: 'password',
-  label: 'Password',
-  helperText: 'Please enter your password',
+  label: 'modal.resetPassword.password',
+  helperText: '',
   error: false,
+  clickHandler: action('clickHandler'),
+  mouseDownHandler: action('mouseDownHandler'),
+};
+export const PasswordInputError = Template.bind({});
+PasswordInputError.args = {
+  name: 'password',
+  value: '',
+  handleChange: action('handleChange'),
+  handleBlur: action('handleBlur'),
+  showPassword: false,
+  type: 'password',
+  label: 'modal.resetPassword.password',
+  helperText: 'modal.resetPassword.required',
+  error: true,
   clickHandler: action('clickHandler'),
   mouseDownHandler: action('mouseDownHandler'),
 };
