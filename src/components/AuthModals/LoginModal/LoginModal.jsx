@@ -47,7 +47,7 @@ const LoginModal = () => {
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           type='email'
-          label={t('modal.registration.email')}
+          label='modal.registration.email'
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
@@ -58,7 +58,7 @@ const LoginModal = () => {
           value={formik.values.password}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          label={t('modal.registration.password')}
+          label='modal.registration.password'
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
           clickHandler={handleClickShowPassword}

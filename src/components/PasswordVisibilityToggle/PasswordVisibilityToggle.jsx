@@ -46,8 +46,8 @@ PasswordVisibilityToggle.propTypes = {
 PasswordVisibilityToggle.defaultProps = {
   name: '',
   showPassword: false,
-  clickHandler: null,
-  mouseDownHandler: null,
+  clickHandler: () => {},
+  mouseDownHandler: () => {},
   tooltip: false,
   textContent: '',
 };

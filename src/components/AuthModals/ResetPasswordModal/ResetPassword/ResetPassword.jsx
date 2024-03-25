@@ -52,7 +52,7 @@ const ResetPassword = () => {
             value={formik.values.password}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            label={t('modal.resetPassword.password')}
+            label='modal.resetPassword.password'
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
             clickHandler={handleClickShowPassword}
@@ -65,7 +65,7 @@ const ResetPassword = () => {
             value={formik.values.repeatPassword}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            label={t('modal.resetPassword.password_repeat')}
+            label='modal.resetPassword.password_repeat'
             error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
             helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
             clickHandler={handleClickShowPassword}
