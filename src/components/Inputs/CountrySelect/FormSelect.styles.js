@@ -1,7 +1,7 @@
 export const styles = {
   input: {
     width: '100%',
-    minWidth: 100,
+    minWidth: 150,
     marginBottom: 24,
   },
   textHelper: {

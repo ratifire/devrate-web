@@ -13,16 +13,19 @@ export default {
     },
   },
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    helperText: '',
+    error: false,
+  },
   decorators: decorators,
 };
-export const Default = {
+export const Outlined = {
   args: {
     variant: 'outlined',
     name: 'country',
     value: '',
     label: 'modal.registration.country',
-    helperText: 'This is a required field',
+    helperText: '',
     error: false,
     itemsText: 'modal.registration.countries',
     handleChange: action('changeHandler'),
@@ -30,13 +33,69 @@ export const Default = {
     countries: userCountries,
   },
 };
-export const Error = {
+export const OutlinedError = {
   args: {
     variant: 'outlined',
     name: 'country',
     value: '',
     label: 'modal.registration.country',
-    helperText: 'This is a required field',
+    helperText: 'modal.registration.required',
+    error: true,
+    itemsText: 'modal.registration.countries',
+    handleChange: action('changeHandler'),
+    handleBlur: action('handleBlur'),
+    countries: userCountries,
+  },
+};
+export const Standard = {
+  args: {
+    variant: 'standard',
+    name: 'country',
+    value: '',
+    label: 'modal.registration.country',
+    helperText: '',
+    error: false,
+    itemsText: 'modal.registration.countries',
+    handleChange: action('changeHandler'),
+    handleBlur: action('handleBlur'),
+    countries: userCountries,
+  },
+};
+export const StandardError = {
+  args: {
+    variant: 'standard',
+    name: 'country',
+    value: '',
+    label: 'modal.registration.country',
+    helperText: 'modal.registration.required',
+    error: true,
+    itemsText: 'modal.registration.countries',
+    handleChange: action('changeHandler'),
+    handleBlur: action('handleBlur'),
+    countries: userCountries,
+  },
+};
+export const Filled = {
+  args: {
+    variant: 'filled',
+    name: 'country',
+    value: '',
+    label: 'modal.registration.country',
+    helperText: '',
+    error: false,
+    itemsText: 'modal.registration.countries',
+    handleChange: action('changeHandler'),
+    handleBlur: action('handleBlur'),
+    countries: userCountries,
+  },
+};
+export const FilledError = {
+  args: {
+    variant: 'filled',
+    name: 'country',
+    value: '',
+    label: 'modal.registration.country',
+    helperText: 'modal.registration.required',
     error: true,
     itemsText: 'modal.registration.countries',
     handleChange: action('changeHandler'),

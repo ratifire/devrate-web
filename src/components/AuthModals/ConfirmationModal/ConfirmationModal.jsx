@@ -95,11 +95,7 @@ const ConfirmationModal = ({ open, setOpen }) => {
         </Box>
 
         <Box sx={styles.wrapperBtn}>
-          <ButtonDef
-            variant='contained'
-            handlerClick={formik.handleSubmit}
-            label={t('modal.confirmation.btn_confirm')}
-          />
+          <ButtonDef variant='contained' handlerClick={formik.handleSubmit} label='modal.confirmation.btn_confirm' />
         </Box>
         <Box sx={styles.spamCheckContainer()}>
           <Typography href='#' sx={styles.policyText}>

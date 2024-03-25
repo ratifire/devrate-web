@@ -1,20 +1,82 @@
 import ButtonDef from './ButtonDef';
+import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Example/ButtonDef',
+  title: 'Form/Button/ButtonDef',
   component: ButtonDef,
   parameters: {
     layout: 'centered',
+    backgrounds: {
+      default: 'dark',
+    },
   },
   tags: ['autodocs'],
   argTypes: {
     variant: 'contained',
-    type: 'submit',
-    disabled: false,
+    type: 'button',
   },
 };
-export const Default = {
+
+export const Contained = {
   args: {
-    label: 'Button',
+    variant: 'contained',
+    label: 'modal.registration.btn_register',
+    correctStyle: {},
+    handlerClick: action('clickHandler'),
+    startIcon: null,
+    endIcon: null,
+  },
+};
+export const ContainedDisabled = {
+  args: {
+    variant: 'contained',
+    label: 'modal.registration.btn_register',
+    correctStyle: {},
+    handlerClick: action('clickHandler'),
+    disabled: true,
+    startIcon: null,
+    endIcon: null,
+  },
+};
+export const Outlined = {
+  args: {
+    variant: 'contained',
+    label: 'modal.registration.btn_register',
+    correctStyle: {},
+    handlerClick: action('clickHandler'),
+    startIcon: null,
+    endIcon: null,
+  },
+};
+export const OutlinedDisabled = {
+  args: {
+    variant: 'outlined',
+    label: 'modal.registration.btn_register',
+    correctStyle: {},
+    handlerClick: action('clickHandler'),
+    disabled: true,
+    startIcon: null,
+    endIcon: null,
+  },
+};
+export const Text = {
+  args: {
+    variant: 'text',
+    label: 'modal.registration.btn_register',
+    correctStyle: {},
+    handlerClick: action('clickHandler'),
+    startIcon: null,
+    endIcon: null,
+  },
+};
+export const TextDisabled = {
+  args: {
+    variant: 'text',
+    label: 'modal.registration.btn_register',
+    correctStyle: {},
+    handlerClick: action('clickHandler'),
+    disabled: true,
+    startIcon: null,
+    endIcon: null,
   },
 };

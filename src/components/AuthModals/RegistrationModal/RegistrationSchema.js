@@ -3,7 +3,7 @@ import i18n from 'i18next';
 
 export const RegistrationSchema = Yup.object().shape({
   email: Yup.string().email(i18n.t('modal.registration.email_invalid')).required(i18n.t('modal.registration.required')),
-  country: Yup.string().required(i18n.t('modal.registration.required')),
+  country: Yup.string().required('modal.registration.required'),
   firstName: Yup.string()
     .min(2, i18n.t('modal.registration.first_name_short'))
     .max(50, i18n.t('modal.registration.first_name_long'))
@@ -20,6 +20,6 @@ export const RegistrationSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], i18n.t('modal.registration.password_must_match'))
     .required(i18n.t('modal.registration.required')),
   agreement: Yup.boolean()
-    .oneOf([true], i18n.t('modal.registration.agreement_error'))
-    .required(i18n.t('modal.registration.agreement_error')),
+    .oneOf([true], 'modal.registration.agreement_error')
+    .required('modal.registration.agreement_error'),
 });
