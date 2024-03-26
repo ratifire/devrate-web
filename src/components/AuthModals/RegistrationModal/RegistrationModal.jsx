@@ -121,7 +121,7 @@ const RegistrationModal = () => {
           changeHandler={formik.handleChange}
           name='news'
           helperText={formik.touched.news && formik.errors.news}
-          label={t('modal.registration.news_letter')}
+          label='modal.registration.news_letter'
           error={formik.touched.news && Boolean(formik.errors.news)}
         />
         <FormCheckbox
@@ -129,7 +129,7 @@ const RegistrationModal = () => {
           changeHandler={formik.handleChange}
           name='agreement'
           helperText={formik.touched.agreement && formik.errors.agreement}
-          label={t('modal.registration.agreement')}
+          label='modal.registration.agreement'
           error={formik.touched.agreement && Boolean(formik.errors.agreement)}
         />
         <Box sx={styles.wrapperBtn}>
@@ -138,10 +138,9 @@ const RegistrationModal = () => {
             type='submit'
             handlerClick={formik.handleSubmit}
             disabled={(!formik.values.news && true) || (!formik.values.agreement && true)}
-            label={t('modal.registration.btn_register')}
+            label='modal.registration.btn_register'
           />
         </Box>
-
         <Box sx={styles.policyTermsContainer}>
           <Link to={'/'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
             {t('modal.registration.privacy_policy')}

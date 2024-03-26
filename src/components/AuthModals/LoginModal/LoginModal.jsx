@@ -82,7 +82,7 @@ const LoginModal = () => {
               (formik.touched.email && Boolean(formik.errors.email)) ||
               (formik.touched.password && Boolean(formik.errors.password))
             }
-            label={t('modal.login.btn_login')}
+            label='modal.login.btn_login'
           />
         </Box>
 

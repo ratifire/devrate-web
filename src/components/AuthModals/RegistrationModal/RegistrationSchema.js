@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import i18n from 'i18next';
 
 export const RegistrationSchema = Yup.object().shape({
-  email: Yup.string().email('modal.registration.email_invalid').required('modal.registration.required'),
+   email: Yup.string().email('modal.registration.email_invalid').required('modal.registration.required'),
   country: Yup.string().required(i18n.t('modal.registration.required')),
   firstName: Yup.string()
     .min(2, 'modal.registration.first_name_short')
@@ -20,6 +20,6 @@ export const RegistrationSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'modal.registration.password_must_match')
     .required('modal.registration.required'),
   agreement: Yup.boolean()
-    .oneOf([true], i18n.t('modal.registration.agreement_error'))
-    .required(i18n.t('modal.registration.agreement_error')),
+    .oneOf([true], 'modal.registration.agreement_error')
+    .required('modal.registration.agreement_error'),
 });

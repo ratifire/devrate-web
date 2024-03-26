@@ -1,9 +1,8 @@
-import { FormControl, InputLabel, Select } from '@mui/material';
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import { styles } from './FormSelect.styles';
-import OptionsList from './OptionsList';
 import { useTranslation } from 'react-i18next';
 
 const FormSelect = ({
@@ -21,7 +20,7 @@ const FormSelect = ({
   const id = uuid();
   const { t } = useTranslation();
   return (
-    <FormControl fullWidth variant={variant} sx={styles.input}>
+    <FormControl fullWidth variant={variant} sx={styles.input} error={error}>
       <InputLabel htmlFor={id}>{t(label)}</InputLabel>
       <Select
         id={id}
@@ -31,11 +30,16 @@ const FormSelect = ({
         onChange={handleChange}
         onBlur={handleBlur}
         error={error}
-        helperText={helperText}
-        FormHelperTextProps={styles.textHelper}
       >
-        <OptionsList data={countries} text={itemsText} />
+        {countries.map(({ id, country }) => (
+          <MenuItem key={id} value={country}>
+            {t(`${itemsText}.${country}`)}
+          </MenuItem>
+        ))}
       </Select>
+      <FormHelperText id={id} sx={styles.textHelper}>
+        {t(helperText)}
+      </FormHelperText>
     </FormControl>
   );
 };
@@ -50,14 +54,14 @@ FormSelect.propTypes = {
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   countries: PropTypes.array.isRequired,
-  itemsText: PropTypes.string.isRequired,
+  itemsText: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 };
 FormSelect.defaultProps = {
   variant: 'outlined',
   name: '',
   value: '',
-  handleChange: null,
-  handleBlur: null,
+  handleChange: () => {},
+  handleBlur: () => {},
   label: '',
   helperText: '',
   error: false,
