@@ -1,9 +1,8 @@
 import * as Yup from 'yup';
-import i18n from 'i18next';
 
 export const RegistrationSchema = Yup.object().shape({
-   email: Yup.string().email('modal.registration.email_invalid').required('modal.registration.required'),
-  country: Yup.string().required(i18n.t('modal.registration.required')),
+  email: Yup.string().email('modal.registration.email_invalid').required('modal.registration.required'),
+  country: Yup.string().required('modal.registration.required'),
   firstName: Yup.string()
     .min(2, 'modal.registration.first_name_short')
     .max(50, 'modal.registration.first_name_long')

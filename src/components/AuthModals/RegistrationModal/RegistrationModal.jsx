@@ -63,11 +63,11 @@ const RegistrationModal = () => {
           value={formik.values.country}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          label={'modal.registration.country'}
+          label='modal.registration.country'
           error={formik.touched.country && Boolean(formik.errors.country)}
           helperText={formik.touched.country && formik.errors.country}
           countries={userCountries}
-          itemsText={'modal.registration.countries'}
+          itemsText='modal.registration.countries'
         />
         <Box sx={styles.inputNameContainer}>
           <FormInput
