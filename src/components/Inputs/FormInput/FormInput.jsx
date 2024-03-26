@@ -4,6 +4,7 @@ import { styles } from './FormInput.styles';
 import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import PasswordVisibilityToggle from '../../PasswordVisibilityToggle';
+import { useTranslation } from 'react-i18next';
 
 const FormInput = ({
   name,
@@ -19,9 +20,10 @@ const FormInput = ({
   mouseDownHandler,
 }) => {
   const id = uuid();
+  const { t } = useTranslation();
   return (
     <FormControl variant='outlined' sx={styles.input} error={error}>
-      <InputLabel htmlFor={id}>{label}</InputLabel>
+      <InputLabel htmlFor={id}>{t(label)}</InputLabel>
       <OutlinedInput
         id={id}
         name={name}
@@ -29,7 +31,7 @@ const FormInput = ({
         onChange={handleChange}
         onBlur={handleBlur}
         type={showPassword ? (showPassword ? 'text' : type) : type}
-        label={label}
+        label={t(label)}
         endAdornment={
           type === 'password' && (
             <PasswordVisibilityToggle
@@ -45,7 +47,7 @@ const FormInput = ({
       />
       {
         <FormHelperText id={id} sx={styles.textHelper}>
-          {helperText}
+          {t(helperText)}
         </FormHelperText>
       }
     </FormControl>
@@ -67,15 +69,15 @@ FormInput.propTypes = {
 FormInput.defaultProps = {
   name: '',
   value: '',
-  handleChange: null,
-  handleBlur: null,
-  showPassword: null,
+  handleChange: () => {},
+  handleBlur: () => {},
+  showPassword: false,
   type: 'text',
   label: '',
   helperText: '',
   error: false,
-  clickHandler: null,
-  mouseDownHandler: null,
+  clickHandler: () => {},
+  mouseDownHandler: () => {},
 };
 
 export default FormInput;

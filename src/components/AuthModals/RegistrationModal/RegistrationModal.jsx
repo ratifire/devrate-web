@@ -53,7 +53,7 @@ const RegistrationModal = () => {
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           type='email'
-          label={t('modal.registration.email')}
+          label='modal.registration.email'
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />
@@ -76,7 +76,7 @@ const RegistrationModal = () => {
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
             type='text'
-            label={t('modal.registration.first_name')}
+            label='modal.registration.first_name'
             helperText={formik.touched.firstName && formik.errors.firstName}
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           />
@@ -85,7 +85,7 @@ const RegistrationModal = () => {
             value={formik.values.lastName}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            label={t('modal.registration.last_name')}
+            label='modal.registration.last_name'
             helperText={formik.touched.lastName && formik.errors.lastName}
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           />
@@ -97,7 +97,7 @@ const RegistrationModal = () => {
           value={formik.values.password}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          label={t('modal.registration.password')}
+          label='modal.registration.password'
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
           clickHandler={handleClickShowPassword}
@@ -110,7 +110,7 @@ const RegistrationModal = () => {
           value={formik.values.repeatPassword}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          label={t('modal.registration.password_repeat')}
+          label='modal.registration.password_repeat'
           error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
           helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
           clickHandler={handleClickShowPassword}

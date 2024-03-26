@@ -49,7 +49,7 @@ const CheckEmail = () => {
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           type='email'
-          label={t('modal.checkEmailResetPassword.email')}
+          label='modal.checkEmailResetPassword.email'
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
         />

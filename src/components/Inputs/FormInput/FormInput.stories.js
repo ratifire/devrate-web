@@ -1,10 +1,9 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
 import FormInput from './FormInput';
 import { decorators } from '../../../../.storybook/preview';
 
 export default {
-  title: 'Example/FormInput',
+  title: 'Form/Inputs/FormInput',
   component: FormInput,
   parameters: {
     layout: 'centered',
@@ -22,33 +21,63 @@ export default {
   decorators: decorators,
 };
 
-const Template = (args) => <FormInput {...args} />;
-export const EmailInput = Template.bind({});
-EmailInput.args = {
-  name: 'email',
-  value: '',
-  handleChange: action('handleChange'),
-  handleBlur: action('handleBlur'),
-  showPassword: false,
-  type: 'email',
-  label: 'Email',
-  helperText: 'Please enter your email',
-  error: false,
-  clickHandler: action('clickHandler'),
-  mouseDownHandler: action('mouseDownHandler'),
+export const TextInput = {
+  args: {
+    name: 'text',
+    value: '',
+    handleChange: action('handleChange'),
+    handleBlur: action('handleBlur'),
+    showPassword: false,
+    type: 'email',
+    label: 'modal.checkEmailResetPassword.email',
+    helperText: '',
+    error: false,
+    clickHandler: action('clickHandler'),
+    mouseDownHandler: action('mouseDownHandler'),
+  },
 };
-
-export const PasswordInput = Template.bind({});
-PasswordInput.args = {
-  name: 'password',
-  value: '',
-  handleChange: action('handleChange'),
-  handleBlur: action('handleBlur'),
-  showPassword: false,
-  type: 'password',
-  label: 'Password',
-  helperText: 'Please enter your password',
-  error: false,
-  clickHandler: action('clickHandler'),
-  mouseDownHandler: action('mouseDownHandler'),
+export const TextInputError = {
+  args: {
+    name: 'email',
+    value: '',
+    handleChange: action('handleChange'),
+    handleBlur: action('handleBlur'),
+    showPassword: false,
+    type: 'email',
+    label: 'modal.checkEmailResetPassword.email',
+    helperText: 'modal.registration.required',
+    error: true,
+    clickHandler: action('clickHandler'),
+    mouseDownHandler: action('mouseDownHandler'),
+  },
+};
+export const PasswordInput = {
+  args: {
+    name: 'password',
+    value: '',
+    handleChange: action('handleChange'),
+    handleBlur: action('handleBlur'),
+    showPassword: false,
+    type: 'password',
+    label: 'modal.resetPassword.password',
+    helperText: '',
+    error: false,
+    clickHandler: action('clickHandler'),
+    mouseDownHandler: action('mouseDownHandler'),
+  },
+};
+export const PasswordInputError = {
+  args: {
+    name: 'password',
+    value: '',
+    handleChange: action('handleChange'),
+    handleBlur: action('handleBlur'),
+    showPassword: false,
+    type: 'password',
+    label: 'modal.resetPassword.password',
+    helperText: 'modal.resetPassword.required',
+    error: true,
+    clickHandler: action('clickHandler'),
+    mouseDownHandler: action('mouseDownHandler'),
+  },
 };
