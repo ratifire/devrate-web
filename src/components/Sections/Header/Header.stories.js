@@ -1,18 +1,27 @@
 import React from 'react';
 import Header from './Header';
-import { decorators } from '../../../../.storybook/preview'
-import { BrowserRouter as Router } from 'react-router-dom'; 
-
+import { decorators } from '../../../../.storybook/preview';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../../redux/store/store';
 
 export default {
   title: 'Sections/Header',
   component: Header,
+  parameters: {
+    layout: 'centered',
+    backgrounds: {
+      default: 'dark',
+    },
+  },
   tags: ['autodocs'],
   decorators: decorators,
 };
 
 export const Default = () => (
-  <Router>
-    <Header/>
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <Header />
+    </Router>
+  </Provider>
 );

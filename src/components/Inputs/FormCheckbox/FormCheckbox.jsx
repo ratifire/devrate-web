@@ -2,15 +2,17 @@ import { Checkbox, FormControl, FormControlLabel, FormHelperText, Typography } f
 import { styles } from './FormCheckbox.styles';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error }) => {
+  const { t } = useTranslation();
   return (
     <FormControl error={error} variant='standard'>
       <FormControlLabel
         control={<Checkbox checked={checked} onChange={changeHandler} name={name} sx={styles.checkBox} />}
-        label={<Typography sx={styles.newsAgreementText}>{label}</Typography>}
+        label={<Typography sx={styles.newsAgreementText}>{t(label)}</Typography>}
       />
-      <FormHelperText>{helperText}</FormHelperText>
+      <FormHelperText>{t(helperText)}</FormHelperText>
     </FormControl>
   );
 };

@@ -80,7 +80,7 @@ const ResetPassword = () => {
                 (formik.touched.repeatPassword && formik.errors.repeatPassword) ||
                 (formik.touched.password && formik.errors.password)
               }
-              label={t('modal.resetPassword.btn_change_password')}
+              label='modal.resetPassword.btn_change_password'
             />
           </Box>
         </Form>
