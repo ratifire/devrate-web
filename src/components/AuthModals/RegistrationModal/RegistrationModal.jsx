@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import { useTranslation } from 'react-i18next';
+import React, {useState} from 'react';
+import {useFormik} from 'formik';
+import {useTranslation} from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import { Box, Link, Typography } from '@mui/material';
+import {Box, CircularProgress, Link, Typography} from '@mui/material';
 import styles from './RegistrationModal.styles';
-import { RegistrationSchema } from './RegistrationSchema';
-import { FormCheckbox, FormInput, FormSelect } from '../../Inputs';
-import { userCountries } from '../../../utils/constants/userCountries';
-import { ButtonDef } from '../../Buttons';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../redux/auth/modalSlice';
-import { Link as RouterLink } from 'react-router-dom';
+import {RegistrationSchema} from './RegistrationSchema';
+import {FormCheckbox, FormInput, FormSelect} from '../../Inputs';
+import {userCountries} from '../../../utils/constants/userCountries';
+import {ButtonDef} from '../../Buttons';
+import {useDispatch, useSelector} from 'react-redux';
+// import { closeModal, openModal } from '../../../redux/modal/modalSlice';
+import {Link as RouterLink} from 'react-router-dom';
+import {useCreateUserMutation} from '../../../redux/auth/authApiSlice';
+import {closeModal, openModal} from '../../../redux/modal/modalSlice';
+// import { useCreateUserMutation } from '../../../redux/auth/authApiSlice';
 
 const initialValues = {
   email: '',
@@ -27,12 +30,24 @@ const RegistrationModal = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [createUser, { isLoading: isCreating }] = useCreateUserMutation();
   const openRegistration = useSelector((state) => state.modal.openRegistration);
   const handleClose = () => dispatch(closeModal({ modalName: 'openRegistration' }));
 
   const onSubmit = (values, { resetForm }) => {
-    alert(JSON.stringify(values, null, 2));
+    const { email, firstName, lastName, news, password } = values;
+    createUser({
+      email,
+      firstName,
+      lastName,
+      country: 'Ukraine',
+      subscribed: news,
+      password,
+    });
+
     resetForm();
+    dispatch(closeModal({ modalName: 'openRegistration' }));
+    dispatch(openModal({ modalName: 'openConfirmation' }));
   };
   const formik = useFormik({
     initialValues,
@@ -43,7 +58,9 @@ const RegistrationModal = () => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
 
-  return (
+  return isCreating ? (
+    <CircularProgress />
+  ) : (
     <ModalLayout open={openRegistration} setOpen={handleClose}>
       <Typography sx={styles.title}>{t('modal.registration.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>

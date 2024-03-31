@@ -2,11 +2,10 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 import { styles } from './ButtonDef.styles';
-import { useTranslation } from 'react-i18next';
 
 const ButtonDef = ({ variant, type, correctStyle, handlerClick, disabled, label, startIcon, endIcon }) => {
   const style = variant === 'contained' ? styles.contained : variant === 'text' ? styles.text : styles.outlined;
-  const { t } = useTranslation();
+
   return (
     <Button
       variant={variant}
@@ -17,14 +16,14 @@ const ButtonDef = ({ variant, type, correctStyle, handlerClick, disabled, label,
       startIcon={startIcon}
       endIcon={endIcon}
     >
-      {t(label)}
+      {label}
     </Button>
   );
 };
 ButtonDef.propTypes = {
   variant: PropTypes.oneOf(['contained', 'text', 'outlined']).isRequired,
   type: PropTypes.oneOf(['button', 'submit', 'reset']).isRequired,
-  correctStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  correctStyle: PropTypes.object,
   handlerClick: PropTypes.func,
   disabled: PropTypes.bool,
   label: PropTypes.string.isRequired,

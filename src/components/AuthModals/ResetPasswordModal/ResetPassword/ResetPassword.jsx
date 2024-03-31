@@ -13,7 +13,7 @@ import { ResetPasswordSchema } from './ResetPasswordSchema';
 import { FormInput } from '../../../Inputs';
 import { ButtonDef } from '../../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../redux/auth/modalSlice';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 
 const initialValues = {
   password: '',

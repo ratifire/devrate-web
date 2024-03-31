@@ -3,6 +3,7 @@ import { Box, Card, Container, Grid, List, ListItem, Typography } from '@mui/mat
 import { styles } from './AboutSection.styles';
 import YoutubeEmbed from '../../UI/YoutubeEmbed/YoutubeEmbed';
 import { useTranslation } from 'react-i18next';
+import ConfirmationModal from '../../AuthModals/ConfirmationModal';
 
 const AboutSection = () => {
   const { t } = useTranslation();
@@ -36,6 +37,7 @@ const AboutSection = () => {
             </Card>
           </Grid>
         </Grid>
+        <ConfirmationModal />
       </Container>
     </Box>
   );

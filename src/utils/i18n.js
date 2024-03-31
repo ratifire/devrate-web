@@ -10,7 +10,7 @@ i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init({
     en,
     uk,
   },
-  debug: true,
+  debug: false,
   fallbackLng: 'uk',
   lng: 'en',
 });
