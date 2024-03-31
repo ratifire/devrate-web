@@ -25,6 +25,7 @@ const FormInput = ({
     <FormControl variant='outlined' sx={styles.input} error={error}>
       <InputLabel htmlFor={id}>{t(label)}</InputLabel>
       <OutlinedInput
+        autoComplete='off'
         id={id}
         name={name}
         value={value}

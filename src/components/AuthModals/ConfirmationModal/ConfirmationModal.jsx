@@ -5,22 +5,54 @@ import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, FormControl, FormHelperText, Link, OutlinedInput, Typography } from '@mui/material';
 import styles from './ConfirmationModal.styles';
 import CancelIcon from '@mui/icons-material/Cancel';
-import PropTypes from 'prop-types';
 import { ButtonDef } from '../../Buttons';
 import { ConfirmationSchema } from './ConfirmationSchema';
 import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal, openModal } from '../../../redux/modal/modalSlice';
+import { useConfirmEmailMutation } from '../../../redux/auth/authApiSlice';
 
-const initialValues = {};
+const initialValues = {
+  text0: '',
+  text1: '',
+  text2: '',
+  text3: '',
+  text4: '',
+  text5: '',
+};
 
-const ConfirmationModal = ({ open, setOpen }) => {
+const ConfirmationModal = () => {
   const { t } = useTranslation();
-  const [codeError] = useState(true);
+  const [codeError, setCodeError] = useState(false);
+  const dispatch = useDispatch();
   const inputRefs = useRef([]);
-  const onSubmit = (values, { resetForm }) => {
-    alert(JSON.stringify(values, null, 2));
-    resetForm({});
+  const [confirmEmail, result] = useConfirmEmailMutation();
+  const openConfirmation = useSelector((state) => state.modal.openConfirmation);
+  const handleClose = () => dispatch(closeModal({ modalName: 'openConfirmation' }));
+  const handleCloseAllModal = () => {
+    dispatch(closeModal({ modalName: 'openRegistration' }));
+    dispatch(closeModal({ modalName: 'openConfirmation' }));
+  };
+
+  const onSubmit = async (values, { resetForm }) => {
+    const code = Object.values(values).join('');
+    console.log(resetForm({}));
+
+    try {
+      const { data } = await confirmEmail(code);
+      if (data) {
+        dispatch(closeModal({ modalName: 'openConfirmation' }));
+        dispatch(openModal({ modalName: 'openLogin' }));
+      }
+      console.log('result.meta.response.status', result.meta.response.status);
+    } catch (error) {
+      if (error.originalStatus === 410) {
+        setCodeError(true);
+      }
+    }
+
     inputRefs.current.forEach((ref) => {
-      ref.value = ''; // Очищення рефа
+      ref.value = '';
     });
   };
 
@@ -48,8 +80,11 @@ const ConfirmationModal = ({ open, setOpen }) => {
     }
   };
 
+  // Визначення вмісту для FormHelperText
+  const helperTextContent = Object.keys(formik.errors).some((key) => formik.touched[key]) ? 'Error Message' : null;
+
   return (
-    <ModalLayout open={open} setOpen={setOpen}>
+    <ModalLayout open={openConfirmation} setOpen={handleClose}>
       <Typography sx={styles.title}>{t('modal.confirmation.title')}</Typography>
       {codeError && (
         <Box sx={styles.codeErrorWrapper}>
@@ -78,34 +113,34 @@ const ConfirmationModal = ({ open, setOpen }) => {
               error={formik.touched[`text${index}`] && Boolean(formik.errors[`text${index}`])}
             >
               <OutlinedInput
-                id={index}
+                autoComplete='off'
+                id={index.toString()}
                 name={`text${index}`}
                 value={formik.values[`text${index}`]}
                 onChange={(event) => handleChange(event, index)}
                 inputRef={(el) => (inputRefs.current[index] = el)}
+                inputProps={{ maxLength: 1 }}
+                autoFocus={index === 0}
                 type='text'
               />
-              {
-                <FormHelperText id={index} sx={styles.textHelper}>
-                  {formik.touched[`text${index}`] && Boolean(formik.errors[`text${index}`])}
-                </FormHelperText>
-              }
             </FormControl>
           ))}
         </Box>
 
+        <FormHelperText sx={styles.textHelper}>{helperTextContent}</FormHelperText>
+
         <Box sx={styles.wrapperBtn}>
           <ButtonDef variant='contained' handlerClick={formik.handleSubmit} label='modal.confirmation.btn_confirm' />
         </Box>
-        <Box sx={styles.spamCheckContainer()}>
+        <Box sx={styles.spamCheckContainer}>
           <Typography href='#' sx={styles.policyText}>
             {t('modal.confirmation.spam_check_text')}
           </Typography>
           <Typography href='#' sx={{ textAlign: 'center' }}>
-            <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
+            <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
               {t('modal.confirmation.repeat_request_link')}
             </Link>
-            <Typography component='span' hr ef='#'>
+            <Typography component='span' href='#'>
               {' '}
               {t('modal.confirmation.repeat_request_text1')}
             </Typography>
@@ -114,7 +149,7 @@ const ConfirmationModal = ({ open, setOpen }) => {
             <Typography component='span' href='#'>
               {t('modal.confirmation.repeat_request_text2')}{' '}
             </Typography>
-            <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
+            <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
               {t('modal.confirmation.change_email_link')}
             </Link>
           </Typography>
@@ -123,18 +158,13 @@ const ConfirmationModal = ({ open, setOpen }) => {
           <Typography href='#' sx={styles.turnBackText}>
             {t('modal.confirmation.return_on')}
           </Typography>
-          <Link to={'/'} component={RouterLink} sx={styles.link} onClick={setOpen}>
+          <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
             {t('modal.confirmation.home_page')}
           </Link>
         </Box>
       </form>
     </ModalLayout>
   );
-};
-
-ConfirmationModal.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
 };
 
 export default ConfirmationModal;

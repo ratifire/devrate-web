@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, CircularProgress, Link, Typography } from '@mui/material';
 import styles from './LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
 import { FormInput } from '../../Inputs';
 import { ButtonDef } from '../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal, openModal } from '../../../redux/auth/modalSlice';
 import { Link as RouterLink } from 'react-router-dom';
+import { closeModal, openModal } from '../../../redux/modal/modalSlice';
+import { useLoginMutation } from '../../../redux/auth/authApiSlice';
 
 const initialValues = {
   email: '',
@@ -24,20 +25,42 @@ const LoginModal = () => {
   const handleClose = () => dispatch(closeModal({ modalName: 'openLogin' }));
   const handleOpen = () => dispatch(openModal({ modalName: 'openCheckEmail' }));
 
-  const onSubmit = (values, { resetForm }) => {
-    alert(JSON.stringify(values, null, 2));
-    resetForm();
-  };
+  const [login, { isLoading }] = useLoginMutation();
+
+  async function onSubmit(values, { resetForm }) {
+    try {
+      // dispatch(setCredentials({ user: userData.user.email }));
+      const userData = await login({ email: formik.values.email, password: formik.values.password }).unwrap();
+      console.log(userData);
+
+      resetForm();
+    } catch (error) {
+      if (!error?.originalStatus) {
+        console.log('No server response');
+      } else if (error.originalStatus?.status === 400) {
+        console.log('Missing Username or Password');
+      } else if (error.originalStatus?.status === 401) {
+        console.log('Unauthorized');
+      } else {
+        console.log('Login Failed');
+      }
+    }
+  }
+
   const formik = useFormik({
     initialValues,
     validationSchema: LoginSchema,
     onSubmit,
   });
 
+  // useEffect(() => {}, [formik.values.email, formik.values.password]);
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
 
-  return (
+  return isLoading ? (
+    <CircularProgress />
+  ) : (
     <ModalLayout open={openLogin} setOpen={handleClose}>
       <Typography sx={styles.title}>{t('modal.login.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>

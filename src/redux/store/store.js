@@ -1,40 +1,38 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
-import { devrateServiceApi } from '../services/authAPI';
+import { persistReducer, persistStore } from 'redux-persist';
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants';
 
-import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-
-import modalSliceReducer from '../auth/modalSlice';
+import modalSliceReducer from '../modal/modalSlice';
+import { apiSlice } from '../services/api/apiSlice';
+import { authReducer } from '../auth/authSlice';
 
 const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['accessToken', 'refreshToken', 'token', 'user', 'isLoggedIn'],
 };
-const authReducer = () => [];
 
-export const store = configureStore({
-  reducer: {
-    modal: modalSliceReducer,
-    [devrateServiceApi.reducerPath]: devrateServiceApi.reducer,
-    auth: persistReducer(authPersistConfig, authReducer),
-  },
+const rootReducer = {
+  modal: modalSliceReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
+  auth: persistReducer(authPersistConfig, authReducer),
+};
+
+const store = configureStore({
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [
-          devrateServiceApi.util.updateQueryResultType,
-          FLUSH,
-          REHYDRATE,
-          PAUSE,
-          PERSIST,
-          PURGE,
-          REGISTER,
-        ],
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(logger),
-  // devTools: process.env.NODE_ENV === 'development', //Only for development mode
+    })
+      .concat(logger)
+      .concat(apiSlice.middleware),
+  devTools: true,
 });
 
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
+
+export { store, persistor };
