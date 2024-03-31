@@ -5,7 +5,7 @@ const modalSlice = createSlice({
   initialState: {
     openLogin: false,
     openRegistration: false,
-    openConfirmation: true,
+    openConfirmation: false,
     openCheckEmail: false,
     openResetPassword: false,
   },

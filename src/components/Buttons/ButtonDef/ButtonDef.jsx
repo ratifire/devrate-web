@@ -2,9 +2,11 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 import { styles } from './ButtonDef.styles';
+import { useTranslation } from 'react-i18next';
 
 const ButtonDef = ({ variant, type, correctStyle, handlerClick, disabled, label, startIcon, endIcon }) => {
   const style = variant === 'contained' ? styles.contained : variant === 'text' ? styles.text : styles.outlined;
+  const { t } = useTranslation();
 
   return (
     <Button
@@ -16,7 +18,7 @@ const ButtonDef = ({ variant, type, correctStyle, handlerClick, disabled, label,
       startIcon={startIcon}
       endIcon={endIcon}
     >
-      {label}
+      {t(label)}
     </Button>
   );
 };
