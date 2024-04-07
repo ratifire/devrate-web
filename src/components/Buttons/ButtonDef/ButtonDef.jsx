@@ -25,7 +25,7 @@ const ButtonDef = ({ variant, type, correctStyle, handlerClick, disabled, label,
 ButtonDef.propTypes = {
   variant: PropTypes.oneOf(['contained', 'text', 'outlined']).isRequired,
   type: PropTypes.oneOf(['button', 'submit', 'reset']).isRequired,
-  correctStyle: PropTypes.object,
+  correctStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   handlerClick: PropTypes.func,
   disabled: PropTypes.bool,
   label: PropTypes.string.isRequired,
