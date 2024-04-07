@@ -6,12 +6,10 @@ import LinkList from '../../UI/LinkList';
 import navLinks from '../../../utils/constants/navLinks';
 import Logo from '../../UI/Logo';
 import { ButtonDef } from '../../Buttons';
-import { useTranslation } from 'react-i18next';
 import { openModal } from '../../../redux/modal/modalSlice';
 import { useDispatch } from 'react-redux';
 
 function Header() {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleOpen = () => dispatch(openModal({ modalName: 'openLogin' }));
   const [mobileOpen, setMobileOpen] = useState(false);
