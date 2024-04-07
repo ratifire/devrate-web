@@ -53,7 +53,7 @@ function Header() {
             </Box>
             <Box sx={styles.headerNav}>
               <LinkList links={navLinks} componentStyles={styles} />
-              <ButtonDef variant='text' handlerClick={handleOpen} type='button' label={t('home.links.login')} />
+              <ButtonDef variant='text' handlerClick={handleOpen} type='button' label='home.links.login' />
             </Box>
           </Toolbar>
           <Box component='nav'>
