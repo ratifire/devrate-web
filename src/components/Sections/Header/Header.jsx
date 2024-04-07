@@ -10,8 +10,6 @@ import { useTranslation } from 'react-i18next';
 import { openModal } from '../../../redux/modal/modalSlice';
 import { useDispatch } from 'react-redux';
 
-x;
-
 function Header() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
