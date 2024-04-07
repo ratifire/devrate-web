@@ -120,7 +120,7 @@ const LoginModal = () => {
               correctStyle={styles.turnBackLink}
               handlerClick={handleOpen}
               type='button'
-              label={t('modal.login.forgot_your_password')}
+              label='modal.login.forgot_your_password'
             />
           </Box>
           <Box sx={styles.wrapperBtn}>
