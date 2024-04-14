@@ -2,6 +2,7 @@ import React from 'react';
 import { ProfileTemplate } from '../../Templates';
 import { Box, Container, Paper } from '@mui/material';
 import { styles } from './ProfilePage.styles';
+import SkillsSection from '../../components/ProfileComponents/SkillsSection/SkillsSection';
 
 const ProfilePage = () => {
   return (
@@ -12,7 +13,7 @@ const ProfilePage = () => {
             Base user info
           </Paper>
           <Paper xs={5} sx={styles.skills}>
-            Skills
+            <SkillsSection />
           </Paper>
           <Paper xs={3} sx={styles.right}>
             Right section
