@@ -10,10 +10,10 @@ const ProfilePage = () => {
   return (
     <ProfileTemplate>
       <Container maxWidth='xl' sx={styles.container}>
-	      <ProfileHeader />
-	      <Box sx={styles.contentWrapper}>
+        <ProfileHeader />
+        <Box sx={styles.contentWrapper}>
           <Paper xs={4} sx={styles.baseUserInfo}>
-	          <BaseUserInfo />
+            <BaseUserInfo />
           </Paper>
           <Paper xs={5} sx={styles.skills}>
             <SkillsSection />
