@@ -3,15 +3,17 @@ import { ProfileTemplate } from '../../Templates';
 import { Box, Container, Paper } from '@mui/material';
 import { styles } from './ProfilePage.styles';
 import SkillsSection from '../../components/ProfileComponents/SkillsSection/SkillsSection';
+import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 import BaseUserInfo from '../../components/Sections/BaseUserInfo';
 
 const ProfilePage = () => {
   return (
     <ProfileTemplate>
       <Container maxWidth='xl' sx={styles.container}>
-        <Box sx={styles.contentWrapper}>
+	      <ProfileHeader />
+	      <Box sx={styles.contentWrapper}>
           <Paper xs={4} sx={styles.baseUserInfo}>
-            <BaseUserInfo />
+	          <BaseUserInfo />
           </Paper>
           <Paper xs={5} sx={styles.skills}>
             <SkillsSection />

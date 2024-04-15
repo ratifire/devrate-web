@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header';
+import ProfileHeader from './ProfileHeader';
 import { decorators } from '../../../../.storybook/preview';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -7,7 +7,7 @@ import { store } from '../../../redux/store/store';
 
 export default {
   title: 'Sections/ProfileHeader',
-  component: Header,
+  component: ProfileHeader,
   parameters: {
     layout: 'centered',
     backgrounds: {
@@ -21,7 +21,7 @@ export default {
 export const Default = () => (
   <Provider store={store}>
     <Router>
-      <Header />
+      <ProfileHeader />
     </Router>
   </Provider>
 );

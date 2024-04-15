@@ -5,7 +5,7 @@ import navLinks from '../../../utils/constants/navLinks';
 import legalInfoLinks from '../../../utils/constants/legalInfoLinks';
 import headerStyles from '../../Sections/Header/Header.styles';
 import footerStyles from '../../Sections/Footer/Footer.styles';
-import { BrowserRouter as Router } from 'react-router-dom'; 
+import { BrowserRouter as Router } from 'react-router-dom';
 
 export default {
   title: 'UI/LinkList',
