@@ -16,7 +16,6 @@ export const styles = {
     ' > div': {
       borderRadius: '8px',
       backgroundColor: '#303032',
-      // padding: '24px',
     },
   },
   baseUserInfo: {

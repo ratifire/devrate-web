@@ -121,6 +121,11 @@ export const en = {
         doneInterviews: 'Interviews done',
         completedInterviews: 'Interviews completed',
       },
+      baseUserInfo: {
+        btn: 'Write a message',
+        online: 'Online',
+        loading: 'Your profile is filled in at',
+      },
     },
   },
 };

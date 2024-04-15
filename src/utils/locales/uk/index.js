@@ -122,6 +122,11 @@ export const uk = {
         doneInterviews: 'інтерв’ю пройдено',
         completedInterviews: 'інтерв’ю проведено',
       },
+      baseUserInfo: {
+        btn: 'Написати повідомлення',
+        online: 'Онлайн',
+        loading: 'Ваш профіль заповнено на',
+      },
     },
   },
 };
