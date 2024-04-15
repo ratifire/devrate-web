@@ -114,5 +114,14 @@ export const uk = {
         password_must_match: 'Паролі мають збігатися',
       },
     },
+    profile: {
+      skills: {
+        skillsTitle: 'Навички',
+        hardSkills: 'Hard Skills',
+        softSkills: 'Soft Skills',
+        doneInterviews: 'інтерв’ю пройдено',
+        completedInterviews: 'інтерв’ю проведено',
+      },
+    },
   },
 };

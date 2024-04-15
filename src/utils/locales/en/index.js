@@ -113,5 +113,14 @@ export const en = {
         password_must_match: 'Passwords must match',
       },
     },
+    profile: {
+      skills: {
+        skillsTitle: 'Skills',
+        hardSkills: 'Hard Skills',
+        softSkills: 'Soft Skills',
+        doneInterviews: 'Interviews done',
+        completedInterviews: 'Interviews completed',
+      },
+    },
   },
 };
