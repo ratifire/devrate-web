@@ -127,6 +127,12 @@ export const uk = {
         online: 'Онлайн',
         loading: 'Ваш профіль заповнено на',
       },
+      experience: {
+        workExperience: 'Досвід роботи',
+        achievement: 'Досягнення',
+        skills: 'Навички',
+        education: 'Освіта',
+      },
     },
   },
 };
