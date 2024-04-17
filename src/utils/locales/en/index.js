@@ -126,6 +126,12 @@ export const en = {
         online: 'Online',
         loading: 'Your profile is filled in at',
       },
+      experience: {
+        workExperience: 'Work Experience',
+        achievement: 'Achievement',
+        skills: 'Skills',
+        education: 'Education',
+      },
     },
   },
 };

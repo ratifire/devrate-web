@@ -5,6 +5,7 @@ import { styles } from './ProfilePage.styles';
 import SkillsSection from '../../components/ProfileComponents/SkillsSection/SkillsSection';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 import BaseUserInfo from '../../components/Sections/BaseUserInfo';
+import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';
 
 const ProfilePage = () => {
   return (
@@ -22,7 +23,7 @@ const ProfilePage = () => {
             Right section
           </Paper>
           <Paper xs={8} sx={styles.experience}>
-            Experience section
+            <ExperienceSection />
           </Paper>
         </Box>
       </Container>

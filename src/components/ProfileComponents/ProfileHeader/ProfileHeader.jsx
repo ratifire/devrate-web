@@ -37,9 +37,7 @@ function ProfileHeader() {
       <Box sx={styles.headerNav}>
         <form onSubmit={formik.handleSubmit}>
           <OutlinedInput
-            disablePadding='true'
             autoComplete='off'
-            id={1}
             name='query'
             placeholder='Пошук'
             type='text'
