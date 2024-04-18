@@ -32,6 +32,6 @@ export const styles = {
   },
   experience: {
     gridColumn: '1/10',
-    gridRow: '2/3',
+    gridRow: '2/5',
   },
 };
