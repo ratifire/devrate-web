@@ -132,6 +132,11 @@ export const en = {
         skills: 'Skills',
         education: 'Education',
       },
+      right: {
+        contact: 'Contact Information',
+        languages: 'Languages',
+        aboutMe: 'About me',
+      },
     },
   },
 };

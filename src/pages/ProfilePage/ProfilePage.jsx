@@ -4,7 +4,8 @@ import { Box, Container, Paper } from '@mui/material';
 import { styles } from './ProfilePage.styles';
 import SkillsSection from '../../components/ProfileComponents/SkillsSection/SkillsSection';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
-import BaseUserInfo from '../../components/Sections/BaseUserInfo';
+import BaseUserInfo from '../../components/ProfileComponents/BaseUserInfo';
+import RightSection from '../../components/ProfileComponents/RightSection';
 import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';
 
 const ProfilePage = () => {
@@ -20,7 +21,7 @@ const ProfilePage = () => {
             <SkillsSection />
           </Paper>
           <Paper xs={3} sx={styles.right}>
-            Right section
+            <RightSection />
           </Paper>
           <Paper xs={8} sx={styles.experience}>
             <ExperienceSection />

@@ -133,6 +133,11 @@ export const uk = {
         skills: 'Навички',
         education: 'Освіта',
       },
+      right: {
+        contact: 'Контактна інформація',
+        languages: 'Мови',
+        aboutMe: 'Про мене',
+      },
     },
   },
 };
