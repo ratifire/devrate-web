@@ -2,7 +2,7 @@ import React from 'react';
 import SkillsSection from './SkillsSection';
 
 export default {
-  title: 'Example/SkillsSection',
+  title: 'Profile/SkillsSection',
   component: SkillsSection,
   argTypes: {
     width: { control: 'text' },

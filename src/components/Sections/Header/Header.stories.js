@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from './Header';
-import { decorators } from '../../../../.storybook/preview';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../../../redux/store/store';
+import { decorators } from '../../../../.storybook/preview';
 
 export default {
-  title: 'Sections/ProfileHeader',
+  title: 'Sections/Header',
   component: Header,
   parameters: {
     layout: 'centered',
