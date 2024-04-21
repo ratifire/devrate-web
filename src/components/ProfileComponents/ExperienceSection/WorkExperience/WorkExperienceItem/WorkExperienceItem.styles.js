@@ -35,11 +35,12 @@ const styles = {
   workDutiesContainer: {
     display: 'flex',
     flexDirection: 'column',
+    marginTop: 16,
   },
   workDutiesTitle: {
     marginBottom: 16,
     fontWeight: '500',
-    fontSize: 29,
+    fontSize: 20,
     lineHeight: 1.6,
     color: '#FFFFFF',
   },
