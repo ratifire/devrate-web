@@ -51,8 +51,8 @@ const RightSection = () => {
         <Typography sx={styles.aboutMe}>
           Кваліфікований Senior back-end розробник із 5-річним досвідом. Працювала з базами даних: MySQL, MariaDB,
           MongoDB, MVC Framework (CakePHP). Робота з тестовою середовищем для PHP (PHPUnit). TV Archive, написання
-          методів панелі управління / методів SOAP. Робота з тестовою с ередовищем для PHP (PHPUnit). TV Archive,
-          написання методів панелі управління / методів SOAP. Робота з тестовою с ередовищем для PHP (PHPUnit). TV
+          методів панелі управління / методів SOAP. Робота з тестовою середовищем для PHP (PHPUnit). TV Archive,
+          написання методів панелі управління / методів SOAP. Робота з тестовою середовищем для PHP (PHPUnit). TV
           Archive, написання методів панелі управління / методів SOAP.
         </Typography>
       </Box>
