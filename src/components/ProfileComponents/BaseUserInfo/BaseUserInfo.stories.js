@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseUserInfo from './BaseUserInfo';
+import { decorators } from '../../../../.storybook/preview';
 
 export default {
   title: 'Profile/BaseUserInfo',
@@ -8,9 +9,11 @@ export default {
     width: { control: 'text' },
     height: { control: 'text' },
   },
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
+  decorators: decorators,
 };
 
 export const Default = (args) => <BaseUserInfo {...args} />;
