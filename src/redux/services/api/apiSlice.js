@@ -6,9 +6,6 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
 });
 
-// eslint-disable-next-line
-console.log('TEST_URL', process.env);
-
 export const apiSlice = createApi({
   baseQuery: baseQuery,
   // eslint-disable-next-line no-unused-vars
