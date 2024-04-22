@@ -1,23 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styles } from './SkillsSection.styles';
 
 const SkillsSection = () => {
   const { t } = useTranslation();
+  const [hardSkillsRating, setHardSkillsRating] = useState(5);
+  const [softSkillsRating, setSoftSkillsRating] = useState(4);
+
+  const handleHardSkillsChange = (newValue) => {
+    setHardSkillsRating(newValue);
+  };
+
+  const handleSoftSkillsChange = (newValue) => {
+    setSoftSkillsRating(newValue);
+  };
 
   return (
     <Box sx={styles.skillsWrapper}>
       <Typography sx={styles.skillsTitle}>{t('profile.skills.skillsTitle')}</Typography>
       <Box sx={styles.hardSkills}>
         <Typography sx={styles.skillsText}>{t('profile.skills.hardSkills')}:</Typography>
-        <Rating name='read-only' value={5} readOnly sx={{ marginRight: 10 }} />
-        <Typography sx={styles.skillsRating}>10/10</Typography>
+        <Rating
+          name='hard-skills-rating'
+          value={hardSkillsRating}
+          onChange={(event, newValue) => handleHardSkillsChange(newValue)}
+          sx={{ marginRight: 10 }}
+        />
+        <Typography sx={styles.skillsRating}>{hardSkillsRating * 2}/10</Typography>
       </Box>
       <Box sx={styles.softSkills}>
         <Typography sx={styles.skillsText}>{t('profile.skills.softSkills')}:</Typography>
-        <Rating name='read-only' value={4} readOnly sx={{ marginRight: 10 }} />
-        <Typography sx={styles.skillsRating}>8/10</Typography>
+        <Rating
+          name='soft-skills-rating'
+          value={softSkillsRating}
+          onChange={(event, newValue) => handleSoftSkillsChange(newValue)}
+          sx={{ marginRight: 10 }}
+        />
+        <Typography sx={styles.skillsRating}>{softSkillsRating * 2}/10</Typography>
       </Box>
       <Box sx={styles.interviewHistory}>
         <Box sx={styles.doneInterviews}>

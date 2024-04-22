@@ -1,7 +1,6 @@
 const styles = {
   experienceContainer: {
     width: '100%',
-    minHeight: 600,
     padding: 24,
     backgroundColor: '#303032',
     borderRadius: 'inherit',
@@ -22,8 +21,9 @@ const styles = {
   },
   icon: { color: '#B78AF7' },
   experienceItemContainer: {
+    overflow: 'auto',
+    maxHeight: 600, // to be adjusted with designers
     minWidth: '100%',
-    minHeight: '100%',
     backgroundColor: '#303032',
   },
 };

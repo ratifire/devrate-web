@@ -131,6 +131,7 @@ export const en = {
         achievement: 'Achievement',
         skills: 'Skills',
         education: 'Education',
+        duties: 'Duties',
       },
       right: {
         contact: 'Contact Information',

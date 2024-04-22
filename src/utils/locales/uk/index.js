@@ -132,6 +132,7 @@ export const uk = {
         achievement: 'Досягнення',
         skills: 'Навички',
         education: 'Освіта',
+        duties: 'Обовʼязки',
       },
       right: {
         contact: 'Контактна інформація',
