@@ -1,9 +1,8 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { ToastContainer, Zoom } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-const BaseLayout = () => {
+const ToastLayout = ({ children }) => {
   return (
     <>
       <ToastContainer
@@ -20,9 +19,13 @@ const BaseLayout = () => {
         theme='colored'
         transition={Zoom}
       />
-      <Outlet />
+      {children}
     </>
   );
 };
 
-export default BaseLayout;
+ToastLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default ToastLayout;
