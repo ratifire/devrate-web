@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 const HomePage = () => {
-  const token = useSelector((state) => state.auth.token);
+  const isAuthenticated = useSelector((state) => state.auth.userId);
 
-  if (token) {
+  if (isAuthenticated) {
     return <Navigate to='/profile' />;
   }
 
