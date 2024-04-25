@@ -11,6 +11,8 @@ export const styles = {
     '> button': {
       padding: 0,
       borderRadius: '4px',
+      width: '100%',
+      height: '100%',
     },
     '@media (min-width: 600px)': {
       flex: '1 0 132px',
@@ -42,6 +44,7 @@ export const styles = {
     color: '#fff',
     letterSpacing: '0.15px',
     marginBottom: 4,
+    paddingRight: 40,
   },
   speciality: {
     fontSize: 20,

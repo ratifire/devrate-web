@@ -1,30 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EditIcon from '@mui/icons-material/Edit';
 import { styles } from './BaseUserInfo.styles';
-import { Avatar, Box, Button, IconButton, Typography } from '@mui/material';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import LinearProgressWithLabel from '../../LinearProgressWithLabel';
+import UserAvatar from '../../UI/UserAvatar';
 
 const BaseUserInfo = () => {
   // const handleOpen = 1;
   const { t } = useTranslation();
-  const [progress, setProgress] = React.useState(0);
+  const [progress] = React.useState(60);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
-    }, 800);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
         <Button type='button'>
-          <Avatar sx={styles.avatar} src='' alt='Олена Бондаренко' />
+          <UserAvatar nameUser={'Олена Бондаренко'} />
         </Button>
       </Box>
       <Box sx={styles.wrapperText}>
