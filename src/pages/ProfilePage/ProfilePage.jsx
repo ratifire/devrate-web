@@ -11,8 +11,8 @@ import ExperienceSection from '../../components/ProfileComponents/ExperienceSect
 const ProfilePage = () => {
   return (
     <ProfileTemplate>
-      <Container maxWidth='xl' sx={styles.container}>
-        <ProfileHeader />
+      <ProfileHeader />
+      <Container maxWidth='xl' sx={styles.container}>        
         <Box sx={styles.contentWrapper}>
           <Paper xs={4} sx={styles.baseUserInfo}>
             <BaseUserInfo />
