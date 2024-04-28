@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Box, Container, Divider, Drawer, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Box, Container, Divider, Drawer, IconButton, Link, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './Header.styles';
 import LinkList from '../../UI/LinkList';
@@ -7,7 +7,9 @@ import navLinks from '../../../utils/constants/navLinks';
 import Logo from '../../UI/Logo';
 import { ButtonDef } from '../../Buttons';
 import { openModal } from '../../../redux/modal/modalSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
+import navigationsLinks from '../../../utils/links/links';
 
 function Header() {
   const dispatch = useDispatch();
@@ -17,7 +19,17 @@ function Header() {
   const handlerDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  const isAuthenticated = useSelector((state) => state.auth.userId);
+  const myProfile = () => {
+    if (!isAuthenticated)
+      return <ButtonDef variant='text' handlerClick={handleOpen} type='button' label='home.links.login' />;
+    return (
+      <Link to={navigationsLinks.profile} component={RouterLink} sx={styles.link}>
+        profile
+      </Link>
+    );
+  };
+  console.log(isAuthenticated);
   const drawer = (
     <Box onClick={handlerDrawerToggle} sx={styles.drawer}>
       <Box sx={styles.logoMobileBox}>
@@ -51,7 +63,7 @@ function Header() {
             </Box>
             <Box sx={styles.headerNav}>
               <LinkList links={navLinks} componentStyles={styles} />
-              <ButtonDef variant='text' handlerClick={handleOpen} type='button' label='home.links.login' />
+              {myProfile()}
             </Box>
           </Toolbar>
           <Box component='nav'>

@@ -10,7 +10,7 @@ const getDesignTokens = (mode) => ({
     },
   },
   typography: {
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: 'Roboto, sans-serif',
     title: {
       fontSize: 60,
       fontWeight: 700,
@@ -93,7 +93,7 @@ const getDesignTokens = (mode) => ({
   baseStyles: {
     body: {
       margin: 0,
-      fontFamily: 'Inter, sans-serif',
+      fontFamily: 'Roboto, sans-serif',
       fontOpticalSizing: 'auto',
       fontStyle: 'normal',
       fontVariationSettings: "'slnt' 0",
@@ -103,7 +103,7 @@ const getDesignTokens = (mode) => ({
       backgroundImage: 'linear-gradient(180deg, #1d1d1d 0%, #090909 100%)',
     },
     code: {
-      fontFamily: 'Inter, sans-serif',
+      fontFamily: 'Roboto, sans-serif',
     },
     '*': {
       boxSizing: 'border-box',

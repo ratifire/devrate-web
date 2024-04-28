@@ -9,13 +9,14 @@ import RightSection from '../../components/ProfileComponents/RightSection';
 import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';
 
 const ProfilePage = () => {
+  const name = 'Олена Бондаренко';
   return (
     <ProfileTemplate>
-      <ProfileHeader />
-      <Container maxWidth='xl' sx={styles.container}>        
+      <ProfileHeader userName={name} />
+      <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper xs={4} sx={styles.baseUserInfo}>
-            <BaseUserInfo />
+            <BaseUserInfo userName={name} />
           </Paper>
           <Paper xs={5} sx={styles.skills}>
             <SkillsSection />
