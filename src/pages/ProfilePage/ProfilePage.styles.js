@@ -19,11 +19,11 @@ export const styles = {
     },
   },
   baseUserInfo: {
-    gridColumn: '1/5',
+    gridColumn: '1/6',
     gridRow: '1/2',
   },
   skills: {
-    gridColumn: '5/10',
+    gridColumn: '6/10',
     gridRow: '1/2',
   },
   right: {

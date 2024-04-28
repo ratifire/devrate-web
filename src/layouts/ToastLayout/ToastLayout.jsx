@@ -26,7 +26,7 @@ const ToastLayout = () => {
 };
 
 ToastLayout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default ToastLayout;

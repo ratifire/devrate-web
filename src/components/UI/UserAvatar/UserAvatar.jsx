@@ -1,41 +1,50 @@
 import React from 'react';
 import { Avatar } from '@mui/material';
 import PropTypes from 'prop-types';
+import bgFromString from '../../../utils/helpers/bgFromString';
+import checkContrast from '../../../utils/helpers/checkContrastColor';
 
-const UserAvatar = ({ nameUser, src }) => {
-  const stringToColor = (string) => {
-    let hash = 0;
-    let i;
-
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-
-    let color = '#';
-
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
-    }
-    return color;
+const UserAvatar = ({ userName, src, size }) => {
+  const styles = {
+    sm: {
+      width: '44px',
+      height: '44px',
+      fontSize: 16,
+      lineHeight: '28px',
+      letterSpacing: '0.15px',
+    },
+    l: {
+      width: '132px',
+      height: '132px',
+      fontSize: 48,
+      lineHeight: '56px',
+      letterSpacing: 0,
+    },
   };
 
   const stringAvatar = (name) => {
+    const BG_COLOR = bgFromString(name);
     return {
       sx: {
-        backgroundColor: stringToColor(name),
-        width: '100%',
-        height: '100%',
+        backgroundColor: BG_COLOR,
+        width: styles[size].width,
+        height: styles[size].height,
         borderRadius: '4px',
+        fontSize: styles[size].fontSize,
+        lineHeight: styles[size].lineHeight,
+        letterSpacing: styles[size].letterSpacing,
+        fontWeight: 400,
+        color: checkContrast(BG_COLOR),
       },
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
   };
 
-  return <Avatar {...stringAvatar(nameUser)} src={src} alt={nameUser} />;
+  return <Avatar {...stringAvatar(userName)} src={src} alt={userName} title={userName} />;
 };
 UserAvatar.propTypes = {
-  nameUser: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(['sm', 'l']).isRequired,
   src: PropTypes.string,
 };
 UserAvatar.defaultProps = {

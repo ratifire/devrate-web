@@ -7,8 +7,9 @@ import { Box, Button, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import LinearProgressWithLabel from '../../LinearProgressWithLabel';
 import UserAvatar from '../../UI/UserAvatar';
+import PropTypes from 'prop-types';
 
-const BaseUserInfo = () => {
+const BaseUserInfo = ({ userName }) => {
   // const handleOpen = 1;
   const { t } = useTranslation();
   const [progress] = React.useState(60);
@@ -17,12 +18,12 @@ const BaseUserInfo = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
         <Button type='button'>
-          <UserAvatar nameUser={'Олена Бондаренко'} />
+          <UserAvatar userName={userName} size='l' />
         </Button>
       </Box>
       <Box sx={styles.wrapperText}>
         <Typography variant='h1' sx={styles.userName}>
-          Олена Бондаренко
+          {userName}
         </Typography>
         <Typography variant='h2' sx={styles.speciality}>
           PHP developer
@@ -58,5 +59,9 @@ const BaseUserInfo = () => {
       </Box>
     </Box>
   );
+};
+
+BaseUserInfo.propTypes = {
+  userName: PropTypes.string.isRequired,
 };
 export default BaseUserInfo;

@@ -1,20 +1,20 @@
 import React from 'react';
-import { AppBar, Badge, Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
+import { AppBar, Badge, Box, Button, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import styles from './ProfileHeader.styles';
 import Logo from '../../UI/Logo';
 
 import { ReactComponent as BellNotification } from '../../../assets/icons/bell.svg'; // import { ReactComponent as LoupeSearch } from '../../../assets/icons/loupe.svg';
 import { ReactComponent as Message } from '../../../assets/icons/message.svg';
 import { ReactComponent as Loupe } from '../../../assets/icons/loupe.svg';
-
-import userImage from '../../../assets/userPhotoSample.png';
 import { useFormik } from 'formik';
+import UserAvatar from '../../UI/UserAvatar';
+import PropTypes from 'prop-types';
 
 const initialValues = {
   query: '',
 };
 
-function ProfileHeader() {
+function ProfileHeader({ userName }) {
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -70,10 +70,15 @@ function ProfileHeader() {
             <Message />
           </Badge>
         </IconButton>
-        <Box component='img' sx={styles.userPhoto} alt='userPhoto' src={userImage} />
+        <Button sx={styles.userPhoto}>
+          <UserAvatar userName={userName} size='sm' />
+        </Button>
       </Box>
     </AppBar>
   );
 }
 
+ProfileHeader.propTypes = {
+  userName: PropTypes.string.isRequired,
+};
 export default ProfileHeader;

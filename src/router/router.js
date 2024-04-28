@@ -5,10 +5,11 @@ import RequireAuth from '../redux/auth/RequireAuth';
 import ProfilePage from '../pages/ProfilePage';
 import React from 'react';
 import ToastLayout from '../layouts/ToastLayout/ToastLayout';
+import navigationLinks from '../utils/links/links';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: navigationLinks.home,
     element: <ToastLayout />,
     errorElement: <ErrorPage />,
     children: [
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
         element: <RequireAuth />,
         children: [
           {
-            path: 'profile',
+            path: navigationLinks.profile,
             element: <ProfilePage />,
           },
         ],

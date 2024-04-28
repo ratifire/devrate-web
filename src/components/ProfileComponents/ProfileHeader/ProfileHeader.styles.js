@@ -22,8 +22,10 @@ const styles = {
     gap: 30,
   },
   userPhoto: {
+    minWidth: 44,
     width: 44,
     height: 44,
+    padding: 0,
   },
 };
 export default styles;
