@@ -19,9 +19,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
       onSuccess: (data, variables, api) => {
-        console.log('Success data:', data);
         console.log('Status code:', api.getState().authApiSlice.requests.confirmEmail.status);
-
         // Повертаємо дані, які будуть доступні через useConfirmEmailMutation
         return data;
       },

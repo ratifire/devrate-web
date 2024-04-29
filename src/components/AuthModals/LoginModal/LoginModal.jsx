@@ -14,6 +14,7 @@ import { ButtonDef } from '../../Buttons';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../redux/auth/authSlice';
+import getCookie from '../../../utils/helpers/getCookie';
 
 const initialValues = {
   email: '',
@@ -35,7 +36,8 @@ const LoginModal = () => {
   async function onSubmit(values, { resetForm }) {
     try {
       const userData = await login({ email: formik.values.email, password: formik.values.password }).unwrap();
-      dispatch(setCredentials({ user: userData, userId: userData }));
+      console.log(userData);
+      dispatch(setCredentials({ data: userData, isAuthenticated: getCookie('JSESSIONID') ? true : false }));
       resetForm();
       dispatch(closeModal('LoginModal'));
       navigate('/profile');

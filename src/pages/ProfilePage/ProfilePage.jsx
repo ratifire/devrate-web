@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ProfileTemplate } from '../../Templates';
 import { Box, Container, Paper } from '@mui/material';
 import { styles } from './ProfilePage.styles';
@@ -7,9 +7,17 @@ import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 import BaseUserInfo from '../../components/ProfileComponents/BaseUserInfo';
 import RightSection from '../../components/ProfileComponents/RightSection';
 import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../../redux/auth/authSlice';
+import getCookie from '../../utils/helpers/getCookie';
 
 const ProfilePage = () => {
   const name = 'Олена Бондаренко';
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setCredentials({ isAuthenticated: getCookie('JSESSIONID') ? true : false }));
+  }, [getCookie('JSESSIONID')]);
+
   return (
     <ProfileTemplate>
       <ProfileHeader userName={name} />
