@@ -72,6 +72,7 @@ function ProfileHeader({ userName }) {
         </IconButton>
         <Button sx={styles.userPhoto}>
           <UserAvatar userName={userName} size='sm' />
+
         </Button>
       </Box>
     </AppBar>
