@@ -60,9 +60,13 @@ The frontend of the application is built using modern web technologies and frame
 
 ## Getting Started
 
-To run the application locally, follow these steps
+To run the application locally, follow these steps:
 
-1. npm start
+1. Ensure you have Node.js version 20.12.2 installed.
+2. Clone the repository to your local machine.
+3. Navigate to the project directory.
+4. Run `npm install` to install dependencies.
+5. Run `npm start` to start the development server.
 
 ## Resources
 
