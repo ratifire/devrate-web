@@ -13,15 +13,21 @@ const AchievementItem = () => {
         <Box sx={styles.logoTitleContainer}>
           <Star width={46} height={38} />
           <Box sx={styles.achievementTitleYearContainer}>
-            <Typography sx={styles.achievementTitle}>Сертифікація CISCO</Typography>
-            <Typography sx={styles.achiementYear}>(2020)</Typography>
+            <Typography variant='h6' sx={styles.achievementTitle}>
+              Сертифікація CISCO
+            </Typography>
+            <Typography variant='subtitle3' sx={styles.achiementYear}>
+              (2020)
+            </Typography>
           </Box>
         </Box>
-        <IconButton sx={{ color: '#B78AF7' }}>
+        <IconButton sx={styles.icon}>
           <DownloadIcon />
         </IconButton>
       </Box>
-      <Typography sx={styles.achievementItemText}>{text}</Typography>
+      <Typography variant='body' sx={styles.achievementItemText}>
+        {text}
+      </Typography>
     </Box>
   );
 };

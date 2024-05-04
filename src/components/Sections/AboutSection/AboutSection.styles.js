@@ -20,7 +20,7 @@ export const styles = {
     fontSize: 46,
     fontWeight: 500,
     lineHeight: '46px',
-    background: theme.typography.aboutTitle.background,
+    background: theme.palette.common.titleGradient,
     backgroundClip: 'text',
     color: 'transparent',
     '&-webkit-background-clip': 'text',
@@ -31,18 +31,18 @@ export const styles = {
     paddingY: 0,
     paddingX: 20,
   },
-  listItem: (theme) => ({
+  listItem: () => ({
     display: 'list-item',
     fontSize: 18,
-    color: theme.palette.text.primary,
+    color: '#F1F1F1',
   }),
-  text: (theme) => ({
+  text: () => ({
     marginBottom: 10,
     fontWeight: 500,
     fontSize: 18,
     lineHeight: '30px',
     letterSpacing: '1.62%',
-    color: theme.palette.text.primary,
+    color: '#F1F1F1',
   }),
   card: {
     height: 483,

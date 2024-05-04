@@ -17,6 +17,7 @@ const ButtonDef = ({ variant, type, correctStyle, handlerClick, disabled, label,
       disabled={disabled}
       startIcon={startIcon}
       endIcon={endIcon}
+      color='primary'
     >
       {t(label)}
     </Button>

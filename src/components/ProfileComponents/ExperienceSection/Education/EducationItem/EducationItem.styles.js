@@ -1,38 +1,32 @@
 const styles = {
-  educationItemContainer: {
+  educationItemContainer: (theme) => ({
     width: '100%',
-    marginBottom: 24,
-    padding: 24,
-    backgroundColor: '#3E3E40',
+    marginBottom: theme.spacing(4),
+    padding: theme.spacing(4),
+    backgroundColor: '#3E3E40', //ask to designers
     borderRadius: 2,
-  },
-  itemHeaderContainer: {
+  }),
+  itemHeaderContainer: (theme) => ({
     width: '100%',
-    marginBottom: 18,
+    marginBottom: theme.spacing(3),
     display: 'flex',
     justifyContent: 'space-between',
-  },
+  }),
   logoTitleContainer: {
     display: 'flex',
     alignItems: 'center',
   },
-  courseTitle: {
-    fontWeight: '500',
-    fontSize: 20,
-    lineHeight: 1.6,
-    color: '#FFFFFF',
-  },
-  schoolTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    lineHeight: 1.01,
-    color: '#C5C5C6',
-  },
-  studyDates: {
-    fontSize: 14,
-    fontWeight: '500',
-    lineHeight: 1.01,
-    color: '#C5C5C6',
-  },
+  courseTitle: (theme) => ({
+    color: theme.palette.text.primary,
+  }),
+  schoolTitle: (theme) => ({
+    color: theme.palette.text.secondary,
+  }),
+  studyDates: (theme) => ({
+    color: theme.palette.text.secondary,
+  }),
+  link: (theme) => ({
+    color: theme.palette.primary[200],
+  }),
 };
 export default styles;

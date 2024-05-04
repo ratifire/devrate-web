@@ -1,6 +1,6 @@
 const styles = {
-  container: {
-    marginTop: 24,
-  },
+  container: (theme) => ({
+    marginTop: theme.spacing(4),
+  }),
 };
 export default styles;

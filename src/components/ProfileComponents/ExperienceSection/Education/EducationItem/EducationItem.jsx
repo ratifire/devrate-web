@@ -13,18 +13,27 @@ const EducationItem = () => {
         <Box sx={styles.logoTitleContainer}>
           <EducationalCourses />
           <Box sx={{ marginLeft: 11 }}>
-            <Typography sx={styles.courseTitle}>PHP course</Typography>
-            <Typography sx={styles.schoolTitle}>HILLEL IT SCHOOL</Typography>
+            <Typography variant='h6' sx={styles.courseTitle}>
+              PHP course
+            </Typography>
+            <Typography variant='subtitle2' sx={styles.schoolTitle}>
+              HILLEL IT SCHOOL
+            </Typography>
           </Box>
         </Box>
-        <Box sx={styles.studyDates}>2016-2016</Box>
+        <Box sx={styles.studyDates}>
+          <Typography variant='subtitle3' sx={styles.studyDates}>
+            2016-2016
+          </Typography>
+        </Box>
       </Box>
       {isCollapsed ? (
         <Typography>
           {text.slice(0, 200)}
           <Link
             component='button'
-            variant='body2'
+            variant='subtitle2'
+            sx={styles.link}
             onClick={() => {
               setIsCollapsed(!isCollapsed);
             }}
@@ -37,7 +46,8 @@ const EducationItem = () => {
           {text}
           <Link
             component='button'
-            variant='body2'
+            variant='subtitle2'
+            sx={styles.link}
             onClick={() => {
               setIsCollapsed(!isCollapsed);
             }}

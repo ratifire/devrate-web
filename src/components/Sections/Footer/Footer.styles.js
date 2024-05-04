@@ -7,7 +7,7 @@ const styles = {
     fontWeight: 500,
     fontSize: 16,
     lineHeight: '24px',
-    color: theme.palette.text.primary,
+    color: theme.palette.common.white,
     textDecoration: 'none',
     flexBasis: '100%',
     textAlign: 'center',
@@ -23,7 +23,7 @@ const styles = {
     fontSize: 14,
     fontWeight: 600,
     lineHeight: '20px',
-    color: theme.palette.text.secondary,
+    color: theme.palette.neutral[200],
     textAlign: 'center',
     '@media (min-width: 768px)': {
       textAlign: 'left',
@@ -33,7 +33,7 @@ const styles = {
     fontSize: 14,
     fontWeight: 600,
     lineHeight: '20px',
-    color: theme.palette.text.grey,
+    color: theme.palette.neutral[300],
     textAlign: 'center',
     '@media (min-width: 768px)': {
       textAlign: 'left',

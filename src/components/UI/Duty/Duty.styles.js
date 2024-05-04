@@ -1,16 +1,14 @@
 export const styles = {
-  dutyContainer: {
+  dutyContainer: (theme) => ({
     display: 'inline-block',
-    paddingY: 7,
-    paddingX: 10,
-    marginRight: 16,
-    marginBottom: 16,
+    paddingY: theme.spacing(2),
+    paddingX: theme.spacing(3),
+    marginRight: theme.spacing(3),
+    marginBottom: theme.spacing(3),
     borderRadius: 100,
-    backgroundColor: '#CEB0FA',
-  },
-  dutyText: {
-    fontSize: 16,
-    lineHeight: 1.75,
-    color: '#360083',
-  },
+    backgroundColor: theme.palette.primary[100],
+  }),
+  dutyText: (theme) => ({
+    color: theme.palette.primary[800],
+  }),
 };

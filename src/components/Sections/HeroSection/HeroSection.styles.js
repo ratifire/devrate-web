@@ -16,7 +16,7 @@ export const styles = {
     fontSize: 60,
     fontWeight: 700,
     lineHeight: '80px',
-    background: theme.typography.title.background,
+    background: theme.palette.common.titleGradient,
     backgroundClip: 'text',
     color: 'transparent',
     '&-webkit-background-clip': 'text',
@@ -28,7 +28,7 @@ export const styles = {
     fontWeight: 500,
     fontSize: 22,
     rowHeight: '150%',
-    color: theme.palette.text.secondary,
+    color: theme.palette.neutral[200],
   }),
   button: {
     paddingX: 0,
