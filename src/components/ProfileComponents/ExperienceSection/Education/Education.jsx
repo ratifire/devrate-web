@@ -1,12 +1,16 @@
 import React from 'react';
-import EducationList from './EducationList/EducationList';
 import { Box } from '@mui/material';
 import styles from './Education.styles.js';
+import EducationItem from './EducationItem/EducationItem';
 
 const Education = () => {
   return (
     <Box sx={styles.container}>
-      <EducationList />
+      <Box>
+        {[1, 2, 3].map((el, index) => {
+          return <EducationItem key={index} />;
+        })}
+      </Box>{' '}
     </Box>
   );
 };

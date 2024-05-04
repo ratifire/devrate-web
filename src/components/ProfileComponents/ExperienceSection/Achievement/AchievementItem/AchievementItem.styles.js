@@ -1,43 +1,39 @@
 const styles = {
-  achievementItemContainer: {
+  achievementItemContainer: (theme) => ({
     width: '100%',
-    padding: 24,
-    backgroundColor: '#3E3E40',
-    borderRadius: 2,
-  },
-  itemHeaderContainer: {
+    padding: theme.spacing(4),
+    backgroundColor: '#3E3E40', // check with designers color not correct
+    borderRadius: theme.shape.borderRadius,
+  }),
+  itemHeaderContainer: (theme) => ({
     width: '100%',
-    marginBottom: 16,
+    marginBottom: theme.spacing(3),
     display: 'flex',
     justifyContent: 'space-between',
-  },
+  }),
   logoTitleContainer: {
     display: 'flex',
     alignItems: 'center',
   },
-  achievementTitleYearContainer: {
-    marginLeft: 11,
+  achievementTitleYearContainer: (theme) => ({
+    marginLeft: theme.spacing(2),
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  achievementTitle: {
-    fontSize: 20,
-    fontWeight: '500',
-    lineHeight: 1.6,
-    color: '#FFFFFF',
-  },
-  achiementYear: {
-    marginLeft: 8,
-    fontSize: 14,
-    fontWeight: '500',
-    lineHeight: 1.01,
-    color: '#C5C5C6',
-  },
-  achievementItemText: {
-    fontSize: 16,
-    lineHeight: 1.5,
-    color: 'FFFFFF',
-  },
+  }),
+  achievementTitle: (theme) => ({
+    color: theme.palette.text.primry,
+  }),
+  achiementYear: (theme) => ({
+    marginLeft: theme.spacing(2),
+
+    color: theme.palette.text.secondary,
+  }),
+  icon: (theme) => ({
+    color: theme.palette.primary[200],
+  }),
+  achievementItemText: (theme) => ({
+    color: theme.palette.text.primry,
+  }),
 };
 export default styles;

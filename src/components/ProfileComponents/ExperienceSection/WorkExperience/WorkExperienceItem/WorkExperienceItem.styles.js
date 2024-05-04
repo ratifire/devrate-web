@@ -1,49 +1,40 @@
 const styles = {
-  workExpeirenceItemContainer: {
+  workExpeirenceItemContainer: (theme) => ({
     width: '100%',
-    marginBottom: 24,
-    padding: 24,
-    backgroundColor: '#3E3E40',
+    marginBottom: theme.spacing(4),
+    padding: theme.spacing(4),
+    backgroundColor: '#3E3E40', //check with designers
     borderRadius: 2,
-  },
-  itemHeaderContainer: {
+  }),
+  itemHeaderContainer: (theme) => ({
     width: '100%',
-    marginBottom: 18,
+    marginBottom: theme.spacing(3),
     display: 'flex',
     justifyContent: 'space-between',
-  },
+  }),
   workTitleContainer: {
     display: 'flex',
     flexDirection: 'column',
   },
-  workPosition: {
-    marginBottom: 4,
-    fontWeight: '500',
-    fontSize: 24,
-    lineHeight: 1.33,
-    color: '#FFFFFF',
-  },
-  workPlaceTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    lineHeight: 1.43,
-    color: '#C5C5C6',
-  },
-  menuIcon: {
-    color: '#C5C5C6',
-  },
-  workDutiesContainer: {
+  workPosition: (theme) => ({
+    marginBottom: theme.spacing(1),
+    color: theme.palette.text.primary,
+  }),
+  workPlaceTitle: (theme) => ({
+    color: theme.palette.text.secondary,
+  }),
+  menuIcon: (theme) => ({
+    color: theme.palette.text.secondary,
+  }),
+  workDutiesContainer: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 16,
-  },
-  workDutiesTitle: {
-    marginBottom: 16,
-    fontWeight: '500',
-    fontSize: 20,
-    lineHeight: 1.6,
-    color: '#FFFFFF',
-  },
+    marginTop: theme.spacing(3),
+  }),
+  workDutiesTitle: (theme) => ({
+    marginBottom: theme.spacing(3),
+    color: theme.palette.text.primary,
+  }),
   workDuties: {},
 };
 export default styles;

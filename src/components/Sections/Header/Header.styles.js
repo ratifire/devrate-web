@@ -34,7 +34,7 @@ const styles = {
     fontWeight: 500,
     fontSize: 16,
     lineHeight: '24px',
-    color: theme.palette.text.secondary,
+    color: theme.palette.neutral[200],
     textDecoration: 'none',
   }),
   drawer: {

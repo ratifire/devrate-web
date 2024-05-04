@@ -6,10 +6,10 @@ import SkillsSection from '../../components/ProfileComponents/SkillsSection/Skil
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 import BaseUserInfo from '../../components/ProfileComponents/BaseUserInfo';
 import RightSection from '../../components/ProfileComponents/RightSection';
-import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../redux/auth/authSlice';
 import getCookie from '../../utils/helpers/getCookie';
+import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';
 
 const ProfilePage = () => {
   const name = 'Олена Бондаренко';

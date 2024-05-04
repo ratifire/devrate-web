@@ -1,12 +1,16 @@
 import React from 'react';
-import WorkExperienceList from './WorkExperienceList/WorkExperienceList';
 import { Box } from '@mui/material';
 import styles from './WorkExperience.styles';
+import WorkExperienceItem from './WorkExperienceItem/WorkExperienceItem';
 
 const WorkExperience = () => {
   return (
-    <Box style={styles.container}>
-      <WorkExperienceList />
+    <Box sx={styles.container}>
+      <Box>
+        {[1, 2, 3].map((el, index) => {
+          return <WorkExperienceItem key={index} />;
+        })}
+      </Box>
     </Box>
   );
 };

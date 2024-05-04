@@ -6,7 +6,9 @@ import { styles } from './Duty.styles';
 const Duty = ({ duty }) => {
   return (
     <Box sx={styles.dutyContainer}>
-      <Typography sx={styles.dutyText}>{duty}</Typography>
+      <Typography variant='subtitle2' sx={styles.dutyText}>
+        {duty}
+      </Typography>
     </Box>
   );
 };

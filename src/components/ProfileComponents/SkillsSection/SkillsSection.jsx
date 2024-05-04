@@ -18,35 +18,49 @@ const SkillsSection = () => {
 
   return (
     <Box sx={styles.skillsWrapper}>
-      <Typography sx={styles.skillsTitle}>{t('profile.skills.skillsTitle')}</Typography>
+      <Typography variant='h6' sx={styles.skillsTitle}>
+        {t('profile.skills.skillsTitle')}
+      </Typography>
       <Box sx={styles.hardSkills}>
-        <Typography sx={styles.skillsText}>{t('profile.skills.hardSkills')}:</Typography>
+        <Typography variant='h6' sx={styles.skillsText}>
+          {t('profile.skills.hardSkills')}:
+        </Typography>
         <Rating
           name='hard-skills-rating'
           value={hardSkillsRating}
           onChange={(event, newValue) => handleHardSkillsChange(newValue)}
           sx={{ marginRight: 10 }}
         />
-        <Typography sx={styles.skillsRating}>{hardSkillsRating * 2}/10</Typography>
+        <Typography variant='subtitle2' sx={styles.skillsRating}>
+          {hardSkillsRating * 2}/10
+        </Typography>
       </Box>
       <Box sx={styles.softSkills}>
-        <Typography sx={styles.skillsText}>{t('profile.skills.softSkills')}:</Typography>
+        <Typography variant='subtitle1' sx={styles.skillsText}>
+          {t('profile.skills.softSkills')}:
+        </Typography>
         <Rating
           name='soft-skills-rating'
           value={softSkillsRating}
           onChange={(event, newValue) => handleSoftSkillsChange(newValue)}
           sx={{ marginRight: 10 }}
         />
-        <Typography sx={styles.skillsRating}>{softSkillsRating * 2}/10</Typography>
+        <Typography variant='subtitle2' sx={styles.skillsRating}>
+          {softSkillsRating * 2}/10
+        </Typography>
       </Box>
       <Box sx={styles.interviewHistory}>
         <Box sx={styles.doneInterviews}>
-          <Typography sx={styles.doneInterviewsQuantity}>10</Typography>
-          <Typography>{t('profile.skills.doneInterviews')}</Typography>
+          <Typography variant='subtitle1' sx={styles.doneInterviewsQuantity}>
+            10
+          </Typography>
+          <Typography variant='caption3'>{t('profile.skills.doneInterviews')}</Typography>
         </Box>
         <Box sx={styles.completedInterviews}>
-          <Typography sx={styles.completedInterviewsQuantity}>24</Typography>
-          <Typography>{t('profile.skills.completedInterviews')}</Typography>
+          <Typography variant='subtitle1' sx={styles.completedInterviewsQuantity}>
+            24
+          </Typography>
+          <Typography variant='caption3'>{t('profile.skills.completedInterviews')}</Typography>
         </Box>
       </Box>
     </Box>

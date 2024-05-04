@@ -17,7 +17,13 @@ const HeroSection = () => {
         <Typography sx={styles.title}>{t('home.hero.title')}</Typography>
         <Typography sx={styles.text}>{t('home.hero.text')}</Typography>
         <Box sx={styles.button}>
-          <ButtonDef variant='contained' handlerClick={handleOpen} type='button' label={t('home.hero.button_text')} />
+          <ButtonDef
+            variant='contained'
+            color='secondary'
+            handlerClick={handleOpen}
+            type='button'
+            label={t('home.hero.button_text')}
+          />
         </Box>
       </Box>
     </Container>

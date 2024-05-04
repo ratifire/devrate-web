@@ -1,5 +1,10 @@
+import { blue, green, lime } from '@mui/material/colors';
+
 const getDesignTokens = (mode) => ({
-  spacing: 1,
+  spacing: [0, 4, 8, 16, 24], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
+  shape: {
+    borderRadius: 4, // borderRadius:1 = 4px borderRadius:2 = 8px
+  },
   breakpoints: {
     values: {
       xs: 0,
@@ -11,82 +16,212 @@ const getDesignTokens = (mode) => ({
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',
-    title: {
+    h1: {
+      fontSize: 96,
+      fontWeight: 300,
+      lineHeight: 1.167,
+      letterSpacing: -1.5,
+    },
+    h2: {
       fontSize: 60,
-      fontWeight: 700,
-      background: 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
-      backgroundClip: 'text',
-      color: 'transparent',
-      '&-webkit-background-clip': 'text',
-      '&-webkit-text-fill-color': 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
+      fontWeight: 300,
+      lineHeight: 1.2,
+      letterSpacing: -0.5,
     },
-    aboutTitle: {
-      fontSize: 46,
+    h3: {
+      fontSize: 48,
+      fontWeight: 400,
+      lineHeight: 1.167,
+      letterSpacing: -1.5,
+    },
+    h4: {
+      fontSize: 34,
+      fontWeight: 400,
+      lineHeight: 1.24,
+      letterSpacing: -1.5,
+    },
+    h5: {
+      fontSize: 24,
+      fontWeight: 400,
+      lineHeight: 1.334,
+      letterSpacing: 0,
+    },
+    h6: {
+      fontSize: 20,
       fontWeight: 500,
-      background: 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
-      backgroundClip: 'text',
-      color: 'transparent',
-      '&-webkit-background-clip': 'text',
-      '&-webkit-text-fill-color': 'linear-gradient(90deg, #7562e4 0%, #fb93a6 100%)',
+      lineHeight: 1.6,
+      letterSpacing: 0.15,
     },
-    list: {
-      fontSize: 18,
-      fontWeight: 500,
-      lineHeight: '30px',
-    },
-    subtitle: {
-      fontSize: 22,
-      fontWeight: 500,
-    },
+
     subtitle1: {
+      fontSize: 20,
+      fontWeight: 400,
+      lineHeight: 1.6,
+      letterSpacing: 0.15,
+    },
+    subtitle2: {
       fontSize: 16,
+      fontWeight: 400,
+      lineHeight: 1.75,
+      letterSpacing: 0.15,
+    },
+    subtitle3: {
+      fontSize: 14,
       fontWeight: 500,
+      lineHeight: 1.57,
+      letterSpacing: 0.1,
+    },
+    body: {
+      fontSize: 16,
+      fontWeight: 400,
+      lineHeight: 1.5,
+      letterSpacing: 0.15,
+    },
+    caption1: {
+      fontSize: 14,
+      fontWeight: 400,
+      lineHeight: 1.43,
+      letterSpacing: 0.17,
+    },
+    caption2: {
+      fontSize: 12,
+      fontWeight: 500,
+      lineHeight: 1.66,
+      letterSpacing: 0.4,
+    },
+    caption3: {
+      fontSize: 12,
+      fontWeight: 400,
+      lineHeight: 2.66,
+      letterSpacing: 1,
     },
   },
   palette: {
-    mode,
-    ...(mode === 'light'
+    ...(mode === 'dark'
       ? {
-          // palette values for light mode
-          primary: {
-            main: '#7D66F5E5',
-          },
-          background: {
-            default: '#faf7f7',
-            gradient: 'radial-gradient(61.9% 53.23% at 62.67% 50%, rgb(71, 62, 98) 0%, rgb(71, 62, 98) 100%)',
-            dark: '#3f3f3f',
-            light: '#4F4F4FCC',
+          common: {
+            black: '#000000',
+            white: '#ffffff',
+            titleGradient: 'linear-gradient(90deg, rgb(117, 98, 228), rgb(251, 147, 166))',
           },
           text: {
-            primary: '#000000',
-            secondary: '#29292c',
-            light: '#F1F1F17F',
-            grey: '#5A5A5E',
+            primary: '#ffffff',
+            secondary: '#C5C5C6',
+            disabled: '#C5C5C6', //визначити колір
+          },
+          action: {
+            active: '#B78AF7',
+            hover: '#CEB0FA',
+            selected: '#CEB0FA',
+            disabled: '#C5C5C6', //визначити колір
+            focus: '#CEB0FA',
+          },
+
+          background: {
+            default: '#1D1D1D',
+            backdrop: '#1D1D1D',
+            body: '#1D1D1D',
+            level1: '#1D1D1D',
+            level2: '#303032',
+            level3: '#69696B',
+            gradient: 'radial-gradient(62.0% 54% at 63% 50%, rgba(71, 62, 98, 0.5) 0%, rgba(71, 62, 98, 0) 100%)',
+          },
+          primary: {
+            50: '#EFE6FD',
+            100: '#CEB0FA',
+            200: '#B78AF7',
+            300: '#9654F4',
+            400: '#8133F1',
+            500: '#6200EE',
+            600: '#5900D9',
+            700: '#4600A9',
+            800: '#360083',
+            900: '#290064',
+          },
+          neutral: {
+            50: '#ECECED',
+            100: '#C5C5C6',
+            200: '#A9A9AA',
+            300: '#828283',
+            400: '#69696B',
+            500: '#444446',
+            600: '#3E3E40',
+            700: '#303032',
+            800: '#252527',
+            900: '#1D1D1D',
+          },
+          success: {
+            main: '#64FF2E',
+            dark: '#3AB310',
+            contrastText: '#ffffff',
+          },
+          warning: {
+            main: '#F3DD12',
+            dark: '#D6C20F',
+            contrastText: '#ffffff',
+          },
+          error: {
+            main: '#B72F46',
+            dark: '#A70000',
+            contrastText: '#ffffff',
+          },
+          info: {
+            main: '#25CBFF',
+            azure: '#16FFB9',
+            hover: '#CEB0FA',
+            contrastText: '#ffffff',
           },
         }
       : {
-          // palette values for dark mode
+          //light theme to be adjusted
+          common: {
+            black: '#000000',
+            white: '#ffffff',
+          },
           primary: {
-            main: '#7D66F5E5',
+            50: lime[50],
+            100: lime[100],
+            200: lime[200],
+            300: lime[300],
+            400: lime[400],
+            500: lime[500],
+            600: lime[600],
+            700: lime[700],
+            800: lime[800],
+            900: lime[900],
           },
-          background: {
-            default: '#090909',
-            gradient: 'radial-gradient(62.0% 54% at 63% 50%, rgba(71, 62, 98, 0.5) 0%, rgba(71, 62, 98, 0) 100%)',
-            dark: '#3f3f3f',
-            light: '#4F4F4FCC',
-            border: 'rgba(161, 161, 170, 0.3)',
-            modal: '#1d1d1d',
+          neutral: {
+            50: green[50],
+            100: green[100],
+            200: green[200],
+            300: green[300],
+            400: green[400],
+            500: green[500],
+            600: green[600],
+            700: green[700],
+            800: green[800],
+            900: green[900],
           },
-          action: {
-            disabled: '#FFFFFF66',
-            error: '#DD3350CC',
-            disabledBackground: '#7D66F566',
+          success: {
+            main: '#64FF2E',
+            dark: '#3AB310',
+            contrastText: '#ffffff',
           },
-          text: {
-            primary: '#f1f1f1',
-            secondary: '#a1a1aa',
-            light: '#F1F1F17F',
-            grey: '#5A5A5E',
+          warning: {
+            main: '#F3DD12',
+            dark: '#D6C20F',
+            contrastText: '#ffffff',
+          },
+          error: {
+            main: '#B72F46',
+            dark: '#A70000',
+            contrastText: '#ffffff',
+          },
+          info: {
+            main: '#25CBFF',
+            azure: '#16FFB9',
+            hover: '#CEB0FA',
+            contrastText: '#ffffff',
           },
         }),
   },
@@ -99,14 +234,30 @@ const getDesignTokens = (mode) => ({
       fontVariationSettings: "'slnt' 0",
       WebkitFontSmoothing: 'antialiased',
       MozOsxFontSmoothing: 'grayscale',
-      backgroundColor: '#1D1D1D',
       backgroundImage: 'linear-gradient(180deg, #1d1d1d 0%, #090909 100%)',
+      backgroundColor: 'rgba(29, 29, 29, 0)',
     },
     code: {
       fontFamily: 'Roboto, sans-serif',
     },
     '*': {
       boxSizing: 'border-box',
+    },
+  },
+  components: {
+    MuiButton: {
+      //task # 218 Add MUI styles for button in Theme
+      variants: [
+        {
+          props: (props) => props.variant === 'outlined' && props.color === 'primary',
+          style: {
+            textTransform: 'none',
+            border: `2px dashed ${blue[500]}`,
+            backgroundColor: '#ff0000',
+            color: '#00ff00',
+          },
+        },
+      ],
     },
   },
 });

@@ -1,17 +1,16 @@
 const styles = {
-  experienceContainer: {
+  experienceContainer: (theme) => ({
     width: '100%',
-    padding: 24,
-    backgroundColor: '#303032',
+    padding: theme.spacing(4),
+    background: theme.palette.background.level2,
     borderRadius: 'inherit',
-  },
+  }),
   tabsContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   tabsHeader: {
-    color: '#B78AF7',
     borderBottom: '1px solid #ccc',
   },
   tabItem: {
@@ -19,12 +18,14 @@ const styles = {
     fontSize: 20,
     fontWeight: '500',
   },
-  icon: { color: '#B78AF7' },
-  experienceItemContainer: {
+  icon: (theme) => ({
+    color: theme.palette.primary[200],
+  }),
+  experienceItemContainer: (theme) => ({
     overflow: 'auto',
     maxHeight: 600, // to be adjusted with designers
     minWidth: '100%',
-    backgroundColor: '#303032',
-  },
+    background: theme.palette.background.level2,
+  }),
 };
 export default styles;

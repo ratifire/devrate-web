@@ -23,8 +23,12 @@ const WorkExperienceItem = () => {
     <Box sx={styles.workExpeirenceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
         <Box sx={styles.workTitleContainer}>
-          <Typography sx={styles.workPosition}>Software engineer</Typography>
-          <Typography sx={styles.workPlaceTitle}>Prosper(Avenga) 2020 - 2021</Typography>
+          <Typography variant='h5' sx={styles.workPosition}>
+            Software engineer
+          </Typography>
+          <Typography variant='subtitle3' sx={styles.workPlaceTitle}>
+            Prosper(Avenga) 2020 - 2021
+          </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
           <MoreVertIcon />
@@ -32,7 +36,9 @@ const WorkExperienceItem = () => {
       </Box>
       <Typography>{text}</Typography>
       <Box sx={styles.workDutiesContainer}>
-        <Typography sx={styles.workDutiesTitle}>{t('profile.experience.duties')}</Typography>
+        <Typography variant='h6' sx={styles.workDutiesTitle}>
+          {t('profile.experience.duties')}
+        </Typography>
         <Box sx={styles.workDuties}>
           {mockData.map((duty, index) => (
             <Duty key={index} duty={duty} />
