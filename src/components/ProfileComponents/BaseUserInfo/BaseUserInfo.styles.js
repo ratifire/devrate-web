@@ -1,29 +1,29 @@
 export const styles = {
-  wrapper: {
+  wrapper: (theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    padding: 24,
-  },
-  wrapperAvatar: {
+    padding: theme.spacing(4),
+  }),
+  wrapperAvatar: (theme) => ({
     flex: '1 0 100%',
-    marginRight: 0,
-    marginBottom: 4,
-    '> button': {
-      padding: 0,
-      borderRadius: '4px',
+    marginRight: theme.spacing(0),
+    marginBottom: theme.spacing(1),
+    '> button': (theme) => ({
+      padding: theme.spacing(0),
+      borderRadius: 1,
       width: '100%',
       height: '100%',
-    },
-    '@media (min-width: 600px)': {
+    }),
+    '@media (min-width: 600px)': (theme) => ({
       flex: '1 0 132px',
-      marginRight: 16,
-      marginBottom: 0,
-    },
-  },
+      marginRight: theme.spacing(3),
+      marginBottom: theme.spacing(0),
+    }),
+  }),
   avatar: {
     width: 132,
     height: 132,
-    borderRadius: '4px',
+    borderRadius: 1,
   },
   wrapperText: {
     flex: '1 0 calc(100% - 148px)',
@@ -33,36 +33,36 @@ export const styles = {
     position: 'absolute',
     top: 0,
     right: 0,
-    button: {
-      color: '#A9A9AA',
-    },
+    button: (theme) => ({
+      color: theme.palette.neutral['100'],
+    }),
   },
-  userName: {
+  userName: (theme) => ({
+    // тут треба поправити на майбутне
     fontSize: 24,
     lineHeight: '38px',
     fontWeight: 500,
-    color: '#fff',
+    color: theme.palette.text.primary,
     letterSpacing: '0.15px',
-    marginBottom: 4,
+    marginBottom: theme.spacing(1),
     paddingRight: 40,
-  },
-  speciality: {
-    fontSize: 20,
-    lineHeight: '30px',
-    color: '#C5C5C6',
-    letterSpacing: '0.15px',
-    marginBottom: 4,
-  },
-  city: {
+  }),
+  speciality: (theme) => ({
+    color: theme.palette.text.secondary,
+    marginBottom: theme.spacing(1),
+  }),
+  city: (theme) => ({
+    // тут треба поправити на майбутне
     display: 'flex',
     fontSize: 16,
     lineHeight: '22px',
     fontWeight: 500,
-    color: '#C5C5C6',
+    color: theme.palette.text.secondary,
     letterSpacing: '0.17px',
-    marginBottom: 4,
-  },
+    marginBottom: theme.spacing(1),
+  }),
   online: {
+    // тут треба поправити на майбутне
     display: 'flex',
     fontSize: 16,
     lineHeight: '22px',
@@ -70,29 +70,29 @@ export const styles = {
     color: '#64FF2E',
     letterSpacing: '0.17px',
   },
-  icon: {
+  icon: (theme) => ({
     fontSize: 18,
-    marginRight: 4,
-  },
-  buttons: {
+    marginRight: theme.spacing(1),
+  }),
+  buttons: (theme) => ({
     flex: '1 1 100%',
     display: 'flex',
     width: '100%',
-    gridGap: 16,
-    marginTop: 20,
-  },
-  btn: {
-    paddingY: 14,
+    gridGap: theme.spacing(4),
+    marginTop: '20px',
+  }),
+  btn: (theme) => ({
+    paddingY: '14px',
     flex: '1 0 calc(100% - 60px)',
     textTransform: 'lowercase',
-    backgroundColor: '#8133F1',
+    backgroundColor: theme.palette.primary['400'],
     '::first-letter': {
       textTransform: 'uppercase',
     },
-  },
-  btnIcon: {
+  }),
+  btnIcon: (theme) => ({
     flex: '1 0 44px',
-    color: '#B78AF7',
-    borderRadius: '4px',
-  },
+    color: theme.palette.action.active,
+    borderRadius: 1,
+  }),
 };

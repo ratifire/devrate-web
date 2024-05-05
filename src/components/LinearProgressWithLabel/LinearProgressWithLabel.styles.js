@@ -4,28 +4,24 @@ export const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column-reverse',
-    gridGap: 8,
   },
   wrapperProgress: {
     width: '100%',
     mr: 1,
   },
-  progress: {
-    backgroundColor: '#69696B',
+  progress: (theme) => ({
+    backgroundColor: theme.palette.neutral['400'],
     height: 20,
-    borderRadius: 10,
-    '>span': {
-      backgroundColor: '#8133F1',
-      borderRadius: 10,
-    },
-  },
+    borderRadius: 2.5,
+    '>span': (theme) => ({
+      backgroundColor: theme.palette.primary['400'],
+      borderRadius: 2.5,
+    }),
+  }),
   wrapperText: {
     minWidth: 35,
   },
-  text: {
-    fontSize: 16,
-    lineHeight: '28px',
-    color: '#C5C5C6',
-    letterSpacing: '0.15px',
-  },
+  text: (theme) => ({
+    color: theme.palette.text.secondary,
+  }),
 };
