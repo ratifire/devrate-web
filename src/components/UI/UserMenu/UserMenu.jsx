@@ -27,8 +27,6 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
     <Box
       sx={styles.userMenuBox}
       role="presentation"
-      // onClick={toggleDrawer(false)}
-      // onKeyDown={toggleDrawer(false)}
     >
       <Box sx={styles.upperMenu}>
         <Typography sx={styles.menuTitle} variant="h5" component="div">Аккаунт</Typography>
@@ -48,7 +46,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
           </ListItem>
         </RouterLink>
 
-        <RouterLink style={styles.menuLink} to={links.profile}>
+        <RouterLink style={styles.menuLink} to={links.schedule}>
           <ListItem disablePadding>
             <ListItemButton sx={styles.listItemButton}>
               <ListItemIcon>
@@ -62,7 +60,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
       </List>
       <Divider />
       <List>
-        <RouterLink style={styles.menuLink} to={links.profile}>
+        <RouterLink style={styles.menuLink} to={links.specializations}>
           <ListItem disablePadding>
             <ListItemButton sx={styles.listItemButton}>
               <ListItemIcon>
@@ -73,7 +71,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
           </ListItem>
         </RouterLink>
 
-        <RouterLink style={styles.menuLink} to={links.profile}>
+        <RouterLink style={styles.menuLink} to={links.interviews}>
           <ListItem disablePadding>
             <ListItemButton sx={styles.listItemButton}>
               <ListItemIcon>
@@ -87,7 +85,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
       </List>
       <Divider />
       <List>
-        <RouterLink style={styles.menuLink} to={links.profile}>
+        <RouterLink style={styles.menuLink} to={links.settings}>
           <ListItem disablePadding>
             <ListItemButton sx={styles.listItemButton}>
               <ListItemIcon>
@@ -98,7 +96,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
           </ListItem>
         </RouterLink>
 
-        <RouterLink style={styles.menuLink} to={links.profile}>
+        <RouterLink style={styles.menuLink} to={links.saved}>
           <ListItem disablePadding>
             <ListItemButton sx={styles.listItemButton}>
               <ListItemIcon>
