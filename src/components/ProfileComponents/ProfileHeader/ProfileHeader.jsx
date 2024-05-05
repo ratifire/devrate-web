@@ -9,12 +9,23 @@ import { ReactComponent as Loupe } from '../../../assets/icons/loupe.svg';
 import { useFormik } from 'formik';
 import UserAvatar from '../../UI/UserAvatar';
 import PropTypes from 'prop-types';
+import UserMenu from '../../UI/UserMenu';
 
 const initialValues = {
   query: '',
 };
 
 function ProfileHeader({ userName }) {
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState( false);
+
+  const toggleDrawer = (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -70,10 +81,10 @@ function ProfileHeader({ userName }) {
             <Message />
           </Badge>
         </IconButton>
-        <Button sx={styles.userPhoto}>
-          <UserAvatar userName={userName} size='sm' />
-
+        <Button sx={styles.userPhoto} onClick={toggleDrawer}>
+          <UserAvatar userName={userName} size='sm'/>
         </Button>
+        <UserMenu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
     </AppBar>
   );
