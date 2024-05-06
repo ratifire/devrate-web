@@ -25,7 +25,7 @@ function Header() {
       return <ButtonDef variant='text' handlerClick={handleOpen} type='button' label='home.links.login' />;
     return (
       <Link to={navigationsLinks.profile} component={RouterLink} sx={styles.link}>
-        profile
+        Profile
       </Link>
     );
   };
