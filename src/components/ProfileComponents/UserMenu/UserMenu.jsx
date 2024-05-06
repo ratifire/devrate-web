@@ -7,11 +7,11 @@ import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import SettingsIcon from '@mui/icons-material/Settings';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import LogoutIcon from '@mui/icons-material/Logout';
-import EastIcon from '@mui/icons-material/East';
 import PropTypes from 'prop-types';
 import styles from './UserMenu.styles';
 import { Link as RouterLink } from "react-router-dom";
 import links from '../../../utils/links/links';
+import { ReactComponent as RightArrow } from '../../../assets/icons/east.svg';
 
 const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
 
@@ -23,7 +23,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
       <Box sx={styles.upperMenu}>
         <Typography sx={styles.menuTitle} variant="h5" component="div">Аккаунт</Typography>
         <IconButton onClick={toggleDrawer}>
-          <EastIcon/>
+          <RightArrow/>
         </IconButton>
       </Box>
       <List>
