@@ -79,7 +79,7 @@ const getDesignTokens = (mode) => ({
     },
     caption1: {
       fontSize: 14,
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: 1.43,
       letterSpacing: 0.17,
     },
