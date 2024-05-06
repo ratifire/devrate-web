@@ -4,7 +4,7 @@ import {
   Typography,
   // List,
   Box,
-  // Divider,
+  Divider,
   ListItem,
   ListItemButton,
   ListItemIcon,
@@ -142,7 +142,8 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
                 </IconButton>
               </Box>
 
-            {links.map((link) => (
+            {links.map((link, index) => (
+              <React.Fragment key={link.path}>
               <Link key={link.path} to={link.path} component={RouterLink} sx={styles.menuLink} target={link.target}>
                 {/*{t(name)}*/}
                 <ListItem disablePadding>
@@ -154,6 +155,8 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
                   </ListItemButton>
                 </ListItem>
               </Link>
+              {index % 2 !== 0 ? <Divider key={index} sx={{borderColor: "white"}} /> : null}
+              </React.Fragment>
             ))}
             </Box>
           </Drawer>
