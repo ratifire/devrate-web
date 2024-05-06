@@ -89,6 +89,7 @@ const getDesignTokens = (mode) => ({
       lineHeight: 1.66,
       letterSpacing: 0.4,
     },
+    //overline
     caption3: {
       fontSize: 12,
       fontWeight: 400,

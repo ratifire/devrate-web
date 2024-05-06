@@ -9,7 +9,9 @@ const LanguagesList = ({ data }) => {
       {data.map(({ level, language, id }) => (
         <Box key={id} sx={styles.wrapper}>
           <Box sx={styles.language}>{language}</Box>
-          <Typography sx={styles.level}>{level}</Typography>
+          <Typography variant='caption3' sx={styles.level}>
+            {level}
+          </Typography>
         </Box>
       ))}
     </>

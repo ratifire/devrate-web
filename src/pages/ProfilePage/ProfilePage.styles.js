@@ -1,23 +1,24 @@
 export const styles = {
-  container: {
-    paddingX: '8px',
+  container: (theme) => ({
+    paddingTop: theme.spacing(4),
+    paddingX: theme.spacing(2),
     '@media (min-width: 1272px)': {
       maxWidth: '1536px',
     },
     '@media (min-width: 600px)': {
-      paddingX: '24px',
+      paddingX: theme.spacing(4),
     },
-  },
-  contentWrapper: {
+  }),
+  contentWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
     gridTemplateRows: 'auto auto',
-    gridGap: '24px',
+    gridGap: theme.spacing(4),
     ' > div': {
-      borderRadius: '8px',
-      backgroundColor: '#303032',
+      borderRadius: 2,
+      backgroundColor: theme.palette.background.level2,
     },
-  },
+  }),
   baseUserInfo: {
     gridColumn: '1/6',
     gridRow: '1/2',
