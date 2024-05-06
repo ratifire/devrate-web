@@ -1,10 +1,10 @@
-import { ReactComponent as Profile } from '../../assets/icons/person_filled.svg';
-import { ReactComponent as Schedule } from '../../assets/icons/calendar_filled.svg';
-import { ReactComponent as Specializations } from '../../assets/icons/school_filled.svg';
-import { ReactComponent as Interviews } from '../../assets/icons/videocamera.svg';
-import { ReactComponent as Settings } from '../../assets/icons/settings_filled.svg';
-import { ReactComponent as Bookmark } from '../../assets/icons/bookmark.svg';
-import { ReactComponent as Logout } from '../../assets/icons/logout_filled.svg';
+import { ReactComponent as Profile } from '../../../assets/icons/person_filled.svg';
+import { ReactComponent as Schedule } from '../../../assets/icons/calendar_filled.svg';
+import { ReactComponent as Specializations } from '../../../assets/icons/school_filled.svg';
+import { ReactComponent as Interviews } from '../../../assets/icons/videocamera.svg';
+import { ReactComponent as Settings } from '../../../assets/icons/settings_filled.svg';
+import { ReactComponent as Bookmark } from '../../../assets/icons/bookmark.svg';
+import { ReactComponent as Logout } from '../../../assets/icons/logout_filled.svg';
 
 import links from '../../../utils/links/links';
 

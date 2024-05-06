@@ -1,7 +1,9 @@
 const styles = {
-  userMenuBox :{
+  userMenuBox : (theme) => ({
+    height: '100%',
     width: 300,
-  },
+    backgroundColor: theme.palette.neutral['800'],
+  }),
   upperMenu: {
     marginTop: 32,
     display: "flex",
