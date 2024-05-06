@@ -25,7 +25,7 @@ const BaseUserInfo = ({ userName }) => {
         <Typography variant='h1' sx={styles.userName}>
           {userName}
         </Typography>
-        <Typography variant='h2' sx={styles.speciality}>
+        <Typography variant='h6' sx={styles.speciality}>
           PHP developer
         </Typography>
         <Typography sx={styles.city}>

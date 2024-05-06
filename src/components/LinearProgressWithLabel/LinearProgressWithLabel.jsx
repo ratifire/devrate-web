@@ -15,7 +15,7 @@ function LinearProgressWithLabel(props) {
       </Box>
       <Box sx={styles.wrapperText}>
         <Typography
-          variant='body2'
+          variant='subtitle2'
           sx={styles.text}
         >{`${t('profile.baseUserInfo.loading')} ${Math.round(props.value)}%`}</Typography>
       </Box>
