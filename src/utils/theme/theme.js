@@ -1,4 +1,4 @@
-import { blue, green, lime } from '@mui/material/colors';
+import { green, lime } from '@mui/material/colors';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -247,15 +247,48 @@ const getDesignTokens = (mode) => ({
   },
   components: {
     MuiButton: {
-      //task # 218 Add MUI styles for button in Theme
       variants: [
+        {
+          props: (props) => props.variant === 'contained' && props.color === 'primary',
+          style: {
+            fontSize: 16,
+            fontWeight: 500,
+            lineHeight: '16px',
+            color: '#ffffff',
+            textAlign: 'center',
+            textTransform: 'uppercase',
+            padding: '12px 20px',
+            width: '100%',
+            backgroundColor: '#8133F1',
+            '&:hover': {
+              backgroundColor: '#360083',
+            },
+            '&:disabled': {
+              backgroundColor: '#1d1d1d',
+              color: '#FFFFFF80',
+            },
+          },
+        },
         {
           props: (props) => props.variant === 'outlined' && props.color === 'primary',
           style: {
-            textTransform: 'none',
-            border: `2px dashed ${blue[500]}`,
-            backgroundColor: '#ff0000',
-            color: '#00ff00',
+            fontSize: 16,
+            fontWeight: 500,
+            lineHeight: '24px',
+            color: '#8133F1',
+            textAlign: 'center',
+            textTransform: 'uppercase',
+            marginY: 0,
+            padding: '12px 20px',
+            width: '100%',
+            backgroundColor: 'transparent',
+            '&:hover': {
+              backgroundColor: 'transparent',
+            },
+            '&:disabled': {
+              backgroundColor: 'transparent',
+              color: '#ECECED',
+            },
           },
         },
       ],

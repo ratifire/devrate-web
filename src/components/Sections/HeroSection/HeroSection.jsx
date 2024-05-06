@@ -18,7 +18,7 @@ const HeroSection = () => {
         <Typography variant='h5' sx={styles.text}>
           {t('home.hero.text')}
         </Typography>
-        <Box>
+        <Box sx={{ width: '170px' }}>
           <ButtonDef
             variant='contained'
             color='secondary'

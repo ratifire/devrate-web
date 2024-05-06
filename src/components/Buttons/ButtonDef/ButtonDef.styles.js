@@ -7,8 +7,8 @@ export const styles = {
     textAlign: 'center',
     textTransform: 'uppercase',
     marginY: 0,
-    paddingY: 20,
-    paddingX: 12,
+    paddingY: '20px',
+    paddingX: '12px',
     width: '100%',
     backgroundColor: theme.palette.primary.main,
     '&:hover': {
