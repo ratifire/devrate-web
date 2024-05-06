@@ -9,7 +9,7 @@ import { ReactComponent as Loupe } from '../../../assets/icons/loupe.svg';
 import { useFormik } from 'formik';
 import UserAvatar from '../../UI/UserAvatar';
 import PropTypes from 'prop-types';
-import UserMenu from '../../UI/UserMenu';
+import UserMenu from '../UserMenu';
 
 const initialValues = {
   query: '',
