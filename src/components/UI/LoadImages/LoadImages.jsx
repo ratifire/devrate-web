@@ -14,7 +14,9 @@ const LoadImages = () => {
     width: 240,
     height: 240,
   });
+
   const [image, setImage] = useState(null);
+
   const [scale, setScale] = useState(1);
 
   const handleWheel = (e) => {
