@@ -16,7 +16,7 @@ const initialValues = {
 };
 
 function ProfileHeader({ userName }) {
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState( false);
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const toggleDrawer = (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -24,7 +24,6 @@ function ProfileHeader({ userName }) {
     }
     setIsDrawerOpen(!isDrawerOpen);
   };
-
 
   const formik = useFormik({
     initialValues,
@@ -55,13 +54,7 @@ function ProfileHeader({ userName }) {
             value={formik.values.query}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            sx={{
-              '& .MuiOutlinedInput-input': {
-                paddingY: '8px!important',
-                paddingX: '12px!important',
-              },
-              width: 276,
-            }}
+            sx={styles.input}
             endAdornment={
               <InputAdornment position='end'>
                 <IconButton type='submit' onClick={formik.handleSubmit} edge='end'>
@@ -82,7 +75,7 @@ function ProfileHeader({ userName }) {
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
-          <UserAvatar userName={userName} size='sm'/>
+          <UserAvatar userName={userName} size='sm' />
         </Button>
         <UserMenu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
