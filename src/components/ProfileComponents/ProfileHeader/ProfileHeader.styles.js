@@ -1,14 +1,13 @@
 const styles = {
-  header: {
+  header: (theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingY: 12,
-    paddingX: 24,
-    marginBottom: 24,
+    paddingY: theme.spacing(3),
+    paddingX: theme.spacing(4),
     width: '100%',
-    backgroundColor: '#303032',
-  },
+    backgroundColor: theme.palette.background.level2,
+  }),
   toolbar: {
     justifyContent: 'space between',
   },
@@ -16,10 +15,17 @@ const styles = {
     flexGrow: 1,
     lineHeight: 0,
   },
-  headerNav: {
+  headerNav: (theme) => ({
     display: { xs: 'none', md: 'flex' },
     alignItems: 'center',
-    gap: 30,
+    gap: theme.spacing(4),
+  }),
+  input: {
+    '& .MuiOutlinedInput-input': {
+      paddingY: '8px!important',
+      paddingX: '12px!important',
+    },
+    width: '276px',
   },
   userPhoto: {
     minWidth: 44,
