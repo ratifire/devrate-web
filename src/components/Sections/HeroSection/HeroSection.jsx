@@ -15,8 +15,10 @@ const HeroSection = () => {
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
         <Typography sx={styles.title}>{t('home.hero.title')}</Typography>
-        <Typography sx={styles.text}>{t('home.hero.text')}</Typography>
-        <Box sx={styles.button}>
+        <Typography variant='h5' sx={styles.text}>
+          {t('home.hero.text')}
+        </Typography>
+        <Box>
           <ButtonDef
             variant='contained'
             color='secondary'

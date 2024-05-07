@@ -17,13 +17,19 @@ const AboutSection = () => {
               <Typography sx={styles.title}>{t('home.about.title')}</Typography>
               <List sx={styles.list}>
                 <ListItem disablePadding sx={styles.listItem}>
-                  <Typography sx={styles.text}>{t('home.about.text1')}</Typography>
+                  <Typography variant='subtitle1' sx={styles.text}>
+                    {t('home.about.text1')}
+                  </Typography>
                 </ListItem>
                 <ListItem disablePadding sx={styles.listItem}>
-                  <Typography sx={styles.text}>{t('home.about.text2')}</Typography>
+                  <Typography variant='subtitle1' sx={styles.text}>
+                    {t('home.about.text2')}
+                  </Typography>
                 </ListItem>
                 <ListItem disablePadding sx={styles.listItem}>
-                  <Typography sx={styles.text}>{t('home.about.text3')}</Typography>
+                  <Typography variant='subtitle1' sx={styles.text}>
+                    {t('home.about.text3')}
+                  </Typography>
                 </ListItem>
               </List>
             </Box>
