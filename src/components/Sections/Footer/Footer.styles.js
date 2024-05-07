@@ -1,6 +1,6 @@
 const styles = {
   container: {
-    '@media (min-width: 600px)': { paddingX: '12px' },
+    '@media (min-width: 600px)': { paddingX: '12px', paddingTop: '180px', paddingBottom: '60px' },
   },
   link: (theme) => ({
     marginLeft: 0,
@@ -19,7 +19,8 @@ const styles = {
     },
   }),
   copyright: (theme) => ({
-    marginBottom: 10,
+    marginRight: 0,
+    paddingTop:'26px',
     fontSize: 14,
     fontWeight: 600,
     lineHeight: '20px',
@@ -33,6 +34,7 @@ const styles = {
     fontSize: 14,
     fontWeight: 600,
     lineHeight: '20px',
+    paddingTop:'10px',
     color: theme.palette.neutral[300],
     textAlign: 'center',
     '@media (min-width: 768px)': {
@@ -44,12 +46,18 @@ const styles = {
     marginLeft: 0,
     display: 'flex',
     alignItems: 'center',
-    flexWrap: 'wrap',
+    justifyContent:' space-between',
+    flexWrap: 'no-wrap',
+    
     '@media (min-width: 768px)': {
       marginLeft: 'auto',
+      
     },
     '@media (min-width: 520px)': {
-      display: 'block',
+      justifyContent:' space-between ',
+      gridGap:'10px',
+      whiteSpace: 'nowrap',
+      alignItems: 'flex-end',
     },
   },
   wrapper: {
@@ -72,6 +80,8 @@ const styles = {
     display: 'none',
     '@media (min-width: 768px)': {
       display: 'inline-block',
+      marginRight:'36px',
+      
     },
   },
   socialGroup: {
@@ -79,8 +89,8 @@ const styles = {
     maxWidth: 200,
     display: 'flex',
     gridGap: 20,
+    paddingLeft:'30px',
     '@media (min-width: 520px)': {
-      display: 'inline-block',
     },
   },
 };
