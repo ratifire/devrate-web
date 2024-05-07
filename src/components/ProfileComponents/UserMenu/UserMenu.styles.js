@@ -4,41 +4,43 @@ const styles = {
     width: 300,
     backgroundColor: theme.palette.neutral['800'],
   }),
-  upperMenu: {
-    marginTop: 32,
+  upperMenu: (theme) => ({
+    marginTop: '32px',
     display: "flex",
     direction: "row",
     justifyContent: "space-around",
-    spacing: 2,
-  },
-  menuTitle: {
-    fontWeight: '400',
-    fontSize: 24,
-  },
+    spacing: theme.spacing(2),
+  }),
+  menuTitle: (theme) => ({
+      fontWeight: theme.typography.h5.fontWeight,
+      fontSize: theme.typography.h5.fontSize,
+    }),
 
-  menuLink: {
-    textDecoration: 'none',
-    color: '#C5C5C6',
-    display: 'block',
-  },
+  menuLink: (theme) =>({
+      textDecoration: 'none',
+      color: theme.palette.text.secondary,
+      display: 'block',
+    }),
 
-  listItemButton: {
-    '& .MuiListItemIcon-root':{
-      color: '#C5C5C6',
-    },
-    '& .MuiListItemText-primary': {
-      fontWeight: 500,
-      fontSize: 20,
-      letterSpacing: 0.15,
-    },
-    '&:hover': {
-      '& .MuiListItemIcon-root': {
-        color: '#B78AF7',
+  listItemButton: (theme) => (
+    {
+      '& .MuiListItemIcon-root':{
+        color: theme.palette.text.secondary,
       },
       '& .MuiListItemText-primary': {
-        color: '#B78AF7',
+        fontWeight: theme.typography.h6.fontWeight,
+        fontSize: theme.typography.h6.fontSize,
+        lineHeight: theme.typography.h6.lineHeight,
+        letterSpacing: theme.typography.h6.letterSpacing,
       },
-    },
-  },
+      '&:hover': {
+        '& .MuiListItemIcon-root': {
+          color: theme.palette.action.active,
+        },
+        '& .MuiListItemText-primary': {
+          color: theme.palette.action.active,
+        },
+      },
+    })
 };
 export default styles;
