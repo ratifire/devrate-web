@@ -36,11 +36,7 @@ export const styles = {
     color: theme.palette.neutral[50],
   }),
   text: (theme) => ({
-    marginBottom: 10,
-    fontWeight: 500,
-    fontSize: 18,
-    lineHeight: '30px',
-    letterSpacing: '1.62%',
+    marginBottom: theme.spacing(2),
     color: theme.palette.neutral[50],
   }),
   card: (theme) => ({
