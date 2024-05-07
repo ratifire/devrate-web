@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 import styles from './UserMenu.styles';
 import { Link as RouterLink } from "react-router-dom";
 import links from './profileRoutes';
-import { ReactComponent as RightArrow } from '../../../assets/icons/east.svg';
+import { ReactComponent as RightArrow } from "../../../assets/icons/east.svg";
 // import { useTranslation } from 'react-i18next';
 
 const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
@@ -155,7 +155,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
                   </ListItemButton>
                 </ListItem>
               </Link>
-              {index % 2 !== 0 ? <Divider key={index} sx={{borderColor: "white"}} /> : null}
+              {index % 2 !== 0 && <Divider key={index} sx={{borderColor: "white"}} /> }
               </React.Fragment>
             ))}
             </Box>

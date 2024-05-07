@@ -1,10 +1,10 @@
-import { ReactComponent as Profile } from '../../../assets/icons/person_filled.svg';
-import { ReactComponent as Schedule } from '../../../assets/icons/calendar_filled.svg';
-import { ReactComponent as Specializations } from '../../../assets/icons/school_filled.svg';
-import { ReactComponent as Interviews } from '../../../assets/icons/videocamera.svg';
-import { ReactComponent as Settings } from '../../../assets/icons/settings_filled.svg';
-import { ReactComponent as Bookmark } from '../../../assets/icons/bookmark.svg';
-import { ReactComponent as Logout } from '../../../assets/icons/logout_filled.svg';
+import PersonIcon from '@mui/icons-material/Person';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import SchoolIcon from '@mui/icons-material/School';
+import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
+import SettingsIcon from '@mui/icons-material/Settings';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import links from '../../../utils/links/links';
 
@@ -12,43 +12,43 @@ export default [
   {
     name: 'profile',
     path: links.profile,
-    icon: Profile,
+    icon: PersonIcon,
     target: '_blank',
   },
   {
     name: 'schedule',
     path: links.schedule,
-    icon: Schedule,
+    icon: CalendarTodayIcon,
     target: '_blank',
   },
   {
     name: 'specializations',
     path: links.specializations,
-    icon: Specializations,
+    icon: SchoolIcon,
     target: '_blank',
   },
   {
     name: 'interviews',
     path: links.interviews,
-    icon: Interviews,
+    icon: VideoCameraFrontIcon,
     target: '_blank',
   },
   {
     name: 'settings',
     path: links.settings,
-    icon: Settings,
+    icon: SettingsIcon,
     target: '_blank',
   },
   {
     name: 'bookmark',
     path: links.bookmark,
-    icon: Bookmark,
+    icon: BookmarkIcon,
     target: '_blank',
   },
   {
     name: 'logout',
     path: links.home,
-    icon: Logout,
+    icon: LogoutIcon,
     target: '_blank',
   },
 ]
