@@ -35,7 +35,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
                     <ListItemIcon>
                         <link.icon/>
                     </ListItemIcon>
-                    <ListItemText primary={t(`profile.userMenu.${link.name}`)}  />
+                    <ListItemText primary={t(link.name)}  />
                   </ListItemButton>
                 </ListItem>
               </Link>

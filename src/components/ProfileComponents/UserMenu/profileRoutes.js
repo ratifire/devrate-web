@@ -10,43 +10,43 @@ import links from '../../../utils/links/links';
 
 export default [
   {
-    name: 'profile',
+    name: 'profile.userMenu.profile',
     path: links.profile,
     icon: PersonIcon,
     target: '_blank',
   },
   {
-    name: 'schedule',
+    name: 'profile.userMenu.schedule',
     path: links.schedule,
     icon: CalendarTodayIcon,
     target: '_blank',
   },
   {
-    name: 'specializations',
+    name: 'profile.userMenu.specializations',
     path: links.specializations,
     icon: SchoolIcon,
     target: '_blank',
   },
   {
-    name: 'interviews',
+    name: 'profile.userMenu.interviews',
     path: links.interviews,
     icon: VideoCameraFrontIcon,
     target: '_blank',
   },
   {
-    name: 'settings',
+    name: 'profile.userMenu.settings',
     path: links.settings,
     icon: SettingsIcon,
     target: '_blank',
   },
   {
-    name: 'bookmark',
+    name: 'profile.userMenu.bookmark',
     path: links.bookmark,
     icon: BookmarkIcon,
     target: '_blank',
   },
   {
-    name: 'logout',
+    name: 'profile.userMenu.logout',
     path: links.home,
     icon: LogoutIcon,
     target: '_blank',
