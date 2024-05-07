@@ -138,6 +138,15 @@ export const en = {
         languages: 'Languages',
         aboutMe: 'About me',
       },
+      userMenu: {
+        profile: 'Profile',
+        schedule: 'Schedule',
+        specializations: 'Specializations',
+        interviews: 'Interviews',
+        settings: 'Settings',
+        bookmark: 'Bookmarks',
+        logout: 'Logout',
+      },
     },
   },
 };
