@@ -12,17 +12,17 @@ const styles = {
     justifyContent: "space-around",
     spacing: theme.spacing(2),
   }),
-  menuTitle: (theme) => ({
-      fontWeight: theme.typography.h5.fontWeight,
-      fontSize: theme.typography.h5.fontSize,
-    }),
-
+  menuTitle: {
+      fontWeight: 500,
+      fontSize: 24,
+      lineHeight: 2.4,
+      letterSpacing: 0.15,
+    },
   menuLink: (theme) =>({
       textDecoration: 'none',
       color: theme.palette.text.secondary,
       display: 'block',
     }),
-
   listItemButton: (theme) => (
     {
       '& .MuiListItemIcon-root':{
@@ -32,7 +32,7 @@ const styles = {
       '& .MuiListItemText-primary': {
         fontWeight: theme.typography.h6.fontWeight,
         fontSize: theme.typography.h6.fontSize,
-        lineHeight: theme.typography.h6.lineHeight,
+        lineHeight: 2.3,
         letterSpacing: theme.typography.h6.letterSpacing,
       },
       '&:hover': {
@@ -42,9 +42,7 @@ const styles = {
         '& .MuiListItemText-primary': {
           color: theme.palette.action.active,
         },
-        // '& .MuiButtonBase-root-MuiListItemButton-root': {
-        //   background: theme.palette.background.level2,
-        // }
+        backgroundColor: 'rgba(0, 0, 0, 0.0)',
       },
     }),
   iconItem: (theme) => ({
