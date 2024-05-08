@@ -33,13 +33,13 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
                 <ListItem disablePadding>
                   <ListItemButton sx={styles.listItemButton}>
                     <ListItemIcon>
-                        <link.icon/>
+                        <link.icon sx={styles.iconItem} />
                     </ListItemIcon>
                     <ListItemText primary={t(link.name)}  />
                   </ListItemButton>
                 </ListItem>
               </Link>
-              {index % 2 !== 0 && <Divider key={index} sx={{borderColor: "white"}} /> }
+              {index % 2 !== 0 && <Divider key={index} sx={styles.divider} /> }
               </React.Fragment>
             ))}
             </Box>
