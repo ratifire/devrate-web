@@ -139,6 +139,15 @@ export const uk = {
         languages: 'Мови',
         aboutMe: 'Про мене',
       },
+      userMenu: {
+        profile: 'Профіль',
+        schedule: 'Розклад',
+        specializations: 'Спеціалізації',
+        interviews: 'Співбесіди',
+        settings: 'Налаштування',
+        bookmark: 'Збережене',
+        logout: 'Вийти',
+      },
     },
   },
 };
