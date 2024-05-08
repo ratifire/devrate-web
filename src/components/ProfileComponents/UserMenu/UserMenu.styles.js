@@ -12,12 +12,6 @@ const styles = {
     justifyContent: "space-around",
     spacing: theme.spacing(2),
   }),
-  menuTitle: {
-      fontWeight: 500,
-      fontSize: 24,
-      lineHeight: 2.4,
-      letterSpacing: 0.15,
-    },
   menuLink: (theme) =>({
       textDecoration: 'none',
       color: theme.palette.text.secondary,

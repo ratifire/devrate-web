@@ -21,7 +21,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
               role="presentation"
             >
               <Box sx={styles.upperMenu}>
-                <Typography sx={styles.menuTitle} variant="h5" component="div">Аккаунт</Typography>
+                <Typography variant="h5" component="div">Аккаунт</Typography>
                 <IconButton onClick={toggleDrawer}>
                   <EastIcon sx={styles.menuLink}/>
                 </IconButton>
