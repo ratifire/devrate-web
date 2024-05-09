@@ -147,6 +147,15 @@ export const en = {
         bookmark: 'Bookmarks',
         logout: 'Logout',
       },
+      modal: {
+        userInfo: {
+          dropPhoto: {
+            first: 'Drop photo here ',
+            second: 'or',
+            third: ' download from your device',
+          },
+        },
+      },
     },
   },
 };

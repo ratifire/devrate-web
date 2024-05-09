@@ -5,6 +5,10 @@ export const styles = {
     justifyContent: 'center',
     gridGap: theme.spacing(3),
   }),
+  dropZoneWrapper: {
+    width: '334px',
+    height: '334px',
+  },
   dropZone: (theme) => ({
     width: 334,
     height: 334,
@@ -17,6 +21,7 @@ export const styles = {
     border: '1px dashed',
     borderColor: theme.palette.neutral[500],
     borderRadius: 1,
+    cursor: 'pointer',
   }),
   icon: (theme) => ({
     fontSize: 64,

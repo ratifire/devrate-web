@@ -148,6 +148,15 @@ export const uk = {
         bookmark: 'Збережене',
         logout: 'Вийти',
       },
+      modal: {
+        userInfo: {
+          dropPhoto: {
+            first: 'Опустіть фото сюди',
+            second: 'або',
+            third: ' завантажити зі свого пристрою',
+          },
+        },
+      },
     },
   },
 };
