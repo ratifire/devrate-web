@@ -8,6 +8,7 @@ const modalSlice = createSlice({
     openConfirmation: false,
     openCheckEmail: false,
     openResetPassword: false,
+    openUserInfo: false,
   },
   reducers: {
     openModal: (state, action) => {

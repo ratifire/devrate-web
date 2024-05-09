@@ -8,12 +8,15 @@ import { useTranslation } from 'react-i18next';
 import LinearProgressWithLabel from '../../LinearProgressWithLabel';
 import UserAvatar from '../../UI/UserAvatar';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { openModal } from '../../../redux/modal/modalSlice';
 
 const BaseUserInfo = ({ userName }) => {
   // const handleOpen = 1;
   const { t } = useTranslation();
   const [progress] = React.useState(60);
-
+  const dispatch = useDispatch();
+  const handleOpen = () => dispatch(openModal({ modalName: 'openUserInfo' }));
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
@@ -22,7 +25,7 @@ const BaseUserInfo = ({ userName }) => {
         </Button>
       </Box>
       <Box sx={styles.wrapperText}>
-        <Typography variant='h1' sx={styles.userName}>
+        <Typography variant='h5' sx={styles.userName}>
           {userName}
         </Typography>
         <Typography variant='h6' sx={styles.speciality}>
@@ -37,7 +40,7 @@ const BaseUserInfo = ({ userName }) => {
           {t('profile.baseUserInfo.online')}
         </Typography>
         <Box sx={styles.wrapperTextBtn}>
-          <IconButton sx={styles.btnIcon} aria-label='Edit user information'>
+          <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpen}>
             <EditIcon />
           </IconButton>
         </Box>
