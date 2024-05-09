@@ -1,3 +1,4 @@
+// ConfirmationSchema.js
 import * as Yup from 'yup';
 
 export const ConfirmationSchema = Yup.object().shape({

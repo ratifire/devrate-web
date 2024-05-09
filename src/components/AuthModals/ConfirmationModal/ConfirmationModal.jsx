@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, FormControl, FormHelperText, Link, OutlinedInput, Typography } from '@mui/material';
-import styles from './ConfirmationModal.styles';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { ButtonDef } from '../../Buttons';
 import { ConfirmationSchema } from './ConfirmationSchema';
@@ -11,6 +10,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useConfirmEmailMutation } from '../../../redux/auth/authApiSlice';
+import styles from './ConfirmationModal.styles';
 
 const initialValues = {
   text0: '',
@@ -80,6 +80,9 @@ const ConfirmationModal = () => {
     }
   };
 
+  // Определение состояния активности кнопки
+  const isButtonActive = Object.values(formik.values).every(val => val !== '');
+
   // Визначення вмісту для FormHelperText
   const helperTextContent = Object.keys(formik.errors).some((key) => formik.touched[key]) ? 'Error Message' : null;
 
@@ -130,7 +133,12 @@ const ConfirmationModal = () => {
         <FormHelperText sx={styles.textHelper}>{helperTextContent}</FormHelperText>
 
         <Box sx={styles.wrapperBtn}>
-          <ButtonDef variant='contained' handlerClick={formik.handleSubmit} label='modal.confirmation.btn_confirm' />
+          <ButtonDef
+            variant='contained'
+            handlerClick={formik.handleSubmit}
+            label='modal.confirmation.btn_confirm'
+            disabled={!isButtonActive}
+          />
         </Box>
         <Box sx={styles.spamCheckContainer}>
           <Typography href='#' sx={styles.policyText}>

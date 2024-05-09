@@ -1,3 +1,7 @@
+// ConfirmationModal.styles.js
+export const buttonColorFilled = '#7D44567'; // Цвет кнопки, когда все цифры введены
+export const buttonColorEmpty = '#7D66F566'; // Цвет кнопки, когда не все цифры введены
+
 const styles = {
   title: (theme) => ({
     fontSize: 16,
@@ -7,7 +11,7 @@ const styles = {
     textAlign: 'center',
     letterSpacing: '-1.1%',
     marginTop: 48,
-    marginBottom: 30,
+    marginBottom: '30px',
   }),
   codeErrorWrapper: { display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 32 },
   codeErrorIcon: {
@@ -23,7 +27,7 @@ const styles = {
     fontWeight: 400,
     letterSpacing: '1.1%',
   },
-  mainTextWrapper: { display: 'flex', flexDirection: 'column', marginBottom: 32 },
+  mainTextWrapper: { display: 'flex', flexDirection: 'column', marginBottom: '32px' },
   mainText: {
     display: 'inline',
     fontSize: 14,
@@ -31,6 +35,7 @@ const styles = {
     lineHeight: 1.5,
     color: '#F1F1F14D',
     letterSpacing: '-1.1%',
+    textAlign:'center',
   },
   userEmail: (theme) => ({
     fontSize: 14,
@@ -40,8 +45,8 @@ const styles = {
     letterSpacing: '-1.1%',
   }),
   wrapperBtn: {
-    marginTop: 44,
-    marginBottom: 37,
+    marginTop: '32px',
+    marginBottom: '37px',
   },
   spamCheckContainer: {
     marginBottom: '80px',
@@ -75,4 +80,5 @@ const styles = {
     },
   }),
 };
+
 export default styles;
