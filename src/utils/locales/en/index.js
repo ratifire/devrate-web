@@ -149,12 +149,13 @@ export const en = {
       },
       modal: {
         userInfo: {
-          dropPhoto: {
+           dropPhoto: {
             first: 'Drop photo here ',
             second: 'or',
             third: ' download from your device',
           },
-        },
+           titlePersonal: 'Personal info',
+         },
       },
     },
   },

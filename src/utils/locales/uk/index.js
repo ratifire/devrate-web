@@ -150,12 +150,13 @@ export const uk = {
       },
       modal: {
         userInfo: {
-          dropPhoto: {
+           dropPhoto: {
             first: 'Опустіть фото сюди',
             second: 'або',
             third: ' завантажити зі свого пристрою',
           },
-        },
+           titlePersonal: 'Персональна інформація',
+         },
       },
     },
   },
