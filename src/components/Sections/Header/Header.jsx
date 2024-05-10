@@ -9,7 +9,7 @@ import { ButtonDef } from '../../Buttons';
 import { openModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import navigationsLinks from '../../../utils/links/links';
+import navigationsLinks from '../../../router/links';
 
 function Header() {
   const dispatch = useDispatch();
