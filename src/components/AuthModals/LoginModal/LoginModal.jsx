@@ -14,7 +14,7 @@ import { ButtonDef } from '../../Buttons';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../redux/auth/authSlice';
-import getCookie from '../../../utils/helpers/getCookie';
+import { useCookies } from 'react-cookie';
 
 const initialValues = {
   email: '',
@@ -23,6 +23,8 @@ const initialValues = {
 
 const LoginModal = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [cookies] = useCookies('JSESSIONID');
+
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openLogin = useSelector((state) => state.modal.openLogin);
@@ -37,7 +39,7 @@ const LoginModal = () => {
     try {
       const userData = await login({ email: formik.values.email, password: formik.values.password }).unwrap();
       console.log(userData);
-      dispatch(setCredentials({ data: userData, isAuthenticated: getCookie('JSESSIONID') ? true : false }));
+      dispatch(setCredentials({ data: userData, isAuthenticated: Boolean(cookies.JSESSIONID) }));
       resetForm();
       dispatch(closeModal('LoginModal'));
       navigate('/profile');

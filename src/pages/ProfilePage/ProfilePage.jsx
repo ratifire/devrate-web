@@ -8,15 +8,17 @@ import BaseUserInfo from '../../components/ProfileComponents/BaseUserInfo';
 import RightSection from '../../components/ProfileComponents/RightSection';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../redux/auth/authSlice';
-import getCookie from '../../utils/helpers/getCookie';
 import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';
+import { useCookies } from 'react-cookie';
 
 const ProfilePage = () => {
   const name = 'Олена Бондаренко';
   const dispatch = useDispatch();
+  const [cookies] = useCookies('JSESSIONID');
+
   useEffect(() => {
-    dispatch(setCredentials({ isAuthenticated: getCookie('JSESSIONID') ? true : false }));
-  }, [getCookie('JSESSIONID')]);
+    dispatch(setCredentials({ isAuthenticated: Boolean(cookies.JSESSIONID) }));
+  }, [cookies.JSESSIONID]);
 
   return (
     <ProfileTemplate>
