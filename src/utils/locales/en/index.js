@@ -149,8 +149,13 @@ export const en = {
       },
       modal: {
         userInfo: {
-          titlePersonal: 'Personal info',
-        },
+           dropPhoto: {
+            first: 'Drop photo here ',
+            second: 'or',
+            third: ' download from your device',
+          },
+           titlePersonal: 'Personal info',
+         },
       },
     },
   },

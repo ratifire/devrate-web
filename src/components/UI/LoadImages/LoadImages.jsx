@@ -5,21 +5,23 @@ import { styles } from './LoadImages.styles';
 import { Box, Typography } from '@mui/material';
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
+import { useTranslation } from 'react-i18next';
+
+const defaultSettingsCanvas = {
+  borderRadius: 4,
+  preview: undefined,
+  width: 240,
+  height: 240,
+};
 
 const LoadImages = () => {
   const editor = useRef(null);
-  const [state] = useState({
-    borderRadius: 4,
-    preview: undefined,
-    width: 240,
-    height: 240,
-  });
-
+  const [settingsCanvas] = useState({ ...defaultSettingsCanvas });
   const [image, setImage] = useState(null);
-
   const [scale, setScale] = useState(1);
-
+  const { t } = useTranslation();
   const handleWheel = (e) => {
+    e.preventDefault();
     const delta = e.deltaY;
     const scaleFactor = delta > 0 ? -0.1 : 0.1;
     const newScale = scale + scaleFactor;
@@ -32,7 +34,7 @@ const LoadImages = () => {
   //   const img = editor.current?.getImageScaledToCanvas().toDataURL();
   //   const rect = editor.current?.getCroppingRect();
   //   if (!img || !rect) return;
-  //   setState({
+  //   setSettingsCanvas({
   //     ...state,
   //     preview: {
   //       img,
@@ -46,18 +48,15 @@ const LoadImages = () => {
   // };
   return (
     <Box sx={styles.wrapper}>
-      <Dropzone
-        onDrop={(dropped) => setImage(dropped[0])}
-        onClick={true}
-        noKeyboard
-        style={{ width: '334px', height: '334px' }}
-      >
+      <Dropzone onDrop={(dropped) => setImage(dropped[0])} onClick={true} noKeyboard style={styles.dropZoneWrapper}>
         {({ getRootProps, getInputProps }) => (
           <Box sx={styles.dropZone} {...getRootProps()}>
             <input {...getInputProps()} />
             <Typography variant='caption1' sx={styles.text}>
-              Drop photo here <br />
-              or <span> download from your device</span>
+              {t('profile.modal.userInfo.dropPhoto.first')}
+              <br />
+              {t('profile.modal.userInfo.dropPhoto.second')}
+              <span>{t('profile.modal.userInfo.dropPhoto.third')}</span>
             </Typography>
             <BackupOutlinedIcon sx={styles.icon} />
           </Box>
@@ -67,9 +66,9 @@ const LoadImages = () => {
         {image ? (
           <AvatarEditor
             ref={editor}
-            width={state.width}
-            height={state.height}
-            borderRadius={state.borderRadius}
+            width={settingsCanvas.width}
+            height={settingsCanvas.height}
+            borderRadius={settingsCanvas.borderRadius}
             image={image}
             style={styles.preview}
             border={50}
