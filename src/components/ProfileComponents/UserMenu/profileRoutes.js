@@ -6,7 +6,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import links from '../../../utils/links/links';
+import links from '../../../router/links';
 
 export default [
   {

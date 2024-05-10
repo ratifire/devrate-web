@@ -5,7 +5,7 @@ import RequireAuth from '../redux/auth/RequireAuth';
 import ProfilePage from '../pages/ProfilePage';
 import React from 'react';
 import ToastLayout from '../layouts/ToastLayout/ToastLayout';
-import navigationLinks from '../utils/links/links';
+import navigationLinks from './links';
 
 const router = createBrowserRouter([
   {
