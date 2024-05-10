@@ -15,7 +15,7 @@ const ProfilePage = () => {
   const name = 'Олена Бондаренко';
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setCredentials({ isAuthenticated: getCookie('JSESSIONID') ? true : false }));
+    dispatch(setCredentials({ isAuthenticated: Boolean(getCookie('JSESSIONID')) }));
   }, [getCookie('JSESSIONID')]);
 
   return (

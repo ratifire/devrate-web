@@ -8,9 +8,9 @@ import getCookie from '../utils/helpers/getCookie';
 const HomePage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setCredentials({ isAuthenticated: getCookie('JSESSIONID') ? true : false }));
+    dispatch(setCredentials({ isAuthenticated: Boolean(getCookie('JSESSIONID')) }));
   }, [getCookie('JSESSIONID')]);
-
+  console.log(Boolean(getCookie('JSESSIONID')));
   return (
     <HomeTemplate>
       <Header />
