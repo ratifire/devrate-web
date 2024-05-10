@@ -8,17 +8,17 @@ export const styles = {
     flex: '1 0 100%',
     marginRight: theme.spacing(0),
     marginBottom: theme.spacing(1),
-    '> button': (theme) => ({
+    '> button': {
       padding: theme.spacing(0),
       borderRadius: 1,
       width: '100%',
       height: '100%',
-    }),
-    '@media (min-width: 600px)': (theme) => ({
+    },
+    '@media (min-width: 600px)': {
       flex: '1 0 132px',
       marginRight: theme.spacing(3),
       marginBottom: theme.spacing(0),
-    }),
+    },
   }),
   avatar: {
     width: 132,
@@ -38,14 +38,9 @@ export const styles = {
     }),
   },
   userName: (theme) => ({
-    // тут треба поправити на майбутне
-    fontSize: 24,
-    lineHeight: '38px',
-    fontWeight: 500,
     color: theme.palette.text.primary,
-    letterSpacing: '0.15px',
     marginBottom: theme.spacing(1),
-    paddingRight: 40,
+    paddingRight: '38px',
   }),
   speciality: (theme) => ({
     color: theme.palette.text.secondary,
@@ -94,5 +89,11 @@ export const styles = {
     flex: '1 0 44px',
     color: theme.palette.action.active,
     borderRadius: 1,
+    ':hover': {
+      backgroundColor: theme.palette.neutral['800'],
+    },
+    svg: {
+      fontSize: '18px',
+    },
   }),
 };

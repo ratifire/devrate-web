@@ -148,6 +148,11 @@ export const uk = {
         bookmark: 'Збережене',
         logout: 'Вийти',
       },
+      modal: {
+        userInfo: {
+          titlePersonal: 'Персональна інформація',
+        },
+      },
     },
   },
 };

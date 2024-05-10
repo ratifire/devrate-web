@@ -147,6 +147,11 @@ export const en = {
         bookmark: 'Bookmarks',
         logout: 'Logout',
       },
+      modal: {
+        userInfo: {
+          titlePersonal: 'Personal info',
+        },
+      },
     },
   },
 };
