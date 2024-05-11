@@ -2,10 +2,9 @@ import React from 'react';
 import { Avatar } from '@mui/material';
 import { styles } from './UserAvatar.styles';
 import PropTypes from 'prop-types';
-import helperFunctions from '../../../utils/helpers/index'
+import { bgFromString, checkContrastColor } from '../../../utils/helpers/index'
 
 const UserAvatar = ({ userName, src, size }) => {
-  const { bgFromString, checkContrastColor } = helperFunctions;
   const stringAvatar = (name) => {
     const BG_COLOR = bgFromString(name);
     return {
