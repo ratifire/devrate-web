@@ -2,10 +2,10 @@ import React from 'react';
 import { Avatar } from '@mui/material';
 import { styles } from './UserAvatar.styles';
 import PropTypes from 'prop-types';
-import bgFromString from '../../../utils/helpers/bgFromString';
-import checkContrast from '../../../utils/helpers/checkContrastColor';
+import functions from '../../../utils/helpers/index'
 
 const UserAvatar = ({ userName, src, size }) => {
+  const { bgFromString, checkContrastColor } = functions;
   const stringAvatar = (name) => {
     const BG_COLOR = bgFromString(name);
     return {
@@ -18,7 +18,7 @@ const UserAvatar = ({ userName, src, size }) => {
         lineHeight: styles[size].lineHeight,
         letterSpacing: styles[size].letterSpacing,
         fontWeight: styles[size].fontWeight,
-        color: checkContrast(BG_COLOR),
+        color: checkContrastColor(BG_COLOR),
       },
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
