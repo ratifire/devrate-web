@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar } from '@mui/material';
 import { styles } from './UserAvatar.styles';
 import PropTypes from 'prop-types';
-import { bgFromString, checkContrastColor } from '../../../utils/helpers/index'
+import { bgFromString, checkContrastColor } from '../../../utils/helpers'
 
 const UserAvatar = ({ userName, src, size }) => {
   const stringAvatar = (name) => {
