@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { styles } from './LanguagesList.styles';
-import { Box, Typography } from '@mui/material';
+import LanguageLevel from '../LanguageLevel';
 
 const LanguagesList = ({ data }) => {
+  //Needed for Modal to return language on which user clicked
+  const languageDeleteHandler = (language) => {
+    console.log(language);
+  };
+
   return (
     <>
-      {data.map(({ level, language, id }) => (
-        <Box key={id} sx={styles.wrapper}>
-          <Box sx={styles.language}>{language}</Box>
-          <Typography variant='caption3' sx={styles.level}>
-            {level}
-          </Typography>
-        </Box>
+      {data.map(({id, language, level }) => (
+        <LanguageLevel key={id} language={language} level={level} languageDeleteHandler={languageDeleteHandler} />
       ))}
     </>
   );
