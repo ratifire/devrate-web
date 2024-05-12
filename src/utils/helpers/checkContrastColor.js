@@ -1,4 +1,4 @@
-const checkContrast = (bgColor) => {
+const checkContrastColor = (bgColor) => {
   if (bgColor[0] !== '#') {
     throw new Error('The function accepts color only in hex and without transparency');
   }
@@ -10,4 +10,4 @@ const checkContrast = (bgColor) => {
 
   return 0.2126 * r + 0.7152 * g + 0.0722 * b < 128 ? '#ffffff' : '#1D1D1D';
 };
-export default checkContrast;
+export default checkContrastColor;
