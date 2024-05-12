@@ -12,16 +12,19 @@ export default {
     layout: 'centered',
   },
 };
-const languagesLevel = [
+const languageLevel = [
   {
+    id: 1,
     language: 'UK',
     level: 'Native: C1',
   },
   {
+    id: 2,
     language: 'EN',
     level: 'Upper-intermediate: B2',
   },
   {
+    id: 3,
     language: 'FR',
     level: 'Intermediate: B1',
   },
@@ -30,11 +33,10 @@ export const Default = () => (
   <Box
     sx={{
       display: 'flex',
-      gridGap: 8,
       alignItems: 'center',
       flexWrap: 'wrap',
     }}
   >
-    <LanguageLevel key={languagesLevel.id} language={languagesLevel.language} level={languagesLevel.level} />
+    <LanguageLevel key={languageLevel.id} language={languageLevel.language} level={languageLevel.level} />
   </Box>
 );
