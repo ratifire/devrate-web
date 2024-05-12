@@ -1,6 +1,4 @@
-// ConfirmationModal.styles.js
-export const buttonColorFilled = '#7D44567'; // Цвет кнопки, когда все цифры введены
-export const buttonColorEmpty = '#7D66F566'; // Цвет кнопки, когда не все цифры введены
+
 
 const styles = {
   title: (theme) => ({
@@ -35,7 +33,7 @@ const styles = {
     lineHeight: 1.5,
     color: '#F1F1F14D',
     letterSpacing: '-1.1%',
-    textAlign:'center',
+    textAlign: 'center',
   },
   userEmail: (theme) => ({
     fontSize: 14,
@@ -79,6 +77,25 @@ const styles = {
       textDecoration: 'underline',
     },
   }),
+  // New styles for input fields
+  input: {
+    minWidth: 48,
+    width: 48,
+    textAlign: 'center',
+    '& input': {
+      padding: '10px',
+      fontSize: '1rem',
+      border: '1px solid #ced4da',
+      borderRadius: '4px',
+      backgroundColor: 'transparent',
+      transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+      '&:focus': {
+        outline: 'none',
+        borderColor: '#80bdff',
+        boxShadow: '0 0 0 0.2rem rgba(0, 123, 255, 0.25)',
+      },
+    },
+  },
 };
 
 export default styles;
