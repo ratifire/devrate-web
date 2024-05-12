@@ -29,6 +29,12 @@ const languageLevel = [
     level: 'Intermediate: B1',
   },
 ];
+
+const languageDeleteHandler = (language) => {
+  console.log(`Deleting language: ${language}`);
+  // Here should be added more logic to handle deletion of the languages in Modal
+};
+
 export const Default = () => (
   <Box
     sx={{
@@ -38,8 +44,14 @@ export const Default = () => (
       flexWrap: 'wrap',
     }}
   >
-    {languageLevel.map(({ id, language, level }) => (
-      <LanguageLevel key={id} language={language} level={level} />
+    {languageLevel.map(({ id, language, level, tobeDeleted }) => (
+      <LanguageLevel
+        key={id}
+        language={language}
+        level={level}
+        tobeDeleted={tobeDeleted}
+        languageDeleteHandler={languageDeleteHandler}
+      />
     ))}
   </Box>
 );
