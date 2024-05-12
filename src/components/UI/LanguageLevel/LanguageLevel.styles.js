@@ -23,4 +23,8 @@ export const styles = {
     color: theme.palette.primary[800],
     padding: '3px 6px',
   }),
+  icon: (theme) => ({
+    color: theme.palette.primary[600],
+    padding: theme.spacing(0),
+  })
 };
