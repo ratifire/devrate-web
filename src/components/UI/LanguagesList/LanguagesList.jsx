@@ -3,18 +3,16 @@ import PropTypes from 'prop-types';
 import LanguageLevel from '../LanguageLevel';
 
 const LanguagesList = ({ data }) => {
-  //Uncomment this block if you want to see how this would work in Modal
-  // const languageDeleteHandler = (language) => {
-  //   console.log(language);
-  // };
+  //Needed for Modal to return language on which user clicked
+  const languageDeleteHandler = (language) => {
+    console.log(language);
+  };
 
   return (
     <>
       {data.map(({id, language, level }) => (
-        <LanguageLevel key={id} language={language} level={level} />
+        <LanguageLevel key={id} language={language} level={level} languageDeleteHandler={languageDeleteHandler} />
       ))}
-      {/*Uncomment to see for language component will be in modal*/}
-      {/*<LanguageLevel language={data[0].language} level={data[0].level} tobeDeleted languageDeleteHandler={languageDeleteHandler} />*/}
     </>
   );
 };
