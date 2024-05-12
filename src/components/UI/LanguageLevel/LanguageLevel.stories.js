@@ -33,10 +33,13 @@ export const Default = () => (
   <Box
     sx={{
       display: 'flex',
+      gridGap: 8,
       alignItems: 'center',
       flexWrap: 'wrap',
     }}
   >
-    <LanguageLevel key={languageLevel.id} language={languageLevel.language} level={languageLevel.level} />
+    {languageLevel.map(({ id, language, level }) => (
+      <LanguageLevel key={id} language={language} level={level} />
+    ))}
   </Box>
 );
