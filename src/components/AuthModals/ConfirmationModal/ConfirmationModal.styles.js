@@ -28,7 +28,7 @@ const styles = {
   mainTextWrapper: { display: 'flex', flexDirection: 'column', marginBottom: '32px' },
   mainText: {
     display: 'inline',
-    fontSize: 14,
+    fontSize: '14px',
     fontWeight: 500,
     lineHeight: 1.5,
     color: '#F1F1F14D',
@@ -59,9 +59,10 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   turnBackText: {
-    marginRight: 10,
+    marginRight: '10px',
     fontSize: 14,
     lineHeight: 1.43,
     color: '#F1F1F14D',
