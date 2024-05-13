@@ -15,6 +15,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
           <Drawer
             anchor="right"
             open={isDrawerOpen}
+            onClose={toggleDrawer}
           >
             <Box
               sx={styles.userMenuBox}
@@ -22,7 +23,7 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
             >
               <Box sx={styles.upperMenu}>
                 <Typography variant="h5" component="div">Аккаунт</Typography>
-                <IconButton onClick={toggleDrawer}>
+                <IconButton sx={styles.menuLinkBtn} onClick={toggleDrawer}>
                   <EastIcon sx={styles.menuLink}/>
                 </IconButton>
               </Box>

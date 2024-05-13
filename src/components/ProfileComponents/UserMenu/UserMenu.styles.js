@@ -12,10 +12,14 @@ const styles = {
     justifyContent: "space-around",
     spacing: theme.spacing(2),
   }),
+  menuLinkBtn: (theme) => ({
+    borderRadius: theme.spacing(1),
+  }),
   menuLink: (theme) =>({
       textDecoration: 'none',
       color: theme.palette.text.secondary,
       display: 'block',
+      borderRadius: theme.spacing(1),
     }),
   listItemButton: (theme) => (
     {
