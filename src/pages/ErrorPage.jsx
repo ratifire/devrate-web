@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useRouteError } from 'react-router-dom';
+import TextAreaInput from '../components/Inputs/TextAreaInput';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -13,6 +14,7 @@ const ErrorPage = () => {
         <hr />
         <Link to={`/`}>go to home</Link>
       </p>
+      <TextAreaInput/>
     </div>
   );
 };
