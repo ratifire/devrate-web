@@ -20,5 +20,13 @@ export const styles = {
     //   color: 'primary.main',
     //   // Set the label color to the primary color when focused
     // },
-  })
+  }),
+  textHelper: {
+    position: 'absolute',
+    bottom: '-23px',
+  },
+  input: (theme) => ({
+      width: '100%',
+      marginBottom: theme.spacing(4),
+    })
 };

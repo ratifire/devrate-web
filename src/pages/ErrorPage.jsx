@@ -14,7 +14,13 @@ const ErrorPage = () => {
         <hr />
         <Link to={`/`}>go to home</Link>
       </p>
-      <TextAreaInput label="About me" />
+      <TextAreaInput
+        name='modal.editPage.personalInformation.title'
+        label='modal.editPage.personalInformation.title'
+        type="text"
+        // error
+        value="Кваліфікований Senior back-end розробник із 5-річним досвідом.  Працювала з базами даних: MySQL, MariaDB, MongoDB, MVC Framework (CakePHP). Робота з тестовою середовищем для PHP (PHPUnit). TV Archive, написання методів панелі управління / методів SOAP. Робота з тестовою с ередовищем для PHP (PHPUnit). TV Archive, написання методів панелі управління / методів SOAP. Робота з тестовою с ередовищем для PHP (PHPUnit). TV Archive, написання методів панелі управління / методів SOAP."
+        helperText="Here is the error" />
     </div>
   );
 };

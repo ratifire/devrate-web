@@ -112,6 +112,14 @@ export const en = {
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
       },
+    editPage: {
+        personalInformation: {
+          title: 'About me',
+        },
+        workExperience: {
+          title: 'Description'
+        }
+      }
     },
     profile: {
       skills: {
