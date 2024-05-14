@@ -1,3 +1,5 @@
+
+
 const styles = {
   title: (theme) => ({
     fontSize: 16,
@@ -7,7 +9,7 @@ const styles = {
     textAlign: 'center',
     letterSpacing: '-1.1%',
     marginTop: 48,
-    marginBottom: 30,
+    marginBottom: '30px',
   }),
   codeErrorWrapper: { display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 32 },
   codeErrorIcon: {
@@ -23,14 +25,15 @@ const styles = {
     fontWeight: 400,
     letterSpacing: '1.1%',
   },
-  mainTextWrapper: { display: 'flex', flexDirection: 'column', marginBottom: 32 },
+  mainTextWrapper: { display: 'flex', flexDirection: 'column', marginBottom: '32px' },
   mainText: {
     display: 'inline',
-    fontSize: 14,
+    fontSize: '14px',
     fontWeight: 500,
     lineHeight: 1.5,
     color: '#F1F1F14D',
     letterSpacing: '-1.1%',
+    textAlign: 'center',
   },
   userEmail: (theme) => ({
     fontSize: 14,
@@ -40,8 +43,8 @@ const styles = {
     letterSpacing: '-1.1%',
   }),
   wrapperBtn: {
-    marginTop: 44,
-    marginBottom: 37,
+    marginTop: '32px',
+    marginBottom: '37px',
   },
   spamCheckContainer: {
     marginBottom: '80px',
@@ -56,9 +59,10 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   turnBackText: {
-    marginRight: 10,
+    marginRight: '10px',
     fontSize: 14,
     lineHeight: 1.43,
     color: '#F1F1F14D',
@@ -74,5 +78,25 @@ const styles = {
       textDecoration: 'underline',
     },
   }),
+  // New styles for input fields
+  input: {
+    minWidth: 48,
+    width: 48,
+    textAlign: 'center',
+    '& input': {
+      padding: '10px',
+      fontSize: '1rem',
+      border: '1px solid #ced4da',
+      borderRadius: '4px',
+      backgroundColor: 'transparent',
+      transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+      '&:focus': {
+        outline: 'none',
+        borderColor: '#80bdff',
+        boxShadow: '0 0 0 0.2rem rgba(0, 123, 255, 0.25)',
+      },
+    },
+  },
 };
+
 export default styles;
