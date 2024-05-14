@@ -21,7 +21,7 @@ const notifications = [
     title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
     date: '6 годин тому',
     new: false,
-    type: 'info',
+    type: 'warning',
   },
   {
     id: 2,

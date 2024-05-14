@@ -1,17 +1,17 @@
 import React from 'react';
 import {Box, Chip, IconButton, Typography} from "@mui/material";
 import styles from "./Notification.styles";
-import { ReactComponent as Warning } from '../../../../assets/icons/warning.svg';
-import { ReactComponent as Info } from '../../../../assets/icons/info.svg';
-import { ReactComponent as Message } from '../../../../assets/icons/message-dots.svg';
-import { ReactComponent as Close } from '../../../../assets/icons/close.svg';
 import PropTypes from "prop-types";
+import Sms from "@mui/icons-material/SmsOutlined";
+import InfoOutlined from "@mui/icons-material/InfoOutlined";
+import ErrorRounded from "@mui/icons-material/ErrorRounded";
+import Close from "@mui/icons-material/Close";
 
 
 const iconMap = {
-  message: <Message  />,
-  info: <Info  />,
-  warning: <Warning  />,
+  message: <Sms />,
+  info: <InfoOutlined />,
+  warning: <ErrorRounded />,
 }
 
 const Notification = (props) => {
@@ -27,7 +27,7 @@ const Notification = (props) => {
       </Box>
 
       <Box sx={styles.actionWrapper}>
-        <IconButton>
+        <IconButton sx={styles.closeBtn}>
           <Close />
         </IconButton>
 

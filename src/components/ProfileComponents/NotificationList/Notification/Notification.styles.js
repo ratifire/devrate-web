@@ -26,6 +26,9 @@ const styles = {
   badge: (theme) => ({
     color: theme.palette.primary['800'],
   }),
+  closeBtn: (theme) => ({
+    color: theme.palette.common.white,
+  }),
   textWrapper: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
