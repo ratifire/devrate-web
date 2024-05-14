@@ -4,7 +4,7 @@ import { styles } from './TextAreaInput.styles';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
-const TextAreaInput = ({ label = "About me" }) => {
+const TextAreaInput = ({ label }) => {
   const { t } = useTranslation();
 
   return (

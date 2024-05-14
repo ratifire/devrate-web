@@ -14,7 +14,7 @@ const ErrorPage = () => {
         <hr />
         <Link to={`/`}>go to home</Link>
       </p>
-      <TextAreaInput/>
+      <TextAreaInput label="About me" />
     </div>
   );
 };
