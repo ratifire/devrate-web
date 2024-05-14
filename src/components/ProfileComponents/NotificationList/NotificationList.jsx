@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Badge, Box, IconButton, Popover} from "@mui/material";
-import Notification from "../Notification";
-import { ReactComponent as BellNotification } from '../../../assets/icons/bell.svg';
+import Notification from "./Notification";
+import {ReactComponent as BellNotification} from '../../../assets/icons/bell.svg';
 import PropTypes from "prop-types";
 import styles from "./NotificationList.styles"; // import { ReactComponent as LoupeSearch } from '../../../assets/icons/loupe.svg';
 
@@ -25,7 +25,7 @@ const NotificationList = (props) => {
     <>
       <IconButton onClick={bellButtonClickHandler}>
         <Badge color='error' overlap='circular' badgeContent=' ' variant='dot' invisible={false}>
-          <BellNotification />
+          <BellNotification/>
         </Badge>
       </IconButton>
       <Popover
@@ -43,17 +43,19 @@ const NotificationList = (props) => {
         }}
       >
         <Box sx={styles.wrapper}>
-          {props.items.map(item => {
-            return (
-              <Notification key={`notification-${item.id}`}
-                            type={item.type}
-                            id={item.id}
-                            date={item.date}
-                            new={item.new}
-                            title={item.title}
-              />
-            );
-          })}
+          <Box sx={styles.scrollWrapper}>
+            {props.items.map(item => {
+              return (
+                <Notification key={`notification-${item.id}`}
+                              type={item.type}
+                              id={item.id}
+                              date={item.date}
+                              new={item.new}
+                              title={item.title}
+                />
+              );
+            })}
+          </Box>
         </Box>
       </Popover>
     </>
