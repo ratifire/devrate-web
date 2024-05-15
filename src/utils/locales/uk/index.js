@@ -113,6 +113,14 @@ export const uk = {
         password_long: 'Пароль занадто довгий',
         password_must_match: 'Паролі мають збігатися',
       },
+      editPage: {
+        personalInformation: {
+          title: 'Про мене',
+        },
+        workExperience: {
+          title: 'Опис'
+        }
+      }
     },
     profile: {
       skills: {

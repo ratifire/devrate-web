@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.15.4",
     "@mui/material": "^5.15.4",
     "@reduxjs/toolkit": "^2.0.1",
+    "@storybook/addon-actions": "^8.1.1",
     "@storybook/addon-themes": "^7.6.17",
     "formik": "^2.4.5",
     "i18next": "^23.7.16",
