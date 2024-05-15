@@ -88,16 +88,17 @@ const ConfirmationModal = () => {
       />
 
 <Box sx={styles.spamCheckContainer}>
-          <Typography sx={styles.policyText}>{t('modal.confirmation.spam_check_text')}</Typography>
+          <Typography sx={styles.mainText}>{t('modal.confirmation.spam_check_text')}</Typography>
           <Typography sx={{ textAlign: 'center' }}>
-            <RouterLink to={'/'} sx={styles.link} onClick={handleCloseAllModal}>{t('modal.confirmation.repeat_request_link')}</RouterLink>
+            <RouterLink sx={styles.link} to={'/'} onClick={handleCloseAllModal}>{t('modal.confirmation.repeat_request_link')}
+            </RouterLink>
             <Typography>{t('modal.confirmation.repeat_request_text1')}</Typography>
           </Typography>
-          <Typography>
-            <Typography>{t('modal.confirmation.repeat_request_text2')}</Typography>
+          <Typography >
+            <Typography sx={styles.turnBackText}>{t('modal.confirmation.repeat_request_text2')}</Typography>
             <RouterLink to={'/'} sx={styles.link} onClick={handleCloseAllModal}>{t('modal.confirmation.change_email_link')}</RouterLink>
           </Typography>
-        </Box>
+</Box>
         <Box sx={styles.turnBackContainer}>
           <Typography sx={styles.turnBackText}>{t('modal.confirmation.return_on')}</Typography>
           <RouterLink to={'/'} sx={styles.link} onClick={handleCloseAllModal}>{t('modal.confirmation.home_page')}</RouterLink>
