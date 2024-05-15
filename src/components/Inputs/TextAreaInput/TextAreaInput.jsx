@@ -11,7 +11,6 @@ const TextAreaInput = ({ name, value, label, type, error, helperText, handleChan
   const id = uuid();
 
   return (
-    //TODO create storybook for this component
     <>
       <FormControl variant='outlined' sx={styles.input} error={error}>
         <TextField
