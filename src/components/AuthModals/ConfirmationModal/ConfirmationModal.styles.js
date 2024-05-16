@@ -1,14 +1,11 @@
-
-
 const styles = {
   title: (theme) => ({
     fontSize: theme.typography.subtitle2.fontSize,
     fontWeight: theme.typography.subtitle2.fontWeight,
     lineHeight: theme.typography.subtitle2.lineHeight,
+    letterSpacing: theme.typography.subtitle2.letterSpacing,
     color: theme.palette.text.primary,
     textAlign: 'center',
-    letterSpacing: theme.typography.subtitle2.letterSpacing,
-    // marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
   }),
   codeErrorWrapper: (theme) => ({
@@ -17,18 +14,18 @@ const styles = {
     alignItems: 'center',
     marginBottom: theme.spacing(4),
   }),
-  codeErrorIcon: {
+  codeErrorIcon: (theme) => ({
     width: '20px',
     height: '20px',
-    color: '#B72F46CC',
-  },
+    color: theme.palette.text.error,
+  }),
   codeErrorText:(theme) => ({
     marginLeft: theme.spacing(3),
-    color: '#B72F46CC',
-    fontSize: 15,
-    lineHeight: 1.5,
-    fontWeight: 400,
-    letterSpacing: '1.1%',
+    color: theme.palette.text.error,
+    fontSize: theme.typography.subtitle2.fontSize,
+    fontWeight: theme.typography.subtitle2.fontWeight,
+    lineHeight: theme.typography.subtitle2.lineHeight,
+    letterSpacing: theme.typography.subtitle2.letterSpacing,
   }),
   mainTextWrapper:(theme) => ({
      display: 'flex', 
@@ -77,31 +74,33 @@ const styles = {
     lineHeight: theme.typography.subtitle3.lineHeight,
     color: theme.palette.text.secondary,
   }),
-  link: (theme) => ({
-    fontSize: theme.typography.subtitle3.fontSize,
-    lineHeight: theme.typography.subtitle3.lineHeight,
-    textDecoration: 'none',
-    color: theme.palette.text.primary,
-  }),
+  // link: (theme) => ({
+  //   paddingBottom: '60px',
+  //   fontSize: theme.typography.subtitle3.fontSize,
+  //   lineHeight: theme.typography.subtitle3.lineHeight,
+  //   textDecoration: 'none',
+  //   color: theme.palette.text.primary,
+  // }),
+
   // New styles for input fields
-  input: {
-    minWidth: 48,
-    width: 48,
-    textAlign: 'center',
-    '& input': {
-      padding: '10px',
-      fontSize: '1rem',
-      border: '1px solid #ced4da',
-      borderRadius: '4px',
-      backgroundColor: 'transparent',
-      transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
-      '&:focus': {
-        outline: 'none',
-        borderColor: '#80bdff',
-        boxShadow: '0 0 0 0.2rem rgba(0, 123, 255, 0.25)',
-      },
-    },
-  },
+  // input: {
+  //   minWidth: 48,
+  //   width: 48,
+  //   textAlign: 'center',
+  //   '& input': {
+  //     padding: '10px',
+  //     fontSize: '1rem',
+  //     border: '1px solid #ced4da',
+  //     borderRadius: '4px',
+  //     backgroundColor: 'transparent',
+  //     transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+  //     '&:focus': {
+  //       outline: 'none',
+  //       borderColor: '#80bdff',
+  //       boxShadow: '0 0 0 0.2rem rgba(0, 123, 255, 0.25)',
+  //     },
+  //   },
+  // },
 };
 
 export default styles;
