@@ -1,9 +1,5 @@
 const styles = {
   title: (theme) => ({
-    fontSize: theme.typography.subtitle2.fontSize,
-    fontWeight: theme.typography.subtitle2.fontWeight,
-    lineHeight: theme.typography.subtitle2.lineHeight,
-    letterSpacing: theme.typography.subtitle2.letterSpacing,
     color: theme.palette.text.primary,
     textAlign: 'center',
     marginBottom: theme.spacing(4),
@@ -22,10 +18,6 @@ const styles = {
   codeErrorText:(theme) => ({
     marginLeft: theme.spacing(3),
     color: theme.palette.text.error,
-    fontSize: theme.typography.subtitle2.fontSize,
-    fontWeight: theme.typography.subtitle2.fontWeight,
-    lineHeight: theme.typography.subtitle2.lineHeight,
-    letterSpacing: theme.typography.subtitle2.letterSpacing,
   }),
   mainTextWrapper:(theme) => ({
      display: 'flex', 
@@ -34,19 +26,11 @@ const styles = {
     }),
   mainText: (theme) =>({
     display: 'inline',
-    fontSize: theme.typography.subtitle3.fontSize,
-    fontWeight: theme.typography.subtitle3.fontWeight,
-    lineHeight: theme.typography.subtitle3.lineHeight,
     color: theme.palette.text.secondary,
-    letterSpacing: theme.typography.subtitle3.letterSpacing,
     textAlign: 'center',
   }),
   userEmail: (theme) => ({
-    fontSize: theme.typography.subtitle3.fontSize,
-    fontWeight: theme.typography.subtitle3.fontWeight,
-    lineHeight: theme.typography.subtitle3.lineHeight,
     color: theme.palette.text.primary,
-    letterSpacing: theme.typography.subtitle3.letterSpacing,
   }),
   wrapperBtn: (theme) => ({
     marginTop: theme.spacing(4),
@@ -54,12 +38,8 @@ const styles = {
   }),
   spamCheckContainer:(theme) => ({
     marginBottom: theme.spacing(4),
-    fontSize: theme.typography.subtitle3.fontSize,
-    fontWeight: theme.typography.subtitle3.fontWeight,
-    lineHeight: theme.typography.subtitle3.lineHeight,
     color: theme.palette.text.secondary,
     textAlign: 'center',
-    letterSpacing: theme.typography.subtitle3.letterSpacing,
   }),
   turnBackContainer: {
     display: 'flex',
@@ -69,9 +49,6 @@ const styles = {
   },
   turnBackText: (theme) => ({
     marginRight: theme.spacing(2),
-    fontSize: theme.typography.subtitle3.fontSize,
-    fontWeight: theme.typography.subtitle3.fontWeight,
-    lineHeight: theme.typography.subtitle3.lineHeight,
     color: theme.palette.text.secondary,
   }),
   // link: (theme) => ({

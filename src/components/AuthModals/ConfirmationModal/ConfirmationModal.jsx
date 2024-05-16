@@ -60,19 +60,19 @@ const ConfirmationModal = () => {
 
   return (
     <ModalLayout open={openConfirmation} setOpen={handleClose}>
-      <Typography sx={styles.title}>{t('modal.confirmation.title')}</Typography>
+      <Typography variant='subtitle2' sx={styles.title}>{t('modal.confirmation.title')}</Typography>
       {codeError && (
         <Box>
           <CancelIcon sx={styles.codeErrorIcon}/>
-          <Typography sx={styles.codeErrorText}>{t('modal.confirmation.code_error_text')}</Typography>
+          <Typography variant='subtitle2' sx={styles.codeErrorText}>{t('modal.confirmation.code_error_text')}</Typography>
         </Box>
       )}
 
       <Box sx={styles.mainTextWrapper}>
-        <Typography sx={styles.mainText}>
-          {t('modal.confirmation.main_text1')} <Typography component='span' sx={styles.userEmail}>user@mail.com</Typography>.
+        <Typography variant='subtitle3' sx={styles.mainText}>
+          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>user@mail.com</Typography>.
         </Typography>
-        <Typography sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
+        <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
       </Box>
 
       <ConfirmationForm
@@ -84,16 +84,16 @@ const ConfirmationModal = () => {
         helperTextContent=""
       />
 
-      <Box sx={styles.spamCheckContainer}>
-        <Typography sx={styles.mainText}>{t('modal.confirmation.spam_check_text')}</Typography>
+      <Box variant='subtitle3' sx={styles.spamCheckContainer}>
+        <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.spam_check_text')}</Typography>
         <Typography sx={{ textAlign: 'center' }}>
           <StyledRouterLink to={'/'} onClick={handleCloseAllModal}>
             {t('modal.confirmation.repeat_request_link')}
           </StyledRouterLink>
-          <Typography>{t('modal.confirmation.repeat_request_text1')}</Typography>
+          <Typography variant='subtitle3'> {t('modal.confirmation.repeat_request_text1')}</Typography>
         </Typography>
         <Typography>
-          <Typography sx={styles.turnBackText}>{t('modal.confirmation.repeat_request_text2')}</Typography>
+          <Typography variant='subtitle3' sx={styles.turnBackText}>{t('modal.confirmation.repeat_request_text2')}</Typography>
           <StyledRouterLink to={'/'} onClick={handleCloseAllModal}>
             {t('modal.confirmation.change_email_link')}
           </StyledRouterLink>
@@ -101,7 +101,7 @@ const ConfirmationModal = () => {
       </Box>
       
       <Box sx={styles.turnBackContainer}>
-        <Typography sx={styles.turnBackText}>{t('modal.confirmation.return_on')}</Typography>
+        <Typography variant='subtitle3' sx={styles.turnBackText}>{t('modal.confirmation.return_on')}</Typography>
         <StyledRouterLink to={'/'} onClick={handleCloseAllModal}>
           {t('modal.confirmation.home_page')}
         </StyledRouterLink>
