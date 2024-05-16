@@ -7,12 +7,11 @@ import { Box, Button, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import LinearProgressWithLabel from '../../LinearProgressWithLabel';
 import UserAvatar from '../../UI/UserAvatar';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
 
-const BaseUserInfo = ({ userName }) => {
-  // const handleOpen = 1;
+const BaseUserInfo = () => {
+  const { firstName, lastName } = useSelector((state) => state.auth.user.data);
   const { t } = useTranslation();
   const [progress] = React.useState(60);
   const dispatch = useDispatch();
@@ -21,12 +20,12 @@ const BaseUserInfo = ({ userName }) => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
         <Button type='button'>
-          <UserAvatar userName={userName} size='l' />
+          <UserAvatar userName={`${firstName} ${lastName}`} size='l' />
         </Button>
       </Box>
       <Box sx={styles.wrapperText}>
         <Typography variant='h5' sx={styles.userName}>
-          {userName}
+          {`${firstName} ${lastName}`}
         </Typography>
         <Typography variant='h6' sx={styles.speciality}>
           PHP developer
@@ -64,7 +63,4 @@ const BaseUserInfo = ({ userName }) => {
   );
 };
 
-BaseUserInfo.propTypes = {
-  userName: PropTypes.string.isRequired,
-};
 export default BaseUserInfo;
