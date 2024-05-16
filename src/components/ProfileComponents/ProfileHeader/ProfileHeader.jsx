@@ -2,14 +2,13 @@ import React from 'react';
 import { AppBar, Badge, Box, Button, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import styles from './ProfileHeader.styles';
 import Logo from '../../UI/Logo';
-
 import { ReactComponent as Message } from '../../../assets/icons/message.svg';
 import { ReactComponent as Loupe } from '../../../assets/icons/loupe.svg';
 import { useFormik } from 'formik';
 import UserAvatar from '../../UI/UserAvatar';
-import PropTypes from 'prop-types';
 import UserMenu from '../UserMenu';
-import NotificationList from "../NotificationList";
+import NotificationList from '../NotificationList';
+import { useSelector } from 'react-redux';
 
 const initialValues = {
   query: '',
@@ -46,7 +45,8 @@ const notifications = [
   },
 ];
 
-function ProfileHeader({ userName }) {
+function ProfileHeader() {
+  const { firstName, lastName } = useSelector((state) => state.auth.user.data);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const toggleDrawer = (event) => {
@@ -102,16 +102,12 @@ function ProfileHeader({ userName }) {
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
-          <UserAvatar userName={userName} size='sm' />
+          <UserAvatar userName={`${firstName} ${lastName}`} size='sm' />
         </Button>
         <UserMenu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
     </AppBar>
   );
 }
-
-ProfileHeader.propTypes = {
-  userName: PropTypes.string.isRequired,
-};
 
 export default ProfileHeader;
