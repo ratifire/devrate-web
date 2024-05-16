@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import Dropzone from 'react-dropzone';
 import { styles } from './LoadImages.styles';
@@ -6,20 +6,23 @@ import { Box, Typography } from '@mui/material';
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
-const defaultSettingsCanvas = {
-  borderRadius: 4,
-  preview: undefined,
-  width: 240,
-  height: 240,
-};
-
-const LoadImages = () => {
+const LoadImages = ({ getImg, imgData }) => {
   const editor = useRef(null);
-  const [settingsCanvas] = useState({ ...defaultSettingsCanvas });
-  const [image, setImage] = useState(null);
-  const [scale, setScale] = useState(1);
+
+  const defaultSettingsCanvas = {
+    image: imgData,
+    borderRadius: 4,
+    isTransparent: false,
+    width: 240,
+    height: 240,
+    showGrid: true,
+  };
+  const [settingsCanvas, setSettingsCanvas] = useState({ ...defaultSettingsCanvas });
+  const [scale, setScale] = useState(1.2);
   const { t } = useTranslation();
+  console.log(editor, '1111111111111');
   const handleWheel = (e) => {
     e.preventDefault();
     const delta = e.deltaY;
@@ -30,46 +33,52 @@ const LoadImages = () => {
       setScale(newScale);
     }
   };
-  // const handleSave = () => {
-  //   const img = editor.current?.getImageScaledToCanvas().toDataURL();
-  //   const rect = editor.current?.getCroppingRect();
-  //   if (!img || !rect) return;
-  //   setSettingsCanvas({
-  //     ...state,
-  //     preview: {
-  //       img,
-  //       rect,
-  //       scale: state.scale,
-  //       width: state.width,
-  //       height: state.height,
-  //       borderRadius: state.borderRadius,
-  //     },
-  //   });
-  // };
+  const handleSave = () => {
+    const img = editor.current?.getImageScaledToCanvas().toDataURL();
+    const rect = editor.current?.getCroppingRect();
+    if (!img || !rect) return;
+    console.log(img, 'q2222222222222222222');
+    setSettingsCanvas({
+      ...settingsCanvas,
+      img,
+      rect,
+      scale: scale,
+    });
+    getImg(settingsCanvas);
+  };
+  useEffect(() => {
+    handleSave();
+    console.log(settingsCanvas);
+  }, [settingsCanvas.image, editor.current]);
   return (
     <Box sx={styles.wrapper}>
-      <Dropzone onDrop={(dropped) => setImage(dropped[0])} onClick={true} noKeyboard style={styles.dropZoneWrapper}>
+      <Dropzone
+        onDrop={([image]) => setSettingsCanvas({ ...settingsCanvas, image })}
+        onClick={true}
+        noKeyboard
+        style={styles.dropZoneWrapper}
+      >
         {({ getRootProps, getInputProps }) => (
           <Box sx={styles.dropZone} {...getRootProps()}>
             <input {...getInputProps()} />
             <Typography variant='caption1' sx={styles.text}>
-              {t('profile.modal.userInfo.dropPhoto.first')}
+              {t('profile.modal.userInfo.photo.dropPhoto.first')}
               <br />
-              {t('profile.modal.userInfo.dropPhoto.second')}
-              <span>{t('profile.modal.userInfo.dropPhoto.third')}</span>
+              {t('profile.modal.userInfo.photo.dropPhoto.second')}
+              <span>{t('profile.modal.userInfo.photo.dropPhoto.third')}</span>
             </Typography>
             <BackupOutlinedIcon sx={styles.icon} />
           </Box>
         )}
       </Dropzone>
       <>
-        {image ? (
+        {settingsCanvas.image ? (
           <AvatarEditor
             ref={editor}
             width={settingsCanvas.width}
             height={settingsCanvas.height}
             borderRadius={settingsCanvas.borderRadius}
-            image={image}
+            image={settingsCanvas.image}
             style={styles.preview}
             border={50}
             color={[29, 29, 29, 0.25]}
@@ -85,5 +94,8 @@ const LoadImages = () => {
     </Box>
   );
 };
-
+LoadImages.propTypes = {
+  getImg: PropTypes.func.isRequired,
+  imgData: PropTypes.any,
+};
 export default LoadImages;
