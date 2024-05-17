@@ -42,7 +42,7 @@ const ResetPassword = () => {
 
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
-      <Typography sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
+      <Typography variant='subtitle3' sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
       <Formik initialValues={formik.initialValues} onSubmit={onSubmit}>
         <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
           <FormInput
@@ -85,10 +85,10 @@ const ResetPassword = () => {
           </Box>
         </Form>
       </Formik>
-      <Typography sx={styles.text}>{t('modal.resetPassword.text_privacy')}</Typography>
-      <Typography sx={styles.textLink}>
+      <Typography  variant='subtitle3' sx={styles.text}>{t('modal.resetPassword.text_privacy')}</Typography>
+      <Typography  variant='subtitle3' sx={styles.textLink}>
         {t('modal.resetPassword.return_on')}
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
+        <Link  variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
           {t('modal.resetPassword.home_page')}
         </Link>
       </Typography>

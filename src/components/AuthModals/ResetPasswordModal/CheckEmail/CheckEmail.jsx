@@ -1,13 +1,9 @@
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-
 import ModalLayout from '../../../../layouts/ModalLayout';
 import styles from './CheckEmail.styles';
-
 import { useTranslation } from 'react-i18next';
-
 import { useFormik } from 'formik';
-
 import { Box, Link, Typography } from '@mui/material';
 import { CheckEmailSchema } from './CheckEmailSchema';
 import { FormInput } from '../../../Inputs';
@@ -41,7 +37,7 @@ const CheckEmail = () => {
 
   return (
     <ModalLayout open={openCheckEmail} setOpen={handleClose}>
-      <Typography sx={styles.title}>{t('modal.checkEmailResetPassword.send_letter_title')}</Typography>
+      <Typography variant='subtitle3' sx={styles.title}>{t('modal.checkEmailResetPassword.send_letter_title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
           name='email'
@@ -63,17 +59,17 @@ const CheckEmail = () => {
           />
         </Box>
       </form>
-      <Box sx={styles.box}>
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
+      <Box variant='subtitle3' sx={styles.box}>
+        <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
           {t('modal.checkEmailResetPassword.privacy_policy')}
         </Link>
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
+        <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
           {t('modal.checkEmailResetPassword.terms_and_conditions')}
         </Link>
       </Box>
-      <Typography sx={styles.textLink}>
+      <Typography variant='subtitle3' sx={styles.textLink}>
         {t('modal.checkEmailResetPassword.return_on')}
-        <Link to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
+        <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
           {t('modal.checkEmailResetPassword.home_page')}
         </Link>
       </Typography>
