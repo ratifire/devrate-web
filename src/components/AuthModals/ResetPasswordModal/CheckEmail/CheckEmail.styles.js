@@ -1,39 +1,27 @@
 const styles = {
   title: (theme) => ({
-    fontSize: 14,
-    fontWeight: 300,
-    lineHeight: '20px',
     color: theme.palette.text.primary,
     textAlign: 'center',
-    marginTop: 48,
-    marginBottom: 30,
+    marginBottom: theme.spacing(4),
   }),
-  textLink: {
-    fontSize: 14,
-    fontWeight: 300,
-    lineHeight: '20px',
-    color: '#f1f1f180',
+  textLink: (theme) => ({
+    color: theme.palette.text.secondary,
     textAlign: 'center',
-    marginTop: 36,
-  },
-  box: {
+    marginTop: theme.spacing(4),
+  }),
+  box: (theme) => ({
     display: 'flex',
-    gridGap: 14,
+    gridGap: theme.spacing(3),
     justifyContent: 'center',
-    fontSize: 14,
-    lineHeight: 1.43,
-  },
+  }),
   link: (theme) => ({
-    fontSize: 14,
-    fontWeight: 300,
-    lineHeight: '20px',
     color: theme.palette.text.primary,
     textAlign: 'center',
     textDecoration: 'underline',
   }),
-  wrapperBtn: {
-    marginTop: 40,
-    marginBottom: 50,
-  },
+  wrapperBtn: (theme) => ({
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+  }),
 };
 export default styles;
