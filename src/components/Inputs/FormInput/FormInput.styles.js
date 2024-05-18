@@ -1,8 +1,8 @@
 export const styles = {
-  input: {
+  input: (theme) => ({
     width: '100%',
-    marginBottom: 24,
-  },
+    marginBottom: theme.spacing(4),
+  }),
   textHelper: {
     position: 'absolute',
     bottom: '-23px',
