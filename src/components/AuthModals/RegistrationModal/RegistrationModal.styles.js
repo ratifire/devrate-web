@@ -1,7 +1,7 @@
 const styles = {
   title: (theme) => ({
     marginTop: 50,
-    marginBottom: 30,
+    marginBottom: theme.spacing(4),
     color: theme.palette.text.primary,
     fontSize: 16,
   }),
