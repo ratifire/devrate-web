@@ -29,7 +29,7 @@ const SkillsSection = () => {
           name='hard-skills-rating'
           value={hardSkillsRating}
           onChange={(event, newValue) => handleHardSkillsChange(newValue)}
-          sx={{ marginRight: 10 }}
+          sx={{ marginRight: '10px' }}
         />
         <Typography variant='subtitle2' sx={styles.skillsRating}>
           {hardSkillsRating * 2}/10
@@ -43,7 +43,7 @@ const SkillsSection = () => {
           name='soft-skills-rating'
           value={softSkillsRating}
           onChange={(event, newValue) => handleSoftSkillsChange(newValue)}
-          sx={{ marginRight: 10 }}
+          sx={{ marginRight: '10px' }}
         />
         <Typography variant='subtitle2' sx={styles.skillsRating}>
           {softSkillsRating * 2}/10

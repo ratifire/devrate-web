@@ -11,16 +11,16 @@ const styles = {
     textDecoration: 'none',
     flexBasis: '100%',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: '20px',
     '@media (min-width: 520px)': {
-      marginLeft: 16,
+      marginLeft: '16px',
       marginBottom: 0,
       textAlign: 'left',
     },
   }),
   copyright: (theme) => ({
     marginRight: 0,
-    paddingTop:'26px',
+    paddingTop: '26px',
     fontSize: 14,
     fontWeight: 600,
     lineHeight: '20px',
@@ -34,7 +34,7 @@ const styles = {
     fontSize: 14,
     fontWeight: 600,
     lineHeight: '20px',
-    paddingTop:'10px',
+    paddingTop: '10px',
     color: theme.palette.neutral[300],
     textAlign: 'center',
     '@media (min-width: 768px)': {
@@ -42,20 +42,19 @@ const styles = {
     },
   }),
   wrapperNav: {
-    marginTop: 20,
+    marginTop: '20px',
     marginLeft: 0,
     display: 'flex',
     alignItems: 'center',
-    justifyContent:' space-between',
+    justifyContent: ' space-between',
     flexWrap: 'no-wrap',
-    
+
     '@media (min-width: 768px)': {
       marginLeft: 'auto',
-      
     },
     '@media (min-width: 520px)': {
-      justifyContent:' space-between ',
-      gridGap:'10px',
+      justifyContent: ' space-between ',
+      gridGap: '10px',
       whiteSpace: 'nowrap',
       alignItems: 'flex-end',
     },
@@ -64,15 +63,15 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom: 20,
+    marginBottom: '20px',
     '@media (min-width: 768px)': {
       alignItems: 'flex-end',
       flexDirection: 'row',
     },
   },
   footer: {
-    paddingTop: 170,
-    paddingBottom: 60,
+    paddingTop: '170px',
+    paddingBottom: '60px',
   },
   logoBoy: {
     width: 30,
@@ -80,18 +79,16 @@ const styles = {
     display: 'none',
     '@media (min-width: 768px)': {
       display: 'inline-block',
-      marginRight:'36px',
-      
+      marginRight: '36px',
     },
   },
   socialGroup: {
     margin: '0 auto',
     maxWidth: 200,
     display: 'flex',
-    gridGap: 20,
-    paddingLeft:'30px',
-    '@media (min-width: 520px)': {
-    },
+    gridGap: '20px',
+    paddingLeft: '30px',
+    '@media (min-width: 520px)': {},
   },
 };
 export default styles;

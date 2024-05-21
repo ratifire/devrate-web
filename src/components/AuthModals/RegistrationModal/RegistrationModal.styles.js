@@ -1,6 +1,6 @@
 const styles = {
   title: (theme) => ({
-    marginTop: 50,
+    marginTop: '50px',
     marginBottom: theme.spacing(4),
     color: theme.palette.text.primary,
     fontSize: 16,
@@ -15,11 +15,11 @@ const styles = {
   inputNameContainer: {
     display: 'flex',
     justifyContent: 'spaceBetween',
-    gridGap: 10,
+    gridGap: '10px',
   },
   wrapperBtn: {
-    marginTop: 37,
-    marginBottom: 50,
+    marginTop: '37px',
+    marginBottom: '50px',
   },
   policyTermsContainer: {
     textAlign: 'center',
@@ -27,7 +27,7 @@ const styles = {
     lineHeight: 1.43,
   },
   policyTermsLink: (theme) => ({
-    marginRight: 10,
+    marginRight: '10px',
     color: theme.palette.text.primary,
     textDecoration: 'underline',
     '&:hover': {
