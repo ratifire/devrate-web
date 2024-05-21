@@ -12,7 +12,7 @@ const EducationItem = () => {
       <Box sx={styles.itemHeaderContainer}>
         <Box sx={styles.logoTitleContainer}>
           <EducationalCourses />
-          <Box sx={{ marginLeft: 11 }}>
+          <Box sx={{ marginLeft: '11px' }}>
             <Typography variant='h6' sx={styles.courseTitle}>
               PHP course
             </Typography>
