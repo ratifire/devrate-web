@@ -3,15 +3,15 @@ import { AboutSection, Footer, Header, HeroSection } from '../components/Section
 import { HomeTemplate } from '../Templates';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../redux/auth/authSlice';
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const [cookies] = useCookies('JSESSIONID');
+  const cookies = Cookies.get('JSESSIONID');
 
   useEffect(() => {
-    dispatch(setCredentials({ isAuthenticated: Boolean(cookies.JSESSIONID) }));
-  }, [cookies.JSESSIONID]);
+    dispatch(setCredentials({ isAuthenticated: Boolean(cookies) }));
+  }, [cookies]);
 
   return (
     <HomeTemplate>

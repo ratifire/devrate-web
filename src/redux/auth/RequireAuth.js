@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 const RequireAuth = () => {
   const location = useLocation();
   const isAuthenticated = useSelector((state) => state.auth.user?.isAuthenticated);
+  // const isAuthenticated = true;
 
   return isAuthenticated ? <Outlet /> : <Navigate to='/' state={{ from: location }} replace />;
 };
