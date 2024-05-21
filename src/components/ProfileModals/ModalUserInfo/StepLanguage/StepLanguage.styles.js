@@ -9,7 +9,7 @@ export const styles = {
     gridGap: theme.spacing(3),
   }),
   iconBtn: (theme) => ({
-    marginTop: '4px',
+    marginTop: theme.spacing(1),
     padding: '12px',
     borderRadius: 1,
     color: theme.palette.primary[200],

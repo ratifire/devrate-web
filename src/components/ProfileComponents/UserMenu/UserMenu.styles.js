@@ -24,7 +24,7 @@ const styles = {
   listItemButton: (theme) => ({
     '& .MuiListItemIcon-root': {
       color: theme.palette.text.secondary,
-      margin: 0,
+      margin: theme.spacing(0),
     },
     '& .MuiListItemText-primary': {
       fontWeight: theme.typography.h6.fontWeight,
