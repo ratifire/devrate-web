@@ -10,17 +10,34 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     confirmEmail: builder.mutation({
-      query: (data) => {
-        console.log('data in confirmEmail', data);
-        return {
-          url: `/auth/signup/${data}`,
-          method: 'PUT',
-          data,
-        };
-      },
+      query: (data) => ({
+        url: `/auth/signup/${data}`,
+        method: 'PUT',
+        data,
+      }),
       onSuccess: (data, variables, api) => {
         console.log('Status code:', api.getState().authApiSlice.requests.confirmEmail.status);
-        // Повертаємо дані, які будуть доступні через useConfirmEmailMutation
+        return data;
+      },
+    }),
+    resetPassword: builder.mutation({
+      query: ({ email }) => ({
+        url: `/auth/password-reset?email=${encodeURIComponent(email)}`,
+        method: 'POST',
+      }),
+      onSuccess: (data, variables, api) => {
+        console.log('Status code:', api.getState().authApiSlice.requests.resetPassword.status);
+        return data;
+      },
+    }),
+    changePassword: builder.mutation({
+      query: ({ code }) => ({
+        url: `/auth/password-reset/${code}`,
+        method: 'POST',
+        body: { code },
+      }),
+      onSuccess: (data, variables, api) => {
+        console.log('Status code:', api.getState().authApiSlice.requests.changePassword.status);
         return data;
       },
     }),
@@ -34,4 +51,4 @@ export const authApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateUserMutation, useConfirmEmailMutation, useLoginMutation } = authApiSlice;
+export const { useCreateUserMutation, useConfirmEmailMutation, useResetPasswordMutation, useChangePasswordMutation, useLoginMutation } = authApiSlice;
