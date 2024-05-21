@@ -163,6 +163,7 @@ export const en = {
             third: ' download from your device',
           },
            titlePersonal: 'Personal info',
+           titleExperience: 'Work Experience',
          },
       },
     },

@@ -164,6 +164,7 @@ export const uk = {
             third: ' завантажити зі свого пристрою',
           },
            titlePersonal: 'Персональна інформація',
+           titleExperience: 'Досвід роботи',
          },
       },
     },
