@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, styled, Tab, Tabs } from '@mui/material';
+import { Box, IconButton, styled, Tab, Tabs } from '@mui/material';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
 import Skills from './Skills/Skills';
 import Achievment from './Achievement/Achievment';
 import { useTranslation } from 'react-i18next';
 import WorkExperience from './WorkExperience/WorkExperience';
+import { Add } from '@mui/icons-material';
 
 const ExperienceSection = () => {
   const [value, setValue] = React.useState('workExperience');
@@ -16,6 +17,9 @@ const ExperienceSection = () => {
     setValue(newValue);
   };
 
+  const handleAddFeature = (value) => {
+    console.log(value);
+  };
   const renderAdditionalInfo = (value) => {
     {
       switch (value) {
@@ -68,7 +72,13 @@ const ExperienceSection = () => {
           <StyledTab value='skills' label={t('profile.experience.skills')} sx={styles.tabItem} />
           <StyledTab value='education' label={t('profile.experience.education')} sx={styles.tabItem} />
         </StyledTabs>
-        {/*<Add sx={styles.icon} />*/}
+        <IconButton
+          onClick={() => {
+            handleAddFeature(value);
+          }}
+        >
+          <Add sx={styles.icon} />
+        </IconButton>
       </Box>
       <Box sx={styles.experienceItemContainer}>{renderAdditionalInfo(value)}</Box>
     </Box>

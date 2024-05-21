@@ -44,7 +44,7 @@ TextAreaInput.propTypes = {
   error: PropTypes.bool.isRequired,
   helperText: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-}
+};
 
 TextAreaInput.defaultProps = {
   name: '',
@@ -57,4 +57,3 @@ TextAreaInput.defaultProps = {
 };
 
 export default TextAreaInput;
-
