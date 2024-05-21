@@ -9,7 +9,8 @@ import { CheckEmailSchema } from './CheckEmailSchema';
 import { FormInput } from '../../../Inputs';
 import { ButtonDef } from '../../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
+import { useResetPasswordMutation } from '../../../../redux/auth/authApiSlice'; // Исправленный путь к файлу
 
 const initialValues = {
   email: '',
@@ -25,10 +26,21 @@ const CheckEmail = () => {
     dispatch(closeModal({ modalName: 'openCheckEmail' }));
   };
 
-  const onSubmit = (values, { resetForm }) => {
-    alert(JSON.stringify(values, null, 2));
-    resetForm();
+  const [sendResetEmail] = useResetPasswordMutation(); 
+
+  const onSubmit = async (values, { resetForm }) => {
+    try {
+      console.log('Data being sent to server:', values); 
+      await sendResetEmail({ email: values.email }); // Отправляем объект с параметром email
+      resetForm();
+      dispatch(closeModal({ modalName: 'openCheckEmail' }));
+      dispatch(openModal({ modalName: 'openResetPassword' }));
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Error sending email. Please try again.');
+    }
   };
+
   const formik = useFormik({
     initialValues,
     validationSchema: CheckEmailSchema,
