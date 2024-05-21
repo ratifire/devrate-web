@@ -5,7 +5,7 @@ const styles = {
     marginBottom: theme.spacing(4),
   }),
   codeErrorWrapper: (theme) => ({
-    display: 'flex', 
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: theme.spacing(4),
@@ -15,16 +15,16 @@ const styles = {
     height: '20px',
     color: theme.palette.text.error,
   }),
-  codeErrorText:(theme) => ({
+  codeErrorText: (theme) => ({
     marginLeft: theme.spacing(3),
     color: theme.palette.text.error,
   }),
-  mainTextWrapper:(theme) => ({
-     display: 'flex', 
-     flexDirection: 'column', 
-     marginBottom: theme.spacing(4), 
-    }),
-  mainText: (theme) =>({
+  mainTextWrapper: (theme) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: theme.spacing(4),
+  }),
+  mainText: (theme) => ({
     display: 'inline',
     color: theme.palette.text.secondary,
     textAlign: 'center',
@@ -36,7 +36,7 @@ const styles = {
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
   }),
-  spamCheckContainer:(theme) => ({
+  spamCheckContainer: (theme) => ({
     marginBottom: theme.spacing(4),
     color: theme.palette.text.secondary,
     textAlign: 'center',

@@ -15,16 +15,16 @@ export const styles = {
     width: '100%',
     position: 'relative',
   }),
-  step: {
-    padding: '0px',
-  },
-  stepBtn: {
-    margin: '0px',
-    padding: '0px',
+  step: (theme) => ({
+    padding: theme.spacing(0),
+  }),
+  stepBtn: (theme) => ({
+    margin: theme.spacing(0),
+    padding: theme.spacing(0),
     ' span': {
-      paddingRight: '0px',
+      paddingRight: theme.spacing(0),
     },
-  },
+  }),
   wrapperStepContent: (theme) => ({
     paddingTop: theme.spacing(4),
   }),

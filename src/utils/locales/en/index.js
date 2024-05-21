@@ -112,14 +112,14 @@ export const en = {
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
       },
-    editPage: {
+      editPage: {
         personalInformation: {
           title: 'About me',
         },
         workExperience: {
-          title: 'Description'
-        }
-      }
+          title: 'Description',
+        },
+      },
     },
     profile: {
       skills: {
@@ -170,6 +170,7 @@ export const en = {
             city: 'City',
             country: 'Country',
             status: 'Status',
+            about_me: 'About me',
             required: 'This is a required field',
           },
           contact: {
@@ -191,10 +192,14 @@ export const en = {
           },
           languages: {
             title: 'Languages',
+            language: 'Language',
+            level: 'Knowledge level',
+            selectLanguage: 'Please select a language.',
+            selectLevel: 'Please select a level.',
+            languageAdded: 'This language has already been added.',
           },
         },
       },
     },
-
   },
 };

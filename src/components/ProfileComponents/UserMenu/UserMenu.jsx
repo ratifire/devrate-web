@@ -1,14 +1,38 @@
 import * as React from 'react';
-import { IconButton, Typography, Box, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Drawer, Link,} from '@mui/material';
+import {
+  IconButton,
+  Typography,
+  Box,
+  Divider,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Drawer,
+  Link,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import styles from './UserMenu.styles';
 import { Link as RouterLink } from "react-router-dom";
 import links from './profileRoutes';
 import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
+import Cookies from 'js-cookie'
+import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 
 const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();
+  const [logout] = useLogoutMutation();
+
+  const logoutHandler = async () => {
+    try {
+      await logout().unwrap();
+      Cookies.remove('JSESSIONID');
+      window.location.reload();
+    } catch (error) {
+      console.log('Logout failed:', error);
+    }
+  }
 
   return (
     <>
@@ -30,7 +54,14 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
 
             {links.map((link, index) => (
               <React.Fragment key={link.path}>
-              <Link key={link.path} to={link.path} component={RouterLink} sx={styles.menuLink} target={link.target}>
+              <Link
+                key={link.path}
+                to={link.path}
+                component={RouterLink}
+                sx={styles.menuLink}
+                target={link.target}
+                {...(link.name === 'profile.userMenu.logout' ? { onClick: logoutHandler } : {})}
+              >
                 <ListItem disablePadding>
                   <ListItemButton sx={styles.listItemButton}>
                     <ListItemIcon>

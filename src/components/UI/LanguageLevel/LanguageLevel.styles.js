@@ -15,8 +15,8 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 24,
-    height: 24,
+    width: '24px',
+    height: '24px',
   }),
   level: (theme) => ({
     lineHeight: '18px',
@@ -26,5 +26,5 @@ export const styles = {
   icon: (theme) => ({
     color: theme.palette.primary[600],
     padding: theme.spacing(0),
-  })
+  }),
 };

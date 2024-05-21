@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const ModalUserInfoSchema = Yup.object().shape({
+export const StepPersonalSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, 'profile.modal.userInfo.personal.first_name_long')
     .max(50, 'profile.modal.userInfo.personal.first_name_short')
@@ -13,10 +13,4 @@ export const ModalUserInfoSchema = Yup.object().shape({
   country: Yup.string().required('profile.modal.userInfo.personal.required'),
   status: Yup.string().optional(),
   aboutMe: Yup.string().optional(),
-  telegram: Yup.string().optional(),
-  linkedIn: Yup.string().optional(),
-  gitHub: Yup.string().optional(),
-  behance: Yup.string().optional(),
-  mail: Yup.string().required('profile.modal.userInfo.personal.required'),
-  phone: Yup.string().optional(),
 });

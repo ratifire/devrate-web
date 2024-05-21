@@ -17,7 +17,7 @@ const PasswordVisibilityToggle = ({ name, showPassword, clickHandler, mouseDownH
           onClick={clickHandler}
           onMouseDown={mouseDownHandler}
           edge='end'
-          sx={{ marginRight: name !== 'repeatPassword' ? -12 : 0 }}
+          sx={{ marginRight: name !== 'repeatPassword' ? '-12px' : 0 }}
         >
           {showPassword ? <VisibilityOff /> : <Visibility />}
         </IconButton>

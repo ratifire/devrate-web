@@ -8,10 +8,9 @@ import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import StepPersonal from './StepPersonal';
-import { useFormik } from 'formik';
-import { ModalUserInfoSchema } from './ModalUserInfoSchema';
-import LoadImages from '../../UI/LoadImages';
 import StepContacts from './StepContacts';
+import StepAvatar from './StepAvatar';
+import StepLanguage from './StepLanguage';
 
 const steps = [
   'profile.modal.userInfo.personal.title',
@@ -25,34 +24,9 @@ const ModalUserInfo = () => {
   const openUserInfo = useSelector((state) => state.modal.openUserInfo);
   const handleClose = () => dispatch(closeModal({ modalName: 'openUserInfo' }));
   const { t } = useTranslation();
-  const userData = useSelector((state) => state.auth.user.data);
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
-  const [img, setImg] = useState(null);
-  const initialValues = {
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-    city: '',
-    country: '',
-    status: '',
-    avatar: img,
-    contact: {
-      telegram: '',
-      linkedIn: '',
-      gitHub: '',
-      behance: '',
-      mail: '',
-      phone: '',
-    },
-  };
-  const onSubmit = (values, { resetForm }) => {
-    resetForm();
-  };
-  const formik = useFormik({
-    initialValues,
-    validationSchema: ModalUserInfoSchema,
-    onSubmit,
-  });
+
   const totalSteps = () => {
     return steps.length;
   };
@@ -70,7 +44,6 @@ const ModalUserInfo = () => {
   };
 
   const handleNext = () => {
-    console.log(formik.values);
     const newActiveStep =
       isLastStep() && !allStepsCompleted() ? steps.findIndex((step, i) => !(i in completed)) : activeStep + 1;
     setActiveStep(newActiveStep);
@@ -90,36 +63,16 @@ const ModalUserInfo = () => {
     handleNext();
   };
 
-  const handleGetImg = (img) => {
-    setImg(img);
-    formik.values.img = img;
-  };
-  const getStepContent = (stepIndex, handleChange, handleBlur, values, errors, touched) => {
+  const getStepContent = (stepIndex) => {
     switch (stepIndex) {
       case 0:
-        return (
-          <StepPersonal
-            values={values}
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            errors={errors}
-            touched={touched}
-          />
-        );
+        return <StepPersonal />;
       case 1:
-        return (
-          <StepContacts
-            values={values}
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            errors={errors}
-            touched={touched}
-          />
-        );
+        return <StepContacts />;
       case 2:
-        return <LoadImages getImg={handleGetImg} imgData={values.img} />;
+        return <StepAvatar />;
       case 3:
-        return <Box>4</Box>;
+        return <StepLanguage />;
       default:
         return 'Unknown stepIndex';
     }
@@ -140,16 +93,7 @@ const ModalUserInfo = () => {
           ))}
         </Stepper>
         <Box>
-          <Box sx={styles.wrapperStepContent}>
-            {getStepContent(
-              activeStep,
-              formik.handleChange,
-              formik.handleBlur,
-              formik.values,
-              formik.errors,
-              formik.touched,
-            )}
-          </Box>
+          <Box sx={styles.wrapperStepContent}>{getStepContent(activeStep)}</Box>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             {activeStep !== steps.length &&
               (completed[activeStep] ? (
@@ -160,7 +104,7 @@ const ModalUserInfo = () => {
                   </Typography>
                 </>
               ) : (
-                <Button onClick={handleComplete}>
+                <Button variant='contained' onClick={handleComplete}>
                   {t(completedSteps() === totalSteps() - 1 ? 'profile.modal.finish' : 'profile.modal.btn')}
                 </Button>
               ))}

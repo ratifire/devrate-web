@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 import PropTypes from 'prop-types';
 
-const TextAreaInput = ({ name, value, label, type, error, helperText, handleChange }) => {
+const TextAreaInput = ({ name, value, label, type, error, helperText, handleChange, handleBlur }) => {
   const { t } = useTranslation();
   const id = uuid();
 
@@ -25,6 +25,7 @@ const TextAreaInput = ({ name, value, label, type, error, helperText, handleChan
           multiline
           rows={6}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
         {
           <FormHelperText id={id} sx={styles.textHelper}>
@@ -44,12 +45,14 @@ TextAreaInput.propTypes = {
   error: PropTypes.bool.isRequired,
   helperText: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-}
+  handleBlur: PropTypes.func.isRequired,
+};
 
 TextAreaInput.defaultProps = {
   name: '',
   value: '',
   handleChange: () => {},
+  handleBlur: () => {},
   type: 'text',
   label: '',
   helperText: '',
@@ -57,4 +60,3 @@ TextAreaInput.defaultProps = {
 };
 
 export default TextAreaInput;
-

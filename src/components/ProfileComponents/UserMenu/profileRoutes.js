@@ -49,6 +49,6 @@ export default [
     name: 'profile.userMenu.logout',
     path: links.home,
     icon: LogoutIcon,
-    target: '_blank',
+    target: '_self',
   },
 ]

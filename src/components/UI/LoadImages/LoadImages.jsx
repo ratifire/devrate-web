@@ -8,21 +8,21 @@ import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
-const LoadImages = ({ getImg, imgData }) => {
+const LoadImages = ({ handleChange, handleBlur, value }) => {
   const editor = useRef(null);
 
   const defaultSettingsCanvas = {
-    image: imgData,
     borderRadius: 4,
     isTransparent: false,
     width: 240,
     height: 240,
     showGrid: true,
   };
+
   const [settingsCanvas, setSettingsCanvas] = useState({ ...defaultSettingsCanvas });
-  const [scale, setScale] = useState(1.2);
+  const [scale, setScale] = useState(1.1);
   const { t } = useTranslation();
-  console.log(editor, '1111111111111');
+
   const handleWheel = (e) => {
     e.preventDefault();
     const delta = e.deltaY;
@@ -33,25 +33,23 @@ const LoadImages = ({ getImg, imgData }) => {
       setScale(newScale);
     }
   };
+
   const handleSave = () => {
     const img = editor.current?.getImageScaledToCanvas().toDataURL();
     const rect = editor.current?.getCroppingRect();
     if (!img || !rect) return;
-    console.log(img, 'q2222222222222222222');
-    setSettingsCanvas({
-      ...settingsCanvas,
-      img,
-      rect,
-      scale: scale,
-    });
-    getImg(settingsCanvas);
+    handleChange(img);
   };
+
   useEffect(() => {
-    handleSave();
-    console.log(settingsCanvas);
-  }, [settingsCanvas.image, editor.current]);
+    if (settingsCanvas.image) {
+      handleSave();
+    }
+  }, [settingsCanvas.image, scale]);
+
   return (
     <Box sx={styles.wrapper}>
+      <input type='hidden' value={value} onChange={handleChange} onBlur={handleBlur} />
       <Dropzone
         onDrop={([image]) => setSettingsCanvas({ ...settingsCanvas, image })}
         onClick={true}
@@ -94,8 +92,11 @@ const LoadImages = ({ getImg, imgData }) => {
     </Box>
   );
 };
+
 LoadImages.propTypes = {
-  getImg: PropTypes.func.isRequired,
-  imgData: PropTypes.any,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
+
 export default LoadImages;

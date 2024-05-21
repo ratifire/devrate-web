@@ -118,9 +118,9 @@ export const uk = {
           title: 'Про мене',
         },
         workExperience: {
-          title: 'Опис'
-        }
-      }
+          title: 'Опис',
+        },
+      },
     },
     profile: {
       skills: {
@@ -171,6 +171,7 @@ export const uk = {
             city: 'Місто',
             country: 'Країна',
             status: 'Статус',
+            about_me: 'Про мене',
             required: "Це обов'язкове поле",
           },
           contact: {
@@ -192,6 +193,11 @@ export const uk = {
           },
           languages: {
             title: 'Мови',
+            language: 'Мова',
+            level: 'Рівень знання',
+            selectLanguage: 'Виберіть мову.',
+            selectLevel: 'Виберіть рівень.',
+            languageAdded: 'Цю мову вже додано.',
           },
         },
       },
