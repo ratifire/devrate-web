@@ -5,6 +5,7 @@ import { closeModal } from '../../../redux/modal/modalSlice';
 import { Box, Typography } from '@mui/material';
 import { styles } from './ExperienceModal.styles';
 import { useTranslation } from 'react-i18next';
+import FormInput from '../../Inputs/FormInput';
 
 const ExperienceModal = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,9 @@ const ExperienceModal = () => {
         {t('profile.modal.userInfo.titleExperience')}
       </Typography>
 
-      <Box sx={styles.wrapper}>Experience Body</Box>
+      <Box sx={styles.wrapper}>
+        <FormInput name='Посада' label='Посада'/>
+      </Box>
     </ModalLayoutProfile>
   );
 };
