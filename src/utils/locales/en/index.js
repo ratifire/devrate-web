@@ -165,6 +165,21 @@ export const en = {
            titlePersonal: 'Personal info',
            titleExperience: 'Work Experience',
          },
+        workExperience: {
+          title: 'Title',
+          title_long: 'Title too long',
+          title_short: 'Title too short',
+          company: 'Company',
+          company_long: 'Company too long',
+          company_short: 'Company too short',
+          description: 'Description',
+          description_long: 'Description too long',
+          description_short: 'Description too short',
+          responsibility: 'Responsibility',
+          responsibility_long: 'Responsibility too long',
+          responsibility_short: 'Responsibility too short',
+          required: 'This is a required field',
+        }
       },
     },
 

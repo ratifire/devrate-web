@@ -7,6 +7,25 @@ export const styles = {
     },
   }),
   wrapper: (theme) => ({
+    display: 'flex',
+    flexWrap: 'wrap',
+    gridGap: `${theme.spacing(4)} ${theme.spacing(3)}`,
+    paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(4),
+  }),
+  input50: (theme) => ({
+    flex: `0 1 calc(50% - ${theme.spacing(2)})`,
+  }),
+  input100: (theme) => ({
+    flex: `0 1 100%`,
+    display: 'flex',
+    alignItems: 'flex-start',
+    gridGap: theme.spacing(3),
+  }),
+  iconBtn: (theme) => ({
+    marginTop: theme.spacing(1),
+    padding: '12px',
+    borderRadius: 1,
+    color: theme.palette.primary[200],
   }),
 };
