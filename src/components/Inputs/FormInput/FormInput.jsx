@@ -33,6 +33,7 @@ const FormInput = ({
         onBlur={handleBlur}
         type={showPassword ? (showPassword ? 'text' : type) : type}
         label={t(label)}
+        placeholder='ewqeqweq'
         endAdornment={
           type === 'password' && (
             <PasswordVisibilityToggle

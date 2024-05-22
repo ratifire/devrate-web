@@ -10,8 +10,14 @@ const LanguagesList = ({ data }) => {
 
   return (
     <>
-      {data.map(({id, language, level }) => (
-        <LanguageLevel key={id} language={language} level={level} languageDeleteHandler={languageDeleteHandler} />
+      {data.map(({ id, language, code, level }) => (
+        <LanguageLevel
+          key={id}
+          language={language}
+          level={level}
+          code={code}
+          languageDeleteHandler={languageDeleteHandler}
+        />
       ))}
     </>
   );

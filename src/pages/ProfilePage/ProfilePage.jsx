@@ -26,16 +26,16 @@ const ProfilePage = () => {
       <ProfileHeader userName={name} />
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
-          <Paper xs={4} sx={styles.baseUserInfo}>
+          <Paper sx={styles.baseUserInfo}>
             <BaseUserInfo userName={name} />
           </Paper>
-          <Paper xs={5} sx={styles.skills}>
+          <Paper sx={styles.skills}>
             <SkillsSection />
           </Paper>
-          <Paper xs={3} sx={styles.right}>
+          <Paper sx={styles.right}>
             <RightSection />
           </Paper>
-          <Paper xs={8} sx={styles.experience}>
+          <Paper sx={styles.experience}>
             <ExperienceSection />
           </Paper>
         </Box>
