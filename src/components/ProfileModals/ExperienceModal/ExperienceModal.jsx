@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/modal/modalSlice';
@@ -11,6 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
+import Duty from '../../UI/Duty';
 
 const ExperienceModal = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const ExperienceModal = () => {
     title: '',
     company: '',
     description: '',
-    responsibility: '',
+    duty: '',
   };
   const onSubmit = (values, { resetForm }) => {
     resetForm();
@@ -32,6 +33,19 @@ const ExperienceModal = () => {
     validationSchema: ExperienceModalSchema,
     onSubmit,
   });
+
+  const [duties, setDuties] = useState([]);
+  const createDuty = (newDuty) => {
+    if (newDuty.length === 0 || newDuty.length > 50) {return}
+    setDuties([...duties, newDuty]);
+    formik.setFieldValue('duty', '');
+  };
+
+  const dutyDeleteHandler = (dutyToDelete) => {
+    setDuties(duties.filter((item) => item !== dutyToDelete));
+  };
+
+  useEffect(() => console.log(duties), [duties]);
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openExperience}>
@@ -78,17 +92,22 @@ const ExperienceModal = () => {
         </Box>
         <Box sx={styles.input100}>
           <FormInput
-            name='responsibility'
-            value={formik.values.responsibility}
+            name='duty'
+            value={formik.values.duty}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            label='profile.modal.workExperience.responsibility'
-            helperText={formik.touched.responsibility && formik.errors.responsibility}
-            error={formik.touched.responsibility && Boolean(formik.errors.responsibility)}
+            label='profile.modal.workExperience.duty'
+            helperText={formik.touched.duty && formik.errors.duty}
+            error={formik.touched.duty && Boolean(formik.errors.duty)}
           />
-          <IconButton sx={styles.iconBtn}>
+          <IconButton sx={styles.iconBtn} onClick={() => createDuty(formik.values.duty)}>
             <AddIcon />
           </IconButton>
+        </Box>
+        <Box sx={styles.duty}>
+          {duties.map((duty, index) => (
+            <Duty key={index} duty={duty} tobeDeleted dutyDeleteHandler={dutyDeleteHandler}/>
+          ))}
         </Box>
       </Box>
     </ModalLayoutProfile>

@@ -11,4 +11,8 @@ export const styles = {
   dutyText: (theme) => ({
     color: theme.palette.primary[800],
   }),
+  icon: (theme) => ({
+    color: theme.palette.primary[600],
+    padding: theme.spacing(0),
+  })
 };

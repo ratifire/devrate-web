@@ -176,9 +176,9 @@ export const uk = {
           description: 'Description',
           description_long: 'Опис занадто довгий',
           description_short: 'Опис занадто короткий',
-          responsibility: 'Responsibility',
-          responsibility_long: 'Обов`язок занадто довгий',
-          responsibility_short: 'Обов`язок занадто короткий',
+          duty: 'Responsibility',
+          duty_long: 'Обов`язок занадто довгий',
+          duty_short: 'Обов`язок занадто короткий',
           required: 'This is a required field',
         }
       },

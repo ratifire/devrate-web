@@ -175,9 +175,9 @@ export const en = {
           description: 'Description',
           description_long: 'Description too long',
           description_short: 'Description too short',
-          responsibility: 'Responsibility',
-          responsibility_long: 'Responsibility too long',
-          responsibility_short: 'Responsibility too short',
+          duty: 'Duty',
+          duty_long: 'Responsibility too long',
+          duty_short: 'Responsibility too short',
           required: 'This is a required field',
         }
       },
