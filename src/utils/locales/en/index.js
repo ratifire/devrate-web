@@ -156,6 +156,8 @@ export const en = {
         logout: 'Logout',
       },
       modal: {
+          btn: 'Save',
+          finish: 'Finish',
         userInfo: {
            dropPhoto: {
             first: 'Drop photo here ',

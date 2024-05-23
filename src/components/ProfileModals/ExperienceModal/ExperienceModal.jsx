@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/modal/modalSlice';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import { styles } from './ExperienceModal.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
@@ -46,6 +46,10 @@ const ExperienceModal = () => {
   };
 
   useEffect(() => console.log(duties), [duties]);
+
+  const handleComplete = () => {
+    console.log('Endpoint is called to update the work experience');
+  }
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openExperience}>
@@ -109,6 +113,11 @@ const ExperienceModal = () => {
             <Duty key={index} duty={duty} tobeDeleted dutyDeleteHandler={dutyDeleteHandler}/>
           ))}
         </Box>
+
+        <Button variant='contained' onClick={handleComplete}>
+          {t('profile.modal.btn')}
+        </Button>
+
       </Box>
     </ModalLayoutProfile>
   );

@@ -157,6 +157,8 @@ export const uk = {
         logout: 'Вийти',
       },
       modal: {
+        btn: 'Зберегти',
+        finish: 'Готово',
         userInfo: {
            dropPhoto: {
             first: 'Опустіть фото сюди',
