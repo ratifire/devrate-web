@@ -1,3 +1,4 @@
 import ModalUserInfo from './ModalUserInfo';
+import WorkExperienceModal from './WorkExperienceModal';
 
-export default ModalUserInfo;
+export  {ModalUserInfo, WorkExperienceModal};

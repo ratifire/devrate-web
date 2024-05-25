@@ -14,6 +14,7 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     label: 'Text',
+    placeholder: 'Placeholder',
     helperText: 'Please correct the description above',
     type: 'text',
     error: false,
