@@ -10,14 +10,11 @@ import { WorkExperienceModalSchema } from './WorkExperienceModalSchema';
 import AddIcon from '@mui/icons-material/Add';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-
-
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
 import Duty from '../../UI/Duty';
 import { ButtonDef } from '../../Buttons';
 import { DateField } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
 
 const WorkExperienceModal = () => {
   const dispatch = useDispatch();
@@ -93,6 +90,26 @@ const WorkExperienceModal = () => {
             />
           </Box>
           <Box sx={styles.input100}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateField sx={styles.input50}
+                         label={t('profile.modal.workExperience.startDate')}
+                         value={formik.values.startDate}
+                         format="YYYY-MM-DD"
+                         onChange={(value) => formik.setFieldValue('startDate', value)}
+                         helperText={formik.touched.startDate && formik.errors.startDate}
+                         error={formik.touched.startDate && Boolean(formik.errors.startDate)}
+              />
+              <DateField sx={styles.input50}
+                         label={t('profile.modal.workExperience.endDate')}
+                         value={formik.values.endDate}
+                         format="YYYY-MM-DD"
+                         onChange={(value) => formik.setFieldValue('endDate', value)}
+                         helperText={formik.touched.endDate && formik.errors.endDate}
+                         error={formik.touched.endDate && Boolean(formik.errors.endDate)}
+              />
+            </LocalizationProvider>
+          </Box>
+          <Box sx={styles.input100}>
             <TextAreaInput
               name='description'
               value={formik.values.description}
@@ -124,29 +141,6 @@ const WorkExperienceModal = () => {
             {duties.map((duty, index) => (
               <Duty key={index} duty={duty} tobeDeleted dutyDeleteHandler={dutyDeleteHandler}/>
             ))}
-          </Box>
-
-          <Box sx={styles.input100}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateField sx={styles.input50}
-                  label={t('profile.modal.workExperience.startDate')}
-                  value={formik.values.startDate}
-                  format="YYYY-MM-DD"
-                  defaultValue={dayjs('2022-04-17')}
-                  onChange={(value) => formik.setFieldValue('startDate', value)}
-                  helperText={formik.touched.startDate && formik.errors.startDate}
-                  error={formik.touched.startDate && Boolean(formik.errors.startDate)}
-                />
-                <DateField sx={styles.input50}
-                  label={t('profile.modal.workExperience.endDate')}
-                  value={formik.values.endDate}
-                  format="YYYY-MM-DD"
-                  defaultValue={dayjs('2023-04-17')}
-                  onChange={(value) => formik.setFieldValue('endDate', value)}
-                  helperText={formik.touched.endDate && formik.errors.endDate}
-                  error={formik.touched.endDate && Boolean(formik.errors.endDate)}
-                />
-            </LocalizationProvider>
           </Box>
 
           <ButtonDef variant='contained' type='submit' label={t('profile.modal.btn')} correctStyle={styles.workExperienceBtn}/>

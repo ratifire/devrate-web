@@ -20,7 +20,7 @@ export const styles = {
         borderColor: theme.palette.primary[600],
       },
       'fieldset': {
-        borderColor: theme.palette.neutral[500], // Change this to the color you want
+        borderColor: theme.palette.neutral[500],
       },
     },
   }),
