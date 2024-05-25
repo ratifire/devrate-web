@@ -118,9 +118,9 @@ export const uk = {
           title: 'Про мене',
         },
         workExperience: {
-          title: 'Опис'
-        }
-      }
+          title: 'Опис',
+        },
+      },
     },
     profile: {
       skills: {
@@ -160,14 +160,48 @@ export const uk = {
         btn: 'Зберегти',
         finish: 'Готово',
         userInfo: {
-           dropPhoto: {
-            first: 'Опустіть фото сюди',
-            second: 'або',
-            third: ' завантажити зі свого пристрою',
+          titlePersonal: 'Персональна інформація',
+          titleExperience: 'Досвід роботи',
+          personal: {
+            title: 'Персональна інформація',
+            firstName: "Ім'я",
+            first_name_long: 'Імʼя занадто довге',
+            first_name_short: 'Імʼя занадто коротке',
+            lastName: 'Прізвище',
+            last_name_long: 'Прізвище занадто довге',
+            last_name_short: 'Прізвище занадто коротке',
+            city: 'Місто',
+            country: 'Країна',
+            status: 'Статус',
+            about_me: 'Про мене',
+            required: "Це обов'язкове поле",
           },
-           titlePersonal: 'Персональна інформація',
-           titleExperience: 'Досвід роботи',
-         },
+          contact: {
+            title: 'Контактна інформація',
+            telegram: 'Telegram',
+            linkedIn: 'LinkedIn',
+            gitHub: 'GitHub',
+            behance: 'Behance',
+            mail: 'Електронна пошта',
+            phone: 'Мобільний телефон',
+          },
+          photo: {
+            title: 'Фотографія',
+            dropPhoto: {
+              first: 'Опустіть фото сюди ',
+              second: 'або',
+              third: ' завантажити зі свого пристрою',
+            },
+          },
+          languages: {
+            title: 'Мови',
+            language: 'Мова',
+            level: 'Рівень знання',
+            selectLanguage: 'Виберіть мову.',
+            selectLevel: 'Виберіть рівень.',
+            languageAdded: 'Цю мову вже додано.',
+          },
+        },
         workExperience: {
           title: 'Посада',
           title_long: 'Посада занадто довге',

@@ -14,7 +14,7 @@ export const styles = {
     height: '132px',
     fontSize: 48,
     lineHeight: '56px',
-    letterSpacing: 0,
+    letterSpacing: '0px',
     fontWeight: 400,
   },
 };

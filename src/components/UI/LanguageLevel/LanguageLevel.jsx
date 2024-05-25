@@ -4,21 +4,18 @@ import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 
-const LanguageLevel = ({ language, level, tobeDeleted, languageDeleteHandler }) => {
+const LanguageLevel = ({ language, level, code, tobeDeleted, languageDeleteHandler }) => {
   return (
     <Box sx={styles.wrapper}>
-      <Box sx={styles.language}>{language}</Box>
+      <Box sx={styles.language}>{code}</Box>
       <Typography variant='caption3' sx={styles.level}>
         {level}
       </Typography>
-      {tobeDeleted &&
-        <IconButton
-          sx={styles.icon}
-          onClick={() => languageDeleteHandler(language)}
-        >
-          <CloseIcon/>
+      {tobeDeleted && (
+        <IconButton sx={styles.icon} onClick={() => languageDeleteHandler(language)}>
+          <CloseIcon />
         </IconButton>
-      }
+      )}
     </Box>
   );
 };
@@ -26,6 +23,7 @@ const LanguageLevel = ({ language, level, tobeDeleted, languageDeleteHandler }) 
 LanguageLevel.propTypes = {
   language: PropTypes.string.isRequired,
   level: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired,
   tobeDeleted: PropTypes.bool,
   languageDeleteHandler: PropTypes.func,
 };

@@ -21,8 +21,8 @@ export const styles = {
     },
   }),
   avatar: {
-    width: 132,
-    height: 132,
+    width: '132px',
+    height: '132px',
     borderRadius: 1,
   },
   wrapperText: {

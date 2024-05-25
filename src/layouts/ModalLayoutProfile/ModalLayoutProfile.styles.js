@@ -14,8 +14,8 @@ export const styles = {
   }),
   btnIcon: (theme) => ({
     position: 'absolute',
-    top: theme.spacing(4),
-    right: theme.spacing(4),
+    top: '24px',
+    right: '24px',
     color: theme.palette.neutral['200'],
     borderRadius: 1,
     ':hover': {

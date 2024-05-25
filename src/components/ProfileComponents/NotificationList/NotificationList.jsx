@@ -3,16 +3,24 @@ import { Badge, Box, IconButton, Popover } from '@mui/material';
 import Notification from './Notification';
 import { ReactComponent as BellNotification } from '../../../assets/icons/bell.svg';
 import PropTypes from 'prop-types';
-import styles from './NotificationList.styles'; // import { ReactComponent as LoupeSearch } from '../../../assets/icons/loupe.svg';
+import styles from './NotificationList.styles';
+import {useSocket} from "../../../utils/hooks/useSocket"; // import { ReactComponent as LoupeSearch } from '../../../assets/icons/loupe.svg';
 
-const NotificationList = (props) => {
+const NotificationList = () => {
   const [bellButton, setBellButton] = useState(null);
-  console.log(props);
+  const [notifications, setNotifications] = useState([]);
   const bellButtonClickHandler = (event) => {
     event.preventDefault();
 
     setBellButton(event.currentTarget);
   };
+
+  useSocket('/ws/notifications', event => {
+    event.target.addEventListener('message', ({data}) => {
+      const json = JSON.parse(data);
+      setNotifications(json)
+    })
+  });
 
   const notificationsListClose = () => {
     setBellButton(null);
@@ -44,7 +52,7 @@ const NotificationList = (props) => {
       >
         <Box sx={styles.wrapper}>
           <Box sx={styles.scrollWrapper}>
-            {props.items.map((item) => {
+            {notifications.map((item) => {
               return (
                 <Notification
                   key={`notification-${item.id}`}

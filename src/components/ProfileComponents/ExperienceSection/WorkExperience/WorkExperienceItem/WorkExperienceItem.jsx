@@ -1,10 +1,11 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, IconButton, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import styles from './WorkExperienceItem.styles.js';
 import { useTranslation } from 'react-i18next';
 import Duty from '../../../../UI/Duty/Duty';
+import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 
 const mockData = [
   'BackEnd development',
@@ -15,8 +16,22 @@ const mockData = [
 ];
 
 const WorkExperienceItem = () => {
-  const { t } = useTranslation();
+  const [anchorEl, setAnchorEl] = useState(false);
 
+  const { t } = useTranslation();
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleEditFeature = () => {
+    console.log('EditFeature');
+  };
+
+  const handleDeleteFeature = () => {
+    console.log('DeleteFeature');
+  };
   const text =
     'Prosper є лідером у сфері фінтеху, пропонуючи платформу пірингового кредитування, яка поєднує передові технології з фінансовими послугами. Вони використовують алгоритми на основі даних для ефективної та справедливої обробки кредитів, що робить їх актуальними для розробників програмного забезпечення, зацікавлених у перетині технологій та фінансів.';
   return (
@@ -31,8 +46,16 @@ const WorkExperienceItem = () => {
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
-          <MoreVertIcon />
-        </Box>
+          <IconButton onClick={(event) => handleMenuOpen(event)}>
+            <MoreVertIcon />
+          </IconButton>
+        </Box>{' '}
+        <DropdownMenu
+          anchorEl={anchorEl}
+          handleCloseMenu={handleCloseMenu}
+          handleEditFeature={handleEditFeature}
+          handleDeleteFeature={handleDeleteFeature}
+        />
       </Box>
       <Typography>{text}</Typography>
       <Box sx={styles.workDutiesContainer}>

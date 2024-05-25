@@ -112,14 +112,14 @@ export const en = {
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
       },
-    editPage: {
+      editPage: {
         personalInformation: {
           title: 'About me',
         },
         workExperience: {
-          title: 'Description'
-        }
-      }
+          title: 'Description',
+        },
+      },
     },
     profile: {
       skills: {
@@ -159,14 +159,48 @@ export const en = {
           btn: 'Save',
           finish: 'Finish',
         userInfo: {
-           dropPhoto: {
-            first: 'Drop photo here ',
-            second: 'or',
-            third: ' download from your device',
+          titlePersonal: 'Personal info',
+          titleExperience: 'Work Experience',
+          personal: {
+            title: 'Personal information',
+            firstName: 'Name',
+            first_name_long: 'Name too long',
+            first_name_short: 'Name too short',
+            lastName: 'Surname',
+            last_name_long: 'Last name too long',
+            last_name_short: 'Surname too short',
+            city: 'City',
+            country: 'Country',
+            status: 'Status',
+            about_me: 'About me',
+            required: 'This is a required field',
           },
-           titlePersonal: 'Personal info',
-           titleExperience: 'Work Experience',
-         },
+          contact: {
+            title: 'Contact Information',
+            telegram: 'Telegram',
+            linkedIn: 'LinkedIn',
+            gitHub: 'GitHub',
+            behance: 'Behance',
+            mail: 'Mail',
+            phone: 'Phone',
+          },
+          photo: {
+            title: 'Photo',
+            dropPhoto: {
+              first: 'Drop photo here ',
+              second: 'or',
+              third: ' download from your device',
+            },
+          },
+          languages: {
+            title: 'Languages',
+            language: 'Language',
+            level: 'Knowledge level',
+            selectLanguage: 'Please select a language.',
+            selectLevel: 'Please select a level.',
+            languageAdded: 'This language has already been added.',
+          },
+        },
         workExperience: {
           title: 'Title',
           title_long: 'Title too long',
@@ -189,6 +223,5 @@ export const en = {
         }
       },
     },
-
   },
 };
