@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const Duty = ({ duty, tobeDeleted, dutyDeleteHandler }) => {
   return (
-    <Box sx={styles.dutyContainer}>
+    <Box sx={tobeDeleted ? styles.dutyContainerwithBTN : styles.dutyContainer}>
       <Typography variant='subtitle2' sx={styles.dutyText}>
         {duty}
       </Typography>

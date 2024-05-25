@@ -32,6 +32,7 @@ export const styles = {
     flex: `0 1 100%`,
     display: 'flex',
     alignItems: 'flex-start',
+    flexWrap: 'wrap',
     gridGap: theme.spacing(3),
   }),
 };
