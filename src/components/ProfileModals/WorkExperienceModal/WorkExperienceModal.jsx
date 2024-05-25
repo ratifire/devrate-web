@@ -59,7 +59,7 @@ const WorkExperienceModal = () => {
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openExperience}>
       <Typography variant='subtitle1' sx={styles.title}>
-        {t('profile.modal.userInfo.titleExperience')}
+        {t('profile.experience.workExperience')}
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>

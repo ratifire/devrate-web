@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import ModalUserInfo from '../../components/ProfileModals';
-import WorkExperienceModal from '../../components/ProfileModals/WorkExperienceModal';
+import { ModalUserInfo, WorkExperienceModal } from '../../components/ProfileModals'
 
 const ProfileTemplate = ({ children }) => {
   const openUserInfo = useSelector((state) => state.modal.openUserInfo);

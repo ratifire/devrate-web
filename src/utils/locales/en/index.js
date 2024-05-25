@@ -159,8 +159,6 @@ export const en = {
           btn: 'Save',
           finish: 'Finish',
         userInfo: {
-          titlePersonal: 'Personal info',
-          titleExperience: 'Work Experience',
           personal: {
             title: 'Personal information',
             firstName: 'Name',
