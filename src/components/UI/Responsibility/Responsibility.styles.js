@@ -1,5 +1,5 @@
 export const styles = {
-  dutyContainer: (theme) => ({
+  responsibilityContainer: (theme) => ({
     display: 'inline-block',
     paddingY: theme.spacing(2),
     paddingX: theme.spacing(3),
@@ -8,7 +8,7 @@ export const styles = {
     borderRadius: 100,
     backgroundColor: theme.palette.primary[100],
   }),
-  dutyContainerwithBTN: (theme) => ({
+  responsibilityContainerwithBTN: (theme) => ({
     display: 'flex',
     alignItems: 'center',
     paddingY: theme.spacing(2),
@@ -17,7 +17,7 @@ export const styles = {
     borderRadius: 100,
     backgroundColor: theme.palette.primary[100],
   }),
-  dutyText: (theme) => ({
+  responsibilityText: (theme) => ({
     color: theme.palette.primary[800],
   }),
   icon: (theme) => ({

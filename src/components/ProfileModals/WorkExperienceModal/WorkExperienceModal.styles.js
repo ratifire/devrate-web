@@ -36,7 +36,7 @@ export const styles = {
     borderRadius: 1,
     color: theme.palette.primary[200],
   }),
-  duty: (theme) => ({
+  responsibility: (theme) => ({
     flex: `0 1 100%`,
     display: 'flex',
     alignItems: 'flex-start',

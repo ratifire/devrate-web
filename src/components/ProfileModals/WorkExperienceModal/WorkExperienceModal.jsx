@@ -8,13 +8,15 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { WorkExperienceModalSchema } from './WorkExperienceModalSchema';
 import AddIcon from '@mui/icons-material/Add';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
-import Duty from '../../UI/Duty';
+import Responsibility from '../../UI/Responsibility';
 import { ButtonDef } from '../../Buttons';
 import { DateField } from '@mui/x-date-pickers';
+import { DateTime } from 'luxon';
+
 
 const WorkExperienceModal = () => {
   const dispatch = useDispatch();
@@ -23,37 +25,47 @@ const WorkExperienceModal = () => {
   const { t } = useTranslation();
 
   const initialValues = {
-    title: '',
-    company: '',
+    position: '',
+    companyName: '',
     description: '',
-    duty: '',
+    responsibilities: '',
     startDate: null,
     endDate: null
   };
   const onSubmit = (values, { resetForm }) => {
-    values.duty = duties;
-    values.startDate = values.startDate ? values.startDate.toISOString().slice(0, 10) : null;
-    values.endDate = values.endDate ? values.endDate.toISOString().slice(0, 10) : null;
+    values.responsibilities = responsibilities;
+
+    if (values.startDate) {
+      const startDate = DateTime.fromISO(values.startDate);
+      values.startDate = startDate.isValid ? startDate.toISODate() : null;
+    }
+
+    if (values.endDate) {
+      const endDate = DateTime.fromISO(values.endDate);
+      values.endDate = endDate.isValid ? endDate.toISODate() : null;
+    }
+
     console.log('Submitted values:', values);
     resetForm();
-    setDuties([]);
+    setResponsibilities([]);
     handleClose();
   };
+
   const formik = useFormik({
     initialValues,
     validationSchema: WorkExperienceModalSchema,
     onSubmit,
   });
 
-  const [duties, setDuties] = useState([]);
-  const createDuty = (newDuty) => {
-    if (newDuty.length === 0 || newDuty.length > 50) {return}
-    setDuties([...duties, newDuty]);
-    formik.setFieldValue('duty', '');
+  const [responsibilities, setResponsibilities] = useState([]);
+  const createResponsibility = (newResponsibility) => {
+    if (newResponsibility.length === 0 || newResponsibility.length > 50) {return}
+    setResponsibilities([...responsibilities, newResponsibility]);
+    formik.setFieldValue('responsibilities', '');
   };
 
-  const dutyDeleteHandler = (dutyToDelete) => {
-    setDuties(duties.filter((item) => item !== dutyToDelete));
+  const responsibilityDeleteHandler = (responsibilityToDelete) => {
+    setResponsibilities(responsibilities.filter((item) => item !== responsibilityToDelete));
   };
 
   return (
@@ -66,35 +78,34 @@ const WorkExperienceModal = () => {
         <Box sx={styles.wrapper}>
           <Box sx={styles.input50}>
             <FormInput
-              name='title'
-              value={formik.values.title}
+              name='position'
+              value={formik.values.position}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               type='text'
-              label='profile.modal.workExperience.title'
-              placeholder='profile.modal.workExperience.title_placeholder'
-              helperText={formik.touched.title && formik.errors.title}
-              error={formik.touched.title && Boolean(formik.errors.title)}
+              label='profile.modal.workExperience.position'
+              placeholder='profile.modal.workExperience.position_placeholder'
+              helperText={formik.touched.position && formik.errors.position}
+              error={formik.touched.position && Boolean(formik.errors.position)}
             />
           </Box>
           <Box sx={styles.input50}>
             <FormInput
-              name='company'
-              value={formik.values.company}
+              name='companyName'
+              value={formik.values.companyName}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
-              label='profile.modal.workExperience.company'
-              placeholder='profile.modal.workExperience.company_placeholder'
-              helperText={formik.touched.company && formik.errors.company}
-              error={formik.touched.company && Boolean(formik.errors.company)}
+              label='profile.modal.workExperience.companyName'
+              placeholder='profile.modal.workExperience.companyName_placeholder'
+              helperText={formik.touched.companyName && formik.errors.companyName}
+              error={formik.touched.companyName && Boolean(formik.errors.companyName)}
             />
           </Box>
           <Box sx={styles.input100}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider dateAdapter={AdapterLuxon}>
               <DateField sx={styles.input50}
                          label={t('profile.modal.workExperience.startDate')}
                          value={formik.values.startDate}
-                         format="YYYY-MM-DD"
                          onChange={(value) => formik.setFieldValue('startDate', value)}
                          helperText={formik.touched.startDate && formik.errors.startDate}
                          error={formik.touched.startDate && Boolean(formik.errors.startDate)}
@@ -102,7 +113,6 @@ const WorkExperienceModal = () => {
               <DateField sx={styles.input50}
                          label={t('profile.modal.workExperience.endDate')}
                          value={formik.values.endDate}
-                         format="YYYY-MM-DD"
                          onChange={(value) => formik.setFieldValue('endDate', value)}
                          helperText={formik.touched.endDate && formik.errors.endDate}
                          error={formik.touched.endDate && Boolean(formik.errors.endDate)}
@@ -124,22 +134,26 @@ const WorkExperienceModal = () => {
           </Box>
           <Box sx={styles.input100}>
             <FormInput
-              name='duty'
-              value={formik.values.duty}
+              name='responsibilities'
+              value={formik.values.responsibilities}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
-              label='profile.modal.workExperience.duty'
-              placeholder='profile.modal.workExperience.duty_placeholder'
-              helperText={formik.touched.duty && formik.errors.duty}
-              error={formik.touched.duty && Boolean(formik.errors.duty)}
+              label='profile.modal.workExperience.responsibilities'
+              placeholder='profile.modal.workExperience.responsibilities_placeholder'
+              helperText={formik.touched.responsibilities && formik.errors.responsibilities}
+              error={formik.touched.responsibilities && Boolean(formik.errors.responsibilities)}
             />
-            <IconButton sx={styles.iconBtn} onClick={() => createDuty(formik.values.duty)}>
+            <IconButton sx={styles.iconBtn} onClick={() => createResponsibility(formik.values.responsibilities)}>
               <AddIcon />
             </IconButton>
           </Box>
-          <Box sx={styles.duty}>
-            {duties.map((duty, index) => (
-              <Duty key={index} duty={duty} tobeDeleted dutyDeleteHandler={dutyDeleteHandler}/>
+          <Box sx={styles.responsibility}>
+            {responsibilities.map((responsibility, index) => (
+              <Responsibility
+                key={index}
+                responsibility={responsibility}
+                tobeDeleted
+                responsibilityDeleteHandler={responsibilityDeleteHandler}/>
             ))}
           </Box>
 
