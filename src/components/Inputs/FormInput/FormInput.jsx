@@ -14,6 +14,7 @@ const FormInput = ({
   handleBlur,
   showPassword,
   label,
+  placeholder,
   helperText,
   error,
   clickHandler,
@@ -33,6 +34,7 @@ const FormInput = ({
         onBlur={handleBlur}
         type={showPassword ? (showPassword ? 'text' : type) : type}
         label={t(label)}
+        placeholder={t(placeholder)}
         endAdornment={
           type === 'password' && (
             <PasswordVisibilityToggle
@@ -62,6 +64,7 @@ FormInput.propTypes = {
   showPassword: PropTypes.bool,
   type: PropTypes.oneOf(['text', 'email', 'password']).isRequired,
   label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   clickHandler: PropTypes.func,
@@ -75,6 +78,7 @@ FormInput.defaultProps = {
   showPassword: false,
   type: 'text',
   label: '',
+  placeholder: '',
   helperText: '',
   error: false,
   clickHandler: () => {},

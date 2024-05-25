@@ -15,6 +15,14 @@ export const styles = {
   }),
   input50: (theme) => ({
     flex: `0 1 calc(50% - ${theme.spacing(2)})`,
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: theme.palette.primary[600],
+      },
+      'fieldset': {
+        borderColor: theme.palette.neutral[500], // Change this to the color you want
+      },
+    },
   }),
   input100: (theme) => ({
     flex: `0 1 100%`,
@@ -35,4 +43,7 @@ export const styles = {
     flexWrap: 'wrap',
     gridGap: theme.spacing(3),
   }),
+  workExperienceBtn: {
+    width: '228px',
+  }
 };
