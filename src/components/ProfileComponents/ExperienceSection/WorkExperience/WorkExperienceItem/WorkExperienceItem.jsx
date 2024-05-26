@@ -6,16 +6,17 @@ import styles from './WorkExperienceItem.styles.js';
 import { useTranslation } from 'react-i18next';
 import Responsibility from '../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
+import PropTypes from 'prop-types';
 
-const mockData = [
-  'BackEnd development',
-  'Leading the design and architecture discussions',
-  'Collaboration with cross-functional teams',
-  'Ensuring code quality and maintainability',
-  'Service/database architecture design and implementation',
-];
+// const mockData = [
+//   'BackEnd development',
+//   'Leading the design and architecture discussions',
+//   'Collaboration with cross-functional teams',
+//   'Ensuring code quality and maintainability',
+//   'Service/database architecture design and implementation',
+// ];
 
-const WorkExperienceItem = () => {
+const WorkExperienceItem = ({ startDate, endDate, position, companyName, description, responsibilities}) => {
   const [anchorEl, setAnchorEl] = useState(false);
 
   const { t } = useTranslation();
@@ -32,17 +33,21 @@ const WorkExperienceItem = () => {
   const handleDeleteFeature = () => {
     console.log('DeleteFeature');
   };
-  const text =
-    'Prosper є лідером у сфері фінтеху, пропонуючи платформу пірингового кредитування, яка поєднує передові технології з фінансовими послугами. Вони використовують алгоритми на основі даних для ефективної та справедливої обробки кредитів, що робить їх актуальними для розробників програмного забезпечення, зацікавлених у перетині технологій та фінансів.';
+  // const text =
+  //   'Prosper є лідером у сфері фінтеху, пропонуючи платформу пірингового кредитування, ' +
+  //   'яка поєднує передові технології з фінансовими послугами. Вони використовують ' +
+  //   'алгоритми на основі даних для ефективної та справедливої обробки кредитів, що робить ' +
+  //   'їх актуальними для розробників програмного забезпечення, зацікавлених у перетині технологій ' +
+  //   'та фінансів.';
   return (
     <Box sx={styles.workExpeirenceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
         <Box sx={styles.workTitleContainer}>
           <Typography variant='h5' sx={styles.workPosition}>
-            Software engineer
+            {position}
           </Typography>
           <Typography variant='subtitle3' sx={styles.workPlaceTitle}>
-            Prosper(Avenga) 2020 - 2021
+            {companyName} {startDate} - {endDate}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
@@ -57,13 +62,13 @@ const WorkExperienceItem = () => {
           handleDeleteFeature={handleDeleteFeature}
         />
       </Box>
-      <Typography>{text}</Typography>
+      <Typography>{description}</Typography>
       <Box sx={styles.workDutiesContainer}>
         <Typography variant='h6' sx={styles.workDutiesTitle}>
           {t('profile.experience.duties')}
         </Typography>
         <Box sx={styles.workDuties}>
-          {mockData.map((responsibility, index) => (
+          {responsibilities.map((responsibility, index) => (
             <Responsibility key={index} responsibility={responsibility} />
           ))}
         </Box>
@@ -71,4 +76,14 @@ const WorkExperienceItem = () => {
     </Box>
   );
 };
+
+WorkExperienceItem.propTypes = {
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
+  companyName: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  responsibilities: PropTypes.array.isRequired,
+}
+
 export default WorkExperienceItem;
