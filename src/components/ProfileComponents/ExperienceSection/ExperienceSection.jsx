@@ -7,6 +7,8 @@ import Achievment from './Achievement/Achievment';
 import { useTranslation } from 'react-i18next';
 import WorkExperience from './WorkExperience/WorkExperience';
 import { Add } from '@mui/icons-material';
+import { openModal } from '../../../redux/modal/modalSlice';
+import { useDispatch } from 'react-redux';
 
 const ExperienceSection = () => {
   const [value, setValue] = React.useState('workExperience');
@@ -17,9 +19,8 @@ const ExperienceSection = () => {
     setValue(newValue);
   };
 
-  const handleAddFeature = (value) => {
-    console.log(value);
-  };
+  const dispatch = useDispatch();
+  const handleAddFeature = () => dispatch(openModal({ modalName: 'openExperience' }));
   const renderAdditionalInfo = (value) => {
     {
       switch (value) {
@@ -72,11 +73,7 @@ const ExperienceSection = () => {
           <StyledTab value='skills' label={t('profile.experience.skills')} sx={styles.tabItem} />
           <StyledTab value='education' label={t('profile.experience.education')} sx={styles.tabItem} />
         </StyledTabs>
-        <IconButton
-          onClick={() => {
-            handleAddFeature(value);
-          }}
-        >
+        <IconButton aria-label='Edit Work Experience' onClick={handleAddFeature}>
           <Add sx={styles.icon} />
         </IconButton>
       </Box>

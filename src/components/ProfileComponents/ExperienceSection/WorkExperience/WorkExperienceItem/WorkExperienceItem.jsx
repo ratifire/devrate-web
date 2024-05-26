@@ -4,7 +4,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import styles from './WorkExperienceItem.styles.js';
 import { useTranslation } from 'react-i18next';
-import Duty from '../../../../UI/Duty/Duty';
+import Responsibility from '../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 
 const mockData = [
@@ -63,8 +63,8 @@ const WorkExperienceItem = () => {
           {t('profile.experience.duties')}
         </Typography>
         <Box sx={styles.workDuties}>
-          {mockData.map((duty, index) => (
-            <Duty key={index} duty={duty} />
+          {mockData.map((responsibility, index) => (
+            <Responsibility key={index} responsibility={responsibility} />
           ))}
         </Box>
       </Box>

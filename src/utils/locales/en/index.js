@@ -156,8 +156,8 @@ export const en = {
         logout: 'Logout',
       },
       modal: {
-        btn: 'Save',
-        finish: 'Finish',
+          btn: 'Save',
+          finish: 'Finish',
         userInfo: {
           personal: {
             title: 'Personal information',
@@ -199,6 +199,27 @@ export const en = {
             languageAdded: 'This language has already been added.',
           },
         },
+        workExperience: {
+          position: 'Position',
+          position_long: 'Title too long',
+          position_short: 'Title too short',
+          position_placeholder: 'Software Engineer',
+          companyName: 'Company',
+          companyName_long: 'Company too long',
+          companyName_short: 'Company too short',
+          companyName_placeholder: 'Prosper(Avenga)',
+          description: 'Description',
+          description_long: 'Description too long',
+          description_short: 'Description too short',
+          description_placeholder:'Prosper is a leader in fintech, offering a peer-to-peer lending platform that combines advanced technology with financial services. They use data-driven algorithms to process loans efficiently and fairly, making them relevant to software developers interested in the intersection of technology and finance.',
+          responsibilities: 'Responsibility',
+          responsibilities_long: 'Responsibility too long',
+          responsibilities_short: 'Responsibility too short',
+          responsibilities_placeholder: 'BackEnd development',
+          startDate: 'Start Date',
+          endDate: 'End Date',
+          required: 'This is a required field',
+        }
       },
     },
   },
