@@ -34,14 +34,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
       },
     }),
     addContactsUser: builder.mutation({
-      query: ({ userId, body }) => {
-        console.log(userId, body, '461546712456735126735671283212');
-        return {
-          url: `/users/${userId}/contacts`,
-          method: 'POST',
-          body,
-        };
-      },
+      query: ({ userId, body }) => ({
+        url: `/users/${userId}/contacts`,
+        method: 'POST',
+        body,
+      }),
     }),
   }),
 });
