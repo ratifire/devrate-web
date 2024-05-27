@@ -38,9 +38,9 @@ const FormSelect = ({
           },
         }}
       >
-        {countries.map(({ id, country }) => (
-          <MenuItem key={id} value={country} sx={styles.menuItem}>
-            {t(`${itemsText}.${country}`)}
+        {countries.map(({ id, country, label }) => (
+          <MenuItem key={`${name}-${id}`} value={country} sx={styles.menuItem}>
+            {label || t(`${itemsText}.${country}`)}
           </MenuItem>
         ))}
       </Select>
