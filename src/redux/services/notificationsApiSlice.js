@@ -1,4 +1,4 @@
-import { apiSlice } from '../services/api/apiSlice';
+import { apiSlice } from './api/apiSlice';
 
 export const notificationsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,9 +11,19 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
       }),
     }),
+    deleteNotification: builder.mutation({
+      query: ({notificationId, userId}) => ({
+        url: `/notifications?${(new URLSearchParams({
+          notificationId,
+          userId
+        }))}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
 export const {
   useMarkAsReadMutation,
+  useDeleteNotificationMutation,
 } = notificationsApiSlice;

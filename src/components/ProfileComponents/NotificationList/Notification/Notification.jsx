@@ -6,9 +6,9 @@ import Sms from '@mui/icons-material/SmsOutlined';
 import InfoOutlined from '@mui/icons-material/InfoOutlined';
 import ErrorRounded from '@mui/icons-material/ErrorRounded';
 import Close from '@mui/icons-material/Close';
-import {useMarkAsReadMutation} from "../../../../redux/auth/notificationsApiSlice";
 import {useSelector} from "react-redux";
 import {selectCurrentUser} from "../../../../redux/auth/authSlice";
+import {useDeleteNotificationMutation, useMarkAsReadMutation} from "../../../../redux/services/notificationsApiSlice";
 
 const iconMap = {
   message: <Sms />,
@@ -19,15 +19,21 @@ const iconMap = {
 const Notification = (props) => {
   const currentUser = useSelector(selectCurrentUser);
   const [markAsRead] = useMarkAsReadMutation();
+  const [deleteNotification] = useDeleteNotificationMutation();
 
   useEffect(() => {
-
-
     markAsRead({
         notificationId: props.id,
         userId: currentUser.data.id,
       });
   }, []);
+
+  const deleteBtnClickHandler = () => {
+    deleteNotification({
+      notificationId: props.id,
+      userId: currentUser.data.id,
+    });
+  };
 
   return (
     <Box sx={styles.wrapper}>
@@ -41,7 +47,7 @@ const Notification = (props) => {
       </Box>
 
       <Box sx={styles.actionWrapper}>
-        <IconButton sx={styles.closeBtn}>
+        <IconButton sx={styles.closeBtn} onClick={deleteBtnClickHandler}>
           <Close />
         </IconButton>
 

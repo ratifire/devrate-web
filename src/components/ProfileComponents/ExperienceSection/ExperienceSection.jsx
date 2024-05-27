@@ -11,7 +11,7 @@ import { openModal } from '../../../redux/modal/modalSlice';
 import { useDispatch } from 'react-redux';
 
 const ExperienceSection = () => {
-  const [value, setValue] = React.useState('workExperience');
+  const [value, setValue] = React.useState('openExperience');
 
   const { t } = useTranslation();
 
@@ -20,11 +20,11 @@ const ExperienceSection = () => {
   };
 
   const dispatch = useDispatch();
-  const handleAddFeature = () => dispatch(openModal({ modalName: 'openExperience' }));
+  const handleAddFeature = () => dispatch(openModal({ modalName: value }));
   const renderAdditionalInfo = (value) => {
     {
       switch (value) {
-        case 'workExperience':
+        case 'openExperience':
           return <WorkExperience />;
         case 'achievement':
           return <Achievment />;
@@ -68,7 +68,7 @@ const ExperienceSection = () => {
           textColor='primary'
           indicatorColor='primary[200]'
         >
-          <StyledTab value='workExperience' label={t('profile.experience.workExperience')} sx={styles.tabItem} />
+          <StyledTab value='openExperience' label={t('profile.experience.workExperience')} sx={styles.tabItem} />
           <StyledTab value='achievement' label={t('profile.experience.achievement')} sx={styles.tabItem} />
           <StyledTab value='skills' label={t('profile.experience.skills')} sx={styles.tabItem} />
           <StyledTab value='education' label={t('profile.experience.education')} sx={styles.tabItem} />
