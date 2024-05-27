@@ -1,33 +1,31 @@
 const styles = {
   title: (theme) => ({
-    marginTop: 50,
-    marginBottom: 30,
+    marginTop: '50px',
+    marginBottom: '30px',
     color: theme.palette.text.primary,
-    fontSize: 16,
   }),
-
   newsAgreementText: (theme) => ({
     fontWeight: 300,
-    fontSize: 14,
+    fontSize: '14px',
     lineHeight: 1.28,
     color: theme.palette.text.primary,
   }),
   inputNameContainer: {
     display: 'flex',
     justifyContent: 'spaceBetween',
-    gridGap: 10,
+    gridGap: '10px',
   },
   wrapperBtn: {
-    marginTop: 37,
-    marginBottom: 50,
+    marginTop: '37px',
+    marginBottom: '50px',
   },
   policyTermsContainer: {
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: '14px',
     lineHeight: 1.43,
   },
   policyTermsLink: (theme) => ({
-    marginRight: 10,
+    marginRight: '10px',
     color: theme.palette.text.primary,
     textDecoration: 'underline',
     '&:hover': {
@@ -35,7 +33,7 @@ const styles = {
     },
   }),
   tooltip: (theme) => ({
-    fontSize: 14,
+    fontSize: '14px',
     fontWeight: 300,
     lineHeight: '18px',
     color: theme.palette.text.primary,

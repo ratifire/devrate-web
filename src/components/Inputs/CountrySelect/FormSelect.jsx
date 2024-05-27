@@ -30,6 +30,9 @@ const FormSelect = ({
         onChange={handleChange}
         onBlur={handleBlur}
         error={error}
+        MenuProps={{
+          sx: styles.menuPaper,
+        }}
       >
         {countries.map(({ id, country }) => (
           <MenuItem key={id} value={country}>

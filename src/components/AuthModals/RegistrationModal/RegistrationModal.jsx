@@ -1,19 +1,17 @@
-import React, {useState} from 'react';
-import {useFormik} from 'formik';
-import {useTranslation} from 'react-i18next';
+import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
-import {Box, CircularProgress, Link, Typography} from '@mui/material';
+import { Box, CircularProgress, Link, Typography } from '@mui/material';
 import styles from './RegistrationModal.styles';
-import {RegistrationSchema} from './RegistrationSchema';
-import {FormCheckbox, FormInput, FormSelect} from '../../Inputs';
-import {userCountries} from '../../../utils/constants/userCountries';
-import {ButtonDef} from '../../Buttons';
-import {useDispatch, useSelector} from 'react-redux';
-// import { closeModal, openModal } from '../../../redux/modal/modalSlice';
-import {Link as RouterLink} from 'react-router-dom';
-import {useCreateUserMutation} from '../../../redux/auth/authApiSlice';
-import {closeModal, openModal} from '../../../redux/modal/modalSlice';
-// import { useCreateUserMutation } from '../../../redux/auth/authApiSlice';
+import { RegistrationSchema } from './RegistrationSchema';
+import { FormCheckbox, FormInput, FormSelect } from '../../Inputs';
+import { userCountries } from '../../../utils/constants/userCountries';
+import { ButtonDef } from '../../Buttons';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
+import { useCreateUserMutation } from '../../../redux/auth/authApiSlice';
+import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 
 const initialValues = {
   email: '',
@@ -58,34 +56,34 @@ const RegistrationModal = () => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
 
-  return isCreating ? (
+  return isCreating ? ( 
     <CircularProgress />
   ) : (
     <ModalLayout open={openRegistration} setOpen={handleClose}>
-      <Typography sx={styles.title}>{t('modal.registration.title')}</Typography>
+      <Typography variant='subtitle2' sx={styles.title}>{t('modal.registration.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-        <FormInput
-          name='email'
-          value={formik.values.email}
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          type='email'
-          label='modal.registration.email'
-          helperText={formik.touched.email && formik.errors.email}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-        />
-        <FormSelect
-          variant='outlined'
-          name='country'
-          value={formik.values.country}
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          label='modal.registration.country'
-          error={formik.touched.country && Boolean(formik.errors.country)}
-          helperText={formik.touched.country && formik.errors.country}
-          countries={userCountries}
-          itemsText='modal.registration.countries'
-        />
+          <FormInput
+            name='email'
+            value={formik.values.email}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            type='email'
+            label='modal.registration.email'
+            helperText={formik.touched.email && formik.errors.email}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+          />
+          <FormSelect
+            variant='outlined'
+            name='country'
+            value={formik.values.country}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            label='modal.registration.country'
+            error={formik.touched.country && Boolean(formik.errors.country)}
+            helperText={formik.touched.country && formik.errors.country}
+            countries={userCountries}
+            itemsText='modal.registration.countries'
+          />
         <Box sx={styles.inputNameContainer}>
           <FormInput
             name='firstName'
