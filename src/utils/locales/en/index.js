@@ -27,6 +27,20 @@ export const en = {
       },
     },
     modal: {
+      achievement: {
+        title: 'Achievement',
+        link: 'Link',
+        summary: 'Achievement label',
+        description: 'Achievement description',
+      },
+      education: {
+        title: 'Education',
+        type: 'Speciality',
+        name: 'Education company',
+        description: 'Description',
+        startYear: 'Start year',
+        endYear: 'End year',
+      },
       checkEmailResetPassword: {
         send_letter_title:
           'Please enter the email address you used when registering. An email will be sent to you with instructions on how to reset your password.',
