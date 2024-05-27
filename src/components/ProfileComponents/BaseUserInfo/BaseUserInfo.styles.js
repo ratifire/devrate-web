@@ -47,24 +47,10 @@ export const styles = {
     marginBottom: theme.spacing(1),
   }),
   city: (theme) => ({
-    // тут треба поправити на майбутне
     display: 'flex',
-    fontSize: 16,
-    lineHeight: '22px',
-    fontWeight: 500,
-    color: theme.palette.text.secondary,
-    letterSpacing: '0.17px',
-    marginBottom: theme.spacing(1),
+    alignItems: 'center',
+    color: theme.palette.info.main,
   }),
-  online: {
-    // тут треба поправити на майбутне
-    display: 'flex',
-    fontSize: 16,
-    lineHeight: '22px',
-    fontWeight: 500,
-    color: '#64FF2E',
-    letterSpacing: '0.17px',
-  },
   icon: (theme) => ({
     fontSize: 18,
     marginRight: theme.spacing(1),
@@ -75,15 +61,6 @@ export const styles = {
     width: '100%',
     gridGap: theme.spacing(4),
     marginTop: '20px',
-  }),
-  btn: (theme) => ({
-    paddingY: '14px',
-    flex: '1 0 calc(100% - 60px)',
-    textTransform: 'lowercase',
-    backgroundColor: theme.palette.primary['400'],
-    '::first-letter': {
-      textTransform: 'uppercase',
-    },
   }),
   btnIcon: (theme) => ({
     flex: '1 0 44px',
