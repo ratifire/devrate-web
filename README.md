@@ -55,8 +55,8 @@ The frontend of the application is built using modern web technologies and frame
 - [@mui/x-date-pickers](https://mui.com/x/react-date-pickers/getting-started/) 
 - [dayjs](https://day.js.org/) 
 - [react-avatar-editor](https://github.com/mosch/react-avatar-editor) 
-- [react-dropzone](https://react-dropzone.js.org/) v14.2.3
-- [react-i18next](https://react.i18next.com/) v14.0.0
+- [react-dropzone](https://react-dropzone.js.org/)
+- [react-i18next](https://react.i18next.com/)
 
 ## Test Account
 
