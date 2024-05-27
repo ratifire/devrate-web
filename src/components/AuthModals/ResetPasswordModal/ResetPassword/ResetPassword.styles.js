@@ -1,47 +1,33 @@
 const styles = {
   title: (theme) => ({
-    fontSize: 16,
-    fontWeight: 500,
-    lineHeight: '24px',
-    color: theme.palette.text.primary,
+    color: theme.palette.text.secondary,
     textAlign: 'center',
-    letterSpacing: '-1.1%',
-    marginTop: 48,
-    marginBottom: 30,
+    marginBottom: theme.spacing(4),
   }),
   text: (theme) => ({
-    fontSize: 14,
-    fontWeight: 300,
-    lineHeight: '20px',
     color: theme.palette.text.primary,
     textAlign: 'center',
-    marginTop: 50,
+    marginTop: theme.spacing(4),
   }),
-  textLink: {
-    fontSize: 14,
-    fontWeight: 300,
-    lineHeight: '20px',
-    color: '#f1f1f180',
+  textLink: (theme) => ({
+    color: theme.palette.text.secondary,
     textAlign: 'center',
-    marginTop: 36,
-  },
+    marginTop: theme.spacing(4),
+  }),
   link: (theme) => ({
-    fontSize: 14,
-    fontWeight: 300,
-    lineHeight: '20px',
     color: theme.palette.text.primary,
     textAlign: 'center',
     textDecoration: 'underline',
-    marginTop: 36,
+    marginTop: theme.spacing(4),
   }),
-  input: {
+  input: (theme) => ({
     width: '100%',
-    marginBottom: 24,
-  },
-  wrapperBtn: {
-    marginTop: 44,
-    marginBottom: 50,
-  },
+    marginBottom: theme.spacing(4),
+  }),
+  wrapperBtn: (theme) => ({
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+  }),
   tooltip: (theme) => ({
     fontSize: 14,
     fontWeight: 300,

@@ -2,20 +2,51 @@ import React from 'react';
 import { AppBar, Badge, Box, Button, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import styles from './ProfileHeader.styles';
 import Logo from '../../UI/Logo';
-
-import { ReactComponent as BellNotification } from '../../../assets/icons/bell.svg'; // import { ReactComponent as LoupeSearch } from '../../../assets/icons/loupe.svg';
 import { ReactComponent as Message } from '../../../assets/icons/message.svg';
 import { ReactComponent as Loupe } from '../../../assets/icons/loupe.svg';
 import { useFormik } from 'formik';
 import UserAvatar from '../../UI/UserAvatar';
-import PropTypes from 'prop-types';
 import UserMenu from '../UserMenu';
+import NotificationList from '../NotificationList';
+import { useSelector } from 'react-redux';
 
 const initialValues = {
   query: '',
 };
 
-function ProfileHeader({ userName }) {
+const notifications = [
+  {
+    id: '1',
+    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
+    date: '6 годин тому',
+    new: false,
+    type: 'warning',
+  },
+  {
+    id: '2',
+    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
+    date: '6 годин тому',
+    new: true,
+    type: 'info',
+  },
+  {
+    id: '3',
+    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
+    date: '6 годин тому',
+    new: true,
+    type: 'info',
+  },
+  {
+    id: '4',
+    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
+    date: '6 годин тому',
+    new: true,
+    type: 'message',
+  },
+];
+
+function ProfileHeader() {
+  const { firstName, lastName } = useSelector((state) => state.auth.user.data);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const toggleDrawer = (event) => {
@@ -64,18 +95,14 @@ function ProfileHeader({ userName }) {
             }
           />
         </form>
-        <IconButton>
-          <Badge color='error' overlap='circular' badgeContent=' ' variant='dot' invisible={false}>
-            <BellNotification />
-          </Badge>
-        </IconButton>
+        <NotificationList items={notifications} />
         <IconButton>
           <Badge color='error' overlap='circular' badgeContent='' variant='dot' invisible={true}>
             <Message />
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
-          <UserAvatar userName={userName} size='sm' />
+          <UserAvatar userName={`${firstName} ${lastName}`} size='sm' />
         </Button>
         <UserMenu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
@@ -83,7 +110,4 @@ function ProfileHeader({ userName }) {
   );
 }
 
-ProfileHeader.propTypes = {
-  userName: PropTypes.string.isRequired,
-};
 export default ProfileHeader;

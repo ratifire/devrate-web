@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import ModalUserInfo from '../../components/ProfileModals';
+import { ModalUserInfo, WorkExperienceModal } from '../../components/ProfileModals'
 
 const ProfileTemplate = ({ children }) => {
   const openUserInfo = useSelector((state) => state.modal.openUserInfo);
+  const openExperience = useSelector((state) => state.modal.openExperience);
   return (
     <div className='profile'>
       {children}
       {openUserInfo && <ModalUserInfo />}
+      {openExperience && <WorkExperienceModal />}
     </div>
   );
 };

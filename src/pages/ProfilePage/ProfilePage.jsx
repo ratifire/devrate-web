@@ -9,32 +9,33 @@ import RightSection from '../../components/ProfileComponents/RightSection';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../redux/auth/authSlice';
 import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie'
 
 const ProfilePage = () => {
   const name = 'Олена Бондаренко';
   const dispatch = useDispatch();
-  const [cookies] = useCookies('JSESSIONID');
+
+  const cookies = Cookies.get('JSESSIONID');
 
   useEffect(() => {
-    dispatch(setCredentials({ isAuthenticated: Boolean(cookies.JSESSIONID) }));
-  }, [cookies.JSESSIONID]);
+    dispatch(setCredentials({ isAuthenticated: Boolean(cookies) }));
+  }, [cookies]);
 
   return (
     <ProfileTemplate>
       <ProfileHeader userName={name} />
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
-          <Paper xs={4} sx={styles.baseUserInfo}>
+          <Paper sx={styles.baseUserInfo}>
             <BaseUserInfo userName={name} />
           </Paper>
-          <Paper xs={5} sx={styles.skills}>
+          <Paper sx={styles.skills}>
             <SkillsSection />
           </Paper>
-          <Paper xs={3} sx={styles.right}>
+          <Paper sx={styles.right}>
             <RightSection />
           </Paper>
-          <Paper xs={8} sx={styles.experience}>
+          <Paper sx={styles.experience}>
             <ExperienceSection />
           </Paper>
         </Box>

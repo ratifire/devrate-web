@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import { styles } from './FormSelect.styles';
 import { useTranslation } from 'react-i18next';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const FormSelect = ({
   variant,
@@ -30,12 +31,15 @@ const FormSelect = ({
         onChange={handleChange}
         onBlur={handleBlur}
         error={error}
-        MenuProps={{
-          sx: styles.menuPaper,
+        IconComponent={KeyboardArrowDownIcon}
+        inputProps={{
+          MenuProps: {
+            sx: styles.selectField,
+          },
         }}
       >
         {countries.map(({ id, country }) => (
-          <MenuItem key={id} value={country}>
+          <MenuItem key={id} value={country} sx={styles.menuItem}>
             {t(`${itemsText}.${country}`)}
           </MenuItem>
         ))}

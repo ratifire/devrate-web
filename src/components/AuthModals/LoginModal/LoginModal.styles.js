@@ -6,8 +6,8 @@ const styles = {
     color: theme.palette.text.primary,
     textAlign: 'center',
     letterSpacing: '-1.1%',
-    marginTop: 48,
-    marginBottom: 30,
+    marginTop: '48px',
+    marginBottom: '30px',
   }),
   textLink: {
     fontSize: 14,
@@ -15,20 +15,20 @@ const styles = {
     color: '#f1f1f180',
     textAlign: 'center',
     lineHeight: 1.5,
-    marginBottom: 32,
+    marginBottom: '32px',
   },
   link: (theme) => ({
-    marginRight: 10,
+    marginRight: '10px',
     textDecoration: 'underline',
     color: theme.palette.text.primary,
   }),
   input: {
     width: '100%',
-    marginBottom: 24,
+    marginBottom: '24px',
   },
   wrapperBtn: {
-    marginTop: 32,
-    marginBottom: 50,
+    marginTop: '32px',
+    marginBottom: '50px',
   },
   policyText: (theme) => ({
     width: '100%',
@@ -36,7 +36,7 @@ const styles = {
     lineHeight: 1.43,
     fontWeight: 300,
     textAlign: 'center',
-    marginBottom: 36,
+    // marginBottom: 36,
     color: theme.palette.text.primary,
   }),
   turnBackContainer: {
@@ -45,7 +45,7 @@ const styles = {
     justifyContent: 'center',
   },
   turnBackText: {
-    marginRight: 10,
+    marginRight: '10px',
     fontSize: 14,
     lineHeight: 1.43,
     color: '#F1F1F14D',
