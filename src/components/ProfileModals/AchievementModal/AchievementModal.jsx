@@ -3,10 +3,10 @@ import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import {useDispatch, useSelector} from 'react-redux';
 import {closeModal} from '../../../redux/modal/modalSlice';
 import {Box, Typography} from '@mui/material';
-import {styles} from './AchivementModal.styles';
+import {styles} from './AchievementModal.styles';
 import {useTranslation} from 'react-i18next';
 import {useFormik} from 'formik';
-import {AchivementModalSchema} from './AchivementModalSchema';
+import {AchievementModalSchema} from './AchievementModalSchema';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
 import {ButtonDef} from '../../Buttons';
@@ -42,7 +42,7 @@ const AchievementModal = () => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: AchivementModalSchema,
+    validationSchema: AchievementModalSchema,
     onSubmit,
   });
 
