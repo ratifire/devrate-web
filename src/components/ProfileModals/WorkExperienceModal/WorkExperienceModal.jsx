@@ -16,9 +16,13 @@ import Responsibility from '../../UI/Responsibility';
 import { ButtonDef } from '../../Buttons';
 import { DateField } from '@mui/x-date-pickers';
 import { DateTime } from 'luxon';
+import { useCreateNewWorkExperienceMutation } from '../../../redux/workExperience/workExperienceApiSlice';
 
 
 const WorkExperienceModal = () => {
+  const { id } = useSelector((state) => state.auth.user.data);
+  const [ createNewWorkExperience ] = useCreateNewWorkExperienceMutation();
+
   const dispatch = useDispatch();
   const openExperience = useSelector((state) => state.modal.openExperience);
   const handleClose = () => dispatch(closeModal({ modalName: 'openExperience' }));
@@ -32,22 +36,20 @@ const WorkExperienceModal = () => {
     startDate: null,
     endDate: null
   };
-  const onSubmit = (values, { resetForm }) => {
-    values.responsibilities = responsibilities;
+  const onSubmit = async (values, { resetForm }) => {
+    const startDate = DateTime.fromISO(values.startDate).toISODate();
+    const endDate = DateTime.fromISO(values.endDate).toISODate();
+    const data = {...values, startDate, endDate, responsibilities};
 
-    if (values.startDate) {
-      const startDate = DateTime.fromISO(values.startDate);
-      values.startDate = startDate.isValid ? startDate.toISODate() : null;
+    try {
+      await createNewWorkExperience({userId: id, data}).unwrap();
+      console.log('Work Experience created successfully');
+    } catch (error) {
+      console.error('Failed to create Work Experience', error);
     }
 
-    if (values.endDate) {
-      const endDate = DateTime.fromISO(values.endDate);
-      values.endDate = endDate.isValid ? endDate.toISODate() : null;
-    }
-
-    console.log('Submitted values:', values);
-    resetForm();
     setResponsibilities([]);
+    resetForm();
     handleClose();
   };
 
