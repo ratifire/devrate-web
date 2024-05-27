@@ -9,11 +9,9 @@ import { FormCheckbox, FormInput, FormSelect } from '../../Inputs';
 import { userCountries } from '../../../utils/constants/userCountries';
 import { ButtonDef } from '../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
-// import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { Link as RouterLink } from 'react-router-dom';
 import { useCreateUserMutation } from '../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
-// import { useCreateUserMutation } from '../../../redux/auth/authApiSlice';
 
 const initialValues = {
   email: '',

@@ -4,15 +4,23 @@ import { Box } from '@mui/material';
 import LoadImages from '../../../UI/LoadImages';
 import { useFormik } from 'formik';
 import { StepAvatarSchema } from './StepAvatarSchema';
+import { useAddPicturesUserMutation } from '../../../../redux/user/userApiSlice';
+import { useSelector } from 'react-redux';
 
 const initialValues = {
   avatar: '',
 };
 
 const StepAvatar = () => {
-  const onSubmit = (values, { resetForm }) => {
-    console.log('Submitted values:', values);
-    resetForm();
+  const [addPicturesUser] = useAddPicturesUserMutation();
+  const userId = useSelector((state) => state.auth.user.data.id);
+  const onSubmit = (values) => {
+    const { avatar } = values;
+    console.log('Submitted values:', avatar);
+    addPicturesUser({
+      userId,
+      avatar,
+    });
   };
 
   const formik = useFormik({
@@ -26,7 +34,7 @@ const StepAvatar = () => {
   };
 
   useEffect(() => {
-    console.log(formik.values.avatar, '12312312');
+    console.log(formik.values.avatar, 'useEffect');
   }, [formik.values.avatar]);
 
   return (
@@ -34,6 +42,7 @@ const StepAvatar = () => {
       <Box sx={styles.input100}>
         <LoadImages handleChange={handleAvatarChange} handleBlur={formik.handleBlur} value={formik.values.avatar} />
       </Box>
+      <button onClick={onSubmit}>eqweqeq</button>
     </Box>
   );
 };

@@ -6,19 +6,25 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from './StepPersonalSchema';
+import { useUpdatePersonalUserMutation } from '../../../../redux/user/userApiSlice';
 
 const StepPersonal = () => {
   const userData = useSelector((state) => state.auth.user.data);
+  console.log(userData);
+
   const initialValues = {
+    id: userData.id,
     firstName: userData.firstName,
     lastName: userData.lastName,
-    city: '',
-    country: '',
-    status: '',
-    aboutMe: '',
+    city: userData.city,
+    country: userData.country,
+    position: userData.position,
+    subscribed: userData.subscribed,
+    description: userData.description,
   };
-  const onSubmit = (values, { resetForm }) => {
-    resetForm();
+  const [updatePersonalUser] = useUpdatePersonalUserMutation();
+  const onSubmit = ({ id, firstName, lastName, city, country, position, subscribed, description }) => {
+    updatePersonalUser({ id, firstName, lastName, city, country, position, subscribed, description });
   };
   const formik = useFormik({
     initialValues,
@@ -26,7 +32,7 @@ const StepPersonal = () => {
     onSubmit,
   });
   return (
-    <Box sx={styles.wrapper}>
+    <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.input50}>
         <FormInput
           name='firstName'
@@ -78,29 +84,30 @@ const StepPersonal = () => {
       </Box>
       <Box sx={styles.input100}>
         <FormInput
-          name='status'
-          value={formik.values.status}
+          name='position'
+          value={formik.values.position}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           type='text'
           label='profile.modal.userInfo.personal.status'
-          helperText={formik.touched.status && formik.errors.status}
-          error={formik.touched.status && Boolean(formik.errors.status)}
+          helperText={formik.touched.position && formik.errors.position}
+          error={formik.touched.position && Boolean(formik.errors.position)}
         />
       </Box>
       <Box sx={styles.input100}>
         <TextAreaInput
-          name='aboutMe'
-          value={formik.values.aboutMe}
+          name='description'
+          value={formik.values.description}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           type='text'
           label='profile.modal.userInfo.personal.about_me'
-          helperText={formik.touched.status && formik.errors.status}
-          error={formik.touched.status && Boolean(formik.errors.status)}
+          helperText={formik.touched.description && formik.errors.description}
+          error={formik.touched.description && Boolean(formik.errors.description)}
         />
       </Box>
-    </Box>
+      <button type='submit'>Зберегти</button>
+    </form>
   );
 };
 
