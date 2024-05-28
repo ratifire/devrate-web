@@ -4,7 +4,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 
-const LanguageLevel = ({ language, level, code, tobeDeleted, languageDeleteHandler }) => {
+const LanguageLevel = ({ level, code, tobeDeleted, languageDeleteHandler }) => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.language}>{code}</Box>
@@ -12,7 +12,7 @@ const LanguageLevel = ({ language, level, code, tobeDeleted, languageDeleteHandl
         {level}
       </Typography>
       {tobeDeleted && (
-        <IconButton sx={styles.icon} onClick={() => languageDeleteHandler(language)}>
+        <IconButton sx={styles.icon} onClick={() => languageDeleteHandler(code)}>
           <CloseIcon />
         </IconButton>
       )}

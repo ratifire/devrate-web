@@ -1,95 +1,36 @@
-export const languages = [
+export const languages = {
+  UKRAINE: 'UA',
+  ENGLISH: 'EN',
+  FRENCH: 'FR',
+  ITALIAN: 'IT',
+  GERMAN: 'DE',
+  SPANISH: 'ES',
+  POLISH: 'PL',
+  CZECH: 'CS',
+};
+export const languagesLevels = [
   {
-    id: 0,
-    name: 'English',
-    code: 'EN',
-    levels: [
-      {
-        id: 0,
-        level: 'Beginner',
-      },
-      {
-        id: 1,
-        level: 'Pre-Intermediate',
-      },
-      {
-        id: 2,
-        level: 'Intermediate',
-      },
-      {
-        id: 3,
-        level: 'Upper-Intermediate',
-      },
-      {
-        id: 4,
-        level: 'Advanced',
-      },
-      {
-        id: 5,
-        level: 'Proficient',
-      },
-    ],
+    level: 'ELEMENTARY|A1',
+    title: 'langLevel.ELEMENTARY_A1',
   },
   {
-    id: 1,
-    name: 'Українська',
-    code: 'UK',
-    levels: [
-      {
-        id: 0,
-        level: 'Початковий рівень',
-      },
-      {
-        id: 1,
-        level: 'Базовий рівень',
-      },
-      {
-        id: 2,
-        level: 'Рубіжний рівень',
-      },
-      {
-        id: 3,
-        level: 'Середній рівень',
-      },
-      {
-        id: 4,
-        level: 'Високий рівень',
-      },
-      {
-        id: 5,
-        level: 'Вільне володіння',
-      },
-    ],
+    level: 'ELEMENTARY|A2',
+    title: 'langLevel.ELEMENTARY_A2',
   },
   {
-    id: 2,
-    name: 'Deutsch',
-    code: 'DE',
-    levels: [
-      {
-        id: 0,
-        level: 'Anfänger',
-      },
-      {
-        id: 1,
-        level: 'Grundlegende Kenntnisse',
-      },
-      {
-        id: 2,
-        level: 'Mittelstufe',
-      },
-      {
-        id: 3,
-        level: 'Selbständige Sprachverwendung',
-      },
-      {
-        id: 4,
-        level: 'Fachkundige Sprachkenntnisse',
-      },
-      {
-        id: 5,
-        level: 'Annähernd muttersprachliche Kenntnisse',
-      },
-    ],
+    level: 'PRE-INTERMEDIATE|B1',
+    title: 'langLevel.PRE-INTERMEDIATE_B1',
+  },
+  {
+    level: 'PRE-INTERMEDIATE|B2',
+    title: 'langLevel.PRE-INTERMEDIATE_B2',
+  },
+  {
+    level: 'INTERMEDIATE|C1',
+    title: 'langLevel.INTERMEDIATE_C1',
+  },
+  {
+    level: 'ADVANCED|C2',
+    title: 'langLevel.ADVANCED_C2',
   },
 ];

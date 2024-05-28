@@ -14,7 +14,7 @@ const StepLanguage = () => {
   const [errorLevel, setErrorLevel] = useState(false);
   const [helperTextLanguage, setHelperTextLanguage] = useState('');
   const [helperTextLevel, setHelperTextLevel] = useState('');
-
+  console.log(lang, 'lang');
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
     setSelectedLevel('');
@@ -52,9 +52,8 @@ const StepLanguage = () => {
 
     if (!hasError) {
       const newLang = {
-        language: selectedLanguage,
-        languageLevel: selectedLevel,
-        code: selectedLangObj.code,
+        level: selectedLevel,
+        name: selectedLangObj.code,
       };
       setLang([...lang, newLang]);
       setSelectedLanguage('');
@@ -63,42 +62,44 @@ const StepLanguage = () => {
   };
 
   const languageDeleteHandler = (languageToDelete) => {
-    setLang(lang.filter((item) => item.language !== languageToDelete));
+    setLang(lang.filter((item) => item.name !== languageToDelete));
   };
 
   useEffect(() => console.log(lang), [lang]);
 
   return (
     <Box sx={styles.wrapper}>
-      <Box sx={styles.input100}>
-        <SelectLanguage
-          variant='outlined'
-          handleLanguageChange={handleLanguageChange}
-          handleLevelChange={handleLevelChange}
-          labelLanguage='profile.modal.userInfo.languages.language'
-          labelLevel='profile.modal.userInfo.languages.level'
-          helperTextLanguage={helperTextLanguage}
-          helperTextLevel={helperTextLevel}
-          errorLanguage={errorLanguage}
-          errorLevel={errorLevel}
-          data={languages}
-        />
-        <IconButton sx={styles.iconBtn} onClick={createLang}>
-          <AddIcon />
-        </IconButton>
-      </Box>
-      <Box sx={styles.input100}>
-        {lang.map((item) => (
-          <LanguageLevel
-            key={item.id}
-            level={item.languageLevel}
-            language={item.language}
-            code={item.code}
-            tobeDeleted={true}
-            languageDeleteHandler={languageDeleteHandler}
+      <form action=''>
+        <Box sx={styles.input100}>
+          <SelectLanguage
+            variant='outlined'
+            handleLanguageChange={handleLanguageChange}
+            handleLevelChange={handleLevelChange}
+            labelLanguage='profile.modal.userInfo.languages.language'
+            labelLevel='profile.modal.userInfo.languages.level'
+            helperTextLanguage={helperTextLanguage}
+            helperTextLevel={helperTextLevel}
+            errorLanguage={errorLanguage}
+            errorLevel={errorLevel}
+            data={languages}
           />
-        ))}
-      </Box>
+          <IconButton sx={styles.iconBtn} onClick={createLang}>
+            <AddIcon />
+          </IconButton>
+        </Box>
+        <Box sx={styles.input100}>
+          {lang.map((item) => (
+            <LanguageLevel
+              key={item.language}
+              level={item.level}
+              language={item.language}
+              code={item.name}
+              tobeDeleted={true}
+              languageDeleteHandler={languageDeleteHandler}
+            />
+          ))}
+        </Box>
+      </form>
     </Box>
   );
 };
