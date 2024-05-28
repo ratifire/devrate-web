@@ -10,15 +10,20 @@ const modalSlice = createSlice({
     openResetPassword: false,
     openUserInfo: false,
     openExperience: false,
+    modalData: null,
   },
   reducers: {
     openModal: (state, action) => {
-      const { modalName } = action.payload;
+      const { modalName, data } = action.payload;
       state[modalName] = true;
+      if (data) {
+        state.modalData = data; // Store the data when the modal is opened
+      }
     },
     closeModal: (state, action) => {
       const { modalName } = action.payload;
       state[modalName] = false;
+      state.modalData = null;
     },
   },
 });

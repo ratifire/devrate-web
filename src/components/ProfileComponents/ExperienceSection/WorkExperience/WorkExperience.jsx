@@ -25,6 +25,7 @@ const WorkExperience = () => {
           return (
             <WorkExperienceItem
               key={id}
+              id={id}
               startDate={startDate}
               endDate={endDate}
               position={position}

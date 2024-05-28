@@ -17,10 +17,31 @@ export const workExperienceApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['WorkExperience'],
     }),
 
+    updateWorkExperienceById: builder.mutation({
+      query({ id, data }) {
+        return {
+          url: `/employment-records/${id}`,
+          method: "PUT",
+          body: {...data},
+        };
+      },
+    }),
+
+    deleteWorkExperienceById: builder.mutation({
+      query(id) {
+        return {
+          url: `/employment-records/${id}`,
+          method: "DELETE",
+        };
+      },
+    }),
+
   }),
 });
 
 export const {
   useGetWorkExperienceByUserIdQuery,
   useCreateNewWorkExperienceMutation,
+  useUpdateWorkExperienceByIdMutation,
+  useDeleteWorkExperienceByIdMutation,
 } = workExperienceApiSlice;

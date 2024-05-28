@@ -7,17 +7,16 @@ import { useTranslation } from 'react-i18next';
 import Responsibility from '../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { openModal } from '../../../../../redux/modal/modalSlice';
+import { useDeleteWorkExperienceByIdMutation } from '../../../../../redux/workExperience/workExperienceApiSlice';
 
-// const mockData = [
-//   'BackEnd development',
-//   'Leading the design and architecture discussions',
-//   'Collaboration with cross-functional teams',
-//   'Ensuring code quality and maintainability',
-//   'Service/database architecture design and implementation',
-// ];
+const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, description, responsibilities }) => {
+  const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();
 
-const WorkExperienceItem = ({ startDate, endDate, position, companyName, description, responsibilities}) => {
   const [anchorEl, setAnchorEl] = useState(false);
+
+  const dispatch = useDispatch();
 
   const { t } = useTranslation();
   const handleCloseMenu = () => {
@@ -28,17 +27,15 @@ const WorkExperienceItem = ({ startDate, endDate, position, companyName, descrip
   };
   const handleEditFeature = () => {
     console.log('EditFeature');
+    dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startDate, endDate } }));
+    handleCloseMenu();
   };
 
-  const handleDeleteFeature = () => {
+  const handleDeleteFeature = async () => {
+    await deleteWorkExperienceMutation(id).unwrap();
     console.log('DeleteFeature');
   };
-  // const text =
-  //   'Prosper є лідером у сфері фінтеху, пропонуючи платформу пірингового кредитування, ' +
-  //   'яка поєднує передові технології з фінансовими послугами. Вони використовують ' +
-  //   'алгоритми на основі даних для ефективної та справедливої обробки кредитів, що робить ' +
-  //   'їх актуальними для розробників програмного забезпечення, зацікавлених у перетині технологій ' +
-  //   'та фінансів.';
+
   return (
     <Box sx={styles.workExpeirenceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
@@ -78,6 +75,7 @@ const WorkExperienceItem = ({ startDate, endDate, position, companyName, descrip
 };
 
 WorkExperienceItem.propTypes = {
+  id: PropTypes.number.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
