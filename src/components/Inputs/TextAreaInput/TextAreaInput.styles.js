@@ -1,32 +1,36 @@
 export const styles = {
-  textareaBox: (theme) => ({
-    borderRadius: theme.spacing(1),
-    '& .MuiOutlinedInput-root': {
-      // '&.Mui-focused fieldset': {
-      //   borderColor: theme.palette.action.active, // Set the border color when focused
-      // },
-      '& fieldset': {
-        borderColor: theme.palette.neutral[500], // Set the border color when not focused
-      },
-      // '&:hover fieldset': {
-      //   borderColor: theme.palette.neutral[300], // Set the border color on hover
-      // },
+  input: (theme) => ({
+    ' .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.neutral['500'],
     },
-    // '& label': {
-    //   color: 'secondary.main',
-    //   // Set the label color to the secondary color
-    // },
-    // '& label.Mui-focused': {
-    //   color: 'primary.main',
-    //   // Set the label color to the primary color when focused
-    // },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.neutral['300'],
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.primary['200'],
+      borderWidth: '2px',
+    },
+    '&.Mui-error.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.error.main,
+    },
+    '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.error.main,
+    },
+  }),
+  label: (theme) => ({
+    '&.Mui-focused': {
+      color: theme.palette.primary['200'],
+    },
+    '&.Mui-error': {
+      color: theme.palette.error.main,
+    },
   }),
   textHelper: {
     position: 'absolute',
     bottom: '-23px',
   },
-  input: (theme) => ({
-      width: '100%',
-      marginBottom: theme.spacing(4),
-    })
+  textareaBox: (theme) => ({
+    width: '100%',
+    marginBottom: theme.spacing(4),
+  }),
 };

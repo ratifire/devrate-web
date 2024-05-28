@@ -23,9 +23,12 @@ const FormInput = ({
   const id = uuid();
   const { t } = useTranslation();
   return (
-    <FormControl variant='outlined' sx={styles.input} error={error}>
-      <InputLabel htmlFor={id}>{t(label)}</InputLabel>
+    <FormControl variant='outlined' sx={styles.inputWrapper} error={error}>
+      <InputLabel htmlFor={id} sx={styles.label}>
+        {t(label)}
+      </InputLabel>
       <OutlinedInput
+        sx={styles.input}
         autoComplete='off'
         id={id}
         name={name}
@@ -48,11 +51,11 @@ const FormInput = ({
           )
         }
       />
-      {
+      {error && (
         <FormHelperText id={id} sx={styles.textHelper}>
           {t(helperText)}
         </FormHelperText>
-      }
+      )}
     </FormControl>
   );
 };

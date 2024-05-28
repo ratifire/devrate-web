@@ -34,8 +34,8 @@ const StepAvatar = () => {
   };
 
   useEffect(() => {
-    console.log(formik.values.avatar, 'useEffect');
-  }, [formik.values.avatar]);
+     console.log(formik.values.avatar, 'formik.values.avatar');
+    }, [formik.values.avatar]);
 
   return (
     <Box sx={styles.wrapper}>
