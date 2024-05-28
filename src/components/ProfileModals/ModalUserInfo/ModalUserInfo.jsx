@@ -23,9 +23,27 @@ const ModalUserInfo = () => {
   const dispatch = useDispatch();
   const openUserInfo = useSelector((state) => state.modal.openUserInfo);
   const handleClose = () => dispatch(closeModal({ modalName: 'openUserInfo' }));
+  const step = useSelector((state) => state.modalStep.step);
   const { t } = useTranslation();
-  const [activeStep, setActiveStep] = useState(0);
+   const [activeStep, setActiveStep] = useState(0);
+    const [completed, setCompleted] = useState({});
 
+  const totalSteps = () => {
+    return steps.length;
+  };
+
+  const completedSteps = () => {
+    return Object.keys(completed).length;
+  };
+
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
+  };
+
+  const allStepsCompleted = () => {
+    return completedSteps() === totalSteps();
+  };
+ 
   const handleNext = () => {
     setActiveStep((nextActiveStep) => nextActiveStep + 1);
   };

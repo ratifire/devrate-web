@@ -1,14 +1,12 @@
 const styles = {
   title: (theme) => ({
     marginTop: '50px',
-    marginBottom: theme.spacing(4),
+    marginBottom: '30px',
     color: theme.palette.text.primary,
-    fontSize: 16,
   }),
-
   newsAgreementText: (theme) => ({
     fontWeight: 300,
-    fontSize: 14,
+    fontSize: '14px',
     lineHeight: 1.28,
     color: theme.palette.text.primary,
   }),
@@ -23,7 +21,7 @@ const styles = {
   },
   policyTermsContainer: {
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: '14px',
     lineHeight: 1.43,
   },
   policyTermsLink: (theme) => ({
@@ -35,7 +33,7 @@ const styles = {
     },
   }),
   tooltip: (theme) => ({
-    fontSize: 14,
+    fontSize: '14px',
     fontWeight: 300,
     lineHeight: '18px',
     color: theme.palette.text.primary,
