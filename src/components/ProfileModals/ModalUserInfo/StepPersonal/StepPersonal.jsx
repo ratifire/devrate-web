@@ -7,24 +7,44 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from './StepPersonalSchema';
 import { useUpdatePersonalUserMutation } from '../../../../redux/user/userApiSlice';
+import { ButtonDef } from '../../../Buttons';
 
 const StepPersonal = () => {
   const userData = useSelector((state) => state.auth.user.data);
-  console.log(userData);
 
   const initialValues = {
-    id: userData.id,
     firstName: userData.firstName,
     lastName: userData.lastName,
     city: userData.city,
     country: userData.country,
     position: userData.position,
-    subscribed: userData.subscribed,
     description: userData.description,
   };
   const [updatePersonalUser] = useUpdatePersonalUserMutation();
-  const onSubmit = ({ id, firstName, lastName, city, country, position, subscribed, description }) => {
-    updatePersonalUser({ id, firstName, lastName, city, country, position, subscribed, description });
+  const onSubmit = ({ firstName, lastName, city, country, position, description }) => {
+    updatePersonalUser({
+      id: userData.id,
+      firstName: firstName,
+      lastName: lastName,
+      status: position,
+      country: country,
+      city: city,
+      subscribed: userData.subscribed,
+      description: description,
+    });
+    console.log(
+      {
+        id: userData.id,
+        firstName: firstName,
+        lastName: lastName,
+        status: position,
+        country: country,
+        city: city,
+        subscribed: userData.subscribed,
+        description: description,
+      },
+      'onSubmit'
+    );
   };
   const formik = useFormik({
     initialValues,
@@ -106,7 +126,9 @@ const StepPersonal = () => {
           error={formik.touched.description && Boolean(formik.errors.description)}
         />
       </Box>
-      <button type='submit'>Зберегти</button>
+      <Box sx={styles.wrapperBtn}>
+        <ButtonDef variant='contained' correctStyle={styles.btn} type='submit' label='profile.modal.btn' />
+      </Box>
     </form>
   );
 };
