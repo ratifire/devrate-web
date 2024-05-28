@@ -23,8 +23,9 @@ const ModalUserInfo = () => {
   const dispatch = useDispatch();
   const openUserInfo = useSelector((state) => state.modal.openUserInfo);
   const handleClose = () => dispatch(closeModal({ modalName: 'openUserInfo' }));
+  const step = useSelector((state) => state.modalStep.step);
   const { t } = useTranslation();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(step);
   const [completed, setCompleted] = useState({});
 
   const totalSteps = () => {
