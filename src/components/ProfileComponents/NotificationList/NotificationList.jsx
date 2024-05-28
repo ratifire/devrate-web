@@ -32,13 +32,19 @@ const NotificationList = () => {
   return (
     <>
       <IconButton onClick={bellButtonClickHandler}>
-        <Badge color='error' overlap='circular' badgeContent=' ' variant='dot' invisible={false}>
+        <Badge
+          color='error'
+          overlap='circular'
+          badgeContent=' '
+          variant='dot'
+          invisible={!notifications?.length}
+        >
           <BellNotification />
         </Badge>
       </IconButton>
       <Popover
         id={id}
-        open={open}
+        open={open && Boolean(notifications?.length)}
         anchorEl={bellButton}
         onClose={notificationsListClose}
         anchorOrigin={{
@@ -59,8 +65,8 @@ const NotificationList = () => {
                   type={item.type}
                   id={item.id}
                   date={item.date}
-                  new={item.new}
-                  title={item.title}
+                  read={item.read}
+                  text={item.text}
                 />
               );
             })}

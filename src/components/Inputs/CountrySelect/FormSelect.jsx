@@ -21,9 +21,12 @@ const FormSelect = ({
   const id = uuid();
   const { t } = useTranslation();
   return (
-    <FormControl fullWidth variant={variant} sx={styles.input} error={error}>
-      <InputLabel htmlFor={id}>{t(label)}</InputLabel>
+    <FormControl fullWidth variant={variant} sx={styles.wrapper} error={error}>
+      <InputLabel htmlFor={id} sx={styles.label}>
+        {t(label)}
+      </InputLabel>
       <Select
+        sx={styles.input}
         id={id}
         name={name}
         value={value}
@@ -38,15 +41,17 @@ const FormSelect = ({
           },
         }}
       >
-        {countries.map(({ id, country }) => (
-          <MenuItem key={id} value={country} sx={styles.menuItem}>
-            {t(`${itemsText}.${country}`)}
+        {countries.map(({ id, country, label }) => (
+          <MenuItem key={`${name}-${id}`} value={country} sx={styles.menuItem}>
+            {label || t(`${itemsText}.${country}`)}
           </MenuItem>
         ))}
       </Select>
-      <FormHelperText id={id} sx={styles.textHelper}>
-        {t(helperText)}
-      </FormHelperText>
+      {error && (
+        <FormHelperText id={id} sx={styles.textHelper}>
+          {t(helperText)}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };
