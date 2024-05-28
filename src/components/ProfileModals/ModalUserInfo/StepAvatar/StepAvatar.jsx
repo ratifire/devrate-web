@@ -26,7 +26,7 @@ const StepAvatar = () => {
   };
 
   useEffect(() => {
-    console.log(formik.values.avatar, '12312312');
+    console.log(formik.values.avatar, 'formik.values.avatar');
   }, [formik.values.avatar]);
 
   return (
