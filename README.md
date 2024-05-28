@@ -49,6 +49,20 @@ The frontend of the application is built using modern web technologies and frame
 - [i18next](https://www.i18next.com/)
 - [luxon](https://moment.github.io/luxon/#/)
 - [classnames](https://github.com/JedWatson/classnames#readme/)
+- [@emotion/react](https://emotion.sh/docs/@emotion/react) 
+- [@emotion/styled](https://emotion.sh/docs/@emotion/styled) 
+- [@mui/icons-material](https://mui.com/components/material-icons/) 
+- [@mui/x-date-pickers](https://mui.com/x/react-date-pickers/getting-started/) 
+- [dayjs](https://day.js.org/) 
+- [react-avatar-editor](https://github.com/mosch/react-avatar-editor) 
+- [react-dropzone](https://react-dropzone.js.org/)
+- [react-i18next](https://react.i18next.com/)
+
+## Test Account
+
+For testing and demonstration purposes, use the following credentials:
+- **Login**: dev1@test.com
+- **Password**: 12345678
 
 ## How to Contribute
 
