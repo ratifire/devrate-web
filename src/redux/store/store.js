@@ -7,6 +7,7 @@ import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist
 import modalSliceReducer from '../modal/modalSlice';
 import { apiSlice } from '../services/api/apiSlice';
 import { authReducer } from '../auth/authSlice';
+import { picturesReducer } from '../user/picturesSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -14,10 +15,17 @@ const authPersistConfig = {
   whitelist: ['user'],
 };
 
+const picturesPersistConfig = {
+  key: 'pictures',
+  storage,
+  whitelist: ['pictures'],
+};
+
 const rootReducer = {
   modal: modalSliceReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: persistReducer(authPersistConfig, authReducer),
+  pictures: persistReducer(picturesPersistConfig, picturesReducer),
 };
 
 const store = configureStore({
