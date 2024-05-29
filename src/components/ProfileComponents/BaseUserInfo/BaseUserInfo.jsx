@@ -10,7 +10,7 @@ import { openModal } from '../../../redux/modal/modalSlice';
 import { setStep } from '../../../redux/modal/modalStepSlice';
 
 const BaseUserInfo = () => {
-  const { firstName, lastName, country, city, position } = useSelector((state) => state.auth.user.data);
+  const { firstName, lastName, country, city, status } = useSelector((state) => state.auth.user.data);
 
   const [progress] = React.useState(60);
   const dispatch = useDispatch();
@@ -36,11 +36,11 @@ const BaseUserInfo = () => {
           {`${firstName} ${lastName}`}
         </Typography>
         <Typography variant='subtitle1' sx={styles.speciality}>
-          {position}
+          {status || ''}
         </Typography>
         <Typography variant='subtitle2' sx={styles.city}>
           <LocationOnIcon sx={styles.icon} />
-          {`${city}, ${country}`}
+          {`${city ? city + ',' : ''} ${country}`}
         </Typography>
         <Box sx={styles.wrapperTextBtn}>
           <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenInfo}>

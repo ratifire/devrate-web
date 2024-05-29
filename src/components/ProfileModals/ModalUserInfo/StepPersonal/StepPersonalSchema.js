@@ -11,6 +11,6 @@ export const StepPersonalSchema = Yup.object().shape({
     .required('profile.modal.userInfo.personal.required'),
   city: Yup.string().optional(),
   country: Yup.string().required('profile.modal.userInfo.personal.required'),
-  status: Yup.string().optional(),
+  status: Yup.string().max(50, 'profile.modal.userInfo.personal.last_name_long').optional(), //
   aboutMe: Yup.string().optional(),
 });

@@ -12,3 +12,4 @@ const personalSlice = createSlice({
   },
   reducers: {},
 });
+export const personalReducer = personalSlice.reducer;
