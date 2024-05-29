@@ -26,14 +26,12 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
     setAnchorEl(event.currentTarget);
   };
   const handleEditFeature = () => {
-    console.log('EditFeature');
     dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startDate, endDate } }));
     handleCloseMenu();
   };
 
   const handleDeleteFeature = async () => {
     await deleteWorkExperienceMutation(id).unwrap();
-    console.log('DeleteFeature');
   };
 
   return (

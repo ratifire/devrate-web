@@ -51,10 +51,8 @@ const WorkExperienceModal = () => {
     try {
       if (modalData && modalData.id) {
         await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
-        console.log('Work Experience updated successfully');
       } else {
         await createNewWorkExperience({ userId: id, data }).unwrap();
-        console.log('Work Experience created successfully');
       }
     }
     catch (error) {
@@ -74,21 +72,21 @@ const WorkExperienceModal = () => {
   });
 
   useEffect(() => {
-    if (modalData) {
-      formik.setValues({
-        position: modalData.position,
-        companyName: modalData.companyName,
-        description: modalData.description,
-        startDate: DateTime.fromISO(modalData.startDate),
-        endDate: DateTime.fromISO(modalData.endDate)
-      });
-      setResponsibilities(modalData.responsibilities);
-    }
+    if (!modalData) return
+
+    formik.setValues({
+      position: modalData.position,
+      companyName: modalData.companyName,
+      description: modalData.description,
+      startDate: DateTime.fromISO(modalData.startDate),
+      endDate: DateTime.fromISO(modalData.endDate)
+    });
+    setResponsibilities(modalData.responsibilities);
   }, [modalData]);
 
   const [responsibilities, setResponsibilities] = useState([]);
   const createResponsibility = (newResponsibility) => {
-    if (newResponsibility.length === 0 || newResponsibility.length > 50) {return}
+    if (newResponsibility.length === 0 || newResponsibility.length > 50) return
     setResponsibilities([...responsibilities, newResponsibility]);
     formik.setFieldValue('responsibilities', '');
   };
