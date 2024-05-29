@@ -72,7 +72,7 @@ const LoginModal = () => {
     <CircularProgress />
   ) : (
     <ModalLayout open={openLogin} setOpen={handleClose}>
-      <Typography sx={styles.title}>{t('modal.login.title')}</Typography>
+      <Typography variant='subtitle2' sx={styles.title}>{t('modal.login.title')}</Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
           name='email'
@@ -119,14 +119,16 @@ const LoginModal = () => {
           />
         </Box>
 
-        <Typography href='#' sx={styles.policyText}>
+        
+        <Typography href='#' variant='caption1' sx={styles.policyText}>
           {t('modal.login.text_privacy')}
         </Typography>
+        
         <Box sx={styles.turnBackContainer}>
-          <Typography href='#' sx={styles.turnBackText}>
+          <Typography href='#' variant='caption1' sx={styles.turnBackText}>
             {t('modal.login.return_on')}
           </Typography>
-          <Link to={'/'} component={RouterLink} sx={styles.turnBackLink} onClick={handleClose}>
+          <Link to={'/'} component={RouterLink} variant='caption1' sx={styles.turnBackLink} onClick={handleClose}>
             {t('modal.login.home_page')}
           </Link>
         </Box>
