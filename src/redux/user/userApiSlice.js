@@ -18,20 +18,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body,
       }),
-      onSuccess: (data, variables, api) => {
-        console.log('Status code:', api.getState().userApiSlice.requests.languageProficienciesUser.status);
-        return data;
-      },
-    }),
-    addPicturesUser: builder.mutation({
-      query: ({ userId, body }) => {
-        console.log(userId, body, '461546712456735126735671283212');
-        return {
-          url: `/users/${userId}/pictures`,
-          method: 'POST',
-          body,
-        };
-      },
     }),
     addContactsUser: builder.mutation({
       query: ({ userId, body }) => ({
@@ -43,9 +29,5 @@ export const userApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useUpdatePersonalUserMutation,
-  useLanguageProficienciesUserMutation,
-  useAddPicturesUserMutation,
-  useAddContactsUserMutation,
-} = userApiSlice;
+export const { useUpdatePersonalUserMutation, useLanguageProficienciesUserMutation, useAddContactsUserMutation } =
+  userApiSlice;
