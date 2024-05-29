@@ -61,7 +61,7 @@ const getDesignTokens = (mode) => ({
     },
     subtitle2: {
       fontSize: 16,
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: 1.75,
       letterSpacing: 0.15,
     },

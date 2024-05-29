@@ -5,6 +5,7 @@ const styles = {
     flexDirection: 'row',
     gap: theme.spacing(4),
     width: '100%',
+    minWidth: 300,
     boxShadow: '0px -1px 0px 0px #C5C5C640 inset',
 
     '&:last-child': {
