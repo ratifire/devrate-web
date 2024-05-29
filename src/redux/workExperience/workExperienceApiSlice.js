@@ -5,7 +5,10 @@ export const workExperienceApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getWorkExperienceByUserId: builder.query({
       query: (userId) => `/users/${userId}/employment-records`,
-      providesTags: ['WorkExperience'],
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ id }) => ({ type: 'WorkExperience', id })), 'WorkExperience']
+          : ['Post'],
     }),
 
     createNewWorkExperience: builder.mutation({
@@ -25,6 +28,7 @@ export const workExperienceApiSlice = apiSlice.injectEndpoints({
           body: {...data},
         };
       },
+      invalidatesTags: (result, error, arg) => [{ type: 'WorkExperience', id: arg.id }],
     }),
 
     deleteWorkExperienceById: builder.mutation({
@@ -34,6 +38,9 @@ export const workExperienceApiSlice = apiSlice.injectEndpoints({
           method: "DELETE",
         };
       },
+      invalidatesTags: (result, error, id) => [
+        { type: 'WorkExperience', id },
+      ],
     }),
 
   }),

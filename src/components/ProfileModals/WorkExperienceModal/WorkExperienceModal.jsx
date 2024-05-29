@@ -79,10 +79,10 @@ const WorkExperienceModal = () => {
         position: modalData.position,
         companyName: modalData.companyName,
         description: modalData.description,
-        responsibilities: modalData.responsibilities.join(', '),
         startDate: DateTime.fromISO(modalData.startDate),
         endDate: DateTime.fromISO(modalData.endDate)
       });
+      setResponsibilities(modalData.responsibilities);
     }
   }, [modalData]);
 
