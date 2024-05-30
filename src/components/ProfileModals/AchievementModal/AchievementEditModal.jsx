@@ -2,41 +2,41 @@ import React from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { Box, Typography } from '@mui/material';
 import { styles } from './AchivementModal.styles';
-import { useSelector } from 'react-redux'; 
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { AchivementModalSchema } from './AchivementModalSchema';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
 import { ButtonDef } from '../../Buttons';
-import { useCreateAchievementMutation } from "../../../redux/services/achievementApiSlice";
+import { useUpdateAchievementMutation } from "../../../redux/services/achievementsApiSlice";
 import { selectCurrentUser } from "../../../redux/auth/authSlice";
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-const AchievementEditModal = ({ isOpen, onClose }) => {
+const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
   const currentUser = useSelector(selectCurrentUser);
   const { t } = useTranslation();
-  const [createAchievement] = useCreateAchievementMutation();
+  const [updateAchievement] = useUpdateAchievementMutation();
 
   const initialValues = {
-    link: '',
-    summary: '',
-    description: '',
+    link: achievement?.link || '',
+    summary: achievement?.summary || '',
+    description: achievement?.description || '',
   };
 
   const onSubmit = async (values, { resetForm }) => {
     console.log('Submitted values:', values);
 
     try {
-      await createAchievement({
-        userId: currentUser.id,
-        payload: values,
+      await updateAchievement({
+        id: achievement.id,
+        payload: { ...values, userId: currentUser.id }, // Including userId in the payload
       });
 
       resetForm();
-      onClose(); 
+      onClose();
     } catch (error) {
-      console.error('Error creating achievement:', error);
+      console.error('Error updating achievement:', error);
     }
   };
 
@@ -105,6 +105,7 @@ const AchievementEditModal = ({ isOpen, onClose }) => {
 AchievementEditModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  achievement: PropTypes.object.isRequired,
 };
 
 export default AchievementEditModal;

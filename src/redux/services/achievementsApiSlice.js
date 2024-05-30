@@ -11,7 +11,18 @@ export const achievementsApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE',
       }),
     }),
+    updateAchievement: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `/achievements/${id}`,
+        method: 'PUT',
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useFetchAchievementsQuery, useDeleteAchievementMutation } = achievementsApiSlice;
+export const { 
+  useFetchAchievementsQuery, 
+  useDeleteAchievementMutation, 
+  useUpdateAchievementMutation 
+} = achievementsApiSlice;

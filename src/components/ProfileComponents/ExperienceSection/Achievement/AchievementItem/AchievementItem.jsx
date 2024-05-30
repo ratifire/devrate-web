@@ -53,7 +53,7 @@ const AchievementItem = ({ achievement, removeAchievement }) => {
               </Typography>
             </Box>
           </Box>
-          <IconButton onClick={(event) => handleMenuOpen(event)}>
+          <IconButton onClick={handleMenuOpen}>
             <MoreVertIcon />
           </IconButton>
           <DropdownMenu
@@ -80,7 +80,7 @@ const AchievementItem = ({ achievement, removeAchievement }) => {
           console.log('Modal closed');
           setIsModalOpen(false);
         }}
-        onSubmit={handleCloseMenu}
+        achievement={achievement} // Pass the achievement prop here
       />
     </Box>
   );
