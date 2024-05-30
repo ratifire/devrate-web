@@ -14,16 +14,19 @@ const RightSection = () => {
       id: 1,
       language: 'UK',
       level: 'Native: C1',
+      code: 'UK'
     },
     {
       id: 2,
       language: 'EN',
       level: 'Upper-intermediate: B2',
+      code: 'EN'
     },
     {
       id: 3,
       language: 'FR',
       level: 'Intermediate: B1',
+      code: 'FR'
     },
   ];
   return (
