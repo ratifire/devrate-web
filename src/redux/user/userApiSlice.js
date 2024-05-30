@@ -2,16 +2,6 @@ import { apiSlice } from '../services/api/apiSlice';
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    updatePersonalUser: builder.mutation({
-      query: (data) => {
-        console.log(data, 'users');
-        return {
-          url: `/users`,
-          method: 'PUT',
-          data,
-        };
-      },
-    }),
     languageProficienciesUser: builder.mutation({
       query: ({ userId, body }) => ({
         url: `/user/${userId}/language-proficiencies`,
@@ -29,5 +19,5 @@ export const userApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useUpdatePersonalUserMutation, useLanguageProficienciesUserMutation, useAddContactsUserMutation } =
+export const { useLanguageProficienciesUserMutation, useAddContactsUserMutation } =
   userApiSlice;

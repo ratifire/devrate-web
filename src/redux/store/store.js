@@ -11,6 +11,7 @@ import modalStepReducer from '../modal/modalStepSlice';
 import { apiSlice } from '../services/api/apiSlice';
 import { authReducer } from '../auth/authSlice';
 import { avatarReducer } from '../user/avatar/avatarSlice';
+import { personalReducer } from '../user/personal/personalSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -23,6 +24,11 @@ const avatarPersistConfig = {
   storage,
   whitelist: ['avatar'],
 };
+const personalPersistConfig = {
+  key: 'personal',
+  storage,
+  whitelist: ['personal'],
+};
 
 const rootReducer = {
   modal: modalSliceReducer,
@@ -30,6 +36,7 @@ const rootReducer = {
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: persistReducer(authPersistConfig, authReducer),
   avatar: persistReducer(avatarPersistConfig, avatarReducer),
+  personal: persistReducer(personalPersistConfig, personalReducer),
 };
 
 const store = configureStore({
