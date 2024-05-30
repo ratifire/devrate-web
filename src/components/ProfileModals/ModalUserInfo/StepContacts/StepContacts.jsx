@@ -4,8 +4,9 @@ import { FormInput } from '../../../Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { StepContactsSchema } from './StepContactsSchema';
-import { useAddContactsUserMutation } from '../../../../redux/user/userApiSlice';
+import { usePostContactsUserMutation } from '../../../../redux/user/contacts/contactsApiSlice';
 import { useSelector } from 'react-redux';
+import { ButtonDef } from '../../../Buttons';
 
 const StepContacts = () => {
   const initialValues = {
@@ -16,11 +17,11 @@ const StepContacts = () => {
     mail: '',
     phone: '',
   };
-  const [addContactsUser] = useAddContactsUserMutation();
+  const [postContactsUser] = usePostContactsUserMutation();
   const userId = useSelector((state) => state.auth.user.data.id);
 
   const onSubmit = ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
-    addContactsUser({
+    postContactsUser({
       userId: userId,
       body: [
         { type: 'TELEGRAM_LINK', value: telegram },
@@ -111,7 +112,7 @@ const StepContacts = () => {
           error={formik.touched.phone && Boolean(formik.errors.phone)}
         />
       </Box>
-      <button type='submit'>eqweqweqw</button>
+      <ButtonDef variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
     </form>
   );
 };

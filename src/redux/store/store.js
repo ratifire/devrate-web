@@ -18,7 +18,6 @@ const authPersistConfig = {
   storage,
   whitelist: ['user'],
 };
-
 const avatarPersistConfig = {
   key: 'avatar',
   storage,
