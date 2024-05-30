@@ -6,10 +6,12 @@ import styles from './AchievementItem.styles.js';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import AchievementEditModal from '../../../../../components/ProfileModals/AchievementModal/AchievementEditModal.jsx';
+import { useDeleteAchievementMutation } from '../../../../../redux/services/achievementsApiSlice.js';
 
-const AchievementItem = ({ achievement }) => {
+const AchievementItem = ({ achievement, removeAchievement }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteAchievement] = useDeleteAchievementMutation();
 
   const handleCloseMenu = () => {
     console.log('Menu closed');
@@ -27,8 +29,16 @@ const AchievementItem = ({ achievement }) => {
     setIsModalOpen(true);
   };
 
-  const handleDeleteFeature = () => {
+  const handleDeleteFeature = async () => {
     console.log('Deleting feature');
+    try {
+      await deleteAchievement(achievement.id).unwrap();
+      console.log('Achievement deleted successfully');
+      removeAchievement(achievement.id);
+    } catch (error) {
+      console.error('Failed to delete the achievement:', error);
+    }
+    handleCloseMenu();
   };
 
   return (
@@ -83,6 +93,7 @@ AchievementItem.propTypes = {
     link: PropTypes.string,
     description: PropTypes.string.isRequired,
   }).isRequired,
+  removeAchievement: PropTypes.func.isRequired,
 };
 
 export default AchievementItem;

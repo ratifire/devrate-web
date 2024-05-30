@@ -5,7 +5,13 @@ export const achievementsApiSlice = apiSlice.injectEndpoints({
     fetchAchievements: builder.query({
       query: (userId) => `/users/${userId}/achievements`,
     }),
+    deleteAchievement: builder.mutation({
+      query: (id) => ({
+        url: `/achievements/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useFetchAchievementsQuery } = achievementsApiSlice;
+export const { useFetchAchievementsQuery, useDeleteAchievementMutation } = achievementsApiSlice;

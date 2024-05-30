@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@mui/material';
 import AchievementItem from './AchievementItem/AchievementItem';
 import styles from './Achievment.styles';
@@ -11,9 +11,21 @@ const Achievement = () => {
 
   console.log('User ID:', userId);
 
-  const { data: achievements, error, isLoading } = useFetchAchievementsQuery(userId, {
-    skip: !userId, // Skip the query if userId is not available
+  const { data: achievementsData, error, isLoading } = useFetchAchievementsQuery(userId, {
+    skip: !userId, 
   });
+
+  const [achievements, setAchievements] = useState([]);
+
+  useEffect(() => {
+    if (achievementsData) {
+      setAchievements(achievementsData);
+    }
+  }, [achievementsData]);
+
+  const removeAchievement = (id) => {
+    setAchievements((prevAchievements) => prevAchievements.filter((achievement) => achievement.id !== id));
+  };
 
   if (!userId) {
     return <Typography>Error: User not authenticated</Typography>;
@@ -31,7 +43,7 @@ const Achievement = () => {
     <Grid container spacing={3} sx={styles.achievementListContainer}>
       {achievements?.map((achievement) => (
         <Grid item key={achievement.id} xs={6}>
-          <AchievementItem achievement={achievement} />
+          <AchievementItem achievement={achievement} removeAchievement={removeAchievement} />
         </Grid>
       ))}
     </Grid>
