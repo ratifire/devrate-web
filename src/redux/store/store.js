@@ -1,3 +1,5 @@
+// src/app/store.js
+
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
