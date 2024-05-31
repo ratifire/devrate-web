@@ -6,10 +6,13 @@ import PropTypes from 'prop-types';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import { useDeleteEducationByIdMutation } from '../../../../../redux/services/educationApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const EducationItem = ({id, type, name, description, startYear, endYear}) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [deleteEducationById] = useDeleteEducationByIdMutation();
+  const { t } = useTranslation();
+
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -66,7 +69,7 @@ const EducationItem = ({id, type, name, description, startYear, endYear}) => {
               setIsCollapsed(!isCollapsed);
             }}
           >
-            Читати далі...
+            {t('profile.experienceSection.readAll')}
           </Link>
         </Typography>
       ) : (
@@ -80,7 +83,7 @@ const EducationItem = ({id, type, name, description, startYear, endYear}) => {
               setIsCollapsed(!isCollapsed);
             }}
           >
-            Згорнути
+            {t('profile.experienceSection.collapse')}
           </Link>
         </Typography>
       )}
