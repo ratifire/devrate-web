@@ -1,4 +1,4 @@
-import { apiSlice } from '../services/api/apiSlice';
+import { apiSlice } from './api/apiSlice';
 
 export const achievementsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

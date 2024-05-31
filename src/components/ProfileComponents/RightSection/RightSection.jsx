@@ -6,29 +6,15 @@ import SocialsLinkList from '../../UI/SocialsLinkList';
 import { useTranslation } from 'react-i18next';
 import LanguagesList from '../../UI/LanguagesList';
 import userSocials from '../../../utils/constants/userSocials';
+import {useSelector} from "react-redux";
+import {selectCurrentUser} from "../../../redux/auth/authSlice";
+import {useFetchLanguagesQuery} from "../../../redux/services/languagesApiSlice";
 
 const RightSection = () => {
   const { t } = useTranslation();
-  const languagesList = [
-    {
-      id: 1,
-      language: 'UK',
-      level: 'Native: C1',
-      code: 'UK'
-    },
-    {
-      id: 2,
-      language: 'EN',
-      level: 'Upper-intermediate: B2',
-      code: 'EN'
-    },
-    {
-      id: 3,
-      language: 'FR',
-      level: 'Intermediate: B1',
-      code: 'FR'
-    },
-  ];
+  const currentUser = useSelector(selectCurrentUser);
+  const languages = useFetchLanguagesQuery(currentUser.data.id);
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
@@ -44,7 +30,7 @@ const RightSection = () => {
           {t('profile.right.languages')}
         </Typography>
         <Box gap={2} sx={styles.wrapperLanguages}>
-          <LanguagesList data={languagesList} />
+          <LanguagesList data={languages.data || []} />
         </Box>
       </Box>
       <Box sx={styles.wrapperBox}>
@@ -52,11 +38,7 @@ const RightSection = () => {
           {t('profile.right.aboutMe')}
         </Typography>
         <Typography variant='subtitle2' sx={styles.aboutMe}>
-          Кваліфікований Senior back-end розробник із 5-річним досвідом. Працювала з базами даних: MySQL, MariaDB,
-          MongoDB, MVC Framework (CakePHP). Робота з тестовою середовищем для PHP (PHPUnit). TV Archive, написання
-          методів панелі управління / методів SOAP. Робота з тестовою середовищем для PHP (PHPUnit). TV Archive,
-          написання методів панелі управління / методів SOAP. Робота з тестовою середовищем для PHP (PHPUnit). TV
-          Archive, написання методів панелі управління / методів SOAP.
+          {currentUser.data.description}
         </Typography>
       </Box>
     </Box>
