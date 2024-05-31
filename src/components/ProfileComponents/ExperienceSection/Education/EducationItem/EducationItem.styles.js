@@ -22,11 +22,11 @@ const styles = {
   schoolTitle: (theme) => ({
     color: theme.palette.text.secondary,
   }),
-  studyDates: (theme) => ({
-    color: theme.palette.text.secondary,
-  }),
   link: (theme) => ({
     color: theme.palette.primary[200],
+  }),
+  menuIcon: (theme) => ({
+    color: theme.palette.text.secondary,
   }),
 };
 export default styles;

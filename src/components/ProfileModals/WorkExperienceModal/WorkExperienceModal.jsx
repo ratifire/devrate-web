@@ -19,6 +19,7 @@ import { DateTime } from 'luxon';
 import {
   useCreateNewWorkExperienceMutation,
   useUpdateWorkExperienceByIdMutation,
+  // useGetWorkExperienceByIdQuery,
 } from '../../../redux/workExperience/workExperienceApiSlice';
 
 
@@ -26,6 +27,7 @@ const WorkExperienceModal = () => {
   const { id } = useSelector((state) => state.auth.user.data);
   const [ createNewWorkExperience ] = useCreateNewWorkExperienceMutation();
   const [ updateWorkExperienceById ] = useUpdateWorkExperienceByIdMutation();
+  // const { getWorkExperienceById } = useGetWorkExperienceByIdQuery();
 
   const dispatch = useDispatch();
   const openExperience = useSelector((state) => state.modal.openExperience);
