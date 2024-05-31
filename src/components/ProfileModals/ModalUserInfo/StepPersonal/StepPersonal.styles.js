@@ -11,4 +11,14 @@ export const styles = {
   input100: {
     flex: `0 1 100%`,
   },
+  wrapperBtn: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    maxWidth: '228px',
+    width: '100%',
+  },
+  btn: {
+    paddingY: '14px',
+  },
 };

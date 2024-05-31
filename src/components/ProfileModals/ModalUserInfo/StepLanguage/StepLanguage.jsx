@@ -5,6 +5,9 @@ import AddIcon from '@mui/icons-material/Add';
 import { languages } from '../../../../utils/constants/languages';
 import SelectLanguage from '../../../Inputs/SelectLanguage';
 import LanguageLevel from '../../../UI/LanguageLevel';
+import { ButtonDef } from '../../../Buttons';
+import { useFormik } from 'formik';
+import { StepAvatarSchema } from '../StepAvatar/StepAvatarSchema';
 
 const StepLanguage = () => {
   const [lang, setLang] = useState([]);
@@ -14,7 +17,7 @@ const StepLanguage = () => {
   const [errorLevel, setErrorLevel] = useState(false);
   const [helperTextLanguage, setHelperTextLanguage] = useState('');
   const [helperTextLevel, setHelperTextLevel] = useState('');
-  console.log(lang, 'lang');
+
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
     setSelectedLevel('');
@@ -52,8 +55,9 @@ const StepLanguage = () => {
 
     if (!hasError) {
       const newLang = {
-        level: selectedLevel,
-        name: selectedLangObj.code,
+        language: selectedLanguage,
+        languageLevel: selectedLevel,
+        code: selectedLangObj.code,
       };
       setLang([...lang, newLang]);
       setSelectedLanguage('');
@@ -62,14 +66,21 @@ const StepLanguage = () => {
   };
 
   const languageDeleteHandler = (languageToDelete) => {
-    setLang(lang.filter((item) => item.name !== languageToDelete));
+    setLang(lang.filter((item) => item.language !== languageToDelete));
   };
-
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+  const formik = useFormik({
+    lang,
+    validationSchema: StepAvatarSchema,
+    onSubmit,
+  });
   useEffect(() => console.log(lang), [lang]);
 
   return (
     <Box sx={styles.wrapper}>
-      <form action=''>
+      <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.input100}>
           <SelectLanguage
             variant='outlined'
@@ -90,15 +101,16 @@ const StepLanguage = () => {
         <Box sx={styles.input100}>
           {lang.map((item) => (
             <LanguageLevel
-              key={item.language}
-              level={item.level}
+              key={item.id}
+              level={item.languageLevel}
               language={item.language}
-              code={item.name}
+              code={item.code}
               tobeDeleted={true}
               languageDeleteHandler={languageDeleteHandler}
             />
           ))}
         </Box>
+        <ButtonDef variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
       </form>
     </Box>
   );

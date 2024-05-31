@@ -1,3 +1,5 @@
+// src/app/store.js
+
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
@@ -8,18 +10,23 @@ import modalSliceReducer from '../modal/modalSlice';
 import modalStepReducer from '../modal/modalStepSlice';
 import { apiSlice } from '../services/api/apiSlice';
 import { authReducer } from '../auth/authSlice';
-import { picturesReducer } from '../user/picturesSlice';
+import { avatarReducer } from '../user/avatar/avatarSlice';
+import { personalReducer } from '../user/personal/personalSlice';
 
 const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['user'],
 };
-
-const picturesPersistConfig = {
-  key: 'pictures',
+const avatarPersistConfig = {
+  key: 'avatar',
   storage,
-  whitelist: ['pictures'],
+  whitelist: ['avatar'],
+};
+const personalPersistConfig = {
+  key: 'personal',
+  storage,
+  whitelist: ['personal'],
 };
 
 const rootReducer = {
@@ -27,7 +34,8 @@ const rootReducer = {
   modalStep: modalStepReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: persistReducer(authPersistConfig, authReducer),
-  pictures: persistReducer(picturesPersistConfig, picturesReducer),
+  avatar: persistReducer(avatarPersistConfig, avatarReducer),
+  personal: persistReducer(personalPersistConfig, personalReducer),
 };
 
 const store = configureStore({

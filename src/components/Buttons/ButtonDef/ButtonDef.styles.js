@@ -10,13 +10,13 @@ export const styles = {
     paddingY: '20px',
     paddingX: '12px',
     width: '100%',
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary['400'],
     '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.primary['600'],
     },
     '&:disabled': {
-      backgroundColor: theme.palette.action.disabledBackground,
-      color: '#FFFFFF80',
+      backgroundColor: theme.palette.neutral['800'],
+      color: theme.palette.neutral['500'],
     },
   }),
   text: (theme) => ({

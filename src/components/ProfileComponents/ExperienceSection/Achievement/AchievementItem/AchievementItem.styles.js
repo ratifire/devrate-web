@@ -35,5 +35,10 @@ const styles = {
   achievementItemText: (theme) => ({
     color: theme.palette.text.primry,
   }),
+  link: (theme) => ({
+    color: theme.palette.text.primary,
+    textAlign: 'center',
+    textDecoration: 'underline',
+  }),
 };
 export default styles;

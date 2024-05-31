@@ -6,17 +6,17 @@ import styles from './WorkExperienceItem.styles.js';
 import { useTranslation } from 'react-i18next';
 import Responsibility from '../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { openModal } from '../../../../../redux/modal/modalSlice';
+import { useDeleteWorkExperienceByIdMutation } from '../../../../../redux/workExperience/workExperienceApiSlice';
 
-const mockData = [
-  'BackEnd development',
-  'Leading the design and architecture discussions',
-  'Collaboration with cross-functional teams',
-  'Ensuring code quality and maintainability',
-  'Service/database architecture design and implementation',
-];
+const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, description, responsibilities }) => {
+  const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();
 
-const WorkExperienceItem = () => {
   const [anchorEl, setAnchorEl] = useState(false);
+
+  const dispatch = useDispatch();
 
   const { t } = useTranslation();
   const handleCloseMenu = () => {
@@ -26,23 +26,23 @@ const WorkExperienceItem = () => {
     setAnchorEl(event.currentTarget);
   };
   const handleEditFeature = () => {
-    console.log('EditFeature');
+    dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startDate, endDate } }));
+    handleCloseMenu();
   };
 
-  const handleDeleteFeature = () => {
-    console.log('DeleteFeature');
+  const handleDeleteFeature = async () => {
+    await deleteWorkExperienceMutation(id).unwrap();
   };
-  const text =
-    'Prosper є лідером у сфері фінтеху, пропонуючи платформу пірингового кредитування, яка поєднує передові технології з фінансовими послугами. Вони використовують алгоритми на основі даних для ефективної та справедливої обробки кредитів, що робить їх актуальними для розробників програмного забезпечення, зацікавлених у перетині технологій та фінансів.';
+
   return (
     <Box sx={styles.workExpeirenceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
         <Box sx={styles.workTitleContainer}>
           <Typography variant='h5' sx={styles.workPosition}>
-            Software engineer
+            {position}
           </Typography>
           <Typography variant='subtitle3' sx={styles.workPlaceTitle}>
-            Prosper(Avenga) 2020 - 2021
+            {companyName} {startDate} - {endDate}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
@@ -57,13 +57,13 @@ const WorkExperienceItem = () => {
           handleDeleteFeature={handleDeleteFeature}
         />
       </Box>
-      <Typography>{text}</Typography>
+      <Typography>{description}</Typography>
       <Box sx={styles.workDutiesContainer}>
         <Typography variant='h6' sx={styles.workDutiesTitle}>
           {t('profile.experience.duties')}
         </Typography>
         <Box sx={styles.workDuties}>
-          {mockData.map((responsibility, index) => (
+          {responsibilities.map((responsibility, index) => (
             <Responsibility key={index} responsibility={responsibility} />
           ))}
         </Box>
@@ -71,4 +71,15 @@ const WorkExperienceItem = () => {
     </Box>
   );
 };
+
+WorkExperienceItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
+  companyName: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  responsibilities: PropTypes.array.isRequired,
+}
+
 export default WorkExperienceItem;

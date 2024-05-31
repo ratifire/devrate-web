@@ -6,25 +6,32 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from './StepPersonalSchema';
-import { useUpdatePersonalUserMutation } from '../../../../redux/user/userApiSlice';
+import { usePostPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
+import { ButtonDef } from '../../../Buttons';
 
 const StepPersonal = () => {
   const userData = useSelector((state) => state.auth.user.data);
-  console.log(userData);
 
   const initialValues = {
-    id: userData.id,
     firstName: userData.firstName,
     lastName: userData.lastName,
     city: userData.city,
     country: userData.country,
-    position: userData.position,
-    subscribed: userData.subscribed,
+    status: userData.status,
     description: userData.description,
   };
-  const [updatePersonalUser] = useUpdatePersonalUserMutation();
-  const onSubmit = ({ id, firstName, lastName, city, country, position, subscribed, description }) => {
-    updatePersonalUser({ id, firstName, lastName, city, country, position, subscribed, description });
+  const [postPersonalUser] = usePostPersonalUserMutation();
+  const onSubmit = ({ firstName, lastName, city, country, status, description }) => {
+    postPersonalUser({
+      id: userData.id,
+      firstName: firstName,
+      lastName: lastName,
+      status: status,
+      country: country,
+      city: city,
+      subscribed: userData.subscribed,
+      description: description,
+    });
   };
   const formik = useFormik({
     initialValues,
@@ -84,14 +91,14 @@ const StepPersonal = () => {
       </Box>
       <Box sx={styles.input100}>
         <FormInput
-          name='position'
-          value={formik.values.position}
+          name='status'
+          value={formik.values.status}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           type='text'
           label='profile.modal.userInfo.personal.status'
-          helperText={formik.touched.position && formik.errors.position}
-          error={formik.touched.position && Boolean(formik.errors.position)}
+          helperText={formik.touched.status && formik.errors.status}
+          error={formik.touched.status && Boolean(formik.errors.status)}
         />
       </Box>
       <Box sx={styles.input100}>
@@ -106,7 +113,9 @@ const StepPersonal = () => {
           error={formik.touched.description && Boolean(formik.errors.description)}
         />
       </Box>
-      <button type='submit'>Зберегти</button>
+      <Box sx={styles.wrapperBtn}>
+        <ButtonDef variant='contained' correctStyle={styles.btn} type='submit' label='profile.modal.btn' />
+      </Box>
     </form>
   );
 };

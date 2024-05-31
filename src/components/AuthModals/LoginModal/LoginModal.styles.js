@@ -1,42 +1,34 @@
 const styles = {
   title: (theme) => ({
-    fontSize: 16,
-    fontWeight: 500,
-    lineHeight: '24px',
     color: theme.palette.text.primary,
     textAlign: 'center',
-    letterSpacing: '-1.1%',
     marginTop: '48px',
-    marginBottom: '30px',
+    marginBottom: '36px',
   }),
   textLink: {
-    fontSize: 14,
+    fontSize: '14px',
     fontWeight: 400,
     color: '#f1f1f180',
     textAlign: 'center',
     lineHeight: 1.5,
-    marginBottom: '32px',
+    marginBottom: '36px',
   },
   link: (theme) => ({
-    marginRight: '10px',
+    marginRight: theme.spacing(2),
     textDecoration: 'underline',
     color: theme.palette.text.primary,
   }),
-  input: {
+  input: (theme) => ({
     width: '100%',
-    marginBottom: '24px',
-  },
+    marginBottom: theme.spacing(4),
+  }),
   wrapperBtn: {
-    marginTop: '32px',
+    marginTop: '36px',
     marginBottom: '50px',
   },
   policyText: (theme) => ({
-    width: '100%',
-    fontSize: 14,
-    lineHeight: 1.43,
-    fontWeight: 300,
     textAlign: 'center',
-    // marginBottom: 36,
+    width: '100%',
     color: theme.palette.text.primary,
   }),
   turnBackContainer: {
@@ -44,15 +36,11 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  turnBackText: {
-    marginRight: '10px',
-    fontSize: 14,
-    lineHeight: 1.43,
+  turnBackText: (theme) => ({
+    marginRight: theme.spacing(2),
     color: '#F1F1F14D',
-  },
+  }),
   turnBackLink: (theme) => ({
-    fontSize: 14,
-    lineHeight: 1.43,
     textDecoration: 'underline',
     color: theme.palette.text.primary,
     paddingY: 0,
@@ -62,4 +50,5 @@ const styles = {
     },
   }),
 };
+
 export default styles;
