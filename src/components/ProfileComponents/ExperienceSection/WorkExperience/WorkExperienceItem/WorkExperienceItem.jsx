@@ -44,7 +44,7 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
             {position}
           </Typography>
           <Typography variant="subtitle3" sx={styles.workPlaceTitle}>
-            {companyName} <span style={{ margin: '0 4px' }}>•</span> {startDate} - {endDate}
+            {companyName} <span style={{ margin: '0 4px' }}>•</span> {startDate.slice(0,4)} - {endDate.slice(0,4)}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
