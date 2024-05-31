@@ -22,9 +22,11 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleEditFeature = () => {
     dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startDate, endDate } }));
     handleCloseMenu();

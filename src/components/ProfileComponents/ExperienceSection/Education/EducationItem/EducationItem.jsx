@@ -13,15 +13,16 @@ const EducationItem = ({id, type, name, description, startYear, endYear}) => {
   const [deleteEducationById] = useDeleteEducationByIdMutation();
   const { t } = useTranslation();
 
-
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleEditFeature = () => {
     console.log('Editing feature');
     handleCloseMenu();
