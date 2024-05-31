@@ -20,4 +20,11 @@ export const styles = {
     alignItems: 'center',
     gridGap: theme.spacing(3),
   }),
+  btn: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    paddingY: '14px',
+    maxWidth: '228px',
+  },
 };
