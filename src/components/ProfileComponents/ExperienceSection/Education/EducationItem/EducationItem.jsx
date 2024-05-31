@@ -5,9 +5,11 @@ import styles from './EducationItem.styles.js';
 import PropTypes from 'prop-types';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
+import { useDeleteEducationByIdMutation } from '../../../../../redux/services/educationApiSlice';
 
-const EducationItem = ({type, name, description, startYear, endYear}) => {
+const EducationItem = ({id, type, name, description, startYear, endYear}) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const [deleteEducationById] = useDeleteEducationByIdMutation();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -22,8 +24,8 @@ const EducationItem = ({type, name, description, startYear, endYear}) => {
     handleCloseMenu();
   };
 
-  const handleDeleteFeature =  () => {
-    console.log('Deleting feature');
+  const handleDeleteFeature =  async () => {
+    await deleteEducationById(id).unwrap();
     handleCloseMenu();
   };
 
@@ -87,6 +89,7 @@ const EducationItem = ({type, name, description, startYear, endYear}) => {
 };
 
 EducationItem.propTypes = {
+  id: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

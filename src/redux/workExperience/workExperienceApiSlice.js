@@ -8,7 +8,7 @@ export const workExperienceApiSlice = apiSlice.injectEndpoints({
       providesTags: (result) =>
         result
           ? [...result.map(({ id }) => ({ type: 'WorkExperience', id })), 'WorkExperience']
-          : ['Post'],
+          : ['WorkExperience'],
     }),
 
     getWorkExperienceById: builder.query({

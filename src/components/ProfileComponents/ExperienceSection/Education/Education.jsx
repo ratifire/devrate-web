@@ -20,6 +20,7 @@ const Education = () => {
           return (
             <EducationItem
               key={id}
+              id={id}
               type={type}
               name={name}
               description={description}
