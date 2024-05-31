@@ -29,7 +29,6 @@ function Header() {
       </Link>
     );
   };
-  console.log(isAuthenticated);
   const drawer = (
     <Box onClick={handlerDrawerToggle} sx={styles.drawer}>
       <Box sx={styles.logoMobileBox}>
