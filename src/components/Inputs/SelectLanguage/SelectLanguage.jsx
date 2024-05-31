@@ -40,9 +40,12 @@ const SelectLanguage = ({
 
   return (
     <>
-      <FormControl fullWidth variant={variant} sx={styles.input} error={errorLanguage}>
-        <InputLabel htmlFor={id}>{t(labelLanguage)}</InputLabel>
+      <FormControl fullWidth variant={variant} sx={styles.wrapper} error={errorLanguage}>
+        <InputLabel htmlFor={id} sx={styles.label}>
+          {t(labelLanguage)}
+        </InputLabel>
         <Select
+          sx={styles.input}
           id={id}
           name='language'
           value={selectedLanguage}
@@ -67,9 +70,12 @@ const SelectLanguage = ({
           </FormHelperText>
         )}
       </FormControl>
-      <FormControl fullWidth variant={variant} sx={styles.input} error={errorLevel} disabled={!selectedLanguage}>
-        <InputLabel htmlFor={`${id}-level`}>{t(labelLevel)}</InputLabel>
+      <FormControl fullWidth variant={variant} sx={styles.wrapper} error={errorLevel} disabled={!selectedLanguage}>
+        <InputLabel htmlFor={`${id}-level`} sx={styles.label}>
+          {t(labelLevel)}
+        </InputLabel>
         <Select
+          sx={styles.input}
           id={`${id}-level`}
           name='languageLevel'
           value={selectedLevel}

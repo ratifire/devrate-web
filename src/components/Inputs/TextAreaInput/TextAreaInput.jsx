@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, FormHelperText, TextField } from '@mui/material';
+import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
 import { styles } from './TextAreaInput.styles';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
@@ -12,9 +12,12 @@ const TextAreaInput = ({ name, value, label, placeholder, type, error, helperTex
 
   return (
     <>
-      <FormControl variant='outlined' sx={styles.input} error={error}>
-        <TextField
-          sx={styles.textareaBox}
+      <FormControl variant='outlined' sx={styles.textareaBox} error={error}>
+        <InputLabel htmlFor={id} sx={styles.label}>
+          {t(label)}
+        </InputLabel>
+        <OutlinedInput
+          sx={styles.input}
           id={id}
           name={name}
           value={value}
@@ -28,11 +31,11 @@ const TextAreaInput = ({ name, value, label, placeholder, type, error, helperTex
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {
+        {error && (
           <FormHelperText id={id} sx={styles.textHelper}>
             {t(helperText)}
           </FormHelperText>
-        }
+        )}
       </FormControl>
     </>
   );
@@ -47,7 +50,7 @@ TextAreaInput.propTypes = {
   helperText: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  handleBlur: PropTypes.func.isRequired
+  handleBlur: PropTypes.func.isRequired,
 };
 
 TextAreaInput.defaultProps = {

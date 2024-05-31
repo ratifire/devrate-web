@@ -144,8 +144,6 @@ export const en = {
         completedInterviews: 'Interviews completed',
       },
       baseUserInfo: {
-        btn: 'Write a message',
-        online: 'Online',
         loading: 'Your profile is filled in at',
       },
       experience: {
@@ -170,8 +168,8 @@ export const en = {
         logout: 'Logout',
       },
       modal: {
-          btn: 'Save',
-          finish: 'Finish',
+        btn: 'Save',
+        finish: 'Finish',
         userInfo: {
           personal: {
             title: 'Personal information',
@@ -225,7 +223,8 @@ export const en = {
           description: 'Description',
           description_long: 'Description too long',
           description_short: 'Description too short',
-          description_placeholder:'Prosper is a leader in fintech, offering a peer-to-peer lending platform that combines advanced technology with financial services. They use data-driven algorithms to process loans efficiently and fairly, making them relevant to software developers interested in the intersection of technology and finance.',
+          description_placeholder:
+            'Prosper is a leader in fintech, offering a peer-to-peer lending platform that combines advanced technology with financial services. They use data-driven algorithms to process loans efficiently and fairly, making them relevant to software developers interested in the intersection of technology and finance.',
           responsibilities: 'Responsibility',
           responsibilities_long: 'Responsibility too long',
           responsibilities_short: 'Responsibility too short',
@@ -233,7 +232,7 @@ export const en = {
           startDate: 'Start Date',
           endDate: 'End Date',
           required: 'This is a required field',
-        }
+        },
       },
     },
   },

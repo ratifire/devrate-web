@@ -6,19 +6,32 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from './StepPersonalSchema';
+import { usePostPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
+import { ButtonDef } from '../../../Buttons';
 
 const StepPersonal = () => {
   const userData = useSelector((state) => state.auth.user.data);
+
   const initialValues = {
     firstName: userData.firstName,
     lastName: userData.lastName,
-    city: '',
-    country: '',
-    status: '',
-    aboutMe: '',
+    city: userData.city,
+    country: userData.country,
+    status: userData.status,
+    description: userData.description,
   };
-  const onSubmit = (values, { resetForm }) => {
-    resetForm();
+  const [postPersonalUser] = usePostPersonalUserMutation();
+  const onSubmit = ({ firstName, lastName, city, country, status, description }) => {
+    postPersonalUser({
+      id: userData.id,
+      firstName: firstName,
+      lastName: lastName,
+      status: status,
+      country: country,
+      city: city,
+      subscribed: userData.subscribed,
+      description: description,
+    });
   };
   const formik = useFormik({
     initialValues,
@@ -26,7 +39,7 @@ const StepPersonal = () => {
     onSubmit,
   });
   return (
-    <Box sx={styles.wrapper}>
+    <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.input50}>
         <FormInput
           name='firstName'
@@ -90,17 +103,20 @@ const StepPersonal = () => {
       </Box>
       <Box sx={styles.input100}>
         <TextAreaInput
-          name='aboutMe'
-          value={formik.values.aboutMe}
+          name='description'
+          value={formik.values.description}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           type='text'
           label='profile.modal.userInfo.personal.about_me'
-          helperText={formik.touched.status && formik.errors.status}
-          error={formik.touched.status && Boolean(formik.errors.status)}
+          helperText={formik.touched.description && formik.errors.description}
+          error={formik.touched.description && Boolean(formik.errors.description)}
         />
       </Box>
-    </Box>
+      <Box sx={styles.wrapperBtn}>
+        <ButtonDef variant='contained' correctStyle={styles.btn} type='submit' label='profile.modal.btn' />
+      </Box>
+    </form>
   );
 };
 

@@ -1,18 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { styles } from './StepAvatar.styles';
 import { Box } from '@mui/material';
 import LoadImages from '../../../UI/LoadImages';
 import { useFormik } from 'formik';
 import { StepAvatarSchema } from './StepAvatarSchema';
+import { usePostAvatarUserMutation } from '../../../../redux/user/avatar/avatarApiSlice';
+import { useSelector } from 'react-redux';
+import { ButtonDef } from '../../../Buttons';
 
 const initialValues = {
   avatar: '',
 };
 
 const StepAvatar = () => {
-  const onSubmit = (values, { resetForm }) => {
-    console.log('Submitted values:', values);
-    resetForm();
+  const [postAvatarUser] = usePostAvatarUserMutation();
+  const userId = useSelector((state) => state.auth.user.data.id);
+  const onSubmit = (values) => {
+    const { avatar } = values;
+    postAvatarUser({
+      userId,
+      avatar: avatar,
+    });
   };
 
   const formik = useFormik({
@@ -25,15 +33,14 @@ const StepAvatar = () => {
     formik.setFieldValue('avatar', img);
   };
 
-  useEffect(() => {
-    console.log(formik.values.avatar, '12312312');
-  }, [formik.values.avatar]);
-
   return (
     <Box sx={styles.wrapper}>
-      <Box sx={styles.input100}>
-        <LoadImages handleChange={handleAvatarChange} handleBlur={formik.handleBlur} value={formik.values.avatar} />
-      </Box>
+      <form onSubmit={formik.handleSubmit}>
+        <Box sx={styles.input100}>
+          <LoadImages handleChange={handleAvatarChange} handleBlur={formik.handleBlur} value={formik.values.avatar} />
+        </Box>
+        <ButtonDef variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
+      </form>
     </Box>
   );
 };

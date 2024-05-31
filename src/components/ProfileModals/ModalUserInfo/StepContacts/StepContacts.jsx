@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { styles } from './StepContacts.styles';
 import { FormInput } from '../../../Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { StepContactsSchema } from './StepContactsSchema';
+import { usePostContactsUserMutation } from '../../../../redux/user/contacts/contactsApiSlice';
+import { useSelector } from 'react-redux';
+import { ButtonDef } from '../../../Buttons';
 
 const StepContacts = () => {
   const initialValues = {
@@ -14,19 +17,29 @@ const StepContacts = () => {
     mail: '',
     phone: '',
   };
-  const onSubmit = (values, { resetForm }) => {
-    resetForm();
+  const [postContactsUser] = usePostContactsUserMutation();
+  const userId = useSelector((state) => state.auth.user.data.id);
+
+  const onSubmit = ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
+    postContactsUser({
+      userId: userId,
+      body: [
+        { type: 'TELEGRAM_LINK', value: telegram },
+        { type: 'EMAIL', value: mail },
+        { type: 'LINKEDIN_LINK', value: linkedIn },
+        { type: 'GITHUB_LINK', value: gitHub },
+        { type: 'BEHANCE_LINK', value: behance },
+        { type: 'PHONE_NUMBER', value: phone },
+      ],
+    });
   };
   const formik = useFormik({
     initialValues,
     validationSchema: StepContactsSchema,
     onSubmit,
   });
-  useEffect(() => {
-    console.log(formik.values, '11111111111111');
-  }, [formik.values]);
   return (
-    <Box sx={styles.wrapper}>
+    <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.input100}>
         <FormInput
           name='telegram'
@@ -99,7 +112,8 @@ const StepContacts = () => {
           error={formik.touched.phone && Boolean(formik.errors.phone)}
         />
       </Box>
-    </Box>
+      <ButtonDef variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
+    </form>
   );
 };
 
