@@ -12,7 +12,7 @@ const Achievement = () => {
   console.log('User ID:', userId);
 
   const { data: achievementsData, error, isLoading } = useFetchAchievementsQuery(userId, {
-    skip: !userId, 
+    skip: !userId,
   });
 
   const [achievements, setAchievements] = useState([]);
@@ -22,6 +22,14 @@ const Achievement = () => {
       setAchievements(achievementsData);
     }
   }, [achievementsData]);
+
+  const updateAchievement = (updatedAchievement) => {
+    setAchievements((prevAchievements) =>
+      prevAchievements.map((achievement) =>
+        achievement.id === updatedAchievement.id ? updatedAchievement : achievement
+      )
+    );
+  };
 
   const removeAchievement = (id) => {
     setAchievements((prevAchievements) => prevAchievements.filter((achievement) => achievement.id !== id));
@@ -43,7 +51,7 @@ const Achievement = () => {
     <Grid container spacing={3} sx={styles.achievementListContainer}>
       {achievements?.map((achievement) => (
         <Grid item key={achievement.id} xs={6}>
-          <AchievementItem achievement={achievement} removeAchievement={removeAchievement} />
+          <AchievementItem achievement={achievement} removeAchievement={removeAchievement} updateAchievement={updateAchievement} />
         </Grid>
       ))}
     </Grid>

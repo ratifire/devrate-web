@@ -8,7 +8,7 @@ import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import AchievementEditModal from '../../../../../components/ProfileModals/AchievementModal/AchievementEditModal.jsx';
 import { useDeleteAchievementMutation } from '../../../../../redux/services/achievementsApiSlice.js';
 
-const AchievementItem = ({ achievement, removeAchievement }) => {
+const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteAchievement] = useDeleteAchievementMutation();
@@ -80,7 +80,8 @@ const AchievementItem = ({ achievement, removeAchievement }) => {
           console.log('Modal closed');
           setIsModalOpen(false);
         }}
-        achievement={achievement} // Pass the achievement prop here
+        achievement={achievement}
+        updateAchievement={updateAchievement} // Pass the updateAchievement function
       />
     </Box>
   );
@@ -94,6 +95,7 @@ AchievementItem.propTypes = {
     description: PropTypes.string.isRequired,
   }).isRequired,
   removeAchievement: PropTypes.func.isRequired,
+  updateAchievement: PropTypes.func.isRequired, // Add prop type for updateAchievement
 };
 
 export default AchievementItem;

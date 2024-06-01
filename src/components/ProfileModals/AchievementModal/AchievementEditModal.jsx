@@ -13,10 +13,10 @@ import { selectCurrentUser } from "../../../redux/auth/authSlice";
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
+const AchievementEditModal = ({ isOpen, onClose, achievement, updateAchievement }) => {
   const currentUser = useSelector(selectCurrentUser);
   const { t } = useTranslation();
-  const [updateAchievement] = useUpdateAchievementMutation();
+  const [updateAchievementApi] = useUpdateAchievementMutation();
 
   const initialValues = {
     link: achievement?.link || '',
@@ -28,11 +28,12 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
     console.log('Submitted values:', values);
 
     try {
-      await updateAchievement({
+      const updatedAchievement = await updateAchievementApi({
         id: achievement.id,
         payload: { ...values, userId: currentUser.id }, // Including userId in the payload
-      });
+      }).unwrap();
 
+      updateAchievement(updatedAchievement);
       resetForm();
       onClose();
     } catch (error) {
@@ -95,7 +96,6 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
           </Box>
 
           <ButtonDef variant='contained' type='submit' label={t('profile.modal.btn')} correctStyle={styles.workExperienceBtn} />
-
         </Box>
       </form>
     </ModalLayoutProfile>
@@ -106,6 +106,7 @@ AchievementEditModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   achievement: PropTypes.object.isRequired,
+  updateAchievement: PropTypes.func.isRequired, // Add prop type for updateAchievement
 };
 
 export default AchievementEditModal;
