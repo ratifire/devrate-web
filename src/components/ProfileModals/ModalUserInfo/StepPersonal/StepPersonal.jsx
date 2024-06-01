@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from './StepPersonalSchema';
-import { usePostPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
+import { usePutPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
 import { ButtonDef } from '../../../Buttons';
 
 const StepPersonal = () => {
@@ -20,9 +20,10 @@ const StepPersonal = () => {
     status: userData.status,
     description: userData.description,
   };
-  const [postPersonalUser] = usePostPersonalUserMutation();
+
+  const [putPersonalUser] = usePutPersonalUserMutation();
   const onSubmit = ({ firstName, lastName, city, country, status, description }) => {
-    postPersonalUser({
+    putPersonalUser({
       id: userData.id,
       firstName: firstName,
       lastName: lastName,

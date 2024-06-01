@@ -23,9 +23,6 @@ const initialValues = {
 
 const LoginModal = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const cookies = Cookies.get('JSESSIONID');
-
-
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openLogin = useSelector((state) => state.modal.openLogin);
@@ -38,12 +35,15 @@ const LoginModal = () => {
 
   async function onSubmit(values, { resetForm }) {
     try {
-      const userData = await login({ email: formik.values.email, password: formik.values.password }).unwrap();
-      console.log(userData);
-      dispatch(setCredentials({ data: userData, isAuthenticated: Boolean(cookies) }));
-      resetForm();
-      dispatch(closeModal('LoginModal'));
-      navigate('/profile');
+      const userData = await login({ email: values.email, password: values.password }).unwrap();
+      await dispatch(setCredentials({ data: userData, isAuthenticated: false }));
+      const cookies = Cookies.get('JSESSIONID');
+      if (cookies) {
+        await dispatch(setCredentials({ data: userData, isAuthenticated: true }));
+        navigate('/profile');
+        resetForm();
+        handleClose();
+      }
     } catch (error) {
       if (!error?.originalStatus) {
         console.log('No server response');
@@ -72,7 +72,9 @@ const LoginModal = () => {
     <CircularProgress />
   ) : (
     <ModalLayout open={openLogin} setOpen={handleClose}>
-      <Typography variant='subtitle2' sx={styles.title}>{t('modal.login.title')}</Typography>
+      <Typography variant='subtitle2' sx={styles.title}>
+        {t('modal.login.title')}
+      </Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
           name='email'
@@ -119,11 +121,10 @@ const LoginModal = () => {
           />
         </Box>
 
-        
         <Typography href='#' variant='caption1' sx={styles.policyText}>
           {t('modal.login.text_privacy')}
         </Typography>
-        
+
         <Box sx={styles.turnBackContainer}>
           <Typography href='#' variant='caption1' sx={styles.turnBackText}>
             {t('modal.login.return_on')}

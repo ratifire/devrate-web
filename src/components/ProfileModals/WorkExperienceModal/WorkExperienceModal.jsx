@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/modal/modalSlice';
@@ -16,13 +16,23 @@ import Responsibility from '../../UI/Responsibility';
 import { ButtonDef } from '../../Buttons';
 import { DateField } from '@mui/x-date-pickers';
 import { DateTime } from 'luxon';
+import {
+  useCreateNewWorkExperienceMutation,
+  useUpdateWorkExperienceByIdMutation,
+} from '../../../redux/workExperience/workExperienceApiSlice';
 
 
 const WorkExperienceModal = () => {
+  const { id } = useSelector((state) => state.auth.user.data);
+  const [ createNewWorkExperience ] = useCreateNewWorkExperienceMutation();
+  const [ updateWorkExperienceById ] = useUpdateWorkExperienceByIdMutation();
+
   const dispatch = useDispatch();
   const openExperience = useSelector((state) => state.modal.openExperience);
   const handleClose = () => dispatch(closeModal({ modalName: 'openExperience' }));
   const { t } = useTranslation();
+
+  const { modalData } = useSelector((state) => state.modal);
 
   const initialValues = {
     position: '',
@@ -32,34 +42,51 @@ const WorkExperienceModal = () => {
     startDate: null,
     endDate: null
   };
-  const onSubmit = (values, { resetForm }) => {
-    values.responsibilities = responsibilities;
 
-    if (values.startDate) {
-      const startDate = DateTime.fromISO(values.startDate);
-      values.startDate = startDate.isValid ? startDate.toISODate() : null;
+  const onSubmit = async (values, { resetForm }) => {
+    const startDate = DateTime.fromISO(values.startDate).toISODate();
+    const endDate = DateTime.fromISO(values.endDate).toISODate();
+    const data = {...values, startDate, endDate, responsibilities};
+
+    try {
+      if (modalData && modalData.id) {
+        await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
+      } else {
+        await createNewWorkExperience({ userId: id, data }).unwrap();
+      }
+    }
+    catch (error) {
+      console.error('Failed to create Work Experience', error);
     }
 
-    if (values.endDate) {
-      const endDate = DateTime.fromISO(values.endDate);
-      values.endDate = endDate.isValid ? endDate.toISODate() : null;
-    }
-
-    console.log('Submitted values:', values);
-    resetForm();
     setResponsibilities([]);
+    resetForm();
     handleClose();
   };
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues,
     validationSchema: WorkExperienceModalSchema,
     onSubmit,
   });
 
+  useEffect(() => {
+    if (!modalData) return
+
+    formik.setValues({
+      position: modalData.position,
+      companyName: modalData.companyName,
+      description: modalData.description,
+      startDate: DateTime.fromISO(modalData.startDate),
+      endDate: DateTime.fromISO(modalData.endDate)
+    });
+    setResponsibilities(modalData.responsibilities);
+  }, [modalData]);
+
   const [responsibilities, setResponsibilities] = useState([]);
   const createResponsibility = (newResponsibility) => {
-    if (newResponsibility.length === 0 || newResponsibility.length > 50) {return}
+    if (newResponsibility.length === 0 || newResponsibility.length > 50) return
     setResponsibilities([...responsibilities, newResponsibility]);
     formik.setFieldValue('responsibilities', '');
   };

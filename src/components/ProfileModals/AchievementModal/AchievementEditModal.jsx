@@ -1,10 +1,10 @@
 import React from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { Box, Typography } from '@mui/material';
-import { styles } from './AchivementModal.styles';
-import { useSelector } from 'react-redux';
+import { styles } from './AchievementModal.styles';
+import { useSelector } from 'react-redux'; 
 import { useFormik } from 'formik';
-import { AchivementModalSchema } from './AchivementModalSchema';
+import { AchievementModalSchema } from './AchievementModalSchema';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
 import { ButtonDef } from '../../Buttons';
@@ -43,7 +43,7 @@ const AchievementEditModal = ({ isOpen, onClose, achievement, updateAchievement 
 
   const formik = useFormik({
     initialValues,
-    validationSchema: AchivementModalSchema,
+    validationSchema: AchievementModalSchema,
     onSubmit,
   });
 
