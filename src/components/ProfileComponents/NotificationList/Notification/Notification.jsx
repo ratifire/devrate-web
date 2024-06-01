@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Box, Chip, IconButton, Typography } from '@mui/material';
 import styles from './Notification.styles';
 import PropTypes from 'prop-types';
@@ -21,12 +21,12 @@ const Notification = (props) => {
   const [markAsRead] = useMarkAsReadMutation();
   const [deleteNotification] = useDeleteNotificationMutation();
 
-  useEffect(() => {
+  const markAsReadClickHandler = () => {
     markAsRead({
-        notificationId: props.id,
-        userId: currentUser.data.id,
-      });
-  }, []);
+      notificationId: props.id,
+      userId: currentUser.data.id,
+    });
+  };
 
   const deleteBtnClickHandler = () => {
     deleteNotification({
@@ -51,7 +51,7 @@ const Notification = (props) => {
           <Close />
         </IconButton>
 
-        {!props.read && <Chip label='Нове' sx={styles.badge} />}
+        {!props.read && <Chip label='Нове' sx={styles.badge} onClick={markAsReadClickHandler} />}
       </Box>
     </Box>
   );
