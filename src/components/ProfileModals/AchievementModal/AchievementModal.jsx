@@ -13,7 +13,7 @@ import { ButtonDef } from '../../Buttons';
 import PropTypes from 'prop-types';
 import { useCreateAchievementMutation } from "../../../redux/services/achievementsApiSlice";
 
-const AchievementModal = ({ onSuccess, currentUser }) => {
+const AchievementModal = ({ onSuccess, userId }) => {
   const dispatch = useDispatch();
   const openAchievement = useSelector((state) => state.modal.achievement);
   const handleClose = () => dispatch(closeModal({ modalName: 'achievement' }));
@@ -30,8 +30,13 @@ const AchievementModal = ({ onSuccess, currentUser }) => {
     console.log('Submitted values:', values);
 
     try {
+      if (!userId) {
+        console.error('User is not authenticated or user ID is missing');
+        return;
+      }
+
       const result = await createAchievement({
-        userId: currentUser.id,
+        userId: userId,
         payload: values,
       }).unwrap();
 
@@ -50,7 +55,7 @@ const AchievementModal = ({ onSuccess, currentUser }) => {
   });
 
   
-  if (!currentUser) {
+  if (!userId) {
     return null;
   }
 
@@ -111,7 +116,7 @@ const AchievementModal = ({ onSuccess, currentUser }) => {
 
 AchievementModal.propTypes = {
   onSuccess: PropTypes.func.isRequired,
-  currentUser: PropTypes.object.isRequired,
+  userId: PropTypes.number.isRequired, 
 };
 
 export default AchievementModal;

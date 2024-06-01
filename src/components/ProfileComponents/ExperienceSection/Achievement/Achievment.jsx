@@ -8,14 +8,12 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 
 const Achievement = () => {
-   // Используем useState для userId
 
-  // Получаем текущего пользователя из Redux
   const currentUser = useSelector(selectCurrentUser);
   const [userId, setUserId] = useState(null);
   
   useEffect(() => {
-    // Проверяем, если currentUser существует и имеет data
+    
     if (currentUser && currentUser.data) {
       setUserId(currentUser.data.id);
     }
@@ -72,7 +70,7 @@ const Achievement = () => {
           </Grid>
         ))}
       </Grid>
-      <AchievementModal onSuccess={addAchievement} userId={userId} /> {/* Используйте userId здесь */}
+      <AchievementModal onSuccess={addAchievement} userId={userId} />
     </>
   );
 };

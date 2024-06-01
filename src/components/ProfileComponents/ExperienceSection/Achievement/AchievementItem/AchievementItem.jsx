@@ -81,7 +81,7 @@ const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) 
           setIsModalOpen(false);
         }}
         achievement={achievement}
-        updateAchievement={updateAchievement} // Pass the updateAchievement function
+        updateAchievement={updateAchievement} 
       />
     </Box>
   );
@@ -95,7 +95,7 @@ AchievementItem.propTypes = {
     description: PropTypes.string.isRequired,
   }).isRequired,
   removeAchievement: PropTypes.func.isRequired,
-  updateAchievement: PropTypes.func.isRequired, // Add prop type for updateAchievement
+  updateAchievement: PropTypes.func.isRequired, 
 };
 
 export default AchievementItem;

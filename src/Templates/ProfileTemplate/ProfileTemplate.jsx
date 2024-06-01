@@ -12,7 +12,7 @@ const ProfileTemplate = ({ children }) => {
   const openEducation = useSelector((state) => state.modal.openEducation);
   const currentUser = useSelector(selectCurrentUser);
 
-  console.log('Current User:', currentUser); // Добавляем консольный вывод
+  console.log('Current User:', currentUser); 
 
   const { data: achievementsData, error, isLoading } = useFetchAchievementsQuery(currentUser?.id, {
     skip: !currentUser?.id,
@@ -26,7 +26,7 @@ const ProfileTemplate = ({ children }) => {
     }
   }, [achievementsData]);
 
-  console.log('Achievements:', achievements); // Добавляем консольный вывод
+  console.log('Achievements:', achievements); 
 
   const addAchievement = (newAchievement) => {
     setAchievements((prevAchievements) => [...prevAchievements, newAchievement]);
