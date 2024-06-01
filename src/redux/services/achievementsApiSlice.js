@@ -18,11 +18,21 @@ export const achievementsApiSlice = apiSlice.injectEndpoints({
         body: payload,
       }),
     }),
+    createAchievement: builder.mutation({
+      query: ({ payload, userId }) => ({
+        url: `/users/${userId}/achievements`,
+        method: 'POST',
+        body: {
+          ...payload
+        }
+      }),
+    }),
   }),
 });
 
 export const { 
   useFetchAchievementsQuery, 
   useDeleteAchievementMutation, 
-  useUpdateAchievementMutation 
+  useUpdateAchievementMutation,
+  useCreateAchievementMutation,
 } = achievementsApiSlice;
