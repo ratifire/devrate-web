@@ -8,9 +8,22 @@ import UserAvatar from '../../UI/UserAvatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
 import { setStep } from '../../../redux/modal/modalStepSlice';
+import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
+import { selectCurrentUser } from '../../../redux/auth/authSlice';
 
 const BaseUserInfo = () => {
-  const { firstName, lastName, country, city, status } = useSelector((state) => state.auth.user.data);
+  const { data: info } = useSelector(selectCurrentUser);
+  const { id, firstName, lastName, country } = info;
+
+  const { data: personalData } = useGetPersonalUserQuery(id);
+  const userData = personalData || {};
+  const {
+    firstName: getFirstName,
+    lastName: getLastName,
+    country: getCountry,
+    city: getCity,
+    status: getStatus,
+  } = userData;
 
   const [progress] = React.useState(60);
   const dispatch = useDispatch();
@@ -28,19 +41,19 @@ const BaseUserInfo = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
         <Button type='button' onClick={handleOpenAvatar}>
-          <UserAvatar userName={`${firstName} ${lastName}`} size='l' />
+          <UserAvatar userName={`${getFirstName || firstName} ${getLastName || lastName}`} size='l' />
         </Button>
       </Box>
       <Box sx={styles.wrapperText}>
         <Typography variant='h5' sx={styles.userName}>
-          {`${firstName} ${lastName}`}
+          {`${getFirstName || firstName} ${getLastName || lastName}`}
         </Typography>
         <Typography variant='subtitle1' sx={styles.speciality}>
-          {status || ''}
+          {getStatus || ''}
         </Typography>
         <Typography variant='subtitle2' sx={styles.city}>
           <LocationOnIcon sx={styles.icon} />
-          {`${city ? city + ',' : ''} ${country}`}
+          {`${getCity ? getCity + ',' : ''} ${getCountry || country}`}
         </Typography>
         <Box sx={styles.wrapperTextBtn}>
           <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenInfo}>
