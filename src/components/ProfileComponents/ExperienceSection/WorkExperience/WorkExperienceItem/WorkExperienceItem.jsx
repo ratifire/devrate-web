@@ -14,7 +14,7 @@ import { useDeleteWorkExperienceByIdMutation } from '../../../../../redux/workEx
 const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, description, responsibilities }) => {
   const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();
 
-  const [anchorEl, setAnchorEl] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -22,9 +22,11 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleEditFeature = () => {
     dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startDate, endDate } }));
     handleCloseMenu();
@@ -41,8 +43,8 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
           <Typography variant='h5' sx={styles.workPosition}>
             {position}
           </Typography>
-          <Typography variant='subtitle3' sx={styles.workPlaceTitle}>
-            {companyName} {startDate} - {endDate}
+          <Typography variant="subtitle3" sx={styles.workPlaceTitle}>
+            {companyName} <span style={{ margin: '0 4px' }}>•</span> {startDate.slice(0,4)} - {endDate.slice(0,4)}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>

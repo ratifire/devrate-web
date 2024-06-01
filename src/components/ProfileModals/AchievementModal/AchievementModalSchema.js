@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const AchivementModalSchema = Yup.object().shape({
+export const AchievementModalSchema = Yup.object().shape({
   link: Yup.string()
     .min(2, 'profile.modal.workExperience.position_long')
     .max(50, 'profile.modal.workExperience.position_short')

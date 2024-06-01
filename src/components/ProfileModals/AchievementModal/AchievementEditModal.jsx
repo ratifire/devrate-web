@@ -1,48 +1,49 @@
 import React from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { Box, Typography } from '@mui/material';
-import { styles } from './AchivementModal.styles';
+import { styles } from './AchievementModal.styles';
 import { useSelector } from 'react-redux'; 
 import { useFormik } from 'formik';
-import { AchivementModalSchema } from './AchivementModalSchema';
+import { AchievementModalSchema } from './AchievementModalSchema';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
 import { ButtonDef } from '../../Buttons';
-import { useCreateAchievementMutation } from "../../../redux/services/achievementApiSlice";
+import { useUpdateAchievementMutation } from "../../../redux/services/achievementsApiSlice";
 import { selectCurrentUser } from "../../../redux/auth/authSlice";
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-const AchievementEditModal = ({ isOpen, onClose }) => {
+const AchievementEditModal = ({ isOpen, onClose, achievement, updateAchievement }) => {
   const currentUser = useSelector(selectCurrentUser);
   const { t } = useTranslation();
-  const [createAchievement] = useCreateAchievementMutation();
+  const [updateAchievementApi] = useUpdateAchievementMutation();
 
   const initialValues = {
-    link: '',
-    summary: '',
-    description: '',
+    link: achievement?.link || '',
+    summary: achievement?.summary || '',
+    description: achievement?.description || '',
   };
 
   const onSubmit = async (values, { resetForm }) => {
     console.log('Submitted values:', values);
 
     try {
-      await createAchievement({
-        userId: currentUser.id,
-        payload: values,
-      });
+      const updatedAchievement = await updateAchievementApi({
+        id: achievement.id,
+        payload: { ...values, userId: currentUser.id }, // Including userId in the payload
+      }).unwrap();
 
+      updateAchievement(updatedAchievement);
       resetForm();
-      onClose(); 
+      onClose();
     } catch (error) {
-      console.error('Error creating achievement:', error);
+      console.error('Error updating achievement:', error);
     }
   };
 
   const formik = useFormik({
     initialValues,
-    validationSchema: AchivementModalSchema,
+    validationSchema: AchievementModalSchema,
     onSubmit,
   });
 
@@ -95,7 +96,6 @@ const AchievementEditModal = ({ isOpen, onClose }) => {
           </Box>
 
           <ButtonDef variant='contained' type='submit' label={t('profile.modal.btn')} correctStyle={styles.workExperienceBtn} />
-
         </Box>
       </form>
     </ModalLayoutProfile>
@@ -105,6 +105,8 @@ const AchievementEditModal = ({ isOpen, onClose }) => {
 AchievementEditModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  achievement: PropTypes.object.isRequired,
+  updateAchievement: PropTypes.func.isRequired, // Add prop type for updateAchievement
 };
 
 export default AchievementEditModal;

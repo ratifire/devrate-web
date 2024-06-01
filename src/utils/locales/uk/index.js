@@ -168,6 +168,10 @@ export const uk = {
         bookmark: 'Збережене',
         logout: 'Вийти',
       },
+      experienceSection: {
+        readAll: 'Читати далі...',
+        collapse: 'Згорнути'
+      },
       modal: {
         btn: 'Зберегти',
         finish: 'Готово',

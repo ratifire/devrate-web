@@ -8,8 +8,13 @@ export const workExperienceApiSlice = apiSlice.injectEndpoints({
       providesTags: (result) =>
         result
           ? [...result.map(({ id }) => ({ type: 'WorkExperience', id })), 'WorkExperience']
-          : ['Post'],
+          : ['WorkExperience'],
     }),
+
+    getWorkExperienceById: builder.query({
+      query: (id) => `/employment-records/${id}`,
+    }),
+
 
     createNewWorkExperience: builder.mutation({
       query: ({userId, data}) => ({
@@ -48,6 +53,7 @@ export const workExperienceApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetWorkExperienceByUserIdQuery,
+  useGetWorkExperienceByIdQuery,
   useCreateNewWorkExperienceMutation,
   useUpdateWorkExperienceByIdMutation,
   useDeleteWorkExperienceByIdMutation,
