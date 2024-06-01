@@ -1,17 +1,17 @@
 import React from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
- import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { Box, Typography } from '@mui/material';
-import { styles } from './AchivementModal.styles';
+import { styles } from './AchievementModal.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { AchivementModalSchema } from './AchivementModalSchema';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
 import { ButtonDef } from '../../Buttons';
 import PropTypes from 'prop-types';
-import { useCreateAchievementMutation } from "../../../redux/services/achievementsApiSlice";
+import { useCreateAchievementMutation } from '../../../redux/services/achievementsApiSlice';
+import { AchievementModalSchema } from './AchievementModalSchema';
 
 const AchievementModal = ({ onSuccess, userId }) => {
   const dispatch = useDispatch();
@@ -54,7 +54,6 @@ const AchievementModal = ({ onSuccess, userId }) => {
     onSubmit,
   });
 
-  
   if (!userId) {
     return null;
   }
@@ -107,7 +106,12 @@ const AchievementModal = ({ onSuccess, userId }) => {
             />
           </Box>
 
-          <ButtonDef variant='contained' type='submit' label={t('profile.modal.btn')} correctStyle={styles.workExperienceBtn} />
+          <ButtonDef
+            variant='contained'
+            type='submit'
+            label={t('profile.modal.btn')}
+            correctStyle={styles.workExperienceBtn}
+          />
         </Box>
       </form>
     </ModalLayoutProfile>
@@ -116,7 +120,7 @@ const AchievementModal = ({ onSuccess, userId }) => {
 
 AchievementModal.propTypes = {
   onSuccess: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired, 
+  userId: PropTypes.number.isRequired,
 };
 
 export default AchievementModal;
