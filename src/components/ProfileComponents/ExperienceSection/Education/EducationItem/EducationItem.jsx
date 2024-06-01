@@ -1,12 +1,38 @@
 import React, { useState } from 'react';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, IconButton, Link, Typography } from '@mui/material';
 import { ReactComponent as EducationalCourses } from '../../../../../assets/icons/educationalCourses.svg';
 import styles from './EducationItem.styles.js';
+import PropTypes from 'prop-types';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import DropdownMenu from '../../DropdownMenu/DropdownMenu';
+import { useDeleteEducationByIdMutation } from '../../../../../redux/services/educationApiSlice';
+import { useTranslation } from 'react-i18next';
 
-const EducationItem = () => {
+const EducationItem = ({id, type, name, description, startYear, endYear}) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const text =
-    'Мої навички у програмуванні на PHP, використанні ООП та підходу MVC підтримуються значним досвідом роботи з базами даних, такими як MySQL та PostgreSQL. Я ефективно використовую фреймворк Laravel 5.3 для розробки масштабованих веб-додатків та володію базовими знаннями Symfony 3, зокрема Sonata. ';
+  const [deleteEducationById] = useDeleteEducationByIdMutation();
+  const { t } = useTranslation();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleEditFeature = () => {
+    console.log('Editing feature');
+    handleCloseMenu();
+  };
+
+  const handleDeleteFeature =  async () => {
+    await deleteEducationById(id).unwrap();
+    handleCloseMenu();
+  };
+
   return (
     <Box sx={styles.educationItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
@@ -14,22 +40,28 @@ const EducationItem = () => {
           <EducationalCourses />
           <Box sx={{ marginLeft: '11px' }}>
             <Typography variant='h6' sx={styles.courseTitle}>
-              PHP course
+              {type}
             </Typography>
-            <Typography variant='subtitle2' sx={styles.schoolTitle}>
-              HILLEL IT SCHOOL
+            <Typography variant="subtitle2" sx={styles.schoolTitle}>
+              {name} <span style={{ margin: '0 4px' }}>•</span> {startYear} - {endYear}
             </Typography>
           </Box>
         </Box>
-        <Box sx={styles.studyDates}>
-          <Typography variant='subtitle3' sx={styles.studyDates}>
-            2016-2016
-          </Typography>
-        </Box>
+        <Box sx={styles.menuIcon}>
+          <IconButton onClick={(event) => handleMenuOpen(event)}>
+            <MoreVertIcon />
+          </IconButton>
+        </Box>{' '}
+        <DropdownMenu
+          anchorEl={anchorEl}
+          handleCloseMenu={handleCloseMenu}
+          handleEditFeature={handleEditFeature}
+          handleDeleteFeature={handleDeleteFeature}
+        />
       </Box>
       {isCollapsed ? (
         <Typography>
-          {text.slice(0, 200)}
+          {description.slice(0, 200) + ' '}
           <Link
             component='button'
             variant='subtitle2'
@@ -38,12 +70,12 @@ const EducationItem = () => {
               setIsCollapsed(!isCollapsed);
             }}
           >
-            Читати далі...
+            {t('profile.experienceSection.readAll')}
           </Link>
         </Typography>
       ) : (
         <Typography>
-          {text}
+          {description + ' '}
           <Link
             component='button'
             variant='subtitle2'
@@ -52,11 +84,21 @@ const EducationItem = () => {
               setIsCollapsed(!isCollapsed);
             }}
           >
-            Згорнути
+            {t('profile.experienceSection.collapse')}
           </Link>
         </Typography>
       )}
     </Box>
   );
 };
+
+EducationItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  startYear: PropTypes.number.isRequired,
+  endYear: PropTypes.number.isRequired,
+}
+
 export default EducationItem;

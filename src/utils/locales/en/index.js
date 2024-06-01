@@ -167,6 +167,10 @@ export const en = {
         bookmark: 'Bookmarks',
         logout: 'Logout',
       },
+      experienceSection: {
+        readAll: 'Read all...',
+        collapse: 'Collapse'
+      },
       modal: {
         btn: 'Save',
         finish: 'Finish',
