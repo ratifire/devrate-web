@@ -3,6 +3,7 @@ export const styles = {
     padding: theme.spacing(4),
   }),
   wrapperBox: (theme) => ({
+    position: 'relative',
     marginBottom: theme.spacing(4),
     ':last-child': {
       marginBottom: 0,
@@ -23,6 +24,17 @@ export const styles = {
     flexWrap: 'wrap',
   },
   aboutMe: (theme) => ({
-    color: theme.palette.neutral[100],
+    color: theme.palette.neutral['100'],
+  }),
+  btnIcon: (theme) => ({
+    flex: '1 0 44px',
+    color: theme.palette.neutral['100'],
+    borderRadius: 1,
+    ':hover': {
+      backgroundColor: theme.palette.neutral['800'],
+    },
+    svg: {
+      fontSize: '18px',
+    },
   }),
 };

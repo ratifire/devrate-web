@@ -14,7 +14,6 @@ const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) 
   const [deleteAchievement] = useDeleteAchievementMutation();
 
   const handleCloseMenu = () => {
-    console.log('Menu closed');
     setAnchorEl(null);
   };
 
@@ -24,7 +23,6 @@ const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) 
   };
 
   const handleEditFeature = () => {
-    console.log('Editing feature');
     handleCloseMenu();
     setIsModalOpen(true);
   };
@@ -57,17 +55,15 @@ const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) 
             <MoreVertIcon />
           </IconButton>
           <DropdownMenu
-            anchorEl={anchorEl} 
+            anchorEl={anchorEl}
             handleCloseMenu={handleCloseMenu}
             handleEditFeature={handleEditFeature}
             handleDeleteFeature={handleDeleteFeature}
           />
         </Box>
         {achievement.link && (
-          <Link href={achievement.link} target="_blank" sx={styles.link}>
-            <Typography variant='subtitle3'>
-              {achievement.link}
-            </Typography>
+          <Link href={achievement.link} target='_blank' sx={styles.link}>
+            <Typography variant='subtitle3'>{achievement.link}</Typography>
           </Link>
         )}
         <Typography variant='body1' sx={styles.achievementItemText}>
@@ -81,7 +77,7 @@ const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) 
           setIsModalOpen(false);
         }}
         achievement={achievement}
-        updateAchievement={updateAchievement} 
+        updateAchievement={updateAchievement}
       />
     </Box>
   );
@@ -95,7 +91,7 @@ AchievementItem.propTypes = {
     description: PropTypes.string.isRequired,
   }).isRequired,
   removeAchievement: PropTypes.func.isRequired,
-  updateAchievement: PropTypes.func.isRequired, 
+  updateAchievement: PropTypes.func.isRequired,
 };
 
 export default AchievementItem;

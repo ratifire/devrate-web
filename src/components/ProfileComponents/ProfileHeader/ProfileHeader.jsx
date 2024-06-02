@@ -64,7 +64,6 @@ function ProfileHeader() {
   async function onSubmit(values, { resetForm }) {
     try {
       resetForm();
-      console.log(values);
     } catch (error) {
       console.log(error);
     }

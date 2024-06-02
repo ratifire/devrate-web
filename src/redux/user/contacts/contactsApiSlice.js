@@ -9,10 +9,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
-    getContactsUser: builder.query({
-      query: (userId) => `/users/${userId}/achievements`,
+    getUserContacts: builder.query({
+      query: (userId) => `/users/${userId}/contacts`,
     }),
   }),
 });
 
-export const { usePostContactsUserMutation } = userApiSlice;
+export const { usePostContactsUserMutation, useGetUserContactsQuery } = userApiSlice;
