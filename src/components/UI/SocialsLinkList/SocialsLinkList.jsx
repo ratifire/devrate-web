@@ -14,7 +14,7 @@ const SocialsLinkList = ({ socials, componentStyles }) => {
   return (
     <>
       {socials &&
-        socials.map((social) => {
+        socials.map((social, index) => {
           const IconComponent = icons[social.type];
           let href;
           if (social.type === 'EMAIL') {
@@ -25,7 +25,7 @@ const SocialsLinkList = ({ socials, componentStyles }) => {
             href = ensureProtocol(social.value);
           }
           return (
-            <Link key={social.id} href={href} sx={componentStyles.link} target='_blank'>
+            <Link key={`${social.id}-${index}`} href={href} sx={componentStyles.link} target='_blank'>
               {IconComponent ? <IconComponent /> : 'Invalid icon'}
             </Link>
           );

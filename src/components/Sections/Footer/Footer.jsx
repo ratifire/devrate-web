@@ -5,10 +5,9 @@ import { Box, Container, Icon, Link, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { ReactComponent as LogoBoy } from '../../../assets/icons/logo-boy.svg';
 import Logo from '../../UI/Logo';
-import socials from '../../../utils/constants/socials';
 import LinkList from '../../UI/LinkList';
 import legalInfoLinks from '../../../utils/constants/legalInfoLinks';
-import SocialsLinkList from '../../UI/SocialsLinkList';
+import { Instagram, LinkedIn } from '@mui/icons-material';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -26,7 +25,12 @@ const Footer = () => {
             </Icon>
             <LinkList links={legalInfoLinks} componentStyles={styles} />
             <Box sx={styles.socialGroup}>
-              <SocialsLinkList socials={socials} componentStyles={styles} />
+              <Link href={'href'} target='_blank'>
+                <Instagram />
+              </Link>
+              <Link href={'href'} target='_blank'>
+                <LinkedIn />
+              </Link>
             </Box>
           </Box>
         </Box>
