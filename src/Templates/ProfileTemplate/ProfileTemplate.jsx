@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { ModalUserInfo, WorkExperienceModal, AchievementModal, EducationModal } from '../../components/ProfileModals';
+import { AchievementModal, EducationModal, ModalUserInfo, WorkExperienceModal } from '../../components/ProfileModals';
 import { useFetchAchievementsQuery } from '../../redux/services/achievementsApiSlice';
 import { selectCurrentUser } from '../../redux/auth/authSlice';
 
@@ -12,9 +12,11 @@ const ProfileTemplate = ({ children }) => {
   const openEducation = useSelector((state) => state.modal.openEducation);
   const currentUser = useSelector(selectCurrentUser);
 
-  console.log('Current User:', currentUser); 
-
-  const { data: achievementsData, error, isLoading } = useFetchAchievementsQuery(currentUser?.id, {
+  const {
+    data: achievementsData,
+    error,
+    isLoading,
+  } = useFetchAchievementsQuery(currentUser?.id, {
     skip: !currentUser?.id,
   });
 
@@ -25,8 +27,6 @@ const ProfileTemplate = ({ children }) => {
       setAchievements(achievementsData);
     }
   }, [achievementsData]);
-
-  console.log('Achievements:', achievements); 
 
   const addAchievement = (newAchievement) => {
     setAchievements((prevAchievements) => [...prevAchievements, newAchievement]);
@@ -42,7 +42,7 @@ const ProfileTemplate = ({ children }) => {
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
       <div>
-        {achievements.map(achievement => (
+        {achievements.map((achievement) => (
           <div key={achievement.id}>{achievement.summary}</div>
         ))}
       </div>
