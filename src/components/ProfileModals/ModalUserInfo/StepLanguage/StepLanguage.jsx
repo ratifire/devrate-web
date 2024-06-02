@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { styles } from './StepLanguage.styles';
 import { Box, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -76,7 +76,7 @@ const StepLanguage = () => {
     validationSchema: StepAvatarSchema,
     onSubmit,
   });
-  useEffect(() => console.log(lang), [lang]);
+  // useEffect(() => console.log(lang), [lang]);
 
   return (
     <Box sx={styles.wrapper}>
