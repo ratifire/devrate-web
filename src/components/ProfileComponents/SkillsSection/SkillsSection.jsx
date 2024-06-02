@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styles } from './SkillsSection.styles';
+import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../redux/auth/authSlice';
 
 const SkillsSection = () => {
+  const { data: info } = useSelector(selectCurrentUser);
+  const { id } = info;
   const { t } = useTranslation();
-  const [hardSkillsRating, setHardSkillsRating] = useState(5);
-  const [softSkillsRating, setSoftSkillsRating] = useState(4);
 
-  const handleHardSkillsChange = (newValue) => {
-    setHardSkillsRating(newValue);
-  };
-
-  const handleSoftSkillsChange = (newValue) => {
-    setSoftSkillsRating(newValue);
-  };
+  const { data: personalData } = useGetPersonalUserQuery(id);
+  const userData = personalData || {};
+  const { hardSkillMark = 0, softSkillMark = 0, completedInterviews = 0, conductedInterviews = 0 } = userData;
 
   return (
     <Box sx={styles.skillsWrapper}>
@@ -25,40 +24,30 @@ const SkillsSection = () => {
         <Typography variant='h6' sx={styles.skillsText}>
           {t('profile.skills.hardSkills')}:
         </Typography>
-        <Rating
-          name='hard-skills-rating'
-          value={hardSkillsRating}
-          onChange={(event, newValue) => handleHardSkillsChange(newValue)}
-          sx={{ marginRight: '10px' }}
-        />
+        <Rating name='hard-skills-rating' readOnly value={hardSkillMark} sx={{ marginRight: '10px' }} />
         <Typography variant='subtitle2' sx={styles.skillsRating}>
-          {hardSkillsRating * 2}/10
+          {hardSkillMark * 2}/10
         </Typography>
       </Box>
       <Box sx={styles.softSkills}>
         <Typography variant='subtitle1' sx={styles.skillsText}>
           {t('profile.skills.softSkills')}:
         </Typography>
-        <Rating
-          name='soft-skills-rating'
-          value={softSkillsRating}
-          onChange={(event, newValue) => handleSoftSkillsChange(newValue)}
-          sx={{ marginRight: '10px' }}
-        />
+        <Rating name='soft-skills-rating' readOnly value={softSkillMark} sx={{ marginRight: '10px' }} />
         <Typography variant='subtitle2' sx={styles.skillsRating}>
-          {softSkillsRating * 2}/10
+          {softSkillMark * 2}/10
         </Typography>
       </Box>
       <Box sx={styles.interviewHistory}>
         <Box sx={styles.doneInterviews}>
           <Typography variant='subtitle1' sx={styles.doneInterviewsQuantity}>
-            10
+            {conductedInterviews}
           </Typography>
           <Typography variant='caption3'>{t('profile.skills.doneInterviews')}</Typography>
         </Box>
         <Box sx={styles.completedInterviews}>
           <Typography variant='subtitle1' sx={styles.completedInterviewsQuantity}>
-            24
+            {completedInterviews}
           </Typography>
           <Typography variant='caption3'>{t('profile.skills.completedInterviews')}</Typography>
         </Box>
@@ -66,4 +55,5 @@ const SkillsSection = () => {
     </Box>
   );
 };
+
 export default SkillsSection;
