@@ -73,9 +73,9 @@ export const en = {
         email: 'Email',
         country: 'Country',
         countries: {
-          ukraine: 'Ukraine',
-          poland: 'Poland',
-          usa: 'USA',
+          Ukraine: 'Ukraine',
+          Poland: 'Poland',
+          USA: 'USA',
         },
         first_name: 'Name',
         last_name: 'Surname',

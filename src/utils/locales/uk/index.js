@@ -74,9 +74,9 @@ export const uk = {
         email: 'Електронна пошта',
         country: 'Країна',
         countries: {
-          ukraine: 'Україна',
-          poland: 'Польща',
-          usa: 'США',
+          Ukraine: 'Україна',
+          Poland: 'Польща',
+          USA: 'США',
         },
         first_name: 'Імʼя',
         last_name: 'Прізвище',
