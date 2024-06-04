@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { useCreateUserMutation } from '../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
+import { useGetCountryListQuery } from '../../../redux/countryList/countryApiSlice';
 
 const initialValues = {
   email: '',
@@ -23,8 +24,6 @@ const initialValues = {
   agreement: false,
 };
 
-const userCountries = ['Ukraine', 'Poland', 'USA']
-
 const RegistrationModal = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
@@ -32,6 +31,7 @@ const RegistrationModal = () => {
   const [createUser, { isLoading: isCreating }] = useCreateUserMutation();
   const openRegistration = useSelector((state) => state.modal.openRegistration);
   const handleClose = () => dispatch(closeModal({ modalName: 'openRegistration' }));
+  const {data: userCountries} = useGetCountryListQuery();
 
   const onSubmit = (values, { resetForm }) => {
     const { email, firstName, lastName, news, password } = values;
@@ -82,7 +82,6 @@ const RegistrationModal = () => {
             error={formik.touched.country && Boolean(formik.errors.country)}
             helperText={formik.touched.country && formik.errors.country}
             countries={userCountries}
-            itemsText='modal.registration.countries'
           />
         <Box sx={styles.inputNameContainer}>
           <FormInput
