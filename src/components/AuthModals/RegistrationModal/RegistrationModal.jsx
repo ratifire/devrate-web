@@ -6,7 +6,6 @@ import { Box, CircularProgress, Link, Typography } from '@mui/material';
 import styles from './RegistrationModal.styles';
 import { RegistrationSchema } from './RegistrationSchema';
 import { FormCheckbox, FormInput, FormSelect } from '../../Inputs';
-import { userCountries } from '../../../utils/constants/userCountries';
 import { ButtonDef } from '../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
@@ -23,6 +22,8 @@ const initialValues = {
   news: false,
   agreement: false,
 };
+
+const userCountries = ['Ukraine', 'Poland', 'USA']
 
 const RegistrationModal = () => {
   const [showPassword, setShowPassword] = useState(false);

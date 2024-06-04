@@ -1,13 +1,12 @@
 import React from 'react';
 import { styles } from './StepPersonal.styles';
-import { FormInput, TextAreaInput } from '../../../Inputs';
+import { FormInput, TextAreaInput, FormSelect } from '../../../Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from './StepPersonalSchema';
 import { usePutPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
 import { ButtonDef } from '../../../Buttons';
-import CountrySelect from '../../../Inputs/CountrySelect';
 import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
 
 const StepPersonal = () => {
@@ -79,7 +78,7 @@ const StepPersonal = () => {
         />
       </Box>
       <Box sx={styles.input50}>
-        <CountrySelect
+        <FormSelect
           variant='outlined'
           name='country'
           value={formik.values.country}
