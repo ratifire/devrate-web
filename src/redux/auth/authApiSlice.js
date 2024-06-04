@@ -22,7 +22,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     resetPassword: builder.mutation({
       query: ({ email }) => ({
-        url: `/auth/password-reset?email=${encodeURIComponent(email)}`,
+        url: `/auth/request-password-reset?email=${encodeURIComponent(email)}`,
         method: 'POST',
       }),
       onSuccess: (data, variables, api) => {

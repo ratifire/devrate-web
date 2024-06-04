@@ -11,6 +11,7 @@ import { ButtonDef } from '../../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useChangePasswordMutation } from '../../../../redux/auth/authApiSlice';
+import ConfirmationForm from '../../ConfirmationModal/ConfirmationForm';
 
 const initialValues = {
   code: '',
@@ -28,31 +29,44 @@ const ResetPassword = () => {
   const handleMouseDownPassword = (event) => event.preventDefault();
 
   const [changePassword] = useChangePasswordMutation();
-
-  const onSubmit = async (values, { resetForm }) => {
-    try {
-      await changePassword({
-        code: values.code,
-      });
-      alert('Password changed successfully!');
-      resetForm();
-      handleClose();
-    } catch (error) {
-      console.error('Error changing password:', error);
-      alert('Error changing password. Please try again.');
-    }
-  };
+  const inputRefs = React.useRef([]);
 
   const formik = useFormik({
     initialValues,
     validationSchema: ResetPasswordSchema,
-    onSubmit,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        await changePassword({
+          code: values.code,
+        });
+        alert('Password changed successfully!');
+        resetForm();
+        handleClose();
+      } catch (error) {
+        console.error('Error changing password:', error);
+        alert('Error changing password. Please try again.');
+      }
+    },
   });
 
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
       <Typography variant='subtitle3' sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
-      <Formik initialValues={formik.initialValues} onSubmit={onSubmit}>
+      <Box sx={styles.mainTextWrapper}>
+        <Typography variant='subtitle3' sx={styles.mainText}>
+          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>user@mail.com</Typography>.
+        </Typography>
+        <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
+      </Box>
+      <ConfirmationForm
+        inputRefs={inputRefs}
+        formik={formik}
+        helperTextContent=""
+        buttonLabel="Enter Code"
+        fieldCount={6}
+        showButton={false}
+      />
+      <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit}>
         <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
           <FormInput
             showPassword={showPassword}

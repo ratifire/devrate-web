@@ -34,5 +34,18 @@ const styles = {
     lineHeight: '18px',
     color: theme.palette.text.primary,
   }),
+  mainTextWrapper: (theme) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: theme.spacing(4),
+  }),
+  mainText: (theme) => ({
+    display: 'inline',
+    color: theme.palette.text.secondary,
+    textAlign: 'center',
+  }),
+  userEmail: (theme) => ({
+    color: theme.palette.text.primary,
+  }),
 };
 export default styles;
