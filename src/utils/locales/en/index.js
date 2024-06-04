@@ -72,11 +72,6 @@ export const en = {
         title: 'Registration',
         email: 'Email',
         country: 'Country',
-        countries: {
-          Ukraine: 'Ukraine',
-          Poland: 'Poland',
-          USA: 'USA',
-        },
         first_name: 'Name',
         last_name: 'Surname',
         password: 'Password',
