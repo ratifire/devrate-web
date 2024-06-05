@@ -31,10 +31,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
       },
     }),
     changePassword: builder.mutation({
-      query: ({ code }) => ({
-        url: `/auth/password-reset/${code}`,
+      query: ({ code, newPassword }) => ({
+        url: '/auth/password-reset',
         method: 'POST',
-        body: { code },
+        body: { code, newPassword },
       }),
       onSuccess: (data, variables, api) => {
         console.log('Status code:', api.getState().authApiSlice.requests.changePassword.status);

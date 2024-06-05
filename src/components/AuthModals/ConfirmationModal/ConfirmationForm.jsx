@@ -9,6 +9,7 @@ const ConfirmationForm = ({
   helperTextContent,
   buttonLabel,
   buttonVariant,
+  handleCodeChange,
   handleSubmit,
   fieldCount = 6,
   showButton = true,
@@ -45,7 +46,10 @@ const ConfirmationForm = ({
     }
   };
 
-  const isButtonActive = Object.values(formik.values).every((val) => val !== '');
+  const handleCode = () => {
+    const code = Array.from({ length: fieldCount }, (_, i) => formik.values[`text${i}`]).join('');
+    handleCodeChange(code);
+  };
 
   return (
     <form onSubmit={handleSubmit || formik.handleSubmit} style={{ width: '100%' }}>
@@ -71,13 +75,16 @@ const ConfirmationForm = ({
       {showButton && (<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
         <ButtonDef
           variant={buttonVariant || 'contained'}
-          onClick={handleSubmit || formik.handleSubmit}
+          onClick={() => {
+            handleSubmit();
+            handleCode(); // Добавляем вызов функции handleCode
+          }}
           label={buttonLabel || 'modal.confirmation.btn_confirm'}
-          disabled={!isButtonActive}
+          disabled={!formik.isValid}
         />
       </Box>
       )
-    }
+      }
     </form>
   );
 };
@@ -91,6 +98,7 @@ ConfirmationForm.propTypes = {
   handleSubmit: PropTypes.func,
   fieldCount: PropTypes.number,
   showButton: PropTypes.bool,
+  handleCodeChange: PropTypes.func.isRequired, // Добавляем пропс для функции обратного вызова
 };
 
 export default ConfirmationForm;

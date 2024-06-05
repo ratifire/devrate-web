@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import ModalLayout from '../../../../layouts/ModalLayout';
 import styles from './ResetPassword.styles';
 import { useTranslation } from 'react-i18next';
-import { Form, Formik, useFormik } from 'formik';
+import { Formik, Form } from 'formik';
 import { Box, Link, Typography } from '@mui/material';
 import { ResetPasswordSchema } from './ResetPasswordSchema';
 import { FormInput } from '../../../Inputs';
@@ -14,8 +14,14 @@ import { useChangePasswordMutation } from '../../../../redux/auth/authApiSlice';
 import ConfirmationForm from '../../ConfirmationModal/ConfirmationForm';
 
 const initialValues = {
-  code: '',
+  newPassword: '',
   repeatCode: '',
+  text0: '',
+  text1: '',
+  text2: '',
+  text3: '',
+  text4: '',
+  text5: '',
 };
 
 const ResetPassword = () => {
@@ -28,26 +34,10 @@ const ResetPassword = () => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
 
-  const [changePassword] = useChangePasswordMutation();
+  const [changePassword, { isError, isSuccess }] = useChangePasswordMutation();
   const inputRefs = React.useRef([]);
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema: ResetPasswordSchema,
-    onSubmit: async (values, { resetForm }) => {
-      try {
-        await changePassword({
-          code: values.code,
-        });
-        alert('Password changed successfully!');
-        resetForm();
-        handleClose();
-      } catch (error) {
-        console.error('Error changing password:', error);
-        alert('Error changing password. Please try again.');
-      }
-    },
-  });
+  // const activeFields = ['text0', 'text1', 'text2', 'text3', 'text4', 'text5'];
 
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
@@ -58,6 +48,29 @@ const ResetPassword = () => {
         </Typography>
         <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
       </Box>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={ResetPasswordSchema}
+        onSubmit={async (values, { resetForm }) => {
+          try {
+            console.log('Confirmation code:', values.code); // Используем значение `code` из формы
+      
+            const response = await changePassword({
+              code: values.code, // Передаем значение `code` в запрос
+              newPassword: values.newPassword,
+            }).unwrap();
+            console.log('Password change response:', response);
+            alert('Password changed successfully!');
+            resetForm();
+            handleClose();
+          } catch (error) {
+            console.error('Error changing password:', error);
+            alert('Error changing password. Please try again.');
+          }
+        }}
+      >
+        {formik => (
+    <Form autoComplete='off' style={{ width: '100%' }}>
       <ConfirmationForm
         inputRefs={inputRefs}
         formik={formik}
@@ -65,48 +78,46 @@ const ResetPassword = () => {
         buttonLabel="Enter Code"
         fieldCount={6}
         showButton={false}
-      />
-      <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit}>
-        <Form autoComplete='off' onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-          <FormInput
-            showPassword={showPassword}
-            type={showPassword ? 'text' : 'password'}
-            name='code'
-            value={formik.values.code}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            label='Password'
-            error={formik.touched.code && Boolean(formik.errors.code)}
-            helperText={formik.touched.code && formik.errors.code}
-            clickHandler={handleClickShowPassword}
-            mouseDownHandler={handleMouseDownPassword}
-          />
-          <FormInput
-            showPassword={showPassword}
-            type={showPassword ? 'text' : 'password'}
-            name='repeatCode'
-            value={formik.values.repeatCode}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            label='Repeat password'
-            error={formik.touched.repeatCode && Boolean(formik.errors.repeatCode)}
-            helperText={formik.touched.repeatCode && formik.errors.repeatCode}
-            clickHandler={handleClickShowPassword}
-            mouseDownHandler={handleMouseDownPassword}
-          />
-          <Box sx={styles.wrapperBtn}>
-            <ButtonDef
-              variant='contained'
-              type='submit'
-              handlerClick={formik.handleSubmit}
-              disabled={
-                (formik.touched.repeatCode && formik.errors.repeatCode) ||
-                (formik.touched.code && formik.errors.code)
-              }
-              label='modal.resetPassword.btn_change_password'
+        handleCodeChange={(code) => formik.setFieldValue('code', code)}
             />
-          </Box>
-        </Form>
+            <FormInput
+              showPassword={showPassword}
+              type={showPassword ? 'text' : 'password'}
+              name='newPassword'
+              value={formik.values.newPassword}
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              label='New Password'
+              error={formik.touched.newPassword && Boolean(formik.errors.newPassword)}
+              helperText={formik.touched.newPassword && formik.errors.newPassword}
+              clickHandler={handleClickShowPassword}
+              mouseDownHandler={handleMouseDownPassword}
+            />
+            <FormInput
+              showPassword={showPassword}
+              type={showPassword ? 'text' : 'password'}
+              name='repeatCode'
+              value={formik.values.repeatCode}
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              label='Repeat New Password'
+              error={formik.touched.repeatCode && Boolean(formik.errors.repeatCode)}
+              helperText={formik.touched.repeatCode && formik.errors.repeatCode}
+              clickHandler={handleClickShowPassword}
+              mouseDownHandler={handleMouseDownPassword}
+            />
+            <Box sx={styles.wrapperBtn}>
+              <ButtonDef
+                variant='contained'
+                type='submit'
+                disabled={!formik.isValid || !formik.dirty}
+                label={t('modal.resetPassword.btn_change_password')}
+              />
+            </Box>
+            {isError && <Typography color="error">Error changing password. Please try again.</Typography>}
+            {isSuccess && <Typography color="primary">Password changed successfully!</Typography>}
+          </Form>
+        )}
       </Formik>
       <Typography variant='subtitle3' sx={styles.text}>{t('modal.resetPassword.text_privacy')}</Typography>
       <Typography variant='subtitle3' sx={styles.textLink}>
