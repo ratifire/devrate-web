@@ -4,7 +4,7 @@ import ModalLayout from '../../../../layouts/ModalLayout';
 import styles from './ResetPassword.styles';
 import { useTranslation } from 'react-i18next';
 import { Formik, Form } from 'formik';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Link, Typography, TextField } from '@mui/material';
 import { ResetPasswordSchema } from './ResetPasswordSchema';
 import { FormInput } from '../../../Inputs';
 import { ButtonDef } from '../../../Buttons';
@@ -14,8 +14,8 @@ import { useChangePasswordMutation } from '../../../../redux/auth/authApiSlice';
 
 const initialValues = {
   newPassword: '',
-  repeatCode: '',
-  code: '', // Add code field
+  repeatPassword: '',
+  code: ['', '', '', '', '', ''],
 };
 
 const ResetPassword = () => {
@@ -30,6 +30,46 @@ const ResetPassword = () => {
 
   const [changePassword, { isError, isSuccess }] = useChangePasswordMutation();
 
+  const fieldCount = 6;
+
+  const inputRefs = React.useRef([]);
+
+  const handleKeyDown = (event, index, formik) => {
+    const { key } = event;
+
+    if ((key >= '0' && key <= '9') || key === 'Backspace' || key === 'Delete') {
+      const { value } = event.target;
+
+      if (value.length === 0 || (value.length === 1 && (key === 'Backspace' || key === 'Delete'))) {
+        if (key >= '0' && key <= '9') {
+          event.preventDefault();
+          const newValue = value + key;
+          formik.setFieldValue(`code[${index}]`, newValue);
+
+          if (index < fieldCount - 1 && !formik.values.code[index + 1]) {
+            inputRefs.current[index + 1].focus();
+          }
+        } else if (key === 'Backspace' && index > 0) {
+          event.preventDefault();
+          formik.setFieldValue(`code[${index}]`, '');
+          inputRefs.current[index - 1].focus();
+        } else if (key === 'Delete' && index < fieldCount - 1) {
+          event.preventDefault();
+          formik.setFieldValue(`code[${index}]`, '');
+          inputRefs.current[index + 1].focus();
+        }
+      } else {
+        event.preventDefault();
+      }
+    } else {
+      event.preventDefault();
+    }
+  };
+
+  const _handleCodeChange = (code) => {
+    console.log('Code entered:', code);
+  };
+
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
       <Typography variant='subtitle3' sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
@@ -39,19 +79,19 @@ const ResetPassword = () => {
         </Typography>
         <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
       </Box>
+
       <Formik
         initialValues={initialValues}
         validationSchema={ResetPasswordSchema}
         onSubmit={async (values, { resetForm }) => {
           try {
-            console.log('Submitting form...');
-            console.log('Data sent to server:', values);
             const requestData = {
-              code: values.text0 + values.text1 + values.text2 + values.text3 + values.text4 + values.text5,
+              code: values.code.join(''),
               newPassword: values.newPassword,
             };
             const response = await changePassword(requestData).unwrap();
-            console.log('Password change response:', response);
+            _handleCodeChange(values.code.join('')); // Call the function here
+            console.log(response); // Use response here
             alert('Password changed successfully!');
             resetForm();
             handleClose();
@@ -61,21 +101,20 @@ const ResetPassword = () => {
           }
         }}
       >
-        {formik => (
+        {(formik) => (
           <Form autoComplete='off' style={{ width: '100%' }}>
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-              {[...Array(6)].map((_, index) => (
+              {[...Array(fieldCount)].map((_, index) => (
                 <React.Fragment key={index}>
-                  <FormInput
+                  <TextField
                     type="text"
-                    name={`text${index}`}
-                    value={formik.values[`text${index}`] ?? ''}
-                    handleChange={formik.handleChange}
-                    handleBlur={formik.handleBlur}
-                    label={`Digit ${index + 1}`}
-                    error={formik.touched[`text${index}`] && Boolean(formik.errors[`text${index}`])}
-                    helperText={formik.touched[`text${index}`] && formik.errors[`text${index}`]}
-                    maxLength={1}
+                    variant="outlined"
+                    inputRef={(ele) => {
+                      inputRefs.current[index] = ele;
+                    }}
+                    onKeyDown={(event) => handleKeyDown(event, index, formik)}
+                    value={formik.values.code[index] ?? ''}
+                    inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
                   />
                 </React.Fragment>
               ))}
@@ -96,13 +135,13 @@ const ResetPassword = () => {
             <FormInput
               showPassword={showPassword}
               type={showPassword ? 'text' : 'password'}
-              name='repeatCode'
-              value={formik.values.repeatCode}
+              name='repeatPassword'
+              value={formik.values.repeatPassword}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               label='Repeat New Password'
-              error={formik.touched.repeatCode && Boolean(formik.errors.repeatCode)}
-              helperText={formik.touched.repeatCode && formik.errors.repeatCode}
+              error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
+              helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
               clickHandler={handleClickShowPassword}
               mouseDownHandler={handleMouseDownPassword}
             />
@@ -119,6 +158,7 @@ const ResetPassword = () => {
           </Form>
         )}
       </Formik>
+
       <Typography variant='subtitle3' sx={styles.text}>{t('modal.resetPassword.text_privacy')}</Typography>
       <Typography variant='subtitle3' sx={styles.textLink}>
         {t('modal.resetPassword.return_on')}
