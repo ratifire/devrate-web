@@ -11,17 +11,11 @@ import { ButtonDef } from '../../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useChangePasswordMutation } from '../../../../redux/auth/authApiSlice';
-import ConfirmationForm from '../../ConfirmationModal/ConfirmationForm';
 
 const initialValues = {
   newPassword: '',
   repeatCode: '',
-  text0: '',
-  text1: '',
-  text2: '',
-  text3: '',
-  text4: '',
-  text5: '',
+  code: '', // Add code field
 };
 
 const ResetPassword = () => {
@@ -35,9 +29,6 @@ const ResetPassword = () => {
   const handleMouseDownPassword = (event) => event.preventDefault();
 
   const [changePassword, { isError, isSuccess }] = useChangePasswordMutation();
-  const inputRefs = React.useRef([]);
-
-  // const activeFields = ['text0', 'text1', 'text2', 'text3', 'text4', 'text5'];
 
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
@@ -53,12 +44,13 @@ const ResetPassword = () => {
         validationSchema={ResetPasswordSchema}
         onSubmit={async (values, { resetForm }) => {
           try {
-            console.log('Confirmation code:', values.code); // Используем значение `code` из формы
-      
-            const response = await changePassword({
-              code: values.code, // Передаем значение `code` в запрос
+            console.log('Submitting form...');
+            console.log('Data sent to server:', values);
+            const requestData = {
+              code: values.text0 + values.text1 + values.text2 + values.text3 + values.text4 + values.text5,
               newPassword: values.newPassword,
-            }).unwrap();
+            };
+            const response = await changePassword(requestData).unwrap();
             console.log('Password change response:', response);
             alert('Password changed successfully!');
             resetForm();
@@ -70,16 +62,24 @@ const ResetPassword = () => {
         }}
       >
         {formik => (
-    <Form autoComplete='off' style={{ width: '100%' }}>
-      <ConfirmationForm
-        inputRefs={inputRefs}
-        formik={formik}
-        helperTextContent=""
-        buttonLabel="Enter Code"
-        fieldCount={6}
-        showButton={false}
-        handleCodeChange={(code) => formik.setFieldValue('code', code)}
-            />
+          <Form autoComplete='off' style={{ width: '100%' }}>
+            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+              {[...Array(6)].map((_, index) => (
+                <React.Fragment key={index}>
+                  <FormInput
+                    type="text"
+                    name={`text${index}`}
+                    value={formik.values[`text${index}`] ?? ''}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                    label={`Digit ${index + 1}`}
+                    error={formik.touched[`text${index}`] && Boolean(formik.errors[`text${index}`])}
+                    helperText={formik.touched[`text${index}`] && formik.errors[`text${index}`]}
+                    maxLength={1}
+                  />
+                </React.Fragment>
+              ))}
+            </Box>
             <FormInput
               showPassword={showPassword}
               type={showPassword ? 'text' : 'password'}
