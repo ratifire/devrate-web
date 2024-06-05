@@ -11,7 +11,7 @@ i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init({
     uk,
   },
   debug: false,
-  fallbackLng: 'uk',
-  lng: 'uk',
+  fallbackLng: 'en',
+  lng: 'en',
 });
 export default i18n;
