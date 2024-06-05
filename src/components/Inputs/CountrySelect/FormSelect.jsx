@@ -16,7 +16,6 @@ const FormSelect = ({
   error,
   helperText,
   countries,
-  itemsText,
 }) => {
   const id = uuid();
   const { t } = useTranslation();
@@ -41,9 +40,9 @@ const FormSelect = ({
           },
         }}
       >
-        {countries.map(({ id, country, label }) => (
-          <MenuItem key={`${name}-${id}`} value={country} sx={styles.menuItem}>
-            {label || t(`${itemsText}.${country}`)}
+        {countries.map((country, index ) => (
+          <MenuItem key={index} value={country} sx={styles.menuItem}>
+            {country}
           </MenuItem>
         ))}
       </Select>
@@ -66,7 +65,6 @@ FormSelect.propTypes = {
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   countries: PropTypes.array.isRequired,
-  itemsText: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 };
 FormSelect.defaultProps = {
   variant: 'outlined',
@@ -78,6 +76,5 @@ FormSelect.defaultProps = {
   helperText: '',
   error: false,
   countries: [],
-  itemsText: '',
 };
 export default FormSelect;
