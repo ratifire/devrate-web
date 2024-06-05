@@ -43,6 +43,10 @@ export const styles = {
       borderRadius: 0,
     },
   }),
+  dropdownPaper: {
+    maxHeight: '200px',
+    overflowY: 'auto',
+  },
   menuItem: (theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.background.level3,
