@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { styles } from './SelectLanguage.styles';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PropTypes from 'prop-types';
+import {
+  useGetDefLanguageLevelQuery,
+  useGetDefLanguageQuery,
+} from '../../../redux/services/defaultLanguage/defaultLanguageApiSlice';
 
 const SelectLanguage = ({
   variant,
@@ -16,27 +20,27 @@ const SelectLanguage = ({
   errorLevel,
   helperTextLanguage,
   helperTextLevel,
-  data,
+  selectedLanguage,
+  selectedLevel,
 }) => {
   const id = uuid();
   const { t } = useTranslation();
-  const [selectedLanguage, setSelectedLanguage] = useState('');
-  const [selectedLevel, setSelectedLevel] = useState('');
+
+  const { data: level } = useGetDefLanguageLevelQuery('language-proficiency-levels.json');
+  const levelCodes = level ? level.map((lvl) => lvl.split('|')[1].toLowerCase()) : [];
+
+  const { data: language } = useGetDefLanguageQuery('language-proficiency-names.json');
+  const languagesArray = language ? Object.entries(language).map(([name, id]) => ({ id, name })) : [];
 
   const handleLanguageSelectChange = (event) => {
     const selectedLang = event.target.value;
-    setSelectedLevel('');
-    setSelectedLanguage(selectedLang);
     handleLanguageChange(selectedLang);
   };
 
   const handleLevelSelectChange = (event) => {
     const selectedLvl = event.target.value;
-    setSelectedLevel(selectedLvl);
     handleLevelChange(selectedLvl);
   };
-
-  const levels = data.find((lang) => lang.name === selectedLanguage)?.levels || [];
 
   return (
     <>
@@ -58,11 +62,12 @@ const SelectLanguage = ({
             },
           }}
         >
-          {data.map(({ id, name }) => (
-            <MenuItem key={id} value={name} sx={styles.menuItem}>
-              {name}
-            </MenuItem>
-          ))}
+          {languagesArray.length > 0 &&
+            languagesArray.map(({ id }) => (
+              <MenuItem key={id} value={id} sx={styles.menuItem}>
+                {t(`language.name.${id}`)}
+              </MenuItem>
+            ))}
         </Select>
         {errorLanguage && (
           <FormHelperText id={id} sx={styles.textHelper}>
@@ -88,11 +93,12 @@ const SelectLanguage = ({
             },
           }}
         >
-          {levels.map(({ id, level }) => (
-            <MenuItem key={id} value={level} sx={styles.menuItem}>
-              {level}
-            </MenuItem>
-          ))}
+          {levelCodes.length > 0 &&
+            levelCodes.map((level) => (
+              <MenuItem key={level} value={level} sx={styles.menuItem}>
+                {t(`language.level.${level}`)}
+              </MenuItem>
+            ))}
         </Select>
         {errorLevel && (
           <FormHelperText id={`${id}-level`} sx={styles.textHelper}>
@@ -114,7 +120,8 @@ SelectLanguage.propTypes = {
   errorLevel: PropTypes.bool.isRequired,
   helperTextLanguage: PropTypes.string.isRequired,
   helperTextLevel: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
+  selectedLanguage: PropTypes.string,
+  selectedLevel: PropTypes.string,
 };
 
 export default SelectLanguage;
