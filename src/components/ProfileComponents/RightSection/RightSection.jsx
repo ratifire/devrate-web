@@ -25,14 +25,14 @@ const RightSection = () => {
           <SocialsLinkList socials={userSocials} componentStyles={styles} />
         </Box>
       </Box>
-      <Box sx={styles.wrapperBox}>
+      {languages.data?.length && <Box sx={styles.wrapperBox}>
         <Typography variant='h6' sx={styles.title}>
           {t('profile.right.languages')}
         </Typography>
         <Box gap={2} sx={styles.wrapperLanguages}>
-          <LanguagesList data={languages.data || []} />
+          <LanguagesList data={languages.data}/>
         </Box>
-      </Box>
+      </Box>}
       <Box sx={styles.wrapperBox}>
         <Typography variant='h6' sx={styles.title}>
           {t('profile.right.aboutMe')}
