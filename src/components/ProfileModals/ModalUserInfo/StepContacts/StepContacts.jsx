@@ -1,43 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styles } from './StepContacts.styles';
 import { FormInput } from '../../../Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { StepContactsSchema } from './StepContactsSchema';
-import { usePostContactsUserMutation } from '../../../../redux/user/contacts/contactsApiSlice';
+import { usePostContactsUserMutation, useGetUserContactsQuery } from '../../../../redux/user/contacts/contactsApiSlice';
 import { useSelector } from 'react-redux';
 import { ButtonDef } from '../../../Buttons';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 
 const StepContacts = () => {
-  const initialValues = {
-    telegram: '',
-    linkedIn: '',
-    gitHub: '',
-    behance: '',
-    mail: '',
-    phone: '',
-  };
-  const [postContactsUser] = usePostContactsUserMutation();
-  const userId = useSelector((state) => state.auth.user.data.id);
+  const currentUser = useSelector(selectCurrentUser);
+  const userId = currentUser?.data?.id;
+  const { data: userContacts, refetch } = useGetUserContactsQuery(userId);
 
-  const onSubmit = ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
-    postContactsUser({
+  const [contactsLoaded, setContactsLoaded] = useState(false);
+
+  useEffect(() => {
+    refetch().then(() => {
+      setContactsLoaded(true); // Set contacts loaded flag to true when data is fetched
+    });
+  }, [refetch]);
+
+  const initialValues = {
+    telegram: userContacts?.find(contact => contact.type === 'TELEGRAM_LINK')?.value || '',
+    linkedIn: userContacts?.find(contact => contact.type === 'LINKEDIN_LINK')?.value || '',
+    gitHub: userContacts?.find(contact => contact.type === 'GITHUB_LINK')?.value || '',
+    behance: userContacts?.find(contact => contact.type === 'BEHANCE_LINK')?.value || '',
+    mail: userContacts?.find(contact => contact.type === 'EMAIL')?.value || '',
+    phone: userContacts?.find(contact => contact.type === 'PHONE_NUMBER')?.value || '',
+  };
+
+  const [postContactsUser] = usePostContactsUserMutation();
+
+  const onSubmit = async (values) => {
+    await postContactsUser({
       userId: userId,
       body: [
-        { type: 'TELEGRAM_LINK', value: telegram },
-        { type: 'EMAIL', value: mail },
-        { type: 'LINKEDIN_LINK', value: linkedIn },
-        { type: 'GITHUB_LINK', value: gitHub },
-        { type: 'BEHANCE_LINK', value: behance },
-        { type: 'PHONE_NUMBER', value: phone },
+        { type: 'TELEGRAM_LINK', value: values.telegram },
+        { type: 'EMAIL', value: values.mail },
+        { type: 'LINKEDIN_LINK', value: values.linkedIn },
+        { type: 'GITHUB_LINK', value: values.gitHub },
+        { type: 'BEHANCE_LINK', value: values.behance },
+        { type: 'PHONE_NUMBER', value: values.phone },
       ],
     });
+    refetch(); // Refetch contacts after submission
   };
+
   const formik = useFormik({
     initialValues,
     validationSchema: StepContactsSchema,
     onSubmit,
+    enableReinitialize: true, // This option allows formik to reinitialize form values when `initialValues` change
   });
+
+  useEffect(() => {
+    console.log('User contacts:', userContacts);
+  }, [userContacts]);
+
+  if (!contactsLoaded) {
+    return <div>Loading...</div>; // Render loading indicator until contacts are loaded
+  }
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.input100}>
