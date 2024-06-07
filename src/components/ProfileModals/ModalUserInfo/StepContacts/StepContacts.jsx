@@ -18,7 +18,7 @@ const StepContacts = () => {
 
   useEffect(() => {
     refetch().then(() => {
-      setContactsLoaded(true); // Set contacts loaded flag to true when data is fetched
+      setContactsLoaded(true); 
     });
   }, [refetch]);
 
@@ -45,14 +45,14 @@ const StepContacts = () => {
         { type: 'PHONE_NUMBER', value: values.phone },
       ],
     });
-    refetch(); // Refetch contacts after submission
+    refetch(); 
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema: StepContactsSchema,
     onSubmit,
-    enableReinitialize: true, // This option allows formik to reinitialize form values when `initialValues` change
+    enableReinitialize: true,
   });
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const StepContacts = () => {
   }, [userContacts]);
 
   if (!contactsLoaded) {
-    return <div>Loading...</div>; // Render loading indicator until contacts are loaded
+    return <div>Loading...</div>; 
   }
 
   return (

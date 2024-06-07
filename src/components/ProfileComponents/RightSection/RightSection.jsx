@@ -24,6 +24,9 @@ const RightSection = () => {
     dispatch(setStep(1));
     dispatch(openModal({ modalName: 'openUserInfo' }));
   };
+
+  const filteredUserContacts = userContacts ? userContacts.filter(contact => contact.value) : [];
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
@@ -37,9 +40,9 @@ const RightSection = () => {
             </IconButton>
           </Box>
         </Box>
-        {userContacts && (
+        {filteredUserContacts.length > 0 && (
           <Box gap={3} sx={styles.wrapperLink}>
-            <SocialsLinkList socials={userContacts} componentStyles={styles} />
+            <SocialsLinkList socials={filteredUserContacts} componentStyles={styles} />
           </Box>
         )}
       </Box>
@@ -63,4 +66,5 @@ const RightSection = () => {
     </Box>
   );
 };
+
 export default RightSection;
