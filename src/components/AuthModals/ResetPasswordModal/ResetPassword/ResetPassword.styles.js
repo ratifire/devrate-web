@@ -47,5 +47,11 @@ const styles = {
   userEmail: (theme) => ({
     color: theme.palette.text.primary,
   }),
+  resetPasswordForm: (theme) => ({
+    display: 'flex',
+    gap: theme.spacing(2), 
+    alignItems: 'center',
+    marginBottom: theme.spacing(4)
+  }),
 };
 export default styles;

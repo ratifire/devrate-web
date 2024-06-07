@@ -77,7 +77,7 @@ const ConfirmationForm = ({
           variant={buttonVariant || 'contained'}
           onClick={() => {
             handleSubmit();
-            handleCode(); // Добавляем вызов функции handleCode
+            handleCode();
           }}
           label={buttonLabel || 'modal.confirmation.btn_confirm'}
           disabled={!formik.isValid}
@@ -98,7 +98,7 @@ ConfirmationForm.propTypes = {
   handleSubmit: PropTypes.func,
   fieldCount: PropTypes.number,
   showButton: PropTypes.bool,
-  handleCodeChange: PropTypes.func.isRequired, // Добавляем пропс для функции обратного вызова
+  handleCodeChange: PropTypes.func.isRequired,
 };
 
 export default ConfirmationForm;

@@ -90,8 +90,8 @@ const ResetPassword = () => {
               newPassword: values.newPassword,
             };
             const response = await changePassword(requestData).unwrap();
-            _handleCodeChange(values.code.join('')); // Call the function here
-            console.log(response); // Use response here
+            _handleCodeChange(values.code.join('')); 
+            console.log(response); 
             alert('Password changed successfully!');
             resetForm();
             handleClose();
@@ -103,7 +103,7 @@ const ResetPassword = () => {
       >
         {(formik) => (
           <Form autoComplete='off' style={{ width: '100%' }}>
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+            <Box sx={ styles.resetPasswordForm }>
               {[...Array(fieldCount)].map((_, index) => (
                 <React.Fragment key={index}>
                   <TextField
