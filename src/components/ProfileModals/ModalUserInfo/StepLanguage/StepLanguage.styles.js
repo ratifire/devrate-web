@@ -27,4 +27,10 @@ export const styles = {
     paddingY: '14px',
     maxWidth: '228px',
   },
+  wrapperLanguages: (theme) => ({
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+    gridGap: theme.spacing(3),
+  }),
 };
