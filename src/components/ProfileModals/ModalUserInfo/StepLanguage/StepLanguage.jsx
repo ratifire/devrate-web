@@ -109,8 +109,8 @@ const StepLanguage = () => {
             helperTextLevel={helperTextLevel}
             errorLanguage={errorLanguage}
             errorLevel={errorLevel}
-            selectedLanguage={selectedLanguage} // Додаємо цей пропс
-            selectedLevel={selectedLevel} // Додаємо цей пропс
+            selectedLanguage={selectedLanguage}
+            selectedLevel={selectedLevel}
           />
           <IconButton sx={styles.iconBtn} onClick={createLang}>
             <AddIcon />

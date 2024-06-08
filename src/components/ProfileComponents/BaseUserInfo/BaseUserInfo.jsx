@@ -10,6 +10,7 @@ import { openModal } from '../../../redux/modal/modalSlice';
 import { setStep } from '../../../redux/modal/modalStepSlice';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import { selectCurrentUser } from '../../../redux/auth/authSlice';
+import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
 
 const BaseUserInfo = () => {
   const { data: info } = useSelector(selectCurrentUser);
@@ -24,6 +25,10 @@ const BaseUserInfo = () => {
     city: getCity,
     status: getStatus,
   } = userData;
+
+  const { data } = useGetAvatarUserQuery(id);
+  const userAvatar = data || {};
+  const { userPicture } = userAvatar;
 
   const [progress] = React.useState(60);
   const dispatch = useDispatch();
@@ -41,7 +46,7 @@ const BaseUserInfo = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
         <Button type='button' onClick={handleOpenAvatar}>
-          <UserAvatar userName={`${getFirstName || firstName} ${getLastName || lastName}`} size='l' />
+          <UserAvatar userName={`${getFirstName || firstName} ${getLastName || lastName}`} src={userPicture} size='l' />
         </Button>
       </Box>
       <Box sx={styles.wrapperText}>

@@ -53,4 +53,28 @@ export const styles = {
     height: 334,
     borderRadius: 4,
   },
+  wrapperBtn: (theme) => ({
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    display: 'flex',
+    gridGap: theme.spacing(3),
+    width: 288,
+  }),
+  btn: {
+    paddingY: '14px',
+    maxWidth: '228px',
+    width: '100%',
+  },
+  btnIcon: (theme) => ({
+    flex: '1 0 44px',
+    color: theme.palette.neutral[200],
+    borderRadius: 1,
+    ':hover': {
+      backgroundColor: theme.palette.neutral[800],
+    },
+    svg: {
+      fontSize: '18px',
+    },
+  }),
 };

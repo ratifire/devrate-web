@@ -1,14 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import Dropzone from 'react-dropzone';
 import { styles } from './LoadImages.styles';
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import { ButtonDef } from '../../Buttons';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-const LoadImages = ({ handleChange, handleBlur, value }) => {
+const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
   const editor = useRef(null);
 
   const defaultSettingsCanvas = {
@@ -17,6 +19,7 @@ const LoadImages = ({ handleChange, handleBlur, value }) => {
     width: 240,
     height: 240,
     showGrid: true,
+    image: '',
   };
 
   const [settingsCanvas, setSettingsCanvas] = useState({ ...defaultSettingsCanvas });
@@ -41,11 +44,10 @@ const LoadImages = ({ handleChange, handleBlur, value }) => {
     handleChange(img);
   };
 
-  useEffect(() => {
-    if (settingsCanvas.image) {
-      handleSave();
-    }
-  }, [settingsCanvas.image, scale]);
+  const handleClickDelete = () => {
+    handlerDelete();
+    setSettingsCanvas(defaultSettingsCanvas);
+  };
 
   return (
     <Box sx={styles.wrapper}>
@@ -89,6 +91,18 @@ const LoadImages = ({ handleChange, handleBlur, value }) => {
           </Box>
         )}
       </>
+      <Box sx={styles.wrapperBtn}>
+        <ButtonDef
+          variant='contained'
+          type='submit'
+          handlerClick={handleSave}
+          label='profile.modal.btn'
+          correctStyle={styles.btn}
+        />
+        <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
+          <DeleteIcon />
+        </IconButton>
+      </Box>
     </Box>
   );
 };
@@ -96,6 +110,7 @@ const LoadImages = ({ handleChange, handleBlur, value }) => {
 LoadImages.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
+  handlerDelete: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };
 
