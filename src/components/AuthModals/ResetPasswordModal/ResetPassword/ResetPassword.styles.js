@@ -34,5 +34,24 @@ const styles = {
     lineHeight: '18px',
     color: theme.palette.text.primary,
   }),
+  mainTextWrapper: (theme) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: theme.spacing(4),
+  }),
+  mainText: (theme) => ({
+    display: 'inline',
+    color: theme.palette.text.secondary,
+    textAlign: 'center',
+  }),
+  userEmail: (theme) => ({
+    color: theme.palette.text.primary,
+  }),
+  resetPasswordForm: (theme) => ({
+    display: 'flex',
+    gap: theme.spacing(2), 
+    alignItems: 'center',
+    marginBottom: theme.spacing(4)
+  }),
 };
 export default styles;

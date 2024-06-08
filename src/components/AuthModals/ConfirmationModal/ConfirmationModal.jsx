@@ -25,7 +25,7 @@ const ConfirmationModal = () => {
     dispatch(closeModal({ modalName: 'openConfirmation' }));
   };
 
-  const formik = useFormik({ 
+  const formik = useFormik({
     initialValues: {
       text0: '',
       text1: '',
@@ -77,11 +77,9 @@ const ConfirmationModal = () => {
 
       <ConfirmationForm
         formik={formik}
-        handleCloseAllModal={handleCloseAllModal}
         inputRefs={inputRefs}
-        handleKeyDown={() => {}}
-        isButtonActive={false}
         helperTextContent=""
+        buttonLabel="modal.confirmation.btn_confirm"
       />
 
       <Box variant='subtitle3' sx={styles.spamCheckContainer}>
