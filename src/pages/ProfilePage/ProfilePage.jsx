@@ -12,7 +12,6 @@ import ExperienceSection from '../../components/ProfileComponents/ExperienceSect
 import Cookies from 'js-cookie'
 
 const ProfilePage = () => {
-  const name = 'Олена Бондаренко';
   const dispatch = useDispatch();
 
   const cookies = Cookies.get('JSESSIONID');
@@ -23,7 +22,7 @@ const ProfilePage = () => {
 
   return (
     <ProfileTemplate>
-      <ProfileHeader userName={name} />
+      <ProfileHeader />
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.baseUserInfo}>

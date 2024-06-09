@@ -5,10 +5,9 @@ import SpecialisationTemplate from '../../Templates/SpecialisationTemplate';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 
 const SpecialisationPage = () => {
-  const name = 'Alina Ostapenko';
   return (
     <SpecialisationTemplate>
-      <ProfileHeader userName={name} />
+      <ProfileHeader/>
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.specialisationTaxonomy}>
@@ -20,14 +19,28 @@ const SpecialisationPage = () => {
           <Paper sx={styles.specialisationInterviewParticipation}>
             <div>Specialization: Interview Participation</div>
           </Paper>
-          <Paper sx={styles.specialisationVideoInterview}>
-            <div>Specialization: Interview Participation</div>
+          <Paper sx={styles.specialisationHardSkills}>
+            <div>Hard Skills</div>
           </Paper>
-          <Paper sx={styles.specialisationSkills}>
-            <div>Skills</div>
+          <Paper sx={styles.specialisationSoftSkills}>
+            <div>Soft Skills</div>
           </Paper>
           <Paper sx={styles.specialisationStatistics}>
             <div>Statistics</div>
+            <Box sx={styles.statisticWrapper}>
+              <Paper sx={styles.level}>
+                <div>Statistic Level</div>
+              </Paper>
+              <Paper sx={styles.averageSkillsScore}>
+                <div>Average score of skills</div>
+              </Paper>
+              <Paper sx={styles.hardSkillsByProductivity}>
+                <div>Hard Skills by productivity</div>
+              </Paper>
+              <Paper sx={styles.interview}>
+                <div>Interview Statistics</div>
+              </Paper>
+            </Box>
           </Paper>
         </Box>
       </Container>
