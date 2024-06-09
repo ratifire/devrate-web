@@ -26,7 +26,7 @@ const ProfilePage = () => {
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.baseUserInfo}>
-            <BaseUserInfo userName={name} />
+            <BaseUserInfo />
           </Paper>
           <Paper sx={styles.skills}>
             <SkillsSection />
