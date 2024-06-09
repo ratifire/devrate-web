@@ -157,7 +157,7 @@ export const uk = {
       userMenu: {
         profile: 'Профіль',
         schedule: 'Розклад',
-        specializations: 'Спеціалізації',
+        specialisations: 'Спеціалізації',
         interviews: 'Співбесіди',
         settings: 'Налаштування',
         bookmark: 'Збережене',

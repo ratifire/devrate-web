@@ -156,7 +156,7 @@ export const en = {
       userMenu: {
         profile: 'Profile',
         schedule: 'Schedule',
-        specializations: 'Specializations',
+        specialisations: 'Specialisations',
         interviews: 'Interviews',
         settings: 'Settings',
         bookmark: 'Bookmarks',
