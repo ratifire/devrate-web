@@ -15,7 +15,7 @@ export const educationApiSlice = apiSlice.injectEndpoints({
       query: ({payload, userId}) => ({
         url: `/users/${userId}/educations`,
         method: 'POST',
-        data: {
+        body: {
           ...payload,
           startYear: +payload.startYear,
           endYear: +payload.endYear,
@@ -28,7 +28,7 @@ export const educationApiSlice = apiSlice.injectEndpoints({
       query: ({payload, id}) => ({
         url: `/educations/${id}`,
         method: 'PUT',
-        data: {
+        body: {
           ...payload,
           startYear: +payload.startYear,
           endYear: +payload.endYear,

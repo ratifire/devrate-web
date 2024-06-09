@@ -28,11 +28,11 @@ const RightSection = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Typography variant='h6' sx={styles.title}>
+          <Typography variant="h6" sx={styles.title}>
             {t('profile.right.contact')}
           </Typography>
           <Box>
-            <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenInfo}>
+            <IconButton sx={styles.btnIcon} aria-label="Edit user information" onClick={handleOpenInfo}>
               <EditIcon />
             </IconButton>
           </Box>
@@ -42,18 +42,18 @@ const RightSection = () => {
         </Box>
       </Box>
       {Boolean(languages.data?.length) && <Box sx={styles.wrapperBox}>
-        <Typography variant='h6' sx={styles.title}>
+        <Typography variant="h6" sx={styles.title}>
           {t('profile.right.languages')}
         </Typography>
         <Box gap={2} sx={styles.wrapperLanguages}>
-          <LanguagesList data={languages.data}/>
+          <LanguagesList data={languages.data} />
         </Box>
       </Box>}
       <Box sx={styles.wrapperBox}>
-        <Typography variant='h6' sx={styles.title}>
+        <Typography variant="h6" sx={styles.title}>
           {t('profile.right.aboutMe')}
         </Typography>
-        <Typography variant='subtitle2' sx={styles.aboutMe}>
+        <Typography variant="subtitle2" sx={styles.aboutMe}>
           {currentUser.data.description}
         </Typography>
       </Box>

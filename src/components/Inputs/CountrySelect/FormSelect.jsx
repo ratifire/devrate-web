@@ -33,7 +33,6 @@ const FormSelect = ({
         onChange={handleChange}
         onBlur={handleBlur}
         error={error}
-
         IconComponent={KeyboardArrowDownIcon}
         inputProps={{
           MenuProps: {

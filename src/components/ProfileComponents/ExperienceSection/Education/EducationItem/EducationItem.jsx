@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, { useMemo, useState } from 'react';
 import { Box, IconButton, Link, Typography } from '@mui/material';
 import { ReactComponent as EducationalCourses } from '../../../../../assets/icons/educationalCourses.svg';
 import styles from './EducationItem.styles.js';
@@ -7,13 +7,13 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import { useDeleteEducationByIdMutation } from '../../../../../redux/services/educationApiSlice';
 import { useTranslation } from 'react-i18next';
-import {useDispatch} from "react-redux";
-import {setEducationDataToEdit} from "../../../../../redux/user/education/educationSlice";
-import {openModal} from "../../../../../redux/modal/modalSlice";
+import { useDispatch } from 'react-redux';
+import { setEducationDataToEdit } from '../../../../../redux/user/education/educationSlice';
+import { openModal } from '../../../../../redux/modal/modalSlice';
 
 const LENGTH_TO_COLLAPSE = 200;
 
-const EducationItem = ({id, type, name, description, startYear, endYear}) => {
+const EducationItem = ({ id, type, name, description, startYear, endYear }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const dispatch = useDispatch();
   const [deleteEducationById] = useDeleteEducationByIdMutation();
@@ -40,11 +40,11 @@ const EducationItem = ({id, type, name, description, startYear, endYear}) => {
       startYear,
       endYear,
     }));
-    dispatch(openModal({modalName: 'education'}));
+    dispatch(openModal({ modalName: 'education' }));
     handleCloseMenu();
   };
 
-  const handleDeleteFeature =  async () => {
+  const handleDeleteFeature = async () => {
     await deleteEducationById(id).unwrap();
     handleCloseMenu();
   };
@@ -55,7 +55,7 @@ const EducationItem = ({id, type, name, description, startYear, endYear}) => {
         <Box sx={styles.logoTitleContainer}>
           <EducationalCourses />
           <Box sx={{ marginLeft: '11px' }}>
-            <Typography variant='h6' sx={styles.courseTitle}>
+            <Typography variant="h6" sx={styles.courseTitle}>
               {type}
             </Typography>
             <Typography variant="subtitle2" sx={styles.schoolTitle}>
@@ -80,8 +80,8 @@ const EducationItem = ({id, type, name, description, startYear, endYear}) => {
         &nbsp;
 
         {needCollapse && <Link
-          component='button'
-          variant='subtitle2'
+          component="button"
+          variant="subtitle2"
           sx={styles.link}
           onClick={() => {
             setIsCollapsed(oldVal => !oldVal);
@@ -101,6 +101,6 @@ EducationItem.propTypes = {
   description: PropTypes.string.isRequired,
   startYear: PropTypes.number.isRequired,
   endYear: PropTypes.number.isRequired,
-}
+};
 
 export default EducationItem;
