@@ -26,11 +26,10 @@ const CheckEmail = () => {
     dispatch(closeModal({ modalName: 'openCheckEmail' }));
   };
 
-  const [sendResetEmail] = useResetPasswordMutation(); 
+  const [sendResetEmail] = useResetPasswordMutation();
 
   const onSubmit = async (values, { resetForm }) => {
     try {
-      console.log('Data being sent to server:', values); 
       await sendResetEmail({ email: values.email }); // Отправляем объект с параметром email
       resetForm();
       dispatch(closeModal({ modalName: 'openCheckEmail' }));
@@ -49,7 +48,9 @@ const CheckEmail = () => {
 
   return (
     <ModalLayout open={openCheckEmail} setOpen={handleClose}>
-      <Typography variant='subtitle3' sx={styles.title}>{t('modal.checkEmailResetPassword.send_letter_title')}</Typography>
+      <Typography variant='subtitle3' sx={styles.title}>
+        {t('modal.checkEmailResetPassword.send_letter_title')}
+      </Typography>
       <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
         <FormInput
           name='email'

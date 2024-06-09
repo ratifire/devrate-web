@@ -1,15 +1,16 @@
 import React from 'react';
 import { styles } from './StepPersonal.styles';
-import { FormInput, FormSelect, TextAreaInput } from '../../../Inputs';
-import { userCountries } from '../../../../utils/constants/userCountries';
+import { FormInput, TextAreaInput, FormSelect } from '../../../Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from './StepPersonalSchema';
-import { usePostPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
+import { usePutPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
 import { ButtonDef } from '../../../Buttons';
+import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
 
 const StepPersonal = () => {
+  const {data: userCountries} = useGetCountryListQuery();
   const userData = useSelector((state) => state.auth.user.data);
 
   const initialValues = {
@@ -20,9 +21,10 @@ const StepPersonal = () => {
     status: userData.status,
     description: userData.description,
   };
-  const [postPersonalUser] = usePostPersonalUserMutation();
+
+  const [putPersonalUser] = usePutPersonalUserMutation();
   const onSubmit = ({ firstName, lastName, city, country, status, description }) => {
-    postPersonalUser({
+    putPersonalUser({
       id: userData.id,
       firstName: firstName,
       lastName: lastName,
@@ -86,7 +88,6 @@ const StepPersonal = () => {
           helperText={formik.touched.country && formik.errors.country}
           error={formik.touched.country && Boolean(formik.errors.country)}
           countries={userCountries}
-          itemsText='modal.registration.countries'
         />
       </Box>
       <Box sx={styles.input100}>

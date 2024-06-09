@@ -1,14 +1,14 @@
 export const userCountries = [
   {
     id: 1,
-    country: 'ukraine',
+    country: 'Ukraine',
   },
   {
     id: 2,
-    country: 'poland',
+    country: 'Poland',
   },
   {
     id: 3,
-    country: 'usa',
+    country: 'USA',
   },
 ];

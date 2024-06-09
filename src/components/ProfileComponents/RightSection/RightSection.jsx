@@ -1,29 +1,47 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './RightSection.styles';
 
 import SocialsLinkList from '../../UI/SocialsLinkList';
 import { useTranslation } from 'react-i18next';
 import LanguagesList from '../../UI/LanguagesList';
-import userSocials from '../../../utils/constants/userSocials';
-import {useSelector} from "react-redux";
-import {selectCurrentUser} from "../../../redux/auth/authSlice";
-import {useFetchLanguagesQuery} from "../../../redux/services/languagesApiSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../redux/auth/authSlice';
+import { useFetchLanguagesQuery } from '../../../redux/services/languagesApiSlice';
+import EditIcon from '@mui/icons-material/Edit';
+import { setStep } from '../../../redux/modal/modalStepSlice';
+import { openModal } from '../../../redux/modal/modalSlice';
+import { useGetUserContactsQuery } from '../../../redux/user/contacts/contactsApiSlice';
 
 const RightSection = () => {
   const { t } = useTranslation();
   const currentUser = useSelector(selectCurrentUser);
   const languages = useFetchLanguagesQuery(currentUser.data.id);
+  const dispatch = useDispatch();
+  const { data: userContacts } = useGetUserContactsQuery(currentUser.data.id);
 
+  const handleOpenInfo = () => {
+    dispatch(setStep(1));
+    dispatch(openModal({ modalName: 'openUserInfo' }));
+  };
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
-        <Typography variant='h6' sx={styles.title}>
-          {t('profile.right.contact')}
-        </Typography>
-        <Box gap={3} sx={styles.wrapperLink}>
-          <SocialsLinkList socials={userSocials} componentStyles={styles} />
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Typography variant='h6' sx={styles.title}>
+            {t('profile.right.contact')}
+          </Typography>
+          <Box>
+            <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenInfo}>
+              <EditIcon />
+            </IconButton>
+          </Box>
         </Box>
+        {userContacts && (
+          <Box gap={3} sx={styles.wrapperLink}>
+            <SocialsLinkList socials={userContacts} componentStyles={styles} />
+          </Box>
+        )}
       </Box>
       {languages.data?.length && <Box sx={styles.wrapperBox}>
         <Typography variant='h6' sx={styles.title}>

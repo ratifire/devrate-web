@@ -73,11 +73,6 @@ export const uk = {
         title: 'Реєстрація',
         email: 'Електронна пошта',
         country: 'Країна',
-        countries: {
-          ukraine: 'Україна',
-          poland: 'Польща',
-          usa: 'США',
-        },
         first_name: 'Імʼя',
         last_name: 'Прізвище',
         password: 'Пароль',
@@ -167,6 +162,10 @@ export const uk = {
         settings: 'Налаштування',
         bookmark: 'Збережене',
         logout: 'Вийти',
+      },
+      experienceSection: {
+        readAll: 'Читати далі...',
+        collapse: 'Згорнути'
       },
       modal: {
         btn: 'Зберегти',

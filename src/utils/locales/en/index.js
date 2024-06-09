@@ -72,11 +72,6 @@ export const en = {
         title: 'Registration',
         email: 'Email',
         country: 'Country',
-        countries: {
-          ukraine: 'Ukraine',
-          poland: 'Poland',
-          usa: 'USA',
-        },
         first_name: 'Name',
         last_name: 'Surname',
         password: 'Password',
@@ -166,6 +161,10 @@ export const en = {
         settings: 'Settings',
         bookmark: 'Bookmarks',
         logout: 'Logout',
+      },
+      experienceSection: {
+        readAll: 'Read all...',
+        collapse: 'Collapse'
       },
       modal: {
         btn: 'Save',
