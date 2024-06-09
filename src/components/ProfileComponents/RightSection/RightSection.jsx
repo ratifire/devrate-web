@@ -37,13 +37,11 @@ const RightSection = () => {
             </IconButton>
           </Box>
         </Box>
-        {userContacts && (
-          <Box gap={3} sx={styles.wrapperLink}>
-            <SocialsLinkList socials={userContacts} componentStyles={styles} />
-          </Box>
-        )}
+        <Box gap={3} sx={styles.wrapperLink}>
+          <SocialsLinkList socials={userContacts} componentStyles={styles} />
+        </Box>
       </Box>
-      {languages.data?.length && <Box sx={styles.wrapperBox}>
+      {Boolean(languages.data?.length) && <Box sx={styles.wrapperBox}>
         <Typography variant='h6' sx={styles.title}>
           {t('profile.right.languages')}
         </Typography>

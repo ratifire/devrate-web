@@ -11,27 +11,26 @@ import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
 import {ButtonDef} from '../../Buttons';
 import CountrySelect from "../../Inputs/CountrySelect";
-import {useCreateEducationMutation} from "../../../redux/services/educationApiSlice";
+import {useCreateEducationMutation, useUpdateEducationMutation} from "../../../redux/services/educationApiSlice";
 import {selectCurrentUser} from "../../../redux/auth/authSlice";
+import {selectEducationDataToEdit} from "../../../redux/user/education/educationSlice";
 
 
 const EducationModal = () => {
   const dispatch = useDispatch();
+  const dataToEdit = useSelector(selectEducationDataToEdit);
   const openEducation = useSelector((state) => state.modal.education);
   const handleClose = () => dispatch(closeModal({ modalName: 'education' }));
   const { t } = useTranslation();
   const [years, setYears] = useState([]);
   const [createEducation] = useCreateEducationMutation();
+  const [updateEducation] = useUpdateEducationMutation();
   const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     const yearsOpts = [];
     for (let i = 1900; i < 2100; i++) {
-      yearsOpts.push({
-        id: `year-${i}`,
-        country: i,
-        label: i,
-      });
+      yearsOpts.push(`${i}`);
     }
     setYears(yearsOpts);
   }, []);
@@ -40,15 +39,30 @@ const EducationModal = () => {
     type: '',
     name: '',
     description: '',
-    startYear: null,
-    endYear: null
+    startYear: `${new Date().getFullYear()}`,
+    endYear: '',
+    ...(dataToEdit || {}),
   };
   const onSubmit = (values, { resetForm }) => {
     console.log('Submitted values:', values);
-    createEducation({
-      userId: currentUser.id,
-      payload: values,
-    })
+    if (dataToEdit) {
+      updateEducation({
+        id: dataToEdit.id,
+        payload: {
+          type: values.type,
+          name: values.name,
+          description: values.description,
+          startYear: values.startYear,
+          endYear: values.endYear,
+        },
+      });
+    } else {
+      createEducation({
+        userId: currentUser.data.id,
+        payload: values,
+      });
+    }
+
 
     resetForm();
     handleClose();
@@ -77,8 +91,8 @@ const EducationModal = () => {
               type='text'
               label='modal.education.type'
               placeholder='profile.modal.workExperience.position_placeholder'
-              helperText={formik.touched.position && formik.errors.position}
-              error={formik.touched.position && Boolean(formik.errors.position)}
+              helperText={formik.touched.type && formik.errors.type}
+              error={formik.touched.type && Boolean(formik.errors.type)}
             />
           </Box>
           <Box sx={styles.input50}>
@@ -89,8 +103,8 @@ const EducationModal = () => {
               handleBlur={formik.handleBlur}
               label='modal.education.name'
               placeholder='profile.modal.workExperience.companyName_placeholder'
-              helperText={formik.touched.companyName && formik.errors.companyName}
-              error={formik.touched.companyName && Boolean(formik.errors.companyName)}
+              helperText={formik.touched.name && formik.errors.name}
+              error={formik.touched.name && Boolean(formik.errors.name)}
             />
           </Box>
           <Box sx={styles.input100}>
@@ -98,17 +112,25 @@ const EducationModal = () => {
                          label={t('modal.education.startYear')}
                          value={formik.values.startYear}
                          countries={years}
+                         name='startYear'
+                         variant="standard"
+                         handleChange={formik.handleChange}
+                         handleBlur={formik.handleBlur}
                          onChange={(value) => formik.setFieldValue('startYear', value)}
-                         helperText={formik.touched.startDate && formik.errors.startDate}
-                         error={formik.touched.startDate && Boolean(formik.errors.startDate)}
+                         helperText={formik.touched.startYear && formik.errors.startYear}
+                         error={formik.touched.startYear && Boolean(formik.errors.startYear)}
               />
               <CountrySelect sx={styles.input50}
                          label={t('modal.education.endYear')}
                          value={formik.values.endYear}
                          countries={years}
+                         name='endYear'
+                         variant="standard"
+                         handleChange={formik.handleChange}
+                         handleBlur={formik.handleBlur}
                          onChange={(value) => formik.setFieldValue('endYear', value)}
-                         helperText={formik.touched.endDate && formik.errors.endDate}
-                         error={formik.touched.endDate && Boolean(formik.errors.endDate)}
+                         helperText={formik.touched.endYear && formik.errors.endYear}
+                         error={formik.touched.endYear && Boolean(formik.errors.endYear)}
               />
           </Box>
           <Box sx={styles.input100}>

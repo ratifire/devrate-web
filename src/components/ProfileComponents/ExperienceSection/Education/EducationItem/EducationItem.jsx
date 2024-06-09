@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useMemo, useState} from 'react';
 import { Box, IconButton, Link, Typography } from '@mui/material';
 import { ReactComponent as EducationalCourses } from '../../../../../assets/icons/educationalCourses.svg';
 import styles from './EducationItem.styles.js';
@@ -7,11 +7,19 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import { useDeleteEducationByIdMutation } from '../../../../../redux/services/educationApiSlice';
 import { useTranslation } from 'react-i18next';
+import {useDispatch} from "react-redux";
+import {setEducationDataToEdit} from "../../../../../redux/user/education/educationSlice";
+import {openModal} from "../../../../../redux/modal/modalSlice";
+
+const LENGTH_TO_COLLAPSE = 200;
 
 const EducationItem = ({id, type, name, description, startYear, endYear}) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const dispatch = useDispatch();
   const [deleteEducationById] = useDeleteEducationByIdMutation();
   const { t } = useTranslation();
+  const excerpt = useMemo(() => description.slice(0, LENGTH_TO_COLLAPSE), [description]);
+  const needCollapse = description.length >= LENGTH_TO_COLLAPSE;
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -24,7 +32,15 @@ const EducationItem = ({id, type, name, description, startYear, endYear}) => {
   };
 
   const handleEditFeature = () => {
-    console.log('Editing feature');
+    dispatch(setEducationDataToEdit({
+      id,
+      type,
+      name,
+      description,
+      startYear,
+      endYear,
+    }));
+    dispatch(openModal({modalName: 'education'}));
     handleCloseMenu();
   };
 
@@ -59,35 +75,21 @@ const EducationItem = ({id, type, name, description, startYear, endYear}) => {
           handleDeleteFeature={handleDeleteFeature}
         />
       </Box>
-      {isCollapsed ? (
-        <Typography>
-          {description.slice(0, 200) + ' '}
-          <Link
-            component='button'
-            variant='subtitle2'
-            sx={styles.link}
-            onClick={() => {
-              setIsCollapsed(!isCollapsed);
-            }}
-          >
-            {t('profile.experienceSection.readAll')}
-          </Link>
-        </Typography>
-      ) : (
-        <Typography>
-          {description + ' '}
-          <Link
-            component='button'
-            variant='subtitle2'
-            sx={styles.link}
-            onClick={() => {
-              setIsCollapsed(!isCollapsed);
-            }}
-          >
-            {t('profile.experienceSection.collapse')}
-          </Link>
-        </Typography>
-      )}
+      <Typography>
+        {isCollapsed && needCollapse ? excerpt : description}
+        &nbsp;
+
+        {needCollapse && <Link
+          component='button'
+          variant='subtitle2'
+          sx={styles.link}
+          onClick={() => {
+            setIsCollapsed(oldVal => !oldVal);
+          }}
+        >
+          {isCollapsed ? t('profile.experienceSection.readAll') : t('profile.experienceSection.collapse')}
+        </Link>}
+      </Typography>
     </Box>
   );
 };

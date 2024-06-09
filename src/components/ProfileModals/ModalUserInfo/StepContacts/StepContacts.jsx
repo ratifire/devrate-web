@@ -1,14 +1,40 @@
 import React from 'react';
-import { styles } from './StepContacts.styles';
-import { FormInput } from '../../../Inputs';
-import { Box } from '@mui/material';
-import { useFormik } from 'formik';
-import { StepContactsSchema } from './StepContactsSchema';
-import { usePostContactsUserMutation } from '../../../../redux/user/contacts/contactsApiSlice';
-import { useSelector } from 'react-redux';
-import { ButtonDef } from '../../../Buttons';
+import {styles} from './StepContacts.styles';
+import {FormInput} from '../../../Inputs';
+import {Box} from '@mui/material';
+import {useFormik} from 'formik';
+import {StepContactsSchema} from './StepContactsSchema';
+import {useGetUserContactsQuery, usePostContactsUserMutation} from '../../../../redux/user/contacts/contactsApiSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {ButtonDef} from '../../../Buttons';
+import {SOCIAL_TYPES} from "../../../UI/SocialsLinkList/SocialTypes";
+import {closeModal} from "../../../../redux/modal/modalSlice";
+
+const typeNameMap = {
+  [SOCIAL_TYPES.TELEGRAM_LINK]: 'telegram',
+  [SOCIAL_TYPES.EMAIL]: 'mail',
+  [SOCIAL_TYPES.LINKEDIN_LINK]: 'linkedIn',
+  [SOCIAL_TYPES.GITHUB_LINK]: 'gitHub',
+  [SOCIAL_TYPES.BEHANCE_LINK]: 'behance',
+  [SOCIAL_TYPES.PHONE_NUMBER]: 'phone',
+}
 
 const StepContacts = () => {
+  const [postContactsUser] = usePostContactsUserMutation();
+  const userId = useSelector((state) => state.auth.user.data.id);
+  const contactsQuery = useGetUserContactsQuery(userId);
+  const dispatch = useDispatch();
+
+  if (contactsQuery.isLoading) {
+    return null;
+  }
+
+  const valuesMap = contactsQuery.data.reduce((acc, contact) => {
+    acc[typeNameMap[contact.type]] = contact.value;
+
+    return acc;
+  }, {});
+
   const initialValues = {
     telegram: '',
     linkedIn: '',
@@ -16,22 +42,22 @@ const StepContacts = () => {
     behance: '',
     mail: '',
     phone: '',
+    ...valuesMap,
   };
-  const [postContactsUser] = usePostContactsUserMutation();
-  const userId = useSelector((state) => state.auth.user.data.id);
-
-  const onSubmit = ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
-    postContactsUser({
+  const onSubmit = async ({telegram, mail, linkedIn, gitHub, behance, phone}) => {
+    await postContactsUser({
       userId: userId,
       body: [
-        { type: 'TELEGRAM_LINK', value: telegram },
-        { type: 'EMAIL', value: mail },
-        { type: 'LINKEDIN_LINK', value: linkedIn },
-        { type: 'GITHUB_LINK', value: gitHub },
-        { type: 'BEHANCE_LINK', value: behance },
-        { type: 'PHONE_NUMBER', value: phone },
+        {type: SOCIAL_TYPES.TELEGRAM_LINK, value: telegram},
+        {type: SOCIAL_TYPES.EMAIL, value: mail},
+        {type: SOCIAL_TYPES.LINKEDIN_LINK, value: linkedIn},
+        {type: SOCIAL_TYPES.GITHUB_LINK, value: gitHub},
+        {type: SOCIAL_TYPES.BEHANCE_LINK, value: behance},
+        {type: SOCIAL_TYPES.PHONE_NUMBER, value: phone},
       ],
     });
+
+    dispatch(closeModal({ modalName: 'openUserInfo' }));
   };
   const formik = useFormik({
     initialValues,
@@ -112,7 +138,7 @@ const StepContacts = () => {
           error={formik.touched.phone && Boolean(formik.errors.phone)}
         />
       </Box>
-      <ButtonDef variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
+      <ButtonDef variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn}/>
     </form>
   );
 };
