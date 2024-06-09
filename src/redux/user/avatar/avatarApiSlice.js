@@ -14,8 +14,16 @@ export const avatarApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: avatar,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'PersonalUser', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: 'AvatarUser', id }],
+    }),
+
+    deleteAvatarUser: builder.mutation({
+      query: (userId) => ({
+        url: `/users/${userId}/pictures`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, id) => [{ type: 'AvatarUser', id }],
     }),
   }),
 });
-export const { useGetAvatarUserQuery, usePostAvatarUserMutation } = avatarApiSlice;
+export const { useGetAvatarUserQuery, usePostAvatarUserMutation, useDeleteAvatarUserMutation } = avatarApiSlice;

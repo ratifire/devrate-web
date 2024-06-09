@@ -2,14 +2,14 @@ import React from 'react';
 import { Avatar } from '@mui/material';
 import { styles } from './UserAvatar.styles';
 import PropTypes from 'prop-types';
-import { bgFromString, checkContrastColor } from '../../../utils/helpers'
+import { bgFromString, checkContrastColor } from '../../../utils/helpers';
 
 const UserAvatar = ({ userName, src, size }) => {
   const stringAvatar = (name) => {
     const BG_COLOR = bgFromString(name);
     return {
       sx: {
-        backgroundColor: BG_COLOR,
+        backgroundColor: src ? 'transparent' : BG_COLOR,
         borderRadius: styles[size].borderRadius,
         width: styles[size].width,
         height: styles[size].height,

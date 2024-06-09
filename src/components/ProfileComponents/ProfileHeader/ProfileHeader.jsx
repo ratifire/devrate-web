@@ -9,6 +9,7 @@ import UserAvatar from '../../UI/UserAvatar';
 import UserMenu from '../UserMenu';
 import NotificationList from '../NotificationList';
 import { useSelector } from 'react-redux';
+import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
 
 const initialValues = {
   query: '',
@@ -46,8 +47,13 @@ const notifications = [
 ];
 
 const ProfileHeader = () => {
-  const { firstName, lastName } = useSelector((state) => state.auth.user.data);
+  const {  id, firstName, lastName } = useSelector((state) => state.auth.user.data);
+
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+
+  const { data } = useGetAvatarUserQuery(id);
+  const userAvatar = data || {};
+  const { userPicture } = userAvatar;
 
   const toggleDrawer = (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -101,7 +107,7 @@ const ProfileHeader = () => {
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
-          <UserAvatar userName={`${firstName} ${lastName}`} size='sm' />
+          <UserAvatar userName={`${firstName} ${lastName}`} src={userPicture} size='sm' />
         </Button>
         <UserMenu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
