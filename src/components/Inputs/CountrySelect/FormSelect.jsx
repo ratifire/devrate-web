@@ -36,6 +36,9 @@ const FormSelect = ({
         IconComponent={KeyboardArrowDownIcon}
         inputProps={{
           MenuProps: {
+            PaperProps: {
+              sx: styles.dropdownPaper,
+            },
             sx: styles.selectField,
           },
         }}

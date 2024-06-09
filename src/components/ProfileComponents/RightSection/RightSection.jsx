@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import LanguagesList from '../../UI/LanguagesList';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { useFetchLanguagesQuery } from '../../../redux/services/languagesApiSlice';
+import { useGetLanguageUserQuery } from '../../../redux/user/language/languageApiSlice';
 import EditIcon from '@mui/icons-material/Edit';
 import { setStep } from '../../../redux/modal/modalStepSlice';
 import { openModal } from '../../../redux/modal/modalSlice';
@@ -16,7 +16,7 @@ import { useGetUserContactsQuery } from '../../../redux/user/contacts/contactsAp
 const RightSection = () => {
   const { t } = useTranslation();
   const currentUser = useSelector(selectCurrentUser);
-  const languages = useFetchLanguagesQuery(currentUser.data.id);
+  const languages = useGetLanguageUserQuery(currentUser.data.id);
   const dispatch = useDispatch();
   const { data: userContacts } = useGetUserContactsQuery(currentUser.data.id);
 
