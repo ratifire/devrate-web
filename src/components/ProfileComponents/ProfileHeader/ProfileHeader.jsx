@@ -46,8 +46,9 @@ const notifications = [
   },
 ];
 
-function ProfileHeader() {
-  const { id, firstName, lastName } = useSelector((state) => state.auth.user.data);
+const ProfileHeader = () => {
+  const {  id, firstName, lastName } = useSelector((state) => state.auth.user.data);
+
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const { data } = useGetAvatarUserQuery(id);
