@@ -45,7 +45,7 @@ const notifications = [
   },
 ];
 
-function ProfileHeader() {
+const ProfileHeader = () => {
   const { firstName, lastName } = useSelector((state) => state.auth.user.data);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
