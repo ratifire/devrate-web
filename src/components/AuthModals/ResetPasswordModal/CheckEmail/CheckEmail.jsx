@@ -10,7 +10,7 @@ import { FormInput } from '../../../Inputs';
 import { ButtonDef } from '../../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
-import { useResetPasswordMutation } from '../../../../redux/auth/authApiSlice'; // Исправленный путь к файлу
+import { useResetPasswordMutation } from '../../../../redux/auth/authApiSlice'; 
 
 const initialValues = {
   email: '',
@@ -30,7 +30,7 @@ const CheckEmail = () => {
 
   const onSubmit = async (values, { resetForm }) => {
     try {
-      await sendResetEmail({ email: values.email }); // Отправляем объект с параметром email
+      await sendResetEmail({ email: values.email });
       resetForm();
       dispatch(closeModal({ modalName: 'openCheckEmail' }));
       dispatch(openModal({ modalName: 'openResetPassword' }));

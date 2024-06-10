@@ -156,7 +156,7 @@ export const en = {
       userMenu: {
         profile: 'Profile',
         schedule: 'Schedule',
-        specializations: 'Specializations',
+        specialisations: 'Specialisations',
         interviews: 'Interviews',
         settings: 'Settings',
         bookmark: 'Bookmarks',
@@ -164,7 +164,7 @@ export const en = {
       },
       experienceSection: {
         readAll: 'Read all...',
-        collapse: 'Collapse'
+        collapse: 'Collapse',
       },
       modal: {
         btn: 'Save',
@@ -232,6 +232,26 @@ export const en = {
           endDate: 'End Date',
           required: 'This is a required field',
         },
+      },
+    },
+    language: {
+      level: {
+        a1: 'Beginner: A1',
+        a2: 'Pre-Intermediate: A2',
+        b1: 'Intermediate: B1',
+        b2: 'Upper-Intermediate: B2',
+        c1: 'Advanced: C1',
+        c2: 'Proficient: C2',
+      },
+      name: {
+        ua: 'Ukrainian',
+        en: 'English',
+        fr: 'French',
+        it: 'Italian',
+        de: 'German',
+        es: 'Spanish',
+        pl: 'Poland',
+        cs: 'Czech',
       },
     },
   },

@@ -3,16 +3,18 @@ import { styles } from './LanguageLevel.styles';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTranslation } from 'react-i18next';
 
-const LanguageLevel = ({id, language, level, code, tobeDeleted, languageDeleteHandler }) => {
+const LanguageLevel = ({ language, level, tobeDeleted, languageDeleteHandler }) => {
+  const { t } = useTranslation();
   return (
     <Box sx={styles.wrapper}>
-      <Box sx={styles.language}>{code}</Box>
+      <Box sx={styles.language}>{language}</Box>
       <Typography variant='caption3' sx={styles.level}>
-        {language}: {level}
+        {t(`language.level.${level}`)}
       </Typography>
       {tobeDeleted && (
-        <IconButton sx={styles.icon} onClick={() => languageDeleteHandler(id)}>
+        <IconButton sx={styles.icon} onClick={() => languageDeleteHandler(language)}>
           <CloseIcon />
         </IconButton>
       )}
@@ -23,8 +25,6 @@ const LanguageLevel = ({id, language, level, code, tobeDeleted, languageDeleteHa
 LanguageLevel.propTypes = {
   language: PropTypes.string.isRequired,
   level: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  code: PropTypes.string.isRequired,
   tobeDeleted: PropTypes.bool,
   languageDeleteHandler: PropTypes.func,
 };

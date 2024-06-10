@@ -17,6 +17,7 @@ export const styles = {
     justifyContent: 'center',
     width: '24px',
     height: '24px',
+    textTransform: 'uppercase',
   }),
   level: (theme) => ({
     lineHeight: '18px',
