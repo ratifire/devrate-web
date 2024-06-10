@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { styles } from './StepContacts.styles';
 import { FormInput } from '../../../Inputs';
 import { Box } from '@mui/material';
@@ -12,15 +12,7 @@ import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 const StepContacts = () => {
   const currentUser = useSelector(selectCurrentUser);
   const userId = currentUser?.data?.id;
-  const { data: userContacts, refetch } = useGetUserContactsQuery(userId);
-
-  const [contactsLoaded, setContactsLoaded] = useState(false);
-
-  useEffect(() => {
-    refetch().then(() => {
-      setContactsLoaded(true); 
-    });
-  }, [refetch]);
+  const { data: userContacts, isLoading } = useGetUserContactsQuery(userId);
 
   const initialValues = {
     telegram: userContacts?.find(contact => contact.type === 'TELEGRAM_LINK')?.value || '',
@@ -33,19 +25,18 @@ const StepContacts = () => {
 
   const [postContactsUser] = usePostContactsUserMutation();
 
-  const onSubmit = async (values) => {
+  const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
     await postContactsUser({
       userId: userId,
       body: [
-        { type: 'TELEGRAM_LINK', value: values.telegram },
-        { type: 'EMAIL', value: values.mail },
-        { type: 'LINKEDIN_LINK', value: values.linkedIn },
-        { type: 'GITHUB_LINK', value: values.gitHub },
-        { type: 'BEHANCE_LINK', value: values.behance },
-        { type: 'PHONE_NUMBER', value: values.phone },
+        { type: 'TELEGRAM_LINK', value: telegram },
+        { type: 'EMAIL', value: mail },
+        { type: 'LINKEDIN_LINK', value: linkedIn },
+        { type: 'GITHUB_LINK', value: gitHub },
+        { type: 'BEHANCE_LINK', value: behance },
+        { type: 'PHONE_NUMBER', value: phone },
       ],
     });
-    refetch(); 
   };
 
   const formik = useFormik({
@@ -55,11 +46,7 @@ const StepContacts = () => {
     enableReinitialize: true,
   });
 
-  useEffect(() => {
-    console.log('User contacts:', userContacts);
-  }, [userContacts]);
-
-  if (!contactsLoaded) {
+  if (isLoading) {
     return <div>Loading...</div>; 
   }
 
