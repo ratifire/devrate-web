@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './RightSection.styles';
+
 import SocialsLinkList from '../../UI/SocialsLinkList';
 import { useTranslation } from 'react-i18next';
 import LanguagesList from '../../UI/LanguagesList';
@@ -24,39 +25,33 @@ const RightSection = () => {
     dispatch(setStep(1));
     dispatch(openModal({ modalName: 'openUserInfo' }));
   };
-
-  const filteredUserContacts = userContacts ? userContacts.filter((contact) => contact.value) : [];
-
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Typography variant='h6' sx={styles.title}>
+          <Typography variant="h6" sx={styles.title}>
             {t('profile.right.contact')}
           </Typography>
           <Box>
-            <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenInfo}>
+            <IconButton sx={styles.btnIcon} aria-label="Edit user information" onClick={handleOpenInfo}>
               <EditIcon />
             </IconButton>
           </Box>
         </Box>
-        {filteredUserContacts.length > 0 && (
-          <Box gap={3} sx={styles.wrapperLink}>
-            <SocialsLinkList socials={filteredUserContacts} componentStyles={styles} />
-          </Box>
-        )}
+        <Box gap={3} sx={styles.wrapperLink}>
+          <SocialsLinkList socials={userContacts} componentStyles={styles} />
+        </Box>
       </Box>
-
-      <Box sx={styles.wrapperBox}>
-        <Typography variant='h6' sx={styles.title}>
+      {Boolean(languages.data?.length) && <Box sx={styles.wrapperBox}>
+        <Typography variant="h6" sx={styles.title}>
           {t('profile.right.languages')}
         </Typography>
         <Box gap={2} sx={styles.wrapperLanguages}>
-          <LanguagesList data={languages.data || []} />
+          <LanguagesList data={languages.data} />
         </Box>
-      </Box>
+      </Box>}
       <Box sx={styles.wrapperBox}>
-        <Typography variant='h6' sx={styles.title}>
+        <Typography variant="h6" sx={styles.title}>
           {t('profile.right.aboutMe')}
         </Typography>
         <Typography variant='subtitle2' sx={styles.aboutMe}>

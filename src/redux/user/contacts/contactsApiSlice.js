@@ -1,6 +1,7 @@
 import { apiSlice } from '../../services/api/apiSlice';
 
 export const userApiSlice = apiSlice.injectEndpoints({
+  tagTypes: ['ContactList'],
   endpoints: (builder) => ({
     postContactsUser: builder.mutation({
       query: ({ userId, body }) => ({
@@ -8,15 +9,17 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body,
       }),
-      invalidatesTags: (result, error, { userId }) => [{ type: 'Contacts', id: userId }],
+      invalidatesTags: ['ContactList'],
     }),
 
     getUserContacts: builder.query({
       query: (userId) => `/users/${userId}/contacts`,
-      providesTags: (result, error, userId) => [{ type: 'Contacts', id: userId }],
+      transformResponse: (response) => {
+        return response.filter(item => item.value?.length);
+      },
+      providesTags: () => ['ContactList'],
     }),
   }),
-  tagTypes: ['Contacts'],
 });
 
 export const { useGetUserContactsQuery, usePostContactsUserMutation } = userApiSlice;

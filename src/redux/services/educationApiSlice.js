@@ -15,8 +15,23 @@ export const educationApiSlice = apiSlice.injectEndpoints({
       query: ({payload, userId}) => ({
         url: `/users/${userId}/educations`,
         method: 'POST',
-        data: {
-          ...payload
+        body: {
+          ...payload,
+          startYear: +payload.startYear,
+          endYear: +payload.endYear,
+        }
+      }),
+      invalidatesTags: ['Education'],
+    }),
+
+    updateEducation: builder.mutation({
+      query: ({payload, id}) => ({
+        url: `/educations/${id}`,
+        method: 'PUT',
+        body: {
+          ...payload,
+          startYear: +payload.startYear,
+          endYear: +payload.endYear,
         }
       }),
       invalidatesTags: ['Education'],
@@ -40,5 +55,6 @@ export const educationApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetEducationByUserIdQuery,
   useCreateEducationMutation,
+  useUpdateEducationMutation,
   useDeleteEducationByIdMutation,
 } = educationApiSlice;

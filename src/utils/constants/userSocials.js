@@ -4,6 +4,7 @@ import { ReactComponent as Github } from '../../assets/icons/github-filled.svg';
 import { ReactComponent as Behance } from '../../assets/icons/behance-filled.svg';
 import { ReactComponent as Email } from '../../assets/icons/mail-filled.svg';
 import { ReactComponent as Phone } from '../../assets/icons/phone-filled.svg';
+import {Link} from "@mui/icons-material";
 
 export default {
   TELEGRAM_LINK: Telegram,
@@ -12,4 +13,5 @@ export default {
   BEHANCE_LINK: Behance,
   EMAIL: Email,
   PHONE_NUMBER: Phone,
+  DEFAULT: Link
 };
