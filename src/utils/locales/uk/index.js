@@ -235,6 +235,10 @@ export const uk = {
         },
       },
     },
+    specialisation:{
+      specialisation_title: 'Спеціалізації',
+      specialisation_btn_make_main: 'Зробити основною'
+    },
     language: {
       level: {
         a1: 'Початковий рівень: A1',

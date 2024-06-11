@@ -234,6 +234,10 @@ export const en = {
         },
       },
     },
+    specialisation:{
+      specialisation_title: 'Specialisations',
+      specialisation_btn_make_main: 'Make the main'
+    },
     language: {
       level: {
         a1: 'Beginner: A1',
