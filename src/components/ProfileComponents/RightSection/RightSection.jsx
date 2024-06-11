@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './RightSection.styles';
-
 import SocialsLinkList from '../../UI/SocialsLinkList';
 import { useTranslation } from 'react-i18next';
 import LanguagesList from '../../UI/LanguagesList';
@@ -24,6 +23,9 @@ const RightSection = () => {
     dispatch(setStep(1));
     dispatch(openModal({ modalName: 'openUserInfo' }));
   };
+
+  const filteredUserContacts = userContacts ? userContacts.filter(contact => contact.value) : [];
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
@@ -37,9 +39,9 @@ const RightSection = () => {
             </IconButton>
           </Box>
         </Box>
-        {userContacts && (
+        {filteredUserContacts.length > 0 && (
           <Box gap={3} sx={styles.wrapperLink}>
-            <SocialsLinkList socials={userContacts} componentStyles={styles} />
+            <SocialsLinkList socials={filteredUserContacts} componentStyles={styles} />
           </Box>
         )}
       </Box>
@@ -63,4 +65,5 @@ const RightSection = () => {
     </Box>
   );
 };
+
 export default RightSection;

@@ -4,24 +4,29 @@ import { FormInput } from '../../../Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { StepContactsSchema } from './StepContactsSchema';
-import { usePostContactsUserMutation } from '../../../../redux/user/contacts/contactsApiSlice';
+import { usePostContactsUserMutation, useGetUserContactsQuery } from '../../../../redux/user/contacts/contactsApiSlice';
 import { useSelector } from 'react-redux';
 import { ButtonDef } from '../../../Buttons';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 
 const StepContacts = () => {
-  const initialValues = {
-    telegram: '',
-    linkedIn: '',
-    gitHub: '',
-    behance: '',
-    mail: '',
-    phone: '',
-  };
-  const [postContactsUser] = usePostContactsUserMutation();
-  const userId = useSelector((state) => state.auth.user.data.id);
+  const currentUser = useSelector(selectCurrentUser);
+  const userId = currentUser?.data?.id;
+  const { data: userContacts, isLoading } = useGetUserContactsQuery(userId);
 
-  const onSubmit = ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
-    postContactsUser({
+  const initialValues = {
+    telegram: userContacts?.find(contact => contact.type === 'TELEGRAM_LINK')?.value || '',
+    linkedIn: userContacts?.find(contact => contact.type === 'LINKEDIN_LINK')?.value || '',
+    gitHub: userContacts?.find(contact => contact.type === 'GITHUB_LINK')?.value || '',
+    behance: userContacts?.find(contact => contact.type === 'BEHANCE_LINK')?.value || '',
+    mail: userContacts?.find(contact => contact.type === 'EMAIL')?.value || '',
+    phone: userContacts?.find(contact => contact.type === 'PHONE_NUMBER')?.value || '',
+  };
+
+  const [postContactsUser] = usePostContactsUserMutation();
+
+  const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
+    await postContactsUser({
       userId: userId,
       body: [
         { type: 'TELEGRAM_LINK', value: telegram },
@@ -33,11 +38,18 @@ const StepContacts = () => {
       ],
     });
   };
+
   const formik = useFormik({
     initialValues,
     validationSchema: StepContactsSchema,
     onSubmit,
+    enableReinitialize: true,
   });
+
+  if (isLoading) {
+    return <div>Loading...</div>; 
+  }
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.input100}>
