@@ -12,6 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { setStep } from '../../../redux/modal/modalStepSlice';
 import { openModal } from '../../../redux/modal/modalSlice';
 import { useGetUserContactsQuery } from '../../../redux/user/contacts/contactsApiSlice';
+import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 
 const RightSection = () => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const RightSection = () => {
   const languages = useGetLanguageUserQuery(currentUser.data.id);
   const dispatch = useDispatch();
   const { data: userContacts } = useGetUserContactsQuery(currentUser.data.id);
-
+  const { data: personalData } = useGetPersonalUserQuery(currentUser.data.id);
   const handleOpenInfo = () => {
     dispatch(setStep(1));
     dispatch(openModal({ modalName: 'openUserInfo' }));
@@ -53,11 +54,12 @@ const RightSection = () => {
         <Typography variant="h6" sx={styles.title}>
           {t('profile.right.aboutMe')}
         </Typography>
-        <Typography variant="subtitle2" sx={styles.aboutMe}>
-          {currentUser.data.description}
+        <Typography variant='subtitle2' sx={styles.aboutMe}>
+          {personalData && personalData.description}
         </Typography>
       </Box>
     </Box>
   );
 };
+
 export default RightSection;

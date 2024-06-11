@@ -22,8 +22,8 @@ export default [
     target: '_blank',
   },
   {
-    name: 'profile.userMenu.specializations',
-    path: links.specializations,
+    name: 'profile.userMenu.specialisations',
+    path: links.specialisations,
     icon: SchoolIcon,
     target: '_blank',
   },

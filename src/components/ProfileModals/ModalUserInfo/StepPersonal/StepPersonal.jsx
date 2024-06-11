@@ -1,6 +1,6 @@
 import React from 'react';
 import { styles } from './StepPersonal.styles';
-import { FormInput, TextAreaInput, FormSelect } from '../../../Inputs';
+import { FormInput, FormSelect, TextAreaInput } from '../../../Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
@@ -10,16 +10,16 @@ import { ButtonDef } from '../../../Buttons';
 import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
 
 const StepPersonal = () => {
-  const {data: userCountries} = useGetCountryListQuery();
+  const { data: userCountries } = useGetCountryListQuery();
   const userData = useSelector((state) => state.auth.user.data);
 
   const initialValues = {
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-    city: userData.city,
-    country: userData.country,
-    status: userData.status,
-    description: userData.description,
+    firstName: userData.firstName || '',
+    lastName: userData.lastName || '',
+    city: userData.city || '',
+    country: userData.country || '',
+    status: userData.status || '',
+    description: userData.description || '',
   };
 
   const [putPersonalUser] = usePutPersonalUserMutation();
