@@ -11,7 +11,6 @@ const SpecialisationCategories = () => {
   const handleChangeSpecialisation = () => {
     console.log('Specialisation changed');
   }
-  //TODO ADD STORYBOOK for this COMPONENT
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.specialisation_left_box}>
