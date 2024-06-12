@@ -12,6 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { setStep } from '../../../redux/modal/modalStepSlice';
 import { openModal } from '../../../redux/modal/modalSlice';
 import { useGetUserContactsQuery } from '../../../redux/user/contacts/contactsApiSlice';
+import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 
 const RightSection = () => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const RightSection = () => {
   const languages = useGetLanguageUserQuery(currentUser.data.id);
   const dispatch = useDispatch();
   const { data: userContacts } = useGetUserContactsQuery(currentUser.data.id);
-
+  const { data: personalData } = useGetPersonalUserQuery(currentUser.data.id);
   const handleOpenInfo = () => {
     dispatch(setStep(1));
     dispatch(openModal({ modalName: 'openUserInfo' }));
@@ -28,39 +29,37 @@ const RightSection = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Typography variant='h6' sx={styles.title}>
+          <Typography variant="h6" sx={styles.title}>
             {t('profile.right.contact')}
           </Typography>
           <Box>
-            <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenInfo}>
+            <IconButton sx={styles.btnIcon} aria-label="Edit user information" onClick={handleOpenInfo}>
               <EditIcon />
             </IconButton>
           </Box>
         </Box>
-        {userContacts && (
-          <Box gap={3} sx={styles.wrapperLink}>
-            <SocialsLinkList socials={userContacts} componentStyles={styles} />
-          </Box>
-        )}
+        <Box gap={3} sx={styles.wrapperLink}>
+          <SocialsLinkList socials={userContacts} componentStyles={styles} />
+        </Box>
       </Box>
-
-      <Box sx={styles.wrapperBox}>
-        <Typography variant='h6' sx={styles.title}>
+      {Boolean(languages.data?.length) && <Box sx={styles.wrapperBox}>
+        <Typography variant="h6" sx={styles.title}>
           {t('profile.right.languages')}
         </Typography>
         <Box gap={2} sx={styles.wrapperLanguages}>
-          <LanguagesList data={languages.data || []} />
+          <LanguagesList data={languages.data} />
         </Box>
-      </Box>
+      </Box>}
       <Box sx={styles.wrapperBox}>
-        <Typography variant='h6' sx={styles.title}>
+        <Typography variant="h6" sx={styles.title}>
           {t('profile.right.aboutMe')}
         </Typography>
         <Typography variant='subtitle2' sx={styles.aboutMe}>
-          {currentUser.data.description}
+          {personalData && personalData.description}
         </Typography>
       </Box>
     </Box>
   );
 };
+
 export default RightSection;

@@ -15,7 +15,6 @@ import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice
 const BaseUserInfo = () => {
   const { data: info } = useSelector(selectCurrentUser);
   const { id, firstName, lastName, country } = info;
-
   const { data: personalData } = useGetPersonalUserQuery(id);
   const userData = personalData || {};
   const {

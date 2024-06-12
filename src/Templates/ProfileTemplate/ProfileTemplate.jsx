@@ -9,7 +9,7 @@ const ProfileTemplate = ({ children }) => {
   const openUserInfo = useSelector((state) => state.modal.openUserInfo);
   const openExperience = useSelector((state) => state.modal.openExperience);
   const openAchievement = useSelector((state) => state.modal.achievement);
-  const openEducation = useSelector((state) => state.modal.openEducation);
+  const openEducation = useSelector((state) => state.modal.education);
   const currentUser = useSelector(selectCurrentUser);
 
   const {

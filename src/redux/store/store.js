@@ -12,6 +12,7 @@ import { apiSlice } from '../services/api/apiSlice';
 import { authReducer } from '../auth/authSlice';
 import { avatarReducer } from '../user/avatar/avatarSlice';
 import { personalReducer } from '../user/personal/personalSlice';
+import { educationReducer } from '../user/education/educationSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -31,6 +32,7 @@ const personalPersistConfig = {
 
 const rootReducer = {
   modal: modalSliceReducer,
+  education: educationReducer,
   modalStep: modalStepReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: persistReducer(authPersistConfig, authReducer),
