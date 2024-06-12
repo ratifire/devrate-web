@@ -236,7 +236,9 @@ export const en = {
     },
     specialisation:{
       specialisation_title: 'Specialisations',
-      specialisation_btn_make_main: 'Make the main'
+      specialisation_btn_make_main: 'Make the main',
+      specialisation_hardSkills: 'HARDSKILLS',
+      specialisation_softSkills: 'SOFTSKILLS',
     },
     language: {
       level: {
