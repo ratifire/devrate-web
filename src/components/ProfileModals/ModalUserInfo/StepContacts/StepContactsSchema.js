@@ -1,27 +1,22 @@
 import * as Yup from 'yup';
 
-const urlRegex = /^(https:\/\/|www\.)/;
-
 export const StepContactsSchema = Yup.object().shape({
   telegram: Yup.string()
-    .url('please type coorect Telegram') 
+    .url('please type correct Telegram') 
     .optional(),
   linkedIn: Yup.string()
-    .matches(urlRegex, 'please type coorect URL') 
-    .matches(/linkedin/, 'please type coorect URL') 
+    .matches(/linkedin/, 'please type correct URL') 
     .optional(),
   gitHub: Yup.string()
-    .matches(urlRegex, 'please type coorect URL') 
-    .matches(/github/, 'please type coorect URL')
+    .matches(/github/, 'please type correct URL')
     .optional(),
   behance: Yup.string()
-    .matches(urlRegex, 'please type coorect URL') 
-    .matches(/behance/, 'please type coorect URL') 
+    .matches(/behance/, 'please type correct URL') 
     .optional(),
   mail: Yup.string()
-    .email('please type coorect Email') 
+    .email('please type correct Email') 
     .required('Email is required'),
   phone: Yup.string()
-    .matches(/^\+?[1-9]\d{1,14}$/, ' please type coorect Phone number') 
+    .matches(/^\+?[1-9]\d{1,14}$/, 'please type correct Phone number') 
     .optional(),
 });
