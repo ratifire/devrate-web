@@ -1,42 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
-// import { styles } from '../SpecializationLevel/SpecializationLevel.styles';
-// import { useTranslation } from 'react-i18next';
-import { ButtonDef } from '../../Buttons';
-// import Button from '@mui/material/Button';
+import { styles } from './SpecializationLevel.styles';
+import { useTranslation } from 'react-i18next';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import ButtonDef from '../../Buttons/ButtonDef';
 
+const SpecializationLevel = () => {
+  const { t } = useTranslation();
+  const [activeButton, setActiveButton] = useState('Junior');
 
-const SpecializationLevel = () => { 
-    // const { t } = useTranslation();
-    
-    return (
-        
-      <Box sx={{width: '480px', height:'201px', padding: '25px'}}>
-        {/* <Typography >{t('home.hero.title')}</Typography> */}
-        <Typography variant='h6' sx={{marginBottom: '10px'}} >Level</Typography>
-        {/* <Typography variant='h6'> {t('home.hero.text')} </Typography> */}
-        <Typography variant='subtitle2' sx={{marginBottom: '10px'}}> Improve your skills to move onto the next level of in-line specialization. </Typography>
-        <Box sx={{ width: '170px' }}>
-          <ButtonGroup sx={{width: '432px', height:'48px'}}
-          variant="contained"
-          aria-label="Basic button group"
+  const handleButtonClick = (label) => {
+    setActiveButton(label);
+  };
+
+  return (
+    <Box sx={styles.contentWrapper}>
+      <Typography variant='h6' sx={styles.title}>
+        {t('specialisation.level.title')}
+      </Typography>
+      <Typography variant='subtitle2' sx={styles.description}>
+        {t('specialisation.level.description')}
+      </Typography>
+      <Box>
+        <ButtonGroup
+          sx={styles.buttonGroup}
+          variant='contained'
+          aria-label='Specialization level button group'
           color='secondary'
-          type='button'
-          
-          >
-            <ButtonDef label={'Junior'}/>
-            <ButtonDef label={'Middle'}/>
-            <ButtonDef label={'Senior'}/>
-      {/* <Button>One</Button>
-      <Button>Two</Button>
-      <Button>Three</Button> */}
-    </ButtonGroup>
-            
-        </Box>
+        >
+          {['Junior', 'Middle', 'Senior'].map((label) => (
+            <ButtonDef sx={styles.button}
+              key={label}
+              label={label}
+              handlerClick={() => handleButtonClick(label)}
+              disabled={false}
+              variant={activeButton === label ? 'contained' : 'outlined'}
+            />
+          ))}
+        </ButtonGroup>
       </Box>
-   
-    );
+    </Box>
+  );
 };
 
-    export default SpecializationLevel;
+export default SpecializationLevel;
