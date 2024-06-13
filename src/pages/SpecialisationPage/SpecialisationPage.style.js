@@ -27,11 +27,13 @@ export const styles = {
   specialisationHardSkills: {
     gridColumn: '1/5',
     gridRow: '2/3',
+    width: '480px'
   },
   specialisationLevel: {
     gridColumn: '5/9',
     gridRow: '2/3',
     height: 201, //To be removed before merge
+    width: '480px'
   },
   specialisationInterviewParticipation: {
     gridColumn: '9/13',
