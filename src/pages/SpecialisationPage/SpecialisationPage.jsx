@@ -3,6 +3,7 @@ import { Box, Container, Paper } from '@mui/material';
 import { styles } from './SpecialisationPage.style';
 import SpecialisationTemplate from '../../Templates/SpecialisationTemplate';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
+import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel'
 
 const SpecialisationPage = () => {
   return (
@@ -13,8 +14,8 @@ const SpecialisationPage = () => {
           <Paper sx={styles.specialisationTaxonomy}>
             <div>Specialization Taxonomy</div>
           </Paper>
-          <Paper sx={styles.specialisationLevel}>
-            <div>Specialization Level</div>
+          <Paper sx={styles.specializationLevel}>
+            <SpecializationLevel />
           </Paper>
           <Paper sx={styles.specialisationInterviewParticipation}>
             <div>Specialization: Interview Participation</div>
