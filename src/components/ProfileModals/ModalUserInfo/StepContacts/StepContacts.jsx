@@ -31,7 +31,6 @@ const StepContacts = () => {
 
   const valuesMap = contactsQuery.data.reduce((acc, contact) => {
     acc[typeNameMap[contact.type]] = contact.value;
-
     return acc;
   }, {});
 
@@ -44,26 +43,36 @@ const StepContacts = () => {
     phone: '',
     ...valuesMap,
   };
+
+  const addHttp = (url) => {
+    if (url && !/^https?:\/\//i.test(url)) {
+      return `http://${url}`;
+    }
+    return url;
+  };
+
   const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
     await postContactsUser({
       userId: userId,
       body: [
-        { type: SOCIAL_TYPES.TELEGRAM_LINK, value: telegram },
+        { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addHttp(telegram) },
         { type: SOCIAL_TYPES.EMAIL, value: mail },
-        { type: SOCIAL_TYPES.LINKEDIN_LINK, value: linkedIn },
-        { type: SOCIAL_TYPES.GITHUB_LINK, value: gitHub },
-        { type: SOCIAL_TYPES.BEHANCE_LINK, value: behance },
+        { type: SOCIAL_TYPES.LINKEDIN_LINK, value: addHttp(linkedIn) },
+        { type: SOCIAL_TYPES.GITHUB_LINK, value: addHttp(gitHub) },
+        { type: SOCIAL_TYPES.BEHANCE_LINK, value: addHttp(behance) },
         { type: SOCIAL_TYPES.PHONE_NUMBER, value: phone },
       ],
     });
 
     dispatch(closeModal({ modalName: 'openUserInfo' }));
   };
+
   const formik = useFormik({
     initialValues,
     validationSchema: StepContactsSchema,
     onSubmit,
   });
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.input100}>
