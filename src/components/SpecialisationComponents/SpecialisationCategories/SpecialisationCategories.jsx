@@ -5,6 +5,7 @@ import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
+import StarIcon from '@mui/icons-material/Star';
 
 const SpecialisationCategories = () => {
   //TODO ADD STORYBOOK for this COMPONENT
@@ -20,7 +21,11 @@ const SpecialisationCategories = () => {
       const index = specialisations.length + 1;
       if (index >= 5) return
       setSpecialisation((data) => [...data, index]);
-      console.log(specialisations);
+      console.log('Open Specialisation Modal to Add Specialisation');
+  }
+
+  const editSpecialisation = () => {
+    console.log('Open Specialisation Modal to Edit Specialisation');
   }
 
   return (
@@ -53,9 +58,12 @@ const SpecialisationCategories = () => {
               sx={styles.figure}
               className="figure"
             >
-              <Box sx={styles.specialisation_title}>
-                <Typography variant='h6'>Frontend Developer</Typography>
-                <Typography variant='subtitle2'>Level Junior</Typography>
+              <Box sx={styles.specialisation_title_star}>
+                <Box sx={styles.specialisation_title}>
+                  <Typography variant='h6'>Frontend Developer</Typography>
+                  <Typography variant='subtitle2'>Level Junior</Typography>
+                </Box>
+                <StarIcon sx={styles.star}/>
               </Box>
               <Box sx={styles.hardAndSoftSkills}>
                 <Box sx={styles.softSkills}>
@@ -66,7 +74,7 @@ const SpecialisationCategories = () => {
                   <Typography variant='caption3' sx={styles.skillsStatistic}>{t('specialisation.specialisation_hardSkills')}</Typography>
                   <Typography variant='body'>2/5</Typography>
                 </Box>
-                <IconButton>
+                <IconButton onClick={editSpecialisation}>
                   <EditIcon sx={styles.editSpecialisation_btn} />
                 </IconButton>
               </Box>

@@ -96,13 +96,21 @@ export const styles = {
       // borderLeft: '1px solid #FF0000',
     },
   },
+  specialisation_title_star: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
   specialisation_title: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     marginTop: theme.spacing(2),
     marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(5),
+    marginRight: theme.spacing(1),
     marginBottom: theme.spacing(3),
+  }),
+  star: (theme) => ({
+    marginTop: '12px',
+    color: theme.palette.action.active,
   }),
   hardAndSoftSkills: (theme) => ({
     marginLeft: theme.spacing(3),
