@@ -6,6 +6,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import CustomArrowCircleDownIcon from './CustomArrowCircleDownIcon';
 import CustomArrowCircleUpIcon from './CustomArrowCircleUpIcon.jsx';
 import SmallLinearProgressWithLabel from './SmallLinearProgressWithLabel.jsx';
+import { useTranslation } from 'react-i18next';
+
 
 const skills = [
   { name: 'Laravel', value: 5, icon: <CustomArrowCircleDownIcon /> },
@@ -19,11 +21,12 @@ const skills = [
 
 const HardSkills = () => {
   const averageMark = skills.reduce((acc, skill) => acc + skill.value, 0) / skills.length;
+  const { t } = useTranslation();
 
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.title}>
-        <Typography variant='h6'>{'Hard skills'}</Typography>
+        <Typography variant='h6'>{t('specialisation.hardSkills.title')}</Typography>
         <IconButton sx={styles.btnIcon} aria-label='Edit user information'>
           <EditIcon />
         </IconButton>
@@ -45,7 +48,7 @@ const HardSkills = () => {
       </Box>
 
       <Box sx={styles.markWrapper}>
-        <Typography variant='h6'>{'Average mark:'}</Typography>
+        <Typography variant='h6'>{t('specialisation.hardSkills.averageMark')}</Typography>
         <Typography sx={styles.mark} variant='h6'>{`${averageMark.toFixed(1)}/10`}</Typography>
       </Box>
     </Box>
