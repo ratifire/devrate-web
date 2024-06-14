@@ -21,8 +21,8 @@ const HardSkills = () => {
   const averageMark = skills.reduce((acc, skill) => acc + skill.value, 0) / skills.length;
 
   return (
-    <Box sx={{ maxWidth: '480px', padding: '20px' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+    <Box sx={styles.wrapper}>
+      <Box sx={styles.title}>
         <Typography variant='h6'>{'Hard skills'}</Typography>
         <IconButton sx={styles.btnIcon} aria-label='Edit user information'>
           <EditIcon />
@@ -32,21 +32,21 @@ const HardSkills = () => {
       <Box>
         {skills.map((skill, index) => (
           <React.Fragment key={index}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Box sx={styles.skillContainer}>
+              <Box sx={styles.iconWrapper}>
                 {skill.icon}
                 <Typography variant='subtitle2'>{skill.name}</Typography>
               </Box>
               <SmallLinearProgressWithLabel value={skill.value} />
             </Box>
-            <Divider sx={{ marginY: '10px', backgroundColor: '#69696B' }} />
+            <Divider sx={styles.divider} />
           </React.Fragment>
         ))}
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px' }}>
+      <Box sx={styles.markWrapper}>
         <Typography variant='h6'>{'Average mark:'}</Typography>
-        <Typography sx={{ color: '#B78AF7' }} variant='h6'>{`${averageMark.toFixed(1)}/10`}</Typography>
+        <Typography sx={styles.mark} variant='h6'>{`${averageMark.toFixed(1)}/10`}</Typography>
       </Box>
     </Box>
   );

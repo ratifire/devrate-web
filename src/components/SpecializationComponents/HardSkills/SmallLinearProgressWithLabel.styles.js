@@ -1,15 +1,18 @@
 export const styles = {
-    progress: {
+    progress: (theme) => ({
       height: 6,
-      backgroundColor:'#69696B',
-      borderRadius: 2.5,
-      
-      
+      backgroundColor: theme.palette.background.level3,
+      borderRadius: theme.shape.borderRadius,
+      color: theme.palette.primary['400'],
       '>span': {
-        borderRadius: '5px',
+        borderRadius: theme.shape.borderRadius,
       },
-    },
+    }),
     text: (theme) => ({
       color: theme.palette.text.secondary,
     }),
+    wrapper: {
+      display: 'flex', 
+      alignItems: 'center'
+    },
   };

@@ -10,7 +10,7 @@ const SmallLinearProgressWithLabel = (props) => {
   const boxStyles = value === 10 ? { width: 70, mr: 2 } : { width: 70, mr: 3 };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <Box sx={styles.wrapper}>
       <Box sx={boxStyles}>
         <LinearProgress sx={styles.progress} variant='determinate' value={value * 10} />
       </Box>
