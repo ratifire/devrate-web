@@ -234,11 +234,15 @@ export const en = {
         },
       },
     },
-    specialisation:{
+    specialisation: {
       specialisation_title: 'Specialisations',
       specialisation_btn_make_main: 'Make the main',
       specialisation_hardSkills: 'HARDSKILLS',
       specialisation_softSkills: 'SOFTSKILLS',
+      level: {
+        title:'Level',
+        description: 'Improve your skills to move onto the next level of in-line specialisation.'
+      },
     },
     language: {
       level: {
@@ -259,12 +263,6 @@ export const en = {
         pl: 'Poland',
         cs: 'Czech',
       },
-    },
-    specialisation:{
-      level: {
-        title:'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.'
-      }
     },
   },
 };

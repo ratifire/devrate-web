@@ -237,7 +237,11 @@ export const uk = {
     },
     specialisation:{
       specialisation_title: 'Спеціалізації',
-      specialisation_btn_make_main: 'Зробити основною'
+      specialisation_btn_make_main: 'Зробити основною',
+      level: {
+        title:'Рівень',
+        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
+      },
     },
     language: {
       level: {
@@ -258,12 +262,6 @@ export const uk = {
         pl: 'Польська',
         cs: 'Чеська',
       },
-    },
-    specialisation:{
-      level: {
-        title:'Рівень',
-        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
-      }
     },
   },
 };
