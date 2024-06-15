@@ -5,21 +5,25 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from './StepPersonalSchema';
-import { usePutPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
+import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
 import { ButtonDef } from '../../../Buttons';
 import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 
 const StepPersonal = () => {
   const { data: userCountries } = useGetCountryListQuery();
-  const userData = useSelector((state) => state.auth.user.data);
+  const { data: userData } = useSelector(selectCurrentUser);
+
+  const { data: info } = useGetPersonalUserQuery(userData.id);
+  const { firstName, lastName, city, country, status, description } = info;
 
   const initialValues = {
-    firstName: userData.firstName || '',
-    lastName: userData.lastName || '',
-    city: userData.city || '',
-    country: userData.country || '',
-    status: userData.status || '',
-    description: userData.description || '',
+    firstName: firstName || userData.firstName || '',
+    lastName: lastName || userData.lastName || '',
+    city: city || userData.city || '',
+    country: country || userData.country || '',
+    status: status || userData.status || '',
+    description: description || userData.description || '',
   };
 
   const [putPersonalUser] = usePutPersonalUserMutation();

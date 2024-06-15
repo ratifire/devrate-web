@@ -46,6 +46,7 @@ export const styles = {
     paddingY: '20px',
     paddingX: '12px',
     width: '100%',
+    border: 'none',
     backgroundColor: 'transparent',
     '&:hover': {
       backgroundColor: 'transparent',

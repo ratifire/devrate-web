@@ -10,6 +10,8 @@ import UserMenu from '../UserMenu';
 import NotificationList from '../NotificationList';
 import { useSelector } from 'react-redux';
 import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
+import { selectCurrentUser } from '../../../redux/auth/authSlice';
+import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 
 const initialValues = {
   query: '',
@@ -47,9 +49,12 @@ const notifications = [
 ];
 
 const ProfileHeader = () => {
-  const {  id, firstName, lastName } = useSelector((state) => state.auth.user.data);
-
+  const { data: info } = useSelector(selectCurrentUser);
+  const { id, firstName, lastName } = info;
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+
+  const { data: personalData } = useGetPersonalUserQuery(id);
+  const { firstName: getFirstName, lastName: getLastName } = personalData;
 
   const { data } = useGetAvatarUserQuery(id);
   const userAvatar = data || {};
@@ -107,12 +112,16 @@ const ProfileHeader = () => {
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
-          <UserAvatar userName={`${firstName} ${lastName}`} src={userPicture} size='sm' />
+          <UserAvatar
+            userName={`${getFirstName || firstName} ${getLastName || lastName}`}
+            src={userPicture}
+            size='sm'
+          />
         </Button>
         <UserMenu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
     </AppBar>
   );
-}
+};
 
 export default ProfileHeader;
