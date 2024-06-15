@@ -52,9 +52,8 @@ const ProfileHeader = () => {
   const { data: info } = useSelector(selectCurrentUser);
   const { id, firstName, lastName } = info;
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-
   const { data: personalData } = useGetPersonalUserQuery(id);
-  const { firstName: getFirstName, lastName: getLastName } = personalData;
+  const { firstName: getFirstName, lastName: getLastName } = personalData || {};
 
   const { data } = useGetAvatarUserQuery(id);
   const userAvatar = data || {};
