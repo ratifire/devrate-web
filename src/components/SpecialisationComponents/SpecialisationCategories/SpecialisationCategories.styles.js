@@ -39,8 +39,8 @@ export const styles = {
   figure: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    height: '138px',
-    width: '228px',
+    minHeight: '138px',
+    minWidth: '228px',
     borderRadius: '10px',
     position: 'relative',
     backgroundColor: theme.palette.neutral[600],
@@ -78,7 +78,7 @@ export const styles = {
     // backgroundColor: 'red',
     height: 43,
     width: 47,
-    top: 95,
+    bottom: 0,
     right: 0,
     borderRadius: '10px',
     '&::before': {
@@ -99,6 +99,7 @@ export const styles = {
   specialisation_title_star: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   specialisation_title: (theme) => ({
     display: 'flex',
@@ -110,6 +111,7 @@ export const styles = {
   }),
   star: (theme) => ({
     marginTop: '12px',
+    marginRight: '16px',
     color: theme.palette.action.active,
   }),
   hardAndSoftSkills: (theme) => ({
@@ -131,9 +133,10 @@ export const styles = {
     letterSpacing: '0.16px',
     fontSize: '11px'
   },
-  editSpecialisation_btn: (theme) => ({
-    marginLeft: '8px',
-    marginTop: '7px',
+  editSpecialisation_btn: {
+    position:'absolute', bottom: '-8px', right: '-6px'
+  },
+  editSpecialisation: (theme) => ({
     zIndex: 1,
     border: '1px solid #444446',
     borderRadius: '50%',
