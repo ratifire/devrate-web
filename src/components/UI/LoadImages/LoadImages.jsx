@@ -27,7 +27,6 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
   const { t } = useTranslation();
 
   const handleWheel = (e) => {
-    e.preventDefault();
     const delta = e.deltaY;
     const scaleFactor = delta > 0 ? -0.1 : 0.1;
     const newScale = scale + scaleFactor;
