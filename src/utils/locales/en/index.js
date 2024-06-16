@@ -237,8 +237,8 @@ export const en = {
     specialisation: {
       specialisation_title: 'Specialisations',
       specialisation_btn_make_main: 'Make the main',
-      specialisation_hardSkills: 'HARDSKILLS',
-      specialisation_softSkills: 'SOFTSKILLS',
+      specialisation_hardSkills: 'Hard Skills',
+      specialisation_softSkills: 'Soft Skills',
       level: {
         title:'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.'

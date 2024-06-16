@@ -83,11 +83,11 @@ const SpecialisationCategories = () => {
               </Box>
               <Box sx={styles.hardAndSoftSkills}>
                 <Box sx={styles.softSkills}>
-                  <Typography variant='caption3' sx={styles.skillsStatistic}>{t('specialisation.specialisation_softSkills')}</Typography>
+                  <Typography variant='caption3' sx={styles.skillsStatistic}>{t('specialisation.specialisation_softSkills').toUpperCase().split(' ').join('')}</Typography>
                   <Typography variant='body'>3/5</Typography>
                 </Box>
                 <Box sx={styles.hardSkills}>
-                  <Typography variant='caption3' sx={styles.skillsStatistic}>{t('specialisation.specialisation_hardSkills')}</Typography>
+                  <Typography variant='caption3' sx={styles.skillsStatistic}>{t('specialisation.specialisation_hardSkills').toUpperCase().split(' ').join('')}</Typography>
                   <Typography variant='body'>2/5</Typography>
                 </Box>
                 <IconButton sx={styles.editSpecialisation_btn} onClick={editSpecialisation}>
