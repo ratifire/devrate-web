@@ -1,22 +1,18 @@
-// HardSkills.jsx
 import React from 'react';
-import { Box, Typography, IconButton, Divider } from '@mui/material';
+import { Box, Typography, IconButton } from '@mui/material';
 import { styles } from './HardSkills.styles';
 import EditIcon from '@mui/icons-material/Edit';
-import CustomArrowCircleDownIcon from './CustomArrowCircleDownIcon';
-import CustomArrowCircleUpIcon from './CustomArrowCircleUpIcon.jsx';
-import SmallLinearProgressWithLabel from './SmallLinearProgressWithLabel.jsx';
+import SkillItem from './SkillItem';
 import { useTranslation } from 'react-i18next';
 
-
 const skills = [
-  { name: 'Laravel', value: 5, icon: <CustomArrowCircleDownIcon /> },
-  { name: 'Symphony', value: 9, icon: <CustomArrowCircleUpIcon /> },
-  { name: 'Zend Framework', value: 3, icon: <CustomArrowCircleDownIcon /> },
-  { name: 'PostgreSQL', value: 8, icon: <CustomArrowCircleUpIcon /> },
-  { name: 'RESTful API', value: 8, icon: <CustomArrowCircleUpIcon /> },
-  { name: 'GitHub/GitLab/Bitbucket', value: 7, icon: <CustomArrowCircleDownIcon /> },
-  { name: 'Docker', value: 10, icon: <CustomArrowCircleUpIcon /> },
+  { name: 'Laravel', value: 5 },
+  { name: 'Symphony', value: 9 },
+  { name: 'Zend Framework', value: 3 },
+  { name: 'PostgreSQL', value: 8 },
+  { name: 'RESTful API', value: 8 },
+  { name: 'GitHub/GitLab/Bitbucket', value: 7 },
+  { name: 'Docker', value: 10 },
 ];
 
 const HardSkills = () => {
@@ -34,16 +30,7 @@ const HardSkills = () => {
 
       <Box>
         {skills.map((skill, index) => (
-          <React.Fragment key={index}>
-            <Box sx={styles.skillContainer}>
-              <Box sx={styles.iconWrapper}>
-                {skill.icon}
-                <Typography variant='subtitle2'>{skill.name}</Typography>
-              </Box>
-              <SmallLinearProgressWithLabel value={skill.value} />
-            </Box>
-            <Divider sx={styles.divider} />
-          </React.Fragment>
+          <SkillItem key={index} name={skill.name} value={skill.value} />
         ))}
       </Box>
 

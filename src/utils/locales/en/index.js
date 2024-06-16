@@ -261,7 +261,8 @@ export const en = {
       },
       hardSkills:{
         title:'Hard skills',
-      }
+        averageMark: 'Average mark:'
+      },
     },
   },
 };
