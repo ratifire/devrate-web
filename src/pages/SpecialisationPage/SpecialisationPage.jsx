@@ -3,7 +3,7 @@ import { Box, Container, Paper } from '@mui/material';
 import { styles } from './SpecialisationPage.style';
 import SpecialisationTemplate from '../../Templates/SpecialisationTemplate';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
-import SpecialisationCategories from '../../components/SpecialisationComponents/SpecialisationCategories';
+import SpecialisationCategories from '../../components/SpecializationComponents/SpecialisationCategories';
 import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel'
 
 const SpecialisationPage = () => {
