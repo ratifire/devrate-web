@@ -1,7 +1,7 @@
 import { green, lime } from '@mui/material/colors';
 
 const getDesignTokens = (mode) => ({
-  spacing: [0, 4, 8, 16, 24], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
+  spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
   shape: {
     borderRadius: 4, // borderRadius:1 = 4px borderRadius:2 = 8px
   },

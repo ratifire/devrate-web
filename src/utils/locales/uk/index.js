@@ -235,6 +235,16 @@ export const uk = {
         },
       },
     },
+    specialisation:{
+      specialisation_title: 'Спеціалізації',
+      specialisation_btn_make_main: 'Зробити основною',
+      specialisation_hardSkills: 'Hard Skills',
+      specialisation_softSkills: 'Soft Skills',
+      level: {
+        title:'Рівень',
+        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
+      },
+    },
     language: {
       level: {
         a1: 'Початковий рівень: A1',
@@ -254,12 +264,6 @@ export const uk = {
         pl: 'Польська',
         cs: 'Чеська',
       },
-    },
-    specialisation:{
-      level: {
-        title:'Рівень',
-        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
-      }
     },
   },
 };
