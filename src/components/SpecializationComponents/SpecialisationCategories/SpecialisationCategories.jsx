@@ -11,8 +11,6 @@ import { useGetSpecialisationByUserIdQuery } from '../../../redux/specialisation
 import { setSelectedSpecialisation } from '../../../redux/specialisation/specialisationSlice';
 
 const SpecialisationCategories = () => {
-  //TODO ADD STORYBOOK for this COMPONENT
-
   const dispatch = useDispatch();
   const selectedSpecialisation = useSelector((state) => state.specialisation.selectedSpecialisation);
   console.log('Data from Redux Slice', selectedSpecialisation);
