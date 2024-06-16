@@ -21,7 +21,7 @@ export const styles = {
   }),
   make_main_btn: (theme) => ({
     color: theme.palette.action.active,
-    borderColor: theme.palette.action.active,
+    border: `1px solid ${theme.palette.action.active}`,
     minWidth: '216px',
     padding: '12px 16px',
     textTransform: 'none',
