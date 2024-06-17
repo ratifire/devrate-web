@@ -1,7 +1,7 @@
 export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
-    // flexWrap: 'wrap',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
     padding: theme.spacing(4),
   }),
@@ -39,8 +39,8 @@ export const styles = {
   figure: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '138px',
-    minWidth: '228px',
+    height: '138px',
+    width: '228px',
     borderRadius: '10px',
     position: 'relative',
     backgroundColor: theme.palette.neutral[600],
@@ -108,6 +108,7 @@ export const styles = {
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(1),
     marginBottom: theme.spacing(3),
+    zIndex: 1,
   }),
   star: (theme) => ({
     marginTop: '12px',

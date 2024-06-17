@@ -1,6 +1,6 @@
 import React from 'react';
 import { styles } from './SpecialisationCategories.styles';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Tooltip, Typography } from '@mui/material';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
@@ -74,7 +74,11 @@ const SpecialisationCategories = () => {
             >
               <Box sx={styles.specialisation_title_star}>
                 <Box sx={styles.specialisation_title}>
-                  <Typography variant='h6'>{name}</Typography>
+                  <Tooltip title={name.replace(/_/g, ' ')}>
+                    <Typography variant='h6'>
+                      {name.length >= 14 && main ? name.slice(0, 14).replace(/_/g, ' ') + '...' : name.slice(0, 18).replace(/_/g, ' ') + '...'}
+                    </Typography>
+                  </Tooltip>
                   <Typography variant='subtitle2'>Level Junior</Typography>
                 </Box>
                 {main && <StarIcon sx={styles.star}/>}
