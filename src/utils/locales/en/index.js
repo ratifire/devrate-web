@@ -263,6 +263,9 @@ export const en = {
         title:'Hard skills',
         averageMark: 'Average mark:'
       },
+      skillsModal: {
+        title: 'Skills'
+      }
     },
   },
 };

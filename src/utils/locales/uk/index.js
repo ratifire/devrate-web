@@ -263,7 +263,10 @@ export const uk = {
       hardSkills:{
         title:'Хард скіли',
         averageMark: 'Середня оцінка:'
-      }
+      },
+      skillsModal: {
+        title: 'Навички'
+      },
     },
   },
 };
