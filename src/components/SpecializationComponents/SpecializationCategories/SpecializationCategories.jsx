@@ -9,6 +9,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice';
 import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
+import { openModal } from '../../../redux/modal/modalSlice';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const SpecializationCategories = () => {
   const handlerAddSpecializations = () => {
       if (specializations.length >= 4) return
       console.log('Open Specialisation Modal to Add Specialisation');
+      dispatch(openModal({modalName: 'openAddSpecialization'}));
   }
 
   const editSpecialization = () => {
