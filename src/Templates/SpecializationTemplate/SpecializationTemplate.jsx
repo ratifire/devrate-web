@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SpecialisationTemplate = ({ children }) => {
+const SpecializationTemplate = ({ children }) => {
   return (
     <div className='specialisation'>
       {children}
@@ -9,8 +9,8 @@ const SpecialisationTemplate = ({ children }) => {
   );
 };
 
-SpecialisationTemplate.propTypes = {
+SpecializationTemplate.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default SpecialisationTemplate;
+export default SpecializationTemplate;

@@ -157,7 +157,7 @@ export const uk = {
       userMenu: {
         profile: 'Профіль',
         schedule: 'Розклад',
-        specialisations: 'Спеціалізації',
+        specializations: 'Спеціалізації',
         interviews: 'Співбесіди',
         settings: 'Налаштування',
         bookmark: 'Збережене',
@@ -235,11 +235,11 @@ export const uk = {
         },
       },
     },
-    specialisation:{
-      specialisation_title: 'Спеціалізації',
-      specialisation_btn_make_main: 'Зробити основною',
-      specialisation_hardSkills: 'Hard Skills',
-      specialisation_softSkills: 'Soft Skills',
+    specialization:{
+      specialization_title: 'Спеціалізації',
+      specialization_btn_make_main: 'Зробити основною',
+      specialization_hardSkills: 'Hard Skills',
+      specialization_softSkills: 'Soft Skills',
       level: {
         title:'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'

@@ -1,9 +1,9 @@
 import { apiSlice } from '../services/api/apiSlice';
 
-export const SpecialisationApiSlice = apiSlice.injectEndpoints({
+export const SpecializationApiSlice = apiSlice.injectEndpoints({
   tagTypes: ['Specialisation'],
   endpoints: (builder) => ({
-    getSpecialisationByUserId: builder.query({
+    getSpecializationByUserId: builder.query({
       query: (userId) => `/users/${userId}/specializations`,
       providesTags: (result) =>
         result
@@ -15,5 +15,5 @@ export const SpecialisationApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetSpecialisationByUserIdQuery,
-} = SpecialisationApiSlice;
+  useGetSpecializationByUserIdQuery,
+} = SpecializationApiSlice;

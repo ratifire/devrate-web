@@ -13,7 +13,7 @@ import { authReducer } from '../auth/authSlice';
 import { avatarReducer } from '../user/avatar/avatarSlice';
 import { personalReducer } from '../user/personal/personalSlice';
 import { educationReducer } from '../user/education/educationSlice';
-import specialisationSliceReducer from '../specialisation/specialisationSlice';
+import specializationSliceReducer from '../specialization/specializationSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -39,7 +39,7 @@ const rootReducer = {
   auth: persistReducer(authPersistConfig, authReducer),
   avatar: persistReducer(avatarPersistConfig, avatarReducer),
   personal: persistReducer(personalPersistConfig, personalReducer),
-  specialisation: specialisationSliceReducer,
+  specialisation: specializationSliceReducer,
 };
 
 const store = configureStore({

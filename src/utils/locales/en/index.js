@@ -156,7 +156,7 @@ export const en = {
       userMenu: {
         profile: 'Profile',
         schedule: 'Schedule',
-        specialisations: 'Specialisations',
+        specializations: 'Specializations',
         interviews: 'Interviews',
         settings: 'Settings',
         bookmark: 'Bookmarks',
@@ -234,11 +234,11 @@ export const en = {
         },
       },
     },
-    specialisation: {
-      specialisation_title: 'Specialisations',
-      specialisation_btn_make_main: 'Make the main',
-      specialisation_hardSkills: 'Hard Skills',
-      specialisation_softSkills: 'Soft Skills',
+    specialization: {
+      specialization_title: 'Specialisations',
+      specialization_btn_make_main: 'Make the main',
+      specialization_hardSkills: 'Hard Skills',
+      specialization_softSkills: 'Soft Skills',
       level: {
         title:'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.'

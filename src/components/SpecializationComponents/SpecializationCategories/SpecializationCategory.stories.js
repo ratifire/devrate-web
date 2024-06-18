@@ -1,10 +1,10 @@
 import React from 'react';
-import SpecialisationCategories from './SpecialisationCategories';
+import SpecializationCategories from './SpecializationCategories';
 import { decorators } from '../../../../.storybook/preview';
 
 export default {
-  title: 'Specialisation/SpecialisationCategories',
-  component: SpecialisationCategories,
+  title: 'Specialization/SpecializationCategories',
+  component: SpecializationCategories,
   argTypes: {
     width: { control: 'text' },
     height: { control: 'text' },
@@ -16,7 +16,7 @@ export default {
   decorators: decorators,
 };
 
-export const Default = (args) => <SpecialisationCategories {...args} />;
+export const Default = (args) => <SpecializationCategories {...args} />;
 Default.args = {
   width: 'auto',
   height: '170px',

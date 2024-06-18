@@ -2,7 +2,7 @@ export default {
   home: '/',
   profile: '/profile',
   schedule:'/schedule',
-  specialisations: '/specialisations',
+  specializations: '/specializations',
   interviews: '/interviews',
   settings:'/settings',
   bookmark: '/bookmark',
