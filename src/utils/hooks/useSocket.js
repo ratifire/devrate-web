@@ -12,6 +12,7 @@ export function useSocket(url, onOpen) {
 
     return () => {
       socket?.close();
+      setSocket(null);
     }
   }, []);
 }
