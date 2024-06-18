@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const SpecializationTemplate = ({ children }) => {
   return (
-    <div className='specialisation'>
+    <div className='specialization'>
       {children}
     </div>
   );
