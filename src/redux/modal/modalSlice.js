@@ -12,6 +12,7 @@ const modalSlice = createSlice({
     openExperience: false,
     modalData: null,
     achievement: false,
+    openAddSpecialization: false,
   },
   reducers: {
     openModal: (state, action) => {

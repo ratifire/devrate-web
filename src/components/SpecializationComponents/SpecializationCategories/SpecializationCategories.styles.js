@@ -1,15 +1,15 @@
 export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
-    // flexWrap: 'wrap',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
     padding: theme.spacing(4),
   }),
-  specialisation_left_box: {
+  specialization_left_box: {
     display: 'flex',
     flexDirection: 'column',
   },
-  specialisation_right_box: (theme) => ({
+  specialization_right_box: (theme) => ({
     minWidth: '890px',
     display: 'flex',
     justifyContent: 'left',
@@ -29,7 +29,7 @@ export const styles = {
       color: theme.palette.primary[500],
     },
   }),
-  add_specialisation_btn: (theme) => ({
+  add_specialization_btn: (theme) => ({
     width: '134px',
     height: '134px',
     backgroundColor: theme.palette.neutral[600],
@@ -39,8 +39,8 @@ export const styles = {
   figure: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '138px',
-    minWidth: '228px',
+    height: '138px',
+    width: '228px',
     borderRadius: '10px',
     position: 'relative',
     backgroundColor: theme.palette.neutral[600],
@@ -96,18 +96,19 @@ export const styles = {
       // borderLeft: '1px solid #FF0000',
     },
   },
-  specialisation_title_star: {
+  specialization_title_star: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  specialisation_title: (theme) => ({
+  specialization_title: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     marginTop: theme.spacing(2),
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(1),
     marginBottom: theme.spacing(3),
+    zIndex: 1,
   }),
   star: (theme) => ({
     marginTop: '12px',
@@ -133,10 +134,10 @@ export const styles = {
     letterSpacing: '0.16px',
     fontSize: '11px'
   },
-  editSpecialisation_btn: {
+  editSpecialization_btn: {
     position:'absolute', bottom: '-8px', right: '-6px'
   },
-  editSpecialisation: (theme) => ({
+  editSpecialization: (theme) => ({
     zIndex: 1,
     border: '1px solid #444446',
     borderRadius: '50%',

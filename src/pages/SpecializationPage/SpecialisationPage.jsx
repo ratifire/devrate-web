@@ -1,14 +1,14 @@
 import React from 'react';
 import { Box, Container, Paper } from '@mui/material';
 import { styles } from './SpecialisationPage.style';
-import SpecialisationTemplate from '../../Templates/SpecialisationTemplate';
+import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
-import SpecialisationCategories from '../../components/SpecializationComponents/SpecialisationCategories';
+import SpecialisationCategories from '../../components/SpecializationComponents/SpecializationCategories';
 import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel'
 
-const SpecialisationPage = () => {
+const SpecializationPage = () => {
   return (
-    <SpecialisationTemplate>
+    <SpecializationTemplate>
       <ProfileHeader/>
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
@@ -46,8 +46,8 @@ const SpecialisationPage = () => {
           </Paper>
         </Box>
       </Container>
-    </SpecialisationTemplate>
+    </SpecializationTemplate>
   );
 };
 
-export default SpecialisationPage;
+export default SpecializationPage;
