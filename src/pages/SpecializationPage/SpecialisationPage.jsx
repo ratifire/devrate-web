@@ -3,6 +3,9 @@ import { Box, Container, Paper } from '@mui/material';
 import { styles } from './SpecialisationPage.style';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
+import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel';
+import HardSkills from '../../components/SpecializationComponents/HardSkills/HardSkills';
+
 import SpecialisationCategories from '../../components/SpecializationComponents/SpecializationCategories';
 import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel'
 
@@ -22,7 +25,7 @@ const SpecializationPage = () => {
             <div>Specialization: Interview Participation</div>
           </Paper>
           <Paper sx={styles.specialisationHardSkills}>
-            <div>Hard Skills</div>
+            <HardSkills />
           </Paper>
           <Paper sx={styles.specialisationSoftSkills}>
             <div>Soft Skills</div>

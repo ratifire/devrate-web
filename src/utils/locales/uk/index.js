@@ -265,5 +265,15 @@ export const uk = {
         cs: 'Чеська',
       },
     },
+    specialisation:{
+      level: {
+        title:'Рівень',
+        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
+      },
+      hardSkills:{
+        title:'Хард скіли',
+        averageMark: 'Середня оцінка:'
+      }
+    },
   },
 };
