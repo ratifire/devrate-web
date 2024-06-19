@@ -3,14 +3,11 @@ import { Box, Container, Paper } from '@mui/material';
 import { styles } from './SpecialisationPage.style';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
-<<<<<<< HEAD:src/pages/SpecialisationPage/SpecialisationPage.jsx
-import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel';
-import HardSkills from '../../components/SpecializationComponents/HardSkills/HardSkills';
+import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel';
+import HardSkills from '../../components/SpecializationComponents/HardSkills';
 
-=======
 import SpecialisationCategories from '../../components/SpecializationComponents/SpecializationCategories';
-import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel'
->>>>>>> main:src/pages/SpecializationPage/SpecialisationPage.jsx
+import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel'
 
 const SpecializationPage = () => {
   return (
