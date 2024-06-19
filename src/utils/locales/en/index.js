@@ -264,7 +264,7 @@ export const en = {
         cs: 'Czech',
       },
     },
-<<<<<<< HEAD
+    
     specialisation:{
       level: {
         title:'Level',
@@ -275,7 +275,5 @@ export const en = {
         averageMark: 'Average mark:'
       },
     },
-=======
->>>>>>> main
   },
 };
