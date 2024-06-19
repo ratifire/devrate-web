@@ -248,6 +248,18 @@ export const en = {
         outcome: 'An interview was conducted',
         makeIncome: 'Schedule an interview',
         makeOutcome: 'Become an interviewer',
+      },
+      scheduleModal: {
+        name: 'Name',
+        specialization: 'Specialization',
+        level: 'Level',
+        role: 'Role',
+        date: 'Date',
+        startTime: 'Start Time',
+        endTime: 'End Time',
+        socialLinks: 'Social Links',
+        schedule: 'Schedule',
+        scheduleInterview: 'Schedule Interview',
       }
     },
     language: {
