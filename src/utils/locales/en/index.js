@@ -264,11 +264,8 @@ export const en = {
         cs: 'Czech',
       },
     },
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
-    specialisation:{
+    
+    specialisation: {
       level: {
         title:'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.'
@@ -281,10 +278,5 @@ export const en = {
         title: 'Skills'
       }
     },
-<<<<<<< HEAD
-=======
-=======
->>>>>>> main
->>>>>>> main
   },
 };
