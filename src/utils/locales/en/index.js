@@ -156,7 +156,7 @@ export const en = {
       userMenu: {
         profile: 'Profile',
         schedule: 'Schedule',
-        specialisations: 'Specialisations',
+        specializations: 'Specializations',
         interviews: 'Interviews',
         settings: 'Settings',
         bookmark: 'Bookmarks',
@@ -232,6 +232,16 @@ export const en = {
           endDate: 'End Date',
           required: 'This is a required field',
         },
+      },
+    },
+    specialization: {
+      specialization_title: 'Specialisations',
+      specialization_btn_make_main: 'Make the main',
+      specialization_hardSkills: 'Hard Skills',
+      specialization_softSkills: 'Soft Skills',
+      level: {
+        title:'Level',
+        description: 'Improve your skills to move onto the next level of in-line specialisation.'
       },
     },
     language: {

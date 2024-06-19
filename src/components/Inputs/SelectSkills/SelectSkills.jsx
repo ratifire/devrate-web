@@ -5,7 +5,6 @@ import { styles } from './SelectSkills.styles';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PropTypes from 'prop-types';
-import { useGetDefLanguageQuery } from '../../../redux/services/defaultLanguage/defaultLanguageApiSlice';
 
 const SelectSkills = ({
   variant,
@@ -18,8 +17,19 @@ const SelectSkills = ({
   const id = uuid();
   const { t } = useTranslation();
 
-  const { data: language } = useGetDefLanguageQuery('language-proficiency-names.json');
-  const languagesArray = language ? Object.entries(language).map(([name, id]) => ({ id, name })) : [];
+  // Hardcoded list of popular programming languages
+  const languagesArray = [
+    { id: 'javascript', name: 'JavaScript' },
+    { id: 'python', name: 'Python' },
+    { id: 'java', name: 'Java' },
+    { id: 'csharp', name: 'C#' },
+    { id: 'cpp', name: 'C++' },
+    { id: 'ruby', name: 'Ruby' },
+    { id: 'typescript', name: 'TypeScript' },
+    { id: 'php', name: 'PHP' },
+    { id: 'swift', name: 'Swift' },
+    { id: 'go', name: 'Go' },
+  ];
 
   const handleLanguageSelectChange = (event) => {
     const selectedLang = event.target.value;
@@ -45,12 +55,11 @@ const SelectSkills = ({
           },
         }}
       >
-        {languagesArray.length > 0 &&
-          languagesArray.map(({ id }) => (
-            <MenuItem key={id} value={id} sx={styles.menuItem}>
-              {t(`language.name.${id}`)}
-            </MenuItem>
-          ))}
+        {languagesArray.map(({ id, name }) => (
+          <MenuItem key={id} value={name} sx={styles.menuItem}>
+            {name}
+          </MenuItem>
+        ))}
       </Select>
       {errorLanguage && (
         <FormHelperText id={id} sx={styles.textHelper}>

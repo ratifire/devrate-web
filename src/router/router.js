@@ -3,7 +3,7 @@ import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
 import RequireAuth from '../redux/auth/RequireAuth';
 import ProfilePage from '../pages/ProfilePage';
-import SpecialisationPage from '../pages/SpecialisationPage';
+import SpecializationPage from '../pages/SpecializationPage';
 import React from 'react';
 import ToastLayout from '../layouts/ToastLayout/ToastLayout';
 import navigationLinks from './links';
@@ -26,8 +26,8 @@ const router = createBrowserRouter([
             element: <ProfilePage />,
           },
           {
-            path: navigationLinks.specialisations,
-            element: <SpecialisationPage />,
+            path: navigationLinks.specializations,
+            element: <SpecializationPage />,
           },
         ],
       },

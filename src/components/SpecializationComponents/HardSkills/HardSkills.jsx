@@ -4,7 +4,7 @@ import { styles } from './HardSkills.styles';
 import EditIcon from '@mui/icons-material/Edit';
 import SkillItem from './SkillItem';
 import { useTranslation } from 'react-i18next';
-import SkillsModal from '../SpecializationModal/SkillsModal/SkillsModal';
+import SkillsModal from '../../SpecializationModals/SkillsModal/SkillsModal';
 
 const skills = [
   { name: 'Laravel', value: 5 },

@@ -16,10 +16,10 @@ const SpecializationLevel = () => {
   return (
     <Box sx={styles.contentWrapper}>
       <Typography variant='h6' sx={styles.title}>
-        {t('specialisation.level.title')}
+        {t('specialization.level.title')}
       </Typography>
       <Typography variant='subtitle2' sx={styles.description}>
-        {t('specialisation.level.description')}
+        {t('specialization.level.description')}
       </Typography>
       <Box>
         <ButtonGroup
