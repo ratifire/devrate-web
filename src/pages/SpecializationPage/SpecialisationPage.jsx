@@ -1,11 +1,15 @@
 import React from 'react';
-import { Box, Container, Paper } from '@mui/material';
+import {Box, Container, Paper, Typography} from '@mui/material';
 import { styles } from './SpecialisationPage.style';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel';
 import HardSkills from '../../components/SpecializationComponents/HardSkills/HardSkills';
 import SpecialisationCategories from '../../components/SpecializationComponents/SpecializationCategories';
+import LevelChart from "../../components/SpecializationComponents/Statistics/LevelChart/LevelChart";
+import SkillsAssessmentChart
+  from "../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart";
+import HardSkillsChart from "../../components/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart";
 
 const SpecializationPage = () => {
   return (
@@ -29,16 +33,16 @@ const SpecializationPage = () => {
             <div>Soft Skills</div>
           </Paper>
           <Paper sx={styles.specialisationStatistics}>
-            <div>Statistics</div>
+            <Typography sx={styles.statisticTitle}>Статистика</Typography>
             <Box sx={styles.statisticWrapper}>
               <Paper sx={styles.level}>
-                <div>Statistic Level</div>
+                <LevelChart/>
               </Paper>
               <Paper sx={styles.averageSkillsScore}>
-                <div>Average score of skills</div>
+                <SkillsAssessmentChart/>
               </Paper>
               <Paper sx={styles.hardSkillsByProductivity}>
-                <div>Hard Skills by productivity</div>
+                <HardSkillsChart/>
               </Paper>
               <Paper sx={styles.interview}>
                 <div>Interview Statistics</div>
