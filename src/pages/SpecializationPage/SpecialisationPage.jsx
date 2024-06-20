@@ -5,6 +5,8 @@ import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel';
 import HardSkills from '../../components/SpecializationComponents/HardSkills';
+import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel';
+import HardSkills from '../../components/SpecializationComponents/HardSkills/HardSkills';
 import SpecialisationCategories from '../../components/SpecializationComponents/SpecializationCategories';
 
 const SpecializationPage = () => {
