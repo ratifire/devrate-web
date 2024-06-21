@@ -234,16 +234,6 @@ export const en = {
         },
       },
     },
-    specialization: {
-      specialization_title: 'Specialisations',
-      specialization_btn_make_main: 'Make the main',
-      specialization_hardSkills: 'Hard Skills',
-      specialization_softSkills: 'Soft Skills',
-      level: {
-        title:'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.'
-      },
-    },
     language: {
       level: {
         a1: 'Beginner: A1',
@@ -264,7 +254,30 @@ export const en = {
         cs: 'Czech',
       },
     },
-    
+
+    specialization: {
+      specialization_title: 'Specialisations',
+      specialization_btn_make_main: 'Make the main',
+      specialization_hardSkills: 'Hard Skills',
+      specialization_softSkills: 'Soft Skills',
+      level: {
+        title:'Level',
+        description: 'Improve your skills to move onto the next level of in-line specialisation.'
+      },
+      modal: {
+        specialization: {
+          modal_title: 'Specialisations',
+          title: 'Specialisation title',
+          title_placeholder: 'Front-End Developer',
+          title_long: 'Title too long',
+          title_short: 'Title too short',
+          level: 'Level',
+          main: 'Main specialisation',
+          required: 'This is a required field',
+        },
+      }
+    },
+    //Below code should be refactored and added to the code above
     specialisation:{
       level: {
         title:'Level',

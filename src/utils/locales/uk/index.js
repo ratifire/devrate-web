@@ -235,16 +235,7 @@ export const uk = {
         },
       },
     },
-    specialization:{
-      specialization_title: 'Спеціалізації',
-      specialization_btn_make_main: 'Зробити основною',
-      specialization_hardSkills: 'Hard Skills',
-      specialization_softSkills: 'Soft Skills',
-      level: {
-        title:'Рівень',
-        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
-      },
-    },
+
     language: {
       level: {
         a1: 'Початковий рівень: A1',
@@ -265,6 +256,31 @@ export const uk = {
         cs: 'Чеська',
       },
     },
+
+    specialization: {
+      specialization_title: 'Спеціалізації',
+      specialization_btn_make_main: 'Зробити основною',
+      specialization_hardSkills: 'Hard Skills',
+      specialization_softSkills: 'Soft Skills',
+      level: {
+        title:'Рівень',
+        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
+      },
+      modal: {
+        specialization: {
+          modal_title: 'Спеціалізації',
+          title: 'Назва спеціалізації',
+          title_placeholder: 'Front-End Розробник',
+          title_long: 'Назва занадто довга',
+          title_short: 'Назва занадто коротка',
+          level: 'Рівень',
+          main: 'Зробити основною',
+          required: "Це обов'язкове поле",
+        },
+      }
+    },
+
+    //Below code should be refactored and added to the code above
     specialisation:{
       level: {
         title:'Рівень',
