@@ -234,6 +234,49 @@ export const en = {
         },
       },
     },
+    specialization: {
+      specialization_title: 'Specialisations',
+      specialization_btn_make_main: 'Make the main',
+      specialization_hardSkills: 'Hard Skills',
+      specialization_softSkills: 'Soft Skills',
+      level: {
+        title:'Level',
+        description: 'Improve your skills to move onto the next level of in-line specialisation.'
+      },
+      hardSkills:{
+        title:'Hard skills',
+        averageMark: 'Average mark:'
+      },
+      modal: {
+        specialization: {
+          modal_title: 'Specializations',
+          title: 'Specialization title',
+          title_placeholder: 'Front-End Developer',
+          title_long: 'Title too long',
+          title_short: 'Title too short',
+          level: 'Level',
+          main: 'Main specialization',
+          required: 'This is a required field',
+        },
+      interview: {
+        income: 'An interview has been completed ',
+        outcome: 'An interview was conducted',
+        makeIncome: 'Schedule an interview',
+        makeOutcome: 'Become an interviewer',
+      },
+      scheduleModal: {
+        name: 'Name',
+        specialization: 'Specialization',
+        level: 'Level',
+        role: 'Role',
+        date: 'Date',
+        startTime: 'Start Time',
+        endTime: 'End Time',
+        socialLinks: 'Social Links',
+        schedule: 'Schedule',
+        scheduleInterview: 'Schedule Interview',
+      },
+    },
     language: {
       level: {
         a1: 'Beginner: A1',
@@ -254,39 +297,6 @@ export const en = {
         cs: 'Czech',
       },
     },
-
-    specialization: {
-      specialization_title: 'Specializations',
-      specialization_btn_make_main: 'Make the main',
-      specialization_hardSkills: 'Hard Skills',
-      specialization_softSkills: 'Soft Skills',
-      level: {
-        title:'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialization.'
-      },
-      modal: {
-        specialization: {
-          modal_title: 'Specializations',
-          title: 'Specialization title',
-          title_placeholder: 'Front-End Developer',
-          title_long: 'Title too long',
-          title_short: 'Title too short',
-          level: 'Level',
-          main: 'Main specialization',
-          required: 'This is a required field',
-        },
-      }
-    },
-    //Below code should be refactored and added to the code above
-    specialisation:{
-      level: {
-        title:'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.'
-      },
-      hardSkills:{
-        title:'Hard skills',
-        averageMark: 'Average mark:'
-      },
     },
   },
 };

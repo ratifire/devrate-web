@@ -235,6 +235,50 @@ export const uk = {
         },
       },
     },
+    specialization:{
+      specialization_title: 'Спеціалізації',
+      specialization_btn_make_main: 'Зробити основною',
+      specialization_hardSkills: 'Hard Skills',
+      specialization_softSkills: 'Soft Skills',
+      level: {
+        title:'Рівень',
+        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
+      },
+      hardSkills:{
+        title:'Хард скіли',
+        averageMark: 'Середня оцінка:'
+      },
+      modal: {
+        specialization: {
+          modal_title: 'Спеціалізації',
+          title: 'Назва спеціалізації',
+          title_placeholder: 'Front-End Розробник',
+          title_long: 'Назва занадто довга',
+          title_short: 'Назва занадто коротка',
+          level: 'Рівень',
+          main: 'Зробити основною',
+          required: "Це обов'язкове поле",
+        },
+      },
+      interview: {
+        income: 'Пройдено інтерв\'ю',
+        outcome: 'Проведено інтерв\'ю',
+        makeIncome: 'Запланувати інтерв’ю',
+        makeOutcome: 'Стати інтерв\'юером',
+      },
+      scheduleModal: {
+        name: 'Ім\'я',
+        specialization: 'Спеціалізація',
+        level: 'Рівень',
+        role: 'Роль',
+        date: 'Дата',
+        startTime: 'Час початку',
+        endTime: 'Час закінчення',
+        socialLinks: 'Додати посилання на соцмережі',
+        schedule: 'Запланувати',
+        scheduleInterview: 'Запланувати інтерв\'ю',
+      }
+    },
 
     language: {
       level: {
@@ -255,41 +299,6 @@ export const uk = {
         pl: 'Польська',
         cs: 'Чеська',
       },
-    },
-
-    specialization: {
-      specialization_title: 'Спеціалізації',
-      specialization_btn_make_main: 'Зробити основною',
-      specialization_hardSkills: 'Hard Skills',
-      specialization_softSkills: 'Soft Skills',
-      level: {
-        title:'Рівень',
-        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
-      },
-      modal: {
-        specialization: {
-          modal_title: 'Спеціалізації',
-          title: 'Назва спеціалізації',
-          title_placeholder: 'Front-End Розробник',
-          title_long: 'Назва занадто довга',
-          title_short: 'Назва занадто коротка',
-          level: 'Рівень',
-          main: 'Зробити основною',
-          required: "Це обов'язкове поле",
-        },
-      }
-    },
-
-    //Below code should be refactored and added to the code above
-    specialisation:{
-      level: {
-        title:'Рівень',
-        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
-      },
-      hardSkills:{
-        title:'Хард скіли',
-        averageMark: 'Середня оцінка:'
-      }
     },
   },
 };
