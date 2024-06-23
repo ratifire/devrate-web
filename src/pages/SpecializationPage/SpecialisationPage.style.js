@@ -26,28 +26,24 @@ export const styles = {
   },
   specialisationHardSkills: {
     gridColumn: '1/5',
-    gridRow: '2/3',
-    width: '480px'
+    gridRow: '2/5',
   },
   specialisationLevel: {
     gridColumn: '5/9',
     gridRow: '2/3',
-    height: 201, //To be removed before merge
-    width: '480px'
   },
   specialisationInterviewParticipation: {
     gridColumn: '9/13',
     gridRow: '2/3',
-    height: 201, //To be removed before merge
   },
   specialisationSoftSkills: {
     gridColumn: '1/5',
-    gridRow: '3/3',
+    gridRow: '5/6',
     height: 276, //To be removed before merge
   },
   specialisationStatistics: {
     gridColumn: '5/13',
-    gridRow: '3/4',
+    gridRow: '3/6',
   },
   statisticWrapper: (theme) => ({
     padding: theme.spacing(4),

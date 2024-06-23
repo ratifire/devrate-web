@@ -244,6 +244,24 @@ export const uk = {
         title:'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
       },
+      interview: {
+        income: 'Пройдено інтерв\'ю',
+        outcome: 'Проведено інтерв\'ю',
+        makeIncome: 'Запланувати інтерв’ю',
+        makeOutcome: 'Стати інтерв\'юером',
+      },
+      scheduleModal: {
+        name: 'Ім\'я',
+        specialization: 'Спеціалізація',
+        level: 'Рівень',
+        role: 'Роль',
+        date: 'Дата',
+        startTime: 'Час початку',
+        endTime: 'Час закінчення',
+        socialLinks: 'Додати посилання на соцмережі',
+        schedule: 'Запланувати',
+        scheduleInterview: 'Запланувати інтерв\'ю',
+      }
     },
     language: {
       level: {

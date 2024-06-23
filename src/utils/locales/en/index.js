@@ -243,6 +243,24 @@ export const en = {
         title:'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.'
       },
+      interview: {
+        income: 'An interview has been completed ',
+        outcome: 'An interview was conducted',
+        makeIncome: 'Schedule an interview',
+        makeOutcome: 'Become an interviewer',
+      },
+      scheduleModal: {
+        name: 'Name',
+        specialization: 'Specialization',
+        level: 'Level',
+        role: 'Role',
+        date: 'Date',
+        startTime: 'Start Time',
+        endTime: 'End Time',
+        socialLinks: 'Social Links',
+        schedule: 'Schedule',
+        scheduleInterview: 'Schedule Interview',
+      }
     },
     language: {
       level: {
