@@ -131,7 +131,7 @@ const ScheduleInterviewModal = () => {
               value={formik.values.startTime}
               countries={times}
               name="startTime"
-              variant="standard"
+              variant="outlined"
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               onChange={(value) => formik.setFieldValue('startTime', value)}
@@ -144,7 +144,7 @@ const ScheduleInterviewModal = () => {
               value={formik.values.endTime}
               countries={times}
               name="endTime"
-              variant="standard"
+              variant="outlined"
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               onChange={(value) => formik.setFieldValue('endTime', value)}
@@ -160,7 +160,7 @@ const ScheduleInterviewModal = () => {
               value={formik.values.socialLinks}
               countries={times}
               name="socialLinks"
-              variant="standard"
+              variant="outlined"
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               onChange={(value) => formik.setFieldValue('socialLinks', value)}
