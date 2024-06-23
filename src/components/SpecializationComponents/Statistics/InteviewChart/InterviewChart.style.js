@@ -39,11 +39,4 @@ export const styles = {
       color: theme.palette.primary[200],
     },
   }),
-  chartWrapper:{
-    width: '100%',
-    height: 200,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
 };

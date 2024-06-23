@@ -1,11 +1,8 @@
 export const styles = {
-  levelChartContainer: (theme) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: theme.spacing(3),
-  }),
+  hardSkillsChartContainer:{
+    width: '264px',
+    height: '340px'
+  },
   title: {
     display: 'flex',
     flexDirection: 'row',
@@ -14,25 +11,19 @@ export const styles = {
     marginBottom: '11px',
   },
   text: (theme) => ({
-    color: theme.pallette.neutral[50],
+    color: theme.palette.neutral[50]
   }),
-  chartContainer: {
-    width: '100%',
-    height: '150px',
-    maxWidth: '500px',
-    margin: '0 auto',
-    position: 'relative',
-  },
-  leftCaption: {
-    position: 'absolute',
-    bottom: '-20%',
-    right: '1%',
-    transform: 'translateX(-50%)',
-  },
-  rigthCaption: {
-    position: 'absolute',
-    bottom: '-20%',
-    left: '8%',
-    transform: 'translateX(-50%)',
-  },
+  tooltipContent:{
+    color: '#FFFFFFF',
+    backgroundColor: '#303032',
+    border: 'none',
+    borderRadius: '4px',
+}, tooltipLabel:{
+
+      color: '#FFFFFFF',
+      backgroundColor: '#303032',
+      fontSize: '14px',
+
+  }
+
 };

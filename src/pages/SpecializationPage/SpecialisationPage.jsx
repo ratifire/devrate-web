@@ -10,8 +10,12 @@ import LevelChart from "../../components/SpecializationComponents/Statistics/Lev
 import SkillsAssessmentChart
   from "../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart";
 import HardSkillsChart from "../../components/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart";
+import InterviewChart from "../../components/SpecializationComponents/Statistics/InteviewChart/InterviewChart";
+import {useTranslation} from "react-i18next";
 
 const SpecializationPage = () => {
+  const { t } = useTranslation();
+  
   return (
     <SpecializationTemplate>
       <ProfileHeader/>
@@ -33,7 +37,9 @@ const SpecializationPage = () => {
             <div>Soft Skills</div>
           </Paper>
           <Paper sx={styles.specialisationStatistics}>
-            <Typography sx={styles.statisticTitle}>Статистика</Typography>
+            <Typography sx={styles.statisticTitle}>
+              {t('specialisation.statistics.title')}
+            </Typography>
             <Box sx={styles.statisticWrapper}>
               <Paper sx={styles.level}>
                 <LevelChart/>
@@ -45,7 +51,7 @@ const SpecializationPage = () => {
                 <HardSkillsChart/>
               </Paper>
               <Paper sx={styles.interview}>
-                <div>Interview Statistics</div>
+                <InterviewChart/>
               </Paper>
             </Box>
           </Paper>

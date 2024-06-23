@@ -3,6 +3,7 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import { Box, MenuItem, Select, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { styles } from './SkillsAssessmentChart.style';
+import {useTranslation} from "react-i18next";
 
 const months = [
   { name: 'Jan', value: 2 },
@@ -24,6 +25,7 @@ const days = [
 
 const SkillsAssessmentChart = () => {
   const [selectedPeriod, setSelectedPeriod] = React.useState(months);
+  const { t } = useTranslation();
 
   const handleChange = (event) => {
     if (event.target.value === 'months') {
@@ -37,7 +39,9 @@ const SkillsAssessmentChart = () => {
     <Box sx={styles.skillsAssessmentChartContainer}>
       <Box sx={styles.titleContainer}>
         <Box>
-          <Typography variant='subtitle2'>Середня оцінка навичок</Typography>
+          <Typography variant='subtitle2'>
+             {t('specialisation.statistics.skills_assessment_chart_title')}
+          </Typography>
         </Box>
         <Box>
           <Select
@@ -54,23 +58,17 @@ const SkillsAssessmentChart = () => {
             }}
           >
             <MenuItem sx={styles.menuItem} value={'months'}>
-              Місяці
+              {t('specialisation.statistics.interview_chart_months')}
             </MenuItem>
             <MenuItem sx={styles.menuItem} value={'days'}>
-              Дні
+              {t('specialisation.statistics.interview_chart_days')}
             </MenuItem>
           </Select>
         </Box>
       </Box>
 
       <Box
-        sx={{
-          width: '100%',
-          height: 200,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        sx={styles.chartWrapper}
       >
         <ResponsiveContainer width='100%' height='100%'>
           <AreaChart data={selectedPeriod} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>

@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
 
 import { styles } from './HardSkillsChart.style.js';
+import {useTranslation} from "react-i18next";
 
 const data = [
   {
@@ -38,13 +39,15 @@ const data = [
 ];
 
 const HardSkillsChart = () => {
+  const { t } = useTranslation();
+  
   return (
-    <Box sx={{ width: '264px', height: '340px' }}>
+    <Box sx={styles.hardSkillsChartContainer}>
       <Typography variant='subtitle2' sx={styles.title}>
-        Hard Skills за продуктивністю
+         {t('specialisation.statistics.hard_skills_chart_title')}
       </Typography>
-      <Typography variant='subtitle3' sx={styles.title}>
-        Цей графік відображає
+      <Typography variant='subtitle3' sx={styles.text}>
+         {t('specialisation.statistics.hard_skills_chart_text')}
       </Typography>
       <RadarChart outerRadius={130} width={264} height={264} data={data}>
         <PolarGrid />
@@ -58,17 +61,8 @@ const HardSkillsChart = () => {
           dot={<circle cx={1} cy={1} r={2} fill='#16FFB9' />}
         />
         <Tooltip
-          contentStyle={{
-            color: '#FFFFFFF',
-            backgroundColor: '#303032',
-            border: 'none',
-            borderRadius: '4px',
-          }}
-          labelStyle={{
-            color: '#FFFFFFF',
-            backgroundColor: '#303032',
-            fontSize: '14px',
-          }}
+          contentStyle={styles.tooltipContent}
+          labelStyle={styles.tooltipLabel}
         />
         <defs>
           <linearGradient id='gradient2' x1='0%' y1='0%' x2='100%' y2='0%'>

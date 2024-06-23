@@ -2,12 +2,15 @@ import React from 'react';
 import {Box, Typography} from '@mui/material';
 import {Gauge, gaugeClasses} from '@mui/x-charts';
 import {styles} from './LevelChart.style.js';
+import {useTranslation} from "react-i18next";
 
 const LevelChart = () => {
+	const { t } = useTranslation();
+	
 	return (
 		<Box sx={styles.levelChartContainer}>
 			<Typography variant='subtitle2' sx={styles.title}>
-				Рівень
+				{t('specialisation.statistics.level_chart_title')}
 			</Typography>
 			<Box sx={styles.chartContainer}>
 				<Box sx={{position: 'relative'}}>
@@ -52,10 +55,10 @@ const LevelChart = () => {
 					</Box>
 				</Box>
 				<Typography variant='caption' sx={styles.leftCaption}>
-					Junior
+					{t('specialisation.statistics.level_chart_left_caption')}
 				</Typography>
 				<Typography variant='caption' sx={styles.rigthCaption}>
-					Middle
+					{t('specialisation.statistics.level_chart_right_caption')}
 				</Typography>
 			</Box>
 		</Box>
