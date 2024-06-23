@@ -7,7 +7,9 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import StarIcon from '@mui/icons-material/Star';
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice';
+import {
+  useGetSpecializationByUserIdQuery, useUpdateSpecializationAsMainByIdMutation,
+} from '../../../redux/specialization/specializationApiSlice';
 import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
 import { openModal } from '../../../redux/modal/modalSlice';
 
@@ -18,25 +20,27 @@ const SpecializationCategories = () => {
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
+  const [ updateSpecializationAsMainById ] = useUpdateSpecializationAsMainByIdMutation();
   console.log('Server data',specializations);
 
   const handlerChangeSpecialization = (specialization) => {
     dispatch(setSelectedSpecialization(specialization));
-    console.log('User clicked on Specialisation',specialization );
+    console.log('User clicked on Specialisation', specialization);
   }
 
   const handlerAddSpecializations = () => {
       if (specializations.length >= 4) return
-      console.log('Open Specialisation Modal to Add Specialisation');
       dispatch(openModal({modalName: 'openAddSpecialization'}));
   }
 
   const editSpecialization = () => {
     console.log('Open Specialisation Modal to Edit Specialisation');
+    dispatch(openModal({modalName: 'openAddSpecialization'}));
   }
 
-  const handlerChangeMainSpecialization = (selectedSpecialization) => {
-    console.log('Main Spec. would be changed to', selectedSpecialization);
+  const handlerChangeMainSpecialization = async (selectedSpecialization) => {
+    await updateSpecializationAsMainById({...selectedSpecialization, main: true}).unwrap();
+    console.log('Main Spec. changed to', {selectedSpecialization, main: true});
   }
 
   if (isLoading) {

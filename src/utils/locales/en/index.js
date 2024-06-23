@@ -256,23 +256,23 @@ export const en = {
     },
 
     specialization: {
-      specialization_title: 'Specialisations',
+      specialization_title: 'Specializations',
       specialization_btn_make_main: 'Make the main',
       specialization_hardSkills: 'Hard Skills',
       specialization_softSkills: 'Soft Skills',
       level: {
         title:'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.'
+        description: 'Improve your skills to move onto the next level of in-line specialization.'
       },
       modal: {
         specialization: {
-          modal_title: 'Specialisations',
-          title: 'Specialisation title',
+          modal_title: 'Specializations',
+          title: 'Specialization title',
           title_placeholder: 'Front-End Developer',
           title_long: 'Title too long',
           title_short: 'Title too short',
           level: 'Level',
-          main: 'Main specialisation',
+          main: 'Main specialization',
           required: 'This is a required field',
         },
       }

@@ -1,25 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { AddSpecializationModalSchema } from './AddSpecializationModalSchema';
+import { SpecializationModalSchema } from './SpecializationModalSchema';
 import { Box, Typography } from '@mui/material';
-import { styles } from './AddSpecializationModal.styles';
+import { styles } from './SpecializationModal.styles';
 import FormInput from '../../Inputs/FormInput';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
 import CountrySelect from '../../Inputs/CountrySelect';
+import {
+  useCreateNewSpecializationMutation,
+  useUpdateSpecializationByIdMutation,
+} from '../../../redux/specialization/specializationApiSlice';
+import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
 
-const AddSpecializationModal = () => {
+const SpecializationModal = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.auth.user.data);
+
   const [level] = useState(['Junior', 'Middle', 'Senior']);
   const [main] = useState(['Yes', 'No']);
 
-
   const openAddSpecialization = useSelector((state) => state.modal.openAddSpecialization);
 
-  const dispatch = useDispatch();
+  const [ createNewSpecialization ] = useCreateNewSpecializationMutation();
+  const [ updateSpecializationById ] = useUpdateSpecializationByIdMutation();
+
+  const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
   const handleClose = () => dispatch(closeModal({ modalName: 'openAddSpecialization' }));
 
   const initialValues = {
@@ -28,8 +38,24 @@ const AddSpecializationModal = () => {
     main: ''
   };
 
-  const onSubmit = (values, { resetForm }) => {
-    console.log('Data from the form', values);
+  const onSubmit = async (values, { resetForm }) => {
+    const main = values.main === 'Yes';
+    const data = {name: values.title, main: main}
+    console.log('Data from the form', data);
+    console.log('SelectedSpecialization', selectedSpecialization);
+
+    try {
+      if (selectedSpecialization && selectedSpecialization.id) {
+        await updateSpecializationById({ id: selectedSpecialization.id, name: data.name }).unwrap();
+        dispatch(setSelectedSpecialization({ id: selectedSpecialization.id, name: data.name }));
+
+      } else {
+        await createNewSpecialization({ userId: id, data }).unwrap();
+      }
+    }
+    catch (error) {
+      console.error('Failed to create Specialization', error);
+    }
     resetForm();
     handleClose();
   };
@@ -37,9 +63,19 @@ const AddSpecializationModal = () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
-    validationSchema: AddSpecializationModalSchema,
+    validationSchema: SpecializationModalSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    if (!selectedSpecialization) return
+
+    formik.setValues({
+      title: selectedSpecialization.name,
+      level: selectedSpecialization.level,
+      main: (selectedSpecialization.main ? 'Yes' : 'No')
+    });
+  }, [selectedSpecialization]);
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openAddSpecialization}>
@@ -99,4 +135,4 @@ const AddSpecializationModal = () => {
     </ModalLayoutProfile>);
 };
 
-export default AddSpecializationModal;
+export default SpecializationModal;
