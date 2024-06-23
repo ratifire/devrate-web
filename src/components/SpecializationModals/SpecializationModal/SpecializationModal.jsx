@@ -48,7 +48,6 @@ const SpecializationModal = () => {
       if (selectedSpecialization && selectedSpecialization.id) {
         await updateSpecializationById({ id: selectedSpecialization.id, name: data.name }).unwrap();
         dispatch(setSelectedSpecialization({ id: selectedSpecialization.id, name: data.name }));
-
       } else {
         await createNewSpecialization({ userId: id, data }).unwrap();
       }
