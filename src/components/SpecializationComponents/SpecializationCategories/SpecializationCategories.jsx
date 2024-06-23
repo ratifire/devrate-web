@@ -29,7 +29,8 @@ const SpecializationCategories = () => {
   }
 
   const handlerAddSpecializations = () => {
-      if (specializations.length >= 4) return
+    dispatch(setSelectedSpecialization(null));
+      if (specializations.length >= 4) return;
       dispatch(openModal({modalName: 'openAddSpecialization'}));
   }
 
@@ -39,6 +40,7 @@ const SpecializationCategories = () => {
   }
 
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
+    if (specializations.length === 0) return;
     await updateSpecializationAsMainById({...selectedSpecialization, main: true}).unwrap();
     console.log('Main Spec. changed to', {selectedSpecialization, main: true});
   }
