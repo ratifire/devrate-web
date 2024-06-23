@@ -1,11 +1,5 @@
 import * as Yup from 'yup';
 
-// const isStartDateBeforeEndDate = (startDate, endDate) => {
-//   // if (startDate && endDate) {
-//   //   return startDate.getTime() < endDate.getTime();
-//   // }
-//   return true;
-// };
 
 export const ScheduleSchema = Yup.object().shape({
   name: Yup.string()
@@ -34,13 +28,7 @@ export const ScheduleSchema = Yup.object().shape({
     .required('Start date is required'),
   endTime: Yup.date()
     .min(new Date(1900, 0, 1), 'Date must be later than 01/01/1900')
-    .max(new Date(), 'Date must be earlier than today')
-      // .nullable()
-      // .test('endDate', 'End date must be later than start date', function (value) {
-      //   const startDate = this.resolve(Yup.ref('startDate'));
-      //   return isStartDateBeforeEndDate(startDate, value);
-      // })
-  ,
+    .max(new Date(), 'Date must be earlier than today'),
   socialLinks: Yup.array().of(
     Yup.string()
       .min(2, 'profile.modal.workExperience.description_short')

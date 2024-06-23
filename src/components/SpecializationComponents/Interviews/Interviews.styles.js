@@ -32,15 +32,8 @@ export const styles = {
     gap: theme.spacing(4),
   }),
   buttonPrimary: () => ({
-    fontSize: '.875rem',
+    fontSize: 14,
     textTransform: 'none',
     fontWeight: 500,
   }),
-  buttonSecondary: (theme) => ({
-    fontSize: '.875rem',
-    textTransform: 'none',
-    fontWeight: 500,
-    color: theme.palette.primary[200],
-    borderColor: theme.palette.primary[200],
-  })
 };

@@ -15,7 +15,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import range from 'lodash/range';
 
-const ScheduleInterview = () => {
+const ScheduleInterviewModal = () => {
   const isOpen = useSelector((state) => state.modal.scheduleInterview);
 
   const dispatch = useDispatch();
@@ -177,4 +177,4 @@ const ScheduleInterview = () => {
     </ModalLayoutProfile>);
 };
 
-export default ScheduleInterview;
+export default ScheduleInterviewModal;

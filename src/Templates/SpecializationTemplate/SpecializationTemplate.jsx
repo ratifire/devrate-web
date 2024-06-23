@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { AddSpecializationModal } from '../../components/SpecializationModals';
-import ScheduleInterview from '../../components/SpecializationModals/ScheduleInterview';
+import ScheduleInterviewModal from '../../components/SpecializationModals/ScheduleInterviewModal';
 
 const SpecializationTemplate = ({ children }) => {
   const openAddSpecialization = useSelector((state) => state.modal.openAddSpecialization);
@@ -11,7 +11,7 @@ const SpecializationTemplate = ({ children }) => {
     <div className='specialization'>
       {children}
       {openAddSpecialization && <AddSpecializationModal/>}
-      {scheduleInterviewIsOpen && <ScheduleInterview />}
+      {scheduleInterviewIsOpen && <ScheduleInterviewModal />}
     </div>
   );
 };
