@@ -6,6 +6,7 @@ import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel/SpecializationLevel';
 import HardSkills from '../../components/SpecializationComponents/HardSkills/HardSkills';
 import SpecialisationCategories from '../../components/SpecializationComponents/SpecializationCategories';
+import Interviews from '../../components/SpecializationComponents/Interviews'
 
 const SpecializationPage = () => {
   return (
@@ -16,11 +17,11 @@ const SpecializationPage = () => {
           <Paper sx={styles.specialisationTaxonomy}>
             <SpecialisationCategories />
           </Paper>
-          <Paper sx={styles.specializationLevel}>
+          <Paper sx={styles.specialisationLevel}>
             <SpecializationLevel />
           </Paper>
           <Paper sx={styles.specialisationInterviewParticipation}>
-            <div>Specialization: Interview Participation</div>
+            <Interviews />
           </Paper>
           <Paper sx={styles.specialisationHardSkills}>
             <HardSkills />
