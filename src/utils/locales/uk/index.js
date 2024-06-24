@@ -250,11 +250,9 @@ export const uk = {
       },
       modal: {
         specialization: {
-          modal_title: 'Спеціалізації',
-          title: 'Назва спеціалізації',
-          title_placeholder: 'Front-End Розробник',
-          title_long: 'Назва занадто довга',
-          title_short: 'Назва занадто коротка',
+          modal_title: 'Спеціалізація',
+          name: 'Назва спеціалізації',
+          name_placeholder: 'Front-End Розробник',
           level: 'Рівень',
           main: 'Зробити основною',
           required: "Це обов'язкове поле",

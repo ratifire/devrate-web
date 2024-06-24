@@ -249,11 +249,9 @@ export const en = {
       },
       modal: {
         specialization: {
-          modal_title: 'Specializations',
-          title: 'Specialization title',
-          title_placeholder: 'Front-End Developer',
-          title_long: 'Title too long',
-          title_short: 'Title too short',
+          modal_title: 'Specialization',
+          name: 'Specialization name',
+          name_placeholder: 'Front-End Developer',
           level: 'Level',
           main: 'Main specialization',
           required: 'This is a required field',

@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 import { SpecializationModalSchema } from './SpecializationModalSchema';
 import { Box, Typography } from '@mui/material';
 import { styles } from './SpecializationModal.styles';
-import FormInput from '../../Inputs/FormInput';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
 import CountrySelect from '../../Inputs/CountrySelect';
@@ -15,6 +14,9 @@ import {
   useUpdateSpecializationByIdMutation,
 } from '../../../redux/specialization/specializationApiSlice';
 import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
+import {
+  useGetSpecializationListQuery
+} from '../../../redux/specialization/specializationList/specializationListApiSlice';
 
 const SpecializationModal = () => {
   const { t } = useTranslation();
@@ -26,18 +28,20 @@ const SpecializationModal = () => {
   const [ createNewSpecialization ] = useCreateNewSpecializationMutation();
   const [ updateSpecializationById ] = useUpdateSpecializationByIdMutation();
 
+  const { data: specializations } = useGetSpecializationListQuery('specialization-names.json');
+
   const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
   const handleClose = () => dispatch(closeModal({ modalName: 'openAddSpecialization' }));
 
   const initialValues = {
-    title: '',
+    name: '',
     level: '',
     main: ''
   };
 
   const onSubmit = async (values, { resetForm }) => {
     const main = values.main === 'Yes';
-    const data = {name: values.title, main: main}
+    const data = {name: values.name, main: main}
     console.log('Data from the form', data);
     console.log('SelectedSpecialization', selectedSpecialization);
 
@@ -67,7 +71,7 @@ const SpecializationModal = () => {
     if (!selectedSpecialization) return
 
     formik.setValues({
-      title: selectedSpecialization.name,
+      name: selectedSpecialization.name,
       level: selectedSpecialization.level,
       main: (selectedSpecialization.main ? 'Yes' : 'No')
     });
@@ -82,17 +86,19 @@ const SpecializationModal = () => {
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
           <Box sx={styles.input100}>
-            <FormInput
-              name='title'
-              value={formik.values.title}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='specialization.modal.specialization.title'
-              placeholder='specialization.modal.specialization.title_placeholder'
-              helperText={formik.touched.title && formik.errors.title}
-              error={formik.touched.title && Boolean(formik.errors.title)}
+            <CountrySelect sx={styles.input50}
+                           label={t('specialization.modal.specialization.name')}
+                           value={formik.values.name}
+                           countries={specializations}
+                           name="name"
+                           variant="outlined"
+                           handleChange={formik.handleChange}
+                           handleBlur={formik.handleBlur}
+                           onChange={(value) => formik.setFieldValue('name', value)}
+                           helperText={formik.touched.name && formik.errors.name}
+                           error={formik.touched.name && Boolean(formik.errors.name)}
             />
+
           </Box>
 
           <Box sx={styles.input100}>
