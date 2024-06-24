@@ -44,8 +44,7 @@ export const styles = {
   specialisationStatistics: {
     gridColumn: '5/13',
      gridRow: '3/4',
-      gridRow: '3/6',
-   },
+    },
   statisticWrapper: (theme) => ({
     padding: theme.spacing(4),
     display: 'grid',
