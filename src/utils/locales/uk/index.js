@@ -244,6 +244,20 @@ export const uk = {
         title:'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
       },
+      hardSkills:{
+        title:'Хард скіли',
+        averageMark: 'Середня оцінка:'
+      },
+      modal: {
+        specialization: {
+          modal_title: 'Спеціалізація',
+          name: 'Назва спеціалізації',
+          name_placeholder: 'Front-End Розробник',
+          level: 'Рівень',
+          main: 'Зробити основною',
+          required: "Це обов'язкове поле",
+        },
+      },
       interview: {
         income: 'Пройдено інтерв\'ю',
         outcome: 'Проведено інтерв\'ю',
@@ -263,6 +277,7 @@ export const uk = {
         scheduleInterview: 'Запланувати інтерв\'ю',
       }
     },
+
     language: {
       level: {
         a1: 'Початковий рівень: A1',
@@ -282,16 +297,6 @@ export const uk = {
         pl: 'Польська',
         cs: 'Чеська',
       },
-    },
-    specialisation:{
-      level: {
-        title:'Рівень',
-        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
-      },
-      hardSkills:{
-        title:'Хард скіли',
-        averageMark: 'Середня оцінка:'
-      }
     },
   },
 };

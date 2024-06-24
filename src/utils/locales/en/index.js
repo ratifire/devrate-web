@@ -243,6 +243,19 @@ export const en = {
         title:'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.'
       },
+      hardSkills:{
+        title:'Hard skills',
+        averageMark: 'Average mark:'
+      },
+      modal: {
+        specialization: {
+          modal_title: 'Specialization',
+          name: 'Specialization name',
+          name_placeholder: 'Front-End Developer',
+          level: 'Level',
+          main: 'Main specialization',
+          required: 'This is a required field',
+        },
       interview: {
         income: 'An interview has been completed ',
         outcome: 'An interview was conducted',
@@ -260,7 +273,7 @@ export const en = {
         socialLinks: 'Social Links',
         schedule: 'Schedule',
         scheduleInterview: 'Schedule Interview',
-      }
+      },
     },
     language: {
       level: {
@@ -282,16 +295,6 @@ export const en = {
         cs: 'Czech',
       },
     },
-    
-    specialisation:{
-      level: {
-        title:'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.'
-      },
-      hardSkills:{
-        title:'Hard skills',
-        averageMark: 'Average mark:'
-      },
     },
   },
 };
