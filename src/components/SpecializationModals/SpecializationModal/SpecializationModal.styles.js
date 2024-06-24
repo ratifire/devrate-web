@@ -1,0 +1,36 @@
+export const styles = {
+  title: (theme) => ({
+    color: theme.palette.text.primary,
+    paddingRight: '38px',
+    ':first-letter': {
+      textTransform: 'uppercase',
+    },
+  }),
+  wrapper: (theme) => ({
+    display: 'flex',
+    flexWrap: 'wrap',
+    gridGap: `${theme.spacing(4)} ${theme.spacing(3)}`,
+    paddingBottom: theme.spacing(3),
+    paddingTop: theme.spacing(4),
+  }),
+  input50: (theme) => ({
+    flex: `0 1 calc(50% - ${theme.spacing(2)})`,
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: theme.palette.primary[600],
+      },
+      'fieldset': {
+        borderColor: theme.palette.neutral[500],
+      },
+    },
+  }),
+  input100: (theme) => ({
+    flex: `0 1 100%`,
+    display: 'flex',
+    alignItems: 'flex-start',
+    gridGap: theme.spacing(3),
+  }),
+  specializationBtn: {
+    width: '228px',
+  }
+};

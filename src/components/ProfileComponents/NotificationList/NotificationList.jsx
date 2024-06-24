@@ -15,12 +15,14 @@ const NotificationList = () => {
     setBellButton(event.currentTarget);
   };
 
-  useSocket('/ws/notifications', event => {
+  const openSocketHandler = event => {
     event.target.addEventListener('message', ({data}) => {
       const json = JSON.parse(data);
       setNotifications(json)
     })
-  });
+  };
+
+  useSocket('/ws/notifications', openSocketHandler);
 
   const notificationsListClose = () => {
     setBellButton(null);

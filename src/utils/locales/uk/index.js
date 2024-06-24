@@ -244,7 +244,7 @@ export const uk = {
         title:'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
       },
-      statistics:{
+       statistics:{
         title:'Статистика',
         level_chart_title:"Рівень",
         level_chart_left_caption:"Junior",
@@ -255,10 +255,41 @@ export const uk = {
         interview_chart_days:"Дні",
         interview_chart_months:"Місяці",
         skills_assessment_chart_title:'Середня оцінка навичок'
-        
+       
+      },
+      hardSkills:{
+        title:'Хард скіли',
+        averageMark: 'Середня оцінка:'
+      },
+      modal: {
+        specialization: {
+          modal_title: 'Спеціалізація',
+          name: 'Назва спеціалізації',
+          name_placeholder: 'Front-End Розробник',
+          level: 'Рівень',
+          main: 'Зробити основною',
+          required: "Це обов'язкове поле",
+        },
+      },
+      interview: {
+        income: 'Пройдено інтерв\'ю',
+        outcome: 'Проведено інтерв\'ю',
+        makeIncome: 'Запланувати інтерв’ю',
+        makeOutcome: 'Стати інтерв\'юером',
+      },
+      scheduleModal: {
+        name: 'Ім\'я',
+        specialization: 'Спеціалізація',
+        level: 'Рівень',
+        role: 'Роль',
+        date: 'Дата',
+        startTime: 'Час початку',
+        endTime: 'Час закінчення',
+        socialLinks: 'Додати посилання на соцмережі',
+        schedule: 'Запланувати',
+        scheduleInterview: 'Запланувати інтерв\'ю',
       }
-  
-    },
+     },
     language: {
       level: {
         a1: 'Початковий рівень: A1',
@@ -278,17 +309,6 @@ export const uk = {
         pl: 'Польська',
         cs: 'Чеська',
       },
-    },
-    specialisation:{
-      level: {
-        title:'Рівень',
-        description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
-      },
-      hardSkills:{
-        title:'Хард скіли',
-        averageMark: 'Середня оцінка:'
-      },
-      
     },
   },
 };
