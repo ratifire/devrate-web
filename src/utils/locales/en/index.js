@@ -243,6 +243,18 @@ export const en = {
         title:'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.'
       },
+       statistics:{
+        title:'Statistics',
+        level_chart_title:"Level",
+        level_chart_left_caption:"Junior1",
+        level_chart_right_caption:"Middle1",
+        hard_skills_chart_title:"Hard Skills by productivity",
+        hard_skills_chart_text:"This chart displays",
+        interview_chart_title:"Interview",
+        interview_chart_days:"Days",
+        interview_chart_months:"Months",
+        skills_assessment_chart_title:'Average skill assessment'
+    },
       hardSkills:{
         title:'Hard skills',
         averageMark: 'Average mark:'
@@ -295,6 +307,5 @@ export const en = {
         cs: 'Czech',
       },
     },
-    },
   },
-};
+}}

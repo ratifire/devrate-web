@@ -43,18 +43,23 @@ export const styles = {
   },
   specialisationStatistics: {
     gridColumn: '5/13',
-    gridRow: '3/6',
-  },
+     gridRow: '3/4',
+    },
   statisticWrapper: (theme) => ({
     padding: theme.spacing(4),
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
     gridTemplateRows: 'auto auto auto auto',
     gridGap: theme.spacing(4),
+    
     ' > div': {
       borderRadius: 2,
       backgroundColor: theme.palette.neutral[600],
     },
+  }),
+  statisticTitle: (theme) => ({
+    marginTop: theme.spacing(4),
+    marginLeft: theme.spacing(4),
   }),
   level: {
     gridColumn: '1/5',
@@ -69,7 +74,9 @@ export const styles = {
   hardSkillsByProductivity: {
     gridColumn: '1/4',
     gridRow: '2/3',
-    height: 100, //To be removed before merge
+    width: '300px',
+    height: '375px',
+    padding: '18px',
   },
   interview: {
     gridColumn: '4/13',
