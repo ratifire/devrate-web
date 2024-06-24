@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,9 +20,6 @@ const SpecializationModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth.user.data);
-
-  const [level] = useState(['Junior', 'Middle', 'Senior']);
-  const [main] = useState(['Yes', 'No']);
 
   const openAddSpecialization = useSelector((state) => state.modal.openAddSpecialization);
 
@@ -102,7 +99,7 @@ const SpecializationModal = () => {
             <CountrySelect sx={styles.input50}
                            label={t('specialization.modal.specialization.level')}
                            value={formik.values.level}
-                           countries={level}
+                           countries={['Junior', 'Middle', 'Senior']}
                            name="level"
                            variant="outlined"
                            handleChange={formik.handleChange}
@@ -114,7 +111,7 @@ const SpecializationModal = () => {
             <CountrySelect sx={styles.input50}
                            label={t('specialization.modal.specialization.main')}
                            value={formik.values.main}
-                           countries={main}
+                           countries={['Yes', 'No']}
                            name="main"
                            variant="outlined"
                            handleChange={formik.handleChange}
