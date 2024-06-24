@@ -32,4 +32,11 @@ export const styles = {
     left: '8%',
     transform: 'translateX(-50%)',
   },
+  chartWrapper:{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '180px',
+  }
 };

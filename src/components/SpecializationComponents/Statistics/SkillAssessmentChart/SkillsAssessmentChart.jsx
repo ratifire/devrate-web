@@ -40,7 +40,7 @@ const SkillsAssessmentChart = () => {
       <Box sx={styles.titleContainer}>
         <Box>
           <Typography variant='subtitle2'>
-             {t('specialisation.statistics.skills_assessment_chart_title')}
+             {t('specialization.statistics.skills_assessment_chart_title')}
           </Typography>
         </Box>
         <Box>
@@ -58,10 +58,10 @@ const SkillsAssessmentChart = () => {
             }}
           >
             <MenuItem sx={styles.menuItem} value={'months'}>
-              {t('specialisation.statistics.interview_chart_months')}
+              {t('specialization.statistics.interview_chart_months')}
             </MenuItem>
             <MenuItem sx={styles.menuItem} value={'days'}>
-              {t('specialisation.statistics.interview_chart_days')}
+              {t('specialization.statistics.interview_chart_days')}
             </MenuItem>
           </Select>
         </Box>

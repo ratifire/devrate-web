@@ -44,10 +44,10 @@ const HardSkillsChart = () => {
   return (
     <Box sx={styles.hardSkillsChartContainer}>
       <Typography variant='subtitle2' sx={styles.title}>
-         {t('specialisation.statistics.hard_skills_chart_title')}
+         {t('specialization.statistics.hard_skills_chart_title')}
       </Typography>
       <Typography variant='subtitle3' sx={styles.text}>
-         {t('specialisation.statistics.hard_skills_chart_text')}
+         {t('specialization.statistics.hard_skills_chart_text')}
       </Typography>
       <RadarChart outerRadius={130} width={264} height={264} data={data}>
         <PolarGrid />

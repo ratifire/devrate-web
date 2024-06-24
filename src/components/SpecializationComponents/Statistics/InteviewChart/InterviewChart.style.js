@@ -1,5 +1,5 @@
 export const styles = {
-  skillsAssessmentChartContainer: (theme) => ({
+  interviewChartContainer: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -39,4 +39,11 @@ export const styles = {
       color: theme.palette.primary[200],
     },
   }),
+  chartWrapper:{
+    width: '100%',
+    height: "320px",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 };

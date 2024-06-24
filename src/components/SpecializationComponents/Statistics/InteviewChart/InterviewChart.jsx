@@ -45,11 +45,11 @@ const InterviewChart = () => {
     };
     
     return (
-        <Box sx={styles.skillsAssessmentChartContainer}>
+        <Box sx={styles.interviewChartContainer}>
             <Box sx={styles.titleContainer}>
                 <Box>
                     <Typography variant='subtitle2'>
-                        {t('specialisation.statistics.interview_chart_title')}
+                        {t('specialization.statistics.interview_chart_title')}
                     </Typography>
                 </Box>
                 <Box>
@@ -67,29 +67,20 @@ const InterviewChart = () => {
                         }}
                     >
                         <MenuItem sx={styles.menuItem} value={'months'}>
-                            {t('specialisation.statistics.interview_chart_months')}
+                            {t('specialization.statistics.interview_chart_months')}
                         </MenuItem>
                         <MenuItem sx={styles.menuItem} value={'days'}>
-                            {t('specialisation.statistics.interview_chart_days')}
+                            {t('specialization.statistics.interview_chart_days')}
                         </MenuItem>
                     </Select>
                 </Box>
             </Box>
             
-            <Box
-                sx={{
-                    width: '100%',
-                    height: "320px",
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
+            <Box sx={styles.chartWrapper}>
                 <ResponsiveContainer width='100%' height='100%'>
                     <BarChart data={selectedPeriod}>
                         <Legend />
-                        {/*<CartesianGrid strokeDasharray="3 3" />*/}
-                        <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
+                         <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip/>

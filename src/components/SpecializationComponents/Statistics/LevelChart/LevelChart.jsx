@@ -10,18 +10,12 @@ const LevelChart = () => {
 	return (
 		<Box sx={styles.levelChartContainer}>
 			<Typography variant='subtitle2' sx={styles.title}>
-				{t('specialisation.statistics.level_chart_title')}
+				{t('specialization.statistics.level_chart_title')}
 			</Typography>
 			<Box sx={styles.chartContainer}>
 				<Box sx={{position: 'relative'}}>
 					<Box
-						sx={{
-							position: 'absolute',
-							top: 0,
-							left: 0,
-							width: '100%',
-							height: '180px',
-						}}
+						sx={styles.chartWrapper}
 					>
 						<Gauge
 							value={90}
@@ -55,10 +49,10 @@ const LevelChart = () => {
 					</Box>
 				</Box>
 				<Typography variant='caption' sx={styles.leftCaption}>
-					{t('specialisation.statistics.level_chart_left_caption')}
+					{t('specialization.statistics.level_chart_left_caption')}
 				</Typography>
 				<Typography variant='caption' sx={styles.rigthCaption}>
-					{t('specialisation.statistics.level_chart_right_caption')}
+					{t('specialization.statistics.level_chart_right_caption')}
 				</Typography>
 			</Box>
 		</Box>

@@ -244,6 +244,19 @@ export const uk = {
         title:'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.'
       },
+      statistics:{
+        title:'Статистика',
+        level_chart_title:"Рівень",
+        level_chart_left_caption:"Junior",
+        level_chart_right_caption:"Middle",
+        hard_skills_chart_title:"Hard Skills за продуктивністю",
+        hard_skills_chart_text:"Цей графік відображає",
+        interview_chart_title:"Інтерв’ю",
+        interview_chart_days:"Дні",
+        interview_chart_months:"Місяці",
+        skills_assessment_chart_title:'Середня оцінка навичок'
+        
+      }
   
     },
     language: {
@@ -275,19 +288,7 @@ export const uk = {
         title:'Хард скіли',
         averageMark: 'Середня оцінка:'
       },
-      statistics:{
-        title:'Статистика',
-        level_chart_title:"Рівень",
-        level_chart_left_caption:"Junior",
-        level_chart_right_caption:"Middle",
-        hard_skills_chart_title:"Hard Skills за продуктивністю",
-        hard_skills_chart_text:"Цей графік відображає",
-        interview_chart_title:"Інтерв’ю",
-        interview_chart_days:"Дні",
-        interview_chart_months:"Місяці",
-        skills_assessment_chart_title:'Середня оцінка навичок'
-        
-      }
+      
     },
   },
 };
