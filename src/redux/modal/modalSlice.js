@@ -14,13 +14,14 @@ const modalSlice = createSlice({
     achievement: false,
     openAddSpecialization: false,
     openSkillsModal: false,
+    scheduleInterview: false,
   },
   reducers: {
     openModal: (state, action) => {
       const { modalName, data } = action.payload;
       state[modalName] = true;
       if (data) {
-        state.modalData = data; // Store the data when the modal is opened
+        state.modalData = data; 
       }
     },
     closeModal: (state, action) => {

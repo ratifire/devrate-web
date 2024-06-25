@@ -243,6 +243,49 @@ export const en = {
         title:'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.'
       },
+       statistics:{
+        title:'Statistics',
+        level_chart_title:"Level",
+        level_chart_left_caption:"Junior1",
+        level_chart_right_caption:"Middle1",
+        hard_skills_chart_title:"Hard Skills by productivity",
+        hard_skills_chart_text:"This chart displays",
+        interview_chart_title:"Interview",
+        interview_chart_days:"Days",
+        interview_chart_months:"Months",
+        skills_assessment_chart_title:'Average skill assessment'
+    },
+      hardSkills:{
+        title:'Hard skills',
+        averageMark: 'Average mark:'
+      },
+      modal: {
+        specialization: {
+          modal_title: 'Specialization',
+          name: 'Specialization name',
+          name_placeholder: 'Front-End Developer',
+          level: 'Level',
+          main: 'Main specialization',
+          required: 'This is a required field',
+        },
+      interview: {
+        income: 'An interview has been completed ',
+        outcome: 'An interview was conducted',
+        makeIncome: 'Schedule an interview',
+        makeOutcome: 'Become an interviewer',
+      },
+      scheduleModal: {
+        name: 'Name',
+        specialization: 'Specialization',
+        level: 'Level',
+        role: 'Role',
+        date: 'Date',
+        startTime: 'Start Time',
+        endTime: 'End Time',
+        socialLinks: 'Social Links',
+        schedule: 'Schedule',
+        scheduleInterview: 'Schedule Interview',
+      },
     },
     language: {
       level: {
@@ -279,4 +322,4 @@ export const en = {
       }
     },
   },
-};
+}}
