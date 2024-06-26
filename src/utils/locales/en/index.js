@@ -268,6 +268,10 @@ export const en = {
           main: 'Main specialization',
           required: 'This is a required field',
         },
+        skills: {
+          title: 'Skills',
+          placeholder: 'Codelgniter, Yii, Zend Framework'
+        },
       interview: {
         income: 'An interview has been completed ',
         outcome: 'An interview was conducted',

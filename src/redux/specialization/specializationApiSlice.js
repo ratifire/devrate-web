@@ -20,6 +20,10 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Specialization'],
     }),
 
+    getMainMasteryBySpecializationId: builder.query({
+      query: (specializationId) => `/specializations/${specializationId}/main-mastery`,
+    }),
+
     updateSpecializationById: builder.mutation({
       query({ id, name }) {
         return {
@@ -29,6 +33,11 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
         };
       },
       invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
+    }),
+
+    getHardSkillsByMasteryId: builder.query({
+      query: ({ masteryId }) => `/masteries/${masteryId}/hard-skills`,
+      providesTags: ['HardSkills'],
     }),
 
     updateSpecializationAsMainById: builder.mutation({
@@ -50,4 +59,6 @@ export const {
   useCreateNewSpecializationMutation,
   useUpdateSpecializationByIdMutation,
   useUpdateSpecializationAsMainByIdMutation,
+  useGetHardSkillsByMasteryIdQuery,
+  useGetMainMasteryBySpecializationIdQuery
 } = SpecializationApiSlice;
