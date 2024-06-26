@@ -37,12 +37,12 @@ export const styles = {
       gridGap: theme.spacing(3),
     }),
     skillItem: (theme) => ({
-      backgroundColor: theme.palette.primary['100'],
-      color: theme.palette.primary['800'],
+      backgroundColor: theme.palette.primary[100],
+      color: theme.palette.primary[800],
       paddingY: theme.spacing(2),
       margin: theme.spacing(1),
       '& .MuiChip-deleteIcon': {
-        color: theme.palette.primary['800'],
+        color: theme.palette.primary[800],
       },
     }),
     modalContent: (theme) => ({

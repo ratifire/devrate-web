@@ -268,6 +268,9 @@ export const en = {
           main: 'Main specialization',
           required: 'This is a required field',
         },
+        skills: {
+          title: 'Skills',
+        },
       interview: {
         income: 'An interview has been completed ',
         outcome: 'An interview was conducted',
@@ -306,20 +309,6 @@ export const en = {
         pl: 'Poland',
         cs: 'Czech',
       },
-    },
-
-    specialisation:{
-      level: {
-        title:'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.'
-      },
-      hardSkills:{
-        title:'Hard skills',
-        averageMark: 'Average mark:'
-      },
-      skillsModal: {
-        title: 'Skills'
-      }
     },
   },
 }}
