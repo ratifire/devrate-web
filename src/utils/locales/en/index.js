@@ -264,13 +264,14 @@ export const en = {
           modal_title: 'Specialization',
           name: 'Specialization name',
           name_placeholder: 'Front-End Developer',
-          level: 'Level',
-          main: 'Main specialization',
+          mastery: 'Main mastery',
           required: 'This is a required field',
         },
         skills: {
           title: 'Skills',
-          placeholder: 'Codelgniter, Yii, Zend Framework'
+          placeholder: 'Codelgniter, Yii, Zend Framework',
+          skill_long: 'Company too long',
+          skill_short: 'Company too short',
         },
       interview: {
         income: 'An interview has been completed ',

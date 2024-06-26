@@ -6,14 +6,14 @@ import ScheduleInterviewModal from '../../components/SpecializationModals/Schedu
 import SkillsModal from '../../components/SpecializationModals/SkillsModal';
 
 const SpecializationTemplate = ({ children }) => {
-  const openAddSpecialization = useSelector((state) => state.modal.openAddSpecialization);
+  const openSpecialization = useSelector((state) => state.modal.openSpecialization);
   const scheduleInterviewIsOpen = useSelector((state) => state.modal.scheduleInterview);
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
 
   return (
     <div className='specialization'>
       {children}
-      {openAddSpecialization && <SpecializationModal/>}
+      {openSpecialization && <SpecializationModal/>}
       {scheduleInterviewIsOpen && <ScheduleInterviewModal />}
       {openSkillsModal && <SkillsModal />}
     </div>

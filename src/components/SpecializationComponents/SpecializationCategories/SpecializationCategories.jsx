@@ -31,12 +31,12 @@ const SpecializationCategories = () => {
   const handlerAddSpecializations = () => {
     dispatch(setSelectedSpecialization(null));
       if (specializations.length >= 4) return;
-      dispatch(openModal({modalName: 'openAddSpecialization'}));
+      dispatch(openModal({modalName: 'openSpecialization', data:  'addSpecialization'  }));
   }
 
-  const editSpecialization = () => {
+  const handlerEditSpecialization = () => {
     console.log('Open Specialisation Modal to Edit Specialisation');
-    dispatch(openModal({modalName: 'openAddSpecialization'}));
+    dispatch(openModal({modalName: 'openSpecialization', data:  'editSpecialization' }));
   }
 
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
@@ -100,7 +100,7 @@ const SpecializationCategories = () => {
                   <Typography variant='caption3' sx={styles.skillsStatistic}>{t('specialization.specialization_hardSkills').toUpperCase().split(' ').join('')}</Typography>
                   <Typography variant='body'>2/5</Typography>
                 </Box>
-                <IconButton sx={styles.editSpecialization_btn} onClick={editSpecialization}>
+                <IconButton sx={styles.editSpecialization_btn} onClick={handlerEditSpecialization}>
                   <EditIcon sx={styles.editSpecialization} />
                 </IconButton>
               </Box>
