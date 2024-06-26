@@ -38,7 +38,6 @@ const SpecializationModal = React.memo(() => {
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
 
   const { modalData } = useSelector((state) => state.modal);
-  console.log(modalData);
 
   const initialValues = {
     name: '',
@@ -47,8 +46,6 @@ const SpecializationModal = React.memo(() => {
   };
 
   const onSubmit = async (values, { resetForm }) => {
-    // const main = values.main === 'Yes';
-    // const data = {name: values.name, main: main}
     const data = {name: values.name}
 
     console.log('Data from the form', data);
@@ -82,9 +79,7 @@ const SpecializationModal = React.memo(() => {
     formik.setValues({
       name: selectedSpecialization.name,
       mastery: selectedSpecialization.mastery,
-      // main: selectedSpecialization.main ? 'Yes' : 'No',
     });
-    // setSkills(selectedSpecialization.skills);
 
   }, [selectedSpecialization, formik.setValues]);
 
