@@ -10,9 +10,11 @@ export const styles = {
       display: 'flex',
       alignItems: 'flex-start',
       gridGap: theme.spacing(3),
+      marginBottom: theme.spacing(4),
+
     }),
     iconBtn: (theme) => ({
-      marginTop: theme.spacing(4),
+      marginTop: theme.spacing(1),
       padding: '12px',
       borderRadius: 1,
       color: theme.palette.primary[200],
