@@ -5,14 +5,18 @@ import EditIcon from '@mui/icons-material/Edit';
 import SkillItem from './SkillItem';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { openModal } from '../../../redux/modal/modalSlice';
-import { useGetHardSkillsByMasteryIdQuery } from '../../../redux/specialization/specializationApiSlice';
+import { 
+  useGetHardSkillsByMasteryIdQuery, 
+  useGetSpecializationByUserIdQuery, 
+  useGetMainMasteryBySpecializationIdQuery 
+} from '../../../redux/specialization/specializationApiSlice';
 
 const HardSkills = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
+  const { id: userId } = useSelector((state) => state.auth.user.data);
 
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSkillsModal' }));
@@ -22,21 +26,34 @@ const HardSkills = () => {
     console.log('State after dispatching openModal:', openSkillsModal);
   }, [openSkillsModal]);
 
+  const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
+
+  const specializationId = specializations?.[0]?.id; // Adjust this based on the actual structure of specializations data
+  console.log('Specializations ID:', specializationId);
+
+  const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
+
+  useEffect(() => {
+    if (mainMastery) {
+      console.log('Main Mastery:', mainMastery);
+    }
+  }, [mainMastery]);
+
   const {
     data: skills = [],
-    isLoading,
-    isError,
-  } = useGetHardSkillsByMasteryIdQuery({ userId: 6661, masteryId: 10001 });
+    isLoading: isLoadingSkills,
+    isError: isErrorSkills,
+  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
 
-  if (isLoading) {
+  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
     return <CircularProgress />;
   }
 
-  if (isError) {
+  if (isErrorSkills) {
     return <Typography variant='h6'>{t('specialisation.hardSkills.error')}</Typography>;
   }
 
-  const averageMark = Math.round(skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length);
+  const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1);
 
   return (
     <Box sx={styles.wrapper}>
@@ -49,7 +66,7 @@ const HardSkills = () => {
 
       <Box>
         {skills.map((skill, index) => (
-          <SkillItem key={index} name={skill.name} value={Math.round(skill.averageMark).toFixed(1)} />
+          <SkillItem key={index} name={skill.name} value={Math.round(skill.averageMark * 10) / 10} />
         ))}
       </Box>
 
@@ -59,11 +76,6 @@ const HardSkills = () => {
       </Box>
     </Box>
   );
-};
-
-HardSkills.propTypes = {
-  userId: PropTypes.number.isRequired,
-  masteryId: PropTypes.number.isRequired,
 };
 
 export default HardSkills;
