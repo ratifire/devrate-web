@@ -45,6 +45,12 @@ const HardSkills = () => {
     isError: isErrorSkills,
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
 
+  useEffect(() => {
+    if (skills) {
+      console.log('Skills data:', skills);
+    }
+  }, [skills]);
+
   if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
     return <CircularProgress />;
   }

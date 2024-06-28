@@ -9,26 +9,44 @@ import { Box, IconButton, Typography, Chip, TextField, CircularProgress } from '
 import { styles } from './SkillsModal.styles';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
-// import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { useGetHardSkillsByMasteryIdQuery } from '../../../redux/specialization/specializationApiSlice';
+import { 
+  useGetHardSkillsByMasteryIdQuery, 
+  useGetSpecializationByUserIdQuery, 
+  useGetMainMasteryBySpecializationIdQuery 
+} from '../../../redux/specialization/specializationApiSlice';
 
 const SkillsModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  // const { id } = useSelector((state) => state.auth.user.data);
-  // const user = useSelector(selectCurrentUser);
-
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
+  const { id: userId } = useSelector((state) => state.auth.user.data);
+
   const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
+
+  const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
+
+  const specializationId = specializations?.[0]?.id; // Adjust this based on the actual structure of specializations data
+  console.log('Specializations ID:', specializationId);
+
+  const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
+
+  useEffect(() => {
+    if (mainMastery) {
+      console.log('Main Mastery:', mainMastery);
+    }
+  }, [mainMastery]);
 
   const {
     data: skills = [],
-    isLoading,
-    isError,
-  } = useGetHardSkillsByMasteryIdQuery({
-    userId: 6661,
-    masteryId: 10001,
-  });
+    isLoading: isLoadingSkills,
+    isError: isErrorSkills,
+  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
+
+  useEffect(() => {
+    if (skills) {
+      console.log('Skills data:', skills);
+    }
+  }, [skills]);
 
   const [selectedSkill, setSelectedSkill] = useState('');
   const [errorSkill, setErrorSkill] = useState(false);
@@ -89,11 +107,11 @@ const SkillsModal = () => {
     );
   };
 
-  if (isLoading) {
+  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
     return <CircularProgress />;
   }
 
-  if (isError) {
+  if (isErrorSkills) {
     return <Typography variant='h6'>{t('specialisation.skillsModal.error')}</Typography>;
   }
 
