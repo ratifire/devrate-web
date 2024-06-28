@@ -12,7 +12,8 @@ import { useTranslation } from 'react-i18next';
 import { 
   useGetHardSkillsByMasteryIdQuery, 
   useGetSpecializationByUserIdQuery, 
-  useGetMainMasteryBySpecializationIdQuery 
+  useGetMainMasteryBySpecializationIdQuery,
+  useAddSkillToMasteryMutation // Import the mutation hook
 } from '../../../redux/specialization/specializationApiSlice';
 
 const SkillsModal = () => {
@@ -51,16 +52,16 @@ const SkillsModal = () => {
   const [selectedSkill, setSelectedSkill] = useState('');
   const [errorSkill, setErrorSkill] = useState(false);
   const [helperTextSkill, setHelperTextSkill] = useState('');
-
-  const onSubmit = () => {
-    // Logic for form submission
-  };
+  
+  const [addSkillToMastery, { isLoading: isAddingSkill }] = useAddSkillToMasteryMutation(); // Use the mutation hook
 
   const formik = useFormik({
     initialValues: {
       skills: [],
     },
-    onSubmit,
+    onSubmit: () => {
+      handleClose();
+    },
   });
 
   useEffect(() => {
@@ -75,7 +76,7 @@ const SkillsModal = () => {
     setHelperTextSkill('');
   };
 
-  const createSkill = () => {
+  const createSkill = async () => {
     let hasError = false;
 
     if (!selectedSkill) {
@@ -93,10 +94,18 @@ const SkillsModal = () => {
     if (!hasError) {
       const newSkill = {
         name: selectedSkill,
-        code: selectedSkill,
+        type: 'HARD_SKILL',
       };
-      formik.setFieldValue('skills', [...formik.values.skills, newSkill]);
-      setSelectedSkill('');
+
+      try {
+        await addSkillToMastery({ masteryId: mainMastery.id, skill: newSkill }).unwrap();
+        formik.setFieldValue('skills', [...formik.values.skills, newSkill]);
+        setSelectedSkill('');
+        setErrorSkill(false);
+        setHelperTextSkill('');
+      } catch (error) {
+        console.error('Failed to add skill:', error);
+      }
     }
   };
 
@@ -107,7 +116,7 @@ const SkillsModal = () => {
     );
   };
 
-  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
+  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills || isAddingSkill) {
     return <CircularProgress />;
   }
 
@@ -149,7 +158,13 @@ const SkillsModal = () => {
               ))}
             </Box>
           </Box>
-          <ButtonDef variant='contained' type='submit' label={t('profile.modal.btn')} correctStyle={styles.btn} />
+          <ButtonDef 
+            variant='contained' 
+            type='submit' 
+            label={t('profile.modal.btn')} 
+            correctStyle={styles.btn} 
+            disabled={formik.isSubmitting || isAddingSkill} // Disable the button while submitting
+          />
         </form>
       </Box>
     </ModalLayoutProfile>
