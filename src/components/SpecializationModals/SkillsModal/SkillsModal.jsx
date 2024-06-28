@@ -13,7 +13,8 @@ import {
   useGetHardSkillsByMasteryIdQuery, 
   useGetSpecializationByUserIdQuery, 
   useGetMainMasteryBySpecializationIdQuery,
-  useAddSkillToMasteryMutation // Import the mutation hook
+  useAddSkillToMasteryMutation,
+  useDeleteSkillByIdMutation, // Импортируем мутацию для удаления
 } from '../../../redux/specialization/specializationApiSlice';
 
 const SkillsModal = () => {
@@ -26,7 +27,7 @@ const SkillsModal = () => {
 
   const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
 
-  const specializationId = specializations?.[0]?.id; // Adjust this based on the actual structure of specializations data
+  const specializationId = specializations?.[0]?.id; // Проверьте структуру данных специализаций
   console.log('Specializations ID:', specializationId);
 
   const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
@@ -52,8 +53,9 @@ const SkillsModal = () => {
   const [selectedSkill, setSelectedSkill] = useState('');
   const [errorSkill, setErrorSkill] = useState(false);
   const [helperTextSkill, setHelperTextSkill] = useState('');
-  
-  const [addSkillToMastery, { isLoading: isAddingSkill }] = useAddSkillToMasteryMutation(); // Use the mutation hook
+
+  const [addSkillToMastery, { isLoading: isAddingSkill }] = useAddSkillToMasteryMutation(); // Используем мутацию добавления скила
+  const [deleteSkillById, { isLoading: isDeletingSkill }] = useDeleteSkillByIdMutation(); // Используем мутацию удаления скила
 
   const formik = useFormik({
     initialValues: {
@@ -109,14 +111,19 @@ const SkillsModal = () => {
     }
   };
 
-  const skillDeleteHandler = (skillToDelete) => {
-    formik.setFieldValue(
-      'skills',
-      formik.values.skills.filter((item) => item.name !== skillToDelete)
-    );
+  const skillDeleteHandler = async (skillToDeleteId) => {
+    try {
+      await deleteSkillById(skillToDeleteId).unwrap();
+      formik.setFieldValue(
+        'skills',
+        formik.values.skills.filter((item) => item.id !== skillToDeleteId)
+      );
+    } catch (error) {
+      console.error('Failed to delete skill:', error);
+    }
   };
 
-  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills || isAddingSkill) {
+  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills || isAddingSkill || isDeletingSkill) {
     return <CircularProgress />;
   }
 
@@ -149,9 +156,9 @@ const SkillsModal = () => {
             <Box sx={styles.wrapperSkills}>
               {formik.values.skills.map((skill) => (
                 <Chip
-                  key={skill.name}
+                  key={skill.id}
                   label={<Typography variant='subtitle2'>{skill.name}</Typography>}
-                  onDelete={() => skillDeleteHandler(skill.name)}
+                  onDelete={() => skillDeleteHandler(skill.id)}
                   deleteIcon={<CloseIcon />}
                   sx={styles.skillItem}
                 />
@@ -163,7 +170,7 @@ const SkillsModal = () => {
             type='submit' 
             label={t('profile.modal.btn')} 
             correctStyle={styles.btn} 
-            disabled={formik.isSubmitting || isAddingSkill} // Disable the button while submitting
+            disabled={formik.isSubmitting || isAddingSkill || isDeletingSkill} // Disable the button while submitting
           />
         </form>
       </Box>
