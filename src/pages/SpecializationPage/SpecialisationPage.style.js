@@ -22,7 +22,6 @@ export const styles = {
   specialisationTaxonomy: {
     gridColumn: '1/13',
     gridRow: '1/2',
-    height: 170, //To be removed before merge
   },
   specialisationHardSkills: {
     gridColumn: '1/5',
