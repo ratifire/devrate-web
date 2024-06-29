@@ -1,19 +1,23 @@
+const DECO_SIZE = 45;
+
 export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
-    flexWrap: 'wrap',
     justifyContent: 'space-between',
     padding: theme.spacing(4),
+    gap: theme.spacing(4),
   }),
   specialization_left_box: {
     display: 'flex',
     flexDirection: 'column',
   },
   specialization_right_box: (theme) => ({
-    minWidth: '890px',
     display: 'flex',
-    justifyContent: 'left',
+    justifyContent: 'flex-start',
     gap: theme.spacing(4),
+    overflowX: 'auto',
+    overflowY: 'visible',
+    paddingBottom: '15px', // for scroll size compensation
   }),
   page_title: (theme) => ({
     marginBottom: theme.spacing(5),
@@ -31,7 +35,6 @@ export const styles = {
   }),
   add_specialization_btn: (theme) => ({
     width: '134px',
-    height: '134px',
     backgroundColor: theme.palette.neutral[600],
     borderRadius: theme.spacing(2),
   }),
@@ -39,63 +42,89 @@ export const styles = {
   figure: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    height: '138px',
-    width: '228px',
+    minWidth: '228px',
     borderRadius: '10px',
     position: 'relative',
-    backgroundColor: theme.palette.neutral[600],
+    cursor: 'pointer',
+
+    '&.active': {
+      '&::before': {
+        borderColor: theme.palette.primary[200],
+      },
+      '&::after': {
+        borderColor: theme.palette.primary[200],
+      },
+      '.figure__deco::after': {
+        borderColor: theme.palette.primary[200],
+      }
+    },
+
     '&::before': {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      // borderBottom: '1px solid #FF0000',
-      // borderLeft: '1px solid #FF0000',
-      // borderRight: '1px solid #FF0000',
-      // backgroundColor: '#3E3E40',
-      top: 90,
+      borderRight: '1px solid ' + theme.palette.neutral[600],
+      borderBottom: '1px solid ' + theme.palette.neutral[600],
+      borderLeft: '1px solid ' + theme.palette.neutral[600],
+      transition: 'border-color .2s easy-in-out',
+      backgroundColor: theme.palette.neutral[600],
+      top: `calc(100% - ${DECO_SIZE + 1}px)`,
       left: 0,
-      height: 45,
-      width: 'calc(100% - 45px)',
+      height: DECO_SIZE,
+      width: `calc(100% - ${DECO_SIZE}px)`,
       borderRadius: '0 0 10px 10px',
+      zIndex: 1,
     },
     '&::after': {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      // borderTop: '1px solid #FF0000',
-      // borderLeft: '1px solid #FF0000',
-      // borderRight: '1px solid #FF0000',
-      // backgroundColor: 'red',
+      border: '1px solid ' + theme.palette.neutral[600],
+      transition: 'border-color .2s easy-in-out',
+      backgroundColor: theme.palette.neutral[600],
       top: 0,
       left: 0,
-      height: 'calc(100% - 45px)',
+      height: `calc(100% - ${DECO_SIZE}px)`,
       width: '100%',
       borderRadius: '10px 10px 10px 0',
     },
   }),
-  figure_deco: {
+  figure_deco: (theme) => ({
     position: 'absolute',
-    // backgroundColor: 'red',
     height: 43,
     width: 47,
-    bottom: 0,
+    bottom: '2px',
     right: 0,
-    borderRadius: '10px',
+    borderRadius: '0 0 10px 0',
+    backgroundColor: theme.palette.background.level2,
+
     '&::before': {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      top: 0,
+      top: '-1px',
+      zIndex: 2,
       left: 0,
-      height: '100%',
-      width: '100%',
-      backgroundColor: '#303032',
-      borderTopLeftRadius: '10px',
-      borderBottomRightRadius: '10px',
-      // borderTop: '1px solid #FF0000',
-      // borderLeft: '1px solid #FF0000',
+      height: '50%',
+      width: '50%',
+      backgroundColor: theme.palette.neutral[600],
     },
-  },
+    '&::after': {
+      content: '""',
+      display: 'flex',
+      position: 'absolute',
+      backgroundColor: theme.palette.background.level2,
+      left: '1px',
+      top: '-1px',
+      zIndex: 2,
+      height: '50%',
+      width: '50%',
+      borderTopLeftRadius: '10px',
+      transition: 'border-color .2s easy-in-out',
+      borderTop: '1px solid ' + theme.palette.neutral[600],
+      borderLeft: '1px solid ' + theme.palette.neutral[600],
+    },
+  }),
   specialization_title_star: {
     display: 'flex',
     flexDirection: 'row',
@@ -114,16 +143,21 @@ export const styles = {
     marginTop: '12px',
     marginRight: '16px',
     color: theme.palette.action.active,
+    position: 'relative',
+    zIndex: 1,
   }),
   hardAndSoftSkills: (theme) => ({
-    marginLeft: theme.spacing(3),
+    gap: theme.spacing(3),
+    paddingLeft: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
     display: 'flex',
     flexDirection: 'row',
+    position: 'relative',
+    zIndex: 1,
   }),
-  softSkills: (theme) => ({
+  softSkills: () => ({
     display: 'flex',
     flexDirection: 'column',
-    marginRight: theme.spacing(3),
   }),
   hardSkills: {
     display: 'flex',
@@ -135,7 +169,13 @@ export const styles = {
     fontSize: '11px'
   },
   editSpecialization_btn: {
-    position:'absolute', bottom: '-8px', right: '-6px'
+    padding: 0,
+    height: '38px',
+    width: '38px',
+    marginTop: '4px',
+    marginLeft: '6px',
+    position: 'relative',
+    zIndex: 3,
   },
   editSpecialization: (theme) => ({
     zIndex: 1,
@@ -147,6 +187,5 @@ export const styles = {
     padding: '7px',
     boxSizing: 'content-box',
     color: theme.palette.text.secondary,
-  })
-
+  }),
 }
