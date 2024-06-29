@@ -70,7 +70,7 @@ const HardSkills = () => {
         </IconButton>
       </Box>
 
-      <Box>
+      <Box sx={styles.skillsContainer}>
         {skills.map((skill, index) => (
           <SkillItem key={index} name={skill.name} value={Math.round(skill.averageMark * 10) / 10} />
         ))}

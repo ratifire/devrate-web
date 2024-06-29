@@ -19,6 +19,26 @@ export const styles = {
     alignItems: 'center',
     marginBottom: theme.spacing(4),
   }),
+  skillsContainer: (theme) => ({
+    maxHeight: '300px', 
+    overflowY: 'auto',
+    paddingRight: '10px', 
+    scrollbarWidth: 'thin', 
+    scrollbarColor: `${theme.palette.neutral['100']} ${theme.palette.neutral['800']}`, 
+    '&::-webkit-scrollbar': {
+      width: '10px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.palette.neutral['100'],
+      borderRadius: '5px',
+      border: '2px solid transparent', 
+      backgroundClip: 'padding-box', 
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.palette.neutral['800'],
+      borderRadius: '5px',
+    },
+  }),
   skillContainer: {
     display: 'flex',
     alignItems: 'center',

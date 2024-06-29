@@ -14,8 +14,10 @@ import {
   useGetSpecializationByUserIdQuery, 
   useGetMainMasteryBySpecializationIdQuery,
   useAddSkillToMasteryMutation,
-  useDeleteSkillByIdMutation, // Импортируем мутацию для удаления
+  useDeleteSkillByIdMutation, 
 } from '../../../redux/specialization/specializationApiSlice';
+
+const MAX_SKILLS = 20;
 
 const SkillsModal = () => {
   const { t } = useTranslation();
@@ -27,16 +29,9 @@ const SkillsModal = () => {
 
   const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
 
-  const specializationId = specializations?.[0]?.id; // Проверьте структуру данных специализаций
-  console.log('Specializations ID:', specializationId);
+  const specializationId = specializations?.[0]?.id;
 
   const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
-
-  useEffect(() => {
-    if (mainMastery) {
-      console.log('Main Mastery:', mainMastery);
-    }
-  }, [mainMastery]);
 
   const {
     data: skills = [],
@@ -44,18 +39,12 @@ const SkillsModal = () => {
     isError: isErrorSkills,
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
 
-  useEffect(() => {
-    if (skills) {
-      console.log('Skills data:', skills);
-    }
-  }, [skills]);
-
   const [selectedSkill, setSelectedSkill] = useState('');
   const [errorSkill, setErrorSkill] = useState(false);
   const [helperTextSkill, setHelperTextSkill] = useState('');
 
-  const [addSkillToMastery, { isLoading: isAddingSkill }] = useAddSkillToMasteryMutation(); // Используем мутацию добавления скила
-  const [deleteSkillById, { isLoading: isDeletingSkill }] = useDeleteSkillByIdMutation(); // Используем мутацию удаления скила
+  const [addSkillToMastery, { isLoading: isAddingSkill }] = useAddSkillToMasteryMutation(); 
+  const [deleteSkillById, { isLoading: isDeletingSkill }] = useDeleteSkillByIdMutation(); 
 
   const formik = useFormik({
     initialValues: {
@@ -79,35 +68,37 @@ const SkillsModal = () => {
   };
 
   const createSkill = async () => {
-    let hasError = false;
+    if (formik.values.skills.length >= MAX_SKILLS) {
+      setErrorSkill(true);
+      setHelperTextSkill('You can not add more then 20 skills');
+      return;
+    }
 
     if (!selectedSkill) {
       setErrorSkill(true);
       setHelperTextSkill('profile.modal.userInfo.skills.selectSkill');
-      hasError = true;
+      return;
     }
 
     if (formik.values.skills.some((item) => item.name === selectedSkill)) {
       setErrorSkill(true);
       setHelperTextSkill('profile.modal.userInfo.skills.skillAdded');
-      hasError = true;
+      return;
     }
 
-    if (!hasError) {
-      const newSkill = {
-        name: selectedSkill,
-        type: 'HARD_SKILL',
-      };
+    const newSkill = {
+      name: selectedSkill,
+      type: 'HARD_SKILL',
+    };
 
-      try {
-        await addSkillToMastery({ masteryId: mainMastery.id, skill: newSkill }).unwrap();
-        formik.setFieldValue('skills', [...formik.values.skills, newSkill]);
-        setSelectedSkill('');
-        setErrorSkill(false);
-        setHelperTextSkill('');
-      } catch (error) {
-        console.error('Failed to add skill:', error);
-      }
+    try {
+      await addSkillToMastery({ masteryId: mainMastery.id, skill: newSkill }).unwrap();
+      formik.setFieldValue('skills', [...formik.values.skills, newSkill]);
+      setSelectedSkill('');
+      setErrorSkill(false);
+      setHelperTextSkill('');
+    } catch (error) {
+      console.error('Failed to add skill:', error);
     }
   };
 
@@ -123,7 +114,7 @@ const SkillsModal = () => {
     }
   };
 
-  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills || isAddingSkill || isDeletingSkill) {
+  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
     return <CircularProgress />;
   }
 
@@ -148,7 +139,7 @@ const SkillsModal = () => {
               error={errorSkill}
               fullWidth
             />
-            <IconButton sx={styles.iconBtn} onClick={createSkill}>
+            <IconButton sx={styles.iconBtn} onClick={createSkill} disabled={isAddingSkill || isDeletingSkill}>
               <AddIcon />
             </IconButton>
           </Box>
@@ -170,7 +161,7 @@ const SkillsModal = () => {
             type='submit' 
             label={t('profile.modal.btn')} 
             correctStyle={styles.btn} 
-            disabled={formik.isSubmitting || isAddingSkill || isDeletingSkill} // Disable the button while submitting
+            disabled={formik.isSubmitting || isAddingSkill || isDeletingSkill} 
           />
         </form>
       </Box>
