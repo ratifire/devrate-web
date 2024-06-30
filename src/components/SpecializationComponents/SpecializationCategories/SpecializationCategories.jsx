@@ -17,6 +17,9 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
   console.log('Data from Redux Slice', selectedSpecialization);
+
+  const softAndHardSkills = useSelector((state) => state.modal.specialisationId);
+  console.log('Chain of the data that receiving', softAndHardSkills);
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);

@@ -5,7 +5,7 @@ export const avatarApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAvatarUser: builder.query({
       query: (userId) => `/users/${userId}/pictures`,
-      providesTags: (result, error, id) => (result ? [{ type: 'AvatarUser', id }] : []),
+      providesTags: (result, error, id) => [{ type: 'AvatarUser', id }],
     }),
 
     postAvatarUser: builder.mutation({

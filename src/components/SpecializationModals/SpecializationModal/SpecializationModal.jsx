@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import CountrySelect from '../../Inputs/CountrySelect';
 import {
   useCreateNewSpecializationMutation,
+  useGetMasteriesBySpecializationIdQuery,
   useUpdateSpecializationByIdMutation,
 } from '../../../redux/specialization/specializationApiSlice';
 import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
@@ -20,6 +21,7 @@ import {
 import FormInput from '../../Inputs/FormInput';
 import AddIcon from '@mui/icons-material/Add';
 import Responsibility from '../../UI/Responsibility';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 const SpecializationModal = React.memo(() => {
   const { t } = useTranslation();
@@ -45,18 +47,26 @@ const SpecializationModal = React.memo(() => {
     skills: ''
   };
 
-  const onSubmit = async (values, { resetForm }) => {
-    const data = {name: values.name}
+  const updateSpecialization = async({id, name}) => {
+    await updateSpecializationById({id, name}).unwrap();
+    dispatch(setSelectedSpecialization({ id, name }));
+  }
 
-    console.log('Data from the form', data);
+
+  const onSubmit = async (values, { resetForm }) => {
+    console.log('Data from the form', { userId: id, name: values.name, mastery: values.mastery });
     console.log('SelectedSpecialization', selectedSpecialization);
 
     try {
       if (modalData === 'editSpecialization') {
-        await updateSpecializationById({ id: selectedSpecialization.id, name: data.name }).unwrap();
-        dispatch(setSelectedSpecialization({ id: selectedSpecialization.id, name: data.name }));
+        await updateSpecialization({ id: selectedSpecialization.id, name: values.name });
       } else {
-        await createNewSpecialization({ userId: id, data }).unwrap();
+        await createNewSpecialization({ userId: id, data: {name: values.name, main: false} }).unwrap();
+        const { data: masteries} = useGetMasteriesBySpecializationIdQuery(createNewSpecialization.data ?? skipToken);
+        if (masteries) {
+          const masteryId = masteries.find((mastery) => mastery.level.toLowerCase() === values.mastery.toLowerCase());
+          console.log('Bla Bla', masteryId);
+        }
       }
     }
     catch (error) {
