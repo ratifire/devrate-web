@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { styles } from './Interviews.styles';
 import { useTranslation } from 'react-i18next';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Mood from '@mui/icons-material/Mood';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
+import { selectCurrentUser } from '../../../redux/auth/authSlice';
+import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice';
 
 const Interviews = () => {
+  const user = useSelector(selectCurrentUser);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { data: specializations} = useGetSpecializationByUserIdQuery(user.data.id);
+
+  const mainSpec = useMemo(() => {
+    return specializations?.find(sp => sp.main);
+  }, [specializations]);
 
   const scheduleClickHandler = () => {
     dispatch(openModal({modalName: 'scheduleInterview'}));
@@ -19,7 +27,7 @@ const Interviews = () => {
     <Box sx={styles.contentWrapper}>
       <Box sx={styles.stats}>
         <Typography variant="h6">
-          Frontend Developer
+          {mainSpec?.name}
         </Typography>
 
         <Box sx={styles.interviewItemOutcome}>
@@ -28,7 +36,7 @@ const Interviews = () => {
             {t('specialization.interview.outcome')}
           </Typography>
           <Typography variant="body1">
-            10
+            {user.data.conductedInterviews}
           </Typography>
         </Box>
         <Box sx={styles.interviewItemIncome}>
@@ -37,7 +45,7 @@ const Interviews = () => {
             {t('specialization.interview.income')}
           </Typography>
           <Typography variant="body1">
-            5
+            {user.data.completedInterviews}
           </Typography>
         </Box>
       </Box>
