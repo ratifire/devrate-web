@@ -4,19 +4,19 @@ const specializationSlice = createSlice({
   name: 'specialization',
   initialState: {
     selectedSpecialization: null,
-    specialisationId: null,
+    newDataSpecialization: null,
   },
   reducers: {
     setSelectedSpecialization: (state, { payload }) => {
       state.selectedSpecialization = { ...payload };
     },
-    setSpecialisationId: (state, { payload }) => {
-      state.softAndHardSkills = { ...payload };
+    setNewDataSpecialization: (state, { payload }) => {
+      state.newDataSpecialization = { ...payload };
     }
   },
 
 });
 
-export const { setSelectedSpecialization, setSpecialisationId } = specializationSlice.actions;
+export const { setSelectedSpecialization, setNewDataSpecialization } = specializationSlice.actions;
 export default specializationSlice.reducer;
 

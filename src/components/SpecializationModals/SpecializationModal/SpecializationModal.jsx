@@ -11,28 +11,34 @@ import { useTranslation } from 'react-i18next';
 import CountrySelect from '../../Inputs/CountrySelect';
 import {
   useCreateNewSpecializationMutation,
-  useGetMasteriesBySpecializationIdQuery,
+  useLazyGetMasteriesBySpecializationIdQuery,
   useUpdateSpecializationByIdMutation,
 } from '../../../redux/specialization/specializationApiSlice';
-import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
+import { setNewDataSpecialization, setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
 import {
   useGetSpecializationListQuery
 } from '../../../redux/specialization/specializationList/specializationListApiSlice';
 import FormInput from '../../Inputs/FormInput';
 import AddIcon from '@mui/icons-material/Add';
 import Responsibility from '../../UI/Responsibility';
-import { skipToken } from '@reduxjs/toolkit/query';
 
-const SpecializationModal = React.memo(() => {
+const initialValues = {
+  name: '',
+  mastery: '',
+  skills: ''
+};
+
+const SpecializationModal =() => {
   const { t } = useTranslation();
+
   const dispatch = useDispatch();
 
-  const { id } = useSelector((state) => state.auth.user.data);
+  const { id: userId } = useSelector((state) => state.auth.user.data);
 
   const openSpecialization = useSelector((state) => state.modal.openSpecialization);
-
   const [ createNewSpecialization ] = useCreateNewSpecializationMutation();
   const [ updateSpecializationById ] = useUpdateSpecializationByIdMutation();
+  const [ triggerRequest ] = useLazyGetMasteriesBySpecializationIdQuery();
 
   const { data: specializations } = useGetSpecializationListQuery('specialization-names.json');
 
@@ -41,44 +47,38 @@ const SpecializationModal = React.memo(() => {
 
   const { modalData } = useSelector((state) => state.modal);
 
-  const initialValues = {
-    name: '',
-    mastery: '',
-    skills: ''
-  };
-
   const updateSpecialization = async({id, name}) => {
     await updateSpecializationById({id, name}).unwrap();
     dispatch(setSelectedSpecialization({ id, name }));
   }
 
 
-  const onSubmit = async (values, { resetForm }) => {
-    console.log('Data from the form', { userId: id, name: values.name, mastery: values.mastery });
-    console.log('SelectedSpecialization', selectedSpecialization);
-
+  const onSubmit = async (values, {resetForm}) => {
     try {
       if (modalData === 'editSpecialization') {
         await updateSpecialization({ id: selectedSpecialization.id, name: values.name });
-      } else {
-        await createNewSpecialization({ userId: id, data: {name: values.name, main: false} }).unwrap();
-        const { data: masteries} = useGetMasteriesBySpecializationIdQuery(createNewSpecialization.data ?? skipToken);
-        if (masteries) {
-          const masteryId = masteries.find((mastery) => mastery.level.toLowerCase() === values.mastery.toLowerCase());
-          console.log('Bla Bla', masteryId);
-        }
+        return
       }
+      const data = await createNewSpecialization({ userId, data: {name: values.name, main: false} }).unwrap();
+      console.log('Shaitan', data.id);
+      const a = await triggerRequest(data.id);
+      console.log("Bla bla", a);
+      const resp = a.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
+      console.log('99999999999999', resp);
+      dispatch(setNewDataSpecialization(resp))
     }
     catch (error) {
-      console.error('Failed to create Specialization', error);
+      console.warn('Failed to create Specialization', error);
     }
-    resetForm();
-    handleClose();
+    finally {
+      resetForm();
+      handleClose();
+    }
   };
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues,
+    initialValues: {...initialValues},
     validationSchema: SpecializationModalSchema,
     onSubmit,
   });
@@ -179,7 +179,7 @@ const SpecializationModal = React.memo(() => {
       </form>
 
     </ModalLayoutProfile>);
-});
+};
 
 SpecializationModal.displayName = 'SpecializationModal';
 

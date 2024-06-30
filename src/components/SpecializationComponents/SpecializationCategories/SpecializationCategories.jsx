@@ -18,8 +18,8 @@ const SpecializationCategories = () => {
   const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
   console.log('Data from Redux Slice', selectedSpecialization);
 
-  const softAndHardSkills = useSelector((state) => state.modal.specialisationId);
-  console.log('Chain of the data that receiving', softAndHardSkills);
+  const newDataSpecialization = useSelector((state) => state.specialisation.newDataSpecialization);
+  console.log('Chain of the data that receiving', newDataSpecialization);
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
@@ -89,7 +89,7 @@ const SpecializationCategories = () => {
                     {name.length >= 14 && main ? name.slice(0, 14).replace(/_/g, ' ') + '...' : name.slice(0, 18).replace(/_/g, ' ') + '...'}
                   </Typography>
                 </Tooltip>
-                <Typography variant="subtitle2">Level Junior</Typography>
+                <Typography variant="subtitle2">{newDataSpecialization && newDataSpecialization.level}</Typography>
               </Box>
               {main && <StarIcon sx={styles.star} />}
             </Box>
@@ -97,12 +97,12 @@ const SpecializationCategories = () => {
               <Box sx={styles.softSkills}>
                 <Typography variant="caption3"
                             sx={styles.skillsStatistic}>{t('specialization.specialization_softSkills').toUpperCase().split(' ').join('')}</Typography>
-                <Typography variant="body">3/5</Typography>
+                <Typography variant="body">{newDataSpecialization ? newDataSpecialization.softSkillMark : 'No data'}</Typography>
               </Box>
               <Box sx={styles.hardSkills}>
                 <Typography variant="caption3"
                             sx={styles.skillsStatistic}>{t('specialization.specialization_hardSkills').toUpperCase().split(' ').join('')}</Typography>
-                <Typography variant="body">2/5</Typography>
+                <Typography variant="body">{newDataSpecialization ? newDataSpecialization.hardSkillMark : 'No data'}</Typography>
               </Box>
             </Box>
             <Box
