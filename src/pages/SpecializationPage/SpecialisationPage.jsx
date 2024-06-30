@@ -13,6 +13,7 @@ import HardSkillsChart from "../../components/SpecializationComponents/Statistic
 import InterviewChart from "../../components/SpecializationComponents/Statistics/InteviewChart/InterviewChart";
 import {useTranslation} from "react-i18next";
  import Interviews from '../../components/SpecializationComponents/Interviews'
+import SoftSkills from '../../components/SpecializationComponents/SoftSkills';
  
 const SpecializationPage = () => {
   const { t } = useTranslation();
@@ -35,7 +36,7 @@ const SpecializationPage = () => {
             <HardSkills />
           </Paper>
           <Paper sx={styles.specialisationSoftSkills}>
-            <div>Soft Skills</div>
+            <SoftSkills />
           </Paper>
           <Paper sx={styles.specialisationStatistics}>
             <Typography sx={styles.statisticTitle}>
