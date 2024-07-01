@@ -1,9 +1,14 @@
-import React, { useEffect } from 'react';
-import { AboutSection, Footer, Header, HeroSection } from '../components/Sections';
-import { HomeTemplate } from '../Templates';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '../redux/auth/authSlice';
 import Cookies from 'js-cookie';
+import React, { memo, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AboutSection, Footer, Header, HeroSection } from '../components/Sections';
+import { setCredentials } from '../redux/auth/authSlice';
+import { HomeTemplate } from '../Templates';
+
+const MemoizedHeader = memo(Header);
+const MemoizedHeroSection = memo(HeroSection);
+const MemoizedAboutSection = memo(AboutSection);
+const MemoizedFooter = memo(Footer);
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -11,14 +16,14 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(setCredentials({ isAuthenticated: Boolean(cookies) }));
-  }, [cookies]);
+  }, [cookies, dispatch]);
 
   return (
     <HomeTemplate>
-      <Header />
-      <HeroSection />
-      <AboutSection />
-      <Footer />
+      <MemoizedHeader />
+      <MemoizedHeroSection />
+      <MemoizedAboutSection />
+      <MemoizedFooter />
     </HomeTemplate>
   );
 };
