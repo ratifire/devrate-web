@@ -99,7 +99,7 @@ const SpecializationCategories = () => {
               <Box sx={styles.specialization_title}>
                 <Tooltip title={name.replace(/_/g, ' ')}>
                   <Typography variant="h6">
-                    {name.length >= 14 && main ? name.slice(0, 14).replace(/_/g, ' ') + '...' : name.slice(0, 18).replace(/_/g, ' ') + '...'}
+                    {name.length >= 14 || name.length >= 14 && main ? name.slice(0, 14).replace(/_/g, ' ') + '...' : name.slice(0, 18).replace(/_/g, ' ')}
                   </Typography>
                 </Tooltip>
                 <Typography variant="subtitle2">{masteryData[id]?.level}</Typography>
