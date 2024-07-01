@@ -12,9 +12,10 @@ import CountrySelect from '../../Inputs/CountrySelect';
 import {
   useCreateNewSpecializationMutation,
   useLazyGetMasteriesBySpecializationIdQuery,
+  useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
   useUpdateSpecializationByIdMutation,
 } from '../../../redux/specialization/specializationApiSlice';
-import { setNewDataSpecialization, setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
+import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
 import {
   useGetSpecializationListQuery
 } from '../../../redux/specialization/specializationList/specializationListApiSlice';
@@ -28,7 +29,7 @@ const initialValues = {
   skills: ''
 };
 
-const SpecializationModal =() => {
+const SpecializationModal = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -39,10 +40,12 @@ const SpecializationModal =() => {
   const [ createNewSpecialization ] = useCreateNewSpecializationMutation();
   const [ updateSpecializationById ] = useUpdateSpecializationByIdMutation();
   const [ triggerRequest ] = useLazyGetMasteriesBySpecializationIdQuery();
+  const [ setNewMainMasteryBySpecIdAndMasteryId ] = useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
 
   const { data: specializations } = useGetSpecializationListQuery('specialization-names.json');
 
   const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
+  console.log(selectedSpecialization, 'selectedSpecialization');
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
 
   const { modalData } = useSelector((state) => state.modal);
@@ -55,17 +58,44 @@ const SpecializationModal =() => {
 
   const onSubmit = async (values, {resetForm}) => {
     try {
+
       if (modalData === 'editSpecialization') {
-        await updateSpecialization({ id: selectedSpecialization.id, name: values.name });
-        return
+        let shouldUpdateSpecialization = false;
+        let shouldUpdateMastery = false;
+
+        // Check if the specialization name has changed
+        if (values.name !== selectedSpecialization.name) {
+          shouldUpdateSpecialization = true;
+        }
+
+        // Check if the mastery has changed
+        if (values.mastery !== selectedSpecialization.mastery) {
+          shouldUpdateMastery = true;
+        }
+
+        // Update specialization if the name has changed
+        if (shouldUpdateSpecialization) {
+          await updateSpecialization({ id: selectedSpecialization.id, name: values.name });
+        } else {
+          console.log('Specialization name has not changed. No update needed.');
+        }
+
+        // Update mastery if it has changed
+        if (shouldUpdateMastery) {
+          const masteries = await triggerRequest(selectedSpecialization.id);
+          const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
+          await setNewMainMasteryBySpecIdAndMasteryId({ masteryId: resp.id, specId: selectedSpecialization.id, name: resp.name, softSkillMark: resp.softSkillMark, hardSkillMark: resp.hardSkillMark });
+        } else {
+          console.log('Mastery has not changed. No update needed.');
+        }
+
+        return;
+
       }
       const data = await createNewSpecialization({ userId, data: {name: values.name, main: false} }).unwrap();
-      console.log('Shaitan', data.id);
-      const a = await triggerRequest(data.id);
-      console.log("Bla bla", a);
-      const resp = a.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
-      console.log('99999999999999', resp);
-      dispatch(setNewDataSpecialization(resp))
+      const masteries = await triggerRequest(data.id);
+      const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
+      await setNewMainMasteryBySpecIdAndMasteryId({ masteryId: resp.id, specId: data.id, name: resp.name, softSkillMark: resp.softSkillMark, hardSkillMark: resp.hardSkillMark });
     }
     catch (error) {
       console.warn('Failed to create Specialization', error);
@@ -131,7 +161,7 @@ const SpecializationModal =() => {
             <CountrySelect sx={styles.input50}
                            label={t('specialization.modal.specialization.mastery')}
                            value={formik.values.mastery}
-                           countries={['Junior', 'Middle', 'Senior']}
+                           countries={['JUNIOR', 'MIDDLE', 'SENIOR']}
                            name="mastery"
                            variant="outlined"
                            handleChange={formik.handleChange}

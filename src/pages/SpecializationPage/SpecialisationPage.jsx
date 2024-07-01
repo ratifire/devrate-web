@@ -13,10 +13,10 @@ import HardSkillsChart from "../../components/SpecializationComponents/Statistic
 import InterviewChart from "../../components/SpecializationComponents/Statistics/InteviewChart/InterviewChart";
 import {useTranslation} from "react-i18next";
  import Interviews from '../../components/SpecializationComponents/Interviews'
- 
+
 const SpecializationPage = () => {
   const { t } = useTranslation();
-  
+
   return (
     <SpecializationTemplate>
       <ProfileHeader/>

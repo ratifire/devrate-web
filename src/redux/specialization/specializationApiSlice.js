@@ -24,6 +24,16 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       query: (specializationId) => `/specializations/${specializationId}/main-mastery`,
     }),
 
+    setNewMainMasteryBySpecIdAndMasteryId: builder.mutation({
+      query({ masteryId, specId, name, softSkillMark, hardSkillMark }) {
+        return {
+          url: `/specializations/${specId}/set-main-mastery/${masteryId}`,
+          method: "PUT",
+          body: {id: masteryId, name, softSkillMark, hardSkillMark},
+        };
+      },
+    }),
+
     updateSpecializationById: builder.mutation({
       query({ id, name }) {
         return {
@@ -77,9 +87,10 @@ export const {
   useUpdateSpecializationByIdMutation,
   useGetMasteriesBySpecializationIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
+  useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
   useUpdateSpecializationAsMainByIdMutation,
   useGetHardAndSoftSkillsByMasteryIdQuery,
   useGetHardSkillsByMasteryIdQuery,
   useGetSoftSkillsByMasteryIdQuery,
-  useGetMainMasteryBySpecializationIdQuery
+  useLazyGetMainMasteryBySpecializationIdQuery
 } = SpecializationApiSlice;

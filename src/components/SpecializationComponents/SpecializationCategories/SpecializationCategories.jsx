@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styles } from './SpecializationCategories.styles';
 import { Box, IconButton, Tooltip, Typography } from '@mui/material';
 import { ButtonDef } from '../../Buttons';
@@ -8,23 +8,36 @@ import EditIcon from '@mui/icons-material/Edit';
 import StarIcon from '@mui/icons-material/Star';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  useGetSpecializationByUserIdQuery, useUpdateSpecializationAsMainByIdMutation,
+  useGetSpecializationByUserIdQuery,
+  useLazyGetMainMasteryBySpecializationIdQuery,
+  useUpdateSpecializationAsMainByIdMutation,
 } from '../../../redux/specialization/specializationApiSlice';
 import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
 import { openModal } from '../../../redux/modal/modalSlice';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const { id } = useSelector((state) => state.auth.user.data);
   const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
   console.log('Data from Redux Slice', selectedSpecialization);
 
-  const newDataSpecialization = useSelector((state) => state.specialisation.newDataSpecialization);
-  console.log('Chain of the data that receiving', newDataSpecialization);
-  const { t } = useTranslation();
-  const { id } = useSelector((state) => state.auth.user.data);
+  const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
+  const [ triggerGetMainMastery ] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [ updateSpecializationAsMainById ] = useUpdateSpecializationAsMainByIdMutation();
-  console.log('Server data',specializations);
+
+  useEffect(() => {
+    if (specializations && specializations.length > 0) {
+      specializations.forEach(async (specialization) => {
+        const { data } = await triggerGetMainMastery(specialization.id);
+        setMasteryData((prev) => ({
+          ...prev,
+          [specialization.id]: data,
+        }));
+      });
+    }
+  }, [specializations, triggerGetMainMastery]);
 
   const handlerChangeSpecialization = (specialization) => {
     dispatch(setSelectedSpecialization(specialization));
@@ -80,7 +93,7 @@ const SpecializationCategories = () => {
             key={id}
             sx={styles.figure}
             className={`figure ${ selectedSpecialization?.id === id ? 'active' : ''}`}
-            onClick={() => handlerChangeSpecialization({ id, name, main })}
+            onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id].level })}
           >
             <Box sx={styles.specialization_title_star}>
               <Box sx={styles.specialization_title}>
@@ -89,7 +102,7 @@ const SpecializationCategories = () => {
                     {name.length >= 14 && main ? name.slice(0, 14).replace(/_/g, ' ') + '...' : name.slice(0, 18).replace(/_/g, ' ') + '...'}
                   </Typography>
                 </Tooltip>
-                <Typography variant="subtitle2">{newDataSpecialization && newDataSpecialization.level}</Typography>
+                <Typography variant="subtitle2">{masteryData[id]?.level}</Typography>
               </Box>
               {main && <StarIcon sx={styles.star} />}
             </Box>
@@ -97,12 +110,12 @@ const SpecializationCategories = () => {
               <Box sx={styles.softSkills}>
                 <Typography variant="caption3"
                             sx={styles.skillsStatistic}>{t('specialization.specialization_softSkills').toUpperCase().split(' ').join('')}</Typography>
-                <Typography variant="body">{newDataSpecialization ? newDataSpecialization.softSkillMark : 'No data'}</Typography>
+                <Typography variant="body">{masteryData[id]?.softSkillMark}</Typography>
               </Box>
               <Box sx={styles.hardSkills}>
                 <Typography variant="caption3"
                             sx={styles.skillsStatistic}>{t('specialization.specialization_hardSkills').toUpperCase().split(' ').join('')}</Typography>
-                <Typography variant="body">{newDataSpecialization ? newDataSpecialization.hardSkillMark : 'No data'}</Typography>
+                <Typography variant="body">{masteryData[id]?.hardSkillMark}</Typography>
               </Box>
             </Box>
             <Box
