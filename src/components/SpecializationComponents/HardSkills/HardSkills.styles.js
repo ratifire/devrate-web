@@ -12,6 +12,9 @@ export const styles = {
   wrapper: (theme) => ({
     maxWidth: '480px',
     padding: theme.spacing(4),
+    backgroundColor: theme.palette.background.level2,
+    borderRadius: 2,
+
   }),
   title: (theme) => ({
     display: 'flex',
@@ -19,26 +22,9 @@ export const styles = {
     alignItems: 'center',
     marginBottom: theme.spacing(4),
   }),
-  skillsContainer: (theme) => ({
-    maxHeight: '300px', 
-    overflowY: 'auto',
-    paddingRight: '10px', 
-    scrollbarWidth: 'thin', 
-    scrollbarColor: `${theme.palette.neutral['100']} ${theme.palette.neutral['800']}`, 
-    '&::-webkit-scrollbar': {
-      width: '10px',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: theme.palette.neutral['100'],
-      borderRadius: '5px',
-      border: '2px solid transparent', 
-      backgroundClip: 'padding-box', 
-    },
-    '&::-webkit-scrollbar-track': {
-      backgroundColor: theme.palette.neutral['800'],
-      borderRadius: '5px',
-    },
-  }),
+  skillsContainer:  {
+    height: 'auto',
+  },
   skillContainer: {
     display: 'flex',
     alignItems: 'center',

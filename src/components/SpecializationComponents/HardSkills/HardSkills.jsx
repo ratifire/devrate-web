@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, IconButton, CircularProgress } from '@mui/material';
 import { styles } from './HardSkills.styles';
 import EditIcon from '@mui/icons-material/Edit';
@@ -18,38 +18,29 @@ const HardSkills = () => {
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const { id: userId } = useSelector((state) => state.auth.user.data);
 
+  const [specializationId, setSpecializationId] = useState(null);
+
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSkillsModal' }));
   };
 
-  useEffect(() => {
-    console.log('State after dispatching openModal:', openSkillsModal);
-  }, [openSkillsModal]);
+  useEffect(() => {}, [openSkillsModal]);
 
   const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
 
-  const specializationId = specializations?.[0]?.id; // Adjust this based on the actual structure of specializations data
-  console.log('Specializations ID:', specializationId);
+  useEffect(() => {
+    if (specializations && specializations.length > 0) {
+      setSpecializationId(specializations[0].id);
+    }
+  }, [specializations]);
 
   const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
-
-  useEffect(() => {
-    if (mainMastery) {
-      console.log('Main Mastery:', mainMastery);
-    }
-  }, [mainMastery]);
 
   const {
     data: skills = [],
     isLoading: isLoadingSkills,
     isError: isErrorSkills,
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
-
-  useEffect(() => {
-    if (skills) {
-      console.log('Skills data:', skills);
-    }
-  }, [skills]);
 
   if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
     return <CircularProgress />;
