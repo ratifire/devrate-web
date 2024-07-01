@@ -1,20 +1,22 @@
-import React from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { Box, Typography } from '@mui/material';
-import { styles } from './AchievementModal.styles';
-import { useSelector } from 'react-redux'; 
 import { useFormik } from 'formik';
-import { AchievementModalSchema } from './AchievementModalSchema';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
+import { selectCurrentUser } from '../../../redux/auth/authSlice';
+import { useUpdateAchievementMutation } from '../../../redux/services/achievementsApiSlice';
+import { ButtonDef } from '../../Buttons';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
-import { ButtonDef } from '../../Buttons';
-import { useUpdateAchievementMutation } from "../../../redux/services/achievementsApiSlice";
-import { selectCurrentUser } from "../../../redux/auth/authSlice";
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { styles } from './AchievementModal.styles';
+import { AchievementModalSchema } from './AchievementModalSchema';
 
-const AchievementEditModal = ({ isOpen, onClose, achievement, updateAchievement }) => {
-  const currentUser = useSelector(selectCurrentUser);
+const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
+  const {
+    data: { id: userId },
+  } = useSelector(selectCurrentUser);
   const { t } = useTranslation();
   const [updateAchievementApi] = useUpdateAchievementMutation();
 
@@ -25,15 +27,12 @@ const AchievementEditModal = ({ isOpen, onClose, achievement, updateAchievement 
   };
 
   const onSubmit = async (values, { resetForm }) => {
-    console.log('Submitted values:', values);
-
     try {
-      const updatedAchievement = await updateAchievementApi({
+      await updateAchievementApi({
         id: achievement.id,
-        payload: { ...values, userId: currentUser.id }, // Including userId in the payload
+        payload: { ...values, userId }, // Including userId in the payload
       }).unwrap();
 
-      updateAchievement(updatedAchievement);
       resetForm();
       onClose();
     } catch (error) {
@@ -52,7 +51,6 @@ const AchievementEditModal = ({ isOpen, onClose, achievement, updateAchievement 
       <Typography variant='subtitle1' sx={styles.title}>
         {t('modal.achievement.title')}
       </Typography>
-
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
           <Box sx={styles.input100}>
@@ -94,8 +92,12 @@ const AchievementEditModal = ({ isOpen, onClose, achievement, updateAchievement 
               error={formik.touched.description && Boolean(formik.errors.description)}
             />
           </Box>
-
-          <ButtonDef variant='contained' type='submit' label={t('profile.modal.btn')} correctStyle={styles.workExperienceBtn} />
+          <ButtonDef
+            variant='contained'
+            type='submit'
+            label={t('profile.modal.btn')}
+            correctStyle={styles.workExperienceBtn}
+          />
         </Box>
       </form>
     </ModalLayoutProfile>
@@ -106,7 +108,6 @@ AchievementEditModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   achievement: PropTypes.object.isRequired,
-  updateAchievement: PropTypes.func.isRequired, // Add prop type for updateAchievement
 };
 
 export default AchievementEditModal;
