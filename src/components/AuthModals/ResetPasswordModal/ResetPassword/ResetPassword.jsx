@@ -1,16 +1,16 @@
+import { Box, Link, TextField, Typography } from '@mui/material';
+import { Form, Formik } from 'formik';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import ModalLayout from '../../../../layouts/ModalLayout';
-import styles from './ResetPassword.styles';
-import { useTranslation } from 'react-i18next';
-import { Formik, Form } from 'formik';
-import { Box, Link, Typography, TextField } from '@mui/material';
-import { ResetPasswordSchema } from './ResetPasswordSchema';
-import { FormInput } from '../../../Inputs';
-import { ButtonDef } from '../../../Buttons';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useChangePasswordMutation } from '../../../../redux/auth/authApiSlice';
+import { closeModal } from '../../../../redux/modal/modalSlice';
+import { ButtonDef } from '../../../Buttons';
+import { FormInput } from '../../../Inputs';
+import styles from './ResetPassword.styles';
+import { ResetPasswordSchema } from './ResetPasswordSchema';
 
 const initialValues = {
   newPassword: '',
@@ -72,12 +72,20 @@ const ResetPassword = () => {
 
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
-      <Typography variant='subtitle3' sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
+      <Typography variant='subtitle3' sx={styles.title}>
+        {t('modal.resetPassword.title')}
+      </Typography>
       <Box sx={styles.mainTextWrapper}>
         <Typography variant='subtitle3' sx={styles.mainText}>
-          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>user@mail.com</Typography>.
+          {t('modal.confirmation.main_text1')}{' '}
+          <Typography variant='subtitle3' component='span' sx={styles.userEmail}>
+            user@mail.com
+          </Typography>
+          .
         </Typography>
-        <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
+        <Typography variant='subtitle3' sx={styles.mainText}>
+          {t('modal.confirmation.main_text2')}
+        </Typography>
       </Box>
 
       <Formik
@@ -90,8 +98,8 @@ const ResetPassword = () => {
               newPassword: values.newPassword,
             };
             const response = await changePassword(requestData).unwrap();
-            _handleCodeChange(values.code.join('')); 
-            console.log(response); 
+            _handleCodeChange(values.code.join(''));
+            console.log(response);
             alert('Password changed successfully!');
             resetForm();
             handleClose();
@@ -103,12 +111,12 @@ const ResetPassword = () => {
       >
         {(formik) => (
           <Form autoComplete='off' style={{ width: '100%' }}>
-            <Box sx={ styles.resetPasswordForm }>
+            <Box sx={styles.resetPasswordForm}>
               {[...Array(fieldCount)].map((_, index) => (
                 <React.Fragment key={index}>
                   <TextField
-                    type="text"
-                    variant="outlined"
+                    type='text'
+                    variant='outlined'
                     inputRef={(ele) => {
                       inputRefs.current[index] = ele;
                     }}
@@ -154,13 +162,15 @@ const ResetPassword = () => {
                 label={t('modal.resetPassword.btn_change_password')}
               />
             </Box>
-            {isError && <Typography color="error">Error changing password. Please try again.</Typography>}
-            {isSuccess && <Typography color="primary">Password changed successfully!</Typography>}
+            {isError && <Typography color='error'>Error changing password. Please try again.</Typography>}
+            {isSuccess && <Typography color='primary'>Password changed successfully!</Typography>}
           </Form>
         )}
       </Formik>
 
-      <Typography variant='subtitle3' sx={styles.text}>{t('modal.resetPassword.text_privacy')}</Typography>
+      <Typography variant='subtitle3' sx={styles.text}>
+        {t('modal.resetPassword.text_privacy')}
+      </Typography>
       <Typography variant='subtitle3' sx={styles.textLink}>
         {t('modal.resetPassword.return_on')}
         <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
