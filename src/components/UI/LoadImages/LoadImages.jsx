@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
-import Dropzone from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import { styles } from './LoadImages.styles';
 import { Box, IconButton, Typography } from '@mui/material';
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
@@ -24,6 +24,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
 
   const [settingsCanvas, setSettingsCanvas] = useState({ ...defaultSettingsCanvas });
   const [scale, setScale] = useState(1.1);
+  const [error, setError] = useState('');
   const { t } = useTranslation();
 
   const handleWheel = (e) => {
@@ -48,48 +49,67 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
     setSettingsCanvas(defaultSettingsCanvas);
   };
 
+  const onDrop = (acceptedFiles, fileRejections) => {
+    if (fileRejections.length > 0) {
+      setError(t('This file can not be used as avatar'));
+      return;
+    }
+
+    if (acceptedFiles.length > 0) {
+      const image = acceptedFiles[0];
+      setSettingsCanvas({ ...settingsCanvas, image });
+      setError(''); // Clear any previous error
+    }
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/jpeg': [],
+      'image/png': [],
+    },
+    maxSize: 200 * 1024, // 200 KB
+    onDrop,
+  });
+
   return (
     <Box sx={styles.wrapper}>
       <input type='hidden' value={value} onChange={handleChange} onBlur={handleBlur} />
-      <Dropzone
-        onDrop={([image]) => setSettingsCanvas({ ...settingsCanvas, image })}
-        onClick={true}
-        noKeyboard
-        style={styles.dropZoneWrapper}
-      >
-        {({ getRootProps, getInputProps }) => (
-          <Box sx={styles.dropZone} {...getRootProps()}>
-            <input {...getInputProps()} />
-            <Typography variant='caption1' sx={styles.text}>
-              {t('profile.modal.userInfo.photo.dropPhoto.first')}
-              <br />
-              {t('profile.modal.userInfo.photo.dropPhoto.second')}
-              <span>{t('profile.modal.userInfo.photo.dropPhoto.third')}</span>
+      <Box {...getRootProps()} sx={styles.dropZoneWrapper}>
+        <input {...getInputProps()} />
+        <Box sx={styles.dropZone}>
+          <Typography variant='caption1' sx={styles.text}>
+            {t('profile.modal.userInfo.photo.dropPhoto.first')}
+            <br />
+            {t('profile.modal.userInfo.photo.dropPhoto.second')}
+            <span>{t('profile.modal.userInfo.photo.dropPhoto.third')}</span>
+          </Typography>
+          <BackupOutlinedIcon sx={styles.icon} />
+          {error && (
+            <Typography color='error' sx={styles.error}>
+              {error}
             </Typography>
-            <BackupOutlinedIcon sx={styles.icon} />
-          </Box>
-        )}
-      </Dropzone>
-      <>
-        {settingsCanvas.image ? (
-          <AvatarEditor
-            ref={editor}
-            width={settingsCanvas.width}
-            height={settingsCanvas.height}
-            borderRadius={settingsCanvas.borderRadius}
-            image={settingsCanvas.image}
-            style={styles.preview}
-            border={50}
-            color={[29, 29, 29, 0.25]}
-            scale={scale}
-            onWheel={handleWheel}
-          />
-        ) : (
-          <Box sx={styles.imgDef}>
-            <ImageOutlinedIcon sx={styles.imgDefIcon} />
-          </Box>
-        )}
-      </>
+          )}
+        </Box>
+      </Box>
+
+      {settingsCanvas.image ? (
+        <AvatarEditor
+          ref={editor}
+          width={settingsCanvas.width}
+          height={settingsCanvas.height}
+          borderRadius={settingsCanvas.borderRadius}
+          image={settingsCanvas.image}
+          style={styles.preview}
+          border={50}
+          color={[29, 29, 29, 0.25]}
+          scale={scale}
+          onWheel={handleWheel}
+        />
+      ) : (
+        <Box sx={styles.imgDef}>
+          <ImageOutlinedIcon sx={styles.imgDefIcon} />
+        </Box>
+      )}
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
           variant='contained'
