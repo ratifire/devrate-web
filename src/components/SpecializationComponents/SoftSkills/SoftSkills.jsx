@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Box, Typography, IconButton } from '@mui/material';
 import { styles } from './SoftSkills.styles';
 import EditIcon from '@mui/icons-material/Edit';
@@ -24,12 +24,12 @@ const SoftSkills = () => {
 
   const { data } = useGetSoftSkillsQuery({ userId: 6661, masteryId: 10001 });
 
-  const averageMark = Math.round((data || []).reduce((acc, skill) => acc + skill.averageMark, 0) / (data || []).length);
+  const averageMark = useMemo(() => Math.round(((data || []).reduce((acc, skill) => acc + skill.averageMark, 0) / (data || []).length) * 10) / 10, [data]);
 
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.title}>
-        <Typography variant='h6'>{t('specialization.softSkill.title')}</Typography>
+        <Typography variant='h6'>{t('specialization.softSkills.title')}</Typography>
         <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleModalOpen}>
           <EditIcon />
         </IconButton>
