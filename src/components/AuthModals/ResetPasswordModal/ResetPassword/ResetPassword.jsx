@@ -115,6 +115,7 @@ const ResetPassword = () => {
                     onKeyDown={(event) => handleKeyDown(event, index, formik)}
                     value={formik.values.code[index] ?? ''}
                     inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
+                    sx={styles.resetPasswordForm['& .MuiOutlinedInput-root']}
                   />
                 </React.Fragment>
               ))}

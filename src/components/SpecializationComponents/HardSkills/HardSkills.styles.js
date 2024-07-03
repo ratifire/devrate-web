@@ -12,6 +12,9 @@ export const styles = {
   wrapper: (theme) => ({
     maxWidth: '480px',
     padding: theme.spacing(4),
+    backgroundColor: theme.palette.background.level2,
+    borderRadius: 2,
+
   }),
   title: (theme) => ({
     display: 'flex',
@@ -19,6 +22,9 @@ export const styles = {
     alignItems: 'center',
     marginBottom: theme.spacing(4),
   }),
+  skillsContainer:  {
+    height: 'auto',
+  },
   skillContainer: {
     display: 'flex',
     alignItems: 'center',

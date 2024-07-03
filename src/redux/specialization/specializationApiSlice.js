@@ -12,10 +12,10 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
     }),
 
     createNewSpecialization: builder.mutation({
-      query: ({userId, data}) => ({
+      query: ({ userId, data }) => ({
         url: `/users/${userId}/specializations`,
-        method: "POST",
-        body: {...data},
+        method: 'POST',
+        body: { ...data },
       }),
       invalidatesTags: ['Specialization'],
     }),
@@ -58,8 +58,8 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       query({ id, name }) {
         return {
           url: '/specializations',
-          method: "PUT",
-          body: {id: id, name},
+          method: 'PUT',
+          body: { id, name },
         };
       },
       invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
@@ -87,13 +87,27 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       query({ id, name, main }) {
         return {
           url: `/specializations/${id}/set-main`,
-          method: "PUT",
-          body: {id: id, name, main},
+          method: 'PUT',
+          body: { id, name, main },
         };
       },
       invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
     }),
-
+    addSkillToMastery: builder.mutation({
+      query: ({ masteryId, skill }) => ({
+        url: `/masteries/${masteryId}/skill`,
+        method: 'POST',
+        body: skill,
+      }),
+      invalidatesTags: ['HardSkills'],
+    }),
+    deleteSkillById: builder.mutation({
+      query: (id) => ({
+        url: `/skills/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['HardSkills'],
+    }),
   }),
 });
 
@@ -108,5 +122,8 @@ export const {
   useGetHardAndSoftSkillsByMasteryIdQuery,
   useGetHardSkillsByMasteryIdQuery,
   useGetSoftSkillsByMasteryIdQuery,
-  useLazyGetMainMasteryBySpecializationIdQuery
+  useLazyGetMainMasteryBySpecializationIdQuery,
+  useGetMainMasteryBySpecializationIdQuery,
+  useAddSkillToMasteryMutation,
+  useDeleteSkillByIdMutation,
 } = SpecializationApiSlice;
