@@ -26,6 +26,9 @@ export const styles = {
   specialisationHardSkills: {
     gridColumn: '1/5',
     gridRow: '2/4',
+    display: 'flex',
+    flexDirection: 'column',
+    flexShrink: 1,
   },
   specialisationLevel: {
     gridColumn: '5/9',
