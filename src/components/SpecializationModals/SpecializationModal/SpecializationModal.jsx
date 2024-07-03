@@ -29,7 +29,7 @@ const initialValues = {
   skills: ''
 };
 
-const SpecializationModal = () => {
+const SpecializationModal = React.memo(() => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -45,7 +45,6 @@ const SpecializationModal = () => {
   const { data: specializations } = useGetSpecializationListQuery('specialization-names.json');
 
   const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
-  console.log(selectedSpecialization, 'selectedSpecialization');
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
 
   const { modalData } = useSelector((state) => state.modal);
@@ -205,7 +204,7 @@ const SpecializationModal = () => {
       </form>
 
     </ModalLayoutProfile>);
-};
+});
 
 SpecializationModal.displayName = 'SpecializationModal';
 
