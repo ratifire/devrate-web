@@ -76,8 +76,6 @@ const SpecializationModal = () => {
         // Update specialization if the name has changed
         if (shouldUpdateSpecialization) {
           await updateSpecialization({ id: selectedSpecialization.id, name: values.name });
-        } else {
-          console.log('Specialization name has not changed. No update needed.');
         }
 
         // Update mastery if it has changed
@@ -85,8 +83,6 @@ const SpecializationModal = () => {
           const masteries = await triggerRequest(selectedSpecialization.id);
           const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
           await setNewMainMasteryBySpecIdAndMasteryId({ masteryId: resp.id, specId: selectedSpecialization.id, name: resp.name, softSkillMark: resp.softSkillMark, hardSkillMark: resp.hardSkillMark });
-        } else {
-          console.log('Mastery has not changed. No update needed.');
         }
 
         return;

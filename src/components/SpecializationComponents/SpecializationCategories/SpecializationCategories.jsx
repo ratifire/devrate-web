@@ -20,7 +20,7 @@ const SpecializationCategories = () => {
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
   const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
-  console.log('Data from Redux Slice', selectedSpecialization);
+  console.log('Selected Specialization || Data from Redux Slice', selectedSpecialization);
 
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
@@ -42,7 +42,6 @@ const SpecializationCategories = () => {
   const handlerChangeSpecialization = (specialization) => {
     const spec = { ...specialization, mastery: specialization.mastery.slice(0,1) + specialization.mastery.slice(1).toLowerCase() }
     dispatch(setSelectedSpecialization(spec));
-    console.log('User clicked on Specialisation', spec);
   }
 
   const handlerAddSpecializations = () => {
@@ -52,14 +51,12 @@ const SpecializationCategories = () => {
   }
 
   const handlerEditSpecialization = () => {
-    console.log('Open Specialisation Modal to Edit Specialisation');
     dispatch(openModal({modalName: 'openSpecialization', data:  'editSpecialization' }));
   }
 
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
     if (specializations.length === 0) return;
     await updateSpecializationAsMainById({...selectedSpecialization, main: true}).unwrap();
-    console.log('Main Spec. changed to', {selectedSpecialization, main: true});
   }
 
   if (isLoading) {
