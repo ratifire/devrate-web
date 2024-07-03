@@ -62,22 +62,18 @@ const SpecializationModal = React.memo(() => {
         let shouldUpdateSpecialization = false;
         let shouldUpdateMastery = false;
 
-        // Check if the specialization name has changed
         if (values.name !== selectedSpecialization.name) {
           shouldUpdateSpecialization = true;
         }
 
-        // Check if the mastery has changed
         if (values.mastery !== selectedSpecialization.mastery) {
           shouldUpdateMastery = true;
         }
 
-        // Update specialization if the name has changed
         if (shouldUpdateSpecialization) {
           await updateSpecialization({ id: selectedSpecialization.id, name: values.name });
         }
 
-        // Update mastery if it has changed
         if (shouldUpdateMastery) {
           const masteries = await triggerRequest(selectedSpecialization.id);
           const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
