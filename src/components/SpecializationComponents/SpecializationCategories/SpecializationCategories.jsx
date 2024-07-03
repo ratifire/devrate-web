@@ -40,8 +40,9 @@ const SpecializationCategories = () => {
   }, [specializations, triggerGetMainMastery]);
 
   const handlerChangeSpecialization = (specialization) => {
-    dispatch(setSelectedSpecialization(specialization));
-    console.log('User clicked on Specialisation', specialization);
+    const spec = { ...specialization, mastery: specialization.mastery.slice(0,1) + specialization.mastery.slice(1).toLowerCase() }
+    dispatch(setSelectedSpecialization(spec));
+    console.log('User clicked on Specialisation', spec);
   }
 
   const handlerAddSpecializations = () => {
@@ -102,7 +103,7 @@ const SpecializationCategories = () => {
                     {name.length >= 14 || name.length >= 14 && main ? name.slice(0, 14).replace(/_/g, ' ') + '...' : name.slice(0, 18).replace(/_/g, ' ')}
                   </Typography>
                 </Tooltip>
-                <Typography variant="subtitle2">Level {masteryData[id]?.level}</Typography>
+                <Typography variant="subtitle2">Level {masteryData[id]?.level.slice(0,1) + masteryData[id]?.level.slice(1).toLowerCase()}</Typography>
               </Box>
               {main && <StarIcon sx={styles.star} />}
             </Box>

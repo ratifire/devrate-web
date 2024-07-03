@@ -161,7 +161,7 @@ const SpecializationModal = () => {
             <CountrySelect sx={styles.input50}
                            label={t('specialization.modal.specialization.mastery')}
                            value={formik.values.mastery}
-                           countries={['JUNIOR', 'MIDDLE', 'SENIOR']}
+                           countries={['Junior', 'Middle', 'Senior']}
                            name="mastery"
                            variant="outlined"
                            handleChange={formik.handleChange}
