@@ -6,8 +6,10 @@ import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import StarIcon from '@mui/icons-material/Star';
+import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  useDeleteSpecializationByIdMutation,
   useGetSpecializationByUserIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
@@ -26,6 +28,7 @@ const SpecializationCategories = () => {
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
   const [ triggerGetMainMastery ] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [ updateSpecializationAsMainById ] = useUpdateSpecializationAsMainByIdMutation();
+  const [ deleteSpecialization ] = useDeleteSpecializationByIdMutation();
 
   useEffect(() => {
     if (specializations && specializations.length > 0) {
@@ -57,6 +60,10 @@ const SpecializationCategories = () => {
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
     if (specializations.length === 0) return;
     await updateSpecializationAsMainById({...selectedSpecialization, main: true}).unwrap();
+  }
+
+  const handlerDeleteSpecialization = async (id) => {
+    await deleteSpecialization(id).unwrap();
   }
 
   if (isLoading) {
@@ -102,7 +109,13 @@ const SpecializationCategories = () => {
                 </Tooltip>
                 <Typography variant="subtitle2">Level {masteryData[id]?.level.slice(0,1) + masteryData[id]?.level.slice(1).toLowerCase()}</Typography>
               </Box>
-              {main && <StarIcon sx={styles.star} />}
+              {main
+                ? <StarIcon sx={styles.star} />
+                :
+                <IconButton sx={styles.deleteBtn} onClick={() => handlerDeleteSpecialization(id)}>
+                  <ClearIcon />
+                </IconButton>}
+
             </Box>
             <Box sx={styles.hardAndSoftSkills}>
               <Box sx={styles.softSkills}>

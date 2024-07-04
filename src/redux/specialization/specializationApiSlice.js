@@ -20,6 +20,18 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Specialization'],
     }),
 
+    deleteSpecializationById: builder.mutation({
+      query(id) {
+        return {
+          url: `/specializations/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: (result, error, id) => [
+        { type: 'Specialization', id },
+      ],
+    }),
+
     getMasteriesBySpecializationId: builder.query({
       query: (id) => `/specializations/${id}/masteries`,
     }),
@@ -127,6 +139,7 @@ export const {
   useGetSpecializationByUserIdQuery,
   useCreateNewSpecializationMutation,
   useUpdateSpecializationByIdMutation,
+  useDeleteSpecializationByIdMutation,
   useGetMasteriesBySpecializationIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
