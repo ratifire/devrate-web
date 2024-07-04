@@ -30,9 +30,10 @@ const CustomArrowCircleUpIcon = (props) => {
 
 const SkillItem = ({ name, value }) => {
   const icon = value > 5 ? <CustomArrowCircleUpIcon /> : <CustomArrowCircleDownIcon />;
+  const paddingRight = value === 0 ? '10px' : '0px';
 
   return (
-    <Box>
+    <Box sx={{ paddingRight }}>
       <Box sx={styles.skillContainer}>
         <Box sx={styles.iconWrapper}>
           {icon}
