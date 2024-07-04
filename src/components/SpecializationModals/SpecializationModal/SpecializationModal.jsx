@@ -10,6 +10,7 @@ import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
 import CountrySelect from '../../Inputs/CountrySelect';
 import {
+  useAddSkillsToMasteryMutation,
   useCreateNewSpecializationMutation,
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
@@ -41,6 +42,7 @@ const SpecializationModal = React.memo(() => {
   const [ updateSpecializationById ] = useUpdateSpecializationByIdMutation();
   const [ triggerRequest ] = useLazyGetMasteriesBySpecializationIdQuery();
   const [ setNewMainMasteryBySpecIdAndMasteryId ] = useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
+  const [ addSkills ] = useAddSkillsToMasteryMutation();
 
   const { data: specializations } = useGetSpecializationListQuery('specialization-names.json');
 
@@ -87,6 +89,7 @@ const SpecializationModal = React.memo(() => {
       const masteries = await triggerRequest(data.id);
       const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
       await setNewMainMasteryBySpecIdAndMasteryId({ masteryId: resp.id, specId: data.id, name: resp.name, softSkillMark: resp.softSkillMark, hardSkillMark: resp.hardSkillMark });
+      await addSkills({id: resp.id, skills});
     }
     catch (error) {
       console.warn('Failed to create Specialization', error);
@@ -117,7 +120,7 @@ const SpecializationModal = React.memo(() => {
   const [skills, setSkills] = useState([]);
   const createSkills = (newSkill) => {
     if (newSkill.length === 0 || newSkill.length > 50) return;
-    setSkills([...skills, newSkill]);
+    setSkills([...skills, {name: newSkill, type: "HARD_SKILL" }]);
     formik.setFieldValue('skills', '');
   };
 
@@ -181,10 +184,10 @@ const SpecializationModal = React.memo(() => {
                 </IconButton>
               </Box>
               <Box sx={styles.skills}>
-                {skills.map((skill, index) => (
+                {skills.map(({name}, index) => (
                   <Responsibility
                     key={index}
-                    responsibility={skill}
+                    responsibility={name}
                     tobeDeleted
                     responsibilityDeleteHandler={deleteSkillsHandler}/>
                 ))}

@@ -93,6 +93,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
     }),
+
     addSkillToMastery: builder.mutation({
       query: ({ masteryId, skill }) => ({
         url: `/masteries/${masteryId}/skill`,
@@ -101,6 +102,16 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['HardSkills'],
     }),
+
+    addSkillsToMastery: builder.mutation({
+      query: ({ id, skills }) => ({
+        url: `/masteries/${id}/skills/bulk`,
+        method: 'POST',
+        body: skills,
+      }),
+      invalidatesTags: ['HardSkills'],
+    }),
+
     deleteSkillById: builder.mutation({
       query: (id) => ({
         url: `/skills/${id}`,
@@ -108,6 +119,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['HardSkills'],
     }),
+
   }),
 });
 
@@ -125,5 +137,6 @@ export const {
   useLazyGetMainMasteryBySpecializationIdQuery,
   useGetMainMasteryBySpecializationIdQuery,
   useAddSkillToMasteryMutation,
+  useAddSkillsToMasteryMutation,
   useDeleteSkillByIdMutation,
 } = SpecializationApiSlice;
