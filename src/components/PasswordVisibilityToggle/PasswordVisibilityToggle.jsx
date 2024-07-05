@@ -1,12 +1,21 @@
+// PasswordVisibilityToggle.js
+import React from 'react';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { IconButton, InputAdornment, Tooltip, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import styles from './PasswordVisibilityToggle.styles';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import React from 'react';
-import PropTypes from 'prop-types';
+import styles from './PasswordVisibilityToggle.styles';
 
-const PasswordVisibilityToggle = ({ name, showPassword, clickHandler, mouseDownHandler, tooltip, textContent }) => {
+const PasswordVisibilityToggle = ({
+  name,
+  showPassword,
+  clickHandler,
+  mouseDownHandler,
+  tooltip,
+  textContent,
+  iconStyle,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -19,14 +28,14 @@ const PasswordVisibilityToggle = ({ name, showPassword, clickHandler, mouseDownH
           edge='end'
           sx={{ marginRight: name !== 'repeatPassword' ? '-12px' : 0 }}
         >
-          {showPassword ? <VisibilityOff /> : <Visibility />}
+          {showPassword ? <VisibilityOff sx={iconStyle} /> : <Visibility sx={iconStyle} />}
         </IconButton>
       </InputAdornment>
       {tooltip && name !== 'repeatPassword' && (
         <InputAdornment position='end'>
           <Tooltip title={<Typography sx={styles.tooltip}>{t(textContent)}</Typography>}>
             <IconButton sx={{ marginRight: 0 }}>
-              <InfoOutlinedIcon />
+              <InfoOutlinedIcon sx={iconStyle} />
             </IconButton>
           </Tooltip>
         </InputAdornment>
@@ -42,7 +51,9 @@ PasswordVisibilityToggle.propTypes = {
   mouseDownHandler: PropTypes.func.isRequired,
   tooltip: PropTypes.bool.isRequired,
   textContent: PropTypes.string,
+  iconStyle: PropTypes.object,
 };
+
 PasswordVisibilityToggle.defaultProps = {
   name: '',
   showPassword: false,
@@ -50,5 +61,7 @@ PasswordVisibilityToggle.defaultProps = {
   mouseDownHandler: () => {},
   tooltip: false,
   textContent: '',
+  iconStyle: {},
 };
+
 export default PasswordVisibilityToggle;
