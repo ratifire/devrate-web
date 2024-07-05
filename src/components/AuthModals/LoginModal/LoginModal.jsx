@@ -1,3 +1,4 @@
+// LoginModal.js
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -98,6 +99,7 @@ const LoginModal = () => {
           helperText={formik.touched.password && formik.errors.password}
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
+          iconStyle={styles.iconStyle}
         />
         <Box sx={styles.textLink}>
           <ButtonDef

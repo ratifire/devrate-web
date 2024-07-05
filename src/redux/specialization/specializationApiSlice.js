@@ -49,7 +49,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
     }),
     addSkillToMastery: builder.mutation({
       query: ({ masteryId, skill }) => ({
-        url: `/masteries/${masteryId}/skill`,
+        url: `/masteries/${masteryId}/skills`,
         method: 'POST',
         body: skill,
       }),

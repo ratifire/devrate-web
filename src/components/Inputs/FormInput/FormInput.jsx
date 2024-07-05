@@ -1,3 +1,4 @@
+// FormInput.js
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { styles } from './FormInput.styles';
@@ -19,6 +20,7 @@ const FormInput = ({
   error,
   clickHandler,
   mouseDownHandler,
+  iconStyle,
 }) => {
   const id = uuid();
   const { t } = useTranslation();
@@ -47,6 +49,7 @@ const FormInput = ({
               mouseDownHandler={mouseDownHandler}
               tooltip={true}
               textContent='modal.registration.password_tooltip'
+              iconStyle={iconStyle}
             />
           )
         }
@@ -59,6 +62,7 @@ const FormInput = ({
     </FormControl>
   );
 };
+
 FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -72,7 +76,9 @@ FormInput.propTypes = {
   error: PropTypes.bool.isRequired,
   clickHandler: PropTypes.func,
   mouseDownHandler: PropTypes.func,
+  iconStyle: PropTypes.object,
 };
+
 FormInput.defaultProps = {
   name: '',
   value: '',
@@ -86,6 +92,7 @@ FormInput.defaultProps = {
   error: false,
   clickHandler: () => {},
   mouseDownHandler: () => {},
+  iconStyle: {},
 };
 
 export default FormInput;
