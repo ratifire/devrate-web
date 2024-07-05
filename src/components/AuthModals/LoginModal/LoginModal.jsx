@@ -29,8 +29,11 @@ const LoginModal = () => {
   const navigate = useNavigate();
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openLogin' }));
-  const handleOpen = () => dispatch(openModal({ modalName: 'openCheckEmail' }));
-
+  const handleOpen = () => {
+    dispatch(openModal({ modalName: 'openCheckEmail' }));
+    dispatch(closeModal({ modalName: 'openLogin' }));
+  }
+  
   const [login, { isLoading }] = useLoginMutation();
 
   async function onSubmit(values, { resetForm }) {
