@@ -1,11 +1,5 @@
 import * as Yup from 'yup';
 
-const isStartDateBeforeEndDate = (startDate, endDate) => {
-  if (startDate && endDate) {
-    return startDate.getTime() < endDate.getTime();
-  }
-  return true;
-};
 
 export const EducationModalSchema = Yup.object().shape({
   type: Yup.string()
@@ -29,7 +23,7 @@ export const EducationModalSchema = Yup.object().shape({
     .max(new Date(), 'Date must be earlier than today')
     .nullable()
     .test('endDate', 'End date must be later than start date', function (value) {
-      const startDate = this.resolve(Yup.ref('startDate'));
-      return isStartDateBeforeEndDate(startDate, value);
+      const { startDate } = this.parent;
+      return !value || value >= startDate;
     }),
 });
