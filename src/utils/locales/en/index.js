@@ -120,6 +120,12 @@ export const en = {
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
+        not_valid: 'Password not valid',
+        code_required: 'Code is required',
+        code_symbol_min: 'Each code digit must be 1 character long',
+        code_length_max: 'Code must be exactly 6 digits long',
+        error: 'Error changing password. Please try again.',
+        success: 'Password changed successfully!'
       },
       editPage: {
         personalInformation: {

@@ -121,6 +121,12 @@ export const uk = {
         password_short: 'Пароль занадто короткий',
         password_long: 'Пароль занадто довгий',
         password_must_match: 'Паролі мають збігатися',
+        not_valid: 'Пароль не валiдний',
+        code_required: 'Код обов\'язковий',
+        code_symbol_min: 'Кожна цифра коду повинна мати довжину 1 символ',
+        code_length_max: 'Code must be exactly 6 digits long',
+        error: 'Помилка при зміні пароля. Спробуйте ще раз.',
+        success: 'Пароль успішно змінено!'
       },
       editPage: {
         personalInformation: {
