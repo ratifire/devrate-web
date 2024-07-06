@@ -1,44 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { Box, IconButton, Typography, Chip, TextField, CircularProgress } from '@mui/material';
+import { Box, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
 import { styles } from './SkillsModal.styles';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
-import useSkillsData from './useSkillsData'; 
+import useSkillsData from './useSkillsData';
 import {
   useAddSkillToMasteryMutation,
   useDeleteSkillByIdMutation,
-} from '../../../redux/specialization/specializationApiSlice'; 
+} from '../../../redux/specialization/specializationApiSlice';
+import { SkillChip } from '../../SpecializationComponents/SkillChip/SkillChip';
 
 const MAX_SKILLS = 20;
 
 const MemoizedButtonDef = React.memo(ButtonDef);
 
-const SkillChip = React.memo(({ skill, onDelete }) => (
-  <Chip
-    key={skill.id}
-    label={<Typography variant='subtitle2'>{skill.name}</Typography>}
-    onDelete={() => onDelete(skill.id)}
-    deleteIcon={<CloseIcon />}
-    sx={styles.skillItem}
-  />
-));
-
-SkillChip.displayName = 'SkillChip';
-
-SkillChip.propTypes = {
-  skill: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-  onDelete: PropTypes.func.isRequired,
-};
 
 const SkillsModal = () => {
   const { t } = useTranslation();

@@ -36,7 +36,7 @@ const SoftSkills = () => {
 
 
   const handleModalOpen = () => {
-    dispatch(openModal({ modalName: 'openSkillsModal' }));
+    dispatch(openModal({ modalName: 'openSoftSkillsModal' }));
   };
 
   return (
