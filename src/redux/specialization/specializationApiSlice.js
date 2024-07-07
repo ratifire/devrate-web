@@ -12,6 +12,13 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           ? [...result.map(({ id }) => ({ type: 'Specialization', id })), 'Specialization']
           : ['Specialization'],
     }),
+    getMainSpecialization: builder.query({
+      query: (userId) => `/users/${userId}/specializations`,
+      providesTags: ['Specialization'],
+      transformResponse(result) {
+        return result.find(({main}) => main);
+      }
+    }),
     createNewSpecialization: builder.mutation({
       query: ({ userId, data }) => ({
         url: `/users/${userId}/specializations`,
@@ -37,6 +44,16 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       query: ({ masteryId }) => `/masteries/${masteryId}/hard-skills`,
       providesTags: ['HardSkills'],
     }),
+
+    getSoftSkills: builder.query({
+      query: (masteryId) => `/masteries/${masteryId}/soft-skills`,
+      providesTags: ['SoftSkills'],
+    }),
+    getAvailableSoftSkills: builder.query({
+      query: () => `/data/specialization/default-soft-skill-names.json`,
+      providesTags: ['SoftSkills'],
+    }),
+
     updateSpecializationAsMainById: builder.mutation({
       query({ id, name, main }) {
         return {
@@ -55,23 +72,37 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['HardSkills'],
     }),
+    createSkillsBulk: builder.mutation({
+      query: ({ masteryId, skills }) => ({
+        url: `/masteries/${masteryId}/skills/bulk`,
+        method: 'POST',
+        body: skills,
+      }),
+      invalidatesTags: ['HardSkills', 'SoftSkills'],
+    }),
     deleteSkillById: builder.mutation({
       query: (id) => ({
         url: `/skills/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['HardSkills'],
+      invalidatesTags: ['HardSkills', 'SoftSkills'],
     }),
   }),
 });
 
 export const {
   useGetSpecializationByUserIdQuery,
+  useGetAvailableSoftSkillsQuery,
+  useGetMainSpecializationQuery,
+  useCreateSkillsBulkMutation,
+  useLazyGetMainSpecializationQuery,
   useCreateNewSpecializationMutation,
   useUpdateSpecializationByIdMutation,
   useUpdateSpecializationAsMainByIdMutation,
   useGetHardSkillsByMasteryIdQuery,
+  useLazyGetSoftSkillsQuery,
   useGetMainMasteryBySpecializationIdQuery,
+  useLazyGetMainMasteryBySpecializationIdQuery,
   useAddSkillToMasteryMutation,
   useDeleteSkillByIdMutation,
 } = SpecializationApiSlice;
