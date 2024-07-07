@@ -12,8 +12,6 @@ const SpecializationTemplate = ({ children }) => {
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const openSoftSkillsModal = useSelector((state) => state.modal.openSoftSkillsModal);
 
-  console.log('openSoftSkillsModal', openSoftSkillsModal);
-
   return (
     <div className='specialization'>
       {children}
