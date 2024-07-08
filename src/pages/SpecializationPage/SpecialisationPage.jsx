@@ -1,26 +1,27 @@
 import React from 'react';
-import {Box, Container, Paper, Typography} from '@mui/material';
+import { Box, Container, Paper, Typography } from '@mui/material';
 import { styles } from './SpecialisationPage.style';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 import SpecializationLevel from '../../components/SpecializationComponents/SpecializationLevel';
 import HardSkills from '../../components/SpecializationComponents/HardSkills';
 import SpecialisationCategories from '../../components/SpecializationComponents/SpecializationCategories';
- import LevelChart from "../../components/SpecializationComponents/Statistics/LevelChart/LevelChart";
+import LevelChart from '../../components/SpecializationComponents/Statistics/LevelChart/LevelChart';
 import SkillsAssessmentChart
-  from "../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart";
+  from '../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart';
 import HardSkillsChart from "../../components/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart";
 import InterviewChart from "../../components/SpecializationComponents/Statistics/InteviewChart/InterviewChart";
 import {useTranslation} from "react-i18next";
- import Interviews from '../../components/SpecializationComponents/Interviews'
+import Interviews from '../../components/SpecializationComponents/Interviews'
+import SoftSkills from '../../components/SpecializationComponents/SoftSkills';
 
 const SpecializationPage = () => {
   const { t } = useTranslation();
 
   return (
     <SpecializationTemplate>
-      <ProfileHeader/>
-      <Container maxWidth='xl' sx={styles.container}>
+      <ProfileHeader />
+      <Container maxWidth="xl" sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.specialisationTaxonomy}>
             <SpecialisationCategories />
@@ -35,7 +36,7 @@ const SpecializationPage = () => {
             <HardSkills />
           </Paper>
           <Paper sx={styles.specialisationSoftSkills}>
-            <div>Soft Skills</div>
+            <SoftSkills />
           </Paper>
           <Paper sx={styles.specialisationStatistics}>
             <Typography sx={styles.statisticTitle}>
@@ -43,16 +44,16 @@ const SpecializationPage = () => {
             </Typography>
             <Box sx={styles.statisticWrapper}>
               <Paper sx={styles.level}>
-                <LevelChart/>
+                <LevelChart />
               </Paper>
               <Paper sx={styles.averageSkillsScore}>
-                <SkillsAssessmentChart/>
+                <SkillsAssessmentChart />
               </Paper>
               <Paper sx={styles.hardSkillsByProductivity}>
-                <HardSkillsChart/>
+                <HardSkillsChart />
               </Paper>
               <Paper sx={styles.interview}>
-                <InterviewChart/>
+                <InterviewChart />
               </Paper>
             </Box>
           </Paper>

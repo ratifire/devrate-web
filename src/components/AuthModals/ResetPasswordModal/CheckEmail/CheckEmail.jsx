@@ -10,7 +10,8 @@ import { FormInput } from '../../../Inputs';
 import { ButtonDef } from '../../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
-import { useResetPasswordMutation } from '../../../../redux/auth/authApiSlice'; 
+import { useResetPasswordMutation } from '../../../../redux/auth/authApiSlice';
+import { setEmail } from '../../../../redux/auth/emailSlice';
 
 const initialValues = {
   email: '',
@@ -32,6 +33,7 @@ const CheckEmail = () => {
     try {
       await sendResetEmail({ email: values.email });
       resetForm();
+      dispatch(setEmail(values.email)); // Save email to the Redux store
       dispatch(closeModal({ modalName: 'openCheckEmail' }));
       dispatch(openModal({ modalName: 'openResetPassword' }));
     } catch (error) {

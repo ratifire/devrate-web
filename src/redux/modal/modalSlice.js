@@ -14,6 +14,7 @@ const modalSlice = createSlice({
     achievement: false,
     openSpecialization: false,
     openSkillsModal: false,
+    openSoftSkillsModal: false,
     scheduleInterview: false,
   },
   reducers: {

@@ -261,6 +261,9 @@ export const uk = {
         title:'Хард скіли',
         averageMark: 'Середня оцінка:'
       },
+      softSkills:{
+        title:'Софт скіли',
+      },
       modal: {
         specialization: {
           modal_title: 'Спеціалізація',

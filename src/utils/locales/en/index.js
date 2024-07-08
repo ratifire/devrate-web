@@ -259,6 +259,9 @@ export const en = {
         title:'Hard skills',
         averageMark: 'Average mark:'
       },
+      softSkills:{
+        title:'Soft skills',
+      },
       modal: {
         specialization: {
           modal_title: 'Specialization',

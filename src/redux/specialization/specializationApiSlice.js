@@ -1,3 +1,5 @@
+// In specializationApiSlice.js
+
 import { apiSlice } from '../services/api/apiSlice';
 
 export const SpecializationApiSlice = apiSlice.injectEndpoints({
@@ -9,6 +11,13 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
         result
           ? [...result.map(({ id }) => ({ type: 'Specialization', id })), 'Specialization']
           : ['Specialization'],
+    }),
+    getMainSpecialization: builder.query({
+      query: (userId) => `/users/${userId}/specializations`,
+      providesTags: ['Specialization'],
+      transformResponse(result) {
+        return result.find(({main}) => main);
+      }
     }),
 
     createNewSpecialization: builder.mutation({
@@ -90,6 +99,16 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       providesTags: ['HardSkills'],
     }),
 
+    getSoftSkills: builder.query({
+      query: (masteryId) => `/masteries/${masteryId}/soft-skills`,
+      providesTags: ['SoftSkills'],
+    }),
+    getAvailableSoftSkills: builder.query({
+      query: () => `/data/specialization/default-soft-skill-names.json`,
+      providesTags: ['SoftSkills'],
+    }),
+
+
     getSoftSkillsByMasteryId: builder.query({
       query: ({ masteryId }) => `/masteries/${masteryId}/soft-skills`,
       providesTags: ['Softskills'],
@@ -124,12 +143,20 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['HardSkills'],
     }),
 
+    createSkillsBulk: builder.mutation({
+      query: ({ masteryId, skills }) => ({
+        url: `/masteries/${masteryId}/skills/bulk`,
+        method: 'POST',
+        body: skills,
+      }),
+      invalidatesTags: ['HardSkills', 'SoftSkills'],
+    }),
     deleteSkillById: builder.mutation({
       query: (id) => ({
         url: `/skills/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['HardSkills'],
+      invalidatesTags: ['HardSkills', 'SoftSkills'],
     }),
 
   }),
@@ -137,6 +164,10 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetSpecializationByUserIdQuery,
+  useGetAvailableSoftSkillsQuery,
+  useGetMainSpecializationQuery,
+  useCreateSkillsBulkMutation,
+  useLazyGetMainSpecializationQuery,
   useCreateNewSpecializationMutation,
   useUpdateSpecializationByIdMutation,
   useDeleteSpecializationByIdMutation,
@@ -146,6 +177,7 @@ export const {
   useUpdateSpecializationAsMainByIdMutation,
   useGetHardAndSoftSkillsByMasteryIdQuery,
   useGetHardSkillsByMasteryIdQuery,
+  useLazyGetSoftSkillsQuery,
   useGetSoftSkillsByMasteryIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useGetMainMasteryBySpecializationIdQuery,

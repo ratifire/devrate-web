@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { styles } from './FormInput.styles';
 import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import PasswordVisibilityToggle from '../../PasswordVisibilityToggle';
 import { useTranslation } from 'react-i18next';
+import { styles } from './FormInput.styles'; // Проверьте импорт стилей
 
 const FormInput = ({
   name,
@@ -19,9 +19,11 @@ const FormInput = ({
   error,
   clickHandler,
   mouseDownHandler,
+  iconStyle,
 }) => {
   const id = uuid();
   const { t } = useTranslation();
+
   return (
     <FormControl variant='outlined' sx={styles.inputWrapper} error={error}>
       <InputLabel htmlFor={id} sx={styles.label}>
@@ -35,7 +37,7 @@ const FormInput = ({
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
-        type={showPassword ? (showPassword ? 'text' : type) : type}
+        type={showPassword ? 'text' : type} // Правильно установите тип в зависимости от showPassword
         label={t(label)}
         placeholder={t(placeholder)}
         endAdornment={
@@ -47,6 +49,7 @@ const FormInput = ({
               mouseDownHandler={mouseDownHandler}
               tooltip={true}
               textContent='modal.registration.password_tooltip'
+              iconStyle={iconStyle}
             />
           )
         }
@@ -59,6 +62,7 @@ const FormInput = ({
     </FormControl>
   );
 };
+
 FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -72,7 +76,9 @@ FormInput.propTypes = {
   error: PropTypes.bool.isRequired,
   clickHandler: PropTypes.func,
   mouseDownHandler: PropTypes.func,
+  iconStyle: PropTypes.object,
 };
+
 FormInput.defaultProps = {
   name: '',
   value: '',
@@ -86,6 +92,7 @@ FormInput.defaultProps = {
   error: false,
   clickHandler: () => {},
   mouseDownHandler: () => {},
+  iconStyle: {},
 };
 
 export default FormInput;
