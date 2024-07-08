@@ -22,6 +22,7 @@ const ResetPassword = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openResetPassword = useSelector((state) => state.modal.openResetPassword);
+  const email = useSelector((state) => state.email.email);
   const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -75,7 +76,7 @@ const ResetPassword = () => {
       <Typography variant='subtitle3' sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
       <Box sx={styles.mainTextWrapper}>
         <Typography variant='subtitle3' sx={styles.mainText}>
-          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>user@mail.com</Typography>.
+          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>{email}</Typography>.
         </Typography>
         <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
       </Box>
