@@ -82,7 +82,7 @@ const WorkExperienceModal = () => {
       endDate: DateTime.fromISO(modalData.endDate)
     });
     setResponsibilities(modalData.responsibilities);
-  }, [modalData]);
+  }, [modalData, formik.setValues]);
 
   const [responsibilities, setResponsibilities] = useState([]);
   const createResponsibility = (newResponsibility) => {
