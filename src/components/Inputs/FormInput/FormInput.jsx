@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import PasswordVisibilityToggle from '../../PasswordVisibilityToggle';
 import { useTranslation } from 'react-i18next';
-import { styles } from './FormInput.styles';
+import { styles } from './FormInput.styles'; // Проверьте импорт стилей
 
 const FormInput = ({
   name,
@@ -37,7 +37,7 @@ const FormInput = ({
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
-        type={type === 'password' && showPassword ? 'text' : type}
+        type={showPassword ? 'text' : type} // Правильно установите тип в зависимости от showPassword
         label={t(label)}
         placeholder={t(placeholder)}
         endAdornment={
@@ -80,8 +80,16 @@ FormInput.propTypes = {
 };
 
 FormInput.defaultProps = {
+  name: '',
+  value: '',
+  handleChange: () => {},
+  handleBlur: () => {},
   showPassword: false,
+  type: 'text',
+  label: '',
   placeholder: '',
+  helperText: '',
+  error: false,
   clickHandler: () => {},
   mouseDownHandler: () => {},
   iconStyle: {},
