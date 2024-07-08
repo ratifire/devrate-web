@@ -80,6 +80,7 @@ const SpecializationModal = React.memo(() => {
           const masteries = await triggerRequest(selectedSpecialization.id);
           const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
           await setNewMainMasteryBySpecIdAndMasteryId({ masteryId: resp.id, specId: selectedSpecialization.id, name: resp.name, softSkillMark: resp.softSkillMark, hardSkillMark: resp.hardSkillMark });
+          window.location.reload();
         }
 
         return;

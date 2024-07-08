@@ -49,17 +49,6 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
 
     getMainMasteryBySpecializationId: builder.query({
       query: (specializationId) => `/specializations/${specializationId}/main-mastery`,
-      providesTags: (result, error, specializationId) => {
-        if (result) {
-          return [
-            { type: 'MainMastery', id: result.id }, // Tag for the specific mastery
-            { type: 'MainMastery', id: specializationId }, // Tag for the specific specialization
-            'MainMastery' // General tag for all main masteries
-          ];
-        } else {
-          return [{ type: 'MainMastery', id: specializationId }, 'MainMastery'];
-        }
-      },
     }),
 
     setNewMainMasteryBySpecIdAndMasteryId: builder.mutation({
@@ -70,11 +59,6 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           body: {id: masteryId, name, softSkillMark, hardSkillMark},
         };
       },
-      invalidatesTags: (result, error, arg) => [
-        { type: 'MainMastery', id: arg.masteryId }, // Invalidate the specific mastery
-        { type: 'MainMastery', id: arg.specId }, // Invalidate the specific specialization
-        'MainMastery' // Invalidate all main masteries
-      ],
     }),
 
     updateSpecializationById: builder.mutation({
