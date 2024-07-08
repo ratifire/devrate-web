@@ -6,6 +6,14 @@ export const styles = {
       textTransform: 'uppercase',
     },
   }),
+  timeButton: () => ({
+    width: 'fit-content',
+  }),
+  timeGrid: (theme) => ({
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: theme.spacing(2),
+  }),
   wrapper: (theme) => ({
     display: 'flex',
     flexWrap: 'wrap',

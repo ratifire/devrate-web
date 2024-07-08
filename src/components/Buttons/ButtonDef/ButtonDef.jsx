@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styles } from './ButtonDef.styles.js';
 
-const ButtonDef = ({ variant, type, correctStyle, handlerClick, disabled, label, startIcon, endIcon }) => {
+const ButtonDef = ({ withTranslation = true,  variant, type, correctStyle, handlerClick, disabled, label, startIcon, endIcon }) => {
   const style = variant === 'contained' ? styles.contained : variant === 'text' ? styles.text : styles.outlined;
   const { t } = useTranslation();
   return (
@@ -18,7 +18,7 @@ const ButtonDef = ({ variant, type, correctStyle, handlerClick, disabled, label,
       endIcon={endIcon}
       color='primary'
     >
-      {t(label)}
+      {withTranslation ? t(label) : label}
     </Button>
   );
 };
@@ -31,6 +31,7 @@ ButtonDef.propTypes = {
   label: PropTypes.string.isRequired,
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
+  withTranslation: PropTypes.bool,
 };
 ButtonDef.defaultProps = {
   variant: 'contained',
@@ -41,6 +42,7 @@ ButtonDef.defaultProps = {
   label: '',
   startIcon: null,
   endIcon: null,
+  withTranslation: true,
 };
 
 export default ButtonDef;

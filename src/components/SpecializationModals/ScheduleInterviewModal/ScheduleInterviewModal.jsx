@@ -1,48 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { ScheduleSchema } from './ScheduleSchema';
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Tab, Tabs, Typography } from '@mui/material';
 import { styles } from './ScheduleInterview.styles';
-import FormInput from '../../Inputs/FormInput';
-import CountrySelect from '../../Inputs/CountrySelect';
 import { ButtonDef } from '../../Buttons';
-import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import range from 'lodash/range';
+
+const days = [
+  'mon',
+  'tue',
+  'wed',
+  'thu',
+  'fri',
+  'sat',
+  'sun',
+];
+
 
 const ScheduleInterviewModal = () => {
   const isOpen = useSelector((state) => state.modal.scheduleInterview);
 
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
-  const [times, setTimes] = useState([]);
+  const [tab, setTab] = useState('mon');
 
   const { t } = useTranslation();
 
-  useEffect(() => {
-    const opts = [];
-    for (const hour of range(0, 23, 1)) {
-      for (const minute of range(0, 45, 15)) {
-        opts.push(`${hour}:${minute}`);
-      }
-    }
-    setTimes(opts);
-  }, []);
+  const tabChangeHandler = (_, newTab) => {
+    setTab(newTab);
+  };
 
   const initialValues = {
-    name: '',
-    speciality: '',
-    level: '',
-    role: '',
-    date: null,
-    startTime: '',
-    endTime: '',
-    socialLinks: [],
+    days: {},
   };
   const onSubmit = (values, { resetForm }) => {
     console.log('Submitted values:', values);
@@ -57,120 +51,90 @@ const ScheduleInterviewModal = () => {
     onSubmit,
   });
 
+  const timeClickHandler = (day, time) => {
+    if (formik.values.days[day]?.[time]) {
+      delete formik.values.days[day][time];
+
+      return formik.setFieldValue(`days.${day}`, {
+        ...formik.values.days[day],
+      });
+    }
+
+    formik.setFieldValue(`days.${day}`, {
+      ...formik.values.days[day],
+      [time]: 1
+    });
+  }
+
+  const generateTimeButtons = (day) => {
+    return range(0, 23).map((hour) => {
+      const hourStr = `${hour}`.padStart(2, '0');
+
+      const time = `${hourStr}:00`;
+
+      return (
+        <ButtonDef
+          correctStyle={styles.timeButton}
+          withTranslation={false}
+          key={`${day}-${hour}-00`}
+          variant={formik.values.days[day]?.[time] ? 'contained' : 'outlined'}
+          type="button"
+          label={time}
+          handlerClick={() => timeClickHandler(day, time)}
+        />
+      );
+    });
+  };
+
   return (
     <ModalLayoutProfile setOpen={handleClose} open={isOpen}>
       <Typography variant="subtitle1" sx={styles.title}>
-        {t('specialization.scheduleModal.scheduleInterview')}
+        {t('specialization.modal.scheduleModal.scheduleInterview')}
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
-          <Box sx={styles.input50}>
-            <FormInput
-              name="name"
-              value={formik.values.name}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type="text"
-              label="specialization.scheduleModal.name"
-              placeholder="profile.modal.workExperience.position_placeholder"
-              helperText={formik.touched.name && formik.errors.name}
-              error={formik.touched.name && Boolean(formik.errors.name)}
-            />
-          </Box>
-          <Box sx={styles.input50}>
-            <FormInput
-              name="speciality"
-              value={formik.values.speciality}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              label="specialization.scheduleModal.specialization"
-              placeholder="profile.modal.workExperience.companyName_placeholder"
-              helperText={formik.touched.speciality && formik.errors.speciality}
-              error={formik.touched.speciality && Boolean(formik.errors.speciality)}
-            />
-          </Box>
-          <Box sx={styles.input50}>
-            <FormInput
-              name="level"
-              value={formik.values.level}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type="text"
-              label="specialization.scheduleModal.level"
-              placeholder="profile.modal.workExperience.position_placeholder"
-              helperText={formik.touched.level && formik.errors.level}
-              error={formik.touched.level && Boolean(formik.errors.level)}
-            />
-          </Box>
-          <Box sx={styles.input50}>
-            <FormInput
-              name="role"
-              value={formik.values.role}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              label="specialization.scheduleModal.role"
-              placeholder="profile.modal.workExperience.companyName_placeholder"
-              helperText={formik.touched.role && formik.errors.role}
-              error={formik.touched.role && Boolean(formik.errors.role)}
-            />
-          </Box>
-          <LocalizationProvider dateAdapter={AdapterLuxon}>
-            <DatePicker
-              sx={styles.input50}
-              value={formik.values.date}
-              onChange={(value) => formik.setFieldValue('date', value)}
-              label={t('specialization.scheduleModal.date')}
-              helperText={formik.touched.date && formik.errors.date}
-              error={formik.touched.date && Boolean(formik.errors.date)}
-            />
-          </LocalizationProvider>
-          <Box sx={styles.timeWrapper}>
-            <CountrySelect
-              label={t('specialization.scheduleModal.startTime')}
-              value={formik.values.startTime}
-              countries={times}
-              name="startTime"
-              variant="outlined"
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              onChange={(value) => formik.setFieldValue('startTime', value)}
-              helperText={formik.touched.startTime && formik.errors.startTime}
-              error={formik.touched.startTime && Boolean(formik.errors.startTime)}
-            />
 
-            <CountrySelect
-              label={t('specialization.scheduleModal.endTime')}
-              value={formik.values.endTime}
-              countries={times}
-              name="endTime"
-              variant="outlined"
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              onChange={(value) => formik.setFieldValue('endTime', value)}
-              helperText={formik.touched.endTime && formik.errors.endTime}
-              error={formik.touched.endTime && Boolean(formik.errors.endTime)}
-            />
+          <Box>
+            <IconButton>
+              <ChevronLeft />
+            </IconButton>
+
+            <Typography variant="subtitle2">This week</Typography>
+
+            <IconButton>
+              <ChevronRight />
+            </IconButton>
           </Box>
 
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs value={tab} onChange={tabChangeHandler}>
+                {days.map(day => {
+                  return (
+                    <Tab label={day} key={`tab-${day}`} value={day} />
+                  );
+                })}
+              </Tabs>
+            </Box>
 
-          <Box sx={styles.input100}>
-            <CountrySelect
-              label={t('specialization.scheduleModal.socialLinks')}
-              value={formik.values.socialLinks}
-              countries={times}
-              name="socialLinks"
-              variant="outlined"
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              onChange={(value) => formik.setFieldValue('socialLinks', value)}
-              helperText={formik.touched.socialLinks && formik.errors.socialLinks}
-              error={formik.touched.socialLinks && Boolean(formik.errors.socialLinks)}
-            />
-          </Box>
+            {days.map(day => {
+              if (tab !== day) {
+                return null;
+              }
 
-          <ButtonDef variant="contained" type="submit" label={t('specialization.scheduleModal.schedule')}
-                     correctStyle={styles.workExperienceBtn} />
+              return (
+                <Box sx={styles.timeGrid} key={`tab-panel-${day}`} >
+                  {generateTimeButtons(day)}
+                </Box>
+              );
+            })}
+
+          <ButtonDef
+            variant="contained"
+            type="submit"
+            label={t('specialization.modal.scheduleModal.schedule')}
+            correctStyle={styles.workExperienceBtn}
+          />
 
         </Box>
       </form>
