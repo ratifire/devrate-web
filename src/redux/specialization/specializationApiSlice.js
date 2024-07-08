@@ -5,6 +5,7 @@ import { apiSlice } from '../services/api/apiSlice';
 export const SpecializationApiSlice = apiSlice.injectEndpoints({
   tagTypes: ['Specialization', 'Masteries','MainMastery', 'HardSkills'],
   endpoints: (builder) => ({
+
     getSpecializationByUserId: builder.query({
       query: (userId) => `/users/${userId}/specializations`,
       providesTags: (result) =>
@@ -12,6 +13,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           ? [...result.map(({ id }) => ({ type: 'Specialization', id })), 'Specialization']
           : ['Specialization'],
     }),
+
     getMainSpecialization: builder.query({
       query: (userId) => `/users/${userId}/specializations`,
       providesTags: ['Specialization'],
