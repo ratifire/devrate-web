@@ -10,25 +10,23 @@ const Education = () => {
   const { data: educations, isLoading } = useGetEducationByUserIdQuery(id);
 
   if (isLoading) {
-    return  <Skeleton animation="wave" height={50} />
+    return <Skeleton animation="wave" height={50} />;
   }
 
   return (
     <Box sx={styles.container}>
-      <Box>
-        {educations.map(({id, type, name, description, startYear, endYear}) => {
-          return (
-            <EducationItem
-              key={id}
-              id={id}
-              type={type}
-              name={name}
-              description={description}
-              startYear={startYear}
-              endYear={endYear} />
-          )
-        })}
-      </Box>{' '}
+      {educations.map(({ id, type, name, description, startYear, endYear }) => {
+        return (
+          <EducationItem
+            key={id}
+            id={id}
+            type={type}
+            name={name}
+            description={description}
+            startYear={startYear}
+            endYear={endYear} />
+        );
+      })}
     </Box>
   );
 };

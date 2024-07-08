@@ -26,6 +26,19 @@ const styles = {
     maxHeight: 600, // to be adjusted with designers
     minWidth: '100%',
     background: theme.palette.background.level2,
+    paddingRight: theme.spacing(2),
+
+    '&::-webkit-scrollbar': {
+      width: 10,
+    },
+    '&::-webkit-scrollbar-track': (theme) => ({
+      backgroundColor: theme.palette.neutral['600'],
+      borderRadius: 8,
+    }),
+    '&::-webkit-scrollbar-thumb': (theme) => ({
+      borderRadius: 6,
+      backgroundColor: theme.palette.common.white,
+    })
   }),
 };
 export default styles;
