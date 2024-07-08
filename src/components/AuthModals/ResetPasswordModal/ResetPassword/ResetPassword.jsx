@@ -1,4 +1,3 @@
-// ResetPassword.js
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import ModalLayout from '../../../../layouts/ModalLayout';
@@ -123,7 +122,7 @@ const ResetPassword = () => {
             </Box>
             <FormInput
               showPassword={showPassword}
-              type={showPassword ? 'text' : 'password'}
+              type='password'
               name='newPassword'
               value={formik.values.newPassword}
               handleChange={formik.handleChange}
@@ -137,7 +136,7 @@ const ResetPassword = () => {
             />
             <FormInput
               showPassword={showPassword}
-              type={showPassword ? 'text' : 'password'}
+              type='password'
               name='repeatPassword'
               value={formik.values.repeatPassword}
               handleChange={formik.handleChange}

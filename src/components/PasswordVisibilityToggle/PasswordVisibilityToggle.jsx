@@ -1,4 +1,3 @@
-// PasswordVisibilityToggle.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
@@ -56,9 +55,6 @@ PasswordVisibilityToggle.propTypes = {
 
 PasswordVisibilityToggle.defaultProps = {
   name: '',
-  showPassword: false,
-  clickHandler: () => {},
-  mouseDownHandler: () => {},
   tooltip: false,
   textContent: '',
   iconStyle: {},

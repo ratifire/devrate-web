@@ -1,10 +1,10 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { styles } from './FormInput.styles';
 import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import PasswordVisibilityToggle from '../../PasswordVisibilityToggle';
 import { useTranslation } from 'react-i18next';
+import { styles } from './FormInput.styles';
 
 const FormInput = ({
   name,
@@ -23,6 +23,7 @@ const FormInput = ({
 }) => {
   const id = uuid();
   const { t } = useTranslation();
+
   return (
     <FormControl variant='outlined' sx={styles.inputWrapper} error={error}>
       <InputLabel htmlFor={id} sx={styles.label}>
@@ -36,7 +37,7 @@ const FormInput = ({
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
-        type={showPassword ? (showPassword ? 'text' : type) : type}
+        type={type === 'password' && showPassword ? 'text' : type}
         label={t(label)}
         placeholder={t(placeholder)}
         endAdornment={
@@ -79,16 +80,8 @@ FormInput.propTypes = {
 };
 
 FormInput.defaultProps = {
-  name: '',
-  value: '',
-  handleChange: () => {},
-  handleBlur: () => {},
   showPassword: false,
-  type: 'text',
-  label: '',
   placeholder: '',
-  helperText: '',
-  error: false,
   clickHandler: () => {},
   mouseDownHandler: () => {},
   iconStyle: {},
