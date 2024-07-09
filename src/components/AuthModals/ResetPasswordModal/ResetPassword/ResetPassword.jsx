@@ -22,6 +22,7 @@ const ResetPassword = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openResetPassword = useSelector((state) => state.modal.openResetPassword);
+  const email = useSelector((state) => state.email.email);
   const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -75,7 +76,7 @@ const ResetPassword = () => {
       <Typography variant='subtitle3' sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
       <Box sx={styles.mainTextWrapper}>
         <Typography variant='subtitle3' sx={styles.mainText}>
-          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>user@mail.com</Typography>.
+          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>{email.replace(/(?<=.{1}).(?=[^@]*?.@)/g, '*')}</Typography>.
         </Typography>
         <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
       </Box>
@@ -115,13 +116,14 @@ const ResetPassword = () => {
                     onKeyDown={(event) => handleKeyDown(event, index, formik)}
                     value={formik.values.code[index] ?? ''}
                     inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
+                    sx={styles.resetPasswordForm['& .MuiOutlinedInput-root']}
                   />
                 </React.Fragment>
               ))}
             </Box>
             <FormInput
               showPassword={showPassword}
-              type={showPassword ? 'text' : 'password'}
+              type='password'
               name='newPassword'
               value={formik.values.newPassword}
               handleChange={formik.handleChange}
@@ -131,10 +133,11 @@ const ResetPassword = () => {
               helperText={formik.touched.newPassword && formik.errors.newPassword}
               clickHandler={handleClickShowPassword}
               mouseDownHandler={handleMouseDownPassword}
+              iconStyle={styles.iconStyle}
             />
             <FormInput
               showPassword={showPassword}
-              type={showPassword ? 'text' : 'password'}
+              type='password'
               name='repeatPassword'
               value={formik.values.repeatPassword}
               handleChange={formik.handleChange}
@@ -144,6 +147,7 @@ const ResetPassword = () => {
               helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
               clickHandler={handleClickShowPassword}
               mouseDownHandler={handleMouseDownPassword}
+              iconStyle={styles.iconStyle}
             />
             <Box sx={styles.wrapperBtn}>
               <ButtonDef

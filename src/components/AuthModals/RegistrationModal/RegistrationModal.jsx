@@ -34,12 +34,12 @@ const RegistrationModal = () => {
   const {data: userCountries} = useGetCountryListQuery();
 
   const onSubmit = (values, { resetForm }) => {
-    const { email, firstName, lastName, news, password } = values;
+    const { email, firstName, lastName, country, news, password } = values;
     createUser({
       email,
       firstName,
       lastName,
-      country: 'Ukraine',
+      country,
       subscribed: news,
       password,
     });

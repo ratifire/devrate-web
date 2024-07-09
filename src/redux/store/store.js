@@ -14,6 +14,7 @@ import { avatarReducer } from '../user/avatar/avatarSlice';
 import { personalReducer } from '../user/personal/personalSlice';
 import { educationReducer } from '../user/education/educationSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
+import emailSliceReducer from '../../redux/auth/emailSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -40,6 +41,7 @@ const rootReducer = {
   avatar: persistReducer(avatarPersistConfig, avatarReducer),
   personal: persistReducer(personalPersistConfig, personalReducer),
   specialisation: specializationSliceReducer,
+  email: emailSliceReducer,
 };
 
 const store = configureStore({

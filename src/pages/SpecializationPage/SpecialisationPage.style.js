@@ -25,8 +25,10 @@ export const styles = {
   },
   specialisationHardSkills: {
     gridColumn: '1/5',
-    gridRow: '2/5',
-    height: 472,
+    gridRow: '2/4',
+    display: 'flex',
+    flexDirection: 'column',
+    flexShrink: 1,
   },
   specialisationLevel: {
     gridColumn: '5/9',
@@ -38,12 +40,11 @@ export const styles = {
   },
   specialisationSoftSkills: {
     gridColumn: '1/5',
-    gridRow: '5/6',
-    height: 276, //To be removed before merge
+    gridRow: '4/5',
   },
   specialisationStatistics: {
     gridColumn: '5/13',
-     gridRow: '3/4',
+     gridRow: '3/6',
     },
   statisticWrapper: (theme) => ({
     padding: theme.spacing(4),

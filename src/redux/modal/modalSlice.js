@@ -12,8 +12,9 @@ const modalSlice = createSlice({
     openExperience: false,
     modalData: null,
     achievement: false,
-    openAddSpecialization: false,
+    openSpecialization: false,
     openSkillsModal: false,
+    openSoftSkillsModal: false,
     scheduleInterview: false,
   },
   reducers: {

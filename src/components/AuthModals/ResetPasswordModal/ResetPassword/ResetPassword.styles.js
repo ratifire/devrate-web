@@ -51,7 +51,15 @@ const styles = {
     display: 'flex',
     gap: theme.spacing(2), 
     alignItems: 'center',
-    marginBottom: theme.spacing(4)
+    marginBottom: theme.spacing(4),
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: theme.palette.neutral[100]
+      },
+    },
+  }),
+  iconStyle: (theme) => ({
+    color: theme.palette.neutral[50]
   }),
 };
 export default styles;
