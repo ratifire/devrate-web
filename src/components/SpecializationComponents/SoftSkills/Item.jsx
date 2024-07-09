@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, Typography, Divider, SvgIcon } from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import { styles } from './HardSkills.styles';
+import { styles } from './SoftSkills.styles';
 import SmallLinearProgressWithLabel from './SmallLinearProgressWithLabel.jsx';
 
 const CustomArrowCircleDownIcon = (props) => {
@@ -28,12 +28,11 @@ const CustomArrowCircleUpIcon = (props) => {
   );
 };
 
-const SkillItem = ({ name, value }) => {
+const Item = ({ name, value }) => {
   const icon = value > 5 ? <CustomArrowCircleUpIcon /> : <CustomArrowCircleDownIcon />;
-  const paddingRight = value === 0 ? '10px' : '0px';
 
   return (
-    <Box sx={{ paddingRight }}>
+    <Box>
       <Box sx={styles.skillContainer}>
         <Box sx={styles.iconWrapper}>
           {icon}
@@ -46,9 +45,9 @@ const SkillItem = ({ name, value }) => {
   );
 };
 
-SkillItem.propTypes = {
+Item.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
 };
 
-export default SkillItem;
+export default Item;

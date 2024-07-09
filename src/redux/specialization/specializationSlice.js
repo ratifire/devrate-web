@@ -9,6 +9,7 @@ const specializationSlice = createSlice({
     setSelectedSpecialization: (state, { payload }) => {
       state.selectedSpecialization = { ...payload };
     },
+
   },
 
 });

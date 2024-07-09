@@ -66,8 +66,10 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
     accept: {
       'image/jpeg': [],
       'image/png': [],
+      'image/tiff': [],
+      'image/webp': [],
     },
-    maxSize: 200 * 1024, // 200 KB
+    maxSize: 5 * 1024 * 1024, // 5 MB
     onDrop,
   });
 
