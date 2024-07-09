@@ -33,7 +33,7 @@ const Interviews = () => {
         <Box sx={styles.interviewItemOutcome}>
           <Mood />
           <Typography variant="body1" sx={styles.interviewType}>
-            {t('specialization.interview.outcome')}
+            {t('specialization.modal.interview.outcome')}
           </Typography>
           <Typography variant="body1">
             {user.data.conductedInterviews}
@@ -42,7 +42,7 @@ const Interviews = () => {
         <Box sx={styles.interviewItemIncome}>
           <Mood />
           <Typography variant="body1" sx={styles.interviewType}>
-            {t('specialization.interview.income')}
+            {t('specialization.modal.interview.income')}
           </Typography>
           <Typography variant="body1">
             {user.data.completedInterviews}
@@ -56,7 +56,7 @@ const Interviews = () => {
         sx={styles.buttonPrimary}
         onClick={scheduleClickHandler}
       >
-        {t('specialization.interview.makeIncome')}
+        {t('specialization.modal.interview.makeIncome')}
         <KeyboardArrowDown />
       </Button>
     </Box>

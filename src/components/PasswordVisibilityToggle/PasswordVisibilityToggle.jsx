@@ -1,11 +1,10 @@
-// PasswordVisibilityToggle.js
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import { IconButton, InputAdornment, Tooltip, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import styles from './PasswordVisibilityToggle.styles';
+import { useTranslation } from 'react-i18next';
+import styles from './PasswordVisibilityToggle.styles'; // Проверьте импорт стилей
 
 const PasswordVisibilityToggle = ({
   name,
