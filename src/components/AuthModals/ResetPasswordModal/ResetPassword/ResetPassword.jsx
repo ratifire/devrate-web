@@ -1,16 +1,16 @@
-import { Box, Link, TextField, Typography } from '@mui/material'
-import { Form, Formik } from 'formik'
-import * as React from 'react'
-import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link as RouterLink } from 'react-router-dom'
-import ModalLayout from '../../../../layouts/ModalLayout'
-import { useChangePasswordMutation } from '../../../../redux/auth/authApiSlice'
-import { closeModal } from '../../../../redux/modal/modalSlice'
-import { ButtonDef } from '../../../Buttons'
-import { FormInput } from '../../../Inputs'
-import styles from './ResetPassword.styles'
-import useResetPasswordSchema from './ResetPasswordSchema'
+import { Box, Link, TextField, Typography } from '@mui/material';
+import { Form, Formik } from 'formik';
+import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
+import ModalLayout from '../../../../layouts/ModalLayout';
+import { useChangePasswordMutation } from '../../../../redux/auth/authApiSlice';
+import { closeModal } from '../../../../redux/modal/modalSlice';
+import { ButtonDef } from '../../../Buttons';
+import { FormInput } from '../../../Inputs';
+import styles from './ResetPassword.styles';
+import resetPasswordSchema from './ResetPasswordSchema';
 
 const initialValues = {
   newPassword: '',
@@ -24,7 +24,6 @@ const ResetPassword = () => {
   const openResetPassword = useSelector((state) => state.modal.openResetPassword);
   const email = useSelector((state) => state.email.email);
   const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
-  const ResetPasswordSchema = useResetPasswordSchema();
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -70,17 +69,25 @@ const ResetPassword = () => {
 
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
-      <Typography variant='subtitle3' sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
+      <Typography variant='subtitle3' sx={styles.title}>
+        {t('modal.resetPassword.title')}
+      </Typography>
       <Box sx={styles.mainTextWrapper}>
         <Typography variant='subtitle3' sx={styles.mainText}>
-          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>{email.replace(/(?<=.{1}).(?=[^@]*?.@)/g, '*')}</Typography>.
+          {t('modal.confirmation.main_text1')}{' '}
+          <Typography variant='subtitle3' component='span' sx={styles.userEmail}>
+            {email.replace(/(?<=.{1}).(?=[^@]*?.@)/g, '*')}
+          </Typography>
+          .
         </Typography>
-        <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
+        <Typography variant='subtitle3' sx={styles.mainText}>
+          {t('modal.confirmation.main_text2')}
+        </Typography>
       </Box>
 
       <Formik
         initialValues={initialValues}
-        validationSchema={ResetPasswordSchema}
+        validationSchema={resetPasswordSchema}
         onSubmit={async (values, { resetForm }) => {
           try {
             const requestData = {
