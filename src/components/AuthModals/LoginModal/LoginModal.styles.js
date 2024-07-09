@@ -49,6 +49,9 @@ const styles = {
       textDecoration: 'underline',
     },
   }),
+  iconStyle: (theme) => ({
+    color: theme.palette.neutral[50]
+  })
 };
 
 export default styles;

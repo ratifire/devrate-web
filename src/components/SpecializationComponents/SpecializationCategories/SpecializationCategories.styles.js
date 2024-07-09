@@ -146,6 +146,16 @@ export const styles = {
     position: 'relative',
     zIndex: 1,
   }),
+
+  deleteBtn: (theme) => ({
+    zIndex: 1,
+    color: theme.palette.action.active,
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    borderRadius: theme.spacing(2),
+  }),
+
   hardAndSoftSkills: (theme) => ({
     gap: theme.spacing(3),
     paddingLeft: theme.spacing(3),

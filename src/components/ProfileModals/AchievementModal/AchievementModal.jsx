@@ -1,24 +1,25 @@
-import React from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../redux/modal/modalSlice';
 import { Box, Typography } from '@mui/material';
-import { styles } from './AchievementModal.styles';
-import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
+import { closeModal } from '../../../redux/modal/modalSlice';
+import { useCreateAchievementMutation } from '../../../redux/services/achievementsApiSlice';
+import { ButtonDef } from '../../Buttons';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
-import { ButtonDef } from '../../Buttons';
-import PropTypes from 'prop-types';
-import { useCreateAchievementMutation } from '../../../redux/services/achievementsApiSlice';
+import { styles } from './AchievementModal.styles';
 import { AchievementModalSchema } from './AchievementModalSchema';
 
-const AchievementModal = ({ onSuccess, userId }) => {
+const AchievementModal = ({ userId }) => {
   const dispatch = useDispatch();
   const openAchievement = useSelector((state) => state.modal.achievement);
-  const handleClose = () => dispatch(closeModal({ modalName: 'achievement' }));
   const { t } = useTranslation();
   const [createAchievement] = useCreateAchievementMutation();
+
+  const handleClose = () => dispatch(closeModal({ modalName: 'achievement' }));
 
   const initialValues = {
     link: '',
@@ -27,20 +28,17 @@ const AchievementModal = ({ onSuccess, userId }) => {
   };
 
   const onSubmit = async (values, { resetForm }) => {
-    console.log('Submitted values:', values);
-
     try {
       if (!userId) {
         console.error('User is not authenticated or user ID is missing');
         return;
       }
 
-      const result = await createAchievement({
+      await createAchievement({
         userId: userId,
         payload: values,
       }).unwrap();
 
-      onSuccess(result);
       resetForm();
       handleClose();
     } catch (error) {
@@ -55,7 +53,7 @@ const AchievementModal = ({ onSuccess, userId }) => {
   });
 
   if (!userId) {
-    return null;
+    return <Typography>Error: User not authenticated</Typography>;
   }
 
   return (
@@ -119,8 +117,7 @@ const AchievementModal = ({ onSuccess, userId }) => {
 };
 
 AchievementModal.propTypes = {
-  onSuccess: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.number,
 };
 
 export default AchievementModal;

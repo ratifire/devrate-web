@@ -22,6 +22,7 @@ const ResetPassword = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openResetPassword = useSelector((state) => state.modal.openResetPassword);
+  const email = useSelector((state) => state.email.email);
   const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
   const ResetPasswordSchema = useResetPasswordSchema();
 
@@ -69,9 +70,14 @@ const ResetPassword = () => {
 
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
-      <Typography variant='subtitle3' sx={styles.title}>
-        {t('modal.resetPassword.title')}
-      </Typography>
+      <Typography variant='subtitle3' sx={styles.title}>{t('modal.resetPassword.title')}</Typography>
+      <Box sx={styles.mainTextWrapper}>
+        <Typography variant='subtitle3' sx={styles.mainText}>
+          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>{email.replace(/(?<=.{1}).(?=[^@]*?.@)/g, '*')}</Typography>.
+        </Typography>
+        <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
+      </Box>
+
       <Formik
         initialValues={initialValues}
         validationSchema={ResetPasswordSchema}
@@ -122,6 +128,7 @@ const ResetPassword = () => {
               helperText={formik.touched.newPassword && formik.errors.newPassword}
               clickHandler={handleClickShowPassword}
               mouseDownHandler={handleMouseDownPassword}
+              iconStyle={styles.iconStyle}
             />
             <FormInput
               showPassword={showPassword}
@@ -135,6 +142,7 @@ const ResetPassword = () => {
               helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
               clickHandler={handleClickShowPassword}
               mouseDownHandler={handleMouseDownPassword}
+              iconStyle={styles.iconStyle}
             />
             <Box sx={styles.wrapperBtn}>
               <ButtonDef

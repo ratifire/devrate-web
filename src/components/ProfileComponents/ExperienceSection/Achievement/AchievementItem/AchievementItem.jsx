@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Box, IconButton, Link, Typography } from '@mui/material';
-import { ReactComponent as Star } from '../../../../../assets/icons/star.svg';
-import styles from './AchievementItem.styles.js';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import DropdownMenu from '../../DropdownMenu/DropdownMenu';
+import { Box, IconButton, Link, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { ReactComponent as Star } from '../../../../../assets/icons/star.svg';
 import AchievementEditModal from '../../../../../components/ProfileModals/AchievementModal/AchievementEditModal.jsx';
 import { useDeleteAchievementMutation } from '../../../../../redux/services/achievementsApiSlice.js';
+import DropdownMenu from '../../DropdownMenu/DropdownMenu';
+import styles from './AchievementItem.styles.js';
 
-const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) => {
+const AchievementItem = ({ achievement }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteAchievement] = useDeleteAchievementMutation();
@@ -18,7 +18,6 @@ const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) 
   };
 
   const handleMenuOpen = (event) => {
-    console.log('Menu opened');
     setAnchorEl(event.currentTarget);
   };
 
@@ -28,11 +27,8 @@ const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) 
   };
 
   const handleDeleteFeature = async () => {
-    console.log('Deleting feature');
     try {
       await deleteAchievement(achievement.id).unwrap();
-      console.log('Achievement deleted successfully');
-      removeAchievement(achievement.id);
     } catch (error) {
       console.error('Failed to delete the achievement:', error);
     }
@@ -70,15 +66,7 @@ const AchievementItem = ({ achievement, removeAchievement, updateAchievement }) 
           {achievement.description}
         </Typography>
       </Box>
-      <AchievementEditModal
-        isOpen={isModalOpen}
-        onClose={() => {
-          console.log('Modal closed');
-          setIsModalOpen(false);
-        }}
-        achievement={achievement}
-        updateAchievement={updateAchievement}
-      />
+      <AchievementEditModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} achievement={achievement} />
     </Box>
   );
 };
@@ -90,8 +78,6 @@ AchievementItem.propTypes = {
     link: PropTypes.string,
     description: PropTypes.string.isRequired,
   }).isRequired,
-  removeAchievement: PropTypes.func.isRequired,
-  updateAchievement: PropTypes.func.isRequired,
 };
 
 export default AchievementItem;
