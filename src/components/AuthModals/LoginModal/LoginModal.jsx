@@ -98,6 +98,7 @@ const LoginModal = () => {
           helperText={formik.touched.password && formik.errors.password}
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
+          iconStyle={styles.iconStyle}
         />
         <Box sx={styles.textLink}>
           <ButtonDef

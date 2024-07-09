@@ -260,14 +260,22 @@ export const uk = {
         title: 'Хард скіли',
         averageMark: 'Середня оцінка:',
       },
+      softSkills:{
+        title:'Софт скіли',
+      },
       modal: {
         specialization: {
           modal_title: 'Спеціалізація',
           name: 'Назва спеціалізації',
           name_placeholder: 'Front-End Розробник',
-          level: 'Рівень',
-          main: 'Зробити основною',
+          mastery: 'Основний рівень',
           required: "Це обов'язкове поле",
+        },
+        skills: {
+          title: 'Навички',
+          placeholder: 'Codelgniter, Yii, Zend Framework',
+          skill_long: 'Навичка за довга',
+          skill_short: 'Навичка за коротка',
         },
       },
       interview: {
