@@ -4,7 +4,7 @@ import { IconButton, InputAdornment, Tooltip, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useTranslation } from 'react-i18next';
-import styles from './PasswordVisibilityToggle.styles'; // Проверьте импорт стилей
+import styles from './PasswordVisibilityToggle.styles'; 
 
 const PasswordVisibilityToggle = ({
   name,
