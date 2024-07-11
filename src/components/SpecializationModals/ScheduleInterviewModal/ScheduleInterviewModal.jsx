@@ -1,25 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { ScheduleSchema } from './ScheduleSchema';
-import { Box, IconButton, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Checkbox, FormControlLabel, IconButton, Tab, Tabs, Typography } from '@mui/material';
 import { styles } from './ScheduleInterview.styles';
 import { ButtonDef } from '../../Buttons';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import range from 'lodash/range';
-
-const days = [
-  'mon',
-  'tue',
-  'wed',
-  'thu',
-  'fri',
-  'sat',
-  'sun',
-];
+import { DateTime } from 'luxon';
+import { getDatesInWeek } from '../../../utils/helpers/getWeekDates';
+import { CheckboxButton } from './CheckboxButton/CheckboxButton';
 
 
 const ScheduleInterviewModal = () => {
@@ -27,16 +20,30 @@ const ScheduleInterviewModal = () => {
 
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
-  const [tab, setTab] = useState('mon');
+  const [date, setDate] = useState(DateTime.now().startOf('day'));
+  const [weekDates, setWeekDates] = useState([]);
+  const [tab, setTab] = useState(date.toFormat('EEE, d'));
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    setWeekDates(getDatesInWeek(date));
+  }, [date]);
+
+  const weekTitle = useMemo(() => {
+    if (DateTime.now().toFormat('W') === date.toFormat('W')) {
+      return t('This week');
+    }
+
+    return `${weekDates[0].toFormat('d')} - ${weekDates.at(-1).toFormat('d')}`;
+  }, [weekDates, date]);
 
   const tabChangeHandler = (_, newTab) => {
     setTab(newTab);
   };
 
   const initialValues = {
-    days: {},
+    dates: {},
   };
   const onSubmit = (values, { resetForm }) => {
     console.log('Submitted values:', values);
@@ -51,36 +58,53 @@ const ScheduleInterviewModal = () => {
     onSubmit,
   });
 
-  const timeClickHandler = (day, time) => {
-    if (formik.values.days[day]?.[time]) {
-      delete formik.values.days[day][time];
+  const timeClickHandler = (isoTime) => {
+    if (formik.values.dates[isoTime]) {
+      delete formik.values.dates[isoTime];
 
-      return formik.setFieldValue(`days.${day}`, {
-        ...formik.values.days[day],
+      return formik.setFieldValue(`dates`, {
+        ...formik.values.dates,
       });
     }
 
-    formik.setFieldValue(`days.${day}`, {
-      ...formik.values.days[day],
-      [time]: 1
+    formik.setFieldValue(`dates`, {
+      ...formik.values.dates,
+      [isoTime]: true,
     });
+  };
+
+  const prevWeekClickHandler = () => {
+    setDate((prevVal) => {
+      const newDate = prevVal.minus({ weeks: 1 });
+      setTab(newDate.toFormat('EEE, d'));
+
+      return newDate;
+    })
+  }
+
+  const nextWeekClickHandler = () => {
+    setDate((prevVal) => {
+      const newDate = prevVal.plus({ weeks: 1 });
+      setTab(newDate.toFormat('EEE, d'));
+
+      return newDate;
+    })
   }
 
   const generateTimeButtons = (day) => {
-    return range(0, 23).map((hour) => {
-      const hourStr = `${hour}`.padStart(2, '0');
+    return range(0, 24).map((hour) => {
 
-      const time = `${hourStr}:00`;
+      const time = day.set({ hour });
+      const timeIso = time.toISO();
 
       return (
-        <ButtonDef
-          correctStyle={styles.timeButton}
-          withTranslation={false}
-          key={`${day}-${hour}-00`}
-          variant={formik.values.days[day]?.[time] ? 'contained' : 'outlined'}
-          type="button"
-          label={time}
-          handlerClick={() => timeClickHandler(day, time)}
+        <CheckboxButton
+          name="dates"
+          key={timeIso}
+          value={timeIso}
+          isChecked={Boolean(formik.values.dates[timeIso])}
+          label={time.toFormat('HH:mm')}
+          onChange={timeClickHandler}
         />
       );
     });
@@ -95,46 +119,70 @@ const ScheduleInterviewModal = () => {
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
 
-          <Box>
-            <IconButton>
+          <Box sx={styles.weekHeading}>
+            <IconButton onClick={prevWeekClickHandler}>
               <ChevronLeft />
             </IconButton>
 
-            <Typography variant="subtitle2">This week</Typography>
+            <Typography variant="subtitle2">{weekTitle}</Typography>
 
-            <IconButton>
+            <IconButton onClick={nextWeekClickHandler}>
               <ChevronRight />
             </IconButton>
           </Box>
 
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={tab} onChange={tabChangeHandler}>
-                {days.map(day => {
-                  return (
-                    <Tab label={day} key={`tab-${day}`} value={day} />
-                  );
-                })}
-              </Tabs>
-            </Box>
-
-            {days.map(day => {
-              if (tab !== day) {
-                return null;
-              }
-
+          <Tabs sx={styles.tabsRow} value={tab} onChange={tabChangeHandler}>
+            {weekDates.map(day => {
+              const tabLabel = day.toFormat('EEE, d');
               return (
-                <Box sx={styles.timeGrid} key={`tab-panel-${day}`} >
-                  {generateTimeButtons(day)}
-                </Box>
+                <Tab label={tabLabel} key={`tab-${tabLabel}`} value={tabLabel} sx={styles.tab} />
               );
             })}
+          </Tabs>
 
-          <ButtonDef
-            variant="contained"
-            type="submit"
-            label={t('specialization.modal.scheduleModal.schedule')}
-            correctStyle={styles.workExperienceBtn}
-          />
+          {weekDates.map(day => {
+            if (tab !== day.toFormat('EEE, d')) {
+              return null;
+            }
+
+            return (
+              <>
+                <Box sx={styles.texts}>
+                  <Typography variant="subtitle2">Choose a comfort time</Typography>
+                  <Typography variant="body1">{weekDates?.[0]?.toFormat('z (ZZZZ)')}</Typography>
+                </Box>
+                <Box sx={styles.timeGrid} key={`tab-panel-${day}`}>
+                  {generateTimeButtons(day)}
+                </Box>
+              </>
+            );
+          })}
+
+          <Box sx={styles.action}>
+            <ButtonDef
+              variant="contained"
+              type="submit"
+              label={t('specialization.modal.scheduleModal.schedule')}
+              correctStyle={styles.workExperienceBtn}
+            />
+
+            <Box sx={styles.checkboxes}>
+              <Typography variant="body1">Apply to:</Typography>
+              <FormControlLabel
+                value="end"
+                control={<Checkbox  />}
+                label={'Mon-Fri'}
+                labelPlacement="end"
+              />
+              <FormControlLabel
+                value="end"
+                control={<Checkbox />}
+                label={'Sat-Sun'}
+                labelPlacement="end"
+              />
+
+            </Box>
+          </Box>
 
         </Box>
       </form>

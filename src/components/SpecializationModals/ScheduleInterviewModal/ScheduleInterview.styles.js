@@ -6,13 +6,63 @@ export const styles = {
       textTransform: 'uppercase',
     },
   }),
-  timeButton: () => ({
-    width: 'fit-content',
-  }),
   timeGrid: (theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    gap: theme.spacing(2),
+    gap: theme.spacing(3),
+  }),
+  tabsRow: (theme) => ({
+    display: 'flex',
+    width: '100%',
+
+    '& .MuiTabs-flexContainer': {
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'space-between',
+      borderBottom: '1px solid ' + theme.palette.neutral[400],
+    }
+  }),
+  action: (theme) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    gap: theme.spacing(3),
+    alignItems: 'center',
+  }),
+  checkboxes: (theme) => ({
+    display: 'flex',
+    width: 'fit-content',
+    gap: theme.spacing(3),
+    alignItems: 'center',
+
+    '& .MuiFormControlLabel-root': {
+      margin: 0
+    }
+  }),
+  weekHeading: (theme) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    gap: theme.spacing(3),
+    width: '100%',
+    alignItems: 'center',
+
+    '& .MuiSvgIcon-root': {
+      fill: theme.palette.neutral[100],
+    }
+  }),
+  texts: (theme) => ({
+    display: 'flex',
+    width: '100%',
+    gap: theme.spacing(3),
+    justifyContent: 'space-between',
+  }),
+  tab: (theme) => ({
+    fontWeight: 500,
+    fontSize: '20px',
+    lineHeight: '32px',
+    letterSpacing: '0.15ox',
+    color: theme.palette.neutral[100],
+    textTransform: 'none',
   }),
   wrapper: (theme) => ({
     display: 'flex',
