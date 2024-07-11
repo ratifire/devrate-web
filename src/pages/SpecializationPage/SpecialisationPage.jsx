@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { styles } from './SpecialisationPage.style';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
@@ -17,6 +17,8 @@ import SoftSkills from '../../components/SpecializationComponents/SoftSkills';
 
 const SpecializationPage = () => {
   const { t } = useTranslation();
+  const [activeMastery, setActiveMastery] = useState('JUNIOR');
+
 
   return (
     <SpecializationTemplate>
@@ -27,13 +29,13 @@ const SpecializationPage = () => {
             <SpecialisationCategories />
           </Paper>
           <Paper sx={styles.specialisationLevel}>
-            <SpecializationLevel />
+            <SpecializationLevel activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
           </Paper>
           <Paper sx={styles.specialisationInterviewParticipation}>
             <Interviews />
           </Paper>
           <Paper sx={styles.specialisationHardSkills}>
-            <HardSkills />
+            <HardSkills activeMastery={activeMastery} setActiveMastery={setActiveMastery}/>
           </Paper>
           <Paper sx={styles.specialisationSoftSkills}>
             <SoftSkills />

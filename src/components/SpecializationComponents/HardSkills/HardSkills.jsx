@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Box, Typography, IconButton, CircularProgress } from '@mui/material';
 import { styles } from './HardSkills.styles';
 import EditIcon from '@mui/icons-material/Edit';
@@ -6,19 +7,20 @@ import SkillItem from './SkillItem';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
-import { 
-  useGetHardSkillsByMasteryIdQuery, 
-  useGetSpecializationByUserIdQuery, 
-  useGetMainMasteryBySpecializationIdQuery 
+import {
+  useGetHardSkillsByMasteryIdQuery,
+  useGetSpecializationByUserIdQuery,
+  useGetMasteriesBySpecializationIdQuery,
 } from '../../../redux/specialization/specializationApiSlice';
 
-const HardSkills = () => {
+const HardSkills = ({ activeMastery, setActiveMastery }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const { id: userId } = useSelector((state) => state.auth.user.data);
 
   const [specializationId, setSpecializationId] = useState(null);
+  const [masteryId, setMasteryId] = useState(null);
 
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSkillsModal' }));
@@ -26,23 +28,54 @@ const HardSkills = () => {
 
   useEffect(() => {}, [openSkillsModal]);
 
+  useEffect(() => {
+    console.log('Specialization ID:', specializationId);
+  }, [specializationId]);
+
+  useEffect(() => {
+    console.log('Mastery ID:', masteryId);
+  }, [masteryId]);
+
+  useEffect(() => {
+    console.log('Active Mastery:', activeMastery);
+  }, [activeMastery]);
+
   const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
 
   useEffect(() => {
+    console.log('Specializations:', specializations);
     if (specializations && specializations.length > 0) {
       setSpecializationId(specializations[0].id);
     }
   }, [specializations]);
 
-  const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
+  const { data: masteries, isLoading: isLoadingMasteries } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
+
+  useEffect(() => {
+    console.log('Masteries:', masteries);
+    if (masteries && masteries.length > 0) {
+      const defaultMastery = masteries[0].level;
+      if (!activeMastery) {
+        setActiveMastery(defaultMastery);
+      }
+    }
+  }, [masteries, activeMastery, setActiveMastery]);
+
+  useEffect(() => {
+    if (masteries && masteries.length > 0 && activeMastery) {
+      const selectedMastery = masteries.find((mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase());
+      console.log('Selected Mastery:', selectedMastery);
+      setMasteryId(selectedMastery?.id || null);
+    }
+  }, [masteries, activeMastery]);
 
   const {
     data: skills = [],
     isLoading: isLoadingSkills,
     isError: isErrorSkills,
-  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
+  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
 
-  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
+  if (isLoadingSpecializations || isLoadingMasteries || isLoadingSkills) {
     return <CircularProgress />;
   }
 
@@ -73,6 +106,11 @@ const HardSkills = () => {
       </Box>
     </Box>
   );
+};
+
+HardSkills.propTypes = {
+  activeMastery: PropTypes.string.isRequired,
+  setActiveMastery: PropTypes.func.isRequired,
 };
 
 export default HardSkills;

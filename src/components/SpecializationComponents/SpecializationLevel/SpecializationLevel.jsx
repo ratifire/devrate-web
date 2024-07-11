@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
 import { styles } from './SpecializationLevel.styles';
 import { useTranslation } from 'react-i18next';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ButtonDef from '../../Buttons/ButtonDef';
 
-const SpecializationLevel = () => {
+const SpecializationLevel = ({ activeMastery, setActiveMastery }) => {
   const { t } = useTranslation();
-  const [activeButton, setActiveButton] = useState('Junior');
 
   const handleButtonClick = (label) => {
-    setActiveButton(label);
+    console.log(`Button clicked: ${label}`);
+    setActiveMastery(label);
   };
 
   return (
@@ -28,19 +29,25 @@ const SpecializationLevel = () => {
           aria-label='Specialization level button group'
           color='secondary'
         >
-          {['Junior', 'Middle', 'Senior'].map((label) => (
-            <ButtonDef sx={styles.button}
+          {['JUNIOR', 'MIDDLE', 'SENIOR'].map((label) => (
+            <ButtonDef
+              sx={styles.button}
               key={label}
               label={label}
               handlerClick={() => handleButtonClick(label)}
               disabled={false}
-              variant={activeButton === label ? 'contained' : 'outlined'}
+              variant={activeMastery === label ? 'contained' : 'outlined'}
             />
           ))}
         </ButtonGroup>
       </Box>
     </Box>
   );
+};
+
+SpecializationLevel.propTypes = {
+  activeMastery: PropTypes.string.isRequired,
+  setActiveMastery: PropTypes.func.isRequired,
 };
 
 export default SpecializationLevel;
