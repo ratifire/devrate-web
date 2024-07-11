@@ -1,53 +1,26 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable */
+
 import { Grid, Typography } from '@mui/material';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import AchievementModal from '../../../../components/ProfileModals/AchievementModal/AchievementModal';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useFetchAchievementsQuery } from '../../../../redux/services/achievementsApiSlice';
 import AchievementItem from './AchievementItem/AchievementItem';
 import styles from './Achievment.styles';
-import { useFetchAchievementsQuery } from '../../../../redux/services/achievementsApiSlice';
-import AchievementModal from '../../../../components/ProfileModals/AchievementModal/AchievementModal'; 
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 
 const Achievement = () => {
+  const {
+    data: { id: userId },
+  } = useSelector(selectCurrentUser);
 
-  const currentUser = useSelector(selectCurrentUser);
-  const [userId, setUserId] = useState(null);
-  
-  useEffect(() => {
-    
-    if (currentUser && currentUser.data) {
-      setUserId(currentUser.data.id);
-    }
-  }, [currentUser]);
-
-  console.log('User ID:', userId);
-
-  const { data: achievementsData, error, isLoading } = useFetchAchievementsQuery(userId, {
+  const {
+    data: achievementsData,
+    error,
+    isLoading,
+  } = useFetchAchievementsQuery(userId, {
     skip: !userId,
   });
-
-  const [achievements, setAchievements] = useState([]);
-
-  useEffect(() => {
-    if (achievementsData) {
-      setAchievements(achievementsData);
-    }
-  }, [achievementsData]);
-
-  const addAchievement = (newAchievement) => {
-    setAchievements((prevAchievements) => [...prevAchievements, newAchievement]);
-  };
-
-  const updateAchievement = (updatedAchievement) => {
-    setAchievements((prevAchievements) =>
-      prevAchievements.map((achievement) =>
-        achievement.id === updatedAchievement.id ? updatedAchievement : achievement
-      )
-    );
-  };
-
-  const removeAchievement = (id) => {
-    setAchievements((prevAchievements) => prevAchievements.filter((achievement) => achievement.id !== id));
-  };
 
   if (!userId) {
     return <Typography>Error: User not authenticated</Typography>;
@@ -64,13 +37,13 @@ const Achievement = () => {
   return (
     <>
       <Grid container spacing={3} sx={styles.achievementListContainer}>
-        {achievements?.map((achievement) => (
+        {achievementsData?.map((achievement) => (
           <Grid item key={achievement.id} xs={6}>
-            <AchievementItem achievement={achievement} removeAchievement={removeAchievement} updateAchievement={updateAchievement} />
+            <AchievementItem achievement={achievement} />
           </Grid>
         ))}
       </Grid>
-      <AchievementModal onSuccess={addAchievement} userId={userId} />
+      <AchievementModal userId={userId} />
     </>
   );
 };

@@ -120,6 +120,12 @@ export const en = {
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
+        not_valid: 'Password not valid',
+        code_required: 'Code is required',
+        code_symbol_min: 'Each code digit must be 1 character long',
+        code_length_max: 'Code must be exactly 6 digits long',
+        error: 'Error changing password. Please try again.',
+        success: 'Password changed successfully!'
       },
       editPage: {
         personalInformation: {
@@ -240,24 +246,24 @@ export const en = {
       specialization_hardSkills: 'Hard Skills',
       specialization_softSkills: 'Soft Skills',
       level: {
-        title:'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.'
+        title: 'Level',
+        description: 'Improve your skills to move onto the next level of in-line specialisation.',
       },
-       statistics:{
-        title:'Statistics',
-        level_chart_title:"Level",
-        level_chart_left_caption:"Junior1",
-        level_chart_right_caption:"Middle1",
-        hard_skills_chart_title:"Hard Skills by productivity",
-        hard_skills_chart_text:"This chart displays",
-        interview_chart_title:"Interview",
-        interview_chart_days:"Days",
-        interview_chart_months:"Months",
-        skills_assessment_chart_title:'Average skill assessment'
-    },
-      hardSkills:{
-        title:'Hard skills',
-        averageMark: 'Average mark:'
+      statistics: {
+        title: 'Statistics',
+        level_chart_title: 'Level',
+        level_chart_left_caption: 'Junior1',
+        level_chart_right_caption: 'Middle1',
+        hard_skills_chart_title: 'Hard Skills by productivity',
+        hard_skills_chart_text: 'This chart displays',
+        interview_chart_title: 'Interview',
+        interview_chart_days: 'Days',
+        interview_chart_months: 'Months',
+        skills_assessment_chart_title: 'Average skill assessment',
+      },
+      hardSkills: {
+        title: 'Hard skills',
+        averageMark: 'Average mark:',
       },
       softSkills:{
         title:'Soft skills',
@@ -267,52 +273,58 @@ export const en = {
           modal_title: 'Specialization',
           name: 'Specialization name',
           name_placeholder: 'Front-End Developer',
-          level: 'Level',
-          main: 'Main specialization',
+          mastery: 'Main mastery',
           required: 'This is a required field',
         },
         skills: {
           title: 'Skills',
-          placeholder: 'Codelgniter, Yii, Zend Framework'
+          placeholder: 'Codelgniter, Yii, Zend Framework',
         },
-      interview: {
-        income: 'An interview has been completed ',
-        outcome: 'An interview was conducted',
-        makeIncome: 'Schedule an interview',
-        makeOutcome: 'Become an interviewer',
+        interview: {
+          income: 'An interview has been completed ',
+          outcome: 'An interview was conducted',
+          makeIncome: 'Schedule an interview',
+          makeOutcome: 'Become an interviewer',
+        },
+        scheduleModal: {
+          name: 'Name',
+          specialization: 'Specialization',
+          level: 'Level',
+          role: 'Role',
+          date: 'Date',
+          startTime: 'Start Time',
+          endTime: 'End Time',
+          socialLinks: 'Social Links',
+          schedule: 'Schedule',
+          scheduleInterview: 'Schedule Interview',
+          skill_long: 'Company too long',
+          skill_short: 'Company too short',
+        },
       },
-      scheduleModal: {
-        name: 'Name',
-        specialization: 'Specialization',
-        level: 'Level',
-        role: 'Role',
-        date: 'Date',
-        startTime: 'Start Time',
-        endTime: 'End Time',
-        socialLinks: 'Social Links',
-        schedule: 'Schedule',
-        scheduleInterview: 'Schedule Interview',
+      language: {
+        level: {
+          a1: 'Beginner: A1',
+          a2: 'Pre-Intermediate: A2',
+          b1: 'Intermediate: B1',
+          b2: 'Upper-Intermediate: B2',
+          c1: 'Advanced: C1',
+          c2: 'Proficient: C2',
+        },
+        name: {
+          ua: 'Ukrainian',
+          en: 'English',
+          fr: 'French',
+          it: 'Italian',
+          de: 'German',
+          es: 'Spanish',
+          pl: 'Poland',
+          cs: 'Czech',
+        },
       },
     },
-    language: {
-      level: {
-        a1: 'Beginner: A1',
-        a2: 'Pre-Intermediate: A2',
-        b1: 'Intermediate: B1',
-        b2: 'Upper-Intermediate: B2',
-        c1: 'Advanced: C1',
-        c2: 'Proficient: C2',
-      },
-      name: {
-        ua: 'Ukrainian',
-        en: 'English',
-        fr: 'French',
-        it: 'Italian',
-        de: 'German',
-        es: 'Spanish',
-        pl: 'Poland',
-        cs: 'Czech',
-      },
+    dropDownMenu: {
+      delete: 'Delete',
+      edit: 'Edit',
     },
   },
-}}
+};

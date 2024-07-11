@@ -9,10 +9,10 @@ import SpecialisationCategories from '../../components/SpecializationComponents/
 import LevelChart from '../../components/SpecializationComponents/Statistics/LevelChart/LevelChart';
 import SkillsAssessmentChart
   from '../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart';
-import HardSkillsChart from '../../components/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart';
-import InterviewChart from '../../components/SpecializationComponents/Statistics/InteviewChart/InterviewChart';
-import { useTranslation } from 'react-i18next';
-import Interviews from '../../components/SpecializationComponents/Interviews';
+import HardSkillsChart from "../../components/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart";
+import InterviewChart from "../../components/SpecializationComponents/Statistics/InteviewChart/InterviewChart";
+import {useTranslation} from "react-i18next";
+import Interviews from '../../components/SpecializationComponents/Interviews'
 import SoftSkills from '../../components/SpecializationComponents/SoftSkills';
 
 const SpecializationPage = () => {

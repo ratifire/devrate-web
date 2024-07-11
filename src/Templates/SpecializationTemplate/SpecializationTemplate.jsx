@@ -7,7 +7,7 @@ import SkillsModal from '../../components/SpecializationModals/SkillsModal';
 import SoftSkillsModal from '../../components/SpecializationModals/SoftSkillsModal';
 
 const SpecializationTemplate = ({ children }) => {
-  const openAddSpecialization = useSelector((state) => state.modal.openAddSpecialization);
+  const openSpecialization = useSelector((state) => state.modal.openSpecialization);
   const scheduleInterviewIsOpen = useSelector((state) => state.modal.scheduleInterview);
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const openSoftSkillsModal = useSelector((state) => state.modal.openSoftSkillsModal);
@@ -15,7 +15,7 @@ const SpecializationTemplate = ({ children }) => {
   return (
     <div className='specialization'>
       {children}
-      {openAddSpecialization && <SpecializationModal/>}
+      {openSpecialization && <SpecializationModal/>}
       {scheduleInterviewIsOpen && <ScheduleInterviewModal />}
       {openSoftSkillsModal && <SoftSkillsModal />}
       {openSkillsModal && <SkillsModal />}

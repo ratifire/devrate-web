@@ -1,13 +1,16 @@
 import * as Yup from 'yup';
 
-export const ResetPasswordSchema = Yup.object().shape({
+const resetPasswordSchema = Yup.object().shape({
   code: Yup.array()
-    .of(Yup.string().required('Code is required').length(1, 'Each code digit must be 1 character long'))
-    .length(6, 'Code must be exactly 6 digits long'),
+    .of(Yup.string().required('modal.resetPassword.code_required').length(1, 'modal.resetPassword.code_symbol_min'))
+    .length(6, 'modal.resetPassword.code_length_max'),
   newPassword: Yup.string()
-    .required('New password is required')
-    .min(8, 'Password must be at least 8 characters long'),
+    .required('modal.resetPassword.required')
+    .min(7, 'modal.resetPassword.password_short')
+    .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{7,}$/, 'modal.resetPassword.not_valid'),
   repeatPassword: Yup.string()
-    .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
-    .required('Please confirm your new password'),
+    .oneOf([Yup.ref('newPassword'), null], 'modal.resetPassword.password_must_match')
+    .required('modal.resetPassword.required'),
 });
+
+export default resetPasswordSchema;
