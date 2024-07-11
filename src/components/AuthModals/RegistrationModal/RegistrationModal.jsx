@@ -12,6 +12,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useCreateUserMutation } from '../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useGetCountryListQuery } from '../../../redux/countryList/countryApiSlice';
+import AdvancedFormSelector from '../../UI/AdvanceFormSelector';
 
 const initialValues = {
   email: '',
@@ -71,7 +72,19 @@ const RegistrationModal = () => {
             label='modal.registration.email'
             helperText={formik.touched.email && formik.errors.email}
             error={formik.touched.email && Boolean(formik.errors.email)}
+            countries={userCountries}
           />
+        {userCountries && <AdvancedFormSelector
+          variant="outlined"
+          name="country"
+          value={formik.values.country}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          label="modal.registration.country"
+          error={formik.touched.country && Boolean(formik.errors.country)}
+          helperText={formik.touched.country && formik.errors.country}
+          countries={userCountries}
+        />}
           <FormSelect
             variant='outlined'
             name='country'
