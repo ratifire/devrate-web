@@ -1,12 +1,37 @@
 import React from 'react';
-import {Box, Typography} from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import {Gauge, gaugeClasses} from '@mui/x-charts';
 import {styles} from './LevelChart.styles.js';
 import {useTranslation} from "react-i18next";
+import { useSelector } from 'react-redux';
+import {
+	useGetHardSkillsByMasteryIdQuery,
+	useGetMainMasteryBySpecializationIdQuery,
+	useGetSpecializationByUserIdQuery,
+} from '../../../../redux/specialization/specializationApiSlice';
 
 const LevelChart = () => {
 	const { t } = useTranslation();
-	
+	const { id: userId } = useSelector((state) => state.auth.user.data);
+	const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
+	const specializationId = specializations?.[0]?.id
+	const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
+	const {
+		data: skills = [],
+		isLoading: isLoadingSkills,
+		isError: isErrorSkills,
+	} = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
+
+	const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0
+
+	if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
+		return <CircularProgress />;
+	}
+
+	if (isErrorSkills) {
+		return <Typography variant='h6'>Something error...</Typography>;
+	}
+
 	return (
 		<Box sx={styles.levelChartContainer}>
 			<Typography variant='subtitle2' sx={styles.title}>
@@ -18,7 +43,7 @@ const LevelChart = () => {
 						sx={styles.chartWrapper}
 					>
 						<Gauge
-							value={90}
+							value={averageMark}
 							startAngle={-90}
 							endAngle={90}
 							innerRadius='80%'
