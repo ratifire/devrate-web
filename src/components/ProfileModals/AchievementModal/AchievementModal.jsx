@@ -19,7 +19,10 @@ const AchievementModal = ({ userId }) => {
   const { t } = useTranslation();
   const [createAchievement] = useCreateAchievementMutation();
 
-  const handleClose = () => dispatch(closeModal({ modalName: 'achievement' }));
+  const handleClose = () => {
+    formik.resetForm();
+    dispatch(closeModal({ modalName: 'achievement' }));
+  }
 
   const initialValues = {
     link: '',
@@ -27,22 +30,17 @@ const AchievementModal = ({ userId }) => {
     description: '',
   };
 
-  const onSubmit = async (values, { resetForm }) => {
+  const onSubmit = async (values) => {
+
     try {
-      if (!userId) {
-        console.error('User is not authenticated or user ID is missing');
-        return;
-      }
-
       await createAchievement({
-        userId: userId,
-        payload: values,
-      }).unwrap();
-
-      resetForm();
+              userId: userId,
+              payload: values,
+            }).unwrap();
       handleClose();
+
     } catch (error) {
-      console.error('Failed to create achievement:', error);
+      console.error('Error updating achievement:', error);
     }
   };
 
