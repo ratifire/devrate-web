@@ -5,12 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Box, CircularProgress, Link, Typography } from '@mui/material';
 import ModalLayout from '../../../layouts/ModalLayout';
-
 import styles from './LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
 import { FormInput } from '../../Inputs';
 import { ButtonDef } from '../../Buttons';
-
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../redux/auth/authSlice';
@@ -32,7 +30,7 @@ const LoginModal = () => {
   const handleOpen = () => {
     dispatch(openModal({ modalName: 'openCheckEmail' }));
     dispatch(closeModal({ modalName: 'openLogin' }));
-  }
+  };
   
   const [login, { isLoading }] = useLoginMutation();
 
