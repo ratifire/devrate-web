@@ -153,6 +153,7 @@ export const en = {
         skills: 'Skills',
         education: 'Education',
         duties: 'Duties',
+        endYear: 'Present',
       },
       right: {
         contact: 'Contact Information',
