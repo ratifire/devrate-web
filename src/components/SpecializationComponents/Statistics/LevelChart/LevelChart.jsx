@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
 import {Gauge, gaugeClasses} from '@mui/x-charts';
-import {styles} from './LevelChart.style.js';
+import {styles} from './LevelChart.styles.js';
 import {useTranslation} from "react-i18next";
 
 const LevelChart = () => {
@@ -48,10 +48,10 @@ const LevelChart = () => {
 						</Gauge>
 					</Box>
 				</Box>
-				<Typography variant='caption' sx={styles.leftCaption}>
+				<Typography variant='caption' sx={styles.rightCaption}>
 					{t('specialization.statistics.level_chart_left_caption')}
 				</Typography>
-				<Typography variant='caption' sx={styles.rigthCaption}>
+				<Typography variant='caption' sx={styles.leftCaption}>
 					{t('specialization.statistics.level_chart_right_caption')}
 				</Typography>
 			</Box>
