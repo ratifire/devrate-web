@@ -62,7 +62,7 @@ const LevelChart = () => {
                   transform: 'translate(0px, -30px)',
                 },
               }}
-              text={({ value }) => `${value} %`}
+              text={({ value }) => `${value}%`}
             >
               <defs>
                 <linearGradient id='gradient' x1='0%' y1='0%' x2='100%' y2='0%'>
