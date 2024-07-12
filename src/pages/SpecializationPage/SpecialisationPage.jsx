@@ -40,7 +40,7 @@ const SpecializationPage = () => {
           </Paper>
           <Paper sx={styles.specialisationStatistics}>
             <Typography sx={styles.statisticTitle}>
-              {t('specialisation.statistics.title')}
+              {t('specialization.statistics.title')}
             </Typography>
             <Box sx={styles.statisticWrapper}>
               <Paper sx={styles.level}>
