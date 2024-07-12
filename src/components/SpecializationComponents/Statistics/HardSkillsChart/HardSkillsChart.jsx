@@ -1,29 +1,12 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
-import {
-  useGetHardSkillsByMasteryIdQuery,
-  useGetMainMasteryBySpecializationIdQuery,
-  useGetSpecializationByUserIdQuery,
-} from '../../../../redux/specialization/specializationApiSlice';
+import useUserSkillsAndMasteryData from '../../useUserSkillsAndMasteryData';
 import { styles } from './HardSkillsChart.style.js';
 
 const HardSkillsChart = () => {
-  const { t } = useTranslation();
-  const { id: userId } = useSelector((state) => state.auth.user.data);
-  const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
-  const specializationId = specializations?.[0]?.id;
-  const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(
-    specializationId,
-    { skip: !specializationId }
-  );
-  const {
-    data: skills = [],
-    isLoading: isLoadingSkills,
-    isError: isErrorSkills,
-  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
+  const { t, skills, isErrorSkills, isLoadingMainMastery, isLoadingSkills, isLoadingSpecializations } =
+    useUserSkillsAndMasteryData();
 
   if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
     return <CircularProgress />;
