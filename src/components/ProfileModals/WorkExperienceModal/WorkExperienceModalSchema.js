@@ -30,7 +30,6 @@ export const WorkExperienceModalSchema = Yup.object().shape({
     .required('Start date is required'),
   endDate: Yup.date()
     .min(new Date(1900, 0, 1), 'Date must be later than 01/01/1900')
-    .max(new Date(), 'Date must be earlier than today')
     .required('End date is required')
     .test('endDate', 'End date must be later than start date', function (value) {
       const startDate = this.resolve(Yup.ref('startDate'));
