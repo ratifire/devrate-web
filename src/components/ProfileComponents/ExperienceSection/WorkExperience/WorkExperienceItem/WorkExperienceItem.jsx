@@ -36,6 +36,7 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
     await deleteWorkExperienceMutation(id).unwrap();
   };
 
+
   return (
     <Box sx={styles.workExpeirenceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
@@ -44,7 +45,8 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
             {position}
           </Typography>
           <Typography variant="subtitle3" sx={styles.workPlaceTitle}>
-            {companyName} <span style={{ margin: '0 4px' }}>•</span> {startDate.slice(0,4)} - {endDate.slice(0,4)}
+            {companyName} <span style={{ margin: '0 4px' }}>•</span>
+            {startDate.slice(0,4)} - {new Date(endDate) > new Date() ? t('profile.experience.endYear') : endDate.slice(0,4)}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Skeleton } from '@mui/material';
+import { Box } from '@mui/material';
 import styles from './WorkExperience.styles';
 import WorkExperienceItem from './WorkExperienceItem/WorkExperienceItem';
 import { useGetWorkExperienceByUserIdQuery } from '../../../../redux/workExperience/workExperienceApiSlice';
@@ -8,11 +8,7 @@ import { useSelector } from 'react-redux';
 const WorkExperience = () => {
   const { id } = useSelector((state) => state.auth.user.data);
 
-  const { data: workExperiencesData, isLoading } = useGetWorkExperienceByUserIdQuery(id);
-
-  if (isLoading) {
-    return <Skeleton animation='wave' height={50} />;
-  }
+  const { data: workExperiencesData } = useGetWorkExperienceByUserIdQuery(id);
 
   console.log(workExperiencesData);
 
