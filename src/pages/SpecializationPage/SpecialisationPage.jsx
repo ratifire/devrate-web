@@ -7,18 +7,16 @@ import SpecializationLevel from '../../components/SpecializationComponents/Speci
 import HardSkills from '../../components/SpecializationComponents/HardSkills';
 import SpecialisationCategories from '../../components/SpecializationComponents/SpecializationCategories';
 import LevelChart from '../../components/SpecializationComponents/Statistics/LevelChart/LevelChart';
-import SkillsAssessmentChart
-  from '../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart';
+import SkillsAssessmentChart from '../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart';
 import HardSkillsChart from "../../components/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart";
 import InterviewChart from "../../components/SpecializationComponents/Statistics/InteviewChart/InterviewChart";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Interviews from '../../components/SpecializationComponents/Interviews'
 import SoftSkills from '../../components/SpecializationComponents/SoftSkills';
 
 const SpecializationPage = () => {
   const { t } = useTranslation();
-  const [activeMastery, setActiveMastery] = useState('JUNIOR');
-
+  const [activeMastery, setActiveMastery] = useState();
 
   return (
     <SpecializationTemplate>
@@ -35,7 +33,7 @@ const SpecializationPage = () => {
             <Interviews />
           </Paper>
           <Paper sx={styles.specialisationHardSkills}>
-            <HardSkills activeMastery={activeMastery} setActiveMastery={setActiveMastery}/>
+            <HardSkills activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
           </Paper>
           <Paper sx={styles.specialisationSoftSkills}>
             <SoftSkills />

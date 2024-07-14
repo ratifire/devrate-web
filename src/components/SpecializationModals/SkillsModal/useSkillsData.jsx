@@ -5,7 +5,7 @@ import {
   useGetMainMasteryBySpecializationIdQuery,
 } from '../../../redux/specialization/specializationApiSlice';
 
-const useSkillsData = (userId) => {
+const useSkillsData = (userId, activeMastery) => {
   const [skillsData, setSkillsData] = useState({
     mainMastery: null,
     skills: [],
@@ -26,11 +26,13 @@ const useSkillsData = (userId) => {
     isError: isErrorMainMastery,
   } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
 
+  const masteryId = activeMastery || mainMastery?.id;
+
   const {
-    data: skills,
+    data: skills = [],
     isLoading: isLoadingSkills,
     isError: isErrorSkills,
-  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
+  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
 
   useEffect(() => {
     if (!isLoadingSpecializations && !isLoadingMainMastery && !isLoadingSkills) {

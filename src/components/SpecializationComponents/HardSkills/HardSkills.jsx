@@ -16,7 +16,6 @@ import {
 const HardSkills = ({ activeMastery, setActiveMastery }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const { id: userId } = useSelector((state) => state.auth.user.data);
 
   const [specializationId, setSpecializationId] = useState(null);
@@ -25,16 +24,6 @@ const HardSkills = ({ activeMastery, setActiveMastery }) => {
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSkillsModal' }));
   };
-
-  useEffect(() => {}, [openSkillsModal]);
-
-  useEffect(() => {
-    console.log('Specialization ID:', specializationId);
-  }, [specializationId]);
-
-  useEffect(() => {
-    console.log('Mastery ID:', masteryId);
-  }, [masteryId]);
 
   useEffect(() => {
     console.log('Active Mastery:', activeMastery);
@@ -111,6 +100,7 @@ const HardSkills = ({ activeMastery, setActiveMastery }) => {
 HardSkills.propTypes = {
   activeMastery: PropTypes.string.isRequired,
   setActiveMastery: PropTypes.func.isRequired,
+  openSkillsModal: PropTypes.bool.isRequired,
 };
 
 export default HardSkills;

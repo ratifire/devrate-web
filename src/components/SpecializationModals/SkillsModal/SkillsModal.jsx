@@ -1,4 +1,7 @@
+// SkillsModal.js
+
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
 import { closeModal } from '../../../redux/modal/modalSlice';
@@ -19,8 +22,7 @@ const MAX_SKILLS = 20;
 
 const MemoizedButtonDef = React.memo(ButtonDef);
 
-
-const SkillsModal = () => {
+const SkillsModal = ({ activeMastery, setActiveMastery }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
@@ -28,7 +30,7 @@ const SkillsModal = () => {
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
 
-  const { mainMastery, skills, isLoading, isError } = useSkillsData(userId);
+  const { mainMastery, skills: fetchedSkills, isLoading, isError } = useSkillsData(userId, activeMastery);
 
   const [selectedSkill, setSelectedSkill] = useState('');
   const [showError, setShowError] = useState(false);
@@ -57,10 +59,14 @@ const SkillsModal = () => {
   });
 
   useEffect(() => {
-    if (skills.length > 0) {
-      formik.setFieldValue('skills', skills);
+    console.log('Active Mastery in SkillsModal:', activeMastery);
+    if (mainMastery) {
+      setActiveMastery(mainMastery.id.toString()); // Update activeMastery in the parent component
     }
-  }, [skills]);
+    if (fetchedSkills.length > 0) {
+      formik.setFieldValue('skills', fetchedSkills);
+    }
+  }, [openSkillsModal, activeMastery, mainMastery, fetchedSkills, setActiveMastery]);
 
   const handleSkillChange = (event) => {
     setSelectedSkill(event.target.value);
@@ -71,10 +77,7 @@ const SkillsModal = () => {
   const validateSkill = async () => {
     setShowError(true);
     const errors = await formik.validateForm();
-    if (Object.keys(errors).length !== 0) {
-      return false;
-    }
-    return true;
+    return Object.keys(errors).length === 0;
   };
 
   const addNewSkill = async () => {
@@ -84,7 +87,7 @@ const SkillsModal = () => {
     };
 
     try {
-      await addSkillToMastery({ masteryId: mainMastery.id, skill: newSkill }).unwrap();
+      await addSkillToMastery({ masteryId: activeMastery, skill: newSkill }).unwrap();
       formik.setFieldValue('skills', [...formik.values.skills, newSkill]);
       setSelectedSkill('');
       setShowError(false);
@@ -159,6 +162,11 @@ const SkillsModal = () => {
       </Box>
     </ModalLayoutProfile>
   );
+};
+
+SkillsModal.propTypes = {
+  activeMastery: PropTypes.string.isRequired,
+  setActiveMastery: PropTypes.func.isRequired,
 };
 
 export default SkillsModal;
