@@ -20,19 +20,24 @@ const AdvancedFormSelector = ({
 }) => {
   const id = uuid();
   const { t } = useTranslation();
+  const handleChange2 = (value) =>{
+    console.log(value);
+  }
   return (
-    <FormControl fullWidth variant={variant}>
+     <FormControl fullWidth variant={variant}>
     <Autocomplete
+      renderInput={(countries) => <TextField {...countries} label={t(label)} />}
+
       disablePortal
       id={id}
       name={name}
+      inputValue={value}
       value={value}
-      onChange={handleChange}
+      onChange={handleChange2}
       onBlur={handleBlur}
       error={error}
       sx={{ width: '100' }}
       options={countries}
-      renderInput={(params) => <TextField {...params} label={t(label)} />}
     />
 
       {error && (
@@ -54,6 +59,18 @@ AdvancedFormSelector.propTypes = {
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   countries: PropTypes.array.isRequired,
+};
+
+AdvancedFormSelector.defaultProps = {
+  variant: 'outlined',
+  name: '',
+  value: '',
+  handleChange: () => {},
+  handleBlur: () => {},
+  label: '',
+  helperText: '',
+  error: false,
+  countries: [],
 };
 
 export default AdvancedFormSelector;

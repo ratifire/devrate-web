@@ -85,17 +85,17 @@ const RegistrationModal = () => {
           helperText={formik.touched.country && formik.errors.country}
           countries={userCountries}
         />}
-          <FormSelect
-            variant='outlined'
-            name='country'
-            value={formik.values.country}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            label='modal.registration.country'
-            error={formik.touched.country && Boolean(formik.errors.country)}
-            helperText={formik.touched.country && formik.errors.country}
-            countries={userCountries}
-          />
+          {/*<FormSelect*/}
+          {/*  variant='outlined'*/}
+          {/*  name='country'*/}
+          {/*  value={formik.values.country}*/}
+          {/*  handleChange={formik.handleChange}*/}
+          {/*  handleBlur={formik.handleBlur}*/}
+          {/*  label='modal.registration.country'*/}
+          {/*  error={formik.touched.country && Boolean(formik.errors.country)}*/}
+          {/*  helperText={formik.touched.country && formik.errors.country}*/}
+          {/*  countries={userCountries}*/}
+          {/*/>*/}
         <Box sx={styles.inputNameContainer}>
           <FormInput
             name='firstName'
