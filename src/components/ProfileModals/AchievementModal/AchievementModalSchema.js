@@ -2,8 +2,9 @@ import * as Yup from 'yup';
 
 export const AchievementModalSchema = Yup.object().shape({
   link: Yup.string()
-    .min(2, 'profile.modal.workExperience.position_long')
-    .max(50, 'profile.modal.workExperience.position_short')
+    .min(10, 'profile.modal.workExperience.position_short')
+    .max(200, 'profile.modal.workExperience.position_long')
+    .url('Invalid URL format')
     .required('profile.modal.workExperience.required'),
   summary: Yup.string()
     .min(2, 'profile.modal.workExperience.companyName_short')

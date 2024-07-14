@@ -36,4 +36,10 @@ export const styles = {
     textTransform: 'none',
     fontWeight: 500,
   }),
+  popoverWrapper: (theme) => ({
+    padding: theme.spacing(2),
+    display: 'flex',
+    gap: theme.spacing(2),
+    backgroundColor: theme.palette.background.body,
+  })
 };

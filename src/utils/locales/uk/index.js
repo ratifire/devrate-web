@@ -154,6 +154,7 @@ export const uk = {
         skills: 'Навички',
         education: 'Освіта',
         duties: 'Обовʼязки',
+        endYear: 'Теп. час',
       },
       right: {
         contact: 'Контактна інформація',

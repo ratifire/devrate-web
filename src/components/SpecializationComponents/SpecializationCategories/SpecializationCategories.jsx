@@ -49,7 +49,7 @@ const SpecializationCategories = () => {
 
   const handlerAddSpecializations = () => {
     dispatch(setSelectedSpecialization(null));
-      if (specializations.length >= 4) return;
+      if (specializations?.length >= 4) return;
       dispatch(openModal({modalName: 'openSpecialization', data:  'addSpecialization'  }));
   }
 
@@ -58,7 +58,7 @@ const SpecializationCategories = () => {
   }
 
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
-    if (specializations.length === 0) return;
+    if (specializations?.length === 0) return;
     await updateSpecializationAsMainById({...selectedSpecialization, main: true}).unwrap();
   }
 
@@ -84,7 +84,7 @@ const SpecializationCategories = () => {
       </Box>
 
       <Box sx={styles.specialization_right_box}>
-        {specializations.length < 4 ? (
+        {specializations?.length < 4 ? (
           <IconButton
             size="large"
             sx={styles.add_specialization_btn}
@@ -93,7 +93,7 @@ const SpecializationCategories = () => {
             <AddIcon />
           </IconButton>
         ) : null}
-        {specializations.map(({ id, name, main }) => (
+        {specializations?.map(({ id, name, main }) => (
           <Box
             key={id}
             sx={styles.figure}
