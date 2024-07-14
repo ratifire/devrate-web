@@ -26,11 +26,11 @@ const Interviews = () => {
   }
 
   const createInterviewRequest = () => {
-    dispatch(openModal({modalName: 'scheduleInterview'}));
+    dispatch(openModal({modalName: 'scheduleInterview', data: {role: 'interviewer'}}));
   }
 
   const createIncomeInterviewRequest = () => {
-    dispatch(openModal({modalName: 'scheduleInterview'}));
+    dispatch(openModal({modalName: 'scheduleInterview', data: {role: 'interviewee'}}));
   }
 
   const closeHandler = () => setCreateButton(null);

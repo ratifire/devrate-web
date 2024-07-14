@@ -4,7 +4,6 @@ import { closeModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { ScheduleSchema } from './ScheduleSchema';
 import { Box, Checkbox, FormControlLabel, IconButton, Tab, Tabs, Typography } from '@mui/material';
 import { styles } from './ScheduleInterview.styles';
 import { ButtonDef } from '../../Buttons';
@@ -13,9 +12,16 @@ import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import { getDatesInWeek } from '../../../utils/helpers/getWeekDates';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
+import { selectCurrentUser } from '../../../redux/auth/authSlice';
+import {
+  useCreateInterviewRequestMutation,
+  useLazyGetMainMasteryBySpecializationIdQuery,
+  useLazyGetMainSpecializationQuery,
+} from '../../../redux/specialization/specializationApiSlice';
+import PropTypes from 'prop-types';
 
 
-const ScheduleInterviewModal = () => {
+const ScheduleInterviewModal = (props) => {
   const isOpen = useSelector((state) => state.modal.scheduleInterview);
 
   const dispatch = useDispatch();
@@ -23,8 +29,14 @@ const ScheduleInterviewModal = () => {
   const [date, setDate] = useState(DateTime.now().startOf('day'));
   const [weekDates, setWeekDates] = useState([]);
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
+  const currentUser = useSelector(selectCurrentUser);
+  const [getMainSpecialization] = useLazyGetMainSpecializationQuery();
+  const [getMainMastery] = useLazyGetMainMasteryBySpecializationIdQuery();
+  const [createInterviewRequest] = useCreateInterviewRequestMutation();
 
   const { t } = useTranslation();
+
+  console.log('ROLE', props.role);
 
   useEffect(() => {
     setWeekDates(getDatesInWeek(date));
@@ -45,8 +57,22 @@ const ScheduleInterviewModal = () => {
   const initialValues = {
     dates: {},
   };
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = async (values, { resetForm }) => {
     console.log('Submitted values:', values);
+
+    const mainSpec = await getMainSpecialization(currentUser.data.id);
+    if (!mainSpec.data) {
+      return;
+    }
+
+    const mainMastery = await getMainMastery(mainSpec.data.id);
+
+    await createInterviewRequest({
+      userId: currentUser.data.id,
+      masteryId: mainMastery.data.id,
+      role: props.role,
+      availableDates: Array.from(Object.keys(values.dates)),
+    });
 
     resetForm();
     handleClose();
@@ -54,7 +80,6 @@ const ScheduleInterviewModal = () => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: ScheduleSchema,
     onSubmit,
   });
 
@@ -187,6 +212,10 @@ const ScheduleInterviewModal = () => {
         </Box>
       </form>
     </ModalLayoutProfile>);
+};
+
+ScheduleInterviewModal.propTypes = {
+  role: PropTypes.string,
 };
 
 export default ScheduleInterviewModal;
