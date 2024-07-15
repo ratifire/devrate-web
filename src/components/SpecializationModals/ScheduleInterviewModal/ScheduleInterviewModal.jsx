@@ -12,7 +12,7 @@ import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import { getDatesInWeek } from '../../../utils/helpers/getWeekDates';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
+import { selectCurrentUserId } from '../../../redux/auth/authSlice';
 import {
   useCreateInterviewRequestMutation,
   useLazyGetMainMasteryBySpecializationIdQuery,
@@ -29,14 +29,12 @@ const ScheduleInterviewModal = (props) => {
   const [date, setDate] = useState(DateTime.now().startOf('day'));
   const [weekDates, setWeekDates] = useState([]);
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
-  const currentUser = useSelector(selectCurrentUser);
+  const currentUserId = useSelector(selectCurrentUserId);
   const [getMainSpecialization] = useLazyGetMainSpecializationQuery();
   const [getMainMastery] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
 
   const { t } = useTranslation();
-
-  console.log('ROLE', props.role);
 
   useEffect(() => {
     setWeekDates(getDatesInWeek(date));
@@ -58,9 +56,7 @@ const ScheduleInterviewModal = (props) => {
     dates: {},
   };
   const onSubmit = async (values, { resetForm }) => {
-    console.log('Submitted values:', values);
-
-    const mainSpec = await getMainSpecialization(currentUser.data.id);
+    const mainSpec = await getMainSpecialization(currentUserId);
     if (!mainSpec.data) {
       return;
     }
@@ -68,7 +64,7 @@ const ScheduleInterviewModal = (props) => {
     const mainMastery = await getMainMastery(mainSpec.data.id);
 
     await createInterviewRequest({
-      userId: currentUser.data.id,
+      userId: currentUserId,
       masteryId: mainMastery.data.id,
       role: props.role,
       availableDates: Array.from(Object.keys(values.dates)),
