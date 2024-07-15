@@ -4,51 +4,53 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { FormControl, FormHelperText } from '@mui/material';
-import { styles } from '../../Inputs/CountrySelect/FormSelect.styles';
+import { styles } from '../AdvancedFormSelect/AdvancedFormSelector.styles';
 import PropTypes from 'prop-types';
 
 const AdvancedFormSelector = ({
-  variant,
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  label,
-  error,
-  helperText,
-  countries,
-}) => {
+                                variant,
+                                name,
+                                handleBlur,
+                                label,
+                                error,
+                                helperText,
+                                countries,
+                              }) => {
   const id = uuid();
   const { t } = useTranslation();
-  const handleChange2 = (value) =>{
-    console.log(value);
-  }
+
+  const [value, setValue] = React.useState(countries[0] || '');
+  const [inputValue, setInputValue] = React.useState('');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
-     <FormControl fullWidth variant={variant}>
-    <Autocomplete
-      renderInput={(countries) => <TextField {...countries} label={t(label)} />}
-
-      disablePortal
-      id={id}
-      name={name}
-      inputValue={value}
-      value={value}
-      onChange={handleChange2}
-      onBlur={handleBlur}
-      error={error}
-      sx={{ width: '100' }}
-      options={countries}
-    />
-
+    <FormControl fullWidth variant={variant} error={error}>
+      <Autocomplete
+        renderInput={(params) => <TextField {...params} label={t(label)} sx={styles.selectField} />}
+        disablePortal
+        id={id}
+        name={name}
+        inputValue={inputValue}
+        onInputChange={(event, newInputValue) => {
+          setInputValue(newInputValue);
+        }}
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        options={countries}
+        sx={{ width: '100%' }}
+      />
       {error && (
-        <FormHelperText id={id} sx={styles.textHelper}>
+        <FormHelperText id={id}>
           {t(helperText)}
         </FormHelperText>
       )}
     </FormControl>
   );
 }
-
 AdvancedFormSelector.propTypes = {
   variant: PropTypes.oneOf(['standard', 'filled', 'outlined']).isRequired,
   name: PropTypes.string.isRequired,
