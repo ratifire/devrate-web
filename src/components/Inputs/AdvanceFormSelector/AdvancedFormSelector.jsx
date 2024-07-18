@@ -4,13 +4,15 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { FormControl, FormHelperText } from '@mui/material';
-import { styles } from '../AdvancedFormSelect/AdvancedFormSelector.styles';
+import { styles } from './AdvancedFormSelector.styles';
 import PropTypes from 'prop-types';
 
 const AdvancedFormSelector = ({
                                 variant,
                                 name,
                                 handleBlur,
+                                handleChange,
+                                value,
                                 label,
                                 error,
                                 helperText,
@@ -19,29 +21,25 @@ const AdvancedFormSelector = ({
   const id = uuid();
   const { t } = useTranslation();
 
-  const [value, setValue] = React.useState(countries[0] || '');
-  const [inputValue, setInputValue] = React.useState('');
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChangeCountry = (event, value) => {
+    handleChange(value);
   };
 
   return (
-    <FormControl fullWidth variant={variant} error={error}>
+    <FormControl fullWidth variant={variant} error={error} sx={styles.wrapper}>
       <Autocomplete
         renderInput={(params) => <TextField {...params} label={t(label)} sx={styles.selectField} />}
         disablePortal
         id={id}
         name={name}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
         value={value}
-        onChange={handleChange}
+        onChange={handleChangeCountry}
         onBlur={handleBlur}
         options={countries}
         sx={{ width: '100%' }}
+        PaperComponent={({ children }) => (
+          <div style={{ backgroundColor: '#1d1d1d' }}>{children}</div>
+        )}
       />
       {error && (
         <FormHelperText id={id}>
@@ -50,7 +48,8 @@ const AdvancedFormSelector = ({
       )}
     </FormControl>
   );
-}
+};
+
 AdvancedFormSelector.propTypes = {
   variant: PropTypes.oneOf(['standard', 'filled', 'outlined']).isRequired,
   name: PropTypes.string.isRequired,
@@ -67,8 +66,10 @@ AdvancedFormSelector.defaultProps = {
   variant: 'outlined',
   name: '',
   value: '',
-  handleChange: () => {},
-  handleBlur: () => {},
+  handleChange: () => {
+  },
+  handleBlur: () => {
+  },
   label: '',
   helperText: '',
   error: false,
@@ -76,3 +77,5 @@ AdvancedFormSelector.defaultProps = {
 };
 
 export default AdvancedFormSelector;
+
+

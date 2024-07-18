@@ -27,6 +27,7 @@ const EducationModal = () => {
   const [updateEducation] = useUpdateEducationMutation();
   const currentUser = useSelector(selectCurrentUser);
 
+
   useEffect(() => {
     const yearsOpts = [];
     for (let i = 1900; i < 2100; i++) {
