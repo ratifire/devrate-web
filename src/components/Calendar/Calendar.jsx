@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { formatDate } from '@fullcalendar/core'
+import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
 import { styles } from './Calendar.styles'
-import PropTypes from 'prop-types';
 
 export default function Calendar() {
   const [weekendsVisible, setWeekendsVisible] = useState(true)
@@ -41,6 +40,15 @@ export default function Calendar() {
 
   function handleEvents(events) {
     setCurrentEvents(events)
+  }
+
+  function renderEventContent(eventInfo) {
+    return (
+      <>
+        <b>{eventInfo.timeText}</b>
+        <i>{eventInfo.event.title}</i>
+      </>
+    )
   }
 
   return (
@@ -79,76 +87,3 @@ export default function Calendar() {
     </div>
   )
 }
-
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  )
-}
-
-function Sidebar({ weekendsVisible, handleWeekendsToggle, currentEvents }) {
-  return (
-    <div style={styles.demoAppSidebar} className='demo-app-sidebar'>
-      <div className='demo-app-sidebar-section'>
-        <h2>Instructions</h2>
-        <ul>
-          <li>Select dates and you will be prompted to create a new event</li>
-          <li>Drag, drop, and resize events</li>
-          <li>Click an event to delete it</li>
-        </ul>
-      </div>
-      <div style={styles.demoAppSidebarSection} className='demo-app-sidebar-section'>
-        <label>
-          <input
-            type='checkbox'
-            checked={weekendsVisible}
-            onChange={handleWeekendsToggle}
-          ></input>
-          toggle weekends
-        </label>
-      </div>
-      <div style={styles.demoAppSidebarSection} className='demo-app-sidebar-section'>
-        <h2>All Events ({currentEvents.length})</h2>
-        <ul>
-          {currentEvents.map((event) => (
-            <SidebarEvent key={event.id} event={event} />
-          ))}
-        </ul>
-      </div>
-    </div>
-  )
-}
-
-Sidebar.propTypes = {
-  weekendsVisible: PropTypes.bool.isRequired,
-  handleWeekendsToggle: PropTypes.func.isRequired,
-  currentEvents: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    title: PropTypes.string.isRequired,
-    start: PropTypes.string.isRequired,
-    end: PropTypes.string,
-    allDay: PropTypes.bool
-  })).isRequired
-};
-
-function SidebarEvent({ event }) {
-  return (
-    <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <i>{event.title}</i>
-    </li>
-  )
-}
-
-SidebarEvent.propTypes = {
-  event: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    title: PropTypes.string.isRequired,
-    start: PropTypes.string.isRequired,
-    end: PropTypes.string,
-    allDay: PropTypes.bool
-  }).isRequired
-};
