@@ -17,10 +17,11 @@ const SchedulePage = () => {
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.scheduleWrapper}>
             <Typography sx={styles.scheduleTitle}>
-              Розклад
-              {t('specialisation.statistics.title')}
+              {t('schedule.title')}
             </Typography>
+            <Paper sx={styles.calendarWrapper}>
               <Calendar />
+            </Paper>
           </Paper>
         </Box>
       </Container>

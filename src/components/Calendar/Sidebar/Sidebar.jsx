@@ -2,17 +2,20 @@ import { styles } from './Sidebar.styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SidebarEvent from '../SidebarEvent/SidebarEvent';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateCalendar } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 export default function Sidebar({ weekendsVisible, handleWeekendsToggle, currentEvents }) {
   return (
-    <div style={styles.Sidebar} className='demo-app-sidebar'>
+    <div style={styles.Sidebar}>
       <div className='demo-app-sidebar-section'>
         <h2>Instructions</h2>
-        <ul>
-          <li>Select dates and you will be prompted to create a new event</li>
-          <li>Drag, drop, and resize events</li>
-          <li>Click an event to delete it</li>
-        </ul>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DateCalendar />
+        </LocalizationProvider>
+
+
       </div>
       <div style={styles.SidebarSection} className='demo-app-sidebar-section'>
         <label>

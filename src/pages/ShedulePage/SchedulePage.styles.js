@@ -27,4 +27,7 @@ export const styles = {
       marginTop: theme.spacing(4),
       marginLeft: theme.spacing(4),
     }),
+  calendarWrapper: (theme) => ({
+    backgroundColor: theme.palette.neutral[600],
+  })
 }

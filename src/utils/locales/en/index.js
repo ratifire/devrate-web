@@ -327,5 +327,8 @@ export const en = {
       delete: 'Delete',
       edit: 'Edit',
     },
+    schedule: {
+      title: 'Schedule',
+    }
   },
 };
