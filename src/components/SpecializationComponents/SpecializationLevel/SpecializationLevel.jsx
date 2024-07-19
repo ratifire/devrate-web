@@ -1,17 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
 import { styles } from './SpecializationLevel.styles';
 import { useTranslation } from 'react-i18next';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ButtonDef from '../../Buttons/ButtonDef';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveMastery } from '../../../redux/specialization/activeMasterySlice';
 
-const SpecializationLevel = ({ activeMastery, setActiveMastery }) => {
+const SpecializationLevel = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
 
   const handleButtonClick = (label) => {
     console.log(`Button clicked: ${label}`);
-    setActiveMastery(label);
+    dispatch(setActiveMastery(label));
   };
 
   return (
@@ -43,11 +46,6 @@ const SpecializationLevel = ({ activeMastery, setActiveMastery }) => {
       </Box>
     </Box>
   );
-};
-
-SpecializationLevel.propTypes = {
-  activeMastery: PropTypes.string.isRequired,
-  setActiveMastery: PropTypes.func.isRequired,
 };
 
 export default SpecializationLevel;

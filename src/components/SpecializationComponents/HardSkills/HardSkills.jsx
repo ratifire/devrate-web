@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Box, Typography, IconButton, CircularProgress } from '@mui/material';
 import { styles } from './HardSkills.styles';
 import EditIcon from '@mui/icons-material/Edit';
@@ -13,26 +12,22 @@ import {
   useGetMasteriesBySpecializationIdQuery,
 } from '../../../redux/specialization/specializationApiSlice';
 
-const HardSkills = ({ activeMastery, setActiveMastery }) => {
+const HardSkills = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id: userId } = useSelector((state) => state.auth.user.data);
+  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
 
   const [specializationId, setSpecializationId] = useState(null);
   const [masteryId, setMasteryId] = useState(null);
 
   const handleModalOpen = () => {
-    dispatch(openModal({ modalName: 'openSkillsModal' }));
+    dispatch(openModal({ modalName: 'openSkillsModal', activeMastery }));
   };
-
-  useEffect(() => {
-    console.log('Active Mastery:', activeMastery);
-  }, [activeMastery]);
 
   const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
 
   useEffect(() => {
-    console.log('Specializations:', specializations);
     if (specializations && specializations.length > 0) {
       setSpecializationId(specializations[0].id);
     }
@@ -41,19 +36,8 @@ const HardSkills = ({ activeMastery, setActiveMastery }) => {
   const { data: masteries, isLoading: isLoadingMasteries } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
 
   useEffect(() => {
-    console.log('Masteries:', masteries);
-    if (masteries && masteries.length > 0) {
-      const defaultMastery = masteries[0].level;
-      if (!activeMastery) {
-        setActiveMastery(defaultMastery);
-      }
-    }
-  }, [masteries, activeMastery, setActiveMastery]);
-
-  useEffect(() => {
     if (masteries && masteries.length > 0 && activeMastery) {
       const selectedMastery = masteries.find((mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase());
-      console.log('Selected Mastery:', selectedMastery);
       setMasteryId(selectedMastery?.id || null);
     }
   }, [masteries, activeMastery]);
@@ -95,12 +79,6 @@ const HardSkills = ({ activeMastery, setActiveMastery }) => {
       </Box>
     </Box>
   );
-};
-
-HardSkills.propTypes = {
-  activeMastery: PropTypes.string.isRequired,
-  setActiveMastery: PropTypes.func.isRequired,
-  openSkillsModal: PropTypes.bool.isRequired,
 };
 
 export default HardSkills;

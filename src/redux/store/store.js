@@ -15,6 +15,8 @@ import { personalReducer } from '../user/personal/personalSlice';
 import { educationReducer } from '../user/education/educationSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
+import activeMasteryReducer from '../specialization/activeMasterySlice';
+
 
 const authPersistConfig = {
   key: 'auth',
@@ -42,6 +44,7 @@ const rootReducer = {
   personal: persistReducer(personalPersistConfig, personalReducer),
   specialisation: specializationSliceReducer,
   email: emailSliceReducer,
+  activeMastery: activeMasteryReducer,
 };
 
 const store = configureStore({

@@ -1,32 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   useGetHardSkillsByMasteryIdQuery,
   useGetSpecializationByUserIdQuery,
-  useGetMainMasteryBySpecializationIdQuery,
+  useGetMasteriesBySpecializationIdQuery,
 } from '../../../redux/specialization/specializationApiSlice';
 
 const useSkillsData = (userId, activeMastery) => {
   const [skillsData, setSkillsData] = useState({
-    mainMastery: null,
+    masteries: [],
     skills: [],
     isLoading: true,
     isError: false,
+    masteryId: null,
   });
 
-  const {
-    data: specializations,
-    isLoading: isLoadingSpecializations,
-    isError: isErrorSpecializations,
-  } = useGetSpecializationByUserIdQuery(userId);
+  const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
   const specializationId = specializations?.[0]?.id;
 
-  const {
-    data: mainMastery,
-    isLoading: isLoadingMainMastery,
-    isError: isErrorMainMastery,
-  } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
+  const { data: masteries = [], isLoading: isLoadingMasteries } = useGetMasteriesBySpecializationIdQuery(
+    specializationId,
+    { skip: !specializationId }
+  );
 
-  const masteryId = activeMastery || mainMastery?.id;
+  const activeMasteryObject = masteries.find((mastery) => mastery.level === activeMastery);
+  const masteryId = activeMasteryObject?.id;
 
   const {
     data: skills = [],
@@ -34,25 +31,21 @@ const useSkillsData = (userId, activeMastery) => {
     isError: isErrorSkills,
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
 
-  useEffect(() => {
-    if (!isLoadingSpecializations && !isLoadingMainMastery && !isLoadingSkills) {
+  const updateSkillsData = useCallback(() => {
+    if (!isLoadingSpecializations && !isLoadingMasteries && !isLoadingSkills) {
       setSkillsData({
-        mainMastery,
+        masteries,
         skills,
         isLoading: false,
-        isError: isErrorSpecializations || isErrorMainMastery || isErrorSkills,
+        isError: isErrorSkills,
+        masteryId,
       });
     }
-  }, [
-    mainMastery,
-    skills,
-    isLoadingSpecializations,
-    isLoadingMainMastery,
-    isLoadingSkills,
-    isErrorSpecializations,
-    isErrorMainMastery,
-    isErrorSkills,
-  ]);
+  }, [masteries, skills, isLoadingSpecializations, isLoadingMasteries, isLoadingSkills, isErrorSkills, masteryId]);
+
+  useEffect(() => {
+    updateSkillsData();
+  }, [updateSkillsData]);
 
   return skillsData;
 };
