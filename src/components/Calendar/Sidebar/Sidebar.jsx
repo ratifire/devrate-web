@@ -4,7 +4,6 @@ import React from 'react';
 import SidebarEvent from '../SidebarEvent/SidebarEvent';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Settings } from 'luxon';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 

@@ -26,7 +26,11 @@ export const styles = {
   scheduleTitle: (theme) => ({
       marginTop: theme.spacing(4),
       marginLeft: theme.spacing(4),
-    }),
+      fontFamily: theme.typography.fontFamily,
+      fontWeight: 500,
+      lineHeight: '41.99px',
+      letterSpacing: '0.25px',
+}),
   calendarWrapper: (theme) => ({
     backgroundColor: theme.palette.neutral[600],
   })

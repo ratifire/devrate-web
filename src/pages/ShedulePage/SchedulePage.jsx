@@ -16,7 +16,7 @@ const SchedulePage = () => {
       <Container maxWidth="xl" sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.scheduleWrapper}>
-            <Typography sx={styles.scheduleTitle}>
+            <Typography variant="h4" sx={styles.scheduleTitle}>
               {t('schedule.title')}
             </Typography>
             <Paper sx={styles.calendarWrapper}>
