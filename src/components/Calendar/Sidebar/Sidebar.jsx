@@ -18,11 +18,8 @@ export default function Sidebar({ weekendsVisible, handleWeekendsToggle, current
   return (
     <div style={styles.Sidebar}>
       <div className='demo-app-sidebar-section'>
-        <h2>Instructions</h2>
         <LocalizationProvider dateAdapter={AdapterLuxon}>
-          <DateCalendar
-
-          />
+          <DateCalendar />
         </LocalizationProvider>
 
 

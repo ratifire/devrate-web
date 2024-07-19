@@ -22,10 +22,11 @@ export const styles = {
   scheduleWrapper: {
     gridColumn: '1/13',
     gridRow: '1/2',
+    padding: '24px',
   },
   scheduleTitle: (theme) => ({
-      marginTop: theme.spacing(4),
       marginLeft: theme.spacing(4),
+      marginBottom: theme.spacing(3),
       fontFamily: theme.typography.fontFamily,
       fontWeight: 500,
       lineHeight: '41.99px',
@@ -33,5 +34,6 @@ export const styles = {
 }),
   calendarWrapper: (theme) => ({
     backgroundColor: theme.palette.neutral[600],
+    borderRadius: 2,
   })
 }

@@ -13,4 +13,7 @@ export const styles = {
     maxWidth: '1100px',
     margin: '0 auto',
   },
+  timeGridSlot: {
+    height: '80.92px', // Adjust this value to change the width of the time-axis slots
+  },
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -10,6 +10,19 @@ import { styles } from './Calendar.styles'
 export default function Calendar() {
   const [weekendsVisible, setWeekendsVisible] = useState(true)
   const [currentEvents, setCurrentEvents] = useState([])
+
+  const calendarRef = useRef(null);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      const calendarApi = calendarRef.current.getApi();
+      const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-timegrid-slot');
+
+      timeGridSlotElements.forEach((el) => {
+        Object.assign(el.style, styles.timeGridSlot);
+      });
+    }
+  }, []);
 
   function handleWeekendsToggle() {
     setWeekendsVisible(!weekendsVisible)
@@ -60,14 +73,18 @@ export default function Calendar() {
       />
       <div style={styles.demoAppMain} className='demo-app-main'>
         <FullCalendar
+          ref={calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
           }}
-          initialView='dayGridMonth'
+          initialView='timeGridWeek'
           firstDay={1}
+          slotDuration="01:00:00"
+          slotLabelInterval={{hours: 1}}
+          expandRows={true}
           editable={true}
           selectable={true}
           selectMirror={true}
@@ -78,6 +95,7 @@ export default function Calendar() {
           eventContent={renderEventContent} // custom render function
           eventClick={handleEventClick}
           eventsSet={handleEvents} // called after events are initialized/added/changed/removed
+          // dayHeaderFormat={{ weekday: 'short' }}
           /* you can update a remote database when these fire:
           eventAdd={function(){}}
           eventChange={function(){}}
