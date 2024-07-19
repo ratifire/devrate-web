@@ -4,15 +4,26 @@ import React from 'react';
 import SidebarEvent from '../SidebarEvent/SidebarEvent';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Settings } from 'luxon';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+
+Settings.defaultWeekSettings = {
+  firstDay: 1,         // Set the first day of the week
+  minimalDays: 4,      // minimum number of days required in the first week of the year for it to be considered as week 1
+  weekend: [6, 7]      // Set weekend days
+};
 
 export default function Sidebar({ weekendsVisible, handleWeekendsToggle, currentEvents }) {
+
   return (
     <div style={styles.Sidebar}>
       <div className='demo-app-sidebar-section'>
         <h2>Instructions</h2>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar />
+        <LocalizationProvider dateAdapter={AdapterLuxon}>
+          <DateCalendar
+
+          />
         </LocalizationProvider>
 
 

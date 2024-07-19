@@ -67,6 +67,7 @@ export default function Calendar() {
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
           }}
           initialView='dayGridMonth'
+          firstDay={1}
           editable={true}
           selectable={true}
           selectMirror={true}
