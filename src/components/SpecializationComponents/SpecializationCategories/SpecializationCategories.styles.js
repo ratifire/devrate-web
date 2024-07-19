@@ -18,6 +18,18 @@ export const styles = {
     overflowX: 'auto',
     overflowY: 'visible',
     paddingBottom: '15px', // for scroll size compensation
+
+    '&::-webkit-scrollbar': {
+      width: 10,
+    },
+    '&::-webkit-scrollbar-track': (theme) => ({
+      backgroundColor: theme.palette.neutral['600'],
+      borderRadius: 8,
+    }),
+    '&::-webkit-scrollbar-thumb': (theme) => ({
+      borderRadius: 6,
+      backgroundColor: theme.palette.common.white,
+    })
   }),
   page_title: (theme) => ({
     marginBottom: theme.spacing(5),

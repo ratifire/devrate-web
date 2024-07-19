@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux';
 
 const ExperienceSection = () => {
   const [value, setValue] = React.useState('openExperience');
-
   const { t } = useTranslation();
 
   const handleChange = (event, newValue) => {
