@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { AchievementModal, EducationModal, ModalUserInfo, WorkExperienceModal } from '../../components/ProfileModals';
 
 const ProfileTemplate = ({ children }) => {
-  const { openUserInfo, openExperience, openAchievement, openEducation } = useSelector((state) => state.modal);
+  const { openUserInfo, openExperience, openAchievement, education } = useSelector((state) => state.modal);
 
   return (
     <div className='profile'>
@@ -12,7 +12,7 @@ const ProfileTemplate = ({ children }) => {
       {openUserInfo && <ModalUserInfo />}
       {openExperience && <WorkExperienceModal />}
       {openAchievement && <AchievementModal />}
-      {openEducation && <EducationModal />}
+      {education && <EducationModal />}
     </div>
   );
 };
