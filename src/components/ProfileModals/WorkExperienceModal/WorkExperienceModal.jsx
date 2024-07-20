@@ -86,7 +86,7 @@ const WorkExperienceModal = () => {
 
   const [responsibilities, setResponsibilities] = useState([]);
   const createResponsibility = (newResponsibility) => {
-    if (newResponsibility.length === 0 || newResponsibility.length > 50) return
+    if (newResponsibility.length < 2 || newResponsibility.length > 50) return
     setResponsibilities([...responsibilities, newResponsibility]);
     formik.setFieldValue('responsibilities', '');
   };
