@@ -26,7 +26,7 @@ const styles = {
     maxHeight: 600, // to be adjusted with designers
     minWidth: '100%',
     background: theme.palette.background.level2,
-    paddingRight: theme.spacing(2),
+    paddingRight: theme.spacing(3),
 
     '&::-webkit-scrollbar': {
       width: 10,

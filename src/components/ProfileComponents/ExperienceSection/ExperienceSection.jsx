@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, IconButton, styled, Tab, Tabs } from '@mui/material';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
-import Skills from './Skills/Skills';
+import Skills from './Skills';
 import Achievment from './Achievement/Achievment';
 import { useTranslation } from 'react-i18next';
 import WorkExperience from './WorkExperience/WorkExperience';

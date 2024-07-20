@@ -1,22 +1,24 @@
 import React from 'react';
+import { Box } from '@mui/material';
+import { styles } from './Skills.styles';
+import SkillsList from './SkillsList';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
+
 
 const Skills = () => {
+  const { data: user } = useSelector(selectCurrentUser);
+  const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(user.id);
+  console.log(specializations, isLoading);
+  
   return (
-    <div>
-      <div>
-        <h2>Frontend Developer</h2>
-        <p>Level Junior</p>
-        <div>
-          <div>
-            <div></div>
-            <p></p>
-          </div>
-        </div>
-      </div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-    </div>
+    <Box sx={styles.wrapper}>
+      <SkillsList/>
+      <SkillsList/>
+      <SkillsList/>
+      <SkillsList/>
+    </Box>
   );
 };
 export default Skills;
