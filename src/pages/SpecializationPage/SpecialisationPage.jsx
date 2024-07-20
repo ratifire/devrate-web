@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { styles } from './SpecialisationPage.style';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
@@ -7,16 +7,16 @@ import SpecializationLevel from '../../components/SpecializationComponents/Speci
 import HardSkills from '../../components/SpecializationComponents/HardSkills';
 import SpecialisationCategories from '../../components/SpecializationComponents/SpecializationCategories';
 import LevelChart from '../../components/SpecializationComponents/Statistics/LevelChart/LevelChart';
-import SkillsAssessmentChart
-  from '../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart';
+import SkillsAssessmentChart from '../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart';
 import HardSkillsChart from "../../components/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart";
 import InterviewChart from "../../components/SpecializationComponents/Statistics/InteviewChart/InterviewChart";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Interviews from '../../components/SpecializationComponents/Interviews'
 import SoftSkills from '../../components/SpecializationComponents/SoftSkills';
 
 const SpecializationPage = () => {
   const { t } = useTranslation();
+  const [activeMastery, setActiveMastery] = useState();
 
   return (
     <SpecializationTemplate>
@@ -27,13 +27,13 @@ const SpecializationPage = () => {
             <SpecialisationCategories />
           </Paper>
           <Paper sx={styles.specialisationLevel}>
-            <SpecializationLevel />
+            <SpecializationLevel activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
           </Paper>
           <Paper sx={styles.specialisationInterviewParticipation}>
             <Interviews />
           </Paper>
           <Paper sx={styles.specialisationHardSkills}>
-            <HardSkills />
+            <HardSkills activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
           </Paper>
           <Paper sx={styles.specialisationSoftSkills}>
             <SoftSkills />
