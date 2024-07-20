@@ -40,7 +40,7 @@ const EducationModal = () => {
     name: '',
     description: '',
     startYear: `${new Date().getFullYear()}`,
-    endYear: '',
+    endYear: `${new Date().getFullYear()}`,
     ...(dataToEdit || {}),
   };
   const onSubmit = (values, { resetForm }) => {
@@ -113,7 +113,7 @@ const EducationModal = () => {
                            value={formik.values.startYear}
                            countries={years}
                            name="startYear"
-                           variant="standard"
+                           variant="outlined"
                            handleChange={formik.handleChange}
                            handleBlur={formik.handleBlur}
                            onChange={(value) => formik.setFieldValue('startYear', value)}
@@ -125,7 +125,7 @@ const EducationModal = () => {
                            value={formik.values.endYear}
                            countries={years}
                            name="endYear"
-                           variant="standard"
+                           variant="outlined"
                            handleChange={formik.handleChange}
                            handleBlur={formik.handleBlur}
                            onChange={(value) => formik.setFieldValue('endYear', value)}
