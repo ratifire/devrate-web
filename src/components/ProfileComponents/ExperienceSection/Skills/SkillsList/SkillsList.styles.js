@@ -10,13 +10,23 @@ export const styles = {
     color: theme.palette.text.main,
   }),
   text: (theme) => ({
+    textTransform: 'lowercase',
     color: theme.palette.neutral[900],
+    '&:first-letter': {
+      textTransform: 'uppercase',
+    },
   }),
-  list:  (theme) => ({
+  level: {
+    display: 'inline-block',
+    '&:first-letter': {
+      textTransform: 'uppercase',
+    },
+  },
+  list: (theme) => ({
     marginTop: theme.spacing(3),
     ' > div': {
       paddingY: theme.spacing(2),
       borderBottom: `1px solid ${theme.palette.neutral[400]}`,
-    }
+    },
   }),
-}
+};
