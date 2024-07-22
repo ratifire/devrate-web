@@ -38,7 +38,7 @@ const AdvancedFormSelector = ({
         options={countries}
         sx={{ width: '100%' }}
         PaperComponent={({ children }) => (
-          <div style={{ backgroundColor: '#1d1d1d' }}>{children}</div>
+          <div style={styles.dropdownPaper}>{children}</div>
         )}
       />
       {error && (
