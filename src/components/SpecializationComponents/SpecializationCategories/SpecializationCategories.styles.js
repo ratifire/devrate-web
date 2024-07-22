@@ -141,6 +141,7 @@ export const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '228px',
   },
   specialization_title: (theme) => ({
     display: 'flex',
@@ -150,7 +151,16 @@ export const styles = {
     marginRight: theme.spacing(1),
     marginBottom: theme.spacing(3),
     zIndex: 1,
+    overflow: 'hidden',
+    maxWidth: '178px',
   }),
+
+  specialization_name: {
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis'
+  },
+
   star: (theme) => ({
     marginTop: '12px',
     marginRight: '16px',
