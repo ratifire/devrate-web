@@ -328,5 +328,8 @@ export const uk = {
       delete: 'Видалити',
       edit: 'Редагувати',
     },
+    schedule: {
+      title: 'Розклад',
+    }
   },
 };
