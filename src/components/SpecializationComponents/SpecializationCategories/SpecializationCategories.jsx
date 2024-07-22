@@ -76,6 +76,7 @@ const SpecializationCategories = () => {
         <Typography variant="h5" sx={styles.page_title}>{t('specialization.specialization_title')}</Typography>
         <ButtonDef
           variant="outlined"
+          disabled={specializations?.length === 0}
           correctStyle={styles.make_main_btn}
           handlerClick={() => handlerChangeMainSpecialization(selectedSpecialization)}
           type="button"
