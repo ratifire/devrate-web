@@ -4,9 +4,9 @@ import { Box, IconButton, Typography,  Tooltip} from '@mui/material';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
 import StarIcon from '@mui/icons-material/Star';
 import ClearIcon from '@mui/icons-material/Clear';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   useDeleteSpecializationByIdMutation,
@@ -135,7 +135,7 @@ const SpecializationCategories = () => {
               className="figure__deco"
             >
               <IconButton sx={styles.editSpecialization_btn} onClick={handlerEditSpecialization}>
-                <EditIcon sx={styles.editSpecialization} />
+                <MoreVertIcon sx={styles.editSpecialization} />
               </IconButton>
             </Box>
           </Box>
