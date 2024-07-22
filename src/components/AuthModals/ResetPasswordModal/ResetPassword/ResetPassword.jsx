@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import ModalLayout from '../../../../layouts/ModalLayout';
 import { useChangePasswordMutation } from '../../../../redux/auth/authApiSlice';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../Buttons';
 import { FormInput } from '../../../Inputs';
 import styles from './ResetPassword.styles';
@@ -34,6 +34,21 @@ const ResetPassword = () => {
   const fieldCount = 6;
 
   const inputRefs = React.useRef([]);
+
+  const handlePaste = (event, formik) => {
+    event.preventDefault();
+    const pastedData = event.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+    const newCode = [...formik.values.code];
+    
+    for (let i = 0; i < pastedData.length; i++) {
+      newCode[i] = pastedData[i];
+    }
+    
+    formik.setFieldValue('code', newCode);
+    
+    const focusIndex = Math.min(pastedData.length, fieldCount - 1);
+    inputRefs.current[focusIndex].focus();
+  };
 
   const handleKeyDown = (event, index, formik) => {
     const { key } = event;
@@ -97,7 +112,8 @@ const ResetPassword = () => {
             await changePassword(requestData).unwrap();
             alert('Password changed successfully!');
             resetForm();
-            handleClose();
+            dispatch(closeModal({ modalName: 'openResetPassword' }));
+            dispatch(openModal({ modalName: 'openLogin' }));
           } catch (error) {
             console.error('Error changing password:', error);
             alert('Error changing password. Please try again.');
@@ -116,6 +132,7 @@ const ResetPassword = () => {
                       inputRefs.current[index] = ele;
                     }}
                     onKeyDown={(event) => handleKeyDown(event, index, formik)}
+                    onPaste={(event) => handlePaste(event, formik)}
                     value={formik.values.code[index] ?? ''}
                     inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
                     sx={styles.resetPasswordForm['& .MuiOutlinedInput-root']}
