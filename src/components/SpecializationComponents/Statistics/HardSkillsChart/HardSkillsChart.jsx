@@ -3,10 +3,13 @@ import React from 'react';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
 import useUserSkillsAndMasteryData from '../../useUserSkillsAndMasteryData';
 import { styles } from './HardSkillsChart.style.js';
+import roundData from '../../HardSkills/roundData';
 
 const HardSkillsChart = () => {
   const { t, skills, isErrorSkills, isLoadingMainMastery, isLoadingSkills, isLoadingSpecializations } =
     useUserSkillsAndMasteryData();
+
+  const roundedSkills = roundData(skills)
 
   if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
     return <CircularProgress />;
@@ -15,6 +18,7 @@ const HardSkillsChart = () => {
   if (isErrorSkills) {
     return <Typography variant='h6'>Something error...</Typography>;
   }
+
   return (
     <Box sx={styles.hardSkillsChartContainer}>
       <Typography variant='subtitle2' sx={styles.title}>
@@ -23,7 +27,7 @@ const HardSkillsChart = () => {
       <Typography variant='subtitle3' sx={styles.text}>
         {t('specialization.statistics.hard_skills_chart_text')}
       </Typography>
-      <RadarChart outerRadius={130} width={264} height={264} data={skills}>
+      <RadarChart outerRadius={130} width={264} height={264} data={roundedSkills}>
         <PolarGrid />
         <PolarAngleAxis dataKey='name' tick={false} />
         <PolarRadiusAxis angle={30} domain={[0, 10]} />
