@@ -34,10 +34,11 @@ const SoftSkills = () => {
     })();
   }, []);
 
-
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSoftSkillsModal' }));
   };
+
+  const averageMarkNumber = mainMastery?.data?.softSkillMark.toFixed(1);
 
   return (
     <Box sx={styles.wrapper}>
@@ -56,7 +57,7 @@ const SoftSkills = () => {
 
       <Box sx={styles.markWrapper}>
         <Typography variant="h6">{t('specialization.hardSkills.averageMark')}</Typography>
-        <Typography sx={styles.mark} variant="h6">{`${mainMastery?.data?.softSkillMark || '0'}/10`}</Typography>
+        <Typography sx={styles.mark} variant="h6">{`${averageMarkNumber || '0'}/10`}</Typography>
       </Box>
     </Box>
   );
