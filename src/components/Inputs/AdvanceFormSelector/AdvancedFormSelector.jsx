@@ -3,8 +3,8 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
-import { FormControl, FormHelperText } from '@mui/material';
-import { styles } from './AdvancedFormSelector.styles';
+import { Box, FormControl, FormHelperText } from '@mui/material';
+import { styles } from './AdvancedFormSelector.styles'; // Import styles // Import styles
 import PropTypes from 'prop-types';
 
 const AdvancedFormSelector = ({
@@ -28,7 +28,14 @@ const AdvancedFormSelector = ({
   return (
     <FormControl fullWidth variant={variant} error={error} sx={styles.wrapper}>
       <Autocomplete
-        renderInput={(params) => <TextField {...params} label={t(label)} sx={styles.selectField} />}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={t(label)}
+            error={error} // Ensure error prop is passed to TextField
+            sx={styles.selectField}
+          />
+        )}
         disablePortal
         id={id}
         name={name}
@@ -38,11 +45,11 @@ const AdvancedFormSelector = ({
         options={countries}
         sx={{ width: '100%' }}
         PaperComponent={({ children }) => (
-          <div style={styles.dropdownPaper}>{children}</div>
+          <Box sx={styles.dropdownPaper}>{children}</Box>
         )}
       />
       {error && (
-        <FormHelperText id={id}>
+        <FormHelperText id={id} sx={styles.helperText}>
           {t(helperText)}
         </FormHelperText>
       )}
@@ -77,5 +84,3 @@ AdvancedFormSelector.defaultProps = {
 };
 
 export default AdvancedFormSelector;
-
-
