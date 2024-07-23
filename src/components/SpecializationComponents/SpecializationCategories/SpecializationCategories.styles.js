@@ -52,6 +52,7 @@ export const styles = {
   }),
 
   figure: (theme) => ({
+    backgroundColor: 'red',
     display: 'flex',
     flexDirection: 'column',
     minWidth: '228px',

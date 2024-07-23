@@ -5,7 +5,6 @@ import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import StarIcon from '@mui/icons-material/Star';
-import ClearIcon from '@mui/icons-material/Clear';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -16,6 +15,7 @@ import {
 } from '../../../redux/specialization/specializationApiSlice';
 import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
 import { openModal } from '../../../redux/modal/modalSlice';
+import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
@@ -26,21 +26,22 @@ const SpecializationCategories = () => {
 
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
-  const [ triggerGetMainMastery ] = useLazyGetMainMasteryBySpecializationIdQuery();
+  const [ getMainMasteryBySpecId ] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [ updateSpecializationAsMainById ] = useUpdateSpecializationAsMainByIdMutation();
   const [ deleteSpecialization ] = useDeleteSpecializationByIdMutation();
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     if (specializations && specializations.length > 0) {
       specializations.forEach(async (specialization) => {
-        const { data } = await triggerGetMainMastery(specialization.id);
+        const { data } = await getMainMasteryBySpecId(specialization.id);
         setMasteryData((prev) => ({
           ...prev,
           [specialization.id]: data,
         }));
       });
     }
-  }, [specializations, triggerGetMainMastery]);
+  }, [specializations, getMainMasteryBySpecId]);
 
   const handlerChangeSpecialization = (specialization) => {
     const spec = { ...specialization, mastery: specialization.mastery.slice(0,1) + specialization.mastery.slice(1).toLowerCase() }
@@ -53,10 +54,6 @@ const SpecializationCategories = () => {
       dispatch(openModal({modalName: 'openSpecialization', data:  'addSpecialization'  }));
   }
 
-  const handlerEditSpecialization = () => {
-    dispatch(openModal({modalName: 'openSpecialization', data:  'editSpecialization' }));
-  }
-
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
     if (specializations?.length === 0) return;
     await updateSpecializationAsMainById({...selectedSpecialization, main: true}).unwrap();
@@ -64,7 +61,22 @@ const SpecializationCategories = () => {
 
   const handlerDeleteSpecialization = async (id) => {
     await deleteSpecialization(id).unwrap();
+    handleCloseMenu();
   }
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleEditFeature = () => {
+    console.log('ID to be edited:', selectedSpecialization.id, selectedSpecialization.name);
+    dispatch(openModal({modalName: 'openSpecialization', data:  'editSpecialization' }));
+    handleCloseMenu();
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -99,7 +111,7 @@ const SpecializationCategories = () => {
             key={id}
             sx={styles.figure}
             className={`figure ${ selectedSpecialization?.id === id ? 'active' : ''}`}
-            onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id].level })}
+            onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
           >
             <Box sx={styles.specialization_title_star}>
               <Box sx={styles.specialization_title}>
@@ -110,13 +122,7 @@ const SpecializationCategories = () => {
                 </Tooltip>
                 <Typography variant="subtitle2">Level {masteryData[id]?.level.slice(0,1) + masteryData[id]?.level.slice(1).toLowerCase()}</Typography>
               </Box>
-              {main
-                ? <StarIcon sx={styles.star} />
-                :
-                <IconButton sx={styles.deleteBtn} onClick={() => handlerDeleteSpecialization(id)}>
-                  <ClearIcon />
-                </IconButton>}
-
+              {main && <StarIcon sx={styles.star} />}
             </Box>
             <Box sx={styles.hardAndSoftSkills}>
               <Box sx={styles.softSkills}>
@@ -134,9 +140,15 @@ const SpecializationCategories = () => {
               sx={styles.figure_deco}
               className="figure__deco"
             >
-              <IconButton sx={styles.editSpecialization_btn} onClick={handlerEditSpecialization}>
+              <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event)}>
                 <MoreVertIcon sx={styles.editSpecialization} />
-              </IconButton>
+              </IconButton>{' '}
+              <DropdownMenu
+                anchorEl={anchorEl}
+                handleCloseMenu={handleCloseMenu}
+                handleEditFeature={handleEditFeature}
+                handleDeleteFeature={() => handlerDeleteSpecialization(selectedSpecialization.id)}
+              />
             </Box>
           </Box>
           ))}
