@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo } from 'react';
 import { ProfileTemplate } from '../../Templates';
 import { Box, Container, Paper } from '@mui/material';
 import { styles } from './ProfilePage.styles';
@@ -6,36 +6,34 @@ import SkillsSection from '../../components/ProfileComponents/SkillsSection/Skil
 import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
 import BaseUserInfo from '../../components/ProfileComponents/BaseUserInfo';
 import RightSection from '../../components/ProfileComponents/RightSection';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '../../redux/auth/authSlice';
 import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';
-import Cookies from 'js-cookie'
+import useAuth from '../../utils/hooks/useAuth';
 
 const ProfilePage = () => {
-  const dispatch = useDispatch();
-
-  const cookies = Cookies.get('JSESSIONID');
-
-  useEffect(() => {
-    dispatch(setCredentials({ isAuthenticated: Boolean(cookies) }));
-  }, [cookies]);
-
+  useAuth();
+  
+  const MemoizedProfileHeader = memo(ProfileHeader);
+  const MemoizedBaseUserInfo = memo(BaseUserInfo);
+  const MemoizedSkillsSection = memo(SkillsSection);
+  const MemoizedRightSection = memo(RightSection);
+  const MemoizedExperienceSection = memo(ExperienceSection);
+  
   return (
     <ProfileTemplate>
-      <ProfileHeader />
-      <Container maxWidth='xl' sx={styles.container}>
+      <MemoizedProfileHeader />
+      <Container maxWidth="xl" sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.baseUserInfo}>
-            <BaseUserInfo />
+            <MemoizedBaseUserInfo />
           </Paper>
           <Paper sx={styles.skills}>
-            <SkillsSection />
+            <MemoizedSkillsSection />
           </Paper>
           <Paper sx={styles.right}>
-            <RightSection />
+            <MemoizedRightSection />
           </Paper>
           <Paper sx={styles.experience}>
-            <ExperienceSection />
+            <MemoizedExperienceSection />
           </Paper>
         </Box>
       </Container>

@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { styles } from './SpecializationLevel.styles';
 import { useTranslation } from 'react-i18next';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ButtonDef from '../../Buttons/ButtonDef';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveMastery } from '../../../redux/specialization/activeMasterySlice';
 
 const SpecializationLevel = () => {
   const { t } = useTranslation();
-  const [activeButton, setActiveButton] = useState('Junior');
+  const dispatch = useDispatch();
+  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
 
   const handleButtonClick = (label) => {
-    setActiveButton(label);
+    console.log(`Button clicked: ${label}`);
+    dispatch(setActiveMastery(label));
   };
 
   return (
@@ -28,13 +32,14 @@ const SpecializationLevel = () => {
           aria-label='Specialization level button group'
           color='secondary'
         >
-          {['Junior', 'Middle', 'Senior'].map((label) => (
-            <ButtonDef sx={styles.button}
+          {['JUNIOR', 'MIDDLE', 'SENIOR'].map((label) => (
+            <ButtonDef
+              sx={styles.button}
               key={label}
               label={label}
               handlerClick={() => handleButtonClick(label)}
               disabled={false}
-              variant={activeButton === label ? 'contained' : 'outlined'}
+              variant={activeMastery === label ? 'contained' : 'outlined'}
             />
           ))}
         </ButtonGroup>
