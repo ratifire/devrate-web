@@ -21,6 +21,9 @@ export const styles = {
     '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
       borderColor: theme.palette.error.main,
     },
+    '& .MuiSelect-icon': {
+      color: theme.palette.text.primary,
+    },
   }),
   label: (theme) => ({
     '&.Mui-focused': {
