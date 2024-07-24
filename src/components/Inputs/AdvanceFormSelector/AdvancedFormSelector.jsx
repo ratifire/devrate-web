@@ -43,7 +43,7 @@ const AdvancedFormSelector = ({
         onChange={handleChangeCountry}
         onBlur={handleBlur}
         options={countries}
-        sx={{ width: '100%' }}
+        sx={styles.autoComplete}
         PaperComponent={({ children }) => (
           <Box sx={styles.dropdownPaper}>{children}</Box>
         )}
@@ -70,16 +70,6 @@ AdvancedFormSelector.propTypes = {
 };
 
 AdvancedFormSelector.defaultProps = {
-  variant: 'outlined',
-  name: '',
-  value: '',
-  handleChange: () => {
-  },
-  handleBlur: () => {
-  },
-  label: '',
-  helperText: '',
-  error: false,
   countries: [],
 };
 

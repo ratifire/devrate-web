@@ -41,7 +41,6 @@ export const styles = {
       backgroundColor: theme.palette.neutral['900'],
     },
     '& .MuiAutocomplete-option': {
-      padding: theme.spacing(1.25),
       '&:hover': {
         backgroundColor: theme.palette.neutral['500'],
       },
@@ -62,4 +61,7 @@ export const styles = {
       fontSize: '0.75rem',
     },
   }),
+  autoComplete: {
+    width: '100%',
+  },
 };

@@ -35,7 +35,6 @@ const RegistrationModal = () => {
   const { data: userCountries } = useGetCountryListQuery();
   const handleChangeCountry = (value) => {
     setCountry(value);
-    console.log(value, 'handleChangeCountry');
   };
 
   useEffect(() => {
