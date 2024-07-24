@@ -47,9 +47,6 @@ const SpecializationModal = React.memo(() => {
   const { data: specializations } = useGetSpecializationListQuery('specialization-names.json');
 
   const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
-  console.log('++++++++++++++++++++++++++');
-  console.log(selectedSpecialization);
-  console.log('++++++++++++++++++++++++++');
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
 
   const { modalData } = useSelector((state) => state.modal);

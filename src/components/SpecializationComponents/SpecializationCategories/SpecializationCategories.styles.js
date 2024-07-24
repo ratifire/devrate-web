@@ -52,7 +52,6 @@ export const styles = {
   }),
 
   figure: (theme) => ({
-    backgroundColor: 'red',
     display: 'flex',
     flexDirection: 'column',
     minWidth: '228px',
@@ -167,16 +166,7 @@ export const styles = {
     marginRight: '16px',
     color: theme.palette.action.active,
     position: 'relative',
-    zIndex: 1,
-  }),
-
-  deleteBtn: (theme) => ({
-    zIndex: 1,
-    color: theme.palette.action.active,
-    position: 'absolute',
-    top: 5,
-    right: 5,
-    borderRadius: theme.spacing(2),
+    zIndex: 1
   }),
 
   hardAndSoftSkills: (theme) => ({
@@ -186,17 +176,20 @@ export const styles = {
     display: 'flex',
     flexDirection: 'row',
     position: 'relative',
-    zIndex: 1,
+    zIndex: 1
   }),
+
   softSkills: () => ({
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   }),
+
   hardSkills: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   skillsStatistic: {
+    textTransform: 'uppercase',
     lineHeight: '18px',
     letterSpacing: '0.16px',
     fontSize: '11px'

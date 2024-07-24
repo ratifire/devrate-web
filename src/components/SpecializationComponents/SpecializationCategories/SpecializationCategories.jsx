@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { styles } from './SpecializationCategories.styles';
-import { Box, IconButton, Typography,  Tooltip} from '@mui/material';
+import { Box, IconButton, Typography, Tooltip } from '@mui/material';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
@@ -22,14 +22,13 @@ const SpecializationCategories = () => {
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
   const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
-  console.log('Selected Specialization || Data from Redux Slice', selectedSpecialization);
 
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
-  const [ getMainMasteryBySpecId ] = useLazyGetMainMasteryBySpecializationIdQuery();
-  const [ updateSpecializationAsMainById ] = useUpdateSpecializationAsMainByIdMutation();
-  const [ deleteSpecialization ] = useDeleteSpecializationByIdMutation();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
+  const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
+  const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
+  const [anchorEl, setAnchorEl] = useState({});
 
   useEffect(() => {
     if (specializations && specializations.length > 0) {
@@ -44,38 +43,45 @@ const SpecializationCategories = () => {
   }, [specializations, getMainMasteryBySpecId]);
 
   const handlerChangeSpecialization = (specialization) => {
-    const spec = { ...specialization, mastery: specialization.mastery.slice(0,1) + specialization.mastery.slice(1).toLowerCase() }
-    dispatch(setSelectedSpecialization(spec));
-  }
+    if (masteryData[specialization.id]) {
+      const spec = { ...specialization, mastery: masteryData[specialization.id].level.slice(0, 1) + masteryData[specialization.id].level.slice(1).toLowerCase() };
+      dispatch(setSelectedSpecialization(spec));
+    }
+  };
 
   const handlerAddSpecializations = () => {
     dispatch(setSelectedSpecialization(null));
-      if (specializations?.length >= 4) return;
-      dispatch(openModal({modalName: 'openSpecialization', data:  'addSpecialization'  }));
-  }
+    if (specializations?.length >= 4) return;
+    dispatch(openModal({ modalName: 'openSpecialization', data: 'addSpecialization' }));
+  };
 
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
     if (specializations?.length === 0) return;
-    await updateSpecializationAsMainById({...selectedSpecialization, main: true}).unwrap();
-  }
+    await updateSpecializationAsMainById({ ...selectedSpecialization, main: true }).unwrap();
+  };
 
   const handlerDeleteSpecialization = async (id) => {
     await deleteSpecialization(id).unwrap();
-    handleCloseMenu();
-  }
-
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
+    handleCloseMenu(id);
   };
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleCloseMenu = (id) => {
+    setAnchorEl((prev) => ({
+      ...prev,
+      [id]: null,
+    }));
   };
 
-  const handleEditFeature = () => {
-    console.log('ID to be edited:', selectedSpecialization.id, selectedSpecialization.name);
-    dispatch(openModal({modalName: 'openSpecialization', data:  'editSpecialization' }));
-    handleCloseMenu();
+  const handleMenuOpen = (event, id) => {
+    setAnchorEl((prev) => ({
+      ...prev,
+      [id]: event.currentTarget,
+    }));
+  };
+
+  const handleEditFeature = (id) => {
+    dispatch(openModal({ modalName: 'openSpecialization', data: 'editSpecialization' }));
+    handleCloseMenu(id);
   };
 
   if (isLoading) {
@@ -110,7 +116,7 @@ const SpecializationCategories = () => {
           <Box
             key={id}
             sx={styles.figure}
-            className={`figure ${ selectedSpecialization?.id === id ? 'active' : ''}`}
+            className={`figure ${selectedSpecialization?.id === id ? 'active' : ''}`}
             onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
           >
             <Box sx={styles.specialization_title_star}>
@@ -120,40 +126,35 @@ const SpecializationCategories = () => {
                     {name}
                   </Typography>
                 </Tooltip>
-                <Typography variant="subtitle2">Level {masteryData[id]?.level.slice(0,1) + masteryData[id]?.level.slice(1).toLowerCase()}</Typography>
+                <Typography variant="subtitle2">Level {masteryData[id]?.level}</Typography>
               </Box>
               {main && <StarIcon sx={styles.star} />}
             </Box>
             <Box sx={styles.hardAndSoftSkills}>
               <Box sx={styles.softSkills}>
-                <Typography variant="caption3"
-                            sx={styles.skillsStatistic}>{t('specialization.specialization_softSkills').toUpperCase().split(' ').join('')}</Typography>
+                <Typography variant="caption3" sx={styles.skillsStatistic}>{t('specialization.specialization_softSkills').split(' ').join('')}</Typography>
                 <Typography variant="body">{masteryData[id]?.softSkillMark}</Typography>
               </Box>
               <Box sx={styles.hardSkills}>
-                <Typography variant="caption3"
-                            sx={styles.skillsStatistic}>{t('specialization.specialization_hardSkills').toUpperCase().split(' ').join('')}</Typography>
+                <Typography variant="caption3" sx={styles.skillsStatistic}>{t('specialization.specialization_hardSkills').split(' ').join('')}</Typography>
                 <Typography variant="body">{masteryData[id]?.hardSkillMark}</Typography>
               </Box>
             </Box>
-            <Box
-              sx={styles.figure_deco}
-              className="figure__deco"
-            >
-              <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event)}>
+            <Box sx={styles.figure_deco} className="figure__deco">
+              <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event, id)}>
                 <MoreVertIcon sx={styles.editSpecialization} />
               </IconButton>{' '}
               <DropdownMenu
-                anchorEl={anchorEl}
-                handleCloseMenu={handleCloseMenu}
-                handleEditFeature={handleEditFeature}
-                handleDeleteFeature={() => handlerDeleteSpecialization(selectedSpecialization.id)}
+                anchorEl={anchorEl[id]}
+                handleCloseMenu={() => handleCloseMenu(id)}
+                handleEditFeature={() => handleEditFeature(id)}
+                handleDeleteFeature={() => handlerDeleteSpecialization(id)}
               />
             </Box>
           </Box>
-          ))}
-        </Box>
+        ))}
       </Box>
+    </Box>
   );
 };
 
