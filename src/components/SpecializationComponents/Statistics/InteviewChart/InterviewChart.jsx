@@ -1,4 +1,6 @@
-import React from 'react';
+/* eslint-disable */
+
+import React, { useEffect, useState } from 'react';
 import {
     Bar,
     BarChart,
@@ -13,6 +15,8 @@ import { Box, MenuItem, Select, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { styles } from './InterviewChart.style';
 import {useTranslation} from "react-i18next";
+import { useGetInterviewSummariesByUserIdQuery } from '../../../../redux/interview/interviewApiSlice';
+import { useSelector } from 'react-redux';
 
 const months = [
     { name: 'Jan', conducted: 2, passed: 10 },
@@ -33,9 +37,15 @@ const days = [
 ];
 
 const InterviewChart = () => {
-    const [selectedPeriod, setSelectedPeriod] = React.useState(months);
+    const [selectedPeriod, setSelectedPeriod] = useState(months);
     const { t } = useTranslation();
-    
+    const [ data, setData ] = useState([])
+
+    const { id: userId } = useSelector((state) => state.auth.user.data);
+    const foo = useGetInterviewSummariesByUserIdQuery(userId);
+    console.log(foo);
+
+    console.log(data);
     const handleChange = (event) => {
         if (event.target.value === 'months') {
             setSelectedPeriod(months);
@@ -43,7 +53,7 @@ const InterviewChart = () => {
             setSelectedPeriod(days);
         }
     };
-    
+
     return (
         <Box sx={styles.interviewChartContainer}>
             <Box sx={styles.titleContainer}>
@@ -75,7 +85,7 @@ const InterviewChart = () => {
                     </Select>
                 </Box>
             </Box>
-            
+
             <Box sx={styles.chartWrapper}>
                 <ResponsiveContainer width='100%' height='100%'>
                     <BarChart data={selectedPeriod}>
