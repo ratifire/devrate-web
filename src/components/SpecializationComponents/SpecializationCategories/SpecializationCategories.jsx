@@ -44,7 +44,7 @@ const SpecializationCategories = () => {
 
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
-      const spec = { ...specialization, mastery: masteryData[specialization.id].level.slice(0, 1) + masteryData[specialization.id].level.slice(1).toLowerCase() };
+      const spec = { ...specialization, mastery: masteryData[specialization.id].level };
       dispatch(setSelectedSpecialization(spec));
     }
   };
