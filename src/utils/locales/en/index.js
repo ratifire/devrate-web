@@ -274,7 +274,7 @@ export const en = {
           modal_title: 'Specialization',
           name: 'Specialization name',
           name_placeholder: 'Front-End Developer',
-          mastery: 'Main mastery',
+          mastery: 'Main level',
           required: 'This is a required field',
         },
         skills: {
