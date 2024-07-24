@@ -132,11 +132,11 @@ const SpecializationCategories = () => {
             </Box>
             <Box sx={styles.hardAndSoftSkills}>
               <Box sx={styles.softSkills}>
-                <Typography variant="caption3" sx={styles.skillsStatistic}>{t('specialization.specialization_softSkills').split(' ').join('')}</Typography>
+                <Typography variant="caption3" sx={styles.skillsStatistic}>{t('specialization.specialization_softSkills')}</Typography>
                 <Typography variant="body">{masteryData[id]?.softSkillMark}</Typography>
               </Box>
               <Box sx={styles.hardSkills}>
-                <Typography variant="caption3" sx={styles.skillsStatistic}>{t('specialization.specialization_hardSkills').split(' ').join('')}</Typography>
+                <Typography variant="caption3" sx={styles.skillsStatistic}>{t('specialization.specialization_hardSkills')}</Typography>
                 <Typography variant="body">{masteryData[id]?.hardSkillMark}</Typography>
               </Box>
             </Box>
