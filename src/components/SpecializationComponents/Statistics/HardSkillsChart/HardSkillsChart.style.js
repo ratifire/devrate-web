@@ -11,7 +11,9 @@ export const styles = {
     marginBottom: '11px',
   },
   text: (theme) => ({
-    color: theme.palette.neutral[50]
+    color: theme.palette.neutral[50],
+    display: 'block',
+    paddingBottom: '6px'
   }),
   tooltipContent:{
     color: '#FFFFFFF',
