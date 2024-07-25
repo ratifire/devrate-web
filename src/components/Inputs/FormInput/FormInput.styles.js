@@ -28,6 +28,9 @@ export const styles = {
     '&.Mui-error': {
       color: theme.palette.error.main,
     },
+    '&.Mui-required .MuiFormLabel-asterisk': {
+      color: '#ED0E0E'
+    },
   }),
   textHelper: {
     position: 'absolute',

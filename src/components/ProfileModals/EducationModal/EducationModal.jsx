@@ -90,6 +90,7 @@ const EducationModal = () => {
               handleBlur={formik.handleBlur}
               type="text"
               label="modal.education.type"
+              required
               placeholder="profile.modal.workExperience.position_placeholder"
               helperText={formik.touched.type && formik.errors.type}
               error={formik.touched.type && Boolean(formik.errors.type)}
@@ -102,6 +103,7 @@ const EducationModal = () => {
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               label="modal.education.name"
+              required
               placeholder="profile.modal.workExperience.companyName_placeholder"
               helperText={formik.touched.name && formik.errors.name}
               error={formik.touched.name && Boolean(formik.errors.name)}
@@ -114,6 +116,7 @@ const EducationModal = () => {
                            countries={years}
                            name="startYear"
                            variant="outlined"
+                           required
                            handleChange={formik.handleChange}
                            handleBlur={formik.handleBlur}
                            onChange={(value) => formik.setFieldValue('startYear', value)}
@@ -140,6 +143,7 @@ const EducationModal = () => {
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               type="text"
+              required
               label="modal.education.description"
               placeholder="profile.modal.workExperience.description_placeholder"
               helperText={formik.touched.description && formik.errors.description}

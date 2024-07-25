@@ -6,14 +6,14 @@ import { v4 as uuid } from 'uuid';
 
 import PropTypes from 'prop-types';
 
-const TextAreaInput = ({ name, value, label, placeholder, type, error, helperText, handleChange, handleBlur }) => {
+const TextAreaInput = ({ name, value, label, required, placeholder, type, error, helperText, handleChange, handleBlur }) => {
   const { t } = useTranslation();
   const id = uuid();
 
   return (
     <>
       <FormControl variant='outlined' sx={styles.textareaBox} error={error}>
-        <InputLabel htmlFor={id} sx={styles.label}>
+        <InputLabel htmlFor={id} sx={styles.label} required={required}>
           {t(label)}
         </InputLabel>
         <OutlinedInput
@@ -45,6 +45,7 @@ TextAreaInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   type: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   helperText: PropTypes.string.isRequired,
@@ -60,6 +61,7 @@ TextAreaInput.defaultProps = {
   handleBlur: () => {},
   type: 'text',
   label: '',
+  required: false,
   placeholder: '',
   helperText: '',
   error: false,
