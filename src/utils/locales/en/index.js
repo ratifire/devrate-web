@@ -29,9 +29,16 @@ export const en = {
     modal: {
       achievement: {
         title: 'Achievement',
-        link: 'Link',
         summary: 'Achievement label',
-        description: 'Achievement description',
+        summary_long: 'Achievement label too long',
+        summary_short: 'Achievement label too short',
+        link: 'Link',
+        link_long: 'Link is too long',
+        link_short: 'Link is too short',
+        description: 'Description',
+        description_long: 'Description label too long',
+        description_short: 'Description label too short',
+        required: 'This is a required field',
       },
       education: {
         title: 'Education',
