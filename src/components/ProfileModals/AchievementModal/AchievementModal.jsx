@@ -31,7 +31,7 @@ const AchievementModal = ({ userId }) => {
   };
 
   const onSubmit = async (values) => {
-    console.log('Submitted values:', values);
+
     try {
       await createAchievement({
               userId: userId,
