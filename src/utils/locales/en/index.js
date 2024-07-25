@@ -29,9 +29,19 @@ export const en = {
     modal: {
       achievement: {
         title: 'Achievement',
-        link: 'Link',
         summary: 'Achievement label',
-        description: 'Achievement description',
+        summary_long: 'Achievement label too long',
+        summary_short: 'Achievement label too short',
+        summary_placeholder: 'Ruby Association Certified Programmer Examination (RY0-100 та RY0-200)',
+        link: 'Link',
+        link_long: 'Link is too long',
+        link_short: 'Link is too short',
+        link_placeholder: 'https://devrate.com/certificate_id=12345678987654321',
+        description: 'Description',
+        description_long: 'Description label too long',
+        description_short: 'Description label too short',
+        description_placeholder: 'The certification recognizes an individual as an expert in the field of networking technologies. It validates knowledge and skills in deploying, managing and troubleshooting network environments.',
+        required: 'This is a required field',
       },
       education: {
         title: 'Education',
