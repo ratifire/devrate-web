@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Box, Button, Popover, Typography } from '@mui/material';
+import { Box, Button, Divider, Popover, Typography } from '@mui/material';
 import { styles } from './Interviews.styles';
 import { useTranslation } from 'react-i18next';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
@@ -25,15 +25,19 @@ const Interviews = () => {
     setCreateButton(event.currentTarget);
   }
 
+  const closeHandler = () => setCreateButton(null);
+
   const createInterviewRequest = () => {
-    dispatch(openModal({modalName: 'scheduleInterview', data: {role: 'interviewer'}}));
+    dispatch(openModal({modalName: 'scheduleInterview', data: {role: 'INTERVIEWER'}}));
+    closeHandler();
   }
 
   const createIncomeInterviewRequest = () => {
-    dispatch(openModal({modalName: 'scheduleInterview', data: {role: 'interviewee'}}));
+    dispatch(openModal({modalName: 'scheduleInterview', data: {role: 'CANDIDATE'}}));
+    closeHandler()
   }
 
-  const closeHandler = () => setCreateButton(null);
+
 
   return (
     <Box sx={styles.contentWrapper}>
@@ -86,19 +90,20 @@ const Interviews = () => {
       >
         <Box sx={styles.popoverWrapper}>
           <Button
-            variant="contained"
+            variant="text"
             type="button"
             color="primary"
-            sx={styles.buttonPrimary}
+            sx={styles.menuButton}
             onClick={createInterviewRequest}
           >
             {t('specialization.modal.interview.makeOutcome')}
           </Button>
+          <Divider sx={styles.divider} />
           <Button
-            variant="outlined"
+            variant="text"
             type="button"
             color="primary"
-            sx={styles.buttonPrimary}
+            sx={styles.menuButton}
             onClick={createIncomeInterviewRequest}
           >
             {t('specialization.modal.interview.makeIncome')}
