@@ -141,6 +141,7 @@ export const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '228px',
   },
   specialization_title: (theme) => ({
     display: 'flex',
@@ -150,22 +151,22 @@ export const styles = {
     marginRight: theme.spacing(1),
     marginBottom: theme.spacing(3),
     zIndex: 1,
+    overflow: 'hidden',
+    maxWidth: '178px',
   }),
+
+  specialization_name: {
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis'
+  },
+
   star: (theme) => ({
     marginTop: '12px',
     marginRight: '16px',
     color: theme.palette.action.active,
     position: 'relative',
-    zIndex: 1,
-  }),
-
-  deleteBtn: (theme) => ({
-    zIndex: 1,
-    color: theme.palette.action.active,
-    position: 'absolute',
-    top: 5,
-    right: 5,
-    borderRadius: theme.spacing(2),
+    zIndex: 1
   }),
 
   hardAndSoftSkills: (theme) => ({
@@ -175,17 +176,20 @@ export const styles = {
     display: 'flex',
     flexDirection: 'row',
     position: 'relative',
-    zIndex: 1,
+    zIndex: 1
   }),
+
   softSkills: () => ({
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   }),
+
   hardSkills: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   skillsStatistic: {
+    textTransform: 'uppercase',
     lineHeight: '18px',
     letterSpacing: '0.16px',
     fontSize: '11px'

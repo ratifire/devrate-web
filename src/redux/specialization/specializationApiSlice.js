@@ -49,6 +49,9 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
 
     getMainMasteryBySpecializationId: builder.query({
       query: (specializationId) => `/specializations/${specializationId}/main-mastery`,
+      transformResponse(result) {
+        return { ...result, level: result.level.charAt(0) + result.level.slice(1).toLowerCase() };
+      }
     }),
 
     setNewMainMasteryBySpecIdAndMasteryId: builder.mutation({

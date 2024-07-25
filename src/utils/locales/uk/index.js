@@ -245,8 +245,8 @@ export const uk = {
     specialization: {
       specialization_title: 'Спеціалізації',
       specialization_btn_make_main: 'Зробити основною',
-      specialization_hardSkills: 'Hard Skills',
-      specialization_softSkills: 'Soft Skills',
+      specialization_hardSkills: 'HardSkills',
+      specialization_softSkills: 'SoftSkills',
       level: {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
