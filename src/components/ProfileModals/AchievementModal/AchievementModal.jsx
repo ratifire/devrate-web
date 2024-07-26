@@ -99,6 +99,7 @@ const AchievementModal = ({ userId }) => {
               type='text'
               label='modal.achievement.description'
               required
+              rows={3}
               placeholder='modal.achievement.description_placeholder'
               helperText={formik.touched.description && formik.errors.description}
               error={formik.touched.description && Boolean(formik.errors.description)}
