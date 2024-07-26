@@ -12,16 +12,25 @@ export const styles = {
   text: (theme) => ({
     textTransform: 'lowercase',
     color: theme.palette.neutral[900],
+    '&.JUNIOR': {
+      color: theme.palette.info.main,
+    },
+    '&.MIDDLE': {
+      color: theme.palette.info.azure,
+    },
+    '&.SENIOR': {
+      color: theme.palette.warning.main,
+    },
     '&:first-letter': {
       textTransform: 'uppercase',
+    },
+    ' span': {
+      display: 'inline-block',
+      '&:first-letter': {
+        textTransform: 'uppercase',
+      },
     },
   }),
-  level: {
-    display: 'inline-block',
-    '&:first-letter': {
-      textTransform: 'uppercase',
-    },
-  },
   list: (theme) => ({
     marginTop: theme.spacing(3),
     ' > div': {

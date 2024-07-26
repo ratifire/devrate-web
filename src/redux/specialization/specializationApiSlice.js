@@ -166,7 +166,6 @@ export const {
   useUpdateSpecializationAsMainByIdMutation,
   useGetHardAndSoftSkillsByMasteryIdQuery,
   useGetHardSkillsByMasteryIdQuery,
-  useLazyGetHardSkillsByMasteryIdQuery,
   useLazyGetSoftSkillsQuery,
   useGetSoftSkillsByMasteryIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
