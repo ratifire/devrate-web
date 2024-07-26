@@ -11,14 +11,13 @@ export const styles = {
   }),
   text: (theme) => ({
     textTransform: 'lowercase',
-    color: theme.palette.neutral[900],
-    '&.JUNIOR': {
+    '&.Junior': {
       color: theme.palette.info.main,
     },
-    '&.MIDDLE': {
+    '&.Middle': {
       color: theme.palette.info.azure,
     },
-    '&.SENIOR': {
+    '&.Senior': {
       color: theme.palette.warning.main,
     },
     '&:first-letter': {
