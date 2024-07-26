@@ -6,25 +6,24 @@ import SkillItem from './SkillItem';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
-import { 
-  useGetHardSkillsByMasteryIdQuery, 
-  useGetSpecializationByUserIdQuery, 
-  useGetMainMasteryBySpecializationIdQuery 
+import {
+  useGetHardSkillsByMasteryIdQuery,
+  useGetSpecializationByUserIdQuery,
+  useGetMasteriesBySpecializationIdQuery,
 } from '../../../redux/specialization/specializationApiSlice';
 
 const HardSkills = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const { id: userId } = useSelector((state) => state.auth.user.data);
+  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
 
   const [specializationId, setSpecializationId] = useState(null);
+  const [masteryId, setMasteryId] = useState(null);
 
   const handleModalOpen = () => {
-    dispatch(openModal({ modalName: 'openSkillsModal' }));
+    dispatch(openModal({ modalName: 'openSkillsModal', activeMastery }));
   };
-
-  useEffect(() => {}, [openSkillsModal]);
 
   const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
 
@@ -34,15 +33,22 @@ const HardSkills = () => {
     }
   }, [specializations]);
 
-  const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
+  const { data: masteries, isLoading: isLoadingMasteries } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
+
+  useEffect(() => {
+    if (masteries && masteries.length > 0 && activeMastery) {
+      const selectedMastery = masteries.find((mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase());
+      setMasteryId(selectedMastery?.id || null);
+    }
+  }, [masteries, activeMastery]);
 
   const {
     data: skills = [],
     isLoading: isLoadingSkills,
     isError: isErrorSkills,
-  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
+  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
 
-  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
+  if (isLoadingSpecializations || isLoadingMasteries || isLoadingSkills) {
     return <CircularProgress />;
   }
 

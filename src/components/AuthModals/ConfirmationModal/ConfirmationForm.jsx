@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, FormHelperText, TextField } from '@mui/material';
 import { ButtonDef } from '../../Buttons';
+import styles from './ConfirmationModal.styles';
+
+
 
 const ConfirmationForm = ({
   inputRefs,
@@ -14,6 +17,16 @@ const ConfirmationForm = ({
   fieldCount = 6,
   showButton = true,
 }) => {
+  useEffect(() => {
+    const allFieldsFilled = Object.keys(formik.values)
+      .filter(key => key.startsWith('text'))
+      .every(key => formik.values[key] !== '');
+
+    if (allFieldsFilled) {
+      formik.validateForm();
+    }
+  }, [formik.values]);
+
   const handleKeyDown = (event, index) => {
     const { key } = event;
 
@@ -46,6 +59,16 @@ const ConfirmationForm = ({
     }
   };
 
+  const handlePaste = (event) => {
+    event.preventDefault();
+    const pastedData = event.clipboardData.getData('text');
+    const numericData = pastedData.replace(/\D/g, '').slice(0, fieldCount);
+    handleCodeChange(numericData);
+    setTimeout(() => {
+      formik.validateForm();
+    }, 0);
+  };
+
   const handleCode = () => {
     const code = Array.from({ length: fieldCount }, (_, i) => formik.values[`text${i}`]).join('');
     handleCodeChange(code);
@@ -53,7 +76,7 @@ const ConfirmationForm = ({
 
   return (
     <form onSubmit={handleSubmit || formik.handleSubmit} style={{ width: '100%' }}>
-      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+      <Box sx={styles.formInput}>
         {[...Array(fieldCount)].map((_, index) => (
           <React.Fragment key={index}>
             <TextField
@@ -63,6 +86,7 @@ const ConfirmationForm = ({
                 inputRefs.current[index] = ele;
               }}
               onKeyDown={(event) => handleKeyDown(event, index)}
+              onPaste={handlePaste}
               value={formik.values[`text${index}`] ?? ''}
               inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
             />
@@ -72,19 +96,19 @@ const ConfirmationForm = ({
 
       <FormHelperText>{helperTextContent}</FormHelperText>
 
-      {showButton && (<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
-        <ButtonDef
-          variant={buttonVariant || 'contained'}
-          onClick={() => {
-            handleSubmit();
-            handleCode();
-          }}
-          label={buttonLabel || 'modal.confirmation.btn_confirm'}
-          disabled={!formik.isValid}
-        />
-      </Box>
-      )
-      }
+      {showButton && (
+        <Box sx={styles.btnWrapper}>
+          <ButtonDef sx={styles.btn}
+            variant={buttonVariant || 'contained'}
+            onClick={() => {
+              handleSubmit();
+              handleCode();
+            }}
+            label={buttonLabel || 'modal.confirmation.btn_confirm'}
+            disabled={!formik.isValid}
+          />
+        </Box>
+      )}
     </form>
   );
 };

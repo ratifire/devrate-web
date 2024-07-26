@@ -70,7 +70,8 @@ const AchievementModal = ({ userId }) => {
               handleBlur={formik.handleBlur}
               type='text'
               label='modal.achievement.summary'
-              placeholder='profile.modal.workExperience.position_placeholder'
+              required
+              placeholder='modal.achievement.summary_placeholder'
               helperText={formik.touched.summary && formik.errors.summary}
               error={formik.touched.summary && Boolean(formik.errors.summary)}
             />
@@ -83,7 +84,8 @@ const AchievementModal = ({ userId }) => {
               handleBlur={formik.handleBlur}
               type='text'
               label='modal.achievement.link'
-              placeholder='profile.modal.workExperience.position_placeholder'
+              required
+              placeholder='modal.achievement.link_placeholder'
               helperText={formik.touched.link && formik.errors.link}
               error={formik.touched.link && Boolean(formik.errors.link)}
             />
@@ -96,7 +98,8 @@ const AchievementModal = ({ userId }) => {
               handleBlur={formik.handleBlur}
               type='text'
               label='modal.achievement.description'
-              placeholder='profile.modal.workExperience.description_placeholder'
+              required
+              placeholder='modal.achievement.description_placeholder'
               helperText={formik.touched.description && formik.errors.description}
               error={formik.touched.description && Boolean(formik.errors.description)}
             />

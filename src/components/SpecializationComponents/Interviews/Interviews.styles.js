@@ -39,7 +39,19 @@ export const styles = {
   popoverWrapper: (theme) => ({
     padding: theme.spacing(2),
     display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
     gap: theme.spacing(2),
-    backgroundColor: theme.palette.background.body,
+    backgroundColor: theme.palette.neutral[800],
+  }),
+  divider: (theme) => ({
+    borderColor: theme.palette.neutral[600],
+  }),
+  menuButton: (theme) => ({
+    color: theme.palette.primary[100],
+    fontSize: 14,
+    textTransform: 'none',
+    fontWeight: 500,
+    paddingX: theme.spacing(5),
   })
 };

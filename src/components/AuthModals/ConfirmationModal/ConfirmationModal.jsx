@@ -19,7 +19,11 @@ const ConfirmationModal = () => {
   const [codeError, setCodeError] = useState(false);
   const [confirmEmail] = useConfirmEmailMutation();
   const openConfirmation = useSelector((state) => state.modal.openConfirmation);
-  const handleClose = () => dispatch(closeModal({ modalName: 'openConfirmation' }));
+  
+  const handleClose = () => {
+    dispatch(closeModal({ modalName: 'openConfirmation' }));
+  };
+
   const handleCloseAllModal = () => {
     dispatch(closeModal({ modalName: 'openRegistration' }));
     dispatch(closeModal({ modalName: 'openConfirmation' }));
@@ -41,8 +45,10 @@ const ConfirmationModal = () => {
       try {
         const { data } = await confirmEmail(code);
         if (data) {
-          dispatch(closeModal({ modalName: 'openConfirmation' }));
-          dispatch(openModal({ modalName: 'openLogin' }));
+          handleClose(); 
+          setTimeout(() => {
+            dispatch(openModal({ modalName: 'openLogin' }));
+          }, 100); 
         }
       } catch (error) {
         if (error.originalStatus === 410) {
@@ -53,10 +59,16 @@ const ConfirmationModal = () => {
       resetForm();
 
       inputRefs.current.forEach((ref) => {
-        ref.value = '';
+        if (ref) ref.value = '';
       });
     },
   });
+
+  const handleCodeChange = (code) => {
+    for (let i = 0; i < 6; i++) {
+      formik.setFieldValue(`text${i}`, code[i] || '');
+    }
+  };
 
   return (
     <ModalLayout open={openConfirmation} setOpen={handleClose}>
@@ -80,6 +92,7 @@ const ConfirmationModal = () => {
         inputRefs={inputRefs}
         helperTextContent=""
         buttonLabel="modal.confirmation.btn_confirm"
+        handleCodeChange={handleCodeChange}
       />
 
       <Box variant='subtitle3' sx={styles.spamCheckContainer}>

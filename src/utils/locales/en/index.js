@@ -29,9 +29,19 @@ export const en = {
     modal: {
       achievement: {
         title: 'Achievement',
-        link: 'Link',
         summary: 'Achievement label',
-        description: 'Achievement description',
+        summary_long: 'Achievement label too long',
+        summary_short: 'Achievement label too short',
+        summary_placeholder: 'Ruby Association Certified Programmer Examination (RY0-100 та RY0-200)',
+        link: 'Link',
+        link_long: 'Link is too long',
+        link_short: 'Link is too short',
+        link_placeholder: 'https://devrate.com/certificate_id=12345678987654321',
+        description: 'Description',
+        description_long: 'Description label too long',
+        description_short: 'Description label too short',
+        description_placeholder: 'The certification recognizes an individual as an expert in the field of networking technologies. It validates knowledge and skills in deploying, managing and troubleshooting network environments.',
+        required: 'This is a required field',
       },
       education: {
         title: 'Education',
@@ -244,8 +254,8 @@ export const en = {
     specialization: {
       specialization_title: 'Specialisations',
       specialization_btn_make_main: 'Make the main',
-      specialization_hardSkills: 'Hard Skills',
-      specialization_softSkills: 'Soft Skills',
+      specialization_hardSkills: 'HardSkills',
+      specialization_softSkills: 'SoftSkills',
       level: {
         title: 'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.',
@@ -274,7 +284,7 @@ export const en = {
           modal_title: 'Specialization',
           name: 'Specialization name',
           name_placeholder: 'Front-End Developer',
-          mastery: 'Main mastery',
+          mastery: 'Main level',
           required: 'This is a required field',
         },
         skills: {
@@ -327,5 +337,8 @@ export const en = {
       delete: 'Delete',
       edit: 'Edit',
     },
+    schedule: {
+      title: 'Schedule',
+    }
   },
 };
