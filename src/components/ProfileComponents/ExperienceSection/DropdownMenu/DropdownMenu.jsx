@@ -1,6 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Menu, MenuItem, Typography } from '@mui/material';
+import { Divider, Menu, MenuItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,7 @@ const DropdownMenu = ({ anchorEl, handleCloseMenu, handleEditFeature, handleDele
         <EditIcon sx={styles.itemIcon} />
         <Typography variant='caption1'>{t('dropDownMenu.edit')}</Typography>
       </MenuItem>
+      <Divider sx={styles.divider} />
       <MenuItem onClick={handleDeleteFeature} sx={styles.menuItem}>
         <DeleteIcon sx={styles.itemIcon} />
         <Typography variant='caption1'>{t('dropDownMenu.delete')}</Typography>

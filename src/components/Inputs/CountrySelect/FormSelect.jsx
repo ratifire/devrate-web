@@ -13,6 +13,7 @@ const FormSelect = ({
   handleChange,
   handleBlur,
   label,
+  required,
   error,
   helperText,
   countries,
@@ -21,7 +22,7 @@ const FormSelect = ({
   const { t } = useTranslation();
   return (
     <FormControl fullWidth variant={variant} sx={styles.wrapper} error={error}>
-      <InputLabel htmlFor={id} sx={styles.label}>
+      <InputLabel htmlFor={id} sx={styles.label} required={required}>
         {t(label)}
       </InputLabel>
       <Select
@@ -65,6 +66,7 @@ FormSelect.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   countries: PropTypes.array.isRequired,
@@ -76,6 +78,7 @@ FormSelect.defaultProps = {
   handleChange: () => {},
   handleBlur: () => {},
   label: '',
+  required: false,
   helperText: '',
   error: false,
   countries: [],

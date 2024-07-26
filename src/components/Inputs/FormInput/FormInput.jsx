@@ -14,6 +14,7 @@ const FormInput = ({
   handleBlur,
   showPassword,
   label,
+  required,
   placeholder,
   helperText,
   error,
@@ -35,7 +36,7 @@ const FormInput = ({
 
   return (
     <FormControl variant='outlined' sx={styles.inputWrapper} error={error}>
-      <InputLabel htmlFor={id} sx={styles.label}>
+      <InputLabel htmlFor={id} sx={styles.label} required={required}>
         {t(label)}
       </InputLabel>
       <OutlinedInput
@@ -81,6 +82,7 @@ FormInput.propTypes = {
   showPassword: PropTypes.bool,
   type: PropTypes.oneOf(['text', 'email', 'password']).isRequired,
   label: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   placeholder: PropTypes.string,
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
@@ -97,6 +99,7 @@ FormInput.defaultProps = {
   showPassword: false,
   type: 'text',
   label: '',
+  required: false,
   placeholder: '',
   helperText: '',
   error: false,
