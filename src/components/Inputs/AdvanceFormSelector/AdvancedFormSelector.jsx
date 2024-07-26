@@ -71,6 +71,8 @@ AdvancedFormSelector.propTypes = {
 
 AdvancedFormSelector.defaultProps = {
   countries: [],
+  error: false,
+  helperText: '',
 };
 
 export default AdvancedFormSelector;
