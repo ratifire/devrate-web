@@ -8,12 +8,12 @@ import SkillsList from './SkillsList';
 
 const Skills = () => {
   const { data: user } = useSelector(selectCurrentUser);
-  const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(user.id);
-  console.log(specializations, isLoading);
+  const { data: specializations } = useGetSpecializationByUserIdQuery(user.id);
 
   return (
     <Box sx={styles.wrapper}>
-      {specializations && specializations.map((item) => <SkillsList key={item.id} data={item} />)}
+      {specializations &&
+        specializations.map((item) => <SkillsList key={item.id} data={item} length={specializations.length} />)}
     </Box>
   );
 };

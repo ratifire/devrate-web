@@ -4,7 +4,7 @@ export const styles = {
     paddingY: theme.spacing(3),
     backgroundColor: theme.palette.neutral[600],
     borderRadius: 2,
-    width: 'calc(25% - 12px)',
+    width: '100%',
   }),
   title: (theme) => ({
     color: theme.palette.text.main,
@@ -32,9 +32,5 @@ export const styles = {
   }),
   list: (theme) => ({
     marginTop: theme.spacing(3),
-    ' > div': {
-      paddingY: theme.spacing(2),
-      borderBottom: `1px solid ${theme.palette.neutral[400]}`,
-    },
   }),
 };

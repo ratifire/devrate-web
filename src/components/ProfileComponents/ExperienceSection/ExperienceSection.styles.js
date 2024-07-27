@@ -23,7 +23,7 @@ const styles = {
   }),
   experienceItemContainer: (theme) => ({
     overflow: 'auto',
-    maxHeight: 600, // to be adjusted with designers
+    maxHeight: 300, // to be adjusted with designers
     minWidth: '100%',
     background: theme.palette.background.level2,
     paddingRight: theme.spacing(3),
@@ -38,7 +38,7 @@ const styles = {
     '&::-webkit-scrollbar-thumb': (theme) => ({
       borderRadius: 6,
       backgroundColor: theme.palette.common.white,
-    })
+    }),
   }),
 };
 export default styles;

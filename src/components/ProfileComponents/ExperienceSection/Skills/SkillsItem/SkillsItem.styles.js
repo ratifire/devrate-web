@@ -3,6 +3,8 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     gridGap: theme.spacing(3),
+    paddingY: theme.spacing(2),
+    borderBottom: `1px solid ${theme.palette.neutral[400]}`,
   }),
   iconWrapper: {
     width: 28,

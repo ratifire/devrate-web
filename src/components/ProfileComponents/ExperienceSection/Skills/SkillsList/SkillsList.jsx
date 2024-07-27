@@ -8,21 +8,18 @@ import {
   useGetMainMasteryBySpecializationIdQuery,
 } from '../../../../../redux/specialization/specializationApiSlice';
 
-const SkillsList = ({ data }) => {
+const SkillsList = ({ data, length }) => {
   const { id, name } = data;
+  const count = length === 1 ? 2 : 1;
+  const { data: mainMastery } = useGetMainMasteryBySpecializationIdQuery(id);
 
-  const { data: mainMastery, isLoading: isLoadingMainMastery } = useGetMainMasteryBySpecializationIdQuery(id);
-
-  const { data: skills = [], isLoading: isLoadingSkills } = useGetHardSkillsByMasteryIdQuery(
+  const { data: skills = [] } = useGetHardSkillsByMasteryIdQuery(
     { id, masteryId: mainMastery?.id },
     { skip: !mainMastery?.id }
   );
 
   const level = mainMastery?.level || 'N/A';
-  console.log(isLoadingMainMastery, 'isLoadingMainMastery');
-  console.log(isLoadingSkills, 'isLoadingSkills');
-  console.log(skills, 'useLazyGetHardSkillsByMasteryIdQuery');
-  console.log(level, 'level');
+
   return (
     <Box sx={styles.wrapper}>
       <Typography variant='h6' sx={styles.title}>
@@ -31,7 +28,7 @@ const SkillsList = ({ data }) => {
       <Typography variant='subtitle2' sx={styles.text} className={level}>
         Level <span>{level}</span>
       </Typography>
-      <Box sx={styles.list}>
+      <Box sx={{ ...styles.list, columnCount: count }}>
         {skills?.map((skill) => (
           <SkillsItem key={skill.id} data={skill} />
         ))}
@@ -42,6 +39,7 @@ const SkillsList = ({ data }) => {
 
 SkillsList.propTypes = {
   data: PropTypes.object.isRequired,
+  length: PropTypes.number.isRequired,
 };
 
 export default SkillsList;
