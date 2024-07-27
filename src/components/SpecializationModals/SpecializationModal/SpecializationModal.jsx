@@ -144,6 +144,7 @@ const SpecializationModal = React.memo(() => {
                            countries={specializations}
                            name="name"
                            variant="outlined"
+                           required
                            handleChange={formik.handleChange}
                            handleBlur={formik.handleBlur}
                            onChange={(value) => formik.setFieldValue('name', value)}
