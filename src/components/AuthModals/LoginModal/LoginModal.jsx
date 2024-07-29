@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Box, Link, Typography } from '@mui/material';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ModalLayout from '../../../layouts/ModalLayout';
 import styles from './LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
@@ -12,7 +13,7 @@ import { ButtonDef } from '../../Buttons';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../redux/auth/authSlice';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'; 
 
 const initialValues = {
   email: '',
@@ -50,7 +51,7 @@ const LoginModal = () => {
       console.error('Login error:', error);
       let errorMessage = 'Something went wrong';
       if (!error?.originalStatus) {
-        errorMessage = 'No server response';
+        errorMessage = 'Invalid email or password';
       } else if (error.originalStatus === 400) {
         errorMessage = 'Missing Username or Password';
       } else if (error.originalStatus === 401) {
@@ -74,8 +75,8 @@ const LoginModal = () => {
   const handleMouseDownPassword = useCallback((event) => event.preventDefault(), []);
 
   const handleFormSubmit = useCallback((e) => {
-    e.preventDefault(); // Prevent default form submission
-    formik.handleSubmit(); // Use Formik's handleSubmit method
+    e.preventDefault(); 
+    formik.handleSubmit(); 
   }, [formik]);
 
   console.log('Render LoginModal', { isSubmitting: formik.isSubmitting, isValid: formik.isValid });
@@ -87,9 +88,12 @@ const LoginModal = () => {
       </Typography>
       <form onSubmit={handleFormSubmit} style={{ width: '100%' }}>
         {loginError && (
-          <Typography color="error" variant="body2" sx={{ mb: 2 }}>
+          <Box sx={styles.errorWrapper}>
+            <HighlightOffIcon sx={styles.errorIcon} />
+          <Typography variant="body2" sx={styles.error}>
             {loginError}
           </Typography>
+          </Box>
         )}
         <FormInput
           name='email'

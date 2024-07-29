@@ -13,6 +13,20 @@ const styles = {
     lineHeight: 1.5,
     marginBottom: '36px',
   },
+  errorWrapper: (theme) => ({
+    display: 'flex', 
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: theme.spacing(4),
+    color: theme.palette.error.main,   
+  }),
+  errorIcon: (theme) => ({
+    marginRight: theme.spacing(2),
+    marginBottom: theme.spacing(4),
+  }),
+  error: {
+    textAlign: 'center',
+  },
   link: (theme) => ({
     marginRight: theme.spacing(2),
     textDecoration: 'underline',
@@ -24,21 +38,27 @@ const styles = {
   }),
   wrapperBtn: {
     marginTop: '36px',
-    marginBottom: '50px',
+    marginBottom: '36px',
   },
   policyText: (theme) => ({
+    display: 'block',
     textAlign: 'center',
     width: '100%',
     color: theme.palette.text.primary,
+    marginBottom: theme.spacing(4),
+    
   }),
   turnBackContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
+    
   },
   turnBackText: (theme) => ({
+    color: theme.palette.text.primary,
     marginRight: theme.spacing(2),
-    color: '#F1F1F14D',
+    
   }),
   turnBackLink: (theme) => ({
     textDecoration: 'underline',
@@ -50,13 +70,8 @@ const styles = {
     },
   }),
   iconStyle: (theme) => ({
-    color: theme.palette.neutral[50]
+    color: theme.palette.neutral[50],
   }),
-  statusMessage: {
-    color: 'red', // or green for success messages
-    marginTop: '1rem',
-    textAlign: 'center',
-  },
 };
 
 export default styles;
