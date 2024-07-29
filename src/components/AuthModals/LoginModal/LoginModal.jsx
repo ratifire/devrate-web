@@ -13,7 +13,7 @@ import { ButtonDef } from '../../Buttons';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../redux/auth/authSlice';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'; 
 
 const initialValues = {
   email: '',
@@ -89,7 +89,7 @@ const LoginModal = () => {
       <form onSubmit={handleFormSubmit} style={{ width: '100%' }}>
         {loginError && (
           <Box sx={styles.errorWrapper}>
-            <HighlightOffIcon sx={{ marginRight: 1 }} />
+            <HighlightOffIcon sx={styles.errorIcon} />
           <Typography variant="body2" sx={styles.error}>
             {loginError}
           </Typography>
