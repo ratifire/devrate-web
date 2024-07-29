@@ -1,4 +1,3 @@
-// В HomeTemplate.jsx
 import PropTypes from 'prop-types';
 import React, { lazy, memo, Suspense } from 'react';
 import { useSelector } from 'react-redux';
