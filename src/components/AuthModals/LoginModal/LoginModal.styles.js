@@ -51,7 +51,12 @@ const styles = {
   }),
   iconStyle: (theme) => ({
     color: theme.palette.neutral[50]
-  })
+  }),
+  statusMessage: {
+    color: 'red', // or green for success messages
+    marginTop: '1rem',
+    textAlign: 'center',
+  },
 };
 
 export default styles;
