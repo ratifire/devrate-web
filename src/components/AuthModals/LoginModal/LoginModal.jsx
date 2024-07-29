@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { Box, CircularProgress, Link, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ModalLayout from '../../../layouts/ModalLayout';
 import styles from './LoginModal.styles';
 import { LoginSchema } from './LoginSchema';
@@ -21,44 +22,48 @@ const initialValues = {
 
 const LoginModal = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState(null);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openLogin = useSelector((state) => state.modal.openLogin);
   const navigate = useNavigate();
 
-  const handleClose = () => dispatch(closeModal({ modalName: 'openLogin' }));
-  const handleOpen = () => {
+  const handleOpen = useCallback(() => {
     dispatch(openModal({ modalName: 'openCheckEmail' }));
     dispatch(closeModal({ modalName: 'openLogin' }));
-  };
-  
-  const [login, { isLoading }] = useLoginMutation();
+  }, [dispatch]);
 
-  async function onSubmit(values, { resetForm }) {
+  const [login] = useLoginMutation();
+
+  const onSubmit = useCallback(async (values, { setSubmitting }) => {
+    console.log('onSubmit called');
+    setLoginError(null);
     try {
       const userData = await login({ email: values.email, password: values.password }).unwrap();
+      console.log('Login successful', userData);
       await dispatch(setCredentials({ data: userData, isAuthenticated: false }));
       const cookies = Cookies.get('JSESSIONID');
       if (cookies) {
         await dispatch(setCredentials({ data: userData, isAuthenticated: true }));
-        navigate('/profile');
-        resetForm();
-        handleClose();
+        navigate('/profile', { replace: true });
       }
     } catch (error) {
+      console.error('Login error:', error);
+      let errorMessage = 'Something went wrong';
       if (!error?.originalStatus) {
-        console.log('No server response');
+        errorMessage = 'Invalid email or password';
       } else if (error.originalStatus === 400) {
-        console.log('Missing Username or Password');
+        errorMessage = 'Missing Username or Password';
       } else if (error.originalStatus === 401) {
-        console.log('Unauthorized');
+        errorMessage = 'Unauthorized';
       } else if (error.originalStatus === 500) {
-        console.log('Login Failed');
-      } else {
-        console.log('Something went wrong');
+        errorMessage = 'Login Failed';
       }
+      setLoginError(errorMessage);
+    } finally {
+      setSubmitting(false);
     }
-  }
+  }, [login, dispatch, navigate]);
 
   const formik = useFormik({
     initialValues,
@@ -66,17 +71,30 @@ const LoginModal = () => {
     onSubmit,
   });
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => event.preventDefault();
+  const handleClickShowPassword = useCallback(() => setShowPassword((show) => !show), []);
+  const handleMouseDownPassword = useCallback((event) => event.preventDefault(), []);
 
-  return isLoading ? (
-    <CircularProgress />
-  ) : (
-    <ModalLayout open={openLogin} setOpen={handleClose}>
+  const handleFormSubmit = useCallback((e) => {
+    e.preventDefault(); 
+    formik.handleSubmit(); 
+  }, [formik]);
+
+  console.log('Render LoginModal', { isSubmitting: formik.isSubmitting, isValid: formik.isValid });
+
+  return (
+    <ModalLayout open={openLogin} setOpen={() => {}}>
       <Typography variant='subtitle2' sx={styles.title}>
         {t('modal.login.title')}
       </Typography>
-      <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+      <form onSubmit={handleFormSubmit} style={{ width: '100%' }}>
+        {loginError && (
+          <Box sx={styles.errorWrapper}>
+            <HighlightOffIcon sx={{ marginRight: 1 }} />
+          <Typography variant="body2" sx={styles.error}>
+            {loginError}
+          </Typography>
+          </Box>
+        )}
         <FormInput
           name='email'
           value={formik.values.email}
@@ -114,11 +132,7 @@ const LoginModal = () => {
           <ButtonDef
             variant='contained'
             type='submit'
-            handlerClick={formik.handleSubmit}
-            disabled={
-              (formik.touched.email && Boolean(formik.errors.email)) ||
-              (formik.touched.password && Boolean(formik.errors.password))
-            }
+            disabled={formik.isSubmitting || !formik.isValid}
             label='modal.login.btn_login'
           />
         </Box>
@@ -131,7 +145,7 @@ const LoginModal = () => {
           <Typography href='#' variant='caption1' sx={styles.turnBackText}>
             {t('modal.login.return_on')}
           </Typography>
-          <Link to={'/'} component={RouterLink} variant='caption1' sx={styles.turnBackLink} onClick={handleClose}>
+          <Link to={'/'} component={RouterLink} variant='caption1' sx={styles.turnBackLink}>
             {t('modal.login.home_page')}
           </Link>
         </Box>
