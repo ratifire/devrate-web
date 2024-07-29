@@ -8,18 +8,18 @@ const educationSlice = createSlice({
   reducers: {
     setEducationDataToEdit: (state, action) => {
       state.dataToEdit = action.payload;
-    }
+    },
+    clearEducationDataToEdit: (state) => {
+      state.dataToEdit = null;
+    },
   },
   selectors: {
-    selectEducationDataToEdit: state => state.dataToEdit,
-  }
+    selectEducationDataToEdit: (state) => state.dataToEdit,
+  },
 });
+
 export const educationReducer = educationSlice.reducer;
 
-export const {
-  setEducationDataToEdit,
-} = educationSlice.actions;
+export const { setEducationDataToEdit, clearEducationDataToEdit } = educationSlice.actions;
 
-export const {
-  selectEducationDataToEdit,
-} = educationSlice.selectors;
+export const { selectEducationDataToEdit } = educationSlice.selectors;

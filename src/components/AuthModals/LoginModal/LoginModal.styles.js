@@ -18,9 +18,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: theme.spacing(4),
-    color: theme.palette.error.main,
-    
-    
+    color: theme.palette.error.main,   
   }),
   errorIcon: (theme) => ({
     marginRight: theme.spacing(2),

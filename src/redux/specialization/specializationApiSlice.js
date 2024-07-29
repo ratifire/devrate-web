@@ -3,23 +3,20 @@
 import { apiSlice } from '../services/api/apiSlice';
 
 export const SpecializationApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['Specialization', 'Masteries','MainMastery', 'HardSkills'],
+  tagTypes: ['Specialization', 'Masteries', 'MainMastery', 'HardSkills'],
   endpoints: (builder) => ({
-
     getSpecializationByUserId: builder.query({
       query: (userId) => `/users/${userId}/specializations`,
       providesTags: (result) =>
-        result
-          ? [...result.map(({ id }) => ({ type: 'Specialization', id })), 'Specialization']
-          : ['Specialization'],
+        result ? [...result.map(({ id }) => ({ type: 'Specialization', id })), 'Specialization'] : ['Specialization'],
     }),
 
     getMainSpecialization: builder.query({
       query: (userId) => `/users/${userId}/specializations`,
       providesTags: ['Specialization'],
       transformResponse(result) {
-        return result.find(({main}) => main);
-      }
+        return result.find(({ main }) => main);
+      },
     }),
 
     createNewSpecialization: builder.mutation({
@@ -35,12 +32,10 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       query(id) {
         return {
           url: `/specializations/${id}`,
-          method: "DELETE",
+          method: 'DELETE',
         };
       },
-      invalidatesTags: (result, error, id) => [
-        { type: 'Specialization', id },
-      ],
+      invalidatesTags: (result, error, id) => [{ type: 'Specialization', id }],
     }),
 
     getMasteriesBySpecializationId: builder.query({
@@ -58,8 +53,8 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       query({ masteryId, specId, name, softSkillMark, hardSkillMark }) {
         return {
           url: `/specializations/${specId}/set-main-mastery/${masteryId}`,
-          method: "PUT",
-          body: {id: masteryId, name, softSkillMark, hardSkillMark},
+          method: 'PUT',
+          body: { id: masteryId, name, softSkillMark, hardSkillMark },
         };
       },
     }),
@@ -78,9 +73,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
     getHardAndSoftSkillsByMasteryId: builder.query({
       query: (id) => `/masteries/${id}`,
       providesTags: (result) =>
-        result
-          ? [...result.map(({ id }) => ({ type: 'Masteries', id })), 'Masteries']
-          : ['Masteries'],
+        result ? [...result.map(({ id }) => ({ type: 'Masteries', id })), 'Masteries'] : ['Masteries'],
     }),
 
     getHardSkillsByMasteryId: builder.query({
@@ -96,7 +89,6 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       query: () => `/data/specialization/default-soft-skill-names.json`,
       providesTags: ['SoftSkills'],
     }),
-
 
     getSoftSkillsByMasteryId: builder.query({
       query: ({ masteryId }) => `/masteries/${masteryId}/soft-skills`,
@@ -158,7 +150,6 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['HardSkills', 'SoftSkills'],
     }),
-
   }),
 });
 
