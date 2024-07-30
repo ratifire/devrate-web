@@ -58,8 +58,7 @@ const EducationModal = () => {
     validationSchema: EducationModalSchema,
     onSubmit: (values, { resetForm }) => {
 
-      const endYearEducation =  (values.endYear === null || values.endYear === 'Now' || values.endYear === '') ? '9999' : values.endYear;
-
+      const endYearEducation =  (values.endYear === null || values.endYear === 'Now' || values.endYear === '') ? new Date('9999-01-01').getFullYear() : new Date(values.endYear).getFullYear();
       if (dataToEdit) {
         updateEducation({
           id: dataToEdit.id,
