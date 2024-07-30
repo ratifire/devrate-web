@@ -22,7 +22,8 @@ const styles = {
     alignItems: 'center',
   }),
   achievementTitle: (theme) => ({
-    color: theme.palette.text.primry,
+    color: theme.palette.text.primary,
+    wordBreak: 'break-word',
   }),
   achiementYear: (theme) => ({
     marginLeft: theme.spacing(2),
@@ -33,7 +34,8 @@ const styles = {
     color: theme.palette.primary[200],
   }),
   achievementItemText: (theme) => ({
-    color: theme.palette.text.primry,
+    color: theme.palette.text.primary,
+    wordBreak: 'break-word',
   }),
   link: (theme) => ({
     color: theme.palette.text.primary,
