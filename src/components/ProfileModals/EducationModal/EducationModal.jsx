@@ -20,7 +20,8 @@ const EducationModal = () => {
   const dataToEdit = useSelector(selectEducationDataToEdit);
   const openEducation = useSelector((state) => state.modal.education);
   const { t } = useTranslation();
-  const [years, setYears] = useState([]);
+  const [startYears, setStartYears] = useState([]);
+  const [endYears, setEndYears] = useState([]);
   const [createEducation] = useCreateEducationMutation();
   const [updateEducation] = useUpdateEducationMutation();
   const currentUser = useSelector(selectCurrentUser);
@@ -31,26 +32,34 @@ const EducationModal = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const yearsOpts = [];
-    for (let i = 1900; i < 2100; i++) {
-      yearsOpts.push(`${i}`);
+    const startYearsOpts = [];
+    for (let i = 1950; i <= `${new Date().getFullYear()}`; i++) {
+      startYearsOpts.push(`${i}`);
     }
-    setYears(yearsOpts);
+    setStartYears(startYearsOpts);
+
+    const endYearsOpts = [];
+    for (let i = 1950; i < 2050; i++) {
+      endYearsOpts.push(`${i}`);
+    }
+    setEndYears(endYearsOpts);
   }, []);
 
   const emptyInitialValues = {
     type: '',
     name: '',
     description: '',
-    startYear: `${new Date().getFullYear()}`,
-    endYear: `${new Date().getFullYear()}`,
+    startYear: '',
+    endYear: '',
   };
 
   const formik = useFormik({
     initialValues: dataToEdit || emptyInitialValues,
     validationSchema: EducationModalSchema,
     onSubmit: (values, { resetForm }) => {
-      console.log('Submitted values:', values);
+
+      const endYearEducation =  (values.endYear === null || values.endYear === 'Now' || values.endYear === '') ? '9999' : values.endYear;
+
       if (dataToEdit) {
         updateEducation({
           id: dataToEdit.id,
@@ -59,13 +68,13 @@ const EducationModal = () => {
             name: values.name,
             description: values.description,
             startYear: values.startYear,
-            endYear: values.endYear,
+            endYear: endYearEducation,
           },
         });
       } else {
         createEducation({
           userId: currentUser.data.id,
-          payload: values,
+          payload: {...values, endYear: endYearEducation},
         });
       }
 
@@ -122,7 +131,7 @@ const EducationModal = () => {
               sx={styles.input50}
               label={t('modal.education.startYear')}
               value={formik.values.startYear}
-              countries={years}
+              countries={startYears}
               name='startYear'
               variant='outlined'
               required
@@ -136,7 +145,7 @@ const EducationModal = () => {
               sx={styles.input50}
               label={t('modal.education.endYear')}
               value={formik.values.endYear}
-              countries={years}
+              countries={endYears}
               name='endYear'
               variant='outlined'
               handleChange={formik.handleChange}

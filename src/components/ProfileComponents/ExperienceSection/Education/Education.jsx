@@ -21,7 +21,7 @@ const Education = () => {
               name={name}
               description={description}
               startYear={startYear}
-              endYear={endYear} />
+              endYear={endYear === 9999 ? 'Now' : endYear} />
           )
         })}
       </Box>{' '}
