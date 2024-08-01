@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/modal/modalSlice';
-import { Box, IconButton, Step, StepButton, Stepper, Typography } from '@mui/material';
+import { Box, IconButton, Step, StepButton, StepConnector, Stepper, Typography } from '@mui/material';
 import { styles } from './ModalUserInfo.styles';
 import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -54,10 +54,15 @@ const ModalUserInfo = () => {
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openUserInfo}>
       <Box sx={styles.wrapper}>
-        <Stepper nonLinear activeStep={activeStep} sx={styles.stepBorder}>
+        <Stepper
+          activeStep={activeStep}
+          className={activeStep === 0 ? 'Mui-active' : ''}
+          sx={styles.stepBorder}
+          connector={<StepConnector />}
+        >
           {steps.map((label, index) => (
             <Step key={label} sx={styles.step}>
-              <StepButton color='inherit' onClick={handleStep(index)} sx={styles.stepBtn} />
+              <StepButton color='inherit' onClick={handleStep(index)} sx={styles.stepBtn} disabled={false} />
               {steps[activeStep] === label && (
                 <Typography variant='subtitle1' sx={styles.title}>
                   {t(label)}
