@@ -54,12 +54,7 @@ const ModalUserInfo = () => {
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openUserInfo}>
       <Box sx={styles.wrapper}>
-        <Stepper
-          activeStep={activeStep}
-          className={activeStep === 0 ? 'Mui-active' : ''}
-          sx={styles.stepBorder}
-          connector={<StepConnector />}
-        >
+        <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
           {steps.map((label, index) => (
             <Step key={label} sx={styles.step}>
               <StepButton color='inherit' onClick={handleStep(index)} sx={styles.stepBtn} disabled={false} />
