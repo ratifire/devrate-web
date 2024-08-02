@@ -4,7 +4,7 @@ export const RegistrationSchema = Yup.object().shape({
   email: Yup.string()
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      'modal.registration.email_invalid'
+      'modal.registration.email_invalid',
     )
     .email('modal.registration.email_invalid')
     .required('modal.registration.required'),
@@ -13,16 +13,16 @@ export const RegistrationSchema = Yup.object().shape({
     .min(2, 'modal.registration.first_name_short')
     .max(50, 'modal.registration.first_name_long')
     .matches(
-      /^[a-zA-Z\s]*$/,
-      'modal.registration.first_name_invalid_characters'
+      /^(?!.*\s{2,})(?!.*\s$)(?!^\s)(?!^\s+.*$)[a-zA-Z\s]*$/,
+      'modal.registration.first_name_invalid_characters',
     )
     .required('modal.registration.required'),
   lastName: Yup.string()
     .min(2, 'modal.registration.last_name_short')
     .max(50, 'modal.registration.last_name_long')
     .matches(
-      /^[a-zA-Z\s]*$/,
-      'modal.registration.last_name_invalid_characters'
+      /^(?!.*\s{2,})(?!.*\s$)(?!^\s)(?!^\s+.*$)[a-zA-Z\s]*$/,
+      'modal.registration.last_name_invalid_characters',
     )
     .required('modal.registration.required'),
   password: Yup.string()

@@ -112,6 +112,8 @@ const ProfileHeader = () => {
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
           <UserAvatar
+            userFirstName={getFirstName || firstName}
+            userLastName={getLastName || lastName}
             userName={`${getFirstName || firstName} ${getLastName || lastName}`}
             src={userPicture}
             size='sm'

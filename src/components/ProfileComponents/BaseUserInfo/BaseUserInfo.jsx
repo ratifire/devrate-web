@@ -47,7 +47,13 @@ const BaseUserInfo = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
         <Button type='button' onClick={handleOpenAvatar}>
-          <UserAvatar userName={`${getFirstName || firstName} ${getLastName || lastName}`} src={userPicture} size='l' />
+          <UserAvatar
+            userFirstName={getFirstName || firstName}
+            userLastName={getLastName || lastName}
+            userName={`${getFirstName || firstName} ${getLastName || lastName}`}
+            src={userPicture}
+            size='l'
+          />
         </Button>
       </Box>
       <Box sx={styles.wrapperText}>
