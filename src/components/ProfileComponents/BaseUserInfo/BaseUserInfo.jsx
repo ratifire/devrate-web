@@ -44,27 +44,29 @@ const BaseUserInfo = () => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
-        <Button type="button" onClick={handleOpenAvatar}>
+        <Button type='button' onClick={handleOpenAvatar}>
           <UserAvatar
             userFirstName={getFirstName || firstName}
             userLastName={getLastName || lastName}
             userName={`${getFirstName || firstName} ${getLastName || lastName}`}
-            src={userPicture} size="l" />
+            src={userPicture}
+            size='l'
+          />
         </Button>
       </Box>
       <Box sx={styles.wrapperText}>
-        <Typography variant="h5" sx={styles.userName}>
+        <Typography variant='h5' sx={styles.userName}>
           {`${getFirstName || firstName} ${getLastName || lastName}`}
         </Typography>
-        <Typography variant="subtitle1" sx={styles.speciality}>
+        <Typography variant='subtitle1' sx={styles.speciality}>
           {getStatus || ''}
         </Typography>
-        <Typography variant="subtitle2" sx={styles.city}>
+        <Typography variant='subtitle2' sx={styles.city}>
           <LocationOnIcon sx={styles.icon} />
           {`${getCity ? getCity + ',' : ''} ${getCountry || country}`}
         </Typography>
         <Box sx={styles.wrapperTextBtn}>
-          <IconButton sx={styles.btnIcon} aria-label="Edit user information" onClick={handleOpenInfo}>
+          <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenInfo}>
             <EditIcon />
           </IconButton>
         </Box>
