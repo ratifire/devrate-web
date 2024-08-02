@@ -80,24 +80,24 @@ const ProfileHeader = () => {
   }
 
   return (
-    <AppBar component='header' position={'static'} sx={styles.header}>
+    <AppBar component="header" position={'static'} sx={styles.header}>
       <Box sx={styles.logoBox}>
         <Logo width={'187'} height={'22'} />
       </Box>
       <Box sx={styles.headerNav}>
         <form onSubmit={formik.handleSubmit}>
           <OutlinedInput
-            autoComplete='off'
-            name='query'
-            placeholder='Пошук'
-            type='text'
+            autoComplete="off"
+            name="query"
+            placeholder="Пошук"
+            type="text"
             value={formik.values.query}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             sx={styles.input}
             endAdornment={
-              <InputAdornment position='end'>
-                <IconButton type='submit' onClick={formik.handleSubmit} edge='end'>
+              <InputAdornment position="end">
+                <IconButton type="submit" onClick={formik.handleSubmit} edge="end">
                   <Loupe />
                 </IconButton>
               </InputAdornment>
@@ -106,15 +106,17 @@ const ProfileHeader = () => {
         </form>
         <NotificationList items={notifications} />
         <IconButton>
-          <Badge color='error' overlap='circular' badgeContent='' variant='dot' invisible={true}>
+          <Badge color="error" overlap="circular" badgeContent="" variant="dot" invisible={true}>
             <Message />
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
           <UserAvatar
+            userFirstName={getFirstName || firstName}
+            userLastName={getLastName || lastName}
             userName={`${getFirstName || firstName} ${getLastName || lastName}`}
             src={userPicture}
-            size='sm'
+            size="sm"
           />
         </Button>
         <UserMenu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
