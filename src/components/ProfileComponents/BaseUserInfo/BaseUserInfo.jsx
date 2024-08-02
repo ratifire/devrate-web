@@ -11,6 +11,7 @@ import { setStep } from '../../../redux/modal/modalStepSlice';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import { selectCurrentUser } from '../../../redux/auth/authSlice';
 import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
+import { useProfileProgress } from './useProfileProgress';
 
 const BaseUserInfo = () => {
   const { data: info } = useSelector(selectCurrentUser);
@@ -29,7 +30,7 @@ const BaseUserInfo = () => {
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
 
-  const [progress] = React.useState(60);
+  const progress = useProfileProgress(id);
   const dispatch = useDispatch();
 
   const handleOpenInfo = () => {
@@ -41,6 +42,7 @@ const BaseUserInfo = () => {
     dispatch(setStep(2));
     dispatch(openModal({ modalName: 'openUserInfo' }));
   };
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
