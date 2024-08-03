@@ -1,27 +1,32 @@
+/* eslint-disable */
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { useGetInterviewSummariesByUserIdQuery } from '../../../../redux/interview/interviewApiSlice';
+import { useGetInterviewSummariesStatisticQuery } from '../../../../redux/chart/chartApiSlice';
+import { createTenDaysData, createTenMonthsData, getCurrentAndLastMonths } from './helpers';
 import { styles } from './InterviewChart.style';
-import mockData from './mockData';
-import { getInterviewsByDays, getInterviewsByMonths } from './helpers';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
-  const { data, isLoading, isError } = useGetInterviewSummariesByUserIdQuery(userId);
+  const { currentMonth: to, previousMonth: from } = useMemo(() => getCurrentAndLastMonths(), []);
+  const { data, isLoading, isError } = useGetInterviewSummariesStatisticQuery({
+    userId,
+    from,
+    to,
+  });
   const { t } = useTranslation();
-  const months = useMemo(() => getInterviewsByMonths({ data: mockData, userId, t }), [data, userId]);
-  const days = useMemo(() => getInterviewsByDays({ data: mockData, userId }), [data, userId]);
-  const [selectedPeriod, setSelectedPeriod] = useState(months);
+  const dateMonths = useMemo(() => createTenMonthsData({ t, data }), [data]);
+  const dateDays = useMemo(() => createTenDaysData({ data }), [data]);
+  const [selectedPeriod, setSelectedPeriod] = useState(dateMonths);
 
   const handleChange = (event) => {
     if (event.target.value === 'months') {
-      setSelectedPeriod(months);
+      setSelectedPeriod(dateMonths);
     } else if (event.target.value === 'days') {
-      setSelectedPeriod(days);
+      setSelectedPeriod(dateDays);
     }
   };
 

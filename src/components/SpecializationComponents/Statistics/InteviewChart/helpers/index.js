@@ -1,4 +1,6 @@
-import getInterviewsByMonths from './getInterviewsByMonths';
-import getInterviewsByDays from './getInterviewsByDays';
+import createTenDaysData from './createTenDaysData';
+import createTenMonthsData from './createTenMonthsData';
+import getCurrentAndLastDays from './getCurrentAndLastDays';
+import getCurrentAndLastMonths from './getCurrentAndLastMonths';
 
-export { getInterviewsByMonths, getInterviewsByDays }
+export { createTenDaysData, createTenMonthsData, getCurrentAndLastDays, getCurrentAndLastMonths };
