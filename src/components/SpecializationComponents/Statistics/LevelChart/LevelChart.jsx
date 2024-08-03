@@ -2,7 +2,7 @@ import { Box, CircularProgress, Typography } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts';
 import React from 'react';
 import { styles } from './LevelChart.styles.js';
-import { useUserSkillsAndMasteryData } from '../helpers';
+import { useUserSkillsAndMasteryData } from '../utils';
 
 const LevelChart = () => {
   const { t, skills, isErrorSkills, isLoadingMainMastery, isLoadingSkills, isLoadingSpecializations } =

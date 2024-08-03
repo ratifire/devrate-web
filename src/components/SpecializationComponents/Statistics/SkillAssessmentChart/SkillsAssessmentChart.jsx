@@ -1,53 +1,33 @@
 /* eslint-disable */
 
-import React, { useMemo, useState } from 'react';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { styles } from './SkillsAssessmentChart.style';
-import {useTranslation} from "react-i18next";
-import { useGetMasteriesHistoryStatisticQuery } from '../../../../redux/chart/chartApiSlice';
-import { getCurrentAndLastMonths } from '../helpers';
-
-const months = [
-  { name: 'Jan', value: 2 },
-  { name: 'Mar', value: 5.5 },
-  { name: 'May', value: 2 },
-  { name: 'Jul', value: 8.5 },
-  { name: 'Sep', value: 1.5 },
-  { name: 'Nov', value: 5 },
-];
-
-const days = [
-  { name: '1-5', value: 2 },
-  { name: '6-10', value: 3 },
-  { name: '11-15', value: 2 },
-  { name: '16-20', value: 3 },
-  { name: '21-25', value: 4 },
-  { name: '26-30', value: 5 },
-];
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material'
+import React, { useMemo } from 'react'
+import { useTranslation } from "react-i18next"
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { styles } from './SkillsAssessmentChart.style'
+import {
+  createTenDaysHistoryData,
+  createTenMonthsHistoryData,
+  getCurrentAndLastMonths,
+  useGetHistoryData, useHandleChange,
+} from '../utils';
 
 const SkillsAssessmentChart = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState(months);
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
-  // const { data, isLoading, isError } = useGetMasteriesHistoryStatisticQuery({ to, from })
+  const { dataHistory, isError, isLoading } = useGetHistoryData({ to, from })
   const { t } = useTranslation();
+  const dataDays = useMemo(() => createTenDaysHistoryData({ data: dataHistory }), [dataHistory]);
+  const dataMonths = useMemo(() => createTenMonthsHistoryData({ t, data: dataHistory }), [dataHistory]);
+  const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths })
 
-  const handleChange = (event) => {
-    if (event.target.value === 'months') {
-      setSelectedPeriod(months);
-    } else if (event.target.value === 'days') {
-      setSelectedPeriod(days);
-    }
-  };
+  if (isLoading) {
+    return <CircularProgress />;
+  }
 
-  // if (isLoading) {
-  //   return <CircularProgress />;
-  // }
-  //
-  // if (isError) {
-  //   return <Typography variant='h6'>Something error...</Typography>;
-  // }
+  if (isError) {
+    return <Typography variant='h6'>Something error...</Typography>;
+  }
 
   return (
     <Box sx={styles.skillsAssessmentChartContainer}>

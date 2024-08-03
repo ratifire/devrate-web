@@ -1,4 +1,4 @@
-const createTenDaysData = ({ data }) => {
+const createTenDaysInterviewData = ({ data }) => {
   const date = new Date();
   const result = [];
 
@@ -28,4 +28,4 @@ const createTenDaysData = ({ data }) => {
   return result.reverse();
 };
 
-export default createTenDaysData;
+export default createTenDaysInterviewData;

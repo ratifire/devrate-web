@@ -3,19 +3,18 @@ import React from 'react';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
 import { styles } from './HardSkillsChart.style.js';
 import roundData from '../../HardSkills/roundData';
-import { useUserSkillsAndMasteryData } from '../helpers';
+import { useUserSkillsAndMasteryData } from '../utils';
 
 const HardSkillsChart = () => {
-  const { t, skills, isErrorSkills, isLoadingMainMastery, isLoadingSkills, isLoadingSpecializations } =
-    useUserSkillsAndMasteryData();
+  const { t, skills, isLoading, isError} = useUserSkillsAndMasteryData();
 
   const roundedSkills = roundData(skills)
 
-  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
+  if (isLoading) {
     return <CircularProgress />;
   }
 
-  if (isErrorSkills) {
+  if (isError) {
     return <Typography variant='h6'>Something error...</Typography>;
   }
 

@@ -1,4 +1,4 @@
-const createTenMonthsData = ({ t, data }) => {
+const createTenMonthsHistoryData = ({ t, data }) => {
   const date = new Date();
   const result = [];
 
@@ -8,19 +8,27 @@ const createTenMonthsData = ({ t, data }) => {
     const monthName = t(`specialization.interviewChartMonths.${month}`);
     const resultItem = {
       name: monthName,
-      conducted: 0,
-      passed: 0,
+      value: 0,
+      count: 0,
     };
 
     if (data) {
       data.forEach((v) => {
         const correctDate = v.date.slice(0, 7);
-
+        const { hardSkillMark, softSkillMark } = v;
         if (correctDate === dateFullName) {
-          resultItem.conducted += v.conducted;
-          resultItem.passed += v.passed;
+          resultItem.value += hardSkillMark + softSkillMark;
+          resultItem.count += 2;
         }
       });
+    }
+
+    if (resultItem.count > 0) {
+      resultItem.value = (resultItem.value / resultItem.count).toFixed(1);
+    }
+
+    if (resultItem.value === 0) {
+      resultItem.value = 5; // костыль!!!!!!!!!!
     }
 
     result.push(resultItem);
@@ -30,4 +38,4 @@ const createTenMonthsData = ({ t, data }) => {
   return result.reverse();
 };
 
-export default createTenMonthsData;
+export default createTenMonthsHistoryData;

@@ -5,23 +5,22 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
 import { styles } from './HardSkills.styles';
 import SkillItem from './SkillItem';
-import { useUserSkillsAndMasteryData } from '../Statistics/helpers';
+import { useUserSkillsAndMasteryData } from '../Statistics/utils';
 
 const HardSkills = () => {
   const dispatch = useDispatch();
-  const { t, skills, isErrorSkills, isLoadingMainMastery, isLoadingSkills, isLoadingSpecializations } =
-    useUserSkillsAndMasteryData();
+  const { t, skills, isError, isLoading } = useUserSkillsAndMasteryData();
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1);
 
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSkillsModal' }));
   };
 
-  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
+  if (isLoading) {
     return <CircularProgress />;
   }
 
-  if (isErrorSkills) {
+  if (isError) {
     return <Typography variant='h6'>{t('specialisation.hardSkills.error')}</Typography>;
   }
 
