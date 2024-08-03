@@ -1,5 +1,7 @@
 import { apiSlice } from '../services/api/apiSlice'
 
+// This slice for Interview Request and Interview Summary
+
 export const interviewApiSlice = apiSlice.injectEndpoints({
   tagTypes: ['InterviewRequest', 'InterviewSummary'],
   endpoints: (builder) => ({
