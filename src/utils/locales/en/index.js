@@ -288,6 +288,7 @@ export const en = {
           name: 'Specialization name',
           name_placeholder: 'Front-End Developer',
           mastery: 'Main level',
+          mastery_helper_text: 'The level for generating your statistics, which will be displayed on your profile page',
           required: 'This is a required field',
         },
         skills: {

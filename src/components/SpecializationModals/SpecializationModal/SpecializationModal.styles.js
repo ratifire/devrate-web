@@ -9,7 +9,7 @@ export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    gridGap: `${theme.spacing(4)} ${theme.spacing(3)}`,
+    // gridGap: `${theme.spacing(4)} ${theme.spacing(3)}`,
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(4),
   }),
@@ -30,6 +30,15 @@ export const styles = {
     alignItems: 'flex-start',
     gridGap: theme.spacing(3),
   }),
+
+  mastery_input: (theme) => ({
+    flex: `0 1 100%`,
+    display: 'flex',
+    flexDirection: 'column', // Ensure the helper text is below the input
+    alignItems: 'flex-start',
+    gridGap: theme.spacing(1),
+  }),
+
   specializationBtn: {
     width: '228px',
   },
@@ -39,6 +48,7 @@ export const styles = {
     alignItems: 'flex-start',
     flexWrap: 'wrap',
     gridGap: theme.spacing(3),
+    marginBottom: theme.spacing(4),
   }),
   iconBtn: (theme) => ({
     marginTop: theme.spacing(1),

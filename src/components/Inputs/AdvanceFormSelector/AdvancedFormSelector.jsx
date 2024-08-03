@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 const AdvancedFormSelector = ({
                                 variant,
                                 name,
+                                required,
                                 handleBlur,
                                 handleChange,
                                 value,
@@ -17,6 +18,7 @@ const AdvancedFormSelector = ({
                                 error,
                                 helperText,
                                 countries,
+                                helperDescription
                               }) => {
   const id = uuid();
   const { t } = useTranslation();
@@ -34,6 +36,7 @@ const AdvancedFormSelector = ({
             label={t(label)}
             error={error} // Ensure error prop is passed to TextField
             sx={styles.selectField}
+            required={required}
           />
         )}
         disablePortal
@@ -53,6 +56,11 @@ const AdvancedFormSelector = ({
           {t(helperText)}
         </FormHelperText>
       )}
+      {helperDescription && (
+        <FormHelperText id={id} >
+          {t(helperDescription)}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };
@@ -60,6 +68,7 @@ const AdvancedFormSelector = ({
 AdvancedFormSelector.propTypes = {
   variant: PropTypes.oneOf(['standard', 'filled', 'outlined']).isRequired,
   name: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   value: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
@@ -67,12 +76,15 @@ AdvancedFormSelector.propTypes = {
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   countries: PropTypes.array.isRequired,
+  helperDescription: PropTypes.string,
 };
 
 AdvancedFormSelector.defaultProps = {
   countries: [],
+  required: false,
   error: false,
   helperText: '',
+  helperDescription: ''
 };
 
 export default AdvancedFormSelector;
