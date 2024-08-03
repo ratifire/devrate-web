@@ -3,9 +3,9 @@ import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
-import useUserSkillsAndMasteryData from '../useUserSkillsAndMasteryData';
 import { styles } from './HardSkills.styles';
 import SkillItem from './SkillItem';
+import { useUserSkillsAndMasteryData } from '../Statistics/helpers';
 
 const HardSkills = () => {
   const dispatch = useDispatch();

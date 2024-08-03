@@ -6,7 +6,7 @@ import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/materi
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { styles } from './SkillsAssessmentChart.style';
 import {useTranslation} from "react-i18next";
-import { useMasteriesHistoryStatisticQuery } from '../../../../redux/chart/chartApiSlice';
+import { useGetMasteriesHistoryStatisticQuery } from '../../../../redux/chart/chartApiSlice';
 import { getCurrentAndLastMonths } from '../helpers';
 
 const months = [
@@ -30,7 +30,7 @@ const days = [
 const SkillsAssessmentChart = () => {
   const [selectedPeriod, setSelectedPeriod] = useState(months);
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
-  // const { data, isLoading, isError } = useMasteriesHistoryStatisticQuery({ to, from })
+  // const { data, isLoading, isError } = useGetMasteriesHistoryStatisticQuery({ to, from })
   const { t } = useTranslation();
 
   const handleChange = (event) => {

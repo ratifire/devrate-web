@@ -4,7 +4,7 @@ import {
   useGetHardSkillsByMasteryIdQuery,
   useGetMainMasteryBySpecializationIdQuery,
   useGetSpecializationByUserIdQuery,
-} from '../../redux/specialization/specializationApiSlice';
+} from '../../../../redux/specialization/specializationApiSlice';
 
 const useUserSkillsAndMasteryData = () => {
   const { t } = useTranslation();

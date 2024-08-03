@@ -26,4 +26,4 @@ export const chartApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetInterviewSummariesStatisticQuery, useMasteriesHistoryStatisticQuery } = apiSlice;
+export const { useGetInterviewSummariesStatisticQuery, useGetMasteriesHistoryStatisticQuery } = apiSlice;
