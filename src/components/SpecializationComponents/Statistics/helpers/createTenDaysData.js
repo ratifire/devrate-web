@@ -25,7 +25,7 @@ const createTenDaysData = ({ data }) => {
     date.setDate(date.getDate() - 1);
   }
 
-  return result;
+  return result.reverse();
 };
 
 export default createTenDaysData;

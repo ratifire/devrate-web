@@ -1,9 +1,13 @@
-import React from 'react';
+/* eslint-disable */
+
+import React, { useMemo, useState } from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { Box, MenuItem, Select, Typography } from '@mui/material';
+import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { styles } from './SkillsAssessmentChart.style';
 import {useTranslation} from "react-i18next";
+import { useMasteriesHistoryStatisticQuery } from '../../../../redux/chart/chartApiSlice';
+import { getCurrentAndLastMonths } from '../helpers';
 
 const months = [
   { name: 'Jan', value: 2 },
@@ -24,7 +28,9 @@ const days = [
 ];
 
 const SkillsAssessmentChart = () => {
-  const [selectedPeriod, setSelectedPeriod] = React.useState(months);
+  const [selectedPeriod, setSelectedPeriod] = useState(months);
+  const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
+  // const { data, isLoading, isError } = useMasteriesHistoryStatisticQuery({ to, from })
   const { t } = useTranslation();
 
   const handleChange = (event) => {
@@ -34,6 +40,14 @@ const SkillsAssessmentChart = () => {
       setSelectedPeriod(days);
     }
   };
+
+  // if (isLoading) {
+  //   return <CircularProgress />;
+  // }
+  //
+  // if (isError) {
+  //   return <Typography variant='h6'>Something error...</Typography>;
+  // }
 
   return (
     <Box sx={styles.skillsAssessmentChartContainer}>

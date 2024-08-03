@@ -1,7 +1,7 @@
 import { apiSlice } from '../services/api/apiSlice';
 
 export const chartApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['InterviewSummaryStatistic'],
+  tagTypes: ['InterviewSummaryStatistic', 'MasteriesHistoryStatistic'],
   endpoints: (builder) => ({
     getInterviewSummariesStatistic: builder.query({
       query: ({ userId, from, to }) => {
@@ -13,7 +13,17 @@ export const chartApiSlice = apiSlice.injectEndpoints({
           ? [...result.map(({ id }) => ({ type: 'InterviewSummary', id })), 'InterviewSummaryStatistic']
           : ['InterviewSummaryStatistic'],
     }),
+    getMasteriesHistoryStatistic: builder.query({
+      query: ({ masteryId, from, to }) => {
+        const params = new URLSearchParams({ from, to });
+        return `/masteries/${masteryId}/history?${params.toString()}`;
+      },
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ id }) => ({ type: 'MasteriesHistory', id })), 'MasteriesHistoryStatistic']
+          : ['MasteriesHistoryStatistic'],
+    })
   }),
 });
 
-export const { useGetInterviewSummariesStatisticQuery } = apiSlice;
+export const { useGetInterviewSummariesStatisticQuery, useMasteriesHistoryStatisticQuery } = apiSlice;

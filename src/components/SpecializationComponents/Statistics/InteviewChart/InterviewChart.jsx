@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useGetInterviewSummariesStatisticQuery } from '../../../../redux/chart/chartApiSlice';
-import { createTenDaysData, createTenMonthsData, getCurrentAndLastMonths } from './helpers';
+import { createTenDaysData, createTenMonthsData, getCurrentAndLastMonths } from '../helpers';
 import { styles } from './InterviewChart.style';
 
 const InterviewChart = () => {
