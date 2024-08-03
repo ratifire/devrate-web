@@ -22,7 +22,6 @@ const styles = {
   }),
   errorIcon: (theme) => ({
     marginRight: theme.spacing(2),
-    marginBottom: theme.spacing(4),
   }),
   error: {
     textAlign: 'center',
