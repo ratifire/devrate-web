@@ -1,4 +1,3 @@
-/* eslint-disable */
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
 import React, { useMemo, useState } from 'react';
@@ -10,23 +9,23 @@ import { createTenDaysData, createTenMonthsData, getCurrentAndLastMonths } from 
 import { styles } from './InterviewChart.style';
 
 const InterviewChart = () => {
+  const [change, setChange] = useState('months');
   const { id: userId } = useSelector((state) => state.auth.user.data);
-  const { currentMonth: to, previousMonth: from } = useMemo(() => getCurrentAndLastMonths(), []);
-  const { data, isLoading, isError } = useGetInterviewSummariesStatisticQuery({
-    userId,
-    from,
-    to,
-  });
+  const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
+  const { data, isLoading, isError } = useGetInterviewSummariesStatisticQuery({ userId, from, to });
   const { t } = useTranslation();
   const dateMonths = useMemo(() => createTenMonthsData({ t, data }), [data]);
   const dateDays = useMemo(() => createTenDaysData({ data }), [data]);
-  const [selectedPeriod, setSelectedPeriod] = useState(dateMonths);
+
+  let selectedPeriod = change === 'months' ? dateMonths : dateDays;
 
   const handleChange = (event) => {
     if (event.target.value === 'months') {
-      setSelectedPeriod(dateMonths);
+      selectedPeriod = dateMonths;
+      setChange('months');
     } else if (event.target.value === 'days') {
-      setSelectedPeriod(dateDays);
+      selectedPeriod = dateDays;
+      setChange('days');
     }
   };
 
