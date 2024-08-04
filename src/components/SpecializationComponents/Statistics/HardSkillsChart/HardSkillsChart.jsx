@@ -1,14 +1,14 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
 import React from 'react';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
-import { styles } from './HardSkillsChart.style.js';
 import roundData from '../../HardSkills/roundData';
 import { useUserSkillsAndMasteryData } from '../utils';
+import { styles } from './HardSkillsChart.style.js';
 
 const HardSkillsChart = () => {
-  const { t, skills, isLoading, isError} = useUserSkillsAndMasteryData();
+  const { t, skills, isLoading, isError } = useUserSkillsAndMasteryData();
 
-  const roundedSkills = roundData(skills)
+  const roundedSkills = roundData(skills);
 
   if (isLoading) {
     return <CircularProgress />;
