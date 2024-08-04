@@ -16,8 +16,8 @@ const modalSlice = createSlice({
     openSkillsModal: false,
     openSoftSkillsModal: false,
     scheduleInterview: false,
-    feedbackRespondent: false,
-    feedbackInterviewer: false,
+    openFeedbackRespondent: false,
+    openFeedbackInterviewer: false,
   },
   reducers: {
     openModal: (state, action) => {
