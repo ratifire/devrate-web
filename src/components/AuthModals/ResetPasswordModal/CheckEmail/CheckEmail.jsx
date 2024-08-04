@@ -33,9 +33,9 @@ const CheckEmail = () => {
     try {
       await sendResetEmail({ email: values.email });
       resetForm();
-      dispatch(setEmail(values.email)); // Save email to the Redux store
+      dispatch(setEmail(values.email));
       dispatch(closeModal({ modalName: 'openCheckEmail' }));
-      dispatch(openModal({ modalName: 'openResetPassword' }));
+      dispatch(openModal({ modalName: 'openNotification' }));
     } catch (error) {
       console.error('Error sending email:', error);
       alert('Error sending email. Please try again.');

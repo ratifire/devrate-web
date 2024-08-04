@@ -117,6 +117,11 @@ export const en = {
         return_on: 'Back to ',
         home_page: 'Home',
       },
+      notificationModal: {
+        title: 'Email sent!',
+        message: 'An email with instructions on how to change your password has been sent to your email address. If you do not receive it within a few minutes, please check that you used the email address for your Devrate account and try again, or contact us for assistance.',
+        btn_enter: 'CONTINUE',
+      },
       resetPassword: {
         title: 'Reset password',
         password: 'Password',
