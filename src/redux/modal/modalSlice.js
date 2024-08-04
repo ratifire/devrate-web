@@ -16,13 +16,15 @@ const modalSlice = createSlice({
     openSkillsModal: false,
     openSoftSkillsModal: false,
     scheduleInterview: false,
+    feedbackRespondent: false,
+    feedbackInterviewer: false,
   },
   reducers: {
     openModal: (state, action) => {
       const { modalName, data } = action.payload;
       state[modalName] = true;
       if (data) {
-        state.modalData = data; 
+        state.modalData = data;
       }
     },
     closeModal: (state, action) => {
