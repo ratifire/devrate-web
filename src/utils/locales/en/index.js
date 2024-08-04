@@ -40,7 +40,8 @@ export const en = {
         description: 'Description',
         description_long: 'Description label too long',
         description_short: 'Description label too short',
-        description_placeholder: 'The certification recognizes an individual as an expert in the field of networking technologies. It validates knowledge and skills in deploying, managing and troubleshooting network environments.',
+        description_placeholder:
+          'The certification recognizes an individual as an expert in the field of networking technologies. It validates knowledge and skills in deploying, managing and troubleshooting network environments.',
         required: 'This is a required field',
       },
       education: {
@@ -97,8 +98,10 @@ export const en = {
         required: 'This is a required field',
         first_name_long: 'Name too long',
         first_name_short: 'Name too short',
+        first_name_invalid_characters: 'Trim trailing name characters',
         last_name_long: 'Last name too long',
         last_name_short: 'Surname too short',
+        last_name_invalid_characters: 'Trim trailing name characters',
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
@@ -140,7 +143,7 @@ export const en = {
         code_symbol_min: 'Each code digit must be 1 character long',
         code_length_max: 'Code must be exactly 6 digits long',
         error: 'Error changing password. Please try again.',
-        success: 'Password changed successfully!'
+        success: 'Password changed successfully!',
       },
       editPage: {
         personalInformation: {
@@ -284,8 +287,8 @@ export const en = {
         title: 'Hard skills',
         averageMark: 'Average mark:',
       },
-      softSkills:{
-        title:'Soft skills',
+      softSkills: {
+        title: 'Soft skills',
       },
       modal: {
         specialization: {
@@ -348,6 +351,6 @@ export const en = {
     },
     schedule: {
       title: 'Schedule',
-    }
+    },
   },
 };
