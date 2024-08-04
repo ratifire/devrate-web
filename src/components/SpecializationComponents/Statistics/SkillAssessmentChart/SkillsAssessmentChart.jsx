@@ -1,25 +1,39 @@
 /* eslint-disable */
 
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material'
-import React, { useMemo } from 'react'
-import { useTranslation } from "react-i18next"
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { styles } from './SkillsAssessmentChart.style'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
+import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import {
+  arithmeticAverageSkillValue,
   createTenDaysHistoryData,
   createTenMonthsHistoryData,
   getCurrentAndLastMonths,
-  useGetHistoryData, useHandleChange,
+  useGetHistoryData,
+  useHandleChange,
 } from '../utils';
+import { styles } from './SkillsAssessmentChart.style';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
-  const { dataHistory, isError, isLoading } = useGetHistoryData({ to, from })
+  const { dataHistory, isError, isLoading } = useGetHistoryData({ to, from });
   const { t } = useTranslation();
-  const dataDays = useMemo(() => createTenDaysHistoryData({ data: dataHistory }), [dataHistory]);
-  const dataMonths = useMemo(() => createTenMonthsHistoryData({ t, data: dataHistory }), [dataHistory]);
-  const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths })
+  const arithmeticAverage = arithmeticAverageSkillValue({
+    data: dataHistory,
+    secondValue: 'hardSkillMark',
+    firstValue: 'softSkillMark',
+  });
+
+  const dataDays = useMemo(
+    () => createTenDaysHistoryData({ data: dataHistory, average: arithmeticAverage }),
+    [dataHistory]
+  );
+  const dataMonths = useMemo(
+    () => createTenMonthsHistoryData({ t, data: dataHistory, average: arithmeticAverage }),
+    [dataHistory]
+  );
+  const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
   if (isLoading) {
     return <CircularProgress />;
@@ -33,9 +47,7 @@ const SkillsAssessmentChart = () => {
     <Box sx={styles.skillsAssessmentChartContainer}>
       <Box sx={styles.titleContainer}>
         <Box>
-          <Typography variant='subtitle2'>
-             {t('specialization.statistics.skills_assessment_chart_title')}
-          </Typography>
+          <Typography variant='subtitle2'>{t('specialization.statistics.skills_assessment_chart_title')}</Typography>
         </Box>
         <Box>
           <Select
@@ -61,9 +73,7 @@ const SkillsAssessmentChart = () => {
         </Box>
       </Box>
 
-      <Box
-        sx={styles.chartWrapper}
-      >
+      <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
           <AreaChart data={selectedPeriod} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
             <defs>

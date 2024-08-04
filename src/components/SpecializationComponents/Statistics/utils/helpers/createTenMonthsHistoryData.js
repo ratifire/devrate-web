@@ -1,4 +1,4 @@
-const createTenMonthsHistoryData = ({ t, data }) => {
+const createTenMonthsHistoryData = ({ t, data, average }) => {
   const date = new Date();
   const result = [];
 
@@ -28,7 +28,7 @@ const createTenMonthsHistoryData = ({ t, data }) => {
     }
 
     if (resultItem.value === 0) {
-      resultItem.value = 5; // костыль!!!!!!!!!!
+      resultItem.value = average;
     }
 
     result.push(resultItem);

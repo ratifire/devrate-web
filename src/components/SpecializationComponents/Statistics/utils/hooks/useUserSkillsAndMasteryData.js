@@ -25,7 +25,7 @@ const useUserSkillsAndMasteryData = () => {
     isError,
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId: mainMastery?.id }, { skip: !mainMastery?.id });
 
-  const isLoading = isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills
+  const isLoading = isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills;
 
   return {
     t,

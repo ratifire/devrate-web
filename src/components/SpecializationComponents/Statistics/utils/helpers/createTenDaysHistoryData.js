@@ -1,4 +1,4 @@
-const createTenDaysHistoryData = ({ data }) => {
+const createTenDaysHistoryData = ({ data, average }) => {
   const date = new Date();
   const result = [];
 
@@ -27,7 +27,7 @@ const createTenDaysHistoryData = ({ data }) => {
     }
 
     if (resultItem.value === 0) {
-      resultItem.value = 5; // костыль!!!!!!!!!!
+      resultItem.value = average;
     }
 
     result.push(resultItem);
