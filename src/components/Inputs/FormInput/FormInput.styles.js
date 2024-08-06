@@ -20,6 +20,15 @@ export const styles = {
     '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
       borderColor: theme.palette.error.main,
     },
+    '&, & input': {
+      backgroundColor: `${theme.palette.background.default} !important`,
+      color: `${theme.palette.text.primary} !important`,
+    },
+    '&:-webkit-autofill, & input:-webkit-autofill': {
+      '-webkit-text-fill-color': `${theme.palette.text.primary} !important`,
+      'box-shadow': `0 0 0 100px ${theme.palette.background.default} inset !important`,
+      'transition': 'background-color 5000s ease-in-out 0s',
+    },
   }),
   label: (theme) => ({
     '&.Mui-focused': {
