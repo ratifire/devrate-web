@@ -2,28 +2,19 @@ import * as Yup from 'yup';
 
 export const RegistrationSchema = Yup.object().shape({
   email: Yup.string()
-    .matches(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      'modal.registration.email_invalid',
-    )
+    .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'modal.registration.email_invalid')
     .email('modal.registration.email_invalid')
     .required('modal.registration.required'),
   country: Yup.string().required('modal.registration.required'),
   firstName: Yup.string()
     .min(2, 'modal.registration.first_name_short')
     .max(50, 'modal.registration.first_name_long')
-    .matches(
-      /^(?!.*\s{2,})(?!.*\s$)(?!^\s)(?!^\s+.*$)[a-zA-Z\s]*$/,
-      'modal.registration.first_name_invalid_characters',
-    )
+    .matches(/^(?!.*\s{2,})[a-zA-Z]+(?:\s[a-zA-Z]+)?$/, 'modal.registration.first_name_invalid_characters')
     .required('modal.registration.required'),
   lastName: Yup.string()
     .min(2, 'modal.registration.last_name_short')
     .max(50, 'modal.registration.last_name_long')
-    .matches(
-      /^(?!.*\s{2,})(?!.*\s$)(?!^\s)(?!^\s+.*$)[a-zA-Z\s]*$/,
-      'modal.registration.last_name_invalid_characters',
-    )
+    .matches(/^(?!.*\s{2,})[a-zA-Z]+(?:\s[a-zA-Z]+)?$/, 'modal.registration.last_name_invalid_characters')
     .required('modal.registration.required'),
   password: Yup.string()
     .min(6, 'modal.registration.password_short')
