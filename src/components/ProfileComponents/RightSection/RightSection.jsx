@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './RightSection.styles';
-
 import SocialsLinkList from '../../UI/SocialsLinkList';
 import { useTranslation } from 'react-i18next';
 import LanguagesList from '../../UI/LanguagesList';

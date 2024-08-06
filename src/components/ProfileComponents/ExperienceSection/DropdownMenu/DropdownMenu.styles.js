@@ -12,6 +12,7 @@ export const styles = {
     marginRight: '10px'
   },
   menuItem: (theme) => ({
+    minWidth: '141px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -24,5 +25,7 @@ export const styles = {
   }),
   divider: (theme) => ({
     backgroundColor: theme.palette.neutral[600],
+    marginLeft: '8px',
+    marginRight: '8px',
   })
 };

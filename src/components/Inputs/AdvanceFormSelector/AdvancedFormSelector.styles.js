@@ -31,6 +31,7 @@ export const styles = {
     '& .MuiInputLabel-root.Mui-error': {
       color: theme.palette.error.main,
     },
+    '& .MuiFormLabel-asterisk': { color: 'red' },
   }),
   dropdownPaper: (theme) => ({
     backgroundColor: '#303032',

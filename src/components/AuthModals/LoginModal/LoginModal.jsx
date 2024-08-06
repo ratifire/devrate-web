@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, Link, Typography } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ModalLayout from '../../../layouts/ModalLayout';
@@ -30,6 +30,10 @@ const LoginModal = () => {
 
   const handleOpen = useCallback(() => {
     dispatch(openModal({ modalName: 'openCheckEmail' }));
+    dispatch(closeModal({ modalName: 'openLogin' }));
+  }, [dispatch]);
+
+  const handleClose = useCallback(() => {
     dispatch(closeModal({ modalName: 'openLogin' }));
   }, [dispatch]);
 
@@ -82,7 +86,7 @@ const LoginModal = () => {
   console.log('Render LoginModal', { isSubmitting: formik.isSubmitting, isValid: formik.isValid });
 
   return (
-    <ModalLayout open={openLogin} setOpen={() => {}}>
+    <ModalLayout open={openLogin} setOpen={handleClose}>
       <Typography variant='subtitle2' sx={styles.title}>
         {t('modal.login.title')}
       </Typography>
@@ -145,9 +149,18 @@ const LoginModal = () => {
           <Typography href='#' variant='caption1' sx={styles.turnBackText}>
             {t('modal.login.return_on')}
           </Typography>
-          <Link to={'/'} component={RouterLink} variant='caption1' sx={styles.turnBackLink}>
-            {t('modal.login.home_page')}
-          </Link>
+          <Link 
+  onClick={(e) => {
+    e.preventDefault();
+    handleClose();
+    navigate('/');
+  }} 
+  component="button"
+  variant='caption1' 
+  sx={styles.turnBackLink}
+>
+  {t('modal.login.home_page')}
+</Link>
         </Box>
       </form>
     </ModalLayout>

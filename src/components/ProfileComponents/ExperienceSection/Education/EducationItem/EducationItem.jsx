@@ -100,7 +100,10 @@ EducationItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   startYear: PropTypes.number.isRequired,
-  endYear: PropTypes.number.isRequired,
+  endYear: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.string.isRequired
+  ]).isRequired
 };
 
 export default EducationItem;
