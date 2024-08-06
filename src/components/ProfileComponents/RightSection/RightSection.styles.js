@@ -25,6 +25,7 @@ export const styles = {
   },
   aboutMe: (theme) => ({
     color: theme.palette.neutral['100'],
+    overflowWrap: 'break-word',
   }),
   btnIcon: (theme) => ({
     flex: '1 0 44px',
