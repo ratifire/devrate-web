@@ -23,7 +23,7 @@ const useGetHistoryData = ({ from, to }) => {
     data: dataHistory,
     isLoading: isLoadingHistory,
     isError: isErrorHistory,
-  } = useGetMasteriesHistoryStatisticQuery({ masteryId: masteryId, to, from }, { skip: !masteryId });
+  } = useGetMasteriesHistoryStatisticQuery({ masteryId, to, from }, { skip: !masteryId });
 
   const isLoading = isLoadingSpecializations || isLoadingHistory || isLoadingMainMastery;
   const isError = isErrorSpecializations || isErrorHistory || isErrorMainMastery;
