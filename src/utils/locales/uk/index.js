@@ -31,13 +31,23 @@ export const uk = {
       achievement: {
         title: 'Досягнення',
         summary: 'Назва досягнення',
+        summary_long: 'Назва досягнення задовга. Внесіть, будь-ласка, зміни',
+        summary_short: 'Назва досягнення закоротка. Внесіть, будь-ласка, зміни',
+        summary_placeholder: 'Ruby Association Certified Programmer Examination (RY0-100 та RY0-200)',
         link: 'Посилання',
-        description: 'Опис досягення',
+        link_long: 'Довге посилання. Внесіть, будь-ласка, зміни',
+        link_short: 'Посилання занадто коротке. Внесіть, будь-ласка, зміни',
+        link_placeholder: 'https://devrate.com/certificate_id=12345678987654321',
+        description: 'Опис досягнення',
+        description_long: 'Довгий опис досягнення. Внесіть, будь-ласка, зміни',
+        description_short: 'Опис досягнення занадто короткий. Внесіть, будь-ласка, зміни',
+        description_placeholder: 'Сертифікація визнає особу як експерта у галузі мережевих технологій. Підтверджує знання та навички у розгортанні, управлінні та усуненні неполадок у мережевих середовищах.',
+        required: "Це обов'язкове поле",
       },
       education: {
         title: 'Освіта',
-        type: 'Спеціальниість',
-        name: 'Навчальний зак',
+        type: 'Спеціальність',
+        name: 'Навчальний заклад',
         description: 'Опис',
         startYear: 'Рік початку',
         endYear: 'Рік закінчення',
@@ -108,6 +118,11 @@ export const uk = {
         return_on: 'Повернутися на ',
         home_page: 'Головну сторінку',
       },
+      notificationModal: {
+        title: 'Листа відправлено!',
+        message: 'На Вашу електронну адресу надіслано лист з інструкціями щодо зміни пароля. Якщо Ви не отримаєте його протягом кількох хвилин, перевірте, чи використовували Ви адресу електронної пошти для свого облікового запису Devrate і повторіть спробу, або зв’яжіться з нами по допомогу.',
+        btn_enter: 'УВІЙТИ',
+      },
       resetPassword: {
         title: 'Скинути пароль',
         password: 'Пароль',
@@ -154,6 +169,7 @@ export const uk = {
         skills: 'Навички',
         education: 'Освіта',
         duties: 'Обовʼязки',
+        endYear: 'Теп. час',
       },
       right: {
         contact: 'Контактна інформація',
@@ -186,8 +202,11 @@ export const uk = {
             last_name_long: 'Прізвище занадто довге',
             last_name_short: 'Прізвище занадто коротке',
             city: 'Місто',
+            city_short: 'Назва міста дуже коротка',
+            city_long:'Назва міста дуже довга',
             country: 'Країна',
             status: 'Статус',
+            status_too_long: 'Поле статус дуже довге',
             about_me: 'Про мене',
             required: "Це обов'язкове поле",
           },
@@ -244,8 +263,8 @@ export const uk = {
     specialization: {
       specialization_title: 'Спеціалізації',
       specialization_btn_make_main: 'Зробити основною',
-      specialization_hardSkills: 'Hard Skills',
-      specialization_softSkills: 'Soft Skills',
+      specialization_hardSkills: 'HardSkills',
+      specialization_softSkills: 'SoftSkills',
       level: {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
@@ -289,6 +308,7 @@ export const uk = {
           name: 'Назва спеціалізації',
           name_placeholder: 'Front-End Розробник',
           mastery: 'Основний рівень',
+          mastery_helper_text: 'Рівень для формування Вашої статистики, яка буде відібражатися в на сторінці Вашого профілю',
           required: "Це обов'язкове поле",
         },
         skills: {
@@ -341,5 +361,8 @@ export const uk = {
       delete: 'Видалити',
       edit: 'Редагувати',
     },
+    schedule: {
+      title: 'Розклад',
+    }
   },
 };

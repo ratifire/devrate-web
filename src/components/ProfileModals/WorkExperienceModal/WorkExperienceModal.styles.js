@@ -23,6 +23,9 @@ export const styles = {
         borderColor: theme.palette.neutral[500],
       },
     },
+    '& .MuiInputLabel-root.Mui-required .MuiFormLabel-asterisk': {
+      color: 'red',
+    },
   }),
   input100: (theme) => ({
     flex: `0 1 100%`,

@@ -1,7 +1,8 @@
 const bgFromString = (string) => {
-  if (string.split(' ').length !== 2) {
+  if (string.split(' ').length < 2) {
     throw new Error('Param should contain a 2 words');
   }
+
   let hash = 0;
   let color = '#';
 

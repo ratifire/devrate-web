@@ -86,7 +86,7 @@ const WorkExperienceModal = () => {
 
   const [responsibilities, setResponsibilities] = useState([]);
   const createResponsibility = (newResponsibility) => {
-    if (newResponsibility.length === 0 || newResponsibility.length > 50) return
+    if (newResponsibility.length < 2 || newResponsibility.length > 50) return
     setResponsibilities([...responsibilities, newResponsibility]);
     formik.setFieldValue('responsibilities', '');
   };
@@ -111,6 +111,7 @@ const WorkExperienceModal = () => {
               handleBlur={formik.handleBlur}
               type='text'
               label='profile.modal.workExperience.position'
+              required
               placeholder='profile.modal.workExperience.position_placeholder'
               helperText={formik.touched.position && formik.errors.position}
               error={formik.touched.position && Boolean(formik.errors.position)}
@@ -123,6 +124,7 @@ const WorkExperienceModal = () => {
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               label='profile.modal.workExperience.companyName'
+              required
               placeholder='profile.modal.workExperience.companyName_placeholder'
               helperText={formik.touched.companyName && formik.errors.companyName}
               error={formik.touched.companyName && Boolean(formik.errors.companyName)}
@@ -133,6 +135,7 @@ const WorkExperienceModal = () => {
               <DateField sx={styles.input50}
                          label={t('profile.modal.workExperience.startDate')}
                          value={formik.values.startDate}
+                         required
                          onChange={(value) => formik.setFieldValue('startDate', value)}
                          helperText={formik.touched.startDate && formik.errors.startDate}
                          error={formik.touched.startDate && Boolean(formik.errors.startDate)}
@@ -154,6 +157,7 @@ const WorkExperienceModal = () => {
               handleBlur={formik.handleBlur}
               type='text'
               label='profile.modal.workExperience.description'
+              required
               placeholder='profile.modal.workExperience.description_placeholder'
               helperText={formik.touched.description && formik.errors.description}
               error={formik.touched.description && Boolean(formik.errors.description)}
@@ -166,6 +170,7 @@ const WorkExperienceModal = () => {
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               label='profile.modal.workExperience.responsibilities'
+              required
               placeholder='profile.modal.workExperience.responsibilities_placeholder'
               helperText={formik.touched.responsibilities && formik.errors.responsibilities}
               error={formik.touched.responsibilities && Boolean(formik.errors.responsibilities)}

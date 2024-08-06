@@ -1,16 +1,17 @@
 import * as Yup from 'yup';
 
 export const AchievementModalSchema = Yup.object().shape({
+  summary: Yup.string().trim()
+    .min(2, 'modal.achievement.summary_short')
+    .max(75, 'modal.achievement.summary_long')
+    .required('modal.achievement.required'),
   link: Yup.string()
-    .min(2, 'profile.modal.workExperience.position_long')
-    .max(50, 'profile.modal.workExperience.position_short')
-    .required('profile.modal.workExperience.required'),
-  summary: Yup.string()
-    .min(2, 'profile.modal.workExperience.companyName_short')
-    .max(100, 'profile.modal.workExperience.companyName_long')
-    .required('profile.modal.workExperience.required'),
-  description: Yup.string()
-    .min(2, 'profile.modal.workExperience.description_short')
-    .max(500, 'profile.modal.workExperience.description_long')
-    .required('profile.modal.workExperience.required'),
+    .min(10, 'modal.achievement.link_short')
+    .max(1000, 'modal.achievement.link_long')
+    .url('Invalid URL format')
+    .required('modal.achievement.required'),
+  description: Yup.string().trim()
+    .min(2, 'modal.achievement.description_short')
+    .max(170, 'modal.achievement.description_long')
+    .required('modal.achievement.required'),
 });

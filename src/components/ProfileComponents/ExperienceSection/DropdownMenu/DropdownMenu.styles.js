@@ -6,8 +6,13 @@ export const styles = {
       color: theme.palette.neutral[100],
     },
   }),
-  itemIcon: { width: 14, height: 14, marginRight: '10px' },
+  itemIcon: {
+    width: 14,
+    height: 14,
+    marginRight: '10px'
+  },
   menuItem: (theme) => ({
+    minWidth: '141px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -18,4 +23,9 @@ export const styles = {
       color: theme.palette.primary[200],
     },
   }),
+  divider: (theme) => ({
+    backgroundColor: theme.palette.neutral[600],
+    marginLeft: '8px',
+    marginRight: '8px',
+  })
 };

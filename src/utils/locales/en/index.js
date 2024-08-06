@@ -29,9 +29,20 @@ export const en = {
     modal: {
       achievement: {
         title: 'Achievement',
-        link: 'Link',
         summary: 'Achievement label',
-        description: 'Achievement description',
+        summary_long: 'Achievement label too long',
+        summary_short: 'Achievement label too short',
+        summary_placeholder: 'Ruby Association Certified Programmer Examination (RY0-100 та RY0-200)',
+        link: 'Link',
+        link_long: 'Link is too long',
+        link_short: 'Link is too short',
+        link_placeholder: 'https://devrate.com/certificate_id=12345678987654321',
+        description: 'Description',
+        description_long: 'Description label too long',
+        description_short: 'Description label too short',
+        description_placeholder:
+          'The certification recognizes an individual as an expert in the field of networking technologies. It validates knowledge and skills in deploying, managing and troubleshooting network environments.',
+        required: 'This is a required field',
       },
       education: {
         title: 'Education',
@@ -87,8 +98,10 @@ export const en = {
         required: 'This is a required field',
         first_name_long: 'Name too long',
         first_name_short: 'Name too short',
+        first_name_invalid_characters: 'Trim trailing name characters',
         last_name_long: 'Last name too long',
         last_name_short: 'Surname too short',
+        last_name_invalid_characters: 'Trim trailing name characters',
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
@@ -106,6 +119,11 @@ export const en = {
         change_email_link: 'change email',
         return_on: 'Back to ',
         home_page: 'Home',
+      },
+      notificationModal: {
+        title: 'Email sent!',
+        message: 'An email with instructions on how to change your password has been sent to your email address. If you do not receive it within a few minutes, please check that you used the email address for your Devrate account and try again, or contact us for assistance.',
+        btn_enter: 'CONTINUE',
       },
       resetPassword: {
         title: 'Reset password',
@@ -125,7 +143,7 @@ export const en = {
         code_symbol_min: 'Each code digit must be 1 character long',
         code_length_max: 'Code must be exactly 6 digits long',
         error: 'Error changing password. Please try again.',
-        success: 'Password changed successfully!'
+        success: 'Password changed successfully!',
       },
       editPage: {
         personalInformation: {
@@ -153,6 +171,7 @@ export const en = {
         skills: 'Skills',
         education: 'Education',
         duties: 'Duties',
+        endYear: 'Present',
       },
       right: {
         contact: 'Contact Information',
@@ -185,8 +204,11 @@ export const en = {
             last_name_long: 'Last name too long',
             last_name_short: 'Surname too short',
             city: 'City',
+            city_short: 'Name of the city is too short',
+            city_long:'Name of the city is too long',
             country: 'Country',
             status: 'Status',
+            status_too_long: 'Status too long',
             about_me: 'About me',
             required: 'This is a required field',
           },
@@ -243,8 +265,8 @@ export const en = {
     specialization: {
       specialization_title: 'Specialisations',
       specialization_btn_make_main: 'Make the main',
-      specialization_hardSkills: 'Hard Skills',
-      specialization_softSkills: 'Soft Skills',
+      specialization_hardSkills: 'HardSkills',
+      specialization_softSkills: 'SoftSkills',
       level: {
         title: 'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.',
@@ -279,15 +301,16 @@ export const en = {
         title: 'Hard skills',
         averageMark: 'Average mark:',
       },
-      softSkills:{
-        title:'Soft skills',
+      softSkills: {
+        title: 'Soft skills',
       },
       modal: {
         specialization: {
           modal_title: 'Specialization',
           name: 'Specialization name',
           name_placeholder: 'Front-End Developer',
-          mastery: 'Main mastery',
+          mastery: 'Main level',
+          mastery_helper_text: 'The level for generating your statistics, which will be displayed on your profile page',
           required: 'This is a required field',
         },
         skills: {
@@ -339,6 +362,9 @@ export const en = {
     dropDownMenu: {
       delete: 'Delete',
       edit: 'Edit',
+    },
+    schedule: {
+      title: 'Schedule',
     },
   },
 };

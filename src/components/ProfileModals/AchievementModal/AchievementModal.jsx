@@ -19,7 +19,10 @@ const AchievementModal = ({ userId }) => {
   const { t } = useTranslation();
   const [createAchievement] = useCreateAchievementMutation();
 
-  const handleClose = () => dispatch(closeModal({ modalName: 'achievement' }));
+  const handleClose = () => {
+    formik.resetForm();
+    dispatch(closeModal({ modalName: 'achievement' }));
+  }
 
   const initialValues = {
     link: '',
@@ -27,22 +30,17 @@ const AchievementModal = ({ userId }) => {
     description: '',
   };
 
-  const onSubmit = async (values, { resetForm }) => {
+  const onSubmit = async (values) => {
+
     try {
-      if (!userId) {
-        console.error('User is not authenticated or user ID is missing');
-        return;
-      }
-
       await createAchievement({
-        userId: userId,
-        payload: values,
-      }).unwrap();
-
-      resetForm();
+              userId: userId,
+              payload: values,
+            }).unwrap();
       handleClose();
+
     } catch (error) {
-      console.error('Failed to create achievement:', error);
+      console.error('Error updating achievement:', error);
     }
   };
 
@@ -72,7 +70,8 @@ const AchievementModal = ({ userId }) => {
               handleBlur={formik.handleBlur}
               type='text'
               label='modal.achievement.summary'
-              placeholder='profile.modal.workExperience.position_placeholder'
+              required
+              placeholder='modal.achievement.summary_placeholder'
               helperText={formik.touched.summary && formik.errors.summary}
               error={formik.touched.summary && Boolean(formik.errors.summary)}
             />
@@ -85,7 +84,8 @@ const AchievementModal = ({ userId }) => {
               handleBlur={formik.handleBlur}
               type='text'
               label='modal.achievement.link'
-              placeholder='profile.modal.workExperience.position_placeholder'
+              required
+              placeholder='modal.achievement.link_placeholder'
               helperText={formik.touched.link && formik.errors.link}
               error={formik.touched.link && Boolean(formik.errors.link)}
             />
@@ -98,7 +98,9 @@ const AchievementModal = ({ userId }) => {
               handleBlur={formik.handleBlur}
               type='text'
               label='modal.achievement.description'
-              placeholder='profile.modal.workExperience.description_placeholder'
+              required
+              rows={3}
+              placeholder='modal.achievement.description_placeholder'
               helperText={formik.touched.description && formik.errors.description}
               error={formik.touched.description && Boolean(formik.errors.description)}
             />

@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import React, { useMemo, useState } from 'react';
+import { Box, Button, Divider, Popover, Typography } from '@mui/material';
 import { styles } from './Interviews.styles';
 import { useTranslation } from 'react-i18next';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
@@ -14,14 +14,30 @@ const Interviews = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { data: specializations} = useGetSpecializationByUserIdQuery(user.data.id);
+  const [createButton, setCreateButton] = useState(null);
+  const open = Boolean(createButton);
 
   const mainSpec = useMemo(() => {
     return specializations?.find(sp => sp.main);
   }, [specializations]);
 
-  const scheduleClickHandler = () => {
-    dispatch(openModal({modalName: 'scheduleInterview'}));
+  const scheduleClickHandler = (event) => {
+    setCreateButton(event.currentTarget);
   }
+
+  const closeHandler = () => setCreateButton(null);
+
+  const createInterviewRequest = () => {
+    dispatch(openModal({modalName: 'scheduleInterview', data: {role: 'INTERVIEWER'}}));
+    closeHandler();
+  }
+
+  const createIncomeInterviewRequest = () => {
+    dispatch(openModal({modalName: 'scheduleInterview', data: {role: 'CANDIDATE'}}));
+    closeHandler()
+  }
+
+
 
   return (
     <Box sx={styles.contentWrapper}>
@@ -59,6 +75,41 @@ const Interviews = () => {
         {t('specialization.modal.interview.makeIncome')}
         <KeyboardArrowDown />
       </Button>
+      <Popover
+        open={open}
+        anchorEl={createButton}
+        onClose={closeHandler}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <Box sx={styles.popoverWrapper}>
+          <Button
+            variant="text"
+            type="button"
+            color="primary"
+            sx={styles.menuButton}
+            onClick={createInterviewRequest}
+          >
+            {t('specialization.modal.interview.makeOutcome')}
+          </Button>
+          <Divider sx={styles.divider} />
+          <Button
+            variant="text"
+            type="button"
+            color="primary"
+            sx={styles.menuButton}
+            onClick={createIncomeInterviewRequest}
+          >
+            {t('specialization.modal.interview.makeIncome')}
+          </Button>
+        </Box>
+      </Popover>
     </Box>
   );
 };

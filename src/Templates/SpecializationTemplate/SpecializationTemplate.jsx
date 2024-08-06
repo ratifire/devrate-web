@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { SpecializationModal } from '../../components/SpecializationModals';
@@ -7,18 +7,21 @@ import SkillsModal from '../../components/SpecializationModals/SkillsModal';
 import SoftSkillsModal from '../../components/SpecializationModals/SoftSkillsModal';
 
 const SpecializationTemplate = ({ children }) => {
+  const modalData = useSelector((state) => state.modal.modalData);
   const openSpecialization = useSelector((state) => state.modal.openSpecialization);
   const scheduleInterviewIsOpen = useSelector((state) => state.modal.scheduleInterview);
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const openSoftSkillsModal = useSelector((state) => state.modal.openSoftSkillsModal);
 
+  const [activeMastery, setActiveMastery] = useState();
+
   return (
     <div className='specialization'>
       {children}
-      {openSpecialization && <SpecializationModal/>}
-      {scheduleInterviewIsOpen && <ScheduleInterviewModal />}
+      {openSpecialization && <SpecializationModal setActiveMastery={setActiveMastery} />}
+      {scheduleInterviewIsOpen && <ScheduleInterviewModal {...(modalData || {})} />}
       {openSoftSkillsModal && <SoftSkillsModal />}
-      {openSkillsModal && <SkillsModal />}
+      {openSkillsModal && <SkillsModal activeMastery={activeMastery} setActiveMastery={setActiveMastery} />}
     </div>
   );
 };

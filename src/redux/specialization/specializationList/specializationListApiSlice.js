@@ -6,6 +6,9 @@ export const specializationListApiSlice = apiSlice.injectEndpoints({
     getSpecializationList: builder.query({
       query: (fileName) => `data/specialization/${fileName}`,
       providesTags: (result, error, id) => (result ? [{ type: 'DefSpecializations', id }] : []),
+      transformResponse: (response) => {
+        return response.map(str => str.replace(/_/g, ' '));
+      },
     }),
   }),
 });

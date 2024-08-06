@@ -57,6 +57,15 @@ const styles = {
         borderColor: theme.palette.neutral[100]
       },
     },
+    '&, & input': {
+      backgroundColor: `${theme.palette.background.default} !important`,
+      color: `${theme.palette.text.primary} !important`,
+    },
+    '&:-webkit-autofill, & input:-webkit-autofill': {
+      '-webkit-text-fill-color': `${theme.palette.text.primary} !important`,
+      'box-shadow': `0 0 0 100px ${theme.palette.background.default} inset !important`,
+      'transition': 'background-color 5000s ease-in-out 0s',
+    },
   }),
   iconStyle: (theme) => ({
     color: theme.palette.neutral[50]

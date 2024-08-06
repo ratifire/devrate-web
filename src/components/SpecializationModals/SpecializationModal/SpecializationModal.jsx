@@ -8,7 +8,6 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './SpecializationModal.styles';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
-import CountrySelect from '../../Inputs/CountrySelect';
 import {
   useAddSkillsToMasteryMutation,
   useCreateNewSpecializationMutation,
@@ -23,6 +22,7 @@ import {
 import FormInput from '../../Inputs/FormInput';
 import AddIcon from '@mui/icons-material/Add';
 import Responsibility from '../../UI/Responsibility';
+import { AdvancedFormSelector } from '../../Inputs';
 
 const initialValues = {
   name: '',
@@ -50,6 +50,25 @@ const SpecializationModal = React.memo(() => {
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
 
   const { modalData } = useSelector((state) => state.modal);
+
+  const [specialization, setSpecialization] = useState('');
+  const [mastery, setMastery] = useState('');
+
+  const handleChangeMastery = (value) => {
+    setMastery(value);
+  };
+
+  const handleChangeSpecialization = (value) => {
+    setSpecialization(value);
+  };
+
+  useEffect(() => {
+    formik.setFieldValue('name', specialization);
+  }, [specialization]);
+
+  useEffect(() => {
+    formik.setFieldValue('mastery', mastery);
+  }, [mastery]);
 
   const updateSpecialization = async({id, name}) => {
     await updateSpecializationById({id, name}).unwrap();
@@ -138,34 +157,39 @@ const SpecializationModal = React.memo(() => {
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
           <Box sx={styles.input100}>
-            <CountrySelect sx={styles.input50}
-                           label={t('specialization.modal.specialization.name')}
-                           value={formik.values.name}
-                           countries={specializations}
-                           name="name"
-                           variant="outlined"
-                           handleChange={formik.handleChange}
-                           handleBlur={formik.handleBlur}
-                           onChange={(value) => formik.setFieldValue('name', value)}
-                           helperText={formik.touched.name && formik.errors.name}
-                           error={formik.touched.name && Boolean(formik.errors.name)}
+            <AdvancedFormSelector
+              required
+              variant="outlined"
+              name="name"
+              value={formik.values.name}
+              handleChange={handleChangeSpecialization}
+              handleBlur={formik.handleBlur}
+              label={t('specialization.modal.specialization.name')}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+              countries={specializations}
             />
           </Box>
 
-          <Box sx={styles.input100}>
-            <CountrySelect sx={styles.input50}
-                           label={t('specialization.modal.specialization.mastery')}
-                           value={formik.values.mastery}
-                           countries={['Junior', 'Middle', 'Senior']}
-                           name="mastery"
-                           variant="outlined"
-                           handleChange={formik.handleChange}
-                           handleBlur={formik.handleBlur}
-                           onChange={(value) => formik.setFieldValue('mastery', value)}
-                           helperText={formik.touched.mastery && formik.errors.mastery}
-                           error={formik.touched.mastery && Boolean(formik.errors.mastery)}
+          <Box sx={styles.mastery_input}>
+            <AdvancedFormSelector
+              required
+              id='mastery'
+              variant="outlined"
+              name="mastery"
+              value={formik.values.mastery}
+              handleChange={handleChangeMastery}
+              handleBlur={formik.handleBlur}
+              label={t('specialization.modal.specialization.mastery')}
+              error={formik.touched.mastery && Boolean(formik.errors.mastery)}
+              helperText={formik.touched.mastery && formik.errors.mastery}
+              countries={['Junior', 'Middle', 'Senior']}
+              helperDescription={t('specialization.modal.specialization.mastery_helper_text')}
             />
+
           </Box>
+
+
 
           {modalData==='addSpecialization' &&
             <>

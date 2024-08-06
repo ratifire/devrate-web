@@ -21,6 +21,9 @@ export const styles = {
     '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
       borderColor: theme.palette.error.main,
     },
+    '& .MuiSelect-icon': {
+      color: theme.palette.text.primary,
+    },
   }),
   label: (theme) => ({
     '&.Mui-focused': {
@@ -28,6 +31,9 @@ export const styles = {
     },
     '&.Mui-error': {
       color: theme.palette.error.main,
+    },
+    '&.Mui-required .MuiFormLabel-asterisk': {
+      color: '#ED0E0E'
     },
   }),
   textHelper: {

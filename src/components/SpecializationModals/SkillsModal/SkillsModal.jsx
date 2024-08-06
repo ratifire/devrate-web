@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
 import { closeModal } from '../../../redux/modal/modalSlice';
@@ -19,16 +19,16 @@ const MAX_SKILLS = 20;
 
 const MemoizedButtonDef = React.memo(ButtonDef);
 
-
 const SkillsModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const { id: userId } = useSelector((state) => state.auth.user.data);
+  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
 
-  const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
+  const handleClose = useCallback(() => dispatch(closeModal({ modalName: 'openSkillsModal' })), [dispatch]);
 
-  const { mainMastery, skills, isLoading, isError } = useSkillsData(userId);
+  const { skills: fetchedSkills, isLoading, isError, masteryId } = useSkillsData(userId, activeMastery);
 
   const [selectedSkill, setSelectedSkill] = useState('');
   const [showError, setShowError] = useState(false);
@@ -37,8 +37,9 @@ const SkillsModal = () => {
   const [deleteSkillById, { isLoading: isDeletingSkill }] = useDeleteSkillByIdMutation();
 
   const formik = useFormik({
-    initialValues: { skills: [] },
-    validate: values => {
+    initialValues: { skills: fetchedSkills },
+    enableReinitialize: true,
+    validate: (values) => {
       const errors = {};
       if (values.skills.length >= MAX_SKILLS) {
         errors.skill = 'profile.modal.userInfo.skills.maxSkills';
@@ -47,7 +48,7 @@ const SkillsModal = () => {
         if (!selectedSkill) {
           errors.skill = 'profile.modal.userInfo.skills.selectSkill';
         }
-        if (values.skills.some(item => item.name === selectedSkill)) {
+        if (values.skills.some((item) => item.name === selectedSkill)) {
           errors.skill = 'profile.modal.userInfo.skills.skillAdded';
         }
       }
@@ -56,61 +57,63 @@ const SkillsModal = () => {
     onSubmit: handleClose,
   });
 
-  useEffect(() => {
-    if (skills.length > 0) {
-      formik.setFieldValue('skills', skills);
-    }
-  }, [skills]);
+  const handleSkillChange = useCallback(
+    (event) => {
+      setSelectedSkill(event.target.value);
+      setShowError(false);
+      formik.validateForm();
+    },
+    [formik]
+  );
 
-  const handleSkillChange = (event) => {
-    setSelectedSkill(event.target.value);
-    setShowError(false);
-    formik.validateForm();
-  };
-
-  const validateSkill = async () => {
+  const validateSkill = useCallback(async () => {
     setShowError(true);
     const errors = await formik.validateForm();
-    if (Object.keys(errors).length !== 0) {
-      return false;
-    }
-    return true;
-  };
+    return Object.keys(errors).length === 0;
+  }, [formik]);
 
-  const addNewSkill = async () => {
+  const addNewSkill = useCallback(async () => {
+    if (!masteryId) {
+      console.error('MasteryId is not available');
+      return;
+    }
+
     const newSkill = {
       name: selectedSkill,
       type: 'HARD_SKILL',
     };
 
     try {
-      await addSkillToMastery({ masteryId: mainMastery.id, skill: newSkill }).unwrap();
-      formik.setFieldValue('skills', [...formik.values.skills, newSkill]);
+      const result = await addSkillToMastery({ masteryId, skill: newSkill }).unwrap();
+      formik.setFieldValue('skills', [...formik.values.skills, result]);
       setSelectedSkill('');
       setShowError(false);
     } catch (error) {
       console.error('Failed to add skill:', error);
     }
-  };
+  }, [selectedSkill, masteryId, addSkillToMastery, formik]);
 
-  const createSkill = async () => {
+  const createSkill = useCallback(async () => {
     const isValid = await validateSkill();
     if (isValid) {
       await addNewSkill();
     }
-  };
+  }, [validateSkill, addNewSkill]);
 
-  const skillDeleteHandler = async (skillToDeleteId) => {
-    try {
-      await deleteSkillById(skillToDeleteId).unwrap();
-      formik.setFieldValue(
-        'skills',
-        formik.values.skills.filter((item) => item.id !== skillToDeleteId)
-      );
-    } catch (error) {
-      console.error('Failed to delete skill:', error);
-    }
-  };
+  const skillDeleteHandler = useCallback(
+    async (skillToDeleteId) => {
+      try {
+        await deleteSkillById(skillToDeleteId).unwrap();
+        formik.setFieldValue(
+          'skills',
+          formik.values.skills.filter((item) => item.id !== skillToDeleteId)
+        );
+      } catch (error) {
+        console.error('Failed to delete skill:', error);
+      }
+    },
+    [deleteSkillById, formik]
+  );
 
   if (isLoading) {
     return <CircularProgress />;
@@ -126,6 +129,7 @@ const SkillsModal = () => {
         <Typography variant='h6' sx={styles.title}>
           {t('specialization.modal.skills.title')}
         </Typography>
+
         <form onSubmit={formik.handleSubmit}>
           <Box sx={styles.input100}>
             <TextField
