@@ -26,7 +26,7 @@ export const styles = {
     right: '1%',
     transform: 'translateX(-50%)',
   },
-  rigthCaption: {
+  rightCaption: {
     position: 'absolute',
     bottom: '-20%',
     left: '8%',
