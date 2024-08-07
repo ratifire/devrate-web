@@ -1,4 +1,4 @@
-const DECO_SIZE = 45;
+const DECO_SIZE = 50;
 
 export const styles = {
   wrapper: (theme) => ({
@@ -55,7 +55,7 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     minWidth: '228px',
-    borderRadius: '10px',
+    borderRadius: '15px',
     position: 'relative',
     cursor: 'pointer',
 
@@ -80,11 +80,11 @@ export const styles = {
       borderLeft: '1px solid ' + theme.palette.neutral[600],
       transition: 'border-color .2s easy-in-out',
       backgroundColor: theme.palette.neutral[600],
-      top: `calc(100% - ${DECO_SIZE + 1}px)`,
+      top: `calc(100% - ${DECO_SIZE+1}px)`,
       left: 0,
       height: DECO_SIZE,
       width: `calc(100% - ${DECO_SIZE}px)`,
-      borderRadius: '0 0 10px 10px',
+      borderRadius: '0 0 15px 15px',
       zIndex: 1,
     },
     '&::after': {
@@ -98,16 +98,16 @@ export const styles = {
       left: 0,
       height: `calc(100% - ${DECO_SIZE}px)`,
       width: '100%',
-      borderRadius: '10px 10px 10px 0',
+      borderRadius: '15px 15px 15px 0',
     },
   }),
   figure_deco: (theme) => ({
     position: 'absolute',
-    height: 43,
-    width: 47,
+    height: 48,
+    width: 52,
     bottom: '2px',
     right: 0,
-    borderRadius: '0 0 10px 0',
+    borderRadius: '0 0 15px 0',
     backgroundColor: theme.palette.background.level2,
 
     '&::before': {
@@ -131,7 +131,7 @@ export const styles = {
       zIndex: 2,
       height: '50%',
       width: '50%',
-      borderTopLeftRadius: '10px',
+      borderTopLeftRadius: '15px',
       transition: 'border-color .2s easy-in-out',
       borderTop: '1px solid ' + theme.palette.neutral[600],
       borderLeft: '1px solid ' + theme.palette.neutral[600],
@@ -149,7 +149,7 @@ export const styles = {
     marginTop: theme.spacing(2),
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(3),
+    marginBottom: '23px',
     zIndex: 1,
     overflow: 'hidden',
     maxWidth: '178px',
@@ -158,7 +158,10 @@ export const styles = {
   specialization_name: {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
+    fontSize: '20px',
+    lineHeight: '32px',
+    letterSpacing: '0.15px',
   },
 
   star: (theme) => ({
@@ -172,7 +175,7 @@ export const styles = {
   hardAndSoftSkills: (theme) => ({
     gap: theme.spacing(3),
     paddingLeft: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
+    paddingBottom: '6px',
     display: 'flex',
     flexDirection: 'row',
     position: 'relative',
@@ -192,14 +195,14 @@ export const styles = {
     textTransform: 'uppercase',
     lineHeight: '18px',
     letterSpacing: '0.16px',
-    fontSize: '11px'
+    fontSize: '10px',
   },
   editSpecialization_btn: {
     padding: 0,
     height: '38px',
     width: '38px',
-    marginTop: '4px',
-    marginLeft: '6px',
+    marginTop: '7px',
+    marginLeft: '11px',
     position: 'relative',
     zIndex: 3,
   },
