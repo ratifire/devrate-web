@@ -18,6 +18,7 @@ export const StepPersonalSchema = Yup.object().shape({
   status: Yup.string()
     .max(50, 'profile.modal.userInfo.personal.status_too_long')
     .optional(),
-  aboutMe: Yup.string()
+  description: Yup.string()
+    .max(480, 'profile.modal.userInfo.personal.about_me_too_long')
     .optional(),
 });
