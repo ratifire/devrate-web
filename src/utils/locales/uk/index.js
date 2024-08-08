@@ -208,6 +208,7 @@ export const uk = {
             status: 'Статус',
             status_too_long: 'Поле статус дуже довге',
             about_me: 'Про мене',
+            about_me_too_long: 'Поле "Про мене" дуже довге',
             required: "Це обов'язкове поле",
           },
           contact: {

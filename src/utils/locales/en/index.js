@@ -210,6 +210,7 @@ export const en = {
             status: 'Status',
             status_too_long: 'Status too long',
             about_me: 'About me',
+            about_me_too_long: 'About me section too long',
             required: 'This is a required field',
           },
           contact: {
