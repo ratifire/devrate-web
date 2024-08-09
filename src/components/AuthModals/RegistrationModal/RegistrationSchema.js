@@ -9,12 +9,18 @@ export const RegistrationSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, 'modal.registration.first_name_short')
     .max(50, 'modal.registration.first_name_long')
-    .matches(/^(?!.*\s{2,})[a-zA-Z]+(?:\s[a-zA-Z]+)?$/, 'modal.registration.first_name_invalid_characters')
+    .matches(
+      /^[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\s\-']*[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\-']$/,
+      'modal.registration.first_name_invalid_characters'
+    )
     .required('modal.registration.required'),
   lastName: Yup.string()
     .min(2, 'modal.registration.last_name_short')
     .max(50, 'modal.registration.last_name_long')
-    .matches(/^(?!.*\s{2,})[a-zA-Z]+(?:\s[a-zA-Z]+)?$/, 'modal.registration.last_name_invalid_characters')
+    .matches(
+      /^[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\s\-']*[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\-']$/,
+      'modal.registration.first_name_invalid_characters'
+    )
     .required('modal.registration.required'),
   password: Yup.string()
     .min(6, 'modal.registration.password_short')
