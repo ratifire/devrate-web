@@ -4,7 +4,7 @@ import { FormInput, FormSelect, TextAreaInput } from '../../../Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
-import { StepPersonalSchema } from './StepPersonalSchema';
+import { StepPersonalSchema } from '../../../../utils/valadationSchemas/index';
 import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
 import { ButtonDef } from '../../../Buttons';
 import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';

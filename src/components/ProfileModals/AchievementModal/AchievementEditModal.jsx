@@ -11,7 +11,7 @@ import { ButtonDef } from '../../Buttons';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
 import { styles } from './AchievementModal.styles';
-import { AchievementModalSchema } from './AchievementModalSchema';
+import { AchievementModalSchema } from '../../../utils/valadationSchemas/index';
 
 const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
   const {
