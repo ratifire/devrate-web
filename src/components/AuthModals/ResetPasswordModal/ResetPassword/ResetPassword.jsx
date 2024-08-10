@@ -53,32 +53,34 @@ const ResetPassword = () => {
   const handleKeyDown = (event, index, formik) => {
     const { key } = event;
 
-    if ((key >= '0' && key <= '9') || key === 'Backspace' || key === 'Delete') {
-      const { value } = event.target;
-
-      if (value.length === 0 || (value.length === 1 && (key === 'Backspace' || key === 'Delete'))) {
-        if (key >= '0' && key <= '9') {
-          event.preventDefault();
-          const newValue = value + key;
-          formik.setFieldValue(`code[${index}]`, newValue);
-
-          if (index < fieldCount - 1 && !formik.values.code[index + 1]) {
-            inputRefs.current[index + 1].focus();
-          }
-        } else if (key === 'Backspace' && index > 0) {
-          event.preventDefault();
-          formik.setFieldValue(`code[${index}]`, '');
-          inputRefs.current[index - 1].focus();
-        } else if (key === 'Delete' && index < fieldCount - 1) {
-          event.preventDefault();
-          formik.setFieldValue(`code[${index}]`, '');
-          inputRefs.current[index + 1].focus();
-        }
-      } else {
-        event.preventDefault();
-      }
-    } else {
+    if (key >= '0' && key <= '9') {
       event.preventDefault();
+      const newValue = formik.values.code[index] + key;
+      formik.setFieldValue(`code[${index}]`, newValue.slice(-1));
+
+      if (index < fieldCount - 1) {
+        inputRefs.current[index + 1].focus();
+      }
+    } else if (key === 'Backspace' || key === 'Delete') {
+      event.preventDefault();
+      formik.setFieldValue(`code[${index}]`, '');
+
+      if (key === 'Backspace' && index > 0) {
+        inputRefs.current[index - 1].focus();
+      } else if (key === 'Delete' && index < fieldCount - 1) {
+        inputRefs.current[index + 1].focus();
+      }
+    } else if (key === 'ArrowLeft' && index > 0) {
+      event.preventDefault();
+      inputRefs.current[index - 1].focus();
+    } else if (key === 'ArrowRight' && index < fieldCount - 1) {
+      event.preventDefault();
+      inputRefs.current[index + 1].focus();
+    } else if (key === 'v' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      navigator.clipboard.readText().then(text => {
+        handlePaste({ clipboardData: { getData: () => text }, preventDefault: () => {} }, formik);
+      });
     }
   };
 
