@@ -134,7 +134,12 @@ const ResetPassword = () => {
                     onKeyDown={(event) => handleKeyDown(event, index, formik)}
                     onPaste={(event) => handlePaste(event, formik)}
                     value={formik.values.code[index] ?? ''}
-                    inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
+                    inputProps={{ 
+                      style: { textAlign: 'center' }, 
+                      maxLength: 1,
+                      autoComplete: 'off',
+                      'data-lpignore': 'true'
+                    }}
                     sx={styles.resetPasswordForm['& .MuiOutlinedInput-root']}
                   />
                 </React.Fragment>
@@ -153,6 +158,11 @@ const ResetPassword = () => {
               clickHandler={handleClickShowPassword}
               mouseDownHandler={handleMouseDownPassword}
               iconStyle={styles.iconStyle}
+              autoComplete='new-password'
+              extraProps={{
+                'data-lpignore': 'true',
+                'data-form-type': 'other',
+              }}
             />
             <FormInput
               showPassword={showPassword}
@@ -167,6 +177,11 @@ const ResetPassword = () => {
               clickHandler={handleClickShowPassword}
               mouseDownHandler={handleMouseDownPassword}
               iconStyle={styles.iconStyle}
+              autoComplete='new-password'
+              extraProps={{
+                'data-lpignore': 'true',
+                'data-form-type': 'other',
+              }}
             />
             <Box sx={styles.wrapperBtn}>
               <ButtonDef
