@@ -28,6 +28,12 @@ export const uk = {
       },
     },
     modal: {
+      feedbackRespondent: {
+        title: 'Залишити відгук',
+        label :'Відгук',
+        placeholder: 'Будь ласка, залиште свій відгук',
+        btn: 'Надіслати'
+      },
       achievement: {
         title: 'Досягнення',
         summary: 'Назва досягнення',

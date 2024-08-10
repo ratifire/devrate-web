@@ -27,6 +27,12 @@ export const en = {
       },
     },
     modal: {
+      feedbackRespondent: {
+        title: 'Leave a feedback',
+        label: 'Review',
+        placeholder: 'Please leave your feedback',
+        btn: 'Send'
+      },
       achievement: {
         title: 'Achievement',
         summary: 'Achievement label',
