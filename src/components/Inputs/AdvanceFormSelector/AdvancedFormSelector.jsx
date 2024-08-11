@@ -49,7 +49,7 @@ const AdvancedFormSelector = ({
         options={countries}
         sx={styles.autoComplete}
         PaperComponent={({ children }) => <Box sx={styles.dropdownPaper}>{children}</Box>}
-        popupIcon={<KeyboardArrowDownIcon />}
+        popupIcon={<KeyboardArrowDownIcon sx={{ color: '#FFFFFF' }} />}
       />
       {error && (
         <FormHelperText id={id} sx={styles.helperText}>
