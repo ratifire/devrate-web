@@ -21,26 +21,30 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
+  const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
+  const mainMasteryandSpecialization = useSelector((state) => state.specialization.mainMastery);
 
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
+
   const [anchorEl, setAnchorEl] = useState({});
 
   useEffect(() => {
-    if (specializations && specializations.length > 0) {
-      specializations.forEach(async (specialization) => {
-        const { data } = await getMainMasteryBySpecId(specialization.id);
-        setMasteryData((prev) => ({
-          ...prev,
-          [specialization.id]: data,
-        }));
-      });
+    if (!specializations) {
+      return;
     }
-  }, [specializations, getMainMasteryBySpecId]);
+
+    specializations.forEach(async (specialization) => {
+      const { data } = await getMainMasteryBySpecId(specialization.id);
+      setMasteryData((prev) => ({
+        ...prev,
+        [specialization.id]: data,
+      }));
+    });
+  }, [specializations, mainMasteryandSpecialization]);
 
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
@@ -91,24 +95,22 @@ const SpecializationCategories = () => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.specialization_left_box}>
-        <Typography variant="h5" sx={styles.page_title}>{t('specialization.specialization_title')}</Typography>
+        <Typography variant='h5' sx={styles.page_title}>
+          {t('specialization.specialization_title')}
+        </Typography>
         <ButtonDef
-          variant="outlined"
+          variant='outlined'
           disabled={specializations?.length === 0}
           correctStyle={styles.make_main_btn}
           handlerClick={() => handlerChangeMainSpecialization(selectedSpecialization)}
-          type="button"
+          type='button'
           label={t('specialization.specialization_btn_make_main')}
         />
       </Box>
 
       <Box sx={styles.specialization_right_box}>
         {specializations?.length < 4 ? (
-          <IconButton
-            size="large"
-            sx={styles.add_specialization_btn}
-            onClick={handlerAddSpecializations}
-          >
+          <IconButton size='large' sx={styles.add_specialization_btn} onClick={handlerAddSpecializations}>
             <AddIcon />
           </IconButton>
         ) : null}
@@ -122,25 +124,29 @@ const SpecializationCategories = () => {
             <Box sx={styles.specialization_title_star}>
               <Box sx={styles.specialization_title}>
                 <Tooltip title={name}>
-                  <Typography variant="h6" sx={styles.specialization_name}>
+                  <Typography variant='h6' sx={styles.specialization_name}>
                     {name}
                   </Typography>
                 </Tooltip>
-                <Typography variant="subtitle2">Level {masteryData[id]?.level}</Typography>
+                <Typography variant='subtitle2'>Level {masteryData[id]?.level}</Typography>
               </Box>
               {main && <StarIcon sx={styles.star} />}
             </Box>
             <Box sx={styles.hardAndSoftSkills}>
               <Box sx={styles.softSkills}>
-                <Typography variant="caption3" sx={styles.skillsStatistic}>{t('specialization.specialization_softSkills')}</Typography>
-                <Typography variant="body">{masteryData[id]?.softSkillMark}</Typography>
+                <Typography variant='caption3' sx={styles.skillsStatistic}>
+                  {t('specialization.specialization_softSkills')}
+                </Typography>
+                <Typography variant='body'>{masteryData[id]?.softSkillMark}</Typography>
               </Box>
               <Box sx={styles.hardSkills}>
-                <Typography variant="caption3" sx={styles.skillsStatistic}>{t('specialization.specialization_hardSkills')}</Typography>
-                <Typography variant="body">{masteryData[id]?.hardSkillMark}</Typography>
+                <Typography variant='caption3' sx={styles.skillsStatistic}>
+                  {t('specialization.specialization_hardSkills')}
+                </Typography>
+                <Typography variant='body'>{masteryData[id]?.hardSkillMark}</Typography>
               </Box>
             </Box>
-            <Box sx={styles.figure_deco} className="figure__deco">
+            <Box sx={styles.figure_deco} className='figure__deco'>
               <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event, id)}>
                 <MoreVertIcon sx={styles.editSpecialization} />
               </IconButton>{' '}
