@@ -6,20 +6,21 @@ import { useTranslation } from 'react-i18next';
 import { Box, FormControl, FormHelperText } from '@mui/material';
 import { styles } from './AdvancedFormSelector.styles'; // Import styles // Import styles
 import PropTypes from 'prop-types';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const AdvancedFormSelector = ({
-                                variant,
-                                name,
-                                required,
-                                handleBlur,
-                                handleChange,
-                                value,
-                                label,
-                                error,
-                                helperText,
-                                countries,
-                                helperDescription
-                              }) => {
+  variant,
+  name,
+  required,
+  handleBlur,
+  handleChange,
+  value,
+  label,
+  error,
+  helperText,
+  countries,
+  helperDescription,
+}) => {
   const id = uuid();
   const { t } = useTranslation();
 
@@ -47,20 +48,15 @@ const AdvancedFormSelector = ({
         onBlur={handleBlur}
         options={countries}
         sx={styles.autoComplete}
-        PaperComponent={({ children }) => (
-          <Box sx={styles.dropdownPaper}>{children}</Box>
-        )}
+        PaperComponent={({ children }) => <Box sx={styles.dropdownPaper}>{children}</Box>}
+        popupIcon={<KeyboardArrowDownIcon />}
       />
       {error && (
         <FormHelperText id={id} sx={styles.helperText}>
           {t(helperText)}
         </FormHelperText>
       )}
-      {helperDescription && (
-        <FormHelperText id={id} >
-          {t(helperDescription)}
-        </FormHelperText>
-      )}
+      {helperDescription && <FormHelperText id={id}>{t(helperDescription)}</FormHelperText>}
     </FormControl>
   );
 };
@@ -84,7 +80,7 @@ AdvancedFormSelector.defaultProps = {
   required: false,
   error: false,
   helperText: '',
-  helperDescription: ''
+  helperDescription: '',
 };
 
 export default AdvancedFormSelector;
