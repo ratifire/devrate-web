@@ -22,12 +22,14 @@ const SpecializationCategories = () => {
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
+  const mainMasteryandSpecialization = useSelector((state) => state.specialization.mainMastery);
 
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
+
   const [anchorEl, setAnchorEl] = useState({});
 
   useEffect(() => {
@@ -42,7 +44,7 @@ const SpecializationCategories = () => {
         [specialization.id]: data,
       }));
     });
-  }, [specializations, getMainMasteryBySpecId]);
+  }, [specializations, mainMasteryandSpecialization]);
 
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {

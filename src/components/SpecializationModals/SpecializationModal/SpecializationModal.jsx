@@ -15,7 +15,7 @@ import {
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
   useUpdateSpecializationByIdMutation,
 } from '../../../redux/specialization/specializationApiSlice';
-import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
+import { setMainMastery, setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
 import { useGetSpecializationListQuery } from '../../../redux/specialization/specializationList/specializationListApiSlice';
 import FormInput from '../../Inputs/FormInput';
 import AddIcon from '@mui/icons-material/Add';
@@ -109,7 +109,7 @@ const SpecializationModal = React.memo(() => {
       const data = await createNewSpecialization({ userId, data: { name: values.name, main: false } }).unwrap();
       const masteries = await triggerRequest(data.id);
       const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
-      await setNewMainMasteryBySpecIdAndMasteryId({
+      const { data: mastery } = await setNewMainMasteryBySpecIdAndMasteryId({
         masteryId: resp.id,
         specId: data.id,
         name: resp.name,
@@ -117,6 +117,15 @@ const SpecializationModal = React.memo(() => {
         hardSkillMark: resp.hardSkillMark,
       });
       await addSkills({ id: resp.id, skills });
+      dispatch(
+        setMainMastery({
+          specId: data.id,
+          masteryId: mastery.id,
+          level: mastery.level,
+          hardSkillMark: mastery.hardSkillMark,
+          softSkillMark: mastery.softSkillMark,
+        })
+      );
     } catch (error) {
       console.warn('Failed to create Specialization', error);
     } finally {
