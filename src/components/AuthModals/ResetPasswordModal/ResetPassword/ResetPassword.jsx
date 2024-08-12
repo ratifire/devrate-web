@@ -65,11 +65,11 @@ const ResetPassword = () => {
       event.preventDefault();
       formik.setFieldValue(`code[${index}]`, '');
 
-      if (key === 'Backspace' && index > 0) {
-        inputRefs.current[index - 1].focus();
-      } else if (key === 'Delete' && index < fieldCount - 1) {
-        inputRefs.current[index + 1].focus();
-      }
+      // if (key === 'Backspace' && index > 0) {
+      //   inputRefs.current[index - 1].focus();
+      // } else if (key === 'Delete' && index < fieldCount - 1) {
+      //   inputRefs.current[index + 1].focus();
+      // }
     } else if (key === 'ArrowLeft' && index > 0) {
       event.preventDefault();
       inputRefs.current[index - 1].focus();
