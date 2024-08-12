@@ -26,10 +26,10 @@ const Footer = () => {
             <LinkList links={legalInfoLinks} componentStyles={styles} />
             <Box sx={styles.socialGroup}>
               <Link href={'href'} target='_blank'>
-                <Instagram />
+                <Instagram sx={styles.icon}/>
               </Link>
               <Link href={'href'} target='_blank'>
-                <LinkedIn />
+                <LinkedIn sx={styles.icon}/>
               </Link>
             </Box>
           </Box>
