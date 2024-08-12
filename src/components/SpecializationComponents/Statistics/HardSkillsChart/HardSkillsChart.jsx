@@ -7,7 +7,6 @@ import { styles } from './HardSkillsChart.style.js';
 
 const HardSkillsChart = () => {
   const { t, skills, isLoading, isError } = useUserSkillsAndMasteryData();
-
   const roundedSkills = roundData(skills);
 
   if (isLoading) {
