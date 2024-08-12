@@ -17,11 +17,17 @@ const InterviewerFeedback = () => {
   const [activeStep, setActiveStep] = useState(1);
   const { handleCloseModal, isOpenModal } = useCloseModal({ modalName: 'openFeedbackRespondent' })
   const { t } = useTranslation();
-  const buttonContent = activeStep === 2 ? t('modal.interview.btnSend') : t('modal.interview.btnNext');
+  const buttonContent = activeStep === 3 ? t('modal.interview.btnSend') : t('modal.interview.btnNext');
 
   const handleNextStep = () => setActiveStep((prev) => prev + 2);
   const handlePrevStep = () => setActiveStep((prev) => prev - 2);
-  const handleStep = (step) => setActiveStep(step);
+  const handleStep = (step) => {
+    if (step === 2 || step === 3) {
+      return setActiveStep(3)
+    }
+
+    setActiveStep(1)
+  }
 
   const handleSubmit = () => {
     console.log('Submit modal');
