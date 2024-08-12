@@ -8,6 +8,7 @@ import { TextAreaInput } from '../../Inputs';
 import { ButtonDef } from '../../Buttons';
 import { useTranslation } from 'react-i18next';
 import { SliderAssessment } from '../components';
+import { SliderAssessmentBox } from '../components/SliderAssessmentBox';
 
 const RespondentFeedback = () => {
   const { t } = useTranslation();
@@ -16,31 +17,33 @@ const RespondentFeedback = () => {
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
       <Typography variant='subtitle1' sx={[styles.titleColor, styles.title]}>
-        {t('modal.feedbackRespondent.title')}
+        {t('modal.interview.title')}
       </Typography>
       <Box>
         <TextAreaInput
           name='description'
-          placeholder={t('modal.feedbackRespondent.placeholder')}
+          placeholder={t('modal.interview.placeholder')}
           type='text'
-          label={t('modal.feedbackRespondent.label')}
+          label={t('modal.interview.label')}
           required
           variant='outlined'
           rows={3}
         />
         <Typography sx={styles.titleColor} variant="h6">Soft Skills</Typography>
-        <SliderAssessment
-          title={'Комунікативність'}
-        />
-        <SliderAssessment
-          title={'Креативність'}
-        />
-        <SliderAssessment
-          title={'Критичне мислення'}
-        />
+        <SliderAssessmentBox>
+          <SliderAssessment
+            title={'Комунікативність'}
+          />
+          <SliderAssessment
+            title={'Креативність'}
+          />
+          <SliderAssessment
+            title={'Критичне мислення'}
+          />
+        </SliderAssessmentBox>
       </Box>
       <ButtonDef
-        label={t('modal.feedbackRespondent.btn')}
+        label={t('modal.interview.btnSend')}
         correctStyle={styles.btn}
       />
     </ModalLayoutProfile>
