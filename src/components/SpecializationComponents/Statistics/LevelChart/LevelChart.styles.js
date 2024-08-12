@@ -25,12 +25,22 @@ export const styles = {
     bottom: '-20%',
     right: '1%',
     transform: 'translateX(-50%)',
+    textTransform: 'lowercase',
+
+    '&:first-letter': {
+      textTransform: 'uppercase',
+    },
   },
   rightCaption: {
     position: 'absolute',
     bottom: '-20%',
     left: '8%',
     transform: 'translateX(-50%)',
+    textTransform: 'lowercase',
+
+    '&:first-letter': {
+      textTransform: 'uppercase',
+    },
   },
   chartWrapper:{
     position: 'absolute',

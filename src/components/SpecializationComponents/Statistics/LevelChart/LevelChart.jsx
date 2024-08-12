@@ -5,16 +5,16 @@ import { useUserSkillsAndMasteryData } from '../utils';
 import { styles } from './LevelChart.styles.js';
 
 const LevelChart = () => {
-  const { t, skills, isErrorSkills, isLoadingMainMastery, isLoadingSkills, isLoadingSpecializations } =
+  const { t, skills, isError, isLoading, activeMastery, nextMasteryLevel } =
     useUserSkillsAndMasteryData();
 
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
 
-  if (isLoadingSpecializations || isLoadingMainMastery || isLoadingSkills) {
+  if (isLoading) {
     return <CircularProgress />;
   }
 
-  if (isErrorSkills) {
+  if (isError) {
     return <Typography variant='h6'>Something error...</Typography>;
   }
 
@@ -58,10 +58,10 @@ const LevelChart = () => {
           </Box>
         </Box>
         <Typography variant='caption' sx={styles.rightCaption}>
-          {t('specialization.statistics.level_chart_left_caption')}
+          {activeMastery}
         </Typography>
         <Typography variant='caption' sx={styles.leftCaption}>
-          {t('specialization.statistics.level_chart_right_caption')}
+          {nextMasteryLevel}
         </Typography>
       </Box>
     </Box>

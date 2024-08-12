@@ -23,6 +23,10 @@ const useUserSkillsAndMasteryData = () => {
   const { data: masteries, isLoading: isLoadingMasteries, isError: isErrorMasteries } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
   const selectMastery = masteries?.find((mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase());
 
+  const selectMasteryIndex = masteries?.findIndex((mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase());
+
+  const nextMasteryLevel = masteries?.[selectMasteryIndex + 1]?.level || 'Guru';
+
   const masteryId = selectMastery?.id
 
   const {
@@ -39,6 +43,8 @@ const useUserSkillsAndMasteryData = () => {
     skills,
     isLoading,
     isError,
+    activeMastery,
+    nextMasteryLevel
   };
 };
 

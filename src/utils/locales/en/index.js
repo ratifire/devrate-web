@@ -290,8 +290,6 @@ export const en = {
       statistics: {
         title: 'Statistics',
         level_chart_title: 'Level',
-        level_chart_left_caption: 'Junior',
-        level_chart_right_caption: 'Middle',
         hard_skills_chart_title: 'Hard Skills by productivity',
         hard_skills_chart_text: 'This graph displays your skills scores from 0 to 10.',
         interview_chart_title: 'Interview',
