@@ -10,14 +10,13 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SliderComponent } from '../components/SliderComponent';
-
-const steps = [1, 2, 3];
+import { LAST_STEP, NUMBER_OF_STEPS } from '../constants';
 
 const InterviewerFeedback = () => {
   const [activeStep, setActiveStep] = useState(1);
   const { handleCloseModal, isOpenModal } = useCloseModal({ modalName: 'openFeedbackRespondent' })
   const { t } = useTranslation();
-  const buttonContent = activeStep === 3 ? t('modal.interview.btnSend') : t('modal.interview.btnNext');
+  const buttonContent = activeStep === LAST_STEP ? t('modal.interview.btnSend') : t('modal.interview.btnNext');
 
   const handleNextStep = () => setActiveStep((prev) => prev + 2);
   const handlePrevStep = () => setActiveStep((prev) => prev - 2);
@@ -39,13 +38,13 @@ const InterviewerFeedback = () => {
         {t('modal.interview.title')}
       </Typography>
       <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
-        {steps.map((label, index) => (
+        {NUMBER_OF_STEPS.map((label, index) => (
           <Step sx={styles.step} key={label}>
             <StepButton
               color='inherit'
               onClick={() => handleStep(label)}
               sx={styles.stepBtn}
-              disabled={index === steps.length} />
+              disabled={index === NUMBER_OF_STEPS.length} />
           </Step>
         ))}
       </Stepper>
@@ -60,7 +59,7 @@ const InterviewerFeedback = () => {
           <IconButton disabled={activeStep === 1} onClick={handlePrevStep}>
             <ArrowBackIcon />
           </IconButton>
-          <IconButton disabled={activeStep === steps.length} onClick={handleNextStep}>
+          <IconButton disabled={activeStep === NUMBER_OF_STEPS.length} onClick={handleNextStep}>
             <ArrowForwardIcon />
           </IconButton>
         </Box>
