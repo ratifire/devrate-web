@@ -3,7 +3,6 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     paddingRight: '16px',
-    gap: '16px',
     maxHeight: '376px',
     height: '100%',
     overflowY: 'auto',

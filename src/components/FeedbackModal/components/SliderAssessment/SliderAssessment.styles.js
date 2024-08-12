@@ -2,16 +2,21 @@ export const styles = {
   title: (theme) => ({
     color: theme.palette.text.primary,
     fontSize: '16px',
+    maxWidth: '330px',
+    width: '100%',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   }),
   subtitle: (theme) => ({
     color: theme.palette.text.primary,
     width: '44px',
-    backgroundColor: 'red',
-
+    textAlign: 'right',
   }),
   container: {
     display: 'flex',
     justifyContent: 'space-between',
+    paddingTop: '29px'
   },
   box: {
     maxWidth: '308px',
@@ -22,7 +27,7 @@ export const styles = {
   },
   slider: (theme) => ({
     color: theme.palette.sliderAssessment.violet, // Цвет ползунка
-    maxWidth: '220px',
+    maxWidth: '260px',
     '& .MuiSlider-thumb': {
       backgroundColor: theme.palette.sliderAssessment.thumb, // Цвет кружка
       height: 12,
@@ -54,5 +59,6 @@ export const styles = {
   }),
   divider: {
     borderColor: '#69696B',
+    paddingTop: '8px',
   }
 }

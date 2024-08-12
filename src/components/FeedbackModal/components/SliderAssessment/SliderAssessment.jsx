@@ -20,9 +20,9 @@ const SliderAssessment = ({ title }) => {
             valueLabelDisplay="on"
             sx={styles.slider}
           />
-          {/*<Typography sx={styles.subtitle} variant="body2">*/}
-          {/*  1/10*/}
-          {/*</Typography>*/}
+          <Typography sx={styles.subtitle} variant="body2">
+            1/10
+          </Typography>
         </Box>
       </Box>
       <Divider sx={styles.divider} />
