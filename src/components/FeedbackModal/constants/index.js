@@ -1,4 +1,4 @@
-import NUMBER_OF_STEPS from './numberOfSteps';
 import LAST_STEP from './lastStep';
+import NUMBER_OF_STEPS from './numberOfSteps';
 
-export { NUMBER_OF_STEPS, LAST_STEP };
+export { LAST_STEP, NUMBER_OF_STEPS };

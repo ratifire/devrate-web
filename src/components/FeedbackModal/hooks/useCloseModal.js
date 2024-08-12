@@ -8,8 +8,8 @@ const useCloseModal = ({ modalName }) => {
 
   return {
     handleCloseModal,
-    isOpenModal
-  }
-}
+    isOpenModal,
+  };
+};
 
-export default useCloseModal
+export default useCloseModal;

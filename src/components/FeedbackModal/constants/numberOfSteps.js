@@ -1,3 +1,3 @@
-const NUMBER_OF_STEPS = [1, 2, 3]
+const NUMBER_OF_STEPS = [1, 2, 3];
 
-export default NUMBER_OF_STEPS
+export default NUMBER_OF_STEPS;

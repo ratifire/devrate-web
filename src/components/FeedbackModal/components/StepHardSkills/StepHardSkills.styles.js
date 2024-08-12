@@ -5,6 +5,6 @@ export const styles = {
   title: (theme) => ({
     paddingBottom: '16px',
     fontSize: '20px',
-    color: theme.palette.text.primary
-  })
-}
+    color: theme.palette.text.primary,
+  }),
+};

@@ -1,7 +1,6 @@
 export const styles = {
   stepBorder: (theme) => ({
     paddingBottom: '28px',
-
     ' .MuiStepConnector-horizontal >span': {
       borderColor: theme.palette.background.level3,
       borderTopWidth: '8px',
@@ -80,6 +79,6 @@ export const styles = {
   title: (theme) => ({
     fontSize: '20px',
     color: theme.palette.text.primary,
-    paddingBottom: '49px'
-  })
-}
+    paddingBottom: '49px',
+  }),
+};

@@ -4,13 +4,13 @@ export const styles = {
     ':first-letter': {
       textTransform: 'uppercase',
     },
-    fontSize: '20px'
+    fontSize: '20px',
   }),
   title: {
-    paddingBottom: '53px'
+    paddingBottom: '53px',
   },
   btn: {
     marginTop: '28px',
-    width: '228px'
+    width: '228px',
   },
-}
+};

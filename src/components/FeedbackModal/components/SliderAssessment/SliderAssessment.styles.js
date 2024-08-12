@@ -16,7 +16,7 @@ export const styles = {
   container: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingTop: '29px'
+    paddingTop: '29px',
   },
   box: {
     maxWidth: '308px',
@@ -46,19 +46,20 @@ export const styles = {
       color: theme.palette.sliderAssessment.gray, // Цвет фона
       height: '8px',
     },
-    '& .MuiSlider-valueLabel': { // Метка
+    '& .MuiSlider-valueLabel': {
+      // Метка
       width: '22px',
       height: '21px',
       color: theme.palette.sliderAssessment.darkGray,
 
       '& > span': {
         color: theme.palette.sliderAssessment.lightGray,
-        fontSize: '14px'
+        fontSize: '14px',
       },
     },
   }),
   divider: {
     borderColor: '#69696B',
     paddingTop: '8px',
-  }
-}
+  },
+};

@@ -1,5 +1,5 @@
 import { SliderAssessment } from './SliderAssessment';
+import { StepHardSkills } from './StepHardSkills';
 import { StepSoftSkills } from './StepSoftSkills';
-import { StepHardSkills } from './StepHardSkills'
 
-export { SliderAssessment, StepSoftSkills, StepHardSkills }
+export { SliderAssessment, StepHardSkills, StepSoftSkills };

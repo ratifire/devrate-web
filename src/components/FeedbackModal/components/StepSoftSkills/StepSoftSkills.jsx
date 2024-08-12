@@ -1,15 +1,13 @@
-/* eslint-disable */
-
-import { styles } from './StepSoftSkills.styles';
-import { TextAreaInput } from '../../../Inputs';
 import { Typography } from '@mui/material';
-import { SliderAssessment } from '../SliderAssessment';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { TextAreaInput } from '../../../Inputs';
+import { SliderAssessment } from '../SliderAssessment';
 import { SliderAssessmentBox } from '../SliderAssessmentBox';
+import { styles } from './StepSoftSkills.styles';
 
 const StepSoftSkills = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <>
@@ -22,20 +20,16 @@ const StepSoftSkills = () => {
         variant='outlined'
         rows={3}
       />
-      <Typography sx={styles.title} variant="h6">Soft Skills</Typography>
+      <Typography sx={styles.title} variant='h6'>
+        Soft Skills
+      </Typography>
       <SliderAssessmentBox>
-        <SliderAssessment
-          title={'Комунікативність'}
-        />
-        <SliderAssessment
-          title={'Креативність'}
-        />
-        <SliderAssessment
-          title={'Критичне мислення'}
-        />
+        <SliderAssessment title={'Комунікативність'} />
+        <SliderAssessment title={'Креативність'} />
+        <SliderAssessment title={'Критичне мислення'} />
       </SliderAssessmentBox>
     </>
-  )
-}
+  );
+};
 
 export default StepSoftSkills;
