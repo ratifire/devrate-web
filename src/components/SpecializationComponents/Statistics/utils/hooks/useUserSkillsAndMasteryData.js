@@ -44,7 +44,7 @@ const useUserSkillsAndMasteryData = () => {
     isLoading,
     isError,
     activeMastery,
-    nextMasteryLevel
+    nextMasteryLevel,
   };
 };
 
