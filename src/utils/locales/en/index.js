@@ -27,11 +27,12 @@ export const en = {
       },
     },
     modal: {
-      feedbackRespondent: {
+      interview: {
         title: 'Leave a feedback',
         label: 'Review',
         placeholder: 'Please leave your feedback',
-        btn: 'Send'
+        btnSend: 'Send',
+        btnNext: 'Next',
       },
       achievement: {
         title: 'Achievement',

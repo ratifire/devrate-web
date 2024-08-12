@@ -28,11 +28,12 @@ export const uk = {
       },
     },
     modal: {
-      feedbackRespondent: {
+      interview: {
         title: 'Залишити відгук',
         label :'Відгук',
         placeholder: 'Будь ласка, залиште свій відгук',
-        btn: 'Надіслати'
+        btnSend: 'Надіслати',
+        btnNext: 'Далі',
       },
       achievement: {
         title: 'Досягнення',

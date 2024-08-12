@@ -2,54 +2,59 @@
 
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { useCloseModal } from '../hooks';
-import { Box, IconButton, Step, StepButton, StepConnector, Stepper, Typography } from '@mui/material';
+import { Box, IconButton, Step, StepButton, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import { styles } from './InterviewerFeedback.styles';
 import { ButtonDef } from '../../Buttons';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import React from 'react';
-import { StepHardSkills, StepSoftSkills } from '../components';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SliderComponent } from '../components/SliderComponent';
 
 const steps = [1, 2, 3];
 
 const InterviewerFeedback = () => {
+  const [activeStep, setActiveStep] = useState(1);
   const { handleCloseModal, isOpenModal } = useCloseModal({ modalName: 'openFeedbackRespondent' })
   const { t } = useTranslation();
-  const activeStep = 1;
+  const buttonContent = activeStep === 2 ? t('modal.interview.btnSend') : t('modal.interview.btnNext');
 
-  const handleStep = (index) => {
-    if (index === 1) {
-      return <StepSoftSkills/>;
-    }
+  const handleNextStep = () => setActiveStep((prev) => prev + 2);
+  const handlePrevStep = () => setActiveStep((prev) => prev - 2);
+  const handleStep = (step) => setActiveStep(step);
 
-    if (index === 2) {
-      return <StepHardSkills/>;
-    }
+  const handleSubmit = () => {
+    console.log('Submit modal');
   }
 
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
-      <Typography variant='subtitle1'>
-        Залишити відгук
+      <Typography sx={styles.title} variant='subtitle1'>
+        {t('modal.interview.title')}
       </Typography>
-      <Stepper activeStep={activeStep} connector={<StepConnector />}>
+      <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
         {steps.map((label, index) => (
-          <Step key={label}>
-            <StepButton color='inherit' onClick={handleStep(index)} disabled={false} />
+          <Step sx={styles.step} key={label}>
+            <StepButton
+              color='inherit'
+              onClick={() => handleStep(label)}
+              sx={styles.stepBtn}
+              disabled={index === steps.length} />
           </Step>
         ))}
       </Stepper>
-      <Box>{handleStep(activeStep)}</Box>
-      <Box>
+      <SliderComponent slide={activeStep}/>
+      <Box sx={styles.sendBox}>
         <ButtonDef
-          label={'Далі'}
+          label={buttonContent}
+          correctStyle={styles.btnSend}
+          handlerClick={activeStep === 1 ? handleNextStep : handleSubmit}
         />
         <Box>
-          <IconButton>
+          <IconButton disabled={activeStep === 1} onClick={handlePrevStep}>
             <ArrowBackIcon />
           </IconButton>
-          <IconButton>
+          <IconButton disabled={activeStep === steps.length} onClick={handleNextStep}>
             <ArrowForwardIcon />
           </IconButton>
         </Box>

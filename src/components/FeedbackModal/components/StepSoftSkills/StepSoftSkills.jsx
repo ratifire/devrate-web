@@ -5,29 +5,35 @@ import { TextAreaInput } from '../../../Inputs';
 import { Typography } from '@mui/material';
 import { SliderAssessment } from '../SliderAssessment';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { SliderAssessmentBox } from '../SliderAssessmentBox';
 
 const StepSoftSkills = () => {
+  const { t } = useTranslation()
+
   return (
     <>
       <TextAreaInput
         name='description'
-        placeholder={'Будь ласка, залиште свій відгук'}
+        placeholder={t('modal.interview.placeholder')}
         type='text'
-        label={'Відгук*'}
+        label={t('modal.interview.label')}
         required
         variant='outlined'
         rows={3}
       />
-      <Typography variant="h6">Soft Skills</Typography>
-      <SliderAssessment
-        title={'Комунікативність'}
-      />
-      <SliderAssessment
-        title={'Креативність'}
-      />
-      <SliderAssessment
-        title={'Критичне мислення'}
-      />
+      <Typography sx={styles.title} variant="h6">Soft Skills</Typography>
+      <SliderAssessmentBox>
+        <SliderAssessment
+          title={'Комунікативність'}
+        />
+        <SliderAssessment
+          title={'Креативність'}
+        />
+        <SliderAssessment
+          title={'Критичне мислення'}
+        />
+      </SliderAssessmentBox>
     </>
   )
 }
