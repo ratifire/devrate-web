@@ -88,6 +88,7 @@ export const en = {
         password: 'Password',
         password_repeat: 'Repeat password',
         password_tooltip: 'Passwords must contain 7 + characters, at least 1 number, at least 1 letter and no spaces.',
+        password_invalid: 'Incorrect password',
         news_letter: 'Send me news, surveys and special offers from DEVRATE',
         agreement: 'I have read and agree to the terms of use',
         agreement_error: 'To use our service, you must agree to the terms of use',

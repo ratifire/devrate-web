@@ -17,8 +17,9 @@ export const RegistrationSchema = Yup.object().shape({
     .matches(/^(?!.*\s{2,})[a-zA-Z]+(?:\s[a-zA-Z]+)?$/, 'modal.registration.last_name_invalid_characters')
     .required('modal.registration.required'),
   password: Yup.string()
-    .min(6, 'modal.registration.password_short')
+    .min(7, 'modal.registration.password_short') 
     .max(50, 'modal.registration.password_long')
+    .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/, 'modal.registration.password_invalid') 
     .required('modal.registration.required'),
   repeatPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'modal.registration.password_must_match')
