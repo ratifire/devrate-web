@@ -1,15 +1,14 @@
-import React from 'react';
-import { Box, Typography, IconButton, CircularProgress } from '@mui/material';
-import { styles } from './HardSkills.styles';
-import EditIcon from '@mui/icons-material/Edit';
-import SkillItem from './SkillItem';
-import { useDispatch } from 'react-redux';
-import { openModal } from '../../../redux/modal/modalSlice';
-import { useUserSkillsAndMasteryData } from '../Statistics/utils';
+import EditIcon from '@mui/icons-material/Edit'
+import { Box, CircularProgress, IconButton, Typography } from '@mui/material'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { openModal } from '../../../redux/modal/modalSlice'
+import { useUserSkillsAndMasteryData } from '../Statistics/utils'
+import { styles } from './HardSkills.styles'
+import SkillItem from './SkillItem'
 
 const HardSkills = () => {
-  const { t, skills, isError, isLoading, activeMastery } =
-    useUserSkillsAndMasteryData();
+  const { t, skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();
   const dispatch = useDispatch();
 
   const handleModalOpen = () => {

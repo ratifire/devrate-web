@@ -42,11 +42,11 @@ export const styles = {
       textTransform: 'uppercase',
     },
   },
-  chartWrapper:{
+  chartWrapper: {
     position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
     height: '180px',
-  }
+  },
 };

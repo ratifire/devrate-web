@@ -5,8 +5,7 @@ import { useUserSkillsAndMasteryData } from '../utils';
 import { styles } from './LevelChart.styles.js';
 
 const LevelChart = () => {
-  const { t, skills, isError, isLoading, activeMastery, nextMasteryLevel } =
-    useUserSkillsAndMasteryData();
+  const { t, skills, isError, isLoading, activeMastery, nextMasteryLevel } = useUserSkillsAndMasteryData();
 
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
 

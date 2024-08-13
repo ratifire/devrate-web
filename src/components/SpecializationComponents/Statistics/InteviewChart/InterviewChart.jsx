@@ -1,17 +1,17 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material'
-import React, { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { useGetInterviewSummariesStatisticQuery } from '../../../../redux/chart/chartApiSlice'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
+import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { useGetInterviewSummariesStatisticQuery } from '../../../../redux/chart/chartApiSlice';
 import {
   createTenDaysInterviewData,
   createTenMonthsInterviewData,
   getCurrentAndLastMonths,
   useHandleChange,
-} from '../utils'
-import { styles } from './InterviewChart.style'
+} from '../utils';
+import { styles } from './InterviewChart.style';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
