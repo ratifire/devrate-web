@@ -113,7 +113,7 @@ export const en = {
         main_text1: 'To finish your account settings, You should confirm your email',
         main_text2: 'Check you email and enter confirmation code',
         btn_confirm: 'Register',
-        spam_check_text: "Didn't receive the letter? Check your spam folder.",
+        spam_check_text: 'Didn\'t receive the letter? Check your spam folder.',
         repeat_request_link: 'Please resend',
         repeat_request_text1: 'request',
         repeat_request_text2: 'or',
@@ -123,7 +123,8 @@ export const en = {
       },
       notificationModal: {
         title: 'Email sent!',
-        message: 'An email with instructions on how to change your password has been sent to your email address. If you do not receive it within a few minutes, please check that you used the email address for your Devrate account and try again, or contact us for assistance.',
+        message:
+          'An email with instructions on how to change your password has been sent to your email address. If you do not receive it within a few minutes, please check that you used the email address for your Devrate account and try again, or contact us for assistance.',
         btn_enter: 'CONTINUE',
       },
       resetPassword: {
@@ -206,7 +207,8 @@ export const en = {
             last_name_short: 'Surname too short',
             city: 'City',
             city_short: 'Name of the city is too short',
-            city_long:'Name of the city is too long',
+            city_long: 'Name of the city is too long',
+            city_invalid: 'Name of the city is invalid',
             country: 'Country',
             status: 'Status',
             status_too_long: 'Status too long',
@@ -285,7 +287,7 @@ export const en = {
         '09': 'Sep',
         '10': 'Oct',
         '11': 'Nov',
-        '12': 'Dec'
+        '12': 'Dec',
       },
       statistics: {
         title: 'Statistics',
