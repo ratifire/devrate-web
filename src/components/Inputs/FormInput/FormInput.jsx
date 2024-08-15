@@ -21,6 +21,8 @@ const FormInput = ({
   clickHandler,
   mouseDownHandler,
   iconStyle,
+  autoComplete,
+  extraProps,
 }) => {
   const id = useMemo(() => uuid(), []);
   const { t } = useTranslation();
@@ -41,7 +43,7 @@ const FormInput = ({
       </InputLabel>
       <OutlinedInput
         sx={styles.input}
-        autoComplete='off'
+        autoComplete={autoComplete}
         id={id}
         name={name}
         value={value}
@@ -64,6 +66,7 @@ const FormInput = ({
             />
           )
         }
+        {...extraProps}
       />
       {error && (
         <FormHelperText id={id} sx={styles.textHelper}>
@@ -89,6 +92,8 @@ FormInput.propTypes = {
   clickHandler: PropTypes.func,
   mouseDownHandler: PropTypes.func,
   iconStyle: PropTypes.object,
+  autoComplete: PropTypes.string,
+  extraProps: PropTypes.object,
 };
 
 FormInput.defaultProps = {
@@ -106,6 +111,8 @@ FormInput.defaultProps = {
   clickHandler: () => {},
   mouseDownHandler: () => {},
   iconStyle: {},
+  autoComplete: 'off',
+  extraProps: {},
 };
 
 export default FormInput;

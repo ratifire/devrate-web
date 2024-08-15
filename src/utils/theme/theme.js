@@ -108,13 +108,13 @@ const getDesignTokens = (mode) => ({
           text: {
             primary: '#ffffff',
             secondary: '#C5C5C6',
-            disabled: '#C5C5C6', //визначити колір
+            disabled: '#F1F1F1', //визначити колір
           },
           action: {
             active: '#B78AF7',
             hover: '#CEB0FA',
             selected: '#CEB0FA',
-            disabled: '#C5C5C6', //визначити колір
+            disabled: '#F1F1F1', //визначити колір
             focus: '#CEB0FA',
           },
 

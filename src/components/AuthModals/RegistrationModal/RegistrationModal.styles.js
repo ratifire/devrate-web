@@ -37,6 +37,9 @@ const styles = {
     lineHeight: '18px',
     color: theme.palette.text.primary,
   }),
+  iconStyle:(theme)=>({
+    color: theme.palette.action.disabled
+  })
 };
 
 export default styles;

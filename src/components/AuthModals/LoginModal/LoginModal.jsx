@@ -13,7 +13,7 @@ import { ButtonDef } from '../../Buttons';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../redux/auth/authSlice';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
 
 const initialValues = {
   email: '',
@@ -79,8 +79,8 @@ const LoginModal = () => {
   const handleMouseDownPassword = useCallback((event) => event.preventDefault(), []);
 
   const handleFormSubmit = useCallback((e) => {
-    e.preventDefault(); 
-    formik.handleSubmit(); 
+    e.preventDefault();
+    formik.handleSubmit();
   }, [formik]);
 
   console.log('Render LoginModal', { isSubmitting: formik.isSubmitting, isValid: formik.isValid });
@@ -129,6 +129,7 @@ const LoginModal = () => {
             correctStyle={styles.turnBackLink}
             handlerClick={handleOpen}
             type='button'
+            disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
             label='modal.login.forgot_your_password'
           />
         </Box>
@@ -149,14 +150,14 @@ const LoginModal = () => {
           <Typography href='#' variant='caption1' sx={styles.turnBackText}>
             {t('modal.login.return_on')}
           </Typography>
-          <Link 
+          <Link
   onClick={(e) => {
     e.preventDefault();
     handleClose();
     navigate('/');
-  }} 
+  }}
   component="button"
-  variant='caption1' 
+  variant='caption1'
   sx={styles.turnBackLink}
 >
   {t('modal.login.home_page')}
