@@ -130,6 +130,7 @@ const RegistrationModal = () => {
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
           autoComplete="new-password"
+          iconStyle={styles.iconStyle}
         />
         <FormInput
           showPassword={showPassword}
@@ -144,6 +145,7 @@ const RegistrationModal = () => {
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
           autoComplete="new-password"
+          iconStyle={styles.iconStyle}
         />
         <FormCheckbox
           checked={formik.values.news}
