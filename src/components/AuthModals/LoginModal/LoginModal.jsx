@@ -7,7 +7,7 @@ import { Box, Link, Typography } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ModalLayout from '../../../layouts/ModalLayout';
 import styles from './LoginModal.styles';
-import { LoginSchema } from './LoginSchema';
+import { LoginSchema } from '../../../utils/valadationSchemas/index';
 import { FormInput } from '../../Inputs';
 import { ButtonDef } from '../../Buttons';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';

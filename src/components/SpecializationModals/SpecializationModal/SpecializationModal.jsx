@@ -3,7 +3,7 @@ import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { SpecializationModalSchema } from './SpecializationModalSchema';
+import { SpecializationModalSchema } from '../../../utils/valadationSchemas/index';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './SpecializationModal.styles';
 import { ButtonDef } from '../../Buttons';

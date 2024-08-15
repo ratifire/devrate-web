@@ -6,7 +6,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './WorkExperienceModal.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { WorkExperienceModalSchema } from './WorkExperienceModalSchema';
+import { WorkExperienceModalSchema } from '../../../utils/valadationSchemas/index';
 import AddIcon from '@mui/icons-material/Add';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';

@@ -8,7 +8,7 @@ import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useConfirmEmailMutation } from '../../../redux/auth/authApiSlice';
 import { useFormik } from 'formik';
 import ConfirmationForm from './ConfirmationForm';
-import { ConfirmationSchema } from './ConfirmationSchema';
+import { ConfirmationSchema } from '../../../utils/valadationSchemas/index';
 import styles from './ConfirmationModal.styles';
 import StyledRouterLink from './StyledRouterLink';
 

@@ -3,7 +3,7 @@ import { styles } from './StepAvatar.styles';
 import { Box } from '@mui/material';
 import LoadImages from '../../../UI/LoadImages';
 import { useFormik } from 'formik';
-import { StepAvatarSchema } from './StepAvatarSchema';
+import { StepAvatarSchema } from '../../../../utils/valadationSchemas/index';
 import { useDeleteAvatarUserMutation, usePostAvatarUserMutation } from '../../../../redux/user/avatar/avatarApiSlice';
 import { useSelector } from 'react-redux';
 

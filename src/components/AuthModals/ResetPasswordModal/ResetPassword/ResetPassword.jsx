@@ -10,7 +10,7 @@ import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../Buttons';
 import { FormInput } from '../../../Inputs';
 import styles from './ResetPassword.styles';
-import resetPasswordSchema from './ResetPasswordSchema';
+import { resetPasswordSchema } from '../../../../utils/valadationSchemas/index';
 
 const initialValues = {
   newPassword: '',
