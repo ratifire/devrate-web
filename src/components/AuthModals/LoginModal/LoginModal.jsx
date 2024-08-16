@@ -108,6 +108,7 @@ const LoginModal = () => {
           label='modal.registration.email'
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
+          autoComplete="email"
         />
         <FormInput
           showPassword={showPassword}
@@ -122,6 +123,7 @@ const LoginModal = () => {
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
           iconStyle={styles.iconStyle}
+          autoComplete="new-password"
         />
         <Box sx={styles.textLink}>
           <ButtonDef
@@ -137,7 +139,7 @@ const LoginModal = () => {
           <ButtonDef
             variant='contained'
             type='submit'
-            disabled={formik.isSubmitting || !formik.isValid}
+            disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
             label='modal.login.btn_login'
           />
         </Box>

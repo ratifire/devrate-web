@@ -69,7 +69,7 @@ const CheckEmail = () => {
             variant='contained'
             type='submit'
             handlerClick={formik.handleSubmit}
-            disabled={formik.touched.email && Boolean(formik.errors.email)}
+            disabled={!formik.values.email || (formik.touched.email && Boolean(formik.errors.email))}
             label='modal.checkEmailResetPassword.btn_send_letter'
           />
         </Box>
