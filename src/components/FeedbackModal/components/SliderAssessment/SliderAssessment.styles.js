@@ -84,6 +84,7 @@ export const styles = {
     backgroundColor: theme.palette.sliderAssessment.darkGray
   }),
   rightActive: (theme) => ({
-    backgroundColor: theme.palette.sliderAssessment.violet
+    backgroundColor: theme.palette.sliderAssessment.violet,
+    height: '9.6px',
   })
 };
