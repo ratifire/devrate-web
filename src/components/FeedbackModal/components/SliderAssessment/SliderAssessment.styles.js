@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export const styles = {
   title: (theme) => ({
     color: theme.palette.text.primary,
@@ -19,15 +21,16 @@ export const styles = {
     paddingTop: '29px',
   },
   box: {
-    maxWidth: '308px',
+    maxWidth: '239px',
     width: '100%',
     display: 'flex',
-    gap: '4px',
+    gap: '15px',
     alignItems: 'center',
+    position: 'relative',
   },
   slider: (theme) => ({
     color: theme.palette.sliderAssessment.violet, // Цвет ползунка
-    maxWidth: '260px',
+    maxWidth: '180px',
     '& .MuiSlider-thumb': {
       backgroundColor: theme.palette.sliderAssessment.thumb, // Цвет кружка
       height: 12,
@@ -62,4 +65,25 @@ export const styles = {
     borderColor: '#69696B',
     paddingTop: '8px',
   },
+  left: (theme) => ({
+    position: 'absolute',
+    width: '25px',
+    height: '9.6px',
+    left: '-20px',
+    borderTopLeftRadius: '12px',
+    borderBottomLeftRadius: '12px',
+    backgroundColor: theme.palette.sliderAssessment.violet
+  }),
+  right: (theme) => ({
+    position: 'absolute',
+    width: '20px',
+    height: '8px',
+    right: '41px',
+    borderTopRightRadius: '12px',
+    borderBottomRightRadius: '12px',
+    backgroundColor: theme.palette.sliderAssessment.darkGray
+  }),
+  rightActive: (theme) => ({
+    backgroundColor: theme.palette.sliderAssessment.violet
+  })
 };
