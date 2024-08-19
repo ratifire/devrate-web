@@ -17,35 +17,39 @@ const RespondentFeedback = () => {
 
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
-      <Typography variant='subtitle1' sx={styles.title}>
-        {t('modal.interview.title')}
-      </Typography>
-      <InterviewerInfo
-        name={'Олена Бондаренко'}
-        position={'Senior Full stack Developer'}
-        data={'03/06/2024'}
-        time={'15:30'}
-      />
-      <Box>
-        <TextAreaInput
-          name='description'
-          placeholder={t('modal.interview.placeholder')}
-          type='text'
-          label={t('modal.interview.label')}
-          required
-          variant='outlined'
-          rows={3}
-        />
-        <Typography sx={styles.subtitle} variant='h6'>
-          Soft Skills
+      <Box sx={styles.container}>
+        <Typography variant='subtitle1' sx={styles.title}>
+          {t('modal.interview.title')}
         </Typography>
-        <SliderAssessmentBox>
-          <SliderAssessment title={'Комунікативність'} />
-          <SliderAssessment title={'Креативність'} />
-          <SliderAssessment title={'Критичне мислення'} />
-        </SliderAssessmentBox>
+        <InterviewerInfo
+          name={'Олена Бондаренко'}
+          position={'Senior Full stack Developer'}
+          data={'03/06/2024'}
+          time={'15:30'}
+        />
+        <Box>
+          <TextAreaInput
+            name='description'
+            placeholder={t('modal.interview.placeholder')}
+            type='text'
+            label={t('modal.interview.label')}
+            required
+            variant='outlined'
+            rows={3}
+          />
+          <Box>
+            <Typography sx={styles.subtitle} variant='h6'>
+              Soft Skills
+            </Typography>
+            <SliderAssessmentBox>
+              <SliderAssessment title={'Комунікативність'} />
+              <SliderAssessment title={'Креативність'} />
+              <SliderAssessment title={'Критичне мислення'} />
+            </SliderAssessmentBox>
+          </Box>
+          </Box>
+        <ButtonDef label={t('modal.interview.btnSend')} correctStyle={styles.btn} />
       </Box>
-      <ButtonDef label={t('modal.interview.btnSend')} correctStyle={styles.btn} />
     </ModalLayoutProfile>
   );
 };
