@@ -6,7 +6,7 @@ import { styles } from './StepHardSkills.styles';
 
 const StepHardSkills = () => {
   return (
-    <Box sx={styles.box}>
+    <Box>
       <Typography sx={styles.title} variant='h6'>
         Hard Skills
       </Typography>
