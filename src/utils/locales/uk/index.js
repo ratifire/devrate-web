@@ -34,6 +34,7 @@ export const uk = {
         placeholder: 'Будь ласка, залиште свій відгук',
         btnSend: 'Надіслати',
         btnNext: 'Далі',
+        interviewer: 'Інтерв’юер'
       },
       achievement: {
         title: 'Досягнення',

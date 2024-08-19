@@ -1,14 +1,15 @@
 export const styles = {
-  titleColor: (theme) => ({
+  title: (theme) => ({
     color: theme.palette.text.primary,
-    ':first-letter': {
-      textTransform: 'uppercase',
-    },
     fontSize: '20px',
+    paddingBottom: '25px',
+    fontWeight: 500,
   }),
-  title: {
-    paddingBottom: '53px',
-  },
+  subtitle: (theme) => ({
+    color: theme.palette.text.primary,
+    fontSize: '20px',
+    fontWeight: 500,
+  }),
   btn: {
     marginTop: '28px',
     width: '228px',

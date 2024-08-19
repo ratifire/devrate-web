@@ -16,7 +16,7 @@ export const styles = {
   container: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingTop: '29px',
+    paddingTop: '24px',
   },
   box: {
     maxWidth: '239px',
@@ -30,6 +30,7 @@ export const styles = {
     color: theme.palette.sliderAssessment.violet, // Цвет ползунка
     maxWidth: '180px',
     borderRadius: '0px',
+
     '& .MuiSlider-thumb': {
       backgroundColor: theme.palette.sliderAssessment.thumb, // Цвет кружка
       height: 12,
@@ -51,16 +52,21 @@ export const styles = {
       height: '8px',
       opacity: 1,
     },
+
     '& .MuiSlider-valueLabel': {
       // Метка
       width: '22px',
       height: '21px',
-      color: theme.palette.sliderAssessment.darkGray,
+      borderRadius: '0',
+      backgroundColor: theme.palette.sliderAssessment.darkGray,
 
       '& > span': {
         color: theme.palette.sliderAssessment.lightGray,
         fontSize: '14px',
       },
+    },
+    '& .MuiSlider-valueLabel.MuiSlider-valueLabelOpen': {
+      transform: 'translateY(-80%) scale(1)',
     },
   }),
   divider: {

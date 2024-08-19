@@ -33,6 +33,7 @@ export const en = {
         placeholder: 'Please leave your feedback',
         btnSend: 'Send',
         btnNext: 'Next',
+        interviewer: 'Interviewer',
       },
       achievement: {
         title: 'Achievement',

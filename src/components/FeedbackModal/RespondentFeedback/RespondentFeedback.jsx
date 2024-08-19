@@ -9,6 +9,7 @@ import { SliderAssessment } from '../components';
 import { SliderAssessmentBox } from '../components/SliderAssessmentBox';
 import { useCloseModal } from '../hooks';
 import { styles } from './RespondentFeedback.styles';
+import InterviewerInfo from '../components/InterviewerInfo/InterviewerInfo';
 
 const RespondentFeedback = () => {
   const { t } = useTranslation();
@@ -16,9 +17,15 @@ const RespondentFeedback = () => {
 
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
-      <Typography variant='subtitle1' sx={[styles.titleColor, styles.title]}>
+      <Typography variant='subtitle1' sx={styles.title}>
         {t('modal.interview.title')}
       </Typography>
+      <InterviewerInfo
+        name={'Олена Бондаренко'}
+        position={'Senior Full stack Developer'}
+        data={'03/06/2024'}
+        time={'15:30'}
+      />
       <Box>
         <TextAreaInput
           name='description'
@@ -29,7 +36,7 @@ const RespondentFeedback = () => {
           variant='outlined'
           rows={3}
         />
-        <Typography sx={styles.titleColor} variant='h6'>
+        <Typography sx={styles.subtitle} variant='h6'>
           Soft Skills
         </Typography>
         <SliderAssessmentBox>
