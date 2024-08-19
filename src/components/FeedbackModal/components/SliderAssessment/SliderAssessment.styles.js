@@ -13,10 +13,14 @@ export const styles = {
     width: '44px',
     textAlign: 'right',
   }),
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   container: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingTop: '24px',
+    // paddingTop: '24px',
   },
   box: {
     maxWidth: '239px',
@@ -71,7 +75,7 @@ export const styles = {
   }),
   divider: {
     borderColor: '#69696B',
-    paddingTop: '8px',
+    // paddingTop: '8px',
   },
   left: (theme) => ({
     position: 'absolute',

@@ -2,9 +2,11 @@ export const styles = {
   box: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    paddingRight: '16px',
-    maxHeight: '376px',
-    height: '100%',
+    paddingRight: '18px',
+    paddingTop: '22px',
+    paddingBottom: '6px',
+    maxHeight: '300px',
+    gap: '30px',
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
       width: '6px',

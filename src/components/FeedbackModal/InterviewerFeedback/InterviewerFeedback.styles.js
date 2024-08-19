@@ -1,6 +1,10 @@
 export const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '24px'
+  },
   stepBorder: (theme) => ({
-    paddingBottom: '28px',
     ' .MuiStepConnector-horizontal >span': {
       borderColor: theme.palette.background.level3,
       borderTopWidth: '8px',
@@ -69,16 +73,16 @@ export const styles = {
   }),
   sendBox: {
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: '28px',
+    gap: '16px',
+    alignSelf: 'end',
+    maxWidth: '472px',
+    width: '100%',
   },
-  btnSend: {
-    maxWidth: '196px',
+  btn: {
+    maxWidth: '228px',
   },
   title: (theme) => ({
     fontSize: '20px',
     color: theme.palette.text.primary,
-    paddingBottom: '49px',
   }),
 };

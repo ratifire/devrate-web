@@ -2,7 +2,6 @@ export const styles = {
   container: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingBottom: '28px',
   },
   title: (theme) => ({
     color: theme.palette.text.primary,

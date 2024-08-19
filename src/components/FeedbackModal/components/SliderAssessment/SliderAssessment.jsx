@@ -9,7 +9,7 @@ const SliderAssessment = ({ title }) => {
   const handleSliderChange = (e) => setSliderValue(e.target.value);
 
   return (
-    <>
+    <Box sx={styles.wrapper}>
       <Box sx={styles.container}>
         <Typography sx={styles.title}>{title}</Typography>
         <Box sx={styles.box}>
@@ -31,7 +31,7 @@ const SliderAssessment = ({ title }) => {
         </Box>
       </Box>
       <Divider sx={styles.divider} />
-    </>
+    </Box>
   );
 };
 
