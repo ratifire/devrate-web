@@ -1,7 +1,7 @@
-import { Box, Divider, Slider, Typography } from '@mui/material'
-import PropTypes from 'prop-types'
+import { Box, Divider, Slider, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { styles } from './SliderAssessment.styles'
+import { styles } from './SliderAssessment.styles';
 
 const SliderAssessment = ({ title }) => {
   const [sliderValue, setSliderValue] = useState(1);

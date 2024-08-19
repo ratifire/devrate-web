@@ -6,10 +6,10 @@ import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { ButtonDef } from '../../Buttons';
 import { TextAreaInput } from '../../Inputs';
 import { SliderAssessment } from '../components';
+import InterviewerInfo from '../components/InterviewerInfo/InterviewerInfo';
 import { SliderAssessmentBox } from '../components/SliderAssessmentBox';
 import { useCloseModal } from '../hooks';
 import { styles } from './RespondentFeedback.styles';
-import InterviewerInfo from '../components/InterviewerInfo/InterviewerInfo';
 
 const RespondentFeedback = () => {
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ const RespondentFeedback = () => {
               <SliderAssessment title={'Критичне мислення'} />
             </SliderAssessmentBox>
           </Box>
-          </Box>
+        </Box>
         <ButtonDef label={t('modal.interview.btnSend')} correctStyle={styles.btn} />
       </Box>
     </ModalLayoutProfile>

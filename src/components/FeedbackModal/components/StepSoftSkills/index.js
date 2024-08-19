@@ -1,3 +1,4 @@
-import StepSoftSkills from './StepSoftSkills';
+import StepSoftSkills from './StepSoftSkills'
 
-export { StepSoftSkills };
+export { StepSoftSkills }
+

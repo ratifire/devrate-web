@@ -22,6 +22,6 @@ export const styles = {
   box: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '4px'
-  }
-}
+    gap: '4px',
+  },
+};

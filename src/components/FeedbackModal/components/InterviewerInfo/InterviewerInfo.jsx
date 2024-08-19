@@ -1,18 +1,20 @@
-import { Box, Typography } from '@mui/material';
-import { styles } from './InterviewerInfo.styles';
-import { useTranslation } from 'react-i18next';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import PropTypes from 'prop-types';
-import React from 'react';
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import { Box, Typography } from '@mui/material'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { styles } from './InterviewerInfo.styles'
 
 const InterviewerInfo = ({ name, position, data, time }) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Box sx={styles.container}>
       <Box sx={styles.box}>
-        <Typography sx={styles.title} >{t('modal.interview.interviewer')}: {name}</Typography>
+        <Typography sx={styles.title}>
+          {t('modal.interview.interviewer')}: {name}
+        </Typography>
         <Typography sx={styles.title}>{position}</Typography>
       </Box>
       <Box sx={styles.box}>
@@ -26,14 +28,14 @@ const InterviewerInfo = ({ name, position, data, time }) => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 InterviewerInfo.propTypes = {
   name: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
   data: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
-}
+};
 
-export default InterviewerInfo
+export default InterviewerInfo;

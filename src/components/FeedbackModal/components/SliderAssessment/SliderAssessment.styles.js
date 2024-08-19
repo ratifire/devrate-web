@@ -84,7 +84,7 @@ export const styles = {
     left: '-21px',
     borderTopLeftRadius: '12px',
     borderBottomLeftRadius: '12px',
-    backgroundColor: theme.palette.sliderAssessment.violet
+    backgroundColor: theme.palette.sliderAssessment.violet,
   }),
   right: (theme) => ({
     position: 'absolute',
@@ -98,5 +98,5 @@ export const styles = {
   rightActive: (theme) => ({
     backgroundColor: theme.palette.sliderAssessment.violet,
     height: '9.6px',
-  })
+  }),
 };
