@@ -16,14 +16,14 @@ const InterviewerInfo = ({ name, position, data, time }) => {
         <Typography sx={styles.title}>{position}</Typography>
       </Box>
       <Box sx={styles.box}>
-        <Typography sx={styles.data}>
+        <Box sx={styles.data}>
           <CalendarTodayIcon sx={styles.icon} />
-          {data}
-        </Typography>
-        <Typography sx={styles.data}>
+          <Typography>{data}</Typography>
+        </Box>
+        <Box sx={styles.data}>
           <AccessTimeIcon sx={styles.icon} />
-          {time}
-        </Typography>
+          <Typography>{time}</Typography>
+        </Box>
       </Box>
     </Box>
   )

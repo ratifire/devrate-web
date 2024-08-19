@@ -13,7 +13,6 @@ export const styles = {
     fontWeight: 500,
     color: theme.palette.text.primary,
     display: 'flex',
-    justifyContent: 'space-between',
     gap: '4px',
     alignItems: 'center',
   }),
