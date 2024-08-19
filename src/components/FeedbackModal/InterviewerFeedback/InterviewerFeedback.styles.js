@@ -61,7 +61,7 @@ export const styles = {
       width: '24px',
       height: '24px',
       position: 'relative',
-      cursor: 'pointer',
+      cursor: 'default',
       color: theme.palette.background.level3,
       '&.Mui-active': {
         color: theme.palette.primary['400'],

@@ -18,13 +18,6 @@ const InterviewerFeedback = () => {
 
   const handleNextStep = () => setActiveStep((prev) => prev + 2);
   const handlePrevStep = () => setActiveStep((prev) => prev - 2);
-  const handleStep = (step) => {
-    if (step === 2 || step === 3) {
-      return setActiveStep(3);
-    }
-
-    setActiveStep(1);
-  };
 
   const handleSubmit = () => {
     console.log('Submit modal');
@@ -41,7 +34,6 @@ const InterviewerFeedback = () => {
             <Step sx={styles.step} key={label}>
               <StepButton
                 color='inherit'
-                onClick={() => handleStep(label)}
                 sx={styles.stepBtn}
                 disabled={index === NUMBER_OF_STEPS.length}
               />
