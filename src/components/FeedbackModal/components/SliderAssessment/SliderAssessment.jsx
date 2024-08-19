@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { Box, Divider, Slider, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react';

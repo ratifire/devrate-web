@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 export const styles = {
   title: (theme) => ({
     color: theme.palette.text.primary,
@@ -11,7 +9,7 @@ export const styles = {
     whiteSpace: 'nowrap',
   }),
   subtitle: (theme) => ({
-    color: theme.palette.text.primary,
+    color: theme.palette.sliderAssessment.lightGray,
     width: '44px',
     textAlign: 'right',
   }),
@@ -31,15 +29,18 @@ export const styles = {
   slider: (theme) => ({
     color: theme.palette.sliderAssessment.violet, // Цвет ползунка
     maxWidth: '180px',
+    borderRadius: '0px',
     '& .MuiSlider-thumb': {
       backgroundColor: theme.palette.sliderAssessment.thumb, // Цвет кружка
       height: 12,
       width: 12,
+      borderRadius: '50%',
     },
     '& .MuiSlider-mark': {
       color: theme.palette.sliderAssessment.lightGray, // Цвет меток
       width: '4px',
       height: '4px',
+      borderRadius: '50%',
     },
     '& .MuiSlider-track': {
       color: theme.palette.sliderAssessment.violet, // Цвет трека
@@ -48,6 +49,7 @@ export const styles = {
     '& .MuiSlider-rail': {
       color: theme.palette.sliderAssessment.gray, // Цвет фона
       height: '8px',
+      opacity: 1,
     },
     '& .MuiSlider-valueLabel': {
       // Метка
@@ -69,7 +71,7 @@ export const styles = {
     position: 'absolute',
     width: '25px',
     height: '9.6px',
-    left: '-20px',
+    left: '-21px',
     borderTopLeftRadius: '12px',
     borderBottomLeftRadius: '12px',
     backgroundColor: theme.palette.sliderAssessment.violet
@@ -78,10 +80,10 @@ export const styles = {
     position: 'absolute',
     width: '20px',
     height: '8px',
-    right: '41px',
+    right: '39px',
     borderTopRightRadius: '12px',
     borderBottomRightRadius: '12px',
-    backgroundColor: theme.palette.sliderAssessment.darkGray
+    backgroundColor: theme.palette.sliderAssessment.gray,
   }),
   rightActive: (theme) => ({
     backgroundColor: theme.palette.sliderAssessment.violet,
