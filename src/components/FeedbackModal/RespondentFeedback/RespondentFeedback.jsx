@@ -1,6 +1,5 @@
 /* eslint-disable */
-
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { ButtonDef } from '../../Buttons';
@@ -10,6 +9,8 @@ import InterviewerInfo from '../components/InterviewerInfo/InterviewerInfo';
 import { SliderAssessmentBox } from '../components/SliderAssessmentBox';
 import { useCloseModal } from '../hooks';
 import { styles } from './RespondentFeedback.styles';
+import { TitleFeedback } from '../components/Titles';
+import React from 'react';
 
 const RespondentFeedback = () => {
   const { t } = useTranslation();
@@ -18,9 +19,7 @@ const RespondentFeedback = () => {
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
       <Box sx={styles.container}>
-        <Typography variant='subtitle1' sx={styles.title}>
-          {t('modal.interview.title')}
-        </Typography>
+        <TitleFeedback title={t('modal.interview.title')} variant={'h3'}/>
         <InterviewerInfo
           name={'Олена Бондаренко'}
           position={'Senior Full stack Developer'}
@@ -38,9 +37,7 @@ const RespondentFeedback = () => {
             rows={3}
           />
           <Box>
-            <Typography sx={styles.subtitle} variant='h6'>
-              Soft Skills
-            </Typography>
+            <TitleFeedback title={'Soft Skills'} variant={'h4'}/>
             <SliderAssessmentBox>
               <SliderAssessment title={'Комунікативність'} />
               <SliderAssessment title={'Креативність'} />

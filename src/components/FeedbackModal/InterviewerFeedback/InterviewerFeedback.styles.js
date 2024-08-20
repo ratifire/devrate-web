@@ -81,8 +81,4 @@ export const styles = {
   btn: {
     maxWidth: '228px',
   },
-  title: (theme) => ({
-    fontSize: '20px',
-    color: theme.palette.text.primary,
-  }),
 };

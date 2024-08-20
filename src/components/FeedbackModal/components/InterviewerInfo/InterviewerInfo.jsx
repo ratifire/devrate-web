@@ -1,30 +1,30 @@
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { styles } from './InterviewerInfo.styles'
+import { DataTimeTitleFeedback, PositionTitle, SubtitleFeedback } from '../Titles';
 
 const InterviewerInfo = ({ name, position, data, time }) => {
   const { t } = useTranslation();
+  const interviewerName = `${t('modal.interview.interviewer')}: ${name}`
 
   return (
     <Box sx={styles.container}>
       <Box sx={styles.box}>
-        <Typography sx={styles.title}>
-          {t('modal.interview.interviewer')}: {name}
-        </Typography>
-        <Typography sx={styles.title}>{position}</Typography>
+        <SubtitleFeedback title={interviewerName} variant={'h4'}/>
+        <PositionTitle variant={'h5'} title={position}/>
       </Box>
       <Box sx={styles.box}>
         <Box sx={styles.data}>
           <CalendarTodayIcon sx={styles.icon} />
-          <Typography>{data}</Typography>
+          <DataTimeTitleFeedback title={data} variant={'subtitle2'}/>
         </Box>
         <Box sx={styles.data}>
           <AccessTimeIcon sx={styles.icon} />
-          <Typography>{time}</Typography>
+          <DataTimeTitleFeedback title={time} variant={'subtitle2'}/>
         </Box>
       </Box>
     </Box>

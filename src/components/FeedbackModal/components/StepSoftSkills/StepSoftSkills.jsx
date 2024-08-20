@@ -1,10 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextAreaInput } from '../../../Inputs';
 import { SliderAssessment } from '../SliderAssessment';
 import { SliderAssessmentBox } from '../SliderAssessmentBox';
 import { styles } from './StepSoftSkills.styles';
+import { TitleFeedback } from '../Titles';
 
 const StepSoftSkills = () => {
   const { t } = useTranslation();
@@ -23,9 +24,7 @@ const StepSoftSkills = () => {
         />
       </Box>
       <Box>
-        <Typography sx={styles.title} variant='h6'>
-          Soft Skills
-        </Typography>
+        <TitleFeedback title={'Soft Skills'} variant={'h4'}/>
         <SliderAssessmentBox>
           <SliderAssessment title={'Комунікативність'} />
           <SliderAssessment title={'Креативність'} />

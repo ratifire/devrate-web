@@ -9,6 +9,7 @@ import { SliderComponent } from '../components/SliderComponent'
 import { LAST_STEP, NUMBER_OF_STEPS } from '../constants'
 import { useCloseModal } from '../hooks'
 import { styles } from './InterviewerFeedback.styles'
+import { TitleFeedback } from '../components/Titles';
 
 const InterviewerFeedback = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -26,9 +27,7 @@ const InterviewerFeedback = () => {
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
       <Box sx={styles.container}>
-        <Typography sx={styles.title} variant='subtitle1'>
-          {t('modal.interview.title')}
-        </Typography>
+        <TitleFeedback title={t('modal.interview.title')} variant='h3' />
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
           {NUMBER_OF_STEPS.map((label, index) => (
             <Step sx={styles.step} key={label}>

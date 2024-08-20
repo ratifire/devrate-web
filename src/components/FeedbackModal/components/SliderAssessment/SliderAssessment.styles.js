@@ -1,18 +1,4 @@
 export const styles = {
-  title: (theme) => ({
-    color: theme.palette.text.primary,
-    fontSize: '16px',
-    maxWidth: '330px',
-    width: '100%',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-  }),
-  subtitle: (theme) => ({
-    color: theme.palette.sliderAssessment.lightGray,
-    width: '44px',
-    textAlign: 'right',
-  }),
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -20,7 +6,6 @@ export const styles = {
   container: {
     display: 'flex',
     justifyContent: 'space-between',
-    // paddingTop: '24px',
   },
   box: {
     maxWidth: '239px',
@@ -75,7 +60,6 @@ export const styles = {
   }),
   divider: {
     borderColor: '#69696B',
-    // paddingTop: '8px',
   },
   left: (theme) => ({
     position: 'absolute',
