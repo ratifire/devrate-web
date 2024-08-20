@@ -288,8 +288,6 @@ export const uk = {
       statistics: {
         title: 'Статистика',
         level_chart_title: 'Рівень',
-        level_chart_left_caption: 'Junior',
-        level_chart_right_caption: 'Middle',
         hard_skills_chart_title: 'Hard Skills за продуктивністю',
         hard_skills_chart_text: 'Цей графік відображає оцінки ваших навичок від 0 до 10.',
         interview_chart_title: 'Інтерв’ю',

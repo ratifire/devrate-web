@@ -1,4 +1,4 @@
-import { apiSlice } from '../services/api/apiSlice';
+import { apiSlice } from '../services/api/apiSlice'
 
 export const chartApiSlice = apiSlice.injectEndpoints({
   tagTypes: ['InterviewSummaryStatistic', 'MasteriesHistoryStatistic'],
@@ -14,9 +14,9 @@ export const chartApiSlice = apiSlice.injectEndpoints({
           : ['InterviewSummaryStatistic'],
     }),
     getMasteriesHistoryStatistic: builder.query({
-      query: ({ masteryId, from, to }) => {
+      query: ({ selectMasteryId, from, to }) => {
         const params = new URLSearchParams({ from, to });
-        return `/masteries/${masteryId}/history?${params.toString()}`;
+        return `/masteries/${selectMasteryId}/history?${params.toString()}`;
       },
       providesTags: (result) =>
         result
