@@ -1,11 +1,11 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material';
 import React from 'react'
-import { SliderAssessment, SliderAssessmentBox, TitleFeedback } from '../../components'
+import { SliderAssessment, SliderAssessmentBox } from '../../components'
 
 const StepHardSkills = () => {
   return (
     <Box>
-      <TitleFeedback title={'Hard Skills'} variant={'h4'}/>
+      <Typography variant={'h6'}>Hard Skills</Typography>
       <SliderAssessmentBox>
         <SliderAssessment title={'Laravel'} />
         <SliderAssessment title={'CodeIgniter, Yii, Zend Framework'} />

@@ -8,6 +8,7 @@ import SchedulePage from '../pages/ShedulePage';
 import React from 'react';
 import ToastLayout from '../layouts/ToastLayout/ToastLayout';
 import navigationLinks from './links';
+import Test from '../pages/Test';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             path: navigationLinks.specializations,
             element: <SpecializationPage />,
           },
+          {
+            path: '/test',
+            element: <Test/>
+          }
         ],
       },
     ],

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
@@ -16,7 +16,7 @@ const RespondentFeedback = () => {
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
       <Box sx={styles.container}>
-        <TitleFeedback title={t('modal.interview.title')} variant={'h3'} />
+        <Typography variant={'h6'}>{t('modal.interview.title')}</Typography>
         <InterviewerInfo
           name={'Олена Бондаренко'}
           position={'Senior Full stack Developer'}
@@ -34,7 +34,7 @@ const RespondentFeedback = () => {
             rows={3}
           />
           <Box>
-            <TitleFeedback title={'Soft Skills'} variant={'h4'} />
+            <Typography variant={'h6'}>Soft Skills</Typography>
             <SliderAssessmentBox>
               <SliderAssessment title={'Комунікативність'} />
               <SliderAssessment title={'Креативність'} />

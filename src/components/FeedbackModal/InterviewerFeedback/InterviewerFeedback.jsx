@@ -1,10 +1,10 @@
 /* eslint-disable */
-import { Box, Step, StepButton, StepConnector, Stepper } from '@mui/material';
+import { Box, Step, StepButton, StepConnector, Stepper, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { ButtonDef } from '../../Buttons';
-import { InterviewerInfo, SliderComponent, TitleFeedback } from '../components';
+import { InterviewerInfo, SliderComponent } from '../components';
 import { LAST_STEP, NUMBER_OF_STEPS } from '../constants';
 import { useCloseModal } from '../hooks';
 import { styles } from './InterviewerFeedback.styles';
@@ -25,7 +25,7 @@ const InterviewerFeedback = () => {
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
       <Box sx={styles.container}>
-        <TitleFeedback title={t('modal.interview.title')} variant='h3' />
+        <Typography variant={'h6'}>{t('modal.interview.title')}</Typography>
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
           {NUMBER_OF_STEPS.map((label, index) => (
             <Step sx={styles.step} key={label}>

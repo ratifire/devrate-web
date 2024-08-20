@@ -1,7 +1,6 @@
-import { Box, Divider, Slider } from '@mui/material'
+import { Box, Divider, Slider, Typography } from '@mui/material';
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { SliderSubtitle, SliderTitle } from '../../components'
 import { styles } from './SliderAssessment.styles'
 
 const SliderAssessment = ({ title }) => {
@@ -12,7 +11,7 @@ const SliderAssessment = ({ title }) => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.container}>
-        <SliderTitle variant={'h6'} title={title}/>
+        <Typography variant={'body'}>{title}</Typography>
         <Box sx={styles.box}>
           <Box sx={styles.left}></Box>
           <Box sx={rightBoxStyles}></Box>
@@ -26,7 +25,7 @@ const SliderAssessment = ({ title }) => {
             valueLabelDisplay='on'
             sx={styles.slider}
           />
-          <SliderSubtitle title={`${sliderValue}/10`} variant={'h6'} />
+          <Typography sx={styles.grade} variant={'body'}>{sliderValue}/10</Typography>
         </Box>
       </Box>
       <Divider sx={styles.divider} />

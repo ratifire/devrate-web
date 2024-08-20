@@ -15,6 +15,11 @@ export const styles = {
     alignItems: 'center',
     position: 'relative',
   },
+  grade: (theme) => ({
+    color: theme.palette.sliderAssessment.lightGray,
+    width: '44px',
+    textAlign: 'right',
+  }),
   slider: (theme) => ({
     color: theme.palette.sliderAssessment.violet, // Цвет ползунка
     maxWidth: '180px',
