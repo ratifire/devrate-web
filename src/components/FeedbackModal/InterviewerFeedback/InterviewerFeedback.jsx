@@ -4,12 +4,10 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile'
 import { ButtonDef } from '../../Buttons'
-import InterviewerInfo from '../components/InterviewerInfo/InterviewerInfo'
-import { SliderComponent } from '../components/SliderComponent'
 import { LAST_STEP, NUMBER_OF_STEPS } from '../constants'
 import { useCloseModal } from '../hooks'
 import { styles } from './InterviewerFeedback.styles'
-import { TitleFeedback } from '../components/Titles';
+import { TitleFeedback, SliderComponent, InterviewerInfo } from '../components';
 
 const InterviewerFeedback = () => {
   const [activeStep, setActiveStep] = useState(1);

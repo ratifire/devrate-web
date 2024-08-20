@@ -4,12 +4,9 @@ import { useTranslation } from 'react-i18next';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { ButtonDef } from '../../Buttons';
 import { TextAreaInput } from '../../Inputs';
-import { SliderAssessment } from '../components';
-import InterviewerInfo from '../components/InterviewerInfo/InterviewerInfo';
-import { SliderAssessmentBox } from '../components/SliderAssessmentBox';
+import { SliderAssessment, InterviewerInfo, SliderAssessmentBox, TitleFeedback } from '../components';
 import { useCloseModal } from '../hooks';
 import { styles } from './RespondentFeedback.styles';
-import { TitleFeedback } from '../components/Titles';
 import React from 'react';
 
 const RespondentFeedback = () => {

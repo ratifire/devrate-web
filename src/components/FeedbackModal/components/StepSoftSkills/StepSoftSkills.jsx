@@ -2,10 +2,8 @@ import { Box } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextAreaInput } from '../../../Inputs';
-import { SliderAssessment } from '../SliderAssessment';
-import { SliderAssessmentBox } from '../SliderAssessmentBox';
+import { SliderAssessment, TitleFeedback, SliderAssessmentBox } from '../../components';
 import { styles } from './StepSoftSkills.styles';
-import { TitleFeedback } from '../Titles';
 
 const StepSoftSkills = () => {
   const { t } = useTranslation();

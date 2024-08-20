@@ -1,8 +1,6 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import { SliderAssessment } from '../SliderAssessment';
-import { SliderAssessmentBox } from '../SliderAssessmentBox';
-import { TitleFeedback } from '../Titles';
+import { SliderAssessment, SliderAssessmentBox, TitleFeedback } from '../../components';
 
 const StepHardSkills = () => {
   return (

@@ -1,8 +1,8 @@
-import TitleFeedback from './TitleFeedback/TitleFeedback';
-import SubtitleFeedback from './SubtitleFeedback/SubtitleFeedback';
-import DataTimeTitleFeedback from './DataTimeTitleFeedback/DataTimeTitleFeedback';
-import PositionTitle from './PositionTitle/PositionTitle';
-import SliderTitle from './SliderTitle/SliderTitle';
-import SliderSubtitle from './SliderSubtitle/SliderSubtitle';
+import { DataTimeTitleFeedback } from './DataTimeTitleFeedback';
+import { PositionTitle } from './PositionTitle';
+import { SliderSubtitle } from './SliderSubtitle';
+import { SliderTitle } from './SliderTitle';
+import { SubtitleFeedback } from './SubtitleFeedback';
+import { TitleFeedback } from './TitleFeedback';
 
-export { TitleFeedback, SubtitleFeedback, DataTimeTitleFeedback, PositionTitle, SliderTitle, SliderSubtitle };
+export { DataTimeTitleFeedback, PositionTitle, SliderSubtitle, SliderTitle, SubtitleFeedback, TitleFeedback };

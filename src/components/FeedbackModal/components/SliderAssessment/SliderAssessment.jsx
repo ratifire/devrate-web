@@ -2,7 +2,7 @@ import { Box, Divider, Slider } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { styles } from './SliderAssessment.styles';
-import { SliderSubtitle, SliderTitle } from '../Titles';
+import { SliderSubtitle, SliderTitle } from '../../components';
 
 const SliderAssessment = ({ title }) => {
   const [sliderValue, setSliderValue] = useState(1);
