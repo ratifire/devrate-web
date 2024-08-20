@@ -131,7 +131,6 @@ const LoginModal = () => {
             correctStyle={styles.turnBackLink}
             handlerClick={handleOpen}
             type='button'
-            disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
             label='modal.login.forgot_your_password'
           />
         </Box>
