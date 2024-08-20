@@ -1,3 +1,4 @@
-import SliderAssessmentBox from './SliderAssessmentBox';
+import SliderAssessmentBox from './SliderAssessmentBox'
 
-export { SliderAssessmentBox };
+export { SliderAssessmentBox }
+

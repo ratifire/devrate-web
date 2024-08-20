@@ -4,8 +4,8 @@ import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { styles } from './InterviewerInfo.styles';
 import { DataTimeTitleFeedback, PositionTitle, SubtitleFeedback } from '../../components';
+import { styles } from './InterviewerInfo.styles';
 
 const InterviewerInfo = ({ name, position, data, time }) => {
   const { t } = useTranslation();

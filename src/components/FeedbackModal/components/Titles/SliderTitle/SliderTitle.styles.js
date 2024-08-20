@@ -10,4 +10,4 @@ export const styles = {
     whiteSpace: 'nowrap',
     letterSpacing: '0.15px',
   }),
-}
+};

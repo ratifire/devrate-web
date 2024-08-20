@@ -5,4 +5,4 @@ export const styles = {
     fontSize: '16px',
     letterSpacing: '0.15px',
   }),
-}
+};

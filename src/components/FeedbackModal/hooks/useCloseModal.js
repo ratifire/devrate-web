@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { closeModal } from '../../../redux/modal/modalSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal } from '../../../redux/modal/modalSlice';
 
 const useCloseModal = ({ modalName }) => {
   const dispatch = useDispatch();

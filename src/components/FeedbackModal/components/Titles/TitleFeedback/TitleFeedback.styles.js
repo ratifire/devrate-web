@@ -4,4 +4,4 @@ export const styles = {
     color: theme.palette.text.primary,
     letterSpacing: '0.15px',
   }),
-}
+};

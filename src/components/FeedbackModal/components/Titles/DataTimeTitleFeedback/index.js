@@ -1,3 +1,3 @@
 import DataTimeTitleFeedback from './DataTimeTitleFeedback';
 
-export { DataTimeTitleFeedback }
+export { DataTimeTitleFeedback };

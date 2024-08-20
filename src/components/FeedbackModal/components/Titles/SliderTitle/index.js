@@ -1,3 +1,3 @@
 import SliderTitle from './SliderTitle';
 
-export { SliderTitle }
+export { SliderTitle };

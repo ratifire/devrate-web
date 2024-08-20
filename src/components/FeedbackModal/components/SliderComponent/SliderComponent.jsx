@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { StepSoftSkills, StepHardSkills } from '../../components';
+import { StepHardSkills, StepSoftSkills } from '../../components'
 
 const SliderComponent = ({ slide }) => {
   const SliderElement =

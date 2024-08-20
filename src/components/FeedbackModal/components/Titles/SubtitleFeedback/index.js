@@ -1,3 +1,3 @@
 import SubtitleFeedback from './SubtitleFeedback';
 
-export { SubtitleFeedback }
+export { SubtitleFeedback };

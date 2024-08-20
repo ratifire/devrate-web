@@ -6,5 +6,5 @@ export const styles = {
     fontSize: '16px',
     fontWeight: '400',
     letterSpacing: '0.15px',
-  })
-}
+  }),
+};

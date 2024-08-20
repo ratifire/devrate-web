@@ -1,13 +1,13 @@
 /* eslint-disable */
-import { Box, Step, StepButton, StepConnector, Stepper, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile'
-import { ButtonDef } from '../../Buttons'
-import { LAST_STEP, NUMBER_OF_STEPS } from '../constants'
-import { useCloseModal } from '../hooks'
-import { styles } from './InterviewerFeedback.styles'
-import { TitleFeedback, SliderComponent, InterviewerInfo } from '../components';
+import { Box, Step, StepButton, StepConnector, Stepper } from '@mui/material';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
+import { ButtonDef } from '../../Buttons';
+import { InterviewerInfo, SliderComponent, TitleFeedback } from '../components';
+import { LAST_STEP, NUMBER_OF_STEPS } from '../constants';
+import { useCloseModal } from '../hooks';
+import { styles } from './InterviewerFeedback.styles';
 
 const InterviewerFeedback = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -29,11 +29,7 @@ const InterviewerFeedback = () => {
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
           {NUMBER_OF_STEPS.map((label, index) => (
             <Step sx={styles.step} key={label}>
-              <StepButton
-                color='inherit'
-                sx={styles.stepBtn}
-                disabled={index === NUMBER_OF_STEPS.length}
-              />
+              <StepButton color='inherit' sx={styles.stepBtn} disabled={index === NUMBER_OF_STEPS.length} />
             </Step>
           ))}
         </Stepper>

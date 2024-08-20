@@ -1,7 +1,7 @@
-import React from 'react';
-import { Typography } from '@mui/material';
-import PropTypes from 'prop-types';
-import { styles } from './SliderSubtitle.styles';
+import { Typography } from '@mui/material'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { styles } from './SliderSubtitle.styles'
 
 const SliderSubtitle = ({ title, variant = 'subtitle2' }) => {
   return (
