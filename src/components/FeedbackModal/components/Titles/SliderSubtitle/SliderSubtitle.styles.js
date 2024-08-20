@@ -4,6 +4,7 @@ export const styles = {
     width: '44px',
     textAlign: 'right',
     fontSize: '16px',
-    fontWeight: '400'
+    fontWeight: '400',
+    letterSpacing: '0.15px',
   })
 }

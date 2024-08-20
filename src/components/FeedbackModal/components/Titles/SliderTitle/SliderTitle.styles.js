@@ -8,5 +8,6 @@ export const styles = {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
+    letterSpacing: '0.15px',
   }),
 }
