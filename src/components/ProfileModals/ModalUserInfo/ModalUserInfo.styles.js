@@ -31,7 +31,7 @@ export const styles = {
   }),
   step: (theme) => ({
     padding: theme.spacing(0),
-    cursor: 'pointer',
+    cursor: 'default',
   }),
   stepBtn: (theme) => ({
     margin: theme.spacing(0),
@@ -74,7 +74,7 @@ export const styles = {
       width: '24px',
       height: '24px',
       position: 'relative',
-      cursor: 'pointer',
+      cursor: 'default',
       color: theme.palette.background.level3,
       '&.Mui-active': {
         color: theme.palette.primary['400'],
