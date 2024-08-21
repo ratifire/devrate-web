@@ -52,7 +52,7 @@ export const styles = {
     gridTemplateColumns: 'repeat(12, 1fr)',
     gridTemplateRows: 'auto auto auto auto',
     gridGap: theme.spacing(4),
-    
+
     ' > div': {
       borderRadius: 2,
       backgroundColor: theme.palette.neutral[600],
@@ -76,7 +76,6 @@ export const styles = {
     gridColumn: '1/4',
     gridRow: '2/3',
     width: '300px',
-    height: '375px',
     padding: '18px',
   },
   interview: {

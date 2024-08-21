@@ -82,13 +82,17 @@ const styles = {
       marginRight: '36px',
     },
   },
-  socialGroup: {
+  socialGroup: (theme) => ({
+    color: theme.palette.neutral[50],
     margin: '0 auto',
     maxWidth: 200,
     display: 'flex',
-    gridGap: '20px',
+    gridGap: '10px',
     paddingLeft: '30px',
     '@media (min-width: 520px)': {},
-  },
+  }),
+  icon: (theme) => ({
+    color: theme.palette.neutral[50],
+  }),
 };
 export default styles;

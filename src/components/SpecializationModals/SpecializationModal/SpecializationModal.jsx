@@ -3,7 +3,7 @@ import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { SpecializationModalSchema } from './SpecializationModalSchema';
+import { SpecializationModalSchema } from '../../../utils/valadationSchemas/index';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './SpecializationModal.styles';
 import { ButtonDef } from '../../Buttons';
@@ -15,10 +15,8 @@ import {
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
   useUpdateSpecializationByIdMutation,
 } from '../../../redux/specialization/specializationApiSlice';
-import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
-import {
-  useGetSpecializationListQuery
-} from '../../../redux/specialization/specializationList/specializationListApiSlice';
+import { setMainMastery, setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
+import { useGetSpecializationListQuery } from '../../../redux/specialization/specializationList/specializationListApiSlice';
 import FormInput from '../../Inputs/FormInput';
 import AddIcon from '@mui/icons-material/Add';
 import Responsibility from '../../UI/Responsibility';
@@ -27,7 +25,7 @@ import { AdvancedFormSelector } from '../../Inputs';
 const initialValues = {
   name: '',
   mastery: '',
-  skills: ''
+  skills: '',
 };
 
 const SpecializationModal = React.memo(() => {
@@ -38,15 +36,15 @@ const SpecializationModal = React.memo(() => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
 
   const openSpecialization = useSelector((state) => state.modal.openSpecialization);
-  const [ createNewSpecialization ] = useCreateNewSpecializationMutation();
-  const [ updateSpecializationById ] = useUpdateSpecializationByIdMutation();
-  const [ triggerRequest ] = useLazyGetMasteriesBySpecializationIdQuery();
-  const [ setNewMainMasteryBySpecIdAndMasteryId ] = useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
-  const [ addSkills ] = useAddSkillsToMasteryMutation();
+  const [createNewSpecialization] = useCreateNewSpecializationMutation();
+  const [updateSpecializationById] = useUpdateSpecializationByIdMutation();
+  const [triggerRequest] = useLazyGetMasteriesBySpecializationIdQuery();
+  const [setNewMainMasteryBySpecIdAndMasteryId] = useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
+  const [addSkills] = useAddSkillsToMasteryMutation();
 
   const { data: specializations } = useGetSpecializationListQuery('specialization-names.json');
 
-  const selectedSpecialization = useSelector((state) => state.specialisation.selectedSpecialization);
+  const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
 
   const { modalData } = useSelector((state) => state.modal);
@@ -70,15 +68,13 @@ const SpecializationModal = React.memo(() => {
     formik.setFieldValue('mastery', mastery);
   }, [mastery]);
 
-  const updateSpecialization = async({id, name}) => {
-    await updateSpecializationById({id, name}).unwrap();
+  const updateSpecialization = async ({ id, name }) => {
+    await updateSpecializationById({ id, name }).unwrap();
     dispatch(setSelectedSpecialization({ id, name }));
-  }
+  };
 
-
-  const onSubmit = async (values, {resetForm}) => {
+  const onSubmit = async (values, { resetForm }) => {
     try {
-
       if (modalData === 'editSpecialization') {
         let shouldUpdateSpecialization = false;
         let shouldUpdateMastery = false;
@@ -98,23 +94,49 @@ const SpecializationModal = React.memo(() => {
         if (shouldUpdateMastery) {
           const masteries = await triggerRequest(selectedSpecialization.id);
           const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
-          await setNewMainMasteryBySpecIdAndMasteryId({ masteryId: resp.id, specId: selectedSpecialization.id, name: resp.name, softSkillMark: resp.softSkillMark, hardSkillMark: resp.hardSkillMark });
-          window.location.reload();
+          const { data: mastery } = await setNewMainMasteryBySpecIdAndMasteryId({
+            masteryId: resp.id,
+            specId: selectedSpecialization.id,
+            name: resp.name,
+            softSkillMark: resp.softSkillMark,
+            hardSkillMark: resp.hardSkillMark,
+          });
+          dispatch(
+            setMainMastery({
+              specId: selectedSpecialization.id,
+              masteryId: mastery.id,
+              level: mastery.level,
+              hardSkillMark: mastery.hardSkillMark,
+              softSkillMark: mastery.softSkillMark,
+            })
+          );
         }
 
         return;
-
       }
-      const data = await createNewSpecialization({ userId, data: {name: values.name, main: false} }).unwrap();
+      const data = await createNewSpecialization({ userId, data: { name: values.name, main: false } }).unwrap();
       const masteries = await triggerRequest(data.id);
       const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
-      await setNewMainMasteryBySpecIdAndMasteryId({ masteryId: resp.id, specId: data.id, name: resp.name, softSkillMark: resp.softSkillMark, hardSkillMark: resp.hardSkillMark });
-      await addSkills({id: resp.id, skills});
-    }
-    catch (error) {
+      const { data: mastery } = await setNewMainMasteryBySpecIdAndMasteryId({
+        masteryId: resp.id,
+        specId: data.id,
+        name: resp.name,
+        softSkillMark: resp.softSkillMark,
+        hardSkillMark: resp.hardSkillMark,
+      });
+      await addSkills({ id: resp.id, skills });
+      dispatch(
+        setMainMastery({
+          specId: data.id,
+          masteryId: mastery.id,
+          level: mastery.level,
+          hardSkillMark: mastery.hardSkillMark,
+          softSkillMark: mastery.softSkillMark,
+        })
+      );
+    } catch (error) {
       console.warn('Failed to create Specialization', error);
-    }
-    finally {
+    } finally {
       resetForm();
       handleClose();
     }
@@ -122,7 +144,7 @@ const SpecializationModal = React.memo(() => {
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: {...initialValues},
+    initialValues: { ...initialValues },
     validationSchema: SpecializationModalSchema,
     onSubmit,
   });
@@ -134,13 +156,12 @@ const SpecializationModal = React.memo(() => {
       name: selectedSpecialization.name,
       mastery: selectedSpecialization.mastery,
     });
-
   }, [selectedSpecialization, formik.setValues]);
 
   const [skills, setSkills] = useState([]);
   const createSkills = (newSkill) => {
     if (newSkill.length === 0 || newSkill.length > 50) return;
-    setSkills([...skills, {name: newSkill, type: "HARD_SKILL" }]);
+    setSkills([...skills, { name: newSkill, type: 'HARD_SKILL' }]);
     formik.setFieldValue('skills', '');
   };
 
@@ -159,8 +180,8 @@ const SpecializationModal = React.memo(() => {
           <Box sx={styles.input100}>
             <AdvancedFormSelector
               required
-              variant="outlined"
-              name="name"
+              variant='outlined'
+              name='name'
               value={formik.values.name}
               handleChange={handleChangeSpecialization}
               handleBlur={formik.handleBlur}
@@ -175,8 +196,8 @@ const SpecializationModal = React.memo(() => {
             <AdvancedFormSelector
               required
               id='mastery'
-              variant="outlined"
-              name="mastery"
+              variant='outlined'
+              name='mastery'
               value={formik.values.mastery}
               handleChange={handleChangeMastery}
               handleBlur={formik.handleBlur}
@@ -186,12 +207,9 @@ const SpecializationModal = React.memo(() => {
               countries={['Junior', 'Middle', 'Senior']}
               helperDescription={t('specialization.modal.specialization.mastery_helper_text')}
             />
-
           </Box>
 
-
-
-          {modalData==='addSpecialization' &&
+          {modalData === 'addSpecialization' && (
             <>
               <Box sx={styles.input100}>
                 <FormInput
@@ -209,25 +227,28 @@ const SpecializationModal = React.memo(() => {
                 </IconButton>
               </Box>
               <Box sx={styles.skills}>
-                {skills.map(({name}, index) => (
+                {skills.map(({ name }, index) => (
                   <Responsibility
                     key={index}
                     responsibility={name}
                     tobeDeleted
-                    responsibilityDeleteHandler={deleteSkillsHandler}/>
+                    responsibilityDeleteHandler={deleteSkillsHandler}
+                  />
                 ))}
               </Box>
             </>
-          }
+          )}
 
-
-          <ButtonDef variant='contained' type='submit' label={t('profile.modal.btn')}
-                     correctStyle={styles.specializationBtn} />
-
+          <ButtonDef
+            variant='contained'
+            type='submit'
+            label={t('profile.modal.btn')}
+            correctStyle={styles.specializationBtn}
+          />
         </Box>
       </form>
-
-    </ModalLayoutProfile>);
+    </ModalLayoutProfile>
+  );
 });
 
 SpecializationModal.displayName = 'SpecializationModal';

@@ -6,7 +6,7 @@ import { Box, Typography } from '@mui/material';
 import { styles } from './EducationModal.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { EducationModalSchema } from './EducationModalSchema';
+import { EducationModalSchema } from '../../../utils/valadationSchemas/index';
 import FormInput from '../../Inputs/FormInput';
 import TextAreaInput from '../../Inputs/TextAreaInput';
 import { ButtonDef } from '../../Buttons';

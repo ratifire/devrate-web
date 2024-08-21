@@ -5,7 +5,7 @@ import styles from './CheckEmail.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Link, Typography } from '@mui/material';
-import { CheckEmailSchema } from './CheckEmailSchema';
+import { CheckEmailSchema } from '../../../../utils/valadationSchemas/index';
 import { FormInput } from '../../../Inputs';
 import { ButtonDef } from '../../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,7 +69,7 @@ const CheckEmail = () => {
             variant='contained'
             type='submit'
             handlerClick={formik.handleSubmit}
-            disabled={formik.touched.email && Boolean(formik.errors.email)}
+            disabled={!formik.values.email || (formik.touched.email && Boolean(formik.errors.email))}
             label='modal.checkEmailResetPassword.btn_send_letter'
           />
         </Box>

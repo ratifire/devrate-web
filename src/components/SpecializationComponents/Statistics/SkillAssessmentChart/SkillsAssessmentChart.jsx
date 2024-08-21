@@ -1,47 +1,51 @@
-import React from 'react';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { Box, MenuItem, Select, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
+import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  arithmeticAverageSkillValue,
+  createTenDaysHistoryData,
+  createTenMonthsHistoryData,
+  getCurrentAndLastMonths,
+  useGetHistoryData,
+  useHandleChange,
+} from '../utils';
 import { styles } from './SkillsAssessmentChart.style';
-import {useTranslation} from "react-i18next";
-
-const months = [
-  { name: 'Jan', value: 2 },
-  { name: 'Mar', value: 5.5 },
-  { name: 'May', value: 2 },
-  { name: 'Jul', value: 8.5 },
-  { name: 'Sep', value: 1.5 },
-  { name: 'Nov', value: 5 },
-];
-
-const days = [
-  { name: '1-5', value: 2 },
-  { name: '6-10', value: 3 },
-  { name: '11-15', value: 2 },
-  { name: '16-20', value: 3 },
-  { name: '21-25', value: 4 },
-  { name: '26-30', value: 5 },
-];
 
 const SkillsAssessmentChart = () => {
-  const [selectedPeriod, setSelectedPeriod] = React.useState(months);
+  const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
+  const { dataHistory, isError, isLoading } = useGetHistoryData({ to, from });
   const { t } = useTranslation();
+  const arithmeticAverage = arithmeticAverageSkillValue({
+    data: dataHistory,
+    secondValue: 'hardSkillMark',
+    firstValue: 'softSkillMark',
+  });
 
-  const handleChange = (event) => {
-    if (event.target.value === 'months') {
-      setSelectedPeriod(months);
-    } else if (event.target.value === 'days') {
-      setSelectedPeriod(days);
-    }
-  };
+  const dataDays = useMemo(
+    () => createTenDaysHistoryData({ data: dataHistory, average: arithmeticAverage }),
+    [dataHistory]
+  );
+  const dataMonths = useMemo(
+    () => createTenMonthsHistoryData({ t, data: dataHistory, average: arithmeticAverage }),
+    [dataHistory]
+  );
+  const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (isError) {
+    return <Typography variant='h6'>Something error...</Typography>;
+  }
 
   return (
     <Box sx={styles.skillsAssessmentChartContainer}>
       <Box sx={styles.titleContainer}>
         <Box>
-          <Typography variant='subtitle2'>
-             {t('specialization.statistics.skills_assessment_chart_title')}
-          </Typography>
+          <Typography variant='subtitle2'>{t('specialization.statistics.skills_assessment_chart_title')}</Typography>
         </Box>
         <Box>
           <Select
@@ -67,9 +71,7 @@ const SkillsAssessmentChart = () => {
         </Box>
       </Box>
 
-      <Box
-        sx={styles.chartWrapper}
-      >
+      <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
           <AreaChart data={selectedPeriod} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
             <defs>

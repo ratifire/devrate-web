@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ModalLayout from '../../../layouts/ModalLayout';
 import { Box, CircularProgress, Link, Typography } from '@mui/material';
 import styles from './RegistrationModal.styles';
-import { RegistrationSchema } from './RegistrationSchema';
+import { RegistrationSchema } from '../../../utils/valadationSchemas/index';
 import { AdvancedFormSelector, FormCheckbox, FormInput } from '../../Inputs';
 import { ButtonDef } from '../../Buttons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,7 +69,7 @@ const RegistrationModal = () => {
   ) : (
     <ModalLayout open={openRegistration} setOpen={handleClose}>
       <Typography variant="subtitle2" sx={styles.title}>{t('modal.registration.title')}</Typography>
-      <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+      <form onSubmit={formik.handleSubmit} style={{ width: '100%' }} autoComplete="off">
         <FormInput
           name="email"
           value={formik.values.email}
@@ -80,6 +80,7 @@ const RegistrationModal = () => {
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
           countries={userCountries}
+          autoComplete="off"
         />
         <AdvancedFormSelector
           variant="outlined"
@@ -91,6 +92,7 @@ const RegistrationModal = () => {
           error={formik.touched.country && Boolean(formik.errors.country)}
           helperText={formik.touched.country && formik.errors.country}
           countries={userCountries}
+          autoComplete="off"
         />
         <Box sx={styles.inputNameContainer}>
           <FormInput
@@ -102,6 +104,7 @@ const RegistrationModal = () => {
             label="modal.registration.first_name"
             helperText={formik.touched.firstName && formik.errors.firstName}
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+            autoComplete="off"
           />
           <FormInput
             name="lastName"
@@ -111,6 +114,7 @@ const RegistrationModal = () => {
             label="modal.registration.last_name"
             helperText={formik.touched.lastName && formik.errors.lastName}
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+            autoComplete="off"
           />
         </Box>
         <FormInput
@@ -125,6 +129,8 @@ const RegistrationModal = () => {
           helperText={formik.touched.password && formik.errors.password}
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
+          autoComplete="new-password"
+          iconStyle={styles.iconStyle}
         />
         <FormInput
           showPassword={showPassword}
@@ -138,6 +144,8 @@ const RegistrationModal = () => {
           helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
+          autoComplete="new-password"
+          iconStyle={styles.iconStyle}
         />
         <FormCheckbox
           checked={formik.values.news}

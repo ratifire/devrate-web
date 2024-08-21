@@ -1,9 +1,8 @@
-import React from 'react';
-import { Chip, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { styles } from '../../SpecializationModals/SoftSkillsModal/SoftSkillsModal.styles';
+import { Chip, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-
+import React from 'react';
+import { styles } from '../../SpecializationModals/SoftSkillsModal/SoftSkillsModal.styles';
 
 export const SkillChip = React.memo(({ skill, onDelete }) => (
   <Chip
@@ -19,7 +18,7 @@ SkillChip.displayName = 'SkillChip';
 
 SkillChip.propTypes = {
   skill: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,

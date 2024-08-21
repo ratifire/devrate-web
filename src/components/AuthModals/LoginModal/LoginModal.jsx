@@ -7,13 +7,13 @@ import { Box, Link, Typography } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ModalLayout from '../../../layouts/ModalLayout';
 import styles from './LoginModal.styles';
-import { LoginSchema } from './LoginSchema';
+import { LoginSchema } from '../../../utils/valadationSchemas/index';
 import { FormInput } from '../../Inputs';
 import { ButtonDef } from '../../Buttons';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../redux/auth/authSlice';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
 
 const initialValues = {
   email: '',
@@ -79,8 +79,8 @@ const LoginModal = () => {
   const handleMouseDownPassword = useCallback((event) => event.preventDefault(), []);
 
   const handleFormSubmit = useCallback((e) => {
-    e.preventDefault(); 
-    formik.handleSubmit(); 
+    e.preventDefault();
+    formik.handleSubmit();
   }, [formik]);
 
   console.log('Render LoginModal', { isSubmitting: formik.isSubmitting, isValid: formik.isValid });
@@ -108,6 +108,7 @@ const LoginModal = () => {
           label='modal.registration.email'
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
+          autoComplete="email"
         />
         <FormInput
           showPassword={showPassword}
@@ -122,6 +123,7 @@ const LoginModal = () => {
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
           iconStyle={styles.iconStyle}
+          autoComplete="new-password"
         />
         <Box sx={styles.textLink}>
           <ButtonDef
@@ -136,7 +138,7 @@ const LoginModal = () => {
           <ButtonDef
             variant='contained'
             type='submit'
-            disabled={formik.isSubmitting || !formik.isValid}
+            disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
             label='modal.login.btn_login'
           />
         </Box>
@@ -149,14 +151,14 @@ const LoginModal = () => {
           <Typography href='#' variant='caption1' sx={styles.turnBackText}>
             {t('modal.login.return_on')}
           </Typography>
-          <Link 
+          <Link
   onClick={(e) => {
     e.preventDefault();
     handleClose();
     navigate('/');
-  }} 
+  }}
   component="button"
-  variant='caption1' 
+  variant='caption1'
   sx={styles.turnBackLink}
 >
   {t('modal.login.home_page')}

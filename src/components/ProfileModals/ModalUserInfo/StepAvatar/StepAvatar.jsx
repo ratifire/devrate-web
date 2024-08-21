@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styles } from './StepAvatar.styles';
 import { Box } from '@mui/material';
 import LoadImages from '../../../UI/LoadImages';
 import { useFormik } from 'formik';
-import { StepAvatarSchema } from './StepAvatarSchema';
+import { StepAvatarSchema } from '../../../../utils/valadationSchemas/index';
 import { useDeleteAvatarUserMutation, usePostAvatarUserMutation } from '../../../../redux/user/avatar/avatarApiSlice';
 import { useSelector } from 'react-redux';
-
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 
 const initialValues = {
@@ -15,6 +14,7 @@ const initialValues = {
 
 const StepAvatar = () => {
   const { data: user } = useSelector(selectCurrentUser);
+  const [hasAvatar, setHasAvatar] = useState(false);
 
   const [postAvatarUser] = usePostAvatarUserMutation();
   const onSubmit = (values) => {
@@ -28,7 +28,11 @@ const StepAvatar = () => {
   const [deleteAvatarUser] = useDeleteAvatarUserMutation();
 
   const handleDeleteAvatar = () => {
-    deleteAvatarUser(user.id);
+    if (hasAvatar) {
+      deleteAvatarUser(user.id);
+      formik.setFieldValue('avatar', '');
+      setHasAvatar(false);
+    }
   };
 
   const formik = useFormik({
@@ -39,6 +43,7 @@ const StepAvatar = () => {
 
   const handleAvatarChange = (img) => {
     formik.setFieldValue('avatar', img);
+    setHasAvatar(!!img);
   };
 
   return (
@@ -50,6 +55,7 @@ const StepAvatar = () => {
             handleBlur={formik.handleBlur}
             handlerDelete={handleDeleteAvatar}
             value={formik.values.avatar}
+            showDeleteButton={hasAvatar}
           />
         </Box>
       </form>

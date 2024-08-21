@@ -1,58 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Typography, IconButton, CircularProgress } from '@mui/material';
-import { styles } from './HardSkills.styles';
-import EditIcon from '@mui/icons-material/Edit';
-import SkillItem from './SkillItem';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../../redux/modal/modalSlice';
-import {
-  useGetHardSkillsByMasteryIdQuery,
-  useGetSpecializationByUserIdQuery,
-  useGetMasteriesBySpecializationIdQuery,
-} from '../../../redux/specialization/specializationApiSlice';
+import EditIcon from '@mui/icons-material/Edit'
+import { Box, CircularProgress, IconButton, Typography } from '@mui/material'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { openModal } from '../../../redux/modal/modalSlice'
+import { useUserSkillsAndMasteryData } from '../Statistics/utils'
+import { styles } from './HardSkills.styles'
+import SkillItem from './SkillItem'
 
 const HardSkills = () => {
+  const { t, skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();
   const dispatch = useDispatch();
-  const { t } = useTranslation();
-  const { id: userId } = useSelector((state) => state.auth.user.data);
-  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
-
-  const [specializationId, setSpecializationId] = useState(null);
-  const [masteryId, setMasteryId] = useState(null);
 
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSkillsModal', activeMastery }));
   };
 
-  const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
-
-  useEffect(() => {
-    if (specializations && specializations.length > 0) {
-      setSpecializationId(specializations[0].id);
-    }
-  }, [specializations]);
-
-  const { data: masteries, isLoading: isLoadingMasteries } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
-
-  useEffect(() => {
-    if (masteries && masteries.length > 0 && activeMastery) {
-      const selectedMastery = masteries.find((mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase());
-      setMasteryId(selectedMastery?.id || null);
-    }
-  }, [masteries, activeMastery]);
-
-  const {
-    data: skills = [],
-    isLoading: isLoadingSkills,
-    isError: isErrorSkills,
-  } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
-
-  if (isLoadingSpecializations || isLoadingMasteries || isLoadingSkills) {
+  if (isLoading) {
     return <CircularProgress />;
   }
 
-  if (isErrorSkills) {
+  if (isError) {
     return <Typography variant='h6'>{t('specialisation.hardSkills.error')}</Typography>;
   }
 

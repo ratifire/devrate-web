@@ -25,6 +25,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
   const [settingsCanvas, setSettingsCanvas] = useState({ ...defaultSettingsCanvas });
   const [scale, setScale] = useState(1.1);
   const [error, setError] = useState('');
+  const [imageUploaded, setImageUploaded] = useState(false); // Track image upload status
   const { t } = useTranslation();
 
   const handleWheel = (e) => {
@@ -42,11 +43,13 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
     const rect = editor.current?.getCroppingRect();
     if (!img || !rect) return;
     handleChange(img);
+    setImageUploaded(true); // Set imageUploaded to true after saving the image
   };
 
   const handleClickDelete = () => {
     handlerDelete();
     setSettingsCanvas(defaultSettingsCanvas);
+    setImageUploaded(false); // Reset imageUploaded when the image is deleted
   };
 
   const onDrop = (acceptedFiles, fileRejections) => {
@@ -112,6 +115,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
           <ImageOutlinedIcon sx={styles.imgDefIcon} />
         </Box>
       )}
+
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
           variant='contained'
@@ -120,9 +124,11 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
           label='profile.modal.btn'
           correctStyle={styles.btn}
         />
-        <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
-          <DeleteIcon />
-        </IconButton>
+        {imageUploaded && ( // Conditionally render the delete button
+          <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
+            <DeleteIcon />
+          </IconButton>
+        )}
       </Box>
     </Box>
   );

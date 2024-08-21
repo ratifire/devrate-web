@@ -9,8 +9,8 @@ const isStartDateBeforeEndDate = (startDate, endDate) => {
 
 export const WorkExperienceModalSchema = Yup.object().shape({
   position: Yup.string()
-    .min(2, 'profile.modal.workExperience.position_long')
-    .max(50, 'profile.modal.workExperience.position_short')
+    .min(2, 'profile.modal.workExperience.position_short')
+    .max(50, 'profile.modal.workExperience.position_long')
     .required('profile.modal.workExperience.required'),
   companyName: Yup.string()
     .min(2, 'profile.modal.workExperience.companyName_short')
@@ -23,8 +23,8 @@ export const WorkExperienceModalSchema = Yup.object().shape({
   responsibilities: Yup.string()
     .min(2, 'profile.modal.workExperience.responsibilities_short')
     .max(50, 'profile.modal.workExperience.responsibilities_long'),
-    // .required('profile.modal.workExperience.required'),
-  startDate:Yup.date()
+  // .required('profile.modal.workExperience.required'),
+  startDate: Yup.date()
     .min(new Date(1900, 0, 1), 'Date must be later than 01/01/1900')
     .max(new Date(), 'Date must be earlier than today')
     .required('Start date is required'),
