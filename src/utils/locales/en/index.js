@@ -47,7 +47,7 @@ export const en = {
       education: {
         title: 'Education',
         type: 'Speciality',
-        name: 'Education company',
+        name: 'Educational institution',
         description: 'Description',
         startYear: 'Start year',
         endYear: 'End year',
