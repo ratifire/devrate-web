@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
+import React from 'react';
+import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
 import { styles } from './SoftSkills.styles';
 import EditIcon from '@mui/icons-material/Edit';
 import Item from './Item';
@@ -7,38 +7,57 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
 import {
-  useLazyGetMainMasteryBySpecializationIdQuery,
-  useLazyGetMainSpecializationQuery,
-  useLazyGetSoftSkillsQuery,
+  useGetMasteriesBySpecializationIdQuery,
+  useGetSoftSkillsQuery, useGetSpecializationByUserIdQuery,
 } from '../../../redux/specialization/specializationApiSlice';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
 
 const SoftSkills = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  // const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
-  const currentUser = useSelector(selectCurrentUser);
-  const [getMainSpecialization] = useLazyGetMainSpecializationQuery();
-  const [getMainMastery, mainMastery] = useLazyGetMainMasteryBySpecializationIdQuery();
-  const [getSoftSkills, softSkills] = useLazyGetSoftSkillsQuery();
-
-  useEffect(() => {
-    (async () => {
-      const mainSpec = await getMainSpecialization(currentUser.data.id);
-      if (!mainSpec.data) {
-        return;
-      }
-
-      const mainMastery = await getMainMastery(mainSpec.data.id);
-      getSoftSkills(mainMastery.data.id);
-    })();
-  }, []);
+  const { id: userId } = useSelector((state) => state.auth.user.data);
+  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
+  const {
+    data: specializations,
+    isLoading: isLoadingSpecializations,
+    isError: isErrorLoadingSpecializations,
+  } = useGetSpecializationByUserIdQuery(userId, {
+    skip: !userId,
+  });
+  const specializationId = specializations?.[0]?.id;
+  const {
+    data: masteries,
+    isLoading: isLoadingMasteries,
+    isError: isErrorMasteries,
+  } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
+  const selectMastery = masteries?.find(
+    (mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase()
+  );
+  const masteryId = selectMastery?.id;
+  const {
+    data: softSkills,
+    isLoading: isLoadingSoftSkill,
+    isError: isErrorSoftSkill
+  } = useGetSoftSkillsQuery(masteryId, { skip: !masteryId });
 
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSoftSkillsModal' }));
   };
 
-  const averageMarkNumber = mainMastery?.data?.softSkillMark.toFixed(1);
+  const averageMarkNumber = softSkills?.length > 0 ?
+    (softSkills?.reduce((acc, skill) => acc + skill.averageMark, 0) / softSkills?.length).toFixed(1)
+    : '0'
+
+  const isLoading = isLoadingSpecializations || isLoadingSoftSkill || isLoadingMasteries;
+  const isError = isErrorSoftSkill || isErrorLoadingSpecializations || isErrorMasteries;
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (isError) {
+    return <Typography variant='h6'>{t('specialisation.hardSkills.error')}</Typography>;
+  }
+
 
   return (
     <Box sx={styles.wrapper}>
@@ -50,7 +69,7 @@ const SoftSkills = () => {
       </Box>
 
       <Box>
-        {(softSkills?.data || []).map((skill, index) => (
+        {softSkills?.map((skill, index) => (
           <Item key={index} name={skill.name} value={+Math.round(skill.averageMark).toFixed(1)} />
         ))}
       </Box>

@@ -1,4 +1,6 @@
 // src/app/store.js
+/* eslint-disable */
+
 
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
@@ -54,7 +56,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      .concat(logger)
+      // .concat(logger)
       .concat(apiSlice.middleware),
   devTools: true,
 });
