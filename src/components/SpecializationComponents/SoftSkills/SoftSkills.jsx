@@ -2,43 +2,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
-import {
-  useGetMasteriesBySpecializationIdQuery,
-  useGetSoftSkillsQuery,
-  useGetSpecializationByUserIdQuery,
-} from '../../../redux/specialization/specializationApiSlice';
+import { useGetSoftSkillsQuery } from '../../../redux/specialization/specializationApiSlice';
+import { useGetMastery } from '../hooks';
 import Item from './Item';
 import { styles } from './SoftSkills.styles';
 
 const SoftSkills = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { id: userId } = useSelector((state) => state.auth.user.data);
-  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
-
-  const {
-    data: specializations,
-    isLoading: isLoadingSpecializations,
-    isError: isErrorLoadingSpecializations,
-  } = useGetSpecializationByUserIdQuery(userId, {
-    skip: !userId,
-  });
-
-  const specializationId = specializations?.[0]?.id;
-
-  const {
-    data: masteries,
-    isLoading: isLoadingMasteries,
-    isError: isErrorMasteries,
-  } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
-
-  const selectMastery = masteries?.find(
-    (mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase()
-  );
-
-  const masteryId = selectMastery?.id;
+  const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
 
   const {
     data: softSkills,
@@ -50,13 +24,8 @@ const SoftSkills = () => {
     dispatch(openModal({ modalName: 'openSoftSkillsModal' }));
   };
 
-  const averageMarkNumber =
-    softSkills?.length > 0
-      ? (softSkills?.reduce((acc, skill) => acc + skill.averageMark, 0) / softSkills?.length).toFixed(1)
-      : '0';
-
-  const isLoading = isLoadingSpecializations || isLoadingSoftSkill || isLoadingMasteries;
-  const isError = isErrorSoftSkill || isErrorLoadingSpecializations || isErrorMasteries;
+  const isLoading = isLoadingMastery || isLoadingSoftSkill;
+  const isError = isErrorMastery || isErrorSoftSkill;
 
   if (isLoading) {
     return <CircularProgress />;
@@ -65,6 +34,11 @@ const SoftSkills = () => {
   if (isError) {
     return <Typography variant='h6'>{t('specialisation.hardSkills.error')}</Typography>;
   }
+
+  const averageMarkNumber =
+    softSkills?.length > 0
+      ? (softSkills?.reduce((acc, skill) => acc + skill.averageMark, 0) / softSkills?.length).toFixed(1)
+      : '0';
 
   return (
     <Box sx={styles.wrapper}>
