@@ -12,7 +12,9 @@ const InterviewerInfo = ({ name, position, data, time }) => {
   return (
     <Box sx={styles.container}>
       <Box sx={styles.box}>
-        <Typography variant={'subtitle2'}>{t('modal.interview.interviewer')}: {name}</Typography>
+        <Typography variant={'subtitle2'}>
+          {t('modal.interview.interviewer')}: {name}
+        </Typography>
         <Typography variant={'caption2'}>{position}</Typography>
       </Box>
       <Box sx={styles.box}>

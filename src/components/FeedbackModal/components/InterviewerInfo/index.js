@@ -1,4 +1,3 @@
-import InterviewerInfo from './InterviewerInfo'
+import InterviewerInfo from './InterviewerInfo';
 
-export { InterviewerInfo }
-
+export { InterviewerInfo };

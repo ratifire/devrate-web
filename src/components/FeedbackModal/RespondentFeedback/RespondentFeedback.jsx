@@ -1,13 +1,13 @@
 /* eslint-disable */
-import { Box, Typography } from '@mui/material';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
-import { ButtonDef } from '../../Buttons';
-import { TextAreaInput } from '../../Inputs';
-import { InterviewerInfo, SliderAssessment, SliderAssessmentBox, TitleFeedback } from '../components';
-import { useCloseModal } from '../hooks';
-import { styles } from './RespondentFeedback.styles';
+import { Box, Typography } from '@mui/material'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile'
+import { ButtonDef } from '../../Buttons'
+import { TextAreaInput } from '../../Inputs'
+import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../components'
+import { useCloseModal } from '../hooks'
+import { styles } from './RespondentFeedback.styles'
 
 const RespondentFeedback = () => {
   const { t } = useTranslation();

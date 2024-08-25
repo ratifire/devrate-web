@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
-import React from 'react'
-import { SliderAssessment, SliderAssessmentBox } from '../../components'
+import React from 'react';
+import { SliderAssessment, SliderAssessmentBox } from '../../components';
 
 const StepHardSkills = () => {
   return (
