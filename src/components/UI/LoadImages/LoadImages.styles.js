@@ -18,9 +18,8 @@ export const styles = {
     flexDirection: 'column',
     gridGap: theme.spacing(2),
     backgroundColor: 'transparent',
-    border: '1px dashed',
-    borderColor: theme.palette.neutral[500],
-    borderRadius: 1,
+    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%23444446' stroke-width='4' stroke-dasharray='16%2c 15' stroke-dashoffset='3' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-radius: 10px`,
     cursor: 'pointer',
   }),
   icon: (theme) => ({
@@ -65,6 +64,9 @@ export const styles = {
     paddingY: '14px',
     maxWidth: '228px',
     width: '100%',
+  },
+  error : {
+textAlign: 'center'
   },
   btnIcon: (theme) => ({
     flex: '1 0 44px',
