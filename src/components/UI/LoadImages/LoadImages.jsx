@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { useDropzone } from 'react-dropzone';
 import { styles } from './LoadImages.styles';
@@ -27,17 +27,19 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
 
   useEffect(() => {
     if (value) {
-      setSettingsCanvas(prev => ({ ...prev, image: value }));
+      setSettingsCanvas((prev) => ({ ...prev, image: value }));
     }
   }, [value]);
 
-  const handleWheel = useCallback((e) => {
-    const delta = e.deltaY;
-    const scaleFactor = delta > 0 ? -0.1 : 0.1;
-    const newScale = Math.max(0.5, Math.min(3, scale + scaleFactor));
-    setScale(newScale);
-  }, [scale]);
-
+  const handleWheel = useCallback(
+    (e) => {
+      const delta = e.deltaY;
+      const scaleFactor = delta > 0 ? -0.1 : 0.1;
+      const newScale = Math.max(0.5, Math.min(3, scale + scaleFactor));
+      setScale(newScale);
+    },
+    [scale]
+  );
   const handleSave = useCallback(() => {
     if (editor.current) {
       const img = editor.current.getImageScaledToCanvas().toDataURL();
@@ -47,7 +49,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
 
   const handleClickDelete = useCallback(() => {
     handlerDelete();
-    setSettingsCanvas(prev => ({ ...prev, image: '' }));
+    setSettingsCanvas((prev) => ({ ...prev, image: '' }));
   }, [handlerDelete]);
 
   const checkImageDimensions = (file) => {
@@ -65,23 +67,26 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
     });
   };
 
-  const onDrop = useCallback(async (acceptedFiles, fileRejections) => {
-    if (fileRejections.length > 0) {
-      setError(t('This file can not be used as avatar'));
-      return;
-    }
-
-    if (acceptedFiles.length > 0) {
-      const image = acceptedFiles[0];
-      try {
-        await checkImageDimensions(image);
-        setSettingsCanvas(prev => ({ ...prev, image }));
-        setError('');
-      } catch (err) {
-        setError(err.message);
+  const onDrop = useCallback(
+    async (acceptedFiles, fileRejections) => {
+      if (fileRejections.length > 0) {
+        setError(t('This file can not be used as avatar'));
+        return;
       }
-    }
-  }, [t]);
+
+      if (acceptedFiles.length > 0) {
+        const image = acceptedFiles[0];
+        try {
+          await checkImageDimensions(image);
+          setSettingsCanvas((prev) => ({ ...prev, image }));
+          setError('');
+        } catch (err) {
+          setError(err.message);
+        }
+      }
+    },
+    [t]
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -143,6 +148,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
           handlerClick={handleSave}
           label='profile.modal.btn'
           correctStyle={styles.btn}
+          disabled={!editor}
         />
         {showDeleteButton && (
           <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
