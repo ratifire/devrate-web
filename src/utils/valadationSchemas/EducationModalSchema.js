@@ -2,8 +2,8 @@ import * as Yup from 'yup';
 
 export const EducationModalSchema = Yup.object().shape({
   type: Yup.string()
-    .min(2, 'profile.modal.workExperience.position_long')
-    .max(50, 'profile.modal.workExperience.position_short')
+    .min(2, 'profile.modal.workExperience.position_short')
+    .max(50, 'profile.modal.workExperience.position_long')
     .required('profile.modal.workExperience.required'),
   name: Yup.string()
     .min(2, 'profile.modal.workExperience.companyName_short')
