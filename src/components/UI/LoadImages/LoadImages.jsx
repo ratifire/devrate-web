@@ -22,7 +22,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
     showGrid: true,
     image: '',
   });
-  const [scale, setScale] = useState(1.1);
+  const [scale, setScale] = useState(1.5);
   const [error, setError] = useState('');
 
   useEffect(() => {
