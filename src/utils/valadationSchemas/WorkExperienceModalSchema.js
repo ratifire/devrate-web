@@ -25,13 +25,13 @@ export const WorkExperienceModalSchema = Yup.object().shape({
     .max(50, 'profile.modal.workExperience.responsibilities_long'),
   // .required('profile.modal.workExperience.required'),
   startDate: Yup.date()
-    .min(new Date(1950, 0, 1), 'Date must be later than 01/01/1900')
-    .max(new Date(), 'Date must be earlier than today')
-    .required('Start date is required'),
+    .min(new Date(1950, 0, 1), 'Date must be later than 01/01/1950')
+    .max(new Date(), 'profile.modal.workExperience.startDateMaxMessage')
+    .required('profile.modal.workExperience.required'),
   endDate: Yup.date()
-    .min(new Date(1950, 0, 1), 'Date must be later than 01/01/1900')
+    .min(new Date(1950, 0, 1), 'profile.modal.workExperience.startDateMinMessage')
     .required('End date is required')
-    .test('endDate', 'End date must be later than start date', function (value) {
+    .test('endDate', 'profile.modal.workExperience.endDateMessage', function (value) {
       const startDate = this.resolve(Yup.ref('startDate'));
       return isStartDateBeforeEndDate(startDate, value);
     }),

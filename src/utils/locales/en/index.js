@@ -263,6 +263,9 @@ export const en = {
           startDate: 'Start Date',
           endDate: 'End Date',
           required: 'This is a required field',
+          startDateMinMessage: 'Date must be later than 01/01/1950',
+          startDateMaxMessage: 'Date must be earlier than today',
+          endDateMessage: 'End date must be later than start date',
         },
         education: {
           title: 'Education',

@@ -259,6 +259,10 @@ export const uk = {
           startDate: 'Дата початку',
           endDate: 'Дата закінчення',
           required: "Це обов'язкове поле",
+          startDateMinMessage: 'Стартова дата має бути пізніше 01/01/1950',
+          startDateMaxMessage: 'Кінцева дата має бути не пізніше за поточку',
+          endDateMessage: 'Кінцева дата має буди пізнішою за стартову дату',
+          
         },
         education: {
           title: 'Освіта',
