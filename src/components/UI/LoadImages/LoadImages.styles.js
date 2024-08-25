@@ -65,6 +65,9 @@ export const styles = {
     maxWidth: '228px',
     width: '100%',
   },
+  error : {
+textAlign: 'center'
+  },
   btnIcon: (theme) => ({
     flex: '1 0 44px',
     color: theme.palette.neutral[200],
