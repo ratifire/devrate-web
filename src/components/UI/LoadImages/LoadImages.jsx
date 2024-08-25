@@ -97,14 +97,16 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
   return (
     <Box sx={styles.wrapper}>
       <input type='hidden' value={value} onChange={handleChange} onBlur={handleBlur} />
-      <Box {...getRootProps()} sx={styles.dropZoneWrapper}>
+      <Box sx={styles.dropZoneWrapper}>
         <input {...getInputProps()} />
         <Box sx={styles.dropZone}>
           <Typography variant='caption1' sx={styles.text}>
             {t('profile.modal.userInfo.photo.dropPhoto.first')}
             <br />
             {t('profile.modal.userInfo.photo.dropPhoto.second')}
-            <span>{t('profile.modal.userInfo.photo.dropPhoto.third')}</span>
+            <Box {...getRootProps()} sx={styles.link}>
+              {t('profile.modal.userInfo.photo.dropPhoto.third')}
+            </Box>
           </Typography>
           <BackupOutlinedIcon sx={styles.icon} />
           {error && (
