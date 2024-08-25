@@ -93,7 +93,7 @@ const EducationModal = () => {
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openEducation}>
       <Typography variant='subtitle1' sx={styles.title}>
-        {t('modal.education.title')}
+        {t('profile.modal.education.title')}
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>
@@ -105,9 +105,9 @@ const EducationModal = () => {
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               type='text'
-              label='modal.education.type'
+              label='profile.modal.education.type'
               required
-              placeholder='profile.modal.workExperience.position_placeholder'
+              placeholder='profile.modal.education.speciality_placeholder'
               helperText={formik.touched.type && formik.errors.type}
               error={formik.touched.type && Boolean(formik.errors.type)}
             />
@@ -118,9 +118,9 @@ const EducationModal = () => {
               value={formik.values.name}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
-              label='modal.education.name'
+              label='profile.modal.education.name'
               required
-              placeholder='profile.modal.workExperience.companyName_placeholder'
+              placeholder='profile.modal.education.edIstitution_placeholder'
               helperText={formik.touched.name && formik.errors.name}
               error={formik.touched.name && Boolean(formik.errors.name)}
             />
@@ -128,10 +128,10 @@ const EducationModal = () => {
           <Box sx={styles.input100}>
             <CountrySelect
               sx={styles.input50}
-              label={t('modal.education.startYear')}
+              label={t('profile.modal.education.startYear')}
               value={formik.values.startYear}
               countries={startYears}
-              name='startYear'
+              name='startYear'                     s
               variant='outlined'
               required
               handleChange={formik.handleChange}
@@ -142,7 +142,7 @@ const EducationModal = () => {
             />
             <CountrySelect
               sx={styles.input50}
-              label={t('modal.education.endYear')}
+              label={t('profile.modal.education.endYear')}
               value={formik.values.endYear}
               countries={endYears}
               name='endYear'
@@ -162,8 +162,8 @@ const EducationModal = () => {
               handleBlur={formik.handleBlur}
               type='text'
               required
-              label='modal.education.description'
-              placeholder='profile.modal.workExperience.description_placeholder'
+              label='profile.modal.education.description'
+              placeholder='profile.modal.education.description_placeholder'
               helperText={formik.touched.description && formik.errors.description}
               error={formik.touched.description && Boolean(formik.errors.description)}
             />
