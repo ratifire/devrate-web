@@ -35,10 +35,6 @@ const ModalUserInfo = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleStep = (step) => () => {
-    setActiveStep(step);
-  };
-
   const getStepContent = (stepIndex) => {
     switch (stepIndex) {
       case 0:
@@ -55,9 +51,9 @@ const ModalUserInfo = () => {
     <ModalLayoutProfile setOpen={handleClose} open={openUserInfo}>
       <Box sx={styles.wrapper}>
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
-          {steps.map((label, index) => (
+          {steps.map((label) => (
             <Step key={label} sx={styles.step}>
-              <StepButton color='inherit' onClick={handleStep(index)} sx={styles.stepBtn} disabled={false} />
+              <StepButton color='inherit' sx={styles.stepBtn} disabled={false} />
               {steps[activeStep] === label && (
                 <Typography variant='subtitle1' sx={styles.title}>
                   {t(label)}
