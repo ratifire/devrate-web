@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 
 export default {
-  title: 'Sections/HeroSection',
+  title: 'LandingComponents/HeroSection',
   component: HeroSection,
   parameters: {
     layout: 'centered',

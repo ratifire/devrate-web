@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { styles } from './HeroSection.styles';
 import { useTranslation } from 'react-i18next';
-import { ButtonDef } from '../../Buttons';
+import { ButtonDef } from '../../FormsComponents/Buttons';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice';
 

@@ -5,7 +5,7 @@ import styles from './Header.styles';
 import LinkList from '../../UI/LinkList';
 import navLinks from '../../../utils/constants/navLinks';
 import Logo from '../../UI/Logo';
-import { ButtonDef } from '../../Buttons';
+import { ButtonDef } from '../../FormsComponents/Buttons';
 import { openModal } from '../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';

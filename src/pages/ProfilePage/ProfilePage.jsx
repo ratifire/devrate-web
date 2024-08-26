@@ -3,7 +3,7 @@ import { ProfileTemplate } from '../../Templates';
 import { Box, Container, Paper } from '@mui/material';
 import { styles } from './ProfilePage.styles';
 import SkillsSection from '../../components/ProfileComponents/SkillsSection/SkillsSection';
-import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
+import ProfileHeader from '../../components/PageComponents/ProfileHeader';
 import BaseUserInfo from '../../components/ProfileComponents/BaseUserInfo';
 import RightSection from '../../components/ProfileComponents/RightSection';
 import ExperienceSection from '../../components/ProfileComponents/ExperienceSection';

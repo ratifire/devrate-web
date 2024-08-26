@@ -6,7 +6,7 @@ import { store } from '../../../redux/store/store';
 import { decorators } from '../../../../.storybook/preview';
 
 export default {
-  title: 'Sections/Header',
+  title: 'LandingComponents/Header',
   component: Header,
   parameters: {
     layout: 'centered',

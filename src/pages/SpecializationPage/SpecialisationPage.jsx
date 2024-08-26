@@ -4,7 +4,7 @@ import { styles } from './SpecialisationPage.style';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import { useTranslation } from 'react-i18next';
 
-const ProfileHeader = React.lazy(() => import('../../components/ProfileComponents/ProfileHeader'));
+const ProfileHeader = React.lazy(() => import('../../components/PageComponents/ProfileHeader'));
 const SpecializationLevel = React.lazy(() => import('../../components/SpecializationComponents/SpecializationLevel'));
 const HardSkills = React.lazy(() => import('../../components/SpecializationComponents/HardSkills'));
 const SpecialisationCategories = React.lazy(

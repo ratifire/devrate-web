@@ -4,7 +4,7 @@ import { decorators } from '../../../../.storybook/preview';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 export default {
-  title: 'Sections/Footer',
+  title: 'LandingComponents/Footer',
   component: Footer,
   tags: ['autodocs'],
   parameters: {
