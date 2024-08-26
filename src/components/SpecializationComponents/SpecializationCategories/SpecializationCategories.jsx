@@ -66,6 +66,7 @@ const SpecializationCategories = () => {
 
   const handlerDeleteSpecialization = async (id) => {
     await deleteSpecialization(id).unwrap();
+    dispatch(setSelectedSpecialization(null));
     handleCloseMenu(id);
   };
 
