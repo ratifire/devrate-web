@@ -1,6 +1,6 @@
 import HeroSection from './HeroSection';
-import { decorators } from '../../../../.storybook/preview';
-import { store } from '../../../redux/store/store';
+import { decorators } from '../../../../../.storybook/preview';
+import { store } from '../../../../redux/store/store';
 import { Provider } from 'react-redux';
 import React from 'react';
 

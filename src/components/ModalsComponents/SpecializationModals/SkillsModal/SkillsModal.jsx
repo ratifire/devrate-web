@@ -1,19 +1,19 @@
 import React, { useState, useCallback } from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
-import { closeModal } from '../../../redux/modal/modalSlice';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Box, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
 import { styles } from './SkillsModal.styles';
-import { ButtonDef } from '../../Buttons';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
 import useSkillsData from './useSkillsData';
 import {
   useAddSkillToMasteryMutation,
   useDeleteSkillByIdMutation,
-} from '../../../redux/specialization/specializationApiSlice';
-import { SkillChip } from '../../SpecializationComponents/SkillChip/SkillChip';
+} from '../../../../redux/specialization/specializationApiSlice';
+import { SkillChip } from '../../../PageComponents/SpecializationComponents/SkillChip/SkillChip';
 
 const MAX_SKILLS = 20;
 

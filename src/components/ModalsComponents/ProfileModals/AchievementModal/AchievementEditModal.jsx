@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { useUpdateAchievementMutation } from '../../../redux/services/achievementsApiSlice';
-import { ButtonDef } from '../../Buttons';
-import FormInput from '../../Inputs/FormInput';
-import TextAreaInput from '../../Inputs/TextAreaInput';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useUpdateAchievementMutation } from '../../../../redux/services/achievementsApiSlice';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import FormInput from '../../../FormsComponents/Inputs/FormInput';
+import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { styles } from './AchievementModal.styles';
-import { AchievementModalSchema } from '../../../utils/valadationSchemas/index';
+import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
 
 const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
   const {

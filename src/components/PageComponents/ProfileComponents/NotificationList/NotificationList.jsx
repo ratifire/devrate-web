@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Badge, Box, IconButton, Popover } from '@mui/material';
 import Notification from './Notification';
-import { ReactComponent as BellNotification } from '../../../assets/icons/bell.svg';
+import { ReactComponent as BellNotification } from '../../../../assets/icons/bell.svg';
 import PropTypes from 'prop-types';
 import styles from './NotificationList.styles';
-import {useSocket} from "../../../utils/hooks/useSocket"; // import { ReactComponent as LoupeSearch } from '../../../assets/icons/loupe.svg';
+import {useSocket} from "../../../../utils/hooks/useSocket"; // import { ReactComponent as LoupeSearch } from '../../../assets/icons/loupe.svg';
 
 const NotificationList = () => {
   const [bellButton, setBellButton] = useState(null);

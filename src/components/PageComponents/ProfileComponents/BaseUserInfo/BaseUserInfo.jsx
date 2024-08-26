@@ -3,14 +3,14 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EditIcon from '@mui/icons-material/Edit';
 import { styles } from './BaseUserInfo.styles';
 import { Box, Button, IconButton, Typography } from '@mui/material';
-import LinearProgressWithLabel from '../../LinearProgressWithLabel';
-import UserAvatar from '../../UI/UserAvatar';
+import LinearProgressWithLabel from '../../../UI/LinearProgressWithLabel';
+import UserAvatar from '../../../UI/UserAvatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../../redux/modal/modalSlice';
-import { setStep } from '../../../redux/modal/modalStepSlice';
-import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
+import { openModal } from '../../../../redux/modal/modalSlice';
+import { setStep } from '../../../../redux/modal/modalStepSlice';
+import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
 import { useProfileProgress } from './useProfileProgress';
 
 const BaseUserInfo = () => {

@@ -1,13 +1,13 @@
 // useProfileProgress.js
 import { useState, useEffect } from 'react';
-import { useGetWorkExperienceByUserIdQuery } from '../../../redux/workExperience/workExperienceApiSlice';
-import { useFetchAchievementsQuery } from '../../../redux/services/achievementsApiSlice';
-import { useGetEducationByUserIdQuery } from '../../../redux/services/educationApiSlice';
-import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice';
-import { useGetUserContactsQuery } from '../../../redux/user/contacts/contactsApiSlice';
-import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
-import { useGetLanguageUserQuery } from '../../../redux/user/language/languageApiSlice';
-import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
+import { useGetWorkExperienceByUserIdQuery } from '../../../../redux/workExperience/workExperienceApiSlice';
+import { useFetchAchievementsQuery } from '../../../../redux/services/achievementsApiSlice';
+import { useGetEducationByUserIdQuery } from '../../../../redux/services/educationApiSlice';
+import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
+import { useGetUserContactsQuery } from '../../../../redux/user/contacts/contactsApiSlice';
+import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice';
+import { useGetLanguageUserQuery } from '../../../../redux/user/language/languageApiSlice';
+import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
 
 export const useProfileProgress = (userId) => {
   const [progress, setProgress] = useState(5);

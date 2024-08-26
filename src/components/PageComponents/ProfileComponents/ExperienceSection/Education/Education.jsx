@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import styles from './Education.styles.js';
 import EducationItem from './EducationItem/EducationItem';
 import { useSelector } from 'react-redux';
-import { useGetEducationByUserIdQuery } from '../../../../redux/services/educationApiSlice';
+import { useGetEducationByUserIdQuery } from '../../../../../redux/services/educationApiSlice';
 
 const Education = () => {
     const { id: userId } = useSelector((state) => state.auth.user.data);

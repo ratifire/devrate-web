@@ -1,19 +1,19 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../redux/modal/modalSlice';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import { Box, Typography } from '@mui/material';
 import { styles } from './EducationModal.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { EducationModalSchema } from '../../../utils/valadationSchemas/index';
-import FormInput from '../../Inputs/FormInput';
-import TextAreaInput from '../../Inputs/TextAreaInput';
-import { ButtonDef } from '../../Buttons';
-import CountrySelect from '../../Inputs/CountrySelect';
-import { useCreateEducationMutation, useUpdateEducationMutation } from '../../../redux/services/educationApiSlice';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { selectEducationDataToEdit, clearEducationDataToEdit } from '../../../redux/user/education/educationSlice';
+import { EducationModalSchema } from '../../../../utils/valadationSchemas/index';
+import FormInput from '../../../FormsComponents/Inputs/FormInput';
+import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
+import { useCreateEducationMutation, useUpdateEducationMutation } from '../../../../redux/services/educationApiSlice';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { selectEducationDataToEdit, clearEducationDataToEdit } from '../../../../redux/user/education/educationSlice';
 
 const EducationModal = () => {
   const dispatch = useDispatch();

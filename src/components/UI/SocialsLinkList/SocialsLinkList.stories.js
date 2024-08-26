@@ -2,7 +2,7 @@ import React from 'react';
 import SocialsLinkList from './SocialsLinkList';
 import { decorators } from '../../../../.storybook/preview';
 import socials from '../../../utils/constants/socials';
-import styles from '../../LandingComponents/Footer/Footer.styles';
+import styles from '../..//PageComponents/LandingComponents/Footer/Footer.styles';
 import { BrowserRouter as Router } from 'react-router-dom'; 
 
 export default {

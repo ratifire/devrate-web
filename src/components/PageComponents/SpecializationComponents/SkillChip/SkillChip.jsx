@@ -2,7 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Chip, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { styles } from '../../SpecializationModals/SoftSkillsModal/SoftSkillsModal.styles';
+import { styles } from '../../../ModalsComponents/SpecializationModals/SoftSkillsModal/SoftSkillsModal.styles';
 
 export const SkillChip = React.memo(({ skill, onDelete }) => (
   <Chip

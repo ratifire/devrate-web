@@ -1,6 +1,6 @@
 import React from 'react';
 import RightSection from './RightSection';
-import { decorators } from '../../../../.storybook/preview';
+import { decorators } from '../../../../../.storybook/preview';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 export default {

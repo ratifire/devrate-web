@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import AchievementModal from '../../../../components/ProfileModals/AchievementModal/AchievementModal';
-import { useFetchAchievementsQuery } from '../../../../redux/services/achievementsApiSlice';
+import AchievementModal from '../../../ProfileComponents/ExperienceSection/Achievement/AchievementItem/AchievementItem';
+import { useFetchAchievementsQuery } from '../../../../../redux/services/achievementsApiSlice';
 import AchievementItem from './AchievementItem/AchievementItem';
 import styles from './Achievment.styles';
 

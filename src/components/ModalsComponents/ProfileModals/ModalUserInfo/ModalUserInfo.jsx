@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../redux/modal/modalSlice';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import { Box, IconButton, Step, StepButton, StepConnector, Stepper, Typography } from '@mui/material';
 import { styles } from './ModalUserInfo.styles';
 import { useTranslation } from 'react-i18next';

@@ -1,6 +1,6 @@
 import React from 'react';
 import UserMenu from './UserMenu';
-import { decorators } from '../../../../.storybook/preview';
+import { decorators } from '../../../../../.storybook/preview';
 
 
 export default {

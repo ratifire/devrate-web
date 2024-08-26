@@ -4,9 +4,9 @@ import { styles } from './SkillsItem.styles';
 import PropTypes from 'prop-types';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import { useUpdateSkillsMutation } from '../../../../../redux/services/skillsApiSlice';
+import { useUpdateSkillsMutation } from '../../../../../../redux/services/skillsApiSlice';
 import { useFormik } from 'formik';
-import { SkillsItemSchema } from '../../../../../utils/valadationSchemas/index';
+import { SkillsItemSchema } from '../../../../../../utils/valadationSchemas/index';
 
 const SkillsItem = ({ data }) => {
   const { id, name, averageMark, hidden } = data;

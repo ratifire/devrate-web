@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
-import { closeModal } from '../../../redux/modal/modalSlice';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './SoftSkillsModal.styles';
@@ -12,11 +12,11 @@ import {
   useLazyGetMainMasteryBySpecializationIdQuery,
   useLazyGetMainSpecializationQuery,
   useLazyGetSoftSkillsQuery,
-} from '../../../redux/specialization/specializationApiSlice';
-import CountrySelect from '../../Inputs/CountrySelect';
-import { ButtonDef } from '../../Buttons';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { SkillChip } from '../../SpecializationComponents/SkillChip/SkillChip';
+} from '../../../../redux/specialization/specializationApiSlice';
+import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { SkillChip } from '../../../PageComponents/SpecializationComponents/SkillChip/SkillChip';
 
 
 const SoftSkillsModal = () => {

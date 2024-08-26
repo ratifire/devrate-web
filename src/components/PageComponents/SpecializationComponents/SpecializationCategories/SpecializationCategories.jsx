@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { styles } from './SpecializationCategories.styles';
 import { Box, IconButton, Typography, Tooltip } from '@mui/material';
-import { ButtonDef } from '../../Buttons';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import StarIcon from '@mui/icons-material/Star';
@@ -12,9 +12,9 @@ import {
   useGetSpecializationByUserIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
-} from '../../../redux/specialization/specializationApiSlice';
-import { setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
-import { openModal } from '../../../redux/modal/modalSlice';
+} from '../../../../redux/specialization/specializationApiSlice';
+import { setSelectedSpecialization } from '../../../../redux/specialization/specializationSlice';
+import { openModal } from '../../../../redux/modal/modalSlice';
 import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
 
 const SpecializationCategories = () => {

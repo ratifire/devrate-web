@@ -1,7 +1,7 @@
 import React from 'react';
 import ExperienceSection from './ExperienceSection';
 import { Provider } from 'react-redux';
-import { store } from '../../../redux/store/store';
+import { store } from '../../../../redux/store/store';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 export default {

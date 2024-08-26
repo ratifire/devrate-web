@@ -7,7 +7,7 @@ import Achievment from './Achievement/Achievment';
 import { useTranslation } from 'react-i18next';
 import WorkExperience from './WorkExperience/WorkExperience';
 import { Add } from '@mui/icons-material';
-import { openModal } from '../../../redux/modal/modalSlice';
+import { openModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch } from 'react-redux';
 
 const ExperienceSection = () => {

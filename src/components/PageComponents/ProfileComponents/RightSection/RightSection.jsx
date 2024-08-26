@@ -1,17 +1,17 @@
 import React from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './RightSection.styles';
-import SocialsLinkList from '../../UI/SocialsLinkList';
+import SocialsLinkList from '../../../UI/SocialsLinkList';
 import { useTranslation } from 'react-i18next';
-import LanguagesList from '../../UI/LanguagesList';
+import LanguagesList from '../../../UI/LanguagesList';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { useGetLanguageUserQuery } from '../../../redux/user/language/languageApiSlice';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useGetLanguageUserQuery } from '../../../../redux/user/language/languageApiSlice';
 import EditIcon from '@mui/icons-material/Edit';
-import { setStep } from '../../../redux/modal/modalStepSlice';
-import { openModal } from '../../../redux/modal/modalSlice';
-import { useGetUserContactsQuery } from '../../../redux/user/contacts/contactsApiSlice';
-import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
+import { setStep } from '../../../../redux/modal/modalStepSlice';
+import { openModal } from '../../../../redux/modal/modalSlice';
+import { useGetUserContactsQuery } from '../../../../redux/user/contacts/contactsApiSlice';
+import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice';
 
 const RightSection = () => {
   const { t } = useTranslation();

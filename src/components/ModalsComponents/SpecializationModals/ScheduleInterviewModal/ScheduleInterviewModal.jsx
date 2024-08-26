@@ -1,23 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
-import { closeModal } from '../../../redux/modal/modalSlice';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Checkbox, FormControlLabel, IconButton, Tab, Tabs, Typography } from '@mui/material';
 import { styles } from './ScheduleInterview.styles';
-import { ButtonDef } from '../../Buttons';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
-import { getDatesInWeek } from '../../../utils/helpers/getWeekDates';
+import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
-import { selectCurrentUserId } from '../../../redux/auth/authSlice';
+import { selectCurrentUserId } from '../../../../redux/auth/authSlice';
 import {
   useCreateInterviewRequestMutation,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useLazyGetMainSpecializationQuery,
-} from '../../../redux/specialization/specializationApiSlice';
+} from '../../../../redux/specialization/specializationApiSlice';
 import PropTypes from 'prop-types';
 
 

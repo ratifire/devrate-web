@@ -1,15 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import { Box, IconButton, Link, Typography } from '@mui/material';
-import { ReactComponent as EducationalCourses } from '../../../../../assets/icons/educationalCourses.svg';
+import { ReactComponent as EducationalCourses } from '../../../../../../assets/icons/educationalCourses.svg';
 import styles from './EducationItem.styles.js';
 import PropTypes from 'prop-types';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
-import { useDeleteEducationByIdMutation } from '../../../../../redux/services/educationApiSlice';
+import { useDeleteEducationByIdMutation } from '../../../../../../redux/services/educationApiSlice';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { setEducationDataToEdit } from '../../../../../redux/user/education/educationSlice';
-import { openModal } from '../../../../../redux/modal/modalSlice';
+import { setEducationDataToEdit } from '../../../../../../redux/user/education/educationSlice';
+import { openModal } from '../../../../../../redux/modal/modalSlice';
 
 const LENGTH_TO_COLLAPSE = 200;
 

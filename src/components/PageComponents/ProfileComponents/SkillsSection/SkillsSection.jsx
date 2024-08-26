@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styles } from './SkillsSection.styles';
-import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
+import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 
 const SkillsSection = () => {
   const { data: info } = useSelector(selectCurrentUser);

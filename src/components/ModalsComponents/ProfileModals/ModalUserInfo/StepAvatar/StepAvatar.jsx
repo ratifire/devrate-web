@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { styles } from './StepAvatar.styles';
 import { Box } from '@mui/material';
-import LoadImages from '../../../UI/LoadImages';
+import LoadImages from '../../../../UI/LoadImages';
 import { useFormik } from 'formik';
-import { StepAvatarSchema } from '../../../../utils/valadationSchemas/index';
-import { useDeleteAvatarUserMutation, usePostAvatarUserMutation, useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
+import { StepAvatarSchema } from '../../../../../utils/valadationSchemas/index';
+import { useDeleteAvatarUserMutation, usePostAvatarUserMutation, useGetAvatarUserQuery } from '../../../../../redux/user/avatar/avatarApiSlice';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 
 const initialValues = {
   avatar: '',

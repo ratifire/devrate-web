@@ -4,12 +4,12 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import styles from './WorkExperienceItem.styles.js';
 import { useTranslation } from 'react-i18next';
-import Responsibility from '../../../../UI/Responsibility/Responsibility';
+import Responsibility from '../../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { openModal } from '../../../../../redux/modal/modalSlice';
-import { useDeleteWorkExperienceByIdMutation } from '../../../../../redux/workExperience/workExperienceApiSlice';
+import { openModal } from '../../../../../../redux/modal/modalSlice';
+import { useDeleteWorkExperienceByIdMutation } from '../../../../../../redux/workExperience/workExperienceApiSlice';
 
 const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, description, responsibilities }) => {
   const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();

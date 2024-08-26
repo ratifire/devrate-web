@@ -18,9 +18,9 @@ import links from './profileRoutes';
 import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
-import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
+import { useLogoutMutation } from '../../../../redux/auth/authApiSlice';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../../../redux/auth/authSlice';
+import { logOut } from '../../../../redux/auth/authSlice';
 
 const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();

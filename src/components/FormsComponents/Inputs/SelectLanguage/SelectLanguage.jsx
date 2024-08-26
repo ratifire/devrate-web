@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import {
   useGetDefLanguageLevelQuery,
   useGetDefLanguageQuery,
-} from '../../../redux/services/defaultLanguage/defaultLanguageApiSlice';
+} from '../../../../redux/services/defaultLanguage/defaultLanguageApiSlice';
 
 const SelectLanguage = ({
   variant,

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { AppBar, Box, Container, Divider, Drawer, IconButton, Link, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './Header.styles';
-import LinkList from '../../UI/LinkList';
-import navLinks from '../../../utils/constants/navLinks';
-import Logo from '../../UI/Logo';
-import { ButtonDef } from '../../FormsComponents/Buttons';
-import { openModal } from '../../../redux/modal/modalSlice';
+import LinkList from '../../../UI/LinkList';
+import navLinks from '../../../../utils/constants/navLinks';
+import Logo from '../../../UI/Logo';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { openModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import navigationsLinks from '../../../router/links';
+import navigationsLinks from '../../../../router/links';
 
 function Header() {
   const dispatch = useDispatch();

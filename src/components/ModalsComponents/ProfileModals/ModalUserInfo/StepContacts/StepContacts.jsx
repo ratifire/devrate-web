@@ -1,14 +1,14 @@
 import React from 'react';
 import { styles } from './StepContacts.styles';
-import { FormInput } from '../../../Inputs';
+import { FormInput } from '../../../../FormsComponents/Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
-import { StepContactsSchema } from '../../../../utils/valadationSchemas/index';
-import { useGetUserContactsQuery, usePostContactsUserMutation } from '../../../../redux/user/contacts/contactsApiSlice';
+import { StepContactsSchema } from '../../../../../utils/valadationSchemas/index';
+import { useGetUserContactsQuery, usePostContactsUserMutation } from '../../../../../redux/user/contacts/contactsApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { ButtonDef } from '../../../Buttons';
-import { SOCIAL_TYPES } from '../../../UI/SocialsLinkList/SocialTypes';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
+import { closeModal } from '../../../../../redux/modal/modalSlice';
 
 const typeNameMap = {
   [SOCIAL_TYPES.TELEGRAM_LINK]: 'telegram',

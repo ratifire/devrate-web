@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../redux/modal/modalSlice';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './WorkExperienceModal.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { WorkExperienceModalSchema } from '../../../utils/valadationSchemas/index';
+import { WorkExperienceModalSchema } from '../../../../utils/valadationSchemas/index';
 import AddIcon from '@mui/icons-material/Add';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import FormInput from '../../Inputs/FormInput';
-import TextAreaInput from '../../Inputs/TextAreaInput';
-import Responsibility from '../../UI/Responsibility';
-import { ButtonDef } from '../../Buttons';
+import FormInput from '../../../FormsComponents/Inputs/FormInput';
+import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
+import Responsibility from '../../../UI/Responsibility';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { DateField } from '@mui/x-date-pickers';
 import { DateTime } from 'luxon';
 import {
   useCreateNewWorkExperienceMutation,
   useUpdateWorkExperienceByIdMutation,
-} from '../../../redux/workExperience/workExperienceApiSlice';
+} from '../../../../redux/workExperience/workExperienceApiSlice';
 
 
 const WorkExperienceModal = () => {

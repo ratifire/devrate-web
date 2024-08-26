@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {
   useGetHardSkillsByMasteryIdQuery,
   useGetMainMasteryBySpecializationIdQuery,
-} from '../../../../../redux/specialization/specializationApiSlice';
+} from '../../../../../../redux/specialization/specializationApiSlice';
 
 const SkillsList = ({ data, length }) => {
   const { id, name } = data;

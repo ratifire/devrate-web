@@ -3,7 +3,7 @@ import {
   useGetHardSkillsByMasteryIdQuery,
   useGetSpecializationByUserIdQuery,
   useGetMasteriesBySpecializationIdQuery,
-} from '../../../redux/specialization/specializationApiSlice';
+} from '../../../../redux/specialization/specializationApiSlice';
 
 const useSkillsData = (userId, activeMastery) => {
   const [skillsData, setSkillsData] = useState({

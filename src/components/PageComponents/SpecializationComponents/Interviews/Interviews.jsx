@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Mood from '@mui/icons-material/Mood';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../../redux/modal/modalSlice';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice';
+import { openModal } from '../../../../redux/modal/modalSlice';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 
 const Interviews = () => {
   const user = useSelector(selectCurrentUser);

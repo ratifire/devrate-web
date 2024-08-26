@@ -3,8 +3,8 @@ import LinkList from './LinkList';
 import { decorators } from '../../../../.storybook/preview';
 import navLinks from '../../../utils/constants/navLinks';
 import legalInfoLinks from '../../../utils/constants/legalInfoLinks';
-import headerStyles from '../../LandingComponents/Header/Header.styles';
-import footerStyles from '../../LandingComponents/Footer/Footer.styles';
+import headerStyles from '../..//PageComponents/LandingComponents/Header/Header.styles';
+import footerStyles from '../..//PageComponents/LandingComponents/Footer/Footer.styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 export default {

@@ -3,9 +3,9 @@ import { Box, Typography } from '@mui/material';
 import { styles } from './SpecializationLevel.styles';
 import { useTranslation } from 'react-i18next';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import ButtonDef from '../../Buttons/ButtonDef';
+import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveMastery } from '../../../redux/specialization/activeMasterySlice';
+import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 
 const SpecializationLevel = () => {
   const { t } = useTranslation();

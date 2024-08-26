@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
-import { closeModal } from '../../../redux/modal/modalSlice';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { SpecializationModalSchema } from '../../../utils/valadationSchemas/index';
+import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/index';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './SpecializationModal.styles';
-import { ButtonDef } from '../../Buttons';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
 import {
   useAddSkillsToMasteryMutation,
@@ -14,13 +14,13 @@ import {
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
   useUpdateSpecializationByIdMutation,
-} from '../../../redux/specialization/specializationApiSlice';
-import { setMainMastery, setSelectedSpecialization } from '../../../redux/specialization/specializationSlice';
-import { useGetSpecializationListQuery } from '../../../redux/specialization/specializationList/specializationListApiSlice';
-import FormInput from '../../Inputs/FormInput';
+} from '../../../../redux/specialization/specializationApiSlice';
+import { setMainMastery, setSelectedSpecialization } from '../../../../redux/specialization/specializationSlice';
+import { useGetSpecializationListQuery } from '../../../../redux/specialization/specializationList/specializationListApiSlice';
+import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import AddIcon from '@mui/icons-material/Add';
-import Responsibility from '../../UI/Responsibility';
-import { AdvancedFormSelector } from '../../Inputs';
+import Responsibility from '../../../UI/Responsibility';
+import { AdvancedFormSelector } from '../../../FormsComponents/Inputs';
 
 const initialValues = {
   name: '',

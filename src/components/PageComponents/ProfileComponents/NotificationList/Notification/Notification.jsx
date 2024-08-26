@@ -7,8 +7,8 @@ import InfoOutlined from '@mui/icons-material/InfoOutlined';
 import ErrorRounded from '@mui/icons-material/ErrorRounded';
 import Close from '@mui/icons-material/Close';
 import {useSelector} from "react-redux";
-import {selectCurrentUser} from "../../../../redux/auth/authSlice";
-import {useDeleteNotificationMutation, useMarkAsReadMutation} from "../../../../redux/services/notificationsApiSlice";
+import {selectCurrentUser} from "../../../../../redux/auth/authSlice";
+import {useDeleteNotificationMutation, useMarkAsReadMutation} from "../../../../../redux/services/notificationsApiSlice";
 
 const iconMap = {
   message: <Sms />,

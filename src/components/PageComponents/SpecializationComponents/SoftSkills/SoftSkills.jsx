@@ -5,13 +5,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import Item from './Item';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../../redux/modal/modalSlice';
+import { openModal } from '../../../../redux/modal/modalSlice';
 import {
   useLazyGetMainMasteryBySpecializationIdQuery,
   useLazyGetMainSpecializationQuery,
   useLazyGetSoftSkillsQuery,
-} from '../../../redux/specialization/specializationApiSlice';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
+} from '../../../../redux/specialization/specializationApiSlice';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 
 const SoftSkills = () => {
   const dispatch = useDispatch();

@@ -1,14 +1,14 @@
 import React from 'react';
 import { styles } from './StepPersonal.styles';
-import { FormInput, FormSelect, TextAreaInput } from '../../../Inputs';
+import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
-import { StepPersonalSchema } from '../../../../utils/valadationSchemas/index';
-import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '../../../../redux/user/personal/personalApiSlice';
-import { ButtonDef } from '../../../Buttons';
-import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { StepPersonalSchema } from '../../../../../utils/valadationSchemas/index';
+import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '../../../../../redux/user/personal/personalApiSlice';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { useGetCountryListQuery } from '../../../../../redux/countryList/countryApiSlice';
+import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 
 const StepPersonal = () => {
   const { data: userCountries } = useGetCountryListQuery();
