@@ -91,7 +91,7 @@ FormInput.propTypes = {
   error: PropTypes.bool.isRequired,
   clickHandler: PropTypes.func,
   mouseDownHandler: PropTypes.func,
-  iconStyle: PropTypes.object,
+  iconStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   autoComplete: PropTypes.string,
   extraProps: PropTypes.object,
 };

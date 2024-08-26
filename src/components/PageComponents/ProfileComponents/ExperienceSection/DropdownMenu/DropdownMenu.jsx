@@ -26,7 +26,7 @@ const DropdownMenu = ({ anchorEl, handleCloseMenu, handleEditFeature, handleDele
 export default DropdownMenu;
 
 DropdownMenu.propTypes = {
-  anchorEl: PropTypes.object,
+  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   setAnchorEl: PropTypes.func,
   handleCloseMenu: PropTypes.func,
   handleEditFeature: PropTypes.func,
