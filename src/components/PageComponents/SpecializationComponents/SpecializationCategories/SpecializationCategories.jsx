@@ -60,12 +60,13 @@ const SpecializationCategories = () => {
   };
 
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
-    if (specializations?.length === 0) return;
+    if (specializations?.length === 0 || selectedSpecialization === null) return;
     await updateSpecializationAsMainById({ ...selectedSpecialization, main: true }).unwrap();
   };
 
   const handlerDeleteSpecialization = async (id) => {
     await deleteSpecialization(id).unwrap();
+    dispatch(setSelectedSpecialization(null));
     handleCloseMenu(id);
   };
 

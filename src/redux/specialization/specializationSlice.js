@@ -8,7 +8,7 @@ const specializationSlice = createSlice({
   },
   reducers: {
     setSelectedSpecialization: (state, { payload }) => {
-      state.selectedSpecialization = { ...payload };
+      state.selectedSpecialization = payload;
     },
     setMainMastery: (state, { payload }) => {
       state.mainMastery = { ...payload };
