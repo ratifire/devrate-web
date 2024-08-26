@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import ModalLayout from '../../../layouts/ModalLayout';
+import ModalLayout from '../../../../layouts/ModalLayout';
 import { Box, CircularProgress, Link, Typography } from '@mui/material';
 import styles from './RegistrationModal.styles';
-import { RegistrationSchema } from '../../../utils/valadationSchemas/index';
-import { AdvancedFormSelector, FormCheckbox, FormInput } from '../../Inputs';
-import { ButtonDef } from '../../Buttons';
+import { RegistrationSchema } from '../../../../utils/valadationSchemas/index';
+import { AdvancedFormSelector, FormCheckbox, FormInput } from '../../../FormsComponents/Inputs';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import { useCreateUserMutation } from '../../../redux/auth/authApiSlice';
-import { closeModal, openModal } from '../../../redux/modal/modalSlice';
-import { useGetCountryListQuery } from '../../../redux/countryList/countryApiSlice';
+import { useCreateUserMutation } from '../../../../redux/auth/authApiSlice';
+import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
+import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
 
 const initialValues = {
   email: '',

@@ -2,9 +2,9 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Typography, Box } from '@mui/material';
-import ModalLayout from '../../../../layouts/ModalLayout';
-import { ButtonDef } from '../../../Buttons';
-import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
+import ModalLayout from '../../../../../layouts/ModalLayout';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import styles from './NotificationModal.styles';
 
 const NotificationModal = () => {

@@ -5,24 +5,24 @@ import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import { useTranslation } from 'react-i18next';
 
 const ProfileHeader = React.lazy(() => import('../../components/PageComponents/ProfileHeader'));
-const SpecializationLevel = React.lazy(() => import('../../components/SpecializationComponents/SpecializationLevel'));
-const HardSkills = React.lazy(() => import('../../components/SpecializationComponents/HardSkills'));
+const SpecializationLevel = React.lazy(() => import('../../components/PageComponents/SpecializationComponents/SpecializationLevel'));
+const HardSkills = React.lazy(() => import('../../components/PageComponents/SpecializationComponents/HardSkills'));
 const SpecialisationCategories = React.lazy(
-  () => import('../../components/SpecializationComponents/SpecializationCategories')
+  () => import('../../components/PageComponents/SpecializationComponents/SpecializationCategories')
 );
-const Interviews = React.lazy(() => import('../../components/SpecializationComponents/Interviews'));
-const SoftSkills = React.lazy(() => import('../../components/SpecializationComponents/SoftSkills'));
+const Interviews = React.lazy(() => import('../../components/PageComponents/SpecializationComponents/Interviews'));
+const SoftSkills = React.lazy(() => import('../../components/PageComponents/SpecializationComponents/SoftSkills'));
 const InterviewChart = React.lazy(
-  () => import('../../components/SpecializationComponents/Statistics/InteviewChart/InterviewChart')
+  () => import('../../components/PageComponents/SpecializationComponents/Statistics/InteviewChart/InterviewChart')
 );
 const SkillsAssessmentChart = React.lazy(
-  () => import('../../components/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart')
+  () => import('../../components/PageComponents/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart')
 );
 const HardSkillsChart = React.lazy(
-  () => import('../../components/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart')
+  () => import('../../components/PageComponents/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart')
 );
 const LevelChart = React.lazy(
-  () => import('../../components/SpecializationComponents/Statistics/LevelChart/LevelChart')
+  () => import('../../components/PageComponents/SpecializationComponents/Statistics/LevelChart/LevelChart')
 );
 
 const SpecializationPage = () => {

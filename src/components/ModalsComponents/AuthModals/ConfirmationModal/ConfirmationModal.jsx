@@ -1,14 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import ModalLayout from '../../../layouts/ModalLayout';
+import ModalLayout from '../../../../layouts/ModalLayout';
 import { Box, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { closeModal, openModal } from '../../../redux/modal/modalSlice';
-import { useConfirmEmailMutation } from '../../../redux/auth/authApiSlice';
+import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
+import { useConfirmEmailMutation } from '../../../../redux/auth/authApiSlice';
 import { useFormik } from 'formik';
 import ConfirmationForm from './ConfirmationForm';
-import { ConfirmationSchema } from '../../../utils/valadationSchemas/index';
+import { ConfirmationSchema } from '../../../../utils/valadationSchemas/index';
 import styles from './ConfirmationModal.styles';
 import StyledRouterLink from './StyledRouterLink';
 

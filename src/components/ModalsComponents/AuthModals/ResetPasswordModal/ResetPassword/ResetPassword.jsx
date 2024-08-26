@@ -4,13 +4,13 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import ModalLayout from '../../../../layouts/ModalLayout';
-import { useChangePasswordMutation } from '../../../../redux/auth/authApiSlice';
-import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
-import { ButtonDef } from '../../../Buttons';
-import { FormInput } from '../../../Inputs';
+import ModalLayout from '../../../../../layouts/ModalLayout';
+import { useChangePasswordMutation } from '../../../../../redux/auth/authApiSlice';
+import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { FormInput } from '../../../../FormsComponents/Inputs';
 import styles from './ResetPassword.styles';
-import { resetPasswordSchema } from '../../../../utils/valadationSchemas/index';
+import { resetPasswordSchema } from '../../../../../utils/valadationSchemas/index';
 
 const initialValues = {
   newPassword: '',

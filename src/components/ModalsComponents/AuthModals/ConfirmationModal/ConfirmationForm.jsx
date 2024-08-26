@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, FormHelperText, TextField } from '@mui/material';
-import { ButtonDef } from '../../Buttons';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 import styles from './ConfirmationModal.styles';
 
 

@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import ModalLayout from '../../../../layouts/ModalLayout';
+import ModalLayout from '../../../../../layouts/ModalLayout';
 import styles from './CheckEmail.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Link, Typography } from '@mui/material';
-import { CheckEmailSchema } from '../../../../utils/valadationSchemas/index';
-import { FormInput } from '../../../Inputs';
-import { ButtonDef } from '../../../Buttons';
+import { CheckEmailSchema } from '../../../../../utils/valadationSchemas/index';
+import { FormInput } from '../../../../FormsComponents/Inputs';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
-import { useResetPasswordMutation } from '../../../../redux/auth/authApiSlice';
-import { setEmail } from '../../../../redux/auth/emailSlice';
+import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
+import { useResetPasswordMutation } from '../../../../../redux/auth/authApiSlice';
+import { setEmail } from '../../../../../redux/auth/emailSlice';
 
 const initialValues = {
   email: '',
