@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { AchievementModal, EducationModal, ModalUserInfo, WorkExperienceModal } from '../../components/ProfileModals';
+import { AchievementModal, EducationModal, ModalUserInfo, WorkExperienceModal } from '../../components/ModalsComponents/ProfileModals';
 
 const ProfileTemplate = ({ children }) => {
   const { openUserInfo, openExperience, openAchievement, education } = useSelector((state) => state.modal);
