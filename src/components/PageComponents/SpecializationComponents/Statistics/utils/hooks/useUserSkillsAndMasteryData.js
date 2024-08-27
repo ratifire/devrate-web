@@ -1,43 +1,17 @@
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import {
-  useGetHardSkillsByMasteryIdQuery,
-  useGetMasteriesBySpecializationIdQuery,
-  useGetSpecializationByUserIdQuery,
-} from '../../../../../../redux/specialization/specializationApiSlice';
+import { useGetHardSkillsByMasteryIdQuery } from '../../../../../../redux/specialization/specializationApiSlice';
+import { useGetMastery } from '../../../../../SpecializationComponents/hooks';
 
 const useUserSkillsAndMasteryData = () => {
   const { t } = useTranslation();
-  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
-  const { id: userId } = useSelector((state) => state.auth.user.data);
-
   const {
-    data: specializations,
-    isLoading: isLoadingSpecializations,
-    isError: isErrorLoadingSpecializations,
-  } = useGetSpecializationByUserIdQuery(userId, {
-    skip: !userId,
-  });
-
-  const specializationId = specializations?.[0]?.id;
-
-  const {
-    data: masteries,
-    isLoading: isLoadingMasteries,
-    isError: isErrorMasteries,
-  } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
-
-  const selectMastery = masteries?.find(
-    (mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase()
-  );
-
-  const selectMasteryIndex = masteries?.findIndex(
-    (mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase()
-  );
-
-  const nextMasteryLevel = masteries?.[selectMasteryIndex + 1]?.level || 'Guru';
-
-  const masteryId = selectMastery?.id;
+    isLoading: isLoadingMastery,
+    isError: isErrorMastery,
+    masteryId,
+    nextMasteryLevel,
+    userId,
+    activeMastery,
+  } = useGetMastery();
 
   const {
     data: skills = [],
@@ -45,8 +19,8 @@ const useUserSkillsAndMasteryData = () => {
     isError: isErrorSkills,
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
 
-  const isLoading = isLoadingSpecializations || isLoadingSkills || isLoadingMasteries;
-  const isError = isErrorSkills || isErrorLoadingSpecializations || isErrorMasteries;
+  const isLoading = isLoadingMastery || isLoadingSkills;
+  const isError = isErrorMastery || isErrorSkills;
 
   return {
     t,

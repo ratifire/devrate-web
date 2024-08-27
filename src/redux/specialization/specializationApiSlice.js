@@ -176,4 +176,5 @@ export const {
   useAddSkillToMasteryMutation,
   useAddSkillsToMasteryMutation,
   useDeleteSkillByIdMutation,
+  useGetSoftSkillsQuery,
 } = SpecializationApiSlice;
