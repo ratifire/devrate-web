@@ -19,14 +19,25 @@ export const styles = {
     color: theme.palette.text.secondary,
   }),
   skillsRating: (theme) => ({
-    color: theme.palette.text.secondary,
+    '& .MuiRating-iconFilled': {
+      color: theme.palette.action.active,
+    },
+    '& .MuiRating-iconEmpty': {
+      color: theme.palette.action.active,
+    },
+    marginRight: '10px',
   }),
   softSkills: (theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: theme.spacing(4),
-    color: theme.palette.text.secondary,
+    '& .MuiRating-iconFilled': {
+      color: theme.palette.action.active,
+    },
+    '& .MuiRating-iconEmpty': {
+      color: theme.palette.action.active,
+    },
   }),
   interviewHistory: {
     display: 'flex',
