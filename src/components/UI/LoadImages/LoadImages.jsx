@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { useDropzone } from 'react-dropzone';
 import { styles } from './LoadImages.styles';
@@ -7,60 +7,86 @@ import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { ButtonDef } from '../../Buttons';
+import { ButtonDef } from '../../FormsComponents/Buttons';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
+const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDeleteButton }) => {
   const editor = useRef(null);
+  const { t } = useTranslation();
 
-  const defaultSettingsCanvas = {
+  const [settingsCanvas, setSettingsCanvas] = useState({
     borderRadius: 4,
     isTransparent: false,
     width: 240,
     height: 240,
     showGrid: true,
     image: '',
-  };
-
-  const [settingsCanvas, setSettingsCanvas] = useState({ ...defaultSettingsCanvas });
-  const [scale, setScale] = useState(1.1);
+  });
+  const [scale, setScale] = useState(1.5);
   const [error, setError] = useState('');
-  const { t } = useTranslation();
 
-  const handleWheel = (e) => {
-    const delta = e.deltaY;
-    const scaleFactor = delta > 0 ? -0.1 : 0.1;
-    const newScale = scale + scaleFactor;
+  useEffect(() => {
+    if (value) {
+      setSettingsCanvas((prev) => ({ ...prev, image: value }));
+    }
+  }, [value]);
 
-    if (newScale >= 0.5 && newScale <= 3) {
+  const handleWheel = useCallback(
+    (e) => {
+      const delta = e.deltaY;
+      const scaleFactor = delta > 0 ? -0.1 : 0.1;
+      const newScale = Math.max(0.5, Math.min(3, scale + scaleFactor));
       setScale(newScale);
+    },
+    [scale]
+  );
+  const handleSave = useCallback(() => {
+    if (editor.current) {
+      const img = editor.current.getImageScaledToCanvas().toDataURL();
+      handleChange(img);
     }
-  };
+  }, [handleChange]);
 
-  const handleSave = () => {
-    const img = editor.current?.getImageScaledToCanvas().toDataURL();
-    const rect = editor.current?.getCroppingRect();
-    if (!img || !rect) return;
-    handleChange(img);
-  };
-
-  const handleClickDelete = () => {
+  const handleClickDelete = useCallback(() => {
     handlerDelete();
-    setSettingsCanvas(defaultSettingsCanvas);
+    setSettingsCanvas((prev) => ({ ...prev, image: '' }));
+  }, [handlerDelete]);
+
+  const checkImageDimensions = (file) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        if (img.width < 98 || img.height < 98) {
+          reject(new Error('Image dimensions must be at least 98x98 pixels'));
+        } else {
+          resolve();
+        }
+      };
+      img.onerror = () => reject(new Error('Failed to load image'));
+      img.src = URL.createObjectURL(file);
+    });
   };
 
-  const onDrop = (acceptedFiles, fileRejections) => {
-    if (fileRejections.length > 0) {
-      setError(t('This file can not be used as avatar'));
-      return;
-    }
+  const onDrop = useCallback(
+    async (acceptedFiles, fileRejections) => {
+      if (fileRejections.length > 0) {
+        setError(t('This file can not be used as avatar'));
+        return;
+      }
 
-    if (acceptedFiles.length > 0) {
-      const image = acceptedFiles[0];
-      setSettingsCanvas({ ...settingsCanvas, image });
-      setError(''); // Clear any previous error
-    }
-  };
+      if (acceptedFiles.length > 0) {
+        const image = acceptedFiles[0];
+        try {
+          await checkImageDimensions(image);
+          setSettingsCanvas((prev) => ({ ...prev, image }));
+          setError('');
+        } catch (err) {
+          setError(err.message);
+        }
+      }
+    },
+    [t]
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -69,21 +95,23 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
       'image/tiff': [],
       'image/webp': [],
     },
-    maxSize: 5 * 1024 * 1024, // 5 MB
+    maxSize: 5 * 1024 * 1024,
     onDrop,
   });
 
   return (
     <Box sx={styles.wrapper}>
       <input type='hidden' value={value} onChange={handleChange} onBlur={handleBlur} />
-      <Box {...getRootProps()} sx={styles.dropZoneWrapper}>
+      <Box sx={styles.dropZoneWrapper}>
         <input {...getInputProps()} />
         <Box sx={styles.dropZone}>
           <Typography variant='caption1' sx={styles.text}>
             {t('profile.modal.userInfo.photo.dropPhoto.first')}
             <br />
             {t('profile.modal.userInfo.photo.dropPhoto.second')}
-            <span>{t('profile.modal.userInfo.photo.dropPhoto.third')}</span>
+            <Box {...getRootProps()} sx={styles.link}>
+              {t('profile.modal.userInfo.photo.dropPhoto.third')}
+            </Box>
           </Typography>
           <BackupOutlinedIcon sx={styles.icon} />
           {error && (
@@ -97,8 +125,8 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
       {settingsCanvas.image ? (
         <AvatarEditor
           ref={editor}
-          width={settingsCanvas.width}
-          height={settingsCanvas.height}
+          width={240}
+          height={240}
           borderRadius={settingsCanvas.borderRadius}
           image={settingsCanvas.image}
           style={styles.preview}
@@ -112,6 +140,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
           <ImageOutlinedIcon sx={styles.imgDefIcon} />
         </Box>
       )}
+
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
           variant='contained'
@@ -119,10 +148,13 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
           handlerClick={handleSave}
           label='profile.modal.btn'
           correctStyle={styles.btn}
+          disabled={!editor}
         />
-        <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
-          <DeleteIcon />
-        </IconButton>
+        {showDeleteButton && (
+          <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
+            <DeleteIcon />
+          </IconButton>
+        )}
       </Box>
     </Box>
   );
@@ -133,6 +165,7 @@ LoadImages.propTypes = {
   handleBlur: PropTypes.func.isRequired,
   handlerDelete: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  showDeleteButton: PropTypes.bool.isRequired,
 };
 
-export default LoadImages;
+export default React.memo(LoadImages);

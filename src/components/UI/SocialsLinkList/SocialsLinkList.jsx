@@ -36,7 +36,7 @@ SocialsLinkList.propTypes = {
       value: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
     }),
-  ).isRequired,
+  ),
   componentStyles: PropTypes.object.isRequired,
 };
 

@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { lazy, memo, Suspense } from 'react';
 import { useSelector } from 'react-redux';
-const CheckEmail = lazy(() => import('../../components/AuthModals/ResetPasswordModal/CheckEmail'));
-const LoginModal = lazy(() => import('../../components/AuthModals/LoginModal'));
-const RegistrationModal = lazy(() => import('../../components/AuthModals/RegistrationModal'));
-const ResetPassword = lazy(() => import('../../components/AuthModals/ResetPasswordModal/ResetPassword'));
-const NotificationModal = lazy(() => import('../../components/AuthModals/ResetPasswordModal/NotificationModal'));
+const CheckEmail = lazy(() => import('../../components/ModalsComponents/AuthModals/ResetPasswordModal/CheckEmail'));
+const LoginModal = lazy(() => import('../../components/ModalsComponents/AuthModals/LoginModal'));
+const RegistrationModal = lazy(() => import('../../components/ModalsComponents/AuthModals/RegistrationModal'));
+const ResetPassword = lazy(() => import('../../components/ModalsComponents/AuthModals/ResetPasswordModal/ResetPassword'));
+const NotificationModal = lazy(() => import('../../components/ModalsComponents/AuthModals/ResetPasswordModal/NotificationModal'));
 
 
 const MemoizedCheckEmail = memo(CheckEmail);

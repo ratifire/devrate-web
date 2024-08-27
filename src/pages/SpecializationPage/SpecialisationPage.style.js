@@ -1,6 +1,6 @@
 export const styles = {
   container: (theme) => ({
-    paddingTop: theme.spacing(4),
+    paddingY: theme.spacing(4),
     paddingX: theme.spacing(2),
     '@media (min-width: 1272px)': {
       maxWidth: '1536px',
@@ -44,15 +44,15 @@ export const styles = {
   },
   specialisationStatistics: {
     gridColumn: '5/13',
-     gridRow: '3/6',
-    },
+    gridRow: '3/6',
+  },
   statisticWrapper: (theme) => ({
     padding: theme.spacing(4),
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: 'auto auto auto auto',
+    gridTemplateRows: 'auto auto',
     gridGap: theme.spacing(4),
-    
+
     ' > div': {
       borderRadius: 2,
       backgroundColor: theme.palette.neutral[600],
@@ -76,7 +76,6 @@ export const styles = {
     gridColumn: '1/4',
     gridRow: '2/3',
     width: '300px',
-    height: '375px',
     padding: '18px',
   },
   interview: {
