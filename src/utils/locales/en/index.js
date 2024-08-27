@@ -27,6 +27,15 @@ export const en = {
       },
     },
     modal: {
+      interview: {
+        title: 'Leave a feedback',
+        label: 'Review',
+        placeholder: 'Please leave your feedback',
+        btnSend: 'Send',
+        btnNext: 'Next',
+        btnBack: 'Back',
+        interviewer: 'Interviewer',
+      },
       achievement: {
         title: 'Achievement',
         summary: 'Achievement label',

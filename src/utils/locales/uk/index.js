@@ -28,6 +28,15 @@ export const uk = {
       },
     },
     modal: {
+      interview: {
+        title: 'Залишити відгук',
+        label :'Відгук',
+        placeholder: 'Будь ласка, залиште свій відгук',
+        btnSend: 'Надіслати',
+        btnNext: 'Далі',
+        btnBack: 'Назад',
+        interviewer: 'Інтерв’юер'
+      },
       achievement: {
         title: 'Досягнення',
         summary: 'Назва досягнення',
