@@ -6,7 +6,7 @@ export const styles = {
     paddingTop: '22px',
     paddingBottom: '6px',
     maxHeight: '300px',
-    gap: '30px',
+    gap: theme.spacing(5),
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
       width: '6px',

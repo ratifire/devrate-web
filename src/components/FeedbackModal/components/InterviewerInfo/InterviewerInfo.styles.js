@@ -3,19 +3,19 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
   },
-  data: {
+  data: (theme) => ({
     display: 'flex',
-    gap: '4px',
+    gap: theme.spacing(1),
     alignItems: 'center',
-  },
+  }),
   icon: {
     width: '14px',
     height: '14px',
   },
-  box: {
+  box: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    gap: '4px',
-  },
+    gap: theme.spacing(1),
+  }),
 };

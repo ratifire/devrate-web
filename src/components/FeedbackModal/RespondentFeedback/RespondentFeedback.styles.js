@@ -1,9 +1,9 @@
 export const styles = {
-  container: {
+  container: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    gap: '24px',
-  },
+    gap: theme.spacing(4),
+  }),
   btn: {
     width: '228px',
   },

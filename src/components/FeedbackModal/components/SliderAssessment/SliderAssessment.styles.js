@@ -7,14 +7,14 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
   },
-  box: {
+  box: (theme) => ({
     maxWidth: '239px',
     width: '100%',
     display: 'flex',
-    gap: '15px',
+    gap: theme.spacing(4),
     alignItems: 'center',
     position: 'relative',
-  },
+  }),
   grade: (theme) => ({
     color: theme.palette.sliderAssessment.lightGray,
     width: '44px',

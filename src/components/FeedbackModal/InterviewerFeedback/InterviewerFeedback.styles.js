@@ -1,9 +1,9 @@
 export const styles = {
-  container: {
+  container: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    gap: '24px'
-  },
+    gap: theme.spacing(4)
+  }),
   stepBorder: (theme) => ({
     ' .MuiStepConnector-horizontal >span': {
       borderColor: theme.palette.background.level3,
@@ -71,13 +71,13 @@ export const styles = {
       },
     },
   }),
-  sendBox: {
+  sendBox: (theme) => ({
     display: 'flex',
-    gap: '16px',
+    gap: theme.spacing(3),
     alignSelf: 'end',
     maxWidth: '472px',
     width: '100%',
-  },
+  }),
   btn: {
     maxWidth: '228px',
   },
