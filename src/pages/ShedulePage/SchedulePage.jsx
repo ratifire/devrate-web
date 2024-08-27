@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { styles } from './SchedulePage.styles';
-import ProfileHeader from '../../components/ProfileComponents/ProfileHeader';
-import Calendar from '../../components/Calendar'
+import ProfileHeader from '../../components/PageComponents/ProfileHeader';
+import Calendar from '../../components/PageComponents/Calendar'
 
 import ScheduleTemplate from '../../Templates/ScheduleTemplate';
 import { useTranslation } from 'react-i18next';

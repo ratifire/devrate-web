@@ -7,7 +7,7 @@ import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { ButtonDef } from '../../Buttons';
+import { ButtonDef } from '../../FormsComponents/Buttons';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDeleteButton }) => {
