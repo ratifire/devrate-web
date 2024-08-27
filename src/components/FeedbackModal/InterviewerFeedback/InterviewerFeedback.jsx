@@ -23,9 +23,9 @@ const InterviewerFeedback = () => {
   };
 
   return (
-    <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
+    <ModalLayoutProfile setOpen={handleCloseModal} open={isOpenModal}>
       <Box sx={styles.container}>
-        <Typography variant={'h6'}>{t('modal.interview.title')}</Typography>
+        <Typography variant='h6'>{t('modal.interview.title')}</Typography>
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
           {NUMBER_OF_STEPS.map((label, index) => (
             <Step sx={styles.step} key={label}>
@@ -34,10 +34,10 @@ const InterviewerFeedback = () => {
           ))}
         </Stepper>
         <InterviewerInfo
-          name={'Олена Бондаренко'}
-          position={'Senior Full stack Developer'}
-          data={'03/06/2024'}
-          time={'15:30'}
+          name='Олена Бондаренко'
+          position='Senior Full stack Developer'
+          data='03/06/2024'
+          time='15:30'
         />
         <SliderComponent slide={activeStep} />
         <Box sx={styles.sendBox}>

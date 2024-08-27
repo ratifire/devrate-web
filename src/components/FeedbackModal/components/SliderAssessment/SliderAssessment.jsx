@@ -11,7 +11,7 @@ const SliderAssessment = ({ title }) => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.container}>
-        <Typography variant={'body'}>{title}</Typography>
+        <Typography variant='body'>{title}</Typography>
         <Box sx={styles.box}>
           <Box sx={styles.left}></Box>
           <Box sx={rightBoxStyles}></Box>
@@ -25,7 +25,7 @@ const SliderAssessment = ({ title }) => {
             valueLabelDisplay='on'
             sx={styles.slider}
           />
-          <Typography sx={styles.grade} variant={'body'}>
+          <Typography sx={styles.grade} variant='body'>
             {sliderValue}/10
           </Typography>
         </Box>

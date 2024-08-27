@@ -14,9 +14,9 @@ const RespondentFeedback = () => {
   const { isOpenModal, handleCloseModal } = useCloseModal({ modalName: 'openFeedbackInterviewer' });
 
   return (
-    <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
+    <ModalLayoutProfile setOpen={handleCloseModal} open={isOpenModal}>
       <Box sx={styles.container}>
-        <Typography variant={'h6'}>{t('modal.interview.title')}</Typography>
+        <Typography variant='h6'>{t('modal.interview.title')}</Typography>
         <InterviewerInfo
           name={'Олена Бондаренко'}
           position={'Senior Full stack Developer'}
@@ -34,11 +34,11 @@ const RespondentFeedback = () => {
             rows={3}
           />
           <Box>
-            <Typography variant={'h6'}>Soft Skills</Typography>
+            <Typography variant='h6'>Soft Skills</Typography>
             <SliderAssessmentBox>
-              <SliderAssessment title={'Комунікативність'} />
-              <SliderAssessment title={'Креативність'} />
-              <SliderAssessment title={'Критичне мислення'} />
+              <SliderAssessment title='Комунікативність' />
+              <SliderAssessment title='Креативність' />
+              <SliderAssessment title='Критичне мислення' />
             </SliderAssessmentBox>
           </Box>
         </Box>

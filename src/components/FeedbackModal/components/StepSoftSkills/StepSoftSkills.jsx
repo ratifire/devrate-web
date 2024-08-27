@@ -22,11 +22,11 @@ const StepSoftSkills = () => {
         />
       </Box>
       <Box>
-        <Typography variant={'h6'}>Soft Skills</Typography>
+        <Typography variant='h6'>Soft Skills</Typography>
         <SliderAssessmentBox>
-          <SliderAssessment title={'Комунікативність'} />
-          <SliderAssessment title={'Креативність'} />
-          <SliderAssessment title={'Критичне мислення'} />
+          <SliderAssessment title='Комунікативність' />
+          <SliderAssessment title='Креативність' />
+          <SliderAssessment title='Критичне мислення' />
         </SliderAssessmentBox>
       </Box>
     </>
