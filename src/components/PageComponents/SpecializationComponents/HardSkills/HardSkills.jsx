@@ -23,7 +23,9 @@ const HardSkills = () => {
     return <Typography variant='h6'>{t('specialisation.hardSkills.error')}</Typography>;
   }
 
-  const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1);
+  const averageMark = skills.length > 0 ?
+  (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1)
+  : '0';
 
   return (
     <Box sx={styles.wrapper}>
