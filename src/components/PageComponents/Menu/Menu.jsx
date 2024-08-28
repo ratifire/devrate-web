@@ -12,17 +12,17 @@ import {
   Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import styles from './UserMenu.styles';
+import styles from './Menu.styles';
 import { Link as RouterLink } from 'react-router-dom';
 import links from './profileRoutes';
 import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
-import { useLogoutMutation } from '../../../../redux/auth/authApiSlice';
+import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../../../../redux/auth/authSlice';
+import { logOut } from '../../../redux/auth/authSlice';
 
-const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
+const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -80,9 +80,9 @@ const UserMenu = ({ isDrawerOpen, toggleDrawer }) => {
   );
 };
 
-UserMenu.propTypes = {
+Menu.propTypes = {
   isDrawerOpen: PropTypes.bool.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
 };
 
-export default UserMenu;
+export default Menu;

@@ -6,12 +6,14 @@ import { ReactComponent as Message } from '../../../assets/icons/message.svg';
 import { ReactComponent as Loupe } from '../../../assets/icons/loupe.svg';
 import { useFormik } from 'formik';
 import UserAvatar from '../../UI/UserAvatar';
-import UserMenu from '../ProfileComponents/UserMenu';
+import Menu from '../Menu';
 import NotificationList from '../ProfileComponents/NotificationList';
 import { useSelector } from 'react-redux';
 import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
 import { selectCurrentUser } from '../../../redux/auth/authSlice';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
+import { Link } from 'react-router-dom';
+import links from '../../../router/links';
 
 const initialValues = {
   query: '',
@@ -82,7 +84,9 @@ const ProfileHeader = () => {
   return (
     <AppBar component='header' position={'static'} sx={styles.header}>
       <Box sx={styles.logoBox}>
-        <Logo width={'187'} height={'22'} />
+        <Link to={links.profile}>
+          <Logo width={'187'} height={'22'} />
+        </Link>
       </Box>
       <Box sx={styles.headerNav}>
         <form onSubmit={formik.handleSubmit}>
@@ -119,7 +123,7 @@ const ProfileHeader = () => {
             size='sm'
           />
         </Button>
-        <UserMenu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
+        <Menu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
     </AppBar>
   );

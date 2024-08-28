@@ -1,10 +1,9 @@
 export default {
   home: '/',
   profile: '/profile',
-  schedule:'/schedule',
+  schedule: '/schedule',
   specializations: '/specializations',
   interviews: '/interviews',
-  settings:'/settings',
+  settings: '/settings',
   bookmark: '/bookmark',
-
 };
