@@ -1,13 +1,14 @@
+import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import navigationLinks from './links';
 import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
 import RequireAuth from '../redux/auth/RequireAuth';
 import ProfilePage from '../pages/ProfilePage';
 import SpecializationPage from '../pages/SpecializationPage';
 import SchedulePage from '../pages/ShedulePage';
-import React from 'react';
+import OtherProfilePage from '../pages/OtherProfile';
 import ToastLayout from '../layouts/ToastLayout/ToastLayout';
-import navigationLinks from './links';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
           {
             path: navigationLinks.profile,
             element: <ProfilePage />,
+          },
+          {
+            path: `${navigationLinks.profile}/:userId`,
+            element: <OtherProfilePage />,
           },
           {
             path: navigationLinks.schedule,
