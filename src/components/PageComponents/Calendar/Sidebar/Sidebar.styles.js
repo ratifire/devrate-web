@@ -10,4 +10,8 @@ export const styles = {
   SidebarSection: {
     padding: '2em',
   },
-}
+  sideBarEventWrapper: (theme) => ({
+    backgroundColor: theme.palette.neutral[600],
+    borderRadius: 2,
+  }),
+};
