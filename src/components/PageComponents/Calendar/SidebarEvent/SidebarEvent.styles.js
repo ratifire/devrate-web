@@ -3,14 +3,16 @@ export const styles = {
     height: '162px',
     backgroundColor: theme.palette.neutral[500],
     borderRadius: 2,
+    padding: '16px',
+    paddingRight: '16px',
     marginBottom: theme.spacing(2),
   }),
-  titleDateTimeBox: {
+  titleDateTimeBox: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '16px 16px 16px 8px',
-  },
+    marginBottom: theme.spacing(2),
+  }),
   title: {
     font: 'Roboto',
     weight: 500,
@@ -25,5 +27,29 @@ export const styles = {
     lineHeight: '20.02px',
     letterSpacing: '0.17px',
     color: theme.palette.primary[50],
+  }),
+  host: (theme) => ({
+    font: 'Roboto',
+    weight: 400,
+    fontSize: '14px',
+    lineHeight: '20.02px',
+    letterSpacing: '0.17px',
+    color: theme.palette.primary[50],
+    '& span': {
+      color: theme.palette.primary[100],
+    },
+    marginBottom: theme.spacing(2),
+  }),
+  hostTitle: (theme) => ({
+    font: 'Roboto',
+    weight: 400,
+    fontSize: '12px',
+    lineHeight: '19.92px',
+    letterSpacing: '0.4px',
+    color: theme.palette.neutral[50],
+    marginBottom: theme.spacing(2),
+  }),
+  cancelEventBtn: (theme) => ({
+    color: theme.palette.primary[100],
   }),
 };

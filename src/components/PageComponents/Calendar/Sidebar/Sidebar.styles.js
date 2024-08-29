@@ -10,6 +10,9 @@ export const styles = {
   SidebarSection: {
     marginLeft: '8px',
     marginRight: '8px',
+    height: '280px',
+    overflow: 'scroll',
+    scrollbarColor: 'white',
   },
   sideBarEventWrapper: (theme) => ({
     backgroundColor: theme.palette.neutral[600],
