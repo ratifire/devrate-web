@@ -3,8 +3,8 @@ export const styles = {
     height: '162px',
     backgroundColor: theme.palette.neutral[500],
     borderRadius: 2,
-    padding: '16px',
-    paddingRight: '16px',
+    padding: theme.spacing(3),
+    paddingRight: theme.spacing(3),
     marginBottom: theme.spacing(2),
   }),
   titleDateTimeBox: (theme) => ({
