@@ -29,7 +29,6 @@ export default function Sidebar({ currentEvents }) {
       {/*  </label>*/}
       {/*</div>*/}
       <div style={styles.SidebarSection} className='demo-app-sidebar-section'>
-        <h2>All Events ({currentEvents.length})</h2>
         {currentEvents.map((event) => (
           <SidebarEvent key={event.id} event={event} />
         ))}

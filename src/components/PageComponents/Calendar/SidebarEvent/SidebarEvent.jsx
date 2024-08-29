@@ -16,12 +16,13 @@ export default function SidebarEvent({ event }) {
 
   return (
     <Paper key={event.id} sx={styles.sideBarEventWrapper}>
-      <Box sx={{ width: '272px', height: '162px' }}>
-        <Typography variant='h6' component='div'>
+      <Box sx={styles.titleDateTimeBox}>
+        <Typography sx={styles.title} variant='h6' component='div'>
           {event.title}
         </Typography>
-        <Typography variant='body2' component='div'></Typography>
-        {`${customFormattedDate} ${formattedTime}`}
+        <Typography sx={styles.dateAndTime} variant='body2' component='div'>
+          {`${customFormattedDate} ${formattedTime}`}
+        </Typography>
       </Box>
     </Paper>
   );
