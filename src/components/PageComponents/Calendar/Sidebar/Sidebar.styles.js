@@ -10,7 +10,7 @@ export const styles = {
   SidebarSection: {
     marginLeft: '8px',
     marginRight: '8px',
-    height: '280px',
+    height: '500px',
     overflow: 'scroll',
     scrollbarColor: 'white',
   },
