@@ -17,7 +17,7 @@ Settings.defaultWeekSettings = {
 // export default function Sidebar({ weekendsVisible, handleWeekendsToggle, currentEvents }) {
 export default function Sidebar({ currentEvents }) {
   return (
-    <Box style={styles.Sidebar}>
+    <Box style={styles.sidebar}>
       <Box className='demo-app-sidebar-section'>
         <LocalizationProvider dateAdapter={AdapterLuxon}>
           <DateCalendar />
@@ -29,7 +29,7 @@ export default function Sidebar({ currentEvents }) {
       {/*    toggle weekends*/}
       {/*  </label>*/}
       {/*</div>*/}
-      <Box style={styles.SidebarSection} className='demo-app-sidebar-section'>
+      <Box style={styles.sidebarSection} className='demo-app-sidebar-section'>
         {currentEvents.map((event) => (
           <SidebarEvent key={event.id} event={event} />
         ))}
