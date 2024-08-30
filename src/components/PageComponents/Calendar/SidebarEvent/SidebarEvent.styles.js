@@ -1,5 +1,5 @@
 export const styles = {
-  sideBarEventWrapper: (theme) => ({
+  sideBarEventContainer: (theme) => ({
     height: '162px',
     backgroundColor: theme.palette.neutral[500],
     borderRadius: 2,

@@ -19,7 +19,7 @@ export default function SidebarEvent({ event }) {
   const customFormattedDate = `${day}/${month}/${year}`;
 
   return (
-    <Paper key={event.id} sx={styles.sideBarEventWrapper}>
+    <Paper key={event.id} sx={styles.sideBarEventContainer}>
       <Box sx={styles.titleDateTimeBox}>
         <Typography sx={styles.title} variant='h6' component='div'>
           {event.title}

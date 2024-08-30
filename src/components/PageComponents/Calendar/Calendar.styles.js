@@ -8,6 +8,7 @@ export const styles = {
   demoAppMain: {
     flexGrow: '1',
     padding: '3em',
+    paddingRight: '10px',
   },
   fc: {
     // maxWidth: '1100px',

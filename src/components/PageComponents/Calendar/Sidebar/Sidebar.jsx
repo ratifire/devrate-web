@@ -14,33 +14,26 @@ Settings.defaultWeekSettings = {
   weekend: [6, 7], // Set weekend days
 };
 
-// export default function Sidebar({ weekendsVisible, handleWeekendsToggle, currentEvents }) {
 export default function Sidebar({ currentEvents }) {
   return (
-    <Box style={styles.sidebar}>
+    <Box sx={styles.container}>
       <Box className='demo-app-sidebar-section'>
         <LocalizationProvider dateAdapter={AdapterLuxon}>
           <DateCalendar />
         </LocalizationProvider>
       </Box>
-      {/*<div style={styles.SidebarSection} className='demo-app-sidebar-section'>*/}
-      {/*  <label>*/}
-      {/*    <input type='checkbox' checked={weekendsVisible} onChange={handleWeekendsToggle}></input>*/}
-      {/*    toggle weekends*/}
-      {/*  </label>*/}
-      {/*</div>*/}
-      <Box style={styles.sidebarSection} className='demo-app-sidebar-section'>
-        {currentEvents.map((event) => (
-          <SidebarEvent key={event.id} event={event} />
-        ))}
+      <Box sx={styles.scrollContainer}>
+        <Box sx={styles.sidebarSection} className='demo-app-sidebar-section'>
+          {currentEvents.map((event) => (
+            <SidebarEvent key={event.id} event={event} />
+          ))}
+        </Box>
       </Box>
     </Box>
   );
 }
 
 Sidebar.propTypes = {
-  weekendsVisible: PropTypes.bool.isRequired,
-  handleWeekendsToggle: PropTypes.func.isRequired,
   currentEvents: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
