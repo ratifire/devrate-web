@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../../redux/modal/modalSlice';
-import { Box, IconButton, Step, StepButton, StepConnector, Stepper, Typography } from '@mui/material';
+import { Box, IconButton, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import { styles } from './ModalUserInfo.styles';
 import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -11,6 +11,7 @@ import StepPersonal from './StepPersonal';
 import StepContacts from './StepContacts';
 import StepAvatar from './StepAvatar';
 import StepLanguage from './StepLanguage';
+import CustomStepIcon from './StepIconComponent';
 
 const steps = [
   'profile.modal.userInfo.personal.title',
@@ -50,18 +51,20 @@ const ModalUserInfo = () => {
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openUserInfo}>
       <Box sx={styles.wrapper}>
+
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
           {steps.map((label) => (
             <Step key={label} sx={styles.step}>
-              <StepButton color='inherit' sx={styles.stepBtn} disabled={false} />
+              <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label}></StepLabel>
               {steps[activeStep] === label && (
-                <Typography variant='subtitle1' sx={styles.title}>
-                  {t(label)}
-                </Typography>
+              <Typography variant='subtitle1' sx={styles.title}>
+                {t(label)}
+              </Typography>
               )}
             </Step>
           ))}
         </Stepper>
+
         <Box>
           <Box sx={styles.wrapperStepContent}>{getStepContent(activeStep)}</Box>
           <Box sx={styles.wrapperBottom}>
@@ -81,3 +84,4 @@ const ModalUserInfo = () => {
 };
 
 export default ModalUserInfo;
+
