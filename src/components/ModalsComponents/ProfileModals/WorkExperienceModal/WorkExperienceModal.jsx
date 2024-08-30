@@ -45,7 +45,7 @@ const WorkExperienceModal = () => {
 
   const onSubmit = async (values, { resetForm }) => {
     const startDate = DateTime.fromISO(values.startDate).toISODate();
-    const endDate = DateTime.fromISO(values.endDate).toISODate();
+    const endDate = values.endDate ? DateTime.fromISO(values.endDate).toISODate() : null;
     const data = {...values, startDate, endDate, responsibilities};
 
     try {

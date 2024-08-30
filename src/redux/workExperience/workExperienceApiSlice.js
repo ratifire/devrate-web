@@ -17,11 +17,18 @@ export const workExperienceApiSlice = apiSlice.injectEndpoints({
 
 
     createNewWorkExperience: builder.mutation({
-      query: ({userId, data}) => ({
-        url: `/users/${userId}/employment-records`,
-        method: "POST",
-        body: {...data},
-      }),
+      query: ({ userId, data }) => {
+        const body = {
+          ...data,
+          ...(data.endDate !== null && { endDate: data.endDate }), // only add endDate if it's not null
+        };
+
+        return {
+          url: `/users/${userId}/employment-records`,
+          method: 'POST',
+          body,
+        };
+      },
       invalidatesTags: ['WorkExperience'],
     }),
 

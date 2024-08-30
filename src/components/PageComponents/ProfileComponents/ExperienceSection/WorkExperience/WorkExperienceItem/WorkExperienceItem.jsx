@@ -46,7 +46,9 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
           </Typography>
           <Typography variant="subtitle3" sx={styles.workPlaceTitle}>
             {companyName} <span style={{ margin: '0 4px' }}>•</span>
-            {startDate.slice(0,4)} - {new Date(endDate) > new Date() ? t('profile.experience.endYear') : endDate.slice(0,4)}
+            {endDate
+              ? `${startDate.slice(0, 4)} - ${new Date(endDate) > new Date() ? t('profile.experience.endYear') : endDate.slice(0, 4)}`
+              : `${startDate.slice(0, 4)} - present`}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
@@ -79,7 +81,7 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
 WorkExperienceItem.propTypes = {
   id: PropTypes.number.isRequired,
   startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string,
   position: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

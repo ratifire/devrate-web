@@ -30,7 +30,7 @@ export const WorkExperienceModalSchema = Yup.object().shape({
     .required('profile.modal.workExperience.required'),
   endDate: Yup.date()
     .min(new Date(1950, 0, 1), 'profile.modal.workExperience.startDateMinMessage')
-    .required('End date is required')
+    .nullable()
     .test('endDate', 'profile.modal.workExperience.endDateMessage', function (value) {
       const startDate = this.resolve(Yup.ref('startDate'));
       return isStartDateBeforeEndDate(startDate, value);
