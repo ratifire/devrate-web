@@ -1,4 +1,5 @@
 export const styles = {
+
   container: (theme) => ({
     background: theme.palette.sliderAssessment.darkGray,
     // borderRight: '1px solid #d3e2e8',
@@ -29,3 +30,4 @@ export const styles = {
     }),
   }),
 };
+ 

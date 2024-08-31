@@ -8,28 +8,40 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { styles } from './Calendar.styles';
 import { Box } from '@mui/material';
 
+ 
 export default function Calendar() {
   const [currentEvents, setCurrentEvents] = useState([]);
-
   const calendarRef = useRef(null);
-
+  
   useEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
-      const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-timegrid-slot');
-
+      const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
+      const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
+      const timeGridHeadElements = calendarApi.el.querySelectorAll('.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid');
+      const timeGridEventElements = calendarApi.el.querySelectorAll('.fc-v-event .fc-event-main');
+      
       timeGridSlotElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridSlot);
+        Object.assign(el.style, styles.timeGridTableData);
+      });
+      timeGridTodayElements.forEach((el) => {
+        Object.assign(el.style, styles.timeGridTodayElements);
+      });
+      timeGridHeadElements.forEach((el) => {
+        Object.assign(el.style, styles.timeGridTableHead);
+      });
+      timeGridEventElements.forEach((el) => {
+        Object.assign(el.style, styles.timeGridEventElements);
       });
     }
   }, []);
 
-  const handleDateSelect = (selectInfo) => {
+  
+  function handleDateSelect(selectInfo) {
     let title = prompt('Please enter a new title for your event');
     let calendarApi = selectInfo.view.calendar;
-
+    
     calendarApi.unselect(); // clear date selection
-
     if (title) {
       calendarApi.addEvent({
         id: createEventId(),
@@ -39,7 +51,7 @@ export default function Calendar() {
         allDay: selectInfo.allDay,
       });
     }
-  };
+  }
 
   const handleEventClick = (clickInfo) => {
     if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
@@ -98,3 +110,4 @@ export default function Calendar() {
     </Box>
   );
 }
+ 
