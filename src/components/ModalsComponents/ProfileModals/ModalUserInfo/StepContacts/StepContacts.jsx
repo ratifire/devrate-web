@@ -29,10 +29,6 @@ const StepContacts = () => {
   const contactsQuery = useGetUserContactsQuery(userId);
   const dispatch = useDispatch();
 
-  if (contactsQuery.isLoading) {
-    return null;
-  }
-
   const valuesMap = contactsQuery.data.reduce((acc, contact) => {
     acc[typeNameMap[contact.type]] = contact.value;
     return acc;
