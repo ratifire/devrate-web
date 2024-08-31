@@ -5,37 +5,54 @@ export const styles = {
     marginBottom: theme.spacing(4),
   }),
   input: (theme) => ({
-    ' .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['500'],
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: theme.palette.neutral[400],
+      },
+      '&:hover fieldset': {
+        borderColor: theme.palette.primary.main,
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: theme.palette.primary.main,
+      },
+      '&.Mui-error fieldset': {
+        borderColor: theme.palette.error.main,
+      },
     },
-    '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['300'],
+    '& .MuiSelect-select': {
+      borderColor: theme.palette.neutral[400],
     },
-    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.primary['200'],
-      borderWidth: '2px',
-    },
-    '&.Mui-error.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
-    },
-    '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
+    '& .MuiSelect-select:empty': {
+      '&:focus': {
+        borderColor: theme.palette.neutral[400],
+      },
     },
   }),
   label: (theme) => ({
-    '&.Mui-focused': {
-      color: theme.palette.primary['200'],
+    '&.MuiFormLabel-root': {
+      color: theme.palette.neutral[400],
+      '&.Mui-focused': {
+        color: theme.palette.neutral[400],
+      },
+      '&.MuiInputLabel-shrink': {
+        color: theme.palette.neutral[400],
+      },
+      '&.Mui-error': {
+        color: theme.palette.error.main,
+      },
     },
-    '&.Mui-error': {
+    '& .required-asterisk': {
       color: theme.palette.error.main,
+      marginRight: '5px',
     },
   }),
   textHelper: {
     position: 'absolute',
-    bottom: '-23px',
+    bottom: '-20px',
+    left: '-15px',
   },
   selectField: (theme) => ({
-    ' .MuiMenu-paper': {
+    '.MuiMenu-paper': {
       backgroundColor: theme.palette.background.level2,
     },
     '.MuiList-root': {
