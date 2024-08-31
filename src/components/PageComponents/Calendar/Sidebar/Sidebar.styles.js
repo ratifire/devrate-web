@@ -3,7 +3,7 @@ export const styles = {
     width: '300px',
     lineHeight: '1.5',
     background: '#3E3E40',
-    borderRight: '1px solid #d3e2e8',
+    // borderRight: '1px solid #d3e2e8',
     borderTopLeftRadius: '8px',
     borderBottomLeftRadius: '8px',
   },
