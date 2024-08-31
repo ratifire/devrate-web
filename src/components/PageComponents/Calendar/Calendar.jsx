@@ -10,7 +10,6 @@ import { Box } from '@mui/material';
 
  
 export default function Calendar() {
-  const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
   const calendarRef = useRef(null);
   
@@ -52,7 +51,7 @@ export default function Calendar() {
         allDay: selectInfo.allDay,
       });
     }
-  };
+  }
 
   const handleEventClick = (clickInfo) => {
     if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
