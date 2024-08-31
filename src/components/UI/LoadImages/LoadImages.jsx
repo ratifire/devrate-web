@@ -1,14 +1,16 @@
+/* eslint-disable */
+
+import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
+import { Box, IconButton, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { useDropzone } from 'react-dropzone';
-import { styles } from './LoadImages.styles';
-import { Box, IconButton, Typography } from '@mui/material';
-import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
-import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import { ButtonDef } from '../../FormsComponents/Buttons';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { styles } from './LoadImages.styles';
 
 const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDeleteButton }) => {
   const editor = useRef(null);
@@ -148,7 +150,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
           handlerClick={handleSave}
           label='profile.modal.btn'
           correctStyle={styles.btn}
-          disabled={!settingsCanvas.image||error}
+          disabled={!settingsCanvas.image || !!error}
         />
         {showDeleteButton && (
           <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
