@@ -5,10 +5,9 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { StepContactsSchema } from '../../../../../utils/valadationSchemas/index';
 import { useGetUserContactsQuery, usePostContactsUserMutation } from '../../../../../redux/user/contacts/contactsApiSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
-import { closeModal } from '../../../../../redux/modal/modalSlice';
 
 const typeNameMap = {
   [SOCIAL_TYPES.TELEGRAM_LINK]: 'telegram',
@@ -23,7 +22,6 @@ const StepContacts = () => {
   const [postContactsUser] = usePostContactsUserMutation();
   const userId = useSelector((state) => state.auth.user.data.id);
   const contactsQuery = useGetUserContactsQuery(userId);
-  const dispatch = useDispatch();
 
   if (contactsQuery.isLoading) {
     return null;
@@ -63,8 +61,6 @@ const StepContacts = () => {
         { type: SOCIAL_TYPES.PHONE_NUMBER, value: phone },
       ],
     });
-
-    dispatch(closeModal({ modalName: 'openUserInfo' }));
   };
 
   const formik = useFormik({
