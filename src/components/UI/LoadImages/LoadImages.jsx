@@ -148,7 +148,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
           handlerClick={handleSave}
           label='profile.modal.btn'
           correctStyle={styles.btn}
-          disabled={!settingsCanvas.image}
+          disabled={!settingsCanvas.image||error}
         />
         {showDeleteButton && (
           <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
