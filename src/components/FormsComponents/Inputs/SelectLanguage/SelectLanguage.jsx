@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
-import { styles } from './SelectLanguage.styles';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PropTypes from 'prop-types';
@@ -9,6 +8,7 @@ import {
   useGetDefLanguageLevelQuery,
   useGetDefLanguageQuery,
 } from '../../../../redux/services/defaultLanguage/defaultLanguageApiSlice';
+import { styles } from './SelectLanguage.styles';
 
 const SelectLanguage = ({
   variant,
@@ -42,18 +42,33 @@ const SelectLanguage = ({
     handleLevelChange(selectedLvl);
   };
 
+  useEffect(() => {
+    if (selectedLanguage === '') {
+      const selectElement = document.getElementById(`${id}-level`);
+      if (selectElement) {
+        selectElement.blur();
+      }
+    }
+  }, [selectedLanguage, id]);
+
   return (
     <>
       <FormControl fullWidth variant={variant} sx={styles.wrapper} error={errorLanguage}>
         <InputLabel htmlFor={id} sx={styles.label}>
           {t(labelLanguage)}
+          <span className='required-asterisk'>*</span>
         </InputLabel>
         <Select
-          sx={styles.input}
+          sx={{
+            ...styles.input,
+            '& .MuiSelect-icon': {
+              color: 'white',
+            },
+          }}
           id={id}
           name='language'
           value={selectedLanguage}
-          label={t(labelLanguage)}
+          label={`${t(labelLanguage)}*`}
           onChange={handleLanguageSelectChange}
           IconComponent={KeyboardArrowDownIcon}
           inputProps={{
@@ -61,6 +76,7 @@ const SelectLanguage = ({
               sx: styles.selectField,
             },
           }}
+          placeholder={`${t(labelLanguage)}*`}
         >
           {languagesArray.length > 0 &&
             languagesArray.map(({ id }) => (
@@ -78,20 +94,22 @@ const SelectLanguage = ({
       <FormControl fullWidth variant={variant} sx={styles.wrapper} error={errorLevel} disabled={!selectedLanguage}>
         <InputLabel htmlFor={`${id}-level`} sx={styles.label}>
           {t(labelLevel)}
+          <span className='required-asterisk'>*</span>
         </InputLabel>
         <Select
           sx={styles.input}
           id={`${id}-level`}
           name='languageLevel'
           value={selectedLevel}
-          label={t(labelLevel)}
+          label={`${t(labelLevel)}*`}
           onChange={handleLevelSelectChange}
-          IconComponent={KeyboardArrowDownIcon}
+          IconComponent={(props) => <KeyboardArrowDownIcon {...props} sx={{ color: 'white' }} />}
           inputProps={{
             MenuProps: {
               sx: styles.selectField,
             },
           }}
+          placeholder={`${t(labelLevel)}`}
         >
           {levelCodes.length > 0 &&
             levelCodes.map((level) => (

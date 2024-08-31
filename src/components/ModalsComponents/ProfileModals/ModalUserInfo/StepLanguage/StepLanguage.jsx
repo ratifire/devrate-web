@@ -6,7 +6,10 @@ import { SelectLanguage } from '../../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { useFormik } from 'formik';
 import LanguageLevel from '../../../../UI/LanguageLevel';
-import { useGetLanguageUserQuery, usePostLanguageUserMutation } from '../../../../../redux/user/language/languageApiSlice';
+import {
+  useGetLanguageUserQuery,
+  usePostLanguageUserMutation,
+} from '../../../../../redux/user/language/languageApiSlice';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 
@@ -29,6 +32,7 @@ const StepLanguage = () => {
       body: values.languages,
     });
   };
+
   const formik = useFormik({
     initialValues: {
       languages: [],
@@ -103,14 +107,15 @@ const StepLanguage = () => {
             variant='outlined'
             handleLanguageChange={handleLanguageChange}
             handleLevelChange={handleLevelChange}
-            labelLanguage='profile.modal.userInfo.languages.language'
-            labelLevel='profile.modal.userInfo.languages.level'
+            labelLanguage='Language  '
+            labelLevel='Level  '
             helperTextLanguage={helperTextLanguage}
             helperTextLevel={helperTextLevel}
             errorLanguage={errorLanguage}
             errorLevel={errorLevel}
             selectedLanguage={selectedLanguage}
             selectedLevel={selectedLevel}
+            sx={styles.languageLevel}
           />
           <IconButton sx={styles.iconBtn} onClick={createLang}>
             <AddIcon />
