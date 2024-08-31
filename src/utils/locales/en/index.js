@@ -122,7 +122,7 @@ export const en = {
         main_text1: 'To finish your account settings, You should confirm your email',
         main_text2: 'Check you email and enter confirmation code',
         btn_confirm: 'Register',
-        spam_check_text: 'Didn\'t receive the letter? Check your spam folder.',
+        spam_check_text: "Didn't receive the letter? Check your spam folder.",
         repeat_request_link: 'Please resend',
         repeat_request_text1: 'request',
         repeat_request_text2: 'or',
@@ -293,7 +293,7 @@ export const en = {
           description_long: 'Description too long',
           description_short: 'Description too short',
           description_placeholder:
-              'My skills in programming in PHP, using OOP and the MVC approach are supported by extensive experience working with databases such as MySQL and PostgreSQL. I am proficient in Laravel 5.3 framework for developing scalable web applications and have basic knowledge of Symfony 3 including Sonata.',
+            'My skills in programming in PHP, using OOP and the MVC approach are supported by extensive experience working with databases such as MySQL and PostgreSQL. I am proficient in Laravel 5.3 framework for developing scalable web applications and have basic knowledge of Symfony 3 including Sonata.',
           required: 'This field is required',
           startDateMinMessage: 'Date must be later than 01/01/1950',
           startDateMaxMessage: 'Date must be earlier than today',
@@ -320,9 +320,9 @@ export const en = {
         '07': 'Jul',
         '08': 'Aug',
         '09': 'Sep',
-        '10': 'Oct',
-        '11': 'Nov',
-        '12': 'Dec',
+        10: 'Oct',
+        11: 'Nov',
+        12: 'Dec',
       },
       statistics: {
         title: 'Statistics',
@@ -402,6 +402,8 @@ export const en = {
     },
     schedule: {
       title: 'Schedule',
+      host: 'Host',
+      cancelEventBtn: 'Cancel event',
     },
   },
 };
