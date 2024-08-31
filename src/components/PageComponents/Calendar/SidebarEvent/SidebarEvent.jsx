@@ -31,7 +31,7 @@ export default function SidebarEvent({ event }) {
       <Typography sx={styles.host} variant='body2' component='div'>
         {t('schedule.host')}: <span>Олена Бондаренко</span>
       </Typography>
-      <Typography sx={styles.hostTitle} variant='body2' component='div'>
+      <Typography sx={styles.hostTitle} variant='caption3' component='div'>
         Senior Full stack Developer
       </Typography>
       <Box sx={styles.titleDateTimeBox}>

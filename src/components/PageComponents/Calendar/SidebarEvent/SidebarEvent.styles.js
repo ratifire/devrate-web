@@ -13,27 +13,10 @@ export const styles = {
     alignItems: 'center',
     marginBottom: theme.spacing(2),
   }),
-  title: {
-    font: 'Roboto',
-    weight: 500,
-    fontSize: '20px',
-    lineHeight: '32px',
-    letterSpacing: '0.15px',
-  },
   dateAndTime: (theme) => ({
-    font: 'Roboto',
-    weight: 400,
-    fontSize: '14px',
-    lineHeight: '20.02px',
-    letterSpacing: '0.17px',
     color: theme.palette.primary[50],
   }),
   host: (theme) => ({
-    font: 'Roboto',
-    weight: 400,
-    fontSize: '14px',
-    lineHeight: '20.02px',
-    letterSpacing: '0.17px',
     color: theme.palette.primary[50],
     '& span': {
       color: theme.palette.primary[100],
@@ -41,9 +24,6 @@ export const styles = {
     marginBottom: theme.spacing(2),
   }),
   hostTitle: (theme) => ({
-    font: 'Roboto',
-    weight: 400,
-    fontSize: '12px',
     lineHeight: '19.92px',
     letterSpacing: '0.4px',
     color: theme.palette.neutral[50],

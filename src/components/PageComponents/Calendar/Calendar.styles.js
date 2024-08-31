@@ -2,16 +2,13 @@ export const styles = {
   demoApp: {
     display: 'flex',
     minHeight: '100%',
-    fontFamily: 'Arial, Helvetica Neue, Helvetica, sans-serif',
     fontSize: '14px',
   },
-  demoAppMain: {
+  demoAppMain: (theme) => ({
     flexGrow: '1',
-    padding: '3em',
-    paddingRight: '10px',
-  },
+    padding: theme.spacing(4),
+  }),
   fc: {
-    // maxWidth: '1100px',
     margin: '0 auto',
   },
   timeGridSlot: {

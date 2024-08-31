@@ -1,15 +1,15 @@
 export const styles = {
   container: (theme) => ({
-    background: '#3E3E40',
+    background: theme.palette.sliderAssessment.darkGray,
     // borderRight: '1px solid #d3e2e8',
     borderTopLeftRadius: theme.spacing(2),
     borderBottomLeftRadius: theme.spacing(2),
     paddingRight: theme.spacing(2),
   }),
-  sidebarSection: {
-    marginLeft: '8px',
+  sidebarSection: (theme) => ({
+    marginLeft: theme.spacing(2),
     maxHeight: 'calc(100vh - 270px)',
-  },
+  }),
   scrollContainer: (theme) => ({
     overflow: 'auto',
     maxHeight: 270, // to be adjusted with designers
