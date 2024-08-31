@@ -36,10 +36,7 @@ export default function Calendar() {
       });
     }
   }, []);
-   
-  function handleWeekendsToggle() {
-    setWeekendsVisible(!weekendsVisible);
-  }
+
   
   function handleDateSelect(selectInfo) {
     let title = prompt('Please enter a new title for your event');
@@ -76,13 +73,6 @@ export default function Calendar() {
     );
   };
 
-<div style={styles.demoApp} className='demo-app'>
-        <Sidebar
-            weekendsVisible={weekendsVisible}
-            handleWeekendsToggle={handleWeekendsToggle}
-            currentEvents={currentEvents}
-        />
-        <div style={styles.demoAppMain} className='demo-app-main'>
   return (
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentEvents} />
