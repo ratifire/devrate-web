@@ -1,14 +1,14 @@
-import React from 'react';
-import { v4 as uuid } from 'uuid';
-import { useTranslation } from 'react-i18next';
-import { styles } from './SelectLanguage.styles';
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { v4 as uuid } from 'uuid';
 import {
   useGetDefLanguageLevelQuery,
   useGetDefLanguageQuery,
 } from '../../../../redux/services/defaultLanguage/defaultLanguageApiSlice';
+import { styles } from './SelectLanguage.styles';
 
 const SelectLanguage = ({
   variant,
@@ -65,7 +65,7 @@ const SelectLanguage = ({
           {languagesArray.length > 0 &&
             languagesArray.map(({ id }) => (
               <MenuItem key={id} value={id} sx={styles.menuItem}>
-                {t(`language.name.${id}`)}
+                {t(`specialization.language.name.${id}`)}
               </MenuItem>
             ))}
         </Select>
@@ -96,7 +96,7 @@ const SelectLanguage = ({
           {levelCodes.length > 0 &&
             levelCodes.map((level) => (
               <MenuItem key={level} value={level} sx={styles.menuItem}>
-                {t(`language.level.${level}`)}
+                {t(`specialization.language.level.${level}`)}
               </MenuItem>
             ))}
         </Select>
