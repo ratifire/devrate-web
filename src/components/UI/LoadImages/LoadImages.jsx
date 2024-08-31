@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
