@@ -51,7 +51,6 @@ const ModalUserInfo = () => {
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openUserInfo}>
       <Box sx={styles.wrapper}>
-
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
           {steps.map((label) => (
             <Step key={label} sx={styles.step}>
