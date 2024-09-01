@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
@@ -20,16 +20,10 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
     width: 240,
     height: 240,
     showGrid: true,
-    image: '',
+    image: value || '',
   });
   const [scale, setScale] = useState(1.5);
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (value) {
-      setSettingsCanvas((prev) => ({ ...prev, image: value }));
-    }
-  }, [value]);
 
   const handleWheel = useCallback(
     (e) => {
