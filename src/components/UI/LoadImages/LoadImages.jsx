@@ -115,26 +115,30 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
           )}
         </Box>
       </Box>
-
-      {settingsCanvas.image ? (
-        <AvatarEditor
-          ref={editor}
-          width={240}
-          height={240}
-          borderRadius={settingsCanvas.borderRadius}
-          image={settingsCanvas.image}
-          style={styles.preview}
-          border={50}
-          color={[29, 29, 29, 0.25]}
-          scale={scale}
-          onWheel={handleWheel}
-        />
-      ) : (
-        <Box sx={styles.imgDef}>
-          <ImageOutlinedIcon sx={styles.imgDefIcon} />
-        </Box>
-      )}
-
+      <Box sx={styles.boxAvatarEditor}>
+        {settingsCanvas.image && (
+          <>
+            <AvatarEditor
+              ref={editor}
+              width={240}
+              height={240}
+              borderRadius={settingsCanvas.borderRadius}
+              image={settingsCanvas.image}
+              style={styles.preview}
+              border={50}
+              color={[29, 29, 29, 0.25]}
+              scale={scale}
+              onWheel={handleWheel}
+            />
+            <Box sx={styles.customBorder}/>
+          </>
+        )}
+        {!settingsCanvas.image && (
+          <Box sx={styles.imgDef}>
+            <ImageOutlinedIcon sx={styles.imgDefIcon} />
+          </Box>
+        )}
+      </Box>
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
           variant='contained'
