@@ -130,7 +130,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
               scale={scale}
               onWheel={handleWheel}
             />
-            <Box sx={styles.customBorder}/>
+            <Box sx={styles.customBorder} />
           </>
         )}
         {!settingsCanvas.image && (
