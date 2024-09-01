@@ -61,7 +61,23 @@ export const styles = {
     width: '100%',
     gridGap: theme.spacing(4),
     marginTop: '20px',
+    '& > :first-of-type': {
+      backgroundColor: theme.palette.primary['400'],
+      color: theme.palette.common.white,
+      padding: '10px 20px',
+      borderRadius: '4px',
+      flex: '1',
+    },
+    '& > :last-of-type': {
+      backgroundColor: 'transparent',
+      border: `1px solid ${theme.palette.primary['400']}`,
+      color: theme.palette.primary['400'],
+      padding: '10px 20px',
+      borderRadius: '4px',
+      flex: '1',
+    },
   }),
+
   btnIcon: (theme) => ({
     flex: '1 0 44px',
     color: theme.palette.action.active,
