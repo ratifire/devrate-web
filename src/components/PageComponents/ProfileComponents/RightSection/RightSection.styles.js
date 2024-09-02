@@ -38,4 +38,9 @@ export const styles = {
       fontSize: '18px',
     },
   }),
+  box: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 };
