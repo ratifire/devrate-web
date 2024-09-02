@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { styles } from './StepLanguage.styles';
-import { Box, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { SelectLanguage } from '../../../../FormsComponents/Inputs';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { Box, IconButton } from '@mui/material';
 import { useFormik } from 'formik';
-import LanguageLevel from '../../../../UI/LanguageLevel';
-import { useGetLanguageUserQuery, usePostLanguageUserMutation } from '../../../../../redux/user/language/languageApiSlice';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import {
+  useGetLanguageUserQuery,
+  usePostLanguageUserMutation,
+} from '../../../../../redux/user/language/languageApiSlice';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { SelectLanguage } from '../../../../FormsComponents/Inputs';
+import LanguageLevel from '../../../../UI/LanguageLevel';
+import { styles } from './StepLanguage.styles';
 
 const StepLanguage = () => {
   const { data: user } = useSelector(selectCurrentUser);
