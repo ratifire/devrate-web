@@ -11,6 +11,7 @@ import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import styles from './ResetPassword.styles';
 import { resetPasswordSchema } from '../../../../../utils/valadationSchemas/index';
+import {toast} from "react-toastify";
 
 const initialValues = {
   newPassword: '',
@@ -112,13 +113,31 @@ const ResetPassword = () => {
               newPassword: values.newPassword,
             };
             await changePassword(requestData).unwrap();
-            alert('Password changed successfully!');
+             toast('Password changed successfully!', {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+             });
             resetForm();
             dispatch(closeModal({ modalName: 'openResetPassword' }));
             dispatch(openModal({ modalName: 'openLogin' }));
           } catch (error) {
             console.error('Error changing password:', error);
-            alert('Error changing password. Please try again.');
+               toast.error('Error changing password. Please try again.', {
+                  position: "top-right",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+              });
           }
         }}
       >
@@ -136,8 +155,8 @@ const ResetPassword = () => {
                     onKeyDown={(event) => handleKeyDown(event, index, formik)}
                     onPaste={(event) => handlePaste(event, formik)}
                     value={formik.values.code[index] ?? ''}
-                    inputProps={{ 
-                      style: { textAlign: 'center' }, 
+                    inputProps={{
+                      style: { textAlign: 'center' },
                       maxLength: 1,
                       autoComplete: 'off',
                       'data-lpignore': 'true'
