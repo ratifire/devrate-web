@@ -10,6 +10,7 @@ export const styles = {
     height: '334px',
   },
   dropZone: (theme) => ({
+    position:"relative",
     width: 334,
     height: 334,
     display: 'flex',
@@ -71,8 +72,12 @@ export const styles = {
     width: '100%',
   },
   error : {
-textAlign: 'center'
-  },
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: 80,
+    left: 0,
+    width: '100%',
+   },
   btnIcon: (theme) => ({
     flex: '1 0 44px',
     color: theme.palette.neutral[200],

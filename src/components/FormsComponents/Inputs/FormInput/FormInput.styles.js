@@ -25,8 +25,8 @@ export const styles = {
       color: `${theme.palette.text.primary} !important`,
     },
     '&:-webkit-autofill, & input:-webkit-autofill': {
-      '-webkit-text-fill-color': `${theme.palette.text.primary} !important`,
-      'box-shadow': `0 0 0 100px ${theme.palette.background.default} inset !important`,
+      'WebkitTextFillColor': `${theme.palette.text.primary} !important`,
+      'boxShadow': `0 0 0 100px ${theme.palette.background.default} inset !important`,
       'transition': 'background-color 5000s ease-in-out 0s',
     },
   }),
