@@ -140,6 +140,7 @@ const getDesignTokens = (mode) => ({
             gradient: 'radial-gradient(62.0% 54% at 63% 50%, rgba(71, 62, 98, 0.5) 0%, rgba(71, 62, 98, 0) 100%)',
             scrollbarTrack: '#303032',
             scrollbarThumb: '#FFF',
+            btnGroup: '#3E3E40',
           },
           primary: {
             50: '#EFE6FD',
@@ -255,7 +256,7 @@ const getDesignTokens = (mode) => ({
     code: {
       fontFamily: 'Roboto, sans-serif',
     },
-    '*': {
+    ' *': {
       boxSizing: 'border-box',
     },
   },
