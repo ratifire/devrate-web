@@ -1,13 +1,18 @@
-import React from 'react';
-import { styles } from './StepContacts.styles';
-import { FormInput } from '../../../../FormsComponents/Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal } from '../../../../../redux/modal/modalSlice';
+import {
+  useGetUserContactsQuery,
+  usePostContactsUserMutation,
+} from '../../../../../redux/user/contacts/contactsApiSlice';
 import { StepContactsSchema } from '../../../../../utils/valadationSchemas/index';
-import { useGetUserContactsQuery, usePostContactsUserMutation } from '../../../../../redux/user/contacts/contactsApiSlice';
-import { useSelector } from 'react-redux';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { FormInput } from '../../../../FormsComponents/Inputs';
 import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
+import { addHttps, addTelegram } from './helpers';
+import { styles } from './StepContacts.styles';
 
 const typeNameMap = {
   [SOCIAL_TYPES.TELEGRAM_LINK]: 'telegram',
@@ -22,10 +27,7 @@ const StepContacts = () => {
   const [postContactsUser] = usePostContactsUserMutation();
   const userId = useSelector((state) => state.auth.user.data.id);
   const contactsQuery = useGetUserContactsQuery(userId);
-
-  if (contactsQuery.isLoading) {
-    return null;
-  }
+  const dispatch = useDispatch();
 
   const valuesMap = contactsQuery.data.reduce((acc, contact) => {
     acc[typeNameMap[contact.type]] = contact.value;
@@ -42,25 +44,20 @@ const StepContacts = () => {
     ...valuesMap,
   };
 
-  const addHttp = (url) => {
-    if (url && !/^https?:\/\//i.test(url)) {
-      return `http://${url}`;
-    }
-    return url;
-  };
-
   const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
     await postContactsUser({
       userId: userId,
       body: [
-        { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addHttp(telegram) },
+        { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addTelegram(telegram) },
         { type: SOCIAL_TYPES.EMAIL, value: mail },
-        { type: SOCIAL_TYPES.LINKEDIN_LINK, value: addHttp(linkedIn) },
-        { type: SOCIAL_TYPES.GITHUB_LINK, value: addHttp(gitHub) },
-        { type: SOCIAL_TYPES.BEHANCE_LINK, value: addHttp(behance) },
+        { type: SOCIAL_TYPES.LINKEDIN_LINK, value: addHttps(linkedIn) },
+        { type: SOCIAL_TYPES.GITHUB_LINK, value: addHttps(gitHub) },
+        { type: SOCIAL_TYPES.BEHANCE_LINK, value: addHttps(behance) },
         { type: SOCIAL_TYPES.PHONE_NUMBER, value: phone },
       ],
     });
+
+    dispatch(closeModal({ modalName: 'openUserInfo' }));
   };
 
   const formik = useFormik({
