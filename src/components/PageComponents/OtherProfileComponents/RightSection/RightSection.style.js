@@ -15,7 +15,6 @@ export const styles = {
   }),
   wrapperLink: {
     display: 'flex',
-    // justifyContent: 'center',
     alignItems: 'center',
   },
   wrapperLanguages: {

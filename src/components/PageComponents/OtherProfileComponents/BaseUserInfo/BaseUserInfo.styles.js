@@ -8,12 +8,7 @@ export const styles = {
     flex: '1 0 100%',
     marginRight: theme.spacing(0),
     marginBottom: theme.spacing(1),
-    '> button': {
-      padding: theme.spacing(0),
-      borderRadius: 1,
-      width: '100%',
-      height: '100%',
-    },
+
     '@media (min-width: 600px)': {
       flex: '1 0 132px',
       marginRight: theme.spacing(3),
@@ -62,31 +57,35 @@ export const styles = {
     gridGap: theme.spacing(4),
     marginTop: '20px',
     '& > :first-of-type': {
+      fontFamily: theme.typography.caption1,
+      textTransform: 'capitalize',
+
       backgroundColor: theme.palette.primary['400'],
       color: theme.palette.common.white,
       padding: '10px 20px',
       borderRadius: '4px',
       flex: '1',
+
+      // '&:hover': {
+      //   backgroundColor: theme.palette.primary['500'], // Меняем цвет при наведении
+      //   boxShadow: `0px 4px 12px ${theme.palette.primary['200']}`, // Пример добавления тени
+      // },
     },
     '& > :last-of-type': {
+      fontFamily: theme.typography.caption1,
+      textTransform: 'capitalize',
+
       backgroundColor: 'transparent',
       border: `1px solid ${theme.palette.primary['400']}`,
-      color: theme.palette.primary['400'],
+      color: theme.palette.primary['200'],
       padding: '10px 20px',
       borderRadius: '4px',
       flex: '1',
-    },
-  }),
 
-  btnIcon: (theme) => ({
-    flex: '1 0 44px',
-    color: theme.palette.action.active,
-    borderRadius: 1,
-    ':hover': {
-      backgroundColor: theme.palette.neutral['800'],
-    },
-    svg: {
-      fontSize: '18px',
+      '&:hover': {
+        borderColor: theme.palette.primary['500'], // Меняем цвет рамки при наведении
+        color: theme.palette.primary['200'],
+      },
     },
   }),
 };

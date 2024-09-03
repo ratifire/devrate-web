@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { styles } from './BaseUserInfo.styles';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice';
 import PropTypes from 'prop-types';
 import UserAvatar from '../../../UI/UserAvatar';
 import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
-import Bookmark from '../../../UI/Bookmark'
+import Bookmark from '../../../UI/Bookmark';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { useTranslation } from 'react-i18next';
 
 const BaseUserInfo = ({ id }) => {
   const { data: personalData } = useGetPersonalUserQuery(id);
+  const { t } = useTranslation();
   const [isBookmarked, setIsBookmarked] = useState(false);
   const userData = personalData || {};
   const {
@@ -28,17 +31,17 @@ const BaseUserInfo = ({ id }) => {
     setIsBookmarked(newValue);
   };
 
+  const handleWriteMessage = () => {
+    console.log('Write a message');
+  };
+
+  const handleBookInterview = () => {
+    console.log('Book an interview');
+  };
 
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperAvatar}>
-        {/*<UserAvatar*/}
-        {/*  userFirstName={getFirstName}*/}
-        {/*  userLastName={getLastName}*/}
-        {/*  userName={`${getFirstName} ${getLastName}`}*/}
-        {/*  src={userPicture}*/}
-        {/*  size='l'*/}
-        {/*/>*/}
         {getFirstName && getLastName && (
           <UserAvatar
             userFirstName={getFirstName}
@@ -48,13 +51,11 @@ const BaseUserInfo = ({ id }) => {
             size="l"
           />
         )}
-
-
       </Box>
       <Box sx={styles.wrapperText}>
         <Typography variant='h5' sx={styles.userName}>
           {`${getFirstName} ${getLastName}`}
-           <Bookmark isBookmarked={isBookmarked} onToggle={handleToggleBookmark}/>
+          <Bookmark isBookmarked={isBookmarked} onToggle={handleToggleBookmark} />
         </Typography>
         <Typography variant='subtitle1' sx={styles.speciality}>
           {getStatus || ''}
@@ -65,13 +66,24 @@ const BaseUserInfo = ({ id }) => {
         </Typography>
       </Box>
       <Box sx={styles.buttons}>
-        <Button sx={styles.buttons}>Write a message</Button>
-        <Button sx={styles.buttons}>Book an interview</Button>
+        <ButtonDef
+          type={'button'}
+          variant='contained'
+          correctStyle={styles.buttons}
+          handlerClick={handleWriteMessage}
+          label={t('Write a massage')}
+        />
+        <ButtonDef
+          variant='contained'
+          correctStyle={styles.buttons}
+          handlerClick={handleBookInterview}
+          label={t('Book an interview')}
+        />
       </Box>
-
     </Box>
   );
 };
+
 BaseUserInfo.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };

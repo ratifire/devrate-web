@@ -31,7 +31,7 @@ export const styles = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: theme.spacing(5),
+    marginBottom: '29px',
     '& .MuiRating-iconFilled': {
       color: theme.palette.action.active,
     },
@@ -44,7 +44,9 @@ export const styles = {
     flexDirection: 'row',
     width: '100%',
   },
-  doneInterviewsQuantity: {},
+  doneInterviewsQuantity: {
+    marginBottom: '-7px'
+  },
   doneInterviews: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -60,7 +62,9 @@ export const styles = {
     borderColor: theme.palette.info.azure,
     borderRadius: 1,
   }),
-  completedInterviewsQuantity: {},
+  completedInterviewsQuantity: {
+    marginBottom: '-7px'
+  },
   completedInterviews: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
