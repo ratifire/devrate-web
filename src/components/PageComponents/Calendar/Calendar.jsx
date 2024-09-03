@@ -7,20 +7,27 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { styles } from './Calendar.styles';
 import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { useGetEventByUserIdQuery } from '../../../redux/calendar/calendarApiSlice';
 
- 
 export default function Calendar() {
   const [currentEvents, setCurrentEvents] = useState([]);
   const calendarRef = useRef(null);
-  
+
+  const { id: userId } = useSelector((state) => state.auth.user.data);
+  const { data: events } = useGetEventByUserIdQuery(userId);
+  console.log('Current events', events);
+
   useEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
       const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
       const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
-      const timeGridHeadElements = calendarApi.el.querySelectorAll('.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid');
+      const timeGridHeadElements = calendarApi.el.querySelectorAll(
+        '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
+      );
       const timeGridEventElements = calendarApi.el.querySelectorAll('.fc-v-event .fc-event-main');
-      
+
       timeGridSlotElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridTableData);
       });
@@ -36,11 +43,10 @@ export default function Calendar() {
     }
   }, []);
 
-  
   function handleDateSelect(selectInfo) {
     let title = prompt('Please enter a new title for your event');
     let calendarApi = selectInfo.view.calendar;
-    
+
     calendarApi.unselect(); // clear date selection
     if (title) {
       calendarApi.addEvent({
@@ -110,4 +116,3 @@ export default function Calendar() {
     </Box>
   );
 }
- 
