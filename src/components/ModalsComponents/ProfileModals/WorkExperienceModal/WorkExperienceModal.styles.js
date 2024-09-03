@@ -48,5 +48,8 @@ export const styles = {
   }),
   workExperienceBtn: {
     width: '228px',
+  },
+  error: {
+    transform: 'translate(-13px, -5px)'
   }
 };

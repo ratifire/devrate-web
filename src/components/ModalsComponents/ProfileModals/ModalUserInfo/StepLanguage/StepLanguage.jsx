@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { styles } from './StepLanguage.styles';
-import { Box, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { SelectLanguage } from '../../../../FormsComponents/Inputs';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { Box, IconButton } from '@mui/material';
 import { useFormik } from 'formik';
-import LanguageLevel from '../../../../UI/LanguageLevel';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import {
   useGetLanguageUserQuery,
   usePostLanguageUserMutation,
 } from '../../../../../redux/user/language/languageApiSlice';
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { SelectLanguage } from '../../../../FormsComponents/Inputs';
+import LanguageLevel from '../../../../UI/LanguageLevel';
+import { styles } from './StepLanguage.styles';
 
 const StepLanguage = () => {
   const { data: user } = useSelector(selectCurrentUser);
@@ -32,7 +32,6 @@ const StepLanguage = () => {
       body: values.languages,
     });
   };
-
   const formik = useFormik({
     initialValues: {
       languages: [],
@@ -107,15 +106,14 @@ const StepLanguage = () => {
             variant='outlined'
             handleLanguageChange={handleLanguageChange}
             handleLevelChange={handleLevelChange}
-            labelLanguage='Language  '
-            labelLevel='Level  '
+            labelLanguage='profile.modal.userInfo.languages.language'
+            labelLevel='profile.modal.userInfo.languages.level'
             helperTextLanguage={helperTextLanguage}
             helperTextLevel={helperTextLevel}
             errorLanguage={errorLanguage}
             errorLevel={errorLevel}
             selectedLanguage={selectedLanguage}
             selectedLevel={selectedLevel}
-            sx={styles.languageLevel}
           />
           <IconButton sx={styles.iconBtn} onClick={createLang}>
             <AddIcon />

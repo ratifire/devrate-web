@@ -5,7 +5,7 @@ import LanguageLevel from '../LanguageLevel';
 const LanguagesList = ({ data }) => {
   return (
     <>
-      {data.map((item) => (
+      {data?.map((item) => (
         <LanguageLevel key={item.name} level={item.level} language={item.name} />
       ))}
     </>

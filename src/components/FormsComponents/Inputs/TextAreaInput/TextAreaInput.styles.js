@@ -30,7 +30,8 @@ export const styles = {
   }),
   textHelper: {
     position: 'absolute',
-    bottom: '-23px',
+    bottom: '-18px',
+    left: '-12px'
   },
   textareaBox: (theme) => ({
     width: '100%',
