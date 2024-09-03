@@ -66,10 +66,6 @@ export const styles = {
       borderRadius: '4px',
       flex: '1',
 
-      // '&:hover': {
-      //   backgroundColor: theme.palette.primary['500'], // Меняем цвет при наведении
-      //   boxShadow: `0px 4px 12px ${theme.palette.primary['200']}`, // Пример добавления тени
-      // },
     },
     '& > :last-of-type': {
       fontFamily: theme.typography.caption1,
@@ -83,7 +79,7 @@ export const styles = {
       flex: '1',
 
       '&:hover': {
-        borderColor: theme.palette.primary['500'], // Меняем цвет рамки при наведении
+        borderColor: theme.palette.primary['500'],
         color: theme.palette.primary['200'],
       },
     },
