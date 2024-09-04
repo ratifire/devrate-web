@@ -231,7 +231,7 @@ export const en = {
             linkedIn: 'LinkedIn',
             gitHub: 'GitHub',
             behance: 'Behance',
-            mail: 'Mail',
+            mail: 'Email',
             phone: 'Phone',
           },
           photo: {

@@ -21,11 +21,10 @@ import {
   useUpdateWorkExperienceByIdMutation,
 } from '../../../../redux/workExperience/workExperienceApiSlice';
 
-
 const WorkExperienceModal = () => {
   const { id } = useSelector((state) => state.auth.user.data);
-  const [ createNewWorkExperience ] = useCreateNewWorkExperienceMutation();
-  const [ updateWorkExperienceById ] = useUpdateWorkExperienceByIdMutation();
+  const [createNewWorkExperience] = useCreateNewWorkExperienceMutation();
+  const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
 
   const dispatch = useDispatch();
   const openExperience = useSelector((state) => state.modal.openExperience);
@@ -40,13 +39,13 @@ const WorkExperienceModal = () => {
     description: '',
     responsibilities: '',
     startDate: null,
-    endDate: null
+    endDate: null,
   };
 
   const onSubmit = async (values, { resetForm }) => {
     const startDate = DateTime.fromISO(values.startDate).toISODate();
     const endDate = DateTime.fromISO(values.endDate).toISODate();
-    const data = {...values, startDate, endDate, responsibilities};
+    const data = { ...values, startDate, endDate, responsibilities };
 
     try {
       if (modalData && modalData.id) {
@@ -54,8 +53,7 @@ const WorkExperienceModal = () => {
       } else {
         await createNewWorkExperience({ userId: id, data }).unwrap();
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Failed to create Work Experience', error);
     }
 
@@ -72,21 +70,21 @@ const WorkExperienceModal = () => {
   });
 
   useEffect(() => {
-    if (!modalData) return
+    if (!modalData) return;
 
     formik.setValues({
       position: modalData.position,
       companyName: modalData.companyName,
       description: modalData.description,
       startDate: DateTime.fromISO(modalData.startDate),
-      endDate: DateTime.fromISO(modalData.endDate)
+      endDate: DateTime.fromISO(modalData.endDate),
     });
     setResponsibilities(modalData.responsibilities);
   }, [modalData, formik.setValues]);
 
   const [responsibilities, setResponsibilities] = useState([]);
   const createResponsibility = (newResponsibility) => {
-    if (newResponsibility.length < 2 || newResponsibility.length > 50) return
+    if (newResponsibility.length < 2 || newResponsibility.length > 50) return;
     setResponsibilities([...responsibilities, newResponsibility]);
     formik.setFieldValue('responsibilities', '');
   };
@@ -132,20 +130,28 @@ const WorkExperienceModal = () => {
           </Box>
           <Box sx={styles.input100}>
             <LocalizationProvider dateAdapter={AdapterLuxon}>
-              <DateField sx={styles.input50}
-                         label={t('profile.modal.workExperience.startDate')}
-                         value={formik.values.startDate}
-                         required
-                         onChange={(value) => formik.setFieldValue('startDate', value)}
-                         helperText={formik.touched.startDate && formik.errors.startDate}
-                         error={formik.touched.startDate && Boolean(formik.errors.startDate)}
+              <DateField
+                sx={styles.input50}
+                label={t('profile.modal.workExperience.startDate')}
+                value={formik.values.startDate}
+                required
+                onChange={(value) => formik.setFieldValue('startDate', value)}
+                helperText={formik.touched.startDate && formik.errors.startDate}
+                error={formik.touched.startDate && Boolean(formik.errors.startDate)}
+                FormHelperTextProps={{
+                  sx: styles.error
+                }}
               />
-              <DateField sx={styles.input50}
-                         label={t('profile.modal.workExperience.endDate')}
-                         value={formik.values.endDate}
-                         onChange={(value) => formik.setFieldValue('endDate', value)}
-                         helperText={formik.touched.endDate && formik.errors.endDate}
-                         error={formik.touched.endDate && Boolean(formik.errors.endDate)}
+              <DateField
+                sx={styles.input50}
+                label={t('profile.modal.workExperience.endDate')}
+                value={formik.values.endDate}
+                onChange={(value) => formik.setFieldValue('endDate', value)}
+                helperText={formik.touched.endDate && formik.errors.endDate}
+                error={formik.touched.endDate && Boolean(formik.errors.endDate)}
+                FormHelperTextProps={{
+                  sx: styles.error
+                }}
               />
             </LocalizationProvider>
           </Box>
@@ -161,6 +167,9 @@ const WorkExperienceModal = () => {
               placeholder='profile.modal.workExperience.description_placeholder'
               helperText={formik.touched.description && formik.errors.description}
               error={formik.touched.description && Boolean(formik.errors.description)}
+              FormHelperTextProps={{
+                sx: styles.error
+              }}
             />
           </Box>
           <Box sx={styles.input100}>
@@ -185,12 +194,17 @@ const WorkExperienceModal = () => {
                 key={index}
                 responsibility={responsibility}
                 tobeDeleted
-                responsibilityDeleteHandler={responsibilityDeleteHandler}/>
+                responsibilityDeleteHandler={responsibilityDeleteHandler}
+              />
             ))}
           </Box>
 
-          <ButtonDef variant='contained' type='submit' label={t('profile.modal.btn')} correctStyle={styles.workExperienceBtn}/>
-
+          <ButtonDef
+            variant='contained'
+            type='submit'
+            label={t('profile.modal.btn')}
+            correctStyle={styles.workExperienceBtn}
+          />
         </Box>
       </form>
     </ModalLayoutProfile>
