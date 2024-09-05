@@ -8,7 +8,7 @@ import { INITIAL_EVENTS } from './event-utils';
 import { styles } from './Calendar.styles';
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useGetEventByUserIdQuery } from '../../../redux/calendar/calendarApiSlice';
+import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/calendar/calendarApiSlice';
 
 export default function Calendar() {
   // const [currentEvents, setCurrentEvents] = useState([]);
@@ -16,8 +16,11 @@ export default function Calendar() {
 
   const from = '2024-06-02';
   const to = '2024-08-02';
+  const fromTime = '2024-07-02T06:00:00-03:00';
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to });
+  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
+  console.log('currentClosestEvents', currentClosestEvents);
 
   useEffect(() => {
     if (calendarRef.current) {
@@ -79,7 +82,7 @@ export default function Calendar() {
   //   );
   // };
 
-  if (isLoading) {
+  if (isLoading || loading) {
     return <div>Loading...</div>;
   }
 

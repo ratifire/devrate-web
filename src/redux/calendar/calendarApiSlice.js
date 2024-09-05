@@ -8,6 +8,11 @@ export const CalendarApiSlice = apiSlice.injectEndpoints({
       providesTags: (result) => (result ? [...result.map(({ id }) => ({ type: 'Event', id })), 'Event'] : ['Event']),
     }),
 
+    getClosestEventByUserId: builder.query({
+      query: ({ userId, fromTime }) => `/users/${userId}/events/closest?from=${fromTime}`,
+      providesTags: (result) => (result ? [...result.map(({ id }) => ({ type: 'Event', id })), 'Event'] : ['Event']),
+    }),
+
     deleteEventById: builder.mutation({
       query: ({ userId, id }) => {
         return {
@@ -20,4 +25,5 @@ export const CalendarApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetEventByUserIdQuery, useDeleteEventByIdMutation } = CalendarApiSlice;
+export const { useGetEventByUserIdQuery, useGetClosestEventByUserIdQuery, useDeleteEventByIdMutation } =
+  CalendarApiSlice;
