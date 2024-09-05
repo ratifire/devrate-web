@@ -14,8 +14,10 @@ export default function Calendar() {
   // const [currentEvents, setCurrentEvents] = useState([]);
   const calendarRef = useRef(null);
 
+  const from = '2024-06-02';
+  const to = '2024-08-02';
   const { id: userId } = useSelector((state) => state.auth.user.data);
-  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery(userId);
+  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to });
 
   useEffect(() => {
     if (calendarRef.current) {

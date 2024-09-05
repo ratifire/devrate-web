@@ -4,7 +4,7 @@ export const CalendarApiSlice = apiSlice.injectEndpoints({
   tagTypes: ['Event'],
   endpoints: (builder) => ({
     getEventByUserId: builder.query({
-      query: (userId) => `users/${userId}/events?from=2024-06-02&to=2024-08-02`,
+      query: ({ userId, from, to }) => `users/${userId}/events?from=${from}&to=${to}`,
       providesTags: (result) => (result ? [...result.map(({ id }) => ({ type: 'Event', id })), 'Event'] : ['Event']),
     }),
 
