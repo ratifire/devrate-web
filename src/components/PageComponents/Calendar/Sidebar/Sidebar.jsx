@@ -35,15 +35,5 @@ export default function Sidebar({ currentEvents }) {
 }
 
 Sidebar.propTypes = {
-  currentEvents: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      eventTypeId: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-      startTime: PropTypes.string.isRequired,
-      host: PropTypes.object.isRequired,
-      participants: PropTypes.array.isRequired,
-    })
-  ).isRequired,
+  currentEvents: PropTypes.array,
 };
