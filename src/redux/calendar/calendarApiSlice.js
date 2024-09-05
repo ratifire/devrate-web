@@ -9,13 +9,13 @@ export const CalendarApiSlice = apiSlice.injectEndpoints({
     }),
 
     deleteEventById: builder.mutation({
-      query(userId, id) {
+      query: ({ userId, id }) => {
         return {
           url: `/users/${userId}/interviews/${id}`,
           method: 'DELETE',
         };
       },
-      // invalidatesTags: (result, error, id) => [{ type: 'Event', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: 'Event', id }],
     }),
   }),
 });

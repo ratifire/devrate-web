@@ -5,13 +5,17 @@ import { Box, Button, IconButton, Paper, Typography } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import { styles } from './SidebarEvent.styles';
 import { useTranslation } from 'react-i18next';
+import { useDeleteEventByIdMutation } from '../../../../redux/calendar/calendarApiSlice';
+import { useSelector } from 'react-redux';
 
 export default function SidebarEvent({ event }) {
   const { id, type, link, host, startTime } = event;
   // eslint-disable-next-line react/prop-types
   const { name, surname, status } = host;
 
+  const { id: userId } = useSelector((state) => state.auth.user.data);
   const { t } = useTranslation();
+  const [deleteEvent] = useDeleteEventByIdMutation();
 
   const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric', separator: '/', localeMatcher: 'lookup' };
   const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: false };
@@ -22,12 +26,19 @@ export default function SidebarEvent({ event }) {
   const [month, day, year] = formattedDate.split('/');
   const customFormattedDate = `${day}/${month}/${year}`;
 
-  console.log('Current events', formattedDate, customFormattedDate, formattedTime);
+  const eventDeleteHandler = async (id) => {
+    try {
+      await deleteEvent({ userId, id }).unwrap();
+    } catch (error) {
+      console.error('Failed to delete event:', error);
+    }
+  };
 
   return (
     <Paper key={id} sx={styles.sideBarEventContainer}>
       <Box sx={styles.titleDateTimeBox}>
         <Typography sx={styles.title} variant='h6' component='div'>
+          {/* TODO double check this code before commit */}
           {/* eslint-disable-next-line react/prop-types */}
           {type.toLowerCase()}
         </Typography>
@@ -48,7 +59,7 @@ export default function SidebarEvent({ event }) {
         <IconButton component='a' href={link} target='_blank'>
           <LinkIcon />
         </IconButton>
-        <Button variant='text' sx={styles.cancelEventBtn}>
+        <Button variant='text' sx={styles.cancelEventBtn} onClick={() => eventDeleteHandler(id)}>
           {t('schedule.cancelEventBtn')}
         </Button>
       </Box>
