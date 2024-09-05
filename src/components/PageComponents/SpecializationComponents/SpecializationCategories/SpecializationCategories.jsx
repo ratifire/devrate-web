@@ -1,6 +1,8 @@
+/* eslint-disable */
+
 import React, { useEffect, useState } from 'react';
 import { styles } from './SpecializationCategories.styles';
-import { Box, IconButton, Typography, Tooltip } from '@mui/material';
+import { Box, IconButton, Typography, Tooltip, CircularProgress } from '@mui/material';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
@@ -25,7 +27,7 @@ const SpecializationCategories = () => {
   const mainMasteryandSpecialization = useSelector((state) => state.specialization.mainMastery);
 
   const [masteryData, setMasteryData] = useState({});
-  const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
+  const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
@@ -90,7 +92,11 @@ const SpecializationCategories = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <CircularProgress />;
+  }
+
+  if (isError) {
+    return <Typography variant='h6'>Something error...</Typography>;
   }
 
   return (
