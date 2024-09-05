@@ -110,11 +110,11 @@ const SpecializationCategories = () => {
       </Box>
 
       <Box sx={styles.specialization_right_box}>
-        {specializations?.length < 4 ? (
+        {specializations?.length < 4 && (
           <IconButton size='large' sx={styles.add_specialization_btn} onClick={handlerAddSpecializations}>
             <AddIcon />
           </IconButton>
-        ) : null}
+        )}
         {specializations?.map(({ id, name, main }) => (
           <Box
             key={id}
