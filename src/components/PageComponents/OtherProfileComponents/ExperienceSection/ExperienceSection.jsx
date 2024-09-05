@@ -19,9 +19,9 @@ const ExperienceSection = ({id}) => {
   const renderAdditionalInfo = (value) => {
     const tab = {
       openExperience: <WorkExperience id={id}/>,
-      achievement: <Achievement />,
-      skills: <Skills />,
-      education: <Education />,
+      achievement: <Achievement id={id}/>,
+      skills: <Skills id={id}/>,
+      education: <Education id={id}/>,
     };
 
     return tab[value] ? tab[value] : <WorkExperience />;

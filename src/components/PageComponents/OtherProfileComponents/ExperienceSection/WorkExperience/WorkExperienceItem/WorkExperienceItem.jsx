@@ -9,7 +9,7 @@ const WorkExperienceItem = ({startDate, endDate, position, companyName, descript
   const { t } = useTranslation();
 
   return (
-    <Box sx={styles.workExpeirenceItemContainer}>
+    <Box sx={styles.workExperienceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
         <Typography variant='h5' sx={styles.workPosition}>
           {position}

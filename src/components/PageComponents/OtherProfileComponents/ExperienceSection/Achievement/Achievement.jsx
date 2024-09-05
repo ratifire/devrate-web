@@ -1,14 +1,13 @@
 import { Grid } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useFetchAchievementsQuery } from '../../../../../redux/services/achievementsApiSlice';
 import AchievementItem from './AchievementItem';
 import styles from './Achievement.style';
+import PropTypes from 'prop-types';
 
-const Achievement = () => {
-  const { id: userId } = useSelector((state) => state.auth.user.data);
+const Achievement = ({id}) => {
 
-  const { data: achievementsData } = useFetchAchievementsQuery(userId, { skip: !userId});
+  const { data: achievementsData } = useFetchAchievementsQuery(id, { skip: !id});
 
   return (
     <>
@@ -22,5 +21,9 @@ const Achievement = () => {
     </>
   );
 };
+
+Achievement.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+}
 
 export default Achievement;
