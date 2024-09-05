@@ -168,8 +168,8 @@ export const en = {
     profile: {
       skills: {
         skillsTitle: 'Skills',
-        hardSkills: 'Hard Skills',
-        softSkills: 'Soft Skills',
+        hardSkills: 'Hard skills',
+        softSkills: 'Soft skills',
         doneInterviews: 'Interviews done',
         completedInterviews: 'Interviews completed',
       },
@@ -177,7 +177,7 @@ export const en = {
         loading: 'Your profile is filled in at',
       },
       experience: {
-        workExperience: 'Work Experience',
+        workExperience: 'Work experience',
         achievement: 'Achievement',
         skills: 'Skills',
         education: 'Education',

@@ -46,10 +46,17 @@ export const styles = {
     paddingY: '20px',
     paddingX: '12px',
     width: '100%',
-    border: 'none',
+    border: 1,
     backgroundColor: 'transparent',
+    borderColor: theme.palette.primary['400'],
     '&:hover': {
       backgroundColor: 'transparent',
+      borderColor: theme.palette.primary['600']
+    },
+    '&:disabled': {
+      borderColor: theme.palette.neutral['800'],
+      backgroundColor: 'transparent',
+      color: theme.palette.neutral['500'],
     },
   }),
 };
