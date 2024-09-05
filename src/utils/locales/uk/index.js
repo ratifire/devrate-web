@@ -167,8 +167,8 @@ export const uk = {
     profile: {
       skills: {
         skillsTitle: 'Навички',
-        hardSkills: 'Hard Skills',
-        softSkills: 'Soft Skills',
+        hardSkills: 'Hard skills',
+        softSkills: 'Soft skills',
         doneInterviews: 'інтерв’ю пройдено',
         completedInterviews: 'інтерв’ю проведено',
       },

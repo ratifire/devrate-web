@@ -67,15 +67,16 @@ const BaseUserInfo = ({ id }) => {
       </Box>
       <Box sx={styles.buttons}>
         <ButtonDef
+          correctStyle={styles.contained}
           type={'button'}
           variant='contained'
-          correctStyle={styles.buttons}
           handlerClick={handleWriteMessage}
           label={t('Write a massage')}
         />
         <ButtonDef
-          variant='contained'
-          correctStyle={styles.buttons}
+          correctStyle={styles.outlined}
+          type={'button'}
+          variant='outlined'
           handlerClick={handleBookInterview}
           label={t('Book an interview')}
         />

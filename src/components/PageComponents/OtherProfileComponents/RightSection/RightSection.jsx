@@ -4,18 +4,16 @@ import { styles } from './RightSection.style';
 import SocialsLinkList from '../../../UI/SocialsLinkList';
 import { useTranslation } from 'react-i18next';
 import LanguagesList from '../../../UI/LanguagesList';
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { useGetLanguageUserQuery } from '../../../../redux/user/language/languageApiSlice';
 import { useGetUserContactsQuery } from '../../../../redux/user/contacts/contactsApiSlice';
 import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice';
+import PropTypes from 'prop-types';
 
-const RightSection = () => {
+const RightSection = ({id}) => {
   const { t } = useTranslation();
-  const currentUser = useSelector(selectCurrentUser);
-  const languages = useGetLanguageUserQuery(currentUser.data.id);
-  const { data: userContacts } = useGetUserContactsQuery(currentUser.data.id);
-  const { data: personalData } = useGetPersonalUserQuery(currentUser.data.id);
+  const languages = useGetLanguageUserQuery(id);
+  const { data: userContacts } = useGetUserContactsQuery(id);
+  const { data: personalData } = useGetPersonalUserQuery(id);
 
   return (
     <Box sx={styles.wrapper}>
@@ -47,6 +45,10 @@ const RightSection = () => {
       </Box>
     </Box>
   );
+};
+
+RightSection.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 
 export default RightSection;

@@ -21,14 +21,14 @@ const Bookmark = ({ isBookmarked = false, onToggle }) => {
 
   return (
     <IconButton
-      style={classes.iconButton}
+      sx={classes.iconButton}
       onClick={handleClick}
       aria-label="bookmark"
     >
       {bookmarked ? (
         <BookmarkIcon style={classes.bookmarkIcon} />
       ) : (
-        <BookmarkBorderIcon style={classes.bookmarkIcon} />
+        <BookmarkBorderIcon />
       )}
     </IconButton>
   );

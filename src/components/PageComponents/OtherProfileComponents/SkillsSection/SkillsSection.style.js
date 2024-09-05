@@ -39,44 +39,36 @@ export const styles = {
       color: theme.palette.action.active,
     },
   }),
-  interviewHistory: {
+  interviewHistory: (theme) => ({
     display: 'flex',
-    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     width: '100%',
-  },
+    gap: theme.spacing(3),
+  }),
   doneInterviewsQuantity: {
-    marginBottom: '-7px'
   },
-  doneInterviews: (theme) => ({
+
+  skillsInterviewBtn: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
-    height: 72,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: theme.spacing(3),
-    padding: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    color: theme.palette.info.azure,
+    textAlign: 'center',
+    height: '72px',
+    width: '100%',
+    padding: '12px 0 16px',
     border: 1,
-    borderColor: theme.palette.info.azure,
     borderRadius: 1,
+  },
+  doneInterviewsBtn: (theme) => ({
+    color: theme.palette.info.azure,
+    borderColor: theme.palette.info.azure,
+
   }),
   completedInterviewsQuantity: {
-    marginBottom: '-7px'
   },
-  completedInterviews: (theme) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    height: 72,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: theme.spacing(2),
-    paddingTop: theme.spacing(2),
+  completedInterviewsBtn: (theme) => ({
     color: theme.palette.info.main,
-    border: 1,
     borderColor: theme.palette.info.main,
-    borderRadius: 1,
   }),
 };

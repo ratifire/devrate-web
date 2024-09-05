@@ -99,8 +99,8 @@ const getDesignTokens = (mode) => ({
     caption3: {
       fontSize: 12,
       fontWeight: 400,
-      lineHeight: 2.66,
-      letterSpacing: 1,
+      lineHeight: 1,
+      letterSpacing: 0,
     },
   },
   palette: {

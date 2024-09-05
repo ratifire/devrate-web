@@ -55,33 +55,41 @@ export const styles = {
     display: 'flex',
     width: '100%',
     gridGap: theme.spacing(4),
-    marginTop: '20px',
-    '& > :first-of-type': {
-      fontFamily: theme.typography.caption1,
-      textTransform: 'capitalize',
+    marginTop: '36px',
+  }),
 
-      backgroundColor: theme.palette.primary['400'],
-      color: theme.palette.common.white,
-      padding: '10px 20px',
-      borderRadius: '4px',
-      flex: '1',
-
+  contained: (theme)=> ({
+    display: 'block',
+    paddingY: '10px',
+    paddingX: '20px',
+    color: theme.palette.text.primary,
+    fontFamily: theme.typography.fontFamily,
+    textTransform: 'lowercase',
+    '&::first-letter': {
+      textTransform: 'uppercase',
     },
-    '& > :last-of-type': {
-      fontFamily: theme.typography.caption1,
-      textTransform: 'capitalize',
 
-      backgroundColor: 'transparent',
-      border: `1px solid ${theme.palette.primary['400']}`,
-      color: theme.palette.primary['200'],
-      padding: '10px 20px',
-      borderRadius: '4px',
-      flex: '1',
-
-      '&:hover': {
-        borderColor: theme.palette.primary['500'],
-        color: theme.palette.primary['200'],
-      },
+    '&:hover': {
+      backgroundColor: theme.palette.primary['600'],
     },
+}),
+
+  outlined: (theme) => ({
+    display: 'block',
+    paddingY: '10px',
+    paddingX: '20px',
+    color: theme.palette.primary['200'],
+    fontFamily: theme.typography.fontFamily,
+    border: `1px solid ${theme.palette.action.active}`,
+    textTransform: 'lowercase',
+    '&::first-letter': {
+      textTransform: 'uppercase',
+    },
+
+    '&:hover': {
+      backgroundColor: `${theme.palette.primary['200']}29`,
+      borderColor: theme.palette.primary['200']
+    },
+
   }),
 };
