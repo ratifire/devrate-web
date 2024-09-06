@@ -23,11 +23,15 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
+  // 8881
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
+  // {id: 6661, main: true, mastery: "Junior", name: "Frontend Developer"
   const mainMasteryandSpecialization = useSelector((state) => state.specialization.mainMastery);
-
+  // null - only null
   const [masteryData, setMasteryData] = useState({});
+  // { hardSkillMark:6.73 id:10001 level:"Junior" softSkillMark:5.31 } - походу это объект с объектами mastry
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
+  // [{completedInterviews : 11 conductedInterviews : 4 id : 6661 main : true name : "Frontend Developer"}]
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
