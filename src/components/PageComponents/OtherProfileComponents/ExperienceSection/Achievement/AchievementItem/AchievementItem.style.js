@@ -1,9 +1,9 @@
 const styles = {
   achievementItemContainer: (theme) => ({
     width: '100%',
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
     backgroundColor: '#3E3E40',
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: 2,
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',
@@ -29,14 +29,12 @@ const styles = {
   }),
   link: (theme) => ({
     color: theme.palette.primary['200'],
-    position: 'absolute',
-    top: '-5px',
-    right: '-5px',
     width: '40px',
     height: '40px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: '-8px',
     '&:hover': {
       backgroundColor: `${theme.palette.primary['200']}29`,
       borderRadius: '4px',
