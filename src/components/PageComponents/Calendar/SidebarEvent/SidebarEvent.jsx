@@ -38,7 +38,6 @@ export default function SidebarEvent({ event }) {
     <Paper key={id} sx={styles.sideBarEventContainer}>
       <Box sx={styles.titleDateTimeBox}>
         <Typography sx={styles.title} variant='h6' component='div'>
-          {/* TODO double check this code before commit */}
           {/* eslint-disable-next-line react/prop-types */}
           {type.toLowerCase()}
         </Typography>
