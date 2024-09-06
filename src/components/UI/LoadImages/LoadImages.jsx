@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
+import { Box, IconButton, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
+import React, { useCallback, useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { useDropzone } from 'react-dropzone';
-import { styles } from './LoadImages.styles';
-import { Box, IconButton, Typography } from '@mui/material';
-import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
-import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import { ButtonDef } from '../../FormsComponents/Buttons';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { styles } from './LoadImages.styles';
 
 const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDeleteButton }) => {
   const editor = useRef(null);
@@ -20,16 +20,10 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
     width: 240,
     height: 240,
     showGrid: true,
-    image: '',
+    image: value || '',
   });
   const [scale, setScale] = useState(1.5);
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (value) {
-      setSettingsCanvas((prev) => ({ ...prev, image: value }));
-    }
-  }, [value]);
 
   const handleWheel = useCallback(
     (e) => {
@@ -121,26 +115,30 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
           )}
         </Box>
       </Box>
-
-      {settingsCanvas.image ? (
-        <AvatarEditor
-          ref={editor}
-          width={240}
-          height={240}
-          borderRadius={settingsCanvas.borderRadius}
-          image={settingsCanvas.image}
-          style={styles.preview}
-          border={50}
-          color={[29, 29, 29, 0.25]}
-          scale={scale}
-          onWheel={handleWheel}
-        />
-      ) : (
-        <Box sx={styles.imgDef}>
-          <ImageOutlinedIcon sx={styles.imgDefIcon} />
-        </Box>
-      )}
-
+      <Box sx={styles.boxAvatarEditor}>
+        {settingsCanvas.image && (
+          <>
+            <AvatarEditor
+              ref={editor}
+              width={240}
+              height={240}
+              borderRadius={settingsCanvas.borderRadius}
+              image={settingsCanvas.image}
+              style={styles.preview}
+              border={50}
+              color={[29, 29, 29, 0.25]}
+              scale={scale}
+              onWheel={handleWheel}
+            />
+            <Box sx={styles.customBorder} />
+          </>
+        )}
+        {!settingsCanvas.image && (
+          <Box sx={styles.imgDef}>
+            <ImageOutlinedIcon sx={styles.imgDefIcon} />
+          </Box>
+        )}
+      </Box>
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
           variant='contained'
@@ -148,7 +146,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
           handlerClick={handleSave}
           label='profile.modal.btn'
           correctStyle={styles.btn}
-          disabled={!settingsCanvas.image}
+          disabled={!settingsCanvas.image || !!error}
         />
         {showDeleteButton && (
           <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>

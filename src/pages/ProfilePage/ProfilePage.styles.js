@@ -29,7 +29,7 @@ export const styles = {
   },
   right: {
     gridColumn: '10/13',
-    gridRow: '1/3',
+    gridRow: '1/5',
   },
   experience: {
     gridColumn: '1/10',

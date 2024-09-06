@@ -77,6 +77,12 @@ const getDesignTokens = (mode) => ({
       lineHeight: 1.5,
       letterSpacing: 0.15,
     },
+    body2: {
+      fontSize: 14,
+      fontWeight: 400,
+      lineHeight: 1.43,
+      letterSpacing: 0.17,
+    },
     caption1: {
       fontSize: 14,
       fontWeight: 500,
@@ -93,8 +99,8 @@ const getDesignTokens = (mode) => ({
     caption3: {
       fontSize: 12,
       fontWeight: 400,
-      lineHeight: 2.66,
-      letterSpacing: 1,
+      lineHeight: 1,
+      letterSpacing: 0,
     },
   },
   palette: {
@@ -104,7 +110,7 @@ const getDesignTokens = (mode) => ({
             violet: '#8133F1',
             lightGray: '#C5C5C6',
             gray: '#69696B',
-            darkGray: '#3E3E40'
+            darkGray: '#3E3E40',
           },
           common: {
             black: '#000000',
@@ -133,7 +139,7 @@ const getDesignTokens = (mode) => ({
             level3: '#69696B',
             gradient: 'radial-gradient(62.0% 54% at 63% 50%, rgba(71, 62, 98, 0.5) 0%, rgba(71, 62, 98, 0) 100%)',
             scrollbarTrack: '#303032',
-            scrollbarThumb: '#FFF'
+            scrollbarThumb: '#FFF',
           },
           primary: {
             50: '#EFE6FD',
