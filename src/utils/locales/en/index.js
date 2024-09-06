@@ -271,6 +271,7 @@ export const en = {
           responsibilities_placeholder: 'BackEnd development',
           startDate: 'Start Date',
           endDate: 'End Date',
+          currentDate: 'Currently at this position',
           required: 'This is a required field',
           startDateMinMessage: 'Date must be later than 01/01/1950',
           startDateMaxMessage: 'Date must be earlier than today',
