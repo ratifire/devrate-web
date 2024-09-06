@@ -18,11 +18,13 @@ import {
 import { setSelectedSpecialization } from '../../../../redux/specialization/specializationSlice';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
+import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
+  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
   // 8881
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
   // {id: 6661, main: true, mastery: "Junior", name: "Frontend Developer"
@@ -32,6 +34,9 @@ const SpecializationCategories = () => {
   // { hardSkillMark:6.73 id:10001 level:"Junior" softSkillMark:5.31 } - походу это объект с объектами mastry
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
   // [{completedInterviews : 11 conductedInterviews : 4 id : 6661 main : true name : "Frontend Developer"}]
+
+  const specializationsSorted = specializations?.toSorted((a, b) => a.main === b.main ? 0 : a.main ? 1 : -1);
+
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
@@ -55,6 +60,7 @@ const SpecializationCategories = () => {
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
       const spec = { ...specialization, mastery: masteryData[specialization.id].level };
+      dispatch(setActiveMastery(spec.mastery));
       dispatch(setSelectedSpecialization(spec));
     }
   };
@@ -125,7 +131,7 @@ const SpecializationCategories = () => {
             <AddIcon />
           </IconButton>
         )}
-        {specializations?.map(({ id, name, main }) => (
+        {specializationsSorted?.map(({ id, name, main }) => (
           <Box
             key={id}
             sx={styles.figure}
