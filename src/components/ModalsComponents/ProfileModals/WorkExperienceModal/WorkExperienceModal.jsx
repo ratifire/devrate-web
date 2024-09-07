@@ -47,8 +47,8 @@ const WorkExperienceModal = () => {
   };
 
   const onSubmit = async (values, { resetForm }) => {
-    const startDate = DateTime.fromISO(values.startDate).toISODate();
-    const endDate = values.currentDate ? 9999 : DateTime.fromISO(values.endDate).toISODate();
+    const startDate = values.startDate;
+    const endDate = values.currentDate ? 9999 : values.startDate;
     const data = { ...values, startDate, endDate, responsibilities };
 
     try {
@@ -96,8 +96,8 @@ const WorkExperienceModal = () => {
       position: modalData.position,
       companyName: modalData.companyName,
       description: modalData.description,
-      startDate: DateTime.fromISO(modalData.startDate),
-      endDate: DateTime.fromISO(modalData.endDate),
+      startDate: modalData.startDate,
+      endDate: modalData.endDate,
     });
     setResponsibilities(modalData.responsibilities);
   }, [modalData, formik.setValues]);
@@ -155,27 +155,26 @@ const WorkExperienceModal = () => {
                 label={t('profile.modal.workExperience.startDate')}
                 value={formik.values.startDate}
                 countries={startYears}
-                name='startYear'
+                name='startDate'
                 variant='outlined'
                 required
                 handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
-                onChange={(value) => formik.setFieldValue('startYear', value)}
-                helperText={formik.touched.startYear && formik.errors.startYear}
-                error={formik.touched.startYear && Boolean(formik.errors.startYear)}
+                helperText={formik.touched.startDate && formik.errors.startDate}
+                error={formik.touched.startDate && Boolean(formik.errors.startDate)}
               />
               <CountrySelect
                 sx={styles.input50}
                 label={t('profile.modal.workExperience.endDate')}
                 value={formik.values.endDate}
                 countries={endYears}
-                name='endYear'
+                name='endDate'
                 variant='outlined'
                 handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
-                onChange={(value) => formik.setFieldValue('endYear', value)}
-                helperText={formik.touched.endYear && formik.errors.endYear}
-                error={formik.touched.endYear && Boolean(formik.errors.endYear)}
+                helperText={formik.touched.endDate && formik.errors.endDate}
+                error={formik.touched.endDate && Boolean(formik.errors.endDate)}
+                disabled={formik.values.currentDate}
               />
             </LocalizationProvider>
             <FormCheckbox

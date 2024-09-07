@@ -32,7 +32,7 @@ export const WorkExperienceModalSchema = Yup.object().shape({
     .max(new Date(), 'End Date must be no later than the current year')
     .when('currentDate', {
       is: (currentDate) => !currentDate,  // When currentDate is false, endDate is required
-      then: (schema) => schema.required('profile.modal.workExperience.endDateRequired'),
+      then: (schema) => schema.required('profile.modal.workExperience.required'),
       otherwise: (schema) => schema.nullable(),  // Make endDate optional if currentDate is true
     })
     .test('endDate', 'profile.modal.workExperience.endDateMessage', function (value) {
