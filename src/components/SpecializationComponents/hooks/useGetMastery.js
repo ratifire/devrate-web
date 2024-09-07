@@ -16,7 +16,7 @@ const useGetMastery = () => {
     skip: !userId,
   });
 
-  const specializationId = specializations?.[0]?.id;
+  const specializationId = specializations?.find((spec) => spec.main)?.id;
 
   const {
     data: masteries,
