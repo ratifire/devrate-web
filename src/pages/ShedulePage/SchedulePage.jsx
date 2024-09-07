@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { styles } from './SchedulePage.styles';
 import ProfileHeader from '../../components/PageComponents/ProfileHeader';
-import Calendar from '../../components/PageComponents/Calendar'
+import Schedule from '../../components/PageComponents/ScheduleComponents';
 
 import ScheduleTemplate from '../../Templates/ScheduleTemplate';
 import { useTranslation } from 'react-i18next';
@@ -13,14 +13,14 @@ const SchedulePage = () => {
   return (
     <ScheduleTemplate>
       <ProfileHeader />
-      <Container maxWidth="xl" sx={styles.container}>
+      <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.scheduleWrapper}>
-            <Typography variant="h4" sx={styles.scheduleTitle}>
+            <Typography variant='h4' sx={styles.scheduleTitle}>
               {t('schedule.title')}
             </Typography>
             <Paper sx={styles.calendarWrapper}>
-              <Calendar />
+              <Schedule />
             </Paper>
           </Paper>
         </Box>

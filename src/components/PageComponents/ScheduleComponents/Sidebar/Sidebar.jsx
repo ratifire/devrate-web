@@ -15,6 +15,7 @@ Settings.defaultWeekSettings = {
 };
 
 export default function Sidebar({ currentEvents }) {
+  console.log('Current events', currentEvents);
   return (
     <Box sx={styles.container}>
       <Box className='demo-app-sidebar-section'>
@@ -34,13 +35,5 @@ export default function Sidebar({ currentEvents }) {
 }
 
 Sidebar.propTypes = {
-  currentEvents: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      title: PropTypes.string.isRequired,
-      start: PropTypes.string.isRequired,
-      end: PropTypes.string,
-      allDay: PropTypes.bool,
-    })
-  ).isRequired,
+  currentEvents: PropTypes.array,
 };

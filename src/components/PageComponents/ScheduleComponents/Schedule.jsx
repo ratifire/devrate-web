@@ -1,26 +1,43 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { INITIAL_EVENTS, createEventId } from './event-utils';
-import { styles } from './Calendar.styles';
+import { styles } from './Schedule.styles';
 import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/schedule/scheduleApiSlice';
 
- 
-export default function Calendar() {
-  const [currentEvents, setCurrentEvents] = useState([]);
+const transformEvents = (events) => {
+  return events.map((event) => ({
+    id: event.id,
+    title: event.type,
+    start: event.startTime,
+  }));
+};
+
+export default function Schedule() {
   const calendarRef = useRef(null);
-  
+
+  const from = '2024-06-02';
+  const to = '2024-08-02';
+  const fromTime = '2024-07-02T06:00:00-03:00';
+  const { id: userId } = useSelector((state) => state.auth.user.data);
+  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to });
+  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
+  console.log('currentClosestEvents', currentEvents);
+
   useEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
       const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
       const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
-      const timeGridHeadElements = calendarApi.el.querySelectorAll('.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid');
+      const timeGridHeadElements = calendarApi.el.querySelectorAll(
+        '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
+      );
       const timeGridEventElements = calendarApi.el.querySelectorAll('.fc-v-event .fc-event-main');
-      
+
       timeGridSlotElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridTableData);
       });
@@ -36,45 +53,15 @@ export default function Calendar() {
     }
   }, []);
 
-  
-  function handleDateSelect(selectInfo) {
-    let title = prompt('Please enter a new title for your event');
-    let calendarApi = selectInfo.view.calendar;
-    
-    calendarApi.unselect(); // clear date selection
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-      });
-    }
+  if (isLoading || loading) {
+    return <div>Loading...</div>;
   }
 
-  const handleEventClick = (clickInfo) => {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
-  };
-
-  const handleEvents = (events) => {
-    setCurrentEvents(events);
-  };
-
-  const renderEventContent = (eventInfo) => {
-    return (
-      <>
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
-      </>
-    );
-  };
+  const transformedEvents = transformEvents(currentEvents || []);
 
   return (
     <Box sx={styles.demoApp}>
-      <Sidebar currentEvents={currentEvents} />
+      <Sidebar currentEvents={currentClosestEvents} />
       <Box sx={styles.demoAppMain}>
         <FullCalendar
           ref={calendarRef}
@@ -89,16 +76,17 @@ export default function Calendar() {
           slotDuration='01:00:00'
           slotLabelInterval={{ hours: 1 }}
           expandRows={true}
-          editable={true}
+          editable={false}
           selectable={true}
           selectMirror={true}
           dayMaxEvents={true}
           weekends={true}
-          initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-          select={handleDateSelect}
-          eventContent={renderEventContent} // custom render function
-          eventClick={handleEventClick}
-          eventsSet={handleEvents} // called after events are initialized/added/changed/removed
+          events={transformedEvents}
+          // initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+          // select={handleDateSelect}
+          // eventContent={renderEventContent} // custom render function
+          // eventClick={handleEventClick}
+          // eventsSet={handleEvents} // called after events are initialized/added/changed/removed
           // dayHeaderFormat={{ weekday: 'short' }}
           /* you can update a remote database when these fire:
           eventAdd={function(){}}
@@ -110,4 +98,3 @@ export default function Calendar() {
     </Box>
   );
 }
- 

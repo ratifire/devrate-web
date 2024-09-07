@@ -7,6 +7,11 @@ export const styles = {
     paddingRight: theme.spacing(3),
     marginBottom: theme.spacing(2),
   }),
+  title: {
+    '&::first-letter': {
+      textTransform: 'uppercase',
+    },
+  },
   titleDateTimeBox: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
