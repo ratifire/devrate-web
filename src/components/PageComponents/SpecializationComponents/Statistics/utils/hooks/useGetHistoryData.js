@@ -15,7 +15,7 @@ const useGetHistoryData = ({ from, to }) => {
     isError: isErrorSpecializations,
   } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
 
-  const specializationId = specializations?.[0]?.id;
+  const specializationId = specializations?.find((spec) => spec.main)?.id;
 
   const {
     data: masteries,
