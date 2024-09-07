@@ -47,7 +47,6 @@ const WorkExperienceModal = () => {
     const startYear = values.startYear;
     const endYear = values.currentDate ? '9999' : values.endYear || '9999';
     const data = { ...values, startYear, endYear, responsibilities };
-    console.log('data', data);
     try {
       if (modalData && modalData.id) {
         await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
@@ -107,6 +106,13 @@ const WorkExperienceModal = () => {
   const responsibilityDeleteHandler = (responsibilityToDelete) => {
     setResponsibilities(responsibilities.filter((item) => item !== responsibilityToDelete));
   };
+
+  const handleCheckboxChange = (e)=>{
+      formik.setFieldValue('currentDate', e.target.checked);
+      if (e.target.checked) {
+        formik.setFieldValue('endYear', '');
+      }
+  }
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openExperience}>
@@ -174,12 +180,7 @@ const WorkExperienceModal = () => {
               <FormCheckbox
                 label={t('profile.modal.workExperience.currentDate')}
                 checked={formik.values.currentDate}
-                changeHandler={(e) => {
-                  formik.setFieldValue('currentDate', e.target.checked);
-                  if (e.target.checked) {
-                    formik.setFieldValue('endYear', '');
-                  }
-                }}
+                changeHandler={handleCheckboxChange}
                 workExperience={true}
                 name='currentDate'
                 helperText={formik.touched.currentDate && formik.errors.currentDate}

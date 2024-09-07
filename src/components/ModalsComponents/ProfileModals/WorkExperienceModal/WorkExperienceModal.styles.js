@@ -24,7 +24,7 @@ export const styles = {
       },
     },
     '& .MuiInputLabel-root.Mui-required .MuiFormLabel-asterisk': {
-      color: 'red',
+      color: theme.palette.error.main,
     },
   }),
 
