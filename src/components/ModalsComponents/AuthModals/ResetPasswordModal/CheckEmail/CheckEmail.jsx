@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import { useResetPasswordMutation } from '../../../../../redux/auth/authApiSlice';
 import { setEmail } from '../../../../../redux/auth/emailSlice';
+import {toast} from "react-toastify";
 
 const initialValues = {
   email: '',
@@ -38,7 +39,16 @@ const CheckEmail = () => {
       dispatch(openModal({ modalName: 'openNotification' }));
     } catch (error) {
       console.error('Error sending email:', error);
-      alert('Error sending email. Please try again.');
+       toast.error('Error sending email. Please try again.', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 

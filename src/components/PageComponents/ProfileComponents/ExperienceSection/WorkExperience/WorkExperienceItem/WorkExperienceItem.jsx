@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../../../redux/modal/modalSlice';
 import { useDeleteWorkExperienceByIdMutation } from '../../../../../../redux/workExperience/workExperienceApiSlice';
 
-const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, description, responsibilities }) => {
+const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
   const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -28,7 +28,7 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
   };
 
   const handleEditFeature = () => {
-    dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startDate, endDate } }));
+    dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startYear, endYear } }));
     handleCloseMenu();
   };
 
@@ -46,7 +46,7 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
           </Typography>
           <Typography variant="subtitle3" sx={styles.workPlaceTitle}>
             {companyName} <span style={{ margin: '0 4px' }}>•</span>
-            {startDate.slice(0,4)} - {new Date(endDate) > new Date() ? t('profile.experience.endYear') : endDate.slice(0,4)}
+            {startYear} - {endYear > new Date().getFullYear() ? t('profile.experience.endYear') : endYear}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
@@ -78,12 +78,12 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
 
 WorkExperienceItem.propTypes = {
   id: PropTypes.number.isRequired,
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
+  startYear: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  endYear: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   position: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   responsibilities: PropTypes.array.isRequired,
-}
+};
 
 export default WorkExperienceItem;
