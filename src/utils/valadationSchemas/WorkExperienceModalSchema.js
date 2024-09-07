@@ -24,16 +24,16 @@ export const WorkExperienceModalSchema = Yup.object().shape({
     .min(2, 'profile.modal.workExperience.responsibilities_short')
     .max(50, 'profile.modal.workExperience.responsibilities_long'),
   startYear: Yup.date()
-    .min(new Date(1950, 0, 1), 'Date must be later than 01/01/1950')
-    .max(new Date(), 'Date must be no later than the current year')
+    .min(new Date(1950, 0, 1), 'profile.modal.workExperience.startYear_min')
+    .max(new Date(), 'profile.modal.workExperience.startYear_max')
     .required('profile.modal.workExperience.required'),
   endYear: Yup.date()
-    .min(Yup.ref('startYear'), 'End Date must be later than Start Date')
-    .max(new Date(), 'End Date must be no later than the current year')
+    .min(Yup.ref('startYear'), 'profile.modal.workExperience.endYear_min')
+    .max(new Date(), 'profile.modal.workExperience.endYear_max')
     .when('currentDate', {
-      is: (currentDate) => !currentDate,  // When currentDate is false, endYear is required
+      is: (currentDate) => !currentDate,
       then: (schema) => schema.required('profile.modal.workExperience.required'),
-      otherwise: (schema) => schema.nullable(),  // Make endYear optional if currentDate is true
+      otherwise: (schema) => schema.nullable(),
     })
     .test('endYear', 'profile.modal.workExperience.endDateMessage', function (value) {
       const startYear = this.resolve(Yup.ref('startYear'));

@@ -224,6 +224,10 @@ export const en = {
             about_me: 'About me',
             about_me_too_long: 'About me section too long',
             required: 'This is a required field',
+            endYear_min: 'End Date must be later than Start Date',
+            endYear_max: 'End Date must be no later than the current year',
+            startYear_min: 'Date must be later than 01/01/1950',
+            startYear_max: 'Date must be no later than the current year',
           },
           contact: {
             title: 'Contact Information',

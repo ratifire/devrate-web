@@ -36,7 +36,6 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
     await deleteWorkExperienceMutation(id).unwrap();
   };
 
-  console.log(endYear);
   return (
     <Box sx={styles.workExpeirenceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
