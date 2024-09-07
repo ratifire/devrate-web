@@ -40,16 +40,16 @@ const WorkExperienceModal = () => {
     companyName: '',
     description: '',
     responsibilities: '',
-    startDate: '',
-    endDate: '',
+    startYear: '',
+    endYear: '',
     currentDate: false,
   };
 
   const onSubmit = async (values, { resetForm }) => {
-    const startDate = values.startDate;
-    const endDate = values.currentDate ? 9999 : values.startDate;
-    const data = { ...values, startDate, endDate, responsibilities };
-
+    const startYear = values.startYear;
+    const endYear = (values.endYear === null || values.endYear === 'present' || values.endYear === '') ? '9999' : values.endYear;
+    const data = { ...values, startYear, endYear, responsibilities };
+    console.log('data', data);
     try {
       if (modalData && modalData.id) {
         await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
@@ -95,8 +95,8 @@ const WorkExperienceModal = () => {
       position: modalData.position,
       companyName: modalData.companyName,
       description: modalData.description,
-      startDate: modalData.startDate,
-      endDate: modalData.endDate,
+      startYear: modalData.startYear,
+      endYear: modalData.endYear,
     });
     setResponsibilities(modalData.responsibilities);
   }, [modalData, formik.setValues]);
@@ -152,27 +152,27 @@ const WorkExperienceModal = () => {
               <CountrySelect
                 sx={styles.input50}
                 label={t('profile.modal.workExperience.startDate')}
-                value={formik.values.startDate}
+                value={formik.values.startYear}
                 countries={startYears}
-                name='startDate'
+                name='startYear'
                 variant='outlined'
                 required
                 handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
-                helperText={formik.touched.startDate && formik.errors.startDate}
-                error={formik.touched.startDate && Boolean(formik.errors.startDate)}
+                helperText={formik.touched.startYear && formik.errors.startYear}
+                error={formik.touched.startYear && Boolean(formik.errors.startYear)}
               />
               <CountrySelect
                 sx={styles.input50}
                 label={t('profile.modal.workExperience.endDate')}
-                value={formik.values.endDate}
+                value={formik.values.endYear}
                 countries={endYears}
-                name='endDate'
+                name='endYear'
                 variant='outlined'
                 handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
-                helperText={formik.touched.endDate && formik.errors.endDate}
-                error={formik.touched.endDate && Boolean(formik.errors.endDate)}
+                helperText={formik.touched.endYear && formik.errors.endYear}
+                error={formik.touched.endYear && Boolean(formik.errors.endYear)}
                 disabled={formik.values.currentDate}
               />
             </LocalizationProvider>
