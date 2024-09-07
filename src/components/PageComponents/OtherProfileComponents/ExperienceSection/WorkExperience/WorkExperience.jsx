@@ -15,13 +15,13 @@ const WorkExperience = ({id}) => {
       <Box>
         {workExperiencesData &&
           workExperiencesData.map(
-            ({ id, startDate, endDate, position, companyName, description, responsibilities }) => {
+            ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
               return (
                 <WorkExperienceItem
                   key={id}
                   id={id}
-                  startDate={startDate}
-                  endDate={endDate}
+                  startYear={startYear}
+                  endYear={endYear}
                   position={position}
                   companyName={companyName}
                   description={description}
