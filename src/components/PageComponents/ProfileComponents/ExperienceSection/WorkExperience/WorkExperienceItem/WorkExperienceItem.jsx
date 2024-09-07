@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../../../redux/modal/modalSlice';
 import { useDeleteWorkExperienceByIdMutation } from '../../../../../../redux/workExperience/workExperienceApiSlice';
 
-const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, description, responsibilities }) => {
+const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
   const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -28,7 +28,7 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
   };
 
   const handleEditFeature = () => {
-    dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startDate, endDate } }));
+    dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startYear, endYear } }));
     handleCloseMenu();
   };
 
@@ -36,7 +36,7 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
     await deleteWorkExperienceMutation(id).unwrap();
   };
 
-
+  console.log(endYear);
   return (
     <Box sx={styles.workExpeirenceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
@@ -46,9 +46,7 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
           </Typography>
           <Typography variant="subtitle3" sx={styles.workPlaceTitle}>
             {companyName} <span style={{ margin: '0 4px' }}>•</span>
-            {endDate
-              ? `${startDate.slice(0, 4)} - ${new Date(endDate) > new Date() ? t('profile.experience.endYear') : endDate.slice(0, 4)}`
-              : `${startDate.slice(0, 4)} - present`}
+            {endYear === '9999' ? `${startYear} - present` : `${startYear} - ${endYear}`}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
@@ -80,8 +78,8 @@ const WorkExperienceItem = ({ id, startDate, endDate, position, companyName, des
 
 WorkExperienceItem.propTypes = {
   id: PropTypes.number.isRequired,
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string,
+  startYear: PropTypes.string.isRequired,
+  endYear: PropTypes.string,
   position: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

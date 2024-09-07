@@ -27,6 +27,7 @@ export const styles = {
       color: 'red',
     },
   }),
+
   input100: (theme) => ({
     flex: `0 1 100%`,
     display: 'flex',
@@ -51,5 +52,10 @@ export const styles = {
   },
   error: {
     transform: 'translate(-13px, -5px)'
-  }
+  },
+  checkBoxContainer: (theme) =>({
+    display: 'flex',
+    alignItems: 'center',
+    flex: ` calc(90% - ${theme.spacing(2)})`
+  })
 };

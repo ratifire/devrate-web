@@ -22,8 +22,8 @@ const WorkExperience = () => {
                 <WorkExperienceItem
                   key={id}
                   id={id}
-                  startYear={startYear}
-                  endYear={endYear}
+                  startYear={`${startYear}`}
+                  endYear={`${endYear}`}
                   position={position}
                   companyName={companyName}
                   description={description}
