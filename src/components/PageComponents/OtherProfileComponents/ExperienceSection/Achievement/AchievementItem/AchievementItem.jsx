@@ -1,15 +1,15 @@
 import React from 'react';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Link, Typography, Tooltip } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import PropTypes from 'prop-types';
-import { ReactComponent as Star } from '../../../../../../assets/icons/star.svg';
+import { ReactComponent as Lightning } from '../../../../../../assets/icons/lightning.svg';
 import styles from './AchievementItem.style';
 
 const AchievementItem = ({ achievement }) => {
   return (
     <Box sx={styles.achievementItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
-        <Star width={46} height={38} />
+        <Lightning width={46} height={38} />
         <Box sx={styles.logoTitleContainer}>
 
           <Box sx={styles.achievementTitleYearContainer}>
@@ -18,13 +18,15 @@ const AchievementItem = ({ achievement }) => {
             </Typography>
           </Box>
 
-          <Box >
-            {achievement.link && (
-              <Link href={achievement.link} target='_blank' sx={styles.link} underline="none">
-                <LinkIcon />
-              </Link>
-            )}
-          </Box>
+          {achievement.link && (
+            <Box sx={{ position: 'relative' }}>
+              <Tooltip title={achievement.link} arrow>
+                <Link href={achievement.link} target='_blank' sx={styles.link} underline="none">
+                  <LinkIcon />
+                </Link>
+              </Tooltip>
+            </Box>
+          )}
 
         </Box>
       </Box>

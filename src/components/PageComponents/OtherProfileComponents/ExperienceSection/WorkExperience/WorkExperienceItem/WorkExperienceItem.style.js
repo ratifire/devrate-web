@@ -2,7 +2,7 @@ const styles = {
   workExperienceItemContainer: (theme) => ({
     width: '100%',
     marginBottom: theme.spacing(4),
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
     backgroundColor: '#3E3E40',
     borderRadius: 2,
   }),
