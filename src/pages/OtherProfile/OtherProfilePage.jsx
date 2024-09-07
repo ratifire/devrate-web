@@ -13,7 +13,7 @@ import ExperienceSection from '../../components/PageComponents/OtherProfileCompo
 const OtherProfilePage = () => {
   const { userId } = useParams();
   useAuth();
-
+  
   const MemoizedProfileHeader = memo(ProfileHeader);
   const MemoizedBaseUserInfo = memo(BaseUserInfo);
   const MemoizedSkillsSection = memo(SkillsSection);

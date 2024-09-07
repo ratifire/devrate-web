@@ -39,7 +39,7 @@ const SpecializationLevel = () => {
               key={label}
               label={label}
               handlerClick={() => handleButtonClick(label)}
-              disabled={false}
+              disabled={activeMastery === label}
               variant={activeMastery === label ? 'contained' : 'outlined'}
               withTranslation={true}
             />

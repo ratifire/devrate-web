@@ -61,8 +61,13 @@ The frontend of the application is built using modern web technologies and frame
 ## Test Account
 
 For testing and demonstration purposes, use the following credentials:
-- **Login**: dev1@test.com
-- **Password**: 12345678
+1. **User 1**
+  - Email: john.rate3@tutamail.com
+  - Password: Dev1234!!
+
+2. **User 2**
+  - Email: dev.rate3@proton.me
+  - Password: Dev1234!
 
 ## How to Contribute
 

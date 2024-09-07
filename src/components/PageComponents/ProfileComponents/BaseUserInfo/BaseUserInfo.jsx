@@ -74,7 +74,7 @@ const BaseUserInfo = () => {
         </Box>
       </Box>
       <Box sx={styles.buttons}>
-        <LinearProgressWithLabel value={progress} />
+        <LinearProgressWithLabel value={progress} size='m' orientation='vertical'/>
       </Box>
     </Box>
   );

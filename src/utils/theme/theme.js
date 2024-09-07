@@ -15,7 +15,7 @@ const getDesignTokens = (mode) => ({
     },
   },
   typography: {
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: '"Roboto", sans-serif',
     h1: {
       fontSize: 96,
       fontWeight: 300,
@@ -261,6 +261,11 @@ const getDesignTokens = (mode) => ({
     },
   },
   components: {
+    MuiTooltip: {
+      tooltip: {
+        backgroundColor: '#8133F1',
+      }
+    },
     MuiButton: {
       variants: [
         {
