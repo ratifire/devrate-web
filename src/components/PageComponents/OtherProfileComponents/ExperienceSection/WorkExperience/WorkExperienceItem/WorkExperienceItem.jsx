@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Responsibility from '../../../../../UI/Responsibility/Responsibility';
 import PropTypes from 'prop-types';
 
-const WorkExperienceItem = ({startDate, endDate, position, companyName, description, responsibilities }) => {
+const WorkExperienceItem = ({startYear, endYear, position, companyName, description, responsibilities }) => {
   const { t } = useTranslation();
 
   return (
@@ -15,7 +15,7 @@ const WorkExperienceItem = ({startDate, endDate, position, companyName, descript
           {position}
         </Typography>
         <Typography variant="caption1" sx={styles.workDate}>
-          {startDate.slice(0,4)} - {new Date(endDate) > new Date() ? t('profile.experience.endYear') : endDate.slice(0,4)}
+          {startYear} - {endYear > new Date().getFullYear() ? t('profile.experience.endYear') : endYear}
         </Typography>
       </Box>
       <Box sx={styles.workPlaceTitleWrapper}>
@@ -37,8 +37,8 @@ const WorkExperienceItem = ({startDate, endDate, position, companyName, descript
 
 WorkExperienceItem.propTypes = {
   id: PropTypes.number.isRequired,
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
+  startYear: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  endYear: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   position: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

@@ -35,4 +35,9 @@ export const styles = {
     gridColumn: '1/10',
     gridRow: '2/5',
   },
+  loading: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 };
