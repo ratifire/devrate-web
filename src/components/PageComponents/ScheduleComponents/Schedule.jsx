@@ -4,10 +4,10 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { styles } from './Calendar.styles';
+import { styles } from './Schedule.styles';
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/calendar/calendarApiSlice';
+import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/schedule/scheduleApiSlice';
 
 const transformEvents = (events) => {
   return events.map((event) => ({
@@ -17,7 +17,7 @@ const transformEvents = (events) => {
   }));
 };
 
-export default function Calendar() {
+export default function Schedule() {
   const calendarRef = useRef(null);
 
   const from = '2024-06-02';

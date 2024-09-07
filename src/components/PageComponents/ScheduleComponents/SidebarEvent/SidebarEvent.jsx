@@ -5,7 +5,7 @@ import { Box, Button, IconButton, Paper, Typography } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import { styles } from './SidebarEvent.styles';
 import { useTranslation } from 'react-i18next';
-import { useDeleteEventByIdMutation } from '../../../../redux/calendar/calendarApiSlice';
+import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { useSelector } from 'react-redux';
 
 export default function SidebarEvent({ event }) {

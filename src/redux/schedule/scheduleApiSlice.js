@@ -1,6 +1,6 @@
 import { apiSlice } from '../services/api/apiSlice';
 
-export const CalendarApiSlice = apiSlice.injectEndpoints({
+export const ScheduleApiSlice = apiSlice.injectEndpoints({
   tagTypes: ['Event'],
   endpoints: (builder) => ({
     getEventByUserId: builder.query({
@@ -26,4 +26,4 @@ export const CalendarApiSlice = apiSlice.injectEndpoints({
 });
 
 export const { useGetEventByUserIdQuery, useGetClosestEventByUserIdQuery, useDeleteEventByIdMutation } =
-  CalendarApiSlice;
+  ScheduleApiSlice;
