@@ -18,6 +18,7 @@ import {
 import { setSelectedSpecialization } from '../../../../redux/specialization/specializationSlice';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
+import CustomTooltip from '../../../UI/CustomTooltip';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
