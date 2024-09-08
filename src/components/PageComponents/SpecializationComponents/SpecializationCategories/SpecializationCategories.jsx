@@ -15,7 +15,11 @@ import {
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
-import { setSelectedSpecialization } from '../../../../redux/specialization/specializationSlice';
+import {
+  setMainSpecializations,
+  setActiveSpecialization,
+  setSelectedSpecialization,
+} from '../../../../redux/specialization/specializationSlice';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
 import CustomTooltip from '../../../UI/CustomTooltip';
@@ -25,17 +29,16 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
+  const activeSpecialization = useSelector((state) => state.specialization.activeSpecialization);
+  const mainSpecialization = useSelector((state) => state.specialization.mainSpecialization);
+  // console.log(mainSpecialization);
+  // console.log('activeSpecialization', activeSpecialization);
   // 8881
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
-  // {id: 6661, main: true, mastery: "Junior", name: "Frontend Developer"
-  const mainMasteryandSpecialization = useSelector((state) => state.specialization.mainMastery);
-  // null - only null
   const [masteryData, setMasteryData] = useState({});
-  // { hardSkillMark:6.73 id:10001 level:"Junior" softSkillMark:5.31 } - походу это объект с объектами mastry
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
-  // [{completedInterviews : 11 conductedInterviews : 4 id : 6661 main : true name : "Frontend Developer"}]
-
+  console.log('specializations',specializations);
+  console.log('masteryData',masteryData);
   const specializationsSorted = specializations?.toSorted((a, b) => a.main === b.main ? 0 : a.main ? 1 : -1);
 
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
@@ -43,6 +46,10 @@ const SpecializationCategories = () => {
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
 
   const [anchorEl, setAnchorEl] = useState({});
+
+  useEffect(() => {
+    dispatch(setMainSpecializations(specializations))
+  }, [specializations]);
 
   useEffect(() => {
     if (!specializations) {
@@ -56,11 +63,12 @@ const SpecializationCategories = () => {
         [specialization.id]: data,
       }));
     });
-  }, [specializations, mainMasteryandSpecialization]);
+  }, [specializations, activeSpecialization]);
 
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
       const spec = { ...specialization, mastery: masteryData[specialization.id].level };
+      dispatch(setActiveSpecialization(spec));
       dispatch(setActiveMastery(spec.mastery));
       dispatch(setSelectedSpecialization(spec));
     }
@@ -75,6 +83,7 @@ const SpecializationCategories = () => {
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
     if (specializations?.length === 0 || selectedSpecialization === null) return;
     await updateSpecializationAsMainById({ ...selectedSpecialization, main: true }).unwrap();
+    dispatch(setMainSpecializations(selectedSpecialization))
   };
 
   const handlerDeleteSpecialization = async (id) => {
@@ -136,7 +145,7 @@ const SpecializationCategories = () => {
           <Box
             key={id}
             sx={styles.figure}
-            className={`figure ${selectedSpecialization?.id === id ? 'active' : ''}`}
+            className={`figure ${activeSpecialization?.id === id ? 'active' : ''}`}
             onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
           >
             <Box sx={styles.specialization_title_star}>
