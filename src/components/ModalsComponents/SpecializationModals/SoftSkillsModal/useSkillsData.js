@@ -1,9 +1,10 @@
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import {
   useGetHardSkillsByMasteryIdQuery,
-  useGetSpecializationByUserIdQuery,
   useGetMainMasteryBySpecializationIdQuery,
 } from '../../../../redux/specialization/specializationApiSlice';
+import { useSelector } from 'react-redux';
 
 const useSkillsData = (userId) => {
   const [skillsData, setSkillsData] = useState({
@@ -13,19 +14,16 @@ const useSkillsData = (userId) => {
     isError: false,
   });
 
-  const {
-    data: specializations,
-    isLoading: isLoadingSpecializations,
-    isError: isErrorSpecializations,
-  } = useGetSpecializationByUserIdQuery(userId);
-  const specializationId = specializations?.[0]?.id;
+  const activeSpecialization = useSelector((state) => state.specialization.activeSpecialization);
+  const mainSpecialization = useSelector((state) => state.specialization.mainSpecialization);
+  const specializationId =  activeSpecialization?.id || mainSpecialization?.id;
 
   const {
     data: mainMastery,
     isLoading: isLoadingMainMastery,
     isError: isErrorMainMastery,
   } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
-
+  console.log('render');
   const {
     data: skills,
     isLoading: isLoadingSkills,

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Divider, Popover, Typography } from '@mui/material';
 import { styles } from './Interviews.styles';
 import { useTranslation } from 'react-i18next';
@@ -7,19 +7,15 @@ import Mood from '@mui/icons-material/Mood';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 
 const Interviews = () => {
   const user = useSelector(selectCurrentUser);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { data: specializations} = useGetSpecializationByUserIdQuery(user.data.id);
   const [createButton, setCreateButton] = useState(null);
   const open = Boolean(createButton);
-
-  const mainSpec = useMemo(() => {
-    return specializations?.find(sp => sp.main);
-  }, [specializations]);
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
+  const mainSpec = activeSpecialization || mainSpecialization;
 
   const scheduleClickHandler = (event) => {
     setCreateButton(event.currentTarget);
@@ -36,8 +32,6 @@ const Interviews = () => {
     dispatch(openModal({modalName: 'scheduleInterview', data: {role: 'CANDIDATE'}}));
     closeHandler()
   }
-
-
 
   return (
     <Box sx={styles.contentWrapper}>

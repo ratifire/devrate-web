@@ -115,6 +115,22 @@ const SpecializationCategories = () => {
     return <Typography variant='h6'>Something error...</Typography>;
   }
 
+  const TestComonent = () => {
+    return (
+      <Box sx={styles.figure_deco} className='figure__deco'>
+        <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event, id)}>
+          <MoreVertIcon sx={styles.editSpecialization} />
+        </IconButton>{' '}
+        <DropdownMenu
+          anchorEl={anchorEl[id]}
+          handleCloseMenu={() => handleCloseMenu(id)}
+          handleEditFeature={() => handleEditFeature(id)}
+          handleDeleteFeature={() => handlerDeleteSpecialization(id)}
+        />
+      </Box>
+    )
+  }
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.specialization_left_box}>

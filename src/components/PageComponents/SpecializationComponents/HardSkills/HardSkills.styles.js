@@ -29,7 +29,7 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    '>div:first-child': {
+    '>div:first-of-type': {
       flex: '1 2 calc(100% - 130px)',
       '>h6': {
         flex: '1 2 max(266px)',
@@ -39,7 +39,7 @@ export const styles = {
         overflow: 'hidden',
       },
     },
-    '>div:last-child': {
+    '>div:last-of-type': {
       flex: '1 2 122px',
       marginLeft: theme.spacing(2),
       gridGap: theme.spacing(2),
