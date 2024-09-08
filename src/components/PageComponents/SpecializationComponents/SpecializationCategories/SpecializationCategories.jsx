@@ -31,14 +31,10 @@ const SpecializationCategories = () => {
   const { id } = useSelector((state) => state.auth.user.data);
   const activeSpecialization = useSelector((state) => state.specialization.activeSpecialization);
   const mainSpecialization = useSelector((state) => state.specialization.mainSpecialization);
-  // console.log(mainSpecialization);
-  // console.log('activeSpecialization', activeSpecialization);
   // 8881
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
-  console.log('specializations',specializations);
-  console.log('masteryData',masteryData);
   const specializationsSorted = specializations?.toSorted((a, b) => a.main === b.main ? 0 : a.main ? 1 : -1);
 
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();

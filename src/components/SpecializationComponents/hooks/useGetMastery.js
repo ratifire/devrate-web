@@ -1,22 +1,14 @@
 import { useSelector } from 'react-redux';
 import {
   useGetMasteriesBySpecializationIdQuery,
-  useGetSpecializationByUserIdQuery,
 } from '../../../redux/specialization/specializationApiSlice';
 
 const useGetMastery = () => {
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
   const { id: userId } = useSelector((state) => state.auth.user.data);
-
-  const {
-    data: specializations,
-    isLoading: isLoadingSpecializations,
-    isError: isErrorLoadingSpecializations,
-  } = useGetSpecializationByUserIdQuery(userId, {
-    skip: !userId,
-  });
-
-  const specializationId = specializations?.find((spec) => spec.main)?.id;
+  const activeSpecialization = useSelector((state) => state.specialization.activeSpecialization);
+  const mainSpecialization = useSelector((state) => state.specialization.mainSpecialization);
+  const specializationId =  activeSpecialization?.id || mainSpecialization?.id;
 
   const {
     data: masteries,
@@ -36,8 +28,8 @@ const useGetMastery = () => {
 
   const masteryId = selectMastery?.id;
 
-  const isLoading = isLoadingSpecializations || isLoadingMasteries;
-  const isError = isErrorLoadingSpecializations || isErrorMasteries;
+  const isLoading = isLoadingMasteries;
+  const isError = isErrorMasteries;
 
   return {
     isLoading,
