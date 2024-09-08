@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { useGetSoftSkillsQuery } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetMastery } from '../../../SpecializationComponents/hooks';
-import Item from './Item';
+import SoftSkillsItem from './SoftSkillsItem';
 import { styles } from './SoftSkills.styles';
 
 const SoftSkills = () => {
@@ -51,7 +51,7 @@ const SoftSkills = () => {
 
       <Box>
         {softSkills?.map((skill, index) => (
-          <Item key={index} name={skill.name} value={+Math.round(skill.averageMark).toFixed(1)} />
+          <SoftSkillsItem key={index} name={skill.name} value={+Math.round(skill.averageMark).toFixed(1)} />
         ))}
       </Box>
 

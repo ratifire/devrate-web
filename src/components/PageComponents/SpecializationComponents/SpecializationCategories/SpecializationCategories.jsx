@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { styles } from './SpecializationCategories.styles';
-import { Box, IconButton, Typography, Tooltip, CircularProgress } from '@mui/material';
+import { Box, IconButton, Typography, CircularProgress } from '@mui/material';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
@@ -18,7 +18,6 @@ import {
 import { setSelectedSpecialization } from '../../../../redux/specialization/specializationSlice';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
-import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
@@ -121,7 +120,7 @@ const SpecializationCategories = () => {
           correctStyle={styles.make_main_btn}
           handlerClick={() => handlerChangeMainSpecialization(selectedSpecialization)}
           type='button'
-          label={t('specialization.specialization_btn_make_main')}
+          label='specialization.specialization_btn_make_main'
         />
       </Box>
 
@@ -140,11 +139,11 @@ const SpecializationCategories = () => {
           >
             <Box sx={styles.specialization_title_star}>
               <Box sx={styles.specialization_title}>
-                <Tooltip title={name}>
+                <CustomTooltip title={name}>
                   <Typography variant='h6' sx={styles.specialization_name}>
                     {name}
                   </Typography>
-                </Tooltip>
+                </CustomTooltip>
                 <Typography variant='subtitle2'>Level {masteryData[id]?.level}</Typography>
               </Box>
               {main && <StarIcon sx={styles.star} />}

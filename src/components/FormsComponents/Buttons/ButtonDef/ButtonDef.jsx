@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styles } from './ButtonDef.styles.js';
 
-const ButtonDef = ({ withTranslation = true,  variant, type, correctStyle, handlerClick, disabled, label, startIcon, endIcon }) => {
+const ButtonDef = ({ withTranslation,  variant, type, correctStyle, handlerClick, disabled, label, startIcon, endIcon }) => {
   const style = variant === 'contained' ? styles.contained : variant === 'text' ? styles.text : styles.outlined;
   const { t } = useTranslation();
   return (
@@ -34,12 +34,9 @@ ButtonDef.propTypes = {
   withTranslation: PropTypes.bool,
 };
 ButtonDef.defaultProps = {
-  variant: 'contained',
-  type: 'submit',
   correctStyle: {},
   handlerClick: () => {},
   disabled: false,
-  label: '',
   startIcon: null,
   endIcon: null,
   withTranslation: true,

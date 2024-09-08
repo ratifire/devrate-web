@@ -12,7 +12,7 @@ const styles = {
     justifyContent: 'space between',
   },
   logoBox: {
-    flexGrow: 1,
+    marginRight: 'auto',
     lineHeight: 0,
   },
   headerNav: (theme) => ({

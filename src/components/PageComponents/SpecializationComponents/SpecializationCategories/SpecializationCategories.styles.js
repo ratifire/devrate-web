@@ -22,14 +22,14 @@ export const styles = {
     '&::-webkit-scrollbar': {
       width: 10,
     },
-    '&::-webkit-scrollbar-track': (theme) => ({
+    '&::-webkit-scrollbar-track':{
       backgroundColor: theme.palette.neutral['600'],
       borderRadius: 8,
-    }),
-    '&::-webkit-scrollbar-thumb': (theme) => ({
+    },
+    '&::-webkit-scrollbar-thumb': {
       borderRadius: 6,
       backgroundColor: theme.palette.common.white,
-    })
+    }
   }),
   page_title: (theme) => ({
     marginBottom: theme.spacing(5),
@@ -42,32 +42,34 @@ export const styles = {
     padding: '12px 16px',
     textTransform: 'none',
     '&:hover': {
-      color: theme.palette.primary[500],
+      color: theme.palette.primary['200'],
+      backgroundColor: `${theme.palette.primary['200']}29`,
+      borderColor: theme.palette.primary['200']
     },
   }),
   add_specialization_btn: (theme) => ({
     width: '134px',
-    backgroundColor: theme.palette.neutral[600],
-    borderRadius: theme.spacing(2),
+    backgroundColor: theme.palette.neutral['600'],
+    borderRadius: 4,
   }),
 
   figure: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     minWidth: '228px',
-    borderRadius: '15px',
+    borderRadius: 4,
     position: 'relative',
     cursor: 'pointer',
 
     '&.active': {
       '&::before': {
-        borderColor: theme.palette.primary[200],
+        borderColor: theme.palette.primary['200'],
       },
       '&::after': {
-        borderColor: theme.palette.primary[200],
+        borderColor: theme.palette.primary['200'],
       },
       '.figure__deco::after': {
-        borderColor: theme.palette.primary[200],
+        borderColor: theme.palette.primary['200'],
       }
     },
 
@@ -75,30 +77,30 @@ export const styles = {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      borderRight: '1px solid ' + theme.palette.neutral[600],
-      borderBottom: '1px solid ' + theme.palette.neutral[600],
-      borderLeft: '1px solid ' + theme.palette.neutral[600],
+      borderRight: '1px solid ' + theme.palette.neutral['600'],
+      borderBottom: '1px solid ' + theme.palette.neutral['600'],
+      borderLeft: '1px solid ' + theme.palette.neutral['600'],
       transition: 'border-color .2s easy-in-out',
-      backgroundColor: theme.palette.neutral[600],
+      backgroundColor: theme.palette.neutral['600'],
       top: `calc(100% - ${DECO_SIZE+1}px)`,
       left: 0,
       height: DECO_SIZE,
       width: `calc(100% - ${DECO_SIZE}px)`,
-      borderRadius: '0 0 15px 15px',
+      borderRadius: '0 0 16px 16px',
       zIndex: 1,
     },
     '&::after': {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      border: '1px solid ' + theme.palette.neutral[600],
+      border: '1px solid ' + theme.palette.neutral['600'],
       transition: 'border-color .2s easy-in-out',
-      backgroundColor: theme.palette.neutral[600],
+      backgroundColor: theme.palette.neutral['600'],
       top: 0,
       left: 0,
       height: `calc(100% - ${DECO_SIZE}px)`,
       width: '100%',
-      borderRadius: '15px 15px 15px 0',
+      borderRadius: '16px 16px 16px 0',
     },
   }),
   figure_deco: (theme) => ({
@@ -107,7 +109,7 @@ export const styles = {
     width: 52,
     bottom: '2px',
     right: 0,
-    borderRadius: '0 0 15px 0',
+    borderRadius: '0 0 16px 0',
     backgroundColor: theme.palette.background.level2,
 
     '&::before': {
@@ -119,7 +121,7 @@ export const styles = {
       left: 0,
       height: '50%',
       width: '50%',
-      backgroundColor: theme.palette.neutral[600],
+      backgroundColor: theme.palette.neutral['600'],
     },
     '&::after': {
       content: '""',
@@ -131,10 +133,10 @@ export const styles = {
       zIndex: 2,
       height: '50%',
       width: '50%',
-      borderTopLeftRadius: '15px',
+      borderTopLeftRadius: '16px',
       transition: 'border-color .2s easy-in-out',
-      borderTop: '1px solid ' + theme.palette.neutral[600],
-      borderLeft: '1px solid ' + theme.palette.neutral[600],
+      borderTop: '1px solid ' + theme.palette.neutral['600'],
+      borderLeft: '1px solid ' + theme.palette.neutral['600'],
     },
   }),
   specialization_title_star: {
@@ -159,9 +161,6 @@ export const styles = {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
-    fontSize: '20px',
-    lineHeight: '32px',
-    letterSpacing: '0.15px',
   },
 
   star: (theme) => ({

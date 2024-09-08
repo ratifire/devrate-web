@@ -15,7 +15,7 @@ const getDesignTokens = (mode) => ({
     },
   },
   typography: {
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: '"Roboto", sans-serif',
     h1: {
       fontSize: 96,
       fontWeight: 300,
@@ -99,8 +99,8 @@ const getDesignTokens = (mode) => ({
     caption3: {
       fontSize: 12,
       fontWeight: 400,
-      lineHeight: 2.66,
-      letterSpacing: 1,
+      lineHeight: 1,
+      letterSpacing: 0,
     },
   },
   palette: {
@@ -140,6 +140,7 @@ const getDesignTokens = (mode) => ({
             gradient: 'radial-gradient(62.0% 54% at 63% 50%, rgba(71, 62, 98, 0.5) 0%, rgba(71, 62, 98, 0) 100%)',
             scrollbarTrack: '#303032',
             scrollbarThumb: '#FFF',
+            btnGroup: '#3E3E40',
           },
           primary: {
             50: '#EFE6FD',
@@ -255,11 +256,16 @@ const getDesignTokens = (mode) => ({
     code: {
       fontFamily: 'Roboto, sans-serif',
     },
-    '*': {
+    ' *': {
       boxSizing: 'border-box',
     },
   },
   components: {
+    MuiTooltip: {
+      tooltip: {
+        backgroundColor: '#8133F1',
+      }
+    },
     MuiButton: {
       variants: [
         {

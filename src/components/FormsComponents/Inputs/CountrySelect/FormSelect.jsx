@@ -62,7 +62,10 @@ const FormSelect = ({
 FormSelect.propTypes = {
   variant: PropTypes.oneOf(['standard', 'filled', 'outlined']).isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.string.isRequired
+  ]).isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,

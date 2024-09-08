@@ -18,8 +18,12 @@ const styles = {
     fontSize: 20,
     fontWeight: '500',
   },
-  icon: (theme) => ({
-    color: theme.palette.primary[200],
+  iconBtn: (theme) => ({
+    color: theme.palette.primary['100'],
+    borderRadius: 1,
+    ':hover': {
+      backgroundColor: `${theme.palette.primary['200']}29`,
+    },
   }),
   experienceItemContainer: (theme) => ({
     overflow: 'auto',

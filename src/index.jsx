@@ -6,7 +6,7 @@ import { persistor, store } from './redux/store/store';
 import { App } from './App';
 import './utils/i18n';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-
+import './assets/fonts/fonts.css';
 import getDesignTokens from './utils/theme/theme';
 
 const darkModeTheme = createTheme(getDesignTokens('dark'));
