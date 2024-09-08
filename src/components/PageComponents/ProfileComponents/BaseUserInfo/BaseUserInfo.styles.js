@@ -33,9 +33,6 @@ export const styles = {
     position: 'absolute',
     top: 0,
     right: 0,
-    button: (theme) => ({
-      color: theme.palette.neutral['100'],
-    }),
   },
   userName: (theme) => ({
     color: theme.palette.text.primary,
@@ -64,10 +61,10 @@ export const styles = {
   }),
   btnIcon: (theme) => ({
     flex: '1 0 44px',
-    color: theme.palette.action.active,
+    color: theme.palette.primary['100'],
     borderRadius: 1,
     ':hover': {
-      backgroundColor: theme.palette.neutral['800'],
+      backgroundColor: `${theme.palette.primary['200']}29`,
     },
     svg: {
       fontSize: '18px',

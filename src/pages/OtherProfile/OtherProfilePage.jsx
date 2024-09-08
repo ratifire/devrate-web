@@ -14,6 +14,7 @@ import { useGetPersonalUserQuery } from '../../redux/user/personal/personalApiSl
 const OtherProfilePage = () => {
   const { userId } = useParams();
   useAuth();
+
   const { data: dataPersonal, error, isLoading } = useGetPersonalUserQuery(userId);
   
   if (isLoading) {

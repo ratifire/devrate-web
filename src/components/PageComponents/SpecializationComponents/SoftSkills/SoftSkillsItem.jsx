@@ -4,7 +4,8 @@ import { Box, Typography, Divider, SvgIcon } from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { styles } from './SoftSkills.styles';
-import SmallLinearProgressWithLabel from './SmallLinearProgressWithLabel.jsx';
+import LinearProgressWithLabel from '../../../UI/LinearProgressWithLabel';
+import CustomTooltip from '../../../UI/CustomTooltip';
 
 const CustomArrowCircleDownIcon = (props) => {
   return (
@@ -28,7 +29,7 @@ const CustomArrowCircleUpIcon = (props) => {
   );
 };
 
-const Item = ({ name, value }) => {
+const SoftSkillsItem = ({ name, value }) => {
   const icon = value > 5 ? <CustomArrowCircleUpIcon /> : <CustomArrowCircleDownIcon />;
 
   return (
@@ -36,18 +37,20 @@ const Item = ({ name, value }) => {
       <Box sx={styles.skillContainer}>
         <Box sx={styles.iconWrapper}>
           {icon}
-          <Typography variant='subtitle2'>{name}</Typography>
+          <CustomTooltip title={name}>
+            <Typography variant='subtitle2'>{name}</Typography>
+          </CustomTooltip>
         </Box>
-        <SmallLinearProgressWithLabel value={value} />
+        <LinearProgressWithLabel value={value} size='s' orientation='horizontal'/>
       </Box>
       <Divider sx={styles.divider} />
     </Box>
   );
 };
 
-Item.propTypes = {
+SoftSkillsItem.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
 };
 
-export default Item;
+export default SoftSkillsItem;

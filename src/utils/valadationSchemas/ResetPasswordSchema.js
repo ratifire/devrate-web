@@ -6,10 +6,10 @@ const resetPasswordSchema = Yup.object().shape({
     .length(6, 'modal.resetPassword.code_length_max'),
   newPassword: Yup.string()
     .required('modal.resetPassword.required')
-    .min(7, 'modal.resetPassword.password_short')
+    .min(8, 'modal.resetPassword.password_short')
     .max(50, 'modal.resetPassword.password_long')
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$%&!?*^()_+\-={}[\]|:;]{7,}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$&*])[A-Za-z\\d!@#$&*]{8,}$/,
       'modal.resetPassword.not_valid'
     ),
   repeatPassword: Yup.string()

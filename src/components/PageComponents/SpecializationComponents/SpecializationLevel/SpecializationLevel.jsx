@@ -11,35 +11,37 @@ const SpecializationLevel = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
-
+  
   const handleButtonClick = (label) => {
     console.log(`Button clicked: ${label}`);
     dispatch(setActiveMastery(label));
   };
-
+  
   return (
     <Box sx={styles.contentWrapper}>
-      <Typography variant='h6' sx={styles.title}>
+      <Typography variant="h6" sx={styles.title}>
         {t('specialization.level.title')}
       </Typography>
-      <Typography variant='subtitle2' sx={styles.description}>
+      <Typography variant="subtitle2" sx={styles.description}>
         {t('specialization.level.description')}
       </Typography>
       <Box>
         <ButtonGroup
           sx={styles.buttonGroup}
-          variant='contained'
-          aria-label='Specialization level button group'
-          color='secondary'
+          variant="contained"
+          aria-label="Specialization level button group"
+          color="secondary"
         >
           {['JUNIOR', 'MIDDLE', 'SENIOR'].map((label) => (
             <ButtonDef
-              sx={styles.button}
+              correctStyle={styles.button}
+              type='submit'
               key={label}
               label={label}
               handlerClick={() => handleButtonClick(label)}
-              disabled={false}
+              disabled={activeMastery === label}
               variant={activeMastery === label ? 'contained' : 'outlined'}
+              withTranslation={true}
             />
           ))}
         </ButtonGroup>
