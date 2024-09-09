@@ -17,11 +17,12 @@ const FormSelect = ({
   error,
   helperText,
   countries,
+                      disabled,
 }) => {
   const id = uuid();
   const { t } = useTranslation();
   return (
-    <FormControl fullWidth variant={variant} sx={styles.wrapper} error={error}>
+    <FormControl fullWidth variant={variant} sx={styles.wrapper} error={error} disabled={disabled}>
       <InputLabel htmlFor={id} sx={styles.label} required={required}>
         {t(label)}
       </InputLabel>
@@ -73,6 +74,7 @@ FormSelect.propTypes = {
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   countries: PropTypes.array.isRequired,
+  disabled: PropTypes.bool,
 };
 FormSelect.defaultProps = {
   variant: 'outlined',
