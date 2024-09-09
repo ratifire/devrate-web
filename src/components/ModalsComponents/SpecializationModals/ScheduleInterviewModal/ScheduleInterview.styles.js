@@ -63,7 +63,16 @@ export const styles = {
     letterSpacing: '0.15ox',
     color: theme.palette.neutral[100],
     textTransform: 'none',
+    '&.Mui-disabled': {
+      fontWeight: 500,
+      fontSize: '20px',
+      lineHeight: '32px',
+      letterSpacing: '0.15px', // Fixed typo: changed '0.15ox' to '0.15px'
+      color: theme.palette.neutral[500],
+      textTransform: 'none',
+    }
   }),
+
   wrapper: (theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
