@@ -29,20 +29,16 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const activeSpecialization = useSelector((state) => state.specialization.activeSpecialization);
-  const mainSpecialization = useSelector((state) => state.specialization.mainSpecialization);
-  // 8881
+  const {activeSpecialization, mainSpecialization, fullSpecializations} = useSelector((state) => state.specialization);
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
   const specializationsSorted = specializations?.toSorted((a, b) => a.main === b.main ? 0 : a.main ? 1 : -1);
-
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
 
   const [anchorEl, setAnchorEl] = useState({});
-
   useEffect(() => {
     dispatch(setMainSpecializations(specializations))
   }, [specializations]);
@@ -113,22 +109,6 @@ const SpecializationCategories = () => {
 
   if (isError) {
     return <Typography variant='h6'>Something error...</Typography>;
-  }
-
-  const TestComonent = () => {
-    return (
-      <Box sx={styles.figure_deco} className='figure__deco'>
-        <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event, id)}>
-          <MoreVertIcon sx={styles.editSpecialization} />
-        </IconButton>{' '}
-        <DropdownMenu
-          anchorEl={anchorEl[id]}
-          handleCloseMenu={() => handleCloseMenu(id)}
-          handleEditFeature={() => handleEditFeature(id)}
-          handleDeleteFeature={() => handlerDeleteSpecialization(id)}
-        />
-      </Box>
-    )
   }
 
   return (
