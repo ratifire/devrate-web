@@ -176,6 +176,7 @@ export const uk = {
       },
       baseUserInfo: {
         loading: 'Ваш профіль заповнено на',
+        complete: 'Вітаємо! Ваш профіль повністю заповнений'
       },
       experience: {
         workExperience: 'Досвід роботи',

@@ -175,6 +175,7 @@ export const en = {
       },
       baseUserInfo: {
         loading: 'Your profile is filled in at',
+        complete: 'Congratulations! Your profile is completely filled out'
       },
       experience: {
         workExperience: 'Work experience',
