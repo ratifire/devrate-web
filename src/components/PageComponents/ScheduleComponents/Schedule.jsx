@@ -102,12 +102,11 @@ export default function Schedule() {
             {
               hour: '2-digit',
               minute: '2-digit',
-              hour12: false, // Set to false to use 24-hour format
+              hour12: false,
             },
           ]}
           slotMinTime={'07:00:00'}
           slotMaxTime={'31:00:00'}
-          // initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
           // select={handleDateSelect}
           // eventContent={renderEventContent} // custom render function
           // eventClick={handleEventClick}
