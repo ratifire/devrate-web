@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react';
+/* eslint-disable */
+import React, { useState } from 'react';
 import { Box, Button, Divider, Popover, Typography } from '@mui/material';
 import { styles } from './Interviews.styles';
 import { useTranslation } from 'react-i18next';
@@ -6,20 +7,15 @@ import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Mood from '@mui/icons-material/Mood';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 
 const Interviews = () => {
-  const user = useSelector(selectCurrentUser);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { data: specializations} = useGetSpecializationByUserIdQuery(user.data.id);
   const [createButton, setCreateButton] = useState(null);
   const open = Boolean(createButton);
-
-  const mainSpec = useMemo(() => {
-    return specializations?.find(sp => sp.main);
-  }, [specializations]);
+  const { activeSpecialization, mainSpecialization, fullSpecializations } = useSelector((state) => state.specialization);
+  const mainSpec = activeSpecialization || mainSpecialization;
+  const activeInterviews = fullSpecializations?.find((spec) => spec.id === mainSpec.id);
 
   const scheduleClickHandler = (event) => {
     setCreateButton(event.currentTarget);
@@ -37,8 +33,6 @@ const Interviews = () => {
     closeHandler()
   }
 
-
-
   return (
     <Box sx={styles.contentWrapper}>
       <Box sx={styles.stats}>
@@ -52,7 +46,7 @@ const Interviews = () => {
             {t('specialization.modal.interview.outcome')}
           </Typography>
           <Typography variant="body1">
-            {user.data.conductedInterviews}
+            {activeInterviews?.conductedInterviews}
           </Typography>
         </Box>
         <Box sx={styles.interviewItemIncome}>
@@ -61,7 +55,7 @@ const Interviews = () => {
             {t('specialization.modal.interview.income')}
           </Typography>
           <Typography variant="body1">
-            {user.data.completedInterviews}
+            {activeInterviews?.completedInterviews}
           </Typography>
         </Box>
       </Box>

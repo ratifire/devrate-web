@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   useGetHardSkillsByMasteryIdQuery,
-  useGetSpecializationByUserIdQuery,
   useGetMasteriesBySpecializationIdQuery,
 } from '../../../../redux/specialization/specializationApiSlice';
+import { useSelector } from 'react-redux';
 
 const useSkillsData = (userId, activeMastery) => {
   const [skillsData, setSkillsData] = useState({
@@ -14,8 +14,9 @@ const useSkillsData = (userId, activeMastery) => {
     masteryId: null,
   });
 
-  const { data: specializations, isLoading: isLoadingSpecializations } = useGetSpecializationByUserIdQuery(userId);
-  const specializationId = specializations?.[0]?.id;
+  const activeSpecialization = useSelector((state) => state.specialization.activeSpecialization);
+  const mainSpecialization = useSelector((state) => state.specialization.mainSpecialization);
+  const specializationId =  activeSpecialization?.id || mainSpecialization?.id;
 
   const { data: masteries = [], isLoading: isLoadingMasteries } = useGetMasteriesBySpecializationIdQuery(
     specializationId,
@@ -32,7 +33,7 @@ const useSkillsData = (userId, activeMastery) => {
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
 
   const updateSkillsData = useCallback(() => {
-    if (!isLoadingSpecializations && !isLoadingMasteries && !isLoadingSkills) {
+    if (!isLoadingMasteries && !isLoadingSkills) {
       setSkillsData({
         masteries,
         skills,
@@ -41,7 +42,7 @@ const useSkillsData = (userId, activeMastery) => {
         masteryId,
       });
     }
-  }, [masteries, skills, isLoadingSpecializations, isLoadingMasteries, isLoadingSkills, isErrorSkills, masteryId]);
+  }, [masteries, skills, isLoadingMasteries, isLoadingSkills, isErrorSkills, masteryId]);
 
   useEffect(() => {
     updateSkillsData();

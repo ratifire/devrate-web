@@ -9,7 +9,7 @@ const activeMasterySlice = createSlice({
   initialState,
   reducers: {
     setActiveMastery: (state, action) => {
-      state.activeMastery = action.payload;
+      state.activeMastery = action.payload.toUpperCase();
     },
   },
 });

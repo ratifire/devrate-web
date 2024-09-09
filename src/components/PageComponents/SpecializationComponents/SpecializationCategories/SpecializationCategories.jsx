@@ -1,6 +1,8 @@
+/* eslint-disable */
+
 import React, { useEffect, useState } from 'react';
 import { styles } from './SpecializationCategories.styles';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography, CircularProgress } from '@mui/material';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
@@ -13,25 +15,33 @@ import {
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
-import { setSelectedSpecialization } from '../../../../redux/specialization/specializationSlice';
+import {
+  setMainSpecializations,
+  setActiveSpecialization,
+  setSelectedSpecialization,
+} from '../../../../redux/specialization/specializationSlice';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
 import CustomTooltip from '../../../UI/CustomTooltip';
+import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
+  const {activeSpecialization, mainSpecialization, fullSpecializations} = useSelector((state) => state.specialization);
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
-  const mainMasteryandSpecialization = useSelector((state) => state.specialization.mainMastery);
-
   const [masteryData, setMasteryData] = useState({});
-  const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
+  const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
+  const specializationsSorted = specializations?.toSorted((a, b) => a.main === b.main ? 0 : a.main ? 1 : -1);
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
 
   const [anchorEl, setAnchorEl] = useState({});
+  useEffect(() => {
+    dispatch(setMainSpecializations(specializations))
+  }, [specializations]);
 
   useEffect(() => {
     if (!specializations) {
@@ -45,11 +55,13 @@ const SpecializationCategories = () => {
         [specialization.id]: data,
       }));
     });
-  }, [specializations, mainMasteryandSpecialization]);
+  }, [specializations, activeSpecialization]);
 
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
       const spec = { ...specialization, mastery: masteryData[specialization.id].level };
+      dispatch(setActiveSpecialization(spec));
+      dispatch(setActiveMastery(spec.mastery));
       dispatch(setSelectedSpecialization(spec));
     }
   };
@@ -63,6 +75,7 @@ const SpecializationCategories = () => {
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
     if (specializations?.length === 0 || selectedSpecialization === null) return;
     await updateSpecializationAsMainById({ ...selectedSpecialization, main: true }).unwrap();
+    dispatch(setMainSpecializations(selectedSpecialization))
   };
 
   const handlerDeleteSpecialization = async (id) => {
@@ -91,7 +104,11 @@ const SpecializationCategories = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <CircularProgress />;
+  }
+
+  if (isError) {
+    return <Typography variant='h6'>Something error...</Typography>;
   }
 
   return (
@@ -111,16 +128,16 @@ const SpecializationCategories = () => {
       </Box>
 
       <Box sx={styles.specialization_right_box}>
-        {specializations?.length < 4 ? (
+        {specializations?.length < 4 && (
           <IconButton size='large' sx={styles.add_specialization_btn} onClick={handlerAddSpecializations}>
             <AddIcon />
           </IconButton>
-        ) : null}
-        {specializations?.map(({ id, name, main }) => (
+        )}
+        {specializationsSorted?.map(({ id, name, main }) => (
           <Box
             key={id}
             sx={styles.figure}
-            className={`figure ${selectedSpecialization?.id === id ? 'active' : ''}`}
+            className={`figure ${activeSpecialization?.id === id ? 'active' : ''}`}
             onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
           >
             <Box sx={styles.specialization_title_star}>
