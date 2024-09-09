@@ -2,20 +2,14 @@ import { useSelector } from 'react-redux';
 import { useGetMasteriesHistoryStatisticQuery } from '../../../../../../redux/chart/chartApiSlice';
 import {
   useGetMasteriesBySpecializationIdQuery,
-  useGetSpecializationByUserIdQuery,
 } from '../../../../../../redux/specialization/specializationApiSlice';
 
 const useGetHistoryData = ({ from, to }) => {
-  const { id: userId } = useSelector((state) => state.auth.user.data);
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
-
-  const {
-    data: specializations,
-    isLoading: isLoadingSpecializations,
-    isError: isErrorSpecializations,
-  } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
-
-  const specializationId = specializations?.find((spec) => spec.main)?.id;
+  // ToDo: Вынести это в отдельный хук
+  const activeSpecialization = useSelector((state) => state.specialization.activeSpecialization);
+  const mainSpecialization = useSelector((state) => state.specialization.mainSpecialization);
+  const specializationId =  activeSpecialization?.id || mainSpecialization?.id;
 
   const {
     data: masteries,
@@ -35,8 +29,8 @@ const useGetHistoryData = ({ from, to }) => {
     isError: isErrorHistory,
   } = useGetMasteriesHistoryStatisticQuery({ selectMasteryId, to, from }, { skip: !selectMasteryId });
 
-  const isLoading = isLoadingSpecializations || isLoadingHistory || isLoadingMasteries;
-  const isError = isErrorSpecializations || isErrorHistory || isErrorMasteries;
+  const isLoading = isLoadingHistory || isLoadingMasteries;
+  const isError = isErrorHistory || isErrorMasteries;
 
   return {
     isLoading,
