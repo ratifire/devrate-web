@@ -5,8 +5,7 @@ import { styles } from './SkillsSection.style';
 import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice';
 import PropTypes from 'prop-types';
 
-const SkillsSection = ({id}) => {
-
+const SkillsSection = ({ id }) => {
   const { t } = useTranslation();
 
   const { data: personalData } = useGetPersonalUserQuery(id);
@@ -22,18 +21,30 @@ const SkillsSection = ({id}) => {
         <Typography variant="h6" sx={styles.skillsText}>
           {t('profile.skills.hardSkills')}:
         </Typography>
-        <Rating name="hard-skills-rating" readOnly value={hardSkillMark} sx={styles.skillsRating} />
+        <Rating
+          name="hard-skills-rating"
+          value={hardSkillMark / 2}
+          precision={0.5}
+          readOnly
+          sx={styles.skillsRating}
+        />
         <Typography variant="subtitle2" sx={styles.skillsRating}>
-          {hardSkillMark * 2}/10
+          {hardSkillMark}/10
         </Typography>
       </Box>
       <Box sx={styles.softSkills}>
         <Typography variant="subtitle1" sx={styles.skillsText}>
           {t('profile.skills.softSkills')}:
         </Typography>
-        <Rating name="soft-skills-rating" readOnly value={softSkillMark} sx={styles.skillsRating} />
+        <Rating
+          name="soft-skills-rating"
+          value={softSkillMark / 2}
+          precision={0.5}
+          readOnly
+          sx={styles.skillsRating}
+        />
         <Typography variant="subtitle2" sx={styles.skillsRating}>
-          {softSkillMark * 2}/10
+          {softSkillMark}/10
         </Typography>
       </Box>
       <Box sx={styles.interviewHistory}>
@@ -53,7 +64,6 @@ const SkillsSection = ({id}) => {
     </Box>
   );
 };
-
 
 SkillsSection.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
