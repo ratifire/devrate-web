@@ -4,13 +4,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error }) => {
+const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, workExperience }) => {
   const { t } = useTranslation();
   return (
     <FormControl error={error} variant='standard'>
       <FormControlLabel
-        control={<Checkbox checked={checked} onChange={changeHandler} name={name} sx={styles.checkBox} />}
-        label={<Typography sx={styles.newsAgreementText}>{t(label)}</Typography>}
+        control={<Checkbox checked={checked} onChange={changeHandler} name={name} sx={workExperience? styles.checkBoxWorkExperience : styles.checkBox} />}
+        label={<Typography sx={workExperience ? styles.newsAgreementTextWorkExperience : styles.newsAgreementText}>{t(label)}</Typography>}
       />
       <FormHelperText>{t(helperText)}</FormHelperText>
     </FormControl>
@@ -24,6 +24,7 @@ FormCheckbox.propTypes = {
   label: PropTypes.string.isRequired,
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
+  workExperience: PropTypes.bool
 };
 FormCheckbox.defaultProps = {
   checked: false,

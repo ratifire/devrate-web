@@ -13,7 +13,6 @@ const SpecializationLevel = () => {
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
   
   const handleButtonClick = (label) => {
-    console.log(`Button clicked: ${label}`);
     dispatch(setActiveMastery(label));
   };
   

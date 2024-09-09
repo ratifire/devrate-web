@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
@@ -9,15 +10,12 @@ import { useTranslation } from 'react-i18next';
 import {
   useCreateSkillsBulkMutation, useDeleteSkillByIdMutation,
   useGetAvailableSoftSkillsQuery,
-  useLazyGetMainMasteryBySpecializationIdQuery,
-  useLazyGetMainSpecializationQuery,
   useLazyGetSoftSkillsQuery,
 } from '../../../../redux/specialization/specializationApiSlice';
 import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { SkillChip } from '../../../PageComponents/SpecializationComponents/SkillChip/SkillChip';
-
+import { useGetMastery } from '../../../SpecializationComponents/hooks';
 
 const SoftSkillsModal = () => {
   const { t } = useTranslation();
@@ -29,39 +27,34 @@ const SoftSkillsModal = () => {
 
   const availableSoftSkills = useGetAvailableSoftSkillsQuery();
   const [createSkillsBulk] = useCreateSkillsBulkMutation();
-  const currentUser = useSelector(selectCurrentUser);
   const [deleteSkill] = useDeleteSkillByIdMutation();
-  const [getMainSpecialization] = useLazyGetMainSpecializationQuery();
-  const [getMainMastery, mainMastery] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [getSoftSkills, loadedSoftSkills] = useLazyGetSoftSkillsQuery();
-
   const deleteClickHandler = (softSkillId) => {
     deleteSkill(softSkillId);
   }
 
+  // Todo: Добавить обработку ошибок и загрузки
+  const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
+
+  // Todo: Удалить юзЭффект
   useEffect(() => {
     (async () => {
-      const mainSpec = await getMainSpecialization(currentUser.data.id);
-      if (!mainSpec.data) {
-        return;
-      }
-
-      const mainMastery = await getMainMastery(mainSpec.data.id);
-      getSoftSkills(mainMastery.data.id);
+      getSoftSkills(masteryId);
     })();
   }, []);
 
+  // Todo: хз что это
   const addBtnClickHandler = () => {
     if (!softSkill.trim().length) {
       return;
     }
 
-    if (!mainMastery?.data?.id) {
+    if (masteryId) {
       return;
     }
 
     createSkillsBulk({
-      masteryId: mainMastery.data.id,
+      masteryId,
       skills: [softSkill].map((skill) => ({
         name: skill,
         type: 'SOFT_SKILL',

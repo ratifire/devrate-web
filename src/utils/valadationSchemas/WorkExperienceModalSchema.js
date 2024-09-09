@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 
-const isStartDateBeforeEndDate = (startDate, endDate) => {
-  if (startDate && endDate) {
-    return startDate.getTime() < endDate.getTime();
+const isStartYearBeforeEndYear = (startYear, endYear) => {
+  if (startYear && endYear) {
+    return startYear.getTime() < endYear.getTime();
   }
   return true;
 };
@@ -23,17 +23,21 @@ export const WorkExperienceModalSchema = Yup.object().shape({
   responsibilities: Yup.string()
     .min(2, 'profile.modal.workExperience.responsibilities_short')
     .max(50, 'profile.modal.workExperience.responsibilities_long'),
-  // .required('profile.modal.workExperience.required'),
-  startDate: Yup.date()
-    .min(new Date(1950, 0, 1), 'Date must be later than 01/01/1950')
-    .max(new Date(), 'Date must be no later then current year')
+  startYear: Yup.date()
+    .min(new Date(1950, 0, 1), 'profile.modal.workExperience.startYear_min')
+    .max(new Date(), 'profile.modal.workExperience.startYear_max')
     .required('profile.modal.workExperience.required'),
-  endDate: Yup.date()
-    .min(new Date(1950, 0, 1), 'Date must be later than Start Date and no later then current year')
-    .max(new Date(), 'Date must be no later then current year')
-    .required('End date is required')
-    .test('endDate', 'profile.modal.workExperience.endDateMessage', function (value) {
-      const startDate = this.resolve(Yup.ref('startDate'));
-      return isStartDateBeforeEndDate(startDate, value);
+  endYear: Yup.date()
+    .min(Yup.ref('startYear'), 'profile.modal.workExperience.endYear_min')
+    .max(new Date(), 'profile.modal.workExperience.endYear_max')
+    .when('currentDate', {
+      is: (currentDate) => !currentDate,
+      then: (schema) => schema.required('profile.modal.workExperience.required'),
+      otherwise: (schema) => schema.nullable(),
+    })
+    .test('endYear', 'profile.modal.workExperience.endDateMessage', function (value) {
+      const startYear = this.resolve(Yup.ref('startYear'));
+      return isStartYearBeforeEndYear(startYear, value);
     }),
+  currentDate: Yup.boolean(),
 });

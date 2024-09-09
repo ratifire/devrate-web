@@ -8,20 +8,20 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { WorkExperienceModalSchema } from '../../../../utils/valadationSchemas/index';
 import AddIcon from '@mui/icons-material/Add';
-import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import Responsibility from '../../../UI/Responsibility';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { DateField } from '@mui/x-date-pickers';
-import { DateTime } from 'luxon';
 import {
   useCreateNewWorkExperienceMutation,
   useUpdateWorkExperienceByIdMutation,
 } from '../../../../redux/workExperience/workExperienceApiSlice';
+import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
+import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
 
 const WorkExperienceModal = () => {
+  const [startYears, setStartYears] = useState([]);
+  const [endYears, setEndYears] = useState([]);
   const { id } = useSelector((state) => state.auth.user.data);
   const [createNewWorkExperience] = useCreateNewWorkExperienceMutation();
   const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
@@ -38,15 +38,15 @@ const WorkExperienceModal = () => {
     companyName: '',
     description: '',
     responsibilities: '',
-    startDate: null,
-    endDate: null,
+    startYear: '',
+    endYear: '',
+    currentDate: false,
   };
 
   const onSubmit = async (values, { resetForm }) => {
-    const startDate = DateTime.fromISO(values.startDate).toISODate();
-    const endDate = DateTime.fromISO(values.endDate).toISODate();
-    const data = { ...values, startDate, endDate, responsibilities };
-
+    const startYear = values.startYear;
+    const endYear = values.currentDate ? '9999' : values.endYear || '9999';
+    const data = { ...values, startYear, endYear, responsibilities };
     try {
       if (modalData && modalData.id) {
         await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
@@ -70,14 +70,28 @@ const WorkExperienceModal = () => {
   });
 
   useEffect(() => {
+    const startYearsOpts = [];
+    for (let i = 1950; i <= `${new Date().getFullYear()}`; i++) {
+      startYearsOpts.push(`${i}`);
+    }
+    setStartYears(startYearsOpts);
+
+    const endYearsOpts = [];
+    for (let i = 1950; i <= `${new Date().getFullYear()}`; i++) {
+      endYearsOpts.push(`${i}`);
+    }
+    setEndYears(endYearsOpts);
+  }, []);
+
+  useEffect(() => {
     if (!modalData) return;
 
     formik.setValues({
       position: modalData.position,
       companyName: modalData.companyName,
       description: modalData.description,
-      startDate: DateTime.fromISO(modalData.startDate),
-      endDate: DateTime.fromISO(modalData.endDate),
+      startYear: modalData.startYear,
+      endYear: modalData.endYear,
     });
     setResponsibilities(modalData.responsibilities);
   }, [modalData, formik.setValues]);
@@ -92,6 +106,13 @@ const WorkExperienceModal = () => {
   const responsibilityDeleteHandler = (responsibilityToDelete) => {
     setResponsibilities(responsibilities.filter((item) => item !== responsibilityToDelete));
   };
+
+  const handleCheckboxChange = (e)=>{
+      formik.setFieldValue('currentDate', e.target.checked);
+      if (e.target.checked) {
+        formik.setFieldValue('endYear', '');
+      }
+  }
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openExperience}>
@@ -129,32 +150,45 @@ const WorkExperienceModal = () => {
             />
           </Box>
           <Box sx={styles.input100}>
-            <LocalizationProvider dateAdapter={AdapterLuxon}>
-              <DateField
-                sx={styles.input50}
-                label={t('profile.modal.workExperience.startDate')}
-                value={formik.values.startDate}
-                required
-                onChange={(value) => formik.setFieldValue('startDate', value)}
-                helperText={formik.touched.startDate && formik.errors.startDate}
-                error={formik.touched.startDate && Boolean(formik.errors.startDate)}
-                FormHelperTextProps={{
-                  sx: styles.error
-                }}
+            <CountrySelect
+              sx={styles.input50}
+              label={t('profile.modal.workExperience.startDate')}
+              value={formik.values.startYear}
+              countries={startYears}
+              name='startYear'
+              variant='outlined'
+              required
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              helperText={formik.touched.startYear && formik.errors.startYear}
+              error={formik.touched.startYear && Boolean(formik.errors.startYear)}
+            />
+            <CountrySelect
+              sx={styles.input50}
+              label={t('profile.modal.workExperience.endDate')}
+              value={formik.values.currentDate ? '' : formik.values.endYear}
+              countries={endYears}
+              name='endYear'
+              variant='outlined'
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              helperText={formik.touched.endYear && formik.errors.endYear}
+              error={formik.touched.endYear && Boolean(formik.errors.endYear)}
+              disabled={formik.values.currentDate}
+            />
+            <Box sx={styles.checkBoxContainer}>
+              <FormCheckbox
+                label={t('profile.modal.workExperience.currentDate')}
+                checked={formik.values.currentDate}
+                changeHandler={handleCheckboxChange}
+                workExperience={true}
+                name='currentDate'
+                helperText={formik.touched.currentDate && formik.errors.currentDate}
+                error={formik.touched.currentDate && Boolean(formik.errors.currentDate)}
               />
-              <DateField
-                sx={styles.input50}
-                label={t('profile.modal.workExperience.endDate')}
-                value={formik.values.endDate}
-                onChange={(value) => formik.setFieldValue('endDate', value)}
-                helperText={formik.touched.endDate && formik.errors.endDate}
-                error={formik.touched.endDate && Boolean(formik.errors.endDate)}
-                FormHelperTextProps={{
-                  sx: styles.error
-                }}
-              />
-            </LocalizationProvider>
+            </Box>
           </Box>
+
           <Box sx={styles.input100}>
             <TextAreaInput
               name='description'

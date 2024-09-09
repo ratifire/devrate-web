@@ -20,8 +20,8 @@ const transformEvents = (events) => {
 export default function Schedule() {
   const calendarRef = useRef(null);
 
-  const from = '2024-06-02';
-  const to = '2024-08-02';
+  const from = '2024-09-02';
+  const to = '2024-10-02';
   const fromTime = '2024-07-02T06:00:00-03:00';
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to });
@@ -32,13 +32,19 @@ export default function Schedule() {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
       const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
+      const th = calendarApi.el.querySelectorAll('.fc-theme-standard th');
       const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
       const timeGridHeadElements = calendarApi.el.querySelectorAll(
         '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
       );
       const timeGridEventElements = calendarApi.el.querySelectorAll('.fc-v-event .fc-event-main');
 
+      // const toolBarElements = calendarApi.el.querySelectorAll('.fc .fc-header-toolbar'); //needed to hide toolbar
+
       timeGridSlotElements.forEach((el) => {
+        Object.assign(el.style, styles.timeGridTableData);
+      });
+      th.forEach((el) => {
         Object.assign(el.style, styles.timeGridTableData);
       });
       timeGridTodayElements.forEach((el) => {
@@ -50,8 +56,12 @@ export default function Schedule() {
       timeGridEventElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridEventElements);
       });
+      //needed to hide toolbar
+      // toolBarElements.forEach((el) => {
+      //   Object.assign(el.style, styles.toolBarElements);
+      // });
     }
-  }, []);
+  });
 
   if (isLoading || loading) {
     return <div>Loading...</div>;
@@ -68,13 +78,14 @@ export default function Schedule() {
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay',
+            center: '',
+            right: '',
           }}
           initialView='timeGridWeek'
           firstDay={1}
           slotDuration='01:00:00'
           slotLabelInterval={{ hours: 1 }}
+          allDaySlot={false}
           expandRows={true}
           editable={false}
           selectable={true}

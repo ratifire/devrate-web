@@ -39,4 +39,18 @@ export const styles = {
   text: (theme) => ({
     color: theme.palette.text.secondary,
   }),
+  completeContainer: (theme) => ({
+    display: 'flex',
+    justifyContent: 'start',
+    marginTop: theme.spacing(2),
+  }),
+  completeText: (theme) => ({
+    color: theme.palette.neutral['100'],
+    marin: '24px 0 37px',
+  }),
+
+  completeIcon: (theme) => ({
+    color: theme.palette.info.azure,
+    marginLeft: theme.spacing(1),
+  }),
 };
