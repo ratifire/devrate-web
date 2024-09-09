@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createSlice } from '@reduxjs/toolkit';
 
 const specializationSlice = createSlice({
@@ -5,6 +6,9 @@ const specializationSlice = createSlice({
   initialState: {
     activeSpecialization: null,
     mainSpecialization: null,
+    fullSpecializations: null,
+    //================================================================
+    activeMainSpecialization: null,
     selectedSpecialization: null,
     mainMastery: null,
   },
@@ -20,6 +24,8 @@ const specializationSlice = createSlice({
       state.activeSpecialization = payload
     },
     setMainSpecializations: (state, { payload }) => {
+      state.fullSpecializations = payload;
+
       if (Array.isArray(payload)) {
         state.mainSpecialization =  payload.find((spec) => spec.main);
         return
@@ -30,5 +36,5 @@ const specializationSlice = createSlice({
   },
 });
 
-export const { setSelectedSpecialization, setMainMastery, setActiveSpecialization, setMainSpecializations } = specializationSlice.actions;
+export const { setSelectedSpecialization, setMainMastery, setActiveSpecialization, setMainSpecializations, setFullActiveSpecialization } = specializationSlice.actions;
 export default specializationSlice.reducer;

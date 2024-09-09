@@ -6,16 +6,15 @@ import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Mood from '@mui/icons-material/Mood';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 
 const Interviews = () => {
-  const user = useSelector(selectCurrentUser);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [createButton, setCreateButton] = useState(null);
   const open = Boolean(createButton);
-  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
+  const { activeSpecialization, mainSpecialization, fullSpecializations } = useSelector((state) => state.specialization);
   const mainSpec = activeSpecialization || mainSpecialization;
+  const activeInterviews = fullSpecializations?.find((spec) => spec.id === mainSpec.id);
 
   const scheduleClickHandler = (event) => {
     setCreateButton(event.currentTarget);
@@ -46,7 +45,7 @@ const Interviews = () => {
             {t('specialization.modal.interview.outcome')}
           </Typography>
           <Typography variant="body1">
-            {user.data.conductedInterviews}
+            {activeInterviews?.conductedInterviews}
           </Typography>
         </Box>
         <Box sx={styles.interviewItemIncome}>
@@ -55,7 +54,7 @@ const Interviews = () => {
             {t('specialization.modal.interview.income')}
           </Typography>
           <Typography variant="body1">
-            {user.data.completedInterviews}
+            {activeInterviews?.completedInterviews}
           </Typography>
         </Box>
       </Box>
