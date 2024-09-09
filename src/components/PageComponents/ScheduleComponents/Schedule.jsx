@@ -61,7 +61,7 @@ export default function Schedule() {
       //   Object.assign(el.style, styles.toolBarElements);
       // });
     }
-  }, []);
+  });
 
   if (isLoading || loading) {
     return <div>Loading...</div>;
