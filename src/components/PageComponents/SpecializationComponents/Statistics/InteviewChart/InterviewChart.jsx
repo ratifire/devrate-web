@@ -1,3 +1,4 @@
+/* eslint-disable */
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
@@ -15,6 +16,8 @@ import { styles } from './InterviewChart.style';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
+  const foo = useSelector((state) => state.auth.user.data);
+  // console.log(foo);
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
   const { data, isLoading, isError } = useGetInterviewSummariesStatisticQuery({ userId, from, to }, { skip: !userId });
   const { t } = useTranslation();

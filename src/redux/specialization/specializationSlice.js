@@ -6,7 +6,7 @@ const specializationSlice = createSlice({
   initialState: {
     activeSpecialization: null,
     mainSpecialization: null,
-    fullSpecializations: null,
+    fullSpecializations: [],
     //================================================================
     activeMainSpecialization: null,
     selectedSpecialization: null,
@@ -24,9 +24,8 @@ const specializationSlice = createSlice({
       state.activeSpecialization = payload
     },
     setMainSpecializations: (state, { payload }) => {
-      state.fullSpecializations = payload;
-
       if (Array.isArray(payload)) {
+        state.fullSpecializations = payload;
         state.mainSpecialization =  payload.find((spec) => spec.main);
         return
       }
