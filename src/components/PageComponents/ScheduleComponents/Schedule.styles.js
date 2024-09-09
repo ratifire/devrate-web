@@ -48,4 +48,8 @@ export const styles = {
     zIndex: 1000,
     pointerEvents: 'none',
   },
+  //needed to hide toolbar
+  // toolBarElements: {
+  //   display: 'none',
+  // },
 };
