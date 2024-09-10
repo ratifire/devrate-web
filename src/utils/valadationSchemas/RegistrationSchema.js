@@ -49,7 +49,7 @@ export const RegistrationSchema = Yup.object().shape({
     .min(8, 'modal.registration.password_short')
     .max(50, 'modal.registration.password_long')
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$&*])[A-Za-z\\d!@#$&*]{8,}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*])[A-Za-z\d!@#$&*]{8,}$/,
       'modal.registration.password_invalid',
     )
     .required('modal.registration.required'),
