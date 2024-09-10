@@ -138,7 +138,7 @@ const ScheduleInterviewModal = ({ role }) => {
   const weekTitle = useMemo(() => {
     return DateTime.now().toFormat('W') === date.toFormat('W')
       ? t('This week')
-      : `${weekDates[0].toFormat('d')} - ${weekDates.at(-1).toFormat('d')}`;
+      : `${weekDates[0].toFormat('MMMM, d')} - ${weekDates.at(-1).toFormat('MMMM, d')}`;
   }, [weekDates, date]);
 
   const renderTabs = () => (
