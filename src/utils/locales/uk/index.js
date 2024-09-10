@@ -229,6 +229,10 @@ export const uk = {
             about_me: 'Про мене',
             about_me_too_long: 'Поле "Про мене" дуже довге',
             required: "Це обов'язкове поле",
+            endYear_min: 'Дата завершення має бути пізнішою за дату початку',
+            endYear_max: 'Дата закінчення має бути не пізніше поточного року',
+            startYear_min: 'Дата має бути пізніше 01/01/1950',
+            startYear_max: 'Дата має бути не пізніше поточного року',
           },
           contact: {
             title: 'Контактна інформація',
@@ -276,6 +280,7 @@ export const uk = {
           responsibilities_placeholder: 'Бекенд-розробник',
           startDate: 'Дата початку',
           endDate: 'Дата закінчення',
+          currentDate: 'На даний момент працюю на цій посаді',
           required: "Це обов'язкове поле",
           startDateMinMessage: 'Стартова дата має бути пізніше 01/01/1950',
           startDateMaxMessage: 'Кінцева дата має бути не пізніше за поточку',
