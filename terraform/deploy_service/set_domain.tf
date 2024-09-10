@@ -1,5 +1,5 @@
 
-resource "aws_route53_record" "back_a_record" {
+resource "aws_route53_record" "front_a_record" {
   zone_id = data.aws_route53_zone.front_dns_zone.zone_id
   name    = "devrate.org"
   type    = "A"

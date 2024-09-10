@@ -5,10 +5,10 @@ resource "aws_ecs_task_definition" "task_definition_front" {
   container_definitions = jsonencode([
     {
       name              = "front-container",
-      image             = "${data.aws_caller_identity.current_user.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.back_repository_name}:${var.image_tag}",
+      image             = "${data.aws_caller_identity.current_user.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.front_repository_name}:${var.image_tag}",
       cpu               = 0,
-      memory            = 819,
-      memoryReservation = 819,
+      memory            = 1700,
+      memoryReservation = 1700,
       healthCheck : {
         "command" : ["CMD-SHELL", "curl -f ${data.aws_lb.lb.dns_name}:${var.front_port}/actuator/health || exit 1"],
         "interval" : 60,
@@ -21,7 +21,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
           containerPort = var.front_port,
           hostPort      = var.front_port,
           protocol      = "tcp",
-          appProtocol   = "https"
+          appProtocol   = "http"
         }
       ],
       essential = true,
@@ -54,7 +54,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
     "EC2"
   ]
   cpu    = "1024"
-  memory = "923"
+  memory = "1800"
   runtime_platform {
     operating_system_family = "LINUX"
     cpu_architecture        = "X86_64"

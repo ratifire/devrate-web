@@ -20,7 +20,7 @@ variable "front_repository_name" {
 
 variable "instance_type" {
   description = "AWS instance type"
-  default     = "t3.micro"
+  default     = "t3.small"
 }
 
 variable "image_tag" {
