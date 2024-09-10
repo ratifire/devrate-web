@@ -115,8 +115,6 @@ const ScheduleInterviewModal = ({ role }) => {
     formik.setFieldValue('dates', newDates);
   };
 
-
-
   const generateTimeButtons = (day) => {
     return range(0, 24).map((hour) => {
       const time = day.set({ hour });
@@ -209,18 +207,20 @@ const ScheduleInterviewModal = ({ role }) => {
             <Box sx={styles.checkboxes}>
               <Typography variant="body1">Apply to:</Typography>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox sx={styles.checkbox}/>}
                 label="Mon-Fri"
                 name="monFri"
                 onChange={formik.handleChange}
                 checked={formik.values.monFri}
+
               />
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox sx={styles.checkbox} />}
                 label="Sat-Sun"
                 name="satSun"
                 onChange={formik.handleChange}
                 checked={formik.values.satSun}
+
               />
             </Box>
           </Box>

@@ -20,7 +20,7 @@ export const styles = {
     },
 
     '&.active': {
-      borderColor: '#9C27B0',
+      borderColor: theme.palette.primary[200],
     }
   }),
   checkbox: {

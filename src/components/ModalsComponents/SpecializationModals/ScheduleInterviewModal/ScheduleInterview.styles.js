@@ -63,6 +63,7 @@ export const styles = {
     letterSpacing: '0.15ox',
     color: theme.palette.neutral[100],
     textTransform: 'none',
+
     '&.Mui-disabled': {
       fontWeight: 500,
       fontSize: '20px',
@@ -70,6 +71,11 @@ export const styles = {
       letterSpacing: '0.15px', // Fixed typo: changed '0.15ox' to '0.15px'
       color: theme.palette.neutral[500],
       textTransform: 'none',
+    },
+    '&.Mui-selected':{
+      color: theme.palette.primary[200],
+      borderBottom: '1px solid ' + theme.palette.primary[200],
+      zIndex: 10
     }
   }),
 
@@ -123,5 +129,11 @@ export const styles = {
   }),
   workExperienceBtn: {
     width: '228px',
-  }
+  },
+  checkbox: (theme) => ({
+    '&.Mui-checked': { // Target the checked state of the checkbox
+      color: theme.palette.primary[200], // Set the color for the checked state
+    },
+  }),
+
 };
