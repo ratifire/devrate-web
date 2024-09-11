@@ -1,40 +1,18 @@
-import React, { useEffect, useState } from 'react';
+const express = require('express');
+const app = express();
 
-const HealthCheck = () => {
-  const [status, setStatus] = useState('Checking...');
-  const [health, setHealth] = useState(false);
+// Define a health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).send('OK'); // Respond with a status code of 200 and 'OK'
+});
 
-  useEffect(() => {
-    // Функция для проверки здоровья API или сервиса
-    const checkHealth = async () => {
-      try {
-        // Здесь можно сделать запрос к бэкенду или другому API для проверки
-        const response = await fetch('/health'); // Пример запроса
-        if (response.ok) {
-          setHealth(true);
-          setStatus('healthy');
-        } else {
-          setHealth(false);
-          setStatus('unhealthy');
-        }
-      } catch (error) {
-        setHealth(false);
-        setStatus('unhealthy');
-      }
-    };
+// Define other endpoints if needed
+// app.get('/', (req, res) => {
+//   res.send('Hello World');
+// });
 
-    // Вызов проверки здоровья при монтировании компонента
-    checkHealth();
-  }, []);
-
-  return (
-    <div>
-      <h1>Health Check</h1>
-      <p>Status: {status}</p>
-      {/* AWS ALB проверяет только содержимое страницы, поэтому тут просто выводим текст */}
-      <p>{health ? 'healthy' : 'unhealthy'}</p>
-    </div>
-  );
-};
-
-export default HealthCheck;
+// Start the server on a specific port (e.g., 3000)
+const port = process.env.PORT || 3000; // You can use an environment variable for the port
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

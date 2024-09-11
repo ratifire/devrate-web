@@ -152,7 +152,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
     unhealthy_threshold = 3
     interval            = 180
     protocol            = "HTTP"
-    path                = "/api/health"
+    path                = "/health"
   }
 }
 
