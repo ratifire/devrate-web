@@ -9,6 +9,7 @@ import SpecializationPage from '../pages/SpecializationPage';
 import SchedulePage from '../pages/ShedulePage';
 import OtherProfilePage from '../pages/OtherProfile';
 import ToastLayout from '../layouts/ToastLayout/ToastLayout';
+import HealthCheck from '../pages/HealthCheck';  // Import the HealthCheck component
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: '/health',   // Add health check route
+        element: <HealthCheck />,  // Render the health check component
       },
       {
         element: <RequireAuth />,
