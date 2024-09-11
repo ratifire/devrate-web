@@ -35,5 +35,5 @@ variable "front_port" {
 
 variable "domain_name" {
   description = "Domain name"
-  default     = "server.devrate.org"
+  default     = "devrate.org"
 }
