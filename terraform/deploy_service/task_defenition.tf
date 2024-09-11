@@ -10,7 +10,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       memory            = 1700,
       memoryReservation = 1700,
       healthCheck : {
-        "command" : ["CMD-SHELL", "curl -f ${data.aws_lb.lb.dns_name}:${var.front_port}/actuator/health || exit 1"],
+        "command" : ["CMD-SHELL", "curl -f ${var.domain_name}/actuator/health || exit 1"],
         "interval" : 60,
         "timeout" : 5,
         "retries" : 4
@@ -53,7 +53,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
   requires_compatibilities = [
     "EC2"
   ]
-  cpu    = "1024"
+  cpu    = "1524"
   memory = "1800"
   runtime_platform {
     operating_system_family = "LINUX"
