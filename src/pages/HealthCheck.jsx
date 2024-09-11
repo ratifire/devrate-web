@@ -1,18 +1,19 @@
-const express = require('express');
-const app = express();
+import React, { useEffect, useState } from 'react';
 
-// Define a health check endpoint
-app.get('/api/health', (req, res) => {
-  res.status(200).send('OK'); // Respond with a status code of 200 and 'OK'
-});
+const HealthCheck = () => {
+  const [status, setStatus] = useState('Checking...');
 
-// Define other endpoints if needed
-// app.get('/', (req, res) => {
-//   res.send('Hello World');
-// });
+  useEffect(() => {
+    // You can add more checks here if you want to check external services (e.g., API health)
+    setStatus('App is Healthy');
+  }, []);
 
-// Start the server on a specific port (e.g., 3000)
-const port = process.env.PORT || 3000; // You can use an environment variable for the port
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+  return (
+    <div>
+      <h1>Health Check</h1>
+      <p>Status: {status}</p>
+    </div>
+  );
+};
+
+export default HealthCheck;
