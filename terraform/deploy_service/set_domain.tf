@@ -26,7 +26,7 @@ resource "aws_lb_listener" "https_ecs_listener" {
   certificate_arn   = aws_acm_certificate.devrate_cert.arn
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.http_ecs_tg.arn
+    target_group_arn = aws_lb_target_group.http_ecs_tg_front.arn
   }
 }
 
