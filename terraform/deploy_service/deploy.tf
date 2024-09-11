@@ -150,7 +150,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
   health_check {
     healthy_threshold   = 4
     unhealthy_threshold = 3
-    interval            = 180
+    interval            = 240
     protocol            = "HTTP"
     path                = "/health"
   }
