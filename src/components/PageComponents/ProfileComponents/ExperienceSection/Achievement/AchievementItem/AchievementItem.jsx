@@ -2,7 +2,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, IconButton, Link, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { ReactComponent as Star } from '../../../../../../assets/icons/star.svg';
+import { ReactComponent as Star } from '../../../../../../assets/icons/AchievementsPageIcons/star.svg';
 import AchievementEditModal from '../../../../../ModalsComponents/ProfileModals/AchievementModal/AchievementEditModal';
 import { useDeleteAchievementMutation } from '../../../../../../redux/services/achievementsApiSlice.js';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
