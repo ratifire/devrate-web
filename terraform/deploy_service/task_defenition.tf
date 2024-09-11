@@ -10,7 +10,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       memory            = 1800,
       memoryReservation = 1800,
       healthCheck : {
-        "command" : ["CMD-SHELL", "curl -f ${var.domain_name}/health || exit 1"],
+        "command" : ["CMD-SHELL", "curl -f https://${var.domain_name}/health || exit 1"],
         "interval" : 180,
         "timeout" : 5,
         "retries" : 4
@@ -20,8 +20,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
           name          = "${var.front_container_name}-${var.front_port}-tcp",
           containerPort = var.front_port,
           hostPort      = var.front_port,
-          protocol      = "tcp",
-          appProtocol   = "http"
+          protocol      = "tcp"
         }
       ],
       essential = true,
