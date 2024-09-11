@@ -7,8 +7,8 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       name              = "front-container",
       image             = "${data.aws_caller_identity.current_user.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.front_repository_name}:${var.image_tag}",
       cpu               = 0,
-      memory            = 1700,
-      memoryReservation = 1700,
+      memory            = 1800,
+      memoryReservation = 1800,
       healthCheck : {
         "command" : ["CMD-SHELL", "curl -f ${data.aws_lb.lb.dns_name}:${var.front_port}/health || exit 1"],
         "interval" : 60,
@@ -53,8 +53,8 @@ resource "aws_ecs_task_definition" "task_definition_front" {
   requires_compatibilities = [
     "EC2"
   ]
-  cpu    = "1524"
-  memory = "1800"
+  cpu    = "2048"
+  memory = "1900"
   runtime_platform {
     operating_system_family = "LINUX"
     cpu_architecture        = "X86_64"
