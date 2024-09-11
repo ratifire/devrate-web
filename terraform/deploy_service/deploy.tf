@@ -145,13 +145,13 @@ resource "aws_lb" "front_ecs_alb" {
 resource "aws_lb_target_group" "http_ecs_tg" {
   name     = "http-ecs-tg"
   port     = var.front_port
-  protocol = "TCP"
+  protocol = "HTTP"
   vpc_id   = data.aws_vpcs.all_vpcs.ids[0]
   health_check {
     healthy_threshold   = 4
     unhealthy_threshold = 3
     interval            = 180
-    protocol            = "TCP"
+    protocol            = "HTTP"
     path                = "/health"
   }
 }
@@ -160,6 +160,23 @@ resource "aws_lb_listener" "http_ecs_listener" {
   load_balancer_arn = aws_lb.front_ecs_alb.arn
   port              = var.front_port
   protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+    redirect {
+      host        = "devrate.org"
+      path        = "/#{path}"
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "http_ecs_listener_TLS" {
+  load_balancer_arn = aws_lb.front_ecs_alb.arn
+  port              = var.front_port
+  protocol          = "TLS"
 
   default_action {
     type = "redirect"
