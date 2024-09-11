@@ -32,7 +32,6 @@ export default function Schedule() {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
       const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
-      const th = calendarApi.el.querySelectorAll('.fc-theme-standard th');
       const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
       const timeGridHeadElements = calendarApi.el.querySelectorAll(
         '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
@@ -44,9 +43,6 @@ export default function Schedule() {
       timeGridSlotElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridTableData);
       });
-      th.forEach((el) => {
-        Object.assign(el.style, styles.timeGridTableData);
-      });
       timeGridTodayElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridTodayElements);
       });
@@ -56,6 +52,15 @@ export default function Schedule() {
       timeGridEventElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridEventElements);
       });
+
+      const styleElement = document.createElement('style');
+      styleElement.textContent = `
+        :root {
+          --fc-border-color: #303032 !important; /* Set the border color explicitly */
+        }
+      `;
+      document.head.appendChild(styleElement);
+
       //needed to hide toolbar
       // toolBarElements.forEach((el) => {
       //   Object.assign(el.style, styles.toolBarElements);
@@ -88,12 +93,20 @@ export default function Schedule() {
           allDaySlot={false}
           expandRows={true}
           editable={false}
-          selectable={true}
+          selectable={false}
           selectMirror={true}
           dayMaxEvents={true}
           weekends={true}
           events={transformedEvents}
-          // initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+          slotLabelFormat={[
+            {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+            },
+          ]}
+          slotMinTime={'07:00:00'}
+          slotMaxTime={'31:00:00'}
           // select={handleDateSelect}
           // eventContent={renderEventContent} // custom render function
           // eventClick={handleEventClick}

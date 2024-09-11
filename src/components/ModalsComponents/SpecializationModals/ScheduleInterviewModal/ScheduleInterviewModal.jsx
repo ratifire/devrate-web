@@ -1,132 +1,180 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Checkbox, FormControlLabel, IconButton, Tab, Tabs, Typography } from '@mui/material';
-import { styles } from './ScheduleInterview.styles';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
-import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
-import { CheckboxButton } from './CheckboxButton/CheckboxButton';
+import PropTypes from 'prop-types';
+
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import { selectCurrentUserId } from '../../../../redux/auth/authSlice';
 import {
   useCreateInterviewRequestMutation,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useLazyGetMainSpecializationQuery,
 } from '../../../../redux/specialization/specializationApiSlice';
-import PropTypes from 'prop-types';
 
+import { styles } from './ScheduleInterview.styles';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
+import { CheckboxButton } from './CheckboxButton/CheckboxButton';
 
-const ScheduleInterviewModal = (props) => {
-  const isOpen = useSelector((state) => state.modal.scheduleInterview);
-
+const ScheduleInterviewModal = ({ role }) => {
   const dispatch = useDispatch();
-  const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
+  const { t } = useTranslation();
+  const isOpen = useSelector((state) => state.modal.scheduleInterview);
+  const currentUserId = useSelector(selectCurrentUserId);
+
   const [date, setDate] = useState(DateTime.now().startOf('day'));
   const [weekDates, setWeekDates] = useState([]);
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
-  const currentUserId = useSelector(selectCurrentUserId);
+
   const [getMainSpecialization] = useLazyGetMainSpecializationQuery();
   const [getMainMastery] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
-
-  const { t } = useTranslation();
 
   useEffect(() => {
     setWeekDates(getDatesInWeek(date));
   }, [date]);
 
-  const weekTitle = useMemo(() => {
-    if (DateTime.now().toFormat('W') === date.toFormat('W')) {
-      return t('This week');
-    }
-
-    return `${weekDates[0].toFormat('d')} - ${weekDates.at(-1).toFormat('d')}`;
-  }, [weekDates, date]);
-
-  const tabChangeHandler = (_, newTab) => {
-    setTab(newTab);
-  };
-
-  const initialValues = {
-    dates: {},
-  };
-  const onSubmit = async (values, { resetForm }) => {
-    const mainSpec = await getMainSpecialization(currentUserId);
-    if (!mainSpec.data) {
-      return;
-    }
-
-    const mainMastery = await getMainMastery(mainSpec.data.id);
-
-    await createInterviewRequest({
-      userId: currentUserId,
-      masteryId: mainMastery.data.id,
-      role: props.role,
-      availableDates: Array.from(Object.keys(values.dates)),
-    });
-
-    resetForm();
-    handleClose();
-  };
-
   const formik = useFormik({
-    initialValues,
-    onSubmit,
+    initialValues: { dates: {}, monFri: false, satSun: false },
+    onSubmit: async (values, { resetForm }) => {
+      const mainSpec = await getMainSpecialization(currentUserId);
+      if (!mainSpec.data) return;
+
+      const mainMastery = await getMainMastery(mainSpec.data.id);
+
+      await createInterviewRequest({
+        userId: currentUserId,
+        masteryId: mainMastery.data.id,
+        role,
+        availableDates: Object.keys(values.dates),
+      });
+
+      resetForm();
+      handleClose();
+    },
   });
 
-  const timeClickHandler = (isoTime) => {
-    if (formik.values.dates[isoTime]) {
-      delete formik.values.dates[isoTime];
+  const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
 
-      return formik.setFieldValue(`dates`, {
-        ...formik.values.dates,
-      });
-    }
+  const handleTabChange = (_, newTab) => setTab(newTab);
 
-    formik.setFieldValue(`dates`, {
-      ...formik.values.dates,
-      [isoTime]: true,
+  const handleWeekNavigation = (direction) => {
+    setDate((prevDate) => {
+      const newDate = direction === 'prev' ? prevDate.minus({ weeks: 1 }) : prevDate.plus({ weeks: 1 });
+
+      if (newDate < DateTime.now().startOf('week')) {
+        return prevDate;
+      }
+
+      setTab(newDate.toFormat('EEE, d'));
+      return newDate;
     });
   };
 
-  const prevWeekClickHandler = () => {
-    setDate((prevVal) => {
-      const newDate = prevVal.minus({ weeks: 1 });
-      setTab(newDate.toFormat('EEE, d'));
+  const handleTimeClick = (isoTime) => {
+    const newDates = { ...formik.values.dates };
+    const hour = DateTime.fromISO(isoTime).hour;
 
-      return newDate;
-    })
-  }
 
-  const nextWeekClickHandler = () => {
-    setDate((prevVal) => {
-      const newDate = prevVal.plus({ weeks: 1 });
-      setTab(newDate.toFormat('EEE, d'));
+    if (formik.values.monFri) {
+      weekDates.forEach((weekDay) => {
+        if (!weekDay.isWeekend) {
+          const timeForWeekDay = weekDay.set({ hour }).toISO();
+          if (newDates[timeForWeekDay]) {
+            delete newDates[timeForWeekDay];
+          } else {
+            newDates[timeForWeekDay] = true;
+          }
+        }
+      });
+    } else if (formik.values.satSun) {
+      weekDates.forEach((weekDay) => {
+        if (weekDay.isWeekend) {
+          const timeForWeekDay = weekDay.set({ hour }).toISO();
+          if (newDates[timeForWeekDay]) {
+            delete newDates[timeForWeekDay];
+          } else {
+            newDates[timeForWeekDay] = true;
+          }
+        }
+      });
+    } else {
+      if (newDates[isoTime]) {
+        delete newDates[isoTime];
+      } else {
+        newDates[isoTime] = true;
+      }
+    }
 
-      return newDate;
-    })
-  }
+    formik.setFieldValue('dates', newDates);
+  };
 
   const generateTimeButtons = (day) => {
     return range(0, 24).map((hour) => {
-
       const time = day.set({ hour });
       const timeIso = time.toISO();
+      const isPastDate = DateTime.now() > time;
 
       return (
         <CheckboxButton
-          name="dates"
           key={timeIso}
+          name="dates"
           value={timeIso}
           isChecked={Boolean(formik.values.dates[timeIso])}
           label={time.toFormat('HH:mm')}
-          onChange={timeClickHandler}
+          onChange={() => handleTimeClick(timeIso)}
+          disabled={isPastDate}
         />
+      );
+    });
+  };
+
+  const weekTitle = useMemo(() => {
+    return DateTime.now().toFormat('W') === date.toFormat('W')
+      ? t('This week')
+      : `${weekDates[0].toFormat('MMMM, d')} - ${weekDates.at(-1).toFormat('MMMM, d')}`;
+  }, [weekDates, date]);
+
+  const renderTabs = () => (
+    <Tabs sx={styles.tabsRow} value={tab} onChange={handleTabChange}>
+      {weekDates.map((day) => {
+        const label = day.toFormat('EEE, d');
+        const isPastDate = DateTime.now().startOf('day') > day;
+
+        const disableWeekends = formik.values.monFri && day.isWeekend;
+        const disableWeekdays = formik.values.satSun && !day.isWeekend;
+
+        return (
+          <Tab
+            disabled={isPastDate || disableWeekends || disableWeekdays}
+            key={label}
+            label={label}
+            value={label}
+            sx={styles.tab}
+          />
+        );
+      })}
+    </Tabs>
+  );
+
+  const renderTimeSlots = () => {
+    return weekDates.map((day) => {
+      if (tab !== day.toFormat('EEE, d')) return null;
+
+      return (
+        <React.Fragment key={`tab-panel-${day}`}>
+          <Box sx={styles.texts}>
+            <Typography variant="subtitle2">Choose a comfort time</Typography>
+            <Typography variant="body1">{weekDates[0]?.toFormat('z (ZZZZ)')}</Typography>
+          </Box>
+          <Box sx={styles.timeGrid}>{generateTimeButtons(day)}</Box>
+        </React.Fragment>
       );
     });
   };
@@ -136,49 +184,19 @@ const ScheduleInterviewModal = (props) => {
       <Typography variant="subtitle1" sx={styles.title}>
         {t('specialization.modal.scheduleModal.scheduleInterview')}
       </Typography>
-
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
-
           <Box sx={styles.weekHeading}>
-            <IconButton onClick={prevWeekClickHandler}>
+            <IconButton onClick={() => handleWeekNavigation('prev')}>
               <ChevronLeft />
             </IconButton>
-
             <Typography variant="subtitle2">{weekTitle}</Typography>
-
-            <IconButton onClick={nextWeekClickHandler}>
+            <IconButton onClick={() => handleWeekNavigation('next')}>
               <ChevronRight />
             </IconButton>
           </Box>
-
-          <Tabs sx={styles.tabsRow} value={tab} onChange={tabChangeHandler}>
-            {weekDates.map(day => {
-              const tabLabel = day.toFormat('EEE, d');
-              return (
-                <Tab label={tabLabel} key={`tab-${tabLabel}`} value={tabLabel} sx={styles.tab} />
-              );
-            })}
-          </Tabs>
-
-          {weekDates.map(day => {
-            if (tab !== day.toFormat('EEE, d')) {
-              return null;
-            }
-
-            return (
-              <>
-                <Box sx={styles.texts}>
-                  <Typography variant="subtitle2">Choose a comfort time</Typography>
-                  <Typography variant="body1">{weekDates?.[0]?.toFormat('z (ZZZZ)')}</Typography>
-                </Box>
-                <Box sx={styles.timeGrid} key={`tab-panel-${day}`}>
-                  {generateTimeButtons(day)}
-                </Box>
-              </>
-            );
-          })}
-
+          {renderTabs()}
+          {renderTimeSlots()}
           <Box sx={styles.action}>
             <ButtonDef
               variant="contained"
@@ -186,28 +204,30 @@ const ScheduleInterviewModal = (props) => {
               label={t('specialization.modal.scheduleModal.schedule')}
               correctStyle={styles.workExperienceBtn}
             />
-
             <Box sx={styles.checkboxes}>
               <Typography variant="body1">Apply to:</Typography>
               <FormControlLabel
-                value="end"
-                control={<Checkbox  />}
-                label={'Mon-Fri'}
-                labelPlacement="end"
+                control={<Checkbox sx={styles.checkbox}/>}
+                label="Mon-Fri"
+                name="monFri"
+                onChange={formik.handleChange}
+                checked={formik.values.monFri}
+
               />
               <FormControlLabel
-                value="end"
-                control={<Checkbox />}
-                label={'Sat-Sun'}
-                labelPlacement="end"
-              />
+                control={<Checkbox sx={styles.checkbox} />}
+                label="Sat-Sun"
+                name="satSun"
+                onChange={formik.handleChange}
+                checked={formik.values.satSun}
 
+              />
             </Box>
           </Box>
-
         </Box>
       </form>
-    </ModalLayoutProfile>);
+    </ModalLayoutProfile>
+  );
 };
 
 ScheduleInterviewModal.propTypes = {
