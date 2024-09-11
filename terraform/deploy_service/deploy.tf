@@ -145,13 +145,13 @@ resource "aws_lb" "front_ecs_alb" {
 resource "aws_lb_target_group" "http_ecs_tg" {
   name     = "http-ecs-tg"
   port     = var.front_port
-  protocol = "HTTP"
+  protocol = "TCP"
   vpc_id   = data.aws_vpcs.all_vpcs.ids[0]
   health_check {
     healthy_threshold   = 4
     unhealthy_threshold = 3
     interval            = 180
-    protocol            = "HTTP"
+    protocol            = "TCP"
     path                = "/health"
   }
 }
