@@ -13,7 +13,6 @@ resource "aws_default_vpc" "default_backend_vpc" {}
 
 resource "aws_s3_bucket" "logs_prod" {
   bucket = "logs-prod"
-  region = "eu-north-1"
   tags = {
     Environment = "prod"
   }
