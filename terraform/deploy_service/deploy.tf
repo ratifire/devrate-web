@@ -143,7 +143,7 @@ resource "aws_lb" "front_ecs_alb" {
     bucket  = "logs-front-1209"
     prefix  = "alb/alb-prod"
   }
-  depends_on = [aws_s3_bucket.logs_prod]
+  depends_on = [aws_s3_bucket.lb-logs]
 }
 
 

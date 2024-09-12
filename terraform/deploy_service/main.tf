@@ -11,39 +11,43 @@ provider "aws" {}
 
 resource "aws_default_vpc" "default_backend_vpc" {}
 
-resource "aws_s3_bucket" "logs_prod" {
-  bucket = "logs-front-1209"
-  tags = {
-    Environment = "prod"
+
+resource "aws_s3_bucket" "lb-logs" {
+  bucket = "logs-front-1209"}
+
+resource "aws_s3_bucket_acl" "lb-logs-acl" {
+  bucket = aws_s3_bucket.lb-logs.id
+  acl    = "private"
+}
+
+data "aws_iam_policy_document" "allow-lb" {
+  statement {
+    principals {
+      type        = "Service"
+      identifiers = ["logdelivery.elb.amazonaws.com"]
+    }
+
+    actions = [
+      "s3:PutObject"
+    ]
+
+    resources = [
+      "${aws_s3_bucket.lb-logs.arn}/*"
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "s3:x-amz-acl"
+
+      values = [
+        "bucket-owner-full-control"
+      ]
+    }
   }
 }
 
-resource "aws_s3_bucket_policy" "logs_prod_policy" {
-  bucket = aws_s3_bucket.logs_prod.id
-
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::${data.aws_caller_identity.current_user.account_id}:root"
-      },
-      "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::logs-front-1209/alb/alb-prod/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
-    },
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::${data.aws_caller_identity.current_user.account_id}:root"
-      },
-      "Action": "s3:PutObjectAcl",
-      "Resource": "arn:aws:s3:::logs-front-1209/alb/alb-prod/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
-    }
-  ]
+resource "aws_s3_bucket_policy" "allow-lb" {
+  bucket = aws_s3_bucket.lb-logs.id
+  policy = data.aws_iam_policy_document.allow-lb.json
 }
-POLICY
-}
-
 
