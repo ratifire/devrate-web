@@ -13,7 +13,8 @@ resource "aws_default_vpc" "default_backend_vpc" {}
 
 
 resource "aws_s3_bucket" "lb-logs" {
-  bucket = "logs-front-1209"}
+  bucket = "logs-front-1209"
+}
 
 resource "aws_s3_bucket_acl" "lb-logs-acl" {
   bucket = aws_s3_bucket.lb-logs.id
