@@ -28,10 +28,18 @@ resource "aws_s3_bucket_policy" "logs_prod_policy" {
     {
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::${data.aws_caller_identity.current_user.account_id}:root"
+        "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
       },
       "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::logs-prod/alb/alb-prod/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
+      "Resource": "arn:aws:s3:::logs-front-1209/alb/alb-prod/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
+      },
+      "Action": "s3:PutObjectAcl",
+      "Resource": "arn:aws:s3:::logs-front-1209/alb/alb-prod/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
     }
   ]
 }
