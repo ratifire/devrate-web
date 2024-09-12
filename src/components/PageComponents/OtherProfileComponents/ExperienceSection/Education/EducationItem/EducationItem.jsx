@@ -7,7 +7,7 @@ import styles from './EducationItem.style';
 
 const LENGTH_TO_COLLAPSE = 200;
 
-const EducationItem = ({ type, name, description, startYear, endYear }) => {
+const EducationItem = ({ type, name, description, startYear, endYear, icon: IconComponent }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const { t } = useTranslation();
   const excerpt = useMemo(() => description.slice(0, LENGTH_TO_COLLAPSE), [description]);
@@ -16,6 +16,8 @@ const EducationItem = ({ type, name, description, startYear, endYear }) => {
   return (
     <Box sx={styles.educationItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
+        {IconComponent && console.log(IconComponent.icon)}
+        {IconComponent && <IconComponent width={100} height={100} />}
         <Box sx={styles.logoTitleContainer}>
           <EducationalCourses />
           <Box sx={{ marginLeft: '11px' }}>
@@ -58,6 +60,7 @@ EducationItem.propTypes = {
     PropTypes.number.isRequired,
     PropTypes.string.isRequired
   ]).isRequired,
+  icon: PropTypes.elementType,
 };
 
 export default EducationItem;

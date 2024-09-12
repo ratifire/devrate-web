@@ -22,13 +22,11 @@ const icons = {
 
 const Achievement = ({ id }) => {
   const dispatch = useDispatch();
-  const { data: achievementsData } = useFetchAchievementsQuery(id, { skip: !id });
+  const { data: achievementsData } = useFetchAchievementsQuery(id, );
   const iconsMap = useSelector((state) => state.icons);
   const iconValues = useMemo(() => Object.keys(icons), []);
   useEffect(() => {
     if (achievementsData) {
-      console.log('Achievements data:', achievementsData);
-
       const existingIcons = iconsMap;
       const achievementsWithoutIcons = achievementsData.filter((achievement) => {return !existingIcons[achievement.id];});
 
