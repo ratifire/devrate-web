@@ -81,7 +81,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
     lifecycle_transition = "autoscaling:EC2_INSTANCE_TERMINATING"
     name                 = "ecs-managed-draining-termination-hook"
     default_result       = "CONTINUE"
-    heartbeat_timeout    = 60
+    heartbeat_timeout    = 120
   }
   dynamic "tag" {
     for_each = {
@@ -151,7 +151,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
     unhealthy_threshold = 3
     interval            = 180
     protocol            = "HTTP"
-    path                = "/health"
+    path                = "/"
     matcher             = "200-305"
   }
 }
