@@ -12,7 +12,7 @@ provider "aws" {}
 resource "aws_default_vpc" "default_backend_vpc" {}
 
 resource "aws_s3_bucket" "logs_prod" {
-  bucket = "logs-prod"
+  bucket = "logs-front-1209"
   tags = {
     Environment = "prod"
   }
