@@ -141,7 +141,7 @@ resource "aws_lb" "front_ecs_alb" {
   access_logs {
     enabled = true
     bucket  = "devrate-bucket-front-1"
-    prefix  = "logs/"
+    prefix  = "logs"
   }
 }
 
