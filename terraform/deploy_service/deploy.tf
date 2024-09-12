@@ -150,25 +150,9 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
   health_check {
     healthy_threshold   = 4
     unhealthy_threshold = 3
-    interval            = 240
+    interval            = 180
     protocol            = "HTTP"
     path                = "/health"
   }
 }
 
-resource "aws_lb_listener" "http_ecs_listener_front" {
-  load_balancer_arn = aws_lb.front_ecs_alb.arn
-  port              = var.front_port
-  protocol          = "HTTP"
-
-  default_action {
-    type = "redirect"
-    redirect {
-      host        = var.domain_name
-      path        = "/#{path}"
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
