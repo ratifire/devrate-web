@@ -28,10 +28,10 @@ resource "aws_s3_bucket_policy" "logs_prod_policy" {
     {
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::582318560864:root"
+        "AWS": "arn:aws:iam::${data.aws_caller_identity.current_user.account_id}:root"
       },
       "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::logs-prod/alb/alb-prod/AWSLogs/<account-id>/*"
+      "Resource": "arn:aws:s3:::logs-prod/alb/alb-prod/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
     }
   ]
 }
