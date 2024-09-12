@@ -14,18 +14,25 @@ Settings.defaultWeekSettings = {
   weekend: [6, 7], // Set weekend days
 };
 
-export default function Sidebar({ currentEvents }) {
+export default function Sidebar({ currentEvents, selectedDate,handleDateChange }) {
   console.log('Current events', currentEvents);
-  return (
+    
+  
+    
+    
+    return (
     <Box sx={styles.container}>
       <Box className='demo-app-sidebar-section'>
         <LocalizationProvider dateAdapter={AdapterLuxon}>
-          <DateCalendar />
+          <DateCalendar
+              value={selectedDate}
+              onChange={handleDateChange}
+          />
         </LocalizationProvider>
       </Box>
       <Box sx={styles.scrollContainer}>
         <Box sx={styles.sidebarSection} className='demo-app-sidebar-section'>
-          {currentEvents.map((event) => (
+          {currentEvents&&currentEvents.map((event) => (
             <SidebarEvent key={event.id} event={event} />
           ))}
         </Box>
@@ -36,4 +43,6 @@ export default function Sidebar({ currentEvents }) {
 
 Sidebar.propTypes = {
   currentEvents: PropTypes.array,
+    selectedDate:  PropTypes.Date,
+  handleDateChange:     PropTypes.func,
 };
