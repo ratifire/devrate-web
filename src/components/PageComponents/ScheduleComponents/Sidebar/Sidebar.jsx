@@ -2,11 +2,9 @@ import { styles } from './Sidebar.styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SidebarEvent from '../SidebarEvent/SidebarEvent';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateCalendar } from '@mui/x-date-pickers';
 import { Settings } from 'luxon';
-import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { Box } from '@mui/material';
+import SmallCalendar from './SmallCalendar';
 
 Settings.defaultWeekSettings = {
   firstDay: 1, // Set the first day of the week
@@ -14,27 +12,15 @@ Settings.defaultWeekSettings = {
   weekend: [6, 7], // Set weekend days
 };
 
-export default function Sidebar({ currentEvents, selectedDate,handleDateChange }) {
-  console.log('Current events', currentEvents);
-    
-  
-    
-    
-    return (
+export default function Sidebar({ currentEvents, selectedDate, handleDateChange }) {
+  return (
     <Box sx={styles.container}>
-      <Box className='demo-app-sidebar-section'>
-        <LocalizationProvider dateAdapter={AdapterLuxon}>
-          <DateCalendar
-              value={selectedDate}
-              onChange={handleDateChange}
-          />
-        </LocalizationProvider>
+      <Box>
+        <SmallCalendar selectedDate={selectedDate} handleDateChange={handleDateChange} />
       </Box>
       <Box sx={styles.scrollContainer}>
-        <Box sx={styles.sidebarSection} className='demo-app-sidebar-section'>
-          {currentEvents&&currentEvents.map((event) => (
-            <SidebarEvent key={event.id} event={event} />
-          ))}
+        <Box sx={styles.sidebarSection}>
+          {currentEvents && currentEvents.map((event) => <SidebarEvent key={event.id} event={event} />)}
         </Box>
       </Box>
     </Box>
@@ -43,6 +29,6 @@ export default function Sidebar({ currentEvents, selectedDate,handleDateChange }
 
 Sidebar.propTypes = {
   currentEvents: PropTypes.array,
-    selectedDate:  PropTypes.Date,
-  handleDateChange:     PropTypes.func,
+  selectedDate: PropTypes.object,
+  handleDateChange: PropTypes.func,
 };
