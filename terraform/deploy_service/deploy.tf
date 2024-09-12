@@ -140,10 +140,9 @@ resource "aws_lb" "front_ecs_alb" {
   subnets            = data.aws_subnets.default_subnets.ids
   access_logs {
     enabled = true
-    bucket  = "logs-front-12092024"
-    prefix  = "alb/alb-prod"
+    bucket  = "logs-front-1209"
   }
-  depends_on = [aws_s3_bucket.lb-logs]
+  depends_on = [aws_s3_bucket.logs_prod]
 }
 
 
