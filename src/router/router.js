@@ -21,10 +21,6 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/health',   // Add health check route
-        element: <HealthCheck />,  // Render the health check component
-      },
-      {
         element: <RequireAuth />,
         children: [
           {
