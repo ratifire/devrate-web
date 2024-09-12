@@ -152,7 +152,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
     interval            = 180
     protocol            = "HTTP"
     path                = "/health"
-    matcher = "200-304"
+    matcher             = "200-304"
   }
 }
 
