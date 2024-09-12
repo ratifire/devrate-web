@@ -151,8 +151,8 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
     unhealthy_threshold = 3
     interval            = 180
     protocol            = "HTTP"
-    path                = "/"
-    matcher             = "200-305"
+    path                = "/index.html"
+    matcher             = "200,304"
   }
 }
 
