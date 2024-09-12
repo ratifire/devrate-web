@@ -8,7 +8,6 @@ resource "aws_lb" "front_ecs_alb" {
     enabled = true
     bucket  = "logs-front-1209"
   }
-  depends_on = [aws_s3_bucket.logs_prod]
 }
 
 

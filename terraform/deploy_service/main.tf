@@ -11,15 +11,8 @@ provider "aws" {}
 
 resource "aws_default_vpc" "default_backend_vpc" {}
 
-resource "aws_s3_bucket" "logs_prod" {
-  bucket = "logs-front-1209"
-  tags = {
-    Environment = "prod"
-  }
-}
-
 resource "aws_s3_bucket_policy" "logs_prod_policy" {
-  bucket = aws_s3_bucket.logs_prod.id
+  bucket = data.aws_s3_bucket.logs-front-1209.id
 
   policy = <<POLICY
 {
