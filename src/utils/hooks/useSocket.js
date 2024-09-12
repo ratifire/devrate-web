@@ -5,19 +5,10 @@ export function useSocket(url, onOpen) {
 
   useEffect(() => {
     const ws = new WebSocket(`${process.env.REACT_APP_WS_URL}${url}`);
-
-    const handleOpen = (event) => {
+    ws.addEventListener('open', event => {
       setSocket(event.target);
       onOpen(event);
-      console.log('Соединение установлено'); // Optional logging for debugging
-    };
-
-    const handleError = (error) => {
-      console.error('Ошибка соединения:', error); // Log connection errors
-    };
-
-    ws.addEventListener('open', handleOpen);
-    ws.addEventListener('error', handleError);
+    });
 
     return () => {
       socket?.close();

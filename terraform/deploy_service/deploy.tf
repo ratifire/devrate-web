@@ -138,7 +138,10 @@ resource "aws_lb" "front_ecs_alb" {
   load_balancer_type = "application"
   security_groups    = [data.aws_security_group.vpc_frontend_security_group.id]
   subnets            = data.aws_subnets.default_subnets.ids
-
+  access_logs {
+    enabled = true
+    bucket  = "devrate-bucket-front-1/logs"
+  }
 }
 
 
