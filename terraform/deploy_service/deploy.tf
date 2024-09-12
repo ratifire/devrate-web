@@ -140,8 +140,7 @@ resource "aws_lb" "front_ecs_alb" {
   subnets            = data.aws_subnets.default_subnets.ids
   access_logs {
     enabled = true
-    bucket  = "devrate-bucket-front-1"
-    prefix  = "logs"
+    bucket  = "front-logs-1209"
   }
 }
 
