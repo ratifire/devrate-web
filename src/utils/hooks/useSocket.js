@@ -1,31 +1,24 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
-export function useSocket(url, onOpen, port = 443) {
+export function useSocket(url, onOpen) {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    // Формируем URL с принудительным портом и выводим в лог
-    const wsUrl = `${process.env.REACT_APP_WS_URL.replace(/(:\d+)?$/, '')}:${port}${url}`;
-    console.log('WebSocket URL:', wsUrl); // Логируем конечный URL WebSocket
-
+    const wsUrl = `${process.env.REACT_APP_WS_URL}${url}`;
+    console.log('Connecting to WebSocket:', wsUrl);
     const ws = new WebSocket(wsUrl);
-
     ws.addEventListener('open', event => {
-      console.log('WebSocket открыт:', event); // Логируем событие открытия
       setSocket(event.target);
       onOpen(event);
     });
 
     ws.addEventListener('error', (error) => {
-      console.error('Ошибка WebSocket:', error); // Логируем ошибки соединения
+      console.error('WebSocket error:', error); // Логирование ошибки WebSocket
     });
 
     return () => {
-      console.log('Закрытие WebSocket:', wsUrl); // Логируем закрытие соединения
       socket?.close();
       setSocket(null);
     }
-  }, [url, port]);
-
-  return socket;
+  }, [url]);
 }
