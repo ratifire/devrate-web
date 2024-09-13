@@ -13,7 +13,6 @@ const HardSkills = () => {
     dispatch(openModal({ modalName: 'openSkillsModal', activeMastery }));
   };
 
-
   const averageMark = skills.length > 0 ?
     (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1)
     : '0';
