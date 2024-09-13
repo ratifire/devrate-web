@@ -18,14 +18,16 @@ const transformEvents = (events) => {
   }));
 };
 
-export default function Schedule() {
+const Schedule = () => {
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
 
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
-  let fromTime = '2024-07-02T06:00:00-03:00';
+  const [fromTime, setFromTime] = useState('');
+  console.log('fromTime', typeof fromTime);
+  const [isReady, setIsReady] = useState(false);
   const { id: userId } = useSelector((state) => state.auth.user.data);
 
   const getWeekStartAndEnd = (year, weekNumber) => {
@@ -52,11 +54,16 @@ export default function Schedule() {
       const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
       setFrom(startOfWeek);
       setTo(endOfWeek);
+      setFromTime(selectedDate.setZone('UTC+3').toISO());
+      setIsReady(true);
     }
   }, [selectedWeek]);
 
-  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to });
-  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
+  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
+  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
+    { userId, fromTime },
+    { skip: !isReady }
+  );
 
   useEffect(() => {
     if (calendarRef.current) {
@@ -92,12 +99,9 @@ export default function Schedule() {
   });
 
   const handleDateChange = (newDate) => {
-    console.log(newDate);
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
-    console.log('Selected date:', newDate.toString());
-    console.log('Week number:', weekNumber);
   };
 
   if (isLoading || loading) {
@@ -152,4 +156,6 @@ export default function Schedule() {
       </Box>
     </Box>
   );
-}
+};
+
+export default Schedule;
