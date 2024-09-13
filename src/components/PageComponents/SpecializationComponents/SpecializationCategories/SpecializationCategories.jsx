@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React, { useEffect, useState } from 'react';
 import { styles } from './SpecializationCategories.styles';
 import { Box, IconButton, Typography, CircularProgress } from '@mui/material';
@@ -29,7 +27,7 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const {activeSpecialization, mainSpecialization, fullSpecializations} = useSelector((state) => state.specialization);
+  const {activeSpecialization} = useSelector((state) => state.specialization);
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);

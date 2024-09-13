@@ -5,30 +5,27 @@ import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Box, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
-import { styles } from './SkillsModal.styles';
+import { styles } from './HardSkillsModal.styles';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
-import useSkillsData from './useSkillsData';
+import useHardSkillsData from './useHardSkillsData';
 import {
   useAddSkillToMasteryMutation,
   useDeleteSkillByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { SkillChip } from '../../../PageComponents/SpecializationComponents/SkillChip/SkillChip';
-
-const MAX_SKILLS = 20;
+import { MAX_SKILLS } from '../constants';
 
 const MemoizedButtonDef = React.memo(ButtonDef);
 
-const SkillsModal = () => {
+const HardSkillsModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
-  const { id: userId } = useSelector((state) => state.auth.user.data);
-  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
 
   const handleClose = useCallback(() => dispatch(closeModal({ modalName: 'openSkillsModal' })), [dispatch]);
 
-  const { skills: fetchedSkills, isLoading, isError, masteryId } = useSkillsData(userId, activeMastery);
+  const { skills: fetchedSkills, isLoading, isError, masteryId } = useHardSkillsData();
 
   const [selectedSkill, setSelectedSkill] = useState('');
   const [showError, setShowError] = useState(false);
@@ -165,4 +162,4 @@ const SkillsModal = () => {
   );
 };
 
-export default SkillsModal;
+export default HardSkillsModal;

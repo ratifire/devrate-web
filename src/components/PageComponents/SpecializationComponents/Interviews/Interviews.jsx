@@ -15,6 +15,7 @@ const Interviews = () => {
   const open = Boolean(createButton);
   const { activeSpecialization, mainSpecialization, fullSpecializations } = useSelector((state) => state.specialization);
   const mainSpec = activeSpecialization || mainSpecialization;
+
   const activeInterviews = fullSpecializations?.find((spec) => spec.id === mainSpec.id);
 
   const scheduleClickHandler = (event) => {

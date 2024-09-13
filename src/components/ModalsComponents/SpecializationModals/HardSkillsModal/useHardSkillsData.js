@@ -5,7 +5,10 @@ import {
 } from '../../../../redux/specialization/specializationApiSlice';
 import { useSelector } from 'react-redux';
 
-const useSkillsData = (userId, activeMastery) => {
+const useHardSkillsData = () => {
+  const { id: userId } = useSelector((state) => state.auth.user.data);
+  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
+
   const [skillsData, setSkillsData] = useState({
     masteries: [],
     skills: [],
@@ -51,4 +54,4 @@ const useSkillsData = (userId, activeMastery) => {
   return skillsData;
 };
 
-export default useSkillsData;
+export default useHardSkillsData;

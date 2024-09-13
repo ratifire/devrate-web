@@ -2,13 +2,12 @@ import { useSelector } from 'react-redux';
 import {
   useGetMasteriesBySpecializationIdQuery,
 } from '../../../redux/specialization/specializationApiSlice';
+import { useGetSpecializationId } from './index';
 
 const useGetMastery = () => {
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
   const { id: userId } = useSelector((state) => state.auth.user.data);
-  const activeSpecialization = useSelector((state) => state.specialization.activeSpecialization);
-  const mainSpecialization = useSelector((state) => state.specialization.mainSpecialization);
-  const specializationId =  activeSpecialization?.id || mainSpecialization?.id;
+  const specializationId =  useGetSpecializationId();
 
   const {
     data: masteries,

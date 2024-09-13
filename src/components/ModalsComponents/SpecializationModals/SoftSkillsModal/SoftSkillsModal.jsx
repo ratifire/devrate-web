@@ -1,10 +1,9 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
 import { styles } from './SoftSkillsModal.styles';
 import { useTranslation } from 'react-i18next';
 import {
@@ -33,8 +32,7 @@ const SoftSkillsModal = () => {
     deleteSkill(softSkillId);
   }
 
-  // Todo: Добавить обработку ошибок и загрузки
-  const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
+  const { isLoading: isLoading, isError: isError, masteryId } = useGetMastery();
 
   // Todo: Удалить юзЭффект
   useEffect(() => {
@@ -60,6 +58,14 @@ const SoftSkillsModal = () => {
         type: 'SOFT_SKILL',
       }))
     });
+  }
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (isError) {
+    return <Typography variant='h6'>{t('specialisation.skillsModal.error')}</Typography>;
   }
 
   return (
