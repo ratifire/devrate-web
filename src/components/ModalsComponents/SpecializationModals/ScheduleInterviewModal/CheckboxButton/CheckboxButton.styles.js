@@ -40,7 +40,7 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     border: '1px solid ' + theme.palette.neutral[700],
-    borderRadius: '4px',
+    borderRadius: 1,
     position: 'relative',
     margin: 0,
     transition: 'border-color .2s easy-in-out',
