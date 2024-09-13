@@ -26,7 +26,6 @@ const Schedule = () => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [fromTime, setFromTime] = useState('');
-  console.log('fromTime', typeof fromTime);
   const [isReady, setIsReady] = useState(false);
   const { id: userId } = useSelector((state) => state.auth.user.data);
 
