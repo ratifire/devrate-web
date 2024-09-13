@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { SpecializationSkillsItem } from './SpecializationSkillsItem';
 
 const SpecializationSkills = ({ isLoading, isError, skills, averageMark, openModal, errorTitle, title, subTitle }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   if (isLoading) {
     return <CircularProgress />;
