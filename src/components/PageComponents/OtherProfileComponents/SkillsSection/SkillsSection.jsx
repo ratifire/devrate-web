@@ -26,9 +26,9 @@ const SkillsSection = ({ id }) => {
           value={hardSkillMark / 2}
           precision={0.5}
           readOnly
-          sx={styles.skillsRating}
+          sx={styles.skillsRatingValue}
         />
-        <Typography variant="subtitle2" sx={styles.skillsRating}>
+        <Typography variant="subtitle2">
           {hardSkillMark}/10
         </Typography>
       </Box>
@@ -41,9 +41,9 @@ const SkillsSection = ({ id }) => {
           value={softSkillMark / 2}
           precision={0.5}
           readOnly
-          sx={styles.skillsRating}
+          sx={styles.skillsRatingValue}
         />
-        <Typography variant="subtitle2" sx={styles.skillsRating}>
+        <Typography variant="subtitle2">
           {softSkillMark}/10
         </Typography>
       </Box>
