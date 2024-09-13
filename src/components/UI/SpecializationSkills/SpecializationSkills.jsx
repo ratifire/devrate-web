@@ -50,7 +50,7 @@ SpecializationSkills.propTypes = {
       type: PropTypes.string.isRequired,
     })
   ).isRequired,
-  averageMark: PropTypes.number.isRequired,
+  averageMark: PropTypes.string.isRequired,
   openModal: PropTypes.func.isRequired,
   errorTitle: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
