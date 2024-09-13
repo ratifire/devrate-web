@@ -11,15 +11,8 @@ provider "aws" {}
 
 resource "aws_default_vpc" "default_backend_vpc" {}
 
-resource "aws_s3_bucket" "logs_prod" {
-  bucket = "logs-front-1209"
-  tags = {
-    Environment = "prod"
-  }
-}
-
 resource "aws_s3_bucket_policy" "logs_prod_policy" {
-  bucket = aws_s3_bucket.logs_prod.id
+  bucket = data.aws_s3_bucket.logs-front-1209.id
 
   policy = <<POLICY
 {
@@ -28,10 +21,10 @@ resource "aws_s3_bucket_policy" "logs_prod_policy" {
     {
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::${data.aws_caller_identity.current_user.account_id}:root"
+        "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
       },
       "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::logs-prod/alb/alb-prod/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
+      "Resource": "arn:aws:s3:::logs-front-1209/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
     }
   ]
 }

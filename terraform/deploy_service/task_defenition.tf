@@ -10,7 +10,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       memory            = 1800,
       memoryReservation = 1800,
       healthCheck : {
-        "command" : ["CMD-SHELL", "curl -f ${data.aws_lb.lb.dns_name}:${var.front_port}/health || exit 1"],
+        "command" : ["CMD-SHELL", "curl -f ${data.aws_lb.lb.dns_name}:${var.front_port}/ || exit 1"],
         "interval" : 120,
         "timeout" : 10,
         "retries" : 3
