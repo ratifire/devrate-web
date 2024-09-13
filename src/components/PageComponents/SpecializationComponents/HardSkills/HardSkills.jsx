@@ -18,15 +18,15 @@ const HardSkills = () => {
   if (isLoading) {
     return <CircularProgress />;
   }
-  
+  console.log(skills);
   if (isError) {
     return <Typography variant="h6">{t('specialisation.hardSkills.error')}</Typography>;
   }
-  
+
   const averageMark = skills.length > 0 ?
     (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1)
     : '0';
-  
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.title}>
