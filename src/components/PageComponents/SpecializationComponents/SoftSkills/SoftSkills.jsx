@@ -35,10 +35,9 @@ const SoftSkills = () => {
     return <Typography variant='h6'>{t('specialisation.hardSkills.error')}</Typography>;
   }
 
-  const averageMarkNumber =
-    softSkills?.length > 0
-      ? (softSkills?.reduce((acc, skill) => acc + skill.averageMark, 0) / softSkills?.length).toFixed(1)
-      : '0';
+  const averageMark = softSkills?.length > 0 ?
+    (softSkills.reduce((acc, skill) => acc + skill.averageMark, 0) / softSkills.length).toFixed(1)
+    : '0';
 
   return (
     <Box sx={styles.wrapper}>
@@ -57,7 +56,7 @@ const SoftSkills = () => {
 
       <Box sx={styles.markWrapper}>
         <Typography variant='h6'>{t('specialization.hardSkills.averageMark')}</Typography>
-        <Typography sx={styles.mark} variant='h6'>{`${averageMarkNumber || '0'}/10`}</Typography>
+        <Typography sx={styles.mark} variant='h6'>{`${averageMark || '0'}/10`}</Typography>
       </Box>
     </Box>
   );
