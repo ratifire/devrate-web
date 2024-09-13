@@ -53,7 +53,7 @@ const Schedule = () => {
       const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
       setFrom(startOfWeek);
       setTo(endOfWeek);
-      setFromTime(selectedDate.setZone('UTC+3').toISO());
+      setFromTime(encodeURIComponent(selectedDate.setZone('UTC+02:00').toISO()));
       setIsReady(true);
     }
   }, [selectedWeek]);
@@ -129,9 +129,9 @@ const Schedule = () => {
           dayMaxEvents={true}
           weekends={true}
           events={transformedEvents}
-          dayHeaderFormat={{
-            weekday: 'short',
-          }}
+          // dayHeaderFormat={{
+          //   weekday: 'short',
+          // }}
           slotLabelFormat={[
             {
               hour: '2-digit',
