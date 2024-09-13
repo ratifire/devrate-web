@@ -4,32 +4,25 @@ import styles from './Education.style';
 import EducationItem from './EducationItem';
 import { useGetEducationByUserIdQuery } from '../../../../../redux/services/educationApiSlice';
 import PropTypes from 'prop-types';
-import { ReactComponent as Book } from '../../../../../assets/icons/EducationPageIcons/book.svg';
-import { ReactComponent as Computer } from '../../../../../assets/icons/EducationPageIcons/computer.svg';
-import { ReactComponent as Molecule } from '../../../../../assets/icons/EducationPageIcons/molecule.svg';
-import { ReactComponent as Cap } from '../../../../../assets/icons/EducationPageIcons/square-academic-cap.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { setIcons } from '../../../../../redux/icons/iconsSlice';
-
-
-const icons = {
-  Book: Book,
-  Computer: Computer,
-  Molecule: Molecule,
-  Cap: Cap,
-};
+import { iconsLocalStorage, loadIconsFromLocalStorage } from '../../../../../utils/helpers';
+import { iconsEducation } from '../../../../../utils/constants/iconsExperience';
 
 const Education = ({ id }) => {
-  const dispatch = useDispatch();
+  const iconsMap = loadIconsFromLocalStorage('education');
   const { data: educationsData } = useGetEducationByUserIdQuery(id, { skip: !id });
-  const iconsMap = useSelector((state) => state.icons);
-  const iconValues = useMemo(() => Object.keys(icons), []);
 
-  const sortedEducations = useMemo(() => {
-    if (!educationsData) return [];
-    return [...educationsData].sort((a, b) => a.startYear - b.startYear);
-  }, [educationsData]);
 
+  const educationsNewData = educationsData?.map((education) => {
+    const iconName = iconsMap[education.id];
+    const iconComponent = iconsEducation[iconName];
+    return {
+      ...education,
+      iconName,
+      iconComponent,
+    };
+  });
+
+  const iconValues = useMemo(() => Object.keys(iconsEducation), []);
 
   useEffect(() => {
     if (educationsData) {
@@ -44,35 +37,34 @@ const Education = ({ id }) => {
         educationsWithoutIcons.forEach((education, index) => {
           newIcons[education.id] = shuffledIcons[index % shuffledIcons.length];
         });
-        dispatch(setIcons({ ...existingIcons, ...newIcons }));
+        iconsLocalStorage({ ...existingIcons, ...newIcons }, 'education');
       }
     }
-  }, [educationsData, dispatch, iconValues, iconsMap]);
+  }, [educationsData, iconValues, iconsMap]);
+
+  const sortedEducations = useMemo(() => {
+    if (!educationsNewData) return [];
+    return [...educationsNewData].sort((a, b) => a.startYear - b.startYear);
+  }, [educationsNewData]);
 
   return (
     <Box sx={styles.container}>
       <Box>
-        {sortedEducations?.map(({ id, type, name, description, startYear, endYear }) => {
-          const iconName = iconsMap[id];
-          console.log(iconsMap[id]);
-          const IconComponent = icons[iconName];
-          return (
-            <EducationItem
-              key={id}
-              type={type}
-              name={name}
-              description={description}
-              startYear={startYear}
-              endYear={endYear === 9999 ? 'Now' : endYear}
-              icon={IconComponent}
-              id={id}
-            />
-          );
-        })}
+        {sortedEducations?.map(({ id, type, name, description, startYear, endYear, iconComponent }) => (
+          <EducationItem
+            key={id}
+            type={type}
+            name={name}
+            description={description}
+            startYear={startYear}
+            endYear={endYear === 9999 ? 'Now' : endYear}
+            icon={iconComponent}
+            id={id}
+          />
+        ))}
       </Box>
     </Box>
-)
-  ;
+  );
 };
 
 Education.propTypes = {

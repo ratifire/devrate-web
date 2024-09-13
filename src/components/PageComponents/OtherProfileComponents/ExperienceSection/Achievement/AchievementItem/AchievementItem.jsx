@@ -1,14 +1,15 @@
 import React from 'react';
-import { Box, Link, Typography, Tooltip } from '@mui/material';
+import { Box, Link, Typography, Tooltip, Grid } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import PropTypes from 'prop-types';
 import styles from './AchievementItem.style';
 
 const AchievementItem = ({ achievement, icon: IconComponent }) => {
   return (
+    <Grid item xs={6}>
     <Box sx={styles.achievementItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
-        {IconComponent && <IconComponent width={46} height={38} />}
+        {IconComponent && <IconComponent width={48} height={48} />}
         <Box sx={styles.logoTitleContainer}>
           <Box sx={styles.achievementTitleYearContainer}>
             <Typography variant='h6' sx={styles.achievementTitle}>
@@ -30,6 +31,7 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
         {achievement.description}
       </Typography>
     </Box>
+    </Grid>
   );
 };
 
