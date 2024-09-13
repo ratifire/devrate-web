@@ -4,9 +4,11 @@ import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip 
 import roundData from '../../HardSkills/roundData';
 import { useUserSkillsAndMasteryData } from '../utils';
 import { styles } from './HardSkillsChart.style.js';
+import { useTranslation } from 'react-i18next';
 
 const HardSkillsChart = () => {
-  const { t, skills, isLoading, isError } = useUserSkillsAndMasteryData();
+  const { skills, isLoading, isError } = useUserSkillsAndMasteryData();
+  const { t } = useTranslation();
   const roundedSkills = roundData(skills);
 
   if (isLoading) {

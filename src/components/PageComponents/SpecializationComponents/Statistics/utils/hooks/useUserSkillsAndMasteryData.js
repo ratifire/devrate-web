@@ -1,9 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import { useGetHardSkillsByMasteryIdQuery } from '../../../../../../redux/specialization/specializationApiSlice';
 import { useGetMastery } from '../../../../../SpecializationComponents/hooks';
 
 const useUserSkillsAndMasteryData = () => {
-  const { t } = useTranslation();
   const {
     isLoading: isLoadingMastery,
     isError: isErrorMastery,
@@ -23,7 +21,6 @@ const useUserSkillsAndMasteryData = () => {
   const isError = isErrorMastery || isErrorSkills;
 
   return {
-    t,
     skills,
     isLoading,
     isError,
