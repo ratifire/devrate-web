@@ -55,7 +55,6 @@ SpecializationSkills.propTypes = {
   errorTitle: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
-};
 }
 
 export default SpecializationSkills;
