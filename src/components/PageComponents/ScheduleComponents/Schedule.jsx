@@ -129,9 +129,9 @@ const Schedule = () => {
           dayMaxEvents={true}
           weekends={true}
           events={transformedEvents}
-          // dayHeaderFormat={{
-          //   weekday: 'short',
-          // }}
+          dayHeaderFormat={{
+            weekday: 'short',
+          }}
           slotLabelFormat={[
             {
               hour: '2-digit',
