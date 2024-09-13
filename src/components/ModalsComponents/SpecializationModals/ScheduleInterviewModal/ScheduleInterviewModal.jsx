@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Box, Checkbox, FormControlLabel, IconButton, Tab, Tabs, Typography } from '@mui/material';
+import { Box, IconButton, Tab, Tabs, Typography } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
@@ -41,7 +41,7 @@ const ScheduleInterviewModal = ({ role }) => {
   }, [date]);
 
   const formik = useFormik({
-    initialValues: { dates: {}, monFri: false, satSun: false },
+    initialValues: { dates: {}},
     onSubmit: async (values, { resetForm }) => {
       const mainSpec = await getMainSpecialization(currentUserId);
       if (!mainSpec.data) return;
@@ -79,38 +79,12 @@ const ScheduleInterviewModal = ({ role }) => {
 
   const handleTimeClick = (isoTime) => {
     const newDates = { ...formik.values.dates };
-    const hour = DateTime.fromISO(isoTime).hour;
 
-
-    if (formik.values.monFri) {
-      weekDates.forEach((weekDay) => {
-        if (!weekDay.isWeekend) {
-          const timeForWeekDay = weekDay.set({ hour }).toISO();
-          if (newDates[timeForWeekDay]) {
-            delete newDates[timeForWeekDay];
-          } else {
-            newDates[timeForWeekDay] = true;
-          }
-        }
-      });
-    } else if (formik.values.satSun) {
-      weekDates.forEach((weekDay) => {
-        if (weekDay.isWeekend) {
-          const timeForWeekDay = weekDay.set({ hour }).toISO();
-          if (newDates[timeForWeekDay]) {
-            delete newDates[timeForWeekDay];
-          } else {
-            newDates[timeForWeekDay] = true;
-          }
-        }
-      });
-    } else {
       if (newDates[isoTime]) {
         delete newDates[isoTime];
       } else {
         newDates[isoTime] = true;
       }
-    }
 
     formik.setFieldValue('dates', newDates);
   };
@@ -204,25 +178,6 @@ const ScheduleInterviewModal = ({ role }) => {
               label={t('specialization.modal.scheduleModal.schedule')}
               correctStyle={styles.workExperienceBtn}
             />
-            <Box sx={styles.checkboxes}>
-              <Typography variant="body1">Apply to:</Typography>
-              <FormControlLabel
-                control={<Checkbox sx={styles.checkbox}/>}
-                label="Mon-Fri"
-                name="monFri"
-                onChange={formik.handleChange}
-                checked={formik.values.monFri}
-
-              />
-              <FormControlLabel
-                control={<Checkbox sx={styles.checkbox} />}
-                label="Sat-Sun"
-                name="satSun"
-                onChange={formik.handleChange}
-                checked={formik.values.satSun}
-
-              />
-            </Box>
           </Box>
         </Box>
       </form>

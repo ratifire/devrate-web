@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 import React, { useState } from 'react';
 import { Box, Button, Divider, Popover, Typography } from '@mui/material';
 import { styles } from './Interviews.styles';
@@ -73,6 +73,7 @@ const Interviews = () => {
         open={open}
         anchorEl={createButton}
         onClose={closeHandler}
+        disableScrollLock={true}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',
