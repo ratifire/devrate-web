@@ -1,12 +1,12 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts';
 import React from 'react';
-import { useUserSkillsAndMasteryData } from '../utils';
+import { getLevel, useUserSkillsAndMasteryData } from '../utils';
 import { styles } from './LevelChart.styles.js';
 import { useTranslation } from 'react-i18next';
 
 const LevelChart = () => {
-  const { skills, isError, isLoading, activeMastery, nextMasteryLevel } = useUserSkillsAndMasteryData();
+  const { skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();
   const { t } = useTranslation();
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
 
@@ -61,7 +61,7 @@ const LevelChart = () => {
           {activeMastery}
         </Typography>
         <Typography variant='caption' sx={styles.leftCaption}>
-          {nextMasteryLevel}
+          {getLevel(activeMastery)}
         </Typography>
       </Box>
     </Box>

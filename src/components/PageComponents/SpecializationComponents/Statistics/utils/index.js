@@ -7,6 +7,7 @@ import getCurrentAndLastMonths from './helpers/getCurrentAndLastMonths';
 import useGetHistoryData from './hooks/useGetHistoryData';
 import useHandleChange from './hooks/useHandleChange';
 import useUserSkillsAndMasteryData from './hooks/useUserSkillsAndMasteryData';
+import getLevel from './helpers/getLevel';
 
 export {
   arithmeticAverageSkillValue,
@@ -18,4 +19,5 @@ export {
   useGetHistoryData,
   useHandleChange,
   useUserSkillsAndMasteryData,
+  getLevel,
 };

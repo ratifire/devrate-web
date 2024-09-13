@@ -6,7 +6,6 @@ const useUserSkillsAndMasteryData = () => {
     isLoading: isLoadingMastery,
     isError: isErrorMastery,
     masteryId,
-    nextMasteryLevel,
     userId,
     activeMastery,
   } = useGetMastery();
@@ -25,7 +24,6 @@ const useUserSkillsAndMasteryData = () => {
     isLoading,
     isError,
     activeMastery,
-    nextMasteryLevel,
   };
 };
 

@@ -19,12 +19,6 @@ const useGetMastery = () => {
     (mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase()
   );
 
-  const selectMasteryIndex = masteries?.findIndex(
-    (mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase()
-  );
-
-  const nextMasteryLevel = masteries?.[selectMasteryIndex + 1]?.level || 'Guru';
-
   const masteryId = selectMastery?.id;
 
   const isLoading = isLoadingMasteries;
@@ -34,7 +28,6 @@ const useGetMastery = () => {
     isLoading,
     isError,
     masteryId,
-    nextMasteryLevel,
     userId,
     activeMastery,
   };
