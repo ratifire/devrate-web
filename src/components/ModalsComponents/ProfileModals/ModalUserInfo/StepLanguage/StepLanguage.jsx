@@ -15,67 +15,94 @@ import { styles } from './StepLanguage.styles';
 
 const StepLanguage = () => {
   const { data: user } = useSelector(selectCurrentUser);
-
-  const [selectedLanguage, setSelectedLanguage] = useState('');
-  const [selectedLevel, setSelectedLevel] = useState('');
-  const [errorLanguage, setErrorLanguage] = useState(false);
-  const [errorLevel, setErrorLevel] = useState(false);
-  const [helperTextLanguage, setHelperTextLanguage] = useState('');
-  const [helperTextLevel, setHelperTextLevel] = useState('');
-
-  const { data } = useGetLanguageUserQuery(user.id);
+  const { data: languages } = useGetLanguageUserQuery(user.id);
   const [postLanguageUser] = usePostLanguageUserMutation(user.id);
 
-  const onSubmit = (values) => {
-    postLanguageUser({
-      userId: user.id,
-      body: values.languages,
-    });
-  };
+  const [formState, setFormState] = useState({
+    selectedLanguage: '',
+    selectedLevel: '',
+    errorLanguage: false,
+    errorLevel: false,
+    helperTextLanguage: '',
+    helperTextLevel: '',
+  });
+
+  const [disabled, setDisabled] = useState(true);
+
   const formik = useFormik({
     initialValues: {
       languages: [],
     },
-    onSubmit,
+    onSubmit: (values) => {
+      postLanguageUser({
+        userId: user.id,
+        body: values.languages,
+      });
+    },
   });
 
   useEffect(() => {
-    if (data) {
-      formik.setFieldValue('languages', data);
+    if (languages) {
+      formik.setFieldValue('languages', languages);
     }
-  }, [data]);
+  }, [languages]);
+
+  // Compare initial languages with current form values to detect changes
+  useEffect(() => {
+    if (languages) {
+      const isFormUnchanged =
+        JSON.stringify(formik.values.languages) === JSON.stringify(languages);
+      setDisabled(isFormUnchanged);
+    }
+  }, [formik.values.languages, languages]);
 
   const handleLanguageChange = (language) => {
-    setSelectedLanguage(language);
-    setSelectedLevel('');
-    setErrorLanguage(false);
-    setHelperTextLanguage('');
+    setFormState((prevState) => ({
+      ...prevState,
+      selectedLanguage: language,
+      selectedLevel: '',
+      errorLanguage: false,
+      helperTextLanguage: '',
+    }));
   };
 
   const handleLevelChange = (level) => {
-    setSelectedLevel(level);
-    setErrorLevel(false);
-    setHelperTextLevel('');
+    setFormState((prevState) => ({
+      ...prevState,
+      selectedLevel: level,
+      errorLevel: false,
+      helperTextLevel: '',
+    }));
   };
 
   const createLang = () => {
+    const { selectedLanguage, selectedLevel } = formState;
     let hasError = false;
 
     if (!selectedLanguage) {
-      setErrorLanguage(true);
-      setHelperTextLanguage('profile.modal.userInfo.languages.selectLanguage');
+      setFormState((prevState) => ({
+        ...prevState,
+        errorLanguage: true,
+        helperTextLanguage: 'profile.modal.userInfo.languages.selectLanguage',
+      }));
       hasError = true;
     }
 
     if (!selectedLevel) {
-      setErrorLevel(true);
-      setHelperTextLevel('profile.modal.userInfo.languages.selectLevel');
+      setFormState((prevState) => ({
+        ...prevState,
+        errorLevel: true,
+        helperTextLevel: 'profile.modal.userInfo.languages.selectLevel',
+      }));
       hasError = true;
     }
 
     if (formik.values.languages.some((item) => item.name === selectedLanguage)) {
-      setErrorLanguage(true);
-      setHelperTextLanguage('profile.modal.userInfo.languages.languageAdded');
+      setFormState((prevState) => ({
+        ...prevState,
+        errorLanguage: true,
+        helperTextLanguage: 'profile.modal.userInfo.languages.languageAdded',
+      }));
       hasError = true;
     }
 
@@ -103,22 +130,23 @@ const StepLanguage = () => {
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.input100}>
           <SelectLanguage
-            variant='outlined'
+            variant="outlined"
             handleLanguageChange={handleLanguageChange}
             handleLevelChange={handleLevelChange}
-            labelLanguage='profile.modal.userInfo.languages.language'
-            labelLevel='profile.modal.userInfo.languages.level'
-            helperTextLanguage={helperTextLanguage}
-            helperTextLevel={helperTextLevel}
-            errorLanguage={errorLanguage}
-            errorLevel={errorLevel}
-            selectedLanguage={selectedLanguage}
-            selectedLevel={selectedLevel}
+            labelLanguage="profile.modal.userInfo.languages.language"
+            labelLevel="profile.modal.userInfo.languages.level"
+            helperTextLanguage={formState.helperTextLanguage}
+            helperTextLevel={formState.helperTextLevel}
+            errorLanguage={formState.errorLanguage}
+            errorLevel={formState.errorLevel}
+            selectedLanguage={formState.selectedLanguage}
+            selectedLevel={formState.selectedLevel}
           />
           <IconButton sx={styles.iconBtn} onClick={createLang}>
             <AddIcon />
           </IconButton>
         </Box>
+
         <Box sx={styles.input100}>
           <Box sx={styles.wrapperLanguages}>
             {formik.values.languages.map((item) => (
@@ -132,7 +160,14 @@ const StepLanguage = () => {
             ))}
           </Box>
         </Box>
-        <ButtonDef variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
+
+        <ButtonDef
+          disabled={disabled}
+          variant="contained"
+          type="submit"
+          label="profile.modal.btn"
+          correctStyle={styles.btn}
+        />
       </form>
     </Box>
   );

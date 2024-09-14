@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styles } from './StepPersonal.styles';
 import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { Box } from '@mui/material';
@@ -16,6 +16,7 @@ const StepPersonal = () => {
 
   const { data: info } = useGetPersonalUserQuery(userData.id);
   const { firstName, lastName, city, country, status, description } = info;
+  const [disabled, setDisabled] = useState(true);
 
   const initialValues = {
     firstName: firstName || userData.firstName || '',
@@ -44,6 +45,11 @@ const StepPersonal = () => {
     validationSchema: StepPersonalSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    setDisabled(!formik.dirty);
+  }, [formik.dirty]);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.wrapper}>
@@ -126,7 +132,7 @@ const StepPersonal = () => {
       </Box>
 
       <Box sx={styles.wrapperBtn}>
-        <ButtonDef variant='contained' correctStyle={styles.btn} type='submit' label='profile.modal.btn' />
+        <ButtonDef disabled={disabled} variant='contained' correctStyle={styles.btn} type='submit' label='profile.modal.btn' />
       </Box>
     </form>
   );
