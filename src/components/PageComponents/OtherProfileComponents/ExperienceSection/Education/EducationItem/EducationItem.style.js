@@ -10,7 +10,7 @@ const styles = {
     width: '100%',
     marginBottom: theme.spacing(3),
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     position: 'relative',
   }),

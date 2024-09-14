@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -8,7 +8,7 @@ import { styles } from './Schedule.styles';
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/schedule/scheduleApiSlice';
-import {DateTime} from "luxon";
+import { DateTime } from 'luxon';
 
 const transformEvents = (events) => {
   return events.map((event) => ({
@@ -18,27 +18,28 @@ const transformEvents = (events) => {
   }));
 };
 
-export default function Schedule() {
+const Schedule = () => {
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
 
-  let from = '';
-  let to = '';
-  let fromTime = '2024-07-02T06:00:00-03:00';
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
+  const [fromTime, setFromTime] = useState('');
+  const [isReady, setIsReady] = useState(false);
   const { id: userId } = useSelector((state) => state.auth.user.data);
-  function getWeekStartAndEnd(year, weekNumber) {
-     const firstDayOfYear = DateTime.local(year).startOf('year');
-     const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
-     const lastDayOfWeek = firstDayOfWeek.endOf('week');
-    
+
+  const getWeekStartAndEnd = (year, weekNumber) => {
+    const firstDayOfYear = DateTime.local(year).startOf('year');
+    const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
+    const lastDayOfWeek = firstDayOfWeek.endOf('week');
+
     return {
       startOfWeek: firstDayOfWeek.toISODate(),
-      endOfWeek: lastDayOfWeek.toISODate()
+      endOfWeek: lastDayOfWeek.toISODate(),
     };
-  }
-  
-  
+  };
+
   useEffect(() => {
     if (selectedWeek !== null && calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
@@ -46,22 +47,23 @@ export default function Schedule() {
       calendarApi.gotoDate(startOfWeek);
     }
   }, [selectedWeek]);
-  
+
   useEffect(() => {
     if (selectedWeek !== null) {
-      from = getWeekStartAndEnd(2024, selectedWeek).startOfWeek;
-      to = getWeekStartAndEnd(2024, selectedWeek).endOfWeek;
+      const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
+      setFrom(startOfWeek);
+      setTo(endOfWeek);
+      setFromTime(encodeURIComponent(`${startOfWeek}T07:00:00+03:00`));
+      setIsReady(true);
     }
   }, [selectedWeek]);
-  
-  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to });
-  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
-  console.log('currentClosestEvents', currentEvents);
-  
 
-  
+  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
+  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
+    { userId, fromTime },
+    { skip: !isReady }
+  );
 
-  
   useEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
@@ -71,7 +73,7 @@ export default function Schedule() {
         '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
       );
       const timeGridEventElements = calendarApi.el.querySelectorAll('.fc-v-event .fc-event-main');
-      
+
       timeGridSlotElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridTableData);
       });
@@ -92,23 +94,15 @@ export default function Schedule() {
         }
       `;
       document.head.appendChild(styleElement);
-
-      //needed to hide toolbar
-      // toolBarElements.forEach((el) => {
-      //   Object.assign(el.style, styles.toolBarElements);
-      // });
     }
   });
-  
+
   const handleDateChange = (newDate) => {
-    console.log(newDate)
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
-    setSelectedWeek(weekNumber)
-    console.log('Selected date:', newDate.toString());
-    console.log('Week number:', weekNumber);
+    setSelectedWeek(weekNumber);
   };
-  
+
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
@@ -137,7 +131,7 @@ export default function Schedule() {
           events={transformedEvents}
           dayHeaderFormat={{
             weekday: 'short',
-            }}
+          }}
           slotLabelFormat={[
             {
               hour: '2-digit',
@@ -161,4 +155,6 @@ export default function Schedule() {
       </Box>
     </Box>
   );
-}
+};
+
+export default Schedule;

@@ -80,11 +80,11 @@ const ExperienceSection = () => {
   }));
   return (
     <Box sx={styles.experienceContainer}>
-      <Box style={styles.tabsContainer}>
-        <StyledTabs value={value} onChange={handleChange} textColor="primary" indicatorColor="primary[200]">
+      <Box sx={styles.tabsContainer}>
+        <StyledTabs sx={styles.wrapperTab} value={value} onChange={handleChange} textColor="primary" indicatorColor="primary[200]">
           <StyledTab value="openExperience" label={t('profile.experience.workExperience')} sx={styles.tabItem} />
           <StyledTab value="achievement" label={t('profile.experience.achievement')} sx={styles.tabItem} />
-          <StyledTab value="skills" label={t('profile.experience.skills')} sx={styles.tabItem} />
+          <StyledTab value="skills" label={t('profile.experience.skills.title')} sx={styles.tabItem} />
           <StyledTab value="education" label={t('profile.experience.education')} sx={styles.tabItem} />
         </StyledTabs>
         {renderBtn(value)}

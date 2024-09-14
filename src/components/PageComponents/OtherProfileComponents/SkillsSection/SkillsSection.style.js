@@ -13,18 +13,20 @@ export const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: theme.spacing(2),
-  }),
-  skillsText: (theme) => ({
-    marginRight: theme.spacing(1),
-    color: theme.palette.text.secondary,
-  }),
-  skillsRating: (theme) => ({
     '& .MuiRating-iconFilled': {
       color: theme.palette.action.active,
     },
     '& .MuiRating-iconEmpty': {
-      color: theme.palette.action.active,
+      color: theme.palette.background.level3,
     },
+  }),
+
+  skillsText: (theme) => ({
+    marginRight: theme.spacing(1),
+    color: theme.palette.text.secondary,
+  }),
+
+  skillsRatingValue: () => ({
     marginRight: '10px',
   }),
   softSkills: (theme) => ({
@@ -36,7 +38,7 @@ export const styles = {
       color: theme.palette.action.active,
     },
     '& .MuiRating-iconEmpty': {
-      color: theme.palette.action.active,
+      color: theme.palette.background.level3,
     },
   }),
   interviewHistory: (theme) => ({
