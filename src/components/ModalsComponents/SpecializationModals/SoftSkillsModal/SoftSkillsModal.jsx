@@ -8,6 +8,7 @@ import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
 import { styles } from './SoftSkillsModal.styles';
 import { useTranslation } from 'react-i18next';
 import {
+  useAddSkillToMasteryMutation,
   useCreateSkillsBulkMutation, useDeleteSkillByIdMutation,
   useGetAvailableSoftSkillsQuery, useGetSoftSkillsByMasteryIdQuery,
   useLazyGetSoftSkillsQuery,
@@ -22,15 +23,17 @@ const SoftSkillsModal = () => {
   const dispatch = useDispatch();
   const [softSkill, setSoftSkill] = useState('');
   const openSkillsModal = useSelector((state) => state.modal.openSoftSkillsModal);
+  const [idDeletedSkills, setIdDeletedSkills] = useState([]);
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
 
   const availableSoftSkills = useGetAvailableSoftSkillsQuery();
   const [createSkillsBulk] = useCreateSkillsBulkMutation();
+  const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
 
   const deleteClickHandler = (softSkillId) => {
-    deleteSkill(softSkillId);
+    setIdDeletedSkills((prev) => ([...prev, softSkillId]));
   }
 
   const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
@@ -42,17 +45,25 @@ const SoftSkillsModal = () => {
       return;
     }
 
-    if (masteryId) {
+    if (!masteryId) {
       return;
     }
 
-    createSkillsBulk({
-      masteryId,
-      skills: [softSkill].map((skill) => ({
-        name: skill,
-        type: 'SOFT_SKILL',
-      }))
-    });
+    const skills = {
+      name: softSkill,
+      type: 'SOFT_SKILL',
+    }
+
+    addSkillToMastery({ masteryId, skills })
+  }
+
+  const handleSubmit = () => {
+    if (idDeletedSkills.length) {
+      idDeletedSkills.forEach((id) => {
+        deleteSkill(id);
+      });
+    }
+    handleClose();
   }
 
   if (isLoadingMastery || isLoadingSkills) {
@@ -92,7 +103,7 @@ const SoftSkillsModal = () => {
           variant='contained'
           type='submit'
           label={t('profile.modal.btn')}
-          handlerClick={handleClose}
+          handlerClick={handleSubmit}
           correctStyle={styles.btn}
         />
       </Box>
