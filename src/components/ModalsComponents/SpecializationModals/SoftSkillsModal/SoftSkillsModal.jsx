@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
@@ -8,7 +9,7 @@ import { styles } from './SoftSkillsModal.styles';
 import { useTranslation } from 'react-i18next';
 import {
   useCreateSkillsBulkMutation, useDeleteSkillByIdMutation,
-  useGetAvailableSoftSkillsQuery,
+  useGetAvailableSoftSkillsQuery, useGetSoftSkillsByMasteryIdQuery,
   useLazyGetSoftSkillsQuery,
 } from '../../../../redux/specialization/specializationApiSlice';
 import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
@@ -27,19 +28,13 @@ const SoftSkillsModal = () => {
   const availableSoftSkills = useGetAvailableSoftSkillsQuery();
   const [createSkillsBulk] = useCreateSkillsBulkMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
-  const [getSoftSkills, loadedSoftSkills] = useLazyGetSoftSkillsQuery();
+
   const deleteClickHandler = (softSkillId) => {
     deleteSkill(softSkillId);
   }
 
-  const { isLoading: isLoading, isError: isError, masteryId } = useGetMastery();
-
-  // Todo: Удалить юзЭффект
-  useEffect(() => {
-    (async () => {
-      getSoftSkills(masteryId);
-    })();
-  }, []);
+  const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
+  const { data: loadedSoftSkills, isLoading: isLoadingSkills, isError: isErrorSkills } = useGetSoftSkillsByMasteryIdQuery({masteryId}, {skip: !masteryId});
 
   // Todo: хз что это
   const addBtnClickHandler = () => {
@@ -60,11 +55,11 @@ const SoftSkillsModal = () => {
     });
   }
 
-  if (isLoading) {
+  if (isLoadingMastery || isLoadingSkills) {
     return <CircularProgress />;
   }
 
-  if (isError) {
+  if (isErrorMastery || isErrorSkills) {
     return <Typography variant='h6'>{t('specialisation.skillsModal.error')}</Typography>;
   }
 
@@ -88,7 +83,7 @@ const SoftSkillsModal = () => {
         </Box>
         <Box sx={styles.input100}>
           <Box sx={styles.wrapperSkills}>
-            {loadedSoftSkills?.data?.map((skill) => (
+            {loadedSoftSkills?.map((skill) => (
               <SkillChip key={skill.name} skill={skill} onDelete={deleteClickHandler} />
             ))}
           </Box>
