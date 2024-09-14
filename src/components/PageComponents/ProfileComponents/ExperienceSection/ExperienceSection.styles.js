@@ -10,6 +10,10 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  wrapperTab:(theme) => ({
+    borderBottom: '1px solid',
+    borderColor: theme.palette.neutral['400'],
+  }),
   tabsHeader: {
     borderBottom: '1px solid #ccc',
   },

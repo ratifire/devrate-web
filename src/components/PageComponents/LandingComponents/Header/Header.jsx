@@ -10,8 +10,10 @@ import { openModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import navigationsLinks from '../../../../router/links';
+import useAuth from '../../../../utils/hooks/useAuth';
 
-function Header() {
+const Header = () => {
+  useAuth();
   const dispatch = useDispatch();
   const handleOpen = () => dispatch(openModal({ modalName: 'openLogin' }));
   const [mobileOpen, setMobileOpen] = useState(false);

@@ -1,12 +1,30 @@
 import * as React from 'react';
 import { tooltipClasses, Tooltip, styled } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
-const CustomTooltip = styled(({ className, children, title, ...props }) => (
-  <Tooltip title={title} arrow placement='top-start' classes={{ popper: className }} {...props}>
-    {children}
-  </Tooltip>
-))(({ theme }) => ({
+const CustomTooltip = styled(({ translate, className, children, title, ...props }) => {
+  const { t } = useTranslation();
+  
+  const renderChildren = () => {
+    
+    if (translate && typeof children === 'string') return t(children);
+    
+    return children;
+  };
+  
+  return (
+    <Tooltip
+      title={t(title)}
+      arrow
+      placement='top-start'
+      classes={{ popper: className }}
+      {...props}
+    >
+      {renderChildren()}
+    </Tooltip>
+  );
+})(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: theme.palette.neutral[800],
     color: theme.palette.text.primary,
@@ -16,7 +34,6 @@ const CustomTooltip = styled(({ className, children, title, ...props }) => (
   },
   [`& .${tooltipClasses.arrow}`]: {
     color: theme.palette.neutral[800],
-    marginLeft: '-5%',
   },
 }));
 
@@ -24,6 +41,12 @@ CustomTooltip.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
+  translate: PropTypes.bool,
+};
+
+CustomTooltip.defaultProps = {
+  className: '',
+  translate: false,
 };
 
 export default CustomTooltip;
