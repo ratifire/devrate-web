@@ -92,7 +92,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
 
     getSoftSkillsByMasteryId: builder.query({
       query: ({ masteryId }) => `/masteries/${masteryId}/soft-skills`,
-      providesTags: ['Softskills'],
+      providesTags: ['SoftSkills'],
     }),
 
     updateSpecializationAsMainById: builder.mutation({
