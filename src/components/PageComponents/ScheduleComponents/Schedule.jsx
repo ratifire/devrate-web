@@ -18,16 +18,18 @@ const transformEvents = (events) => {
   }));
 };
 
-export default function Schedule() {
+const Schedule = () => {
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
 
-  let from = '';
-  let to = '';
-  let fromTime = '2024-07-02T06:00:00-03:00';
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
+  const [fromTime, setFromTime] = useState('');
+  const [isReady, setIsReady] = useState(false);
   const { id: userId } = useSelector((state) => state.auth.user.data);
-  function getWeekStartAndEnd(year, weekNumber) {
+
+  const getWeekStartAndEnd = (year, weekNumber) => {
     const firstDayOfYear = DateTime.local(year).startOf('year');
     const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
     const lastDayOfWeek = firstDayOfWeek.endOf('week');
@@ -36,7 +38,7 @@ export default function Schedule() {
       startOfWeek: firstDayOfWeek.toISODate(),
       endOfWeek: lastDayOfWeek.toISODate(),
     };
-  }
+  };
 
   useEffect(() => {
     if (selectedWeek !== null && calendarRef.current) {
@@ -48,14 +50,19 @@ export default function Schedule() {
 
   useEffect(() => {
     if (selectedWeek !== null) {
-      from = getWeekStartAndEnd(2024, selectedWeek).startOfWeek;
-      to = getWeekStartAndEnd(2024, selectedWeek).endOfWeek;
+      const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
+      setFrom(startOfWeek);
+      setTo(endOfWeek);
+      setFromTime(encodeURIComponent(`${startOfWeek}T07:00:00+03:00`));
+      setIsReady(true);
     }
   }, [selectedWeek]);
 
-  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to });
-  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
-  console.log('currentClosestEvents', currentEvents);
+  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
+  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
+    { userId, fromTime },
+    { skip: !isReady }
+  );
 
   useEffect(() => {
     if (calendarRef.current) {
@@ -91,12 +98,9 @@ export default function Schedule() {
   });
 
   const handleDateChange = (newDate) => {
-    console.log(newDate);
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
-    console.log('Selected date:', newDate.toString());
-    console.log('Week number:', weekNumber);
   };
 
   if (isLoading || loading) {
@@ -151,4 +155,6 @@ export default function Schedule() {
       </Box>
     </Box>
   );
-}
+};
+
+export default Schedule;

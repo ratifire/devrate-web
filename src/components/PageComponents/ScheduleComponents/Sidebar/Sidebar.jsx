@@ -12,7 +12,7 @@ Settings.defaultWeekSettings = {
   weekend: [6, 7], // Set weekend days
 };
 
-export default function Sidebar({ currentEvents, selectedDate, handleDateChange }) {
+const Sidebar = ({ currentEvents, selectedDate, handleDateChange }) => {
   return (
     <Box sx={styles.container}>
       <Box>
@@ -25,10 +25,12 @@ export default function Sidebar({ currentEvents, selectedDate, handleDateChange 
       </Box>
     </Box>
   );
-}
+};
 
 Sidebar.propTypes = {
   currentEvents: PropTypes.array,
   selectedDate: PropTypes.object,
   handleDateChange: PropTypes.func,
 };
+
+export default Sidebar;
