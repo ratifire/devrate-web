@@ -123,7 +123,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: skill,
       }),
-      invalidatesTags: ['HardSkills, SoftSkills'],
+      invalidatesTags: ['HardSkills', 'SoftSkills'],
     }),
 
     createSkillsBulk: builder.mutation({
