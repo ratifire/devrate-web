@@ -53,7 +53,7 @@ const Schedule = () => {
       const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
       setFrom(startOfWeek);
       setTo(endOfWeek);
-      setFromTime(encodeURIComponent(selectedDate.setZone('UTC+03:00').toISO()));
+      setFromTime(encodeURIComponent(`${startOfWeek}T07:00:00+03:00`));
       setIsReady(true);
     }
   }, [selectedWeek]);
