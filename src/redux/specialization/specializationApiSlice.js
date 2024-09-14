@@ -126,6 +126,15 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['HardSkills', 'SoftSkills'],
     }),
 
+    addSkillsToMastery: builder.mutation({
+      query: ({ id, skills }) => ({
+        url: `/masteries/${id}/skills/bulk`,
+        method: 'POST',
+        body: skills,
+      }),
+      invalidatesTags: ['HardSkills', 'SoftSkills'],
+    }),
+
     createSkillsBulk: builder.mutation({
       query: ({ masteryId, skills }) => ({
         url: `/masteries/${masteryId}/skills/bulk`,
