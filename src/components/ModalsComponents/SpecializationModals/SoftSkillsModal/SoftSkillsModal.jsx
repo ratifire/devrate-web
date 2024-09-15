@@ -51,7 +51,7 @@ const SoftSkillsModal = () => {
     setAllSkills((prev) => {
       const isSkillExist = prev.find((skill) => skill.name === softSkill);
 
-      if (isSkillExist) {
+      if (isSkillExist || !softSkill) {
         return prev;
       }
 
