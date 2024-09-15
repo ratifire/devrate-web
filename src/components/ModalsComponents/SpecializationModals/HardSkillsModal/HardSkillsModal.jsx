@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {v4 as uuidv4} from 'uuid';
 import React, { useCallback, useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
@@ -40,7 +39,12 @@ const HardSkillsModal = () => {
   }, [isLoadingSkills]);
 
   const handleDeleteSkill = (softSkillId) => {
-    setIdDeletedSkills((prev) => ([...prev, softSkillId]));
+    const isSkillExist = skills.find((skill) => skill.id === softSkillId);
+
+    if (isSkillExist) {
+      setIdDeletedSkills((prev) => ([...prev, softSkillId]));
+    }
+
     setAllSkills((prev) => prev.filter((skill) => skill.id !== softSkillId));
     setAddSkills((prev) => prev.filter((skill) => skill.id !== softSkillId));
   }
@@ -51,14 +55,8 @@ const HardSkillsModal = () => {
     const id = uuidv4();
 
     if (allSkills.length < MAX_SKILLS && !isSkillExist && isSkill) {
-      setAddSkills((prev) => ([...prev, { id, type: 'HARD_SKILL', name: skill }]));
-      setAllSkills((prev) => ([
-        ...prev,
-        {
-          id,
-          name: skill,
-        }
-      ]));
+      setAddSkills((prev) => ([...prev, { id, name: skill }]));
+      setAllSkills((prev) => ([...prev, { id, name: skill }]));
       setSkill('');
     }
   }
@@ -76,7 +74,7 @@ const HardSkillsModal = () => {
 
     if (addSkills.length) {
       addSkills.forEach((skill) => {
-        addSkillToMastery({masteryId, skill});
+        addSkillToMastery({masteryId, skill: {name: skill.name, type: 'HARD_SKILL'}});
       });
     }
 
