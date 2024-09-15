@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
@@ -6,7 +5,7 @@ import { useUserSkillsAndMasteryData } from '../Statistics/utils';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
 
 const HardSkills = () => {
-  const { t, skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();
+  const { skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();
   const dispatch = useDispatch();
   
   const handleModalOpen = () => {
