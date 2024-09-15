@@ -17,7 +17,7 @@ import {
 import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useGetMastery } from '../../../SpecializationComponents/hooks';
-import { SkillChip } from '../../../UI/Specialization/SkillChip/SkillChip';
+import { SkillChip } from '../../../UI/Specialization/SkillChip';
 
 const SoftSkillsModal = () => {
   const { t } = useTranslation();
@@ -29,7 +29,8 @@ const SoftSkillsModal = () => {
   const [allSkills, setAllSkills] = useState([]);
   const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
 
-  const availableSoftSkills = useGetAvailableSoftSkillsQuery();
+  const {data: availableSkills, isLoading: isLoadingAvailableSkills, isError: isErrorAbailabaleSkills } = useGetAvailableSoftSkillsQuery();
+
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
 
@@ -96,11 +97,11 @@ const SoftSkillsModal = () => {
     handleClose();
   }
 
-  if (isLoadingMastery || isLoadingSkills) {
+  if (isLoadingMastery || isLoadingSkills || isLoadingAvailableSkills) {
     return <CircularProgress />;
   }
 
-  if (isErrorMastery || isErrorSkills) {
+  if (isErrorMastery || isErrorSkills || isErrorAbailabaleSkills) {
     return <Typography variant='h6'>{t('specialisation.skillsModal.error')}</Typography>;
   }
 
@@ -113,7 +114,7 @@ const SoftSkillsModal = () => {
           <Box sx={styles.input}>
             <CountrySelect label={t('specialization.modal.skills.title')}
                            value={softSkill}
-                           countries={availableSoftSkills.data || []}
+                           countries={availableSkills || []}
                            variant="standard"
                            handleChange={({target}) => setSoftSkill(target.value)}
             />
@@ -122,7 +123,7 @@ const SoftSkillsModal = () => {
             </IconButton>
           </Box>
           <Box sx={styles.input}>
-            <Box sx={styles.wrapperSkills}>
+            <Box>
               {allSkills?.map((skill) => (
                 <SkillChip key={skill.name} skill={skill} onDelete={deleteClickHandler} />
               ))}
