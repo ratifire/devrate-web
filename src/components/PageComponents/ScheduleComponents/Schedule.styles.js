@@ -60,7 +60,7 @@ export const styles = {
     zIndex: 1000,
   
   }       ,
-  popupTriangular:theme=>({
+  popupTriangular:(theme)=>({
     position: "absolute",
     bottom: "0px", // Трикутник під popup
     left: "-19px", // Відстань від лівого краю
@@ -71,7 +71,7 @@ export const styles = {
     borderTop: "10px solid transparent", // Задайте колір трикутника
     zIndex: 1001, // Вище фону popup
   }),
-  infoContainer:theme=>({
+  infoContainer:(theme)=>({
     display:"flex",
     marginBottom: theme.spacing(2)
   }),
@@ -89,7 +89,7 @@ export const styles = {
     paddingLeft:theme.spacing(4)
   }),
   
-  title:theme=>({
+  title:(theme)=>({
     color: theme.palette.neutral[200],
     margin: 0,
     marginBottom:theme.spacing(2)
@@ -116,14 +116,14 @@ export const styles = {
     width:"100%",
     height:"100%"
   },
-  icon:theme=>({
+  icon:(theme)=>({
     width:"24px",
     height: "24px",
     display:"block",
     color: theme.palette.primary[100],
     padding:0,
    }),
-  outlined:theme=>({
+  outlined:(theme)=>({
     display:"block",
       height:"100%",
     border:"none",
