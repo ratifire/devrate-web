@@ -16,8 +16,8 @@ import {
 } from '../../../../redux/specialization/specializationApiSlice';
 import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { SkillChip } from '../../../PageComponents/SpecializationComponents/SkillChip/SkillChip';
 import { useGetMastery } from '../../../SpecializationComponents/hooks';
+import { SkillChip } from '../../../UI/Specialization/SkillChip/SkillChip';
 
 const SoftSkillsModal = () => {
   const { t } = useTranslation();
@@ -106,36 +106,36 @@ const SoftSkillsModal = () => {
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
-      <Box sx={styles.modalContent}>
-        <Typography variant='h6' sx={styles.title}>
-          {t('specialization.modal.skills.title')}
-        </Typography>
-        <Box sx={styles.input100}>
-          <CountrySelect label={t('modal.education.startYear')}
-                         value={softSkill}
-                         countries={availableSoftSkills.data || []}
-                         variant="standard"
-                         handleChange={({target}) => setSoftSkill(target.value)}
-          />
-          <IconButton sx={styles.iconBtn} onClick={handleAddSkill} >
-            <AddIcon />
-          </IconButton>
-        </Box>
-        <Box sx={styles.input100}>
-          <Box sx={styles.wrapperSkills}>
-            {allSkills?.map((skill) => (
-              <SkillChip key={skill.name} skill={skill} onDelete={deleteClickHandler} />
-            ))}
+      <Typography variant='h6' sx={styles.title}>
+        {t('specialization.softSkills.title')}
+      </Typography>
+      <form>
+          <Box sx={styles.input}>
+            <CountrySelect label={t('specialization.modal.skills.title')}
+                           value={softSkill}
+                           countries={availableSoftSkills.data || []}
+                           variant="standard"
+                           handleChange={({target}) => setSoftSkill(target.value)}
+            />
+            <IconButton sx={styles.iconBtn} onClick={handleAddSkill} >
+              <AddIcon />
+            </IconButton>
           </Box>
-        </Box>
-        <ButtonDef
-          variant='contained'
-          type='submit'
-          label={t('profile.modal.btn')}
-          handlerClick={handleSubmit}
-          correctStyle={styles.btn}
-        />
-      </Box>
+          <Box sx={styles.input}>
+            <Box sx={styles.wrapperSkills}>
+              {allSkills?.map((skill) => (
+                <SkillChip key={skill.name} skill={skill} onDelete={deleteClickHandler} />
+              ))}
+            </Box>
+          </Box>
+          <ButtonDef
+            variant='contained'
+            type='submit'
+            label={t('profile.modal.btn')}
+            handlerClick={handleSubmit}
+            correctStyle={styles.btn}
+          />
+      </form>
     </ModalLayoutProfile>
   );
 };

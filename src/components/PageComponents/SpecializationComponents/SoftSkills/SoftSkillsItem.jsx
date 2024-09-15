@@ -33,7 +33,7 @@ const SoftSkillsItem = ({ name, value }) => {
   const icon = value > 5 ? <CustomArrowCircleUpIcon /> : <CustomArrowCircleDownIcon />;
 
   return (
-    <Box>
+    <>
       <Box sx={styles.skillContainer}>
         <Box sx={styles.iconWrapper}>
           {icon}
@@ -44,7 +44,7 @@ const SoftSkillsItem = ({ name, value }) => {
         <LinearProgressWithLabel value={value} size='s' orientation='horizontal'/>
       </Box>
       <Divider sx={styles.divider} />
-    </Box>
+    </>
   );
 };
 

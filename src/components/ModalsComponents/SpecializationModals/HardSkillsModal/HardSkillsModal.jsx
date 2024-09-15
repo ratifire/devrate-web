@@ -13,8 +13,8 @@ import {
   useAddSkillToMasteryMutation,
   useDeleteSkillByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
-import { SkillChip } from '../../../PageComponents/SpecializationComponents/SkillChip/SkillChip';
 import { MAX_SKILLS } from '../constants';
+import { SkillChip } from '../../../UI/Specialization/SkillChip/SkillChip';
 
 const MemoizedButtonDef = React.memo(ButtonDef);
 

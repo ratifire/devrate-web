@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Box, Typography, Divider, SvgIcon } from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import CustomTooltip from '../../CustomTooltip';
-import LinearProgressWithLabel from '../../LinearProgressWithLabel';
 import { styles } from './SpecializationSkillsItem.styles';
+import CustomTooltip from '../../../CustomTooltip';
+import LinearProgressWithLabel from '../../../LinearProgressWithLabel';
 
 const CustomArrowCircleDownIcon = (props) => {
   return (
