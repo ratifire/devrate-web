@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
-import { styles } from './SoftSkillsModal.styles';
+import { styles } from '../styles/SkillsModal.styles';
 import { useTranslation } from 'react-i18next';
 import {
   useAddSkillToMasteryMutation,

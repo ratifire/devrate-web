@@ -5,7 +5,7 @@ import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Box, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
-import { styles } from './HardSkillsModal.styles';
+import { styles } from '../styles/SkillsModal.styles';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
 import useHardSkillsData from './useHardSkillsData';
@@ -14,7 +14,8 @@ import {
   useDeleteSkillByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { MAX_SKILLS } from '../constants';
-import { SkillChip } from '../../../UI/Specialization/SkillChip/SkillChip';
+import { styles as hardSkillsStyles } from './HardSkillsModal.styles';
+import { SkillChip } from '../../../UI/Specialization/SkillChip';
 
 const MemoizedButtonDef = React.memo(ButtonDef);
 
@@ -122,13 +123,11 @@ const HardSkillsModal = () => {
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
-      <Box sx={styles.modalContent}>
-        <Typography variant='h6' sx={styles.title}>
-          {t('specialization.modal.skills.title')}
-        </Typography>
-
+      <Typography variant='h6' sx={styles.title}>
+        {t('specialization.modal.skills.title')}
+      </Typography>
         <form onSubmit={formik.handleSubmit}>
-          <Box sx={styles.input100}>
+          <Box sx={[styles.input, hardSkillsStyles.box]}>
             <TextField
               variant='outlined'
               value={selectedSkill}
@@ -142,8 +141,8 @@ const HardSkillsModal = () => {
               <AddIcon />
             </IconButton>
           </Box>
-          <Box sx={styles.input100}>
-            <Box sx={styles.wrapperSkills}>
+          <Box sx={styles.input}>
+            <Box>
               {formik.values.skills.map((skill) => (
                 <SkillChip key={skill.id} skill={skill} onDelete={skillDeleteHandler} />
               ))}
@@ -157,7 +156,6 @@ const HardSkillsModal = () => {
             disabled={formik.isSubmitting || isAddingSkill || isDeletingSkill}
           />
         </form>
-      </Box>
     </ModalLayoutProfile>
   );
 };
