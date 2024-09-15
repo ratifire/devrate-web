@@ -29,7 +29,7 @@ const SoftSkillsModal = () => {
   const [allSkills, setAllSkills] = useState([]);
   const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
 
-  const {data: availableSkills, isLoading: isLoadingAvailableSkills, isError: isErrorAbailabaleSkills } = useGetAvailableSoftSkillsQuery();
+  const {data: availableSkills, isLoading: isLoadingAvailableSkills, isError: isErrorAvailableSkills } = useGetAvailableSoftSkillsQuery();
 
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
@@ -101,7 +101,7 @@ const SoftSkillsModal = () => {
     return <CircularProgress />;
   }
 
-  if (isErrorMastery || isErrorSkills || isErrorAbailabaleSkills) {
+  if (isErrorMastery || isErrorSkills || isErrorAvailableSkills) {
     return <Typography variant='h6'>{t('specialisation.skillsModal.error')}</Typography>;
   }
 
