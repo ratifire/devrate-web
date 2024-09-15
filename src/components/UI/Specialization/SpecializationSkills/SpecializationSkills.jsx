@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { styles } from './SpecializationSkills.styles';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { SpecializationSkillsItem } from './SpecializationSkillsItem';
+import { ItemSkill } from '../SkillsItem';
 
 const SpecializationSkills = ({ isLoading, isError, skills, averageMark, openModal, errorTitle, title, subTitle }) => {
   const { t } = useTranslation()
@@ -27,7 +27,7 @@ const SpecializationSkills = ({ isLoading, isError, skills, averageMark, openMod
       </Box>
       <Box sx={styles.skillsContainer}>
         {skills?.map((skill) => (
-          <SpecializationSkillsItem key={skill.id} name={skill.name} value={Math.round(skill.averageMark * 10) / 10} grows={skill.grows} />
+          <ItemSkill key={skill.id} name={skill.name} value={Math.round(skill.averageMark * 10) / 10} grows={skill.grows} />
         ))}
       </Box>
       <Box sx={styles.markWrapper}>

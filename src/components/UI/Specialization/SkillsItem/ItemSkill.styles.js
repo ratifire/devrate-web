@@ -32,13 +32,4 @@ export const styles = {
     marginY: theme.spacing(2),
     backgroundColor: theme.palette.background.level3,
   }),
-  iconCircle: {
-    fill: '#252527',
-  },
-  arrowDownIcon: {
-    fill: '#ED0E0E',
-  },
-  arrowUpIcon: {
-    fill: '#64FF2E',
-  },
 };
