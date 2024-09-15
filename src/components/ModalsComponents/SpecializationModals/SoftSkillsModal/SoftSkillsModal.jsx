@@ -59,10 +59,6 @@ const SoftSkillsModal = () => {
     setAddSkill((prev) => prev.filter((skill) => skill.id !== softSkillId));
   }
 
-  console.log('addSkill', addSkill);
-  console.log('idDeletedSkills', idDeletedSkills);
-  console.log('allSkills', allSkills);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
