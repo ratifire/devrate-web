@@ -27,8 +27,7 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const {activeSpecialization} = useSelector((state) => state.specialization);
-  const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
+  const { activeSpecialization, mainSpecialization, selectedSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
   const specializationsSorted = specializations?.toSorted((a, b) => a.main === b.main ? 0 : a.main ? 1 : -1);
@@ -79,6 +78,7 @@ const SpecializationCategories = () => {
   const handlerDeleteSpecialization = async (id) => {
     await deleteSpecialization(id).unwrap();
     dispatch(setSelectedSpecialization(null));
+    dispatch(setActiveSpecialization(mainSpecialization))
     handleCloseMenu(id);
   };
 
