@@ -27,16 +27,16 @@ const HardSkillsModal = () => {
   const [idDeletedSkills, setIdDeletedSkills] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
   const [addSkills, setAddSkills] = useState([]);
-  const handleClose = useCallback(() => dispatch(closeModal({ modalName: 'openSkillsModal' })), [dispatch]);
   const { masteryId, isError: isErrorMastery, isLoading: isLoadingMastery } = useGetMastery();
   const {data: skills, isError: isErrorSkills, isLoading: isLoadingSkills} = useGetHardSkillsByMasteryIdQuery({masteryId}, {skip: !masteryId});
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
 
-
   useEffect(() => {
     setAllSkills(skills);
   }, [isLoadingSkills]);
+
+  const handleClose = useCallback(() => dispatch(closeModal({ modalName: 'openSkillsModal' })), [dispatch]);
 
   const handleDeleteSkill = (softSkillId) => {
     const isSkillExist = skills.find((skill) => skill.id === softSkillId);

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {v4 as uuidv4} from 'uuid';
 import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
@@ -27,18 +26,9 @@ const SoftSkillsModal = () => {
   const [idDeletedSkills, setIdDeletedSkills] = useState([]);
   const [addSkill, setAddSkill] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
-  const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
-
   const {data: availableSkills, isLoading: isLoadingAvailableSkills, isError: isErrorAvailableSkills } = useGetAvailableSoftSkillsQuery();
-
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
-
-  const handleDeleteSkill = (softSkillId) => {
-    setAllSkills((prev) => prev.filter((skill) => skill.id !== softSkillId));
-    setIdDeletedSkills((prev) => ([...prev, softSkillId]));
-  }
-
   const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
   const { data: skills, isLoading: isLoadingSkills, isError: isErrorSkills } = useGetSoftSkillsByMasteryIdQuery({masteryId}, {skip: !masteryId});
 
@@ -46,14 +36,32 @@ const SoftSkillsModal = () => {
     setAllSkills(skills);
   }, [isLoadingSkills]);
 
+  const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
+
   const handleAddSkill = () => {
     const isSkillExist = allSkills.find((skill) => skill.name === softSkill);
+    const id = uuidv4();
 
     if (!isSkillExist && softSkill) {
-      setAllSkills((prev) => [...prev, { id: uuidv4(), name: softSkill, type: 'SOFT_SKILL' }]);
-      setAddSkill((prev) => [...prev, { name: softSkill, type: 'SOFT_SKILL' }]);
+      setAllSkills((prev) => [...prev, { id, name: softSkill }]);
+      setAddSkill((prev) => [...prev, { id, name: softSkill }]);
     }
   }
+
+  const handleDeleteSkill = (softSkillId) => {
+    const isSkillExist = skills.find((skill) => skill.id === softSkillId);
+
+    if (isSkillExist) {
+      setIdDeletedSkills((prev) => ([...prev, softSkillId]));
+    }
+
+    setAllSkills((prev) => prev.filter((skill) => skill.id !== softSkillId));
+    setAddSkill((prev) => prev.filter((skill) => skill.id !== softSkillId));
+  }
+
+  console.log('addSkill', addSkill);
+  console.log('idDeletedSkills', idDeletedSkills);
+  console.log('allSkills', allSkills);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,9 +74,10 @@ const SoftSkillsModal = () => {
 
     if (addSkill.length) {
       addSkill.forEach((skill) => {
-        addSkillToMastery({masteryId, skill});
+        addSkillToMastery({masteryId, skill: {name: skill.name, type: 'SOFT_SKILL'}});
       });
     }
+
     handleClose();
   }
 
@@ -109,6 +118,7 @@ const SoftSkillsModal = () => {
             type='submit'
             label={t('profile.modal.btn')}
             correctStyle={styles.btn}
+            disabled={addSkill.length === 0 && idDeletedSkills.length === 0}
           />
       </form>
     </ModalLayoutProfile>
