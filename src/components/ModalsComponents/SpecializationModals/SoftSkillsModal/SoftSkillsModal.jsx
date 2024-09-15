@@ -34,9 +34,8 @@ const SoftSkillsModal = () => {
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
 
-  const deleteClickHandler = (softSkillId) => {
+  const handleDeleteSkill = (softSkillId) => {
     setAllSkills((prev) => prev.filter((skill) => skill.id !== softSkillId));
-
     setIdDeletedSkills((prev) => ([...prev, softSkillId]));
   }
 
@@ -48,41 +47,17 @@ const SoftSkillsModal = () => {
   }, [isLoadingSkills]);
 
   const handleAddSkill = () => {
-    setAllSkills((prev) => {
-      const isSkillExist = prev.find((skill) => skill.name === softSkill);
+    const isSkillExist = allSkills.find((skill) => skill.name === softSkill);
 
-      if (isSkillExist || !softSkill) {
-        return prev;
-      }
-
-      return [
-        ...prev,
-        {
-          id: uuidv4(),
-          name: softSkill,
-          type: 'SOFT_SKILL',
-        }
-      ]
-    })
-
-    setAddSkill((prev) => {
-      const isSkillExist = allSkills.find((skill) => skill.name === softSkill);
-
-      if (isSkillExist) {
-        return prev;
-      }
-
-      return [
-        ...prev,
-        {
-          name: softSkill,
-          type: 'SOFT_SKILL',
-        }
-      ]
-    })
+    if (!isSkillExist && softSkill) {
+      setAllSkills((prev) => [...prev, { id: uuidv4(), name: softSkill, type: 'SOFT_SKILL' }]);
+      setAddSkill((prev) => [...prev, { name: softSkill, type: 'SOFT_SKILL' }]);
+    }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (idDeletedSkills.length) {
       idDeletedSkills.forEach((id) => {
         deleteSkill(id);
@@ -110,7 +85,7 @@ const SoftSkillsModal = () => {
       <Typography variant='h6' sx={styles.title}>
         {t('specialization.softSkills.title')}
       </Typography>
-      <form>
+      <form onSubmit={handleSubmit}>
           <Box sx={styles.input}>
             <CountrySelect label={t('specialization.modal.skills.title')}
                            value={softSkill}
@@ -125,7 +100,7 @@ const SoftSkillsModal = () => {
           <Box sx={styles.input}>
             <Box>
               {allSkills?.map((skill) => (
-                <SkillChip key={skill.name} skill={skill} onDelete={deleteClickHandler} />
+                <SkillChip key={skill.name} skill={skill} onDelete={handleDeleteSkill} />
               ))}
             </Box>
           </Box>
@@ -133,7 +108,6 @@ const SoftSkillsModal = () => {
             variant='contained'
             type='submit'
             label={t('profile.modal.btn')}
-            handlerClick={handleSubmit}
             correctStyle={styles.btn}
           />
       </form>

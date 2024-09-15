@@ -1,21 +1,22 @@
-import React, { useState, useCallback } from 'react';
+/* eslint-disable */
+import {v4 as uuidv4} from 'uuid';
+import React, { useCallback, useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFormik } from 'formik';
 import { Box, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
 import { styles } from '../styles/SkillsModal.styles';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
-import useHardSkillsData from './useHardSkillsData';
-import {
-  useAddSkillToMasteryMutation,
-  useDeleteSkillByIdMutation,
-} from '../../../../redux/specialization/specializationApiSlice';
 import { MAX_SKILLS } from '../constants';
 import { styles as hardSkillsStyles } from './HardSkillsModal.styles';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
+import {
+  useAddSkillToMasteryMutation, useDeleteSkillByIdMutation,
+  useGetHardSkillsByMasteryIdQuery,
+} from '../../../../redux/specialization/specializationApiSlice';
+import { useGetMastery } from '../../../SpecializationComponents/hooks';
 
 const MemoizedButtonDef = React.memo(ButtonDef);
 
@@ -23,101 +24,76 @@ const HardSkillsModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
-
+  const [skill, setSkill] = useState('');
+  const [idDeletedSkills, setIdDeletedSkills] = useState([]);
+  const [allSkills, setAllSkills] = useState([]);
+  const [addSkills, setAddSkills] = useState([]);
   const handleClose = useCallback(() => dispatch(closeModal({ modalName: 'openSkillsModal' })), [dispatch]);
+  const { masteryId, isError: isErrorMastery, isLoading: isLoadingMastery } = useGetMastery();
+  const {data: skills, isError: isErrorSkills, isLoading: isLoadingSkills} = useGetHardSkillsByMasteryIdQuery({masteryId}, {skip: !masteryId});
+  const [addSkillToMastery] = useAddSkillToMasteryMutation();
+  const [deleteSkill] = useDeleteSkillByIdMutation();
 
-  const { skills: fetchedSkills, isLoading, isError, masteryId } = useHardSkillsData();
 
-  const [selectedSkill, setSelectedSkill] = useState('');
-  const [showError, setShowError] = useState(false);
+  useEffect(() => {
+    setAllSkills(skills);
+  }, [isLoadingSkills]);
 
-  const [addSkillToMastery, { isLoading: isAddingSkill }] = useAddSkillToMasteryMutation();
-  const [deleteSkillById, { isLoading: isDeletingSkill }] = useDeleteSkillByIdMutation();
+  const handleDeleteSkill = (softSkillId) => {
+    setIdDeletedSkills((prev) => ([...prev, softSkillId]));
+    setAllSkills((prev) => prev.filter((skill) => skill.id !== softSkillId));
+    setAddSkills((prev) => prev.filter((skill) => skill.id !== softSkillId));
+  }
 
-  const formik = useFormik({
-    initialValues: { skills: fetchedSkills },
-    enableReinitialize: true,
-    validate: (values) => {
-      const errors = {};
-      if (values.skills.length >= MAX_SKILLS) {
-        errors.skill = 'profile.modal.userInfo.skills.maxSkills';
-      }
-      if (showError) {
-        if (!selectedSkill) {
-          errors.skill = 'profile.modal.userInfo.skills.selectSkill';
+  const handleAddSkill = () => {
+    const isSkillExist = allSkills.find((v) => v.name === skill);
+    const isSkill = skill.trim();
+    const id = uuidv4();
+
+    if (allSkills.length < MAX_SKILLS && !isSkillExist && isSkill) {
+      setAddSkills((prev) => ([...prev, { id, type: 'HARD_SKILL', name: skill }]));
+      setAllSkills((prev) => ([
+        ...prev,
+        {
+          id,
+          name: skill,
         }
-        if (values.skills.some((item) => item.name === selectedSkill)) {
-          errors.skill = 'profile.modal.userInfo.skills.skillAdded';
-        }
-      }
-      return errors;
-    },
-    onSubmit: handleClose,
-  });
+      ]));
+      setSkill('');
+    }
+  }
 
-  const handleSkillChange = useCallback(
-    (event) => {
-      setSelectedSkill(event.target.value);
-      setShowError(false);
-      formik.validateForm();
-    },
-    [formik]
-  );
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      setSkill('');
+      handleAddSkill();
+    }
+  }
 
-  const validateSkill = useCallback(async () => {
-    setShowError(true);
-    const errors = await formik.validateForm();
-    return Object.keys(errors).length === 0;
-  }, [formik]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const addNewSkill = useCallback(async () => {
-    if (!masteryId) {
-      console.error('MasteryId is not available');
-      return;
+    if (addSkills.length) {
+      addSkills.forEach((skill) => {
+        addSkillToMastery({masteryId, skill});
+      });
     }
 
-    const newSkill = {
-      name: selectedSkill,
-      type: 'HARD_SKILL',
-    };
-
-    try {
-      const result = await addSkillToMastery({ masteryId, skill: newSkill }).unwrap();
-      formik.setFieldValue('skills', [...formik.values.skills, result]);
-      setSelectedSkill('');
-      setShowError(false);
-    } catch (error) {
-      console.error('Failed to add skill:', error);
+    if (idDeletedSkills.length) {
+      idDeletedSkills.forEach((id) => {
+        deleteSkill(id);
+      });
     }
-  }, [selectedSkill, masteryId, addSkillToMastery, formik]);
 
-  const createSkill = useCallback(async () => {
-    const isValid = await validateSkill();
-    if (isValid) {
-      await addNewSkill();
-    }
-  }, [validateSkill, addNewSkill]);
+    handleClose();
+  }
 
-  const skillDeleteHandler = useCallback(
-    async (skillToDeleteId) => {
-      try {
-        await deleteSkillById(skillToDeleteId).unwrap();
-        formik.setFieldValue(
-          'skills',
-          formik.values.skills.filter((item) => item.id !== skillToDeleteId)
-        );
-      } catch (error) {
-        console.error('Failed to delete skill:', error);
-      }
-    },
-    [deleteSkillById, formik]
-  );
-
-  if (isLoading) {
+  if (isLoadingMastery || isLoadingSkills) {
     return <CircularProgress />;
   }
 
-  if (isError) {
+  if (isErrorMastery || isErrorSkills) {
     return <Typography variant='h6'>{t('specialisation.skillsModal.error')}</Typography>;
   }
 
@@ -126,25 +102,23 @@ const HardSkillsModal = () => {
       <Typography variant='h6' sx={styles.title}>
         {t('specialization.modal.skills.title')}
       </Typography>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
           <Box sx={[styles.input, hardSkillsStyles.box]}>
             <TextField
               variant='outlined'
-              value={selectedSkill}
-              onChange={handleSkillChange}
+              value={skill}
+              onChange={(e) => setSkill(e.target.value)}
               label={t('specialization.modal.skills.placeholder')}
-              helperText={formik.errors.skill && t(formik.errors.skill)}
-              error={!!formik.errors.skill}
               fullWidth
             />
-            <IconButton sx={styles.iconBtn} onClick={createSkill} disabled={isAddingSkill || isDeletingSkill}>
+            <IconButton onClick={handleAddSkill} sx={styles.iconBtn}>
               <AddIcon />
             </IconButton>
           </Box>
           <Box sx={styles.input}>
             <Box>
-              {formik.values.skills.map((skill) => (
-                <SkillChip key={skill.id} skill={skill} onDelete={skillDeleteHandler} />
+              {allSkills?.map((skill) => (
+                <SkillChip onDelete={handleDeleteSkill} key={skill.id} skill={skill} />
               ))}
             </Box>
           </Box>
@@ -153,7 +127,7 @@ const HardSkillsModal = () => {
             type='submit'
             label={t('profile.modal.btn')}
             correctStyle={styles.btn}
-            disabled={formik.isSubmitting || isAddingSkill || isDeletingSkill}
+            disabled={addSkills.length === 0 && idDeletedSkills.length === 0}
           />
         </form>
     </ModalLayoutProfile>
