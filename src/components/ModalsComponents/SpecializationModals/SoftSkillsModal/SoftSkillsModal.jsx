@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {v4 as uuidv4} from 'uuid';
 import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
@@ -53,10 +52,10 @@ const SoftSkillsModal = () => {
 
     if (!isSkillExist && skill) {
       if (!isAddedSkill) {
-        setAddSkill((prev) => [...prev, { id, name: skill }]);
+        setAddSkill((prev) => [...prev, { id: isAddedSkill?.id || id, name: isAddedSkill?.name || skill }]);
       }
 
-      setAllSkills((prev) => [...prev, { id, name: skill }]);
+      setAllSkills((prev) => [...prev, { id: isAddedSkill?.id || id, name: isAddedSkill?.name || skill }]);
       setAvailableSkills((prev) => prev.filter((availableSkill) => availableSkill !== skill));
       setIdDeletedSkills((prev) => prev.filter((id) => id !== id));
       setSkill('')
