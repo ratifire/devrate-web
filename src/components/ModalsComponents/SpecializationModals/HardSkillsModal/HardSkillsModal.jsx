@@ -24,7 +24,6 @@ const HardSkillsModal = () => {
     allSkills: [],
     addSkills: [],
   });
-  const { skill, idDeletedSkills, allSkills, addSkills } = state;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
@@ -32,17 +31,15 @@ const HardSkillsModal = () => {
   const {data: skills, isError: isErrorSkills, isLoading: isLoadingSkills} = useGetHardSkillsByMasteryIdQuery({masteryId}, {skip: !masteryId});
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
+  const { skill, idDeletedSkills, allSkills, addSkills } = state;
   const isFindSkill = allSkills?.find((v) => v.name === skill.trim());
 
-  const updateState = (newState) => {
-    setState((prevState) => ({ ...prevState, ...newState }));
-  };
+  const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
+  const updateState = (newState) => setState((prevState) => ({ ...prevState, ...newState }));
 
   useEffect(() => {
     updateState({ allSkills: skills });
   }, [isLoadingSkills]);
-
-  const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
 
   const handleDeleteSkill = (skillId) => {
     const isSkillExist = skills.find((skill) => skill.id === skillId);
@@ -60,12 +57,11 @@ const HardSkillsModal = () => {
   }
 
   const handleAddSkill = () => {
-    const isSkillExist = allSkills.find((v) => v.name === skill);
     const isSkillInDataBase = skills.find((v) => v.name === skill);
     const skillValue = skill.trim();
     const id = isSkillInDataBase?.id || uuidv4();
 
-    if (allSkills.length < MAX_SKILLS && !isSkillExist && skillValue) {
+    if (allSkills.length < MAX_SKILLS && !isFindSkill && skillValue) {
       if (!isSkillInDataBase) {
         updateState({ addSkills: [...addSkills, { id, name: skillValue }] });
       }

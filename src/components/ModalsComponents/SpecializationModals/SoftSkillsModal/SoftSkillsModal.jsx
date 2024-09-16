@@ -19,11 +19,13 @@ import { useGetMastery } from '../../../SpecializationComponents/hooks';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 
 const SoftSkillsModal = () => {
-  const [skill, setSkill] = useState('');
-  const [addSkill, setAddSkill] = useState([]);
-  const [allSkills, setAllSkills] = useState([]);
-  const [idDeletedSkills, setIdDeletedSkills] = useState([]);
-  const [availableSkills, setAvailableSkills] = useState([]);
+  const [state, setState] = useState({
+    skill: '',
+    addSkill: [],
+    allSkills: [],
+    idDeletedSkills: [],
+    availableSkills: [],
+  });
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSoftSkillsModal);
@@ -32,17 +34,21 @@ const SoftSkillsModal = () => {
   const [deleteSkill] = useDeleteSkillByIdMutation();
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const {data, isLoading: isLoadingAvailableSkills, isError: isErrorAvailableSkills } = useGetAvailableSoftSkillsQuery();
+  const {skill, addSkill, availableSkills, allSkills, idDeletedSkills} = state;
+
+  const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
+  const updateState= (newState) => setState((prevState) => ({ ...prevState, ...newState }));
 
   useEffect(() => {
     if (!isLoadingSkills || !isLoadingAvailableSkills || data) {
       const filteredSkills = data?.filter((v) => !skills?.some((skill) => skill.name === v)) || [];
 
-      setAvailableSkills(filteredSkills);
-      setAllSkills(skills);
+      updateState({
+        availableSkills: filteredSkills,
+        allSkills: skills,
+      });
     }
   }, [isLoadingSkills, isLoadingAvailableSkills, data]);
-
-  const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
 
   const handleAddSkill = () => {
     const isSkillExist = allSkills.find((v) => v.name === skill);
@@ -52,26 +58,32 @@ const SoftSkillsModal = () => {
 
     if (!isSkillExist && skill) {
       if (!isAddedSkill) {
-        setAddSkill((prev) => [...prev, { id, name: isAddedSkill?.name || skill }]);
+        updateState({ addSkill: [...addSkill, { id, name: isAddedSkill?.name || skill }] });
       }
 
-      setAllSkills((prev) => [...prev, { id, name: isAddedSkill?.name || skill }]);
-      setAvailableSkills((prev) => prev.filter((availableSkill) => availableSkill !== skill));
-      setIdDeletedSkills((prev) => prev.filter((id) => id !== id));
-      setSkill('')
+      updateState({
+        skill: '',
+        allSkills: [...allSkills, { id, name: isAddedSkill?.name || skill}],
+        availableSkills: availableSkills.filter((availableSkill) => availableSkill !== skill),
+        idDeletedSkills: idDeletedSkills.filter((v) => v.id !== id)
+      })
     }
   }
 
   const handleDeleteSkill = (skillId) => {
-    const isSkillExist = skills.find((skill) => skill.id === skillId);
+    const isSkillExist = skills.find((v) => v.id === skillId);
 
     if (isSkillExist) {
-      setIdDeletedSkills((prev) => ([...prev, { id: skillId, name: isSkillExist.name }]));
+      updateState({
+        idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
+      })
     }
 
-    setAvailableSkills((prev) => [...prev, allSkills.find((skill) => skill.id === skillId).name]);
-    setAllSkills((prev) => prev.filter((skill) => skill.id !== skillId));
-    setAddSkill((prev) => prev.filter((skill) => skill.id !== skillId));
+    updateState({
+      availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
+      allSkills: allSkills.filter((skill) => skill.id !== skillId),
+      addSkill: addSkill.filter((skill) => skill.id !== skillId)
+    })
   }
 
   const handleSubmit = (e) => {
@@ -115,7 +127,7 @@ const SoftSkillsModal = () => {
                            disabled={availableSkills?.length === 0}
                            variant="standard"
                            name='softSkill'
-                           handleChange={({target}) => setSkill(target.value)}
+                           handleChange={({target}) => updateState({skill: target.value})}
             />
             <IconButton disabled={!skill} sx={styles.iconBtn} onClick={handleAddSkill} >
               <AddIcon />
