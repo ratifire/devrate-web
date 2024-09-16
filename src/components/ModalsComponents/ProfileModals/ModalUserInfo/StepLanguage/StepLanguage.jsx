@@ -27,8 +27,6 @@ const StepLanguage = () => {
     helperTextLevel: '',
   });
 
-  const [disabled, setDisabled] = useState(true);
-
   const formik = useFormik({
     initialValues: {
       languages: [],
@@ -46,15 +44,6 @@ const StepLanguage = () => {
       formik.setFieldValue('languages', languages);
     }
   }, [languages]);
-
-  // Compare initial languages with current form values to detect changes
-  useEffect(() => {
-    if (languages) {
-      const isFormUnchanged =
-        JSON.stringify(formik.values.languages) === JSON.stringify(languages);
-      setDisabled(isFormUnchanged);
-    }
-  }, [formik.values.languages, languages]);
 
   const handleLanguageChange = (language) => {
     setFormState((prevState) => ({
@@ -125,6 +114,8 @@ const StepLanguage = () => {
     );
   };
 
+  let isFormUnchanged = JSON.stringify(formik.values.languages) === JSON.stringify(languages);
+
   return (
     <Box sx={styles.wrapper}>
       <form onSubmit={formik.handleSubmit}>
@@ -162,7 +153,7 @@ const StepLanguage = () => {
         </Box>
 
         <ButtonDef
-          disabled={disabled}
+          disabled={isFormUnchanged}
           variant="contained"
           type="submit"
           label="profile.modal.btn"
