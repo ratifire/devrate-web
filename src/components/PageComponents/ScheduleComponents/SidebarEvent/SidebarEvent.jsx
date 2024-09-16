@@ -1,6 +1,6 @@
 import { formatDate } from '@fullcalendar/core';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Button, IconButton, Paper, Typography } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import { styles } from './SidebarEvent.styles';
@@ -19,8 +19,8 @@ const SidebarEvent = ({ event }) => {
   const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric', separator: '/', localeMatcher: 'lookup' };
   const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: false };
 
-  const formattedDate = formatDate(startTime, optionsDate);
-  const formattedTime = formatDate(startTime, optionsTime);
+  const formattedDate = useMemo(() => formatDate(startTime, optionsDate), [startTime]);
+  const formattedTime = useMemo(() => formatDate(startTime, optionsTime), [startTime]);
 
   const [month, day, year] = formattedDate.split('/');
   const customFormattedDate = `${day}/${month}/${year}`;
