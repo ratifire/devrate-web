@@ -20,13 +20,13 @@ import {
 import { useGetMastery } from '../../../SpecializationComponents/hooks';
 
 const HardSkillsModal = () => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const [skill, setSkill] = useState('');
   const [idDeletedSkills, setIdDeletedSkills] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
   const [addSkills, setAddSkills] = useState([]);
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const { masteryId, isError: isErrorMastery, isLoading: isLoadingMastery } = useGetMastery();
   const {data: skills, isError: isErrorSkills, isLoading: isLoadingSkills} = useGetHardSkillsByMasteryIdQuery({masteryId}, {skip: !masteryId});
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
@@ -39,22 +39,22 @@ const HardSkillsModal = () => {
 
   const handleClose = useCallback(() => dispatch(closeModal({ modalName: 'openSkillsModal' })), [dispatch]);
 
-  const handleDeleteSkill = (softSkillId) => {
-    const isSkillExist = skills.find((skill) => skill.id === softSkillId);
+  const handleDeleteSkill = (skillId) => {
+    const isSkillExist = skills.find((skill) => skill.id === skillId);
 
     if (isSkillExist) {
-      setIdDeletedSkills((prev) => ([...prev, softSkillId]));
+      setIdDeletedSkills((prev) => ([...prev, { id: skillId, name: isSkillExist.name }]));
     }
 
-    setAllSkills((prev) => prev.filter((skill) => skill.id !== softSkillId));
-    setAddSkills((prev) => prev.filter((skill) => skill.id !== softSkillId));
+    setAllSkills((prev) => prev.filter((skill) => skill.id !== skillId));
+    setAddSkills((prev) => prev.filter((skill) => skill.id !== skillId));
   }
 
   const handleAddSkill = () => {
     const isSkillExist = allSkills.find((v) => v.name === skill);
     const isSkillInDataBase = skills.find((v) => v.name === skill);
     const skillValue = skill.trim();
-    const id = isSkillInDataBase.id || uuidv4();
+    const id = isSkillInDataBase?.id || uuidv4();
 
     if (allSkills.length < MAX_SKILLS && !isSkillExist && skillValue) {
       if (!isSkillInDataBase) {
@@ -62,6 +62,7 @@ const HardSkillsModal = () => {
       }
 
       setAllSkills((prev) => ([...prev, { id, name: skillValue }]));
+      setIdDeletedSkills((prev) => prev.filter((id) => id !== id));
       setSkill('');
     }
   }
@@ -84,8 +85,8 @@ const HardSkillsModal = () => {
     }
 
     if (idDeletedSkills.length) {
-      idDeletedSkills.forEach((id) => {
-        deleteSkill(id);
+      idDeletedSkills.forEach((v) => {
+        deleteSkill(v.id);
       });
     }
 
