@@ -1,7 +1,5 @@
-/* eslint-disable */
-
 import {v4 as uuidv4} from 'uuid';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import AddIcon from '@mui/icons-material/Add';
 import { closeModal } from '../../../../redux/modal/modalSlice';
@@ -20,10 +18,13 @@ import {
 import { useGetMastery } from '../../../SpecializationComponents/hooks';
 
 const HardSkillsModal = () => {
-  const [skill, setSkill] = useState('');
-  const [idDeletedSkills, setIdDeletedSkills] = useState([]);
-  const [allSkills, setAllSkills] = useState([]);
-  const [addSkills, setAddSkills] = useState([]);
+  const [state, setState] = useState({
+    skill: '',
+    idDeletedSkills: [],
+    allSkills: [],
+    addSkills: [],
+  });
+  const { skill, idDeletedSkills, allSkills, addSkills } = state;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
@@ -33,21 +34,29 @@ const HardSkillsModal = () => {
   const [deleteSkill] = useDeleteSkillByIdMutation();
   const isFindSkill = allSkills?.find((v) => v.name === skill.trim());
 
+  const updateState = (newState) => {
+    setState((prevState) => ({ ...prevState, ...newState }));
+  };
+
   useEffect(() => {
-    setAllSkills(skills);
+    updateState({ allSkills: skills });
   }, [isLoadingSkills]);
 
-  const handleClose = useCallback(() => dispatch(closeModal({ modalName: 'openSkillsModal' })), [dispatch]);
+  const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
 
   const handleDeleteSkill = (skillId) => {
     const isSkillExist = skills.find((skill) => skill.id === skillId);
 
     if (isSkillExist) {
-      setIdDeletedSkills((prev) => ([...prev, { id: skillId, name: isSkillExist.name }]));
+      updateState({
+        idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
+      });
     }
 
-    setAllSkills((prev) => prev.filter((skill) => skill.id !== skillId));
-    setAddSkills((prev) => prev.filter((skill) => skill.id !== skillId));
+    updateState({
+      allSkills: allSkills.filter((skill) => skill.id !== skillId),
+      addSkills: addSkills.filter((skill) => skill.id !== skillId),
+    });
   }
 
   const handleAddSkill = () => {
@@ -58,19 +67,20 @@ const HardSkillsModal = () => {
 
     if (allSkills.length < MAX_SKILLS && !isSkillExist && skillValue) {
       if (!isSkillInDataBase) {
-        setAddSkills((prev) => ([...prev, { id, name: skillValue }]));
+        updateState({ addSkills: [...addSkills, { id, name: skillValue }] });
       }
 
-      setAllSkills((prev) => ([...prev, { id, name: skillValue }]));
-      setIdDeletedSkills((prev) => prev.filter((id) => id !== id));
-      setSkill('');
+      updateState({
+        allSkills: [...allSkills, { id, name: skillValue }],
+        skill: '',
+        idDeletedSkills: idDeletedSkills.filter((v) => v.id !== id),
+      });
     }
   }
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      setSkill('');
       handleAddSkill();
     }
   }
@@ -112,7 +122,7 @@ const HardSkillsModal = () => {
               variant='outlined'
               autoFocus={true}
               value={skill}
-              onChange={(e) => setSkill(e.target.value)}
+              onChange={(e) => updateState({ skill: e.target.value })}
               label={t('specialization.modal.skills.placeholder')}
               fullWidth
             />
