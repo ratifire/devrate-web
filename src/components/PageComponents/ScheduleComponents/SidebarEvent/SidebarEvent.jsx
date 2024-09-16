@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { useSelector } from 'react-redux';
 
-export default function SidebarEvent({ event }) {
+const SidebarEvent = ({ event }) => {
   const { id, type, link, host, startTime } = event;
   // eslint-disable-next-line react/prop-types
   const { name, surname, status } = host;
@@ -84,8 +84,20 @@ export default function SidebarEvent({ event }) {
       </Box>
     </Paper>
   );
-}
+};
 
 SidebarEvent.propTypes = {
-  event: PropTypes.object,
+  event: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    host: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      surname: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+    }).isRequired,
+    startTime: PropTypes.string.isRequired,
+  }).isRequired,
 };
+
+export default SidebarEvent;
