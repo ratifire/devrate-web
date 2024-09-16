@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 
 const SidebarEvent = ({ event }) => {
   const { id, type, link, host, startTime } = event;
-  // eslint-disable-next-line react/prop-types
   const { name, surname, status } = host;
 
   const { id: userId } = useSelector((state) => state.auth.user.data);
