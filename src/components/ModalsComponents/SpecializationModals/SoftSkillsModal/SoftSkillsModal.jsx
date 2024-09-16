@@ -48,14 +48,14 @@ const SoftSkillsModal = () => {
     const isSkillExist = allSkills.find((v) => v.name === skill);
     const isAddedSkill = skills.find((v) => v.name === skill);
 
-    const id = uuidv4();
+    const id = isAddedSkill?.id || uuidv4();
 
     if (!isSkillExist && skill) {
       if (!isAddedSkill) {
-        setAddSkill((prev) => [...prev, { id: isAddedSkill?.id || id, name: isAddedSkill?.name || skill }]);
+        setAddSkill((prev) => [...prev, { id, name: isAddedSkill?.name || skill }]);
       }
 
-      setAllSkills((prev) => [...prev, { id: isAddedSkill?.id || id, name: isAddedSkill?.name || skill }]);
+      setAllSkills((prev) => [...prev, { id, name: isAddedSkill?.name || skill }]);
       setAvailableSkills((prev) => prev.filter((availableSkill) => availableSkill !== skill));
       setIdDeletedSkills((prev) => prev.filter((id) => id !== id));
       setSkill('')
