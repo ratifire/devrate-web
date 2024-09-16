@@ -1,9 +1,10 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts';
 import React from 'react';
-import { getLevel, useUserSkillsAndMasteryData } from '../utils';
+import { getLevel } from '../utils';
 import { styles } from './LevelChart.styles.js';
 import { useTranslation } from 'react-i18next';
+import { useUserSkillsAndMasteryData } from '../../../../../utils/hooks/specialization';
 
 const LevelChart = () => {
   const { skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();

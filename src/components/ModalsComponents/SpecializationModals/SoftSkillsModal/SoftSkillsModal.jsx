@@ -15,8 +15,8 @@ import {
 } from '../../../../redux/specialization/specializationApiSlice';
 import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useGetMastery } from '../../../SpecializationComponents/hooks';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
+import { useGetMastery } from '../../../../utils/hooks/specialization';
 
 const SoftSkillsModal = () => {
   const [state, setState] = useState({

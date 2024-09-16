@@ -3,7 +3,7 @@ import { useGetMasteriesHistoryStatisticQuery } from '../../../../../../redux/ch
 import {
   useGetMasteriesBySpecializationIdQuery,
 } from '../../../../../../redux/specialization/specializationApiSlice';
-import { useGetSpecializationId } from '../../../../../SpecializationComponents/hooks';
+import { useGetSpecializationId } from '../../../../../../utils/hooks/specialization';
 
 const useGetHistoryData = ({ from, to }) => {
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);

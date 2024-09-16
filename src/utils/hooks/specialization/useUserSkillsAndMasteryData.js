@@ -1,5 +1,5 @@
-import { useGetHardSkillsByMasteryIdQuery } from '../../../../../../redux/specialization/specializationApiSlice';
-import { useGetMastery } from '../../../../../SpecializationComponents/hooks';
+import { useGetMastery } from './index';
+import { useGetHardSkillsByMasteryIdQuery } from '../../../redux/specialization/specializationApiSlice';
 
 const useUserSkillsAndMasteryData = () => {
   const {

@@ -15,7 +15,7 @@ import {
   useAddSkillToMasteryMutation, useDeleteSkillByIdMutation,
   useGetHardSkillsByMasteryIdQuery,
 } from '../../../../redux/specialization/specializationApiSlice';
-import { useGetMastery } from '../../../SpecializationComponents/hooks';
+import { useGetMastery } from '../../../../utils/hooks/specialization';
 
 const HardSkillsModal = () => {
   const [state, setState] = useState({

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
-import { useUserSkillsAndMasteryData } from '../Statistics/utils';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
+import { useUserSkillsAndMasteryData } from '../../../../utils/hooks/specialization';
 
 const HardSkills = () => {
   const { skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();

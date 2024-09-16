@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { useGetSoftSkillsQuery } from '../../../../redux/specialization/specializationApiSlice';
-import { useGetMastery } from '../../../SpecializationComponents/hooks';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
+import { useGetMastery } from '../../../../utils/hooks/specialization';
 
 const SoftSkills = () => {
   const dispatch = useDispatch();
