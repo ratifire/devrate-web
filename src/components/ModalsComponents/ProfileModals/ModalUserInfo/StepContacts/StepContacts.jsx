@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../../../redux/modal/modalSlice';
 import {
@@ -28,7 +28,6 @@ const StepContacts = () => {
   const userId = useSelector((state) => state.auth.user.data.id);
   const contactsQuery = useGetUserContactsQuery(userId);
   const dispatch = useDispatch();
-  const [disabled, setDisabled] = useState(true);
 
   const valuesMap = contactsQuery.data.reduce((acc, contact) => {
     acc[typeNameMap[contact.type]] = contact.value;
@@ -66,10 +65,6 @@ const StepContacts = () => {
     validationSchema: StepContactsSchema,
     onSubmit,
   });
-
-  useEffect(() => {
-    setDisabled(!formik.dirty);
-  }, [formik.dirty]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -146,7 +141,7 @@ const StepContacts = () => {
           error={formik.touched.phone && Boolean(formik.errors.phone)}
         />
       </Box>
-      <ButtonDef disabled={disabled} variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
+      <ButtonDef disabled={!formik.dirty} variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
     </form>
   );
 };
