@@ -35,7 +35,7 @@ const SoftSkillsModal = () => {
 
   useEffect(() => {
     if (!isLoadingSkills || !isLoadingAvailableSkills || data) {
-      const filteredSkills = data.filter((v) => !skills?.some((skill) => skill.name === v)) || [];
+      const filteredSkills = data?.filter((v) => !skills?.some((skill) => skill.name === v)) || [];
 
       setAvailableSkills(filteredSkills);
       setAllSkills(skills);
