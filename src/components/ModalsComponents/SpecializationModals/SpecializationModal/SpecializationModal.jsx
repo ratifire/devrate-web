@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,9 +41,8 @@ const SpecializationModal = React.memo(() => {
   const [triggerRequest] = useLazyGetMasteriesBySpecializationIdQuery();
   const [setNewMainMasteryBySpecIdAndMasteryId] = useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
   const [addSkills] = useAddSkillsToMasteryMutation();
-
-  const { data: specializations } = useGetSpecializationListQuery('specialization-names.json');
-
+  const { data } = useGetSpecializationListQuery('specialization-names.json');
+  const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data])
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
 
