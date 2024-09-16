@@ -20,12 +20,10 @@ export const styles = {
     backgroundColor: '#303032',
     border: 'none',
     borderRadius: '4px',
-}, tooltipLabel:{
-
+  },
+  tooltipLabel:{
       color: '#FFFFFFF',
       backgroundColor: '#303032',
       fontSize: '14px',
-
   }
-
 };
