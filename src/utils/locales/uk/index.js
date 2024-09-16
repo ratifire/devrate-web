@@ -88,6 +88,7 @@ export const uk = {
         required: "Це обов'язкове поле",
         password_short: 'Пароль занадто короткий',
         password_long: 'Пароль занадто довгий',
+        password_invalid: 'Неприпустимий пароль',
       },
       registration: {
         title: 'Реєстрація',
@@ -150,6 +151,7 @@ export const uk = {
         password_short: 'Пароль занадто короткий',
         password_long: 'Пароль занадто довгий',
         password_must_match: 'Паролі мають збігатися',
+        password_invalid: 'Неприпустимий пароль',
         not_valid: 'Пароль не валiдний',
         code_required: "Код обов'язковий",
         code_symbol_min: 'Кожна цифра коду повинна мати довжину 1 символ',
@@ -181,7 +183,11 @@ export const uk = {
       experience: {
         workExperience: 'Досвід роботи',
         achievement: 'Досягнення',
-        skills: 'Навички',
+        skills: {
+          title: 'Навички',
+          search: 'Пошук',
+          star: 'Основна спеціалізація',
+        },
         education: 'Освіта',
         duties: 'Обовʼязки',
         endYear: 'Теп. час',
