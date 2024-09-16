@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, styled, Tab, Tabs } from '@mui/material';
 import styles from './ExperienceSection.styles';
 import Education from '../../OtherProfileComponents/ExperienceSection/Education';
-// import Skills from '../../OtherProfileComponents/ExperienceSection/Skills';
+import Skills from '../../OtherProfileComponents/ExperienceSection/Skills';
 import Achievement from '../../OtherProfileComponents/ExperienceSection/Achievement';
 import { useTranslation } from 'react-i18next';
 import WorkExperience from './WorkExperience';
@@ -20,7 +20,7 @@ const ExperienceSection = ({id}) => {
     const tab = {
       openExperience: <WorkExperience id={id}/>,
       achievement: <Achievement id={id}/>,
-      // skills: <Skills id={id}/>,
+      skills: <Skills id={id}/>,
       education: <Education id={id}/>,
     };
 
@@ -49,10 +49,10 @@ const ExperienceSection = ({id}) => {
   return (
     <Box sx={styles.experienceContainer}>
       <Box style={styles.tabsContainer}>
-        <StyledTabs value={value} onChange={handleChange} textColor='primary' indicatorColor='primary[200]'>
+        <StyledTabs  sx={styles.wrapperTab} value={value} onChange={handleChange} textColor='primary' indicatorColor='primary[200]'>
           <StyledTab value='openExperience' label={t('profile.experience.workExperience')} sx={styles.tabItem} />
           <StyledTab value='achievement' label={t('profile.experience.achievement')} sx={styles.tabItem} />
-          {/*<StyledTab value='skills' label={t('profile.experience.skills')} sx={styles.tabItem} />*/}
+          <StyledTab value='skills' label={t('profile.experience.skills.title')} sx={styles.tabItem} />
           <StyledTab value='education' label={t('profile.experience.education')} sx={styles.tabItem} />
         </StyledTabs>
       </Box>

@@ -2,8 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Box, IconButton, Tab, Tabs, Typography } from '@mui/material';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import { Box, Typography } from '@mui/material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
@@ -21,6 +20,9 @@ import { styles } from './ScheduleInterview.styles';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
+import RenderTabs from './components/TabsRender';
+import RenderTimeSlots from './components/RenderTimeSlots';
+import WeekNavigation from './components/WeekNavigation';
 
 const ScheduleInterviewModal = ({ role }) => {
   const dispatch = useDispatch();
@@ -36,13 +38,18 @@ const ScheduleInterviewModal = ({ role }) => {
   const [getMainMastery] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
 
+  const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
+  const handleTabChange = (_, newTab) => setTab(newTab);
+
   useEffect(() => {
     setWeekDates(getDatesInWeek(date));
   }, [date]);
 
-  const formik = useFormik({
-    initialValues: { dates: {}},
-    onSubmit: async (values, { resetForm }) => {
+  const initialValues={
+    dates: {}
+  }
+
+  const onSubmit  = async (values, { resetForm }) => {
       const mainSpec = await getMainSpecialization(currentUserId);
       if (!mainSpec.data) return;
 
@@ -57,12 +64,12 @@ const ScheduleInterviewModal = ({ role }) => {
 
       resetForm();
       handleClose();
-    },
+  }
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
   });
-
-  const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
-
-  const handleTabChange = (_, newTab) => setTab(newTab);
 
   const handleWeekNavigation = (direction) => {
     setDate((prevDate) => {
@@ -89,7 +96,7 @@ const ScheduleInterviewModal = ({ role }) => {
     formik.setFieldValue('dates', newDates);
   };
 
-  const generateTimeButtons = (day) => {
+   const generateTimeButtons = (day) => {
     return range(0, 24).map((hour) => {
       const time = day.set({ hour });
       const timeIso = time.toISO();
@@ -109,78 +116,45 @@ const ScheduleInterviewModal = ({ role }) => {
     });
   };
 
-  const weekTitle = useMemo(() => {
-    return DateTime.now().toFormat('W') === date.toFormat('W')
-      ? t('This week')
-      : `${weekDates[0].toFormat('MMMM, d')} - ${weekDates.at(-1).toFormat('MMMM, d')}`;
-  }, [weekDates, date]);
-
-  const renderTabs = () => (
-    <Tabs sx={styles.tabsRow} value={tab} onChange={handleTabChange}>
-      {weekDates.map((day) => {
-        const label = day.toFormat('EEE, d');
-        const isPastDate = DateTime.now().startOf('day') > day;
-
-        const disableWeekends = formik.values.monFri && day.isWeekend;
-        const disableWeekdays = formik.values.satSun && !day.isWeekend;
-
-        return (
-          <Tab
-            disabled={isPastDate || disableWeekends || disableWeekdays}
-            key={label}
-            label={label}
-            value={label}
-            sx={styles.tab}
-          />
-        );
-      })}
-    </Tabs>
+  const weekTitle = useMemo(() =>
+      DateTime.now().toFormat('W') === date.toFormat('W')
+        ? t('This week')
+        : `${weekDates[0].toFormat('MMMM, d')} - ${weekDates.at(-1).toFormat('MMMM, d')}`,
+    [weekDates, date]
   );
-
-  const renderTimeSlots = () => {
-    return weekDates.map((day) => {
-      if (tab !== day.toFormat('EEE, d')) return null;
-
-      return (
-        <React.Fragment key={`tab-panel-${day}`}>
-          <Box sx={styles.texts}>
-            <Typography variant="subtitle2">Choose a comfort time</Typography>
-            <Typography variant="body1">{weekDates[0]?.toFormat('z (ZZZZ)')}</Typography>
-          </Box>
-          <Box sx={styles.timeGrid}>{generateTimeButtons(day)}</Box>
-        </React.Fragment>
-      );
-    });
-  };
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={isOpen}>
+
       <Typography variant="subtitle1" sx={styles.title}>
         {t('specialization.modal.scheduleModal.scheduleInterview')}
       </Typography>
+
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
-          <Box sx={styles.weekHeading}>
-            <IconButton onClick={() => handleWeekNavigation('prev')}>
-              <ChevronLeft />
-            </IconButton>
-            <Typography variant="subtitle2">{weekTitle}</Typography>
-            <IconButton onClick={() => handleWeekNavigation('next')}>
-              <ChevronRight />
-            </IconButton>
-          </Box>
-          {renderTabs()}
-          {renderTimeSlots()}
-          <Box sx={styles.action}>
+          <WeekNavigation
+           onWeekNav={handleWeekNavigation}
+           weekTitle={weekTitle}
+          />
+          <RenderTabs
+            weekDates={weekDates}
+            onChange={handleTabChange}
+            tab={tab}
+          />
+          <RenderTimeSlots
+            timeButtons={generateTimeButtons}
+            weekDates={weekDates}
+            tab={tab}
+          />
             <ButtonDef
               variant="contained"
               type="submit"
               label={t('specialization.modal.scheduleModal.schedule')}
               correctStyle={styles.workExperienceBtn}
             />
-          </Box>
         </Box>
       </form>
+
     </ModalLayoutProfile>
   );
 };

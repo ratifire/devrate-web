@@ -87,6 +87,7 @@ export const en = {
         required: 'This is a required field',
         password_short: 'Password too short',
         password_long: 'Password too long',
+        password_invalid: 'Incorrect password',
       },
       registration: {
         title: 'Registration',
@@ -149,6 +150,7 @@ export const en = {
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
+        password_invalid: 'Incorrect password',
         not_valid: 'Password not valid',
         code_required: 'Code is required',
         code_symbol_min: 'Each code digit must be 1 character long',
@@ -180,7 +182,11 @@ export const en = {
       experience: {
         workExperience: 'Work experience',
         achievement: 'Achievement',
-        skills: 'Skills',
+        skills: {
+          title: 'Skills',
+          search: 'Search',
+          star: 'Main specialization',
+        },
         education: 'Education',
         duties: 'Duties',
         endYear: 'Present',
