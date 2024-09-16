@@ -68,8 +68,8 @@ const InterviewChart = () => {
             <XAxis dataKey='name' />
             <YAxis />
             <Tooltip contentStyle={styles.tooltipContent} labelStyle={styles.tooltipLabel} />
-            <Bar dataKey='conducted' fill='#CEB0FA' radius={[2, 2, 0, 0]} />
-            <Bar dataKey='passed' fill='#8133F1' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='conducted' fill='#FFFFFF' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='passed' fill='#FFFFFF' radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Box>

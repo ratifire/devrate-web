@@ -87,8 +87,8 @@ const SkillsAssessmentChart = () => {
             <Area
               type='monotone'
               dataKey='value'
-              stroke='#25CBFF'
-              strokeWidth={3}
+              stroke='#FFFFFF'
+              strokeWidth={0}
               fillOpacity={1}
               fill='url(#colorValue)'
             />
