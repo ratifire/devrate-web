@@ -8,7 +8,7 @@ export const styles = {
       '>h6': {
         flex: '1 2 max(266px)',
         maxWidth: '266px',
-        width:'10vw',
+        width: '10vw',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
       },

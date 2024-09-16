@@ -4,9 +4,9 @@ import createTenDaysInterviewData from './helpers/createTenDaysInterviewData';
 import createTenMonthsHistoryData from './helpers/createTenMonthsHistoryData';
 import createTenMonthsInterviewData from './helpers/createTenMonthsInterviewData';
 import getCurrentAndLastMonths from './helpers/getCurrentAndLastMonths';
+import getLevel from './helpers/getLevel';
 import useGetHistoryData from './hooks/useGetHistoryData';
 import useHandleChange from './hooks/useHandleChange';
-import getLevel from './helpers/getLevel';
 
 export {
   arithmeticAverageSkillValue,
@@ -15,7 +15,7 @@ export {
   createTenMonthsHistoryData,
   createTenMonthsInterviewData,
   getCurrentAndLastMonths,
+  getLevel,
   useGetHistoryData,
   useHandleChange,
-  getLevel,
 };

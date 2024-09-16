@@ -1,8 +1,8 @@
-import React from 'react';
+import { Box, Divider, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { Box, Typography, Divider } from '@mui/material';
-import LinearProgressWithLabel from '../../../UI/LinearProgressWithLabel';
+import React from 'react';
 import CustomTooltip from '../../../UI/CustomTooltip';
+import LinearProgressWithLabel from '../../../UI/LinearProgressWithLabel';
 import { CustomArrowCircleDownIcon } from './CustomArrowCircleDownIcon';
 import { CustomArrowCircleUpIcon } from './CustomArrowCircleUpIcon';
 import { styles } from './ItemSkill.styles';
@@ -19,7 +19,7 @@ const ItemSkill = ({ name, value, grows }) => {
             <Typography variant='subtitle2'>{name}</Typography>
           </CustomTooltip>
         </Box>
-        <LinearProgressWithLabel value={value} size='s' orientation='horizontal'/>
+        <LinearProgressWithLabel value={value} size='s' orientation='horizontal' />
       </Box>
       <Divider sx={styles.divider} />
     </>

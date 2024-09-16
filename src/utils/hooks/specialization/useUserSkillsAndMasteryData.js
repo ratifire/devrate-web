@@ -1,14 +1,8 @@
-import { useGetMastery } from './index';
 import { useGetHardSkillsByMasteryIdQuery } from '../../../redux/specialization/specializationApiSlice';
+import { useGetMastery } from './index';
 
 const useUserSkillsAndMasteryData = () => {
-  const {
-    isLoading: isLoadingMastery,
-    isError: isErrorMastery,
-    masteryId,
-    userId,
-    activeMastery,
-  } = useGetMastery();
+  const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId, userId, activeMastery } = useGetMastery();
 
   const {
     data: skills = [],

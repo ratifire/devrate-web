@@ -1,13 +1,11 @@
 import { useSelector } from 'react-redux';
 import { useGetMasteriesHistoryStatisticQuery } from '../../../../../../redux/chart/chartApiSlice';
-import {
-  useGetMasteriesBySpecializationIdQuery,
-} from '../../../../../../redux/specialization/specializationApiSlice';
+import { useGetMasteriesBySpecializationIdQuery } from '../../../../../../redux/specialization/specializationApiSlice';
 import { useGetSpecializationId } from '../../../../../../utils/hooks/specialization';
 
 const useGetHistoryData = ({ from, to }) => {
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
-  const specializationId =  useGetSpecializationId()
+  const specializationId = useGetSpecializationId();
   const {
     data: masteries,
     isLoading: isLoadingMasteries,

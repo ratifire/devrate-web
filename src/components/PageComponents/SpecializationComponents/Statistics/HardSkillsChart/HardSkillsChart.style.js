@@ -1,7 +1,7 @@
 export const styles = {
-  hardSkillsChartContainer:{
+  hardSkillsChartContainer: {
     width: '264px',
-    height: '340px'
+    height: '340px',
   },
   title: {
     display: 'flex',
@@ -13,17 +13,17 @@ export const styles = {
   text: (theme) => ({
     color: theme.palette.neutral[50],
     display: 'block',
-    paddingBottom: '6px'
+    paddingBottom: '6px',
   }),
-  tooltipContent:{
-    color: '#FFFFFFF',
+  tooltipContent: {
+    color: '#FFFFFF',
     backgroundColor: '#303032',
     border: 'none',
     borderRadius: '4px',
   },
-  tooltipLabel:{
-      color: '#FFFFFFF',
-      backgroundColor: '#303032',
-      fontSize: '14px',
-  }
+  tooltipLabel: {
+    color: '#FFFFFF',
+    backgroundColor: '#303032',
+    fontSize: '14px',
+  },
 };

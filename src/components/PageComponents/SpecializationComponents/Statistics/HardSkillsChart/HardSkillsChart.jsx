@@ -1,10 +1,10 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
+import { useUserSkillsAndMasteryData } from '../../../../../utils/hooks/specialization';
 import roundData from '../../HardSkills/roundData';
 import { styles } from './HardSkillsChart.style.js';
-import { useTranslation } from 'react-i18next';
-import { useUserSkillsAndMasteryData } from '../../../../../utils/hooks/specialization';
 
 const HardSkillsChart = () => {
   const { skills, isLoading, isError } = useUserSkillsAndMasteryData();

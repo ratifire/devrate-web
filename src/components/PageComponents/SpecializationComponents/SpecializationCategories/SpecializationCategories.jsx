@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { styles } from './SpecializationCategories.styles';
-import { Box, IconButton, Typography, CircularProgress } from '@mui/material';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
-import StarIcon from '@mui/icons-material/Star';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import StarIcon from '@mui/icons-material/Star';
+import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '../../../../redux/modal/modalSlice';
+import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 import {
   useDeleteSpecializationByIdMutation,
   useGetSpecializationByUserIdQuery,
@@ -14,23 +14,25 @@ import {
   useUpdateSpecializationAsMainByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import {
-  setMainSpecializations,
   setActiveSpecialization,
+  setMainSpecializations,
   setSelectedSpecialization,
 } from '../../../../redux/specialization/specializationSlice';
-import { openModal } from '../../../../redux/modal/modalSlice';
-import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
-import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
+import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
+import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const { activeSpecialization, mainSpecialization, selectedSpecialization } = useSelector((state) => state.specialization);
+  const { activeSpecialization, mainSpecialization, selectedSpecialization } = useSelector(
+    (state) => state.specialization
+  );
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
-  const specializationsSorted = specializations?.toSorted((a, b) => a.main === b.main ? 0 : a.main ? 1 : -1);
+  const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
   const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
@@ -38,7 +40,7 @@ const SpecializationCategories = () => {
   const [anchorEl, setAnchorEl] = useState({});
 
   useEffect(() => {
-    dispatch(setMainSpecializations(specializations))
+    dispatch(setMainSpecializations(specializations));
   }, [specializations]);
 
   useEffect(() => {
@@ -73,13 +75,13 @@ const SpecializationCategories = () => {
   const handlerChangeMainSpecialization = async (selectedSpecialization) => {
     if (specializations?.length === 0 || selectedSpecialization === null) return;
     await updateSpecializationAsMainById({ ...selectedSpecialization, main: true }).unwrap();
-    dispatch(setMainSpecializations(selectedSpecialization))
+    dispatch(setMainSpecializations(selectedSpecialization));
   };
 
   const handlerDeleteSpecialization = async (id) => {
     await deleteSpecialization(id).unwrap();
     dispatch(setSelectedSpecialization(null));
-    dispatch(setActiveSpecialization(mainSpecialization))
+    dispatch(setActiveSpecialization(mainSpecialization));
     handleCloseMenu(id);
   };
 

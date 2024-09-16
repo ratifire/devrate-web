@@ -2,15 +2,15 @@ export const styles = {
   contentWrapper: (theme) => ({
     padding: theme.spacing(4),
   }),
-  
+
   title: (theme) => ({
     marginBottom: theme.spacing(2),
   }),
-  
+
   description: (theme) => ({
     marginBottom: theme.spacing(3),
   }),
-  
+
   buttonGroup: (theme) => ({
     width: '100%',
     boxShadow: 'none',

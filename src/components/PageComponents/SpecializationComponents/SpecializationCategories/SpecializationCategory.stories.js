@@ -1,6 +1,6 @@
 import React from 'react';
-import SpecializationCategories from './SpecializationCategories';
 import { decorators } from '../../../../../.storybook/preview';
+import SpecializationCategories from './SpecializationCategories';
 
 export default {
   title: 'Specialization/SpecializationCategories',

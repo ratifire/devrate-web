@@ -1,7 +1,7 @@
-import { SvgIcon } from '@mui/material';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import React from 'react';
-import { styles } from './CustomArrowCircleUpIcon.styles';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
+import { SvgIcon } from '@mui/material'
+import React from 'react'
+import { styles } from './CustomArrowCircleUpIcon.styles'
 
 const CustomArrowCircleUpIcon = (props) => {
   return (
