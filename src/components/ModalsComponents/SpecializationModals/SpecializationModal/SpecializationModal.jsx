@@ -4,7 +4,7 @@ import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/index';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
 import { styles } from './SpecializationModal.styles';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useTranslation } from 'react-i18next';
@@ -41,7 +41,8 @@ const SpecializationModal = React.memo(() => {
   const [triggerRequest] = useLazyGetMasteriesBySpecializationIdQuery();
   const [setNewMainMasteryBySpecIdAndMasteryId] = useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
   const [addSkills] = useAddSkillsToMasteryMutation();
-  const { data } = useGetSpecializationListQuery('specialization-names.json');
+  const { data, isLoading, isError } = useGetSpecializationListQuery('specialization-names.json');
+
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data])
   const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
@@ -167,6 +168,14 @@ const SpecializationModal = React.memo(() => {
   const deleteSkillsHandler = (skillToDelete) => {
     setSkills(skills.filter((item) => item !== skillToDelete));
   };
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (isError) {
+    return <Typography variant='h6'>Something error...</Typography>;
+  }
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openSpecialization}>

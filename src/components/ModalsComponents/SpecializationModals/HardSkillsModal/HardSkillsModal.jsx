@@ -31,8 +31,11 @@ const HardSkillsModal = () => {
   const {data: skills, isError: isErrorSkills, isLoading: isLoadingSkills} = useGetHardSkillsByMasteryIdQuery({masteryId}, {skip: !masteryId});
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
+
   const { skill, idDeletedSkills, allSkills, addSkills } = state;
   const isFindSkill = allSkills?.find((v) => v.name === skill.trim());
+  const isLoading = isLoadingMastery || isLoadingSkills;
+  const isError = isErrorMastery || isErrorSkills;
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
   const updateState = (newState) => setState((prevState) => ({ ...prevState, ...newState }));
@@ -99,12 +102,12 @@ const HardSkillsModal = () => {
     handleClose();
   }
 
-  if (isLoadingMastery || isLoadingSkills) {
+  if (isLoading) {
     return <CircularProgress />;
   }
 
-  if (isErrorMastery || isErrorSkills) {
-    return <Typography variant='h6'>{t('specialisation.skillsModal.error')}</Typography>;
+  if (isError) {
+    return <Typography variant='h6'>Something error...</Typography>;
   }
 
   return (
