@@ -44,6 +44,7 @@ const StepPersonal = () => {
     validationSchema: StepPersonalSchema,
     onSubmit,
   });
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.wrapper}>
@@ -126,7 +127,7 @@ const StepPersonal = () => {
       </Box>
 
       <Box sx={styles.wrapperBtn}>
-        <ButtonDef variant='contained' correctStyle={styles.btn} type='submit' label='profile.modal.btn' />
+        <ButtonDef disabled={!formik.dirty} variant='contained' correctStyle={styles.btn} type='submit' label='profile.modal.btn' />
       </Box>
     </form>
   );
