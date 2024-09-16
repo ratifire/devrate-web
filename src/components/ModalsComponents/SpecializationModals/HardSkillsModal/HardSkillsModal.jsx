@@ -33,8 +33,6 @@ const HardSkillsModal = () => {
   const [deleteSkill] = useDeleteSkillByIdMutation();
   const isFindSkill = allSkills?.find((v) => v.name === skill.trim());
 
-  // console.log('allSkills', allSkills);
-  // console.log('addSkills', addSkills);
   useEffect(() => {
     setAllSkills(skills);
   }, [isLoadingSkills]);
@@ -54,11 +52,15 @@ const HardSkillsModal = () => {
 
   const handleAddSkill = () => {
     const isSkillExist = allSkills.find((v) => v.name === skill);
+    const isSkillInDataBase = skills.find((v) => v.name === skill);
     const skillValue = skill.trim();
-    const id = uuidv4();
+    const id = isSkillInDataBase.id || uuidv4();
 
     if (allSkills.length < MAX_SKILLS && !isSkillExist && skillValue) {
-      setAddSkills((prev) => ([...prev, { id, name: skillValue }]));
+      if (!isSkillInDataBase) {
+        setAddSkills((prev) => ([...prev, { id, name: skillValue }]));
+      }
+
       setAllSkills((prev) => ([...prev, { id, name: skillValue }]));
       setSkill('');
     }
