@@ -1,6 +1,6 @@
 import { formatDate } from '@fullcalendar/core';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, IconButton, Paper, Typography } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import { styles } from './SidebarEvent.styles';
@@ -34,6 +34,24 @@ export default function SidebarEvent({ event }) {
     }
   };
 
+  const [showCancelButton, setShowCancelButton] = useState(true);
+  const [disableLink, setDisableLink] = useState(false);
+
+  useEffect(() => {
+    const currentTime = new Date();
+    const eventStartTime = new Date(startTime);
+
+    const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
+
+    if (timeDifferenceInMinutes >= 1) {
+      setShowCancelButton(false);
+    }
+
+    if (timeDifferenceInMinutes >= 60) {
+      setDisableLink(true);
+    }
+  }, [startTime]);
+
   return (
     <Paper key={id} sx={styles.sideBarEventContainer}>
       <Box sx={styles.titleDateTimeBox}>
@@ -55,12 +73,14 @@ export default function SidebarEvent({ event }) {
         {status}
       </Typography>
       <Box sx={styles.titleDateTimeBox}>
-        <IconButton component='a' href={link} target='_blank'>
+        <IconButton component='a' href={link} target='_blank' disabled={disableLink}>
           <LinkIcon />
         </IconButton>
-        <Button variant='text' sx={styles.cancelEventBtn} onClick={() => eventDeleteHandler(id)}>
-          {t('schedule.cancelEventBtn')}
-        </Button>
+        {showCancelButton && (
+          <Button variant='text' sx={styles.cancelEventBtn} onClick={() => eventDeleteHandler(id)}>
+            {t('schedule.cancelEventBtn')}
+          </Button>
+        )}
       </Box>
     </Paper>
   );
