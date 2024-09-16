@@ -37,18 +37,26 @@ const SidebarEvent = ({ event }) => {
   const [disableLink, setDisableLink] = useState(false);
 
   useEffect(() => {
-    const currentTime = new Date();
     const eventStartTime = new Date(startTime);
 
-    const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
+    const checkTimeDifference = () => {
+      const currentTime = new Date();
+      const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
 
-    if (timeDifferenceInMinutes >= 1) {
-      setShowCancelButton(false);
-    }
+      if (timeDifferenceInMinutes >= 1) {
+        setShowCancelButton(false);
+      }
 
-    if (timeDifferenceInMinutes >= 60) {
-      setDisableLink(true);
-    }
+      if (timeDifferenceInMinutes >= 60) {
+        setDisableLink(true);
+      }
+    };
+
+    checkTimeDifference();
+
+    const timer = setInterval(checkTimeDifference, 60000);
+
+    return () => clearInterval(timer);
   }, [startTime]);
 
   return (
