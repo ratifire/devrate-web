@@ -46,4 +46,15 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  tooltipContent:{
+    color: '#FFFFFFF',
+    backgroundColor: '#303032',
+    border: 'none',
+    borderRadius: '4px',
+  },
+  tooltipLabel:{
+    color: '#FFFFFFF',
+    backgroundColor: '#303032',
+    fontSize: '14px',
+  }
 };

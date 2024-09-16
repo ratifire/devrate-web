@@ -70,7 +70,6 @@ const SkillsAssessmentChart = () => {
           </Select>
         </Box>
       </Box>
-
       <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
           <AreaChart data={selectedPeriod} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
@@ -84,7 +83,7 @@ const SkillsAssessmentChart = () => {
             <XAxis dataKey='name' />
             <YAxis />
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
-            <Tooltip />
+            <Tooltip contentStyle={styles.tooltipContent} labelStyle={styles.tooltipLabel} />
             <Area
               type='monotone'
               dataKey='value'
