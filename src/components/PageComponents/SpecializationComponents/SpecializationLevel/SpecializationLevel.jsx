@@ -1,20 +1,38 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import { styles } from './SpecializationLevel.styles';
 import { useTranslation } from 'react-i18next';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
+import { useGetMainMasteryBySpecializationIdQuery } from '../../../../redux/specialization/specializationApiSlice';
+import { useGetSpecializationId } from '../../../../utils/hooks/specialization';
 
 const SpecializationLevel = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
-  
-  const handleButtonClick = (label) => {
+  const activeMastery = useSelector((state) => state.activeMastery.activeMastery)
+  const specializationId =  useGetSpecializationId();
+  const { data: mastery, isLoading, isError } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId })
+
+  useEffect(() => {
+    if (mastery) {
+      dispatch(setActiveMastery(mastery.level));
+    }
+  }, [mastery]);
+
+  const handleClick = (label) => {
     dispatch(setActiveMastery(label));
   };
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (isError) {
+    return <Typography variant='h6'>Something error...</Typography>;
+  }
   
   return (
     <Box sx={styles.contentWrapper}>
@@ -37,7 +55,7 @@ const SpecializationLevel = () => {
               type='submit'
               key={label}
               label={label}
-              handlerClick={() => handleButtonClick(label)}
+              handlerClick={() => handleClick(label)}
               disabled={activeMastery === label}
               variant={activeMastery === label ? 'contained' : 'outlined'}
               withTranslation={true}

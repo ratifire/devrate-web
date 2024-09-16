@@ -36,6 +36,7 @@ const SpecializationCategories = () => {
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
 
   const [anchorEl, setAnchorEl] = useState({});
+
   useEffect(() => {
     dispatch(setMainSpecializations(specializations))
   }, [specializations]);
