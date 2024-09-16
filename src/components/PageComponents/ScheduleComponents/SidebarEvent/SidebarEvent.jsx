@@ -56,7 +56,6 @@ const SidebarEvent = ({ event }) => {
     <Paper key={id} sx={styles.sideBarEventContainer}>
       <Box sx={styles.titleDateTimeBox}>
         <Typography sx={styles.title} variant='h6' component='div'>
-          {/* eslint-disable-next-line react/prop-types */}
           {type.toLowerCase()}
         </Typography>
         <Typography sx={styles.dateAndTime} variant='body2' component='div'>
