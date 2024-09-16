@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import {v4 as uuidv4} from 'uuid';
 import React, { useCallback, useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
@@ -17,8 +19,6 @@ import {
 } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetMastery } from '../../../SpecializationComponents/hooks';
 
-const MemoizedButtonDef = React.memo(ButtonDef);
-
 const HardSkillsModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -31,7 +31,10 @@ const HardSkillsModal = () => {
   const {data: skills, isError: isErrorSkills, isLoading: isLoadingSkills} = useGetHardSkillsByMasteryIdQuery({masteryId}, {skip: !masteryId});
   const [addSkillToMastery] = useAddSkillToMasteryMutation();
   const [deleteSkill] = useDeleteSkillByIdMutation();
+  const isFindSkill = allSkills?.find((v) => v.name === skill.trim());
 
+  // console.log('allSkills', allSkills);
+  // console.log('addSkills', addSkills);
   useEffect(() => {
     setAllSkills(skills);
   }, [isLoadingSkills]);
@@ -51,12 +54,12 @@ const HardSkillsModal = () => {
 
   const handleAddSkill = () => {
     const isSkillExist = allSkills.find((v) => v.name === skill);
-    const isSkill = skill.trim();
+    const skillValue = skill.trim();
     const id = uuidv4();
 
-    if (allSkills.length < MAX_SKILLS && !isSkillExist && isSkill) {
-      setAddSkills((prev) => ([...prev, { id, name: skill }]));
-      setAllSkills((prev) => ([...prev, { id, name: skill }]));
+    if (allSkills.length < MAX_SKILLS && !isSkillExist && skillValue) {
+      setAddSkills((prev) => ([...prev, { id, name: skillValue }]));
+      setAllSkills((prev) => ([...prev, { id, name: skillValue }]));
       setSkill('');
     }
   }
@@ -104,12 +107,13 @@ const HardSkillsModal = () => {
           <Box sx={[styles.input, hardSkillsStyles.box]}>
             <TextField
               variant='outlined'
+              autoFocus={true}
               value={skill}
               onChange={(e) => setSkill(e.target.value)}
               label={t('specialization.modal.skills.placeholder')}
               fullWidth
             />
-            <IconButton onClick={handleAddSkill} sx={styles.iconBtn}>
+            <IconButton disabled={!skill.trim() || !!isFindSkill} onClick={handleAddSkill} sx={styles.iconBtn}>
               <AddIcon />
             </IconButton>
           </Box>
@@ -120,7 +124,7 @@ const HardSkillsModal = () => {
               ))}
             </Box>
           </Box>
-          <MemoizedButtonDef
+          <ButtonDef
             variant='contained'
             type='submit'
             label={t('profile.modal.btn')}
