@@ -68,11 +68,11 @@ FormSelect.propTypes = {
     PropTypes.string.isRequired
   ]).isRequired,
   handleChange: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func,
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  helperText: PropTypes.string.isRequired,
-  error: PropTypes.bool.isRequired,
+  helperText: PropTypes.string,
+  error: PropTypes.bool,
   countries: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
 };
