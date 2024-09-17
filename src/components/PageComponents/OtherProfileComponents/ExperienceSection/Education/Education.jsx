@@ -4,43 +4,21 @@ import styles from './Education.style';
 import EducationItem from './EducationItem';
 import { useGetEducationByUserIdQuery } from '../../../../../redux/services/educationApiSlice';
 import PropTypes from 'prop-types';
-import { iconsLocalStorage, loadIconsFromLocalStorage } from '../../../../../utils/helpers';
-import { iconsEducation } from '../../../../../utils/constants/iconsExperience';
+import { loadIconsFromLocalStorage } from '../../../../../utils/helpers';
+import { iconsEducation } from '../../../../../utils/constants/Experience/iconsExperience';
+import { mapDataWithIcons } from '../../../../../utils/helpers/mapDataWithIcons';
+import { iconValuesEducation } from '../../../../../utils/constants/Experience/iconsKeys';
+import { updateIconsInLocalStorage } from '../../../../../utils/helpers/updateIconsInLocalStorage';
 
 const Education = ({ id }) => {
   const iconsMap = loadIconsFromLocalStorage('education');
   const { data: educationsData } = useGetEducationByUserIdQuery(id, { skip: !id });
-
-
-  const educationsNewData = educationsData?.map((education) => {
-    const iconName = iconsMap[education.id];
-    const iconComponent = iconsEducation[iconName];
-    return {
-      ...education,
-      iconName,
-      iconComponent,
-    };
-  });
-
-  const iconValues = useMemo(() => Object.keys(iconsEducation), []);
+  const educationsNewData = mapDataWithIcons(educationsData, iconsMap, iconsEducation);
+  const iconValues = useMemo(() => iconValuesEducation, []);
 
   useEffect(() => {
-    if (educationsData) {
-      const existingIcons = iconsMap;
-      const educationsWithoutIcons = educationsData.filter((education) => {
-        return !existingIcons[education.id];
-      });
-
-      if (educationsWithoutIcons.length > 0) {
-        const shuffledIcons = [...iconValues].sort(() => 0.5 - Math.random());
-        const newIcons = {};
-        educationsWithoutIcons.forEach((education, index) => {
-          newIcons[education.id] = shuffledIcons[index % shuffledIcons.length];
-        });
-        iconsLocalStorage({ ...existingIcons, ...newIcons }, 'education');
-      }
-    }
-  }, [educationsData, iconValues, iconsMap]);
+    updateIconsInLocalStorage(educationsNewData, iconsMap, iconValues, 'education');
+  }, [educationsNewData, iconValues, iconsMap]);
 
   const sortedEducations = useMemo(() => {
     if (!educationsNewData) return [];

@@ -5,6 +5,8 @@ const styles = {
     padding: theme.spacing(4),
     backgroundColor: '#3E3E40', //ask to designers
     borderRadius: 2,
+    wordBreak: 'break-word',
+    overflowWrap: 'break-word'
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',

@@ -2,8 +2,8 @@ const styles = {
   achievementItemContainer: (theme) => ({
     width: '100%',
     padding: theme.spacing(4),
-    backgroundColor: '#3E3E40', // check with designers color not correct
-    borderRadius: theme.shape.borderRadius,
+    backgroundColor: '#3E3E40',
+    borderRadius: 2,
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',
@@ -42,5 +42,15 @@ const styles = {
     textAlign: 'center',
     textDecoration: 'underline',
   }),
+
+  iconBtnModal: (theme) => ({
+    color: theme.palette.sliderAssessment.lightGray,
+    transition: 'background-color 0.3s, transform 0.3s',
+    '&:hover': {
+      backgroundColor: theme.palette.sliderAssessment.gray,
+      color: theme.palette.sliderAssessment.lightGray,
+    },
+  }),
+
 };
 export default styles;

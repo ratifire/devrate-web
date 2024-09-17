@@ -5,13 +5,13 @@ export const AchievementModalSchema = Yup.object().shape({
     .min(2, 'modal.achievement.summary_short')
     .max(75, 'modal.achievement.summary_long')
     .required('modal.achievement.required'),
-  link: Yup.string()
-    .min(10, 'modal.achievement.link_short')
-    .max(1000, 'modal.achievement.link_long')
-    .url('Invalid URL format')
-    .required('modal.achievement.required'),
+  // link: Yup.string()         {/*commented out link in case if its need it's needed in the future*/}
+  //   .min(10, 'modal.achievement.link_short')
+  //   .max(1000, 'modal.achievement.link_long')
+  //   .url('Invalid URL format')
+  //   .required('modal.achievement.required'),
   description: Yup.string().trim()
     .min(2, 'modal.achievement.description_short')
-    .max(170, 'modal.achievement.description_long')
+    .max(300, 'modal.achievement.description_long')
     .required('modal.achievement.required'),
 });
