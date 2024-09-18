@@ -63,7 +63,7 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
           </Box>
         </Box>
         <Box sx={styles.menuIcon}>
-          <IconButton onClick={(event) => handleMenuOpen(event)}>
+          <IconButton onClick={(event) => handleMenuOpen(event)} sx={styles.iconBtnModal}>
             <MoreVertIcon />
           </IconButton>
         </Box>{' '}

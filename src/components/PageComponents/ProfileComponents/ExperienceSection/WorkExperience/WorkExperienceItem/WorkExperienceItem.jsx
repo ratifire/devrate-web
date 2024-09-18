@@ -49,7 +49,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
-          <IconButton onClick={(event) => handleMenuOpen(event)}>
+          <IconButton onClick={(event) => handleMenuOpen(event)} sx={styles.iconBtnModal}>
             <MoreVertIcon />
           </IconButton>
         </Box>{' '}

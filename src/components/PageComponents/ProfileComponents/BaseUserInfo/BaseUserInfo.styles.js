@@ -62,9 +62,10 @@ export const styles = {
   btnIcon: (theme) => ({
     flex: '1 0 44px',
     color: theme.palette.primary['100'],
-    borderRadius: 1,
+    borderRadius: 1,transition: 'background-color 0.3s, transform 0.3s',
     ':hover': {
       backgroundColor: `${theme.palette.primary['200']}29`,
+      transform: 'scale(1.1)',
     },
     svg: {
       fontSize: '18px',

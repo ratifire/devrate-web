@@ -42,8 +42,8 @@ const styles = {
   iconBtnModal: (theme) => ({
     color: theme.palette.sliderAssessment.lightGray,
     padding: 0,
-    width: '40px',
-    height: '40px',
+    width: '35px',
+    height: '35px',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
