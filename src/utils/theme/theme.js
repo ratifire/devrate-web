@@ -171,6 +171,11 @@ const getDesignTokens = (mode) => ({
             dark: '#3AB310',
             contrastText: '#ffffff',
           },
+          arrow: {
+            down: '#ED0E0E',
+            up: '#64FF2E',
+            circle: '#252527',
+          },
           warning: {
             main: '#F3DD12',
             dark: '#D6C20F',
