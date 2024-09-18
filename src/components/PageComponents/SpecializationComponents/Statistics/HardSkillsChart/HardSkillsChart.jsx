@@ -5,8 +5,10 @@ import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip 
 import { useUserSkillsAndMasteryData } from '../../../../../utils/hooks/specialization';
 import roundData from '../../HardSkills/roundData';
 import { styles } from './HardSkillsChart.style.js';
+import { useTooltip } from '../utils';
 
 const HardSkillsChart = () => {
+  const { tooltipContent, tooltipLabel } = useTooltip();
   const { skills, isLoading, isError } = useUserSkillsAndMasteryData();
   const { t } = useTranslation();
   const roundedSkills = roundData(skills);
@@ -38,7 +40,7 @@ const HardSkillsChart = () => {
           fillOpacity={0.3}
           dot={({ cx, cy, index }) => <circle key={index} cx={cx} cy={cy} r={2} fill='#16FFB9' />}
         />
-        <Tooltip contentStyle={styles.tooltipContent} labelStyle={styles.tooltipLabel} />
+        <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
         <defs>
           <linearGradient id='gradient2' x1='0%' y1='0%' x2='100%' y2='0%'>
             <stop offset='0%' style={{ stopColor: '#16FFB9', stopOpacity: 1 }} />

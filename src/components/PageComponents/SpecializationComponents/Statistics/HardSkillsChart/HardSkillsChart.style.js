@@ -15,15 +15,4 @@ export const styles = {
     display: 'block',
     paddingBottom: '6px',
   }),
-  tooltipContent: {
-    color: '#FFFFFF',
-    backgroundColor: '#303032',
-    border: 'none',
-    borderRadius: '4px',
-  },
-  tooltipLabel: {
-    color: '#FFFFFF',
-    backgroundColor: '#303032',
-    fontSize: '14px',
-  },
 };

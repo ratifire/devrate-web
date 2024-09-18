@@ -9,7 +9,7 @@ import {
   createTenMonthsHistoryData,
   getCurrentAndLastMonths,
   useGetHistoryData,
-  useHandleChange,
+  useHandleChange, useTooltip,
 } from '../utils';
 import { styles } from './SkillsAssessmentChart.style';
 
@@ -17,6 +17,7 @@ const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
   const { dataHistory, isError, isLoading } = useGetHistoryData({ to, from });
   const { t } = useTranslation();
+  const { tooltipContent, tooltipLabel } = useTooltip();
   const arithmeticAverage = arithmeticAverageSkillValue({
     data: dataHistory,
     secondValue: 'hardSkillMark',
@@ -83,7 +84,7 @@ const SkillsAssessmentChart = () => {
             <XAxis dataKey='name' />
             <YAxis />
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
-            <Tooltip contentStyle={styles.tooltipContent} labelStyle={styles.tooltipLabel} />
+            <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
             <Area
               type='monotone'
               dataKey='value'
