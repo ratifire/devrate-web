@@ -23,6 +23,7 @@ const SkillsSection = () => {
         <Typography variant="h6" sx={styles.skillsText}>
           {t('profile.skills.hardSkills')}:
         </Typography>
+
         <Rating
           name="hard-skills-rating"
           value={hardSkillMark / 2}
@@ -30,7 +31,8 @@ const SkillsSection = () => {
           readOnly
           sx={styles.skillsRatingValue}
         />
-        <Typography variant="subtitle2">
+
+        <Typography variant="subtitle2" sx={styles.skillMark}>
           {hardSkillMark}/10
         </Typography>
       </Box>
@@ -45,7 +47,7 @@ const SkillsSection = () => {
           readOnly
           sx={styles.skillsRatingValue}
         />
-        <Typography variant="subtitle2">
+        <Typography variant="subtitle2" sx={styles.skillMark}>
           {softSkillMark}/10
         </Typography>
       </Box>

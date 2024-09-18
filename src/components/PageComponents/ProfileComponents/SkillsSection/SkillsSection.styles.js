@@ -24,11 +24,18 @@ export const styles = {
   skillsText: (theme) => ({
     marginRight: theme.spacing(1),
     color: theme.palette.text.secondary,
+    width: '108px'
+
   }),
 
   skillsRatingValue: () => ({
     marginRight: '10px',
   }),
+
+  skillMark: {
+    textAlign: 'start',
+  },
+
   softSkills: (theme) => ({
     display: 'flex',
     flexDirection: 'row',
