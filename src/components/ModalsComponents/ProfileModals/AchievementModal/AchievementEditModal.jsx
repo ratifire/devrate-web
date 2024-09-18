@@ -21,7 +21,7 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
   const [updateAchievementApi] = useUpdateAchievementMutation();
 
   const initialValues = {
-    link: achievement?.link || '',
+    // link: achievement?.link || '',
     summary: achievement?.summary || '',
     description: achievement?.description || '',
   };
@@ -44,6 +44,7 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
     initialValues,
     validationSchema: AchievementModalSchema,
     onSubmit,
+    enableReinitialize: true,
   });
 
   return (
@@ -66,19 +67,20 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
               error={formik.touched.summary && Boolean(formik.errors.summary)}
             />
           </Box>
-          <Box sx={styles.input100}>
-            <FormInput
-              name='link'
-              value={formik.values.link}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='modal.achievement.link'
-              placeholder='profile.modal.workExperience.position_placeholder'
-              helperText={formik.touched.link && formik.errors.link}
-              error={formik.touched.link && Boolean(formik.errors.link)}
-            />
-          </Box>
+          {/*commented out <Link> in case if its need it's needed in the future*/}
+          {/*<Box sx={styles.input100}>*/}
+          {/*  <FormInput*/}
+          {/*    name='link'*/}
+          {/*    value={formik.values.link}*/}
+          {/*    handleChange={formik.handleChange}*/}
+          {/*    handleBlur={formik.handleBlur}*/}
+          {/*    type='text'*/}
+          {/*    label='modal.achievement.link'*/}
+          {/*    placeholder='profile.modal.workExperience.position_placeholder'*/}
+          {/*    helperText={formik.touched.link && formik.errors.link}*/}
+          {/*    error={formik.touched.link && Boolean(formik.errors.link)}*/}
+          {/*  />*/}
+          {/*</Box>*/}
           <Box sx={styles.input100}>
             <TextAreaInput
               name='description'

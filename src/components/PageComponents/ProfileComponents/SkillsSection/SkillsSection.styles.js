@@ -13,66 +13,59 @@ export const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: theme.spacing(2),
-  }),
-  skillsText: (theme) => ({
-    marginRight: theme.spacing(1),
-    color: theme.palette.text.secondary,
-  }),
-  skillsRating: (theme) => ({
     '& .MuiRating-iconFilled': {
       color: theme.palette.action.active,
     },
     '& .MuiRating-iconEmpty': {
-      color: theme.palette.action.active,
+      color: theme.palette.background.level3,
     },
+  }),
+
+  skillsText: (theme) => ({
+    marginRight: theme.spacing(1),
+    color: theme.palette.text.secondary,
+  }),
+
+  skillsRatingValue: () => ({
     marginRight: '10px',
   }),
   softSkills: (theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: theme.spacing(4),
+    marginBottom: '29px',
     '& .MuiRating-iconFilled': {
       color: theme.palette.action.active,
     },
     '& .MuiRating-iconEmpty': {
-      color: theme.palette.action.active,
+      color: theme.palette.background.level3,
     },
   }),
-  interviewHistory: {
+  interviewHistory: (theme) => ({
     display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-  },
-  doneInterviewsQuantity: {},
-  doneInterviews: (theme) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    height: 72,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginRight: theme.spacing(3),
-    padding: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    color: theme.palette.info.azure,
-    border: 1,
-    borderColor: theme.palette.info.azure,
-    borderRadius: 1,
+    width: '100%',
+    gap: theme.spacing(3),
   }),
-  completedInterviewsQuantity: {},
-  completedInterviews: (theme) => ({
+  skillsInterviewBtn: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
-    height: 72,
     justifyContent: 'center',
-    alignItems: 'center',
-    padding: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    color: theme.palette.info.main,
+    textAlign: 'center',
+    height: '72px',
+    width: '100%',
+    padding: '12px 0 16px',
     border: 1,
-    borderColor: theme.palette.info.main,
     borderRadius: 1,
+  },
+  doneInterviewsBtn: (theme) => ({
+    color: theme.palette.info.azure,
+    borderColor: theme.palette.info.azure,
+
+  }),
+  completedInterviewsBtn: (theme) => ({
+    color: theme.palette.info.main,
+    borderColor: theme.palette.info.main,
   }),
 };
