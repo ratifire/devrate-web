@@ -33,8 +33,7 @@ export const styles = {
   }),
 
   skillMark: {
-    width: '44px',
-    textAlign: 'center',
+    textAlign: 'start',
   },
 
   softSkills: (theme) => ({
