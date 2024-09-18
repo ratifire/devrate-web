@@ -39,22 +39,39 @@ const styles = {
     textDecoration: 'underline',
   }),
 
+  // iconBtnModal: (theme) => ({
+  //   color: theme.palette.neutral['200'],
+  //   padding: 0,
+  //   width: '35px',
+  //   height: '35px',
+  //   borderRadius: '50%',
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   transition: 'background-color 0.3s, transform 0.3s',
+  //   '&:hover': {
+  //     backgroundColor: theme.palette.neutral['700'],
+  //     color: theme.palette.neutral['200'],
+  //   },
+  // }),
   iconBtnModal: (theme) => ({
-    color: theme.palette.sliderAssessment.lightGray,
+    color: theme.palette.neutral['200'],
     padding: 0,
     width: '35px',
     height: '35px',
-    borderRadius: '50%',
+    borderRadius: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
-      backgroundColor: theme.palette.sliderAssessment.gray,
-      color: theme.palette.sliderAssessment.lightGray,
-      transform: 'scale(1.1)',
+      backgroundColor: theme.palette.neutral['700'],
+      color: theme.palette.neutral['200'],
+      // borderRadius не меняется, так что нет перехода от круга к квадрату
     },
   }),
+
+
 
 };
 export default styles;

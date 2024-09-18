@@ -23,12 +23,12 @@ const styles = {
     fontWeight: '500',
   },
   iconBtn: (theme) => ({
-    color: theme.palette.primary['100'],
+    color: theme.palette.action.hover,
     borderRadius: 1,
     transition: 'background-color 0.3s, transform 0.3s',
     ':hover': {
       backgroundColor: `${theme.palette.primary['200']}29`,
-      transform: 'scale(1.1)',
+      color: theme.palette.action.active,
     },
   }),
   experienceItemContainer: (theme) => ({

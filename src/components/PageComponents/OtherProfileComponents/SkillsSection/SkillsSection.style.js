@@ -24,6 +24,7 @@ export const styles = {
   skillsText: (theme) => ({
     marginRight: theme.spacing(1),
     color: theme.palette.text.secondary,
+    width: '102px'
   }),
 
   skillsRatingValue: () => ({
