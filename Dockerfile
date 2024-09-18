@@ -1,9 +1,8 @@
 FROM node:20.11.0 AS builder
-WORKDIR /app
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /home/node/app
 COPY package*.json ./
-RUN npm install
 RUN npm install --save-dev @babel/plugin-proposal-private-property-in-object
-COPY --from=builder /app .
-COPY --chown=node:node . .
-EXPOSE 3000
+COPY . .
+EXPOSE 8080
 CMD [ "node", "app.js" ]
