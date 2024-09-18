@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { useFormik } from 'formik'
-import React, { useEffect } from 'react'
+import React from 'react';
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice'
 import {
@@ -12,16 +12,12 @@ import { StepAvatarSchema } from '../../../../../utils/valadationSchemas/index'
 import LoadImages from '../../../../UI/LoadImages'
 import { styles } from './StepAvatar.styles'
 
-const initialValues = {
-  avatar: '',
-};
-
 const StepAvatar = () => {
   const { data: user } = useSelector(selectCurrentUser);
 
   const [postAvatarUser] = usePostAvatarUserMutation();
   const [deleteAvatarUser] = useDeleteAvatarUserMutation();
-  const { data: avatarData, isSuccess } = useGetAvatarUserQuery(user.id);
+  const { data: avatarData } = useGetAvatarUserQuery(user.id);
 
   const avatarValue = avatarData?.userPicture || '';
 
@@ -34,7 +30,9 @@ const StepAvatar = () => {
   };
 
   const formik = useFormik({
-    initialValues,
+    initialValues: {
+      avatar: avatarValue,
+    },
     validationSchema: StepAvatarSchema,
     onSubmit,
   });
@@ -49,12 +47,6 @@ const StepAvatar = () => {
   const handleAvatarChange = (img) => {
     formik.setFieldValue('avatar', img);
   };
-
-  useEffect(() => {
-    if (isSuccess && avatarValue && !formik.values.avatar) {
-      formik.setFieldValue('avatar', avatarValue);
-    }
-  }, [isSuccess, avatarValue, formik.values.avatar]);
 
   return (
     <Box sx={styles.wrapper}>
