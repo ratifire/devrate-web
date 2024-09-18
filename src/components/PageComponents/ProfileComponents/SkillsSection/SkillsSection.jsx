@@ -10,11 +10,10 @@ const SkillsSection = () => {
   const { data: info } = useSelector(selectCurrentUser);
   const { id } = info;
   const { t } = useTranslation();
-  
+
   const { data: personalData } = useGetPersonalUserQuery(id);
   const userData = personalData || {};
   const { hardSkillMark = 0, softSkillMark = 0, completedInterviews = 0, conductedInterviews = 0 } = userData;
-  console.log(userData,'userData');
   return (
     <Box sx={styles.skillsWrapper}>
       <Typography variant="h6" sx={styles.skillsTitle}>
@@ -24,8 +23,16 @@ const SkillsSection = () => {
         <Typography variant="h6" sx={styles.skillsText}>
           {t('profile.skills.hardSkills')}:
         </Typography>
-        <Rating name="hard-skills-rating" readOnly value={hardSkillMark} sx={styles.skillsRating} />
-        <Typography variant="subtitle2" sx={styles.skillsRating}>
+
+        <Rating
+          name="hard-skills-rating"
+          value={hardSkillMark / 2}
+          precision={0.5}
+          readOnly
+          sx={styles.skillsRatingValue}
+        />
+
+        <Typography variant="subtitle2" sx={styles.skillMark}>
           {hardSkillMark}/10
         </Typography>
       </Box>
@@ -33,20 +40,26 @@ const SkillsSection = () => {
         <Typography variant="subtitle1" sx={styles.skillsText}>
           {t('profile.skills.softSkills')}:
         </Typography>
-        <Rating name="soft-skills-rating" readOnly value={softSkillMark} sx={styles.skillsRating} />
-        <Typography variant="subtitle2" sx={styles.skillsRating}>
+        <Rating
+          name="soft-skills-rating"
+          value={softSkillMark / 2}
+          precision={0.5}
+          readOnly
+          sx={styles.skillsRatingValue}
+        />
+        <Typography variant="subtitle2" sx={styles.skillMark}>
           {softSkillMark}/10
         </Typography>
       </Box>
       <Box sx={styles.interviewHistory}>
-        <Box sx={styles.doneInterviews}>
-          <Typography variant="subtitle1" sx={styles.doneInterviewsQuantity}>
+        <Box sx={[styles.skillsInterviewBtn, styles.doneInterviewsBtn]}>
+          <Typography variant="subtitle1">
             {conductedInterviews}
           </Typography>
           <Typography variant="caption3">{t('profile.skills.doneInterviews')}</Typography>
         </Box>
-        <Box sx={styles.completedInterviews}>
-          <Typography variant="subtitle1" sx={styles.completedInterviewsQuantity}>
+        <Box sx={[styles.skillsInterviewBtn, styles.completedInterviewsBtn]}>
+          <Typography variant="subtitle1">
             {completedInterviews}
           </Typography>
           <Typography variant="caption3">{t('profile.skills.completedInterviews')}</Typography>

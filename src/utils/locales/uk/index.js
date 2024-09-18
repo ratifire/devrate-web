@@ -420,6 +420,9 @@ export const uk = {
       title: 'Розклад',
       host: 'Хост',
       cancelEventBtn: 'Відмінити івент',
+      popupUserInfo: 'Інформація про вас',
+      popupInterviewerInfo: 'Інформація про співбесідника',
+      popupRole: 'Роль:'
     },
   },
 };

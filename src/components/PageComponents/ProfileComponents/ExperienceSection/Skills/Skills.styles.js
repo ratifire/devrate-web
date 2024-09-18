@@ -3,6 +3,6 @@ export const styles = {
     display: 'flex',
     position: 'relative',
     gridGap: theme.spacing(3),
-    marginTop: '20px',
+    marginTop: '24px',
   }),
 };

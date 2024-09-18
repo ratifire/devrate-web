@@ -420,6 +420,9 @@ export const en = {
       title: 'Schedule',
       host: 'Host',
       cancelEventBtn: 'Cancel event',
+      popupUserInfo: 'Info about you',
+      popupInterviewerInfo: 'Info about you',
+      popupRole: 'Role:'
     },
   },
 };

@@ -28,7 +28,7 @@ const SkillsSection = ({ id }) => {
           readOnly
           sx={styles.skillsRatingValue}
         />
-        <Typography variant="subtitle2">
+        <Typography variant="subtitle2" sx={styles.skillMark}>
           {hardSkillMark}/10
         </Typography>
       </Box>
@@ -43,7 +43,7 @@ const SkillsSection = ({ id }) => {
           readOnly
           sx={styles.skillsRatingValue}
         />
-        <Typography variant="subtitle2">
+        <Typography variant="subtitle2" sx={styles.skillMark}>
           {softSkillMark}/10
         </Typography>
       </Box>
