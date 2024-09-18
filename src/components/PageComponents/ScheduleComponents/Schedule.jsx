@@ -5,13 +5,13 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { styles } from './Schedule.styles';
-import {Box, IconButton, Typography} from '@mui/material';
+import {Box} from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/schedule/scheduleApiSlice';
+import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery, } from '../../../redux/schedule/scheduleApiSlice';
 import {DateTime} from "luxon";
-import {ButtonDef} from "../../FormsComponents/Buttons";
-import LinkIcon from '@mui/icons-material/Link';
-const transformEvents = (events) => {
+
+import EventPopup from "./EventPopup";
+  const transformEvents = (events) => {
   return events.map((event) => ({
     id: event.id,
     title: event.type,
@@ -23,7 +23,7 @@ export default function Schedule() {
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
-  const [events, setEvents] = useState([]); // Стейт для зберігання подій
+  const [event, setEvent] = useState([]);
   const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
 
   const [from, setFrom] = useState('');
@@ -31,7 +31,6 @@ export default function Schedule() {
   const [fromTime, setFromTime] = useState('');
   const [isReady, setIsReady] = useState(false);
   const { id: userId } = useSelector((state) => state.auth.user.data);
-
   const getWeekStartAndEnd = (year, weekNumber) => {
     const firstDayOfYear = DateTime.local(year).startOf('year');
     const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
@@ -67,6 +66,7 @@ export default function Schedule() {
     { skip: !isReady }
   );
 
+  
   useEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
@@ -106,30 +106,30 @@ export default function Schedule() {
     setSelectedWeek(weekNumber);
     };
   
-  //Adjust function below or delete it.
-  const handleDateClick = (info) => {
-    // Додавання події при кліку на дату
-    const newEvent = {
-      id: Date.now(),
-      title: 'New Event',
-      start: info.dateStr,
-    };
-    setEvents((prevEvents) => [...prevEvents, newEvent]);
-  };
-  const handleEventMouseEnter = (info) => {
-     const rect = info.el.getBoundingClientRect();
-    const x = rect.left+120 ;
-    const y = rect.top-120;
-    
-    setPopup({
-      visible: true,
-      event: info.event,
-      x: x,
-      y: y,
-    });
+  const handleEventClick = (info) => {
+      if(info){
+      const rect = info.el.getBoundingClientRect();
+      const x = rect.left + 120;
+      const y = rect.top - 140;
+      setEvent(currentClosestEvents[0])
+      
+      const eventDetails = {
+        title: info.event.title,
+        start: info.event.start, // Event start date and time
+        end: info.event.end,     // Event end date and time
+        extendedProps: info.event.extendedProps, // Custom event properties, if any
+      };
+      
+      setPopup({
+        visible: true,
+        event: eventDetails,
+        x: x,
+        y: y,
+      });
+    }
   };
   
-  const handleEventMouseLeave = () => {
+  const handleClosePopup= () => {
      setPopup({
       visible: false,
       event: null,
@@ -137,6 +137,8 @@ export default function Schedule() {
       y: 0,
     });
   };
+  
+  
   
   if (isLoading || loading) {
     return <div>Loading...</div>;
@@ -163,7 +165,7 @@ export default function Schedule() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={true}
-          events={[...transformedEvents, ...events]}
+          events={[...transformedEvents]}
           dayHeaderFormat={{
             weekday: 'short',
           }}
@@ -176,60 +178,10 @@ export default function Schedule() {
           ]}
           slotMinTime={'07:00:00'}
           slotMaxTime={'31:00:00'}
-          dateClick={handleDateClick} // Обробник кліку
-          eventMouseEnter={handleEventMouseEnter} // Обробник при наведенні на подію
-          eventMouseLeave={handleEventMouseLeave} // Обробник при виході курсора з події
-            
-            // select={handleDateSelect}
-          // eventContent={renderEventContent} // custom render function
-          // eventClick={handleEventClick}
-          // eventsSet={handleEvents} // called after events are initialized/added/changed/removed
-          // dayHeaderFormat={{ weekday: 'short' }}
-          /* you can update a remote database when these fire:
-          eventAdd={function(){}}
-          eventChange={function(){}}
-          eventRemove={function(){}}
-          */
+          eventClick={handleEventClick}
         />
-        {popup.visible && (
-            <Box
-                sx={{...styles.popup,
-                  top: popup.y - 60,
-                  left: popup.x+30,}}
-            >
-              <Box sx={styles.popupTriangular}></Box>
-              <Box sx={styles.infoContainer}>
-                <Box sx={styles.userInfo}>
-                  <Typography variant="caption2" sx={styles.title}>Інформація про вас</Typography>
-                  <Typography variant="subtitle2" sx={styles.name}>Олена Бондаренко</Typography>
-                  <Typography variant="caption2" sx={styles.position}>Junior Frontend Developer</Typography>
-                  <Typography variant="caption2" sx={styles.role}>Роль: Респондент</Typography>
-                </Box>
-                <Box sx={styles.interviewerInfo}>
-                  <Typography variant="caption2" sx={styles.title}>Інформація про співбесідника</Typography>
-                  <Typography variant="subtitle2" sx={styles.name}>Олена Бондаренко</Typography>
-                  <Typography variant="caption2" sx={styles.position}>FullStack Developer</Typography>
-                  <Typography variant="caption2" sx={styles.role}>Роль: Інтерв’ювер</Typography>
-                </Box>
-              </Box>
-              <Box sx={styles.buttonsContainer}>
-                <IconButton
-                    sx={styles.icon}
-                // onClick={handle}
-                >
-                  <LinkIcon/>
-                </IconButton>
-                  <ButtonDef
-                      correctStyle={styles.outlined}
-                      type={'button'}
-                      variant='outlined'
-                      // handlerClick={handleCancelInterview}
-                      label='Відмінити інтервʼю'
-                  />
-              </Box>
-              
-      
-            </Box>
+        {popup.visible && event && (
+           <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup}/>
         )}
       </Box>
     </Box>
