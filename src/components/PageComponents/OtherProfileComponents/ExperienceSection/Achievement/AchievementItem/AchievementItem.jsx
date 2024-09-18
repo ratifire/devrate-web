@@ -16,15 +16,17 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
               {achievement.summary}
             </Typography>
           </Box>
-          {achievement.link && (
+          {/*{achievement.link && (*/}
             <Box sx={{ position: 'relative' }}>
               <Tooltip title={achievement.link} arrow>
+                {/*commented out <Link> in case if its need it's needed in the future*/}
                 <Link href={achievement.link} target='_blank' sx={styles.link} underline="none">
+                {/*<Link  sx={styles.link} underline="none">*/}
                   <LinkIcon />
                 </Link>
               </Tooltip>
             </Box>
-          )}
+          {/*// )}*/}
         </Box>
       </Box>
       <Typography variant='body1' sx={styles.achievementItemText}>

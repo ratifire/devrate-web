@@ -3,7 +3,7 @@ import { Box, IconButton, styled, Tab, Tabs } from '@mui/material';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
 import Skills from './Skills';
-import Achievment from './Achievement/Achievment';
+import Achievement from './Achievement';
 import { useTranslation } from 'react-i18next';
 import WorkExperience from './WorkExperience/WorkExperience';
 import { Add } from '@mui/icons-material';
@@ -23,7 +23,7 @@ const ExperienceSection = () => {
   const renderAdditionalInfo = (value) => {
     const tab = {
       openExperience: <WorkExperience />,
-      achievement: <Achievment />,
+      achievement: <Achievement />,
       skills: <Skills />,
       education: <Education />,
     };
@@ -66,7 +66,7 @@ const ExperienceSection = () => {
     },
     '& .MuiTabs-indicatorSpan': {
       width: '100%',
-      backgroundColor: theme.palette.primary.primary200,
+      backgroundColor: theme.palette.primary[200],
     },
   }));
   

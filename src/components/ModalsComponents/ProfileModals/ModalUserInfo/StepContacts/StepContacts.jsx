@@ -141,7 +141,7 @@ const StepContacts = () => {
           error={formik.touched.phone && Boolean(formik.errors.phone)}
         />
       </Box>
-      <ButtonDef variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
+      <ButtonDef disabled={!formik.dirty} variant='contained' type='submit' label='profile.modal.btn' correctStyle={styles.btn} />
     </form>
   );
 };
