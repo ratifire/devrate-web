@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import {
@@ -20,7 +20,6 @@ const initialValues = {
 
 const StepAvatar = () => {
   const { data: user } = useSelector(selectCurrentUser);
-  const [hasAvatar, setHasAvatar] = useState(false);
 
   const [postAvatarUser] = usePostAvatarUserMutation();
   const [deleteAvatarUser] = useDeleteAvatarUserMutation();
@@ -46,17 +45,15 @@ const StepAvatar = () => {
   });
 
   const handleDeleteAvatar = useCallback(() => {
-    if (hasAvatar) {
+    if (avatarValue) {
       deleteAvatarUser(user.id);
       formik.setFieldValue('avatar', '');
-      setHasAvatar(false);
     }
-  }, [hasAvatar, user.id, deleteAvatarUser, formik]);
+  }, [avatarValue, user.id, deleteAvatarUser, formik]);
 
   const handleAvatarChange = useCallback(
     (img) => {
       formik.setFieldValue('avatar', img);
-      setHasAvatar(!!img);
     },
     [formik]
   );
@@ -64,7 +61,6 @@ const StepAvatar = () => {
   useEffect(() => {
     if (isSuccess && avatarValue && !formik.values.avatar) {
       formik.setFieldValue('avatar', avatarValue);
-      setHasAvatar(true);
     }
   }, [isSuccess, avatarValue, formik.values.avatar]);
 
@@ -75,10 +71,9 @@ const StepAvatar = () => {
         handleBlur={formik.handleBlur}
         handlerDelete={handleDeleteAvatar}
         value={avatarValue}
-        showDeleteButton={hasAvatar}
       />
     ),
-    [handleAvatarChange, formik.handleBlur, handleDeleteAvatar, avatarValue, hasAvatar]
+    [handleAvatarChange, formik.handleBlur, handleDeleteAvatar, avatarValue]
   );
 
   return (

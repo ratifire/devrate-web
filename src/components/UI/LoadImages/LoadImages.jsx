@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { ButtonDef } from '../../FormsComponents/Buttons';
 import { styles } from './LoadImages.styles';
 
-const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDeleteButton }) => {
+const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
   const editor = useRef(null);
   const { t } = useTranslation();
 
@@ -148,7 +148,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
           correctStyle={styles.btn}
           disabled={!settingsCanvas.image || !!error}
         />
-        {showDeleteButton && (
+        {value && (
           <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
             <DeleteIcon />
           </IconButton>
