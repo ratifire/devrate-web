@@ -14,9 +14,7 @@ import { updateIconsInLocalStorage } from '../../../../../utils/helpers/updateIc
 const Achievement = ({ id }) => {
   const iconsMap = loadIconsFromLocalStorage('achievement');
   const { data: achievementsData } = useFetchAchievementsQuery(id);
-  console.log('Raw achievementsData:', achievementsData);
   const achievementsNewData = mapDataWithIcons(achievementsData, iconsMap, iconsAchievement);
-  console.log('Mapped achievementsData:', achievementsNewData);
   const iconValues = useMemo(() => iconValuesAchievement, []);
 
 

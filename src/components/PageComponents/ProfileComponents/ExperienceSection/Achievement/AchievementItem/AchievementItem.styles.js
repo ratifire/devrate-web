@@ -1,9 +1,10 @@
 const styles = {
   achievementItemContainer: (theme) => ({
     width: '100%',
-    padding: theme.spacing(4),
-    backgroundColor: '#3E3E40',
+    padding: theme.spacing(3),
+    backgroundColor: theme.palette.sliderAssessment.darkGray,
     borderRadius: 2,
+    height: '184px',
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',
@@ -25,11 +26,6 @@ const styles = {
     color: theme.palette.text.primary,
     wordBreak: 'break-word',
   }),
-  achiementYear: (theme) => ({
-    marginLeft: theme.spacing(2),
-
-    color: theme.palette.text.secondary,
-  }),
   icon: (theme) => ({
     color: theme.palette.primary[200],
   }),
@@ -45,10 +41,18 @@ const styles = {
 
   iconBtnModal: (theme) => ({
     color: theme.palette.sliderAssessment.lightGray,
+    padding: 0,
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
       backgroundColor: theme.palette.sliderAssessment.gray,
       color: theme.palette.sliderAssessment.lightGray,
+      transform: 'scale(1.1)',
     },
   }),
 

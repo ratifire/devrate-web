@@ -3,7 +3,7 @@ const styles = {
     width: '100%',
     marginBottom: theme.spacing(4),
     padding: theme.spacing(3),
-    backgroundColor: '#3E3E40',
+    backgroundColor: theme.palette.sliderAssessment.darkGray,
     borderRadius: 2,
   }),
   itemHeaderContainer: (theme) => ({

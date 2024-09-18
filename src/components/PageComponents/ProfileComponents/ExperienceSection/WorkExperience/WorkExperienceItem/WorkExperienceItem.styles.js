@@ -1,9 +1,9 @@
 const styles = {
-  workExpeirenceItemContainer: (theme) => ({
+  workExperienceItemContainer: (theme) => ({
     width: '100%',
     marginBottom: theme.spacing(4),
     padding: theme.spacing(4),
-    backgroundColor: '#3E3E40', //check with designers
+    backgroundColor: theme.palette.sliderAssessment.darkGray,
     borderRadius: 2,
   }),
   itemHeaderContainer: (theme) => ({

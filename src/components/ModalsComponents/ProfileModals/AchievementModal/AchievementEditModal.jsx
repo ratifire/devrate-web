@@ -44,6 +44,7 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
     initialValues,
     validationSchema: AchievementModalSchema,
     onSubmit,
+    enableReinitialize: true,
   });
 
   return (

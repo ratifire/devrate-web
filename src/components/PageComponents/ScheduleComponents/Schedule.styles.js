@@ -17,27 +17,27 @@ export const styles = {
   //   borderColor: '#303032',
   //   backgroundColor: 'red',
   // },
-  timeGridTableData: {
+  timeGridTableData: (theme) => ({
     height: '80.92px', // Adjust this value to change the width of the time-axis slots
-    borderColor: '#303032',
-  },
-  timeGridTableHead: {
-    borderColor: '#303032',
-    color: '#C5C5C6',
+    borderColor: theme.palette.neutral[700],
+  }),
+  timeGridTableHead: (theme) => ({
+    borderColor: theme.palette.neutral[700],
+    color: theme.palette.sliderAssessment.lightGray,
     fontSize: '14px',
     lineHeight: '20.02px',
-  },
-  timeGridTodayElements: {
-    backgroundColor: '#3E3E40',
-  },
-  timeGridEventElements: {
-    backgroundColor: '#25CBFF',
+  }),
+  timeGridTodayElements: (theme) => ({
+    backgroundColor: theme.palette.sliderAssessment.darkGray,
+  }),
+  timeGridEventElements: (theme) => ({
+    backgroundColor: theme.palette.info.main,
     border: 'none',
     fontSize: '14px',
     fontWeight: 500,
     lineHeight: '21.98px',
-    color: '#303032',
-  },
+    color: theme.palette.neutral[700],
+  }),
   eventTooltip: {
     position: 'absolute',
     backgroundColor: 'white',
@@ -48,7 +48,7 @@ export const styles = {
     zIndex: 1000,
     pointerEvents: 'none',
   },
-  popup: {
+  popup: (theme) => ({
     width: "413px",
     height: "181px",
     padding: "18px",
@@ -56,10 +56,10 @@ export const styles = {
     display:"flex",
     justifyContent: "space-between",
     flexDirection:"column",
-    backgroundColor: "#252527",
+    backgroundColor: theme.palette.neutral[800],
     zIndex: 1000,
   
-  }       ,
+  }),
   popupTriangular:(theme)=>({
     position: "absolute",
     bottom: "0px", // Трикутник під popup

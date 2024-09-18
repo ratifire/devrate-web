@@ -30,7 +30,7 @@ const Achievement = () => {
       <Grid container spacing={3} sx={styles.achievementListContainer}>
         {achievementsNewData?.map((achievement) =>
           <Grid item key={achievement.id} xs={6}>
-            <AchievementItem key={achievement.id} achievement={achievement} icon={achievement.iconComponent}/>
+            <AchievementItem achievement={achievement} icon={achievement.iconComponent} />
           </Grid>
         )}
       </Grid>

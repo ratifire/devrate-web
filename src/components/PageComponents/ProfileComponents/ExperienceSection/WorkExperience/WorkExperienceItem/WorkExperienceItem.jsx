@@ -37,7 +37,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   };
 
   return (
-    <Box sx={styles.workExpeirenceItemContainer}>
+    <Box sx={styles.workExperienceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
         <Box sx={styles.workTitleContainer}>
           <Typography variant='h5' sx={styles.workPosition}>

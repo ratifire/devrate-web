@@ -2,8 +2,9 @@ const styles = {
   achievementItemContainer: (theme) => ({
     width: '100%',
     padding: theme.spacing(3),
-    backgroundColor: '#3E3E40',
+    backgroundColor: theme.palette.sliderAssessment.darkGray,
     borderRadius: 2,
+    height: '184px',
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',

@@ -12,6 +12,6 @@ export const AchievementModalSchema = Yup.object().shape({
   //   .required('modal.achievement.required'),
   description: Yup.string().trim()
     .min(2, 'modal.achievement.description_short')
-    .max(300, 'modal.achievement.description_long')
+    .max(170, 'modal.achievement.description_long')
     .required('modal.achievement.required'),
 });
