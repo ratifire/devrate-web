@@ -30,5 +30,22 @@ const styles = {
   menuIcon: (theme) => ({
     color: theme.palette.text.secondary,
   }),
+
+  iconBtnModal: (theme) => ({
+    color: theme.palette.sliderAssessment.lightGray,
+    padding: 0,
+    width: '35px',
+    height: '35px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'background-color 0.3s, transform 0.3s',
+    '&:hover': {
+      backgroundColor: theme.palette.sliderAssessment.gray,
+      color: theme.palette.sliderAssessment.lightGray,
+      transform: 'scale(1.1)',
+    },
+  }),
 };
 export default styles;
