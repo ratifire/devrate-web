@@ -14,7 +14,6 @@ export const styles = {
     padding: theme.spacing(4),
     backgroundColor: theme.palette.background.level2,
     borderRadius: 2,
-    
   }),
   title: (theme) => ({
     display: 'flex',
@@ -34,7 +33,7 @@ export const styles = {
       '>h6': {
         flex: '1 2 max(266px)',
         maxWidth: '266px',
-        width:'10vw',
+        width: '10vw',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
       },

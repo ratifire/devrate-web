@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { SpecializationModal } from '../../components/ModalsComponents/SpecializationModals';
 import ScheduleInterviewModal from '../../components/ModalsComponents/SpecializationModals/ScheduleInterviewModal';
-import SkillsModal from '../../components/ModalsComponents/SpecializationModals/SkillsModal';
 import SoftSkillsModal from '../../components/ModalsComponents/SpecializationModals/SoftSkillsModal';
+import HardSkillsModal from '../../components/ModalsComponents/SpecializationModals/HardSkillsModal';
 
 const SpecializationTemplate = ({ children }) => {
   const modalData = useSelector((state) => state.modal.modalData);
@@ -21,7 +21,7 @@ const SpecializationTemplate = ({ children }) => {
       {openSpecialization && <SpecializationModal setActiveMastery={setActiveMastery} />}
       {scheduleInterviewIsOpen && <ScheduleInterviewModal {...(modalData || {})} />}
       {openSoftSkillsModal && <SoftSkillsModal />}
-      {openSkillsModal && <SkillsModal activeMastery={activeMastery} setActiveMastery={setActiveMastery} />}
+      {openSkillsModal && <HardSkillsModal activeMastery={activeMastery} setActiveMastery={setActiveMastery} />}
     </div>
   );
 };

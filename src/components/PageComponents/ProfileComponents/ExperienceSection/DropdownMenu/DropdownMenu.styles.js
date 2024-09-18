@@ -12,7 +12,8 @@ export const styles = {
     marginRight: '10px'
   },
   menuItem: (theme) => ({
-    minWidth: '141px',
+    maxWidth: '125px',
+    width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',

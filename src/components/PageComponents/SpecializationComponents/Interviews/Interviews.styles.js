@@ -24,9 +24,7 @@ export const styles = {
     display: 'flex',
     width: '100%',
   },
-  interviewCounter: {
-
-  },
+  interviewCounter: {},
   buttons: (theme) => ({
     display: 'flex',
     gap: theme.spacing(4),
@@ -53,5 +51,5 @@ export const styles = {
     textTransform: 'none',
     fontWeight: 500,
     paddingX: theme.spacing(5),
-  })
+  }),
 };
