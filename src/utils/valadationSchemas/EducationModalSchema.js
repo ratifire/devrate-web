@@ -10,7 +10,7 @@ export const EducationModalSchema = Yup.object().shape({
     .max(100, 'profile.modal.education.edIstitution_long')
     .required('profile.modal.education.required'),
   description: Yup.string()
-    .min(100, 'profile.modal.education.description_short')
+    .min(40, 'profile.modal.education.description_short')
     .max(500, 'profile.modal.education.description_long')
     .required('profile.modal.education.required'),
   startYear:Yup.date()
