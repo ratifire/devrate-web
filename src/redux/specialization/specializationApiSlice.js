@@ -40,13 +40,15 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
 
     getMasteriesBySpecializationId: builder.query({
       query: (id) => `/specializations/${id}/masteries`,
+      providesTags: ['Masteries']
     }),
 
     getMainMasteryBySpecializationId: builder.query({
       query: (specializationId) => `/specializations/${specializationId}/main-mastery`,
       transformResponse(result) {
         return { ...result, level: result.level.charAt(0) + result.level.slice(1).toLowerCase() };
-      }
+      },
+      providesTags: ['Masteries']
     }),
 
     setNewMainMasteryBySpecIdAndMasteryId: builder.mutation({
@@ -57,6 +59,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           body: { id: masteryId, name, softSkillMark, hardSkillMark },
         };
       },
+      invalidatesTags: ['Masteries'],
     }),
 
     updateSpecializationById: builder.mutation({

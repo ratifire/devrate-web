@@ -8,14 +8,10 @@ const specializationSlice = createSlice({
     fullSpecializations: [],
     //================================================================
     selectedSpecialization: null,
-    mainMastery: null,
   },
   reducers: {
     setSelectedSpecialization: (state, { payload }) => {
       state.selectedSpecialization = payload;
-    },
-    setMainMastery: (state, { payload }) => {
-      state.mainMastery = { ...payload };
     },
     // =============================================================
     setActiveSpecialization: (state, { payload }) => {
@@ -33,5 +29,5 @@ const specializationSlice = createSlice({
   },
 });
 
-export const { setSelectedSpecialization, setMainMastery, setActiveSpecialization, setMainSpecializations } = specializationSlice.actions;
+export const { setSelectedSpecialization, setActiveSpecialization, setMainSpecializations } = specializationSlice.actions;
 export default specializationSlice.reducer;
