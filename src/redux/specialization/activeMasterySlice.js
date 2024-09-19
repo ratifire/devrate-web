@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  activeMastery: 'JUNIOR',
+  activeMastery: '',
 };
 
 const activeMasterySlice = createSlice({
