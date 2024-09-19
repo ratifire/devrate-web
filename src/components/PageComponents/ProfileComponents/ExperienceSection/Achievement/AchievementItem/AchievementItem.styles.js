@@ -4,7 +4,10 @@ const styles = {
     padding: theme.spacing(3),
     backgroundColor: theme.palette.sliderAssessment.darkGray,
     borderRadius: 2,
-    height: '184px',
+    maxHeight: '184px',
+    height: '100%',
+    alignItems: 'stretch',
+    display: 'flex',
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',
@@ -67,11 +70,7 @@ const styles = {
     '&:hover': {
       backgroundColor: theme.palette.neutral['700'],
       color: theme.palette.neutral['200'],
-      // borderRadius не меняется, так что нет перехода от круга к квадрату
     },
   }),
-
-
-
 };
 export default styles;
