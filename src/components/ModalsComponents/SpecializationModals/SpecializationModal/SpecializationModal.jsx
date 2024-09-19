@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
@@ -28,7 +28,7 @@ const initialValues = {
   skills: '',
 };
 
-const SpecializationModal = React.memo(() => {
+const SpecializationModal = memo(() => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
