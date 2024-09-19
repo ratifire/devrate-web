@@ -17,7 +17,7 @@ const Interviews = () => {
   );
   const mainSpec = activeSpecialization || mainSpecialization;
 
-  const activeInterviews = fullSpecializations?.find((spec) => spec.id === mainSpec.id);
+  const activeInterviews = fullSpecializations?.find((spec) => spec.id === mainSpec?.id);
 
   const scheduleClickHandler = (event) => {
     setCreateButton(event.currentTarget);
