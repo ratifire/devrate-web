@@ -33,20 +33,18 @@ const SpecializationCategories = () => {
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
   const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
-  const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
+  const [getMainMasteryBySpecId, data] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
 
   const [anchorEl, setAnchorEl] = useState({});
 
   useEffect(() => {
-    dispatch(setMainSpecializations(specializations));
-  }, [specializations]);
-
-  useEffect(() => {
     if (!specializations) {
       return;
     }
+
+    dispatch(setMainSpecializations(specializations));
 
     specializations.forEach(async (specialization) => {
       const { data } = await getMainMasteryBySpecId(specialization.id);
@@ -55,7 +53,8 @@ const SpecializationCategories = () => {
         [specialization.id]: data,
       }));
     });
-  }, [specializations, activeSpecialization]);
+  }, [specializations, activeSpecialization, data.currentData?.level]); // Максимальный костыль
+  // Без data.currentData?.level не обновляется уровень мастерства, при вызове editSpecialization.
 
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
