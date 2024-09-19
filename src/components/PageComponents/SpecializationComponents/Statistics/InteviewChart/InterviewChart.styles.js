@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export const styles = {
   interviewChartContainer: (theme) => ({
     display: 'flex',
@@ -30,12 +32,13 @@ export const styles = {
     },
   }),
   dropdownPaper: (theme) => ({
-    backgroundColor: theme.palette.background.level3,
+    backgroundColor: theme.palette.neutral[900]
   }),
 
   menuItem: (theme) => ({
+    backgroundColor: theme.palette.neutral[900],
     '&:hover': {
-      backgroundColor: theme.palette.background.level3,
+      backgroundColor: theme.palette.neutral[800],
       color: theme.palette.primary[200],
     },
   }),

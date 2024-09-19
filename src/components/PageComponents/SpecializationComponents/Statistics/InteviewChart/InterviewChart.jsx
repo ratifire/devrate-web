@@ -11,7 +11,7 @@ import {
   getCurrentAndLastMonths,
   useHandleChange, useTooltip,
 } from '../utils';
-import { styles } from './InterviewChart.style';
+import { styles } from './InterviewChart.styles';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);

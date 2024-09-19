@@ -11,7 +11,7 @@ import {
   useGetHistoryData,
   useHandleChange, useTooltip,
 } from '../utils';
-import { styles } from './SkillsAssessmentChart.style';
+import { styles } from './SkillsAssessmentChart.styles';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);

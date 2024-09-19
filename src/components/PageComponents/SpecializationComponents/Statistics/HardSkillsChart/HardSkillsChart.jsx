@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
 import { useUserSkillsAndMasteryData } from '../../../../../utils/hooks/specialization';
 import roundData from '../../HardSkills/roundData';
-import { styles } from './HardSkillsChart.style.js';
+import { styles } from './HardSkillsChart.styles.js';
 import { useTooltip } from '../utils';
 
 const HardSkillsChart = () => {
