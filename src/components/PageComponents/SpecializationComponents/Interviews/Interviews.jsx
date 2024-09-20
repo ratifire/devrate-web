@@ -77,7 +77,11 @@ const Interviews = () => {
       </Button>
       <Popover
         sx={styles.popover}
-        PaperProps={{ style: { width: popoverWidth } }}
+        slotProps={{
+          root: {
+            style: { width: popoverWidth },
+          },
+        }}
         open={open}
         anchorEl={createButton}
         onClose={closeHandler}
