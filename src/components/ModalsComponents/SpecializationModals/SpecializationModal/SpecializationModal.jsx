@@ -209,7 +209,11 @@ const SpecializationModal = memo(() => {
                   helperText={formik.touched.skills && formik.errors.skills}
                   error={formik.touched.skills && Boolean(formik.errors.skills)}
                 />
-                <IconButton sx={styles.iconBtn} onClick={() => createSkills(formik.values.skills)}>
+                <IconButton
+                  sx={styles.iconBtn}
+                  onClick={() => createSkills(formik.values.skills)}
+                  disabled={formik.touched.skills && Boolean(formik.errors.skills)}
+                >
                   <AddIcon />
                 </IconButton>
               </Box>
