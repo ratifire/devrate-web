@@ -23,9 +23,6 @@ export const styles = {
   }),
   host: (theme) => ({
     color: theme.palette.primary[50],
-    '& span': {
-      color: theme.palette.primary[100],
-    },
     marginBottom: theme.spacing(2),
   }),
   hostTitle: (theme) => ({
@@ -33,6 +30,13 @@ export const styles = {
     letterSpacing: '0.4px',
     color: theme.palette.neutral[50],
     marginBottom: theme.spacing(2),
+  }),
+  host_link: (theme) => ({
+    color: theme.palette.text.primary,
+    textDecoration: 'none',
+    '&:hover': {
+      color: theme.palette.action.hover,
+    },
   }),
   cancelEventBtn: (theme) => ({
     color: theme.palette.primary[100],
