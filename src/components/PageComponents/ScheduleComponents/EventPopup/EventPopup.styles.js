@@ -11,7 +11,7 @@ export const styles = {popup: {
 		zIndex: 1000,
 	
 },
-popupTriangular:(theme)=>({
+	popupTriangularBottomLeft:(theme)=>({
 	position: "absolute",
 	bottom: "0px",
 	left: "-19px",
@@ -22,6 +22,39 @@ popupTriangular:(theme)=>({
 	borderTop: "10px solid transparent",
 	zIndex: 1001,
 }),
+	popupTriangularTopLeft:(theme)=>({
+		position: "absolute",
+		bottom: "190px",
+		left: "-19px",
+		width: 0,
+		height: 0,
+		borderLeft: "9px solid transparent",
+		borderRight: `14px solid ${theme.palette.neutral[800]}`,
+		borderBottom: "10px solid transparent",
+		zIndex: 1001,
+	}),
+	popupTriangularTopRight:(theme)=>({
+		position: "absolute",
+		bottom: "190px",
+		right: "-19px",
+		width: 0,
+		height: 0,
+		borderRight: "9px solid transparent",
+		borderLeft: `14px solid ${theme.palette.neutral[800]}`,
+		borderBottom: "10px solid transparent",
+		zIndex: 1001,
+	}),
+	popupTriangularBottomRight:(theme)=>({
+		position: "absolute",
+		bottom: "0px",
+		right: "-19px",
+		width: 0,
+		height: 0,
+		borderRight: "9px solid transparent",
+		borderLeft: `14px solid ${theme.palette.neutral[800]}`,
+		borderTop: "10px solid transparent",
+		zIndex: 1001,
+	}),
 	closeIcon:(theme)=>({
 	position:"absolute",
 	right:0,
