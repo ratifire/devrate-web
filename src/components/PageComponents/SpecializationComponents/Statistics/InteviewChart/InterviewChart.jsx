@@ -1,4 +1,3 @@
-/* eslint-disable */
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
 import React, { useMemo } from 'react';

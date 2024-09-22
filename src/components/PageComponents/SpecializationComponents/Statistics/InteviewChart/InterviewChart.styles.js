@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 export const styles = {
   interviewChartContainer: (theme) => ({
     display: 'flex',
