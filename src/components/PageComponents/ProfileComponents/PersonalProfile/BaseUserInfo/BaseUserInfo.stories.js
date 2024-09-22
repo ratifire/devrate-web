@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseUserInfo from './BaseUserInfo';
-import { decorators } from '../../../../../.storybook/preview';
+import { decorators } from '../../../../../../.storybook/preview';
 
 export default {
   title: 'ProfileComponents/BaseUserInfo',
