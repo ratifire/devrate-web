@@ -32,7 +32,7 @@ const InterviewChart = () => {
   if (isError) {
     return <Typography variant='h6'>Something error...</Typography>;
   }
-
+  // TODO: Add translations
   return (
     <Box sx={styles.interviewChartContainer}>
       <Box sx={styles.titleContainer}>
@@ -64,7 +64,7 @@ const InterviewChart = () => {
       </Box>
       <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
-          <BarChart data={selectedPeriod}>
+          <BarChart data={selectedPeriod} margin={{ top: 0, right: 5, left: -30, bottom: 0 }} >
             <defs>
               <linearGradient id='colorConducted' x1='0' y1='0' x2='0' y2='1'>
                 <stop offset='0%' stopColor='#FFC061' stopOpacity={1} />
@@ -82,8 +82,8 @@ const InterviewChart = () => {
             <XAxis dataKey='name' />
             <YAxis domain={[0, 10]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} interval={0}/>
             <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
-            <Bar dataKey='conducted' fill='url(#colorConducted)' radius={[2, 2, 0, 0]} />
-            <Bar dataKey='passed' fill='url(#colorPassed)' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='conducted' name='Conducted' fill='url(#colorConducted)' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='passed' name='Passed' fill='url(#colorPassed)' radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Box>

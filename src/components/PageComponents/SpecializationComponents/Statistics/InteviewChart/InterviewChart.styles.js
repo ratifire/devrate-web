@@ -52,6 +52,13 @@ export const styles = {
     '& .recharts-default-legend': {
       display: 'flex',
       justifyContent: 'space-between',
+      paddingBottom: '10px !important',
+    },
+    '& .legend-item-0': {
+      paddingLeft: '40px',
+    },
+    '& .legend-item-1': {
+      marginRight: '0 !important',
     }
   },
 };
