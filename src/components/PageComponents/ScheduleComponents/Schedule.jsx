@@ -1,17 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { styles } from './Schedule.styles';
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery, } from '../../../redux/schedule/scheduleApiSlice';
-import {DateTime} from "luxon";
+import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/schedule/scheduleApiSlice';
+import { DateTime } from 'luxon';
 
-import EventPopup from "./EventPopup";
-  const transformEvents = (events) => {
+import EventPopup from './EventPopup';
+const transformEvents = (events) => {
   return events.map((event) => ({
     id: event.id,
     title: event.type,
@@ -62,7 +62,6 @@ export default function Schedule() {
     { skip: !isReady }
   );
 
-  
   useEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
@@ -100,10 +99,10 @@ export default function Schedule() {
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
-    };
-  
+  };
+
   const handleEventClick = (info) => {
-      if(info){
+    if (info) {
       const rect = info.el.getBoundingClientRect();
         let x    = rect.left + 120;
         let y    = rect.top - 140;
@@ -134,13 +133,16 @@ export default function Schedule() {
           setPopupPosition("TOPLEFT")
         }
         
-        const eventDetails = {
+
+
+      const eventDetails = {
+
         title: info.event.title,
         start: info.event.start, // Event start date and time
-        end: info.event.end,     // Event end date and time
+        end: info.event.end, // Event end date and time
         extendedProps: info.event.extendedProps, // Custom event properties, if any
       };
-      
+
       setPopup({
         visible: true,
         event: eventDetails,
@@ -149,9 +151,9 @@ export default function Schedule() {
       });
     }
   };
-  
-  const handleClosePopup= () => {
-     setPopup({
+
+  const handleClosePopup = () => {
+    setPopup({
       visible: false,
       event: null,
       x: 0,
@@ -178,7 +180,7 @@ export default function Schedule() {
   //   return [];
   // };
   
-  
+
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
@@ -218,13 +220,14 @@ export default function Schedule() {
               hour12: false,
             },
           ]}
-          slotMinTime={'00:00:00'}
+           slotMinTime={'00:00:00'}
           slotMaxTime={'24:00:00'}
           eventClick={handleEventClick}
         />
         {popup.visible && event && (
            <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition}/>
         )}
+
       </Box>
     </Box>
   );
