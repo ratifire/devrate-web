@@ -20,7 +20,7 @@ import {
 } from '../../../../redux/specialization/specializationSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
-import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
+import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
 import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
