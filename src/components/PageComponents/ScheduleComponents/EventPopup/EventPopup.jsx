@@ -9,7 +9,7 @@ import {useTranslation} from "react-i18next";
 import {toast} from "react-toastify";
 import {useDeleteEventByIdMutation} from "../../../../redux/schedule/scheduleApiSlice";
 
-const EventPopup = ({handleClosePopup, event, popup}) => {
+const EventPopup = ({handleClosePopup, event, popup, popupPosition}) => {
 	const { t } = useTranslation();
 	const [deleteEventById] = useDeleteEventByIdMutation();
 	
@@ -47,7 +47,13 @@ const EventPopup = ({handleClosePopup, event, popup}) => {
 				top: popup.y - 60,
 				left: popup.x+30,}}
 		>
-			<Box sx={styles.popupTriangular}></Box>
+			{popupPosition==="TOPLEFT"&&<Box sx={styles.popupTriangularTopLeft}></Box>}
+			
+			{popupPosition==="BOTTOMLEFT"&&<Box sx={styles.popupTriangularBottomLeft}></Box>}
+			{popupPosition==="TOPRIGHT"&&<Box sx={styles.popupTriangularTopRight}></Box>}
+			{popupPosition==="BOTTOMRIGHT"&&<Box sx={styles.popupTriangularBottomRight}></Box>}
+			
+			
 			<Box sx={styles.infoContainer}>
 				<IconButton onClick={handleClosePopup} sx={styles.closeIcon}
 				>
@@ -92,10 +98,11 @@ EventPopup.propTypes = {
 	handleClosePopup: PropTypes.func.isRequired,
 	event: PropTypes.object.isRequired,
 	popup: PropTypes.object.isRequired,
+	popupPosition: PropTypes.string
 };
 EventPopup.defaultProps = {
 	handleClosePopup: () => {},
 	event: {},
 	popup: {},
-
+	popupPosition:"TOPRIGHT"
 };
