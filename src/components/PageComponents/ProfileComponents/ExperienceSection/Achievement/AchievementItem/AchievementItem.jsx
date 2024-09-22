@@ -64,9 +64,12 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
         {/*    <Typography variant='subtitle3'>{achievement.link}</Typography>*/}
         {/*  </Link>*/}
         {/*)}*/}
-        <Typography variant='body1' sx={styles.achievementItemText}>
-          {achievement.description}
-        </Typography>
+        <Box sx={styles.achievementItemText}>
+          <Typography variant='body1' >
+            {achievement.description}
+          </Typography>
+        </Box>
+
       </Box>
       <AchievementEditModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} achievement={achievement} />
     </Box>

@@ -1,17 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { styles } from './Schedule.styles';
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery, } from '../../../redux/schedule/scheduleApiSlice';
-import {DateTime} from "luxon";
+import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/schedule/scheduleApiSlice';
+import { DateTime } from 'luxon';
 
-import EventPopup from "./EventPopup";
-  const transformEvents = (events) => {
+import EventPopup from './EventPopup';
+const transformEvents = (events) => {
   return events.map((event) => ({
     id: event.id,
     title: event.type,
@@ -25,7 +25,7 @@ export default function Schedule() {
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
   const [event, setEvent] = useState([]);
   const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
-
+  const [popupPosition, setPopupPosition ] =useState("TOPRIGHT")
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [fromTime, setFromTime] = useState('');
@@ -41,24 +41,20 @@ export default function Schedule() {
       endOfWeek: lastDayOfWeek.toISODate(),
     };
   };
-
+  
   useEffect(() => {
     if (selectedWeek !== null && calendarRef.current) {
-      const calendarApi = calendarRef.current.getApi();
-      const { startOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
-      calendarApi.gotoDate(startOfWeek);
-    }
-  }, [selectedWeek]);
-
-  useEffect(() => {
-    if (selectedWeek !== null) {
       const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
       setFrom(startOfWeek);
       setTo(endOfWeek);
       setFromTime(encodeURIComponent(`${startOfWeek}T07:00:00+03:00`));
       setIsReady(true);
+      
+      const calendarApi = calendarRef.current.getApi();
+      calendarApi.gotoDate(startOfWeek);
     }
   }, [selectedWeek]);
+
 
   const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
   const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
@@ -66,7 +62,6 @@ export default function Schedule() {
     { skip: !isReady }
   );
 
-  
   useEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
@@ -75,7 +70,7 @@ export default function Schedule() {
       const timeGridHeadElements = calendarApi.el.querySelectorAll(
         '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
       );
-      const timeGridEventElements = calendarApi.el.querySelectorAll('.fc-v-event .fc-event-main');
+      const timeGridEventElements = calendarApi.el.querySelectorAll('.fc-timegrid-event-harness-inset .fc-timegrid-event');
 
       timeGridSlotElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridTableData);
@@ -87,9 +82,9 @@ export default function Schedule() {
         Object.assign(el.style, styles.timeGridTableHead);
       });
       timeGridEventElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridEventElements);
-      });
-
+           Object.assign(el.style, styles.timeGridEventElements);
+       });
+ 
       const styleElement = document.createElement('style');
       styleElement.textContent = `
         :root {
@@ -104,22 +99,50 @@ export default function Schedule() {
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
-    };
-  
+  };
+
   const handleEventClick = (info) => {
-      if(info){
+    if (info) {
       const rect = info.el.getBoundingClientRect();
-      const x = rect.left + 120;
-      const y = rect.top - 140;
+        let x    = rect.left + 120;
+        let y    = rect.top - 140;
       setEvent(currentClosestEvents[0])
+        if(rect.left>window.innerWidth/2 ){
+        x = rect.left - 450;
+      }
+        if(rect.left<window.innerWidth/2 ){
+          x = rect.left + 120;
+        }
+      if(rect.top<400){
+        y = rect.top + 180;
+      }
+      if(rect.top>window.innerHeight-200){
+        y = rect.top - 140;
+      }
       
+      if(rect.left>window.innerWidth/2&&window.innerHeight-200){
+        setPopupPosition("BOTTOMRIGHT")
+      }
+        if(rect.left>window.innerWidth/2&&rect.top<400){
+          setPopupPosition("TOPRIGHT")
+        }
+        if(rect.left<window.innerWidth/2&&window.innerHeight-200){
+          setPopupPosition("BOTTOMLEFT")
+        }
+        if(rect.left<window.innerWidth/2&&rect.top<400){
+          setPopupPosition("TOPLEFT")
+        }
+        
+
+
       const eventDetails = {
+
         title: info.event.title,
         start: info.event.start, // Event start date and time
-        end: info.event.end,     // Event end date and time
+        end: info.event.end, // Event end date and time
         extendedProps: info.event.extendedProps, // Custom event properties, if any
       };
-      
+
       setPopup({
         visible: true,
         event: eventDetails,
@@ -128,9 +151,9 @@ export default function Schedule() {
       });
     }
   };
-  
-  const handleClosePopup= () => {
-     setPopup({
+
+  const handleClosePopup = () => {
+    setPopup({
       visible: false,
       event: null,
       x: 0,
@@ -138,8 +161,26 @@ export default function Schedule() {
     });
   };
   
+  //Possible usage via eventClassNames={eventClassNames}
+  // Delete or use after final version
+  // const eventClassNames = (arg) => {
+  //   if (arg.event._def.title === 'CANDIDATE') {
+  //     return[ {height: "100%",
+  //       backgroundColor: 'yellow',
+  //       border: 'none',
+  //       fontSize: '14px',
+  //       fontWeight: 500,
+  //       // lineHeight: '21.98px',
+  //       color: '#303032',
+  //       boxShadow: "none"}];
+  //   } else if (arg.event._def.title === 'INTERVIEW') {
+  //      return [{"background-color": "blue",
+  //    " border-color": "blue"}];
+  //   }
+  //   return [];
+  // };
   
-  
+
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
@@ -165,7 +206,10 @@ export default function Schedule() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={true}
+          displayEventTime={false }
+          eventBackgroundColor={event.type==="INTERVIEW"?'#16FFB966':'#25CBFF'}
           events={[...transformedEvents]}
+          // eventClassNames={eventClassNames}
           dayHeaderFormat={{
             weekday: 'short',
           }}
@@ -176,13 +220,14 @@ export default function Schedule() {
               hour12: false,
             },
           ]}
-          slotMinTime={'07:00:00'}
-          slotMaxTime={'31:00:00'}
+           slotMinTime={'00:00:00'}
+          slotMaxTime={'24:00:00'}
           eventClick={handleEventClick}
         />
         {popup.visible && event && (
-           <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup}/>
+           <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition}/>
         )}
+
       </Box>
     </Box>
   );

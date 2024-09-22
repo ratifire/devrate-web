@@ -1,7 +1,8 @@
 import { formatDate } from '@fullcalendar/core';
+import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Box, Button, IconButton, Paper, Typography } from '@mui/material';
+import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import { styles } from './SidebarEvent.styles';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +11,7 @@ import { useSelector } from 'react-redux';
 
 const SidebarEvent = ({ event }) => {
   const { id, type, link, host, startTime } = event;
-  const { name, surname, status } = host;
+  const { id: hostId, name, surname, status } = host;
 
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { t } = useTranslation();
@@ -71,9 +72,9 @@ const SidebarEvent = ({ event }) => {
       </Box>
       <Typography sx={styles.host} variant='body2' component='div'>
         {t('schedule.host')}:{' '}
-        <span>
+        <Link component={RouterLink} to={`/profile/${hostId}`} sx={styles.host_link}>
           {name} {surname}
-        </span>
+        </Link>
       </Typography>
       <Typography sx={styles.hostTitle} variant='caption3' component='div'>
         {status}
@@ -98,6 +99,7 @@ SidebarEvent.propTypes = {
     type: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
     host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       surname: PropTypes.string.isRequired,
       status: PropTypes.string.isRequired,
