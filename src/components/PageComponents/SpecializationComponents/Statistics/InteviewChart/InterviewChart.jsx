@@ -1,3 +1,4 @@
+/* eslint-disable */
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
@@ -64,13 +65,25 @@ const InterviewChart = () => {
       <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
           <BarChart data={selectedPeriod}>
-            <Legend />
+            <defs>
+              <linearGradient id='colorConducted' x1='0' y1='0' x2='0' y2='1'>
+                <stop offset='0%' stopColor='#FFC061' stopOpacity={1} />
+                <stop offset='29.8%' stopColor='#F39E37' stopOpacity={1} />
+                <stop offset='100%' stopColor='#8D5C20' stopOpacity={1} />
+              </linearGradient>
+              <linearGradient id='colorPassed' x1='0' y1='0' x2='0' y2='1'>
+                <stop offset='0%' stopColor='#B07AFD' stopOpacity={1} />
+                <stop offset='36.8%' stopColor='#8133F1' stopOpacity={1} />
+                <stop offset='100%' stopColor='#4A1D8B' stopOpacity={1} />
+              </linearGradient>
+            </defs>
+            <Legend iconType="circle" layout="horizontal" align="center" verticalAlign="top" />
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
             <XAxis dataKey='name' />
-            <YAxis />
+            <YAxis domain={[0, 10]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} interval={0}/>
             <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
-            <Bar dataKey='conducted' fill='#CEB0FA' radius={[2, 2, 0, 0]} />
-            <Bar dataKey='passed' fill='#8133F1' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='conducted' fill='url(#colorConducted)' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='passed' fill='url(#colorPassed)' radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Box>

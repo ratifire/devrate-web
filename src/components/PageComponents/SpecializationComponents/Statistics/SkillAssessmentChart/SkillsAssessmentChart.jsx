@@ -76,8 +76,8 @@ const SkillsAssessmentChart = () => {
           <AreaChart data={selectedPeriod} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
             <defs>
               <linearGradient id='colorValue' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='0%' stopColor='#25CBFF' stopOpacity={1} />
-                <stop offset='48.5%' stopColor='rgba(37, 203, 255, 0.515)' stopOpacity={1} />
+                <stop offset='0%' stopColor='#DAFE22' stopOpacity={1} />
+                <stop offset='53.8%' stopColor='rgba(130, 254, 102, 0.552)' stopOpacity={1} />
                 <stop offset='100%' stopColor='rgba(22, 255, 185, 0)' stopOpacity={1} />
               </linearGradient>
             </defs>

@@ -44,7 +44,7 @@ const HardSkillsChart = () => {
         <defs>
           <linearGradient id='gradient2' x1='0%' y1='0%' x2='100%' y2='0%'>
             <stop offset='0%' style={{ stopColor: '#16FFB9', stopOpacity: 1 }} />
-            <stop offset='100%' style={{ stopColor: '#25CBFF', stopOpacity: 1 }} />
+            <stop offset='100%' style={{ stopColor: '#DAFE22', stopOpacity: 1 }} />
           </linearGradient>
         </defs>
       </RadarChart>

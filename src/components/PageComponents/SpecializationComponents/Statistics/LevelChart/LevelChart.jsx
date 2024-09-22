@@ -50,9 +50,10 @@ const LevelChart = () => {
             >
               <defs>
                 <linearGradient id='gradient' x1='0%' y1='0%' x2='100%' y2='0%'>
-                  <stop offset='0%' style={{ stopColor: '#EFE6FD', stopOpacity: 1 }} />
-                  <stop offset='50%' style={{ stopColor: '#B78AF7', stopOpacity: 1 }} />
-                  <stop offset='100%' style={{ stopColor: '#8133F1', stopOpacity: 1 }} />
+                  <stop offset='0.04%' style={{ stopColor: '#4A1D8B', stopOpacity: 1 }} />
+                  <stop offset='26.65%' style={{ stopColor: '#8233F1', stopOpacity: 1 }} />
+                  <stop offset='57.07%' style={{ stopColor: '#A756B4', stopOpacity: 1 }} />
+                  <stop offset='90.86%' style={{ stopColor: '#FCA728', stopOpacity: 1 }} />
                 </linearGradient>
               </defs>
             </Gauge>

@@ -43,10 +43,15 @@ export const styles = {
     },
   }),
   chartWrapper: {
+    maxWidth: '587px',
     width: '100%',
-    height: '320px',
+    height: '340px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    '& .recharts-default-legend': {
+      display: 'flex',
+      justifyContent: 'space-between',
+    }
   },
 };
