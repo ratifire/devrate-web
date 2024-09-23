@@ -58,7 +58,7 @@ resource "aws_ecs_cluster_capacity_providers" "front_cluster_capacity_provider" 
 
   default_capacity_provider_strategy {
     capacity_provider = aws_ecs_capacity_provider.front_capacity_provider.name
-    base              = 0
+    base              = 1
     weight            = 1
   }
 }
