@@ -352,6 +352,7 @@ export const en = {
       hardSkills: {
         title: 'Hard skills',
         averageMark: 'Average mark:',
+        error: 'Error loading skills',
       },
       softSkills: {
         title: 'Soft skills',

@@ -22,7 +22,7 @@ const SpecializationLevel = () => {
 
   useEffect(() => {
     if (mastery) {
-      dispatch(setActiveMastery(mastery.level));
+      dispatch(setActiveMastery(mastery?.level));
     }
   }, [mastery]);
 

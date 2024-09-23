@@ -23,7 +23,7 @@ const HardSkills = () => {
       isError={isError}
       openModal={handleModalOpen}
       subTitle='specialization.hardSkills.averageMark'
-      errorTitle='specialisation.hardSkills.error'
+      errorTitle='specialization.hardSkills.error'
       title='specialization.hardSkills.title'
     />
   );

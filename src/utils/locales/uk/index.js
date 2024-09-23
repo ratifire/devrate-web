@@ -353,6 +353,7 @@ export const uk = {
       hardSkills: {
         title: 'Хард скіли',
         averageMark: 'Середня оцінка:',
+        error: 'Помилка при завантаженні навичок',
       },
       softSkills: {
         title: 'Софт скіли',
