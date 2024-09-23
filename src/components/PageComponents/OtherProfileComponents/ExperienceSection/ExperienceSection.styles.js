@@ -1,7 +1,9 @@
 const styles = {
   experienceContainer: (theme) => ({
     width: '100%',
-    padding: theme.spacing(4),
+    paddingX: theme.spacing(4),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(2),
     background: theme.palette.background.level2,
     borderRadius: 'inherit',
   }),
@@ -28,12 +30,12 @@ const styles = {
     color: theme.palette.primary[200],
   }),
   experienceItemContainer: (theme) => ({
+    marginTop: theme.spacing(4),
     overflow: 'auto',
-    maxHeight: 300, // to be adjusted with designers
     minWidth: '100%',
+    maxHeight: 300,
     background: theme.palette.background.level2,
     paddingRight: theme.spacing(3),
-
     '&::-webkit-scrollbar': {
       width: 10,
     },

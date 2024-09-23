@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { Box } from '@mui/material';
-import styles from './Education.styles.js';
+// import { styles } from './Education.styles.js';
 import EducationItem from './EducationItem';
 import { useSelector } from 'react-redux';
 import { useGetEducationByUserIdQuery } from '../../../../../redux/services/educationApiSlice';
@@ -27,7 +27,7 @@ const Education = () => {
   }, [educationsNewData]);
 
   return (
-    <Box sx={styles.container}>
+    
       <Box>
         {sortedEducations.map(({ id, type, name, description, startYear, endYear, iconComponent }) => (
           <EducationItem
@@ -42,7 +42,6 @@ const Education = () => {
           />
         ))}
       </Box>
-    </Box>
   );
 };
 

@@ -12,27 +12,47 @@ import PropTypes from 'prop-types';
 import SkillsItem from './SkillsItem';
 import CustomTooltip from '../../../../UI/CustomTooltip';
 import TextAreaSearch from '../../../../FormsComponents/Inputs/TextAreaSearch';
+import SearchIcon from '@mui/icons-material/Search';
+import { sortedSkills } from '../../../../../utils/helpers/sortedSkills';
 
 const Skills = ({ id }) => {
-  
   const [specCurrent, setSpecCurrent] = useState('');
-  const [open, setOpen] = useState(false);
-  const [srtSearch, setSrtSearch] = useState('');
-  
   
   const { data: specializations } = useGetSpecializationByUserIdQuery(id);
   
   const selectedSpecialization = specializations?.find((s) => s.name === specCurrent);
   
   const { data: specializationsLevel } = useGetMainMasteryBySpecializationIdQuery(selectedSpecialization?.id);
-  const level = specializationsLevel?.level || 'N/A';
+  
+  const level = specializationsLevel?.level;
+  
   const { data: skills = [] } = useGetHardSkillsByMasteryIdQuery(
     { id, masteryId: specializationsLevel?.id },
     { skip: !specializationsLevel?.id },
   );
-  const hardSkill = skills.filter((item) => item.hidden === true);
-  const count = hardSkill.length > 1 ? 2 : 1;
   
+  const skillVisible = skills.filter((item) => item.hidden === true);
+  const [filteredSkills, setFilteredSkills] = useState(skillVisible);
+  
+  // useEffect(() => {
+  //   setFilteredSkills(skillVisible);
+  // }, [skillVisible]);
+  //Select
+  const [open, setOpen] = useState(false);
+  //Select
+  //textarea
+  const [srtSearch, setSrtSearch] = useState('');
+  
+  //textarea
+  //column items
+  const count = skillVisible.length > 1 ? 2 : 1;
+  //column items
+  const loverNameHardSkills = skillVisible.map((item) => ({
+    ...item,
+    name: item.name.toLowerCase(),
+  }));
+  
+  //Select
   useEffect(() => {
     if (specializations && specializations.length > 0) {
       const mainSpecialization = specializations.find((item) => item.main);
@@ -46,6 +66,7 @@ const Skills = ({ id }) => {
     const value = event.target.value;
     setSpecCurrent(value);
   };
+  
   const handleOpen = () => {
     setOpen(true);
   };
@@ -53,10 +74,33 @@ const Skills = ({ id }) => {
   const handleClose = () => {
     setOpen(false);
   };
+  //Select
+  //textarea
   const handleChangeSearch = (event) => {
     const value = event.target.value;
     setSrtSearch(value);
+    const loverValue = value.toLowerCase();
+    
+    if (loverValue.trim() === '') {
+      setFilteredSkills(skillVisible);
+    } else {
+      const result = sortedSkills(loverNameHardSkills, loverValue);
+      setFilteredSkills(result);
+      console.log(result, 'result');
+    }
+    
   };
+  //textarea
+  
+  //button
+  const handleClick = () => {
+    const searchStr = srtSearch.toLocaleLowerCase().split(', ');
+    
+    const result = sortedSkills(loverNameHardSkills, searchStr);
+    setFilteredSkills(result);
+    console.log(result, 'result');
+  };
+  //button
   return (
     <Box sx={styles.wrapper}>
       <Box sx={open ? styles.skillBg : styles.skill}>
@@ -94,17 +138,21 @@ const Skills = ({ id }) => {
           <Typography sx={styles.text} className={level} variant="body">Level {level}</Typography>
         </Box>
         <Box sx={{ ...styles.list, columnCount: count }}>
-          {hardSkill?.map((item) => <SkillsItem key={item.id} data={item} />)}
+          {srtSearch.trim() === '' ? skillVisible?.map((item) => <SkillsItem key={item.id} data={item} />) :
+            filteredSkills?.map((item) => <SkillsItem key={item.id} data={item} />)}
         </Box>
       </Box>
-      <Box sx={styles.search}>
-        <TextAreaSearch
-          value={srtSearch}
-          handleChange={handleChangeSearch}
-        />
-        <IconButton sx={styles.btnIcon}>
-          ds
-        </IconButton>
+      <Box sx={styles.wrapperSearch}>
+        <Box sx={styles.search}>
+          <TextAreaSearch
+            value={srtSearch}
+            handleChange={handleChangeSearch}
+          />
+          <IconButton onClick={handleClick} type="button" sx={styles.btnIcon}>
+            <SearchIcon />
+            {'Пошук'}
+          </IconButton>
+        </Box>
       </Box>
     </Box>
   );

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import AchievementModal from '../../../../ModalsComponents/ProfileModals/AchievementModal';
 import { useFetchAchievementsQuery } from '../../../../../redux/services/achievementsApiSlice';
 import AchievementItem from './AchievementItem';
-import styles from './Achievment.styles';
+// import { styles } from './Achievment.styles';
 import { loadIconsFromLocalStorage } from '../../../../../utils/helpers';
 import { iconsAchievement } from '../../../../../utils/constants/Experience/iconsExperience';
 import {mapDataWithIcons} from '../../../../../utils/helpers/mapDataWithIcons';
@@ -27,7 +27,7 @@ const Achievement = () => {
 
   return (
     <>
-      <Grid container spacing={3} sx={styles.achievementListContainer}>
+      <Grid container spacing={3}>
         {achievementsNewData?.map((achievement) =>
           <Grid item key={achievement.id} xs={6}>
             <AchievementItem achievement={achievement} icon={achievement.iconComponent} />

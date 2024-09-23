@@ -3,7 +3,6 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     gridGap: '20px',
-    marginTop: '20px',
   }),
   info: (theme) => ({
     display: 'flex',
@@ -35,14 +34,21 @@ export const styles = {
       left: '0',
       width: '100%',
       height: '100%',
-      background: `${theme.palette.background.default}66`,
+      background: `${theme.palette.neutral['900']}BD`,
     },
   }),
-  search: {
+  wrapperSearch: {
     flex: '0 1 max(333px)',
+    height: '300px',
     position: 'relative',
   },
-  
+  search: {
+    position: 'sticky',
+    right: '0',
+    top: '0',
+    height: '100%',
+    width: '100%',
+  },
   wrapperSelect:(theme) => ({
     display: 'flex',
     alignItems: 'center',
@@ -109,6 +115,19 @@ export const styles = {
   }),
   list: {
     columnGap: '32px',
+    overflow: 'auto',
+    maxHeight: 300,
+    '&::-webkit-scrollbar': {
+      width: 10,
+    },
+    '&::-webkit-scrollbar-track': (theme) => ({
+      backgroundColor: theme.palette.neutral['600'],
+      borderRadius: 8,
+    }),
+    '&::-webkit-scrollbar-thumb': (theme) => ({
+      borderRadius: 6,
+      backgroundColor: theme.palette.common.white,
+    }),
   },
   text: (theme) => ({
     textTransform: 'capitalize',
@@ -125,18 +144,23 @@ export const styles = {
       textTransform: 'uppercase',
     },
   }),
-  btnIcon: {
+  btnIcon:(theme) => ( {
     position: 'absolute',
-    bottom: 0,
-    left: 0,
-  },
+    bottom: '4px',
+    right: '16px',
+    borderRadius: 1,
+    gridGap: theme.spacing(2),
+    fontSize: '14px',
+    padding: '7px 10px',
+    color: theme.palette.primary['100'],
+    ' svg': {
+      color: theme.palette.primary['200'],
+    },
+  }),
   textArea:(theme)=> ({
     marginBottom: theme.spacing(0),
     width: '100%',
     height: '100%',
-    ' *': {
-      width: '100%',
-      height: '100%',
-    }
+    padding: theme.spacing(0),
   }),
 };

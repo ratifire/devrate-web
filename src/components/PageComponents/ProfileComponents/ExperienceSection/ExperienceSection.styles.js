@@ -33,7 +33,8 @@ const styles = {
   }),
   experienceItemContainer: (theme) => ({
     overflow: 'auto',
-    maxHeight: 300, // to be adjusted with designers
+    marginTop: theme.spacing(4),
+    maxHeight: '300px',
     minWidth: '100%',
     background: theme.palette.background.level2,
     paddingRight: theme.spacing(3),
