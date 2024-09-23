@@ -92,7 +92,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
 
     getSoftSkillsByMasteryId: builder.query({
       query: ({ masteryId }) => `/masteries/${masteryId}/soft-skills`,
-      providesTags: ['Softskills'],
+      providesTags: ['SoftSkills'],
     }),
 
     updateSpecializationAsMainById: builder.mutation({
@@ -123,7 +123,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: skill,
       }),
-      invalidatesTags: ['HardSkills'],
+      invalidatesTags: ['HardSkills', 'SoftSkills'],
     }),
 
     addSkillsToMastery: builder.mutation({
@@ -132,7 +132,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: skills,
       }),
-      invalidatesTags: ['HardSkills'],
+      invalidatesTags: ['HardSkills', 'SoftSkills'],
     }),
 
     createSkillsBulk: builder.mutation({

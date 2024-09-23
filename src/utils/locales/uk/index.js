@@ -370,8 +370,7 @@ export const uk = {
         skills: {
           title: 'Навички',
           placeholder: 'Codelgniter, Yii, Zend Framework',
-          skill_long: 'Навичка за довга',
-          skill_short: 'Навичка за коротка',
+          no_skills: 'Немає доступних навичок',
         },
       },
       interview: {
@@ -421,6 +420,9 @@ export const uk = {
       title: 'Розклад',
       host: 'Хост',
       cancelEventBtn: 'Відмінити івент',
+      popupUserInfo: 'Інформація про вас',
+      popupInterviewerInfo: 'Інформація про співбесідника',
+      popupRole: 'Роль:'
     },
   },
 };

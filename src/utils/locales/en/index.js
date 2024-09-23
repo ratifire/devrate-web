@@ -368,6 +368,7 @@ export const en = {
         skills: {
           title: 'Skills',
           placeholder: 'Codelgniter, Yii, Zend Framework',
+          no_skills: 'No available skills',
         },
         interview: {
           income: 'An interview has been completed ',
@@ -419,6 +420,9 @@ export const en = {
       title: 'Schedule',
       host: 'Host',
       cancelEventBtn: 'Cancel event',
+      popupUserInfo: 'Info about you',
+      popupInterviewerInfo: 'Info about you',
+      popupRole: 'Role:'
     },
   },
 };

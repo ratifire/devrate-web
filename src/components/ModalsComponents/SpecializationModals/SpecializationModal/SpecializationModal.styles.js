@@ -19,7 +19,7 @@ export const styles = {
       '&.Mui-focused fieldset': {
         borderColor: theme.palette.primary[600],
       },
-      'fieldset': {
+      fieldset: {
         borderColor: theme.palette.neutral[500],
       },
     },

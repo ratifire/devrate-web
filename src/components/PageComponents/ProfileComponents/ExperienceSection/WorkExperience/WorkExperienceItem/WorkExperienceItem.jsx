@@ -37,7 +37,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   };
 
   return (
-    <Box sx={styles.workExpeirenceItemContainer}>
+    <Box sx={styles.workExperienceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
         <Box sx={styles.workTitleContainer}>
           <Typography variant='h5' sx={styles.workPosition}>
@@ -49,7 +49,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
-          <IconButton onClick={(event) => handleMenuOpen(event)}>
+          <IconButton onClick={(event) => handleMenuOpen(event)} sx={styles.iconBtnModal}>
             <MoreVertIcon />
           </IconButton>
         </Box>{' '}

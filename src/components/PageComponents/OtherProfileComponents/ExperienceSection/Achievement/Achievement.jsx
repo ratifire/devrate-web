@@ -4,43 +4,22 @@ import AchievementItem from './AchievementItem';
 import { Grid } from '@mui/material';
 import styles from './Achievement.style';
 import PropTypes from 'prop-types';
-import { iconsLocalStorage, loadIconsFromLocalStorage } from '../../../../../utils/helpers';
-import { iconsAchievement } from '../../../../../utils/constants/iconsExperience';
+import { loadIconsFromLocalStorage } from '../../../../../utils/helpers';
+import { iconsAchievement } from '../../../../../utils/constants/Experience/iconsExperience';
+import { mapDataWithIcons } from '../../../../../utils/helpers/mapDataWithIcons';
+import { iconValuesAchievement } from '../../../../../utils/constants/Experience/iconsKeys';
+import { updateIconsInLocalStorage } from '../../../../../utils/helpers/updateIconsInLocalStorage';
 
 
 const Achievement = ({ id }) => {
   const iconsMap = loadIconsFromLocalStorage('achievement');
   const { data: achievementsData } = useFetchAchievementsQuery(id);
+  const achievementsNewData = mapDataWithIcons(achievementsData, iconsMap, iconsAchievement);
+  const iconValues = useMemo(() => iconValuesAchievement, []);
 
-  const achievementsNewData = achievementsData?.map((achievement) => {
-    const iconName = iconsMap[achievement.id];
-    const iconComponent = iconsAchievement[iconName];
-    return {
-      ...achievement,
-      iconName,
-      iconComponent,
-    };
-  });
-
-
-  const iconValues = useMemo(() => Object.keys(iconsAchievement), []);
 
   useEffect(() => {
-    if (achievementsData) {
-      const existingIcons = iconsMap;
-      const achievementsWithoutIcons = achievementsData.filter((achievement) => {
-        return !existingIcons[achievement.id];
-      });
-
-      if (achievementsWithoutIcons.length > 0) {
-        const shuffledIcons = [...iconValues].sort(() => 0.5 - Math.random());
-        const newIcons = {};
-        achievementsWithoutIcons.forEach((achievement, index) => {
-          newIcons[achievement.id] = shuffledIcons[index % shuffledIcons.length];
-        });
-        iconsLocalStorage({ ...existingIcons, ...newIcons }, 'achievement');
-      }
-    }
+    updateIconsInLocalStorage(achievementsData, iconsMap, iconValues, 'achievement');
   }, [achievementsData, iconValues, iconsMap]);
 
 

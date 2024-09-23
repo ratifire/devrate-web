@@ -3,8 +3,10 @@ const styles = {
     width: '100%',
     marginBottom: theme.spacing(4),
     padding: theme.spacing(4),
-    backgroundColor: '#3E3E40', //ask to designers
+    backgroundColor: theme.palette.sliderAssessment.darkGray,
     borderRadius: 2,
+    wordBreak: 'break-word',
+    overflowWrap: 'break-word'
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',
@@ -27,6 +29,20 @@ const styles = {
   }),
   menuIcon: (theme) => ({
     color: theme.palette.text.secondary,
+  }),
+
+  iconBtnModal: (theme) => ({
+    flex: '1 0 35px',
+    color: theme.palette.neutral['200'],
+    borderRadius: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'background-color 0.3s, transform 0.3s',
+    '&:hover': {
+      backgroundColor: theme.palette.neutral['700'],
+      color: theme.palette.neutral['200'],
+    },
   }),
 };
 export default styles;

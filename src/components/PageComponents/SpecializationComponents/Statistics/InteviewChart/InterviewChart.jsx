@@ -9,7 +9,7 @@ import {
   createTenDaysInterviewData,
   createTenMonthsInterviewData,
   getCurrentAndLastMonths,
-  useHandleChange,
+  useHandleChange, useTooltip,
 } from '../utils';
 import { styles } from './InterviewChart.style';
 
@@ -20,6 +20,7 @@ const InterviewChart = () => {
   const { t } = useTranslation();
   const dataMonths = useMemo(() => createTenMonthsInterviewData({ t, data }), [data]);
   const dataDays = useMemo(() => createTenDaysInterviewData({ data }), [data]);
+  const { tooltipLabel, tooltipContent } = useTooltip();
 
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
@@ -60,7 +61,6 @@ const InterviewChart = () => {
           </Select>
         </Box>
       </Box>
-
       <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
           <BarChart data={selectedPeriod}>
@@ -68,7 +68,7 @@ const InterviewChart = () => {
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
             <XAxis dataKey='name' />
             <YAxis />
-            <Tooltip />
+            <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
             <Bar dataKey='conducted' fill='#CEB0FA' radius={[2, 2, 0, 0]} />
             <Bar dataKey='passed' fill='#8133F1' radius={[2, 2, 0, 0]} />
           </BarChart>
