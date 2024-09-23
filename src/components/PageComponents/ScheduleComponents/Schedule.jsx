@@ -36,7 +36,7 @@ export default function Schedule() {
       id: event.id,
       title: event.type,
       start: event.startTime,
-      backgroundColor: event.type === 'INTERVIEW' ? '#16FFB966' : '#25CBFF',
+      backgroundColor: event.type === 'INTERVIEW' ? '#16FFB966' : '#FCA728',
     }));
   };
 
