@@ -19,6 +19,7 @@ const ConfirmationModal = () => {
   const [codeError, setCodeError] = useState(false);
   const [confirmEmail] = useConfirmEmailMutation();
   const openConfirmation = useSelector((state) => state.modal.openConfirmation);
+
   const handleClose = () => {
     dispatch(closeModal({ modalName: 'openConfirmation' }));
   };
@@ -109,6 +110,7 @@ const ConfirmationModal = () => {
           </StyledRouterLink>
         </Typography>
       </Box>
+
       <Box sx={styles.turnBackContainer}>
         <Typography variant='subtitle3' sx={styles.turnBackText}>{t('modal.confirmation.return_on')}</Typography>
         <StyledRouterLink to={'/'} onClick={handleCloseAllModal}>
