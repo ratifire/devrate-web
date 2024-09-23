@@ -421,7 +421,7 @@ export const en = {
       host: 'Host',
       cancelEventBtn: 'Cancel event',
       popupUserInfo: 'Info about you',
-      popupInterviewerInfo: 'Info about Interviewer',
+      popupInterviewerInfo: 'Info about interviewer',
       popupRole: 'Role:',
     },
   },
