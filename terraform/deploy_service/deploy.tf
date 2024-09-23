@@ -69,7 +69,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
     id      = aws_launch_template.ecs_front_launch.id
     version = aws_launch_template.ecs_front_launch.latest_version
   }
-  min_size                  = 1
+  min_size                  = 2
   max_size                  = 2
   desired_capacity          = 2
   health_check_type         = "EC2"
