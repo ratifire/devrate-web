@@ -13,6 +13,9 @@ env:
   ECS_CLUSTER: frontend-cluster                # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: frontend_td             # set this to the path to your Amazon ECS task definition file
   CONTAINER_NAME: front-container              # set this to the name of the container in the containerDefinitions section of your task definition
+  REACT_APP_API_URL: 'https://server.devrate.org'
+  REACT_APP_WS_URL: 'wss://server.devrate.org'
+
 
 permissions:
   contents: read
