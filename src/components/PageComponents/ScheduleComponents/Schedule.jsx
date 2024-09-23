@@ -11,14 +11,6 @@ import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../..
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
 
-const transformEvents = (events) => {
-  return events.map((event) => ({
-    id: event.id,
-    title: event.type,
-    start: event.startTime,
-  }));
-};
-
 export default function Schedule() {
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
@@ -31,6 +23,22 @@ export default function Schedule() {
   const [fromTime, setFromTime] = useState('');
   const [isReady, setIsReady] = useState(false);
   const { id: userId } = useSelector((state) => state.auth.user.data);
+  const [events, setEvents] = useState([]);
+
+  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
+  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
+    { userId, fromTime },
+    { skip: !isReady }
+  );
+
+  const transformEvents = (events) => {
+    return events.map((event) => ({
+      id: event.id,
+      title: event.type,
+      start: event.startTime,
+      backgroundColor: event.type === 'INTERVIEW' ? '#16FFB966' : '#25CBFF',
+    }));
+  };
 
   const getWeekStartAndEnd = (year, weekNumber) => {
     const firstDayOfYear = DateTime.local(year).startOf('year');
@@ -56,13 +64,8 @@ export default function Schedule() {
     }
   }, [selectedWeek]);
 
-  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
-  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
-    { userId, fromTime },
-    { skip: !isReady }
-  );
-
   useEffect(() => {
+    setEvents(transformEvents(currentEvents || []));
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
       const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
@@ -86,16 +89,8 @@ export default function Schedule() {
       timeGridEventElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridEventElements);
       });
-
-      const styleElement = document.createElement('style');
-      styleElement.textContent = `
-        :root {
-          --fc-border-color: #303032 !important; /* Set the border color explicitly */
-        }
-      `;
-      document.head.appendChild(styleElement);
     }
-  });
+  }, [currentEvents]);
 
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
@@ -183,8 +178,6 @@ export default function Schedule() {
     return <div>Loading...</div>;
   }
 
-  const transformedEvents = transformEvents(currentEvents || []);
-
   return (
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
@@ -205,8 +198,7 @@ export default function Schedule() {
           dayMaxEvents={true}
           weekends={true}
           displayEventTime={false}
-          eventBackgroundColor={event.type === 'INTERVIEW' ? '#16FFB966' : '#25CBFF'}
-          events={[...transformedEvents]}
+          events={events}
           // eventClassNames={eventClassNames}
           dayHeaderFormat={{
             weekday: 'short',
