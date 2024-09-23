@@ -45,8 +45,10 @@ const ConfirmationModal = () => {
       try {
         const { data } = await confirmEmail(code);
         if (data) {
-          dispatch(closeModal({ modalName: 'openConfirmation' }));
-          dispatch(openModal({ modalName: 'openLogin' }));
+          handleClose();
+          setTimeout(() => {
+            dispatch(openModal({ modalName: 'openLogin' }));
+          }, 100);
         }
       } catch (error) {
         if (error.originalStatus === 410) {
