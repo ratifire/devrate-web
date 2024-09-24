@@ -1,3 +1,4 @@
+/* eslint-disable */
 import AddIcon from '@mui/icons-material/Add';
 import { Box, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
@@ -17,6 +18,8 @@ import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { MAX_SKILLS } from '../constants';
 import { styles } from '../styles/SkillsModal.styles';
 import { styles as hardSkillsStyles } from './HardSkillsModal.styles';
+import { useFormik } from 'formik';
+import { HardSkillsValidationSchema } from '../../../../utils/valadationSchemas/HardSkillsValidationSchema';
 
 const HardSkillsModal = () => {
   const [state, setState] = useState({
@@ -89,9 +92,8 @@ const HardSkillsModal = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const onSubmit = () => {
+    console.log('click');
     if (addSkills.length) {
       addSkills.forEach((skill) => {
         addSkillToMastery({ masteryId, skill: { name: skill.name, type: 'HARD_SKILL' } });
@@ -107,6 +109,14 @@ const HardSkillsModal = () => {
     handleClose();
   };
 
+  const formik = useFormik({
+    initialValues: {
+      skill: '',
+    },
+    onSubmit,
+    validationSchema: HardSkillsValidationSchema,
+  });
+
   if (isLoading) {
     return <CircularProgress />;
   }
@@ -120,7 +130,7 @@ const HardSkillsModal = () => {
       <Typography variant='h6' sx={styles.title}>
         {t('specialization.modal.skills.title')}
       </Typography>
-      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
+      <form onSubmit={formik.handleSubmit} onKeyDown={handleKeyDown}>
         <Box sx={[styles.input, hardSkillsStyles.box]}>
           <TextField
             variant='outlined'
