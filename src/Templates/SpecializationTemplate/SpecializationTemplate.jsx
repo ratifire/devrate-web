@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { SpecializationModal } from '../../components/ModalsComponents/SpecializationModals';
-import ScheduleInterviewModal from '../../components/ModalsComponents/SpecializationModals/ScheduleInterviewModal';
-import SoftSkillsModal from '../../components/ModalsComponents/SpecializationModals/SoftSkillsModal';
-import HardSkillsModal from '../../components/ModalsComponents/SpecializationModals/HardSkillsModal';
+import { SoftSkillsModal, HardSkillsModal, ScheduleInterviewModal, SpecializationModal } from '../../components/ModalsComponents/SpecializationModals';
 
 const SpecializationTemplate = ({ children }) => {
   const modalData = useSelector((state) => state.modal.modalData);
