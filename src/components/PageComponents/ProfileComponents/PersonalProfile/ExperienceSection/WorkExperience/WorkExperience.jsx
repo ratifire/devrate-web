@@ -4,19 +4,22 @@ import styles from './WorkExperience.styles';
 import WorkExperienceItem from './WorkExperienceItem/WorkExperienceItem';
 import { useGetWorkExperienceByUserIdQuery } from '../../../../../../redux/workExperience/workExperienceApiSlice';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 
-const WorkExperience = () => {
+const WorkExperience = ({ tab, profileType, imgUrl }) => {
   const { id } = useSelector((state) => state.auth.user.data);
 
   const { data: workExperiencesData } = useGetWorkExperienceByUserIdQuery(id);
 
-  console.log(workExperiencesData);
+  if (!workExperiencesData || workExperiencesData.length === 0) {
+    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
+  }
 
   return (
     <Box sx={styles.container}>
       <Box>
-        {workExperiencesData &&
-          workExperiencesData.map(
+        {workExperiencesData?.map(
             ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
               return (
                 <WorkExperienceItem
@@ -30,11 +33,18 @@ const WorkExperience = () => {
                   responsibilities={responsibilities}
                 />
               );
-            }
-          )}
+            },
+          )
+        }
       </Box>
     </Box>
   );
 };
+
+WorkExperience.propTypes = {
+  tab: PropTypes.string.isRequired,
+  profileType: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string.isRequired
+}
 
 export default WorkExperience;

@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import { AchievementModal, EducationModal, ModalUserInfo, WorkExperienceModal } from '../../../components/ModalsComponents/ProfileModals';
 
 const PersonalProfileTemplate = ({ children }) => {
-  const { openUserInfo, openExperience, openAchievement, education } = useSelector((state) => state.modal);
+  const { openUserInfo, workExperience, achievement, education } = useSelector((state) => state.modal);
 
   return (
     <div className='profile'>
       {children}
       {openUserInfo && <ModalUserInfo />}
-      {openExperience && <WorkExperienceModal />}
-      {openAchievement && <AchievementModal />}
+      {workExperience && <WorkExperienceModal />}
+      {achievement && <AchievementModal />}
       {education && <EducationModal />}
     </div>
   );

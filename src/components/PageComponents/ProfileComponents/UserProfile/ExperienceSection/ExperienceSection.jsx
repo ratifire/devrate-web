@@ -7,25 +7,28 @@ import Achievement from '../../UserProfile/ExperienceSection/Achievement';
 import { useTranslation } from 'react-i18next';
 import WorkExperience from './WorkExperience';
 import PropTypes from 'prop-types';
+import { emptyUserTabsPictures } from '../../../../../utils/constants/emptyTabsPictures';
 
-const ExperienceSection = ({id}) => {
+const ExperienceSection = ({ id }) => {
   const [value, setValue] = React.useState('openExperience');
   const { t } = useTranslation();
+
+  const profileType = 'user';
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const renderAdditionalInfo = (value) => {
-    const tab = {
-      openExperience: <WorkExperience id={id}/>,
-      achievement: <Achievement id={id}/>,
-      skills: <Skills id={id}/>,
-      education: <Education id={id}/>,
-    };
-
-    return tab[value] ? tab[value] : <WorkExperience />;
+  const tab = {
+    openExperience: <WorkExperience id={id} tab={'workExperience'} profileType={profileType}
+                                    imgUrl={emptyUserTabsPictures.WorkExperienceUserPic} />,
+    achievement: <Achievement id={id} tab={'achievement'} profileType={profileType}
+                              imgUrl={emptyUserTabsPictures.AchievementUserPic} />,
+    skills: <Skills id={id} tab={'skills'} profileType={profileType} imgUrl={emptyUserTabsPictures.SkillsUserPic} />,
+    education: <Education id={id} tab={'education'} profileType={profileType}
+                          imgUrl={emptyUserTabsPictures.EducationUserPic} />,
   };
+
   const StyledTabs = styled(Tabs)(({ theme }) => ({
     '& .MuiTabs-indicator': {
       display: 'flex',
@@ -49,14 +52,16 @@ const ExperienceSection = ({id}) => {
   return (
     <Box sx={styles.experienceContainer}>
       <Box style={styles.tabsContainer}>
-        <StyledTabs  sx={styles.wrapperTab} value={value} onChange={handleChange} textColor='primary' indicatorColor='primary[200]'>
-          <StyledTab value='openExperience' label={t('profile.experience.workExperience')} sx={styles.tabItem} />
-          <StyledTab value='achievement' label={t('profile.experience.achievement')} sx={styles.tabItem} />
-          <StyledTab value='skills' label={t('profile.experience.skills.title')} sx={styles.tabItem} />
-          <StyledTab value='education' label={t('profile.experience.education')} sx={styles.tabItem} />
+        <StyledTabs sx={styles.wrapperTab} value={value} onChange={handleChange} textColor="primary"
+                    indicatorColor="primary[200]">
+          <StyledTab value="openExperience" label={t('profile.experience.workExperience.tabName')}
+                     sx={styles.tabItem} />
+          <StyledTab value="achievement" label={t('profile.experience.achievement.tabName')} sx={styles.tabItem} />
+          <StyledTab value="skills" label={t('profile.experience.skills.tabName')} sx={styles.tabItem} />
+          <StyledTab value="education" label={t('profile.experience.education.tabName')} sx={styles.tabItem} />
         </StyledTabs>
       </Box>
-      <Box sx={styles.experienceItemContainer}>{renderAdditionalInfo(value)}</Box>
+      <Box sx={styles.experienceItemContainer}>{tab[value]}</Box>
     </Box>
   );
 };

@@ -9,15 +9,18 @@ import { iconsEducation } from '../../../../../../utils/constants/Experience/ico
 import { mapDataWithIcons } from '../../../../../../utils/helpers/mapDataWithIcons';
 import { iconValuesEducation } from '../../../../../../utils/constants/Experience/iconsKeys';
 import { updateIconsInLocalStorage } from '../../../../../../utils/helpers/updateIconsInLocalStorage';
+import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 
-const Education = ({ id }) => {
+const Education = ({ id, tab, profileType, imgUrl }) => {
   const iconsMap = loadIconsFromLocalStorage('education');
-  const { data: educationsData } = useGetEducationByUserIdQuery(id, { skip: !id });
+  const { data: educationsData, isLoading } = useGetEducationByUserIdQuery(id, { skip: !id });
   const educationsNewData = mapDataWithIcons(educationsData, iconsMap, iconsEducation);
   const iconValues = useMemo(() => iconValuesEducation, []);
 
   useEffect(() => {
-    updateIconsInLocalStorage(educationsNewData, iconsMap, iconValues, 'education');
+    if (educationsNewData && educationsNewData.length > 0) {
+      updateIconsInLocalStorage(educationsNewData, iconsMap, iconValues, 'education');
+    }
   }, [educationsNewData, iconValues, iconsMap]);
 
   const sortedEducations = useMemo(() => {
@@ -25,10 +28,14 @@ const Education = ({ id }) => {
     return [...educationsNewData].sort((a, b) => a.startYear - b.startYear);
   }, [educationsNewData]);
 
+  if (isLoading || !educationsData || educationsData.length === 0) {
+    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
+  }
+
   return (
     <Box sx={styles.container}>
       <Box>
-        {sortedEducations?.map(({ id, type, name, description, startYear, endYear, iconComponent }) => (
+        {sortedEducations.map(({ id, type, name, description, startYear, endYear, iconComponent }) => (
           <EducationItem
             key={id}
             type={type}
@@ -47,6 +54,9 @@ const Education = ({ id }) => {
 
 Education.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  tab: PropTypes.string.isRequired,
+  profileType: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string.isRequired
 };
 
 export default Education;

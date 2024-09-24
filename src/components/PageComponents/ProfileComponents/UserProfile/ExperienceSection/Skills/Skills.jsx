@@ -12,15 +12,16 @@ import PropTypes from 'prop-types';
 import SkillsItem from './SkillsItem';
 import CustomTooltip from '../../../../../UI/CustomTooltip';
 import TextAreaSearch from '../../../../../FormsComponents/Inputs/TextAreaSearch';
+import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 
-const Skills = ({ id }) => {
+const Skills = ({ id, tab, profileType, imgUrl }) => {
   
   const [specCurrent, setSpecCurrent] = useState('');
   const [open, setOpen] = useState(false);
   const [srtSearch, setSrtSearch] = useState('');
   
   
-  const { data: specializations } = useGetSpecializationByUserIdQuery(id);
+  const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(id);
   
   const selectedSpecialization = specializations?.find((s) => s.name === specCurrent);
   
@@ -57,6 +58,11 @@ const Skills = ({ id }) => {
     const value = event.target.value;
     setSrtSearch(value);
   };
+
+  if (isLoading || !specializations || specializations.length === 0) {
+    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
+  }
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={open ? styles.skillBg : styles.skill}>
@@ -112,6 +118,9 @@ const Skills = ({ id }) => {
 
 Skills.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  tab: PropTypes.string.isRequired,
+  profileType: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string.isRequired,
 };
 
 export default Skills;

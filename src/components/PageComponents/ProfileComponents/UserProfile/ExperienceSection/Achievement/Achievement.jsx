@@ -9,18 +9,26 @@ import { iconsAchievement } from '../../../../../../utils/constants/Experience/i
 import { mapDataWithIcons } from '../../../../../../utils/helpers/mapDataWithIcons';
 import { iconValuesAchievement } from '../../../../../../utils/constants/Experience/iconsKeys';
 import { updateIconsInLocalStorage } from '../../../../../../utils/helpers/updateIconsInLocalStorage';
+import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 
 
-const Achievement = ({ id }) => {
+const Achievement = ({ id, tab, profileType, imgUrl }) => {
   const iconsMap = loadIconsFromLocalStorage('achievement');
   const { data: achievementsData } = useFetchAchievementsQuery(id);
   const achievementsNewData = mapDataWithIcons(achievementsData, iconsMap, iconsAchievement);
   const iconValues = useMemo(() => iconValuesAchievement, []);
 
 
+
+
   useEffect(() => {
     updateIconsInLocalStorage(achievementsData, iconsMap, iconValues, 'achievement');
   }, [achievementsData, iconValues, iconsMap]);
+
+
+  if (!achievementsData || achievementsData.length === 0) {
+    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
+  }
 
 
   return (
@@ -34,6 +42,9 @@ const Achievement = ({ id }) => {
 
 Achievement.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  tab: PropTypes.string.isRequired,
+  profileType: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string.isRequired,
 };
 
 export default Achievement;

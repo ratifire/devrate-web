@@ -1,9 +1,13 @@
 const styles = {
   experienceContainer: (theme) => ({
     width: '100%',
-    padding: theme.spacing(4),
+    paddingX: theme.spacing(4),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(2),
     background: theme.palette.background.level2,
     borderRadius: 'inherit',
+    height: '100%',
+    minHeight: '382px',
   }),
   tabsContainer: {
     display: 'flex',
@@ -37,6 +41,7 @@ const styles = {
     minWidth: '100%',
     background: theme.palette.background.level2,
     paddingRight: theme.spacing(3),
+    height: '100%',
 
     '&::-webkit-scrollbar': {
       width: 10,

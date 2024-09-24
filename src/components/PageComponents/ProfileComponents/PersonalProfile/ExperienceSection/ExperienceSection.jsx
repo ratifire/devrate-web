@@ -9,30 +9,34 @@ import WorkExperience from './WorkExperience/WorkExperience';
 import { Add } from '@mui/icons-material';
 import { openModal } from '../../../../../redux/modal/modalSlice';
 import { useDispatch } from 'react-redux';
+import { emptyPersonalTabsPictures } from '../../../../../utils/constants/emptyTabsPictures';
 
 const ExperienceSection = () => {
-  const [value, setValue] = React.useState('openExperience');
+  const [value, setValue] = React.useState('workExperience');
   const { t } = useTranslation();
-  
+
+  const profileType = 'personal';
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
+
   const dispatch = useDispatch();
   const handleAddFeature = () => dispatch(openModal({ modalName: value }));
-  const renderAdditionalInfo = (value) => {
-    const tab = {
-      openExperience: <WorkExperience />,
-      achievement: <Achievement />,
-      skills: <Skills />,
-      education: <Education />,
-    };
-    
-    return tab[value] ? tab[value] : <WorkExperience />;
+  const tab = {
+    workExperience: <WorkExperience tab={'workExperience'} profileType={profileType}
+                                    imgUrl={emptyPersonalTabsPictures.emptyWorkExperiencePic} />,
+    achievement: <Achievement tab={'achievement'} profileType={profileType}
+                              imgUrl={emptyPersonalTabsPictures.emptyAchievementPic} />,
+    skills: <Skills tab={'skills'} profileType={profileType} imgUrl={emptyPersonalTabsPictures.emptySkillsPic} />,
+    education: <Education tab={'education'} profileType={profileType}
+                          imgUrl={emptyPersonalTabsPictures.emptyEducationPic} />,
   };
+
+
   const renderBtn = (value) => {
     const tab = {
-      openExperience: (
+      workExperience: (
         <IconButton sx={styles.iconBtn} aria-label="Edit Work Experience" onClick={handleAddFeature}>
           <Add />
         </IconButton>
@@ -49,7 +53,7 @@ const ExperienceSection = () => {
         </IconButton>
       ),
     };
-    
+
     return tab[value] ? (
       tab[value]
     ) : (
@@ -69,7 +73,7 @@ const ExperienceSection = () => {
       backgroundColor: theme.palette.primary[200],
     },
   }));
-  
+
   const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
     '&.Mui-selected': {
       color: theme.palette.primary[200],
@@ -81,15 +85,17 @@ const ExperienceSection = () => {
   return (
     <Box sx={styles.experienceContainer}>
       <Box sx={styles.tabsContainer}>
-        <StyledTabs sx={styles.wrapperTab} value={value} onChange={handleChange} textColor="primary" indicatorColor="primary[200]">
-          <StyledTab value="openExperience" label={t('profile.experience.workExperience')} sx={styles.tabItem} />
-          <StyledTab value="achievement" label={t('profile.experience.achievement')} sx={styles.tabItem} />
-          <StyledTab value="skills" label={t('profile.experience.skills.title')} sx={styles.tabItem} />
-          <StyledTab value="education" label={t('profile.experience.education')} sx={styles.tabItem} />
+        <StyledTabs sx={styles.wrapperTab} value={value} onChange={handleChange} textColor="primary"
+                    indicatorColor="primary[200]">
+          <StyledTab value="workExperience" label={t('profile.experience.workExperience.tabName')}
+                     sx={styles.tabItem} />
+          <StyledTab value="achievement" label={t('profile.experience.achievement.tabName')} sx={styles.tabItem} />
+          <StyledTab value="skills" label={t('profile.experience.skills.tabName')} sx={styles.tabItem} />
+          <StyledTab value="education" label={t('profile.experience.education.tabName')} sx={styles.tabItem} />
         </StyledTabs>
         {renderBtn(value)}
       </Box>
-      <Box sx={styles.experienceItemContainer}>{renderAdditionalInfo(value)}</Box>
+      <Box sx={styles.experienceItemContainer}>{tab[value]}</Box>
     </Box>
   );
 };

@@ -123,7 +123,7 @@ export const en = {
         main_text1: 'To finish your account settings, You should confirm your email',
         main_text2: 'Check you email and enter confirmation code',
         btn_confirm: 'Register',
-        spam_check_text: "Didn't receive the letter? Check your spam folder.",
+        spam_check_text: 'Didn\'t receive the letter? Check your spam folder.',
         repeat_request_link: 'Please resend',
         repeat_request_text1: 'request',
         repeat_request_text2: 'or',
@@ -177,17 +177,49 @@ export const en = {
       },
       baseUserInfo: {
         loading: 'Your profile is filled in at',
-        complete: 'Congratulations! Your profile is completely filled out'
+        complete: 'Congratulations! Your profile is completely filled out',
       },
       experience: {
-        workExperience: 'Work experience',
-        achievement: 'Achievement',
+        workExperience: {
+          tabName: 'Work experience',
+          emptyTabName: {
+            tabName: 'Work experience',
+            title: 'Add information about your work experience',
+            subTitle: 'This will help other users to learn more about you!',
+            button: 'Add work experience'
+          },
+
+        },
+        achievement: {
+          tabName: 'Achievement',
+          emptyTabName: {
+            tabName: 'Achievement',
+            title: 'Add information about your achievements',
+            subTitle: 'You can add your certificates or other achievements and attach links to them!',
+            button: 'Add achievements'
+          }
+        },
         skills: {
+          tabName: 'Skills',
+          emptyTabName: {
+            tabName: 'Skills',
+            title: 'Add information about your skills',
+            subTitle: 'Add specializations and skills from them that you currently possess!',
+            button: 'Add specializations'
+          },
           title: 'Skills',
           search: 'Search',
           star: 'Main specialization',
         },
-        education: 'Education',
+        education: {
+          tabName: 'Education',
+          emptyTabName: {
+            tabName: 'Education',
+            title: 'Add information about your education',
+            subTitle: 'Tell other users about the places you studied and the experience you gained!',
+            button: 'Add education'
+          }
+        },
         duties: 'Duties',
         endYear: 'Present',
       },
@@ -266,6 +298,7 @@ export const en = {
           },
         },
         workExperience: {
+          title: 'Work Experience',
           position: 'Position',
           position_long: 'Title too long',
           position_short: 'Title too short',
@@ -422,7 +455,7 @@ export const en = {
       cancelEventBtn: 'Cancel event',
       popupUserInfo: 'Info about you',
       popupInterviewerInfo: 'Info about you',
-      popupRole: 'Role:'
+      popupRole: 'Role:',
     },
   },
 };
