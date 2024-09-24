@@ -375,6 +375,7 @@ export const uk = {
           no_skills: 'Немає доступних навичок',
           errorDuplicate: 'Такий навик вже існує',
           errorRequired: "Це обов'язкове поле",
+          errorLength: 'Назва навички занадто довга',
         },
       },
       interview: {

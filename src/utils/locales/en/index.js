@@ -373,6 +373,7 @@ export const en = {
           no_skills: 'No available skills',
           errorDuplicate: 'Such a skill already exists',
           errorRequired: 'This is a required field',
+          errorLength: 'Skill name is max 100 characters long',
         },
         interview: {
           income: 'An interview has been completed ',
