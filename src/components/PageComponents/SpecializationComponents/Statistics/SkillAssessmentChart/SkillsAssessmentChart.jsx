@@ -73,7 +73,7 @@ const SkillsAssessmentChart = () => {
       </Box>
       <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
-          <AreaChart data={selectedPeriod} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
+          <AreaChart data={selectedPeriod} margin={{ top: 6, right: 0, left: -40, bottom: 0 }}>
             <defs>
               <linearGradient id='colorValue' x1='0' y1='0' x2='0' y2='1'>
                 <stop offset='0%' stopColor='#DAFE22' stopOpacity={1} />
@@ -82,7 +82,7 @@ const SkillsAssessmentChart = () => {
               </linearGradient>
             </defs>
             <XAxis dataKey='name' />
-            <YAxis />
+            <YAxis domain={[0, 9]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} interval={0}/>
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
             <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
             <Area
