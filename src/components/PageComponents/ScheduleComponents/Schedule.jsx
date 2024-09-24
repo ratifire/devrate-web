@@ -9,15 +9,7 @@ import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/schedule/scheduleApiSlice';
 import { DateTime } from 'luxon';
-
 import EventPopup from './EventPopup';
-const transformEvents = (events) => {
-  return events.map((event) => ({
-    id: event.id,
-    title: event.type,
-    start: event.startTime,
-  }));
-};
 
 export default function Schedule() {
   const calendarRef = useRef(null);
@@ -25,12 +17,29 @@ export default function Schedule() {
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
   const [event, setEvent] = useState([]);
   const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
-  const [popupPosition, setPopupPosition ] =useState("TOPRIGHT")
+  const [popupPosition, setPopupPosition] = useState('TOPRIGHT');
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [fromTime, setFromTime] = useState('');
   const [isReady, setIsReady] = useState(false);
   const { id: userId } = useSelector((state) => state.auth.user.data);
+  const [events, setEvents] = useState([]);
+
+  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
+  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
+    { userId, fromTime },
+    { skip: !isReady }
+  );
+
+  const transformEvents = (events) => {
+    return events.map((event) => ({
+      id: event.id,
+      title: event.type,
+      start: event.startTime,
+      backgroundColor: event.type === 'INTERVIEW' ? '#16FFB966' : '#FCA728',
+    }));
+  };
+
   const getWeekStartAndEnd = (year, weekNumber) => {
     const firstDayOfYear = DateTime.local(year).startOf('year');
     const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
@@ -41,7 +50,7 @@ export default function Schedule() {
       endOfWeek: lastDayOfWeek.toISODate(),
     };
   };
-  
+
   useEffect(() => {
     if (selectedWeek !== null && calendarRef.current) {
       const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
@@ -49,20 +58,14 @@ export default function Schedule() {
       setTo(endOfWeek);
       setFromTime(encodeURIComponent(`${startOfWeek}T07:00:00+03:00`));
       setIsReady(true);
-      
+
       const calendarApi = calendarRef.current.getApi();
       calendarApi.gotoDate(startOfWeek);
     }
   }, [selectedWeek]);
 
-
-  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
-  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
-    { userId, fromTime },
-    { skip: !isReady }
-  );
-
   useEffect(() => {
+    setEvents(transformEvents(currentEvents || []));
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
       const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
@@ -70,7 +73,9 @@ export default function Schedule() {
       const timeGridHeadElements = calendarApi.el.querySelectorAll(
         '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
       );
-      const timeGridEventElements = calendarApi.el.querySelectorAll('.fc-timegrid-event-harness-inset .fc-timegrid-event');
+      const timeGridEventElements = calendarApi.el.querySelectorAll(
+        '.fc-timegrid-event-harness-inset .fc-timegrid-event'
+      );
 
       timeGridSlotElements.forEach((el) => {
         Object.assign(el.style, styles.timeGridTableData);
@@ -82,18 +87,10 @@ export default function Schedule() {
         Object.assign(el.style, styles.timeGridTableHead);
       });
       timeGridEventElements.forEach((el) => {
-           Object.assign(el.style, styles.timeGridEventElements);
-       });
- 
-      const styleElement = document.createElement('style');
-      styleElement.textContent = `
-        :root {
-          --fc-border-color: #303032 !important; /* Set the border color explicitly */
-        }
-      `;
-      document.head.appendChild(styleElement);
+        Object.assign(el.style, styles.timeGridEventElements);
+      });
     }
-  });
+  }, [currentEvents]);
 
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
@@ -104,39 +101,36 @@ export default function Schedule() {
   const handleEventClick = (info) => {
     if (info) {
       const rect = info.el.getBoundingClientRect();
-        let x    = rect.left + 120;
-        let y    = rect.top - 140;
-      setEvent(currentClosestEvents[0])
-        if(rect.left>window.innerWidth/2 ){
+      let x = rect.left + 120;
+      let y = rect.top - 140;
+      setEvent(currentClosestEvents[0]);
+      if (rect.left > window.innerWidth / 2) {
         x = rect.left - 450;
       }
-        if(rect.left<window.innerWidth/2 ){
-          x = rect.left + 120;
-        }
-      if(rect.top<400){
+      if (rect.left < window.innerWidth / 2) {
+        x = rect.left + 120;
+      }
+      if (rect.top < 400) {
         y = rect.top + 180;
       }
-      if(rect.top>window.innerHeight-200){
+      if (rect.top > window.innerHeight - 200) {
         y = rect.top - 140;
       }
-      
-      if(rect.left>window.innerWidth/2&&window.innerHeight-200){
-        setPopupPosition("BOTTOMRIGHT")
-      }
-        if(rect.left>window.innerWidth/2&&rect.top<400){
-          setPopupPosition("TOPRIGHT")
-        }
-        if(rect.left<window.innerWidth/2&&window.innerHeight-200){
-          setPopupPosition("BOTTOMLEFT")
-        }
-        if(rect.left<window.innerWidth/2&&rect.top<400){
-          setPopupPosition("TOPLEFT")
-        }
-        
 
+      if (rect.left > window.innerWidth / 2 && window.innerHeight - 200) {
+        setPopupPosition('BOTTOMRIGHT');
+      }
+      if (rect.left > window.innerWidth / 2 && rect.top < 400) {
+        setPopupPosition('TOPRIGHT');
+      }
+      if (rect.left < window.innerWidth / 2 && window.innerHeight - 200) {
+        setPopupPosition('BOTTOMLEFT');
+      }
+      if (rect.left < window.innerWidth / 2 && rect.top < 400) {
+        setPopupPosition('TOPLEFT');
+      }
 
       const eventDetails = {
-
         title: info.event.title,
         start: info.event.start, // Event start date and time
         end: info.event.end, // Event end date and time
@@ -160,7 +154,7 @@ export default function Schedule() {
       y: 0,
     });
   };
-  
+
   //Possible usage via eventClassNames={eventClassNames}
   // Delete or use after final version
   // const eventClassNames = (arg) => {
@@ -179,13 +173,10 @@ export default function Schedule() {
   //   }
   //   return [];
   // };
-  
 
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
-
-  const transformedEvents = transformEvents(currentEvents || []);
 
   return (
     <Box sx={styles.demoApp}>
@@ -206,9 +197,8 @@ export default function Schedule() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={true}
-          displayEventTime={false }
-          eventBackgroundColor={event.type==="INTERVIEW"?'#16FFB966':'#25CBFF'}
-          events={[...transformedEvents]}
+          displayEventTime={false}
+          events={events}
           // eventClassNames={eventClassNames}
           dayHeaderFormat={{
             weekday: 'short',
@@ -220,14 +210,11 @@ export default function Schedule() {
               hour12: false,
             },
           ]}
-           slotMinTime={'00:00:00'}
-          slotMaxTime={'24:00:00'}
           eventClick={handleEventClick}
         />
         {popup.visible && event && (
-           <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition}/>
+          <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition} />
         )}
-
       </Box>
     </Box>
   );
