@@ -36,7 +36,7 @@ const SpecializationCategories = () => {
   const [getMainMasteryBySpecId, data] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
-  console.log(data);
+
   const [anchorEl, setAnchorEl] = useState({});
 
   useEffect(() => {
