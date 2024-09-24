@@ -371,6 +371,8 @@ export const en = {
           title: 'Skills',
           placeholder: 'Codelgniter, Yii, Zend Framework',
           no_skills: 'No available skills',
+          errorDuplicate: 'Such a skill already exists',
+          errorRequired: 'This is a required field',
         },
         interview: {
           income: 'An interview has been completed ',

@@ -373,6 +373,8 @@ export const uk = {
           title: 'Навички',
           placeholder: 'Codelgniter, Yii, Zend Framework',
           no_skills: 'Немає доступних навичок',
+          errorDuplicate: 'Такий навик вже існує',
+          errorRequired: "Це обов'язкове поле",
         },
       },
       interview: {
