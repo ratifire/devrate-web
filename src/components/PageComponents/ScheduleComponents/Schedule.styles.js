@@ -6,38 +6,39 @@ export const styles = {
   },
   demoAppMain: (theme) => ({
     flexGrow: '1',
-
     padding: theme.spacing(4),
   }),
   fc: {
     margin: '0 auto',
   },
-  // timeGridSlot: {
-  //   height: '80.92px', // Adjust this value to change the width of the time-axis slots
-  //   borderColor: '#303032',
-  //   backgroundColor: 'red',
-  // },
-  timeGridTableData: (theme) => ({
-    height: '80.92px', // Adjust this value to change the width of the time-axis slots
-    borderColor: theme.palette.neutral[700],
-  }),
-  timeGridTableHead: (theme) => ({
-    borderColor: theme.palette.neutral[700],
-    color: theme.palette.sliderAssessment.lightGray,
+  timeGridSlot: {
+    height: '70px', // Adjust this value to change the width of the time-axis slots
+    borderColor: '#303032',
+    backgroundColor: 'red',
+  },
+  timeGridTableData: {
+    height: '70px', // Adjust this value to change the width of the time-axis slots
+    borderColor: '#303032',
+  },
+  timeGridTableHead: {
+    borderColor: '#303032',
+    color: '#C5C5C6',
     fontSize: '14px',
     lineHeight: '20.02px',
-  }),
-  timeGridTodayElements: (theme) => ({
-    backgroundColor: theme.palette.sliderAssessment.darkGray,
-  }),
-  timeGridEventElements: (theme) => ({
-    backgroundColor: theme.palette.info.main,
+  },
+  timeGridTodayElements: {
+    backgroundColor: '#25CBFF1A',
+  },
+  timeGridEventElements: {
+    height: '100%',
     border: 'none',
+    borderRadius: '2px',
     fontSize: '14px',
     fontWeight: 500,
-    lineHeight: '21.98px',
-    color: theme.palette.neutral[700],
-  }),
+    lineHeight: '22px',
+    color: '#303032',
+    boxShadow: 'none',
+  },
   eventTooltip: {
     position: 'absolute',
     backgroundColor: 'white',

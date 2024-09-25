@@ -3,14 +3,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { ButtonDef } from '../../FormsComponents/Buttons';
 import { styles } from './LoadImages.styles';
 
-const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDeleteButton }) => {
+const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
   const editor = useRef(null);
   const { t } = useTranslation();
 
@@ -25,26 +25,24 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
   const [scale, setScale] = useState(1.5);
   const [error, setError] = useState('');
 
-  const handleWheel = useCallback(
-    (e) => {
-      const delta = e.deltaY;
-      const scaleFactor = delta > 0 ? -0.1 : 0.1;
-      const newScale = Math.max(0.5, Math.min(3, scale + scaleFactor));
-      setScale(newScale);
-    },
-    [scale]
-  );
-  const handleSave = useCallback(() => {
+  const handleWheel = (e) => {
+    const delta = e.deltaY;
+    const scaleFactor = delta > 0 ? -0.1 : 0.1;
+    const newScale = Math.max(0.5, Math.min(3, scale + scaleFactor));
+    setScale(newScale);
+  };
+
+  const handleSave = () => {
     if (editor.current) {
       const img = editor.current.getImageScaledToCanvas().toDataURL();
       handleChange(img);
     }
-  }, [handleChange]);
+  };
 
-  const handleClickDelete = useCallback(() => {
+  const handleClickDelete = () => {
     handlerDelete();
     setSettingsCanvas((prev) => ({ ...prev, image: '' }));
-  }, [handlerDelete]);
+  };
 
   const checkImageDimensions = (file) => {
     return new Promise((resolve, reject) => {
@@ -61,26 +59,23 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
     });
   };
 
-  const onDrop = useCallback(
-    async (acceptedFiles, fileRejections) => {
-      if (fileRejections.length > 0) {
-        setError(t('This file can not be used as avatar'));
-        return;
-      }
+  const onDrop = async (acceptedFiles, fileRejections) => {
+    if (fileRejections.length > 0) {
+      setError(t('This file can not be used as avatar'));
+      return;
+    }
 
-      if (acceptedFiles.length > 0) {
-        const image = acceptedFiles[0];
-        try {
-          await checkImageDimensions(image);
-          setSettingsCanvas((prev) => ({ ...prev, image }));
-          setError('');
-        } catch (err) {
-          setError(err.message);
-        }
+    if (acceptedFiles.length > 0) {
+      const image = acceptedFiles[0];
+      try {
+        await checkImageDimensions(image);
+        setSettingsCanvas((prev) => ({ ...prev, image }));
+        setError('');
+      } catch (err) {
+        setError(err.message);
       }
-    },
-    [t]
-  );
+    }
+  };
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -148,7 +143,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, showDelete
           correctStyle={styles.btn}
           disabled={!settingsCanvas.image || !!error}
         />
-        {showDeleteButton && (
+        {value && (
           <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
             <DeleteIcon />
           </IconButton>
@@ -163,7 +158,6 @@ LoadImages.propTypes = {
   handleBlur: PropTypes.func.isRequired,
   handlerDelete: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  showDeleteButton: PropTypes.bool.isRequired,
 };
 
 export default React.memo(LoadImages);

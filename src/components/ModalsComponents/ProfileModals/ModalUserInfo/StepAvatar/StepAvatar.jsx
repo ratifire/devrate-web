@@ -1,90 +1,64 @@
-import { Box } from '@mui/material';
-import { useFormik } from 'formik';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { Box } from '@mui/material'
+import { useFormik } from 'formik'
+import React from 'react';
+import { useSelector } from 'react-redux'
+import { selectCurrentUser } from '../../../../../redux/auth/authSlice'
 import {
   useDeleteAvatarUserMutation,
   useGetAvatarUserQuery,
   usePostAvatarUserMutation,
-} from '../../../../../redux/user/avatar/avatarApiSlice';
-import { StepAvatarSchema } from '../../../../../utils/valadationSchemas/index';
-import LoadImages from '../../../../UI/LoadImages';
-import { styles } from './StepAvatar.styles';
-
-const MemoizedLoadImages = memo(LoadImages);
-
-const initialValues = {
-  avatar: '',
-};
+} from '../../../../../redux/user/avatar/avatarApiSlice'
+import { StepAvatarSchema } from '../../../../../utils/valadationSchemas/index'
+import LoadImages from '../../../../UI/LoadImages'
+import { styles } from './StepAvatar.styles'
 
 const StepAvatar = () => {
   const { data: user } = useSelector(selectCurrentUser);
-  const [hasAvatar, setHasAvatar] = useState(false);
 
   const [postAvatarUser] = usePostAvatarUserMutation();
   const [deleteAvatarUser] = useDeleteAvatarUserMutation();
-  const { data: avatarData, isSuccess } = useGetAvatarUserQuery(user.id);
+  const { data: avatarData } = useGetAvatarUserQuery(user.id);
 
   const avatarValue = avatarData?.userPicture || '';
 
-  const onSubmit = useCallback(
-    (values) => {
-      const { avatar } = values;
-      postAvatarUser({
-        userId: user.id,
-        avatar: avatar,
-      });
-    },
-    [user.id, postAvatarUser]
-  );
+  const onSubmit = (values) => {
+    const { avatar } = values;
+    postAvatarUser({
+      userId: user.id,
+      avatar: avatar,
+    });
+  };
 
   const formik = useFormik({
-    initialValues,
+    initialValues: {
+      avatar: avatarValue,
+    },
     validationSchema: StepAvatarSchema,
     onSubmit,
   });
 
-  const handleDeleteAvatar = useCallback(() => {
-    if (hasAvatar) {
+  const handleDeleteAvatar = () => {
+    if (avatarValue) {
       deleteAvatarUser(user.id);
       formik.setFieldValue('avatar', '');
-      setHasAvatar(false);
     }
-  }, [hasAvatar, user.id, deleteAvatarUser, formik]);
+  };
 
-  const handleAvatarChange = useCallback(
-    (img) => {
-      formik.setFieldValue('avatar', img);
-      setHasAvatar(!!img);
-    },
-    [formik]
-  );
-
-  useEffect(() => {
-    if (isSuccess && avatarValue && !formik.values.avatar) {
-      formik.setFieldValue('avatar', avatarValue);
-      setHasAvatar(true);
-    }
-  }, [isSuccess, avatarValue, formik.values.avatar]);
-
-  const memoizedLoadImages = useMemo(
-    () => (
-      <MemoizedLoadImages
-        handleChange={handleAvatarChange}
-        handleBlur={formik.handleBlur}
-        handlerDelete={handleDeleteAvatar}
-        value={avatarValue}
-        showDeleteButton={hasAvatar}
-      />
-    ),
-    [handleAvatarChange, formik.handleBlur, handleDeleteAvatar, avatarValue, hasAvatar]
-  );
+  const handleAvatarChange = (img) => {
+    formik.setFieldValue('avatar', img);
+  };
 
   return (
     <Box sx={styles.wrapper}>
       <form onSubmit={formik.handleSubmit}>
-        <Box sx={styles.input100}>{memoizedLoadImages}</Box>
+        <Box sx={styles.input100}>
+          <LoadImages
+            handleChange={handleAvatarChange}
+            handleBlur={formik.handleBlur}
+            handlerDelete={handleDeleteAvatar}
+            value={avatarValue}
+          />
+        </Box>
       </form>
     </Box>
   );
