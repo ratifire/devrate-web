@@ -20,35 +20,44 @@ const ConfirmationForm = ({
     const allFieldsFilled = Object.keys(formik.values)
       .filter(key => key.startsWith('text'))
       .every(key => formik.values[key] !== '');
-    
+
     if (allFieldsFilled) {
       formik.validateForm();
     }
   }, [formik.values]);
-  
+
   const handleKeyDown = (event, index) => {
-    const { key } = event;
-    
+    const { key, ctrlKey, metaKey } = event;
+
+    // Allow paste when Ctrl + V or Cmd + V is pressed
+    if ((ctrlKey || metaKey) && key === 'v') {
+      return; // Do not prevent default, allow paste to happen
+    }
+
     if ((key >= '0' && key <= '9') || key === 'Backspace' || key === 'Delete') {
       const { value } = event.target;
-      
+
       if (value.length === 0 || (value.length === 1 && (key === 'Backspace' || key === 'Delete'))) {
         if (key >= '0' && key <= '9') {
           event.preventDefault();
           const newValue = value + key;
           formik.setFieldValue(`text${index}`, newValue);
-          
-          if (index < fieldCount - 1 && !formik.values[`text${index + 1}`]) {
+
+          if (index < fieldCount - 1 && !formik.values[`text${index}`]) {
             inputRefs.current[index + 1].focus();
           }
-        } else if (key === 'Backspace' && index > 0) {
+        } else if (key === 'Backspace') {
           event.preventDefault();
           formik.setFieldValue(`text${index}`, '');
-          inputRefs.current[index - 1].focus();
+
+          if (index > 0) {
+            inputRefs.current[index - 1].focus();
+            formik.setFieldValue(`text${index - 1}`, '');
+          }
         } else if (key === 'Delete' && index < fieldCount - 1) {
           event.preventDefault();
           formik.setFieldValue(`text${index}`, '');
-          inputRefs.current[index + 1].focus();
+          inputRefs.current[index - 1].focus();
         }
       } else {
         event.preventDefault();
@@ -57,27 +66,42 @@ const ConfirmationForm = ({
       event.preventDefault();
     }
   };
-  
+
   const handlePaste = (event) => {
     event.preventDefault();
+
+    // Get pasted data and extract only numeric values, limiting to the field count
     const pastedData = event.clipboardData.getData('text');
     const numericData = pastedData.replace(/\D/g, '').slice(0, fieldCount);
-    handleCodeChange(numericData);
+
+    // Distribute the pasted data across input fields
+    numericData.split('').forEach((char, index) => {
+      formik.setFieldValue(`text${index}`, char);
+      inputRefs.current[index].value = char; // Set the input field value
+    });
+
+    // Move focus to the next empty field after pasting
+    const nextFieldIndex = numericData.length;
+    if (nextFieldIndex < fieldCount) {
+      inputRefs.current[nextFieldIndex].focus();
+    }
+
+    // Trigger form validation after pasting
     setTimeout(() => {
       formik.validateForm();
     }, 0);
   };
-  
+
   const handleCode = () => {
     const code = Array.from({ length: fieldCount }, (_, i) => formik.values[`text${i}`]).join('');
     handleCodeChange(code);
   };
-  
+
   const handleClick = () => {
     handleSubmit();
     handleCode();
   };
-  
+
   return (
     <form onSubmit={handleSubmit || formik.handleSubmit} style={{ width: '100%' }}>
       <Box sx={styles.formInput}>
@@ -96,9 +120,9 @@ const ConfirmationForm = ({
           />
         ))}
       </Box>
-      
+
       <FormHelperText>{helperTextContent}</FormHelperText>
-      
+
       {showButton && (
         <Box sx={styles.btnWrapper}>
           <ButtonDef
