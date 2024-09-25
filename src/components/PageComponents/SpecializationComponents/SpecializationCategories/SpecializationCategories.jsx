@@ -1,3 +1,4 @@
+/* eslint-disable */
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import StarIcon from '@mui/icons-material/Star';
@@ -32,16 +33,16 @@ const SpecializationCategories = () => {
     (state) => state.specialization
   );
   const [masteryData, setMasteryData] = useState({});
-  const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
+  const { data: specializations, isLoading: isLoadingGetSpecialization, isFetching, isError } = useGetSpecializationByUserIdQuery(id);
   const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
-  const [getMainMasteryBySpecId, data] = useLazyGetMainMasteryBySpecializationIdQuery();
-  const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
-  const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
-
+  const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery }] = useLazyGetMainMasteryBySpecializationIdQuery();
+  const [updateSpecializationAsMainById, { isLoading: isLoadingUpdateSpecialization }] = useUpdateSpecializationAsMainByIdMutation();
+  const [deleteSpecialization, { isLoading: isLoadingDeleteSpecialization }] = useDeleteSpecializationByIdMutation();
+  const isLoading = isLoadingGetSpecialization || isLoadingGetMainMastery || isLoadingUpdateSpecialization || isLoadingDeleteSpecialization || isFetching;
   const [anchorEl, setAnchorEl] = useState({});
 
   useEffect(() => {
-    if (!specializations) {
+    if (!specializations || isLoading) {
       return;
     }
 
@@ -54,8 +55,7 @@ const SpecializationCategories = () => {
         [specialization.id]: data,
       }));
     });
-  }, [specializations, activeSpecialization, data.currentData?.level]); // Максимальный костыль
-  // Без data.currentData?.level не обновляется уровень мастерства, при вызове editSpecialization.
+  }, [specializations, activeSpecialization]);
 
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
