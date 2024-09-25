@@ -88,6 +88,10 @@ const HardSkillsModal = () => {
       return updateState({ helperText: 'specialization.modal.skills.errorLength', error: true });
     }
 
+    if (allSkills.length >= MAX_SKILLS) {
+      return updateState({ helperText: 'specialization.modal.skills.errorQuantity', error: true });
+    }
+
     if (isFindSkill) {
       return updateState({ helperText: 'specialization.modal.skills.errorDuplicate', error: true });
     }

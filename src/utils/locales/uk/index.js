@@ -380,6 +380,7 @@ export const uk = {
           errorDuplicate: 'Такий навик вже існує',
           errorRequired: "Це обов'язкове поле",
           errorLength: 'Назва навички занадто довга',
+          errorQuantity: 'Ви можете додати до 20 навичок',
         },
       },
       interview: {

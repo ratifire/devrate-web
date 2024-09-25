@@ -378,6 +378,7 @@ export const en = {
           errorDuplicate: 'Such a skill already exists',
           errorRequired: 'This is a required field',
           errorLength: 'Skill name is max 100 characters long',
+          errorQuantity: 'You can add up to 20 skills',
         },
         interview: {
           income: 'An interview has been completed ',
