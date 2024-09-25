@@ -29,9 +29,8 @@ const ConfirmationForm = ({
   const handleKeyDown = (event, index) => {
     const { key, ctrlKey, metaKey } = event;
 
-    // Allow paste when Ctrl + V or Cmd + V is pressed
     if ((ctrlKey || metaKey) && key === 'v') {
-      return; // Do not prevent default, allow paste to happen
+      return;
     }
 
     if ((key >= '0' && key <= '9') || key === 'Backspace' || key === 'Delete') {
@@ -70,23 +69,19 @@ const ConfirmationForm = ({
   const handlePaste = (event) => {
     event.preventDefault();
 
-    // Get pasted data and extract only numeric values, limiting to the field count
     const pastedData = event.clipboardData.getData('text');
     const numericData = pastedData.replace(/\D/g, '').slice(0, fieldCount);
 
-    // Distribute the pasted data across input fields
     numericData.split('').forEach((char, index) => {
       formik.setFieldValue(`text${index}`, char);
-      inputRefs.current[index].value = char; // Set the input field value
+      inputRefs.current[index].value = char;
     });
 
-    // Move focus to the next empty field after pasting
     const nextFieldIndex = numericData.length;
     if (nextFieldIndex < fieldCount) {
       inputRefs.current[nextFieldIndex].focus();
     }
 
-    // Trigger form validation after pasting
     setTimeout(() => {
       formik.validateForm();
     }, 0);
