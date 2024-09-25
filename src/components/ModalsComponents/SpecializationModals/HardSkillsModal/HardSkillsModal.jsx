@@ -31,18 +31,18 @@ const HardSkillsModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
-  const { masteryId, isError: isErrorMastery, isLoading: isLoadingMastery } = useGetMastery();
+  const { masteryId, isError: isErrorMastery, isFetching: isFetchingMastery } = useGetMastery();
   const {
     data: skills,
     isError: isErrorSkills,
-    isLoading: isLoadingSkills,
+    isFetching: isFetchingSkills,
   } = useGetHardSkillsByMasteryIdQuery({ masteryId }, { skip: !masteryId });
   const [addSkillToMastery, { isLoading: isLoadingAddSkill, isError: isErrorAddSkill }] = useAddSkillToMasteryMutation();
   const [deleteSkill, { isLoading: isLoadingDeleteSkill, isError: isErrorDeleteSkill }] = useDeleteSkillByIdMutation();
 
   const { skill, idDeletedSkills, allSkills, addSkills } = state;
   const isFindSkill = allSkills?.find((v) => v.name === skill.trim());
-  const isLoading = isLoadingMastery || isLoadingSkills || isLoadingAddSkill || isLoadingDeleteSkill;
+  const isLoading = isFetchingMastery || isFetchingSkills || isLoadingAddSkill || isLoadingDeleteSkill;
   const isError = isErrorMastery || isErrorSkills || isErrorAddSkill || isErrorDeleteSkill;
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
@@ -50,7 +50,7 @@ const HardSkillsModal = () => {
 
   useEffect(() => {
     updateState({ allSkills: skills });
-  }, [isLoadingSkills]);
+  }, [isFetchingSkills]);
 
   const handleChange = (e) => {
     updateState({
@@ -140,50 +140,48 @@ const HardSkillsModal = () => {
     handleClose();
   };
 
-  if (isLoading) {
-    return <LoaderComponent />;
-  }
-
-  if (isError) {
-    return <ErrorComponent />;
-  }
-
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
-      <Typography variant='h6' sx={styles.title}>
-        {t('specialization.modal.skills.title')}
-      </Typography>
-      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
-        <Box sx={[styles.input, hardSkillsStyles.box]}>
-          <TextField
-            variant='outlined'
-            autoFocus={true}
-            helperText={t(state.helperText)}
-            error={state.error}
-            value={skill}
-            onChange={handleChange}
-            label={t('specialization.modal.skills.placeholder')}
-            fullWidth
-          />
-          <IconButton onClick={handleAddSkill} sx={styles.iconBtn}>
-            <AddIcon />
-          </IconButton>
-        </Box>
-        <Box sx={styles.input}>
-          <Box>
-            {allSkills?.map((skill) => (
-              <SkillChip onDelete={handleDeleteSkill} key={skill.id} skill={skill} />
-            ))}
-          </Box>
-        </Box>
-        <ButtonDef
-          variant='contained'
-          type='submit'
-          label={t('profile.modal.btn')}
-          correctStyle={styles.btn}
-          disabled={addSkills.length === 0 && idDeletedSkills.length === 0}
-        />
-      </form>
+      {isError && <ErrorComponent />}
+      {isLoading && <LoaderComponent />}
+      {!isLoading && (
+        <>
+          <Typography variant='h6' sx={styles.title}>
+            {t('specialization.modal.skills.title')}
+          </Typography>
+          <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
+            <Box sx={[styles.input, hardSkillsStyles.box]}>
+              <TextField
+                variant='outlined'
+                autoFocus={true}
+                helperText={t(state.helperText)}
+                error={state.error}
+                value={skill}
+                onChange={handleChange}
+                label={t('specialization.modal.skills.placeholder')}
+                fullWidth
+              />
+              <IconButton onClick={handleAddSkill} sx={styles.iconBtn}>
+                <AddIcon />
+              </IconButton>
+            </Box>
+            <Box sx={styles.input}>
+              <Box>
+                {allSkills?.map((skill) => (
+                  <SkillChip onDelete={handleDeleteSkill} key={skill.id} skill={skill} />
+                ))}
+              </Box>
+            </Box>
+            <ButtonDef
+              variant='contained'
+              type='submit'
+              label={t('profile.modal.btn')}
+              correctStyle={styles.btn}
+              disabled={addSkills.length === 0 && idDeletedSkills.length === 0}
+            />
+          </form>
+        </>
+      )}
     </ModalLayoutProfile>
   );
 };

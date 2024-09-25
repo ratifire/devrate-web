@@ -17,7 +17,7 @@ import { LoaderComponent, ErrorComponent } from '../../../../UI/Exceptions';
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
-  const { data, isLoading, isError } = useGetInterviewSummariesStatisticQuery({ userId, from, to }, { skip: !userId });
+  const { data, isFetching, isError } = useGetInterviewSummariesStatisticQuery({ userId, from, to }, { skip: !userId });
   const { t } = useTranslation();
   const dataMonths = useMemo(() => createTenMonthsInterviewData({ t, data }), [data]);
   const dataDays = useMemo(() => createTenDaysInterviewData({ data }), [data]);
@@ -25,7 +25,7 @@ const InterviewChart = () => {
 
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
-  if (isLoading) {
+  if (isFetching) {
     return <LoaderComponent />
   }
 

@@ -10,11 +10,11 @@ import { LoaderComponent, ErrorComponent } from '../../../../UI/Exceptions';
 
 const HardSkillsChart = () => {
   const { tooltipContent, tooltipLabel } = useTooltip();
-  const { skills, isLoading, isError } = useUserSkillsAndMasteryData();
+  const { skills, isFetching, isError } = useUserSkillsAndMasteryData();
   const { t } = useTranslation();
   const roundedSkills = roundData(skills);
 
-  if (isLoading) {
+  if (isFetching) {
     return <LoaderComponent/>
   }
 

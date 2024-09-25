@@ -2,20 +2,20 @@ import { useGetHardSkillsByMasteryIdQuery } from '../../../redux/specialization/
 import { useGetMastery } from './index';
 
 const useUserSkillsAndMasteryData = () => {
-  const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId, userId, activeMastery } = useGetMastery();
+  const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId, userId, activeMastery } = useGetMastery();
 
   const {
     data: skills = [],
-    isLoading: isLoadingSkills,
+    isFetching: isFetchingSkills,
     isError: isErrorSkills,
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
 
-  const isLoading = isLoadingMastery || isLoadingSkills;
+  const isFetching = isFetchingMastery || isFetchingSkills;
   const isError = isErrorMastery || isErrorSkills;
 
   return {
     skills,
-    isLoading,
+    isFetching,
     isError,
     activeMastery,
   };

@@ -8,27 +8,27 @@ const useGetHistoryData = ({ from, to }) => {
   const specializationId = useGetSpecializationId();
   const {
     data: masteries,
-    isLoading: isLoadingMasteries,
+    isFetching: isFetchingMasteries,
     isError: isErrorMasteries,
   } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
 
   const selectMastery = masteries?.find(
-    (mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase()
+    (v) => v.level && v.level.toUpperCase() === activeMastery.toUpperCase()
   );
 
   const selectMasteryId = selectMastery?.id;
 
   const {
     data: dataHistory,
-    isLoading: isLoadingHistory,
+    isFetching: isFetchingHistory,
     isError: isErrorHistory,
   } = useGetMasteriesHistoryStatisticQuery({ selectMasteryId, to, from }, { skip: !selectMasteryId });
 
-  const isLoading = isLoadingHistory || isLoadingMasteries;
+  const isFetching = isFetchingHistory || isFetchingMasteries;
   const isError = isErrorHistory || isErrorMasteries;
 
   return {
-    isLoading,
+    isFetching,
     isError,
     dataHistory,
   };

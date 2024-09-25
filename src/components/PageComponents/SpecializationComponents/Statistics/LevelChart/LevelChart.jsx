@@ -8,11 +8,11 @@ import { styles } from './LevelChart.styles.js';
 import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 
 const LevelChart = () => {
-  const { skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();
+  const { skills, isError, isFetching, activeMastery } = useUserSkillsAndMasteryData();
   const { t } = useTranslation();
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
 
-  if (isLoading) {
+  if (isFetching) {
     return <LoaderComponent />
   }
 

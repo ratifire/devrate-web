@@ -17,7 +17,7 @@ const SpecializationLevel = () => {
   const specializationId = useGetSpecializationId();
   const {
     data: mastery,
-    isLoading,
+    isFetching,
     isError,
   } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
 
@@ -31,7 +31,7 @@ const SpecializationLevel = () => {
     dispatch(setActiveMastery(label));
   };
 
-  if (isLoading) {
+  if (isFetching) {
     return <LoaderComponent/>
   }
 
