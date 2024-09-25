@@ -72,3 +72,7 @@ data "aws_lb" "lb" {
 data "aws_route53_zone" "front_dns_zone" {
   name = "devrate.org"
 }
+
+data "aws_s3_bucket" "logs-front-1209" {
+  bucket = "logs-front-1209"
+}

@@ -91,7 +91,7 @@ export default function Schedule() {
       });
     }
   }, [currentEvents]);
-
+  
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
@@ -100,6 +100,20 @@ export default function Schedule() {
 
   const handleEventClick = (info) => {
     if (info) {
+      if (calendarRef.current) {
+        const calendarApi = calendarRef.current.getApi();
+        const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+        console.log(scroller)
+        if (popup.visible) {
+          if (scroller) {
+            scroller.style.overflow = 'hidden';
+          }
+        } else {
+          if (scroller) {
+            scroller.style.overflow = 'auto';
+          }
+        }
+      }
       const rect = info.el.getBoundingClientRect();
       let x = rect.left + 120;
       let y = rect.top - 140;
@@ -143,6 +157,7 @@ export default function Schedule() {
         x: x,
         y: y,
       });
+      
     }
   };
 
@@ -154,26 +169,7 @@ export default function Schedule() {
       y: 0,
     });
   };
-
-  //Possible usage via eventClassNames={eventClassNames}
-  // Delete or use after final version
-  // const eventClassNames = (arg) => {
-  //   if (arg.event._def.title === 'CANDIDATE') {
-  //     return[ {height: "100%",
-  //       backgroundColor: 'yellow',
-  //       border: 'none',
-  //       fontSize: '14px',
-  //       fontWeight: 500,
-  //       // lineHeight: '21.98px',
-  //       color: '#303032',
-  //       boxShadow: "none"}];
-  //   } else if (arg.event._def.title === 'INTERVIEW') {
-  //      return [{"background-color": "blue",
-  //    " border-color": "blue"}];
-  //   }
-  //   return [];
-  // };
-
+  
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
@@ -181,8 +177,9 @@ export default function Schedule() {
   return (
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
-      <Box sx={styles.demoAppMain}>
+      <Box sx={styles.demoAppMain} >
         <FullCalendar
+          
           ref={calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={false}
@@ -199,7 +196,6 @@ export default function Schedule() {
           weekends={true}
           displayEventTime={false}
           events={events}
-          // eventClassNames={eventClassNames}
           dayHeaderFormat={{
             weekday: 'short',
           }}
