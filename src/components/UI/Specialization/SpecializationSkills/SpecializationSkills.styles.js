@@ -42,6 +42,7 @@ export const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: theme.spacing(3),
+    paddingRight: '10px',
   }),
   mark: (theme) => ({
     color: theme.palette.action.active,
