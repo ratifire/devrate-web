@@ -349,6 +349,10 @@ export const en = {
         interview_chart_months: 'Months',
         skills_assessment_chart_title: 'Average skill assessment',
       },
+      interviewsChart: {
+        conducted: 'Conducted',
+        passed: 'Passed',
+      },
       hardSkills: {
         title: 'Hard skills',
         averageMark: 'Average mark:',

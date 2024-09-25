@@ -326,6 +326,10 @@ export const uk = {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
       },
+      interviewsChart: {
+        conducted: 'Проведено',
+        passed: 'Пройдено',
+      },
       interviewChartMonths: {
         '01': 'Січ',
         '02': 'Лют',

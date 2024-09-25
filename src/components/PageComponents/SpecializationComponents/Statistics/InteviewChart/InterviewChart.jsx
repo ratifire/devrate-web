@@ -32,7 +32,7 @@ const InterviewChart = () => {
   if (isError) {
     return <Typography variant='h6'>Something error...</Typography>;
   }
-  // TODO: Add translations
+
   return (
     <Box sx={styles.interviewChartContainer}>
       <Box sx={styles.titleContainer}>
@@ -82,8 +82,8 @@ const InterviewChart = () => {
             <XAxis dataKey='name' />
             <YAxis domain={[0, 10]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} interval={0}/>
             <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
-            <Bar dataKey='conducted' name='Conducted' fill='url(#colorConducted)' radius={[2, 2, 0, 0]} />
-            <Bar dataKey='passed' name='Passed' fill='url(#colorPassed)' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='conducted' name={t('specialization.interviewsChart.conducted')} fill='url(#colorConducted)' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='passed' name={t('specialization.interviewsChart.passed')} fill='url(#colorPassed)' radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Box>
