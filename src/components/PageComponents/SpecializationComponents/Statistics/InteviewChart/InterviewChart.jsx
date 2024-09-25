@@ -1,5 +1,5 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
+import { Box, MenuItem, Select, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import {
   useHandleChange, useTooltip,
 } from '../utils';
 import { styles } from './InterviewChart.styles';
+import { Loader } from '../../../../UI/Loader';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -25,7 +26,7 @@ const InterviewChart = () => {
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <Loader/>
   }
 
   if (isError) {

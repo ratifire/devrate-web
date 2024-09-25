@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import StarIcon from '@mui/icons-material/Star';
-import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +22,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
 import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
 import { styles } from './SpecializationCategories.styles';
+import { Loader } from '../../../UI/Loader';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
@@ -104,7 +105,7 @@ const SpecializationCategories = () => {
   };
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <Loader/>
   }
 
   if (isError) {

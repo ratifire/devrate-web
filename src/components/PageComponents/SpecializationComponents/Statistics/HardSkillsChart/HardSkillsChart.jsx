@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
@@ -6,6 +6,7 @@ import { useUserSkillsAndMasteryData } from '../../../../../utils/hooks/speciali
 import roundData from '../utils/roundData';
 import { styles } from './HardSkillsChart.styles.js';
 import { useTooltip } from '../utils';
+import { Loader } from '../../../../UI/Loader';
 
 const HardSkillsChart = () => {
   const { tooltipContent, tooltipLabel } = useTooltip();
@@ -14,7 +15,7 @@ const HardSkillsChart = () => {
   const roundedSkills = roundData(skills);
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <Loader/>
   }
 
   if (isError) {

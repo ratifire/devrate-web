@@ -1,10 +1,11 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUserSkillsAndMasteryData } from '../../../../../utils/hooks/specialization';
 import { getLevel } from '../utils';
 import { styles } from './LevelChart.styles.js';
+import { Loader } from '../../../../UI/Loader';
 
 const LevelChart = () => {
   const { skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();
@@ -12,7 +13,7 @@ const LevelChart = () => {
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <Loader/>
   }
 
   if (isError) {

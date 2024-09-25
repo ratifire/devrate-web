@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,7 @@ import { useGetMainMasteryBySpecializationIdQuery } from '../../../../redux/spec
 import { useGetSpecializationId } from '../../../../utils/hooks/specialization';
 import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
 import { styles } from './SpecializationLevel.styles';
+import { Loader } from '../../../UI/Loader';
 
 const SpecializationLevel = () => {
   const { t } = useTranslation();
@@ -31,7 +32,7 @@ const SpecializationLevel = () => {
   };
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <Loader/>
   }
 
   if (isError) {

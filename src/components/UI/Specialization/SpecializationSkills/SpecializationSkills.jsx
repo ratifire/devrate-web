@@ -1,16 +1,17 @@
 import EditIcon from '@mui/icons-material/Edit';
-import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ItemSkill } from '../SkillsItem';
 import { styles } from './SpecializationSkills.styles';
+import { Loader } from '../../Loader';
 
 const SpecializationSkills = ({ isLoading, isError, skills, averageMark, openModal, errorTitle, title, subTitle }) => {
   const { t } = useTranslation();
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <Loader/>
   }
 
   if (isError) {

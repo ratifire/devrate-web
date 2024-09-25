@@ -1,5 +1,5 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Box, CircularProgress, MenuItem, Select, Typography } from '@mui/material';
+import { Box, MenuItem, Select, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
@@ -12,6 +12,7 @@ import {
   useHandleChange, useTooltip,
 } from '../utils';
 import { styles } from './SkillsAssessmentChart.styles';
+import { Loader } from '../../../../UI/Loader';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
@@ -35,7 +36,7 @@ const SkillsAssessmentChart = () => {
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <Loader/>
   }
 
   if (isError) {
