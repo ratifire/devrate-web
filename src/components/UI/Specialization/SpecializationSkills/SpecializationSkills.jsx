@@ -7,7 +7,7 @@ import { ItemSkill } from '../SkillsItem';
 import { styles } from './SpecializationSkills.styles';
 import { ErrorComponent, LoaderComponent } from '../../Exceptions';
 
-const SpecializationSkills = ({ isLoading, isError, skills, averageMark, openModal, errorTitle, title, subTitle }) => {
+const SpecializationSkills = ({ isLoading, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { t } = useTranslation();
 
   if (isLoading) {
@@ -58,7 +58,6 @@ SpecializationSkills.propTypes = {
   ).isRequired,
   averageMark: PropTypes.string.isRequired,
   openModal: PropTypes.func.isRequired,
-  errorTitle: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
 };

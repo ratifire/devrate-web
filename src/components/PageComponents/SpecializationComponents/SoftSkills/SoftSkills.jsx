@@ -33,7 +33,6 @@ const SoftSkills = () => {
       averageMark={averageMark}
       openModal={handleModalOpen}
       subTitle='specialization.hardSkills.averageMark'
-      errorTitle='specialization.hardSkills.error'
       title='specialization.softSkills.title'
     />
   );
