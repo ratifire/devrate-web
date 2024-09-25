@@ -19,25 +19,25 @@ export const styles = {
   timeGridTableData: {
     height: '70px', // Adjust this value to change the width of the time-axis slots
     borderColor: '#303032',
-   },
-  timeGridTableHead:  {
-    borderColor:'#303032',
+  },
+  timeGridTableHead: {
+    borderColor: '#303032',
     color: '#C5C5C6',
     fontSize: '14px',
     lineHeight: '20.02px',
   },
-  timeGridTodayElements:  {
-    backgroundColor: '#CEB0FA',
-   },
-  timeGridEventElements:  {
-    height: "100%",
+  timeGridTodayElements: {
+    backgroundColor: '#25CBFF1A',
+  },
+  timeGridEventElements: {
+    height: '100%',
     border: 'none',
-    borderRadius: "2px",
+    borderRadius: '2px',
     fontSize: '14px',
     fontWeight: 500,
     lineHeight: '22px',
     color: '#303032',
-    boxShadow: "none"
+    boxShadow: 'none',
   },
   eventTooltip: {
     position: 'absolute',
