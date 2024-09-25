@@ -6,7 +6,7 @@ import { useUserSkillsAndMasteryData } from '../../../../../utils/hooks/speciali
 import roundData from '../utils/roundData';
 import { styles } from './HardSkillsChart.styles.js';
 import { useTooltip } from '../utils';
-import { Loader } from '../../../../UI/Loader';
+import { LoaderComponent, ErrorComponent } from '../../../../UI/Exceptions';
 
 const HardSkillsChart = () => {
   const { tooltipContent, tooltipLabel } = useTooltip();
@@ -15,11 +15,11 @@ const HardSkillsChart = () => {
   const roundedSkills = roundData(skills);
 
   if (isLoading) {
-    return <Loader/>
+    return <LoaderComponent/>
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />
   }
 
   return (

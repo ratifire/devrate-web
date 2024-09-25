@@ -5,17 +5,17 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ItemSkill } from '../SkillsItem';
 import { styles } from './SpecializationSkills.styles';
-import { Loader } from '../../Loader';
+import { ErrorComponent, LoaderComponent } from '../../Exceptions';
 
 const SpecializationSkills = ({ isLoading, isError, skills, averageMark, openModal, errorTitle, title, subTitle }) => {
   const { t } = useTranslation();
 
   if (isLoading) {
-    return <Loader/>
+    return <LoaderComponent />
   }
 
   if (isError) {
-    return <Typography variant='h6'>{t(errorTitle)}</Typography>;
+    return <ErrorComponent />
   }
 
   return (

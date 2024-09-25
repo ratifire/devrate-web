@@ -1,5 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
-import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,6 +21,7 @@ import { AdvancedFormSelector } from '../../../FormsComponents/Inputs';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 
 const initialValues = {
   name: '',
@@ -155,11 +156,11 @@ const SpecializationModal = () => {
   };
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />;
   }
 
   return (

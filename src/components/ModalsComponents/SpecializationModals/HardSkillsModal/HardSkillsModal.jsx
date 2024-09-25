@@ -1,5 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
-import { Box, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
+import { Box, IconButton, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,7 @@ import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { MAX_SKILLS } from '../constants';
 import { styles } from '../styles/SkillsModal.styles';
 import { styles as hardSkillsStyles } from './HardSkillsModal.styles';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 
 const HardSkillsModal = () => {
   const [state, setState] = useState({
@@ -136,11 +137,11 @@ const HardSkillsModal = () => {
   };
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />;
   }
 
   return (

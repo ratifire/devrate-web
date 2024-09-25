@@ -1,5 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
-import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 
 const SoftSkillsModal = () => {
   const [state, setState] = useState({
@@ -116,11 +117,11 @@ const SoftSkillsModal = () => {
   };
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />;
   }
 
   const labelInput = availableSkills.length

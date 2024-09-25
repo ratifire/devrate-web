@@ -12,7 +12,7 @@ import {
   useHandleChange, useTooltip,
 } from '../utils';
 import { styles } from './SkillsAssessmentChart.styles';
-import { Loader } from '../../../../UI/Loader';
+import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
@@ -36,11 +36,11 @@ const SkillsAssessmentChart = () => {
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
   if (isLoading) {
-    return <Loader/>
+    return <LoaderComponent />
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />
   }
 
   return (

@@ -8,7 +8,7 @@ import { useGetMainMasteryBySpecializationIdQuery } from '../../../../redux/spec
 import { useGetSpecializationId } from '../../../../utils/hooks/specialization';
 import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
 import { styles } from './SpecializationLevel.styles';
-import { Loader } from '../../../UI/Loader';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 
 const SpecializationLevel = () => {
   const { t } = useTranslation();
@@ -32,11 +32,11 @@ const SpecializationLevel = () => {
   };
 
   if (isLoading) {
-    return <Loader/>
+    return <LoaderComponent/>
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />
   }
 
   return (

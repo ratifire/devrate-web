@@ -12,7 +12,7 @@ import {
   useHandleChange, useTooltip,
 } from '../utils';
 import { styles } from './InterviewChart.styles';
-import { Loader } from '../../../../UI/Loader';
+import { LoaderComponent, ErrorComponent } from '../../../../UI/Exceptions';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -26,11 +26,11 @@ const InterviewChart = () => {
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
   if (isLoading) {
-    return <Loader/>
+    return <LoaderComponent />
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />
   }
 
   return (

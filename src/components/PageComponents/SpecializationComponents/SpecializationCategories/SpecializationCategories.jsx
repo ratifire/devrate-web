@@ -22,7 +22,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
 import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
 import { styles } from './SpecializationCategories.styles';
-import { Loader } from '../../../UI/Loader';
+import { LoaderComponent, ErrorComponent } from '../../../UI/Exceptions';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
@@ -105,11 +105,11 @@ const SpecializationCategories = () => {
   };
 
   if (isLoading) {
-    return <Loader/>
+    return <LoaderComponent/>
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />
   }
 
   return (

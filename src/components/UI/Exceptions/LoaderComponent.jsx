@@ -1,8 +1,8 @@
 import { Box, CircularProgress } from '@mui/material';
-import { styles } from './Loader.styles';
+import { styles } from './Exceptions.styles';
 import React from 'react';
 
-const Loader = () => {
+const LoaderComponent = () => {
   return (
     <Box sx={styles.box}>
       <CircularProgress />
@@ -10,4 +10,4 @@ const Loader = () => {
   )
 }
 
-export default Loader;
+export default LoaderComponent;
