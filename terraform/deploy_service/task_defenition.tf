@@ -21,7 +21,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
           containerPort = var.front_port,
           hostPort      = var.front_port,
           protocol      = "tcp",
-          appProtocol   = "http"
+          appProtocol   = "https"
         }
       ],
       essential = true,

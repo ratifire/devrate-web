@@ -14,7 +14,7 @@ resource "aws_lb" "front_ecs_alb" {
 resource "aws_lb_target_group" "http_ecs_tg_front" {
   name                 = "http-ecs-tg-front"
   port                 = var.front_port
-  protocol             = "HTTP"
+  protocol             = "HTTPS"
   vpc_id               = data.aws_vpcs.all_vpcs.ids[0]
   deregistration_delay = "120"
   stickiness {
@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     interval            = 180
-    protocol            = "HTTP"
+    protocol            = "HTTPS"
     path                = "/"
     matcher             = "200-305"
   }
