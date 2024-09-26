@@ -29,7 +29,7 @@ variable "image_tag" {
 
 variable "front_port" {
   description = "Port number on which back service is listening"
-  default     = 443
+  default     = 3000
 }
 
 
