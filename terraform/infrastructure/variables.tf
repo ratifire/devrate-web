@@ -30,5 +30,5 @@ variable "cidr_blocks" {
 
 variable "front_port" {
   description = "Port number on which back service is listening"
-  default     = 3000
+  default     = 443
 }
