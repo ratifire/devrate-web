@@ -24,6 +24,7 @@ export default function Schedule() {
   const [isReady, setIsReady] = useState(false);
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [events, setEvents] = useState([]);
+  const [eventStartTime, setEventStartTime] = useState(null);
 
   const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
   const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
@@ -61,8 +62,15 @@ export default function Schedule() {
 
       const calendarApi = calendarRef.current.getApi();
       calendarApi.gotoDate(startOfWeek);
+      if (eventStartTime) {
+        calendarApi.scrollToTime(eventStartTime);
+      } else {
+        // Default time to current time
+        const now = DateTime.now().toFormat('HH:mm:00');
+        calendarApi.scrollToTime(now);
+      }
     }
-  }, [selectedWeek]);
+  }, [selectedWeek, eventStartTime]);
 
   useEffect(() => {
     setEvents(transformEvents(currentEvents || []));
@@ -91,11 +99,47 @@ export default function Schedule() {
       });
     }
   }, [currentEvents]);
-  
+
+  const findEventTimeForChosenDay = (newDate) => {
+    const luxonDate = DateTime.fromISO(newDate);
+
+    // Check if the date is valid
+    if (!luxonDate.isValid) {
+      console.log('Invalid date'); // Log an error message if the date is invalid
+      return;
+    }
+
+    // Extract the day, month, and year from the parsed date
+    const targetDay = luxonDate.day;
+    const targetMonth = luxonDate.month;
+    const targetYear = luxonDate.year;
+
+    // Filter events that match the target day, month, and year
+    const matchingEvents = events.filter((event) => {
+      const eventDate = DateTime.fromISO(event.start);
+      const eventDay = eventDate.day;
+      const eventMonth = eventDate.month;
+      const eventYear = eventDate.year;
+
+      return eventDay === targetDay && eventMonth === targetMonth && eventYear === targetYear;
+    });
+
+    if (matchingEvents.length > 0) {
+      const startTime = DateTime.fromISO(matchingEvents[0].start).toLocal().toFormat('HH:mm:ss'); // Convert to local time and format
+      console.log(2222, startTime); // Log the start time
+      return startTime; // Return the start time
+    } else {
+      console.log('No matching events found'); // Log a message if no matching events are found
+      return null; // Return null if no matching events are found
+    }
+  };
+
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
+    const startTime = findEventTimeForChosenDay(newDate);
+    setEventStartTime(startTime);
   };
 
   const handleEventClick = (info) => {
@@ -103,7 +147,7 @@ export default function Schedule() {
       if (calendarRef.current) {
         const calendarApi = calendarRef.current.getApi();
         const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
-        console.log(scroller)
+        console.log(scroller);
         if (popup.visible) {
           if (scroller) {
             scroller.style.overflow = 'hidden';
@@ -157,7 +201,6 @@ export default function Schedule() {
         x: x,
         y: y,
       });
-      
     }
   };
 
@@ -169,7 +212,7 @@ export default function Schedule() {
       y: 0,
     });
   };
-  
+
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
@@ -177,9 +220,8 @@ export default function Schedule() {
   return (
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
-      <Box sx={styles.demoAppMain} >
+      <Box sx={styles.demoAppMain}>
         <FullCalendar
-          
           ref={calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={false}
