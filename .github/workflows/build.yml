@@ -6,6 +6,8 @@ env:
   IMAGE_TAG: ${{ github.sha }}
   AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
   AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+  REACT_APP_API_URL: 'https://server.devrate.org'
+  REACT_APP_WS_URL: 'wss://server.devrate.org'
 
 on:
   workflow_dispatch:
@@ -18,24 +20,26 @@ jobs:
   build-and-push:
     name: Build and Push
     runs-on: ubuntu-latest
-    environment: dev
+    strategy:
+      matrix:
+        node-version: [ 20.11.0 ]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: maven
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-      - name: run tests
-        run: mvn test
+      - name: Set environment variables with defaults
+        run: |
+          echo "REACT_APP_API_URL=${{ env.REACT_APP_API_URL }}" >> .env
+          echo "REACT_APP_WS_URL=${{ env.REACT_APP_WS_URL }}" >> .env
 
-      - name: run build
-        run: mvn package -DskipTests
+      - run: npm ci
+      - run: npm run build --if-present
 
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
