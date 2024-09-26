@@ -32,7 +32,6 @@ const ConfirmationForm = ({
     if ((ctrlKey || metaKey) && key === 'v') {
       return;
     }
-
     if ((key >= '0' && key <= '9') || key === 'Backspace' || key === 'Delete') {
       const { value } = event.target;
 
