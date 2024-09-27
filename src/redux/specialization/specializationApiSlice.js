@@ -20,10 +20,14 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
     }),
 
     createNewSpecialization: builder.mutation({
-      query: ({ userId, data }) => ({
+      query: ({ userId, name, mainMasteryName, main }) => ({
         url: `/users/${userId}/specializations`,
         method: 'POST',
-        body: { ...data },
+        body: { 
+          name,
+          mainMasteryName: mainMasteryName.toUpperCase(),
+          main
+        },
       }),
       invalidatesTags: ['Specialization'],
     }),

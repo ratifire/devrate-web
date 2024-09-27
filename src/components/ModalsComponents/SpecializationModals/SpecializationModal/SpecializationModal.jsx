@@ -110,7 +110,7 @@ const SpecializationModal = () => {
         return;
       }
 
-      const data = await createNewSpecialization({ userId, data: { name: values.name, mainMasteryName: values.mastery.toUpperCase(), main: false } }).unwrap();
+      const data = await createNewSpecialization({ userId, name: values.name, mainMasteryName: values.mastery, main: false }).unwrap();
       const masteries = await triggerRequest(data.id);
       const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
       await setNewMainMasteryBySpecIdAndMasteryId({
