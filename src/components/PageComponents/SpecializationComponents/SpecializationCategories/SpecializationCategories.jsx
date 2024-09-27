@@ -60,9 +60,12 @@ const SpecializationCategories = () => {
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
       const spec = { ...specialization, mastery: masteryData[specialization.id].level };
-      dispatch(setActiveSpecialization(spec));
       dispatch(setActiveMastery(spec.mastery));
       dispatch(setSelectedSpecialization(spec));
+
+      if (activeSpecialization?.id !== specialization.id) {
+        dispatch(setActiveSpecialization(spec));
+      }
     }
   };
 
