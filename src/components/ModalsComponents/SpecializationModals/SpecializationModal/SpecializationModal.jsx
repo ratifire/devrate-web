@@ -1,3 +1,4 @@
+/* eslint-disable */
 import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useFormik } from 'formik';
@@ -8,7 +9,7 @@ import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useAddSkillsToMasteryMutation,
-  useCreateNewSpecializationMutation,
+  useCreateNewSpecializationMutation, useGetSpecializationByUserIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
   useUpdateSpecializationByIdMutation,
@@ -35,7 +36,7 @@ const SpecializationModal = () => {
   const dispatch = useDispatch();
 
   const { id: userId } = useSelector((state) => state.auth.user.data);
-
+  const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId);
   const openSpecialization = useSelector((state) => state.modal.openSpecialization);
   const [createNewSpecialization, { isError: isErrorCreateNewSpecialization, isLoading: isLoadingCreateNewSpecialization }] = useCreateNewSpecializationMutation();
   const [updateSpecializationById, { isError: isErrorUpdateSpecialization, isLoading: isLoadingUpdateSpecialization }] = useUpdateSpecializationByIdMutation();
@@ -61,6 +62,14 @@ const SpecializationModal = () => {
   };
 
   const handleChangeSpecialization = (value) => {
+    const isSpecialization = mySpecialization.some((spec) => spec.name === value);
+
+    if (isSpecialization) {
+      formik.setFieldTouched('name', true, false);
+      formik.setErrors({ name: 'specialization.modal.specialization.errorDuplicate' });
+      return;
+    }
+
     setSpecialization(value);
   };
 
@@ -173,7 +182,6 @@ const SpecializationModal = () => {
         <Box sx={styles.wrapper}>
           <Box sx={styles.input100}>
             <AdvancedFormSelector
-              required
               variant='outlined'
               name='name'
               value={formik.values.name || ''} // Warning from MUI: 'value is null'
@@ -187,7 +195,6 @@ const SpecializationModal = () => {
           </Box>
           <Box sx={styles.mastery_input}>
             <AdvancedFormSelector
-              required
               id='mastery'
               variant='outlined'
               name='mastery'
@@ -239,6 +246,7 @@ const SpecializationModal = () => {
             type='submit'
             label={t('profile.modal.btn')}
             correctStyle={styles.specializationBtn}
+            disabled={formik.isSubmitting || !formik.isValid}
           />
         </Box>
       </form>

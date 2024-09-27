@@ -370,6 +370,7 @@ export const en = {
           mastery_helper_text: 'The level for generating your statistics, which will be displayed on your profile page',
           required: 'This is a required field',
           max_length: 'Skill name is max 100 characters long',
+          errorDuplicate: 'Such a specialization already exists',
         },
         skills: {
           title: 'Skills',
