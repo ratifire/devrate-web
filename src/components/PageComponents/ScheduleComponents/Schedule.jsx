@@ -62,20 +62,32 @@ export default function Schedule() {
 
       const calendarApi = calendarRef.current.getApi();
       calendarApi.gotoDate(startOfWeek);
-      if (eventStartTime) {
-        calendarApi.scrollToTime(eventStartTime);
-      } else {
-        // Default time to current time
-        const now = DateTime.now().toFormat('HH:mm:00');
-        calendarApi.scrollToTime(now);
-      }
+
+      applyRequeredStyles(calendarApi);
     }
-  }, [selectedWeek, eventStartTime]);
+  }, [selectedWeek]);
+
+  useEffect(() => {
+    const calendarApi = calendarRef.current.getApi();
+    if (eventStartTime) {
+      calendarApi.scrollToTime(eventStartTime);
+    } else {
+      const now = DateTime.now().toFormat('HH:mm:00');
+      calendarApi.scrollToTime(now);
+    }
+  }, [selectedDate]);
 
   useEffect(() => {
     setEvents(transformEvents(currentEvents || []));
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
+
+      applyRequeredStyles(calendarApi);
+    }
+  }, [currentEvents]);
+
+  const applyRequeredStyles = (calendarApi) => {
+    if (calendarApi) {
       const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
       const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
       const timeGridHeadElements = calendarApi.el.querySelectorAll(
@@ -98,23 +110,19 @@ export default function Schedule() {
         Object.assign(el.style, styles.timeGridEventElements);
       });
     }
-  }, [currentEvents]);
+  };
 
   const findEventTimeForChosenDay = (newDate) => {
     const luxonDate = DateTime.fromISO(newDate);
 
-    // Check if the date is valid
     if (!luxonDate.isValid) {
-      console.log('Invalid date'); // Log an error message if the date is invalid
       return;
     }
 
-    // Extract the day, month, and year from the parsed date
     const targetDay = luxonDate.day;
     const targetMonth = luxonDate.month;
     const targetYear = luxonDate.year;
 
-    // Filter events that match the target day, month, and year
     const matchingEvents = events.filter((event) => {
       const eventDate = DateTime.fromISO(event.start);
       const eventDay = eventDate.day;
@@ -124,14 +132,11 @@ export default function Schedule() {
       return eventDay === targetDay && eventMonth === targetMonth && eventYear === targetYear;
     });
 
-    if (matchingEvents.length > 0) {
-      const startTime = DateTime.fromISO(matchingEvents[0].start).toLocal().toFormat('HH:mm:ss'); // Convert to local time and format
-      console.log(2222, startTime); // Log the start time
-      return startTime; // Return the start time
-    } else {
-      console.log('No matching events found'); // Log a message if no matching events are found
-      return null; // Return null if no matching events are found
+    if (matchingEvents.length === 0) {
+      return null;
     }
+
+    return DateTime.fromISO(matchingEvents[0].start).toLocal().toFormat('HH:mm:ss');
   };
 
   const handleDateChange = (newDate) => {
