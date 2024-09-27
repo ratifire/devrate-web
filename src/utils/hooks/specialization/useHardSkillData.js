@@ -5,10 +5,12 @@ const useHardSkillData = () => {
   const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId, userId, activeMastery } = useGetMastery();
 
   const {
-    data: skills = [],
+    data = [],
     isFetching: isFetchingSkills,
     isError: isErrorSkills,
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
+
+  const skills = masteryId ? data : [];
 
   const isFetching = isFetchingMastery || isFetchingSkills;
   const isError = isErrorMastery || isErrorSkills;

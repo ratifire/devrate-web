@@ -19,10 +19,12 @@ const useGetHistoryData = ({ from, to }) => {
   const selectMasteryId = selectMastery?.id;
 
   const {
-    data: dataHistory,
+    data,
     isFetching: isFetchingHistory,
     isError: isErrorHistory,
   } = useGetMasteriesHistoryStatisticQuery({ selectMasteryId, to, from }, { skip: !selectMasteryId });
+
+  const dataHistory = selectMasteryId ? data : [];
 
   const isFetching = isFetchingHistory || isFetchingMasteries;
   const isError = isErrorHistory || isErrorMasteries;

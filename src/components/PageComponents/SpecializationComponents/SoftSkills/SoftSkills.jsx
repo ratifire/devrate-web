@@ -10,10 +10,12 @@ const SoftSkills = () => {
   const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
 
   const {
-    data: skills = [],
+    data,
     isFetching: isLoadingSoftSkill,
     isError: isErrorSoftSkill,
   } = useGetSoftSkillsQuery(masteryId, { skip: !masteryId });
+
+  const skills = masteryId ? data : [];
 
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSoftSkillsModal' }));

@@ -82,9 +82,18 @@ const SpecializationCategories = () => {
   };
 
   const handlerDeleteSpecialization = async (id) => {
+    const findMainSpecialization = specializations.find((spec) => spec.main);
+
     await deleteSpecialization(id).unwrap();
     dispatch(setSelectedSpecialization(null));
-    dispatch(setActiveSpecialization(mainSpecialization));
+
+    if (findMainSpecialization?.id === id) {
+      dispatch(setActiveSpecialization(null));
+      dispatch(setMainSpecializations(null));
+    } else {
+      dispatch(setActiveSpecialization(mainSpecialization));
+    }
+
     handleCloseMenu(id);
   };
 

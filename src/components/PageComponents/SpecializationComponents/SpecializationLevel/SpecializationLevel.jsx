@@ -16,14 +16,18 @@ const SpecializationLevel = () => {
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
   const specializationId = useGetSpecializationId();
   const {
-    data: mastery,
+    data,
     isFetching,
     isError,
   } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
 
+  const mastery = specializationId ? data : '';
+
   useEffect(() => {
     if (mastery) {
       dispatch(setActiveMastery(mastery?.level));
+    } else {
+      dispatch(setActiveMastery(''));
     }
   }, [mastery]);
 

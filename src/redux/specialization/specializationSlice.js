@@ -24,7 +24,7 @@ const specializationSlice = createSlice({
         return
       }
 
-      state.mainSpecialization = payload;
+      state.mainSpecialization = null;
     },
   },
 });
