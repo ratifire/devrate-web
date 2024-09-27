@@ -176,7 +176,7 @@ const SpecializationModal = () => {
               required
               variant='outlined'
               name='name'
-              value={formik.values.name}
+              value={formik.values.name || ''} // Warning from MUI: 'value is null'
               handleChange={handleChangeSpecialization}
               handleBlur={formik.handleBlur}
               label={t('specialization.modal.specialization.name')}
@@ -191,7 +191,7 @@ const SpecializationModal = () => {
               id='mastery'
               variant='outlined'
               name='mastery'
-              value={formik.values.mastery}
+              value={formik.values.mastery || ''} // Warning from MUI: 'value is null'
               handleChange={handleChangeMastery}
               handleBlur={formik.handleBlur}
               label={t('specialization.modal.specialization.mastery')}
