@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { Box } from '@mui/material';
 import styles from './Education.styles.js';
 import EducationItem from './EducationItem';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetEducationByUserIdQuery } from '../../../../../../redux/services/educationApiSlice';
 import { loadIconsFromLocalStorage } from '../../../../../../utils/helpers';
 import { mapDataWithIcons } from '../../../../../../utils/helpers/mapDataWithIcons';
@@ -11,6 +11,7 @@ import { iconValuesEducation } from '../../../../../../utils/constants/Experienc
 import { updateIconsInLocalStorage } from '../../../../../../utils/helpers/updateIconsInLocalStorage';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import PropTypes from 'prop-types';
+import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
 
 const Education = ({ tab, profileType, imgUrl }) => {
   const iconsMap = loadIconsFromLocalStorage('education');
@@ -18,12 +19,19 @@ const Education = ({ tab, profileType, imgUrl }) => {
   const { data: educationsData, isLoading } = useGetEducationByUserIdQuery(userId, { skip: !userId });
   const educationsNewData = mapDataWithIcons(educationsData, iconsMap, iconsEducation);
   const iconValues = useMemo(() => iconValuesEducation, []);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setButtonState({tab, hasData: !educationsData}));
+  }, []);
 
   useEffect(() => {
     if (educationsNewData && educationsNewData.length > 0) {
       updateIconsInLocalStorage(educationsNewData, iconsMap, iconValues, 'education');
     }
-  }, [educationsNewData, iconValues, iconsMap]);
+
+  }, [educationsNewData, iconsMap, iconValues]);
+
 
   const sortedEducations = useMemo(() => {
     if (!educationsNewData) return [];
@@ -31,7 +39,7 @@ const Education = ({ tab, profileType, imgUrl }) => {
   }, [educationsNewData]);
 
   if (isLoading || !educationsData || educationsData.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
+    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} isData={!educationsData}/>;
   }
 
   return (

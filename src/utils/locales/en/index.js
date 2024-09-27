@@ -224,6 +224,11 @@ export const en = {
         endYear: 'Present',
       },
       right: {
+        empty: {
+          emptyLanguages: 'You have not added any language yet.',
+          emptyAboutMe: 'You have not added information about yourself yet.\n' +
+            'To edit your information, go to your profile settings.',
+        },
         contact: 'Contact Information',
         languages: 'Languages',
         aboutMe: 'About me',

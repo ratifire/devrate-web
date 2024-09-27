@@ -14,7 +14,6 @@ import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/Emp
 import PropTypes from 'prop-types';
 
 
-
 const Achievement = ({tab, profileType, imgUrl}) => {
   const iconsMap = loadIconsFromLocalStorage('achievement');
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -22,13 +21,15 @@ const Achievement = ({tab, profileType, imgUrl}) => {
   const achievementsNewData = mapDataWithIcons(achievementsData, iconsMap, iconsAchievement);
   const iconValues = useMemo(() => iconValuesAchievement, []);
 
+  useEffect(() => {
+    if (achievementsData && achievementsData.length > 0) {
+      updateIconsInLocalStorage(achievementsData, iconsMap, iconValues, 'education');
+    }
 
-    useEffect(() => {
-      updateIconsInLocalStorage(achievementsData, iconsMap, iconValues, 'achievement');
-      }, [achievementsData, iconValues, iconsMap]);
+  }, [achievementsData, iconsMap, iconValues]);
 
   if (!achievementsData || achievementsData.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
+    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} isData={!achievementsData}/>;
   }
 
   return (

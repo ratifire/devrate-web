@@ -45,31 +45,43 @@ const RightSection = () => {
           </Box>
         </Box>
         <Box gap={3} sx={styles.wrapperLink}>
-          <SocialsLinkList socials={userContacts} componentStyles={styles} />
+          {userContacts && userContacts.length > 0 ? (
+            <SocialsLinkList socials={userContacts} componentStyles={styles} />
+          ) : (
+            <Typography variant='body1'>{t('profile.empty.contacts')}</Typography>
+          )}
         </Box>
       </Box>
-        <Box sx={styles.wrapperBox}>
-          <Box sx={styles.box}>
-            <Typography variant='h6' sx={styles.title}>
-              {t('profile.right.languages')}
-            </Typography>
-            <Box>
-              <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenLanguage}>
-                <EditIcon />
-              </IconButton>
-            </Box>
-          </Box>
-          <Box gap={2} sx={styles.wrapperLanguages}>
-            <LanguagesList data={languages.data} />
+      <Box sx={styles.wrapperBox}>
+        <Box sx={styles.box}>
+          <Typography variant='h6' sx={styles.title}>
+            {t('profile.right.languages')}
+          </Typography>
+          <Box>
+            <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenLanguage}>
+              <EditIcon />
+            </IconButton>
           </Box>
         </Box>
+        <Box gap={2} sx={styles.wrapperLanguages}>
+          {languages.data && languages.data.length > 0 ? (
+            <LanguagesList data={languages.data} />
+          ) : (
+            <Typography variant='body1'>{t('profile.right.empty.emptyLanguages')}</Typography>
+          )}
+        </Box>
+      </Box>
       <Box sx={styles.wrapperBox}>
         <Typography variant='h6' sx={styles.title}>
           {t('profile.right.aboutMe')}
         </Typography>
-        <Typography variant='subtitle2' sx={styles.aboutMe}>
-          {personalData && personalData.description}
-        </Typography>
+        {personalData && personalData.description ? (
+          <Typography variant='subtitle2' sx={styles.aboutMe}>
+            {personalData.description}
+          </Typography>
+        ) : (
+          <Typography variant='body1'>{t('profile.right.empty.emptyAboutMe')}</Typography>
+        )}
       </Box>
     </Box>
   );

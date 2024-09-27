@@ -12,6 +12,7 @@ const Skills = ({tab, profileType, imgUrl}) => {
   const { data: user } = useSelector(selectCurrentUser);
   const { data: specializations, isLoading } = useGetSpecializationByUserIdQuery(user.id);
 
+
   if (isLoading || !specializations || specializations.length === 0) {
     return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
   }
