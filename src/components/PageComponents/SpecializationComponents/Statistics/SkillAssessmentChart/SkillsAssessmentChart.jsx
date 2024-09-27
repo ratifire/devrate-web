@@ -16,7 +16,7 @@ import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
-  const { dataHistory, isError, isFetching } = useGetHistoryData({ to, from });
+  const { data: dataHistory, isError, isFetching } = useGetHistoryData({ to, from });
   const { t } = useTranslation();
   const { tooltipContent, tooltipLabel } = useTooltip();
   const arithmeticAverage = arithmeticAverageSkillValue({

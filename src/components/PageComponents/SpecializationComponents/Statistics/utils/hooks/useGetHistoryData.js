@@ -6,25 +6,26 @@ import { useGetSpecializationId } from '../../../../../../utils/hooks/specializa
 const useGetHistoryData = ({ from, to }) => {
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
   const specializationId = useGetSpecializationId();
+
   const {
-    data: masteries,
+    data: masteriesData,
     isFetching: isFetchingMasteries,
     isError: isErrorMasteries,
   } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
 
-  const selectMastery = masteries?.find(
-    (v) => v.level && v.level.toUpperCase() === activeMastery.toUpperCase()
-  );
+  const masteries = specializationId ? masteriesData : [];
+
+  const selectMastery = masteries?.find((v) => v?.level.toUpperCase() === activeMastery?.toUpperCase());
 
   const selectMasteryId = selectMastery?.id;
 
   const {
-    data,
+    data: historyData,
     isFetching: isFetchingHistory,
     isError: isErrorHistory,
   } = useGetMasteriesHistoryStatisticQuery({ selectMasteryId, to, from }, { skip: !selectMasteryId });
 
-  const dataHistory = selectMasteryId ? data : [];
+  const data = selectMasteryId ? historyData : [];
 
   const isFetching = isFetchingHistory || isFetchingMasteries;
   const isError = isErrorHistory || isErrorMasteries;
@@ -32,7 +33,7 @@ const useGetHistoryData = ({ from, to }) => {
   return {
     isFetching,
     isError,
-    dataHistory,
+    data,
   };
 };
 
