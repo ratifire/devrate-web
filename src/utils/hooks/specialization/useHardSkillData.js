@@ -1,7 +1,7 @@
 import { useGetHardSkillsByMasteryIdQuery } from '../../../redux/specialization/specializationApiSlice';
 import { useGetMastery } from './index';
 
-const useUserSkillsAndMasteryData = () => {
+const useHardSkillData = () => {
   const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId, userId, activeMastery } = useGetMastery();
 
   const {
@@ -21,4 +21,4 @@ const useUserSkillsAndMasteryData = () => {
   };
 };
 
-export default useUserSkillsAndMasteryData;
+export default useHardSkillData;

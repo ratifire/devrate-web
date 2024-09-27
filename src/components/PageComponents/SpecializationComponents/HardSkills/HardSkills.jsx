@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
-import { useUserSkillsAndMasteryData } from '../../../../utils/hooks/specialization';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
+import { useHardSkillData } from '../../../../utils/hooks/specialization';
 
 const HardSkills = () => {
-  const { skills, isError, isFetching, activeMastery } = useUserSkillsAndMasteryData();
+  const { skills, isError, isFetching, activeMastery } = useHardSkillData();
   const dispatch = useDispatch();
 
   const handleModalOpen = () => { dispatch(openModal({ modalName: 'openSkillsModal', activeMastery })) };
