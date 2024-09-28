@@ -1,8 +1,7 @@
-/* eslint-disable */
 import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
@@ -24,13 +23,8 @@ import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 
-const initialValues = {
-  name: '',
-  mastery: '',
-  skills: '',
-};
-
 const SpecializationModal = () => {
+  const [skills, setSkills] = useState([]);
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -40,7 +34,7 @@ const SpecializationModal = () => {
   const openSpecialization = useSelector((state) => state.modal.openSpecialization);
   const [createNewSpecialization, { isError: isErrorCreateNewSpecialization, isLoading: isLoadingCreateNewSpecialization }] = useCreateNewSpecializationMutation();
   const [updateSpecializationById, { isError: isErrorUpdateSpecialization, isLoading: isLoadingUpdateSpecialization }] = useUpdateSpecializationByIdMutation();
-  const [triggerRequest, { isError: isErrorGetMasteries, isLoading: isLoadingGetMasteries }] = useLazyGetMasteriesBySpecializationIdQuery();
+  const [triggerRequest, { isError: isErrorGetMasteries, isFetching: isLoadingGetMasteries }] = useLazyGetMasteriesBySpecializationIdQuery();
   const [setNewMainMasteryBySpecIdAndMasteryId, { isError: isErrorSetNewMastery, isLoading: isLoadingSetNewMastery }] = useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
   const [addSkills, { isError: isErrorAddSkill, isLoading: isLoadingAddSkill }] = useAddSkillsToMasteryMutation();
   const { data, isError: isErrorGetSpecialization, isLoading: isLoadingGetSpecialization } = useGetSpecializationListQuery('specialization-names.json');
@@ -54,11 +48,8 @@ const SpecializationModal = () => {
 
   const { modalData } = useSelector((state) => state.modal);
 
-  const [specialization, setSpecialization] = useState('');
-  const [mastery, setMastery] = useState('');
-
   const handleChangeMastery = (value) => {
-    setMastery(value);
+    formik.setFieldValue('mastery', value);
   };
 
   const handleChangeSpecialization = (value) => {
@@ -70,16 +61,8 @@ const SpecializationModal = () => {
       return;
     }
 
-    setSpecialization(value);
+    formik.setFieldValue('name', value);
   };
-
-  useEffect(() => {
-    formik.setFieldValue('name', specialization);
-  }, [specialization]);
-
-  useEffect(() => {
-    formik.setFieldValue('mastery', mastery);
-  }, [mastery]);
 
   const updateSpecialization = async ({ id, name }) => {
     await updateSpecializationById({ id, name }).unwrap();
@@ -138,6 +121,12 @@ const SpecializationModal = () => {
     }
   };
 
+  const initialValues = {
+    name: selectedSpecialization?.name || '',
+    mastery: selectedSpecialization?.mastery || '',
+    skills: '',
+  }
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: { ...initialValues },
@@ -145,16 +134,6 @@ const SpecializationModal = () => {
     onSubmit,
   });
 
-  useEffect(() => {
-    if (!selectedSpecialization) return;
-
-    formik.setValues({
-      name: selectedSpecialization.name,
-      mastery: selectedSpecialization.mastery,
-    });
-  }, [selectedSpecialization, formik.setValues]);
-
-  const [skills, setSkills] = useState([]);
   const createSkills = (newSkill) => {
     if (newSkill.length === 0 || newSkill.length > 50) return;
     setSkills([...skills, { name: newSkill, type: 'HARD_SKILL' }]);
@@ -246,7 +225,7 @@ const SpecializationModal = () => {
             type='submit'
             label={t('profile.modal.btn')}
             correctStyle={styles.specializationBtn}
-            disabled={formik.isSubmitting || !formik.isValid}
+            disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}
           />
         </Box>
       </form>
