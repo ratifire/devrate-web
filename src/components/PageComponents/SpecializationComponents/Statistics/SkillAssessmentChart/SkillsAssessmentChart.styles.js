@@ -41,8 +41,9 @@ export const styles = {
     },
   }),
   chartWrapper: {
+    fontSize: '12px',
     width: '100%',
-    height: 200,
+    height: '187px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

@@ -13,7 +13,7 @@ const useTooltip = () => {
   const tooltipLabel = {
     color: theme.palette.common.white,
     backgroundColor: theme.palette.background.level2,
-    fontSize: '14px',
+    fontSize: '12px',
   };
 
   return {

@@ -41,6 +41,7 @@ export const styles = {
     },
   }),
   chartWrapper: {
+    fontSize: '12px',
     maxWidth: '587px',
     width: '100%',
     height: '340px',
@@ -48,12 +49,13 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     '& .recharts-default-legend': {
+      fontSize: '14px',
       display: 'flex',
       justifyContent: 'space-between',
       paddingBottom: '10px !important',
     },
     '& .legend-item-0': {
-      paddingLeft: '40px',
+      paddingLeft: '30px',
     },
     '& .legend-item-1': {
       marginRight: '0 !important',
