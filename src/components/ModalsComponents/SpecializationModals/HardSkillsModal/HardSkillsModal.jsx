@@ -15,9 +15,9 @@ import { useGetMastery } from '../../../../utils/hooks/specialization'
 import { ButtonDef } from '../../../FormsComponents/Buttons'
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions'
 import { SkillChip } from '../../../UI/Specialization/SkillChip'
-import { MAX_SKILLS } from '../constants'
 import { styles } from '../styles/SkillsModal.styles'
 import { styles as hardSkillsStyles } from './HardSkillsModal.styles'
+import MAX_SKILLS from '../../../../utils/constants/Specialization/maxSkills';
 
 const HardSkillsModal = () => {
   const [state, setState] = useState({

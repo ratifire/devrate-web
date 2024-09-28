@@ -8,6 +8,7 @@ import getLevel from './helpers/getLevel';
 import useGetHistoryData from './hooks/useGetHistoryData';
 import useHandleChange from './hooks/useHandleChange';
 import useTooltip from './hooks/useTooltip';
+import roundData from './helpers/roundData';
 
 export {
   arithmeticAverageSkillValue,
@@ -20,4 +21,5 @@ export {
   useGetHistoryData,
   useHandleChange,
   useTooltip,
+  roundData
 };
