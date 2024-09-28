@@ -5,7 +5,7 @@ import {
   useGetHardSkillsByMasteryIdQuery,
   useGetMainMasteryBySpecializationIdQuery,
   useGetSpecializationByUserIdQuery,
-} from '../../../../../redux/specialization/specializationApiSlice';
+} from '../../../../../../redux/specialization/specializationApiSlice';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import StarIcon from '@mui/icons-material/Star';
 import PropTypes from 'prop-types';
@@ -14,34 +14,35 @@ import CustomTooltip from '../../../../../UI/CustomTooltip';
 import TextAreaSearch from '../../../../../FormsComponents/Inputs/TextAreaSearch';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import SearchIcon from '@mui/icons-material/Search';
-import { sortedSkills } from '../../../../../utils/helpers/sortedSkills';
+import { sortedSkills } from '../../../../../../utils/helpers/sortedSkills';
+import { sortSkillsByOriginal } from '../../../../../../utils/helpers/sortedSkillsByOriginal';
 
 const Skills = ({ id, tab, profileType, imgUrl }) => {
-  
   const [specCurrent, setSpecCurrent] = useState('');
-  const [open, setOpen] = useState(false);
-  const [srtSearch, setSrtSearch] = useState('');
   
-  
-  const { data: specializations } = useGetSpecializationByUserIdQuery(id);
+  const { data: specializations , isLoading } = useGetSpecializationByUserIdQuery(id);
   
   const selectedSpecialization = specializations?.find((s) => s.name === specCurrent);
   
   const { data: specializationsLevel } = useGetMainMasteryBySpecializationIdQuery(selectedSpecialization?.id);
-  const level = specializationsLevel?.level || 'N/A';
+  
+  const level = specializationsLevel?.level;
+  
   const { data: skills = [] } = useGetHardSkillsByMasteryIdQuery(
     { id, masteryId: specializationsLevel?.id },
     { skip: !specializationsLevel?.id },
   );
   
+  const skillVisible = skills.filter((item) => item.hidden === true);
+  const [filteredSkills, setFilteredSkills] = useState(skillVisible);
+
   //Select
   const [open, setOpen] = useState(false);
   //Select
-  
   //textarea
   const [srtSearch, setSrtSearch] = useState('');
-  //textarea
   
+  //textarea
   //column items
   const count = skillVisible.length > 1 ? 2 : 1;
   //column items
@@ -73,40 +74,40 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
     setOpen(false);
   };
   //Select
-  
   //textarea
   const handleChangeSearch = (event) => {
     const value = event.target.value;
     setSrtSearch(value);
-    
     const loverValue = value.toLowerCase();
     
     if (loverValue.trim() === '') {
       setFilteredSkills(skillVisible);
     } else {
       const result = sortedSkills(loverNameHardSkills, loverValue);
-      setFilteredSkills(result);
-      console.log(result, 'result');
+      const sortedOriginal = sortSkillsByOriginal(skillVisible,result);
+      setFilteredSkills(sortedOriginal);
     }
-    
   };
-  //textarea
-
-  if (isLoading || !specializations || specializations.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
-  }
-
   //textarea
   
   //button
   const handleClick = () => {
-    const searchStr = srtSearch.toLocaleLowerCase().split(', ');
+    const loverValue = srtSearch.toLowerCase();
     
-    const result = sortedSkills(loverNameHardSkills, searchStr);
-    setFilteredSkills(result);
-    console.log(result, 'result');
+    if (loverValue.trim() === '') {
+      setFilteredSkills(skillVisible);
+    } else {
+      const result = sortedSkills(loverNameHardSkills, loverValue);
+      const sortedOriginal = sortSkillsByOriginal(skillVisible,result);
+      setFilteredSkills(sortedOriginal);
+    }
   };
   //button
+  
+  if (isLoading || !specializations || specializations.length === 0) {
+    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
+  }
+  
   return (
     <Box sx={styles.wrapper}>
       <Box sx={open ? styles.skillBg : styles.skill}>
@@ -144,7 +145,8 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
           <Typography sx={styles.text} className={level} variant="body">Level {level}</Typography>
         </Box>
         <Box sx={{ ...styles.list, columnCount: count }}>
-          {hardSkill?.map((item) => <SkillsItem key={item.id} data={item} />)}
+          {srtSearch.trim() === '' ? skillVisible?.map((item) => <SkillsItem key={item.id} data={item} />) :
+            filteredSkills?.map((item) => <SkillsItem key={item.id} data={item} />)}
         </Box>
       </Box>
       <Box sx={styles.wrapperSearch}>
@@ -153,8 +155,9 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
             value={srtSearch}
             handleChange={handleChangeSearch}
           />
-          <IconButton sx={styles.btnIcon}>
-            ds
+          <IconButton onClick={handleClick} type="button" sx={styles.btnIcon}>
+            <SearchIcon />
+            {'Пошук'}
           </IconButton>
         </Box>
       </Box>
