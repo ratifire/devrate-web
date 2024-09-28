@@ -1,3 +1,3 @@
-import HardSkillsModal from './HardSkillsModal';
+import HardSkillsModal from './HardSkillsModal'
 
 export default HardSkillsModal;

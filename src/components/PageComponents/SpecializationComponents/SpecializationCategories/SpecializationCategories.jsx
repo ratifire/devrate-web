@@ -13,15 +13,12 @@ import {
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
-import {
-  setActiveSpecialization,
-  setMainSpecializations,
-} from '../../../../redux/specialization/specializationSlice';
+import { setActiveSpecialization, setMainSpecializations } from '../../../../redux/specialization/specializationSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
 import { styles } from './SpecializationCategories.styles';
-import { LoaderComponent, ErrorComponent } from '../../../UI/Exceptions';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
@@ -29,12 +26,24 @@ const SpecializationCategories = () => {
   const { id } = useSelector((state) => state.auth.user.data);
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
-  const { data: specializations, isLoading: isLoadingGetSpecialization, isFetching, isError } = useGetSpecializationByUserIdQuery(id, { skip: !id });
+  const {
+    data: specializations,
+    isLoading: isLoadingGetSpecialization,
+    isFetching,
+    isError,
+  } = useGetSpecializationByUserIdQuery(id, { skip: !id });
   const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
-  const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery }] = useLazyGetMainMasteryBySpecializationIdQuery();
-  const [updateSpecializationAsMainById, { isLoading: isLoadingUpdateSpecialization }] = useUpdateSpecializationAsMainByIdMutation();
+  const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery }] =
+    useLazyGetMainMasteryBySpecializationIdQuery();
+  const [updateSpecializationAsMainById, { isLoading: isLoadingUpdateSpecialization }] =
+    useUpdateSpecializationAsMainByIdMutation();
   const [deleteSpecialization, { isLoading: isLoadingDeleteSpecialization }] = useDeleteSpecializationByIdMutation();
-  const isLoading = isLoadingGetSpecialization || isLoadingGetMainMastery || isLoadingUpdateSpecialization || isLoadingDeleteSpecialization || isFetching;
+  const isLoading =
+    isLoadingGetSpecialization ||
+    isLoadingGetMainMastery ||
+    isLoadingUpdateSpecialization ||
+    isLoadingDeleteSpecialization ||
+    isFetching;
   const [anchorEl, setAnchorEl] = useState({});
 
   useEffect(() => {
@@ -71,7 +80,10 @@ const SpecializationCategories = () => {
 
   const handlerChangeMainSpecialization = async () => {
     if (specializations?.length === 0 || !activeSpecialization) return;
-    await updateSpecializationAsMainById({ ...activeSpecialization, main: true }, {skip: !activeSpecialization}).unwrap();
+    await updateSpecializationAsMainById(
+      { ...activeSpecialization, main: true },
+      { skip: !activeSpecialization }
+    ).unwrap();
     dispatch(setMainSpecializations(activeSpecialization));
   };
 
@@ -111,11 +123,11 @@ const SpecializationCategories = () => {
   };
 
   if (isLoading) {
-    return <LoaderComponent/>
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <ErrorComponent />
+    return <ErrorComponent />;
   }
 
   return (

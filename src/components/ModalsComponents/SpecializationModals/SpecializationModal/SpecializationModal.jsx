@@ -8,7 +8,8 @@ import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useAddSkillsToMasteryMutation,
-  useCreateNewSpecializationMutation, useGetSpecializationByUserIdQuery,
+  useCreateNewSpecializationMutation,
+  useGetSpecializationByUserIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
   useUpdateSpecializationByIdMutation,
@@ -19,9 +20,9 @@ import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/i
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector } from '../../../FormsComponents/Inputs';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 
 const SpecializationModal = () => {
   const [skills, setSkills] = useState([]);
@@ -32,15 +33,37 @@ const SpecializationModal = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
   const openSpecialization = useSelector((state) => state.modal.openSpecialization);
-  const [createNewSpecialization, { isError: isErrorCreateNewSpecialization, isLoading: isLoadingCreateNewSpecialization }] = useCreateNewSpecializationMutation();
-  const [updateSpecializationById, { isError: isErrorUpdateSpecialization, isLoading: isLoadingUpdateSpecialization }] = useUpdateSpecializationByIdMutation();
-  const [triggerRequest, { isError: isErrorGetMasteries, isFetching: isLoadingGetMasteries }] = useLazyGetMasteriesBySpecializationIdQuery();
-  const [setNewMainMasteryBySpecIdAndMasteryId, { isError: isErrorSetNewMastery, isLoading: isLoadingSetNewMastery }] = useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
+  const [
+    createNewSpecialization,
+    { isError: isErrorCreateNewSpecialization, isLoading: isLoadingCreateNewSpecialization },
+  ] = useCreateNewSpecializationMutation();
+  const [updateSpecializationById, { isError: isErrorUpdateSpecialization, isLoading: isLoadingUpdateSpecialization }] =
+    useUpdateSpecializationByIdMutation();
+  const [triggerRequest, { isError: isErrorGetMasteries, isFetching: isLoadingGetMasteries }] =
+    useLazyGetMasteriesBySpecializationIdQuery();
+  const [setNewMainMasteryBySpecIdAndMasteryId, { isError: isErrorSetNewMastery, isLoading: isLoadingSetNewMastery }] =
+    useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
   const [addSkills, { isError: isErrorAddSkill, isLoading: isLoadingAddSkill }] = useAddSkillsToMasteryMutation();
-  const { data, isError: isErrorGetSpecialization, isLoading: isLoadingGetSpecialization } = useGetSpecializationListQuery('specialization-names.json');
+  const {
+    data,
+    isError: isErrorGetSpecialization,
+    isLoading: isLoadingGetSpecialization,
+  } = useGetSpecializationListQuery('specialization-names.json');
 
-  const isLoading = isLoadingCreateNewSpecialization || isLoadingUpdateSpecialization || isLoadingGetMasteries || isLoadingSetNewMastery || isLoadingAddSkill || isLoadingGetSpecialization;
-  const isError = isErrorCreateNewSpecialization || isErrorUpdateSpecialization || isErrorGetMasteries || isErrorSetNewMastery || isErrorAddSkill || isErrorGetSpecialization;
+  const isLoading =
+    isLoadingCreateNewSpecialization ||
+    isLoadingUpdateSpecialization ||
+    isLoadingGetMasteries ||
+    isLoadingSetNewMastery ||
+    isLoadingAddSkill ||
+    isLoadingGetSpecialization;
+  const isError =
+    isErrorCreateNewSpecialization ||
+    isErrorUpdateSpecialization ||
+    isErrorGetMasteries ||
+    isErrorSetNewMastery ||
+    isErrorAddSkill ||
+    isErrorGetSpecialization;
 
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
   const { activeSpecialization } = useSelector((state) => state.specialization);
@@ -96,14 +119,19 @@ const SpecializationModal = () => {
             name: resp.level,
             softSkillMark: resp.softSkillMark,
             hardSkillMark: resp.hardSkillMark,
-          })
+          });
           dispatch(setActiveSpecialization({ ...activeSpecialization, mastery: values.mastery }));
         }
 
         return;
       }
 
-      const data = await createNewSpecialization({ userId, name: values.name, mainMasteryName: values.mastery, main: false }).unwrap();
+      const data = await createNewSpecialization({
+        userId,
+        name: values.name,
+        mainMasteryName: values.mastery,
+        main: false,
+      }).unwrap();
       const masteries = await triggerRequest(data.id);
       const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
       await setNewMainMasteryBySpecIdAndMasteryId({
@@ -126,7 +154,7 @@ const SpecializationModal = () => {
     name: modalData === 'editSpecialization' ? activeSpecialization?.name : '',
     mastery: modalData === 'editSpecialization' ? activeSpecialization?.mastery : '',
     skills: '',
-  }
+  };
 
   const formik = useFormik({
     enableReinitialize: true,

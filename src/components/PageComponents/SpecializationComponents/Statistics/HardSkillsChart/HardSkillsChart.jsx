@@ -2,11 +2,11 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
+import useHardSkillData from '../../../../../utils/hooks/specialization/useHardSkillData';
+import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
+import { useTooltip } from '../utils';
 import roundData from '../utils/roundData';
 import { styles } from './HardSkillsChart.styles.js';
-import { useTooltip } from '../utils';
-import { LoaderComponent, ErrorComponent } from '../../../../UI/Exceptions';
-import useHardSkillData from '../../../../../utils/hooks/specialization/useHardSkillData';
 
 const HardSkillsChart = () => {
   const { tooltipContent, tooltipLabel } = useTooltip();
@@ -15,11 +15,11 @@ const HardSkillsChart = () => {
   const roundedSkills = roundData(skills);
 
   if (isFetching) {
-    return <LoaderComponent/>
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <ErrorComponent />
+    return <ErrorComponent />;
   }
 
   return (

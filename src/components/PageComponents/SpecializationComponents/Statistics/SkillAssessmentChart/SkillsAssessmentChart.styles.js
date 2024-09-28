@@ -30,7 +30,7 @@ export const styles = {
     },
   }),
   dropdownPaper: (theme) => ({
-    backgroundColor: theme.palette.neutral[900]
+    backgroundColor: theme.palette.neutral[900],
   }),
 
   menuItem: (theme) => ({
@@ -46,5 +46,5 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 };

@@ -15,9 +15,9 @@ import {
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 
 const SoftSkillsModal = () => {
   const [state, setState] = useState({
@@ -47,7 +47,8 @@ const SoftSkillsModal = () => {
   } = useGetAvailableSoftSkillsQuery();
 
   const { skill, addSkill, availableSkills, allSkills, idDeletedSkills } = state;
-  const isLoading = isFetchingMastery || isFetchingSkills || isFetchingAvailableSkills || isLoadingDeleteSkill || isLoadingAddSkill;
+  const isLoading =
+    isFetchingMastery || isFetchingSkills || isFetchingAvailableSkills || isLoadingDeleteSkill || isLoadingAddSkill;
   const isError = isErrorMastery || isErrorSkills || isErrorAvailableSkills;
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
@@ -69,8 +70,8 @@ const SoftSkillsModal = () => {
       skill: e.target.value,
       error: false,
       errorText: '',
-    })
-  }
+    });
+  };
 
   const handleAddSkill = () => {
     const isSkillExist = allSkills.find((v) => v.name === skill);
@@ -87,7 +88,6 @@ const SoftSkillsModal = () => {
     const id = isAddedSkill?.id || uuidv4();
 
     if (!isSkillExist && skill) {
-
       if (!isAddedSkill) {
         updateState({ addSkill: [...addSkill, { id, name: isAddedSkill?.name || skill }] });
       }

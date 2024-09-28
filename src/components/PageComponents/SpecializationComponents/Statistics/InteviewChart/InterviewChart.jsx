@@ -5,14 +5,15 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useGetInterviewSummariesStatisticQuery } from '../../../../../redux/chart/chartApiSlice';
+import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 import {
   createTenDaysInterviewData,
   createTenMonthsInterviewData,
   getCurrentAndLastMonths,
-  useHandleChange, useTooltip,
+  useHandleChange,
+  useTooltip,
 } from '../utils';
 import { styles } from './InterviewChart.styles';
-import { LoaderComponent, ErrorComponent } from '../../../../UI/Exceptions';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -26,11 +27,11 @@ const InterviewChart = () => {
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
   if (isFetching) {
-    return <LoaderComponent />
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <ErrorComponent />
+    return <ErrorComponent />;
   }
 
   return (
@@ -64,7 +65,7 @@ const InterviewChart = () => {
       </Box>
       <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
-          <BarChart data={selectedPeriod} margin={{ top: 0, right: 5, left: -30, bottom: 0 }} >
+          <BarChart data={selectedPeriod} margin={{ top: 0, right: 5, left: -30, bottom: 0 }}>
             <defs>
               <linearGradient id='colorConducted' x1='0' y1='0' x2='0' y2='1'>
                 <stop offset='0%' stopColor='#FFC061' stopOpacity={1} />
@@ -77,13 +78,23 @@ const InterviewChart = () => {
                 <stop offset='100%' stopColor='#4A1D8B' stopOpacity={1} />
               </linearGradient>
             </defs>
-            <Legend iconType="circle" layout="horizontal" align="center" verticalAlign="top" />
+            <Legend iconType='circle' layout='horizontal' align='center' verticalAlign='top' />
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
             <XAxis dataKey='name' />
-            <YAxis domain={[0, 10]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} interval={0}/>
+            <YAxis domain={[0, 10]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} interval={0} />
             <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
-            <Bar dataKey='conducted' name={t('specialization.interviewsChart.conducted')} fill='url(#colorConducted)' radius={[2, 2, 0, 0]} />
-            <Bar dataKey='passed' name={t('specialization.interviewsChart.passed')} fill='url(#colorPassed)' radius={[2, 2, 0, 0]} />
+            <Bar
+              dataKey='conducted'
+              name={t('specialization.interviewsChart.conducted')}
+              fill='url(#colorConducted)'
+              radius={[2, 2, 0, 0]}
+            />
+            <Bar
+              dataKey='passed'
+              name={t('specialization.interviewsChart.passed')}
+              fill='url(#colorPassed)'
+              radius={[2, 2, 0, 0]}
+            />
           </BarChart>
         </ResponsiveContainer>
       </Box>

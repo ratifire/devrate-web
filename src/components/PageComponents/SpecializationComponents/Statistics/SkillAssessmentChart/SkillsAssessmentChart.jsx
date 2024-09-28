@@ -3,16 +3,17 @@ import { Box, MenuItem, Select, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 import {
   arithmeticAverageSkillValue,
   createTenDaysHistoryData,
   createTenMonthsHistoryData,
   getCurrentAndLastMonths,
   useGetHistoryData,
-  useHandleChange, useTooltip,
+  useHandleChange,
+  useTooltip,
 } from '../utils';
 import { styles } from './SkillsAssessmentChart.styles';
-import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
@@ -36,11 +37,11 @@ const SkillsAssessmentChart = () => {
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
   if (isFetching) {
-    return <LoaderComponent />
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <ErrorComponent />
+    return <ErrorComponent />;
   }
 
   return (
@@ -83,7 +84,7 @@ const SkillsAssessmentChart = () => {
               </linearGradient>
             </defs>
             <XAxis dataKey='name' />
-            <YAxis domain={[0, 9]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} interval={0}/>
+            <YAxis domain={[0, 9]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} interval={0} />
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
             <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
             <Area

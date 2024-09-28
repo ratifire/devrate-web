@@ -2,10 +2,10 @@ import { Box, Typography } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useHardSkillData } from '../../../../../utils/hooks/specialization';
+import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 import { getLevel } from '../utils';
 import { styles } from './LevelChart.styles.js';
-import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
-import { useHardSkillData } from '../../../../../utils/hooks/specialization';
 
 const LevelChart = () => {
   const { skills, isError, isFetching, activeMastery } = useHardSkillData();
@@ -13,11 +13,11 @@ const LevelChart = () => {
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
 
   if (isFetching) {
-    return <LoaderComponent />
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <ErrorComponent />
+    return <ErrorComponent />;
   }
 
   return (

@@ -7,19 +7,17 @@ import { setActiveMastery } from '../../../../redux/specialization/activeMastery
 import { useGetMainMasteryBySpecializationIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetSpecializationId } from '../../../../utils/hooks/specialization';
 import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
-import { styles } from './SpecializationLevel.styles';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { styles } from './SpecializationLevel.styles';
 
 const SpecializationLevel = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
   const specializationId = useGetSpecializationId();
-  const {
-    data,
-    isFetching,
-    isError,
-  } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
+  const { data, isFetching, isError } = useGetMainMasteryBySpecializationIdQuery(specializationId, {
+    skip: !specializationId,
+  });
 
   const mastery = specializationId ? data : '';
 
@@ -36,11 +34,11 @@ const SpecializationLevel = () => {
   };
 
   if (isFetching) {
-    return <LoaderComponent/>
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <ErrorComponent />
+    return <ErrorComponent />;
   }
 
   return (

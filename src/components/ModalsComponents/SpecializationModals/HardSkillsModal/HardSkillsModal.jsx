@@ -1,23 +1,23 @@
-import AddIcon from '@mui/icons-material/Add';
-import { Box, IconButton, TextField, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import AddIcon from '@mui/icons-material/Add'
+import { Box, IconButton, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid'
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile'
+import { closeModal } from '../../../../redux/modal/modalSlice'
 import {
   useAddSkillToMasteryMutation,
   useDeleteSkillByIdMutation,
   useGetHardSkillsByMasteryIdQuery,
-} from '../../../../redux/specialization/specializationApiSlice';
-import { useGetMastery } from '../../../../utils/hooks/specialization';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { SkillChip } from '../../../UI/Specialization/SkillChip';
-import { MAX_SKILLS } from '../constants';
-import { styles } from '../styles/SkillsModal.styles';
-import { styles as hardSkillsStyles } from './HardSkillsModal.styles';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+} from '../../../../redux/specialization/specializationApiSlice'
+import { useGetMastery } from '../../../../utils/hooks/specialization'
+import { ButtonDef } from '../../../FormsComponents/Buttons'
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions'
+import { SkillChip } from '../../../UI/Specialization/SkillChip'
+import { MAX_SKILLS } from '../constants'
+import { styles } from '../styles/SkillsModal.styles'
+import { styles as hardSkillsStyles } from './HardSkillsModal.styles'
 
 const HardSkillsModal = () => {
   const [state, setState] = useState({
@@ -37,7 +37,8 @@ const HardSkillsModal = () => {
     isError: isErrorSkills,
     isFetching: isFetchingSkills,
   } = useGetHardSkillsByMasteryIdQuery({ masteryId }, { skip: !masteryId });
-  const [addSkillToMastery, { isLoading: isLoadingAddSkill, isError: isErrorAddSkill }] = useAddSkillToMasteryMutation();
+  const [addSkillToMastery, { isLoading: isLoadingAddSkill, isError: isErrorAddSkill }] =
+    useAddSkillToMasteryMutation();
   const [deleteSkill, { isLoading: isLoadingDeleteSkill, isError: isErrorDeleteSkill }] = useDeleteSkillByIdMutation();
 
   const { skill, idDeletedSkills, allSkills, addSkills } = state;
@@ -57,8 +58,8 @@ const HardSkillsModal = () => {
       skill: e.target.value,
       error: false,
       errorText: '',
-    })
-  }
+    });
+  };
 
   const handleDeleteSkill = (skillId) => {
     const isSkillExist = skills.find((skill) => skill.id === skillId);
