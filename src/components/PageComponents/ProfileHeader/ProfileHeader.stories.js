@@ -6,7 +6,7 @@ import { decorators } from '../../../../.storybook/preview';
 import ProfileHeader from './index';
 
 export default {
-  title: 'Profile/ProfileHeader',
+  title: 'ProfileComponents/ProfileHeader',
   component: ProfileHeader,
   parameters: {
     layout: 'centered',

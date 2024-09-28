@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,10 +12,11 @@ import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { styles } from './AchievementModal.styles';
 import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
 
-const AchievementModal = ({ userId }) => {
+const AchievementModal = () => {
   const dispatch = useDispatch();
   const openAchievement = useSelector((state) => state.modal.achievement);
   const { t } = useTranslation();
+  const { id } = useSelector((state) => state.auth.user.data);
   const [createAchievement] = useCreateAchievementMutation();
 
   const handleClose = () => {
@@ -34,7 +34,7 @@ const AchievementModal = ({ userId }) => {
 
     try {
       await createAchievement({
-              userId: userId,
+              userId: id,
               payload: values,
             }).unwrap();
       handleClose();
@@ -50,7 +50,7 @@ const AchievementModal = ({ userId }) => {
     onSubmit,
   });
 
-  if (!userId) {
+  if (!id) {
     return <Typography>Error: User not authenticated</Typography>;
   }
 
@@ -119,8 +119,5 @@ const AchievementModal = ({ userId }) => {
   );
 };
 
-AchievementModal.propTypes = {
-  userId: PropTypes.number,
-};
 
 export default AchievementModal;
