@@ -123,8 +123,8 @@ const SpecializationModal = () => {
   };
 
   const initialValues = {
-    name: activeSpecialization?.name || '',
-    mastery: activeSpecialization?.mastery || '',
+    name: modalData === 'editSpecialization' ? activeSpecialization?.name : '',
+    mastery: modalData === 'editSpecialization' ? activeSpecialization?.mastery : '',
     skills: '',
   }
 

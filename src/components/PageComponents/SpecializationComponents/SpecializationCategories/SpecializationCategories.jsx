@@ -27,9 +27,7 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const { activeSpecialization, mainSpecialization, selectedSpecialization } = useSelector(
-    (state) => state.specialization
-  );
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
   const { data: specializations, isLoading: isLoadingGetSpecialization, isFetching, isError } = useGetSpecializationByUserIdQuery(id, { skip: !id });
   const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
@@ -67,15 +65,14 @@ const SpecializationCategories = () => {
   };
 
   const handlerAddSpecializations = () => {
-    dispatch(setActiveSpecialization(null));
     if (specializations?.length >= 4) return;
     dispatch(openModal({ modalName: 'openSpecialization', data: 'addSpecialization' }));
   };
 
-  const handlerChangeMainSpecialization = async (selectedSpecialization) => {
-    if (specializations?.length === 0 || selectedSpecialization === null) return;
-    await updateSpecializationAsMainById({ ...selectedSpecialization, main: true }).unwrap();
-    dispatch(setMainSpecializations(selectedSpecialization));
+  const handlerChangeMainSpecialization = async () => {
+    if (specializations?.length === 0 || activeSpecialization === null) return;
+    await updateSpecializationAsMainById({ ...activeSpecialization, main: true }).unwrap();
+    dispatch(setMainSpecializations(activeSpecialization));
   };
 
   const handlerDeleteSpecialization = async (id) => {
@@ -131,7 +128,7 @@ const SpecializationCategories = () => {
           variant='outlined'
           disabled={specializations?.length === 0}
           correctStyle={styles.make_main_btn}
-          handlerClick={() => handlerChangeMainSpecialization(selectedSpecialization)}
+          handlerClick={handlerChangeMainSpecialization}
           type='button'
           label='specialization.specialization_btn_make_main'
         />
