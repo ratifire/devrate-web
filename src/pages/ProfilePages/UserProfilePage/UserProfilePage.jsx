@@ -11,6 +11,12 @@ import { useParams, Navigate } from 'react-router-dom'; // Додаємо Naviga
 import ExperienceSection from '../../../components/PageComponents/ProfileComponents/UserProfile/ExperienceSection';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 
+const MemoizedProfileHeader = memo(ProfileHeader);
+const MemoizedBaseUserInfo = memo(BaseUserInfo);
+const MemoizedSkillsSection = memo(SkillsSection);
+const MemoizedRightSection = memo(RightSection);
+const MemoizedExperienceSection = memo(ExperienceSection);
+
 const UserProfilePage = () => {
   const { userId } = useParams();
   useAuth();
@@ -24,13 +30,7 @@ const UserProfilePage = () => {
   if (error || !dataPersonal) {
     return <Navigate to="/404" />;
   }
-  
-  const MemoizedProfileHeader = memo(ProfileHeader);
-  const MemoizedBaseUserInfo = memo(BaseUserInfo);
-  const MemoizedSkillsSection = memo(SkillsSection);
-  const MemoizedRightSection = memo(RightSection);
-  const MemoizedExperienceSection = memo(ExperienceSection);
-  
+
   return (
     <UserProfileTemplate>
       <MemoizedProfileHeader />
