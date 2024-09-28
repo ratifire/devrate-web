@@ -9,15 +9,15 @@ import RightSection from '../../../components/PageComponents/ProfileComponents/P
 import ExperienceSection from '../../../components/PageComponents/ProfileComponents/PersonalProfile/ExperienceSection';
 import useAuth from '../../../utils/hooks/useAuth';
 
+const MemoizedProfileHeader = memo(ProfileHeader);
+const MemoizedBaseUserInfo = memo(BaseUserInfo);
+const MemoizedSkillsSection = memo(SkillsSection);
+const MemoizedRightSection = memo(RightSection);
+const MemoizedExperienceSection = memo(ExperienceSection);
+
 const PersonalProfilePage = () => {
   useAuth();
-  
-  const MemoizedProfileHeader = memo(ProfileHeader);
-  const MemoizedBaseUserInfo = memo(BaseUserInfo);
-  const MemoizedSkillsSection = memo(SkillsSection);
-  const MemoizedRightSection = memo(RightSection);
-  const MemoizedExperienceSection = memo(ExperienceSection);
-  
+
   return (
     <PersonalProfileTemplate>
       <MemoizedProfileHeader />

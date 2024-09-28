@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, IconButton, styled, Tab, Tabs } from '@mui/material';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
@@ -10,20 +10,13 @@ import { Add } from '@mui/icons-material';
 import { openModal } from '../../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { emptyPersonalTabsPictures } from '../../../../../utils/constants/emptyTabsPictures';
-// import { setButtonState } from '../../../../../redux/addButton/addButtonSlice';
 
 const ExperienceSection = () => {
-  const [value, setValue] = useState('education');
+  const [value, setValue] = useState('workExperience');
   const { t } = useTranslation();
   const buttonStates  = useSelector((state) => state.button);
-  console.log(buttonStates);
   const profileType = 'personal';
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // dispatch(setButtonState({value, hasData: false}));
-
-  }, [buttonStates]);
 
 
   const handleChange = (event, newValue) => {
@@ -51,7 +44,6 @@ const ExperienceSection = () => {
     workExperience:
       <IconButton
         sx={styles.iconBtn}
-        aria-label="Edit Work Experience"
         onClick={handleAddFeature}
       >
         <Add />
@@ -59,7 +51,6 @@ const ExperienceSection = () => {
     achievement:
       <IconButton
         sx={styles.iconBtn}
-        aria-label="Edit Achievement"
         onClick={handleAddFeature}
       >
         <Add />
@@ -68,7 +59,6 @@ const ExperienceSection = () => {
     education:
       <IconButton
         sx={styles.iconBtn}
-        aria-label="Edit Education"
         onClick={handleAddFeature}
       >
         <Add />

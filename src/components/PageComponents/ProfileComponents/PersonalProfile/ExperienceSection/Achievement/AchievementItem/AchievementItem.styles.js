@@ -8,6 +8,9 @@ const styles = {
     height: '100%',
     alignItems: 'stretch',
     display: 'flex',
+    '>div': {
+      width: '100%',
+    }
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',
@@ -41,22 +44,6 @@ const styles = {
     textAlign: 'center',
     textDecoration: 'underline',
   }),
-
-  // iconBtnModal: (theme) => ({
-  //   color: theme.palette.neutral['200'],
-  //   padding: 0,
-  //   width: '35px',
-  //   height: '35px',
-  //   borderRadius: '50%',
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   transition: 'background-color 0.3s, transform 0.3s',
-  //   '&:hover': {
-  //     backgroundColor: theme.palette.neutral['700'],
-  //     color: theme.palette.neutral['200'],
-  //   },
-  // }),
   iconBtnModal: (theme) => ({
     color: theme.palette.neutral['200'],
     padding: 0,
