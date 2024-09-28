@@ -70,8 +70,8 @@ const SpecializationCategories = () => {
   };
 
   const handlerChangeMainSpecialization = async () => {
-    if (specializations?.length === 0 || activeSpecialization === null) return;
-    await updateSpecializationAsMainById({ ...activeSpecialization, main: true }).unwrap();
+    if (specializations?.length === 0 || !activeSpecialization) return;
+    await updateSpecializationAsMainById({ ...activeSpecialization, main: true }, {skip: !activeSpecialization}).unwrap();
     dispatch(setMainSpecializations(activeSpecialization));
   };
 
