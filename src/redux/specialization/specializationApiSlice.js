@@ -52,7 +52,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       transformResponse(result) {
         return { ...result, level: result.level.charAt(0) + result.level.slice(1).toLowerCase() };
       },
-      providesTags: ['Masteries']
+      providesTags: (result, error, id) => [{ type: 'MainMastery', id }],
     }),
 
     setNewMainMasteryBySpecIdAndMasteryId: builder.mutation({
@@ -63,7 +63,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           body: { id: masteryId, name, softSkillMark, hardSkillMark },
         };
       },
-      invalidatesTags: ['Masteries'],
+      invalidatesTags: (result, error, { masteryId }) => [{ type: 'MainMastery', id: masteryId }],
     }),
 
     updateSpecializationById: builder.mutation({

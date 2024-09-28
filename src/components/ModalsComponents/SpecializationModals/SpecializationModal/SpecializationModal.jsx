@@ -14,7 +14,7 @@ import {
   useUpdateSpecializationByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetSpecializationListQuery } from '../../../../redux/specialization/specializationList/specializationListApiSlice';
-import { setSelectedSpecialization } from '../../../../redux/specialization/specializationSlice';
+import { setActiveSpecialization } from '../../../../redux/specialization/specializationSlice';
 import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/index';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector } from '../../../FormsComponents/Inputs';
@@ -30,7 +30,7 @@ const SpecializationModal = () => {
   const dispatch = useDispatch();
 
   const { id: userId } = useSelector((state) => state.auth.user.data);
-  const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId);
+  const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
   const openSpecialization = useSelector((state) => state.modal.openSpecialization);
   const [createNewSpecialization, { isError: isErrorCreateNewSpecialization, isLoading: isLoadingCreateNewSpecialization }] = useCreateNewSpecializationMutation();
   const [updateSpecializationById, { isError: isErrorUpdateSpecialization, isLoading: isLoadingUpdateSpecialization }] = useUpdateSpecializationByIdMutation();
@@ -43,7 +43,7 @@ const SpecializationModal = () => {
   const isError = isErrorCreateNewSpecialization || isErrorUpdateSpecialization || isErrorGetMasteries || isErrorSetNewMastery || isErrorAddSkill || isErrorGetSpecialization;
 
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
-  const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
+  const { activeSpecialization } = useSelector((state) => state.specialization);
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
 
   const { modalData } = useSelector((state) => state.modal);
@@ -66,7 +66,7 @@ const SpecializationModal = () => {
 
   const updateSpecialization = async ({ id, name }) => {
     await updateSpecializationById({ id, name }).unwrap();
-    dispatch(setSelectedSpecialization({ id, name }));
+    dispatch(setActiveSpecialization({ id, name }));
   };
 
   const onSubmit = async (values, { resetForm }) => {
@@ -75,28 +75,29 @@ const SpecializationModal = () => {
         let shouldUpdateSpecialization = false;
         let shouldUpdateMastery = false;
 
-        if (values.name !== selectedSpecialization.name) {
+        if (values.name !== activeSpecialization.name) {
           shouldUpdateSpecialization = true;
         }
 
-        if (values.mastery !== selectedSpecialization.mastery) {
+        if (values.mastery !== activeSpecialization.mastery) {
           shouldUpdateMastery = true;
         }
 
         if (shouldUpdateSpecialization) {
-          await updateSpecialization({ id: selectedSpecialization.id, name: values.name });
+          await updateSpecialization({ id: activeSpecialization.id, name: values.name });
         }
 
         if (shouldUpdateMastery) {
-          const masteries = await triggerRequest(selectedSpecialization.id);
+          const masteries = await triggerRequest(activeSpecialization.id);
           const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
           await setNewMainMasteryBySpecIdAndMasteryId({
             masteryId: resp.id,
-            specId: selectedSpecialization.id,
+            specId: activeSpecialization.id,
             name: resp.level,
             softSkillMark: resp.softSkillMark,
             hardSkillMark: resp.hardSkillMark,
-          });
+          })
+          dispatch(setActiveSpecialization({ ...activeSpecialization, mastery: values.mastery }));
         }
 
         return;
@@ -122,8 +123,8 @@ const SpecializationModal = () => {
   };
 
   const initialValues = {
-    name: selectedSpecialization?.name || '',
-    mastery: selectedSpecialization?.mastery || '',
+    name: activeSpecialization?.name || '',
+    mastery: activeSpecialization?.mastery || '',
     skills: '',
   }
 

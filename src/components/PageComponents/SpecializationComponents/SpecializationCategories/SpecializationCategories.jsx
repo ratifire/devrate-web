@@ -16,7 +16,6 @@ import {
 import {
   setActiveSpecialization,
   setMainSpecializations,
-  setSelectedSpecialization,
 } from '../../../../redux/specialization/specializationSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
@@ -32,7 +31,7 @@ const SpecializationCategories = () => {
     (state) => state.specialization
   );
   const [masteryData, setMasteryData] = useState({});
-  const { data: specializations, isLoading: isLoadingGetSpecialization, isFetching, isError } = useGetSpecializationByUserIdQuery(id);
+  const { data: specializations, isLoading: isLoadingGetSpecialization, isFetching, isError } = useGetSpecializationByUserIdQuery(id, { skip: !id });
   const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
   const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery }] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [updateSpecializationAsMainById, { isLoading: isLoadingUpdateSpecialization }] = useUpdateSpecializationAsMainByIdMutation();
@@ -60,7 +59,6 @@ const SpecializationCategories = () => {
     if (masteryData[specialization.id]) {
       const spec = { ...specialization, mastery: masteryData[specialization.id].level };
       dispatch(setActiveMastery(spec.mastery));
-      dispatch(setSelectedSpecialization(spec));
 
       if (activeSpecialization?.id !== specialization.id) {
         dispatch(setActiveSpecialization(spec));
@@ -69,7 +67,7 @@ const SpecializationCategories = () => {
   };
 
   const handlerAddSpecializations = () => {
-    dispatch(setSelectedSpecialization(null));
+    dispatch(setActiveSpecialization(null));
     if (specializations?.length >= 4) return;
     dispatch(openModal({ modalName: 'openSpecialization', data: 'addSpecialization' }));
   };
@@ -84,7 +82,7 @@ const SpecializationCategories = () => {
     const findMainSpecialization = specializations.find((spec) => spec.main);
 
     await deleteSpecialization(id).unwrap();
-    dispatch(setSelectedSpecialization(null));
+    dispatch(setActiveSpecialization(null));
 
     if (findMainSpecialization?.id === id) {
       dispatch(setActiveSpecialization(null));
