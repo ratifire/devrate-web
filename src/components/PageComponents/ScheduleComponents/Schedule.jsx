@@ -11,7 +11,7 @@ import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../..
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
 
-export default function Schedule() {
+const Schedule = () => {
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
@@ -63,7 +63,7 @@ export default function Schedule() {
       const calendarApi = calendarRef.current.getApi();
       calendarApi.gotoDate(startOfWeek);
 
-      applyRequeredStyles(calendarApi);
+      applyRequiredStyles(calendarApi);
     }
   }, [selectedWeek]);
 
@@ -71,10 +71,11 @@ export default function Schedule() {
     const calendarApi = calendarRef.current.getApi();
     if (eventStartTime) {
       calendarApi.scrollToTime(eventStartTime);
-    } else {
-      const now = DateTime.now().toFormat('HH:mm:00');
-      calendarApi.scrollToTime(now);
     }
+    // } else {
+    //   const now = DateTime.now().toFormat('HH:mm:00');
+    //   calendarApi.scrollToTime(now);
+    // }
   }, [selectedDate]);
 
   useEffect(() => {
@@ -82,11 +83,11 @@ export default function Schedule() {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
 
-      applyRequeredStyles(calendarApi);
+      applyRequiredStyles(calendarApi);
     }
   }, [currentEvents]);
 
-  const applyRequeredStyles = (calendarApi) => {
+  const applyRequiredStyles = (calendarApi) => {
     if (calendarApi) {
       const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
       const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
@@ -136,7 +137,10 @@ export default function Schedule() {
       return null;
     }
 
-    return DateTime.fromISO(matchingEvents[0].start).toLocal().toFormat('HH:mm:ss');
+    const startTime = DateTime.fromISO(matchingEvents[0].start).toLocal();
+    const adjustedTime = startTime.minus({ hours: 1 });
+
+    return adjustedTime.toFormat('HH:mm:ss');
   };
 
   const handleDateChange = (newDate) => {
@@ -261,4 +265,6 @@ export default function Schedule() {
       </Box>
     </Box>
   );
-}
+};
+
+export default Schedule;
