@@ -21,16 +21,15 @@ const Education = ({ tab, profileType, imgUrl }) => {
   const iconValues = useMemo(() => iconValuesEducation, []);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setButtonState({tab, hasData: !educationsData}));
-  }, []);
 
   useEffect(() => {
     if (educationsNewData && educationsNewData.length > 0) {
       updateIconsInLocalStorage(educationsNewData, iconsMap, iconValues, 'education');
+      dispatch(setButtonState({ tab, hasData: true }));
+
     }
 
-  }, [educationsNewData, iconsMap, iconValues]);
+  }, [educationsNewData, iconsMap, iconValues, tab]);
 
 
   const sortedEducations = useMemo(() => {

@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import React, { useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AchievementModal from '../../../../../ModalsComponents/ProfileModals/AchievementModal';
 import { useFetchAchievementsQuery } from '../../../../../../redux/services/achievementsApiSlice';
 import AchievementItem from './AchievementItem';
@@ -12,6 +12,7 @@ import { iconValuesAchievement } from '../../../../../../utils/constants/Experie
 import { updateIconsInLocalStorage } from '../../../../../../utils/helpers/updateIconsInLocalStorage';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import PropTypes from 'prop-types';
+import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
 
 
 const Achievement = ({tab, profileType, imgUrl}) => {
@@ -20,13 +21,15 @@ const Achievement = ({tab, profileType, imgUrl}) => {
   const { data: achievementsData } = useFetchAchievementsQuery(userId, { skip: !userId});
   const achievementsNewData = mapDataWithIcons(achievementsData, iconsMap, iconsAchievement);
   const iconValues = useMemo(() => iconValuesAchievement, []);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (achievementsData && achievementsData.length > 0) {
       updateIconsInLocalStorage(achievementsData, iconsMap, iconValues, 'education');
+      dispatch(setButtonState({ tab, hasData: true }));
     }
 
-  }, [achievementsData, iconsMap, iconValues]);
+  }, [achievementsData, iconsMap, iconValues, tab]);
 
   if (!achievementsData || achievementsData.length === 0) {
     return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} isData={!achievementsData}/>;
