@@ -65,11 +65,15 @@ const HardSkillsModal = () => {
 
     if (isSkillExist) {
       updateState({
+        error: false,
+        errorText: '',
         idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
       });
     }
 
     updateState({
+      error: false,
+      errorText: '',
       allSkills: allSkills.filter((skill) => skill.id !== skillId),
       addSkills: addSkills.filter((skill) => skill.id !== skillId),
     });

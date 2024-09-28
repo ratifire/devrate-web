@@ -380,6 +380,7 @@ export const en = {
           errorRequired: 'This is a required field',
           errorLength: 'Skill name is max 100 characters long',
           errorQuantity: 'You can add up to 20 skills',
+          errorNotAvailable: 'Not available skills',
         },
         interview: {
           income: 'An interview has been completed ',

@@ -22,6 +22,8 @@ import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 const SoftSkillsModal = () => {
   const [state, setState] = useState({
     skill: '',
+    helperText: '',
+    error: false,
     addSkill: [],
     allSkills: [],
     idDeletedSkills: [],
@@ -62,13 +64,30 @@ const SoftSkillsModal = () => {
     }
   }, [isFetchingSkills, isFetchingAvailableSkills, data]);
 
+  const handleChange = (e) => {
+    updateState({
+      skill: e.target.value,
+      error: false,
+      errorText: '',
+    })
+  }
+
   const handleAddSkill = () => {
     const isSkillExist = allSkills.find((v) => v.name === skill);
     const isAddedSkill = skills.find((v) => v.name === skill);
 
+    if (!availableSkills.length) {
+      return updateState({ helperText: 'specialization.modal.skills.errorNotAvailable', error: true });
+    }
+
+    if (!skill) {
+      return updateState({ helperText: 'specialization.modal.skills.errorRequired', error: true });
+    }
+
     const id = isAddedSkill?.id || uuidv4();
 
     if (!isSkillExist && skill) {
+
       if (!isAddedSkill) {
         updateState({ addSkill: [...addSkill, { id, name: isAddedSkill?.name || skill }] });
       }
@@ -87,11 +106,15 @@ const SoftSkillsModal = () => {
 
     if (isSkillExist) {
       updateState({
+        error: false,
+        errorText: '',
         idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
       });
     }
 
     updateState({
+      error: false,
+      errorText: '',
       availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
       allSkills: allSkills.filter((skill) => skill.id !== skillId),
       addSkill: addSkill.filter((skill) => skill.id !== skillId),
@@ -135,12 +158,14 @@ const SoftSkillsModal = () => {
                 label={t(labelInput)}
                 value={skill}
                 countries={availableSkills}
+                helperText={t(state.helperText)}
+                error={state.error}
                 disabled={availableSkills?.length === 0}
                 variant='standard'
                 name='softSkill'
-                handleChange={({ target }) => updateState({ skill: target.value })}
+                handleChange={handleChange}
               />
-              <IconButton disabled={!skill} sx={styles.iconBtn} onClick={handleAddSkill}>
+              <IconButton sx={styles.iconBtn} onClick={handleAddSkill}>
                 <AddIcon />
               </IconButton>
             </Box>

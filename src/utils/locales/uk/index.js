@@ -382,6 +382,7 @@ export const uk = {
           errorRequired: "Це обов'язкове поле",
           errorLength: 'Назва навички занадто довга',
           errorQuantity: 'Ви можете додати до 20 навичок',
+          errorNotAvailable: 'Немає доступних навичок',
         },
       },
       interview: {
