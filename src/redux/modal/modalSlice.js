@@ -9,7 +9,7 @@ const modalSlice = createSlice({
     openCheckEmail: false,
     openResetPassword: false,
     openUserInfo: false,
-    openExperience: false,
+    workExperience: false,
     modalData: null,
     achievement: false,
     openSpecialization: false,

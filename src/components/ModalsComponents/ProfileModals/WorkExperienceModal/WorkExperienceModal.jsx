@@ -27,8 +27,8 @@ const WorkExperienceModal = () => {
   const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
 
   const dispatch = useDispatch();
-  const openExperience = useSelector((state) => state.modal.openExperience);
-  const handleClose = () => dispatch(closeModal({ modalName: 'openExperience' }));
+  const workExperience = useSelector((state) => state.modal.workExperience);
+  const handleClose = () => dispatch(closeModal({ modalName: 'workExperience' }));
   const { t } = useTranslation();
 
   const { modalData } = useSelector((state) => state.modal);
@@ -115,9 +115,9 @@ const WorkExperienceModal = () => {
   }
 
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={openExperience}>
+    <ModalLayoutProfile setOpen={handleClose} open={workExperience}>
       <Typography variant='subtitle1' sx={styles.title}>
-        {t('profile.experience.workExperience')}
+        {t('profile.modal.workExperience.title')}
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>

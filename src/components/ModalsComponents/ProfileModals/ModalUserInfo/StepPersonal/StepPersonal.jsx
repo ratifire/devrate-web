@@ -23,7 +23,7 @@ const StepPersonal = () => {
     city: city || userData.city || '',
     country: country || userData.country || '',
     status: status || userData.status || '',
-    description: description || userData.description || '',
+    description: description || '',
   };
 
   const [putPersonalUser] = usePutPersonalUserMutation();
