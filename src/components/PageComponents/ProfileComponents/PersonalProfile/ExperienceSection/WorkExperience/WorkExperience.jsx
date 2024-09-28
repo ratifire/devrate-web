@@ -11,6 +11,7 @@ const WorkExperience = ({ tab, profileType, imgUrl }) => {
   const { id } = useSelector((state) => state.auth.user.data);
   const { data: workExperiencesData } = useGetWorkExperienceByUserIdQuery(id);
 
+
   if (!workExperiencesData || workExperiencesData.length === 0) {
     return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} isData={!workExperiencesData} />;
   }
