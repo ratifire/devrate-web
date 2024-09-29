@@ -6,9 +6,13 @@ import { useTranslation } from 'react-i18next';
 import { ItemSkill } from '../SkillsItem';
 import { styles } from './SpecializationSkills.styles';
 import { ErrorComponent, LoaderComponent } from '../../Exceptions';
+import { useSelector } from 'react-redux';
 
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { t } = useTranslation();
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
+
+  const isDisabled = !activeSpecialization && !mainSpecialization;
 
   if (isFetching) {
     return <LoaderComponent />
@@ -22,7 +26,7 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
     <Box sx={styles.wrapper}>
       <Box sx={styles.title}>
         <Typography variant='h6'>{t(title)}</Typography>
-        <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={openModal}>
+        <IconButton disabled={isDisabled} sx={styles.btnIcon} aria-label='Edit user information' onClick={openModal}>
           <EditIcon />
         </IconButton>
       </Box>
