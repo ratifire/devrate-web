@@ -14,13 +14,14 @@ const SpecializationLevel = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const specializationId = useGetSpecializationId();
   const { data, isFetching, isError } = useGetMainMasteryBySpecializationIdQuery(specializationId, {
     skip: !specializationId,
   });
 
   const mastery = specializationId ? data : '';
-
+  const isDisabled = !activeSpecialization && !mainSpecialization;
   useEffect(() => {
     if (mastery) {
       dispatch(setActiveMastery(mastery?.level));
@@ -55,6 +56,7 @@ const SpecializationLevel = () => {
           variant='contained'
           aria-label='Specialization level button group'
           color='secondary'
+          disabled={isDisabled}
         >
           {['JUNIOR', 'MIDDLE', 'SENIOR'].map((label) => (
             <ButtonDef
