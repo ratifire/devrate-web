@@ -51,7 +51,7 @@ const SkillsItem = ({ data }) => {
       <Typography variant='body1' sx={styles.text}>
         {name}
       </Typography>
-      <Typography variant='h6' sx={styles.grade}>
+      <Typography variant="subtitle2" sx={styles.number}>
         {mark}
       </Typography>
     </Box>

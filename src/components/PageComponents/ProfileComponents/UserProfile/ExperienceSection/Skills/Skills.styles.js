@@ -39,7 +39,7 @@ export const styles = {
   }),
   wrapperSearch: {
     flex: '0 1 max(333px)',
-    height: '300px',
+    height: '280px',
     position: 'relative',
   },
   search: {
@@ -114,14 +114,20 @@ export const styles = {
     fontSize: '14px',
   }),
   list: {
-    columnGap: '32px',
-    overflow: 'auto',
-    maxHeight: 300,
+    overflowY: 'auto',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gridGap:'0 32px',
+    maxHeight: '220px',
+    paddingRight: '16px',
+    '>div': {
+      flex: '1 1 calc(50% - 16px)'
+    },
     '&::-webkit-scrollbar': {
-      width: 10,
+      width: 6,
     },
     '&::-webkit-scrollbar-track': (theme) => ({
-      backgroundColor: theme.palette.neutral['600'],
+      backgroundColor: theme.palette.neutral['800'],
       borderRadius: 8,
     }),
     '&::-webkit-scrollbar-thumb': (theme) => ({
@@ -138,7 +144,7 @@ export const styles = {
       color: theme.palette.info.azure,
     },
     '&.Senior': {
-      color: theme.palette.warning.main,
+      color: theme.palette.info.lime,
     },
     '&:first-letter': {
       textTransform: 'uppercase',

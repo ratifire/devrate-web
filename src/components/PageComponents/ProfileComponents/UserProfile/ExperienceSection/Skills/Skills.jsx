@@ -41,11 +41,8 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
   //Select
   //textarea
   const [srtSearch, setSrtSearch] = useState('');
-  
   //textarea
-  //column items
-  const count = skillVisible.length > 1 ? 2 : 1;
-  //column items
+  
   const loverNameHardSkills = skillVisible.map((item) => ({
     ...item,
     name: item.name.toLowerCase(),
@@ -142,9 +139,9 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
               ))}
             </Select>
           </Box>
-          <Typography sx={styles.text} className={level} variant="body">Level {level}</Typography>
+          <Typography sx={styles.text} className={level} variant="subtitle2">Level {level}</Typography>
         </Box>
-        <Box sx={{ ...styles.list, columnCount: count }}>
+        <Box sx={styles.list}>
           {srtSearch.trim() === '' ? skillVisible?.map((item) => <SkillsItem key={item.id} data={item} />) :
             filteredSkills?.map((item) => <SkillsItem key={item.id} data={item} />)}
         </Box>

@@ -18,7 +18,7 @@ export const styles = {
       color: theme.palette.info.azure,
     },
     '&.Senior': {
-      color: theme.palette.warning.main,
+      color: theme.palette.info.lime,
     },
     '&:first-letter': {
       textTransform: 'uppercase',

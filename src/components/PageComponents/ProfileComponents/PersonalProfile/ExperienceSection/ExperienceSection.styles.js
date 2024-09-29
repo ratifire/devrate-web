@@ -37,10 +37,10 @@ const styles = {
   }),
   experienceItemContainer: (theme) => ({
     overflow: 'auto',
-    marginTop: theme.spacing(4),
     maxHeight: '300px',
     minWidth: '100%',
     background: theme.palette.background.level2,
+    paddingTop: '20px',
     paddingRight: theme.spacing(3),
     height: '100%',
 
