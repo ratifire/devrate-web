@@ -14,9 +14,12 @@ const Interviews = () => {
   const [popoverWidth, setPopoverWidth] = useState(0);
   const [createButton, setCreateButton] = useState(null);
   const open = Boolean(createButton);
+
   const { activeSpecialization, mainSpecialization, fullSpecializations } = useSelector(
     (state) => state.specialization
   );
+
+  const isDisabled = !activeSpecialization && !mainSpecialization;
 
   useEffect(() => {
     if (buttonRef.current) {
@@ -30,9 +33,13 @@ const Interviews = () => {
 
   const scheduleClickHandler = (event) => {
     setCreateButton(event.currentTarget);
+    buttonRef.current.setAttribute('data-active', 'true');
   };
 
-  const closeHandler = () => setCreateButton(null);
+  const closeHandler = () => {
+    setCreateButton(null);
+    buttonRef.current.setAttribute('data-active', 'false');
+  }
 
   const createInterviewRequest = () => {
     dispatch(openModal({ modalName: 'scheduleInterview', data: { role: 'INTERVIEWER' } }));
@@ -71,6 +78,7 @@ const Interviews = () => {
         color='primary'
         sx={styles.buttonPrimary}
         onClick={scheduleClickHandler}
+        disabled={isDisabled}
       >
         {t('specialization.modal.interview.makeIncome')}
         <KeyboardArrowDown />

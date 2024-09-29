@@ -29,12 +29,17 @@ export const styles = {
     display: 'flex',
     gap: theme.spacing(4),
   }),
-  buttonPrimary: () => ({
+  buttonPrimary: (theme) => ({
     fontSize: 14,
     textTransform: 'none',
     fontWeight: 500,
-    borderRadius: '4px 4px 0 0',
     width: '100%',
+    '&:disabled': {
+      backgroundColor: theme.palette.background.btnGroup,
+    },
+    '&[data-active="true"]': {
+      borderRadius: '4px 4px 0 0'
+    },
   }),
   popoverWrapper: (theme) => ({
     padding: theme.spacing(2),
