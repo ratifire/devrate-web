@@ -7,19 +7,21 @@ import { SpecializationSkills } from '../../../UI/Specialization/SpecializationS
 
 const SoftSkills = () => {
   const dispatch = useDispatch();
-  const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
+  const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
 
   const {
-    data: skills = [],
-    isLoading: isLoadingSoftSkill,
+    data,
+    isFetching: isLoadingSoftSkill,
     isError: isErrorSoftSkill,
   } = useGetSoftSkillsQuery(masteryId, { skip: !masteryId });
+
+  const skills = masteryId ? data : [];
 
   const handleModalOpen = () => {
     dispatch(openModal({ modalName: 'openSoftSkillsModal' }));
   };
 
-  const isLoading = isLoadingMastery || isLoadingSoftSkill;
+  const isFetching = isFetchingMastery || isLoadingSoftSkill;
   const isError = isErrorMastery || isErrorSoftSkill;
 
   const averageMark =
@@ -27,13 +29,12 @@ const SoftSkills = () => {
 
   return (
     <SpecializationSkills
-      isLoading={isLoading}
+      isFetching={isFetching}
       isError={isError}
       skills={skills}
       averageMark={averageMark}
       openModal={handleModalOpen}
       subTitle='specialization.hardSkills.averageMark'
-      errorTitle='specialisation.hardSkills.error'
       title='specialization.softSkills.title'
     />
   );

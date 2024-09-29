@@ -359,6 +359,7 @@ export const en = {
       specialization_btn_make_main: 'Make the main',
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',
+      error: 'Something went wrong...',
       level: {
         title: 'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.',
@@ -387,6 +388,10 @@ export const en = {
         interview_chart_months: 'Months',
         skills_assessment_chart_title: 'Average skill assessment',
       },
+      interviewsChart: {
+        conducted: 'Conducted',
+        passed: 'Passed',
+      },
       hardSkills: {
         title: 'Hard skills',
         averageMark: 'Average mark:',
@@ -402,11 +407,18 @@ export const en = {
           mastery: 'Main level',
           mastery_helper_text: 'The level for generating your statistics, which will be displayed on your profile page',
           required: 'This is a required field',
+          max_length: 'Skill name is max 100 characters long',
+          errorDuplicate: 'Such a specialization already exists',
         },
         skills: {
           title: 'Skills',
           placeholder: 'Codelgniter, Yii, Zend Framework',
           no_skills: 'No available skills',
+          errorDuplicate: 'Such a skill already exists',
+          errorRequired: 'This is a required field',
+          errorLength: 'Skill name is max 100 characters long',
+          errorQuantity: 'You can add up to 20 skills',
+          errorNotAvailable: 'Not available skills',
         },
         interview: {
           income: 'An interview has been completed ',

@@ -24,7 +24,8 @@ import RenderTabs from './components/TabsRender';
 import RenderTimeSlots from './components/RenderTimeSlots';
 import WeekNavigation from './components/WeekNavigation';
 
-const ScheduleInterviewModal = ({ role }) => {
+const ScheduleInterviewModal = () => {
+  const { role } = useSelector((state) => state.modal.modalData);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const isOpen = useSelector((state) => state.modal.scheduleInterview);

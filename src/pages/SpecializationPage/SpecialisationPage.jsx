@@ -44,7 +44,7 @@ const SpecializationPage = () => {
         <MemoizedProfileHeader />
         <Container maxWidth='xl' sx={styles.container}>
           <Box sx={styles.contentWrapper}>
-            <Paper sx={styles.specialisationTaxonomy}>
+            <Paper sx={styles.specialisationCategories}>
               <MemoizedSpecialisationCategories />
             </Paper>
             <Paper sx={styles.specialisationLevel}>

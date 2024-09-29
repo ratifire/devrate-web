@@ -1,24 +1,26 @@
 import { useGetHardSkillsByMasteryIdQuery } from '../../../redux/specialization/specializationApiSlice';
 import { useGetMastery } from './index';
 
-const useUserSkillsAndMasteryData = () => {
-  const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId, userId, activeMastery } = useGetMastery();
+const useHardSkillData = () => {
+  const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId, userId, activeMastery } = useGetMastery();
 
   const {
-    data: skills = [],
-    isLoading: isLoadingSkills,
+    data = [],
+    isFetching: isFetchingSkills,
     isError: isErrorSkills,
   } = useGetHardSkillsByMasteryIdQuery({ userId, masteryId }, { skip: !masteryId });
 
-  const isLoading = isLoadingMastery || isLoadingSkills;
+  const skills = masteryId ? data : [];
+
+  const isFetching = isFetchingMastery || isFetchingSkills;
   const isError = isErrorMastery || isErrorSkills;
 
   return {
     skills,
-    isLoading,
+    isFetching,
     isError,
     activeMastery,
   };
 };
 
-export default useUserSkillsAndMasteryData;
+export default useHardSkillData;

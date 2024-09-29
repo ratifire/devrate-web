@@ -355,9 +355,14 @@ export const uk = {
       specialization_btn_make_main: 'Зробити основною',
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',
+      error: 'Щось пішло не так...',
       level: {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
+      },
+      interviewsChart: {
+        conducted: 'Проведено',
+        passed: 'Пройдено',
       },
       interviewChartMonths: {
         '01': 'Січ',
@@ -399,11 +404,18 @@ export const uk = {
           mastery_helper_text:
             'Рівень для формування Вашої статистики, яка буде відібражатися в на сторінці Вашого профілю',
           required: "Це обов'язкове поле",
+          max_length: 'Назва вміння може мати довжину не більше 100 символів',
+          errorDuplicate: 'Така спеціалізація вже існує',
         },
         skills: {
           title: 'Навички',
           placeholder: 'Codelgniter, Yii, Zend Framework',
           no_skills: 'Немає доступних навичок',
+          errorDuplicate: 'Такий навик вже існує',
+          errorRequired: "Це обов'язкове поле",
+          errorLength: 'Назва навички занадто довга',
+          errorQuantity: 'Ви можете додати до 20 навичок',
+          errorNotAvailable: 'Немає доступних навичок',
         },
       },
       interview: {

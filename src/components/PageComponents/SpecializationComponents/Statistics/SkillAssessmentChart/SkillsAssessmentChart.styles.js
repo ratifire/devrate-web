@@ -1,5 +1,5 @@
 export const styles = {
-  interviewChartContainer: (theme) => ({
+  skillsAssessmentChartContainer: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -30,18 +30,20 @@ export const styles = {
     },
   }),
   dropdownPaper: (theme) => ({
-    backgroundColor: theme.palette.background.level3,
+    backgroundColor: theme.palette.neutral[900],
   }),
 
   menuItem: (theme) => ({
+    backgroundColor: theme.palette.neutral[900],
     '&:hover': {
-      backgroundColor: theme.palette.background.level3,
+      backgroundColor: theme.palette.neutral[800],
       color: theme.palette.primary[200],
     },
   }),
   chartWrapper: {
+    fontSize: '12px',
     width: '100%',
-    height: '320px',
+    height: '187px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

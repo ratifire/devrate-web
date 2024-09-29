@@ -1,5 +1,5 @@
 export const styles = {
-  skillsAssessmentChartContainer: (theme) => ({
+  interviewChartContainer: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -30,20 +30,35 @@ export const styles = {
     },
   }),
   dropdownPaper: (theme) => ({
-    backgroundColor: theme.palette.background.level3,
+    backgroundColor: theme.palette.neutral[900]
   }),
 
   menuItem: (theme) => ({
+    backgroundColor: theme.palette.neutral[900],
     '&:hover': {
-      backgroundColor: theme.palette.background.level3,
+      backgroundColor: theme.palette.neutral[800],
       color: theme.palette.primary[200],
     },
   }),
   chartWrapper: {
+    fontSize: '12px',
+    maxWidth: '587px',
     width: '100%',
-    height: 200,
+    height: '340px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+    '& .recharts-default-legend': {
+      fontSize: '14px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      paddingBottom: '10px !important',
+    },
+    '& .legend-item-0': {
+      paddingLeft: '30px',
+    },
+    '& .legend-item-1': {
+      marginRight: '0 !important',
+    }
+  },
 };

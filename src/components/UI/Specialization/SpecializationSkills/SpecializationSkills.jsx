@@ -1,27 +1,32 @@
 import EditIcon from '@mui/icons-material/Edit';
-import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ItemSkill } from '../SkillsItem';
 import { styles } from './SpecializationSkills.styles';
+import { ErrorComponent, LoaderComponent } from '../../Exceptions';
+import { useSelector } from 'react-redux';
 
-const SpecializationSkills = ({ isLoading, isError, skills, averageMark, openModal, errorTitle, title, subTitle }) => {
+const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { t } = useTranslation();
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
 
-  if (isLoading) {
-    return <CircularProgress />;
+  const isDisabled = !activeSpecialization && !mainSpecialization;
+
+  if (isFetching) {
+    return <LoaderComponent />
   }
 
   if (isError) {
-    return <Typography variant='h6'>{t(errorTitle)}</Typography>;
+    return <ErrorComponent />
   }
 
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.title}>
         <Typography variant='h6'>{t(title)}</Typography>
-        <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={openModal}>
+        <IconButton disabled={isDisabled} sx={styles.btnIcon} aria-label='Edit user information' onClick={openModal}>
           <EditIcon />
         </IconButton>
       </Box>
@@ -44,7 +49,7 @@ const SpecializationSkills = ({ isLoading, isError, skills, averageMark, openMod
 };
 
 SpecializationSkills.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired,
   skills: PropTypes.arrayOf(
     PropTypes.shape({
@@ -54,10 +59,9 @@ SpecializationSkills.propTypes = {
       name: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
     })
-  ).isRequired,
+  ),
   averageMark: PropTypes.string.isRequired,
   openModal: PropTypes.func.isRequired,
-  errorTitle: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
 };
