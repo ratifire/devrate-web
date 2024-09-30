@@ -7,7 +7,11 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { styles } from './Schedule.styles';
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/schedule/scheduleApiSlice';
+import {
+  useGetClosestEventByUserIdQuery,
+  useGetEventByUserIdQuery,
+  useLazyGetEventByUserIdQuery,
+} from '../../../redux/schedule/scheduleApiSlice';
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
 
@@ -24,13 +28,13 @@ const Schedule = () => {
   const [isReady, setIsReady] = useState(false);
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [events, setEvents] = useState([]);
-  const [eventStartTime, setEventStartTime] = useState(null);
 
   const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
   const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
     { userId, fromTime },
     { skip: !isReady }
   );
+  const [triggerEvents] = useLazyGetEventByUserIdQuery();
 
   const transformEvents = (events) => {
     return events.map((event) => ({
@@ -57,7 +61,7 @@ const Schedule = () => {
       const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
       setFrom(startOfWeek);
       setTo(endOfWeek);
-      setFromTime(encodeURIComponent(`${startOfWeek}T07:00:00+03:00`));
+      setFromTime(encodeURIComponent(`${startOfWeek}T00:00:00+03:00`));
       setIsReady(true);
 
       const calendarApi = calendarRef.current.getApi();
@@ -66,17 +70,6 @@ const Schedule = () => {
       applyRequiredStyles(calendarApi);
     }
   }, [selectedWeek]);
-
-  useEffect(() => {
-    const calendarApi = calendarRef.current.getApi();
-    if (eventStartTime) {
-      calendarApi.scrollToTime(eventStartTime);
-    }
-    // } else {
-    //   const now = DateTime.now().toFormat('HH:mm:00');
-    //   calendarApi.scrollToTime(now);
-    // }
-  }, [selectedDate]);
 
   useEffect(() => {
     setEvents(transformEvents(currentEvents || []));
@@ -113,7 +106,7 @@ const Schedule = () => {
     }
   };
 
-  const findEventTimeForChosenDay = (newDate) => {
+  const findEventTimeForChosenDay = (newDate, resp) => {
     const luxonDate = DateTime.fromISO(newDate);
 
     if (!luxonDate.isValid) {
@@ -124,12 +117,12 @@ const Schedule = () => {
     const targetMonth = luxonDate.month;
     const targetYear = luxonDate.year;
 
-    const matchingEvents = events.filter((event) => {
-      const eventDate = DateTime.fromISO(event.start);
+    const matchingEvents = resp.filter((event) => {
+      const eventDate = DateTime.fromISO(event.startTime);
       const eventDay = eventDate.day;
       const eventMonth = eventDate.month;
       const eventYear = eventDate.year;
-
+      // console.log(eventDay, targetDay, eventMonth, targetMonth, eventYear, targetYear);
       return eventDay === targetDay && eventMonth === targetMonth && eventYear === targetYear;
     });
 
@@ -137,18 +130,33 @@ const Schedule = () => {
       return null;
     }
 
-    const startTime = DateTime.fromISO(matchingEvents[0].start).toLocal();
+    const startTime = DateTime.fromISO(matchingEvents[0].startTime).toLocal();
     const adjustedTime = startTime.minus({ hours: 1 });
 
     return adjustedTime.toFormat('HH:mm:ss');
   };
 
-  const handleDateChange = (newDate) => {
+  const handleDateChange = async (newDate) => {
+    const calendarApi = calendarRef.current.getApi();
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
-    const startTime = findEventTimeForChosenDay(newDate);
-    setEventStartTime(startTime);
+
+    const chosenDay = DateTime.fromISO(newDate);
+    const year = chosenDay.year;
+
+    const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
+
+    const { data: resp } = await triggerEvents({ userId, from: startOfWeek, to: endOfWeek });
+    const startTime = findEventTimeForChosenDay(newDate, resp);
+    calendarApi.gotoDate(startOfWeek);
+
+    if (startTime) {
+      calendarApi.scrollToTime(startTime);
+    } else {
+      const now = DateTime.now().toFormat('HH:mm:00');
+      calendarApi.scrollToTime(now);
+    }
   };
 
   const handleEventClick = (info) => {
