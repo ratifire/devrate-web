@@ -3,7 +3,7 @@
 import { apiSlice } from '../services/api/apiSlice';
 
 export const SpecializationApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['Specialization', 'Masteries', 'MainMastery', 'HardSkills'],
+  tagTypes: ['Specialization', 'Masteries', 'MainMastery', 'HardSkills', 'SoftSkills'],
   endpoints: (builder) => ({
     getSpecializationByUserId: builder.query({
       query: (userId) => `/users/${userId}/specializations`,
@@ -20,10 +20,14 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
     }),
 
     createNewSpecialization: builder.mutation({
-      query: ({ userId, data }) => ({
+      query: ({ userId, name, mainMasteryName, main }) => ({
         url: `/users/${userId}/specializations`,
         method: 'POST',
-        body: { ...data },
+        body: { 
+          name,
+          mainMasteryName: mainMasteryName.toUpperCase(),
+          main
+        },
       }),
       invalidatesTags: ['Specialization'],
     }),
@@ -40,13 +44,15 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
 
     getMasteriesBySpecializationId: builder.query({
       query: (id) => `/specializations/${id}/masteries`,
+      providesTags: ['Masteries']
     }),
 
     getMainMasteryBySpecializationId: builder.query({
       query: (specializationId) => `/specializations/${specializationId}/main-mastery`,
       transformResponse(result) {
         return { ...result, level: result.level.charAt(0) + result.level.slice(1).toLowerCase() };
-      }
+      },
+      providesTags: (result, error, id) => [{ type: 'MainMastery', id }],
     }),
 
     setNewMainMasteryBySpecIdAndMasteryId: builder.mutation({
@@ -57,6 +63,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           body: { id: masteryId, name, softSkillMark, hardSkillMark },
         };
       },
+      invalidatesTags: (result, error, { masteryId }) => [{ type: 'MainMastery', id: masteryId }],
     }),
 
     updateSpecializationById: builder.mutation({

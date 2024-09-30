@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  activeMastery: 'JUNIOR',
+  activeMastery: '',
 };
 
 const activeMasterySlice = createSlice({
@@ -9,7 +9,7 @@ const activeMasterySlice = createSlice({
   initialState,
   reducers: {
     setActiveMastery: (state, action) => {
-      state.activeMastery = action.payload.toUpperCase();
+      state.activeMastery = action.payload?.toUpperCase();
     },
   },
 });

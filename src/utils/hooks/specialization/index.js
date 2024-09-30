@@ -1,5 +1,5 @@
 import useGetMastery from './useGetMastery';
 import useGetSpecializationId from './useGetSpecializationId';
-import useUserSkillsAndMasteryData from './useUserSkillsAndMasteryData';
+import useHardSkillData from './useHardSkillData';
 
-export { useGetMastery, useGetSpecializationId, useUserSkillsAndMasteryData };
+export { useGetMastery, useGetSpecializationId, useHardSkillData };

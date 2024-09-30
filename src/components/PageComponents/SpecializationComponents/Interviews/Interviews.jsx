@@ -1,7 +1,7 @@
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Mood from '@mui/icons-material/Mood';
 import { Box, Button, Divider, Popover, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
@@ -10,20 +10,36 @@ import { styles } from './Interviews.styles';
 const Interviews = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const buttonRef = useRef(null);
+  const [popoverWidth, setPopoverWidth] = useState(0);
   const [createButton, setCreateButton] = useState(null);
   const open = Boolean(createButton);
+
   const { activeSpecialization, mainSpecialization, fullSpecializations } = useSelector(
     (state) => state.specialization
   );
+
+  const isDisabled = !activeSpecialization && !mainSpecialization;
+
+  useEffect(() => {
+    if (buttonRef.current) {
+      setPopoverWidth(buttonRef.current.offsetWidth);
+    }
+  }, []);
+
   const mainSpec = activeSpecialization || mainSpecialization;
 
-  const activeInterviews = fullSpecializations?.find((spec) => spec.id === mainSpec.id);
+  const activeInterviews = fullSpecializations?.find((spec) => spec.id === mainSpec?.id);
 
   const scheduleClickHandler = (event) => {
     setCreateButton(event.currentTarget);
+    buttonRef.current.setAttribute('data-active', 'true');
   };
 
-  const closeHandler = () => setCreateButton(null);
+  const closeHandler = () => {
+    setCreateButton(null);
+    buttonRef.current.setAttribute('data-active', 'false');
+  }
 
   const createInterviewRequest = () => {
     dispatch(openModal({ modalName: 'scheduleInterview', data: { role: 'INTERVIEWER' } }));
@@ -56,16 +72,24 @@ const Interviews = () => {
         </Box>
       </Box>
       <Button
+        ref={buttonRef}
         variant='contained'
         type='button'
         color='primary'
         sx={styles.buttonPrimary}
         onClick={scheduleClickHandler}
+        disabled={isDisabled}
       >
         {t('specialization.modal.interview.makeIncome')}
         <KeyboardArrowDown />
       </Button>
       <Popover
+        sx={styles.popover}
+        slotProps={{
+          root: {
+            style: { width: popoverWidth },
+          },
+        }}
         open={open}
         anchorEl={createButton}
         onClose={closeHandler}

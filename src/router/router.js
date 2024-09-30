@@ -4,10 +4,10 @@ import navigationLinks from './links';
 import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
 import RequireAuth from '../redux/auth/RequireAuth';
-import ProfilePage from '../pages/ProfilePage';
+import PersonalProfilePage from '../pages/ProfilePages/PersonalProfilePage';
 import SpecializationPage from '../pages/SpecializationPage';
 import SchedulePage from '../pages/ShedulePage';
-import OtherProfilePage from '../pages/OtherProfile';
+import UserProfilePage from '../pages/ProfilePages/UserProfilePage';
 import ToastLayout from '../layouts/ToastLayout/ToastLayout';
 
 const router = createBrowserRouter([
@@ -25,11 +25,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: navigationLinks.profile,
-            element: <ProfilePage />,
+            element: <PersonalProfilePage />,
           },
           {
             path: `${navigationLinks.profile}/:userId`,
-            element: <OtherProfilePage />,
+            element: <UserProfilePage />,
           },
           {
             path: navigationLinks.schedule,

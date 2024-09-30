@@ -9,7 +9,6 @@ export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    // gridGap: `${theme.spacing(4)} ${theme.spacing(3)}`,
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(4),
   }),

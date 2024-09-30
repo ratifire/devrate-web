@@ -7,7 +7,7 @@ import { ReactComponent as Loupe } from '../../../assets/icons/loupe.svg';
 import { useFormik } from 'formik';
 import UserAvatar from '../../UI/UserAvatar';
 import Menu from '../Menu';
-import NotificationList from '../ProfileComponents/NotificationList';
+import NotificationList from '../ProfileComponents/PersonalProfile/NotificationList';
 import { useSelector } from 'react-redux';
 import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
 import { selectCurrentUser } from '../../../redux/auth/authSlice';

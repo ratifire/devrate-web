@@ -1,5 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
-import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,12 +15,15 @@ import {
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';
 
 const SoftSkillsModal = () => {
   const [state, setState] = useState({
     skill: '',
+    helperText: '',
+    error: false,
     addSkill: [],
     allSkills: [],
     idDeletedSkills: [],
@@ -29,29 +32,30 @@ const SoftSkillsModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSoftSkillsModal);
-  const { isLoading: isLoadingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
+  const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
   const {
     data: skills,
-    isLoading: isLoadingSkills,
+    isFetching: isFetchingSkills,
     isError: isErrorSkills,
   } = useGetSoftSkillsByMasteryIdQuery({ masteryId }, { skip: !masteryId });
-  const [deleteSkill] = useDeleteSkillByIdMutation();
-  const [addSkillToMastery] = useAddSkillToMasteryMutation();
+  const [deleteSkill, { isLoading: isLoadingDeleteSkill }] = useDeleteSkillByIdMutation();
+  const [addSkillToMastery, { isLoading: isLoadingAddSkill }] = useAddSkillToMasteryMutation();
   const {
     data,
-    isLoading: isLoadingAvailableSkills,
+    isFetching: isFetchingAvailableSkills,
     isError: isErrorAvailableSkills,
   } = useGetAvailableSoftSkillsQuery();
 
   const { skill, addSkill, availableSkills, allSkills, idDeletedSkills } = state;
-  const isLoading = isLoadingMastery || isLoadingSkills || isLoadingAvailableSkills;
+  const isLoading =
+    isFetchingMastery || isFetchingSkills || isFetchingAvailableSkills || isLoadingDeleteSkill || isLoadingAddSkill;
   const isError = isErrorMastery || isErrorSkills || isErrorAvailableSkills;
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
   const updateState = (newState) => setState((prevState) => ({ ...prevState, ...newState }));
 
   useEffect(() => {
-    if (!isLoadingSkills || !isLoadingAvailableSkills || data) {
+    if (!isFetchingSkills || !isFetchingAvailableSkills || data) {
       const filteredSkills = data?.filter((v) => !skills?.some((skill) => skill.name === v)) || [];
 
       updateState({
@@ -59,11 +63,27 @@ const SoftSkillsModal = () => {
         allSkills: skills,
       });
     }
-  }, [isLoadingSkills, isLoadingAvailableSkills, data]);
+  }, [isFetchingSkills, isFetchingAvailableSkills, data]);
+
+  const handleChange = (e) => {
+    updateState({
+      skill: e.target.value,
+      error: false,
+      errorText: '',
+    });
+  };
 
   const handleAddSkill = () => {
     const isSkillExist = allSkills.find((v) => v.name === skill);
     const isAddedSkill = skills.find((v) => v.name === skill);
+
+    if (!availableSkills.length) {
+      return updateState({ helperText: 'specialization.modal.skills.errorNotAvailable', error: true });
+    }
+
+    if (!skill) {
+      return updateState({ helperText: 'specialization.modal.skills.errorRequired', error: true });
+    }
 
     const id = isAddedSkill?.id || uuidv4();
 
@@ -86,11 +106,15 @@ const SoftSkillsModal = () => {
 
     if (isSkillExist) {
       updateState({
+        error: false,
+        errorText: '',
         idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
       });
     }
 
     updateState({
+      error: false,
+      errorText: '',
       availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
       allSkills: allSkills.filter((skill) => skill.id !== skillId),
       addSkill: addSkill.filter((skill) => skill.id !== skillId),
@@ -115,53 +139,53 @@ const SoftSkillsModal = () => {
     handleClose();
   };
 
-  if (isLoading) {
-    return <CircularProgress />;
-  }
-
-  if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
-  }
-
   const labelInput = availableSkills.length
     ? 'specialization.modal.skills.title'
     : 'specialization.modal.skills.no_skills';
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
-      <Typography variant='h6' sx={styles.title}>
-        {t('specialization.modal.skills.title')}
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        <Box sx={styles.input}>
-          <CountrySelect
-            label={t(labelInput)}
-            value={skill}
-            countries={availableSkills}
-            disabled={availableSkills?.length === 0}
-            variant='standard'
-            name='softSkill'
-            handleChange={({ target }) => updateState({ skill: target.value })}
-          />
-          <IconButton disabled={!skill} sx={styles.iconBtn} onClick={handleAddSkill}>
-            <AddIcon />
-          </IconButton>
-        </Box>
-        <Box sx={styles.input}>
-          <Box>
-            {allSkills?.map((skill) => (
-              <SkillChip key={skill.name} skill={skill} onDelete={handleDeleteSkill} />
-            ))}
-          </Box>
-        </Box>
-        <ButtonDef
-          variant='contained'
-          type='submit'
-          label={t('profile.modal.btn')}
-          correctStyle={styles.btn}
-          disabled={addSkill.length === 0 && idDeletedSkills.length === 0}
-        />
-      </form>
+      {isError && <ErrorComponent />}
+      {isLoading && <LoaderComponent />}
+      {!isLoading && (
+        <>
+          <Typography variant='h6' sx={styles.title}>
+            {t('specialization.modal.skills.title')}
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <Box sx={styles.input}>
+              <CountrySelect
+                label={t(labelInput)}
+                value={skill}
+                countries={availableSkills}
+                helperText={t(state.helperText)}
+                error={state.error}
+                disabled={availableSkills?.length === 0}
+                variant='standard'
+                name='softSkill'
+                handleChange={handleChange}
+              />
+              <IconButton sx={styles.iconBtn} onClick={handleAddSkill}>
+                <AddIcon />
+              </IconButton>
+            </Box>
+            <Box sx={styles.input}>
+              <Box>
+                {allSkills?.map((skill) => (
+                  <SkillChip key={skill.name} skill={skill} onDelete={handleDeleteSkill} />
+                ))}
+              </Box>
+            </Box>
+            <ButtonDef
+              variant='contained'
+              type='submit'
+              label={t('profile.modal.btn')}
+              correctStyle={styles.btn}
+              disabled={addSkill.length === 0 && idDeletedSkills.length === 0}
+            />
+          </form>
+        </>
+      )}
     </ModalLayoutProfile>
   );
 };
