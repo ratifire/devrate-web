@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Container,Paper, Switch, Typography} from '@mui/material';
+import {Box, Container,Paper, Typography} from '@mui/material';
 import { styles } from './SchedulePage.styles';
 import ProfileHeader from '../../components/PageComponents/ProfileHeader';
 import Schedule from '../../components/PageComponents/ScheduleComponents';
