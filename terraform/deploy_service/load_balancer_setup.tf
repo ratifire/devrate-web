@@ -16,7 +16,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
   port                 = var.front_port
   protocol             = "HTTP"
   vpc_id               = data.aws_vpcs.all_vpcs.ids[0]
-  deregistration_delay = "120"
+  deregistration_delay = "30"
   stickiness {
     type            = "lb_cookie"
     cookie_duration = "86400"
@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
   health_check {
     healthy_threshold   = 2
     unhealthy_threshold = 2
-    interval            = 180
+    interval            = 150
     protocol            = "HTTP"
     path                = "/"
     matcher             = "200-305"
