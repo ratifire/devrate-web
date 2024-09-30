@@ -36,27 +36,6 @@ const Schedule = () => {
   );
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
 
-  const transformEvents = (events) => {
-    return events.map((event) => ({
-      id: event.id,
-      title: event.type,
-      start: event.startTime,
-      backgroundColor: event.type === 'INTERVIEW' ? '#DAFE22' : '#FCA728',
-      textColor: "#1D1D1D"
-    }));
-  };
-
-  const getWeekStartAndEnd = (year, weekNumber) => {
-    const firstDayOfYear = DateTime.local(year).startOf('year');
-    const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
-    const lastDayOfWeek = firstDayOfWeek.endOf('week');
-
-    return {
-      startOfWeek: firstDayOfWeek.toISODate(),
-      endOfWeek: lastDayOfWeek.toISODate(),
-    };
-  };
-
   useEffect(() => {
     if (selectedWeek !== null && calendarRef.current) {
       const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
@@ -81,32 +60,6 @@ const Schedule = () => {
     }
   }, [currentEvents]);
 
-  const applyRequiredStyles = (calendarApi) => {
-    if (calendarApi) {
-      const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
-      const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
-      const timeGridHeadElements = calendarApi.el.querySelectorAll(
-        '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
-      );
-      const timeGridEventElements = calendarApi.el.querySelectorAll(
-        '.fc-timegrid-event-harness-inset .fc-timegrid-event'
-      );
-
-      timeGridSlotElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridTableData);
-      });
-      timeGridTodayElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridTodayElements);
-      });
-      timeGridHeadElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridTableHead);
-      });
-      timeGridEventElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridEventElements);
-      });
-    }
-  };
-
   const findEventTimeForChosenDay = (newDate, resp) => {
     const luxonDate = DateTime.fromISO(newDate);
 
@@ -123,7 +76,6 @@ const Schedule = () => {
       const eventDay = eventDate.day;
       const eventMonth = eventDate.month;
       const eventYear = eventDate.year;
-      // console.log(eventDay, targetDay, eventMonth, targetMonth, eventYear, targetYear);
       return eventDay === targetDay && eventMonth === targetMonth && eventYear === targetYear;
     });
 
@@ -150,7 +102,6 @@ const Schedule = () => {
 
     const { data: resp } = await triggerEvents({ userId, from: startOfWeek, to: endOfWeek });
     const startTime = findEventTimeForChosenDay(newDate, resp);
-    calendarApi.gotoDate(startOfWeek);
 
     if (startTime) {
       calendarApi.scrollToTime(startTime);
@@ -166,15 +117,15 @@ const Schedule = () => {
         const calendarApi = calendarRef.current.getApi();
         const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
         if (scroller) {
-              scroller.style.overflow = 'hidden';
-          }
+          scroller.style.overflow = 'hidden';
+        }
       }
       const rect = info.el.getBoundingClientRect();
       let x = rect.left + 120;
       let y = rect.top - 140;
       setEvent(currentClosestEvents[0]);
       if (rect.left > window.innerWidth / 2) {
-         // x = rect.left - 450;
+        // x = rect.left - 450;
         x = rect.left - window.innerWidth / 5;
       }
       if (rect.left < window.innerWidth / 2) {
@@ -214,7 +165,6 @@ const Schedule = () => {
         x: x,
         y: y,
       });
-      
     }
   };
 
@@ -310,6 +260,53 @@ const Schedule = () => {
       </Box>
     </Box>
   );
+};
+
+const transformEvents = (events) => {
+  return events.map((event) => ({
+    id: event.id,
+    title: event.type,
+    start: event.startTime,
+    backgroundColor: event.type === 'INTERVIEW' ? '#DAFE22' : '#FCA728',
+    textColor: '#1D1D1D',
+  }));
+};
+
+const getWeekStartAndEnd = (year, weekNumber) => {
+  const firstDayOfYear = DateTime.local(year).startOf('year');
+  const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
+  const lastDayOfWeek = firstDayOfWeek.endOf('week');
+
+  return {
+    startOfWeek: firstDayOfWeek.toISODate(),
+    endOfWeek: lastDayOfWeek.toISODate(),
+  };
+};
+
+const applyRequiredStyles = (calendarApi) => {
+  if (calendarApi) {
+    const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
+    const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
+    const timeGridHeadElements = calendarApi.el.querySelectorAll(
+      '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
+    );
+    const timeGridEventElements = calendarApi.el.querySelectorAll(
+      '.fc-timegrid-event-harness-inset .fc-timegrid-event'
+    );
+
+    timeGridSlotElements.forEach((el) => {
+      Object.assign(el.style, styles.timeGridTableData);
+    });
+    timeGridTodayElements.forEach((el) => {
+      Object.assign(el.style, styles.timeGridTodayElements);
+    });
+    timeGridHeadElements.forEach((el) => {
+      Object.assign(el.style, styles.timeGridTableHead);
+    });
+    timeGridEventElements.forEach((el) => {
+      Object.assign(el.style, styles.timeGridEventElements);
+    });
+  }
 };
 
 export default Schedule;
