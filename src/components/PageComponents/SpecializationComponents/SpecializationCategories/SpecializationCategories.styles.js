@@ -21,6 +21,7 @@ export const styles = {
 
     '&::-webkit-scrollbar': {
       width: 10,
+      height: 10,
     },
     '&::-webkit-scrollbar-track': {
       backgroundColor: theme.palette.neutral['600'],

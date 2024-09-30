@@ -1,24 +1,24 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
-import { useUserSkillsAndMasteryData } from '../../../../../utils/hooks/specialization';
-import roundData from '../../HardSkills/roundData';
-import { styles } from './HardSkillsChart.style.js';
-import { useTooltip } from '../utils';
+import useHardSkillData from '../../../../../utils/hooks/specialization/useHardSkillData';
+import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
+import { roundData, useTooltip } from '../utils';
+import { styles } from './HardSkillsChart.styles.js';
 
 const HardSkillsChart = () => {
   const { tooltipContent, tooltipLabel } = useTooltip();
-  const { skills, isLoading, isError } = useUserSkillsAndMasteryData();
+  const { skills, isFetching, isError } = useHardSkillData();
   const { t } = useTranslation();
   const roundedSkills = roundData(skills);
 
-  if (isLoading) {
-    return <CircularProgress />;
+  if (isFetching) {
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />;
   }
 
   return (
@@ -44,7 +44,7 @@ const HardSkillsChart = () => {
         <defs>
           <linearGradient id='gradient2' x1='0%' y1='0%' x2='100%' y2='0%'>
             <stop offset='0%' style={{ stopColor: '#16FFB9', stopOpacity: 1 }} />
-            <stop offset='100%' style={{ stopColor: '#25CBFF', stopOpacity: 1 }} />
+            <stop offset='100%' style={{ stopColor: '#DAFE22', stopOpacity: 1 }} />
           </linearGradient>
         </defs>
       </RadarChart>

@@ -8,18 +8,18 @@ const useTooltip = () => {
     backgroundColor: theme.palette.background.level2,
     border: 'none',
     borderRadius: 1,
-  }
+  };
 
   const tooltipLabel = {
     color: theme.palette.common.white,
     backgroundColor: theme.palette.background.level2,
-    fontSize: '14px',
-  }
+    fontSize: '12px',
+  };
 
   return {
     tooltipContent,
-    tooltipLabel
-  }
-}
+    tooltipLabel,
+  };
+};
 
 export default useTooltip;

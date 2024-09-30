@@ -181,18 +181,51 @@ export const uk = {
         complete: 'Вітаємо! Ваш профіль повністю заповнений'
       },
       experience: {
-        workExperience: 'Досвід роботи',
-        achievement: 'Досягнення',
-        skills: {
-          title: 'Навички',
-          search: 'Пошук',
-          star: 'Основна спеціалізація',
+        workExperience:{
+          tabName: 'Досвід роботи',
+          emptyTabName: {
+            tabName: 'Досвід роботи',
+            title: 'Додайте інформацію про свій досвід роботи',
+            subTitle: 'Це допоможе іншим користувачам дізнатися про вас більше!',
+            button: 'Додати досвід роботи'
+          },
         },
-        education: 'Освіта',
+        achievement: {
+          tabName:  'Досягнення',
+          emptyTabName: {
+            tabName:  'Досягнення',
+            title: 'Додайте інформацію про свої досягнення',
+            subTitle: 'Ви можете додати свої сертифікати чи інші досягнення та прикріпити до них посилання!',
+            button: 'Додайте досягнення'
+          }
+        },
+        skills: {
+          tabName: 'Навички',
+          emptyTabName: {
+            tabName: 'Навички',
+            title: 'Додайте інформацію про свої навички',
+            subTitle: 'Додайте спеціалізації та навички з них, якими ви зараз володієте!',
+            button: 'Додайте спеціалізації'
+          },
+          education: {
+            tabName: 'Освіта',
+            emptyTabName: {
+              tabName: 'Освіта',
+              title: 'Додайте інформацію про свою освіту',
+              subTitle: 'Розкажіть іншим користувачам про місця, які ви вивчали, та отриманий досвід!',
+              button: 'Додайте освіту'
+            }
+          },
         duties: 'Обовʼязки',
         endYear: 'Теп. час',
       },
       right: {
+        empty: {
+          emptyLanguages: 'Ви ще не додали жодної мови.',
+          emptyAboutMe: 'Ви ще не додали інформацію про себе.\n' +
+            'Для того, щоб редагувати інформацію про себе, зайдіть в налаштування профілю.',
+        },
+      },
         contact: 'Контактна інформація',
         languages: 'Мови',
         aboutMe: 'Про мене',
@@ -322,9 +355,14 @@ export const uk = {
       specialization_btn_make_main: 'Зробити основною',
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',
+      error: 'Щось пішло не так...',
       level: {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
+      },
+      interviewsChart: {
+        conducted: 'Проведено',
+        passed: 'Пройдено',
       },
       interviewChartMonths: {
         '01': 'Січ',
@@ -366,11 +404,18 @@ export const uk = {
           mastery_helper_text:
             'Рівень для формування Вашої статистики, яка буде відібражатися в на сторінці Вашого профілю',
           required: "Це обов'язкове поле",
+          max_length: 'Назва вміння може мати довжину не більше 100 символів',
+          errorDuplicate: 'Така спеціалізація вже існує',
         },
         skills: {
           title: 'Навички',
           placeholder: 'Codelgniter, Yii, Zend Framework',
           no_skills: 'Немає доступних навичок',
+          errorDuplicate: 'Такий навик вже існує',
+          errorRequired: "Це обов'язкове поле",
+          errorLength: 'Назва навички занадто довга',
+          errorQuantity: 'Ви можете додати до 20 навичок',
+          errorNotAvailable: 'Немає доступних навичок',
         },
       },
       interview: {

@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,22 +7,26 @@ import { setActiveMastery } from '../../../../redux/specialization/activeMastery
 import { useGetMainMasteryBySpecializationIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetSpecializationId } from '../../../../utils/hooks/specialization';
 import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { styles } from './SpecializationLevel.styles';
 
 const SpecializationLevel = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const specializationId = useGetSpecializationId();
-  const {
-    data: mastery,
-    isLoading,
-    isError,
-  } = useGetMainMasteryBySpecializationIdQuery(specializationId, { skip: !specializationId });
+  const { data, isFetching, isError } = useGetMainMasteryBySpecializationIdQuery(specializationId, {
+    skip: !specializationId,
+  });
 
+  const mastery = specializationId ? data : '';
+  const isDisabled = !activeSpecialization && !mainSpecialization;
   useEffect(() => {
     if (mastery) {
-      dispatch(setActiveMastery(mastery.level));
+      dispatch(setActiveMastery(mastery?.level));
+    } else {
+      dispatch(setActiveMastery(''));
     }
   }, [mastery]);
 
@@ -30,12 +34,12 @@ const SpecializationLevel = () => {
     dispatch(setActiveMastery(label));
   };
 
-  if (isLoading) {
-    return <CircularProgress />;
+  if (isFetching) {
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />;
   }
 
   return (
@@ -52,6 +56,7 @@ const SpecializationLevel = () => {
           variant='contained'
           aria-label='Specialization level button group'
           color='secondary'
+          disabled={isDisabled}
         >
           {['JUNIOR', 'MIDDLE', 'SENIOR'].map((label) => (
             <ButtonDef

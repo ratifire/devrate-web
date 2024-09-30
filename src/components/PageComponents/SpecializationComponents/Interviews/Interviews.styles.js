@@ -29,18 +29,32 @@ export const styles = {
     display: 'flex',
     gap: theme.spacing(4),
   }),
-  buttonPrimary: () => ({
+  buttonPrimary: (theme) => ({
     fontSize: 14,
     textTransform: 'none',
     fontWeight: 500,
+    width: '100%',
+    '&:disabled': {
+      backgroundColor: theme.palette.background.btnGroup,
+    },
+    '&[data-active="true"]': {
+      borderRadius: '4px 4px 0 0'
+    },
   }),
   popoverWrapper: (theme) => ({
     padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    gap: theme.spacing(2),
     backgroundColor: theme.palette.neutral[800],
+  }),
+  popover: (theme) => ({
+    '& .MuiPaper-root.MuiPopover-paper.css-4w3m95-MuiPaper-root-MuiPopover-paper': {
+      borderRadius: '0 0 4px 4px',
+      backgroundColor: theme.palette.neutral[800],
+      maxWidth: '432px',
+      width: 'inherit',
+    },
   }),
   divider: (theme) => ({
     borderColor: theme.palette.neutral[600],

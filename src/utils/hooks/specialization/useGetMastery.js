@@ -7,23 +7,16 @@ const useGetMastery = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const specializationId = useGetSpecializationId();
 
-  const {
-    data: masteries,
-    isLoading: isLoadingMasteries,
-    isError: isErrorMasteries,
-  } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
+  const { data: dataMasteries, isError, isFetching } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
 
-  const selectMastery = masteries?.find(
-    (mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase()
-  );
+  const data = specializationId ? dataMasteries : []
+
+  const selectMastery = data?.find((v) => v.level && v.level.toUpperCase() === activeMastery.toUpperCase()) || null;
 
   const masteryId = selectMastery?.id;
 
-  const isLoading = isLoadingMasteries;
-  const isError = isErrorMasteries;
-
   return {
-    isLoading,
+    isFetching,
     isError,
     masteryId,
     userId,

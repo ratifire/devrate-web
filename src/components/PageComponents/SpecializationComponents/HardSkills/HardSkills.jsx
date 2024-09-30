@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
-import { useUserSkillsAndMasteryData } from '../../../../utils/hooks/specialization';
+import { useHardSkillData } from '../../../../utils/hooks/specialization';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
 
 const HardSkills = () => {
-  const { skills, isError, isLoading, activeMastery } = useUserSkillsAndMasteryData();
+  const { skills, isError, isFetching, activeMastery } = useHardSkillData();
   const dispatch = useDispatch();
 
   const handleModalOpen = () => {
@@ -17,13 +17,12 @@ const HardSkills = () => {
 
   return (
     <SpecializationSkills
-      isLoading={isLoading}
+      isFetching={isFetching}
       skills={skills}
       averageMark={averageMark}
       isError={isError}
       openModal={handleModalOpen}
       subTitle='specialization.hardSkills.averageMark'
-      errorTitle='specialisation.hardSkills.error'
       title='specialization.hardSkills.title'
     />
   );
