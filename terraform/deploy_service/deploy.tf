@@ -112,6 +112,7 @@ resource "aws_ecs_service" "front_services" {
   force_new_deployment               = true
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
+  health_check_grace_period_seconds = 150
   capacity_provider_strategy {
     capacity_provider = aws_ecs_capacity_provider.front_capacity_provider.name
     base              = 1
