@@ -73,7 +73,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
   max_size                  = 2
   desired_capacity          = 2
   health_check_type         = "EC2"
-  health_check_grace_period = 150
+  health_check_grace_period = 180
   vpc_zone_identifier       = data.aws_subnets.default_subnets.ids
   force_delete              = true
   termination_policies      = ["OldestInstance"]
@@ -81,7 +81,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
     lifecycle_transition = "autoscaling:EC2_INSTANCE_TERMINATING"
     name                 = "ecs-managed-draining-termination-hook"
     default_result       = "CONTINUE"
-    heartbeat_timeout    = 100
+    heartbeat_timeout    = 120
   }
   dynamic "tag" {
     for_each = {
@@ -112,7 +112,7 @@ resource "aws_ecs_service" "front_services" {
   force_new_deployment               = true
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
-  health_check_grace_period_seconds  = 150
+  health_check_grace_period_seconds  = 180
   capacity_provider_strategy {
     capacity_provider = aws_ecs_capacity_provider.front_capacity_provider.name
     base              = 1
