@@ -3,7 +3,6 @@ import  emptyAchievementPic from '../../assets/pictures/emptyExperienceTabPictur
 import  emptySkillsPic from '../../assets/pictures/emptyExperienceTabPictures/PersonalProfilePages/Skills/emptySkillPicture.svg';
 import emptyEducationPic from '../../assets/pictures/emptyExperienceTabPictures/PersonalProfilePages/Education/emptyEducationPicture.svg';
 
-
 export const emptyPersonalTabsPictures = {
   emptyWorkExperiencePic: emptyWorkExperiencePic,
   emptyAchievementPic: emptyAchievementPic,

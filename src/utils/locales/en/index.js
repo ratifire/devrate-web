@@ -123,7 +123,7 @@ export const en = {
         main_text1: 'To finish your account settings, You should confirm your email',
         main_text2: 'Check you email and enter confirmation code',
         btn_confirm: 'Register',
-        spam_check_text: "Didn't receive the letter? Check your spam folder.",
+        spam_check_text: 'Didn\'t receive the letter? Check your spam folder.',
         repeat_request_link: 'Please resend',
         repeat_request_text1: 'request',
         repeat_request_text2: 'or',
@@ -186,8 +186,9 @@ export const en = {
             tabName: 'Work experience',
             title: 'Add information about your work experience',
             subTitle: 'This will help other users to learn more about you!',
-            button: 'Add work experience',
+            button: 'Add work experience'
           },
+
         },
         achievement: {
           tabName: 'Achievement',
@@ -195,8 +196,8 @@ export const en = {
             tabName: 'Achievement',
             title: 'Add information about your achievements',
             subTitle: 'You can add your certificates or other achievements and attach links to them!',
-            button: 'Add achievements',
-          },
+            button: 'Add achievements'
+          }
         },
         skills: {
           tabName: 'Skills',
@@ -204,7 +205,7 @@ export const en = {
             tabName: 'Skills',
             title: 'Add information about your skills',
             subTitle: 'Add specializations and skills from them that you currently possess!',
-            button: 'Add specializations',
+            button: 'Add specializations'
           },
           title: 'Skills',
           search: 'Search',
@@ -216,8 +217,8 @@ export const en = {
             tabName: 'Education',
             title: 'Add information about your education',
             subTitle: 'Tell other users about the places you studied and the experience you gained!',
-            button: 'Add education',
-          },
+            button: 'Add education'
+          }
         },
         duties: 'Duties',
         endYear: 'Present',
@@ -225,8 +226,7 @@ export const en = {
       right: {
         empty: {
           emptyLanguages: 'You have not added any language yet.',
-          emptyAboutMe:
-            'You have not added information about yourself yet.\n' +
+          emptyAboutMe: 'You have not added information about yourself yet.\n' +
             'To edit your information, go to your profile settings.',
         },
         contact: 'Contact Information',
@@ -471,7 +471,7 @@ export const en = {
       host: 'Host',
       cancelEventBtn: 'Cancel event',
       popupUserInfo: 'Info about you',
-      popupInterviewerInfo: 'Info about the interviewee',
+      popupInterviewerInfo: 'Info about you',
       popupRole: 'Role:',
     },
   },

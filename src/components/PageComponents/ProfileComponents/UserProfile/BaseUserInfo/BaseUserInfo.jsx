@@ -49,6 +49,7 @@ const BaseUserInfo = ({ id }) => {
             userName={`${getFirstName} ${getLastName}`}
             src={userPicture}
             size="l"
+            correctStyle={styles.correctAvatar}
           />
         )}
       </Box>

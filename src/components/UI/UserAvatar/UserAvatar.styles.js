@@ -10,8 +10,8 @@ export const styles = {
   },
   l: {
     borderRadius: 1,
-    width: '132px',
-    height: '132px',
+    width: '152px',
+    height: '152px',
     fontSize: 48,
     lineHeight: '56px',
     letterSpacing: '0px',
