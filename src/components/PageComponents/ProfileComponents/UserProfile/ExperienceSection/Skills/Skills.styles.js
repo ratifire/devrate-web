@@ -118,10 +118,19 @@ export const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     gridGap:'0 32px',
-    maxHeight: '220px',
+    maxHeight: '200px',
     paddingRight: '16px',
     '>div': {
-      flex: '1 1 calc(50% - 16px)'
+      flex: '0 1 calc(50% - 16px)',
+      maxWidth: '291px',
+      width: '2vw',
+      textWrap: 'nowrap',
+      ">span":{
+        display: 'inline-block',
+        width: '100%',
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+      },
     },
     '&::-webkit-scrollbar': {
       width: 6,
@@ -136,19 +145,22 @@ export const styles = {
     }),
   },
   text: (theme) => ({
-    textTransform: 'capitalize',
-    '&.Junior': {
+    '&.JUNIOR': {
       color: theme.palette.info.main,
     },
-    '&.Middle': {
+    '&.MIDDLE': {
       color: theme.palette.info.azure,
     },
-    '&.Senior': {
+    '&.SENIOR': {
       color: theme.palette.info.lime,
     },
-    '&:first-letter': {
-      textTransform: 'uppercase',
-    },
+    '>span': {
+      textTransform: 'lowercase',
+      display: 'inline-block',
+      '&:first-letter': {
+        textTransform: 'uppercase',
+      },
+    }
   }),
   btnIcon:(theme) => ( {
     position: 'absolute',

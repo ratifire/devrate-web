@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, IconButton, MenuItem, Select, Typography } from '@mui/material';
 import { styles } from './Skills.styles';
-import {
-  useGetHardSkillsByMasteryIdQuery,
-  useGetMainMasteryBySpecializationIdQuery,
-  useGetSpecializationByUserIdQuery,
-} from '../../../../../../redux/specialization/specializationApiSlice';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import StarIcon from '@mui/icons-material/Star';
 import PropTypes from 'prop-types';
@@ -16,47 +11,39 @@ import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/Emp
 import SearchIcon from '@mui/icons-material/Search';
 import { sortedSkills } from '../../../../../../utils/helpers/sortedSkills';
 import { sortSkillsByOriginal } from '../../../../../../utils/helpers/sortedSkillsByOriginal';
+import { useGetUserAllSpecializationQuery } from '../../../../../../redux/user/personal/personalApiSlice';
+import { updateAllSpecializations } from './updateAllSpecialization';
 
 const Skills = ({ id, tab, profileType, imgUrl }) => {
   const [specCurrent, setSpecCurrent] = useState('');
+  const { data: userAllSpecializations, isLoading } = useGetUserAllSpecializationQuery(id);
   
-  const { data: specializations , isLoading } = useGetSpecializationByUserIdQuery(id);
-  
-  const selectedSpecialization = specializations?.find((s) => s.name === specCurrent);
-  
-  const { data: specializationsLevel } = useGetMainMasteryBySpecializationIdQuery(selectedSpecialization?.id);
-  
-  const level = specializationsLevel?.level;
-  
-  const { data: skills = [] } = useGetHardSkillsByMasteryIdQuery(
-    { id, masteryId: specializationsLevel?.id },
-    { skip: !specializationsLevel?.id },
-  );
-  
-  const skillVisible = skills.filter((item) => item.hidden === true);
-  const [filteredSkills, setFilteredSkills] = useState(skillVisible);
+  const updateAllSpecialization = userAllSpecializations ? updateAllSpecializations(userAllSpecializations) : [];
+  const selectedSpecialization = updateAllSpecialization?.find((s) => s.specializationName === specCurrent);
 
-  //Select
-  const [open, setOpen] = useState(false);
-  //Select
-  //textarea
-  const [srtSearch, setSrtSearch] = useState('');
-  //textarea
+  const level = selectedSpecialization?.masteryName;
   
-  const loverNameHardSkills = skillVisible.map((item) => ({
+  const skillVisible = selectedSpecialization?.hardSkills.filter((item) => item.hidden === true);
+  
+  const [filteredSkills, setFilteredSkills] = useState(skillVisible);
+  
+  const [open, setOpen] = useState(false);
+  
+  const [srtSearch, setSrtSearch] = useState('');
+  
+  const loverNameHardSkills = skillVisible?.map((item) => ({
     ...item,
     name: item.name.toLowerCase(),
   }));
   
-  //Select
   useEffect(() => {
-    if (specializations && specializations.length > 0) {
-      const mainSpecialization = specializations.find((item) => item.main);
+    if (userAllSpecializations && userAllSpecializations.length > 0) {
+      const mainSpecialization = userAllSpecializations.find((item) => item.mainSpecialization);
       if (mainSpecialization) {
-        setSpecCurrent(mainSpecialization.name);
+        setSpecCurrent(mainSpecialization.specializationName);
       }
     }
-  }, [specializations]);
+  }, [userAllSpecializations]);
   
   const handleChange = (event) => {
     const value = event.target.value;
@@ -70,8 +57,7 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  //Select
-  //textarea
+  
   const handleChangeSearch = (event) => {
     const value = event.target.value;
     setSrtSearch(value);
@@ -81,13 +67,11 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
       setFilteredSkills(skillVisible);
     } else {
       const result = sortedSkills(loverNameHardSkills, loverValue);
-      const sortedOriginal = sortSkillsByOriginal(skillVisible,result);
+      const sortedOriginal = sortSkillsByOriginal(skillVisible, result);
       setFilteredSkills(sortedOriginal);
     }
   };
-  //textarea
   
-  //button
   const handleClick = () => {
     const loverValue = srtSearch.toLowerCase();
     
@@ -95,14 +79,13 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
       setFilteredSkills(skillVisible);
     } else {
       const result = sortedSkills(loverNameHardSkills, loverValue);
-      const sortedOriginal = sortSkillsByOriginal(skillVisible,result);
+      const sortedOriginal = sortSkillsByOriginal(skillVisible, result);
       setFilteredSkills(sortedOriginal);
     }
   };
-  //button
   
-  if (isLoading || !specializations || specializations.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
+  if (isLoading || !userAllSpecializations || userAllSpecializations.length === 0) {
+    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} />;
   }
   
   return (
@@ -110,7 +93,7 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
       <Box sx={open ? styles.skillBg : styles.skill}>
         <Box sx={styles.info}>
           <Box sx={styles.wrapperSelect}>
-            {selectedSpecialization?.main &&
+            {selectedSpecialization?.mainSpecialization &&
               <CustomTooltip title="profile.experience.skills.star" translate={true}>
                 <StarIcon sx={styles.star} />
               </CustomTooltip>}
@@ -131,19 +114,19 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
                 },
               }}
             >
-              {specializations && specializations.map((item) => (
-                <MenuItem key={item.id} value={item.name} sx={styles.selectItem}>
-                  {item.name}
-                  {item.main && <StarIcon sx={styles.selectItemStar} />}
+              {updateAllSpecialization?.map((item) => (
+                <MenuItem key={item.specializationName} value={item.specializationName} sx={styles.selectItem}>
+                  {item.specializationName}
+                  {item.mainSpecialization && <StarIcon sx={styles.selectItemStar} />}
                 </MenuItem>
               ))}
             </Select>
           </Box>
-          <Typography sx={styles.text} className={level} variant="subtitle2">Level {level}</Typography>
+          <Typography sx={styles.text} className={level} variant="subtitle2">Level <span>{level}</span></Typography>
         </Box>
         <Box sx={styles.list}>
-          {srtSearch.trim() === '' ? skillVisible?.map((item) => <SkillsItem key={item.id} data={item} />) :
-            filteredSkills?.map((item) => <SkillsItem key={item.id} data={item} />)}
+          {srtSearch.trim() === '' ? skillVisible?.map((item) => <SkillsItem key={item.id} data={item}  isSorted={item.isSorted}/>) :
+            filteredSkills?.map((item) => <SkillsItem key={item.id} data={item} isSorted={item.isSorted}/>)}
         </Box>
       </Box>
       <Box sx={styles.wrapperSearch}>

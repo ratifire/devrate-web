@@ -5,6 +5,14 @@ export const styles = {
     gridGap: theme.spacing(2),
     paddingY: theme.spacing(2),
     borderBottom: `1px solid ${theme.palette.neutral[400]}`,
+    ">p": {
+      flex: '1 2 max(132px)',
+      maxWidth: '132px',
+      width: '2vw',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      textWrap: 'nowrap',
+    },
   }),
   iconWrapper: {
     width: 28,

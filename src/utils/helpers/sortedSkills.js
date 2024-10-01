@@ -1,25 +1,17 @@
 export const sortedSkills = (skills, searchStr) => {
-  
   if (typeof searchStr === 'string') {
-    if (searchStr.includes(',')) {
-      searchStr = searchStr.split(',').map((item) => item.trim());
-    } else {
-      searchStr = [searchStr.trim()];
-    }
+    searchStr = searchStr.split(',').map((item) => item.trim());
+    
+    searchStr = searchStr.filter((item) => item !== '' && item.match(/[a-zA-Zа-яА-ЯіІїЇєЄґҐ0-9]/));
   }
-  return skills.sort((a, b) => {
-    const matchA = searchStr.some((searchTerm) => a.name.includes(searchTerm));
-    const matchB = searchStr.some((searchTerm) => b.name.includes(searchTerm));
-    
-    if (matchA && matchB) {
-      const indexA = searchStr.findIndex((searchTerm) => a.name.includes(searchTerm));
-      const indexB = searchStr.findIndex((searchTerm) => b.name.includes(searchTerm));
+  
+  if (searchStr.length === 0) return [];
+  
+  return skills
+    .filter((item) => searchStr.some((searchTerm) => item.name.toLowerCase().includes(searchTerm.toLowerCase())))
+    .sort((a, b) => {
+      const indexA = searchStr.findIndex((searchTerm) => a.name.toLowerCase().includes(searchTerm.toLowerCase()));
+      const indexB = searchStr.findIndex((searchTerm) => b.name.toLowerCase().includes(searchTerm.toLowerCase()));
       return indexA - indexB;
-    }
-    
-    if (matchA) return -1;
-    if (matchB) return 1;
-    
-    return 0;
-  });
+    });
 };

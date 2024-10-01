@@ -7,6 +7,7 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import { useUpdateSkillsMutation } from '../../../../../../../redux/services/skillsApiSlice';
 import { useFormik } from 'formik';
 import { SkillsItemSchema } from '../../../../../../../utils/valadationSchemas/index';
+import CustomTooltip from '../../../../../../UI/CustomTooltip';
 
 const SkillsItem = ({ data }) => {
   const { id, name, averageMark, hidden } = data;
@@ -28,9 +29,6 @@ const SkillsItem = ({ data }) => {
     validationSchema: SkillsItemSchema,
     onSubmit,
   });
-  // коментар нижче для, сторінки чужого користувача
-  // const iconArrow =
-  //   averageMark > 5 ? <ArrowUpwardIcon sx={styles.arrowUpIcon} /> : <ArrowDownwardIcon sx={styles.arrowDownIcon} />;
   const iconEye = hiddenSkill ? (
     <VisibilityOutlinedIcon sx={styles.eye} />
   ) : (
@@ -49,7 +47,9 @@ const SkillsItem = ({ data }) => {
         </form>
       </Box>
       <Typography variant='body1' sx={styles.text}>
+        <CustomTooltip title={name}>
         {name}
+        </CustomTooltip>
       </Typography>
       <Typography variant="subtitle2" sx={styles.number}>
         {mark}
