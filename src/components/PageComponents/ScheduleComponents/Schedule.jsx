@@ -36,7 +36,8 @@ export default function Schedule() {
       id: event.id,
       title: event.type,
       start: event.startTime,
-      backgroundColor: event.type === 'INTERVIEW' ? '#16FFB966' : '#FCA728',
+      backgroundColor: event.type === 'INTERVIEW' ? '#DAFE22' : '#FCA728',
+      textColor: "#1D1D1D"
     }));
   };
 
@@ -103,29 +104,24 @@ export default function Schedule() {
       if (calendarRef.current) {
         const calendarApi = calendarRef.current.getApi();
         const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
-        console.log(scroller)
-        if (popup.visible) {
-          if (scroller) {
-            scroller.style.overflow = 'hidden';
+        if (scroller) {
+              scroller.style.overflow = 'hidden';
           }
-        } else {
-          if (scroller) {
-            scroller.style.overflow = 'auto';
-          }
-        }
       }
       const rect = info.el.getBoundingClientRect();
       let x = rect.left + 120;
       let y = rect.top - 140;
       setEvent(currentClosestEvents[0]);
       if (rect.left > window.innerWidth / 2) {
-        x = rect.left - 450;
+         // x = rect.left - 450;
+        x = rect.left - window.innerWidth / 5;
       }
       if (rect.left < window.innerWidth / 2) {
-        x = rect.left + 120;
+        // x = rect.left + 120;
+        x = rect.left + window.innerWidth / 18.5;
       }
       if (rect.top < 400) {
-        y = rect.top + 180;
+        y = rect.top + 130;
       }
       if (rect.top > window.innerHeight - 200) {
         y = rect.top - 140;
@@ -160,7 +156,44 @@ export default function Schedule() {
       
     }
   };
-
+  
+  // useEffect(() => {
+  //   const adjustPopupPosition = (rect) => {
+  //     let x = rect.left + 120;
+  //     // let y = rect.top - 140;
+  //
+  //     // Adjust X and Y based on window size
+  //     if (rect.left > window.innerWidth / 2) {
+  //       x = rect.left - window.innerWidth / 5;
+  //     }
+  //     if (rect.left < window.innerWidth / 2) {
+  //       x = rect.left + window.innerWidth / 18.5;
+  //     }
+  //
+  //
+  //     return { x };
+  //   };
+  //   const handleResize = () => {
+  //     console.log(popup.visible, popup.event)
+  //      if (popup.visible && popup.event) {
+  //       // Safeguard: Check if the element exists before getting its position
+  //       const eventEl = document.querySelector('#popup');
+  //       console.log(eventEl)
+  //       if (eventEl) {
+  //         const rect = eventEl.getBoundingClientRect();
+  //         const { x } = adjustPopupPosition(rect);
+  //         setPopup((prevPopup) => ({
+  //           ...prevPopup,
+  //           x,
+  //         }));
+  //       }
+  //     }
+  //   };
+  //
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, [popup.visible, popup.event, popup]);
+  
   const handleClosePopup = () => {
     setPopup({
       visible: false,
@@ -168,6 +201,9 @@ export default function Schedule() {
       x: 0,
       y: 0,
     });
+    const calendarApi = calendarRef.current.getApi();
+    const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+    scroller.style.overflow = 'auto';
   };
   
   if (isLoading || loading) {
@@ -179,7 +215,6 @@ export default function Schedule() {
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
       <Box sx={styles.demoAppMain} >
         <FullCalendar
-          
           ref={calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={false}
