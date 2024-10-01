@@ -1,5 +1,5 @@
 resource "aws_lb" "front_ecs_alb" {
-  name               = "ecs-alb-front-${aws_ecs_task_definition.task_definition_front.revision}"
+  name               = "ecs-alb-front"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [data.aws_security_group.vpc_frontend_security_group.id]
@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
   health_check {
     healthy_threshold   = 2
     unhealthy_threshold = 2
-    interval            = 140
+    interval            = 40
     protocol            = "HTTP"
     path                = "/"
     matcher             = "200-305"
