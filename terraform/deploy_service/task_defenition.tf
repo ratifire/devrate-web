@@ -13,8 +13,8 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       healthCheck : {
         "command" : ["CMD-SHELL", "curl -f https://${var.domain_name}/ || exit 1"],
         "interval" : 120,
-        "timeout" : 5,
-        "retries" : 2
+        "timeout" : 10,
+        "retries" : 3
       },
       portMappings = [
         {
