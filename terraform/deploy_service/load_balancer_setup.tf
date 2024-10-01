@@ -1,5 +1,5 @@
 resource "aws_lb" "front_ecs_alb" {
-  name               = "ecs-alb-front"
+  name               = "ecs-alb-front-${aws_ecs_task_definition.task_definition_front.revision}"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [data.aws_security_group.vpc_frontend_security_group.id]
@@ -12,11 +12,11 @@ resource "aws_lb" "front_ecs_alb" {
 
 
 resource "aws_lb_target_group" "http_ecs_tg_front" {
-  name                 = "http-ecs-tg-front"
+  name                 = "http-ecs-tg-front-${aws_ecs_task_definition.task_definition_front.revision}"
   port                 = var.front_port
   protocol             = "HTTP"
   vpc_id               = data.aws_vpcs.all_vpcs.ids[0]
-  deregistration_delay = "30"
+  deregistration_delay = "20"
   stickiness {
     type            = "lb_cookie"
     cookie_duration = "86400"
@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
   health_check {
     healthy_threshold   = 2
     unhealthy_threshold = 2
-    interval            = 150
+    interval            = 60
     protocol            = "HTTP"
     path                = "/"
     matcher             = "200-305"
