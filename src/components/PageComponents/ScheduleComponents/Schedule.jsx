@@ -22,34 +22,28 @@ const Schedule = () => {
   const [event, setEvent] = useState([]);
   const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
   const [popupPosition, setPopupPosition] = useState('TOPRIGHT');
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-  const [fromTime, setFromTime] = useState('');
-  const [isReady, setIsReady] = useState(false);
+  const [from, setFrom] = useState(DateTime.local().startOf('week').plus({ days: 1 }).toFormat('yyyy-MM-dd'));
+  const [to, setTo] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
+  const [fromTime, setFromTime] = useState(
+    encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`)
+  );
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [events, setEvents] = useState([]);
+  const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
+  console.log(eventStartTime, `eventStartTime`);
 
-  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
-  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
-    { userId, fromTime },
-    { skip: !isReady }
-  );
+  const { data: currentEvents, isLoading, isFetching } = useGetEventByUserIdQuery({ userId, from, to });
+  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
 
   useEffect(() => {
-    if (selectedWeek !== null && calendarRef.current) {
-      const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
-      setFrom(startOfWeek);
-      setTo(endOfWeek);
-      setFromTime(encodeURIComponent(`${startOfWeek}T00:00:00+03:00`));
-      setIsReady(true);
-
+    if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
-      calendarApi.gotoDate(startOfWeek);
-
       applyRequiredStyles(calendarApi);
+      calendarApi.gotoDate(from);
+      calendarApi.scrollToTime(eventStartTime);
     }
-  }, [selectedWeek]);
+  }, [selectedWeek, eventStartTime]);
 
   useEffect(() => {
     setEvents(transformEvents(currentEvents || []));
@@ -58,7 +52,7 @@ const Schedule = () => {
 
       applyRequiredStyles(calendarApi);
     }
-  }, [currentEvents]);
+  }, [isFetching]);
 
   const findEventTimeForChosenDay = (newDate, resp) => {
     const luxonDate = DateTime.fromISO(newDate);
@@ -80,7 +74,7 @@ const Schedule = () => {
     });
 
     if (matchingEvents.length === 0) {
-      return null;
+      return DateTime.now().toFormat('HH:mm:ss');
     }
 
     const startTime = DateTime.fromISO(matchingEvents[0].startTime).toLocal();
@@ -90,7 +84,6 @@ const Schedule = () => {
   };
 
   const handleDateChange = async (newDate) => {
-    const calendarApi = calendarRef.current.getApi();
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
@@ -99,16 +92,13 @@ const Schedule = () => {
     const year = chosenDay.year;
 
     const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
+    setFrom(startOfWeek);
+    setTo(endOfWeek);
+    setFromTime(encodeURIComponent(`${startOfWeek}T00:00:00+03:00`));
 
     const { data: resp } = await triggerEvents({ userId, from: startOfWeek, to: endOfWeek });
     const startTime = findEventTimeForChosenDay(newDate, resp);
-
-    if (startTime) {
-      calendarApi.scrollToTime(startTime);
-    } else {
-      const now = DateTime.now().toFormat('HH:mm:00');
-      calendarApi.scrollToTime(now);
-    }
+    setEventStartTime(startTime);
   };
 
   const handleEventClick = (info) => {
