@@ -25,5 +25,9 @@ export const ScheduleApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetEventByUserIdQuery, useGetClosestEventByUserIdQuery, useDeleteEventByIdMutation } =
-  ScheduleApiSlice;
+export const {
+  useGetEventByUserIdQuery,
+  useLazyGetEventByUserIdQuery,
+  useGetClosestEventByUserIdQuery,
+  useDeleteEventByIdMutation,
+} = ScheduleApiSlice;
