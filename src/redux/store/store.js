@@ -18,6 +18,7 @@ import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
 import activeMasteryReducer from '../specialization/activeMasterySlice';
 import buttonReducer from '../addButton/addButtonSlice'
+import themeSliceReducer from "../theme/themeSlice";
 
 const authPersistConfig = {
   key: 'auth',
@@ -36,6 +37,7 @@ const personalPersistConfig = {
 };
 
 const rootReducer = {
+  theme:themeSliceReducer,
   modal: modalSliceReducer,
   education: educationReducer,
   modalStep: modalStepReducer,
