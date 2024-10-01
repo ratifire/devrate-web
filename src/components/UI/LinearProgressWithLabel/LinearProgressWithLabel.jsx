@@ -10,7 +10,6 @@ const LinearProgressWithLabel = ({ value, size, orientation }) => {
   const style = size === 's' ? styles.s : styles.m;
   const orientationStyle = orientation === 'horizontal' ? styles.horizontal : styles.vertical;
 
-  // Check if progress is complete
   const isComplete = value >= 100;
 
   return (
