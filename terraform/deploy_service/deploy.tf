@@ -81,7 +81,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
     lifecycle_transition = "autoscaling:EC2_INSTANCE_TERMINATING"
     name                 = "ecs-managed-draining-termination-hook"
     default_result       = "CONTINUE"
-    heartbeat_timeout    = 120
+    heartbeat_timeout    = 100
   }
   dynamic "tag" {
     for_each = {
