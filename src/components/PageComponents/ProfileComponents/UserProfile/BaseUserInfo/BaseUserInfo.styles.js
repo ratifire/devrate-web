@@ -20,6 +20,10 @@ export const styles = {
     height: '132px',
     borderRadius: 1,
   },
+  correctAvatar: {
+    width: '132px',
+    height: '132px',
+  },
   wrapperText: {
     flex: '1 0 calc(100% - 148px)',
     position: 'relative',

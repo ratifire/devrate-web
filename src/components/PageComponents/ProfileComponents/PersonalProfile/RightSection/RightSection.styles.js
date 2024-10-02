@@ -14,8 +14,8 @@ export const styles = {
     marginBottom: theme.spacing(2),
   }),
   wrapperLink: {
+    flexWrap: 'wrap',
     display: 'flex',
-    // justifyContent: 'center',
     alignItems: 'center',
   },
   wrapperLanguages: {
