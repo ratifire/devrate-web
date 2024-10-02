@@ -106,6 +106,11 @@ const getDesignTokens = (mode) => ({
   palette: {
     ...(mode === 'dark'
       ? {
+          themeSwitcher:{
+            backgroundColor: "#8796A5",
+            switcherColor: '#8133F1',
+            borderColor: "#1D1D1D"
+          },
           sliderAssessment: {
             violet: '#8133F1',
             lightGray: '#C5C5C6',
@@ -191,10 +196,22 @@ const getDesignTokens = (mode) => ({
             azure: '#16FFB9',
             hover: '#CEB0FA',
             contrastText: '#ffffff',
+            lime: '#DAFE22',
           },
         }
       : {
           //light theme to be adjusted
+          themeSwitcher:{
+            backgroundColor: "#ffffff",
+            switcherColor: "#EE7538",
+            borderColor:      "#C5C5C6"
+          },
+          sliderAssessment: {
+            violet: 'green',
+            lightGray: '#C5C5C6',
+            gray: '#69696B',
+            darkGray: '#3E3E40',
+          },
           common: {
             black: '#000000',
             white: '#ffffff',

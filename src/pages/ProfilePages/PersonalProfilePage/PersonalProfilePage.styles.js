@@ -29,10 +29,10 @@ export const styles = {
   },
   right: {
     gridColumn: '10/13',
-    gridRow: '1/5',
+    gridRow: '1/3',
   },
   experience: {
     gridColumn: '1/10',
-    gridRow: '2/5',
+    gridRow: '2/3',
   },
 };

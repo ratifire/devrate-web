@@ -7,7 +7,10 @@ export const personalApiSlice = apiSlice.injectEndpoints({
       query: (userId) => `/users/${userId}`,
       providesTags: (result, error, id) => (result ? [{ type: 'PersonalUser', id }] : []),
     }),
-
+    getUserAllSpecialization: builder.query({
+      query: (id) => `/users/${id}/specializations/main-mastery/skills`,
+      providesTags: (result, error, id) => (result ? [{ type: 'PersonalUser', id }] : []),
+    }),
     putPersonalUser: builder.mutation({
       query: (body) => ({
         url: `/users`,
@@ -27,4 +30,4 @@ export const personalApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetPersonalUserQuery, usePutPersonalUserMutation, deletePersonalUserMutation } = personalApiSlice;
+export const { useGetPersonalUserQuery, usePutPersonalUserMutation, deletePersonalUserMutation, useGetUserAllSpecializationQuery } = personalApiSlice;

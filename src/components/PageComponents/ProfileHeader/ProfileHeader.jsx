@@ -14,6 +14,7 @@ import { selectCurrentUser } from '../../../redux/auth/authSlice';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import { Link } from 'react-router-dom';
 import links from '../../../router/links';
+import ThemeSwitch from "../../UI/ThemeSwitch/ThemeSwitch";
 
 const initialValues = {
   query: '',
@@ -108,6 +109,7 @@ const ProfileHeader = () => {
             }
           />
         </form>
+        <ThemeSwitch/>
         <NotificationList items={notifications} />
         <IconButton>
           <Badge color='error' overlap='circular' badgeContent='' variant='dot' invisible={true}>
