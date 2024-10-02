@@ -2,9 +2,17 @@ export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
     alignItems: 'center',
-    gridGap: theme.spacing(3),
+    gridGap: theme.spacing(2),
     paddingY: theme.spacing(2),
     borderBottom: `1px solid ${theme.palette.neutral[400]}`,
+    ">p": {
+      flex: '1 2 max(132px)',
+      maxWidth: '132px',
+      width: '2vw',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      textWrap: 'nowrap',
+    },
   }),
   iconWrapper: {
     width: 28,
@@ -41,7 +49,16 @@ export const styles = {
     color: theme.palette.text.primary,
     width: '100%',
   }),
-  grade: (theme) => ({
-    color: theme.palette.primary[200],
+  number: (theme) => ({
+    color: theme.palette.primary['200'],
+    width: 'auto',
+    paddingX: '7px',
+    height: '24px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    backgroundColor: theme.palette.neutral['800'],
+    lineHeight: '24px',
   }),
 };

@@ -3,7 +3,6 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     gridGap: '20px',
-    marginTop: '20px',
   }),
   info: (theme) => ({
     display: 'flex',
@@ -35,14 +34,21 @@ export const styles = {
       left: '0',
       width: '100%',
       height: '100%',
-      background: `${theme.palette.background.default}66`,
+      background: `${theme.palette.neutral['900']}BD`,
     },
   }),
-  search: {
+  wrapperSearch: {
     flex: '0 1 max(333px)',
+    height: '280px',
     position: 'relative',
   },
-  
+  search: {
+    position: 'sticky',
+    right: '0',
+    top: '0',
+    height: '100%',
+    width: '100%',
+  },
   wrapperSelect:(theme) => ({
     display: 'flex',
     alignItems: 'center',
@@ -108,35 +114,71 @@ export const styles = {
     fontSize: '14px',
   }),
   list: {
-    columnGap: '32px',
+    overflowY: 'auto',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gridGap:'0 32px',
+    maxHeight: '200px',
+    paddingRight: '16px',
+    '>div': {
+      flex: '0 1 calc(50% - 16px)',
+      maxWidth: '291px',
+      width: '2vw',
+      textWrap: 'nowrap',
+      ">span":{
+        display: 'inline-block',
+        width: '100%',
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+      },
+    },
+    '&::-webkit-scrollbar': {
+      width: 6,
+    },
+    '&::-webkit-scrollbar-track': (theme) => ({
+      backgroundColor: theme.palette.neutral['800'],
+      borderRadius: 8,
+    }),
+    '&::-webkit-scrollbar-thumb': (theme) => ({
+      borderRadius: 6,
+      backgroundColor: theme.palette.common.white,
+    }),
   },
   text: (theme) => ({
-    textTransform: 'capitalize',
-    '&.Junior': {
+    '&.JUNIOR': {
       color: theme.palette.info.main,
     },
-    '&.Middle': {
+    '&.MIDDLE': {
       color: theme.palette.info.azure,
     },
-    '&.Senior': {
-      color: theme.palette.warning.main,
+    '&.SENIOR': {
+      color: theme.palette.info.lime,
     },
-    '&:first-letter': {
-      textTransform: 'uppercase',
+    '>span': {
+      textTransform: 'lowercase',
+      display: 'inline-block',
+      '&:first-letter': {
+        textTransform: 'uppercase',
+      },
+    }
+  }),
+  btnIcon:(theme) => ( {
+    position: 'absolute',
+    bottom: '4px',
+    right: '16px',
+    borderRadius: 1,
+    gridGap: theme.spacing(2),
+    fontSize: '14px',
+    padding: '7px 10px',
+    color: theme.palette.primary['100'],
+    ' svg': {
+      color: theme.palette.primary['200'],
     },
   }),
-  btnIcon: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-  },
   textArea:(theme)=> ({
     marginBottom: theme.spacing(0),
     width: '100%',
     height: '100%',
-    ' *': {
-      width: '100%',
-      height: '100%',
-    }
+    padding: theme.spacing(0),
   }),
 };

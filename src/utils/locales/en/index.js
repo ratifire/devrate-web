@@ -206,7 +206,7 @@ export const en = {
             subTitle: 'Add specializations and skills from them that you currently possess!',
             button: 'Add specializations',
           },
-          title: 'Skills',
+          allSkills: 'All skills',
           search: 'Search',
           star: 'Main specialization',
         },
