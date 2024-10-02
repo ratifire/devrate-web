@@ -206,6 +206,11 @@ const getDesignTokens = (mode) => ({
             switcherColor: "#EE7538",
             borderColor:      "#C5C5C6"
           },
+          arrow: {
+            down: '#ED0E0E',
+            up: '#64FF2E',
+            circle: '#252527',
+          },
           sliderAssessment: {
             violet: 'green',
             lightGray: '#C5C5C6',

@@ -6,16 +6,10 @@ import { Box, Typography } from '@mui/material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
-
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import { selectCurrentUserId } from '../../../../redux/auth/authSlice';
-import {
-  useCreateInterviewRequestMutation,
-  useLazyGetMainMasteryBySpecializationIdQuery,
-  useLazyGetMainSpecializationQuery,
-} from '../../../../redux/specialization/specializationApiSlice';
-
+import { useCreateInterviewRequestMutation } from '../../../../redux/specialization/specializationApiSlice';
 import { styles } from './ScheduleInterview.styles';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
@@ -23,6 +17,7 @@ import { CheckboxButton } from './CheckboxButton/CheckboxButton';
 import RenderTabs from './components/TabsRender';
 import RenderTimeSlots from './components/RenderTimeSlots';
 import WeekNavigation from './components/WeekNavigation';
+import { useGetMastery } from '../../../../utils/hooks/specialization';
 
 const ScheduleInterviewModal = () => {
   const { role } = useSelector((state) => state.modal.modalData);
@@ -34,11 +29,8 @@ const ScheduleInterviewModal = () => {
   const [date, setDate] = useState(DateTime.now().startOf('day'));
   const [weekDates, setWeekDates] = useState([]);
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
-
-  const [getMainSpecialization] = useLazyGetMainSpecializationQuery();
-  const [getMainMastery] = useLazyGetMainMasteryBySpecializationIdQuery();
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
-
+  const { masteryId } = useGetMastery();
   const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
   const handleTabChange = (_, newTab) => setTab(newTab);
 
@@ -51,14 +43,9 @@ const ScheduleInterviewModal = () => {
   }
 
   const onSubmit  = async (values, { resetForm }) => {
-      const mainSpec = await getMainSpecialization(currentUserId);
-      if (!mainSpec.data) return;
-
-      const mainMastery = await getMainMastery(mainSpec.data.id);
-
       await createInterviewRequest({
         userId: currentUserId,
-        masteryId: mainMastery.data.id,
+        masteryId,
         role,
         availableDates: Object.keys(values.dates),
       });

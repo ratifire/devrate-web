@@ -165,12 +165,20 @@ const SpecializationModal = () => {
 
   const createSkills = (newSkill) => {
     if (newSkill.length === 0 || newSkill.length > 50) return;
+    const isSkill = skills.some((skill) => skill.name === newSkill);
+
+    if (isSkill) {
+      formik.setFieldTouched('skills', true, false);
+      formik.setErrors({ skills: 'specialization.modal.skills.errorDuplicate' });
+      return;
+    }
+
     setSkills([...skills, { name: newSkill, type: 'HARD_SKILL' }]);
     formik.setFieldValue('skills', '');
   };
 
   const deleteSkillsHandler = (skillToDelete) => {
-    setSkills(skills.filter((item) => item !== skillToDelete));
+    setSkills(skills.filter((item) => item.name !== skillToDelete));
   };
 
   if (isLoading) {
