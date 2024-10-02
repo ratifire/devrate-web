@@ -44,7 +44,7 @@ const RightSection = () => {
             </IconButton>
           </Box>
         </Box>
-        <Box gap={3} sx={styles.wrapperLink}>
+        <Box gap={2} sx={styles.wrapperLink}>
           {userContacts && userContacts.length > 0 ? (
             <SocialsLinkList socials={userContacts} componentStyles={styles} />
           ) : (

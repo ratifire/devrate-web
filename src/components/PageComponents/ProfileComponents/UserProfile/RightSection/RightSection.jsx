@@ -9,7 +9,7 @@ import { useGetUserContactsQuery } from '../../../../../redux/user/contacts/cont
 import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import PropTypes from 'prop-types';
 
-const RightSection = ({id}) => {
+const RightSection = ({id}, profileType) => {
   const { t } = useTranslation();
   const languages = useGetLanguageUserQuery(id);
   const { data: userContacts } = useGetUserContactsQuery(id);
@@ -23,26 +23,30 @@ const RightSection = ({id}) => {
             {t('profile.right.contact')}
           </Typography>
         </Box>
-        <Box gap={3} sx={styles.wrapperLink}>
+        <Box gap={2} sx={styles.wrapperLink}>
           <SocialsLinkList socials={userContacts} componentStyles={styles} />
         </Box>
       </Box>
-      {Boolean(languages.data?.length) && <Box sx={styles.wrapperBox}>
-        <Typography variant="h6" sx={styles.title}>
-          {t('profile.right.languages')}
-        </Typography>
-        <Box gap={2} sx={styles.wrapperLanguages}>
-          <LanguagesList data={languages.data} />
+      {Boolean(languages.data?.length) && profileType !== 'user' && (
+        <Box sx={styles.wrapperBox}>
+          <Typography variant="h6" sx={styles.title}>
+            {t('profile.right.languages')}
+          </Typography>
+          <Box gap={2} sx={styles.wrapperLanguages}>
+            <LanguagesList data={languages.data} />
+          </Box>
         </Box>
-      </Box>}
-      <Box sx={styles.wrapperBox}>
-        <Typography variant="h6" sx={styles.title}>
-          {t('profile.right.aboutMe')}
-        </Typography>
-        <Typography variant='subtitle2' sx={styles.aboutMe}>
-          {personalData && personalData.description}
-        </Typography>
-      </Box>
+      )}
+      {personalData?.description && (
+        <Box sx={styles.wrapperBox}>
+          <Typography variant="h6" sx={styles.title}>
+            {t('profile.right.aboutMe')}
+          </Typography>
+          <Typography variant="subtitle2" sx={styles.aboutMe}>
+            {personalData.description}
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 };

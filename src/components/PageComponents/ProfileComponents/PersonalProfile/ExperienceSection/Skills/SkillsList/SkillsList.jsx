@@ -3,33 +3,39 @@ import { styles } from './SkillsList.styles';
 import { Box, Typography } from '@mui/material';
 import SkillsItem from '../SkillsItem';
 import PropTypes from 'prop-types';
-import {
-  useGetHardSkillsByMasteryIdQuery,
-  useGetMainMasteryBySpecializationIdQuery,
-} from '../../../../../../../redux/specialization/specializationApiSlice';
+import CustomTooltip from '../../../../../../UI/CustomTooltip';
+import StarIcon from '@mui/icons-material/Star';
 
 const SkillsList = ({ data, length }) => {
-  const { id, name } = data;
+  const { specializationName, mainSpecialization,masteryName, hardSkills } = data;
   const count = length === 1 ? 2 : 1;
-  const { data: mainMastery } = useGetMainMasteryBySpecializationIdQuery(id);
-  
-  const { data: skills = [] } = useGetHardSkillsByMasteryIdQuery(
-    { id, masteryId: mainMastery?.id },
-    { skip: !mainMastery?.id },
-  );
-  
-  const level = mainMastery?.level || 'N/A';
+  const level = masteryName || 'N/A';
   
   return (
     <Box sx={styles.wrapper}>
-      <Typography variant="h6" sx={styles.title}>
-        {name}
-      </Typography>
+      <Box sx={styles.titleWrapper}>
+        {mainSpecialization ?
+          <>
+            <CustomTooltip title="profile.experience.skills.star" translate={true}>
+              <StarIcon sx={styles.star} />
+            </CustomTooltip>
+            <CustomTooltip title={specializationName}>
+              <Typography variant="h6" sx={styles.title}>
+              {specializationName}
+              </Typography>
+            </CustomTooltip>
+          </>
+          : <CustomTooltip title={specializationName}>
+            <Typography variant="h6" sx={styles.title}>
+              {specializationName}
+            </Typography>
+          </CustomTooltip>}
+      </Box>
       <Typography variant="subtitle2" sx={styles.text} className={level}>
         Level <span>{level}</span>
       </Typography>
       <Box sx={{ ...styles.list, columnCount: count }}>
-        {skills?.map((skill) => (
+        {hardSkills?.map((skill) => (
           <SkillsItem key={skill.id} data={skill} />
         ))}
       </Box>

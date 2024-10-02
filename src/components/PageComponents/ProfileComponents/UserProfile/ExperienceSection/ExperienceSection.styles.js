@@ -34,10 +34,11 @@ const styles = {
   }),
   experienceItemContainer: (theme) => ({
     overflow: 'auto',
-    maxHeight: 300, // to be adjusted with designers
+    maxHeight: 300,
     minWidth: '100%',
     background: theme.palette.background.level2,
     paddingRight: theme.spacing(3),
+    paddingTop: '20px',
     height: '100%',
 
     '&::-webkit-scrollbar': {

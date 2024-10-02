@@ -15,18 +15,18 @@ export const styles = {
       height: '100%',
     },
     '@media (min-width: 600px)': {
-      flex: '1 0 132px',
+      flex: '1 0 152px',
       marginRight: theme.spacing(3),
       marginBottom: theme.spacing(0),
     },
   }),
   avatar: {
-    width: '132px',
-    height: '132px',
+    width: '152px',
+    height: '152px',
     borderRadius: 1,
   },
   wrapperText: {
-    flex: '1 0 calc(100% - 148px)',
+    flex: '1 0 calc(100% - 168px)',
     position: 'relative',
   },
   wrapperTextBtn: {
