@@ -16,7 +16,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
   port                 = var.front_port
   protocol             = "HTTP"
   vpc_id               = data.aws_vpcs.all_vpcs.ids[0]
-  deregistration_delay = "90"
+  deregistration_delay = "30"
   stickiness {
     type            = "lb_cookie"
     cookie_duration = "86400"
