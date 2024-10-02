@@ -81,6 +81,7 @@ const Schedule = () => {
   };
 
   const handleDateChange = async (newDate) => {
+    handleClosePopup();
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
