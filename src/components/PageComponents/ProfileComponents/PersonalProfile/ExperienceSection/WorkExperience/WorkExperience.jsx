@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
-import styles from './WorkExperience.styles';
+// import { styles } from './WorkExperience.styles';
 import WorkExperienceItem from './WorkExperienceItem/WorkExperienceItem';
 import { useGetWorkExperienceByUserIdQuery } from '../../../../../../redux/workExperience/workExperienceApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +26,6 @@ const WorkExperience = ({ tab, profileType, imgUrl }) => {
   }
 
   return (
-    <Box sx={styles.container}>
       <Box>
         {workExperiencesData?.map(
             ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
@@ -46,7 +45,6 @@ const WorkExperience = ({ tab, profileType, imgUrl }) => {
           )
         }
       </Box>
-    </Box>
   );
 };
 

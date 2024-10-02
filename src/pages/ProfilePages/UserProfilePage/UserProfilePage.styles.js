@@ -33,7 +33,7 @@ export const styles = {
   },
   experience: {
     gridColumn: '1/10',
-    gridRow: '2/5',
+    gridRow: '2/3',
   },
   loading: {
     display: 'flex',

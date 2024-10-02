@@ -196,6 +196,7 @@ const getDesignTokens = (mode) => ({
             azure: '#16FFB9',
             hover: '#CEB0FA',
             contrastText: '#ffffff',
+            lime: '#DAFE22',
           },
         }
       : {

@@ -8,9 +8,9 @@ const CustomTooltip = styled(({ translate, className, children, title, ...props 
   
   const renderChildren = () => {
     
-    if (translate && typeof children === 'string') return t(children);
+    if (translate && typeof children === 'string') return <span>{t(children)}</span>;
     
-    return children;
+    return typeof children === 'string' ? <span>{children}</span> : children;
   };
   
   return (
