@@ -16,7 +16,6 @@ export const styles = {
   wrapperLink: {
     flexWrap: 'wrap',
     display: 'flex',
-    // justifyContent: 'center',
     alignItems: 'center',
   },
   wrapperLanguages: {
