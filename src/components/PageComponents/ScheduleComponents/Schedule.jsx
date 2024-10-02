@@ -24,13 +24,10 @@ const Schedule = () => {
   const [popupPosition, setPopupPosition] = useState('TOPRIGHT');
   const [from, setFrom] = useState(DateTime.local().startOf('week').plus({ days: 1 }).toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
-  const [fromTime, setFromTime] = useState(
-    encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`)
-  );
+  const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [events, setEvents] = useState([]);
   const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
-  console.log(eventStartTime, `eventStartTime`);
 
   const { data: currentEvents, isLoading, isFetching } = useGetEventByUserIdQuery({ userId, from, to });
   const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
@@ -94,7 +91,6 @@ const Schedule = () => {
     const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
     setFrom(startOfWeek);
     setTo(endOfWeek);
-    setFromTime(encodeURIComponent(`${startOfWeek}T00:00:00+03:00`));
 
     const { data: resp } = await triggerEvents({ userId, from: startOfWeek, to: endOfWeek });
     const startTime = findEventTimeForChosenDay(newDate, resp);
