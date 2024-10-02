@@ -480,7 +480,7 @@ export const uk = {
     schedule: {
       title: 'Розклад',
       host: 'Хост',
-      participants: 'Учасник',
+      participant: 'Учасник',
       cancelEventBtn: 'Відмінити івент',
       popupUserInfo: 'Інформація про вас',
       popupInterviewerInfo: 'Інформація про співбесідника',
