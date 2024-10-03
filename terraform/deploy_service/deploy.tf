@@ -71,7 +71,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
   }
   min_size                  = 1
   max_size                  = 2
-  desired_capacity          = 2
+  desired_capacity          = 1
   health_check_type         = "EC2"
   health_check_grace_period = 180
   vpc_zone_identifier       = data.aws_subnets.default_subnets.ids
