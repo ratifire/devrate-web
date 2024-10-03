@@ -472,7 +472,7 @@ export const en = {
       participant: 'Participant',
       cancelEventBtn: 'Cancel event',
       popupUserInfo: 'Info about you',
-      popupInterviewerInfo: 'Info about you',
+      popupInterviewerInfo: 'Info about participant',
       popupRole: 'Role:',
     },
   },
