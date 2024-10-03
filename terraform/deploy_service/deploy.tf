@@ -69,7 +69,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
     id      = aws_launch_template.ecs_front_launch.id
     version = aws_launch_template.ecs_front_launch.latest_version
   }
-  min_size                  = 2
+  min_size                  = 1
   max_size                  = 2
   desired_capacity          = 2
   health_check_type         = "EC2"
@@ -108,7 +108,7 @@ resource "aws_ecs_service" "front_services" {
   cluster                            = var.front_cluster_name
   task_definition                    = aws_ecs_task_definition.task_definition_front.arn
   scheduling_strategy                = "REPLICA"
-  desired_count                      = 2
+  desired_count                      = 1
   force_new_deployment               = true
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
