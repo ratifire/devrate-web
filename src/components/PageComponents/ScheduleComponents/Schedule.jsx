@@ -29,7 +29,7 @@ const Schedule = () => {
   const [events, setEvents] = useState([]);
   const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
 
-  const { data: currentEvents, isLoading, isFetching } = useGetEventByUserIdQuery({ userId, from, to });
+  const { data: eventsForSelectedWeek, isLoading, isFetching } = useGetEventByUserIdQuery({ userId, from, to });
   const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
 
@@ -43,7 +43,7 @@ const Schedule = () => {
   }, [selectedWeek, eventStartTime]);
 
   useEffect(() => {
-    setEvents(transformEvents(currentEvents || []));
+    setEvents(transformEvents(eventsForSelectedWeek || []));
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
 
@@ -110,7 +110,7 @@ const Schedule = () => {
       const rect = info.el.getBoundingClientRect();
       let x = rect.left + 120;
       let y = rect.top - 140;
-      setEvent(currentClosestEvents[0]);
+      setEvent(eventsForSelectedWeek[0]);
       if (rect.left > window.innerWidth / 2) {
         // x = rect.left - 450;
         x = rect.left - window.innerWidth / 5;
