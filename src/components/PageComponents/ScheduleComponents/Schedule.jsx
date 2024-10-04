@@ -113,6 +113,7 @@ const Schedule = () => {
     return offsetTop;
   }
   const handleEventClick = (info) => {
+    // console.log(info)
     if (info) {
       if (calendarRef.current) {
         const calendarApi = calendarRef.current.getApi();
@@ -124,7 +125,8 @@ const Schedule = () => {
       const rect = info.el.getBoundingClientRect();
       let x
       let y
-      setEvent(currentClosestEvents[0]);
+      setEvent(currentClosestEvents.find(event=>event.id.toString()===info.event._def.publicId));
+      
       const dimentions = {popupWidth:413, arrowWidth:10, popupHeight: 200, rectWidth: 120, rectHeight:70}
       const xoffset = rect.left - (dimentions.popupWidth + dimentions.arrowWidth)
       const yoffset = getOffsetTopWithScroll(info.el)
