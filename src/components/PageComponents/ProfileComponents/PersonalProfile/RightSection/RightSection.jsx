@@ -73,7 +73,6 @@ const RightSection = () => {
       </Box>
       <Box sx={styles.wrapperBox}>
         <Typography variant='h6' sx={styles.title}>
-
           {t('profile.right.aboutMe')}
         </Typography>
         {personalData && personalData.description ? (
