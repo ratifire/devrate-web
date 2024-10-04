@@ -76,3 +76,11 @@ data "aws_route53_zone" "front_dns_zone" {
 data "aws_s3_bucket" "logs-front-1209" {
   bucket = "logs-front-1209"
 }
+
+data "aws_acm_certificate" "devrate_cert" {
+  domain   = "devrate.org"
+  statuses = ["ISSUED"]
+  tags = {
+    "Name" = "devrate.org"
+  }
+}

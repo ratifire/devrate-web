@@ -10,12 +10,3 @@ resource "aws_route53_record" "front_a_record" {
     evaluate_target_health = true
   }
 }
-
-
-data "aws_acm_certificate" "devrate_cert" {
-  domain   = "devrate.org"
-  statuses = ["ISSUED"]
-  tags = {
-    "devrate.org" = "devrate.org"
-  }
-}
