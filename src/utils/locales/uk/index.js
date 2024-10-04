@@ -3,7 +3,7 @@ export const uk = {
     home: {
       hero: {
         title: 'Мультифункціональна платформа від розробників для розробників',
-        text: 'Інтерв\'ю. Рейтинги. Резюме',
+        text: "Інтерв'ю. Рейтинги. Резюме",
         button_text: 'Реєстрація',
       },
       about: {
@@ -20,7 +20,7 @@ export const uk = {
       links: {
         home_page: 'Головну сторінку',
         about_platform: 'Про платформу',
-        community: 'Ком\'юніті',
+        community: "Ком'юніті",
         contacts: 'Контакти',
         login: 'Увійти',
         terms_and_conditions: 'Правила та умови',
@@ -52,7 +52,7 @@ export const uk = {
         description_short: 'Опис досягнення занадто короткий. Внесіть, будь-ласка, зміни',
         description_placeholder:
           'Сертифікація визнає особу як експерта у галузі мережевих технологій. Підтверджує знання та навички у розгортанні, управлінні та усуненні неполадок у мережевих середовищах.',
-        required: 'Це обов\'язкове поле',
+        required: "Це обов'язкове поле",
       },
       education: {
         title: 'Освіта',
@@ -72,7 +72,7 @@ export const uk = {
         return_on: 'Повернутися на ',
         home_page: 'Головну сторінку',
         email_invalid: 'Недійсна електронна пошта',
-        required: 'Це обов\'язкове поле',
+        required: "Це обов'язкове поле",
       },
       login: {
         title: 'Увійдіть у свій обліковий запис DEVRATE',
@@ -85,7 +85,7 @@ export const uk = {
         return_on: 'Повернутися на ',
         home_page: 'Головну сторінку',
         email_invalid: 'Недійсна електронна пошта',
-        required: 'Це обов\'язкове поле',
+        required: "Це обов'язкове поле",
         password_short: 'Пароль занадто короткий',
         password_long: 'Пароль занадто довгий',
         password_invalid: 'Неприпустимий пароль',
@@ -107,7 +107,7 @@ export const uk = {
         privacy_policy: 'Політика конфіденційності',
         terms_and_conditions: 'Правила та умови',
         email_invalid: 'Недійсна електронна пошта',
-        required: 'Це обов\'язкове поле',
+        required: "Це обов'язкове поле",
         first_name_long: 'Імʼя занадто довге',
         first_name_short: 'Імʼя занадто коротке',
         first_name_invalid_characters: 'Обрізати кінцеві символи імені',
@@ -147,13 +147,13 @@ export const uk = {
         text_privacy: 'Продовжуючи, Ви погоджуєтеся з нашою політикою конфіденційності і умовами користування.',
         return_on: 'Повернутися на ',
         home_page: 'Головну сторінку',
-        required: 'Це обов\'язкове поле',
+        required: "Це обов'язкове поле",
         password_short: 'Пароль занадто короткий',
         password_long: 'Пароль занадто довгий',
         password_must_match: 'Паролі мають збігатися',
         password_invalid: 'Неприпустимий пароль',
         not_valid: 'Пароль не валiдний',
-        code_required: 'Код обов\'язковий',
+        code_required: "Код обов'язковий",
         code_symbol_min: 'Кожна цифра коду повинна мати довжину 1 символ',
         code_length_max: 'Code must be exactly 6 digits long',
         error: 'Помилка при зміні пароля. Спробуйте ще раз.',
@@ -237,7 +237,8 @@ export const uk = {
         right: {
           empty: {
             emptyLanguages: 'Ви ще не додали жодної мови.',
-            emptyAboutMe: 'Ви ще не додали інформацію про себе.\n' +
+            emptyAboutMe:
+              'Ви ще не додали інформацію про себе.\n' +
               'Для того, щоб редагувати інформацію про себе, зайдіть в налаштування профілю.',
           },
         },
@@ -264,7 +265,7 @@ export const uk = {
         userInfo: {
           personal: {
             title: 'Персональна інформація',
-            firstName: 'Ім\'я',
+            firstName: "Ім'я",
             first_name_long: 'Імʼя занадто довге',
             first_name_short: 'Імʼя занадто коротке',
             first_name_invalid_characters: '',
@@ -282,7 +283,7 @@ export const uk = {
             status_too_long: 'Поле статус дуже довге',
             about_me: 'Про мене',
             about_me_too_long: 'Поле "Про мене" дуже довге',
-            required: 'Це обов\'язкове поле',
+            required: "Це обов'язкове поле",
             endYear_min: 'Дата завершення має бути пізнішою за дату початку',
             endYear_max: 'Дата закінчення має бути не пізніше поточного року',
             startYear_min: 'Дата має бути пізніше 01/01/1950',
@@ -335,7 +336,7 @@ export const uk = {
           startDate: 'Дата початку',
           endDate: 'Дата закінчення',
           currentDate: 'На даний момент працюю на цій посаді',
-          required: 'Це обов\'язкове поле',
+          required: "Це обов'язкове поле",
           startDateMinMessage: 'Стартова дата має бути пізніше 01/01/1950',
           startDateMaxMessage: 'Кінцева дата має бути не пізніше за поточку',
           endDateMessage: 'Кінцева дата має буди пізнішою за стартову дату',
@@ -418,7 +419,7 @@ export const uk = {
           mastery: 'Основний рівень',
           mastery_helper_text:
             'Рівень для формування Вашої статистики, яка буде відібражатися в на сторінці Вашого профілю',
-          required: 'Це обов\'язкове поле',
+          required: "Це обов'язкове поле",
           max_length: 'Назва вміння може мати довжину не більше 100 символів',
           errorDuplicate: 'Така спеціалізація вже існує',
         },
@@ -427,20 +428,20 @@ export const uk = {
           placeholder: 'Codelgniter, Yii, Zend Framework',
           no_skills: 'Немає доступних навичок',
           errorDuplicate: 'Такий навик вже існує',
-          errorRequired: 'Це обов\'язкове поле',
+          errorRequired: "Це обов'язкове поле",
           errorLength: 'Назва навички занадто довга',
           errorQuantity: 'Ви можете додати до 20 навичок',
           errorNotAvailable: 'Немає доступних навичок',
         },
       },
       interview: {
-        income: 'Пройдено інтерв\'ю',
-        outcome: 'Проведено інтерв\'ю',
+        income: "Пройдено інтерв'ю",
+        outcome: "Проведено інтерв'ю",
         makeIncome: 'Запланувати інтерв’ю',
-        makeOutcome: 'Стати інтерв\'юером',
+        makeOutcome: "Стати інтерв'юером",
       },
       scheduleModal: {
-        name: 'Ім\'я',
+        name: "Ім'я",
         specialization: 'Спеціалізація',
         level: 'Рівень',
         role: 'Роль',
@@ -449,7 +450,7 @@ export const uk = {
         endTime: 'Час закінчення',
         socialLinks: 'Додати посилання на соцмережі',
         schedule: 'Запланувати',
-        scheduleInterview: 'Запланувати інтерв\'ю',
+        scheduleInterview: "Запланувати інтерв'ю",
       },
     },
     language: {
@@ -479,6 +480,7 @@ export const uk = {
     schedule: {
       title: 'Розклад',
       host: 'Хост',
+      participant: 'Учасник',
       cancelEventBtn: 'Відмінити івент',
       popupUserInfo: 'Інформація про вас',
       popupInterviewerInfo: 'Інформація про співбесідника',

@@ -1,6 +1,6 @@
 export const styles = {
   sideBarEventContainer: (theme) => ({
-    height: '162px',
+    height: '185px', //162px changed to 185px due to adding line of participant
     backgroundColor: theme.palette.neutral[500],
     borderRadius: 2,
     padding: theme.spacing(3),
@@ -25,6 +25,10 @@ export const styles = {
     color: theme.palette.primary[50],
     marginBottom: theme.spacing(2),
   }),
+  participant: (theme) => ({
+    color: theme.palette.primary[50],
+    marginBottom: theme.spacing(2),
+  }),
   hostTitle: (theme) => ({
     lineHeight: '19.92px',
     letterSpacing: '0.4px',
@@ -32,6 +36,13 @@ export const styles = {
     marginBottom: theme.spacing(2),
   }),
   host_link: (theme) => ({
+    color: theme.palette.text.primary,
+    textDecoration: 'none',
+    '&:hover': {
+      color: theme.palette.action.hover,
+    },
+  }),
+  participant_link: (theme) => ({
     color: theme.palette.text.primary,
     textDecoration: 'none',
     '&:hover': {
