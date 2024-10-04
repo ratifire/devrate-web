@@ -100,7 +100,18 @@ const Schedule = () => {
     const startTime = findEventTimeForChosenDay(newDate, resp);
     setEventStartTime(startTime);
   };
-
+  function getOffsetTopWithScroll(element) {
+    let offsetTop = 0;
+    let currentElement = element;
+    while (currentElement) {
+      offsetTop += currentElement.offsetTop;
+      if (currentElement.offsetParent && currentElement.offsetParent.scrollTop) {
+        offsetTop -= currentElement.offsetParent.scrollTop;
+      }
+      currentElement = currentElement.offsetParent;
+    }
+    return offsetTop;
+  }
   const handleEventClick = (info) => {
     if (info) {
       if (calendarRef.current) {
@@ -111,36 +122,43 @@ const Schedule = () => {
         }
       }
       const rect = info.el.getBoundingClientRect();
-      let x = rect.left + 120;
-      let y = rect.top - 140;
+      let x
+      let y
       setEvent(currentClosestEvents[0]);
-      if (rect.left > window.innerWidth / 2) {
-        // x = rect.left - 450;
-        x = rect.left - window.innerWidth / 5;
-      }
-      if (rect.left < window.innerWidth / 2) {
-        // x = rect.left + 120;
-        x = rect.left + window.innerWidth / 18.5;
-      }
-      if (rect.top < 400) {
-        y = rect.top + 130;
-      }
-      if (rect.top > window.innerHeight - 200) {
-        y = rect.top - 140;
-      }
-
-      if (rect.left > window.innerWidth / 2 && window.innerHeight - 200) {
-        setPopupPosition('BOTTOMRIGHT');
-      }
-      if (rect.left > window.innerWidth / 2 && rect.top < 400) {
-        setPopupPosition('TOPRIGHT');
-      }
-      if (rect.left < window.innerWidth / 2 && window.innerHeight - 200) {
-        setPopupPosition('BOTTOMLEFT');
-      }
-      if (rect.left < window.innerWidth / 2 && rect.top < 400) {
-        setPopupPosition('TOPLEFT');
-      }
+      const dimentions = {popupWidth:413, arrowWidth:10, popupHeight: 200, rectWidth: 120, rectHeight:70}
+      const xoffset = rect.left - (dimentions.popupWidth + dimentions.arrowWidth)
+      const yoffset = getOffsetTopWithScroll(info.el)
+      
+      x = xoffset
+      y = yoffset
+      setPopupPosition('TOPRIGHT');
+      
+      // if (rect.left > window.innerWidth / 2) {
+      //   // x = rect.left - 450;
+      //   x = rect.left - window.innerWidth / 5;
+      // }
+      // if (rect.left < window.innerWidth / 2) {
+      //   // x = rect.left + 120;
+      //   x = rect.left + window.innerWidth / 18.5;
+      // }
+      // if (rect.top < 400) {
+      //   y = rect.top + 130;
+      // }
+      // if (rect.top > window.innerHeight - 200) {
+      //   y = rect.top - 140;
+      // }
+      // if (rect.left > window.innerWidth / 2 && window.innerHeight - 200) {
+      //   setPopupPosition('BOTTOMRIGHT');
+      // }
+      // if (rect.left > window.innerWidth / 2 && rect.top < 400) {
+      //   setPopupPosition('TOPRIGHT');
+      // }
+      // if (rect.left < window.innerWidth / 2 && window.innerHeight - 200) {
+      //   setPopupPosition('BOTTOMLEFT');
+      // }
+      // if (rect.left < window.innerWidth / 2 && rect.top < 400) {
+      //   setPopupPosition('TOPLEFT');
+      // }
 
       const eventDetails = {
         title: info.event.title,
@@ -157,43 +175,6 @@ const Schedule = () => {
       });
     }
   };
-
-  // useEffect(() => {
-  //   const adjustPopupPosition = (rect) => {
-  //     let x = rect.left + 120;
-  //     // let y = rect.top - 140;
-  //
-  //     // Adjust X and Y based on window size
-  //     if (rect.left > window.innerWidth / 2) {
-  //       x = rect.left - window.innerWidth / 5;
-  //     }
-  //     if (rect.left < window.innerWidth / 2) {
-  //       x = rect.left + window.innerWidth / 18.5;
-  //     }
-  //
-  //
-  //     return { x };
-  //   };
-  //   const handleResize = () => {
-  //     console.log(popup.visible, popup.event)
-  //      if (popup.visible && popup.event) {
-  //       // Safeguard: Check if the element exists before getting its position
-  //       const eventEl = document.querySelector('#popup');
-  //       console.log(eventEl)
-  //       if (eventEl) {
-  //         const rect = eventEl.getBoundingClientRect();
-  //         const { x } = adjustPopupPosition(rect);
-  //         setPopup((prevPopup) => ({
-  //           ...prevPopup,
-  //           x,
-  //         }));
-  //       }
-  //     }
-  //   };
-  //
-  //   window.addEventListener('resize', handleResize);
-  //   return () => window.removeEventListener('resize', handleResize);
-  // }, [popup.visible, popup.event, popup]);
 
   const handleClosePopup = () => {
     setPopup({
