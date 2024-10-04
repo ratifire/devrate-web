@@ -10,13 +10,12 @@ resource "aws_lb" "front_ecs_alb" {
   }
 }
 
-
 resource "aws_lb_target_group" "http_ecs_tg_front" {
   name                 = "http-ecs-tg-front"
   port                 = var.front_port
   protocol             = "HTTP"
   vpc_id               = data.aws_vpcs.all_vpcs.ids[0]
-  deregistration_delay = "120"
+  deregistration_delay = "30"
   stickiness {
     type            = "lb_cookie"
     cookie_duration = "86400"
@@ -31,13 +30,12 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
   }
 }
 
-
 resource "aws_lb_listener" "https_ecs_listener" {
   load_balancer_arn = aws_lb.front_ecs_alb.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
-  certificate_arn   = aws_acm_certificate.devrate_cert.arn
+  certificate_arn   = data.aws_acm_certificate.devrate_cert.arn
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.http_ecs_tg_front.arn
