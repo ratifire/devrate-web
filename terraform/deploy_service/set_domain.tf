@@ -12,11 +12,7 @@ resource "aws_route53_record" "front_a_record" {
 }
 
 
-resource "aws_acm_certificate" "devrate_cert" {
-  domain_name       = "devrate.org"
-  validation_method = "DNS"
-
-  subject_alternative_names = [
-    "*.devrate.org"
-  ]
+data "aws_acm_certificate" "devrate_cert" {
+  domain   = "devrate.org"
+  statuses = ["ISSUED"]
 }
