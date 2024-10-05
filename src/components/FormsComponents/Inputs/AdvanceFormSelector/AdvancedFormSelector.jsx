@@ -28,6 +28,15 @@ const AdvancedFormSelector = ({
     handleChange(value);
   };
 
+  const handleBlurCountry = () => {
+    handleBlur({
+      target: {
+        name: name,
+        value: value,
+      },
+    });
+  }
+
   return (
     <FormControl fullWidth variant={variant} error={error} sx={styles.wrapper}>
       <Autocomplete
@@ -45,7 +54,7 @@ const AdvancedFormSelector = ({
         name={name}
         value={value}
         onChange={handleChangeCountry}
-        onBlur={handleBlur}
+        onBlur={handleBlurCountry}
         options={countries}
         freeSolo // Hides the warning from the MUI
         forcePopupIcon // Hides the warning from the MUI, adds the dropdown icon
