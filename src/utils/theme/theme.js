@@ -199,6 +199,12 @@ const getDesignTokens = (mode) => ({
               up: '#64FF2E',
               circle: '#252527',
             },
+            levelChart: {
+              grad1: '#4A1D8B',
+              grad2: '#8233F1',
+              grad3: '#A756B4',
+              grad4: '#FCA728',
+            }
           }
         }
       : {
@@ -208,6 +214,12 @@ const getDesignTokens = (mode) => ({
               up: '#3AB310',
               circle: '#ECECED',
             },
+            levelChart: {
+              grad1: '#5B08D3',
+              grad2: '#7F23FF',
+              grad3: '#B056BE',
+              grad4: '#FCA728',
+            }
           },
           //light theme to be adjusted
           themeSwitcher:{
