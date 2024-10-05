@@ -204,6 +204,10 @@ const getDesignTokens = (mode) => ({
               grad2: '#8233F1',
               grad3: '#A756B4',
               grad4: '#FCA728',
+            },
+            hardSkillsChart: {
+              grad1: '#16FFB9',
+              grad2: '#DAFE22'
             }
           }
         }
@@ -219,6 +223,10 @@ const getDesignTokens = (mode) => ({
               grad2: '#7F23FF',
               grad3: '#B056BE',
               grad4: '#FCA728',
+            },
+            hardSkillsChart: {
+              grad1: '#D31772',
+              grad2: '#EE7538'
             }
           },
           //light theme to be adjusted
