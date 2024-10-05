@@ -176,11 +176,6 @@ const getDesignTokens = (mode) => ({
             dark: '#3AB310',
             contrastText: '#ffffff',
           },
-          arrow: {
-            down: '#ED0E0E',
-            up: '#64FF2E',
-            circle: '#252527',
-          },
           warning: {
             main: '#F3DD12',
             dark: '#D6C20F',
@@ -198,18 +193,27 @@ const getDesignTokens = (mode) => ({
             contrastText: '#ffffff',
             lime: '#DAFE22',
           },
+          specialization: {
+            arrow: {
+              down: '#ED0E0E',
+              up: '#64FF2E',
+              circle: '#252527',
+            },
+          }
         }
       : {
+          specialization: {
+            arrow: {
+              down: '#A70000',
+              up: '#3AB310',
+              circle: '#ECECED',
+            },
+          },
           //light theme to be adjusted
           themeSwitcher:{
             backgroundColor: "#ffffff",
             switcherColor: "#EE7538",
             borderColor:      "#C5C5C6"
-          },
-          arrow: {
-            down: '#ED0E0E',
-            up: '#64FF2E',
-            circle: '#252527',
           },
           sliderAssessment: {
             violet: 'green',
