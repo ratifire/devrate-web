@@ -14,6 +14,7 @@ import {
   useTooltip,
 } from '../utils';
 import { styles } from './InterviewChart.styles';
+import useThemeInterviewChart from './useThemeInterviewChart';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -23,6 +24,7 @@ const InterviewChart = () => {
   const dataMonths = useMemo(() => createTenMonthsInterviewData({ t, data }), [data]);
   const dataDays = useMemo(() => createTenDaysInterviewData({ data }), [data]);
   const { tooltipLabel, tooltipContent } = useTooltip();
+  const { conductedGrad1, conductedGrad2, conductedGrad3, passedGrad1, passedGrad2, passedGrad3 } = useThemeInterviewChart()
 
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
@@ -68,14 +70,14 @@ const InterviewChart = () => {
           <BarChart data={selectedPeriod} margin={{ top: 0, right: 5, left: -30, bottom: 0 }}>
             <defs>
               <linearGradient id='colorConducted' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='0%' stopColor='#FFC061' stopOpacity={1} />
-                <stop offset='29.8%' stopColor='#F39E37' stopOpacity={1} />
-                <stop offset='100%' stopColor='#8D5C20' stopOpacity={1} />
+                <stop offset='0%' stopColor={conductedGrad1} stopOpacity={1} />
+                <stop offset='29.8%' stopColor={conductedGrad2} stopOpacity={1} />
+                <stop offset='100%' stopColor={conductedGrad3} stopOpacity={1} />
               </linearGradient>
               <linearGradient id='colorPassed' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='0%' stopColor='#B07AFD' stopOpacity={1} />
-                <stop offset='36.8%' stopColor='#8133F1' stopOpacity={1} />
-                <stop offset='100%' stopColor='#4A1D8B' stopOpacity={1} />
+                <stop offset='0%' stopColor={passedGrad1} stopOpacity={1} />
+                <stop offset='36.8%' stopColor={passedGrad2} stopOpacity={1} />
+                <stop offset='100%' stopColor={passedGrad3} stopOpacity={1} />
               </linearGradient>
             </defs>
             <Legend iconType='circle' layout='horizontal' align='center' verticalAlign='top' />

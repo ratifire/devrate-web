@@ -208,7 +208,15 @@ const getDesignTokens = (mode) => ({
             hardSkillsChart: {
               grad1: '#16FFB9',
               grad2: '#DAFE22'
-            }
+            },
+            interviewChart: {
+              conductedGrad1: '#FFC061',
+              conductedGrad2: '#F39E37',
+              conductedGrad3: '#8D5C20',
+              passedGrad1: '#B07AFD',
+              passedGrad2: '#8133F1',
+              passedGrad3: '#4A1D8B',
+            },
           }
         }
       : {
@@ -227,7 +235,15 @@ const getDesignTokens = (mode) => ({
             hardSkillsChart: {
               grad1: '#D31772',
               grad2: '#EE7538'
-            }
+            },
+            interviewChart: {
+              conductedGrad1: '#FFC061',
+              conductedGrad2: '#F39E37',
+              conductedGrad3: '#B76604',
+              passedGrad1: '#B07AFD',
+              passedGrad2: '#8838FA',
+              passedGrad3: '#5B08D3',
+            },
           },
           //light theme to be adjusted
           themeSwitcher:{
