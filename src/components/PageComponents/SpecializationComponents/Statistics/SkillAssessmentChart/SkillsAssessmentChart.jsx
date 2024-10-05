@@ -14,6 +14,7 @@ import {
   useTooltip,
 } from '../utils';
 import { styles } from './SkillsAssessmentChart.styles';
+import useSkillsAssessmentChart from './useSkillsAssessmentChart';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
@@ -25,6 +26,7 @@ const SkillsAssessmentChart = () => {
     secondValue: 'hardSkillMark',
     firstValue: 'softSkillMark',
   });
+  const { grad1, grad2, grad3 } = useSkillsAssessmentChart()
 
   const dataDays = useMemo(
     () => createTenDaysHistoryData({ data: dataHistory, average: arithmeticAverage }),
@@ -78,9 +80,9 @@ const SkillsAssessmentChart = () => {
           <AreaChart data={selectedPeriod} margin={{ top: 6, right: 0, left: -40, bottom: 0 }}>
             <defs>
               <linearGradient id='colorValue' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='0%' stopColor='#DAFE22' stopOpacity={1} />
-                <stop offset='53.8%' stopColor='rgba(130, 254, 102, 0.552)' stopOpacity={1} />
-                <stop offset='100%' stopColor='rgba(22, 255, 185, 0)' stopOpacity={1} />
+                <stop offset='0%' stopColor={grad1} stopOpacity={1} />
+                <stop offset='53.8%' stopColor={grad2} stopOpacity={1} />
+                <stop offset='100%' stopColor={grad3} stopOpacity={1} />
               </linearGradient>
             </defs>
             <XAxis dataKey='name' />

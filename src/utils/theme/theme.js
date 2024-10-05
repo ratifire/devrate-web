@@ -217,6 +217,11 @@ const getDesignTokens = (mode) => ({
               passedGrad2: '#8133F1',
               passedGrad3: '#4A1D8B',
             },
+            assessmentChart: {
+              grad1: '#DAFE22',
+              grad2: 'rgba(130, 254, 102, 0.55)',
+              grad3: 'rgba(22, 255, 185, 0.00)',
+            }
           }
         }
       : {
@@ -244,6 +249,11 @@ const getDesignTokens = (mode) => ({
               passedGrad2: '#8838FA',
               passedGrad3: '#5B08D3',
             },
+            assessmentChart: {
+              grad1: '#EE7538',
+              grad2: 'rgba(226, 75, 82, 0.56)',
+              grad3: 'rgba(211, 23, 114, 0.00)',
+            }
           },
           //light theme to be adjusted
           themeSwitcher:{
