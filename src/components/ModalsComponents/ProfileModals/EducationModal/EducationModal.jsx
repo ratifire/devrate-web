@@ -10,7 +10,7 @@ import { EducationModalSchema } from '../../../../utils/valadationSchemas/index'
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
+import CountrySelect from '../../../FormsComponents/Inputs/FormSelect';
 import { useCreateEducationMutation, useUpdateEducationMutation } from '../../../../redux/services/educationApiSlice';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { selectEducationDataToEdit, clearEducationDataToEdit } from '../../../../redux/user/education/educationSlice';

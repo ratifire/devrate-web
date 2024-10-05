@@ -14,7 +14,7 @@ import {
 } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
+import CountrySelect from '../../../FormsComponents/Inputs/FormSelect';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';

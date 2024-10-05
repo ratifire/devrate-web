@@ -17,7 +17,7 @@ import {
   useUpdateWorkExperienceByIdMutation,
 } from '../../../../redux/workExperience/workExperienceApiSlice';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
-import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
+import CountrySelect from '../../../FormsComponents/Inputs/FormSelect';
 
 const WorkExperienceModal = () => {
   const [startYears, setStartYears] = useState([]);

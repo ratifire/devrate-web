@@ -23,7 +23,7 @@ import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
-import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
+import CountrySelect from '../../../FormsComponents/Inputs/FormSelect';
 
 const SpecializationModal = () => {
   const [skills, setSkills] = useState([]);
