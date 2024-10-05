@@ -39,6 +39,7 @@ export const styles = {
   textHelper: {
     position: 'absolute',
     bottom: '-23px',
+    marginLeft: '0',
   },
   selectField: (theme) => ({
     ' .MuiMenu-paper': {
