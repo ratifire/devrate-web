@@ -10,10 +10,10 @@ import { EducationModalSchema } from '../../../../utils/valadationSchemas/index'
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import CountrySelect from '../../../FormsComponents/Inputs/FormSelect';
 import { useCreateEducationMutation, useUpdateEducationMutation } from '../../../../redux/services/educationApiSlice';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { selectEducationDataToEdit, clearEducationDataToEdit } from '../../../../redux/user/education/educationSlice';
+import { FormSelect } from '../../../FormsComponents/Inputs';
 
 const EducationModal = () => {
   const dispatch = useDispatch();
@@ -126,7 +126,7 @@ const EducationModal = () => {
             />
           </Box>
           <Box sx={styles.input100}>
-            <CountrySelect
+            <FormSelect
               sx={styles.input50}
               label={t('profile.modal.education.startYear')}
               value={formik.values.startYear}
@@ -140,7 +140,7 @@ const EducationModal = () => {
               helperText={formik.touched.startYear && formik.errors.startYear}
               error={formik.touched.startYear && Boolean(formik.errors.startYear)}
             />
-            <CountrySelect
+            <FormSelect
               sx={styles.input50}
               label={t('profile.modal.education.endYear')}
               value={formik.values.endYear}

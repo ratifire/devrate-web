@@ -14,10 +14,10 @@ import {
 } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import CountrySelect from '../../../FormsComponents/Inputs/FormSelect';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';
+import { FormSelect } from '../../../FormsComponents/Inputs';
 
 const SoftSkillsModal = () => {
   const [state, setState] = useState({
@@ -154,7 +154,7 @@ const SoftSkillsModal = () => {
           </Typography>
           <form onSubmit={handleSubmit}>
             <Box sx={styles.input}>
-              <CountrySelect
+              <FormSelect
                 label={t(labelInput)}
                 value={skill}
                 countries={availableSkills}

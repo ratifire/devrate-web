@@ -18,12 +18,11 @@ import { useGetSpecializationListQuery } from '../../../../redux/specialization/
 import { setActiveSpecialization } from '../../../../redux/specialization/specializationSlice';
 import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/index';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { AdvancedFormSelector } from '../../../FormsComponents/Inputs';
+import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
-import CountrySelect from '../../../FormsComponents/Inputs/FormSelect';
 
 const SpecializationModal = () => {
   const [skills, setSkills] = useState([]);
@@ -212,7 +211,7 @@ const SpecializationModal = () => {
             />
           </Box>
           <Box sx={styles.mastery_input}>
-            <CountrySelect
+            <FormSelect
               id='mastery'
               variant='outlined'
               name='mastery'

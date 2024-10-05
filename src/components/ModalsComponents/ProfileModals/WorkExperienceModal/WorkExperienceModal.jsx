@@ -17,7 +17,7 @@ import {
   useUpdateWorkExperienceByIdMutation,
 } from '../../../../redux/workExperience/workExperienceApiSlice';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
-import CountrySelect from '../../../FormsComponents/Inputs/FormSelect';
+import { FormSelect } from '../../../FormsComponents/Inputs';
 
 const WorkExperienceModal = () => {
   const [startYears, setStartYears] = useState([]);
@@ -150,7 +150,7 @@ const WorkExperienceModal = () => {
             />
           </Box>
           <Box sx={styles.input100}>
-            <CountrySelect
+            <FormSelect
               sx={styles.input50}
               label={t('profile.modal.workExperience.startDate')}
               value={formik.values.startYear}
@@ -163,7 +163,7 @@ const WorkExperienceModal = () => {
               helperText={formik.touched.startYear && formik.errors.startYear}
               error={formik.touched.startYear && Boolean(formik.errors.startYear)}
             />
-            <CountrySelect
+            <FormSelect
               sx={styles.input50}
               label={t('profile.modal.workExperience.endDate')}
               value={formik.values.currentDate ? '' : formik.values.endYear}
