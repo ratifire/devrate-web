@@ -145,7 +145,6 @@ const getDesignTokens = (mode) => ({
             gradient: 'radial-gradient(62.0% 54% at 63% 50%, rgba(71, 62, 98, 0.5) 0%, rgba(71, 62, 98, 0) 100%)',
             scrollbarTrack: '#303032',
             scrollbarThumb: '#FFF',
-            btnGroup: '#3E3E40',
           },
           primary: {
             50: '#EFE6FD',
@@ -221,6 +220,10 @@ const getDesignTokens = (mode) => ({
               grad1: '#DAFE22',
               grad2: 'rgba(130, 254, 102, 0.55)',
               grad3: 'rgba(22, 255, 185, 0.00)',
+            },
+            level: {
+              btnGroup: '#3E3E40',
+              btn: '#8133F1'
             }
           }
         }
@@ -253,6 +256,10 @@ const getDesignTokens = (mode) => ({
               grad1: '#EE7538',
               grad2: 'rgba(226, 75, 82, 0.56)',
               grad3: 'rgba(211, 23, 114, 0.00)',
+            },
+            level: {
+              btnGroup: '#ECECED',
+              btn: '#8133F1'
             }
           },
           //light theme to be adjusted
