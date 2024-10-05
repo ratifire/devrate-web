@@ -23,6 +23,7 @@ import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
+import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
 
 const SpecializationModal = () => {
   const [skills, setSkills] = useState([]);
@@ -71,7 +72,8 @@ const SpecializationModal = () => {
 
   const { modalData } = useSelector((state) => state.modal);
 
-  const handleChangeMastery = (value) => {
+  const handleChangeMastery = (e) => {
+    const value = e.target.value;
     formik.setFieldValue('mastery', value);
   };
 
@@ -210,7 +212,7 @@ const SpecializationModal = () => {
             />
           </Box>
           <Box sx={styles.mastery_input}>
-            <AdvancedFormSelector
+            <CountrySelect
               id='mastery'
               variant='outlined'
               name='mastery'
