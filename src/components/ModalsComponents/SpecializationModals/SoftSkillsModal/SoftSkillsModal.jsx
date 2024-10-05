@@ -161,7 +161,7 @@ const SoftSkillsModal = () => {
                 helperText={t(state.helperText)}
                 error={state.error}
                 disabled={availableSkills?.length === 0}
-                variant='standard'
+                variant='outlined'
                 name='softSkill'
                 handleChange={handleChange}
               />
