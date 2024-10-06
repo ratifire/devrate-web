@@ -11,7 +11,7 @@ import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/Emp
 import SearchIcon from '@mui/icons-material/Search';
 import { sortedSkills } from '../../../../../../utils/helpers/sortedSkills';
 import { sortSkillsByOriginal } from '../../../../../../utils/helpers/sortedSkillsByOriginal';
-import { useGetUserAllSpecializationQuery } from '../../../../../../redux/user/personal/personalApiSlice';
+import { useGetUserAllSpecializationQuery } from '../../../../../../redux/specialization/specializationApiSlice';
 import { updateAllSpecializations } from './updateAllSpecialization';
 
 const Skills = ({ id, tab, profileType, imgUrl }) => {

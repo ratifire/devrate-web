@@ -39,9 +39,12 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           method: 'DELETE',
         };
       },
-      invalidatesTags: (result, error, id) => [{ type: 'Specialization', id }],
+      providesTags:  ['Specialization'],
     }),
-
+    getUserAllSpecialization: builder.query({
+      query: (id) => `/users/${id}/specializations/main-mastery/skills`,
+      providesTags: ['HardSkills','Specialization'],
+    }),
     getMasteriesBySpecializationId: builder.query({
       query: (id) => `/specializations/${id}/masteries`,
       providesTags: ['Masteries']
@@ -184,4 +187,5 @@ export const {
   useAddSkillsToMasteryMutation,
   useDeleteSkillByIdMutation,
   useGetSoftSkillsQuery,
+  useGetUserAllSpecializationQuery,
 } = SpecializationApiSlice;

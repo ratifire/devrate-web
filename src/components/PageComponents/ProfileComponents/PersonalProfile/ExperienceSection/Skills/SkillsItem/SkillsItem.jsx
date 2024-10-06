@@ -9,7 +9,7 @@ import { useFormik } from 'formik';
 import { SkillsItemSchema } from '../../../../../../../utils/valadationSchemas/index';
 import CustomTooltip from '../../../../../../UI/CustomTooltip';
 
-const SkillsItem = ({ data }) => {
+const SkillsItem = ({ data, flex }) => {
   const { id, name, averageMark, hidden } = data;
   const [hiddenSkill, setHiddenSkill] = useState(hidden);
   const mark = Math.round(averageMark);
@@ -38,7 +38,7 @@ const SkillsItem = ({ data }) => {
     setHiddenSkill(!hiddenSkill);
   };
   return (
-    <Box sx={styles.wrapper}>
+    <Box sx={[ styles.wrapper, flex ]}>
       <Box sx={styles.iconWrapper}>
         <form onSubmit={formik.handleSubmit}>
           <IconButton sx={styles.icon} type='submit' onClick={handlerClick}>
@@ -65,6 +65,7 @@ SkillsItem.propTypes = {
     averageMark: PropTypes.number.isRequired,
     hidden: PropTypes.bool.isRequired,
   }).isRequired,
+  flex: PropTypes.any
 };
 
 export default SkillsItem;
