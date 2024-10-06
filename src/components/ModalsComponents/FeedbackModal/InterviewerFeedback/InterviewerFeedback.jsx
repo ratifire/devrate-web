@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Box, Step, StepButton, StepConnector, Stepper, Typography } from '@mui/material';
+import { Box, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InterviewerInfo, SliderComponent } from '../components';
@@ -8,6 +8,7 @@ import { useCloseModal } from '../hooks';
 import { styles } from './InterviewerFeedback.styles';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
+import CustomStepIcon from '../../ProfileModals/ModalUserInfo/StepIconComponent';
 
 const InterviewerFeedback = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -27,9 +28,9 @@ const InterviewerFeedback = () => {
       <Box sx={styles.container}>
         <Typography variant='h6'>{t('modal.interview.title')}</Typography>
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
-          {NUMBER_OF_STEPS.map((label, index) => (
+          {NUMBER_OF_STEPS.map((label) => (
             <Step sx={styles.step} key={label}>
-              <StepButton color='inherit' sx={styles.stepBtn} disabled={index === NUMBER_OF_STEPS.length} />
+              <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label}></StepLabel>
             </Step>
           ))}
         </Stepper>
