@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { TextAreaInput } from '../../../Inputs'
 import { SliderAssessment, SliderAssessmentBox } from '../../components'
 import { styles } from './StepSoftSkills.styles'
+import { TextAreaInput } from '../../../../FormsComponents/Inputs';
 
 const StepSoftSkills = () => {
   const { t } = useTranslation();

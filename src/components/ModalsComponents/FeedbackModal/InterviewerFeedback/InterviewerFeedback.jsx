@@ -2,12 +2,12 @@
 import { Box, Step, StepButton, StepConnector, Stepper, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
-import { ButtonDef } from '../../Buttons';
 import { InterviewerInfo, SliderComponent } from '../components';
 import { LAST_STEP, NUMBER_OF_STEPS } from '../constants';
 import { useCloseModal } from '../hooks';
 import { styles } from './InterviewerFeedback.styles';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 
 const InterviewerFeedback = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -23,7 +23,7 @@ const InterviewerFeedback = () => {
   };
 
   return (
-    <ModalLayoutProfile setOpen={handleCloseModal} open={isOpenModal}>
+    <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
       <Box sx={styles.container}>
         <Typography variant='h6'>{t('modal.interview.title')}</Typography>
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
@@ -42,12 +42,16 @@ const InterviewerFeedback = () => {
         <SliderComponent slide={activeStep} />
         <Box sx={styles.sendBox}>
           <ButtonDef
+            type={'submit'}
+            variant={'contained'}
             label={t('modal.interview.btnBack')}
             correctStyle={styles.btn}
             handlerClick={handlePrevStep}
             disabled={activeStep === 1}
           />
           <ButtonDef
+            type={'submit'}
+            variant={'contained'}
             label={buttonContent}
             correctStyle={styles.btn}
             handlerClick={activeStep === 1 ? handleNextStep : handleSubmit}

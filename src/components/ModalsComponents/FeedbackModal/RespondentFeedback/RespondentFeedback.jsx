@@ -2,19 +2,19 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile'
-import { ButtonDef } from '../../Buttons'
-import { TextAreaInput } from '../../Inputs'
 import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../components'
 import { useCloseModal } from '../hooks'
 import { styles } from './RespondentFeedback.styles'
+import { TextAreaInput } from '../../../FormsComponents/Inputs';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 
 const RespondentFeedback = () => {
   const { t } = useTranslation();
   const { isOpenModal, handleCloseModal } = useCloseModal({ modalName: 'openFeedbackInterviewer' });
 
   return (
-    <ModalLayoutProfile setOpen={handleCloseModal} open={isOpenModal}>
+    <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
       <Box sx={styles.container}>
         <Typography variant='h6'>{t('modal.interview.title')}</Typography>
         <InterviewerInfo
@@ -42,7 +42,7 @@ const RespondentFeedback = () => {
             </SliderAssessmentBox>
           </Box>
         </Box>
-        <ButtonDef label={t('modal.interview.btnSend')} correctStyle={styles.btn} />
+        <ButtonDef variant={'contained'} type={'submit'} label={t('modal.interview.btnSend')} correctStyle={styles.btn} />
       </Box>
     </ModalLayoutProfile>
   );
