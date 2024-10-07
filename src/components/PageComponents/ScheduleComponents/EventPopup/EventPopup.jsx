@@ -41,7 +41,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
     }
   };
   return (
-    <Box id="popup" sx={{ ...styles.popup, top: popup.y - 60, left: popup.x + 30 }}>
+    <Box id="popup" sx={{ ...styles.popup, top: popup.y, left: popup.x   }}>
       {popupPosition === 'TOPLEFT' && <Box sx={styles.popupTriangularTopLeft}></Box>}
       {popupPosition === 'BOTTOMLEFT' && <Box sx={styles.popupTriangularBottomLeft}></Box>}
       {popupPosition === 'TOPRIGHT' && <Box sx={styles.popupTriangularTopRight}></Box>}

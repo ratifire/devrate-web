@@ -1,12 +1,12 @@
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import { v4 as uuid } from 'uuid';
-import { useTranslation } from 'react-i18next';
-import { Box, FormControl, FormHelperText } from '@mui/material';
-import { styles } from './AdvancedFormSelector.styles'; // Import styles // Import styles
-import PropTypes from 'prop-types';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Box, FormControl, FormHelperText } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import { v4 as uuid } from 'uuid';
+import { styles } from './AdvancedFormSelector.styles'; // Import styles // Import styles
 
 const AdvancedFormSelector = ({
   variant,
@@ -28,6 +28,15 @@ const AdvancedFormSelector = ({
     handleChange(value);
   };
 
+  const handleBlurCountry = () => {
+    handleBlur({
+      target: {
+        name: name,
+        value: value,
+      },
+    });
+  };
+
   return (
     <FormControl fullWidth variant={variant} error={error} sx={styles.wrapper}>
       <Autocomplete
@@ -45,7 +54,7 @@ const AdvancedFormSelector = ({
         name={name}
         value={value}
         onChange={handleChangeCountry}
-        onBlur={handleBlur}
+        onBlur={handleBlurCountry}
         options={countries}
         freeSolo // Hides the warning from the MUI
         forcePopupIcon // Hides the warning from the MUI, adds the dropdown icon
