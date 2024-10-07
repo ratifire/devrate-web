@@ -13,7 +13,9 @@ const InputSearch = () => {
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      getSearch(query);
+      if (query) {
+        getSearch(query);
+      }
     }, 1000);
 
     return () => clearTimeout(timerId);
@@ -23,7 +25,10 @@ const InputSearch = () => {
     setQuery(e.target.value);
   };
 
-  console.log(users);
+  const handleBlur = () => {
+    setQuery('');
+  }
+
   return (
     <Box>
       <OutlinedInput
@@ -33,6 +38,8 @@ const InputSearch = () => {
         type='text'
         value={query}
         onChange={handleChange}
+        onBlur={handleBlur}
+        onFocus={() => setQuery('')}
         sx={styles.input}
         endAdornment={
           <InputAdornment position='end'>
@@ -42,7 +49,7 @@ const InputSearch = () => {
           </InputAdornment>
         }
       />
-      {!!users?.length && <ModalSearch users={users} />}
+      {!!users?.length && !!query && <ModalSearch users={users} />}
     </Box>
   );
 };
