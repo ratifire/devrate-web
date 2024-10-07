@@ -1,10 +1,8 @@
 import React from 'react';
-import { AppBar, Badge, Box, Button, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
+import { AppBar, Badge, Box, Button, IconButton } from '@mui/material';
 import styles from './ProfileHeader.styles';
 import Logo from '../../UI/Logo';
 import { ReactComponent as Message } from '../../../assets/icons/message.svg';
-import { ReactComponent as Loupe } from '../../../assets/icons/loupe.svg';
-import { useFormik } from 'formik';
 import UserAvatar from '../../UI/UserAvatar';
 import Menu from '../Menu';
 import NotificationList from '../ProfileComponents/PersonalProfile/NotificationList';
@@ -15,10 +13,7 @@ import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalAp
 import { Link } from 'react-router-dom';
 import links from '../../../router/links';
 import ThemeSwitch from "../../UI/ThemeSwitch/ThemeSwitch";
-
-const initialValues = {
-  query: '',
-};
+import { InputSearch } from './InputSearch';
 
 const notifications = [
   {
@@ -69,19 +64,6 @@ const ProfileHeader = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-  });
-
-  async function onSubmit(values, { resetForm }) {
-    try {
-      resetForm();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
     <AppBar component='header' position={'static'} sx={styles.header}>
       <Box sx={styles.logoBox}>
@@ -90,25 +72,7 @@ const ProfileHeader = () => {
         </Link>
       </Box>
       <Box sx={styles.headerNav}>
-        <form onSubmit={formik.handleSubmit}>
-          <OutlinedInput
-            autoComplete='off'
-            name='query'
-            placeholder='Пошук'
-            type='text'
-            value={formik.values.query}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            sx={styles.input}
-            endAdornment={
-              <InputAdornment position='end'>
-                <IconButton type='submit' onClick={formik.handleSubmit} edge='end'>
-                  <Loupe />
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </form>
+        <InputSearch />
         <ThemeSwitch/>
         <NotificationList items={notifications} />
         <IconButton>
