@@ -1,4 +1,4 @@
-import { ReactComponent as Telegram } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/linkedin.svg';
+import { ReactComponent as Telegram } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/telegram.svg';
 import { ReactComponent as Linkedin } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/linkedin.svg';
 import { ReactComponent as Github } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/github.svg';
 import { ReactComponent as Behance } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/behance.svg';
