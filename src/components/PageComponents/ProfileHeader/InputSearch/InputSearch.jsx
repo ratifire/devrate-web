@@ -1,13 +1,14 @@
-import { IconButton, InputAdornment, OutlinedInput } from '@mui/material';
+import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg';
 import { styles } from './InputSearch.styles';
 import { useTranslation } from 'react-i18next';
 import { useLazyGetSearchQuery } from '../../../../redux/search/searchApiSlice';
+import { ModalSearch } from '../ModalSearch';
 
 const InputSearch = () => {
   const { t } = useTranslation();
-  const [getSearch] = useLazyGetSearchQuery();
+  const [getSearch, { data: users }] = useLazyGetSearchQuery();
   const [query, setQuery] = useState('');
 
   useEffect(() => {
@@ -22,8 +23,9 @@ const InputSearch = () => {
     setQuery(e.target.value);
   };
 
+  console.log(users);
   return (
-    <form>
+    <Box>
       <OutlinedInput
         autoComplete='off'
         name='query'
@@ -40,7 +42,8 @@ const InputSearch = () => {
           </InputAdornment>
         }
       />
-    </form>
+      {!!users?.length && <ModalSearch users={users} />}
+    </Box>
   )
 }
 
