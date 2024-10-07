@@ -53,7 +53,7 @@ const InputSearch = () => {
           </InputAdornment>
         }
       />
-      {!!users?.length && <ModalSearch users={users} />}
+      {!!users.length && <ModalSearch users={users} />}
     </Box>
   );
 };
