@@ -8,13 +8,16 @@ import { styles } from './InputSearch.styles'
 
 const InputSearch = () => {
   const { t } = useTranslation();
-  const [getSearch, { data: users }] = useLazyGetSearchQuery();
+  const [getSearch] = useLazyGetSearchQuery();
   const [query, setQuery] = useState('');
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (query) {
-        getSearch(query);
+        getSearch(query).then((res) => {
+          setUsers(res.data || []);
+        });
       }
     }, 1000);
 
@@ -27,6 +30,7 @@ const InputSearch = () => {
 
   const handleBlur = () => {
     setQuery('');
+    setUsers([]);
   }
 
   return (
@@ -49,7 +53,7 @@ const InputSearch = () => {
           </InputAdornment>
         }
       />
-      {!!users?.length && !!query && <ModalSearch users={users} />}
+      {!!users?.length && <ModalSearch users={users} />}
     </Box>
   );
 };
