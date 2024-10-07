@@ -6,8 +6,7 @@ export const styles = {
     paddingY: theme.spacing(2),
     borderBottom: `1px solid ${theme.palette.neutral[400]}`,
     ">p": {
-      flex: '1 2 max(132px)',
-      maxWidth: '132px',
+      flex: '1 2 max(420px)',
       width: '2vw',
       textOverflow: 'ellipsis',
       overflow: 'hidden',
