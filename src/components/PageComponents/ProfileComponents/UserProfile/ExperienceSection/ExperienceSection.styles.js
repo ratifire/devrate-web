@@ -17,11 +17,9 @@ const styles = {
   },
   wrapperTab:(theme) => ({
     borderBottom: '1px solid',
-    borderColor: theme.palette.neutral['400'],
+    borderColor: theme.palette.tabs.borderColor,
   }),
-  tabsHeader: {
-    borderBottom: '1px solid #ccc',
-  },
+
   tabItem: {
     textTransform: 'none',
     fontSize: 20,

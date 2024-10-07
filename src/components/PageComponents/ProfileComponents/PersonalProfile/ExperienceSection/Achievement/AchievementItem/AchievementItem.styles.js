@@ -8,6 +8,7 @@ const styles = {
     height: '100%',
     alignItems: 'stretch',
     display: 'flex',
+    border: theme.palette.sliderAssessment.border,
     '>div': {
       width: '100%',
     }
@@ -45,7 +46,7 @@ const styles = {
     textDecoration: 'underline',
   }),
   iconBtnModal: (theme) => ({
-    color: theme.palette.neutral['200'],
+    color: theme.palette.iconBtnModalDropdown.color,
     padding: 0,
     width: '35px',
     height: '35px',
@@ -55,8 +56,8 @@ const styles = {
     justifyContent: 'center',
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
-      backgroundColor: theme.palette.neutral['700'],
-      color: theme.palette.neutral['200'],
+      backgroundColor: theme.palette.iconBtnModalDropdown.hoverBgColor,
+      color: theme.palette.iconBtnModalDropdown.color,
     },
   }),
 };
