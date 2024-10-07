@@ -1,5 +1,8 @@
 export const uk = {
   translation: {
+    header: {
+      search: 'Пошук',
+    },
     home: {
       hero: {
         title: 'Мультифункціональна платформа від розробників для розробників',

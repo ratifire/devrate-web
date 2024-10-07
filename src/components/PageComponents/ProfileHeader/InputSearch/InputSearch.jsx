@@ -4,12 +4,15 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg';
 import { styles } from './InputSearch.styles';
+import { useTranslation } from 'react-i18next';
 
 const initialValues = {
   query: '',
 };
 
 const InputSearch = () => {
+  const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -28,7 +31,7 @@ const InputSearch = () => {
       <OutlinedInput
         autoComplete='off'
         name='query'
-        placeholder='Пошук'
+        placeholder={t('header.search')}
         type='text'
         value={formik.values.query}
         onChange={formik.handleChange}
