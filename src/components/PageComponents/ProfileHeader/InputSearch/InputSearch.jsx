@@ -1,6 +1,5 @@
-/* eslint-disable */
 import { IconButton, InputAdornment, OutlinedInput } from '@mui/material';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg';
 import { styles } from './InputSearch.styles';
 import { useTranslation } from 'react-i18next';
@@ -8,26 +7,20 @@ import { useLazyGetSearchQuery } from '../../../../redux/search/searchApiSlice';
 
 const InputSearch = () => {
   const { t } = useTranslation();
-  const [getSearch, { data: users }] = useLazyGetSearchQuery();
+  const [getSearch] = useLazyGetSearchQuery();
   const [query, setQuery] = useState('');
-  const timeoutId = useRef(null);
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      getSearch(query);
+    }, 1000)
 
-    if (timeoutId.current) {
-      clearTimeout(timeoutId.current);
-    }
+    return () => clearTimeout(timerId);
+  }, [query]);
 
-    timeoutId.current = setTimeout(() => {
-      if (value) {
-        getSearch(value);
-      }
-    }, 1000);
+  const handleChange = (e) => {
+    setQuery(e.target.value);
   };
-
-  console.log(users);
 
   return (
     <form>
@@ -37,7 +30,7 @@ const InputSearch = () => {
         placeholder={t('header.search')}
         type='text'
         value={query}
-        onChange={handleInputChange}
+        onChange={handleChange}
         sx={styles.input}
         endAdornment={
           <InputAdornment position='end'>
