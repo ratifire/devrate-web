@@ -3,5 +3,5 @@ export const styles = {
     position: 'absolute',
     backgroundColor: 'red',
     zIndex: '100',
-  }
-}
+  },
+};

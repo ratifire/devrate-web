@@ -1,19 +1,19 @@
-import React from 'react';
 import { AppBar, Badge, Box, Button, IconButton } from '@mui/material';
-import styles from './ProfileHeader.styles';
-import Logo from '../../UI/Logo';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Message } from '../../../assets/icons/message.svg';
+import { selectCurrentUser } from '../../../redux/auth/authSlice';
+import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
+import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
+import links from '../../../router/links';
+import Logo from '../../UI/Logo';
+import ThemeSwitch from '../../UI/ThemeSwitch/ThemeSwitch';
 import UserAvatar from '../../UI/UserAvatar';
 import Menu from '../Menu';
 import NotificationList from '../ProfileComponents/PersonalProfile/NotificationList';
-import { useSelector } from 'react-redux';
-import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
-import { Link } from 'react-router-dom';
-import links from '../../../router/links';
-import ThemeSwitch from "../../UI/ThemeSwitch/ThemeSwitch";
 import { InputSearch } from './InputSearch';
+import styles from './ProfileHeader.styles';
 
 const notifications = [
   {
@@ -73,7 +73,7 @@ const ProfileHeader = () => {
       </Box>
       <Box sx={styles.headerNav}>
         <InputSearch />
-        <ThemeSwitch/>
+        <ThemeSwitch />
         <NotificationList items={notifications} />
         <IconButton>
           <Badge color='error' overlap='circular' badgeContent='' variant='dot' invisible={true}>

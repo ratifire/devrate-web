@@ -1,10 +1,10 @@
-import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg';
-import { styles } from './InputSearch.styles';
-import { useTranslation } from 'react-i18next';
-import { useLazyGetSearchQuery } from '../../../../redux/search/searchApiSlice';
-import { ModalSearch } from '../ModalSearch';
+import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg'
+import { useLazyGetSearchQuery } from '../../../../redux/search/searchApiSlice'
+import { ModalSearch } from '../ModalSearch'
+import { styles } from './InputSearch.styles'
 
 const InputSearch = () => {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ const InputSearch = () => {
   useEffect(() => {
     const timerId = setTimeout(() => {
       getSearch(query);
-    }, 1000)
+    }, 1000);
 
     return () => clearTimeout(timerId);
   }, [query]);
@@ -44,7 +44,7 @@ const InputSearch = () => {
       />
       {!!users?.length && <ModalSearch users={users} />}
     </Box>
-  )
-}
+  );
+};
 
 export default InputSearch;
