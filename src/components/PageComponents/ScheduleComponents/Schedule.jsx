@@ -110,25 +110,23 @@ const Schedule = () => {
     return offsetTop;
   }
   const handleEventClick = (info) => {
+
      if (info) {
-      if (calendarRef.current) {
-        const calendarApi = calendarRef.current.getApi();
-        const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
-        if (scroller) {
+       if (calendarRef.current) {
+         const calendarApi = calendarRef.current.getApi();
+         const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+         if (scroller) {
           scroller.style.overflow = 'hidden';
         }
       }
+      
       const rect = info.el.getBoundingClientRect();
-       let x
-      let y
-      setEvent(currentClosestEvents.find(event=>event.id.toString()===info.event._def.publicId));
+      setEvent(eventsForSelectedWeek.find(event=>event.id.toString()===info.event._def.publicId));
       
       const dimentions = {popupWidth:413, arrowWidth:10, popupHeight: 200, rectWidth: 120, rectHeight:70}
       const xoffset = rect.left - (dimentions.popupWidth + dimentions.arrowWidth)
       const yoffset = getOffsetTopWithScroll(info.el)
       
-      x = xoffset
-      y = yoffset
       setPopupPosition('TOPRIGHT');
       
       // if (rect.left > window.innerWidth / 2) {
@@ -168,8 +166,8 @@ const Schedule = () => {
       setPopup({
         visible: true,
         event: eventDetails,
-        x: x,
-        y: y,
+        x: xoffset,
+        y: yoffset,
       });
     }
   };
