@@ -3,9 +3,9 @@ import { apiSlice } from '../services/api/apiSlice';
 export const SearchApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getSearch: builder.query({
-      query: (search) => `/search?search=${search}`,
+      query: (search) => `users/search?query=${search}`, // Исправлено
     })
   })
 })
 
-export const { useGetSearchQuery } = SearchApiSlice;
+export const { useLazyGetSearchQuery } = SearchApiSlice;
