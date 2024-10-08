@@ -2,6 +2,7 @@ export const en = {
   translation: {
     header: {
       search: 'Search',
+      notFound: 'Users not found',
     },
     home: {
       hero: {
