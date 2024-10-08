@@ -5,7 +5,7 @@ export const styles = {
     backgroundColor: theme.palette.neutral[900],
     maxWidth: '276px',
     width: '100%',
-    height: '300px',
+    height: '316px',
     padding: theme.spacing(2),
     borderRadius: theme.spacing(2),
     zIndex: '5',
@@ -34,4 +34,10 @@ export const styles = {
       textDecoration: 'none',
     },
   }),
+  boxCentered: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
 };

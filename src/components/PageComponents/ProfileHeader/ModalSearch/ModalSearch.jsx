@@ -6,7 +6,7 @@ import { styles } from './ModalSearch.styles';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { useTranslation } from 'react-i18next';
 
-const ModalSearch = ({ users, isError, isSpinner }) => {
+const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   const { t } = useTranslation();
 
   return (
@@ -14,10 +14,14 @@ const ModalSearch = ({ users, isError, isSpinner }) => {
       {isError && <ErrorComponent />}
       {isSpinner && <LoaderComponent />}
       <List sx={styles.list}>
-        {users.length === 0 && <Typography>{t('header.notFound')}</Typography>}
-        {users.length > 0 && users.map((v) => (
+        {!users.length && (
+          <Box sx={styles.boxCentered}>
+            <Typography>{t('header.notFound')}</Typography>
+          </Box>
+        )}
+        {!!users.length && users.map((v) => (
           <ListItem sx={styles.item} key={v.id}>
-            <Link key={v.id} to={`/profile/${v.id}`}>
+            <Link onClick={onClose} key={v.id} to={`/profile/${v.id}`}>
               <Typography>
                 {v.firstName} {v.lastName}
               </Typography>
@@ -32,6 +36,7 @@ const ModalSearch = ({ users, isError, isSpinner }) => {
 ModalSearch.propTypes = {
   isError: PropTypes.bool.isRequired,
   isSpinner: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
