@@ -1,29 +1,34 @@
 /* eslint-disable */
-import { Box } from '@mui/material';
+import { Box, List, ListItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { styles } from './ModalSearch.styles';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 
-const ModalSearch = ({ users }) => {
+const ModalSearch = ({ users, isError, isSpinner }) => {
   return (
     <Box sx={styles.box}>
-      <ul>
+      {isError && <ErrorComponent />}
+      {isSpinner && <LoaderComponent />}
+      <List sx={styles.list}>
         {users.map((v) => (
-          <li key={v.id}>
+          <ListItem sx={styles.item} key={v.id}>
             <Link key={v.id} to={`/profile/${v.id}`}>
-              <h2>
+              <Typography>
                 {v.firstName} {v.lastName}
-              </h2>
+              </Typography>
             </Link>
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </Box>
   );
 };
 
 ModalSearch.propTypes = {
+  isError: PropTypes.bool.isRequired,
+  isSpinner: PropTypes.bool.isRequired,
   users: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

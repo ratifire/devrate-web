@@ -1,3 +1,4 @@
-import InputSearch from './InputSearch';
+import InputSearch from './InputSearch'
 
-export { InputSearch };
+export { InputSearch }
+

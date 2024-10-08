@@ -1,22 +1,31 @@
-import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg'
-import { useLazyGetSearchQuery } from '../../../../redux/search/searchApiSlice'
-import { ModalSearch } from '../ModalSearch'
-import { styles } from './InputSearch.styles'
+/* eslint-disable */
+import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg';
+import { useLazyGetSearchQuery } from '../../../../redux/search/searchApiSlice';
+import { ModalSearch } from '../ModalSearch';
+import { styles } from './InputSearch.styles';
 
 const InputSearch = () => {
   const { t } = useTranslation();
-  const [getSearch] = useLazyGetSearchQuery();
-  const [query, setQuery] = useState('');
-  const [users, setUsers] = useState([]);
+  const [getSearch, { isError, isFetching }] = useLazyGetSearchQuery();
+  const [state, setState] = useState({
+    query: '',
+    users: [],
+    isChange: false,
+  })
+  const { query, users, isChange } = state;
+  const updateState = (newState) => setState((prevState) => ({ ...prevState, ...newState }));
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (query) {
         getSearch(query).then((res) => {
-          setUsers(res.data || []);
+          updateState({
+            users: res.data || [],
+            isChange: false,
+          });
         });
       }
     }, 1000);
@@ -25,13 +34,19 @@ const InputSearch = () => {
   }, [query]);
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    updateState({
+      query: e.target.value,
+      isChange: true,
+      users: [],
+    })
   };
 
   const handleBlur = () => {
-    setQuery('');
-    setUsers([]);
-  }
+    updateState({
+      query: '',
+      users: [],
+    })
+  };
 
   return (
     <Box>
@@ -43,7 +58,6 @@ const InputSearch = () => {
         value={query}
         onChange={handleChange}
         onBlur={handleBlur}
-        onFocus={() => setQuery('')}
         sx={styles.input}
         endAdornment={
           <InputAdornment position='end'>
@@ -53,7 +67,13 @@ const InputSearch = () => {
           </InputAdornment>
         }
       />
-      {!!users.length && <ModalSearch users={users} />}
+      {query && (
+        <ModalSearch
+          isError={isError}
+          isSpinner={isFetching || isChange}
+          users={users}
+        />
+      )}
     </Box>
   );
 };
