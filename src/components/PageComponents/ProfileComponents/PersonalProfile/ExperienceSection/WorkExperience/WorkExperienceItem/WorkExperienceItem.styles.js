@@ -5,6 +5,7 @@ const styles = {
     padding: theme.spacing(4),
     backgroundColor: theme.palette.sliderAssessment.darkGray,
     borderRadius: 2,
+    border: theme.palette.sliderAssessment.border
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',
@@ -39,15 +40,15 @@ const styles = {
 
   iconBtnModal: (theme) => ({
     flex: '1 0 35px',
-    color: theme.palette.neutral['200'],
+    color: theme.palette.iconBtnModalDropdown.color,
     borderRadius: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
-      backgroundColor: theme.palette.neutral['700'],
-      color: theme.palette.neutral['200'],
+      backgroundColor: theme.palette.iconBtnModalDropdown.hoverBgColor,
+      color: theme.palette.iconBtnModalDropdown.color,
     },
   }),
 };
