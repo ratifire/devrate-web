@@ -9,26 +9,42 @@ import { styles } from './ModalSearch.styles';
 const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   const { t } = useTranslation();
 
+  if (isSpinner) {
+    return (
+      <Box sx={styles.box}>
+        <LoaderComponent />
+      </Box>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Box sx={styles.box}>
+        <ErrorComponent />
+      </Box>
+    );
+  }
+
+  if (!users.length) {
+    return (
+      <Box sx={styles.box}>
+        <Typography>{t('header.notFound')}</Typography>
+      </Box>
+    );
+  }
+
   return (
     <Box sx={styles.box}>
-      {isError && <ErrorComponent />}
-      {isSpinner && <LoaderComponent />}
       <List sx={styles.list}>
-        {!users.length && (
-          <Box sx={styles.boxCentered}>
-            <Typography>{t('header.notFound')}</Typography>
-          </Box>
-        )}
-        {!!users.length &&
-          users.map((v) => (
-            <ListItem sx={styles.item} key={v.id}>
-              <Link onClick={onClose} key={v.id} to={`/profile/${v.id}`}>
-                <Typography>
-                  {v.firstName} {v.lastName}
-                </Typography>
-              </Link>
-            </ListItem>
-          ))}
+        {users.map((v) => (
+          <ListItem sx={styles.item} key={v.id}>
+            <Link onClick={onClose} key={v.id} to={`/profile/${v.id}`}>
+              <Typography>
+                {v.firstName} {v.lastName}
+              </Typography>
+            </Link>
+          </ListItem>
+        ))}
       </List>
     </Box>
   );

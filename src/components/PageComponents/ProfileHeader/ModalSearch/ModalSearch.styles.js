@@ -8,11 +8,16 @@ export const styles = {
     height: '316px',
     padding: theme.spacing(2),
     borderRadius: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     zIndex: '5',
   }),
   list: (theme) => ({
     overflowY: 'auto',
     height: '300px',
+    width: '100%',
     '&::-webkit-scrollbar': {
       width: 10,
     },
@@ -34,10 +39,4 @@ export const styles = {
       textDecoration: 'none',
     },
   }),
-  boxCentered: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-  },
 };
