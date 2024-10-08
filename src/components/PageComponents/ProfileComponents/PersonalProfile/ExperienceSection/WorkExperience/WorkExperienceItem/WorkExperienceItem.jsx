@@ -12,11 +12,8 @@ import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/
 
 const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
   const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();
-
   const [anchorEl, setAnchorEl] = useState(null);
-
   const dispatch = useDispatch();
-
   const { t } = useTranslation();
   const handleCloseMenu = () => {
     setAnchorEl(null);
@@ -27,7 +24,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   };
 
   const handleEditFeature = () => {
-    dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startYear, endYear } }));
+    dispatch(openModal({ modalName: 'workExperience', data: { id, position, companyName, description, responsibilities, startYear, endYear } }));
     handleCloseMenu();
   };
 
