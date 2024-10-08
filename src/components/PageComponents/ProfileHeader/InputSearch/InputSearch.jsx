@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,14 +6,16 @@ import { useLazyGetSearchQuery } from '../../../../redux/search/searchApiSlice';
 import { ModalSearch } from '../ModalSearch';
 import { styles } from './InputSearch.styles';
 
+const initialState = {
+  query: '',
+  users: [],
+  isChange: false,
+};
+
 const InputSearch = () => {
   const { t } = useTranslation();
   const [getSearch, { isError, isFetching }] = useLazyGetSearchQuery();
-  const [state, setState] = useState({
-    query: '',
-    users: [],
-    isChange: false,
-  });
+  const [state, setState] = useState(initialState);
   const { query, users, isChange } = state;
   const updateState = (newState) => setState((prevState) => ({ ...prevState, ...newState }));
   const boxRef = useRef(null);
@@ -39,12 +40,12 @@ const InputSearch = () => {
       query: e.target.value,
       isChange: true,
       users: [],
-    })
+    });
   };
 
   const handleClose = () => {
-    updateState({query: '', users: []});
-  }
+    updateState({ query: '', users: [] });
+  };
 
   const handleBlur = (e) => {
     if (boxRef.current && boxRef.current.contains(e.relatedTarget)) {
@@ -74,12 +75,7 @@ const InputSearch = () => {
         }
       />
       {query && (
-        <ModalSearch
-          isError={isError}
-          isSpinner={isFetching || isChange}
-          users={users}
-          onClose={handleClose}
-        />
+        <ModalSearch isError={isError} isSpinner={isFetching || isChange} users={users} onClose={handleClose} />
       )}
     </Box>
   );

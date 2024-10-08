@@ -1,10 +1,10 @@
 import { Box, List, ListItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { styles } from './ModalSearch.styles';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { styles } from './ModalSearch.styles';
 
 const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   const { t } = useTranslation();
@@ -19,15 +19,16 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
             <Typography>{t('header.notFound')}</Typography>
           </Box>
         )}
-        {!!users.length && users.map((v) => (
-          <ListItem sx={styles.item} key={v.id}>
-            <Link onClick={onClose} key={v.id} to={`/profile/${v.id}`}>
-              <Typography>
-                {v.firstName} {v.lastName}
-              </Typography>
-            </Link>
-          </ListItem>
-        ))}
+        {!!users.length &&
+          users.map((v) => (
+            <ListItem sx={styles.item} key={v.id}>
+              <Link onClick={onClose} key={v.id} to={`/profile/${v.id}`}>
+                <Typography>
+                  {v.firstName} {v.lastName}
+                </Typography>
+              </Link>
+            </ListItem>
+          ))}
       </List>
     </Box>
   );
