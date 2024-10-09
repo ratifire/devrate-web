@@ -1,18 +1,17 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
+// Хук WebSocket
 export function useSocket(url, onOpen) {
-  const [socket, setSocket] = useState(null);
-
   useEffect(() => {
     const ws = new WebSocket(`${process.env.REACT_APP_WS_URL}${url}`);
-    ws.addEventListener('open', event => {
-      setSocket(event.target);
+    
+    ws.addEventListener('open', (event) => {
       onOpen(event);
     });
-
+    
+    // Очищення ресурсу WebSocket при розмонтаженні компонента
     return () => {
-      socket?.close();
-      setSocket(null);
-    }
-  }, []);
+      ws.close();
+    };
+  }, [url, onOpen]); // Додано залежності
 }

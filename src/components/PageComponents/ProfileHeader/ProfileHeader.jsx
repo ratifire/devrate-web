@@ -20,37 +20,6 @@ const initialValues = {
   query: '',
 };
 
-const notifications = [
-  {
-    id: '1',
-    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
-    date: '6 годин тому',
-    new: false,
-    type: 'warning',
-  },
-  {
-    id: '2',
-    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
-    date: '6 годин тому',
-    new: true,
-    type: 'info',
-  },
-  {
-    id: '3',
-    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
-    date: '6 годин тому',
-    new: true,
-    type: 'info',
-  },
-  {
-    id: '4',
-    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
-    date: '6 годин тому',
-    new: true,
-    type: 'message',
-  },
-];
-
 const ProfileHeader = () => {
   const { data: info } = useSelector(selectCurrentUser);
   const { id, firstName, lastName } = info;
@@ -110,7 +79,7 @@ const ProfileHeader = () => {
           />
         </form>
         <ThemeSwitch/>
-        <NotificationList items={notifications} />
+        <NotificationList />
         <IconButton>
           <Badge color='error' overlap='circular' badgeContent='' variant='dot' invisible={true}>
             <Message />

@@ -2,7 +2,7 @@
 
 
 import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants';
@@ -17,8 +17,9 @@ import { educationReducer } from '../user/education/educationSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
 import activeMasteryReducer from '../specialization/activeMasterySlice';
-import buttonReducer from '../addButton/addButtonSlice'
-import themeSliceReducer from "../theme/themeSlice";
+import buttonReducer from '../addButton/addButtonSlice';
+import themeSliceReducer from '../theme/themeSlice';
+import { notificationApi } from '../notification/notificationApiSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -37,7 +38,7 @@ const personalPersistConfig = {
 };
 
 const rootReducer = {
-  theme:themeSliceReducer,
+  theme: themeSliceReducer,
   modal: modalSliceReducer,
   education: educationReducer,
   modalStep: modalStepReducer,
@@ -49,6 +50,7 @@ const rootReducer = {
   email: emailSliceReducer,
   activeMastery: activeMasteryReducer,
   button: buttonReducer,
+  [notificationApi.reducerPath]: notificationApi.reducer,
 };
 
 const store = configureStore({
@@ -59,8 +61,8 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      .concat(logger)
-      .concat(apiSlice.middleware),
+      .concat(apiSlice.middleware)
+      .concat(notificationApi.middleware),
   devTools: true,
 });
 

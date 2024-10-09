@@ -20,7 +20,7 @@ const Notification = (props) => {
   const currentUser = useSelector(selectCurrentUser);
   const [markAsRead] = useMarkAsReadMutation();
   const [deleteNotification] = useDeleteNotificationMutation();
-
+  console.log(props,'props');
   const markAsReadClickHandler = () => {
     markAsRead({
       notificationId: props.id,
