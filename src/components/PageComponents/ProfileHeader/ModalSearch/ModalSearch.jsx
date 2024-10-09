@@ -1,10 +1,12 @@
-import { Box, List, ListItem, Typography } from '@mui/material';
+/* eslint-disable */
+import { Box, Divider, List, ListItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { styles } from './ModalSearch.styles';
+import UserAvatar from '../../../UI/UserAvatar';
 
 const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   const { t } = useTranslation();
@@ -32,17 +34,33 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
       </Box>
     );
   }
-
+  console.log(users);
   return (
     <Box sx={styles.box}>
       <List sx={styles.list}>
         {users.map((v) => (
           <ListItem sx={styles.item} key={v.id}>
-            <Link onClick={onClose} key={v.id} to={`/profile/${v.id}`}>
-              <Typography>
-                {v.firstName} {v.lastName}
-              </Typography>
-            </Link>
+            <Box>
+              <Link onClick={onClose} key={v.id} to={`/profile/${v.id}`}>
+                <Box sx={styles.linkBox}>
+                  <Typography variant='subtitle2'>
+                    {v.firstName} {v.lastName}
+                  </Typography>
+                  <Typography variant='subtitle3'>
+                    {v.status}
+                  </Typography>
+                </Box>
+                <UserAvatar
+                  size={'l'}
+                  userName={v.firstName}
+                  userFirstName={v.lastName}
+                  userLastName={v.lastName}
+                  correctStyle={styles.img}
+                  src={v.picture}
+                />
+              </Link>
+            </Box>
+            <Divider sx={styles.divider} />
           </ListItem>
         ))}
       </List>
@@ -59,6 +77,8 @@ ModalSearch.propTypes = {
       id: PropTypes.number.isRequired,
       firstName: PropTypes.string.isRequired,
       lastName: PropTypes.string.isRequired,
+      picture: PropTypes.string,
+      status: PropTypes.string,
     })
   ),
 };

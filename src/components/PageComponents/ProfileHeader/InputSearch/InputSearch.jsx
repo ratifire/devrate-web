@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -48,11 +49,11 @@ const InputSearch = () => {
   };
 
   const handleBlur = (e) => {
-    if (boxRef.current && boxRef.current.contains(e.relatedTarget)) {
-      return;
-    }
-
-    handleClose();
+    // if (boxRef.current && boxRef.current.contains(e.relatedTarget)) {
+    //   return;
+    // }
+    //
+    // handleClose();
   };
 
   return (

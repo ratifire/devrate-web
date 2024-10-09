@@ -4,6 +4,6 @@ export const styles = {
       paddingY: '8px!important',
       paddingX: '12px!important',
     },
-    width: '276px',
+    width: '376px',
   },
 };
