@@ -34,7 +34,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
       </Box>
     );
   }
-  console.log(users);
+
   return (
     <Box sx={styles.box}>
       <List sx={styles.list}>
@@ -42,18 +42,18 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
           <ListItem sx={styles.item} key={v.id}>
             <Box>
               <Link onClick={onClose} key={v.id} to={`/profile/${v.id}`}>
-                <Box sx={styles.linkBox}>
+                <Box>
                   <Typography variant='subtitle2'>
                     {v.firstName} {v.lastName}
                   </Typography>
-                  <Typography variant='subtitle3'>
+                  <Typography sx={styles.subtitle} variant='subtitle3'>
                     {v.status}
                   </Typography>
                 </Box>
                 <UserAvatar
-                  size={'l'}
+                  size={'sm'}
                   userName={v.firstName}
-                  userFirstName={v.lastName}
+                  userFirstName={v.firstName}
                   userLastName={v.lastName}
                   correctStyle={styles.img}
                   src={v.picture}

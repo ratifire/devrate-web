@@ -1,14 +1,14 @@
-/* eslint-disable */
 export const styles = {
   box: (theme) => ({
     marginTop: theme.spacing(2),
     position: 'absolute',
-    backgroundColor: theme.palette.neutral[900],
+    backgroundColor: theme.palette.background.backdrop,
     maxWidth: '376px',
     width: '100%',
-    height: '368px',
+    maxHeight: '428px',
     padding: theme.spacing(3),
     borderRadius: theme.spacing(2),
+    border: `1px solid ${theme.palette.border.color}`,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -17,7 +17,9 @@ export const styles = {
   }),
   list: (theme) => ({
     overflowY: 'auto',
-    height: '350px',
+    padding: 0,
+    paddingRight: '8px',
+    maxHeight: '412px',
     width: '100%',
     '&::-webkit-scrollbar': {
       width: 6,
@@ -33,15 +35,19 @@ export const styles = {
   }),
   item: (theme) => ({
     display: 'block',
-    '&:hover': {
-      backgroundColor: theme.palette.neutral['800'],
-    },
+    padding: '0',
+    paddingRight: theme.spacing(2),
     '& a': {
       color: theme.palette.text.primary,
+      minHeight: '64px',
       textDecoration: 'none',
       display: 'flex',
       justifyContent: 'space-between',
+      alignItems: 'center',
       gap: '33px',
+      '&: hover': {
+        backgroundColor: theme.palette.neutral['800'],
+      }
     },
   }),
   img: {
@@ -49,12 +55,10 @@ export const styles = {
     height: '40px',
     borderRadius: '50%',
   },
-  linkBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '4px',
-  },
   divider: (theme) => ({
-
-  })
+    backgroundColor: theme.palette.search.color,
+  }),
+  subtitle: (theme) => ({
+    color: theme.palette.neutral['100'],
+  }),
 };

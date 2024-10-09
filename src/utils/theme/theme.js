@@ -104,9 +104,15 @@ const getDesignTokens = (mode) => ({
   palette: {
     ...(mode === 'dark'
       ? {
+        border: {
+          color: '#252527',
+        },
         iconBtn: {
           color: '#CEB0FA',
           hoverColor: ''
+        },
+        search: {
+          color: 'rgba(197, 197, 198, 0.25)'
         },
         tabsEl: {
           borderColor: '#69696B',
@@ -239,6 +245,12 @@ const getDesignTokens = (mode) => ({
         },
       }
       : {
+        border: {
+          color: '#C5C5C6',
+        },
+        search: {
+          color: 'rgba(197, 197, 198, 0.40)'
+        },
         tabsEl: {
           borderColor: '#A9A9AA',
           indicator: '#6200EE',
