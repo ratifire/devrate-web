@@ -2,7 +2,7 @@ export const uk = {
   translation: {
     header: {
       search: 'Пошук',
-      notFound: 'Користувачів не знайдено',
+      notFound: 'За цим запитом немає збігів',
     },
     home: {
       hero: {

@@ -2,7 +2,7 @@ export const en = {
   translation: {
     header: {
       search: 'Search',
-      notFound: 'Users not found',
+      notFound: 'There are no matches for this request',
     },
     home: {
       hero: {
