@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../../assets/icons/logo.svg';
+import logo from '../../../assets/icons/LogoHeader/BlackThemeIcon/BlackLogoHeader.svg';
 import PropTypes from 'prop-types';
 import { CardMedia } from '@mui/material';
 import { pictureData } from '../../../utils/constants/pictureData';
