@@ -7,9 +7,14 @@ import { Link } from 'react-router-dom';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { styles } from './ModalSearch.styles';
 import UserAvatar from '../../../UI/UserAvatar';
+import { useSelector } from 'react-redux';
+import { DARK_THEME } from '../../../../utils/constants/theme';
+import { DARK_NOT_FOUND, LIGHT_NOT_FOUND } from './bgImg';
 
 const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   const { t } = useTranslation();
+  const { mode } = useSelector((state) => state.theme);
+  const imgUrl = mode === DARK_THEME ? DARK_NOT_FOUND : LIGHT_NOT_FOUND;
 
   if (isSpinner) {
     return (
@@ -29,7 +34,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
 
   if (!users.length) {
     return (
-      <Box sx={styles.box}>
+      <Box sx={{ ...styles.box, backgroundImage: `url(${imgUrl})`}}>
         <Typography>{t('header.notFound')}</Typography>
       </Box>
     );
