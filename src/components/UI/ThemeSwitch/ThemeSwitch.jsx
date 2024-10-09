@@ -2,6 +2,7 @@ import React from 'react'
 import {FormControlLabel, FormGroup, styled, Switch} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {toggleTheme} from "../../../redux/theme/themeSlice";
+import { DARK_THEME } from '../../../utils/constants/theme';
 
 const ThemeSwitch = () => {
 	const dispatch = useDispatch()
@@ -25,7 +26,7 @@ const ThemeSwitch = () => {
 					backgroundColor: '#3E3E40',
 					borderRadius: 26 / 2,
 					border: `${theme.palette.themeSwitcher.borderColor} 1px solid`,
-					...theme.applyStyles('dark', {
+					...theme.applyStyles(DARK_THEME, {
 						backgroundColor: theme.palette.themeSwitcher.switcherColor,
 						
 					}),
@@ -58,7 +59,7 @@ const ThemeSwitch = () => {
 			backgroundColor: theme.palette.themeSwitcher.backgroundColor,
 			borderRadius: 26 / 2,
 			border: `${theme.palette.themeSwitcher.borderColor} 1px solid`,
-			...theme.applyStyles('dark', {
+			...theme.applyStyles(DARK_THEME, {
 				backgroundColor: '#8796A5',
 			}),
 		},

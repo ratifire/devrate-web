@@ -1,3 +1,5 @@
+import { DARK_THEME } from '../constants/theme';
+
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
   shape: {
@@ -102,7 +104,7 @@ const getDesignTokens = (mode) => ({
     },
   },
   palette: {
-    ...(mode === 'dark'
+    ...(mode === DARK_THEME
       ? {
         border: {
           color: '#252527',
