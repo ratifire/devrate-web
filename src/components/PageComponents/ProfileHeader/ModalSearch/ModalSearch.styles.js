@@ -14,6 +14,7 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: '5',
+    color: theme.palette.text.primary,
   }),
   list: (theme) => ({
     overflowY: 'auto',
