@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 import { styles } from './ModalSearch.styles';
-import UserAvatar from '../../../UI/UserAvatar';
+import UserAvatar from '../../../../UI/UserAvatar';
 import { useSelector } from 'react-redux';
-import { DARK_THEME } from '../../../../utils/constants/theme';
-import { DARK_NOT_FOUND, LIGHT_NOT_FOUND } from './bgImg';
+import { DARK_THEME } from '../../../../../utils/constants/theme';
+import { DARK_NOT_FOUND, LIGHT_NOT_FOUND } from '../constants';
 
 const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   const { t } = useTranslation();
@@ -34,8 +34,9 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
 
   if (!users.length) {
     return (
-      <Box sx={{ ...styles.box, backgroundImage: `url(${imgUrl})`}}>
-        <Typography>{t('header.notFound')}</Typography>
+      <Box sx={styles.box}>
+        <Typography variant='subtitle1' sx={styles.emptyTitle}>{t('header.notFound')}</Typography>
+        <Box sx={{ ...styles.boxImg, backgroundImage: `url(${imgUrl})` }}/>
       </Box>
     );
   }

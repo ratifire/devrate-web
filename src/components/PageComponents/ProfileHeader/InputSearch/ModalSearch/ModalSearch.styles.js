@@ -15,7 +15,20 @@ export const styles = {
     justifyContent: 'center',
     zIndex: '5',
     color: theme.palette.text.primary,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   }),
+  boxImg: {
+    width: '100%',
+    minHeight: '187px',
+    backgroundSize: 'contain',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    marginBottom: '32px',
+  },
+  emptyTitle: {
+    paddingBottom: '24px',
+  },
   list: (theme) => ({
     overflowY: 'auto',
     padding: 0,
