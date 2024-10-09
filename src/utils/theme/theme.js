@@ -101,7 +101,7 @@ const getDesignTokens = (mode) => ({
       letterSpacing: 0,
     },
   },
-  palette: {
+  palette: {mode,
     ...(mode === 'dark'
       ? {
         iconBtn: {
@@ -147,7 +147,7 @@ const getDesignTokens = (mode) => ({
         },
         themeSwitcher: {
           backgroundColor: '#8796A5',
-          switcherColor: '#8133F1',
+          switcherColor: '#25CBFF',
           borderColor: '#1D1D1D',
         },
         sliderAssessment: {
@@ -166,6 +166,8 @@ const getDesignTokens = (mode) => ({
           primary: '#ffffff',
           secondary: '#C5C5C6',
           disabled: '#F1F1F1',
+          accent: "#007CA3",
+          darkGray: '#F8F8F8',
         },
         action: {
           active: '#B78AF7',
@@ -232,13 +234,22 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#25CBFF',
+          blueDark: "#007CA3",
           azure: '#16FFB9',
+          azureDark: "#00855D",
+          orange:"#FCA728",
+          orangeDark: "#EE7538",
+          pink: "#D31772",
           hover: '#CEB0FA',
           contrastText: '#ffffff',
           lime: '#DAFE22',
         },
       }
       : {
+        iconBtn: {
+            color: '#CEB0FA',
+            hoverColor: ''
+          },
         tabsEl: {
           borderColor: '#A9A9AA',
           indicator: '#6200EE',
@@ -291,12 +302,16 @@ const getDesignTokens = (mode) => ({
         common: {
           black: '#000000',
           white: '#ffffff',
+          
+          titleGradient: 'linear-gradient(90deg, rgb(117, 98, 228), rgb(251, 147, 166))',
         },
         text: {
           primary: '#1D1D1D',
           secondary: '#1D1D1D',
           disabled: '#A0A0A0',
-        },
+          accent:  "#25CBFF",
+          darkGray: '#F8F8F8',
+         },
         action: {
           active: '#6200EE',
           hover: '#8133F1',
@@ -362,9 +377,15 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#2196F3',
+          blueDark: "#007CA3",
           azure: '#16FFB9',
+          azureDark: "#00855D",
+          orange:"#FCA728",
+          orangeDark: "#EE7538",
+          pink: "#D31772",
           hover: '#E3F2FD',
           contrastText: '#000000',
+          lime: '#DAFE22',
         },
       }),
   },

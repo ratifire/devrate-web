@@ -1,10 +1,14 @@
 import React from 'react';
 import logo from '../../../assets/icons/logo.svg';
+import logoLight from '../../../assets/icons/logoLight.svg';
+
 import PropTypes from 'prop-types';
 import { CardMedia } from '@mui/material';
 import { pictureData } from '../../../utils/constants/pictureData';
+import {useTheme} from "@mui/material/styles";
 
 const Logo = ({ width, height }) => {
+  const theme = useTheme()
   return (
     <CardMedia component='picture' width={width} height={height}>
       {pictureData.map((element) => (
@@ -14,7 +18,7 @@ const Logo = ({ width, height }) => {
           media={`(max-width: ${element.mediaWidth}px)`}
         />
       ))}
-      <img src={logo} alt='logo' width={width} height={height} />
+      <img src={theme.palette.mode==="dark"?logo:logoLight} alt='logo' width={width} height={height} />
     </CardMedia>
   );
 };

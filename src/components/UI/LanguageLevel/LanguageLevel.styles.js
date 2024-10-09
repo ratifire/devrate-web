@@ -10,7 +10,7 @@ export const styles = {
     fontWeight: 400,
     fontSize: 12,
     lineHeight: '12px',
-    color: theme.palette.text.primary,
+    color: theme.palette.common.white ,
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',

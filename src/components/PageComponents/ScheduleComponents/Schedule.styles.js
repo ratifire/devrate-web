@@ -16,14 +16,24 @@ export const styles = {
     borderColor: '#303032',
     backgroundColor: 'red',
   },
-  timeGridTableData: {
+  timeGridTableDataDark: {
     height: '70px', // Adjust this value to change the width of the time-axis slots
     borderColor: '#303032',
   },
-  timeGridTableHead: {
+  timeGridTableDataLight: {
+    height: '70px',
+    borderColor: '#C5C5C6',
+  },
+  timeGridTableHeadDark: {
     borderColor: '#303032',
     color: '#C5C5C6',
     fontSize: '14px',
+    lineHeight: '20.02px',
+  },
+  timeGridTableHeadLight: {
+    borderColor: '#C5C5C6',
+    color: '#303032',
+     fontSize: '14px',
     lineHeight: '20.02px',
   },
   timeGridTodayElements: {
