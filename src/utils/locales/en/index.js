@@ -1,5 +1,9 @@
 export const en = {
   translation: {
+    header: {
+      search: 'Search',
+      notFound: 'Users not found',
+    },
     home: {
       hero: {
         title: 'A multifunctional platform from developers for developers',
