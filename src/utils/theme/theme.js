@@ -114,7 +114,8 @@ const getDesignTokens = (mode) => ({
           hoverColor: ''
         },
         search: {
-          color: 'rgba(197, 197, 198, 0.25)'
+          color: 'rgba(197, 197, 198, 0.25)',
+          inputActive: '#B78AF7'
         },
         tabsEl: {
           borderColor: '#69696B',
@@ -251,7 +252,8 @@ const getDesignTokens = (mode) => ({
           color: '#C5C5C6',
         },
         search: {
-          color: 'rgba(197, 197, 198, 0.40)'
+          color: 'rgba(197, 197, 198, 0.40)',
+          inputActive: '#8133F1'
         },
         tabsEl: {
           borderColor: '#A9A9AA',

@@ -40,7 +40,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
       </Box>
     );
   }
-  console.log(users);
+
   return (
     <Box sx={styles.box}>
       <List sx={styles.list}>
