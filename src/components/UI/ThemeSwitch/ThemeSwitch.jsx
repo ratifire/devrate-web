@@ -26,7 +26,7 @@ const ThemeSwitch = () => {
 					borderRadius: 26 / 2,
 					border: `${theme.palette.themeSwitcher.borderColor} 1px solid`,
 					...theme.applyStyles('dark', {
-						backgroundColor: theme.palette.themeSwitcher.switcherColor,
+						backgroundColor: theme.palette.themeSwitcher.backgroundColor,
 						
 					}),
 				},

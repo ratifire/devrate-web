@@ -1,8 +1,10 @@
 export const styles = {
 
   container: (theme) => ({
-    background: theme.palette.sliderAssessment.darkGray,
+    // backgroundColor: theme.palette.mode==="dark" ? theme.palette.sliderAssessment.darkGray : theme.palette.action.hover,
+    // backgroundColor: theme.palette.sliderAssessment.darkGray,
     // borderRight: '1px solid #d3e2e8',
+    // backgroundColor:"red",
     borderTopLeftRadius: theme.spacing(2),
     borderBottomLeftRadius: theme.spacing(2),
     paddingRight: theme.spacing(2),
@@ -30,4 +32,3 @@ export const styles = {
     }),
   }),
 };
- 
