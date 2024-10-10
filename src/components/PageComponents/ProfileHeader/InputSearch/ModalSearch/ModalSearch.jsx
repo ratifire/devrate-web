@@ -40,29 +40,29 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
       </Box>
     );
   }
-
+  console.log(users);
   return (
     <Box sx={styles.box}>
       <List sx={styles.list}>
-        {users.map((v) => (
-          <ListItem sx={styles.item} key={v.id}>
+        {users.map(({id, lastName, firstName, picture, mainSpecializationName}) => (
+          <ListItem sx={styles.item} key={id}>
             <Box>
-              <Link onClick={onClose} key={v.id} to={`/profile/${v.id}`}>
+              <Link onClick={onClose} key={id} to={`/profile/${id}`}>
                 <Box>
                   <Typography variant='subtitle2'>
-                    {v.firstName} {v.lastName}
+                    {firstName} {lastName}
                   </Typography>
                   <Typography sx={styles.subtitle} variant='subtitle3'>
-                    {v.status}
+                    {mainSpecializationName}
                   </Typography>
                 </Box>
                 <UserAvatar
                   size={'sm'}
-                  userName={v.firstName}
-                  userFirstName={v.firstName}
-                  userLastName={v.lastName}
+                  userName={firstName}
+                  userFirstName={firstName}
+                  userLastName={lastName}
                   correctStyle={styles.img}
-                  src={v.picture}
+                  src={picture}
                 />
               </Link>
             </Box>
