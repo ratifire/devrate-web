@@ -43,8 +43,6 @@ const Schedule = () => {
   useLayoutEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
-      console.log("test1")
-      
       applyRequiredStyles(calendarApi, theme);
       calendarApi.gotoDate(from);
       calendarApi.scrollToTime(eventStartTime);
