@@ -22,7 +22,7 @@ const ThemeSwitch = () => {
 				},
 				'& + .MuiSwitch-track': {
 					opacity: 1,
-					backgroundColor: '#3E3E40',
+					backgroundColor: theme.palette.themeSwitcher.backgroundColor,
 					borderRadius: 26 / 2,
 					border: `${theme.palette.themeSwitcher.borderColor} 1px solid`,
 					...theme.applyStyles('dark', {

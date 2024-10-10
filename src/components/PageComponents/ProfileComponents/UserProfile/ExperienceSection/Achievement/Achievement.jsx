@@ -1,29 +1,16 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import { useFetchAchievementsQuery } from '../../../../../../redux/services/achievementsApiSlice';
 import AchievementItem from './AchievementItem';
 import { Grid } from '@mui/material';
-import styles from './Achievement.style';
 import PropTypes from 'prop-types';
-import { loadIconsFromLocalStorage } from '../../../../../../utils/helpers';
 import { iconsAchievement } from '../../../../../../utils/constants/Experience/iconsExperience';
-import { mapDataWithIcons } from '../../../../../../utils/helpers/mapDataWithIcons';
-import { iconValuesAchievement } from '../../../../../../utils/constants/Experience/iconsKeys';
-import { updateIconsInLocalStorage } from '../../../../../../utils/helpers/updateIconsInLocalStorage';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
+import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
 
 
 const Achievement = ({ id, tab, profileType, imgUrl }) => {
-  const iconsMap = loadIconsFromLocalStorage('achievement');
   const { data: achievementsData } = useFetchAchievementsQuery(id);
-  const achievementsNewData = mapDataWithIcons(achievementsData, iconsMap, iconsAchievement);
-  const iconValues = useMemo(() => iconValuesAchievement, []);
-
-
-
-
-  useEffect(() => {
-    updateIconsInLocalStorage(achievementsData, iconsMap, iconValues, 'achievement');
-  }, [achievementsData, iconValues, iconsMap]);
+  const getIcon = loopedObjValues(iconsAchievement);
 
 
   if (!achievementsData || achievementsData.length === 0) {
@@ -32,9 +19,9 @@ const Achievement = ({ id, tab, profileType, imgUrl }) => {
 
 
   return (
-    <Grid container spacing={3} sx={styles.achievementListContainer}>
-      {achievementsNewData?.map((achievement) =>
-        <AchievementItem key={achievement.id} achievement={achievement} icon={achievement.iconComponent} />
+    <Grid container spacing={3}>
+      {achievementsData?.map((achievement) =>
+        <AchievementItem key={achievement.id} achievement={achievement} icon={getIcon()} />
       )}
     </Grid>
   );

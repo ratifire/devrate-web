@@ -104,9 +104,66 @@ const getDesignTokens = (mode) => ({
   palette: {mode,
     ...(mode === 'dark'
       ? {
+        baseUserInfo: {
+          city: {
+            color: '#25CBFF',
+          },
+        },
+        rightSection: {
+          languages: {
+            border: {
+              borderColor: 'transparent',
+            },
+            type: {
+              color: '#FFFFFF',
+              backgroundColor: '#5900D9',
+            },
+            level: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA',
+            },
+            modalDeleteIcon: {
+              color: '#5900D9',
+            },
+          },
+          text: {
+            color: '#C5C5C6',
+          },
+        },
+        scroll: {
+          scrollWrapp: {
+            backgroundColor: '#3E3E40',
+          },
+          scrollEl: {
+            backgroundColor: '#FFFFFF',
+          },
+        },
+
         iconBtn: {
-          color: '#CEB0FA',
-          hoverColor: ''
+          editBtn: {
+            color: '#CEB0FA',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          createBtn: {
+            color: '#CEB0FA',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          burgerDot: {
+            color: '#C5C5C6',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#A9A9AA',
+              backgroundColor: '#252527',
+            },
+          },
         },
         tabsEl: {
           borderColor: '#69696B',
@@ -146,7 +203,7 @@ const getDesignTokens = (mode) => ({
           responsibilityBorder: 'transparent',
         },
         themeSwitcher: {
-          backgroundColor: '#8796A5',
+          backgroundColor: '#252527',
           switcherColor: '#25CBFF',
           borderColor: '#1D1D1D',
         },
@@ -246,11 +303,41 @@ const getDesignTokens = (mode) => ({
         },
       }
       : {
-        iconBtn: {
-            color: '#CEB0FA',
-            hoverColor: ''
+         baseUserInfo: {
+          city: {
+            color: '#007CA3',
           },
-        tabsEl: {
+        },
+        rightSection: {
+          languages: {
+            border: {
+              borderColor: '#B78AF7',
+            },
+            type: {
+              color: '#FFFFFF',
+              backgroundColor: '#6200EE',
+            },
+            level: {
+              color: '#4600A9',
+              backgroundColor: '#EFE6FD',
+            },
+            modalDeleteIcon: {
+              color: '#6200EE',
+            },
+          },
+          text: {
+            color: '#3E3E40',
+          },
+        },
+        scroll: {
+          scrollWrapp: {
+            backgroundColor: '#ECECED',
+          },
+          scrollEl: {
+            backgroundColor: '#C5C5C6',
+          },
+        },
+         tabsEl: {
           borderColor: '#A9A9AA',
           indicator: '#6200EE',
           default: {
@@ -260,6 +347,32 @@ const getDesignTokens = (mode) => ({
           focused: {
             color: '#6200EE',
             backgroundColor: 'transparent',
+          },
+        },
+        iconBtn: {
+          editBtn: {
+            color: '#8133F1',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#8133F1',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          createBtn: {
+            color: '#CEB0FA',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          burgerDot: {
+            color: '#C5C5C6',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#A9A9AA',
+              backgroundColor: '#252527',
+            },
           },
         },
         sectionSkills: {

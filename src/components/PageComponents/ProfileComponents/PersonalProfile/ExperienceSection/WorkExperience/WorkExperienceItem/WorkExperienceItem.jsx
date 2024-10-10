@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
 import styles from './WorkExperienceItem.styles.js';
 import { useTranslation } from 'react-i18next';
 import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
@@ -13,11 +12,8 @@ import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/
 
 const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
   const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();
-
   const [anchorEl, setAnchorEl] = useState(null);
-
   const dispatch = useDispatch();
-
   const { t } = useTranslation();
   const handleCloseMenu = () => {
     setAnchorEl(null);
@@ -28,7 +24,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   };
 
   const handleEditFeature = () => {
-    dispatch(openModal({ modalName: 'openExperience', data: { id, position, companyName, description, responsibilities, startYear, endYear } }));
+    dispatch(openModal({ modalName: 'workExperience', data: { id, position, companyName, description, responsibilities, startYear, endYear } }));
     handleCloseMenu();
   };
 
