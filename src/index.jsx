@@ -11,7 +11,6 @@ import getDesignTokens from './utils/theme/theme';
 
 const ThemedApp = () => {
     const themeMode = useSelector((state) => state.theme);
-    console.log(themeMode)
     const darkModeTheme = createTheme(getDesignTokens(themeMode.mode));
     return (
         <ThemeProvider theme={darkModeTheme}>

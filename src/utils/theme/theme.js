@@ -1,3 +1,5 @@
+import { DARK_THEME } from '../constants/theme';
+
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
   shape: {
@@ -102,8 +104,11 @@ const getDesignTokens = (mode) => ({
     },
   },
   palette: {mode,
-    ...(mode === 'dark'
+    ...(mode === DARK_THEME
       ? {
+        border: {
+          color: '#252527',
+        },
         baseUserInfo: {
           city: {
             color: '#25CBFF',
@@ -164,6 +169,13 @@ const getDesignTokens = (mode) => ({
               backgroundColor: '#252527',
             },
           },
+        },
+        search: {
+          color: 'rgba(197, 197, 198, 0.25)',
+          inputActive: '#B78AF7',
+          emptyTitle: '#fff',
+          title: '#fff',
+          subtitle: '#C5C5C6'
         },
         tabsEl: {
           borderColor: '#69696B',
@@ -303,6 +315,15 @@ const getDesignTokens = (mode) => ({
         },
       }
       : {
+        border: {
+          color: '#C5C5C6',
+        },
+        search: {
+          color: 'rgba(197, 197, 198, 0.40)',
+          inputActive: '#8133F1',
+          title: '#1D1D1D',
+          subtitle: '#303032'
+        },
          baseUserInfo: {
           city: {
             color: '#007CA3',
