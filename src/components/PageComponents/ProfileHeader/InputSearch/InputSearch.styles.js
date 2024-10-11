@@ -7,7 +7,7 @@ export const styles = {
       paddingX: '12px!important',
     },
     '&.Mui-focused': {
-      width: '376px',
+      width: '400px',
     },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
       borderColor: theme.palette.search.inputActive,

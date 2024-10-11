@@ -3,7 +3,7 @@ export const styles = {
     marginTop: theme.spacing(2),
     position: 'absolute',
     backgroundColor: theme.palette.background.backdrop,
-    maxWidth: '376px',
+    maxWidth: '400px',
     width: '100%',
     maxHeight: '400px',
     padding: theme.spacing(2, 3),
@@ -35,7 +35,7 @@ export const styles = {
     overflowY: 'auto',
     padding: 0,
     paddingRight: '8px',
-    height: '384px',
+    maxHeight: '384px',
     width: '100%',
     '&::-webkit-scrollbar': {
       width: 6,
