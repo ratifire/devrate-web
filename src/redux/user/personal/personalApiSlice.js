@@ -7,7 +7,6 @@ export const personalApiSlice = apiSlice.injectEndpoints({
       query: (userId) => `/users/${userId}`,
       providesTags: (result, error, id) => (result ? [{ type: 'PersonalUser', id }] : []),
     }),
-
     putPersonalUser: builder.mutation({
       query: (body) => ({
         url: `/users`,
@@ -16,7 +15,6 @@ export const personalApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, { id }) => [{ type: 'PersonalUser', id }],
     }),
-
     deletePersonalUser: builder.mutation({
       query: (userId) => ({
         url: `/users/${userId}`,

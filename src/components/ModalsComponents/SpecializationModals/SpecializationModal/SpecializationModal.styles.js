@@ -9,7 +9,6 @@ export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    // gridGap: `${theme.spacing(4)} ${theme.spacing(3)}`,
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(4),
   }),
@@ -19,7 +18,7 @@ export const styles = {
       '&.Mui-focused fieldset': {
         borderColor: theme.palette.primary[600],
       },
-      'fieldset': {
+      fieldset: {
         borderColor: theme.palette.neutral[500],
       },
     },

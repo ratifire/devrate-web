@@ -1,41 +1,39 @@
-import { useSelector } from 'react-redux';
-import { useGetMasteriesHistoryStatisticQuery } from '../../../../../../redux/chart/chartApiSlice';
-import {
-  useGetMasteriesBySpecializationIdQuery,
-} from '../../../../../../redux/specialization/specializationApiSlice';
+import { useSelector } from 'react-redux'
+import { useGetMasteriesHistoryStatisticQuery } from '../../../../../../redux/chart/chartApiSlice'
+import { useGetMasteriesBySpecializationIdQuery } from '../../../../../../redux/specialization/specializationApiSlice'
+import { useGetSpecializationId } from '../../../../../../utils/hooks/specialization'
 
 const useGetHistoryData = ({ from, to }) => {
   const activeMastery = useSelector((state) => state.activeMastery.activeMastery);
-  // ToDo: Вынести это в отдельный хук
-  const activeSpecialization = useSelector((state) => state.specialization.activeSpecialization);
-  const mainSpecialization = useSelector((state) => state.specialization.mainSpecialization);
-  const specializationId =  activeSpecialization?.id || mainSpecialization?.id;
+  const specializationId = useGetSpecializationId();
 
   const {
-    data: masteries,
-    isLoading: isLoadingMasteries,
+    data: masteriesData,
+    isFetching: isFetchingMasteries,
     isError: isErrorMasteries,
   } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
 
-  const selectMastery = masteries?.find(
-    (mastery) => mastery.level && mastery.level.toUpperCase() === activeMastery.toUpperCase()
-  );
+  const masteries = specializationId ? masteriesData : [];
+
+  const selectMastery = masteries?.find((v) => v?.level.toUpperCase() === activeMastery?.toUpperCase());
 
   const selectMasteryId = selectMastery?.id;
 
   const {
-    data: dataHistory,
-    isLoading: isLoadingHistory,
+    data: historyData,
+    isFetching: isFetchingHistory,
     isError: isErrorHistory,
   } = useGetMasteriesHistoryStatisticQuery({ selectMasteryId, to, from }, { skip: !selectMasteryId });
 
-  const isLoading = isLoadingHistory || isLoadingMasteries;
+  const data = selectMasteryId ? historyData : [];
+
+  const isFetching = isFetchingHistory || isFetchingMasteries;
   const isError = isErrorHistory || isErrorMasteries;
 
   return {
-    isLoading,
+    isFetching,
     isError,
-    dataHistory,
+    data,
   };
 };
 

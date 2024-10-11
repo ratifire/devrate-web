@@ -4,6 +4,7 @@ import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { DateCalendar } from '@mui/x-date-pickers';
 import PropTypes from 'prop-types';
 import DayPicker from './DayPicker';
+import { styles } from './SmallCalendar.styles';
 
 const SmallCalendar = ({ selectedDate, handleDateChange }) => {
   const [hoveredDay, setHoveredDay] = useState(null);
@@ -23,6 +24,7 @@ const SmallCalendar = ({ selectedDate, handleDateChange }) => {
             onPointerLeave: () => setHoveredDay(null),
           }),
         }}
+        sx={styles.switcher}
       />
     </LocalizationProvider>
   );

@@ -1,149 +1,210 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { styles } from './Schedule.styles';
-import {Box, IconButton, Typography} from '@mui/material';
+import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useGetClosestEventByUserIdQuery, useGetEventByUserIdQuery } from '../../../redux/schedule/scheduleApiSlice';
-import {DateTime} from "luxon";
-import {ButtonDef} from "../../FormsComponents/Buttons";
-import LinkIcon from '@mui/icons-material/Link';
-const transformEvents = (events) => {
-  return events.map((event) => ({
-    id: event.id,
-    title: event.type,
-    start: event.startTime,
-  }));
-};
-
-export default function Schedule() {
+import {
+  useGetClosestEventByUserIdQuery,
+  useGetEventByUserIdQuery,
+  useLazyGetEventByUserIdQuery,
+} from '../../../redux/schedule/scheduleApiSlice';
+import { DateTime } from 'luxon';
+import EventPopup from './EventPopup';
+import { useTheme } from '@mui/material/styles';
+  console.log(DateTime)
+const Schedule = () => {
+  const theme = useTheme();
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
-  const [events, setEvents] = useState([]); // Стейт для зберігання подій
+  const [event, setEvent] = useState([]);
   const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
-
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-  const [fromTime, setFromTime] = useState('');
-  const [isReady, setIsReady] = useState(false);
+  const [popupPosition, setPopupPosition] = useState('TOPRIGHT');
+  const [from, setFrom] = useState(DateTime.local().startOf('week').plus({ days: 1 }).toFormat('yyyy-MM-dd'));
+  const [to, setTo] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
+  // const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
+  const specificDate = DateTime.fromISO('2024-09-23T00:00:00+03:00');
+  const fromTime = encodeURIComponent(`${specificDate.toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
+  
   const { id: userId } = useSelector((state) => state.auth.user.data);
+  const [events, setEvents] = useState([]);
+  const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
 
-  const getWeekStartAndEnd = (year, weekNumber) => {
-    const firstDayOfYear = DateTime.local(year).startOf('year');
-    const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
-    const lastDayOfWeek = firstDayOfWeek.endOf('week');
-
-    return {
-      startOfWeek: firstDayOfWeek.toISODate(),
-      endOfWeek: lastDayOfWeek.toISODate(),
-    };
-  };
-
-  useEffect(() => {
-    if (selectedWeek !== null && calendarRef.current) {
-      const calendarApi = calendarRef.current.getApi();
-      const { startOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
-      calendarApi.gotoDate(startOfWeek);
-    }
-  }, [selectedWeek]);
-
-  useEffect(() => {
-    if (selectedWeek !== null) {
-      const { startOfWeek, endOfWeek } = getWeekStartAndEnd(2024, selectedWeek);
-      setFrom(startOfWeek);
-      setTo(endOfWeek);
-      setFromTime(encodeURIComponent(`${startOfWeek}T07:00:00+03:00`));
-      setIsReady(true);
-    }
-  }, [selectedWeek]);
-
-  const { data: currentEvents, isLoading } = useGetEventByUserIdQuery({ userId, from, to }, { skip: !isReady });
-  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery(
-    { userId, fromTime },
-    { skip: !isReady }
-  );
-
-  useEffect(() => {
+  const { data: eventsForSelectedWeek, isLoading, isFetching } = useGetEventByUserIdQuery({ userId, from, to });
+  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
+  const [triggerEvents] = useLazyGetEventByUserIdQuery();
+    console.log(events)
+  console.log(DateTime.local())
+  
+  useLayoutEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
-      const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
-      const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
-      const timeGridHeadElements = calendarApi.el.querySelectorAll(
-        '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
-      );
-      const timeGridEventElements = calendarApi.el.querySelectorAll('.fc-v-event .fc-event-main');
-
-      timeGridSlotElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridTableData);
-      });
-      timeGridTodayElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridTodayElements);
-      });
-      timeGridHeadElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridTableHead);
-      });
-      timeGridEventElements.forEach((el) => {
-        Object.assign(el.style, styles.timeGridEventElements);
-      });
-
-      const styleElement = document.createElement('style');
-      styleElement.textContent = `
-        :root {
-          --fc-border-color: #303032 !important; /* Set the border color explicitly */
-        }
-      `;
-      document.head.appendChild(styleElement);
+      applyRequiredStyles(calendarApi, theme);
+      calendarApi.gotoDate(from);
+      calendarApi.scrollToTime(eventStartTime);
     }
-  });
+  }, [selectedWeek, eventStartTime,from, theme]);
+  
+  useEffect(() => {
+    setEvents(transformEvents(eventsForSelectedWeek || []));
+    console.log(calendarRef.current)
+    if (calendarRef.current) {
+      const calendarApi = calendarRef.current.getApi();
+                console.log("test2")
+      applyRequiredStyles(calendarApi, theme);
+    }
+  }, [eventsForSelectedWeek,isFetching, theme]);
 
-  const handleDateChange = (newDate) => {
+  const findEventTimeForChosenDay = (newDate, resp) => {
+    const luxonDate = DateTime.fromISO(newDate);
+
+    if (!luxonDate.isValid) {
+      return;
+    }
+
+    const targetDay = luxonDate.day;
+    const targetMonth = luxonDate.month;
+    const targetYear = luxonDate.year;
+
+    const matchingEvents = resp.filter((event) => {
+      const eventDate = DateTime.fromISO(event.startTime);
+      const eventDay = eventDate.day;
+      const eventMonth = eventDate.month;
+      const eventYear = eventDate.year;
+      return eventDay === targetDay && eventMonth === targetMonth && eventYear === targetYear;
+    });
+
+    if (matchingEvents.length === 0) {
+      return DateTime.now().toFormat('HH:mm:ss');
+    }
+
+    const startTime = DateTime.fromISO(matchingEvents[0].startTime).toLocal();
+    const adjustedTime = startTime.minus({ hours: 1 });
+
+    return adjustedTime.toFormat('HH:mm:ss');
+  };
+
+  const handleDateChange = async (newDate) => {
+    handleClosePopup();
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
-    };
-  
-  //Adjust function below or delete it.
-  const handleDateClick = (info) => {
-    // Додавання події при кліку на дату
-    const newEvent = {
-      id: Date.now(),
-      title: 'New Event',
-      start: info.dateStr,
-    };
-    setEvents((prevEvents) => [...prevEvents, newEvent]);
+
+    const chosenDay = DateTime.fromISO(newDate);
+    const year = chosenDay.year;
+
+    const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
+    setFrom(startOfWeek);
+    setTo(endOfWeek);
+
+    const { data: resp } = await triggerEvents({ userId, from: startOfWeek, to: endOfWeek });
+    const startTime = findEventTimeForChosenDay(newDate, resp);
+    setEventStartTime(startTime);
   };
-  const handleEventMouseEnter = (info) => {
-     const rect = info.el.getBoundingClientRect();
-    const x = rect.left+120 ;
-    const y = rect.top-120;
-    
+  function getOffsetTopWithScroll(element) {
+    let offsetTop = 0;
+    let currentElement = element;
+    while (currentElement) {
+      offsetTop += currentElement.offsetTop;
+      if (currentElement.offsetParent && currentElement.offsetParent.scrollTop) {
+        offsetTop -= currentElement.offsetParent.scrollTop;
+      }
+      currentElement = currentElement.offsetParent;
+    }
+    return offsetTop;
+  }
+  const handleEventClick = (info) => {
+
+     if (info) {
+       if (calendarRef.current) {
+         const calendarApi = calendarRef.current.getApi();
+         const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+         if (scroller) {
+          scroller.style.overflow = 'hidden';
+        }
+      }
+      
+      const rect = info.el.getBoundingClientRect();
+      setEvent(eventsForSelectedWeek.find(event=>event.id.toString()===info.event._def.publicId));
+      
+      const dimentions = {popupWidth:413, arrowWidth:10, popupHeight: 200, rectWidth: 120, rectHeight:70}
+      const xoffset = rect.left - (dimentions.popupWidth + dimentions.arrowWidth)
+      const yoffset = getOffsetTopWithScroll(info.el)
+      
+      setPopupPosition('TOPRIGHT');
+      
+      // if (rect.left > window.innerWidth / 2) {
+      //   // x = rect.left - 450;
+      //   x = rect.left - window.innerWidth / 5;
+      // }
+      // if (rect.left < window.innerWidth / 2) {
+      //   // x = rect.left + 120;
+      //   x = rect.left + window.innerWidth / 18.5;
+      // }
+      // if (rect.top < 400) {
+      //   y = rect.top + 130;
+      // }
+      // if (rect.top > window.innerHeight - 200) {
+      //   y = rect.top - 140;
+      // }
+      // if (rect.left > window.innerWidth / 2 && window.innerHeight - 200) {
+      //   setPopupPosition('BOTTOMRIGHT');
+      // }
+      // if (rect.left > window.innerWidth / 2 && rect.top < 400) {
+      //   setPopupPosition('TOPRIGHT');
+      // }
+      // if (rect.left < window.innerWidth / 2 && window.innerHeight - 200) {
+      //   setPopupPosition('BOTTOMLEFT');
+      // }
+      // if (rect.left < window.innerWidth / 2 && rect.top < 400) {
+      //   setPopupPosition('TOPLEFT');
+      // }
+
+      const eventDetails = {
+        title: info.event.title,
+        start: info.event.start, // Event start date and time
+        end: info.event.end, // Event end date and time
+        extendedProps: info.event.extendedProps, // Custom event properties, if any
+      };
+
+      setPopup({
+        visible: true,
+        event: eventDetails,
+        x: xoffset,
+        y: yoffset,
+      });
+    }
+  };
+
+  const handleClosePopup = () => {
     setPopup({
-      visible: true,
-      event: info.event,
-      x: x,
-      y: y,
-    });
-  };
-  
-  const handleEventMouseLeave = () => {
-     setPopup({
       visible: false,
       event: null,
       x: 0,
       y: 0,
     });
+    const calendarApi = calendarRef.current.getApi();
+    const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+    scroller.style.overflow = 'auto';
   };
   
+  const transformEvents = (events) => {
+    return events.map((event) => ({
+      id: event.id,
+      title: event.type,
+      start: event.startTime,
+      backgroundColor: event.type === 'INTERVIEW' ? theme.palette.info.lime : theme.palette.info.orange,
+      textColor: '#1D1D1D',
+    }));
+  };
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
-
-  const transformedEvents = transformEvents(currentEvents || []);
-
+        console.log(currentClosestEvents)
   return (
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
@@ -163,7 +224,8 @@ export default function Schedule() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={true}
-          events={[...transformedEvents, ...events]}
+          displayEventTime={false}
+          events={events}
           dayHeaderFormat={{
             weekday: 'short',
           }}
@@ -174,64 +236,53 @@ export default function Schedule() {
               hour12: false,
             },
           ]}
-          slotMinTime={'07:00:00'}
-          slotMaxTime={'31:00:00'}
-          dateClick={handleDateClick} // Обробник кліку
-          eventMouseEnter={handleEventMouseEnter} // Обробник при наведенні на подію
-          eventMouseLeave={handleEventMouseLeave} // Обробник при виході курсора з події
-            
-            // select={handleDateSelect}
-          // eventContent={renderEventContent} // custom render function
-          // eventClick={handleEventClick}
-          // eventsSet={handleEvents} // called after events are initialized/added/changed/removed
-          // dayHeaderFormat={{ weekday: 'short' }}
-          /* you can update a remote database when these fire:
-          eventAdd={function(){}}
-          eventChange={function(){}}
-          eventRemove={function(){}}
-          */
+          eventClick={handleEventClick}
         />
-        {popup.visible && (
-            <Box
-                sx={{...styles.popup,
-                  top: popup.y - 60,
-                  left: popup.x+30,}}
-            >
-              <Box sx={styles.popupTriangular}></Box>
-              <Box sx={styles.infoContainer}>
-                <Box sx={styles.userInfo}>
-                  <Typography variant="caption2" sx={styles.title}>Інформація про вас</Typography>
-                  <Typography variant="subtitle2" sx={styles.name}>Олена Бондаренко</Typography>
-                  <Typography variant="caption2" sx={styles.position}>Junior Frontend Developer</Typography>
-                  <Typography variant="caption2" sx={styles.role}>Роль: Респондент</Typography>
-                </Box>
-                <Box sx={styles.interviewerInfo}>
-                  <Typography variant="caption2" sx={styles.title}>Інформація про співбесідника</Typography>
-                  <Typography variant="subtitle2" sx={styles.name}>Олена Бондаренко</Typography>
-                  <Typography variant="caption2" sx={styles.position}>FullStack Developer</Typography>
-                  <Typography variant="caption2" sx={styles.role}>Роль: Інтерв’ювер</Typography>
-                </Box>
-              </Box>
-              <Box sx={styles.buttonsContainer}>
-                <IconButton
-                    sx={styles.icon}
-                // onClick={handle}
-                >
-                  <LinkIcon/>
-                </IconButton>
-                  <ButtonDef
-                      correctStyle={styles.outlined}
-                      type={'button'}
-                      variant='outlined'
-                      // handlerClick={handleCancelInterview}
-                      label='Відмінити інтервʼю'
-                  />
-              </Box>
-              
-      
-            </Box>
+        {popup.visible && event && (
+          <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition} />
         )}
       </Box>
     </Box>
   );
-}
+};
+
+
+
+const getWeekStartAndEnd = (year, weekNumber) => {
+  const firstDayOfYear = DateTime.local(year).startOf('year');
+  const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
+  const lastDayOfWeek = firstDayOfWeek.endOf('week');
+
+  return {
+    startOfWeek: firstDayOfWeek.toISODate(),
+    endOfWeek: lastDayOfWeek.toISODate(),
+  };
+};
+
+const applyRequiredStyles = (calendarApi, theme) => {
+  if (calendarApi) {
+    const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
+    const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
+    const timeGridHeadElements = calendarApi.el.querySelectorAll(
+      '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
+    );
+    const timeGridEventElements = calendarApi.el.querySelectorAll(
+      '.fc-timegrid-event-harness-inset .fc-timegrid-event'
+    );
+
+    timeGridSlotElements.forEach((el) => {
+      Object.assign(el.style, theme.palette.mode === "dark" ? styles.timeGridTableDataDark: styles.timeGridTableDataLight);
+    });
+    timeGridTodayElements.forEach((el) => {
+      Object.assign(el.style, styles.timeGridTodayElements);
+    });
+    timeGridHeadElements.forEach((el) => {
+      Object.assign(el.style, theme.palette.mode === "dark" ? styles.timeGridTableHeadDark: styles.timeGridTableHeadLight);
+    });
+    timeGridEventElements.forEach((el) => {
+      Object.assign(el.style, styles.timeGridEventElements);
+    });
+  }
+};
+
+export default Schedule;

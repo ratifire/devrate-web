@@ -9,10 +9,13 @@ on:
 env:
   AWS_REGION: 'eu-north-1'                    # set this to your preferred AWS region, e.g. eu-north-1
   ECR_REPOSITORY: frontend-service             # set this to your Amazon ECR repository name
-  ECS_SERVICE: frontend-service               # set this to your Amazon ECS service name
+  ECS_SERVICE: front-service                   # set this to your Amazon ECS service name
   ECS_CLUSTER: frontend-cluster                # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: frontend_td             # set this to the path to your Amazon ECS task definition file
   CONTAINER_NAME: front-container              # set this to the name of the container in the containerDefinitions section of your task definition
+  REACT_APP_API_URL: 'https://server.devrate.org'
+  REACT_APP_WS_URL: 'wss://server.devrate.org'
+
 
 permissions:
   contents: read
@@ -21,22 +24,26 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: dev
+    strategy:
+      matrix:
+        node-version: [20.11.0]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: maven
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-      - name: Run tests
-        run: mvn test
+      - name: Set environment variables with defaults
+        run: |
+          echo "REACT_APP_API_URL=${{ env.REACT_APP_API_URL }}" >> .env
+          echo "REACT_APP_WS_URL=${{ env.REACT_APP_WS_URL }}" >> .env
 
-      - name: Run build
-        run: mvn package -DskipTests
+      - run: npm ci
+      - run: npm run build --if-present
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -85,3 +92,10 @@ jobs:
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
+
+      - name: Send notification to Slack
+        if: success()
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{
+            "text": "GitHub Action (FrontEnd): New brunch is deploying to AWS! Status: ${{ job.status }}.\nTriggered by: ${{ github.actor }}\nBranch: ${{ github.ref }}"
+          }' ${{ secrets.SLACK_WEBHOOK_URL }}

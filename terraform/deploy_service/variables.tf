@@ -31,3 +31,9 @@ variable "front_port" {
   description = "Port number on which back service is listening"
   default     = 3000
 }
+
+
+variable "domain_name" {
+  description = "Domain name"
+  default     = "devrate.org"
+}

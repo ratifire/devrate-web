@@ -21,15 +21,16 @@ export const styles = {
 
     '&::-webkit-scrollbar': {
       width: 10,
+      height: 10,
     },
-    '&::-webkit-scrollbar-track':{
+    '&::-webkit-scrollbar-track': {
       backgroundColor: theme.palette.neutral['600'],
       borderRadius: 8,
     },
     '&::-webkit-scrollbar-thumb': {
       borderRadius: 6,
       backgroundColor: theme.palette.common.white,
-    }
+    },
   }),
   page_title: (theme) => ({
     marginBottom: theme.spacing(5),
@@ -44,7 +45,7 @@ export const styles = {
     '&:hover': {
       color: theme.palette.primary['200'],
       backgroundColor: `${theme.palette.primary['200']}29`,
-      borderColor: theme.palette.primary['200']
+      borderColor: theme.palette.primary['200'],
     },
   }),
   add_specialization_btn: (theme) => ({
@@ -70,19 +71,18 @@ export const styles = {
       },
       '.figure__deco::after': {
         borderColor: theme.palette.primary['200'],
-      }
+      },
     },
 
     '&::before': {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      borderRight: '1px solid ' + theme.palette.neutral['600'],
-      borderBottom: '1px solid ' + theme.palette.neutral['600'],
-      borderLeft: '1px solid ' + theme.palette.neutral['600'],
+      border: `1px solid ${theme.palette.neutral['600']}`,
+      borderTop: 'none',
       transition: 'border-color .2s easy-in-out',
       backgroundColor: theme.palette.neutral['600'],
-      top: `calc(100% - ${DECO_SIZE+1}px)`,
+      top: `calc(100% - ${DECO_SIZE + 1}px)`,
       left: 0,
       height: DECO_SIZE,
       width: `calc(100% - ${DECO_SIZE}px)`,
@@ -93,7 +93,8 @@ export const styles = {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      border: '1px solid ' + theme.palette.neutral['600'],
+      border: `1px solid ${theme.palette.neutral['600']}`,
+      borderBottom: 'none',
       transition: 'border-color .2s easy-in-out',
       backgroundColor: theme.palette.neutral['600'],
       top: 0,
@@ -168,7 +169,7 @@ export const styles = {
     marginRight: '16px',
     color: theme.palette.action.active,
     position: 'relative',
-    zIndex: 1
+    zIndex: 1,
   }),
 
   hardAndSoftSkills: (theme) => ({
@@ -178,17 +179,17 @@ export const styles = {
     display: 'flex',
     flexDirection: 'row',
     position: 'relative',
-    zIndex: 1
+    zIndex: 1,
   }),
 
   softSkills: () => ({
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   }),
 
   hardSkills: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   skillsStatistic: {
     textTransform: 'uppercase',
@@ -216,4 +217,4 @@ export const styles = {
     boxSizing: 'content-box',
     color: theme.palette.text.secondary,
   }),
-}
+};

@@ -1,20 +1,23 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts';
 import React from 'react';
-import { useUserSkillsAndMasteryData } from '../utils';
+import { useTranslation } from 'react-i18next';
+import { useHardSkillData } from '../../../../../utils/hooks/specialization';
+import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
+import { getLevel } from '../utils';
 import { styles } from './LevelChart.styles.js';
 
 const LevelChart = () => {
-  const { t, skills, isError, isLoading, activeMastery, nextMasteryLevel } = useUserSkillsAndMasteryData();
-
+  const { skills, isError, isFetching, activeMastery } = useHardSkillData();
+  const { t } = useTranslation();
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
 
-  if (isLoading) {
-    return <CircularProgress />;
+  if (isFetching) {
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />;
   }
 
   return (
@@ -48,9 +51,10 @@ const LevelChart = () => {
             >
               <defs>
                 <linearGradient id='gradient' x1='0%' y1='0%' x2='100%' y2='0%'>
-                  <stop offset='0%' style={{ stopColor: '#EFE6FD', stopOpacity: 1 }} />
-                  <stop offset='50%' style={{ stopColor: '#B78AF7', stopOpacity: 1 }} />
-                  <stop offset='100%' style={{ stopColor: '#8133F1', stopOpacity: 1 }} />
+                  <stop offset='0.04%' style={{ stopColor: '#4A1D8B', stopOpacity: 1 }} />
+                  <stop offset='26.65%' style={{ stopColor: '#8233F1', stopOpacity: 1 }} />
+                  <stop offset='57.07%' style={{ stopColor: '#A756B4', stopOpacity: 1 }} />
+                  <stop offset='90.86%' style={{ stopColor: '#FCA728', stopOpacity: 1 }} />
                 </linearGradient>
               </defs>
             </Gauge>
@@ -60,7 +64,7 @@ const LevelChart = () => {
           {activeMastery}
         </Typography>
         <Typography variant='caption' sx={styles.leftCaption}>
-          {nextMasteryLevel}
+          {getLevel(activeMastery)}
         </Typography>
       </Box>
     </Box>

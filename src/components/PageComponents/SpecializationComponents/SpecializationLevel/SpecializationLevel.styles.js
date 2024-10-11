@@ -2,21 +2,24 @@ export const styles = {
   contentWrapper: (theme) => ({
     padding: theme.spacing(4),
   }),
-  
+
   title: (theme) => ({
     marginBottom: theme.spacing(2),
   }),
-  
+
   description: (theme) => ({
     marginBottom: theme.spacing(3),
   }),
-  
+
   buttonGroup: (theme) => ({
     width: '100%',
     boxShadow: 'none',
     backgroundColor: theme.palette.background.btnGroup,
     padding: theme.spacing(1),
     gridGap: theme.spacing(1),
+    '.MuiButtonGroup-firstButton.Mui-disabled, .MuiButtonGroup-middleButton.Mui-disabled': {
+      borderRight: 'none'
+    },
     ' .MuiButtonGroup-lastButton': {
       borderRadius: 1,
       border: 'none',

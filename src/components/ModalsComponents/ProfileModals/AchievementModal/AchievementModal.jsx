@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,10 +12,11 @@ import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { styles } from './AchievementModal.styles';
 import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
 
-const AchievementModal = ({ userId }) => {
+const AchievementModal = () => {
   const dispatch = useDispatch();
   const openAchievement = useSelector((state) => state.modal.achievement);
   const { t } = useTranslation();
+  const { id } = useSelector((state) => state.auth.user.data);
   const [createAchievement] = useCreateAchievementMutation();
 
   const handleClose = () => {
@@ -25,7 +25,7 @@ const AchievementModal = ({ userId }) => {
   }
 
   const initialValues = {
-    link: '',
+    // link: '',
     summary: '',
     description: '',
   };
@@ -34,7 +34,7 @@ const AchievementModal = ({ userId }) => {
 
     try {
       await createAchievement({
-              userId: userId,
+              userId: id,
               payload: values,
             }).unwrap();
       handleClose();
@@ -50,7 +50,7 @@ const AchievementModal = ({ userId }) => {
     onSubmit,
   });
 
-  if (!userId) {
+  if (!id) {
     return <Typography>Error: User not authenticated</Typography>;
   }
 
@@ -76,20 +76,21 @@ const AchievementModal = ({ userId }) => {
               error={formik.touched.summary && Boolean(formik.errors.summary)}
             />
           </Box>
-          <Box sx={styles.input100}>
-            <FormInput
-              name='link'
-              value={formik.values.link}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='modal.achievement.link'
-              required
-              placeholder='modal.achievement.link_placeholder'
-              helperText={formik.touched.link && formik.errors.link}
-              error={formik.touched.link && Boolean(formik.errors.link)}
-            />
-          </Box>
+          {/*commented out <Link> in case if its need it's needed in the future*/}
+          {/*<Box sx={styles.input100}>*/}
+          {/*  <FormInput*/}
+          {/*    name='link'*/}
+          {/*    value={formik.values.link}*/}
+          {/*    handleChange={formik.handleChange}*/}
+          {/*    handleBlur={formik.handleBlur}*/}
+          {/*    type='text'*/}
+          {/*    label='modal.achievement.link'*/}
+          {/*    required*/}
+          {/*    placeholder='modal.achievement.link_placeholder'*/}
+          {/*    helperText={formik.touched.link && formik.errors.link}*/}
+          {/*    error={formik.touched.link && Boolean(formik.errors.link)}*/}
+          {/*  />*/}
+          {/*</Box>*/}
           <Box sx={styles.input100}>
             <TextAreaInput
               name='description'
@@ -118,8 +119,5 @@ const AchievementModal = ({ userId }) => {
   );
 };
 
-AchievementModal.propTypes = {
-  userId: PropTypes.number,
-};
 
 export default AchievementModal;

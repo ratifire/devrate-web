@@ -1,5 +1,6 @@
 // src/app/store.js
 
+
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
@@ -16,6 +17,8 @@ import { educationReducer } from '../user/education/educationSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
 import activeMasteryReducer from '../specialization/activeMasterySlice';
+import buttonReducer from '../addButton/addButtonSlice'
+import themeSliceReducer from "../theme/themeSlice";
 
 const authPersistConfig = {
   key: 'auth',
@@ -31,10 +34,15 @@ const personalPersistConfig = {
   key: 'personal',
   storage,
   whitelist: ['personal'],
+}; const themePersistConfig = {
+  key: 'theme',
+  storage,
+  whitelist: ['theme'],
 };
 
 const rootReducer = {
-  modal: modalSliceReducer,
+  theme:themeSliceReducer,
+  modal: persistReducer(themePersistConfig,modalSliceReducer),
   education: educationReducer,
   modalStep: modalStepReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
@@ -44,6 +52,7 @@ const rootReducer = {
   specialization: specializationSliceReducer,
   email: emailSliceReducer,
   activeMastery: activeMasteryReducer,
+  button: buttonReducer,
 };
 
 const store = configureStore({

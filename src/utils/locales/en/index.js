@@ -177,21 +177,58 @@ export const en = {
       },
       baseUserInfo: {
         loading: 'Your profile is filled in at',
-        complete: 'Congratulations! Your profile is completely filled out'
+        complete: 'Congratulations! Your profile is completely filled out',
       },
       experience: {
-        workExperience: 'Work experience',
-        achievement: 'Achievement',
+        workExperience: {
+          tabName: 'Work experience',
+          emptyTabName: {
+            tabName: 'Work experience',
+            title: 'Add information about your work experience',
+            subTitle: 'This will help other users to learn more about you!',
+            button: 'Add work experience',
+          },
+        },
+        achievement: {
+          tabName: 'Achievement',
+          emptyTabName: {
+            tabName: 'Achievement',
+            title: 'Add information about your achievements',
+            subTitle: 'You can add your certificates or other achievements and attach links to them!',
+            button: 'Add achievements',
+          },
+        },
         skills: {
-          title: 'Skills',
+          tabName: 'Skills',
+          emptyTabName: {
+            tabName: 'Skills',
+            title: 'Add information about your skills',
+            subTitle: 'Add specializations and skills from them that you currently possess!',
+            button: 'Add specializations',
+          },
+          allSkills: 'All skills',
           search: 'Search',
           star: 'Main specialization',
         },
-        education: 'Education',
+        education: {
+          tabName: 'Education',
+          emptyTabName: {
+            tabName: 'Education',
+            title: 'Add information about your education',
+            subTitle: 'Tell other users about the places you studied and the experience you gained!',
+            button: 'Add education',
+          },
+        },
         duties: 'Duties',
         endYear: 'Present',
       },
       right: {
+        empty: {
+          emptyLanguages: 'You have not added any language yet.',
+          emptyAboutMe:
+            'You have not added information about yourself yet.\n' +
+            'To edit your information, go to your profile settings.',
+        },
         contact: 'Contact Information',
         languages: 'Languages',
         aboutMe: 'About me',
@@ -266,6 +303,7 @@ export const en = {
           },
         },
         workExperience: {
+          title: 'Work Experience',
           position: 'Position',
           position_long: 'Title too long',
           position_short: 'Title too short',
@@ -321,6 +359,7 @@ export const en = {
       specialization_btn_make_main: 'Make the main',
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',
+      error: 'Something went wrong...',
       level: {
         title: 'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.',
@@ -349,6 +388,10 @@ export const en = {
         interview_chart_months: 'Months',
         skills_assessment_chart_title: 'Average skill assessment',
       },
+      interviewsChart: {
+        conducted: 'Conducted',
+        passed: 'Passed',
+      },
       hardSkills: {
         title: 'Hard skills',
         averageMark: 'Average mark:',
@@ -364,10 +407,18 @@ export const en = {
           mastery: 'Main level',
           mastery_helper_text: 'The level for generating your statistics, which will be displayed on your profile page',
           required: 'This is a required field',
+          max_length: 'Skill name is max 100 characters long',
+          errorDuplicate: 'Such a specialization already exists',
         },
         skills: {
           title: 'Skills',
           placeholder: 'Codelgniter, Yii, Zend Framework',
+          no_skills: 'No available skills',
+          errorDuplicate: 'Such a skill already exists',
+          errorRequired: 'This is a required field',
+          errorLength: 'Skill name is max 100 characters long',
+          errorQuantity: 'You can add up to 20 skills',
+          errorNotAvailable: 'Not available skills',
         },
         interview: {
           income: 'An interview has been completed ',
@@ -418,7 +469,11 @@ export const en = {
     schedule: {
       title: 'Schedule',
       host: 'Host',
+      participant: 'Participant',
       cancelEventBtn: 'Cancel event',
+      popupUserInfo: 'Info about you',
+      popupInterviewerInfo: 'Info about participant',
+      popupRole: 'Role:',
     },
   },
 };

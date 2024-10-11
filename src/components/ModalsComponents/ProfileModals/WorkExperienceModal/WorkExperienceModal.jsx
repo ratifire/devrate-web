@@ -17,7 +17,7 @@ import {
   useUpdateWorkExperienceByIdMutation,
 } from '../../../../redux/workExperience/workExperienceApiSlice';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
-import CountrySelect from '../../../FormsComponents/Inputs/CountrySelect';
+import { FormSelect } from '../../../FormsComponents/Inputs';
 
 const WorkExperienceModal = () => {
   const [startYears, setStartYears] = useState([]);
@@ -27,8 +27,8 @@ const WorkExperienceModal = () => {
   const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
 
   const dispatch = useDispatch();
-  const openExperience = useSelector((state) => state.modal.openExperience);
-  const handleClose = () => dispatch(closeModal({ modalName: 'openExperience' }));
+  const workExperience = useSelector((state) => state.modal.workExperience);
+  const handleClose = () => dispatch(closeModal({ modalName: 'workExperience' }));
   const { t } = useTranslation();
 
   const { modalData } = useSelector((state) => state.modal);
@@ -115,9 +115,9 @@ const WorkExperienceModal = () => {
   }
 
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={openExperience}>
+    <ModalLayoutProfile setOpen={handleClose} open={workExperience}>
       <Typography variant='subtitle1' sx={styles.title}>
-        {t('profile.experience.workExperience')}
+        {t('profile.modal.workExperience.title')}
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>
@@ -150,7 +150,7 @@ const WorkExperienceModal = () => {
             />
           </Box>
           <Box sx={styles.input100}>
-            <CountrySelect
+            <FormSelect
               sx={styles.input50}
               label={t('profile.modal.workExperience.startDate')}
               value={formik.values.startYear}
@@ -163,7 +163,7 @@ const WorkExperienceModal = () => {
               helperText={formik.touched.startYear && formik.errors.startYear}
               error={formik.touched.startYear && Boolean(formik.errors.startYear)}
             />
-            <CountrySelect
+            <FormSelect
               sx={styles.input50}
               label={t('profile.modal.workExperience.endDate')}
               value={formik.values.currentDate ? '' : formik.values.endYear}

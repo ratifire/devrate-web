@@ -1,52 +1,57 @@
-/* eslint-disable */
-
-import React, { useEffect, useState } from 'react';
-import { styles } from './SpecializationCategories.styles';
-import { Box, IconButton, Typography, CircularProgress } from '@mui/material';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
-import StarIcon from '@mui/icons-material/Star';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import StarIcon from '@mui/icons-material/Star';
+import { Box, IconButton, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '../../../../redux/modal/modalSlice';
+import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 import {
   useDeleteSpecializationByIdMutation,
   useGetSpecializationByUserIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
-import {
-  setMainSpecializations,
-  setActiveSpecialization,
-  setSelectedSpecialization,
-} from '../../../../redux/specialization/specializationSlice';
-import { openModal } from '../../../../redux/modal/modalSlice';
-import DropdownMenu from '../../ProfileComponents/ExperienceSection/DropdownMenu/DropdownMenu';
+import { setActiveSpecialization, setMainSpecializations } from '../../../../redux/specialization/specializationSlice';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
-import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
+import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const {activeSpecialization, mainSpecialization, fullSpecializations} = useSelector((state) => state.specialization);
-  const selectedSpecialization = useSelector((state) => state.specialization.selectedSpecialization);
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
-  const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(id);
-  const specializationsSorted = specializations?.toSorted((a, b) => a.main === b.main ? 0 : a.main ? 1 : -1);
-  const [getMainMasteryBySpecId] = useLazyGetMainMasteryBySpecializationIdQuery();
-  const [updateSpecializationAsMainById] = useUpdateSpecializationAsMainByIdMutation();
-  const [deleteSpecialization] = useDeleteSpecializationByIdMutation();
-
+  const {
+    data: specializations,
+    isLoading: isLoadingGetSpecialization,
+    isFetching,
+    isError,
+  } = useGetSpecializationByUserIdQuery(id, { skip: !id });
+  const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
+  const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery }] =
+    useLazyGetMainMasteryBySpecializationIdQuery();
+  const [updateSpecializationAsMainById, { isLoading: isLoadingUpdateSpecialization }] =
+    useUpdateSpecializationAsMainByIdMutation();
+  const [deleteSpecialization, { isLoading: isLoadingDeleteSpecialization }] = useDeleteSpecializationByIdMutation();
+  const isLoading =
+    isLoadingGetSpecialization ||
+    isLoadingGetMainMastery ||
+    isLoadingUpdateSpecialization ||
+    isLoadingDeleteSpecialization ||
+    isFetching;
   const [anchorEl, setAnchorEl] = useState({});
-  useEffect(() => {
-    dispatch(setMainSpecializations(specializations))
-  }, [specializations]);
 
   useEffect(() => {
-    if (!specializations) {
+    if (!specializations || isLoading) {
       return;
     }
+
+    dispatch(setMainSpecializations(specializations));
 
     specializations.forEach(async (specialization) => {
       const { data } = await getMainMasteryBySpecId(specialization.id);
@@ -60,27 +65,41 @@ const SpecializationCategories = () => {
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
       const spec = { ...specialization, mastery: masteryData[specialization.id].level };
-      dispatch(setActiveSpecialization(spec));
       dispatch(setActiveMastery(spec.mastery));
-      dispatch(setSelectedSpecialization(spec));
+
+      if (activeSpecialization?.id !== specialization.id) {
+        dispatch(setActiveSpecialization(spec));
+      }
     }
   };
 
   const handlerAddSpecializations = () => {
-    dispatch(setSelectedSpecialization(null));
     if (specializations?.length >= 4) return;
     dispatch(openModal({ modalName: 'openSpecialization', data: 'addSpecialization' }));
   };
 
-  const handlerChangeMainSpecialization = async (selectedSpecialization) => {
-    if (specializations?.length === 0 || selectedSpecialization === null) return;
-    await updateSpecializationAsMainById({ ...selectedSpecialization, main: true }).unwrap();
-    dispatch(setMainSpecializations(selectedSpecialization))
+  const handlerChangeMainSpecialization = async () => {
+    if (specializations?.length === 0 || !activeSpecialization) return;
+    await updateSpecializationAsMainById(
+      { ...activeSpecialization, main: true },
+      { skip: !activeSpecialization }
+    ).unwrap();
+    dispatch(setMainSpecializations(activeSpecialization));
   };
 
   const handlerDeleteSpecialization = async (id) => {
+    const findMainSpecialization = specializations.find((spec) => spec.main);
+
     await deleteSpecialization(id).unwrap();
-    dispatch(setSelectedSpecialization(null));
+    dispatch(setActiveSpecialization(null));
+
+    if (findMainSpecialization?.id === id) {
+      dispatch(setActiveSpecialization(null));
+      dispatch(setMainSpecializations(null));
+    } else {
+      dispatch(setActiveSpecialization(mainSpecialization));
+    }
+
     handleCloseMenu(id);
   };
 
@@ -104,11 +123,11 @@ const SpecializationCategories = () => {
   };
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <LoaderComponent />;
   }
 
   if (isError) {
-    return <Typography variant='h6'>Something error...</Typography>;
+    return <ErrorComponent />;
   }
 
   return (
@@ -121,7 +140,7 @@ const SpecializationCategories = () => {
           variant='outlined'
           disabled={specializations?.length === 0}
           correctStyle={styles.make_main_btn}
-          handlerClick={() => handlerChangeMainSpecialization(selectedSpecialization)}
+          handlerClick={handlerChangeMainSpecialization}
           type='button'
           label='specialization.specialization_btn_make_main'
         />

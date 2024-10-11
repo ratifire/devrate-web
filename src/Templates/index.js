@@ -1,6 +1,6 @@
 import HomeTemplate from './HomeTemplate';
-import ProfileTemplate from './ProfileTemplate';
 import SpecializationTemplate from './SpecializationTemplate';
-import OtherProfileTemplate from './OtherProfileTemplate';
+import PersonalProfileTemplate from './ProfileTemplates';
+import UserProfileTemplate from './ProfileTemplates';
 
-export { HomeTemplate, ProfileTemplate, SpecializationTemplate, OtherProfileTemplate };
+export { HomeTemplate, SpecializationTemplate, PersonalProfileTemplate, UserProfileTemplate };

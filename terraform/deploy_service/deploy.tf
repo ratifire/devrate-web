@@ -58,7 +58,7 @@ resource "aws_ecs_cluster_capacity_providers" "front_cluster_capacity_provider" 
 
   default_capacity_provider_strategy {
     capacity_provider = aws_ecs_capacity_provider.front_capacity_provider.name
-    base              = 0
+    base              = 1
     weight            = 1
   }
 }
@@ -71,9 +71,9 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
   }
   min_size                  = 1
   max_size                  = 2
-  desired_capacity          = 2
+  desired_capacity          = 1
   health_check_type         = "EC2"
-  health_check_grace_period = 200
+  health_check_grace_period = 180
   vpc_zone_identifier       = data.aws_subnets.default_subnets.ids
   force_delete              = true
   termination_policies      = ["OldestInstance"]
@@ -81,7 +81,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
     lifecycle_transition = "autoscaling:EC2_INSTANCE_TERMINATING"
     name                 = "ecs-managed-draining-termination-hook"
     default_result       = "CONTINUE"
-    heartbeat_timeout    = 60
+    heartbeat_timeout    = 120
   }
   dynamic "tag" {
     for_each = {
@@ -110,7 +110,7 @@ resource "aws_ecs_service" "front_services" {
   scheduling_strategy                = "REPLICA"
   desired_count                      = 1
   force_new_deployment               = true
-  deployment_minimum_healthy_percent = 100
+  deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
   capacity_provider_strategy {
     capacity_provider = aws_ecs_capacity_provider.front_capacity_provider.name
@@ -119,7 +119,7 @@ resource "aws_ecs_service" "front_services" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.http_ecs_tg.arn
+    target_group_arn = aws_lb_target_group.http_ecs_tg_front.arn
     container_name   = var.front_container_name
     container_port   = var.front_port
   }
@@ -129,46 +129,5 @@ resource "aws_ecs_service" "front_services" {
   }
   lifecycle {
     create_before_destroy = true
-  }
-}
-
-resource "aws_lb" "front_ecs_alb" {
-  name               = "ecs-alb-front"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [data.aws_security_group.vpc_frontend_security_group.id]
-  subnets            = data.aws_subnets.default_subnets.ids
-
-}
-
-
-resource "aws_lb_target_group" "http_ecs_tg" {
-  name     = "http-ecs-tg"
-  port     = var.front_port
-  protocol = "HTTP"
-  vpc_id   = data.aws_vpcs.all_vpcs.ids[0]
-  health_check {
-    healthy_threshold   = 4
-    unhealthy_threshold = 3
-    interval            = 60
-    protocol            = "HTTP"
-    path                = "/actuator/health"
-  }
-}
-
-resource "aws_lb_listener" "http_ecs_listener" {
-  load_balancer_arn = aws_lb.front_ecs_alb.arn
-  port              = var.front_port
-  protocol          = "HTTP"
-
-  default_action {
-    type = "redirect"
-    redirect {
-      host        = "devrate.org"
-      path        = "/#{path}"
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
   }
 }

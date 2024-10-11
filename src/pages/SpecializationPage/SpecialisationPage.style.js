@@ -19,9 +19,10 @@ export const styles = {
       backgroundColor: theme.palette.background.level2,
     },
   }),
-  specialisationTaxonomy: {
+  specialisationCategories: {
     gridColumn: '1/13',
     gridRow: '1/2',
+    minHeight: 202,
   },
   specialisationHardSkills: {
     gridColumn: '1/5',

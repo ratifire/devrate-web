@@ -1,9 +1,6 @@
-// import AddSpecializationModal from './AddSpecializationModal';
-// import EditSpecializationModal from './EditSpecializationModal';
-// import InterviewModal from './InterviewModal/';
-
-import SkillsModal from './SkillsModal';
-import SpecializationModal from './SpecializationModal';
+import HardSkillsModal from './HardSkillsModal';
 import ScheduleInterviewModal from './ScheduleInterviewModal';
+import SoftSkillsModal from './SoftSkillsModal';
+import SpecializationModal from './SpecializationModal';
 
-export { SkillsModal, SpecializationModal, ScheduleInterviewModal };
+export { HardSkillsModal, ScheduleInterviewModal, SoftSkillsModal, SpecializationModal };
