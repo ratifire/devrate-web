@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +22,7 @@ const InputSearch = () => {
   const boxRef = useRef(null);
   const queryTrim = query.trim();
   const formatQueryTrim = formatSearchQuery(queryTrim);
-  const debouncedValue = useDebounce({ value: formatQueryTrim, delay: 1000 });
+  const debouncedValue = useDebounce({ value: formatQueryTrim });
   const { data, isError, isFetching, originalArgs } = useGetSearchQuery(debouncedValue, { skip: !debouncedValue });
 
   useEffect(() => {
