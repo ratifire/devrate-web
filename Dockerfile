@@ -1,7 +1,7 @@
 FROM node:20.11.0 AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm run build
+RUN npm install --production
 COPY . .
 EXPOSE 3000
 CMD [ "npm", "start" ]
