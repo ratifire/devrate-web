@@ -3,7 +3,9 @@ import { AppBar, Badge, Box, Button, IconButton, InputAdornment, OutlinedInput }
 import styles from './ProfileHeader.styles';
 import Logo from '../../UI/Logo';
 import { ReactComponent as Message } from '../../../assets/icons/message.svg';
+// import { ReactComponent as MessageLight } from '../../../assets/icons/messageLight.svg';
 import { ReactComponent as Loupe } from '../../../assets/icons/loupe.svg';
+// import { ReactComponent as LoupeLight } from '../../../assets/icons/loupeLight.svg';
 import { useFormik } from 'formik';
 import UserAvatar from '../../UI/UserAvatar';
 import Menu from '../Menu';
@@ -15,6 +17,7 @@ import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalAp
 import { Link } from 'react-router-dom';
 import links from '../../../router/links';
 import ThemeSwitch from "../../UI/ThemeSwitch/ThemeSwitch";
+// import {useTheme} from "@mui/material/styles";
 
 const initialValues = {
   query: '',
@@ -52,7 +55,8 @@ const notifications = [
 ];
 
 const ProfileHeader = () => {
-  const { data: info } = useSelector(selectCurrentUser);
+  // const theme = useTheme()
+   const { data: info } = useSelector(selectCurrentUser);
   const { id, firstName, lastName } = info;
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const { data: personalData } = useGetPersonalUserQuery(id);
@@ -104,6 +108,7 @@ const ProfileHeader = () => {
               <InputAdornment position='end'>
                 <IconButton type='submit' onClick={formik.handleSubmit} edge='end'>
                   <Loupe />
+                  {/*{theme.palette.mode==="dark"?<Loupe />:<LoupeLight />}*/}
                 </IconButton>
               </InputAdornment>
             }
@@ -114,6 +119,7 @@ const ProfileHeader = () => {
         <IconButton>
           <Badge color='error' overlap='circular' badgeContent='' variant='dot' invisible={true}>
             <Message />
+            {/*{theme.palette.mode==="dark"?<Message />:<MessageLight />}*/}
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>

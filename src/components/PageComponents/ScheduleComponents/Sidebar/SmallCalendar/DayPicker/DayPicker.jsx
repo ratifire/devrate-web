@@ -13,19 +13,19 @@ const CustomPickersDay = styled(PickersDay, {
     backgroundColor: '#CEB0FA',
     color: '#1D1D1D',
     '&:hover, &:focus': {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary[300],
       color: theme.palette.primary.contrastText,
     },
   }),
   ...(isHovered && {
-    // backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.primary.light,
     '&:hover': {
-      backgroundColor: '#69696B',
+      backgroundColor: theme.palette.mode === "dark" ? theme.palette.neutral[400]:theme.palette.neutral[100],
     },
     ...theme.applyStyles('dark', {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.primary[300],
       '&:hover, &:focus': {
-        backgroundColor: theme.palette.primary.dark,
+        backgroundColor: theme.palette.primary[100],
       },
     }),
   }),
