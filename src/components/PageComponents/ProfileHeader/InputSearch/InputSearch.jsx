@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +23,7 @@ const InputSearch = () => {
   const queryTrim = query.trim();
   const formatQueryTrim = formatSearchQuery(queryTrim);
   const debouncedValue = useDebounce({ value: formatQueryTrim, delay: 1000 });
-  const { data, isError, isFetching } = useGetSearchQuery(debouncedValue, { skip: !debouncedValue });
+  const { data, isError, isFetching, originalArgs } = useGetSearchQuery(debouncedValue, { skip: !debouncedValue });
 
   useEffect(() => {
     updateState({
@@ -34,8 +33,21 @@ const InputSearch = () => {
   }, [data]);
 
   const handleChange = (e) => {
+    const value = e.target.value;
+    const formatValue = formatSearchQuery(value);
+
+    if (formatValue === query) return;
+
+    if (formatValue.trim() === originalArgs) {
+      return  updateState({
+        isChange: false,
+        query: formatValue,
+        users: data,
+      })
+    }
+
     updateState({
-      query: e.target.value,
+      query: formatValue,
       isChange: true,
       users: [],
     });
@@ -46,7 +58,9 @@ const InputSearch = () => {
   };
 
   const handleBlur = (e) => {
-    if (boxRef.current && boxRef.current.contains(e.relatedTarget)) {
+    const relatedTarget = e.relatedTarget;
+
+    if (boxRef.current && boxRef.current.contains(relatedTarget)) {
       return;
     }
 
