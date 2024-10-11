@@ -18,7 +18,7 @@ import { useGetSpecializationListQuery } from '../../../../redux/specialization/
 import { setActiveSpecialization } from '../../../../redux/specialization/specializationSlice';
 import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/index';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { AdvancedFormSelector } from '../../../FormsComponents/Inputs';
+import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
@@ -71,7 +71,8 @@ const SpecializationModal = () => {
 
   const { modalData } = useSelector((state) => state.modal);
 
-  const handleChangeMastery = (value) => {
+  const handleChangeMastery = (e) => {
+    const value = e.target.value;
     formik.setFieldValue('mastery', value);
   };
 
@@ -210,7 +211,7 @@ const SpecializationModal = () => {
             />
           </Box>
           <Box sx={styles.mastery_input}>
-            <AdvancedFormSelector
+            <FormSelect
               id='mastery'
               variant='outlined'
               name='mastery'

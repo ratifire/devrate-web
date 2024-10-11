@@ -47,7 +47,10 @@ export const styles = {
       },
     },
   }),
-  list: (theme) => ({
-    marginTop: theme.spacing(3),
-  }),
+  list: {
+    marginTop: '16px',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gridGap: '0 20px',
+  },
 };

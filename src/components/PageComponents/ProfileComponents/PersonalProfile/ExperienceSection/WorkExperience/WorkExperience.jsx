@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
-// import { styles } from './WorkExperience.styles';
 import WorkExperienceItem from './WorkExperienceItem/WorkExperienceItem';
 import { useGetWorkExperienceByUserIdQuery } from '../../../../../../redux/workExperience/workExperienceApiSlice';
 import { useDispatch, useSelector } from 'react-redux';

@@ -6,7 +6,7 @@ import { selectCurrentUser } from '../../../../../../redux/auth/authSlice';
 import SkillsList from './SkillsList';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import PropTypes from 'prop-types';
-import { useGetUserAllSpecializationQuery } from '../../../../../../redux/user/personal/personalApiSlice';
+import { useGetUserAllSpecializationQuery } from '../../../../../../redux/specialization/specializationApiSlice';
 
 const Skills = ({tab, profileType, imgUrl}) => {
   const { data: user } = useSelector(selectCurrentUser);
