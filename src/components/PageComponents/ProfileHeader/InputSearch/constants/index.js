@@ -1,4 +1,4 @@
-import LIGHT_NOT_FOUND from './lightImg';
 import DARK_NOT_FOUND from './darkImg';
+import LIGHT_NOT_FOUND from './lightImg';
 
-export { LIGHT_NOT_FOUND, DARK_NOT_FOUND };
+export { DARK_NOT_FOUND, LIGHT_NOT_FOUND };

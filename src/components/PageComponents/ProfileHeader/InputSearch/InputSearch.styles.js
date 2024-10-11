@@ -1,4 +1,3 @@
-/* eslint-disable */
 export const styles = {
   input: (theme) => ({
     width: '300px',

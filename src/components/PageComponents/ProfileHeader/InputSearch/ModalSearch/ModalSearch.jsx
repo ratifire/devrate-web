@@ -2,13 +2,13 @@ import { Box, Divider, List, ListItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
-import { styles } from './ModalSearch.styles';
-import UserAvatar from '../../../../UI/UserAvatar';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { DARK_THEME } from '../../../../../utils/constants/theme';
+import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
+import UserAvatar from '../../../../UI/UserAvatar';
 import { DARK_NOT_FOUND, LIGHT_NOT_FOUND } from '../constants';
+import { styles } from './ModalSearch.styles';
 
 const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   const { t } = useTranslation();
@@ -34,8 +34,10 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   if (!users?.length) {
     return (
       <Box sx={styles.box}>
-        <Typography variant='subtitle1' sx={styles.emptyTitle}>{t('header.notFound')}</Typography>
-        <Box sx={{ ...styles.boxImg, backgroundImage: `url(${imgUrl})` }}/>
+        <Typography variant='subtitle1' sx={styles.emptyTitle}>
+          {t('header.notFound')}
+        </Typography>
+        <Box sx={{ ...styles.boxImg, backgroundImage: `url(${imgUrl})` }} />
       </Box>
     );
   }
@@ -43,7 +45,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   return (
     <Box sx={styles.box}>
       <List sx={styles.list}>
-        {users.map(({id, lastName, firstName, picture, mainSpecializationName}) => (
+        {users.map(({ id, lastName, firstName, picture, mainSpecializationName }) => (
           <ListItem sx={styles.item} key={id}>
             <Box sx={styles.link}>
               <Link onClick={onClose} key={id} to={`/profile/${id}`}>
