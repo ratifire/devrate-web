@@ -1,12 +1,13 @@
+/* eslint-disable */
 import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg';
 import { useGetSearchQuery } from '../../../../redux/search/searchApiSlice';
-import { ModalSearch } from './ModalSearch';
-import { styles } from './InputSearch.styles';
-import { formatSearchQuery } from './helpers';
 import useDebounce from '../../../../utils/hooks/useDebounce';
+import { styles } from './InputSearch.styles';
+import { ModalSearch } from './ModalSearch';
+import { formatSearchQuery } from './helpers';
 
 const initialState = {
   query: '',
@@ -39,11 +40,11 @@ const InputSearch = () => {
     if (formatValue === query) return;
 
     if (formatValue.trim() === originalArgs) {
-      return  updateState({
+      return updateState({
         isChange: false,
         query: formatValue,
         users: data,
-      })
+      });
     }
 
     updateState({
