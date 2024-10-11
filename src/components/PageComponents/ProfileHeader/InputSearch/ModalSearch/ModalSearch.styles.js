@@ -49,9 +49,12 @@ export const styles = {
       backgroundColor: theme.palette.scroll.scrollEl,
     },
   }),
-  link: {
+  link: (theme) => ({
     padding: '8px',
-  },
+    '&:hover': {
+      backgroundColor: theme.palette.scroll.scrollWrapp,
+    },
+  }),
   item: (theme) => ({
     padding: '0',
     display: 'block',
