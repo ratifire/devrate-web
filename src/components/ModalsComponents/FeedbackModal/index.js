@@ -1,4 +1,3 @@
-import { InterviewerFeedback } from './InterviewerFeedback';
-import { RespondentFeedback } from './RespondentFeedback';
+import FeedbackModal from './FeedbackModal';
 
-export { InterviewerFeedback, RespondentFeedback };
+export { FeedbackModal };

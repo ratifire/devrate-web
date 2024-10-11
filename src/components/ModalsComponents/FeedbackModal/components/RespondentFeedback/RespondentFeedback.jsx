@@ -2,12 +2,12 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../components'
-import { useCloseModal } from '../hooks'
+import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../index'
+import { useCloseModal } from '../../hooks'
 import { styles } from './RespondentFeedback.styles'
-import { TextAreaInput } from '../../../FormsComponents/Inputs';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import { TextAreaInput } from '../../../../FormsComponents/Inputs';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import ModalLayoutProfile from '../../../../../layouts/ModalLayoutProfile';
 
 const RespondentFeedback = () => {
   const { t } = useTranslation();

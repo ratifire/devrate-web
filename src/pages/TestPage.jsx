@@ -1,12 +1,11 @@
 /* eslint-disable */
 import React from 'react';
-import { InterviewerFeedback, RespondentFeedback } from '../components/ModalsComponents/FeedbackModal';
+import { FeedbackModal } from '../components/ModalsComponents/FeedbackModal';
 
 const TestPage = () => {
   return (
     <>
-      {/*<InterviewerFeedback/>*/}
-      <RespondentFeedback/>
+      <FeedbackModal />
     </>
   )
 }

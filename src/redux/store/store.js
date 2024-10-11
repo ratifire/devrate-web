@@ -14,6 +14,7 @@ import { authReducer } from '../auth/authSlice';
 import { avatarReducer } from '../user/avatar/avatarSlice';
 import { personalReducer } from '../user/personal/personalSlice';
 import { educationReducer } from '../user/education/educationSlice';
+import feedbackSliceReducer from '../feedback/feedbackModalSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
 import activeMasteryReducer from '../specialization/activeMasterySlice';
@@ -53,6 +54,7 @@ const rootReducer = {
   email: emailSliceReducer,
   activeMastery: activeMasteryReducer,
   button: buttonReducer,
+  feedback: feedbackSliceReducer,
 };
 
 const store = configureStore({

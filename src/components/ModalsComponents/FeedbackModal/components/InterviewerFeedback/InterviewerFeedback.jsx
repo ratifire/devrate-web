@@ -2,13 +2,13 @@
 import { Box, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { InterviewerInfo, SliderComponent } from '../components';
-import { LAST_STEP, NUMBER_OF_STEPS } from '../constants';
-import { useCloseModal } from '../hooks';
+import { InterviewerInfo, SliderComponent } from '../index';
+import { LAST_STEP, NUMBER_OF_STEPS } from '../../constants';
+import { useCloseModal } from '../../hooks';
 import { styles } from './InterviewerFeedback.styles';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import CustomStepIcon from '../../ProfileModals/ModalUserInfo/StepIconComponent';
+import ModalLayoutProfile from '../../../../../layouts/ModalLayoutProfile';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import CustomStepIcon from '../../../ProfileModals/ModalUserInfo/StepIconComponent';
 
 const InterviewerFeedback = () => {
   const [activeStep, setActiveStep] = useState(1);
