@@ -32,7 +32,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
     );
   }
 
-  if (!users.length) {
+  if (!users?.length) {
     return (
       <Box sx={styles.box}>
         <Typography variant='subtitle1' sx={styles.emptyTitle}>{t('header.notFound')}</Typography>
