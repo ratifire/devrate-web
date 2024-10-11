@@ -172,7 +172,10 @@ const getDesignTokens = (mode) => ({
         },
         search: {
           color: 'rgba(197, 197, 198, 0.25)',
-          inputActive: '#B78AF7'
+          inputActive: '#B78AF7',
+          emptyTitle: '#fff',
+          title: '#fff',
+          subtitle: '#C5C5C6'
         },
         tabsEl: {
           borderColor: '#69696B',
@@ -317,7 +320,9 @@ const getDesignTokens = (mode) => ({
         },
         search: {
           color: 'rgba(197, 197, 198, 0.40)',
-          inputActive: '#8133F1'
+          inputActive: '#8133F1',
+          title: '#1D1D1D',
+          subtitle: '#303032'
         },
          baseUserInfo: {
           city: {

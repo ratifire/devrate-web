@@ -26,10 +26,11 @@ export const styles = {
     backgroundRepeat: 'no-repeat',
     marginBottom: '40px',
   },
-  emptyTitle: {
+  emptyTitle: (theme) => ({
     paddingTop: '40px',
     paddingBottom: '24px',
-  },
+    color: theme.palette.search.title,
+  }),
   list: (theme) => ({
     overflowY: 'auto',
     padding: 0,
@@ -54,6 +55,7 @@ export const styles = {
   item: (theme) => ({
     padding: '0',
     display: 'block',
+    color: theme.palette.search.title,
     '& a': {
       color: theme.palette.text.primary,
       textDecoration: 'none',
@@ -72,6 +74,6 @@ export const styles = {
     backgroundColor: theme.palette.search.color,
   }),
   subtitle: (theme) => ({
-    color: theme.palette.neutral['100'],
+    color: theme.palette.search.subtitle,
   }),
 };
