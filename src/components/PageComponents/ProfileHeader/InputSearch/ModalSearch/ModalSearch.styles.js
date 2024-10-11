@@ -40,12 +40,12 @@ export const styles = {
       width: 6,
     },
     '&::-webkit-scrollbar-track': {
-      backgroundColor: theme.palette.neutral['600'],
+      backgroundColor: theme.palette.scroll.scrollWrapp,
       borderRadius: 8,
     },
     '&::-webkit-scrollbar-thumb': {
       borderRadius: 6,
-      backgroundColor: theme.palette.common.white,
+      backgroundColor: theme.palette.scroll.scrollEl,
     },
   }),
   link: {

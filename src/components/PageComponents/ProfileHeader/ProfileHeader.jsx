@@ -47,7 +47,8 @@ const notifications = [
 ];
 
 const ProfileHeader = () => {
-  const { data: info } = useSelector(selectCurrentUser);
+  // const theme = useTheme()
+   const { data: info } = useSelector(selectCurrentUser);
   const { id, firstName, lastName } = info;
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const { data: personalData } = useGetPersonalUserQuery(id);
@@ -78,6 +79,7 @@ const ProfileHeader = () => {
         <IconButton>
           <Badge color='error' overlap='circular' badgeContent='' variant='dot' invisible={true}>
             <Message />
+            {/*{theme.palette.mode==="dark"?<Message />:<MessageLight />}*/}
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>

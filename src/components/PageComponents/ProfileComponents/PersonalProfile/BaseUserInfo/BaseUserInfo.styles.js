@@ -46,7 +46,7 @@ export const styles = {
   city: (theme) => ({
     display: 'flex',
     alignItems: 'center',
-    color: theme.palette.info.main,
+    color: theme.palette.baseUserInfo.city.color,
   }),
   icon: (theme) => ({
     fontSize: 18,

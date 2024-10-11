@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -14,8 +14,10 @@ import {
 } from '../../../redux/schedule/scheduleApiSlice';
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
-
+import { useTheme } from '@mui/material/styles';
+  console.log(DateTime)
 const Schedule = () => {
+  const theme = useTheme();
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
@@ -24,7 +26,10 @@ const Schedule = () => {
   const [popupPosition, setPopupPosition] = useState('TOPRIGHT');
   const [from, setFrom] = useState(DateTime.local().startOf('week').plus({ days: 1 }).toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
-  const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
+  // const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
+  const specificDate = DateTime.fromISO('2024-09-23T00:00:00+03:00');
+  const fromTime = encodeURIComponent(`${specificDate.toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
+  
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [events, setEvents] = useState([]);
   const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
@@ -32,24 +37,27 @@ const Schedule = () => {
   const { data: eventsForSelectedWeek, isLoading, isFetching } = useGetEventByUserIdQuery({ userId, from, to });
   const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
-
-  useEffect(() => {
+    console.log(events)
+  console.log(DateTime.local())
+  
+  useLayoutEffect(() => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
-      applyRequiredStyles(calendarApi);
+      applyRequiredStyles(calendarApi, theme);
       calendarApi.gotoDate(from);
       calendarApi.scrollToTime(eventStartTime);
     }
-  }, [selectedWeek, eventStartTime]);
-
+  }, [selectedWeek, eventStartTime,from, theme]);
+  
   useEffect(() => {
     setEvents(transformEvents(eventsForSelectedWeek || []));
+    console.log(calendarRef.current)
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
-
-      applyRequiredStyles(calendarApi);
+                console.log("test2")
+      applyRequiredStyles(calendarApi, theme);
     }
-  }, [isFetching]);
+  }, [eventsForSelectedWeek,isFetching, theme]);
 
   const findEventTimeForChosenDay = (newDate, resp) => {
     const luxonDate = DateTime.fromISO(newDate);
@@ -183,11 +191,20 @@ const Schedule = () => {
     const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
     scroller.style.overflow = 'auto';
   };
-
+  
+  const transformEvents = (events) => {
+    return events.map((event) => ({
+      id: event.id,
+      title: event.type,
+      start: event.startTime,
+      backgroundColor: event.type === 'INTERVIEW' ? theme.palette.info.lime : theme.palette.info.orange,
+      textColor: '#1D1D1D',
+    }));
+  };
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
-
+        console.log(currentClosestEvents)
   return (
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
@@ -229,15 +246,7 @@ const Schedule = () => {
   );
 };
 
-const transformEvents = (events) => {
-  return events.map((event) => ({
-    id: event.id,
-    title: event.type,
-    start: event.startTime,
-    backgroundColor: event.type === 'INTERVIEW' ? '#DAFE22' : '#FCA728',
-    textColor: '#1D1D1D',
-  }));
-};
+
 
 const getWeekStartAndEnd = (year, weekNumber) => {
   const firstDayOfYear = DateTime.local(year).startOf('year');
@@ -250,7 +259,7 @@ const getWeekStartAndEnd = (year, weekNumber) => {
   };
 };
 
-const applyRequiredStyles = (calendarApi) => {
+const applyRequiredStyles = (calendarApi, theme) => {
   if (calendarApi) {
     const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
     const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
@@ -262,13 +271,13 @@ const applyRequiredStyles = (calendarApi) => {
     );
 
     timeGridSlotElements.forEach((el) => {
-      Object.assign(el.style, styles.timeGridTableData);
+      Object.assign(el.style, theme.palette.mode === "dark" ? styles.timeGridTableDataDark: styles.timeGridTableDataLight);
     });
     timeGridTodayElements.forEach((el) => {
       Object.assign(el.style, styles.timeGridTodayElements);
     });
     timeGridHeadElements.forEach((el) => {
-      Object.assign(el.style, styles.timeGridTableHead);
+      Object.assign(el.style, theme.palette.mode === "dark" ? styles.timeGridTableHeadDark: styles.timeGridTableHeadLight);
     });
     timeGridEventElements.forEach((el) => {
       Object.assign(el.style, styles.timeGridEventElements);

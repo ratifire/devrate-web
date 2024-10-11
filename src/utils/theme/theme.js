@@ -103,15 +103,72 @@ const getDesignTokens = (mode) => ({
       letterSpacing: 0,
     },
   },
-  palette: {
+  palette: {mode,
     ...(mode === DARK_THEME
       ? {
         border: {
           color: '#252527',
         },
+        baseUserInfo: {
+          city: {
+            color: '#25CBFF',
+          },
+        },
+        rightSection: {
+          languages: {
+            border: {
+              borderColor: 'transparent',
+            },
+            type: {
+              color: '#FFFFFF',
+              backgroundColor: '#5900D9',
+            },
+            level: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA',
+            },
+            modalDeleteIcon: {
+              color: '#5900D9',
+            },
+          },
+          text: {
+            color: '#C5C5C6',
+          },
+        },
+        scroll: {
+          scrollWrapp: {
+            backgroundColor: '#3E3E40',
+          },
+          scrollEl: {
+            backgroundColor: '#FFFFFF',
+          },
+        },
+
         iconBtn: {
-          color: '#CEB0FA',
-          hoverColor: ''
+          editBtn: {
+            color: '#CEB0FA',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          createBtn: {
+            color: '#CEB0FA',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          burgerDot: {
+            color: '#C5C5C6',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#A9A9AA',
+              backgroundColor: '#252527',
+            },
+          },
         },
         search: {
           color: 'rgba(197, 197, 198, 0.25)',
@@ -155,8 +212,8 @@ const getDesignTokens = (mode) => ({
           responsibilityBorder: 'transparent',
         },
         themeSwitcher: {
-          backgroundColor: '#8796A5',
-          switcherColor: '#8133F1',
+          backgroundColor: '#252527',
+          switcherColor: '#25CBFF',
           borderColor: '#1D1D1D',
         },
         sliderAssessment: {
@@ -175,6 +232,8 @@ const getDesignTokens = (mode) => ({
           primary: '#ffffff',
           secondary: '#C5C5C6',
           disabled: '#F1F1F1',
+          accent: "#007CA3",
+          darkGray: '#F8F8F8',
         },
         action: {
           active: '#B78AF7',
@@ -241,7 +300,12 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#25CBFF',
+          blueDark: "#007CA3",
           azure: '#16FFB9',
+          azureDark: "#00855D",
+          orange:"#FCA728",
+          orangeDark: "#EE7538",
+          pink: "#D31772",
           hover: '#CEB0FA',
           contrastText: '#ffffff',
           lime: '#DAFE22',
@@ -255,7 +319,41 @@ const getDesignTokens = (mode) => ({
           color: 'rgba(197, 197, 198, 0.40)',
           inputActive: '#8133F1'
         },
-        tabsEl: {
+         baseUserInfo: {
+          city: {
+            color: '#007CA3',
+          },
+        },
+        rightSection: {
+          languages: {
+            border: {
+              borderColor: '#B78AF7',
+            },
+            type: {
+              color: '#FFFFFF',
+              backgroundColor: '#6200EE',
+            },
+            level: {
+              color: '#4600A9',
+              backgroundColor: '#EFE6FD',
+            },
+            modalDeleteIcon: {
+              color: '#6200EE',
+            },
+          },
+          text: {
+            color: '#3E3E40',
+          },
+        },
+        scroll: {
+          scrollWrapp: {
+            backgroundColor: '#ECECED',
+          },
+          scrollEl: {
+            backgroundColor: '#C5C5C6',
+          },
+        },
+         tabsEl: {
           borderColor: '#A9A9AA',
           indicator: '#6200EE',
           default: {
@@ -265,6 +363,32 @@ const getDesignTokens = (mode) => ({
           focused: {
             color: '#6200EE',
             backgroundColor: 'transparent',
+          },
+        },
+        iconBtn: {
+          editBtn: {
+            color: '#8133F1',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#8133F1',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          createBtn: {
+            color: '#CEB0FA',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          burgerDot: {
+            color: '#C5C5C6',
+            backgroundColor: 'transperent',
+            hover: {
+              color: '#A9A9AA',
+              backgroundColor: '#252527',
+            },
           },
         },
         sectionSkills: {
@@ -307,12 +431,16 @@ const getDesignTokens = (mode) => ({
         common: {
           black: '#000000',
           white: '#ffffff',
+          
+          titleGradient: 'linear-gradient(90deg, rgb(117, 98, 228), rgb(251, 147, 166))',
         },
         text: {
           primary: '#1D1D1D',
           secondary: '#1D1D1D',
           disabled: '#A0A0A0',
-        },
+          accent:  "#25CBFF",
+          darkGray: '#F8F8F8',
+         },
         action: {
           active: '#6200EE',
           hover: '#8133F1',
@@ -378,9 +506,15 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#2196F3',
+          blueDark: "#007CA3",
           azure: '#16FFB9',
+          azureDark: "#00855D",
+          orange:"#FCA728",
+          orangeDark: "#EE7538",
+          pink: "#D31772",
           hover: '#E3F2FD',
           contrastText: '#000000',
+          lime: '#DAFE22',
         },
       }),
   },

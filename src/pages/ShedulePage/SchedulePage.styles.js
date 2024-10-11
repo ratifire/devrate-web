@@ -16,7 +16,7 @@ export const styles = {
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
-      backgroundColor: theme.palette.background.level2,
+      backgroundColor: theme.palette.mode==="dark" ? theme.palette.background.level2 :theme.palette.common.white,
     },
   }),
   scheduleWrapper: {
@@ -33,7 +33,8 @@ export const styles = {
       letterSpacing: '0.25px',
 }),
   calendarWrapper: (theme) => ({
-    backgroundColor: theme.palette.neutral[600],
+    // backgroundColor: theme.palette.mode==="dark" ? theme.palette.background.level2 :theme.palette.common.white,
+    backgroundColor: theme.palette.sliderAssessment.darkGray,
     borderRadius: 2,
   })
 }
