@@ -5,8 +5,8 @@ export const styles = {
     backgroundColor: theme.palette.background.backdrop,
     maxWidth: '376px',
     width: '100%',
-    maxHeight: '428px',
-    padding: theme.spacing(3),
+    maxHeight: '400px',
+    padding: theme.spacing(2, 3),
     borderRadius: theme.spacing(2),
     border: `1px solid ${theme.palette.border.color}`,
     display: 'flex',
@@ -20,20 +20,21 @@ export const styles = {
   }),
   boxImg: {
     width: '100%',
-    minHeight: '187px',
+    height: '248px',
     backgroundSize: 'contain',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    marginBottom: '32px',
+    marginBottom: '40px',
   },
   emptyTitle: {
+    paddingTop: '40px',
     paddingBottom: '24px',
   },
   list: (theme) => ({
     overflowY: 'auto',
     padding: 0,
     paddingRight: '8px',
-    maxHeight: '412px',
+    height: '384px',
     width: '100%',
     '&::-webkit-scrollbar': {
       width: 6,
@@ -47,21 +48,19 @@ export const styles = {
       backgroundColor: theme.palette.common.white,
     },
   }),
+  link: {
+    padding: '8px',
+  },
   item: (theme) => ({
-    display: 'block',
     padding: '0',
-    paddingRight: theme.spacing(2),
+    display: 'block',
     '& a': {
       color: theme.palette.text.primary,
-      minHeight: '64px',
       textDecoration: 'none',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       gap: '33px',
-      '&: hover': {
-        backgroundColor: theme.palette.neutral['800'],
-      }
     },
   }),
   img: {

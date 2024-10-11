@@ -45,7 +45,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
       <List sx={styles.list}>
         {users.map(({id, lastName, firstName, picture, mainSpecializationName}) => (
           <ListItem sx={styles.item} key={id}>
-            <Box>
+            <Box sx={styles.link}>
               <Link onClick={onClose} key={id} to={`/profile/${id}`}>
                 <Box>
                   <Typography variant='subtitle2'>
