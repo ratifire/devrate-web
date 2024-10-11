@@ -1,5 +1,5 @@
 import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg';
 import { useGetSearchQuery } from '../../../../redux/search/searchApiSlice';
@@ -7,6 +7,7 @@ import useDebounce from '../../../../utils/hooks/useDebounce';
 import { styles } from './InputSearch.styles';
 import { ModalSearch } from './ModalSearch';
 import { formatSearchQuery } from './helpers';
+import useMergeState from '../../../../utils/hooks/useUpdateState';
 
 const initialState = {
   query: '',
@@ -16,21 +17,21 @@ const initialState = {
 
 const InputSearch = () => {
   const { t } = useTranslation();
-  const [state, setState] = useState(initialState);
+  const [state, updateState] = useMergeState(initialState);
   const { query, users, isChange } = state;
-  const updateState = (newState) => setState((prevState) => ({ ...prevState, ...newState }));
   const boxRef = useRef(null);
-  const queryTrim = query.trim();
-  const formatQueryTrim = formatSearchQuery(queryTrim);
+  const formatQueryTrim = formatSearchQuery(query.trim());
   const debouncedValue = useDebounce({ value: formatQueryTrim });
-  const { data, isError, isFetching, originalArgs } = useGetSearchQuery(debouncedValue, { skip: !debouncedValue });
+  const { data, isError, isFetching, originalArgs, startedTimeStamp } = useGetSearchQuery(debouncedValue, { skip: !debouncedValue });
 
   useEffect(() => {
-    updateState({
-      users: data || [],
-      isChange: false,
-    });
-  }, [data]);
+    if (data) {
+      updateState({
+        users: data || [],
+        isChange: false,
+      });
+    }
+  }, [data, startedTimeStamp]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -86,7 +87,7 @@ const InputSearch = () => {
           </InputAdornment>
         }
       />
-      {queryTrim && (
+      {formatQueryTrim && (
         <ModalSearch isError={isError} isSpinner={isFetching || isChange} users={users} onClose={handleClose} />
       )}
     </Box>

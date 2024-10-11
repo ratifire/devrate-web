@@ -8,4 +8,4 @@ export const SearchApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLazyGetSearchQuery, useGetSearchQuery } = SearchApiSlice;
+export const { useGetSearchQuery } = SearchApiSlice;
