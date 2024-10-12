@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -15,8 +15,7 @@ import {
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
 import { useTheme } from '@mui/material/styles';
-  console.log(DateTime)
-const Schedule = () => {
+ const Schedule = () => {
   const theme = useTheme();
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
@@ -37,31 +36,41 @@ const Schedule = () => {
   const { data: eventsForSelectedWeek, isLoading, isFetching } = useGetEventByUserIdQuery({ userId, from, to });
   const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
-    console.log(events)
-  console.log(DateTime.local())
   
-  useLayoutEffect(() => {
-    if (calendarRef.current) {
-      const calendarApi = calendarRef.current.getApi();
-      applyRequiredStyles(calendarApi, theme);
-      calendarApi.gotoDate(from);
-      calendarApi.scrollToTime(eventStartTime);
-    }
-  }, [selectedWeek, eventStartTime,from, theme]);
+  
+  
+  useEffect(() => {
+    const waitForCalendarRef = () => {
+      if (calendarRef.current) {
+        const calendarApi = calendarRef.current.getApi();
+        applyRequiredStyles(calendarApi, theme);
+        calendarApi.gotoDate(from);
+        calendarApi.scrollToTime(eventStartTime);
+      } else {
+        setTimeout(waitForCalendarRef, 0);
+      }
+    };
+    waitForCalendarRef();
+  }, [selectedWeek, eventStartTime, from, theme]);
   
   useEffect(() => {
     setEvents(transformEvents(eventsForSelectedWeek || []));
-    console.log(calendarRef.current)
-    if (calendarRef.current) {
-      const calendarApi = calendarRef.current.getApi();
-                console.log("test2")
-      applyRequiredStyles(calendarApi, theme);
-    }
-  }, [eventsForSelectedWeek,isFetching, theme]);
-
+    
+    const waitForCalendarRef = () => {
+      if (calendarRef.current) {
+        const calendarApi = calendarRef.current.getApi();
+        applyRequiredStyles(calendarApi, theme);
+      } else {
+        setTimeout(waitForCalendarRef, 0);
+      }
+    };
+    
+    waitForCalendarRef();
+  }, [eventsForSelectedWeek, isFetching, theme]);
+  
+  
   const findEventTimeForChosenDay = (newDate, resp) => {
     const luxonDate = DateTime.fromISO(newDate);
-
     if (!luxonDate.isValid) {
       return;
     }
@@ -201,43 +210,43 @@ const Schedule = () => {
       textColor: '#1D1D1D',
     }));
   };
+  
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
-        console.log(currentClosestEvents)
   return (
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
       <Box sx={styles.demoAppMain}>
-        <FullCalendar
-          ref={calendarRef}
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          headerToolbar={false}
-          initialView='timeGridWeek'
-          firstDay={1}
-          slotDuration='01:00:00'
-          slotLabelInterval={{ hours: 1 }}
-          allDaySlot={false}
-          expandRows={true}
-          editable={false}
-          selectable={false}
-          selectMirror={true}
-          dayMaxEvents={true}
-          weekends={true}
-          displayEventTime={false}
-          events={events}
-          dayHeaderFormat={{
-            weekday: 'short',
-          }}
-          slotLabelFormat={[
-            {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false,
-            },
-          ]}
-          eventClick={handleEventClick}
-        />
+        {<FullCalendar
+            ref={calendarRef}
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            headerToolbar={false}
+            initialView='timeGridWeek'
+            firstDay={1}
+            slotDuration='01:00:00'
+            slotLabelInterval={{hours: 1}}
+            allDaySlot={false}
+            expandRows={true}
+            editable={false}
+            selectable={false}
+            selectMirror={true}
+            dayMaxEvents={true}
+            weekends={true}
+            displayEventTime={false}
+            events={events}
+            dayHeaderFormat={{
+              weekday: 'short',
+            }}
+            slotLabelFormat={[
+              {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+              },
+            ]}
+            eventClick={handleEventClick}
+        />}
         {popup.visible && event && (
           <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition} />
         )}
@@ -269,7 +278,7 @@ const applyRequiredStyles = (calendarApi, theme) => {
     const timeGridEventElements = calendarApi.el.querySelectorAll(
       '.fc-timegrid-event-harness-inset .fc-timegrid-event'
     );
-
+    
     timeGridSlotElements.forEach((el) => {
       Object.assign(el.style, theme.palette.mode === "dark" ? styles.timeGridTableDataDark: styles.timeGridTableDataLight);
     });

@@ -10,6 +10,7 @@ export const styles = {
     flexDirection: 'column',
     backgroundColor: '#252527',
     zIndex: 1000,
+    
   },
   popupTriangularBottomLeft: (theme) => ({
     position: 'absolute',
@@ -18,7 +19,7 @@ export const styles = {
     width: 0,
     height: 0,
     borderLeft: '9px solid transparent',
-    borderRight: `14px solid ${theme.palette.mode === "dark" ? theme.palette.neutral[800] : theme.palette.neutral[50]}`,
+    borderRight: `14px solid ${theme.palette.schedule.popup.popupBorderColor}`,
     borderTop: '10px solid transparent',
     zIndex: 1001,
   }),
@@ -29,7 +30,7 @@ export const styles = {
     width: 0,
     height: 0,
     borderLeft: '9px solid transparent',
-    borderRight: `14px solid ${theme.palette.mode === "dark" ? theme.palette.neutral[800] : theme.palette.neutral[50]}`,
+    borderRight: `14px solid ${theme.palette.schedule.popup.popupBorderColor}`,
     borderBottom: '10px solid transparent',
     zIndex: 1001,
   }),
@@ -40,7 +41,7 @@ export const styles = {
     width: 0,
     height: 0,
     borderRight: '9px solid transparent',
-    borderLeft: `14px solid ${theme.palette.mode === "dark" ? theme.palette.neutral[800] : theme.palette.neutral[50]}`,
+    borderLeft: `14px solid ${theme.palette.schedule.popup.popupBorderColor}`,
     borderBottom: '10px solid transparent',
     zIndex: 1001,
   }),
@@ -51,7 +52,7 @@ export const styles = {
     width: 0,
     height: 0,
     borderRight: '9px solid transparent',
-    borderLeft: `14px solid ${theme.palette.mode === "dark" ? theme.palette.neutral[800] : theme.palette.neutral[50]}`,
+    borderLeft: `14px solid ${theme.palette.schedule.popup.popupBorderColor}`,
     borderTop: '10px solid transparent',
     zIndex: 1001,
   }),
@@ -59,7 +60,7 @@ export const styles = {
     position: 'absolute',
     right: 0,
     top: 0,
-    color: theme.palette.mode==="dark"?theme.palette.primary[100]:theme.palette.primary[600],
+    color: theme.palette.schedule.popup.closeIconColor,
     
   }),
   infoContainer: (theme) => ({
@@ -71,7 +72,7 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     paddingRight: theme.spacing(4),
-    borderRight: `1px dashed ${theme.palette.mode==="dark"?theme.palette.neutral[200]:theme.palette.neutral[100]}`,
+    borderRight: `1px dashed ${theme.palette.schedule.popup.userInfoBorderColor}`,
   }),
   interviewerInfo: (theme) => ({
     width: '55%',
@@ -79,9 +80,8 @@ export const styles = {
     flexDirection: 'column',
     paddingLeft: theme.spacing(4),
   }),
-
   title: (theme) => ({
-    color: theme.palette.mode==="dark"?theme.palette.neutral[200]:theme.palette.neutral[900],
+    color: theme.palette.schedule.popup.titleColor,
     margin: 0,
     marginBottom: theme.spacing(2),
   }),
@@ -99,11 +99,7 @@ export const styles = {
   role: {
     margin: 0,
     textTransform: 'capitalize',
-    // '&:first-letter': {
-    //   textTransform: 'uppercase',
-    // },
   },
-
   buttonsContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -115,14 +111,14 @@ export const styles = {
     width: '24px',
     height: '24px',
     display: 'block',
-    color: theme.palette.mode==="dark"?theme.palette.primary[100]:theme.palette.primary[600],
+    color: theme.palette.schedule.popup.iconColor,
     padding: 0,
   }),
   outlined: (theme) => ({
     display: 'block',
     height: '100%',
     border: 'none',
-    color: theme.palette.mode==="dark"?theme.palette.primary[100]:theme.palette.primary[600],
+    color: theme.palette.schedule.popup.iconColor,
     fontSize: '14px',
     textTransform: 'none',
     padding: 0,

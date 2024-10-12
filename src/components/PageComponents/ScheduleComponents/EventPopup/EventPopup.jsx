@@ -8,15 +8,15 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
-// import {useTheme} from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const { t } = useTranslation();
   const [deleteEventById] = useDeleteEventByIdMutation();
-  // const theme = useTheme()
+  const theme = useTheme()
   const handleCancelInterview = async function (event) {
     try {
-      await deleteEventById(event).unwrap(); // change to async function for correct work
+      await deleteEventById(event).unwrap();
       toast.success('Event was deleted', {
         position: 'top-right',
         autoClose: 3000,
@@ -48,7 +48,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
           ... styles.popup,
           top: popup.y,
           left: popup.x,
-          // backgroundColor: theme.palette.mode === "dark" ? theme.palette.neutral[800] : theme.palette.neutral[50] ,
+          backgroundColor: theme.palette.mode === "dark" ? theme.palette.neutral[800] : theme.palette.neutral[50] ,
+          boxShadow:theme.palette.mode === "dark" ? "box-shadow: 2px 4px 6px 0px #00000000":
+          "2px 4px 6px 0px #00000040"
         }}    >
       {popupPosition === 'TOPLEFT' && <Box sx={styles.popupTriangularTopLeft}></Box>}
       {popupPosition === 'BOTTOMLEFT' && <Box sx={styles.popupTriangularBottomLeft}></Box>}
