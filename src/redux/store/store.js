@@ -1,8 +1,8 @@
 // src/app/store.js
-
+/* eslint-disable */
 
 import { configureStore } from '@reduxjs/toolkit';
-// import logger from 'redux-logger';
+//import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants';
@@ -17,9 +17,8 @@ import { educationReducer } from '../user/education/educationSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
 import activeMasteryReducer from '../specialization/activeMasterySlice';
-import buttonReducer from '../addButton/addButtonSlice';
-import themeSliceReducer from '../theme/themeSlice';
-import { notificationApi } from '../notification/notificationApiSlice';
+import buttonReducer from '../addButton/addButtonSlice'
+import themeSliceReducer from "../theme/themeSlice";
 
 const authPersistConfig = {
   key: 'auth',
@@ -35,11 +34,15 @@ const personalPersistConfig = {
   key: 'personal',
   storage,
   whitelist: ['personal'],
+}; const themePersistConfig = {
+  key: 'theme',
+  storage,
+  whitelist: ['theme'],
 };
 
 const rootReducer = {
-  theme: themeSliceReducer,
-  modal: modalSliceReducer,
+  theme:themeSliceReducer,
+  modal: persistReducer(themePersistConfig,modalSliceReducer),
   education: educationReducer,
   modalStep: modalStepReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
@@ -50,7 +53,6 @@ const rootReducer = {
   email: emailSliceReducer,
   activeMastery: activeMasteryReducer,
   button: buttonReducer,
-  [notificationApi.reducerPath]: notificationApi.reducer,
 };
 
 const store = configureStore({
@@ -61,8 +63,8 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      .concat(apiSlice.middleware)
-      .concat(notificationApi.middleware),
+      // .concat(logger)
+      .concat(apiSlice.middleware),
   devTools: true,
 });
 

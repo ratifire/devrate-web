@@ -1,3 +1,5 @@
+import { DARK_THEME } from '../constants/theme';
+
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
   shape: {
@@ -101,9 +103,12 @@ const getDesignTokens = (mode) => ({
       letterSpacing: 0,
     },
   },
-  palette: {
-    ...(mode === 'dark'
+  palette: {mode,
+    ...(mode === DARK_THEME
       ? {
+        border: {
+          color: '#252527',
+        },
         baseUserInfo: {
           city: {
             color: '#25CBFF',
@@ -165,6 +170,13 @@ const getDesignTokens = (mode) => ({
             },
           },
         },
+        search: {
+          color: 'rgba(197, 197, 198, 0.25)',
+          inputActive: '#B78AF7',
+          emptyTitle: '#fff',
+          title: '#fff',
+          subtitle: '#C5C5C6'
+        },
         tabsEl: {
           borderColor: '#69696B',
           indicator: '#B78AF7',
@@ -223,6 +235,8 @@ const getDesignTokens = (mode) => ({
           primary: '#ffffff',
           secondary: '#C5C5C6',
           disabled: '#F1F1F1',
+          accent: "#007CA3",
+          darkGray: '#F8F8F8',
         },
         action: {
           active: '#B78AF7',
@@ -289,14 +303,28 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#25CBFF',
+          blueDark: "#007CA3",
           azure: '#16FFB9',
+          azureDark: "#00855D",
+          orange:"#FCA728",
+          orangeDark: "#EE7538",
+          pink: "#D31772",
           hover: '#CEB0FA',
           contrastText: '#ffffff',
           lime: '#DAFE22',
         },
       }
       : {
-        baseUserInfo: {
+        border: {
+          color: '#C5C5C6',
+        },
+        search: {
+          color: 'rgba(197, 197, 198, 0.40)',
+          inputActive: '#8133F1',
+          title: '#1D1D1D',
+          subtitle: '#303032'
+        },
+         baseUserInfo: {
           city: {
             color: '#007CA3',
           },
@@ -330,7 +358,7 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#C5C5C6',
           },
         },
-        tabsEl: {
+         tabsEl: {
           borderColor: '#A9A9AA',
           indicator: '#6200EE',
           default: {
@@ -408,12 +436,16 @@ const getDesignTokens = (mode) => ({
         common: {
           black: '#000000',
           white: '#ffffff',
+          
+          titleGradient: 'linear-gradient(90deg, rgb(117, 98, 228), rgb(251, 147, 166))',
         },
         text: {
           primary: '#1D1D1D',
           secondary: '#1D1D1D',
           disabled: '#A0A0A0',
-        },
+          accent:  "#25CBFF",
+          darkGray: '#F8F8F8',
+         },
         action: {
           active: '#6200EE',
           hover: '#8133F1',
@@ -479,9 +511,15 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#2196F3',
+          blueDark: "#007CA3",
           azure: '#16FFB9',
+          azureDark: "#00855D",
+          orange:"#FCA728",
+          orangeDark: "#EE7538",
+          pink: "#D31772",
           hover: '#E3F2FD',
           contrastText: '#000000',
+          lime: '#DAFE22',
         },
       }),
   },

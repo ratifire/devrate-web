@@ -29,7 +29,7 @@ export const styles = {
   }),
   m: (theme) => ({
     height: 8,
-    backgroundColor: theme.palette.neutral['400'],
+    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.neutral[400]: theme.palette.neutral[50],
     borderRadius: 3,
     '>span': {
       background: 'linear-gradient(90deg, #4A1D8B, #8233F1, #A756B4, #FCA728)',
