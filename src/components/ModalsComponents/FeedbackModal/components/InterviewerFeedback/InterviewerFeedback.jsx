@@ -4,15 +4,12 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InterviewerInfo, SliderComponent } from '../index';
 import { LAST_STEP, NUMBER_OF_STEPS } from '../../constants';
-import { useCloseModal } from '../../hooks';
 import { styles } from './InterviewerFeedback.styles';
-import ModalLayoutProfile from '../../../../../layouts/ModalLayoutProfile';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import CustomStepIcon from '../../../ProfileModals/ModalUserInfo/StepIconComponent';
 
 const InterviewerFeedback = () => {
   const [activeStep, setActiveStep] = useState(1);
-  const { handleCloseModal, isOpenModal } = useCloseModal({ modalName: 'openFeedbackRespondent' });
   const { t } = useTranslation();
   const buttonContent = activeStep === LAST_STEP ? t('modal.interview.btnSend') : t('modal.interview.btnNext');
 
@@ -24,7 +21,6 @@ const InterviewerFeedback = () => {
   };
 
   return (
-    <ModalLayoutProfile setOpen={handleCloseModal} open={true}>
       <Box sx={styles.container}>
         <Typography variant='h6'>{t('modal.interview.title')}</Typography>
         <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
@@ -59,7 +55,6 @@ const InterviewerFeedback = () => {
           />
         </Box>
       </Box>
-    </ModalLayoutProfile>
   );
 };
 
