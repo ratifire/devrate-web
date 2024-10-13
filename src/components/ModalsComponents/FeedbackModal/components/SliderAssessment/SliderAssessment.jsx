@@ -26,6 +26,7 @@ const SliderAssessment = ({ title }) => {
             valueLabelDisplay='on'
             sx={styles.slider}
           />
+          <input name={title} type='hidden' value={sliderValue} />
           <Typography sx={styles.grade} variant='body'>
             {sliderValue}/10
           </Typography>

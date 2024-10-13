@@ -8,7 +8,7 @@ import { styles } from './CandidateFeedback.styles';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import CustomStepIcon from '../../../ProfileModals/ModalUserInfo/StepIconComponent';
 
-const CandidateFeedback = () => {
+const CandidateFeedback = ({ data }) => {
   const [activeStep, setActiveStep] = useState(1);
   const { t } = useTranslation();
   const buttonContent = activeStep === LAST_STEP ? t('modal.interview.btnSend') : t('modal.interview.btnNext');
@@ -19,6 +19,8 @@ const CandidateFeedback = () => {
   const handleSubmit = () => {
     console.log('Submit modal');
   };
+
+  console.log(data);
 
   return (
       <Box sx={styles.container}>

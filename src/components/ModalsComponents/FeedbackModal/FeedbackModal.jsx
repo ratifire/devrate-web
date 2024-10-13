@@ -23,7 +23,7 @@ const FeedbackModal = () => {
 
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={open}>
-      <RenderRoleModal role={role} />
+      <RenderRoleModal role={role} data={data} />
     </ModalLayoutProfile>
   )
 }

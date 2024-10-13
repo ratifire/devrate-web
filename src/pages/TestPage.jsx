@@ -17,8 +17,8 @@ const TestPage = () => {
     <>
       <Box sx={{display: 'flex'}}>
         <ThemeSwitch/>
-        <Button onClick={() => handleClickButton(40001)}>Candidate ID: 40001</Button>
-        <Button onClick={() => handleClickButton(40002)}>Interview ID: 40002</Button>
+        <Button onClick={() => handleClickButton(40001)}>Interview ID: 40001</Button>
+        <Button onClick={() => handleClickButton(40002)}>Candidate ID: 40002</Button>
       </Box>
       { open && <FeedbackModal/> }
     </>

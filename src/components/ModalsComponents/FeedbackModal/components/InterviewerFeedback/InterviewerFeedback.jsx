@@ -6,18 +6,21 @@ import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../index
 import { styles } from './InterviewerFeedback.styles'
 import { TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { formatDateTime } from '../../helpers';
 
-const InterviewerFeedback = () => {
+const InterviewerFeedback = ({data}) => {
   const { t } = useTranslation();
+  const { interviewStartTime, participant: { id, name, status, surname }, skills } = data;
+  const { date, time } = formatDateTime(interviewStartTime);
 
   return (
       <Box sx={styles.container}>
         <Typography variant='h6'>{t('modal.interview.title')}</Typography>
         <InterviewerInfo
-          name={'Олена Бондаренко'}
-          position={'Senior Full stack Developer'}
-          data={'03/06/2024'}
-          time={'15:30'}
+          name={`${name} ${surname}`}
+          position={status}
+          date={date}
+          time={time}
         />
         <Box>
           <TextAreaInput
@@ -32,9 +35,9 @@ const InterviewerFeedback = () => {
           <Box>
             <Typography variant='h6'>Soft Skills</Typography>
             <SliderAssessmentBox>
-              <SliderAssessment title='Комунікативність' />
-              <SliderAssessment title='Креативність' />
-              <SliderAssessment title='Критичне мислення' />
+              {skills.map(({ name, id }) => (
+                <SliderAssessment key={id} title={name} />
+              ))}
             </SliderAssessmentBox>
           </Box>
         </Box>
