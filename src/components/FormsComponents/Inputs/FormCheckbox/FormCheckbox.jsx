@@ -9,8 +9,23 @@ const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, 
   return (
     <FormControl error={error} variant='standard'>
       <FormControlLabel
-        control={<Checkbox checked={checked} onChange={changeHandler} name={name} sx={workExperience? styles.checkBoxWorkExperience : styles.checkBox} />}
-        label={<Typography sx={workExperience ? styles.newsAgreementTextWorkExperience : styles.newsAgreementText}>{t(label)}</Typography>}
+        control={
+        <Checkbox
+          checked={checked}
+          onChange={changeHandler}
+          name={name}
+          sx={
+          workExperience ? styles.checkBoxWorkExperience : styles.checkBox}
+        />}
+        label={
+        <Typography
+          sx={
+          workExperience ?
+            styles.newsAgreementTextWorkExperience :
+            styles.newsAgreementText}
+        >
+          {t(label)}
+        </Typography>}
       />
       <FormHelperText>{t(helperText)}</FormHelperText>
     </FormControl>

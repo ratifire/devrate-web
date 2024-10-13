@@ -1,31 +1,31 @@
 export const styles = {
   input: (theme) => ({
     ' .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['500'],
+      borderColor: theme.palette.modals.textAreaInput.border.default,
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['300'],
+      borderColor: theme.palette.modals.textAreaInput.border.hover,
     },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.primary['200'],
+      borderColor: theme.palette.modals.textAreaInput.border.focused,
       borderWidth: '2px',
     },
     '&.Mui-error.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
+      borderColor: theme.palette.modals.textAreaInput.border.error,
     },
     '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
+      borderColor: theme.palette.modals.textAreaInput.border.error,
     },
   }),
   label: (theme) => ({
     '&.Mui-focused': {
-      color: theme.palette.primary['200'],
+      color: theme.palette.modals.textAreaInput.labelColor.focused,
     },
     '&.Mui-error': {
-      color: theme.palette.error.main,
+      color: theme.palette.modals.textAreaInput.labelColor.error,
     },
     '&.Mui-required .MuiFormLabel-asterisk': {
-      color: '#ED0E0E'
+      color: theme.palette.modals.textAreaInput.labelColor.required
     },
   }),
   textHelper: {

@@ -2,7 +2,7 @@ import React from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EditIcon from '@mui/icons-material/Edit';
 import { styles } from './BaseUserInfo.styles';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import LinearProgressWithLabel from '../../../../UI/LinearProgressWithLabel';
 import UserAvatar from '../../../../UI/UserAvatar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,6 @@ import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/pers
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import { useGetAvatarUserQuery } from '../../../../../redux/user/avatar/avatarApiSlice';
 import { useProfileProgress } from './useProfileProgress';
-import { IconButtonDef } from '../../../../FormsComponents/Buttons';
 
 const BaseUserInfo = () => {
   const { data: info } = useSelector(selectCurrentUser);
@@ -69,9 +68,12 @@ const BaseUserInfo = () => {
           {`${getCity ? getCity + ',' : ''} ${getCountry || country}`}
         </Typography>
         <Box sx={styles.wrapperTextBtn}>
-          <IconButtonDef hendleClick={handleOpenInfo} label="Edit user information" color="purple">
+          <IconButton
+            sx={styles.btnIcon}
+            aria-label='Edit user information'
+            onClick={handleOpenInfo}>
             <EditIcon />
-          </IconButtonDef>
+          </IconButton>
         </Box>
       </Box>
       <Box sx={styles.buttons}>

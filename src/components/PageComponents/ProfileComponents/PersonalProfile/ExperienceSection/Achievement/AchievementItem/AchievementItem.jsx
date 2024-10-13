@@ -47,9 +47,11 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
               </Typography>
             </Box>
           </Box>
-          <IconButton onClick={handleMenuOpen} sx={styles.iconBtnModal}>
-            <MoreVertIcon />
-          </IconButton>
+          <Box sx={styles.menuIcon}>
+            <IconButton onClick={(event) => handleMenuOpen(event)} sx={styles.iconBtnModal}>
+              <MoreVertIcon />
+            </IconButton>
+          </Box> {' '}
           <DropdownMenu
             anchorEl={anchorEl}
             handleCloseMenu={handleCloseMenu}
