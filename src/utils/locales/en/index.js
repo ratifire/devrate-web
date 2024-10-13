@@ -39,6 +39,9 @@ export const en = {
         btnNext: 'Next',
         btnBack: 'Back',
         interviewer: 'Interviewer',
+        required: 'This is a required field',
+        long: 'This field is too long',
+        short: 'This field is too short',
       },
       achievement: {
         title: 'Achievement',
