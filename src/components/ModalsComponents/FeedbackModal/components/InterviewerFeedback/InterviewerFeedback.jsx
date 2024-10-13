@@ -7,6 +7,7 @@ import { styles } from './InterviewerFeedback.styles'
 import { TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { formatDateTime } from '../../helpers';
+import PropTypes from 'prop-types';
 
 const InterviewerFeedback = ({data}) => {
   const { t } = useTranslation();
@@ -44,6 +45,26 @@ const InterviewerFeedback = ({data}) => {
         <ButtonDef variant={'contained'} type={'submit'} label={t('modal.interview.btnSend')} correctStyle={styles.btn} />
       </Box>
   );
+};
+
+InterviewerFeedback.propTypes = {
+  data: PropTypes.shape({
+    interviewStartTime: PropTypes.string.isRequired,
+    participant: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      surname: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+    }).isRequired,
+    skills: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
 };
 
 export default InterviewerFeedback;

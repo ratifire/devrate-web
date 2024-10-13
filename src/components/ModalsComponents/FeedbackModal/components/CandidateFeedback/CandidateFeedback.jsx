@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Box, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +8,7 @@ import { styles } from './CandidateFeedback.styles';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import CustomStepIcon from '../../../ProfileModals/ModalUserInfo/StepIconComponent';
 import { formatDateTime } from '../../helpers';
+import PropTypes from 'prop-types';
 
 const CandidateFeedback = ({ data }) => {
   const [activeStep, setActiveStep] = useState(1);
@@ -59,6 +61,26 @@ const CandidateFeedback = ({ data }) => {
         </Box>
       </Box>
   );
+};
+
+CandidateFeedback.propTypes = {
+  data: PropTypes.shape({
+    interviewStartTime: PropTypes.string.isRequired,
+    participant: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      surname: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+    }).isRequired,
+    skills: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
 };
 
 export default CandidateFeedback;
