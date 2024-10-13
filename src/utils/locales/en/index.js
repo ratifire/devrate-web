@@ -479,5 +479,12 @@ export const en = {
       popupInterviewerInfo: 'Info about participant',
       popupRole: 'Role:',
     },
+    notifications: {
+      empty: 'You currently have no new notifications',
+      newNotifications: 'New',
+      hourAgo: 'hours ago',
+      lessThanHourAgo:'Less than an hour ago',
+      GREETING: '',
+    },
   },
 };

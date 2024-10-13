@@ -14,7 +14,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   const { t } = useTranslation();
   const { mode } = useSelector((state) => state.theme);
   const imgUrl = mode === DARK_THEME ? DARK_NOT_FOUND : LIGHT_NOT_FOUND;
-
+  console.log(imgUrl,'imgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrlimgUrl');
   if (isSpinner) {
     return (
       <Box sx={styles.box}>

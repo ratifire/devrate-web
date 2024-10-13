@@ -52,7 +52,7 @@ const getDesignTokens = (mode) => ({
       lineHeight: 1.6,
       letterSpacing: 0.15,
     },
-
+    
     subtitle1: {
       fontSize: 20,
       fontWeight: 400,
@@ -103,9 +103,32 @@ const getDesignTokens = (mode) => ({
       letterSpacing: 0,
     },
   },
-  palette: {mode,
+  palette: {
+    mode,
     ...(mode === DARK_THEME
       ? {
+        notifications: {
+          backgroundColor: '#252527',
+          borderColor: 'transparent',
+          badge: {
+            backgroundColor: '#FF0000',
+            boxShadow: '#FF0000CC',
+            fill:'#C5C5C6',
+          },
+          icon:{
+            close: '#C5C5C6',
+            typeMessage: '#C5C5C6',
+          },
+          item: {
+            color: '#FFFFFF',
+            boxShadow: '#C5C5C640',
+            colorTime: '#C5C5C6',
+            newMessages: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA',
+            }
+          },
+        },
         border: {
           color: '#252527',
         },
@@ -143,7 +166,7 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#FFFFFF',
           },
         },
-
+        
         iconBtn: {
           editBtn: {
             color: '#CEB0FA',
@@ -175,7 +198,7 @@ const getDesignTokens = (mode) => ({
           inputActive: '#B78AF7',
           emptyTitle: '#fff',
           title: '#fff',
-          subtitle: '#C5C5C6'
+          subtitle: '#C5C5C6',
         },
         tabsEl: {
           borderColor: '#69696B',
@@ -235,7 +258,7 @@ const getDesignTokens = (mode) => ({
           primary: '#ffffff',
           secondary: '#C5C5C6',
           disabled: '#F1F1F1',
-          accent: "#007CA3",
+          accent: '#007CA3',
           darkGray: '#F8F8F8',
         },
         action: {
@@ -303,18 +326,40 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#25CBFF',
-          blueDark: "#007CA3",
+          blueDark: '#007CA3',
           azure: '#16FFB9',
-          azureDark: "#00855D",
-          orange:"#FCA728",
-          orangeDark: "#EE7538",
-          pink: "#D31772",
+          azureDark: '#00855D',
+          orange: '#FCA728',
+          orangeDark: '#EE7538',
+          pink: '#D31772',
           hover: '#CEB0FA',
           contrastText: '#ffffff',
           lime: '#DAFE22',
         },
       }
       : {
+        notifications: {
+          backgroundColor: '#FFFFFF',
+          borderColor: '#C5C5C6',
+          badge: {
+            backgroundColor: '#FF0000',
+            boxShadow: '#FF0000CC',
+            fill:'#69696B',
+          },
+          icon:{
+            close: '#3E3E40',
+            typeMessage: '#3E3E40',
+          },
+          item: {
+            color: '#1D1D1D',
+            boxShadow: '#C5C5C640',
+            colorTime: '#3E3E40',
+            newMessages: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA',
+            }
+          },
+        },
         border: {
           color: '#C5C5C6',
         },
@@ -322,9 +367,9 @@ const getDesignTokens = (mode) => ({
           color: 'rgba(197, 197, 198, 0.40)',
           inputActive: '#8133F1',
           title: '#1D1D1D',
-          subtitle: '#303032'
+          subtitle: '#303032',
         },
-         baseUserInfo: {
+        baseUserInfo: {
           city: {
             color: '#007CA3',
           },
@@ -358,7 +403,7 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#C5C5C6',
           },
         },
-         tabsEl: {
+        tabsEl: {
           borderColor: '#A9A9AA',
           indicator: '#6200EE',
           default: {
@@ -443,9 +488,9 @@ const getDesignTokens = (mode) => ({
           primary: '#1D1D1D',
           secondary: '#1D1D1D',
           disabled: '#A0A0A0',
-          accent:  "#25CBFF",
+          accent: '#25CBFF',
           darkGray: '#F8F8F8',
-         },
+        },
         action: {
           active: '#6200EE',
           hover: '#8133F1',
@@ -511,12 +556,12 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#2196F3',
-          blueDark: "#007CA3",
+          blueDark: '#007CA3',
           azure: '#16FFB9',
-          azureDark: "#00855D",
-          orange:"#FCA728",
-          orangeDark: "#EE7538",
-          pink: "#D31772",
+          azureDark: '#00855D',
+          orange: '#FCA728',
+          orangeDark: '#EE7538',
+          pink: '#D31772',
           hover: '#E3F2FD',
           contrastText: '#000000',
           lime: '#DAFE22',

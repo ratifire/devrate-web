@@ -490,5 +490,12 @@ export const uk = {
       popupInterviewerInfo: 'Інформація про співбесідника',
       popupRole: 'Роль:',
     },
+    notifications: {
+      empty: 'На даний момент у вас ще немає нових сповіщень',
+      newNotifications: 'Нове',
+      hourAgo: 'годин тому',
+      lessThanHourAgo:'Менше години тому',
+      GREETING: '',
+    },
   },
 };
