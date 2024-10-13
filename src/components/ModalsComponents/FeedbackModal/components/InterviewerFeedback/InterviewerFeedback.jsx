@@ -31,7 +31,7 @@ const InterviewerFeedback = ({data}) => {
             label={t('modal.interview.label')}
             required
             variant='outlined'
-            rows={3}
+            rows={2}
           />
           <Box>
             <Typography variant='h6'>Soft Skills</Typography>

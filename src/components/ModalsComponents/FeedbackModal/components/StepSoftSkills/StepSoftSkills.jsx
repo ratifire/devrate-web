@@ -19,7 +19,7 @@ const StepSoftSkills = ({ skills }) => {
           label={t('modal.interview.label')}
           required
           variant='outlined'
-          rows={3}
+          rows={2}
         />
       </Box>
       <Box>
