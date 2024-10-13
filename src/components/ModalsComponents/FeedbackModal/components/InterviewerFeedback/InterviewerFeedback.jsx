@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Box, Typography } from '@mui/material'
-import React from 'react'
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next'
 import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../index'
 import { styles } from './InterviewerFeedback.styles'
@@ -11,7 +11,7 @@ import { formatDateTime } from '../../helpers';
 const InterviewerFeedback = ({data}) => {
   const { t } = useTranslation();
   const { interviewStartTime, participant: { id, name, status, surname }, skills } = data;
-  const { date, time } = formatDateTime(interviewStartTime);
+  const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
   return (
       <Box sx={styles.container}>

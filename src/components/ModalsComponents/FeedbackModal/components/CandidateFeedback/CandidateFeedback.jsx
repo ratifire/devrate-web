@@ -1,16 +1,19 @@
-/* eslint-disable */
 import { Box, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InterviewerInfo, SliderComponent } from '../index';
 import { LAST_STEP, NUMBER_OF_STEPS } from '../../constants';
 import { styles } from './CandidateFeedback.styles';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import CustomStepIcon from '../../../ProfileModals/ModalUserInfo/StepIconComponent';
+import { formatDateTime } from '../../helpers';
 
 const CandidateFeedback = ({ data }) => {
   const [activeStep, setActiveStep] = useState(1);
   const { t } = useTranslation();
+  const { interviewStartTime, participant: { id, name, status, surname }, skills } = data;
+  const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
+
   const buttonContent = activeStep === LAST_STEP ? t('modal.interview.btnSend') : t('modal.interview.btnNext');
 
   const handleNextStep = () => setActiveStep((prev) => prev + 2);
@@ -19,8 +22,6 @@ const CandidateFeedback = ({ data }) => {
   const handleSubmit = () => {
     console.log('Submit modal');
   };
-
-  console.log(data);
 
   return (
       <Box sx={styles.container}>
@@ -33,12 +34,12 @@ const CandidateFeedback = ({ data }) => {
           ))}
         </Stepper>
         <InterviewerInfo
-          name='Олена Бондаренко'
-          position='Senior Full stack Developer'
-          data='03/06/2024'
-          time='15:30'
+          name={`${name} ${surname}`}
+          position={status}
+          date={date}
+          time={time}
         />
-        <SliderComponent slide={activeStep} />
+        <SliderComponent skills={skills} slide={activeStep} />
         <Box sx={styles.sendBox}>
           <ButtonDef
             type={'submit'}

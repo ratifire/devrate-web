@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { SliderAssessment, SliderAssessmentBox } from '../../components'
 import { styles } from './StepSoftSkills.styles'
 import { TextAreaInput } from '../../../../FormsComponents/Inputs';
+import PropTypes from 'prop-types';
 
-const StepSoftSkills = () => {
+const StepSoftSkills = ({ skills }) => {
   const { t } = useTranslation();
 
   return (
@@ -24,13 +25,24 @@ const StepSoftSkills = () => {
       <Box>
         <Typography variant='h6'>Soft Skills</Typography>
         <SliderAssessmentBox>
-          <SliderAssessment title='Комунікативність' />
-          <SliderAssessment title='Креативність' />
-          <SliderAssessment title='Критичне мислення' />
+          {skills
+            .filter(({type}) => type === 'SOFT_SKILL')
+            .map(({id, name}) => <SliderAssessment key={id} title={name}/>)
+          }
         </SliderAssessmentBox>
       </Box>
     </>
   );
+};
+
+StepSoftSkills.propTypes = {
+  skills: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default StepSoftSkills;
