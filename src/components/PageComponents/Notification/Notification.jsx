@@ -22,7 +22,7 @@ const Notification = () => {
   
   const { mode } = useSelector((state) => state.theme);
   const icons = mode === DARK_THEME ? emptyNotificationDark : emptyNotificationLight;
-  console.log(icons);
+
   const bellButtonClickHandler = (event) => {
     event.preventDefault();
     setBellButton(event.currentTarget);

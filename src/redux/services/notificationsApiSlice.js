@@ -20,7 +20,6 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
             const data = JSON.parse(event.data);
             
             updateCachedData((draft) => {
-              console.log(data,'api Dev1234!! data');
               draft.push(data);
             });
           };
