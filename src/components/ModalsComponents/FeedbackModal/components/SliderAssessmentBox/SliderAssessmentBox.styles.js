@@ -1,11 +1,11 @@
 export const styles = {
-  box: (theme) => ({
+  box: (theme, size) => ({
     display: 'flex',
     flexDirection: 'column',
     paddingRight: '18px',
     paddingTop: '22px',
     paddingBottom: '6px',
-    maxHeight: '300px',
+    maxHeight: size === 'small' ? '180px' : '300px',
     gap: theme.spacing(5),
     overflowY: 'auto',
     '&::-webkit-scrollbar': {

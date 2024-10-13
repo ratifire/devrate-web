@@ -7,7 +7,7 @@ const StepHardSkills = ({ skills }) => {
   return (
     <Box>
       <Typography variant='h6'>Hard Skills</Typography>
-      <SliderAssessmentBox>
+      <SliderAssessmentBox size='large'>
         {skills
         .filter(({type}) => type === 'HARD_SKILL')
         .map(({id, name}) => <SliderAssessment key={id} title={name}/>)
