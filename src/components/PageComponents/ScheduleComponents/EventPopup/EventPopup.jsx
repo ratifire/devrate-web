@@ -17,7 +17,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const handleCancelInterview = async function (event) {
     try {
       await deleteEventById(event).unwrap();
-      toast.success('Event was deleted', {
+      toast.success(t('schedule.deleteEventSuccessMessage'), {
         position: 'top-right',
         autoClose: 3000,
         hideProgressBar: false,
@@ -29,7 +29,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       });
     } catch (error) {
       console.error('Failed to add skill:', error);
-      toast.error('Event was not deleted due to some problems', {
+      toast.error(t('schedule.deleteEventErrorMessage'), {
         position: 'top-right',
         autoClose: 3000,
         hideProgressBar: false,
