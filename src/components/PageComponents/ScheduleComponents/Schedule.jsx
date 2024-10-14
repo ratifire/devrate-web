@@ -127,8 +127,7 @@ import { useTheme } from '@mui/material/styles';
     return offsetTop;
   }
   const handleEventClick = (info) => {
-
-     if (info) {
+      if (info) {
        if (calendarRef.current) {
          const calendarApi = calendarRef.current.getApi();
          const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
@@ -136,51 +135,34 @@ import { useTheme } from '@mui/material/styles';
           scroller.style.overflow = 'hidden';
         }
       }
+       const rect = info.el.getBoundingClientRect();
+       setEvent(eventsForSelectedWeek.find(event=>event.id.toString()===info.event._def.publicId));
       
-      const rect = info.el.getBoundingClientRect();
-      setEvent(eventsForSelectedWeek.find(event=>event.id.toString()===info.event._def.publicId));
-      
-      const dimentions = {popupWidth:413, arrowWidth:10, popupHeight: 200, rectWidth: 120, rectHeight:70}
-      const xoffset = rect.left - (dimentions.popupWidth + dimentions.arrowWidth)
-      const yoffset = getOffsetTopWithScroll(info.el)
-      
-      setPopupPosition('TOPRIGHT');
-      
-      // if (rect.left > window.innerWidth / 2) {
-      //   // x = rect.left - 450;
-      //   x = rect.left - window.innerWidth / 5;
-      // }
-      // if (rect.left < window.innerWidth / 2) {
-      //   // x = rect.left + 120;
-      //   x = rect.left + window.innerWidth / 18.5;
-      // }
-      // if (rect.top < 400) {
-      //   y = rect.top + 130;
-      // }
-      // if (rect.top > window.innerHeight - 200) {
-      //   y = rect.top - 140;
-      // }
-      // if (rect.left > window.innerWidth / 2 && window.innerHeight - 200) {
-      //   setPopupPosition('BOTTOMRIGHT');
-      // }
-      // if (rect.left > window.innerWidth / 2 && rect.top < 400) {
-      //   setPopupPosition('TOPRIGHT');
-      // }
-      // if (rect.left < window.innerWidth / 2 && window.innerHeight - 200) {
-      //   setPopupPosition('BOTTOMLEFT');
-      // }
-      // if (rect.left < window.innerWidth / 2 && rect.top < 400) {
-      //   setPopupPosition('TOPLEFT');
-      // }
-
-      const eventDetails = {
-        title: info.event.title,
-        start: info.event.start, // Event start date and time
-        end: info.event.end, // Event end date and time
-        extendedProps: info.event.extendedProps, // Custom event properties, if any
+       const dimensions = {popupWidth:413, arrowWidth:10, popupHeight: 200, rectWidth: 120, rectHeight:70}
+       let xoffset = rect.left - (dimensions.popupWidth + dimensions.arrowWidth)
+       let yoffset = getOffsetTopWithScroll(info.el)
+       setPopupPosition('TOPRIGHT');
+     if (rect.left < window.innerWidth / 2) {
+         xoffset = rect.left + dimensions.rectWidth + (3* dimensions.arrowWidth);
+         setPopupPosition('TOPLEFT');
+        }
+     if ((rect.left > window.innerWidth / 2 ) && ( rect.top > window.innerHeight / 2)) {
+        yoffset = yoffset - dimensions.popupHeight
+        setPopupPosition('BOTTOMRIGHT');
+        }
+     if (rect.left < window.innerWidth / 2 && ( rect.top > window.innerHeight / 2)) {
+         yoffset = yoffset - dimensions.popupHeight
+         setPopupPosition('BOTTOMLEFT');
+     }
+     
+     const eventDetails = {
+         title: info.event.title,
+         start: info.event.start, // Event start date and time
+         end: info.event.end, // Event end date and time
+         extendedProps: info.event.extendedProps, // Custom event properties, if any
       };
-
-      setPopup({
+    
+     setPopup({
         visible: true,
         event: eventDetails,
         x: xoffset,
