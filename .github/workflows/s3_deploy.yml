@@ -20,7 +20,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      working-directory: terraform/deploy_service
+      working-directory: terraform/s3_deploy
     defaults:
       run:
         shell: bash
