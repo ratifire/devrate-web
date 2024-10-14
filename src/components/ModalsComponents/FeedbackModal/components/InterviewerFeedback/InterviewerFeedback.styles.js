@@ -4,7 +4,8 @@ export const styles = {
     flexDirection: 'column',
     gap: theme.spacing(4),
   }),
-  btn: {
+  btn: (theme) => ({
     width: '228px',
-  },
+    marginTop: theme.spacing(4),
+  }),
 };

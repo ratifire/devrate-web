@@ -1,12 +1,17 @@
+/* eslint-disable */
 import { Box, Divider, Slider, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { styles } from './SliderAssessment.styles';
 
-const SliderAssessment = ({ title }) => {
-  const [sliderValue, setSliderValue] = useState(1);
-  const rightBoxStyles = sliderValue === 10 ? [styles.right, styles.rightActive] : styles.right;
-  const handleSliderChange = (e) => setSliderValue(e.target.value);
+const SliderAssessment = ({ title, value, onChange }) => {
+  const rightBoxStyles = value === 10 ? [styles.right, styles.rightActive] : styles.right;
+
+  const handleSliderChange = (e, newValue) => {
+    onChange(newValue);
+  };
+
+  console.log('render');
 
   return (
     <Box sx={styles.wrapper}>
@@ -16,7 +21,7 @@ const SliderAssessment = ({ title }) => {
           <Box sx={styles.left}></Box>
           <Box sx={rightBoxStyles}></Box>
           <Slider
-            value={sliderValue}
+            value={value}
             onChange={handleSliderChange}
             step={1}
             min={1}
@@ -25,9 +30,9 @@ const SliderAssessment = ({ title }) => {
             valueLabelDisplay='on'
             sx={styles.slider}
           />
-          <input name={title} type='hidden' value={sliderValue} />
+          <input name={title} type='hidden' value={value} />
           <Typography sx={styles.grade} variant='body'>
-            {sliderValue}/10
+            {value}/10
           </Typography>
         </Box>
       </Box>
@@ -38,6 +43,7 @@ const SliderAssessment = ({ title }) => {
 
 SliderAssessment.propTypes = {
   title: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
-
 export default SliderAssessment;
