@@ -103,9 +103,114 @@ const getDesignTokens = (mode) => ({
       letterSpacing: 0,
     },
   },
-  palette: {mode,
+  palette: {
+    mode,
     ...(mode === DARK_THEME
       ? {
+        steper: {
+          completed: {
+            circle: {
+              backgroundColor: '#8133F1',
+            },
+            backgroundColor: '#8133F1',
+          },
+          active: {
+            circle: {
+              backgroundColor: '#8133F1',
+            },
+            backgroundColor: '#8133F1',
+          },
+          inactive: {
+            circle: {
+              backgroundColor: '#69696B',
+            },
+            backgroundColor: '#69696B',
+          },
+          color: '#FFFFFF',
+        },
+        modals: {
+          inputs: {
+            placeholder: '#69696B',
+            border: {
+              default: '#444446',
+              hover: '#828283',
+              focused: '#B78AF7',
+              disable: '#3E3E40',
+              error: '#ED0E0E',
+            },
+            textColor: {
+              default: '#FFFFFF',
+              placeholder: '#69696B',
+              disabled: '#69696B',
+            },
+            labelColor: {
+              default: '#C5C5C6',
+              hover: '#C5C5C6',
+              focused: '#B78AF7',
+              disable: '#69696B',
+              error: '#D32F2F',
+              required: '#ED0E0E',
+            },
+          },
+          select: {
+            placeholder: '#69696B',
+            border: {
+              default: '#444446',
+              hover: '#828283',
+              focused: '#B78AF7',
+              disable: '#3E3E40',
+              error: '#ED0E0E',
+            },
+            textColor: {
+              default: '#FFFFFF',
+              placeholder: '#69696B',
+              disabled: '#69696B',
+            },
+            labelColor: {
+              default: '#C5C5C6',
+              hover: '#C5C5C6',
+              focused: '#B78AF7',
+              disable: '#69696B',
+              error: '#D32F2F',
+              required: '#ED0E0E',
+            },
+            selectedField: {
+              backgroundColor: '#1D1D1D',
+              selected: {
+                backgroundColor: '#252527',
+                color: '#B78AF7',
+              },
+              hover: '#252527',
+            },
+          },
+          textAreaInput: {
+            placeholder: '#69696B',
+            border: {
+              default: '#444446',
+              hover: '#828283',
+              focused: '#B78AF7',
+              disable: '#3E3E40',
+              error: '#ED0E0E',
+            },
+            textColor: {
+              default: '#FFFFFF',
+              placeholder: '#69696B',
+              disabled: '#69696B',
+            },
+            labelColor: {
+              default: '#C5C5C6',
+              hover: '#C5C5C6',
+              focused: '#B78AF7',
+              disable: '#69696B',
+              error: '#D32F2F',
+              required: '#ED0E0E',
+            },
+          },
+          titleColor: '#FFFFFF',
+          backgroundColor: '#1D1D1D',
+          color: '#69696B',
+          progressBgColor: '#69696B',
+        },
         border: {
           color: '#252527',
         },
@@ -145,9 +250,33 @@ const getDesignTokens = (mode) => ({
         },
 
         iconBtn: {
+          stepRight: {
+            active: {
+              backgroundColor: '#B78AF7',
+              hoverColor: '#252527',
+            },
+            disable: {
+              color: '#444446',
+            },
+          },
+          btnSave: {
+            backgroundColor: {
+              default: '#8133F1',
+              hover: '#5900D9',
+              disable: '#252527',
+            },
+            color: {
+              default: '#FFFFFF',
+              disabled: '#00000061',
+            },
+          },
+          btnClose: {
+            color: '#A9A9AA',
+            hoverColor: '#303032',
+          },
           editBtn: {
             color: '#CEB0FA',
-            backgroundColor: 'transperent',
+            backgroundColor: 'transparent',
             hover: {
               color: '#B78AF7',
               backgroundColor: '#CEB0FA29',
@@ -155,7 +284,7 @@ const getDesignTokens = (mode) => ({
           },
           createBtn: {
             color: '#CEB0FA',
-            backgroundColor: 'transperent',
+            backgroundColor: 'transparent',
             hover: {
               color: '#B78AF7',
               backgroundColor: '#CEB0FA29',
@@ -163,7 +292,7 @@ const getDesignTokens = (mode) => ({
           },
           burgerDot: {
             color: '#C5C5C6',
-            backgroundColor: 'transperent',
+            backgroundColor: 'transparent',
             hover: {
               color: '#A9A9AA',
               backgroundColor: '#252527',
@@ -175,7 +304,7 @@ const getDesignTokens = (mode) => ({
           inputActive: '#B78AF7',
           emptyTitle: '#fff',
           title: '#fff',
-          subtitle: '#C5C5C6'
+          subtitle: '#C5C5C6',
         },
         tabsEl: {
           borderColor: '#69696B',
@@ -223,8 +352,29 @@ const getDesignTokens = (mode) => ({
           violet: '#8133F1',
           lightGray: '#C5C5C6',
           gray: '#69696B',
-          darkGray: '#3E3E40',
+          backgroundColor: '#3E3E40',
           border: 'transparent',
+        },
+        experienceSkillSect: {
+          text: {
+            junior: '#25CBFF',
+            middle: '#16FFB9',
+            senior: '#DAFE22',
+          },
+          star: '#B78AF7',
+          eye: {
+            eyeHidden: '#C5C5C6',
+            eyeVisible: '#B78AF7',
+            backgroundColor: '#444446',
+          },
+          number: {
+            color: '#B78AF7',
+            backgroundColor: '#252527',
+          },
+          tooltip: {
+            color: '#FFFFFF',
+            backgroundColor: '#252527',
+          },
         },
         common: {
           black: '#000000',
@@ -235,7 +385,7 @@ const getDesignTokens = (mode) => ({
           primary: '#ffffff',
           secondary: '#C5C5C6',
           disabled: '#F1F1F1',
-          accent: "#007CA3",
+          accent: '#007CA3',
           darkGray: '#F8F8F8',
         },
         action: {
@@ -303,12 +453,12 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#25CBFF',
-          blueDark: "#007CA3",
+          blueDark: '#007CA3',
           azure: '#16FFB9',
-          azureDark: "#00855D",
-          orange:"#FCA728",
-          orangeDark: "#EE7538",
-          pink: "#D31772",
+          azureDark: '#00855D',
+          orange: '#FCA728',
+          orangeDark: '#EE7538',
+          pink: '#D31772',
           hover: '#CEB0FA',
           contrastText: '#ffffff',
           lime: '#DAFE22',
@@ -322,9 +472,115 @@ const getDesignTokens = (mode) => ({
           color: 'rgba(197, 197, 198, 0.40)',
           inputActive: '#8133F1',
           title: '#1D1D1D',
-          subtitle: '#303032'
+          subtitle: '#303032',
         },
-         baseUserInfo: {
+        steper: {
+          completed: {
+            circle: {
+              backgroundColor: '#8133F1',
+              color: '#ECECED',
+            },
+            backgroundColor: '#8133F1',
+          },
+          active: {
+            circle: {
+              backgroundColor: '#8133F1',
+              color: '#ECECED',
+            },
+            backgroundColor: '#8133F1',
+          },
+          inactive: {
+            circle: {
+              backgroundColor: '#ECECED',
+            },
+            backgroundColor: '#ECECED',
+          },
+          color: '#1D1D1D',
+        },
+        modals: {
+          inputs: {
+            placeholder: '#69696B',
+            border: {
+              default: '#828283',
+              hover: '#444446',
+              focused: '#8133F1',
+              disable: '#A9A9AA',
+              error: '#A70000',
+            },
+            textColor: {
+              default: '#444446',
+              placeholder: '#444446',
+              disabled: '#828283',
+            },
+            labelColor: {
+              default: '#1D1D1D',
+              hover: '#1D1D1D',
+              focused: '#8133F1',
+              disable: '#828283',
+              error: '#A70000',
+              required: '#ED0E0E',
+            },
+          },
+          select: {
+            placeholder: '#69696B',
+            border: {
+              default: '#828283',
+              hover: '#444446',
+              focused: '#8133F1',
+              disable: '#A9A9AA',
+              error: '#A70000',
+            },
+            textColor: {
+              default: '#444446',
+              placeholder: '#444446',
+              disabled: '#828283',
+            },
+            labelColor: {
+              default: '#1D1D1D',
+              hover: '#1D1D1D',
+              focused: '#8133F1',
+              disable: '#828283',
+              error: '#A70000',
+              required: '#ED0E0E',
+            },
+            selectedField: {
+              backgroundColor: '#FFFFFF',
+              selected: {
+                backgroundColor: '#ECECED',
+                color: '#8133F1',
+              },
+              hover: '#ECECED',
+            },
+          },
+          textAreaInput: {
+            placeholder: '#69696B',
+            border: {
+              default: '#828283',
+              hover: '#444446',
+              focused: '#8133F1',
+              disable: '#A9A9AA',
+              error: '#A70000',
+            },
+            textColor: {
+              default: '#444446',
+              placeholder: '#444446',
+              disabled: '#828283',
+            },
+            labelColor: {
+              default: '#1D1D1D',
+              hover: '#1D1D1D',
+              focused: '#8133F1',
+              disable: '#828283',
+              error: '#A70000',
+              required: '#ED0E0E',
+            },
+          },
+          titleColor: '#1D1D1D',
+          backgroundColor: '#FFFFFF',
+          color: '#69696B',
+          progressBgColor: '#ECECED',
+        },
+        baseUserInfo: {
           city: {
             color: '#007CA3',
           },
@@ -358,7 +614,7 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#C5C5C6',
           },
         },
-         tabsEl: {
+        tabsEl: {
           borderColor: '#A9A9AA',
           indicator: '#6200EE',
           default: {
@@ -371,28 +627,52 @@ const getDesignTokens = (mode) => ({
           },
         },
         iconBtn: {
+          stepRight: {
+            active: {
+              backgroundColor: '#5900D9',
+              hoverColor: '#EFE6FD',
+            },
+            disable: {
+              color: '#444446',
+            },
+          },
+          btnSave: {
+            backgroundColor: {
+              default: '#5900D9',
+              hover: '#360083',
+              disable: '#C5C5C6',
+            },
+            color: {
+              default: '#FFFFFF',
+              disabled: '#828283',
+            },
+          },
+          btnClose: {
+            color: '#1D1D1D',
+            hoverColor: '#ECECED',
+          },
           editBtn: {
             color: '#8133F1',
-            backgroundColor: 'transperent',
+            backgroundColor: 'transparent',
             hover: {
               color: '#8133F1',
               backgroundColor: '#CEB0FA29',
             },
           },
           createBtn: {
-            color: '#CEB0FA',
-            backgroundColor: 'transperent',
+            color: '#8133F1',
+            backgroundColor: 'transparent',
             hover: {
-              color: '#B78AF7',
-              backgroundColor: '#CEB0FA29',
+              color: '#8133F1',
+              backgroundColor: '#EFE6FD',
             },
           },
           burgerDot: {
-            color: '#C5C5C6',
-            backgroundColor: 'transperent',
+            color: '#3E3E40',
+            backgroundColor: 'transparent',
             hover: {
-              color: '#A9A9AA',
-              backgroundColor: '#252527',
+              color: '#3E3E40',
+              backgroundColor: '#ECECED',
             },
           },
         },
@@ -430,22 +710,42 @@ const getDesignTokens = (mode) => ({
           violet: '#6200EE',
           lightGray: '#F0F0F0',
           gray: '#A0A0A0',
-          darkGray: '#F8F8F8',
+          backgroundColor: '#F8F8F8',
           border: '1px solid ' + '#ECECED',
+        },
+        experienceSkillSect: {
+          text: {
+            junior: '#007CA3',
+            middle: '#00855D',
+            senior: '#D31772',
+          },
+          star: '#4600A9',
+          eye: {
+            eyeHidden: '#3E3E40',
+            eyeVisible: '#4600A9',
+            backgroundColor: '#ECECED',
+          },
+          number: {
+            color: '#4600A9',
+            backgroundColor: '#C5C5C6',
+          },
+          tooltip: {
+            color: '#1D1D1D',
+            backgroundColor: '#C5C5C6',
+          },
         },
         common: {
           black: '#000000',
           white: '#ffffff',
-          
           titleGradient: 'linear-gradient(90deg, rgb(117, 98, 228), rgb(251, 147, 166))',
         },
         text: {
           primary: '#1D1D1D',
           secondary: '#1D1D1D',
           disabled: '#A0A0A0',
-          accent:  "#25CBFF",
+          accent: '#25CBFF',
           darkGray: '#F8F8F8',
-         },
+        },
         action: {
           active: '#6200EE',
           hover: '#8133F1',
@@ -511,12 +811,12 @@ const getDesignTokens = (mode) => ({
         },
         info: {
           main: '#2196F3',
-          blueDark: "#007CA3",
+          blueDark: '#007CA3',
           azure: '#16FFB9',
-          azureDark: "#00855D",
-          orange:"#FCA728",
-          orangeDark: "#EE7538",
-          pink: "#D31772",
+          azureDark: '#00855D',
+          orange: '#FCA728',
+          orangeDark: '#EE7538',
+          pink: '#D31772',
           hover: '#E3F2FD',
           contrastText: '#000000',
           lime: '#DAFE22',

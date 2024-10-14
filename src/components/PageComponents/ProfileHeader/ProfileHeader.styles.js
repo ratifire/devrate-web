@@ -7,6 +7,7 @@ const styles = {
     paddingX: theme.spacing(4),
     width: '100%',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
+    backgroundImage: 'none',
   }),
   toolbar: {
     justifyContent: 'space between',

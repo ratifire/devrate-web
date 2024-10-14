@@ -3,7 +3,7 @@ const styles = {
     width: '100%',
     marginBottom: theme.spacing(4),
     padding: theme.spacing(4),
-    backgroundColor: theme.palette.sliderAssessment.darkGray,
+    backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     borderRadius: 2,
     border: theme.palette.sliderAssessment.border
   }),
