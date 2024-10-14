@@ -35,7 +35,7 @@ resource "aws_s3_bucket_policy" "s3_front_policy" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject*"
-        Resource  = "${data.aws_s3_bucket.s3_front_site.arn}/*"
+        Resource  = "arn:aws:s3:::devrate.org/*"
       }
     ]
   })

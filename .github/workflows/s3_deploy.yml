@@ -38,20 +38,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      - name: Set environment variables with defaults
-        run: |
-          echo "REACT_APP_API_URL=${{ env.REACT_APP_API_URL }}" >> .env
-          echo "REACT_APP_WS_URL=${{ env.REACT_APP_WS_URL }}" >> .env
-
-      - run: npm install
-      - run: npm run build --if-present
-
-      - name: List all files and directories recursively
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "All files and directories:"
-          ls -R
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -74,6 +60,14 @@ jobs:
       - name: Terraform apply
         run: terraform apply -auto-approve -input=false
 
+      - name: Set environment variables with defaults
+        run: |
+          echo "REACT_APP_API_URL=${{ env.REACT_APP_API_URL }}" >> .env
+          echo "REACT_APP_WS_URL=${{ env.REACT_APP_WS_URL }}" >> .env
+
+      - name: Build
+        run: npm install && npm run build
+
       - name: Sync files to S3
-        run: aws s3 sync build/ s3://devrate.org --delete
+        run: aws s3 sync .build/ s3://devrate.org --delete
         working-directory: /home/runner/work/devrate-web/devrate-web
