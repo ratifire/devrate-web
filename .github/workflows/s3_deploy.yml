@@ -76,4 +76,3 @@ jobs:
 
       - name: Sync files to S3
         run: aws s3 sync build/ s3://devrate.org --delete
-        working-directory: home/runner/work/devrate-web/devrate-web
