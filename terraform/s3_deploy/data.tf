@@ -64,3 +64,15 @@ resource "aws_route53_record" "devrate_dns" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "www" {
+  zone_id = data.aws_route53_zone.s3_front_dns_zone.zone_id
+  name    = "www.devrate.org"
+  type    = "A"
+
+  alias {
+    name                   = data.aws_s3_bucket.s3_front_site.website_endpoint
+    zone_id                = data.aws_s3_bucket.s3_front_site.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
