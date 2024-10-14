@@ -15,14 +15,6 @@ data "aws_s3_bucket" "s3_front_site" {
   bucket = "devrate.org"
 }
 
-resource "aws_s3_bucket_ownership_controls" "s3_front_ownership" {
-  bucket = data.aws_s3_bucket.s3_front_site.id
-
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
 resource "aws_s3_bucket_public_access_block" "s3_front_site_pb" {
   bucket = data.aws_s3_bucket.s3_front_site.id
 
