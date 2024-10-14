@@ -41,41 +41,6 @@ resource "aws_s3_bucket_policy" "s3_front_policy" {
   })
 }
 
-resource "aws_cloudfront_distribution" "s3_front_distribution" {
-  origin {
-    domain_name = data.aws_s3_bucket.s3_front_site.bucket_regional_domain_name
-    origin_id   = "s3_front_site"
-  }
-
-  enabled             = true
-  default_root_object = "index.html"
-
-  default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "s3_front_site"
-
-    viewer_protocol_policy = "redirect-to-https"
-
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
-  }
-
-  restrictions {
-    geo_restriction {
-      restriction_type = "none"
-    }
-  }
-
-  viewer_certificate {
-    cloudfront_default_certificate = true
-  }
-}
-
 data "aws_route53_zone" "s3_front_dns_zone" {
   name = "devrate.org"
 }
@@ -94,8 +59,8 @@ resource "aws_route53_record" "devrate_dns" {
   type    = "A"
 
   alias {
-    name                   = aws_cloudfront_distribution.s3_front_distribution.domain_name
-    zone_id                = aws_cloudfront_distribution.s3_front_distribution.hosted_zone_id
+    name                   = data.aws_s3_bucket.s3_front_site.website_endpoint
+    zone_id                = data.aws_s3_bucket.s3_front_site.hosted_zone_id
     evaluate_target_health = false
   }
 }
