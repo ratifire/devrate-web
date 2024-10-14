@@ -7,7 +7,9 @@ terraform {
   }
 }
 
-provider "aws" {}
+provider "aws" {
+  region = "eu-north-1"
+}
 
 data "aws_s3_bucket" "s3_front_site" {
   bucket = "devrate.org"
