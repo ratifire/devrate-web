@@ -9,29 +9,39 @@ terraform {
 
 provider "aws" {}
 
-resource "aws_s3_bucket" "s3_front_site" {
+data "aws_s3_bucket" "s3_front_site" {
   bucket = "devrate.org"
 }
 
 resource "aws_s3_bucket_ownership_controls" "s3_front_ownership" {
-  bucket = aws_s3_bucket.s3_front_site.id
+  bucket = data.aws_s3_bucket.s3_front_site.id
 
   rule {
     object_ownership = "BucketOwnerPreferred"
   }
 }
 
+resource "aws_s3_bucket_public_access_block" "s3_front_site_pb" {
+  bucket = data.aws_s3_bucket.s3_front_site.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
 resource "aws_s3_bucket_policy" "s3_front_policy" {
-  bucket = aws_s3_bucket.s3_front_site.id
+  bucket = data.aws_s3_bucket.s3_front_site.id
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
+        Sid       = "PublicReadGetObject"
         Effect    = "Allow"
         Principal = "*"
-        Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.s3_front_site.arn}/*"
+        Action    = "s3:GetObject*"
+        Resource  = "${data.aws_s3_bucket.s3_front_site.arn}/*"
       }
     ]
   })
@@ -39,7 +49,7 @@ resource "aws_s3_bucket_policy" "s3_front_policy" {
 
 resource "aws_cloudfront_distribution" "s3_front_distribution" {
   origin {
-    domain_name = aws_s3_bucket.s3_front_site.bucket_regional_domain_name
+    domain_name = data.aws_s3_bucket.s3_front_site.bucket_regional_domain_name
     origin_id   = "s3_front_site"
   }
 
@@ -68,7 +78,8 @@ resource "aws_cloudfront_distribution" "s3_front_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = data.aws_acm_certificate.s3_front_cert.arn
+    ssl_support_method  = "sni-only"
   }
 }
 
