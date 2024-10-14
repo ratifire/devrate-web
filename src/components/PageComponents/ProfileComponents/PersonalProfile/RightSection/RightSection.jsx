@@ -67,9 +67,6 @@ const RightSection = () => {
               onClick={handleOpenLanguage}>
               <EditIcon />
             </IconButton>
-            {/*<IconButtonDef hendleClick={handleOpenLanguage} label="Edit user information" color="purple">*/}
-            {/*  <EditIcon />*/}
-            {/*</IconButtonDef>*/}
           </Box>
         </Box>
         <Box gap={2} sx={styles.wrapperLanguages}>

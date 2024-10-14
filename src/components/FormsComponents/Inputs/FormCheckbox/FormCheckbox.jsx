@@ -6,6 +6,9 @@ import { useTranslation } from 'react-i18next';
 
 const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, workExperience }) => {
   const { t } = useTranslation();
+
+  const checkboxStyles = workExperience ? styles.checkBoxWorkExperience : styles.checkBox;
+  const textStyles = workExperience ? styles.newsAgreementTextWorkExperience : styles.newsAgreementText;
   return (
     <FormControl error={error} variant='standard'>
       <FormControlLabel
@@ -14,15 +17,11 @@ const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, 
           checked={checked}
           onChange={changeHandler}
           name={name}
-          sx={
-          workExperience ? styles.checkBoxWorkExperience : styles.checkBox}
+          sx={checkboxStyles}
         />}
         label={
         <Typography
-          sx={
-          workExperience ?
-            styles.newsAgreementTextWorkExperience :
-            styles.newsAgreementText}
+          sx={textStyles}
         >
           {t(label)}
         </Typography>}
