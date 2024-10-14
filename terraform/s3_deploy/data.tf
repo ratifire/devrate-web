@@ -11,11 +11,13 @@ provider "aws" {}
 
 resource "aws_s3_bucket" "s3_front_site" {
   bucket = "devrate.org"
-  acl    = "public-read"
+}
 
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
+resource "aws_s3_bucket_ownership_controls" "s3_front_ownership" {
+  bucket = aws_s3_bucket.s3_front_site.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
   }
 }
 
