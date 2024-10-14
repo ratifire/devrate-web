@@ -23,6 +23,14 @@ resource "aws_s3_bucket_ownership_controls" "s3_front_ownership" {
   }
 }
 
+resource "aws_s3_bucket_public_access_block" "s3_front_site_pb" {
+  bucket = data.aws_s3_bucket.s3_front_site.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
 
 resource "aws_s3_bucket_policy" "s3_front_policy" {
   bucket = data.aws_s3_bucket.s3_front_site.id
@@ -72,8 +80,7 @@ resource "aws_cloudfront_distribution" "s3_front_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = data.aws_acm_certificate.s3_front_cert.arn
-    ssl_support_method  = "sni-only"
+    cloudfront_default_certificate = true
   }
 }
 
