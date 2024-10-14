@@ -72,4 +72,4 @@ jobs:
         run: terraform apply -auto-approve -input=false
 
       - name: Sync files to S3
-        run: aws s3 sync build/ s3://s3-front-deploying --delete
+        run: aws s3 sync build/ s3://devrate.org --delete
