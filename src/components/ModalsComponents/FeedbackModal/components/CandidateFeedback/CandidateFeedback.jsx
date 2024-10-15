@@ -3,27 +3,37 @@ import { Box, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/m
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InterviewerInfo, SliderComponent } from '../index';
-import { LAST_STEP, NUMBER_OF_STEPS } from '../../constants';
+import { FIRST_STEP, LAST_STEP, NUMBER_OF_STEPS } from '../../constants';
 import { styles } from './CandidateFeedback.styles';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import CustomStepIcon from '../../../ProfileModals/ModalUserInfo/StepIconComponent';
 import { formatDateTime } from '../../helpers';
 import PropTypes from 'prop-types';
+import { useFormik } from 'formik';
+import { FeedbackModalSchema } from '../../../../../utils/valadationSchemas';
 
 const CandidateFeedback = ({ data }) => {
   const [activeStep, setActiveStep] = useState(1);
   const { t } = useTranslation();
   const { interviewStartTime, participant: { id, name, status, surname }, skills } = data;
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
-
-  const buttonContent = activeStep === LAST_STEP ? t('modal.interview.btnSend') : t('modal.interview.btnNext');
-
   const handleNextStep = () => setActiveStep((prev) => prev + 2);
   const handlePrevStep = () => setActiveStep((prev) => prev - 2);
 
-  const handleSubmit = () => {
-    console.log('Submit modal');
+  const initialValues = {
+    description: '',
+    skills: skills.map(({ id, name, type }) => ({ id, name, type, value: 1 })),
   };
+
+  const onSubmit = (values) => {
+    console.log('Submit', values);
+  }
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: FeedbackModalSchema,
+    onSubmit
+  })
 
   return (
       <Box sx={styles.container}>
@@ -41,24 +51,39 @@ const CandidateFeedback = ({ data }) => {
           date={date}
           time={time}
         />
-        <SliderComponent skills={skills} slide={activeStep} />
-        <Box sx={styles.sendBox}>
-          <ButtonDef
-            type={'submit'}
-            variant={'contained'}
-            label={t('modal.interview.btnBack')}
-            correctStyle={styles.btn}
-            handlerClick={handlePrevStep}
-            disabled={activeStep === 1}
-          />
-          <ButtonDef
-            type={'submit'}
-            variant={'contained'}
-            label={buttonContent}
-            correctStyle={styles.btn}
-            handlerClick={activeStep === 1 ? handleNextStep : handleSubmit}
-          />
-        </Box>
+        <form onSubmit={formik.handleSubmit}>
+          <Box sx={styles.formBox}>
+            <SliderComponent formik={formik} skills={skills} slide={activeStep} />
+            <Box sx={styles.sendBox}>
+              <ButtonDef
+                type={'button'}
+                variant={'contained'}
+                label={t('modal.interview.btnBack')}
+                correctStyle={styles.btn}
+                handlerClick={handlePrevStep}
+                disabled={activeStep === 1}
+              />
+              {activeStep === FIRST_STEP && (
+                <ButtonDef
+                  type={'button'}
+                  variant={'contained'}
+                  label={t('modal.interview.btnNext')}
+                  correctStyle={styles.btn}
+                  handlerClick={handleNextStep}
+                />
+              )}
+              {activeStep === LAST_STEP && (
+                <ButtonDef
+                  type={'submit'}
+                  variant={'contained'}
+                  label={t('modal.interview.btnSend')}
+                  disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+                  correctStyle={styles.btn}
+                />
+              )}
+            </Box>
+          </Box>
+        </form>
       </Box>
   );
 };

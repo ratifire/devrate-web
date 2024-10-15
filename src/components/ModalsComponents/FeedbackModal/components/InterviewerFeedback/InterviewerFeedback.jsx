@@ -33,8 +33,6 @@ const InterviewerFeedback = ({data}) => {
     onSubmit
   })
 
-  console.log(formik.isSubmitting, !formik.isValid, !formik.dirty);
-
   return (
       <Box sx={styles.container}>
         <Typography variant='h6'>{t('modal.interview.title')}</Typography>

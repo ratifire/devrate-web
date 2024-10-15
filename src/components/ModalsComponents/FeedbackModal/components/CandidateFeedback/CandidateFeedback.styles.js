@@ -42,4 +42,9 @@ export const styles = {
   btn: {
     maxWidth: '228px',
   },
+  formBox: (theme) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(4)
+  }),
 };

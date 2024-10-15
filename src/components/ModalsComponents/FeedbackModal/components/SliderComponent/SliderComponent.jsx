@@ -2,14 +2,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { StepHardSkills, StepSoftSkills } from '../../components'
 
-const SliderComponent = ({ slide, skills }) => {
+const SliderComponent = ({ slide, formik }) => {
   const SliderElement =
     {
       1: StepSoftSkills,
       3: StepHardSkills,
     }[slide] ?? StepSoftSkills;
 
-  return <SliderElement skills={skills} />;
+  return <SliderElement formik={formik} />;
 };
 
 SliderComponent.propTypes = {
@@ -21,6 +21,7 @@ SliderComponent.propTypes = {
       type: PropTypes.string.isRequired,
     })
   ).isRequired,
+  formik: PropTypes.object.isRequired,
 };
 
 export default SliderComponent;

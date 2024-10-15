@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,8 +7,10 @@ import { styles } from './StepSoftSkills.styles'
 import { TextAreaInput } from '../../../../FormsComponents/Inputs';
 import PropTypes from 'prop-types';
 
-const StepSoftSkills = ({ skills }) => {
+const StepSoftSkills = ({ formik }) => {
   const { t } = useTranslation();
+  const { values, } = formik;
+  const { description, skills } = values;
 
   return (
     <>
@@ -18,6 +21,8 @@ const StepSoftSkills = ({ skills }) => {
           type='text'
           label={t('modal.interview.label')}
           required
+          value={description}
+          handleChange={formik.handleChange}
           variant='outlined'
           rows={2}
         />
@@ -27,7 +32,13 @@ const StepSoftSkills = ({ skills }) => {
         <SliderAssessmentBox>
           {skills
             .filter(({type}) => type === 'SOFT_SKILL')
-            .map(({id, name}) => <SliderAssessment key={id} title={name}/>)
+            .map(({id, name}, index) => (
+              <SliderAssessment
+                key={id}
+                title={name}
+                value={formik.values.skills[index].value}
+                onChange={(newValue) => formik.setFieldValue(`skills[${index}].value`, newValue)}
+              />))
           }
         </SliderAssessmentBox>
       </Box>
@@ -36,13 +47,7 @@ const StepSoftSkills = ({ skills }) => {
 };
 
 StepSoftSkills.propTypes = {
-  skills: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  formik: PropTypes.object.isRequired,
 };
 
 export default StepSoftSkills;
