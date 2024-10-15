@@ -24,7 +24,6 @@ const InterviewerFeedback = ({data}) => {
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
   const [createInterview] = useCreateInterviewMutation();
 
-
   const initialValues = {
     comment: '',
     skills: skills.map(({ id, name }) => ({ id, name, value: 1 })),

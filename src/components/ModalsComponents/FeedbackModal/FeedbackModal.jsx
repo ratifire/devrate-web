@@ -24,7 +24,7 @@ const FeedbackModal = () => {
   }
 
   const { interviewStartTime, participant: { id, name, role, status, surname }, skills } = data;
-
+  console.log(role, id);
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={open}>
       <RenderRoleModal role={role} data={data} />

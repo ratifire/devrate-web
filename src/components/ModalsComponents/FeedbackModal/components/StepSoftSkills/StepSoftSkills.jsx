@@ -9,22 +9,25 @@ import PropTypes from 'prop-types';
 
 const StepSoftSkills = ({ formik }) => {
   const { t } = useTranslation();
-  const { values, } = formik;
-  const { description, skills } = values;
+  const { values } = formik;
+  const { skills, comment } = values;
 
   return (
     <>
       <Box sx={styles.container}>
         <TextAreaInput
-          name='description'
+          name='comment'
           placeholder={t('modal.interview.placeholder')}
           type='text'
           label={t('modal.interview.label')}
           required
-          value={description}
-          handleChange={formik.handleChange}
           variant='outlined'
           rows={2}
+          handleChange={formik.handleChange}
+          value={comment}
+          handleBlur={formik.handleBlur}
+          helperText={formik.touched.comment && formik.errors.comment}
+          error={formik.touched.comment && Boolean(formik.errors.comment)}
         />
       </Box>
       <Box>

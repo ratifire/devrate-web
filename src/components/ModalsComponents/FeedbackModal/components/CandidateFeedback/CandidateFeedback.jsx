@@ -11,22 +11,34 @@ import { formatDateTime } from '../../helpers';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import { FeedbackModalSchema } from '../../../../../utils/valadationSchemas';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { useCreateInterviewMutation } from '../../../../../redux/feedback/interviewApiSlice';
 
 const CandidateFeedback = ({ data }) => {
   const [activeStep, setActiveStep] = useState(1);
   const { t } = useTranslation();
   const { interviewStartTime, participant: { id, name, status, surname }, skills } = data;
+  const { feedbackId } = useSelector((state) => state.feedback);
+  const { data: { id: userId } } = useSelector(selectCurrentUser);
+  const [createInterview] = useCreateInterviewMutation();
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
   const handleNextStep = () => setActiveStep((prev) => prev + 2);
   const handlePrevStep = () => setActiveStep((prev) => prev - 2);
 
   const initialValues = {
-    description: '',
+    comment: '',
     skills: skills.map(({ id, name, type }) => ({ id, name, type, value: 1 })),
   };
 
-  const onSubmit = (values) => {
-    console.log('Submit', values);
+  const onSubmit = async (values) => {
+    const body = {
+      interviewFeedbackDetailId: feedbackId,
+      comment: values.comment,
+      skills: values.skills.map(({ id, value }) => ({ id, mark: value }))
+    }
+
+    await createInterview({ reviewerId: userId, body });
   }
 
   const formik = useFormik({
