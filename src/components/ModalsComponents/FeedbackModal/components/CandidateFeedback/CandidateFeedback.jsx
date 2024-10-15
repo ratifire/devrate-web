@@ -47,6 +47,8 @@ const CandidateFeedback = ({ data }) => {
     onSubmit
   })
 
+  console.log(formik.values.skills);
+
   return (
       <Box sx={styles.container}>
         <Typography variant='h6'>{t('modal.interview.title')}</Typography>
