@@ -6,34 +6,34 @@ export const styles = {
   }),
   input: (theme) => ({
     ' .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['500'],
+      borderColor: theme.palette.modals.select.border.default,
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['300'],
+      borderColor: theme.palette.modals.select.border.hover,
     },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.primary['200'],
+      borderColor: theme.palette.modals.select.border.focused,
       borderWidth: '2px',
     },
     '&.Mui-error.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
+      borderColor: theme.palette.modals.select.border.error,
     },
     '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
+      borderColor: theme.palette.modals.select.border.error,
     },
     '& .MuiSelect-icon': {
-      color: theme.palette.text.primary,
+      color: theme.palette.modals.inputs.textColor.default,
     },
   }),
   label: (theme) => ({
     '&.Mui-focused': {
-      color: theme.palette.primary['200'],
+      color: theme.palette.modals.select.labelColor.focused,
     },
     '&.Mui-error': {
-      color: theme.palette.error.main,
+      color: theme.palette.modals.select.labelColor.error,
     },
     '&.Mui-required .MuiFormLabel-asterisk': {
-      color: '#ED0E0E'
+      color: theme.palette.modals.select.labelColor.required
     },
   }),
   textHelper: {
@@ -43,11 +43,19 @@ export const styles = {
   },
   selectField: (theme) => ({
     ' .MuiMenu-paper': {
-      backgroundColor: theme.palette.background.level2,
+      backgroundColor: theme.palette.modals.select.selectedField.selected,
+      '&::-webkit-scrollbar': {
+        width: '1px',
+        backgroundColor: theme.palette.modals.select.selectedField.backgroundColor,
+      },
     },
     '.MuiList-root': {
-      backgroundColor: theme.palette.background.level2,
+      backgroundColor: theme.palette.modals.select.selectedField.backgroundColor,
       borderRadius: 0,
+    },
+    '.Mui-selected': {
+      backgroundColor: `${theme.palette.modals.select.selectedField.selected.backgroundColor} !important`,
+      color: `${theme.palette.modals.select.selectedField.selected.color} !important`,
     },
   }),
   dropdownPaper: {
@@ -56,7 +64,7 @@ export const styles = {
   },
   menuItem: (theme) => ({
     '&:hover': {
-      backgroundColor: theme.palette.background.level3,
+      backgroundColor: theme.palette.modals.select.selectedField.hover
     },
   }),
 };
