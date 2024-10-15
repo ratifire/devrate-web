@@ -1,3 +1,3 @@
-import FeedbackModalSkeleton from './FeedbackModalSkeleton';
+import { FeedbackModalSkeleton } from './Modal';
 
 export { FeedbackModalSkeleton };
