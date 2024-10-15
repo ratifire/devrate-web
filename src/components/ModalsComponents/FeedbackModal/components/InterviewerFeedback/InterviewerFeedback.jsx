@@ -10,21 +10,34 @@ import { formatDateTime } from '../../helpers';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import { FeedbackModalSchema } from '../../../../../utils/valadationSchemas';
+import { useCreateInterviewMutation } from '../../../../../redux/feedback/interviewApiSlice';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 
 const MemoizedSliderAssessment = memo(SliderAssessment)
 
 const InterviewerFeedback = ({data}) => {
   const { t } = useTranslation();
   const { interviewStartTime, participant: { id, name, status, surname }, skills } = data;
+  const { feedbackId } = useSelector((state) => state.feedback);
+  const { data: { id: userId } } = useSelector(selectCurrentUser)
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
+  const [createInterview] = useCreateInterviewMutation();
+
 
   const initialValues = {
-    description: '',
+    comment: '',
     skills: skills.map(({ id, name }) => ({ id, name, value: 1 })),
   };
 
-  const onSubmit = (values) => {
-    console.log('Submit', values);
+  const onSubmit = async (values) => {
+    const body = {
+      interviewFeedbackDetailId: feedbackId,
+      comment: values.comment,
+      skills: values.skills.map(({ id, value }) => ({ id, mark: value }))
+    }
+
+    await createInterview({ reviewerId: userId, body });
   }
 
   const formik = useFormik({
@@ -45,7 +58,7 @@ const InterviewerFeedback = ({data}) => {
         <form onSubmit={formik.handleSubmit}>
           <Box>
             <TextAreaInput
-              name='description'
+              name='comment'
               placeholder={t('modal.interview.placeholder')}
               type='text'
               label={t('modal.interview.label')}
@@ -53,10 +66,10 @@ const InterviewerFeedback = ({data}) => {
               variant='outlined'
               rows={2}
               handleChange={formik.handleChange}
-              value={formik.values.description}
+              value={formik.values.comment}
               handleBlur={formik.handleBlur}
-              helperText={formik.touched.description && formik.errors.description}
-              error={formik.touched.description && Boolean(formik.errors.description)}
+              helperText={formik.touched.comment && formik.errors.comment}
+              error={formik.touched.comment && Boolean(formik.errors.comment)}
             />
             <Box>
               <Typography variant='h6'>Soft Skills</Typography>

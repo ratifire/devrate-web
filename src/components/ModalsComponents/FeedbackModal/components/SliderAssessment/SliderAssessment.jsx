@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Box, Divider, Slider, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -10,8 +9,6 @@ const SliderAssessment = ({ title, value, onChange }) => {
   const handleSliderChange = (e, newValue) => {
     onChange(newValue);
   };
-
-  console.log('render');
 
   return (
     <Box sx={styles.wrapper}>
