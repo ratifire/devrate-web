@@ -28,7 +28,15 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       environment = [
         {
           name  = "ACTIVE_PROFILE",
-          value = "dev"
+          value = "production"
+        },
+        {
+          name  = "REACT_APP_API_URL",
+          value = "https://server.devrate.org"
+        },
+        {
+          name  = "REACT_APP_WS_URL",
+          value = "wss://server.devrate.org"
         }
       ],
       mountPoints = [],
