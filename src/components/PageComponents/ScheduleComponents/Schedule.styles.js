@@ -9,6 +9,10 @@ export const styles = {
     flexGrow: '1',
     padding: theme.spacing(4),
   }),
+  demoAppMainOn: theme=>({
+    flexGrow: '1',
+    padding: theme.spacing(4),
+  }),
   fc: {
     margin: '0 auto',
   },

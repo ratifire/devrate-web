@@ -15,6 +15,8 @@ import {
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
 import { useTheme } from '@mui/material/styles';
+
+
  const Schedule = () => {
   const theme = useTheme();
   const calendarRef = useRef(null);
@@ -25,9 +27,9 @@ import { useTheme } from '@mui/material/styles';
   const [popupPosition, setPopupPosition] = useState('TOPRIGHT');
   const [from, setFrom] = useState(DateTime.local().startOf('week').plus({ days: 1 }).toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
-  // const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
-  const specificDate = DateTime.fromISO('2024-09-23T00:00:00+03:00');
-  const fromTime = encodeURIComponent(`${specificDate.toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
+  const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
+  // const specificDate = DateTime.fromISO('2024-09-23T00:00:00+03:00');
+  // const fromTime = encodeURIComponent(`${specificDate.toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
   
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [events, setEvents] = useState([]);
@@ -37,37 +39,36 @@ import { useTheme } from '@mui/material/styles';
   const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
   
-  
-  
   useEffect(() => {
-    const waitForCalendarRef = () => {
-      if (calendarRef.current) {
-        const calendarApi = calendarRef.current.getApi();
-        applyRequiredStyles(calendarApi, theme);
-        calendarApi.gotoDate(from);
-        calendarApi.scrollToTime(eventStartTime);
-      } else {
-        setTimeout(waitForCalendarRef, 0);
-      }
-    };
-    waitForCalendarRef();
-  }, [selectedWeek, eventStartTime, from, theme]);
-  
-  useEffect(() => {
-    setEvents(transformEvents(eventsForSelectedWeek || []));
-    
-    const waitForCalendarRef = () => {
-      if (calendarRef.current) {
-        const calendarApi = calendarRef.current.getApi();
-        applyRequiredStyles(calendarApi, theme);
-      } else {
-        setTimeout(waitForCalendarRef, 0);
-      }
-    };
-    
-    waitForCalendarRef();
-  }, [eventsForSelectedWeek, isFetching, theme]);
-  
+         const waitForCalendarRef = () => {
+             if (calendarRef.current) {
+                 const calendarApi = calendarRef.current.getApi();
+                 applyRequiredStyles(calendarApi, theme);
+                 calendarApi.gotoDate(from);
+                 calendarApi.scrollToTime(eventStartTime);
+             } else {
+                 requestAnimationFrame(waitForCalendarRef);
+             }
+         };
+
+         waitForCalendarRef();
+     }, [selectedWeek, eventStartTime, from, theme]);
+
+     useEffect(() => {
+         setEvents(transformEvents(eventsForSelectedWeek || []));
+
+         const waitForCalendarRef = () => {
+             if (calendarRef.current) {
+                 const calendarApi = calendarRef.current.getApi();
+                 applyRequiredStyles(calendarApi, theme);
+             } else {
+                 requestAnimationFrame(waitForCalendarRef);
+             }
+         };
+
+         waitForCalendarRef();
+     }, [eventsForSelectedWeek, isFetching, theme]);
+
   
   const findEventTimeForChosenDay = (newDate, resp) => {
     const luxonDate = DateTime.fromISO(newDate);
@@ -251,29 +252,29 @@ const getWeekStartAndEnd = (year, weekNumber) => {
 };
 
 const applyRequiredStyles = (calendarApi, theme) => {
-  if (calendarApi) {
-    const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
-    const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
-    const timeGridHeadElements = calendarApi.el.querySelectorAll(
-      '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
-    );
-    const timeGridEventElements = calendarApi.el.querySelectorAll(
-      '.fc-timegrid-event-harness-inset .fc-timegrid-event'
-    );
-    
-    timeGridSlotElements.forEach((el) => {
-      Object.assign(el.style, theme.palette.mode === "dark" ? styles.timeGridTableDataDark: styles.timeGridTableDataLight);
-    });
-    timeGridTodayElements.forEach((el) => {
-      Object.assign(el.style, styles.timeGridTodayElements);
-    });
-    timeGridHeadElements.forEach((el) => {
-      Object.assign(el.style, theme.palette.mode === "dark" ? styles.timeGridTableHeadDark: styles.timeGridTableHeadLight);
-    });
-    timeGridEventElements.forEach((el) => {
-      Object.assign(el.style, styles.timeGridEventElements);
-    });
-  }
+    if (calendarApi) {
+        const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
+        const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
+        const timeGridHeadElements = calendarApi.el.querySelectorAll(
+            '.fc-theme-standard th, .fc-theme-standard .fc-scrollgrid'
+        );
+        const timeGridEventElements = calendarApi.el.querySelectorAll(
+            '.fc-timegrid-event-harness-inset .fc-timegrid-event'
+        );
+        
+        timeGridSlotElements.forEach((el) => {
+            Object.assign(el.style, theme.palette.mode === "dark" ? styles.timeGridTableDataDark: styles.timeGridTableDataLight);
+        });
+        timeGridTodayElements.forEach((el) => {
+            Object.assign(el.style, styles.timeGridTodayElements);
+        });
+        timeGridHeadElements.forEach((el) => {
+            Object.assign(el.style, theme.palette.mode === "dark" ? styles.timeGridTableHeadDark: styles.timeGridTableHeadLight);
+        });
+        timeGridEventElements.forEach((el) => {
+            Object.assign(el.style, styles.timeGridEventElements);
+        });
+    }
 };
 
 export default Schedule;

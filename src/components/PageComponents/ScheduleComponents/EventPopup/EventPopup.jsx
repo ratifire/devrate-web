@@ -11,6 +11,7 @@ import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleA
 import {useTheme} from "@mui/material/styles";
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
+  console.log(event)
   const { t } = useTranslation();
   const [deleteEventById] = useDeleteEventByIdMutation();
   const theme = useTheme()
@@ -56,28 +57,14 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       {popupPosition === 'BOTTOMLEFT' && <Box sx={styles.popupTriangularBottomLeft}></Box>}
       {popupPosition === 'TOPRIGHT' && <Box sx={styles.popupTriangularTopRight}></Box>}
       {popupPosition === 'BOTTOMRIGHT' && <Box sx={styles.popupTriangularBottomRight}></Box>}
-
-      <Box sx={styles.infoContainer}>
+      
+      {event.type==="INTERVIEW" && <Box sx={styles.infoContainer}>
         <IconButton onClick={handleClosePopup} sx={styles.closeIcon}>
-          <CloseIcon />
+          <CloseIcon/>
         </IconButton>
         <Box sx={styles.userInfo}>
           <Typography variant='caption2' sx={styles.title}>
             {t('schedule.popupUserInfo')}
-          </Typography>
-          <Typography variant='subtitle2' sx={styles.name}>
-            {event.participantDtos[0].name} {event.participantDtos[0].surname}
-          </Typography>
-          <Typography variant='caption2' sx={styles.position}>
-            {event.participantDtos[0].status}
-          </Typography>
-          <Typography variant='caption2' sx={styles.role}>
-            {t('schedule.popupRole')} {event.participantDtos[0].role.toLowerCase()}
-          </Typography>
-        </Box>
-        <Box sx={styles.interviewerInfo}>
-          <Typography variant='caption2' sx={styles.title}>
-            {t('schedule.popupInterviewerInfo')}
           </Typography>
           <Typography variant='subtitle2' sx={styles.name}>
             {event.host.name} {event.host.surname}
@@ -89,7 +76,21 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
             {t('schedule.popupRole')} {event.host.role.toLowerCase()}
           </Typography>
         </Box>
-      </Box>
+        <Box sx={styles.interviewerInfo}>
+          <Typography variant='caption2' sx={styles.title}>
+            {t('schedule.popupInterviewerInfo')}
+          </Typography>
+          <Typography variant='subtitle2' sx={styles.name}>
+            {event.participantDtos[0].name} {event.participantDtos[0].surname}
+          </Typography>
+          <Typography variant='caption2' sx={styles.position}>
+            {event.participantDtos[0].status}
+          </Typography>
+          <Typography variant='caption2' sx={styles.role}>
+            {t('schedule.popupRole')} {event.participantDtos[0].role.toLowerCase()}
+          </Typography>
+        </Box>
+      </Box>}
       <Box sx={styles.buttonsContainer}>
         <IconButton component='a' href={event.link} target='_blank' sx={styles.icon}>
           <LinkIcon />
