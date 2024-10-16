@@ -14,38 +14,33 @@ export const styles = {
     alignItems: 'center',
     marginBottom: theme.spacing(2),
     '& .MuiRating-iconFilled': {
-      color: theme.palette.action.active,
+      color: theme.palette.skillsSection.stars.iconFilled,
     },
     '& .MuiRating-iconEmpty': {
-      color: theme.palette.background.level3,
+      color: theme.palette.skillsSection.stars.iconEmpty,
     },
   }),
-
   skillsText: (theme) => ({
     marginRight: theme.spacing(1),
     color: theme.palette.text.secondary,
     width: '108px'
   }),
-
   skillsRatingValue: () => ({
     marginRight: '10px',
   }),
-
   skillMark: {
     textAlign: 'start',
   },
-
-
   softSkills: (theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: '29px',
     '& .MuiRating-iconFilled': {
-      color: theme.palette.action.active,
+      color: theme.palette.skillsSection.stars.iconFilled,
     },
     '& .MuiRating-iconEmpty': {
-      color: theme.palette.background.level3,
+      color: theme.palette.skillsSection.stars.iconEmpty,
     },
   }),
   interviewHistory: (theme) => ({
@@ -55,9 +50,6 @@ export const styles = {
     width: '100%',
     gap: theme.spacing(3),
   }),
-  doneInterviewsQuantity: {
-  },
-
   skillsInterviewBtn: {
     display: 'flex',
     flexDirection: 'column',
@@ -70,14 +62,14 @@ export const styles = {
     borderRadius: 1,
   },
   doneInterviewsBtn: (theme) => ({
-    color: theme.palette.info.azure,
-    borderColor: theme.palette.info.azure,
+    color: theme.palette.skillsSection.doneInterviews.color,
+    borderColor: theme.palette.skillsSection.doneInterviews.borderColor,
+    backgroundColor: theme.palette.skillsSection.doneInterviews.backgroundColor,
 
   }),
-  completedInterviewsQuantity: {
-  },
   completedInterviewsBtn: (theme) => ({
-    color: theme.palette.info.main,
-    borderColor: theme.palette.info.main,
+    color: theme.palette.skillsSection.completedInterviews.color,
+    borderColor: theme.palette.skillsSection.completedInterviews.borderColor,
+    backgroundColor: theme.palette.skillsSection.completedInterviews.backgroundColor,
   }),
 };

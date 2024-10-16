@@ -2,8 +2,8 @@ export const styles = {
   menu: (theme) => ({
     padding: '10px',
     '& .MuiPaper-root': {
-      backgroundColor: theme.palette.neutral[900],
-      color: theme.palette.neutral[100],
+      backgroundColor: theme.palette.modalDropdown.backgroundColor,
+      color: theme.palette.modalDropdown.color,
     },
   }),
   itemIcon: {
@@ -17,15 +17,18 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: theme.palette.neutral[900],
-    color: theme.palette.neutral[100],
+    color: theme.palette.modalDropdown.color,
     '&:hover': {
-      backgroundColor: theme.palette.neutral[800],
-      color: theme.palette.primary[200],
+      backgroundColor: theme.palette.modalDropdown.hoverBgColor,
+      color: theme.palette.modalDropdown.color,
     },
+    '&:active': {
+      backgroundColor: theme.palette.modalDropdown.hoverBgColor,
+      color: theme.palette.action.active
+    }
   }),
   divider: (theme) => ({
-    backgroundColor: theme.palette.neutral[600],
+    backgroundColor: theme.palette.modalDropdown.divider,
     marginLeft: '8px',
     marginRight: '8px',
   })

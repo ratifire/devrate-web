@@ -7,12 +7,17 @@ import SkillsList from './SkillsList';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import PropTypes from 'prop-types';
 import { useGetUserAllSpecializationQuery } from '../../../../../../redux/specialization/specializationApiSlice';
+import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 
-const Skills = ({tab, profileType, imgUrl}) => {
+const Skills = ({ tab }) => {
   const { data: user } = useSelector(selectCurrentUser);
   const { data: userAllSpecializations, isLoading } = useGetUserAllSpecializationQuery(user.id);
+
   if (isLoading || !userAllSpecializations || userAllSpecializations.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
+    return <EmptyExperienceTab
+      tab={tab}
+      profileType='personal'
+      imgUrl={emptyPersonalTabsPictures.emptySkillsPic}/>;
   }
 
   return (
@@ -24,7 +29,5 @@ const Skills = ({tab, profileType, imgUrl}) => {
 
 Skills.propTypes = {
   tab: PropTypes.string.isRequired,
-  profileType: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired,
 }
 export default Skills;
