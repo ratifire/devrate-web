@@ -17,7 +17,7 @@ export const styles = {
     position: 'relative',
   }),
   grade: (theme) => ({
-    color: theme.palette.sliderAssessment.lightGray,
+    color: theme.palette.sliderAssessment.grade,
     width: '44px',
     textAlign: 'right',
   }),
@@ -53,10 +53,10 @@ export const styles = {
       width: '22px',
       height: '21px',
       borderRadius: '0',
-      backgroundColor: theme.palette.sliderAssessment.darkGray,
+      backgroundColor: theme.palette.sliderAssessment.tooltip.backgroundColor,
 
       '& > span': {
-        color: theme.palette.sliderAssessment.lightGray,
+        color: theme.palette.sliderAssessment.tooltip.color,
         fontSize: '14px',
       },
     },

@@ -354,6 +354,11 @@ const getDesignTokens = (mode) => ({
           gray: '#69696B',
           backgroundColor: '#3E3E40',
           border: 'transparent',
+          grade: '#C5C5C6',
+          tooltip: {
+            color: '#C5C5C6',
+            backgroundColor: '#3E3E40',
+          },
         },
         experienceSkillSect: {
           text: {
@@ -708,10 +713,15 @@ const getDesignTokens = (mode) => ({
         },
         sliderAssessment: {
           violet: '#6200EE',
-          lightGray: '#F0F0F0',
-          gray: '#A0A0A0',
+          lightGray: '#A9A9AA',
+          gray: '#ECECED',
           backgroundColor: '#F8F8F8',
           border: '1px solid ' + '#ECECED',
+          grade: '#1D1D1D',
+          tooltip: {
+            color: '#1D1D1D',
+            backgroundColor: '#A9A9AA',
+          },
         },
         experienceSkillSect: {
           text: {

@@ -65,7 +65,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      .concat(logger)
+      // .concat(logger)
       .concat(apiSlice.middleware),
   devTools: true,
 });
