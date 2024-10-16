@@ -1,6 +1,5 @@
-/* eslint-disable */
 import { Box, Typography } from '@mui/material'
-import React, { memo, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next'
 import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../index'
 import { styles } from './InterviewerFeedback.styles'
@@ -14,11 +13,9 @@ import { useCreateInterviewMutation } from '../../../../../redux/feedback/interv
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 
-const MemoizedSliderAssessment = memo(SliderAssessment)
-
 const InterviewerFeedback = ({data}) => {
   const { t } = useTranslation();
-  const { interviewStartTime, participant: { id, name, status, surname }, skills } = data;
+  const { interviewStartTime, participant: { name, status, surname }, skills } = data;
   const { feedbackId } = useSelector((state) => state.feedback);
   const { data: { id: userId } } = useSelector(selectCurrentUser)
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
@@ -73,12 +70,11 @@ const InterviewerFeedback = ({data}) => {
             <Box>
               <Typography variant='h6'>Soft Skills</Typography>
               <SliderAssessmentBox>
-                {skills.map(({ name, id }, index) => (
-                  <MemoizedSliderAssessment
+                {skills.map(({ id }) => (
+                  <SliderAssessment
                     key={id}
-                    title={name}
-                    value={formik.values.skills[index].value}
-                    onChange={(newValue) => formik.setFieldValue(`skills[${index}].value`, newValue)}
+                    id={id}
+                    formik={formik}
                   />
                 ))}
               </SliderAssessmentBox>
