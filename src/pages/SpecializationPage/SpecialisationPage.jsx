@@ -25,19 +25,21 @@ const LevelChart = React.lazy(
   () => import('../../components/PageComponents/SpecializationComponents/Statistics/LevelChart/LevelChart')
 );
 
+const MemoizedProfileHeader = React.memo(ProfileHeader);
+const MemoizedSpecializationLevel = React.memo(SpecializationLevel);
+const MemoizedHardSkills = React.memo(HardSkills);
+const MemoizedSpecialisationCategories = React.memo(SpecialisationCategories);
+const MemoizedInterviews = React.memo(Interviews);
+const MemoizedSoftSkills = React.memo(SoftSkills);
+const MemoizedInterviewChart = React.memo(InterviewChart);
+const MemoizedSkillsAssessmentChart = React.memo(SkillsAssessmentChart);
+const MemoizedHardSkillsChart = React.memo(HardSkillsChart);
+const MemoizedLevelChart = React.memo(LevelChart);
+
 const SpecializationPage = () => {
   const { t } = useTranslation();
   const [activeMastery, setActiveMastery] = useState();
-  const MemoizedProfileHeader = React.memo(ProfileHeader);
-  const MemoizedSpecializationLevel = React.memo(SpecializationLevel);
-  const MemoizedHardSkills = React.memo(HardSkills);
-  const MemoizedSpecialisationCategories = React.memo(SpecialisationCategories);
-  const MemoizedInterviews = React.memo(Interviews);
-  const MemoizedSoftSkills = React.memo(SoftSkills);
-  const MemoizedInterviewChart = React.memo(InterviewChart);
-  const MemoizedSkillsAssessmentChart = React.memo(SkillsAssessmentChart);
-  const MemoizedHardSkillsChart = React.memo(HardSkillsChart);
-  const MemoizedLevelChart = React.memo(LevelChart);
+
   return (
     <SpecializationTemplate>
       <Suspense fallback={<div>Loading...</div>}>
@@ -60,7 +62,7 @@ const SpecializationPage = () => {
               <MemoizedSoftSkills />
             </Paper>
             <Paper sx={styles.specialisationStatistics}>
-              <Typography sx={styles.statisticTitle}>{t('specialization.statistics.title')}</Typography>
+              <Typography variant='h6' sx={styles.statisticTitle}>{t('specialization.statistics.title')}</Typography>
               <Box sx={styles.statisticWrapper}>
                 <Paper sx={styles.level}>
                   <MemoizedLevelChart />

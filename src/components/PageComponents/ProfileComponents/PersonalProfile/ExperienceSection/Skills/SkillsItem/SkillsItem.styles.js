@@ -6,8 +6,7 @@ export const styles = {
     paddingY: theme.spacing(2),
     borderBottom: `1px solid ${theme.palette.neutral[400]}`,
     ">p": {
-      flex: '1 2 max(132px)',
-      maxWidth: '132px',
+      flex: '1 2 max(420px)',
       width: '2vw',
       textOverflow: 'ellipsis',
       overflow: 'hidden',
@@ -22,7 +21,7 @@ export const styles = {
     justifyContent: 'center',
   },
   icon: (theme) => ({
-    backgroundColor: theme.palette.neutral[500],
+    backgroundColor: theme.palette.experienceSkillSect.eye.backgroundColor,
     width: 24,
     height: 24,
     margin: theme.spacing(1),
@@ -39,18 +38,18 @@ export const styles = {
   }),
   eyeHidden: (theme) => ({
     fontSize: 14,
-    fill: theme.palette.neutral[100],
+    fill: theme.palette.experienceSkillSect.eye.eyeHidden,
   }),
   eye: (theme) => ({
     fontSize: 14,
-    fill: theme.palette.primary[200],
+    fill: theme.palette.experienceSkillSect.eye.eyeVisible,
   }),
   text: (theme) => ({
     color: theme.palette.text.primary,
     width: '100%',
   }),
   number: (theme) => ({
-    color: theme.palette.primary['200'],
+    color: theme.palette.experienceSkillSect.number.color,
     width: 'auto',
     paddingX: '7px',
     height: '24px',
@@ -58,7 +57,7 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
-    backgroundColor: theme.palette.neutral['800'],
+    backgroundColor: `${theme.palette.experienceSkillSect.number.backgroundColor} !important`,
     lineHeight: '24px',
   }),
 };

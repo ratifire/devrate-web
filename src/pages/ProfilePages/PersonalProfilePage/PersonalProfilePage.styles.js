@@ -16,7 +16,8 @@ export const styles = {
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
-      backgroundColor: theme.palette.background.level2,
+      backgroundColor: theme.palette.pagesSections.backgroundColor,
+      backgroundImage: 'none',
     },
   }),
   baseUserInfo: {

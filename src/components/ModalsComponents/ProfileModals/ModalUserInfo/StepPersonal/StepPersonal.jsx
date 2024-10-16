@@ -127,7 +127,13 @@ const StepPersonal = () => {
       </Box>
 
       <Box sx={styles.wrapperBtn}>
-        <ButtonDef disabled={!formik.dirty} variant='contained' correctStyle={styles.btn} type='submit' label='profile.modal.btn' />
+        <ButtonDef
+          disabled={!formik.dirty}
+          variant='contained'
+          correctStyle={styles.btn}
+          type='submit'
+          label='profile.modal.btn'
+        />
       </Box>
     </form>
   );

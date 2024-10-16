@@ -13,7 +13,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
         "command" : ["CMD-SHELL", "curl -f https://${var.domain_name}/ || exit 1"],
         "interval" : 120,
         "timeout" : 10,
-        "retries" : 3
+        "retries" : 2
       },
       portMappings = [
         {
