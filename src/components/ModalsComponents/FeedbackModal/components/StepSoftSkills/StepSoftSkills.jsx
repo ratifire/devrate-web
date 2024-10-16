@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -35,12 +34,11 @@ const StepSoftSkills = ({ formik }) => {
         <SliderAssessmentBox>
           {skills
             .filter(({type}) => type === 'SOFT_SKILL')
-            .map(({id, name}, index) => (
+            .map(({id}) => (
               <SliderAssessment
                 key={id}
-                title={name}
-                value={formik.values.skills[index].value}
-                onChange={(newValue) => formik.setFieldValue(`skills[${index}].value`, newValue)}
+                id={id}
+                formik={formik}
               />))
           }
         </SliderAssessmentBox>

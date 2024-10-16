@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { styles } from './SliderAssessment.styles';
 
-const SliderAssessment = ({ title, value, onChange }) => {
-  const rightBoxStyles = value === 10 ? [styles.right, styles.rightActive] : styles.right;
+const SliderAssessment = ({ formik, id }) => {
+  const values = formik.values.skills;
+  const index = values.findIndex((skill) => skill.id === id);
+  const skillValue = values[index].value;
+  const title = values[index].name;
+
+  const rightBoxStyles = skillValue === 10 ? [styles.right, styles.rightActive] : styles.right;
 
   const handleSliderChange = (e, newValue) => {
-    onChange(newValue);
+    formik.setFieldValue(`skills[${index}].value`, newValue);
   };
 
   return (
@@ -18,7 +23,7 @@ const SliderAssessment = ({ title, value, onChange }) => {
           <Box sx={styles.left}></Box>
           <Box sx={rightBoxStyles}></Box>
           <Slider
-            value={value}
+            value={skillValue}
             onChange={handleSliderChange}
             step={1}
             min={1}
@@ -27,20 +32,19 @@ const SliderAssessment = ({ title, value, onChange }) => {
             valueLabelDisplay='on'
             sx={styles.slider}
           />
-          <input name={title} type='hidden' value={value} />
+          <input name={title} type='hidden' value={skillValue} />
           <Typography sx={styles.grade} variant='body'>
-            {value}/10
+            {skillValue}/10
           </Typography>
         </Box>
       </Box>
       <Divider sx={styles.divider} />
     </Box>
   );
-};
+}
 
 SliderAssessment.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
+  formik: PropTypes.object,
+  id: PropTypes.number,
 };
 export default SliderAssessment;

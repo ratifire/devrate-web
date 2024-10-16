@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { SliderAssessment, SliderAssessmentBox } from '../../components';
@@ -14,12 +13,11 @@ const StepHardSkills = ({ formik }) => {
       <SliderAssessmentBox size='large'>
         {skills
         .filter(({type}) => type === 'HARD_SKILL')
-        .map(({id, name}, index) => (
+        .map(({id}) => (
           <SliderAssessment
             key={id}
-            title={name}
-            value={formik.values.skills[index].value}
-            onChange={(newValue) => formik.setFieldValue(`skills[${index}].value`, newValue)}
+            id={id}
+            formik={formik}
           />))
         }
       </SliderAssessmentBox>
