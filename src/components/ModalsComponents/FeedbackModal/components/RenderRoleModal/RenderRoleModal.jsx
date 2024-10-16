@@ -42,7 +42,7 @@ RenderRoleModal.propTypes = {
         type: PropTypes.string.isRequired,
       })
     ).isRequired,
-  }).isRequired,
+  }),
 };
 
 export default RenderRoleModal;
