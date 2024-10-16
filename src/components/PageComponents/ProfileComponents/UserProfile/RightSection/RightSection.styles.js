@@ -24,7 +24,7 @@ export const styles = {
     flexWrap: 'wrap',
   },
   aboutMe: (theme) => ({
-    color: theme.palette.neutral['100'],
+    color: theme.palette.rightSection.text.color,
     overflowWrap: 'break-word',
   }),
   btnIcon: (theme) => ({

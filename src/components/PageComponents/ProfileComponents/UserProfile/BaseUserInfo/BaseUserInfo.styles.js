@@ -28,14 +28,6 @@ export const styles = {
     flex: '1 0 calc(100% - 148px)',
     position: 'relative',
   },
-  wrapperTextBtn: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    button: (theme) => ({
-      color: theme.palette.neutral['100'],
-    }),
-  },
   userName: (theme) => ({
     color: theme.palette.text.primary,
     marginBottom: theme.spacing(1),
@@ -48,7 +40,7 @@ export const styles = {
   city: (theme) => ({
     display: 'flex',
     alignItems: 'center',
-    color: theme.palette.info.main,
+    color: theme.palette.baseUserInfo.city.color,
   }),
   icon: (theme) => ({
     fontSize: 18,
@@ -66,7 +58,7 @@ export const styles = {
     display: 'block',
     paddingY: '10px',
     paddingX: '20px',
-    color: theme.palette.text.primary,
+    color: theme.palette.iconBtn.writeMasssge.color,
     fontFamily: theme.typography.fontFamily,
     textTransform: 'lowercase',
     '&::first-letter': {
@@ -74,7 +66,7 @@ export const styles = {
     },
 
     '&:hover': {
-      backgroundColor: theme.palette.primary['600'],
+      backgroundColor: theme.palette.iconBtn.writeMasssge.hover,
     },
 }),
 
@@ -82,17 +74,18 @@ export const styles = {
     display: 'block',
     paddingY: '10px',
     paddingX: '20px',
-    color: theme.palette.primary['200'],
+    color: theme.palette.iconBtn.bookInterview.color,
     fontFamily: theme.typography.fontFamily,
-    border: `1px solid ${theme.palette.action.active}`,
+    border: `1px solid ${theme.palette.iconBtn.bookInterview.borderColor}`,
     textTransform: 'lowercase',
     '&::first-letter': {
       textTransform: 'uppercase',
     },
 
     '&:hover': {
-      backgroundColor: `${theme.palette.primary['200']}29`,
-      borderColor: theme.palette.primary['200']
+      backgroundColor: theme.palette.iconBtn.bookInterview.hover.backgroundColor,
+      borderColor: theme.palette.iconBtn.bookInterview.hover.borderColor,
+      color: theme.palette.iconBtn.bookInterview.hover.color,
     },
 
   }),

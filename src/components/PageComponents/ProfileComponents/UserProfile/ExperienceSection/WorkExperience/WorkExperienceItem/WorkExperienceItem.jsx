@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import styles from './WorkExperienceItem.style';
+import styles from './WorkExperienceItem.styles';
 import { useTranslation } from 'react-i18next';
 import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
 import PropTypes from 'prop-types';

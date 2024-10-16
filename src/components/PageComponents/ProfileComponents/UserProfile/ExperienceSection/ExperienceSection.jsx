@@ -7,26 +7,20 @@ import Achievement from '../../UserProfile/ExperienceSection/Achievement';
 import { useTranslation } from 'react-i18next';
 import WorkExperience from './WorkExperience';
 import PropTypes from 'prop-types';
-import { emptyUserTabsPictures } from '../../../../../utils/constants/emptyTabsPictures';
 
 const ExperienceSection = ({ id }) => {
   const [value, setValue] = React.useState('openExperience');
   const { t } = useTranslation();
-
-  const profileType = 'user';
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const tab = {
-    openExperience: <WorkExperience id={id} tab={'workExperience'} profileType={profileType}
-                                    imgUrl={emptyUserTabsPictures.WorkExperienceUserPic} />,
-    achievement: <Achievement id={id} tab={'achievement'} profileType={profileType}
-                              imgUrl={emptyUserTabsPictures.AchievementUserPic} />,
-    skills: <Skills id={id} tab={'skills'} profileType={profileType} imgUrl={emptyUserTabsPictures.SkillsUserPic} />,
-    education: <Education id={id} tab={'education'} profileType={profileType}
-                          imgUrl={emptyUserTabsPictures.EducationUserPic} />,
+    openExperience: <WorkExperience id={id} tab={'workExperience'}/>,
+    achievement: <Achievement id={id} tab={'achievement'}/>,
+    skills: <Skills id={id} tab={'skills'}/>,
+    education: <Education id={id} tab={'education'}/>,
   };
 
   const StyledTabs = styled(Tabs)(({ theme }) => ({

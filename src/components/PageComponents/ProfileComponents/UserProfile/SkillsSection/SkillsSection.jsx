@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { styles } from './SkillsSection.style';
+import { styles } from './SkillsSection.styles';
 import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import PropTypes from 'prop-types';
 
@@ -33,7 +33,7 @@ const SkillsSection = ({ id }) => {
         </Typography>
       </Box>
       <Box sx={styles.softSkills}>
-        <Typography variant="subtitle1" sx={styles.skillsText}>
+        <Typography variant="h6" sx={styles.skillsText}>
           {t('profile.skills.softSkills')}:
         </Typography>
         <Rating
@@ -49,13 +49,13 @@ const SkillsSection = ({ id }) => {
       </Box>
       <Box sx={styles.interviewHistory}>
         <Box sx={[styles.skillsInterviewBtn, styles.doneInterviewsBtn]}>
-          <Typography variant="subtitle1" sx={styles.doneInterviewsQuantity}>
+          <Typography variant="subtitle1">
             {conductedInterviews}
           </Typography>
           <Typography variant="caption3">{t('profile.skills.doneInterviews')}</Typography>
         </Box>
         <Box sx={[styles.skillsInterviewBtn, styles.completedInterviewsBtn]}>
-          <Typography variant="subtitle1" sx={styles.completedInterviewsQuantity}>
+          <Typography variant="subtitle1">
             {completedInterviews}
           </Typography>
           <Typography variant="caption3">{t('profile.skills.completedInterviews')}</Typography>

@@ -107,6 +107,41 @@ const getDesignTokens = (mode) => ({
     mode,
     ...(mode === DARK_THEME
       ? {
+        notifications: {
+          backgroundColor: '#252527',
+          borderColor: 'transparent',
+          badge: {
+            backgroundColor: '#FF0000',
+            boxShadow: '#FF0000CC',
+            fill:'#C5C5C6',
+          },
+          icon:{
+            close: '#C5C5C6',
+            typeMessage: '#C5C5C6',
+          },
+          item: {
+            color: '#FFFFFF',
+            boxShadow: '#C5C5C640',
+            colorTime: '#C5C5C6',
+            newMessages: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA',
+            }
+          },
+        },
+        checkBox: {
+          border: '#C5C5C6',
+        },
+        border: {
+          color: '#252527',
+        },
+        search: {
+          color: 'rgba(197, 197, 198, 0.25)',
+          inputActive: '#B78AF7',
+          emptyTitle: '#fff',
+          title: '#fff',
+          subtitle: '#C5C5C6',
+        },
         steper: {
           completed: {
             circle: {
@@ -187,6 +222,7 @@ const getDesignTokens = (mode) => ({
             placeholder: '#69696B',
             border: {
               default: '#444446',
+              default2: '#252527',
               hover: '#828283',
               focused: '#B78AF7',
               disable: '#3E3E40',
@@ -210,9 +246,6 @@ const getDesignTokens = (mode) => ({
           backgroundColor: '#1D1D1D',
           color: '#69696B',
           progressBgColor: '#69696B',
-        },
-        border: {
-          color: '#252527',
         },
         baseUserInfo: {
           city: {
@@ -249,6 +282,30 @@ const getDesignTokens = (mode) => ({
           },
         },
         iconBtn: {
+          search:{
+            color: '#CEB0FA',
+            svgColor: '#B78AF7'
+          },
+          link: {
+            color: '#CEB0FA',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          writeMasssge: {
+            color: '#FFFFFF',
+            hover: '#5900D9',
+          },
+          bookInterview: {
+            color: '#B78AF7',
+            borderColor: '#B78AF7',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+              borderColor: '#B78AF7',
+            },
+          },
           stepRight: {
             active: {
               backgroundColor: '#B78AF7',
@@ -298,13 +355,7 @@ const getDesignTokens = (mode) => ({
             },
           },
         },
-        search: {
-          color: 'rgba(197, 197, 198, 0.25)',
-          inputActive: '#B78AF7',
-          emptyTitle: '#fff',
-          title: '#fff',
-          subtitle: '#C5C5C6',
-        },
+
         tabsEl: {
           borderColor: '#69696B',
           indicator: '#B78AF7',
@@ -317,7 +368,11 @@ const getDesignTokens = (mode) => ({
             backgroundColor: 'transparent',
           },
         },
-        sectionSkills: {
+        skillsSection: {
+          stars: {
+            iconFilled: '#B78AF7',
+            iconEmpty: '#828283',
+          },
           doneInterviews: {
             color: '#16FFB9',
             backgroundColor: 'transparent',
@@ -332,9 +387,12 @@ const getDesignTokens = (mode) => ({
         pagesSections: {
           backgroundColor: '#303032',
         },
-        iconBtnModalDropdown: {
+
+        modalDropdown: {
           color: '#C5C5C6',
-          hoverBgColor: '#303032',
+          backgroundColor: '#1D1D1D',
+          hoverBgColor: '#252527',
+          divider: '#69696B',
         },
         responcibility: {
           backgroundColor: '#CEB0FA',
@@ -352,9 +410,17 @@ const getDesignTokens = (mode) => ({
           lightGray: '#C5C5C6',
           gray: '#69696B',
           backgroundColor: '#3E3E40',
+          backgroundColor2: '#252527' + 'BD',
           border: 'transparent',
         },
         experienceSkillSect: {
+          wrapperUnSorted:{
+            borderColor: '#69696B',
+          },
+          wrapperSorted: {
+            color: '#CEB0FA',
+            borderColor: '#CEB0FA',
+          },
           text: {
             junior: '#25CBFF',
             middle: '#16FFB9',
@@ -374,6 +440,7 @@ const getDesignTokens = (mode) => ({
             color: '#FFFFFF',
             backgroundColor: '#252527',
           },
+          default: ''
         },
         common: {
           black: '#000000',
@@ -493,7 +560,31 @@ const getDesignTokens = (mode) => ({
 },
       }
       : {
-
+        notifications: {
+          backgroundColor: '#FFFFFF',
+          borderColor: '#C5C5C6',
+          badge: {
+            backgroundColor: '#A70000',
+            boxShadow: '#FF0000CC',
+            fill:'#69696B',
+          },
+          icon:{
+            close: '#3E3E40',
+            typeMessage: '#3E3E40',
+          },
+          item: {
+            color: '#1D1D1D',
+            boxShadow: '#C5C5C640',
+            colorTime: '#3E3E40',
+            newMessages: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA',
+            }
+          },
+        },
+        checkBox: {
+          border: '#828283',
+        },
         border: {
           color: '#C5C5C6',
         },
@@ -585,6 +676,7 @@ const getDesignTokens = (mode) => ({
             placeholder: '#69696B',
             border: {
               default: '#828283',
+              default2: '#ECECED',
               hover: '#444446',
               focused: '#8133F1',
               disable: '#A9A9AA',
@@ -643,7 +735,6 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#C5C5C6',
           },
         },
-
         tabsEl: {
           borderColor: '#A9A9AA',
           indicator: '#6200EE',
@@ -657,6 +748,30 @@ const getDesignTokens = (mode) => ({
           },
         },
         iconBtn: {
+          search:{
+            color: '#8133F1',
+            svgColor: '#8133F1'
+          },
+          link: {
+            color: '#8133F1',
+            hover: {
+              color: '#8133F1',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          writeMasssge: {
+            color: '#FFFFFF',
+            hover: '#360083',
+          },
+          bookInterview: {
+            color: '#6200EE',
+            borderColor: '#6200EE',
+            hover: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA29',
+              borderColor: '#360083',
+            },
+          },
           stepRight: {
             active: {
               backgroundColor: '#5900D9',
@@ -706,7 +821,11 @@ const getDesignTokens = (mode) => ({
             },
           },
         },
-        sectionSkills: {
+        skillsSection: {
+          stars: {
+            iconFilled: '#8133F1',
+            iconEmpty: '#828283',
+          },
           doneInterviews: {
             color: '#00855D',
             backgroundColor: '#F8FFFD',
@@ -721,9 +840,11 @@ const getDesignTokens = (mode) => ({
         pagesSections: {
           backgroundColor: '#ffffff',
         },
-        iconBtnModalDropdown: {
-          color: '#3E3E40',
+        modalDropdown: {
+          color: '#1D1D1D',
+          backgroundColor: '#FFFFFF',
           hoverBgColor: '#ECECED',
+          divider: '#C5C5C6',
         },
         responcibility: {
           backgroundColor: '#EFE6FD',
@@ -741,6 +862,7 @@ const getDesignTokens = (mode) => ({
           lightGray: '#F0F0F0',
           gray: '#A0A0A0',
           backgroundColor: '#F8F8F8',
+          backgroundColor2: '#C5C5C6' + 'BD',
           border: '1px solid ' + '#ECECED',
         },
           schedule:{
@@ -770,16 +892,23 @@ const getDesignTokens = (mode) => ({
               hostLinkColor:"#6200EE",
               participantlinkColor:"#6200EE",
               cancelEventBtnColor: "#6200EE"
-              
+
             },
           },
         experienceSkillSect: {
+          wrapperUnSorted:{
+            borderColor: '#C5C5C6',
+          },
+          wrapperSorted: {
+            color: '#8133F1',
+            borderColor: '#8133F1',
+          },
           text: {
             junior: '#007CA3',
             middle: '#00855D',
             senior: '#D31772',
           },
-          star: '#4600A9',
+          star: '#8133F1',
           eye: {
             eyeHidden: '#3E3E40',
             eyeVisible: '#4600A9',
@@ -799,7 +928,6 @@ const getDesignTokens = (mode) => ({
           white: '#ffffff',
           titleGradient: 'linear-gradient(90deg, rgb(117, 98, 228), rgb(251, 147, 166))',
         },
-        
         text: {
           primary: '#1D1D1D',
           secondary: '#1D1D1D',
