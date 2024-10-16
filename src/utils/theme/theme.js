@@ -301,6 +301,7 @@ const getDesignTokens = (mode) => ({
           lime: '#DAFE22',
         },
           schedule:{
+          backgroundColor:  '#3E3E40',
           smallCalendar:{
             textColor:"#FFFFFF",
             backgroundColor: "#E0CCFF",
@@ -440,6 +441,7 @@ const getDesignTokens = (mode) => ({
           border: '1px solid ' + '#ECECED',
         },
           schedule:{
+            backgroundColor:  '#F8F8F8',
             smallCalendar:{
               textColor:"#F8F8F8",
               backgroundColor:"#A066FF",
