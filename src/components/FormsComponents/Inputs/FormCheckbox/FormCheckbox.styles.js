@@ -10,12 +10,14 @@ export const styles = {
     '&.Mui-checked': {
       color: theme.palette.disabled,
     },
+
   }),
   checkBoxWorkExperience: (theme) => ({
     color: theme.palette.disabled,
     '&.Mui-checked': {
       color: theme.palette.sliderAssessment.violet,
     },
+
   }),
   newsAgreementTextWorkExperience: (theme) => ({
     fontWeight: 400,

@@ -4,6 +4,7 @@ import getDesignTokens from '../src/utils/theme/theme';
 import i18n from '../src/utils/i18n';
 import React, { Suspense, useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
+import { DARK_THEME, LIGHT_THEME } from '../src/utils/constants/theme';
 
 const withI18next = (Story, context) => {
   const { locale } = context.globals;
@@ -51,10 +52,10 @@ const preview = {
   decorators: [
     withThemeFromJSXProvider({
       themes: {
-        light: createTheme(getDesignTokens('light')),
-        dark: createTheme(getDesignTokens('dark')),
+        light: createTheme(getDesignTokens(LIGHT_THEME)),
+        dark: createTheme(getDesignTokens(DARK_THEME)),
       },
-      defaultTheme: 'dark',
+      defaultTheme: DARK_THEME,
       Provider: ThemeProvider,
       GlobalStyles: CssBaseline,
     }),

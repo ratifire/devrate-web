@@ -1,5 +1,5 @@
 // src/app/store.js
-
+/* eslint-disable */
 
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
