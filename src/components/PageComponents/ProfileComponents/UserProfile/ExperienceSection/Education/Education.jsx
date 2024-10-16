@@ -1,32 +1,22 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Box } from '@mui/material';
 import styles from './Education.style';
 import EducationItem from './EducationItem';
 import { useGetEducationByUserIdQuery } from '../../../../../../redux/services/educationApiSlice';
 import PropTypes from 'prop-types';
-import { loadIconsFromLocalStorage } from '../../../../../../utils/helpers';
-import { iconsEducation } from '../../../../../../utils/constants/Experience/iconsExperience';
-import { mapDataWithIcons } from '../../../../../../utils/helpers/mapDataWithIcons';
-import { iconValuesEducation } from '../../../../../../utils/constants/Experience/iconsKeys';
-import { updateIconsInLocalStorage } from '../../../../../../utils/helpers/updateIconsInLocalStorage';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
+import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
+import { iconsEducation } from '../../../../../../utils/constants/Experience/iconsExperience';
 
 const Education = ({ id, tab, profileType, imgUrl }) => {
-  const iconsMap = loadIconsFromLocalStorage('education');
   const { data: educationsData, isLoading } = useGetEducationByUserIdQuery(id, { skip: !id });
-  const educationsNewData = mapDataWithIcons(educationsData, iconsMap, iconsEducation);
-  const iconValues = useMemo(() => iconValuesEducation, []);
+  const getIcon = loopedObjValues(iconsEducation);
 
-  useEffect(() => {
-    if (educationsNewData && educationsNewData.length > 0) {
-      updateIconsInLocalStorage(educationsNewData, iconsMap, iconValues, 'education');
-    }
-  }, [educationsNewData, iconValues, iconsMap]);
 
   const sortedEducations = useMemo(() => {
-    if (!educationsNewData) return [];
-    return [...educationsNewData].sort((a, b) => a.startYear - b.startYear);
-  }, [educationsNewData]);
+    if (!educationsData) return [];
+    return [...educationsData].sort((a, b) => a.startYear - b.startYear);
+  }, [educationsData]);
 
   if (isLoading || !educationsData || educationsData.length === 0) {
     return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl}/>;
@@ -35,7 +25,7 @@ const Education = ({ id, tab, profileType, imgUrl }) => {
   return (
     <Box sx={styles.container}>
       <Box>
-        {sortedEducations.map(({ id, type, name, description, startYear, endYear, iconComponent }) => (
+        {sortedEducations.map(({ id, type, name, description, startYear, endYear }) => (
           <EducationItem
             key={id}
             type={type}
@@ -43,7 +33,7 @@ const Education = ({ id, tab, profileType, imgUrl }) => {
             description={description}
             startYear={startYear}
             endYear={endYear === 9999 ? 'Now' : endYear}
-            icon={iconComponent}
+            icon={getIcon()}
             id={id}
           />
         ))}

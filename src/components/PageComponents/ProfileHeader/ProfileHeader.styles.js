@@ -6,7 +6,8 @@ const styles = {
     paddingY: theme.spacing(3),
     paddingX: theme.spacing(4),
     width: '100%',
-    backgroundColor: theme.palette.background.level2,
+    backgroundColor: theme.palette.pagesSections.backgroundColor,
+    backgroundImage: 'none',
   }),
   toolbar: {
     justifyContent: 'space between',
@@ -20,13 +21,6 @@ const styles = {
     alignItems: 'center',
     gap: theme.spacing(4),
   }),
-  input: {
-    '& .MuiOutlinedInput-input': {
-      paddingY: '8px!important',
-      paddingX: '12px!important',
-    },
-    width: '276px',
-  },
   userPhoto: {
     minWidth: 44,
     width: 44,

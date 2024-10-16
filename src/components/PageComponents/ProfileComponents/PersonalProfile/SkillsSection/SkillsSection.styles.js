@@ -67,12 +67,14 @@ export const styles = {
     borderRadius: 1,
   },
   doneInterviewsBtn: (theme) => ({
-    color: theme.palette.info.azure,
-    borderColor: theme.palette.info.azure,
+    color: theme.palette.sectionSkills.doneInterviews.color,
+    borderColor: theme.palette.sectionSkills.doneInterviews.borderColor,
+    backgroundColor: theme.palette.sectionSkills.doneInterviews.backgroundColor,
 
   }),
   completedInterviewsBtn: (theme) => ({
-    color: theme.palette.info.main,
-    borderColor: theme.palette.info.main,
+    color: theme.palette.sectionSkills.completedInterviews.color,
+    borderColor: theme.palette.sectionSkills.completedInterviews.borderColor,
+    backgroundColor: theme.palette.sectionSkills.completedInterviews.backgroundColor,
   }),
 };

@@ -1,4 +1,4 @@
-import FormSelect from './CountrySelect';
+import FormSelect from './FormSelect';
 import FormCheckbox from './FormCheckbox';
 import FormInput from './FormInput';
 import TextAreaInput from './TextAreaInput';

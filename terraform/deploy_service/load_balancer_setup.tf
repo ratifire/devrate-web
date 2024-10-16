@@ -10,7 +10,6 @@ resource "aws_lb" "front_ecs_alb" {
   }
 }
 
-
 resource "aws_lb_target_group" "http_ecs_tg_front" {
   name                 = "http-ecs-tg-front"
   port                 = var.front_port
@@ -30,7 +29,6 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
     matcher             = "200-305"
   }
 }
-
 
 resource "aws_lb_listener" "https_ecs_listener" {
   load_balancer_arn = aws_lb.front_ecs_alb.arn

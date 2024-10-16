@@ -10,8 +10,8 @@ import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleA
 import { useSelector } from 'react-redux';
 
 const SidebarEvent = ({ event }) => {
-  const { id, type, link, host, startTime } = event;
-  const { id: hostId, name, surname, status } = host;
+  const { id, type, link, host, startTime, participantDtos } = event;
+  const { id: hostId, name, surname } = host;
 
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { t } = useTranslation();
@@ -76,8 +76,14 @@ const SidebarEvent = ({ event }) => {
           {name} {surname}
         </Link>
       </Typography>
+      <Typography sx={styles.participant} variant='body2' component='div'>
+        {t('schedule.participant')}:{' '}
+        <Link component={RouterLink} to={`/profile/${participantDtos[0].id}`} sx={styles.participant_link}>
+          {participantDtos[0].name} {participantDtos[0].surname}
+        </Link>
+      </Typography>
       <Typography sx={styles.hostTitle} variant='caption3' component='div'>
-        {status}
+        {participantDtos[0].status}
       </Typography>
       <Box sx={styles.titleDateTimeBox}>
         <IconButton component='a' href={link} target='_blank' disabled={disableLink}>
@@ -105,6 +111,14 @@ SidebarEvent.propTypes = {
       status: PropTypes.string.isRequired,
     }).isRequired,
     startTime: PropTypes.string.isRequired,
+    participantDtos: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        surname: PropTypes.string.isRequired,
+        status: PropTypes.string.isRequired,
+      })
+    ),
   }).isRequired,
 };
 
