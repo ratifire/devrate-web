@@ -471,6 +471,8 @@ export const en = {
       edit: 'Edit',
     },
     schedule: {
+      deleteEventSuccessMessage:'Event was deleted',
+      deleteEventErrorMessage:'Event was not deleted due to some problems',
       title: 'Schedule',
       host: 'Host',
       participant: 'Participant',

@@ -1,17 +1,16 @@
 export const styles = {
   switcher: (theme) => ({
     '& .MuiPickersCalendarHeader-switchViewButton': {
-      color: theme.palette.mode==="dark" ? theme.palette.text.white:theme.palette.text.darkGrey,
-      
+      color: theme.palette.schedule.smallCalendar.switchViewButtonColor,
       '&:hover': {
-        backgroundColor: theme.palette.mode==="dark" ? theme.palette.primary[100] : theme.palette.primary[300],
+        backgroundColor: theme.palette.schedule.smallCalendar.switchViewButtonBackgroundColor,
         borderRadius: 1,
       },
     },
     '& .MuiPickersArrowSwitcher-button': {
-      color: theme.palette.mode==="dark" ? theme.palette.common.white : theme.palette.common.black,
-       '&:hover': {
-            backgroundColor: theme.palette.mode==="dark" ? theme.palette.primary[100] : theme.palette.primary[300],
+      color: theme.palette.schedule.smallCalendar.arrowSwitcherColor,
+        '&:hover': {
+         backgroundColor: theme.palette.schedule.smallCalendar.arrowSwitcherBackgroundColor,
           borderRadius: 1,
       },
     },

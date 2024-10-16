@@ -4,7 +4,12 @@ export const styles = {
     minHeight: '100%',
     fontSize: '14px',
   },
-  demoAppMain: (theme) => ({
+  demoAppMain: theme=>({
+    // display: "none",
+    flexGrow: '1',
+    padding: theme.spacing(4),
+  }),
+  demoAppMainOn: theme=>({
     flexGrow: '1',
     padding: theme.spacing(4),
   }),

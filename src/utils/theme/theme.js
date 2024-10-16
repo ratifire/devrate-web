@@ -248,7 +248,6 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#FFFFFF',
           },
         },
-
         iconBtn: {
           stepRight: {
             active: {
@@ -463,8 +462,38 @@ const getDesignTokens = (mode) => ({
           contrastText: '#ffffff',
           lime: '#DAFE22',
         },
+          schedule:{
+          backgroundColor:  '#3E3E40',
+          smallCalendar:{
+            textColor:"#FFFFFF",
+            backgroundColor: "#E0CCFF",
+            switchViewButtonColor:"#A9A9AA",
+            switchViewButtonBackgroundColor:"#CEB0FA",
+            arrowSwitcherColor: "#A9A9AA",
+            arrowSwitcherBackgroundColor: "#CEB0FA"
+          },
+            popup:{
+              backgroundColor: '#252527',
+              popupBorderColor: '#252527',
+              closeIconColor:'#E0CCFF',
+              userInfoBorderColor: "#A9A9AA",
+              titleColor: '#A9A9AA',
+              iconColor: '#E0CCFF'
+            },
+            sideBarEvent:{
+              backgroundColor: "#444446",
+              titleColor:  "#FFFFFF",
+              dateAndTimeColor: "#EFE6FD",
+              participant: '#ECECED',
+              hostTitle:"#ECECED",
+              hostLinkColor:"#CEB0FA",
+              participantlinkColor:"#CEB0FA",
+              cancelEventBtnColor: "#CEB0FA"
+            }
+},
       }
       : {
+
         border: {
           color: '#C5C5C6',
         },
@@ -614,6 +643,7 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#C5C5C6',
           },
         },
+
         tabsEl: {
           borderColor: '#A9A9AA',
           indicator: '#6200EE',
@@ -713,6 +743,36 @@ const getDesignTokens = (mode) => ({
           backgroundColor: '#F8F8F8',
           border: '1px solid ' + '#ECECED',
         },
+          schedule:{
+            backgroundColor:  '#F8F8F8',
+            smallCalendar:{
+              textColor:"#F8F8F8",
+              backgroundColor:"#A066FF",
+              switchViewButtonColor:"#000000",
+              switchViewButtonBackgroundColor:"#CEB0FA",
+              arrowSwitcherColor: "#000000",
+              arrowSwitcherBackgroundColor: "#CEB0FA"
+            },
+            popup:{
+              backgroundColor: "#ECECED",
+              popupBorderColor:"#ECECED",
+              closeIconColor: "#5900D9",
+              userInfoBorderColor:  "#C5C5C6",
+              titleColor: '#1D1D1D',
+              iconColor: '#5900D9'
+            },
+            sideBarEvent:{
+              backgroundColor: "#F8F8F8",
+              titleColor:  "#1D1D1D",
+              dateAndTimeColor:"#303032",
+              participant: "#444446",
+              hostTitle:"#444446",
+              hostLinkColor:"#6200EE",
+              participantlinkColor:"#6200EE",
+              cancelEventBtnColor: "#6200EE"
+              
+            },
+          },
         experienceSkillSect: {
           text: {
             junior: '#007CA3',
@@ -739,6 +799,7 @@ const getDesignTokens = (mode) => ({
           white: '#ffffff',
           titleGradient: 'linear-gradient(90deg, rgb(117, 98, 228), rgb(251, 147, 166))',
         },
+        
         text: {
           primary: '#1D1D1D',
           secondary: '#1D1D1D',
