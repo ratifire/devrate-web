@@ -17,6 +17,7 @@ export const styles = {
     ' > div': {
       borderRadius: 2,
       backgroundColor: theme.palette.pagesSections.backgroundColor,
+      backgroundImage: 'none',
     },
   }),
   baseUserInfo: {

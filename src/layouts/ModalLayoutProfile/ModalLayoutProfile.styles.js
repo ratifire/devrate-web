@@ -7,7 +7,7 @@ export const styles = {
   wrapper: (theme) => ({
     padding: theme.spacing(4),
     borderRadius: 2,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.modals.backgroundColor,
     position: 'relative',
     width: '100%',
     maxWidth: '732px',
@@ -16,10 +16,10 @@ export const styles = {
     position: 'absolute',
     top: '24px',
     right: '24px',
-    color: theme.palette.neutral['200'],
+    color: theme.palette.iconBtn.btnClose.color,
     borderRadius: 1,
     ':hover': {
-      backgroundColor: theme.palette.neutral['800'],
+      backgroundColor: theme.palette.iconBtn.btnClose.hoverColor,
     },
     svg: {
       fontSize: '18px',

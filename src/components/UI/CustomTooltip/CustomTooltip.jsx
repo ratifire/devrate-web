@@ -26,14 +26,14 @@ const CustomTooltip = styled(({ translate, className, children, title, ...props 
   );
 })(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: theme.palette.neutral[800],
+    backgroundColor: theme.palette.experienceSkillSect.tooltip.backgroundColor,
     color: theme.palette.text.primary,
     fontSize: '16px',
     padding: '2px 8px',
     borderRadius: theme.shape.borderRadius,
   },
   [`& .${tooltipClasses.arrow}`]: {
-    color: theme.palette.neutral[800],
+    color: theme.palette.experienceSkillSect.tooltip.color,
   },
 }));
 
