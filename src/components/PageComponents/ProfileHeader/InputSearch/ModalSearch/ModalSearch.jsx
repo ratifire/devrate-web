@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { DARK_THEME } from '../../../../../utils/constants/theme';
+import { DARK_THEME } from '../../../../../utils/constants/Theme/theme';
 import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 import UserAvatar from '../../../../UI/UserAvatar';
 import { DARK_NOT_FOUND, LIGHT_NOT_FOUND } from '../constants';

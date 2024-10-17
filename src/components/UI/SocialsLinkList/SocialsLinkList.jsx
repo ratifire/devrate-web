@@ -6,7 +6,7 @@ import whiteIcons from '../../../utils/constants/RightSection/whiteThemeIcons';
 import { SOCIAL_TYPES } from './SocialTypes';
 import { ensureProtocol } from '../../../utils/helpers/ensureProtocol';
 import { useSelector } from 'react-redux';
-import { DARK_THEME } from '../../../utils/constants/theme';
+import { DARK_THEME } from '../../../utils/constants/Theme/theme';
 
 const SocialsLinkList = ({ socials, componentStyles }) => {
   const {mode} = useSelector(state => state.theme)
