@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setButtonState } from '../../../../../redux/addButton/addButtonSlice';
 import { Link } from 'react-router-dom';
 import links from '../../../../../router/links';
-import { DARK_THEME } from '../../../../../utils/constants/theme';
+import { DARK_THEME } from '../../../../../utils/constants/Theme/theme';
 
 
 const ExperienceEmptyItem = ({ tab, profileType, imgUrl, isData }) => {

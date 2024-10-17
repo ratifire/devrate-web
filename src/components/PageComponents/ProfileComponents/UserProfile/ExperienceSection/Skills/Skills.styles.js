@@ -100,7 +100,7 @@ export const styles = {
     lineHeight: '22px',
     fontWeight: 500,
     letterSpacing: 0.1,
-    color: theme.palette.neutral['100'],
+    color: theme.palette.modals.select.selectedField.selected.color,
     borderBottom: `1px solid ${theme.palette.neutral['600']}`,
     paddingY: '12px',
     paddingX: theme.spacing(2),
