@@ -1,5 +1,6 @@
+/* eslint-disable */
 import { Box, Typography } from '@mui/material'
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next'
 import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../index'
 import { styles } from './InterviewerFeedback.styles'
@@ -20,18 +21,28 @@ const InterviewerFeedback = ({data}) => {
   const { data: { id: userId } } = useSelector(selectCurrentUser)
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
   const [createInterview] = useCreateInterviewMutation();
+  const formRef = useRef(null);
 
   const initialValues = {
     comment: '',
-    skills: skills.map(({ id, name }) => ({ id, name, value: 1 })),
   };
 
   const onSubmit = async (values) => {
+    const formData = new FormData(formRef.current);
+
+    const dynamicValues = skills.map((v) => {
+      return { id: v.id, mark: formData.get(v.name) };
+    });
+
+    console.log(dynamicValues);
+
     const body = {
       interviewFeedbackDetailId: feedbackId,
       comment: values.comment,
-      skills: values.skills.map(({ id, value }) => ({ id, mark: value }))
+      skills: dynamicValues,
     }
+
+    console.log(body);
 
     await createInterview({ reviewerId: userId, body });
   }
@@ -41,7 +52,7 @@ const InterviewerFeedback = ({data}) => {
     validationSchema: FeedbackModalSchema,
     onSubmit
   })
-
+  // console.log(skills);
   return (
       <Box sx={styles.container}>
         <Typography variant='h6'>{t('modal.interview.title')}</Typography>
@@ -51,7 +62,7 @@ const InterviewerFeedback = ({data}) => {
           date={date}
           time={time}
         />
-        <form onSubmit={formik.handleSubmit}>
+        <form ref={formRef} onSubmit={formik.handleSubmit}>
           <Box>
             <TextAreaInput
               name='comment'
@@ -70,11 +81,10 @@ const InterviewerFeedback = ({data}) => {
             <Box>
               <Typography variant='h6'>Soft Skills</Typography>
               <SliderAssessmentBox>
-                {skills.map(({ id }) => (
+                {skills.map(({ id, name }) => (
                   <SliderAssessment
                     key={id}
-                    id={id}
-                    formik={formik}
+                    title={name}
                   />
                 ))}
               </SliderAssessmentBox>
