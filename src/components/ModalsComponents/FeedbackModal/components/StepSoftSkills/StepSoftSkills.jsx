@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { TextAreaInput } from '../../../../FormsComponents/Inputs'
 import { SliderAssessment, SliderAssessmentBox } from '../../components'
 import { styles } from './StepSoftSkills.styles'
-import { TextAreaInput } from '../../../../FormsComponents/Inputs';
-import PropTypes from 'prop-types';
 
 const StepSoftSkills = ({ formik }) => {
   const { t } = useTranslation();
