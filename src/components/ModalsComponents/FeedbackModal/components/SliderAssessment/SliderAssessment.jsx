@@ -41,7 +41,7 @@ const SliderAssessment = ({ formik, id }) => {
       <Divider sx={styles.divider} />
     </Box>
   );
-}
+};
 
 SliderAssessment.propTypes = {
   formik: PropTypes.object,

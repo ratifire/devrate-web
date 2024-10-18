@@ -2,7 +2,7 @@ export const styles = {
   container: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.spacing(4)
+    gap: theme.spacing(4),
   }),
   stepBorder: (theme) => ({
     paddingX: '6px',
@@ -45,6 +45,6 @@ export const styles = {
   formBox: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.spacing(4)
+    gap: theme.spacing(4),
   }),
 };

@@ -1,3 +1,4 @@
-import CandidateFeedback from './CandidateFeedback';
+import CandidateFeedback from './CandidateFeedback'
 
-export { CandidateFeedback };
+export { CandidateFeedback }
+

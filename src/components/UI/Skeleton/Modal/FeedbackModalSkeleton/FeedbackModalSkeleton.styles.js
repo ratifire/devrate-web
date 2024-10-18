@@ -13,5 +13,5 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(4),
-  })
+  }),
 };

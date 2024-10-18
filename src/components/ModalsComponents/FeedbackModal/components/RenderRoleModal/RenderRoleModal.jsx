@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import { CandidateFeedback } from '../CandidateFeedback';
 import React from 'react';
-import { InterviewerFeedback } from '../InterviewerFeedback';
-import { FeedbackModalSkeleton } from '../../../../UI/Skeleton';
 import { ErrorComponent } from '../../../../UI/Exceptions';
+import { FeedbackModalSkeleton } from '../../../../UI/Skeleton';
+import { CandidateFeedback } from '../CandidateFeedback';
+import { InterviewerFeedback } from '../InterviewerFeedback';
 
 const RenderRoleModal = ({ role, data, isFetching, isError }) => {
   if (isFetching) {
@@ -11,16 +11,17 @@ const RenderRoleModal = ({ role, data, isFetching, isError }) => {
   }
 
   if (isError) {
-    return <ErrorComponent/>;
+    return <ErrorComponent />;
   }
 
-  const ModalElement = {
-    CANDIDATE: CandidateFeedback,
-    INTERVIEWER: InterviewerFeedback,
-  }[role] ?? ErrorComponent;
+  const ModalElement =
+    {
+      CANDIDATE: CandidateFeedback,
+      INTERVIEWER: InterviewerFeedback,
+    }[role] ?? ErrorComponent;
 
   return <ModalElement data={data} />;
-}
+};
 
 RenderRoleModal.propTypes = {
   role: PropTypes.string.isRequired,

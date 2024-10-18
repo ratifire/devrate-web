@@ -1,7 +1,7 @@
-import { Box } from '@mui/material'
-import PropTypes from 'prop-types'
-import React from 'react'
-import { styles } from './SliderAssessmentBox.styles'
+import { Box } from '@mui/material';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { styles } from './SliderAssessmentBox.styles';
 
 const SliderAssessmentBox = ({ children, size = 'small' }) => {
   return <Box sx={(theme) => styles.box(theme, size)}>{children}</Box>;

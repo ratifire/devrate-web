@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { SliderAssessment, SliderAssessmentBox } from '../../components';
-import PropTypes from 'prop-types';
 
 const StepHardSkills = ({ formik }) => {
-  const { values, } = formik;
+  const { values } = formik;
   const { skills } = values;
 
   return (
@@ -12,14 +12,10 @@ const StepHardSkills = ({ formik }) => {
       <Typography variant='h6'>Hard Skills</Typography>
       <SliderAssessmentBox size='large'>
         {skills
-        .filter(({type}) => type === 'HARD_SKILL')
-        .map(({id}) => (
-          <SliderAssessment
-            key={id}
-            id={id}
-            formik={formik}
-          />))
-        }
+          .filter(({ type }) => type === 'HARD_SKILL')
+          .map(({ id }) => (
+            <SliderAssessment key={id} id={id} formik={formik} />
+          ))}
       </SliderAssessmentBox>
     </Box>
   );

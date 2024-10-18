@@ -14,8 +14,8 @@ const feedbackModalSlice = createSlice({
     closeFeedbackModal: (state) => {
       state.open = false;
       state.feedbackId = null;
-    }
-  }
+    },
+  },
 });
 
 export const { openFeedbackModal, closeFeedbackModal } = feedbackModalSlice.actions;
