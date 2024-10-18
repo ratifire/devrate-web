@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Box, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InterviewerInfo, SliderComponent } from '../index';
 import { FIRST_STEP, LAST_STEP, NUMBER_OF_STEPS } from '../../constants';
@@ -46,18 +46,6 @@ const CandidateFeedback = ({ data }) => {
     validationSchema: FeedbackModalSchema,
     onSubmit
   })
-
-  const prevLink = useRef(formik)
-
-  useEffect(() => {
-    if (prevLink.current !== formik) {
-      console.log('Формик новый');
-    } else {
-      console.log('Формик старый');
-    }
-
-    prevLink.current = formik
-  }, [formik])
 
   return (
       <Box sx={styles.container}>
