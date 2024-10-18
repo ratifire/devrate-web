@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { formatDateTime } from '../../helpers';
-import useFormikInit from '../../hooks';
+import useFeedbackForm from '../../hooks';
 import { InterviewerInfo, StepSoftSkills } from '../index';
 import { styles } from './InterviewerFeedback.styles';
 
 const InterviewerFeedback = () => {
   const { t } = useTranslation();
-  const { interviewStartTime, name, status, surname, isError, formik } = useFormikInit();
+  const { interviewStartTime, name, status, surname, isError, formik } = useFeedbackForm();
 
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 

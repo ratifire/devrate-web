@@ -5,7 +5,7 @@ import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { FIRST_STEP, LAST_STEP } from '../../constants';
 import { formatDateTime } from '../../helpers';
-import useFormikInit from '../../hooks';
+import useFeedbackForm from '../../hooks';
 import { InterviewerInfo, SliderComponent } from '../index';
 import { InterviewStepper } from '../InterviewStepper';
 import { styles } from './CandidateFeedback.styles';
@@ -13,7 +13,7 @@ import { styles } from './CandidateFeedback.styles';
 const CandidateFeedback = () => {
   const [activeStep, setActiveStep] = useState(FIRST_STEP);
   const { t } = useTranslation();
-  const { formik, isError, interviewStartTime, surname, name, status } = useFormikInit();
+  const { formik, isError, interviewStartTime, surname, name, status } = useFeedbackForm();
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
   const handleNextStep = () => setActiveStep(LAST_STEP);

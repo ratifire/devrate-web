@@ -5,7 +5,7 @@ import { closeFeedbackModal } from '../../../../redux/feedback/feedbackModalSlic
 import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '../../../../redux/feedback/interviewApiSlice';
 import { FeedbackModalSchema } from '../../../../utils/valadationSchemas';
 
-const useFormikInit = () => {
+const useFeedbackForm = () => {
   const dispatch = useDispatch();
   const { feedbackId } = useSelector((state) => state.feedback);
   const {
@@ -54,4 +54,4 @@ const useFormikInit = () => {
   };
 };
 
-export default useFormikInit;
+export default useFeedbackForm;

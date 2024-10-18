@@ -1,3 +1,3 @@
-import useFormikInit from './useFormikInit';
+import useFeedbackForm from './useFeedbackForm';
 
-export default useFormikInit;
+export default useFeedbackForm;
