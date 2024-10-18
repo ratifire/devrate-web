@@ -2,11 +2,11 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { styles } from './InterviewerInfo.styles';
 
-const InterviewerInfo = ({ name, position, date, time }) => {
+const InterviewerInfo = memo(({ name, position, date, time }) => {
   const { t } = useTranslation();
 
   return (
@@ -29,7 +29,9 @@ const InterviewerInfo = ({ name, position, date, time }) => {
       </Box>
     </Box>
   );
-};
+});
+
+InterviewerInfo.displayName = 'InterviewerInfo';
 
 InterviewerInfo.propTypes = {
   name: PropTypes.string.isRequired,
