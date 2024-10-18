@@ -1,4 +1,4 @@
-import { Box, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
 import React, { useMemo, useState } from 'react';
@@ -7,12 +7,12 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import { useCreateInterviewMutation } from '../../../../../redux/feedback/interviewApiSlice';
 import { FeedbackModalSchema } from '../../../../../utils/valadationSchemas';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import CustomStepIcon from '../../../ProfileModals/ModalUserInfo/StepIconComponent';
-import { FIRST_STEP, LAST_STEP, NUMBER_OF_STEPS } from '../../constants';
+import { FIRST_STEP, LAST_STEP } from '../../constants';
 import { formatDateTime } from '../../helpers';
 import { InterviewerInfo, SliderComponent } from '../index';
 import { styles } from './CandidateFeedback.styles';
+import { InterviewStepper } from '../InterviewStepper';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
 
 const CandidateFeedback = ({ data }) => {
   const [activeStep, setActiveStep] = useState(1);
@@ -55,13 +55,7 @@ const CandidateFeedback = ({ data }) => {
   return (
     <Box sx={styles.container}>
       <Typography variant='h6'>{t('modal.interview.title')}</Typography>
-      <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
-        {NUMBER_OF_STEPS.map((label) => (
-          <Step sx={styles.step} key={label}>
-            <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label}></StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+      <InterviewStepper activeStep={activeStep}/>
       <InterviewerInfo name={`${name} ${surname}`} position={status} date={date} time={time} />
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.formBox}>

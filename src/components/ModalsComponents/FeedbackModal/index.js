@@ -1,3 +1,4 @@
-import FeedbackModal from './FeedbackModal';
+import FeedbackModal from './FeedbackModal'
 
-export { FeedbackModal };
+export { FeedbackModal }
+
