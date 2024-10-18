@@ -8,10 +8,9 @@ import { closeFeedbackModal } from '../../../../../redux/feedback/feedbackModalS
 import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '../../../../../redux/feedback/interviewApiSlice';
 import { FeedbackModalSchema } from '../../../../../utils/valadationSchemas';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { formatDateTime } from '../../helpers';
-import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../index';
+import { InterviewerInfo, StepSoftSkills } from '../index';
 import { styles } from './InterviewerFeedback.styles';
 
 const InterviewerFeedback = () => {
@@ -24,6 +23,7 @@ const InterviewerFeedback = () => {
     participant: { name, status, surname },
     skills,
   } = data;
+
   const {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
@@ -32,7 +32,7 @@ const InterviewerFeedback = () => {
 
   const initialValues = {
     comment: '',
-    skills: skills.map(({ id, name }) => ({ id, name, value: 1 })),
+    skills: skills.map(({ id, name, type }) => ({ id, name, type, value: 1 })),
   };
 
   const onSubmit = async (values) => {
@@ -64,29 +64,8 @@ const InterviewerFeedback = () => {
       <Typography variant='h6'>{t('modal.interview.title')}</Typography>
       <InterviewerInfo name={`${name} ${surname}`} position={status} date={date} time={time} />
       <form onSubmit={formik.handleSubmit}>
-        <Box>
-          <TextAreaInput
-            name='comment'
-            placeholder={t('modal.interview.placeholder')}
-            type='text'
-            label={t('modal.interview.label')}
-            required
-            variant='outlined'
-            rows={2}
-            handleChange={formik.handleChange}
-            value={formik.values.comment}
-            handleBlur={formik.handleBlur}
-            helperText={formik.touched.comment && formik.errors.comment}
-            error={formik.touched.comment && Boolean(formik.errors.comment)}
-          />
-          <Box>
-            <Typography variant='h6'>Soft Skills</Typography>
-            <SliderAssessmentBox>
-              {skills.map(({ id }) => (
-                <SliderAssessment key={id} id={id} formik={formik} />
-              ))}
-            </SliderAssessmentBox>
-          </Box>
+        <Box sx={styles.formBox}>
+          <StepSoftSkills formik={formik} />
         </Box>
         <ButtonDef
           variant='contained'
