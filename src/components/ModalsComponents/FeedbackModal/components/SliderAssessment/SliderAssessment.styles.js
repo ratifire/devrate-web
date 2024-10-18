@@ -64,9 +64,9 @@ export const styles = {
       transform: 'translateY(-80%) scale(1)',
     },
   }),
-  divider: {
-    borderColor: '#69696B',
-  },
+  divider: (theme) => ({
+    borderColor: theme.palette.sliderAssessment.divider,
+  }),
   left: (theme) => ({
     position: 'absolute',
     width: '25px',

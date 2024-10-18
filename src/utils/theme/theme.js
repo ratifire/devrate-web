@@ -355,6 +355,7 @@ const getDesignTokens = (mode) => ({
           backgroundColor: '#3E3E40',
           border: 'transparent',
           grade: '#C5C5C6',
+          divider: '#69696B',
           tooltip: {
             color: '#C5C5C6',
             backgroundColor: '#3E3E40',
@@ -718,6 +719,7 @@ const getDesignTokens = (mode) => ({
           backgroundColor: '#F8F8F8',
           border: '1px solid ' + '#ECECED',
           grade: '#1D1D1D',
+          divider: '#C5C5C6',
           tooltip: {
             color: '#1D1D1D',
             backgroundColor: '#A9A9AA',
