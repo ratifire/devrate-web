@@ -8,7 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 const SkillsList = ({ data, length }) => {
   const { specializationName, mainSpecialization, masteryName, hardSkills } = data;
-  const flexValue = length === 1 ? (hardSkills.length === 1) ? 'flex: 0 1 100%' : 'flex: 0 1 calc(50% - 10px)' : 'flex: 0 1 100%';
+  const flexValue = length === 1 ? (hardSkills.length === 1) ? { flex: '0 1 100%' } : { flex: '0 1 calc(50% - 10px)' } : { flex: '0 1 100%' };
   const level = masteryName || 'N/A';
   
   return (

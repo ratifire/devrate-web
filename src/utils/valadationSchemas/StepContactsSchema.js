@@ -1,17 +1,22 @@
 import * as Yup from 'yup'
 
+const linkedinRegex = /^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9-]+\/?$/;
+const githubRegex = /^https:\/\/github\.com\/[a-zA-Z0-9-]+\/?$/;
+const behanceRegex = /^https:\/\/www\.behance\.net\/[a-zA-Z0-9-]+\/?$/;
+const telegramRegex = /^https:\/\/t\.me\/[a-zA-Z0-9_]+\/?$/;
+
 export const StepContactsSchema = Yup.object().shape({
   telegram: Yup.string()
-  .matches(/^(https?:\/\/t\.me\/|@|b\d{5})/, 'please type correct URL, username')
+  .matches(telegramRegex, 'please type correct URL, username')
   .optional(),
   linkedIn: Yup.string()
-    .matches(/linkedin/, 'please type correct URL')
+    .matches(linkedinRegex, 'please type correct URL')
     .optional(),
   gitHub: Yup.string()
-    .matches(/github/, 'please type correct URL')
+    .matches(githubRegex, 'please type correct URL')
     .optional(),
   behance: Yup.string()
-    .matches(/behance/, 'please type correct URL')
+    .matches(behanceRegex, 'please type correct URL')
     .optional(),
   mail: Yup.string()
     .email('please type correct Email')
