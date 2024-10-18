@@ -4,7 +4,7 @@ import getDesignTokens from '../src/utils/theme/theme';
 import i18n from '../src/utils/i18n';
 import React, { Suspense, useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { DARK_THEME, LIGHT_THEME } from '../src/utils/constants/theme';
+import { DARK_THEME, LIGHT_THEME } from '../src/utils/constants/Theme/theme';
 
 const withI18next = (Story, context) => {
   const { locale } = context.globals;
