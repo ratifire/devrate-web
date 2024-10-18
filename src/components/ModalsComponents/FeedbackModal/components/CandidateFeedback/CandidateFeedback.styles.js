@@ -7,7 +7,7 @@ export const styles = {
   sendBox: (theme) => ({
     display: 'flex',
     gap: theme.spacing(3),
-    alignSelf: 'end',
+    alignSelf: 'start',
     maxWidth: '472px',
     width: '100%',
   }),
