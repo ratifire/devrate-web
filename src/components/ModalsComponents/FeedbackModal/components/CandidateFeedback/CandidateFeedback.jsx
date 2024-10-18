@@ -18,7 +18,7 @@ import { ErrorComponent } from '../../../../UI/Exceptions';
 const CandidateFeedback = () => {
   const { feedbackId } = useSelector((state) => state.feedback);
   const { data } = useGetInterviewByIdQuery({ id: feedbackId }, { skip: !feedbackId });
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(FIRST_STEP);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const {
@@ -30,8 +30,8 @@ const CandidateFeedback = () => {
   const [createInterview, { isError }] = useCreateInterviewMutation();
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
-  const handleNextStep = () => setActiveStep((prev) => prev + 2);
-  const handlePrevStep = () => setActiveStep((prev) => prev - 2);
+  const handleNextStep = () => setActiveStep(LAST_STEP);
+  const handlePrevStep = () => setActiveStep(FIRST_STEP);
 
   const initialValues = {
     comment: '',
