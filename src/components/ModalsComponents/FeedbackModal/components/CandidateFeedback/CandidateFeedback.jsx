@@ -47,7 +47,7 @@ const CandidateFeedback = () => {
 
     const result = await createInterview({ reviewerId: userId, body });
 
-    if (result.data) {
+    if (!result.error) {
       dispatch(closeFeedbackModal());
     }
   };
@@ -55,7 +55,7 @@ const CandidateFeedback = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: FeedbackModalSchema,
-    onSubmit,
+    onSubmit
   });
 
   if (isError) {

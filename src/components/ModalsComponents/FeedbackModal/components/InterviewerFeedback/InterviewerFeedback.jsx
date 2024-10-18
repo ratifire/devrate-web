@@ -44,7 +44,7 @@ const InterviewerFeedback = () => {
 
     const result = await createInterview({ reviewerId: userId, body });
 
-    if (result.data) {
+    if (!result.error) {
       dispatch(closeFeedbackModal());
     }
   };
@@ -54,7 +54,7 @@ const InterviewerFeedback = () => {
     validationSchema: FeedbackModalSchema,
     onSubmit,
   });
-
+  
   if (isError) {
     return <ErrorComponent />;
   }
