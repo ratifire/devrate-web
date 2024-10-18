@@ -38,7 +38,7 @@ const router = createBrowserRouter([
           {
             path: navigationLinks.specializations,
             element: <SpecializationPage />,
-          },
+          }
         ],
       },
     ],

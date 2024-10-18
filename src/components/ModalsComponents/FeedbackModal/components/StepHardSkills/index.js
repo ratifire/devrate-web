@@ -1,3 +1,3 @@
-import StepHardSkills from './StepHardSkills';
+import StepHardSkills from './StepHardSkills'
 
-export { StepHardSkills };
+export { StepHardSkills }

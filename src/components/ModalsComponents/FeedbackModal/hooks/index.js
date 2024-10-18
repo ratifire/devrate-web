@@ -1,3 +1,3 @@
-import useCloseModal from './useCloseModal';
+import useFeedbackForm from './useFeedbackForm';
 
-export { useCloseModal };
+export default useFeedbackForm;

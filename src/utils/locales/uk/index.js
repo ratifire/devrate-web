@@ -39,7 +39,10 @@ export const uk = {
         btnSend: 'Надіслати',
         btnNext: 'Далі',
         btnBack: 'Назад',
-        interviewer: 'Інтерв’юер',
+        interviewer: 'Кандидат',
+        required: "Це поле обов'язкове до заповнення",
+        long: 'Це поле занадто довге',
+        short: 'Це поле занадто коротке',
       },
       achievement: {
         title: 'Досягнення',
