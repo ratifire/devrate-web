@@ -1,7 +1,7 @@
-import { Box, Divider, Slider, Typography } from '@mui/material';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { styles } from './SliderAssessment.styles';
+import { Box, Divider, Slider, Typography } from '@mui/material'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { styles } from './SliderAssessment.styles'
 
 const SliderAssessment = ({ formik, id }) => {
   const values = formik.values.skills;

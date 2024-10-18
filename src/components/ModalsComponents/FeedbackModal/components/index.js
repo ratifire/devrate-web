@@ -1,17 +1,15 @@
 import { InterviewerInfo } from './InterviewerInfo'
+import { RoleBasedFeedbackModal } from './RoleBasedFeedbackModal'
 import { SliderAssessment } from './SliderAssessment'
 import { SliderAssessmentBox } from './SliderAssessmentBox'
 import { SliderComponent } from './SliderComponent'
 import { StepHardSkills } from './StepHardSkills'
 import { StepSoftSkills } from './StepSoftSkills'
-import { RoleBasedFeedbackModal } from './RoleBasedFeedbackModal';
 
 export {
-  InterviewerInfo,
-  SliderAssessment,
+  InterviewerInfo, RoleBasedFeedbackModal, SliderAssessment,
   SliderAssessmentBox,
   SliderComponent,
   StepHardSkills,
-  StepSoftSkills,
-  RoleBasedFeedbackModal,
+  StepSoftSkills
 }

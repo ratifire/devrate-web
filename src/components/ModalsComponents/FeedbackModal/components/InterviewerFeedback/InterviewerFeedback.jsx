@@ -4,15 +4,15 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { closeFeedbackModal } from '../../../../../redux/feedback/feedbackModalSlice';
 import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '../../../../../redux/feedback/interviewApiSlice';
 import { FeedbackModalSchema } from '../../../../../utils/valadationSchemas';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { TextAreaInput } from '../../../../FormsComponents/Inputs';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 import { formatDateTime } from '../../helpers';
 import { InterviewerInfo, SliderAssessment, SliderAssessmentBox } from '../index';
 import { styles } from './InterviewerFeedback.styles';
-import { closeFeedbackModal } from '../../../../../redux/feedback/feedbackModalSlice';
-import { ErrorComponent } from '../../../../UI/Exceptions';
 
 const InterviewerFeedback = () => {
   const { feedbackId } = useSelector((state) => state.feedback);
@@ -54,7 +54,7 @@ const InterviewerFeedback = () => {
     validationSchema: FeedbackModalSchema,
     onSubmit,
   });
-  
+
   if (isError) {
     return <ErrorComponent />;
   }

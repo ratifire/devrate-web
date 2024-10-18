@@ -4,16 +4,16 @@ import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { closeFeedbackModal } from '../../../../../redux/feedback/feedbackModalSlice';
 import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '../../../../../redux/feedback/interviewApiSlice';
 import { FeedbackModalSchema } from '../../../../../utils/valadationSchemas';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 import { FIRST_STEP, LAST_STEP } from '../../constants';
 import { formatDateTime } from '../../helpers';
 import { InterviewerInfo, SliderComponent } from '../index';
-import { styles } from './CandidateFeedback.styles';
 import { InterviewStepper } from '../InterviewStepper';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { closeFeedbackModal } from '../../../../../redux/feedback/feedbackModalSlice';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { styles } from './CandidateFeedback.styles';
 
 const CandidateFeedback = () => {
   const { feedbackId } = useSelector((state) => state.feedback);
@@ -26,7 +26,9 @@ const CandidateFeedback = () => {
     participant: { name, status, surname },
     skills,
   } = data;
-  const { data: { id: userId } } = useSelector(selectCurrentUser);
+  const {
+    data: { id: userId },
+  } = useSelector(selectCurrentUser);
   const [createInterview, { isError }] = useCreateInterviewMutation();
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
@@ -55,7 +57,7 @@ const CandidateFeedback = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: FeedbackModalSchema,
-    onSubmit
+    onSubmit,
   });
 
   if (isError) {
@@ -65,7 +67,7 @@ const CandidateFeedback = () => {
   return (
     <Box sx={styles.container}>
       <Typography variant='h6'>{t('modal.interview.title')}</Typography>
-      <InterviewStepper activeStep={activeStep}/>
+      <InterviewStepper activeStep={activeStep} />
       <InterviewerInfo name={`${name} ${surname}`} position={status} date={date} time={time} />
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.formBox}>

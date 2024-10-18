@@ -1,9 +1,9 @@
 import { Step, StepConnector, StepLabel, Stepper } from '@mui/material';
-import { styles } from './InterviewStepper.styles';
-import { NUMBER_OF_STEPS } from '../../constants';
-import CustomStepIcon from '../../../ProfileModals/ModalUserInfo/StepIconComponent';
-import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import React, { memo } from 'react';
+import CustomStepIcon from '../../../ProfileModals/ModalUserInfo/StepIconComponent';
+import { NUMBER_OF_STEPS } from '../../constants';
+import { styles } from './InterviewStepper.styles';
 
 const InterviewStepper = memo(({ activeStep }) => {
   return (
@@ -14,7 +14,7 @@ const InterviewStepper = memo(({ activeStep }) => {
         </Step>
       ))}
     </Stepper>
-  )
+  );
 });
 
 InterviewStepper.propTypes = {

@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { ErrorComponent } from '../../../../UI/Exceptions';
-import { FeedbackModalSkeleton } from '../../../../UI/Skeleton';
-import { CandidateFeedback } from '../CandidateFeedback';
-import { InterviewerFeedback } from '../InterviewerFeedback';
+import PropTypes from 'prop-types'
+import React from 'react'
+import { ErrorComponent } from '../../../../UI/Exceptions'
+import { FeedbackModalSkeleton } from '../../../../UI/Skeleton'
+import { CandidateFeedback } from '../CandidateFeedback'
+import { InterviewerFeedback } from '../InterviewerFeedback'
 
 const RoleBasedFeedbackModal = ({ role, isFetching, isError }) => {
   if (isFetching) {
