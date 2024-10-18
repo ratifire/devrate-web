@@ -14,13 +14,6 @@ const SliderComponent = ({ slide, formik }) => {
 
 SliderComponent.propTypes = {
   slide: PropTypes.number.isRequired,
-  skills: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-    })
-  ).isRequired,
   formik: PropTypes.object.isRequired,
 };
 
