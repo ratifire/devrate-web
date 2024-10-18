@@ -1,15 +1,15 @@
-import { Box, Typography } from '@mui/material'
-import PropTypes from 'prop-types'
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { TextAreaInput } from '../../../../FormsComponents/Inputs'
-import { SliderAssessment, SliderAssessmentBox } from '../../components'
-import { styles } from './StepSoftSkills.styles'
+import { Box, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { TextAreaInput } from '../../../../FormsComponents/Inputs';
+import { SliderAssessment, SliderAssessmentBox } from '../../components';
+import { styles } from './StepSoftSkills.styles';
 
 const StepSoftSkills = ({ formik }) => {
   const { t } = useTranslation();
-  const { values } = formik;
-  const { skills, comment } = values;
+  const { skills, comment } = formik.values;
+  const softSkills = skills.filter(({ type }) => type === 'SOFT_SKILL');
 
   return (
     <>
@@ -32,15 +32,9 @@ const StepSoftSkills = ({ formik }) => {
       <Box>
         <Typography variant='h6'>Soft Skills</Typography>
         <SliderAssessmentBox>
-          {skills
-            .filter(({type}) => type === 'SOFT_SKILL')
-            .map(({id}) => (
-              <SliderAssessment
-                key={id}
-                id={id}
-                formik={formik}
-              />))
-          }
+          {softSkills.map(({ id }) => (
+            <SliderAssessment key={id} id={id} formik={formik} />
+          ))}
         </SliderAssessmentBox>
       </Box>
     </>

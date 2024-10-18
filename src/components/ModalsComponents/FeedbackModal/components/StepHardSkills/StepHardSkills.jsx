@@ -4,18 +4,16 @@ import React from 'react';
 import { SliderAssessment, SliderAssessmentBox } from '../../components';
 
 const StepHardSkills = ({ formik }) => {
-  const { values } = formik;
-  const { skills } = values;
+  const skills = formik.values.skills;
+  const hardSkills = skills.filter(({ type }) => type === 'HARD_SKILL');
 
   return (
     <Box>
       <Typography variant='h6'>Hard Skills</Typography>
       <SliderAssessmentBox size='large'>
-        {skills
-          .filter(({ type }) => type === 'HARD_SKILL')
-          .map(({ id }) => (
-            <SliderAssessment key={id} id={id} formik={formik} />
-          ))}
+        {hardSkills.map(({ id }) => (
+          <SliderAssessment key={id} id={id} formik={formik} />
+        ))}
       </SliderAssessmentBox>
     </Box>
   );
