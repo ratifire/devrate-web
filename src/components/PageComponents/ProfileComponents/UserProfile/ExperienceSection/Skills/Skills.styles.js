@@ -16,14 +16,16 @@ export const styles = {
     flex: '0 1 max(679px)',
     paddingY: theme.spacing(3),
     paddingX: theme.spacing(4),
-    backgroundColor: theme.palette.neutral['600'],
+    backgroundColor: theme.palette.sliderAssessment.backgroundColor,
+    border: theme.palette.sliderAssessment.border,
     borderRadius: 2,
   }),
   skillBg:(theme) => ({
     flex: '0 1 max(679px)',
     paddingY: theme.spacing(3),
     paddingX: theme.spacing(4),
-    backgroundColor: theme.palette.neutral['600'],
+    backgroundColor: theme.palette.sliderAssessment.backgroundColor2,
+    border: theme.palette.sliderAssessment.border,
     borderRadius: 2,
     position: 'relative',
     ':before':{
@@ -34,7 +36,7 @@ export const styles = {
       left: '0',
       width: '100%',
       height: '100%',
-      background: `${theme.palette.neutral['900']}BD`,
+      background: theme.palette.sliderAssessment.backgroundColor2,
     },
   }),
   wrapperSearch: {
@@ -55,7 +57,7 @@ export const styles = {
     gridGap: theme.spacing(2),
   }),
   star: (theme) => ({
-    color: theme.palette.primary['200'],
+    color: theme.palette.experienceSkillSect.star,
   }),
   select:(theme) => ({
     ' .MuiSelect-select.MuiSelect-standard.MuiInputBase-input.MuiInput-input': {
@@ -81,12 +83,12 @@ export const styles = {
     },
   }),
   selectPaper:(theme)=>({
-    backgroundColor: theme.palette.neutral['800'],
+    backgroundColor: theme.palette.modals.select.selectedField.backgroundColor,
     paddingX: theme.spacing(2),
     ' .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected':{
-      backgroundColor: theme.palette.neutral['800'],
+      backgroundColor: theme.palette.modals.select.selectedField.selected.backgroundColor,
       ':hover': {
-        backgroundColor: theme.palette.neutral['800'],
+        backgroundColor: theme.palette.modals.select.selectedField.hover,
       },
     },
   }),
@@ -98,7 +100,7 @@ export const styles = {
     lineHeight: '22px',
     fontWeight: 500,
     letterSpacing: 0.1,
-    color: theme.palette.neutral['100'],
+    color: theme.palette.modals.select.selectedField.selected.color,
     borderBottom: `1px solid ${theme.palette.neutral['600']}`,
     paddingY: '12px',
     paddingX: theme.spacing(2),
@@ -106,11 +108,11 @@ export const styles = {
       borderBottom: `1px solid transparent`,
     },
     ':hover': {
-      backgroundColor: theme.palette.neutral['800'],
+      backgroundColor: theme.palette.modals.select.selectedField.hover,
     },
   }),
   selectItemStar: (theme) =>({
-    color: theme.palette.primary['200'],
+    color: theme.palette.experienceSkillSect.star,
     fontSize: '14px',
   }),
   list: {
@@ -136,23 +138,23 @@ export const styles = {
       width: 6,
     },
     '&::-webkit-scrollbar-track': (theme) => ({
-      backgroundColor: theme.palette.neutral['800'],
+      backgroundColor: theme.palette.scroll.scrollWrapp.backgroundColor,
       borderRadius: 8,
     }),
     '&::-webkit-scrollbar-thumb': (theme) => ({
       borderRadius: 6,
-      backgroundColor: theme.palette.common.white,
+      backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
     }),
   },
   text: (theme) => ({
     '&.JUNIOR': {
-      color: theme.palette.info.main,
+      color: theme.palette.experienceSkillSect.text.junior,
     },
     '&.MIDDLE': {
-      color: theme.palette.info.azure,
+      color: theme.palette.experienceSkillSect.text.middle,
     },
     '&.SENIOR': {
-      color: theme.palette.info.lime,
+      color: theme.palette.experienceSkillSect.text.senior,
     },
     '>span': {
       textTransform: 'lowercase',
@@ -170,9 +172,9 @@ export const styles = {
     gridGap: theme.spacing(2),
     fontSize: '14px',
     padding: '7px 10px',
-    color: theme.palette.primary['100'],
+    color: theme.palette.iconBtn.search.color,
     ' svg': {
-      color: theme.palette.primary['200'],
+      color: theme.palette.iconBtn.search.svgColor,
     },
   }),
   textArea:(theme)=> ({

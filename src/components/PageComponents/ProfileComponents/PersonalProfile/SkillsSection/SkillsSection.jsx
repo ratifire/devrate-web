@@ -37,7 +37,7 @@ const SkillsSection = () => {
         </Typography>
       </Box>
       <Box sx={styles.softSkills}>
-        <Typography variant="subtitle1" sx={styles.skillsText}>
+        <Typography variant="h6" sx={styles.skillsText}>
           {t('profile.skills.softSkills')}:
         </Typography>
         <Rating

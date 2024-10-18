@@ -3,8 +3,9 @@ const styles = {
     width: '100%',
     marginBottom: theme.spacing(4),
     padding: theme.spacing(3),
-    backgroundColor: theme.palette.sliderAssessment.darkGray,
+    backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     borderRadius: 2,
+    border: theme.palette.sliderAssessment.border,
     wordBreak: 'break-word',
     overflowWrap: 'break-word'
   }),

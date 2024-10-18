@@ -3,14 +3,31 @@ import { styles } from './FormCheckbox.styles';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import {CustomCheckboxIcon, CustomCheckedIcon} from '../../../UI/CustomCheckbox/CustomCheckbox';
 
 const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, workExperience }) => {
   const { t } = useTranslation();
+
+
+
+  const textStyles = workExperience ? styles.newsAgreementTextWorkExperience : styles.newsAgreementText;
   return (
     <FormControl error={error} variant='standard'>
       <FormControlLabel
-        control={<Checkbox checked={checked} onChange={changeHandler} name={name} sx={workExperience? styles.checkBoxWorkExperience : styles.checkBox} />}
-        label={<Typography sx={workExperience ? styles.newsAgreementTextWorkExperience : styles.newsAgreementText}>{t(label)}</Typography>}
+        control={
+        <Checkbox
+          icon={<CustomCheckboxIcon />}
+          checkedIcon={<CustomCheckedIcon />}
+          checked={checked}
+          onChange={changeHandler}
+          name={name}
+        />}
+        label={
+        <Typography
+          sx={textStyles}
+        >
+          {t(label)}
+        </Typography>}
       />
       <FormHelperText>{t(helperText)}</FormHelperText>
     </FormControl>

@@ -39,7 +39,10 @@ const RightSection = () => {
             {t('profile.right.contact')}
           </Typography>
           <Box>
-            <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenInfo}>
+            <IconButton
+              sx={styles.btnIcon}
+              aria-label='Edit user information'
+              onClick={handleOpenInfo}>
               <EditIcon />
             </IconButton>
           </Box>
@@ -58,7 +61,10 @@ const RightSection = () => {
             {t('profile.right.languages')}
           </Typography>
           <Box>
-            <IconButton sx={styles.btnIcon} aria-label='Edit user information' onClick={handleOpenLanguage}>
+            <IconButton
+              sx={styles.btnIcon}
+              aria-label='Edit user information'
+              onClick={handleOpenLanguage}>
               <EditIcon />
             </IconButton>
           </Box>

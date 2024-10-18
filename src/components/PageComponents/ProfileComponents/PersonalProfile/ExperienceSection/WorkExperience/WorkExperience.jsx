@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
+import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 
-const WorkExperience = ({ tab, profileType, imgUrl }) => {
+const WorkExperience = ({ tab }) => {
   const { id } = useSelector((state) => state.auth.user.data);
   const { data: workExperiencesData } = useGetWorkExperienceByUserIdQuery(id);
 
@@ -21,8 +22,14 @@ const WorkExperience = ({ tab, profileType, imgUrl }) => {
 
 
   if (!workExperiencesData || workExperiencesData.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} isData={!workExperiencesData} />;
+    return <EmptyExperienceTab
+      tab={tab}
+      profileType='personal'
+      imgUrl={emptyPersonalTabsPictures.emptyWorkExperiencePic}
+      isData={!workExperiencesData} />;
   }
+
+
 
   return (
       <Box>
@@ -49,8 +56,6 @@ const WorkExperience = ({ tab, profileType, imgUrl }) => {
 
 WorkExperience.propTypes = {
   tab: PropTypes.string.isRequired,
-  profileType: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired
 }
 
 export default WorkExperience;

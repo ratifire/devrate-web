@@ -31,12 +31,12 @@ const styles = {
     },
   }),
   iconBtn: (theme) => ({
-    color: theme.palette.action.hover,
+    color: theme.palette.iconBtn.createBtn.color,
     borderRadius: 1,
     transition: 'background-color 0.3s, transform 0.3s',
     ':hover': {
-      backgroundColor: `${theme.palette.primary['200']}29`,
-      color: theme.palette.action.active,
+      backgroundColor: theme.palette.iconBtn.createBtn.hover.backgroundColor,
+      color: theme.palette.iconBtn.createBtn.hover.color,
     },
   }),
   experienceItemContainer: (theme) => ({

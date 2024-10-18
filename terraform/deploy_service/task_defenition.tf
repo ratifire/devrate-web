@@ -9,6 +9,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       cpu               = 0,
       memory            = 1800,
       memoryReservation = 1800,
+      stopTimeout       = 10,
       healthCheck : {
         "command" : ["CMD-SHELL", "curl -f https://${var.domain_name}/ || exit 1"],
         "interval" : 120,
@@ -28,7 +29,15 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       environment = [
         {
           name  = "ACTIVE_PROFILE",
-          value = "dev"
+          value = "production"
+        },
+        {
+          name  = "REACT_APP_API_URL",
+          value = "https://server.devrate.org"
+        },
+        {
+          name  = "REACT_APP_WS_URL",
+          value = "wss://server.devrate.org"
         }
       ],
       mountPoints = [],

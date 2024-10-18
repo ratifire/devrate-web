@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { styles } from './RightSection.style';
+import { styles } from './RightSection.styles';
 import SocialsLinkList from '../../../../UI/SocialsLinkList';
 import { useTranslation } from 'react-i18next';
 import LanguagesList from '../../../../UI/LanguagesList';
@@ -18,7 +18,10 @@ const RightSection = ({id}, profileType) => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between' }}>
           <Typography variant="h6" sx={styles.title}>
             {t('profile.right.contact')}
           </Typography>

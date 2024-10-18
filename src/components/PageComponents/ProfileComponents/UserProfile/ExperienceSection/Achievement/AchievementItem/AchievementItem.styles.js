@@ -2,7 +2,8 @@ const styles = {
   achievementItemContainer: (theme) => ({
     width: '100%',
     padding: theme.spacing(3),
-    backgroundColor: theme.palette.sliderAssessment.darkGray,
+    backgroundColor: theme.palette.sliderAssessment.backgroundColor,
+    border: theme.palette.sliderAssessment.border,
     borderRadius: 2,
     height: '184px',
   }),
@@ -29,7 +30,7 @@ const styles = {
     color: theme.palette.text.primary,
   }),
   link: (theme) => ({
-    color: theme.palette.action.hover,
+    color: theme.palette.iconBtn.link.color,
     width: '40px',
     height: '40px',
     display: 'flex',
@@ -39,9 +40,9 @@ const styles = {
     borderRadius: 1,
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
-      backgroundColor: `${theme.palette.primary['200']}29`,
+      color: theme.palette.iconBtn.link.hover.color,
+      backgroundColor: theme.palette.iconBtn.link.hover.backgroundColor,
       borderRadius: '4px',
-      color: theme.palette.action.active,
       cursor: 'pointer',
     },
   }),

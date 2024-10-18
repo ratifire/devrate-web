@@ -1,0 +1,58 @@
+# This workflow will build and push a new container image to Amazon ECR,
+# and then will deploy a new task definition to Amazon ECS.
+
+name: S3_Deploy
+
+on:
+  workflow_dispatch:
+
+env:
+  AWS_REGION: 'eu-north-1'                    # set this to your preferred AWS region, e.g. eu-north-1
+  REACT_APP_API_URL: 'https://server.devrate.org'
+  REACT_APP_WS_URL: 'wss://server.devrate.org'
+
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.11.0]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Set environment variables with defaults
+        run: |
+          echo "REACT_APP_API_URL=${{ env.REACT_APP_API_URL }}" >> .env
+          echo "REACT_APP_WS_URL=${{ env.REACT_APP_WS_URL }}" >> .env
+
+      - run: npm install
+      - run: npm run build --if-present
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync S3
+        uses: aws-actions/s3-sync-action@v0.5.1
+        with:
+          bucket: devrate.org
+          source-dir: ./build  # Update based on your build output directory
+        env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_REGION: ${{ env.AWS_REGION }}

@@ -8,10 +8,11 @@ import { iconsEducation } from '../../../../../../utils/constants/Experience/ico
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import PropTypes from 'prop-types';
 import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
-import {loopedObjValues} from '../../../../../../utils/helpers/loopedObjValues';
+import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
+import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 
 
-const Education = ({ tab, profileType, imgUrl }) => {
+const Education = ({ tab }) => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: educationsData, isLoading } = useGetEducationByUserIdQuery(userId, { skip: !userId });
   const dispatch = useDispatch();
@@ -32,7 +33,11 @@ const Education = ({ tab, profileType, imgUrl }) => {
   }, [educationsData]);
 
   if (isLoading || !educationsData || educationsData.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} isData={!educationsData}/>;
+    return <EmptyExperienceTab
+      tab={tab}
+      profileType="personal"
+      imgUrl={emptyPersonalTabsPictures.emptyEducationPic}
+      isData={!educationsData} />;
   }
 
   return (
@@ -57,8 +62,6 @@ const Education = ({ tab, profileType, imgUrl }) => {
 
 Education.propTypes = {
   tab: PropTypes.string.isRequired,
-  profileType: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired
-}
+};
 
 export default Education;

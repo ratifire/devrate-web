@@ -24,7 +24,11 @@ const Header = () => {
   const isAuthenticated = useSelector((state) => state.auth.user?.isAuthenticated || false);
   const myProfile = () => {
     if (!isAuthenticated)
-      return <ButtonDef variant='text' handlerClick={handleOpen} type='button' label='home.links.login' />;
+      return <ButtonDef
+        variant='text'
+        handlerClick={handleOpen}
+        type='button'
+        label='home.links.login' />;
     return (
       <Link to={navigationsLinks.profile} component={RouterLink} sx={styles.link}>
         Profile

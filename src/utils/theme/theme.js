@@ -1,4 +1,4 @@
-import { DARK_THEME } from '../constants/theme';
+import { DARK_THEME } from '../constants/Theme/theme';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -42,7 +42,7 @@ const getDesignTokens = (mode) => ({
     },
     h5: {
       fontSize: 24,
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: 1.334,
       letterSpacing: 0,
     },
@@ -52,7 +52,7 @@ const getDesignTokens = (mode) => ({
       lineHeight: 1.6,
       letterSpacing: 0.15,
     },
-    
+
     subtitle1: {
       fontSize: 20,
       fontWeight: 400,
@@ -129,8 +129,123 @@ const getDesignTokens = (mode) => ({
             }
           },
         },
+        checkBox: {
+          border: '#C5C5C6',
+        },
         border: {
           color: '#252527',
+        },
+        search: {
+          color: 'rgba(197, 197, 198, 0.25)',
+          inputActive: '#B78AF7',
+          emptyTitle: '#fff',
+          title: '#fff',
+          subtitle: '#C5C5C6',
+        },
+        steper: {
+          completed: {
+            circle: {
+              backgroundColor: '#8133F1',
+            },
+            backgroundColor: '#8133F1',
+          },
+          active: {
+            circle: {
+              backgroundColor: '#8133F1',
+            },
+            backgroundColor: '#8133F1',
+          },
+          inactive: {
+            circle: {
+              backgroundColor: '#69696B',
+            },
+            backgroundColor: '#69696B',
+          },
+          color: '#FFFFFF',
+        },
+        modals: {
+          inputs: {
+            placeholder: '#69696B',
+            border: {
+              default: '#444446',
+              hover: '#828283',
+              focused: '#B78AF7',
+              disable: '#3E3E40',
+              error: '#ED0E0E',
+            },
+            textColor: {
+              default: '#FFFFFF',
+              placeholder: '#69696B',
+              disabled: '#69696B',
+            },
+            labelColor: {
+              default: '#C5C5C6',
+              hover: '#C5C5C6',
+              focused: '#B78AF7',
+              disable: '#69696B',
+              error: '#D32F2F',
+              required: '#ED0E0E',
+            },
+          },
+          select: {
+            placeholder: '#69696B',
+            border: {
+              default: '#444446',
+              hover: '#828283',
+              focused: '#B78AF7',
+              disable: '#3E3E40',
+              error: '#ED0E0E',
+            },
+            textColor: {
+              default: '#FFFFFF',
+              placeholder: '#69696B',
+              disabled: '#69696B',
+            },
+            labelColor: {
+              default: '#C5C5C6',
+              hover: '#C5C5C6',
+              focused: '#B78AF7',
+              disable: '#69696B',
+              error: '#D32F2F',
+              required: '#ED0E0E',
+            },
+            selectedField: {
+              backgroundColor: '#1D1D1D',
+              selected: {
+                backgroundColor: '#252527',
+                color: '#C5C5C6',
+              },
+              hover: '#252527',
+            },
+          },
+          textAreaInput: {
+            placeholder: '#69696B',
+            border: {
+              default: '#444446',
+              default2: '#252527',
+              hover: '#828283',
+              focused: '#B78AF7',
+              disable: '#3E3E40',
+              error: '#ED0E0E',
+            },
+            textColor: {
+              default: '#FFFFFF',
+              placeholder: '#69696B',
+              disabled: '#69696B',
+            },
+            labelColor: {
+              default: '#C5C5C6',
+              hover: '#C5C5C6',
+              focused: '#B78AF7',
+              disable: '#69696B',
+              error: '#D32F2F',
+              required: '#ED0E0E',
+            },
+          },
+          titleColor: '#FFFFFF',
+          backgroundColor: '#1D1D1D',
+          color: '#69696B',
+          progressBgColor: '#69696B',
         },
         baseUserInfo: {
           city: {
@@ -166,11 +281,58 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#FFFFFF',
           },
         },
-        
         iconBtn: {
+          search:{
+            color: '#CEB0FA',
+            svgColor: '#B78AF7'
+          },
+          link: {
+            color: '#CEB0FA',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          writeMasssge: {
+            color: '#FFFFFF',
+            hover: '#5900D9',
+          },
+          bookInterview: {
+            color: '#B78AF7',
+            borderColor: '#B78AF7',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+              borderColor: '#B78AF7',
+            },
+          },
+          stepRight: {
+            active: {
+              backgroundColor: '#B78AF7',
+              hoverColor: '#252527',
+            },
+            disable: {
+              color: '#444446',
+            },
+          },
+          btnSave: {
+            backgroundColor: {
+              default: '#8133F1',
+              hover: '#5900D9',
+              disable: '#252527',
+            },
+            color: {
+              default: '#FFFFFF',
+              disabled: '#00000061',
+            },
+          },
+          btnClose: {
+            color: '#A9A9AA',
+            hoverColor: '#303032',
+          },
           editBtn: {
             color: '#CEB0FA',
-            backgroundColor: 'transperent',
+            backgroundColor: 'transparent',
             hover: {
               color: '#B78AF7',
               backgroundColor: '#CEB0FA29',
@@ -178,7 +340,7 @@ const getDesignTokens = (mode) => ({
           },
           createBtn: {
             color: '#CEB0FA',
-            backgroundColor: 'transperent',
+            backgroundColor: 'transparent',
             hover: {
               color: '#B78AF7',
               backgroundColor: '#CEB0FA29',
@@ -186,7 +348,7 @@ const getDesignTokens = (mode) => ({
           },
           burgerDot: {
             color: '#C5C5C6',
-            backgroundColor: 'transperent',
+            backgroundColor: 'transparent',
             hover: {
               color: '#A9A9AA',
               backgroundColor: '#252527',
@@ -212,7 +374,11 @@ const getDesignTokens = (mode) => ({
             backgroundColor: 'transparent',
           },
         },
-        sectionSkills: {
+        skillsSection: {
+          stars: {
+            iconFilled: '#B78AF7',
+            iconEmpty: '#828283',
+          },
           doneInterviews: {
             color: '#16FFB9',
             backgroundColor: 'transparent',
@@ -227,9 +393,12 @@ const getDesignTokens = (mode) => ({
         pagesSections: {
           backgroundColor: '#303032',
         },
-        iconBtnModalDropdown: {
+
+        modalDropdown: {
           color: '#C5C5C6',
-          hoverBgColor: '#303032',
+          backgroundColor: '#1D1D1D',
+          hoverBgColor: '#252527',
+          divider: '#69696B',
         },
         responcibility: {
           backgroundColor: '#CEB0FA',
@@ -246,8 +415,38 @@ const getDesignTokens = (mode) => ({
           violet: '#8133F1',
           lightGray: '#C5C5C6',
           gray: '#69696B',
-          darkGray: '#3E3E40',
+          backgroundColor: '#3E3E40',
+          backgroundColor2: '#252527' + 'BD',
           border: 'transparent',
+        },
+        experienceSkillSect: {
+          wrapperUnSorted:{
+            borderColor: '#69696B',
+          },
+          wrapperSorted: {
+            color: '#CEB0FA',
+            borderColor: '#CEB0FA',
+          },
+          text: {
+            junior: '#25CBFF',
+            middle: '#16FFB9',
+            senior: '#DAFE22',
+          },
+          star: '#B78AF7',
+          eye: {
+            eyeHidden: '#C5C5C6',
+            eyeVisible: '#B78AF7',
+            backgroundColor: '#444446',
+          },
+          number: {
+            color: '#B78AF7',
+            backgroundColor: '#252527',
+          },
+          tooltip: {
+            color: '#FFFFFF',
+            backgroundColor: '#252527',
+          },
+          default: ''
         },
         common: {
           black: '#000000',
@@ -336,13 +535,42 @@ const getDesignTokens = (mode) => ({
           contrastText: '#ffffff',
           lime: '#DAFE22',
         },
+          schedule:{
+          backgroundColor:  '#3E3E40',
+          smallCalendar:{
+            textColor:"#FFFFFF",
+            backgroundColor: "#E0CCFF",
+            switchViewButtonColor:"#A9A9AA",
+            switchViewButtonBackgroundColor:"#CEB0FA",
+            arrowSwitcherColor: "#A9A9AA",
+            arrowSwitcherBackgroundColor: "#CEB0FA"
+          },
+            popup:{
+              backgroundColor: '#252527',
+              popupBorderColor: '#252527',
+              closeIconColor:'#E0CCFF',
+              userInfoBorderColor: "#A9A9AA",
+              titleColor: '#A9A9AA',
+              iconColor: '#E0CCFF'
+            },
+            sideBarEvent:{
+              backgroundColor: "#444446",
+              titleColor:  "#FFFFFF",
+              dateAndTimeColor: "#EFE6FD",
+              participant: '#ECECED',
+              hostTitle:"#ECECED",
+              hostLinkColor:"#CEB0FA",
+              participantlinkColor:"#CEB0FA",
+              cancelEventBtnColor: "#CEB0FA"
+            }
+},
       }
       : {
         notifications: {
           backgroundColor: '#FFFFFF',
           borderColor: '#C5C5C6',
           badge: {
-            backgroundColor: '#FF0000',
+            backgroundColor: '#A70000',
             boxShadow: '#FF0000CC',
             fill:'#69696B',
           },
@@ -360,6 +588,9 @@ const getDesignTokens = (mode) => ({
             }
           },
         },
+        checkBox: {
+          border: '#828283',
+        },
         border: {
           color: '#C5C5C6',
         },
@@ -368,6 +599,113 @@ const getDesignTokens = (mode) => ({
           inputActive: '#8133F1',
           title: '#1D1D1D',
           subtitle: '#303032',
+        },
+        steper: {
+          completed: {
+            circle: {
+              backgroundColor: '#8133F1',
+              color: '#ECECED',
+            },
+            backgroundColor: '#8133F1',
+          },
+          active: {
+            circle: {
+              backgroundColor: '#8133F1',
+              color: '#ECECED',
+            },
+            backgroundColor: '#8133F1',
+          },
+          inactive: {
+            circle: {
+              backgroundColor: '#ECECED',
+            },
+            backgroundColor: '#ECECED',
+          },
+          color: '#1D1D1D',
+        },
+        modals: {
+          inputs: {
+            placeholder: '#69696B',
+            border: {
+              default: '#828283',
+              hover: '#444446',
+              focused: '#8133F1',
+              disable: '#A9A9AA',
+              error: '#A70000',
+            },
+            textColor: {
+              default: '#444446',
+              placeholder: '#444446',
+              disabled: '#828283',
+            },
+            labelColor: {
+              default: '#1D1D1D',
+              hover: '#1D1D1D',
+              focused: '#8133F1',
+              disable: '#828283',
+              error: '#A70000',
+              required: '#ED0E0E',
+            },
+          },
+          select: {
+            placeholder: '#69696B',
+            border: {
+              default: '#828283',
+              hover: '#444446',
+              focused: '#8133F1',
+              disable: '#A9A9AA',
+              error: '#A70000',
+            },
+            textColor: {
+              default: '#444446',
+              placeholder: '#444446',
+              disabled: '#828283',
+            },
+            labelColor: {
+              default: '#1D1D1D',
+              hover: '#1D1D1D',
+              focused: '#8133F1',
+              disable: '#828283',
+              error: '#A70000',
+              required: '#ED0E0E',
+            },
+            selectedField: {
+              backgroundColor: '#FFFFFF',
+              selected: {
+                backgroundColor: '#ECECED',
+                color: '#303032',
+              },
+              hover: '#ECECED',
+            },
+          },
+          textAreaInput: {
+            placeholder: '#69696B',
+            border: {
+              default: '#828283',
+              default2: '#ECECED',
+              hover: '#444446',
+              focused: '#8133F1',
+              disable: '#A9A9AA',
+              error: '#A70000',
+            },
+            textColor: {
+              default: '#444446',
+              placeholder: '#444446',
+              disabled: '#828283',
+            },
+            labelColor: {
+              default: '#1D1D1D',
+              hover: '#1D1D1D',
+              focused: '#8133F1',
+              disable: '#828283',
+              error: '#A70000',
+              required: '#ED0E0E',
+            },
+          },
+          titleColor: '#1D1D1D',
+          backgroundColor: '#FFFFFF',
+          color: '#69696B',
+          progressBgColor: '#ECECED',
         },
         baseUserInfo: {
           city: {
@@ -416,32 +754,84 @@ const getDesignTokens = (mode) => ({
           },
         },
         iconBtn: {
+          search:{
+            color: '#8133F1',
+            svgColor: '#8133F1'
+          },
+          link: {
+            color: '#8133F1',
+            hover: {
+              color: '#8133F1',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          writeMasssge: {
+            color: '#FFFFFF',
+            hover: '#360083',
+          },
+          bookInterview: {
+            color: '#6200EE',
+            borderColor: '#6200EE',
+            hover: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA29',
+              borderColor: '#360083',
+            },
+          },
+          stepRight: {
+            active: {
+              backgroundColor: '#5900D9',
+              hoverColor: '#EFE6FD',
+            },
+            disable: {
+              color: '#444446',
+            },
+          },
+          btnSave: {
+            backgroundColor: {
+              default: '#5900D9',
+              hover: '#360083',
+              disable: '#C5C5C6',
+            },
+            color: {
+              default: '#FFFFFF',
+              disabled: '#828283',
+            },
+          },
+          btnClose: {
+            color: '#1D1D1D',
+            hoverColor: '#ECECED',
+          },
           editBtn: {
             color: '#8133F1',
-            backgroundColor: 'transperent',
+            backgroundColor: 'transparent',
             hover: {
               color: '#8133F1',
               backgroundColor: '#CEB0FA29',
             },
           },
           createBtn: {
-            color: '#CEB0FA',
-            backgroundColor: 'transperent',
+            color: '#8133F1',
+            backgroundColor: 'transparent',
             hover: {
-              color: '#B78AF7',
-              backgroundColor: '#CEB0FA29',
+              color: '#8133F1',
+              backgroundColor: '#EFE6FD',
             },
           },
           burgerDot: {
-            color: '#C5C5C6',
-            backgroundColor: 'transperent',
+            color: '#3E3E40',
+            backgroundColor: 'transparent',
             hover: {
-              color: '#A9A9AA',
-              backgroundColor: '#252527',
+              color: '#3E3E40',
+              backgroundColor: '#ECECED',
             },
           },
         },
-        sectionSkills: {
+        skillsSection: {
+          stars: {
+            iconFilled: '#8133F1',
+            iconEmpty: '#828283',
+          },
           doneInterviews: {
             color: '#00855D',
             backgroundColor: '#F8FFFD',
@@ -456,9 +846,11 @@ const getDesignTokens = (mode) => ({
         pagesSections: {
           backgroundColor: '#ffffff',
         },
-        iconBtnModalDropdown: {
-          color: '#3E3E40',
+        modalDropdown: {
+          color: '#1D1D1D',
+          backgroundColor: '#FFFFFF',
           hoverBgColor: '#ECECED',
+          divider: '#C5C5C6',
         },
         responcibility: {
           backgroundColor: '#EFE6FD',
@@ -475,13 +867,71 @@ const getDesignTokens = (mode) => ({
           violet: '#6200EE',
           lightGray: '#F0F0F0',
           gray: '#A0A0A0',
-          darkGray: '#F8F8F8',
+          backgroundColor: '#F8F8F8',
+          backgroundColor2: '#C5C5C6' + 'BD',
           border: '1px solid ' + '#ECECED',
+        },
+          schedule:{
+            backgroundColor:  '#F8F8F8',
+            smallCalendar:{
+              textColor:"#F8F8F8",
+              backgroundColor:"#A066FF",
+              switchViewButtonColor:"#000000",
+              switchViewButtonBackgroundColor:"#CEB0FA",
+              arrowSwitcherColor: "#000000",
+              arrowSwitcherBackgroundColor: "#CEB0FA"
+            },
+            popup:{
+              backgroundColor: "#ECECED",
+              popupBorderColor:"#ECECED",
+              closeIconColor: "#5900D9",
+              userInfoBorderColor:  "#C5C5C6",
+              titleColor: '#1D1D1D',
+              iconColor: '#5900D9'
+            },
+            sideBarEvent:{
+              backgroundColor: "#F8F8F8",
+              titleColor:  "#1D1D1D",
+              dateAndTimeColor:"#303032",
+              participant: "#444446",
+              hostTitle:"#444446",
+              hostLinkColor:"#6200EE",
+              participantlinkColor:"#6200EE",
+              cancelEventBtnColor: "#6200EE"
+
+            },
+          },
+        experienceSkillSect: {
+          wrapperUnSorted:{
+            borderColor: '#C5C5C6',
+          },
+          wrapperSorted: {
+            color: '#8133F1',
+            borderColor: '#8133F1',
+          },
+          text: {
+            junior: '#007CA3',
+            middle: '#00855D',
+            senior: '#D31772',
+          },
+          star: '#8133F1',
+          eye: {
+            eyeHidden: '#3E3E40',
+            eyeVisible: '#4600A9',
+            backgroundColor: '#ECECED',
+          },
+          number: {
+            color: '#4600A9',
+            backgroundColor: '#C5C5C6',
+          },
+          tooltip: {
+            color: '#1D1D1D',
+            backgroundColor: '#C5C5C6',
+          },
         },
         common: {
           black: '#000000',
           white: '#ffffff',
-          
           titleGradient: 'linear-gradient(90deg, rgb(117, 98, 228), rgb(251, 147, 166))',
         },
         text: {

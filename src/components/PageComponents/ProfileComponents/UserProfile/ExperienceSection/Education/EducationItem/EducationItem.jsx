@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Box, Link, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import styles from './EducationItem.style';
+import styles from './EducationItem.styles';
 
 const LENGTH_TO_COLLAPSE = 200;
 

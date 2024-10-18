@@ -2,7 +2,7 @@ const styles = {
   achievementItemContainer: (theme) => ({
     width: '100%',
     padding: theme.spacing(3),
-    backgroundColor: theme.palette.sliderAssessment.darkGray,
+    backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     borderRadius: 2,
     maxHeight: '184px',
     height: '100%',
@@ -45,19 +45,21 @@ const styles = {
     textAlign: 'center',
     textDecoration: 'underline',
   }),
+  menuIcon: (theme) => ({
+    color: theme.palette.text.secondary,
+  }),
   iconBtnModal: (theme) => ({
-    color: theme.palette.iconBtnModalDropdown.color,
-    padding: 0,
-    width: '35px',
-    height: '35px',
+    flex: '1 0 35px',
+    color: theme.palette.iconBtn.burgerDot.color,
     borderRadius: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
-      backgroundColor: theme.palette.iconBtnModalDropdown.hoverBgColor,
-      color: theme.palette.iconBtnModalDropdown.color,
+      color: theme.palette.iconBtn.burgerDot.hover.color,
+      backgroundColor: theme.palette.iconBtn.burgerDot.hover.backgroundColor,
+
     },
   }),
 };

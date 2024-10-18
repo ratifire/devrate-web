@@ -26,8 +26,8 @@ export const styles = {
     fontSize: 14,
     fontWeight: 400,
     display: 'block',
-    backgroundColor: theme.palette.primary['400'],
-    color: theme.palette.info.contrastText,
+    backgroundColor: theme.palette.iconBtn.btnSave.backgroundColor.default,
+    color: theme.palette.iconBtn.btnSave.color.default,
     textTransform: 'lowercase',
     marginBottom: '12px',
     maxWidth: '271px',
@@ -36,7 +36,7 @@ export const styles = {
       textTransform: 'uppercase',
     },
     ':hover': {
-      backgroundColor: theme.palette.primary['600'],
+      backgroundColor: theme.palette.iconBtn.btnSave.backgroundColor.hover,
     },
   }),
 
