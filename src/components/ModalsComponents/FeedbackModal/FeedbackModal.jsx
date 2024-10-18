@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeFeedbackModal } from '../../../redux/feedback/feedbackModalSlice';
 import { useGetInterviewByIdQuery } from '../../../redux/feedback/interviewApiSlice';
-import { RenderRoleModal } from './components/RenderRoleModal';
+import { RoleBasedFeedbackModal } from './components';
 
 const FeedbackModal = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const FeedbackModal = () => {
 
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={open}>
-      <RenderRoleModal isFetching={isFetching} isError={isError} role={role} data={data} />
+      <RoleBasedFeedbackModal isFetching={isFetching} isError={isError} role={role} data={data} />
     </ModalLayoutProfile>
   );
 };

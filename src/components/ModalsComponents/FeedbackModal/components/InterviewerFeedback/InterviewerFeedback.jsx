@@ -24,8 +24,8 @@ const InterviewerFeedback = ({ data }) => {
   const {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
-  const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
   const [createInterview] = useCreateInterviewMutation();
+  const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
   const initialValues = {
     comment: '',

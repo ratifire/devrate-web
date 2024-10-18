@@ -28,6 +28,7 @@ const CandidateFeedback = ({ data }) => {
   } = useSelector(selectCurrentUser);
   const [createInterview] = useCreateInterviewMutation();
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
+
   const handleNextStep = () => setActiveStep((prev) => prev + 2);
   const handlePrevStep = () => setActiveStep((prev) => prev - 2);
 

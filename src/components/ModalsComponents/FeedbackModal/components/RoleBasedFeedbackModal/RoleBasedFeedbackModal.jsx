@@ -5,7 +5,7 @@ import { FeedbackModalSkeleton } from '../../../../UI/Skeleton';
 import { CandidateFeedback } from '../CandidateFeedback';
 import { InterviewerFeedback } from '../InterviewerFeedback';
 
-const RenderRoleModal = ({ role, data, isFetching, isError }) => {
+const RoleBasedFeedbackModal = ({ role, data, isFetching, isError }) => {
   if (isFetching) {
     return <FeedbackModalSkeleton />;
   }
@@ -23,7 +23,7 @@ const RenderRoleModal = ({ role, data, isFetching, isError }) => {
   return <ModalElement data={data} />;
 };
 
-RenderRoleModal.propTypes = {
+RoleBasedFeedbackModal.propTypes = {
   role: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired,
@@ -46,4 +46,4 @@ RenderRoleModal.propTypes = {
   }),
 };
 
-export default RenderRoleModal;
+export default RoleBasedFeedbackModal;

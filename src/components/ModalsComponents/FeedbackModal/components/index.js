@@ -4,6 +4,7 @@ import { SliderAssessmentBox } from './SliderAssessmentBox'
 import { SliderComponent } from './SliderComponent'
 import { StepHardSkills } from './StepHardSkills'
 import { StepSoftSkills } from './StepSoftSkills'
+import { RoleBasedFeedbackModal } from './RoleBasedFeedbackModal';
 
 export {
   InterviewerInfo,
@@ -11,5 +12,6 @@ export {
   SliderAssessmentBox,
   SliderComponent,
   StepHardSkills,
-  StepSoftSkills
+  StepSoftSkills,
+  RoleBasedFeedbackModal,
 }
