@@ -485,6 +485,8 @@ export const uk = {
       edit: 'Редагувати',
     },
     schedule: {
+      deleteEventSuccessMessage:'Подія видалена',
+      deleteEventErrorMessage:'Подія не була видалена',
       title: 'Розклад',
       host: 'Хост',
       participant: 'Учасник',

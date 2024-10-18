@@ -7,21 +7,21 @@ export const styles = {
       maxHeight: '254px',
     },
     ' .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['800'],
+      borderColor: theme.palette.modals.textAreaInput.border.default2,
       borderRadius: 2,
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['300'],
+      borderColor: theme.palette.modals.textAreaInput.border.default2,
     },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.primary['300'],
+      borderColor: theme.palette.modals.textAreaInput.border.focused,
       borderWidth: '2px',
     },
     '&.Mui-error.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
+      borderColor: theme.palette.modals.textAreaInput.border.error,
     },
     '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
+      borderColor: theme.palette.modals.textAreaInput.border.error,
     },
   }),
   textHelper: {
@@ -33,8 +33,8 @@ export const styles = {
     width: '100%',
     height: '100%',
     display: 'block',
-    backgroundColor: theme.palette.neutral['800'],
-    borderColor: theme.palette.neutral['800'],
+    backgroundColor: theme.palette.modals.select.selectedField.selected.backgroundColor,
+    borderColor: theme.palette.modals.select.selectedField.selected.backgroundColor,
     borderRadius: 2,
     marginBottom: theme.spacing(0),
   }),

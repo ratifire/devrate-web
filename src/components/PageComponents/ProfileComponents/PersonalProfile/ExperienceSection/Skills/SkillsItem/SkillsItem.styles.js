@@ -57,7 +57,7 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
-    backgroundColor: `${theme.palette.experienceSkillSect.number.backgroundColor} !important`,
+    backgroundColor: `${theme.palette.experienceSkillSect.number.backgroundColor}`,
     lineHeight: '24px',
   }),
 };

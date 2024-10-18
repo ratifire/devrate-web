@@ -9,13 +9,11 @@ import WorkExperience from './WorkExperience/WorkExperience';
 import { Add } from '@mui/icons-material';
 import { openModal } from '../../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { emptyPersonalTabsPictures } from '../../../../../utils/constants/emptyTabsPictures';
 
 const ExperienceSection = () => {
   const [value, setValue] = useState('workExperience');
   const { t } = useTranslation();
   const buttonStates  = useSelector((state) => state.button);
-  const profileType = 'personal';
   const dispatch = useDispatch();
 
 
@@ -29,14 +27,10 @@ const ExperienceSection = () => {
 
 
   const tab = {
-    workExperience: <WorkExperience tab={'workExperience'} profileType={profileType}
-                                    imgUrl={emptyPersonalTabsPictures.emptyWorkExperiencePic} />,
-    achievement: <Achievement tab={'achievement'} profileType={profileType}
-                              imgUrl={emptyPersonalTabsPictures.emptyAchievementPic} />,
-    skills: <Skills tab={'skills'} profileType={profileType} imgUrl={emptyPersonalTabsPictures.emptySkillsPic} />,
-    education: <Education tab={'education'} profileType={profileType}
-                          imgUrl={emptyPersonalTabsPictures.emptyEducationPic} />,
-
+    workExperience: <WorkExperience tab={'workExperience'}/>,
+    achievement: <Achievement tab={'achievement'}/>,
+    skills: <Skills tab={'skills'}/>,
+    education: <Education tab={'education'} />,
   };
 
 

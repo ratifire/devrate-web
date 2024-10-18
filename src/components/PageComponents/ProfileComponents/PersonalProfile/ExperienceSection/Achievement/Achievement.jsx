@@ -9,12 +9,13 @@ import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/Emp
 import PropTypes from 'prop-types';
 import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
 import {loopedObjValues} from '../../../../../../utils/helpers/loopedObjValues';
+import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 
 
 
 
 
-const Achievement = ({ tab, profileType, imgUrl }) => {
+const Achievement = ({ tab }) => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: achievementsData } = useFetchAchievementsQuery(userId, { skip: !userId });
   const dispatch = useDispatch();
@@ -28,7 +29,11 @@ const Achievement = ({ tab, profileType, imgUrl }) => {
   }, [achievementsData, tab]);
 
   if (!achievementsData || achievementsData.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} isData={!achievementsData} />;
+    return <EmptyExperienceTab
+      tab={tab}
+      profileType='personal'
+      imgUrl={emptyPersonalTabsPictures.emptyAchievementPic}
+      isData={!achievementsData} />;
   }
 
   return (
@@ -48,8 +53,6 @@ const Achievement = ({ tab, profileType, imgUrl }) => {
 
 Achievement.propTypes = {
   tab: PropTypes.string.isRequired,
-  profileType: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired,
 };
 
 export default Achievement;
