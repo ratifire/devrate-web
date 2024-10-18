@@ -18,7 +18,7 @@ const FeedbackModal = () => {
 
   return (
     <ModalLayoutProfile setOpen={handleCloseModal} open={open}>
-      <RoleBasedFeedbackModal isFetching={isFetching} isError={isError} role={role} data={data} />
+      <RoleBasedFeedbackModal isFetching={isFetching} isError={isError} role={role} />
     </ModalLayoutProfile>
   );
 };

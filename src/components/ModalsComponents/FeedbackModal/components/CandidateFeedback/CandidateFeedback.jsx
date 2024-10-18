@@ -1,11 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import PropTypes from 'prop-types';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
-import { useCreateInterviewMutation } from '../../../../../redux/feedback/interviewApiSlice';
+import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '../../../../../redux/feedback/interviewApiSlice';
 import { FeedbackModalSchema } from '../../../../../utils/valadationSchemas';
 import { FIRST_STEP, LAST_STEP } from '../../constants';
 import { formatDateTime } from '../../helpers';
@@ -13,20 +12,22 @@ import { InterviewerInfo, SliderComponent } from '../index';
 import { styles } from './CandidateFeedback.styles';
 import { InterviewStepper } from '../InterviewStepper';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { closeFeedbackModal } from '../../../../../redux/feedback/feedbackModalSlice';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 
-const CandidateFeedback = ({ data }) => {
+const CandidateFeedback = () => {
+  const { feedbackId } = useSelector((state) => state.feedback);
+  const { data } = useGetInterviewByIdQuery({ id: feedbackId }, { skip: !feedbackId });
   const [activeStep, setActiveStep] = useState(1);
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const {
     interviewStartTime,
     participant: { name, status, surname },
     skills,
   } = data;
-  const { feedbackId } = useSelector((state) => state.feedback);
-  const {
-    data: { id: userId },
-  } = useSelector(selectCurrentUser);
-  const [createInterview] = useCreateInterviewMutation();
+  const { data: { id: userId } } = useSelector(selectCurrentUser);
+  const [createInterview, { isError }] = useCreateInterviewMutation();
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
   const handleNextStep = () => setActiveStep((prev) => prev + 2);
@@ -44,7 +45,11 @@ const CandidateFeedback = ({ data }) => {
       skills: values.skills.map(({ id, value }) => ({ id, mark: value })),
     };
 
-    await createInterview({ reviewerId: userId, body });
+    const result = await createInterview({ reviewerId: userId, body });
+
+    if (result.data) {
+      dispatch(closeFeedbackModal());
+    }
   };
 
   const formik = useFormik({
@@ -52,6 +57,10 @@ const CandidateFeedback = ({ data }) => {
     validationSchema: FeedbackModalSchema,
     onSubmit,
   });
+
+  if (isError) {
+    return <ErrorComponent />;
+  }
 
   return (
     <Box sx={styles.container}>
@@ -93,26 +102,6 @@ const CandidateFeedback = ({ data }) => {
       </form>
     </Box>
   );
-};
-
-CandidateFeedback.propTypes = {
-  data: PropTypes.shape({
-    interviewStartTime: PropTypes.string.isRequired,
-    participant: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      surname: PropTypes.string.isRequired,
-      status: PropTypes.string.isRequired,
-      role: PropTypes.string.isRequired,
-    }).isRequired,
-    skills: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
 };
 
 export default CandidateFeedback;
