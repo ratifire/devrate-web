@@ -10,7 +10,6 @@ const InterviewRejected = ({ createAt, payload }) => {
   const { t } = useTranslation();
   const { userFirstName } = JSON.parse(payload);
   
-  console.log(userFirstName);
   return (
     <>
       <Box sx={styles.iconWrapper}>
@@ -18,7 +17,7 @@ const InterviewRejected = ({ createAt, payload }) => {
       </Box>
       <Box sx={styles.textWrapper}>
         <Typography variant="body">
-          {t('notifications.interviewRejected')}
+          {t('notifications.interviewRejected')}{userFirstName}
         </Typography>
         <Typography sx={styles.date} variant="body2">
           <TimeAgo data={createAt} />

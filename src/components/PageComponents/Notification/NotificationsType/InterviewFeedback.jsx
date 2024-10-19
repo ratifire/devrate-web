@@ -10,7 +10,6 @@ const InterviewFeedback = ({ createAt, payload }) => {
   const { t } = useTranslation();
   const { feedbackId } = JSON.parse(payload);
   
-  console.log(feedbackId);
   return (
     <>
       <Box sx={styles.iconWrapper}>
@@ -18,7 +17,7 @@ const InterviewFeedback = ({ createAt, payload }) => {
       </Box>
       <Box sx={styles.textWrapper}>
         <Typography variant="body">
-          {t('notifications.interviewFeedback')}
+          {t('notifications.interviewFeedback')} {feedbackId}
           <Typography variant="body" sx={styles.btn}>
               {t('notifications.feedbackBtn')}
           </Typography>
