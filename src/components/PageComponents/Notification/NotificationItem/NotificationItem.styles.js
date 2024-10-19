@@ -9,7 +9,7 @@ const styles = {
     
     '&:last-child': {
       boxShadow: 'none',
-    }
+    },
   }),
   iconWrapper: (theme) => ({
     flex: '0 1 32px',
@@ -36,14 +36,14 @@ const styles = {
       fontWeight: 500,
       lineHeight: '20px',
       letterSpacing: '0.17px',
-    }
+    },
   }),
   closeBtn: (theme) => ({
     padding: theme.spacing(0),
     '>svg': {
       color: theme.palette.notifications.icon.close,
       fontSize: '20px',
-    }
+    },
   }),
   textWrapper: (theme) => ({
     flex: '0 1 calc(100% - 118px)',
@@ -68,6 +68,17 @@ const styles = {
   }),
   date: (theme) => ({
     color: theme.palette.neutral['100'],
+  }),
+  btn: (theme) => ({
+    padding: theme.spacing(0),
+    display: 'inline-block',
+    marginLeft: '10px',
+    color: theme.palette.notifications.item.btnFeedback,
+    letterSpacing: 0.15,
+    fontSize: 16,
+    lineHeight: '24px',
+    fontWeight: 400,
+    cursor: 'pointer',
   }),
 };
 

@@ -1,30 +1,20 @@
 import React from 'react';
-import { Box, Chip, IconButton, Typography } from '@mui/material';
 import styles from './NotificationItem.styles';
+import { Box, Chip, IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
-import Sms from '@mui/icons-material/SmsOutlined';
-import InfoOutlined from '@mui/icons-material/InfoOutlined';
-import ErrorRounded from '@mui/icons-material/ErrorRounded';
 import Close from '@mui/icons-material/Close';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { useDeleteNotificationMutation, useMarkAsReadMutation } from '../../../../redux/services/notificationsApiSlice';
-import TimeAgo from '../../../UI/TimeAgo';
 import { useTranslation } from 'react-i18next';
-
-const iconMap = {
-  INTERVIEW_REQUEST_EXPIRED: <Sms />,
-  INTERVIEW_REJECTED: <InfoOutlined />,
-  INTERVIEW_SCHEDULED: <ErrorRounded />,
-  GREETING: <ErrorRounded />,
-};
+import { Greeting, InterviewFeedback, InterviewScheduled } from '../NotificationsType';
+import InterviewRejected from '../NotificationsType/InterviewRejected';
+import InterviewRequestExpired from '../NotificationsType/InterviewRequestExpired';
 
 const NotificationItem = ({ data }) => {
   const { t } = useTranslation();
   
-  const { id, type, read, createAt, payload } = data;
-  const payloadObj = JSON.parse(payload);
-  const {role,scheduledDateTime} = payloadObj;
+  const { id, type, read: isRead, createAt, payload } = data;
   
   const currentUser = useSelector(selectCurrentUser);
   
@@ -45,22 +35,23 @@ const NotificationItem = ({ data }) => {
     });
   };
   
+  const typeMessages = {
+    GREETING: <Greeting createAt={createAt} />,
+    INTERVIEW_FEEDBACK: <InterviewFeedback createAt={createAt} payload={payload} />,
+    INTERVIEW_SCHEDULED: <InterviewScheduled createAt={createAt} payload={payload} />,
+    INTERVIEW_REQUEST_EXPIRED: <InterviewRejected createAt={createAt} payload={payload} />,
+    INTERVIEW_REJECTED: <InterviewRequestExpired createAt={createAt} />,
+  };
+  
   return (
     <Box sx={styles.wrapper}>
-      <Box sx={styles.iconWrapper}>
-        {iconMap[type || 'info']}
-      </Box>
-      <Box sx={styles.textWrapper}>
-        <Typography variant="body">{role } {scheduledDateTime}</Typography>
-        <Typography sx={styles.date} variant="body2">
-          <TimeAgo data={createAt}/>
-        </Typography>
-      </Box>
+      {typeMessages[type]}
       <Box sx={styles.actionWrapper}>
         <IconButton sx={styles.closeBtn} onClick={deleteBtnClickHandler}>
           <Close />
         </IconButton>
-        { !read && <Chip label={t('notifications.newNotifications')} sx={styles.badge} onClick={markAsReadClickHandler} />}
+        { !isRead &&
+          <Chip label={t('notifications.newNotifications')} sx={styles.badge} onClick={markAsReadClickHandler} />}
       </Box>
     </Box>
   );

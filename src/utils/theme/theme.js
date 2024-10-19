@@ -123,6 +123,7 @@ const getDesignTokens = (mode) => ({
             color: '#FFFFFF',
             boxShadow: '#C5C5C640',
             colorTime: '#C5C5C6',
+            btnFeedback: '#B78AF7',
             newMessages: {
               color: '#360083',
               backgroundColor: '#CEB0FA',
@@ -134,13 +135,6 @@ const getDesignTokens = (mode) => ({
         },
         border: {
           color: '#252527',
-        },
-        search: {
-          color: 'rgba(197, 197, 198, 0.25)',
-          inputActive: '#B78AF7',
-          emptyTitle: '#fff',
-          title: '#fff',
-          subtitle: '#C5C5C6',
         },
         steper: {
           completed: {
@@ -582,10 +576,12 @@ const getDesignTokens = (mode) => ({
             color: '#1D1D1D',
             boxShadow: '#C5C5C640',
             colorTime: '#3E3E40',
+            btnFeedback: '#4600A9',
             newMessages: {
               color: '#360083',
               backgroundColor: '#CEB0FA',
             }
+            
           },
         },
         checkBox: {

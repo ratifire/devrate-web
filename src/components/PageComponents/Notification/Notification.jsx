@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import { Badge, Box, IconButton, Popover, Typography } from '@mui/material';
-import NotificationItem from './NotificationItem';
+import { Badge, IconButton, Popover } from '@mui/material';
 import { ReactComponent as BellNotification } from '../../../assets/icons/bell.svg';
 import styles from './Notification.styles';
 import { useGetNotificationsQuery } from '../../../redux/services/notificationsApiSlice';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import { useTranslation } from 'react-i18next';
 import emptyNotificationLight from '../../../utils/constants/notification/whiteThemeIcons';
 import emptyNotificationDark from '../../../utils/constants/notification/darkThemeIcons';
-import { DARK_THEME } from '../../../utils/constants/theme';
+import { DARK_THEME } from '../../../utils/constants/Theme/theme';
+import NotificationEmpty from './NotificationEmpty';
+import NotificationList from './NotificationList';
 
 const Notification = () => {
-  const { t } = useTranslation();
-  
   const { data: info } = useSelector(selectCurrentUser);
   const [bellButton, setBellButton] = useState(null);
   
-  const { data: notifications, isLoading, isError } = useGetNotificationsQuery(info.id);
-  const newNotification = !notifications?.some((item) => item.read === false);
+  const { data: notifications, isLoading } = useGetNotificationsQuery(info.id);
+  const newNotification = notifications?.every(item => item.read) ?? true;
   
   const { mode } = useSelector((state) => state.theme);
   const icons = mode === DARK_THEME ? emptyNotificationDark : emptyNotificationLight;
-
+  
   const bellButtonClickHandler = (event) => {
     event.preventDefault();
     setBellButton(event.currentTarget);
@@ -33,7 +31,9 @@ const Notification = () => {
   };
   
   const open = Boolean(bellButton);
-  const id = open ? 'simple-popover' : undefined;
+  
+  const elem = notifications?.length === 0 ? <NotificationEmpty icons={icons} /> :
+    <NotificationList data={notifications} isLoading={isLoading} />;
   
   return (
     <>
@@ -49,7 +49,6 @@ const Notification = () => {
         </Badge>
       </IconButton>
       <Popover
-        id={id}
         open={open}
         anchorEl={bellButton}
         onClose={notificationsListClose}
@@ -63,26 +62,7 @@ const Notification = () => {
         }}
         sx={styles.wrapperPopover}
       >
-        {notifications?.length === 0 ?
-          <Box sx={styles.boxWrapper}>
-            <Typography sx={styles.boxTitle} variant="subtitle1">
-              {t('notifications.empty')}
-            </Typography>
-            <Box sx={{ ...styles.boxImg, backgroundImage: `url(${icons})` }} />
-          </Box>
-          : <Box sx={styles.wrapper}>
-            <Box sx={styles.scrollWrapper}>
-              {isLoading && <div>Loading...</div>}
-              {isError && <div>Error loading notifications</div>}
-              { !isLoading &&
-                notifications?.map((item) => (
-                  <NotificationItem
-                    key={item.id}
-                    data={item}
-                  />
-                ))}
-            </Box>
-          </Box>}
+        {elem}
       </Popover>
     </>
   );

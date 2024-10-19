@@ -497,7 +497,12 @@ export const uk = {
       newNotifications: 'Нове',
       hourAgo: 'годин тому',
       lessThanHourAgo:'Менше години тому',
-      GREETING: '',
+      interviewScheduled: 'test text',
+      greeting: 'test text',
+      interviewFeedback: 'test text',
+      interviewRejected: 'test text',
+      interviewRequestExpired: 'test text',
+      feedbackBtn: 'Залишити відгук',
     },
   },
 };
