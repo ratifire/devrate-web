@@ -14,9 +14,9 @@ import InterviewRequestExpired from '../NotificationsType/InterviewRequestExpire
 const NotificationItem = ({ data }) => {
   const { t } = useTranslation();
   
-  const { id, type, read: isRead, createAt, payload } = data;
+  const { id, type, read: isRead, createdAt, payload } = data;
   
-  const currentUser = useSelector(selectCurrentUser);
+  const { data: currentUser } = useSelector(selectCurrentUser);
   
   const [markAsRead] = useMarkAsReadMutation();
   const [deleteNotification] = useDeleteNotificationMutation();
@@ -24,23 +24,23 @@ const NotificationItem = ({ data }) => {
   const markAsReadClickHandler = () => {
     markAsRead({
       notificationId: id,
-      userId: currentUser.data.id,
+      userId: currentUser.id,
     });
   };
   
   const deleteBtnClickHandler = () => {
     deleteNotification({
       notificationId: id,
-      userId: currentUser.data.id,
+      userId: currentUser.id,
     });
   };
   
   const typeMessages = {
-    GREETING: <Greeting createAt={createAt} />,
-    INTERVIEW_FEEDBACK: <InterviewFeedback createAt={createAt} payload={payload} />,
-    INTERVIEW_SCHEDULED: <InterviewScheduled createAt={createAt} payload={payload} />,
-    INTERVIEW_REQUEST_EXPIRED: <InterviewRejected createAt={createAt} payload={payload} />,
-    INTERVIEW_REJECTED: <InterviewRequestExpired createAt={createAt} />,
+    GREETING: <Greeting createAt={createdAt} />,
+    INTERVIEW_FEEDBACK: <InterviewFeedback createAt={createdAt} payload={payload} />,
+    INTERVIEW_SCHEDULED: <InterviewScheduled createAt={createdAt} payload={payload} />,
+    INTERVIEW_REQUEST_EXPIRED: <InterviewRejected createAt={createdAt} payload={payload} />,
+    INTERVIEW_REJECTED: <InterviewRequestExpired createAt={createdAt} />,
   };
   
   return (
@@ -58,7 +58,13 @@ const NotificationItem = ({ data }) => {
 };
 
 NotificationItem.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    payload: PropTypes.string.isRequired,
+    read: PropTypes.bool.isRequired,
+    createdAt: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default NotificationItem;
