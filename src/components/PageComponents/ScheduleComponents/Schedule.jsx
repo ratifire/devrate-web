@@ -15,7 +15,6 @@ import {
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
 import { useTheme } from '@mui/material/styles';
-import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer";
 
 
 const Schedule = () => {
@@ -201,7 +200,7 @@ const Schedule = () => {
     return (
         <Box sx={styles.demoApp}>
             <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
-            <CustomScrollContainer sx={styles.demoAppMain}>
+            <Box sx={styles.demoAppMain}>
                 {<FullCalendar
                     ref={calendarRef}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -234,7 +233,7 @@ const Schedule = () => {
                 {popup.visible && event && (
                     <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition} />
                 )}
-            </CustomScrollContainer>
+            </Box>
         </Box>
     );
 };
@@ -259,13 +258,11 @@ const applyRequiredStyles = (calendarApi, theme) => {
             Object.assign(fcScroller.style, {
                 overflowY: 'scroll',
                 scrollbarWidth: 'thin',
-                scrollbarColor: `${theme.palette.neutral['600']} ${theme.palette.common.white}`,
+                scrollbarColor: `${theme.palette.scroll.scrollWrapp.backgroundColor} ${theme.palette.scroll.scrollEl.backgroundColor}`,
+                '--webkit-scrollbar': '10px',
+                '--webkit-scrollbar-track': `background: ${theme.palette.scroll.scrollWrapp.backgroundColor}`,
+                '--webkit-scrollbar-thumb': `background-color: ${theme.palette.scroll.scrollEl.backgroundColor}; border-radius: 10px`
             });
-            
-            fcScroller.style['--webkit-scrollbar'] = '10px';
-            fcScroller.style['--webkit-scrollbar-track'] = `background: ${theme.palette.neutral['600']}`;
-            fcScroller.style['--webkit-scrollbar-thumb'] = `background-color: ${theme.palette.common.white}`;
-            fcScroller.style['--webkit-scrollbar-thumb'] = 'border-radius: 10px';
         }
         
         const fcHeaderScroller = calendarApi.el.querySelector('.fc-scroller');
