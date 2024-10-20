@@ -253,6 +253,22 @@ const getWeekStartAndEnd = (year, weekNumber) => {
 
 const applyRequiredStyles = (calendarApi, theme) => {
     if (calendarApi) {
+        const fcScroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+        if (fcScroller) {
+            Object.assign(fcScroller.style, {
+                overflowY: 'scroll',
+                scrollbarWidth: 'thin',
+                scrollbarColor: `${theme.palette.scroll.scrollWrapp.backgroundColor} ${theme.palette.scroll.scrollEl.backgroundColor}`,
+                '--webkit-scrollbar': '10px',
+                '--webkit-scrollbar-track': `background: ${theme.palette.scroll.scrollWrapp.backgroundColor}`,
+                '--webkit-scrollbar-thumb': `background-color: ${theme.palette.scroll.scrollEl.backgroundColor}; border-radius: 10px`
+            });
+        }
+        
+        const fcHeaderScroller = calendarApi.el.querySelector('.fc-scroller');
+        if (fcHeaderScroller) {
+            fcHeaderScroller.style.overflow = 'hidden';
+        }
         const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
         const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
         const timeGridHeadElements = calendarApi.el.querySelectorAll(
