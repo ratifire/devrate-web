@@ -5,7 +5,6 @@ export const styles = {
     fontSize: '14px',
   },
   demoAppMain: theme=>({
-    // display: "none",
     flexGrow: '1',
     padding: theme.spacing(4),
   }),
