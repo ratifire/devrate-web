@@ -21,22 +21,22 @@ export const styles = {
     alignItems: 'center',
     marginBottom: theme.spacing(4),
   }),
-  skillsContainer: {
+  skillsContainer: (theme) => ({
     maxHeight: '312px',
     overflowY: 'auto',
     paddingRight: '10px',
     '&::-webkit-scrollbar': {
-      width: 10,
+      width: 6,
     },
-    '&::-webkit-scrollbar-track': (theme) => ({
-      backgroundColor: theme.palette.neutral['600'],
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.palette.scroll.scrollWrapp,
       borderRadius: 8,
-    }),
-    '&::-webkit-scrollbar-thumb': (theme) => ({
+    },
+    '&::-webkit-scrollbar-thumb': {
       borderRadius: 6,
-      backgroundColor: theme.palette.common.white,
-    }),
-  },
+      backgroundColor: theme.palette.scroll.scrollEl,
+    },
+  }),
   markWrapper: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
