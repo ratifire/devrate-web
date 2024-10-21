@@ -18,6 +18,7 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
         try {
           await cacheDataLoaded;
           const listener = ({data}) => {
+            
             const dataParse = JSON.parse(data);
             
             updateCachedData((draft) => {
