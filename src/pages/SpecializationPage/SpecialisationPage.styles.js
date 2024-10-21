@@ -16,7 +16,7 @@ export const styles = {
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
-      backgroundColor: theme.palette.background.level2,
+      backgroundColor: theme.palette.pagesSections.backgroundColor,
     },
   }),
   specialisationCategories: {
@@ -61,7 +61,7 @@ export const styles = {
 
     ' > div': {
       borderRadius: 2,
-      backgroundColor: theme.palette.neutral[600],
+      backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     },
   }),
   statisticTitle: (theme) => ({
