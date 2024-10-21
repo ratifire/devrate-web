@@ -559,6 +559,9 @@ const getDesignTokens = (mode) => ({
             },
           },
           specialization: {
+            progress: {
+              color: '#8133F1',
+            },
             arrow: {
               down: '#ED0E0E',
               up: '#64FF2E',
@@ -595,6 +598,9 @@ const getDesignTokens = (mode) => ({
         }
       : {
           specialization: {
+            progress: {
+              color: '#8133F1',
+            },
             arrow: {
               down: '#A70000',
               up: '#3AB310',
