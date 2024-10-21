@@ -22,7 +22,9 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
             const dataParse = JSON.parse(data);
             
             updateCachedData((draft) => {
+              
               draft.push(dataParse);
+              
             });
           };
           
