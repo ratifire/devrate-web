@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import {useTheme} from "@mui/material/styles";
 import { Link } from 'react-router-dom';
+import links from '../../../../router/links';
 
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
@@ -68,18 +69,13 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
           <Typography variant='caption2' sx={styles.title}>
             {t('schedule.popupUserInfo')}
           </Typography>
-          <Typography variant='subtitle2' sx={styles.name}>
-            <Link
-              to={`/profile/${event.host.id}`}
-              style={{
-                textDecoration: 'none',
-                color: theme.palette.mode === 'dark' ?
-                  theme.palette.schedule.sideBarEvent.titleColor :
-                  theme.palette.schedule.sideBarEvent.titleColor,
-              }}>
-              {event.host.name} {event.host.surname}
-            </Link>
-          </Typography>
+          <Box
+            sx={styles.name}
+            component={Link}
+            to={`${links.profile}/${event.host.id}`}
+          >
+            {event.host.name} {event.host.surname}
+          </Box>
           <Typography variant='caption2' sx={styles.position}>
             {event.host.status}
           </Typography>
@@ -91,17 +87,13 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
           <Typography variant='caption2' sx={styles.title}>
             {t('schedule.popupInterviewerInfo')}
           </Typography>
-          <Typography variant='subtitle2' sx={styles.name}>
-            <Link to={`/profile/${event.participantDtos[0].id}`}
-                  style={{
-                    textDecoration: 'none',
-                    color: theme.palette.mode === 'dark' ?
-                      theme.palette.schedule.sideBarEvent.titleColor :
-                      theme.palette.schedule.sideBarEvent.titleColor,
-                  }}>
-              {event.participantDtos[0].name} {event.participantDtos[0].surname}
-            </Link>
-          </Typography>
+          <Box
+            sx={styles.name}
+            component={Link}
+            to={`${links.profile}/${event.host.id}`}
+          >
+            {event.participantDtos[0].name} {event.participantDtos[0].surname}
+          </Box>
           <Typography variant='caption2' sx={styles.position}>
             {event.participantDtos[0].status}
           </Typography>

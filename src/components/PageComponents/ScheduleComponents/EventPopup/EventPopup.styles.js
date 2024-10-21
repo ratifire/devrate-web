@@ -89,8 +89,10 @@ export const styles = {
     color: theme.palette.text.primary,
     margin: theme.spacing(0),
     marginBottom: theme.spacing(2),
+    textDecoration: 'none',
     '>a': {
-      color: 'red',
+
+      color: theme.palette.schedule.sideBarEvent.titleColor,
     }
   }),
   position: (theme) => ({
