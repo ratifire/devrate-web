@@ -1,5 +1,5 @@
 import { AppBar, Badge, Box, Button, IconButton } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Message } from '../../../assets/icons/message.svg';
@@ -11,46 +11,15 @@ import Logo from '../../UI/Logo';
 import ThemeSwitch from '../../UI/ThemeSwitch/ThemeSwitch';
 import UserAvatar from '../../UI/UserAvatar';
 import Menu from '../Menu';
-import NotificationList from '../ProfileComponents/PersonalProfile/NotificationList';
+import Notification from '../Notification';
 import { InputSearch } from './InputSearch';
 import styles from './ProfileHeader.styles';
-
-const notifications = [
-  {
-    id: '1',
-    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
-    date: '6 годин тому',
-    new: false,
-    type: 'warning',
-  },
-  {
-    id: '2',
-    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
-    date: '6 годин тому',
-    new: true,
-    type: 'info',
-  },
-  {
-    id: '3',
-    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
-    date: '6 годин тому',
-    new: true,
-    type: 'info',
-  },
-  {
-    id: '4',
-    title: 'Олег Козаченко надіслав(-ла) Вам запит на спілкування!',
-    date: '6 годин тому',
-    new: true,
-    type: 'message',
-  },
-];
 
 const ProfileHeader = () => {
   // const theme = useTheme()
    const { data: info } = useSelector(selectCurrentUser);
   const { id, firstName, lastName } = info;
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { data: personalData } = useGetPersonalUserQuery(id);
   const { firstName: getFirstName, lastName: getLastName } = personalData || {};
 
@@ -75,7 +44,7 @@ const ProfileHeader = () => {
       <Box sx={styles.headerNav}>
         <InputSearch />
         <ThemeSwitch />
-        <NotificationList items={notifications} />
+        <Notification />
         <IconButton>
           <Badge color='error' overlap='circular' badgeContent='' variant='dot' invisible={true}>
             <Message />
