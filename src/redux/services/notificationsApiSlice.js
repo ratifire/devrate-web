@@ -30,7 +30,9 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
           
           ws.addEventListener('message', listener);
         } catch {
+          
           new Error('Sorry something went wrong ...');
+          
         }
         
         await cacheEntryRemoved;
