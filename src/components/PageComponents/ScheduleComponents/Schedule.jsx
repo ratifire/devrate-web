@@ -259,6 +259,7 @@ const applyRequiredStyles = (calendarApi, theme) => {
                 overflowY: 'scroll',
                 scrollbarWidth: 'thin',
                 scrollbarColor: `${theme.palette.scroll.scrollWrapp.backgroundColor} ${theme.palette.scroll.scrollEl.backgroundColor}`,
+                '--webkit-scrollbar-button': 'display: none',
                 '--webkit-scrollbar': '10px',
                 '--webkit-scrollbar-track': `background: ${theme.palette.scroll.scrollWrapp.backgroundColor}`,
                 '--webkit-scrollbar-thumb': `background-color: ${theme.palette.scroll.scrollEl.backgroundColor}; border-radius: 10px`
