@@ -48,6 +48,7 @@ export const styles = {
     gridRow: '4/5',
   },
   specialisationStatistics: {
+    backgroundImage: 'none',
     gridColumn: '5/13',
     gridRow: '3/6',
   },
