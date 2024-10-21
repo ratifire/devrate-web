@@ -253,7 +253,7 @@ const getWeekStartAndEnd = (year, weekNumber) => {
 
 const applyRequiredStyles = (calendarApi, theme) => {
     if (calendarApi) {
-        const fcScroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+        const fcScroller = calendarApi.el.querySelector('.fc-scroller .fc-scroller-liquid-absolute');
         if (fcScroller) {
             Object.assign(fcScroller.style, {
                 overflowY: 'scroll',
