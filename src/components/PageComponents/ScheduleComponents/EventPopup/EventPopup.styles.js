@@ -89,6 +89,9 @@ export const styles = {
     color: theme.palette.text.primary,
     margin: theme.spacing(0),
     marginBottom: theme.spacing(2),
+    '>a': {
+      color: 'red',
+    }
   }),
   position: (theme) => ({
     margin: 0,

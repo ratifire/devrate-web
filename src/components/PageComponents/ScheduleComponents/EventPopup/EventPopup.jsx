@@ -9,6 +9,8 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import {useTheme} from "@mui/material/styles";
+import { Link } from 'react-router-dom';
+
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   console.log(event)
@@ -67,7 +69,16 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
             {t('schedule.popupUserInfo')}
           </Typography>
           <Typography variant='subtitle2' sx={styles.name}>
-            {event.host.name} {event.host.surname}
+            <Link
+              to={`/profile/${event.host.id}`}
+              style={{
+                textDecoration: 'none',
+                color: theme.palette.mode === 'dark' ?
+                  theme.palette.schedule.sideBarEvent.titleColor :
+                  theme.palette.schedule.sideBarEvent.titleColor,
+              }}>
+              {event.host.name} {event.host.surname}
+            </Link>
           </Typography>
           <Typography variant='caption2' sx={styles.position}>
             {event.host.status}
@@ -81,7 +92,15 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
             {t('schedule.popupInterviewerInfo')}
           </Typography>
           <Typography variant='subtitle2' sx={styles.name}>
-            {event.participantDtos[0].name} {event.participantDtos[0].surname}
+            <Link to={`/profile/${event.participantDtos[0].id}`}
+                  style={{
+                    textDecoration: 'none',
+                    color: theme.palette.mode === 'dark' ?
+                      theme.palette.schedule.sideBarEvent.titleColor :
+                      theme.palette.schedule.sideBarEvent.titleColor,
+                  }}>
+              {event.participantDtos[0].name} {event.participantDtos[0].surname}
+            </Link>
           </Typography>
           <Typography variant='caption2' sx={styles.position}>
             {event.participantDtos[0].status}
