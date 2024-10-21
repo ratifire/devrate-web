@@ -15,6 +15,7 @@ import {
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
 import { useTheme } from '@mui/material/styles';
+import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer.tsx";
 
 
  const Schedule = () => {
@@ -200,7 +201,7 @@ import { useTheme } from '@mui/material/styles';
   return (
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
-      <Box sx={styles.demoAppMain}>
+      <CustomScrollContainer sx={styles.demoAppMain}>
         {<FullCalendar
             ref={calendarRef}
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -233,7 +234,7 @@ import { useTheme } from '@mui/material/styles';
         {popup.visible && event && (
           <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition} />
         )}
-      </Box>
+      </CustomScrollContainer>
     </Box>
   );
 };
