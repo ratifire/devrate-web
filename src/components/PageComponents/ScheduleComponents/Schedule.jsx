@@ -15,6 +15,7 @@ import {
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
 import { useTheme } from '@mui/material/styles';
+import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer.tsx";
 
 
  const Schedule = () => {
@@ -200,7 +201,7 @@ import { useTheme } from '@mui/material/styles';
   return (
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
-      <Box sx={styles.demoAppMain}>
+      <CustomScrollContainer sx={styles.demoAppMain}>
         {<FullCalendar
             ref={calendarRef}
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -233,7 +234,7 @@ import { useTheme } from '@mui/material/styles';
         {popup.visible && event && (
           <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition} />
         )}
-      </Box>
+      </CustomScrollContainer>
     </Box>
   );
 };
@@ -253,6 +254,23 @@ const getWeekStartAndEnd = (year, weekNumber) => {
 
 const applyRequiredStyles = (calendarApi, theme) => {
     if (calendarApi) {
+        const fcScroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+        if (fcScroller) {
+            Object.assign(fcScroller.style, {
+                overflowY: 'scroll',
+                scrollbarWidth: 'thin',
+                scrollbarColor: `${theme.palette.scroll.scrollWrapp.backgroundColor} ${theme.palette.scroll.scrollEl.backgroundColor}`,
+                '--webkit-scrollbar-button': 'display: none',
+                '--webkit-scrollbar': '10px',
+                '--webkit-scrollbar-track': `background: ${theme.palette.scroll.scrollWrapp.backgroundColor}`,
+                '--webkit-scrollbar-thumb': `background-color: ${theme.palette.scroll.scrollEl.backgroundColor}; border-radius: 10px`
+            });
+        }
+        
+        const fcHeaderScroller = calendarApi.el.querySelector('.fc-scroller');
+        if (fcHeaderScroller) {
+            fcHeaderScroller.style.overflow = 'hidden';
+        }
         const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
         const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
         const timeGridHeadElements = calendarApi.el.querySelectorAll(
