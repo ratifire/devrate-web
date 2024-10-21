@@ -3,14 +3,14 @@ export const styles = {
     paddingX: '6px',
 
     ' .MuiStepConnector-horizontal >span': {
-      borderColor: theme.palette.background.level3,
+      borderColor: theme.palette.steper.inactive.backgroundColor,
       borderTopWidth: '8px',
     },
     ' .Mui-active > span': {
-      borderColor: theme.palette.primary['400'],
+      borderColor: theme.palette.steper.active.backgroundColor,
     },
     ' .Mui-completed>span': {
-      borderColor: theme.palette.primary['400'],
+      borderColor: theme.palette.steper.completed.backgroundColor,
     },
   }),
   step: (theme) => ({
