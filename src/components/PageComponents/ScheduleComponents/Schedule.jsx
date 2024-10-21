@@ -253,7 +253,7 @@ const getWeekStartAndEnd = (year, weekNumber) => {
 
 const applyRequiredStyles = (calendarApi, theme) => {
     if (calendarApi) {
-        const fcScroller = calendarApi.el.querySelector('.fc-scroller .fc-scroller-liquid-absolute');
+        const fcScroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
         if (fcScroller) {
             Object.assign(fcScroller.style, {
                 overflowY: 'scroll',
@@ -261,7 +261,7 @@ const applyRequiredStyles = (calendarApi, theme) => {
                 scrollbarColor: `${theme.palette.scroll.scrollWrapp.backgroundColor} ${theme.palette.scroll.scrollEl.backgroundColor}`,
                 '--webkit-scrollbar-button': 'display: none',
                 '--webkit-scrollbar': '10px',
-                '--webkit-scrollbar-track': `background: ${theme.palette.scroll.scrollWrapp.backgroundColor}`,
+                '--webkit-scrollbar-track': `background: ${theme.palette.scroll.scrollWrapp.backgroundColor}; border-radius: 10px`,
                 '--webkit-scrollbar-thumb': `background-color: ${theme.palette.scroll.scrollEl.backgroundColor}; border-radius: 10px`
             });
         }
