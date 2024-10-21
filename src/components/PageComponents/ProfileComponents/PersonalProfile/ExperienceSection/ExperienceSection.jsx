@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, IconButton, styled, Tab, Tabs } from '@mui/material';
+import { Box, IconButton, Tab, Tabs } from '@mui/material';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
 import Skills from './Skills';
@@ -9,13 +9,11 @@ import WorkExperience from './WorkExperience/WorkExperience';
 import { Add } from '@mui/icons-material';
 import { openModal } from '../../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { emptyPersonalTabsPictures } from '../../../../../utils/constants/emptyTabsPictures';
 
 const ExperienceSection = () => {
   const [value, setValue] = useState('workExperience');
   const { t } = useTranslation();
   const buttonStates  = useSelector((state) => state.button);
-  const profileType = 'personal';
   const dispatch = useDispatch();
 
 
@@ -29,14 +27,10 @@ const ExperienceSection = () => {
 
 
   const tab = {
-    workExperience: <WorkExperience tab={'workExperience'} profileType={profileType}
-                                    imgUrl={emptyPersonalTabsPictures.emptyWorkExperiencePic} />,
-    achievement: <Achievement tab={'achievement'} profileType={profileType}
-                              imgUrl={emptyPersonalTabsPictures.emptyAchievementPic} />,
-    skills: <Skills tab={'skills'} profileType={profileType} imgUrl={emptyPersonalTabsPictures.emptySkillsPic} />,
-    education: <Education tab={'education'} profileType={profileType}
-                          imgUrl={emptyPersonalTabsPictures.emptyEducationPic} />,
-
+    workExperience: <WorkExperience tab={'workExperience'}/>,
+    achievement: <Achievement tab={'achievement'}/>,
+    skills: <Skills tab={'skills'}/>,
+    education: <Education tab={'education'} />,
   };
 
 
@@ -65,39 +59,16 @@ const ExperienceSection = () => {
       </IconButton>,
   };
 
-
-  const StyledTabs = styled(Tabs)(({ theme }) => ({
-    '& .MuiTabs-indicator': {
-      display: 'flex',
-      justifyContent: 'center',
-      backgroundColor: theme.palette.primary[200],
-    },
-    '& .MuiTabs-indicatorSpan': {
-      width: '100%',
-      backgroundColor: theme.palette.primary[200],
-    },
-  }));
-
-  const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
-    '&.Mui-selected': {
-      color: theme.palette.primary[200],
-    },
-    '&.Mui-focusVisible': {
-      backgroundColor: 'rgba(100, 95, 228, 0.32)',
-    },
-  }));
-
   return (
     <Box sx={styles.experienceContainer}>
       <Box sx={styles.tabsContainer}>
-        <StyledTabs sx={styles.wrapperTab} value={value} onChange={handleChange} textColor="primary"
-                    indicatorColor="primary[200]">
-          <StyledTab value="workExperience" label={t('profile.experience.workExperience.tabName')}
+        <Tabs sx={styles.wrapperTab} value={value} onChange={handleChange}>
+          <Tab disableRipple value="workExperience" label={t('profile.experience.workExperience.tabName')}
                      sx={styles.tabItem} />
-          <StyledTab value="achievement" label={t('profile.experience.achievement.tabName')} sx={styles.tabItem} />
-          <StyledTab value="skills" label={t('profile.experience.skills.tabName')} sx={styles.tabItem} />
-          <StyledTab value="education" label={t('profile.experience.education.tabName')} sx={styles.tabItem} />
-        </StyledTabs>
+          <Tab disableRipple value="achievement" label={t('profile.experience.achievement.tabName')} sx={styles.tabItem} />
+          <Tab disableRipple value="skills" label={t('profile.experience.skills.tabName')} sx={styles.tabItem} />
+          <Tab disableRipple value="education" label={t('profile.experience.education.tabName')} sx={styles.tabItem} />
+        </Tabs>
         {buttonStates[value] && tabButtonPlus[value]}
       </Box>
       <Box sx={styles.experienceItemContainer}>{tab[value]}</Box>

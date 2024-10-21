@@ -4,7 +4,6 @@ const styles = {
     paddingX: theme.spacing(4),
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(2),
-    background: theme.palette.background.level2,
     borderRadius: 'inherit',
     height: '100%',
     minHeight: '382px',
@@ -16,30 +15,34 @@ const styles = {
   },
   wrapperTab:(theme) => ({
     borderBottom: '1px solid',
-    borderColor: theme.palette.neutral['400'],
+    borderColor: theme.palette.tabsEl.borderColor,
+    '& .MuiTabs-indicator': {
+      display: 'flex',
+      justifyContent: 'center',
+      backgroundColor: theme.palette.tabsEl.indicator,
+    },
   }),
-  tabsHeader: {
-    borderBottom: '1px solid #ccc',
-  },
-  tabItem: {
+  tabItem: (theme) => ({
     textTransform: 'none',
     fontSize: 20,
     fontWeight: '500',
-  },
+    '&.Mui-selected': {
+      color: theme.palette.tabsEl.focused.color,
+    },
+  }),
   iconBtn: (theme) => ({
-    color: theme.palette.action.hover,
+    color: theme.palette.iconBtn.createBtn.color,
     borderRadius: 1,
     transition: 'background-color 0.3s, transform 0.3s',
     ':hover': {
-      backgroundColor: `${theme.palette.primary['200']}29`,
-      color: theme.palette.action.active,
+      backgroundColor: theme.palette.iconBtn.createBtn.hover.backgroundColor,
+      color: theme.palette.iconBtn.createBtn.hover.color,
     },
   }),
   experienceItemContainer: (theme) => ({
     overflow: 'auto',
     maxHeight: '300px',
     minWidth: '100%',
-    background: theme.palette.background.level2,
     paddingTop: '20px',
     paddingRight: theme.spacing(3),
     height: '100%',
@@ -48,12 +51,12 @@ const styles = {
       width: 10,
     },
     '&::-webkit-scrollbar-track': (theme) => ({
-      backgroundColor: theme.palette.neutral['600'],
+      backgroundColor: theme.palette.scroll.scrollWrapp.backgroundColor,
       borderRadius: 8,
     }),
     '&::-webkit-scrollbar-thumb': (theme) => ({
       borderRadius: 6,
-      backgroundColor: theme.palette.common.white,
+      backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
     }),
   }),
 };

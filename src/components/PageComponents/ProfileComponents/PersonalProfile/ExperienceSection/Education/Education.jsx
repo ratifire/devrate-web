@@ -4,46 +4,46 @@ import styles from './Education.styles.js';
 import EducationItem from './EducationItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetEducationByUserIdQuery } from '../../../../../../redux/services/educationApiSlice';
-import { loadIconsFromLocalStorage } from '../../../../../../utils/helpers';
-import { mapDataWithIcons } from '../../../../../../utils/helpers/mapDataWithIcons';
 import { iconsEducation } from '../../../../../../utils/constants/Experience/iconsExperience';
-import { iconValuesEducation } from '../../../../../../utils/constants/Experience/iconsKeys';
-import { updateIconsInLocalStorage } from '../../../../../../utils/helpers/updateIconsInLocalStorage';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import PropTypes from 'prop-types';
 import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
+import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
+import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 
-const Education = ({ tab, profileType, imgUrl }) => {
-  const iconsMap = loadIconsFromLocalStorage('education');
+
+const Education = ({ tab }) => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: educationsData, isLoading } = useGetEducationByUserIdQuery(userId, { skip: !userId });
-  const educationsNewData = mapDataWithIcons(educationsData, iconsMap, iconsEducation);
-  const iconValues = useMemo(() => iconValuesEducation, []);
   const dispatch = useDispatch();
+  const getIcon = loopedObjValues(iconsEducation);
 
 
   useEffect(() => {
-    if (educationsNewData && educationsNewData.length > 0) {
-      updateIconsInLocalStorage(educationsNewData, iconsMap, iconValues, 'education');
+    if (educationsData && educationsData.length > 0) {
       dispatch(setButtonState({ tab, hasData: true }));
     }
 
-  }, [educationsNewData, iconsMap, iconValues, tab]);
+  }, [educationsData, tab]);
 
 
   const sortedEducations = useMemo(() => {
-    if (!educationsNewData) return [];
-    return [...educationsNewData].sort((a, b) => a.startYear - b.startYear);
-  }, [educationsNewData]);
+    if (!educationsData) return [];
+    return [...educationsData].sort((a, b) => a.startYear - b.startYear);
+  }, [educationsData]);
 
   if (isLoading || !educationsData || educationsData.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} isData={!educationsData}/>;
+    return <EmptyExperienceTab
+      tab={tab}
+      profileType="personal"
+      imgUrl={emptyPersonalTabsPictures.emptyEducationPic}
+      isData={!educationsData} />;
   }
 
   return (
     <Box sx={styles.container}>
       <Box>
-        {sortedEducations.map(({ id, type, name, description, startYear, endYear, iconComponent }) => (
+        {sortedEducations.map(({ id, type, name, description, startYear, endYear }) => (
           <EducationItem
             key={id}
             id={id}
@@ -52,7 +52,7 @@ const Education = ({ tab, profileType, imgUrl }) => {
             description={description}
             startYear={startYear}
             endYear={endYear === 9999 ? 'Now' : endYear}
-            icon={iconComponent}
+            icon={getIcon()}
           />
         ))}
       </Box>
@@ -62,8 +62,6 @@ const Education = ({ tab, profileType, imgUrl }) => {
 
 Education.propTypes = {
   tab: PropTypes.string.isRequired,
-  profileType: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired
-}
+};
 
 export default Education;

@@ -7,8 +7,9 @@ import CustomTooltip from '../../../../../../UI/CustomTooltip';
 import StarIcon from '@mui/icons-material/Star';
 
 const SkillsList = ({ data, length }) => {
-  const { specializationName, mainSpecialization,masteryName, hardSkills } = data;
-  const count = length === 1 ? 2 : 1;
+  const { specializationName, mainSpecialization, masteryName, hardSkills } = data;
+  
+  const flexValue = length === 1 ? (hardSkills.length === 1) ? { flex: '0 1 100%' } : { flex: '0 1 calc(50% - 10px)' } : { flex: '0 1 100%' };
   const level = masteryName || 'N/A';
   
   return (
@@ -21,7 +22,7 @@ const SkillsList = ({ data, length }) => {
             </CustomTooltip>
             <CustomTooltip title={specializationName}>
               <Typography variant="h6" sx={styles.title}>
-              {specializationName}
+                {specializationName}
               </Typography>
             </CustomTooltip>
           </>
@@ -34,9 +35,9 @@ const SkillsList = ({ data, length }) => {
       <Typography variant="subtitle2" sx={styles.text} className={level}>
         Level <span>{level}</span>
       </Typography>
-      <Box sx={{ ...styles.list, columnCount: count }}>
+      <Box sx={styles.list}>
         {hardSkills?.map((skill) => (
-          <SkillsItem key={skill.id} data={skill} />
+          <SkillsItem key={skill.id} data={skill} flex={flexValue} />
         ))}
       </Box>
     </Box>

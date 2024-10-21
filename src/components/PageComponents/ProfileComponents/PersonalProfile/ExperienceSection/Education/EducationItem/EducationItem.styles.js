@@ -3,8 +3,9 @@ const styles = {
     width: '100%',
     marginBottom: theme.spacing(4),
     padding: theme.spacing(4),
-    backgroundColor: theme.palette.sliderAssessment.darkGray,
+    backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     borderRadius: 2,
+    border: theme.palette.sliderAssessment.border,
     wordBreak: 'break-word',
     overflowWrap: 'break-word'
   }),
@@ -33,15 +34,15 @@ const styles = {
 
   iconBtnModal: (theme) => ({
     flex: '1 0 35px',
-    color: theme.palette.neutral['200'],
+    color: theme.palette.iconBtn.burgerDot.color,
     borderRadius: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
-      backgroundColor: theme.palette.neutral['700'],
-      color: theme.palette.neutral['200'],
+      color: theme.palette.iconBtn.burgerDot.hover.color,
+      backgroundColor: theme.palette.iconBtn.burgerDot.hover.backgroundColor,
     },
   }),
 };

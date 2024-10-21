@@ -1,5 +1,9 @@
 export const uk = {
   translation: {
+    header: {
+      search: 'Пошук',
+      notFound: 'За цим запитом немає збігів',
+    },
     home: {
       hero: {
         title: 'Мультифункціональна платформа від розробників для розробників',
@@ -478,6 +482,8 @@ export const uk = {
       edit: 'Редагувати',
     },
     schedule: {
+      deleteEventSuccessMessage:'Подія видалена',
+      deleteEventErrorMessage:'Подія не була видалена',
       title: 'Розклад',
       host: 'Хост',
       participant: 'Учасник',

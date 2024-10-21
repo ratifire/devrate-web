@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Link, Typography, Tooltip, Grid } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import PropTypes from 'prop-types';
-import styles from './AchievementItem.style';
+import styles from './AchievementItem.styles';
 
 const AchievementItem = ({ achievement, icon: IconComponent }) => {
   return (

@@ -1,5 +1,5 @@
 // src/app/store.js
-
+/* eslint-disable */
 
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
@@ -34,11 +34,15 @@ const personalPersistConfig = {
   key: 'personal',
   storage,
   whitelist: ['personal'],
+}; const themePersistConfig = {
+  key: 'theme',
+  storage,
+  whitelist: ['theme'],
 };
 
 const rootReducer = {
   theme:themeSliceReducer,
-  modal: modalSliceReducer,
+  modal: persistReducer(themePersistConfig,modalSliceReducer),
   education: educationReducer,
   modalStep: modalStepReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,

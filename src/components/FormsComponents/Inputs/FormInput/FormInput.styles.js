@@ -5,40 +5,40 @@ export const styles = {
   }),
   input: (theme) => ({
     ' .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['500'],
+      borderColor: theme.palette.modals.inputs.border.default,
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.neutral['300'],
+      borderColor: theme.palette.modals.inputs.border.hover,
     },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.primary['200'],
+      borderColor: theme.palette.modals.inputs.border.focused,
       borderWidth: '2px',
     },
     '&.Mui-error.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
+      borderColor: theme.palette.modals.inputs.border.error,
     },
     '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.main,
+      borderColor: theme.palette.modals.inputs.border.error,
     },
     '&, & input': {
-      backgroundColor: `${theme.palette.background.default} !important`,
-      color: `${theme.palette.text.primary} !important`,
+      backgroundColor: theme.palette.modals.background,
+      color: theme.palette.modals.inputs.textColor.default,
     },
     '&:-webkit-autofill, & input:-webkit-autofill': {
-      'WebkitTextFillColor': `${theme.palette.text.primary} !important`,
-      'boxShadow': `0 0 0 100px ${theme.palette.background.default} inset !important`,
+      'WebkitTextFillColor': `${theme.palette.modals.inputs.textColor.default} !important`,
+      'boxShadow': `0 0 0 100px ${theme.palette.modals.backgroundColor} inset !important`,
       'transition': 'background-color 5000s ease-in-out 0s',
     },
   }),
   label: (theme) => ({
     '&.Mui-focused': {
-      color: theme.palette.primary['200'],
+      color: theme.palette.modals.inputs.labelColor.focused,
     },
     '&.Mui-error': {
-      color: theme.palette.error.main,
+      color: theme.palette.modals.inputs.labelColor.error,
     },
     '&.Mui-required .MuiFormLabel-asterisk': {
-      color: '#ED0E0E'
+      color: theme.palette.modals.inputs.labelColor.required
     },
   }),
   textHelper: {

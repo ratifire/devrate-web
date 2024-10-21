@@ -19,7 +19,7 @@ export const styles = {
   }),
   s: (theme) => ({
     height: 8,
-    backgroundColor: theme.palette.neutral['400'],
+    backgroundColor: theme.palette.modals.progressBgColor,
     borderRadius: 3,
     color: theme.palette.primary['400'],
     '>span': {
@@ -29,7 +29,7 @@ export const styles = {
   }),
   m: (theme) => ({
     height: 8,
-    backgroundColor: theme.palette.neutral['400'],
+    backgroundColor: theme.palette.modals.progressBgColor,
     borderRadius: 3,
     '>span': {
       background: 'linear-gradient(90deg, #4A1D8B, #8233F1, #A756B4, #FCA728)',

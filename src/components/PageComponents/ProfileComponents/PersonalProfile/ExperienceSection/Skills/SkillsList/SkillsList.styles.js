@@ -2,14 +2,15 @@ export const styles = {
   wrapper: (theme) => ({
     paddingX: theme.spacing(4),
     paddingY: theme.spacing(3),
-    backgroundColor: theme.palette.neutral[600],
+    backgroundColor: theme.palette.sliderAssessment.backgroundColor,
+    border: theme.palette.sliderAssessment.border,
     borderRadius: 2,
     width: '100%',
   }),
   star: (theme) => ({
     width: '18px',
     height: '18px',
-    color: theme.palette.primary['200'],
+    color: theme.palette.experienceSkillSect.star,
   }),
   titleWrapper: (theme) => ({
     display: 'flex',
@@ -29,13 +30,13 @@ export const styles = {
   text: (theme) => ({
     textTransform: 'lowercase',
     '&.JUNIOR': {
-      color: theme.palette.info.main,
+      color: theme.palette.experienceSkillSect.text.junior,
     },
     '&.MIDDLE': {
-      color: theme.palette.info.azure,
+      color: theme.palette.experienceSkillSect.text.middle,
     },
     '&.SENIOR': {
-      color: theme.palette.info.lime,
+      color: theme.palette.experienceSkillSect.text.senior,
     },
     '&:first-letter': {
       textTransform: 'uppercase',
@@ -47,7 +48,10 @@ export const styles = {
       },
     },
   }),
-  list: (theme) => ({
-    marginTop: theme.spacing(3),
-  }),
+  list: {
+    marginTop: '16px',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gridGap: '0 20px',
+  },
 };

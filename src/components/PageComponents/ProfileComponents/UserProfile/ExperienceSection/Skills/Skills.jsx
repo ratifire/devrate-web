@@ -11,26 +11,22 @@ import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/Emp
 import SearchIcon from '@mui/icons-material/Search';
 import { sortedSkills } from '../../../../../../utils/helpers/sortedSkills';
 import { sortSkillsByOriginal } from '../../../../../../utils/helpers/sortedSkillsByOriginal';
-import { useGetUserAllSpecializationQuery } from '../../../../../../redux/user/personal/personalApiSlice';
+import { useGetUserAllSpecializationQuery } from '../../../../../../redux/specialization/specializationApiSlice';
 import { updateAllSpecializations } from './updateAllSpecialization';
+import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 
-const Skills = ({ id, tab, profileType, imgUrl }) => {
+
+const Skills = ({ id, tab }) => {
   const [specCurrent, setSpecCurrent] = useState('');
   const { data: userAllSpecializations, isLoading } = useGetUserAllSpecializationQuery(id);
   
   const updateAllSpecialization = userAllSpecializations ? updateAllSpecializations(userAllSpecializations) : [];
   const selectedSpecialization = updateAllSpecialization?.find((s) => s.specializationName === specCurrent);
-
   const level = selectedSpecialization?.masteryName;
-  
   const skillVisible = selectedSpecialization?.hardSkills.filter((item) => item.hidden === true);
-  
   const [filteredSkills, setFilteredSkills] = useState(skillVisible);
-  
   const [open, setOpen] = useState(false);
-  
   const [srtSearch, setSrtSearch] = useState('');
-  
   const loverNameHardSkills = skillVisible?.map((item) => ({
     ...item,
     name: item.name.toLowerCase(),
@@ -85,7 +81,7 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
   };
   
   if (isLoading || !userAllSpecializations || userAllSpecializations.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType={profileType} imgUrl={imgUrl} />;
+    return <EmptyExperienceTab tab={tab} profileType='user' imgUrl={emptyUserTabsPictures.emptySkillsPic} />;
   }
   
   return (
@@ -148,8 +144,6 @@ const Skills = ({ id, tab, profileType, imgUrl }) => {
 Skills.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   tab: PropTypes.string.isRequired,
-  profileType: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired,
 };
 
 export default Skills;
