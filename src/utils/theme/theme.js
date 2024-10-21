@@ -1,4 +1,4 @@
-import { DARK_THEME } from '../constants/theme';
+import { DARK_THEME } from '../constants/Theme/theme';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -42,7 +42,7 @@ const getDesignTokens = (mode) => ({
     },
     h5: {
       fontSize: 24,
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: 1.334,
       letterSpacing: 0,
     },
@@ -213,7 +213,7 @@ const getDesignTokens = (mode) => ({
               backgroundColor: '#1D1D1D',
               selected: {
                 backgroundColor: '#252527',
-                color: '#B78AF7',
+                color: '#C5C5C6',
               },
               hover: '#252527',
             },
@@ -673,7 +673,7 @@ const getDesignTokens = (mode) => ({
               backgroundColor: '#FFFFFF',
               selected: {
                 backgroundColor: '#ECECED',
-                color: '#8133F1',
+                color: '#303032',
               },
               hover: '#ECECED',
             },
