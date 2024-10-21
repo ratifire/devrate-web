@@ -11,12 +11,13 @@ export const styles = {
     maxWidth: '239px',
     width: '100%',
     display: 'flex',
-    gap: theme.spacing(4),
+    justifyContent: 'space-between',
+    gap: theme.spacing(1),
     alignItems: 'center',
     position: 'relative',
   }),
   grade: (theme) => ({
-    color: theme.palette.sliderAssessment.lightGray,
+    color: theme.palette.sliderAssessment.grade,
     width: '44px',
     textAlign: 'right',
   }),
@@ -52,10 +53,10 @@ export const styles = {
       width: '22px',
       height: '21px',
       borderRadius: '0',
-      backgroundColor: theme.palette.sliderAssessment.darkGray,
+      backgroundColor: theme.palette.sliderAssessment.tooltip.backgroundColor,
 
       '& > span': {
-        color: theme.palette.sliderAssessment.lightGray,
+        color: theme.palette.sliderAssessment.tooltip.color,
         fontSize: '14px',
       },
     },
@@ -63,9 +64,9 @@ export const styles = {
       transform: 'translateY(-80%) scale(1)',
     },
   }),
-  divider: {
-    borderColor: '#69696B',
-  },
+  divider: (theme) => ({
+    borderColor: theme.palette.sliderAssessment.divider,
+  }),
   left: (theme) => ({
     position: 'absolute',
     width: '25px',
@@ -79,7 +80,7 @@ export const styles = {
     position: 'absolute',
     width: '20px',
     height: '8px',
-    right: '39px',
+    right: '53px',
     borderTopRightRadius: '12px',
     borderBottomRightRadius: '12px',
     backgroundColor: theme.palette.sliderAssessment.gray,
