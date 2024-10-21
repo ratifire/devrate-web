@@ -5,7 +5,6 @@ export const styles = {
     fontSize: '14px',
   },
   demoAppMain: theme=>({
-    // display: "none",
     flexGrow: '1',
     padding: theme.spacing(4),
   }),
@@ -38,7 +37,7 @@ export const styles = {
   timeGridTableHeadLight: {
     borderColor: '#C5C5C6',
     color: '#303032',
-     fontSize: '14px',
+    fontSize: '14px',
     lineHeight: '20.02px',
   },
   timeGridTodayElements: {
