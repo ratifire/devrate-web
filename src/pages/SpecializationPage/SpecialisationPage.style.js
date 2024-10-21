@@ -20,11 +20,13 @@ export const styles = {
     },
   }),
   specialisationCategories: {
+    backgroundImage: 'none',
     gridColumn: '1/13',
     gridRow: '1/2',
     minHeight: 202,
   },
   specialisationHardSkills: {
+    backgroundImage: 'none',
     gridColumn: '1/5',
     gridRow: '2/4',
     display: 'flex',
@@ -32,10 +34,12 @@ export const styles = {
     flexShrink: 1,
   },
   specialisationLevel: {
+    backgroundImage: 'none',
     gridColumn: '5/9',
     gridRow: '2/3',
   },
   specialisationInterviewParticipation: {
+    backgroundImage: 'none',
     gridColumn: '9/13',
     gridRow: '2/3',
   },
