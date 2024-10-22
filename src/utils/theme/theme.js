@@ -559,6 +559,9 @@ const getDesignTokens = (mode) => ({
             },
           },
           specialization: {
+            subtitle: {
+              color: '#ECECED'
+            },
             progress: {
               color: '#8133F1',
             },
@@ -598,6 +601,9 @@ const getDesignTokens = (mode) => ({
         }
       : {
           specialization: {
+            subtitle: {
+              color: '#252527'
+            },
             progress: {
               color: '#8133F1',
             },
