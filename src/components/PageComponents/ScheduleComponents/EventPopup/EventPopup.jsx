@@ -14,7 +14,6 @@ import links from '../../../../router/links';
 
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
-  console.log(event)
   const { t } = useTranslation();
   const [deleteEventById] = useDeleteEventByIdMutation();
   const theme = useTheme()

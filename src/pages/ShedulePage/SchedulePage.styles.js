@@ -34,7 +34,6 @@ export const styles = {
       letterSpacing: '0.25px',
 }),
   calendarWrapper: (theme) => ({
-    // backgroundColor: theme.palette.mode==="dark" ? theme.palette.background.level2 :theme.palette.common.white,
     backgroundColor: theme.palette.schedule.backgroundColor,
      borderRadius: 2,
     backgroundImage: 'none',
