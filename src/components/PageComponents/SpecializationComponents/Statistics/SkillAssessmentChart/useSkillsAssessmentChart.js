@@ -4,8 +4,8 @@ const useSkillsAssessmentChart = () => {
   const theme = useTheme();
 
   const grad1 = theme.palette.specialization.assessmentChart.grad1;
-  const grad2 = theme.palette.specialization.assessmentChart.grad1;
-  const grad3 = theme.palette.specialization.assessmentChart.grad1;
+  const grad2 = theme.palette.specialization.assessmentChart.grad2;
+  const grad3 = theme.palette.specialization.assessmentChart.grad3;
 
   return {
     grad1,
