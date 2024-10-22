@@ -58,6 +58,7 @@ The frontend of the application is built using modern web technologies and frame
 - [react-dropzone](https://react-dropzone.js.org/)
 - [react-i18next](https://react.i18next.com/)
 
+
 ## Test Account
 
 For testing and demonstration purposes, use the following credentials:
