@@ -598,8 +598,14 @@ const getDesignTokens = (mode) => ({
               btn: '#8133F1',
             },
           },
+          selectField: {
+           color: '#303032'
+          }
         }
       : {
+          selectField: {
+            color: '#F8F8F8'
+          },
           specialization: {
             subtitle: {
               color: '#252527'
