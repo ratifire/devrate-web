@@ -3,22 +3,21 @@ import { useTheme } from '@mui/material/styles';
 const useTooltip = () => {
   const theme = useTheme();
 
-  const tooltipContent = {
-    color: theme.palette.common.white,
-    backgroundColor: theme.palette.background.level2,
-    border: 'none',
-    borderRadius: 1,
+  const itemStyle = {
+    color: theme.palette.modalDropdown.color,
   };
 
-  const tooltipLabel = {
-    color: theme.palette.common.white,
-    backgroundColor: theme.palette.background.level2,
+  const contentStyle = {
     fontSize: '12px',
+    backgroundColor: theme.palette.modalDropdown.backgroundColor,
+    color: theme.palette.modalDropdown.color,
+    borderRadius: 1,
+    border: 'transparent',
   };
 
   return {
-    tooltipContent,
-    tooltipLabel,
+    itemStyle,
+    contentStyle
   };
 };
 

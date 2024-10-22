@@ -23,7 +23,7 @@ const InterviewChart = () => {
   const { t } = useTranslation();
   const dataMonths = useMemo(() => createTenMonthsInterviewData({ t, data }), [data]);
   const dataDays = useMemo(() => createTenDaysInterviewData({ data }), [data]);
-  const { tooltipLabel, tooltipContent } = useTooltip();
+  const { itemStyle, contentStyle } = useTooltip();
   const { conductedGrad1, conductedGrad2, conductedGrad3, passedGrad1, passedGrad2, passedGrad3 } = useThemeInterviewChart()
 
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
@@ -84,7 +84,7 @@ const InterviewChart = () => {
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
             <XAxis dataKey='name' />
             <YAxis domain={[0, 10]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} interval={0} />
-            <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
+            <Tooltip itemStyle={itemStyle} contentStyle={contentStyle} />
             <Bar
               dataKey='conducted'
               name={t('specialization.interviewsChart.conducted')}
