@@ -72,20 +72,24 @@ export const styles = {
     gridColumn: '1/5',
     gridRow: '1/2',
     height: 250, //To be removed before merge
+    backgroundImage: 'none',
   },
   averageSkillsScore: {
     gridColumn: '5/13',
     gridRow: '1/2',
     height: 250, //To be removed before merge
+    backgroundImage: 'none',
   },
   hardSkillsByProductivity: {
     gridColumn: '1/4',
     gridRow: '2/3',
     width: '300px',
     padding: '18px',
+    backgroundImage: 'none',
   },
   interview: {
     gridColumn: '4/13',
     gridRow: '2/3',
+    backgroundImage: 'none',
   },
 };
