@@ -1,9 +1,11 @@
 export const styles = {
   btnIcon: (theme) => ({
-    color: theme.palette.primary['100'],
+    color: theme.palette.iconBtn.createBtn.color,
+    transition: 'background-color 0.3s, transform 0.3s',
     borderRadius: 1,
     ':hover': {
-      backgroundColor: `${theme.palette.primary['200']}29`,
+      backgroundColor: theme.palette.iconBtn.createBtn.hover.backgroundColor,
+      color: theme.palette.iconBtn.createBtn.hover.color,
     },
     svg: {
       fontSize: '18px',
