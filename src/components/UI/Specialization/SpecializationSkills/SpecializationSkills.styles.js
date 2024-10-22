@@ -28,7 +28,7 @@ export const styles = {
     overflowY: 'auto',
     paddingRight: '10px',
     '&::-webkit-scrollbar': {
-      width: 6,
+      width: 10,
     },
     '&::-webkit-scrollbar-track': {
       backgroundColor: theme.palette.scroll.scrollWrapp,
