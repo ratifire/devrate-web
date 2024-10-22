@@ -1,5 +1,4 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Box, MenuItem, Select, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
@@ -15,6 +14,7 @@ import {
 } from '../utils';
 import { styles } from './SkillsAssessmentChart.styles';
 import useSkillsAssessmentChart from './useSkillsAssessmentChart';
+import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
@@ -52,28 +52,11 @@ const SkillsAssessmentChart = () => {
         <Box>
           <Typography variant='subtitle2'>{t('specialization.statistics.skills_assessment_chart_title')}</Typography>
         </Box>
-        <Box>
-          <Select
-            sx={styles.select}
-            onChange={handleChange}
-            defaultValue={'months'}
-            IconComponent={KeyboardArrowDownIcon}
-            inputProps={{
-              MenuProps: {
-                PaperProps: {
-                  sx: styles.dropdownPaper,
-                },
-              },
-            }}
-          >
-            <MenuItem sx={styles.menuItem} value={'months'}>
-              {t('specialization.statistics.interview_chart_months')}
-            </MenuItem>
-            <MenuItem sx={styles.menuItem} value={'days'}>
-              {t('specialization.statistics.interview_chart_days')}
-            </MenuItem>
-          </Select>
-        </Box>
+        <ChartDropDown
+          handleChange={handleChange}
+          months={t('specialization.statistics.interview_chart_months')}
+          days={t('specialization.statistics.interview_chart_days')}
+        />
       </Box>
       <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
