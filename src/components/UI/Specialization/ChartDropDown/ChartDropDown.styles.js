@@ -16,14 +16,19 @@ export const styles = {
     },
   }),
   dropdownPaper: (theme) => ({
-    backgroundColor: theme.palette.neutral[900],
+    backgroundColor: theme.palette.modalDropdown.backgroundColor,
+    color: theme.palette.modalDropdown.color,
   }),
 
   menuItem: (theme) => ({
-    backgroundColor: theme.palette.neutral[900],
+    color: theme.palette.modalDropdown.color,
     '&:hover': {
-      backgroundColor: theme.palette.neutral[800],
-      color: theme.palette.primary[200],
+      backgroundColor: theme.palette.modalDropdown.hoverBgColor,
+      color: theme.palette.modalDropdown.color,
     },
+    '&:active': {
+      backgroundColor: theme.palette.modalDropdown.hoverBgColor,
+      color: theme.palette.action.active
+    }
   }),
 };
