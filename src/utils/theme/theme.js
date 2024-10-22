@@ -1,4 +1,6 @@
 import { DARK_THEME } from '../constants/Theme/theme';
+import { specializationDark } from './specialization/specializationDark';
+import { specializationLight } from './specialization/specializationLight';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -558,94 +560,10 @@ const getDesignTokens = (mode) => ({
               cancelEventBtnColor: '#CEB0FA',
             },
           },
-          specialization: {
-            subtitle: {
-              color: '#ECECED'
-            },
-            progress: {
-              color: '#8133F1',
-            },
-            arrow: {
-              down: '#ED0E0E',
-              up: '#64FF2E',
-              circle: '#252527',
-            },
-            levelChart: {
-              grad1: '#4A1D8B',
-              grad2: '#8233F1',
-              grad3: '#A756B4',
-              grad4: '#FCA728',
-            },
-            hardSkillsChart: {
-              grad1: '#16FFB9',
-              grad2: '#DAFE22',
-            },
-            interviewChart: {
-              conductedGrad1: '#FFC061',
-              conductedGrad2: '#F39E37',
-              conductedGrad3: '#8D5C20',
-              passedGrad1: '#B07AFD',
-              passedGrad2: '#8133F1',
-              passedGrad3: '#4A1D8B',
-            },
-            assessmentChart: {
-              grad1: '#DAFE22',
-              grad2: 'rgba(130, 254, 102, 0.55)',
-              grad3: 'rgba(22, 255, 185, 0.00)',
-            },
-            level: {
-              btnGroup: '#3E3E40',
-              btn: '#8133F1',
-            },
-          },
-          selectField: {
-           color: '#303032'
-          }
+          ...specializationDark
         }
       : {
-          selectField: {
-            color: '#F8F8F8'
-          },
-          specialization: {
-            subtitle: {
-              color: '#252527'
-            },
-            progress: {
-              color: '#8133F1',
-            },
-            arrow: {
-              down: '#A70000',
-              up: '#3AB310',
-              circle: '#ECECED',
-            },
-            levelChart: {
-              grad1: '#5B08D3',
-              grad2: '#7F23FF',
-              grad3: '#B056BE',
-              grad4: '#FCA728',
-            },
-            hardSkillsChart: {
-              grad1: '#D31772',
-              grad2: '#EE7538',
-            },
-            interviewChart: {
-              conductedGrad1: '#FFC061',
-              conductedGrad2: '#F39E37',
-              conductedGrad3: '#B76604',
-              passedGrad1: '#B07AFD',
-              passedGrad2: '#8838FA',
-              passedGrad3: '#5B08D3',
-            },
-            assessmentChart: {
-              grad1: '#EE7538',
-              grad2: 'rgba(226, 75, 82, 0.56)',
-              grad3: 'rgba(211, 23, 114, 0.00)',
-            },
-            level: {
-              btnGroup: '#ECECED',
-              btn: '#8133F1',
-            },
-          },
+          ...specializationLight,
           notifications: {
             backgroundColor: '#FFFFFF',
             borderColor: '#C5C5C6',
