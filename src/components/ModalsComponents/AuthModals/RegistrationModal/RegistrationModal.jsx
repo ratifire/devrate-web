@@ -63,7 +63,16 @@ const RegistrationModal = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
-
+  
+  const isFormValid = formik.values.email &&
+      formik.values.country &&
+      formik.values.firstName &&
+      formik.values.lastName &&
+      formik.values.password &&
+      formik.values.repeatPassword &&
+      formik.values.agreement &&
+      formik.isValid && formik.dirty;
+  
   return isCreating ? (
     <CircularProgress />
   ) : (
@@ -168,7 +177,7 @@ const RegistrationModal = () => {
             variant="contained"
             type="submit"
             handlerClick={formik.handleSubmit}
-            disabled={(!formik.values.news && true) || (!formik.values.agreement && true)}
+            disabled={!isFormValid}
             label="modal.registration.btn_register"
           />
         </Box>
