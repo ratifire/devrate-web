@@ -45,6 +45,9 @@ export const specializationLight = {
     },
     star: {
       color: '#8133F1'
+    },
+    activeSpec: {
+      color: 'transparent',
     }
   },
 }

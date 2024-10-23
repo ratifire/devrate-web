@@ -56,13 +56,13 @@ export const styles = {
 
     '&.active': {
       '&::before': {
-        borderColor: theme.palette.primary['200'],
+        borderColor: theme.palette.specialization.activeSpec.color,
       },
       '&::after': {
-        borderColor: theme.palette.primary['200'],
+        borderColor: theme.palette.specialization.activeSpec.color,
       },
       '.figure__deco::after': {
-        borderColor: theme.palette.primary['200'],
+        borderColor: theme.palette.specialization.activeSpec.color,
       },
     },
 

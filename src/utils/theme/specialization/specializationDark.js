@@ -45,6 +45,9 @@ export const specializationDark = {
     },
     star: {
       color: '#B78AF7'
+    },
+    activeSpec: {
+      color: '#B78AF7',
     }
   },
 };
