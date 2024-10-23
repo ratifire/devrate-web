@@ -563,6 +563,7 @@ const getDesignTokens = (mode) => ({
           ...specializationDark
         }
       : {
+        ...specializationLight,
         notifications: {
           backgroundColor: '#FFFFFF',
           borderColor: '#C5C5C6',
