@@ -44,7 +44,7 @@ export const specializationLight = {
       deco: '#FFF',
     }
   },
-  selectField: {
+  selectField: { // После pull вынести в theme.js
     color: '#F8F8F8'
   },
 }
