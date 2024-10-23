@@ -42,6 +42,9 @@ export const specializationDark = {
       color: '#3E3E40',
       border: 'transparent',
       deco: '#303032',
+    },
+    star: {
+      color: '#B78AF7'
     }
   },
 };

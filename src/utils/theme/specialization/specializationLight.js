@@ -42,6 +42,9 @@ export const specializationLight = {
       border: '#C5C5C6',
       color: '#ECECED',
       deco: '#FFF',
+    },
+    star: {
+      color: '#8133F1'
     }
   },
 }

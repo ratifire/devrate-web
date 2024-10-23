@@ -159,7 +159,7 @@ export const styles = {
   star: (theme) => ({
     marginTop: '12px',
     marginRight: '16px',
-    color: theme.palette.action.active,
+    color: theme.palette.specialization.star.color,
     position: 'relative',
     zIndex: 1,
   }),
