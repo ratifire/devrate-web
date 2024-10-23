@@ -48,6 +48,9 @@ export const specializationDark = {
     },
     activeSpec: {
       color: '#B78AF7',
+    },
+    mark: {
+      color: '#B78AF7'
     }
   },
 };

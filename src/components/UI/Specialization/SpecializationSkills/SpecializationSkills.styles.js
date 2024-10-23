@@ -47,6 +47,6 @@ export const styles = {
     paddingRight: '10px',
   }),
   mark: (theme) => ({
-    color: theme.palette.action.active,
+    color: theme.palette.specialization.mark.color,
   }),
 };
