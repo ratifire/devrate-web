@@ -109,286 +109,286 @@ const getDesignTokens = (mode) => ({
     mode,
     ...(mode === DARK_THEME
       ? {
-          notifications: {
-            backgroundColor: '#252527',
-            borderColor: 'transparent',
-            badge: {
-              backgroundColor: '#FF0000',
-              boxShadow: '#FF0000CC',
-              fill: '#C5C5C6',
-            },
-            icon: {
-              close: '#C5C5C6',
-              typeMessage: '#C5C5C6',
-            },
-            item: {
-              color: '#FFFFFF',
-              boxShadow: '#C5C5C640',
-              colorTime: '#C5C5C6',
-              newMessages: {
-                color: '#360083',
-                backgroundColor: '#CEB0FA',
-              },
-            },
+        notifications: {
+          backgroundColor: '#252527',
+          borderColor: 'transparent',
+          badge: {
+            backgroundColor: '#FF0000',
+            boxShadow: '#FF0000CC',
+            fill:'#C5C5C6',
           },
-          checkBox: {
-            border: '#C5C5C6',
+          icon:{
+            close: '#C5C5C6',
+            typeMessage: '#C5C5C6',
           },
-          border: {
-            color: '#252527',
+          item: {
+            color: '#FFFFFF',
+            boxShadow: '#C5C5C640',
+            colorTime: '#C5C5C6',
+            newMessages: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA',
+            }
           },
-          search: {
-            color: 'rgba(197, 197, 198, 0.25)',
-            inputActive: '#B78AF7',
-            emptyTitle: '#fff',
-            title: '#fff',
-            subtitle: '#C5C5C6',
-          },
-          steper: {
-            completed: {
-              circle: {
-                backgroundColor: '#8133F1',
-              },
+        },
+        checkBox: {
+          border: '#C5C5C6',
+        },
+        border: {
+          color: '#252527',
+        },
+        search: {
+          color: 'rgba(197, 197, 198, 0.25)',
+          inputActive: '#B78AF7',
+          emptyTitle: '#fff',
+          title: '#fff',
+          subtitle: '#C5C5C6',
+        },
+        steper: {
+          completed: {
+            circle: {
               backgroundColor: '#8133F1',
             },
-            active: {
-              circle: {
-                backgroundColor: '#8133F1',
-              },
+            backgroundColor: '#8133F1',
+          },
+          active: {
+            circle: {
               backgroundColor: '#8133F1',
             },
-            inactive: {
-              circle: {
-                backgroundColor: '#69696B',
-              },
+            backgroundColor: '#8133F1',
+          },
+          inactive: {
+            circle: {
               backgroundColor: '#69696B',
             },
-            color: '#FFFFFF',
+            backgroundColor: '#69696B',
           },
-          modals: {
-            inputs: {
+          color: '#FFFFFF',
+        },
+        modals: {
+          inputs: {
+            placeholder: '#69696B',
+            border: {
+              default: '#444446',
+              hover: '#828283',
+              focused: '#B78AF7',
+              disable: '#3E3E40',
+              error: '#ED0E0E',
+            },
+            textColor: {
+              default: '#FFFFFF',
               placeholder: '#69696B',
-              border: {
-                default: '#444446',
-                hover: '#828283',
-                focused: '#B78AF7',
-                disable: '#3E3E40',
-                error: '#ED0E0E',
-              },
-              textColor: {
-                default: '#FFFFFF',
-                placeholder: '#69696B',
-                disabled: '#69696B',
-              },
-              labelColor: {
-                default: '#C5C5C6',
-                hover: '#C5C5C6',
-                focused: '#B78AF7',
-                disable: '#69696B',
-                error: '#D32F2F',
-                required: '#ED0E0E',
-              },
+              disabled: '#69696B',
             },
-            select: {
+            labelColor: {
+              default: '#C5C5C6',
+              hover: '#C5C5C6',
+              focused: '#B78AF7',
+              disable: '#69696B',
+              error: '#D32F2F',
+              required: '#ED0E0E',
+            },
+          },
+          select: {
+            placeholder: '#69696B',
+            border: {
+              default: '#444446',
+              hover: '#828283',
+              focused: '#B78AF7',
+              disable: '#3E3E40',
+              error: '#ED0E0E',
+            },
+            textColor: {
+              default: '#FFFFFF',
               placeholder: '#69696B',
-              border: {
-                default: '#444446',
-                hover: '#828283',
-                focused: '#B78AF7',
-                disable: '#3E3E40',
-                error: '#ED0E0E',
-              },
-              textColor: {
-                default: '#FFFFFF',
-                placeholder: '#69696B',
-                disabled: '#69696B',
-              },
-              labelColor: {
-                default: '#C5C5C6',
-                hover: '#C5C5C6',
-                focused: '#B78AF7',
-                disable: '#69696B',
-                error: '#D32F2F',
-                required: '#ED0E0E',
-              },
-              selectedField: {
-                backgroundColor: '#1D1D1D',
-                selected: {
-                  backgroundColor: '#252527',
-                  color: '#C5C5C6',
-                },
-                hover: '#252527',
-              },
+              disabled: '#69696B',
             },
-            textAreaInput: {
-              placeholder: '#69696B',
-              border: {
-                default: '#444446',
-                default2: '#252527',
-                hover: '#828283',
-                focused: '#B78AF7',
-                disable: '#3E3E40',
-                error: '#ED0E0E',
-              },
-              textColor: {
-                default: '#FFFFFF',
-                placeholder: '#69696B',
-                disabled: '#69696B',
-              },
-              labelColor: {
-                default: '#C5C5C6',
-                hover: '#C5C5C6',
-                focused: '#B78AF7',
-                disable: '#69696B',
-                error: '#D32F2F',
-                required: '#ED0E0E',
-              },
+            labelColor: {
+              default: '#C5C5C6',
+              hover: '#C5C5C6',
+              focused: '#B78AF7',
+              disable: '#69696B',
+              error: '#D32F2F',
+              required: '#ED0E0E',
             },
-            titleColor: '#FFFFFF',
-            backgroundColor: '#1D1D1D',
-            color: '#69696B',
-            progressBgColor: '#69696B',
-          },
-          baseUserInfo: {
-            city: {
-              color: '#25CBFF',
-            },
-          },
-          rightSection: {
-            languages: {
-              border: {
-                borderColor: 'transparent',
-              },
-              type: {
-                color: '#FFFFFF',
-                backgroundColor: '#5900D9',
-              },
-              level: {
-                color: '#360083',
-                backgroundColor: '#CEB0FA',
-              },
-              modalDeleteIcon: {
-                color: '#5900D9',
-              },
-            },
-            text: {
-              color: '#C5C5C6',
-            },
-          },
-          scroll: {
-            scrollWrapp: {
-              backgroundColor: '#3E3E40',
-            },
-            scrollEl: {
-              backgroundColor: '#FFFFFF',
-            },
-          },
-          iconBtn: {
-            search: {
-              color: '#CEB0FA',
-              svgColor: '#B78AF7',
-            },
-            link: {
-              color: '#CEB0FA',
-              hover: {
-                color: '#B78AF7',
-                backgroundColor: '#CEB0FA29',
-              },
-            },
-            writeMasssge: {
-              color: '#FFFFFF',
-              hover: '#5900D9',
-            },
-            bookInterview: {
-              color: '#B78AF7',
-              borderColor: '#B78AF7',
-              hover: {
-                color: '#B78AF7',
-                backgroundColor: '#CEB0FA29',
-                borderColor: '#B78AF7',
-              },
-            },
-            stepRight: {
-              active: {
-                backgroundColor: '#B78AF7',
-                hoverColor: '#252527',
-              },
-              disable: {
-                color: '#444446',
-              },
-            },
-            btnSave: {
-              backgroundColor: {
-                default: '#8133F1',
-                hover: '#5900D9',
-                disable: '#252527',
-              },
-              color: {
-                default: '#FFFFFF',
-                disabled: '#00000061',
-              },
-            },
-            btnClose: {
-              color: '#A9A9AA',
-              hoverColor: '#303032',
-            },
-            editBtn: {
-              color: '#CEB0FA',
-              backgroundColor: 'transparent',
-              hover: {
-                color: '#B78AF7',
-                backgroundColor: '#CEB0FA29',
-              },
-            },
-            createBtn: {
-              color: '#CEB0FA',
-              backgroundColor: 'transparent',
-              hover: {
-                color: '#B78AF7',
-                backgroundColor: '#CEB0FA29',
-              },
-            },
-            burgerDot: {
-              color: '#C5C5C6',
-              backgroundColor: 'transparent',
-              hover: {
-                color: '#A9A9AA',
+            selectedField: {
+              backgroundColor: '#1D1D1D',
+              selected: {
                 backgroundColor: '#252527',
+                color: '#C5C5C6',
               },
+              hover: '#252527',
             },
           },
-
-          tabsEl: {
-            borderColor: '#69696B',
-            indicator: '#B78AF7',
-            default: {
-              color: '#C5C5C6',
-              backgroundColor: 'transparent',
+          textAreaInput: {
+            placeholder: '#69696B',
+            border: {
+              default: '#444446',
+              default2: '#252527',
+              hover: '#828283',
+              focused: '#B78AF7',
+              disable: '#3E3E40',
+              error: '#ED0E0E',
             },
-            focused: {
+            textColor: {
+              default: '#FFFFFF',
+              placeholder: '#69696B',
+              disabled: '#69696B',
+            },
+            labelColor: {
+              default: '#C5C5C6',
+              hover: '#C5C5C6',
+              focused: '#B78AF7',
+              disable: '#69696B',
+              error: '#D32F2F',
+              required: '#ED0E0E',
+            },
+          },
+          titleColor: '#FFFFFF',
+          backgroundColor: '#1D1D1D',
+          color: '#69696B',
+          progressBgColor: '#69696B',
+        },
+        baseUserInfo: {
+          city: {
+            color: '#25CBFF',
+          },
+        },
+        rightSection: {
+          languages: {
+            border: {
+              borderColor: 'transparent',
+            },
+            type: {
+              color: '#FFFFFF',
+              backgroundColor: '#5900D9',
+            },
+            level: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA',
+            },
+            modalDeleteIcon: {
+              color: '#5900D9',
+            },
+          },
+          text: {
+            color: '#C5C5C6',
+          },
+        },
+        scroll: {
+          scrollWrapp: {
+            backgroundColor: '#3E3E40',
+          },
+          scrollEl: {
+            backgroundColor: '#FFFFFF',
+          },
+        },
+        iconBtn: {
+          search:{
+            color: '#CEB0FA',
+            svgColor: '#B78AF7'
+          },
+          link: {
+            color: '#CEB0FA',
+            hover: {
               color: '#B78AF7',
-              backgroundColor: 'transparent',
+              backgroundColor: '#CEB0FA29',
             },
           },
-          skillsSection: {
-            stars: {
-              iconFilled: '#B78AF7',
-              iconEmpty: '#828283',
-            },
-            doneInterviews: {
-              color: '#16FFB9',
-              backgroundColor: 'transparent',
-              borderColor: '#16FFB9',
-            },
-            completedInterviews: {
-              color: '#25CBFF',
-              backgroundColor: 'transparent',
-              borderColor: '#25CBFF',
+          writeMasssge: {
+            color: '#FFFFFF',
+            hover: '#5900D9',
+          },
+          bookInterview: {
+            color: '#B78AF7',
+            borderColor: '#B78AF7',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+              borderColor: '#B78AF7',
             },
           },
-          pagesSections: {
-            backgroundColor: '#303032',
+          stepRight: {
+            active: {
+              backgroundColor: '#B78AF7',
+              hoverColor: '#252527',
+            },
+            disable: {
+              color: '#444446',
+            },
           },
+          btnSave: {
+            backgroundColor: {
+              default: '#8133F1',
+              hover: '#5900D9',
+              disable: '#252527',
+            },
+            color: {
+              default: '#FFFFFF',
+              disabled: '#00000061',
+            },
+          },
+          btnClose: {
+            color: '#A9A9AA',
+            hoverColor: '#303032',
+          },
+          editBtn: {
+            color: '#CEB0FA',
+            backgroundColor: 'transparent',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          createBtn: {
+            color: '#CEB0FA',
+            backgroundColor: 'transparent',
+            hover: {
+              color: '#B78AF7',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          burgerDot: {
+            color: '#C5C5C6',
+            backgroundColor: 'transparent',
+            hover: {
+              color: '#A9A9AA',
+              backgroundColor: '#252527',
+            },
+          },
+        },
+
+        tabsEl: {
+          borderColor: '#69696B',
+          indicator: '#B78AF7',
+          default: {
+            color: '#C5C5C6',
+            backgroundColor: 'transparent',
+          },
+          focused: {
+            color: '#B78AF7',
+            backgroundColor: 'transparent',
+          },
+        },
+        skillsSection: {
+          stars: {
+            iconFilled: '#B78AF7',
+            iconEmpty: '#828283',
+          },
+          doneInterviews: {
+            color: '#16FFB9',
+            backgroundColor: 'transparent',
+            borderColor: '#16FFB9',
+          },
+          completedInterviews: {
+            color: '#25CBFF',
+            backgroundColor: 'transparent',
+            borderColor: '#25CBFF',
+          },
+        },
+        pagesSections: {
+          backgroundColor: '#303032',
+        },
 
           modalDropdown: {
             color: '#C5C5C6',
@@ -563,321 +563,320 @@ const getDesignTokens = (mode) => ({
           ...specializationDark
         }
       : {
-          ...specializationLight,
-          notifications: {
-            backgroundColor: '#FFFFFF',
-            borderColor: '#C5C5C6',
-            badge: {
-              backgroundColor: '#A70000',
-              boxShadow: '#FF0000CC',
-              fill: '#69696B',
-            },
-            icon: {
-              close: '#3E3E40',
-              typeMessage: '#3E3E40',
-            },
-            item: {
-              color: '#1D1D1D',
-              boxShadow: '#C5C5C640',
-              colorTime: '#3E3E40',
-              newMessages: {
-                color: '#360083',
-                backgroundColor: '#CEB0FA',
-              },
-            },
+        notifications: {
+          backgroundColor: '#FFFFFF',
+          borderColor: '#C5C5C6',
+          badge: {
+            backgroundColor: '#A70000',
+            boxShadow: '#FF0000CC',
+            fill:'#69696B',
           },
-          checkBox: {
-            border: '#828283',
+          icon:{
+            close: '#3E3E40',
+            typeMessage: '#3E3E40',
           },
-          border: {
-            color: '#C5C5C6',
+          item: {
+            color: '#1D1D1D',
+            boxShadow: '#C5C5C640',
+            colorTime: '#3E3E40',
+            newMessages: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA',
+            }
           },
-          search: {
-            color: 'rgba(197, 197, 198, 0.40)',
-            inputActive: '#8133F1',
-            title: '#1D1D1D',
-            subtitle: '#303032',
-          },
-          steper: {
-            completed: {
-              circle: {
-                backgroundColor: '#8133F1',
-                color: '#ECECED',
-              },
+        },
+        checkBox: {
+          border: '#828283',
+        },
+        border: {
+          color: '#C5C5C6',
+        },
+        search: {
+          color: 'rgba(197, 197, 198, 0.40)',
+          inputActive: '#8133F1',
+          title: '#1D1D1D',
+          subtitle: '#303032',
+        },
+        steper: {
+          completed: {
+            circle: {
               backgroundColor: '#8133F1',
+              color: '#ECECED',
             },
-            active: {
-              circle: {
-                backgroundColor: '#8133F1',
-                color: '#ECECED',
-              },
+            backgroundColor: '#8133F1',
+          },
+          active: {
+            circle: {
               backgroundColor: '#8133F1',
+              color: '#ECECED',
             },
-            inactive: {
-              circle: {
-                backgroundColor: '#ECECED',
-              },
+            backgroundColor: '#8133F1',
+          },
+          inactive: {
+            circle: {
               backgroundColor: '#ECECED',
             },
-            color: '#1D1D1D',
-          },
-          modals: {
-            inputs: {
-              placeholder: '#69696B',
-              border: {
-                default: '#828283',
-                hover: '#444446',
-                focused: '#8133F1',
-                disable: '#A9A9AA',
-                error: '#A70000',
-              },
-              textColor: {
-                default: '#444446',
-                placeholder: '#444446',
-                disabled: '#828283',
-              },
-              labelColor: {
-                default: '#1D1D1D',
-                hover: '#1D1D1D',
-                focused: '#8133F1',
-                disable: '#828283',
-                error: '#A70000',
-                required: '#ED0E0E',
-              },
-            },
-            select: {
-              placeholder: '#69696B',
-              border: {
-                default: '#828283',
-                hover: '#444446',
-                focused: '#8133F1',
-                disable: '#A9A9AA',
-                error: '#A70000',
-              },
-              textColor: {
-                default: '#444446',
-                placeholder: '#444446',
-                disabled: '#828283',
-              },
-              labelColor: {
-                default: '#1D1D1D',
-                hover: '#1D1D1D',
-                focused: '#8133F1',
-                disable: '#828283',
-                error: '#A70000',
-                required: '#ED0E0E',
-              },
-              selectedField: {
-                backgroundColor: '#FFFFFF',
-                selected: {
-                  backgroundColor: '#ECECED',
-                  color: '#303032',
-                },
-                hover: '#ECECED',
-              },
-            },
-            textAreaInput: {
-              placeholder: '#69696B',
-              border: {
-                default: '#828283',
-                default2: '#ECECED',
-                hover: '#444446',
-                focused: '#8133F1',
-                disable: '#A9A9AA',
-                error: '#A70000',
-              },
-              textColor: {
-                default: '#444446',
-                placeholder: '#444446',
-                disabled: '#828283',
-              },
-              labelColor: {
-                default: '#1D1D1D',
-                hover: '#1D1D1D',
-                focused: '#8133F1',
-                disable: '#828283',
-                error: '#A70000',
-                required: '#ED0E0E',
-              },
-            },
-            titleColor: '#1D1D1D',
-            backgroundColor: '#FFFFFF',
-            color: '#69696B',
-            progressBgColor: '#ECECED',
-          },
-          baseUserInfo: {
-            city: {
-              color: '#007CA3',
-            },
-          },
-          rightSection: {
-            languages: {
-              border: {
-                borderColor: '#B78AF7',
-              },
-              type: {
-                color: '#FFFFFF',
-                backgroundColor: '#6200EE',
-              },
-              level: {
-                color: '#4600A9',
-                backgroundColor: '#EFE6FD',
-              },
-              modalDeleteIcon: {
-                color: '#6200EE',
-              },
-            },
-            text: {
-              color: '#3E3E40',
-            },
-          },
-          scroll: {
-            scrollWrapp: {
-              backgroundColor: '#ECECED',
-            },
-            scrollEl: {
-              backgroundColor: '#C5C5C6',
-            },
-          },
-          tabsEl: {
-            borderColor: '#A9A9AA',
-            indicator: '#6200EE',
-            default: {
-              color: '#1D1D1D',
-              backgroundColor: 'transparent',
-            },
-            focused: {
-              color: '#6200EE',
-              backgroundColor: 'transparent',
-            },
-          },
-          iconBtn: {
-            search: {
-              color: '#8133F1',
-              svgColor: '#8133F1',
-            },
-            link: {
-              color: '#8133F1',
-              hover: {
-                color: '#8133F1',
-                backgroundColor: '#CEB0FA29',
-              },
-            },
-            writeMasssge: {
-              color: '#FFFFFF',
-              hover: '#360083',
-            },
-            bookInterview: {
-              color: '#6200EE',
-              borderColor: '#6200EE',
-              hover: {
-                color: '#360083',
-                backgroundColor: '#CEB0FA29',
-                borderColor: '#360083',
-              },
-            },
-            stepRight: {
-              active: {
-                backgroundColor: '#5900D9',
-                hoverColor: '#EFE6FD',
-              },
-              disable: {
-                color: '#444446',
-              },
-            },
-            btnSave: {
-              backgroundColor: {
-                default: '#5900D9',
-                hover: '#360083',
-                disable: '#C5C5C6',
-              },
-              color: {
-                default: '#FFFFFF',
-                disabled: '#828283',
-              },
-            },
-            btnClose: {
-              color: '#1D1D1D',
-              hoverColor: '#ECECED',
-            },
-            editBtn: {
-              color: '#8133F1',
-              backgroundColor: 'transparent',
-              hover: {
-                color: '#8133F1',
-                backgroundColor: '#CEB0FA29',
-              },
-            },
-            createBtn: {
-              color: '#8133F1',
-              backgroundColor: 'transparent',
-              hover: {
-                color: '#8133F1',
-                backgroundColor: '#EFE6FD',
-              },
-            },
-            burgerDot: {
-              color: '#3E3E40',
-              backgroundColor: 'transparent',
-              hover: {
-                color: '#3E3E40',
-                backgroundColor: '#ECECED',
-              },
-            },
-          },
-          skillsSection: {
-            stars: {
-              iconFilled: '#8133F1',
-              iconEmpty: '#828283',
-            },
-            doneInterviews: {
-              color: '#00855D',
-              backgroundColor: '#F8FFFD',
-              borderColor: '#00855D',
-            },
-            completedInterviews: {
-              color: '#007CA3',
-              backgroundColor: '#F8FDFF',
-              borderColor: '#007CA3',
-            },
-          },
-          pagesSections: {
-            backgroundColor: '#ffffff',
-          },
-          modalDropdown: {
-            color: '#1D1D1D',
-            backgroundColor: '#FFFFFF',
-            hoverBgColor: '#ECECED',
-            divider: '#C5C5C6',
-          },
-          responcibility: {
-            backgroundColor: '#EFE6FD',
-            responsibilityText: '#4600A9',
-            responsibilityIcon: '#5900D9', //need to check
-            responsibilityBorder: '#B78AF7',
-          },
-          themeSwitcher: {
             backgroundColor: '#ECECED',
-            switcherColor: '#EE7538',
-            borderColor: '#C5C5C6',
           },
-          sliderAssessment: {
-            violet: '#6200EE',
-            lightGray: '#F0F0F0',
-            gray: '#A0A0A0',
-            backgroundColor: '#F8F8F8',
-            backgroundColor2: '#C5C5C6' + 'BD',
-            border: '1px solid ' + '#ECECED',
+          color: '#1D1D1D',
+        },
+        modals: {
+          inputs: {
+            placeholder: '#69696B',
+            border: {
+              default: '#828283',
+              hover: '#444446',
+              focused: '#8133F1',
+              disable: '#A9A9AA',
+              error: '#A70000',
+            },
+            textColor: {
+              default: '#444446',
+              placeholder: '#444446',
+              disabled: '#828283',
+            },
+            labelColor: {
+              default: '#1D1D1D',
+              hover: '#1D1D1D',
+              focused: '#8133F1',
+              disable: '#828283',
+              error: '#A70000',
+              required: '#ED0E0E',
+            },
           },
-          schedule: {
-            backgroundColor: '#F8F8F8',
-            smallCalendar: {
-              textColor: '#F8F8F8',
-              backgroundColor: '#A066FF',
-              switchViewButtonColor: '#000000',
-              switchViewButtonBackgroundColor: '#CEB0FA',
-              arrowSwitcherColor: '#000000',
-              arrowSwitcherBackgroundColor: '#CEB0FA',
+          select: {
+            placeholder: '#69696B',
+            border: {
+              default: '#828283',
+              hover: '#444446',
+              focused: '#8133F1',
+              disable: '#A9A9AA',
+              error: '#A70000',
+            },
+            textColor: {
+              default: '#444446',
+              placeholder: '#444446',
+              disabled: '#828283',
+            },
+            labelColor: {
+              default: '#1D1D1D',
+              hover: '#1D1D1D',
+              focused: '#8133F1',
+              disable: '#828283',
+              error: '#A70000',
+              required: '#ED0E0E',
+            },
+            selectedField: {
+              backgroundColor: '#FFFFFF',
+              selected: {
+                backgroundColor: '#ECECED',
+                color: '#303032',
+              },
+              hover: '#ECECED',
+            },
+          },
+          textAreaInput: {
+            placeholder: '#69696B',
+            border: {
+              default: '#828283',
+              default2: '#ECECED',
+              hover: '#444446',
+              focused: '#8133F1',
+              disable: '#A9A9AA',
+              error: '#A70000',
+            },
+            textColor: {
+              default: '#444446',
+              placeholder: '#444446',
+              disabled: '#828283',
+            },
+            labelColor: {
+              default: '#1D1D1D',
+              hover: '#1D1D1D',
+              focused: '#8133F1',
+              disable: '#828283',
+              error: '#A70000',
+              required: '#ED0E0E',
+            },
+          },
+          titleColor: '#1D1D1D',
+          backgroundColor: '#FFFFFF',
+          color: '#69696B',
+          progressBgColor: '#ECECED',
+        },
+        baseUserInfo: {
+          city: {
+            color: '#007CA3',
+          },
+        },
+        rightSection: {
+          languages: {
+            border: {
+              borderColor: '#B78AF7',
+            },
+            type: {
+              color: '#FFFFFF',
+              backgroundColor: '#6200EE',
+            },
+            level: {
+              color: '#4600A9',
+              backgroundColor: '#EFE6FD',
+            },
+            modalDeleteIcon: {
+              color: '#6200EE',
+            },
+          },
+          text: {
+            color: '#3E3E40',
+          },
+        },
+        scroll: {
+          scrollWrapp: {
+            backgroundColor: '#ECECED',
+          },
+          scrollEl: {
+            backgroundColor: '#C5C5C6',
+          },
+        },
+        tabsEl: {
+          borderColor: '#A9A9AA',
+          indicator: '#6200EE',
+          default: {
+            color: '#1D1D1D',
+            backgroundColor: 'transparent',
+          },
+          focused: {
+            color: '#6200EE',
+            backgroundColor: 'transparent',
+          },
+        },
+        iconBtn: {
+          search:{
+            color: '#8133F1',
+            svgColor: '#8133F1'
+          },
+          link: {
+            color: '#8133F1',
+            hover: {
+              color: '#8133F1',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          writeMasssge: {
+            color: '#FFFFFF',
+            hover: '#360083',
+          },
+          bookInterview: {
+            color: '#6200EE',
+            borderColor: '#6200EE',
+            hover: {
+              color: '#360083',
+              backgroundColor: '#CEB0FA29',
+              borderColor: '#360083',
+            },
+          },
+          stepRight: {
+            active: {
+              backgroundColor: '#5900D9',
+              hoverColor: '#EFE6FD',
+            },
+            disable: {
+              color: '#444446',
+            },
+          },
+          btnSave: {
+            backgroundColor: {
+              default: '#5900D9',
+              hover: '#360083',
+              disable: '#C5C5C6',
+            },
+            color: {
+              default: '#FFFFFF',
+              disabled: '#828283',
+            },
+          },
+          btnClose: {
+            color: '#1D1D1D',
+            hoverColor: '#ECECED',
+          },
+          editBtn: {
+            color: '#8133F1',
+            backgroundColor: 'transparent',
+            hover: {
+              color: '#8133F1',
+              backgroundColor: '#CEB0FA29',
+            },
+          },
+          createBtn: {
+            color: '#8133F1',
+            backgroundColor: 'transparent',
+            hover: {
+              color: '#8133F1',
+              backgroundColor: '#EFE6FD',
+            },
+          },
+          burgerDot: {
+            color: '#3E3E40',
+            backgroundColor: 'transparent',
+            hover: {
+              color: '#3E3E40',
+              backgroundColor: '#ECECED',
+            },
+          },
+        },
+        skillsSection: {
+          stars: {
+            iconFilled: '#8133F1',
+            iconEmpty: '#828283',
+          },
+          doneInterviews: {
+            color: '#00855D',
+            backgroundColor: '#F8FFFD',
+            borderColor: '#00855D',
+          },
+          completedInterviews: {
+            color: '#007CA3',
+            backgroundColor: '#F8FDFF',
+            borderColor: '#007CA3',
+          },
+        },
+        pagesSections: {
+          backgroundColor: '#ffffff',
+        },
+        modalDropdown: {
+          color: '#1D1D1D',
+          backgroundColor: '#FFFFFF',
+          hoverBgColor: '#ECECED',
+          divider: '#C5C5C6',
+        },
+        responcibility: {
+          backgroundColor: '#EFE6FD',
+          responsibilityText: '#4600A9',
+          responsibilityIcon: '#5900D9', //need to check
+          responsibilityBorder: '#B78AF7',
+        },
+        themeSwitcher: {
+          backgroundColor: '#ECECED',
+          switcherColor: '#EE7538',
+          borderColor: '#C5C5C6',
+        },
+        sliderAssessment: {
+          violet: '#6200EE',
+          lightGray: '#F0F0F0',
+          gray: '#A0A0A0',
+          backgroundColor: '#F8F8F8',
+          backgroundColor2: '#C5C5C6' + 'BD',
+          border: '1px solid ' + '#ECECED',
+        },
+          schedule:{
+            backgroundColor:  '#F8F8F8',
+            smallCalendar:{
+              textColor:"#F8F8F8",
+              backgroundColor:"#A066FF",
+              switchViewButtonColor:"#000000",
+              switchViewButtonBackgroundColor:"#CEB0FA",
+              arrowSwitcherColor: "#000000",
+              arrowSwitcherBackgroundColor: "#CEB0FA"
             },
             popup: {
               backgroundColor: '#ECECED',

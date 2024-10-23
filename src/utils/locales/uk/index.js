@@ -492,5 +492,17 @@ export const uk = {
       popupInterviewerInfo: 'Інформація про співбесідника',
       popupRole: 'Роль:',
     },
+    notifications: {
+      empty: 'На даний момент у вас ще немає нових сповіщень',
+      newNotifications: 'Нове',
+      hourAgo: 'годин тому',
+      lessThanHourAgo:'Менше години тому',
+      interviewScheduled: 'test text',
+      greeting: 'test text',
+      interviewFeedback: 'test text',
+      interviewRejected: 'test text',
+      interviewRequestExpired: 'test text',
+      feedbackBtn: 'Залишити відгук',
+    },
   },
 };
