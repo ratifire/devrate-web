@@ -45,14 +45,14 @@ export const RegistrationSchema = Yup.object().shape({
       'modal.registration.last_name_invalid_characters',
     )
     .required('modal.registration.required'),
-  password: Yup.string()
-    .min(8, 'modal.registration.password_short')
-    .max(50, 'modal.registration.password_long')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*])[A-Za-z\d!@#$&*]{8,}$/,
-      'modal.registration.password_invalid',
-    )
-    .required('modal.registration.required'),
+    password: Yup.string()
+        .min(8, 'modal.registration.password_short')
+        .max(50, 'modal.registration.password_long')
+        .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*?])[A-Za-z\d!@#$&*?]{8,}$/,
+            'modal.registration.password_invalid',
+        )
+        .required('modal.registration.required'),
   repeatPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'modal.registration.password_must_match')
     .required('modal.registration.required'),
