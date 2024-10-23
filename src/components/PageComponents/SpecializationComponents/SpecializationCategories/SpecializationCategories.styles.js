@@ -20,16 +20,15 @@ export const styles = {
     paddingBottom: '15px', // for scroll size compensation
 
     '&::-webkit-scrollbar': {
-      width: 10,
       height: 10,
     },
     '&::-webkit-scrollbar-track': {
-      backgroundColor: theme.palette.neutral['600'],
+      backgroundColor: theme.palette.scroll.scrollWrapp,
       borderRadius: 8,
     },
     '&::-webkit-scrollbar-thumb': {
       borderRadius: 6,
-      backgroundColor: theme.palette.common.white,
+      backgroundColor: theme.palette.scroll.scrollEl,
     },
   }),
   page_title: (theme) => ({
