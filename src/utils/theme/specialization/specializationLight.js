@@ -39,7 +39,9 @@ export const specializationLight = {
       btn: '#8133F1',
     },
     addSpec: {
-      color: '#ECECED'
+      border: '#C5C5C6',
+      color: '#ECECED',
+      deco: '#FFF',
     }
   },
   selectField: {

@@ -39,7 +39,9 @@ export const specializationDark = {
       btn: '#8133F1',
     },
     addSpec: {
-      color: '#3E3E40'
+      color: '#3E3E40',
+      border: 'transparent',
+      deco: '#303032',
     }
   },
   selectField: {
