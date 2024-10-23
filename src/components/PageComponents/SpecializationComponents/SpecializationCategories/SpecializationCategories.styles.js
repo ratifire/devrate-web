@@ -36,21 +36,14 @@ export const styles = {
     marginBottom: theme.spacing(5),
     fontSize: 34,
   }),
-  make_main_btn: (theme) => ({
-    color: theme.palette.action.active,
-    border: `1px solid ${theme.palette.action.active}`,
+  make_main_btn: {
     minWidth: '216px',
     padding: '12px 16px',
     textTransform: 'none',
-    '&:hover': {
-      color: theme.palette.primary['200'],
-      backgroundColor: `${theme.palette.primary['200']}29`,
-      borderColor: theme.palette.primary['200'],
-    },
-  }),
+  },
   add_specialization_btn: (theme) => ({
     width: '134px',
-    backgroundColor: theme.palette.neutral['600'],
+    backgroundColor: theme.palette.specialization.addSpec.color,
     borderRadius: 4,
   }),
 
