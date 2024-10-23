@@ -1,6 +1,5 @@
 import { DARK_THEME } from '../constants/Theme/theme';
-import { specializationDark } from './specialization/specializationDark';
-import { specializationLight } from './specialization/specializationLight';
+import { specializationDark, specializationLight } from './specialization';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
