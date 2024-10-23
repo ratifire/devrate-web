@@ -559,10 +559,16 @@ const getDesignTokens = (mode) => ({
               cancelEventBtnColor: '#CEB0FA',
             },
           },
-          ...specializationDark
+          selectField: {
+            color: '#303032'
+          },
+          ...specializationDark,
         }
       : {
         ...specializationLight,
+        selectField: {
+          color: '#F8F8F8'
+        },
         notifications: {
           backgroundColor: '#FFFFFF',
           borderColor: '#C5C5C6',

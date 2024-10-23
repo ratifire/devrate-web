@@ -44,7 +44,4 @@ export const specializationDark = {
       deco: '#303032',
     }
   },
-  selectField: { // После pull вынести в theme.js
-    color: '#303032'
-  }
 };
