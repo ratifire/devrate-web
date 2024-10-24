@@ -55,6 +55,10 @@ export const specializationDark = {
     },
     dropDown: {
       color: '#CEB0FA',
+    },
+    btnEditSpec: {
+      color: '#C5C5C6',
+      border: '#444446',
     }
   },
 };

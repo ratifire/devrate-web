@@ -56,5 +56,9 @@ export const specializationLight = {
     dropDown: {
       color: '#8133F1',
     },
+    btnEditSpec: {
+      color: '#828283',
+      border: '#C5C5C6',
+    }
   },
 }
