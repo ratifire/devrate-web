@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 const isStartYearBeforeEndYear = (startYear, endYear) => {
   if (startYear && endYear) {
-    return startYear.getTime() < endYear.getTime();
+    return startYear.getTime() <= endYear.getTime();
   }
   return true;
 };
@@ -28,7 +28,7 @@ export const WorkExperienceModalSchema = Yup.object().shape({
     .max(new Date(), 'profile.modal.workExperience.startYear_max')
     .required('profile.modal.workExperience.required'),
   endYear: Yup.date()
-    .min(Yup.ref('startYear'), 'profile.modal.workExperience.endYear_min')
+    .min(Yup.ref('startYear'), 'profile.modal.workExperience.endDateMessage')
     .max(new Date(), 'profile.modal.workExperience.endYear_max')
     .when('currentDate', {
       is: (currentDate) => !currentDate,
