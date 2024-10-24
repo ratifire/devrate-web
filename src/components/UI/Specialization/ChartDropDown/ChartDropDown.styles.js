@@ -3,15 +3,15 @@ export const styles = {
     width: '103px',
     height: '23px',
     fontSize: '12px',
-    color: theme.palette.primary[200],
+    color: theme.palette.specialization.dropDown.color,
     ' .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.primary[200],
+      borderColor: theme.palette.specialization.dropDown.color,
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.primary[200],
+      borderColor: theme.palette.specialization.dropDown.color,
     },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.primary[200],
+      borderColor: theme.palette.specialization.dropDown.color,
       borderWidth: '2px',
     },
   }),

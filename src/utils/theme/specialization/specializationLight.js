@@ -51,6 +51,9 @@ export const specializationLight = {
     },
     mark: {
       color: '#5900D9'
+    },
+    dropDown: {
+      color: '#8133F1',
     }
   },
 }
