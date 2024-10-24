@@ -14,6 +14,9 @@ export const styles = {
       borderColor: theme.palette.specialization.dropDown.color,
       borderWidth: '2px',
     },
+    '& svg': {
+      color: theme.palette.specialization.dropDown.color,
+    },
   }),
   dropdownPaper: (theme) => ({
     backgroundColor: theme.palette.modalDropdown.backgroundColor,
