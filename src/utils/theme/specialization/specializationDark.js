@@ -5,6 +5,7 @@ export const specializationDark = {
     },
     progress: {
       color: '#8133F1',
+      bgColor: '#69696B',
     },
     arrow: {
       down: '#ED0E0E',

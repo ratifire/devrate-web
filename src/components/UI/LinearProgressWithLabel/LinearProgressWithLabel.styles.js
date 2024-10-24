@@ -19,7 +19,7 @@ export const styles = {
   }),
   s: (theme) => ({
     height: 8,
-    backgroundColor: theme.palette.modals.progressBgColor,
+    backgroundColor: theme.palette.specialization.progress.bgColor,
     borderRadius: 3,
     color: theme.palette.primary['400'],
     '>span': {

@@ -5,6 +5,7 @@ export const specializationLight = {
     },
     progress: {
       color: '#8133F1',
+      bgColor: '#C5C5C6',
     },
     arrow: {
       down: '#A70000',
@@ -54,6 +55,6 @@ export const specializationLight = {
     },
     dropDown: {
       color: '#8133F1',
-    }
+    },
   },
 }
