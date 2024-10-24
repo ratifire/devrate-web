@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import regEx from '../constants/regularExpressions'
 
 const resetPasswordSchema = Yup.object().shape({
   code: Yup.array()
@@ -8,8 +9,7 @@ const resetPasswordSchema = Yup.object().shape({
       .trim()
     .min(8, 'modal.resetPassword.password_short')
     .max(50, 'modal.resetPassword.password_long')
-    .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*?])[A-Za-z\d!@#$&*?]{8,}$/,
+    .matches(regEx.passwordValidationRegex,
       'modal.resetPassword.password_invalid',
     )
     .required('modal.resetPassword.required'),

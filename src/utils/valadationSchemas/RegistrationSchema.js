@@ -1,4 +1,6 @@
 import * as Yup from 'yup';
+import regEx from '../constants/regularExpressions'
+
 
 export const RegistrationSchema = Yup.object().shape({
   email: Yup.string()
@@ -48,8 +50,7 @@ export const RegistrationSchema = Yup.object().shape({
     password: Yup.string()
         .min(8, 'modal.registration.password_short')
         .max(50, 'modal.registration.password_long')
-        .matches(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*?])[A-Za-z\d!@#$&*?]{8,}$/,
+        .matches(regEx.passwordValidationRegex,
             'modal.registration.password_invalid',
         )
         .required('modal.registration.required'),
