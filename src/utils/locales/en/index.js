@@ -170,6 +170,25 @@ export const en = {
           title: 'Description',
         },
       },
+      feedbackProjectModal: {
+        title: 'Leave a feedback',
+        type_of_feedback: {
+          offer: 'Offer',
+          error: 'Error',
+          response: 'Response',
+        },
+        defaultTextFor: {
+          offer: `If you have some offer's after using our site - please write your review.`,
+          error: `If you have some error's after using our site - please write your review.`,
+          response: `If you would like to leave a review after using our site, please write it here.`
+        },
+        feedback: 'Feedback',
+        button: 'Send',
+        label: 'Type of feedback',
+        textPlaceholder: 'Please enter your feedback here...',
+        required: 'This is a required field',
+      },
+
     },
     profile: {
       skills: {
