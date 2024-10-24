@@ -31,8 +31,6 @@ const useFeedbackForm = () => {
       skills: values.skills.map(({ id, value }) => ({ id, mark: value })),
     };
 
-    console.log(body);
-
     const result = await createInterview({ reviewerId: userId, body });
 
     if (!result.error) {
