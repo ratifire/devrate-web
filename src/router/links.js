@@ -6,5 +6,4 @@ export default {
   interviews: '/interviews',
   settings: '/settings',
   bookmark: '/bookmark',
-  feedback: '/test',
 };

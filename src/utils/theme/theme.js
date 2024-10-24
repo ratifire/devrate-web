@@ -135,6 +135,7 @@ const getDesignTokens = (mode) => ({
         },
         border: {
           color: '#252527',
+          menuColor: '#444446',
         },
         steper: {
           completed: {
@@ -589,6 +590,7 @@ const getDesignTokens = (mode) => ({
         },
         border: {
           color: '#C5C5C6',
+          menuColor: '#C5C5C6',
         },
         search: {
           color: 'rgba(197, 197, 198, 0.40)',

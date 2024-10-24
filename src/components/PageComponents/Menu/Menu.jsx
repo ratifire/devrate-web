@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
-  Box,
-  Divider,
+  Box, Divider,
   Drawer,
   IconButton,
   Link,
@@ -21,6 +20,10 @@ import Cookies from 'js-cookie';
 import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../../redux/auth/authSlice';
+import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
+import { openModal } from '../../../redux/modal/modalSlice';
+import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
+import { ButtonDef } from '../../FormsComponents/Buttons';
 
 const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();
@@ -37,6 +40,10 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
     } catch (error) {
       console.log('Logout failed:', error);
     }
+  };
+
+  const handleOpenFeedbackModal = () => {
+    dispatch(openModal({ modalName: 'feedbackProjectModal' }));
   };
 
   return (
@@ -74,8 +81,33 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
               {index % 2 !== 0 && <Divider key={index} sx={styles.divider} />}
             </React.Fragment>
           ))}
+          <ButtonDef
+            variant='text'
+            startIcon={<ForumOutlinedIcon sx={styles.iconItem} />}
+            type='button'
+            handlerClick={handleOpenFeedbackModal}
+            correctStyle={styles.btnFeedback}
+            label={t('Leave a Feedback')}
+          />
+
+
+          {/*<Link*/}
+          {/*  sx={styles.menuLink}*/}
+          {/*  onClick={handleOpenFeedbackModal}*/}
+          {/*>*/}
+          {/*  <ListItem disablePadding>*/}
+          {/*    <ListItemButton sx={styles.listItemButton}>*/}
+          {/*      <ListItemIcon>*/}
+          {/*        <ForumOutlinedIcon sx={styles.iconItem} />*/}
+          {/*      </ListItemIcon>*/}
+          {/*      <ListItemText primary={t('Leave a Feedback')} />*/}
+          {/*    </ListItemButton>*/}
+          {/*  </ListItem>*/}
+          {/*</Link>*/}
         </Box>
       </Drawer>
+
+      <FeedbackProjectModal />
     </>
   );
 };

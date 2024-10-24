@@ -9,7 +9,6 @@ import SpecializationPage from '../pages/SpecializationPage';
 import SchedulePage from '../pages/ShedulePage';
 import UserProfilePage from '../pages/ProfilePages/UserProfilePage';
 import ToastLayout from '../layouts/ToastLayout/ToastLayout';
-import ReviewsPage from '../pages/ReviewsPage';
 
 const router = createBrowserRouter([
   {
@@ -39,10 +38,6 @@ const router = createBrowserRouter([
           {
             path: navigationLinks.specializations,
             element: <SpecializationPage />,
-          },
-          {
-            path: 'test',
-            element: <ReviewsPage />,
           },
         ],
       },

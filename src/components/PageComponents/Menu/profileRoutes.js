@@ -5,7 +5,6 @@ import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import SettingsIcon from '@mui/icons-material/Settings';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import LogoutIcon from '@mui/icons-material/Logout';
-import QuestionAnswerOutlined from '@mui/icons-material/QuestionAnswerOutlined';
 
 import links from '../../../router/links';
 
@@ -50,12 +49,6 @@ export default [
     name: 'profile.userMenu.logout',
     path: links.home,
     icon: LogoutIcon,
-    target: '_self',
-  },
-  {
-    name: 'feedback',
-    path: links.feedback,
-    icon: QuestionAnswerOutlined,
     target: '_self',
   },
 ];

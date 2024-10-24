@@ -13,3 +13,4 @@ export {LoginSchema} from "./LoginSchema";
 export {ModalUserInfoSchema} from "./ModalUserInfoSchema"; // not used anywhere
 export {RegistrationSchema} from "./RegistrationSchema";
 export {SkillsItemSchema} from "./SkillsItemSchema";
+export {FeedbackModal} from "./FeedbackModal"

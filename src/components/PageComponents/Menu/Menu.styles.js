@@ -3,6 +3,8 @@ const styles = {
     height: '100%',
     width: 300,
     background: theme.palette.background.level2,
+    display: 'flex',
+    flexDirection: 'column',
   }),
   upperMenu: (theme) => ({
     marginTop: theme.spacing(4),
@@ -19,7 +21,7 @@ const styles = {
     textDecoration: 'none',
     color: theme.palette.text.secondary,
     display: 'block',
-    borderRadius: theme.spacing(1),
+    borderRadius: 1,
   }),
   listItemButton: (theme) => ({
     '& .MuiListItemIcon-root': {
@@ -27,10 +29,10 @@ const styles = {
       margin: theme.spacing(0),
     },
     '& .MuiListItemText-primary': {
-      fontWeight: theme.typography.h6.fontWeight,
-      fontSize: theme.typography.h6.fontSize,
+      fontWeight: 500,
+      fontSize: '20px',
       lineHeight: 2.3,
-      letterSpacing: theme.typography.h6.letterSpacing,
+      letterSpacing: 0.15,
     },
     '&:hover': {
       '& .MuiListItemIcon-root': {
@@ -47,9 +49,28 @@ const styles = {
     marginRight: theme.spacing(2),
   }),
   divider: (theme) => ({
-    borderColor: 'white',
+    borderColor: theme.palette.border.menuColor,
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(4),
+  }),
+  btnFeedback: (theme) => ({
+    marginTop: 'auto',
+    color: theme.palette.text.secondary,
+    borderRadius: 1,
+    fontWeight: 500,
+    fontSize: '20px',
+    lineHeight: 2.3,
+    letterSpacing: 0.15,
+    justifyContent: 'flex-start',
+    paddingX: theme.spacing(3),
+    paddingY: theme.spacing(2),
+    marginBottom: '32px',
+    '>span.MuiButton-startIcon>*:nth-of-type(1)': {
+      fontSize: '24px',
+    },
+    '&:hover': {
+      color: theme.palette.action.active,
+    },
   }),
 };
 export default styles;
