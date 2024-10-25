@@ -8,8 +8,12 @@ import { useTranslation } from 'react-i18next';
 
 const InterviewFeedback = ({ createAt, payload }) => {
   const { t } = useTranslation();
-  const { feedbackId } = JSON.parse(payload);
-  
+  const { feedbackId } = JSON.parse(payload); // Херня где приходит ID
+
+  const handleClick = () => {
+
+  }
+
   return (
     <>
       <Box sx={styles.iconWrapper}>
@@ -18,7 +22,7 @@ const InterviewFeedback = ({ createAt, payload }) => {
       <Box sx={styles.textWrapper}>
         <Typography variant="body">
           {t('notifications.interviewFeedback')} {feedbackId}
-          <Typography variant="body" sx={styles.btn}>
+          <Typography onClick={handleClick} variant="body" sx={styles.btn}>
               {t('notifications.feedbackBtn')}
           </Typography>
         </Typography>
