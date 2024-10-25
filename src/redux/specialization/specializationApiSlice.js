@@ -39,9 +39,9 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           method: 'DELETE',
         };
       },
-      invalidatesTags:  (result, error, id) => [{ type: 'Specialization', id }],
+      invalidatesTags: ['Specialization']
     }),
-    getUserAllSpecialization: builder.query({
+    getUserAllSpecialization: builder.query({ // На профиле
       query: (id) => `/users/${id}/specializations/main-mastery/skills`,
       providesTags: ['HardSkills','Specialization'],
     }),
