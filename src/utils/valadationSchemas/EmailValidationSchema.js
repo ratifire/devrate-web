@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 const emailRegex =
-  /^(?!.*\.\.)(?!.*@.*@)(?!.*\s)(?!.*[<>'"():;])[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]{1,255}\.[a-zA-Z]{2,}$/;
+  /^(?!.*\.\.)(?!.*@.*@)(?!.*\s)(?!.*[<>'"():;])[\p{L}0-9._%+-]{1,64}@[\p{L}0-9.-]{1,255}\.[\p{L}]{2,}$/u;
 
 Yup.addMethod(Yup.string, 'email', function (message) {
   return this.test('email', message, function (value) {
