@@ -14,10 +14,11 @@ import Menu from '../Menu';
 import Notification from '../Notification';
 import { InputSearch } from './InputSearch';
 import styles from './ProfileHeader.styles';
+import { FeedbackInterviewModal } from '../../ModalsComponents/FeedbackModal/FeedbackInterviewModal';
 
 const ProfileHeader = () => {
-  // const theme = useTheme()
-   const { data: info } = useSelector(selectCurrentUser);
+  const { data: info } = useSelector(selectCurrentUser);
+  const { open } = useSelector((state) => state.feedback);
   const { id, firstName, lastName } = info;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { data: personalData } = useGetPersonalUserQuery(id);
@@ -62,6 +63,7 @@ const ProfileHeader = () => {
         </Button>
         <Menu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
+      {open && <FeedbackInterviewModal/>}
     </AppBar>
   );
 };

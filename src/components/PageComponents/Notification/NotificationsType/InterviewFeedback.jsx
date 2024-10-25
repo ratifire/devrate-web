@@ -5,13 +5,16 @@ import TimeAgo from '../../../UI/TimeAgo';
 import PropTypes from 'prop-types';
 import { InfoOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { openFeedbackModal } from '../../../../redux/feedback/feedbackModalSlice';
 
 const InterviewFeedback = ({ createAt, payload }) => {
   const { t } = useTranslation();
-  const { feedbackId } = JSON.parse(payload); // Херня где приходит ID
+  const { feedbackId } = JSON.parse(payload);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-
+    dispatch(openFeedbackModal(feedbackId))
   }
 
   return (
