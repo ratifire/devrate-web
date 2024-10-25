@@ -9,15 +9,28 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import {useTheme} from "@mui/material/styles";
+import {useSelector} from "react-redux";
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
-  console.log(event)
+
   const { t } = useTranslation();
-  const [deleteEventById] = useDeleteEventByIdMutation();
   const theme = useTheme()
-  const handleCancelInterview = async function (event) {
+  const { id: userId } = useSelector((state) => state.auth.user.data);
+  const [deleteEventById] = useDeleteEventByIdMutation();
+
+  const handleCancelInterview = async function () {
+
+    if (!event || !event.id) {
+      console.error('Event object or event ID is missing');
+    }
+
+    if(!userId) {
+      console.error('User ID is missing');
+    }
+
     try {
-      await deleteEventById(event).unwrap();
+        await deleteEventById({userId, id: event.id}).unwrap();
+
       toast.success(t('schedule.deleteEventSuccessMessage'), {
         position: 'top-right',
         autoClose: 3000,
@@ -30,6 +43,11 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       });
     } catch (error) {
       console.error('Failed to add skill:', error);
+
+      if (error.status === 400) {
+        console.error('Bad Request: Likely an issue with the request data or format');
+      }
+
       toast.error(t('schedule.deleteEventErrorMessage'), {
         position: 'top-right',
         autoClose: 3000,
@@ -42,6 +60,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       });
     }
   };
+
   return (
     <Box
         id="popup"
@@ -57,7 +76,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       {popupPosition === 'BOTTOMLEFT' && <Box sx={styles.popupTriangularBottomLeft}></Box>}
       {popupPosition === 'TOPRIGHT' && <Box sx={styles.popupTriangularTopRight}></Box>}
       {popupPosition === 'BOTTOMRIGHT' && <Box sx={styles.popupTriangularBottomRight}></Box>}
-      
+
       {event.type==="INTERVIEW" && <Box sx={styles.infoContainer}>
         <IconButton onClick={handleClosePopup} sx={styles.closeIcon}>
           <CloseIcon/>
