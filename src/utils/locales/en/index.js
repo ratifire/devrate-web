@@ -176,9 +176,9 @@ export const en = {
       feedbackProjectModal: {
         title: 'Leave a feedback',
         type_of_feedback: {
-          offer: 'Offer',
-          error: 'Error',
-          response: 'Response',
+          PROPOSITION: 'Offer',
+          ISSUE: 'Error',
+          FEEDBACK: 'Response',
         },
         defaultTextFor: {
           offer: `If you have some offer's after using our site - please write your review.`,

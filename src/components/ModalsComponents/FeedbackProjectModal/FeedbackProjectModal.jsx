@@ -10,14 +10,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { styles } from './FeedbackProjectModal.styles';
 import { FeedbackModal } from '../../../utils/valadationSchemas/index';
+import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
 
 const FeedbackProjectModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openFeedback = useSelector((state) => state.modal.feedbackProjectModal);
+  const { id } = useSelector((state) => state.auth.user.data);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const feedbackOptions = ['offer', 'error', 'response'];
+  const feedbackOptions = ['PROPOSITION', 'ISSUE', 'FEEDBACK'];
+
+
+  const [createFeedback] = useCreateFeedbackMutation();
 
   const handleClose = () => {
     formik.resetForm();
@@ -28,8 +33,11 @@ const FeedbackProjectModal = () => {
     setIsLoading(true);
     setError(null);
     try {
-      console.log('Отправляем отзыв на сервер...', values);
-      handleClose();
+      await createFeedback({
+      userId: id,
+      type: values.select,
+      text: values.feedbackText,
+    }).unwrap();
     } catch (error) {
       console.error('Ошибка отправки отзыва:', error);
       setError('Произошла ошибка при отправке. Попробуйте еще раз.');
