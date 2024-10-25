@@ -38,7 +38,7 @@ export const styles = {
     maxHeight: '384px',
     width: '100%',
     '&::-webkit-scrollbar': {
-      width: 6,
+      width: 10,
     },
     '&::-webkit-scrollbar-track': {
       backgroundColor: theme.palette.scroll.scrollWrapp,
