@@ -122,7 +122,7 @@ export const styles = {
       position: 'absolute',
       backgroundColor: theme.palette.specialization.addSpec.deco,
       left: '2px',
-      top: '0',
+      top: '0px',
       zIndex: 2,
       height: '50%',
       width: '50%',
