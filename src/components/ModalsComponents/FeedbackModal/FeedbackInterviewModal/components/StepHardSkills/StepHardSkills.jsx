@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { SliderAssessment, SliderAssessmentBox } from '../../components';
+import { SliderAssessment, SliderAssessmentBox } from '../index';
 
 const StepHardSkills = ({ formik }) => {
   const skills = formik.values.skills;

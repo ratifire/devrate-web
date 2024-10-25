@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { ButtonDef } from '../../../../../FormsComponents/Buttons';
+import { ErrorComponent } from '../../../../../UI/Exceptions';
 import { formatDateTime } from '../../helpers';
 import useFeedbackForm from '../../hooks';
 import { InterviewerInfo, StepSoftSkills } from '../index';
