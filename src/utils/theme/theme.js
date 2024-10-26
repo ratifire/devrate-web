@@ -412,6 +412,12 @@ const getDesignTokens = (mode) => ({
           backgroundColor: '#3E3E40',
           backgroundColor2: '#252527' + 'BD',
           border: 'transparent',
+          grade: '#C5C5C6',
+          divider: '#69696B',
+          tooltip: {
+            color: '#C5C5C6',
+            backgroundColor: '#3E3E40',
+          },
         },
         experienceSkillSect: {
           wrapperUnSorted:{
@@ -861,11 +867,17 @@ const getDesignTokens = (mode) => ({
         },
         sliderAssessment: {
           violet: '#6200EE',
-          lightGray: '#F0F0F0',
-          gray: '#A0A0A0',
+          lightGray: '#A9A9AA',
+          gray: '#ECECED',
           backgroundColor: '#F8F8F8',
           backgroundColor2: '#C5C5C6' + 'BD',
           border: '1px solid ' + '#ECECED',
+          grade: '#1D1D1D',
+          divider: '#C5C5C6',
+          tooltip: {
+            color: '#1D1D1D',
+            backgroundColor: '#A9A9AA',
+          },
         },
           schedule:{
             backgroundColor:  '#F8F8F8',
