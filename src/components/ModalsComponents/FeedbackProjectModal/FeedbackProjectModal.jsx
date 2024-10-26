@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { Typography, CircularProgress } from '@mui/material';
 import ButtonDef from '../../FormsComponents/Buttons/ButtonDef';
@@ -9,51 +9,55 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { styles } from './FeedbackProjectModal.styles';
-import { FeedbackModal } from '../../../utils/valadationSchemas/index';
+import { FeedbackProjectModalSchema } from '../../../utils/valadationSchemas/index';
 import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
+import { feedbackOptions } from './constants';
+import { ErrorComponent } from '../../UI/Exceptions';
+
+const initialValues= {
+  select: '',
+  feedbackText: '',
+};
 
 const FeedbackProjectModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openFeedback = useSelector((state) => state.modal.feedbackProjectModal);
   const { id } = useSelector((state) => state.auth.user.data);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const feedbackOptions = ['PROPOSITION', 'ISSUE', 'FEEDBACK'];
 
 
-  const [createFeedback] = useCreateFeedbackMutation();
+  const [createFeedback, { isError, isLoading }] = useCreateFeedbackMutation();
 
   const handleClose = () => {
-    formik.resetForm();
     dispatch(closeModal({ modalName: 'feedbackProjectModal' }));
   };
 
   const onSubmit = async (values) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      await createFeedback({
+    await createFeedback({
       userId: id,
       type: values.select,
       text: values.feedbackText,
-    }).unwrap();
-    } catch (error) {
-      console.error('Ошибка отправки отзыва:', error);
-      setError('Произошла ошибка при отправке. Попробуйте еще раз.');
-    } finally {
-      setIsLoading(false);
+    });
+    if (!isError) {
+      handleClose()
     }
   };
 
   const formik = useFormik({
-    initialValues: {
-      select: '',
-      feedbackText: '',
-    },
-    validationSchema: FeedbackModal,
+    initialValues,
+    validationSchema: FeedbackProjectModalSchema,
     onSubmit,
   });
+
+  if (isError) {
+    return (
+      <ModalLayoutProfile
+        setOpen={handleClose}
+        open={openFeedback}>
+        <ErrorComponent />
+      </ModalLayoutProfile>
+    );
+  }
 
   return (
     <>
@@ -61,12 +65,6 @@ const FeedbackProjectModal = () => {
         <Typography variant="h6" sx={styles.title}>
           {t('modal.feedbackProjectModal.title')}
         </Typography>
-
-        {error && (
-          <Typography color="error" variant="body2">
-            {error}
-          </Typography>
-        )}
 
         <form onSubmit={formik.handleSubmit}>
           <FormSelect

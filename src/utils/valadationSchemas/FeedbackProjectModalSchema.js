@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const FeedbackModal = Yup.object({
+export const FeedbackProjectModalSchema = Yup.object({
   select: Yup.string()
     .required('Выберите значение из списка'),
   feedbackText: Yup.string()

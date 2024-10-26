@@ -18,7 +18,7 @@ import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../../redux/auth/authSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { openModal } from '../../../redux/modal/modalSlice';
@@ -28,6 +28,7 @@ import { ButtonDef } from '../../FormsComponents/Buttons';
 const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const feedbackProjectModal = useSelector((state) => state.modal.feedbackProjectModal);
 
   const [logout] = useLogoutMutation();
 
@@ -89,25 +90,10 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
             correctStyle={styles.btnFeedback}
             label={t('Leave a Feedback')}
           />
-
-
-          {/*<Link*/}
-          {/*  sx={styles.menuLink}*/}
-          {/*  onClick={handleOpenFeedbackModal}*/}
-          {/*>*/}
-          {/*  <ListItem disablePadding>*/}
-          {/*    <ListItemButton sx={styles.listItemButton}>*/}
-          {/*      <ListItemIcon>*/}
-          {/*        <ForumOutlinedIcon sx={styles.iconItem} />*/}
-          {/*      </ListItemIcon>*/}
-          {/*      <ListItemText primary={t('Leave a Feedback')} />*/}
-          {/*    </ListItemButton>*/}
-          {/*  </ListItem>*/}
-          {/*</Link>*/}
         </Box>
       </Drawer>
 
-      <FeedbackProjectModal />
+      {feedbackProjectModal && <FeedbackProjectModal/>}
     </>
   );
 };
