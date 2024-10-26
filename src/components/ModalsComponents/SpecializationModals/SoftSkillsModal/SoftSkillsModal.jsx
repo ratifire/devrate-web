@@ -1,6 +1,6 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -18,17 +18,20 @@ import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';
 import { FormSelect } from '../../../FormsComponents/Inputs';
+import useMergeState from '../../../../utils/hooks/useMergeState';
+
+const initialState = {
+  skill: '',
+  helperText: '',
+  error: false,
+  addSkill: [],
+  allSkills: [],
+  idDeletedSkills: [],
+  availableSkills: [],
+}
 
 const SoftSkillsModal = () => {
-  const [state, setState] = useState({
-    skill: '',
-    helperText: '',
-    error: false,
-    addSkill: [],
-    allSkills: [],
-    idDeletedSkills: [],
-    availableSkills: [],
-  });
+  const [state, updateState] = useMergeState(initialState);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSoftSkillsModal);
@@ -50,9 +53,9 @@ const SoftSkillsModal = () => {
   const isLoading =
     isFetchingMastery || isFetchingSkills || isFetchingAvailableSkills || isLoadingDeleteSkill || isLoadingAddSkill;
   const isError = isErrorMastery || isErrorSkills || isErrorAvailableSkills;
+  const { error, helperText } = state;
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openSoftSkillsModal' }));
-  const updateState = (newState) => setState((prevState) => ({ ...prevState, ...newState }));
 
   useEffect(() => {
     if (!isFetchingSkills || !isFetchingAvailableSkills || data) {
@@ -158,8 +161,8 @@ const SoftSkillsModal = () => {
                 label={t(labelInput)}
                 value={skill}
                 countries={availableSkills}
-                helperText={t(state.helperText)}
-                error={state.error}
+                helperText={t(helperText)}
+                error={error}
                 disabled={availableSkills?.length === 0}
                 variant='outlined'
                 name='softSkill'
