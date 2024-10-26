@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const RenderTabs = ({ weekDates,  onChange, tab}) => {
   const handleTabChange = (event, newTab) => {
-    onChange(event, newTab); // Pass both the event and the new tab value
+    onChange(newTab); // Pass both the event and the new tab value
   };
 
   return(

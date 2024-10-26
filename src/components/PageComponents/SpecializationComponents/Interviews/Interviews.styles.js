@@ -49,11 +49,11 @@ export const styles = {
     backgroundColor: theme.palette.neutral[800],
   }),
   popover: (theme) => ({
-    '& .MuiPaper-root.MuiPopover-paper.css-4w3m95-MuiPaper-root-MuiPopover-paper': {
+    '>.MuiPaper-root': {
       borderRadius: '0 0 4px 4px',
       backgroundColor: theme.palette.neutral[800],
-      maxWidth: '432px',
-      width: 'inherit',
+      maxWidth: 600,
+      width: '100%',
     },
   }),
   divider: (theme) => ({
@@ -64,6 +64,5 @@ export const styles = {
     fontSize: 14,
     textTransform: 'none',
     fontWeight: 500,
-    paddingX: theme.spacing(5),
   }),
 };

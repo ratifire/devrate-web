@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { styles } from '../ScheduleInterview.styles';
+import { styles } from '../ScheduleInterviewModal.styles';
 import PropTypes from 'prop-types';
 
 const RenderTimeSlots = ({ weekDates, tab, timeButtons }) => {
@@ -24,9 +24,9 @@ const RenderTimeSlots = ({ weekDates, tab, timeButtons }) => {
 };
 
 RenderTimeSlots.propTypes = {
-  weekDates: PropTypes.array.isRequired, // Corrected to array
+  weekDates: PropTypes.array.isRequired,
   timeButtons: PropTypes.func.isRequired,
-  tab: PropTypes.string.isRequired, // Corrected to string
+  tab: PropTypes.string.isRequired,
 };
 
 export default RenderTimeSlots;

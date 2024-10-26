@@ -68,7 +68,7 @@ export const styles = {
       fontWeight: 500,
       fontSize: '20px',
       lineHeight: '32px',
-      letterSpacing: '0.15px', // Fixed typo: changed '0.15ox' to '0.15px'
+      letterSpacing: '0.15px',
       color: theme.palette.neutral[500],
       textTransform: 'none',
     },
@@ -129,10 +129,11 @@ export const styles = {
   }),
   workExperienceBtn: {
     width: '228px',
+    textTransform: 'capitalize',
   },
   checkbox: (theme) => ({
-    '&.Mui-checked': { // Target the checked state of the checkbox
-      color: theme.palette.primary[200], // Set the color for the checked state
+    '&.Mui-checked': {
+      color: theme.palette.primary[200],
     },
   }),
 

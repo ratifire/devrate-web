@@ -9,8 +9,11 @@ import PropTypes from 'prop-types';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import { selectCurrentUserId } from '../../../../redux/auth/authSlice';
-import { useCreateInterviewRequestMutation } from '../../../../redux/specialization/specializationApiSlice';
-import { styles } from './ScheduleInterview.styles';
+import {
+  useCreateInterviewRequestMutation,
+  useGetInterviewRequestQuery,
+} from '../../../../redux/specialization/specializationApiSlice';
+import { styles } from './ScheduleInterviewModal.styles';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
@@ -24,72 +27,77 @@ const ScheduleInterviewModal = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const isOpen = useSelector((state) => state.modal.scheduleInterview);
-  const currentUserId = useSelector(selectCurrentUserId);
-
+  const userId = useSelector(selectCurrentUserId);
+  
+  const { data: currentDates } = useGetInterviewRequestQuery({
+    userId,
+    role,
+  }, { skip: !userId });
+  console.log(currentDates, 'currentDates');
   const [date, setDate] = useState(DateTime.now().startOf('day'));
   const [weekDates, setWeekDates] = useState([]);
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
   const { masteryId } = useGetMastery();
   const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
-  const handleTabChange = (_, newTab) => setTab(newTab);
-
+  const handleTabChange = (newTab) => setTab(newTab);
+  
   useEffect(() => {
     setWeekDates(getDatesInWeek(date));
   }, [date]);
-
-  const initialValues={
-    dates: {}
-  }
-
-  const onSubmit  = async (values, { resetForm }) => {
-      await createInterviewRequest({
-        userId: currentUserId,
-        masteryId,
-        role,
-        availableDates: Object.keys(values.dates),
-      });
-
-      resetForm();
-      handleClose();
-  }
-
+  
+  const initialValues = {
+    dates: {},
+  };
+  
+  const onSubmit = async (values, { resetForm }) => {
+    await createInterviewRequest({
+      userId: userId,
+      masteryId,
+      role,
+      availableDates: Object.keys(values.dates),
+    });
+    
+    resetForm();
+    handleClose();
+  };
+  
   const formik = useFormik({
     initialValues,
     onSubmit,
   });
-
+  
   const handleWeekNavigation = (direction) => {
     setDate((prevDate) => {
       const newDate = direction === 'prev' ? prevDate.minus({ weeks: 1 }) : prevDate.plus({ weeks: 1 });
-
+      
       if (newDate < DateTime.now().startOf('week')) {
         return prevDate;
       }
-
+      
       setTab(newDate.toFormat('EEE, d'));
       return newDate;
     });
   };
-
+  
   const handleTimeClick = (isoTime) => {
     const newDates = { ...formik.values.dates };
-
-      if (newDates[isoTime]) {
-        delete newDates[isoTime];
-      } else {
-        newDates[isoTime] = true;
-      }
-
+    
+    if (newDates[isoTime]) {
+      delete newDates[isoTime];
+    } else {
+      newDates[isoTime] = true;
+    }
+    
     formik.setFieldValue('dates', newDates);
   };
-
-   const generateTimeButtons = (day) => {
+  
+  const generateTimeButtons = (day) => {
     return range(0, 24).map((hour) => {
       const time = day.set({ hour });
       const timeIso = time.toISO();
       const isPastDate = DateTime.now() > time;
-
+      
       return (
         <CheckboxButton
           key={timeIso}
@@ -103,26 +111,26 @@ const ScheduleInterviewModal = () => {
       );
     });
   };
-
+  
   const weekTitle = useMemo(() =>
       DateTime.now().toFormat('W') === date.toFormat('W')
         ? t('This week')
         : `${weekDates[0].toFormat('MMMM, d')} - ${weekDates.at(-1).toFormat('MMMM, d')}`,
-    [weekDates, date]
+    [weekDates, date],
   );
-
+  
   return (
     <ModalLayoutProfile setOpen={handleClose} open={isOpen}>
-
+      
       <Typography variant="subtitle1" sx={styles.title}>
         {t('specialization.modal.scheduleModal.scheduleInterview')}
       </Typography>
-
+      
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
           <WeekNavigation
-           onWeekNav={handleWeekNavigation}
-           weekTitle={weekTitle}
+            onWeekNav={handleWeekNavigation}
+            weekTitle={weekTitle}
           />
           <RenderTabs
             weekDates={weekDates}
@@ -134,15 +142,15 @@ const ScheduleInterviewModal = () => {
             weekDates={weekDates}
             tab={tab}
           />
-            <ButtonDef
-              variant="contained"
-              type="submit"
-              label={t('specialization.modal.scheduleModal.schedule')}
-              correctStyle={styles.workExperienceBtn}
-            />
+          <ButtonDef
+            variant="contained"
+            type="submit"
+            label={t('specialization.modal.scheduleModal.schedule')}
+            correctStyle={styles.workExperienceBtn}
+          />
         </Box>
       </form>
-
+    
     </ModalLayoutProfile>
   );
 };
