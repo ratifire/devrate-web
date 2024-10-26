@@ -1,6 +1,6 @@
 import AddIcon from '@mui/icons-material/Add'
 import { Box, IconButton, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
@@ -18,16 +18,19 @@ import { SkillChip } from '../../../UI/Specialization/SkillChip'
 import { styles } from '../styles/SkillsModal.styles'
 import { styles as hardSkillsStyles } from './HardSkillsModal.styles'
 import MAX_SKILLS from '../../../../utils/constants/Specialization/maxSkills';
+import useMergeState from '../../../../utils/hooks/useMergeState';
+
+const initialState = {
+  skill: '',
+  helperText: '',
+  error: false,
+  idDeletedSkills: [],
+  allSkills: [],
+  addSkills: [],
+};
 
 const HardSkillsModal = () => {
-  const [state, setState] = useState({
-    skill: '',
-    helperText: '',
-    error: false,
-    idDeletedSkills: [],
-    allSkills: [],
-    addSkills: [],
-  });
+  const [state, updateState] = useMergeState(initialState);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
@@ -45,9 +48,9 @@ const HardSkillsModal = () => {
   const isFindSkill = allSkills?.find((v) => v.name === skill.trim());
   const isLoading = isFetchingMastery || isFetchingSkills || isLoadingAddSkill || isLoadingDeleteSkill;
   const isError = isErrorMastery || isErrorSkills || isErrorAddSkill || isErrorDeleteSkill;
+  const { error, helperText } = state;
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
-  const updateState = (newState) => setState((prevState) => ({ ...prevState, ...newState }));
 
   useEffect(() => {
     updateState({ allSkills: skills });
@@ -159,8 +162,8 @@ const HardSkillsModal = () => {
               <TextField
                 variant='outlined'
                 autoFocus={true}
-                helperText={t(state.helperText)}
-                error={state.error}
+                helperText={t(helperText)}
+                error={error}
                 value={skill}
                 onChange={handleChange}
                 label={t('specialization.modal.skills.placeholder')}

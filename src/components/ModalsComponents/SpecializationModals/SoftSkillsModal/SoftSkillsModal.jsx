@@ -28,7 +28,7 @@ const initialState = {
   allSkills: [],
   idDeletedSkills: [],
   availableSkills: [],
-}
+};
 
 const SoftSkillsModal = () => {
   const [state, updateState] = useMergeState(initialState);
