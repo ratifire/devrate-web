@@ -106,13 +106,16 @@ const WorkExperienceModal = () => {
   const responsibilityDeleteHandler = (responsibilityToDelete) => {
     setResponsibilities(responsibilities.filter((item) => item !== responsibilityToDelete));
   };
-
-  const handleCheckboxChange = (e)=>{
-      formik.setFieldValue('currentDate', e.target.checked);
-      if (e.target.checked) {
-        formik.setFieldValue('endYear', '');
-      }
-  }
+  
+  const handleCheckboxChange = (e) => {
+    const isChecked = e.target.checked;
+    const newValues = {
+      ...formik.values,
+      currentDate: isChecked,
+      endYear: isChecked ? '' : formik.values.endYear || '',
+    };
+    formik.setValues(newValues);
+  };
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={workExperience}>

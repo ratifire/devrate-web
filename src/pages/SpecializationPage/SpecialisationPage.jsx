@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
-import { styles } from './SpecialisationPage.style';
+import { styles } from './SpecialisationPage.styles';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import { useTranslation } from 'react-i18next';
 

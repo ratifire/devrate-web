@@ -11,7 +11,7 @@ export const styles = {
     marginBottom: '11px',
   },
   text: (theme) => ({
-    color: theme.palette.neutral[50],
+    color: theme.palette.specialization.subtitle.color,
     display: 'block',
     paddingBottom: '6px',
   }),

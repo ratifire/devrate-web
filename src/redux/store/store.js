@@ -1,5 +1,4 @@
 // src/app/store.js
-/* eslint-disable */
 
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
@@ -14,6 +13,7 @@ import { authReducer } from '../auth/authSlice';
 import { avatarReducer } from '../user/avatar/avatarSlice';
 import { personalReducer } from '../user/personal/personalSlice';
 import { educationReducer } from '../user/education/educationSlice';
+import feedbackSliceReducer from '../feedback/feedbackModalSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
 import activeMasteryReducer from '../specialization/activeMasterySlice';
@@ -53,6 +53,7 @@ const rootReducer = {
   email: emailSliceReducer,
   activeMastery: activeMasteryReducer,
   button: buttonReducer,
+  feedback: feedbackSliceReducer,
 };
 
 const store = configureStore({
@@ -63,7 +64,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      .concat(logger)
+      // .concat(logger)
       .concat(apiSlice.middleware),
   devTools: true,
 });

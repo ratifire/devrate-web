@@ -19,12 +19,12 @@ export const styles = {
   }),
   s: (theme) => ({
     height: 8,
-    backgroundColor: theme.palette.modals.progressBgColor,
+    backgroundColor: theme.palette.specialization.progress.bgColor,
     borderRadius: 3,
     color: theme.palette.primary['400'],
     '>span': {
       borderRadius: 3,
-      background: 'linear-gradient(90deg, #4A1D8B, #8233F1, #A756B4, #FCA728)',
+      background: theme.palette.specialization.progress,
     },
   }),
   m: (theme) => ({
