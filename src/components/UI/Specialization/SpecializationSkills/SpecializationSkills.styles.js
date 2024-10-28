@@ -1,9 +1,11 @@
 export const styles = {
   btnIcon: (theme) => ({
-    color: theme.palette.primary['100'],
+    color: theme.palette.iconBtn.createBtn.color,
+    transition: 'background-color 0.3s, transform 0.3s',
     borderRadius: 1,
     ':hover': {
-      backgroundColor: `${theme.palette.primary['200']}29`,
+      backgroundColor: theme.palette.iconBtn.createBtn.hover.backgroundColor,
+      color: theme.palette.iconBtn.createBtn.hover.color,
     },
     svg: {
       fontSize: '18px',
@@ -21,22 +23,22 @@ export const styles = {
     alignItems: 'center',
     marginBottom: theme.spacing(4),
   }),
-  skillsContainer: {
+  skillsContainer: (theme) => ({
     maxHeight: '312px',
     overflowY: 'auto',
     paddingRight: '10px',
     '&::-webkit-scrollbar': {
       width: 10,
     },
-    '&::-webkit-scrollbar-track': (theme) => ({
-      backgroundColor: theme.palette.neutral['600'],
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.palette.scroll.scrollWrapp,
       borderRadius: 8,
-    }),
-    '&::-webkit-scrollbar-thumb': (theme) => ({
+    },
+    '&::-webkit-scrollbar-thumb': {
       borderRadius: 6,
-      backgroundColor: theme.palette.common.white,
-    }),
-  },
+      backgroundColor: theme.palette.scroll.scrollEl,
+    },
+  }),
   markWrapper: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
@@ -45,6 +47,6 @@ export const styles = {
     paddingRight: '10px',
   }),
   mark: (theme) => ({
-    color: theme.palette.action.active,
+    color: theme.palette.specialization.mark.color,
   }),
 };

@@ -4,15 +4,15 @@ const useArrowTheme = () => {
   const theme = useTheme();
 
   const iconCircle = {
-    fill: theme.palette.arrow.circle,
+    fill: theme.palette.specialization.arrow.circle,
   };
 
   const arrowDownIcon = {
-    fill: theme.palette.arrow.down,
+    fill: theme.palette.specialization.arrow.down,
   };
 
   const arrowUpIcon = {
-    fill: theme.palette.arrow.up,
+    fill: theme.palette.specialization.arrow.up,
   };
 
   return {
