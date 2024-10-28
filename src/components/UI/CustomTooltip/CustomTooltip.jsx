@@ -33,7 +33,7 @@ const CustomTooltip = styled(({ translate, className, children, title, ...props 
     borderRadius: theme.shape.borderRadius,
   },
   [`& .${tooltipClasses.arrow}`]: {
-    color: theme.palette.experienceSkillSect.tooltip.color,
+    color: theme.palette.experienceSkillSect.tooltip.backgroundColor
   },
 }));
 

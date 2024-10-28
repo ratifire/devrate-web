@@ -53,6 +53,11 @@ export const styles = {
     marginTop: theme.spacing(1),
     padding: '12px',
     borderRadius: 1,
-    color: theme.palette.primary[200],
+    color: theme.palette.iconBtn.createBtn.hover.color,
+    transition: 'background-color 0.3s, transform 0.3s',
+    ':hover': {
+      backgroundColor: theme.palette.iconBtn.createBtn.hover.backgroundColor,
+      color: theme.palette.iconBtn.createBtn.hover.color,
+    }
   }),
 };

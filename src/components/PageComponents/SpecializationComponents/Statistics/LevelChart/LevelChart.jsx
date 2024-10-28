@@ -6,11 +6,14 @@ import { useHardSkillData } from '../../../../../utils/hooks/specialization';
 import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 import { getLevel } from '../utils';
 import { styles } from './LevelChart.styles.js';
+import useThemeLevelChart from './useThemeLevelChart';
 
 const LevelChart = () => {
   const { skills, isError, isFetching, activeMastery } = useHardSkillData();
   const { t } = useTranslation();
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
+  const { grad1, grad2, grad3, grad4 } = useThemeLevelChart()
+
 
   if (isFetching) {
     return <LoaderComponent />;
@@ -51,10 +54,10 @@ const LevelChart = () => {
             >
               <defs>
                 <linearGradient id='gradient' x1='0%' y1='0%' x2='100%' y2='0%'>
-                  <stop offset='0.04%' style={{ stopColor: '#4A1D8B', stopOpacity: 1 }} />
-                  <stop offset='26.65%' style={{ stopColor: '#8233F1', stopOpacity: 1 }} />
-                  <stop offset='57.07%' style={{ stopColor: '#A756B4', stopOpacity: 1 }} />
-                  <stop offset='90.86%' style={{ stopColor: '#FCA728', stopOpacity: 1 }} />
+                  <stop offset='0.04%' style={{ stopColor: grad1, stopOpacity: 1 }} />
+                  <stop offset='26.65%' style={{ stopColor: grad2, stopOpacity: 1 }} />
+                  <stop offset='57.07%' style={{ stopColor: grad3, stopOpacity: 1 }} />
+                  <stop offset='90.86%' style={{ stopColor: grad4, stopOpacity: 1 }} />
                 </linearGradient>
               </defs>
             </Gauge>
