@@ -7,7 +7,7 @@ import useDebounce from '../../../../utils/hooks/useDebounce';
 import { styles } from './InputSearch.styles';
 import { ModalSearch } from './ModalSearch';
 import { formatSearchQuery } from './helpers';
-import useMergeState from '../../../../utils/hooks/useUpdateState';
+import useMergeState from '../../../../utils/hooks/useMergeState';
 
 const initialState = {
   query: '',

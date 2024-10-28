@@ -9,9 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import {useTheme} from "@mui/material/styles";
+import { Link } from 'react-router-dom';
+import links from '../../../../router/links';
+
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
-  console.log(event)
   const { t } = useTranslation();
   const [deleteEventById] = useDeleteEventByIdMutation();
   const theme = useTheme()
@@ -66,9 +68,13 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
           <Typography variant='caption2' sx={styles.title}>
             {t('schedule.popupUserInfo')}
           </Typography>
-          <Typography variant='subtitle2' sx={styles.name}>
+          <Box
+            sx={styles.name}
+            component={Link}
+            to={`${links.profile}/${event.host.id}`}
+          >
             {event.host.name} {event.host.surname}
-          </Typography>
+          </Box>
           <Typography variant='caption2' sx={styles.position}>
             {event.host.status}
           </Typography>
@@ -80,9 +86,13 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
           <Typography variant='caption2' sx={styles.title}>
             {t('schedule.popupInterviewerInfo')}
           </Typography>
-          <Typography variant='subtitle2' sx={styles.name}>
+          <Box
+            sx={styles.name}
+            component={Link}
+            to={`${links.profile}/${event.host.id}`}
+          >
             {event.participantDtos[0].name} {event.participantDtos[0].surname}
-          </Typography>
+          </Box>
           <Typography variant='caption2' sx={styles.position}>
             {event.participantDtos[0].status}
           </Typography>
