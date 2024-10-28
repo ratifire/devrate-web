@@ -1,5 +1,4 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Box, MenuItem, Select, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -14,6 +13,8 @@ import {
   useTooltip,
 } from '../utils';
 import { styles } from './InterviewChart.styles';
+import useThemeInterviewChart from './useThemeInterviewChart';
+import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -22,7 +23,8 @@ const InterviewChart = () => {
   const { t } = useTranslation();
   const dataMonths = useMemo(() => createTenMonthsInterviewData({ t, data }), [data]);
   const dataDays = useMemo(() => createTenDaysInterviewData({ data }), [data]);
-  const { tooltipLabel, tooltipContent } = useTooltip();
+  const { itemStyle, contentStyle } = useTooltip();
+  const { conductedGrad1, conductedGrad2, conductedGrad3, passedGrad1, passedGrad2, passedGrad3 } = useThemeInterviewChart()
 
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
@@ -40,49 +42,32 @@ const InterviewChart = () => {
         <Box>
           <Typography variant='subtitle2'>{t('specialization.statistics.interview_chart_title')}</Typography>
         </Box>
-        <Box>
-          <Select
-            sx={styles.select}
-            onChange={handleChange}
-            defaultValue={'months'}
-            IconComponent={KeyboardArrowDownIcon}
-            inputProps={{
-              MenuProps: {
-                PaperProps: {
-                  sx: styles.dropdownPaper,
-                },
-              },
-            }}
-          >
-            <MenuItem sx={styles.menuItem} value={'months'}>
-              {t('specialization.statistics.interview_chart_months')}
-            </MenuItem>
-            <MenuItem sx={styles.menuItem} value={'days'}>
-              {t('specialization.statistics.interview_chart_days')}
-            </MenuItem>
-          </Select>
-        </Box>
+        <ChartDropDown
+          handleChange={handleChange}
+          months={t('specialization.statistics.interview_chart_months')}
+          days={t('specialization.statistics.interview_chart_days')}
+        />
       </Box>
       <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
           <BarChart data={selectedPeriod} margin={{ top: 0, right: 5, left: -30, bottom: 0 }}>
             <defs>
               <linearGradient id='colorConducted' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='0%' stopColor='#FFC061' stopOpacity={1} />
-                <stop offset='29.8%' stopColor='#F39E37' stopOpacity={1} />
-                <stop offset='100%' stopColor='#8D5C20' stopOpacity={1} />
+                <stop offset='0%' stopColor={conductedGrad1} stopOpacity={1} />
+                <stop offset='29.8%' stopColor={conductedGrad2} stopOpacity={1} />
+                <stop offset='100%' stopColor={conductedGrad3} stopOpacity={1} />
               </linearGradient>
               <linearGradient id='colorPassed' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='0%' stopColor='#B07AFD' stopOpacity={1} />
-                <stop offset='36.8%' stopColor='#8133F1' stopOpacity={1} />
-                <stop offset='100%' stopColor='#4A1D8B' stopOpacity={1} />
+                <stop offset='0%' stopColor={passedGrad1} stopOpacity={1} />
+                <stop offset='36.8%' stopColor={passedGrad2} stopOpacity={1} />
+                <stop offset='100%' stopColor={passedGrad3} stopOpacity={1} />
               </linearGradient>
             </defs>
             <Legend iconType='circle' layout='horizontal' align='center' verticalAlign='top' />
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
             <XAxis dataKey='name' />
             <YAxis domain={[0, 10]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} interval={0} />
-            <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
+            <Tooltip itemStyle={itemStyle} contentStyle={contentStyle} />
             <Bar
               dataKey='conducted'
               name={t('specialization.interviewsChart.conducted')}

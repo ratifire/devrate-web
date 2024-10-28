@@ -8,8 +8,32 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
 });
 
-const baseQueryWithReauth = async (args, api, extraOptions) => {
+export const customBaseQuery = async (args, api, extraOptions) => {
   const result = await baseQuery(args, api, extraOptions);
+
+  if (result.error) {
+    if (result.error.status === 429) {
+      return {
+        error: {
+          status: result.error.status,
+          data: result.error.data || 'Too Many Requests. Please try again later.',
+        },
+      };
+    }
+    return {
+      error: {
+        status: result.error.status,
+        data: result.error.data || 'Request error',
+      },
+    };
+  }
+
+  return result;
+};
+
+const baseQueryWithReauth = async (args, api, extraOptions) => {
+  const result = await customBaseQuery(args, api, extraOptions);
+
   if (result.error && result.error.status === 401) {
     api.dispatch(logOut());
     Cookies.remove('JSESSIONID');
@@ -17,6 +41,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     navigate('/');
     return Promise.reject(result.error);
   }
+
   return result;
 };
 

@@ -20,37 +20,29 @@ export const styles = {
     paddingBottom: '15px', // for scroll size compensation
 
     '&::-webkit-scrollbar': {
-      width: 10,
       height: 10,
     },
     '&::-webkit-scrollbar-track': {
-      backgroundColor: theme.palette.neutral['600'],
+      backgroundColor: theme.palette.scroll.scrollWrapp,
       borderRadius: 8,
     },
     '&::-webkit-scrollbar-thumb': {
       borderRadius: 6,
-      backgroundColor: theme.palette.common.white,
+      backgroundColor: theme.palette.scroll.scrollEl,
     },
   }),
   page_title: (theme) => ({
     marginBottom: theme.spacing(5),
     fontSize: 34,
   }),
-  make_main_btn: (theme) => ({
-    color: theme.palette.action.active,
-    border: `1px solid ${theme.palette.action.active}`,
+  make_main_btn: {
     minWidth: '216px',
     padding: '12px 16px',
     textTransform: 'none',
-    '&:hover': {
-      color: theme.palette.primary['200'],
-      backgroundColor: `${theme.palette.primary['200']}29`,
-      borderColor: theme.palette.primary['200'],
-    },
-  }),
+  },
   add_specialization_btn: (theme) => ({
     width: '134px',
-    backgroundColor: theme.palette.neutral['600'],
+    backgroundColor: theme.palette.specialization.addSpec.color,
     borderRadius: 4,
   }),
 
@@ -64,13 +56,13 @@ export const styles = {
 
     '&.active': {
       '&::before': {
-        borderColor: theme.palette.primary['200'],
+        borderColor: theme.palette.specialization.activeSpec.color,
       },
       '&::after': {
-        borderColor: theme.palette.primary['200'],
+        borderColor: theme.palette.specialization.activeSpec.color,
       },
       '.figure__deco::after': {
-        borderColor: theme.palette.primary['200'],
+        borderColor: theme.palette.specialization.activeSpec.color,
       },
     },
 
@@ -78,10 +70,10 @@ export const styles = {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      border: `1px solid ${theme.palette.neutral['600']}`,
+      border: `1px solid ${theme.palette.specialization.addSpec.border}`,
       borderTop: 'none',
       transition: 'border-color .2s easy-in-out',
-      backgroundColor: theme.palette.neutral['600'],
+      backgroundColor: theme.palette.specialization.addSpec.color,
       top: `calc(100% - ${DECO_SIZE + 1}px)`,
       left: 0,
       height: DECO_SIZE,
@@ -93,10 +85,10 @@ export const styles = {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      border: `1px solid ${theme.palette.neutral['600']}`,
+      border: `1px solid ${theme.palette.specialization.addSpec.border}`,
       borderBottom: 'none',
       transition: 'border-color .2s easy-in-out',
-      backgroundColor: theme.palette.neutral['600'],
+      backgroundColor: theme.palette.specialization.addSpec.color,
       top: 0,
       left: 0,
       height: `calc(100% - ${DECO_SIZE}px)`,
@@ -111,7 +103,7 @@ export const styles = {
     bottom: '2px',
     right: 0,
     borderRadius: '0 0 16px 0',
-    backgroundColor: theme.palette.background.level2,
+    backgroundColor: theme.palette.specialization.addSpec.deco,
 
     '&::before': {
       content: '""',
@@ -122,22 +114,22 @@ export const styles = {
       left: 0,
       height: '50%',
       width: '50%',
-      backgroundColor: theme.palette.neutral['600'],
+      backgroundColor: theme.palette.specialization.addSpec.color,
     },
     '&::after': {
       content: '""',
       display: 'flex',
       position: 'absolute',
-      backgroundColor: theme.palette.background.level2,
-      left: '1px',
-      top: '-1px',
+      backgroundColor: theme.palette.specialization.addSpec.deco,
+      left: '2px',
+      top: '0px',
       zIndex: 2,
       height: '50%',
       width: '50%',
       borderTopLeftRadius: '16px',
       transition: 'border-color .2s easy-in-out',
-      borderTop: '1px solid ' + theme.palette.neutral['600'],
-      borderLeft: '1px solid ' + theme.palette.neutral['600'],
+      borderTop: '1px solid ' + theme.palette.specialization.addSpec.border,
+      borderLeft: '1px solid ' + theme.palette.specialization.addSpec.border,
     },
   }),
   specialization_title_star: {
@@ -167,7 +159,7 @@ export const styles = {
   star: (theme) => ({
     marginTop: '12px',
     marginRight: '16px',
-    color: theme.palette.action.active,
+    color: theme.palette.specialization.star.color,
     position: 'relative',
     zIndex: 1,
   }),
@@ -208,13 +200,13 @@ export const styles = {
   },
   editSpecialization: (theme) => ({
     zIndex: 1,
-    border: '1px solid #444446',
+    border: `1px solid ${theme.palette.specialization.btnEditSpec.border}`,
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: '7px',
     boxSizing: 'content-box',
-    color: theme.palette.text.secondary,
+    color: theme.palette.specialization.btnEditSpec.color,
   }),
 };

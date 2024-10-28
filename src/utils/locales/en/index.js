@@ -176,22 +176,17 @@ export const en = {
       feedbackProjectModal: {
         title: 'Leave a feedback',
         type_of_feedback: {
-          PROPOSITION: 'Offer',
-          ISSUE: 'Error',
-          FEEDBACK: 'Response',
-        },
-        defaultTextFor: {
-          offer: `If you have some offer's after using our site - please write your review.`,
-          error: `If you have some error's after using our site - please write your review.`,
-          response: `If you would like to leave a review after using our site, please write it here.`
+          PROPOSITION: 'Feature request',
+          ISSUE: 'Bug',
+          FEEDBACK: 'Feedback',
         },
         feedback: 'Feedback',
         button: 'Send',
         label: 'Type of feedback',
         textPlaceholder: 'Please enter your feedback here...',
         required: 'This is a required field',
+        error_429: 'You have already sent feedback this month',
       },
-
     },
     profile: {
       skills: {

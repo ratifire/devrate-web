@@ -6,11 +6,13 @@ import useHardSkillData from '../../../../../utils/hooks/specialization/useHardS
 import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
 import { roundData, useTooltip } from '../utils';
 import { styles } from './HardSkillsChart.styles.js';
+import useThemeHardSkillsChart from './useThemeHardSkillsChart';
 
 const HardSkillsChart = () => {
-  const { tooltipContent, tooltipLabel } = useTooltip();
+  const { itemStyle,  contentStyle } = useTooltip();
   const { skills, isFetching, isError } = useHardSkillData();
   const { t } = useTranslation();
+  const { grad1, grad2 } = useThemeHardSkillsChart();
   const roundedSkills = roundData(skills);
 
   if (isFetching) {
@@ -40,11 +42,11 @@ const HardSkillsChart = () => {
           fillOpacity={0.3}
           dot={({ cx, cy, index }) => <circle key={index} cx={cx} cy={cy} r={2} fill='#16FFB9' />}
         />
-        <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
+        <Tooltip itemStyle={itemStyle} contentStyle={contentStyle} />
         <defs>
           <linearGradient id='gradient2' x1='0%' y1='0%' x2='100%' y2='0%'>
-            <stop offset='0%' style={{ stopColor: '#16FFB9', stopOpacity: 1 }} />
-            <stop offset='100%' style={{ stopColor: '#DAFE22', stopOpacity: 1 }} />
+            <stop offset='0%' style={{ stopColor: grad1, stopOpacity: 1 }} />
+            <stop offset='100%' style={{ stopColor: grad2, stopOpacity: 1 }} />
           </linearGradient>
         </defs>
       </RadarChart>

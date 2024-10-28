@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
-import { Typography, CircularProgress } from '@mui/material';
+import { Typography, CircularProgress, Snackbar, Alert } from '@mui/material';
 import ButtonDef from '../../FormsComponents/Buttons/ButtonDef';
 import { useTranslation } from 'react-i18next';
 import FormSelect from '../../FormsComponents/Inputs/FormSelect';
@@ -12,9 +12,8 @@ import { styles } from './FeedbackProjectModal.styles';
 import { FeedbackProjectModalSchema } from '../../../utils/valadationSchemas/index';
 import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
 import { feedbackOptions } from './constants';
-import { ErrorComponent } from '../../UI/Exceptions';
 
-const initialValues= {
+const initialValues = {
   select: '',
   feedbackText: '',
 };
@@ -25,21 +24,31 @@ const FeedbackProjectModal = () => {
   const openFeedback = useSelector((state) => state.modal.feedbackProjectModal);
   const { id } = useSelector((state) => state.auth.user.data);
 
+  const [createFeedback, { isError, isLoading, isSuccess }] = useCreateFeedbackMutation();
 
-  const [createFeedback, { isError, isLoading }] = useCreateFeedbackMutation();
+  const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false);
+  const [openSnackbarError, setOpenSnackbarError] = useState(false);
 
   const handleClose = () => {
     dispatch(closeModal({ modalName: 'feedbackProjectModal' }));
   };
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setOpenSnackbarSuccess(false);
+    setOpenSnackbarError(false);
+  };
+
   const onSubmit = async (values) => {
-    await createFeedback({
-      userId: id,
-      type: values.select,
-      text: values.feedbackText,
-    });
-    if (!isError) {
-      handleClose()
+    try {
+      await createFeedback({
+        userId: id,
+        type: values.select,
+        text: values.feedbackText,
+
+      });
+    } catch (error) {
+      console.error('Submit Error:', error);
     }
   };
 
@@ -49,59 +58,92 @@ const FeedbackProjectModal = () => {
     onSubmit,
   });
 
-  if (isError) {
-    return (
-      <ModalLayoutProfile
-        setOpen={handleClose}
-        open={openFeedback}>
-        <ErrorComponent />
-      </ModalLayoutProfile>
-    );
-  }
-
+  useEffect(() => {
+    if (isSuccess) {
+      setOpenSnackbarSuccess(true);
+      const timeoutId = setTimeout(() => {
+        handleClose();
+      }, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+    if (isError) {
+      setOpenSnackbarError(true);
+    }
+  }, [isSuccess, isError]);
   return (
-    <>
-      <ModalLayoutProfile setOpen={handleClose} open={openFeedback}>
-        <Typography variant="h6" sx={styles.title}>
-          {t('modal.feedbackProjectModal.title')}
-        </Typography>
+    <ModalLayoutProfile setOpen={handleClose} open={openFeedback}>
+      <Typography variant="h6" sx={styles.title}>
+        {t('modal.feedbackProjectModal.title')}
+      </Typography>
 
-        <form onSubmit={formik.handleSubmit}>
-          <FormSelect
-            variant="outlined"
-            name="select"
-            value={formik.values.select}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            label={t('modal.feedbackProjectModal.label')}
-            required
-            countries={feedbackOptions}
-            isTranslated
-          />
+      <form onSubmit={formik.handleSubmit}>
+        <FormSelect
+          variant="outlined"
+          name="select"
+          value={formik.values.select}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          label={t('modal.feedbackProjectModal.label')}
+          required
+          countries={feedbackOptions}
+          isTranslated
+        />
 
-          <TextAreaInput
-            name="feedbackText"
-            value={formik.values.feedbackText}
-            label={'Message'}
-            required
-            placeholder={t('modal.feedbackProjectModal.textPlaceholder')}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-          />
+        <TextAreaInput
+          name="feedbackText"
+          value={formik.values.feedbackText}
+          label={'Message'}
+          required
+          placeholder={t('modal.feedbackProjectModal.textPlaceholder')}
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+        />
 
-          <ButtonDef
-            fullWidth
-            label={t('modal.feedbackProjectModal.button')}
-            type="submit"
-            variant="contained"
-            correctStyle={styles.btn}
-            disabled={!formik.isValid || !formik.dirty || isLoading}
-          >
-            {isLoading ? <CircularProgress size={24} /> : t('modal.feedbackProjectModal.button')}
-          </ButtonDef>
-        </form>
-      </ModalLayoutProfile>
-    </>
+        <ButtonDef
+          fullWidth
+          label={t('modal.feedbackProjectModal.button')}
+          type="submit"
+          variant="contained"
+          correctStyle={styles.btn}
+          disabled={!formik.isValid || !formik.dirty || isLoading}
+        >
+          {isLoading ? <CircularProgress size={24} /> : t('modal.feedbackProjectModal.button')}
+        </ButtonDef>
+      </form>
+
+      <Snackbar
+        open={openSnackbarSuccess}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={styles.snackBar}
+        sx={styles.snackbarTransition}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={styles.alertContent}
+        >
+          Successfully!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openSnackbarError}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={styles.snackBar}
+        sx={styles.snackbarTransition}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          sx={styles.alertContent}        >
+          {/*{error?.data || 'An error occurred. Please try again.'}*/}
+          {t('modal.feedbackProjectModal.error_429')}
+        </Alert>
+      </Snackbar>
+
+    </ModalLayoutProfile>
   );
 };
 
