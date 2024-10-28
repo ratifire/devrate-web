@@ -1,33 +1,36 @@
-import AddIcon from '@mui/icons-material/Add'
-import { Box, IconButton, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { v4 as uuidv4 } from 'uuid'
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile'
-import { closeModal } from '../../../../redux/modal/modalSlice'
+import AddIcon from '@mui/icons-material/Add';
+import { Box, IconButton, TextField, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useAddSkillToMasteryMutation,
   useDeleteSkillByIdMutation,
   useGetHardSkillsByMasteryIdQuery,
-} from '../../../../redux/specialization/specializationApiSlice'
-import { useGetMastery } from '../../../../utils/hooks/specialization'
-import { ButtonDef } from '../../../FormsComponents/Buttons'
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions'
-import { SkillChip } from '../../../UI/Specialization/SkillChip'
-import { styles } from '../styles/SkillsModal.styles'
-import { styles as hardSkillsStyles } from './HardSkillsModal.styles'
+} from '../../../../redux/specialization/specializationApiSlice';
 import MAX_SKILLS from '../../../../utils/constants/Specialization/maxSkills';
+import { useGetMastery } from '../../../../utils/hooks/specialization';
+import useMergeState from '../../../../utils/hooks/useMergeState';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { SkillChip } from '../../../UI/Specialization/SkillChip';
+import { styles } from '../styles/SkillsModal.styles';
+import { styles as hardSkillsStyles } from './HardSkillsModal.styles';
+
+const initialState = {
+  skill: '',
+  helperText: '',
+  error: false,
+  idDeletedSkills: [],
+  allSkills: [],
+  addSkills: [],
+};
 
 const HardSkillsModal = () => {
-  const [state, setState] = useState({
-    skill: '',
-    helperText: '',
-    error: false,
-    idDeletedSkills: [],
-    allSkills: [],
-    addSkills: [],
-  });
+  const [state, updateState] = useMergeState(initialState);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
@@ -45,9 +48,9 @@ const HardSkillsModal = () => {
   const isFindSkill = allSkills?.find((v) => v.name === skill.trim());
   const isLoading = isFetchingMastery || isFetchingSkills || isLoadingAddSkill || isLoadingDeleteSkill;
   const isError = isErrorMastery || isErrorSkills || isErrorAddSkill || isErrorDeleteSkill;
+  const { error, helperText } = state;
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
-  const updateState = (newState) => setState((prevState) => ({ ...prevState, ...newState }));
 
   useEffect(() => {
     updateState({ allSkills: skills });
@@ -127,66 +130,73 @@ const HardSkillsModal = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (addSkills.length) {
-      addSkills.forEach((skill) => {
-        addSkillToMastery({ masteryId, skill: { name: skill.name, type: 'HARD_SKILL' } });
-      });
-    }
+    const addSkillPromises = addSkills.map((skill) =>
+      addSkillToMastery({ masteryId, skill: { name: skill.name, type: 'HARD_SKILL' } })
+    );
 
-    if (idDeletedSkills.length) {
-      idDeletedSkills.forEach((v) => {
-        deleteSkill(v.id);
-      });
-    }
+    const deleteSkillPromises = idDeletedSkills.map((v) => deleteSkill(v.id));
+
+    await Promise.all([...addSkillPromises, ...deleteSkillPromises]);
 
     handleClose();
   };
 
+  if (isLoading) {
+    return (
+      <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
+        <LoaderComponent />
+      </ModalLayoutProfile>
+    );
+  }
+
+  if (isError) {
+    return (
+      <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
+        <ErrorComponent />
+      </ModalLayoutProfile>
+    );
+  }
+
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
-      {isError && <ErrorComponent />}
-      {isLoading && <LoaderComponent />}
-      {!isLoading && (
-        <>
-          <Typography variant='h6' sx={styles.title}>
-            {t('specialization.modal.skills.title')}
-          </Typography>
-          <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
-            <Box sx={[styles.input, hardSkillsStyles.box]}>
-              <TextField
-                variant='outlined'
-                autoFocus={true}
-                helperText={t(state.helperText)}
-                error={state.error}
-                value={skill}
-                onChange={handleChange}
-                label={t('specialization.modal.skills.placeholder')}
-                fullWidth
-              />
-              <IconButton onClick={handleAddSkill} sx={styles.iconBtn}>
-                <AddIcon />
-              </IconButton>
-            </Box>
-            <Box sx={styles.input}>
-              <Box>
-                {allSkills?.map((skill) => (
-                  <SkillChip onDelete={handleDeleteSkill} key={skill.id} skill={skill} />
-                ))}
-              </Box>
-            </Box>
-            <ButtonDef
-              variant='contained'
-              type='submit'
-              label={t('profile.modal.btn')}
-              correctStyle={styles.btn}
-              disabled={addSkills.length === 0 && idDeletedSkills.length === 0}
-            />
-          </form>
-        </>
-      )}
+      <Typography variant='h6' sx={styles.title}>
+        {t('specialization.modal.skills.title')}
+      </Typography>
+      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
+        <Box sx={[styles.input, hardSkillsStyles.box]}>
+          <TextField
+            variant='outlined'
+            autoFocus={true}
+            helperText={t(helperText)}
+            error={error}
+            value={skill}
+            onChange={handleChange}
+            sx={hardSkillsStyles.input}
+            label={t('specialization.modal.skills.placeholder')}
+            fullWidth
+          />
+          <IconButton onClick={handleAddSkill} sx={styles.iconBtn}>
+            <AddIcon />
+          </IconButton>
+        </Box>
+        <Box sx={styles.input}>
+          <Box>
+            {allSkills?.map((skill) => (
+              <SkillChip onDelete={handleDeleteSkill} key={skill.id} skill={skill} />
+            ))}
+          </Box>
+        </Box>
+        <ButtonDef
+          variant='contained'
+          type='submit'
+          label={t('profile.modal.btn')}
+          correctStyle={styles.btn}
+          disabled={addSkills.length === 0 && idDeletedSkills.length === 0}
+        />
+      </form>
     </ModalLayoutProfile>
   );
 };
