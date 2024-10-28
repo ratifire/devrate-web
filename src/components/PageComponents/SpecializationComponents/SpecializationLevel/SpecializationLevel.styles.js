@@ -14,7 +14,7 @@ export const styles = {
   buttonGroup: (theme) => ({
     width: '100%',
     boxShadow: 'none',
-    backgroundColor: theme.palette.background.btnGroup,
+    backgroundColor: theme.palette.specialization.level.btnGroup,
     padding: theme.spacing(1),
     gridGap: theme.spacing(1),
     '.MuiButtonGroup-firstButton.Mui-disabled, .MuiButtonGroup-middleButton.Mui-disabled': {
@@ -57,19 +57,19 @@ export const styles = {
       },
     },
     ' .MuiButton-contained': {
-      backgroundColor: theme.palette.primary['400'],
+      backgroundColor: theme.palette.specialization.level.btn,
       cursor: 'auto',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.primary['400'],
+        backgroundColor: theme.palette.specialization.level.btn,
       },
       ':active': {
         border: 'none',
-        backgroundColor: theme.palette.primary['400'],
+        backgroundColor: theme.palette.specialization.level.btn,
       },
       ':disabled': {
         border: 'none',
-        backgroundColor: theme.palette.primary['400'],
+        backgroundColor: theme.palette.specialization.level.btn,
         color: theme.palette.text.primary,
       },
     },

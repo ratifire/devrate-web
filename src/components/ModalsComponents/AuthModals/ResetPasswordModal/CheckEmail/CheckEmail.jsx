@@ -5,14 +5,14 @@ import styles from './CheckEmail.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Link, Typography } from '@mui/material';
-import { CheckEmailSchema } from '../../../../../utils/valadationSchemas/index';
+import { CheckResetEmailSchema } from '../../../../../utils/valadationSchemas/index';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import { useResetPasswordMutation } from '../../../../../redux/auth/authApiSlice';
 import { setEmail } from '../../../../../redux/auth/emailSlice';
-import {toast} from "react-toastify";
+import { toast } from 'react-toastify';
 
 const initialValues = {
   email: '',
@@ -39,22 +39,22 @@ const CheckEmail = () => {
       dispatch(openModal({ modalName: 'openNotification' }));
     } catch (error) {
       console.error('Error sending email:', error);
-       toast.error('Error sending email. Please try again.', {
-        position: "top-right",
+      toast.error('Error sending email. Please try again.', {
+        position: 'top-right',
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
     }
   };
 
   const formik = useFormik({
     initialValues,
-    validationSchema: CheckEmailSchema,
+    validationSchema: CheckResetEmailSchema,
     onSubmit,
   });
 
