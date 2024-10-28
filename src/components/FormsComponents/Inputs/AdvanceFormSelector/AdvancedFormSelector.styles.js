@@ -6,7 +6,7 @@ export const styles = {
   }),
   selectField: (theme) => ({
     '& .MuiInputBase-root': {
-      backgroundColor: theme.palette.neutral['900'], // Background color of the input
+      backgroundColor: 'transparent', // Background color of the input
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -34,7 +34,7 @@ export const styles = {
     '& .MuiFormLabel-asterisk': { color: 'red' },
   }),
   dropdownPaper: (theme) => ({
-    backgroundColor: '#303032',
+    backgroundColor: theme.palette.selectField.color,
     borderRadius: '3px',
     '& .MuiAutocompleteListbox': {
       maxHeight: '287px',

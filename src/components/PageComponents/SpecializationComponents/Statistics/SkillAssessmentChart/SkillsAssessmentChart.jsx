@@ -1,5 +1,4 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Box, MenuItem, Select, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
@@ -14,17 +13,20 @@ import {
   useTooltip,
 } from '../utils';
 import { styles } from './SkillsAssessmentChart.styles';
+import useSkillsAssessmentChart from './useSkillsAssessmentChart';
+import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
   const { data: dataHistory, isError, isFetching } = useGetHistoryData({ to, from });
   const { t } = useTranslation();
-  const { tooltipContent, tooltipLabel } = useTooltip();
+  const { itemStyle, contentStyle } = useTooltip();
   const arithmeticAverage = arithmeticAverageSkillValue({
     data: dataHistory,
     secondValue: 'hardSkillMark',
     firstValue: 'softSkillMark',
   });
+  const { grad1, grad2, grad3 } = useSkillsAssessmentChart()
 
   const dataDays = useMemo(
     () => createTenDaysHistoryData({ data: dataHistory, average: arithmeticAverage }),
@@ -50,43 +52,26 @@ const SkillsAssessmentChart = () => {
         <Box>
           <Typography variant='subtitle2'>{t('specialization.statistics.skills_assessment_chart_title')}</Typography>
         </Box>
-        <Box>
-          <Select
-            sx={styles.select}
-            onChange={handleChange}
-            defaultValue={'months'}
-            IconComponent={KeyboardArrowDownIcon}
-            inputProps={{
-              MenuProps: {
-                PaperProps: {
-                  sx: styles.dropdownPaper,
-                },
-              },
-            }}
-          >
-            <MenuItem sx={styles.menuItem} value={'months'}>
-              {t('specialization.statistics.interview_chart_months')}
-            </MenuItem>
-            <MenuItem sx={styles.menuItem} value={'days'}>
-              {t('specialization.statistics.interview_chart_days')}
-            </MenuItem>
-          </Select>
-        </Box>
+        <ChartDropDown
+          handleChange={handleChange}
+          months={t('specialization.statistics.interview_chart_months')}
+          days={t('specialization.statistics.interview_chart_days')}
+        />
       </Box>
       <Box sx={styles.chartWrapper}>
         <ResponsiveContainer width='100%' height='100%'>
           <AreaChart data={selectedPeriod} margin={{ top: 6, right: 0, left: -40, bottom: 0 }}>
             <defs>
               <linearGradient id='colorValue' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='0%' stopColor='#DAFE22' stopOpacity={1} />
-                <stop offset='53.8%' stopColor='rgba(130, 254, 102, 0.552)' stopOpacity={1} />
-                <stop offset='100%' stopColor='rgba(22, 255, 185, 0)' stopOpacity={1} />
+                <stop offset='0%' stopColor={grad1} stopOpacity={1} />
+                <stop offset='53.8%' stopColor={grad2} stopOpacity={1} />
+                <stop offset='100%' stopColor={grad3} stopOpacity={1} />
               </linearGradient>
             </defs>
             <XAxis dataKey='name' />
             <YAxis domain={[0, 9]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} interval={0} />
             <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
-            <Tooltip contentStyle={tooltipContent} labelStyle={tooltipLabel} />
+            <Tooltip itemStyle={itemStyle} contentStyle={contentStyle} />
             <Area
               type='monotone'
               dataKey='value'

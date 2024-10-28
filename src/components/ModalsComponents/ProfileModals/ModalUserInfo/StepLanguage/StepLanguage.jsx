@@ -26,7 +26,9 @@ const StepLanguage = () => {
     helperTextLanguage: '',
     helperTextLevel: '',
   });
+  const [isFormUnchanged, setIsFormUnchanged] = useState(true);
 
+  
   const formik = useFormik({
     initialValues: {
       languages: [],
@@ -44,7 +46,11 @@ const StepLanguage = () => {
       formik.setFieldValue('languages', languages);
     }
   }, [languages]);
-
+  
+  useEffect(() => {
+    setIsFormUnchanged(JSON.stringify(formik.values.languages) === JSON.stringify(languages));
+  }, [formik.values.languages, languages]);
+  
   const handleLanguageChange = (language) => {
     setFormState((prevState) => ({
       ...prevState,
@@ -113,8 +119,6 @@ const StepLanguage = () => {
       formik.values.languages.filter((item) => item.name !== languageToDelete)
     );
   };
-
-  let isFormUnchanged = JSON.stringify(formik.values.languages) === JSON.stringify(languages);
 
   return (
     <Box sx={styles.wrapper}>
