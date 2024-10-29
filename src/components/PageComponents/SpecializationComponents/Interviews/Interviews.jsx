@@ -54,7 +54,7 @@ const Interviews = () => {
   return (
     <Box sx={styles.contentWrapper}>
       <Box sx={styles.stats}>
-        <Typography variant='h6'>{mainSpec?.name}</Typography>
+        <Typography variant='h6' sx={styles.title}>{mainSpec?.name}</Typography>
 
         <Box sx={styles.interviewItemOutcome}>
           <Mood />

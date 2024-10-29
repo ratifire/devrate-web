@@ -10,15 +10,18 @@ export const styles = {
     flexDirection: 'column',
     gap: theme.spacing(1),
   }),
+  title: (theme) => ({
+    color: theme.palette.scheduleInterview.area.color,
+  }),
   interviewItemIncome: (theme) => ({
     display: 'flex',
     gap: theme.spacing(1),
-    color: theme.palette.info.azure,
+    color: theme.palette.scheduleInterview.area.income,
   }),
   interviewItemOutcome: (theme) => ({
     display: 'flex',
     gap: theme.spacing(1),
-    color: theme.palette.info.main,
+    color: theme.palette.scheduleInterview.area.outcome,
   }),
   interviewType: {
     display: 'flex',
@@ -34,6 +37,10 @@ export const styles = {
     textTransform: 'none',
     fontWeight: 500,
     width: '100%',
+    letterSpacing: '0.1px',
+    gridGap: theme.spacing(2),
+    backgroundColor: theme.palette.scheduleInterview.area.btn.backgroundColor,
+    paddingY: '10px',
     '&:disabled': {
       backgroundColor: theme.palette.background.btnGroup,
     },
@@ -46,23 +53,28 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    backgroundColor: theme.palette.neutral[800],
+    backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
   }),
   popover: (theme) => ({
     '>.MuiPaper-root': {
       borderRadius: '0 0 4px 4px',
-      backgroundColor: theme.palette.neutral[800],
+      backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
+      boxShadow: 'none',
       maxWidth: 600,
       width: '100%',
     },
   }),
   divider: (theme) => ({
-    borderColor: theme.palette.neutral[600],
+    borderColor: theme.palette.scheduleInterview.area.popover.borderColor,
   }),
   menuButton: (theme) => ({
-    color: theme.palette.primary[100],
+    color: theme.palette.scheduleInterview.area.popover.btn.color,
     fontSize: 14,
     textTransform: 'none',
     fontWeight: 500,
+    display: 'flex',
+    ':hover': {
+      backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
+    }
   }),
 };

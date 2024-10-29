@@ -131,7 +131,16 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
     }),
-    
+    updateInterviewRequest: builder.mutation({
+      query ({ userId, masteryId, role, availableDates }) {
+        return {
+          url: `/users/${userId}/interview-requests`,
+          method: 'PUT',
+          body: { role, masteryId, availableDates },
+        };
+      },
+      invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
+    }),
     addSkillToMastery: builder.mutation({
       query: ({ masteryId, skill }) => ({
         url: `/masteries/${masteryId}/skills`,
@@ -175,6 +184,7 @@ export const {
   useUpdateSpecializationByIdMutation,
   useGetInterviewRequestQuery,
   useCreateInterviewRequestMutation,
+  useUpdateInterviewRequestMutation,
   useDeleteSpecializationByIdMutation,
   useGetMasteriesBySpecializationIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,

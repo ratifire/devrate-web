@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
@@ -12,6 +12,7 @@ import { selectCurrentUserId } from '../../../../redux/auth/authSlice';
 import {
   useCreateInterviewRequestMutation,
   useGetInterviewRequestQuery,
+  useUpdateInterviewRequestMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { styles } from './ScheduleInterviewModal.styles';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
@@ -28,21 +29,43 @@ const ScheduleInterviewModal = () => {
   const { t } = useTranslation();
   const isOpen = useSelector((state) => state.modal.scheduleInterview);
   const userId = useSelector(selectCurrentUserId);
+  const [checked, setChecked] = useState([]);
+  
+  const shouldUpdate = useRef(false);
   
   const { data: currentDates } = useGetInterviewRequestQuery({
     userId,
     role,
   }, { skip: !userId });
-  console.log(currentDates, 'currentDates');
+  
+  useLayoutEffect(() => {
+    if (currentDates && currentDates.availableDates) {
+      let availableDates = [];
+      if (Array.isArray(currentDates.availableDates)) {
+        const localDate = DateTime.local();
+        const offsetInHours = localDate.offset / 60;
+        const timeZone = `UTC${offsetInHours >= 0 ? '+' : ''}${offsetInHours}`;
+        shouldUpdate.current = true;
+        availableDates = currentDates.availableDates.map((item) => {
+          let d = DateTime.fromISO(item, { zone: 'utc' });
+          return d.setZone(timeZone).toISO();
+        });
+      }
+      setChecked(Array.from(new Set([...checked, ...availableDates]))); // Запобігаємо дублюванню
+    }
+  }, [currentDates]);
+  
   const [date, setDate] = useState(DateTime.now().startOf('day'));
   const [weekDates, setWeekDates] = useState([]);
+  
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
+  const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
   const { masteryId } = useGetMastery();
   const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
   const handleTabChange = (newTab) => setTab(newTab);
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     setWeekDates(getDatesInWeek(date));
   }, [date]);
   
@@ -51,12 +74,21 @@ const ScheduleInterviewModal = () => {
   };
   
   const onSubmit = async (values, { resetForm }) => {
-    await createInterviewRequest({
-      userId: userId,
-      masteryId,
-      role,
-      availableDates: Object.keys(values.dates),
-    });
+    if (shouldUpdate.current) {
+      await updateInterviewRequest({
+        userId: userId,
+        masteryId,
+        role,
+        availableDates: checked,
+      });
+    } else {
+      await createInterviewRequest({
+        userId: userId,
+        masteryId,
+        role,
+        availableDates: checked,
+      });
+    }
     
     resetForm();
     handleClose();
@@ -81,17 +113,12 @@ const ScheduleInterviewModal = () => {
   };
   
   const handleTimeClick = (isoTime) => {
-    const newDates = { ...formik.values.dates };
-    
-    if (newDates[isoTime]) {
-      delete newDates[isoTime];
-    } else {
-      newDates[isoTime] = true;
-    }
-    
-    formik.setFieldValue('dates', newDates);
+    setChecked((prevChecked) =>
+      prevChecked.includes(isoTime)
+        ? prevChecked.filter((time) => time !== isoTime)
+        : [...prevChecked, isoTime],
+    );
   };
-  
   const generateTimeButtons = (day) => {
     return range(0, 24).map((hour) => {
       const time = day.set({ hour });
@@ -103,7 +130,7 @@ const ScheduleInterviewModal = () => {
           key={timeIso}
           name="dates"
           value={timeIso}
-          isChecked={Boolean(formik.values.dates[timeIso])}
+          isChecked={checked.includes(timeIso)}
           label={time.toFormat('HH:mm')}
           onChange={() => handleTimeClick(timeIso)}
           disabled={isPastDate}
@@ -121,11 +148,9 @@ const ScheduleInterviewModal = () => {
   
   return (
     <ModalLayoutProfile setOpen={handleClose} open={isOpen}>
-      
       <Typography variant="subtitle1" sx={styles.title}>
         {t('specialization.modal.scheduleModal.scheduleInterview')}
       </Typography>
-      
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
           <WeekNavigation
@@ -146,7 +171,7 @@ const ScheduleInterviewModal = () => {
             variant="contained"
             type="submit"
             label={t('specialization.modal.scheduleModal.schedule')}
-            correctStyle={styles.workExperienceBtn}
+            correctStyle={styles.btn}
           />
         </Box>
       </form>
