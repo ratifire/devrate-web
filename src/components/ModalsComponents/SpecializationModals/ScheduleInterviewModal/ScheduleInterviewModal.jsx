@@ -22,6 +22,7 @@ import RenderTabs from './components/TabsRender';
 import RenderTimeSlots from './components/RenderTimeSlots';
 import WeekNavigation from './components/WeekNavigation';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
+import { getUserUTC } from '../../../../utils/helpers';
 
 const ScheduleInterviewModal = () => {
   const { role } = useSelector((state) => state.modal.modalData);
@@ -42,9 +43,7 @@ const ScheduleInterviewModal = () => {
     if (currentDates && currentDates.availableDates) {
       let availableDates = [];
       if (Array.isArray(currentDates.availableDates)) {
-        const localDate = DateTime.local();
-        const offsetInHours = localDate.offset / 60;
-        const timeZone = `UTC${offsetInHours >= 0 ? '+' : ''}${offsetInHours}`;
+        const timeZone = getUserUTC();
         shouldUpdate.current = true;
         availableDates = currentDates.availableDates.map((item) => {
           let d = DateTime.fromISO(item, { zone: 'utc' });
@@ -73,7 +72,7 @@ const ScheduleInterviewModal = () => {
     dates: {},
   };
   
-  const onSubmit = async (values, { resetForm }) => {
+  const onSubmit = async () => {
     if (shouldUpdate.current) {
       await updateInterviewRequest({
         userId: userId,
@@ -89,8 +88,6 @@ const ScheduleInterviewModal = () => {
         availableDates: checked,
       });
     }
-    
-    resetForm();
     handleClose();
   };
   
