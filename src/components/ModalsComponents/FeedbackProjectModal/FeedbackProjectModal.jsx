@@ -42,23 +42,18 @@ const FeedbackProjectModal = () => {
   };
 
   const onSubmit = async (values) => {
-    try {
-      const result = await createFeedback({
-        userId: id,
-        type: values.select,
-        text: values.feedbackText,
-      });
+    const result = await createFeedback({
+      userId: id,
+      type: values.select,
+      text: values.feedbackText,
+    });
 
-      if (result.error) {
-        setState({ openSnackbarError: true });
-        await formik.setValues(initialValues);
-      } else {
-        setState({ openSnackbarSuccess: true });
-        await formik.setValues(initialValues);
-      }
-    } catch (error) {
-      console.error('Submit Error:', error);
+    if (result.error) {
       setState({ openSnackbarError: true });
+      await formik.setValues(initialValues);
+    } else {
+      setState({ openSnackbarSuccess: true });
+      await formik.setValues(initialValues);
     }
   };
 
