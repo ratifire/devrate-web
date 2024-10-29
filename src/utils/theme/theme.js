@@ -412,6 +412,12 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#3E3E40',
             backgroundColor2: '#252527' + 'BD',
             border: 'transparent',
+            grade: '#C5C5C6',
+            divider: '#69696B',
+            tooltip: {
+              color: '#C5C5C6',
+              backgroundColor: '#3E3E40',
+            },
           },
           experienceSkillSect: {
             wrapperUnSorted: {
