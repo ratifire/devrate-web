@@ -557,6 +557,15 @@ const getDesignTokens = (mode) => ({
               participantlinkColor: '#CEB0FA',
               cancelEventBtnColor: '#CEB0FA',
             },
+            userLinksEvent: {
+              color: '#CEB0FA',
+              hover: {
+                color: '#8133F1',
+              },
+              active: {
+                color: '#5900D9'
+              },
+            },
           },
           selectField: {
             color: '#303032',
@@ -906,6 +915,16 @@ const getDesignTokens = (mode) => ({
               hostLinkColor: '#6200EE',
               participantlinkColor: '#6200EE',
               cancelEventBtnColor: '#6200EE',
+
+            },
+            userLinksEvent: {
+              color: '#6200EE',
+              hover: {
+                color: '#360083',
+              },
+              active: {
+                color: '#290064'
+              },
             },
           },
           experienceSkillSect: {

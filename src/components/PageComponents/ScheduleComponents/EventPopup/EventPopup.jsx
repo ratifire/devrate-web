@@ -84,16 +84,20 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
         <IconButton onClick={handleClosePopup} sx={styles.closeIcon}>
           <CloseIcon/>
         </IconButton>
+
         <Box sx={styles.userInfo}>
           <Typography variant='caption2' sx={styles.title}>
             {t('schedule.popupUserInfo')}
           </Typography>
           <Box
-            sx={styles.name}
             component={Link}
             to={`${links.profile}/${event.host.id}`}
+            sx={{ textDecoration: 'none' }}
           >
-            {event.host.name} {event.host.surname}
+            <Typography variant='subtitle2' sx={styles.name}>
+              {event.host.name} {event.host.surname}
+            </Typography>
+
           </Box>
           <Typography variant='caption2' sx={styles.position}>
             {event.host.status}
@@ -102,16 +106,20 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
             {t('schedule.popupRole')} {event.host.role.toLowerCase()}
           </Typography>
         </Box>
+
         <Box sx={styles.interviewerInfo}>
           <Typography variant='caption2' sx={styles.title}>
             {t('schedule.popupInterviewerInfo')}
           </Typography>
           <Box
-            sx={styles.name}
             component={Link}
-            to={`${links.profile}/${event.host.id}`}
+            to={`${links.profile}/${event.participantDtos[0].id}`}
+            sx={{ textDecoration: 'none' }}
           >
-            {event.participantDtos[0].name} {event.participantDtos[0].surname}
+            <Typography variant='subtitle2' sx={styles.name}>
+              {event.participantDtos[0].name} {event.participantDtos[0].surname}
+            </Typography>
+
           </Box>
           <Typography variant='caption2' sx={styles.position}>
             {event.participantDtos[0].status}
@@ -121,6 +129,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
           </Typography>
         </Box>
       </Box>}
+
       <Box sx={styles.buttonsContainer}>
         <IconButton component='a' href={event.link} target='_blank' sx={styles.icon}>
           <LinkIcon />
