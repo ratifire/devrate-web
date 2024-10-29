@@ -88,7 +88,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
             type='button'
             handlerClick={handleOpenFeedbackModal}
             correctStyle={styles.btnFeedback}
-            label={t('Leave a Feedback')}
+            label={t('profile.userMenu.leaveAFeedback')}
           />
         </Box>
       </Drawer>

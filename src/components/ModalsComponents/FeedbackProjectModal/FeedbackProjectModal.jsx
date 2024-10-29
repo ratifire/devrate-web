@@ -76,7 +76,7 @@ const FeedbackProjectModal = () => {
           value={formik.values.select}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          label={t('modal.feedbackProjectModal.label')}
+          label={t('modal.feedbackProjectModal.formSelectLabel')}
           required
           countries={feedbackOptions}
           isTranslated
@@ -85,7 +85,7 @@ const FeedbackProjectModal = () => {
         <TextAreaInput
           name="feedbackText"
           value={formik.values.feedbackText}
-          label={'Message'}
+          label={t('modal.feedbackProjectModal.textAreaLabel')}
           required
           placeholder={t('modal.feedbackProjectModal.textPlaceholder')}
           handleChange={formik.handleChange}

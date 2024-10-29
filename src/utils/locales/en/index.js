@@ -185,7 +185,8 @@ export const en = {
         short: 'This field is too short',
         feedback: 'Feedback',
         button: 'Send',
-        label: 'Type of feedback',
+        formSelectLabel: 'Type of feedback',
+        textAreaLabel: 'Message',
         textPlaceholder: 'Please enter your feedback here...',
         error_429: 'You have already sent feedback this month',
         error_request: 'Request error',
@@ -266,6 +267,7 @@ export const en = {
         settings: 'Settings',
         bookmark: 'Bookmarks',
         logout: 'Logout',
+        leaveAFeedback: 'Leave a Feedback',
       },
       experienceSection: {
         readAll: 'Read all...',
