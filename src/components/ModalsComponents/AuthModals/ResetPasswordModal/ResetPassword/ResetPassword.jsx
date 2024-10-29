@@ -128,7 +128,7 @@ const ResetPassword = () => {
             dispatch(openModal({ modalName: 'openLogin' }));
           } catch (error) {
             console.error('Error changing password:', error);
-               toast.error('Error changing password. Please try again.', {
+               toast.error('Invalid code. Please try again.', {
                   position: "top-right",
                   autoClose: 3000,
                   hideProgressBar: false,

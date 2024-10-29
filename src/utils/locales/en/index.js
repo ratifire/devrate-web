@@ -162,7 +162,7 @@ export const en = {
         code_required: 'Code is required',
         code_symbol_min: 'Each code digit must be 1 character long',
         code_length_max: 'Code must be exactly 6 digits long',
-        error: 'Error changing password. Please try again.',
+        error: 'Invalid code. Please try again.',
         success: 'Password changed successfully!',
       },
       editPage: {
