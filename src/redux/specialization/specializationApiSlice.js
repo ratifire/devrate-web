@@ -115,9 +115,14 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
     }),
-
+    
+    getInterviewRequest: builder.query({
+      query: ({ userId, role }) => `/users/${userId}/interview-requests?role=${role}`,
+      providesTags: ['Specialization'],
+    }),
+    
     createInterviewRequest: builder.mutation({
-      query({ userId, masteryId, role, availableDates }) {
+      query ({ userId, masteryId, role, availableDates }) {
         return {
           url: `/users/${userId}/interview-requests`,
           method: 'POST',
@@ -126,7 +131,16 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
     }),
-
+    updateInterviewRequest: builder.mutation({
+      query ({ userId, masteryId, role, availableDates }) {
+        return {
+          url: `/users/${userId}/interview-requests`,
+          method: 'PUT',
+          body: { role, masteryId, availableDates },
+        };
+      },
+      invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
+    }),
     addSkillToMastery: builder.mutation({
       query: ({ masteryId, skill }) => ({
         url: `/masteries/${masteryId}/skills`,
@@ -135,7 +149,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['HardSkills', 'SoftSkills'],
     }),
-
+    
     addSkillsToMastery: builder.mutation({
       query: ({ id, skills }) => ({
         url: `/masteries/${id}/skills/bulk`,
@@ -168,7 +182,9 @@ export const {
   useGetAvailableSoftSkillsQuery,
   useCreateNewSpecializationMutation,
   useUpdateSpecializationByIdMutation,
+  useGetInterviewRequestQuery,
   useCreateInterviewRequestMutation,
+  useUpdateInterviewRequestMutation,
   useDeleteSpecializationByIdMutation,
   useGetMasteriesBySpecializationIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
