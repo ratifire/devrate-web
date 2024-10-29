@@ -22,7 +22,7 @@ export const styles = {
   },
   snackBar: {
     vertical: 'top',
-    horizontal: 'right',
+    horizontal: 'center',
   },
   snackbarTransition: {
     '& .MuiSnackbar-root': {
@@ -30,11 +30,6 @@ export const styles = {
     },
   },
   alertContent: {
-    backgroundColor: '#323232',
-    color: '#fff',
-    padding: '16px',
-    borderRadius: '8px',
-    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
     width: '100%'
   },
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { Typography, CircularProgress, Snackbar, Alert } from '@mui/material';
 import ButtonDef from '../../FormsComponents/Buttons/ButtonDef';
@@ -12,6 +12,7 @@ import { styles } from './FeedbackProjectModal.styles';
 import { FeedbackProjectModalSchema } from '../../../utils/valadationSchemas/index';
 import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
 import { feedbackOptions } from './constants';
+import useMergeState from '../../../utils/hooks/useMergeState';
 
 const initialValues = {
   select: '',
@@ -24,10 +25,12 @@ const FeedbackProjectModal = () => {
   const openFeedback = useSelector((state) => state.modal.feedbackProjectModal);
   const { id } = useSelector((state) => state.auth.user.data);
 
-  const [createFeedback, { isError, isLoading, isSuccess }] = useCreateFeedbackMutation();
+  const [createFeedback, { isLoading }] = useCreateFeedbackMutation();
 
-  const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false);
-  const [openSnackbarError, setOpenSnackbarError] = useState(false);
+  const [state, setState] = useMergeState({
+    openSnackbarSuccess: false,
+    openSnackbarError: false,
+  });
 
   const handleClose = () => {
     dispatch(closeModal({ modalName: 'feedbackProjectModal' }));
@@ -35,20 +38,27 @@ const FeedbackProjectModal = () => {
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === 'clickaway') return;
-    setOpenSnackbarSuccess(false);
-    setOpenSnackbarError(false);
+    setState({ openSnackbarSuccess: false, openSnackbarError: false });
   };
 
   const onSubmit = async (values) => {
     try {
-      await createFeedback({
+      const result = await createFeedback({
         userId: id,
         type: values.select,
         text: values.feedbackText,
-
       });
+
+      if (result.error) {
+        setState({ openSnackbarError: true });
+        await formik.setValues(initialValues);
+      } else {
+        setState({ openSnackbarSuccess: true });
+        await formik.setValues(initialValues);
+      }
     } catch (error) {
       console.error('Submit Error:', error);
+      setState({ openSnackbarError: true });
     }
   };
 
@@ -58,18 +68,6 @@ const FeedbackProjectModal = () => {
     onSubmit,
   });
 
-  useEffect(() => {
-    if (isSuccess) {
-      setOpenSnackbarSuccess(true);
-      const timeoutId = setTimeout(() => {
-        handleClose();
-      }, 2000);
-      return () => clearTimeout(timeoutId);
-    }
-    if (isError) {
-      setOpenSnackbarError(true);
-    }
-  }, [isSuccess, isError]);
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openFeedback}>
       <Typography variant="h6" sx={styles.title}>
@@ -112,7 +110,7 @@ const FeedbackProjectModal = () => {
       </form>
 
       <Snackbar
-        open={openSnackbarSuccess}
+        open={state.openSnackbarSuccess}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
         anchorOrigin={styles.snackBar}
@@ -123,12 +121,12 @@ const FeedbackProjectModal = () => {
           severity="success"
           sx={styles.alertContent}
         >
-          Successfully!
+          {t('modal.feedbackProjectModal.success')}
         </Alert>
       </Snackbar>
 
       <Snackbar
-        open={openSnackbarError}
+        open={state.openSnackbarError}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
         anchorOrigin={styles.snackBar}
@@ -137,8 +135,7 @@ const FeedbackProjectModal = () => {
         <Alert
           onClose={handleCloseSnackbar}
           severity="error"
-          sx={styles.alertContent}        >
-          {/*{error?.data || 'An error occurred. Please try again.'}*/}
+          sx={styles.alertContent}>
           {t('modal.feedbackProjectModal.error_429')}
         </Alert>
       </Snackbar>

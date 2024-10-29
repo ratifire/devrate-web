@@ -2,9 +2,9 @@ import * as Yup from 'yup';
 
 export const FeedbackProjectModalSchema = Yup.object({
   select: Yup.string()
-    .required('Выберите значение из списка'),
+    .required('modal.feedbackProjectModal.required'),
   feedbackText: Yup.string()
-    .min(2, 'Минимум 2 символа')
-    .max(300, 'Максимум 150 символов')
-    .required('Введите сообщение'),
+    .min(2, 'modal.feedbackProjectModal.short')
+    .max(300, 'modal.feedbackProjectModal.long')
+    .required('modal.feedbackProjectModal.required'),
 });
