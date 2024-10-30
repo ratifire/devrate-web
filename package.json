@@ -48,7 +48,9 @@
     "lint:css": "stylelint src",
     "lint:css:fix": "npm run lint:css -- --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "delBuildWin": "rd /s /q build",
+    "delBuildUnix": "rm -rf build"
   },
   "eslintConfig": {
     "extends": [

@@ -297,6 +297,10 @@ const getDesignTokens = (mode) => ({
             city: {
               color: '#25CBFF',
             },
+            completeText: {
+              color: '#C5C5C6',
+              iconColor: '#16FFB9',
+            },
           },
           rightSection: {
             languages: {
@@ -608,6 +612,15 @@ const getDesignTokens = (mode) => ({
               participantlinkColor: '#CEB0FA',
               cancelEventBtnColor: '#CEB0FA',
             },
+            userLinksEvent: {
+              color: '#CEB0FA',
+              hover: {
+                color: '#8133F1',
+              },
+              active: {
+                color: '#5900D9'
+              },
+            },
           },
           selectField: {
             color: '#303032',
@@ -809,6 +822,10 @@ const getDesignTokens = (mode) => ({
             city: {
               color: '#007CA3',
             },
+            completeText: {
+              color: '#303032',
+              iconColor: '#3AB310',
+            },
           },
           rightSection: {
             languages: {
@@ -1002,6 +1019,16 @@ const getDesignTokens = (mode) => ({
               hostLinkColor: '#6200EE',
               participantlinkColor: '#6200EE',
               cancelEventBtnColor: '#6200EE',
+
+            },
+            userLinksEvent: {
+              color: '#6200EE',
+              hover: {
+                color: '#360083',
+              },
+              active: {
+                color: '#290064'
+              },
             },
           },
           experienceSkillSect: {
