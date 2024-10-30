@@ -45,12 +45,12 @@ export const styles = {
     marginTop: theme.spacing(2),
   }),
   completeText: (theme) => ({
-    color: theme.palette.neutral['100'],
+    color: theme.palette.baseUserInfo.completeText.color,
     marin: '24px 0 37px',
   }),
 
   completeIcon: (theme) => ({
-    color: theme.palette.info.azure,
+    color: theme.palette.baseUserInfo.completeText.iconColor,
     marginLeft: theme.spacing(1),
   }),
 };

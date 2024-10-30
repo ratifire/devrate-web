@@ -297,6 +297,10 @@ const getDesignTokens = (mode) => ({
             city: {
               color: '#25CBFF',
             },
+            completeText: {
+              color: '#C5C5C6',
+              iconColor: '#16FFB9',
+            },
           },
           rightSection: {
             languages: {
@@ -808,6 +812,10 @@ const getDesignTokens = (mode) => ({
           baseUserInfo: {
             city: {
               color: '#007CA3',
+            },
+            completeText: {
+              color: '#303032',
+              iconColor: '#3AB310',
             },
           },
           rightSection: {
