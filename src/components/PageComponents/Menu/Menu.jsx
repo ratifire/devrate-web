@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
-  Box,
-  Divider,
+  Box, Divider,
   Drawer,
   IconButton,
   Link,
@@ -19,12 +18,17 @@ import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../../redux/auth/authSlice';
+import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
+import { openModal } from '../../../redux/modal/modalSlice';
+import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
+import { ButtonDef } from '../../FormsComponents/Buttons';
 
 const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const feedbackProjectModal = useSelector((state) => state.modal.feedbackProjectModal);
 
   const [logout] = useLogoutMutation();
 
@@ -37,6 +41,10 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
     } catch (error) {
       console.log('Logout failed:', error);
     }
+  };
+
+  const handleOpenFeedbackModal = () => {
+    dispatch(openModal({ modalName: 'feedbackProjectModal' }));
   };
 
   return (
@@ -74,8 +82,18 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
               {index % 2 !== 0 && <Divider key={index} sx={styles.divider} />}
             </React.Fragment>
           ))}
+          <ButtonDef
+            variant='text'
+            startIcon={<ForumOutlinedIcon sx={styles.iconItem} />}
+            type='button'
+            handlerClick={handleOpenFeedbackModal}
+            correctStyle={styles.btnFeedback}
+            label={t('profile.userMenu.leaveAFeedback')}
+          />
         </Box>
       </Drawer>
+
+      {feedbackProjectModal && <FeedbackProjectModal/>}
     </>
   );
 };
