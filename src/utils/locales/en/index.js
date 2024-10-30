@@ -104,7 +104,7 @@ export const en = {
         last_name: 'Surname',
         password: 'Password',
         password_repeat: 'Repeat password',
-        password_tooltip: 'Passwords must contain 8 + characters, at least 1 number, at least 1 letter and no spaces.',
+        password_tooltip: 'Passwords must contain 8 + characters, at least one special character (@,$,!,%,?,&), number, uppercase letter, lowercase letter and no spaces.',
         password_invalid: 'Incorrect password',
         news_letter: 'Send me news, surveys and special offers from DEVRATE',
         agreement: 'I have read and agree to the terms of use',
@@ -162,7 +162,7 @@ export const en = {
         code_required: 'Code is required',
         code_symbol_min: 'Each code digit must be 1 character long',
         code_length_max: 'Code must be exactly 6 digits long',
-        error: 'Error changing password. Please try again.',
+        error: 'Invalid code. Please try again.',
         success: 'Password changed successfully!',
       },
       editPage: {

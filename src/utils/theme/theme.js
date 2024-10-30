@@ -108,6 +108,51 @@ const getDesignTokens = (mode) => ({
     mode,
     ...(mode === DARK_THEME
       ? {
+        scheduleInterview: {
+          area: {
+            color: '#FFFFFF',
+            income: '#16FFB9',
+            outcome: '#25CBFF',
+            btn:{
+              backgroundColor:'#8133F1',
+            },
+            popover: {
+              backgroundColor: '#252527',
+              borderColor: '#3E3E40',
+              btn: {
+                color: '#CEB0FA',
+              }
+            },
+          },
+          modal: {
+            color: '#FFFFFF',
+            backgroundColor: '#1D1D1D',
+            tab: {
+              borderColor: '#69696B',
+              color:'#C5C5C6',
+              arrows: '#C5C5C6',
+              current: {
+                borderColor: '#B78AF7',
+                color:'#B78AF7',
+              },
+              disabled: {
+                color:'#444446',
+              }
+            },
+            checkbox: {
+              borderColor: '#3E3E40',
+              color: '#C5C5C6',
+              checked: {
+                borderColor: '#B78AF7',
+                color: '#FFFFFF',
+              },
+              disabled: {
+                borderColor: '#444446',
+                color:'#444446',
+              }
+            }
+          },
+        },
           notifications: {
             backgroundColor: '#252527',
             borderColor: 'transparent',
@@ -412,6 +457,12 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#3E3E40',
             backgroundColor2: '#252527' + 'BD',
             border: 'transparent',
+            grade: '#C5C5C6',
+            divider: '#69696B',
+            tooltip: {
+              color: '#C5C5C6',
+              backgroundColor: '#3E3E40',
+            },
           },
           experienceSkillSect: {
             wrapperUnSorted: {
@@ -568,6 +619,51 @@ const getDesignTokens = (mode) => ({
           selectField: {
             color: '#F8F8F8',
           },
+        scheduleInterview: {
+          area: {
+            color: '#1D1D1D',
+            income: '#00855D',
+            outcome: '#007CA3',
+            btn:{
+              backgroundColor:'#5900D9',
+            },
+            popover: {
+              backgroundColor: '#ECECED',
+              borderColor: '#C5C5C6',
+              btn: {
+                color: '#360083',
+              }
+            },
+          },
+          modal: {
+            color: '#1D1D1D',
+            backgroundColor: '#1D1D1D',
+            tab: {
+              borderColor: '#C5C5C6',
+              color: '#303032',
+              arrows: '#303032',
+              current: {
+                borderColor: '#6200EE',
+                color:'#6200EE',
+              },
+              disabled: {
+                color:'#ECECED',
+              }
+            },
+            checkbox: {
+              borderColor: '#C5C5C6',
+              color: '#303032',
+              checked: {
+                borderColor: '#8133F1',
+                color: '#1D1D1D',
+              },
+              disabled: {
+                borderColor: '#ECECED',
+                color:'#444446',
+              }
+            }
+          },
+        },
           notifications: {
             backgroundColor: '#FFFFFF',
             borderColor: '#C5C5C6',
