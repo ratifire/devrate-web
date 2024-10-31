@@ -10,7 +10,7 @@ export const RegistrationSchema = Yup.object().shape({
     .min(2, 'modal.registration.first_name_short')
     .max(50, 'modal.registration.first_name_long')
     .matches(
-      /^[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\s\-']*[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\-']$/,
+      /^[\p{L}\s\-'’]+$/u,
       'modal.registration.first_name_invalid_characters'
     )
     .required('modal.registration.required'),
@@ -18,7 +18,7 @@ export const RegistrationSchema = Yup.object().shape({
     .min(2, 'modal.registration.last_name_short')
     .max(50, 'modal.registration.last_name_long')
     .matches(
-      /^[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\s\-']*[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\-']$/,
+      /^[\p{L}\s\-'’]+$/u,
       'modal.registration.last_name_invalid_characters'
     )
     .required('modal.registration.required'),
