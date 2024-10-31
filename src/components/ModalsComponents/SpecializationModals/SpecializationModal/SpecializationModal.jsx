@@ -84,9 +84,7 @@ const SpecializationModal = () => {
     const isSpecialization = mySpecialization.some((spec) => spec.name === value);
 
     if (isSpecialization) {
-      if (modalData === editSpecialization) {
-        formik.setFieldValue('name', value);
-      }
+      formik.setFieldValue('name', value);
       setState({ specializationNameError: 'specialization.modal.specialization.errorDuplicate' });
       return;
     }
@@ -196,7 +194,7 @@ const SpecializationModal = () => {
   if (isError) {
     return <ErrorComponent />;
   }
-  console.log(formik.values);
+
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openSpecialization}>
       <Typography variant='subtitle1' sx={styles.title}>
