@@ -34,13 +34,13 @@ const HardSkillsChart = () => {
       <RadarChart outerRadius={130} width={264} height={264} data={roundedSkills}>
         <PolarGrid />
         <PolarAngleAxis dataKey='name' tick={false} />
-        <PolarRadiusAxis angle={30} domain={[0, 10]} />
+        {!!roundedSkills.length && <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />}
         <Radar
           dataKey='averageMark'
           stroke='url(#gradient2)'
           strokeWidth={3}
           fillOpacity={0.3}
-          dot={({ cx, cy, index }) => <circle key={index} cx={cx} cy={cy} r={2} fill='#16FFB9' />}
+          dot={({ cx, cy, index }) => <circle key={index} cx={cx} cy={cy} r={6} fill='url(#gradient2)' />}
         />
         <Tooltip itemStyle={itemStyle} contentStyle={contentStyle} />
         <defs>

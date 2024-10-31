@@ -10,7 +10,7 @@ export const styles = {
     flexDirection: 'column',
     backgroundColor: '#252527',
     zIndex: 1000,
-    
+
   },
   popupTriangularBottomLeft: (theme) => ({
     position: 'absolute',
@@ -61,7 +61,7 @@ export const styles = {
     right: 0,
     top: 0,
     color: theme.palette.schedule.popup.closeIconColor,
-    
+
   }),
   infoContainer: (theme) => ({
     display: 'flex',
@@ -86,14 +86,15 @@ export const styles = {
     marginBottom: theme.spacing(2),
   }),
   name: (theme) => ({
-    color: theme.palette.text.primary,
+    color: theme.palette.schedule.userLinksEvent.color,
     margin: theme.spacing(0),
     marginBottom: theme.spacing(2),
-    textDecoration: 'none',
-    '>a': {
-
-      color: theme.palette.schedule.sideBarEvent.titleColor,
-    }
+    '&:hover': {
+      color: theme.palette.schedule.userLinksEvent.hover.color,
+    },
+    '&:active': {
+      color: theme.palette.schedule.userLinksEvent.active.color,
+    },
   }),
   position: (theme) => ({
     margin: 0,

@@ -173,6 +173,25 @@ export const en = {
           title: 'Description',
         },
       },
+      feedbackProjectModal: {
+        title: 'Leave a feedback',
+        type_of_feedback: {
+          PROPOSITION: 'Feature request',
+          ISSUE: 'Bug',
+          FEEDBACK: 'Feedback',
+        },
+        required: 'This is a required field',
+        long: 'This field is too long',
+        short: 'This field is too short',
+        feedback: 'Feedback',
+        button: 'Send',
+        formSelectLabel: 'Type of feedback',
+        textAreaLabel: 'Message',
+        textPlaceholder: 'Please enter your feedback here...',
+        error_429: 'You have already sent feedback this month',
+        error_request: 'Request error',
+        success: 'Feedback sent successfully',
+      },
     },
     profile: {
       skills: {
@@ -248,6 +267,7 @@ export const en = {
         settings: 'Settings',
         bookmark: 'Bookmarks',
         logout: 'Logout',
+        leaveAFeedback: 'Leave a Feedback',
       },
       experienceSection: {
         readAll: 'Read all...',

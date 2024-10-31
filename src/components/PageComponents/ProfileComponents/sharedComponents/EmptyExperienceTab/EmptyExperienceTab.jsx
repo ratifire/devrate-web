@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styles } from './EmptyExperienceTab.styles';
 import PropTypes from 'prop-types';
@@ -57,14 +57,8 @@ const ExperienceEmptyItem = ({ tab, profileType, imgUrl, isData }) => {
             /> :
             <Box  sx={styles.linkWrapper}>
                 <Link to={links.specializations}>
-                  <Button
-                    color='primary'
-                    type='button'
-                    sx={styles.link}
-                  >{t(`profile.experience.${tab}.emptyTabName.button`)}
-                  </Button>
+                  {t(`profile.experience.${tab}.emptyTabName.button`)}
                 </Link>
-
             </Box>
 
           }
