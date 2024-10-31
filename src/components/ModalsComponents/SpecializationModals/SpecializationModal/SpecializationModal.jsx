@@ -96,7 +96,7 @@ const SpecializationModal = () => {
 
   const updateSpecialization = async ({ id, name }) => {
     await updateSpecializationById({ id, name }).unwrap();
-    dispatch(setActiveSpecialization({ id, name }));
+    dispatch(setActiveSpecialization({ ...activeSpecialization, id, name }));
   };
 
   const onSubmit = async (values, { resetForm }) => {
