@@ -270,7 +270,7 @@ const SpecializationModal = () => {
             type='submit'
             label={t('profile.modal.btn')}
             correctStyle={styles.specializationBtn}
-            disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}
+            disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
           />
         </Box>
       </form>
