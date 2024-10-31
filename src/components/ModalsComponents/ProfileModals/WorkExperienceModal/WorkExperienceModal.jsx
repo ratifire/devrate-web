@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../../redux/modal/modalSlice';
@@ -18,13 +18,17 @@ import {
 } from '../../../../redux/workExperience/workExperienceApiSlice';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
+import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
+
+
 
 const WorkExperienceModal = () => {
-  const [startYears, setStartYears] = useState([]);
-  const [endYears, setEndYears] = useState([]);
+  const [responsibilities, setResponsibilities] = useState([]);
+  const selectYears = useMemo(() => generateYearsArray(), []);
   const { id } = useSelector((state) => state.auth.user.data);
   const [createNewWorkExperience] = useCreateNewWorkExperienceMutation();
   const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
+
 
   const dispatch = useDispatch();
   const workExperience = useSelector((state) => state.modal.workExperience);
@@ -34,13 +38,13 @@ const WorkExperienceModal = () => {
   const { modalData } = useSelector((state) => state.modal);
 
   const initialValues = {
-    position: '',
-    companyName: '',
-    description: '',
-    responsibilities: '',
-    startYear: '',
-    endYear: '',
-    currentDate: false,
+    position: modalData?.position || '',
+    companyName: modalData?.companyName || '',
+    description: modalData?.description || '',
+    responsibilities: modalData?.responsibilities || '',
+    startYear: modalData?.startYear || '',
+    endYear: modalData?.endYear || '',
+    currentDate: modalData?.endYear === '9999',
   };
 
   const onSubmit = async (values, { resetForm }) => {
@@ -69,34 +73,6 @@ const WorkExperienceModal = () => {
     onSubmit,
   });
 
-  useEffect(() => {
-    const startYearsOpts = [];
-    for (let i = 1950; i <= `${new Date().getFullYear()}`; i++) {
-      startYearsOpts.push(`${i}`);
-    }
-    setStartYears(startYearsOpts);
-
-    const endYearsOpts = [];
-    for (let i = 1950; i <= `${new Date().getFullYear()}`; i++) {
-      endYearsOpts.push(`${i}`);
-    }
-    setEndYears(endYearsOpts);
-  }, []);
-
-  useEffect(() => {
-    if (!modalData) return;
-
-    formik.setValues({
-      position: modalData.position,
-      companyName: modalData.companyName,
-      description: modalData.description,
-      startYear: modalData.startYear,
-      endYear: modalData.endYear,
-    });
-    setResponsibilities(modalData.responsibilities);
-  }, [modalData, formik.setValues]);
-
-  const [responsibilities, setResponsibilities] = useState([]);
   const createResponsibility = (newResponsibility) => {
     if (newResponsibility.length < 2 || newResponsibility.length > 50) return;
     setResponsibilities([...responsibilities, newResponsibility]);
@@ -157,7 +133,7 @@ const WorkExperienceModal = () => {
               sx={styles.input50}
               label={t('profile.modal.workExperience.startDate')}
               value={formik.values.startYear}
-              countries={startYears}
+              countries={selectYears}
               name='startYear'
               variant='outlined'
               required
@@ -170,7 +146,7 @@ const WorkExperienceModal = () => {
               sx={styles.input50}
               label={t('profile.modal.workExperience.endDate')}
               value={formik.values.currentDate ? '' : formik.values.endYear}
-              countries={endYears}
+              countries={selectYears}
               name='endYear'
               variant='outlined'
               handleChange={formik.handleChange}

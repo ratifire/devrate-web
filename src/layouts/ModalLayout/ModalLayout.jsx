@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Modal, Zoom } from '@mui/material';
 import { styles } from './ModalLayout.styles';
 import PropTypes from 'prop-types';
-import Logo from '../../components/UI/Logo';
 
 export const ModalLayout = ({ open, setOpen, children }) => {
   return (
@@ -15,12 +14,7 @@ export const ModalLayout = ({ open, setOpen, children }) => {
       sx={styles.modal}
     >
       <Zoom in={open}>
-        <Box sx={styles.modalContainer}>
-          <Box sx={styles.iconContainer}>
-            <Logo width={'147'} height={'18'} />
-          </Box>
-          {children}
-        </Box>
+        <Box sx={styles.modalContainer}>{children}</Box>
       </Zoom>
     </Modal>
   );

@@ -68,6 +68,7 @@ const StepPersonal = () => {
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
             required
+            type='text'
             label='profile.modal.userInfo.personal.lastName'
             helperText={formik.touched.lastName && formik.errors.lastName}
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
