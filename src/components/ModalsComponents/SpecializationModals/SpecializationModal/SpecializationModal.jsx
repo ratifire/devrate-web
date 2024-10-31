@@ -23,6 +23,7 @@ import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
+import modalSpecialization from '../../../../utils/constants/Specialization/modalSpecialization'
 
 const SpecializationModal = () => {
   const [skills, setSkills] = useState([]);
@@ -64,7 +65,7 @@ const SpecializationModal = () => {
     isErrorSetNewMastery ||
     isErrorAddSkill ||
     isErrorGetSpecialization;
-
+  const { editSpecialization, addSpecialization } = modalSpecialization;
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
   const { activeSpecialization } = useSelector((state) => state.specialization);
   const handleClose = () => dispatch(closeModal({ modalName: 'openSpecialization' }));
@@ -95,7 +96,7 @@ const SpecializationModal = () => {
 
   const onSubmit = async (values, { resetForm }) => {
     try {
-      if (modalData === 'editSpecialization') {
+      if (modalData === editSpecialization) {
         let shouldUpdateSpecialization = false;
         let shouldUpdateMastery = false;
 
@@ -152,8 +153,8 @@ const SpecializationModal = () => {
   };
 
   const initialValues = {
-    name: modalData === 'editSpecialization' ? activeSpecialization?.name : '',
-    mastery: modalData === 'editSpecialization' ? activeSpecialization?.mastery : '',
+    name: modalData === editSpecialization ? activeSpecialization?.name : '',
+    mastery: modalData === editSpecialization ? activeSpecialization?.mastery : '',
     skills: '',
   };
 
@@ -225,7 +226,7 @@ const SpecializationModal = () => {
               helperDescription={t('specialization.modal.specialization.mastery_helper_text')}
             />
           </Box>
-          {modalData === 'addSpecialization' && (
+          {modalData === addSpecialization && (
             <>
               <Box sx={styles.input100}>
                 <FormInput
