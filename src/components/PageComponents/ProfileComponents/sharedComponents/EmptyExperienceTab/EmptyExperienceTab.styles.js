@@ -1,5 +1,5 @@
 export const styles = {
-  emptyContainer:  {
+  emptyContainer: {
     width: '100%',
     height: '100%',
     display: 'flex',
@@ -40,32 +40,31 @@ export const styles = {
     },
   }),
 
-  linkWrapper: {
+  linkWrapper: (theme) => ({
     ' a': {
       textDecoration: 'none',
+      textAlign: 'center',
+      letterSpacing: 0.17,
+      fontSize: 14,
+      lineHeight: '16px',
+      fontWeight: 400,
+      display: 'block',
+      backgroundColor: theme.palette.iconBtn.btnSave.backgroundColor.default,
+      color: theme.palette.iconBtn.btnSave.color.default,
+      textTransform: 'none',
+      marginBottom: '12px',
+      width: '271px',
+      height: '56px',
+      borderRadius: '4px',
+      cursor: 'pointer',
+      paddingY: '20px',
+      '::first-letter': {
+        textTransform: 'uppercase',
+      },
+      ':hover': {
+        backgroundColor: theme.palette.iconBtn.btnSave.backgroundColor.hover,
+      },
+      boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
     },
-  },
-
-  link: (theme) => ({
-    letterSpacing: 0.17,
-    fontSize: 14,
-    fontWeight: 400,
-    display: 'flex',
-    backgroundColor: theme.palette.primary['400'],
-    color: theme.palette.info.contrastText,
-    alignItems: 'center',
-    justifyContent: 'center',
-    textTransform: 'none',
-    marginBottom: '12px',
-    width: '271px',
-    height: '55px',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    '::first-letter': {
-      textTransform: 'uppercase',
-    },
-    ':hover': {
-      backgroundColor: theme.palette.primary['600'],
-    }
-  })
+  }),
 };
