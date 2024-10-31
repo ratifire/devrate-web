@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
@@ -16,6 +16,8 @@ import {
 } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetSpecializationListQuery } from '../../../../redux/specialization/specializationList/specializationListApiSlice';
 import { setActiveSpecialization } from '../../../../redux/specialization/specializationSlice';
+import modalSpecialization from '../../../../utils/constants/Specialization/modalSpecialization';
+import useMergeState from '../../../../utils/hooks/useMergeState';
 import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/index';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
@@ -23,14 +25,15 @@ import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
-import modalSpecialization from '../../../../utils/constants/Specialization/modalSpecialization'
 
 const SpecializationModal = () => {
-  const [skills, setSkills] = useState([]);
+  const [state, setState] = useMergeState({
+    skills: [],
+    specializationNameError: '',
+  });
+  const { skills, specializationNameError } = state;
   const { t } = useTranslation();
-
   const dispatch = useDispatch();
-
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
   const openSpecialization = useSelector((state) => state.modal.openSpecialization);
@@ -82,15 +85,13 @@ const SpecializationModal = () => {
 
     if (isSpecialization) {
       if (modalData === editSpecialization) {
-        console.log('dgasgas')
         formik.setFieldValue('name', value);
       }
-
-      formik.setFieldTouched('name', true, false);
-      formik.setErrors({ name: 'specialization.modal.specialization.errorDuplicate' });
+      setState({ specializationNameError: 'specialization.modal.specialization.errorDuplicate' });
       return;
     }
 
+    setState({ specializationNameError: '' });
     formik.setFieldValue('name', value);
   };
 
@@ -180,12 +181,12 @@ const SpecializationModal = () => {
       return;
     }
 
-    setSkills([...skills, { name: newSkill, type: 'HARD_SKILL' }]);
+    setState({ skills: [...skills, { name: newSkill, type: 'HARD_SKILL' }] });
     formik.setFieldValue('skills', '');
   };
 
   const deleteSkillsHandler = (skillToDelete) => {
-    setSkills(skills.filter((item) => item.name !== skillToDelete));
+    setState({ skills: skills.filter((item) => item.name !== skillToDelete) });
   };
 
   if (isLoading) {
@@ -211,8 +212,8 @@ const SpecializationModal = () => {
               handleChange={handleChangeSpecialization}
               handleBlur={formik.handleBlur}
               label={t('specialization.modal.specialization.name')}
-              error={formik.touched.name && Boolean(formik.errors.name)}
-              helperText={formik.touched.name && formik.errors.name}
+              error={formik.touched.name && (Boolean(formik.errors.name) || Boolean(specializationNameError))}
+              helperText={formik.touched.name && (formik.errors.name || specializationNameError)}
               countries={specializations}
             />
           </Box>
