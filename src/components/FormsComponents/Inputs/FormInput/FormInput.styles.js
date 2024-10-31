@@ -25,9 +25,9 @@ export const styles = {
       color: theme.palette.modals.inputs.textColor.default,
     },
     '&:-webkit-autofill, & input:-webkit-autofill': {
-      'WebkitTextFillColor': `${theme.palette.modals.inputs.textColor.default} !important`,
-      'boxShadow': `0 0 0 100px ${theme.palette.modals.backgroundColor} inset !important`,
-      'transition': 'background-color 5000s ease-in-out 0s',
+      WebkitTextFillColor: `${theme.palette.modals.inputs.textColor.default} !important`,
+      boxShadow: `0 0 0 100px ${theme.palette.modals.backgroundColor} inset !important`,
+      transition: 'background-color 5000s ease-in-out 0s',
     },
   }),
   label: (theme) => ({
@@ -38,12 +38,13 @@ export const styles = {
       color: theme.palette.modals.inputs.labelColor.error,
     },
     '&.Mui-required .MuiFormLabel-asterisk': {
-      color: theme.palette.modals.inputs.labelColor.required
+      color: theme.palette.modals.inputs.labelColor.required,
     },
   }),
-  textHelper: {
+  textHelper: (theme) => ({
+    color: theme.palette.neutral[300],
     position: 'absolute',
-    bottom: '-18px',
-    left: '-12px'
-  },
+    bottom: '-21px',
+    left: '0px',
+  }),
 };

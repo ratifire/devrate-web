@@ -7,19 +7,19 @@ export const styles = {
   modalContainer: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'left',
     padding: '22px 16px',
     backgroundColor: '#1D1D1D',
     borderRadius: '6px',
     width: '95%',
     '@media (min-width: 580px)': {
-      width: 526,
-      padding: '55px 78px',
+      width: 570,
+      padding: '26px 36px',
     },
   },
   iconContainer: {
     width: 147,
     height: 18,
-    marginBottom:'48px'
+    marginBottom: '48px',
   },
 };
