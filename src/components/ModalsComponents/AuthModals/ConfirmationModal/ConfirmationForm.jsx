@@ -32,6 +32,10 @@ const ConfirmationForm = ({
     if ((ctrlKey || metaKey) && key === 'v') {
       return;
     }
+    
+    if (key === 'Tab') {
+      return;
+    }
     if ((key >= '0' && key <= '9') || key === 'Backspace' || key === 'Delete') {
       const { value } = event.target;
 
@@ -50,7 +54,6 @@ const ConfirmationForm = ({
 
           if (index > 0) {
             inputRefs.current[index - 1].focus();
-            formik.setFieldValue(`text${index - 1}`, '');
           }
         } else if (key === 'Delete' && index < fieldCount - 1) {
           event.preventDefault();
