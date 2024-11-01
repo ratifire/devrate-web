@@ -4,9 +4,6 @@ const styles = {
     marginBottom: theme.spacing(4),
     color: theme.palette.text.primary,
   }),
-  lastTitleWord: {
-    color: '#FCA728',
-  },
   newsAgreementText: (theme) => ({
     fontWeight: 300,
     fontSize: '14px',
@@ -28,6 +25,9 @@ const styles = {
     lineHeight: 1.43,
   },
   policyTermsLink: (theme) => ({
+    fontFamily: 'Open Sans',
+    fontSize: '16px',
+    lineHeight: 1.5,
     marginRight: '24px',
     color: theme.palette.action.active,
     textDecoration: 'underline',

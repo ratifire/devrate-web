@@ -1,0 +1,37 @@
+.landingForm .MuiFormControl-root .MuiFormLabel-root {
+  font-family: 'Open Sans' !important;
+ }
+
+.landingForm .MuiFormControl-root .MuiInputBase-root {
+  font-family: 'Open Sans' !important;
+}
+
+.landingForm .MuiFormControl-root .MuiFormHelperText-root {
+  font-family: 'Open Sans' !important;
+}
+
+.landingForm .MuiFormControl-root .MuiFormControlLabel-root .MuiTypography-root {
+  font-family: 'Open Sans' !important;
+}
+
+.landingForm .MuiBox-root .MuiButtonBase-root {
+  font-family: 'Open Sans' !important;
+}
+
+ /* .MuiFormHelperText-root { */
+
+ /*  font-family: 'Open Sans' !important; */
+
+ /* } */
+
+ /* .MuiInputBase-root { */
+
+ /*  font-family: 'Open Sans' !important; */
+
+ /* } */
+
+ /* .MuiButtonBase-root { */
+
+ /*  font-family: 'Open Sans' !important; */
+
+ /* } */

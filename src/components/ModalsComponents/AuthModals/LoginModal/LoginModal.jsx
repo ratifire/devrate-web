@@ -14,6 +14,7 @@ import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../../redux/auth/authSlice';
 import Cookies from 'js-cookie';
+import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
 
 const initialValues = {
   email: '',
@@ -39,35 +40,38 @@ const LoginModal = () => {
 
   const [login] = useLoginMutation();
 
-  const onSubmit = useCallback(async (values, { setSubmitting }) => {
-    console.log('onSubmit called');
-    setLoginError(null);
-    try {
-      const userData = await login({ email: values.email, password: values.password }).unwrap();
-      console.log('Login successful', userData);
-      await dispatch(setCredentials({ data: userData, isAuthenticated: false }));
-      const cookies = Cookies.get('JSESSIONID');
-      if (cookies) {
-        await dispatch(setCredentials({ data: userData, isAuthenticated: true }));
-        navigate('/profile', { replace: true });
+  const onSubmit = useCallback(
+    async (values, { setSubmitting }) => {
+      console.log('onSubmit called');
+      setLoginError(null);
+      try {
+        const userData = await login({ email: values.email, password: values.password }).unwrap();
+        console.log('Login successful', userData);
+        await dispatch(setCredentials({ data: userData, isAuthenticated: false }));
+        const cookies = Cookies.get('JSESSIONID');
+        if (cookies) {
+          await dispatch(setCredentials({ data: userData, isAuthenticated: true }));
+          navigate('/profile', { replace: true });
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        let errorMessage = 'Something went wrong';
+        if (!error?.originalStatus) {
+          errorMessage = 'Invalid email or password';
+        } else if (error.originalStatus === 400) {
+          errorMessage = 'Missing Username or Password';
+        } else if (error.originalStatus === 401) {
+          errorMessage = 'Unauthorized';
+        } else if (error.originalStatus === 500) {
+          errorMessage = 'Login Failed';
+        }
+        setLoginError(errorMessage);
+      } finally {
+        setSubmitting(false);
       }
-    } catch (error) {
-      console.error('Login error:', error);
-      let errorMessage = 'Something went wrong';
-      if (!error?.originalStatus) {
-        errorMessage = 'Invalid email or password';
-      } else if (error.originalStatus === 400) {
-        errorMessage = 'Missing Username or Password';
-      } else if (error.originalStatus === 401) {
-        errorMessage = 'Unauthorized';
-      } else if (error.originalStatus === 500) {
-        errorMessage = 'Login Failed';
-      }
-      setLoginError(errorMessage);
-    } finally {
-      setSubmitting(false);
-    }
-  }, [login, dispatch, navigate]);
+    },
+    [login, dispatch, navigate]
+  );
 
   const formik = useFormik({
     initialValues,
@@ -78,25 +82,31 @@ const LoginModal = () => {
   const handleClickShowPassword = useCallback(() => setShowPassword((show) => !show), []);
   const handleMouseDownPassword = useCallback((event) => event.preventDefault(), []);
 
-  const handleFormSubmit = useCallback((e) => {
-    e.preventDefault();
-    formik.handleSubmit();
-  }, [formik]);
+  const handleFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      formik.handleSubmit();
+    },
+    [formik]
+  );
 
   console.log('Render LoginModal', { isSubmitting: formik.isSubmitting, isValid: formik.isValid });
 
   return (
     <ModalLayout open={openLogin} setOpen={handleClose}>
-      <Typography variant='subtitle2' sx={styles.title}>
-        {t('modal.login.title')}
+      <Typography variant='h5' sx={styles.title}>
+        {changeColorOfLastTitleWord(t('modal.login.title'))}
       </Typography>
-      <form onSubmit={handleFormSubmit} style={{ width: '100%' }}>
+      <Typography variant='subtitle2' sx={styles.subtitle}>
+        {t('modal.login.subtitle')}
+      </Typography>
+      <form className='landingForm' onSubmit={handleFormSubmit} style={{ width: '100%' }}>
         {loginError && (
           <Box sx={styles.errorWrapper}>
             <HighlightOffIcon sx={styles.errorIcon} />
-          <Typography variant="body2" sx={styles.error}>
-            {loginError}
-          </Typography>
+            <Typography variant='body2' sx={styles.error}>
+              {loginError}
+            </Typography>
           </Box>
         )}
         <FormInput
@@ -108,7 +118,7 @@ const LoginModal = () => {
           label='modal.registration.email'
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
-          autoComplete="email"
+          autoComplete='email'
         />
         <FormInput
           showPassword={showPassword}
@@ -123,7 +133,7 @@ const LoginModal = () => {
           clickHandler={handleClickShowPassword}
           mouseDownHandler={handleMouseDownPassword}
           iconStyle={styles.iconStyle}
-          autoComplete="new-password"
+          autoComplete='new-password'
         />
         <Box sx={styles.textLink}>
           <ButtonDef
@@ -142,27 +152,33 @@ const LoginModal = () => {
             label='modal.login.btn_login'
           />
         </Box>
-
-        <Typography href='#' variant='caption1' sx={styles.policyText}>
-          {t('modal.login.text_privacy')}
-        </Typography>
-
-        <Box sx={styles.turnBackContainer}>
-          <Typography href='#' variant='caption1' sx={styles.turnBackText}>
-            {t('modal.login.return_on')}
+        <Box sx={styles.policyLinkBox}>
+          <Typography variant='caption1' sx={styles.policyText}>
+            {t('modal.login.text_privacy')}
           </Typography>
-          <Link
-  onClick={(e) => {
-    e.preventDefault();
-    handleClose();
-    navigate('/');
-  }}
-  component="button"
-  variant='caption1'
-  sx={styles.turnBackLink}
->
-  {t('modal.login.home_page')}
-</Link>
+          <Box>
+            <Link
+              sx={styles.policyLink}
+              onClick={(e) => {
+                e.preventDefault();
+                handleClose();
+                navigate('/#');
+              }}
+            >
+              {t('modal.login.text_privacy_policy')}
+            </Link>{' '}
+            &{' '}
+            <Link
+              sx={styles.policyLink}
+              onClick={(e) => {
+                e.preventDefault();
+                handleClose();
+                navigate('/#');
+              }}
+            >
+              {t('modal.login.text_privacy_terms')}
+            </Link>
+          </Box>
         </Box>
       </form>
     </ModalLayout>
