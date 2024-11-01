@@ -7,18 +7,19 @@ import { useTranslation } from 'react-i18next';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const FormSelect = ({
-  variant,
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  label,
-  required,
-  error,
-  helperText,
-  countries,
+                      variant,
+                      name,
+                      value,
+                      handleChange,
+                      handleBlur,
+                      label,
+                      required,
+                      error,
+                      helperText,
+                      countries,
                       disabled,
-}) => {
+                      isTranslated,
+                    }) => {
   const id = uuid();
   const { t } = useTranslation();
   return (
@@ -45,9 +46,9 @@ const FormSelect = ({
           },
         }}
       >
-        {countries.map((country, index ) => (
+        {countries.map((country, index) => (
           <MenuItem key={index} value={country} sx={styles.menuItem}>
-            {country}
+            {isTranslated ? t(`modal.feedbackProjectModal.type_of_feedback.${country}`)  : country }
           </MenuItem>
         ))}
       </Select>
@@ -65,7 +66,7 @@ FormSelect.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.number.isRequired,
-    PropTypes.string.isRequired
+    PropTypes.string.isRequired,
   ]).isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func,
@@ -75,17 +76,21 @@ FormSelect.propTypes = {
   error: PropTypes.bool,
   countries: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
+  isTranslated: PropTypes.bool,
 };
 FormSelect.defaultProps = {
   variant: 'outlined',
   name: '',
   value: '',
-  handleChange: () => {},
-  handleBlur: () => {},
+  handleChange: () => {
+  },
+  handleBlur: () => {
+  },
   label: '',
   required: false,
   helperText: '',
   error: false,
   countries: [],
+  isTranslated: false,
 };
 export default FormSelect;

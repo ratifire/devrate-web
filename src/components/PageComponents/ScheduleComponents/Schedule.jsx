@@ -26,8 +26,8 @@ import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer
   const [event, setEvent] = useState([]);
   const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
   const [popupPosition, setPopupPosition] = useState('TOPRIGHT');
-  const [from, setFrom] = useState(DateTime.local().startOf('week').plus({ days: 1 }).toFormat('yyyy-MM-dd'));
-  const [to, setTo] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
+  const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
+  const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
   const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
   // const specificDate = DateTime.fromISO('2024-09-23T00:00:00+03:00');
   // const fromTime = encodeURIComponent(`${specificDate.toFormat('yyyy-MM-dd')}T00:00:00+03:00`);

@@ -1,8 +1,12 @@
 const styles = {
   title: (theme) => ({
-    marginBottom: '30px',
+    fontFamily: 'Zen Dots',
+    marginBottom: theme.spacing(4),
     color: theme.palette.text.primary,
   }),
+  lastTitleWord: {
+    color: '#FCA728',
+  },
   newsAgreementText: (theme) => ({
     fontWeight: 300,
     fontSize: '14px',
@@ -15,8 +19,8 @@ const styles = {
     gridGap: '10px',
   },
   wrapperBtn: {
-    marginTop: '37px',
-    marginBottom: '50px',
+    marginTop: '24px',
+    marginBottom: '24px',
   },
   policyTermsContainer: {
     textAlign: 'center',
@@ -24,8 +28,8 @@ const styles = {
     lineHeight: 1.43,
   },
   policyTermsLink: (theme) => ({
-    marginRight: '10px',
-    color: theme.palette.text.primary,
+    marginRight: '24px',
+    color: theme.palette.action.active,
     textDecoration: 'underline',
     '&:hover': {
       textDecoration: 'underline',
@@ -37,9 +41,9 @@ const styles = {
     lineHeight: '18px',
     color: theme.palette.text.primary,
   }),
-  iconStyle:(theme)=>({
-    color: theme.palette.action.disabled
-  })
+  iconStyle: (theme) => ({
+    color: theme.palette.action.disabled,
+  }),
 };
 
 export default styles;

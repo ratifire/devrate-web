@@ -36,6 +36,21 @@ const FormInput = ({
     }, 0);
   };
 
+  const getHelperTextColor = () => {
+    if (error && helperText === 'modal.registration.required') {
+      return 'red';
+    }
+    if (
+      error &&
+      (helperText === 'modal.registration.password_short' ||
+        helperText === 'modal.registration.password_long' ||
+        helperText === 'modal.registration.password_invalid')
+    ) {
+      return 'red';
+    }
+    return 'grey';
+  };
+
   return (
     <FormControl variant='outlined' sx={styles.inputWrapper} error={error}>
       <InputLabel htmlFor={id} sx={styles.label} required={required}>
@@ -60,15 +75,21 @@ const FormInput = ({
               showPassword={showPassword}
               clickHandler={handleTogglePasswordVisibility}
               mouseDownHandler={mouseDownHandler}
-              tooltip={true}
-              textContent='modal.registration.password_tooltip'
               iconStyle={iconStyle}
             />
           )
         }
         {...extraProps}
       />
-      {error && (
+      {name === 'password' && (
+        <FormHelperText
+          id={id}
+          sx={{ position: 'absolute', bottom: '-21px', left: '0px', color: getHelperTextColor() }}
+        >
+          {t(helperText === 'modal.registration.required' ? helperText : 'modal.registration.password_tooltip')}
+        </FormHelperText>
+      )}
+      {error && name !== 'password' && (
         <FormHelperText id={id} sx={styles.textHelper}>
           {t(helperText)}
         </FormHelperText>

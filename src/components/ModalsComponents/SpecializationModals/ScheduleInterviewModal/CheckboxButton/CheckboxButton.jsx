@@ -23,9 +23,7 @@ export const CheckboxButton = ({
         />
       }
       label={
-        <Typography
-          sx={disabled ? styles.labelDisabled : styles.label}
-        >
+        <Typography>
           {label}
         </Typography>
       }

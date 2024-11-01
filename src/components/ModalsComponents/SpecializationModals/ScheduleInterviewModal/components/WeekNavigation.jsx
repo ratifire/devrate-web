@@ -4,10 +4,10 @@ import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const WeekNavigation = ({onWeekNav, weekTitle}) =>{
-
-
-  return(
+const WeekNavigation = ({ onWeekNav, weekTitle }) => {
+  
+  
+  return (
     <Box sx={styles.weekHeading}>
       <IconButton onClick={() => onWeekNav('prev')}>
         <ChevronLeft />
@@ -17,12 +17,12 @@ const WeekNavigation = ({onWeekNav, weekTitle}) =>{
         <ChevronRight />
       </IconButton>
     </Box>
-  )
-}
+  );
+};
 
 WeekNavigation.propTypes = {
   onWeekNav: PropTypes.func.isRequired,
-  weekTitle: PropTypes.string.isRequired
-}
+  weekTitle: PropTypes.string.isRequired,
+};
 
 export default WeekNavigation;
