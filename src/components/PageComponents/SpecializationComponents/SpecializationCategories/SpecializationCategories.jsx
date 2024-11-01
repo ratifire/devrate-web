@@ -19,6 +19,7 @@ import CustomTooltip from '../../../UI/CustomTooltip';
 import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
 import { styles } from './SpecializationCategories.styles';
+import modalSpecialization from '../../../../utils/constants/Specialization/modalSpecialization'
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const SpecializationCategories = () => {
     isLoadingDeleteSpecialization ||
     isFetching;
   const [anchorEl, setAnchorEl] = useState({});
+  const { editSpecialization, addSpecialization } = modalSpecialization;
 
   useEffect(() => {
     if (!specializations || isLoading) {
@@ -75,7 +77,7 @@ const SpecializationCategories = () => {
 
   const handlerAddSpecializations = () => {
     if (specializations?.length >= 4) return;
-    dispatch(openModal({ modalName: 'openSpecialization', data: 'addSpecialization' }));
+    dispatch(openModal({ modalName: 'openSpecialization', data: addSpecialization }));
   };
 
   const handlerChangeMainSpecialization = async () => {
@@ -118,7 +120,7 @@ const SpecializationCategories = () => {
   };
 
   const handleEditFeature = (id) => {
-    dispatch(openModal({ modalName: 'openSpecialization', data: 'editSpecialization' }));
+    dispatch(openModal({ modalName: 'openSpecialization', data: editSpecialization }));
     handleCloseMenu(id);
   };
 

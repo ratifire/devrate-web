@@ -19,7 +19,7 @@ const ConfirmationModal = () => {
   const [codeError, setCodeError] = useState(false);
   const [confirmEmail] = useConfirmEmailMutation();
   const openConfirmation = useSelector((state) => state.modal.openConfirmation);
-
+  const email = useSelector((state) => state.modal.modalData);
   const handleClose = () => {
     dispatch(closeModal({ modalName: 'openConfirmation' }));
   };
@@ -79,10 +79,12 @@ const ConfirmationModal = () => {
           <Typography variant='subtitle2' sx={styles.codeErrorText}>{t('modal.confirmation.code_error_text')}</Typography>
         </Box>
       )}
-
+      
       <Box sx={styles.mainTextWrapper}>
         <Typography variant='subtitle3' sx={styles.mainText}>
-          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>user@mail.com</Typography>.
+          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>
+            {email && email.replace(/(?<=.{1}).(?=[^@]*?.@)/g, '*')}
+        </Typography>.
         </Typography>
         <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
       </Box>

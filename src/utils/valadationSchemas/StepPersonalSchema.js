@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export const StepPersonalSchema = Yup.object().shape({
   firstName: Yup.string()
     .matches(
-      /^[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\s\-']*[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\-']$/,
+      /^[\p{L}\s\-'’]+$/u,
       'modal.registration.first_name_invalid_characters'
     )
     .min(2, 'profile.modal.userInfo.personal.first_name_long')
@@ -11,7 +11,7 @@ export const StepPersonalSchema = Yup.object().shape({
     .required('profile.modal.userInfo.personal.required'),
   lastName: Yup.string()
     .matches(
-      /^[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\s\-']*[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\-']$/,
+      /^[\p{L}\s\-'’]+$/u,
       'modal.registration.first_name_invalid_characters'
     )
     .min(2, 'profile.modal.userInfo.personal.last_name_short')
@@ -19,12 +19,12 @@ export const StepPersonalSchema = Yup.object().shape({
     .required('profile.modal.userInfo.personal.required'),
   city: Yup.string()
     .matches(
-      /^[a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\-'']*([a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\-''])?$/,
+      /^[\p{L}\s\-'’]+$/u,
       'profile.modal.userInfo.personal.city_invalid'
     )
     .min(2, 'profile.modal.userInfo.personal.city_short')
     .max(25, 'profile.modal.userInfo.personal.city_long')
-    .optional(),
+    .required('profile.modal.userInfo.personal.required'),
   country: Yup.string().required('profile.modal.userInfo.personal.required'),
   status: Yup.string().max(50, 'profile.modal.userInfo.personal.status_too_long').optional(),
   description: Yup.string().max(480, 'profile.modal.userInfo.personal.about_me_too_long').optional(),
