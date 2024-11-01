@@ -46,6 +46,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const handleOpenFeedbackModal = () => {
     dispatch(openModal({ modalName: 'feedbackProjectModal' }));
   };
+const order = (item) => item === 'profile.userMenu.logout'  ? 'order: 2' : 'order: 0';
 
   return (
     <>
@@ -66,7 +67,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
                 key={link.path}
                 to={link.path}
                 component={RouterLink}
-                sx={styles.menuLink}
+                sx={[styles.menuLink, order(link.name)]}
                 target={link.target}
                 {...(link.name === 'profile.userMenu.logout' ? { onClick: logoutHandler } : {})}
               >
@@ -96,6 +97,56 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
       {feedbackProjectModal && <FeedbackProjectModal/>}
     </>
   );
+  // return (
+  //   <>
+  //     <Drawer anchor='right' open={isDrawerOpen} onClose={toggleDrawer}>
+  //       <Box sx={styles.userMenuBox} role='presentation'>
+  //         <Box sx={styles.upperMenu}>
+  //           <Typography variant='h5' component='div'>
+  //             Account
+  //           </Typography>
+  //           <IconButton sx={styles.menuLinkBtn} onClick={toggleDrawer}>
+  //             <EastIcon sx={styles.menuLink} />
+  //           </IconButton>
+  //         </Box>
+  //
+  //         {links.map((link, index) => (
+  //           <React.Fragment key={link.path}>
+  //             {link.name === 'profile.userMenu.logout' && (
+  //               <ButtonDef
+  //                 variant='text'
+  //                 startIcon={<ForumOutlinedIcon sx={styles.iconItem} />}
+  //                 type='button'
+  //                 handlerClick={handleOpenFeedbackModal}
+  //                 correctStyle={styles.btnFeedback}
+  //                 label={t('profile.userMenu.leaveAFeedback')}
+  //               />
+  //             )}
+  //             <Link
+  //               to={link.path}
+  //               component={RouterLink}
+  //               sx={styles.menuLink}
+  //               target={link.target}
+  //               {...(link.name === 'profile.userMenu.logout' ? { onClick: logoutHandler } : {})}
+  //             >
+  //               <ListItem disablePadding>
+  //                 <ListItemButton sx={styles.listItemButton}>
+  //                   <ListItemIcon>
+  //                     <link.icon sx={styles.iconItem} />
+  //                   </ListItemIcon>
+  //                   <ListItemText primary={t(link.name)} />
+  //                 </ListItemButton>
+  //               </ListItem>
+  //             </Link>
+  //             {index % 2 !== 0 && <Divider key={index} sx={styles.divider} />}
+  //           </React.Fragment>
+  //         ))}
+  //       </Box>
+  //     </Drawer>
+  //
+  //     {feedbackProjectModal && <FeedbackProjectModal/>}
+  //   </>
+  // );
 };
 
 Menu.propTypes = {

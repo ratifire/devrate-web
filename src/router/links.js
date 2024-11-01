@@ -5,5 +5,5 @@ export default {
   specializations: '/specializations',
   interviews: '/interviews',
   settings: '/settings',
-  bookmark: '/bookmark',
+  FAQ: '/FAQ',
 };

@@ -45,26 +45,28 @@ const styles = {
     },
   }),
   iconItem: (theme) => ({
-    marginLeft: theme.spacing(4),
+    marginLeft: theme.spacing(3),
     marginRight: theme.spacing(2),
   }),
   divider: (theme) => ({
     borderColor: theme.palette.border.menuColor,
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(4),
+    marginBottom: '32px',
   }),
   btnFeedback: (theme) => ({
-    marginTop: 'auto',
     color: theme.palette.text.secondary,
     borderRadius: 1,
-    fontWeight: 500,
+    fontWeight: 400,
     fontSize: '20px',
     lineHeight: 2.3,
     letterSpacing: 0.15,
     justifyContent: 'flex-start',
     paddingX: theme.spacing(3),
     paddingY: theme.spacing(2),
-    marginBottom: '32px',
+    order: 1,
+    '>span.MuiButton-startIcon': {
+      marginLeft: 0,
+    },
     '>span.MuiButton-startIcon>*:nth-of-type(1)': {
       fontSize: '24px',
     },

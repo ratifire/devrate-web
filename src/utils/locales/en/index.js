@@ -265,9 +265,9 @@ export const en = {
         specializations: 'Specializations',
         interviews: 'Interviews',
         settings: 'Settings',
-        bookmark: 'Bookmarks',
+        FAQ: 'FAQ',
         logout: 'Logout',
-        leaveAFeedback: 'Leave a Feedback',
+        leaveAFeedback: 'Feedback',
       },
       experienceSection: {
         readAll: 'Read all...',
