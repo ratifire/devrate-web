@@ -54,7 +54,7 @@ const RegistrationModal = () => {
     });
     resetForm();
     dispatch(closeModal({ modalName: 'openRegistration' }));
-    dispatch(openModal({ modalName: 'openConfirmation' }));
+    dispatch(openModal({ modalName: 'openConfirmation', data:email }));
   };
   const formik = useFormik({
     initialValues,
