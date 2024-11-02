@@ -61,6 +61,10 @@ export const specializationDark = {
     btnEditSpec: {
       color: '#C5C5C6',
       border: '#444446',
+    },
+    inputAddSpec: {
+      backgroundColor: '#8133F1',
+      color: '#FFFFFF',
     }
   },
 };
