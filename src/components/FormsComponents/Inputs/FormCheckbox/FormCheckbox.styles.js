@@ -1,6 +1,5 @@
 export const styles = {
   newsAgreementText: (theme) => ({
-    // fontFamily: 'Open Sans',
     fontWeight: 400,
     fontSize: '16px',
     lineHeight: 1.5,
