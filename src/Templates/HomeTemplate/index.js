@@ -1,3 +1,3 @@
-import HomeTemplate from './HomeTemplate';
+import FaqTemplate from '../FaqTemplate';
 
-export default HomeTemplate;
+export default FaqTemplate;
