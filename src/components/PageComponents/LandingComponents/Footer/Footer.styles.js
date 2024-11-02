@@ -82,6 +82,11 @@ const styles = {
       marginRight: '36px',
     },
   },
+  socialLinks: {
+    display: 'flex',
+    gap: '150px',
+
+  },
   socialGroup: (theme) => ({
     color: theme.palette.neutral[50],
     margin: '0 auto',

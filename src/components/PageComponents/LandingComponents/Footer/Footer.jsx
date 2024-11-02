@@ -16,25 +16,47 @@ const Footer = () => {
     <Container maxWidth='xl' sx={styles.container}>
       <Box component='footer' sx={styles.footer}>
         <Box sx={styles.wrapper}>
-          <Link to={`/`} component={RouterLink}>
-            <Logo width={'187'} height={'22'} />
-          </Link>
-          <Box sx={styles.wrapperNav}>
-            <Icon sx={styles.logoBoy}>
-              <LogoBoy />
-            </Icon>
-            <LinkList links={legalInfoLinks} componentStyles={styles} />
+
+          <Box sx={styles.socialLinks}>
+            <Link to={`/`} component={RouterLink}>
+              <Logo width={'187'} height={'22'} />
+            </Link>
             <Box sx={styles.socialGroup}>
-              <Link href={'href'} target='_blank'>
-                <Instagram sx={styles.icon}/>
-              </Link>
               <Link href={'href'} target='_blank'>
                 <LinkedIn sx={styles.icon}/>
               </Link>
+              <Link href={'href'} target='_blank'>
+                <Instagram sx={styles.icon}/>
+              </Link>
             </Box>
           </Box>
+
+
+          {/*<Box sx={styles.wrapperNav}>*/}
+          {/*  <Icon sx={styles.logoBoy}>*/}
+          {/*    <LogoBoy />*/}
+          {/*  </Icon>*/}
+          {/*  <LinkList links={legalInfoLinks} componentStyles={styles} />*/}
+          {/*</Box>*/}
         </Box>
         <Box>
+          <Box component='paragraph'>
+            {t('Technical interview training platform: elevate your skills with both beginners and experienced professionals. Our platform is designed to make the interview preparation process smoother and less stressful for everyone.')}
+          </Box>
+          <Box sx={{display: 'flex'}}>
+            <Typography component='h2'>
+              {t('Developed By')}
+            </Typography>
+            <Link to={`/`} component={RouterLink}>
+              <Logo width={'187'} height={'22'} />
+            </Link>
+          </Box>
+          <Link>
+            ratifire.org
+          </Link>
+          <Box>
+
+          </Box>
           <Typography level='body-md' sx={styles.copyright}>
             {t('home.footer.copyright')}
           </Typography>
