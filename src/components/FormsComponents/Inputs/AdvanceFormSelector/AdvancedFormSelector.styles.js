@@ -65,4 +65,7 @@ export const styles = {
   autoComplete: {
     width: '100%',
   },
+  icon: (theme) => ({
+    color: theme.palette.specialization.inputAddSpec.icon,
+  })
 };

@@ -65,6 +65,7 @@ export const specializationDark = {
     inputAddSpec: {
       backgroundColor: '#8133F1',
       color: '#FFFFFF',
+      icon: '#FFFFFF',
     }
   },
 };
