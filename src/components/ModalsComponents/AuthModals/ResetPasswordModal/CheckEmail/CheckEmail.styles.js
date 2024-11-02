@@ -1,23 +1,35 @@
 const styles = {
   title: (theme) => ({
+    fontFamily: 'Zen Dots',
+    marginBottom: theme.spacing(2),
     color: theme.palette.text.primary,
-    textAlign: 'center',
+  }),
+  subtitle: (theme) => ({
+    fontFamily: 'Open Sans',
+    fontSize: '18px',
+    color: theme.palette.neutral[100],
     marginBottom: theme.spacing(4),
   }),
-  textLink: (theme) => ({
-    color: theme.palette.text.secondary,
-    textAlign: 'center',
-    marginTop: theme.spacing(4),
+  bottom_subtitle: (theme) => ({
+    fontFamily: 'Open Sans',
+    fontSize: '18px',
+    color: theme.palette.neutral[100],
   }),
   box: (theme) => ({
     display: 'flex',
-    gridGap: theme.spacing(3),
-    justifyContent: 'center',
+    flexDirection: 'column',
+    gridGap: theme.spacing(2),
+    alignItems: 'center',
   }),
   link: (theme) => ({
-    color: theme.palette.text.primary,
-    textAlign: 'center',
     textDecoration: 'underline',
+    color: theme.palette.action.active,
+    fontWeight: 600,
+    fontSize: '18px',
+    fontLineHeight: 1.5,
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   }),
   wrapperBtn: (theme) => ({
     marginTop: theme.spacing(4),

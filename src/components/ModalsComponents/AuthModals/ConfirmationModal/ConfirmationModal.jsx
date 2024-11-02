@@ -72,33 +72,43 @@ const ConfirmationModal = () => {
 
   return (
     <ModalLayout open={openConfirmation} setOpen={handleClose}>
-      <Typography variant='subtitle2' sx={styles.title}>{t('modal.confirmation.title')}</Typography>
+      <Typography variant='subtitle2' sx={styles.title}>
+        {t('modal.confirmation.title')}
+      </Typography>
       {codeError && (
         <Box>
-          <CancelIcon sx={styles.codeErrorIcon}/>
-          <Typography variant='subtitle2' sx={styles.codeErrorText}>{t('modal.confirmation.code_error_text')}</Typography>
+          <CancelIcon sx={styles.codeErrorIcon} />
+          <Typography variant='subtitle2' sx={styles.codeErrorText}>
+            {t('modal.confirmation.code_error_text')}
+          </Typography>
         </Box>
       )}
-      
+
       <Box sx={styles.mainTextWrapper}>
         <Typography variant='subtitle3' sx={styles.mainText}>
-          {t('modal.confirmation.main_text1')} <Typography variant='subtitle3' component='span' sx={styles.userEmail}>
+          {t('modal.confirmation.main_text1')}{' '}
+          <Typography variant='subtitle3' component='span' sx={styles.userEmail}>
             {email && email.replace(/(?<=.{1}).(?=[^@]*?.@)/g, '*')}
-        </Typography>.
+          </Typography>
+          .
         </Typography>
-        <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.main_text2')}</Typography>
+        <Typography variant='subtitle3' sx={styles.mainText}>
+          {t('modal.confirmation.main_text2')}
+        </Typography>
       </Box>
 
       <ConfirmationForm
         formik={formik}
         inputRefs={inputRefs}
-        helperTextContent=""
-        buttonLabel="modal.confirmation.btn_confirm"
+        helperTextContent=''
+        buttonLabel='modal.confirmation.btn_confirm'
         handleCodeChange={handleCodeChange}
       />
 
       <Box variant='subtitle3' sx={styles.spamCheckContainer}>
-        <Typography variant='subtitle3' sx={styles.mainText}>{t('modal.confirmation.spam_check_text')}</Typography>
+        <Typography variant='subtitle3' sx={styles.mainText}>
+          {t('modal.confirmation.spam_check_text')}
+        </Typography>
         <Typography sx={{ textAlign: 'center' }}>
           <StyledRouterLink to={'/'} onClick={handleCloseAllModal}>
             {t('modal.confirmation.repeat_request_link')}
@@ -106,7 +116,9 @@ const ConfirmationModal = () => {
           <Typography variant='subtitle3'> {t('modal.confirmation.repeat_request_text1')}</Typography>
         </Typography>
         <Typography>
-          <Typography variant='subtitle3' sx={styles.turnBackText}>{t('modal.confirmation.repeat_request_text2')}</Typography>
+          <Typography variant='subtitle3' sx={styles.turnBackText}>
+            {t('modal.confirmation.repeat_request_text2')}
+          </Typography>
           <StyledRouterLink to={'/'} onClick={handleCloseAllModal}>
             {t('modal.confirmation.change_email_link')}
           </StyledRouterLink>
@@ -114,7 +126,9 @@ const ConfirmationModal = () => {
       </Box>
 
       <Box sx={styles.turnBackContainer}>
-        <Typography variant='subtitle3' sx={styles.turnBackText}>{t('modal.confirmation.return_on')}</Typography>
+        <Typography variant='subtitle3' sx={styles.turnBackText}>
+          {t('modal.confirmation.return_on')}
+        </Typography>
         <StyledRouterLink to={'/'} onClick={handleCloseAllModal}>
           {t('modal.confirmation.home_page')}
         </StyledRouterLink>

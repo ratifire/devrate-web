@@ -1,9 +1,15 @@
 .landingForm .MuiFormControl-root .MuiFormLabel-root {
   font-family: 'Open Sans' !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
  }
 
 .landingForm .MuiFormControl-root .MuiInputBase-root {
   font-family: 'Open Sans' !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
 }
 
 .landingForm .MuiFormControl-root .MuiFormHelperText-root {
