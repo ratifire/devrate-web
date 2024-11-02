@@ -38,6 +38,8 @@ export const specializationDark = {
     level: {
       btnGroup: '#3E3E40',
       btn: '#8133F1',
+      color: '#FFFFFF',
+      colorActive: '#FFFFFF',
     },
     addSpec: {
       color: '#3E3E40',

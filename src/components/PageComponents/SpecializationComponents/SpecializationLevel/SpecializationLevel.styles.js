@@ -25,7 +25,7 @@ export const styles = {
       border: 'none',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.background.level2,
+        backgroundColor: theme.palette.neutral['200'],
       },
       ':active': {
         border: 'none',
@@ -37,7 +37,7 @@ export const styles = {
       border: 'none',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.background.level2,
+        backgroundColor: theme.palette.neutral['200'],
       },
       ':active': {
         border: 'none',
@@ -49,7 +49,7 @@ export const styles = {
       border: 'none',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.background.level2,
+        backgroundColor: theme.palette.neutral['200'],
       },
       ':active': {
         border: 'none',
@@ -58,6 +58,7 @@ export const styles = {
     },
     ' .MuiButton-contained': {
       backgroundColor: theme.palette.specialization.level.btn,
+      color: `${theme.palette.specialization.level.colorActive} !important`,
       cursor: 'auto',
       ':hover': {
         border: 'none',
@@ -74,8 +75,9 @@ export const styles = {
       },
     },
   }),
-  button: {
+  button: (theme) => ({
     padding: '9px 0px 8px',
+    color: theme.palette.specialization.level.color,
     textTransform: 'lowercase',
     display: 'inline-block',
     lineHeight: '23px',
@@ -85,5 +87,5 @@ export const styles = {
     ':hover': {
       border: 'none',
     },
-  },
+  })
 };
