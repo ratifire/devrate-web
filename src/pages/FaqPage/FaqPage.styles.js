@@ -19,6 +19,7 @@ export const styles = {
       borderRadius: 2,
       backgroundColor: theme.palette.pagesSections.backgroundColor,
       backgroundImage: 'none',
+      boxShadow: 'none',
     },
   }),
   faq: {
