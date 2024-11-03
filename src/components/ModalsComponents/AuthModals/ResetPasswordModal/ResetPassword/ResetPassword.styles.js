@@ -1,8 +1,11 @@
 const styles = {
   title: (theme) => ({
-    color: theme.palette.text.secondary,
-    textAlign: 'center',
-    marginBottom: theme.spacing(4),
+    fontFamily: 'Zen Dots',
+    marginBottom: theme.spacing(2),
+    color: theme.palette.text.primary,
+    fontWeight: 400,
+    fontSize: '24px',
+    lineHeight: 1.5,
   }),
   text: (theme) => ({
     color: theme.palette.text.primary,
@@ -40,21 +43,26 @@ const styles = {
     marginBottom: theme.spacing(4),
   }),
   mainText: (theme) => ({
+    fontFamily: 'Open Sans',
+    fontSize: 18,
+    lineHeight: 1.5,
     display: 'inline',
-    color: theme.palette.text.secondary,
-    textAlign: 'center',
+    color: theme.palette.neutral[100],
   }),
   userEmail: (theme) => ({
-    color: theme.palette.text.primary,
+    fontSize: 18,
+    lineHeight: 1.5,
+    fontWeight: 700,
+    color: theme.palette.primary[200],
   }),
   resetPasswordForm: (theme) => ({
     display: 'flex',
-    gap: theme.spacing(2), 
+    gap: theme.spacing(2),
     alignItems: 'center',
     marginBottom: theme.spacing(4),
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: theme.palette.neutral[100]
+        borderColor: theme.palette.neutral[100],
       },
     },
     '&, & input': {
@@ -64,11 +72,11 @@ const styles = {
     '&:-webkit-autofill, & input:-webkit-autofill': {
       '-webkit-text-fill-color': `${theme.palette.text.primary} !important`,
       'box-shadow': `0 0 0 100px ${theme.palette.background.default} inset !important`,
-      'transition': 'background-color 5000s ease-in-out 0s',
+      transition: 'background-color 5000s ease-in-out 0s',
     },
   }),
   iconStyle: (theme) => ({
-    color: theme.palette.neutral[50]
+    color: theme.palette.neutral[50],
   }),
 };
 export default styles;

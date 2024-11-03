@@ -37,7 +37,9 @@ const CheckEmail = () => {
       resetForm();
       dispatch(setEmail(values.email));
       dispatch(closeModal({ modalName: 'openCheckEmail' }));
-      dispatch(openModal({ modalName: 'openNotification' }));
+      dispatch(openModal({ modalName: 'openResetPassword' }));
+      //TODO 'Delete this code, but reconfirm with design first'
+      // dispatch(openModal({ modalName: 'openNotification' }));
     } catch (error) {
       console.error('Error sending email:', error);
       toast.error('Error sending email. Please try again.', {
@@ -105,6 +107,7 @@ const CheckEmail = () => {
           </Link>
         </Typography>
       </Box>
+      {/*TODO 'To be checked with design team'*/}
       {/*<Typography variant='subtitle3' sx={styles.textLink}>*/}
       {/*  {t('modal.checkEmailResetPassword.return_on')}*/}
       {/*  <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>*/}

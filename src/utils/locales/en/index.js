@@ -134,7 +134,8 @@ export const en = {
       confirmation: {
         title: 'Confirm your email',
         code_error_text: 'Unfortunately, the code has expired or is not valid',
-        main_text1: 'To finish your account settings, You should confirm your email',
+        main_text1:
+          'To confirm the password change, you will need to confirm the security code. Please check your email',
         main_text2: 'Check you email and enter confirmation code',
         btn_confirm: 'Register',
         spam_check_text: "Didn't receive the letter? Check your spam folder.",
@@ -146,13 +147,12 @@ export const en = {
         home_page: 'Home',
       },
       notificationModal: {
-        title: 'Email sent!',
-        message:
-          'An email with instructions on how to change your password has been sent to your email address. If you do not receive it within a few minutes, please check that you used the email address for your Devrate account and try again, or contact us for assistance.',
-        btn_enter: 'CONTINUE',
+        title: 'Password Reset',
+        message: 'Your password has been successfully changed!',
+        btn_enter: 'Sign In',
       },
       resetPassword: {
-        title: 'Reset password',
+        title: 'Password Reset',
         password: 'Password',
         password_tooltip: 'Passwords must contain 8 + characters, at least 1 number, at least 1 letter and no spaces.',
         password_repeat: 'Repeat password',
