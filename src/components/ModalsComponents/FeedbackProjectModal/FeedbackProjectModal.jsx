@@ -50,10 +50,8 @@ const FeedbackProjectModal = () => {
 
     if (result.error) {
       setState({ openSnackbarError: true });
-      await formik.setValues(initialValues);
     } else {
       setState({ openSnackbarSuccess: true });
-      await formik.setValues(initialValues);
     }
   };
 
