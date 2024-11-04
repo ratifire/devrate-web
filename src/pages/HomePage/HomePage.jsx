@@ -1,8 +1,9 @@
 import Cookies from 'js-cookie';
 import React, { memo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { AboutSection, Footer, HeroSection } from '../../components/PageComponents/LandingComponents';
+import { AboutSection,  HeroSection } from '../../components/PageComponents/LandingComponents';
 import { Header } from './../HomePage/sections';
+import Footer  from './../HomePage/sections/Footer';
 import { setCredentials } from '../../redux/auth/authSlice';
 import { HomeTemplate } from '../../Templates';
 import './styles/reset.css';
