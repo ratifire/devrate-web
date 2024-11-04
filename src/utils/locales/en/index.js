@@ -530,7 +530,6 @@ export const en = {
       feedbackBtn: 'Leave feedback',
     },
     faqText: {
-      blog: 'Latest updates',
       title: 'FAQ – Frequently Asked Question',
       question1: {
         question: 'How can I request an interview?',
@@ -607,6 +606,18 @@ export const en = {
       question19: {
         question: 'Can I invite a specific person to an interview?',
         answer: 'Currently, the participant selection is automated and doesn’t support inviting a specific person. We strive to ensure fairness and impartiality, so we rely on the automatic selection for an effective interview experience.',
+      },
+    },
+    blogText: {
+      title: 'Latest updates',
+      readNext: 'Read more...',
+      upd1: {
+        title: 'Simulation of real interviews with AI',
+        text: "Added a function where artificial intelligence will play the role of an interviewer, asking questions and analyzing answers in real time.",
+      },
+      upd2: {
+        title: 'Mentor panel',
+        text: "Updated the functionality of personal mentoring, adding a control panel where mentors can see the results of their mentees' interviews, analyze their progress and provide feedback.",
       },
     },
   },

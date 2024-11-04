@@ -12,7 +12,7 @@ export const styles = {
     maxHeight: '586px',
     height: '100%',
     overflowY: 'auto',
-    
+
     '&::-webkit-scrollbar': {
       paddingRight: theme.spacing(3),
       width: 10,

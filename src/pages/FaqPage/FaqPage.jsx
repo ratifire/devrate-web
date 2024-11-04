@@ -8,11 +8,10 @@ import { Blog, Faq } from '../../components/PageComponents/FaqComponents';
 const MemoizedProfileHeader = memo(ProfileHeader);
 
 const FaqPage = () => {
-  
   return (
     <FaqTemplate>
       <MemoizedProfileHeader />
-      <Container maxWidth="xl" sx={styles.container}>
+      <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.faq}>
             <Faq />
