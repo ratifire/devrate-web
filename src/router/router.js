@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import navigationLinks from './links';
 import ErrorPage from '../pages/ErrorPage';
-import HomePage from '../pages/HomePage';
+import HomePage from '../pages/HomePage/HomePage';
 import RequireAuth from '../redux/auth/RequireAuth';
 import PersonalProfilePage from '../pages/ProfilePages/PersonalProfilePage';
 import SpecializationPage from '../pages/SpecializationPage';
