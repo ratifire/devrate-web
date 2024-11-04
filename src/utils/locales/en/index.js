@@ -213,6 +213,9 @@ export const en = {
             title: 'Add information about your work experience',
             subTitle: 'This will help other users to learn more about you!',
             button: 'Add work experience',
+            userProfile: {
+              title: 'The user has not yet added information about work experience',
+            },
           },
         },
         achievement: {
@@ -222,6 +225,9 @@ export const en = {
             title: 'Add information about your achievements',
             subTitle: 'You can add your certificates or other achievements and attach links to them!',
             button: 'Add achievements',
+            userProfile: {
+              title: 'The user has not yet added information about achievements',
+            },
           },
         },
         skills: {
@@ -231,6 +237,9 @@ export const en = {
             title: 'Add information about your skills',
             subTitle: 'Add specializations and skills from them that you currently possess!',
             button: 'Add specializations',
+            userProfile: {
+              title: 'User has not yet added information about skills',
+            },
           },
           allSkills: 'All skills',
           search: 'Search',
@@ -243,6 +252,9 @@ export const en = {
             title: 'Add information about your education',
             subTitle: 'Tell other users about the places you studied and the experience you gained!',
             button: 'Add education',
+            userProfile: {
+              title: 'The user has not yet added information about education',
+            },
           },
         },
         duties: 'Duties',
