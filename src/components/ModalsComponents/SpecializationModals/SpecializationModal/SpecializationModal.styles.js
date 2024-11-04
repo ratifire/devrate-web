@@ -28,6 +28,34 @@ export const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     gridGap: theme.spacing(3),
+    '& .base-Popper-root .MuiBox-root': {
+      padding: `${theme.spacing(2)} 0 ${theme.spacing(2)} 0`
+    },
+    '& .base-Popper-root .MuiAutocomplete-listbox ': {
+      maxHeight: '250px',
+      marginRight: theme.spacing(2),
+      marginLeft: theme.spacing(2),
+      '&::-webkit-scrollbar': {
+        paddingRight: theme.spacing(2),
+        width: 10,
+      },
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: theme.palette.scroll.scrollWrapp.backgroundColor,
+        borderRadius: 8,
+      },
+      '&::-webkit-scrollbar-thumb': {
+        borderRadius: 6,
+        backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
+      },
+    },
+    '& .base-Popper-root .MuiBox-root .MuiAutocomplete-option.Mui-focused': {
+      backgroundColor: 'transparent',
+      marginRight: theme.spacing(2),
+      '&:hover': {
+        backgroundColor: theme.palette.specialization.inputAddSpec.backgroundColor,
+        color: theme.palette.specialization.inputAddSpec.color,
+      },
+    }
   }),
 
   mastery_input: (theme) => ({

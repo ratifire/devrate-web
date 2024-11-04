@@ -60,7 +60,7 @@ const AdvancedFormSelector = ({
         forcePopupIcon // Hides the warning from the MUI, adds the dropdown icon
         sx={styles.autoComplete}
         PaperComponent={({ children }) => <Box sx={styles.dropdownPaper}>{children}</Box>}
-        popupIcon={<KeyboardArrowDownIcon sx={{ color: '#FFFFFF' }} />}
+        popupIcon={<KeyboardArrowDownIcon sx={styles.icon}/>}
       />
       {error && (
         <FormHelperText id={id} sx={styles.helperText}>
