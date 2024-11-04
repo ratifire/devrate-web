@@ -26,12 +26,12 @@ import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer
   const [event, setEvent] = useState([]);
   const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
   const [popupPosition, setPopupPosition] = useState('TOPRIGHT');
+  const [eventUpdated, setEventUpdated] = useState(false);
   const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
   const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
   // const specificDate = DateTime.fromISO('2024-09-23T00:00:00+03:00');
   // const fromTime = encodeURIComponent(`${specificDate.toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
-  
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [events, setEvents] = useState([]);
   const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
@@ -39,7 +39,6 @@ import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer
   const { data: eventsForSelectedWeek, isLoading, isFetching } = useGetEventByUserIdQuery({ userId, from, to });
   const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
-  
   useEffect(() => {
          const waitForCalendarRef = () => {
              if (calendarRef.current) {
@@ -53,7 +52,7 @@ import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer
          };
 
          waitForCalendarRef();
-     }, [selectedWeek, eventStartTime, from, theme]);
+     }, [selectedWeek, eventStartTime, from, theme, eventUpdated]);
 
      useEffect(() => {
          setEvents(transformEvents(eventsForSelectedWeek || []));
@@ -68,7 +67,7 @@ import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer
          };
 
          waitForCalendarRef();
-     }, [eventsForSelectedWeek, isFetching, theme]);
+     }, [eventsForSelectedWeek, isFetching, theme, eventUpdated]);
 
   
   const findEventTimeForChosenDay = (newDate, resp) => {
@@ -98,7 +97,7 @@ import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer
 
     return adjustedTime.toFormat('HH:mm:ss');
   };
-
+  
   const handleDateChange = async (newDate) => {
     handleClosePopup();
     setSelectedDate(newDate);
@@ -200,7 +199,8 @@ import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer
   }
   return (
     <Box sx={styles.demoApp}>
-      <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange} />
+      <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange}   setEventUpdated={setEventUpdated}
+      />
       <CustomScrollContainer sx={styles.demoAppMain}>
         {<FullCalendar
             ref={calendarRef}
