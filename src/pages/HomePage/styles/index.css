@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1784px;
+    width: 100%;
+    padding: 0 12px;
+    margin: 0 auto;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 16px;
+    letter-spacing: 0.17px;
+    font-weight: 600;
+    box-shadow: 0 3px 1px -2px #0003, 0 2px 2px 0 #00000023, 0 1px 5px 0 #0000001E;
+    border-radius: 8px;
+}
+
+.btn.btn-primary {
+    background-color: #5900D9;
+    color: #FFF;
+}
+
+.btn.btn-secondary {
+    background-color: #44444633;
+    color: #FFF;
+}
+
+.btn.btn-xl {
+    padding: 16px;
+    line-height: 34px;
+    font-size: 24px;
+}
+
+.btn.btn-m {
+    padding: 12px;
+    line-height: 26px;
+    font-size: 18px;
+}

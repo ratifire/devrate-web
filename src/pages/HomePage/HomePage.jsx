@@ -1,9 +1,12 @@
 import Cookies from 'js-cookie';
 import React, { memo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { AboutSection, Footer, Header, HeroSection } from '../../components/PageComponents/LandingComponents';
+import { AboutSection, Footer, HeroSection } from '../../components/PageComponents/LandingComponents';
+import { Header } from './../HomePage/sections';
 import { setCredentials } from '../../redux/auth/authSlice';
 import { HomeTemplate } from '../../Templates';
+import './styles/reset.css';
+import './styles/index.css';
 
 const MemoizedHeader = memo(Header);
 const MemoizedHeroSection = memo(HeroSection);
