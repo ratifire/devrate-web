@@ -21,6 +21,7 @@
     border: none;
     cursor: pointer;
     transition: all 0.2s linear;
+    text-decoration: none;
 }
 
 .btn.btn-primary {
