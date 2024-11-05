@@ -88,6 +88,7 @@
   }
 }
 
+
 /* FORM */
 
 .contactForm {
@@ -131,6 +132,10 @@
     color: #FFFFFF;
   }
 
+  &__input:focus {
+    color: #FFFFFF;
+  }
+
   &__textarea {
     border-radius: 4px;
     padding: 12px;
@@ -149,18 +154,49 @@
     color: #828283;
   }
 
+  &__textarea:focus {
+    color: #828283;
+  }
+
   &__button {
-    border-radius: 8px;
     padding: 12px 48px;
     border: none;
     cursor: pointer;
-    background-color: #5900D9;
-    color: #FFF;
-    box-shadow: 0 3px 1px -2px #0003, 0 2px 2px 0 #00000023, 0 1px 5px 0 #0000001E;
-    font-weight: 600;
     font-size: 18px;
     line-height: 143%;
-    letter-spacing: 0.01em;
     text-transform: uppercase;
+  }
+}
+
+/* BREAKPOINTS */
+
+@media (max-width: 1600px) {
+  .footer {
+    &__container {
+      padding: 0 12px;
+    }
+  }
+  .contactForm {
+    width: 720px;
+  }
+}
+
+
+@media (max-width: 1450px) {
+  .contactForm {
+    width: 620px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .footer {
+    &__social {
+      justify-content: flex-start;
+      gap: 60px;
+    }
+
+    &__descriptions {
+      max-width: 420px;
+    }
   }
 }

@@ -18,11 +18,17 @@
     font-weight: 600;
     box-shadow: 0 3px 1px -2px #0003, 0 2px 2px 0 #00000023, 0 1px 5px 0 #0000001E;
     border-radius: 8px;
+
 }
 
 .btn.btn-primary {
     background-color: #5900D9;
     color: #FFF;
+    transition: background-color 0.5s ease;
+
+    &:hover {
+        background-color: #360083;
+    }
 }
 
 .btn.btn-secondary {

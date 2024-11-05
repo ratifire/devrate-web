@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import linkdin from "../../assets/linkdin.svg";
 import mail from "../../assets/mail.svg";
@@ -16,11 +15,9 @@ const Footer = () => {
                 <div className={styles.footer__container}>
                     <div className={styles.footer__content}>
                         <div className={styles.footer__social}>
-                            <Link to={'/'} className={styles.footer__logo}>
-                                <img src={logo} alt="Skillzzy Logo"/>
-                            </Link>
+                            <img className={styles.footer__logo} src={logo} alt="Skillzzy Logo"/>
                             <div className={styles.footer__socialIkons}>
-                                <a href="https://www.linkedin.com" aria-label="LinkedIn">
+                                <a href="https://www.linkedin.com/company/ratifire/" aria-label="LinkedIn">
                                     <img src={linkdin} alt="LinkedIn Icon"/>
                                 </a>
                                 <a href="mailto:info@skillzzy.com" aria-label="Email">
@@ -57,7 +54,7 @@ const Footer = () => {
                             <input type="text" className={styles.contactForm__input} placeholder="Name Surname"/>
                             <input type="email" className={styles.contactForm__input} placeholder="Enter your email"/>
                             <textarea className={styles.contactForm__textarea} placeholder="Enter your request..."></textarea>
-                            <button type="submit" className={styles.contactForm__button}>SEND</button>
+                            <button type="submit" className={`btn btn-primary ${styles.contactForm__button}`}>SEND</button>
                         </form>
                     </div>
                 </div>
