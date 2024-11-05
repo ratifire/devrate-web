@@ -15,7 +15,6 @@ import links from '../../../../router/links';
 
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpdated}) => {
-  console.log(event)
   const { t } = useTranslation();
   const theme = useTheme()
   const { id: userId } = useSelector((state) => state.auth.user.data);
