@@ -1,7 +1,7 @@
 export const styles = {
   skillsWrapper: (theme) => ({
     width: '100%',
-    height: 260,
+    height: '100%',
     padding: theme.spacing(4),
   }),
   skillsTitle: (theme) => ({

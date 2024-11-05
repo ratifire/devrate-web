@@ -68,12 +68,10 @@ export const styles = {
   level: {
     gridColumn: '1/5',
     gridRow: '1/2',
-    height: 250, //To be removed before merge
   },
   averageSkillsScore: {
     gridColumn: '5/13',
     gridRow: '1/2',
-    height: 250, //To be removed before merge
   },
   hardSkillsByProductivity: {
     gridColumn: '1/4',
