@@ -54,7 +54,7 @@ const Footer = () => {
                             <input type="text" className={styles.contactForm__input} placeholder="Name Surname"/>
                             <input type="email" className={styles.contactForm__input} placeholder="Enter your email"/>
                             <textarea className={styles.contactForm__textarea} placeholder="Enter your request..."></textarea>
-                            <button type="submit" className={`btn btn-primary ${styles.contactForm__button}`}>SEND</button>
+                            <button type="submit" className={`btn btn-primary btn-m ${styles.contactForm__button}`}>SEND</button>
                         </form>
                     </div>
                 </div>
