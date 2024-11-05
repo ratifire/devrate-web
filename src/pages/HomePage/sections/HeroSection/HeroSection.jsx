@@ -13,12 +13,18 @@ const HeroSection = () => {
         </div>
 
         <div className={styles.hero__right}>
-          <p>
-            Master your interview skills with real-world practice alongside experts and peers. Get personalized
-            feedback, objective evaluations, and in-depth insights to confidently prepare for success in any interview!
-          </p>
-          <button>Registration</button>
-          <button>Login</button>
+          <div>
+            <p>
+              Master your interview skills with real-world practice alongside experts and peers. Get personalized
+              feedback, objective evaluations, and in-depth insights to confidently prepare for success in any
+              interview!
+            </p>
+          </div>
+
+          <div >
+            <button className='btn btn-primary btn-m'>Registration</button>
+            <button className='btn btn-secondary btn-m'>Login</button>
+          </div>
         </div>
       </div>
     </section>
