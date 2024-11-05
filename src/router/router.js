@@ -9,6 +9,9 @@ import SpecializationPage from '../pages/SpecializationPage';
 import SchedulePage from '../pages/ShedulePage';
 import UserProfilePage from '../pages/ProfilePages/UserProfilePage';
 import ToastLayout from '../layouts/ToastLayout/ToastLayout';
+import FaqPage from '../pages/FaqPage';
+import PrivacyPolicy from '../pages/PrivacyPolicy';
+import TermsAndConditions from '../pages/TermsAndConditions';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +22,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: navigationLinks.privacy_policy,
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: navigationLinks.terms_and_conditions,
+        element: <TermsAndConditions />,
       },
       {
         element: <RequireAuth />,
@@ -38,6 +49,10 @@ const router = createBrowserRouter([
           {
             path: navigationLinks.specializations,
             element: <SpecializationPage />,
+          },
+          {
+            path: navigationLinks.faq,
+            element: <FaqPage />,
           },
         ],
       },

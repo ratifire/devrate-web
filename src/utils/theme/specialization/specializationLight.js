@@ -50,7 +50,7 @@ export const specializationLight = {
       color: '#8133F1'
     },
     activeSpec: {
-      color: 'transparent',
+      color: '#8133F1',
     },
     mark: {
       color: '#5900D9'

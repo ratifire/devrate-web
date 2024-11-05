@@ -3,6 +3,7 @@ const styles = {
     '@media (min-width: 600px)': { paddingX: theme.spacing(2) },
   }),
   header: {
+    fontFamily: 'Open Sans',
     background: 'none',
     borderBottom: '0.3px solid rgba(161, 161, 170, 0.3)',
     boxShadow: 0,
