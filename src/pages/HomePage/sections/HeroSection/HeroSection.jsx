@@ -21,9 +21,9 @@ const HeroSection = () => {
             </p>
           </div>
 
-          <div >
-            <button className='btn btn-primary btn-m'>Registration</button>
-            <button className='btn btn-secondary btn-m'>Login</button>
+          <div className={styles.btn__container}>
+            <button className={`btn btn-primary btn-m ${styles.registration}`}>Registration</button>
+            <button className={`btn btn-secondary btn-m ${styles.login}`}>Login</button>
           </div>
         </div>
       </div>

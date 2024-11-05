@@ -41,3 +41,21 @@
     }
   }
 }
+
+.btn__container {
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+
+  .registration {
+    width: 299px;
+    height: 66px;
+    margin-right: 36px;
+  }
+
+  .login {
+    width: 220px;
+    height: 66px;
+    background-color: transparent;
+  }
+}
