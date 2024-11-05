@@ -38,7 +38,7 @@ export const specializationLight = {
     level: {
       btnGroup: '#ECECED',
       btn: '#8133F1',
-      color: '#FFFFFF',
+      color: '#1D1D1D',
       colorActive: '#FFFFFF',
     },
     addSpec: {
