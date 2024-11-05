@@ -1,3 +1,4 @@
 import Header from './Header';
+import HeroSection from './HeroSection';
 
-export {Header,}
+export {Header, HeroSection}
