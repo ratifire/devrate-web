@@ -11,14 +11,16 @@
 
 .btn {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     grid-gap: 16px;
     letter-spacing: 0.17px;
     font-weight: 600;
     box-shadow: 0 3px 1px -2px #0003, 0 2px 2px 0 #00000023, 0 1px 5px 0 #0000001E;
     border-radius: 8px;
-
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s linear;
 }
 
 .btn.btn-primary {
