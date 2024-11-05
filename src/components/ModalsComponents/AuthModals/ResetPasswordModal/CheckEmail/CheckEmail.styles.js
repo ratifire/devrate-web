@@ -5,7 +5,7 @@ const styles = {
     color: theme.palette.text.primary,
   }),
   subtitle: (theme) => ({
-    fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans, sans-serif',
     fontSize: '18px',
     color: theme.palette.neutral[100],
     marginBottom: theme.spacing(4),
