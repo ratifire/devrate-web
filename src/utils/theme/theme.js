@@ -594,6 +594,7 @@ const getDesignTokens = (mode) => ({
           },
           error: {
             main: '#B72F46',
+            mainConcentrated: '#ED0E0E',
             dark: '#A70000',
             contrastText: '#ffffff',
           },

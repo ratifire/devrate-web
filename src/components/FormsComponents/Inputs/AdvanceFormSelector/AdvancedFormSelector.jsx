@@ -19,7 +19,6 @@ const AdvancedFormSelector = ({
   error,
   helperText,
   countries,
-  helperDescription,
 }) => {
   const id = uuid();
   const { t } = useTranslation();
@@ -60,14 +59,13 @@ const AdvancedFormSelector = ({
         forcePopupIcon // Hides the warning from the MUI, adds the dropdown icon
         sx={styles.autoComplete}
         PaperComponent={({ children }) => <Box sx={styles.dropdownPaper}>{children}</Box>}
-        popupIcon={<KeyboardArrowDownIcon sx={styles.icon}/>}
+        popupIcon={<KeyboardArrowDownIcon sx={styles.icon} />}
       />
       {error && (
         <FormHelperText id={id} sx={styles.helperText}>
           {t(helperText)}
         </FormHelperText>
       )}
-      {helperDescription && <FormHelperText id={id}>{t(helperDescription)}</FormHelperText>}
     </FormControl>
   );
 };
@@ -83,7 +81,6 @@ AdvancedFormSelector.propTypes = {
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   countries: PropTypes.array.isRequired,
-  helperDescription: PropTypes.string,
 };
 
 AdvancedFormSelector.defaultProps = {
@@ -91,7 +88,6 @@ AdvancedFormSelector.defaultProps = {
   required: false,
   error: false,
   helperText: '',
-  helperDescription: '',
 };
 
 export default AdvancedFormSelector;

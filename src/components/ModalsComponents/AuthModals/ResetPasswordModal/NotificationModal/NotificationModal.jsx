@@ -1,3 +1,4 @@
+// TODO 'Delete this code, but reconfirm with design first'
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +7,7 @@ import ModalLayout from '../../../../../layouts/ModalLayout';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import styles from './NotificationModal.styles';
+import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
 
 const NotificationModal = () => {
   const { t } = useTranslation();
@@ -16,13 +18,13 @@ const NotificationModal = () => {
 
   const handleEnter = () => {
     dispatch(closeModal({ modalName: 'openNotification' }));
-    dispatch(openModal({ modalName: 'openResetPassword' }));
+    dispatch(openModal({ modalName: 'openLogin' }));
   };
 
   return (
     <ModalLayout open={openNotification} setOpen={handleClose}>
       <Typography variant='subtitle3' sx={styles.title}>
-        {t('modal.notificationModal.title')}
+        {changeColorOfLastTitleWord(t('modal.notificationModal.title'))}
       </Typography>
       <Typography variant='subtitle3' sx={styles.message}>
         {t('modal.notificationModal.message')}

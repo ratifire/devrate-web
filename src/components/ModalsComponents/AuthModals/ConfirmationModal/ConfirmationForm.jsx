@@ -1,25 +1,36 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Box, FormHelperText, TextField } from '@mui/material';
+import { Box, Link, TextField, Typography } from '@mui/material';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import styles from './ConfirmationModal.styles';
-
+import { useTranslation } from 'react-i18next';
+import { closeModal } from '../../../../redux/modal/modalSlice';
+import { useDispatch } from 'react-redux';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const ConfirmationForm = ({
-                            inputRefs,
-                            formik,
-                            helperTextContent,
-                            buttonLabel,
-                            buttonVariant,
-                            handleCodeChange,
-                            handleSubmit,
-                            fieldCount = 6,
-                            showButton = true,
-                          }) => {
+  inputRefs,
+  formik,
+  helperTextContent,
+  buttonLabel,
+  buttonVariant,
+  handleCodeChange,
+  handleSubmit,
+  fieldCount = 6,
+  showButton = true,
+}) => {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  const handleCloseAllModal = () => {
+    dispatch(closeModal({ modalName: 'openRegistration' }));
+    dispatch(closeModal({ modalName: 'openConfirmation' }));
+  };
+
   useEffect(() => {
     const allFieldsFilled = Object.keys(formik.values)
-      .filter(key => key.startsWith('text'))
-      .every(key => formik.values[key] !== '');
+      .filter((key) => key.startsWith('text'))
+      .every((key) => formik.values[key] !== '');
 
     if (allFieldsFilled) {
       formik.validateForm();
@@ -32,7 +43,7 @@ const ConfirmationForm = ({
     if ((ctrlKey || metaKey) && key === 'v') {
       return;
     }
-    
+
     if (key === 'Tab') {
       return;
     }
@@ -100,13 +111,13 @@ const ConfirmationForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit || formik.handleSubmit} style={{ width: '100%' }}>
+    <form className='landingForm' onSubmit={handleSubmit || formik.handleSubmit} style={{ width: '100%' }}>
       <Box sx={styles.formInput}>
         {[...Array(fieldCount)].map((_, index) => (
           <TextField
             key={index}
-            type="text"
-            variant="outlined"
+            type='text'
+            variant='outlined'
             inputRef={(ele) => {
               inputRefs.current[index] = ele;
             }}
@@ -118,17 +129,47 @@ const ConfirmationForm = ({
         ))}
       </Box>
 
-      <FormHelperText>{helperTextContent}</FormHelperText>
+      {helperTextContent && (
+        <Box sx={styles.codeErrorWrapper}>
+          <CancelIcon sx={styles.codeErrorIcon} />
+          <Typography variant='subtitle2' sx={styles.codeErrorText}>
+            {t('modal.confirmation.code_error_text')}
+          </Typography>
+        </Box>
+      )}
+
+      <Box variant='subtitle3' sx={styles.spamCheckContainer}>
+        <Typography variant='subtitle3' sx={styles.mainText}>
+          {t('modal.confirmation.spam_check_text')}
+        </Typography>
+        <Typography sx={{ textAlign: 'center' }}>
+          <Link sx={styles.confirmationLink} to={'/'} onClick={handleCloseAllModal}>
+            {t('modal.confirmation.repeat_request_link')}
+          </Link>
+          <Typography variant='subtitle3' sx={styles.mainText}>
+            {' '}
+            {t('modal.confirmation.repeat_request_text1')}
+          </Typography>
+          <Typography variant='subtitle3' sx={styles.mainText}>
+            {' '}
+            {t('modal.confirmation.repeat_request_text2')}{' '}
+          </Typography>
+          <Link sx={styles.confirmationLink} to={'/'} onClick={handleCloseAllModal}>
+            {t('modal.confirmation.change_email_link')}
+          </Link>
+        </Typography>
+        <Typography></Typography>
+      </Box>
 
       {showButton && (
         <Box sx={styles.btnWrapper}>
           <ButtonDef
             sx={styles.btn}
-            type="submit"
+            type='submit'
             variant={buttonVariant || 'contained'}
             onClick={handleClick}
             label={buttonLabel || 'modal.confirmation.btn_confirm'}
-            disabled={ !formik.isValid}
+            disabled={!formik.isValid}
           />
         </Box>
       )}
@@ -139,7 +180,7 @@ const ConfirmationForm = ({
 ConfirmationForm.propTypes = {
   inputRefs: PropTypes.object.isRequired,
   formik: PropTypes.object.isRequired,
-  helperTextContent: PropTypes.string,
+  helperTextContent: PropTypes.bool,
   buttonLabel: PropTypes.string,
   buttonVariant: PropTypes.string,
   handleSubmit: PropTypes.func,
