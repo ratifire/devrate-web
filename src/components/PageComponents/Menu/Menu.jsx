@@ -46,7 +46,13 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const handleOpenFeedbackModal = () => {
     dispatch(openModal({ modalName: 'feedbackProjectModal' }));
   };
-  const order = (item) => item === 'profile.userMenu.logout' ? 'order: 2' : 'order: 0';
+  const order = (item) => `order: ${item === 'profile.userMenu.logout' ? 2 : 0}`;
+
+  const handleLinkClick = (link) => {
+    if (link.name === 'profile.userMenu.logout') {
+      logoutHandler();
+    }
+  };
 
   return (
     <>
@@ -69,7 +75,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
                 component={RouterLink}
                 sx={[styles.menuLink, order(link.name)]}
                 target={link.target}
-                {...(link.name === 'profile.userMenu.logout' ? { onClick: logoutHandler } : {})}
+                onClick={() => handleLinkClick(link)}
               >
                 <ListItem disablePadding>
                   <ListItemButton sx={styles.listItemButton}>

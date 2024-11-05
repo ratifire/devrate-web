@@ -48,11 +48,10 @@ const FeedbackProjectModal = () => {
       text: values.feedbackText,
     });
 
-    if (result.error) {
-      setState({ openSnackbarError: true });
-    } else {
-      setState({ openSnackbarSuccess: true });
-    }
+    setState({
+      openSnackbarError: !!result.error,
+      openSnackbarSuccess: !result.error,
+    });
   };
 
   const formik = useFormik({
