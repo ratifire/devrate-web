@@ -280,7 +280,7 @@ export const en = {
         bookmark: 'Bookmarks',
         faq: 'FAQ',
         logout: 'Logout',
-        leaveAFeedback: 'Leave a Feedback',
+        leaveAFeedback: 'Feedback',
       },
       experienceSection: {
         readAll: 'Read all...',
