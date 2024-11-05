@@ -1,6 +1,6 @@
 const styles = {
   title: (theme) => ({
-    fontFamily: 'Zen Dots',
+    fontFamily: 'Zen Dots, sans-serif',
     marginBottom: theme.spacing(4),
     color: theme.palette.text.primary,
   }),
@@ -25,7 +25,7 @@ const styles = {
     lineHeight: 1.43,
   },
   policyTermsLink: (theme) => ({
-    fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans, sans-serif',
     fontSize: '16px',
     lineHeight: 1.5,
     marginRight: '24px',

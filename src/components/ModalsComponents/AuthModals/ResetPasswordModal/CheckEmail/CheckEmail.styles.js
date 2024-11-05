@@ -1,6 +1,6 @@
 const styles = {
   title: (theme) => ({
-    fontFamily: 'Zen Dots',
+    fontFamily: 'Zen Dots, sans-serif',
     marginBottom: theme.spacing(2),
     color: theme.palette.text.primary,
   }),
@@ -10,16 +10,30 @@ const styles = {
     color: theme.palette.neutral[100],
     marginBottom: theme.spacing(4),
   }),
-  bottom_subtitle: (theme) => ({
-    fontFamily: 'Open Sans',
+  policyText: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
     fontSize: '18px',
+    fontLineHeight: 1.5,
+    display: 'block',
+    textAlign: 'center',
+    width: '100%',
     color: theme.palette.neutral[100],
   }),
-  box: (theme) => ({
+  policyLinkBox: {
     display: 'flex',
     flexDirection: 'column',
-    gridGap: theme.spacing(2),
     alignItems: 'center',
+    marginBottom: 0,
+  },
+  policyLink: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
+    textDecoration: 'underline',
+    color: theme.palette.action.active,
+    fontSize: '18px',
+    fontLineHeight: 1.5,
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   }),
   link: (theme) => ({
     textDecoration: 'underline',
@@ -34,6 +48,16 @@ const styles = {
   wrapperBtn: (theme) => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
+  }),
+  text: (theme) => ({
+    color: theme.palette.text.primary,
+    textAlign: 'center',
+    marginTop: theme.spacing(4),
+  }),
+  textLink: (theme) => ({
+    color: theme.palette.text.secondary,
+    textAlign: 'center',
+    marginTop: theme.spacing(4),
   }),
 };
 export default styles;

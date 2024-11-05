@@ -1,27 +1,32 @@
 const styles = {
   title: (theme) => ({
-    fontFamily: 'Zen Dots',
+    fontFamily: 'Zen Dots, sans-serif',
     marginBottom: theme.spacing(2),
     color: theme.palette.text.primary,
     fontWeight: 400,
     fontSize: '24px',
     lineHeight: 1.5,
   }),
-  text: (theme) => ({
-    color: theme.palette.text.primary,
-    textAlign: 'center',
-    marginTop: theme.spacing(4),
+  bottom_subtitle: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
+    fontSize: '18px',
+    color: theme.palette.neutral[100],
   }),
-  textLink: (theme) => ({
-    color: theme.palette.text.secondary,
-    textAlign: 'center',
-    marginTop: theme.spacing(4),
+  box: (theme) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    gridGap: theme.spacing(2),
+    alignItems: 'center',
   }),
   link: (theme) => ({
-    color: theme.palette.text.primary,
-    textAlign: 'center',
     textDecoration: 'underline',
-    marginTop: theme.spacing(4),
+    color: theme.palette.action.active,
+    fontWeight: 600,
+    fontSize: '18px',
+    fontLineHeight: 1.5,
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   }),
   input: (theme) => ({
     width: '100%',
@@ -43,7 +48,7 @@ const styles = {
     marginBottom: theme.spacing(4),
   }),
   mainText: (theme) => ({
-    fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans, sans-serif',
     fontSize: 18,
     lineHeight: 1.5,
     display: 'inline',

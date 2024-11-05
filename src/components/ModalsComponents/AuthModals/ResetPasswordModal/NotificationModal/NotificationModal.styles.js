@@ -1,6 +1,6 @@
 const styles = {
   title: (theme) => ({
-    fontFamily: 'Zen Dots',
+    fontFamily: 'Zen Dots, sans-serif',
     marginBottom: theme.spacing(2),
     color: theme.palette.text.primary,
     fontWeight: 400,
@@ -8,7 +8,7 @@ const styles = {
     lineHeight: 1.5,
   }),
   message: (theme) => ({
-    fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans, sans-serif',
     fontSize: '18px',
     color: theme.palette.neutral[100],
     marginBottom: theme.spacing(4),

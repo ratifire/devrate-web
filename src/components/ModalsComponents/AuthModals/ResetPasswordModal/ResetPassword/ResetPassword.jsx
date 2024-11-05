@@ -26,6 +26,10 @@ const ResetPassword = () => {
   const openResetPassword = useSelector((state) => state.modal.openResetPassword);
   const email = useSelector((state) => state.email.email);
   const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
+  const handleCloseAllModal = () => {
+    dispatch(closeModal({ modalName: 'openLogin' }));
+    dispatch(closeModal({ modalName: 'openCheckEmail' }));
+  };
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -100,11 +104,6 @@ const ResetPassword = () => {
           </Typography>
           .
         </Typography>
-
-        {/*TODO 'Delete_this_code_before_push*/}
-        {/*<Typography variant='subtitle3' sx={styles.mainText}>*/}
-        {/*  {t('modal.confirmation.main_text2')}*/}
-        {/*</Typography>*/}
       </Box>
 
       <Formik
@@ -224,17 +223,21 @@ const ResetPassword = () => {
         )}
       </Formik>
 
-      {/*TODO this part of code should be reviewed*/}
+      <Box variant='subtitle3' sx={styles.box}>
+        <Typography variant='subtitle3' sx={styles.bottom_subtitle}>
+          {t('modal.checkEmailResetPassword.subtitle3')}
+        </Typography>
 
-      <Typography variant='subtitle3' sx={styles.text}>
-        {t('modal.resetPassword.text_privacy')}
-      </Typography>
-      <Typography variant='subtitle3' sx={styles.textLink}>
-        {t('modal.resetPassword.return_on')}
-        <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
-          {t('modal.resetPassword.home_page')}
-        </Link>
-      </Typography>
+        <Typography variant='subtitle3' sx={styles.bottom_subtitle}>
+          <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
+            {t('modal.checkEmailResetPassword.resend_link')}
+          </Link>{' '}
+          {t('modal.checkEmailResetPassword.middle_text')}
+          <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
+            {t('modal.checkEmailResetPassword.change_email')}
+          </Link>
+        </Typography>
+      </Box>
     </ModalLayout>
   );
 };

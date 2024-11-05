@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ModalLayout from '../../../../../layouts/ModalLayout';
 import styles from './CheckEmail.styles';
 import { useTranslation } from 'react-i18next';
@@ -22,12 +23,13 @@ const initialValues = {
 const CheckEmail = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const openCheckEmail = useSelector((state) => state.modal.openCheckEmail);
   const handleClose = () => dispatch(closeModal({ modalName: 'openCheckEmail' }));
-  const handleCloseAllModal = () => {
-    dispatch(closeModal({ modalName: 'openLogin' }));
-    dispatch(closeModal({ modalName: 'openCheckEmail' }));
-  };
+  // const handleCloseAllModal = () => {
+  //   dispatch(closeModal({ modalName: 'openLogin' }));
+  //   dispatch(closeModal({ modalName: 'openCheckEmail' }));
+  // };
 
   const [sendResetEmail] = useResetPasswordMutation();
 
@@ -92,28 +94,35 @@ const CheckEmail = () => {
           />
         </Box>
       </form>
-      <Box variant='subtitle3' sx={styles.box}>
-        <Typography variant='subtitle3' sx={styles.bottom_subtitle}>
-          {t('modal.checkEmailResetPassword.subtitle3')}
-        </Typography>
 
-        <Typography variant='subtitle3' sx={styles.bottom_subtitle}>
-          <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
-            {t('modal.checkEmailResetPassword.resend_link')}
-          </Link>{' '}
-          {t('modal.checkEmailResetPassword.middle_text')}
-          <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
-            {t('modal.checkEmailResetPassword.change_email')}
-          </Link>
+      <Box sx={styles.policyLinkBox}>
+        <Typography variant='caption1' sx={styles.policyText}>
+          {t('modal.login.text_privacy')}
         </Typography>
+        <Box>
+          <Link
+            sx={styles.policyLink}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClose();
+              navigate('/#');
+            }}
+          >
+            {t('modal.login.text_privacy_policy')}
+          </Link>{' '}
+          &{' '}
+          <Link
+            sx={styles.policyLink}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClose();
+              navigate('/#');
+            }}
+          >
+            {t('modal.login.text_privacy_terms')}
+          </Link>
+        </Box>
       </Box>
-      {/*TODO 'To be checked with design team'*/}
-      {/*<Typography variant='subtitle3' sx={styles.textLink}>*/}
-      {/*  {t('modal.checkEmailResetPassword.return_on')}*/}
-      {/*  <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>*/}
-      {/*    {t('modal.checkEmailResetPassword.home_page')}*/}
-      {/*  </Link>*/}
-      {/*</Typography>*/}
     </ModalLayout>
   );
 };

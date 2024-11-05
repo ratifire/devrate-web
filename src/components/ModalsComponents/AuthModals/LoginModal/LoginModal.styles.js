@@ -1,11 +1,11 @@
 const styles = {
   title: (theme) => ({
-    fontFamily: 'Zen Dots',
+    fontFamily: 'Zen Dots, sans-serif',
     marginBottom: theme.spacing(2),
     color: theme.palette.text.primary,
   }),
   subtitle: (theme) => ({
-    fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans, sans-serif',
     color: theme.palette.neutral[100],
     marginBottom: theme.spacing(4),
   }),
@@ -43,7 +43,7 @@ const styles = {
     marginBottom: '16px',
   },
   policyText: (theme) => ({
-    fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans, sans-serif',
     fontSize: '18px',
     fontLineHeight: 1.5,
     display: 'block',
@@ -62,6 +62,7 @@ const styles = {
     marginRight: theme.spacing(2),
   }),
   turnBackLink: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
     textDecoration: 'underline',
     color: theme.palette.action.active,
     fontWeight: 600,
@@ -73,7 +74,7 @@ const styles = {
   }),
 
   policyLink: (theme) => ({
-    fontFamily: 'Open Sans',
+    fontFamily: 'Open Sans, sans-serif',
     textDecoration: 'underline',
     color: theme.palette.action.active,
     fontSize: '18px',

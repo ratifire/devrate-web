@@ -49,7 +49,8 @@ export const styles = {
   }),
   helperText: (theme) => ({
     position: 'absolute',
-    bottom: '-18px',
+    bottom: '-21px',
+    left: '14px',
     '&.MuiFormHelperText-root': {
       color: theme.palette.error.main,
     },
@@ -67,5 +68,5 @@ export const styles = {
   },
   icon: (theme) => ({
     color: theme.palette.specialization.inputAddSpec.icon,
-  })
+  }),
 };
