@@ -94,7 +94,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
             variant='text'
             startIcon={<ForumOutlinedIcon sx={styles.iconItem} />}
             type='button'
-            handlerClick={handleOpenFeedbackModal}
+            onClick={handleOpenFeedbackModal}
             sx={styles.btnFeedback}
           >
             <Typography sx={styles.btnText} variant='h6'>
