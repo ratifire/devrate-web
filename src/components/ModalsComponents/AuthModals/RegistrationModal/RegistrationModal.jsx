@@ -12,6 +12,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useCreateUserMutation } from '../../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
+import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
 
 const initialValues = {
   email: '',
@@ -53,7 +54,7 @@ const RegistrationModal = () => {
     });
     resetForm();
     dispatch(closeModal({ modalName: 'openRegistration' }));
-    dispatch(openModal({ modalName: 'openConfirmation', data:email }));
+    dispatch(openModal({ modalName: 'openConfirmation', data: email }));
   };
   const formik = useFormik({
     initialValues,
@@ -75,17 +76,6 @@ const RegistrationModal = () => {
     formik.isValid &&
     formik.dirty;
 
-  const changeColorOfLastTitleWord = (text) => {
-    const words = text.split(' ');
-    const lastWord = words.pop();
-    const modifiedText = words.join(' ');
-    return (
-      <>
-        {modifiedText} <span style={styles.lastTitleWord}>{lastWord}</span>
-      </>
-    );
-  };
-
   return isCreating ? (
     <CircularProgress />
   ) : (
@@ -93,7 +83,7 @@ const RegistrationModal = () => {
       <Typography variant='h5' sx={styles.title}>
         {changeColorOfLastTitleWord(t('modal.registration.title'))}
       </Typography>
-      <form onSubmit={formik.handleSubmit} style={{ width: '100%' }} autoComplete='off'>
+      <form className='landingForm' onSubmit={formik.handleSubmit} style={{ width: '100%' }} autoComplete='off'>
         <FormInput
           name='email'
           value={formik.values.email}
@@ -156,6 +146,7 @@ const RegistrationModal = () => {
           mouseDownHandler={handleMouseDownPassword}
           autoComplete='new-password'
           iconStyle={styles.iconStyle}
+          signupPassword
         />
         <FormInput
           showPassword={showPassword}
@@ -198,10 +189,10 @@ const RegistrationModal = () => {
           />
         </Box>
         <Box sx={styles.policyTermsContainer}>
-          <Link to={'/'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
+          <Link to={'/privacy_policy'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
             {t('modal.registration.privacy_policy')}
           </Link>
-          <Link to={'/'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
+          <Link to={'/terms_and_conditions'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
             {t('modal.registration.terms_and_conditions')}
           </Link>
         </Box>

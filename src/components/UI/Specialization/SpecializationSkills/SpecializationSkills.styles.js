@@ -12,6 +12,7 @@ export const styles = {
     },
   }),
   wrapper: (theme) => ({
+    height: '100%',
     maxWidth: '480px',
     padding: theme.spacing(4),
     backgroundColor: theme.palette.background.level2,
