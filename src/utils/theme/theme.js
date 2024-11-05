@@ -45,7 +45,7 @@ const getDesignTokens = (mode) => ({
       fontSize: 24,
       fontWeight: 500,
       lineHeight: 1.334,
-      letterSpacing: 0,
+      letterSpacing: 0.15,
     },
     h6: {
       fontSize: 20,
@@ -108,6 +108,31 @@ const getDesignTokens = (mode) => ({
     mode,
     ...(mode === DARK_THEME
       ? {
+          faq: {
+            title: '#FFFFFF',
+            questions: {
+              backgroundColor: '#3E3E40',
+              boxShadow: '#3E3E40',
+              question: '#FFFFFF',
+              answer: '#FFFFFF',
+              icon: {
+                color: '#C5C5C6',
+                expanded: '#B78AF7',
+              },
+            },
+            blog: {
+              title: '#FFFFFF',
+              blogItem: {
+                backgroundColor: '#3E3E40',
+                boxShadow: '#3E3E40',
+                title: '#FFFFFF',
+                data: '#C5C5C6',
+                version: '#EFE6FD',
+                text: '#FFFFFF',
+                btn: '#B78AF7',
+              },
+            },
+          },
           scheduleInterview: {
             area: {
               color: '#FFFFFF',
@@ -630,6 +655,31 @@ const getDesignTokens = (mode) => ({
         }
       : {
           ...specializationLight,
+          faq: {
+            title: '#1D1D1D',
+            questions: {
+              backgroundColor: '#F8F8F8',
+              boxShadow: '#C5C5C6',
+              question: '#1D1D1D',
+              answer: '#1D1D1D',
+              icon: {
+                color: '#69696B',
+                expanded: '#8133F1',
+              },
+            },
+            blog: {
+              title: '#1D1D1D',
+              blogItem: {
+                backgroundColor: '#F8F8F8',
+                boxShadow: '#C5C5C6',
+                title: '#1D1D1D',
+                data: '#303032',
+                version: '#360083',
+                text: '#1D1D1D',
+                btn: '#290064',
+              },
+            },
+          },
           selectField: {
             color: '#F8F8F8',
           },

@@ -35,7 +35,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const logoutHandler = async () => {
     try {
       await logout().unwrap();
-      Cookies.remove('JSESSIONID');
+      Cookies.remove('JSESSIONID', { path: '/', domain: 'devrate.org' });
       dispatch(logOut());
       window.location.reload();
     } catch (error) {

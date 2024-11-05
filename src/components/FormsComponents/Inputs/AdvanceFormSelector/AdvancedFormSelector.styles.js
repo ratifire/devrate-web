@@ -29,7 +29,7 @@ export const styles = {
       color: theme.palette.action.active, // Label color when focused
     },
     '& .MuiInputLabel-root.Mui-error': {
-      color: theme.palette.error.main,
+      color: theme.palette.modals.select.labelColor.error,
     },
     '& .MuiFormLabel-asterisk': { color: 'red' },
   }),
@@ -65,4 +65,7 @@ export const styles = {
   autoComplete: {
     width: '100%',
   },
+  icon: (theme) => ({
+    color: theme.palette.specialization.inputAddSpec.icon,
+  })
 };
