@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {
-  Box, Divider,
+  Box,
+  Button,
+  Divider,
   Drawer,
   IconButton,
   Link,
@@ -23,7 +25,6 @@ import { logOut } from '../../../redux/auth/authSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { openModal } from '../../../redux/modal/modalSlice';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
-import { ButtonDef } from '../../FormsComponents/Buttons';
 
 const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();
@@ -56,10 +57,10 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
 
   return (
     <>
-      <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
-        <Box sx={styles.userMenuBox} role="presentation">
+      <Drawer anchor='right' open={isDrawerOpen} onClose={toggleDrawer}>
+        <Box sx={styles.userMenuBox} role='presentation'>
           <Box sx={styles.upperMenu}>
-            <Typography variant="h5" component="div">
+            <Typography variant='h5' component='div'>
               Account
             </Typography>
             <IconButton sx={styles.menuLinkBtn} onClick={toggleDrawer}>
@@ -89,14 +90,17 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
               {index % 2 !== 0 && <Divider key={index} sx={styles.divider} />}
             </React.Fragment>
           ))}
-          <ButtonDef
-            variant="text"
+          <Button
+            variant='text'
             startIcon={<ForumOutlinedIcon sx={styles.iconItem} />}
-            type="button"
+            type='button'
             handlerClick={handleOpenFeedbackModal}
-            correctStyle={styles.btnFeedback}
-            label={t('profile.userMenu.leaveAFeedback')}
-          />
+            sx={styles.btnFeedback}
+          >
+            <Typography sx={styles.btnText} variant='h6'>
+              {t('profile.userMenu.leaveAFeedback')}
+            </Typography>
+          </Button>
         </Box>
       </Drawer>
 
