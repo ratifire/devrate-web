@@ -39,7 +39,6 @@ const ConfirmationModal = () => {
       try {
         const { data } = await confirmEmail(code).unwrap();
         resetForm();
-        console.log('123', data);
         if (data) {
           handleClose();
           setTimeout(() => {

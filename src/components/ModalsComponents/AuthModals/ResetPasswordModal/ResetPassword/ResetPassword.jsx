@@ -129,9 +129,7 @@ const ResetPassword = () => {
             resetForm();
             dispatch(closeModal({ modalName: 'openResetPassword' }));
             dispatch(openModal({ modalName: 'openNotification' }));
-            // dispatch(openModal({ modalName: 'openLogin' }));
           } catch (error) {
-            console.error('Error changing password:', error);
             toast.error('Invalid code. Please try again.', {
               position: 'top-right',
               autoClose: 3000,

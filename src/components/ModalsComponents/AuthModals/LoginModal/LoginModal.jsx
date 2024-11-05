@@ -42,11 +42,9 @@ const LoginModal = () => {
 
   const onSubmit = useCallback(
     async (values, { setSubmitting }) => {
-      console.log('onSubmit called');
       setLoginError(null);
       try {
         const userData = await login({ email: values.email, password: values.password }).unwrap();
-        console.log('Login successful', userData);
         await dispatch(setCredentials({ data: userData, isAuthenticated: false }));
         const cookies = Cookies.get('JSESSIONID');
         if (cookies) {
@@ -54,7 +52,6 @@ const LoginModal = () => {
           navigate('/profile', { replace: true });
         }
       } catch (error) {
-        console.error('Login error:', error);
         let errorMessage = 'Something went wrong';
         if (!error?.originalStatus) {
           errorMessage = 'Invalid email or password';
@@ -89,8 +86,6 @@ const LoginModal = () => {
     },
     [formik]
   );
-
-  console.log('Render LoginModal', { isSubmitting: formik.isSubmitting, isValid: formik.isValid });
 
   return (
     <ModalLayout open={openLogin} setOpen={handleClose}>

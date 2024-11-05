@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ModalLayout from '../../../../../layouts/ModalLayout';
 import styles from './CheckEmail.styles';
 import { useTranslation } from 'react-i18next';
@@ -26,10 +25,6 @@ const CheckEmail = () => {
   const navigate = useNavigate();
   const openCheckEmail = useSelector((state) => state.modal.openCheckEmail);
   const handleClose = () => dispatch(closeModal({ modalName: 'openCheckEmail' }));
-  // const handleCloseAllModal = () => {
-  //   dispatch(closeModal({ modalName: 'openLogin' }));
-  //   dispatch(closeModal({ modalName: 'openCheckEmail' }));
-  // };
 
   const [sendResetEmail] = useResetPasswordMutation();
 
@@ -40,10 +35,7 @@ const CheckEmail = () => {
       dispatch(setEmail(values.email));
       dispatch(closeModal({ modalName: 'openCheckEmail' }));
       dispatch(openModal({ modalName: 'openResetPassword' }));
-      //TODO 'Delete this code, but reconfirm with design first'
-      // dispatch(openModal({ modalName: 'openNotification' }));
     } catch (error) {
-      console.error('Error sending email:', error);
       toast.error('Error sending email. Please try again.', {
         position: 'top-right',
         autoClose: 3000,
