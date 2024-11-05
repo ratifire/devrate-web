@@ -54,7 +54,7 @@ const RegistrationModal = () => {
     });
     resetForm();
     dispatch(closeModal({ modalName: 'openRegistration' }));
-    dispatch(openModal({ modalName: 'openConfirmation', data:email }));
+    dispatch(openModal({ modalName: 'openConfirmation', data: email }));
   };
   const formik = useFormik({
     initialValues,
@@ -189,10 +189,10 @@ const RegistrationModal = () => {
           />
         </Box>
         <Box sx={styles.policyTermsContainer}>
-          <Link to={'/'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
+          <Link to={'/privacy_policy'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
             {t('modal.registration.privacy_policy')}
           </Link>
-          <Link to={'/'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
+          <Link to={'/terms_and_conditions'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
             {t('modal.registration.terms_and_conditions')}
           </Link>
         </Box>

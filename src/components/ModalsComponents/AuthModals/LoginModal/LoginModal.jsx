@@ -157,7 +157,7 @@ const LoginModal = () => {
               onClick={(e) => {
                 e.preventDefault();
                 handleClose();
-                navigate('/#');
+                navigate('/privacy_policy');
               }}
             >
               {t('modal.login.text_privacy_policy')}
@@ -168,7 +168,7 @@ const LoginModal = () => {
               onClick={(e) => {
                 e.preventDefault();
                 handleClose();
-                navigate('/#');
+                navigate('/terms_and_conditions');
               }}
             >
               {t('modal.login.text_privacy_terms')}

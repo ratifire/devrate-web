@@ -7,4 +7,6 @@ export default {
   settings: '/settings',
   bookmark: '/bookmark',
   faq: '/faq',
+  privacy_policy: '/privacy_policy',
+  terms_and_conditions: '/terms_and_conditions',
 };

@@ -19,9 +19,6 @@ const MemoizedResetPassword = memo(ResetPassword);
 const MemoizedNotificationModal = memo(NotificationModal);
 
 const HomeTemplate = ({ children }) => {
-  // const { openLogin, openRegistration, openCheckEmail, openResetPassword } = useSelector((state) => state.modal);
-
-  //TODO 'Delete this code, but reconfirm with design'
   const { openLogin, openRegistration, openCheckEmail, openResetPassword, openNotification } = useSelector(
     (state) => state.modal
   );
