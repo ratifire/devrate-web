@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './EventPopup.styles';
 import CloseIcon from '@mui/icons-material/Close';
@@ -14,16 +14,40 @@ import { Link } from 'react-router-dom';
 import links from '../../../../router/links';
 
 
-const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
-
+const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpdated}) => {
   const { t } = useTranslation();
   const theme = useTheme()
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [deleteEventById] = useDeleteEventByIdMutation();
 
+  const [showCancelButton, setShowCancelButton] = useState(true);
+  const [disableLink, setDisableLink] = useState(false);
+  
+  useEffect(() => {
+    const eventStartTime = new Date(event.startTime);
+    
+    const checkTimeDifference = () => {
+      const currentTime = new Date();
+      const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
+      
+      if (timeDifferenceInMinutes >= 1) {
+        setShowCancelButton(false);
+      }
+      
+      if (timeDifferenceInMinutes >= 60) {
+        setDisableLink(true);
+      }
+    };
+    
+    checkTimeDifference();
+    
+    const timer = setInterval(checkTimeDifference, 60000);
+    
+    return () => clearInterval(timer);
+  }, [event.startTime]);
   const handleCancelInterview = async function () {
 
-    if (!event || !event.id) {
+    if (!event || !event.eventTypeId) {
       console.error('Event object or event ID is missing');
     }
 
@@ -32,8 +56,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
     }
 
     try {
-        await deleteEventById({userId, id: event.id}).unwrap();
-
+        await deleteEventById({userId, id: event.eventTypeId}).unwrap();
+        handleClosePopup()
+      setEventUpdated((prev) => !prev);
       toast.success(t('schedule.deleteEventSuccessMessage'), {
         position: 'top-right',
         autoClose: 3000,
@@ -131,16 +156,16 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       </Box>}
 
       <Box sx={styles.buttonsContainer}>
-        <IconButton component='a' href={event.link} target='_blank' sx={styles.icon}>
+        <IconButton component='a' href={event.link} target='_blank' sx={styles.icon} disabled={disableLink}>
           <LinkIcon />
         </IconButton>
-        <ButtonDef
-          correctStyle={styles.outlined}
-          type={'button'}
-          variant='outlined'
-          handlerClick={handleCancelInterview}
-          label={t('schedule.cancelEventBtn')}
-        />
+        {showCancelButton&&<ButtonDef
+            correctStyle={styles.outlined}
+            type={'button'}
+            variant='outlined'
+            handlerClick={handleCancelInterview}
+            label={t('schedule.cancelEventBtn')}
+        />}
       </Box>
     </Box>
   );
@@ -152,10 +177,13 @@ EventPopup.propTypes = {
   event: PropTypes.object.isRequired,
   popup: PropTypes.object.isRequired,
   popupPosition: PropTypes.string,
+  setEventUpdated: PropTypes.func.isRequired
+  
 };
 EventPopup.defaultProps = {
   handleClosePopup: () => {},
   event: {},
   popup: {},
   popupPosition: 'TOPRIGHT',
+  setEventUpdated: ()=>{}
 };

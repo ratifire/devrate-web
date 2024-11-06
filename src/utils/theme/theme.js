@@ -1,5 +1,6 @@
 import { DARK_THEME } from '../constants/Theme/theme';
 import { specializationDark, specializationLight } from './specialization';
+import { scheduleDark, scheduleLight } from './schedule';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -610,51 +611,16 @@ const getDesignTokens = (mode) => ({
             contrastText: '#ffffff',
             lime: '#DAFE22',
           },
-          schedule: {
-            backgroundColor: '#3E3E40',
-            smallCalendar: {
-              textColor: '#FFFFFF',
-              backgroundColor: '#E0CCFF',
-              switchViewButtonColor: '#A9A9AA',
-              switchViewButtonBackgroundColor: '#CEB0FA',
-              arrowSwitcherColor: '#A9A9AA',
-              arrowSwitcherBackgroundColor: '#CEB0FA',
-            },
-            popup: {
-              backgroundColor: '#252527',
-              popupBorderColor: '#252527',
-              closeIconColor: '#E0CCFF',
-              userInfoBorderColor: '#A9A9AA',
-              titleColor: '#A9A9AA',
-              iconColor: '#E0CCFF',
-            },
-            sideBarEvent: {
-              backgroundColor: '#444446',
-              titleColor: '#FFFFFF',
-              dateAndTimeColor: '#EFE6FD',
-              participant: '#ECECED',
-              hostTitle: '#ECECED',
-              hostLinkColor: '#CEB0FA',
-              participantlinkColor: '#CEB0FA',
-              cancelEventBtnColor: '#CEB0FA',
-            },
-            userLinksEvent: {
-              color: '#CEB0FA',
-              hover: {
-                color: '#8133F1',
-              },
-              active: {
-                color: '#5900D9',
-              },
-            },
-          },
+
           selectField: {
             color: '#303032',
           },
           ...specializationDark,
+          ...scheduleDark,
         }
       : {
           ...specializationLight,
+          ...scheduleLight,
           faq: {
             title: '#1D1D1D',
             questions: {
@@ -1041,44 +1007,6 @@ const getDesignTokens = (mode) => ({
             tooltip: {
               color: '#1D1D1D',
               backgroundColor: '#A9A9AA',
-            },
-          },
-          schedule: {
-            backgroundColor: '#F8F8F8',
-            smallCalendar: {
-              textColor: '#F8F8F8',
-              backgroundColor: '#A066FF',
-              switchViewButtonColor: '#000000',
-              switchViewButtonBackgroundColor: '#CEB0FA',
-              arrowSwitcherColor: '#000000',
-              arrowSwitcherBackgroundColor: '#CEB0FA',
-            },
-            popup: {
-              backgroundColor: '#ECECED',
-              popupBorderColor: '#ECECED',
-              closeIconColor: '#5900D9',
-              userInfoBorderColor: '#C5C5C6',
-              titleColor: '#1D1D1D',
-              iconColor: '#5900D9',
-            },
-            sideBarEvent: {
-              backgroundColor: '#F8F8F8',
-              titleColor: '#1D1D1D',
-              dateAndTimeColor: '#303032',
-              participant: '#444446',
-              hostTitle: '#444446',
-              hostLinkColor: '#6200EE',
-              participantlinkColor: '#6200EE',
-              cancelEventBtnColor: '#6200EE',
-            },
-            userLinksEvent: {
-              color: '#6200EE',
-              hover: {
-                color: '#360083',
-              },
-              active: {
-                color: '#290064',
-              },
             },
           },
           experienceSkillSect: {
