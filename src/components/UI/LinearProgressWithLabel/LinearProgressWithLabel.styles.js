@@ -24,7 +24,7 @@ export const styles = {
     color: theme.palette.primary['400'],
     '>span': {
       borderRadius: 3,
-      background: theme.palette.specialization.progress,
+      background: theme.palette.specialization.progress.color,
     },
   }),
   m: (theme) => ({

@@ -15,8 +15,6 @@ import {
 import { DateTime } from 'luxon';
 import EventPopup from './EventPopup';
 import { useTheme } from '@mui/material/styles';
-import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer.tsx";
-
 
 
  const Schedule = () => {
@@ -31,6 +29,7 @@ import CustomScrollContainer from "./CustomScrollContainer/CustomScrollContainer
   const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
   const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
+
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [events, setEvents] = useState([]);
   const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
@@ -256,13 +255,9 @@ const applyRequiredStyles = (calendarApi, theme) => {
         const fcScroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
         if (fcScroller) {
             Object.assign(fcScroller.style, {
-                overflowY: 'scroll',
-                scrollbarWidth: 'thin',
-                scrollbarColor: `${theme.palette.scroll.scrollWrapp.backgroundColor} ${theme.palette.scroll.scrollEl.backgroundColor}`,
-                '--webkit-scrollbar-button': 'display: none',
-                '--webkit-scrollbar': '10px',
-                '--webkit-scrollbar-track': `background: ${theme.palette.scroll.scrollWrapp.backgroundColor}`,
-                '--webkit-scrollbar-thumb': `background-color: ${theme.palette.scroll.scrollEl.backgroundColor}; border-radius: 10px`
+                '::-webkit-scrollbar': '10px',
+                '::-webkit-scrollbar-track': `background: ${theme.palette.scroll.scrollWrapp.backgroundColor}`,
+                '::-webkit-scrollbar-thumb': `background-color: ${theme.palette.scroll.scrollEl.backgroundColor}; border-radius: 10px`
             });
         }
         

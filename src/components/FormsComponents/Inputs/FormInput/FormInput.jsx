@@ -23,6 +23,8 @@ const FormInput = ({
   iconStyle,
   autoComplete,
   extraProps,
+  signupPassword,
+  handleKeyDown,
 }) => {
   const id = useMemo(() => uuid(), []);
   const { t } = useTranslation();
@@ -68,6 +70,7 @@ const FormInput = ({
         label={t(label)}
         placeholder={t(placeholder)}
         inputRef={inputRef}
+        onKeyDown={handleKeyDown}
         endAdornment={
           type === 'password' && (
             <PasswordVisibilityToggle
@@ -81,7 +84,7 @@ const FormInput = ({
         }
         {...extraProps}
       />
-      {name === 'password' && (
+      {signupPassword && (
         <FormHelperText
           id={id}
           sx={{ position: 'absolute', bottom: '-21px', left: '0px', color: getHelperTextColor() }}
@@ -89,7 +92,7 @@ const FormInput = ({
           {t(helperText === 'modal.registration.required' ? helperText : 'modal.registration.password_tooltip')}
         </FormHelperText>
       )}
-      {error && name !== 'password' && (
+      {error && !signupPassword && (
         <FormHelperText id={id} sx={styles.textHelper}>
           {t(helperText)}
         </FormHelperText>
@@ -115,6 +118,8 @@ FormInput.propTypes = {
   iconStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   autoComplete: PropTypes.string,
   extraProps: PropTypes.object,
+  signupPassword: PropTypes.bool,
+  handleKeyDown: PropTypes.func
 };
 
 FormInput.defaultProps = {

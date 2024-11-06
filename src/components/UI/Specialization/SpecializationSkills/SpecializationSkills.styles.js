@@ -12,7 +12,11 @@ export const styles = {
     },
   }),
   wrapper: (theme) => ({
+    height: '100%',
     maxWidth: '480px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(3),
     padding: theme.spacing(4),
     backgroundColor: theme.palette.background.level2,
     borderRadius: 2,
@@ -21,7 +25,7 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(2),
   }),
   skillsContainer: (theme) => ({
     maxHeight: '312px',
@@ -39,13 +43,13 @@ export const styles = {
       backgroundColor: theme.palette.scroll.scrollEl,
     },
   }),
-  markWrapper: (theme) => ({
+  markWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: theme.spacing(3),
+    marginTop: 'auto',
     paddingRight: '10px',
-  }),
+  },
   mark: (theme) => ({
     color: theme.palette.specialization.mark.color,
   }),
