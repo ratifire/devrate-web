@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+  import React, { useMemo, useState } from 'react';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../../redux/modal/modalSlice';
@@ -36,7 +36,7 @@ const WorkExperienceModal = () => {
   const { t } = useTranslation();
 
   const { modalData } = useSelector((state) => state.modal);
-
+   console.log(modalData?.responsibilities)
   const initialValues = {
     position: modalData?.position || '',
     companyName: modalData?.companyName || '',

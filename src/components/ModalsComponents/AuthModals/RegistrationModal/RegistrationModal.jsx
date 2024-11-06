@@ -34,8 +34,15 @@ const RegistrationModal = () => {
   const openRegistration = useSelector((state) => state.modal.openRegistration);
   const handleClose = () => dispatch(closeModal({ modalName: 'openRegistration' }));
   const { data: userCountries } = useGetCountryListQuery();
+
   const handleChangeCountry = (value) => {
     setCountry(value);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
   };
 
   useEffect(() => {
@@ -93,9 +100,9 @@ const RegistrationModal = () => {
           label='modal.registration.email'
           helperText={formik.touched.email && formik.errors.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
-          countries={userCountries}
           autoComplete='off'
           placeholder='example@example.com'
+          handleKeyDown={handleKeyDown}
         />
         <Box sx={styles.inputNameContainer}>
           <FormInput
