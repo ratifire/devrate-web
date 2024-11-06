@@ -3,7 +3,6 @@
 import { apiSlice } from '../services/api/apiSlice';
 
 export const SpecializationApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['Specialization', 'Masteries', 'MainMastery', 'HardSkills', 'SoftSkills'],
   endpoints: (builder) => ({
     getSpecializationByUserId: builder.query({
       query: (userId) => `/users/${userId}/specializations`,
@@ -105,7 +104,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       providesTags: ['SoftSkills'],
     }),
 
-    updateSpecializationAsMainById: builder.mutation({
+    updateSpecializationAsMainById: builder.mutation({ // Вот здесь обновляется mainMastery
       query({ id, name, main }) {
         return {
           url: `/specializations/${id}/set-main`,
@@ -113,7 +112,10 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           body: { id, name, main },
         };
       },
-      invalidatesTags: (result, error, arg) => [{ type: 'Specialization', id: arg.id }],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Specialization', id: arg.id },
+        { type: 'PersonalUser',  id: arg.userId }
+      ],
     }),
     
     getInterviewRequest: builder.query({

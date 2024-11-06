@@ -1,7 +1,6 @@
 import { apiSlice } from '../../services/api/apiSlice';
 
 export const personalApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['PersonalUser'],
   endpoints: (builder) => ({
     getPersonalUser: builder.query({
       query: (userId) => `/users/${userId}`,
