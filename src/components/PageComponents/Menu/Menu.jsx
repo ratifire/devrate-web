@@ -37,6 +37,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
     try {
       await logout().unwrap();
       Cookies.remove('JSESSIONID', { path: '/', domain: 'devrate.org' });
+      Cookies.remove('JSESSIONID', { path: '/', domain: 'localhost' });
       dispatch(logOut());
       window.location.reload();
     } catch (error) {
