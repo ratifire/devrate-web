@@ -1,0 +1,35 @@
+.faq {
+  margin-bottom: 160px;
+
+  &__title {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 150%;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    position: relative;
+
+    &:before {
+      content: url("../../assets/fqa-border.svg");
+      position: absolute;
+      top: 24px;
+      bottom: 0;
+    }
+  }
+
+  &__menu {
+
+  }
+
+  &__item {
+
+  }
+
+  &__header {
+
+  }
+
+  &__content {
+
+  }
+}
