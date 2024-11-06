@@ -43,6 +43,7 @@ const Skills = ({ id, tab }) => {
   const handleChange = (event) => {
     const value = event.target.value;
     setSpecCurrent(value);
+    setStrSearch('');
   };
 
   const handleOpen = () => {
@@ -118,9 +119,11 @@ const Skills = ({ id, tab }) => {
               ))}
             </Select>
           </Box>
-          <Typography sx={styles.text} className={level} variant='subtitle2'>
-            Level <span>{level}</span>
-          </Typography>
+          {!!level && (
+            <Typography sx={styles.text} className={level} variant='subtitle2'>
+              Level <span>{level}</span>
+            </Typography>
+          )}
         </Box>
         <Box sx={styles.list}>
           {strSearch.trim() === ''
