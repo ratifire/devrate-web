@@ -2,7 +2,7 @@ export const scheduleLight = {
   schedule: {
     backgroundColor: '#F8F8F8',
     contentWrapper: {
-      backgroundColor: '#fff'
+      backgroundColor: '#fff',
     },
     smallCalendar: {
       textColor: '#F8F8F8',

@@ -1,7 +1,7 @@
 export const specializationLight = {
   specialization: {
     subtitle: {
-      color: '#252527'
+      color: '#252527',
     },
     progress: {
       color: '#8133F1',
@@ -47,13 +47,13 @@ export const specializationLight = {
       deco: '#FFF',
     },
     star: {
-      color: '#8133F1'
+      color: '#8133F1',
     },
     activeSpec: {
       color: '#8133F1',
     },
     mark: {
-      color: '#5900D9'
+      color: '#5900D9',
     },
     dropDown: {
       color: '#8133F1',
@@ -68,4 +68,4 @@ export const specializationLight = {
       icon: '#444446',
     },
   },
-}
+};
