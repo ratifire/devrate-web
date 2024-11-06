@@ -255,10 +255,6 @@ const applyRequiredStyles = (calendarApi, theme) => {
         const fcScroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
         if (fcScroller) {
             Object.assign(fcScroller.style, {
-                // overflowY: 'scroll',
-                // scrollbarWidth: 'thin',
-                // scrollbarColor: `${theme.palette.scroll.scrollWrapp.backgroundColor} ${theme.palette.scroll.scrollEl.backgroundColor}`,
-                // '--webkit-scrollbar-button': 'display: none',
                 '::-webkit-scrollbar': '10px',
                 '::-webkit-scrollbar-track': `background: ${theme.palette.scroll.scrollWrapp.backgroundColor}`,
                 '::-webkit-scrollbar-thumb': `background-color: ${theme.palette.scroll.scrollEl.backgroundColor}; border-radius: 10px`
