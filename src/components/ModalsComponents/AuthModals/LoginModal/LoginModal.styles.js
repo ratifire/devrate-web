@@ -1,9 +1,13 @@
 const styles = {
   title: (theme) => ({
+    fontFamily: 'Zen Dots, sans-serif',
+    marginBottom: theme.spacing(2),
     color: theme.palette.text.primary,
-    textAlign: 'center',
-    marginTop: '48px',
-    marginBottom: '36px',
+  }),
+  subtitle: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
+    color: theme.palette.neutral[100],
+    marginBottom: theme.spacing(4),
   }),
   textLink: {
     fontSize: '14px',
@@ -11,14 +15,14 @@ const styles = {
     color: '#f1f1f180',
     textAlign: 'center',
     lineHeight: 1.5,
-    marginBottom: '36px',
+    marginBottom: '24px',
   },
   errorWrapper: (theme) => ({
-    display: 'flex', 
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: theme.spacing(4),
-    color: theme.palette.error.main,   
+    color: theme.palette.error.main,
   }),
   errorIcon: (theme) => ({
     marginRight: theme.spacing(2),
@@ -36,34 +40,45 @@ const styles = {
     marginBottom: theme.spacing(4),
   }),
   wrapperBtn: {
-    marginTop: '36px',
-    marginBottom: '36px',
+    marginBottom: '16px',
   },
   policyText: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
+    fontSize: '18px',
+    fontLineHeight: 1.5,
     display: 'block',
     textAlign: 'center',
     width: '100%',
-    color: theme.palette.text.primary,
-    marginBottom: theme.spacing(4),
-    
+    color: theme.palette.neutral[100],
   }),
-  turnBackContainer: {
+  policyLinkBox: {
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
-    
+    marginBottom: 0,
   },
   turnBackText: (theme) => ({
     color: theme.palette.text.primary,
     marginRight: theme.spacing(2),
-    
   }),
   turnBackLink: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
     textDecoration: 'underline',
-    color: theme.palette.text.primary,
-    paddingY: 0,
-    paddingX: 0,
+    color: theme.palette.action.active,
+    fontWeight: 600,
+    fontSize: '18px',
+    fontLineHeight: 1.5,
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  }),
+
+  policyLink: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
+    textDecoration: 'underline',
+    color: theme.palette.action.active,
+    fontSize: '18px',
+    fontLineHeight: 1.5,
     '&:hover': {
       textDecoration: 'underline',
     },

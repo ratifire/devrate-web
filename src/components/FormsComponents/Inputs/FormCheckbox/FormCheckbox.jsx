@@ -3,31 +3,25 @@ import { styles } from './FormCheckbox.styles';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import {CustomCheckboxIcon, CustomCheckedIcon} from '../../../UI/CustomCheckbox/CustomCheckbox';
+import { CustomCheckboxIcon, CustomCheckedIcon } from '../../../UI/CustomCheckbox/CustomCheckbox';
 
 const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, workExperience }) => {
   const { t } = useTranslation();
-
-
 
   const textStyles = workExperience ? styles.newsAgreementTextWorkExperience : styles.newsAgreementText;
   return (
     <FormControl error={error} variant='standard'>
       <FormControlLabel
         control={
-        <Checkbox
-          icon={<CustomCheckboxIcon />}
-          checkedIcon={<CustomCheckedIcon />}
-          checked={checked}
-          onChange={changeHandler}
-          name={name}
-        />}
-        label={
-        <Typography
-          sx={textStyles}
-        >
-          {t(label)}
-        </Typography>}
+          <Checkbox
+            icon={<CustomCheckboxIcon />}
+            checkedIcon={<CustomCheckedIcon />}
+            checked={checked}
+            onChange={changeHandler}
+            name={name}
+          />
+        }
+        label={<Typography sx={textStyles}>{t(label)}</Typography>}
       />
       <FormHelperText>{t(helperText)}</FormHelperText>
     </FormControl>
@@ -41,7 +35,7 @@ FormCheckbox.propTypes = {
   label: PropTypes.string.isRequired,
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
-  workExperience: PropTypes.bool
+  workExperience: PropTypes.bool,
 };
 FormCheckbox.defaultProps = {
   checked: false,

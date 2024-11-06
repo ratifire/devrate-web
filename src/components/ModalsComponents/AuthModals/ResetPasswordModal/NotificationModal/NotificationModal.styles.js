@@ -1,19 +1,22 @@
 const styles = {
-    title: (theme) => ({
-      color: theme.palette.text.primary,
-      textAlign: 'center',
-      marginBottom: theme.spacing(4),
-    }),
-    message: (theme) => ({
-      color: theme.palette.text.secondary,
-      textAlign: 'center',
-      marginBottom: theme.spacing(4),
-    }),
-    wrapperBtn: (theme) => ({
-      marginTop: theme.spacing(4),
-      marginBottom: theme.spacing(4),
-      width: '100%'
-    }),
-  };
+  title: (theme) => ({
+    fontFamily: 'Zen Dots, sans-serif',
+    marginBottom: theme.spacing(2),
+    color: theme.palette.text.primary,
+    fontWeight: 400,
+    fontSize: '24px',
+    lineHeight: 1.5,
+  }),
+  message: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
+    fontSize: '18px',
+    color: theme.palette.neutral[100],
+    marginBottom: theme.spacing(4),
+  }),
+  wrapperBtn: (theme) => ({
+    marginBottom: theme.spacing(4),
+    width: '100%',
+  }),
+};
 
-  export default styles;
+export default styles;

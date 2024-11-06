@@ -16,7 +16,7 @@ export const styles = {
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
-      backgroundColor:  theme.palette.background.level2,
+      backgroundColor: theme.palette.schedule.contentWrapper.backgroundColor,
       backgroundImage: 'none',
     },
   }),
@@ -24,19 +24,22 @@ export const styles = {
     gridColumn: '1/13',
     gridRow: '1/2',
     padding: '24px',
+    backgroundImage: 'none',
+    boxShadow: 'none',
   },
   scheduleTitle: (theme) => ({
-      marginLeft: theme.spacing(4),
-      marginBottom: theme.spacing(3),
-      fontFamily: theme.typography.fontFamily,
-      fontWeight: 500,
-      lineHeight: '41.99px',
-      letterSpacing: '0.25px',
-}),
+    marginLeft: theme.spacing(4),
+    marginBottom: theme.spacing(3),
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: 500,
+    lineHeight: '41.99px',
+    letterSpacing: '0.25px',
+  }),
   calendarWrapper: (theme) => ({
     backgroundColor: theme.palette.schedule.backgroundColor,
-     borderRadius: 2,
+    boxShadow: 'none',
+    borderRadius: 2,
     backgroundImage: 'none',
 
-  })
-}
+  }),
+};

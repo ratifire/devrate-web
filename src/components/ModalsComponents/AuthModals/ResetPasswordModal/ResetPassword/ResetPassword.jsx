@@ -11,7 +11,8 @@ import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import styles from './ResetPassword.styles';
 import { resetPasswordSchema } from '../../../../../utils/valadationSchemas/index';
-import {toast} from "react-toastify";
+import { toast } from 'react-toastify';
+import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
 
 const initialValues = {
   newPassword: '',
@@ -25,6 +26,10 @@ const ResetPassword = () => {
   const openResetPassword = useSelector((state) => state.modal.openResetPassword);
   const email = useSelector((state) => state.email.email);
   const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
+  const handleCloseAllModal = () => {
+    dispatch(closeModal({ modalName: 'openLogin' }));
+    dispatch(closeModal({ modalName: 'openCheckEmail' }));
+  };
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -40,13 +45,13 @@ const ResetPassword = () => {
     event.preventDefault();
     const pastedData = event.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
     const newCode = [...formik.values.code];
-    
+
     for (let i = 0; i < pastedData.length; i++) {
       newCode[i] = pastedData[i];
     }
-    
+
     formik.setFieldValue('code', newCode);
-    
+
     const focusIndex = Math.min(pastedData.length, fieldCount - 1);
     inputRefs.current[focusIndex].focus();
   };
@@ -79,7 +84,7 @@ const ResetPassword = () => {
       inputRefs.current[index + 1].focus();
     } else if (key === 'v' && (event.ctrlKey || event.metaKey)) {
       event.preventDefault();
-      navigator.clipboard.readText().then(text => {
+      navigator.clipboard.readText().then((text) => {
         handlePaste({ clipboardData: { getData: () => text }, preventDefault: () => {} }, formik);
       });
     }
@@ -88,18 +93,16 @@ const ResetPassword = () => {
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
       <Typography variant='subtitle3' sx={styles.title}>
-        {t('modal.resetPassword.title')}
+        {changeColorOfLastTitleWord(t('modal.resetPassword.title'))}
       </Typography>
       <Box sx={styles.mainTextWrapper}>
         <Typography variant='subtitle3' sx={styles.mainText}>
-          {t('modal.confirmation.main_text1')}{' '}
+          {t('modal.confirmation.main_text1')}
+          <br />
           <Typography variant='subtitle3' component='span' sx={styles.userEmail}>
             {email.replace(/(?<=.{1}).(?=[^@]*?.@)/g, '*')}
           </Typography>
           .
-        </Typography>
-        <Typography variant='subtitle3' sx={styles.mainText}>
-          {t('modal.confirmation.main_text2')}
         </Typography>
       </Box>
 
@@ -113,36 +116,35 @@ const ResetPassword = () => {
               newPassword: values.newPassword,
             };
             await changePassword(requestData).unwrap();
-             toast('Password changed successfully!', {
-              position: "top-right",
+            toast('Password changed successfully!', {
+              position: 'top-right',
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              theme: "dark",
-             });
+              theme: 'dark',
+            });
             resetForm();
             dispatch(closeModal({ modalName: 'openResetPassword' }));
-            dispatch(openModal({ modalName: 'openLogin' }));
+            dispatch(openModal({ modalName: 'openNotification' }));
           } catch (error) {
-            console.error('Error changing password:', error);
-               toast.error('Invalid code. Please try again.', {
-                  position: "top-right",
-                  autoClose: 3000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-              });
+            toast.error('Invalid code. Please try again.', {
+              position: 'top-right',
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'dark',
+            });
           }
         }}
       >
         {(formik) => (
-          <Form autoComplete='off' style={{ width: '100%' }}>
+          <Form className='landingForm' autoComplete='off' style={{ width: '100%' }}>
             <Box sx={styles.resetPasswordForm}>
               {[...Array(fieldCount)].map((_, index) => (
                 <React.Fragment key={index}>
@@ -159,7 +161,7 @@ const ResetPassword = () => {
                       style: { textAlign: 'center' },
                       maxLength: 1,
                       autoComplete: 'off',
-                      'data-lpignore': 'true'
+                      'data-lpignore': 'true',
                     }}
                     sx={styles.resetPasswordForm['& .MuiOutlinedInput-root']}
                   />
@@ -180,6 +182,7 @@ const ResetPassword = () => {
               mouseDownHandler={handleMouseDownPassword}
               iconStyle={styles.iconStyle}
               autoComplete='new-password'
+              signupPassword
               extraProps={{
                 'data-lpignore': 'true',
                 'data-form-type': 'other',
@@ -218,15 +221,21 @@ const ResetPassword = () => {
         )}
       </Formik>
 
-      <Typography variant='subtitle3' sx={styles.text}>
-        {t('modal.resetPassword.text_privacy')}
-      </Typography>
-      <Typography variant='subtitle3' sx={styles.textLink}>
-        {t('modal.resetPassword.return_on')}
-        <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleClose}>
-          {t('modal.resetPassword.home_page')}
-        </Link>
-      </Typography>
+      <Box variant='subtitle3' sx={styles.box}>
+        <Typography variant='subtitle3' sx={styles.bottom_subtitle}>
+          {t('modal.checkEmailResetPassword.subtitle3')}
+        </Typography>
+
+        <Typography variant='subtitle3' sx={styles.bottom_subtitle}>
+          <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
+            {t('modal.checkEmailResetPassword.resend_link')}
+          </Link>{' '}
+          {t('modal.checkEmailResetPassword.middle_text')}
+          <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
+            {t('modal.checkEmailResetPassword.change_email')}
+          </Link>
+        </Typography>
+      </Box>
     </ModalLayout>
   );
 };

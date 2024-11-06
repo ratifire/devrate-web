@@ -25,11 +25,11 @@ export const styles = {
       border: 'none',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.background.level2,
+        backgroundColor: theme.palette.neutral['400'],
       },
       ':active': {
         border: 'none',
-        backgroundColor: theme.palette.neutral['800'],
+        backgroundColor: theme.palette.neutral['400'],
       },
     },
     ' .MuiButtonGroup-firstButton': {
@@ -37,11 +37,11 @@ export const styles = {
       border: 'none',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.background.level2,
+        backgroundColor: theme.palette.neutral['400'],
       },
       ':active': {
         border: 'none',
-        backgroundColor: theme.palette.neutral['800'],
+        backgroundColor: theme.palette.neutral['400'],
       },
     },
     ' .MuiButtonGroup-middleButton': {
@@ -49,15 +49,16 @@ export const styles = {
       border: 'none',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.background.level2,
+        backgroundColor: theme.palette.neutral['400'],
       },
       ':active': {
         border: 'none',
-        backgroundColor: theme.palette.neutral['800'],
+        backgroundColor: theme.palette.neutral['400'],
       },
     },
     ' .MuiButton-contained': {
       backgroundColor: theme.palette.specialization.level.btn,
+      color: `${theme.palette.specialization.level.colorActive} !important`,
       cursor: 'auto',
       ':hover': {
         border: 'none',
@@ -74,8 +75,9 @@ export const styles = {
       },
     },
   }),
-  button: {
+  button: (theme) => ({
     padding: '9px 0px 8px',
+    color: theme.palette.specialization.level.color,
     textTransform: 'lowercase',
     display: 'inline-block',
     lineHeight: '23px',
@@ -85,5 +87,5 @@ export const styles = {
     ':hover': {
       border: 'none',
     },
-  },
+  })
 };

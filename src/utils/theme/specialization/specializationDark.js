@@ -38,6 +38,8 @@ export const specializationDark = {
     level: {
       btnGroup: '#3E3E40',
       btn: '#8133F1',
+      color: '#FFFFFF',
+      colorActive: '#FFFFFF',
     },
     addSpec: {
       color: '#3E3E40',
@@ -59,6 +61,11 @@ export const specializationDark = {
     btnEditSpec: {
       color: '#C5C5C6',
       border: '#444446',
+    },
+    inputAddSpec: {
+      backgroundColor: '#8133F1',
+      color: '#FFFFFF',
+      icon: '#FFFFFF',
     }
   },
 };

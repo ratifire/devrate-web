@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {
-  Box, Divider,
+  Box,
+  Button,
+  Divider,
   Drawer,
   IconButton,
   Link,
@@ -23,7 +25,6 @@ import { logOut } from '../../../redux/auth/authSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { openModal } from '../../../redux/modal/modalSlice';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
-import { ButtonDef } from '../../FormsComponents/Buttons';
 
 const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();
@@ -35,7 +36,8 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const logoutHandler = async () => {
     try {
       await logout().unwrap();
-      Cookies.remove('JSESSIONID');
+      Cookies.remove('JSESSIONID', { path: '/', domain: 'devrate.org' });
+      Cookies.remove('JSESSIONID', { path: '/', domain: 'localhost' });
       dispatch(logOut());
       window.location.reload();
     } catch (error) {
@@ -45,6 +47,13 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
 
   const handleOpenFeedbackModal = () => {
     dispatch(openModal({ modalName: 'feedbackProjectModal' }));
+  };
+  // const order = (item) => `order: ${item === 'profile.userMenu.logout' ? 2 : 0}`;
+
+  const handleLinkClick = (link) => {
+    if (link.name === 'profile.userMenu.logout') {
+      logoutHandler();
+    }
   };
 
   return (
@@ -63,12 +72,11 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
           {links.map((link, index) => (
             <React.Fragment key={link.path}>
               <Link
-                key={link.path}
                 to={link.path}
                 component={RouterLink}
                 sx={styles.menuLink}
                 target={link.target}
-                {...(link.name === 'profile.userMenu.logout' ? { onClick: logoutHandler } : {})}
+                onClick={() => handleLinkClick(link)}
               >
                 <ListItem disablePadding>
                   <ListItemButton sx={styles.listItemButton}>
@@ -79,21 +87,24 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
                   </ListItemButton>
                 </ListItem>
               </Link>
-              {index % 2 !== 0 && <Divider key={index} sx={styles.divider} />}
+              {index % 2 !== 0 && <Divider sx={styles.divider} />}
             </React.Fragment>
           ))}
-          <ButtonDef
+          <Button
             variant='text'
             startIcon={<ForumOutlinedIcon sx={styles.iconItem} />}
             type='button'
-            handlerClick={handleOpenFeedbackModal}
-            correctStyle={styles.btnFeedback}
-            label={t('profile.userMenu.leaveAFeedback')}
-          />
+            onClick={handleOpenFeedbackModal}
+            sx={styles.btnFeedback}
+          >
+            <Typography sx={styles.btnText} variant='h6'>
+              {t('profile.userMenu.leaveAFeedback')}
+            </Typography>
+          </Button>
         </Box>
       </Drawer>
 
-      {feedbackProjectModal && <FeedbackProjectModal/>}
+      {feedbackProjectModal && <FeedbackProjectModal />}
     </>
   );
 };

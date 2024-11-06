@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import { styles } from './EventPopup.styles';
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,6 +19,32 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
   const theme = useTheme()
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [deleteEventById] = useDeleteEventByIdMutation();
+
+  const [showCancelButton, setShowCancelButton] = useState(true);
+  const [disableLink, setDisableLink] = useState(false);
+  
+  useEffect(() => {
+    const eventStartTime = new Date(event.startTime);
+    
+    const checkTimeDifference = () => {
+      const currentTime = new Date();
+      const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
+      
+      if (timeDifferenceInMinutes >= 1) {
+        setShowCancelButton(false);
+      }
+      
+      if (timeDifferenceInMinutes >= 60) {
+        setDisableLink(true);
+      }
+    };
+    
+    checkTimeDifference();
+    
+    const timer = setInterval(checkTimeDifference, 60000);
+    
+    return () => clearInterval(timer);
+  }, [event.startTime]);
   const handleCancelInterview = async function () {
 
     if (!event || !event.eventTypeId) {
@@ -130,16 +156,16 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
       </Box>}
 
       <Box sx={styles.buttonsContainer}>
-        <IconButton component='a' href={event.link} target='_blank' sx={styles.icon}>
+        <IconButton component='a' href={event.link} target='_blank' sx={styles.icon} disabled={disableLink}>
           <LinkIcon />
         </IconButton>
-        <ButtonDef
-          correctStyle={styles.outlined}
-          type={'button'}
-          variant='outlined'
-          handlerClick={handleCancelInterview}
-          label={t('schedule.cancelEventBtn')}
-        />
+        {showCancelButton&&<ButtonDef
+            correctStyle={styles.outlined}
+            type={'button'}
+            variant='outlined'
+            handlerClick={handleCancelInterview}
+            label={t('schedule.cancelEventBtn')}
+        />}
       </Box>
     </Box>
   );

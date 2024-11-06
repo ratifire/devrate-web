@@ -40,8 +40,8 @@ export default [
     target: '_self',
   },
   {
-    name: 'profile.userMenu.bookmark',
-    path: links.bookmark,
+    name: 'profile.userMenu.faq',
+    path: links.faq,
     icon: BookmarkIcon,
     target: '_self',
   },

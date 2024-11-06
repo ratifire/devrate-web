@@ -17,16 +17,16 @@ export const styles = {
     ' > div': {
       borderRadius: 2,
       backgroundColor: theme.palette.pagesSections.backgroundColor,
+      boxShadow: 'none',
+      backgroundImage: 'none',
     },
   }),
   specialisationCategories: {
-    backgroundImage: 'none',
     gridColumn: '1/13',
     gridRow: '1/2',
     minHeight: 202,
   },
   specialisationHardSkills: {
-    backgroundImage: 'none',
     gridColumn: '1/5',
     gridRow: '2/4',
     display: 'flex',
@@ -34,12 +34,10 @@ export const styles = {
     flexShrink: 1,
   },
   specialisationLevel: {
-    backgroundImage: 'none',
     gridColumn: '5/9',
     gridRow: '2/3',
   },
   specialisationInterviewParticipation: {
-    backgroundImage: 'none',
     gridColumn: '9/13',
     gridRow: '2/3',
   },
@@ -48,7 +46,6 @@ export const styles = {
     gridRow: '4/5',
   },
   specialisationStatistics: {
-    backgroundImage: 'none',
     gridColumn: '5/13',
     gridRow: '3/6',
   },
@@ -71,25 +68,19 @@ export const styles = {
   level: {
     gridColumn: '1/5',
     gridRow: '1/2',
-    height: 250, //To be removed before merge
-    backgroundImage: 'none',
   },
   averageSkillsScore: {
     gridColumn: '5/13',
     gridRow: '1/2',
-    height: 250, //To be removed before merge
-    backgroundImage: 'none',
   },
   hardSkillsByProductivity: {
     gridColumn: '1/4',
     gridRow: '2/3',
     width: '300px',
     padding: '18px',
-    backgroundImage: 'none',
   },
   interview: {
     gridColumn: '4/13',
     gridRow: '2/3',
-    backgroundImage: 'none',
   },
 };

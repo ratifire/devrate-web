@@ -1,5 +1,5 @@
 const formatSearchQuery = (str) => {
-  return str.replace(/[^a-zA-Zа-щА-ЩґҐєЄіІїЇьЬ\s\-']/g, '');
+  return str.replace(/[^\p{L}\s\-'’]+/gu, '');
 };
 
 export default formatSearchQuery;
