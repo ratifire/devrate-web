@@ -38,7 +38,10 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           method: 'DELETE',
         };
       },
-      invalidatesTags: (result, error, { id }) => [{ type: 'Specialization', id }],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Specialization', id: arg.id },
+        { type: 'PersonalUser',  id: arg.userId }
+      ],
     }),
     getUserAllSpecialization: builder.query({
       query: (id) => `/users/${id}/specializations/main-mastery/skills`,
