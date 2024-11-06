@@ -1,5 +1,5 @@
 .faq {
-  margin-bottom: 160px;
+  margin-bottom: 145px;
 
   &__title {
     font-weight: 400;
@@ -10,26 +10,90 @@
     position: relative;
 
     &:before {
-      content: url("../../assets/fqa-border.svg");
+      content: '';
       position: absolute;
-      top: 24px;
-      bottom: 0;
+      width: 113px;
+      height: 9px;
+      left: 0;
+      bottom: -10px;
+      background-image: url("../../assets/fqa-border.svg");
     }
   }
 
   &__menu {
+    display: flex;
+    gap: 40px; //25
 
+    @media screen and (max-width: 1380px) {
+      justify-content: space-between;
+    }
+
+    @media screen and (max-width: 1250px) {
+      flex-direction: column;
+    }
   }
 
-  &__item {
+  &__items {
+    flex: 1 1 50%;
 
+    @media screen and (max-width: 1380px) {
+      flex: 0 0 max(600px);
+    }
+  }
+
+  &__itemsContent {
   }
 
   &__header {
+    padding: 36px;
+    border-bottom: 1px solid #69696B;
+    position: relative;
 
+    &::before {
+      content: "";
+      position: absolute;
+      top: 34px;
+      left: 0;
+      bottom: 0;
+      width: 28px;
+      height: 36px;
+      background-image: url("../../assets/fqa-svg.svg");
+    }
   }
 
-  &__content {
-
+  &__iconBottom {
+    position: absolute;
+    top: 38px;
+    right: 0;
+    bottom: 0;
+    width: 36px;
+    height: 36px;
   }
+
+  &__question {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 150%;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+  }
+
+  &__number {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 150%;
+    color: #EE7538;
+    margin-right: 8px;
+  }
+
+  &__answer {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    color: #C5C5C6;
+    max-width: 736px;
+    padding: 0 54px;
+  }
+
+
 }
