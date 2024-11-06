@@ -5,13 +5,21 @@ export const styles = {
     fontSize: '14px',
   },
   demoAppMain: theme=>({
-    // display: "none",
     flexGrow: '1',
     padding: theme.spacing(4),
-  }),
-  demoAppMainOn: theme=>({
-    flexGrow: '1',
-    padding: theme.spacing(4),
+    '& .fc-scroller.fc-scroller-liquid-absolute': {
+      '&::-webkit-scrollbar': {
+        width: 10,
+      },
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: theme.palette.schedule.scroll.track,
+        borderRadius: 8,
+      },
+      '&::-webkit-scrollbar-thumb': {
+        borderRadius: 6,
+        backgroundColor: theme.palette.schedule.scroll.thumb,
+      },
+    }
   }),
   fc: {
     margin: '0 auto',

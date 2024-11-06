@@ -25,11 +25,11 @@ export const styles = {
       border: 'none',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.neutral['200'],
+        backgroundColor: theme.palette.neutral['400'],
       },
       ':active': {
         border: 'none',
-        backgroundColor: theme.palette.neutral['800'],
+        backgroundColor: theme.palette.neutral['400'],
       },
     },
     ' .MuiButtonGroup-firstButton': {
@@ -37,11 +37,11 @@ export const styles = {
       border: 'none',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.neutral['200'],
+        backgroundColor: theme.palette.neutral['400'],
       },
       ':active': {
         border: 'none',
-        backgroundColor: theme.palette.neutral['800'],
+        backgroundColor: theme.palette.neutral['400'],
       },
     },
     ' .MuiButtonGroup-middleButton': {
@@ -49,11 +49,11 @@ export const styles = {
       border: 'none',
       ':hover': {
         border: 'none',
-        backgroundColor: theme.palette.neutral['200'],
+        backgroundColor: theme.palette.neutral['400'],
       },
       ':active': {
         border: 'none',
-        backgroundColor: theme.palette.neutral['800'],
+        backgroundColor: theme.palette.neutral['400'],
       },
     },
     ' .MuiButton-contained': {
