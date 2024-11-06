@@ -15,23 +15,22 @@ import { useGetUserAllSpecializationQuery } from '../../../../../../redux/specia
 import { updateAllSpecializations } from './updateAllSpecialization';
 import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 
-
 const Skills = ({ id, tab }) => {
   const [specCurrent, setSpecCurrent] = useState('');
   const { data: userAllSpecializations, isLoading } = useGetUserAllSpecializationQuery(id);
-  
+
   const updateAllSpecialization = userAllSpecializations ? updateAllSpecializations(userAllSpecializations) : [];
   const selectedSpecialization = updateAllSpecialization?.find((s) => s.specializationName === specCurrent);
   const level = selectedSpecialization?.masteryName;
   const skillVisible = selectedSpecialization?.hardSkills.filter((item) => item.hidden === true);
   const [filteredSkills, setFilteredSkills] = useState(skillVisible);
   const [open, setOpen] = useState(false);
-  const [srtSearch, setSrtSearch] = useState('');
+  const [strSearch, setStrSearch] = useState('');
   const loverNameHardSkills = skillVisible?.map((item) => ({
     ...item,
     name: item.name.toLowerCase(),
   }));
-  
+
   useEffect(() => {
     if (userAllSpecializations && userAllSpecializations.length > 0) {
       const mainSpecialization = userAllSpecializations.find((item) => item.mainSpecialization);
@@ -40,25 +39,25 @@ const Skills = ({ id, tab }) => {
       }
     }
   }, [userAllSpecializations]);
-  
+
   const handleChange = (event) => {
     const value = event.target.value;
     setSpecCurrent(value);
   };
-  
+
   const handleOpen = () => {
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   const handleChangeSearch = (event) => {
     const value = event.target.value;
-    setSrtSearch(value);
+    setStrSearch(value);
     const loverValue = value.toLowerCase();
-    
+
     if (loverValue.trim() === '') {
       setFilteredSkills(skillVisible);
     } else {
@@ -67,10 +66,10 @@ const Skills = ({ id, tab }) => {
       setFilteredSkills(sortedOriginal);
     }
   };
-  
+
   const handleClick = () => {
-    const loverValue = srtSearch.toLowerCase();
-    
+    const loverValue = strSearch.toLowerCase();
+
     if (loverValue.trim() === '') {
       setFilteredSkills(skillVisible);
     } else {
@@ -79,20 +78,21 @@ const Skills = ({ id, tab }) => {
       setFilteredSkills(sortedOriginal);
     }
   };
-  
+
   if (isLoading || !userAllSpecializations || userAllSpecializations.length === 0) {
     return <EmptyExperienceTab tab={tab} profileType='user' imgUrl={emptyUserTabsPictures.emptySkillsPic} />;
   }
-  
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={open ? styles.skillBg : styles.skill}>
         <Box sx={styles.info}>
           <Box sx={styles.wrapperSelect}>
-            {selectedSpecialization?.mainSpecialization &&
-              <CustomTooltip title="profile.experience.skills.star" translate={true}>
+            {selectedSpecialization?.mainSpecialization && (
+              <CustomTooltip title='profile.experience.skills.star' translate={true}>
                 <StarIcon sx={styles.star} />
-              </CustomTooltip>}
+              </CustomTooltip>
+            )}
             <Select
               sx={styles.select}
               value={specCurrent}
@@ -101,7 +101,7 @@ const Skills = ({ id, tab }) => {
               onOpen={handleOpen}
               onClose={handleClose}
               IconComponent={KeyboardArrowDownIcon}
-              variant="standard"
+              variant='standard'
               inputProps={{
                 MenuProps: {
                   PaperProps: {
@@ -118,20 +118,20 @@ const Skills = ({ id, tab }) => {
               ))}
             </Select>
           </Box>
-          <Typography sx={styles.text} className={level} variant="subtitle2">Level <span>{level}</span></Typography>
+          <Typography sx={styles.text} className={level} variant='subtitle2'>
+            Level <span>{level}</span>
+          </Typography>
         </Box>
         <Box sx={styles.list}>
-          {srtSearch.trim() === '' ? skillVisible?.map((item) => <SkillsItem key={item.id} data={item}  isSorted={item.isSorted}/>) :
-            filteredSkills?.map((item) => <SkillsItem key={item.id} data={item} isSorted={item.isSorted}/>)}
+          {strSearch.trim() === ''
+            ? skillVisible?.map((item) => <SkillsItem key={item.id} data={item} isSorted={item.isSorted} />)
+            : filteredSkills?.map((item) => <SkillsItem key={item.id} data={item} isSorted={item.isSorted} />)}
         </Box>
       </Box>
       <Box sx={styles.wrapperSearch}>
         <Box sx={styles.search}>
-          <TextAreaSearch
-            value={srtSearch}
-            handleChange={handleChangeSearch}
-          />
-          <IconButton onClick={handleClick} type="button" sx={styles.btnIcon}>
+          <TextAreaSearch value={strSearch} handleChange={handleChangeSearch} />
+          <IconButton onClick={handleClick} type='button' sx={styles.btnIcon}>
             <SearchIcon />
             {'Пошук'}
           </IconButton>
