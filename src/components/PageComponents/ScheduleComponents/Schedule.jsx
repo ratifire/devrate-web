@@ -199,7 +199,7 @@ import { useTheme } from '@mui/material/styles';
     <Box sx={styles.demoApp}>
       <Sidebar currentEvents={currentClosestEvents} selectedDate={selectedDate} handleDateChange={handleDateChange}   setEventUpdated={setEventUpdated}
       />
-      <CustomScrollContainer sx={styles.demoAppMain}>
+      <Box sx={styles.demoAppMain}>
         {<FullCalendar
             ref={calendarRef}
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -232,7 +232,7 @@ import { useTheme } from '@mui/material/styles';
         {popup.visible && event && (
           <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition} />
         )}
-      </CustomScrollContainer>
+      </Box>
     </Box>
   );
 };
