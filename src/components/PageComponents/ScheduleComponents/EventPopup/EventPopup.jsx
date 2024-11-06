@@ -14,12 +14,12 @@ import { Link } from 'react-router-dom';
 import links from '../../../../router/links';
 
 
-const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
-
+const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpdated}) => {
   const { t } = useTranslation();
   const theme = useTheme()
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const [deleteEventById] = useDeleteEventByIdMutation();
+
   const [showCancelButton, setShowCancelButton] = useState(true);
   const [disableLink, setDisableLink] = useState(false);
   
@@ -47,7 +47,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   }, [event.startTime]);
   const handleCancelInterview = async function () {
 
-    if (!event || !event.id) {
+    if (!event || !event.eventTypeId) {
       console.error('Event object or event ID is missing');
     }
 
@@ -56,8 +56,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
     }
 
     try {
-        await deleteEventById({userId, id: event.id}).unwrap();
-
+        await deleteEventById({userId, id: event.eventTypeId}).unwrap();
+        handleClosePopup()
+      setEventUpdated((prev) => !prev);
       toast.success(t('schedule.deleteEventSuccessMessage'), {
         position: 'top-right',
         autoClose: 3000,
@@ -176,10 +177,13 @@ EventPopup.propTypes = {
   event: PropTypes.object.isRequired,
   popup: PropTypes.object.isRequired,
   popupPosition: PropTypes.string,
+  setEventUpdated: PropTypes.func.isRequired
+  
 };
 EventPopup.defaultProps = {
   handleClosePopup: () => {},
   event: {},
   popup: {},
   popupPosition: 'TOPRIGHT',
+  setEventUpdated: ()=>{}
 };
