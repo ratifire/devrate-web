@@ -1,3 +1,3 @@
-import FqaSection from "./FqaSection";
+import FaqSection from "./FaqSection";
 
-export default FqaSection;
+export default FaqSection;

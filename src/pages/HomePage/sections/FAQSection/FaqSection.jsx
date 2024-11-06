@@ -4,7 +4,7 @@ import { faqData } from './faqData';
 import iconBtn from '../../assets/icon-bottom.svg';
 import iconOpen from '../../assets/icon-open-top.svg';
 
-const FqaSection = () => {
+const FaqSection = () => {
   const [openId, setOpenId] = useState(null);
 
   const handleOnClick = (id) => {
@@ -61,4 +61,4 @@ const FqaSection = () => {
     </section>
   );
 };
-export default FqaSection;
+export default FaqSection;
