@@ -24,6 +24,7 @@ const FormInput = ({
   autoComplete,
   extraProps,
   signupPassword,
+  handleKeyDown,
 }) => {
   const id = useMemo(() => uuid(), []);
   const { t } = useTranslation();
@@ -69,6 +70,7 @@ const FormInput = ({
         label={t(label)}
         placeholder={t(placeholder)}
         inputRef={inputRef}
+        onKeyDown={handleKeyDown}
         endAdornment={
           type === 'password' && (
             <PasswordVisibilityToggle
@@ -117,6 +119,7 @@ FormInput.propTypes = {
   autoComplete: PropTypes.string,
   extraProps: PropTypes.object,
   signupPassword: PropTypes.bool,
+  handleKeyDown: PropTypes.func
 };
 
 FormInput.defaultProps = {
