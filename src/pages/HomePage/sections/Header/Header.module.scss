@@ -31,14 +31,23 @@
       list-style: none;
 
       a {
+        display: block;
         color: #fff;
         text-decoration: none;
-        font-weight: bold;
-        transition: color 0.3s;
+        font-weight: 700;
         margin-right: 24px;
+        transition: all 0.3s linear;
+
 
         &:hover {
           color: #ad7dd1;
+          transform: scale(1.1);
+
+        }
+
+        &:active {
+          color: #8133F1;
+
         }
       }
     }

@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './AboutUsSection.module.scss';
-import aboutUsImg from './../../assets/aboutUsImg.svg';
 
 const AboutUsSection = () => {
   return (
-    <section className={styles.about__bg}>
+    <section className={styles.about__bg} id='about'>
       <div className={styles.about}>
         <div className='container'>
           <h2 className={styles.heading}>
@@ -23,9 +22,6 @@ const AboutUsSection = () => {
               <h3 className={styles.topRight}>Community of Peers</h3>
               <p>Engage with other developers who are ready to share their knowledge and help.</p>
             </div>
-            {/*<div className={styles.gridImage}>*/}
-            {/*  <img src={aboutUsImg} alt='aboutUs_PC' />*/}
-            {/*</div>*/}
             <div className={`${styles.card} ${styles.botLeft}`}>
               <h3 className={styles.botLeft}>Beginner-Friendly</h3>
               <p>Practice in a space where mistakes are part of the learning process, not failures.</p>

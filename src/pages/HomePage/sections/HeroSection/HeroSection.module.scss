@@ -53,7 +53,7 @@
       @media screen and (max-width: 1280px) {
         font-size: 35px;
         line-height: 55px;
-        text-align: center;
+        text-align: left;
       }
 
       .highlight {
@@ -90,7 +90,7 @@
       @media screen and (max-width: 1280px) {
         font-size: 16px;
         line-height: 22px;
-        text-align: center;
+        text-align: left;
         max-width: 553px;
       }
     }
@@ -110,6 +110,7 @@
   }
 
   .login {
+
     max-width: 220px;
     width: 100%;
   }
