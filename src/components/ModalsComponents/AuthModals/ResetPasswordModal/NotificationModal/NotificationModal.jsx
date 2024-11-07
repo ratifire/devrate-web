@@ -34,6 +34,7 @@ const NotificationModal = () => {
           type='button'
           handlerClick={handleEnter}
           label='modal.notificationModal.btn_enter'
+          correctStyle={styles.submitBtn}
         />
       </Box>
     </ModalLayout>

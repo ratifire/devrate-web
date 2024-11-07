@@ -182,6 +182,7 @@ const ConfirmationForm = ({
             onClick={handleClick}
             label={buttonLabel || 'modal.confirmation.btn_confirm'}
             disabled={!formik.isValid}
+            correctStyle={styles.submitBtn}
           />
         </Box>
       )}

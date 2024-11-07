@@ -146,6 +146,7 @@ const LoginModal = () => {
             type='submit'
             disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
             label='modal.login.btn_login'
+            correctStyle={styles.submitBtn}
           />
         </Box>
         <Box sx={styles.policyLinkBox}>

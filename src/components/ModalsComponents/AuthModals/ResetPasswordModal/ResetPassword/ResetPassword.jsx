@@ -13,6 +13,7 @@ import styles from './ResetPassword.styles';
 import { resetPasswordSchema } from '../../../../../utils/valadationSchemas/index';
 import { toast } from 'react-toastify';
 import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const initialValues = {
   newPassword: '',
@@ -163,11 +164,29 @@ const ResetPassword = () => {
                       autoComplete: 'off',
                       'data-lpignore': 'true',
                     }}
-                    sx={styles.resetPasswordForm['& .MuiOutlinedInput-root']}
+                    sx={{
+                      ...(isError && {
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: '#ED0E0E',
+                          },
+                        },
+                      }),
+                    }}
                   />
                 </React.Fragment>
               ))}
             </Box>
+
+            {isError && (
+              <Box sx={styles.codeErrorWrapper}>
+                <CancelIcon sx={styles.codeErrorIcon} />
+                <Typography variant='subtitle2' sx={styles.codeErrorText}>
+                  {t('modal.resetPassword.error')}
+                </Typography>
+              </Box>
+            )}
+
             <FormInput
               showPassword={showPassword}
               type='password'
@@ -213,9 +232,9 @@ const ResetPassword = () => {
                 type='submit'
                 disabled={!formik.isValid || !formik.dirty}
                 label={t('modal.resetPassword.btn_change_password')}
+                correctStyle={styles.submitBtn}
               />
             </Box>
-            {isError && <Typography color='error'>{t('modal.resetPassword.error')}</Typography>}
             {isSuccess && <Typography color='primary'>{t('modal.resetPassword.success')}</Typography>}
           </Form>
         )}
