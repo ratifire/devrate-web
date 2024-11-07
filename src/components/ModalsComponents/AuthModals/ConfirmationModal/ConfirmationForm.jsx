@@ -124,7 +124,19 @@ const ConfirmationForm = ({
             onKeyDown={(event) => handleKeyDown(event, index)}
             onPaste={handlePaste}
             value={formik.values[`text${index}`] ?? ''}
-            inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
+            inputProps={{
+              style: { textAlign: 'center' },
+              maxLength: 1,
+            }}
+            sx={{
+              ...(helperTextContent && {
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#ED0E0E',
+                  },
+                },
+              }),
+            }}
           />
         ))}
       </Box>
