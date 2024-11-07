@@ -128,6 +128,15 @@ const ConfirmationForm = ({
               style: { textAlign: 'center' },
               maxLength: 1,
             }}
+            sx={{
+              ...(helperTextContent && {
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#ED0E0E',
+                  },
+                },
+              }),
+            }}
           />
         ))}
       </Box>
