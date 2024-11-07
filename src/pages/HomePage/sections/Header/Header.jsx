@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <header className={styles.header__bg}>
+    <header className={styles.header__bg} id='home'>
       <div className='container'>
 
         <div className={styles.header}>
