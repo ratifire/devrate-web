@@ -1,4 +1,3 @@
-// TODO 'Delete this code, but reconfirm with design first'
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
