@@ -124,7 +124,10 @@ const ConfirmationForm = ({
             onKeyDown={(event) => handleKeyDown(event, index)}
             onPaste={handlePaste}
             value={formik.values[`text${index}`] ?? ''}
-            inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
+            inputProps={{
+              style: { textAlign: 'center' },
+              maxLength: 1,
+            }}
           />
         ))}
       </Box>

@@ -74,6 +74,7 @@ const styles = {
   }),
 
   policyLink: (theme) => ({
+    pointerEvents: 'none', //Remove it to enable links
     fontFamily: 'Open Sans, sans-serif',
     textDecoration: 'underline',
     color: theme.palette.action.active,

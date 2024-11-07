@@ -51,6 +51,7 @@ const LoginModal = () => {
           await dispatch(setCredentials({ data: userData, isAuthenticated: true }));
           navigate('/profile', { replace: true });
         }
+        handleClose();
       } catch (error) {
         let errorMessage = 'Something went wrong';
         if (!error?.originalStatus) {

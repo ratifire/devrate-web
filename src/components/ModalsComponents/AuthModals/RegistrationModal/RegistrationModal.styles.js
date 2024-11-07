@@ -25,6 +25,7 @@ const styles = {
     lineHeight: 1.43,
   },
   policyTermsLink: (theme) => ({
+    pointerEvents: 'none', //Remove it to enable links
     fontFamily: 'Open Sans, sans-serif',
     fontSize: '16px',
     lineHeight: 1.5,
