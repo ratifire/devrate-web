@@ -72,7 +72,7 @@ export const styles = {
   error : {
     textAlign: 'center',
     position: 'absolute',
-    bottom: 80,
+    bottom: 60,
     left: 0,
     width: '100%',
   },

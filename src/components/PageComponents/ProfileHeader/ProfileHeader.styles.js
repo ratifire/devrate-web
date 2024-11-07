@@ -8,6 +8,7 @@ const styles = {
     width: '100%',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     backgroundImage: 'none',
+    boxShadow: 'none',
   }),
   toolbar: {
     justifyContent: 'space between',

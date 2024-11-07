@@ -37,6 +37,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
     try {
       await logout().unwrap();
       Cookies.remove('JSESSIONID', { path: '/', domain: 'devrate.org' });
+      Cookies.remove('JSESSIONID', { path: '/', domain: 'localhost' });
       dispatch(logOut());
       window.location.reload();
     } catch (error) {
@@ -47,7 +48,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const handleOpenFeedbackModal = () => {
     dispatch(openModal({ modalName: 'feedbackProjectModal' }));
   };
-  const order = (item) => `order: ${item === 'profile.userMenu.logout' ? 2 : 0}`;
+  // const order = (item) => `order: ${item === 'profile.userMenu.logout' ? 2 : 0}`;
 
   const handleLinkClick = (link) => {
     if (link.name === 'profile.userMenu.logout') {
@@ -71,10 +72,9 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
           {links.map((link, index) => (
             <React.Fragment key={link.path}>
               <Link
-                key={link.path}
                 to={link.path}
                 component={RouterLink}
-                sx={[styles.menuLink, order(link.name)]}
+                sx={styles.menuLink}
                 target={link.target}
                 onClick={() => handleLinkClick(link)}
               >
@@ -87,7 +87,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
                   </ListItemButton>
                 </ListItem>
               </Link>
-              {index % 2 !== 0 && <Divider key={index} sx={styles.divider} />}
+              {index % 2 !== 0 && <Divider sx={styles.divider} />}
             </React.Fragment>
           ))}
           <Button
