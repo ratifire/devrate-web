@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -22,21 +26,42 @@
     cursor: pointer;
     transition: all 0.2s linear;
     text-decoration: none;
+
+    & > svg {
+        transition: all 0.2s linear;
+    }
+
+    &:hover > svg {
+        transform: scale(1.3);
+    }
 }
 
 .btn.btn-primary {
     background-color: #5900D9;
     color: #FFF;
-    transition: background-color 0.5s ease;
 
     &:hover {
         background-color: #360083;
     }
+
+
+    &:active {
+        background-color: #360083CC;
+    }
+
 }
 
 .btn.btn-secondary {
     background-color: #44444633;
     color: #FFF;
+
+    &:hover {
+        background-color: #44444666;
+    }
+
+    &:active {
+        background-color: #4444464D;
+    }
 }
 
 .btn.btn-xl {

@@ -13,7 +13,7 @@ const FaqSection = () => {
 
 
   return (
-    <section className={styles.faq}>
+    <section className={styles.faq} id='faq'>
       <div className='container'>
         <h1 className={styles.faq__title}>FAQ</h1>
         <div className={styles.faq__menu}>
