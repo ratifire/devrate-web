@@ -1,0 +1,124 @@
+.faq {
+  margin-bottom: 145px;
+
+  &__title {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 150%;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 113px;
+      height: 9px;
+      left: 0;
+      bottom: -10px;
+      background-image: url("../../assets/fqa-border.svg");
+    }
+  }
+
+  &__menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+
+    @media screen and (max-width: 1023px) {
+      flex-direction: column;
+    }
+  }
+
+  &__item {
+    max-width: 844px;
+    width: 100%;
+
+    @media screen and (max-width: 1740px) {
+      max-width: 780px;
+    }
+
+    @media screen and (max-width: 1620px) {
+      max-width: 680px;
+    }
+
+    @media screen and (max-width: 1420px) {
+      max-width: 580px;
+    }
+
+    @media screen and (max-width: 1220px) {
+      max-width: 480px;
+    }
+
+    @media screen and (max-width: 1023px) {
+      max-width: 100%;
+    }
+  }
+
+  &__menuContent {
+  }
+
+  &__header {
+    padding: 36px;
+    border-bottom: 1px solid #69696B;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 34px;
+      left: 0;
+      bottom: 0;
+      width: 28px;
+      height: 36px;
+      background-image: url("../../assets/fqa-svg.svg");
+    }
+  }
+
+  &__iconBottom {
+    position: absolute;
+    top: 38px;
+    right: 0;
+    bottom: 0;
+    width: 36px;
+    height: 36px;
+  }
+
+  &__question {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 150%;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+
+    @media screen and (max-width: 1740px) {
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 1500px) {
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: 1420px) {
+      font-size: 16px;
+    }
+  }
+
+  &__number {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 150%;
+    color: #EE7538;
+    margin-right: 8px;
+  }
+
+  &__answer {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    color: #C5C5C6;
+    max-width: 736px;
+    padding: 0 54px;
+  }
+}
