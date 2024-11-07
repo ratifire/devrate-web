@@ -4,5 +4,4 @@ import FaqSection from './FAQSection';
 import Footer from './Footer';
 import AboutUsSection from './AboutUsSection';
 
-export { Header, HeroSection, FaqSection, Footer };
-export { Header, HeroSection, Footer, AboutUsSection };
+export { Header, HeroSection, AboutUsSection, FaqSection, Footer };
