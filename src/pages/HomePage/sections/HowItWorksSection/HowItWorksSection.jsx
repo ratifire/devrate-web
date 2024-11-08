@@ -8,7 +8,7 @@ import img5 from '../../assets/img5.png';
 
 const howItWorksSection = () => {
   return (
-    <section className={styles.bg}>
+    <section className={styles.bg} id='howItWorks'>
       <div className='container'>
         <div className={styles.works}>
           <div className={styles.works__block}>

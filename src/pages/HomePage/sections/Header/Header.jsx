@@ -17,7 +17,7 @@ const Header = () => {
           <nav className={styles.header__nav}>
             <ul className={styles.header__nav__links}>
               <li>
-                <a href='#how-it-works'>How It Works</a>
+                <a href='#howItWorks'>How It Works</a>
               </li>
               <li>
                 <a href='#about'>About us</a>
