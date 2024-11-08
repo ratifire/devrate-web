@@ -25,7 +25,7 @@ const HomeTemplate = ({ children }) => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className='home'>
+      <div className='homePage'>
         {children}
         {openLogin && <MemoizedLoginModal />}
         {openRegistration && <MemoizedRegistrationModal />}
