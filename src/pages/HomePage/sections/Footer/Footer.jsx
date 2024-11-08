@@ -12,8 +12,8 @@ const Footer = () => {
         <div className={styles.footer__container}>
           <div className={styles.footer__content}>
             <div className={styles.footer__social}>
-              <a className={styles.footer__logo} href="#home">
-                <img  src={logo} alt='Skillzzy Logo' />
+              <a className={styles.footer__logo} href='#home'>
+                <img src={logo} alt='Skillzzy Logo' />
               </a>
               <div className={styles.footer__socialIkons}>
                 <a href='https://www.linkedin.com/company/ratifire/' aria-label='LinkedIn'>

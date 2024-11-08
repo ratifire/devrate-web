@@ -11,12 +11,12 @@ const FaqSection = () => {
     setOpenId(openId === id ? null : id);
   };
 
-
   return (
-    <section className={styles.faq} id='faq'>
+    <section className={styles.faq__bg} id='faq'>
       <div className='container'>
-        <h1 className={styles.faq__title}>FAQ</h1>
-        <div className={styles.faq__menu}>
+        <div className={styles.faq}>
+          <h2 className={styles.faq__title}>FAQ</h2>
+          <div className={styles.faq__menu}>
             {faqData.map((item) => (
               <div className={styles.faq__item} key={item.id} onClick={() => handleOnClick(item.id)}>
                 <div className={styles.faq__header}>
@@ -33,6 +33,7 @@ const FaqSection = () => {
                 </div>
               </div>
             ))}
+          </div>
         </div>
       </div>
     </section>

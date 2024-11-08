@@ -9,7 +9,6 @@ const AboutUsSection = () => {
           <h2 className={styles.heading}>
             About <span className={styles.highlight}>Us</span>
           </h2>
-
           <div className={styles.gridContainer}>
             <div className={`${styles.card} ${styles.topLeft}`}>
               <h3 className={styles.topLeft}>Real Experience</h3>

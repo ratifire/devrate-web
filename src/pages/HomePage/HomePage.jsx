@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import React, { memo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Header, HeroSection, AboutUsSection, FaqSection, Footer } from './../HomePage/sections';
+import { Header, HeroSection,HowItWorksSection, AboutUsSection, FaqSection, Footer } from './../HomePage/sections';
 import { setCredentials } from '../../redux/auth/authSlice';
 import { HomeTemplate } from '../../Templates';
 import './styles/reset.css';
@@ -10,6 +10,7 @@ import './assets/fonts/fonts.css';
 
 const MemoizedHeader = memo(Header);
 const MemoizedHeroSection = memo(HeroSection);
+const MemoizedHowItWorksSection = memo(HowItWorksSection);
 const MemoizedAboutSection = memo(AboutUsSection);
 const MemoizedFqaSection = memo(FaqSection);
 const MemoizedFooter = memo(Footer);
@@ -26,6 +27,7 @@ const HomePage = () => {
     <HomeTemplate>
       <MemoizedHeader />
       <MemoizedHeroSection />
+      <MemoizedHowItWorksSection />
       <MemoizedAboutSection />
       <MemoizedFqaSection />
       <MemoizedFooter />
