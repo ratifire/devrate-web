@@ -129,6 +129,9 @@ const ConfirmationForm = ({
               maxLength: 1,
             }}
             sx={{
+              '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#B78AF7',
+              },
               ...(helperTextContent && {
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {

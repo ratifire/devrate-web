@@ -100,5 +100,10 @@ const styles = {
     borderRadius: theme.spacing(2),
     padding: '12px',
   }),
+  codeFocusWrapper: (theme) => ({
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.action.selected,
+    },
+  }),
 };
 export default styles;

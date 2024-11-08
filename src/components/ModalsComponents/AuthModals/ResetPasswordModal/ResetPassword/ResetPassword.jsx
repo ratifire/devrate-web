@@ -165,6 +165,7 @@ const ResetPassword = () => {
                       'data-lpignore': 'true',
                     }}
                     sx={{
+                      ...styles.codeFocusWrapper,
                       ...(isError && {
                         '& .MuiOutlinedInput-root': {
                           '& fieldset': {
