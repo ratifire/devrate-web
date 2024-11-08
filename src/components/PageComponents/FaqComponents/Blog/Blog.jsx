@@ -34,7 +34,7 @@ const Blog = () => {
       <Typography variant='h6' sx={styles.title}>
         {t('blogText.title')}
       </Typography>
-      <Box sx={styles.list} ref={containerRef} className='blog-list'>
+      <Box sx={styles.list} ref={containerRef}>
         {renderBlogList()}
       </Box>
     </Box>
