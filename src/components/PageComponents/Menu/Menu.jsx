@@ -25,6 +25,7 @@ import { logOut } from '../../../redux/auth/authSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { openModal } from '../../../redux/modal/modalSlice';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
+import { DARK_THEME } from '../../../utils/constants/Theme/theme';
 
 const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();
@@ -39,6 +40,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
       Cookies.remove('JSESSIONID', { path: '/', domain: 'devrate.org' });
       Cookies.remove('JSESSIONID', { path: '/', domain: 'localhost' });
       dispatch(logOut());
+      localStorage.setItem('theme', JSON.stringify({ mode: DARK_THEME }));
       window.location.reload();
     } catch (error) {
       console.log('Logout failed:', error);
