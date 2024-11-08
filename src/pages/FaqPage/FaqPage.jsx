@@ -3,7 +3,7 @@ import { Box, Container, Paper } from '@mui/material';
 import { styles } from './FaqPage.styles';
 import { FaqTemplate } from '../../Templates';
 import ProfileHeader from '../../components/PageComponents/ProfileHeader';
-import { BlogSkeleton } from '../../components/UI/Skeleton';
+import { BlogSkeleton, FaqSkeleton } from '../../components/UI/Skeleton';
 
 const Blog = lazy(() => import('../../components/PageComponents/FaqComponents/Blog'));
 const Faq = lazy(() => import('../../components/PageComponents/FaqComponents/Faq'));
@@ -17,7 +17,7 @@ const FaqPage = () => {
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.faq}>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<FaqSkeleton/>}>
               <Faq />
             </Suspense>
           </Paper>
