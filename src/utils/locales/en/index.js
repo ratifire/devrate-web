@@ -374,6 +374,8 @@ export const en = {
           startDateMinMessage: 'Date must be later than 01/01/1950',
           startDateMaxMessage: 'Date must be earlier than today',
           endDateMessage: 'End date must be later than start date',
+          endYear_min: 'End Date must be later than Start Date',
+          endYear_max: 'End date cannot be later than this year',
         },
         education: {
           title: 'Education',

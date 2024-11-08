@@ -278,6 +278,8 @@ export const uk = {
         contact: 'Контактна інформація',
         languages: 'Мови',
         aboutMe: 'Про мене',
+        duties: 'Обов\'язки',
+        endYear: 'Поточний',
       },
       userMenu: {
         profile: 'Профіль',
@@ -352,6 +354,7 @@ export const uk = {
         },
         workExperience: {
           position: 'Посада',
+          title: 'Досвід роботи',
           position_long: 'Посада занадто довге',
           position_short: 'Посада занадто коротка',
           position_placeholder: 'Інженер-програміст',
@@ -375,6 +378,8 @@ export const uk = {
           startDateMinMessage: 'Стартова дата має бути пізніше 01/01/1950',
           startDateMaxMessage: 'Кінцева дата має бути не пізніше за поточку',
           endDateMessage: 'Кінцева дата має буди пізнішою за стартову дату',
+          endYear_min: 'Дата завершення повинна бути пізніше дати початку',
+          endYear_max: 'Кінцева дата не може бути пізніше цього року',
         },
         education: {
           title: 'Освіта',
