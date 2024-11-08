@@ -168,7 +168,7 @@ export const en = {
         code_required: 'Code is required',
         code_symbol_min: 'Each code digit must be 1 character long',
         code_length_max: 'Code must be exactly 6 digits long',
-        error: 'Invalid code. Please try again.',
+        error: 'The code is incorrect or the term has passed.',
         success: 'Password changed successfully!',
       },
       editPage: {

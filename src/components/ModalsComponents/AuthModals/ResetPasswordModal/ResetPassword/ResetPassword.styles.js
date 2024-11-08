@@ -65,14 +65,8 @@ const styles = {
     gap: theme.spacing(2),
     alignItems: 'center',
     marginBottom: theme.spacing(4),
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: theme.palette.neutral[100],
-      },
-    },
     '&, & input': {
       backgroundColor: `${theme.palette.background.default} !important`,
-      color: `${theme.palette.text.primary} !important`,
     },
     '&:-webkit-autofill, & input:-webkit-autofill': {
       '-webkit-text-fill-color': `${theme.palette.text.primary} !important`,
@@ -80,8 +74,36 @@ const styles = {
       transition: 'background-color 5000s ease-in-out 0s',
     },
   }),
+  codeErrorWrapper: (theme) => ({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: theme.spacing(4),
+  }),
+  codeErrorIcon: (theme) => ({
+    width: '20px',
+    height: '20px',
+    color: theme.palette.error.mainConcentrated,
+  }),
+  codeErrorText: (theme) => ({
+    marginLeft: theme.spacing(3),
+    color: theme.palette.error.mainConcentrated,
+  }),
   iconStyle: (theme) => ({
     color: theme.palette.neutral[50],
+  }),
+  submitBtn: (theme) => ({
+    fontSize: '18px',
+    fontWeight: 600,
+    lineHeight: 1.43,
+    borderRadius: theme.spacing(2),
+    padding: '12px',
+  }),
+  codeFocusWrapper: (theme) => ({
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.action.selected,
+    },
   }),
 };
 export default styles;

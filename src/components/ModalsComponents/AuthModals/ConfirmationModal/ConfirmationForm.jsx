@@ -129,6 +129,9 @@ const ConfirmationForm = ({
               maxLength: 1,
             }}
             sx={{
+              '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#B78AF7',
+              },
               ...(helperTextContent && {
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
@@ -182,6 +185,7 @@ const ConfirmationForm = ({
             onClick={handleClick}
             label={buttonLabel || 'modal.confirmation.btn_confirm'}
             disabled={!formik.isValid}
+            correctStyle={styles.submitBtn}
           />
         </Box>
       )}

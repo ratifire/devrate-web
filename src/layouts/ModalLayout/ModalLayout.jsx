@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Modal, Zoom } from '@mui/material';
+import { Box, IconButton, Modal, Zoom } from '@mui/material';
 import { styles } from './ModalLayout.styles';
 import PropTypes from 'prop-types';
+import CloseIcon from '@mui/icons-material/Close';
 
 export const ModalLayout = ({ open, setOpen, children }) => {
   return (
@@ -14,7 +15,12 @@ export const ModalLayout = ({ open, setOpen, children }) => {
       sx={styles.modal}
     >
       <Zoom in={open}>
-        <Box sx={styles.modalContainer}>{children}</Box>
+        <Box sx={styles.modalContainer}>
+          <IconButton sx={styles.btnIcon} type='button' aria-label='Close modal' onClick={setOpen}>
+            <CloseIcon />
+          </IconButton>
+          {children}
+        </Box>
       </Zoom>
     </Modal>
   );
