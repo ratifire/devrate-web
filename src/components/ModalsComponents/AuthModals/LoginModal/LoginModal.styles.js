@@ -17,19 +17,23 @@ const styles = {
     lineHeight: 1.5,
     marginBottom: '24px',
   },
-  errorWrapper: (theme) => ({
+  codeErrorWrapper: (theme) => ({
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: theme.spacing(4),
-    color: theme.palette.error.main,
+    alignItems: 'center',
+    marginBottom: theme.spacing(2),
   }),
-  errorIcon: (theme) => ({
-    marginRight: theme.spacing(2),
+  codeErrorIcon: (theme) => ({
+    width: '20px',
+    height: '20px',
+    color: theme.palette.error.mainConcentrated,
   }),
-  error: {
-    textAlign: 'center',
-  },
+  codeErrorText: (theme) => ({
+    fontFamily: 'Open Sans, sans-serif',
+    marginLeft: theme.spacing(3),
+    color: theme.palette.error.mainConcentrated,
+  }),
   link: (theme) => ({
     marginRight: theme.spacing(2),
     textDecoration: 'underline',
@@ -51,12 +55,12 @@ const styles = {
     width: '100%',
     color: theme.palette.neutral[100],
   }),
-  policyLinkBox: {
+  policyLinkBox: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: 0,
-  },
+    marginBottom: theme.spacing(0),
+  }),
   turnBackText: (theme) => ({
     color: theme.palette.text.primary,
     marginRight: theme.spacing(2),
@@ -74,6 +78,7 @@ const styles = {
   }),
 
   policyLink: (theme) => ({
+    pointerEvents: 'none', //Remove it to enable links
     fontFamily: 'Open Sans, sans-serif',
     textDecoration: 'underline',
     color: theme.palette.action.active,
@@ -85,6 +90,13 @@ const styles = {
   }),
   iconStyle: (theme) => ({
     color: theme.palette.neutral[50],
+  }),
+  submitBtn: (theme) => ({
+    fontSize: '18px',
+    fontWeight: 600,
+    lineHeight: 1.43,
+    borderRadius: theme.spacing(2),
+    padding: '12px',
   }),
 };
 

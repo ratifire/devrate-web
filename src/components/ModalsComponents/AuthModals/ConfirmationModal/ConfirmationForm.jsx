@@ -124,7 +124,22 @@ const ConfirmationForm = ({
             onKeyDown={(event) => handleKeyDown(event, index)}
             onPaste={handlePaste}
             value={formik.values[`text${index}`] ?? ''}
-            inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
+            inputProps={{
+              style: { textAlign: 'center' },
+              maxLength: 1,
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#B78AF7',
+              },
+              ...(helperTextContent && {
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#ED0E0E',
+                  },
+                },
+              }),
+            }}
           />
         ))}
       </Box>
@@ -170,6 +185,7 @@ const ConfirmationForm = ({
             onClick={handleClick}
             label={buttonLabel || 'modal.confirmation.btn_confirm'}
             disabled={!formik.isValid}
+            correctStyle={styles.submitBtn}
           />
         </Box>
       )}

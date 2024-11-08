@@ -25,6 +25,7 @@ const styles = {
     lineHeight: 1.43,
   },
   policyTermsLink: (theme) => ({
+    pointerEvents: 'none', //Remove it to enable links
     fontFamily: 'Open Sans, sans-serif',
     fontSize: '16px',
     lineHeight: 1.5,
@@ -43,6 +44,13 @@ const styles = {
   }),
   iconStyle: (theme) => ({
     color: theme.palette.action.disabled,
+  }),
+  submitBtn: (theme) => ({
+    fontSize: '18px',
+    fontWeight: 600,
+    lineHeight: 1.43,
+    borderRadius: theme.spacing(2),
+    padding: '12px',
   }),
 };
 
