@@ -1,3 +1,4 @@
 import { FeedbackModalSkeleton } from './Modal';
+import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
 
-export { FeedbackModalSkeleton };
+export { FeedbackModalSkeleton, BlogSkeleton, FaqSkeleton };
