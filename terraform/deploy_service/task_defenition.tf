@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       image             = "${data.aws_caller_identity.current_user.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.front_repository_name}:${var.image_tag}",
       cpu               = 0,
       memory            = 2000,
-      memoryReservation = 2000,
+      memoryReservation = 1950,
       stopTimeout       = 10,
       healthCheck : {
         "command" : ["CMD-SHELL", "curl -f https://${var.domain_name}/ || exit 1"],
