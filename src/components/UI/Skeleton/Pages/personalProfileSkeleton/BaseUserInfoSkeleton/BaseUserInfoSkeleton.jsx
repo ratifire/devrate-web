@@ -12,8 +12,8 @@ const BaseUserInfoSkeleton = () => {
             <Skeleton variant='rounded' width='100%' height={30} />
             <Skeleton variant='rounded' width={34} height={30} />
           </Box>
-          <Skeleton variant='rounded' width='100%' height={32} />
-          <Skeleton variant='rounded' width='100%' height={28} />
+          <Skeleton variant='rounded' height={32} />
+          <Skeleton variant='rounded' height={28} />
         </Box>
       </Box>
       <Skeleton variant='rounded' width='100' height={44} />
