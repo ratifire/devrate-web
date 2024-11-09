@@ -3,9 +3,12 @@ import { Box, Container, Paper, Typography } from '@mui/material';
 import { styles } from './SpecialisationPage.styles';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import { useTranslation } from 'react-i18next';
+import SpecialisationCategoriesSkeleton from '../../components/UI/Skeleton/Pages/specializationSkeleton/SpecialisationCategoriesSkeleton';
 
 const ProfileHeader = React.lazy(() => import('../../components/PageComponents/ProfileHeader'));
-const SpecializationLevel = React.lazy(() => import('../../components/PageComponents/SpecializationComponents/SpecializationLevel'));
+const SpecializationLevel = React.lazy(
+  () => import('../../components/PageComponents/SpecializationComponents/SpecializationLevel')
+);
 const HardSkills = React.lazy(() => import('../../components/PageComponents/SpecializationComponents/HardSkills'));
 const SpecialisationCategories = React.lazy(
   () => import('../../components/PageComponents/SpecializationComponents/SpecializationCategories')
@@ -16,7 +19,10 @@ const InterviewChart = React.lazy(
   () => import('../../components/PageComponents/SpecializationComponents/Statistics/InteviewChart/InterviewChart')
 );
 const SkillsAssessmentChart = React.lazy(
-  () => import('../../components/PageComponents/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart')
+  () =>
+    import(
+      '../../components/PageComponents/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart'
+    )
 );
 const HardSkillsChart = React.lazy(
   () => import('../../components/PageComponents/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart')
@@ -42,45 +48,47 @@ const SpecializationPage = () => {
 
   return (
     <SpecializationTemplate>
-      <Suspense fallback={<div>Loading...</div>}>
-        <MemoizedProfileHeader />
-        <Container maxWidth='xl' sx={styles.container}>
-          <Box sx={styles.contentWrapper}>
-            <Paper sx={styles.specialisationCategories}>
+      <MemoizedProfileHeader />
+      <Container maxWidth='xl' sx={styles.container}>
+        <Box sx={styles.contentWrapper}>
+          <Paper sx={styles.specialisationCategories}>
+            <Suspense fallback={<SpecialisationCategoriesSkeleton />}>
               <MemoizedSpecialisationCategories />
-            </Paper>
-            <Paper sx={styles.specialisationLevel}>
-              <MemoizedSpecializationLevel activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
-            </Paper>
-            <Paper sx={styles.specialisationInterviewParticipation}>
-              <MemoizedInterviews />
-            </Paper>
-            <Paper sx={styles.specialisationHardSkills}>
-              <MemoizedHardSkills activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
-            </Paper>
-            <Paper sx={styles.specialisationSoftSkills}>
-              <MemoizedSoftSkills />
-            </Paper>
-            <Paper sx={styles.specialisationStatistics}>
-              <Typography variant='h6' sx={styles.statisticTitle}>{t('specialization.statistics.title')}</Typography>
-              <Box sx={styles.statisticWrapper}>
-                <Paper sx={styles.level}>
-                  <MemoizedLevelChart />
-                </Paper>
-                <Paper sx={styles.averageSkillsScore}>
-                  <MemoizedSkillsAssessmentChart />
-                </Paper>
-                <Paper sx={styles.hardSkillsByProductivity}>
-                  <MemoizedHardSkillsChart />
-                </Paper>
-                <Paper sx={styles.interview}>
-                  <MemoizedInterviewChart />
-                </Paper>
-              </Box>
-            </Paper>
-          </Box>
-        </Container>
-      </Suspense>
+            </Suspense>
+          </Paper>
+          <Paper sx={styles.specialisationLevel}>
+            <MemoizedSpecializationLevel activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
+          </Paper>
+          <Paper sx={styles.specialisationInterviewParticipation}>
+            <MemoizedInterviews />
+          </Paper>
+          <Paper sx={styles.specialisationHardSkills}>
+            <MemoizedHardSkills activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
+          </Paper>
+          <Paper sx={styles.specialisationSoftSkills}>
+            <MemoizedSoftSkills />
+          </Paper>
+          <Paper sx={styles.specialisationStatistics}>
+            <Typography variant='h6' sx={styles.statisticTitle}>
+              {t('specialization.statistics.title')}
+            </Typography>
+            <Box sx={styles.statisticWrapper}>
+              <Paper sx={styles.level}>
+                <MemoizedLevelChart />
+              </Paper>
+              <Paper sx={styles.averageSkillsScore}>
+                <MemoizedSkillsAssessmentChart />
+              </Paper>
+              <Paper sx={styles.hardSkillsByProductivity}>
+                <MemoizedHardSkillsChart />
+              </Paper>
+              <Paper sx={styles.interview}>
+                <MemoizedInterviewChart />
+              </Paper>
+            </Box>
+          </Paper>
+        </Box>
+      </Container>
     </SpecializationTemplate>
   );
 };
