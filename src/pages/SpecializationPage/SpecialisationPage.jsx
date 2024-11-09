@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { styles } from './SpecialisationPage.styles';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
@@ -13,43 +13,43 @@ import {
   SkillsSkeleton,
 } from '../../components/UI/Skeleton';
 import LevelChartSkeleton from '../../components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
+import ProfileHeader from '../../components/PageComponents/ProfileHeader';
 
-const ProfileHeader = React.lazy(() => import('../../components/PageComponents/ProfileHeader'));
-const SpecializationLevel = React.lazy(
+const SpecializationLevel = lazy(
   () => import('../../components/PageComponents/SpecializationComponents/SpecializationLevel')
 );
-const HardSkills = React.lazy(() => import('../../components/PageComponents/SpecializationComponents/HardSkills'));
-const SpecialisationCategories = React.lazy(
+const HardSkills = lazy(() => import('../../components/PageComponents/SpecializationComponents/HardSkills'));
+const SpecialisationCategories = lazy(
   () => import('../../components/PageComponents/SpecializationComponents/SpecializationCategories')
 );
-const Interviews = React.lazy(() => import('../../components/PageComponents/SpecializationComponents/Interviews'));
-const SoftSkills = React.lazy(() => import('../../components/PageComponents/SpecializationComponents/SoftSkills'));
-const InterviewChart = React.lazy(
+const Interviews = lazy(() => import('../../components/PageComponents/SpecializationComponents/Interviews'));
+const SoftSkills = lazy(() => import('../../components/PageComponents/SpecializationComponents/SoftSkills'));
+const InterviewChart = lazy(
   () => import('../../components/PageComponents/SpecializationComponents/Statistics/InteviewChart/InterviewChart')
 );
-const SkillsAssessmentChart = React.lazy(
+const SkillsAssessmentChart = lazy(
   () =>
     import(
       '../../components/PageComponents/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart'
     )
 );
-const HardSkillsChart = React.lazy(
+const HardSkillsChart = lazy(
   () => import('../../components/PageComponents/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart')
 );
-const LevelChart = React.lazy(
+const LevelChart = lazy(
   () => import('../../components/PageComponents/SpecializationComponents/Statistics/LevelChart/LevelChart')
 );
 
-const MemoizedProfileHeader = React.memo(ProfileHeader);
-const MemoizedSpecializationLevel = React.memo(SpecializationLevel);
-const MemoizedHardSkills = React.memo(HardSkills);
-const MemoizedSpecialisationCategories = React.memo(SpecialisationCategories);
-const MemoizedInterviews = React.memo(Interviews);
-const MemoizedSoftSkills = React.memo(SoftSkills);
-const MemoizedInterviewChart = React.memo(InterviewChart);
-const MemoizedSkillsAssessmentChart = React.memo(SkillsAssessmentChart);
-const MemoizedHardSkillsChart = React.memo(HardSkillsChart);
-const MemoizedLevelChart = React.memo(LevelChart);
+const MemoizedProfileHeader = memo(ProfileHeader);
+const MemoizedSpecializationLevel = memo(SpecializationLevel);
+const MemoizedHardSkills = memo(HardSkills);
+const MemoizedSpecialisationCategories = memo(SpecialisationCategories);
+const MemoizedInterviews = memo(Interviews);
+const MemoizedSoftSkills = memo(SoftSkills);
+const MemoizedInterviewChart = memo(InterviewChart);
+const MemoizedSkillsAssessmentChart = memo(SkillsAssessmentChart);
+const MemoizedHardSkillsChart = memo(HardSkillsChart);
+const MemoizedLevelChart = memo(LevelChart);
 
 const SpecializationPage = () => {
   const { t } = useTranslation();
