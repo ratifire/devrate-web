@@ -17,7 +17,7 @@ import {
   RightSectionSkeleton,
   ExperienceSectionSkeleton,
 } from './Pages/personalProfileSkeleton';
-import { UserBaseUserInfoSkeleton, UserRightSectionSkeleton, UserExperienceSectionSkeleton } from './Pages/userProfileSkeleton';
+import UserExperienceSectionSkeleton from "./Pages/userProfileSkeleton/UserExperienceSectionSkeleton";
 
 export {
   BlogSkeleton,
@@ -36,7 +36,5 @@ export {
   SkillsSectionSkeleton,
   RightSectionSkeleton,
   ExperienceSectionSkeleton,
-  UserBaseUserInfoSkeleton,
-  UserRightSectionSkeleton,
-  UserExperienceSectionSkeleton,
+  UserExperienceSectionSkeleton
 };

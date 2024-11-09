@@ -1,5 +1,3 @@
-import UserBaseUserInfoSkeleton from './UserBaseUserInfoSkeleton';
-import UserRightSectionSkeleton from './UserRightSectionSkeleton';
-import UserExperienceSectionSkeleton from './UserExperienceSectionSkeleton';
+import UserProfileSkeleton from './UserProfileSkeleton';
 
-export { UserBaseUserInfoSkeleton, UserRightSectionSkeleton, UserExperienceSectionSkeleton };
+export default UserProfileSkeleton;

@@ -1,17 +1,12 @@
 import React, { lazy, memo, Suspense } from 'react';
 import UserProfileTemplate from '../../../Templates/ProfileTemplates/UserProfileTemplate';
-import { Box, CircularProgress, Container, Paper } from '@mui/material';
+import { Box, Container, Paper } from '@mui/material';
 import { styles } from './UserProfilePage.styles';
 import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
 import useAuth from '../../../utils/hooks/useAuth';
 import { useParams, Navigate } from 'react-router-dom';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
-import {
-  SkillsSectionSkeleton,
-  UserBaseUserInfoSkeleton,
-  UserRightSectionSkeleton,
-} from '../../../components/UI/Skeleton';
-import UserExperienceSectionSkeleton from '../../../components/UI/Skeleton/Pages/userProfileSkeleton/UserExperienceSectionSkeleton';
+import UserProfileSkeleton from '../../../components/UI/Skeleton/Pages/userProfileSkeleton';
 
 const SkillsSection = lazy(
   () => import('../../../components/PageComponents/ProfileComponents/UserProfile/SkillsSection/SkillsSection')
@@ -39,11 +34,7 @@ const UserProfilePage = () => {
   const { data: dataPersonal, error, isLoading } = useGetPersonalUserQuery(userId);
 
   if (isLoading) {
-    return (
-      <Box sx={styles.loading}>
-        <CircularProgress />
-      </Box>
-    );
+    return <UserProfileSkeleton />;
   }
 
   if (error || !dataPersonal) {
@@ -51,33 +42,27 @@ const UserProfilePage = () => {
   }
 
   return (
-    <UserProfileTemplate>
-      <MemoizedProfileHeader />
-      <Container maxWidth='xl' sx={styles.container}>
-        <Box sx={styles.contentWrapper}>
-          <Paper sx={styles.baseUserInfo}>
-            <Suspense fallback={<UserBaseUserInfoSkeleton />}>
+    <Suspense fallback={UserProfileSkeleton}>
+      <UserProfileTemplate>
+        <MemoizedProfileHeader />
+        <Container maxWidth='xl' sx={styles.container}>
+          <Box sx={styles.contentWrapper}>
+            <Paper sx={styles.baseUserInfo}>
               <MemoizedBaseUserInfo id={userId} />
-            </Suspense>
-          </Paper>
-          <Paper sx={styles.skills}>
-            <Suspense fallback={<SkillsSectionSkeleton />}>
+            </Paper>
+            <Paper sx={styles.skills}>
               <MemoizedSkillsSection id={userId} />
-            </Suspense>
-          </Paper>
-          <Paper sx={styles.right}>
-            <Suspense fallback={<UserRightSectionSkeleton />}>
+            </Paper>
+            <Paper sx={styles.right}>
               <MemoizedRightSection id={userId} />
-            </Suspense>
-          </Paper>
-          <Paper sx={styles.experience}>
-            <Suspense fallback={<UserExperienceSectionSkeleton />}>
+            </Paper>
+            <Paper sx={styles.experience}>
               <MemoizedExperienceSection id={userId} />
-            </Suspense>
-          </Paper>
-        </Box>
-      </Container>
-    </UserProfileTemplate>
+            </Paper>
+          </Box>
+        </Container>
+      </UserProfileTemplate>
+    </Suspense>
   );
 };
 
