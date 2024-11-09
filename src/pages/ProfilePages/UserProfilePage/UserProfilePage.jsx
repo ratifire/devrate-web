@@ -7,10 +7,9 @@ import useAuth from '../../../utils/hooks/useAuth';
 import { useParams, Navigate } from 'react-router-dom';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import {
-  BaseUserInfoSkeleton,
   ExperienceSectionSkeleton,
   RightSectionSkeleton,
-  SkillsSectionSkeleton
+  SkillsSectionSkeleton, UserBaseUserInfoSkeleton
 } from '../../../components/UI/Skeleton';
 
 const SkillsSection = lazy(
@@ -56,7 +55,7 @@ const UserProfilePage = () => {
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.baseUserInfo}>
-            <Suspense fallback={<BaseUserInfoSkeleton />}>
+            <Suspense fallback={<UserBaseUserInfoSkeleton />}>
               <MemoizedBaseUserInfo id={userId} />
             </Suspense>
           </Paper>
