@@ -1,4 +1,5 @@
 import UserBaseUserInfoSkeleton from './UserBaseUserInfoSkeleton';
-import UserRightSectionSkeleton from "./UserRightSectionSkeleton";
+import UserRightSectionSkeleton from './UserRightSectionSkeleton';
+import UserExperienceSectionSkeleton from './UserExperienceSectionSkeleton';
 
-export { UserBaseUserInfoSkeleton, UserRightSectionSkeleton };
+export { UserBaseUserInfoSkeleton, UserRightSectionSkeleton, UserExperienceSectionSkeleton };

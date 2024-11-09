@@ -7,11 +7,11 @@ import useAuth from '../../../utils/hooks/useAuth';
 import { useParams, Navigate } from 'react-router-dom';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import {
-  ExperienceSectionSkeleton,
   SkillsSectionSkeleton,
   UserBaseUserInfoSkeleton,
   UserRightSectionSkeleton,
 } from '../../../components/UI/Skeleton';
+import UserExperienceSectionSkeleton from '../../../components/UI/Skeleton/Pages/userProfileSkeleton/UserExperienceSectionSkeleton';
 
 const SkillsSection = lazy(
   () => import('../../../components/PageComponents/ProfileComponents/UserProfile/SkillsSection/SkillsSection')
@@ -71,7 +71,7 @@ const UserProfilePage = () => {
             </Suspense>
           </Paper>
           <Paper sx={styles.experience}>
-            <Suspense fallback={<ExperienceSectionSkeleton />}>
+            <Suspense fallback={<UserExperienceSectionSkeleton />}>
               <MemoizedExperienceSection id={userId} />
             </Suspense>
           </Paper>
