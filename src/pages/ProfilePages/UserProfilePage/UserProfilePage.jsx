@@ -8,8 +8,9 @@ import { useParams, Navigate } from 'react-router-dom';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import {
   ExperienceSectionSkeleton,
-  RightSectionSkeleton,
-  SkillsSectionSkeleton, UserBaseUserInfoSkeleton
+  SkillsSectionSkeleton,
+  UserBaseUserInfoSkeleton,
+  UserRightSectionSkeleton,
 } from '../../../components/UI/Skeleton';
 
 const SkillsSection = lazy(
@@ -65,7 +66,7 @@ const UserProfilePage = () => {
             </Suspense>
           </Paper>
           <Paper sx={styles.right}>
-            <Suspense fallback={<RightSectionSkeleton />}>
+            <Suspense fallback={<UserRightSectionSkeleton />}>
               <MemoizedRightSection id={userId} />
             </Suspense>
           </Paper>
