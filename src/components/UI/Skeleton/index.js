@@ -16,7 +16,7 @@ import {
   SkillsSectionSkeleton,
   RightSectionSkeleton,
   ExperienceSectionSkeleton,
-} from './Pages/profileSkeleton';
+} from './Pages/personalProfileSkeleton';
 
 export {
   BlogSkeleton,
