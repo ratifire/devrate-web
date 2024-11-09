@@ -5,7 +5,10 @@ import { styles } from './CategoriesSkeleton.styles';
 const CategoriesSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton variant='rounded' width={235} height={154} />
+      <Box sx={styles.mainBox}>
+        <Skeleton variant='rounded' width={235} height={45} />
+        <Skeleton variant='rounded' width={235} height={50} />
+      </Box>
       <Box sx={styles.box}>
         <Skeleton variant='rounded' width={228} height={139} />
         <Skeleton variant='rounded' width={228} height={139} />
