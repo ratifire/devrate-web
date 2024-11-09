@@ -106,6 +106,7 @@ const SpecializationPage = () => {
               </Paper>
               <Paper sx={styles.interview}>
                 <Suspense fallback={<InterviewChartSkeleton />}>
+                  {/*<InterviewChartSkeleton />*/}
                   <MemoizedInterviewChart />
                 </Suspense>
               </Paper>
