@@ -1,13 +1,28 @@
-import React, { memo } from 'react';
+import React, { lazy, memo, Suspense } from 'react';
 import PersonalProfileTemplate from '../../../Templates/ProfileTemplates/PersonalProfileTemplate';
 import { Box, Container, Paper } from '@mui/material';
 import { styles } from './PersonalProfilePage.styles';
-import SkillsSection from '../../../components/PageComponents/ProfileComponents/PersonalProfile/SkillsSection';
-import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
-import BaseUserInfo from '../../../components/PageComponents/ProfileComponents/PersonalProfile/BaseUserInfo';
-import RightSection from '../../../components/PageComponents/ProfileComponents/PersonalProfile/RightSection';
-import ExperienceSection from '../../../components/PageComponents/ProfileComponents/PersonalProfile/ExperienceSection';
 import useAuth from '../../../utils/hooks/useAuth';
+import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
+import {
+  BaseUserInfoSkeleton,
+  ExperienceSectionSkeleton,
+  RightSectionSkeleton,
+  SkillsSectionSkeleton,
+} from '../../../components/UI/Skeleton';
+
+const SkillsSection = lazy(
+  () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/SkillsSection')
+);
+const BaseUserInfo = lazy(
+  () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/BaseUserInfo')
+);
+const RightSection = lazy(
+  () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/RightSection')
+);
+const ExperienceSection = lazy(
+  () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/ExperienceSection')
+);
 
 const MemoizedProfileHeader = memo(ProfileHeader);
 const MemoizedBaseUserInfo = memo(BaseUserInfo);
@@ -21,19 +36,27 @@ const PersonalProfilePage = () => {
   return (
     <PersonalProfileTemplate>
       <MemoizedProfileHeader />
-      <Container maxWidth="xl" sx={styles.container}>
+      <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.baseUserInfo}>
-            <MemoizedBaseUserInfo />
+            <Suspense fallback={<BaseUserInfoSkeleton />}>
+              <MemoizedBaseUserInfo />
+            </Suspense>
           </Paper>
           <Paper sx={styles.skills}>
-            <MemoizedSkillsSection />
+            <Suspense fallback={<SkillsSectionSkeleton />}>
+              <MemoizedSkillsSection />
+            </Suspense>
           </Paper>
           <Paper sx={styles.right}>
-            <MemoizedRightSection />
+            <Suspense fallback={<RightSectionSkeleton />}>
+              <MemoizedRightSection />
+            </Suspense>
           </Paper>
           <Paper sx={styles.experience}>
-            <MemoizedExperienceSection />
+            <Suspense fallback={<ExperienceSectionSkeleton />}>
+              <MemoizedExperienceSection />
+            </Suspense>
           </Paper>
         </Box>
       </Container>

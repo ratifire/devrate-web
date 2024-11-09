@@ -29,7 +29,6 @@ export const WorkExperienceModalSchema = Yup.object().shape({
     .required('profile.modal.workExperience.required'),
   endYear: Yup.date()
     .min(Yup.ref('startYear'), 'profile.modal.workExperience.endDateMessage')
-    .max(new Date(), 'profile.modal.workExperience.endYear_max')
     .when('currentDate', {
       is: (currentDate) => !currentDate,
       then: (schema) => schema.required('profile.modal.workExperience.required'),

@@ -78,15 +78,11 @@ const WorkExperienceModal = () => {
   const responsibilityDeleteHandler = (responsibilityToDelete) => {
     setResponsibilities(responsibilities.filter((item) => item !== responsibilityToDelete));
   };
-  
+
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
-    const newValues = {
-      ...formik.values,
-      currentDate: isChecked,
-      endYear: isChecked ? '' : formik.values.endYear || '',
-    };
-    formik.setValues(newValues);
+    formik.setFieldValue('currentDate', isChecked);
+    formik.setFieldValue('endYear', isChecked ? '9999' : formik.values.endYear || '');
   };
 
   return (
@@ -215,6 +211,7 @@ const WorkExperienceModal = () => {
             type='submit'
             label={t('profile.modal.btn')}
             correctStyle={styles.workExperienceBtn}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
           />
         </Box>
       </form>
