@@ -1,6 +1,9 @@
 export const styles = {
   wrapper: {
-    padding: '20px',
-    paddingTop: '0px',
-  }
+    width: '100%',
+  },
+  calendar: {
+    display: 'block',
+    height: '100%',
+  },
 };

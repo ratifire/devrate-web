@@ -23,8 +23,8 @@ const SchedulePage = () => {
             </Typography>
             <Paper sx={styles.calendarWrapper}>
               <Suspense fallback={<ScheduleSkeleton/>}>
-                {/*<ScheduleSkeleton/>*/}
-                <Schedule />
+                <ScheduleSkeleton/>
+                {/*<Schedule />*/}
               </Suspense>
             </Paper>
           </Paper>
