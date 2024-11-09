@@ -1,10 +1,12 @@
 import React from 'react';
 import { Box, Skeleton } from '@mui/material';
+import { styles } from './SidebarSkeleton.styles';
 
 const SidebarSkeleton = () => {
   return (
-    <Box>
-      <Skeleton variant='rounded' width={300} height={100} />
+    <Box sx={styles.wrapper}>
+      <Skeleton sx={styles.title} variant='rounded' width={320} height={30} />
+      <Skeleton width={320} height={280}/>
     </Box>
   )
 }

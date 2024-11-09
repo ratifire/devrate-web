@@ -1,6 +1,6 @@
 export const styles = {
   wrapper: {
     padding: '20px',
-    display: 'flex',
+    paddingTop: '0px',
   }
-}
+};
