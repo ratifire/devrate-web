@@ -5,7 +5,7 @@ import { styles } from './FullCalendarSkeleton.styles';
 const FullCalendarSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton sx={styles.calendar} variant='rounded' />
+      <Skeleton sx={styles.calendar} variant='rectangular' />
     </Box>
   )
 }

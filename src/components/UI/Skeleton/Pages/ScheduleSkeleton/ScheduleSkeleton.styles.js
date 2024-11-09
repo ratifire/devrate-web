@@ -1,8 +1,8 @@
 export const styles = {
   wrapper: {
-    padding: '20px',
+    padding: '24px',
     display: 'flex',
     minHeight: '100vh',
-    gap: '20px',
+    gap: '10px',
   }
 }

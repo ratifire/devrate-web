@@ -1,8 +1,6 @@
 export const styles = {
   wrapper: {
-    // height: '334px',
-  },
-  title: {
-
+    maxWidth: '320px',
+    width: '100%',
   }
 }

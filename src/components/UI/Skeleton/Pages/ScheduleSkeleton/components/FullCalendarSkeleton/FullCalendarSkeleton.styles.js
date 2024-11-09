@@ -3,7 +3,6 @@ export const styles = {
     width: '100%',
   },
   calendar: {
-    display: 'block',
     height: '100%',
   },
 };

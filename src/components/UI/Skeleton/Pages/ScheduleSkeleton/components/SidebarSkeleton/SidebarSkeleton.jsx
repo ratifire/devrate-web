@@ -5,8 +5,7 @@ import { styles } from './SidebarSkeleton.styles';
 const SidebarSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton sx={styles.title} variant='rounded' width={320} height={30} />
-      <Skeleton width={320} height={310}/>
+      <Skeleton variant='rounded' width={275} height={260} />
     </Box>
   )
 }
