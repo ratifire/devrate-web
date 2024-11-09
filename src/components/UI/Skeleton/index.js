@@ -1,26 +1,28 @@
 import { FeedbackModalSkeleton } from './Modal';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
+import { ScheduleSkeleton } from './Pages/ScheduleSkeleton';
 import {
   CategoriesSkeleton,
-  LevelSkeleton,
-  InterviewsSkeleton,
-  SkillsSkeleton,
-  LevelChartSkeleton,
-  SkillsAssessmentChartSkeleton,
   HardSkillsChartSkeleton,
   InterviewChartSkeleton,
+  InterviewsSkeleton,
+  LevelChartSkeleton,
+  LevelSkeleton,
+  SkillsAssessmentChartSkeleton,
+  SkillsSkeleton,
 } from './Pages/specializationSkeleton';
 
 export {
-  FeedbackModalSkeleton,
   BlogSkeleton,
-  FaqSkeleton,
   CategoriesSkeleton,
-  LevelSkeleton,
-  InterviewsSkeleton,
-  SkillsSkeleton,
-  LevelChartSkeleton,
-  SkillsAssessmentChartSkeleton,
+  FaqSkeleton,
+  FeedbackModalSkeleton,
   HardSkillsChartSkeleton,
   InterviewChartSkeleton,
+  InterviewsSkeleton,
+  LevelChartSkeleton,
+  LevelSkeleton,
+  ScheduleSkeleton,
+  SkillsAssessmentChartSkeleton,
+  SkillsSkeleton,
 };
