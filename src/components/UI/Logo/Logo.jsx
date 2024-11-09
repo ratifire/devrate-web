@@ -1,6 +1,6 @@
 import React from 'react';
  //import logo from '../../../assets/icons/logo.svg';
-import logoLight from '../../../assets/icons/logoLight.svg';
+import logoLight from '../../../assets/icons/LogoHeader/WhiteThemeIcon/logoHeader.svg';
 import logo from '../../../assets/icons/LogoHeader/BlackThemeIcon/BlackLogoHeader.svg';
 import PropTypes from 'prop-types';
 import { CardMedia } from '@mui/material';
