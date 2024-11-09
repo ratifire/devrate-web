@@ -3,20 +3,20 @@ import { Gauge, gaugeClasses } from '@mui/x-charts';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHardSkillData } from '../../../../../utils/hooks/specialization';
-import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 import { getLevel } from '../utils';
 import { styles } from './LevelChart.styles.js';
 import useThemeLevelChart from './useThemeLevelChart';
+import LevelChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 
 const LevelChart = () => {
   const { skills, isError, isFetching, activeMastery } = useHardSkillData();
   const { t } = useTranslation();
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
-  const { grad1, grad2, grad3, grad4 } = useThemeLevelChart()
-
+  const { grad1, grad2, grad3, grad4 } = useThemeLevelChart();
 
   if (isFetching) {
-    return <LoaderComponent />;
+    return <LevelChartSkeleton />;
   }
 
   if (isError) {
