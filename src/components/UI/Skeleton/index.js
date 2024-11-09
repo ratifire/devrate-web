@@ -11,6 +11,12 @@ import {
   SkillsAssessmentChartSkeleton,
   SkillsSkeleton,
 } from './Pages/specializationSkeleton';
+import {
+  BaseUserInfoSkeleton,
+  SkillsSectionSkeleton,
+  RightSectionSkeleton,
+  ExperienceSectionSkeleton,
+} from './Pages/profileSkeleton';
 
 export {
   BlogSkeleton,
@@ -25,4 +31,8 @@ export {
   ScheduleSkeleton,
   SkillsAssessmentChartSkeleton,
   SkillsSkeleton,
+  BaseUserInfoSkeleton,
+  SkillsSectionSkeleton,
+  RightSectionSkeleton,
+  ExperienceSectionSkeleton,
 };
