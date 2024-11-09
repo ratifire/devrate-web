@@ -1,5 +1,26 @@
 import { FeedbackModalSkeleton } from './Modal';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
-import { SpecialisationCategoriesSkeleton } from './Pages/specializationSkeleton';
+import {
+  CategoriesSkeleton,
+  LevelSkeleton,
+  InterviewsSkeleton,
+  SkillsSkeleton,
+  LevelChartSkeleton,
+  SkillsAssessmentChartSkeleton,
+  HardSkillsChartSkeleton,
+  InterviewChartSkeleton,
+} from './Pages/specializationSkeleton';
 
-export { FeedbackModalSkeleton, BlogSkeleton, FaqSkeleton, SpecialisationCategoriesSkeleton };
+export {
+  FeedbackModalSkeleton,
+  BlogSkeleton,
+  FaqSkeleton,
+  CategoriesSkeleton,
+  LevelSkeleton,
+  InterviewsSkeleton,
+  SkillsSkeleton,
+  LevelChartSkeleton,
+  SkillsAssessmentChartSkeleton,
+  HardSkillsChartSkeleton,
+  InterviewChartSkeleton,
+};

@@ -1,9 +1,18 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { styles } from './SpecialisationPage.styles';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import { useTranslation } from 'react-i18next';
-import SpecialisationCategoriesSkeleton from '../../components/UI/Skeleton/Pages/specializationSkeleton/SpecialisationCategoriesSkeleton';
+import {
+  CategoriesSkeleton,
+  HardSkillsChartSkeleton,
+  InterviewChartSkeleton,
+  InterviewsSkeleton,
+  LevelSkeleton,
+  SkillsAssessmentChartSkeleton,
+  SkillsSkeleton,
+} from '../../components/UI/Skeleton';
+import LevelChartSkeleton from '../../components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 
 const ProfileHeader = React.lazy(() => import('../../components/PageComponents/ProfileHeader'));
 const SpecializationLevel = React.lazy(
@@ -44,7 +53,6 @@ const MemoizedLevelChart = React.memo(LevelChart);
 
 const SpecializationPage = () => {
   const { t } = useTranslation();
-  const [activeMastery, setActiveMastery] = useState();
 
   return (
     <SpecializationTemplate>
@@ -52,21 +60,29 @@ const SpecializationPage = () => {
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.specialisationCategories}>
-            <Suspense fallback={<SpecialisationCategoriesSkeleton />}>
+            <Suspense fallback={<CategoriesSkeleton />}>
               <MemoizedSpecialisationCategories />
             </Suspense>
           </Paper>
           <Paper sx={styles.specialisationLevel}>
-            <MemoizedSpecializationLevel activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
+            <Suspense fallback={<LevelSkeleton />}>
+              <MemoizedSpecializationLevel />
+            </Suspense>
           </Paper>
           <Paper sx={styles.specialisationInterviewParticipation}>
-            <MemoizedInterviews />
+            <Suspense fallback={<InterviewsSkeleton />}>
+              <MemoizedInterviews />
+            </Suspense>
           </Paper>
           <Paper sx={styles.specialisationHardSkills}>
-            <MemoizedHardSkills activeMastery={activeMastery} setActiveMastery={setActiveMastery} />
+            <Suspense fallback={<SkillsSkeleton />}>
+              <MemoizedHardSkills />
+            </Suspense>
           </Paper>
           <Paper sx={styles.specialisationSoftSkills}>
-            <MemoizedSoftSkills />
+            <Suspense fallback={<SkillsSkeleton />}>
+              <MemoizedSoftSkills />
+            </Suspense>
           </Paper>
           <Paper sx={styles.specialisationStatistics}>
             <Typography variant='h6' sx={styles.statisticTitle}>
@@ -74,16 +90,24 @@ const SpecializationPage = () => {
             </Typography>
             <Box sx={styles.statisticWrapper}>
               <Paper sx={styles.level}>
-                <MemoizedLevelChart />
+                <Suspense fallback={<LevelChartSkeleton />}>
+                  <MemoizedLevelChart />
+                </Suspense>
               </Paper>
               <Paper sx={styles.averageSkillsScore}>
-                <MemoizedSkillsAssessmentChart />
+                <Suspense fallback={<SkillsAssessmentChartSkeleton />}>
+                  <MemoizedSkillsAssessmentChart />
+                </Suspense>
               </Paper>
               <Paper sx={styles.hardSkillsByProductivity}>
-                <MemoizedHardSkillsChart />
+                <Suspense fallback={<HardSkillsChartSkeleton />}>
+                  <MemoizedHardSkillsChart />
+                </Suspense>
               </Paper>
               <Paper sx={styles.interview}>
-                <MemoizedInterviewChart />
+                <Suspense fallback={<InterviewChartSkeleton />}>
+                  <MemoizedInterviewChart />
+                </Suspense>
               </Paper>
             </Box>
           </Paper>
