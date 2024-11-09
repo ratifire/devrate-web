@@ -6,7 +6,7 @@ const SidebarSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
       <Skeleton sx={styles.title} variant='rectangular' height={30} />
-      <Skeleton sx={styles.calendar} variant='rectangular' height={230} />
+      <Skeleton variant='rectangular' height={210} />
     </Box>
   )
 }
