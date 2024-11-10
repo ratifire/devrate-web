@@ -17,7 +17,7 @@ export const en = {
         text3: 'Get detailed, actionable feedback on exactly what you need to work on to get the job you deserve.',
       },
       footer: {
-        copyright: '© 2023 Devrate, Inc. All rights reserved.',
+        copyright: '© 2023 SKILLZZY, Inc. All rights reserved.',
         trademarks: 'All trademarks, logos and brand names are <br/> the property of their respective owners.',
       },
       links: {
@@ -52,7 +52,7 @@ export const en = {
         link: 'Link',
         link_long: 'Link is too long',
         link_short: 'Link is too short',
-        link_placeholder: 'https://devrate.com/certificate_id=12345678987654321',
+        link_placeholder: 'https://skillzzy.com/certificate_id=12345678987654321',
         description: 'Description',
         description_long: 'Description label too long',
         description_short: 'Description label too short',
@@ -86,7 +86,7 @@ export const en = {
       },
       login: {
         title: 'Sign In',
-        subtitle: 'Log in to your account DEVRATE',
+        subtitle: 'Log in to your account SKILLZZY',
         email: 'Email',
         password: 'Password',
         password_tooltip: 'Passwords must contain 8 + characters, at least 1 number, at least 1 letter and no spaces.',
@@ -113,7 +113,7 @@ export const en = {
         password_repeat: 'Repeat password',
         password_tooltip: '8+ characters,\n' + 'at least 1 number, 1 uppercase and 1 lowercase letter, 1 symbol',
         password_invalid: 'Incorrect password',
-        news_letter: 'Send me news, surveys and special offers from DEVRATE',
+        news_letter: 'Send me news, surveys and special offers from SKILLZZY',
         agreement: 'I have read and agree to the Terms and conditions',
         agreement_error: 'To use our service, you must agree to the terms of use',
         btn_register: 'Sign Up',
