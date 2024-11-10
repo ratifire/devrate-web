@@ -17,6 +17,13 @@ const styles = {
     marginBottom: theme.spacing(4),
     width: '100%',
   }),
+  submitBtn: (theme) => ({
+    fontSize: '18px',
+    fontWeight: 600,
+    lineHeight: 1.43,
+    borderRadius: theme.spacing(2),
+    padding: '12px',
+  }),
 };
 
 export default styles;

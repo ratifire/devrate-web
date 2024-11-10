@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useGetInterviewSummariesStatisticQuery } from '../../../../../redux/chart/chartApiSlice';
-import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 import {
   createTenDaysInterviewData,
   createTenMonthsInterviewData,
@@ -15,6 +15,7 @@ import {
 import { styles } from './InterviewChart.styles';
 import useThemeInterviewChart from './useThemeInterviewChart';
 import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
+import InterviewChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/InterviewChartSkeleton';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -24,12 +25,13 @@ const InterviewChart = () => {
   const dataMonths = useMemo(() => createTenMonthsInterviewData({ t, data }), [data]);
   const dataDays = useMemo(() => createTenDaysInterviewData({ data }), [data]);
   const { itemStyle, contentStyle } = useTooltip();
-  const { conductedGrad1, conductedGrad2, conductedGrad3, passedGrad1, passedGrad2, passedGrad3 } = useThemeInterviewChart()
+  const { conductedGrad1, conductedGrad2, conductedGrad3, passedGrad1, passedGrad2, passedGrad3 } =
+    useThemeInterviewChart();
 
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
   if (isFetching) {
-    return <LoaderComponent />;
+    return <InterviewChartSkeleton />;
   }
 
   if (isError) {

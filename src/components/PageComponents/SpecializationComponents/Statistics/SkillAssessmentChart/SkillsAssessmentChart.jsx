@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 import {
   arithmeticAverageSkillValue,
   createTenDaysHistoryData,
@@ -15,6 +15,7 @@ import {
 import { styles } from './SkillsAssessmentChart.styles';
 import useSkillsAssessmentChart from './useSkillsAssessmentChart';
 import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
+import { SkillsAssessmentChartSkeleton } from '../../../../UI/Skeleton';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
@@ -26,7 +27,7 @@ const SkillsAssessmentChart = () => {
     secondValue: 'hardSkillMark',
     firstValue: 'softSkillMark',
   });
-  const { grad1, grad2, grad3 } = useSkillsAssessmentChart()
+  const { grad1, grad2, grad3 } = useSkillsAssessmentChart();
 
   const dataDays = useMemo(
     () => createTenDaysHistoryData({ data: dataHistory, average: arithmeticAverage }),
@@ -39,7 +40,7 @@ const SkillsAssessmentChart = () => {
   const { handleChange, selectedPeriod } = useHandleChange({ dataDays, dataMonths });
 
   if (isFetching) {
-    return <LoaderComponent />;
+    return <SkillsAssessmentChartSkeleton />;
   }
 
   if (isError) {

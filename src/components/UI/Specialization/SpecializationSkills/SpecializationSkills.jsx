@@ -5,8 +5,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ItemSkill } from '../SkillsItem';
 import { styles } from './SpecializationSkills.styles';
-import { ErrorComponent, LoaderComponent } from '../../Exceptions';
+import { ErrorComponent } from '../../Exceptions';
 import { useSelector } from 'react-redux';
+import { SkillsSkeleton } from '../../Skeleton';
 
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
   const isDisabled = !activeSpecialization && !mainSpecialization;
 
   if (isFetching) {
-    return <LoaderComponent />
+    return <SkillsSkeleton />
   }
 
   if (isError) {

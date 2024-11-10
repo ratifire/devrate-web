@@ -39,7 +39,7 @@ const ProfileHeader = () => {
     <AppBar component='header' position={'static'} sx={styles.header}>
       <Box sx={styles.logoBox}>
         <Link to={links.profile}>
-          <Logo width={'187'} height={'22'} />
+          <Logo width={'187'} height={'44'} />
         </Link>
       </Box>
       <Box sx={styles.headerNav}>

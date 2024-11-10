@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, Link, Typography } from '@mui/material';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ModalLayout from '../../../../layouts/ModalLayout';
 import styles from './LoginModal.styles';
 import { LoginSchema } from '../../../../utils/valadationSchemas/index';
@@ -15,6 +14,7 @@ import { useLoginMutation } from '../../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../../redux/auth/authSlice';
 import Cookies from 'js-cookie';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const initialValues = {
   email: '',
@@ -97,14 +97,6 @@ const LoginModal = () => {
         {t('modal.login.subtitle')}
       </Typography>
       <form className='landingForm' onSubmit={handleFormSubmit} style={{ width: '100%' }}>
-        {loginError && (
-          <Box sx={styles.errorWrapper}>
-            <HighlightOffIcon sx={styles.errorIcon} />
-            <Typography variant='body2' sx={styles.error}>
-              {loginError}
-            </Typography>
-          </Box>
-        )}
         <FormInput
           name='email'
           value={formik.values.email}
@@ -131,6 +123,16 @@ const LoginModal = () => {
           iconStyle={styles.iconStyle}
           autoComplete='new-password'
         />
+
+        {loginError && (
+          <Box sx={styles.codeErrorWrapper}>
+            <CancelIcon sx={styles.codeErrorIcon} />
+            <Typography variant='subtitle2' sx={styles.codeErrorText}>
+              {loginError}
+            </Typography>
+          </Box>
+        )}
+
         <Box sx={styles.textLink}>
           <ButtonDef
             variant='text'
@@ -146,6 +148,7 @@ const LoginModal = () => {
             type='submit'
             disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
             label='modal.login.btn_login'
+            correctStyle={styles.submitBtn}
           />
         </Box>
         <Box sx={styles.policyLinkBox}>

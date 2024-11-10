@@ -11,24 +11,26 @@ const ResetPassword = lazy(
 const NotificationModal = lazy(
   () => import('../../components/ModalsComponents/AuthModals/ResetPasswordModal/NotificationModal')
 );
+const ConfirmationModal = lazy(() => import('../../components/ModalsComponents/AuthModals/ConfirmationModal'));
 
 const MemoizedCheckEmail = memo(CheckEmail);
 const MemoizedLoginModal = memo(LoginModal);
 const MemoizedRegistrationModal = memo(RegistrationModal);
 const MemoizedResetPassword = memo(ResetPassword);
 const MemoizedNotificationModal = memo(NotificationModal);
+const MemoConfirmationModal = memo(ConfirmationModal);
 
 const HomeTemplate = ({ children }) => {
-  const { openLogin, openRegistration, openCheckEmail, openResetPassword, openNotification } = useSelector(
-    (state) => state.modal
-  );
+  const { openLogin, openRegistration, openConfirmation, openCheckEmail, openResetPassword, openNotification } =
+    useSelector((state) => state.modal);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className='home'>
+      <div className='homePage'>
         {children}
         {openLogin && <MemoizedLoginModal />}
         {openRegistration && <MemoizedRegistrationModal />}
+        {openConfirmation && <MemoConfirmationModal />}
         {openCheckEmail && <MemoizedCheckEmail />}
         {openResetPassword && <MemoizedResetPassword />}
         {openNotification && <MemoizedNotificationModal />}

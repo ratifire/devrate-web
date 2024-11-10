@@ -13,7 +13,7 @@ const Blog = () => {
 
   const renderBlogList = () => {
     return blogArr?.map((blog) => (
-      <Box sx={styles.card} key={blog.version}>
+      <Box sx={styles.card} key={blog.id}>
         <Typography variant='subtitle2' sx={styles.blogTitle}>
           {t(blog.title)}
         </Typography>
@@ -34,7 +34,7 @@ const Blog = () => {
       <Typography variant='h6' sx={styles.title}>
         {t('blogText.title')}
       </Typography>
-      <Box sx={styles.list} ref={containerRef} className='blog-list'>
+      <Box sx={styles.list} ref={containerRef}>
         {renderBlogList()}
       </Box>
     </Box>
