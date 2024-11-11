@@ -73,11 +73,6 @@
           border-radius: 4px;
           transform: scale(1.1);
         }
-
-        &:active {
-          filter: invert(10%) sepia(5) saturate(500%) hue-rotate(125deg) brightness(101%) contrast(101%);
-        }
-
       }
     }
 
