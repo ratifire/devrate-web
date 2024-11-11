@@ -16,10 +16,11 @@ import {
 import { setActiveSpecialization, setMainSpecializations } from '../../../../redux/specialization/specializationSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { ErrorComponent } from '../../../UI/Exceptions';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
 import { styles } from './SpecializationCategories.styles';
 import modalSpecialization from '../../../../utils/constants/Specialization/modalSpecialization'
+import { CategoriesSkeleton } from '../../../UI/Skeleton';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
@@ -125,7 +126,7 @@ const SpecializationCategories = () => {
   };
 
   if (isLoading) {
-    return <LoaderComponent />;
+    return <CategoriesSkeleton />;
   }
 
   if (isError) {

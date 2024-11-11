@@ -18,7 +18,7 @@ export const uk = {
           'Отримайте докладний, дієвий відгук про те, над чим саме вам потрібно працювати, щоб отримати роботу, на яку ви заслуговуєте.',
       },
       footer: {
-        copyright: '© 2023 Devrate, Inc. Усі права захищено.',
+        copyright: '© 2023 SKILLZZY, Inc. Усі права захищено.',
         trademarks: 'Усі торгові марки, логотипи та назви брендів є <br/> власністю відповідних власників.',
       },
       links: {
@@ -53,7 +53,7 @@ export const uk = {
         link: 'Посилання',
         link_long: 'Довге посилання. Внесіть, будь-ласка, зміни',
         link_short: 'Посилання занадто коротке. Внесіть, будь-ласка, зміни',
-        link_placeholder: 'https://devrate.com/certificate_id=12345678987654321',
+        link_placeholder: 'https://skillzzy.com/certificate_id=12345678987654321',
         description: 'Опис досягнення',
         description_long: 'Довгий опис досягнення. Внесіть, будь-ласка, зміни',
         description_short: 'Опис досягнення занадто короткий. Внесіть, будь-ласка, зміни',
@@ -87,7 +87,7 @@ export const uk = {
       },
       login: {
         title: 'Увійдіть в аккаунт',
-        subtitle: 'Увійдіть в обліковий запис DEVRATE',
+        subtitle: 'Увійдіть в обліковий запис SKILLZZY',
         email: 'Електронна пошта',
         password: 'Пароль',
         password_tooltip:
@@ -115,7 +115,7 @@ export const uk = {
         password_repeat: 'Повторити пароль',
         password_tooltip: 'Паролі повинні містити 8 + символів, принаймні 1 цифру, принаймні 1 літеру та без пробілів.',
         password_invalid: 'Неприпустимий пароль',
-        news_letter: 'Надсилати мені новини, опитування та спеціальні пропозиції від DEVRATE',
+        news_letter: 'Надсилати мені новини, опитування та спеціальні пропозиції від SKILLZZY',
         agreement: 'Я прочитав (ла) та погоджуюсь з умовами користування',
         agreement_error: 'Для використання нашого сервісу вам необхідно погодитися з умовами користування',
         btn_register: 'Зареєструватись',
@@ -278,6 +278,8 @@ export const uk = {
         contact: 'Контактна інформація',
         languages: 'Мови',
         aboutMe: 'Про мене',
+        duties: "Обов'язки",
+        endYear: 'Поточний',
       },
       userMenu: {
         profile: 'Профіль',
@@ -352,6 +354,7 @@ export const uk = {
         },
         workExperience: {
           position: 'Посада',
+          title: 'Досвід роботи',
           position_long: 'Посада занадто довге',
           position_short: 'Посада занадто коротка',
           position_placeholder: 'Інженер-програміст',
@@ -375,6 +378,8 @@ export const uk = {
           startDateMinMessage: 'Стартова дата має бути пізніше 01/01/1950',
           startDateMaxMessage: 'Кінцева дата має бути не пізніше за поточку',
           endDateMessage: 'Кінцева дата має буди пізнішою за стартову дату',
+          endYear_min: 'Дата завершення повинна бути пізніше дати початку',
+          endYear_max: 'Кінцева дата не може бути пізніше цього року',
         },
         education: {
           title: 'Освіта',

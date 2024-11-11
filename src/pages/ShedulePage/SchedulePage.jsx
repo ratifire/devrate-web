@@ -1,15 +1,17 @@
-import React from 'react';
-import {Box, Container,Paper, Typography} from '@mui/material';
+import React, { lazy, Suspense } from 'react';
+import { Box, Container, Paper, Typography } from '@mui/material';
 import { styles } from './SchedulePage.styles';
 import ProfileHeader from '../../components/PageComponents/ProfileHeader';
-import Schedule from '../../components/PageComponents/ScheduleComponents';
+
+const Schedule = lazy(() => import('../../components/PageComponents/ScheduleComponents'));
 
 import ScheduleTemplate from '../../Templates/ScheduleTemplate';
 import { useTranslation } from 'react-i18next';
+import { ScheduleSkeleton } from '../../components/UI/Skeleton';
 
 const SchedulePage = () => {
   const { t } = useTranslation();
-  
+
   return (
     <ScheduleTemplate>
       <ProfileHeader />
@@ -20,7 +22,9 @@ const SchedulePage = () => {
               {t('schedule.title')}
             </Typography>
             <Paper sx={styles.calendarWrapper}>
-              <Schedule />
+              <Suspense fallback={<ScheduleSkeleton/>}>
+                <Schedule />
+              </Suspense>
             </Paper>
           </Paper>
         </Box>
