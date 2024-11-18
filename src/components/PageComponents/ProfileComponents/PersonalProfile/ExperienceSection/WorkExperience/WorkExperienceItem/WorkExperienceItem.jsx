@@ -41,7 +41,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
           </Typography>
           <Typography variant="subtitle3" sx={styles.workPlaceTitle}>
             {companyName} <span style={{ margin: '0 4px' }}>•</span>
-            {endYear === '9999' ? `${startYear} - present` : `${startYear} - ${endYear}`}
+            {endYear === '9999' ? `${startYear} - ${t('profile.experience.endYear')}` : `${startYear} - ${endYear}`}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>

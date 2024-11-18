@@ -8,7 +8,6 @@ import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
-import { selectCurrentUserId } from '../../../../redux/auth/authSlice';
 import {
   useCreateInterviewRequestMutation,
   useGetInterviewRequestQuery,
@@ -29,15 +28,16 @@ const ScheduleInterviewModal = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const isOpen = useSelector((state) => state.modal.scheduleInterview);
-  const userId = useSelector(selectCurrentUserId);
   const [checked, setChecked] = useState([]);
-  
+  const { masteryId, userId } = useGetMastery()
+
   const shouldUpdate = useRef(false);
   
   const { data: currentDates } = useGetInterviewRequestQuery({
     userId,
     role,
-  }, { skip: !userId });
+    masteryId
+  }, { skip: !userId || !masteryId });
   
   useLayoutEffect(() => {
     if (currentDates && currentDates.availableDates) {
@@ -60,7 +60,6 @@ const ScheduleInterviewModal = () => {
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
   const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
-  const { masteryId } = useGetMastery();
   const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
   const handleTabChange = (newTab) => setTab(newTab);
   

@@ -1,8 +1,10 @@
 export const styles = {
   contentWrapper: (theme) => ({
     padding: theme.spacing(4),
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-between',
     gap: theme.spacing(4),
   }),
   stats: (theme) => ({

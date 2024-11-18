@@ -20,28 +20,24 @@ import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
 
-
-
 const WorkExperienceModal = () => {
-  const [responsibilities, setResponsibilities] = useState([]);
-  const selectYears = useMemo(() => generateYearsArray(), []);
+  const dispatch = useDispatch();
+  const { modalData } = useSelector((state) => state.modal);
+  const workExperience = useSelector((state) => state.modal.workExperience);
   const { id } = useSelector((state) => state.auth.user.data);
+  const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
+  const { t } = useTranslation();
   const [createNewWorkExperience] = useCreateNewWorkExperienceMutation();
   const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
 
-
-  const dispatch = useDispatch();
-  const workExperience = useSelector((state) => state.modal.workExperience);
+  const selectYears = useMemo(() => generateYearsArray(), []);
   const handleClose = () => dispatch(closeModal({ modalName: 'workExperience' }));
-  const { t } = useTranslation();
 
-  const { modalData } = useSelector((state) => state.modal);
-   console.log(modalData?.responsibilities)
   const initialValues = {
     position: modalData?.position || '',
     companyName: modalData?.companyName || '',
     description: modalData?.description || '',
-    responsibilities: modalData?.responsibilities || '',
+    responsibilities: '',
     startYear: modalData?.startYear || '',
     endYear: modalData?.endYear || '',
     currentDate: modalData?.endYear === '9999',
@@ -82,15 +78,11 @@ const WorkExperienceModal = () => {
   const responsibilityDeleteHandler = (responsibilityToDelete) => {
     setResponsibilities(responsibilities.filter((item) => item !== responsibilityToDelete));
   };
-  
+
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
-    const newValues = {
-      ...formik.values,
-      currentDate: isChecked,
-      endYear: isChecked ? '' : formik.values.endYear || '',
-    };
-    formik.setValues(newValues);
+    formik.setFieldValue('currentDate', isChecked);
+    formik.setFieldValue('endYear', isChecked ? '9999' : formik.values.endYear || '');
   };
 
   return (
@@ -201,22 +193,25 @@ const WorkExperienceModal = () => {
               <AddIcon />
             </IconButton>
           </Box>
-          <Box sx={styles.responsibility}>
-            {responsibilities.map((responsibility, index) => (
-              <Responsibility
-                key={index}
-                responsibility={responsibility}
-                tobeDeleted
-                responsibilityDeleteHandler={responsibilityDeleteHandler}
-              />
-            ))}
-          </Box>
+          {!!responsibilities.length && (
+            <Box sx={styles.responsibility}>
+              {responsibilities.map((responsibility, index) => (
+                <Responsibility
+                  key={index}
+                  responsibility={responsibility}
+                  tobeDeleted
+                  responsibilityDeleteHandler={responsibilityDeleteHandler}
+                />
+              ))}
+            </Box>
+          )}
 
           <ButtonDef
             variant='contained'
             type='submit'
             label={t('profile.modal.btn')}
             correctStyle={styles.workExperienceBtn}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
           />
         </Box>
       </form>

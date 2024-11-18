@@ -1,73 +1,83 @@
 .header {
-	display: flex;
-	justify-content: space-between;
-	
-	&__bg {
-		top: 0;
-		left: 0;
-		z-index: 1000;
-		position: absolute;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 20px 0;
-		background-color: transparent;
-	}
-	
-	&__logo img {
-		width: 214px;
-		height: auto;
-	}
-	
-	&__nav {
-		display: flex;
-		gap: 24px;
-		
-		&__links {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			list-style: none;
-			
-			a {
-				display: block;
-				color: #fff;
-				text-decoration: none;
-				font-weight: 700;
-				margin-right: 24px;
-				transition: all 0.3s linear;
-				
-				
-				&:hover {
-					color: #ad7dd1;
-					transform: scale(1.1);
-					
-				}
-				
-				&:active {
-					color: #8133F1;
-					
-				}
-			}
-		}
-	}
-	
-	&__socialIcons {
-		display: flex;
-		gap: 15px;
-		
-		& > a {
-			margin-left: 8px;
-			
-			img {
-				width: 54px;
-				height: 54px;
-			}
-		}
-		
-		& > a:first-child {
-			margin-left: 0;
-		}
-	}
+  display: flex;
+  justify-content: space-between;
+
+  &__bg {
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    background-color: transparent;
+  }
+
+  &__logo img {
+    width: 214px;
+    height: auto;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 24px;
+
+    &__links {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+
+      a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 700;
+        margin-right: 24px;
+        transition: all 0.3s linear;
+
+
+        &:hover {
+          color: #B78AF7;
+          transform: scale(1.1);
+
+        }
+
+        &:active {
+          color: #8133F1;
+
+        }
+      }
+    }
+  }
+
+  &__socialIcons {
+    display: flex;
+    gap: 15px;
+
+    & > a {
+      margin-left: 8px;
+
+
+      img {
+        width: 54px;
+        height: 54px;
+        transition: all 0.3s linear;
+
+
+        &:hover {
+          background-color: #CEB0FA29;
+          border-radius: 4px;
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    & > a:first-child {
+      margin-left: 0;
+    }
+  }
 }

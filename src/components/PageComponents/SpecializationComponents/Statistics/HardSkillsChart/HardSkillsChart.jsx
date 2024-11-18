@@ -3,20 +3,21 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
 import useHardSkillData from '../../../../../utils/hooks/specialization/useHardSkillData';
-import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 import { roundData, useTooltip } from '../utils';
 import { styles } from './HardSkillsChart.styles.js';
 import useThemeHardSkillsChart from './useThemeHardSkillsChart';
+import HardSkillsChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/HardSkillsChartSkeleton';
 
 const HardSkillsChart = () => {
-  const { itemStyle,  contentStyle } = useTooltip();
+  const { itemStyle, contentStyle } = useTooltip();
   const { skills, isFetching, isError } = useHardSkillData();
   const { t } = useTranslation();
   const { grad1, grad2 } = useThemeHardSkillsChart();
   const roundedSkills = roundData(skills);
 
   if (isFetching) {
-    return <LoaderComponent />;
+    return <HardSkillsChartSkeleton />;
   }
 
   if (isError) {
