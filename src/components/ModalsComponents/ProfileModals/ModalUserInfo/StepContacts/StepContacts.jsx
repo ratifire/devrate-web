@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../../redux/modal/modalSlice';
+import { useSelector } from 'react-redux';
 import {
   useGetUserContactsQuery,
   usePostContactsUserMutation,
@@ -27,7 +26,6 @@ const StepContacts = () => {
   const [postContactsUser] = usePostContactsUserMutation();
   const userId = useSelector((state) => state.auth.user.data.id);
   const contactsQuery = useGetUserContactsQuery(userId);
-  const dispatch = useDispatch();
 
   const valuesMap = contactsQuery.data.reduce((acc, contact) => {
     acc[typeNameMap[contact.type]] = contact.value;
@@ -56,8 +54,6 @@ const StepContacts = () => {
         { type: SOCIAL_TYPES.PHONE_NUMBER, value: phone },
       ],
     });
-
-    dispatch(closeModal({ modalName: 'openUserInfo' }));
   };
 
   const formik = useFormik({
