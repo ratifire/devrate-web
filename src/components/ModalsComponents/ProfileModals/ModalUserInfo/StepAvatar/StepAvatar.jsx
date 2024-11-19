@@ -27,6 +27,7 @@ const StepAvatar = () => {
       userId: user.id,
       avatar: avatar,
     });
+    formik.resetForm();
   };
 
   const formik = useFormik({
@@ -48,6 +49,10 @@ const StepAvatar = () => {
     formik.setFieldValue('avatar', img);
   };
 
+  const handleChangeDirty = (img) => {
+    formik.setFieldValue('avatar', img);
+  }
+
   return (
     <Box sx={styles.wrapper}>
       <form onSubmit={formik.handleSubmit}>
@@ -57,6 +62,8 @@ const StepAvatar = () => {
             handleBlur={formik.handleBlur}
             handlerDelete={handleDeleteAvatar}
             value={avatarValue}
+            isDisabled={!formik.dirty}
+            onChange={handleChangeDirty}
           />
         </Box>
       </form>
