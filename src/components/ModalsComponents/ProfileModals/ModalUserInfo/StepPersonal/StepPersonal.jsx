@@ -5,7 +5,10 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from '../../../../../utils/valadationSchemas/index';
-import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '../../../../../redux/user/personal/personalApiSlice';
+import {
+  useGetPersonalUserQuery,
+  usePutPersonalUserMutation,
+} from '../../../../../redux/user/personal/personalApiSlice';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { useGetCountryListQuery } from '../../../../../redux/countryList/countryApiSlice';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
@@ -13,7 +16,7 @@ import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 const StepPersonal = () => {
   const { data: userCountries } = useGetCountryListQuery();
   const { data: userData } = useSelector(selectCurrentUser);
-
+  const [putPersonalUser] = usePutPersonalUserMutation();
   const { data: info } = useGetPersonalUserQuery(userData.id);
   const { firstName, lastName, city, country, status, description } = info;
 
@@ -26,9 +29,8 @@ const StepPersonal = () => {
     description: description || '',
   };
 
-  const [putPersonalUser] = usePutPersonalUserMutation();
-  const onSubmit = ({ firstName, lastName, city, country, status, description }) => {
-    putPersonalUser({
+  const onSubmit = async ({ firstName, lastName, city, country, status, description }) => {
+    const response = await putPersonalUser({
       id: userData.id,
       firstName: firstName,
       lastName: lastName,
@@ -37,8 +39,20 @@ const StepPersonal = () => {
       city: city,
       subscribed: userData.subscribed,
       description: description,
-    });
+    }).unwrap();
+
+    const initialValues = {
+      firstName: response.firstName || '',
+      lastName: response.lastName || '',
+      city: response.city || '',
+      country: response.country || '',
+      status: response.status || '',
+      description: response.description || '',
+    };
+
+    await formik.resetForm({ values: { ...initialValues } });
   };
+
   const formik = useFormik({
     initialValues,
     validationSchema: StepPersonalSchema,
@@ -129,7 +143,7 @@ const StepPersonal = () => {
 
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          disabled={!formik.dirty}
+          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
           variant='contained'
           correctStyle={styles.btn}
           type='submit'

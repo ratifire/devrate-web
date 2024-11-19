@@ -10,6 +10,8 @@ const typeNameMap = {
 };
 
 const getDataStepContacts = (data) => {
+  if (!Array.isArray(data)) return {};
+
   return Object.fromEntries(data.map((contact) => [typeNameMap[contact.type], contact.value]));
 };
 
