@@ -10,27 +10,15 @@ import { StepContactsSchema } from '../../../../../utils/valadationSchemas/index
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
-import { addHttps, addTelegram } from './helpers';
+import {addHttps, addTelegram, getDataStepContacts} from './helpers';
 import { styles } from './StepContacts.styles';
-
-const typeNameMap = {
-  [SOCIAL_TYPES.TELEGRAM_LINK]: 'telegram',
-  [SOCIAL_TYPES.EMAIL]: 'mail',
-  [SOCIAL_TYPES.LINKEDIN_LINK]: 'linkedIn',
-  [SOCIAL_TYPES.GITHUB_LINK]: 'gitHub',
-  [SOCIAL_TYPES.BEHANCE_LINK]: 'behance',
-  [SOCIAL_TYPES.PHONE_NUMBER]: 'phone',
-};
 
 const StepContacts = () => {
   const [postContactsUser] = usePostContactsUserMutation();
   const userId = useSelector((state) => state.auth.user.data.id);
-  const contactsQuery = useGetUserContactsQuery(userId);
+  const { data: contactsData } = useGetUserContactsQuery(userId);
 
-  const valuesMap = contactsQuery.data.reduce((acc, contact) => {
-    acc[typeNameMap[contact.type]] = contact.value;
-    return acc;
-  }, {});
+  const valuesMap = getDataStepContacts(contactsData);
 
   const initialValues = {
     telegram: '',
@@ -43,7 +31,7 @@ const StepContacts = () => {
   };
 
   const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
-    await postContactsUser({
+    const  updatesValues = await postContactsUser({
       userId: userId,
       body: [
         { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addTelegram(telegram) },
@@ -53,7 +41,11 @@ const StepContacts = () => {
         { type: SOCIAL_TYPES.BEHANCE_LINK, value: addHttps(behance) },
         { type: SOCIAL_TYPES.PHONE_NUMBER, value: phone },
       ],
-    });
+    }).unwrap();
+    // Обновление формы, после отправки данных.
+    // Это нужно для того, что formik.dirty отработал корректно, и после отправки данных, кнопка стала неактивной.
+    const updatesValuesMap = getDataStepContacts(updatesValues);
+    await formik.resetForm({ values: { ...initialValues, ...updatesValuesMap } });
   };
 
   const formik = useFormik({
