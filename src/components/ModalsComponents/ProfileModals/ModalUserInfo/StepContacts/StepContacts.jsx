@@ -138,7 +138,7 @@ const StepContacts = () => {
         />
       </Box>
       <ButtonDef
-        disabled={!formik.dirty}
+        disabled={!formik.dirty || formik.isSubmitting || !formik.isValid}
         variant='contained'
         type='submit'
         label='profile.modal.btn'
