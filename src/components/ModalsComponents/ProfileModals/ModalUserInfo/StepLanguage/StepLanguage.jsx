@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import {
@@ -15,8 +15,8 @@ import { styles } from './StepLanguage.styles';
 
 const StepLanguage = () => {
   const { data: user } = useSelector(selectCurrentUser);
-  const { data: languages } = useGetLanguageUserQuery(user.id);
-  const [postLanguageUser] = usePostLanguageUserMutation(user.id);
+  const { data: languagesData } = useGetLanguageUserQuery(user.id, { skip: !user });
+  const [postLanguageUser] = usePostLanguageUserMutation(user.id, { skip: !user });
 
   const [formState, setFormState] = useState({
     selectedLanguage: '',
@@ -26,30 +26,22 @@ const StepLanguage = () => {
     helperTextLanguage: '',
     helperTextLevel: '',
   });
-  const [isFormUnchanged, setIsFormUnchanged] = useState(true);
 
-  
+  const onSubmit = async (values) => {
+    const result = await postLanguageUser({
+      userId: user.id,
+      body: values.languages,
+    }).unwrap();
+
+    formik.resetForm({ values: { languages: result || [] } });
+  }
+
   const formik = useFormik({
     initialValues: {
-      languages: [],
+      languages: languagesData || [],
     },
-    onSubmit: (values) => {
-      postLanguageUser({
-        userId: user.id,
-        body: values.languages,
-      });
-    },
+    onSubmit,
   });
-
-  useEffect(() => {
-    if (languages) {
-      formik.setFieldValue('languages', languages);
-    }
-  }, [languages]);
-  
-  useEffect(() => {
-    setIsFormUnchanged(JSON.stringify(formik.values.languages) === JSON.stringify(languages));
-  }, [formik.values.languages, languages]);
   
   const handleLanguageChange = (language) => {
     setFormState((prevState) => ({
@@ -141,7 +133,6 @@ const StepLanguage = () => {
             <AddIcon />
           </IconButton>
         </Box>
-
         <Box sx={styles.input100}>
           <Box sx={styles.wrapperLanguages}>
             {formik.values.languages.map((item) => (
@@ -155,9 +146,8 @@ const StepLanguage = () => {
             ))}
           </Box>
         </Box>
-
         <ButtonDef
-          disabled={isFormUnchanged}
+          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
           variant="contained"
           type="submit"
           label="profile.modal.btn"
