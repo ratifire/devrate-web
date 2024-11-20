@@ -1,5 +1,4 @@
-import AddIcon from '@mui/icons-material/Add';
-import { Box, IconButton } from '@mui/material';
+import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -18,14 +17,6 @@ const StepLanguage = () => {
   const { data: languages } = useGetLanguageUserQuery(user.id);
   const [postLanguageUser] = usePostLanguageUserMutation(user.id);
 
-  const [formState, setFormState] = useState({
-    selectedLanguage: '',
-    selectedLevel: '',
-    errorLanguage: false,
-    errorLevel: false,
-    helperTextLanguage: '',
-    helperTextLevel: '',
-  });
   const [isFormUnchanged, setIsFormUnchanged] = useState(true);
 
   
@@ -50,67 +41,17 @@ const StepLanguage = () => {
   useEffect(() => {
     setIsFormUnchanged(JSON.stringify(formik.values.languages) === JSON.stringify(languages));
   }, [formik.values.languages, languages]);
-  
-  const handleLanguageChange = (language) => {
-    setFormState((prevState) => ({
-      ...prevState,
-      selectedLanguage: language,
-      selectedLevel: '',
-      errorLanguage: false,
-      helperTextLanguage: '',
-    }));
-  };
 
-  const handleLevelChange = (level) => {
-    setFormState((prevState) => ({
-      ...prevState,
-      selectedLevel: level,
-      errorLevel: false,
-      helperTextLevel: '',
-    }));
-  };
 
-  const createLang = () => {
-    const { selectedLanguage, selectedLevel } = formState;
-    let hasError = false;
+  const createLang = (data) => {
+    const { selectedLanguage, selectedLevel } = data;
 
-    if (!selectedLanguage) {
-      setFormState((prevState) => ({
-        ...prevState,
-        errorLanguage: true,
-        helperTextLanguage: 'profile.modal.userInfo.languages.selectLanguage',
-      }));
-      hasError = true;
-    }
-
-    if (!selectedLevel) {
-      setFormState((prevState) => ({
-        ...prevState,
-        errorLevel: true,
-        helperTextLevel: 'profile.modal.userInfo.languages.selectLevel',
-      }));
-      hasError = true;
-    }
-
-    if (formik.values.languages.some((item) => item.name === selectedLanguage)) {
-      setFormState((prevState) => ({
-        ...prevState,
-        errorLanguage: true,
-        helperTextLanguage: 'profile.modal.userInfo.languages.languageAdded',
-      }));
-      hasError = true;
-    }
-
-    if (!hasError) {
       const newLang = {
         name: selectedLanguage,
         level: selectedLevel,
         code: selectedLanguage,
       };
       formik.setFieldValue('languages', [...formik.values.languages, newLang]);
-      handleLanguageChange('');
-      handleLevelChange('');
-    }
   };
 
   const languageDeleteHandler = (languageToDelete) => {
@@ -125,21 +66,9 @@ const StepLanguage = () => {
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.input100}>
           <SelectLanguage
-            variant="outlined"
-            handleLanguageChange={handleLanguageChange}
-            handleLevelChange={handleLevelChange}
-            labelLanguage="profile.modal.userInfo.languages.language"
-            labelLevel="profile.modal.userInfo.languages.level"
-            helperTextLanguage={formState.helperTextLanguage}
-            helperTextLevel={formState.helperTextLevel}
-            errorLanguage={formState.errorLanguage}
-            errorLevel={formState.errorLevel}
-            selectedLanguage={formState.selectedLanguage}
-            selectedLevel={formState.selectedLevel}
+              onSubmit={createLang}
+              prohibitedValues={formik.values.languages}
           />
-          <IconButton sx={styles.iconBtn} onClick={createLang}>
-            <AddIcon />
-          </IconButton>
         </Box>
 
         <Box sx={styles.input100}>
