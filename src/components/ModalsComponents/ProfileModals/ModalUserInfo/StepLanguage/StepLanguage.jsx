@@ -37,8 +37,11 @@ const StepLanguage = () => {
       formik.setFieldValue('languages', languages);
     }
   }, [languages]);
-  
+
+
   useEffect(() => {
+
+    // Todo: replace with lodash func
     setIsFormUnchanged(JSON.stringify(formik.values.languages) === JSON.stringify(languages));
   }, [formik.values.languages, languages]);
 
