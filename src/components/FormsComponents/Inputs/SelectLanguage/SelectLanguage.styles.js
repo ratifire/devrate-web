@@ -64,5 +64,6 @@ export const styles = {
     '&:hover': {
       backgroundColor: theme.palette.background.level3,
     },
+
   }),
 };
