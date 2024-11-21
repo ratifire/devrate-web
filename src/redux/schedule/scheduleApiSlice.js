@@ -1,16 +1,18 @@
 import { apiSlice } from '../services/api/apiSlice';
+import { TAG_TYPES } from '../../utils/constants/tagTypes';
 
 export const ScheduleApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['Event'],
   endpoints: (builder) => ({
     getEventByUserId: builder.query({
       query: ({ userId, from, to }) => `users/${userId}/events?from=${from}&to=${to}`,
-      providesTags: (result) => (result ? [...result.map(({ id }) => ({ type: 'Event', id })), 'Event'] : ['Event']),
+      providesTags: (result) =>
+        result ? [...result.map(({ id }) => ({ type: TAG_TYPES.Event, id })), TAG_TYPES.Event] : [TAG_TYPES.Event],
     }),
 
     getClosestEventByUserId: builder.query({
       query: ({ userId, fromTime }) => `/users/${userId}/events/closest?from=${fromTime}`,
-      providesTags: (result) => (result ? [...result.map(({ id }) => ({ type: 'Event', id })), 'Event'] : ['Event']),
+      providesTags: (result) =>
+        result ? [...result.map(({ id }) => ({ type: TAG_TYPES.Event, id })), TAG_TYPES.Event] : [TAG_TYPES.Event],
     }),
 
     deleteEventById: builder.mutation({
@@ -20,7 +22,7 @@ export const ScheduleApiSlice = apiSlice.injectEndpoints({
           method: 'DELETE',
         };
       },
-      invalidatesTags: (result, error, { id }) => [{ type: 'Event', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: TAG_TYPES.Event, id }],
     }),
   }),
 });

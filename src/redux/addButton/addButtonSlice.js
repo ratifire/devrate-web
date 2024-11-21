@@ -18,6 +18,4 @@ const buttonSlice = createSlice({
 
 export const { setButtonState } = buttonSlice.actions;
 
-export const selectButtonState = (state) => state.button;
-
 export default buttonSlice.reducer;
