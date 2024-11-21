@@ -41,8 +41,8 @@ const StepPersonal = () => {
     description: description || '',
   };
 
-  const onSubmit = async ({ firstName, lastName, city, country, status, description }) => {
-    await putPersonalUser({
+  const onSubmit = ({ firstName, lastName, city, country, status, description }) => {
+    putPersonalUser({
       id: userData.id,
       firstName: firstName,
       lastName: lastName,

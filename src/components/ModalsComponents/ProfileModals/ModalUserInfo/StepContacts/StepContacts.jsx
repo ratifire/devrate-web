@@ -41,8 +41,8 @@ const StepContacts = () => {
     ...valuesMap,
   };
 
-  const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
-    await postContactsUser({
+  const onSubmit = ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
+    postContactsUser({
       userId: userId,
       body: [
         { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addTelegram(telegram) },
