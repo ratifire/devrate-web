@@ -10,8 +10,13 @@ import { StepContactsSchema } from '../../../../../utils/valadationSchemas/index
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
-import { addHttps, addPhone, addTelegram, getDataStepContacts } from './helpers';
 import { styles } from './StepContacts.styles';
+import {
+  addHttps,
+  addPhone,
+  addTelegram,
+  getDataStepContacts,
+} from '../../../../../utils/helpers/helpersForStepContactModal';
 
 const StepContacts = () => {
   const [postContactsUser] = usePostContactsUserMutation();
