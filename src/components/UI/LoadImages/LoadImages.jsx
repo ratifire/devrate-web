@@ -71,6 +71,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled
         await checkImageDimensions(image);
         setSettingsCanvas((prev) => ({ ...prev, image }));
         setError('');
+        handleChange(image);
       } catch (err) {
         setError(err.message);
       }
