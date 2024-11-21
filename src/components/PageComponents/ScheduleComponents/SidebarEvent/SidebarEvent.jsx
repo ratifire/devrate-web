@@ -10,7 +10,7 @@ import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleA
 import { useSelector } from 'react-redux';
 
 const SidebarEvent = ({ event }) => {
-  const { id, type, link, host, startTime, participantDtos } = event;
+  const { eventTypeId, type, link, host, startTime, participantDtos } = event;
   const { id: hostId, name, surname } = host;
 
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -61,7 +61,7 @@ const SidebarEvent = ({ event }) => {
   }, [startTime]);
 
   return (
-    <Paper key={id} sx={styles.sideBarEventContainer}>
+    <Paper key={eventTypeId} sx={styles.sideBarEventContainer}>
       <Box sx={styles.titleDateTimeBox}>
         <Typography sx={styles.title} variant='h6' component='div'>
           {type.toLowerCase()}
@@ -90,7 +90,7 @@ const SidebarEvent = ({ event }) => {
           <LinkIcon />
         </IconButton>
         {showCancelButton && (
-          <Button variant='text' sx={styles.cancelEventBtn} onClick={() => eventDeleteHandler(id)}>
+          <Button variant='text' sx={styles.cancelEventBtn} onClick={() => eventDeleteHandler(eventTypeId)}>
             {t('schedule.cancelEventBtn')}
           </Button>
         )}
@@ -101,7 +101,7 @@ const SidebarEvent = ({ event }) => {
 
 SidebarEvent.propTypes = {
   event: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    eventTypeId: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
     host: PropTypes.shape({

@@ -193,10 +193,17 @@ const RegistrationModal = () => {
             handlerClick={formik.handleSubmit}
             disabled={!isFormValid}
             label='modal.registration.btn_register'
+            correctStyle={styles.submitBtn}
           />
         </Box>
         <Box sx={styles.policyTermsContainer}>
-          <Link to={'/privacy_policy'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
+          <Link
+            to={'/privacy_policy'}
+            aria-disabled
+            component={RouterLink}
+            sx={styles.policyTermsLink}
+            onClick={handleClose}
+          >
             {t('modal.registration.privacy_policy')}
           </Link>
           <Link to={'/terms_and_conditions'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>

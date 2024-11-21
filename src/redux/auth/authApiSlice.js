@@ -15,6 +15,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         data,
       }),
+      transformResponse: (response) => {
+        // Ensure the response is correctly transformed
+        return response; // Adjust according to your API response structure
+      },
+      transformErrorResponse: (response) => {
+        // Ensure the error response is correctly transformed
+        return response.data; // Adjust according to your API error response structure
+      },
       onSuccess: (data, variables, api) => {
         console.log('Status code:', api.getState().authApiSlice.requests.confirmEmail.status);
         return data;

@@ -37,13 +37,14 @@ const ConfirmationModal = () => {
       const code = Object.values(values).join('');
 
       try {
-        const { data } = await confirmEmail(code).unwrap();
+        const response = await confirmEmail(code).unwrap();
         resetForm();
-        if (data) {
-          handleClose();
+        handleClose();
+        // dispatch(closeModal({ modalName: 'openConfirmation' }));
+        if (response) {
           setTimeout(() => {
             dispatch(openModal({ modalName: 'openLogin' }));
-          }, 100);
+          }, 500);
         }
       } catch (error) {
         setCodeError(true);

@@ -1,0 +1,258 @@
+.footer {
+  padding: 16px 0 160px;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: url("../../assets/BackgroundImages/Background_5-01_footer.svg");
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: cover;
+    width: 100%;
+    height: 657px;
+    z-index: -1;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    grid-gap: 12px;
+
+    @media screen and (max-width: 1024px) {
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: flex-start;
+      grid-gap: 48px;
+    }
+  }
+
+  &__content {
+    flex: 0 0 max(530px);
+    min-width: 400px;
+
+    @media screen and (max-width: 1024px) {
+      flex: none;
+      min-width: 0;
+      max-width: 768px;
+      width: 100%;
+    }
+  }
+
+  &__social {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+  }
+
+  &__logo {
+  }
+
+  &__socialIkons {
+    display: flex;
+    gap: 15px;
+
+    & > a {
+      margin-left: 8px;
+
+
+      img {
+        width: 54px;
+        height: 54px;
+        transition: all 0.3s linear;
+
+
+        &:hover {
+          background-color: #CEB0FA29;
+          border-radius: 4px;
+          transform: scale(1.1);
+        }
+
+      }
+    }
+
+    & > a:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &__descriptions {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+    max-width: 530px;
+
+    @media screen and (max-width: 1024px) {
+      max-width: 768px;
+    }
+  }
+
+  &__developer {
+  }
+
+  &__developerName {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 150%;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+
+  &__developerLink {
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 150%;
+    text-transform: lowercase;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: #B78AF7;
+    margin-bottom: 20px;
+    transition: all 0.2s linear;
+
+    &:hover {
+      color: #8133F1;
+    }
+
+    &:active {
+      color: #5900D9;
+    }
+  }
+
+  &__policies {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 16px;
+  }
+
+  &__policyLink {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 150%;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    text-align: center;
+    color: #B78AF7;
+    transition: all 0.3s linear;
+
+    &:hover {
+      color: #8133F1;
+    }
+
+    &:active {
+      color: #5900D9;
+    }
+  }
+
+  &__copyright {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+  }
+
+  &__copyrightYear {
+    color: #FFFFFF;
+  }
+
+  &__trademarks {
+    color: #A9A9AA;
+    max-width: 350px;
+  }
+}
+
+
+/* FORM */
+
+.contactForm {
+  border-radius: 16px;
+  padding: 36px;
+  background-color: rgba(29, 29, 29, 0.6);
+  flex: 0 1 max(868px);
+
+  @media screen and (max-width: 1024px) {
+    flex: none;
+    max-width: 768px;
+    width: 100%;
+  }
+
+  &__title {
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    text-shadow: 2px 2px 4px 0 rgba(29, 29, 29, 0.25);
+    color: #FFFFFF;
+    margin-bottom: 24px;
+  }
+
+  &__titleFocus {
+    color: #B78AF7;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__input {
+    border-radius: 4px;
+    padding: 16px 10px;
+    border: 1px solid #444446;
+    outline: none;
+    background-color: #1D1D1D;
+  }
+
+  &__input::placeholder {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+  }
+
+  &__input:focus {
+    color: #FFFFFF;
+  }
+
+  &__textarea {
+    border-radius: 4px;
+    padding: 12px;
+    border: 1px solid #444446;
+    outline: none;
+    resize: none;
+    height: 126px;
+    background-color: #1D1D1D;
+  }
+
+  &__textarea::placeholder {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    letter-spacing: 0.01em;
+    color: #828283;
+  }
+
+  &__textarea:focus {
+    color: #828283;
+  }
+
+  &__button {
+    text-transform: uppercase;
+  }
+}

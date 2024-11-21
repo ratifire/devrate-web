@@ -111,10 +111,11 @@ const ConfirmationForm = ({
   };
 
   return (
-    <form className='landingForm' onSubmit={handleSubmit || formik.handleSubmit} style={{ width: '100%' }}>
+    <form className='landingForm' autoComplete="off" onSubmit={handleSubmit || formik.handleSubmit} style={{ width: '100%' }}>
       <Box sx={styles.formInput}>
         {[...Array(fieldCount)].map((_, index) => (
           <TextField
+              autocomplete={false}
             key={index}
             type='text'
             variant='outlined'
@@ -124,7 +125,31 @@ const ConfirmationForm = ({
             onKeyDown={(event) => handleKeyDown(event, index)}
             onPaste={handlePaste}
             value={formik.values[`text${index}`] ?? ''}
-            inputProps={{ style: { textAlign: 'center' }, maxLength: 1 }}
+            inputProps={{
+              style: { textAlign: 'center' },
+              maxLength: 1,
+            }}
+              sx={{
+                '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#B78AF7',
+                  backgroundColor: 'transparent',
+                },
+                ...(helperTextContent && {
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#ED0E0E',
+                    },
+                  },
+                }),
+                '& .MuiOutlinedInput-root': {
+                  '& input:-webkit-autofill': {
+                    WebkitBoxShadow: '0 0 0 100px transparent inset',
+                    WebkitTextFillColor: 'inherit',
+                    transition: 'background-color 5000s ease-in-out 0s',
+                  },
+                },
+              }}
+          
           />
         ))}
       </Box>
@@ -170,6 +195,7 @@ const ConfirmationForm = ({
             onClick={handleClick}
             label={buttonLabel || 'modal.confirmation.btn_confirm'}
             disabled={!formik.isValid}
+            correctStyle={styles.submitBtn}
           />
         </Box>
       )}

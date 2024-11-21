@@ -57,6 +57,9 @@ export const styles = {
       backgroundColor: `${theme.palette.modals.select.selectedField.selected.backgroundColor} !important`,
       color: `${theme.palette.modals.select.selectedField.selected.color} !important`,
     },
+    '.MuiMenuItem-root.Mui-focusVisible': {
+      backgroundColor: `${theme.palette.modals.select.selectedField.selected.backgroundColor}`,
+    },
   }),
   dropdownPaper: {
     maxHeight: '200px',

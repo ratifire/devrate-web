@@ -17,7 +17,7 @@ export const en = {
         text3: 'Get detailed, actionable feedback on exactly what you need to work on to get the job you deserve.',
       },
       footer: {
-        copyright: '© 2023 Devrate, Inc. All rights reserved.',
+        copyright: '© 2023 SKILLZZY, Inc. All rights reserved.',
         trademarks: 'All trademarks, logos and brand names are <br/> the property of their respective owners.',
       },
       links: {
@@ -52,7 +52,7 @@ export const en = {
         link: 'Link',
         link_long: 'Link is too long',
         link_short: 'Link is too short',
-        link_placeholder: 'https://devrate.com/certificate_id=12345678987654321',
+        link_placeholder: 'https://skillzzy.com/certificate_id=12345678987654321',
         description: 'Description',
         description_long: 'Description label too long',
         description_short: 'Description label too short',
@@ -86,7 +86,7 @@ export const en = {
       },
       login: {
         title: 'Sign In',
-        subtitle: 'Log in to your account DEVRATE',
+        subtitle: 'Log in to your account SKILLZZY',
         email: 'Email',
         password: 'Password',
         password_tooltip: 'Passwords must contain 8 + characters, at least 1 number, at least 1 letter and no spaces.',
@@ -113,8 +113,8 @@ export const en = {
         password_repeat: 'Repeat password',
         password_tooltip: '8+ characters,\n' + 'at least 1 number, 1 uppercase and 1 lowercase letter, 1 symbol',
         password_invalid: 'Incorrect password',
-        news_letter: 'Send me news, surveys and special offers from DEVRATE',
-        agreement: 'I have read and agree to the terms of use',
+        news_letter: 'Send me news, surveys and special offers from SKILLZZY',
+        agreement: 'I have read and agree to the Terms and conditions',
         agreement_error: 'To use our service, you must agree to the terms of use',
         btn_register: 'Sign Up',
         privacy_policy: 'Privacy Policy',
@@ -123,10 +123,10 @@ export const en = {
         required: 'This is a required field',
         first_name_long: 'Name too long',
         first_name_short: 'Name too short',
-        first_name_invalid_characters: 'Trim trailing name characters',
+        first_name_invalid_characters: 'Only uppercase and lowercase letters allowed',
         last_name_long: 'Last name too long',
         last_name_short: 'Surname too short',
-        last_name_invalid_characters: 'Trim the last characters of the last name',
+        last_name_invalid_characters: 'Only uppercase and lowercase letters allowed',
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
@@ -168,7 +168,7 @@ export const en = {
         code_required: 'Code is required',
         code_symbol_min: 'Each code digit must be 1 character long',
         code_length_max: 'Code must be exactly 6 digits long',
-        error: 'Invalid code. Please try again.',
+        error: 'The code is incorrect or the term has passed.',
         success: 'Password changed successfully!',
       },
       editPage: {
@@ -374,6 +374,8 @@ export const en = {
           startDateMinMessage: 'Date must be later than 01/01/1950',
           startDateMaxMessage: 'Date must be earlier than today',
           endDateMessage: 'End date must be later than start date',
+          endYear_min: 'End Date must be later than Start Date',
+          endYear_max: 'End date cannot be later than this year',
         },
         education: {
           title: 'Education',
@@ -539,91 +541,122 @@ export const en = {
       title: 'FAQ – Frequently Asked Question',
       question1: {
         question: 'How can I request an interview?',
-        answer: 'To request an interview, you need to go to the Specialization screen, choose one of your specializations for which the interview will be conducted, then click on the \'Schedule an interview\' button and select your role. If you wish to conduct the interview, select \'Become an interviewer.\' If you want to be evaluated, choose \'Schedule an interview.\' Then, fill out the form, select convenient dates and times, and confirm by clicking \'Schedule.\' After that, your request will be submitted, and you\'ll be notified when the interview is scheduled.',
+        answer:
+          "To request an interview, you need to go to the Specialization screen, choose one of your specializations for which the interview will be conducted, then click on the 'Schedule an interview' button and select your role. If you wish to conduct the interview, select 'Become an interviewer.' If you want to be evaluated, choose 'Schedule an interview.' Then, fill out the form, select convenient dates and times, and confirm by clicking 'Schedule.' After that, your request will be submitted, and you'll be notified when the interview is scheduled.",
       },
       question2: {
         question: 'When creating a specialization (Junior, Middle, Senior), how do you choose the appropriate level?',
-        answer: 'Consider your experience and skills in the selected specialization when choosing the appropriate level. If you are just starting out and have limited practical experience, the Junior level is recommended. For those with moderate experience who can work independently with some guidance, the Middle level may be the best fit. If you have extensive experience, can lead projects, and mentor others, the Senior level would be the most appropriate. Selecting a level that accurately reflects your current expertise is crucial for ensuring a fair evaluation process and selecting the appropriate interview participants.',
+        answer:
+          'Consider your experience and skills in the selected specialization when choosing the appropriate level. If you are just starting out and have limited practical experience, the Junior level is recommended. For those with moderate experience who can work independently with some guidance, the Middle level may be the best fit. If you have extensive experience, can lead projects, and mentor others, the Senior level would be the most appropriate. Selecting a level that accurately reflects your current expertise is crucial for ensuring a fair evaluation process and selecting the appropriate interview participants.',
       },
       question3: {
         question: 'How long does it take to wait for an interview?',
-        answer: 'From the moment you submit an interview request, we immediately begin searching for a match that meets your criteria (specialization, skills, level, availability, etc.). As soon as a match is found, you\'ll receive a notification with further steps. If no suitable match is found within 30 days, you will be notified about the next steps.',
+        answer:
+          "From the moment you submit an interview request, we immediately begin searching for a match that meets your criteria (specialization, skills, level, availability, etc.). As soon as a match is found, you'll receive a notification with further steps. If no suitable match is found within 30 days, you will be notified about the next steps.",
       },
       question4: {
         question: 'How can I cancel or reschedule an interview?',
-        answer: 'We apologize, but at this time, rescheduling an interview is unavailable. This feature will be implemented in future versions. For now, you can cancel the interview, which will restart the search process for a new match. To cancel, go to the \'Schedule\' page, find the interview, select it, and click \'Cancel Event.\'',
+        answer:
+          "We apologize, but at this time, rescheduling an interview is unavailable. This feature will be implemented in future versions. For now, you can cancel the interview, which will restart the search process for a new match. To cancel, go to the 'Schedule' page, find the interview, select it, and click 'Cancel Event.'",
       },
       question5: {
         question: 'Where can I view my interview results?',
-        answer: 'To view your interview results, go to the \'Interviews\' screen — it displays the overall score, comments, and other important information.',
+        answer:
+          "To view your interview results, go to the 'Interviews' screen — it displays the overall score, comments, and other important information.",
       },
       question6: {
         question: 'Can I select my interviewer or candidate?',
-        answer: 'Our system automatically selects the most suitable participant for you through our matching algorithms, taking your requests into account. This enables effective evaluation of your skills and ensures the best possible match.',
+        answer:
+          'Our system automatically selects the most suitable participant for you through our matching algorithms, taking your requests into account. This enables effective evaluation of your skills and ensures the best possible match.',
       },
       question7: {
         question: 'How can I raise my level?',
-        answer: 'To increase your level, actively participate in interviews as a candidate and an interviewer. Positive feedback, consistent demonstration of your skills, and expanding your expertise in the specialization will help you advance. Our system tracks your results and progress to support your growth based on demonstrated abilities.',
+        answer:
+          'To increase your level, actively participate in interviews as a candidate and an interviewer. Positive feedback, consistent demonstration of your skills, and expanding your expertise in the specialization will help you advance. Our system tracks your results and progress to support your growth based on demonstrated abilities.',
       },
       question8: {
         question: 'What criteria are used to match an interviewer or candidate?',
-        answer: 'Our matching system uses several key criteria to find the best interviewers and candidates, including specialization, skill level, experience, availability, and timezone. These factors ensure a productive and effective interview suited to both participants.',
+        answer:
+          'Our matching system uses several key criteria to find the best interviewers and candidates, including specialization, skill level, experience, availability, and timezone. These factors ensure a productive and effective interview suited to both participants.',
       },
       question9: {
         question: 'What is a primary specialization, and how do I select it?',
-        answer: 'Your primary specialization is your key field, with its general score displayed on the main profile screen. It will also be visible to other users during searches and marked as primary to highlight your main professional focus.',
+        answer:
+          'Your primary specialization is your key field, with its general score displayed on the main profile screen. It will also be visible to other users during searches and marked as primary to highlight your main professional focus.',
       },
       question10: {
         question: 'How long does an interview take?',
-        answer: 'A practical interview typically lasts up to 40 minutes, depending on the interview type and agreed-upon format between you and the other participant.',
+        answer:
+          'A practical interview typically lasts up to 40 minutes, depending on the interview type and agreed-upon format between you and the other participant.',
       },
       question11: {
         question: 'How is the evaluation conducted after the interview?',
-        answer: 'After the interview, each participant will receive a notification to complete the results. If you were the interviewer, you\'ll need to evaluate the candidate\'s hard and soft skills and write a general comment. If you were the candidate, you need to rate the interviewer\'s soft skills and leave a general comment.',
+        answer:
+          "After the interview, each participant will receive a notification to complete the results. If you were the interviewer, you'll need to evaluate the candidate's hard and soft skills and write a general comment. If you were the candidate, you need to rate the interviewer's soft skills and leave a general comment.",
       },
       question12: {
         question: 'Where can I view my interview schedule?',
-        answer: 'The interview schedule is available on the \'Schedule\' screen. You can access it through the right-hand menu by clicking on the \'Schedule\' section.',
+        answer:
+          "The interview schedule is available on the 'Schedule' screen. You can access it through the right-hand menu by clicking on the 'Schedule' section.",
       },
       question13: {
-        question: 'What if I don\'t receive an interview invitation within 30 days?',
-        answer: 'If you don\'t receive an invitation within 30 days, please submit a new request, selecting your desired specialization, role (interviewer/candidate), and convenient dates and times.',
+        question: "What if I don't receive an interview invitation within 30 days?",
+        answer:
+          "If you don't receive an invitation within 30 days, please submit a new request, selecting your desired specialization, role (interviewer/candidate), and convenient dates and times.",
       },
       question14: {
         question: 'How do I know an interview has been scheduled?',
-        answer: 'Once we find a match that meets your criteria, we will send you a notification and an email to the address you provided during registration. The interview will also appear on your schedule on the \'Schedule\' screen.',
+        answer:
+          "Once we find a match that meets your criteria, we will send you a notification and an email to the address you provided during registration. The interview will also appear on your schedule on the 'Schedule' screen.",
       },
       question15: {
         question: 'What do I need to prepare for an interview?',
-        answer: 'All you need is a basic preparation for your selected skills. The interview is conducted online via Zoom, so it\'s essential to find a quiet place, ensure a stable internet connection, and be ready for the experience.',
+        answer:
+          "All you need is a basic preparation for your selected skills. The interview is conducted online via Zoom, so it's essential to find a quiet place, ensure a stable internet connection, and be ready for the experience.",
       },
       question16: {
         question: 'How can I report a bug on the site?',
-        answer: 'To report a bug, use the \'Leave Feedback\' option in the right-hand menu. Here, you can also share your thoughts about the site and offer suggestions for improvement. We genuinely appreciate your attention and support!',
+        answer:
+          "To report a bug, use the 'Leave Feedback' option in the right-hand menu. Here, you can also share your thoughts about the site and offer suggestions for improvement. We genuinely appreciate your attention and support!",
       },
       question17: {
         question: 'What should I do if my interview partner doesn’t show up?',
-        answer: 'If your interview partner doesn’t show up, report it through the \'Leave Feedback\' form. The system will automatically submit a new request, and we\'ll work to find a new match for you soon.',
+        answer:
+          "If your interview partner doesn’t show up, report it through the 'Leave Feedback' form. The system will automatically submit a new request, and we'll work to find a new match for you soon.",
       },
       question18: {
         question: 'How can I update my contact information?',
-        answer: 'To update your contact information, go to your profile by clicking on your avatar in the upper-right corner. Then, select the \'Edit Profile\' option and make the necessary changes. Don\'t forget to save your new data.',
+        answer:
+          "To update your contact information, go to your profile by clicking on your avatar in the upper-right corner. Then, select the 'Edit Profile' option and make the necessary changes. Don't forget to save your new data.",
       },
       question19: {
         question: 'Can I invite a specific person to an interview?',
-        answer: 'Currently, the participant selection is automated and doesn’t support inviting a specific person. We strive to ensure fairness and impartiality, so we rely on the automatic selection for an effective interview experience.',
+        answer:
+          'Currently, the participant selection is automated and doesn’t support inviting a specific person. We strive to ensure fairness and impartiality, so we rely on the automatic selection for an effective interview experience.',
       },
     },
     blogText: {
       title: 'Latest updates',
       readNext: 'Read more...',
       upd1: {
-        title: 'Simulation of real interviews with AI',
-        text: "Added a function where artificial intelligence will play the role of an interviewer, asking questions and analyzing answers in real time.",
+        title: 'Feedback Form',
+        text: 'A feedback form has been added where users can share their experience using the platform, suggest improvements, or report any issues found. The form allows selecting a feedback type: PROPOSITION (suggestion), ISSUE (problem), or FEEDBACK (general feedback). This will help us respond promptly to feedback, implement improvements, and maintain high service quality, focusing on your needs and preferences.',
       },
       upd2: {
-        title: 'Mentor panel',
-        text: "Updated the functionality of personal mentoring, adding a control panel where mentors can see the results of their mentees' interviews, analyze their progress and provide feedback.",
+        title: 'User Search',
+        text: 'A user search function has been added, allowing profiles to be found by first name, last name, or a combination of both fields. The search form is located on the profile page in the top right corner, next to the theme switch and notification icon. This update makes it quick and convenient to find the users you need, providing easier access to profiles.',
+      },
+      upd3: {
+        title: 'Interview Request Time Adjustment',
+        text: 'A time adjustment function for interview requests has been added. This new feature allows users to easily change the scheduled interview time without needing to submit a new request. It significantly enhances scheduling flexibility, making it easier to coordinate the availability of both candidates and interviewers. With this function, users can quickly adjust interview times to fit their schedules or accommodate unexpected changes.',
+      },
+      upd4: {
+        title: 'User Skill Search',
+        text: 'You can now easily find users\' skills, gaining a clearer understanding of their qualifications. The intuitive search form allows you to enter keywords and receive instant results, greatly simplifying access to relevant skills. This update provides a fast and convenient way to search for skills, making platform navigation more efficient. To use the skill search, simply go to a user’s profile, navigate to the "Skills" section, and enter the desired skills in the search form.',
+      },
+      upd5: {
+        title: 'Main Page Design Update',
+        text: "We've refreshed the main page design with an improved color scheme, along with a feedback form and contact details for easier communication. Key information about the platform’s features and benefits has been added to enhance understanding of how it works. A new FAQ section has been created with answers to frequently asked questions for your convenience. Additionally, the visual design of the registration, login, and email confirmation forms has been updated. All these changes are aimed at enhancing your experience and comfort on our platform.",
       },
     },
   },

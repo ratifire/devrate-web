@@ -7,8 +7,9 @@ import { setActiveMastery } from '../../../../redux/specialization/activeMastery
 import { useGetMainMasteryBySpecializationIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetSpecializationId } from '../../../../utils/hooks/specialization';
 import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { ErrorComponent } from '../../../UI/Exceptions';
 import { styles } from './SpecializationLevel.styles';
+import LevelSkeleton from '../../../UI/Skeleton/Pages/specializationSkeleton/LevelSkeleton';
 
 const SpecializationLevel = () => {
   const { t } = useTranslation();
@@ -35,7 +36,7 @@ const SpecializationLevel = () => {
   };
 
   if (isFetching) {
-    return <LoaderComponent />;
+    return <LevelSkeleton/>;
   }
 
   if (isError) {

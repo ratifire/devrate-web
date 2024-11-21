@@ -1,4 +1,3 @@
-// TODO 'Delete this code, but reconfirm with design first'
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -35,6 +34,7 @@ const NotificationModal = () => {
           type='button'
           handlerClick={handleEnter}
           label='modal.notificationModal.btn_enter'
+          correctStyle={styles.submitBtn}
         />
       </Box>
     </ModalLayout>
