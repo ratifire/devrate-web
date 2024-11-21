@@ -6,12 +6,12 @@ const StepAvatarSkeleton = () => {
   return (
     <>
       <Box sx={styles.box}>
-        <Skeleton variant='rounded' width='336px' height='336px' />
-        <Skeleton variant='rounded' width='336px' height='336px' />
+        <Skeleton variant='rounded' width={336} height={336} />
+        <Skeleton variant='rounded' width={336} height={336} />
       </Box>
       <Box sx={styles.btnBox}>
-        <Skeleton variant='rounded' width={228} height={44}/>
-        <Skeleton variant='rounded' width={44} height={44}/>
+        <Skeleton variant='rounded' width={228} height={44} />
+        <Skeleton variant='rounded' width={44} height={44} />
       </Box>
     </>
   );
