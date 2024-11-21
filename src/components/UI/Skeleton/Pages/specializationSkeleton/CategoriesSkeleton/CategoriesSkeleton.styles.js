@@ -11,7 +11,7 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    gap: '32px',
+    gap: '35px',
   },
   box: (theme) => ({
     display: 'flex',
