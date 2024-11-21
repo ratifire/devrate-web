@@ -1,3 +1,4 @@
-import StepContactsSkeleton from "./StepContactsSkeleton";
+import StepContactsSkeleton from './StepContactsSkeleton';
+import StepPersonalSkeleton from "./StepPersonalSkeleton";
 
-export { StepContactsSkeleton };
+export { StepContactsSkeleton, StepPersonalSkeleton };

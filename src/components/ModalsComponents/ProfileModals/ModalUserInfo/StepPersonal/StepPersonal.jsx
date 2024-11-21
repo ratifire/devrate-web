@@ -12,13 +12,25 @@ import {
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { useGetCountryListQuery } from '../../../../../redux/countryList/countryApiSlice';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { StepPersonalSkeleton } from '../../../../UI/Skeleton';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 
 const StepPersonal = () => {
-  const { data: userCountries } = useGetCountryListQuery();
+  const {
+    data: userCountries,
+    isFetching: isFetchingGetCountry,
+    isError: isErrorFetchingGetCountry,
+  } = useGetCountryListQuery();
   const { data: userData } = useSelector(selectCurrentUser);
-  const [putPersonalUser] = usePutPersonalUserMutation();
-  const { data: info } = useGetPersonalUserQuery(userData.id);
-  const { firstName, lastName, city, country, status, description } = info;
+  const [putPersonalUser, { data: dataPutPersonalUser, isError: isErrorPutPersonal, isLoading: isLoadingPutPersonal }] =
+    usePutPersonalUserMutation();
+  const {
+    data: dataGetPersonal,
+    isFetching: isFetchingGetPersonal,
+    isError: isErrorGetPersonal,
+  } = useGetPersonalUserQuery(userData.id, { skip: !userData.id });
+
+  const { firstName, lastName, city, country, status, description } = dataPutPersonalUser || dataGetPersonal;
 
   const initialValues = {
     firstName: firstName || userData.firstName || '',
@@ -30,7 +42,7 @@ const StepPersonal = () => {
   };
 
   const onSubmit = async ({ firstName, lastName, city, country, status, description }) => {
-    const response = await putPersonalUser({
+    await putPersonalUser({
       id: userData.id,
       firstName: firstName,
       lastName: lastName,
@@ -39,25 +51,25 @@ const StepPersonal = () => {
       city: city,
       subscribed: userData.subscribed,
       description: description,
-    }).unwrap();
+    });
 
-    const initialValues = {
-      firstName: response.firstName || '',
-      lastName: response.lastName || '',
-      city: response.city || '',
-      country: response.country || '',
-      status: response.status || '',
-      description: response.description || '',
-    };
-
-    await formik.resetForm({ values: { ...initialValues } });
+    formik.resetForm();
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema: StepPersonalSchema,
     onSubmit,
+    enableReinitialize: true,
   });
+
+  if (isErrorFetchingGetCountry || isErrorGetPersonal || isErrorPutPersonal) {
+    return <ErrorComponent />;
+  }
+
+  if (isFetchingGetCountry || isFetchingGetPersonal || isLoadingPutPersonal) {
+    return <StepPersonalSkeleton />;
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>

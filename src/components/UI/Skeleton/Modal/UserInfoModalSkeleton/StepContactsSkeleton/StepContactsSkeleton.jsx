@@ -1,6 +1,7 @@
 import React from 'react';
 import { styles } from './StepContactsSkeleton.styles';
 import { Skeleton } from '@mui/material';
+import { BtnSkeleton } from '../components';
 
 const StepContactsSkeleton = () => {
   return (
@@ -11,7 +12,7 @@ const StepContactsSkeleton = () => {
       <Skeleton sx={styles.input} variant='rounded' height={56} />
       <Skeleton sx={styles.input} variant='rounded' height={56} />
       <Skeleton sx={styles.input} variant='rounded' height={56} />
-      <Skeleton sx={styles.btn} height={44} variant='rounded'/>
+      <BtnSkeleton />
     </>
   );
 };
