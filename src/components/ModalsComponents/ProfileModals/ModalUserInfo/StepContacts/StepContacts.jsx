@@ -17,12 +17,19 @@ import {
   addTelegram,
   getDataStepContacts,
 } from '../../../../../utils/helpers/helpersForStepContactModal';
+import { StepContactsSkeleton } from '../../../../UI/Skeleton';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 
 const StepContacts = () => {
-  const [postContactsUser] = usePostContactsUserMutation();
+  const [postContactsUser, { isLoading, isError: isErrorPostContacts, data: dataPost }] = usePostContactsUserMutation();
   const userId = useSelector((state) => state.auth.user.data.id);
-  const { data: contactsData } = useGetUserContactsQuery(userId, { skip: !userId });
-  const valuesMap = getDataStepContacts(contactsData);
+  const {
+    data: contactsData,
+    isFetching,
+    isError: isErrorGetUseContacts,
+  } = useGetUserContactsQuery(userId, { skip: !userId });
+
+  const valuesMap = dataPost ? getDataStepContacts(dataPost) : getDataStepContacts(contactsData);
 
   const initialValues = {
     telegram: '',
@@ -35,7 +42,7 @@ const StepContacts = () => {
   };
 
   const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
-    const response = await postContactsUser({
+    await postContactsUser({
       userId: userId,
       body: [
         { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addTelegram(telegram) },
@@ -45,18 +52,24 @@ const StepContacts = () => {
         { type: SOCIAL_TYPES.BEHANCE_LINK, value: addHttps(behance) },
         { type: SOCIAL_TYPES.PHONE_NUMBER, value: addPhone(phone) },
       ],
-    }).unwrap();
-
-    const valuesMap = getDataStepContacts(response);
-
-    await formik.resetForm({ values: { ...initialValues, ...valuesMap } });
+    });
+    formik.resetForm();
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema: StepContactsSchema,
     onSubmit,
+    enableReinitialize: true,
   });
+
+  if (isErrorGetUseContacts || isErrorPostContacts) {
+    return <ErrorComponent />;
+  }
+
+  if (isFetching || isLoading) {
+    return <StepContactsSkeleton />;
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>

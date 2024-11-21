@@ -17,7 +17,8 @@ import {
   RightSectionSkeleton,
   ExperienceSectionSkeleton,
 } from './Pages/personalProfileSkeleton';
-import UserExperienceSectionSkeleton from "./Pages/userProfileSkeleton/UserExperienceSectionSkeleton";
+import UserExperienceSectionSkeleton from './Pages/userProfileSkeleton/UserExperienceSectionSkeleton';
+import { StepContactsSkeleton } from './Modal/UserInfoModalSkeleton';
 
 export {
   BlogSkeleton,
@@ -36,5 +37,6 @@ export {
   SkillsSectionSkeleton,
   RightSectionSkeleton,
   ExperienceSectionSkeleton,
-  UserExperienceSectionSkeleton
+  UserExperienceSectionSkeleton,
+  StepContactsSkeleton,
 };

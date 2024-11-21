@@ -29,6 +29,8 @@ export const addTelegram = (url) => {
 };
 
 export const addPhone = (phone) => {
+  if (!phone) return '';
+
   const cleanedPhone = phone.replace(/\D/g, '');
   return phone.trim().startsWith('+') ? phone : `+${cleanedPhone}`;
 };
