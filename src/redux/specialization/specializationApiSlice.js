@@ -127,7 +127,10 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
     }),
 
     getInterviewRequest: builder.query({
-      query: ({ userId, role }) => `/users/${userId}/interview-requests?role=${role}`,
+      query: ({ userId, role, masteryId }) => ({
+        url: `/users/${userId}/interview-requests`,
+        params: { role, masteryId },
+      }),
       providesTags: [TAG_TYPES.Specialization],
     }),
 
