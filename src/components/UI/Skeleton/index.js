@@ -18,7 +18,12 @@ import {
   ExperienceSectionSkeleton,
 } from './Pages/personalProfileSkeleton';
 import UserExperienceSectionSkeleton from './Pages/userProfileSkeleton/UserExperienceSectionSkeleton';
-import { StepContactsSkeleton, StepPersonalSkeleton, StepAvatarSkeleton } from './Modal/UserInfoModalSkeleton';
+import {
+  StepContactsSkeleton,
+  StepPersonalSkeleton,
+  StepAvatarSkeleton,
+  StepLanguageSkeleton,
+} from './Modal/UserInfoModalSkeleton';
 
 export {
   BlogSkeleton,
@@ -41,4 +46,5 @@ export {
   StepContactsSkeleton,
   StepPersonalSkeleton,
   StepAvatarSkeleton,
+  StepLanguageSkeleton,
 };

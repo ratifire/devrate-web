@@ -12,11 +12,18 @@ import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { SelectLanguage } from '../../../../FormsComponents/Inputs';
 import LanguageLevel from '../../../../UI/LanguageLevel';
 import { styles } from './StepLanguage.styles';
+import { ErrorComponent } from '../../../../UI/Exceptions';
+import { StepLanguageSkeleton } from '../../../../UI/Skeleton';
 
 const StepLanguage = () => {
   const { data: user } = useSelector(selectCurrentUser);
-  const { data: languagesData } = useGetLanguageUserQuery(user.id, { skip: !user });
-  const [postLanguageUser] = usePostLanguageUserMutation(user.id, { skip: !user });
+  const {
+    data: dataGetLanguage,
+    isError: isErrorGetLanguage,
+    isFetching: isFetchingGetLanguage,
+  } = useGetLanguageUserQuery(user.id, { skip: !user });
+  const [postLanguageUser, { data: dataPostLanguage, isError: isErrorPostLanguage, isLoading: isLoadingPostLanguage }] =
+    usePostLanguageUserMutation(user.id, { skip: !user });
 
   const [formState, setFormState] = useState({
     selectedLanguage: '',
@@ -27,22 +34,23 @@ const StepLanguage = () => {
     helperTextLevel: '',
   });
 
-  const onSubmit = async (values) => {
-    const result = await postLanguageUser({
+  const onSubmit = (values) => {
+    postLanguageUser({
       userId: user.id,
       body: values.languages,
-    }).unwrap();
+    });
 
-    formik.resetForm({ values: { languages: result || [] } });
-  }
+    formik.resetForm();
+  };
 
   const formik = useFormik({
     initialValues: {
-      languages: languagesData || [],
+      languages: dataPostLanguage || dataGetLanguage || [],
     },
     onSubmit,
+    enableReinitialize: true,
   });
-  
+
   const handleLanguageChange = (language) => {
     setFormState((prevState) => ({
       ...prevState,
@@ -112,16 +120,24 @@ const StepLanguage = () => {
     );
   };
 
+  if (isErrorGetLanguage || isErrorPostLanguage) {
+    return <ErrorComponent />;
+  }
+
+  if (isFetchingGetLanguage || isLoadingPostLanguage) {
+    return <StepLanguageSkeleton />;
+  }
+
   return (
     <Box sx={styles.wrapper}>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.input100}>
           <SelectLanguage
-            variant="outlined"
+            variant='outlined'
             handleLanguageChange={handleLanguageChange}
             handleLevelChange={handleLevelChange}
-            labelLanguage="profile.modal.userInfo.languages.language"
-            labelLevel="profile.modal.userInfo.languages.level"
+            labelLanguage='profile.modal.userInfo.languages.language'
+            labelLevel='profile.modal.userInfo.languages.level'
             helperTextLanguage={formState.helperTextLanguage}
             helperTextLevel={formState.helperTextLevel}
             errorLanguage={formState.errorLanguage}
@@ -148,9 +164,9 @@ const StepLanguage = () => {
         </Box>
         <ButtonDef
           disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-          variant="contained"
-          type="submit"
-          label="profile.modal.btn"
+          variant='contained'
+          type='submit'
+          label='profile.modal.btn'
           correctStyle={styles.btn}
         />
       </form>
