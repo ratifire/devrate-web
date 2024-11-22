@@ -5,17 +5,32 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { StepPersonalSchema } from '../../../../../utils/valadationSchemas/index';
-import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '../../../../../redux/user/personal/personalApiSlice';
+import {
+  useGetPersonalUserQuery,
+  usePutPersonalUserMutation,
+} from '../../../../../redux/user/personal/personalApiSlice';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { useGetCountryListQuery } from '../../../../../redux/countryList/countryApiSlice';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { StepPersonalSkeleton } from '../../../../UI/Skeleton';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 
 const StepPersonal = () => {
-  const { data: userCountries } = useGetCountryListQuery();
+  const {
+    data: userCountries,
+    isFetching: isFetchingGetCountry,
+    isError: isErrorFetchingGetCountry,
+  } = useGetCountryListQuery();
   const { data: userData } = useSelector(selectCurrentUser);
+  const [putPersonalUser, { data: dataPutPersonalUser, isError: isErrorPutPersonal, isLoading: isLoadingPutPersonal }] =
+    usePutPersonalUserMutation();
+  const {
+    data: dataGetPersonal,
+    isFetching: isFetchingGetPersonal,
+    isError: isErrorGetPersonal,
+  } = useGetPersonalUserQuery(userData.id, { skip: !userData.id });
 
-  const { data: info } = useGetPersonalUserQuery(userData.id);
-  const { firstName, lastName, city, country, status, description } = info;
+  const { firstName, lastName, city, country, status, description } = dataPutPersonalUser || dataGetPersonal;
 
   const initialValues = {
     firstName: firstName || userData.firstName || '',
@@ -26,7 +41,6 @@ const StepPersonal = () => {
     description: description || '',
   };
 
-  const [putPersonalUser] = usePutPersonalUserMutation();
   const onSubmit = ({ firstName, lastName, city, country, status, description }) => {
     putPersonalUser({
       id: userData.id,
@@ -38,12 +52,24 @@ const StepPersonal = () => {
       subscribed: userData.subscribed,
       description: description,
     });
+
+    formik.resetForm();
   };
+
   const formik = useFormik({
     initialValues,
     validationSchema: StepPersonalSchema,
     onSubmit,
+    enableReinitialize: true,
   });
+
+  if (isErrorFetchingGetCountry || isErrorGetPersonal || isErrorPutPersonal) {
+    return <ErrorComponent />;
+  }
+
+  if (isFetchingGetCountry || isFetchingGetPersonal || isLoadingPutPersonal) {
+    return <StepPersonalSkeleton />;
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -129,7 +155,7 @@ const StepPersonal = () => {
 
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          disabled={!formik.dirty}
+          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
           variant='contained'
           correctStyle={styles.btn}
           type='submit'

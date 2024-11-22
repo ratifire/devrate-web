@@ -11,13 +11,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['ContactList'],
     }),
-
     getUserContacts: builder.query({
       query: (userId) => `/users/${userId}/contacts`,
-      transformResponse: (response) => {
-        return response.filter(item => item.value?.length);
-      },
-      providesTags: () => ['ContactList'],
+      providesTags: ['ContactList'],
     }),
   }),
 });
