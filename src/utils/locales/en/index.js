@@ -268,6 +268,7 @@ export const en = {
       },
       right: {
         empty: {
+          emptyContacts: 'You have not added any contact yet.',
           emptyLanguages: 'You have not added any language yet.',
           emptyAboutMe:
             'You have not added information about yourself yet.\n' +

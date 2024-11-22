@@ -51,7 +51,7 @@ const RightSection = () => {
           {userContacts && userContacts.length > 0 ? (
             <SocialsLinkList socials={userContacts} componentStyles={styles} />
           ) : (
-            <Typography variant='body1'>{t('profile.empty.contacts')}</Typography>
+            <Typography variant='body1'>{t('profile.right.empty.emptyContacts')}</Typography>
           )}
         </Box>
       </Box>

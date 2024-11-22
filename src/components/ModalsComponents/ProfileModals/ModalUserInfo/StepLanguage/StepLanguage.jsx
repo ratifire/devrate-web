@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import {
@@ -12,11 +12,18 @@ import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { SelectLanguage } from '../../../../FormsComponents/Inputs';
 import LanguageLevel from '../../../../UI/LanguageLevel';
 import { styles } from './StepLanguage.styles';
+import { ErrorComponent } from '../../../../UI/Exceptions';
+import { StepLanguageSkeleton } from '../../../../UI/Skeleton';
 
 const StepLanguage = () => {
   const { data: user } = useSelector(selectCurrentUser);
-  const { data: languages } = useGetLanguageUserQuery(user.id);
-  const [postLanguageUser] = usePostLanguageUserMutation(user.id);
+  const {
+    data: dataGetLanguage,
+    isError: isErrorGetLanguage,
+    isFetching: isFetchingGetLanguage,
+  } = useGetLanguageUserQuery(user.id, { skip: !user });
+  const [postLanguageUser, { data: dataPostLanguage, isError: isErrorPostLanguage, isLoading: isLoadingPostLanguage }] =
+    usePostLanguageUserMutation(user.id, { skip: !user });
 
   const [formState, setFormState] = useState({
     selectedLanguage: '',
@@ -26,31 +33,24 @@ const StepLanguage = () => {
     helperTextLanguage: '',
     helperTextLevel: '',
   });
-  const [isFormUnchanged, setIsFormUnchanged] = useState(true);
 
-  
+  const onSubmit = (values) => {
+    postLanguageUser({
+      userId: user.id,
+      body: values.languages,
+    });
+
+    formik.resetForm();
+  };
+
   const formik = useFormik({
     initialValues: {
-      languages: [],
+      languages: dataPostLanguage || dataGetLanguage || [],
     },
-    onSubmit: (values) => {
-      postLanguageUser({
-        userId: user.id,
-        body: values.languages,
-      });
-    },
+    onSubmit,
+    enableReinitialize: true,
   });
 
-  useEffect(() => {
-    if (languages) {
-      formik.setFieldValue('languages', languages);
-    }
-  }, [languages]);
-  
-  useEffect(() => {
-    setIsFormUnchanged(JSON.stringify(formik.values.languages) === JSON.stringify(languages));
-  }, [formik.values.languages, languages]);
-  
   const handleLanguageChange = (language) => {
     setFormState((prevState) => ({
       ...prevState,
@@ -120,16 +120,24 @@ const StepLanguage = () => {
     );
   };
 
+  if (isErrorGetLanguage || isErrorPostLanguage) {
+    return <ErrorComponent />;
+  }
+
+  if (isFetchingGetLanguage || isLoadingPostLanguage) {
+    return <StepLanguageSkeleton />;
+  }
+
   return (
     <Box sx={styles.wrapper}>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.input100}>
           <SelectLanguage
-            variant="outlined"
+            variant='outlined'
             handleLanguageChange={handleLanguageChange}
             handleLevelChange={handleLevelChange}
-            labelLanguage="profile.modal.userInfo.languages.language"
-            labelLevel="profile.modal.userInfo.languages.level"
+            labelLanguage='profile.modal.userInfo.languages.language'
+            labelLevel='profile.modal.userInfo.languages.level'
             helperTextLanguage={formState.helperTextLanguage}
             helperTextLevel={formState.helperTextLevel}
             errorLanguage={formState.errorLanguage}
@@ -141,7 +149,6 @@ const StepLanguage = () => {
             <AddIcon />
           </IconButton>
         </Box>
-
         <Box sx={styles.input100}>
           <Box sx={styles.wrapperLanguages}>
             {formik.values.languages.map((item) => (
@@ -155,12 +162,11 @@ const StepLanguage = () => {
             ))}
           </Box>
         </Box>
-
         <ButtonDef
-          disabled={isFormUnchanged}
-          variant="contained"
-          type="submit"
-          label="profile.modal.btn"
+          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+          variant='contained'
+          type='submit'
+          label='profile.modal.btn'
           correctStyle={styles.btn}
         />
       </form>

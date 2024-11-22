@@ -2,6 +2,7 @@ import { apiSlice } from '../../services/api/apiSlice';
 import { TAG_TYPES } from '../../../utils/constants/tagTypes';
 
 export const userApiSlice = apiSlice.injectEndpoints({
+  tagTypes: ['ContactList'],
   endpoints: (builder) => ({
     postContactsUser: builder.mutation({
       query: ({ userId, body }) => ({

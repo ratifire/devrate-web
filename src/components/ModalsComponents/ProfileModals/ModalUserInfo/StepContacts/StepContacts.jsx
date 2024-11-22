@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../../redux/modal/modalSlice';
+import { useSelector } from 'react-redux';
 import {
   useGetUserContactsQuery,
   usePostContactsUserMutation,
@@ -11,28 +10,26 @@ import { StepContactsSchema } from '../../../../../utils/valadationSchemas/index
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
-import { addHttps, addTelegram } from './helpers';
 import { styles } from './StepContacts.styles';
-
-const typeNameMap = {
-  [SOCIAL_TYPES.TELEGRAM_LINK]: 'telegram',
-  [SOCIAL_TYPES.EMAIL]: 'mail',
-  [SOCIAL_TYPES.LINKEDIN_LINK]: 'linkedIn',
-  [SOCIAL_TYPES.GITHUB_LINK]: 'gitHub',
-  [SOCIAL_TYPES.BEHANCE_LINK]: 'behance',
-  [SOCIAL_TYPES.PHONE_NUMBER]: 'phone',
-};
+import {
+  addHttps,
+  addPhone,
+  addTelegram,
+  getDataStepContacts,
+} from '../../../../../utils/helpers/helpersForStepContactModal';
+import { StepContactsSkeleton } from '../../../../UI/Skeleton';
+import { ErrorComponent } from '../../../../UI/Exceptions';
 
 const StepContacts = () => {
-  const [postContactsUser] = usePostContactsUserMutation();
+  const [postContactsUser, { isLoading, isError: isErrorPostContacts, data: dataPost }] = usePostContactsUserMutation();
   const userId = useSelector((state) => state.auth.user.data.id);
-  const contactsQuery = useGetUserContactsQuery(userId);
-  const dispatch = useDispatch();
+  const {
+    data: contactsData,
+    isFetching,
+    isError: isErrorGetUseContacts,
+  } = useGetUserContactsQuery(userId, { skip: !userId });
 
-  const valuesMap = contactsQuery.data.reduce((acc, contact) => {
-    acc[typeNameMap[contact.type]] = contact.value;
-    return acc;
-  }, {});
+  const valuesMap = dataPost ? getDataStepContacts(dataPost) : getDataStepContacts(contactsData);
 
   const initialValues = {
     telegram: '',
@@ -44,8 +41,8 @@ const StepContacts = () => {
     ...valuesMap,
   };
 
-  const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
-    await postContactsUser({
+  const onSubmit = ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
+    postContactsUser({
       userId: userId,
       body: [
         { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addTelegram(telegram) },
@@ -53,18 +50,26 @@ const StepContacts = () => {
         { type: SOCIAL_TYPES.LINKEDIN_LINK, value: addHttps(linkedIn) },
         { type: SOCIAL_TYPES.GITHUB_LINK, value: addHttps(gitHub) },
         { type: SOCIAL_TYPES.BEHANCE_LINK, value: addHttps(behance) },
-        { type: SOCIAL_TYPES.PHONE_NUMBER, value: phone },
+        { type: SOCIAL_TYPES.PHONE_NUMBER, value: addPhone(phone) },
       ],
     });
-
-    dispatch(closeModal({ modalName: 'openUserInfo' }));
+    formik.resetForm();
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema: StepContactsSchema,
     onSubmit,
+    enableReinitialize: true,
   });
+
+  if (isErrorGetUseContacts || isErrorPostContacts) {
+    return <ErrorComponent />;
+  }
+
+  if (isFetching || isLoading) {
+    return <StepContactsSkeleton />;
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -142,7 +147,7 @@ const StepContacts = () => {
         />
       </Box>
       <ButtonDef
-        disabled={!formik.dirty}
+        disabled={!formik.dirty || formik.isSubmitting || !formik.isValid}
         variant='contained'
         type='submit'
         label='profile.modal.btn'
