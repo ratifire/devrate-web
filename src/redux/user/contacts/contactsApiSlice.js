@@ -1,4 +1,5 @@
 import { apiSlice } from '../../services/api/apiSlice';
+import { TAG_TYPES } from '../../../utils/constants/tagTypes';
 
 export const userApiSlice = apiSlice.injectEndpoints({
   tagTypes: ['ContactList'],
@@ -9,11 +10,15 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['ContactList'],
+      invalidatesTags: [TAG_TYPES.ContactList],
     }),
+
     getUserContacts: builder.query({
       query: (userId) => `/users/${userId}/contacts`,
-      providesTags: ['ContactList'],
+      transformResponse: (response) => {
+        return response.filter((item) => item.value?.length);
+      },
+      providesTags: () => [TAG_TYPES.ContactList],
     }),
   }),
 });

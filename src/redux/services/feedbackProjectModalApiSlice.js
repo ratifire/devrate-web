@@ -1,7 +1,7 @@
 import { apiSlice } from './api/apiSlice';
+import { TAG_TYPES } from '../../utils/constants/tagTypes';
 
 export const feedbackProjectModalApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['Feedback'],
   endpoints: (builder) => ({
     createFeedback: builder.mutation({
       query: ({ userId, type, text }) => ({
@@ -9,11 +9,9 @@ export const feedbackProjectModalApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { type, text },
       }),
-      invalidatesTags: ['Feedback'],
+      invalidatesTags: [TAG_TYPES.Feedback],
     }),
   }),
 });
 
-export const {
-  useCreateFeedbackMutation,
-} = feedbackProjectModalApiSlice;
+export const { useCreateFeedbackMutation } = feedbackProjectModalApiSlice;
