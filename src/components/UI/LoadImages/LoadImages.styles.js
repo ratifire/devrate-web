@@ -52,6 +52,7 @@ export const styles = {
     },
   }),
   preview: {
+    display: 'block',
     width: 334,
     height: 334,
     borderRadius: 4,

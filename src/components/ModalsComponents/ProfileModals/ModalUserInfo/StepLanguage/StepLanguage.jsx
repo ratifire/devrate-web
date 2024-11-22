@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import {
@@ -11,66 +11,61 @@ import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { SelectLanguage } from '../../../../FormsComponents/Inputs';
 import LanguageLevel from '../../../../UI/LanguageLevel';
 import { styles } from './StepLanguage.styles';
-
+import { ErrorComponent } from '../../../../UI/Exceptions';
+import { StepLanguageSkeleton } from '../../../../UI/Skeleton';
 const StepLanguage = () => {
   const { data: user } = useSelector(selectCurrentUser);
-  const { data: languages } = useGetLanguageUserQuery(user.id);
-  const [postLanguageUser] = usePostLanguageUserMutation(user.id);
-
-  const [isFormUnchanged, setIsFormUnchanged] = useState(true);
-
-  
+  const {
+    data: dataGetLanguage,
+    isError: isErrorGetLanguage,
+    isFetching: isFetchingGetLanguage,
+  } = useGetLanguageUserQuery(user.id, { skip: !user });
+  const [postLanguageUser, { data: dataPostLanguage, isError: isErrorPostLanguage, isLoading: isLoadingPostLanguage }] =
+    usePostLanguageUserMutation(user.id, { skip: !user });
+  const onSubmit = (values) => {
+    postLanguageUser({
+      userId: user.id,
+      body: values.languages,
+    });
+    formik.resetForm();
+  };
   const formik = useFormik({
     initialValues: {
-      languages: [],
+      languages: dataPostLanguage || dataGetLanguage || [],
     },
-    onSubmit: (values) => {
-      postLanguageUser({
-        userId: user.id,
-        body: values.languages,
-      });
-    },
+    onSubmit,
+    enableReinitialize: true,
   });
-
-  useEffect(() => {
-    if (languages) {
-      formik.setFieldValue('languages', languages);
-    }
-  }, [languages]);
-  
-  useEffect(() => {
-    setIsFormUnchanged(JSON.stringify(formik.values.languages) === JSON.stringify(languages));
-  }, [formik.values.languages, languages]);
-
-
   const createLang = (data) => {
     const { selectedLanguage, selectedLevel } = data;
-
-      const newLang = {
-        name: selectedLanguage,
-        level: selectedLevel,
-        code: selectedLanguage,
-      };
-      formik.setFieldValue('languages', [...formik.values.languages, newLang]);
+    const newLang = {
+      name: selectedLanguage,
+      level: selectedLevel,
+      code: selectedLanguage,
+    };
+    formik.setFieldValue('languages', [...formik.values.languages, newLang]);
   };
-
   const languageDeleteHandler = (languageToDelete) => {
     formik.setFieldValue(
       'languages',
       formik.values.languages.filter((item) => item.name !== languageToDelete)
     );
   };
-
+  if (isErrorGetLanguage || isErrorPostLanguage) {
+    return <ErrorComponent />;
+  }
+  if (isFetchingGetLanguage || isLoadingPostLanguage) {
+    return <StepLanguageSkeleton />;
+  }
   return (
     <Box sx={styles.wrapper}>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.input100}>
           <SelectLanguage
-              onSubmit={createLang}
-              prohibitedValues={formik.values.languages}
+            onSubmit={createLang}
+            prohibitedValues={formik.values.languages}
           />
         </Box>
-
         <Box sx={styles.input100}>
           <Box sx={styles.wrapperLanguages}>
             {formik.values.languages.map((item) => (
@@ -84,17 +79,15 @@ const StepLanguage = () => {
             ))}
           </Box>
         </Box>
-
         <ButtonDef
-          disabled={isFormUnchanged}
-          variant="contained"
-          type="submit"
-          label="profile.modal.btn"
+          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+          variant='contained'
+          type='submit'
+          label='profile.modal.btn'
           correctStyle={styles.btn}
         />
       </form>
     </Box>
   );
 };
-
 export default StepLanguage;

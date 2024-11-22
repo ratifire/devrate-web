@@ -86,14 +86,8 @@ const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = nul
 
   return (
     <>
-      <FormControl
-        fullWidth
-        required
-        variant={variant}
-        sx={styles.wrapper}
-        error={selectedLanguage.errorLanguage}>
-
-        <InputLabel htmlFor={id} sx={styles.label}>
+      <FormControl fullWidth variant={variant} sx={styles.wrapper} error={selectedLanguage.errorLanguage}>
+        <InputLabel htmlFor={id} sx={styles.label} required>
           {t('profile.modal.userInfo.languages.language')}
         </InputLabel>
         <Select
@@ -109,7 +103,6 @@ const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = nul
               sx: styles.selectField,
             },
           }}
-          required
         >
           {languagesArray.length > 0 &&
             languagesArray.map(({ id }) => (
@@ -130,9 +123,9 @@ const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = nul
         sx={styles.wrapper}
         error={selectedLanguage.errorLevel}
         disabled={!selectedLanguage}
-        required
+
       >
-        <InputLabel htmlFor={`${id}-level`} sx={styles.label}>
+        <InputLabel htmlFor={`${id}-level`} sx={styles.label} required>
           {t('profile.modal.userInfo.languages.level')}
         </InputLabel>
         <Select
@@ -148,9 +141,7 @@ const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = nul
               sx: styles.selectField,
             },
           }}
-          required
           disabled={!selectedLanguage.selectedLanguage}
-
         >
           {levelCodes.length > 0 &&
             levelCodes.map((level) => (
