@@ -11,11 +11,7 @@ import {
 import { styles } from './SelectLanguage.styles';
 import AddIcon from '@mui/icons-material/Add';
 
-const SelectLanguage = ({
-  variant = 'outlined',
-  onSubmit,
-  prohibitedValues = null,
-}) => {
+const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = null }) => {
   const id = uuid();
   const { t } = useTranslation();
 
@@ -34,11 +30,11 @@ const SelectLanguage = ({
     helperTextLevel: '',
   });
 
-  const handleChange = (field, value = '') => {
+  const handleChange = (field, event = '') => {
     setSelectedLanguage((prevState) => {
       const updatedState = {
         ...prevState,
-        [field]: value,
+        [field]: event.target.value,
       };
 
       if (field === 'selectedLanguage') {
@@ -56,12 +52,11 @@ const SelectLanguage = ({
     });
   };
 
-
   const onSubmitLanguageHandler = () => {
-    const { selectedLanguage, selectedLevel } = selectedLanguage;
+    const { selectedLanguage: lang, selectedLevel } = selectedLanguage;
     const updates = {};
 
-    if (!selectedLanguage) {
+    if (!lang) {
       updates.errorLanguage = true;
       updates.helperTextLanguage = 'profile.modal.userInfo.languages.selectLanguage';
     }
@@ -71,7 +66,7 @@ const SelectLanguage = ({
       updates.helperTextLevel = 'profile.modal.userInfo.languages.selectLevel';
     }
 
-    if (prohibitedValues && prohibitedValues.some((item) => item.name === selectedLanguage)) {
+    if (prohibitedValues && prohibitedValues.some((item) => item.name === lang)) {
       updates.errorLanguage = true;
       updates.helperTextLanguage = 'profile.modal.userInfo.languages.languageAdded';
     }
@@ -85,22 +80,28 @@ const SelectLanguage = ({
     }
 
     onSubmit(selectedLanguage);
-    handleChange('selectedLanguage');
-    handleChange('selectedLevel');
+    handleChange('selectedLanguage', { target: '' });
+    handleChange('selectedLevel', { target: '' });
   };
 
   return (
     <>
-      <FormControl fullWidth variant={variant} sx={styles.wrapper} error={selectedLanguage.errorLanguage}>
+      <FormControl
+        fullWidth
+        required
+        variant={variant}
+        sx={styles.wrapper}
+        error={selectedLanguage.errorLanguage}>
+
         <InputLabel htmlFor={id} sx={styles.label}>
-          {t("profile.modal.userInfo.languages.language")}
+          {t('profile.modal.userInfo.languages.language')}
         </InputLabel>
         <Select
           sx={styles.input}
           id={id}
           name='language'
-          value={selectedLanguage}
-          label={t("profile.modal.userInfo.languages.language")}
+          value={selectedLanguage.selectedLanguage}
+          label={t('profile.modal.userInfo.languages.language')}
           onChange={(data) => handleChange('selectedLanguage', data)}
           IconComponent={KeyboardArrowDownIcon}
           inputProps={{
@@ -108,6 +109,7 @@ const SelectLanguage = ({
               sx: styles.selectField,
             },
           }}
+          required
         >
           {languagesArray.length > 0 &&
             languagesArray.map(({ id }) => (
@@ -122,16 +124,23 @@ const SelectLanguage = ({
           </FormHelperText>
         )}
       </FormControl>
-      <FormControl fullWidth variant={variant} sx={styles.wrapper} error={selectedLanguage.errorLevel} disabled={!selectedLanguage}>
+      <FormControl
+        fullWidth
+        variant={variant}
+        sx={styles.wrapper}
+        error={selectedLanguage.errorLevel}
+        disabled={!selectedLanguage}
+        required
+      >
         <InputLabel htmlFor={`${id}-level`} sx={styles.label}>
-          {t("profile.modal.userInfo.languages.level")}
+          {t('profile.modal.userInfo.languages.level')}
         </InputLabel>
         <Select
           sx={styles.input}
           id={`${id}-level`}
           name='languageLevel'
           value={selectedLanguage.selectedLevel}
-          label={t("profile.modal.userInfo.languages.level")}
+          label={t('profile.modal.userInfo.languages.level')}
           onChange={(data) => handleChange('selectedLevel', data)}
           IconComponent={KeyboardArrowDownIcon}
           inputProps={{
@@ -139,6 +148,9 @@ const SelectLanguage = ({
               sx: styles.selectField,
             },
           }}
+          required
+          disabled={!selectedLanguage.selectedLanguage}
+
         >
           {levelCodes.length > 0 &&
             levelCodes.map((level) => (
@@ -163,7 +175,7 @@ const SelectLanguage = ({
 SelectLanguage.propTypes = {
   variant: PropTypes.oneOf(['standard', 'filled', 'outlined']),
   onSubmit: PropTypes.func,
-  prohibitedValues: PropTypes.arrayOf(PropTypes.string)
+  prohibitedValues: PropTypes.array,
 };
 
 export default SelectLanguage;

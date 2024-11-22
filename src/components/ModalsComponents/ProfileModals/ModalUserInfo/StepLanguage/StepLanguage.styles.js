@@ -14,16 +14,27 @@ export const styles = {
     gridGap: theme.spacing(3),
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: theme.palette.neutral[400],
+        borderColor: theme.palette.modals.select.border.default,
       },
       '&:hover fieldset': {
-        borderColor: theme.palette.primary.main,
+        borderColor: theme.palette.modals.select.border.hover,
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.primary.main,
+        borderColor: theme.palette.modals.select.border.focused,
       },
       '& legend': {
         width: 'auto',
+      },
+      '& > .MuiSvgIcon-root': {
+        color: theme.palette.scheduleInterview.modal.tab.arrows,
+      },
+      '&.Mui-disabled': {
+        '& .MuiOutlinedInput-notchedOutline': {
+          borderColor: theme.palette.modals.select.border.default,
+        },
+        '& > .MuiSvgIcon-root': {
+          color: theme.palette.modals.select.textColor.disabled,
+        },
       },
     },
     '& .MuiFormLabel-root': {
