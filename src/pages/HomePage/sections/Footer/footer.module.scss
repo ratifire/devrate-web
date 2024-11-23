@@ -209,10 +209,12 @@
   }
 
   &__input {
+    color: #FFFFFF;
     border-radius: 4px;
     padding: 16px 10px;
     border: 1px solid #444446;
     outline: none;
+    font-size: 18px;
     background-color: #1D1D1D;
   }
 
@@ -222,7 +224,7 @@
     font-size: 18px;
     line-height: 150%;
     letter-spacing: 0.01em;
-    color: #FFFFFF;
+    color: #828283
   }
 
   &__input:focus {
@@ -230,8 +232,10 @@
   }
 
   &__textarea {
+    color: #FFFFFF;
     border-radius: 4px;
     padding: 12px;
+    font-size: 18px;
     border: 1px solid #444446;
     outline: none;
     resize: none;
@@ -249,7 +253,7 @@
   }
 
   &__textarea:focus {
-    color: #828283;
+    color: #FFFFFF;
   }
 
   &__button {
