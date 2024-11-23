@@ -32,8 +32,10 @@ const MemoizedExperienceSection = memo(ExperienceSection);
 const UserProfilePage = () => {
   const { userId } = useParams();
   const numericUserId = Number(userId);
+  
   const navigate = useNavigate();
   useAuth();
+  
   const { data } = useSelector(selectCurrentUser);
 
   useEffect(() => {
