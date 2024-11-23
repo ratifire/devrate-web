@@ -59,6 +59,7 @@ const RegistrationModal = () => {
       subscribed: news,
       password,
     });
+
     resetForm();
     dispatch(closeModal({ modalName: 'openRegistration' }));
     dispatch(openModal({ modalName: 'openConfirmation', data: email }));

@@ -1,42 +1,54 @@
 import React, { useState } from 'react';
 import styles from './Faq.module.scss';
+import {memo} from 'react';
 import { faqData } from './faqData';
-import iconBtn from '../../assets/icon-bottom.svg';
-import iconOpen from '../../assets/icon-open-top.svg';
+import ItemFaq from './ItemFaq';
 
-const FaqSection = () => {
+const FaqSection = memo(() => {
   const [openId, setOpenId] = useState(null);
 
   const handleOnClick = (id) => {
+    const scrollOffset = window.scrollY;
     setOpenId(openId === id ? null : id);
+
+    setTimeout(() => {
+      window.scrollTo({ top: scrollOffset });
+    }, 0);
   };
 
+  const firstColumn = faqData.filter((item, index) => {
+    const columnLength = faqData.length / 2 - 1;
+    return index <= columnLength;
+  });
+
+  const secondColumn = faqData.filter((item, index) => {
+    const columnLength = faqData.length / 2 - 1;
+    return index > columnLength;
+  });
+
   return (
-    <section className={styles.faq__bg} id='faq'>
-      <div className='container'>
+    <section className={styles.faq__bg} id="faq">
+      <div className="container">
         <div className={styles.faq}>
           <h2 className={styles.faq__title}>FAQ</h2>
-          <div className={styles.faq__menu}>
-            {faqData.map((item) => (
-              <div className={styles.faq__item} key={item.id} onClick={() => handleOnClick(item.id)}>
-                <div className={styles.faq__header}>
-                  <img
-                    className={styles.faq__iconBottom}
-                    src={openId === item.id ? iconOpen : iconBtn}
-                    alt='iconButton'
-                  />
-                  <div className={styles.faq__question}>
-                    <span className={styles.faq__number}>{item.id}</span>
-                    {item.question}
-                  </div>
-                  {openId === item.id && <div className={styles.faq__answer}>{item.answer}</div>}
-                </div>
-              </div>
-            ))}
+          <div className={styles.faq__columns}>
+            <div className={styles.faq__column}>
+              {firstColumn.map((item) => (
+                <ItemFaq key={item.id} item={item} openId={openId} handleOnClick={handleOnClick} />
+              ))}
+            </div>
+            <div className={styles.faq__column}>
+              {secondColumn.map((item) => (
+                <ItemFaq key={item.id} item={item} openId={openId} handleOnClick={handleOnClick} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
-};
+});
+
+FaqSection.displayName = 'FaqSection';
+
 export default FaqSection;
