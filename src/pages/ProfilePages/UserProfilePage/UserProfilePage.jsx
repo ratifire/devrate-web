@@ -1,12 +1,14 @@
-import React, { lazy, memo, Suspense } from 'react';
+import React, { lazy, memo, Suspense, useEffect } from 'react';
 import UserProfileTemplate from '../../../Templates/ProfileTemplates/UserProfileTemplate';
 import { Box, Container, Paper } from '@mui/material';
 import { styles } from './UserProfilePage.styles';
 import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
 import useAuth from '../../../utils/hooks/useAuth';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import UserProfileSkeleton from '../../../components/UI/Skeleton/Pages/userProfileSkeleton';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../redux/auth/authSlice';
 
 const SkillsSection = lazy(
   () => import('../../../components/PageComponents/ProfileComponents/UserProfile/SkillsSection/SkillsSection')
@@ -29,9 +31,18 @@ const MemoizedExperienceSection = memo(ExperienceSection);
 
 const UserProfilePage = () => {
   const { userId } = useParams();
+  const numericUserId = Number(userId);
+  const navigate = useNavigate();
   useAuth();
+  const { data } = useSelector(selectCurrentUser);
 
-  const { data: dataPersonal, error, isLoading } = useGetPersonalUserQuery(userId);
+  useEffect(() => {
+    if (numericUserId === data.id) {
+      navigate('/profile');
+    }
+  }, [numericUserId, data.id]);
+
+  const { data: dataPersonal, error, isLoading } = useGetPersonalUserQuery(numericUserId);
 
   if (isLoading) {
     return <UserProfileSkeleton />;
@@ -42,22 +53,22 @@ const UserProfilePage = () => {
   }
 
   return (
-    <Suspense fallback={UserProfileSkeleton}>
+    <Suspense fallback={<UserProfileSkeleton />}>
       <UserProfileTemplate>
         <MemoizedProfileHeader />
         <Container maxWidth='xl' sx={styles.container}>
           <Box sx={styles.contentWrapper}>
             <Paper sx={styles.baseUserInfo}>
-              <MemoizedBaseUserInfo id={userId} />
+              <MemoizedBaseUserInfo id={numericUserId} />
             </Paper>
             <Paper sx={styles.skills}>
-              <MemoizedSkillsSection id={userId} />
+              <MemoizedSkillsSection id={numericUserId} />
             </Paper>
             <Paper sx={styles.right}>
-              <MemoizedRightSection id={userId} />
+              <MemoizedRightSection id={numericUserId} />
             </Paper>
             <Paper sx={styles.experience}>
-              <MemoizedExperienceSection id={userId} />
+              <MemoizedExperienceSection id={numericUserId} />
             </Paper>
           </Box>
         </Container>
