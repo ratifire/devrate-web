@@ -48,7 +48,7 @@ const BaseUserInfo = ({ id }) => {
             userLastName={getLastName}
             userName={`${getFirstName} ${getLastName}`}
             src={userPicture}
-            size="l"
+            size='l'
             correctStyle={styles.correctAvatar}
           />
         )}
@@ -72,7 +72,7 @@ const BaseUserInfo = ({ id }) => {
           type={'button'}
           variant='contained'
           handlerClick={handleWriteMessage}
-          label={t('Write a massage')}
+          label={t('Write a message')}
         />
         <ButtonDef
           correctStyle={styles.outlined}
