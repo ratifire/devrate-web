@@ -14,6 +14,7 @@ import { resetPasswordSchema } from '../../../../../utils/valadationSchemas/inde
 import { toast } from 'react-toastify';
 import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { Snackbar } from '@mui/material';
 
 const initialValues = {
   newPassword: '',

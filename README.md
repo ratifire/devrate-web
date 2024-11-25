@@ -44,7 +44,8 @@ The frontend of the application is built using modern web technologies and frame
 - [Jest](https://jestjs.io/)
 - [Prettier](https://prettier.io/)
 - [Styled Components](https://styled-components.com/)
-- [react-toastify](https://fkhadra.github.io/react-toastify/introduction)
+
+[//]: # (- [Snackbar/MUI]&#40;&#41;)
 - [@mui/material](https://mui.com/getting-started/installation/)
 - [i18next](https://www.i18next.com/)
 - [luxon](https://moment.github.io/luxon/#/)

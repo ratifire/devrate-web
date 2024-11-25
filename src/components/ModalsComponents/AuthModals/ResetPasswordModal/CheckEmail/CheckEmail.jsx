@@ -4,7 +4,7 @@ import ModalLayout from '../../../../../layouts/ModalLayout';
 import styles from './CheckEmail.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Link, Typography, Snackbar } from '@mui/material';
 import { CheckResetEmailSchema } from '../../../../../utils/valadationSchemas/index';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
