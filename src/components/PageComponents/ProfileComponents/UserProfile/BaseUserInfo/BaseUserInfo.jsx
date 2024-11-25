@@ -72,14 +72,14 @@ const BaseUserInfo = ({ id }) => {
           type={'button'}
           variant='contained'
           handlerClick={handleWriteMessage}
-          label={t('Write a message')}
+          label={t('profile.baseUserInfo.messageBtn')}
         />
         <ButtonDef
           correctStyle={styles.outlined}
           type={'button'}
           variant='outlined'
           handlerClick={handleBookInterview}
-          label={t('Book an interview')}
+          label={t('profile.baseUserInfo.interviewBtn')}
         />
       </Box>
     </Box>

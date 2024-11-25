@@ -212,6 +212,8 @@ export const uk = {
       baseUserInfo: {
         loading: 'Ваш профіль заповнено на',
         complete: 'Вітаємо! Ваш профіль повністю заповнений',
+        messageBtn: 'Написати повідомлення',
+        interviewBtn: 'Забронювати співбесіду',
       },
       experience: {
         workExperience: {
