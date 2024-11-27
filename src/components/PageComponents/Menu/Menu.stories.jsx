@@ -1,6 +1,6 @@
 import React from 'react';
-import Menu from './Menu';
 import { decorators } from '../../../../.storybook/preview';
+import Menu from './Menu';
 
 export default {
   title: 'UI/Menu',
@@ -14,6 +14,6 @@ export default {
 
 export const Default = () => <Menu isDrawerOpen toggleDrawer={decorators.action('toggleDrawer')} />;
 
-export const Open = () => <Menu isDrawerOpen={true} toggleDrawer={decorators.action('toggleDrawer')} />;
+export const Open = () => <Menu isDrawerOpen toggleDrawer={decorators.action('toggleDrawer')} />;
 
 export const Closed = () => <Menu isDrawerOpen={false} toggleDrawer={decorators.action('toggleDrawer')} />;

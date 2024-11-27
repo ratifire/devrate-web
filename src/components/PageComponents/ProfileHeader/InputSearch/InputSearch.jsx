@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg';
 import { useGetSearchQuery } from '../../../../redux/search/searchApiSlice';
 import useDebounce from '../../../../utils/hooks/useDebounce';
+import useMergeState from '../../../../utils/hooks/useMergeState';
 import { styles } from './InputSearch.styles';
 import { ModalSearch } from './ModalSearch';
 import { formatSearchQuery } from './helpers';
-import useMergeState from '../../../../utils/hooks/useMergeState';
 
 const initialState = {
   query: '',
@@ -22,7 +22,9 @@ const InputSearch = () => {
   const boxRef = useRef(null);
   const formatQueryTrim = formatSearchQuery(query.trim());
   const debouncedValue = useDebounce({ value: formatQueryTrim });
-  const { data, isError, isFetching, originalArgs, startedTimeStamp } = useGetSearchQuery(debouncedValue, { skip: !debouncedValue });
+  const { data, isError, isFetching, originalArgs, startedTimeStamp } = useGetSearchQuery(debouncedValue, {
+    skip: !debouncedValue,
+  });
 
   useEffect(() => {
     if (data) {
@@ -72,13 +74,6 @@ const InputSearch = () => {
     <Box ref={boxRef}>
       <OutlinedInput
         autoComplete='off'
-        name='query'
-        placeholder={t('header.search')}
-        type='text'
-        value={query}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        sx={styles.input}
         endAdornment={
           <InputAdornment position='end'>
             <IconButton edge='end'>
@@ -86,6 +81,13 @@ const InputSearch = () => {
             </IconButton>
           </InputAdornment>
         }
+        name='query'
+        placeholder={t('header.search')}
+        sx={styles.input}
+        type='text'
+        value={query}
+        onBlur={handleBlur}
+        onChange={handleChange}
       />
       {formatQueryTrim && (
         <ModalSearch isError={isError} isSpinner={isFetching || isChange} users={users} onClose={handleClose} />

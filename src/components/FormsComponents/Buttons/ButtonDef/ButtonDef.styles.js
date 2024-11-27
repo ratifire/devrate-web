@@ -51,7 +51,7 @@ export const styles = {
     borderColor: theme.palette.primary['400'],
     '&:hover': {
       backgroundColor: 'transparent',
-      borderColor: theme.palette.primary['600']
+      borderColor: theme.palette.primary['600'],
     },
     '&:disabled': {
       borderColor: theme.palette.neutral['800'],

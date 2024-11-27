@@ -16,13 +16,13 @@ const EducationItem = ({ type, name, description, startYear, endYear, icon: Icon
   return (
     <Box sx={styles.educationItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
-        {IconComponent && <IconComponent width={48} height={48} />}
+        {IconComponent && <IconComponent height={48} width={48} />}
         <Box sx={styles.logoTitleContainer}>
           <Box sx={{ marginLeft: '11px' }}>
-            <Typography variant="h6" sx={styles.courseTitle}>
+            <Typography sx={styles.courseTitle} variant='h6'>
               {type}
             </Typography>
-            <Typography variant="subtitle3" sx={styles.schoolTitle}>
+            <Typography sx={styles.schoolTitle} variant='subtitle3'>
               {name}
             </Typography>
           </Box>
@@ -35,12 +35,7 @@ const EducationItem = ({ type, name, description, startYear, endYear, icon: Icon
         {isCollapsed && needCollapse ? excerpt : description}
         &nbsp;
         {needCollapse && (
-          <Link
-            component="button"
-            variant="subtitle3"
-            sx={styles.link}
-            onClick={() => setIsCollapsed(!isCollapsed)}
-          >
+          <Link component='button' sx={styles.link} variant='subtitle3' onClick={() => setIsCollapsed(!isCollapsed)}>
             {isCollapsed ? t('profile.experienceSection.readAll') : t('profile.experienceSection.collapse')}
           </Link>
         )}
@@ -54,10 +49,7 @@ EducationItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   startYear: PropTypes.number.isRequired,
-  endYear: PropTypes.oneOfType([
-    PropTypes.number.isRequired,
-    PropTypes.string.isRequired
-  ]).isRequired,
+  endYear: PropTypes.oneOfType([PropTypes.number.isRequired, PropTypes.string.isRequired]).isRequired,
   icon: PropTypes.elementType,
 };
 

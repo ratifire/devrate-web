@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, styled, Tab, Tabs } from '@mui/material';
-import styles from './ExperienceSection.styles';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import Education from '../../UserProfile/ExperienceSection/Education';
 import Skills from '../../UserProfile/ExperienceSection/Skills';
 import Achievement from '../../UserProfile/ExperienceSection/Achievement';
-import { useTranslation } from 'react-i18next';
+import styles from './ExperienceSection.styles';
 import WorkExperience from './WorkExperience';
-import PropTypes from 'prop-types';
 
 const ExperienceSection = ({ id }) => {
   const [value, setValue] = React.useState('openExperience');
@@ -17,10 +17,10 @@ const ExperienceSection = ({ id }) => {
   };
 
   const tab = {
-    openExperience: <WorkExperience id={id} tab={'workExperience'}/>,
-    achievement: <Achievement id={id} tab={'achievement'}/>,
-    skills: <Skills id={id} tab={'skills'}/>,
-    education: <Education id={id} tab={'education'}/>,
+    openExperience: <WorkExperience id={id} tab={'workExperience'} />,
+    achievement: <Achievement id={id} tab={'achievement'} />,
+    skills: <Skills id={id} tab={'skills'} />,
+    education: <Education id={id} tab={'education'} />,
   };
 
   const StyledTabs = styled(Tabs)(({ theme }) => ({
@@ -46,13 +46,21 @@ const ExperienceSection = ({ id }) => {
   return (
     <Box sx={styles.experienceContainer}>
       <Box style={styles.tabsContainer}>
-        <StyledTabs sx={styles.wrapperTab} value={value} onChange={handleChange} textColor="primary"
-                    indicatorColor="primary[200]">
-          <StyledTab value="openExperience" label={t('profile.experience.workExperience.tabName')}
-                     sx={styles.tabItem} />
-          <StyledTab value="achievement" label={t('profile.experience.achievement.tabName')} sx={styles.tabItem} />
-          <StyledTab value="skills" label={t('profile.experience.skills.tabName')} sx={styles.tabItem} />
-          <StyledTab value="education" label={t('profile.experience.education.tabName')} sx={styles.tabItem} />
+        <StyledTabs
+          indicatorColor='primary[200]'
+          sx={styles.wrapperTab}
+          textColor='primary'
+          value={value}
+          onChange={handleChange}
+        >
+          <StyledTab
+            label={t('profile.experience.workExperience.tabName')}
+            sx={styles.tabItem}
+            value='openExperience'
+          />
+          <StyledTab label={t('profile.experience.achievement.tabName')} sx={styles.tabItem} value='achievement' />
+          <StyledTab label={t('profile.experience.skills.tabName')} sx={styles.tabItem} value='skills' />
+          <StyledTab label={t('profile.experience.education.tabName')} sx={styles.tabItem} value='education' />
         </StyledTabs>
       </Box>
       <Box sx={styles.experienceItemContainer}>{tab[value]}</Box>
@@ -63,6 +71,5 @@ const ExperienceSection = ({ id }) => {
 ExperienceSection.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
-
 
 export default ExperienceSection;

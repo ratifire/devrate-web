@@ -41,6 +41,7 @@ module.exports = {
     'react/self-closing-comp': ['error', { component: true, html: true }],
     'react/no-array-index-key': 'warn',
     'react/jsx-boolean-value': ['error', 'never'],
+    'no-console': 'warn',
   },
   settings: {
     react: {

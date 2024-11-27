@@ -15,8 +15,8 @@ export const styles = {
     '>h6': {
       color: theme.palette.experienceSkillSect.number.color,
       border: `1px solid ${theme.palette.experienceSkillSect.number.color}`,
-      backgroundColor: theme.palette.experienceSkillSect.number.backgroundColor
-    }
+      backgroundColor: theme.palette.experienceSkillSect.number.backgroundColor,
+    },
   }),
   wrapper: (theme) => ({
     display: 'flex',
@@ -41,5 +41,5 @@ export const styles = {
     backgroundColor: theme.palette.experienceSkillSect.number.backgroundColor,
     border: '1px solid transparent',
     lineHeight: '24px',
-  })
+  }),
 };

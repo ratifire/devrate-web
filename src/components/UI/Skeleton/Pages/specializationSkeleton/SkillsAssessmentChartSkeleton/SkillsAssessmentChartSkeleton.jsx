@@ -5,10 +5,10 @@ import { styles } from './SkillsAssessmentChartSkeleton.styles';
 const SkillsAssessmentChartSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton variant='rounded' height={28}/>
-      <Skeleton variant='rounded' height={187}/>
+      <Skeleton height={28} variant='rounded' />
+      <Skeleton height={187} variant='rounded' />
     </Box>
-  )
+  );
 };
 
 export default SkillsAssessmentChartSkeleton;

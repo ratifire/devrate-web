@@ -1,19 +1,19 @@
 import React from 'react';
-import {Box, Skeleton} from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 import { styles } from './SkillsSectionSkeleton.styles';
 
 const SkillsSectionSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton sx={styles.elem} variant='rounded' height={32}/>
-      <Skeleton sx={styles.elem} variant='rounded' height={32}/>
-      <Skeleton sx={styles.lastElem} variant='rounded' height={32}/>
+      <Skeleton height={32} sx={styles.elem} variant='rounded' />
+      <Skeleton height={32} sx={styles.elem} variant='rounded' />
+      <Skeleton height={32} sx={styles.lastElem} variant='rounded' />
       <Box sx={styles.box}>
-        <Skeleton variant='rounded' width={208} height={72}/>
-        <Skeleton variant='rounded' width={208} height={72}/>
+        <Skeleton height={72} variant='rounded' width={208} />
+        <Skeleton height={72} variant='rounded' width={208} />
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default SkillsSectionSkeleton;

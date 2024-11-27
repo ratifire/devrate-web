@@ -4,7 +4,7 @@ const styles = {
     overflowY: 'auto',
     overflowX: 'hidden',
     paddingRight: theme.spacing(2),
-    
+
     '&::-webkit-scrollbar': {
       width: 6,
     },

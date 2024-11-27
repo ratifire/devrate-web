@@ -16,8 +16,8 @@ import feedbackSliceReducer from '../feedback/feedbackModalSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
 import activeMasteryReducer from '../specialization/activeMasterySlice';
-import buttonReducer from '../addButton/addButtonSlice'
-import themeSliceReducer from "../theme/themeSlice";
+import buttonReducer from '../addButton/addButtonSlice';
+import themeSliceReducer from '../theme/themeSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -33,15 +33,16 @@ const personalPersistConfig = {
   key: 'personal',
   storage,
   whitelist: ['personal'],
-}; const themePersistConfig = {
+};
+const themePersistConfig = {
   key: 'theme',
   storage,
   whitelist: ['theme'],
 };
 
 const rootReducer = {
-  theme:themeSliceReducer,
-  modal: persistReducer(themePersistConfig,modalSliceReducer),
+  theme: themeSliceReducer,
+  modal: persistReducer(themePersistConfig, modalSliceReducer),
   education: educationReducer,
   modalStep: modalStepReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
@@ -62,8 +63,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    })
-      .concat(apiSlice.middleware),
+    }).concat(apiSlice.middleware),
   devTools: true,
 });
 

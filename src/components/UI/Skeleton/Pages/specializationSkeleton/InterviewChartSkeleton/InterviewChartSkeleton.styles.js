@@ -9,5 +9,5 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: '10px',
-  }
+  },
 };

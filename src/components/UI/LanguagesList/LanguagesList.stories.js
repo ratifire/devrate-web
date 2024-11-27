@@ -1,7 +1,7 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import { decorators } from '../../../../.storybook/preview';
 import LanguagesList from './LanguagesList';
-import { Box } from '@mui/material';
 
 export default {
   title: 'UI/LanguagesList',

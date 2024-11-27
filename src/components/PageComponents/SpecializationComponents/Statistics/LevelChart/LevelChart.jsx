@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { useHardSkillData } from '../../../../../utils/hooks/specialization';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { getLevel } from '../utils';
+import LevelChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 import { styles } from './LevelChart.styles.js';
 import useThemeLevelChart from './useThemeLevelChart';
-import LevelChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 
 const LevelChart = () => {
   const { skills, isError, isFetching, activeMastery } = useHardSkillData();
@@ -25,19 +25,18 @@ const LevelChart = () => {
 
   return (
     <Box sx={styles.levelChartContainer}>
-      <Typography variant='subtitle2' sx={styles.title}>
+      <Typography sx={styles.title} variant='subtitle2'>
         {t('specialization.statistics.level_chart_title')}
       </Typography>
       <Box sx={styles.chartContainer}>
         <Box sx={{ position: 'relative' }}>
           <Box sx={styles.chartWrapper}>
             <Gauge
-              value={averageMark}
-              startAngle={-90}
+              cornerRadius='90%'
               endAngle={90}
               innerRadius='80%'
               outerRadius='100%'
-              cornerRadius='90%'
+              startAngle={-90}
               sx={{
                 padding: 0,
                 height: '150px',
@@ -51,9 +50,10 @@ const LevelChart = () => {
                 },
               }}
               text={({ value }) => `${value}%`}
+              value={averageMark}
             >
               <defs>
-                <linearGradient id='gradient' x1='0%' y1='0%' x2='100%' y2='0%'>
+                <linearGradient id='gradient' x1='0%' x2='100%' y1='0%' y2='0%'>
                   <stop offset='0.04%' style={{ stopColor: grad1, stopOpacity: 1 }} />
                   <stop offset='26.65%' style={{ stopColor: grad2, stopOpacity: 1 }} />
                   <stop offset='57.07%' style={{ stopColor: grad3, stopOpacity: 1 }} />
@@ -63,10 +63,10 @@ const LevelChart = () => {
             </Gauge>
           </Box>
         </Box>
-        <Typography variant='caption' sx={styles.rightCaption}>
+        <Typography sx={styles.rightCaption} variant='caption'>
           {activeMastery}
         </Typography>
-        <Typography variant='caption' sx={styles.leftCaption}>
+        <Typography sx={styles.leftCaption} variant='caption'>
           {getLevel(activeMastery)}
         </Typography>
       </Box>

@@ -5,7 +5,7 @@ const styles = {
     padding: theme.spacing(3),
     backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     borderRadius: 2,
-    border: theme.palette.sliderAssessment.border
+    border: theme.palette.sliderAssessment.border,
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',
@@ -17,7 +17,6 @@ const styles = {
   workPosition: (theme) => ({
     color: theme.palette.text.primary,
     marginBottom: theme.spacing(1),
-
   }),
   workDate: (theme) => ({
     color: theme.palette.text.secondary,

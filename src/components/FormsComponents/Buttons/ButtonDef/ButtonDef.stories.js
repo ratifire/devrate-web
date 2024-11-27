@@ -1,5 +1,5 @@
-import ButtonDef from './ButtonDef';
 import { action } from '@storybook/addon-actions';
+import ButtonDef from './ButtonDef';
 
 export default {
   title: 'Form/Button/ButtonDef',

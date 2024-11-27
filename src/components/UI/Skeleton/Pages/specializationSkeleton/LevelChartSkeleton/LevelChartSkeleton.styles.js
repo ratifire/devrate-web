@@ -4,5 +4,5 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '15px',
-  })
+  }),
 };

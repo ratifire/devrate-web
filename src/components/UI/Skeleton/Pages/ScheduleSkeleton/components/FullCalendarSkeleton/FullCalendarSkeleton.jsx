@@ -7,7 +7,7 @@ const FullCalendarSkeleton = () => {
     <Box sx={styles.wrapper}>
       <Skeleton sx={styles.calendar} variant='rectangular' />
     </Box>
-  )
-}
+  );
+};
 
 export default FullCalendarSkeleton;

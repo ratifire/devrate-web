@@ -37,29 +37,29 @@ const AdvancedFormSelector = ({
   };
 
   return (
-    <FormControl fullWidth variant={variant} error={error} sx={styles.wrapper}>
+    <FormControl fullWidth error={error} sx={styles.wrapper} variant={variant}>
       <Autocomplete
+        disablePortal
+        forcePopupIcon // Hides the warning from the MUI, adds the dropdown icon
+        freeSolo // Hides the warning from the MUI
+        PaperComponent={({ children }) => <Box sx={styles.dropdownPaper}>{children}</Box>}
+        id={id}
+        name={name}
+        options={countries}
+        popupIcon={<KeyboardArrowDownIcon sx={styles.icon} />}
         renderInput={(params) => (
           <TextField
             {...params}
-            label={t(label)}
             error={error} // Ensure error prop is passed to TextField
-            sx={styles.selectField}
+            label={t(label)}
             required={required}
+            sx={styles.selectField}
           />
         )}
-        disablePortal
-        id={id}
-        name={name}
-        value={value}
-        onChange={handleChangeCountry}
-        onBlur={handleBlurCountry}
-        options={countries}
-        freeSolo // Hides the warning from the MUI
-        forcePopupIcon // Hides the warning from the MUI, adds the dropdown icon
         sx={styles.autoComplete}
-        PaperComponent={({ children }) => <Box sx={styles.dropdownPaper}>{children}</Box>}
-        popupIcon={<KeyboardArrowDownIcon sx={styles.icon} />}
+        value={value}
+        onBlur={handleBlurCountry}
+        onChange={handleChangeCountry}
       />
       {error && (
         <FormHelperText id={id} sx={styles.helperText}>

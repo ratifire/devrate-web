@@ -1,2 +1,2 @@
-import StepIconComponent from './StepIconComponent'
-export default StepIconComponent
+import StepIconComponent from './StepIconComponent';
+export default StepIconComponent;

@@ -15,5 +15,4 @@ export const styles = (theme) => ({
   bookmarkIcon: {
     fontSize: '24px',
   },
-
 });

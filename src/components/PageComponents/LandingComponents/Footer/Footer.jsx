@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import styles from './Footer.styles';
 import { Box, Container, Icon, Link, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
+import { Instagram, LinkedIn } from '@mui/icons-material';
 import { ReactComponent as LogoBoy } from '../../../../assets/icons/logo-boy.svg';
 import Logo from '../../../UI/Logo';
 import LinkList from '../../../UI/LinkList';
 import legalInfoLinks from '../../../../utils/constants/legalInfoLinks';
-import { Instagram, LinkedIn } from '@mui/icons-material';
+import styles from './Footer.styles';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -16,20 +16,20 @@ const Footer = () => {
     <Container maxWidth='xl' sx={styles.container}>
       <Box component='footer' sx={styles.footer}>
         <Box sx={styles.wrapper}>
-          <Link to={`/`} component={RouterLink}>
-            <Logo width={'187'} height={'22'} />
+          <Link component={RouterLink} to={`/`}>
+            <Logo height={'22'} width={'187'} />
           </Link>
           <Box sx={styles.wrapperNav}>
             <Icon sx={styles.logoBoy}>
               <LogoBoy />
             </Icon>
-            <LinkList links={legalInfoLinks} componentStyles={styles} />
+            <LinkList componentStyles={styles} links={legalInfoLinks} />
             <Box sx={styles.socialGroup}>
               <Link href={'href'} target='_blank'>
-                <Instagram sx={styles.icon}/>
+                <Instagram sx={styles.icon} />
               </Link>
               <Link href={'href'} target='_blank'>
-                <LinkedIn sx={styles.icon}/>
+                <LinkedIn sx={styles.icon} />
               </Link>
             </Box>
           </Box>

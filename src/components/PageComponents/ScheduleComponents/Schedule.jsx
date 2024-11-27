@@ -1,21 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Sidebar from './Sidebar';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { styles } from './Schedule.styles';
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { DateTime } from 'luxon';
+import { useTheme } from '@mui/material/styles';
 import {
   useGetClosestEventByUserIdQuery,
   useGetEventByUserIdQuery,
   useLazyGetEventByUserIdQuery,
 } from '../../../redux/schedule/scheduleApiSlice';
-import { DateTime } from 'luxon';
-import EventPopup from './EventPopup';
-import { useTheme } from '@mui/material/styles';
 import { ScheduleSkeleton } from '../../UI/Skeleton';
+import EventPopup from './EventPopup';
+import { styles } from './Schedule.styles';
+import Sidebar from './Sidebar';
 
 const Schedule = () => {
   const theme = useTheme();
@@ -198,32 +198,32 @@ const Schedule = () => {
     <Box sx={styles.demoApp}>
       <Sidebar
         currentEvents={currentClosestEvents}
-        selectedDate={selectedDate}
         handleDateChange={handleDateChange}
+        selectedDate={selectedDate}
         setEventUpdated={setEventUpdated}
       />
       <Box sx={styles.demoAppMain}>
         {
           <FullCalendar
             ref={calendarRef}
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            headerToolbar={false}
-            initialView='timeGridWeek'
-            firstDay={1}
-            slotDuration='01:00:00'
-            slotLabelInterval={{ hours: 1 }}
+            dayMaxEvents
+            expandRows
+            selectMirror
+            weekends
             allDaySlot={false}
-            expandRows={true}
-            editable={false}
-            selectable={false}
-            selectMirror={true}
-            dayMaxEvents={true}
-            weekends={true}
-            displayEventTime={false}
-            events={events}
             dayHeaderFormat={{
               weekday: 'short',
             }}
+            displayEventTime={false}
+            editable={false}
+            eventClick={handleEventClick}
+            events={events}
+            firstDay={1}
+            headerToolbar={false}
+            initialView='timeGridWeek'
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            selectable={false}
+            slotDuration='01:00:00'
             slotLabelFormat={[
               {
                 hour: '2-digit',
@@ -231,11 +231,11 @@ const Schedule = () => {
                 hour12: false,
               },
             ]}
-            eventClick={handleEventClick}
+            slotLabelInterval={{ hours: 1 }}
           />
         }
         {popup.visible && event && (
-          <EventPopup popup={popup} event={event} handleClosePopup={handleClosePopup} popupPosition={popupPosition} />
+          <EventPopup event={event} handleClosePopup={handleClosePopup} popup={popup} popupPosition={popupPosition} />
         )}
       </Box>
     </Box>

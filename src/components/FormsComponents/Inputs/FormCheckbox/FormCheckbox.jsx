@@ -1,9 +1,9 @@
 import { Checkbox, FormControl, FormControlLabel, FormHelperText, Typography } from '@mui/material';
-import { styles } from './FormCheckbox.styles';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { CustomCheckboxIcon, CustomCheckedIcon } from '../../../UI/CustomCheckbox/CustomCheckbox';
+import { styles } from './FormCheckbox.styles';
 
 const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, workExperience }) => {
   const { t } = useTranslation();
@@ -14,11 +14,11 @@ const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, 
       <FormControlLabel
         control={
           <Checkbox
-            icon={<CustomCheckboxIcon />}
-            checkedIcon={<CustomCheckedIcon />}
             checked={checked}
-            onChange={changeHandler}
+            checkedIcon={<CustomCheckedIcon />}
+            icon={<CustomCheckboxIcon />}
             name={name}
+            onChange={changeHandler}
           />
         }
         label={<Typography sx={textStyles}>{t(label)}</Typography>}

@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import { Box, Typography } from '@mui/material';
-import { styles } from './EducationModal.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import { closeModal } from '../../../../redux/modal/modalSlice';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { EducationModalSchema } from '../../../../utils/valadationSchemas/index';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
@@ -14,6 +13,7 @@ import { useCreateEducationMutation, useUpdateEducationMutation } from '../../..
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { selectEducationDataToEdit, clearEducationDataToEdit } from '../../../../redux/user/education/educationSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
+import { styles } from './EducationModal.styles';
 
 const EducationModal = () => {
   const dispatch = useDispatch();
@@ -57,8 +57,10 @@ const EducationModal = () => {
     initialValues: dataToEdit || emptyInitialValues,
     validationSchema: EducationModalSchema,
     onSubmit: (values, { resetForm }) => {
-
-      const endYearEducation =  (values.endYear === null || values.endYear === 'Now' || values.endYear === '') ? new Date('9999-01-01').getFullYear() : new Date(values.endYear).getFullYear();
+      const endYearEducation =
+        values.endYear === null || values.endYear === 'Now' || values.endYear === ''
+          ? new Date('9999-01-01').getFullYear()
+          : new Date(values.endYear).getFullYear();
       if (dataToEdit) {
         updateEducation({
           id: dataToEdit.id,
@@ -73,7 +75,7 @@ const EducationModal = () => {
       } else {
         createEducation({
           userId: currentUser.data.id,
-          payload: {...values, endYear: endYearEducation},
+          payload: { ...values, endYear: endYearEducation },
         });
       }
 
@@ -91,8 +93,8 @@ const EducationModal = () => {
   }, [openEducation, formik, dispatch]);
 
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={openEducation}>
-      <Typography variant='subtitle1' sx={styles.title}>
+    <ModalLayoutProfile open={openEducation} setOpen={handleClose}>
+      <Typography sx={styles.title} variant='subtitle1'>
         {t('profile.modal.education.title')}
       </Typography>
 
@@ -100,80 +102,81 @@ const EducationModal = () => {
         <Box sx={styles.wrapper}>
           <Box sx={styles.input50}>
             <FormInput
-              name='type'
-              value={formik.values.type}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='profile.modal.education.type'
               required
-              placeholder='profile.modal.education.speciality_placeholder'
-              helperText={formik.touched.type && formik.errors.type}
               error={formik.touched.type && Boolean(formik.errors.type)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.type && formik.errors.type}
+              label='profile.modal.education.type'
+              name='type'
+              placeholder='profile.modal.education.speciality_placeholder'
+              type='text'
+              value={formik.values.type}
             />
           </Box>
           <Box sx={styles.input50}>
             <FormInput
-              name='name'
-              value={formik.values.name}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              label='profile.modal.education.name'
               required
-              placeholder='profile.modal.education.edIstitution_placeholder'
-              helperText={formik.touched.name && formik.errors.name}
               error={formik.touched.name && Boolean(formik.errors.name)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.name && formik.errors.name}
+              label='profile.modal.education.name'
+              name='name'
+              placeholder='profile.modal.education.edIstitution_placeholder'
+              value={formik.values.name}
             />
           </Box>
           <Box sx={styles.input100}>
             <FormSelect
-              sx={styles.input50}
-              label={t('profile.modal.education.startYear')}
-              value={formik.values.startYear}
-              countries={startYears}
-              name='startYear'                     s
-              variant='outlined'
               required
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              onChange={(value) => formik.setFieldValue('startYear', value)}
-              helperText={formik.touched.startYear && formik.errors.startYear}
+              s
+              countries={startYears}
               error={formik.touched.startYear && Boolean(formik.errors.startYear)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.startYear && formik.errors.startYear}
+              label={t('profile.modal.education.startYear')}
+              name='startYear'
+              sx={styles.input50}
+              value={formik.values.startYear}
+              variant='outlined'
+              onChange={(value) => formik.setFieldValue('startYear', value)}
             />
             <FormSelect
-              sx={styles.input50}
-              label={t('profile.modal.education.endYear')}
-              value={formik.values.endYear}
               countries={endYears}
-              name='endYear'
-              variant='outlined'
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              onChange={(value) => formik.setFieldValue('endYear', value)}
-              helperText={formik.touched.endYear && formik.errors.endYear}
               error={formik.touched.endYear && Boolean(formik.errors.endYear)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.endYear && formik.errors.endYear}
+              label={t('profile.modal.education.endYear')}
+              name='endYear'
+              sx={styles.input50}
+              value={formik.values.endYear}
+              variant='outlined'
+              onChange={(value) => formik.setFieldValue('endYear', value)}
             />
           </Box>
           <Box sx={styles.input100}>
             <TextAreaInput
-              name='description'
-              value={formik.values.description}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
               required
-              label='profile.modal.education.description'
-              placeholder='profile.modal.education.description_placeholder'
-              helperText={formik.touched.description && formik.errors.description}
               error={formik.touched.description && Boolean(formik.errors.description)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.description && formik.errors.description}
+              label='profile.modal.education.description'
+              name='description'
+              placeholder='profile.modal.education.description_placeholder'
+              type='text'
+              value={formik.values.description}
             />
           </Box>
 
           <ButtonDef
-            variant='contained'
-            type='submit'
-            label={t('profile.modal.btn')}
             correctStyle={styles.workExperienceBtn}
+            label={t('profile.modal.btn')}
+            type='submit'
+            variant='contained'
           />
         </Box>
       </form>

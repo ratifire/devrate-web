@@ -19,7 +19,7 @@ export const styles = {
       '&.Mui-focused fieldset': {
         borderColor: theme.palette.primary[600],
       },
-      'fieldset': {
+      fieldset: {
         borderColor: theme.palette.neutral[500],
       },
     },
@@ -45,5 +45,5 @@ export const styles = {
   }),
   workExperienceBtn: {
     width: '228px',
-  }
+  },
 };

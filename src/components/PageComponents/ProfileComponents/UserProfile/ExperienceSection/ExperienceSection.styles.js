@@ -13,7 +13,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  wrapperTab:(theme) => ({
+  wrapperTab: (theme) => ({
     borderBottom: '1px solid',
     borderColor: theme.palette.tabsEl.borderColor,
     '& .MuiTabs-indicator': {

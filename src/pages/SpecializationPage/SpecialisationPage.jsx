@@ -1,8 +1,7 @@
 import React, { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
-import { styles } from './SpecialisationPage.styles';
-import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import { useTranslation } from 'react-i18next';
+import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import {
   CategoriesSkeleton,
   HardSkillsChartSkeleton,
@@ -14,6 +13,7 @@ import {
 } from '../../components/UI/Skeleton';
 import LevelChartSkeleton from '../../components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 import ProfileHeader from '../../components/PageComponents/ProfileHeader';
+import { styles } from './SpecialisationPage.styles';
 
 const SpecializationLevel = lazy(
   () => import('../../components/PageComponents/SpecializationComponents/SpecializationLevel')
@@ -85,7 +85,7 @@ const SpecializationPage = () => {
             </Suspense>
           </Paper>
           <Paper sx={styles.specialisationStatistics}>
-            <Typography variant='h6' sx={styles.statisticTitle}>
+            <Typography sx={styles.statisticTitle} variant='h6'>
               {t('specialization.statistics.title')}
             </Typography>
             <Box sx={styles.statisticWrapper}>

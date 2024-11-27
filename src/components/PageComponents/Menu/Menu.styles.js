@@ -24,7 +24,7 @@ const styles = {
     borderRadius: 1,
     '&:last-of-type': {
       order: 2,
-    }
+    },
   }),
   listItemButton: (theme) => ({
     '& .MuiListItemIcon-root': {

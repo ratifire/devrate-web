@@ -7,9 +7,13 @@ const useGetMastery = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const specializationId = useGetSpecializationId();
 
-  const { data: dataMasteries, isError, isFetching } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
+  const {
+    data: dataMasteries,
+    isError,
+    isFetching,
+  } = useGetMasteriesBySpecializationIdQuery(specializationId, { skip: !specializationId });
 
-  const data = specializationId ? dataMasteries : []
+  const data = specializationId ? dataMasteries : [];
 
   const selectMastery = data?.find((v) => v.level && v.level.toUpperCase() === activeMastery.toUpperCase()) || null;
 

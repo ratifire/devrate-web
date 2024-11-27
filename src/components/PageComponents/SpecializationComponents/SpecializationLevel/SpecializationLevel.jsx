@@ -8,8 +8,8 @@ import { useGetMainMasteryBySpecializationIdQuery } from '../../../../redux/spec
 import { useGetSpecializationId } from '../../../../utils/hooks/specialization';
 import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
 import { ErrorComponent } from '../../../UI/Exceptions';
-import { styles } from './SpecializationLevel.styles';
 import LevelSkeleton from '../../../UI/Skeleton/Pages/specializationSkeleton/LevelSkeleton';
+import { styles } from './SpecializationLevel.styles';
 
 const SpecializationLevel = () => {
   const { t } = useTranslation();
@@ -36,7 +36,7 @@ const SpecializationLevel = () => {
   };
 
   if (isFetching) {
-    return <LevelSkeleton/>;
+    return <LevelSkeleton />;
   }
 
   if (isError) {
@@ -45,30 +45,30 @@ const SpecializationLevel = () => {
 
   return (
     <Box sx={styles.contentWrapper}>
-      <Typography variant='h6' sx={styles.title}>
+      <Typography sx={styles.title} variant='h6'>
         {t('specialization.level.title')}
       </Typography>
-      <Typography variant='subtitle2' sx={styles.description}>
+      <Typography sx={styles.description} variant='subtitle2'>
         {t('specialization.level.description')}
       </Typography>
       <Box>
         <ButtonGroup
-          sx={styles.buttonGroup}
-          variant='contained'
           aria-label='Specialization level button group'
           color='secondary'
           disabled={isDisabled}
+          sx={styles.buttonGroup}
+          variant='contained'
         >
           {['JUNIOR', 'MIDDLE', 'SENIOR'].map((label) => (
             <ButtonDef
-              correctStyle={styles.button}
-              type='submit'
               key={label}
-              label={label}
-              handlerClick={() => handleClick(label)}
+              withTranslation
+              correctStyle={styles.button}
               disabled={activeMastery === label}
+              handlerClick={() => handleClick(label)}
+              label={label}
+              type='submit'
               variant={activeMastery === label ? 'contained' : 'outlined'}
-              withTranslation={true}
             />
           ))}
         </ButtonGroup>

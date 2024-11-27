@@ -13,9 +13,6 @@ const SmallCalendar = ({ selectedDate, handleDateChange }) => {
     <LocalizationProvider dateAdapter={AdapterLuxon}>
       <DateCalendar
         showDaysOutsideCurrentMonth
-        value={selectedDate}
-        onChange={handleDateChange}
-        slots={{ day: DayPicker }}
         slotProps={{
           day: (ownerState) => ({
             selectedDay: selectedDate,
@@ -24,7 +21,10 @@ const SmallCalendar = ({ selectedDate, handleDateChange }) => {
             onPointerLeave: () => setHoveredDay(null),
           }),
         }}
+        slots={{ day: DayPicker }}
         sx={styles.switcher}
+        value={selectedDate}
+        onChange={handleDateChange}
       />
     </LocalizationProvider>
   );

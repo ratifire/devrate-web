@@ -1,6 +1,6 @@
 import React from 'react';
-import PasswordVisibilityToggle from './PasswordVisibilityToggle';
 import { Stack } from '@mui/material';
+import PasswordVisibilityToggle from './PasswordVisibilityToggle';
 
 export default {
   title: 'Example/PasswordVisibilityToggle',
@@ -11,7 +11,7 @@ export default {
 };
 
 const Template = (args) => (
-  <Stack direction='row' spacing={1} alignItems='center'>
+  <Stack alignItems='center' direction='row' spacing={1}>
     <PasswordVisibilityToggle {...args} />
   </Stack>
 );

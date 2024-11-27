@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
-import UserProfileTemplate from '../../../../../Templates/ProfileTemplates/UserProfileTemplate';
 import { Box, Container, Paper } from '@mui/material';
+import UserProfileTemplate from '../../../../../Templates/ProfileTemplates/UserProfileTemplate';
 import { styles } from '../../../../../pages/ProfilePages/UserProfilePage/UserProfilePage.styles';
 import { SkillsSectionSkeleton } from '../personalProfileSkeleton';
 import ProfileHeader from '../../../../PageComponents/ProfileHeader';
-import UserBaseUserInfoSkeleton from "./UserBaseUserInfoSkeleton";
-import UserRightSectionSkeleton from "./UserRightSectionSkeleton";
-import {UserExperienceSectionSkeleton} from "../../index";
+import { UserExperienceSectionSkeleton } from '../../index';
+import UserBaseUserInfoSkeleton from './UserBaseUserInfoSkeleton';
+import UserRightSectionSkeleton from './UserRightSectionSkeleton';
 const MemoizedProfileHeader = memo(ProfileHeader);
 
 const UserProfileSkeleton = () => {
@@ -33,4 +33,4 @@ const UserProfileSkeleton = () => {
   );
 };
 
-export default UserProfileSkeleton
+export default UserProfileSkeleton;
