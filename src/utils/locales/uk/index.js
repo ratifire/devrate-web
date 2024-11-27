@@ -269,6 +269,7 @@ export const uk = {
         },
         right: {
           empty: {
+            emptyContacts: 'Ви ще не додали жодного контакту',
             emptyLanguages: 'Ви ще не додали жодної мови.',
             emptyAboutMe:
               'Ви ще не додали інформацію про себе.\n' +

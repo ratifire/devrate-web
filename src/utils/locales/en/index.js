@@ -268,6 +268,7 @@ export const en = {
       },
       right: {
         empty: {
+          emptyContacts: 'You have not added any contact yet.',
           emptyLanguages: 'You have not added any language yet.',
           emptyAboutMe:
             'You have not added information about yourself yet.\n' +
@@ -403,7 +404,7 @@ export const en = {
       },
     },
     specialization: {
-      specialization_title: 'Specialisations',
+      specialization_title: 'Specializations',
       specialization_btn_make_main: 'Make the main',
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',

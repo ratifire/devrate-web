@@ -1,4 +1,4 @@
-import { FeedbackModalSkeleton } from './Modal';
+import FeedbackModalSkeleton from './Modal/FeedbackModalSkeleton';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
 import { ScheduleSkeleton } from './Pages/ScheduleSkeleton';
 import {
@@ -17,7 +17,13 @@ import {
   RightSectionSkeleton,
   ExperienceSectionSkeleton,
 } from './Pages/personalProfileSkeleton';
-import UserExperienceSectionSkeleton from "./Pages/userProfileSkeleton/UserExperienceSectionSkeleton";
+import UserExperienceSectionSkeleton from './Pages/userProfileSkeleton/UserExperienceSectionSkeleton';
+import {
+  StepContactsSkeleton,
+  StepPersonalSkeleton,
+  StepAvatarSkeleton,
+  StepLanguageSkeleton,
+} from './Modal/UserInfoModalSkeleton';
 
 export {
   BlogSkeleton,
@@ -36,5 +42,9 @@ export {
   SkillsSectionSkeleton,
   RightSectionSkeleton,
   ExperienceSectionSkeleton,
-  UserExperienceSectionSkeleton
+  UserExperienceSectionSkeleton,
+  StepContactsSkeleton,
+  StepPersonalSkeleton,
+  StepAvatarSkeleton,
+  StepLanguageSkeleton,
 };

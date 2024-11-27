@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Cookies from 'js-cookie';
 import { logOut } from '../../auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { TAG_TYPES_ARRAY } from '../../../utils/constants/tagTypes';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
@@ -20,6 +21,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   return result;
 };
 export const apiSlice = createApi({
+  tagTypes: TAG_TYPES_ARRAY,
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
 });

@@ -1,12 +1,12 @@
 import { apiSlice } from './api/apiSlice';
 import { urlWS } from './api/socketsEndpoints';
+import {TAG_TYPES} from "../../utils/constants/tagTypes";
 
 export const notificationsApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['notifications'],
   endpoints: (builder) => ({
     getNotifications: builder.query({
       query: (userId) => `/users/${userId}/notifications`,
-      providesTags: ['notifications'],
+      providesTags: [TAG_TYPES.Notifications],
       transformResponse (response) {
         return response;
       },
@@ -47,7 +47,7 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
         }))}`,
         method: 'PATCH',
       }),
-      invalidatesTags: ['notifications'],
+      invalidatesTags: [TAG_TYPES.Notifications],
     }),
     deleteNotification: builder.mutation({
       query: ({ notificationId, userId }) => ({
@@ -57,7 +57,7 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
         }))}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['notifications'],
+      invalidatesTags: [TAG_TYPES.Notifications],
     }),
   }),
 });

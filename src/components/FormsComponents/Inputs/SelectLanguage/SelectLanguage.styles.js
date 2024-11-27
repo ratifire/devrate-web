@@ -28,24 +28,22 @@ export const styles = {
       },
     },
   }),
+
   label: (theme) => ({
     '&.MuiFormLabel-root': {
       color: theme.palette.neutral[400],
       '&.Mui-focused': {
-        color: theme.palette.neutral[400],
-      },
-      '&.MuiInputLabel-shrink': {
-        color: theme.palette.neutral[400],
+        color: theme.palette.modals.select.labelColor.focused,
       },
       '&.Mui-error': {
         color: theme.palette.error.main,
       },
     },
-    '& .required-asterisk': {
-      color: theme.palette.error.main,
-      marginRight: '5px',
+    '& .MuiFormLabel-asterisk': {
+      color: theme.palette.modals.select.labelColor.required,
     },
   }),
+
   textHelper: {
     position: 'absolute',
     bottom: '-20px',
@@ -56,13 +54,31 @@ export const styles = {
       backgroundColor: theme.palette.background.level2,
     },
     '.MuiList-root': {
-      backgroundColor: theme.palette.background.level2,
+      backgroundColor: theme.palette.modals.select.selectedField.backgroundColor,
       borderRadius: 0,
     },
   }),
   menuItem: (theme) => ({
     '&:hover': {
-      backgroundColor: theme.palette.background.level3,
+      backgroundColor: theme.palette.modals.select.selectedField.hover,
+    },
+    '&.Mui-selected': {
+      backgroundColor: `${theme.palette.modals.select.selectedField.selected.backgroundColor} !important`,
+      color: theme.palette.modals.select.selectedField.selected.color,
+    },
+    '&.MuiMenuItem-root.Mui-focusVisible': {
+      backgroundColor: theme.palette.modals.select.selectedField.selected.backgroundColor,
+    },
+  }),
+  iconBtn: (theme) => ({
+    marginTop: theme.spacing(1),
+    padding: '12px',
+    borderRadius: 1,
+    color: theme.palette.iconBtn.createBtn.color,
+    transition: 'background-color 0.3s, transform 0.3s',
+    ':hover': {
+      backgroundColor: theme.palette.iconBtn.createBtn.hover.backgroundColor,
+      color: theme.palette.iconBtn.createBtn.hover.color,
     },
   }),
 };

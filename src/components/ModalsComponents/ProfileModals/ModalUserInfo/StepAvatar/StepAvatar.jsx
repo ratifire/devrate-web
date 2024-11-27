@@ -1,23 +1,29 @@
-import { Box } from '@mui/material'
-import { useFormik } from 'formik'
+import { Box } from '@mui/material';
+import { useFormik } from 'formik';
 import React from 'react';
-import { useSelector } from 'react-redux'
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice'
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import {
   useDeleteAvatarUserMutation,
   useGetAvatarUserQuery,
   usePostAvatarUserMutation,
-} from '../../../../../redux/user/avatar/avatarApiSlice'
-import { StepAvatarSchema } from '../../../../../utils/valadationSchemas/index'
-import LoadImages from '../../../../UI/LoadImages'
-import { styles } from './StepAvatar.styles'
+} from '../../../../../redux/user/avatar/avatarApiSlice';
+import { StepAvatarSchema } from '../../../../../utils/valadationSchemas/index';
+import LoadImages from '../../../../UI/LoadImages';
+import { styles } from './StepAvatar.styles';
+import { ErrorComponent } from '../../../../UI/Exceptions';
+import { StepAvatarSkeleton } from '../../../../UI/Skeleton';
 
 const StepAvatar = () => {
   const { data: user } = useSelector(selectCurrentUser);
-
-  const [postAvatarUser] = usePostAvatarUserMutation();
-  const [deleteAvatarUser] = useDeleteAvatarUserMutation();
-  const { data: avatarData } = useGetAvatarUserQuery(user.id);
+  const [postAvatarUser, { isError: isErrorPostAvatar, isLoading: isLoadingPostAvatar }] = usePostAvatarUserMutation();
+  const [deleteAvatarUser, { isError: isErrorDeleteAvatar, isLoading: isLoadingDeleteAvatar }] =
+    useDeleteAvatarUserMutation();
+  const {
+    data: avatarData,
+    isError: isErrorGerAvatar,
+    isFetching: isFetchingGetAvatar,
+  } = useGetAvatarUserQuery(user.id, { skip: !user.id });
 
   const avatarValue = avatarData?.userPicture || '';
 
@@ -27,6 +33,7 @@ const StepAvatar = () => {
       userId: user.id,
       avatar: avatar,
     });
+    formik.resetForm();
   };
 
   const formik = useFormik({
@@ -48,6 +55,18 @@ const StepAvatar = () => {
     formik.setFieldValue('avatar', img);
   };
 
+  const handleChangeDirty = (img) => {
+    formik.setFieldValue('avatar', img);
+  };
+
+  if (isErrorGerAvatar || isErrorPostAvatar || isErrorDeleteAvatar) {
+    return <ErrorComponent />;
+  }
+
+  if (isFetchingGetAvatar || isLoadingPostAvatar || isLoadingDeleteAvatar) {
+    return <StepAvatarSkeleton />;
+  }
+
   return (
     <Box sx={styles.wrapper}>
       <form onSubmit={formik.handleSubmit}>
@@ -57,6 +76,8 @@ const StepAvatar = () => {
             handleBlur={formik.handleBlur}
             handlerDelete={handleDeleteAvatar}
             value={avatarValue}
+            isDisabled={!formik.dirty}
+            onChange={handleChangeDirty}
           />
         </Box>
       </form>

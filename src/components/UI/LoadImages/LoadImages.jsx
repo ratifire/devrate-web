@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { ButtonDef } from '../../FormsComponents/Buttons';
 import { styles } from './LoadImages.styles';
 
-const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
+const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled, onChange }) => {
   const editor = useRef(null);
   const { t } = useTranslation();
 
@@ -71,6 +71,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
         await checkImageDimensions(image);
         setSettingsCanvas((prev) => ({ ...prev, image }));
         setError('');
+        handleChange(image);
       } catch (err) {
         setError(err.message);
       }
@@ -87,6 +88,11 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
     maxSize: 5 * 1024 * 1024,
     onDrop,
   });
+
+  const handleChangeImg = () => {
+    const img = editor.current.getImageScaledToCanvas().toDataURL();
+    onChange(img);
+  }
 
   return (
     <Box sx={styles.wrapper}>
@@ -124,6 +130,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
               color={[29, 29, 29, 0.25]}
               scale={scale}
               onWheel={handleWheel}
+              onImageChange={handleChangeImg}
             />
             <Box sx={styles.customBorder} />
           </>
@@ -141,7 +148,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
           handlerClick={handleSave}
           label='profile.modal.btn'
           correctStyle={styles.btn}
-          disabled={!settingsCanvas.image || !!error}
+          disabled={isDisabled || !settingsCanvas.image || !!error}
         />
         {value && (
           <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
@@ -158,6 +165,8 @@ LoadImages.propTypes = {
   handleBlur: PropTypes.func.isRequired,
   handlerDelete: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
 };
 
 export default React.memo(LoadImages);

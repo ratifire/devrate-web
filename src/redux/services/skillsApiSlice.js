@@ -1,4 +1,5 @@
 import { apiSlice } from './api/apiSlice';
+import {TAG_TYPES} from "../../utils/constants/tagTypes";
 
 export const skillsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -7,7 +8,7 @@ export const skillsApiSlice = apiSlice.injectEndpoints({
         url: `/skills/${id}/hide/${hide}`,
         method: 'PATCH',
       }),
-      invalidatesTags: ['Skills'],
+      invalidatesTags: [TAG_TYPES.Skills],
     }),
   }),
 });
