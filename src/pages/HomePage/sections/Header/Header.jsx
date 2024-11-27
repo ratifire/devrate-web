@@ -1,17 +1,17 @@
 import React from 'react';
-import styles from './Header.module.scss';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import linkdin from '../../assets/linkdin.svg';
 import mail from '../../assets/mail.svg';
-import { Link } from 'react-router-dom';
+import styles from './Header.module.scss';
 
 const Header = () => {
   return (
     <header className={styles.header__bg} id='home'>
       <div className='container'>
         <div className={styles.header}>
-          <Link to={'/'} className={styles.header__logo}>
-            <img src={logo} alt='Skillzzy Logo' />
+          <Link className={styles.header__logo} to={'/'}>
+            <img alt='Skillzzy Logo' src={logo} />
           </Link>
 
           <nav className={styles.header__nav}>
@@ -32,11 +32,11 @@ const Header = () => {
           </nav>
 
           <div className={styles.header__socialIcons}>
-            <a href='https://www.linkedin.com' aria-label='LinkedIn'>
-              <img src={linkdin} alt='LinkedIn Icon' />
+            <a aria-label='LinkedIn' href='https://www.linkedin.com'>
+              <img alt='LinkedIn Icon' src={linkdin} />
             </a>
-            <a href='mailto:info@skillzzy.com' aria-label='Email'>
-              <img src={mail} alt='Mail Icon' />
+            <a aria-label='Email' href='mailto:info@skillzzy.com'>
+              <img alt='Mail Icon' src={mail} />
             </a>
           </div>
         </div>

@@ -7,10 +7,10 @@ import { styles } from './SkillChip.styles';
 export const SkillChip = React.memo(({ skill, onDelete }) => (
   <Chip
     key={skill.id}
-    label={<Typography variant='subtitle2'>{skill.name}</Typography>}
-    onDelete={() => onDelete(skill.id)}
     deleteIcon={<CloseIcon />}
+    label={<Typography variant='subtitle2'>{skill.name}</Typography>}
     sx={styles.skillItem}
+    onDelete={() => onDelete(skill.id)}
   />
 ));
 

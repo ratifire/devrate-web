@@ -1,10 +1,10 @@
 import React from 'react';
-import { styles } from './TermsAndConditions.styles';
 import { Typography } from '@mui/material';
+import { styles } from './TermsAndConditions.styles';
 
 const TermsAndConditions = () => {
   return (
-    <Typography variant='h4' sx={styles.title}>
+    <Typography sx={styles.title} variant='h4'>
       Terms and Conditions
     </Typography>
   );

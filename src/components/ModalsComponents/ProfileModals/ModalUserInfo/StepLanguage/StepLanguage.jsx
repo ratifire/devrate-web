@@ -10,9 +10,9 @@ import {
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { SelectLanguage } from '../../../../FormsComponents/Inputs';
 import LanguageLevel from '../../../../UI/LanguageLevel';
-import { styles } from './StepLanguage.styles';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { StepLanguageSkeleton } from '../../../../UI/Skeleton';
+import { styles } from './StepLanguage.styles';
 const StepLanguage = () => {
   const { data: user } = useSelector(selectCurrentUser);
   const {
@@ -61,30 +61,27 @@ const StepLanguage = () => {
     <Box sx={styles.wrapper}>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.input100}>
-          <SelectLanguage
-            onSubmit={createLang}
-            prohibitedValues={formik.values.languages}
-          />
+          <SelectLanguage prohibitedValues={formik.values.languages} onSubmit={createLang} />
         </Box>
         <Box sx={styles.input100}>
           <Box sx={styles.wrapperLanguages}>
             {formik.values.languages.map((item) => (
               <LanguageLevel
                 key={item.name}
-                level={item.level}
+                tobeDeleted
                 language={item.name}
-                tobeDeleted={true}
                 languageDeleteHandler={languageDeleteHandler}
+                level={item.level}
               />
             ))}
           </Box>
         </Box>
         <ButtonDef
-          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-          variant='contained'
-          type='submit'
-          label='profile.modal.btn'
           correctStyle={styles.btn}
+          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+          label='profile.modal.btn'
+          type='submit'
+          variant='contained'
         />
       </form>
     </Box>

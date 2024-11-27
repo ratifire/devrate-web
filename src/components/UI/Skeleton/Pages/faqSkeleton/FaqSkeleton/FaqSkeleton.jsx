@@ -1,23 +1,23 @@
-import { styles } from './FaqSkeleton.styles';
 import { Box, Skeleton } from '@mui/material';
 import React from 'react';
+import { styles } from './FaqSkeleton.styles';
 
 const FaqSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton sx={styles.block} variant='rounded' width='100%' height={43} />
+      <Skeleton height={43} sx={styles.block} variant='rounded' width='100%' />
       <Box sx={styles.list}>
-        <Skeleton sx={styles.block} variant='rounded' width='100%' height={74} />
-        <Skeleton sx={styles.block} variant='rounded' width='100%' height={94} />
-        <Skeleton sx={styles.block} variant='rounded' width='100%' height={74} />
-        <Skeleton sx={styles.block} variant='rounded' width='100%' height={74} />
-        <Skeleton sx={styles.block} variant='rounded' width='100%' height={74} />
-        <Skeleton sx={styles.block} variant='rounded' width='100%' height={74} />
-        <Skeleton sx={styles.block} variant='rounded' width='100%' height={74} />
-        <Skeleton sx={styles.block} variant='rounded' width='100%' height={74} />
+        <Skeleton height={74} sx={styles.block} variant='rounded' width='100%' />
+        <Skeleton height={94} sx={styles.block} variant='rounded' width='100%' />
+        <Skeleton height={74} sx={styles.block} variant='rounded' width='100%' />
+        <Skeleton height={74} sx={styles.block} variant='rounded' width='100%' />
+        <Skeleton height={74} sx={styles.block} variant='rounded' width='100%' />
+        <Skeleton height={74} sx={styles.block} variant='rounded' width='100%' />
+        <Skeleton height={74} sx={styles.block} variant='rounded' width='100%' />
+        <Skeleton height={74} sx={styles.block} variant='rounded' width='100%' />
       </Box>
     </Box>
   );
-}
+};
 
 export default FaqSkeleton;

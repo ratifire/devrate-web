@@ -7,16 +7,16 @@ const ToastLayout = () => {
   return (
     <>
       <ToastContainer
-        position='top-right'
-        autoClose={5000}
-        limit={3}
-        hideProgressBar={false}
-        newestOnTop={false}
         closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
         draggable
+        pauseOnFocusLoss
         pauseOnHover
+        autoClose={5000}
+        hideProgressBar={false}
+        limit={3}
+        newestOnTop={false}
+        position='top-right'
+        rtl={false}
         theme='colored'
         transition={Zoom}
       />

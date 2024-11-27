@@ -4,16 +4,16 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import CancelIcon from '@mui/icons-material/Cancel';
 import ModalLayout from '../../../../../layouts/ModalLayout';
 import { useChangePasswordMutation } from '../../../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
-import styles from './ResetPassword.styles';
 import { resetPasswordSchema } from '../../../../../utils/valadationSchemas/index';
-import { toast } from 'react-toastify';
 import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
-import CancelIcon from '@mui/icons-material/Cancel';
+import styles from './ResetPassword.styles';
 
 const initialValues = {
   newPassword: '',
@@ -93,14 +93,14 @@ const ResetPassword = () => {
 
   return (
     <ModalLayout open={openResetPassword} setOpen={handleClose}>
-      <Typography variant='subtitle3' sx={styles.title}>
+      <Typography sx={styles.title} variant='subtitle3'>
         {changeColorOfLastTitleWord(t('modal.resetPassword.title'))}
       </Typography>
       <Box sx={styles.mainTextWrapper}>
-        <Typography variant='subtitle3' sx={styles.mainText}>
+        <Typography sx={styles.mainText} variant='subtitle3'>
           {t('modal.confirmation.main_text1')}
           <br />
-          <Typography variant='subtitle3' component='span' sx={styles.userEmail}>
+          <Typography component='span' sx={styles.userEmail} variant='subtitle3'>
             {email.replace(/(?<=.{1}).(?=[^@]*?.@)/g, '*')}
           </Typography>
           .
@@ -145,24 +145,20 @@ const ResetPassword = () => {
         }}
       >
         {(formik) => (
-          <Form className='landingForm' autoComplete='off' style={{ width: '100%' }}>
+          <Form autoComplete='off' className='landingForm' style={{ width: '100%' }}>
             <Box sx={styles.resetPasswordForm}>
               {[...Array(fieldCount)].map((_, index) => (
+                // eslint-disable-next-line react/no-array-index-key
                 <React.Fragment key={index}>
                   <TextField
-                    type='text'
-                    variant='outlined'
-                    inputRef={(ele) => {
-                      inputRefs.current[index] = ele;
-                    }}
-                    onKeyDown={(event) => handleKeyDown(event, index, formik)}
-                    onPaste={(event) => handlePaste(event, formik)}
-                    value={formik.values.code[index] ?? ''}
                     inputProps={{
                       style: { textAlign: 'center' },
                       maxLength: 1,
                       autoComplete: 'off',
                       'data-lpignore': 'true',
+                    }}
+                    inputRef={(ele) => {
+                      inputRefs.current[index] = ele;
                     }}
                     sx={{
                       ...styles.codeFocusWrapper,
@@ -174,6 +170,11 @@ const ResetPassword = () => {
                         },
                       }),
                     }}
+                    type='text'
+                    value={formik.values.code[index] ?? ''}
+                    variant='outlined'
+                    onKeyDown={(event) => handleKeyDown(event, index, formik)}
+                    onPaste={(event) => handlePaste(event, formik)}
                   />
                 </React.Fragment>
               ))}
@@ -182,58 +183,58 @@ const ResetPassword = () => {
             {isError && (
               <Box sx={styles.codeErrorWrapper}>
                 <CancelIcon sx={styles.codeErrorIcon} />
-                <Typography variant='subtitle2' sx={styles.codeErrorText}>
+                <Typography sx={styles.codeErrorText} variant='subtitle2'>
                   {t('modal.resetPassword.error')}
                 </Typography>
               </Box>
             )}
 
             <FormInput
-              showPassword={showPassword}
-              type='password'
-              name='newPassword'
-              value={formik.values.newPassword}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              label='New Password'
-              error={formik.touched.newPassword && Boolean(formik.errors.newPassword)}
-              helperText={formik.touched.newPassword && formik.errors.newPassword}
-              clickHandler={handleClickShowPassword}
-              mouseDownHandler={handleMouseDownPassword}
-              iconStyle={styles.iconStyle}
-              autoComplete='new-password'
               signupPassword
+              autoComplete='new-password'
+              clickHandler={handleClickShowPassword}
+              error={formik.touched.newPassword && Boolean(formik.errors.newPassword)}
               extraProps={{
                 'data-lpignore': 'true',
                 'data-form-type': 'other',
               }}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.newPassword && formik.errors.newPassword}
+              iconStyle={styles.iconStyle}
+              label='New Password'
+              mouseDownHandler={handleMouseDownPassword}
+              name='newPassword'
+              showPassword={showPassword}
+              type='password'
+              value={formik.values.newPassword}
             />
             <FormInput
-              showPassword={showPassword}
-              type='password'
-              name='repeatPassword'
-              value={formik.values.repeatPassword}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              label='Repeat New Password'
-              error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
-              helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
-              clickHandler={handleClickShowPassword}
-              mouseDownHandler={handleMouseDownPassword}
-              iconStyle={styles.iconStyle}
               autoComplete='new-password'
+              clickHandler={handleClickShowPassword}
+              error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
               extraProps={{
                 'data-lpignore': 'true',
                 'data-form-type': 'other',
               }}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
+              iconStyle={styles.iconStyle}
+              label='Repeat New Password'
+              mouseDownHandler={handleMouseDownPassword}
+              name='repeatPassword'
+              showPassword={showPassword}
+              type='password'
+              value={formik.values.repeatPassword}
             />
             <Box sx={styles.wrapperBtn}>
               <ButtonDef
-                variant='contained'
-                type='submit'
+                correctStyle={styles.submitBtn}
                 disabled={!formik.isValid || !formik.dirty}
                 label={t('modal.resetPassword.btn_change_password')}
-                correctStyle={styles.submitBtn}
+                type='submit'
+                variant='contained'
               />
             </Box>
             {isSuccess && <Typography color='primary'>{t('modal.resetPassword.success')}</Typography>}
@@ -241,17 +242,17 @@ const ResetPassword = () => {
         )}
       </Formik>
 
-      <Box variant='subtitle3' sx={styles.box}>
-        <Typography variant='subtitle3' sx={styles.bottom_subtitle}>
+      <Box sx={styles.box} variant='subtitle3'>
+        <Typography sx={styles.bottom_subtitle} variant='subtitle3'>
           {t('modal.checkEmailResetPassword.subtitle3')}
         </Typography>
 
-        <Typography variant='subtitle3' sx={styles.bottom_subtitle}>
-          <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
+        <Typography sx={styles.bottom_subtitle} variant='subtitle3'>
+          <Link component={RouterLink} sx={styles.link} to={'/'} variant='subtitle3' onClick={handleCloseAllModal}>
             {t('modal.checkEmailResetPassword.resend_link')}
           </Link>{' '}
           {t('modal.checkEmailResetPassword.middle_text')}
-          <Link variant='subtitle3' to={'/'} component={RouterLink} sx={styles.link} onClick={handleCloseAllModal}>
+          <Link component={RouterLink} sx={styles.link} to={'/'} variant='subtitle3' onClick={handleCloseAllModal}>
             {t('modal.checkEmailResetPassword.change_email')}
           </Link>
         </Typography>

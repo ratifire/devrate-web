@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
+import AddIcon from '@mui/icons-material/Add';
 import {
   useGetDefLanguageLevelQuery,
   useGetDefLanguageQuery,
 } from '../../../../redux/services/defaultLanguage/defaultLanguageApiSlice';
 import { styles } from './SelectLanguage.styles';
-import AddIcon from '@mui/icons-material/Add';
 
 const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = null }) => {
   const id = uuid();
@@ -86,27 +86,27 @@ const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = nul
 
   return (
     <>
-      <FormControl fullWidth variant={variant} sx={styles.wrapper} error={selectedLanguage.errorLanguage}>
-        <InputLabel htmlFor={id} sx={styles.label} required>
+      <FormControl fullWidth error={selectedLanguage.errorLanguage} sx={styles.wrapper} variant={variant}>
+        <InputLabel required htmlFor={id} sx={styles.label}>
           {t('profile.modal.userInfo.languages.language')}
         </InputLabel>
         <Select
-          sx={styles.input}
-          id={id}
-          name='language'
-          value={selectedLanguage.selectedLanguage}
-          label={t('profile.modal.userInfo.languages.language')}
-          onChange={(data) => handleChange('selectedLanguage', data)}
           IconComponent={KeyboardArrowDownIcon}
+          id={id}
           inputProps={{
             MenuProps: {
               sx: styles.selectField,
             },
           }}
+          label={t('profile.modal.userInfo.languages.language')}
+          name='language'
+          sx={styles.input}
+          value={selectedLanguage.selectedLanguage}
+          onChange={(data) => handleChange('selectedLanguage', data)}
         >
           {languagesArray.length > 0 &&
             languagesArray.map(({ id }) => (
-              <MenuItem key={id} value={id} sx={styles.menuItem}>
+              <MenuItem key={id} sx={styles.menuItem} value={id}>
                 {t(`specialization.language.name.${id}`)}
               </MenuItem>
             ))}
@@ -119,33 +119,32 @@ const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = nul
       </FormControl>
       <FormControl
         fullWidth
-        variant={variant}
-        sx={styles.wrapper}
-        error={selectedLanguage.errorLevel}
         disabled={!selectedLanguage}
-
+        error={selectedLanguage.errorLevel}
+        sx={styles.wrapper}
+        variant={variant}
       >
-        <InputLabel htmlFor={`${id}-level`} sx={styles.label} required>
+        <InputLabel required htmlFor={`${id}-level`} sx={styles.label}>
           {t('profile.modal.userInfo.languages.level')}
         </InputLabel>
         <Select
-          sx={styles.input}
-          id={`${id}-level`}
-          name='languageLevel'
-          value={selectedLanguage.selectedLevel}
-          label={t('profile.modal.userInfo.languages.level')}
-          onChange={(data) => handleChange('selectedLevel', data)}
           IconComponent={KeyboardArrowDownIcon}
+          disabled={!selectedLanguage.selectedLanguage}
+          id={`${id}-level`}
           inputProps={{
             MenuProps: {
               sx: styles.selectField,
             },
           }}
-          disabled={!selectedLanguage.selectedLanguage}
+          label={t('profile.modal.userInfo.languages.level')}
+          name='languageLevel'
+          sx={styles.input}
+          value={selectedLanguage.selectedLevel}
+          onChange={(data) => handleChange('selectedLevel', data)}
         >
           {levelCodes.length > 0 &&
             levelCodes.map((level) => (
-              <MenuItem key={level} value={level} sx={styles.menuItem}>
+              <MenuItem key={level} sx={styles.menuItem} value={level}>
                 {t(`specialization.language.level.${level}`)}
               </MenuItem>
             ))}

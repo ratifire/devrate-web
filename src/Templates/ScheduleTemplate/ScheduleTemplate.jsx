@@ -2,11 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ScheduleTemplate = ({ children }) => {
-  return (
-    <div className="schedule">
-      {children}
-    </div>
-  );
+  return <div className='schedule'>{children}</div>;
 };
 
 ScheduleTemplate.propTypes = {

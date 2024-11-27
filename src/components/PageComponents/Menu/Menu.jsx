@@ -13,19 +13,19 @@ import {
   Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import styles from './Menu.styles';
 import { Link as RouterLink } from 'react-router-dom';
-import links from './profileRoutes';
 import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
-import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
+import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 import { logOut } from '../../../redux/auth/authSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { openModal } from '../../../redux/modal/modalSlice';
-import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import { DARK_THEME } from '../../../utils/constants/Theme/theme';
+import links from './profileRoutes';
+import styles from './Menu.styles';
 
 const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const { t } = useTranslation();
@@ -43,6 +43,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
       localStorage.setItem('theme', JSON.stringify({ mode: DARK_THEME }));
       window.location.reload();
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log('Logout failed:', error);
     }
   };
@@ -61,9 +62,9 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   return (
     <>
       <Drawer anchor='right' open={isDrawerOpen} onClose={toggleDrawer}>
-        <Box sx={styles.userMenuBox} role='presentation'>
+        <Box role='presentation' sx={styles.userMenuBox}>
           <Box sx={styles.upperMenu}>
-            <Typography variant='h5' component='div'>
+            <Typography component='div' variant='h5'>
               Account
             </Typography>
             <IconButton sx={styles.menuLinkBtn} onClick={toggleDrawer}>
@@ -74,10 +75,10 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
           {links.map((link, index) => (
             <React.Fragment key={link.path}>
               <Link
-                to={link.path}
                 component={RouterLink}
                 sx={styles.menuLink}
                 target={link.target}
+                to={link.path}
                 onClick={() => handleLinkClick(link)}
               >
                 <ListItem disablePadding>
@@ -93,11 +94,11 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
             </React.Fragment>
           ))}
           <Button
-            variant='text'
             startIcon={<ForumOutlinedIcon sx={styles.iconItem} />}
-            type='button'
-            onClick={handleOpenFeedbackModal}
             sx={styles.btnFeedback}
+            type='button'
+            variant='text'
+            onClick={handleOpenFeedbackModal}
           >
             <Typography sx={styles.btnText} variant='h6'>
               {t('profile.userMenu.leaveAFeedback')}

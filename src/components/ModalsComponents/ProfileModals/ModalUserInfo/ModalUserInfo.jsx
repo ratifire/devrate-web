@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import { Box, IconButton, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
-import { styles } from './ModalUserInfo.styles';
 import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { closeModal } from '../../../../redux/modal/modalSlice';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import { styles } from './ModalUserInfo.styles';
 import StepPersonal from './StepPersonal';
 import StepContacts from './StepContacts';
 import StepAvatar from './StepAvatar';
@@ -49,16 +49,16 @@ const ModalUserInfo = () => {
     }
   };
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={openUserInfo}>
+    <ModalLayoutProfile open={openUserInfo} setOpen={handleClose}>
       <Box sx={styles.wrapper}>
-        <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
+        <Stepper activeStep={activeStep} connector={<StepConnector />} sx={styles.stepBorder}>
           {steps.map((label) => (
             <Step key={label} sx={styles.step}>
-              <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label}></StepLabel>
+              <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label} />
               {steps[activeStep] === label && (
-              <Typography variant='subtitle1' sx={styles.title}>
-                {t(label)}
-              </Typography>
+                <Typography sx={styles.title} variant='subtitle1'>
+                  {t(label)}
+                </Typography>
               )}
             </Step>
           ))}
@@ -68,10 +68,10 @@ const ModalUserInfo = () => {
           <Box sx={styles.wrapperStepContent}>{getStepContent(activeStep)}</Box>
           <Box sx={styles.wrapperBottom}>
             <Box sx={styles.wrapperBtn}>
-              <IconButton disabled={activeStep === 0} onClick={handlePrev} sx={styles.btnIcon}>
+              <IconButton disabled={activeStep === 0} sx={styles.btnIcon} onClick={handlePrev}>
                 <ArrowBackIcon />
               </IconButton>
-              <IconButton disabled={activeStep === 3} onClick={handleNext} sx={styles.btnIcon}>
+              <IconButton disabled={activeStep === 3} sx={styles.btnIcon} onClick={handleNext}>
                 <ArrowForwardIcon />
               </IconButton>
             </Box>
@@ -83,4 +83,3 @@ const ModalUserInfo = () => {
 };
 
 export default ModalUserInfo;
-

@@ -5,14 +5,14 @@ import { styles } from './InterviewChartSkeleton.styles';
 const InterviewChartSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton sx={styles.title} variant='rounded' height={28}/>
+      <Skeleton height={28} sx={styles.title} variant='rounded' />
       <Box sx={styles.box}>
-        <Skeleton variant='rounded' width={100} height={21}/>
-        <Skeleton variant='rounded' width={100} height={21}/>
+        <Skeleton height={21} variant='rounded' width={100} />
+        <Skeleton height={21} variant='rounded' width={100} />
       </Box>
-      <Skeleton variant='rounded' height={309}/>
+      <Skeleton height={309} variant='rounded' />
     </Box>
-  )
+  );
 };
 
 export default InterviewChartSkeleton;

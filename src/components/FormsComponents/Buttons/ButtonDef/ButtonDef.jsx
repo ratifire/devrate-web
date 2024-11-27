@@ -2,27 +2,29 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { styles } from './ButtonDef.styles.js';
 import { memo } from 'react';
+import { styles } from './ButtonDef.styles.js';
 
-const ButtonDef = memo(({ withTranslation,  variant, type, correctStyle, handlerClick, disabled, label, startIcon, endIcon }) => {
-  const style = variant === 'contained' ? styles.contained : variant === 'text' ? styles.text : styles.outlined;
-  const { t } = useTranslation();
-  return (
-    <Button
-      variant={variant}
-      type={type}
-      onClick={handlerClick}
-      sx={[style, correctStyle]}
-      disabled={disabled}
-      startIcon={startIcon}
-      endIcon={endIcon}
-      color='primary'
-    >
-      {withTranslation ? t(label) : label}
-    </Button>
-  );
-});
+const ButtonDef = memo(
+  ({ withTranslation, variant, type, correctStyle, handlerClick, disabled, label, startIcon, endIcon }) => {
+    const style = variant === 'contained' ? styles.contained : variant === 'text' ? styles.text : styles.outlined;
+    const { t } = useTranslation();
+    return (
+      <Button
+        color='primary'
+        disabled={disabled}
+        endIcon={endIcon}
+        startIcon={startIcon}
+        sx={[style, correctStyle]}
+        type={type}
+        variant={variant}
+        onClick={handlerClick}
+      >
+        {withTranslation ? t(label) : label}
+      </Button>
+    );
+  }
+);
 
 ButtonDef.displayName = 'ButtonDef';
 

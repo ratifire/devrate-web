@@ -12,7 +12,7 @@ const StepHardSkills = ({ formik }) => {
       <Typography variant='h6'>Hard Skills</Typography>
       <SliderAssessmentBox size='large'>
         {hardSkills.map(({ id }) => (
-          <SliderAssessment key={id} id={id} formik={formik} />
+          <SliderAssessment key={id} formik={formik} id={id} />
         ))}
       </SliderAssessmentBox>
     </Box>

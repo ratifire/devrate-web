@@ -14,5 +14,5 @@ export const styles = {
     left: 0,
     maxWidth: '288px',
     width: '100%',
-  }
+  },
 };

@@ -1,19 +1,19 @@
 import React from 'react';
-import { styles } from './StepPersonalSkeleton.styles';
 import { Box, Skeleton } from '@mui/material';
 import { BtnSkeleton } from '../components';
+import { styles } from './StepPersonalSkeleton.styles';
 
 const StepPersonalSkeleton = () => {
   return (
     <>
       <Box sx={styles.box}>
-        <Skeleton sx={styles.input} variant='rounded' width={334} height={56} />
-        <Skeleton sx={styles.input} variant='rounded' width={334} height={56} />
-        <Skeleton sx={styles.input} variant='rounded' width={334} height={56} />
-        <Skeleton sx={styles.input} variant='rounded' width={334} height={56} />
+        <Skeleton height={56} sx={styles.input} variant='rounded' width={334} />
+        <Skeleton height={56} sx={styles.input} variant='rounded' width={334} />
+        <Skeleton height={56} sx={styles.input} variant='rounded' width={334} />
+        <Skeleton height={56} sx={styles.input} variant='rounded' width={334} />
       </Box>
-      <Skeleton sx={styles.input} variant='rounded' height={56} />
-      <Skeleton sx={styles.lastElem} variant='rounded' height={171} />
+      <Skeleton height={56} sx={styles.input} variant='rounded' />
+      <Skeleton height={171} sx={styles.lastElem} variant='rounded' />
       <BtnSkeleton />
     </>
   );

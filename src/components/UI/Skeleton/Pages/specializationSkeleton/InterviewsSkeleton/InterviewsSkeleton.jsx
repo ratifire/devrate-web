@@ -6,11 +6,11 @@ const InterviewsSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.box}>
-        <Skeleton variant='rounded' width='100%' height={32} />
-        <Skeleton variant='rounded' width='100%' height={24} />
-        <Skeleton variant='rounded' width='100%' height={24} />
+        <Skeleton height={32} variant='rounded' width='100%' />
+        <Skeleton height={24} variant='rounded' width='100%' />
+        <Skeleton height={24} variant='rounded' width='100%' />
       </Box>
-      <Skeleton variant='rounded' width='100%' height={44} />
+      <Skeleton height={44} variant='rounded' width='100%' />
     </Box>
   );
 };

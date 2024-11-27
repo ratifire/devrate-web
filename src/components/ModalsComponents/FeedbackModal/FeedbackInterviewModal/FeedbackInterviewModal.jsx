@@ -17,8 +17,8 @@ const FeedbackInterviewModal = () => {
   const role = data?.participant?.role || '';
 
   return (
-    <ModalLayoutProfile setOpen={handleCloseModal} open={open}>
-      <RoleBasedFeedbackModal isFetching={isFetching} isError={isError} role={role} />
+    <ModalLayoutProfile open={open} setOpen={handleCloseModal}>
+      <RoleBasedFeedbackModal isError={isError} isFetching={isFetching} role={role} />
     </ModalLayoutProfile>
   );
 };

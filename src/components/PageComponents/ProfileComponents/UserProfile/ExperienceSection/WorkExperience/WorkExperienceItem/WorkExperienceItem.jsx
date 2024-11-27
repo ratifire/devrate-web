@@ -1,32 +1,33 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import styles from './WorkExperienceItem.styles';
 import { useTranslation } from 'react-i18next';
-import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
 import PropTypes from 'prop-types';
+import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
+import styles from './WorkExperienceItem.styles';
 
-const WorkExperienceItem = ({startYear, endYear, position, companyName, description, responsibilities }) => {
+const WorkExperienceItem = ({ startYear, endYear, position, companyName, description, responsibilities }) => {
   const { t } = useTranslation();
 
   return (
     <Box sx={styles.workExperienceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
-        <Typography variant='h5' sx={styles.workPosition}>
+        <Typography sx={styles.workPosition} variant='h5'>
           {position}
         </Typography>
-        <Typography variant="caption1" sx={styles.workDate}>
+        <Typography sx={styles.workDate} variant='caption1'>
           {startYear} - {endYear > new Date().getFullYear() ? t('profile.experience.endYear') : endYear}
         </Typography>
       </Box>
       <Box sx={styles.workPlaceTitleWrapper}>
-      <Typography variant="caption1" sx={styles.workPlaceTitle}>
-        {companyName}
-      </Typography>
+        <Typography sx={styles.workPlaceTitle} variant='caption1'>
+          {companyName}
+        </Typography>
       </Box>
       <Typography>{description}</Typography>
       <Box sx={styles.workDutiesContainer}>
         <Box sx={styles.workDuties}>
           {responsibilities.map((responsibility, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <Responsibility key={index} responsibility={responsibility} />
           ))}
         </Box>

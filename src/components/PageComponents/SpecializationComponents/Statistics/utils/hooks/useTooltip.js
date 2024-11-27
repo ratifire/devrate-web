@@ -17,7 +17,7 @@ const useTooltip = () => {
 
   return {
     itemStyle,
-    contentStyle
+    contentStyle,
   };
 };
 

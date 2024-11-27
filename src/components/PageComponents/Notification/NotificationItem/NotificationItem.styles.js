@@ -6,7 +6,7 @@ const styles = {
     width: '100%',
     minWidth: 300,
     boxShadow: `0 -1px 0 0 ${theme.palette.notifications.item.boxShadow} inset`,
-    
+
     '&:last-child': {
       boxShadow: 'none',
     },

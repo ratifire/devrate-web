@@ -14,7 +14,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   const { t } = useTranslation();
   const { mode } = useSelector((state) => state.theme);
   const imgUrl = mode === DARK_THEME ? DARK_NOT_FOUND : LIGHT_NOT_FOUND;
-  
+
   if (isSpinner) {
     return (
       <Box sx={styles.box}>
@@ -34,7 +34,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
   if (!users?.length) {
     return (
       <Box sx={styles.box}>
-        <Typography variant='subtitle1' sx={styles.emptyTitle}>
+        <Typography sx={styles.emptyTitle} variant='subtitle1'>
           {t('header.notFound')}
         </Typography>
         <Box sx={{ ...styles.boxImg, backgroundImage: `url(${imgUrl})` }} />
@@ -46,8 +46,8 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
     <Box sx={styles.box}>
       <List sx={styles.list}>
         {users.map(({ id, lastName, firstName, picture, mainSpecializationName }) => (
-          <ListItem sx={styles.item} key={id}>
-            <Box sx={styles.link} component={Link} onClick={onClose} key={id} to={`/profile/${id}`}>
+          <ListItem key={id} sx={styles.item}>
+            <Box key={id} component={Link} sx={styles.link} to={`/profile/${id}`} onClick={onClose}>
               <Box>
                 <Typography variant='subtitle2'>
                   {firstName} {lastName}
@@ -57,12 +57,12 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
                 </Typography>
               </Box>
               <UserAvatar
+                correctStyle={styles.img}
                 size={'sm'}
-                userName={firstName}
+                src={picture}
                 userFirstName={firstName}
                 userLastName={lastName}
-                correctStyle={styles.img}
-                src={picture}
+                userName={firstName}
               />
             </Box>
             <Divider sx={styles.divider} />

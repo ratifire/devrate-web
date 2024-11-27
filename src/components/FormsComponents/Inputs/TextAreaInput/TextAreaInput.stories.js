@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import TextAreaInput from './TextAreaInput';
 import { decorators } from '../../../../.storybook/preview';
+import TextAreaInput from './TextAreaInput';
 
 export default {
   title: 'Form/Inputs/TextAreaInput',
@@ -30,7 +30,7 @@ export const TextInput = {
     type: 'text',
     label: 'modal.editPage.personalInformation.title',
     helperText: '',
-    error: false
+    error: false,
   },
 };
 
@@ -42,6 +42,6 @@ export const TextInputError = {
     type: 'text',
     label: 'modal.editPage.personalInformation.title',
     helperText: 'modal.registration.required',
-    error: true
+    error: true,
   },
 };

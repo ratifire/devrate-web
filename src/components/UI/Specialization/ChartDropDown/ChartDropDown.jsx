@@ -1,17 +1,15 @@
 import { Box, MenuItem, Select } from '@mui/material';
-import { styles } from './ChartDropDown.styles';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { styles } from './ChartDropDown.styles';
 
 const ChartDropDown = ({ months, days, handleChange }) => {
   return (
     <Box>
       <Select
-        sx={styles.select}
-        onChange={handleChange}
-        defaultValue={'months'}
         IconComponent={KeyboardArrowDownIcon}
+        defaultValue={'months'}
         inputProps={{
           MenuProps: {
             PaperProps: {
@@ -19,6 +17,8 @@ const ChartDropDown = ({ months, days, handleChange }) => {
             },
           },
         }}
+        sx={styles.select}
+        onChange={handleChange}
       >
         <MenuItem sx={styles.menuItem} value={'months'}>
           {months}
@@ -28,13 +28,13 @@ const ChartDropDown = ({ months, days, handleChange }) => {
         </MenuItem>
       </Select>
     </Box>
-  )
-}
+  );
+};
 
 ChartDropDown.propTypes = {
   months: PropTypes.string.isRequired,
   days: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-}
+};
 
 export default ChartDropDown;

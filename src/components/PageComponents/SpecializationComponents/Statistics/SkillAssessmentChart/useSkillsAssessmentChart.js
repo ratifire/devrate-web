@@ -11,7 +11,7 @@ const useSkillsAssessmentChart = () => {
     grad1,
     grad2,
     grad3,
-  }
-}
+  };
+};
 
 export default useSkillsAssessmentChart;
