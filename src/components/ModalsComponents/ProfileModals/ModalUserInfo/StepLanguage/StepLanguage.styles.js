@@ -14,36 +14,31 @@ export const styles = {
     gridGap: theme.spacing(3),
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: theme.palette.neutral[400],
+        borderColor: theme.palette.modals.select.border.default,
       },
       '&:hover fieldset': {
-        borderColor: theme.palette.primary.main,
+        borderColor: theme.palette.modals.select.border.hover,
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.primary.main,
+        borderColor: theme.palette.modals.select.border.focused,
       },
       '& legend': {
         width: 'auto',
       },
+      '& > .MuiSvgIcon-root': {
+        color: theme.palette.scheduleInterview.modal.tab.arrows,
+      },
+      '&.Mui-disabled': {
+        '& .MuiOutlinedInput-notchedOutline': {
+          borderColor: theme.palette.modals.select.border.default,
+        },
+        '& > .MuiSvgIcon-root': {
+          color: theme.palette.modals.select.textColor.disabled,
+        },
+      },
     },
     '& .MuiFormLabel-root': {
       color: theme.palette.text.primary,
-    },
-  }),
-  languageLevel: (theme) => ({
-    '& .MuiOutlinedInput-root fieldset': {
-      borderColor: theme.palette.neutral[400],
-    },
-  }),
-  iconBtn: (theme) => ({
-    marginTop: theme.spacing(1),
-    padding: '12px',
-    borderRadius: 1,
-    color: theme.palette.iconBtn.createBtn.color,
-    transition: 'background-color 0.3s, transform 0.3s',
-    ':hover': {
-      backgroundColor: theme.palette.iconBtn.createBtn.hover.backgroundColor,
-      color: theme.palette.iconBtn.createBtn.hover.color,
     },
   }),
   list: (theme) => ({

@@ -404,7 +404,7 @@ export const en = {
       },
     },
     specialization: {
-      specialization_title: 'Specialisations',
+      specialization_title: 'Specializations',
       specialization_btn_make_main: 'Make the main',
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',
