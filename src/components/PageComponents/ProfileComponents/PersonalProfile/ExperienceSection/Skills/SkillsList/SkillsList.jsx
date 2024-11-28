@@ -1,38 +1,45 @@
 import React from 'react';
-import { styles } from './SkillsList.styles';
 import { Box, Typography } from '@mui/material';
-import SkillsItem from '../SkillsItem';
 import PropTypes from 'prop-types';
-import CustomTooltip from '../../../../../../UI/CustomTooltip';
 import StarIcon from '@mui/icons-material/Star';
+import SkillsItem from '../SkillsItem';
+import CustomTooltip from '../../../../../../UI/CustomTooltip';
+import { styles } from './SkillsList.styles';
 
 const SkillsList = ({ data, length }) => {
   const { specializationName, mainSpecialization, masteryName, hardSkills } = data;
-  
-  const flexValue = length === 1 ? (hardSkills.length === 1) ? { flex: '0 1 100%' } : { flex: '0 1 calc(50% - 10px)' } : { flex: '0 1 100%' };
+
+  const flexValue =
+    length === 1
+      ? hardSkills.length === 1
+        ? { flex: '0 1 100%' }
+        : { flex: '0 1 calc(50% - 10px)' }
+      : { flex: '0 1 100%' };
   const level = masteryName || 'N/A';
-  
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.titleWrapper}>
-        {mainSpecialization ?
+        {mainSpecialization ? (
           <>
-            <CustomTooltip title="profile.experience.skills.star" translate={true}>
+            <CustomTooltip translate title='profile.experience.skills.star'>
               <StarIcon sx={styles.star} />
             </CustomTooltip>
             <CustomTooltip title={specializationName}>
-              <Typography variant="h6" sx={styles.title}>
+              <Typography sx={styles.title} variant='h6'>
                 {specializationName}
               </Typography>
             </CustomTooltip>
           </>
-          : <CustomTooltip title={specializationName}>
-            <Typography variant="h6" sx={styles.title}>
+        ) : (
+          <CustomTooltip title={specializationName}>
+            <Typography sx={styles.title} variant='h6'>
               {specializationName}
             </Typography>
-          </CustomTooltip>}
+          </CustomTooltip>
+        )}
       </Box>
-      <Typography variant="subtitle2" sx={styles.text} className={level}>
+      <Typography className={level} sx={styles.text} variant='subtitle2'>
         Level <span>{level}</span>
       </Typography>
       <Box sx={styles.list}>

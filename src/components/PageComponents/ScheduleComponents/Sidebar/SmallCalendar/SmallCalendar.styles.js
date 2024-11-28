@@ -9,9 +9,9 @@ export const styles = {
     },
     '& .MuiPickersArrowSwitcher-button': {
       color: theme.palette.schedule.smallCalendar.arrowSwitcherColor,
-        '&:hover': {
-         backgroundColor: theme.palette.schedule.smallCalendar.arrowSwitcherBackgroundColor,
-          borderRadius: 1,
+      '&:hover': {
+        backgroundColor: theme.palette.schedule.smallCalendar.arrowSwitcherBackgroundColor,
+        borderRadius: 1,
       },
     },
   }),

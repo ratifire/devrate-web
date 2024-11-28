@@ -10,4 +10,4 @@ export const styles = {
     gap: '16px',
     marginBottom: '16px',
   },
-}
+};

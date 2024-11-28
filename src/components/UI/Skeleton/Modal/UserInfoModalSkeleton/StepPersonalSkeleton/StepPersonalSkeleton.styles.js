@@ -9,5 +9,5 @@ export const styles = {
   },
   lastElem: {
     marginBottom: '40px',
-  }
-}
+  },
+};

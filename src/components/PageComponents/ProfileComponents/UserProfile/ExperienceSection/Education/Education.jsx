@@ -1,19 +1,17 @@
 import React, { useMemo } from 'react';
 import { Box } from '@mui/material';
-import styles from './Education.styles';
-import EducationItem from './EducationItem';
-import { useGetEducationByUserIdQuery } from '../../../../../../redux/services/educationApiSlice';
 import PropTypes from 'prop-types';
+import { useGetEducationByUserIdQuery } from '../../../../../../redux/services/educationApiSlice';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
 import { iconsEducation } from '../../../../../../utils/constants/Experience/iconsExperience';
 import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
-
+import EducationItem from './EducationItem';
+import styles from './Education.styles';
 
 const Education = ({ id, tab }) => {
   const { data: educationsData, isLoading } = useGetEducationByUserIdQuery(id, { skip: !id });
   const getIcon = loopedObjValues(iconsEducation);
-
 
   const sortedEducations = useMemo(() => {
     if (!educationsData) return [];
@@ -21,10 +19,7 @@ const Education = ({ id, tab }) => {
   }, [educationsData]);
 
   if (isLoading || !educationsData || educationsData.length === 0) {
-    return <EmptyExperienceTab
-      tab={tab}
-      profileType="user"
-      imgUrl={emptyUserTabsPictures.emptyEducationPic} />;
+    return <EmptyExperienceTab imgUrl={emptyUserTabsPictures.emptyEducationPic} profileType='user' tab={tab} />;
   }
 
   return (
@@ -33,13 +28,13 @@ const Education = ({ id, tab }) => {
         {sortedEducations.map(({ id, type, name, description, startYear, endYear }) => (
           <EducationItem
             key={id}
-            type={type}
-            name={name}
             description={description}
-            startYear={startYear}
             endYear={endYear === 9999 ? 'Now' : endYear}
             icon={getIcon()}
             id={id}
+            name={name}
+            startYear={startYear}
+            type={type}
           />
         ))}
       </Box>

@@ -15,25 +15,25 @@ const StepSoftSkills = ({ formik }) => {
     <>
       <Box sx={styles.container}>
         <TextAreaInput
+          required
+          error={formik.touched.comment && Boolean(formik.errors.comment)}
+          handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
+          helperText={formik.touched.comment && formik.errors.comment}
+          label={t('modal.interview.label')}
           name='comment'
           placeholder={t('modal.interview.placeholder')}
-          type='text'
-          label={t('modal.interview.label')}
-          required
-          variant='outlined'
           rows={2}
-          handleChange={formik.handleChange}
+          type='text'
           value={comment}
-          handleBlur={formik.handleBlur}
-          helperText={formik.touched.comment && formik.errors.comment}
-          error={formik.touched.comment && Boolean(formik.errors.comment)}
+          variant='outlined'
         />
       </Box>
       <Box>
         <Typography variant='h6'>Soft Skills</Typography>
         <SliderAssessmentBox>
           {softSkills.map(({ id }) => (
-            <SliderAssessment key={id} id={id} formik={formik} />
+            <SliderAssessment key={id} formik={formik} id={id} />
           ))}
         </SliderAssessmentBox>
       </Box>

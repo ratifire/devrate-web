@@ -7,4 +7,4 @@ export const getDatesInWeek = (date) => {
   }
 
   return dates;
-}
+};

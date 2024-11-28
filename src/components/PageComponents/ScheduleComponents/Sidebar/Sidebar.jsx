@@ -1,9 +1,9 @@
-import { styles } from './Sidebar.styles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import SidebarEvent from '../SidebarEvent/SidebarEvent';
 import { Settings } from 'luxon';
 import { Box } from '@mui/material';
+import SidebarEvent from '../SidebarEvent/SidebarEvent';
+import { styles } from './Sidebar.styles';
 import SmallCalendar from './SmallCalendar';
 
 Settings.defaultWeekSettings = {
@@ -16,7 +16,7 @@ const Sidebar = ({ currentEvents, selectedDate, handleDateChange }) => {
   return (
     <Box sx={styles.container}>
       <Box>
-        <SmallCalendar selectedDate={selectedDate} handleDateChange={handleDateChange} />
+        <SmallCalendar handleDateChange={handleDateChange} selectedDate={selectedDate} />
       </Box>
       <Box sx={styles.scrollContainer}>
         <Box sx={styles.sidebarSection}>

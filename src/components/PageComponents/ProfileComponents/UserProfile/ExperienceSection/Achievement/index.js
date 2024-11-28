@@ -1,2 +1,2 @@
-import Achievement from "./Achievement";
+import Achievement from './Achievement';
 export default Achievement;

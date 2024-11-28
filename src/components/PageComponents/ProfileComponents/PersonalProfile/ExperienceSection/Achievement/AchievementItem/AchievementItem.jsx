@@ -29,34 +29,34 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
     try {
       await deleteAchievement(achievement.id).unwrap();
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Failed to delete the achievement:', error);
     }
     handleCloseMenu();
   };
-
 
   return (
     <Box sx={styles.achievementItemContainer}>
       <Box key={achievement.id}>
         <Box sx={styles.itemHeaderContainer}>
           <Box sx={styles.logoTitleContainer}>
-            {IconComponent ? <IconComponent width={48} height={48} /> : <Typography>No Icon</Typography>}
+            {IconComponent ? <IconComponent height={48} width={48} /> : <Typography>No Icon</Typography>}
             <Box sx={styles.achievementTitleYearContainer}>
-              <Typography variant='h6' sx={styles.achievementTitle}>
+              <Typography sx={styles.achievementTitle} variant='h6'>
                 {achievement.summary}
               </Typography>
             </Box>
           </Box>
           <Box sx={styles.menuIcon}>
-            <IconButton onClick={(event) => handleMenuOpen(event)} sx={styles.iconBtnModal}>
+            <IconButton sx={styles.iconBtnModal} onClick={(event) => handleMenuOpen(event)}>
               <MoreVertIcon />
             </IconButton>
-          </Box> {' '}
+          </Box>{' '}
           <DropdownMenu
             anchorEl={anchorEl}
             handleCloseMenu={handleCloseMenu}
-            handleEditFeature={handleEditFeature}
             handleDeleteFeature={handleDeleteFeature}
+            handleEditFeature={handleEditFeature}
           />
         </Box>
         {/*commented out <Link> in case if its need it's needed in the future*/}
@@ -67,13 +67,10 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
         {/*  </Link>*/}
         {/*)}*/}
         <Box sx={styles.achievementItemText}>
-          <Typography variant='body1' >
-            {achievement.description}
-          </Typography>
+          <Typography variant='body1'>{achievement.description}</Typography>
         </Box>
-
       </Box>
-      <AchievementEditModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} achievement={achievement} />
+      <AchievementEditModal achievement={achievement} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </Box>
   );
 };

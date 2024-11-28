@@ -144,7 +144,7 @@ const SoftSkillsModal = () => {
 
   if (isLoading) {
     return (
-      <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
+      <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
         <LoaderComponent />
       </ModalLayoutProfile>
     );
@@ -152,29 +152,29 @@ const SoftSkillsModal = () => {
 
   if (isError) {
     return (
-      <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
+      <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
         <ErrorComponent />
       </ModalLayoutProfile>
     );
   }
 
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
-      <Typography variant='h6' sx={styles.title}>
+    <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
+      <Typography sx={styles.title} variant='h6'>
         {t('specialization.modal.skills.title')}
       </Typography>
       <form onSubmit={handleSubmit}>
         <Box sx={styles.input}>
           <FormSelect
-            label={t(labelInput)}
-            value={skill}
             countries={availableSkills}
-            helperText={t(helperText)}
-            error={error}
             disabled={availableSkills?.length === 0}
-            variant='outlined'
-            name='softSkill'
+            error={error}
             handleChange={handleChange}
+            helperText={t(helperText)}
+            label={t(labelInput)}
+            name='softSkill'
+            value={skill}
+            variant='outlined'
           />
           <IconButton sx={styles.iconBtn} onClick={handleAddSkill}>
             <AddIcon />
@@ -188,11 +188,11 @@ const SoftSkillsModal = () => {
           </Box>
         </Box>
         <ButtonDef
-          variant='contained'
-          type='submit'
-          label={t('profile.modal.btn')}
           correctStyle={styles.btn}
           disabled={addSkill.length === 0 && idDeletedSkills.length === 0}
+          label={t('profile.modal.btn')}
+          type='submit'
+          variant='contained'
         />
       </form>
     </ModalLayoutProfile>

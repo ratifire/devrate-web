@@ -4,7 +4,7 @@ export const styles = {
     minHeight: '100%',
     fontSize: '14px',
   },
-  demoAppMain: theme=>({
+  demoAppMain: (theme) => ({
     flexGrow: '1',
     padding: theme.spacing(4),
     '& .fc-scroller.fc-scroller-liquid-absolute': {
@@ -19,7 +19,7 @@ export const styles = {
         borderRadius: 6,
         backgroundColor: theme.palette.schedule.scroll.thumb,
       },
-    }
+    },
   }),
   fc: {
     margin: '0 auto',
@@ -46,7 +46,7 @@ export const styles = {
   timeGridTableHeadLight: {
     borderColor: '#C5C5C6',
     color: '#303032',
-     fontSize: '14px',
+    fontSize: '14px',
     lineHeight: '20.02px',
   },
   timeGridTodayElements: {

@@ -5,9 +5,9 @@ import { styles } from './HardSkillsChartSkeleton.styles';
 const HardSkillsChartSkeleton = () => {
   return (
     <>
-      <Skeleton sx={styles.title} variant='rounded' height={28} />
-      <Skeleton sx={styles.subTitle} variant='rounded' height={50} />
-      <Skeleton variant='rounded' height={264} />
+      <Skeleton height={28} sx={styles.title} variant='rounded' />
+      <Skeleton height={50} sx={styles.subTitle} variant='rounded' />
+      <Skeleton height={264} variant='rounded' />
     </>
   );
 };

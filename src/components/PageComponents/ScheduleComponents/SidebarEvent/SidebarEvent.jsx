@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
-import { styles } from './SidebarEvent.styles';
 import { useTranslation } from 'react-i18next';
-import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
+import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
+import { styles } from './SidebarEvent.styles';
 
 const SidebarEvent = ({ event }) => {
   const { eventTypeId, type, link, host, startTime, participantDtos } = event;
@@ -29,13 +29,12 @@ const SidebarEvent = ({ event }) => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-
   const eventDeleteHandler = async (id) => {
     try {
       await deleteEvent({ userId, id }).unwrap();
       enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
-
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Failed to delete event:', error);
     }
   };
@@ -69,34 +68,34 @@ const SidebarEvent = ({ event }) => {
   return (
     <Paper key={eventTypeId} sx={styles.sideBarEventContainer}>
       <Box sx={styles.titleDateTimeBox}>
-        <Typography sx={styles.title} variant='h6' component='div'>
+        <Typography component='div' sx={styles.title} variant='h6'>
           {type.toLowerCase()}
         </Typography>
-        <Typography sx={styles.dateAndTime} variant='body2' component='div'>
+        <Typography component='div' sx={styles.dateAndTime} variant='body2'>
           {customFormattedDate} {formattedTime}
         </Typography>
       </Box>
-      <Typography sx={styles.host} variant='body2' component='div'>
+      <Typography component='div' sx={styles.host} variant='body2'>
         {t('schedule.host')}:{' '}
-        <Link component={RouterLink} to={`/profile/${hostId}`} sx={styles.host_link}>
+        <Link component={RouterLink} sx={styles.host_link} to={`/profile/${hostId}`}>
           {name} {surname}
         </Link>
       </Typography>
-      <Typography sx={styles.participant} variant='body2' component='div'>
+      <Typography component='div' sx={styles.participant} variant='body2'>
         {t('schedule.participant')}:{' '}
-        <Link component={RouterLink} to={`/profile/${participantDtos[0].id}`} sx={styles.participant_link}>
+        <Link component={RouterLink} sx={styles.participant_link} to={`/profile/${participantDtos[0].id}`}>
           {participantDtos[0].name} {participantDtos[0].surname}
         </Link>
       </Typography>
-      <Typography sx={styles.hostTitle} variant='caption3' component='div'>
+      <Typography component='div' sx={styles.hostTitle} variant='caption3'>
         {participantDtos[0].status}
       </Typography>
       <Box sx={styles.titleDateTimeBox}>
-        <IconButton component='a' href={link} target='_blank' disabled={disableLink}>
+        <IconButton component='a' disabled={disableLink} href={link} target='_blank'>
           <LinkIcon />
         </IconButton>
         {showCancelButton && (
-          <Button variant='text' sx={styles.cancelEventBtn} onClick={() => eventDeleteHandler(eventTypeId)}>
+          <Button sx={styles.cancelEventBtn} variant='text' onClick={() => eventDeleteHandler(eventTypeId)}>
             {t('schedule.cancelEventBtn')}
           </Button>
         )}

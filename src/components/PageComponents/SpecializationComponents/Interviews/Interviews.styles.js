@@ -47,7 +47,7 @@ export const styles = {
       backgroundColor: theme.palette.background.btnGroup,
     },
     '&[data-active="true"]': {
-      borderRadius: '4px 4px 0 0'
+      borderRadius: '4px 4px 0 0',
     },
   }),
   popoverWrapper: (theme) => ({
@@ -77,6 +77,6 @@ export const styles = {
     display: 'flex',
     ':hover': {
       backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
-    }
+    },
   }),
 };

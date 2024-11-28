@@ -30,6 +30,6 @@ export const styles = {
     },
   },
   alertContent: {
-    width: '100%'
+    width: '100%',
   },
 };

@@ -11,7 +11,7 @@ export const styles = {
     position: 'relative',
     margin: 0,
     transition: 'border-color .2s easy-in-out',
-    
+
     '& .MuiTypography-root': {
       fontSize: '16px',
       fontWeight: 500,
@@ -19,7 +19,7 @@ export const styles = {
       lineHeight: '22.88px',
       color: theme.palette.scheduleInterview.modal.checkbox.color,
     },
-    
+
     '&.active': {
       borderColor: theme.palette.scheduleInterview.modal.checkbox.checked.borderColor,
       '>p': {
@@ -44,7 +44,7 @@ export const styles = {
     position: 'relative',
     margin: 0,
     transition: 'border-color .2s easy-in-out',
-    
+
     '& .MuiTypography-root': {
       fontSize: '16px',
       fontWeight: 500,
@@ -53,5 +53,4 @@ export const styles = {
       color: theme.palette.scheduleInterview.modal.checkbox.disabled.color,
     },
   }),
-  
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
-import { styles } from './SelectSkills.styles';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PropTypes from 'prop-types';
+import { styles } from './SelectSkills.styles';
 
 const SelectSkills = ({
   variant,
@@ -37,26 +37,26 @@ const SelectSkills = ({
   };
 
   return (
-    <FormControl fullWidth variant={variant} sx={styles.wrapper} error={errorLanguage}>
+    <FormControl fullWidth error={errorLanguage} sx={styles.wrapper} variant={variant}>
       <InputLabel htmlFor={id} sx={styles.label}>
         {t(labelLanguage)}
       </InputLabel>
       <Select
-        sx={styles.input}
-        id={id}
-        name='language'
-        value={selectedLanguage}
-        label={t(labelLanguage)}
-        onChange={handleLanguageSelectChange}
         IconComponent={KeyboardArrowDownIcon}
+        id={id}
         inputProps={{
           MenuProps: {
             sx: styles.selectField,
           },
         }}
+        label={t(labelLanguage)}
+        name='language'
+        sx={styles.input}
+        value={selectedLanguage}
+        onChange={handleLanguageSelectChange}
       >
         {languagesArray.map(({ id, name }) => (
-          <MenuItem key={id} value={name} sx={styles.menuItem}>
+          <MenuItem key={id} sx={styles.menuItem} value={name}>
             {name}
           </MenuItem>
         ))}

@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import FormInput from './FormInput';
 import { decorators } from '../../../../.storybook/preview';
+import FormInput from './FormInput';
 
 export default {
   title: 'Form/Inputs/FormInput',

@@ -4,5 +4,5 @@ export const styles = {
     display: 'flex',
     minHeight: '100vh',
     gap: '10px',
-  }
-}
+  },
+};

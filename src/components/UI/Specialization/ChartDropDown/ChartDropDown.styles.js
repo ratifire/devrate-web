@@ -31,7 +31,7 @@ export const styles = {
     },
     '&:active': {
       backgroundColor: theme.palette.modalDropdown.hoverBgColor,
-      color: theme.palette.action.active
-    }
+      color: theme.palette.action.active,
+    },
   }),
 };

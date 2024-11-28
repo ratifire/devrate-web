@@ -12,10 +12,10 @@ import {
   useHandleChange,
   useTooltip,
 } from '../utils';
-import { styles } from './InterviewChart.styles';
-import useThemeInterviewChart from './useThemeInterviewChart';
 import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
 import InterviewChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/InterviewChartSkeleton';
+import { styles } from './InterviewChart.styles';
+import useThemeInterviewChart from './useThemeInterviewChart';
 
 const InterviewChart = () => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -45,41 +45,41 @@ const InterviewChart = () => {
           <Typography variant='subtitle2'>{t('specialization.statistics.interview_chart_title')}</Typography>
         </Box>
         <ChartDropDown
+          days={t('specialization.statistics.interview_chart_days')}
           handleChange={handleChange}
           months={t('specialization.statistics.interview_chart_months')}
-          days={t('specialization.statistics.interview_chart_days')}
         />
       </Box>
       <Box sx={styles.chartWrapper}>
-        <ResponsiveContainer width='100%' height='100%'>
+        <ResponsiveContainer height='100%' width='100%'>
           <BarChart data={selectedPeriod} margin={{ top: 0, right: 5, left: -30, bottom: 0 }}>
             <defs>
-              <linearGradient id='colorConducted' x1='0' y1='0' x2='0' y2='1'>
+              <linearGradient id='colorConducted' x1='0' x2='0' y1='0' y2='1'>
                 <stop offset='0%' stopColor={conductedGrad1} stopOpacity={1} />
                 <stop offset='29.8%' stopColor={conductedGrad2} stopOpacity={1} />
                 <stop offset='100%' stopColor={conductedGrad3} stopOpacity={1} />
               </linearGradient>
-              <linearGradient id='colorPassed' x1='0' y1='0' x2='0' y2='1'>
+              <linearGradient id='colorPassed' x1='0' x2='0' y1='0' y2='1'>
                 <stop offset='0%' stopColor={passedGrad1} stopOpacity={1} />
                 <stop offset='36.8%' stopColor={passedGrad2} stopOpacity={1} />
                 <stop offset='100%' stopColor={passedGrad3} stopOpacity={1} />
               </linearGradient>
             </defs>
-            <Legend iconType='circle' layout='horizontal' align='center' verticalAlign='top' />
-            <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
+            <Legend align='center' iconType='circle' layout='horizontal' verticalAlign='top' />
+            <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
             <XAxis dataKey='name' />
-            <YAxis domain={[0, 10]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} interval={0} />
-            <Tooltip itemStyle={itemStyle} contentStyle={contentStyle} />
+            <YAxis domain={[0, 10]} interval={0} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+            <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
             <Bar
               dataKey='conducted'
-              name={t('specialization.interviewsChart.conducted')}
               fill='url(#colorConducted)'
+              name={t('specialization.interviewsChart.conducted')}
               radius={[2, 2, 0, 0]}
             />
             <Bar
               dataKey='passed'
-              name={t('specialization.interviewsChart.passed')}
               fill='url(#colorPassed)'
+              name={t('specialization.interviewsChart.passed')}
               radius={[2, 2, 0, 0]}
             />
           </BarChart>

@@ -2,8 +2,8 @@ import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { v4 as uuid } from 'uuid';
-import PasswordVisibilityToggle from '../../PasswordVisibilityToggle';
 import { useTranslation } from 'react-i18next';
+import PasswordVisibilityToggle from '../../PasswordVisibilityToggle';
 import { styles } from './FormInput.styles';
 import HelperTextComponent from './FormHelperText';
 
@@ -40,38 +40,38 @@ const FormInput = ({
   };
 
   return (
-    <FormControl variant='outlined' sx={styles.inputWrapper} error={error}>
-      <InputLabel htmlFor={id} sx={styles.label} required={required}>
+    <FormControl error={error} sx={styles.inputWrapper} variant='outlined'>
+      <InputLabel htmlFor={id} required={required} sx={styles.label}>
         {t(label)}
       </InputLabel>
       <OutlinedInput
-        sx={styles.input}
         autoComplete={autoComplete}
-        id={id}
-        name={name}
-        value={value}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        type={showPassword ? 'text' : type}
-        label={t(label)}
-        placeholder={t(placeholder)}
-        inputRef={inputRef}
-        onKeyDown={handleKeyDown}
         endAdornment={
           type === 'password' && (
             <PasswordVisibilityToggle
+              clickHandler={handleTogglePasswordVisibility}
+              iconStyle={iconStyle}
+              mouseDownHandler={mouseDownHandler}
               name={name}
               showPassword={showPassword}
-              clickHandler={handleTogglePasswordVisibility}
-              mouseDownHandler={mouseDownHandler}
-              iconStyle={iconStyle}
             />
           )
         }
+        id={id}
+        inputRef={inputRef}
+        label={t(label)}
+        name={name}
+        placeholder={t(placeholder)}
+        sx={styles.input}
+        type={showPassword ? 'text' : type}
+        value={value}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
         {...extraProps}
       />
 
-      <HelperTextComponent id={id} signupPassword={signupPassword} error={error} helperText={helperText} />
+      <HelperTextComponent error={error} helperText={helperText} id={id} signupPassword={signupPassword} />
     </FormControl>
   );
 };
@@ -94,7 +94,7 @@ FormInput.propTypes = {
   autoComplete: PropTypes.string,
   extraProps: PropTypes.object,
   signupPassword: PropTypes.bool,
-  handleKeyDown: PropTypes.func
+  handleKeyDown: PropTypes.func,
 };
 
 FormInput.defaultProps = {

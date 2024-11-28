@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from '@mui/material';
+import { useSelector } from 'react-redux';
 import darkIcons from '../../../utils/constants/RightSection/darkThemeIcons';
 import whiteIcons from '../../../utils/constants/RightSection/whiteThemeIcons';
-import { SOCIAL_TYPES } from './SocialTypes';
 import { ensureProtocol } from '../../../utils/helpers/ensureProtocol';
-import { useSelector } from 'react-redux';
 import { DARK_THEME } from '../../../utils/constants/Theme/theme';
+import { SOCIAL_TYPES } from './SocialTypes';
 
 const SocialsLinkList = ({ socials, componentStyles }) => {
-  const {mode} = useSelector(state => state.theme)
+  const { mode } = useSelector((state) => state.theme);
   const icons = mode === DARK_THEME ? darkIcons : whiteIcons;
-
 
   return socials ? (
     <>
@@ -28,7 +27,8 @@ const SocialsLinkList = ({ socials, componentStyles }) => {
         }
 
         return (
-          <Link key={`${social.id}-${index}`} href={href} sx={componentStyles.link} target="_blank">
+          // eslint-disable-next-line react/no-array-index-key
+          <Link key={`${social.id}-${index}`} href={href} sx={componentStyles.link} target='_blank'>
             <IconComponent />
           </Link>
         );
@@ -43,7 +43,7 @@ SocialsLinkList.propTypes = {
       id: PropTypes.number.isRequired,
       value: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
-    }),
+    })
   ),
   componentStyles: PropTypes.object.isRequired,
 };

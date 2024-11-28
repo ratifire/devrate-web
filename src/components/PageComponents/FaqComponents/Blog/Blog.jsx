@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import { Box, Typography } from '@mui/material';
-import { styles } from './Blog.styles';
 import { useTranslation } from 'react-i18next';
-import { blogArr } from './blogArr';
 import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding';
+import { styles } from './Blog.styles';
+import { blogArr } from './blogArr';
 
 const Blog = () => {
   const { t } = useTranslation();
@@ -13,15 +13,15 @@ const Blog = () => {
 
   const renderBlogList = () => {
     return blogArr?.map((blog) => (
-      <Box sx={styles.card} key={blog.id}>
-        <Typography variant='subtitle2' sx={styles.blogTitle}>
+      <Box key={blog.id} sx={styles.card}>
+        <Typography sx={styles.blogTitle} variant='subtitle2'>
           {t(blog.title)}
         </Typography>
-        <Typography variant='caption1' sx={styles.blogData}>
+        <Typography sx={styles.blogData} variant='caption1'>
           {blog.data}
           <span>{blog.version}</span>
         </Typography>
-        <Typography variant='caption2' sx={styles.blogText}>
+        <Typography sx={styles.blogText} variant='caption2'>
           {t(blog.text)}
           <span>{t('blogText.readNext')}</span>
         </Typography>
@@ -31,10 +31,10 @@ const Blog = () => {
 
   return (
     <Box sx={styles.wrapper}>
-      <Typography variant='h6' sx={styles.title}>
+      <Typography sx={styles.title} variant='h6'>
         {t('blogText.title')}
       </Typography>
-      <Box sx={styles.list} ref={containerRef}>
+      <Box ref={containerRef} sx={styles.list}>
         {renderBlogList()}
       </Box>
     </Box>

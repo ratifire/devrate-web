@@ -29,7 +29,7 @@ export const styles = {
     alignItems: 'flex-start',
     gridGap: theme.spacing(3),
     '& .base-Popper-root .MuiBox-root': {
-      padding: `${theme.spacing(2)} 0 ${theme.spacing(2)} 0`
+      padding: `${theme.spacing(2)} 0 ${theme.spacing(2)} 0`,
     },
     '& .base-Popper-root .MuiAutocomplete-listbox ': {
       maxHeight: '250px',
@@ -55,7 +55,7 @@ export const styles = {
         backgroundColor: theme.palette.specialization.inputAddSpec.backgroundColor,
         color: theme.palette.specialization.inputAddSpec.color,
       },
-    }
+    },
   }),
 
   mastery_input: (theme) => ({
@@ -86,6 +86,6 @@ export const styles = {
     ':hover': {
       backgroundColor: theme.palette.iconBtn.createBtn.hover.backgroundColor,
       color: theme.palette.iconBtn.createBtn.hover.color,
-    }
+    },
   }),
 };

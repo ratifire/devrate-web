@@ -1,7 +1,7 @@
 export const specializationDark = {
   specialization: {
     subtitle: {
-      color: '#ECECED'
+      color: '#ECECED',
     },
     progress: {
       color: '#8133F1',
@@ -47,13 +47,13 @@ export const specializationDark = {
       deco: '#303032',
     },
     star: {
-      color: '#B78AF7'
+      color: '#B78AF7',
     },
     activeSpec: {
       color: '#B78AF7',
     },
     mark: {
-      color: '#B78AF7'
+      color: '#B78AF7',
     },
     dropDown: {
       color: '#CEB0FA',
@@ -66,6 +66,6 @@ export const specializationDark = {
       backgroundColor: '#8133F1',
       color: '#FFFFFF',
       icon: '#FFFFFF',
-    }
+    },
   },
 };

@@ -1,15 +1,15 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './LevelSkeleton.styles';
 import React from 'react';
+import { styles } from './LevelSkeleton.styles';
 
 const LevelSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton variant='rounded' height={30} />
-      <Skeleton variant='rounded' height={50} />
-      <Skeleton variant='rounded' height={40} />
+      <Skeleton height={30} variant='rounded' />
+      <Skeleton height={50} variant='rounded' />
+      <Skeleton height={40} variant='rounded' />
     </Box>
-  )
-}
+  );
+};
 
 export default LevelSkeleton;

@@ -1,18 +1,18 @@
 import React from 'react';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { Typography, CircularProgress } from '@mui/material';
-import ButtonDef from '../../FormsComponents/Buttons/ButtonDef';
 import { useTranslation } from 'react-i18next';
-import FormSelect from '../../FormsComponents/Inputs/FormSelect';
-import TextAreaInput from '../../FormsComponents/Inputs/TextAreaInput';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
+import ButtonDef from '../../FormsComponents/Buttons/ButtonDef';
+import FormSelect from '../../FormsComponents/Inputs/FormSelect';
+import TextAreaInput from '../../FormsComponents/Inputs/TextAreaInput';
+import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../redux/modal/modalSlice';
-import { styles } from './FeedbackProjectModal.styles';
 import { FeedbackProjectModalSchema } from '../../../utils/valadationSchemas/index';
 import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
 import { feedbackOptions } from './constants';
-import { useSnackbar } from 'notistack';
+import { styles } from './FeedbackProjectModal.styles';
 
 const initialValues = {
   select: '',
@@ -65,41 +65,41 @@ const FeedbackProjectModal = () => {
   });
 
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={openFeedback}>
-      <Typography variant='h6' sx={styles.title}>
+    <ModalLayoutProfile open={openFeedback} setOpen={handleClose}>
+      <Typography sx={styles.title} variant='h6'>
         {t('modal.feedbackProjectModal.title')}
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>
         <FormSelect
-          variant='outlined'
-          name='select'
-          value={formik.values.select}
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          label={t('modal.feedbackProjectModal.formSelectLabel')}
+          isTranslated
           required
           countries={feedbackOptions}
-          isTranslated
+          handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
+          label={t('modal.feedbackProjectModal.formSelectLabel')}
+          name='select'
+          value={formik.values.select}
+          variant='outlined'
         />
 
         <TextAreaInput
-          name='feedbackText'
-          value={formik.values.feedbackText}
-          label={t('modal.feedbackProjectModal.textAreaLabel')}
           required
-          placeholder={t('modal.feedbackProjectModal.textPlaceholder')}
-          handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
+          label={t('modal.feedbackProjectModal.textAreaLabel')}
+          name='feedbackText'
+          placeholder={t('modal.feedbackProjectModal.textPlaceholder')}
+          value={formik.values.feedbackText}
         />
 
         <ButtonDef
           fullWidth
+          correctStyle={styles.btn}
+          disabled={!formik.isValid || !formik.dirty || isLoading}
           label={t('modal.feedbackProjectModal.button')}
           type='submit'
           variant='contained'
-          correctStyle={styles.btn}
-          disabled={!formik.isValid || !formik.dirty || isLoading}
         >
           {isLoading ? <CircularProgress size={24} /> : t('modal.feedbackProjectModal.button')}
         </ButtonDef>

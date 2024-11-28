@@ -1,12 +1,14 @@
+import { TAG_TYPES } from '../../utils/constants/tagTypes';
 import { apiSlice } from './api/apiSlice';
-import {TAG_TYPES} from "../../utils/constants/tagTypes";
 
 export const achievementsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchAchievements: builder.query({
       query: (userId) => `/users/${userId}/achievements`,
       providesTags: (result) =>
-        result ? [...result.map(({ id }) => ({ type: TAG_TYPES.Achievement, id })), TAG_TYPES.Achievement] : [TAG_TYPES.Achievement],
+        result
+          ? [...result.map(({ id }) => ({ type: TAG_TYPES.Achievement, id })), TAG_TYPES.Achievement]
+          : [TAG_TYPES.Achievement],
     }),
     deleteAchievement: builder.mutation({
       query: (id) => ({

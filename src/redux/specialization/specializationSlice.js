@@ -9,13 +9,13 @@ const specializationSlice = createSlice({
   },
   reducers: {
     setActiveSpecialization: (state, { payload }) => {
-      state.activeSpecialization = payload
+      state.activeSpecialization = payload;
     },
     setMainSpecializations: (state, { payload }) => {
       if (Array.isArray(payload)) {
         state.fullSpecializations = payload;
-        state.mainSpecialization =  payload.find((spec) => spec.main);
-        return
+        state.mainSpecialization = payload.find((spec) => spec.main);
+        return;
       }
 
       state.mainSpecialization = null;

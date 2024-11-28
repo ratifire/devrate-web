@@ -17,11 +17,11 @@ const HardSkills = () => {
 
   return (
     <SpecializationSkills
-      isFetching={isFetching}
-      skills={skills}
       averageMark={averageMark}
       isError={isError}
+      isFetching={isFetching}
       openModal={handleModalOpen}
+      skills={skills}
       subTitle='specialization.hardSkills.averageMark'
       title='specialization.hardSkills.title'
     />

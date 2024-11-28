@@ -9,8 +9,8 @@ import { useCreateAchievementMutation } from '../../../../redux/services/achieve
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
-import { styles } from './AchievementModal.styles';
 import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
+import { styles } from './AchievementModal.styles';
 
 const AchievementModal = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const AchievementModal = () => {
   const handleClose = () => {
     formik.resetForm();
     dispatch(closeModal({ modalName: 'achievement' }));
-  }
+  };
 
   const initialValues = {
     // link: '',
@@ -31,15 +31,14 @@ const AchievementModal = () => {
   };
 
   const onSubmit = async (values) => {
-
     try {
       await createAchievement({
-              userId: id,
-              payload: values,
-            }).unwrap();
+        userId: id,
+        payload: values,
+      }).unwrap();
       handleClose();
-
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error updating achievement:', error);
     }
   };
@@ -55,8 +54,8 @@ const AchievementModal = () => {
   }
 
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={openAchievement}>
-      <Typography variant='subtitle1' sx={styles.title}>
+    <ModalLayoutProfile open={openAchievement} setOpen={handleClose}>
+      <Typography sx={styles.title} variant='subtitle1'>
         {t('modal.achievement.title')}
       </Typography>
 
@@ -64,16 +63,16 @@ const AchievementModal = () => {
         <Box sx={styles.wrapper}>
           <Box sx={styles.input100}>
             <FormInput
-              name='summary'
-              value={formik.values.summary}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='modal.achievement.summary'
               required
-              placeholder='modal.achievement.summary_placeholder'
-              helperText={formik.touched.summary && formik.errors.summary}
               error={formik.touched.summary && Boolean(formik.errors.summary)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.summary && formik.errors.summary}
+              label='modal.achievement.summary'
+              name='summary'
+              placeholder='modal.achievement.summary_placeholder'
+              type='text'
+              value={formik.values.summary}
             />
           </Box>
           {/*commented out <Link> in case if its need it's needed in the future*/}
@@ -93,31 +92,30 @@ const AchievementModal = () => {
           {/*</Box>*/}
           <Box sx={styles.input100}>
             <TextAreaInput
-              name='description'
-              value={formik.values.description}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='modal.achievement.description'
               required
-              rows={3}
-              placeholder='modal.achievement.description_placeholder'
-              helperText={formik.touched.description && formik.errors.description}
               error={formik.touched.description && Boolean(formik.errors.description)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.description && formik.errors.description}
+              label='modal.achievement.description'
+              name='description'
+              placeholder='modal.achievement.description_placeholder'
+              rows={3}
+              type='text'
+              value={formik.values.description}
             />
           </Box>
 
           <ButtonDef
-            variant='contained'
-            type='submit'
-            label={t('profile.modal.btn')}
             correctStyle={styles.workExperienceBtn}
+            label={t('profile.modal.btn')}
+            type='submit'
+            variant='contained'
           />
         </Box>
       </form>
     </ModalLayoutProfile>
   );
 };
-
 
 export default AchievementModal;
