@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { memo } from 'react';
 import styles from './Faq.module.scss';
-import {memo} from 'react';
 import { faqData } from './faqData';
 import ItemFaq from './ItemFaq';
 
@@ -27,19 +27,19 @@ const FaqSection = memo(() => {
   });
 
   return (
-    <section className={styles.faq__bg} id="faq">
-      <div className="container">
+    <section className={styles.faq__bg} id='faq'>
+      <div className='container'>
         <div className={styles.faq}>
           <h2 className={styles.faq__title}>FAQ</h2>
           <div className={styles.faq__columns}>
             <div className={styles.faq__column}>
               {firstColumn.map((item) => (
-                <ItemFaq key={item.id} item={item} openId={openId} handleOnClick={handleOnClick} />
+                <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
               ))}
             </div>
             <div className={styles.faq__column}>
               {secondColumn.map((item) => (
-                <ItemFaq key={item.id} item={item} openId={openId} handleOnClick={handleOnClick} />
+                <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
               ))}
             </div>
           </div>

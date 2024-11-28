@@ -1,18 +1,14 @@
 import React from 'react';
-import styles from './ItemFaq.module.scss';
+import PropTypes from 'prop-types';
 import iconBtn from '../../../assets/icon-bottom.svg';
 import iconOpen from '../../../assets/icon-open-top.svg';
-import PropTypes from 'prop-types';
+import styles from './ItemFaq.module.scss';
 
 const ItemFaq = ({ item, openId, handleOnClick }) => {
   return (
     <div className={styles.item_faq} onClick={() => handleOnClick(item.id)}>
       <div className={styles.item_faq__header}>
-        <img
-          className={styles.item_faq__iconBottom}
-          src={openId === item.id ? iconOpen : iconBtn}
-          alt="iconButton"
-        />
+        <img alt='iconButton' className={styles.item_faq__iconBottom} src={openId === item.id ? iconOpen : iconBtn} />
         <div className={styles.item_faq__question}>
           <span className={styles.item_faq__number}>{item.id}</span>
           {item.question}
