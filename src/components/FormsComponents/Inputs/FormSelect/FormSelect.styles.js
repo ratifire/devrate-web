@@ -24,6 +24,14 @@ export const styles = {
     '& .MuiSelect-icon': {
       color: theme.palette.modals.inputs.textColor.default,
     },
+    '&.Mui-disabled': {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: '#3E3E40',
+      },
+      '& >.MuiSvgIcon-root': {
+        color: '#69696B',
+      },
+    },
   }),
   label: (theme) => ({
     '&.Mui-focused': {
@@ -33,7 +41,10 @@ export const styles = {
       color: theme.palette.modals.select.labelColor.error,
     },
     '&.Mui-required .MuiFormLabel-asterisk': {
-      color: theme.palette.modals.select.labelColor.required
+      color: theme.palette.modals.select.labelColor.required,
+    },
+    '&.Mui-disabled': {
+      color: '#69696B',
     },
   }),
   textHelper: {
@@ -57,6 +68,9 @@ export const styles = {
       backgroundColor: `${theme.palette.modals.select.selectedField.selected.backgroundColor} !important`,
       color: `${theme.palette.modals.select.selectedField.selected.color} !important`,
     },
+    '.MuiMenuItem-root.Mui-focusVisible': {
+      backgroundColor: `${theme.palette.modals.select.selectedField.selected.backgroundColor}`,
+    },
   }),
   dropdownPaper: {
     maxHeight: '200px',
@@ -64,7 +78,7 @@ export const styles = {
   },
   menuItem: (theme) => ({
     '&:hover': {
-      backgroundColor: theme.palette.modals.select.selectedField.hover
+      backgroundColor: theme.palette.modals.select.selectedField.hover,
     },
   }),
 };

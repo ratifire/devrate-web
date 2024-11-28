@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import ModalLayout from '../../../../layouts/ModalLayout';
 import { Box, CircularProgress, Link, Typography } from '@mui/material';
-import styles from './RegistrationModal.styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 import { RegistrationSchema } from '../../../../utils/valadationSchemas/index';
 import { AdvancedFormSelector, FormCheckbox, FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import ModalLayout from '../../../../layouts/ModalLayout';
 import { useCreateUserMutation } from '../../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
+import styles from './RegistrationModal.styles';
 
 const initialValues = {
   email: '',
@@ -49,21 +49,26 @@ const RegistrationModal = () => {
     formik.setFieldValue('country', country);
   }, [country]);
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = async (values, { resetForm, setErrors }) => {
     const { email, firstName, lastName, country, news, password } = values;
-    createUser({
-      email,
-      firstName,
-      lastName,
-      country,
-      subscribed: news,
-      password,
-    });
+    try {
+      await createUser({
+        email,
+        firstName,
+        lastName,
+        country,
+        subscribed: news,
+        password,
+      }).unwrap();
 
-    resetForm();
-    dispatch(closeModal({ modalName: 'openRegistration' }));
-    dispatch(openModal({ modalName: 'openConfirmation', data: email }));
+      resetForm();
+      dispatch(closeModal({ modalName: 'openRegistration' }));
+      dispatch(openModal({ modalName: 'openConfirmation', data: email }));
+    } catch (error) {
+      if (error.status === 409) setErrors({ email: 'This email is already in use' });
+    }
   };
+
   const formik = useFormik({
     initialValues,
     validationSchema: RegistrationSchema,
@@ -88,126 +93,126 @@ const RegistrationModal = () => {
     <CircularProgress />
   ) : (
     <ModalLayout open={openRegistration} setOpen={handleClose}>
-      <Typography variant='h5' sx={styles.title}>
+      <Typography sx={styles.title} variant='h5'>
         {changeColorOfLastTitleWord(t('modal.registration.title'))}
       </Typography>
-      <form className='landingForm' onSubmit={formik.handleSubmit} style={{ width: '100%' }} autoComplete='off'>
+      <form autoComplete='off' className='landingForm' style={{ width: '100%' }} onSubmit={formik.handleSubmit}>
         <FormInput
-          name='email'
-          value={formik.values.email}
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          type='email'
-          label='modal.registration.email'
-          helperText={formik.touched.email && formik.errors.email}
-          error={formik.touched.email && Boolean(formik.errors.email)}
           autoComplete='off'
-          placeholder='example@example.com'
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
           handleKeyDown={handleKeyDown}
+          helperText={formik.touched.email && formik.errors.email}
+          label='modal.registration.email'
+          name='email'
+          placeholder='example@example.com'
+          type='email'
+          value={formik.values.email}
         />
         <Box sx={styles.inputNameContainer}>
           <FormInput
-            name='firstName'
-            value={formik.values.firstName}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            type='text'
-            label='modal.registration.first_name'
-            helperText={formik.touched.firstName && formik.errors.firstName}
-            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
             autoComplete='off'
+            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.firstName && formik.errors.firstName}
+            label='modal.registration.first_name'
+            name='firstName'
+            type='text'
+            value={formik.values.firstName}
           />
           <FormInput
+            autoComplete='off'
+            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.lastName && formik.errors.lastName}
+            label='modal.registration.last_name'
             name='lastName'
             value={formik.values.lastName}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            label='modal.registration.last_name'
-            helperText={formik.touched.lastName && formik.errors.lastName}
-            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-            autoComplete='off'
           />
         </Box>
         <AdvancedFormSelector
-          variant='outlined'
+          autoComplete='off'
+          countries={userCountries}
+          error={formik.touched.country && Boolean(formik.errors.country)}
+          handleBlur={formik.handleBlur}
+          handleChange={handleChangeCountry}
+          helperText={formik.touched.country && formik.errors.country}
+          label='modal.registration.country'
           name='country'
           value={formik.values.country}
-          handleChange={handleChangeCountry}
-          handleBlur={formik.handleBlur}
-          label='modal.registration.country'
-          error={formik.touched.country && Boolean(formik.errors.country)}
-          helperText={formik.touched.country && formik.errors.country}
-          countries={userCountries}
-          autoComplete='off'
+          variant='outlined'
         />
         <FormInput
-          showPassword={showPassword}
-          type='password'
-          name='password'
-          value={formik.values.password}
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          label='modal.registration.password'
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-          clickHandler={handleClickShowPassword}
-          mouseDownHandler={handleMouseDownPassword}
-          autoComplete='new-password'
-          iconStyle={styles.iconStyle}
           signupPassword
-        />
-        <FormInput
+          autoComplete='new-password'
+          clickHandler={handleClickShowPassword}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
+          helperText={formik.touched.password && formik.errors.password}
+          iconStyle={styles.iconStyle}
+          label='modal.registration.password'
+          mouseDownHandler={handleMouseDownPassword}
+          name='password'
           showPassword={showPassword}
           type='password'
-          name='repeatPassword'
-          value={formik.values.repeatPassword}
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          label='modal.registration.password_repeat'
-          error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
-          helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
-          clickHandler={handleClickShowPassword}
-          mouseDownHandler={handleMouseDownPassword}
+          value={formik.values.password}
+        />
+        <FormInput
           autoComplete='new-password'
+          clickHandler={handleClickShowPassword}
+          error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
+          handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
+          helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
           iconStyle={styles.iconStyle}
+          label='modal.registration.password_repeat'
+          mouseDownHandler={handleMouseDownPassword}
+          name='repeatPassword'
+          showPassword={showPassword}
+          type='password'
+          value={formik.values.repeatPassword}
         />
         <FormCheckbox
-          checked={formik.values.news}
           changeHandler={formik.handleChange}
-          name='news'
+          checked={formik.values.news}
+          error={formik.touched.news && Boolean(formik.errors.news)}
           helperText={formik.touched.news && formik.errors.news}
           label='modal.registration.news_letter'
-          error={formik.touched.news && Boolean(formik.errors.news)}
+          name='news'
         />
         <FormCheckbox
-          checked={formik.values.agreement}
           changeHandler={formik.handleChange}
-          name='agreement'
+          checked={formik.values.agreement}
+          error={formik.touched.agreement && Boolean(formik.errors.agreement)}
           helperText={formik.touched.agreement && formik.errors.agreement}
           label='modal.registration.agreement'
-          error={formik.touched.agreement && Boolean(formik.errors.agreement)}
+          name='agreement'
         />
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
-            variant='contained'
-            type='submit'
-            handlerClick={formik.handleSubmit}
-            disabled={!isFormValid}
-            label='modal.registration.btn_register'
             correctStyle={styles.submitBtn}
+            disabled={!isFormValid}
+            handlerClick={formik.handleSubmit}
+            label='modal.registration.btn_register'
+            type='submit'
+            variant='contained'
           />
         </Box>
         <Box sx={styles.policyTermsContainer}>
           <Link
-            to={'/privacy_policy'}
             aria-disabled
             component={RouterLink}
             sx={styles.policyTermsLink}
+            to={'/privacy_policy'}
             onClick={handleClose}
           >
             {t('modal.registration.privacy_policy')}
           </Link>
-          <Link to={'/terms_and_conditions'} component={RouterLink} sx={styles.policyTermsLink} onClick={handleClose}>
+          <Link component={RouterLink} sx={styles.policyTermsLink} to={'/terms_and_conditions'} onClick={handleClose}>
             {t('modal.registration.terms_and_conditions')}
           </Link>
         </Box>

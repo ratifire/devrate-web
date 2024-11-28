@@ -40,7 +40,7 @@ export const useProfileProgress = (userId) => {
       newProgress += 20;
     }
 
-    if (userContacts && Object.values(userContacts).some(value => value)) {
+    if (userContacts && Object.values(userContacts).some((value) => value)) {
       newProgress += 10;
     }
 

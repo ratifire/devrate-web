@@ -4,17 +4,17 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, Link, Typography } from '@mui/material';
+import Cookies from 'js-cookie';
+import CancelIcon from '@mui/icons-material/Cancel';
 import ModalLayout from '../../../../layouts/ModalLayout';
-import styles from './LoginModal.styles';
 import { LoginSchema } from '../../../../utils/valadationSchemas/index';
 import { FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../../redux/auth/authSlice';
-import Cookies from 'js-cookie';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
-import CancelIcon from '@mui/icons-material/Cancel';
+import styles from './LoginModal.styles';
 
 const initialValues = {
   email: '',
@@ -90,44 +90,44 @@ const LoginModal = () => {
 
   return (
     <ModalLayout open={openLogin} setOpen={handleClose}>
-      <Typography variant='h5' sx={styles.title}>
+      <Typography sx={styles.title} variant='h5'>
         {changeColorOfLastTitleWord(t('modal.login.title'))}
       </Typography>
-      <Typography variant='subtitle2' sx={styles.subtitle}>
+      <Typography sx={styles.subtitle} variant='subtitle2'>
         {t('modal.login.subtitle')}
       </Typography>
-      <form className='landingForm' onSubmit={handleFormSubmit} style={{ width: '100%' }}>
+      <form className='landingForm' style={{ width: '100%' }} onSubmit={handleFormSubmit}>
         <FormInput
-          name='email'
-          value={formik.values.email}
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          type='email'
-          label='modal.registration.email'
-          helperText={formik.touched.email && formik.errors.email}
-          error={formik.touched.email && Boolean(formik.errors.email)}
           autoComplete='email'
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
+          helperText={formik.touched.email && formik.errors.email}
+          label='modal.registration.email'
+          name='email'
+          type='email'
+          value={formik.values.email}
         />
         <FormInput
+          autoComplete='new-password'
+          clickHandler={handleClickShowPassword}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
+          helperText={formik.touched.password && formik.errors.password}
+          iconStyle={styles.iconStyle}
+          label='modal.registration.password'
+          mouseDownHandler={handleMouseDownPassword}
+          name='password'
           showPassword={showPassword}
           type='password'
-          name='password'
           value={formik.values.password}
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          label='modal.registration.password'
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-          clickHandler={handleClickShowPassword}
-          mouseDownHandler={handleMouseDownPassword}
-          iconStyle={styles.iconStyle}
-          autoComplete='new-password'
         />
 
         {loginError && (
           <Box sx={styles.codeErrorWrapper}>
             <CancelIcon sx={styles.codeErrorIcon} />
-            <Typography variant='subtitle2' sx={styles.codeErrorText}>
+            <Typography sx={styles.codeErrorText} variant='subtitle2'>
               {loginError}
             </Typography>
           </Box>
@@ -135,24 +135,24 @@ const LoginModal = () => {
 
         <Box sx={styles.textLink}>
           <ButtonDef
-            variant='text'
             correctStyle={styles.turnBackLink}
             handlerClick={handleOpen}
-            type='button'
             label='modal.login.forgot_your_password'
+            type='button'
+            variant='text'
           />
         </Box>
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
-            variant='contained'
-            type='submit'
+            correctStyle={styles.submitBtn}
             disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
             label='modal.login.btn_login'
-            correctStyle={styles.submitBtn}
+            type='submit'
+            variant='contained'
           />
         </Box>
         <Box sx={styles.policyLinkBox}>
-          <Typography variant='caption1' sx={styles.policyText}>
+          <Typography sx={styles.policyText} variant='caption1'>
             {t('modal.login.text_privacy')}
           </Typography>
           <Box>

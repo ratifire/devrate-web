@@ -125,10 +125,10 @@ export const uk = {
         required: "Це обов'язкове поле",
         first_name_long: 'Імʼя занадто довге',
         first_name_short: 'Імʼя занадто коротке',
-        first_name_invalid_characters: 'Обрізати кінцеві символи імені',
+        first_name_invalid_characters: 'Дозволені лише великі та малі літери',
         last_name_long: 'Прізвище занадто довге',
         last_name_short: 'Прізвище занадто коротке',
-        last_name_invalid_characters: 'Обрізати кінцеві символи призвища',
+        last_name_invalid_characters: 'Дозволені лише великі та малі літери',
         password_short: 'Пароль занадто короткий',
         password_long: 'Пароль занадто довгий',
         password_must_match: 'Паролі мають збігатися',
@@ -269,6 +269,7 @@ export const uk = {
         },
         right: {
           empty: {
+            emptyContacts: 'Ви ще не додали жодного контакту',
             emptyLanguages: 'Ви ще не додали жодної мови.',
             emptyAboutMe:
               'Ви ще не додали інформацію про себе.\n' +

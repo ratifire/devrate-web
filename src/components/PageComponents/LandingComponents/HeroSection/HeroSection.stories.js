@@ -1,8 +1,8 @@
-import HeroSection from './HeroSection';
-import { decorators } from '../../../../../.storybook/preview';
-import { store } from '../../../../redux/store/store';
 import { Provider } from 'react-redux';
 import React from 'react';
+import { decorators } from '../../../../../.storybook/preview';
+import { store } from '../../../../redux/store/store';
+import HeroSection from './HeroSection';
 
 export default {
   title: 'LandingComponents/HeroSection',

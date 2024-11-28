@@ -1,15 +1,15 @@
 import { apiSlice } from '../api/apiSlice';
+import { TAG_TYPES } from '../../../utils/constants/tagTypes';
 
 export const DefaultLanguageApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['DefLanguage'],
   endpoints: (builder) => ({
     getDefLanguageLevel: builder.query({
       query: (fileName) => `/data/languageproficiency/${fileName}`,
-      providesTags: (result, error, id) => (result ? [{ type: 'DefLanguage', id }] : []),
+      providesTags: (result, error, id) => (result ? [{ type: TAG_TYPES.DefLanguage, id }] : []),
     }),
     getDefLanguage: builder.query({
       query: (fileName) => `/data/languageproficiency/${fileName}`,
-      providesTags: (result, error, id) => (result ? [{ type: 'DefLanguage', id }] : []),
+      providesTags: (result, error, id) => (result ? [{ type: TAG_TYPES.DefLanguage, id }] : []),
     }),
   }),
 });

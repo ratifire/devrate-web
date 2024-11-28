@@ -1,19 +1,21 @@
+import { TAG_TYPES } from '../../utils/constants/tagTypes';
 import { apiSlice } from './api/apiSlice';
 
 export const achievementsApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['Achievement'],
   endpoints: (builder) => ({
     fetchAchievements: builder.query({
       query: (userId) => `/users/${userId}/achievements`,
       providesTags: (result) =>
-        result ? [...result.map(({ id }) => ({ type: 'Achievement', id })), 'Achievement'] : ['Achievement'],
+        result
+          ? [...result.map(({ id }) => ({ type: TAG_TYPES.Achievement, id })), TAG_TYPES.Achievement]
+          : [TAG_TYPES.Achievement],
     }),
     deleteAchievement: builder.mutation({
       query: (id) => ({
         url: `/achievements/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Achievement', id }],
+      invalidatesTags: (result, error, id) => [{ type: TAG_TYPES.Achievement, id }],
     }),
     updateAchievement: builder.mutation({
       query: ({ id, payload }) => ({
@@ -21,7 +23,7 @@ export const achievementsApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: payload,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Achievement', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: TAG_TYPES.Achievement, id }],
     }),
     createAchievement: builder.mutation({
       query: ({ payload, userId }) => ({
@@ -29,7 +31,7 @@ export const achievementsApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: payload,
       }),
-      invalidatesTags: ['Achievement'],
+      invalidatesTags: [TAG_TYPES.Achievement],
     }),
   }),
 });

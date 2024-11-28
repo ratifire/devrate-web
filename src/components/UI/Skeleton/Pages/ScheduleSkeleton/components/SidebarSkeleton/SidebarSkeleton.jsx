@@ -5,10 +5,10 @@ import { styles } from './SidebarSkeleton.styles';
 const SidebarSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton sx={styles.title} variant='rectangular' height={30} />
-      <Skeleton variant='rectangular' height={210} />
+      <Skeleton height={30} sx={styles.title} variant='rectangular' />
+      <Skeleton height={210} variant='rectangular' />
     </Box>
-  )
-}
+  );
+};
 
 export default SidebarSkeleton;

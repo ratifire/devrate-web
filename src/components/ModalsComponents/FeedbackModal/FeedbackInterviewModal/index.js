@@ -1,4 +1,3 @@
-import FeedbackInterviewModal from './FeedbackInterviewModal'
+import FeedbackInterviewModal from './FeedbackInterviewModal';
 
-export { FeedbackInterviewModal }
-
+export { FeedbackInterviewModal };

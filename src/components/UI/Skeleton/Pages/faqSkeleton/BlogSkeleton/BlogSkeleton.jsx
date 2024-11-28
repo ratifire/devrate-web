@@ -1,19 +1,19 @@
-import { styles } from './BlogSkeleton.styles';
 import { Box, Skeleton } from '@mui/material';
 import React from 'react';
+import { styles } from './BlogSkeleton.styles';
 
 const BlogSkeleton = () => {
   return (
     <Box sx={styles.box}>
-      <Skeleton sx={styles.title} variant='rounded' height={32} />
+      <Skeleton height={32} sx={styles.title} variant='rounded' />
       <Box sx={styles.list}>
-        <Skeleton sx={styles.card} variant='rounded' height={280} />
-        <Skeleton sx={styles.card} variant='rounded' height={280} />
-        <Skeleton sx={styles.card} variant='rounded' height={280} />
-        <Skeleton sx={styles.card} variant='rounded' height={280} />
+        <Skeleton height={280} sx={styles.card} variant='rounded' />
+        <Skeleton height={280} sx={styles.card} variant='rounded' />
+        <Skeleton height={280} sx={styles.card} variant='rounded' />
+        <Skeleton height={280} sx={styles.card} variant='rounded' />
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default BlogSkeleton;

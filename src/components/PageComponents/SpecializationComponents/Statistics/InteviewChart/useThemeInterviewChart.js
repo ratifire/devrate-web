@@ -1,7 +1,7 @@
 import { useTheme } from '@mui/material/styles';
 
 const useThemeInterviewChart = () => {
-  const theme = useTheme()
+  const theme = useTheme();
 
   const conductedGrad1 = theme.palette.specialization.interviewChart.conductedGrad1;
   const conductedGrad2 = theme.palette.specialization.interviewChart.conductedGrad2;
@@ -18,7 +18,7 @@ const useThemeInterviewChart = () => {
     passedGrad1,
     passedGrad2,
     passedGrad3,
-  }
-}
+  };
+};
 
 export default useThemeInterviewChart;

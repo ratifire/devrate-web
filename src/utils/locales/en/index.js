@@ -123,10 +123,10 @@ export const en = {
         required: 'This is a required field',
         first_name_long: 'Name too long',
         first_name_short: 'Name too short',
-        first_name_invalid_characters: 'Trim trailing name characters',
+        first_name_invalid_characters: 'Only uppercase and lowercase letters allowed',
         last_name_long: 'Last name too long',
         last_name_short: 'Surname too short',
-        last_name_invalid_characters: 'Trim the last characters of the last name',
+        last_name_invalid_characters: 'Only uppercase and lowercase letters allowed',
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
@@ -268,6 +268,7 @@ export const en = {
       },
       right: {
         empty: {
+          emptyContacts: 'You have not added any contact yet.',
           emptyLanguages: 'You have not added any language yet.',
           emptyAboutMe:
             'You have not added information about yourself yet.\n' +
@@ -403,7 +404,7 @@ export const en = {
       },
     },
     specialization: {
-      specialization_title: 'Specialisations',
+      specialization_title: 'Specializations',
       specialization_btn_make_main: 'Make the main',
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',

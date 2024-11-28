@@ -10,7 +10,6 @@ export const styles = {
     flexDirection: 'column',
     backgroundColor: '#252527',
     zIndex: 1000,
-
   },
   popupTriangularBottomLeft: (theme) => ({
     position: 'absolute',
@@ -61,7 +60,6 @@ export const styles = {
     right: 0,
     top: 0,
     color: theme.palette.schedule.popup.closeIconColor,
-
   }),
   infoContainer: (theme) => ({
     display: 'flex',

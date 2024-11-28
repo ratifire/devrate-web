@@ -9,7 +9,7 @@ const RequireAuth = () => {
 
   const isAuthenticated = currentUser?.isAuthenticated;
 
-  return isAuthenticated ? <Outlet /> : <Navigate to='/' state={{ from: location }} replace />;
+  return isAuthenticated ? <Outlet /> : <Navigate replace state={{ from: location }} to='/' />;
 };
 
 export default RequireAuth;

@@ -1,35 +1,47 @@
 import React from 'react';
 import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
-import { styles } from './TextAreaInput.styles';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
 
 import PropTypes from 'prop-types';
+import { styles } from './TextAreaInput.styles';
 
-const TextAreaInput = ({ name, value, label, required, rows, placeholder, type, error, helperText, handleChange, handleBlur }) => {
+const TextAreaInput = ({
+  name,
+  value,
+  label,
+  required,
+  rows,
+  placeholder,
+  type,
+  error,
+  helperText,
+  handleChange,
+  handleBlur,
+}) => {
   const { t } = useTranslation();
   const id = uuid();
 
   return (
     <>
-      <FormControl variant='outlined' sx={styles.textareaBox} error={error}>
-        <InputLabel htmlFor={id} sx={styles.label} required={required}>
+      <FormControl error={error} sx={styles.textareaBox} variant='outlined'>
+        <InputLabel htmlFor={id} required={required} sx={styles.label}>
           {t(label)}
         </InputLabel>
         <OutlinedInput
-          sx={styles.input}
-          id={id}
-          name={name}
-          value={value}
-          label={t(label)}
-          placeholder={t(placeholder)}
-          rows={rows}
-          type={type}
-          error={error}
           fullWidth
           multiline
-          onChange={handleChange}
+          error={error}
+          id={id}
+          label={t(label)}
+          name={name}
+          placeholder={t(placeholder)}
+          rows={rows}
+          sx={styles.input}
+          type={type}
+          value={value}
           onBlur={handleBlur}
+          onChange={handleChange}
         />
         {error && (
           <FormHelperText id={id} sx={styles.textHelper}>

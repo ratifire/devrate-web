@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import styles from './WorkExperienceItem.styles.js';
 import { useTranslation } from 'react-i18next';
-import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
-import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
+import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import { openModal } from '../../../../../../../redux/modal/modalSlice';
 import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/workExperience/workExperienceApiSlice';
+import styles from './WorkExperienceItem.styles.js';
 
 const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
   const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();
@@ -24,7 +24,12 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   };
 
   const handleEditFeature = () => {
-    dispatch(openModal({ modalName: 'workExperience', data: { id, position, companyName, description, responsibilities, startYear, endYear } }));
+    dispatch(
+      openModal({
+        modalName: 'workExperience',
+        data: { id, position, companyName, description, responsibilities, startYear, endYear },
+      })
+    );
     handleCloseMenu();
   };
 
@@ -36,33 +41,34 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
     <Box sx={styles.workExperienceItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
         <Box sx={styles.workTitleContainer}>
-          <Typography variant='h5' sx={styles.workPosition}>
+          <Typography sx={styles.workPosition} variant='h5'>
             {position}
           </Typography>
-          <Typography variant="subtitle3" sx={styles.workPlaceTitle}>
+          <Typography sx={styles.workPlaceTitle} variant='subtitle3'>
             {companyName} <span style={{ margin: '0 4px' }}>•</span>
             {endYear === '9999' ? `${startYear} - ${t('profile.experience.endYear')}` : `${startYear} - ${endYear}`}
           </Typography>
         </Box>
         <Box sx={styles.menuIcon}>
-          <IconButton onClick={(event) => handleMenuOpen(event)} sx={styles.iconBtnModal}>
+          <IconButton sx={styles.iconBtnModal} onClick={(event) => handleMenuOpen(event)}>
             <MoreVertIcon />
           </IconButton>
         </Box>{' '}
         <DropdownMenu
           anchorEl={anchorEl}
           handleCloseMenu={handleCloseMenu}
-          handleEditFeature={handleEditFeature}
           handleDeleteFeature={handleDeleteFeature}
+          handleEditFeature={handleEditFeature}
         />
       </Box>
       <Typography>{description}</Typography>
       <Box sx={styles.workDutiesContainer}>
-        <Typography variant='h6' sx={styles.workDutiesTitle}>
+        <Typography sx={styles.workDutiesTitle} variant='h6'>
           {t('profile.experience.duties')}
         </Typography>
         <Box sx={styles.workDuties}>
           {responsibilities.map((responsibility, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <Responsibility key={index} responsibility={responsibility} />
           ))}
         </Box>

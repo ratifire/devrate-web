@@ -1,7 +1,7 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import { decorators } from '../../../../.storybook/preview';
 import LanguageLevel from './LanguageLevel';
-import { Box } from '@mui/material';
 
 export default {
   title: 'UI/LanguageLevel',
@@ -31,6 +31,7 @@ const languageLevel = [
 ];
 
 const languageDeleteHandler = (language) => {
+  // eslint-disable-next-line no-console
   console.log(`Deleting language: ${language}`);
   // Here should be added more logic to handle deletion of the languages in Modal
 };
@@ -48,9 +49,9 @@ export const Default = () => (
       <LanguageLevel
         key={id}
         language={language}
+        languageDeleteHandler={languageDeleteHandler}
         level={level}
         tobeDeleted={tobeDeleted}
-        languageDeleteHandler={languageDeleteHandler}
       />
     ))}
   </Box>

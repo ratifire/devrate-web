@@ -1,3 +1,3 @@
-import SliderAssessment from './SliderAssessment'
+import SliderAssessment from './SliderAssessment';
 
-export { SliderAssessment }
+export { SliderAssessment };

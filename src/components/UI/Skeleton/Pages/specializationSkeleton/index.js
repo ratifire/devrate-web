@@ -15,5 +15,5 @@ export {
   LevelChartSkeleton,
   SkillsAssessmentChartSkeleton,
   HardSkillsChartSkeleton,
-  InterviewChartSkeleton
+  InterviewChartSkeleton,
 };

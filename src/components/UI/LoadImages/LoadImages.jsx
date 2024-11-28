@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { ButtonDef } from '../../FormsComponents/Buttons';
 import { styles } from './LoadImages.styles';
 
-const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
+const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled, onChange }) => {
   const editor = useRef(null);
   const { t } = useTranslation();
 
@@ -71,6 +71,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
         await checkImageDimensions(image);
         setSettingsCanvas((prev) => ({ ...prev, image }));
         setError('');
+        handleChange(image);
       } catch (err) {
         setError(err.message);
       }
@@ -88,13 +89,18 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
     onDrop,
   });
 
+  const handleChangeImg = () => {
+    const img = editor.current.getImageScaledToCanvas().toDataURL();
+    onChange(img);
+  };
+
   return (
     <Box sx={styles.wrapper}>
-      <input type='hidden' value={value} onChange={handleChange} onBlur={handleBlur} />
+      <input type='hidden' value={value} onBlur={handleBlur} onChange={handleChange} />
       <Box sx={styles.dropZoneWrapper}>
         <input {...getInputProps()} />
         <Box sx={styles.dropZone}>
-          <Typography variant='caption1' sx={styles.text}>
+          <Typography sx={styles.text} variant='caption1'>
             {t('profile.modal.userInfo.photo.dropPhoto.first')}
             <br />
             {t('profile.modal.userInfo.photo.dropPhoto.second')}
@@ -115,14 +121,15 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
           <>
             <AvatarEditor
               ref={editor}
-              width={240}
-              height={240}
-              borderRadius={settingsCanvas.borderRadius}
-              image={settingsCanvas.image}
-              style={styles.preview}
               border={50}
+              borderRadius={settingsCanvas.borderRadius}
               color={[29, 29, 29, 0.25]}
+              height={240}
+              image={settingsCanvas.image}
               scale={scale}
+              style={styles.preview}
+              width={240}
+              onImageChange={handleChangeImg}
               onWheel={handleWheel}
             />
             <Box sx={styles.customBorder} />
@@ -136,15 +143,15 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value }) => {
       </Box>
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          variant='contained'
-          type='submit'
+          correctStyle={styles.btn}
+          disabled={isDisabled || !settingsCanvas.image || !!error}
           handlerClick={handleSave}
           label='profile.modal.btn'
-          correctStyle={styles.btn}
-          disabled={!settingsCanvas.image || !!error}
+          type='submit'
+          variant='contained'
         />
         {value && (
-          <IconButton sx={styles.btnIcon} onClick={handleClickDelete} aria-label='Delete user Avatar'>
+          <IconButton aria-label='Delete user Avatar' sx={styles.btnIcon} onClick={handleClickDelete}>
             <DeleteIcon />
           </IconButton>
         )}
@@ -158,6 +165,8 @@ LoadImages.propTypes = {
   handleBlur: PropTypes.func.isRequired,
   handlerDelete: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
 };
 
 export default React.memo(LoadImages);

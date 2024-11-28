@@ -49,26 +49,28 @@ The frontend of the application is built using modern web technologies and frame
 - [i18next](https://www.i18next.com/)
 - [luxon](https://moment.github.io/luxon/#/)
 - [classnames](https://github.com/JedWatson/classnames#readme/)
-- [@emotion/react](https://emotion.sh/docs/@emotion/react) 
-- [@emotion/styled](https://emotion.sh/docs/@emotion/styled) 
-- [@mui/icons-material](https://mui.com/components/material-icons/) 
-- [@mui/x-date-pickers](https://mui.com/x/react-date-pickers/getting-started/) 
-- [dayjs](https://day.js.org/) 
-- [react-avatar-editor](https://github.com/mosch/react-avatar-editor) 
+- [@emotion/react](https://emotion.sh/docs/@emotion/react)
+- [@emotion/styled](https://emotion.sh/docs/@emotion/styled)
+- [@mui/icons-material](https://mui.com/components/material-icons/)
+- [@mui/x-date-pickers](https://mui.com/x/react-date-pickers/getting-started/)
+- [dayjs](https://day.js.org/)
+- [react-avatar-editor](https://github.com/mosch/react-avatar-editor)
 - [react-dropzone](https://react-dropzone.js.org/)
 - [react-i18next](https://react.i18next.com/)
-
 
 ## Test Account
 
 For testing and demonstration purposes, use the following credentials:
+
 1. **User 1**
-  - Email: john.rate3@tutamail.com
-  - Password: Dev1234!!
+
+- Email: john.rate3@tutamail.com
+- Password: Dev1234!!
 
 2. **User 2**
-  - Email: dev.rate3@proton.me
-  - Password: Dev1234!
+
+- Email: dev.rate3@proton.me
+- Password: Dev1234!
 
 ## How to Contribute
 
@@ -87,7 +89,3 @@ To run the application locally, follow these steps:
 3. Navigate to the project directory.
 4. Run `npm install` to install dependencies.
 5. Run `npm start` to start the development server.
-
-## Resources
-
-to be added later

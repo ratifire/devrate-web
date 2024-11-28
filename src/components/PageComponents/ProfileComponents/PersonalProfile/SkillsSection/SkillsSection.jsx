@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { styles } from './SkillsSection.styles';
-import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import { useSelector } from 'react-redux';
+import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { styles } from './SkillsSection.styles';
 
 const SkillsSection = () => {
   const { data: info } = useSelector(selectCurrentUser);
@@ -16,53 +16,49 @@ const SkillsSection = () => {
   const { hardSkillMark = 0, softSkillMark = 0, completedInterviews = 0, conductedInterviews = 0 } = userData;
   return (
     <Box sx={styles.skillsWrapper}>
-      <Typography variant="h6" sx={styles.skillsTitle}>
+      <Typography sx={styles.skillsTitle} variant='h6'>
         {t('profile.skills.skillsTitle')}
       </Typography>
       <Box sx={styles.hardSkills}>
-        <Typography variant="h6" sx={styles.skillsText}>
+        <Typography sx={styles.skillsText} variant='h6'>
           {t('profile.skills.hardSkills')}:
         </Typography>
 
         <Rating
-          name="hard-skills-rating"
-          value={hardSkillMark / 2}
-          precision={0.5}
           readOnly
+          name='hard-skills-rating'
+          precision={0.5}
           sx={styles.skillsRatingValue}
+          value={hardSkillMark / 2}
         />
 
-        <Typography variant="subtitle2" sx={styles.skillMark}>
+        <Typography sx={styles.skillMark} variant='subtitle2'>
           {hardSkillMark}/10
         </Typography>
       </Box>
       <Box sx={styles.softSkills}>
-        <Typography variant="h6" sx={styles.skillsText}>
+        <Typography sx={styles.skillsText} variant='h6'>
           {t('profile.skills.softSkills')}:
         </Typography>
         <Rating
-          name="soft-skills-rating"
-          value={softSkillMark / 2}
-          precision={0.5}
           readOnly
+          name='soft-skills-rating'
+          precision={0.5}
           sx={styles.skillsRatingValue}
+          value={softSkillMark / 2}
         />
-        <Typography variant="subtitle2" sx={styles.skillMark}>
+        <Typography sx={styles.skillMark} variant='subtitle2'>
           {softSkillMark}/10
         </Typography>
       </Box>
       <Box sx={styles.interviewHistory}>
         <Box sx={[styles.skillsInterviewBtn, styles.doneInterviewsBtn]}>
-          <Typography variant="subtitle1">
-            {conductedInterviews}
-          </Typography>
-          <Typography variant="caption3">{t('profile.skills.doneInterviews')}</Typography>
+          <Typography variant='subtitle1'>{conductedInterviews}</Typography>
+          <Typography variant='caption3'>{t('profile.skills.doneInterviews')}</Typography>
         </Box>
         <Box sx={[styles.skillsInterviewBtn, styles.completedInterviewsBtn]}>
-          <Typography variant="subtitle1">
-            {completedInterviews}
-          </Typography>
-          <Typography variant="caption3">{t('profile.skills.completedInterviews')}</Typography>
+          <Typography variant='subtitle1'>{completedInterviews}</Typography>
+          <Typography variant='caption3'>{t('profile.skills.completedInterviews')}</Typography>
         </Box>
       </Box>
     </Box>

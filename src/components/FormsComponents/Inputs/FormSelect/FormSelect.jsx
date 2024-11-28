@@ -2,41 +2,35 @@ import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/
 import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
-import { styles } from './FormSelect.styles';
 import { useTranslation } from 'react-i18next';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { styles } from './FormSelect.styles';
 
 const FormSelect = ({
-                      variant,
-                      name,
-                      value,
-                      handleChange,
-                      handleBlur,
-                      label,
-                      required,
-                      error,
-                      helperText,
-                      countries,
-                      disabled,
-                      isTranslated,
-                    }) => {
+  variant,
+  name,
+  value,
+  handleChange,
+  handleBlur,
+  label,
+  required,
+  error,
+  helperText,
+  countries,
+  disabled,
+  isTranslated,
+}) => {
   const id = uuid();
   const { t } = useTranslation();
   return (
-    <FormControl fullWidth variant={variant} sx={styles.wrapper} error={error} disabled={disabled}>
-      <InputLabel htmlFor={id} sx={styles.label} required={required}>
+    <FormControl fullWidth disabled={disabled} error={error} sx={styles.wrapper} variant={variant}>
+      <InputLabel htmlFor={id} required={required} sx={styles.label}>
         {t(label)}
       </InputLabel>
       <Select
-        sx={styles.input}
-        id={id}
-        name={name}
-        value={value}
-        label={t(label)}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        error={error}
         IconComponent={KeyboardArrowDownIcon}
+        error={error}
+        id={id}
         inputProps={{
           MenuProps: {
             PaperProps: {
@@ -45,10 +39,17 @@ const FormSelect = ({
             sx: styles.selectField,
           },
         }}
+        label={t(label)}
+        name={name}
+        sx={styles.input}
+        value={value}
+        onBlur={handleBlur}
+        onChange={handleChange}
       >
         {countries.map((country, index) => (
-          <MenuItem key={index} value={country} sx={styles.menuItem}>
-            {isTranslated ? t(`modal.feedbackProjectModal.type_of_feedback.${country}`)  : country }
+          // eslint-disable-next-line react/no-array-index-key
+          <MenuItem key={index} sx={styles.menuItem} value={country}>
+            {isTranslated ? t(`modal.feedbackProjectModal.type_of_feedback.${country}`) : country}
           </MenuItem>
         ))}
       </Select>
@@ -64,10 +65,7 @@ const FormSelect = ({
 FormSelect.propTypes = {
   variant: PropTypes.oneOf(['standard', 'filled', 'outlined']).isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([
-    PropTypes.number.isRequired,
-    PropTypes.string.isRequired,
-  ]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.number.isRequired, PropTypes.string.isRequired]).isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func,
   label: PropTypes.string.isRequired,
@@ -82,10 +80,8 @@ FormSelect.defaultProps = {
   variant: 'outlined',
   name: '',
   value: '',
-  handleChange: () => {
-  },
-  handleBlur: () => {
-  },
+  handleChange: () => {},
+  handleBlur: () => {},
   label: '',
   required: false,
   helperText: '',

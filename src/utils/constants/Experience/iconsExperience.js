@@ -6,7 +6,6 @@ import { ReactComponent as PuzzleIcon } from '../../../assets/icons/Achievements
 import { ReactComponent as Glare } from '../../../assets/icons/AchievementsPageIcons/glare.svg';
 import { ReactComponent as Lamp } from '../../../assets/icons/AchievementsPageIcons/lamp.svg';
 
-
 export const iconsAchievement = {
   Lightning: LightningIcon,
   Star: StarIcon,
@@ -17,9 +16,6 @@ export const iconsAchievement = {
   Lamp: Lamp,
 };
 
-
-
-
 import { ReactComponent as Book } from '../../../assets/icons/EducationPageIcons/book.svg';
 import { ReactComponent as Computer } from '../../../assets/icons/EducationPageIcons/computer.svg';
 import { ReactComponent as Molecule } from '../../../assets/icons/EducationPageIcons/molecule.svg';
@@ -27,7 +23,6 @@ import { ReactComponent as Cap } from '../../../assets/icons/EducationPageIcons/
 import { ReactComponent as Lightbulb } from '../../../assets/icons/EducationPageIcons/lightbulb.svg';
 import { ReactComponent as Chart } from '../../../assets/icons/EducationPageIcons/chart.svg';
 import { ReactComponent as Symbols } from '../../../assets/icons/EducationPageIcons/symbols.svg';
-
 
 export const iconsEducation = {
   Book: Book,
@@ -37,4 +32,4 @@ export const iconsEducation = {
   Lightbulb: Lightbulb,
   Chart: Chart,
   Symbols: Symbols,
-}
+};

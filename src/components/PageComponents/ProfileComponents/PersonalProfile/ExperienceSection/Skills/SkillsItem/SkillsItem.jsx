@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
-import { styles } from './SkillsItem.styles';
 import PropTypes from 'prop-types';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import { useUpdateSkillsMutation } from '../../../../../../../redux/services/skillsApiSlice';
 import { useFormik } from 'formik';
+import { useUpdateSkillsMutation } from '../../../../../../../redux/services/skillsApiSlice';
 import { SkillsItemSchema } from '../../../../../../../utils/valadationSchemas/index';
 import CustomTooltip from '../../../../../../UI/CustomTooltip';
+import { styles } from './SkillsItem.styles';
 
 const SkillsItem = ({ data, flex }) => {
   const { id, name, averageMark, hidden } = data;
@@ -38,7 +38,7 @@ const SkillsItem = ({ data, flex }) => {
     setHiddenSkill(!hiddenSkill);
   };
   return (
-    <Box sx={[ styles.wrapper, flex ]}>
+    <Box sx={[styles.wrapper, flex]}>
       <Box sx={styles.iconWrapper}>
         <form onSubmit={formik.handleSubmit}>
           <IconButton sx={styles.icon} type='submit' onClick={handlerClick}>
@@ -46,12 +46,10 @@ const SkillsItem = ({ data, flex }) => {
           </IconButton>
         </form>
       </Box>
-      <Typography variant='body1' sx={styles.text}>
-        <CustomTooltip title={name}>
-        {name}
-        </CustomTooltip>
+      <Typography sx={styles.text} variant='body1'>
+        <CustomTooltip title={name}>{name}</CustomTooltip>
       </Typography>
-      <Typography variant="subtitle2" sx={styles.number}>
+      <Typography sx={styles.number} variant='subtitle2'>
         {mark}
       </Typography>
     </Box>
@@ -65,7 +63,7 @@ SkillsItem.propTypes = {
     averageMark: PropTypes.number.isRequired,
     hidden: PropTypes.bool.isRequired,
   }).isRequired,
-  flex: PropTypes.any
+  flex: PropTypes.any,
 };
 
 export default SkillsItem;

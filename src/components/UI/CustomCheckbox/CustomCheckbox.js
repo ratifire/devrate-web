@@ -17,7 +17,6 @@ export const CustomCheckboxIcon = styled('span')(({ theme }) => ({
   },
 }));
 
-
 export const CustomCheckedIcon = styled('span')(({ theme }) => ({
   width: 24,
   height: 24,

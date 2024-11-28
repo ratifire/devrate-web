@@ -10,9 +10,9 @@ const PasswordVisibilityToggle = ({ showPassword, clickHandler, mouseDownHandler
       <InputAdornment position='end'>
         <IconButton
           aria-label='toggle password visibility'
+          edge='end'
           onClick={clickHandler}
           onMouseDown={mouseDownHandler}
-          edge='end'
         >
           {showPassword ? <VisibilityOutlinedIcon sx={iconStyle} /> : <VisibilityOffOutlinedIcon sx={iconStyle} />}
         </IconButton>

@@ -21,5 +21,5 @@ export {
   useGetHistoryData,
   useHandleChange,
   useTooltip,
-  roundData
+  roundData,
 };

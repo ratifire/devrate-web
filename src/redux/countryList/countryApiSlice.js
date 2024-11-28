@@ -8,6 +8,4 @@ export const workExperienceApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useGetCountryListQuery,
-} = workExperienceApiSlice;
+export const { useGetCountryListQuery } = workExperienceApiSlice;

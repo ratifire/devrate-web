@@ -1,9 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Typography, LinearProgress } from '@mui/material';
-import { styles } from './LinearProgressWithLabel.styles';
 import { useTranslation } from 'react-i18next';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { styles } from './LinearProgressWithLabel.styles';
 
 const LinearProgressWithLabel = ({ value, size, orientation }) => {
   const { t } = useTranslation();
@@ -16,21 +16,19 @@ const LinearProgressWithLabel = ({ value, size, orientation }) => {
     <Box sx={[styles.wrapper, orientationStyle]}>
       {isComplete ? (
         <Box sx={styles.completeContainer}>
-
           <Box>
-            <Typography variant="subtitle2" sx={styles.completeText}>
-            {t('profile.baseUserInfo.complete')}
-          </Typography>
+            <Typography sx={styles.completeText} variant='subtitle2'>
+              {t('profile.baseUserInfo.complete')}
+            </Typography>
           </Box>
 
           <Box>
             <CheckCircleOutlineIcon fontSize={'medium'} sx={styles.completeIcon} />
           </Box>
-
         </Box>
       ) : (
         <>
-          <Typography variant="subtitle2" sx={styles.text}>
+          <Typography sx={styles.text} variant='subtitle2'>
             {orientation === 'horizontal'
               ? `${value}/10`
               : `${t('profile.baseUserInfo.loading')} ${Math.round(value)}%`}
@@ -38,8 +36,8 @@ const LinearProgressWithLabel = ({ value, size, orientation }) => {
           <Box sx={styles.wrapperProgress}>
             <LinearProgress
               sx={style}
-              variant="determinate"
               value={orientation === 'horizontal' ? value * 10 : value}
+              variant='determinate'
             />
           </Box>
         </>

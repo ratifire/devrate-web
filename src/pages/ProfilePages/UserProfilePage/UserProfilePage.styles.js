@@ -19,7 +19,6 @@ export const styles = {
       backgroundColor: theme.palette.pagesSections.backgroundColor,
       backgroundImage: 'none',
       boxShadow: 'none',
-
     },
   }),
   baseUserInfo: {

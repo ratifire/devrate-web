@@ -40,6 +40,5 @@ export const styles = {
     boxShadow: 'none',
     borderRadius: 2,
     backgroundImage: 'none',
-
   }),
 };

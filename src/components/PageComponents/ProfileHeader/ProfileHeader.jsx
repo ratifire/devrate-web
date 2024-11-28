@@ -7,6 +7,7 @@ import { selectCurrentUser } from '../../../redux/auth/authSlice';
 import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import links from '../../../router/links';
+import { FeedbackInterviewModal } from '../../ModalsComponents/FeedbackModal/FeedbackInterviewModal';
 import Logo from '../../UI/Logo';
 import ThemeSwitch from '../../UI/ThemeSwitch/ThemeSwitch';
 import UserAvatar from '../../UI/UserAvatar';
@@ -14,7 +15,6 @@ import Menu from '../Menu';
 import Notification from '../Notification';
 import { InputSearch } from './InputSearch';
 import styles from './ProfileHeader.styles';
-import { FeedbackInterviewModal } from '../../ModalsComponents/FeedbackModal/FeedbackInterviewModal';
 
 const ProfileHeader = () => {
   const { data: info } = useSelector(selectCurrentUser);
@@ -39,7 +39,7 @@ const ProfileHeader = () => {
     <AppBar component='header' position={'static'} sx={styles.header}>
       <Box sx={styles.logoBox}>
         <Link to={links.profile}>
-          <Logo width={'187'} height={'44'} />
+          <Logo height={'44'} width={'187'} />
         </Link>
       </Box>
       <Box sx={styles.headerNav}>
@@ -47,23 +47,23 @@ const ProfileHeader = () => {
         <ThemeSwitch />
         <Notification />
         <IconButton>
-          <Badge color='error' overlap='circular' badgeContent='' variant='dot' invisible={true}>
+          <Badge invisible badgeContent='' color='error' overlap='circular' variant='dot'>
             <Message />
             {/*{theme.palette.mode==="dark"?<Message />:<MessageLight />}*/}
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
           <UserAvatar
+            size='sm'
+            src={userPicture}
             userFirstName={getFirstName || firstName}
             userLastName={getLastName || lastName}
             userName={`${getFirstName || firstName} ${getLastName || lastName}`}
-            src={userPicture}
-            size='sm'
           />
         </Button>
         <Menu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
-      {open && <FeedbackInterviewModal/>}
+      {open && <FeedbackInterviewModal />}
     </AppBar>
   );
 };

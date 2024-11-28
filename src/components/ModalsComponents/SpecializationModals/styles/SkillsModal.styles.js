@@ -18,7 +18,7 @@ export const styles = {
     ':hover': {
       backgroundColor: theme.palette.iconBtn.createBtn.hover.backgroundColor,
       color: theme.palette.iconBtn.createBtn.hover.color,
-    }
+    },
   }),
   btn: (theme) => ({
     paddingY: '14px',

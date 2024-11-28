@@ -1,13 +1,12 @@
-import React, { lazy, Suspense } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
-import { styles } from './SchedulePage.styles';
+import React, { lazy, Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
+import ScheduleTemplate from '../../Templates/ScheduleTemplate';
 import ProfileHeader from '../../components/PageComponents/ProfileHeader';
+import { ScheduleSkeleton } from '../../components/UI/Skeleton';
+import { styles } from './SchedulePage.styles';
 
 const Schedule = lazy(() => import('../../components/PageComponents/ScheduleComponents'));
-
-import ScheduleTemplate from '../../Templates/ScheduleTemplate';
-import { useTranslation } from 'react-i18next';
-import { ScheduleSkeleton } from '../../components/UI/Skeleton';
 
 const SchedulePage = () => {
   const { t } = useTranslation();
@@ -18,11 +17,11 @@ const SchedulePage = () => {
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.scheduleWrapper}>
-            <Typography variant='h4' sx={styles.scheduleTitle}>
+            <Typography sx={styles.scheduleTitle} variant='h4'>
               {t('schedule.title')}
             </Typography>
             <Paper sx={styles.calendarWrapper}>
-              <Suspense fallback={<ScheduleSkeleton/>}>
+              <Suspense fallback={<ScheduleSkeleton />}>
                 <Schedule />
               </Suspense>
             </Paper>

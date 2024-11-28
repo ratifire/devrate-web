@@ -1,7 +1,12 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { SoftSkillsModal, HardSkillsModal, ScheduleInterviewModal, SpecializationModal } from '../../components/ModalsComponents/SpecializationModals';
+import {
+  SoftSkillsModal,
+  HardSkillsModal,
+  ScheduleInterviewModal,
+  SpecializationModal,
+} from '../../components/ModalsComponents/SpecializationModals';
 
 const MemoizedSpecializationModal = memo(SpecializationModal);
 const MemoizedScheduleInterviewModal = memo(ScheduleInterviewModal);
