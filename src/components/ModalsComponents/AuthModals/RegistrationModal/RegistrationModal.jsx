@@ -67,7 +67,6 @@ const RegistrationModal = () => {
     } catch (error) {
       if (error.status === 409) setErrors({ email: 'This email is already in use' });
     }
-
   };
 
   const formik = useFormik({
