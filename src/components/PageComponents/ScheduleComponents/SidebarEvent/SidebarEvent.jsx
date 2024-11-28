@@ -8,6 +8,7 @@ import { styles } from './SidebarEvent.styles';
 import { useTranslation } from 'react-i18next';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 
 const SidebarEvent = ({ event }) => {
   const { eventTypeId, type, link, host, startTime, participantDtos } = event;
@@ -26,9 +27,14 @@ const SidebarEvent = ({ event }) => {
   const [month, day, year] = formattedDate.split('/');
   const customFormattedDate = `${day}/${month}/${year}`;
 
+  const { enqueueSnackbar } = useSnackbar();
+
+
   const eventDeleteHandler = async (id) => {
     try {
       await deleteEvent({ userId, id }).unwrap();
+      enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
+
     } catch (error) {
       console.error('Failed to delete event:', error);
     }

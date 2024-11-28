@@ -11,10 +11,9 @@ import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import styles from './ResetPassword.styles';
 import { resetPasswordSchema } from '../../../../../utils/valadationSchemas/index';
-import { toast } from 'react-toastify';
 import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Snackbar } from '@mui/material';
+import { useSnackbar } from 'notistack';
 
 const initialValues = {
   newPassword: '',
@@ -36,6 +35,8 @@ const ResetPassword = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const [changePassword, { isError, isSuccess }] = useChangePasswordMutation();
 
@@ -87,7 +88,13 @@ const ResetPassword = () => {
     } else if (key === 'v' && (event.ctrlKey || event.metaKey)) {
       event.preventDefault();
       navigator.clipboard.readText().then((text) => {
-        handlePaste({ clipboardData: { getData: () => text }, preventDefault: () => {} }, formik);
+        handlePaste(
+          {
+            clipboardData: { getData: () => text },
+            preventDefault: () => {},
+          },
+          formik
+        );
       });
     }
   };
@@ -118,30 +125,12 @@ const ResetPassword = () => {
               newPassword: values.newPassword,
             };
             await changePassword(requestData).unwrap();
-            toast('Password changed successfully!', {
-              position: 'top-right',
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: 'dark',
-            });
+            enqueueSnackbar('Password changed successfully!', { variant: 'success' });
             resetForm();
             dispatch(closeModal({ modalName: 'openResetPassword' }));
             dispatch(openModal({ modalName: 'openNotification' }));
           } catch (error) {
-            toast.error('Invalid code. Please try again.', {
-              position: 'top-right',
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: 'dark',
-            });
+            enqueueSnackbar('Invalid code. Please try again.', { variant: 'error' });
           }
         }}
       >

@@ -8,6 +8,10 @@ import './utils/i18n';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import './assets/fonts/fonts.css';
 import getDesignTokens from './utils/theme/theme';
+import { SnackbarProvider } from 'notistack';
+
+const rootDom = document.getElementById('root')
+const root = ReactDOM.createRoot(rootDom);
 
 const ThemedApp = () => {
     const themeMode = useSelector((state) => state.theme);
@@ -15,12 +19,20 @@ const ThemedApp = () => {
     return (
         <ThemeProvider theme={darkModeTheme}>
             <CssBaseline />
+          <SnackbarProvider
+            domRoot={rootDom}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            autoHideDuration={3000}
+          >
             <App />
+          </SnackbarProvider>
         </ThemeProvider>
     );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Suspense fallback='loading'>
         <Provider store={store}>

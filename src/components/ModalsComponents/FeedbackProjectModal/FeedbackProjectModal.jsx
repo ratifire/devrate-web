@@ -1,6 +1,6 @@
 import React from 'react';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
-import { Typography, CircularProgress, Snackbar, Alert } from '@mui/material';
+import { Typography, CircularProgress } from '@mui/material';
 import ButtonDef from '../../FormsComponents/Buttons/ButtonDef';
 import { useTranslation } from 'react-i18next';
 import FormSelect from '../../FormsComponents/Inputs/FormSelect';
@@ -12,7 +12,7 @@ import { styles } from './FeedbackProjectModal.styles';
 import { FeedbackProjectModalSchema } from '../../../utils/valadationSchemas/index';
 import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
 import { feedbackOptions } from './constants';
-import useMergeState from '../../../utils/hooks/useMergeState';
+import { useSnackbar } from 'notistack';
 
 const initialValues = {
   select: '',
@@ -21,24 +21,15 @@ const initialValues = {
 
 const FeedbackProjectModal = () => {
   const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const openFeedback = useSelector((state) => state.modal.feedbackProjectModal);
   const { id } = useSelector((state) => state.auth.user.data);
 
   const [createFeedback, { isLoading }] = useCreateFeedbackMutation();
 
-  const [state, setState] = useMergeState({
-    openSnackbarSuccess: false,
-    openSnackbarError: false,
-  });
-
   const handleClose = () => {
     dispatch(closeModal({ modalName: 'feedbackProjectModal' }));
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === 'clickaway') return;
-    setState({ openSnackbarSuccess: false, openSnackbarError: false });
   };
 
   const onSubmit = async (values) => {
@@ -48,10 +39,23 @@ const FeedbackProjectModal = () => {
       text: values.feedbackText,
     });
 
-    setState({
-      openSnackbarError: !!result.error,
-      openSnackbarSuccess: !result.error,
-    });
+    if (result.error) {
+      enqueueSnackbar(t('modal.feedbackProjectModal.error_429'), {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center',
+        },
+      });
+    } else {
+      enqueueSnackbar(t('modal.feedbackProjectModal.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center',
+        },
+      });
+    }
   };
 
   const formik = useFormik({
@@ -62,14 +66,14 @@ const FeedbackProjectModal = () => {
 
   return (
     <ModalLayoutProfile setOpen={handleClose} open={openFeedback}>
-      <Typography variant="h6" sx={styles.title}>
+      <Typography variant='h6' sx={styles.title}>
         {t('modal.feedbackProjectModal.title')}
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>
         <FormSelect
-          variant="outlined"
-          name="select"
+          variant='outlined'
+          name='select'
           value={formik.values.select}
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
@@ -80,7 +84,7 @@ const FeedbackProjectModal = () => {
         />
 
         <TextAreaInput
-          name="feedbackText"
+          name='feedbackText'
           value={formik.values.feedbackText}
           label={t('modal.feedbackProjectModal.textAreaLabel')}
           required
@@ -92,46 +96,14 @@ const FeedbackProjectModal = () => {
         <ButtonDef
           fullWidth
           label={t('modal.feedbackProjectModal.button')}
-          type="submit"
-          variant="contained"
+          type='submit'
+          variant='contained'
           correctStyle={styles.btn}
           disabled={!formik.isValid || !formik.dirty || isLoading}
         >
           {isLoading ? <CircularProgress size={24} /> : t('modal.feedbackProjectModal.button')}
         </ButtonDef>
       </form>
-
-      <Snackbar
-        open={state.openSnackbarSuccess}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        anchorOrigin={styles.snackBar}
-        sx={styles.snackbarTransition}
-      >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity="success"
-          sx={styles.alertContent}
-        >
-          {t('modal.feedbackProjectModal.success')}
-        </Alert>
-      </Snackbar>
-
-      <Snackbar
-        open={state.openSnackbarError}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        anchorOrigin={styles.snackBar}
-        sx={styles.snackbarTransition}
-      >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity="error"
-          sx={styles.alertContent}>
-          {t('modal.feedbackProjectModal.error_429')}
-        </Alert>
-      </Snackbar>
-
     </ModalLayoutProfile>
   );
 };
