@@ -49,20 +49,26 @@ const RegistrationModal = () => {
     formik.setFieldValue('country', country);
   }, [country]);
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = async (values, { resetForm, setErrors }) => {
     const { email, firstName, lastName, country, news, password } = values;
-    createUser({
-      email,
-      firstName,
-      lastName,
-      country,
-      subscribed: news,
-      password,
-    });
-    resetForm();
-    dispatch(closeModal({ modalName: 'openRegistration' }));
-    dispatch(openModal({ modalName: 'openConfirmation', data: email }));
+    try {
+      await createUser({
+        email,
+        firstName,
+        lastName,
+        country,
+        subscribed: news,
+        password,
+      }).unwrap();
+
+      resetForm();
+      dispatch(closeModal({ modalName: 'openRegistration' }));
+      dispatch(openModal({ modalName: 'openConfirmation', data: email }));
+    } catch (error) {
+      if (error.status === 409) setErrors({ email: 'This email is already in use' });
+    }
   };
+
   const formik = useFormik({
     initialValues,
     validationSchema: RegistrationSchema,
