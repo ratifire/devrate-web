@@ -6,17 +6,15 @@ import RequireAuth from '../redux/auth/RequireAuth';
 import PersonalProfilePage from '../pages/ProfilePages/PersonalProfilePage';
 import SpecializationPage from '../pages/SpecializationPage';
 import SchedulePage from '../pages/ShedulePage';
-import ToastLayout from '../layouts/ToastLayout/ToastLayout';
 import FaqPage from '../pages/FaqPage';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsAndConditions from '../pages/TermsAndConditions';
-import navigationLinks from './links';
 import UserProfileRoute from './UserProfileRoute';
+import navigationLinks from './links';
 
 const router = createBrowserRouter([
   {
     path: navigationLinks.home,
-    element: <ToastLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
