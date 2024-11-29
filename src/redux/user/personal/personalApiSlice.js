@@ -1,5 +1,5 @@
 import { apiSlice } from '../../services/api/apiSlice';
-import {TAG_TYPES} from "../../../utils/constants/tagTypes";
+import { TAG_TYPES } from '../../../utils/constants/tagTypes';
 
 export const personalApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

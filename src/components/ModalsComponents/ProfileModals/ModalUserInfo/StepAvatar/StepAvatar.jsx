@@ -10,9 +10,9 @@ import {
 } from '../../../../../redux/user/avatar/avatarApiSlice';
 import { StepAvatarSchema } from '../../../../../utils/valadationSchemas/index';
 import LoadImages from '../../../../UI/LoadImages';
-import { styles } from './StepAvatar.styles';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { StepAvatarSkeleton } from '../../../../UI/Skeleton';
+import { styles } from './StepAvatar.styles';
 
 const StepAvatar = () => {
   const { data: user } = useSelector(selectCurrentUser);
@@ -72,11 +72,11 @@ const StepAvatar = () => {
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.input100}>
           <LoadImages
-            handleChange={handleAvatarChange}
             handleBlur={formik.handleBlur}
+            handleChange={handleAvatarChange}
             handlerDelete={handleDeleteAvatar}
-            value={avatarValue}
             isDisabled={!formik.dirty}
+            value={avatarValue}
             onChange={handleChangeDirty}
           />
         </Box>

@@ -25,13 +25,13 @@ export const styles = {
       color: theme.palette.modals.textAreaInput.labelColor.error,
     },
     '&.Mui-required .MuiFormLabel-asterisk': {
-      color: theme.palette.modals.textAreaInput.labelColor.required
+      color: theme.palette.modals.textAreaInput.labelColor.required,
     },
   }),
   textHelper: {
     position: 'absolute',
     bottom: '-18px',
-    left: '-12px'
+    left: '-12px',
   },
   textareaBox: (theme) => ({
     width: '100%',

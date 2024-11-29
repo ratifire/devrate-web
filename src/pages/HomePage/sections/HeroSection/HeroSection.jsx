@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './HeroSection.module.scss';
-import { openModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import navigationsLinks from '../../../../router/links';
 import { Link, Link as RouterLink } from 'react-router-dom';
+import { openModal } from '../../../../redux/modal/modalSlice';
+import navigationsLinks from '../../../../router/links';
 import { ReactComponent as Arrow } from '../../assets/iconArrow.svg';
+import styles from './HeroSection.module.scss';
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const HeroSection = () => {
         </button>
       );
     return (
-      <Link to={navigationsLinks.profile} component={RouterLink} className={`btn btn-secondary btn-xl ${styles.login}`}>
+      <Link className={`btn btn-secondary btn-xl ${styles.login}`} component={RouterLink} to={navigationsLinks.profile}>
         Profile
         <Arrow />
       </Link>

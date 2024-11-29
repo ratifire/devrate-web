@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import navigationLinks from './links';
 import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage/HomePage';
 import RequireAuth from '../redux/auth/RequireAuth';
@@ -11,6 +10,7 @@ import ToastLayout from '../layouts/ToastLayout/ToastLayout';
 import FaqPage from '../pages/FaqPage';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsAndConditions from '../pages/TermsAndConditions';
+import navigationLinks from './links';
 import UserProfileRoute from './UserProfileRoute';
 
 const router = createBrowserRouter([

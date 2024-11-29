@@ -8,7 +8,7 @@ const UserProfileRoute = () => {
   const { id: authorizedUserId } = useSelector((state) => state.auth.user.data);
 
   if (+userId === authorizedUserId) {
-    return <Navigate to='/profile' replace />;
+    return <Navigate replace to='/profile' />;
   }
 
   return <UserProfilePage />;

@@ -3,6 +3,6 @@ export const styles = {
     padding: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
-    gap: '20px'
+    gap: '20px',
   }),
 };

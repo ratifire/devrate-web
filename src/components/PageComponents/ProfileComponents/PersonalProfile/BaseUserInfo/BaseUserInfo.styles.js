@@ -66,7 +66,7 @@ export const styles = {
     transition: 'background-color 0.3s, transform 0.3s',
     ':hover': {
       backgroundColor: `${theme.palette.primary['200']}29`,
-      color: theme.palette.action.active
+      color: theme.palette.action.active,
     },
     svg: {
       fontSize: '18px',

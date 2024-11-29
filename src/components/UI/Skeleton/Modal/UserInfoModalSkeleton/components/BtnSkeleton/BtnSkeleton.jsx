@@ -1,9 +1,9 @@
 import React from 'react';
-import { styles } from './BtnSkeleton.styles';
 import { Skeleton } from '@mui/material';
+import { styles } from './BtnSkeleton.styles';
 
 const BtnSkeleton = () => {
-  return <Skeleton sx={styles.btn} height={44} variant='rounded' />;
+  return <Skeleton height={44} sx={styles.btn} variant='rounded' />;
 };
 
 export default BtnSkeleton;

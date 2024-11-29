@@ -5,7 +5,7 @@ export const styles = {
     gridGap: theme.spacing(2),
     paddingY: theme.spacing(2),
     borderBottom: `1px solid ${theme.palette.neutral[400]}`,
-    ">p": {
+    '>p': {
       flex: '1 2 max(420px)',
       width: '2vw',
       textOverflow: 'ellipsis',

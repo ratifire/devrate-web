@@ -12,7 +12,7 @@ export const styles = {
     position: 'relative',
     zIndex: 10,
   }),
-  skill:(theme) => ({
+  skill: (theme) => ({
     flex: '0 1 max(679px)',
     paddingY: theme.spacing(3),
     paddingX: theme.spacing(4),
@@ -20,7 +20,7 @@ export const styles = {
     border: theme.palette.sliderAssessment.border,
     borderRadius: 2,
   }),
-  skillBg:(theme) => ({
+  skillBg: (theme) => ({
     flex: '0 1 max(679px)',
     paddingY: theme.spacing(3),
     paddingX: theme.spacing(4),
@@ -28,7 +28,7 @@ export const styles = {
     border: theme.palette.sliderAssessment.border,
     borderRadius: 2,
     position: 'relative',
-    ':before':{
+    ':before': {
       content: '""',
       borderRadius: 2,
       position: 'absolute',
@@ -51,7 +51,7 @@ export const styles = {
     height: '100%',
     width: '100%',
   },
-  wrapperSelect:(theme) => ({
+  wrapperSelect: (theme) => ({
     display: 'flex',
     alignItems: 'center',
     gridGap: theme.spacing(2),
@@ -59,7 +59,7 @@ export const styles = {
   star: (theme) => ({
     color: theme.palette.experienceSkillSect.star,
   }),
-  select:(theme) => ({
+  select: (theme) => ({
     ' .MuiSelect-select.MuiSelect-standard.MuiInputBase-input.MuiInput-input': {
       paddingRight: '34px',
       paddingY: theme.spacing(0),
@@ -82,17 +82,17 @@ export const styles = {
       borderBottom: 'none',
     },
   }),
-  selectPaper:(theme)=>({
+  selectPaper: (theme) => ({
     backgroundColor: theme.palette.modals.select.selectedField.backgroundColor,
     paddingX: theme.spacing(2),
-    ' .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected':{
+    ' .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected': {
       backgroundColor: theme.palette.modals.select.selectedField.selected.backgroundColor,
       ':hover': {
         backgroundColor: theme.palette.modals.select.selectedField.hover,
       },
     },
   }),
-  selectItem:(theme) => ({
+  selectItem: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -111,7 +111,7 @@ export const styles = {
       backgroundColor: theme.palette.modals.select.selectedField.hover,
     },
   }),
-  selectItemStar: (theme) =>({
+  selectItemStar: (theme) => ({
     color: theme.palette.experienceSkillSect.star,
     fontSize: '14px',
   }),
@@ -119,7 +119,7 @@ export const styles = {
     overflowY: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
-    gridGap:'0 32px',
+    gridGap: '0 32px',
     maxHeight: '200px',
     paddingRight: '16px',
     '>div': {
@@ -127,7 +127,7 @@ export const styles = {
       maxWidth: '291px',
       width: '2vw',
       textWrap: 'nowrap',
-      ">span":{
+      '>span': {
         display: 'inline-block',
         width: '100%',
         textOverflow: 'ellipsis',
@@ -162,9 +162,9 @@ export const styles = {
       '&:first-letter': {
         textTransform: 'uppercase',
       },
-    }
+    },
   }),
-  btnIcon:(theme) => ( {
+  btnIcon: (theme) => ({
     position: 'absolute',
     bottom: '4px',
     right: '16px',
@@ -177,7 +177,7 @@ export const styles = {
       color: theme.palette.iconBtn.search.svgColor,
     },
   }),
-  textArea:(theme)=> ({
+  textArea: (theme) => ({
     marginBottom: theme.spacing(0),
     width: '100%',
     height: '100%',

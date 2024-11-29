@@ -17,14 +17,14 @@ export const styles = {
     flex: `0 1 calc(50% - ${theme.spacing(2)})`,
     '& .MuiOutlinedInput-root': {
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.primary[600],
+        borderColor: theme.palette.modals.select.border.focused,
       },
-      'fieldset': {
+      fieldset: {
         borderColor: theme.palette.neutral[500],
       },
     },
     '& .MuiInputLabel-root.Mui-required .MuiFormLabel-asterisk': {
-      color: theme.palette.error.main,
+      color: theme.palette.modals.select.labelColor.required,
     },
   }),
 
@@ -56,11 +56,11 @@ export const styles = {
     width: '228px',
   },
   error: {
-    transform: 'translate(-13px, -5px)'
+    transform: 'translate(-13px, -5px)',
   },
-  checkBoxContainer: (theme) =>({
+  checkBoxContainer: (theme) => ({
     display: 'flex',
     alignItems: 'center',
-    flex: ` calc(90% - ${theme.spacing(2)})`
-  })
+    flex: ` calc(90% - ${theme.spacing(2)})`,
+  }),
 };

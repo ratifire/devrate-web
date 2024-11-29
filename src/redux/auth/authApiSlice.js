@@ -23,8 +23,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         // Ensure the error response is correctly transformed
         return response.data; // Adjust according to your API error response structure
       },
-      onSuccess: (data, variables, api) => {
-        console.log('Status code:', api.getState().authApiSlice.requests.confirmEmail.status);
+      onSuccess: (data) => {
         return data;
       },
     }),
@@ -33,8 +32,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: `/auth/request-password-reset?email=${encodeURIComponent(email)}`,
         method: 'POST',
       }),
-      onSuccess: (data, variables, api) => {
-        console.log('Status code:', api.getState().authApiSlice.requests.resetPassword.status);
+      onSuccess: (data) => {
         return data;
       },
     }),
@@ -44,8 +42,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { code, newPassword },
       }),
-      onSuccess: (data, variables, api) => {
-        console.log('Status code:', api.getState().authApiSlice.requests.changePassword.status);
+      onSuccess: (data) => {
         return data;
       },
     }),

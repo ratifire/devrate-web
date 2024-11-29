@@ -9,7 +9,7 @@ export const styles = {
   itemIcon: {
     width: 14,
     height: 14,
-    marginRight: '10px'
+    marginRight: '10px',
   },
   menuItem: (theme) => ({
     maxWidth: '125px',
@@ -24,12 +24,12 @@ export const styles = {
     },
     '&:active': {
       backgroundColor: theme.palette.modalDropdown.hoverBgColor,
-      color: theme.palette.action.active
-    }
+      color: theme.palette.action.active,
+    },
   }),
   divider: (theme) => ({
     backgroundColor: theme.palette.modalDropdown.divider,
     marginLeft: '8px',
     marginRight: '8px',
-  })
+  }),
 };

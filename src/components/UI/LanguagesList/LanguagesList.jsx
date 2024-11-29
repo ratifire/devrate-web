@@ -6,7 +6,7 @@ const LanguagesList = ({ data }) => {
   return (
     <>
       {data?.map((item) => (
-        <LanguageLevel key={item.name} level={item.level} language={item.name} />
+        <LanguageLevel key={item.name} language={item.name} level={item.level} />
       ))}
     </>
   );

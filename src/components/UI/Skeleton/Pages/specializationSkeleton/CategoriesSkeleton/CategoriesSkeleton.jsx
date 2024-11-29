@@ -6,17 +6,17 @@ const CategoriesSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.mainBox}>
-        <Skeleton variant='rounded' width={235} height={45} />
-        <Skeleton variant='rounded' width={235} height={50} />
+        <Skeleton height={45} variant='rounded' width={235} />
+        <Skeleton height={50} variant='rounded' width={235} />
       </Box>
       <Box sx={styles.box}>
-        <Skeleton variant='rounded' width={226} height={139} />
-        <Skeleton variant='rounded' width={226} height={139} />
-        <Skeleton variant='rounded' width={226} height={139} />
-        <Skeleton variant='rounded' width={226} height={139} />
+        <Skeleton height={139} variant='rounded' width={226} />
+        <Skeleton height={139} variant='rounded' width={226} />
+        <Skeleton height={139} variant='rounded' width={226} />
+        <Skeleton height={139} variant='rounded' width={226} />
       </Box>
     </Box>
   );
-}
+};
 
 export default CategoriesSkeleton;

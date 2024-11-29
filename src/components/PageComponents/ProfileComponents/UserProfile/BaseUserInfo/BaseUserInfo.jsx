@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { styles } from './BaseUserInfo.styles';
 import { Box, Typography } from '@mui/material';
-import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import UserAvatar from '../../../../UI/UserAvatar';
 import { useGetAvatarUserQuery } from '../../../../../redux/user/avatar/avatarApiSlice';
 import Bookmark from '../../../../UI/Bookmark';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { useTranslation } from 'react-i18next';
+import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = ({ id }) => {
   const { data: personalData } = useGetPersonalUserQuery(id);
@@ -32,10 +32,12 @@ const BaseUserInfo = ({ id }) => {
   };
 
   const handleWriteMessage = () => {
+    // eslint-disable-next-line no-console
     console.log('Write a message');
   };
 
   const handleBookInterview = () => {
+    // eslint-disable-next-line no-console
     console.log('Book an interview');
   };
 
@@ -44,24 +46,24 @@ const BaseUserInfo = ({ id }) => {
       <Box sx={styles.wrapperAvatar}>
         {getFirstName && getLastName && (
           <UserAvatar
+            correctStyle={styles.correctAvatar}
+            size='l'
+            src={userPicture}
             userFirstName={getFirstName}
             userLastName={getLastName}
             userName={`${getFirstName} ${getLastName}`}
-            src={userPicture}
-            size='l'
-            correctStyle={styles.correctAvatar}
           />
         )}
       </Box>
       <Box sx={styles.wrapperText}>
-        <Typography variant='h5' sx={styles.userName}>
+        <Typography sx={styles.userName} variant='h5'>
           {`${getFirstName} ${getLastName}`}
           <Bookmark isBookmarked={isBookmarked} onToggle={handleToggleBookmark} />
         </Typography>
-        <Typography variant='subtitle1' sx={styles.speciality}>
+        <Typography sx={styles.speciality} variant='subtitle1'>
           {getStatus || ''}
         </Typography>
-        <Typography variant='subtitle2' sx={styles.city}>
+        <Typography sx={styles.city} variant='subtitle2'>
           <LocationOnIcon sx={styles.icon} />
           {`${getCity ? getCity + ',' : ''} ${getCountry}`}
         </Typography>
@@ -69,17 +71,17 @@ const BaseUserInfo = ({ id }) => {
       <Box sx={styles.buttons}>
         <ButtonDef
           correctStyle={styles.contained}
+          handlerClick={handleWriteMessage}
+          label={t('Write a message')}
           type={'button'}
           variant='contained'
-          handlerClick={handleWriteMessage}
-          label={t('profile.baseUserInfo.messageBtn')}
         />
         <ButtonDef
           correctStyle={styles.outlined}
+          handlerClick={handleBookInterview}
+          label={t('Book an interview')}
           type={'button'}
           variant='outlined'
-          handlerClick={handleBookInterview}
-          label={t('profile.baseUserInfo.interviewBtn')}
         />
       </Box>
     </Box>

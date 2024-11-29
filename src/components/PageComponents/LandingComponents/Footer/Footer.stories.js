@@ -1,7 +1,7 @@
 import React from 'react';
-import Footer from './Footer';
-import { decorators } from '../../../../../.storybook/preview';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { decorators } from '../../../../../.storybook/preview';
+import Footer from './Footer';
 
 export default {
   title: 'LandingComponents/Footer',

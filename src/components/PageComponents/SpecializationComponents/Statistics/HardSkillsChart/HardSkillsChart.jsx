@@ -5,9 +5,9 @@ import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip 
 import useHardSkillData from '../../../../../utils/hooks/specialization/useHardSkillData';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { roundData, useTooltip } from '../utils';
+import HardSkillsChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/HardSkillsChartSkeleton';
 import { styles } from './HardSkillsChart.styles.js';
 import useThemeHardSkillsChart from './useThemeHardSkillsChart';
-import HardSkillsChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/HardSkillsChartSkeleton';
 
 const HardSkillsChart = () => {
   const { itemStyle, contentStyle } = useTooltip();
@@ -26,26 +26,26 @@ const HardSkillsChart = () => {
 
   return (
     <Box sx={styles.hardSkillsChartContainer}>
-      <Typography variant='subtitle2' sx={styles.title}>
+      <Typography sx={styles.title} variant='subtitle2'>
         {t('specialization.statistics.hard_skills_chart_title')}
       </Typography>
-      <Typography variant='subtitle3' sx={styles.text}>
+      <Typography sx={styles.text} variant='subtitle3'>
         {t('specialization.statistics.hard_skills_chart_text')}
       </Typography>
-      <RadarChart outerRadius={130} width={264} height={264} data={roundedSkills}>
+      <RadarChart data={roundedSkills} height={264} outerRadius={130} width={264}>
         <PolarGrid />
         <PolarAngleAxis dataKey='name' tick={false} />
-        {!!roundedSkills.length && <PolarRadiusAxis angle={30} domain={[0, 10]} tick={false} axisLine={false} />}
+        {!!roundedSkills.length && <PolarRadiusAxis angle={30} axisLine={false} domain={[0, 10]} tick={false} />}
         <Radar
           dataKey='averageMark'
+          dot={({ cx, cy, index }) => <circle key={index} cx={cx} cy={cy} fill='url(#gradient2)' r={6} />}
+          fillOpacity={0.3}
           stroke='url(#gradient2)'
           strokeWidth={3}
-          fillOpacity={0.3}
-          dot={({ cx, cy, index }) => <circle key={index} cx={cx} cy={cy} r={6} fill='url(#gradient2)' />}
         />
-        <Tooltip itemStyle={itemStyle} contentStyle={contentStyle} />
+        <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
         <defs>
-          <linearGradient id='gradient2' x1='0%' y1='0%' x2='100%' y2='0%'>
+          <linearGradient id='gradient2' x1='0%' x2='100%' y1='0%' y2='0%'>
             <stop offset='0%' style={{ stopColor: grad1, stopOpacity: 1 }} />
             <stop offset='100%' style={{ stopColor: grad2, stopOpacity: 1 }} />
           </linearGradient>

@@ -27,35 +27,35 @@ const CandidateFeedback = () => {
     <Box sx={styles.container}>
       <Typography variant='h6'>{t('modal.interview.title')}</Typography>
       <InterviewStepper activeStep={activeStep} />
-      <InterviewerInfo name={`${name} ${surname}`} position={status} date={date} time={time} />
+      <InterviewerInfo date={date} name={`${name} ${surname}`} position={status} time={time} />
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.formBox}>
           <SliderComponent formik={formik} slide={activeStep} />
           <Box sx={styles.sendBox}>
             <ButtonDef
+              correctStyle={styles.btn}
+              disabled={activeStep === 1}
+              handlerClick={handlePrevStep}
+              label={t('modal.interview.btnBack')}
               type={'button'}
               variant={'contained'}
-              label={t('modal.interview.btnBack')}
-              correctStyle={styles.btn}
-              handlerClick={handlePrevStep}
-              disabled={activeStep === 1}
             />
             {activeStep === FIRST_STEP && (
               <ButtonDef
-                type={'button'}
-                variant={'contained'}
-                label={t('modal.interview.btnNext')}
                 correctStyle={styles.btn}
                 handlerClick={handleNextStep}
+                label={t('modal.interview.btnNext')}
+                type={'button'}
+                variant={'contained'}
               />
             )}
             {activeStep === LAST_STEP && (
               <ButtonDef
+                correctStyle={styles.btn}
+                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+                label={t('modal.interview.btnSend')}
                 type={'submit'}
                 variant={'contained'}
-                label={t('modal.interview.btnSend')}
-                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
-                correctStyle={styles.btn}
               />
             )}
           </Box>

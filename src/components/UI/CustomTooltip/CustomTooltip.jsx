@@ -5,22 +5,15 @@ import { useTranslation } from 'react-i18next';
 
 const CustomTooltip = styled(({ translate, className, children, title, ...props }) => {
   const { t } = useTranslation();
-  
+
   const renderChildren = () => {
-    
     if (translate && typeof children === 'string') return <span>{t(children)}</span>;
-    
+
     return typeof children === 'string' ? <span>{children}</span> : children;
   };
-  
+
   return (
-    <Tooltip
-      title={t(title)}
-      arrow
-      placement='top-start'
-      classes={{ popper: className }}
-      {...props}
-    >
+    <Tooltip arrow classes={{ popper: className }} placement='top-start' title={t(title)} {...props}>
       {renderChildren()}
     </Tooltip>
   );
@@ -33,7 +26,7 @@ const CustomTooltip = styled(({ translate, className, children, title, ...props 
     borderRadius: theme.shape.borderRadius,
   },
   [`& .${tooltipClasses.arrow}`]: {
-    color: theme.palette.experienceSkillSect.tooltip.backgroundColor
+    color: theme.palette.experienceSkillSect.tooltip.backgroundColor,
   },
 }));
 

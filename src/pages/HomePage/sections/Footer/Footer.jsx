@@ -13,14 +13,14 @@ const Footer = () => {
           <div className={styles.footer__content}>
             <div className={styles.footer__social}>
               <a className={styles.footer__logo} href='#home'>
-                <img src={logo} alt='Skillzzy Logo' />
+                <img alt='Skillzzy Logo' src={logo} />
               </a>
               <div className={styles.footer__socialIkons}>
-                <a href='https://www.linkedin.com/company/ratifire/' aria-label='LinkedIn'>
-                  <img src={linkdin} alt='LinkedIn Icon' />
+                <a aria-label='LinkedIn' href='https://www.linkedin.com/company/ratifire/'>
+                  <img alt='LinkedIn Icon' src={linkdin} />
                 </a>
-                <a href='mailto:info@skillzzy.com' aria-label='Email'>
-                  <img src={mail} alt='Mail Icon' />
+                <a aria-label='Email' href='mailto:info@skillzzy.com'>
+                  <img alt='Mail Icon' src={mail} />
                 </a>
               </div>
             </div>
@@ -33,17 +33,17 @@ const Footer = () => {
               <div className={styles.footer__developerName}>
                 <p>Developed By</p>
                 <a aria-label='ratifire'>
-                  <img src={ratifire} alt='ratifire' />
+                  <img alt='ratifire' src={ratifire} />
                 </a>
               </div>
-              <a href='#' target='_blank' className={styles.footer__developerLink}>
+              <a className={styles.footer__developerLink} href='#' target='_blank'>
                 ratifire.org
               </a>
               <div className={styles.footer__policies}>
-                <a href='#' className={styles.footer__policyLink}>
+                <a className={styles.footer__policyLink} href='#'>
                   Terms and conditions
                 </a>
-                <a href='#' className={styles.footer__policyLink}>
+                <a className={styles.footer__policyLink} href='#'>
                   Privacy Policy
                 </a>
               </div>
@@ -60,10 +60,10 @@ const Footer = () => {
               <span className={styles.contactForm__titleFocus}>Get</span> In Touch
             </h2>
             <form className={styles.contactForm__form}>
-              <input type='text' className={styles.contactForm__input} placeholder='Name Surname' />
-              <input type='email' className={styles.contactForm__input} placeholder='Enter your email' />
-              <textarea className={styles.contactForm__textarea} placeholder='Enter your request...'></textarea>
-              <button type='submit' className={`btn btn-primary btn-m ${styles.contactForm__button}`}>
+              <input className={styles.contactForm__input} placeholder='Name Surname' type='text' />
+              <input className={styles.contactForm__input} placeholder='Enter your email' type='email' />
+              <textarea className={styles.contactForm__textarea} placeholder='Enter your request...' />
+              <button className={`btn btn-primary btn-m ${styles.contactForm__button}`} type='submit'>
                 SEND
               </button>
             </form>

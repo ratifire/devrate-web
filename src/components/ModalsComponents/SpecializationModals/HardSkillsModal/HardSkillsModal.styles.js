@@ -5,6 +5,6 @@ export const styles = {
   input: {
     '& p': {
       marginLeft: '0',
-    }
-  }
+    },
+  },
 };

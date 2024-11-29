@@ -1,5 +1,4 @@
 export const styles = {
-
   container: (theme) => ({
     display: 'flex',
     flexDirection: 'column',

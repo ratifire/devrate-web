@@ -3,8 +3,8 @@ module.exports = {
     // Add or modify Webpack settings
     return config;
   },
-  devServer: function(configFunction) {
-    return function(proxy, allowedHost) {
+  devServer: function (configFunction) {
+    return function (proxy, allowedHost) {
       const config = configFunction(proxy, allowedHost);
 
       config.client = {

@@ -10,8 +10,8 @@ import { useUpdateAchievementMutation } from '../../../../redux/services/achieve
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
-import { styles } from './AchievementModal.styles';
 import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
+import { styles } from './AchievementModal.styles';
 
 const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
   const {
@@ -36,6 +36,7 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
       resetForm();
       onClose();
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error updating achievement:', error);
     }
   };
@@ -48,23 +49,23 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
   });
 
   return (
-    <ModalLayoutProfile setOpen={onClose} open={isOpen}>
-      <Typography variant='subtitle1' sx={styles.title}>
+    <ModalLayoutProfile open={isOpen} setOpen={onClose}>
+      <Typography sx={styles.title} variant='subtitle1'>
         {t('modal.achievement.title')}
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
           <Box sx={styles.input100}>
             <FormInput
-              name='summary'
-              value={formik.values.summary}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='modal.achievement.summary'
-              placeholder='profile.modal.workExperience.position_placeholder'
-              helperText={formik.touched.summary && formik.errors.summary}
               error={formik.touched.summary && Boolean(formik.errors.summary)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.summary && formik.errors.summary}
+              label='modal.achievement.summary'
+              name='summary'
+              placeholder='profile.modal.workExperience.position_placeholder'
+              type='text'
+              value={formik.values.summary}
             />
           </Box>
           {/*commented out <Link> in case if its need it's needed in the future*/}
@@ -83,22 +84,22 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
           {/*</Box>*/}
           <Box sx={styles.input100}>
             <TextAreaInput
-              name='description'
-              value={formik.values.description}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='modal.achievement.description'
-              placeholder='profile.modal.workExperience.description_placeholder'
-              helperText={formik.touched.description && formik.errors.description}
               error={formik.touched.description && Boolean(formik.errors.description)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.description && formik.errors.description}
+              label='modal.achievement.description'
+              name='description'
+              placeholder='profile.modal.workExperience.description_placeholder'
+              type='text'
+              value={formik.values.description}
             />
           </Box>
           <ButtonDef
-            variant='contained'
-            type='submit'
-            label={t('profile.modal.btn')}
             correctStyle={styles.workExperienceBtn}
+            label={t('profile.modal.btn')}
+            type='submit'
+            variant='contained'
           />
         </Box>
       </form>

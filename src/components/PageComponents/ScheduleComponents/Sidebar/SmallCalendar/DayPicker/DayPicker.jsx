@@ -21,7 +21,7 @@ const CustomPickersDay = styled(PickersDay, {
   ...(isHovered && {
     backgroundColor: theme.palette.primary.light,
     '&:hover': {
-      backgroundColor: theme.palette.mode === DARK_THEME ? theme.palette.neutral[400]:theme.palette.neutral[100],
+      backgroundColor: theme.palette.mode === DARK_THEME ? theme.palette.neutral[400] : theme.palette.neutral[100],
     },
     ...theme.applyStyles(DARK_THEME, {
       backgroundColor: theme.palette.primary[300],
@@ -47,11 +47,11 @@ const DayPicker = (props) => {
   return (
     <CustomPickersDay
       {...other}
-      day={day}
       disableMargin
-      selected={false}
-      isSelected={isInSameWeek(day, selectedDay)}
+      day={day}
       isHovered={isInSameWeek(day, hoveredDay)}
+      isSelected={isInSameWeek(day, selectedDay)}
+      selected={false}
     />
   );
 };

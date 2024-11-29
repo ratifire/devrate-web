@@ -10,13 +10,13 @@ const DropdownMenu = ({ anchorEl, handleCloseMenu, handleEditFeature, handleDele
   const { t } = useTranslation();
 
   return (
-    <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu} sx={styles.menu}>
-      <MenuItem onClick={handleEditFeature} sx={styles.menuItem}>
+    <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} sx={styles.menu} onClose={handleCloseMenu}>
+      <MenuItem sx={styles.menuItem} onClick={handleEditFeature}>
         <EditIcon sx={styles.itemIcon} />
         <Typography variant='caption1'>{t('dropDownMenu.edit')}</Typography>
       </MenuItem>
       <Divider sx={styles.divider} />
-      <MenuItem onClick={handleDeleteFeature} sx={styles.menuItem}>
+      <MenuItem sx={styles.menuItem} onClick={handleDeleteFeature}>
         <DeleteIcon sx={styles.itemIcon} />
         <Typography variant='caption1'>{t('dropDownMenu.delete')}</Typography>
       </MenuItem>

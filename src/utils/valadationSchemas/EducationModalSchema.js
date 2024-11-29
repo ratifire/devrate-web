@@ -13,15 +13,14 @@ export const EducationModalSchema = Yup.object().shape({
     .min(40, 'profile.modal.education.description_short')
     .max(500, 'profile.modal.education.description_long')
     .required('profile.modal.education.required'),
-  startYear:Yup.date()
+  startYear: Yup.date()
     .min(new Date(1950, 0, 1), 'profile.modal.education.startDateMinMessage')
     .max(new Date(), 'profile.modal.education.startDateMaxMessage')
     .required('profile.modal.education.required'),
-  endYear: Yup.mixed()
-    .test('endDate', 'profile.modal.education.endDateMessage', function (value) {
-      const { startYear } = this.parent;
-      if (!value) return true; // Allow empty value
-      const endYearDate = value === 'Now' || value === '' ? new Date('9999-01-01') : new Date(value);
-      return endYearDate > new Date(startYear);
-    }),
+  endYear: Yup.mixed().test('endDate', 'profile.modal.education.endDateMessage', function (value) {
+    const { startYear } = this.parent;
+    if (!value) return true; // Allow empty value
+    const endYearDate = value === 'Now' || value === '' ? new Date('9999-01-01') : new Date(value);
+    return endYearDate > new Date(startYear);
+  }),
 });

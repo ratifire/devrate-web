@@ -32,6 +32,6 @@ export const styles = {
     },
     '& .legend-item-1': {
       marginRight: '0 !important',
-    }
+    },
   },
 };

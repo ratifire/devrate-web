@@ -3,32 +3,22 @@ import { Checkbox, FormControlLabel, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { styles } from './CheckboxButton.styles';
 
-export const CheckboxButton = ({
-                                 label,
-                                 value,
-                                 isChecked,
-                                 onChange,
-                                 disabled,
-                               }) => {
+export const CheckboxButton = ({ label, value, isChecked, onChange, disabled }) => {
   return (
     <FormControlLabel
-      sx={disabled ? styles.wrapperDisabled : styles.wrapper}
+      className={isChecked ? 'active' : ''}
       control={
         <Checkbox
+          checked={isChecked}
+          disabled={disabled}
           sx={styles.checkbox}
           value={value}
-          checked={isChecked}
           onChange={() => onChange(value)}
-          disabled={disabled}
         />
       }
-      label={
-        <Typography>
-          {label}
-        </Typography>
-      }
-      labelPlacement="end"
-      className={isChecked ? 'active' : ''}
+      label={<Typography>{label}</Typography>}
+      labelPlacement='end'
+      sx={disabled ? styles.wrapperDisabled : styles.wrapper}
     />
   );
 };

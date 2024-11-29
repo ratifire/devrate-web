@@ -35,21 +35,18 @@ const RightSection = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
         <Box sx={styles.box}>
-          <Typography variant='h6' sx={styles.title}>
+          <Typography sx={styles.title} variant='h6'>
             {t('profile.right.contact')}
           </Typography>
           <Box>
-            <IconButton
-              sx={styles.btnIcon}
-              aria-label='Edit user information'
-              onClick={handleOpenInfo}>
+            <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenInfo}>
               <EditIcon />
             </IconButton>
           </Box>
         </Box>
         <Box gap={2} sx={styles.wrapperLink}>
           {userContacts && userContacts.length > 0 ? (
-            <SocialsLinkList socials={userContacts} componentStyles={styles} />
+            <SocialsLinkList componentStyles={styles} socials={userContacts} />
           ) : (
             <Typography variant='body1'>{t('profile.right.empty.emptyContacts')}</Typography>
           )}
@@ -57,14 +54,11 @@ const RightSection = () => {
       </Box>
       <Box sx={styles.wrapperBox}>
         <Box sx={styles.box}>
-          <Typography variant='h6' sx={styles.title}>
+          <Typography sx={styles.title} variant='h6'>
             {t('profile.right.languages')}
           </Typography>
           <Box>
-            <IconButton
-              sx={styles.btnIcon}
-              aria-label='Edit user information'
-              onClick={handleOpenLanguage}>
+            <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenLanguage}>
               <EditIcon />
             </IconButton>
           </Box>
@@ -78,11 +72,11 @@ const RightSection = () => {
         </Box>
       </Box>
       <Box sx={styles.wrapperBox}>
-        <Typography variant='h6' sx={styles.title}>
+        <Typography sx={styles.title} variant='h6'>
           {t('profile.right.aboutMe')}
         </Typography>
         {personalData && personalData.description ? (
-          <Typography variant='subtitle2' sx={styles.aboutMe}>
+          <Typography sx={styles.aboutMe} variant='subtitle2'>
             {personalData.description}
           </Typography>
         ) : (

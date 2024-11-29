@@ -2,7 +2,7 @@ export const scheduleDark = {
   schedule: {
     backgroundColor: '#3E3E40',
     contentWrapper: {
-      backgroundColor: '#303032'
+      backgroundColor: '#303032',
     },
     smallCalendar: {
       textColor: '#FFFFFF',

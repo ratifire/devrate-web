@@ -1,12 +1,12 @@
 import React, { lazy, memo, Suspense } from 'react';
-import UserProfileTemplate from '../../../Templates/ProfileTemplates/UserProfileTemplate';
 import { Box, Container, Paper } from '@mui/material';
-import { styles } from './UserProfilePage.styles';
+import { useParams, Navigate } from 'react-router-dom';
 import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
 import useAuth from '../../../utils/hooks/useAuth';
-import { useParams, Navigate } from 'react-router-dom';
+import UserProfileTemplate from '../../../Templates/ProfileTemplates/UserProfileTemplate';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import UserProfileSkeleton from '../../../components/UI/Skeleton/Pages/userProfileSkeleton';
+import { styles } from './UserProfilePage.styles';
 
 const SkillsSection = lazy(
   () => import('../../../components/PageComponents/ProfileComponents/UserProfile/SkillsSection/SkillsSection')

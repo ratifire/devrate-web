@@ -1,3 +1,3 @@
-import InterviewerFeedback from './InterviewerFeedback'
+import InterviewerFeedback from './InterviewerFeedback';
 
-export { InterviewerFeedback }
+export { InterviewerFeedback };

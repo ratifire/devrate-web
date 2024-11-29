@@ -1,15 +1,15 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { styles } from './RightSection.styles';
-import SocialsLinkList from '../../../../UI/SocialsLinkList';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import SocialsLinkList from '../../../../UI/SocialsLinkList';
 import LanguagesList from '../../../../UI/LanguagesList';
 import { useGetLanguageUserQuery } from '../../../../../redux/user/language/languageApiSlice';
 import { useGetUserContactsQuery } from '../../../../../redux/user/contacts/contactsApiSlice';
 import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
-import PropTypes from 'prop-types';
+import { styles } from './RightSection.styles';
 
-const RightSection = ({id}, profileType) => {
+const RightSection = ({ id }, profileType) => {
   const { t } = useTranslation();
   const languages = useGetLanguageUserQuery(id);
   const { data: userContacts } = useGetUserContactsQuery(id);
@@ -18,21 +18,24 @@ const RightSection = ({id}, profileType) => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.wrapperBox}>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between' }}>
-          <Typography variant="h6" sx={styles.title}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Typography sx={styles.title} variant='h6'>
             {t('profile.right.contact')}
           </Typography>
         </Box>
         <Box gap={2} sx={styles.wrapperLink}>
-          <SocialsLinkList socials={userContacts} componentStyles={styles} />
+          <SocialsLinkList componentStyles={styles} socials={userContacts} />
         </Box>
       </Box>
       {Boolean(languages.data?.length) && profileType !== 'user' && (
         <Box sx={styles.wrapperBox}>
-          <Typography variant="h6" sx={styles.title}>
+          <Typography sx={styles.title} variant='h6'>
             {t('profile.right.languages')}
           </Typography>
           <Box gap={2} sx={styles.wrapperLanguages}>
@@ -42,10 +45,10 @@ const RightSection = ({id}, profileType) => {
       )}
       {personalData?.description && (
         <Box sx={styles.wrapperBox}>
-          <Typography variant="h6" sx={styles.title}>
+          <Typography sx={styles.title} variant='h6'>
             {t('profile.right.aboutMe')}
           </Typography>
-          <Typography variant="subtitle2" sx={styles.aboutMe}>
+          <Typography sx={styles.aboutMe} variant='subtitle2'>
             {personalData.description}
           </Typography>
         </Box>

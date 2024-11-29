@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import ModalLayout from '../../../../layouts/ModalLayout';
 import { Box, Typography } from '@mui/material';
+import { useFormik } from 'formik';
+import ModalLayout from '../../../../layouts/ModalLayout';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useConfirmEmailMutation } from '../../../../redux/auth/authApiSlice';
-import { useFormik } from 'formik';
-import ConfirmationForm from './ConfirmationForm';
 import { ConfirmationSchema } from '../../../../utils/valadationSchemas/index';
-import styles from './ConfirmationModal.styles';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
+import ConfirmationForm from './ConfirmationForm';
+import styles from './ConfirmationModal.styles';
 
 const ConfirmationModal = () => {
   const { t } = useTranslation();
@@ -64,14 +64,14 @@ const ConfirmationModal = () => {
 
   return (
     <ModalLayout open={openConfirmation} setOpen={handleClose}>
-      <Typography variant='subtitle2' sx={styles.title}>
+      <Typography sx={styles.title} variant='subtitle2'>
         {changeColorOfLastTitleWord(t('modal.confirmation.title'))}
       </Typography>
 
       <Box sx={styles.mainTextWrapper}>
-        <Typography variant='subtitle3' sx={styles.mainText}>
+        <Typography sx={styles.mainText} variant='subtitle3'>
           {t('modal.confirmation.main_text1')}{' '}
-          <Typography variant='subtitle3' component='span' sx={styles.userEmail}>
+          <Typography component='span' sx={styles.userEmail} variant='subtitle3'>
             {email && email.replace(/(?<=.{1}).(?=[^@]*?.@)/g, '*')}
             {'.'}
           </Typography>{' '}
@@ -81,11 +81,11 @@ const ConfirmationModal = () => {
       </Box>
 
       <ConfirmationForm
-        formik={formik}
-        inputRefs={inputRefs}
-        helperTextContent={codeError}
         buttonLabel='modal.confirmation.btn_confirm'
+        formik={formik}
         handleCodeChange={handleCodeChange}
+        helperTextContent={codeError}
+        inputRefs={inputRefs}
       />
     </ModalLayout>
   );

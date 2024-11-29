@@ -3,7 +3,7 @@ export const styles = {
     height: '100%',
     alignItems: 'stretch',
     padding: '8px 12px 38px',
-    'textarea': {
+    textarea: {
       maxHeight: '254px',
     },
     ' .MuiOutlinedInput-notchedOutline': {
@@ -27,7 +27,7 @@ export const styles = {
   textHelper: {
     position: 'absolute',
     bottom: '-18px',
-    left: '-12px'
+    left: '-12px',
   },
   textareaBox: (theme) => ({
     width: '100%',
