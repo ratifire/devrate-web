@@ -6,7 +6,7 @@ resource "aws_lb" "front_ecs_alb" {
   subnets            = data.aws_subnets.default_subnets.ids
   access_logs {
     enabled = true
-    bucket  = "logs-front-1209"
+    bucket  = var.bucket_name_logs
   }
 }
 

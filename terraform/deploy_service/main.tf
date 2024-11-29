@@ -1,10 +1,5 @@
 terraform {
-  backend "s3" {
-    bucket  = "devrate-bucket-front-1"
-    encrypt = true
-    key     = "AWS/build-test-frontend-deploy-tstates/terraform.tfstate"
-    region  = "eu-north-1"
-  }
+  backend "s3" {}
 }
 
 provider "aws" {}
@@ -12,7 +7,7 @@ provider "aws" {}
 resource "aws_default_vpc" "default_backend_vpc" {}
 
 resource "aws_s3_bucket_policy" "logs_prod_policy" {
-  bucket = data.aws_s3_bucket.logs-front-1209.id
+  bucket = data.aws_s3_bucket.front-logs.id
 
   policy = <<POLICY
 {
@@ -24,7 +19,7 @@ resource "aws_s3_bucket_policy" "logs_prod_policy" {
         "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
       },
       "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::logs-front-1209/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
+      "Resource": "arn:aws:s3:::${var.bucket_name_logs}-1209/AWSLogs/${data.aws_caller_identity.current_user.account_id}/*"
     }
   ]
 }

@@ -73,7 +73,7 @@ data "aws_route53_zone" "front_dns_zone" {
   name = var.domain_name
 }
 
-data "aws_s3_bucket" "logs-front-1209" {
+data "aws_s3_bucket" "front-logs" {
   bucket = var.bucket_name_logs
 }
 

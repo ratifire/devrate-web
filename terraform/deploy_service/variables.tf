@@ -42,3 +42,7 @@ variable "bucket_name_logs" {
   description = "Bucket name fo the logs"
   default     = "logs-front-1209"
 }
+
+variable "subdomain_name" {
+  default = "server.devrate.org"
+}

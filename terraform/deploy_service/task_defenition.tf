@@ -33,11 +33,11 @@ resource "aws_ecs_task_definition" "task_definition_front" {
         },
         {
           name  = "REACT_APP_API_URL",
-          value = "https://server.devrate.org"
+          value = "https://${var.subdomain_name}"
         },
         {
           name  = "REACT_APP_WS_URL",
-          value = "wss://server.devrate.org"
+          value = "wss://${var.subdomain_name}"
         }
       ],
       mountPoints = [],
