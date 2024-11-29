@@ -6,6 +6,7 @@ import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material'
 import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { styles } from './SidebarEvent.styles';
 
@@ -26,9 +27,12 @@ const SidebarEvent = ({ event }) => {
   const [month, day, year] = formattedDate.split('/');
   const customFormattedDate = `${day}/${month}/${year}`;
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const eventDeleteHandler = async (id) => {
     try {
       await deleteEvent({ userId, id }).unwrap();
+      enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Failed to delete event:', error);
