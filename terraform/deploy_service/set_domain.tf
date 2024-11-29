@@ -1,7 +1,7 @@
 
 resource "aws_route53_record" "front_a_record" {
   zone_id = data.aws_route53_zone.front_dns_zone.zone_id
-  name    = "devrate.org"
+  name    = var.domain_name
   type    = "A"
 
   alias {

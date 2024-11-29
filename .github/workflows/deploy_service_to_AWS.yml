@@ -53,9 +53,10 @@ jobs:
             echo "Error: File ${{ github.event.inputs.environment }}.tfvars does not exist in /home/runner/work/devrate-web/devrate-web/${{ env.working-directory }}."
             exit 1
           fi
+
       - name: Terraform Init
         run: |
-          terraform init
+          terraform init -backend-config="/home/runner/work/devrate-web/devrate-web/${{ env.working-directory }}/${{ github.event.inputs.environment }}.backend" -reconfigure
 
       - name: Terraform Format
         run: terraform fmt -check
