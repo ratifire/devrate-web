@@ -1,15 +1,13 @@
 @use 'sass:map';
 
 $colors: (
-  'primary-50': #efe6fd,
-  'neutral-50': #ececed,
-  'additional-white': #fff,
+        'primary-50': #efe6fd,
+        'neutral-50': #ececed,
+        'additional-white': #fff,
 );
 
 @each $color-name, $color-value in $colors {
-  .bg-#{$color-name}
-
- {
+  .bg-#{$color-name} {
     background-color: $color-value;
   }
 }
