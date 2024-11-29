@@ -4,7 +4,7 @@ import { Box, Link, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import styles from './ConfirmationModal.styles';
 
@@ -23,8 +23,8 @@ const ConfirmationForm = ({
   const dispatch = useDispatch();
 
   const handleCloseAllModal = () => {
-    dispatch(closeModal({ modalName: 'openRegistration' }));
     dispatch(closeModal({ modalName: 'openConfirmation' }));
+    dispatch(openModal({ modalName: 'openRegistration' }));
   };
 
   useEffect(() => {
@@ -173,7 +173,7 @@ const ConfirmationForm = ({
           {t('modal.confirmation.spam_check_text')}
         </Typography>
         <Typography sx={{ textAlign: 'center' }}>
-          <Link sx={styles.confirmationLink} to={'/'} onClick={handleCloseAllModal}>
+          <Link sx={styles.confirmationLink} to={'/'}>
             {t('modal.confirmation.repeat_request_link')}
           </Link>
           <Typography sx={styles.mainText} variant='subtitle3'>

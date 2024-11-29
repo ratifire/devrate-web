@@ -28,8 +28,8 @@ const ResetPassword = () => {
   const email = useSelector((state) => state.email.email);
   const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
   const handleCloseAllModal = () => {
-    dispatch(closeModal({ modalName: 'openLogin' }));
-    dispatch(closeModal({ modalName: 'openCheckEmail' }));
+    dispatch(closeModal({ modalName: 'openResetPassword' }));
+    dispatch(openModal({ modalName: 'openCheckEmail' }));
   };
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -232,7 +232,7 @@ const ResetPassword = () => {
         </Typography>
 
         <Typography sx={styles.bottom_subtitle} variant='subtitle3'>
-          <Link component={RouterLink} sx={styles.link} to={'/'} variant='subtitle3' onClick={handleCloseAllModal}>
+          <Link component={RouterLink} sx={styles.link} to={'/'} variant='subtitle3'>
             {t('modal.checkEmailResetPassword.resend_link')}
           </Link>{' '}
           {t('modal.checkEmailResetPassword.middle_text')}
