@@ -9,6 +9,7 @@ export const styles = {
       paddingX: theme.spacing(4),
     },
   }),
+
   contentWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
@@ -21,10 +22,12 @@ export const styles = {
       boxShadow: 'none',
     },
   }),
+
   baseUserInfo: {
     gridColumn: '1/6',
     gridRow: '1/2',
   },
+
   skills: {
     gridColumn: '6/10',
     gridRow: '1/2',
