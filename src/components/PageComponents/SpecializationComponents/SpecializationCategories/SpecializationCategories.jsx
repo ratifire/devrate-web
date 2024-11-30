@@ -26,29 +26,34 @@ import { styles } from './SpecializationCategories.styles';
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [anchorEl, setAnchorEl] = useState({});
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useSelector((state) => state.auth.user.data);
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
+
   const {
     data: specializations,
-    isLoading: isLoadingGetSpecialization,
-    isFetching,
-    isError,
+    isFetching: isFetchingGetSpecialization,
+    isError: isErrorGetSpecialization,
   } = useGetSpecializationByUserIdQuery(id, { skip: !id });
-  const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
-  const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery }] =
+  const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery, isError: isErrorGetMainMastery }] =
     useLazyGetMainMasteryBySpecializationIdQuery();
-  const [updateSpecializationAsMainById, { isLoading: isLoadingUpdateSpecialization }] =
-    useUpdateSpecializationAsMainByIdMutation();
-  const [deleteSpecialization, { isLoading: isLoadingDeleteSpecialization }] = useDeleteSpecializationByIdMutation();
+  const [
+    updateSpecializationAsMainById,
+    { isLoading: isLoadingUpdateSpecialization, isError: isErrorUpdateSpecialization },
+  ] = useUpdateSpecializationAsMainByIdMutation();
+  const [deleteSpecialization, { isLoading: isLoadingDeleteSpecialization, isErrorDeleteSpecialization }] =
+    useDeleteSpecializationByIdMutation();
+
   const isLoading =
-    isLoadingGetSpecialization ||
+    isFetchingGetSpecialization ||
     isLoadingGetMainMastery ||
     isLoadingUpdateSpecialization ||
-    isLoadingDeleteSpecialization ||
-    isFetching;
-  const [anchorEl, setAnchorEl] = useState({});
+    isLoadingDeleteSpecialization;
+  const isError =
+    isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization || isErrorDeleteSpecialization;
+  const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
   const { editSpecialization, addSpecialization } = modalSpecialization;
 
   useEffect(() => {
@@ -162,7 +167,6 @@ const SpecializationCategories = () => {
           variant='outlined'
         />
       </Box>
-
       <Box sx={styles.specialization_right_box}>
         {specializations?.length < 4 && (
           <IconButton size='large' sx={styles.add_specialization_btn} onClick={handlerAddSpecializations}>
