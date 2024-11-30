@@ -1,6 +1,6 @@
 region = "eu-north-1"
 
-domain_name = "skillzzy.com"
+domain_name = "dev.skillzzy.com"
 
 bucket_name_logs = "skillzzy-front-logs-1"
 
