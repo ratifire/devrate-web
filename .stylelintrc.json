@@ -10,6 +10,8 @@
         "message": "Expected class selector to be in camelCase or kebab-case"
       }
     ],
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "color-function-notation": null,
+    "alpha-value-notation": null
   }
 }
