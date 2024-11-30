@@ -46,3 +46,7 @@ variable "bucket_name_logs" {
 variable "subdomain_name" {
   default = "server.devrate.org"
 }
+
+variable "vpc" {
+  default = "vpc-0032e90317069a534"
+}
