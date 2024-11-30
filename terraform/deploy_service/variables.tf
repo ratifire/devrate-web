@@ -47,6 +47,10 @@ variable "subdomain_name" {
   default = "server.devrate.org"
 }
 
+variable "back_subdomain_name" {
+  default = "server.skillzzy.com"
+}
+
 variable "vpc" {
   default = "vpc-0032e90317069a534"
 }
