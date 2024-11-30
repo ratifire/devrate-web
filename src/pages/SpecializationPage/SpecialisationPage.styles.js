@@ -57,6 +57,7 @@ export const styles = {
     gridGap: theme.spacing(4),
 
     ' > div': {
+      backgroundImage: 'none',
       borderRadius: 2,
       backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     },
