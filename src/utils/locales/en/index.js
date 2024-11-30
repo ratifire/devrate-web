@@ -409,6 +409,7 @@ export const en = {
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',
       error: 'Something went wrong...',
+      errorDeleteSpec: "You can't delete a specialisation",
       level: {
         title: 'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.',

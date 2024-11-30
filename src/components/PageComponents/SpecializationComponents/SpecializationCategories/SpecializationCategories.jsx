@@ -5,6 +5,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 import {
@@ -25,6 +26,7 @@ import { styles } from './SpecializationCategories.styles';
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
   const { id } = useSelector((state) => state.auth.user.data);
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
@@ -93,17 +95,29 @@ const SpecializationCategories = () => {
   const handlerDeleteSpecialization = async (id) => {
     const findMainSpecialization = specializations.find((spec) => spec.main);
 
-    await deleteSpecialization(id).unwrap();
-    dispatch(setActiveSpecialization(null));
-
-    if (findMainSpecialization?.id === id) {
+    try {
+      await deleteSpecialization(id).unwrap();
       dispatch(setActiveSpecialization(null));
-      dispatch(setMainSpecializations(null));
-    } else {
-      dispatch(setActiveSpecialization(mainSpecialization));
-    }
 
-    handleCloseMenu(id);
+      if (findMainSpecialization?.id === id) {
+        dispatch(setActiveSpecialization(null));
+        dispatch(setMainSpecializations(null));
+      } else {
+        dispatch(setActiveSpecialization(mainSpecialization));
+      }
+    } catch (err) {
+      if (err.status === 409) {
+        enqueueSnackbar(t('specialization.errorDeleteSpec'), {
+          variant: 'error',
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'center',
+          },
+        });
+      }
+    } finally {
+      handleCloseMenu(id);
+    }
   };
 
   const handleCloseMenu = (id) => {
