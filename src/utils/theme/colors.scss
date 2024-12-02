@@ -7,12 +7,11 @@ $colors: (
 );
 
 @each $color-name, $color-value in $colors {
-  .bg-#{$color-name}
-
- {
+  .bg-#{$color-name} {
     background-color: $color-value;
   }
 }
+
 
 //.bg-primary-50 {
 //	background-color: #EFE6FD;background-colorbackground-colorbackground-color

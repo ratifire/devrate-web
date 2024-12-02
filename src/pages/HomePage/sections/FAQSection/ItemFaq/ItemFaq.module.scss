@@ -1,5 +1,5 @@
-.item_faq {
-  width: 100%;
+.itemFaq {
+    width: 100%;
 
   &__header {
     padding: 36px;
@@ -32,7 +32,7 @@
     font-weight: 600;
     font-size: 24px;
     line-height: 150%;
-    color: #fff;
+    color: #FFF;
     margin-bottom: 16px;
 
     @media screen and (width <= 1740px) {
