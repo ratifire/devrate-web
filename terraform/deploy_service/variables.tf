@@ -35,5 +35,22 @@ variable "front_port" {
 
 variable "domain_name" {
   description = "Domain name"
-  default     = "devrate.org"
+  default     = "skillzzy.com"
+}
+
+variable "bucket_name_logs" {
+  description = "Bucket name fo the logs"
+  default     = "logs-front-1209"
+}
+
+variable "subdomain_name" {
+  default = "server.devrate.org"
+}
+
+variable "back_subdomain_name" {
+  default = "server.skillzzy.com"
+}
+
+variable "vpc" {
+  default = "vpc-0032e90317069a534"
 }

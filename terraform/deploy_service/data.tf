@@ -22,7 +22,7 @@ data "aws_vpcs" "all_vpcs" {}
 data "aws_subnets" "default_subnets" {
   filter {
     name   = "vpc-id"
-    values = ["vpc-00b9e5046c1050334"]
+    values = [var.vpc]
   }
 
 
@@ -70,17 +70,17 @@ data "aws_lb" "lb" {
 }
 
 data "aws_route53_zone" "front_dns_zone" {
-  name = "devrate.org"
+  name = var.domain_name
 }
 
-data "aws_s3_bucket" "logs-front-1209" {
-  bucket = "logs-front-1209"
+data "aws_s3_bucket" "front-logs" {
+  bucket = var.bucket_name_logs
 }
 
-data "aws_acm_certificate" "devrate_cert" {
-  domain   = "devrate.org"
+data "aws_acm_certificate" "domain_cert" {
+  domain   = var.domain_name
   statuses = ["ISSUED"]
   tags = {
-    "Name" = "devrate.org"
+    "Name" = var.domain_name
   }
 }
