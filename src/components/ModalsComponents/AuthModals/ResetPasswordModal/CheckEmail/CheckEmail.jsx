@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Link, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { useSnackbar } from 'notistack';
 import { CheckResetEmailSchema } from '../../../../../utils/valadationSchemas/index';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
@@ -28,6 +28,8 @@ const CheckEmail = () => {
 
   const [sendResetEmail] = useResetPasswordMutation();
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const onSubmit = async (values, { resetForm }) => {
     try {
       await sendResetEmail({ email: values.email });
@@ -36,16 +38,7 @@ const CheckEmail = () => {
       dispatch(closeModal({ modalName: 'openCheckEmail' }));
       dispatch(openModal({ modalName: 'openResetPassword' }));
     } catch (error) {
-      toast.error('Error sending email. Please try again.', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'dark',
-      });
+      enqueueSnackbar('Error sending email. Please try again.', { variant: 'error' });
     }
   };
 

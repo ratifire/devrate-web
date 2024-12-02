@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import LinkIcon from '@mui/icons-material/Link';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
+import { useSnackbar } from 'notistack';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -21,6 +21,8 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
 
   const [showCancelButton, setShowCancelButton] = useState(true);
   const [disableLink, setDisableLink] = useState(false);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const eventStartTime = new Date(event.startTime);
@@ -59,16 +61,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
       await deleteEventById({ userId, id: event.eventTypeId }).unwrap();
       handleClosePopup();
       setEventUpdated((prev) => !prev);
-      toast.success(t('schedule.deleteEventSuccessMessage'), {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'dark',
-      });
+      enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Failed to add skill:', error);
@@ -77,17 +70,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
         // eslint-disable-next-line no-console
         console.error('Bad Request: Likely an issue with the request data or format');
       }
-
-      toast.error(t('schedule.deleteEventErrorMessage'), {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'dark',
-      });
+      enqueueSnackbar(t('schedule.deleteEventErrorMessage'), { variant: 'error' });
     }
   };
 
