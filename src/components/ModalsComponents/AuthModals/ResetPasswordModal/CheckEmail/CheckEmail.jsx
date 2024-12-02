@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Link, Typography } from '@mui/material';
@@ -22,7 +22,7 @@ const initialValues = {
 const CheckEmail = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const openCheckEmail = useSelector((state) => state.modal.openCheckEmail);
   const handleClose = () => dispatch(closeModal({ modalName: 'openCheckEmail' }));
 
@@ -90,8 +90,8 @@ const CheckEmail = () => {
             sx={styles.policyLink}
             onClick={(e) => {
               e.preventDefault();
-              handleClose();
-              navigate('/#');
+              // handleClose();
+              // navigate('/#');
             }}
           >
             {t('modal.login.text_privacy_policy')}
@@ -101,8 +101,8 @@ const CheckEmail = () => {
             sx={styles.policyLink}
             onClick={(e) => {
               e.preventDefault();
-              handleClose();
-              navigate('/#');
+              // handleClose();
+              // navigate('/#');
             }}
           >
             {t('modal.login.text_privacy_terms')}

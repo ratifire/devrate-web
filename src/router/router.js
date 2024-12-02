@@ -6,10 +6,10 @@ import RequireAuth from '../redux/auth/RequireAuth';
 import PersonalProfilePage from '../pages/ProfilePages/PersonalProfilePage';
 import SpecializationPage from '../pages/SpecializationPage';
 import SchedulePage from '../pages/ShedulePage';
-import UserProfilePage from '../pages/ProfilePages/UserProfilePage';
 import FaqPage from '../pages/FaqPage';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsAndConditions from '../pages/TermsAndConditions';
+import UserProfileRoute from './UserProfileRoute';
 import navigationLinks from './links';
 
 const router = createBrowserRouter([
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
           },
           {
             path: `${navigationLinks.profile}/:userId`,
-            element: <UserProfilePage />,
+            element: <UserProfileRoute />,
           },
           {
             path: navigationLinks.schedule,

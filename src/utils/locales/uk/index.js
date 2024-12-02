@@ -125,10 +125,10 @@ export const uk = {
         required: "Це обов'язкове поле",
         first_name_long: 'Імʼя занадто довге',
         first_name_short: 'Імʼя занадто коротке',
-        first_name_invalid_characters: 'Дозволені лише великі та малі літери',
+        first_name_invalid_characters: 'Дозволені лише літери',
         last_name_long: 'Прізвище занадто довге',
         last_name_short: 'Прізвище занадто коротке',
-        last_name_invalid_characters: 'Дозволені лише великі та малі літери',
+        last_name_invalid_characters: 'Дозволені лише літери',
         password_short: 'Пароль занадто короткий',
         password_long: 'Пароль занадто довгий',
         password_must_match: 'Паролі мають збігатися',
@@ -212,6 +212,8 @@ export const uk = {
       baseUserInfo: {
         loading: 'Ваш профіль заповнено на',
         complete: 'Вітаємо! Ваш профіль повністю заповнений',
+        messageBtn: 'Написати повідомлення',
+        interviewBtn: 'Забронювати співбесіду',
       },
       experience: {
         workExperience: {
@@ -413,6 +415,7 @@ export const uk = {
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',
       error: 'Щось пішло не так...',
+      errorDeleteSpec: 'Ви не можете видалити спеціалізацію',
       level: {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
