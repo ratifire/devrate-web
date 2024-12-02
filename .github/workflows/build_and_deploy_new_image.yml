@@ -16,11 +16,6 @@ on:
           - prod
           - dev_new
 
-env:
-  REACT_APP_API_URL: 'https://server.devrate.org'
-  REACT_APP_WS_URL: 'wss://server.devrate.org'
-
-
 permissions:
   contents: read
 
@@ -44,8 +39,8 @@ jobs:
 
       - name: Set environment variables with defaults
         run: |
-          echo "REACT_APP_API_URL=${{ env.REACT_APP_API_URL }}" >> .env
-          echo "REACT_APP_WS_URL=${{ env.REACT_APP_WS_URL }}" >> .env
+          echo "REACT_APP_API_URL=${{ vars.REACT_APP_API_URL }}" >> .env
+          echo "REACT_APP_WS_URL=${{ vars.REACT_APP_WS_URL }}" >> .env
 
       - run: npm ci
       - run: npm run build --if-present
