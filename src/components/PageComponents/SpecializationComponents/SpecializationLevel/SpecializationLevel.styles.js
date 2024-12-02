@@ -18,7 +18,7 @@ export const styles = {
     padding: theme.spacing(1),
     gridGap: theme.spacing(1),
     '.MuiButtonGroup-firstButton.Mui-disabled, .MuiButtonGroup-middleButton.Mui-disabled': {
-      borderRight: 'none'
+      borderRight: 'none',
     },
     ' .MuiButtonGroup-lastButton': {
       borderRadius: 1,
@@ -87,5 +87,5 @@ export const styles = {
     ':hover': {
       border: 'none',
     },
-  })
+  }),
 };

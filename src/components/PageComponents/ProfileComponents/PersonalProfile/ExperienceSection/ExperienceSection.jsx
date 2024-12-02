@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { Box, IconButton, Tab, Tabs } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { Add } from '@mui/icons-material';
+import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '../../../../../redux/modal/modalSlice';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
 import Skills from './Skills';
 import Achievement from './Achievement';
-import { useTranslation } from 'react-i18next';
 import WorkExperience from './WorkExperience/WorkExperience';
-import { Add } from '@mui/icons-material';
-import { openModal } from '../../../../../redux/modal/modalSlice';
-import { useDispatch, useSelector } from 'react-redux';
 
 const ExperienceSection = () => {
   const [value, setValue] = useState('workExperience');
   const { t } = useTranslation();
-  const buttonStates  = useSelector((state) => state.button);
+  const buttonStates = useSelector((state) => state.button);
   const dispatch = useDispatch();
-
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -25,49 +24,50 @@ const ExperienceSection = () => {
     dispatch(openModal({ modalName: value }));
   };
 
-
   const tab = {
-    workExperience: <WorkExperience tab={'workExperience'}/>,
-    achievement: <Achievement tab={'achievement'}/>,
-    skills: <Skills tab={'skills'}/>,
+    workExperience: <WorkExperience tab={'workExperience'} />,
+    achievement: <Achievement tab={'achievement'} />,
+    skills: <Skills tab={'skills'} />,
     education: <Education tab={'education'} />,
   };
 
-
   const tabButtonPlus = {
-    workExperience:
-      <IconButton
-        sx={styles.iconBtn}
-        onClick={handleAddFeature}
-      >
+    workExperience: (
+      <IconButton sx={styles.iconBtn} onClick={handleAddFeature}>
         <Add />
-      </IconButton>,
-    achievement:
-      <IconButton
-        sx={styles.iconBtn}
-        onClick={handleAddFeature}
-      >
+      </IconButton>
+    ),
+    achievement: (
+      <IconButton sx={styles.iconBtn} onClick={handleAddFeature}>
         <Add />
-      </IconButton>,
+      </IconButton>
+    ),
     skills: <></>,
-    education:
-      <IconButton
-        sx={styles.iconBtn}
-        onClick={handleAddFeature}
-      >
+    education: (
+      <IconButton sx={styles.iconBtn} onClick={handleAddFeature}>
         <Add />
-      </IconButton>,
+      </IconButton>
+    ),
   };
 
   return (
     <Box sx={styles.experienceContainer}>
       <Box sx={styles.tabsContainer}>
         <Tabs sx={styles.wrapperTab} value={value} onChange={handleChange}>
-          <Tab disableRipple value="workExperience" label={t('profile.experience.workExperience.tabName')}
-                     sx={styles.tabItem} />
-          <Tab disableRipple value="achievement" label={t('profile.experience.achievement.tabName')} sx={styles.tabItem} />
-          <Tab disableRipple value="skills" label={t('profile.experience.skills.tabName')} sx={styles.tabItem} />
-          <Tab disableRipple value="education" label={t('profile.experience.education.tabName')} sx={styles.tabItem} />
+          <Tab
+            disableRipple
+            label={t('profile.experience.workExperience.tabName')}
+            sx={styles.tabItem}
+            value='workExperience'
+          />
+          <Tab
+            disableRipple
+            label={t('profile.experience.achievement.tabName')}
+            sx={styles.tabItem}
+            value='achievement'
+          />
+          <Tab disableRipple label={t('profile.experience.skills.tabName')} sx={styles.tabItem} value='skills' />
+          <Tab disableRipple label={t('profile.experience.education.tabName')} sx={styles.tabItem} value='education' />
         </Tabs>
         {buttonStates[value] && tabButtonPlus[value]}
       </Box>

@@ -5,7 +5,7 @@ const styles = {
     padding: theme.spacing(4),
     backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     borderRadius: 2,
-    border: theme.palette.sliderAssessment.border
+    border: theme.palette.sliderAssessment.border,
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',

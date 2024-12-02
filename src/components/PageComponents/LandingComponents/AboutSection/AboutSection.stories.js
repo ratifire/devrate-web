@@ -1,5 +1,5 @@
-import AboutSection from './AboutSection';
 import { decorators } from '../../../../../.storybook/preview';
+import AboutSection from './AboutSection';
 
 export default {
   title: 'LandingComponents/AboutSection',

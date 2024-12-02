@@ -3,11 +3,11 @@ import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ItemSkill } from '../SkillsItem';
-import { styles } from './SpecializationSkills.styles';
-import { ErrorComponent } from '../../Exceptions';
 import { useSelector } from 'react-redux';
+import { ItemSkill } from '../SkillsItem';
+import { ErrorComponent } from '../../Exceptions';
 import { SkillsSkeleton } from '../../Skeleton';
+import { styles } from './SpecializationSkills.styles';
 
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { t } = useTranslation();
@@ -16,18 +16,18 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
   const isDisabled = !activeSpecialization && !mainSpecialization;
 
   if (isFetching) {
-    return <SkillsSkeleton />
+    return <SkillsSkeleton />;
   }
 
   if (isError) {
-    return <ErrorComponent />
+    return <ErrorComponent />;
   }
 
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.title}>
         <Typography variant='h6'>{t(title)}</Typography>
-        <IconButton disabled={isDisabled} sx={styles.btnIcon} aria-label='Edit user information' onClick={openModal}>
+        <IconButton aria-label='Edit user information' disabled={isDisabled} sx={styles.btnIcon} onClick={openModal}>
           <EditIcon />
         </IconButton>
       </Box>
@@ -35,9 +35,9 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
         {skills?.map((skill) => (
           <ItemSkill
             key={skill.id}
+            grows={skill.grows}
             name={skill.name}
             value={Math.round(skill.averageMark * 10) / 10}
-            grows={skill.grows}
           />
         ))}
       </Box>

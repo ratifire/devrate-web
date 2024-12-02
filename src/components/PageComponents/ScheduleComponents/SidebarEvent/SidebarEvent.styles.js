@@ -1,14 +1,14 @@
 export const styles = {
   sideBarEventContainer: (theme) => ({
     height: '185px', //162px changed to 185px due to adding line of participant
-    backgroundColor:theme.palette.schedule.sideBarEvent.backgroundColor,
+    backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
     borderRadius: 2,
     padding: theme.spacing(3),
     paddingRight: theme.spacing(3),
     marginBottom: theme.spacing(2),
   }),
-  title: (theme)=>({
-    color:theme.palette.schedule.sideBarEvent.titleColor,
+  title: (theme) => ({
+    color: theme.palette.schedule.sideBarEvent.titleColor,
     '&::first-letter': {
       textTransform: 'uppercase',
     },
@@ -18,9 +18,9 @@ export const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: theme.spacing(2),
-   }),
+  }),
   dateAndTime: (theme) => ({
-    color:theme.palette.schedule.sideBarEvent.dateAndTimeColor,
+    color: theme.palette.schedule.sideBarEvent.dateAndTimeColor,
   }),
   host: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.hostColor,

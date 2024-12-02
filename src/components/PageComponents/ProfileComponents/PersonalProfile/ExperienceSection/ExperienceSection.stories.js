@@ -1,8 +1,8 @@
 import React from 'react';
-import ExperienceSection from './ExperienceSection';
 import { Provider } from 'react-redux';
-import { store } from '../../../../../redux/store/store';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { store } from '../../../../../redux/store/store';
+import ExperienceSection from './ExperienceSection';
 
 export default {
   title: 'ProfileComponents/ExperienceSection',

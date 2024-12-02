@@ -146,7 +146,7 @@ const HardSkillsModal = () => {
 
   if (isLoading) {
     return (
-      <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
+      <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
         <LoaderComponent />
       </ModalLayoutProfile>
     );
@@ -154,47 +154,47 @@ const HardSkillsModal = () => {
 
   if (isError) {
     return (
-      <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
+      <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
         <ErrorComponent />
       </ModalLayoutProfile>
     );
   }
 
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={openSkillsModal}>
-      <Typography variant='h6' sx={styles.title}>
+    <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
+      <Typography sx={styles.title} variant='h6'>
         {t('specialization.modal.skills.title')}
       </Typography>
-      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
+      <form onKeyDown={handleKeyDown} onSubmit={handleSubmit}>
         <Box sx={[styles.input, hardSkillsStyles.box]}>
           <TextField
-            variant='outlined'
-            autoFocus={true}
-            helperText={t(helperText)}
-            error={error}
-            value={skill}
-            onChange={handleChange}
-            sx={hardSkillsStyles.input}
-            label={t('specialization.modal.skills.placeholder')}
+            autoFocus
             fullWidth
+            error={error}
+            helperText={t(helperText)}
+            label={t('specialization.modal.skills.placeholder')}
+            sx={hardSkillsStyles.input}
+            value={skill}
+            variant='outlined'
+            onChange={handleChange}
           />
-          <IconButton onClick={handleAddSkill} sx={styles.iconBtn}>
+          <IconButton sx={styles.iconBtn} onClick={handleAddSkill}>
             <AddIcon />
           </IconButton>
         </Box>
         <Box sx={styles.input}>
           <Box>
             {allSkills?.map((skill) => (
-              <SkillChip onDelete={handleDeleteSkill} key={skill.id} skill={skill} />
+              <SkillChip key={skill.id} skill={skill} onDelete={handleDeleteSkill} />
             ))}
           </Box>
         </Box>
         <ButtonDef
-          variant='contained'
-          type='submit'
-          label={t('profile.modal.btn')}
           correctStyle={styles.btn}
           disabled={addSkills.length === 0 && idDeletedSkills.length === 0}
+          label={t('profile.modal.btn')}
+          type='submit'
+          variant='contained'
         />
       </form>
     </ModalLayoutProfile>

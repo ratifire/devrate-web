@@ -1,7 +1,6 @@
 import React, { lazy, memo, Suspense } from 'react';
-import PersonalProfileTemplate from '../../../Templates/ProfileTemplates/PersonalProfileTemplate';
 import { Box, Container, Paper } from '@mui/material';
-import { styles } from './PersonalProfilePage.styles';
+import PersonalProfileTemplate from '../../../Templates/ProfileTemplates/PersonalProfileTemplate';
 import useAuth from '../../../utils/hooks/useAuth';
 import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
 import {
@@ -10,6 +9,7 @@ import {
   RightSectionSkeleton,
   SkillsSectionSkeleton,
 } from '../../../components/UI/Skeleton';
+import { styles } from './PersonalProfilePage.styles';
 
 const SkillsSection = lazy(
   () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/SkillsSection')

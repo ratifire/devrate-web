@@ -3,8 +3,8 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
-import { styles } from './Bookmark.style';
 import { useTheme } from '@mui/material/styles';
+import { styles } from './Bookmark.style';
 
 const Bookmark = ({ isBookmarked = false, onToggle }) => {
   const [bookmarked, setBookmarked] = useState(isBookmarked);
@@ -20,16 +20,8 @@ const Bookmark = ({ isBookmarked = false, onToggle }) => {
   };
 
   return (
-    <IconButton
-      sx={classes.iconButton}
-      onClick={handleClick}
-      aria-label="bookmark"
-    >
-      {bookmarked ? (
-        <BookmarkIcon style={classes.bookmarkIcon} />
-      ) : (
-        <BookmarkBorderIcon />
-      )}
+    <IconButton aria-label='bookmark' sx={classes.iconButton} onClick={handleClick}>
+      {bookmarked ? <BookmarkIcon style={classes.bookmarkIcon} /> : <BookmarkBorderIcon />}
     </IconButton>
   );
 };

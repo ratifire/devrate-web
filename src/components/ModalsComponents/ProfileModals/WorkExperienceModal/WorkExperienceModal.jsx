@@ -1,13 +1,12 @@
-  import React, { useMemo, useState } from 'react';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import { Box, IconButton, Typography } from '@mui/material';
-import { styles } from './WorkExperienceModal.styles';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { WorkExperienceModalSchema } from '../../../../utils/valadationSchemas/index';
 import AddIcon from '@mui/icons-material/Add';
+import { WorkExperienceModalSchema } from '../../../../utils/valadationSchemas/index';
+import { closeModal } from '../../../../redux/modal/modalSlice';
+import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import Responsibility from '../../../UI/Responsibility';
@@ -19,6 +18,7 @@ import {
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
+import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceModal = () => {
   const dispatch = useDispatch();
@@ -54,6 +54,7 @@ const WorkExperienceModal = () => {
         await createNewWorkExperience({ userId: id, data }).unwrap();
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Failed to create Work Experience', error);
     }
 
@@ -86,8 +87,8 @@ const WorkExperienceModal = () => {
   };
 
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={workExperience}>
-      <Typography variant='subtitle1' sx={styles.title}>
+    <ModalLayoutProfile open={workExperience} setOpen={handleClose}>
+      <Typography sx={styles.title} variant='subtitle1'>
         {t('profile.modal.workExperience.title')}
       </Typography>
 
@@ -95,99 +96,99 @@ const WorkExperienceModal = () => {
         <Box sx={styles.wrapper}>
           <Box sx={styles.input50}>
             <FormInput
-              name='position'
-              value={formik.values.position}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='profile.modal.workExperience.position'
               required
-              placeholder='profile.modal.workExperience.position_placeholder'
-              helperText={formik.touched.position && formik.errors.position}
               error={formik.touched.position && Boolean(formik.errors.position)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.position && formik.errors.position}
+              label='profile.modal.workExperience.position'
+              name='position'
+              placeholder='profile.modal.workExperience.position_placeholder'
+              type='text'
+              value={formik.values.position}
             />
           </Box>
           <Box sx={styles.input50}>
             <FormInput
-              name='companyName'
-              value={formik.values.companyName}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              label='profile.modal.workExperience.companyName'
               required
-              placeholder='profile.modal.workExperience.companyName_placeholder'
-              helperText={formik.touched.companyName && formik.errors.companyName}
               error={formik.touched.companyName && Boolean(formik.errors.companyName)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.companyName && formik.errors.companyName}
+              label='profile.modal.workExperience.companyName'
+              name='companyName'
+              placeholder='profile.modal.workExperience.companyName_placeholder'
+              value={formik.values.companyName}
             />
           </Box>
           <Box sx={styles.input100}>
             <FormSelect
-              sx={styles.input50}
-              label={t('profile.modal.workExperience.startDate')}
-              value={formik.values.startYear}
-              countries={selectYears}
-              name='startYear'
-              variant='outlined'
               required
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              helperText={formik.touched.startYear && formik.errors.startYear}
+              countries={selectYears}
               error={formik.touched.startYear && Boolean(formik.errors.startYear)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.startYear && formik.errors.startYear}
+              label={t('profile.modal.workExperience.startDate')}
+              name='startYear'
+              sx={styles.input50}
+              value={formik.values.startYear}
+              variant='outlined'
             />
             <FormSelect
-              sx={styles.input50}
-              label={t('profile.modal.workExperience.endDate')}
-              value={formik.values.currentDate ? '' : formik.values.endYear}
               countries={selectYears}
-              name='endYear'
-              variant='outlined'
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              helperText={formik.touched.endYear && formik.errors.endYear}
-              error={formik.touched.endYear && Boolean(formik.errors.endYear)}
               disabled={formik.values.currentDate}
+              error={formik.touched.endYear && Boolean(formik.errors.endYear)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.endYear && formik.errors.endYear}
+              label={t('profile.modal.workExperience.endDate')}
+              name='endYear'
+              sx={styles.input50}
+              value={formik.values.currentDate ? '' : formik.values.endYear}
+              variant='outlined'
             />
             <Box sx={styles.checkBoxContainer}>
               <FormCheckbox
-                label={t('profile.modal.workExperience.currentDate')}
-                checked={formik.values.currentDate}
+                workExperience
                 changeHandler={handleCheckboxChange}
-                workExperience={true}
-                name='currentDate'
-                helperText={formik.touched.currentDate && formik.errors.currentDate}
+                checked={formik.values.currentDate}
                 error={formik.touched.currentDate && Boolean(formik.errors.currentDate)}
+                helperText={formik.touched.currentDate && formik.errors.currentDate}
+                label={t('profile.modal.workExperience.currentDate')}
+                name='currentDate'
               />
             </Box>
           </Box>
 
           <Box sx={styles.input100}>
             <TextAreaInput
-              name='description'
-              value={formik.values.description}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              type='text'
-              label='profile.modal.workExperience.description'
               required
-              placeholder='profile.modal.workExperience.description_placeholder'
-              helperText={formik.touched.description && formik.errors.description}
-              error={formik.touched.description && Boolean(formik.errors.description)}
               FormHelperTextProps={{
-                sx: styles.error
+                sx: styles.error,
               }}
+              error={formik.touched.description && Boolean(formik.errors.description)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.description && formik.errors.description}
+              label='profile.modal.workExperience.description'
+              name='description'
+              placeholder='profile.modal.workExperience.description_placeholder'
+              type='text'
+              value={formik.values.description}
             />
           </Box>
           <Box sx={styles.input100}>
             <FormInput
-              name='responsibilities'
-              value={formik.values.responsibilities}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              label='profile.modal.workExperience.responsibilities'
               required
-              placeholder='profile.modal.workExperience.responsibilities_placeholder'
-              helperText={formik.touched.responsibilities && formik.errors.responsibilities}
               error={formik.touched.responsibilities && Boolean(formik.errors.responsibilities)}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              helperText={formik.touched.responsibilities && formik.errors.responsibilities}
+              label='profile.modal.workExperience.responsibilities'
+              name='responsibilities'
+              placeholder='profile.modal.workExperience.responsibilities_placeholder'
+              value={formik.values.responsibilities}
             />
             <IconButton sx={styles.iconBtn} onClick={() => createResponsibility(formik.values.responsibilities)}>
               <AddIcon />
@@ -197,9 +198,10 @@ const WorkExperienceModal = () => {
             <Box sx={styles.responsibility}>
               {responsibilities.map((responsibility, index) => (
                 <Responsibility
+                  // eslint-disable-next-line react/no-array-index-key
                   key={index}
-                  responsibility={responsibility}
                   tobeDeleted
+                  responsibility={responsibility}
                   responsibilityDeleteHandler={responsibilityDeleteHandler}
                 />
               ))}
@@ -207,11 +209,11 @@ const WorkExperienceModal = () => {
           )}
 
           <ButtonDef
-            variant='contained'
-            type='submit'
-            label={t('profile.modal.btn')}
             correctStyle={styles.workExperienceBtn}
             disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+            label={t('profile.modal.btn')}
+            type='submit'
+            variant='contained'
           />
         </Box>
       </form>

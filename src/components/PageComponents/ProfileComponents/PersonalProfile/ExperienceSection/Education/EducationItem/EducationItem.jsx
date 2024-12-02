@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import { Box, IconButton, Link, Typography } from '@mui/material';
-import styles from './EducationItem.styles.js';
 import PropTypes from 'prop-types';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import DropdownMenu from '../../DropdownMenu';
-import { useDeleteEducationByIdMutation } from '../../../../../../../redux/services/educationApiSlice';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import DropdownMenu from '../../DropdownMenu';
+import { useDeleteEducationByIdMutation } from '../../../../../../../redux/services/educationApiSlice';
 import { setEducationDataToEdit } from '../../../../../../../redux/user/education/educationSlice';
 import { openModal } from '../../../../../../../redux/modal/modalSlice';
+import styles from './EducationItem.styles.js';
 
 const LENGTH_TO_COLLAPSE = 200;
 
@@ -31,14 +31,16 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
   };
 
   const handleEditFeature = () => {
-    dispatch(setEducationDataToEdit({
-      id,
-      type,
-      name,
-      description,
-      startYear,
-      endYear,
-    }));
+    dispatch(
+      setEducationDataToEdit({
+        id,
+        type,
+        name,
+        description,
+        startYear,
+        endYear,
+      })
+    );
     dispatch(openModal({ modalName: 'education' }));
     handleCloseMenu();
   };
@@ -52,42 +54,43 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
     <Box sx={styles.educationItemContainer}>
       <Box sx={styles.itemHeaderContainer}>
         <Box sx={styles.logoTitleContainer}>
-          {IconComponent && <IconComponent width={48} height={48} />}
+          {IconComponent && <IconComponent height={48} width={48} />}
           <Box sx={{ marginLeft: '11px' }}>
-            <Typography variant="h6" sx={styles.courseTitle}>
+            <Typography sx={styles.courseTitle} variant='h6'>
               {type}
             </Typography>
-            <Typography variant="subtitle2" sx={styles.schoolTitle}>
+            <Typography sx={styles.schoolTitle} variant='subtitle2'>
               {name} <span style={{ margin: '0 4px' }}>•</span> {startYear} - {endYear}
             </Typography>
           </Box>
         </Box>
         <Box sx={styles.menuIcon}>
-          <IconButton onClick={(event) => handleMenuOpen(event)} sx={styles.iconBtnModal}>
+          <IconButton sx={styles.iconBtnModal} onClick={(event) => handleMenuOpen(event)}>
             <MoreVertIcon />
           </IconButton>
         </Box>{' '}
         <DropdownMenu
           anchorEl={anchorEl}
           handleCloseMenu={handleCloseMenu}
-          handleEditFeature={handleEditFeature}
           handleDeleteFeature={handleDeleteFeature}
+          handleEditFeature={handleEditFeature}
         />
       </Box>
       <Typography>
         {isCollapsed && needCollapse ? excerpt : description}
         &nbsp;
-
-        {needCollapse && <Link
-          component="button"
-          variant="subtitle2"
-          sx={styles.link}
-          onClick={() => {
-            setIsCollapsed(oldVal => !oldVal);
-          }}
-        >
-          {isCollapsed ? t('profile.experienceSection.readAll') : t('profile.experienceSection.collapse')}
-        </Link>}
+        {needCollapse && (
+          <Link
+            component='button'
+            sx={styles.link}
+            variant='subtitle2'
+            onClick={() => {
+              setIsCollapsed((oldVal) => !oldVal);
+            }}
+          >
+            {isCollapsed ? t('profile.experienceSection.readAll') : t('profile.experienceSection.collapse')}
+          </Link>
+        )}
       </Typography>
     </Box>
   );
@@ -99,10 +102,7 @@ EducationItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   startYear: PropTypes.number.isRequired,
-  endYear: PropTypes.oneOfType([
-    PropTypes.number.isRequired,
-    PropTypes.string.isRequired
-  ]).isRequired,
+  endYear: PropTypes.oneOfType([PropTypes.number.isRequired, PropTypes.string.isRequired]).isRequired,
   icon: PropTypes.elementType,
 };
 

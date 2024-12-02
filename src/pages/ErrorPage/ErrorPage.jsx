@@ -5,19 +5,19 @@ import { styles } from './ErrorPage.styles';
 
 const ErrorPage = () => {
   const error = useRouteError();
-  console.error(error);
+
   return (
     <Box sx={styles.box}>
-      <Typography variant='h1' gutterBottom>
+      <Typography gutterBottom variant='h1'>
         Oops!
       </Typography>
-      <Typography variant='body1' gutterBottom>
+      <Typography gutterBottom variant='body1'>
         Sorry, an unexpected error has occurred.
       </Typography>
-      <Typography variant='body2' color='error' gutterBottom>
+      <Typography gutterBottom color='error' variant='body2'>
         <i>{error.statusText || error.message}</i>
       </Typography>
-      <Button sx={styles.btn} component={Link} to='/' variant='contained' color='primary'>
+      <Button color='primary' component={Link} sx={styles.btn} to='/' variant='contained'>
         Go to Home
       </Button>
     </Box>

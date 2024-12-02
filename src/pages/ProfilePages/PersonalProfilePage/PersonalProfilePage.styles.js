@@ -12,7 +12,7 @@ export const styles = {
   contentWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: 'auto auto',
+    gridTemplateRows: 'auto auto auto',
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
@@ -32,9 +32,12 @@ export const styles = {
   right: {
     gridColumn: '10/13',
     gridRow: '1/3',
+    minWidth: '354px',
   },
   experience: {
     gridColumn: '1/10',
-    gridRow: '2/3',
+    gridRow: '2/5',
+    minHeight: '382px',
+    height: 'calc(100vh - 412px)',
   },
 };

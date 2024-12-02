@@ -10,7 +10,7 @@ const LinkList = ({ links, componentStyles }) => {
   return (
     <>
       {links.map(({ name, path }) => (
-        <Link key={path} to={path} component={RouterLink} sx={componentStyles.link}>
+        <Link key={path} component={RouterLink} sx={componentStyles.link} to={path}>
           {t(name)}
         </Link>
       ))}

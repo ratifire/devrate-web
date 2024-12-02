@@ -7,10 +7,10 @@ import { styles } from './InterviewStepper.styles';
 
 const InterviewStepper = memo(({ activeStep }) => {
   return (
-    <Stepper activeStep={activeStep} sx={styles.stepBorder} connector={<StepConnector />}>
+    <Stepper activeStep={activeStep} connector={<StepConnector />} sx={styles.stepBorder}>
       {NUMBER_OF_STEPS.map((label) => (
-        <Step sx={styles.step} key={label}>
-          <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label}></StepLabel>
+        <Step key={label} sx={styles.step}>
+          <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label} />
         </Step>
       ))}
     </Stepper>

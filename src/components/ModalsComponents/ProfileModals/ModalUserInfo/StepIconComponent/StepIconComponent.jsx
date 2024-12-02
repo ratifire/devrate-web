@@ -9,17 +9,7 @@ function CustomStepIcon(props) {
   const theme = useTheme();
   const style = styles(theme);
 
-  return (
-    <Box
-      sx={[
-        style.root,
-        completed && style.completed,
-        active && style.active,
-      ]}
-    >
-      {icon}
-    </Box>
-  );
+  return <Box sx={[style.root, completed && style.completed, active && style.active]}>{icon}</Box>;
 }
 
 CustomStepIcon.propTypes = {

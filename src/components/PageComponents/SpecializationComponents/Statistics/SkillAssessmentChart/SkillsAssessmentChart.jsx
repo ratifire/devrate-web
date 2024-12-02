@@ -12,10 +12,10 @@ import {
   useHandleChange,
   useTooltip,
 } from '../utils';
-import { styles } from './SkillsAssessmentChart.styles';
-import useSkillsAssessmentChart from './useSkillsAssessmentChart';
 import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
 import { SkillsAssessmentChartSkeleton } from '../../../../UI/Skeleton';
+import { styles } from './SkillsAssessmentChart.styles';
+import useSkillsAssessmentChart from './useSkillsAssessmentChart';
 
 const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
@@ -54,32 +54,32 @@ const SkillsAssessmentChart = () => {
           <Typography variant='subtitle2'>{t('specialization.statistics.skills_assessment_chart_title')}</Typography>
         </Box>
         <ChartDropDown
+          days={t('specialization.statistics.interview_chart_days')}
           handleChange={handleChange}
           months={t('specialization.statistics.interview_chart_months')}
-          days={t('specialization.statistics.interview_chart_days')}
         />
       </Box>
       <Box sx={styles.chartWrapper}>
-        <ResponsiveContainer width='100%' height='100%'>
+        <ResponsiveContainer height='100%' width='100%'>
           <AreaChart data={selectedPeriod} margin={{ top: 6, right: 0, left: -40, bottom: 0 }}>
             <defs>
-              <linearGradient id='colorValue' x1='0' y1='0' x2='0' y2='1'>
+              <linearGradient id='colorValue' x1='0' x2='0' y1='0' y2='1'>
                 <stop offset='0%' stopColor={grad1} stopOpacity={1} />
                 <stop offset='53.8%' stopColor={grad2} stopOpacity={1} />
                 <stop offset='100%' stopColor={grad3} stopOpacity={1} />
               </linearGradient>
             </defs>
             <XAxis dataKey='name' />
-            <YAxis domain={[0, 9]} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} interval={0} />
-            <CartesianGrid strokeDasharray='7 7' vertical={false} strokeWidth={0.5} />
-            <Tooltip itemStyle={itemStyle} contentStyle={contentStyle} />
+            <YAxis domain={[0, 9]} interval={0} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} />
+            <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
+            <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
             <Area
-              type='monotone'
               dataKey='value'
+              fill='url(#colorValue)'
+              fillOpacity={1}
               stroke='#FFFFFF'
               strokeWidth={0}
-              fillOpacity={1}
-              fill='url(#colorValue)'
+              type='monotone'
             />
           </AreaChart>
         </ResponsiveContainer>

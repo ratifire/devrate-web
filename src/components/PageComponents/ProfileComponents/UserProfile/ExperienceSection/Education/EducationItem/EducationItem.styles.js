@@ -7,7 +7,7 @@ const styles = {
     borderRadius: 2,
     border: theme.palette.sliderAssessment.border,
     wordBreak: 'break-word',
-    overflowWrap: 'break-word'
+    overflowWrap: 'break-word',
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',

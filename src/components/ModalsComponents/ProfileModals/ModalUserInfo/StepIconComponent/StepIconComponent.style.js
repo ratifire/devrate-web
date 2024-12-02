@@ -9,15 +9,13 @@ export const styles = (theme) => ({
     width: 30,
     height: 30,
     cursor: 'default',
-
   },
   completed: {
     backgroundColor: (theme) => theme.palette.steper.completed.circle.backgroundColor,
-    color: theme.palette.steper.completed.circle.color
-
+    color: theme.palette.steper.completed.circle.color,
   },
   active: {
     backgroundColor: (theme) => theme.palette.steper.active.circle.backgroundColor,
-    color: theme.palette.steper.active.circle.color
+    color: theme.palette.steper.active.circle.color,
   },
 });

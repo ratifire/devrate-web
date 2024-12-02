@@ -10,7 +10,7 @@ const LanguageLevel = ({ language, level, tobeDeleted, languageDeleteHandler }) 
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.language}>{language}</Box>
-      <Typography variant='caption3' sx={styles.level}>
+      <Typography sx={styles.level} variant='caption3'>
         {t(`specialization.language.level.${level}`)}
       </Typography>
       {tobeDeleted && (

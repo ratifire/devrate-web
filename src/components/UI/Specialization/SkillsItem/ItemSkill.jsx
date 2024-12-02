@@ -19,7 +19,7 @@ const ItemSkill = ({ name, value, grows }) => {
             <Typography variant='subtitle2'>{name}</Typography>
           </CustomTooltip>
         </Box>
-        <LinearProgressWithLabel value={value} size='s' orientation='horizontal' />
+        <LinearProgressWithLabel orientation='horizontal' size='s' value={value} />
       </Box>
       <Divider sx={styles.divider} />
     </>

@@ -5,11 +5,11 @@ import { styles } from './LevelChartSkeleton.styles';
 const LevelChartSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton variant='rounded' height={28}/>
-      <Skeleton variant='rounded' height={150} />
-      <Skeleton variant='rounded' height={20} />
+      <Skeleton height={28} variant='rounded' />
+      <Skeleton height={150} variant='rounded' />
+      <Skeleton height={20} variant='rounded' />
     </Box>
-  )
+  );
 };
 
 export default LevelChartSkeleton;

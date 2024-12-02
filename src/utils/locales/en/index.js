@@ -123,10 +123,10 @@ export const en = {
         required: 'This is a required field',
         first_name_long: 'Name too long',
         first_name_short: 'Name too short',
-        first_name_invalid_characters: 'Only uppercase and lowercase letters allowed',
+        first_name_invalid_characters: 'Only letters allowed',
         last_name_long: 'Last name too long',
         last_name_short: 'Surname too short',
-        last_name_invalid_characters: 'Only uppercase and lowercase letters allowed',
+        last_name_invalid_characters: 'Only letters allowed',
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
@@ -210,6 +210,8 @@ export const en = {
       baseUserInfo: {
         loading: 'Your profile is filled in at',
         complete: 'Congratulations! Your profile is completely filled out',
+        messageBtn: 'Write a message',
+        interviewBtn: 'Book an interview',
       },
       experience: {
         workExperience: {
@@ -409,6 +411,7 @@ export const en = {
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',
       error: 'Something went wrong...',
+      errorDeleteSpec: "You can't delete a specialisation",
       level: {
         title: 'Level',
         description: 'Improve your skills to move onto the next level of in-line specialisation.',

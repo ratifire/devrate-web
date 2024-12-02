@@ -1,7 +1,7 @@
 import React from 'react';
-import RightSection from './RightSection';
-import { decorators } from '../../../../../../.storybook/preview';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { decorators } from '../../../../../../.storybook/preview';
+import RightSection from './RightSection';
 
 export default {
   title: 'ProfileComponents/RightSection',

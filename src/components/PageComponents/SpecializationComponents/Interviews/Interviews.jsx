@@ -39,7 +39,7 @@ const Interviews = () => {
   const closeHandler = () => {
     setCreateButton(null);
     buttonRef.current.setAttribute('data-active', 'false');
-  }
+  };
 
   const createInterviewRequest = () => {
     dispatch(openModal({ modalName: 'scheduleInterview', data: { role: 'INTERVIEWER' } }));
@@ -54,18 +54,20 @@ const Interviews = () => {
   return (
     <Box sx={styles.contentWrapper}>
       <Box sx={styles.stats}>
-        <Typography variant='h6' sx={styles.title}>{mainSpec?.name}</Typography>
+        <Typography sx={styles.title} variant='h6'>
+          {mainSpec?.name}
+        </Typography>
 
         <Box sx={styles.interviewItemOutcome}>
           <Mood />
-          <Typography variant='body1' sx={styles.interviewType}>
+          <Typography sx={styles.interviewType} variant='body1'>
             {t('specialization.modal.interview.outcome')}
           </Typography>
           <Typography variant='body1'>{activeInterviews?.conductedInterviews}</Typography>
         </Box>
         <Box sx={styles.interviewItemIncome}>
           <Mood />
-          <Typography variant='body1' sx={styles.interviewType}>
+          <Typography sx={styles.interviewType} variant='body1'>
             {t('specialization.modal.interview.income')}
           </Typography>
           <Typography variant='body1'>{activeInterviews?.completedInterviews}</Typography>
@@ -73,46 +75,46 @@ const Interviews = () => {
       </Box>
       <Button
         ref={buttonRef}
-        variant='contained'
-        type='button'
         color='primary'
-        sx={styles.buttonPrimary}
-        onClick={scheduleClickHandler}
         disabled={isDisabled}
+        sx={styles.buttonPrimary}
+        type='button'
+        variant='contained'
+        onClick={scheduleClickHandler}
       >
         {t('specialization.modal.interview.makeIncome')}
         <KeyboardArrowDown />
       </Button>
       <Popover
-        sx={styles.popover}
+        disableScrollLock
+        anchorEl={createButton}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        open={open}
         slotProps={{
           root: {
             style: { width: popoverWidth },
           },
         }}
-        open={open}
-        anchorEl={createButton}
-        onClose={closeHandler}
-        disableScrollLock={true}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
+        sx={styles.popover}
         transformOrigin={{
           vertical: 'top',
           horizontal: 'center',
         }}
+        onClose={closeHandler}
       >
         <Box sx={styles.popoverWrapper}>
-          <Button variant='text' type='button' color='primary' sx={styles.menuButton} onClick={createInterviewRequest}>
+          <Button color='primary' sx={styles.menuButton} type='button' variant='text' onClick={createInterviewRequest}>
             {t('specialization.modal.interview.makeOutcome')}
           </Button>
           <Divider sx={styles.divider} />
           <Button
-            variant='text'
-            type='button'
             color='primary'
             sx={styles.menuButton}
+            type='button'
+            variant='text'
             onClick={createIncomeInterviewRequest}
           >
             {t('specialization.modal.interview.makeIncome')}

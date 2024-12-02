@@ -23,6 +23,7 @@
     "i18next-http-backend": "^2.4.2",
     "js-cookie": "^3.0.5",
     "luxon": "^3.4.4",
+    "notistack": "^3.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-avatar-editor": "^13.0.2",
@@ -33,7 +34,6 @@
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
-    "react-toastify": "^10.0.4",
     "recharts": "^2.12.7",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
@@ -50,7 +50,21 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "delBuildWin": "rd /s /q build",
-    "delBuildUnix": "rm -rf build"
+    "delBuildUnix": "rm -rf build",
+    "prepare": "husky",
+    "prettier:fix": "prettier --write .",
+    "lint": "eslint ./src/**/*.{js,jsx}",
+    "lint:fix": "eslint ./src/**/*.{js,jsx} --fix"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix --max-warnings=0"
+    ],
+    "*.{css,scss}": [
+      "prettier --write",
+      "stylelint --fix"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -71,6 +85,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",
@@ -81,12 +96,19 @@
     "@storybook/react-webpack5": "^7.6.17",
     "@storybook/test": "^7.6.17",
     "css-loader": "^7.1.2",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-storybook": "^0.8.0",
+    "husky": "^9.1.7",
     "jsdoc": "^4.0.2",
-    "prettier": "3.2.4",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.4.1",
     "react-app-rewired": "^2.2.1",
     "sass": "^1.80.6",
     "storybook": "^7.6.17",

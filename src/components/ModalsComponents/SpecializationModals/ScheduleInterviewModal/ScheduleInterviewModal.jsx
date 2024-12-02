@@ -13,15 +13,15 @@ import {
   useGetInterviewRequestQuery,
   useUpdateInterviewRequestMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
-import { styles } from './ScheduleInterviewModal.styles';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
+import { useGetMastery } from '../../../../utils/hooks/specialization';
+import { getUserUTC } from '../../../../utils/helpers';
+import { styles } from './ScheduleInterviewModal.styles';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
 import RenderTabs from './components/TabsRender';
 import RenderTimeSlots from './components/RenderTimeSlots';
 import WeekNavigation from './components/WeekNavigation';
-import { useGetMastery } from '../../../../utils/hooks/specialization';
-import { getUserUTC } from '../../../../utils/helpers';
 
 const ScheduleInterviewModal = () => {
   const { role } = useSelector((state) => state.modal.modalData);
@@ -29,16 +29,19 @@ const ScheduleInterviewModal = () => {
   const { t } = useTranslation();
   const isOpen = useSelector((state) => state.modal.scheduleInterview);
   const [checked, setChecked] = useState([]);
-  const { masteryId, userId } = useGetMastery()
+  const { masteryId, userId } = useGetMastery();
 
   const shouldUpdate = useRef(false);
-  
-  const { data: currentDates } = useGetInterviewRequestQuery({
-    userId,
-    role,
-    masteryId
-  }, { skip: !userId || !masteryId });
-  
+
+  const { data: currentDates } = useGetInterviewRequestQuery(
+    {
+      userId,
+      role,
+      masteryId,
+    },
+    { skip: !userId || !masteryId }
+  );
+
   useLayoutEffect(() => {
     if (currentDates && currentDates.availableDates) {
       let availableDates = [];
@@ -53,24 +56,24 @@ const ScheduleInterviewModal = () => {
       setChecked(Array.from(new Set([...checked, ...availableDates]))); // Запобігаємо дублюванню
     }
   }, [currentDates]);
-  
+
   const [date, setDate] = useState(DateTime.now().startOf('day'));
   const [weekDates, setWeekDates] = useState([]);
-  
+
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
   const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
   const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
   const handleTabChange = (newTab) => setTab(newTab);
-  
+
   useLayoutEffect(() => {
     setWeekDates(getDatesInWeek(date));
   }, [date]);
-  
+
   const initialValues = {
     dates: {},
   };
-  
+
   const onSubmit = async () => {
     if (shouldUpdate.current) {
       await updateInterviewRequest({
@@ -89,30 +92,28 @@ const ScheduleInterviewModal = () => {
     }
     handleClose();
   };
-  
+
   const formik = useFormik({
     initialValues,
     onSubmit,
   });
-  
+
   const handleWeekNavigation = (direction) => {
     setDate((prevDate) => {
       const newDate = direction === 'prev' ? prevDate.minus({ weeks: 1 }) : prevDate.plus({ weeks: 1 });
-      
+
       if (newDate < DateTime.now().startOf('week')) {
         return prevDate;
       }
-      
+
       setTab(newDate.toFormat('EEE, d'));
       return newDate;
     });
   };
-  
+
   const handleTimeClick = (isoTime) => {
     setChecked((prevChecked) =>
-      prevChecked.includes(isoTime)
-        ? prevChecked.filter((time) => time !== isoTime)
-        : [...prevChecked, isoTime],
+      prevChecked.includes(isoTime) ? prevChecked.filter((time) => time !== isoTime) : [...prevChecked, isoTime]
     );
   };
   const generateTimeButtons = (day) => {
@@ -120,58 +121,47 @@ const ScheduleInterviewModal = () => {
       const time = day.set({ hour });
       const timeIso = time.toISO();
       const isPastDate = DateTime.now() > time;
-      
+
       return (
         <CheckboxButton
           key={timeIso}
-          name="dates"
-          value={timeIso}
+          disabled={isPastDate}
           isChecked={checked.includes(timeIso)}
           label={time.toFormat('HH:mm')}
+          name='dates'
+          value={timeIso}
           onChange={() => handleTimeClick(timeIso)}
-          disabled={isPastDate}
         />
       );
     });
   };
-  
-  const weekTitle = useMemo(() =>
+
+  const weekTitle = useMemo(
+    () =>
       DateTime.now().toFormat('W') === date.toFormat('W')
         ? t('This week')
         : `${weekDates[0].toFormat('MMMM, d')} - ${weekDates.at(-1).toFormat('MMMM, d')}`,
-    [weekDates, date],
+    [weekDates, date]
   );
-  
+
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={isOpen}>
-      <Typography variant="subtitle1" sx={styles.title}>
+    <ModalLayoutProfile open={isOpen} setOpen={handleClose}>
+      <Typography sx={styles.title} variant='subtitle1'>
         {t('specialization.modal.scheduleModal.scheduleInterview')}
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
-          <WeekNavigation
-            onWeekNav={handleWeekNavigation}
-            weekTitle={weekTitle}
-          />
-          <RenderTabs
-            weekDates={weekDates}
-            onChange={handleTabChange}
-            tab={tab}
-          />
-          <RenderTimeSlots
-            timeButtons={generateTimeButtons}
-            weekDates={weekDates}
-            tab={tab}
-          />
+          <WeekNavigation weekTitle={weekTitle} onWeekNav={handleWeekNavigation} />
+          <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
+          <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
           <ButtonDef
-            variant="contained"
-            type="submit"
-            label={t('specialization.modal.scheduleModal.schedule')}
             correctStyle={styles.btn}
+            label={t('specialization.modal.scheduleModal.schedule')}
+            type='submit'
+            variant='contained'
           />
         </Box>
       </form>
-    
     </ModalLayoutProfile>
   );
 };

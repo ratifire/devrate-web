@@ -23,7 +23,7 @@ export const styles = {
   skillsText: (theme) => ({
     marginRight: theme.spacing(1),
     color: theme.palette.text.secondary,
-    width: '108px'
+    width: '108px',
   }),
   skillsRatingValue: () => ({
     marginRight: '10px',
@@ -65,7 +65,6 @@ export const styles = {
     color: theme.palette.skillsSection.doneInterviews.color,
     borderColor: theme.palette.skillsSection.doneInterviews.borderColor,
     backgroundColor: theme.palette.skillsSection.doneInterviews.backgroundColor,
-
   }),
   completedInterviewsBtn: (theme) => ({
     color: theme.palette.skillsSection.completedInterviews.color,
