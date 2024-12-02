@@ -17,7 +17,7 @@ const AchievementModal = () => {
   const openAchievement = useSelector((state) => state.modal.achievement);
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const [createAchievement] = useCreateAchievementMutation();
+  const [createAchievement, { isLoading }] = useCreateAchievementMutation();
 
   const handleClose = () => {
     formik.resetForm();
@@ -108,6 +108,9 @@ const AchievementModal = () => {
 
           <ButtonDef
             correctStyle={styles.workExperienceBtn}
+            // disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
+            disabled={isLoading}
+            isLoading={isLoading}
             label={t('profile.modal.btn')}
             type='submit'
             variant='contained'

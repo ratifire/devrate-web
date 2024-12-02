@@ -59,4 +59,8 @@ export const styles = {
       color: theme.palette.neutral['500'],
     },
   }),
+  circular: () => ({
+    position: 'absolute',
+    left: '65px',
+  }),
 };
