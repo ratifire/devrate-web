@@ -415,6 +415,7 @@ export const uk = {
       specialization_hardSkills: 'HardSkills',
       specialization_softSkills: 'SoftSkills',
       error: 'Щось пішло не так...',
+      errorDeleteSpec: 'Ви не можете видалити спеціалізацію',
       level: {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
