@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       memoryReservation = 1900,
       stopTimeout       = 10,
       healthCheck : {
-        "command" : ["CMD-SHELL", "curl -f https://${var.domain_name}/ || exit 1"],
+        "command" : ["CMD-SHELL", "curl -f https://${var.subdomain_name}/ || exit 1"],
         "interval" : 120,
         "timeout" : 10,
         "retries" : 2
@@ -33,11 +33,11 @@ resource "aws_ecs_task_definition" "task_definition_front" {
         },
         {
           name  = "REACT_APP_API_URL",
-          value = "https://server.devrate.org"
+          value = "https://${var.back_subdomain_name}"
         },
         {
           name  = "REACT_APP_WS_URL",
-          value = "wss://server.devrate.org"
+          value = "wss://${var.back_subdomain_name}"
         }
       ],
       mountPoints = [],
