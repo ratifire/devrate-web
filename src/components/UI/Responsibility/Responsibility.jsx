@@ -1,23 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, IconButton, Typography } from '@mui/material';
-import { styles } from './Responsibility.styles';
 import CloseIcon from '@mui/icons-material/Close';
+import { styles } from './Responsibility.styles';
 
 const Responsibility = ({ responsibility, tobeDeleted, responsibilityDeleteHandler }) => {
   return (
     <Box sx={tobeDeleted ? styles.responsibilityContainerwithBTN : styles.responsibilityContainer}>
-      <Typography variant='subtitle2' sx={styles.responsibilityText}>
+      <Typography sx={styles.responsibilityText} variant='subtitle2'>
         {responsibility}
       </Typography>
-      {tobeDeleted &&
-        <IconButton
-          sx={styles.icon}
-          onClick={() => responsibilityDeleteHandler(responsibility)}
-        >
-          <CloseIcon/>
+      {tobeDeleted && (
+        <IconButton sx={styles.icon} onClick={() => responsibilityDeleteHandler(responsibility)}>
+          <CloseIcon />
         </IconButton>
-      }
+      )}
     </Box>
   );
 };

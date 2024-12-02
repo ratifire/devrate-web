@@ -27,5 +27,5 @@ export const styles = {
       borderRadius: 6,
       backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
     },
-  })
+  }),
 };

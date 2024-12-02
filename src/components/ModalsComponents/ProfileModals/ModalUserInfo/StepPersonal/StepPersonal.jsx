@@ -1,9 +1,8 @@
 import React from 'react';
-import { styles } from './StepPersonal.styles';
-import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
+import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { StepPersonalSchema } from '../../../../../utils/valadationSchemas/index';
 import {
   useGetPersonalUserQuery,
@@ -14,6 +13,7 @@ import { useGetCountryListQuery } from '../../../../../redux/countryList/country
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import { StepPersonalSkeleton } from '../../../../UI/Skeleton';
 import { ErrorComponent } from '../../../../UI/Exceptions';
+import { styles } from './StepPersonal.styles';
 
 const StepPersonal = () => {
   const {
@@ -76,90 +76,90 @@ const StepPersonal = () => {
       <Box sx={styles.wrapper}>
         <Box sx={styles.input50}>
           <FormInput
-            name='firstName'
-            value={formik.values.firstName}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
             required
-            type='text'
-            label='profile.modal.userInfo.personal.firstName'
-            helperText={formik.touched.firstName && formik.errors.firstName}
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.firstName && formik.errors.firstName}
+            label='profile.modal.userInfo.personal.firstName'
+            name='firstName'
+            type='text'
+            value={formik.values.firstName}
           />
         </Box>
         <Box sx={styles.input50}>
           <FormInput
-            name='lastName'
-            value={formik.values.lastName}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
             required
-            type='text'
-            label='profile.modal.userInfo.personal.lastName'
-            helperText={formik.touched.lastName && formik.errors.lastName}
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.lastName && formik.errors.lastName}
+            label='profile.modal.userInfo.personal.lastName'
+            name='lastName'
+            type='text'
+            value={formik.values.lastName}
           />
         </Box>
         <Box sx={styles.input50}>
           <FormInput
-            name='city'
-            value={formik.values.city}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
             required
-            type='text'
-            label='profile.modal.userInfo.personal.city'
-            helperText={formik.touched.city && formik.errors.city}
             error={formik.touched.city && Boolean(formik.errors.city)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.city && formik.errors.city}
+            label='profile.modal.userInfo.personal.city'
+            name='city'
+            type='text'
+            value={formik.values.city}
           />
         </Box>
         <Box sx={styles.input50}>
           <FormSelect
-            variant='outlined'
+            required
+            countries={userCountries}
+            error={formik.touched.country && Boolean(formik.errors.country)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.country && formik.errors.country}
+            label='profile.modal.userInfo.personal.country'
             name='country'
             value={formik.values.country}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            required
-            label='profile.modal.userInfo.personal.country'
-            helperText={formik.touched.country && formik.errors.country}
-            error={formik.touched.country && Boolean(formik.errors.country)}
-            countries={userCountries}
+            variant='outlined'
           />
         </Box>
         <Box sx={styles.input100}>
           <FormInput
-            name='status'
-            value={formik.values.status}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            type='text'
-            label='profile.modal.userInfo.personal.status'
-            helperText={formik.touched.status && formik.errors.status}
             error={formik.touched.status && Boolean(formik.errors.status)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.status && formik.errors.status}
+            label='profile.modal.userInfo.personal.status'
+            name='status'
+            type='text'
+            value={formik.values.status}
           />
         </Box>
         <Box sx={styles.input100}>
           <TextAreaInput
-            name='description'
-            value={formik.values.description}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            type='text'
-            label='profile.modal.userInfo.personal.about_me'
-            helperText={formik.touched.description && formik.errors.description}
             error={formik.touched.description && Boolean(formik.errors.description)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.description && formik.errors.description}
+            label='profile.modal.userInfo.personal.about_me'
+            name='description'
+            type='text'
+            value={formik.values.description}
           />
         </Box>
       </Box>
 
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-          variant='contained'
           correctStyle={styles.btn}
-          type='submit'
+          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
           label='profile.modal.btn'
+          type='submit'
+          variant='contained'
         />
       </Box>
     </form>

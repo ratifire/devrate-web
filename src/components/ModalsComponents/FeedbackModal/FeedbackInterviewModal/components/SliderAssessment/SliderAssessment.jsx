@@ -1,7 +1,7 @@
-import { Box, Divider, Slider, Typography } from '@mui/material'
-import PropTypes from 'prop-types'
-import React from 'react'
-import { styles } from './SliderAssessment.styles'
+import { Box, Divider, Slider, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { styles } from './SliderAssessment.styles';
 
 const SliderAssessment = ({ formik, id }) => {
   const values = formik.values.skills;
@@ -20,17 +20,17 @@ const SliderAssessment = ({ formik, id }) => {
       <Box sx={styles.container}>
         <Typography variant='body'>{title}</Typography>
         <Box sx={styles.box}>
-          <Box sx={styles.left}></Box>
-          <Box sx={rightBoxStyles}></Box>
+          <Box sx={styles.left} />
+          <Box sx={rightBoxStyles} />
           <Slider
-            value={skillValue}
-            onChange={handleSliderChange}
-            step={1}
-            min={1}
-            max={10}
             marks
-            valueLabelDisplay='on'
+            max={10}
+            min={1}
+            step={1}
             sx={styles.slider}
+            value={skillValue}
+            valueLabelDisplay='on'
+            onChange={handleSliderChange}
           />
           <input name={title} type='hidden' value={skillValue} />
           <Typography sx={styles.grade} variant='body'>

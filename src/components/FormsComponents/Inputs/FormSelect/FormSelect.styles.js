@@ -78,7 +78,7 @@ export const styles = {
   },
   menuItem: (theme) => ({
     '&:hover': {
-      backgroundColor: theme.palette.modals.select.selectedField.hover
+      backgroundColor: theme.palette.modals.select.selectedField.hover,
     },
   }),
 };

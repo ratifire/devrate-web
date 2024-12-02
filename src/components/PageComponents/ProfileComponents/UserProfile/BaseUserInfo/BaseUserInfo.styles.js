@@ -54,7 +54,7 @@ export const styles = {
     marginTop: '36px',
   }),
 
-  contained: (theme)=> ({
+  contained: (theme) => ({
     display: 'block',
     paddingY: '10px',
     paddingX: '20px',
@@ -68,7 +68,7 @@ export const styles = {
     '&:hover': {
       backgroundColor: theme.palette.iconBtn.writeMasssge.hover,
     },
-}),
+  }),
 
   outlined: (theme) => ({
     display: 'block',
@@ -87,6 +87,5 @@ export const styles = {
       borderColor: theme.palette.iconBtn.bookInterview.hover.borderColor,
       color: theme.palette.iconBtn.bookInterview.hover.color,
     },
-
   }),
 };

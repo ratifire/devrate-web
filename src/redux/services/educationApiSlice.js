@@ -1,5 +1,5 @@
-import { apiSlice } from './api/apiSlice';
 import { TAG_TYPES } from '../../utils/constants/tagTypes';
+import { apiSlice } from './api/apiSlice';
 
 export const educationApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

@@ -14,4 +14,4 @@ export { ModalUserInfoSchema } from './ModalUserInfoSchema'; // not used anywher
 export { RegistrationSchema } from './RegistrationSchema';
 export { SkillsItemSchema } from './SkillsItemSchema';
 export { FeedbackModalSchema } from './FeedbackModalSchema';
-export {FeedbackProjectModalSchema} from "./FeedbackProjectModalSchema"
+export { FeedbackProjectModalSchema } from './FeedbackProjectModalSchema';

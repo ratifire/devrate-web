@@ -149,6 +149,7 @@ const SpecializationModal = () => {
       });
       await addSkills({ id: resp.id, skills });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn('Failed to create Specialization', error);
     } finally {
       resetForm();
@@ -196,57 +197,57 @@ const SpecializationModal = () => {
   }
 
   return (
-    <ModalLayoutProfile setOpen={handleClose} open={openSpecialization}>
-      <Typography variant='subtitle1' sx={styles.title}>
+    <ModalLayoutProfile open={openSpecialization} setOpen={handleClose}>
+      <Typography sx={styles.title} variant='subtitle1'>
         {t('specialization.modal.specialization.modal_title')}
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
           <Box sx={styles.input100}>
             <AdvancedFormSelector
-              variant='outlined'
+              countries={specializations}
+              error={formik.touched.name && (Boolean(formik.errors.name) || Boolean(specializationNameError))}
+              handleBlur={formik.handleBlur}
+              handleChange={handleChangeSpecialization}
+              helperText={formik.touched.name && (formik.errors.name || specializationNameError)}
+              label={t('specialization.modal.specialization.name')}
               name='name'
               value={formik.values.name || ''} // Warning from MUI: 'value is null'
-              handleChange={handleChangeSpecialization}
-              handleBlur={formik.handleBlur}
-              label={t('specialization.modal.specialization.name')}
-              error={formik.touched.name && (Boolean(formik.errors.name) || Boolean(specializationNameError))}
-              helperText={formik.touched.name && (formik.errors.name || specializationNameError)}
-              countries={specializations}
+              variant='outlined'
             />
           </Box>
           <Box sx={styles.mastery_input}>
             <FormSelect
+              countries={['Junior', 'Middle', 'Senior']}
+              error={formik.touched.mastery && Boolean(formik.errors.mastery)}
+              handleBlur={formik.handleBlur}
+              handleChange={handleChangeMastery}
+              helperDescription={t('specialization.modal.specialization.mastery_helper_text')}
+              helperText={formik.touched.mastery && formik.errors.mastery}
               id='mastery'
-              variant='outlined'
+              label={t('specialization.modal.specialization.mastery')}
               name='mastery'
               value={formik.values.mastery || ''} // Warning from MUI: 'value is null'
-              handleChange={handleChangeMastery}
-              handleBlur={formik.handleBlur}
-              label={t('specialization.modal.specialization.mastery')}
-              error={formik.touched.mastery && Boolean(formik.errors.mastery)}
-              helperText={formik.touched.mastery && formik.errors.mastery}
-              countries={['Junior', 'Middle', 'Senior']}
-              helperDescription={t('specialization.modal.specialization.mastery_helper_text')}
+              variant='outlined'
             />
           </Box>
           {modalData === addSpecialization && (
             <>
               <Box sx={styles.input100}>
                 <FormInput
-                  name='skills'
-                  value={formik.values.skills}
-                  handleChange={formik.handleChange}
-                  handleBlur={formik.handleBlur}
-                  label='specialization.modal.skills.title'
-                  placeholder='specialization.modal.skills.placeholder'
-                  helperText={formik.touched.skills && formik.errors.skills}
                   error={formik.touched.skills && Boolean(formik.errors.skills)}
+                  handleBlur={formik.handleBlur}
+                  handleChange={formik.handleChange}
+                  helperText={formik.touched.skills && formik.errors.skills}
+                  label='specialization.modal.skills.title'
+                  name='skills'
+                  placeholder='specialization.modal.skills.placeholder'
+                  value={formik.values.skills}
                 />
                 <IconButton
+                  disabled={formik.touched.skills && Boolean(formik.errors.skills)}
                   sx={styles.iconBtn}
                   onClick={() => createSkills(formik.values.skills)}
-                  disabled={formik.touched.skills && Boolean(formik.errors.skills)}
                 >
                   <AddIcon />
                 </IconButton>
@@ -254,9 +255,10 @@ const SpecializationModal = () => {
               <Box sx={styles.skills}>
                 {skills.map(({ name }, index) => (
                   <Responsibility
+                    // eslint-disable-next-line react/no-array-index-key
                     key={index}
-                    responsibility={name}
                     tobeDeleted
+                    responsibility={name}
                     responsibilityDeleteHandler={deleteSkillsHandler}
                   />
                 ))}
@@ -264,11 +266,11 @@ const SpecializationModal = () => {
             </>
           )}
           <ButtonDef
-            variant='contained'
-            type='submit'
-            label={t('profile.modal.btn')}
             correctStyle={styles.specializationBtn}
             disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
+            label={t('profile.modal.btn')}
+            type='submit'
+            variant='contained'
           />
         </Box>
       </form>

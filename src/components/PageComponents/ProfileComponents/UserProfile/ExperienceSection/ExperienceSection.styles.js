@@ -13,7 +13,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  wrapperTab:(theme) => ({
+  wrapperTab: (theme) => ({
     borderBottom: '1px solid',
     borderColor: theme.palette.tabsEl.borderColor,
     '& .MuiTabs-indicator': {
@@ -41,12 +41,11 @@ const styles = {
   }),
   experienceItemContainer: (theme) => ({
     overflow: 'auto',
-    maxHeight: '300px',
     minWidth: '100%',
     paddingTop: '20px',
     paddingRight: theme.spacing(3),
-    height: '100%',
-
+    minHeight: '300px',
+    height: 'calc(100vh - 506px)',
     '&::-webkit-scrollbar': {
       width: 10,
     },

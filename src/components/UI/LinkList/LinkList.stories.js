@@ -1,11 +1,11 @@
 import React from 'react';
-import LinkList from './LinkList';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { decorators } from '../../../../.storybook/preview';
 import navLinks from '../../../utils/constants/navLinks';
 import legalInfoLinks from '../../../utils/constants/legalInfoLinks';
 import headerStyles from '../..//PageComponents/LandingComponents/Header/Header.styles';
 import footerStyles from '../..//PageComponents/LandingComponents/Footer/Footer.styles';
-import { BrowserRouter as Router } from 'react-router-dom';
+import LinkList from './LinkList';
 
 export default {
   title: 'UI/LinkList',
@@ -19,11 +19,11 @@ export default {
 
 export const Header = () => (
   <Router>
-    <LinkList links={navLinks} componentStyles={headerStyles} />
+    <LinkList componentStyles={headerStyles} links={navLinks} />
   </Router>
 );
 export const Footer = () => (
   <Router>
-    <LinkList links={legalInfoLinks} componentStyles={footerStyles} />
+    <LinkList componentStyles={footerStyles} links={legalInfoLinks} />
   </Router>
 );

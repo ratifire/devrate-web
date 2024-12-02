@@ -21,5 +21,5 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     gap: '20px',
-  }
+  },
 };

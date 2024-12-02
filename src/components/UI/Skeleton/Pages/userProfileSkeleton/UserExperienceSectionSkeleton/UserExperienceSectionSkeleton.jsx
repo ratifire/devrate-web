@@ -1,14 +1,14 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './UserExperienceSectionSkeleton.styles';
 import React from 'react';
+import { styles } from './UserExperienceSectionSkeleton.styles';
 
 const UserExperienceSectionSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.box}>
-        <Skeleton variant='rounded' width={542} height={50} />
+        <Skeleton height={50} variant='rounded' width={542} />
       </Box>
-      <Skeleton variant='rounded' width='100%' height={261} />
+      <Skeleton height={261} variant='rounded' width='100%' />
     </Box>
   );
 };

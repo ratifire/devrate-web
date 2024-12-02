@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Box, IconButton, MenuItem, Select, Typography } from '@mui/material';
-import { styles } from './Skills.styles';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import StarIcon from '@mui/icons-material/Star';
 import PropTypes from 'prop-types';
-import SkillsItem from './SkillsItem';
+import SearchIcon from '@mui/icons-material/Search';
 import CustomTooltip from '../../../../../UI/CustomTooltip';
 import TextAreaSearch from '../../../../../FormsComponents/Inputs/TextAreaSearch';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
-import SearchIcon from '@mui/icons-material/Search';
 import { sortedSkills } from '../../../../../../utils/helpers/sortedSkills';
 import { sortSkillsByOriginal } from '../../../../../../utils/helpers/sortedSkillsByOriginal';
 import { useGetUserAllSpecializationQuery } from '../../../../../../redux/specialization/specializationApiSlice';
-import { updateAllSpecializations } from './updateAllSpecialization';
 import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
+import { updateAllSpecializations } from './updateAllSpecialization';
+import SkillsItem from './SkillsItem';
+import { styles } from './Skills.styles';
 
 const Skills = ({ id, tab }) => {
   const [specCurrent, setSpecCurrent] = useState('');
@@ -81,7 +81,7 @@ const Skills = ({ id, tab }) => {
   };
 
   if (isLoading || !userAllSpecializations || userAllSpecializations.length === 0) {
-    return <EmptyExperienceTab tab={tab} profileType='user' imgUrl={emptyUserTabsPictures.emptySkillsPic} />;
+    return <EmptyExperienceTab imgUrl={emptyUserTabsPictures.emptySkillsPic} profileType='user' tab={tab} />;
   }
 
   return (
@@ -90,19 +90,12 @@ const Skills = ({ id, tab }) => {
         <Box sx={styles.info}>
           <Box sx={styles.wrapperSelect}>
             {selectedSpecialization?.mainSpecialization && (
-              <CustomTooltip title='profile.experience.skills.star' translate={true}>
+              <CustomTooltip translate title='profile.experience.skills.star'>
                 <StarIcon sx={styles.star} />
               </CustomTooltip>
             )}
             <Select
-              sx={styles.select}
-              value={specCurrent}
-              onChange={handleChange}
-              open={open}
-              onOpen={handleOpen}
-              onClose={handleClose}
               IconComponent={KeyboardArrowDownIcon}
-              variant='standard'
               inputProps={{
                 MenuProps: {
                   PaperProps: {
@@ -110,9 +103,16 @@ const Skills = ({ id, tab }) => {
                   },
                 },
               }}
+              open={open}
+              sx={styles.select}
+              value={specCurrent}
+              variant='standard'
+              onChange={handleChange}
+              onClose={handleClose}
+              onOpen={handleOpen}
             >
               {updateAllSpecialization?.map((item) => (
-                <MenuItem key={item.specializationName} value={item.specializationName} sx={styles.selectItem}>
+                <MenuItem key={item.specializationName} sx={styles.selectItem} value={item.specializationName}>
                   {item.specializationName}
                   {item.mainSpecialization && <StarIcon sx={styles.selectItemStar} />}
                 </MenuItem>
@@ -120,7 +120,7 @@ const Skills = ({ id, tab }) => {
             </Select>
           </Box>
           {!!level && (
-            <Typography sx={styles.text} className={level} variant='subtitle2'>
+            <Typography className={level} sx={styles.text} variant='subtitle2'>
               Level <span>{level}</span>
             </Typography>
           )}
@@ -133,8 +133,8 @@ const Skills = ({ id, tab }) => {
       </Box>
       <Box sx={styles.wrapperSearch}>
         <Box sx={styles.search}>
-          <TextAreaSearch value={strSearch} handleChange={handleChangeSearch} />
-          <IconButton onClick={handleClick} type='button' sx={styles.btnIcon}>
+          <TextAreaSearch handleChange={handleChangeSearch} value={strSearch} />
+          <IconButton sx={styles.btnIcon} type='button' onClick={handleClick}>
             <SearchIcon />
             {'Пошук'}
           </IconButton>

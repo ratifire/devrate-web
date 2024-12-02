@@ -11,7 +11,7 @@ const styles = {
     border: theme.palette.sliderAssessment.border,
     '>div': {
       width: '100%',
-    }
+    },
   }),
   itemHeaderContainer: (theme) => ({
     width: '100%',
@@ -59,7 +59,6 @@ const styles = {
     '&:hover': {
       color: theme.palette.iconBtn.burgerDot.hover.color,
       backgroundColor: theme.palette.iconBtn.burgerDot.hover.backgroundColor,
-
     },
   }),
 };

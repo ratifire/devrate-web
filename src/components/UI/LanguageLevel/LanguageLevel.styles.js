@@ -5,10 +5,9 @@ export const styles = {
     border: `1px solid ${theme.palette.rightSection.languages.border.borderColor}`,
     borderRadius: 4,
     display: 'flex',
-
   }),
   language: (theme) => ({
-    backgroundColor:  theme.palette.rightSection.languages.type.backgroundColor,
+    backgroundColor: theme.palette.rightSection.languages.type.backgroundColor,
     fontWeight: 400,
     fontSize: 12,
     lineHeight: '12px',

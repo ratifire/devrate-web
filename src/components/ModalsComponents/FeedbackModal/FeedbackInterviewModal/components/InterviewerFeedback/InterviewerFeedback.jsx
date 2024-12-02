@@ -21,17 +21,17 @@ const InterviewerFeedback = () => {
   return (
     <Box sx={styles.container}>
       <Typography variant='h6'>{t('modal.interview.title')}</Typography>
-      <InterviewerInfo name={`${name} ${surname}`} position={status} date={date} time={time} />
+      <InterviewerInfo date={date} name={`${name} ${surname}`} position={status} time={time} />
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.formBox}>
           <StepSoftSkills formik={formik} />
         </Box>
         <ButtonDef
-          variant='contained'
-          type='submit'
-          label={t('modal.interview.btnSend')}
-          disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
           correctStyle={styles.btn}
+          disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+          label={t('modal.interview.btnSend')}
+          type='submit'
+          variant='contained'
         />
       </form>
     </Box>

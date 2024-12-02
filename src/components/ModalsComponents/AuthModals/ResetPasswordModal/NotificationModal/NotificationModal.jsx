@@ -5,8 +5,8 @@ import { Typography, Box } from '@mui/material';
 import ModalLayout from '../../../../../layouts/ModalLayout';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
-import styles from './NotificationModal.styles';
 import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
+import styles from './NotificationModal.styles';
 
 const NotificationModal = () => {
   const { t } = useTranslation();
@@ -22,19 +22,19 @@ const NotificationModal = () => {
 
   return (
     <ModalLayout open={openNotification} setOpen={handleClose}>
-      <Typography variant='subtitle3' sx={styles.title}>
+      <Typography sx={styles.title} variant='subtitle3'>
         {changeColorOfLastTitleWord(t('modal.notificationModal.title'))}
       </Typography>
-      <Typography variant='subtitle3' sx={styles.message}>
+      <Typography sx={styles.message} variant='subtitle3'>
         {t('modal.notificationModal.message')}
       </Typography>
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          variant='contained'
-          type='button'
+          correctStyle={styles.submitBtn}
           handlerClick={handleEnter}
           label='modal.notificationModal.btn_enter'
-          correctStyle={styles.submitBtn}
+          type='button'
+          variant='contained'
         />
       </Box>
     </ModalLayout>

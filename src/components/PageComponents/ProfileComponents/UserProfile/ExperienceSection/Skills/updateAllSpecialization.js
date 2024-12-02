@@ -1,6 +1,6 @@
 export const updateAllSpecializations = (specializations) => {
   const skillsMap = new Map();
-  
+
   specializations.forEach((spec) => {
     spec.hardSkills.forEach((skill) => {
       const existingSkill = skillsMap.get(skill.name);
@@ -20,4 +20,4 @@ export const updateAllSpecializations = (specializations) => {
   };
 
   return [allSkillsSpecialization, ...specializations];
-}
+};

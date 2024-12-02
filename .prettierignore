@@ -2,3 +2,7 @@
 **/.svn
 **/.hg
 **/node_modules
+**/.yml
+**/.tf
+build/
+.github

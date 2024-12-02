@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Link, TextField, Typography } from '@mui/material';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import styles from './ConfirmationModal.styles';
 import { useTranslation } from 'react-i18next';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useDispatch } from 'react-redux';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import styles from './ConfirmationModal.styles';
 
 const ConfirmationForm = ({
   inputRefs,
@@ -23,8 +23,8 @@ const ConfirmationForm = ({
   const dispatch = useDispatch();
 
   const handleCloseAllModal = () => {
-    dispatch(closeModal({ modalName: 'openRegistration' }));
     dispatch(closeModal({ modalName: 'openConfirmation' }));
+    dispatch(openModal({ modalName: 'openRegistration' }));
   };
 
   useEffect(() => {
@@ -111,45 +111,50 @@ const ConfirmationForm = ({
   };
 
   return (
-    <form className='landingForm' autoComplete="off" onSubmit={handleSubmit || formik.handleSubmit} style={{ width: '100%' }}>
+    <form
+      autoComplete='off'
+      className='landingForm'
+      style={{ width: '100%' }}
+      onSubmit={handleSubmit || formik.handleSubmit}
+    >
       <Box sx={styles.formInput}>
         {[...Array(fieldCount)].map((_, index) => (
           <TextField
-              autocomplete={false}
+            // eslint-disable-next-line react/no-array-index-key
             key={index}
-            type='text'
-            variant='outlined'
-            inputRef={(ele) => {
-              inputRefs.current[index] = ele;
-            }}
-            onKeyDown={(event) => handleKeyDown(event, index)}
-            onPaste={handlePaste}
-            value={formik.values[`text${index}`] ?? ''}
+            autocomplete={false}
             inputProps={{
               style: { textAlign: 'center' },
               maxLength: 1,
             }}
-              sx={{
-                '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#B78AF7',
-                  backgroundColor: 'transparent',
-                },
-                ...(helperTextContent && {
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#ED0E0E',
-                    },
-                  },
-                }),
+            inputRef={(ele) => {
+              inputRefs.current[index] = ele;
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#B78AF7',
+                backgroundColor: 'transparent',
+              },
+              ...(helperTextContent && {
                 '& .MuiOutlinedInput-root': {
-                  '& input:-webkit-autofill': {
-                    WebkitBoxShadow: '0 0 0 100px transparent inset',
-                    WebkitTextFillColor: 'inherit',
-                    transition: 'background-color 5000s ease-in-out 0s',
+                  '& fieldset': {
+                    borderColor: '#ED0E0E',
                   },
                 },
-              }}
-          
+              }),
+              '& .MuiOutlinedInput-root': {
+                '& input:-webkit-autofill': {
+                  WebkitBoxShadow: '0 0 0 100px transparent inset',
+                  WebkitTextFillColor: 'inherit',
+                  transition: 'background-color 5000s ease-in-out 0s',
+                },
+              },
+            }}
+            type='text'
+            value={formik.values[`text${index}`] ?? ''}
+            variant='outlined'
+            onKeyDown={(event) => handleKeyDown(event, index)}
+            onPaste={handlePaste}
           />
         ))}
       </Box>
@@ -157,25 +162,25 @@ const ConfirmationForm = ({
       {helperTextContent && (
         <Box sx={styles.codeErrorWrapper}>
           <CancelIcon sx={styles.codeErrorIcon} />
-          <Typography variant='subtitle2' sx={styles.codeErrorText}>
+          <Typography sx={styles.codeErrorText} variant='subtitle2'>
             {t('modal.confirmation.code_error_text')}
           </Typography>
         </Box>
       )}
 
-      <Box variant='subtitle3' sx={styles.spamCheckContainer}>
-        <Typography variant='subtitle3' sx={styles.mainText}>
+      <Box sx={styles.spamCheckContainer} variant='subtitle3'>
+        <Typography sx={styles.mainText} variant='subtitle3'>
           {t('modal.confirmation.spam_check_text')}
         </Typography>
         <Typography sx={{ textAlign: 'center' }}>
-          <Link sx={styles.confirmationLink} to={'/'} onClick={handleCloseAllModal}>
+          <Link sx={styles.confirmationLink} to={'/'}>
             {t('modal.confirmation.repeat_request_link')}
           </Link>
-          <Typography variant='subtitle3' sx={styles.mainText}>
+          <Typography sx={styles.mainText} variant='subtitle3'>
             {' '}
             {t('modal.confirmation.repeat_request_text1')}
           </Typography>
-          <Typography variant='subtitle3' sx={styles.mainText}>
+          <Typography sx={styles.mainText} variant='subtitle3'>
             {' '}
             {t('modal.confirmation.repeat_request_text2')}{' '}
           </Typography>
@@ -183,19 +188,19 @@ const ConfirmationForm = ({
             {t('modal.confirmation.change_email_link')}
           </Link>
         </Typography>
-        <Typography></Typography>
+        <Typography />
       </Box>
 
       {showButton && (
         <Box sx={styles.btnWrapper}>
           <ButtonDef
+            correctStyle={styles.submitBtn}
+            disabled={!formik.isValid}
+            label={buttonLabel || 'modal.confirmation.btn_confirm'}
             sx={styles.btn}
             type='submit'
             variant={buttonVariant || 'contained'}
             onClick={handleClick}
-            label={buttonLabel || 'modal.confirmation.btn_confirm'}
-            disabled={!formik.isValid}
-            correctStyle={styles.submitBtn}
           />
         </Box>
       )}
