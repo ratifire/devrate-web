@@ -22,7 +22,7 @@ data "aws_vpcs" "all_vpcs" {}
 data "aws_subnets" "default_subnets" {
   filter {
     name   = "vpc-id"
-    values = ["vpc-0032e90317069a534"]
+    values = [var.vpc]
   }
 
 
