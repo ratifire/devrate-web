@@ -77,7 +77,7 @@ data "aws_s3_bucket" "front-logs" {
   bucket = var.bucket_name_logs
 }
 
-data "aws_acm_certificate" "devrate_cert" {
+data "aws_acm_certificate" "domain_cert" {
   domain   = var.domain_name
   statuses = ["ISSUED"]
   tags = {
