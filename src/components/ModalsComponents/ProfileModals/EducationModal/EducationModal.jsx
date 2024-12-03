@@ -53,35 +53,37 @@ const EducationModal = () => {
     endYear: '',
   };
 
+  const onSubmit = async (values, { resetForm }) => {
+    const endYearEducation =
+      values.endYear === null || values.endYear === 'Now' || values.endYear === ''
+        ? new Date('9999-01-01').getFullYear()
+        : new Date(values.endYear).getFullYear();
+    if (dataToEdit) {
+      await updateEducation({
+        id: dataToEdit.id,
+        payload: {
+          type: values.type,
+          name: values.name,
+          description: values.description,
+          startYear: values.startYear,
+          endYear: endYearEducation,
+        },
+      });
+    } else {
+      await createEducation({
+        userId: currentUser.data.id,
+        payload: { ...values, endYear: endYearEducation },
+      });
+    }
+
+    resetForm();
+    handleClose();
+  };
+
   const formik = useFormik({
     initialValues: dataToEdit || emptyInitialValues,
     validationSchema: EducationModalSchema,
-    onSubmit: (values, { resetForm }) => {
-      const endYearEducation =
-        values.endYear === null || values.endYear === 'Now' || values.endYear === ''
-          ? new Date('9999-01-01').getFullYear()
-          : new Date(values.endYear).getFullYear();
-      if (dataToEdit) {
-        updateEducation({
-          id: dataToEdit.id,
-          payload: {
-            type: values.type,
-            name: values.name,
-            description: values.description,
-            startYear: values.startYear,
-            endYear: endYearEducation,
-          },
-        });
-      } else {
-        createEducation({
-          userId: currentUser.data.id,
-          payload: { ...values, endYear: endYearEducation },
-        });
-      }
-
-      resetForm();
-      handleClose();
-    },
+    onSubmit,
     enableReinitialize: true,
   });
 
@@ -174,6 +176,7 @@ const EducationModal = () => {
 
           <ButtonDef
             correctStyle={styles.workExperienceBtn}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
             label={t('profile.modal.btn')}
             type='submit'
             variant='contained'

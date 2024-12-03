@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import LinkIcon from '@mui/icons-material/Link';
@@ -11,9 +11,11 @@ import { Link } from 'react-router-dom';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import links from '../../../../router/links';
+import useCheckTimeDifference from '../../../../utils/hooks/schedule/useCheckTimeDifference';
 import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpdated }) => {
+  const { eventTypeId, type, link, host, startTime, participantDtos } = event;
   const { t } = useTranslation();
   const theme = useTheme();
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -24,30 +26,10 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
 
   const { enqueueSnackbar } = useSnackbar();
 
-  useEffect(() => {
-    const eventStartTime = new Date(event.startTime);
+  useCheckTimeDifference(startTime, setShowCancelButton, setDisableLink);
 
-    const checkTimeDifference = () => {
-      const currentTime = new Date();
-      const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
-
-      if (timeDifferenceInMinutes >= 1) {
-        setShowCancelButton(false);
-      }
-
-      if (timeDifferenceInMinutes >= 60) {
-        setDisableLink(true);
-      }
-    };
-
-    checkTimeDifference();
-
-    const timer = setInterval(checkTimeDifference, 60000);
-
-    return () => clearInterval(timer);
-  }, [event.startTime]);
   const handleCancelInterview = async function () {
-    if (!event || !event.eventTypeId) {
+    if (!event || !eventTypeId) {
       // eslint-disable-next-line no-console
       console.error('Event object or event ID is missing');
     }
@@ -58,7 +40,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
     }
 
     try {
-      await deleteEventById({ userId, id: event.eventTypeId }).unwrap();
+      await deleteEventById({ userId, id: eventTypeId }).unwrap();
       handleClosePopup();
       setEventUpdated((prev) => !prev);
       enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
@@ -91,7 +73,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
       {popupPosition === 'TOPRIGHT' && <Box sx={styles.popupTriangularTopRight} />}
       {popupPosition === 'BOTTOMRIGHT' && <Box sx={styles.popupTriangularBottomRight} />}
 
-      {event.type === 'INTERVIEW' && (
+      {type === 'INTERVIEW' && (
         <Box sx={styles.infoContainer}>
           <IconButton sx={styles.closeIcon} onClick={handleClosePopup}>
             <CloseIcon />
@@ -101,16 +83,16 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
             <Typography sx={styles.title} variant='caption2'>
               {t('schedule.popupUserInfo')}
             </Typography>
-            <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${event.host.id}`}>
+            <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${host.id}`}>
               <Typography sx={styles.name} variant='subtitle2'>
-                {event.host.name} {event.host.surname}
+                {host.name} {host.surname}
               </Typography>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
-              {event.host.status}
+              {host.status}
             </Typography>
             <Typography sx={styles.role} variant='caption2'>
-              {t('schedule.popupRole')} {event.host.role.toLowerCase()}
+              {t('schedule.popupRole')} {host.role.toLowerCase()}
             </Typography>
           </Box>
 
@@ -118,27 +100,23 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
             <Typography sx={styles.title} variant='caption2'>
               {t('schedule.popupInterviewerInfo')}
             </Typography>
-            <Box
-              component={Link}
-              sx={{ textDecoration: 'none' }}
-              to={`${links.profile}/${event.participantDtos[0].id}`}
-            >
+            <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${participantDtos[0].id}`}>
               <Typography sx={styles.name} variant='subtitle2'>
-                {event.participantDtos[0].name} {event.participantDtos[0].surname}
+                {participantDtos[0].name} {participantDtos[0].surname}
               </Typography>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
-              {event.participantDtos[0].status}
+              {participantDtos[0].status}
             </Typography>
             <Typography sx={styles.role} variant='caption2'>
-              {t('schedule.popupRole')} {event.participantDtos[0].role.toLowerCase()}
+              {t('schedule.popupRole')} {participantDtos[0].role.toLowerCase()}
             </Typography>
           </Box>
         </Box>
       )}
 
       <Box sx={styles.buttonsContainer}>
-        <IconButton component='a' disabled={disableLink} href={event.link} sx={styles.icon} target='_blank'>
+        <IconButton component='a' disabled={disableLink} href={link} sx={styles.icon} target='_blank'>
           <LinkIcon />
         </IconButton>
         {showCancelButton && (

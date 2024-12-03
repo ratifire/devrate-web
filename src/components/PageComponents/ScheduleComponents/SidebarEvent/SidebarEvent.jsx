@@ -1,13 +1,14 @@
 import { formatDate } from '@fullcalendar/core';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
+import useCheckTimeDifference from '../../../../utils/hooks/schedule/useCheckTimeDifference';
 import { styles } from './SidebarEvent.styles';
 
 const SidebarEvent = ({ event }) => {
@@ -41,30 +42,7 @@ const SidebarEvent = ({ event }) => {
 
   const [showCancelButton, setShowCancelButton] = useState(true);
   const [disableLink, setDisableLink] = useState(false);
-
-  useEffect(() => {
-    const eventStartTime = new Date(startTime);
-
-    const checkTimeDifference = () => {
-      const currentTime = new Date();
-      const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
-
-      if (timeDifferenceInMinutes >= 1) {
-        setShowCancelButton(false);
-      }
-
-      if (timeDifferenceInMinutes >= 60) {
-        setDisableLink(true);
-      }
-    };
-
-    checkTimeDifference();
-
-    const timer = setInterval(checkTimeDifference, 60000);
-
-    return () => clearInterval(timer);
-  }, [startTime]);
-
+  useCheckTimeDifference(startTime, setShowCancelButton, setDisableLink);
   return (
     <Paper key={eventTypeId} sx={styles.sideBarEventContainer}>
       <Box sx={styles.titleDateTimeBox}>
