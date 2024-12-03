@@ -51,7 +51,7 @@
     "build-storybook": "storybook build",
     "delBuildWin": "rd /s /q build",
     "delBuildUnix": "rm -rf build",
-    "prepare": "node ./.husky/install.mjs",
+   "prepare": "node ././.husky/install.mjs",
     "prettier:fix": "prettier --write .",
     "lint": "eslint ./src/**/*.{js,jsx}",
     "lint:fix": "eslint ./src/**/*.{js,jsx} --fix"
