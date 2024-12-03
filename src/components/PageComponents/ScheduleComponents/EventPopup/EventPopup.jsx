@@ -4,11 +4,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import LinkIcon from '@mui/icons-material/Link';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-// import { useSnackbar } from 'notistack';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import links from '../../../../router/links';
 import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';
@@ -18,12 +16,10 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
   const { t } = useTranslation();
   const theme = useTheme();
   const { id: userId } = useSelector((state) => state.auth.user.data);
-  // const [deleteEventById] = useDeleteEventByIdMutation();
 
   const [showCancelButton, setShowCancelButton] = useState(true);
   const [disableLink, setDisableLink] = useState(false);
 
-  // const { enqueueSnackbar } = useSnackbar();
   const deleteEvent = useDeleteEvent();
 
   useEffect(() => {
@@ -63,33 +59,6 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
       onFinally: () => console.log('EventPopup: Deletion process complete'),
     });
   };
-  // const handleCancelInterview = async function () {
-  //   if (!event || !event.eventTypeId) {
-  //     // eslint-disable-next-line no-console
-  //     console.error('Event object or event ID is missing');
-  //   }
-  //
-  //   if (!userId) {
-  //     // eslint-disable-next-line no-console
-  //     console.error('User ID is missing');
-  //   }
-  //
-  //   try {
-  //     await deleteEventById({ userId, id: event.eventTypeId }).unwrap();
-  //     handleClosePopup();
-  //     setEventUpdated((prev) => !prev);
-  //     enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
-  //   } catch (error) {
-  //     // eslint-disable-next-line no-console
-  //     console.error('Failed to add skill:', error);
-  //
-  //     if (error.status === 400) {
-  //       // eslint-disable-next-line no-console
-  //       console.error('Bad Request: Likely an issue with the request data or format');
-  //     }
-  //     enqueueSnackbar(t('schedule.deleteEventErrorMessage'), { variant: 'error' });
-  //   }
-  // };
 
   return (
     <Box

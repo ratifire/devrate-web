@@ -6,8 +6,6 @@ import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material'
 import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-// import { useSnackbar } from 'notistack';
-// import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';
 import { styles } from './SidebarEvent.styles';
 
@@ -17,7 +15,6 @@ const SidebarEvent = ({ event, handleClosePopup, setEventUpdated }) => {
 
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { t } = useTranslation();
-  // const [deleteEvent] = useDeleteEventByIdMutation();
 
   const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric', separator: '/', localeMatcher: 'lookup' };
   const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: false };
@@ -29,8 +26,6 @@ const SidebarEvent = ({ event, handleClosePopup, setEventUpdated }) => {
   const customFormattedDate = `${day}/${month}/${year}`;
 
   const deleteEvent = useDeleteEvent();
-
-  // const { enqueueSnackbar } = useSnackbar();
 
   const handleCancelInterview = async () => {
     await deleteEvent({
@@ -46,15 +41,6 @@ const SidebarEvent = ({ event, handleClosePopup, setEventUpdated }) => {
       onFinally: () => console.log('EventPopup: Deletion process complete'),
     });
   };
-  // const eventDeleteHandler = async (id) => {
-  //   try {
-  //     await deleteEvent({ userId, id }).unwrap();
-  //     enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
-  //   } catch (error) {
-  //     // eslint-disable-next-line no-console
-  //     console.error('Failed to delete event:', error);
-  //   }
-  // };
 
   const [showCancelButton, setShowCancelButton] = useState(true);
   const [disableLink, setDisableLink] = useState(false);
