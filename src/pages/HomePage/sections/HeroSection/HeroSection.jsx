@@ -53,7 +53,7 @@ const HeroSection = () => {
               </p>
             </div>
 
-            <div className={styles.btn__container}>
+            <div className={styles.btnContainer}>
               <button className={`btn btn-primary btn-xl ${styles.registration}`} onClick={handleOpenRegistration}>
                 <span>Registration</span>
                 <Arrow />

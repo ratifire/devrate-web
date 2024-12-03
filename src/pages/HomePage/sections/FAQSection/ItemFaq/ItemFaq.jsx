@@ -6,14 +6,14 @@ import styles from './ItemFaq.module.scss';
 
 const ItemFaq = ({ item, openId, handleOnClick }) => {
   return (
-    <div className={styles.item_faq} onClick={() => handleOnClick(item.id)}>
-      <div className={styles.item_faq__header}>
-        <img alt='iconButton' className={styles.item_faq__iconBottom} src={openId === item.id ? iconOpen : iconBtn} />
-        <div className={styles.item_faq__question}>
-          <span className={styles.item_faq__number}>{item.id}</span>
+    <div className={styles.itemFaq} onClick={() => handleOnClick(item.id)}>
+      <div className={styles.itemFaq__header}>
+        <img alt='iconButton' className={styles.itemFaq__iconBottom} src={openId === item.id ? iconOpen : iconBtn} />
+        <div className={styles.itemFaq__question}>
+          <span className={styles.itemFaq__number}>{item.id}</span>
           {item.question}
         </div>
-        {openId === item.id && <div className={styles.item_faq__answer}>{item.answer}</div>}
+        {openId === item.id && <div className={styles.itemFaq__answer}>{item.answer}</div>}
       </div>
     </div>
   );
