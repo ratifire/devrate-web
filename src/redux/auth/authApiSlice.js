@@ -10,10 +10,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     confirmEmail: builder.mutation({
-      query: (data) => ({
-        url: `/auth/signup/${data}`,
+      query: ({ confirmationCode, email }) => ({
+        url: `/auth/signup/confirm`,
         method: 'PUT',
-        data,
+        body: { confirmationCode, email },
       }),
       transformResponse: (response) => {
         // Ensure the response is correctly transformed
@@ -47,11 +47,22 @@ export const authApiSlice = apiSlice.injectEndpoints({
       },
     }),
     login: builder.mutation({
-      query: (credentials) => ({
+      query: ({ email, password }) => ({
         url: '/auth/signin',
         method: 'POST',
-        body: { ...credentials },
+        body: { email, password },
       }),
+      transformResponse: (response, meta) => {
+        const headers = meta?.response?.headers;
+        if (headers) {
+          const authToken = headers.get('authorization');
+          const idToken = headers.get('id-token');
+
+          if (authToken && idToken) {
+            return { authToken, idToken, ...response };
+          }
+        }
+      },
     }),
     logout: builder.mutation({
       query: () => ({

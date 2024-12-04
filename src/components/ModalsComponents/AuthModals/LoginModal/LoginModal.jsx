@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, Link, Typography } from '@mui/material';
-import Cookies from 'js-cookie';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ModalLayout from '../../../../layouts/ModalLayout';
 import { LoginSchema } from '../../../../utils/valadationSchemas/index';
@@ -45,10 +44,10 @@ const LoginModal = () => {
       setLoginError(null);
       try {
         const userData = await login({ email: values.email, password: values.password }).unwrap();
-        await dispatch(setCredentials({ data: userData, isAuthenticated: false }));
-        const cookies = Cookies.get('JSESSIONID');
-        if (cookies) {
-          await dispatch(setCredentials({ data: userData, isAuthenticated: true }));
+        dispatch(setCredentials({ data: userData, isAuthenticated: false }));
+
+        if (userData?.idToken && userData?.authToken) {
+          dispatch(setCredentials({ data: userData, isAuthenticated: true }));
           navigate('/profile', { replace: true });
         }
         handleClose();
