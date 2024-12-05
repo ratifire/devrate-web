@@ -104,4 +104,5 @@ export const {
   useChangePasswordMutation,
   useLoginMutation,
   useLogoutMutation,
+  useRefreshTokenMutationLazy,
 } = authApiSlice;

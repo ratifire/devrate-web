@@ -32,6 +32,12 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         api,
         extraOptions
       );
+
+      if (refreshToken.error && refreshToken.error.status === 497) {
+        api.dispatch(setCredentials({ data: {}, isAuthenticated: false }));
+        return result;
+      }
+
       if (refreshToken.meta) {
         const headers = refreshToken?.meta?.response?.headers;
 
@@ -42,8 +48,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
           if (authToken && idToken) {
             api.dispatch(
               setCredentials({
-                authToken,
-                idToken,
+                data: { authToken, idToken },
+                isAuthenticated: true,
               })
             );
             return baseQuery(args, api, extraOptions);
