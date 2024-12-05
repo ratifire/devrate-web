@@ -1,4 +1,4 @@
-name: Terraform_destroy
+name: Down_infrastructure
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   terraform:
-    name: Terraform destroy infrastructure
+    name: Down_infrastructure
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     env:
