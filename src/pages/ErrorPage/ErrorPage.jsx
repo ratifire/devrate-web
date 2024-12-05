@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
-import { Link, useRouteError } from 'react-router-dom';
+import { Link, useRouteError } from 'react-router';
 import { styles } from './ErrorPage.styles';
 
 const ErrorPage = () => {

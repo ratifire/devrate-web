@@ -1,6 +1,6 @@
 import React, { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router';
 import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
 import useAuth from '../../../utils/hooks/useAuth';
 import UserProfileTemplate from '../../../Templates/ProfileTemplates/UserProfileTemplate';

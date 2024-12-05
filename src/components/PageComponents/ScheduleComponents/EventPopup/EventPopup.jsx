@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import links from '../../../../router/links';

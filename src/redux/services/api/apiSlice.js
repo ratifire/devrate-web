@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { logOut } from '../../auth/authSlice';
 import { TAG_TYPES_ARRAY } from '../../../utils/constants/tagTypes';
 
