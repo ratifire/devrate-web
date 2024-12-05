@@ -8,6 +8,7 @@ import modalSliceReducer from '../modal/modalSlice';
 import modalStepReducer from '../modal/modalStepSlice';
 import { apiSlice } from '../services/api/apiSlice';
 import { authReducer } from '../auth/authSlice';
+import tokenSlice from '../auth/tokenSlice';
 import { educationReducer } from '../user/education/educationSlice';
 import feedbackSliceReducer from '../feedback/feedbackModalSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
@@ -20,6 +21,12 @@ const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['user'],
+};
+
+const tokenPersistConfig = {
+  key: 'tokens',
+  storage,
+  whitelist: ['idToken', 'authToken', 'isAuth'],
 };
 
 const themePersistConfig = {
@@ -39,6 +46,7 @@ const rootReducer = {
   button: buttonReducer,
   feedback: feedbackSliceReducer,
   auth: persistReducer(authPersistConfig, authReducer),
+  tokens: persistReducer(tokenPersistConfig, tokenSlice),
   theme: persistReducer(themePersistConfig, themeSliceReducer),
 };
 

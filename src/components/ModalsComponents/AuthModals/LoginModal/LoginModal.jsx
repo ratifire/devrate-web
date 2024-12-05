@@ -13,6 +13,7 @@ import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../../redux/auth/authApiSlice';
 import { setCredentials } from '../../../../redux/auth/authSlice';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
+import { setTokens } from '../../../../redux/auth/tokenSlice';
 import styles from './LoginModal.styles';
 
 const initialValues = {
@@ -43,11 +44,14 @@ const LoginModal = () => {
     async (values, { setSubmitting }) => {
       setLoginError(null);
       try {
-        const userData = await login({ email: values.email, password: values.password }).unwrap();
-        dispatch(setCredentials({ data: userData, isAuthenticated: false }));
+        const { userData, idToken, authToken } = await login({
+          email: values.email,
+          password: values.password,
+        }).unwrap();
+        dispatch(setCredentials({ data: userData }));
 
-        if (userData?.idToken && userData?.authToken) {
-          dispatch(setCredentials({ data: userData, isAuthenticated: true }));
+        if (idToken && authToken) {
+          dispatch(setTokens({ idToken, authToken }));
           navigate('/profile', { replace: true });
         }
         handleClose();

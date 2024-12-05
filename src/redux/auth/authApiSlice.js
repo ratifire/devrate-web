@@ -1,6 +1,7 @@
 import { apiSlice } from '../services/api/apiSlice';
 import { setDarkTheme } from '../theme/themeSlice';
 import { logOut } from './authSlice';
+import { clearTokens } from './tokenSlice';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -61,7 +62,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
           const idToken = headers.get('id-token');
 
           if (authToken && idToken) {
-            return { authToken, idToken, ...response };
+            return { authToken, idToken, userData: { ...response } };
           }
         }
       },
@@ -87,6 +88,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         try {
           await queryFulfilled;
           dispatch(logOut());
+          dispatch(clearTokens());
           dispatch(setDarkTheme());
         } catch (error) {
           // eslint-disable-next-line no-console

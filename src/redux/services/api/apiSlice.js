@@ -2,13 +2,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TAG_TYPES_ARRAY } from '../../../utils/constants/tagTypes';
 import { setCredentials } from '../../auth/authSlice';
 import { PUBLIC_ENDPOINTS_ARRAY } from '../../../utils/constants/publicEndpoints';
+import { setTokens } from '../../auth/tokenSlice';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
   credentials: 'include',
   prepareHeaders: (headers, { getState, endpoint }) => {
     if (!PUBLIC_ENDPOINTS_ARRAY.includes(endpoint)) {
-      const { authToken, idToken } = getState().auth.user.data;
+      const { authToken, idToken } = getState().tokens;
 
       if (authToken && idToken) {
         headers.set('Authorization', authToken);
@@ -46,12 +47,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
           const idToken = headers.get('id-token');
 
           if (authToken && idToken) {
-            api.dispatch(
-              setCredentials({
-                data: { authToken, idToken },
-                isAuthenticated: true,
-              })
-            );
+            api.dispatch(setTokens({ idToken, authToken }));
             return baseQuery(args, api, extraOptions);
           }
         }
