@@ -106,12 +106,20 @@ const AchievementModal = () => {
             />
           </Box>
 
+          {/*<ButtonDef*/}
+          {/*  correctStyle={styles.workExperienceBtn}*/}
+          {/*  // disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}*/}
+          {/*  disabled={isLoading}*/}
+          {/*  isLoading={isLoading}*/}
+          {/*  label={t('profile.modal.btn')}*/}
+          {/*  type='submit'*/}
+          {/*  variant='contained'*/}
+          {/*/>*/}
           <ButtonDef
             correctStyle={styles.workExperienceBtn}
-            // disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
-            disabled={isLoading}
-            isLoading={isLoading}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
+            loading={isLoading}
             type='submit'
             variant='contained'
           />

@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { StepPersonalSchema } from '../../../../../utils/valadationSchemas/index';
 import {
@@ -24,8 +25,6 @@ const StepPersonal = () => {
   const { data: userData } = useSelector(selectCurrentUser);
   const [putPersonalUser, { data: dataPutPersonalUser, isError: isErrorPutPersonal, isLoading: isLoadingPutPersonal }] =
     usePutPersonalUserMutation();
-  // eslint-disable-next-line no-console
-  console.log('isLoadingPutPersonal:', isLoadingPutPersonal);
 
   const {
     data: dataGetPersonal,
@@ -34,6 +33,7 @@ const StepPersonal = () => {
   } = useGetPersonalUserQuery(userData.id, { skip: !userData.id });
 
   const { firstName, lastName, city, country, status, description } = dataPutPersonalUser || dataGetPersonal;
+  const { t } = useTranslation();
 
   const initialValues = {
     firstName: firstName || userData.firstName || '',
@@ -58,8 +58,6 @@ const StepPersonal = () => {
 
     formik.resetForm();
   };
-  // eslint-disable-next-line no-console
-  console.log(putPersonalUser, 'putPersonalUser');
 
   const formik = useFormik({
     initialValues,
@@ -75,6 +73,10 @@ const StepPersonal = () => {
   if (isFetchingGetCountry || isFetchingGetPersonal || isLoadingPutPersonal) {
     return <StepPersonalSkeleton />;
   }
+  //
+  // if (true) {
+  //   return <StepPersonalSkeleton />;
+  // }
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -162,8 +164,8 @@ const StepPersonal = () => {
         <ButtonDef
           correctStyle={styles.btn}
           disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoadingPutPersonal}
-          isLoading={isLoadingPutPersonal}
-          label='profile.modal.btn'
+          label={t('profile.modal.btn')}
+          loading={isLoadingPutPersonal}
           type='submit'
           variant='contained'
         />

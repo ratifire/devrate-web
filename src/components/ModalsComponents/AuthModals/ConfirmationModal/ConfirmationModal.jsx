@@ -81,7 +81,7 @@ const ConfirmationModal = () => {
       </Box>
 
       <ConfirmationForm
-        buttonLabel='modal.confirmation.btn_confirm'
+        buttonLabel={t('modal.confirmation.btn_confirm')}
         formik={formik}
         handleCodeChange={handleCodeChange}
         helperTextContent={codeError}

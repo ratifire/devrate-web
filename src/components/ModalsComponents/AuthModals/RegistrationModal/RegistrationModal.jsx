@@ -197,11 +197,13 @@ const RegistrationModal = () => {
             correctStyle={styles.submitBtn}
             disabled={!isFormValid}
             handlerClick={formik.handleSubmit}
-            label='modal.registration.btn_register'
+            label={t('modal.registration.btn_register')}
+            loading={isCreating}
             type='submit'
             variant='contained'
           />
         </Box>
+        {/*TODO: Check prop loading*/}
         <Box sx={styles.policyTermsContainer}>
           <Link
             aria-disabled

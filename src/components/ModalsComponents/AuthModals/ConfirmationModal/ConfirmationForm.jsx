@@ -197,6 +197,7 @@ const ConfirmationForm = ({
             correctStyle={styles.submitBtn}
             disabled={!formik.isValid}
             label={buttonLabel || 'modal.confirmation.btn_confirm'}
+            loading={formik.isSubmitting}
             sx={styles.btn}
             type='submit'
             variant={buttonVariant || 'contained'}
