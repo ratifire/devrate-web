@@ -1,4 +1,6 @@
 import { apiSlice } from '../services/api/apiSlice';
+import { setDarkTheme } from '../theme/themeSlice';
+import { logOut } from './authSlice';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -68,8 +70,29 @@ export const authApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: '/auth/logout',
         method: 'POST',
+        credentials: 'include',
+        headers: (headers, { getState }) => {
+          const { authToken, idToken } = getState().auth.user;
+
+          if (authToken && idToken) {
+            headers.set('Authorization', authToken);
+            headers.set('Id-Token', idToken);
+          }
+
+          return headers;
+        },
         responseHandler: (response) => response.text(),
       }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(logOut());
+          dispatch(setDarkTheme());
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.log('Logout failed:', error);
+        }
+      },
     }),
   }),
 });

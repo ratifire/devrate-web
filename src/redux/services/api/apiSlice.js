@@ -1,21 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TAG_TYPES_ARRAY } from '../../../utils/constants/tagTypes';
 import { setCredentials } from '../../auth/authSlice';
+import { PUBLIC_ENDPOINTS_ARRAY } from '../../../utils/constants/publicEndpoints';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
   credentials: 'include',
   prepareHeaders: (headers, { getState, endpoint }) => {
-    const ignoreEndpoints = [
-      'createUser',
-      'confirmEmail',
-      'login',
-      'resetPassword',
-      'changePassword',
-      'getCountryList',
-    ];
-
-    if (!ignoreEndpoints.includes(endpoint)) {
+    if (!PUBLIC_ENDPOINTS_ARRAY.includes(endpoint)) {
       const { authToken, idToken } = getState().auth.user.data;
 
       if (authToken && idToken) {
@@ -35,23 +27,27 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         {
           url: '/auth/refresh-token',
           method: 'POST',
+          credentials: 'include',
         },
         api,
         extraOptions
       );
-
       if (refreshToken.meta) {
         const headers = refreshToken?.meta?.response?.headers;
 
         if (headers) {
           const authToken = headers.get('authorization');
           const idToken = headers.get('id-token');
-          api.dispatch(
-            setCredentials({
-              authToken,
-              idToken,
-            })
-          );
+
+          if (authToken && idToken) {
+            api.dispatch(
+              setCredentials({
+                authToken,
+                idToken,
+              })
+            );
+            return baseQuery(args, api, extraOptions);
+          }
         }
       }
     } catch (error) {
