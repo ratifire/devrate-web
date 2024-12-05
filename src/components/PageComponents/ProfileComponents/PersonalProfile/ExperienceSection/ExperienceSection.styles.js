@@ -41,12 +41,11 @@ const styles = {
   }),
   experienceItemContainer: (theme) => ({
     overflow: 'auto',
-    maxHeight: '300px',
     minWidth: '100%',
+    minHeight: '300px',
+    height: 'calc(100vh - 506px)',
     paddingTop: '20px',
     paddingRight: theme.spacing(3),
-    height: '100%',
-
     '&::-webkit-scrollbar': {
       width: 10,
     },
