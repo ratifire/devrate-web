@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TAG_TYPES_ARRAY } from '../../../utils/constants/tagTypes';
-import { setCredentials } from '../../auth/authSlice';
+import { logOut } from '../../auth/authSlice';
 import { PUBLIC_ENDPOINTS_ARRAY } from '../../../utils/constants/publicEndpoints';
-import { setTokens } from '../../auth/tokenSlice';
+import { clearTokens, setTokens } from '../../auth/tokenSlice';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
@@ -35,7 +35,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       );
 
       if (refreshToken.error && refreshToken.error.status === 497) {
-        api.dispatch(setCredentials({ data: {}, isAuthenticated: false }));
+        api.dispatch(logOut());
+        api.dispatch(clearTokens());
         return result;
       }
 
