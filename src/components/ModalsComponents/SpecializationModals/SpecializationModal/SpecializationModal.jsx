@@ -269,10 +269,12 @@ const SpecializationModal = () => {
             correctStyle={styles.specializationBtn}
             disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
             label={t('profile.modal.btn')}
+            loading={isLoading}
             type='submit'
             variant='contained'
           />
         </Box>
+        {/*  TODO: Ask about submit and loadingState*/}
       </form>
     </ModalLayoutProfile>
   );

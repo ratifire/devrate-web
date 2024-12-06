@@ -152,6 +152,7 @@ const StepContacts = () => {
         correctStyle={styles.btn}
         disabled={!formik.dirty || formik.isSubmitting || !formik.isValid}
         label={t('profile.modal.btn')}
+        loading={isLoading}
         type='submit'
         variant='contained'
       />

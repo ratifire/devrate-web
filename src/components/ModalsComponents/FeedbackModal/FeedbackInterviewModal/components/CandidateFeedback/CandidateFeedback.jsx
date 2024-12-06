@@ -13,7 +13,7 @@ import { styles } from './CandidateFeedback.styles';
 const CandidateFeedback = () => {
   const [activeStep, setActiveStep] = useState(FIRST_STEP);
   const { t } = useTranslation();
-  const { formik, isError, interviewStartTime, surname, name, status } = useFeedbackForm();
+  const { formik, isError, interviewStartTime, surname, name, status, isLoading } = useFeedbackForm();
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
   const handleNextStep = () => setActiveStep(LAST_STEP);
@@ -54,9 +54,11 @@ const CandidateFeedback = () => {
                 correctStyle={styles.btn}
                 disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
                 label={t('modal.interview.btnSend')}
+                loading={isLoading}
                 type={'submit'}
                 variant={'contained'}
               />
+              //TODO need to check this button
             )}
           </Box>
         </Box>

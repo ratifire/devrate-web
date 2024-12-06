@@ -10,7 +10,7 @@ import { styles } from './InterviewerFeedback.styles';
 
 const InterviewerFeedback = () => {
   const { t } = useTranslation();
-  const { interviewStartTime, name, status, surname, isError, formik } = useFeedbackForm();
+  const { interviewStartTime, name, status, surname, isError, formik, isLoading } = useFeedbackForm();
 
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
@@ -30,6 +30,7 @@ const InterviewerFeedback = () => {
           correctStyle={styles.btn}
           disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
           label={t('modal.interview.btnSend')}
+          loading={isLoading}
           type='submit'
           variant='contained'
         />
