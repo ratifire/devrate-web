@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router';
 import { Provider } from 'react-redux';
 import { store } from '../../../../redux/store/store';
 import { decorators } from '../../../../../.storybook/preview';

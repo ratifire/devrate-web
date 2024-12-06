@@ -1,7 +1,7 @@
 import { AppBar, Badge, Box, Button, IconButton } from '@mui/material';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ReactComponent as Message } from '../../../assets/icons/message.svg';
 import { selectCurrentUser } from '../../../redux/auth/authSlice';
 import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';

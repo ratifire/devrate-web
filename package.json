@@ -32,7 +32,7 @@
     "react-dropzone": "^14.2.3",
     "react-i18next": "^14.0.0",
     "react-redux": "^9.1.0",
-    "react-router-dom": "^6.21.3",
+    "react-router": "^7.0.2",
     "react-scripts": "5.0.1",
     "recharts": "^2.12.7",
     "redux-logger": "^3.0.6",
