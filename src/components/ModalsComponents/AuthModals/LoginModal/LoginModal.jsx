@@ -11,8 +11,8 @@ import { FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../../redux/auth/authApiSlice';
-import { setCredentials } from '../../../../redux/auth/authSlice';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
+import { setCredentials } from '../../../../redux/auth/authSlice';
 import { setTokens } from '../../../../redux/auth/tokenSlice';
 import styles from './LoginModal.styles';
 

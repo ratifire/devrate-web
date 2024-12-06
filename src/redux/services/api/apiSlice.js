@@ -3,18 +3,19 @@ import { TAG_TYPES_ARRAY } from '../../../utils/constants/tagTypes';
 import { logOut } from '../../auth/authSlice';
 import { PUBLIC_ENDPOINTS_ARRAY } from '../../../utils/constants/publicEndpoints';
 import { clearTokens, setTokens } from '../../auth/tokenSlice';
+import { getTokenInHeaders } from '../../../utils/helpers';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
   credentials: 'include',
   prepareHeaders: (headers, { getState, endpoint }) => {
-    if (!PUBLIC_ENDPOINTS_ARRAY.includes(endpoint)) {
-      const { authToken, idToken } = getState().tokens;
+    if (PUBLIC_ENDPOINTS_ARRAY.includes(endpoint)) return;
 
-      if (authToken && idToken) {
-        headers.set('Authorization', authToken);
-        headers.set('Id-Token', idToken);
-      }
+    const { authToken, idToken } = getState().tokens;
+
+    if (authToken && idToken) {
+      headers.set('Authorization', authToken);
+      headers.set('Id-Token', idToken);
     }
   },
 });
@@ -44,8 +45,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         const headers = refreshToken?.meta?.response?.headers;
 
         if (headers) {
-          const authToken = headers.get('authorization');
-          const idToken = headers.get('id-token');
+          const { authToken, idToken } = getTokenInHeaders({ headers });
 
           if (authToken && idToken) {
             api.dispatch(setTokens({ idToken, authToken }));
