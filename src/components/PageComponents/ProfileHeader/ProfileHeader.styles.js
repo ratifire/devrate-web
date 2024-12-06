@@ -28,5 +28,9 @@ const styles = {
     height: 44,
     padding: 0,
   },
+  iconButtonWrapper: (theme) => ({
+    borderRadius: 1,
+    color: theme.palette.notifications.badge.fill,
+  }),
 };
 export default styles;

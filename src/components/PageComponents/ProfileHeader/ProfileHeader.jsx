@@ -46,10 +46,9 @@ const ProfileHeader = () => {
         <InputSearch />
         <ThemeSwitch />
         <Notification />
-        <IconButton>
+        <IconButton sx={styles.iconButtonWrapper}>
           <Badge invisible badgeContent='' color='error' overlap='circular' variant='dot'>
             <Message />
-            {/*{theme.palette.mode==="dark"?<Message />:<MessageLight />}*/}
           </Badge>
         </IconButton>
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
