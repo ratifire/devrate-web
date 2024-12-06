@@ -1,3 +1,5 @@
+@import '../../styles/scss/mediaBreakpoints.scss';
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -35,9 +37,11 @@
         color: #fff;
         text-decoration: none;
         font-family: 'Open Sans', sans-serif;
+        font-size: 24px;
         font-weight: 700;
         margin-right: 24px;
         transition: all 0.3s linear;
+        line-height: 136%;
 
         &:hover {
           color: #b78af7;
@@ -46,6 +50,10 @@
 
         &:active {
           color: #8133f1;
+        }
+
+        @include desktop {
+          font-size: 18px;
         }
       }
     }

@@ -1,9 +1,7 @@
 import React from 'react';
 import img1 from '../../assets/img1.png';
-import img2 from '../../assets/img2.png';
-import img3 from '../../assets/img3.png';
+import img2 from '../../assets/img2n.png';
 import img4 from '../../assets/img4.png';
-import img5 from '../../assets/img5.png';
 import styles from './HowItWorksSection.module.scss';
 
 const howItWorksSection = () => {
@@ -32,9 +30,8 @@ const howItWorksSection = () => {
             </div>
           </div>
           <div className={styles.works__block}>
-            <div className={styles.works__left}>
+            <div className={`${styles.works__left} ${styles.left2}`}>
               <img alt='' className={styles.img2} src={img2} />
-              <img alt='' className={styles.img3} src={img3} />
             </div>
             <div className={`${styles.works__right} ${styles.right2}`}>
               <div className={`${styles.card__wrapper} ${styles.m2}`}>
@@ -49,7 +46,7 @@ const howItWorksSection = () => {
               </div>
             </div>
           </div>
-          <div className={styles.works__block}>
+          <div className={`${styles.works__block} ${styles.block3}`}>
             <div className={`${styles.works__left} ${styles.left3}`}>
               <div className={`${styles.card__wrapper} ${styles.m3}`}>
                 <div className={styles.card__title__wrapper}>
@@ -62,9 +59,8 @@ const howItWorksSection = () => {
                 </p>
               </div>
             </div>
-            <div className={styles.works__right}>
+            <div className={`${styles.works__right} ${styles.right3}`}>
               <img alt='' className={styles.img4} src={img4} />
-              <img alt='' className={styles.img5} src={img5} />
             </div>
           </div>
         </div>

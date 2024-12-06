@@ -1,3 +1,5 @@
+@import '../../styles/scss/mediaBreakpoints.scss';
+
 .bg {
   padding: 44px 0 12px;
   background-color: #161616;
@@ -41,8 +43,12 @@
     grid-gap: 12px;
     margin-bottom: 109px;
 
+    @include desktop {
+      margin-bottom: 85px;
+    }
+
     &:nth-child(2) {
-      margin-bottom: 124px;
+      margin-bottom: 185px;
     }
 
     &:last-child {
@@ -84,6 +90,11 @@
     & span {
       color: #b78af7;
     }
+
+    @include desktop {
+      font-size: 30px;
+      margin-bottom: 57px;
+    }
   }
 }
 
@@ -104,18 +115,20 @@
     background-image: url('../../assets/arrow3.svg');
     background-repeat: no-repeat;
     background-position: bottom center;
+    background-size: 100%;
     position: absolute;
     bottom: -50px;
     left: 150px;
 
-    @media screen and (width <= 1024px) {
-      display: none;
+    @include desktop {
+      max-width: 267px;
+      bottom: 0;
     }
   }
 }
 
 .right2 {
-  min-width: 553px;
+  width: 30.1136%;
 
   &::after {
     content: '';
@@ -126,17 +139,32 @@
     background-repeat: no-repeat;
     background-position: bottom center;
     position: absolute;
-    bottom: -190px;
-    left: 280px;
+    bottom: -125px;
+    left: 0;
 
-    @media screen and (width <= 1024px) {
-      display: none;
+    @include desktop {
+      bottom: -90px;
+      left: 0;
+      background-size: 100%;
+      width: 110px;
     }
   }
 }
 
+.left2 {
+  width: 69.8864%;
+}
+
+.block3 {
+  height: auto;
+}
+
+.right3 {
+  width: 82%;
+}
+
 .left3 {
-  min-width: 553px;
+  width: 18%;
 }
 
 .m1 {
@@ -154,23 +182,29 @@
   right: 175px;
   z-index: 10;
 
-  @media screen and (width <= 1024px) {
-    position: relative;
-    top: auto;
-    right: auto;
+  @include desktop {
+    top: 0;
+    right: 105px;
+  }
+
+  @media screen and (width <= 1300px) {
+    right: 36px;
+  }
+
+  @media screen and (width <= 1150px) {
+    right: 0;
   }
 }
 
 .m3 {
   position: absolute;
-  top: 0;
-  left: 180px;
+  top: -110px;
+  left: 170px;
   z-index: 10;
 
-  @media screen and (width <= 1024px) {
-    position: relative;
-    top: auto;
-    left: auto;
+  @media screen and (width <= 1730px) {
+    top: -130px;
+    left: 0;
   }
 }
 
@@ -180,6 +214,10 @@
     border-radius: 16px;
     padding: 24px;
     width: 553px;
+
+    @include desktop {
+      max-width: 438px;
+    }
 
     &::before {
       content: '';
@@ -207,6 +245,10 @@
       bottom: -14px;
       left: -15px;
       z-index: 2;
+
+      @include desktop {
+        bottom: -8px;
+      }
     }
   }
 
@@ -218,6 +260,10 @@
     color: #fff;
     position: relative;
     z-index: 20;
+
+    @include desktop {
+      font-size: 24px;
+    }
 
     &__wrapper {
       display: flex;
@@ -235,6 +281,10 @@
     color: #fff;
     position: relative;
     z-index: 20;
+
+    @include desktop {
+      font-size: 18px;
+    }
   }
 }
 
@@ -264,6 +314,20 @@
     top: 0;
     left: 0;
   }
+
+  @include desktop {
+    font-size: 24px;
+    height: 55px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::after {
+      height: 55px;
+      width: 60px;
+    }
+  }
 }
 
 .img1 {
@@ -280,30 +344,16 @@
     left: -20px;
   }
 
-  @media screen and (width <= 1024px) {
-    display: none;
+  @include desktop {
+    top: 73px;
+    left: -20px;
+    min-height: 275px;
   }
 }
 
 .img2 {
-  transform: rotateZ(-6deg);
-  max-width: 869px;
   width: 100%;
   height: auto;
-
-  @media screen and (width <= 1024px) {
-    display: none;
-  }
-}
-
-.img3 {
-  transform: rotateZ(18deg);
-  max-width: 571px;
-  width: 100%;
-  height: auto;
-  position: absolute;
-  bottom: 15px;
-  right: -300px;
 
   @media screen and (width <= 1024px) {
     display: none;
@@ -311,25 +361,5 @@
 }
 
 .img4 {
-  max-width: 571px;
   width: 100%;
-  height: auto;
-  position: absolute;
-  bottom: -155px;
-  left: -446px;
-
-  @media screen and (width <= 1024px) {
-    display: none;
-  }
-}
-
-.img5 {
-  max-width: 1017px;
-  width: 100%;
-  height: auto;
-  margin-top: 107px;
-
-  @media screen and (width <= 1024px) {
-    display: none;
-  }
 }

@@ -7,6 +7,7 @@ import { Header, HeroSection, HowItWorksSection, AboutUsSection, FaqSection, Foo
 import './styles/reset.css';
 import './styles/index.css';
 import './assets/fonts/fonts.css';
+import './styles/scss/index.scss';
 
 const MemoizedHeader = memo(Header);
 const MemoizedHeroSection = memo(HeroSection);

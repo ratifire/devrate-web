@@ -1,13 +1,10 @@
+@import '../../styles/scss/mediaBreakpoints.scss';
+
 .hero {
   display: flex;
   justify-content: space-between;
   align-items: center;
   grid-gap: 8px;
-
-  @media screen and (width <= 1280px) {
-    flex-direction: column;
-    justify-content: flex-start;
-  }
 
   &__bg {
     padding-top: 102px;
@@ -51,34 +48,21 @@
   &__left {
     flex: 1 1 max(1017px);
 
-    @media screen and (width <= 1280px) {
-      flex: none;
-      padding-top: 220px;
+    @include desktop {
+      flex: 1 1 max(643px);
     }
 
     h1 {
       font-family: 'Zen Dots', sans-serif;
       font-size: 60px;
       font-weight: 400;
-      line-height: 90px;
+      line-height: 150%;
       letter-spacing: 0.01em;
       color: #fff;
       text-shadow: 2px 2px 4px 0 rgb(29 29 29 / 25%);
 
-      @media screen and (width <= 1680px) {
-        font-size: 50px;
-        line-height: 75px;
-      }
-
-      @media screen and (width <= 1480px) {
-        font-size: 45px;
-        line-height: 65px;
-      }
-
-      @media screen and (width <= 1280px) {
-        font-size: 35px;
-        line-height: 55px;
-        text-align: left;
+      @include desktop {
+        font-size: 36px;
       }
 
       .highlight {
@@ -96,9 +80,8 @@
   &__right {
     flex: 1 1 max(719px);
 
-    @media screen and (width <= 1280px) {
-      flex: none;
-      padding-top: 50px;
+    @include desktop {
+      flex: 1 1 max(453px);
     }
 
     p {
@@ -108,16 +91,8 @@
       line-height: 36px;
       color: #fff;
 
-      @media screen and (width <= 1680px) {
-        font-size: 20px;
-        line-height: 28px;
-      }
-
-      @media screen and (width <= 1280px) {
-        font-size: 16px;
-        line-height: 22px;
-        text-align: left;
-        max-width: 553px;
+      @include desktop {
+        font-size: 18px;
       }
     }
   }
@@ -130,13 +105,36 @@
   grid-gap: 36px;
   margin-top: 36px;
 
+  @include desktop {
+    grid-gap: 24px;
+  }
+
   .registration {
     max-width: 299px;
     width: 100%;
+
+    @include desktop {
+      max-width: 230px;
+    }
   }
 
   .login {
     max-width: 220px;
     width: 100%;
+
+    @include desktop {
+      max-width: 187px;
+    }
+  }
+
+  @include desktop {
+    .registration,
+    .login {
+      display: flex;
+      align-items: center;
+      font-size: 18px !important;
+      line-height: 150% !important;
+      padding: 12px 0 !important;
+    }
   }
 }
