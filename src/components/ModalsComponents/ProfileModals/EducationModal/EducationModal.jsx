@@ -20,6 +20,7 @@ const EducationModal = () => {
   const dataToEdit = useSelector(selectEducationDataToEdit);
   const openEducation = useSelector((state) => state.modal.education);
   const { t } = useTranslation();
+  const translatedNow = t('profile.modal.education.now');
   const [startYears, setStartYears] = useState([]);
   const [endYears, setEndYears] = useState([]);
   const [createEducation] = useCreateEducationMutation();
@@ -55,7 +56,7 @@ const EducationModal = () => {
 
   const onSubmit = async (values, { resetForm }) => {
     const endYearEducation =
-      values.endYear === null || values.endYear === 'Now' || values.endYear === ''
+      values.endYear === null || values.endYear === translatedNow || values.endYear === ''
         ? new Date('9999-01-01').getFullYear()
         : new Date(values.endYear).getFullYear();
     if (dataToEdit) {

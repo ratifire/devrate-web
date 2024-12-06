@@ -67,6 +67,7 @@ export const en = {
         description: 'Description',
         startYear: 'Start year',
         endYear: 'End year',
+        now: 'Now',
       },
       checkEmailResetPassword: {
         title: 'Password Reset',
