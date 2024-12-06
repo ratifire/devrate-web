@@ -27,10 +27,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     changePassword: builder.mutation({
-      query: ({ code, newPassword }) => ({
+      query: ({ code, newPassword, email }) => ({
         url: '/auth/password-reset',
         method: 'POST',
-        body: { code, newPassword },
+        body: { code, newPassword, email },
       }),
     }),
     login: builder.mutation({
