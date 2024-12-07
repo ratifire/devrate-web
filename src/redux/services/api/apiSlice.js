@@ -7,7 +7,6 @@ import { getTokenInHeaders } from '../../../utils/helpers';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
-  credentials: 'include',
   prepareHeaders: (headers, { getState, endpoint }) => {
     if (PUBLIC_ENDPOINTS_ARRAY.includes(endpoint)) return;
 
