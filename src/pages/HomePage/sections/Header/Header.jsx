@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import logo from '../../assets/logo.svg';
 import linkdin from '../../assets/linkdin.svg';
 import mail from '../../assets/mail.svg';
@@ -51,7 +51,7 @@ export default Header;
 // import logo from '../../assets/logo.svg';
 // import linkdin from '../../assets/linkdin.svg';
 // import mail from '../../assets/mail.svg';
-// import { Link } from 'react-router-dom';
+// import { Link } from 'react-router';
 //
 // const Header = () => {
 //   const [activeIcon, setActiveIcon] = useState(null);

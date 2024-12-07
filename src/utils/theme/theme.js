@@ -199,6 +199,7 @@ const getDesignTokens = (mode) => ({
                 color: '#360083',
                 backgroundColor: '#CEB0FA',
               },
+              btnFeedback: '#B78AF7',
             },
           },
           checkBox: {
@@ -717,6 +718,7 @@ const getDesignTokens = (mode) => ({
                 color: '#360083',
                 backgroundColor: '#CEB0FA',
               },
+              btnFeedback: '#360083',
             },
           },
           checkBox: {

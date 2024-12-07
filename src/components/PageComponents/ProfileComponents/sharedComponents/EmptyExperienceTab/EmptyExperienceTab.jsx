@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { openModal } from '../../../../../redux/modal/modalSlice';
 import { setButtonState } from '../../../../../redux/addButton/addButtonSlice';
