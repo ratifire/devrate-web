@@ -8,7 +8,7 @@ on:
       environment:
         description: 'Select environment to deploy (prod, dev, dev_new)'
         required: true
-        default: 'dev'
+        default: 'dev_new'
         type: choice
         options:
           - dev
@@ -76,7 +76,7 @@ jobs:
             echo "Waiting for workflow run $RUN_ID to complete..."
               gh run watch $RUN_ID --exit-status --interval 15
           fi 
-          
+
       - name: Send notification to Slack
         if: success()
         run: |
