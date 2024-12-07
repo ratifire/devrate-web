@@ -5,11 +5,14 @@ import { InfoOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import TimeAgo from '../../../UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
+import { formatToLocalDate } from '../../../../utils/helpers/formatToLocalDate';
 
 const InterviewScheduled = ({ createAt, payload }) => {
   const { t } = useTranslation();
-  const { rejectionUserFirstName, scheduleTime } = JSON.parse(payload);
+  const { role, formattedDateTime } = JSON.parse(payload);
 
+  const roleLower = role.toLowerCase();
+  const date = formatToLocalDate(formattedDateTime);
   return (
     <>
       <Box sx={styles.iconWrapper}>
@@ -17,8 +20,10 @@ const InterviewScheduled = ({ createAt, payload }) => {
       </Box>
       <Box sx={styles.textWrapper}>
         <Typography variant='body'>
-          {t('notifications.interviewScheduled')} {rejectionUserFirstName}
-          {scheduleTime}
+          {t('notifications.interviewScheduled', {
+            roleLower,
+            date,
+          })}
         </Typography>
         <Typography sx={styles.date} variant='body2'>
           <TimeAgo data={createAt} />
