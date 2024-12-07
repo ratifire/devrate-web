@@ -9,11 +9,9 @@ import Logo from '../../../UI/Logo';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import navigationsLinks from '../../../../router/links';
-import useAuth from '../../../../utils/hooks/useAuth';
 import styles from './Header.styles';
 
 const Header = () => {
-  useAuth();
   const dispatch = useDispatch();
   const handleOpen = () => dispatch(openModal({ modalName: 'openLogin' }));
   const [mobileOpen, setMobileOpen] = useState(false);

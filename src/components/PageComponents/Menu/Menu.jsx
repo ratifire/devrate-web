@@ -16,14 +16,11 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router';
 import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
-import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
-import { logOut } from '../../../redux/auth/authSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { openModal } from '../../../redux/modal/modalSlice';
-import { DARK_THEME } from '../../../utils/constants/Theme/theme';
 import links from './profileRoutes';
 import styles from './Menu.styles';
 
@@ -37,11 +34,6 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const logoutHandler = async () => {
     try {
       await logout().unwrap();
-      Cookies.remove('JSESSIONID', { path: '/', domain: 'devrate.org' });
-      Cookies.remove('JSESSIONID', { path: '/', domain: 'localhost' });
-      dispatch(logOut());
-      localStorage.setItem('theme', JSON.stringify({ mode: DARK_THEME }));
-      window.location.reload();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log('Logout failed:', error);
@@ -51,11 +43,10 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   const handleOpenFeedbackModal = () => {
     dispatch(openModal({ modalName: 'feedbackProjectModal' }));
   };
-  // const order = (item) => `order: ${item === 'profile.userMenu.logout' ? 2 : 0}`;
 
-  const handleLinkClick = (link) => {
+  const handleLinkClick = async (link) => {
     if (link.name === 'profile.userMenu.logout') {
-      logoutHandler();
+      await logoutHandler();
     }
   };
 
