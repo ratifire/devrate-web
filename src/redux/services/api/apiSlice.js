@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TAG_TYPES_ARRAY } from '../../../utils/constants/tagTypes';
 import { logOut } from '../../auth/authSlice';
+import { TAG_TYPES_ARRAY } from '../../../utils/constants/tagTypes';
 import { PUBLIC_ENDPOINTS_ARRAY } from '../../../utils/constants/publicEndpoints';
 import { clearTokens, setTokens } from '../../auth/tokenSlice';
 import { getTokenInHeaders } from '../../../utils/helpers';

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Box, Link, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ModalLayout from '../../../../layouts/ModalLayout';

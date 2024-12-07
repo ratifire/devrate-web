@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';

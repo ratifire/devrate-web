@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router';
 import { decorators } from '../../../../.storybook/preview';
 import socials from '../../../utils/constants/socials';
 import styles from '../..//PageComponents/LandingComponents/Footer/Footer.styles';

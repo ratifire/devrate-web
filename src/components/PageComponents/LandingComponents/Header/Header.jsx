@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AppBar, Box, Container, Divider, Drawer, IconButton, Link, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 import LinkList from '../../../UI/LinkList';
 import navLinks from '../../../../utils/constants/navLinks';
 import Logo from '../../../UI/Logo';

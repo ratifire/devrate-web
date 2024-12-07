@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useSnackbar } from 'notistack';
 import { useRef, useState } from 'react';
