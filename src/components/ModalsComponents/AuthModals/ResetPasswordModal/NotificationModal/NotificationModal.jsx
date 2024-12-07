@@ -6,7 +6,6 @@ import ModalLayout from '../../../../../layouts/ModalLayout';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
-import { useMarkAsReadMutation } from '../../../../../redux/services/notificationsApiSlice';
 import styles from './NotificationModal.styles';
 
 const NotificationModal = () => {
@@ -15,9 +14,6 @@ const NotificationModal = () => {
   const openNotification = useSelector((state) => state.modal.openNotification);
 
   const handleClose = () => dispatch(closeModal({ modalName: 'openNotification' }));
-
-  // TODO need to check how it work
-  const [{ isLoading }] = useMarkAsReadMutation();
 
   const handleEnter = () => {
     dispatch(closeModal({ modalName: 'openNotification' }));
@@ -37,7 +33,6 @@ const NotificationModal = () => {
           correctStyle={styles.submitBtn}
           handlerClick={handleEnter}
           label={t('modal.notificationModal.btn_enter')}
-          loading={isLoading}
           type='button'
           variant='contained'
         />

@@ -12,7 +12,7 @@ const useFeedbackForm = () => {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
   const { data } = useGetInterviewByIdQuery({ id: feedbackId }, { skip: !feedbackId });
-  const [createInterview, { isError }, { isLoading }] = useCreateInterviewMutation();
+  const [createInterview, { isError, isLoading }] = useCreateInterviewMutation();
   const {
     interviewStartTime,
     participant: { name, status, surname },

@@ -58,7 +58,6 @@ const CandidateFeedback = () => {
                 type={'submit'}
                 variant={'contained'}
               />
-              //TODO need to check this button
             )}
           </Box>
         </Box>

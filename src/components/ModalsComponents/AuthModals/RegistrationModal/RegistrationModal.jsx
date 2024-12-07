@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Box, CircularProgress, Link, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { RegistrationSchema } from '../../../../utils/valadationSchemas/index';
@@ -30,7 +30,7 @@ const RegistrationModal = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [createUser, { isLoading: isCreating }] = useCreateUserMutation();
+  const [createUser, { isLoading: isLoadingCreating }] = useCreateUserMutation();
   const openRegistration = useSelector((state) => state.modal.openRegistration);
   const handleClose = () => dispatch(closeModal({ modalName: 'openRegistration' }));
   const { data: userCountries } = useGetCountryListQuery();
@@ -89,9 +89,7 @@ const RegistrationModal = () => {
     formik.isValid &&
     formik.dirty;
 
-  return isCreating ? (
-    <CircularProgress />
-  ) : (
+  return (
     <ModalLayout open={openRegistration} setOpen={handleClose}>
       <Typography sx={styles.title} variant='h5'>
         {changeColorOfLastTitleWord(t('modal.registration.title'))}
@@ -198,12 +196,11 @@ const RegistrationModal = () => {
             disabled={!isFormValid}
             handlerClick={formik.handleSubmit}
             label={t('modal.registration.btn_register')}
-            loading={isCreating}
+            loading={isLoadingCreating}
             type='submit'
             variant='contained'
           />
         </Box>
-        {/*TODO: Check prop loading*/}
         <Box sx={styles.policyTermsContainer}>
           <Link
             aria-disabled
