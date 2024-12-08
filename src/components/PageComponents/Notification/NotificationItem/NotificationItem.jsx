@@ -13,7 +13,6 @@ import styles from './NotificationItem.styles';
 
 const NotificationItem = ({ data }) => {
   const { t } = useTranslation();
-
   const { id, type, read: isRead, createdAt, payload } = data;
 
   const { data: currentUser } = useSelector(selectCurrentUser);
@@ -39,8 +38,8 @@ const NotificationItem = ({ data }) => {
     GREETING: <Greeting createAt={createdAt} />,
     INTERVIEW_FEEDBACK: <InterviewFeedback createAt={createdAt} payload={payload} />,
     INTERVIEW_SCHEDULED: <InterviewScheduled createAt={createdAt} payload={payload} />,
-    INTERVIEW_REQUEST_EXPIRED: <InterviewRejected createAt={createdAt} payload={payload} />,
-    INTERVIEW_REJECTED: <InterviewRequestExpired createAt={createdAt} />,
+    INTERVIEW_REQUEST_EXPIRED: <InterviewRequestExpired createAt={createdAt} payload={payload} />,
+    INTERVIEW_REJECTED: <InterviewRejected createAt={createdAt} payload={payload} />,
   };
 
   return (

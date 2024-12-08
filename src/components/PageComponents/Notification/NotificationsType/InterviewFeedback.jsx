@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { InfoOutlined } from '@mui/icons-material';
+import InfoIcon from '@mui/icons-material/Info';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import TimeAgo from '../../../UI/TimeAgo';
@@ -20,7 +20,7 @@ const InterviewFeedback = ({ createAt, payload }) => {
   return (
     <>
       <Box sx={styles.iconWrapper}>
-        <InfoOutlined />
+        <InfoIcon />
       </Box>
       <Box sx={styles.textWrapper}>
         <Typography variant='body'>

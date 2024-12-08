@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import links from '../../../../router/links';
 import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';

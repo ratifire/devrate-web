@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Box, CircularProgress, Link, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 import { RegistrationSchema } from '../../../../utils/valadationSchemas/index';
 import { AdvancedFormSelector, FormCheckbox, FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
