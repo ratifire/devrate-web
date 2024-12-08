@@ -62,21 +62,21 @@ export const styles = {
   circularIcon: (theme) => ({
     color: theme.palette.iconBtn.loadingIcon,
   }),
-  working: () => ({
+  working: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     paddingY: '14px',
     maxWidth: '228px',
     height: '44px',
-  }),
+  },
 
-  workingSmall: () => ({
+  workingSmall: {
     position: 'absolute',
     bottom: 0,
     left: '244px',
     paddingY: '14px',
     maxWidth: '44px',
     height: '44px',
-  }),
+  },
 };

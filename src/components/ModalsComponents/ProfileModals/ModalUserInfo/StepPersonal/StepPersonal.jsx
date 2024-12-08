@@ -73,10 +73,6 @@ const StepPersonal = () => {
   if (isFetchingGetCountry || isFetchingGetPersonal || isLoadingPutPersonal) {
     return <StepPersonalSkeleton />;
   }
-  //
-  // if (true) {
-  //   return <StepPersonalSkeleton />;
-  // }
 
   return (
     <form onSubmit={formik.handleSubmit}>
