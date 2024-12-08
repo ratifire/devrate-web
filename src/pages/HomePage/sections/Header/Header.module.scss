@@ -15,11 +15,28 @@
     justify-content: space-between;
     padding: 20px 0;
     background-color: transparent;
+
+    @include tablet {
+      padding: 11.5px 0;
+    }
+  }
+
+  @include tablet {
+    align-items: center;
+
+    &__logo {
+      font-size: 0;
+    }
   }
 
   &__logo img {
     width: 214px;
     height: auto;
+
+    @include tablet {
+      width: 142px;
+      height: 33px;
+    }
   }
 
   &__nav {
@@ -31,6 +48,10 @@
       align-items: center;
       justify-content: space-between;
       list-style: none;
+
+      @include tablet {
+        display: none;
+      }
 
       a {
         display: block;
@@ -76,6 +97,12 @@
           border-radius: 4px;
           transform: scale(1.1);
         }
+      }
+    }
+
+    @include tablet {
+      &__dn {
+        display: none;
       }
     }
 

@@ -46,19 +46,21 @@ const HeroSection = () => {
 
           <div className={styles.hero__right}>
             <div>
-              <p>
-                Master your interview skills with real-world practice alongside experts and peers. Get personalized
-                feedback, objective evaluations, and in-depth insights to confidently prepare for success in any
-                interview!
-              </p>
-            </div>
+              <div>
+                <p>
+                  Master your interview skills with real-world practice alongside experts and peers. Get personalized
+                  feedback, objective evaluations, and in-depth insights to confidently prepare for success in any
+                  interview!
+                </p>
+              </div>
 
-            <div className={styles.btnContainer}>
-              <button className={`btn btn-primary btn-xl ${styles.registration}`} onClick={handleOpenRegistration}>
-                <span>Registration</span>
-                <Arrow />
-              </button>
-              {myProfile()}
+              <div className={styles.btnContainer}>
+                <button className={`btn btn-primary btn-xl ${styles.registration}`} onClick={handleOpenRegistration}>
+                  <span>Registration</span>
+                  <Arrow />
+                </button>
+                {myProfile()}
+              </div>
             </div>
           </div>
         </div>
