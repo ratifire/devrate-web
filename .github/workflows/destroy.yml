@@ -8,7 +8,7 @@ on:
       environment:
         description: 'Select environment to deploy (prod, dev, dev_new)'
         required: true
-        default: 'dev'
+        default: 'dev_new'
         type: choice
         options:
           - dev
@@ -28,7 +28,7 @@ jobs:
         id: determine_env
         run: |
           if [ -z "${{ github.event.inputs.environment }}" ]; then
-            ENVIRONMENT="dev"  # Default value for scheduled runs
+            ENVIRONMENT="dev_new"  # Default value for scheduled runs
           else
             ENVIRONMENT="${{ github.event.inputs.environment }}"
           fi
