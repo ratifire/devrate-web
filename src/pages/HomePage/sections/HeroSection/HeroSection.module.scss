@@ -8,6 +8,7 @@
 
   @include tablet {
     flex-direction: column;
+    grid-gap: 0;
   }
 
   &__bg {
@@ -77,6 +78,10 @@
         font-size: 36px;
       }
 
+      @include tablet {
+        text-align: center;
+      }
+
       .highlight {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -98,13 +103,43 @@
 
     @include tablet {
       flex: 1 1 auto;
-      width: 100vw;
-      height: 100%;
-      box-shadow: 0 -4px 10px 0 rgb(0 0 0 / 25%);
-      background: linear-gradient(180deg, #2a2145 0%, #211b37 51.4%, #161616 100%);
-      border-top: 2px solid #6853ac;
-      border-radius: 24px 24px 0 0;
-      padding: 24px;
+      padding-top: 333px;
+
+      .heroWrapper {
+        width: 100vw;
+        height: 100%;
+        box-shadow: 0 -4px 10px 0 rgb(0 0 0 / 25%);
+        background: linear-gradient(180deg, #2a2145 0%, #211b37 51.4%, #161616 100%);
+        border-top: 2px solid #6853ac;
+        border-radius: 24px 24px 0 0;
+        padding: 24px 24px 11px;
+        position: relative;
+
+        &::before,
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          background-repeat: no-repeat;
+        }
+
+        &::before {
+          width: 233.13px;
+          height: 305.77px;
+          background-image: url('../../assets/hero/mascot.svg');
+          top: -275px;
+          left: calc(50% - 116.565px);
+          z-index: -1;
+        }
+
+        &::after {
+          width: 148px;
+          height: 55px;
+          background-image: url('../../assets/hero/handsOfMascot.svg');
+          top: -40px;
+          left: calc(50% - 85px);
+        }
+      }
     }
 
     p {
@@ -127,6 +162,10 @@
   align-items: center;
   grid-gap: 36px;
   margin-top: 36px;
+
+  .join {
+    display: none;
+  }
 
   @include desktop {
     grid-gap: 24px;
@@ -152,12 +191,26 @@
 
   @include desktop {
     .registration,
-    .login {
+    .login,
+    .join {
       display: flex;
       align-items: center;
       font-size: 18px !important;
       line-height: 150% !important;
       padding: 12px 0 !important;
+    }
+  }
+
+  @include tablet {
+    .registration,
+    .login {
+      display: none;
+    }
+
+    .join {
+      display: block;
+      text-transform: uppercase;
+      width: 100%;
     }
   }
 }

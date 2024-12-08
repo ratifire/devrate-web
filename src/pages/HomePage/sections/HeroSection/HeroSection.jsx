@@ -45,7 +45,7 @@ const HeroSection = () => {
           </div>
 
           <div className={styles.hero__right}>
-            <div>
+            <div className={styles.heroWrapper}>
               <div>
                 <p>
                   Master your interview skills with real-world practice alongside experts and peers. Get personalized
@@ -60,6 +60,7 @@ const HeroSection = () => {
                   <Arrow />
                 </button>
                 {myProfile()}
+                <button className={`btn btn-primary btn-xl ${styles.join}`}>Join Us</button>
               </div>
             </div>
           </div>
