@@ -9,29 +9,33 @@ export const useDeleteEvent = () => {
 
   return async ({ userId, eventId, onSuccess, onError, onFinally }) => {
     if (!userId) {
-      // eslint-disable-next-line no-console
-      console.error('User ID is missing');
-      onError?.(new Error('User ID is missing'));
+      if (!onError) {
+        enqueueSnackbar(t('schedule.missingUserIdErrorMessage'), { variant: 'error' });
+      } else {
+        onError(t('schedule.missingUserIdErrorMessage'));
+      }
       return;
     }
 
     if (!eventId) {
-      // eslint-disable-next-line no-console
-      console.error('Event ID is missing');
-      onError?.(new Error('Event ID is missing'));
+      if (!onError) {
+        enqueueSnackbar(t('schedule.missingEventIdErrorMessage'), { variant: 'error' });
+      } else {
+        onError(t('schedule.missingEventIdErrorMessage'));
+      }
       return;
     }
 
     try {
       await deleteEventById({ userId, id: eventId }).unwrap();
       enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
-
       onSuccess?.();
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to delete event:', error);
-      enqueueSnackbar(t('schedule.deleteEventErrorMessage'), { variant: 'error' });
-      onError?.(error);
+      if (!onError) {
+        enqueueSnackbar(t('schedule.deleteEventErrorMessage'), { variant: 'error' });
+      } else {
+        onError(t('schedule.deleteEventErrorMessage'));
+      }
     } finally {
       onFinally?.();
     }
