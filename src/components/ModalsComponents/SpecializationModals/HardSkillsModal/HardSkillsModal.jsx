@@ -15,7 +15,7 @@ import MAX_SKILLS from '../../../../utils/constants/Specialization/maxSkills';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import useMergeState from '../../../../utils/hooks/useMergeState';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { ErrorComponent } from '../../../UI/Exceptions';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';
 import { styles as hardSkillsStyles } from './HardSkillsModal.styles';
@@ -144,14 +144,6 @@ const HardSkillsModal = () => {
     handleClose();
   };
 
-  if (isLoading) {
-    return (
-      <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
-        <LoaderComponent />
-      </ModalLayoutProfile>
-    );
-  }
-
   if (isError) {
     return (
       <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
@@ -193,6 +185,7 @@ const HardSkillsModal = () => {
           correctStyle={styles.btn}
           disabled={addSkills.length === 0 && idDeletedSkills.length === 0}
           label={t('profile.modal.btn')}
+          loading={isLoading}
           type='submit'
           variant='contained'
         />

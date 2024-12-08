@@ -34,7 +34,7 @@ const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = nul
     setSelectedLanguage((prevState) => {
       const updatedState = {
         ...prevState,
-        [field]: event.target.value,
+        [field]: event.target.value || '',
       };
 
       if (field === 'selectedLanguage') {
@@ -101,7 +101,7 @@ const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = nul
           label={t('profile.modal.userInfo.languages.language')}
           name='language'
           sx={styles.input}
-          value={selectedLanguage.selectedLanguage}
+          value={selectedLanguage.selectedLanguage || ''}
           onChange={(data) => handleChange('selectedLanguage', data)}
         >
           {languagesArray.length > 0 &&
@@ -139,7 +139,7 @@ const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = nul
           label={t('profile.modal.userInfo.languages.level')}
           name='languageLevel'
           sx={styles.input}
-          value={selectedLanguage.selectedLevel}
+          value={selectedLanguage.selectedLevel || ''}
           onChange={(data) => handleChange('selectedLevel', data)}
         >
           {levelCodes.length > 0 &&

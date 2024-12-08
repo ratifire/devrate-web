@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Skeleton } from '@mui/material';
-import { BtnSkeleton } from '../components';
+import { ButtonDef } from '../../../../../FormsComponents/Buttons';
 import { styles } from './StepLanguageSkeleton.styles';
 
 const StepLanguageSkeleton = () => {
@@ -16,7 +16,7 @@ const StepLanguageSkeleton = () => {
         <Skeleton height={34} variant='rounded' width={141} />
         <Skeleton height={34} variant='rounded' width={178} />
       </Box>
-      <BtnSkeleton />
+      <ButtonDef loading useSkeleton={'working'} variant={'contained'} />
     </>
   );
 };

@@ -217,6 +217,7 @@ const ResetPassword = () => {
                 correctStyle={styles.submitBtn}
                 disabled={!formik.isValid || !formik.dirty}
                 label={t('modal.resetPassword.btn_change_password')}
+                loading={formik.isSubmitting}
                 type='submit'
                 variant='contained'
               />
