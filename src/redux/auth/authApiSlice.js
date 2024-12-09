@@ -38,6 +38,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: '/auth/signin',
         method: 'POST',
         body: { email, password },
+        credentials: 'include',
       }),
       transformResponse: (response, meta) => {
         const headers = meta?.response?.headers;
