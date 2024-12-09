@@ -10,7 +10,7 @@ on:
       environment:
         description: 'Select environment to deploy (prod, dev, dev_new)'
         required: true
-        default: 'dev'
+        default: 'dev_new'
         type: choice
         options:
           - dev
@@ -25,7 +25,7 @@ jobs:
   build-and-push:
     name: Build and Push
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ github.event.inputs.environment || 'dev_new' }}
     strategy:
       matrix:
         node-version: [ 20.11.0 ]
