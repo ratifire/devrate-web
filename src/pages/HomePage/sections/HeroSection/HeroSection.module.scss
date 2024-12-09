@@ -11,6 +11,10 @@
     grid-gap: 0;
   }
 
+  @include phone {
+    align-items: flex-start;
+  }
+
   &__bg {
     padding-top: 102px;
     padding-bottom: 102px;
@@ -19,6 +23,10 @@
     align-items: center;
     position: relative;
     z-index: 1;
+
+    @include tablet {
+      padding-bottom: 16px;
+    }
 
     &::before {
       content: '';
@@ -70,6 +78,10 @@
       color: #fff;
       text-shadow: 2px 2px 4px 0 rgb(29 29 29 / 25%);
 
+      .h1Phone {
+        display: none;
+      }
+
       @media screen and (width <= 1700px) {
         font-size: 50px;
       }
@@ -82,10 +94,27 @@
         text-align: center;
       }
 
+      @include phone {
+        font-size: 24px;
+        text-align: left;
+
+        .h1Phone {
+          display: block;
+        }
+
+        .h1Desktop {
+          display: none;
+        }
+      }
+
       .highlight {
         margin-left: 1rem;
         margin-right: 1rem;
         color: #b78af7;
+
+        @include phone {
+          margin: 0;
+        }
       }
 
       .emphasis {
@@ -105,6 +134,10 @@
       flex: 1 1 auto;
       padding-top: 333px;
 
+      @include phone {
+        padding-top: 230px;
+      }
+
       .heroWrapper {
         width: 100vw;
         height: 100%;
@@ -114,6 +147,12 @@
         border-radius: 24px 24px 0 0;
         padding: 24px 24px 11px;
         position: relative;
+
+        @include phone {
+          width: 100%;
+          border-top: 1px solid #6853ac;
+          padding: 24px;
+        }
 
         &::before,
         &::after {
@@ -130,6 +169,10 @@
           top: -275px;
           left: calc(50% - 116.565px);
           z-index: -1;
+
+          @include phone {
+            left: calc(100% - 222.13px);
+          }
         }
 
         &::after {
@@ -138,20 +181,28 @@
           background-image: url('../../assets/hero/handsOfMascot.svg');
           top: -40px;
           left: calc(50% - 85px);
+
+          @include phone {
+            left: calc(100% - 190px);
+          }
         }
       }
     }
+  }
 
-    p {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 24px;
-      font-weight: 600;
-      line-height: 36px;
-      color: #fff;
+  p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #fff;
 
-      @include desktop {
-        font-size: 18px;
-      }
+    @include desktop {
+      font-size: 18px;
+    }
+
+    @include phone {
+      font-size: 18px;
     }
   }
 }

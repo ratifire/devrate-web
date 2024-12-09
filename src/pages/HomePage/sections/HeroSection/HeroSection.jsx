@@ -34,13 +34,25 @@ const HeroSection = () => {
         <div className={styles.hero}>
           <div className={styles.hero__left}>
             <h1>
-              Prepare for
-              <span className={styles.highlight}>
-                Technical
-                <br /> Interviews
-              </span>
-              with support
-              <br /> from <span className={styles.emphasis}>Experts and Peers!</span>
+              <div className={styles.h1Desktop}>
+                Prepare for
+                <span className={styles.highlight}>
+                  Technical
+                  <br /> Interviews
+                </span>
+                with support
+                <br /> from <span className={styles.emphasis}>Experts and Peers!</span>
+              </div>
+
+              <div className={styles.h1Phone}>
+                Prepare for <br />
+                <span className={styles.emphasis}>Experts and Peers!</span> <br />
+                <span className={styles.highlight}>
+                  Technical
+                  <br /> Interviews <br />
+                </span>
+                with support from
+              </div>
             </h1>
           </div>
 
