@@ -74,7 +74,8 @@ const CheckEmail = () => {
             correctStyle={styles.submitBtn}
             disabled={!formik.values.email || (formik.touched.email && Boolean(formik.errors.email))}
             handlerClick={formik.handleSubmit}
-            label='modal.checkEmailResetPassword.btn_send_letter'
+            label={t('modal.checkEmailResetPassword.btn_send_letter')}
+            loading={formik.isSubmitting}
             type='submit'
             variant='contained'
           />

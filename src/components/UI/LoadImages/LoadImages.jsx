@@ -146,7 +146,7 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled
           correctStyle={styles.btn}
           disabled={isDisabled || !settingsCanvas.image || !!error}
           handlerClick={handleSave}
-          label='profile.modal.btn'
+          label={t('profile.modal.btn')}
           type='submit'
           variant='contained'
         />

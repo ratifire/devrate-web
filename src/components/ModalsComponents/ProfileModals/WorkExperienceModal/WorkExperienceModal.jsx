@@ -27,7 +27,7 @@ const WorkExperienceModal = () => {
   const { id } = useSelector((state) => state.auth.user.data);
   const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
   const { t } = useTranslation();
-  const [createNewWorkExperience] = useCreateNewWorkExperienceMutation();
+  const [createNewWorkExperience, { isLoading }] = useCreateNewWorkExperienceMutation();
   const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
 
   const selectYears = useMemo(() => generateYearsArray(), []);
@@ -210,8 +210,9 @@ const WorkExperienceModal = () => {
 
           <ButtonDef
             correctStyle={styles.workExperienceBtn}
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
+            loading={isLoading}
             type='submit'
             variant='contained'
           />

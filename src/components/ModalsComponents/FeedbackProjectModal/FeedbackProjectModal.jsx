@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, CircularProgress } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -98,11 +98,10 @@ const FeedbackProjectModal = () => {
           correctStyle={styles.btn}
           disabled={!formik.isValid || !formik.dirty || isLoading}
           label={t('modal.feedbackProjectModal.button')}
+          loading={isLoading}
           type='submit'
           variant='contained'
-        >
-          {isLoading ? <CircularProgress size={24} /> : t('modal.feedbackProjectModal.button')}
-        </ButtonDef>
+        />
       </form>
     </ModalLayoutProfile>
   );

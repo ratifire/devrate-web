@@ -46,7 +46,7 @@ const ExperienceEmptyItem = ({ tab, profileType, imgUrl, isData }) => {
             <ButtonDef
               correctStyle={styles.button}
               handlerClick={handleOpenModal}
-              label={`profile.experience.${tab}.emptyTabName.button`}
+              label={t(`profile.experience.${tab}.emptyTabName.button`)}
               type='button'
               variant='contained'
             />

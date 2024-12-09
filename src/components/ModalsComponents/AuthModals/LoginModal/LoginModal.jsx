@@ -140,7 +140,8 @@ const LoginModal = () => {
           <ButtonDef
             correctStyle={styles.turnBackLink}
             handlerClick={handleOpen}
-            label='modal.login.forgot_your_password'
+            label={t('modal.login.forgot_your_password')}
+            loading={formik.isSubmitting}
             type='button'
             variant='text'
           />
@@ -149,7 +150,8 @@ const LoginModal = () => {
           <ButtonDef
             correctStyle={styles.submitBtn}
             disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
-            label='modal.login.btn_login'
+            label={t('modal.login.btn_login')}
+            loading={formik.isSubmitting}
             type='submit'
             variant='contained'
           />

@@ -62,7 +62,6 @@ const SpecializationLevel = () => {
           {['JUNIOR', 'MIDDLE', 'SENIOR'].map((label) => (
             <ButtonDef
               key={label}
-              withTranslation
               correctStyle={styles.button}
               disabled={activeMastery === label}
               handlerClick={() => handleClick(label)}

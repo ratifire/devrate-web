@@ -32,7 +32,7 @@ const NotificationModal = () => {
         <ButtonDef
           correctStyle={styles.submitBtn}
           handlerClick={handleEnter}
-          label='modal.notificationModal.btn_enter'
+          label={t('modal.notificationModal.btn_enter')}
           type='button'
           variant='contained'
         />

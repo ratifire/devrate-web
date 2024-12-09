@@ -22,7 +22,7 @@ const EducationModal = () => {
   const { t } = useTranslation();
   const [startYears, setStartYears] = useState([]);
   const [endYears, setEndYears] = useState([]);
-  const [createEducation] = useCreateEducationMutation();
+  const [createEducation, { isLoading }] = useCreateEducationMutation();
   const [updateEducation] = useUpdateEducationMutation();
   const currentUser = useSelector(selectCurrentUser);
 
@@ -174,7 +174,9 @@ const EducationModal = () => {
 
           <ButtonDef
             correctStyle={styles.workExperienceBtn}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
+            loading={isLoading}
             type='submit'
             variant='contained'
           />
