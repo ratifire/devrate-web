@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import { useSnackbar } from 'notistack';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { EducationModalSchema } from '../../../../utils/valadationSchemas/index';
@@ -25,6 +26,7 @@ const EducationModal = () => {
   const [createEducation] = useCreateEducationMutation();
   const [updateEducation] = useUpdateEducationMutation();
   const currentUser = useSelector(selectCurrentUser);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = useCallback(() => {
     dispatch(closeModal({ modalName: 'education' }));
@@ -53,16 +55,15 @@ const EducationModal = () => {
     endYear: '',
   };
 
-  const formik = useFormik({
-    initialValues: dataToEdit || emptyInitialValues,
-    validationSchema: EducationModalSchema,
-    onSubmit: (values, { resetForm }) => {
-      const endYearEducation =
-        values.endYear === null || values.endYear === 'Now' || values.endYear === ''
-          ? new Date('9999-01-01').getFullYear()
-          : new Date(values.endYear).getFullYear();
+  const onSubmit = async (values, { resetForm }) => {
+    const endYearEducation =
+      values.endYear === null || values.endYear === 'Now' || values.endYear === ''
+        ? new Date('9999-01-01').getFullYear()
+        : new Date(values.endYear).getFullYear();
+
+    try {
       if (dataToEdit) {
-        updateEducation({
+        await updateEducation({
           id: dataToEdit.id,
           payload: {
             type: values.type,
@@ -71,17 +72,32 @@ const EducationModal = () => {
             startYear: values.startYear,
             endYear: endYearEducation,
           },
-        });
+        }).unwrap();
+
+        enqueueSnackbar(t('modalNotifyText.education.edit.success'), { variant: 'success' });
       } else {
-        createEducation({
+        await createEducation({
           userId: currentUser.data.id,
           payload: { ...values, endYear: endYearEducation },
-        });
-      }
+        }).unwrap();
 
+        enqueueSnackbar(t('modalNotifyText.education.create.success'), { variant: 'success' });
+      }
       resetForm();
       handleClose();
-    },
+    } catch (error) {
+      if (dataToEdit) {
+        enqueueSnackbar(t('modalNotifyText.education.edit.error'), { variant: 'error' });
+      } else {
+        enqueueSnackbar(t('modalNotifyText.education.create.error'), { variant: 'error' });
+      }
+    }
+  };
+
+  const formik = useFormik({
+    initialValues: dataToEdit || emptyInitialValues,
+    validationSchema: EducationModalSchema,
+    onSubmit,
     enableReinitialize: true,
   });
 

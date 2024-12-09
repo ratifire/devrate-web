@@ -2,6 +2,8 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 import {
   useGetUserContactsQuery,
   usePostContactsUserMutation,
@@ -28,6 +30,8 @@ const StepContacts = () => {
     isFetching,
     isError: isErrorGetUseContacts,
   } = useGetUserContactsQuery(userId, { skip: !userId });
+  const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
 
   const valuesMap = dataPost ? getDataStepContacts(dataPost) : getDataStepContacts(contactsData);
 
@@ -41,21 +45,25 @@ const StepContacts = () => {
     ...valuesMap,
   };
 
-  const onSubmit = ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
-    postContactsUser({
-      userId: userId,
-      body: [
-        { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addTelegram(telegram) },
-        { type: SOCIAL_TYPES.EMAIL, value: mail },
-        { type: SOCIAL_TYPES.LINKEDIN_LINK, value: addHttps(linkedIn) },
-        { type: SOCIAL_TYPES.GITHUB_LINK, value: addHttps(gitHub) },
-        { type: SOCIAL_TYPES.BEHANCE_LINK, value: addHttps(behance) },
-        { type: SOCIAL_TYPES.PHONE_NUMBER, value: addPhone(phone) },
-      ],
-    });
-    formik.resetForm();
+  const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
+    try {
+      await postContactsUser({
+        userId: userId,
+        body: [
+          { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addTelegram(telegram) },
+          { type: SOCIAL_TYPES.EMAIL, value: mail },
+          { type: SOCIAL_TYPES.LINKEDIN_LINK, value: addHttps(linkedIn) },
+          { type: SOCIAL_TYPES.GITHUB_LINK, value: addHttps(gitHub) },
+          { type: SOCIAL_TYPES.BEHANCE_LINK, value: addHttps(behance) },
+          { type: SOCIAL_TYPES.PHONE_NUMBER, value: addPhone(phone) },
+        ],
+      }).unwrap();
+      enqueueSnackbar(t('modalNotifyText.contacts.create.success'), { variant: 'success' });
+      formik.resetForm();
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.contacts.create.error'), { variant: 'error' });
+    }
   };
-
   const formik = useFormik({
     initialValues,
     validationSchema: StepContactsSchema,

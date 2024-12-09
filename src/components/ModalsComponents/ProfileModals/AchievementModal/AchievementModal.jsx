@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useCreateAchievementMutation } from '../../../../redux/services/achievementsApiSlice';
@@ -18,6 +19,7 @@ const AchievementModal = () => {
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
   const [createAchievement] = useCreateAchievementMutation();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
     formik.resetForm();
@@ -36,10 +38,10 @@ const AchievementModal = () => {
         userId: id,
         payload: values,
       }).unwrap();
+      enqueueSnackbar(t('modalNotifyText.achievement.create.success'), { variant: 'success' });
       handleClose();
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error updating achievement:', error);
+      enqueueSnackbar(t('modalNotifyText.achievement.create.error'), { variant: 'error' });
     }
   };
 

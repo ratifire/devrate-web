@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { useUpdateAchievementMutation } from '../../../../redux/services/achievementsApiSlice';
@@ -12,13 +13,13 @@ import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
 import { styles } from './AchievementModal.styles';
-
 const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
   const {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
   const { t } = useTranslation();
   const [updateAchievementApi] = useUpdateAchievementMutation();
+  const { enqueueSnackbar } = useSnackbar();
 
   const initialValues = {
     // link: achievement?.link || '',
@@ -32,12 +33,12 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
         id: achievement.id,
         payload: { ...values, userId }, // Including userId in the payload
       }).unwrap();
+      enqueueSnackbar(t('modalNotifyText.achievement.edit.success'), { variant: 'success' });
 
       resetForm();
       onClose();
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error updating achievement:', error);
+      enqueueSnackbar(t('modalNotifyText.achievement.edit.error'), { variant: 'error' });
     }
   };
 

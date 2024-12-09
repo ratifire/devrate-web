@@ -668,5 +668,105 @@ export const en = {
         text: "We've refreshed the main page design with an improved color scheme, along with a feedback form and contact details for easier communication. Key information about the platform’s features and benefits has been added to enhance understanding of how it works. A new FAQ section has been created with answers to frequently asked questions for your convenience. Additionally, the visual design of the registration, login, and email confirmation forms has been updated. All these changes are aimed at enhancing your experience and comfort on our platform.",
       },
     },
+    modalNotifyText: {
+      workExperience: {
+        create: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      education: {
+        create: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      achievement: {
+        create: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      personal: {
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      avatar: {
+        create: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      contacts: {
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      language: {
+        add: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+    },
   },
 };

@@ -22,9 +22,9 @@ const ThemedApp = () => {
       <SnackbarProvider
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right',
+          horizontal: 'center',
         }}
-        autoHideDuration={3000}
+        autoHideDuration={2000}
         domRoot={rootDom}
       >
         <App />

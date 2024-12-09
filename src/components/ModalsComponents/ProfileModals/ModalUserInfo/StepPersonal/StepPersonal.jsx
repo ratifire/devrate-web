@@ -2,6 +2,8 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useSnackbar } from 'notistack';
 import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { StepPersonalSchema } from '../../../../../utils/valadationSchemas/index';
 import {
@@ -29,6 +31,8 @@ const StepPersonal = () => {
     isFetching: isFetchingGetPersonal,
     isError: isErrorGetPersonal,
   } = useGetPersonalUserQuery(userData.id, { skip: !userData.id });
+  const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
 
   const { firstName, lastName, city, country, status, description } = dataPutPersonalUser || dataGetPersonal;
 
@@ -41,18 +45,22 @@ const StepPersonal = () => {
     description: description || '',
   };
 
-  const onSubmit = ({ firstName, lastName, city, country, status, description }) => {
-    putPersonalUser({
-      id: userData.id,
-      firstName: firstName,
-      lastName: lastName,
-      status: status,
-      country: country,
-      city: city,
-      subscribed: userData.subscribed,
-      description: description,
-    });
-
+  const onSubmit = async ({ firstName, lastName, city, country, status, description }) => {
+    try {
+      await putPersonalUser({
+        id: userData.id,
+        firstName: firstName,
+        lastName: lastName,
+        status: status,
+        country: country,
+        city: city,
+        subscribed: userData.subscribed,
+        description: description,
+      }).unwrap();
+      enqueueSnackbar(t('modalNotifyText.personal.create.success'), { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.personal.create.error'), { variant: 'error' });
+    }
     formik.resetForm();
   };
 
