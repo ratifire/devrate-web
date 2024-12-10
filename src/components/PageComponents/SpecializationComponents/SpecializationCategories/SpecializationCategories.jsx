@@ -162,7 +162,7 @@ const SpecializationCategories = () => {
           correctStyle={styles.make_main_btn}
           disabled={specializations?.length === 0}
           handlerClick={handlerChangeMainSpecialization}
-          label='specialization.specialization_btn_make_main'
+          label={t('specialization.specialization_btn_make_main')}
           type='button'
           variant='outlined'
         />
