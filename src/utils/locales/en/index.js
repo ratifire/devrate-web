@@ -470,7 +470,7 @@ export const en = {
           errorRequired: 'This is a required field',
           errorLength: 'Skill name is max 100 characters long',
           errorQuantity: 'You can add up to 20 skills',
-          errorNotAvailable: 'Not available skills',
+          errorNoAvailable: 'No available skills',
         },
         interview: {
           income: 'An interview has been completed ',
@@ -764,6 +764,48 @@ export const en = {
         },
         delete: {
           success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      hardSkills: {
+        add: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      softSkills: {
+        add: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      specialization: {
+        create: {
+          success: 'Specialization {{values}} added successfully',
+          error: 'Failed to create Specialization',
+        },
+        edit: {
+          success: 'Edited successfully to {{name}}',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: '{{name}} was deleted successfully',
           error: 'Something went wrong',
         },
       },

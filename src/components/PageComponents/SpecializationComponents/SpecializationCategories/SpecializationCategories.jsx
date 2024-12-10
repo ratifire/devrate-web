@@ -96,12 +96,14 @@ const SpecializationCategories = () => {
     ).unwrap();
     dispatch(setMainSpecializations(activeSpecialization));
   };
-
   const handlerDeleteSpecialization = async (id) => {
     const findMainSpecialization = specializations.find((spec) => spec.main);
 
     try {
       await deleteSpecialization(id).unwrap();
+      enqueueSnackbar(t('modalNotifyText.specialization.delete.success', { name: activeSpecialization.name }), {
+        variant: 'success',
+      });
       dispatch(setActiveSpecialization(null));
 
       if (findMainSpecialization?.id === id) {
@@ -112,13 +114,7 @@ const SpecializationCategories = () => {
       }
     } catch (err) {
       if (err.status === 409) {
-        enqueueSnackbar(t('specialization.errorDeleteSpec'), {
-          variant: 'error',
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'center',
-          },
-        });
+        enqueueSnackbar(t('specialization.errorDeleteSpec'), { variant: 'error' });
       }
     } finally {
       handleCloseMenu(id);

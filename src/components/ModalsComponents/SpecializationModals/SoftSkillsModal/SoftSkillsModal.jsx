@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { useSnackbar } from 'notistack';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
@@ -36,6 +37,7 @@ const SoftSkillsModal = () => {
   const dispatch = useDispatch();
   const openSkillsModal = useSelector((state) => state.modal.openSoftSkillsModal);
   const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
+  const { enqueueSnackbar } = useSnackbar();
   const {
     data: skills,
     isFetching: isFetchingSkills,
@@ -72,70 +74,130 @@ const SoftSkillsModal = () => {
     updateState({
       skill: e.target.value,
       error: false,
-      errorText: '',
+      helperText: '',
     });
   };
+  const handleAddSkill = async () => {
+    try {
+      const isSkillExist = allSkills.find((v) => v.name === skill);
+      const isAddedSkill = skills.find((v) => v.name === skill);
+      const id = isAddedSkill?.id || uuidv4();
 
-  const handleAddSkill = () => {
-    const isSkillExist = allSkills.find((v) => v.name === skill);
-    const isAddedSkill = skills.find((v) => v.name === skill);
+      if (!availableSkills.length) {
+        updateState({ helperText: 'specialization.modal.skills.errorNoAvailable', error: true });
+        throw new Error('specialization.modal.skills.errorNoAvailable');
+      }
 
-    if (!availableSkills.length) {
-      return updateState({ helperText: 'specialization.modal.skills.errorNotAvailable', error: true });
+      if (!skill) {
+        updateState({ helperText: 'specialization.modal.skills.errorRequired', error: true });
+        throw new Error('specialization.modal.skills.errorRequired');
+      }
+
+      if (!isSkillExist && skill) {
+        if (!isAddedSkill) {
+          updateState({ addSkill: [...addSkill, { id, name: isAddedSkill?.name || skill }] });
+        }
+
+        updateState({
+          skill: '',
+          allSkills: [...allSkills, { id, name: isAddedSkill?.name || skill }],
+          availableSkills: availableSkills.filter((availableSkill) => availableSkill !== skill),
+          idDeletedSkills: idDeletedSkills.filter((v) => v.id !== id),
+        });
+
+        enqueueSnackbar(t('modalNotifyText.softSkills.add.success'), { variant: 'success' });
+      }
+    } catch (error) {
+      const errorMessage = t(error.message);
+      enqueueSnackbar(errorMessage, { variant: 'error' });
     }
+  };
+  // const handleAddSkill = () => {
+  //   const isSkillExist = allSkills.find((v) => v.name === skill);
+  //   const isAddedSkill = skills.find((v) => v.name === skill);
+  //
+  //   if (!availableSkills.length) {
+  //     return updateState({ helperText: 'specialization.modal.skills.errorNotAvailable', error: true });
+  //   }
+  //
+  //   if (!skill) {
+  //     return updateState({ helperText: 'specialization.modal.skills.errorRequired', error: true });
+  //   }
+  //
+  //   const id = isAddedSkill?.id || uuidv4();
+  //
+  //   if (!isSkillExist && skill) {
+  //     if (!isAddedSkill) {
+  //       updateState({ addSkill: [...addSkill, { id, name: isAddedSkill?.name || skill }] });
+  //     }
+  //
+  //     updateState({
+  //       skill: '',
+  //       allSkills: [...allSkills, { id, name: isAddedSkill?.name || skill }],
+  //       availableSkills: availableSkills.filter((availableSkill) => availableSkill !== skill),
+  //       idDeletedSkills: idDeletedSkills.filter((v) => v.id !== id),
+  //     });
+  //   }
+  // };
+  const handleDeleteSkill = async (skillId) => {
+    try {
+      const isSkillExist = skills.find((v) => v.id === skillId);
 
-    if (!skill) {
-      return updateState({ helperText: 'specialization.modal.skills.errorRequired', error: true });
-    }
-
-    const id = isAddedSkill?.id || uuidv4();
-
-    if (!isSkillExist && skill) {
-      if (!isAddedSkill) {
-        updateState({ addSkill: [...addSkill, { id, name: isAddedSkill?.name || skill }] });
+      if (isSkillExist) {
+        updateState({
+          error: false,
+          helperText: '',
+          idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
+        });
       }
 
       updateState({
-        skill: '',
-        allSkills: [...allSkills, { id, name: isAddedSkill?.name || skill }],
-        availableSkills: availableSkills.filter((availableSkill) => availableSkill !== skill),
-        idDeletedSkills: idDeletedSkills.filter((v) => v.id !== id),
+        availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
+        allSkills: allSkills.filter((skill) => skill.id !== skillId),
+        addSkill: addSkill.filter((skill) => skill.id !== skillId),
       });
+
+      enqueueSnackbar(t('modalNotifyText.softSkills.delete.success'), { variant: 'success' });
+    } catch {
+      enqueueSnackbar(t('modalNotifyText.softSkills.delete.error'), { variant: 'error' });
     }
   };
 
-  const handleDeleteSkill = (skillId) => {
-    const isSkillExist = skills.find((v) => v.id === skillId);
-
-    if (isSkillExist) {
-      updateState({
-        error: false,
-        errorText: '',
-        idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
-      });
-    }
-
-    updateState({
-      error: false,
-      errorText: '',
-      availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
-      allSkills: allSkills.filter((skill) => skill.id !== skillId),
-      addSkill: addSkill.filter((skill) => skill.id !== skillId),
-    });
-  };
+  // const handleDeleteSkill = (skillId) => {
+  //   const isSkillExist = skills.find((v) => v.id === skillId);
+  //
+  //   if (isSkillExist) {
+  //     updateState({
+  //       error: false,
+  //       errorText: '',
+  //       idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
+  //     });
+  //   }
+  //
+  //   updateState({
+  //     error: false,
+  //     errorText: '',
+  //     availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
+  //     allSkills: allSkills.filter((skill) => skill.id !== skillId),
+  //     addSkill: addSkill.filter((skill) => skill.id !== skillId),
+  //   });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const deleteSkillPromises = idDeletedSkills.map((v) => deleteSkill(v.id));
 
-    const deleteSkillPromises = idDeletedSkills.map((v) => deleteSkill(v.id));
+      const addSkillPromises = addSkill.map((skill) =>
+        addSkillToMastery({ masteryId, skill: { name: skill.name, type: 'SOFT_SKILL' } })
+      );
 
-    const addSkillPromises = addSkill.map((skill) =>
-      addSkillToMastery({ masteryId, skill: { name: skill.name, type: 'SOFT_SKILL' } })
-    );
-
-    await Promise.all([...addSkillPromises, ...deleteSkillPromises]);
-
-    handleClose();
+      await Promise.all([...addSkillPromises, ...deleteSkillPromises]);
+      enqueueSnackbar(t('modalNotifyText.hardSkills.create.success'), { variant: 'success' });
+      handleClose();
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.hardSkills.create.error'), { variant: 'success' });
+    }
   };
 
   const labelInput = availableSkills.length

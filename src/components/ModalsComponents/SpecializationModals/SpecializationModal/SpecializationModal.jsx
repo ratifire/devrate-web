@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
@@ -33,6 +34,7 @@ const SpecializationModal = () => {
   });
   const { skills, specializationNameError } = state;
   const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
@@ -79,7 +81,6 @@ const SpecializationModal = () => {
     const value = e.target.value;
     formik.setFieldValue('mastery', value);
   };
-
   const handleChangeSpecialization = (value) => {
     const isSpecialization = mySpecialization.some((spec) => spec.name === value);
 
@@ -94,8 +95,13 @@ const SpecializationModal = () => {
   };
 
   const updateSpecialization = async ({ id, name }) => {
-    await updateSpecializationById({ id, name }).unwrap();
-    dispatch(setActiveSpecialization({ ...activeSpecialization, id, name }));
+    try {
+      await updateSpecializationById({ id, name }).unwrap();
+      dispatch(setActiveSpecialization({ ...activeSpecialization, id, name }));
+      enqueueSnackbar(t('modalNotifyText.specialization.edit.success', { name }), { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.specialization.edit.error'), { variant: 'error' });
+    }
   };
 
   const onSubmit = async (values, { resetForm }) => {
@@ -148,9 +154,11 @@ const SpecializationModal = () => {
         hardSkillMark: resp.hardSkillMark,
       });
       await addSkills({ id: resp.id, skills });
+      enqueueSnackbar(t('modalNotifyText.specialization.create.success', { values: values.name }), {
+        variant: 'success',
+      });
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.warn('Failed to create Specialization', error);
+      enqueueSnackbar(t('modalNotifyText.specialization.create.error'), { variant: 'error' });
     } finally {
       resetForm();
       handleClose();
