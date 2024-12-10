@@ -1,8 +1,7 @@
-import { AppBar, Badge, Box, Button, IconButton } from '@mui/material';
+import { AppBar, Box, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router';
-import { ReactComponent as Message } from '../../../assets/icons/message.svg';
 import { selectCurrentUser } from '../../../redux/auth/authSlice';
 import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
@@ -13,6 +12,7 @@ import ThemeSwitch from '../../UI/ThemeSwitch/ThemeSwitch';
 import UserAvatar from '../../UI/UserAvatar';
 import Menu from '../Menu';
 import Notification from '../Notification';
+import Chat from '../Chat';
 import { InputSearch } from './InputSearch';
 import styles from './ProfileHeader.styles';
 
@@ -46,13 +46,10 @@ const ProfileHeader = () => {
         <InputSearch />
         <ThemeSwitch />
         <Notification />
-        <IconButton sx={styles.iconButtonWrapper}>
-          <Badge invisible badgeContent='' color='error' overlap='circular' variant='dot'>
-            <Message />
-          </Badge>
-        </IconButton>
+        <Chat />
         <Button sx={styles.userPhoto} onClick={toggleDrawer}>
           <UserAvatar
+            radius='square'
             size='sm'
             src={userPicture}
             userFirstName={getFirstName || firstName}

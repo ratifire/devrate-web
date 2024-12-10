@@ -48,6 +48,7 @@ const BaseUserInfo = () => {
       <Box sx={styles.wrapperAvatar}>
         <Button type='button' onClick={handleOpenAvatar}>
           <UserAvatar
+            radius='square'
             size='l'
             src={userPicture}
             userFirstName={getFirstName || firstName}
