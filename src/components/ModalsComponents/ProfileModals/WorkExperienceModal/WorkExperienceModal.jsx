@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';

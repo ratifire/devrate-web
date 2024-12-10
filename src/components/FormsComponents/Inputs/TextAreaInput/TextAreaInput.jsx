@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';

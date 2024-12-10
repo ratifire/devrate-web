@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';

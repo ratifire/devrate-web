@@ -1,6 +1,5 @@
 import { Box, Divider, List, ListItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router';

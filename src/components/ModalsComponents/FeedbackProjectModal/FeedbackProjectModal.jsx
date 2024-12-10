@@ -1,4 +1,3 @@
-import React from 'react';
 import { Typography, CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';

@@ -1,5 +1,4 @@
 import { Checkbox, FormControl, FormControlLabel, FormHelperText, Typography } from '@mui/material';
-import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { CustomCheckboxIcon, CustomCheckedIcon } from '../../../UI/CustomCheckbox/CustomCheckbox';

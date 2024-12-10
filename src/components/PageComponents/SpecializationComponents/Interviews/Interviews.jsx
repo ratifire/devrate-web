@@ -1,7 +1,7 @@
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Mood from '@mui/icons-material/Mood';
 import { Box, Button, Divider, Popover, Typography } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';

@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import { useTranslation } from 'react-i18next';

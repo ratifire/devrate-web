@@ -1,6 +1,5 @@
 import { Box, MenuItem, Select } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import React from 'react';
 import PropTypes from 'prop-types';
 import { styles } from './ChartDropDown.styles';
 

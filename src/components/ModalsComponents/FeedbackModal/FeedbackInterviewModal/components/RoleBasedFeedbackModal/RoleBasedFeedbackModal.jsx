@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 import { ErrorComponent } from '../../../../../UI/Exceptions';
 import { FeedbackModalSkeleton } from '../../../../../UI/Skeleton';
 import { CandidateFeedback } from '../CandidateFeedback';

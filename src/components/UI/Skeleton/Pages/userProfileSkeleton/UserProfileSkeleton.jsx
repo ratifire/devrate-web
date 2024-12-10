@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Box, Container, Paper } from '@mui/material';
 import UserProfileTemplate from '../../../../../Templates/ProfileTemplates/UserProfileTemplate';
 import { styles } from '../../../../../pages/ProfilePages/UserProfilePage/UserProfilePage.styles';

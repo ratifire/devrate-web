@@ -1,7 +1,7 @@
-import React from 'react';
 import { Box, styled, Tab, Tabs } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import Education from '../../UserProfile/ExperienceSection/Education';
 import Skills from '../../UserProfile/ExperienceSection/Skills';
 import Achievement from '../../UserProfile/ExperienceSection/Achievement';
@@ -9,7 +9,7 @@ import styles from './ExperienceSection.styles';
 import WorkExperience from './WorkExperience';
 
 const ExperienceSection = ({ id }) => {
-  const [value, setValue] = React.useState('openExperience');
+  const [value, setValue] = useState('openExperience');
   const { t } = useTranslation();
 
   const handleChange = (event, newValue) => {

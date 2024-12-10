@@ -1,7 +1,7 @@
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AchievementEditModal from '../../../../../../ModalsComponents/ProfileModals/AchievementModal/AchievementEditModal';
 import { useDeleteAchievementMutation } from '../../../../../../../redux/services/achievementsApiSlice.js';
 import DropdownMenu from '../../DropdownMenu';

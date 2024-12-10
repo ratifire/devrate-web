@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormControlLabel, FormGroup, styled, Switch } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTheme } from '../../../redux/theme/themeSlice';

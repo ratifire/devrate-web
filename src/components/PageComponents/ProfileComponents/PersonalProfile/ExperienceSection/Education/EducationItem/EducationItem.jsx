@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Box, IconButton, Link, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import MoreVertIcon from '@mui/icons-material/MoreVert';

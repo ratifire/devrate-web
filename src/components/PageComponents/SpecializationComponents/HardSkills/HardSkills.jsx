@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { useHardSkillData } from '../../../../utils/hooks/specialization';

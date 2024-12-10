@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,7 @@ import { FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../../redux/auth/authApiSlice';
-import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
+import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
 import { setCredentials } from '../../../../redux/auth/authSlice';
 import { setTokens } from '../../../../redux/auth/tokenSlice';
 import styles from './LoginModal.styles';

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -9,7 +9,6 @@ import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice
 import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
 import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 import EducationItem from './EducationItem';
-import styles from './Education.styles.js';
 
 const Education = ({ tab }) => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
@@ -40,7 +39,7 @@ const Education = ({ tab }) => {
   }
 
   return (
-    <Box sx={styles.container}>
+    <Box>
       <Box>
         {sortedEducations.map(({ id, type, name, description, startYear, endYear }) => (
           <EducationItem

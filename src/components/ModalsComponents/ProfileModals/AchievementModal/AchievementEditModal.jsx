@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';

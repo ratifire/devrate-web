@@ -1,6 +1,6 @@
 import { Step, StepConnector, StepLabel, Stepper } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { memo } from 'react';
+import { memo } from 'react';
 import CustomStepIcon from '../../../../ProfileModals/ModalUserInfo/StepIconComponent';
 import { NUMBER_OF_STEPS } from '../../constants';
 import { styles } from './InterviewStepper.styles';

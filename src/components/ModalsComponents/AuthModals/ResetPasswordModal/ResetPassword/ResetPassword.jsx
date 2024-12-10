@@ -13,7 +13,7 @@ import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { resetPasswordSchema } from '../../../../../utils/valadationSchemas/index';
-import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
+import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
 import styles from './ResetPassword.styles';
 
 const initialValues = {
@@ -123,6 +123,7 @@ const ResetPassword = () => {
             resetForm();
             dispatch(closeModal({ modalName: 'openResetPassword' }));
             dispatch(openModal({ modalName: 'openNotification' }));
+            // eslint-disable-next-line no-unused-vars
           } catch (error) {
             enqueueSnackbar('Invalid code. Please try again.', { variant: 'error' });
           }

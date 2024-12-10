@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Card, Container, Grid, List, ListItem, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import YoutubeEmbed from '../../../UI/YoutubeEmbed/YoutubeEmbed';

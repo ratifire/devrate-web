@@ -1,6 +1,5 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { SvgIcon } from '@mui/material';
-import React from 'react';
 import { useArrowTheme } from '../hooks';
 
 const CustomArrowCircleDownIcon = (props) => {

@@ -1,10 +1,10 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Chip, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
+import { memo } from 'react';
 import { styles } from './SkillChip.styles';
 
-export const SkillChip = React.memo(({ skill, onDelete }) => (
+export const SkillChip = memo(({ skill, onDelete }) => (
   <Chip
     key={skill.id}
     deleteIcon={<CloseIcon />}

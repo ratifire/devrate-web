@@ -1,4 +1,3 @@
-import React from 'react';
 import { Skeleton } from '@mui/material';
 import { BtnSkeleton } from '../components';
 import { styles } from './StepContactsSkeleton.styles';

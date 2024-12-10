@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 import { Settings } from 'luxon';
 import { Box } from '@mui/material';
 import SidebarEvent from '../SidebarEvent/SidebarEvent';

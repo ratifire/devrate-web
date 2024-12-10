@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router } from 'react-router';
 import { decorators } from '../../../../../.storybook/preview';
 import Footer from './Footer';

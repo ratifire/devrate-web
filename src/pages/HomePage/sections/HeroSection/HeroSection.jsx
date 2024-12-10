@@ -1,9 +1,8 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Link as RouterLink } from 'react-router';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import navigationsLinks from '../../../../router/links';
-import { ReactComponent as Arrow } from '../../assets/iconArrow.svg';
+import Arrow from '../../assets/iconArrow.svg?react';
 import styles from './HeroSection.module.scss';
 
 const HeroSection = () => {

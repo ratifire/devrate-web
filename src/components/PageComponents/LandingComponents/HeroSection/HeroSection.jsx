@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';

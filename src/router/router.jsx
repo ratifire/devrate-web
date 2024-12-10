@@ -1,15 +1,14 @@
-import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage/HomePage';
-import RequireAuth from '../redux/auth/RequireAuth';
+import RequireAuth from '../redux/auth/RequireAuth.jsx';
 import PersonalProfilePage from '../pages/ProfilePages/PersonalProfilePage';
 import SpecializationPage from '../pages/SpecializationPage';
 import SchedulePage from '../pages/ShedulePage';
 import FaqPage from '../pages/FaqPage';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsAndConditions from '../pages/TermsAndConditions';
-import UserProfileRoute from './UserProfileRoute';
+import UserProfileRoute from './UserProfileRoute.jsx';
 import navigationLinks from './links';
 
 const router = createBrowserRouter([

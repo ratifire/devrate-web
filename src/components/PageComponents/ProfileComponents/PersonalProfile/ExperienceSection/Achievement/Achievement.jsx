@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { iconsAchievement } from '../../../../../../utils/constants/Experience/iconsExperience';
