@@ -41,6 +41,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "server-build": "node build-script.js",
+    "serve-build": "node ./server-build/server.js",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint:css": "stylelint src",

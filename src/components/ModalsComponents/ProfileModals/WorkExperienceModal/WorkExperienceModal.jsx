@@ -225,7 +225,7 @@ const WorkExperienceModal = () => {
 
           <ButtonDef
             correctStyle={styles.workExperienceBtn}
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || !responsibilities.length}
             label={t('profile.modal.btn')}
             type='submit'
             variant='contained'

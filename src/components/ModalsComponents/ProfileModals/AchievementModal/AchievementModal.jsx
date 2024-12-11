@@ -110,6 +110,7 @@ const AchievementModal = () => {
 
           <ButtonDef
             correctStyle={styles.workExperienceBtn}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
             label={t('profile.modal.btn')}
             type='submit'
             variant='contained'
