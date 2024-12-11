@@ -1,5 +1,5 @@
 import { formatDate } from '@fullcalendar/core';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 import PropTypes from 'prop-types';
 import React, { useMemo, useState } from 'react';
 import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router';
 import { decorators } from '../../../../.storybook/preview';
 import navLinks from '../../../utils/constants/navLinks';
 import legalInfoLinks from '../../../utils/constants/legalInfoLinks';

@@ -1,7 +1,6 @@
 import React, { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
 import PersonalProfileTemplate from '../../../Templates/ProfileTemplates/PersonalProfileTemplate';
-import useAuth from '../../../utils/hooks/useAuth';
 import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
 import {
   BaseUserInfoSkeleton,
@@ -31,8 +30,6 @@ const MemoizedRightSection = memo(RightSection);
 const MemoizedExperienceSection = memo(ExperienceSection);
 
 const PersonalProfilePage = () => {
-  useAuth();
-
   return (
     <PersonalProfileTemplate>
       <MemoizedProfileHeader />

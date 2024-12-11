@@ -1,4 +1,8 @@
 import { apiSlice } from '../services/api/apiSlice';
+import { setDarkTheme } from '../theme/themeSlice';
+import { getTokenInHeaders } from '../../utils/helpers';
+import { logOut } from './authSlice';
+import { clearTokens } from './tokenSlice';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,55 +14,56 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     confirmEmail: builder.mutation({
-      query: (data) => ({
-        url: `/auth/signup/${data}`,
+      query: ({ confirmationCode, email }) => ({
+        url: `/auth/signup/confirm`,
         method: 'PUT',
-        data,
+        body: { confirmationCode, email },
       }),
-      transformResponse: (response) => {
-        // Ensure the response is correctly transformed
-        return response; // Adjust according to your API response structure
-      },
-      transformErrorResponse: (response) => {
-        // Ensure the error response is correctly transformed
-        return response.data; // Adjust according to your API error response structure
-      },
-      onSuccess: (data) => {
-        return data;
-      },
     }),
     resetPassword: builder.mutation({
       query: ({ email }) => ({
         url: `/auth/request-password-reset?email=${encodeURIComponent(email)}`,
         method: 'POST',
       }),
-      onSuccess: (data) => {
-        return data;
-      },
     }),
     changePassword: builder.mutation({
-      query: ({ code, newPassword }) => ({
+      query: ({ code, newPassword, email }) => ({
         url: '/auth/password-reset',
         method: 'POST',
-        body: { code, newPassword },
+        body: { code, newPassword, email },
       }),
-      onSuccess: (data) => {
-        return data;
-      },
     }),
     login: builder.mutation({
-      query: (credentials) => ({
+      query: ({ email, password }) => ({
         url: '/auth/signin',
         method: 'POST',
-        body: { ...credentials },
+        body: { email, password },
+        credentials: 'include',
       }),
+      transformResponse: (response, meta) => {
+        const headers = meta?.response?.headers;
+        if (headers) {
+          const { authToken, idToken } = getTokenInHeaders({ headers });
+
+          if (authToken && idToken) {
+            return { authToken, idToken, userData: { ...response } };
+          }
+        }
+      },
     }),
     logout: builder.mutation({
       query: () => ({
         url: '/auth/logout',
         method: 'POST',
+        credentials: 'include',
         responseHandler: (response) => response.text(),
       }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(logOut());
+        dispatch(clearTokens());
+        dispatch(setDarkTheme());
+      },
     }),
   }),
 });

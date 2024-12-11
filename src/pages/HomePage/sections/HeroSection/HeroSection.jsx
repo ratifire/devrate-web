@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Link as RouterLink } from 'react-router-dom';
+import { Link, Link as RouterLink } from 'react-router';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import navigationsLinks from '../../../../router/links';
 import { ReactComponent as Arrow } from '../../assets/iconArrow.svg';
@@ -10,10 +10,10 @@ const HeroSection = () => {
   const dispatch = useDispatch();
   const handleOpenRegistration = () => dispatch(openModal({ modalName: 'openRegistration' }));
   const handleOpenLogin = () => dispatch(openModal({ modalName: 'openLogin' }));
+  const { isAuth } = useSelector((state) => state.tokens);
 
-  const isAuthenticated = useSelector((state) => state.auth.user?.isAuthenticated || false);
   const myProfile = () => {
-    if (!isAuthenticated)
+    if (!isAuth)
       return (
         <button className={`btn btn-secondary btn-xl ${styles.login}`} onClick={handleOpenLogin}>
           <span>Login</span>

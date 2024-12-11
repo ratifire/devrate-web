@@ -8,7 +8,7 @@ import styles from '../NotificationItem/NotificationItem.styles';
 
 const InterviewRejected = ({ createAt, payload }) => {
   const { t } = useTranslation();
-  const { userFirstName } = JSON.parse(payload);
+  const { rejectionUserFirstName, scheduleTime } = JSON.parse(payload);
 
   return (
     <>
@@ -17,8 +17,7 @@ const InterviewRejected = ({ createAt, payload }) => {
       </Box>
       <Box sx={styles.textWrapper}>
         <Typography variant='body'>
-          {t('notifications.interviewRejected')}
-          {userFirstName}
+          {t('notifications.interviewRejected', { rejectionUserFirstName, scheduleTime })}
         </Typography>
         <Typography sx={styles.date} variant='body2'>
           <TimeAgo data={createAt} />

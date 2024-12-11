@@ -538,11 +538,16 @@ export const uk = {
       newNotifications: 'Нове',
       hourAgo: 'годин тому',
       lessThanHourAgo: 'Менше години тому',
-      interviewScheduled: 'test text',
-      greeting: 'test text',
-      interviewFeedback: 'test text',
-      interviewRejected: 'test text',
-      interviewRequestExpired: 'test text',
+      interviewScheduled:
+        'Вашу співбесіду на роль {{roleLower}} заплановано на {{date}} (UTC). Будьте готові та доступні в зазначений час.',
+      greeting:
+        'Ласкаво просимо! Ми раді вітати вас у DevRate — спільноті, де розробники діляться досвідом, навчаються та знаходять нові можливості',
+      interviewFeedback:
+        'Вітаємо із завершенням співбесіди! Будь ласка, заповніть коротку форму та оцініть навички співрозмовника. Залишити вiдгук',
+      interviewRejected:
+        'Співбесіду з {{rejectionUserFirstName}}, заплановану на {{scheduleTime}}, скасовано. Ми вже працюємо над пошуком нового співрозмовника та скоро повідомимо Вас',
+      interviewRequestExpired:
+        'Шановний(а) {{userFirstName}}, Ваш запит на співбесіду сплив. Будь ласка, створіть новий, якщо бажаєте продовжити.',
       feedbackBtn: 'Залишити відгук',
     },
     faqText: {
