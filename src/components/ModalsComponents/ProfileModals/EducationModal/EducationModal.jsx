@@ -75,7 +75,13 @@ const EducationModal = () => {
           },
         }).unwrap();
 
-        enqueueSnackbar(t('modalNotifyText.education.edit.success'), { variant: 'success' });
+        enqueueSnackbar(t('modalNotifyText.education.edit.success'), {
+          variant: 'success',
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+          },
+        });
       } else {
         await createEducation({
           userId: currentUser.data.id,
@@ -88,7 +94,13 @@ const EducationModal = () => {
       handleClose();
     } catch (error) {
       if (dataToEdit) {
-        enqueueSnackbar(t('modalNotifyText.education.edit.error'), { variant: 'error' });
+        enqueueSnackbar(t('modalNotifyText.education.edit.error'), {
+          variant: 'error',
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+          },
+        });
       } else {
         enqueueSnackbar(t('modalNotifyText.education.create.error'), { variant: 'error' });
       }

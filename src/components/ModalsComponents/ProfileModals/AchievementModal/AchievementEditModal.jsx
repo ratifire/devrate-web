@@ -33,12 +33,24 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
         id: achievement.id,
         payload: { ...values, userId }, // Including userId in the payload
       }).unwrap();
-      enqueueSnackbar(t('modalNotifyText.achievement.edit.success'), { variant: 'success' });
+      enqueueSnackbar(t('modalNotifyText.achievement.edit.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
 
       resetForm();
       onClose();
     } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.achievement.edit.error'), { variant: 'error' });
+      enqueueSnackbar(t('modalNotifyText.achievement.edit.error'), {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
     }
   };
 

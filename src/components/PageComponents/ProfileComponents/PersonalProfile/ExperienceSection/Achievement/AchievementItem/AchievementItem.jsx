@@ -32,9 +32,21 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
   const handleDeleteFeature = async () => {
     try {
       await deleteAchievement(achievement.id).unwrap();
-      enqueueSnackbar(t('modalNotifyText.achievement.delete.success'), { variant: 'success' });
+      enqueueSnackbar(t('modalNotifyText.achievement.delete.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
     } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.achievement.delete.error'), { variant: 'error' });
+      enqueueSnackbar(t('modalNotifyText.achievement.delete.error'), {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
     }
     handleCloseMenu();
   };
