@@ -3,8 +3,8 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 // Define paths
-const reactBuildPath = path.join(__dirname, '../', 'build');
-const serverBuildPath = path.join(__dirname, '../', 'server-build');
+const reactBuildPath = path.join(__dirname, 'build');
+const serverBuildPath = path.join(__dirname, 'server-build');
 const serverFilePath = path.join(serverBuildPath, 'server.js');
 const packageFilePath = path.join(serverBuildPath, 'package.json');
 
