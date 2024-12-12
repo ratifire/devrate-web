@@ -176,10 +176,10 @@ const EducationModal = () => {
           </Box>
 
           <ButtonDef
-            correctStyle={styles.workExperienceBtn}
             disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
             loading={isLoading}
+            sx={styles.workExperienceBtn}
             type='submit'
             variant='contained'
           />

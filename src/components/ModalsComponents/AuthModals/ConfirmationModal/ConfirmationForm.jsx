@@ -194,11 +194,10 @@ const ConfirmationForm = ({
       {showButton && (
         <Box sx={styles.btnWrapper}>
           <ButtonDef
-            correctStyle={styles.submitBtn}
             disabled={!formik.isValid}
             label={buttonLabel || 'modal.confirmation.btn_confirm'}
             loading={formik.isSubmitting}
-            sx={styles.btn}
+            sx={styles.submitBtn}
             type='submit'
             variant={buttonVariant || 'contained'}
             onClick={handleClick}

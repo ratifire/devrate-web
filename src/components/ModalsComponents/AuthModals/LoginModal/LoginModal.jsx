@@ -138,20 +138,20 @@ const LoginModal = () => {
 
         <Box sx={styles.textLink}>
           <ButtonDef
-            correctStyle={styles.turnBackLink}
-            handlerClick={handleOpen}
             label={t('modal.login.forgot_your_password')}
             loading={formik.isSubmitting}
+            sx={styles.turnBackLink}
             type='button'
             variant='text'
+            onClick={handleOpen}
           />
         </Box>
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
-            correctStyle={styles.submitBtn}
             disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
             label={t('modal.login.btn_login')}
             loading={formik.isSubmitting}
+            sx={styles.submitBtn}
             type='submit'
             variant='contained'
           />

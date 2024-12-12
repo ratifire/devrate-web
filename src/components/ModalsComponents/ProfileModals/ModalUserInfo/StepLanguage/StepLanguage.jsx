@@ -79,10 +79,10 @@ const StepLanguage = () => {
           </Box>
         </Box>
         <ButtonDef
-          correctStyle={styles.btn}
           disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
           label={t('profile.modal.btn')}
           loading={isLoadingPostLanguage}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />

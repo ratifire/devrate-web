@@ -262,10 +262,10 @@ const SpecializationModal = () => {
             </>
           )}
           <ButtonDef
-            correctStyle={styles.specializationBtn}
             disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
             label={t('profile.modal.btn')}
             loading={isLoading}
+            sx={styles.specializationBtn}
             type='submit'
             variant='contained'
           />

@@ -21,10 +21,10 @@ const HeroSection = () => {
         <Box sx={{ width: '170px' }}>
           <ButtonDef
             color='secondary'
-            handlerClick={handleOpen}
             label={t('home.hero.button_text')}
             type='button'
             variant='contained'
+            onClick={handleOpen}
           />
         </Box>
       </Box>

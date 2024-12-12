@@ -129,11 +129,11 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
         </IconButton>
         {showCancelButton && (
           <ButtonDef
-            correctStyle={styles.outlined}
-            handlerClick={handleCancelInterview}
             label={t('schedule.cancelEventBtn')}
+            sx={styles.outlined}
             type={'button'}
             variant='outlined'
+            onClick={handleCancelInterview}
           />
         )}
       </Box>

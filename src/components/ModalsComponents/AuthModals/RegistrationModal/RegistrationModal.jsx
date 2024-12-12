@@ -192,13 +192,13 @@ const RegistrationModal = () => {
         />
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
-            correctStyle={styles.submitBtn}
             disabled={!isFormValid}
-            handlerClick={formik.handleSubmit}
             label={t('modal.registration.btn_register')}
             loading={isLoadingCreating}
+            sx={styles.submitBtn}
             type='submit'
             variant='contained'
+            onClick={formik.handleSubmit}
           />
         </Box>
         <Box sx={styles.policyTermsContainer}>

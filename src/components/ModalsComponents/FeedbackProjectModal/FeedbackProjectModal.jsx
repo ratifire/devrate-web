@@ -95,10 +95,10 @@ const FeedbackProjectModal = () => {
 
         <ButtonDef
           fullWidth
-          correctStyle={styles.btn}
           disabled={!formik.isValid || !formik.dirty || isLoading}
           label={t('modal.feedbackProjectModal.button')}
           loading={isLoading}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />

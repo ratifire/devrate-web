@@ -62,12 +62,12 @@ const SpecializationLevel = () => {
           {['JUNIOR', 'MIDDLE', 'SENIOR'].map((label) => (
             <ButtonDef
               key={label}
-              correctStyle={styles.button}
               disabled={activeMastery === label}
-              handlerClick={() => handleClick(label)}
               label={label}
+              sx={styles.button}
               type='submit'
               variant={activeMastery === label ? 'contained' : 'outlined'}
+              onClick={() => handleClick(label)}
             />
           ))}
         </ButtonGroup>

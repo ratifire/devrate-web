@@ -4,15 +4,7 @@ import { LoadingButton } from '@mui/lab';
 import CircularProgress from '@mui/material/CircularProgress';
 import { styles } from './ButtonDef.styles.js';
 
-const ButtonDef = ({
-  correctStyle: style,
-  handlerClick: onClick,
-  label,
-  variant,
-  useSkeleton,
-  loading = false,
-  ...props
-}) => {
+const ButtonDef = ({ sx: style, label, variant, useSkeleton, loading = false, ...props }) => {
   return (
     <LoadingButton
       color='primary'
@@ -20,7 +12,6 @@ const ButtonDef = ({
       loadingIndicator={<CircularProgress size={20} sx={styles.circularIcon} />}
       sx={[styles[variant], style, styles[useSkeleton]]}
       variant={variant}
-      onClick={onClick}
       {...props}
     >
       {label}
@@ -29,8 +20,7 @@ const ButtonDef = ({
 };
 
 ButtonDef.propTypes = {
-  correctStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  handlerClick: PropTypes.func,
+  sx: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   label: PropTypes.string,
   variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
   loading: PropTypes.bool,

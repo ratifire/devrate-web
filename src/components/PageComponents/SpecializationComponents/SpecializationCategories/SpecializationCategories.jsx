@@ -159,12 +159,12 @@ const SpecializationCategories = () => {
           {t('specialization.specialization_title')}
         </Typography>
         <ButtonDef
-          correctStyle={styles.make_main_btn}
           disabled={specializations?.length === 0}
-          handlerClick={handlerChangeMainSpecialization}
           label={t('specialization.specialization_btn_make_main')}
+          sx={styles.make_main_btn}
           type='button'
           variant='outlined'
+          onClick={handlerChangeMainSpecialization}
         />
       </Box>
       <Box sx={styles.specialization_right_box}>

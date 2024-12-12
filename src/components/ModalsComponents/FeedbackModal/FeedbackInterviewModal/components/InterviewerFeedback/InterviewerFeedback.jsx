@@ -27,10 +27,10 @@ const InterviewerFeedback = () => {
           <StepSoftSkills formik={formik} />
         </Box>
         <ButtonDef
-          correctStyle={styles.btn}
           disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
           label={t('modal.interview.btnSend')}
           loading={isLoading}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />

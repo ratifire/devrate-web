@@ -182,10 +182,10 @@ const HardSkillsModal = () => {
           </Box>
         </Box>
         <ButtonDef
-          correctStyle={styles.btn}
           disabled={addSkills.length === 0 && idDeletedSkills.length === 0}
           label={t('profile.modal.btn')}
           loading={isLoading}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />

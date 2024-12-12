@@ -44,11 +44,11 @@ const ExperienceEmptyItem = ({ tab, profileType, imgUrl, isData }) => {
           </Typography>
           {tab !== 'skills' ? (
             <ButtonDef
-              correctStyle={styles.button}
-              handlerClick={handleOpenModal}
               label={t(`profile.experience.${tab}.emptyTabName.button`)}
+              sx={styles.button}
               type='button'
               variant='contained'
+              onClick={handleOpenModal}
             />
           ) : (
             <Box sx={styles.linkWrapper}>
