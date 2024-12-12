@@ -38,6 +38,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: '/auth/signin',
         method: 'POST',
         body: { email, password },
+        credentials: 'include',
       }),
       transformResponse: (response, meta) => {
         const headers = meta?.response?.headers;
@@ -54,6 +55,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: '/auth/logout',
         method: 'POST',
+        credentials: 'include',
         responseHandler: (response) => response.text(),
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {

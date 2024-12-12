@@ -68,6 +68,7 @@ export const uk = {
         description: 'Опис',
         startYear: 'Рік початку',
         endYear: 'Рік закінчення',
+        now: 'Зараз',
       },
       checkEmailResetPassword: {
         title: 'Скидання пароля',
