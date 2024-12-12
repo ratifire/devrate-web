@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';
 import { styles } from './SidebarEvent.styles';
 
-const SidebarEvent = ({ event, handleClosePopup, setEventUpdated }) => {
+const SidebarEvent = ({ event }) => {
   const { eventTypeId, type, link, host, startTime, participantDtos } = event;
   const { id: hostId, name, surname } = host;
 
@@ -31,10 +31,6 @@ const SidebarEvent = ({ event, handleClosePopup, setEventUpdated }) => {
     await deleteEvent({
       userId,
       eventId: event?.eventTypeId,
-      onSuccess: () => {
-        handleClosePopup();
-        setEventUpdated((prev) => !prev);
-      },
       // eslint-disable-next-line no-console
       onError: (error) => console.error('EventPopup: Error deleting event', error),
       // eslint-disable-next-line no-console
@@ -108,8 +104,7 @@ const SidebarEvent = ({ event, handleClosePopup, setEventUpdated }) => {
 };
 
 SidebarEvent.propTypes = {
-  handleClosePopup: PropTypes.func.isRequired,
-  setEventUpdated: PropTypes.func.isRequired,
+  setEventUpdated: PropTypes.func,
   event: PropTypes.shape({
     eventTypeId: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
