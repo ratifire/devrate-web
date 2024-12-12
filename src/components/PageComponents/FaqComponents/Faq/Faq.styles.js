@@ -7,6 +7,7 @@ export const styles = {
   title: (theme) => ({
     marginBottom: theme.spacing(4),
     color: theme.palette.faq.title,
+    backgroundColor: 'red',
   }),
   list: (theme) => ({
     maxHeight: '586px',

@@ -1,11 +1,18 @@
+@import '../../styles/scss/mediaBreakpoints.scss';
+
 .about {
   display: flex;
   align-items: center;
+  padding: 24px;
 
   &__bg {
     padding-bottom: 136px;
     position: relative;
     z-index: 10;
+
+    @include phone {
+      padding-bottom: 0;
+    }
 
     &::before {
       content: '';
@@ -17,7 +24,6 @@
       background-repeat: no-repeat;
       background-position: top right;
       background-size: cover;
-      height: 1040px;
       width: 100%;
     }
 
@@ -35,45 +41,158 @@
 
 .heading {
   font-family: 'Zen Dots', sans-serif;
+  text-align: center;
   font-size: 48px;
   font-weight: 400;
   line-height: 72px;
   letter-spacing: 0.01em;
   color: #fff;
   text-shadow: 2px 2px 4px rgb(29 29 29 / 25%);
-  text-align: center;
   margin-bottom: 84px;
   position: relative;
   z-index: 10;
 
+  @include desktop {
+    text-align: center;
+    font-size: 30px;
+    line-height: 2px;
+  }
+
+  @include tablet {
+    align-self: center;
+    font-size: 32px;
+  }
+
+  @include phone {
+    align-self: flex-start;
+    font-size: 24px;
+    margin-bottom: 18px;
+  }
+
   .highlight {
     margin-left: 0.3rem;
     color: #b78af7;
+
+    @include phone {
+      font-size: 24px;
+      color: #ee7538;
+    }
+  }
+}
+
+.backgroundImg {
+  width: 268px;
+  height: 320px;
+  margin: 0 auto;
+  background-image: url('../../assets/aboutUsImg.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  @media screen and (width >= 768px) {
+    background-image: none;
+    display: none;
   }
 }
 
 .gridContainer {
+  align-self: center;
   justify-content: space-between;
   display: grid;
-  grid-template: auto auto / minmax(300px, 571px) 0 minmax(300px, 571px);
+  grid-template: auto / minmax(300px, 571px) minmax(100px, 200px) minmax(300px, 571px);
   grid-template-areas:
-    'topLeft fix topRight'
-    'botLeft fix botRight';
-  grid-gap: 80px 12px;
+    'topLeft . topRight'
+    'botLeft . botRight';
+  grid-gap: 80px 2px;
   background-image: url('../../assets/aboutUsImg.svg');
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
   z-index: 10;
 
-  @media screen and (width <= 1280px) {
+  @include desktop {
+    background-size: 278px 332px;
+    grid-gap: 74px 12px;
+    justify-content: space-between;
+  }
+
+  @include tablet-large {
+    display: grid;
+    grid-template:
+      'topLeft favBigRight' auto
+      'botLeft favBigRight' auto
+      'favBigLeft topRight' auto
+      'favBigLeft botRight' auto;
+    grid-template-columns: minmax(320px, 420px) minmax(320px, 420px);
+    grid-gap: 12px;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  @include tablet {
+    align-self: center;
+    justify-content: space-between;
+    display: grid;
+    grid-template: auto / minmax(300px, 571px) minmax(100px, 200px) minmax(300px, 571px);
+    grid-template-areas:
+      'topLeft . topRight'
+      'botLeft . botRight';
+    grid-gap: 80px 2px;
+    background-image: url('../../assets/aboutUsImg.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  @include phone {
+    background-image: none;
+    justify-content: center;
+    background-position: bottom center;
     grid-template: repeat(4, auto) / 100%;
     grid-template-areas:
       'topLeft '
       'botLeft '
       'topRight'
-      'botRight';
-    grid-gap: 60px;
+      'botRight'
+      'favBigRight'
+      'favBigLeft';
+    grid-gap: 36px;
+  }
+
+  .favBigRight {
+    display: none;
+
+    @include tablet-large {
+      display: block;
+      grid-area: favBigRight;
+      background-image: url('../../assets/BackgroundImages/fav2big.png');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  .favBigLeft {
+    display: none;
+
+    @include tablet-large {
+      display: block;
+      grid-area: favBigLeft;
+      font-size: 40px;
+      background-image: url('../../assets/BackgroundImages/fav4big.png');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    @include tablet {
+      display: none;
+    }
   }
 }
 
@@ -88,8 +207,25 @@
   justify-content: center;
   flex-direction: column;
 
-  @media screen and (width <= 1280px) {
+  @include desktop {
     justify-self: center;
+    max-width: 452px;
+    height: 194px;
+    padding: 18px 16px;
+  }
+
+  @include tablet {
+    justify-self: center;
+    max-width: 452px;
+    height: 194px;
+    padding: 18px 16px;
+  }
+
+  @include phone {
+    max-width: 328px;
+    padding: 18px 16px;
+    width: 100%;
+    height: 100%;
   }
 
   &::before {
@@ -104,6 +240,14 @@
     background-repeat: no-repeat;
     background-position: top left;
     background-size: 100% 100%;
+
+    @include desktop {
+      max-width: 452px;
+    }
+
+    @include phone {
+      width: 328px;
+    }
   }
 
   &::after {
@@ -116,6 +260,14 @@
     max-width: 555px;
     height: calc(100% - 20px);
     background-color: #1d1d1dcc;
+
+    @include desktop-macbook {
+      height: calc(100% - 10px);
+    }
+
+    @include phone {
+      display: none;
+    }
   }
 
   &.topLeft {
@@ -123,6 +275,15 @@
 
     &::before {
       background-image: url('../../assets/AbouSectionBorder/topLeftBorder.svg');
+
+      @include desktop-macbook {
+        max-width: 452px;
+      }
+
+      @include phone {
+        width: 328px;
+        background-image: url('../../assets/AbouSectionBorder/topLeftBorderMobile.png');
+      }
     }
   }
 
@@ -131,6 +292,15 @@
 
     &::before {
       background-image: url('../../assets/AbouSectionBorder/botLeftBorder.svg');
+
+      @include desktop-macbook {
+        max-width: 452px;
+      }
+
+      @include phone {
+        width: 328px;
+        background-image: url('../../assets/AbouSectionBorder/botLeftBorderMobile.png');
+      }
     }
   }
 
@@ -139,6 +309,15 @@
 
     &::before {
       background-image: url('../../assets/AbouSectionBorder/topRightBorder.svg');
+
+      @include desktop-macbook {
+        max-width: 452px;
+      }
+
+      @include phone {
+        width: 328px;
+        background-image: url('../../assets/AbouSectionBorder/botLeftBorderMobile.png');
+      }
     }
   }
 
@@ -147,6 +326,15 @@
 
     &::before {
       background-image: url('../../assets/AbouSectionBorder/botRightBorder.svg');
+
+      @include desktop-macbook {
+        max-width: 452px;
+      }
+
+      @include phone {
+        width: 328px;
+        background-image: url('../../assets/AbouSectionBorder/topLeftBorderMobile.png');
+      }
     }
   }
 
@@ -160,6 +348,31 @@
     position: relative;
     z-index: 3;
 
+    @include desktop-macbook {
+      width: fit-content;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    @include tablet-large {
+      width: fit-content;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      padding-bottom: 4px;
+    }
+
+    @include phone {
+      width: fit-content;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 16px;
+      padding-bottom: 4px;
+    }
+
     &::before {
       content: '';
       display: block;
@@ -171,14 +384,26 @@
       background-repeat: no-repeat;
       background-position: top left;
       background-size: contain;
+
+      @include phone {
+        width: 100%;
+      }
     }
 
     &.topLeft::before {
       background-image: url('../../assets/AboutSectionLines/topLeft.svg');
+
+      @include phone {
+        background-image: url('../../assets/AboutSectionLines/topLeftMobile.png');
+      }
     }
 
     &.botLeft::before {
       background-image: url('../../assets/AboutSectionLines/botLeft.svg');
+
+      @include phone {
+        background-image: url('../../assets/AboutSectionLines/botLeftMobile.svg');
+      }
     }
 
     &.topRight::before {
@@ -193,10 +418,34 @@
   & p {
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;
-    font-weight: 400;
-    line-height: 36px;
+    line-height: 1.5;
     color: #fff;
     position: relative;
     z-index: 3;
+
+    @include desktop-macbook {
+      font-size: 18px;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    @include tablet-large {
+      align-self: flex-end;
+      font-size: 18px;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    @include phone {
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+  }
+
+  @include phone {
+    padding: 18px 16px;
+    width: 100%;
+    height: 100%;
   }
 }

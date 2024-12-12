@@ -1,5 +1,7 @@
+@import '../../styles/scss/mediaBreakpoints.scss';
+
 .footer {
-  padding: 16px 0 160px;
+  padding: 16px 0;
   position: relative;
   z-index: 1;
 
@@ -20,9 +22,13 @@
   &__container {
     display: flex;
     justify-content: space-between;
-    grid-gap: 12px;
 
-    @media screen and (width <= 1024px) {
+    @include tablet-large {
+      grid-gap: 24px;
+    }
+
+    @include tablet {
+      flex: 2;
       flex-direction: column-reverse;
       align-items: center;
       justify-content: flex-start;
@@ -31,14 +37,38 @@
   }
 
   &__content {
-    flex: 0 0 max(530px);
-    min-width: 400px;
+    display: flex;
+    flex: 1 1;
+    max-width: 571px;
+    flex-direction: column;
+    gap: 24px;
 
-    @media screen and (width <= 1024px) {
-      flex: none;
-      min-width: 0;
-      max-width: 768px;
+    @include desktop-macbook {
+      max-width: 356px;
+      padding: 24px 0;
+    }
+
+    @include tablet-large {
+      flex: 1 1;
+      gap: 24px;
+      flex-direction: column;
+    }
+
+    @include tablet {
+      gap: 24px;
+      flex-direction: row;
+      max-width: 100%;
+    }
+
+    @include phone {
+      flex-direction: column;
       width: 100%;
+    }
+  }
+
+  &__socialContainer {
+    @include phone {
+      display: none;
     }
   }
 
@@ -46,9 +76,27 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
+
+    @include desktop-macbook {
+      justify-content: space-between;
+    }
+
+    @include phone {
+      display: none;
+    }
   }
 
-  &__socialIkons {
+  &__logo {
+    width: 214px;
+
+    @include desktop-macbook {
+      display: inline-block;
+      width: 192px;
+      height: 55px;
+    }
+  }
+
+  &__socialIcons {
     display: flex;
     gap: 15px;
 
@@ -71,6 +119,14 @@
     & > a:first-child {
       margin-left: 0;
     }
+
+    @include desktop-macbook {
+      padding-right: 16px;
+    }
+
+    @include tablet {
+      display: none;
+    }
   }
 
   &__descriptions {
@@ -82,8 +138,12 @@
     margin-bottom: 16px;
     max-width: 530px;
 
-    @media screen and (width <= 1024px) {
-      max-width: 768px;
+    @include desktop-macbook {
+      font-size: 14px;
+    }
+
+    @include phone {
+      display: none;
     }
   }
 
@@ -97,6 +157,22 @@
     line-height: 150%;
     text-transform: uppercase;
     color: #fff;
+
+    > a > img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 161px;
+      height: 48px;
+    }
+
+    @include desktop-macbook {
+      font-size: 18px;
+
+      > a > img {
+        width: 121px;
+        height: 36px;
+      }
+    }
   }
 
   &__developerLink {
@@ -119,6 +195,10 @@
     &:active {
       color: #5900d9;
     }
+
+    @include phone {
+      font-size: 18px;
+    }
   }
 
   &__policies {
@@ -130,7 +210,7 @@
   &__policyLink {
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 150%;
     text-decoration: underline;
     text-decoration-skip-ink: none;
@@ -145,12 +225,21 @@
     &:active {
       color: #5900d9;
     }
+
+    @include tablet {
+      font-weight: 400;
+      font-size: 16px;
+    }
   }
 
   &__copyright {
     font-weight: 600;
     font-size: 18px;
     line-height: 150%;
+
+    @include desktop-macbook {
+      font-size: 14px;
+    }
   }
 
   &__copyrightYear {
@@ -159,7 +248,6 @@
 
   &__trademarks {
     color: #a9a9aa;
-    max-width: 350px;
   }
 }
 
@@ -169,12 +257,38 @@
   border-radius: 16px;
   padding: 36px;
   background-color: rgb(29 29 29 / 60%);
-  flex: 0 1 max(868px);
+  width: 50%;
 
-  @media screen and (width <= 1024px) {
-    flex: none;
-    max-width: 768px;
+  @include tablet {
+    padding: 0;
     width: 100%;
+  }
+
+  &__titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 42px;
+    position: relative;
+
+    @include desktop-macbook {
+      justify-content: space-between;
+    }
+
+    @include tablet {
+      &::before {
+        content: '';
+        background-image: url('../../assets/footerUnderlineMob.svg');
+        width: 100%;
+        height: 4px;
+        position: absolute;
+        left: 0;
+        bottom: -12px;
+        background-repeat: no-repeat;
+        background-position: top left;
+        background-size: cover;
+      }
+    }
   }
 
   &__title {
@@ -185,10 +299,36 @@
     text-shadow: 2px 2px 4px 0 rgb(29 29 29 / 25%);
     color: #fff;
     margin-bottom: 24px;
+
+    @include tablet {
+      margin-bottom: 0;
+    }
   }
 
   &__titleFocus {
     color: #b78af7;
+  }
+
+  &__socialLink {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+  }
+
+  &__socialLink img {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__socialIcons {
+    height: 100%;
+    align-items: center;
+    display: none;
+
+    @include tablet {
+      display: flex;
+      gap: 8px;
+    }
   }
 
   &__form {
@@ -214,6 +354,10 @@
     line-height: 150%;
     letter-spacing: 0.01em;
     color: #828283;
+
+    @include tablet-large {
+      font-size: 16px;
+    }
   }
 
   &__input:focus {

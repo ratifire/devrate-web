@@ -28,9 +28,9 @@ const Faq = () => {
 
   return (
     <Box sx={styles.wrapper}>
-      <Typography sx={styles.title} variant='h4'>
-        {t('faqText.title')}
-      </Typography>
+      {/*<Typography sx={styles.title} variant='h4'>*/}
+      {/*  {t('faqText.title')}*/}
+      {/*</Typography>*/}
       <Box sx={styles.list}>{renderQuestions()}</Box>
     </Box>
   );
