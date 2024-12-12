@@ -1,7 +1,25 @@
 @import './variables.scss';
 
+@mixin desktop-extra-large() {
+  @media screen and (max-width: $breakpoint-large) {
+    @content;
+  }
+}
+
+@mixin desktop-macbook() {
+  @media screen and (max-width: $breakpoint-xxl) {
+    @content;
+  }
+}
+
 @mixin desktop() {
   @media screen and (max-width: $breakpoint-xxl) {
+    @content;
+  }
+}
+
+@mixin tablet-large() {
+  @media screen and (width <= 1279px) {
     @content;
   }
 }

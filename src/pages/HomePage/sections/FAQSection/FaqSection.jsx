@@ -16,32 +16,20 @@ const FaqSection = memo(() => {
     }, 0);
   };
 
-  const firstColumn = faqData.filter((item, index) => {
-    const columnLength = faqData.length / 2 - 1;
-    return index <= columnLength;
-  });
-
-  const secondColumn = faqData.filter((item, index) => {
-    const columnLength = faqData.length / 2 - 1;
-    return index > columnLength;
-  });
-
   return (
     <section className={styles.faq__bg} id='faq'>
-      <div className='container'>
-        <div className={styles.faq}>
-          <h2 className={styles.faq__title}>FAQ</h2>
-          <div className={styles.faq__columns}>
-            <div className={styles.faq__column}>
-              {firstColumn.map((item) => (
-                <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
-              ))}
-            </div>
-            <div className={styles.faq__column}>
-              {secondColumn.map((item) => (
-                <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
-              ))}
-            </div>
+      <div className={styles.faq}>
+        <h2 className={styles.faq__title}>FAQ</h2>
+        <div className={styles.faq__columns}>
+          <div className={styles.faq__column}>
+            {faqData.slice(0, 5).map((item) => (
+              <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
+            ))}
+          </div>
+          <div className={styles.faq__column}>
+            {faqData.slice(5, 10).map((item) => (
+              <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
+            ))}
           </div>
         </div>
       </div>
