@@ -42,6 +42,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "server-build": "node build-script.js",
+    "serve-build": "node ./server-build/server.js",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint:css": "stylelint src",
@@ -50,7 +52,7 @@
     "build-storybook": "storybook build",
     "delBuildWin": "rd /s /q build",
     "delBuildUnix": "rm -rf build",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "prettier:fix": "prettier --write .",
     "lint": "eslint ./src/**/*.{js,jsx}",
     "lint:fix": "eslint ./src/**/*.{js,jsx} --fix"
