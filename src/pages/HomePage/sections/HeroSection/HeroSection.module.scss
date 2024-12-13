@@ -6,8 +6,14 @@
   align-items: center;
   grid-gap: 8px;
 
-  @include tablet {
+  @include tablet-large {
     flex-direction: column;
+    align-items: flex-start;
+    grid-gap: 24px;
+  }
+
+  @include tablet {
+    align-items: center;
     grid-gap: 0;
   }
 
@@ -99,7 +105,7 @@
       flex: 1 1 max(643px);
     }
 
-    @include tablet {
+    @include tablet-large {
       flex: 1 1 auto;
     }
 
@@ -164,8 +170,11 @@
       flex: 1 1 max(453px);
     }
 
-    @include tablet {
+    @include tablet-large {
       flex: 1 1 auto;
+    }
+
+    @include tablet {
       padding-top: 333px;
 
       @include phone {
@@ -228,7 +237,8 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;
     font-weight: 600;
-    line-height: 36px;
+    line-height: 150%;
+    letter-spacing: 0.01em;
     color: #fff;
 
     @include desktop {
@@ -263,14 +273,24 @@
     @include desktop {
       max-width: 230px;
     }
+
+    @include tablet-large {
+      width: 50%;
+      max-width: 100%;
+    }
   }
 
   .login {
     max-width: 220px;
-    width: 100%;
+    width: 50%;
 
     @include desktop {
       max-width: 187px;
+    }
+
+    @include tablet-large {
+      width: 50%;
+      max-width: 100%;
     }
   }
 

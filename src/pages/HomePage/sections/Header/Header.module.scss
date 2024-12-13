@@ -3,6 +3,11 @@
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    font-size: 0;
+  }
 
   &__bg {
     top: 0;
@@ -21,17 +26,14 @@
     }
   }
 
-  @include tablet {
-    align-items: center;
-
-    &__logo {
-      font-size: 0;
-    }
-  }
-
   &__logo img {
     width: 214px;
     height: auto;
+
+    @include tablet-large {
+      width: 161px;
+      height: 36px;
+    }
 
     @include tablet {
       width: 142px;
