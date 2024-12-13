@@ -155,9 +155,10 @@ const StepContacts = () => {
         />
       </Box>
       <ButtonDef
-        correctStyle={styles.btn}
         disabled={!formik.dirty || formik.isSubmitting || !formik.isValid}
-        label='profile.modal.btn'
+        label={t('profile.modal.btn')}
+        loading={isLoading}
+        sx={styles.btn}
         type='submit'
         variant='contained'
       />

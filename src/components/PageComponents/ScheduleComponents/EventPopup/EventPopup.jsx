@@ -1,59 +1,63 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import LinkIcon from '@mui/icons-material/Link';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useSnackbar } from 'notistack';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router';
-import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import links from '../../../../router/links';
-import useCheckTimeDifference from '../../../../utils/hooks/schedule/useCheckTimeDifference';
+import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';
 import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpdated }) => {
-  const { eventTypeId, type, link, host, startTime, participantDtos } = event;
   const { t } = useTranslation();
   const theme = useTheme();
   const { id: userId } = useSelector((state) => state.auth.user.data);
-  const [deleteEventById] = useDeleteEventByIdMutation();
 
   const [showCancelButton, setShowCancelButton] = useState(true);
   const [disableLink, setDisableLink] = useState(false);
 
-  const { enqueueSnackbar } = useSnackbar();
+  const deleteEvent = useDeleteEvent();
 
-  useCheckTimeDifference(startTime, setShowCancelButton, setDisableLink);
+  useEffect(() => {
+    const eventStartTime = new Date(event.startTime);
 
-  const handleCancelInterview = async function () {
-    if (!event || !eventTypeId) {
-      // eslint-disable-next-line no-console
-      console.error('Event object or event ID is missing');
-    }
+    const checkTimeDifference = () => {
+      const currentTime = new Date();
+      const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
 
-    if (!userId) {
-      // eslint-disable-next-line no-console
-      console.error('User ID is missing');
-    }
-
-    try {
-      await deleteEventById({ userId, id: eventTypeId }).unwrap();
-      handleClosePopup();
-      setEventUpdated((prev) => !prev);
-      enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to add skill:', error);
-
-      if (error.status === 400) {
-        // eslint-disable-next-line no-console
-        console.error('Bad Request: Likely an issue with the request data or format');
+      if (timeDifferenceInMinutes >= 1) {
+        setShowCancelButton(false);
       }
-      enqueueSnackbar(t('schedule.deleteEventErrorMessage'), { variant: 'error' });
-    }
+
+      if (timeDifferenceInMinutes >= 60) {
+        setDisableLink(true);
+      }
+    };
+
+    checkTimeDifference();
+
+    const timer = setInterval(checkTimeDifference, 60000);
+
+    return () => clearInterval(timer);
+  }, [event.startTime]);
+
+  const handleCancelInterview = async () => {
+    await deleteEvent({
+      userId,
+      eventId: event?.eventTypeId,
+      onSuccess: () => {
+        handleClosePopup();
+        setEventUpdated((prev) => !prev);
+      },
+      // eslint-disable-next-line no-console
+      onError: (error) => console.error('EventPopup: Error deleting event', error),
+      // eslint-disable-next-line no-console
+      onFinally: () => console.log('EventPopup: Deletion process complete'),
+    });
   };
 
   return (
@@ -73,7 +77,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
       {popupPosition === 'TOPRIGHT' && <Box sx={styles.popupTriangularTopRight} />}
       {popupPosition === 'BOTTOMRIGHT' && <Box sx={styles.popupTriangularBottomRight} />}
 
-      {type === 'INTERVIEW' && (
+      {event.type === 'INTERVIEW' && (
         <Box sx={styles.infoContainer}>
           <IconButton sx={styles.closeIcon} onClick={handleClosePopup}>
             <CloseIcon />
@@ -83,16 +87,16 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
             <Typography sx={styles.title} variant='caption2'>
               {t('schedule.popupUserInfo')}
             </Typography>
-            <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${host.id}`}>
+            <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${event.host.id}`}>
               <Typography sx={styles.name} variant='subtitle2'>
-                {host.name} {host.surname}
+                {event.host.name} {event.host.surname}
               </Typography>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
-              {host.status}
+              {event.host.status}
             </Typography>
             <Typography sx={styles.role} variant='caption2'>
-              {t('schedule.popupRole')} {host.role.toLowerCase()}
+              {t('schedule.popupRole')} {event.host.role.toLowerCase()}
             </Typography>
           </Box>
 
@@ -100,32 +104,36 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
             <Typography sx={styles.title} variant='caption2'>
               {t('schedule.popupInterviewerInfo')}
             </Typography>
-            <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${participantDtos[0].id}`}>
+            <Box
+              component={Link}
+              sx={{ textDecoration: 'none' }}
+              to={`${links.profile}/${event.participantDtos[0].id}`}
+            >
               <Typography sx={styles.name} variant='subtitle2'>
-                {participantDtos[0].name} {participantDtos[0].surname}
+                {event.participantDtos[0].name} {event.participantDtos[0].surname}
               </Typography>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
-              {participantDtos[0].status}
+              {event.participantDtos[0].status}
             </Typography>
             <Typography sx={styles.role} variant='caption2'>
-              {t('schedule.popupRole')} {participantDtos[0].role.toLowerCase()}
+              {t('schedule.popupRole')} {event.participantDtos[0].role.toLowerCase()}
             </Typography>
           </Box>
         </Box>
       )}
 
       <Box sx={styles.buttonsContainer}>
-        <IconButton component='a' disabled={disableLink} href={link} sx={styles.icon} target='_blank'>
+        <IconButton component='a' disabled={disableLink} href={event.link} sx={styles.icon} target='_blank'>
           <LinkIcon />
         </IconButton>
         {showCancelButton && (
           <ButtonDef
-            correctStyle={styles.outlined}
-            handlerClick={handleCancelInterview}
             label={t('schedule.cancelEventBtn')}
+            sx={styles.outlined}
             type={'button'}
             variant='outlined'
+            onClick={handleCancelInterview}
           />
         )}
       </Box>

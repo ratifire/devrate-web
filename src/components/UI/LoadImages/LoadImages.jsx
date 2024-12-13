@@ -141,12 +141,12 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled
       </Box>
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          correctStyle={styles.btn}
           disabled={isDisabled || !settingsCanvas.image || !!error}
-          handlerClick={handleSave}
-          label='profile.modal.btn'
+          label={t('profile.modal.btn')}
+          sx={styles.btn}
           type='submit'
           variant='contained'
+          onClick={handleSave}
         />
         {value && (
           <IconButton aria-label='Delete user Avatar' sx={styles.btnIcon} onClick={handleClickDelete}>

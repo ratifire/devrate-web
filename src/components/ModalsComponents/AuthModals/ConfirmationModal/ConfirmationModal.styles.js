@@ -68,10 +68,6 @@ const styles = {
     justifyContent: 'center',
     marginTop: theme.spacing(4),
   }),
-  btn: (theme) => ({
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-  }),
   confirmationLink: (theme) => ({
     textDecoration: 'underline',
     color: theme.palette.action.active,
@@ -88,6 +84,8 @@ const styles = {
     lineHeight: 1.43,
     borderRadius: theme.spacing(2),
     padding: '12px',
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
   }),
 };
 

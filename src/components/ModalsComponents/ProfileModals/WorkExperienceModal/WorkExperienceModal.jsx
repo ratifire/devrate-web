@@ -28,7 +28,7 @@ const WorkExperienceModal = () => {
   const { id } = useSelector((state) => state.auth.user.data);
   const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
   const { t } = useTranslation();
-  const [createNewWorkExperience] = useCreateNewWorkExperienceMutation();
+  const [createNewWorkExperience, { isLoading }] = useCreateNewWorkExperienceMutation();
   const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -224,9 +224,10 @@ const WorkExperienceModal = () => {
           )}
 
           <ButtonDef
-            correctStyle={styles.workExperienceBtn}
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || !responsibilities.length}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
+            loading={isLoading}
+            sx={styles.workExperienceBtn}
             type='submit'
             variant='contained'
           />

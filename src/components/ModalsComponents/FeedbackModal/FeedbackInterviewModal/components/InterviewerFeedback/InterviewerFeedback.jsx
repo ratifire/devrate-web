@@ -10,7 +10,7 @@ import { styles } from './InterviewerFeedback.styles';
 
 const InterviewerFeedback = () => {
   const { t } = useTranslation();
-  const { interviewStartTime, name, status, surname, isError, formik } = useFeedbackForm();
+  const { interviewStartTime, name, status, surname, isError, formik, isLoading } = useFeedbackForm();
 
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
@@ -27,9 +27,10 @@ const InterviewerFeedback = () => {
           <StepSoftSkills formik={formik} />
         </Box>
         <ButtonDef
-          correctStyle={styles.btn}
           disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
           label={t('modal.interview.btnSend')}
+          loading={isLoading}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />

@@ -155,8 +155,8 @@ const ScheduleInterviewModal = () => {
           <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
           <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
           <ButtonDef
-            correctStyle={styles.btn}
             label={t('specialization.modal.scheduleModal.schedule')}
+            sx={styles.btn}
             type='submit'
             variant='contained'
           />

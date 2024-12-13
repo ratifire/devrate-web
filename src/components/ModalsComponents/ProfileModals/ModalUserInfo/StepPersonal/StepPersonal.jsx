@@ -26,6 +26,7 @@ const StepPersonal = () => {
   const { data: userData } = useSelector(selectCurrentUser);
   const [putPersonalUser, { data: dataPutPersonalUser, isError: isErrorPutPersonal, isLoading: isLoadingPutPersonal }] =
     usePutPersonalUserMutation();
+
   const {
     data: dataGetPersonal,
     isFetching: isFetchingGetPersonal,
@@ -163,9 +164,10 @@ const StepPersonal = () => {
 
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          correctStyle={styles.btn}
-          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-          label='profile.modal.btn'
+          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoadingPutPersonal}
+          label={t('profile.modal.btn')}
+          loading={isLoadingPutPersonal}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />

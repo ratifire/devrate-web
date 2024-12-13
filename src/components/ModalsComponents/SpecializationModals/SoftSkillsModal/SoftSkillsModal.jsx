@@ -17,7 +17,7 @@ import { useGetMastery } from '../../../../utils/hooks/specialization';
 import useMergeState from '../../../../utils/hooks/useMergeState';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { FormSelect } from '../../../FormsComponents/Inputs';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { ErrorComponent } from '../../../UI/Exceptions';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';
 
@@ -204,14 +204,6 @@ const SoftSkillsModal = () => {
     ? 'specialization.modal.skills.title'
     : 'specialization.modal.skills.no_skills';
 
-  if (isLoading) {
-    return (
-      <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
-        <LoaderComponent />
-      </ModalLayoutProfile>
-    );
-  }
-
   if (isError) {
     return (
       <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
@@ -250,9 +242,10 @@ const SoftSkillsModal = () => {
           </Box>
         </Box>
         <ButtonDef
-          correctStyle={styles.btn}
           disabled={addSkill.length === 0 && idDeletedSkills.length === 0}
           label={t('profile.modal.btn')}
+          loading={isLoading}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />

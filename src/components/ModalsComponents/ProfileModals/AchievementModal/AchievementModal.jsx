@@ -18,7 +18,7 @@ const AchievementModal = () => {
   const openAchievement = useSelector((state) => state.modal.achievement);
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
-  const [createAchievement] = useCreateAchievementMutation();
+  const [createAchievement, { isLoading }] = useCreateAchievementMutation();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
@@ -77,21 +77,6 @@ const AchievementModal = () => {
               value={formik.values.summary}
             />
           </Box>
-          {/*commented out <Link> in case if its need it's needed in the future*/}
-          {/*<Box sx={styles.input100}>*/}
-          {/*  <FormInput*/}
-          {/*    name='link'*/}
-          {/*    value={formik.values.link}*/}
-          {/*    handleChange={formik.handleChange}*/}
-          {/*    handleBlur={formik.handleBlur}*/}
-          {/*    type='text'*/}
-          {/*    label='modal.achievement.link'*/}
-          {/*    required*/}
-          {/*    placeholder='modal.achievement.link_placeholder'*/}
-          {/*    helperText={formik.touched.link && formik.errors.link}*/}
-          {/*    error={formik.touched.link && Boolean(formik.errors.link)}*/}
-          {/*  />*/}
-          {/*</Box>*/}
           <Box sx={styles.input100}>
             <TextAreaInput
               required
@@ -107,11 +92,11 @@ const AchievementModal = () => {
               value={formik.values.description}
             />
           </Box>
-
           <ButtonDef
-            correctStyle={styles.workExperienceBtn}
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
+            loading={isLoading}
+            sx={styles.workExperienceBtn}
             type='submit'
             variant='contained'
           />

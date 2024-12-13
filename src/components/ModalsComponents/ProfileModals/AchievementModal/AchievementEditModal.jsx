@@ -13,12 +13,13 @@ import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
 import { styles } from './AchievementModal.styles';
+
 const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
   const {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
   const { t } = useTranslation();
-  const [updateAchievementApi] = useUpdateAchievementMutation();
+  const [updateAchievementApi, { isLoading }] = useUpdateAchievementMutation();
   const { enqueueSnackbar } = useSnackbar();
 
   const initialValues = {
@@ -81,20 +82,6 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
               value={formik.values.summary}
             />
           </Box>
-          {/*commented out <Link> in case if its need it's needed in the future*/}
-          {/*<Box sx={styles.input100}>*/}
-          {/*  <FormInput*/}
-          {/*    name='link'*/}
-          {/*    value={formik.values.link}*/}
-          {/*    handleChange={formik.handleChange}*/}
-          {/*    handleBlur={formik.handleBlur}*/}
-          {/*    type='text'*/}
-          {/*    label='modal.achievement.link'*/}
-          {/*    placeholder='profile.modal.workExperience.position_placeholder'*/}
-          {/*    helperText={formik.touched.link && formik.errors.link}*/}
-          {/*    error={formik.touched.link && Boolean(formik.errors.link)}*/}
-          {/*  />*/}
-          {/*</Box>*/}
           <Box sx={styles.input100}>
             <TextAreaInput
               error={formik.touched.description && Boolean(formik.errors.description)}
@@ -109,8 +96,10 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
             />
           </Box>
           <ButtonDef
-            correctStyle={styles.workExperienceBtn}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
+            loading={isLoading}
+            sx={styles.workExperienceBtn}
             type='submit'
             variant='contained'
           />
