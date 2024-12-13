@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { StepPersonalSchema } from '../../../../../utils/valadationSchemas/index';
 import {
@@ -24,6 +25,7 @@ const StepPersonal = () => {
   const { data: userData } = useSelector(selectCurrentUser);
   const [putPersonalUser, { data: dataPutPersonalUser, isError: isErrorPutPersonal, isLoading: isLoadingPutPersonal }] =
     usePutPersonalUserMutation();
+
   const {
     data: dataGetPersonal,
     isFetching: isFetchingGetPersonal,
@@ -31,6 +33,7 @@ const StepPersonal = () => {
   } = useGetPersonalUserQuery(userData.id, { skip: !userData.id });
 
   const { firstName, lastName, city, country, status, description } = dataPutPersonalUser || dataGetPersonal;
+  const { t } = useTranslation();
 
   const initialValues = {
     firstName: firstName || userData.firstName || '',
@@ -155,9 +158,10 @@ const StepPersonal = () => {
 
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          correctStyle={styles.btn}
-          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-          label='profile.modal.btn'
+          disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoadingPutPersonal}
+          label={t('profile.modal.btn')}
+          loading={isLoadingPutPersonal}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />

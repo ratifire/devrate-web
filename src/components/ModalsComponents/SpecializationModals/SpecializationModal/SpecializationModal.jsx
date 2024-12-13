@@ -22,7 +22,7 @@ import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/i
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { ErrorComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
 
@@ -125,7 +125,7 @@ const SpecializationModal = () => {
             name: resp.level,
             softSkillMark: resp.softSkillMark,
             hardSkillMark: resp.hardSkillMark,
-          });
+          }).unwrap();
           dispatch(setActiveSpecialization({ ...activeSpecialization, mastery: values.mastery }));
         }
 
@@ -146,7 +146,7 @@ const SpecializationModal = () => {
         name: resp.level,
         softSkillMark: resp.softSkillMark,
         hardSkillMark: resp.hardSkillMark,
-      });
+      }).unwrap();
       await addSkills({ id: resp.id, skills });
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -187,10 +187,6 @@ const SpecializationModal = () => {
   const deleteSkillsHandler = (skillToDelete) => {
     setState({ skills: skills.filter((item) => item.name !== skillToDelete) });
   };
-
-  if (isLoading) {
-    return <LoaderComponent />;
-  }
 
   if (isError) {
     return <ErrorComponent />;
@@ -266,9 +262,10 @@ const SpecializationModal = () => {
             </>
           )}
           <ButtonDef
-            correctStyle={styles.specializationBtn}
             disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
             label={t('profile.modal.btn')}
+            loading={isLoading}
+            sx={styles.specializationBtn}
             type='submit'
             variant='contained'
           />

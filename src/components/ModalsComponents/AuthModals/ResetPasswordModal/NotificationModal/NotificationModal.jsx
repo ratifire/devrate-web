@@ -30,11 +30,11 @@ const NotificationModal = () => {
       </Typography>
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          correctStyle={styles.submitBtn}
-          handlerClick={handleEnter}
-          label='modal.notificationModal.btn_enter'
+          label={t('modal.notificationModal.btn_enter')}
+          sx={styles.submitBtn}
           type='button'
           variant='contained'
+          onClick={handleEnter}
         />
       </Box>
     </ModalLayout>

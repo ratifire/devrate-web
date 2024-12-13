@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
   useGetUserContactsQuery,
   usePostContactsUserMutation,
@@ -22,6 +23,7 @@ import { styles } from './StepContacts.styles';
 
 const StepContacts = () => {
   const [postContactsUser, { isLoading, isError: isErrorPostContacts, data: dataPost }] = usePostContactsUserMutation();
+  const { t } = useTranslation();
   const userId = useSelector((state) => state.auth.user.data.id);
   const {
     data: contactsData,
@@ -147,9 +149,10 @@ const StepContacts = () => {
         />
       </Box>
       <ButtonDef
-        correctStyle={styles.btn}
         disabled={!formik.dirty || formik.isSubmitting || !formik.isValid}
-        label='profile.modal.btn'
+        label={t('profile.modal.btn')}
+        loading={isLoading}
+        sx={styles.btn}
         type='submit'
         variant='contained'
       />

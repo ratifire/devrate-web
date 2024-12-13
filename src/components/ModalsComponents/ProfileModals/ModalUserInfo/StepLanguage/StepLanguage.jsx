@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import {
   useGetLanguageUserQuery,
@@ -15,6 +16,7 @@ import { StepLanguageSkeleton } from '../../../../UI/Skeleton';
 import { styles } from './StepLanguage.styles';
 const StepLanguage = () => {
   const { data: user } = useSelector(selectCurrentUser);
+  const { t } = useTranslation();
   const {
     data: dataGetLanguage,
     isError: isErrorGetLanguage,
@@ -77,9 +79,10 @@ const StepLanguage = () => {
           </Box>
         </Box>
         <ButtonDef
-          correctStyle={styles.btn}
           disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-          label='profile.modal.btn'
+          label={t('profile.modal.btn')}
+          loading={isLoadingPostLanguage}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />
