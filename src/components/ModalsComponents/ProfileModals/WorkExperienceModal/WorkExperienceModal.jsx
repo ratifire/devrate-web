@@ -61,11 +61,19 @@ const WorkExperienceModal = () => {
 
       if (modalData?.id) {
         await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
+        enqueueSnackbar(t(messageKey), {
+          variant: 'success',
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+          },
+        });
       } else {
         await createNewWorkExperience({ userId: id, data }).unwrap();
+        enqueueSnackbar(t(messageKey), { variant: 'success' });
       }
 
-      enqueueSnackbar(t(messageKey), { variant: 'success' });
+      // enqueueSnackbar(t(messageKey), { variant: 'success' });
       setResponsibilities([]);
       resetForm();
       handleClose();

@@ -112,76 +112,26 @@ const SoftSkillsModal = () => {
       enqueueSnackbar(errorMessage, { variant: 'error' });
     }
   };
-  // const handleAddSkill = () => {
-  //   const isSkillExist = allSkills.find((v) => v.name === skill);
-  //   const isAddedSkill = skills.find((v) => v.name === skill);
-  //
-  //   if (!availableSkills.length) {
-  //     return updateState({ helperText: 'specialization.modal.skills.errorNotAvailable', error: true });
-  //   }
-  //
-  //   if (!skill) {
-  //     return updateState({ helperText: 'specialization.modal.skills.errorRequired', error: true });
-  //   }
-  //
-  //   const id = isAddedSkill?.id || uuidv4();
-  //
-  //   if (!isSkillExist && skill) {
-  //     if (!isAddedSkill) {
-  //       updateState({ addSkill: [...addSkill, { id, name: isAddedSkill?.name || skill }] });
-  //     }
-  //
-  //     updateState({
-  //       skill: '',
-  //       allSkills: [...allSkills, { id, name: isAddedSkill?.name || skill }],
-  //       availableSkills: availableSkills.filter((availableSkill) => availableSkill !== skill),
-  //       idDeletedSkills: idDeletedSkills.filter((v) => v.id !== id),
-  //     });
-  //   }
-  // };
-  const handleDeleteSkill = async (skillId) => {
-    try {
-      const isSkillExist = skills.find((v) => v.id === skillId);
 
-      if (isSkillExist) {
-        updateState({
-          error: false,
-          helperText: '',
-          idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
-        });
-      }
+  const handleDeleteSkill = (skillId) => {
+    const isSkillExist = skills.find((v) => v.id === skillId);
 
+    if (isSkillExist) {
       updateState({
-        availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
-        allSkills: allSkills.filter((skill) => skill.id !== skillId),
-        addSkill: addSkill.filter((skill) => skill.id !== skillId),
+        error: false,
+        errorText: '',
+        idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
       });
-
-      enqueueSnackbar(t('modalNotifyText.softSkills.delete.success'), { variant: 'success' });
-    } catch {
-      enqueueSnackbar(t('modalNotifyText.softSkills.delete.error'), { variant: 'error' });
     }
-  };
 
-  // const handleDeleteSkill = (skillId) => {
-  //   const isSkillExist = skills.find((v) => v.id === skillId);
-  //
-  //   if (isSkillExist) {
-  //     updateState({
-  //       error: false,
-  //       errorText: '',
-  //       idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
-  //     });
-  //   }
-  //
-  //   updateState({
-  //     error: false,
-  //     errorText: '',
-  //     availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
-  //     allSkills: allSkills.filter((skill) => skill.id !== skillId),
-  //     addSkill: addSkill.filter((skill) => skill.id !== skillId),
-  //   });
-  // };
+    updateState({
+      error: false,
+      errorText: '',
+      availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
+      allSkills: allSkills.filter((skill) => skill.id !== skillId),
+      addSkill: addSkill.filter((skill) => skill.id !== skillId),
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

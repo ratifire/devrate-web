@@ -66,28 +66,23 @@ const HardSkillsModal = () => {
     });
   };
 
-  const handleDeleteSkill = async (skillId) => {
-    try {
-      const isSkillExist = skills.find((skill) => skill.id === skillId);
+  const handleDeleteSkill = (skillId) => {
+    const isSkillExist = skills.find((skill) => skill.id === skillId);
 
-      if (isSkillExist) {
-        await updateState({
-          error: false,
-          helperText: '',
-          idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
-        });
-      }
-
-      await updateState({
+    if (isSkillExist) {
+      updateState({
         error: false,
-        helperText: '',
-        allSkills: allSkills.filter((skill) => skill.id !== skillId),
-        addSkills: addSkills.filter((skill) => skill.id !== skillId),
+        errorText: '',
+        idDeletedSkills: [...idDeletedSkills, { id: skillId, name: isSkillExist.name }],
       });
-      enqueueSnackbar(t('modalNotifyText.hardSkills.delete.success'), { variant: 'success' });
-    } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.hardSkills.delete.error'), { variant: 'error' });
     }
+
+    updateState({
+      error: false,
+      errorText: '',
+      allSkills: allSkills.filter((skill) => skill.id !== skillId),
+      addSkills: addSkills.filter((skill) => skill.id !== skillId),
+    });
   };
   const handleAddSkill = async () => {
     updateState({
@@ -142,52 +137,6 @@ const HardSkillsModal = () => {
       enqueueSnackbar(errorMessage, { variant: 'error' });
     }
   };
-
-  // const handleAddSkill = async () => {
-  //   try {
-  //     const isSkillInDataBase = skills.find((v) => v.name === skill);
-  //     const skillValue = skill.trim();
-  //     const id = isSkillInDataBase?.id || uuidv4();
-  //
-  //     if (!skillValue) {
-  //       return updateState({ helperText: 'specialization.modal.skills.errorRequired', error: true });
-  //     }
-  //
-  //     if (skillValue.length > 100) {
-  //       return updateState({ helperText: 'specialization.modal.skills.errorLength', error: true });
-  //     }
-  //
-  //     if (allSkills.length >= MAX_SKILLS) {
-  //       return updateState({ helperText: 'specialization.modal.skills.errorQuantity', error: true });
-  //     }
-  //
-  //     if (isFindSkill) {
-  //       throw new Error('specialization.modal.skills.errorDuplicate');
-  //       // return updateState({ helperText: 'specialization.modal.skills.errorDuplicate', error: true });
-  //     }
-  //
-  //     if (allSkills.length < MAX_SKILLS && !isFindSkill && skillValue) {
-  //       if (!isSkillInDataBase) {
-  //         updateState({
-  //           addSkills: [...addSkills, { id, name: skillValue }],
-  //           error: false,
-  //           helperText: '',
-  //         });
-  //       }
-  //
-  //       updateState({
-  //         skill: '',
-  //         error: false,
-  //         helperText: '',
-  //         allSkills: [...allSkills, { id, name: skillValue }],
-  //         idDeletedSkills: idDeletedSkills.filter((v) => v.id !== id),
-  //       });
-  //       enqueueSnackbar(t('modalNotifyText.language.add.success'), { variant: 'success' });
-  //     }
-  //   } catch (error) {
-  //     enqueueSnackbar(t('modalNotifyText.language.add.error'), { variant: 'error' });
-  //   }
-  // };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {

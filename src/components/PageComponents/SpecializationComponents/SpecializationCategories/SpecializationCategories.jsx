@@ -89,12 +89,19 @@ const SpecializationCategories = () => {
   };
 
   const handlerChangeMainSpecialization = async () => {
-    if (specializations?.length === 0 || !activeSpecialization) return;
-    await updateSpecializationAsMainById(
-      { ...activeSpecialization, main: true },
-      { skip: !activeSpecialization }
-    ).unwrap();
-    dispatch(setMainSpecializations(activeSpecialization));
+    try {
+      if (specializations?.length === 0 || !activeSpecialization) return;
+      await updateSpecializationAsMainById(
+        { ...activeSpecialization, main: true },
+        { skip: !activeSpecialization }
+      ).unwrap();
+      dispatch(setMainSpecializations(activeSpecialization));
+      enqueueSnackbar(t('modalNotifyText.specialization.change.success', { name: activeSpecialization.name }), {
+        variant: 'success',
+      });
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.specialization.change.error'), { variant: 'error' });
+    }
   };
   const handlerDeleteSpecialization = async (id) => {
     const findMainSpecialization = specializations.find((spec) => spec.main);
@@ -103,6 +110,10 @@ const SpecializationCategories = () => {
       await deleteSpecialization(id).unwrap();
       enqueueSnackbar(t('modalNotifyText.specialization.delete.success', { name: activeSpecialization.name }), {
         variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
       });
       dispatch(setActiveSpecialization(null));
 

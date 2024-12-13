@@ -809,6 +809,24 @@ export const en = {
           success: '{{name}} was deleted successfully',
           error: 'Something went wrong',
         },
+        change: {
+          success: '{{name}} set as the main specialization successfully',
+          error: 'Failed to set {{name}} as the main specialization',
+        },
+      },
+      interview: {
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
       },
     },
   },

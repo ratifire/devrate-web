@@ -39,7 +39,13 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   const handleDeleteFeature = async () => {
     try {
       await deleteWorkExperienceMutation(id).unwrap();
-      enqueueSnackbar(t('modalNotifyText.workExperience.delete.success'), { variant: 'success' });
+      enqueueSnackbar(t('modalNotifyText.workExperience.delete.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.workExperience.delete.error'), { variant: 'error' });
     }

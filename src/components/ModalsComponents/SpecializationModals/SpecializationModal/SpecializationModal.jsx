@@ -98,7 +98,13 @@ const SpecializationModal = () => {
     try {
       await updateSpecializationById({ id, name }).unwrap();
       dispatch(setActiveSpecialization({ ...activeSpecialization, id, name }));
-      enqueueSnackbar(t('modalNotifyText.specialization.edit.success', { name }), { variant: 'success' });
+      enqueueSnackbar(t('modalNotifyText.specialization.edit.success', { name }), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.specialization.edit.error'), { variant: 'error' });
     }

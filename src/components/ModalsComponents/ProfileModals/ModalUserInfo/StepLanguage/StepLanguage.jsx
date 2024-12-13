@@ -60,16 +60,11 @@ const StepLanguage = () => {
       enqueueSnackbar(t('modalNotifyText.language.add.error'), { variant: 'error' });
     }
   };
-  const languageDeleteHandler = async (languageToDelete) => {
-    try {
-      await formik.setFieldValue(
-        'languages',
-        formik.values.languages.filter((item) => item.name !== languageToDelete)
-      );
-      enqueueSnackbar(t('modalNotifyText.language.delete.success'), { variant: 'success' });
-    } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.language.delete.error'), { variant: 'error' });
-    }
+  const languageDeleteHandler = (languageToDelete) => {
+    formik.setFieldValue(
+      'languages',
+      formik.values.languages.filter((item) => item.name !== languageToDelete)
+    );
   };
   if (isErrorGetLanguage || isErrorPostLanguage) {
     return <ErrorComponent />;
