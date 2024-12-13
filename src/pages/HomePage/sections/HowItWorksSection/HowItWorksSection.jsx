@@ -3,15 +3,20 @@ import img1 from '../../assets/img1.png';
 import img2 from '../../assets/img2n.png';
 import img4 from '../../assets/img4.png';
 import styles from './HowItWorksSection.module.scss';
+import Swiper from './HowItWorksSwiper/HowItWorksSwiper';
 
 const howItWorksSection = () => {
   return (
     <section className={styles.bg} id='howItWorks'>
       <div className='container'>
+        <h2 className={`${styles.titleMobile} ${styles.mainTitle}`}>
+          How It <span>Works?</span>
+        </h2>
         <div className={styles.works}>
+          <Swiper />
           <div className={styles.works__block}>
             <div className={`${styles.works__left} ${styles.left1}`}>
-              <h2 className={styles.works__title}>
+              <h2 className={styles.mainTitle}>
                 How It <span>Works?</span>
               </h2>
               <div className={`${styles.card__wrapper} ${styles.m1}`}>

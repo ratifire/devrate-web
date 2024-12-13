@@ -25,7 +25,11 @@
     z-index: 1;
 
     @include tablet {
-      padding-bottom: 16px;
+      padding-bottom: 60px;
+    }
+
+    @include phone {
+      padding-bottom: 48px;
     }
 
     &::before {
@@ -55,6 +59,36 @@
 
     & > div {
       height: 100%;
+    }
+  }
+
+  &Text {
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &TextTablet {
+    display: none;
+
+    @include tablet {
+      display: block;
+    }
+
+    @include phone {
+      display: none;
+    }
+  }
+
+  &TextMobile {
+    display: none;
+
+    @include tablet {
+      display: none;
+    }
+
+    @include phone {
+      display: block;
     }
   }
 
@@ -242,10 +276,14 @@
 
   @include desktop {
     .registration,
-    .login,
-    .join {
+    .login {
       display: flex;
       align-items: center;
+    }
+
+    .registration,
+    .login,
+    .join {
       font-size: 18px !important;
       line-height: 150% !important;
       padding: 12px 0 !important;

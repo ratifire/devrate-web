@@ -59,10 +59,19 @@ const HeroSection = () => {
           <div className={styles.hero__right}>
             <div className={styles.heroWrapper}>
               <div>
-                <p>
+                <p className={styles.heroText}>
                   Master your interview skills with real-world practice alongside experts and peers. Get personalized
                   feedback, objective evaluations, and in-depth insights to confidently prepare for success in any
                   interview!
+                </p>
+                <p className={styles.heroTextTablet}>
+                  Master your interview skills with real-world practice alongside experts and peers. Get personalized
+                  feedback, objective evaluations, and in-depth insights to confidently prepare for success in any
+                  interview!
+                </p>
+                <p className={styles.heroTextMobile}>
+                  Master your interview skills, get personalized feedback, objective evaluations to confidently prepare
+                  for success in any interview!
                 </p>
               </div>
 
