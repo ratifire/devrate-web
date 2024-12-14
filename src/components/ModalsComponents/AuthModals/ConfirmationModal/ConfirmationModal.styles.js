@@ -26,11 +26,17 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+    },
   }),
   mainText: (theme) => ({
     fontFamily: 'Open Sans, sans-serif',
     fontSize: '18px',
     color: theme.palette.neutral[100],
+    '@media (max-width: 1480px)': {
+      fontSize: '16px',
+    },
   }),
   userEmail: (theme) => ({
     color: theme.palette.action.active,
@@ -42,11 +48,17 @@ const styles = {
   wrapperBtn: (theme) => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+    },
   }),
   spamCheckContainer: (theme) => ({
     marginBottom: theme.spacing(4),
     color: theme.palette.text.secondary,
     textAlign: 'center',
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+    },
   }),
   turnBackText: (theme) => ({
     marginRight: theme.spacing(2),
@@ -57,6 +69,9 @@ const styles = {
     gap: 2,
     alignItems: 'center',
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+    },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: theme.palette.neutral[100],
@@ -67,10 +82,16 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginTop: '16px',
+    },
   }),
   btn: (theme) => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginTop: '16px',
+    },
   }),
   confirmationLink: (theme) => ({
     textDecoration: 'underline',
