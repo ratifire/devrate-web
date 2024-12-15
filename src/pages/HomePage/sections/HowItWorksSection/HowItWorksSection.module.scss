@@ -326,7 +326,8 @@
 
       @include tablet {
         max-width: 277px;
-        bottom: 0;
+        height: 380px;
+        top: 25px;
         left: 0;
       }
     }

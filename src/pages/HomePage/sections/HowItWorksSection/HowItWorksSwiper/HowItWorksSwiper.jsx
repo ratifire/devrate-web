@@ -12,8 +12,8 @@ const HowItWorksSwiper = () => {
   return (
     <Swiper
       autoHeight
+      centeredSlides
       navigation
-      className={styles.sliderContainer}
       modules={[Pagination]}
       pagination={{
         clickable: true,
