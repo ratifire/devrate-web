@@ -3,12 +3,23 @@
 .about {
   display: flex;
   align-items: center;
-  padding: 24px;
+
+  @include tablet-large {
+    margin-top: 100px;
+  }
+
+  @include phone {
+    margin-top: 80px;
+  }
 
   &__bg {
     padding-bottom: 136px;
     position: relative;
     z-index: 10;
+
+    @include tablet-large {
+      padding-bottom: 0;
+    }
 
     @include phone {
       padding-bottom: 0;
@@ -25,6 +36,21 @@
       background-position: top right;
       background-size: cover;
       width: 100%;
+      height: 100%;
+
+      @include desktop-macbook {
+        top: -200px;
+      }
+
+      @include tablet {
+        background-image: url('../../assets/BackgroundImages/Background_2-01.png');
+      }
+
+      @include phone {
+        background-image: url('../../assets/BackgroundImages/Background_2-01.png');
+        background-size: 100% 600px;
+        top: 0;
+      }
     }
 
     &::after {
@@ -33,8 +59,19 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 100px;
+      height: 100%;
+      background-repeat: no-repeat;
       background-image: linear-gradient(0deg, #161616 10%, rgb(0 0 0 / 0%) 50%);
+
+      @include tablet {
+        background-image: none;
+      }
+
+      @include phone {
+        background-image: url('../../assets/BackgroundImages/Background_3-01.png');
+        background-size: 100% 600px;
+        top: 600px;
+      }
     }
   }
 }
@@ -44,7 +81,6 @@
   text-align: center;
   font-size: 48px;
   font-weight: 400;
-  line-height: 72px;
   letter-spacing: 0.01em;
   color: #fff;
   text-shadow: 2px 2px 4px rgb(29 29 29 / 25%);
@@ -52,19 +88,17 @@
   position: relative;
   z-index: 10;
 
-  @include desktop {
-    text-align: center;
+  @include desktop-macbook {
     font-size: 30px;
-    line-height: 2px;
   }
 
   @include tablet {
-    align-self: center;
-    font-size: 32px;
+    text-align: start;
+    font-size: 24px;
+    margin-bottom: 24px;
   }
 
   @include phone {
-    align-self: flex-start;
     font-size: 24px;
     margin-bottom: 18px;
   }
@@ -73,26 +107,26 @@
     margin-left: 0.3rem;
     color: #b78af7;
 
-    @include phone {
-      font-size: 24px;
+    @include tablet {
       color: #ee7538;
     }
   }
 }
 
 .backgroundImg {
-  width: 268px;
-  height: 320px;
-  margin: 0 auto;
-  background-image: url('../../assets/aboutUsImg.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  position: relative;
+  display: none;
 
-  @media screen and (width >= 768px) {
-    background-image: none;
-    display: none;
+  @include phone {
+    display: block;
+    width: 268px;
+    height: 320px;
+    margin: 0 auto;
+    background-image: url('../../assets/aboutUsImg.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 10;
   }
 }
 
@@ -114,7 +148,6 @@
   @include desktop {
     background-size: 278px 332px;
     grid-gap: 74px 12px;
-    justify-content: space-between;
   }
 
   @include tablet-large {
@@ -129,22 +162,21 @@
     justify-content: center;
     position: relative;
     z-index: 10;
+    background-image: none;
   }
 
   @include tablet {
     align-self: center;
     justify-content: space-between;
     display: grid;
-    grid-template: auto / minmax(300px, 571px) minmax(100px, 200px) minmax(300px, 571px);
+    grid-template: auto / minmax(328px, 571px) minmax(20px, 100px) minmax(328px, 571px);
     grid-template-areas:
       'topLeft . topRight'
       'botLeft . botRight';
     grid-gap: 80px 2px;
-    background-image: url('../../assets/aboutUsImg.svg');
-    background-repeat: no-repeat;
-    background-position: center;
     position: relative;
     z-index: 10;
+    background-image: url('../../assets/aboutUsImg.svg');
   }
 
   @include phone {
@@ -171,6 +203,7 @@
       background-image: url('../../assets/BackgroundImages/fav2big.png');
       background-repeat: no-repeat;
       background-position: center;
+      background-size: 300px 330px;
     }
 
     @include tablet {
@@ -188,6 +221,7 @@
       background-image: url('../../assets/BackgroundImages/fav4big.png');
       background-repeat: no-repeat;
       background-position: center;
+      background-size: 230px 276px;
     }
 
     @include tablet {
@@ -265,7 +299,7 @@
       height: calc(100% - 10px);
     }
 
-    @include phone {
+    @include tablet {
       display: none;
     }
   }
@@ -278,6 +312,10 @@
 
       @include desktop-macbook {
         max-width: 452px;
+      }
+
+      @include tablet {
+        min-width: 327px;
       }
 
       @include phone {
@@ -436,8 +474,11 @@
       letter-spacing: 0;
     }
 
-    @include phone {
+    @include tablet {
       font-size: 16px;
+    }
+
+    @include phone {
       line-height: 1.5;
       letter-spacing: 0;
     }

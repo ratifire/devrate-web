@@ -9,9 +9,25 @@ html {
 .container {
   max-width: 1784px;
   width: 100%;
-  padding: 0 12px;
+  padding: 0 80px;
   margin: 0 auto;
   overflow: hidden;
+
+  @media screen and (width <= 1439px) {
+    padding: 0 80px;
+  }
+
+  @media screen and (width <= 1279px) {
+    padding: 0 60px;
+  }
+
+  @media screen and (width <= 991px) {
+    padding: 0 24px;
+  }
+
+  @media screen and (width <= 767px) {
+    padding: 0 24px;
+  }
 }
 
 .btn {

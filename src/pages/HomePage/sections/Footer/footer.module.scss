@@ -1,22 +1,35 @@
 @import '../../styles/scss/mediaBreakpoints.scss';
 
 .footer {
-  padding: 16px 0;
   position: relative;
-  z-index: 1;
+  z-index: 10;
+
+  @include phone {
+    padding-bottom: 72px;
+  }
 
   &::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -45px;
     right: 0;
     background-image: url('../../assets/BackgroundImages/Background_5-01_footer.svg');
     background-repeat: no-repeat;
-    background-position: top right;
+    background-position: top left;
     background-size: cover;
     width: 100%;
-    height: 657px;
+    height: 100%;
     z-index: -1;
+
+    @include desktop-macbook {
+      top: 0;
+      bottom: -10px;
+    }
+
+    @include tablet {
+      background-image: url('../../assets/BackgroundImages/Background_8-01_footer_mobile.svg');
+      bottom: 0;
+    }
   }
 
   &__container {
@@ -34,6 +47,10 @@
       justify-content: flex-start;
       grid-gap: 48px;
     }
+
+    @include tablet {
+      grid-gap: 72px;
+    }
   }
 
   &__content {
@@ -45,7 +62,6 @@
 
     @include desktop-macbook {
       max-width: 356px;
-      padding: 24px 0;
     }
 
     @include tablet-large {
@@ -262,6 +278,12 @@
   @include tablet {
     padding: 0;
     width: 100%;
+    background-color: transparent;
+  }
+
+  @include phone {
+    border: none;
+    background-color: transparent;
   }
 
   &__titleContainer {

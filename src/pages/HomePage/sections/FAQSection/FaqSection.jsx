@@ -18,18 +18,20 @@ const FaqSection = memo(() => {
 
   return (
     <section className={styles.faq__bg} id='faq'>
-      <div className={styles.faq}>
-        <h2 className={styles.faq__title}>FAQ</h2>
-        <div className={styles.faq__columns}>
-          <div className={styles.faq__column}>
-            {faqData.slice(0, 5).map((item) => (
-              <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
-            ))}
-          </div>
-          <div className={styles.faq__column}>
-            {faqData.slice(5, 10).map((item) => (
-              <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
-            ))}
+      <div className='container'>
+        <div className={styles.faq}>
+          <h2 className={styles.faq__title}>FAQ</h2>
+          <div className={styles.faq__columns}>
+            <div className={styles.faq__column}>
+              {faqData.slice(0, 5).map((item) => (
+                <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
+              ))}
+            </div>
+            <div className={styles.faq__column}>
+              {faqData.slice(5, 10).map((item) => (
+                <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
