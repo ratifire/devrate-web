@@ -73,7 +73,6 @@ const WorkExperienceModal = () => {
         enqueueSnackbar(t(messageKey), { variant: 'success' });
       }
 
-      // enqueueSnackbar(t(messageKey), { variant: 'success' });
       setResponsibilities([]);
       resetForm();
       handleClose();
