@@ -24,6 +24,7 @@
     @include desktop-macbook {
       top: 0;
       bottom: -10px;
+      height: 86%;
     }
 
     @include tablet {

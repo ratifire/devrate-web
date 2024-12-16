@@ -5,7 +5,6 @@
 }
 
 .bg {
-  padding-bottom: 12px;
   background-color: #161616;
   position: relative;
   z-index: 10;
@@ -13,15 +12,23 @@
   &::before {
     content: '';
     display: block;
-    width: 100%;
-    height: 1040px;
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     right: 0;
     background-image: url('../../assets/BackgroundImages/Background_2-01_howitworks.svg');
     background-repeat: no-repeat;
-    background-position: bottom right;
+    background-position: top right;
     background-size: cover;
+    width: 100%;
+    height: 44%;
+
+    @include desktop-macbook {
+      height: 38%;
+    }
+
+    @include tablet-large {
+      height: 56%;
+    }
 
     @include tablet {
       display: none;
@@ -32,7 +39,6 @@
     content: '';
     display: block;
     width: 100%;
-    height: 100px;
     position: absolute;
     bottom: 940px;
     left: 0;

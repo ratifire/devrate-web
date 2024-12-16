@@ -3,8 +3,9 @@
 .about {
   display: flex;
   align-items: center;
+  padding-bottom: 100px;
 
-  @include tablet-large {
+  @include tablet {
     margin-top: 100px;
   }
 
@@ -38,16 +39,15 @@
       width: 100%;
       height: 100%;
 
-      @include desktop-macbook {
-        top: -200px;
-      }
-
       @include tablet {
         background-image: url('../../assets/BackgroundImages/Background_2-01.png');
+        background-position: bottom left;
+        top: 0;
       }
 
       @include phone {
         background-image: url('../../assets/BackgroundImages/Background_2-01.png');
+        background-position: top right;
         background-size: 100% 600px;
         top: 0;
       }
@@ -59,8 +59,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      background-repeat: no-repeat;
+      height: 100px;
       background-image: linear-gradient(0deg, #161616 10%, rgb(0 0 0 / 0%) 50%);
 
       @include tablet {
@@ -70,6 +69,7 @@
       @include phone {
         background-image: url('../../assets/BackgroundImages/Background_3-01.png');
         background-size: 100% 600px;
+        height: 600px;
         top: 600px;
       }
     }
@@ -176,7 +176,6 @@
     grid-gap: 80px 2px;
     position: relative;
     z-index: 10;
-    background-image: url('../../assets/aboutUsImg.svg');
   }
 
   @include phone {
@@ -299,7 +298,8 @@
       height: calc(100% - 10px);
     }
 
-    @include tablet {
+    @include tablet-large {
+      background-color: transparent;
       display: none;
     }
   }
