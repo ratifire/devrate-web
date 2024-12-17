@@ -68,7 +68,6 @@ export default [
       'react/jsx-boolean-value': ['error', 'never'],
       'no-console': 'warn',
       'react-hooks/exhaustive-deps': 'off',
-      'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },
