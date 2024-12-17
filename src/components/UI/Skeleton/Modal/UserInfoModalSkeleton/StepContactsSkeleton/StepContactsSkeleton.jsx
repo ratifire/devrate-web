@@ -1,5 +1,5 @@
 import { Skeleton } from '@mui/material';
-import { BtnSkeleton } from '../components';
+import { ButtonDef } from '../../../../../FormsComponents/Buttons';
 import { styles } from './StepContactsSkeleton.styles';
 
 const StepContactsSkeleton = () => {
@@ -11,7 +11,7 @@ const StepContactsSkeleton = () => {
       <Skeleton height={56} sx={styles.input} variant='rounded' />
       <Skeleton height={56} sx={styles.input} variant='rounded' />
       <Skeleton height={56} sx={styles.input} variant='rounded' />
-      <BtnSkeleton />
+      <ButtonDef loading useSkeleton={'working'} variant={'contained'} />
     </>
   );
 };

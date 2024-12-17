@@ -2,6 +2,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 import AchievementEditModal from '../../../../../../ModalsComponents/ProfileModals/AchievementModal/AchievementEditModal';
 import { useDeleteAchievementMutation } from '../../../../../../../redux/services/achievementsApiSlice.js';
 import DropdownMenu from '../../DropdownMenu';
@@ -11,6 +13,8 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteAchievement] = useDeleteAchievementMutation();
+  const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
@@ -28,9 +32,22 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
   const handleDeleteFeature = async () => {
     try {
       await deleteAchievement(achievement.id).unwrap();
+      enqueueSnackbar(t('modalNotifyText.achievement.delete.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to delete the achievement:', error);
+      enqueueSnackbar(t('modalNotifyText.achievement.delete.error'), {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
     }
     handleCloseMenu();
   };

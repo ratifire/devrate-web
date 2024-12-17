@@ -4,6 +4,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import { openModal } from '../../../../../../../redux/modal/modalSlice';
@@ -15,6 +16,8 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
+
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
@@ -34,7 +37,19 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   };
 
   const handleDeleteFeature = async () => {
-    await deleteWorkExperienceMutation(id).unwrap();
+    try {
+      await deleteWorkExperienceMutation(id).unwrap();
+      enqueueSnackbar(t('modalNotifyText.workExperience.delete.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.workExperience.delete.error'), { variant: 'error' });
+    }
   };
 
   return (

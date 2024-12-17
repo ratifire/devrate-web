@@ -26,7 +26,7 @@ PasswordVisibilityToggle.propTypes = {
   mouseDownHandler: PropTypes.func.isRequired,
   tooltip: PropTypes.bool.isRequired,
   textContent: PropTypes.string,
-  iconStyle: PropTypes.object,
+  iconStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
 PasswordVisibilityToggle.defaultProps = {

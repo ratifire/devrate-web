@@ -70,18 +70,18 @@ const BaseUserInfo = ({ id }) => {
       </Box>
       <Box sx={styles.buttons}>
         <ButtonDef
-          correctStyle={styles.contained}
-          handlerClick={handleWriteMessage}
           label={t('Write a message')}
+          sx={styles.contained}
           type={'button'}
           variant='contained'
+          onClick={handleWriteMessage}
         />
         <ButtonDef
-          correctStyle={styles.outlined}
-          handlerClick={handleBookInterview}
           label={t('Book an interview')}
+          sx={styles.outlined}
           type={'button'}
           variant='outlined'
+          onClick={handleBookInterview}
         />
       </Box>
     </Box>

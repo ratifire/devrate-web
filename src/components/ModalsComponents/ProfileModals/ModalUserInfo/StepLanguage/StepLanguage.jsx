@@ -1,6 +1,8 @@
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import {
   useGetLanguageUserQuery,
@@ -13,6 +15,9 @@ import { ErrorComponent } from '../../../../UI/Exceptions';
 import { StepLanguageSkeleton } from '../../../../UI/Skeleton';
 import { styles } from './StepLanguage.styles';
 const StepLanguage = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
+
   const { data: user } = useSelector(selectCurrentUser);
   const {
     data: dataGetLanguage,
@@ -21,12 +26,18 @@ const StepLanguage = () => {
   } = useGetLanguageUserQuery(user.id, { skip: !user });
   const [postLanguageUser, { data: dataPostLanguage, isError: isErrorPostLanguage, isLoading: isLoadingPostLanguage }] =
     usePostLanguageUserMutation(user.id, { skip: !user });
-  const onSubmit = (values) => {
-    postLanguageUser({
-      userId: user.id,
-      body: values.languages,
-    });
-    formik.resetForm();
+  const onSubmit = async (values) => {
+    try {
+      await postLanguageUser({
+        userId: user.id,
+        body: values.languages,
+      }).unwrap();
+      enqueueSnackbar(t('modalNotifyText.language.create.success'), { variant: 'success' });
+      formik.resetForm();
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.language.create.error'), { variant: 'error' });
+    }
   };
   const formik = useFormik({
     initialValues: {
@@ -35,14 +46,20 @@ const StepLanguage = () => {
     onSubmit,
     enableReinitialize: true,
   });
-  const createLang = (data) => {
-    const { selectedLanguage, selectedLevel } = data;
-    const newLang = {
-      name: selectedLanguage,
-      level: selectedLevel,
-      code: selectedLanguage,
-    };
-    formik.setFieldValue('languages', [...formik.values.languages, newLang]);
+  const createLang = async (data) => {
+    try {
+      const { selectedLanguage, selectedLevel } = data;
+      const newLang = {
+        name: selectedLanguage,
+        level: selectedLevel,
+        code: selectedLanguage,
+      };
+      await formik.setFieldValue('languages', [...formik.values.languages, newLang]);
+      enqueueSnackbar(t('modalNotifyText.language.add.success'), { variant: 'success' });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.language.add.error'), { variant: 'error' });
+    }
   };
   const languageDeleteHandler = (languageToDelete) => {
     formik.setFieldValue(
@@ -76,9 +93,10 @@ const StepLanguage = () => {
           </Box>
         </Box>
         <ButtonDef
-          correctStyle={styles.btn}
           disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-          label='profile.modal.btn'
+          label={t('profile.modal.btn')}
+          loading={isLoadingPostLanguage}
+          sx={styles.btn}
           type='submit'
           variant='contained'
         />

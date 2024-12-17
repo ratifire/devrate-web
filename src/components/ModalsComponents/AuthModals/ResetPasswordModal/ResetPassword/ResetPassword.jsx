@@ -215,9 +215,10 @@ const ResetPassword = () => {
             />
             <Box sx={styles.wrapperBtn}>
               <ButtonDef
-                correctStyle={styles.submitBtn}
                 disabled={!formik.isValid || !formik.dirty}
                 label={t('modal.resetPassword.btn_change_password')}
+                loading={formik.isSubmitting}
+                sx={styles.submitBtn}
                 type='submit'
                 variant='contained'
               />

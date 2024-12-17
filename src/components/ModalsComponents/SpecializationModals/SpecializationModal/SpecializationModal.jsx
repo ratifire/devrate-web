@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
@@ -22,7 +23,7 @@ import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/i
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
-import { ErrorComponent, LoaderComponent } from '../../../UI/Exceptions';
+import { ErrorComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
 
@@ -33,6 +34,7 @@ const SpecializationModal = () => {
   });
   const { skills, specializationNameError } = state;
   const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
@@ -79,7 +81,6 @@ const SpecializationModal = () => {
     const value = e.target.value;
     formik.setFieldValue('mastery', value);
   };
-
   const handleChangeSpecialization = (value) => {
     const isSpecialization = mySpecialization.some((spec) => spec.name === value);
 
@@ -94,8 +95,20 @@ const SpecializationModal = () => {
   };
 
   const updateSpecialization = async ({ id, name }) => {
-    await updateSpecializationById({ id, name }).unwrap();
-    dispatch(setActiveSpecialization({ ...activeSpecialization, id, name }));
+    try {
+      await updateSpecializationById({ id, name }).unwrap();
+      dispatch(setActiveSpecialization({ ...activeSpecialization, id, name }));
+      enqueueSnackbar(t('modalNotifyText.specialization.edit.success', { name }), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.specialization.edit.error'), { variant: 'error' });
+    }
   };
 
   const onSubmit = async (values, { resetForm }) => {
@@ -125,7 +138,7 @@ const SpecializationModal = () => {
             name: resp.level,
             softSkillMark: resp.softSkillMark,
             hardSkillMark: resp.hardSkillMark,
-          });
+          }).unwrap();
           dispatch(setActiveSpecialization({ ...activeSpecialization, mastery: values.mastery }));
         }
 
@@ -146,11 +159,14 @@ const SpecializationModal = () => {
         name: resp.level,
         softSkillMark: resp.softSkillMark,
         hardSkillMark: resp.hardSkillMark,
-      });
+      }).unwrap();
       await addSkills({ id: resp.id, skills });
+      enqueueSnackbar(t('modalNotifyText.specialization.create.success', { values: values.name }), {
+        variant: 'success',
+      });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.warn('Failed to create Specialization', error);
+      enqueueSnackbar(t('modalNotifyText.specialization.create.error'), { variant: 'error' });
     } finally {
       resetForm();
       handleClose();
@@ -187,10 +203,6 @@ const SpecializationModal = () => {
   const deleteSkillsHandler = (skillToDelete) => {
     setState({ skills: skills.filter((item) => item.name !== skillToDelete) });
   };
-
-  if (isLoading) {
-    return <LoaderComponent />;
-  }
 
   if (isError) {
     return <ErrorComponent />;
@@ -266,9 +278,10 @@ const SpecializationModal = () => {
             </>
           )}
           <ButtonDef
-            correctStyle={styles.specializationBtn}
             disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
             label={t('profile.modal.btn')}
+            loading={isLoading}
+            sx={styles.specializationBtn}
             type='submit'
             variant='contained'
           />
