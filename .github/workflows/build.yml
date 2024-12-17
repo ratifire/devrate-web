@@ -26,10 +26,6 @@ jobs:
     name: Build and Push
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment || 'dev_new' }}
-    strategy:
-      matrix:
-        node-version: [ 20.11.0 ]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v4
@@ -39,13 +35,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      - name: Set environment variables with defaults
-        run: |
-          echo "REACT_APP_API_URL=${{ vars.REACT_APP_API_URL }}" >> .env
-          echo "REACT_APP_WS_URL=${{ vars.REACT_APP_WS_URL }}" >> .env
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm ci
-      - run: npm run build --if-present
+      - name: Build React with Express (server-build)
+        run: |
+          VITE_API_URL=${{ vars.REACT_APP_API_URL }} \
+          VITE_WS_URL=${{ vars.REACT_APP_WS_URL }} \
+          npm run server-build
 
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
