@@ -40,7 +40,7 @@ const UserProfilePage = () => {
   }
 
   return (
-    <Suspense fallback={UserProfileSkeleton}>
+    <Suspense fallback={<UserProfileSkeleton />}>
       <UserProfileTemplate>
         <MemoizedProfileHeader />
         <Container maxWidth='xl' sx={styles.container}>

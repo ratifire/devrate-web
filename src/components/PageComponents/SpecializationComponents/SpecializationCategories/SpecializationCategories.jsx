@@ -89,19 +89,32 @@ const SpecializationCategories = () => {
   };
 
   const handlerChangeMainSpecialization = async () => {
-    if (specializations?.length === 0 || !activeSpecialization) return;
-    await updateSpecializationAsMainById(
-      { ...activeSpecialization, main: true },
-      { skip: !activeSpecialization }
-    ).unwrap();
-    dispatch(setMainSpecializations(activeSpecialization));
+    try {
+      if (specializations?.length === 0 || !activeSpecialization) return;
+      await updateSpecializationAsMainById(
+        { ...activeSpecialization, main: true },
+        { skip: !activeSpecialization }
+      ).unwrap();
+      dispatch(setMainSpecializations(activeSpecialization));
+      enqueueSnackbar(t('modalNotifyText.specialization.change.success', { name: activeSpecialization.name }), {
+        variant: 'success',
+      });
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.specialization.change.error'), { variant: 'error' });
+    }
   };
-
   const handlerDeleteSpecialization = async (id) => {
     const findMainSpecialization = specializations.find((spec) => spec.main);
 
     try {
       await deleteSpecialization(id).unwrap();
+      enqueueSnackbar(t('modalNotifyText.specialization.delete.success', { name: activeSpecialization.name }), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
       dispatch(setActiveSpecialization(null));
 
       if (findMainSpecialization?.id === id) {
@@ -112,13 +125,7 @@ const SpecializationCategories = () => {
       }
     } catch (err) {
       if (err.status === 409) {
-        enqueueSnackbar(t('specialization.errorDeleteSpec'), {
-          variant: 'error',
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'center',
-          },
-        });
+        enqueueSnackbar(t('specialization.errorDeleteSpec'), { variant: 'error' });
       }
     } finally {
       handleCloseMenu(id);
@@ -159,12 +166,12 @@ const SpecializationCategories = () => {
           {t('specialization.specialization_title')}
         </Typography>
         <ButtonDef
-          correctStyle={styles.make_main_btn}
           disabled={specializations?.length === 0}
-          handlerClick={handlerChangeMainSpecialization}
-          label='specialization.specialization_btn_make_main'
+          label={t('specialization.specialization_btn_make_main')}
+          sx={styles.make_main_btn}
           type='button'
           variant='outlined'
+          onClick={handlerChangeMainSpecialization}
         />
       </Box>
       <Box sx={styles.specialization_right_box}>
