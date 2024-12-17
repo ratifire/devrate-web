@@ -8,7 +8,6 @@ export const styles = {
     flex: '1 0 100%',
     marginRight: theme.spacing(0),
     marginBottom: theme.spacing(1),
-
     '@media (min-width: 600px)': {
       flex: '1 0 132px',
       marginRight: theme.spacing(3),
