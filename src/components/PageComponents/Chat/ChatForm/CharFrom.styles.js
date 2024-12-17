@@ -27,7 +27,7 @@ export const styles = {
       fontSize: '18px',
     },
   }),
-  btnIconScroll: (theme) => ({
+  btnIconScroll: {
     position: 'sticky',
     width: '44px',
     height: '44px',
@@ -35,16 +35,18 @@ export const styles = {
     left: 'auto',
     marginLeft: 'auto',
     zIndex: 10,
-    color: '#CEB0FA',
+    color: '#FFFFFF',
     borderRadius: 1,
-    backgroundColor: theme.palette.iconBtn.btnClose.hoverColor,
+    backgroundColor: '#8133F1',
+    transition: 'all .2s ease-in-out',
     ':hover': {
-      backgroundColor: theme.palette.iconBtn.btnClose.hoverColor,
+      transform: 'scale(1.05)',
+      backgroundColor: '#444446',
     },
     svg: {
       fontSize: '18px',
     },
-  }),
+  },
   chatWrapper: {
     position: 'relative',
     display: 'flex',
@@ -81,21 +83,19 @@ export const styles = {
     },
     ' textarea.MuiOutlinedInput-input': {
       '&::-webkit-scrollbar': {
-        width: 10,
+        width: 0,
       },
-      '&::-webkit-scrollbar-track': (theme) => ({
-        backgroundColor: theme.palette.scroll.scrollWrapp.backgroundColor,
-        borderRadius: 8,
-      }),
-      '&::-webkit-scrollbar-thumb': (theme) => ({
-        borderRadius: 6,
-        backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
-      }),
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: 'transparent',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: 'transparent',
+      },
     },
   },
   btnSend: {
     position: 'absolute',
-    top: 'calc(50% - 12px)',
+    top: '24px',
     right: '28px',
     height: '24px',
     width: '24px',

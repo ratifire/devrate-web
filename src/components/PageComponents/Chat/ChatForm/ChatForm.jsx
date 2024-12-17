@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, IconButton, TextField, Typography } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import UserAvatar from '../../../UI/UserAvatar';
@@ -8,6 +8,7 @@ import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSl
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { ReactComponent as Send } from '../../../../assets/icons/send.svg';
 import { array } from '../../../../utils/constants/testMessages';
+import { closeChat } from '../../../../redux/chat/chatSlice';
 import { styles } from './CharFrom.styles';
 import ChatMessage from './ChatMessage';
 
@@ -17,7 +18,10 @@ const ChatForm = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [isUserAtBottom, setIsUserAtBottom] = useState(true);
   const [textFieldHeight, setTextFieldHeight] = useState(23); // Default minHeight
-
+  const dispatch = useDispatch();
+  const handleClose = () => {
+    dispatch(closeChat({ chatElement: 'chat' }));
+  };
   const { data: info } = useSelector(selectCurrentUser);
   const { id, firstName, lastName } = info;
   const { data } = useGetAvatarUserQuery(id);
@@ -83,7 +87,7 @@ const ChatForm = () => {
           userName={`${firstName} ${lastName}`}
         />
         <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
-        <IconButton aria-label='Close Сhat' sx={styles.btnIcon} type='button'>
+        <IconButton aria-label='Close Сhat' sx={styles.btnIcon} type='button' onClick={handleClose}>
           <CloseIcon />
         </IconButton>
       </Box>
@@ -91,7 +95,7 @@ const ChatForm = () => {
         {array?.map((item) => (
           <ChatMessage key={item.id} read={item.read} text={item.text} time={item.time} variant={item.type} />
         ))}
-        {showScrollButton && ( // Показувати кнопку, якщо showScrollButton === true
+        {showScrollButton && (
           <IconButton aria-label='Scroll to bottom' sx={styles.btnIconScroll} onClick={handleScrollToBottom}>
             <KeyboardArrowDownIcon />
           </IconButton>

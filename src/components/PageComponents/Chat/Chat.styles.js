@@ -20,4 +20,10 @@ export const styles = {
       fill: theme.palette.notifications.badge.fill,
     },
   }),
+  position: () => ({
+    position: 'fixed',
+    bottom: 0,
+    right: '100px',
+    zIndex: 100,
+  }),
 };
