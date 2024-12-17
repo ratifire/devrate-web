@@ -39,8 +39,8 @@ jobs:
 
       - name: Set environment variables with defaults
         run: |
-          echo "REACT_APP_API_URL=${{ vars.REACT_APP_API_URL }}" >> .env
-          echo "REACT_APP_WS_URL=${{ vars.REACT_APP_WS_URL }}" >> .env
+          echo "VITE_API_URL=${{ vars.REACT_APP_API_URL }}" >> .env
+          echo "VITE_WS_URL=${{ vars.REACT_APP_WS_URL }}" >> .env
 
       - run: npm ci
       - run: npm run build --if-present
