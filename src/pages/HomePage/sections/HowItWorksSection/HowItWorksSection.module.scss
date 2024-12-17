@@ -23,11 +23,23 @@
     height: 44%;
 
     @include desktop-macbook {
-      height: 38%;
+      height: 40%;
     }
 
     @include tablet-large {
+      height: 54%;
+    }
+
+    @media screen and (width <= 1170px) {
       height: 56%;
+    }
+
+    @media screen and (width <= 1080px) {
+      height: 58%;
+    }
+
+    @media screen and (width <= 1010px) {
+      height: 60%;
     }
 
     @include tablet {
@@ -115,6 +127,10 @@
   @include desktop {
     font-size: 30px;
     margin-bottom: 57px;
+  }
+
+  @include tablet {
+    font-size: 24px;
   }
 }
 
