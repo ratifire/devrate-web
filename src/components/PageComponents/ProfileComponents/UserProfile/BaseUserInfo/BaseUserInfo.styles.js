@@ -53,7 +53,6 @@ export const styles = {
     gridGap: theme.spacing(4),
     marginTop: '36px',
   }),
-
   contained: (theme) => ({
     display: 'block',
     paddingY: '10px',
@@ -64,12 +63,10 @@ export const styles = {
     '&::first-letter': {
       textTransform: 'uppercase',
     },
-
     '&:hover': {
       backgroundColor: theme.palette.iconBtn.writeMasssge.hover,
     },
   }),
-
   outlined: (theme) => ({
     display: 'block',
     paddingY: '10px',
@@ -81,7 +78,6 @@ export const styles = {
     '&::first-letter': {
       textTransform: 'uppercase',
     },
-
     '&:hover': {
       backgroundColor: theme.palette.iconBtn.bookInterview.hover.backgroundColor,
       borderColor: theme.palette.iconBtn.bookInterview.hover.borderColor,
