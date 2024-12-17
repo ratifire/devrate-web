@@ -76,7 +76,7 @@ if (!fs.existsSync(packageFilePath)) {
 
 // Step 6: Install server dependencies
 log('Installing server dependencies...');
-execSync('npm install', { cwd: serverBuildPath, stdio: 'inherit' });
+execSync('npm install --production', { cwd: serverBuildPath, stdio: 'inherit' });
 
 // Step 7: Remove original React build directory
 log('Removing original React build directory...');
