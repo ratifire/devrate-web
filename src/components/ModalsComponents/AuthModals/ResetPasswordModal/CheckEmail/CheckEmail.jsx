@@ -69,12 +69,13 @@ const CheckEmail = () => {
         />
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
-            correctStyle={styles.submitBtn}
             disabled={!formik.values.email || (formik.touched.email && Boolean(formik.errors.email))}
-            handlerClick={formik.handleSubmit}
-            label='modal.checkEmailResetPassword.btn_send_letter'
+            label={t('modal.checkEmailResetPassword.btn_send_letter')}
+            loading={formik.isSubmitting}
+            sx={styles.submitBtn}
             type='submit'
             variant='contained'
+            onClick={formik.handleSubmit}
           />
         </Box>
       </form>

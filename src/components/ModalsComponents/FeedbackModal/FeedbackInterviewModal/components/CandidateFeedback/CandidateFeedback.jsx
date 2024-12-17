@@ -13,7 +13,7 @@ import { styles } from './CandidateFeedback.styles';
 const CandidateFeedback = () => {
   const [activeStep, setActiveStep] = useState(FIRST_STEP);
   const { t } = useTranslation();
-  const { formik, isError, interviewStartTime, surname, name, status } = useFeedbackForm();
+  const { formik, isError, interviewStartTime, surname, name, status, isLoading } = useFeedbackForm();
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
   const handleNextStep = () => setActiveStep(LAST_STEP);
@@ -33,27 +33,28 @@ const CandidateFeedback = () => {
           <SliderComponent formik={formik} slide={activeStep} />
           <Box sx={styles.sendBox}>
             <ButtonDef
-              correctStyle={styles.btn}
               disabled={activeStep === 1}
-              handlerClick={handlePrevStep}
               label={t('modal.interview.btnBack')}
+              sx={styles.btn}
               type={'button'}
               variant={'contained'}
+              onClick={handlePrevStep}
             />
             {activeStep === FIRST_STEP && (
               <ButtonDef
-                correctStyle={styles.btn}
-                handlerClick={handleNextStep}
                 label={t('modal.interview.btnNext')}
+                sx={styles.btn}
                 type={'button'}
                 variant={'contained'}
+                onClick={handleNextStep}
               />
             )}
             {activeStep === LAST_STEP && (
               <ButtonDef
-                correctStyle={styles.btn}
                 disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
                 label={t('modal.interview.btnSend')}
+                loading={isLoading}
+                sx={styles.btn}
                 type={'submit'}
                 variant={'contained'}
               />

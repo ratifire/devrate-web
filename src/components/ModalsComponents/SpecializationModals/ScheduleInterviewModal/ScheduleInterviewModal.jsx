@@ -6,6 +6,7 @@ import { Box, Typography } from '@mui/material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
+import { useSnackbar } from 'notistack';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
@@ -30,6 +31,7 @@ const ScheduleInterviewModal = () => {
   const isOpen = useSelector((state) => state.modal.scheduleInterview);
   const [checked, setChecked] = useState([]);
   const { masteryId, userId } = useGetMastery();
+  const { enqueueSnackbar } = useSnackbar();
 
   const shouldUpdate = useRef(false);
 
@@ -82,6 +84,13 @@ const ScheduleInterviewModal = () => {
         role,
         availableDates: checked,
       });
+      enqueueSnackbar(t('modalNotifyText.interview.edit.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
     } else {
       await createInterviewRequest({
         userId: userId,
@@ -89,6 +98,7 @@ const ScheduleInterviewModal = () => {
         role,
         availableDates: checked,
       });
+      enqueueSnackbar(t('modalNotifyText.interview.create.success'), { variant: 'success' });
     }
     handleClose();
   };
@@ -155,8 +165,8 @@ const ScheduleInterviewModal = () => {
           <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
           <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
           <ButtonDef
-            correctStyle={styles.btn}
             label={t('specialization.modal.scheduleModal.schedule')}
+            sx={styles.btn}
             type='submit'
             variant='contained'
           />

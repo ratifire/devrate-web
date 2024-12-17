@@ -1,4 +1,6 @@
 import { Typography, CircularProgress } from '@mui/material';
+import React from 'react';
+import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,21 +41,9 @@ const FeedbackProjectModal = () => {
     });
 
     if (result.error) {
-      enqueueSnackbar(t('modal.feedbackProjectModal.error_429'), {
-        variant: 'error',
-        anchorOrigin: {
-          vertical: 'top',
-          horizontal: 'center',
-        },
-      });
+      enqueueSnackbar(t('modal.feedbackProjectModal.error_429'), { variant: 'error' });
     } else {
-      enqueueSnackbar(t('modal.feedbackProjectModal.success'), {
-        variant: 'success',
-        anchorOrigin: {
-          vertical: 'top',
-          horizontal: 'center',
-        },
-      });
+      enqueueSnackbar(t('modal.feedbackProjectModal.success'), { variant: 'success' });
     }
   };
 
@@ -94,14 +84,13 @@ const FeedbackProjectModal = () => {
 
         <ButtonDef
           fullWidth
-          correctStyle={styles.btn}
           disabled={!formik.isValid || !formik.dirty || isLoading}
           label={t('modal.feedbackProjectModal.button')}
+          loading={isLoading}
+          sx={styles.btn}
           type='submit'
           variant='contained'
-        >
-          {isLoading ? <CircularProgress size={24} /> : t('modal.feedbackProjectModal.button')}
-        </ButtonDef>
+        />
       </form>
     </ModalLayoutProfile>
   );

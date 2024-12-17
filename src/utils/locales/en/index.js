@@ -67,6 +67,7 @@ export const en = {
         description: 'Description',
         startYear: 'Start year',
         endYear: 'End year',
+        now: 'Now',
       },
       checkEmailResetPassword: {
         title: 'Password Reset',
@@ -470,7 +471,7 @@ export const en = {
           errorRequired: 'This is a required field',
           errorLength: 'Skill name is max 100 characters long',
           errorQuantity: 'You can add up to 20 skills',
-          errorNotAvailable: 'Not available skills',
+          errorNoAvailable: 'No available skills',
         },
         interview: {
           income: 'An interview has been completed ',
@@ -666,6 +667,166 @@ export const en = {
       upd5: {
         title: 'Main Page Design Update',
         text: "We've refreshed the main page design with an improved color scheme, along with a feedback form and contact details for easier communication. Key information about the platform’s features and benefits has been added to enhance understanding of how it works. A new FAQ section has been created with answers to frequently asked questions for your convenience. Additionally, the visual design of the registration, login, and email confirmation forms has been updated. All these changes are aimed at enhancing your experience and comfort on our platform.",
+      },
+    },
+    modalNotifyText: {
+      workExperience: {
+        create: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      education: {
+        create: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      achievement: {
+        create: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      personal: {
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      avatar: {
+        create: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      contacts: {
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      language: {
+        add: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      hardSkills: {
+        add: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      softSkills: {
+        add: {
+          success: 'Added successfully',
+          error: 'Something went wrong',
+        },
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
+      },
+      specialization: {
+        create: {
+          success: 'Specialization {{values}} added successfully',
+          error: 'Failed to create Specialization',
+        },
+        edit: {
+          success: 'Edited successfully to {{name}}',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: '{{name}} was deleted successfully',
+          error: 'Something went wrong',
+        },
+        change: {
+          success: '{{name}} set as the main specialization successfully',
+          error: 'Failed to set {{name}} as the main specialization',
+        },
+      },
+      interview: {
+        create: {
+          success: 'Submitted successfully',
+          error: 'Something went wrong',
+        },
+        edit: {
+          success: 'Edited successfully',
+          error: 'Something went wrong',
+        },
+        delete: {
+          success: 'Deleted successfully',
+          error: 'Something went wrong',
+        },
       },
     },
   },

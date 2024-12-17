@@ -1,5 +1,5 @@
 import { Box, Skeleton } from '@mui/material';
-import { BtnSkeleton } from '../components';
+import { ButtonDef } from '../../../../../FormsComponents/Buttons';
 import { styles } from './StepPersonalSkeleton.styles';
 
 const StepPersonalSkeleton = () => {
@@ -13,9 +13,8 @@ const StepPersonalSkeleton = () => {
       </Box>
       <Skeleton height={56} sx={styles.input} variant='rounded' />
       <Skeleton height={171} sx={styles.lastElem} variant='rounded' />
-      <BtnSkeleton />
+      <ButtonDef loading useSkeleton={'working'} variant={'contained'} />
     </>
   );
 };
-
 export default StepPersonalSkeleton;

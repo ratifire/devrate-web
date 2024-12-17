@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import DropdownMenu from '../../DropdownMenu';
 import { useDeleteEducationByIdMutation } from '../../../../../../../redux/services/educationApiSlice';
 import { setEducationDataToEdit } from '../../../../../../../redux/user/education/educationSlice';
@@ -19,6 +20,7 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
   const { t } = useTranslation();
   const excerpt = useMemo(() => description.slice(0, LENGTH_TO_COLLAPSE), [description]);
   const needCollapse = description.length >= LENGTH_TO_COLLAPSE;
+  const { enqueueSnackbar } = useSnackbar();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -46,7 +48,25 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
   };
 
   const handleDeleteFeature = async () => {
-    await deleteEducationById(id).unwrap();
+    try {
+      await deleteEducationById(id).unwrap();
+      enqueueSnackbar(t('modalNotifyText.achievement.delete.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.achievement.delete.error'), {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+    }
+
     handleCloseMenu();
   };
 

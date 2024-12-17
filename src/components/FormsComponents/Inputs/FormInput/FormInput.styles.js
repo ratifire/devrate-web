@@ -2,6 +2,9 @@ export const styles = {
   inputWrapper: (theme) => ({
     width: '100%',
     marginBottom: theme.spacing(4),
+    '& .Mui-error': {
+      marginLeft: 0,
+    },
   }),
   input: (theme) => ({
     ' .MuiOutlinedInput-notchedOutline': {
