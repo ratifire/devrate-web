@@ -92,6 +92,7 @@ const EducationModal = () => {
       }
       resetForm();
       handleClose();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       if (dataToEdit) {
         enqueueSnackbar(t('modalNotifyText.education.edit.error'), {

@@ -46,6 +46,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
           horizontal: 'right',
         },
       });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.workExperience.delete.error'), { variant: 'error' });
     }

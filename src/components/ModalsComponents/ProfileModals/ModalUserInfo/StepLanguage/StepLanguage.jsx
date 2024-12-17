@@ -34,6 +34,7 @@ const StepLanguage = () => {
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.language.create.success'), { variant: 'success' });
       formik.resetForm();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.language.create.error'), { variant: 'error' });
     }
@@ -55,6 +56,7 @@ const StepLanguage = () => {
       };
       await formik.setFieldValue('languages', [...formik.values.languages, newLang]);
       enqueueSnackbar(t('modalNotifyText.language.add.success'), { variant: 'success' });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.language.add.error'), { variant: 'error' });
     }

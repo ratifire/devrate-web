@@ -99,6 +99,7 @@ const SpecializationCategories = () => {
       enqueueSnackbar(t('modalNotifyText.specialization.change.success', { name: activeSpecialization.name }), {
         variant: 'success',
       });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.specialization.change.error'), { variant: 'error' });
     }

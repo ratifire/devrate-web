@@ -39,6 +39,7 @@ const AchievementModal = () => {
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.achievement.create.success'), { variant: 'success' });
       handleClose();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.achievement.create.error'), { variant: 'error' });
     }

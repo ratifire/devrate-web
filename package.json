@@ -42,7 +42,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "react-app-rewired start",
     "server-build": "node build-script.js",
     "serve-build": "node ./server-build/server.js",
     "test": "react-app-rewired test",

@@ -57,6 +57,7 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
           horizontal: 'right',
         },
       });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.achievement.delete.error'), {
         variant: 'error',

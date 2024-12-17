@@ -76,6 +76,7 @@ const WorkExperienceModal = () => {
       setResponsibilities([]);
       resetForm();
       handleClose();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       const errorKey = modalData?.id
         ? 'modalNotifyText.workExperience.edit.error'

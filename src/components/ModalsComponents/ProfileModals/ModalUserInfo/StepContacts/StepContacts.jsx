@@ -59,6 +59,7 @@ const StepContacts = () => {
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.contacts.create.success'), { variant: 'success' });
       formik.resetForm();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.contacts.create.error'), { variant: 'error' });
     }
