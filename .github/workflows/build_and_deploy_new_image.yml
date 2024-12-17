@@ -46,8 +46,8 @@ jobs:
 
       - name: Build React with Express (server-build)
         run: |
-          REACT_APP_API_URL=${{ github.event.inputs.REACT_APP_API_URL }} \
-          REACT_APP_WS_URL=${{ github.event.inputs.REACT_APP_WS_URL }} \
+          REACT_APP_API_URL=${{ vars.REACT_APP_WS_URL }} \
+          REACT_APP_WS_URL=${{ vars.REACT_APP_WS_URL }} \
           npm run server-build
 
       - name: Configure AWS credentials
@@ -68,8 +68,8 @@ jobs:
           ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          REACT_APP_API_URL=${{ github.event.inputs.REACT_APP_API_URL }} \
-          REACT_APP_WS_URL=${{ github.event.inputs.REACT_APP_WS_URL }} \
+          REACT_APP_API_URL=${{ vars.REACT_APP_WS_URL }} \
+          REACT_APP_WS_URL=${{ vars.REACT_APP_WS_URL }} \
           # Build a docker container and push it to ECR so that it can be deployed to ECS.
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
