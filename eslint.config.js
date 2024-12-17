@@ -9,7 +9,7 @@ import prettier from 'eslint-plugin-prettier';
 import storybook from 'eslint-plugin-storybook';
 
 export default [
-  { ignores: ['node_modules/', 'build/', '.github', '**/.git', '**/.svn', '**/.hg', '**/.yml', '**/.tf'] },
+  { ignores: ['node_modules/', 'build/', '.github', '**/*.git', '**/*.svn', '**/*.hg', '**/*.yml', '**/*.tf'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
