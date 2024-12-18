@@ -1,6 +1,13 @@
+@import '../../styles/scss/mediaBreakpoints.scss';
+
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    font-size: 0;
+  }
 
   &__bg {
     top: 0;
@@ -13,11 +20,25 @@
     justify-content: space-between;
     padding: 20px 0;
     background-color: transparent;
+
+    @include tablet {
+      padding: 11.5px 0;
+    }
   }
 
   &__logo img {
     width: 214px;
     height: auto;
+
+    @include tablet-large {
+      width: 161px;
+      height: 36px;
+    }
+
+    @include tablet {
+      width: 142px;
+      height: 33px;
+    }
   }
 
   &__nav {
@@ -30,14 +51,20 @@
       justify-content: space-between;
       list-style: none;
 
+      @include tablet {
+        display: none;
+      }
+
       a {
         display: block;
         color: #fff;
         text-decoration: none;
         font-family: 'Open Sans', sans-serif;
+        font-size: 24px;
         font-weight: 700;
         margin-right: 24px;
         transition: all 0.3s linear;
+        line-height: 136%;
 
         &:hover {
           color: #b78af7;
@@ -46,6 +73,10 @@
 
         &:active {
           color: #8133f1;
+        }
+
+        @include desktop {
+          font-size: 18px;
         }
       }
     }
@@ -68,6 +99,12 @@
           border-radius: 4px;
           transform: scale(1.1);
         }
+      }
+    }
+
+    @include tablet {
+      &__dn {
+        display: none;
       }
     }
 

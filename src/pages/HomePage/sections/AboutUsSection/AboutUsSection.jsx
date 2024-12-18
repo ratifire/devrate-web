@@ -25,6 +25,8 @@ const AboutUsSection = () => {
               <h3 className={styles.botLeft}>Beginner-Friendly</h3>
               <p>Practice in a space where mistakes are part of the learning process, not failures.</p>
             </div>
+            <div className={styles.favBigRight} />
+            <div className={styles.favBigLeft} />
             <div className={`${styles.card} ${styles.botRight}`}>
               <h3 className={styles.botRight}>Detailed Feedback</h3>
               <p>
@@ -33,6 +35,7 @@ const AboutUsSection = () => {
               </p>
             </div>
           </div>
+          <div className={styles.backgroundImg} />
         </div>
       </div>
     </section>
