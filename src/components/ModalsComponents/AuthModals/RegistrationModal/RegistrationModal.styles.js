@@ -3,7 +3,21 @@ const styles = {
     fontFamily: 'Zen Dots, sans-serif',
     marginBottom: theme.spacing(4),
     color: theme.palette.text.primary,
+    '@media (max-width: 1280px)': {
+      marginBottom: '16px',
+    },
   }),
+  scrollBox: {
+    '@media (max-width: 1440px)': {
+      maxHeight: '287px',
+      overflowY: 'auto',
+      marginBottom: '24px',
+    },
+    '@media (max-width: 1280px)': {
+      maxHeight: '192px',
+      marginBottom: '16px',
+    },
+  },
   newsAgreementText: (theme) => ({
     fontWeight: 300,
     fontSize: '14px',
@@ -18,6 +32,10 @@ const styles = {
   wrapperBtn: {
     marginTop: '24px',
     marginBottom: '24px',
+    '@media( max-width: 1280px )': {
+      marginTop: '16px',
+      marginBottom: '16px',
+    },
   },
   policyTermsContainer: {
     textAlign: 'center',
