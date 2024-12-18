@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { bgFromString, checkContrastColor } from '../../../utils/helpers';
 import { styles } from './UserAvatar.styles';
 
-const UserAvatar = ({ userName, userFirstName, userLastName, src, size, correctStyle }) => {
+const UserAvatar = ({ userName, userFirstName, userLastName, src, size, correctStyle, radius }) => {
   const stringAvatar = (firstName, lastName) => {
     const BG_COLOR = bgFromString(`${userFirstName} ${userLastName}`);
     return {
       sx: [
         {
           backgroundColor: src ? 'transparent' : BG_COLOR,
-          borderRadius: styles[size].borderRadius,
+          borderRadius: styles[radius].borderRadius,
           width: styles[size].width,
           height: styles[size].height,
           fontSize: styles[size].fontSize,
@@ -31,7 +31,8 @@ UserAvatar.propTypes = {
   userName: PropTypes.string.isRequired,
   userFirstName: PropTypes.string.isRequired,
   userLastName: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['sm', 'l']).isRequired,
+  size: PropTypes.oneOf(['sm', 'm', 'l']).isRequired,
+  radius: PropTypes.oneOf(['square', 'circle']).isRequired,
   src: PropTypes.string,
   correctStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };

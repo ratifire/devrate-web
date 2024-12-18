@@ -1,12 +1,24 @@
+@import '../../styles/scss/mediaBreakpoints';
+
 .hero {
   display: flex;
   justify-content: space-between;
   align-items: center;
   grid-gap: 8px;
 
-  @media screen and (width <= 1280px) {
+  @include tablet-large {
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: flex-start;
+    grid-gap: 24px;
+  }
+
+  @include tablet {
+    align-items: center;
+    grid-gap: 0;
+  }
+
+  @include phone {
+    align-items: flex-start;
   }
 
   &__bg {
@@ -17,6 +29,14 @@
     align-items: center;
     position: relative;
     z-index: 1;
+
+    @include tablet {
+      padding-bottom: 60px;
+    }
+
+    @include phone {
+      padding-bottom: 48px;
+    }
 
     &::before {
       content: '';
@@ -48,43 +68,93 @@
     }
   }
 
+  &Text {
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &TextTablet {
+    display: none;
+
+    @include tablet {
+      display: block;
+    }
+
+    @include phone {
+      display: none;
+    }
+  }
+
+  &TextMobile {
+    display: none;
+
+    @include tablet {
+      display: none;
+    }
+
+    @include phone {
+      display: block;
+    }
+  }
+
   &__left {
     flex: 1 1 max(1017px);
 
-    @media screen and (width <= 1280px) {
-      flex: none;
-      padding-top: 220px;
+    @include desktop {
+      flex: 1 1 max(643px);
+    }
+
+    @include tablet-large {
+      flex: 1 1 auto;
     }
 
     h1 {
       font-family: 'Zen Dots', sans-serif;
       font-size: 60px;
       font-weight: 400;
-      line-height: 90px;
+      line-height: 150%;
       letter-spacing: 0.01em;
       color: #fff;
       text-shadow: 2px 2px 4px 0 rgb(29 29 29 / 25%);
 
-      @media screen and (width <= 1680px) {
+      .h1Phone {
+        display: none;
+      }
+
+      @media screen and (width <= 1700px) {
         font-size: 50px;
-        line-height: 75px;
       }
 
-      @media screen and (width <= 1480px) {
-        font-size: 45px;
-        line-height: 65px;
+      @include desktop {
+        font-size: 36px;
       }
 
-      @media screen and (width <= 1280px) {
-        font-size: 35px;
-        line-height: 55px;
+      @include tablet {
+        text-align: center;
+      }
+
+      @include phone {
+        font-size: 24px;
         text-align: left;
+
+        .h1Phone {
+          display: block;
+        }
+
+        .h1Desktop {
+          display: none;
+        }
       }
 
       .highlight {
         margin-left: 1rem;
         margin-right: 1rem;
         color: #b78af7;
+
+        @include phone {
+          margin: 0;
+        }
       }
 
       .emphasis {
@@ -96,29 +166,87 @@
   &__right {
     flex: 1 1 max(719px);
 
-    @media screen and (width <= 1280px) {
-      flex: none;
-      padding-top: 50px;
+    @include desktop {
+      flex: 1 1 max(453px);
     }
 
-    p {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 24px;
-      font-weight: 600;
-      line-height: 36px;
-      color: #fff;
+    @include tablet-large {
+      flex: 1 1 auto;
+    }
 
-      @media screen and (width <= 1680px) {
-        font-size: 20px;
-        line-height: 28px;
+    @include tablet {
+      padding-top: 333px;
+
+      @include phone {
+        padding-top: 230px;
       }
 
-      @media screen and (width <= 1280px) {
-        font-size: 16px;
-        line-height: 22px;
-        text-align: left;
-        max-width: 553px;
+      .heroWrapper {
+        width: 100vw;
+        height: 100%;
+        box-shadow: 0 -4px 10px 0 rgb(0 0 0 / 25%);
+        background: linear-gradient(180deg, #2a2145 0%, #211b37 51.4%, #161616 100%);
+        border-top: 2px solid #6853ac;
+        border-radius: 24px 24px 0 0;
+        padding: 24px 24px 11px;
+        position: relative;
+
+        @include phone {
+          width: 100%;
+          border-top: 1px solid #6853ac;
+          padding: 24px;
+        }
+
+        &::before,
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          background-repeat: no-repeat;
+        }
+
+        &::before {
+          width: 233.13px;
+          height: 305.77px;
+          background-image: url('../../assets/hero/mascot.svg');
+          top: -275px;
+          left: calc(50% - 116.565px);
+          z-index: -1;
+
+          @include phone {
+            left: calc(100% - 222.13px);
+          }
+        }
+
+        &::after {
+          width: 148px;
+          height: 55px;
+          background-image: url('../../assets/hero/handsOfMascot.svg');
+          top: -40px;
+          left: calc(50% - 85px);
+
+          @include phone {
+            left: calc(100% - 190px);
+          }
+        }
       }
+    }
+  }
+
+  p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: 0.01em;
+    color: #fff;
+
+    @include desktop {
+      font-size: 18px;
+    }
+
+    @include phone {
+      font-size: 18px;
     }
   }
 }
@@ -130,13 +258,68 @@
   grid-gap: 36px;
   margin-top: 36px;
 
+  .join {
+    display: none;
+  }
+
+  @include desktop {
+    grid-gap: 24px;
+  }
+
   .registration {
     max-width: 299px;
     width: 100%;
+
+    @include desktop {
+      max-width: 230px;
+    }
+
+    @include tablet-large {
+      width: 50%;
+      max-width: 100%;
+    }
   }
 
   .login {
     max-width: 220px;
-    width: 100%;
+    width: 50%;
+
+    @include desktop {
+      max-width: 187px;
+    }
+
+    @include tablet-large {
+      width: 50%;
+      max-width: 100%;
+    }
+  }
+
+  @include desktop {
+    .registration,
+    .login {
+      display: flex;
+      align-items: center;
+    }
+
+    .registration,
+    .login,
+    .join {
+      font-size: 18px !important;
+      line-height: 150% !important;
+      padding: 12px 0 !important;
+    }
+  }
+
+  @include tablet {
+    .registration,
+    .login {
+      display: none;
+    }
+
+    .join {
+      display: block;
+      text-transform: uppercase;
+      width: 100%;
+    }
   }
 }

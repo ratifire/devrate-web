@@ -6,6 +6,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants';
 import modalSliceReducer from '../modal/modalSlice';
 import modalStepReducer from '../modal/modalStepSlice';
+import chatSliceReducer from '../chat/chatSlice';
 import { apiSlice } from '../services/api/apiSlice';
 import { authReducer } from '../auth/authSlice';
 import tokenSlice from '../auth/tokenSlice';
@@ -36,6 +37,7 @@ const themePersistConfig = {
 };
 
 const rootReducer = {
+  chat: chatSliceReducer,
   modal: modalSliceReducer,
   education: educationReducer,
   modalStep: modalStepReducer,

@@ -34,7 +34,7 @@ const Header = () => {
             <a aria-label='LinkedIn' href='https://www.linkedin.com'>
               <img alt='LinkedIn Icon' src={linkdin} />
             </a>
-            <a aria-label='Email' href='mailto:info@skillzzy.com'>
+            <a aria-label='Email' className={styles.header__socialIcons__dn} href='mailto:info@skillzzy.com'>
               <img alt='Mail Icon' src={mail} />
             </a>
           </div>

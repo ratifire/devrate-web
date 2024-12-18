@@ -8,7 +8,6 @@ export const styles = {
     flex: '1 0 100%',
     marginRight: theme.spacing(0),
     marginBottom: theme.spacing(1),
-
     '@media (min-width: 600px)': {
       flex: '1 0 132px',
       marginRight: theme.spacing(3),
@@ -53,7 +52,6 @@ export const styles = {
     gridGap: theme.spacing(4),
     marginTop: '36px',
   }),
-
   contained: (theme) => ({
     display: 'block',
     paddingY: '10px',
@@ -64,12 +62,10 @@ export const styles = {
     '&::first-letter': {
       textTransform: 'uppercase',
     },
-
     '&:hover': {
       backgroundColor: theme.palette.iconBtn.writeMasssge.hover,
     },
   }),
-
   outlined: (theme) => ({
     display: 'block',
     paddingY: '10px',
@@ -81,7 +77,6 @@ export const styles = {
     '&::first-letter': {
       textTransform: 'uppercase',
     },
-
     '&:hover': {
       backgroundColor: theme.palette.iconBtn.bookInterview.hover.backgroundColor,
       borderColor: theme.palette.iconBtn.bookInterview.hover.borderColor,

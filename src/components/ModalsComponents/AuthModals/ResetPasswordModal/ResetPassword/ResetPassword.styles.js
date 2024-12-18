@@ -35,6 +35,10 @@ const styles = {
   wrapperBtn: (theme) => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+      marginTop: '16px',
+    },
   }),
   tooltip: (theme) => ({
     fontSize: 14,
@@ -46,6 +50,9 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+    },
   }),
   mainText: (theme) => ({
     fontFamily: 'Open Sans, sans-serif',
@@ -53,18 +60,27 @@ const styles = {
     lineHeight: 1.5,
     display: 'inline',
     color: theme.palette.neutral[100],
+    '@media (max-width: 1440px)': {
+      fontSize: 16,
+    },
   }),
   userEmail: (theme) => ({
     fontSize: 18,
     lineHeight: 1.5,
     fontWeight: 700,
     color: theme.palette.primary[200],
+    '@media (max-width: 1440px)': {
+      fontSize: 16,
+    },
   }),
   resetPasswordForm: (theme) => ({
     display: 'flex',
     gap: theme.spacing(2),
     alignItems: 'center',
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+    },
     '&, & input': {
       backgroundColor: `${theme.palette.background.default} !important`,
     },
@@ -80,6 +96,9 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+    },
   }),
   codeErrorIcon: (theme) => ({
     width: '20px',
