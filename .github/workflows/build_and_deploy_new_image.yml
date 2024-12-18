@@ -12,7 +12,7 @@ on:
         default: 'dev_new'
         type: choice
         options:
-          - dev
+          - dev_old
           - prod
           - dev_new
 

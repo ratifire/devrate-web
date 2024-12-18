@@ -7,12 +7,12 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to deploy (prod, dev, dev_new)'
+        description: 'Select environment to deploy (prod, dev_old, dev_new)'
         required: true
         default: 'dev_new'
         type: choice
         options:
-          - dev
+          - dev_old
           - prod
           - dev_new
 
