@@ -3,14 +3,17 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import UserAvatar from '../../../../UI/UserAvatar';
 import { useGetAvatarUserQuery } from '../../../../../redux/user/avatar/avatarApiSlice';
 import Bookmark from '../../../../UI/Bookmark';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { openChat } from '../../../../../redux/chat/chatSlice';
 import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = ({ id }) => {
+  const dispatch = useDispatch();
   const { data: personalData } = useGetPersonalUserQuery(id);
   const { t } = useTranslation();
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -32,8 +35,7 @@ const BaseUserInfo = ({ id }) => {
   };
 
   const handleWriteMessage = () => {
-    // eslint-disable-next-line no-console
-    console.log('Write a message');
+    dispatch(openChat({ chatElement: 'chat' }));
   };
 
   const handleBookInterview = () => {
@@ -47,6 +49,7 @@ const BaseUserInfo = ({ id }) => {
         {getFirstName && getLastName && (
           <UserAvatar
             correctStyle={styles.correctAvatar}
+            radius='square'
             size='l'
             src={userPicture}
             userFirstName={getFirstName}
