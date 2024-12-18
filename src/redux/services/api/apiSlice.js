@@ -54,6 +54,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
+      api.dispatch(logOut());
+      api.dispatch(clearTokens());
       return result;
     }
   }

@@ -1,4 +1,4 @@
-@import './variables';
+@use './variables.scss' as *;
 
 @mixin desktop-extra-large() {
   @media screen and (max-width: $breakpoint-large) {

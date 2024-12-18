@@ -1,4 +1,4 @@
-@import '../../styles/scss/mediaBreakpoints';
+@use '../../styles/scss/mediaBreakpoints.scss' as *;
 
 .about {
   display: flex;

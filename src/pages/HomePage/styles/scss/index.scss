@@ -1,2 +1,2 @@
-@import './variables';
-@import './mediaBreakpoints';
+@use './variables.scss' as *;
+@use './mediaBreakpoints.scss' as *;
