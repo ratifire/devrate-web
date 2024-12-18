@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import { AppBar, Box, Container, Divider, Drawer, IconButton, Link, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 import LinkList from '../../../UI/LinkList';
 import navLinks from '../../../../utils/constants/navLinks';
 import Logo from '../../../UI/Logo';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import navigationsLinks from '../../../../router/links';
-import useAuth from '../../../../utils/hooks/useAuth';
 import styles from './Header.styles';
 
 const Header = () => {
-  useAuth();
   const dispatch = useDispatch();
   const handleOpen = () => dispatch(openModal({ modalName: 'openLogin' }));
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,7 +22,7 @@ const Header = () => {
   const isAuthenticated = useSelector((state) => state.auth.user?.isAuthenticated || false);
   const myProfile = () => {
     if (!isAuthenticated)
-      return <ButtonDef handlerClick={handleOpen} label='home.links.login' type='button' variant='text' />;
+      return <ButtonDef label='home.links.login' type='button' variant='text' onClick={handleOpen} />;
     return (
       <Link component={RouterLink} sx={styles.link} to={navigationsLinks.profile}>
         Profile

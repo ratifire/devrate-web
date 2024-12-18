@@ -1,4 +1,4 @@
-name: Deploy_Service_to_AWS
+name: Deploy_Service
 
 env:
   IMAGE_TAG: ${{ github.sha }}
@@ -9,7 +9,7 @@ on:
       environment:
         description: 'Select environment to deploy (prod, dev, dev_new)'
         required: true
-        default: 'dev'
+        default: 'dev_new'
         type: choice
         options:
           - dev
@@ -24,7 +24,7 @@ jobs:
   terraform:
     name: Terraform deploy service to AWS
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ github.event.inputs.environment || 'dev_new' }}
     env:
       working-directory: terraform/deploy_service
     defaults:

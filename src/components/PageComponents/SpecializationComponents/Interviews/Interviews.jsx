@@ -41,7 +41,7 @@ const Interviews = () => {
     buttonRef.current.setAttribute('data-active', 'false');
   };
 
-  const createInterviewRequest = () => {
+  const createInterviewRequest = async () => {
     dispatch(openModal({ modalName: 'scheduleInterview', data: { role: 'INTERVIEWER' } }));
     closeHandler();
   };

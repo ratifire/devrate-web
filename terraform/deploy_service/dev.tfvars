@@ -9,3 +9,5 @@ subdomain_name = "devrate.org"
 vpc = "vpc-00b9e5046c1050334"
 
 back_subdomain_name = "server.devrate.org"
+
+instance_type = "t3.small"

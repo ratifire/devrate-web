@@ -37,10 +37,12 @@ const ConfirmationModal = () => {
       const code = Object.values(values).join('');
 
       try {
-        const response = await confirmEmail(code).unwrap();
+        const response = await confirmEmail({
+          confirmationCode: code,
+          email,
+        }).unwrap();
         resetForm();
         handleClose();
-        // dispatch(closeModal({ modalName: 'openConfirmation' }));
         if (response) {
           setTimeout(() => {
             dispatch(openModal({ modalName: 'openLogin' }));
@@ -81,7 +83,7 @@ const ConfirmationModal = () => {
       </Box>
 
       <ConfirmationForm
-        buttonLabel='modal.confirmation.btn_confirm'
+        buttonLabel={t('modal.confirmation.btn_confirm')}
         formik={formik}
         handleCodeChange={handleCodeChange}
         helperTextContent={codeError}

@@ -3,9 +3,10 @@ import { Form, Formik } from 'formik';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useSnackbar } from 'notistack';
+import { useRef, useState } from 'react';
 import ModalLayout from '../../../../../layouts/ModalLayout';
 import { useChangePasswordMutation } from '../../../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
@@ -21,28 +22,26 @@ const initialValues = {
   code: ['', '', '', '', '', ''],
 };
 
+const fieldCount = 6;
+
 const ResetPassword = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const inputRefs = useRef([]);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const openResetPassword = useSelector((state) => state.modal.openResetPassword);
   const email = useSelector((state) => state.email.email);
+  const { enqueueSnackbar } = useSnackbar();
+  const [changePassword, { isError, isSuccess }] = useChangePasswordMutation();
+
   const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
   const handleCloseAllModal = () => {
     dispatch(closeModal({ modalName: 'openResetPassword' }));
     dispatch(openModal({ modalName: 'openCheckEmail' }));
   };
 
-  const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
-
-  const { enqueueSnackbar } = useSnackbar();
-
-  const [changePassword, { isError, isSuccess }] = useChangePasswordMutation();
-
-  const fieldCount = 6;
-
-  const inputRefs = React.useRef([]);
 
   const handlePaste = (event, formik) => {
     event.preventDefault();
@@ -117,6 +116,7 @@ const ResetPassword = () => {
             const requestData = {
               code: values.code.join(''),
               newPassword: values.newPassword,
+              email,
             };
             await changePassword(requestData).unwrap();
             enqueueSnackbar('Password changed successfully!', { variant: 'success' });
@@ -214,9 +214,10 @@ const ResetPassword = () => {
             />
             <Box sx={styles.wrapperBtn}>
               <ButtonDef
-                correctStyle={styles.submitBtn}
                 disabled={!formik.isValid || !formik.dirty}
                 label={t('modal.resetPassword.btn_change_password')}
+                loading={formik.isSubmitting}
+                sx={styles.submitBtn}
                 type='submit'
                 variant='contained'
               />

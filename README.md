@@ -30,7 +30,7 @@ The frontend of the application is built using modern web technologies and frame
 - [React](https://reactjs.org/)
 - [React DevTools](https://reactjs.org/blog/2019/08/15/new-react-devtools.html)
 - [react-dom](https://reactjs.org/docs/react-dom.html)
-- [react-router-dom](https://reactrouter.com/web/guides/quick-start)
+- [react-router](https://reactrouter.com/web/guides/quick-start)
 - [Redux](https://redux.js.org/)
 - [react-redux](https://react-redux.js.org/)
 - [@reduxjs/toolkit](https://redux-toolkit.js.org/)

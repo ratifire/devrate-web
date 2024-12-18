@@ -199,6 +199,7 @@ const getDesignTokens = (mode) => ({
                 color: '#360083',
                 backgroundColor: '#CEB0FA',
               },
+              btnFeedback: '#B78AF7',
             },
           },
           checkBox: {
@@ -429,6 +430,9 @@ const getDesignTokens = (mode) => ({
                 color: '#A9A9AA',
                 backgroundColor: '#252527',
               },
+            },
+            loadingIcon: {
+              color: '#A9A9AA',
             },
           },
 
@@ -714,6 +718,7 @@ const getDesignTokens = (mode) => ({
                 color: '#360083',
                 backgroundColor: '#CEB0FA',
               },
+              btnFeedback: '#360083',
             },
           },
           checkBox: {
@@ -957,6 +962,9 @@ const getDesignTokens = (mode) => ({
                 color: '#3E3E40',
                 backgroundColor: '#ECECED',
               },
+            },
+            loadingIcon: {
+              color: '#303032',
             },
           },
           skillsSection: {

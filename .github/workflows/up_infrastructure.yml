@@ -1,4 +1,4 @@
-name: Terraform_destroy
+name: Up_infrastructure
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
       environment:
         description: 'Select environment to deploy (prod, dev, dev_new)'
         required: true
-        default: 'dev'
+        default: 'dev_new'
         type: choice
         options:
           - dev
@@ -19,9 +19,9 @@ permissions:
 
 jobs:
   terraform:
-    name: Terraform destroy infrastructure
+    name: Up_infrastructure
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ github.event.inputs.environment || 'dev_new' }}
     env:
       working-directory: terraform/infrastructure
     defaults:
@@ -68,5 +68,8 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check
 
-    - name: Terraform destroy
-      run: terraform destroy -auto-approve -input=false -var-file=${{ github.event.inputs.environment }}.tfvars
+    - name: Terraform Plan
+      run: terraform plan -input=false -var-file=${{ github.event.inputs.environment }}.tfvars
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve -input=false -var-file=${{ github.event.inputs.environment }}.tfvars

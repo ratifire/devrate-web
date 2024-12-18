@@ -8,6 +8,7 @@ export const styles = {
   dropZoneWrapper: {
     width: '334px',
     height: '334px',
+    cursor: 'pointer',
   },
   dropZone: (theme) => ({
     position: 'relative',
@@ -47,10 +48,6 @@ export const styles = {
     display: 'inline-block',
     marginLeft: '5px',
     color: theme.palette.primary[200],
-    cursor: 'pointer',
-    ':hover': {
-      textDecoration: 'underline',
-    },
   }),
   preview: {
     display: 'block',

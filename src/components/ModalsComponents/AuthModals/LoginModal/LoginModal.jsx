@@ -2,9 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Box, Link, Typography } from '@mui/material';
-import Cookies from 'js-cookie';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ModalLayout from '../../../../layouts/ModalLayout';
 import { LoginSchema } from '../../../../utils/valadationSchemas/index';
@@ -12,8 +11,9 @@ import { FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useLoginMutation } from '../../../../redux/auth/authApiSlice';
-import { setCredentials } from '../../../../redux/auth/authSlice';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
+import { setCredentials } from '../../../../redux/auth/authSlice';
+import { setTokens } from '../../../../redux/auth/tokenSlice';
 import styles from './LoginModal.styles';
 
 const initialValues = {
@@ -44,11 +44,14 @@ const LoginModal = () => {
     async (values, { setSubmitting }) => {
       setLoginError(null);
       try {
-        const userData = await login({ email: values.email, password: values.password }).unwrap();
-        await dispatch(setCredentials({ data: userData, isAuthenticated: false }));
-        const cookies = Cookies.get('JSESSIONID');
-        if (cookies) {
-          await dispatch(setCredentials({ data: userData, isAuthenticated: true }));
+        const { userData, idToken, authToken } = await login({
+          email: values.email,
+          password: values.password,
+        }).unwrap();
+        dispatch(setCredentials({ data: userData }));
+
+        if (idToken && authToken) {
+          dispatch(setTokens({ idToken, authToken }));
           navigate('/profile', { replace: true });
         }
         handleClose();
@@ -135,18 +138,20 @@ const LoginModal = () => {
 
         <Box sx={styles.textLink}>
           <ButtonDef
-            correctStyle={styles.turnBackLink}
-            handlerClick={handleOpen}
-            label='modal.login.forgot_your_password'
+            label={t('modal.login.forgot_your_password')}
+            loading={formik.isSubmitting}
+            sx={styles.turnBackLink}
             type='button'
             variant='text'
+            onClick={handleOpen}
           />
         </Box>
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
-            correctStyle={styles.submitBtn}
             disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
-            label='modal.login.btn_login'
+            label={t('modal.login.btn_login')}
+            loading={formik.isSubmitting}
+            sx={styles.submitBtn}
             type='submit'
             variant='contained'
           />

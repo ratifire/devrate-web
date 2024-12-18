@@ -1,13 +1,12 @@
 import { formatDate } from '@fullcalendar/core';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useSnackbar } from 'notistack';
-import { useDeleteEventByIdMutation } from '../../../../redux/schedule/scheduleApiSlice';
+import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';
 import { styles } from './SidebarEvent.styles';
 
 const SidebarEvent = ({ event }) => {
@@ -16,7 +15,6 @@ const SidebarEvent = ({ event }) => {
 
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { t } = useTranslation();
-  const [deleteEvent] = useDeleteEventByIdMutation();
 
   const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric', separator: '/', localeMatcher: 'lookup' };
   const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: false };
@@ -27,16 +25,17 @@ const SidebarEvent = ({ event }) => {
   const [month, day, year] = formattedDate.split('/');
   const customFormattedDate = `${day}/${month}/${year}`;
 
-  const { enqueueSnackbar } = useSnackbar();
+  const deleteEvent = useDeleteEvent();
 
-  const eventDeleteHandler = async (id) => {
-    try {
-      await deleteEvent({ userId, id }).unwrap();
-      enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
-    } catch (error) {
+  const handleCancelInterview = async () => {
+    await deleteEvent({
+      userId,
+      eventId: event?.eventTypeId,
       // eslint-disable-next-line no-console
-      console.error('Failed to delete event:', error);
-    }
+      onError: (error) => console.error('EventPopup: Error deleting event', error),
+      // eslint-disable-next-line no-console
+      onFinally: () => console.log('EventPopup: Deletion process complete'),
+    });
   };
 
   const [showCancelButton, setShowCancelButton] = useState(true);
@@ -95,7 +94,7 @@ const SidebarEvent = ({ event }) => {
           <LinkIcon />
         </IconButton>
         {showCancelButton && (
-          <Button sx={styles.cancelEventBtn} variant='text' onClick={() => eventDeleteHandler(eventTypeId)}>
+          <Button sx={styles.cancelEventBtn} variant='text' onClick={() => handleCancelInterview(eventTypeId)}>
             {t('schedule.cancelEventBtn')}
           </Button>
         )}
@@ -105,6 +104,7 @@ const SidebarEvent = ({ event }) => {
 };
 
 SidebarEvent.propTypes = {
+  setEventUpdated: PropTypes.func,
   event: PropTypes.shape({
     eventTypeId: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,

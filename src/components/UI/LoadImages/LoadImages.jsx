@@ -97,16 +97,14 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled
   return (
     <Box sx={styles.wrapper}>
       <input type='hidden' value={value} onBlur={handleBlur} onChange={handleChange} />
-      <Box sx={styles.dropZoneWrapper}>
+      <Box sx={styles.dropZoneWrapper} {...getRootProps()}>
         <input {...getInputProps()} />
         <Box sx={styles.dropZone}>
           <Typography sx={styles.text} variant='caption1'>
             {t('profile.modal.userInfo.photo.dropPhoto.first')}
             <br />
             {t('profile.modal.userInfo.photo.dropPhoto.second')}
-            <Box {...getRootProps()} sx={styles.link}>
-              {t('profile.modal.userInfo.photo.dropPhoto.third')}
-            </Box>
+            <Box sx={styles.link}>{t('profile.modal.userInfo.photo.dropPhoto.third')}</Box>
           </Typography>
           <BackupOutlinedIcon sx={styles.icon} />
           {error && (
@@ -143,12 +141,12 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled
       </Box>
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
-          correctStyle={styles.btn}
           disabled={isDisabled || !settingsCanvas.image || !!error}
-          handlerClick={handleSave}
-          label='profile.modal.btn'
+          label={t('profile.modal.btn')}
+          sx={styles.btn}
           type='submit'
           variant='contained'
+          onClick={handleSave}
         />
         {value && (
           <IconButton aria-label='Delete user Avatar' sx={styles.btnIcon} onClick={handleClickDelete}>

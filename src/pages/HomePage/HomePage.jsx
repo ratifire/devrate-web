@@ -1,7 +1,4 @@
-import Cookies from 'js-cookie';
-import React, { memo, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '../../redux/auth/authSlice';
+import React, { memo } from 'react';
 import { HomeTemplate } from '../../Templates';
 import { AboutUsSection, FaqSection, Footer, HowItWorksSection } from './../HomePage/sections';
 import './styles/reset.css';
@@ -18,13 +15,6 @@ const MemoizedFqaSection = memo(FaqSection);
 const MemoizedFooter = memo(Footer);
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const cookies = Cookies.get('JSESSIONID');
-
-  useEffect(() => {
-    dispatch(setCredentials({ isAuthenticated: Boolean(cookies) }));
-  }, [cookies, dispatch]);
-
   return (
     <HomeTemplate>
       <MemoizedHeader />

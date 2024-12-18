@@ -2,6 +2,8 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import {
   useDeleteAvatarUserMutation,
@@ -24,16 +26,27 @@ const StepAvatar = () => {
     isError: isErrorGerAvatar,
     isFetching: isFetchingGetAvatar,
   } = useGetAvatarUserQuery(user.id, { skip: !user.id });
+  const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
 
   const avatarValue = avatarData?.userPicture || '';
 
-  const onSubmit = (values) => {
-    const { avatar } = values;
-    postAvatarUser({
-      userId: user.id,
-      avatar: avatar,
-    });
-    formik.resetForm();
+  const onSubmit = async (values) => {
+    try {
+      const { avatar } = values;
+      await postAvatarUser({
+        userId: user.id,
+        avatar,
+      }).unwrap();
+      const messageKey = avatarValue ? 'modalNotifyText.avatar.edit.success' : 'modalNotifyText.avatar.create.success';
+
+      enqueueSnackbar(t(messageKey), { variant: 'success' });
+      formik.resetForm();
+    } catch (error) {
+      const errorKey = avatarValue ? 'modalNotifyText.avatar.edit.error' : 'modalNotifyText.avatar.create.error';
+
+      enqueueSnackbar(t(errorKey), { variant: 'error' });
+    }
   };
 
   const formik = useFormik({
@@ -44,10 +57,15 @@ const StepAvatar = () => {
     onSubmit,
   });
 
-  const handleDeleteAvatar = () => {
+  const handleDeleteAvatar = async () => {
     if (avatarValue) {
-      deleteAvatarUser(user.id);
-      formik.setFieldValue('avatar', '');
+      try {
+        await deleteAvatarUser(user.id).unwrap();
+        enqueueSnackbar(t('modalNotifyText.avatar.delete.success'), { variant: 'success' });
+        await formik.setFieldValue('avatar', '');
+      } catch (error) {
+        enqueueSnackbar(t('modalNotifyText.avatar.delete.error'), { variant: 'error' });
+      }
     }
   };
 

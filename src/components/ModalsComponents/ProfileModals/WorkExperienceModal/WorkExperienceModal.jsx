@@ -4,6 +4,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
+import { useSnackbar } from 'notistack';
 import { WorkExperienceModalSchema } from '../../../../utils/valadationSchemas/index';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
@@ -27,8 +28,9 @@ const WorkExperienceModal = () => {
   const { id } = useSelector((state) => state.auth.user.data);
   const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
   const { t } = useTranslation();
-  const [createNewWorkExperience] = useCreateNewWorkExperienceMutation();
+  const [createNewWorkExperience, { isLoading }] = useCreateNewWorkExperienceMutation();
   const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
+  const { enqueueSnackbar } = useSnackbar();
 
   const selectYears = useMemo(() => generateYearsArray(), []);
   const handleClose = () => dispatch(closeModal({ modalName: 'workExperience' }));
@@ -42,25 +44,45 @@ const WorkExperienceModal = () => {
     endYear: modalData?.endYear || '',
     currentDate: modalData?.endYear === '9999',
   };
-
   const onSubmit = async (values, { resetForm }) => {
-    const startYear = values.startYear;
-    const endYear = values.currentDate ? '9999' : values.endYear || '9999';
-    const data = { ...values, startYear, endYear, responsibilities };
     try {
-      if (modalData && modalData.id) {
+      const { startYear, endYear, currentDate } = values;
+      const formattedEndYear = currentDate ? '9999' : endYear || '9999';
+      const data = {
+        ...values,
+        startYear,
+        endYear: formattedEndYear,
+        responsibilities,
+      };
+
+      const messageKey = modalData?.id
+        ? 'modalNotifyText.workExperience.edit.success'
+        : 'modalNotifyText.workExperience.create.success';
+
+      if (modalData?.id) {
         await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
+        enqueueSnackbar(t(messageKey), {
+          variant: 'success',
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+          },
+        });
       } else {
         await createNewWorkExperience({ userId: id, data }).unwrap();
+        enqueueSnackbar(t(messageKey), { variant: 'success' });
       }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to create Work Experience', error);
-    }
 
-    setResponsibilities([]);
-    resetForm();
-    handleClose();
+      setResponsibilities([]);
+      resetForm();
+      handleClose();
+    } catch (error) {
+      const errorKey = modalData?.id
+        ? 'modalNotifyText.workExperience.edit.error'
+        : 'modalNotifyText.workExperience.create.error';
+
+      enqueueSnackbar(t(errorKey), { variant: 'error' });
+    }
   };
 
   const formik = useFormik({
@@ -209,9 +231,10 @@ const WorkExperienceModal = () => {
           )}
 
           <ButtonDef
-            correctStyle={styles.workExperienceBtn}
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
+            loading={isLoading}
+            sx={styles.workExperienceBtn}
             type='submit'
             variant='contained'
           />

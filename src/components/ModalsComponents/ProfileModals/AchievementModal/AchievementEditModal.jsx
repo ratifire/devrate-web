@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { useUpdateAchievementMutation } from '../../../../redux/services/achievementsApiSlice';
@@ -18,7 +19,8 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
   const { t } = useTranslation();
-  const [updateAchievementApi] = useUpdateAchievementMutation();
+  const [updateAchievementApi, { isLoading }] = useUpdateAchievementMutation();
+  const { enqueueSnackbar } = useSnackbar();
 
   const initialValues = {
     // link: achievement?.link || '',
@@ -32,12 +34,24 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
         id: achievement.id,
         payload: { ...values, userId }, // Including userId in the payload
       }).unwrap();
+      enqueueSnackbar(t('modalNotifyText.achievement.edit.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
 
       resetForm();
       onClose();
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error updating achievement:', error);
+      enqueueSnackbar(t('modalNotifyText.achievement.edit.error'), {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
     }
   };
 
@@ -68,20 +82,6 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
               value={formik.values.summary}
             />
           </Box>
-          {/*commented out <Link> in case if its need it's needed in the future*/}
-          {/*<Box sx={styles.input100}>*/}
-          {/*  <FormInput*/}
-          {/*    name='link'*/}
-          {/*    value={formik.values.link}*/}
-          {/*    handleChange={formik.handleChange}*/}
-          {/*    handleBlur={formik.handleBlur}*/}
-          {/*    type='text'*/}
-          {/*    label='modal.achievement.link'*/}
-          {/*    placeholder='profile.modal.workExperience.position_placeholder'*/}
-          {/*    helperText={formik.touched.link && formik.errors.link}*/}
-          {/*    error={formik.touched.link && Boolean(formik.errors.link)}*/}
-          {/*  />*/}
-          {/*</Box>*/}
           <Box sx={styles.input100}>
             <TextAreaInput
               error={formik.touched.description && Boolean(formik.errors.description)}
@@ -96,8 +96,10 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
             />
           </Box>
           <ButtonDef
-            correctStyle={styles.workExperienceBtn}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
+            loading={isLoading}
+            sx={styles.workExperienceBtn}
             type='submit'
             variant='contained'
           />
