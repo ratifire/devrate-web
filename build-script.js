@@ -44,8 +44,8 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(PORT, () => {
-    console.log(\`Server is running on http://localhost:\${PORT}\`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(\`Server is running on http://0.0.0.0:\${PORT}\`);
 });
 `;
   fs.writeFileSync(serverFilePath, serverContent);
@@ -76,7 +76,7 @@ if (!fs.existsSync(packageFilePath)) {
 
 // Step 6: Install server dependencies
 log('Installing server dependencies...');
-execSync('npm install', { cwd: serverBuildPath, stdio: 'inherit' });
+execSync('npm install --production', { cwd: serverBuildPath, stdio: 'inherit' });
 
 // Step 7: Remove original React build directory
 log('Removing original React build directory...');
