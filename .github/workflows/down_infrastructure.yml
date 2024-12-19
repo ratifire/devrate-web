@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to deploy (prod, dev_old, dev_new)'
+        description: 'Select environment to deploy (prod, dev_old, dev)'
         required: true
-        default: 'dev_new'
+        default: 'dev'
         type: choice
         options:
           - dev_old
           - prod
-          - dev_new
+          - dev
 
 permissions:
   id-token: write
@@ -21,7 +21,7 @@ jobs:
   terraform:
     name: Down_infrastructure
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment || 'dev_new' }}
+    environment: ${{ github.event.inputs.environment || 'dev' }}
     env:
       working-directory: terraform/infrastructure
     defaults:
