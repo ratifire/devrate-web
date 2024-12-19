@@ -12,6 +12,10 @@ const styles = {
     fontSize: '18px',
     color: theme.palette.neutral[100],
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+      fontSize: '16px',
+    },
   }),
   wrapperBtn: (theme) => ({
     marginBottom: theme.spacing(4),

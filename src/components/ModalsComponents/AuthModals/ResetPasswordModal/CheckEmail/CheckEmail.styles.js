@@ -9,6 +9,12 @@ const styles = {
     fontSize: '18px',
     color: theme.palette.neutral[100],
     marginBottom: theme.spacing(4),
+    '@media (max-width: 1280px)': {
+      fontSize: '16px',
+    },
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: '16px',
+    },
   }),
   policyText: (theme) => ({
     fontFamily: 'Open Sans, sans-serif',
@@ -48,6 +54,10 @@ const styles = {
   wrapperBtn: (theme) => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginTop: '16px',
+      marginBottom: '16px',
+    },
   }),
   text: (theme) => ({
     color: theme.palette.text.primary,

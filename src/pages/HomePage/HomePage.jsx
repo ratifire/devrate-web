@@ -1,9 +1,11 @@
 import React, { memo } from 'react';
 import { HomeTemplate } from '../../Templates';
-import { Header, HeroSection, HowItWorksSection, AboutUsSection, FaqSection, Footer } from './../HomePage/sections';
+import { AboutUsSection, FaqSection, Footer, HowItWorksSection } from './../HomePage/sections';
 import './styles/reset.css';
 import './styles/index.css';
 import './assets/fonts/fonts.css';
+import './styles/scss/index.scss';
+import { Header, HeroSection } from './sections';
 
 const MemoizedHeader = memo(Header);
 const MemoizedHeroSection = memo(HeroSection);

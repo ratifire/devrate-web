@@ -8,15 +8,21 @@ const styles = {
     fontFamily: 'Open Sans, sans-serif',
     color: theme.palette.neutral[100],
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: theme.spacing(2),
+    },
   }),
-  textLink: {
+  textLink: (theme) => ({
     fontSize: '14px',
     fontWeight: 400,
     color: '#f1f1f180',
     textAlign: 'center',
     lineHeight: 1.5,
     marginBottom: '24px',
-  },
+    [theme.breakpoints.down('xl')]: {
+      marginBottom: theme.spacing(3),
+    },
+  }),
   codeErrorWrapper: (theme) => ({
     display: 'flex',
     flexDirection: 'row',
