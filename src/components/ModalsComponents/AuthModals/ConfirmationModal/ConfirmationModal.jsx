@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
@@ -7,7 +7,7 @@ import ModalLayout from '../../../../layouts/ModalLayout';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useConfirmEmailMutation } from '../../../../redux/auth/authApiSlice';
 import { ConfirmationSchema } from '../../../../utils/valadationSchemas/index';
-import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
+import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
 import ConfirmationForm from './ConfirmationForm';
 import styles from './ConfirmationModal.styles';
 
@@ -48,6 +48,7 @@ const ConfirmationModal = () => {
             dispatch(openModal({ modalName: 'openLogin' }));
           }, 500);
         }
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         setCodeError(true);
       }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Link, Typography, Tooltip, Grid } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import PropTypes from 'prop-types';

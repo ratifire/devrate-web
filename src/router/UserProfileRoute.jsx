@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, Navigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import UserProfilePage from '../pages/ProfilePages/UserProfilePage';

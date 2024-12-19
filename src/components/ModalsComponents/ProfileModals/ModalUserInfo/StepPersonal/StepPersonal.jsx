@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
@@ -59,6 +58,7 @@ const StepPersonal = () => {
         description: description,
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.personal.create.success'), { variant: 'success' });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.personal.create.error'), { variant: 'error' });
     }

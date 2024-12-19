@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Link, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';

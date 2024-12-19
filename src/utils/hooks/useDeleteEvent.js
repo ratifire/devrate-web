@@ -30,6 +30,7 @@ export const useDeleteEvent = () => {
       await deleteEventById({ userId, id: eventId }).unwrap();
       enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
       onSuccess?.();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       if (!onError) {
         enqueueSnackbar(t('schedule.deleteEventErrorMessage'), { variant: 'error' });

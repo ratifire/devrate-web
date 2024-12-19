@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { lazy, memo, Suspense } from 'react';
+import { lazy, memo, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import './HomeTemplate.css';
 const CheckEmail = lazy(() => import('../../components/ModalsComponents/AuthModals/ResetPasswordModal/CheckEmail'));

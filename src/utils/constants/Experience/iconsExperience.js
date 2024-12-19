@@ -1,10 +1,17 @@
-import { ReactComponent as LightningIcon } from '../../../assets/icons/AchievementsPageIcons/lightning.svg';
-import { ReactComponent as StarIcon } from '../../../assets/icons/AchievementsPageIcons/star.svg';
-import { ReactComponent as MedalIcon } from '../../../assets/icons/AchievementsPageIcons/medal.svg';
-import { ReactComponent as GobletIcon } from '../../../assets/icons/AchievementsPageIcons/goblet.svg';
-import { ReactComponent as PuzzleIcon } from '../../../assets/icons/AchievementsPageIcons/puzzle.svg';
-import { ReactComponent as Glare } from '../../../assets/icons/AchievementsPageIcons/glare.svg';
-import { ReactComponent as Lamp } from '../../../assets/icons/AchievementsPageIcons/lamp.svg';
+import LightningIcon from '../../../assets/icons/AchievementsPageIcons/lightning.svg?react';
+import StarIcon from '../../../assets/icons/AchievementsPageIcons/star.svg?react';
+import MedalIcon from '../../../assets/icons/AchievementsPageIcons/medal.svg?react';
+import GobletIcon from '../../../assets/icons/AchievementsPageIcons/goblet.svg?react';
+import PuzzleIcon from '../../../assets/icons/AchievementsPageIcons/puzzle.svg?react';
+import Glare from '../../../assets/icons/AchievementsPageIcons/glare.svg?react';
+import Lamp from '../../../assets/icons/AchievementsPageIcons/lamp.svg?react';
+import Book from '../../../assets/icons/EducationPageIcons/book.svg?react';
+import Computer from '../../../assets/icons/EducationPageIcons/computer.svg?react';
+import Molecule from '../../../assets/icons/EducationPageIcons/molecule.svg?react';
+import Cap from '../../../assets/icons/EducationPageIcons/square-academic-cap.svg?react';
+import Lightbulb from '../../../assets/icons/EducationPageIcons/lightbulb.svg?react';
+import Chart from '../../../assets/icons/EducationPageIcons/chart.svg?react';
+import Symbols from '../../../assets/icons/EducationPageIcons/symbols.svg?react';
 
 export const iconsAchievement = {
   Lightning: LightningIcon,
@@ -15,14 +22,6 @@ export const iconsAchievement = {
   Glare: Glare,
   Lamp: Lamp,
 };
-
-import { ReactComponent as Book } from '../../../assets/icons/EducationPageIcons/book.svg';
-import { ReactComponent as Computer } from '../../../assets/icons/EducationPageIcons/computer.svg';
-import { ReactComponent as Molecule } from '../../../assets/icons/EducationPageIcons/molecule.svg';
-import { ReactComponent as Cap } from '../../../assets/icons/EducationPageIcons/square-academic-cap.svg';
-import { ReactComponent as Lightbulb } from '../../../assets/icons/EducationPageIcons/lightbulb.svg';
-import { ReactComponent as Chart } from '../../../assets/icons/EducationPageIcons/chart.svg';
-import { ReactComponent as Symbols } from '../../../assets/icons/EducationPageIcons/symbols.svg';
 
 export const iconsEducation = {
   Book: Book,

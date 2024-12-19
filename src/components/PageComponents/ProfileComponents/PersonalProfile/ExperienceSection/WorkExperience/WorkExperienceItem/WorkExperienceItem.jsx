@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
@@ -46,6 +46,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
           horizontal: 'right',
         },
       });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.workExperience.delete.error'), { variant: 'error' });
     }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';

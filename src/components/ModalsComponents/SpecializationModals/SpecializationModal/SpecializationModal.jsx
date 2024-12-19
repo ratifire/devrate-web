@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -105,6 +105,7 @@ const SpecializationModal = () => {
           horizontal: 'right',
         },
       });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.specialization.edit.error'), { variant: 'error' });
     }
@@ -163,6 +164,7 @@ const SpecializationModal = () => {
       enqueueSnackbar(t('modalNotifyText.specialization.create.success', { values: values.name }), {
         variant: 'success',
       });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.specialization.create.error'), { variant: 'error' });
     } finally {

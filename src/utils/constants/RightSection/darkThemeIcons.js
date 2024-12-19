@@ -1,10 +1,10 @@
 import { Link } from '@mui/icons-material';
-import { ReactComponent as Telegram } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/telegram.svg';
-import { ReactComponent as Linkedin } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/linkedin.svg';
-import { ReactComponent as Github } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/github.svg';
-import { ReactComponent as Behance } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/behance.svg';
-import { ReactComponent as Email } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/mail.svg';
-import { ReactComponent as Phone } from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/phone.svg';
+import Telegram from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/telegram.svg?react';
+import Linkedin from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/linkedin.svg?react';
+import Github from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/github.svg?react';
+import Behance from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/behance.svg?react';
+import Email from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/mail.svg?react';
+import Phone from '../../../assets/icons/ProfileRightSection/BlackThemeIcons/phone.svg?react';
 
 export default {
   TELEGRAM_LINK: Telegram,

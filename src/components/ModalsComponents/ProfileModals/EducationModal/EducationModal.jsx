@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -92,6 +92,7 @@ const EducationModal = () => {
       }
       resetForm();
       handleClose();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       if (dataToEdit) {
         enqueueSnackbar(t('modalNotifyText.education.edit.error'), {

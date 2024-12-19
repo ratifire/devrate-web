@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import React from 'react';
 import styles from './Notification.styles';
 import NotificationItem from './NotificationItem';
 

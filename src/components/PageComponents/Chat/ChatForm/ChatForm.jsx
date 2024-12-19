@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
@@ -6,7 +6,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import UserAvatar from '../../../UI/UserAvatar';
 import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { ReactComponent as Send } from '../../../../assets/icons/send.svg';
+import Send from '../../../../assets/icons/send.svg?react';
 import { array } from '../../../../utils/constants/testMessages';
 import { closeChat } from '../../../../redux/chat/chatSlice';
 import { styles } from './CharFrom.styles';

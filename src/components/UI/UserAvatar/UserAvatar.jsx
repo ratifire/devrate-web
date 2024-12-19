@@ -1,4 +1,3 @@
-import React from 'react';
 import { Avatar } from '@mui/material';
 import PropTypes from 'prop-types';
 import { bgFromString, checkContrastColor } from '../../../utils/helpers';

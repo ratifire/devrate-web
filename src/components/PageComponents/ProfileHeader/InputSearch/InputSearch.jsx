@@ -1,7 +1,7 @@
 import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ReactComponent as Loupe } from '../../../../assets/icons/loupe.svg';
+import Loupe from '../../../../assets/icons/loupe.svg?react';
 import { useGetSearchQuery } from '../../../../redux/search/searchApiSlice';
 import useDebounce from '../../../../utils/hooks/useDebounce';
 import useMergeState from '../../../../utils/hooks/useMergeState';

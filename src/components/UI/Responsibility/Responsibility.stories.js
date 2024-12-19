@@ -1,4 +1,3 @@
-import React from 'react';
 import Responsibility from './Responsibility';
 
 export default {

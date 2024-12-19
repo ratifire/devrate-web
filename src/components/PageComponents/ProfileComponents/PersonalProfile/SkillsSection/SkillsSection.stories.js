@@ -1,4 +1,3 @@
-import React from 'react';
 import SkillsSection from './SkillsSection';
 
 export default {

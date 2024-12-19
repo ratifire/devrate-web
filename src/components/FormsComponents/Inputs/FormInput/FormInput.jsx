@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { v4 as uuid } from 'uuid';

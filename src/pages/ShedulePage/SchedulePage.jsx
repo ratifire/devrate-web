@@ -1,5 +1,5 @@
 import { Box, Container, Paper, Typography } from '@mui/material';
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import ScheduleTemplate from '../../Templates/ScheduleTemplate';
 import ProfileHeader from '../../components/PageComponents/ProfileHeader';

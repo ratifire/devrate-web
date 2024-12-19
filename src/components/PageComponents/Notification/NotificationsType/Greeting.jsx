@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Sms from '@mui/icons-material/SmsOutlined';
 import PropTypes from 'prop-types';

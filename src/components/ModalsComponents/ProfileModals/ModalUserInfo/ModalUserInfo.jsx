@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, IconButton, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';

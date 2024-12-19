@@ -1,4 +1,4 @@
-@import '../../styles/scss/mediaBreakpoints.scss';
+@use '../../styles/scss/mediaBreakpoints.scss' as *;
 
 .footer {
   position: relative;

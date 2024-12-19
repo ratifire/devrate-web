@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -40,6 +39,7 @@ const AchievementModal = () => {
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.achievement.create.success'), { variant: 'success' });
       handleClose();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.achievement.create.error'), { variant: 'error' });
     }

@@ -1,7 +1,7 @@
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import AchievementEditModal from '../../../../../../ModalsComponents/ProfileModals/AchievementModal/AchievementEditModal';
@@ -39,6 +39,7 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
           horizontal: 'right',
         },
       });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.achievement.delete.error'), {
         variant: 'error',

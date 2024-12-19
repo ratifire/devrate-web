@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useGetEducationByUserIdQuery } from '../../../../../../redux/services/educationApiSlice';
@@ -7,7 +7,6 @@ import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues
 import { iconsEducation } from '../../../../../../utils/constants/Experience/iconsExperience';
 import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 import EducationItem from './EducationItem';
-import styles from './Education.styles';
 
 const Education = ({ id, tab }) => {
   const { data: educationsData, isLoading } = useGetEducationByUserIdQuery(id, { skip: !id });
@@ -23,7 +22,7 @@ const Education = ({ id, tab }) => {
   }
 
   return (
-    <Box sx={styles.container}>
+    <Box>
       <Box>
         {sortedEducations.map(({ id, type, name, description, startYear, endYear }) => (
           <EducationItem

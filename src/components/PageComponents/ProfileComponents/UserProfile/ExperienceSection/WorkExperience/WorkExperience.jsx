@@ -1,11 +1,9 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import WorkExperienceItem from '../../ExperienceSection/WorkExperience/WorkExperienceItem';
 import { useGetWorkExperienceByUserIdQuery } from '../../../../../../redux/workExperience/workExperienceApiSlice';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
-import styles from './WorkExperience.styles';
 
 const WorkExperience = ({ id, tab }) => {
   const { data: workExperiencesData } = useGetWorkExperienceByUserIdQuery(id);
@@ -15,7 +13,7 @@ const WorkExperience = ({ id, tab }) => {
   }
 
   return (
-    <Box sx={styles.container}>
+    <Box>
       <Box>
         {workExperiencesData?.map(
           ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
