@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeFeedbackModal } from '../../../../redux/feedback/feedbackModalSlice';

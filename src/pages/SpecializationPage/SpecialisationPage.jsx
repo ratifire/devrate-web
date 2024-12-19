@@ -1,4 +1,4 @@
-import React, { lazy, memo, Suspense } from 'react';
+import { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import SpecializationTemplate from '../../Templates/SpecializationTemplate';

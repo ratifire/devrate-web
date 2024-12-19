@@ -57,6 +57,7 @@ The frontend of the application is built using modern web technologies and frame
 - [react-avatar-editor](https://github.com/mosch/react-avatar-editor)
 - [react-dropzone](https://react-dropzone.js.org/)
 - [react-i18next](https://react.i18next.com/)
+- [vite](https://vite.dev/)
 
 ## Test Account
 
@@ -87,5 +88,5 @@ To run the application locally, follow these steps:
 1. Ensure you have Node.js version 20.12.2 installed.
 2. Clone the repository to your local machine.
 3. Navigate to the project directory.
-4. Run `npm install` to install dependencies.
-5. Run `npm start` to start the development server.
+4. Run `npm install --legacy-peer-deps` to install dependencies.
+5. Run `npm dev` to start the development server.

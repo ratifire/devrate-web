@@ -3,7 +3,6 @@ import { Box, FormControl, FormHelperText } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
 import { styles } from './AdvancedFormSelector.styles'; // Import styles // Import styles

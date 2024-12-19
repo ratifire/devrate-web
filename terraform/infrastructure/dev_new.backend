@@ -1,4 +1,0 @@
-bucket  = "skillzzy-front-terraform-dev"
-encrypt = true
-key     = "AWS/skillzzy-front-terraform-dev-infrastructure/terraform.tfstate"
-region  = "eu-north-1"

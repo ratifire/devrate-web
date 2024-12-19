@@ -1,4 +1,3 @@
-import React from 'react';
 import { Skeleton } from '@mui/material';
 import { ButtonDef } from '../../../../../FormsComponents/Buttons';
 import { styles } from './StepContactsSkeleton.styles';

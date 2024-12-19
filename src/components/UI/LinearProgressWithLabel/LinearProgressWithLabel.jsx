@@ -1,4 +1,3 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Typography, LinearProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';

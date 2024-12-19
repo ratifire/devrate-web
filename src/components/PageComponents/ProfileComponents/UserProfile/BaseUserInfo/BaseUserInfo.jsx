@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';

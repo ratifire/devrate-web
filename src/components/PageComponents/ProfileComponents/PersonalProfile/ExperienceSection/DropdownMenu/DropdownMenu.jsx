@@ -2,7 +2,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Divider, Menu, MenuItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { styles } from './DropdownMenu.styles';
 

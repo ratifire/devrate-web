@@ -1,13 +1,13 @@
 region = "eu-north-1"
 
-domain_name = "devrate.org"
+domain_name = "skillzzy.com"
 
-bucket_name_logs = "logs-front-1209"
+bucket_name_logs = "skillzzy-front-logs-1"
 
-subdomain_name = "devrate.org"
+subdomain_name = "dev.skillzzy.com"
 
-vpc = "vpc-00b9e5046c1050334"
+vpc = "vpc-0032e90317069a534"
 
-back_subdomain_name = "server.devrate.org"
+back_subdomain_name = "server.skillzzy.com"
 
 instance_type = "t3.small"

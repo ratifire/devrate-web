@@ -12,7 +12,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       stopTimeout       = 10,
       healthCheck : {
         "command" : ["CMD-SHELL", "curl -f https://${var.subdomain_name}/ || exit 1"],
-        "interval" : 120,
+        "interval" : 60,
         "timeout" : 10,
         "retries" : 2
       },

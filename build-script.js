@@ -1,6 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Define paths
 const reactBuildPath = path.join(__dirname, 'build');
@@ -76,7 +80,7 @@ if (!fs.existsSync(packageFilePath)) {
 
 // Step 6: Install server dependencies
 log('Installing server dependencies...');
-execSync('npm install', { cwd: serverBuildPath, stdio: 'inherit' });
+execSync('npm install --legacy-peer-deps', { cwd: serverBuildPath, stdio: 'inherit' });
 
 // Step 7: Remove original React build directory
 log('Removing original React build directory...');

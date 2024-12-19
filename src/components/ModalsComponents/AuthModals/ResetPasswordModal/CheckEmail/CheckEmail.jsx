@@ -1,5 +1,3 @@
-import * as React from 'react';
-// import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Link, Typography } from '@mui/material';
@@ -12,7 +10,7 @@ import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import { useResetPasswordMutation } from '../../../../../redux/auth/authApiSlice';
 import { setEmail } from '../../../../../redux/auth/emailSlice';
 import ModalLayout from '../../../../../layouts/ModalLayout';
-import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord';
+import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
 import styles from './CheckEmail.styles';
 
 const initialValues = {
@@ -22,7 +20,6 @@ const initialValues = {
 const CheckEmail = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const openCheckEmail = useSelector((state) => state.modal.openCheckEmail);
   const handleClose = () => dispatch(closeModal({ modalName: 'openCheckEmail' }));
 
@@ -37,6 +34,7 @@ const CheckEmail = () => {
       dispatch(setEmail(values.email));
       dispatch(closeModal({ modalName: 'openCheckEmail' }));
       dispatch(openModal({ modalName: 'openResetPassword' }));
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar('Error sending email. Please try again.', { variant: 'error' });
     }

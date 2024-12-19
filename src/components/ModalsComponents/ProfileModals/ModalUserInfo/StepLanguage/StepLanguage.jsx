@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
@@ -35,6 +34,7 @@ const StepLanguage = () => {
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.language.create.success'), { variant: 'success' });
       formik.resetForm();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.language.create.error'), { variant: 'error' });
     }
@@ -56,6 +56,7 @@ const StepLanguage = () => {
       };
       await formik.setFieldValue('languages', [...formik.values.languages, newLang]);
       enqueueSnackbar(t('modalNotifyText.language.add.success'), { variant: 'success' });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.language.add.error'), { variant: 'error' });
     }

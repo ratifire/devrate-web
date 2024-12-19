@@ -1,4 +1,4 @@
-import React, { lazy, memo, Suspense } from 'react';
+import { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
 import { FaqTemplate } from '../../Templates';
 import ProfileHeader from '../../components/PageComponents/ProfileHeader';

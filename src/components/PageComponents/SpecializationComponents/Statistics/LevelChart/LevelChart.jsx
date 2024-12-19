@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHardSkillData } from '../../../../../utils/hooks/specialization';
 import { ErrorComponent } from '../../../../UI/Exceptions';

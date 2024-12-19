@@ -1,4 +1,3 @@
-import React from 'react';
 import { decorators } from '../../../../../.storybook/preview';
 import SpecializationCategories from './SpecializationCategories';
 

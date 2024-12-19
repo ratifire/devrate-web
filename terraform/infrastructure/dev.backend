@@ -1,4 +1,4 @@
-bucket  = "devrate-bucket-front-1"
+bucket  = "skillzzy-front-terraform-dev"
 encrypt = true
-key     = "AWS/build-test-frontend-infrastructure-tstates/terraform.tfstate"
+key     = "AWS/skillzzy-front-terraform-dev-infrastructure/terraform.tfstate"
 region  = "eu-north-1"

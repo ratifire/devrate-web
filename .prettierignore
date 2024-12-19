@@ -1,8 +1,10 @@
-**/.git
-**/.svn
-**/.hg
+**/*.git
+**/*.svn
+**/*.hg
 **/node_modules
-**/.yml
-**/.tf
+**/*.yml
+**/*.tf
 build/
 .github
+**/*.html
+**/*.md

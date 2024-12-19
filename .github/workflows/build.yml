@@ -8,14 +8,14 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to deploy (prod, dev, dev_new)'
+        description: 'Select environment to deploy (prod, dev_old, dev)'
         required: true
-        default: 'dev_new'
+        default: 'dev'
         type: choice
         options:
-          - dev
+          - dev_old
           - prod
-          - dev_new
+          - dev
 
 permissions:
   id-token: write
@@ -25,11 +25,7 @@ jobs:
   build-and-push:
     name: Build and Push
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment || 'dev_new' }}
-    strategy:
-      matrix:
-        node-version: [ 20.11.0 ]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    environment: ${{ github.event.inputs.environment || 'dev' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -39,13 +35,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      - name: Set environment variables with defaults
-        run: |
-          echo "REACT_APP_API_URL=${{ vars.REACT_APP_API_URL }}" >> .env
-          echo "REACT_APP_WS_URL=${{ vars.REACT_APP_WS_URL }}" >> .env
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
 
-      - run: npm ci
-      - run: npm run build --if-present
+      - name: Build React with Express (server-build)
+        run: |
+          VITE_API_URL=${{ vars.REACT_APP_API_URL }} \
+          VITE_WS_URL=${{ vars.REACT_APP_WS_URL }} \
+          npm run server-build
 
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -64,7 +61,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           # Build a docker container 
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -f Dockerfile.aws -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 
       - name: Push image to Amazon ECR
         id: push-image

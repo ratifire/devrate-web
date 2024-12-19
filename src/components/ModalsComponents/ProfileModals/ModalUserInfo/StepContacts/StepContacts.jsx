@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
@@ -60,6 +59,7 @@ const StepContacts = () => {
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.contacts.create.success'), { variant: 'success' });
       formik.resetForm();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.contacts.create.error'), { variant: 'error' });
     }

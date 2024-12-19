@@ -1,6 +1,5 @@
 import { Tab, Tabs } from '@mui/material';
 import { DateTime } from 'luxon';
-import React from 'react';
 import PropTypes from 'prop-types';
 import { styles } from './styles';
 

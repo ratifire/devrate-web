@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -44,6 +43,7 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
 
       resetForm();
       onClose();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.achievement.edit.error'), {
         variant: 'error',

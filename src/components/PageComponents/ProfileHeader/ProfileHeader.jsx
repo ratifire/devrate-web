@@ -1,5 +1,5 @@
 import { AppBar, Box, Button } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router';
 import { selectCurrentUser } from '../../../redux/auth/authSlice';

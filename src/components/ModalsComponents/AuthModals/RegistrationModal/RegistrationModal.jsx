@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Box, Link, Typography } from '@mui/material';
@@ -11,7 +11,7 @@ import ModalLayout from '../../../../layouts/ModalLayout';
 import { useCreateUserMutation } from '../../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
-import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord';
+import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
 import styles from './RegistrationModal.styles';
 
 const initialValues = {

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { HomeTemplate } from '../../Templates';
 import { AboutUsSection, FaqSection, Footer, HowItWorksSection } from './../HomePage/sections';
 import './styles/reset.css';

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 
 const FaqTemplate = ({ children }) => {
   return (

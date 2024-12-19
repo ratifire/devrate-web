@@ -1,4 +1,3 @@
-import React from 'react';
 import logo from '../../assets/logo.svg';
 import linkdin from '../../assets/linkdin.svg';
 import mail from '../../assets/mail.svg';

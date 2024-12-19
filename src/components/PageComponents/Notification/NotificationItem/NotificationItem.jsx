@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Chip, IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
 import Close from '@mui/icons-material/Close';

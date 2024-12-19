@@ -1,6 +1,5 @@
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { SvgIcon } from '@mui/material';
-import React from 'react';
 import { useArrowTheme } from '../hooks';
 
 const CustomArrowCircleUpIcon = (props) => {

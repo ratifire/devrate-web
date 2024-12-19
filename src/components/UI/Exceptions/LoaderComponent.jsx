@@ -1,5 +1,4 @@
 import { Box, CircularProgress } from '@mui/material';
-import React from 'react';
 import { styles } from './Exceptions.styles';
 
 const LoaderComponent = () => {

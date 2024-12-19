@@ -1,5 +1,24 @@
 {
   "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
+  "ignoreFiles": [
+    "**/*.tsx",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.js",
+    "**/*.md",
+    "**/*.svg",
+    "/node_modules",
+    "**/*.woff",
+    "**/*.woff2",
+    "**/*.png",
+    "build/",
+    ".github",
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.yml",
+    "**/.tf"
+  ],
   "customSyntax": "postcss-scss",
   "rules": {
     "scss/at-import-partial-extension": null,

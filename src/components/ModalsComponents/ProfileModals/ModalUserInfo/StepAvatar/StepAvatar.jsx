@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
@@ -42,6 +41,7 @@ const StepAvatar = () => {
 
       enqueueSnackbar(t(messageKey), { variant: 'success' });
       formik.resetForm();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       const errorKey = avatarValue ? 'modalNotifyText.avatar.edit.error' : 'modalNotifyText.avatar.create.error';
 
@@ -63,6 +63,7 @@ const StepAvatar = () => {
         await deleteAvatarUser(user.id).unwrap();
         enqueueSnackbar(t('modalNotifyText.avatar.delete.success'), { variant: 'success' });
         await formik.setFieldValue('avatar', '');
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         enqueueSnackbar(t('modalNotifyText.avatar.delete.error'), { variant: 'error' });
       }

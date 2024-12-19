@@ -1,6 +1,5 @@
 import { Box, IconButton, Typography } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import React from 'react';
 import PropTypes from 'prop-types';
 import { styles } from './styles';
 

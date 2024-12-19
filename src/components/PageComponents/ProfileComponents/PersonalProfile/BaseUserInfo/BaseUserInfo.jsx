@@ -1,4 +1,3 @@
-import React from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, Button, IconButton, Typography } from '@mui/material';

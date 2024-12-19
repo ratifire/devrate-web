@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import iconBtn from '../../../assets/icon-bottom.svg';
 import iconOpen from '../../../assets/icon-open-top.svg';

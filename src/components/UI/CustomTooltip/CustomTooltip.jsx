@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { tooltipClasses, Tooltip, styled } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';

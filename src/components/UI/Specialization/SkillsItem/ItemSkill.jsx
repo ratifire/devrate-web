@@ -1,6 +1,5 @@
 import { Box, Divider, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
 import CustomTooltip from '../../../UI/CustomTooltip';
 import LinearProgressWithLabel from '../../../UI/LinearProgressWithLabel';
 import { CustomArrowCircleDownIcon } from './CustomArrowCircleDownIcon';
