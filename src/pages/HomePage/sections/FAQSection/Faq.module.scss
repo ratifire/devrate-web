@@ -117,13 +117,12 @@
   }
 
   &__columns {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
     column-gap: 72px;
 
     @include tablet-large {
-      grid-template-columns: repeat(1, 1fr);
       gap: 8px;
+      flex-direction: column;
 
       & > div:last-child {
         & > *:nth-last-child(-n + 3) {
@@ -134,19 +133,15 @@
   }
 
   &__column {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(5, auto);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 
     @include tablet {
-      grid-template-columns: repeat(1, 1fr);
-      grid-template-rows: repeat(5, auto);
       gap: 0;
     }
 
     @include phone {
-      grid-template-columns: repeat(1, 1fr);
-      grid-template-rows: repeat(5, auto);
       gap: 8px;
     }
   }
