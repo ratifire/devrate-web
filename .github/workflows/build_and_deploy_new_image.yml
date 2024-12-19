@@ -15,6 +15,9 @@ on:
           - dev_old
           - prod
           - dev
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
