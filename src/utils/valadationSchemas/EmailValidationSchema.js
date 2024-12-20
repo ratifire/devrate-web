@@ -12,10 +12,10 @@ Yup.addMethod(Yup.string, 'email', function (message) {
 
     if (!localPart || !domainPart) return false;
 
-    if (localPart.length < 1 || localPart.length > 64) return false;
-    if (domainPart.length < 1 || domainPart.length > 255) return false;
+    if (localPart.length < 1 || localPart.length > 63) return false;
+    if (domainPart.length < 1 || domainPart.length > 192) return false;
 
-    if (trimmedValue.length > 320) return false;
+    if (trimmedValue.length > 255) return false;
 
     if (/^[.@-]/.test(localPart) || /[.@-]$/.test(localPart)) return false;
     if (/^[.@-]/.test(domainPart) || /[.@-]$/.test(domainPart)) return false;
