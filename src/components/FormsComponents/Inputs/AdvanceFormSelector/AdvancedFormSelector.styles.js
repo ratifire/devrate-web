@@ -2,7 +2,7 @@ export const styles = {
   wrapper: (theme) => ({
     width: '100%',
     minWidth: 150,
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(5),
   }),
   selectField: (theme) => ({
     '& .MuiInputBase-root': {
@@ -50,7 +50,7 @@ export const styles = {
   helperText: (theme) => ({
     position: 'absolute',
     bottom: '-21px',
-    left: '14px',
+    left: '0px',
     '&.MuiFormHelperText-root': {
       color: theme.palette.error.main,
     },

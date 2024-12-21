@@ -35,6 +35,6 @@ export const styles = {
   },
   textareaBox: (theme) => ({
     width: '100%',
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(5),
   }),
 };
