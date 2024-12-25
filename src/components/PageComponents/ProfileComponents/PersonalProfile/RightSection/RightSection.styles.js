@@ -1,6 +1,9 @@
 export const styles = {
   wrapper: (theme) => ({
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
+    '@media (min-width: 1272px)': {
+      padding: theme.spacing(4),
+    },
   }),
   wrapperBox: (theme) => ({
     position: 'relative',
@@ -44,5 +47,16 @@ export const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  link: {
+    display: 'inline-block',
+    ' svg': {
+      width: '34px',
+      height: '34px',
+      '@media (min-width: 1272px)': {
+        width: '44px',
+        height: '44px',
+      },
+    },
   },
 };

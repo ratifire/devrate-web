@@ -2,7 +2,10 @@ export const styles = {
   skillsWrapper: (theme) => ({
     width: '100%',
     height: '100%',
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
+    '@media (min-width: 1272px)': {
+      padding: theme.spacing(4),
+    },
   }),
   skillsTitle: (theme) => ({
     marginBottom: theme.spacing(2),

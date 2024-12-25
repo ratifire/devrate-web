@@ -81,78 +81,80 @@ const StepContacts = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Box sx={styles.input100}>
-        <FormInput
-          error={formik.touched.telegram && Boolean(formik.errors.telegram)}
-          handleBlur={formik.handleBlur}
-          handleChange={formik.handleChange}
-          helperText={formik.touched.telegram && formik.errors.telegram}
-          label='profile.modal.userInfo.contact.telegram'
-          name='telegram'
-          type='text'
-          value={formik.values.telegram}
-        />
-      </Box>
-      <Box sx={styles.input100}>
-        <FormInput
-          error={formik.touched.linkedIn && Boolean(formik.errors.linkedIn)}
-          handleBlur={formik.handleBlur}
-          handleChange={formik.handleChange}
-          helperText={formik.touched.linkedIn && formik.errors.linkedIn}
-          label='profile.modal.userInfo.contact.linkedIn'
-          name='linkedIn'
-          type='text'
-          value={formik.values.linkedIn}
-        />
-      </Box>
-      <Box sx={styles.input100}>
-        <FormInput
-          error={formik.touched.gitHub && Boolean(formik.errors.gitHub)}
-          handleBlur={formik.handleBlur}
-          handleChange={formik.handleChange}
-          helperText={formik.touched.gitHub && formik.errors.gitHub}
-          label='profile.modal.userInfo.contact.gitHub'
-          name='gitHub'
-          type='text'
-          value={formik.values.gitHub}
-        />
-      </Box>
-      <Box sx={styles.input100}>
-        <FormInput
-          error={formik.touched.behance && Boolean(formik.errors.behance)}
-          handleBlur={formik.handleBlur}
-          handleChange={formik.handleChange}
-          helperText={formik.touched.behance && formik.errors.behance}
-          label='profile.modal.userInfo.contact.behance'
-          name='behance'
-          type='text'
-          value={formik.values.behance}
-        />
-      </Box>
-      <Box sx={styles.input100}>
-        <FormInput
-          required
-          error={formik.touched.mail && Boolean(formik.errors.mail)}
-          handleBlur={formik.handleBlur}
-          handleChange={formik.handleChange}
-          helperText={formik.touched.mail && formik.errors.mail}
-          label='profile.modal.userInfo.contact.mail'
-          name='mail'
-          type='text'
-          value={formik.values.mail}
-        />
-      </Box>
-      <Box sx={styles.input100}>
-        <FormInput
-          error={formik.touched.phone && Boolean(formik.errors.phone)}
-          handleBlur={formik.handleBlur}
-          handleChange={formik.handleChange}
-          helperText={formik.touched.phone && formik.errors.phone}
-          label='profile.modal.userInfo.contact.phone'
-          name='phone'
-          type='text'
-          value={formik.values.phone}
-        />
+      <Box sx={styles.wrapper}>
+        <Box sx={styles.input100}>
+          <FormInput
+            error={formik.touched.telegram && Boolean(formik.errors.telegram)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.telegram && formik.errors.telegram}
+            label='profile.modal.userInfo.contact.telegram'
+            name='telegram'
+            type='text'
+            value={formik.values.telegram}
+          />
+        </Box>
+        <Box sx={styles.input100}>
+          <FormInput
+            error={formik.touched.linkedIn && Boolean(formik.errors.linkedIn)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.linkedIn && formik.errors.linkedIn}
+            label='profile.modal.userInfo.contact.linkedIn'
+            name='linkedIn'
+            type='text'
+            value={formik.values.linkedIn}
+          />
+        </Box>
+        <Box sx={styles.input100}>
+          <FormInput
+            error={formik.touched.gitHub && Boolean(formik.errors.gitHub)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.gitHub && formik.errors.gitHub}
+            label='profile.modal.userInfo.contact.gitHub'
+            name='gitHub'
+            type='text'
+            value={formik.values.gitHub}
+          />
+        </Box>
+        <Box sx={styles.input100}>
+          <FormInput
+            error={formik.touched.behance && Boolean(formik.errors.behance)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.behance && formik.errors.behance}
+            label='profile.modal.userInfo.contact.behance'
+            name='behance'
+            type='text'
+            value={formik.values.behance}
+          />
+        </Box>
+        <Box sx={styles.input100}>
+          <FormInput
+            required
+            error={formik.touched.mail && Boolean(formik.errors.mail)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.mail && formik.errors.mail}
+            label='profile.modal.userInfo.contact.mail'
+            name='mail'
+            type='text'
+            value={formik.values.mail}
+          />
+        </Box>
+        <Box sx={styles.input100}>
+          <FormInput
+            error={formik.touched.phone && Boolean(formik.errors.phone)}
+            handleBlur={formik.handleBlur}
+            handleChange={formik.handleChange}
+            helperText={formik.touched.phone && formik.errors.phone}
+            label='profile.modal.userInfo.contact.phone'
+            name='phone'
+            type='text'
+            value={formik.values.phone}
+          />
+        </Box>
       </Box>
       <ButtonDef
         disabled={!formik.dirty || formik.isSubmitting || !formik.isValid}

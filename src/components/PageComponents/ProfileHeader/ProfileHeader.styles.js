@@ -3,12 +3,16 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingY: theme.spacing(3),
-    paddingX: theme.spacing(4),
+    paddingY: '12px',
+    paddingX: theme.spacing(3),
     width: '100%',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     backgroundImage: 'none',
     boxShadow: 'none',
+    '@media (min-width: 1272px)': {
+      paddingY: theme.spacing(3),
+      paddingX: theme.spacing(4),
+    },
   }),
   toolbar: {
     justifyContent: 'space between',
@@ -28,9 +32,5 @@ const styles = {
     height: 44,
     padding: 0,
   },
-  iconButtonWrapper: (theme) => ({
-    borderRadius: 1,
-    color: theme.palette.notifications.badge.fill,
-  }),
 };
 export default styles;

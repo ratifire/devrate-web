@@ -48,10 +48,26 @@ export const styles = {
       },
     },
   }),
-  list: {
+  list: (theme) => ({
     marginTop: '16px',
     display: 'flex',
     flexWrap: 'wrap',
     gridGap: '0 20px',
-  },
+    '@media (max-width: 1272px)': {
+      overflowY: 'auto',
+      maxHeight: '135px',
+      paddingRight: theme.spacing(3),
+      '&::-webkit-scrollbar': {
+        width: 10,
+      },
+      '&::-webkit-scrollbar-track': () => ({
+        backgroundColor: '#303032',
+        borderRadius: 8,
+      }),
+      '&::-webkit-scrollbar-thumb': (theme) => ({
+        borderRadius: 6,
+        backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
+      }),
+    },
+  }),
 };

@@ -1,11 +1,13 @@
 export const styles = {
   container: (theme) => ({
-    paddingTop: theme.spacing(4),
-    paddingX: theme.spacing(2),
-    '@media (min-width: 1272px)': {
-      maxWidth: '1536px',
-    },
+    paddingX: theme.spacing(3),
     '@media (min-width: 600px)': {
+      paddingTop: theme.spacing(3),
+      paddingX: theme.spacing(3),
+    },
+    '@media (min-width: 1272px)': {
+      maxWidth: '1920px',
+      paddingTop: theme.spacing(4),
       paddingX: theme.spacing(4),
     },
   }),
@@ -13,7 +15,10 @@ export const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
     gridTemplateRows: 'auto auto auto',
-    gridGap: theme.spacing(4),
+    gridGap: theme.spacing(3),
+    '@media (min-width: 1272px)': {
+      gridGap: theme.spacing(4),
+    },
     ' > div': {
       borderRadius: 2,
       backgroundColor: theme.palette.pagesSections.backgroundColor,
@@ -31,7 +36,7 @@ export const styles = {
   },
   right: {
     gridColumn: '10/13',
-    gridRow: '1/3',
+    gridRow: '1/5',
     minWidth: '354px',
   },
   experience: {

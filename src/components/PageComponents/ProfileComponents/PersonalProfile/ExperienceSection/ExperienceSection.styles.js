@@ -1,12 +1,16 @@
 const styles = {
   experienceContainer: (theme) => ({
     width: '100%',
-    paddingX: theme.spacing(4),
-    paddingTop: theme.spacing(4),
+    paddingX: theme.spacing(3),
+    paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(2),
     borderRadius: 'inherit',
     height: '100%',
     minHeight: '382px',
+    '@media (min-width: 1272px)': {
+      paddingTop: theme.spacing(4),
+      paddingX: theme.spacing(4),
+    },
   }),
   tabsContainer: {
     display: 'flex',
@@ -24,8 +28,11 @@ const styles = {
   }),
   tabItem: (theme) => ({
     textTransform: 'none',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '500',
+    '@media (min-width: 1272px)': {
+      fontSize: 20,
+    },
     '&.Mui-selected': {
       color: theme.palette.tabsEl.focused.color,
     },

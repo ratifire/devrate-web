@@ -2,7 +2,10 @@ export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
+    '@media (min-width: 1272px)': {
+      padding: theme.spacing(4),
+    },
   }),
   wrapperAvatar: (theme) => ({
     flex: '1 0 100%',
