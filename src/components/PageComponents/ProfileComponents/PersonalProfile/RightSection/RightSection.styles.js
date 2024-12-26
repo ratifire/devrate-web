@@ -1,6 +1,6 @@
 export const styles = {
   wrapper: (theme) => ({
-    padding: theme.spacing(3),
+    padding: `20px ${theme.spacing(3)} ${theme.spacing(3)}`,
     '@media (min-width: 1272px)': {
       padding: theme.spacing(4),
     },

@@ -1,6 +1,5 @@
 const styles = {
   userMenuBox: (theme) => ({
-    height: '100%',
     width: 300,
     background: theme.palette.background.level2,
     display: 'flex',

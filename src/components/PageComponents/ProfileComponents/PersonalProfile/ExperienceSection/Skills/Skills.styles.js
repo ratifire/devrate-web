@@ -5,7 +5,7 @@ export const styles = {
     gridGap: theme.spacing(3),
     flexWrap: 'wrap',
     '@media (min-width: 1272px)': {
-      flexWrap: 'no-wrap',
+      flexWrap: 'nowrap',
     },
   }),
 };

@@ -8,25 +8,26 @@ export const styles = {
     },
   }),
   wrapperAvatar: (theme) => ({
-    flex: '1 0 100%',
+    flex: '1 0 132px',
     marginRight: theme.spacing(0),
     marginBottom: theme.spacing(1),
     '> button': {
       padding: theme.spacing(0),
       borderRadius: 1,
-      width: '100%',
+      width: 'auto',
       height: '100%',
     },
-    '@media (min-width: 600px)': {
+    '@media (min-width: 1272px)': {
       flex: '1 0 152px',
       marginRight: theme.spacing(3),
       marginBottom: theme.spacing(0),
     },
   }),
   avatar: {
-    width: '152px',
-    height: '152px',
-    borderRadius: 1,
+    '@media (min-width: 1272px)': {
+      width: '152px',
+      height: '152px',
+    },
   },
   wrapperText: {
     flex: '1 0 calc(100% - 168px)',
