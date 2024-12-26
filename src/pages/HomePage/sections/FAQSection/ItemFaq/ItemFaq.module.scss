@@ -15,6 +15,10 @@
     height: 100%;
 
     @include desktop-macbook {
+      padding: 36px 0;
+    }
+
+    @include tablet-large {
       padding: 24px 0;
     }
 
@@ -104,18 +108,34 @@
   &__answer {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    font-size: 24px;
+    font-size: 0;
     line-height: 150%;
     color: #c5c5c6;
+    padding-top: 16px;
+    margin: 0 54px;
+    transition: all 70ms linear;
+
+    &Active {
+      font-size: 24px;
+    }
 
     @include desktop-macbook {
-      font-size: 16px;
+      font-size: 0;
+      margin: 0 38px;
+
+      &Active {
+        font-size: 16px;
+      }
     }
 
     @include phone {
-      font-size: 14px;
+      font-size: 0;
       line-height: 1.35;
       color: #fff;
+
+      &Active {
+        font-size: 14px;
+      }
     }
   }
 }

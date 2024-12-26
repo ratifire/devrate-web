@@ -30,16 +30,16 @@
     height: 100%;
     z-index: -1;
 
-    @media screen and (width <= 1800px) {
-      background-position: -24px 0;
+    @media screen and (width <= 1930px) {
+      background-position: -15px 0;
     }
 
     @include desktop {
-      background-position: -72px 0;
+      background-position: top left;
     }
 
     @include tablet-large {
-      background-position: -33px 0;
+      background-position: 33px 0;
     }
 
     @include tablet {

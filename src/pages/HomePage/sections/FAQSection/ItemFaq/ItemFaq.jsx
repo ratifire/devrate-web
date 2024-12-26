@@ -18,7 +18,13 @@ const ItemFaq = ({ item, openId, handleOnClick }) => {
           </div>
           <img alt='iconButton' className={styles.itemFaq__iconBottom} src={openId === item.id ? iconOpen : iconBtn} />
         </div>
-        {openId === item.id && <div className={styles.itemFaq__answer}>{item.answer}</div>}
+        <div
+          className={
+            openId === item.id ? `${styles.itemFaq__answer} ${styles.itemFaq__answerActive}` : styles.itemFaq__answer
+          }
+        >
+          {item.answer}
+        </div>
       </div>
     </div>
   );
