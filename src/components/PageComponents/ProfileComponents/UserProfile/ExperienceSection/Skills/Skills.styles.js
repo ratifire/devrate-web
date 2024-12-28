@@ -147,13 +147,13 @@ export const styles = {
     }),
   },
   text: (theme) => ({
-    '&.JUNIOR': {
+    '&.Junior': {
       color: theme.palette.experienceSkillSect.text.junior,
     },
-    '&.MIDDLE': {
+    '&.Middle': {
       color: theme.palette.experienceSkillSect.text.middle,
     },
-    '&.SENIOR': {
+    '&.Senior': {
       color: theme.palette.experienceSkillSect.text.senior,
     },
     '>span': {
