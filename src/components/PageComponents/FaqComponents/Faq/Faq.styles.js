@@ -30,7 +30,7 @@ export const styles = {
   }),
   accordion: (theme) => ({
     padding: theme.spacing(3),
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(3),
     borderRadius: 1,
     backgroundColor: theme.palette.faq.questions.backgroundColor,
     backgroundImage: 'none',
