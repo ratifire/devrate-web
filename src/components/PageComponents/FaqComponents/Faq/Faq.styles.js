@@ -7,10 +7,10 @@ export const styles = {
   title: (theme) => ({
     marginBottom: theme.spacing(4),
     color: theme.palette.faq.title,
-    backgroundColor: 'red',
+    fontWeight: 500,
   }),
   list: (theme) => ({
-    maxHeight: '586px',
+    maxHeight: 'calc(100vh - 206px)',
     height: '100%',
     overflowY: 'auto',
     paddingRight: theme.spacing(3),

@@ -9,7 +9,7 @@ export const styles = {
     color: theme.palette.faq.blog.title,
   }),
   list: (theme) => ({
-    maxHeight: '586px',
+    maxHeight: 'calc(100vh - 193px);',
     height: '100%',
     overflowY: 'auto',
 

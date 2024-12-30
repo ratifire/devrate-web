@@ -20,6 +20,7 @@ export const styles = {
       backgroundImage: 'none',
       boxShadow: 'none',
     },
+    height: 'calc(100vh - 116px)',
   }),
   faq: {
     flex: '65.783 0 0',
