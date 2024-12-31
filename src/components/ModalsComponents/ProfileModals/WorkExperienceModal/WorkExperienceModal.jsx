@@ -5,9 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
-import { WorkExperienceModalSchema } from '../../../../utils/valadationSchemas/index';
+import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas/index';
 import { closeModal } from '../../../../redux/modal/modalSlice';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import Responsibility from '../../../UI/Responsibility';
@@ -24,7 +23,6 @@ import { styles } from './WorkExperienceModal.styles';
 const WorkExperienceModal = () => {
   const dispatch = useDispatch();
   const { modalData } = useSelector((state) => state.modal);
-  const workExperience = useSelector((state) => state.modal.workExperience);
   const { id } = useSelector((state) => state.auth.user.data);
   const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
   const { t } = useTranslation();
@@ -110,7 +108,7 @@ const WorkExperienceModal = () => {
   };
 
   return (
-    <ModalLayoutProfile open={workExperience} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='subtitle1'>
         {t('profile.modal.workExperience.title')}
       </Typography>
@@ -241,7 +239,7 @@ const WorkExperienceModal = () => {
           />
         </Box>
       </form>
-    </ModalLayoutProfile>
+    </>
   );
 };
 

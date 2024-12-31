@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
 import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
-import { StepPersonalSchema } from '../../../../../utils/valadationSchemas/index';
+import { StepPersonalSchema } from '../../../../../utils/validationSchemas/index';
 import {
   useGetPersonalUserQuery,
   usePutPersonalUserMutation,

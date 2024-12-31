@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box, Link, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router';
-import { RegistrationSchema } from '../../../../utils/valadationSchemas/index';
+import { RegistrationSchema } from '../../../../utils/validationSchemas/index';
 import { AdvancedFormSelector, FormCheckbox, FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import ModalLayout from '../../../../layouts/ModalLayout';

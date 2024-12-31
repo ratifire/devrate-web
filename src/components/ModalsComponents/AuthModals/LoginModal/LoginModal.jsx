@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import { Box, Link, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ModalLayout from '../../../../layouts/ModalLayout';
-import { LoginSchema } from '../../../../utils/valadationSchemas/index';
+import { LoginSchema } from '../../../../utils/validationSchemas/index';
 import { FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';

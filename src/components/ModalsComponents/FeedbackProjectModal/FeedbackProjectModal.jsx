@@ -8,7 +8,7 @@ import FormSelect from '../../FormsComponents/Inputs/FormSelect';
 import TextAreaInput from '../../FormsComponents/Inputs/TextAreaInput';
 import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../redux/modal/modalSlice';
-import { FeedbackProjectModalSchema } from '../../../utils/valadationSchemas/index';
+import { FeedbackProjectModalSchema } from '../../../utils/validationSchemas/index';
 import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
 import { feedbackOptions } from './constants';
 import { styles } from './FeedbackProjectModal.styles';

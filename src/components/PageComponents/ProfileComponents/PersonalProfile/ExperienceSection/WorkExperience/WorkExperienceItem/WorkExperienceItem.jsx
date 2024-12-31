@@ -28,10 +28,10 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
 
   const handleEditFeature = () => {
     dispatch(
-      openModal({
-        modalName: 'workExperience',
-        data: { id, position, companyName, description, responsibilities, startYear, endYear },
-      })
+      openModal(
+        'workExperienceModal'
+        // data: { id, position, companyName, description, responsibilities, startYear, endYear },
+      )
     );
     handleCloseMenu();
   };

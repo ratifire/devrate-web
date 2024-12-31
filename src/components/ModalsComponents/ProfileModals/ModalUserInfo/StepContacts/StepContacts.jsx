@@ -7,7 +7,7 @@ import {
   useGetUserContactsQuery,
   usePostContactsUserMutation,
 } from '../../../../../redux/user/contacts/contactsApiSlice';
-import { StepContactsSchema } from '../../../../../utils/valadationSchemas/index';
+import { StepContactsSchema } from '../../../../../utils/validationSchemas/index';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';

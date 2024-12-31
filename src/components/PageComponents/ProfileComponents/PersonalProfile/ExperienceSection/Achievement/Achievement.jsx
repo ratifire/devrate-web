@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { iconsAchievement } from '../../../../../../utils/constants/Experience/iconsExperience';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { useFetchAchievementsQuery } from '../../../../../../redux/services/achievementsApiSlice';
-import AchievementModal from '../../../../../ModalsComponents/ProfileModals/AchievementModal';
 import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
 import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
 import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
@@ -43,7 +42,6 @@ const Achievement = ({ tab }) => {
           </Grid>
         ))}
       </Grid>
-      <AchievementModal userId={userId} />
     </>
   );
 };

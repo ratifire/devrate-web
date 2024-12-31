@@ -19,7 +19,7 @@ import { useGetSpecializationListQuery } from '../../../../redux/specialization/
 import { setActiveSpecialization } from '../../../../redux/specialization/specializationSlice';
 import modalSpecialization from '../../../../utils/constants/Specialization/modalSpecialization';
 import useMergeState from '../../../../utils/hooks/useMergeState';
-import { SpecializationModalSchema } from '../../../../utils/valadationSchemas/index';
+import { SpecializationModalSchema } from '../../../../utils/validationSchemas/index';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';

@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Box, Link, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { CheckResetEmailSchema } from '../../../../../utils/valadationSchemas/index';
+import { CheckResetEmailSchema } from '../../../../../utils/validationSchemas/index';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';

@@ -10,7 +10,7 @@ import { useUpdateAchievementMutation } from '../../../../redux/services/achieve
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
-import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
+import { AchievementModalSchema } from '../../../../utils/validationSchemas/index';
 import { styles } from './AchievementModal.styles';
 
 const AchievementEditModal = ({ isOpen, onClose, achievement }) => {

@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 import { closeModal } from '../../../../redux/modal/modalSlice';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
-import { EducationModalSchema } from '../../../../utils/valadationSchemas/index';
+import { EducationModalSchema } from '../../../../utils/validationSchemas/index';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
@@ -15,11 +14,12 @@ import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { selectEducationDataToEdit, clearEducationDataToEdit } from '../../../../redux/user/education/educationSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { styles } from './EducationModal.styles';
+import educationModal from './index.js';
 
 const EducationModal = () => {
   const dispatch = useDispatch();
   const dataToEdit = useSelector(selectEducationDataToEdit);
-  const openEducation = useSelector((state) => state.modal.education);
+  const openEducation = useSelector((state) => state.modal);
   const { t } = useTranslation();
   const translatedNow = t('profile.modal.education.now');
   const [startYears, setStartYears] = useState([]);
@@ -30,7 +30,7 @@ const EducationModal = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = useCallback(() => {
-    dispatch(closeModal({ modalName: 'education' }));
+    dispatch(closeModal('educationModal'));
     dispatch(clearEducationDataToEdit());
   }, [dispatch]);
 
@@ -116,14 +116,14 @@ const EducationModal = () => {
   });
 
   useEffect(() => {
-    if (!openEducation) {
+    if (!openEducation[educationModal]) {
       formik.resetForm();
       dispatch(clearEducationDataToEdit());
     }
   }, [openEducation, formik, dispatch]);
 
   return (
-    <ModalLayoutProfile open={openEducation} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='subtitle1'>
         {t('profile.modal.education.title')}
       </Typography>
@@ -212,7 +212,7 @@ const EducationModal = () => {
           />
         </Box>
       </form>
-    </ModalLayoutProfile>
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import ModalLayout from '../../../../layouts/ModalLayout';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useConfirmEmailMutation } from '../../../../redux/auth/authApiSlice';
-import { ConfirmationSchema } from '../../../../utils/valadationSchemas/index';
+import { ConfirmationSchema } from '../../../../utils/validationSchemas/index';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
 import ConfirmationForm from './ConfirmationForm';
 import styles from './ConfirmationModal.styles';
