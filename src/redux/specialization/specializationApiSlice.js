@@ -68,10 +68,9 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
     }),
 
     setNewMainMasteryBySpecIdAndMasteryId: builder.mutation({
-      query: ({ masteryId, specId, name, softSkillMark, hardSkillMark }) => ({
+      query: ({ masteryId, specId }) => ({
         url: `/specializations/${specId}/set-main-mastery/${masteryId}`,
         method: 'PUT',
-        body: { id: masteryId, name: masteryLvl[name], softSkillMark, hardSkillMark },
       }),
       invalidatesTags: (result, error, { masteryId }) => [{ type: TAG_TYPES.MainMastery, id: masteryId }],
     }),
