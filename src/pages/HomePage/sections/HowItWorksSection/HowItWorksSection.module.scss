@@ -17,29 +17,17 @@
     right: 0;
     background-image: url('../../assets/BackgroundImages/Background_2-01_howitworks.svg');
     background-repeat: no-repeat;
-    background-position: top right;
+    background-position: bottom right;
     background-size: cover;
     width: 100%;
-    height: 44%;
+    height: 969px;
 
     @include desktop-macbook {
-      height: 40%;
+      height: 828px;
     }
 
     @include tablet-large {
-      height: 54%;
-    }
-
-    @media screen and (width <= 1170px) {
-      height: 56%;
-    }
-
-    @media screen and (width <= 1080px) {
-      height: 58%;
-    }
-
-    @media screen and (width <= 1010px) {
-      height: 60%;
+      height: 1039px;
     }
 
     @include tablet {
