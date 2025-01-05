@@ -1,12 +1,13 @@
 import { formatDate } from '@fullcalendar/core';
 import { Link as RouterLink } from 'react-router';
 import PropTypes from 'prop-types';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';
+import useCheckTimeDifference from '../../../../utils/hooks/schedule/useCheckTimeDifference.js';
 import { styles } from './SidebarEvent.styles';
 
 const SidebarEvent = ({ event }) => {
@@ -25,6 +26,8 @@ const SidebarEvent = ({ event }) => {
   const [month, day, year] = formattedDate.split('/');
   const customFormattedDate = `${day}/${month}/${year}`;
 
+  const { showCancelButton, disableLink } = useCheckTimeDifference(startTime);
+
   const deleteEvent = useDeleteEvent();
 
   const handleCancelInterview = async () => {
@@ -37,32 +40,6 @@ const SidebarEvent = ({ event }) => {
       onFinally: () => console.log('EventPopup: Deletion process complete'),
     });
   };
-
-  const [showCancelButton, setShowCancelButton] = useState(true);
-  const [disableLink, setDisableLink] = useState(false);
-
-  useEffect(() => {
-    const eventStartTime = new Date(startTime);
-
-    const checkTimeDifference = () => {
-      const currentTime = new Date();
-      const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
-
-      if (timeDifferenceInMinutes >= 1) {
-        setShowCancelButton(false);
-      }
-
-      if (timeDifferenceInMinutes >= 60) {
-        setDisableLink(true);
-      }
-    };
-
-    checkTimeDifference();
-
-    const timer = setInterval(checkTimeDifference, 60000);
-
-    return () => clearInterval(timer);
-  }, [startTime]);
 
   return (
     <Paper key={eventTypeId} sx={styles.sideBarEventContainer}>

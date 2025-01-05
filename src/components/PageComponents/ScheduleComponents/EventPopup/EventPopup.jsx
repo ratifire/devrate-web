@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import LinkIcon from '@mui/icons-material/Link';
@@ -10,6 +9,7 @@ import { Link } from 'react-router';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import links from '../../../../router/links';
 import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';
+import useCheckTimeDifference from '../../../../utils/hooks/schedule/useCheckTimeDifference.js';
 import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpdated }) => {
@@ -17,33 +17,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
   const theme = useTheme();
   const { id: userId } = useSelector((state) => state.auth.user.data);
 
-  const [showCancelButton, setShowCancelButton] = useState(true);
-  const [disableLink, setDisableLink] = useState(false);
+  const { showCancelButton, disableLink } = useCheckTimeDifference(event.startTime);
 
   const deleteEvent = useDeleteEvent();
-
-  useEffect(() => {
-    const eventStartTime = new Date(event.startTime);
-
-    const checkTimeDifference = () => {
-      const currentTime = new Date();
-      const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
-
-      if (timeDifferenceInMinutes >= 1) {
-        setShowCancelButton(false);
-      }
-
-      if (timeDifferenceInMinutes >= 60) {
-        setDisableLink(true);
-      }
-    };
-
-    checkTimeDifference();
-
-    const timer = setInterval(checkTimeDifference, 60000);
-
-    return () => clearInterval(timer);
-  }, [event.startTime]);
 
   const handleCancelInterview = async () => {
     await deleteEvent({
