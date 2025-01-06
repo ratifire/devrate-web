@@ -18,29 +18,32 @@ import {
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
+import { selectWorkExperienceDataToEdit } from '../../../../redux/workExperience/workExperienceSlice.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceModal = () => {
   const dispatch = useDispatch();
-  const { modalData } = useSelector((state) => state.modal);
   const { id } = useSelector((state) => state.auth.user.data);
-  const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
+  const dataToEdit = useSelector(selectWorkExperienceDataToEdit);
+  const [responsibilities, setResponsibilities] = useState(dataToEdit?.responsibilities || []);
   const { t } = useTranslation();
   const [createNewWorkExperience, { isLoading }] = useCreateNewWorkExperienceMutation();
   const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
   const { enqueueSnackbar } = useSnackbar();
 
   const selectYears = useMemo(() => generateYearsArray(), []);
-  const handleClose = () => dispatch(closeModal({ modalName: 'workExperience' }));
+  const handleClose = () => {
+    dispatch(closeModal({ modalName: 'workExperience' }));
+  };
 
   const initialValues = {
-    position: modalData?.position || '',
-    companyName: modalData?.companyName || '',
-    description: modalData?.description || '',
+    position: dataToEdit?.position || '',
+    companyName: dataToEdit?.companyName || '',
+    description: dataToEdit?.description || '',
     responsibilities: '',
-    startYear: modalData?.startYear || '',
-    endYear: modalData?.endYear || '',
-    currentDate: modalData?.endYear === '9999',
+    startYear: dataToEdit?.startYear || '',
+    endYear: dataToEdit?.endYear || '',
+    currentDate: dataToEdit?.endYear === '9999',
   };
   const onSubmit = async (values, { resetForm }) => {
     try {
@@ -53,12 +56,12 @@ const WorkExperienceModal = () => {
         responsibilities,
       };
 
-      const messageKey = modalData?.id
+      const messageKey = dataToEdit?.id
         ? 'modalNotifyText.workExperience.edit.success'
         : 'modalNotifyText.workExperience.create.success';
 
-      if (modalData?.id) {
-        await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
+      if (dataToEdit?.id) {
+        await updateWorkExperienceById({ id: dataToEdit.id, data }).unwrap();
         enqueueSnackbar(t(messageKey), {
           variant: 'success',
           anchorOrigin: {
@@ -70,13 +73,12 @@ const WorkExperienceModal = () => {
         await createNewWorkExperience({ userId: id, data }).unwrap();
         enqueueSnackbar(t(messageKey), { variant: 'success' });
       }
-
       setResponsibilities([]);
       resetForm();
       handleClose();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      const errorKey = modalData?.id
+      const errorKey = dataToEdit?.id
         ? 'modalNotifyText.workExperience.edit.error'
         : 'modalNotifyText.workExperience.create.error';
 
@@ -230,7 +232,7 @@ const WorkExperienceModal = () => {
           )}
 
           <ButtonDef
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
+            disabled={!formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
             loading={isLoading}
             sx={styles.workExperienceBtn}

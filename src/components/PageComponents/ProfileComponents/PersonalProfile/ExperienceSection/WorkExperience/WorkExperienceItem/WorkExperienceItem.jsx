@@ -7,8 +7,9 @@ import { useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
-import { openModal } from '../../../../../../../redux/modal/modalSlice';
 import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/workExperience/workExperienceApiSlice';
+import { setWorkExperienceDataToEdit } from '../../../../../../../redux/workExperience/workExperienceSlice.js';
+import { openModal } from '../../../../../../../redux/modal/modalSlice.js';
 import styles from './WorkExperienceItem.styles.js';
 
 const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
@@ -28,12 +29,10 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
 
   const handleEditFeature = () => {
     dispatch(
-      openModal(
-        'workExperienceModal'
-        // data: { id, position, companyName, description, responsibilities, startYear, endYear },
-      )
+      setWorkExperienceDataToEdit({ id, position, companyName, description, responsibilities, startYear, endYear })
     );
     handleCloseMenu();
+    dispatch(openModal({ modalType: 'workExperienceModal' }));
   };
 
   const handleDeleteFeature = async () => {

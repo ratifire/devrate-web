@@ -21,7 +21,7 @@ const ExperienceSection = () => {
   };
 
   const handleAddFeature = (modal) => {
-    dispatch(openModal(modal));
+    dispatch(openModal({ modalType: modal }));
   };
 
   const tab = {
