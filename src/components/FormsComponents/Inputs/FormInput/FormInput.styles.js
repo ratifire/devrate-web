@@ -1,7 +1,7 @@
 export const styles = {
   inputWrapper: (theme) => ({
     width: '100%',
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(5),
     '& .Mui-error': {
       marginLeft: 0,
     },

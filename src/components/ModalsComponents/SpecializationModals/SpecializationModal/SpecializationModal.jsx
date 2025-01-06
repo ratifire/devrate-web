@@ -135,9 +135,6 @@ const SpecializationModal = () => {
           await setNewMainMasteryBySpecIdAndMasteryId({
             masteryId: resp.id,
             specId: activeSpecialization.id,
-            name: resp.level,
-            softSkillMark: resp.softSkillMark,
-            hardSkillMark: resp.hardSkillMark,
           }).unwrap();
           dispatch(setActiveSpecialization({ ...activeSpecialization, mastery: values.mastery }));
         }
@@ -156,9 +153,6 @@ const SpecializationModal = () => {
       await setNewMainMasteryBySpecIdAndMasteryId({
         masteryId: resp.id,
         specId: data.id,
-        name: resp.level,
-        softSkillMark: resp.softSkillMark,
-        hardSkillMark: resp.hardSkillMark,
       }).unwrap();
       await addSkills({ id: resp.id, skills });
       enqueueSnackbar(t('modalNotifyText.specialization.create.success', { values: values.name }), {

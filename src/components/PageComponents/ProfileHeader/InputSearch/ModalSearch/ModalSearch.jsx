@@ -57,6 +57,7 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
               </Box>
               <UserAvatar
                 correctStyle={styles.img}
+                radius={'circle'}
                 size={'sm'}
                 src={picture}
                 userFirstName={firstName}

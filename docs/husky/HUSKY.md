@@ -29,7 +29,10 @@
 
 # Ігнорування файлів для перевірки
 
+### Ігнорування файлів для prettier
 ![Скріншот файла .prettierignore](./screenshots/prettier-ignore.png)
+
+### Ігнорування файлів для eslint
 ![Скріншот файла .eslintignore](./screenshots/eslint-ignore.png)
 
-Щоб ігнорувати файли від перевірки, потрібно вказати шлях до файлу в файлі .prettierignore або .eslintignore
+Щоб ігнорувати файли від перевірки, потрібно вказати шлях до файлу в файлі .prettierignore або eslint.config.js

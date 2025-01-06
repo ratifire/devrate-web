@@ -29,13 +29,13 @@ export const styles = {
   }),
   text: (theme) => ({
     textTransform: 'lowercase',
-    '&.JUNIOR': {
+    '&.Junior': {
       color: theme.palette.experienceSkillSect.text.junior,
     },
-    '&.MIDDLE': {
+    '&.Middle': {
       color: theme.palette.experienceSkillSect.text.middle,
     },
-    '&.SENIOR': {
+    '&.Senior': {
       color: theme.palette.experienceSkillSect.text.senior,
     },
     '&:first-letter': {
