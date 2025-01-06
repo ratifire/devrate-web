@@ -8,7 +8,6 @@ import { useSnackbar } from 'notistack';
 import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/workExperience/workExperienceApiSlice';
-import { setWorkExperienceDataToEdit } from '../../../../../../../redux/workExperience/workExperienceSlice.js';
 import { openModal } from '../../../../../../../redux/modal/modalSlice.js';
 import styles from './WorkExperienceItem.styles.js';
 
@@ -28,11 +27,22 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   };
 
   const handleEditFeature = () => {
-    dispatch(
-      setWorkExperienceDataToEdit({ id, position, companyName, description, responsibilities, startYear, endYear })
-    );
     handleCloseMenu();
-    dispatch(openModal({ modalType: 'workExperienceModal' }));
+    dispatch(
+      openModal({
+        modalType: 'workExperienceEditModal',
+        data: {
+          id: id,
+          position: position,
+          companyName: companyName,
+          description: description,
+          responsibilities: responsibilities,
+          startYear: startYear,
+          endYear: endYear,
+          currentDate: endYear,
+        },
+      })
+    );
   };
 
   const handleDeleteFeature = async () => {

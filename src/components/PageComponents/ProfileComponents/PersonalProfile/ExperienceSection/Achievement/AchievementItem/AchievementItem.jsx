@@ -14,7 +14,6 @@ import styles from './AchievementItem.styles.js';
 const AchievementItem = ({ achievement, icon: IconComponent }) => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteAchievement] = useDeleteAchievementMutation();
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
@@ -99,7 +98,6 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
           <Typography variant='body1'>{achievement.description}</Typography>
         </Box>
       </Box>
-      {/*<AchievementEditModal achievement={achievement} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />*/}
     </Box>
   );
 };

@@ -11,7 +11,6 @@ import { apiSlice } from '../services/api/apiSlice';
 import { authReducer } from '../auth/authSlice';
 import tokenSlice from '../auth/tokenSlice';
 import { educationReducer } from '../user/education/educationSlice';
-import workExperienceReducer from '../workExperience/workExperienceSlice.js';
 import feedbackSliceReducer from '../feedback/feedbackModalSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
@@ -41,7 +40,6 @@ const rootReducer = {
   chat: chatSliceReducer,
   modal: modalSliceReducer,
   education: educationReducer,
-  workExperience: workExperienceReducer,
   modalStep: modalStepReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   specialization: specializationSliceReducer,
