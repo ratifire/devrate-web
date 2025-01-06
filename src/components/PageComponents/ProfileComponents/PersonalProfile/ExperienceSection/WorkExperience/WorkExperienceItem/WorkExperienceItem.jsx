@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
-import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/workExperience/workExperienceApiSlice';
+import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/services/workExperienceApiSlice.js';
 import { openModal } from '../../../../../../../redux/modal/modalSlice.js';
 import styles from './WorkExperienceItem.styles.js';
 

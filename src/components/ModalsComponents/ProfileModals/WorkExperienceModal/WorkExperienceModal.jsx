@@ -11,7 +11,7 @@ import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import Responsibility from '../../../UI/Responsibility';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useCreateNewWorkExperienceMutation } from '../../../../redux/workExperience/workExperienceApiSlice';
+import { useCreateNewWorkExperienceMutation } from '../../../../redux/services/workExperienceApiSlice.js';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';

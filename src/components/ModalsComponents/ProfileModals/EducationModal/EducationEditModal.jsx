@@ -1,32 +1,31 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
 import { EducationModalSchema } from '../../../../utils/validationSchemas/index';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useCreateEducationMutation } from '../../../../redux/services/educationApiSlice';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useUpdateEducationMutation } from '../../../../redux/services/educationApiSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { styles } from './EducationModal.styles';
 
-const EducationModal = () => {
+const EducationEditModal = () => {
   const dispatch = useDispatch();
+  const modalData = useSelector(selectModalData);
   const { t } = useTranslation();
   const translatedNow = t('profile.modal.education.now');
   const [startYears, setStartYears] = useState([]);
   const [endYears, setEndYears] = useState([]);
-  const [createEducation, { isLoading }] = useCreateEducationMutation();
-  const currentUser = useSelector(selectCurrentUser);
+  const [updateEducation] = useUpdateEducationMutation();
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleClose = useCallback(() => {
-    dispatch(closeModal({ modalType: 'educationModal' }));
-  }, [dispatch]);
+  const handleClose = () => {
+    dispatch(closeModal({ modalType: 'educationEditModal' }));
+  };
 
   useEffect(() => {
     const startYearsOpts = [];
@@ -43,11 +42,11 @@ const EducationModal = () => {
   }, []);
 
   const emptyInitialValues = {
-    type: '',
-    name: '',
-    description: '',
-    startYear: '',
-    endYear: '',
+    type: modalData?.type || '',
+    name: modalData?.name || '',
+    description: modalData?.description || '',
+    startYear: modalData?.startYear || '',
+    endYear: modalData?.endYear || '',
   };
 
   const onSubmit = async (values, { resetForm }) => {
@@ -57,22 +56,44 @@ const EducationModal = () => {
         : new Date(values.endYear).getFullYear();
 
     try {
-      await createEducation({
-        userId: currentUser.data.id,
-        payload: { ...values, endYear: endYearEducation },
-      }).unwrap();
+      if (modalData) {
+        await updateEducation({
+          id: modalData.id,
+          payload: {
+            type: values.type,
+            name: values.name,
+            description: values.description,
+            startYear: values.startYear,
+            endYear: endYearEducation,
+          },
+        }).unwrap();
 
-      enqueueSnackbar(t('modalNotifyText.education.create.success'), { variant: 'success' });
-
+        enqueueSnackbar(t('modalNotifyText.education.edit.success'), {
+          variant: 'success',
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+          },
+        });
+      }
       resetForm();
       handleClose();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.education.create.error'), { variant: 'error' });
+      if (modalData) {
+        enqueueSnackbar(t('modalNotifyText.education.edit.error'), {
+          variant: 'error',
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+          },
+        });
+      }
     }
   };
+
   const formik = useFormik({
-    initialValues: emptyInitialValues,
+    initialValues: modalData || emptyInitialValues,
     validationSchema: EducationModalSchema,
     onSubmit,
     enableReinitialize: true,
@@ -159,9 +180,8 @@ const EducationModal = () => {
           </Box>
 
           <ButtonDef
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
             label={t('profile.modal.btn')}
-            loading={isLoading}
             sx={styles.workExperienceBtn}
             type='submit'
             variant='contained'
@@ -172,4 +192,4 @@ const EducationModal = () => {
   );
 };
 
-export default EducationModal;
+export default EducationEditModal;

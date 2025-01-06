@@ -10,7 +10,6 @@ import chatSliceReducer from '../chat/chatSlice';
 import { apiSlice } from '../services/api/apiSlice';
 import { authReducer } from '../auth/authSlice';
 import tokenSlice from '../auth/tokenSlice';
-import { educationReducer } from '../user/education/educationSlice';
 import feedbackSliceReducer from '../feedback/feedbackModalSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
@@ -39,7 +38,6 @@ const themePersistConfig = {
 const rootReducer = {
   chat: chatSliceReducer,
   modal: modalSliceReducer,
-  education: educationReducer,
   modalStep: modalStepReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   specialization: specializationSliceReducer,

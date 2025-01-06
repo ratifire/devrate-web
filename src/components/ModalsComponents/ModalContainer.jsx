@@ -3,6 +3,7 @@ import { EducationModal, WorkExperienceModal, AchievementModal, ModalUserInfo } 
 import { LoginModal } from './AuthModals/index.js';
 import AchievementEditModal from './ProfileModals/AchievementModal/AchievementEditModal.jsx';
 import WorkExperienceEditModal from './ProfileModals/WorkExperienceModal/WorkExperienceEditModal.jsx';
+import EducationEditModal from './ProfileModals/EducationModal/EducationEditModal.jsx';
 
 const modalEnum = {
   achievementModal: AchievementModal,
@@ -10,6 +11,7 @@ const modalEnum = {
   workExperienceModal: WorkExperienceModal,
   workExperienceEditModal: WorkExperienceEditModal,
   educationModal: EducationModal,
+  educationEditModal: EducationEditModal,
   userInfoModal: ModalUserInfo,
   loginModal: LoginModal,
 };

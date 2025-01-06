@@ -1,5 +1,5 @@
-import { apiSlice } from '../services/api/apiSlice';
-import { TAG_TYPES } from '../../utils/constants/tagTypes';
+import { TAG_TYPES } from '../../utils/constants/tagTypes.js';
+import { apiSlice } from './api/apiSlice.js';
 
 export const workExperienceApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
