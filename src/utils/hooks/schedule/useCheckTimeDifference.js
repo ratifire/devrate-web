@@ -1,28 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { checkTimeDifference } from '../../helpers/checkTimeDifference.js';
 
-const useCheckTimeDifference = (startTime, setShowCancelButton, setDisableLink) => {
+const useCheckTimeDifference = (startTime) => {
+  const [showCancelButton, setShowCancelButton] = useState(true);
+  const [disableLink, setDisableLink] = useState(false);
   useEffect(() => {
-    const eventStartTime = new Date(startTime);
+    checkTimeDifference(startTime, setShowCancelButton, setDisableLink);
+  }, [startTime, setDisableLink, setDisableLink]);
 
-    const checkTimeDifference = () => {
-      const currentTime = new Date();
-      const timeDifferenceInMinutes = (currentTime - eventStartTime) / (1000 * 60);
-
-      if (timeDifferenceInMinutes >= 1) {
-        setShowCancelButton(false);
-      }
-
-      if (timeDifferenceInMinutes >= 60) {
-        setDisableLink(true);
-      }
-    };
-
-    checkTimeDifference();
-
-    const timer = setInterval(checkTimeDifference, 60000);
-
-    return () => clearInterval(timer);
-  }, [startTime]);
+  return { showCancelButton, disableLink };
 };
 
 export default useCheckTimeDifference;

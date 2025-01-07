@@ -6,7 +6,7 @@ import CustomTooltip from '../../../../../../UI/CustomTooltip';
 import { styles } from './SkillsList.styles';
 
 const SkillsList = ({ data, length }) => {
-  const { specializationName, mainSpecialization, masteryName, hardSkills } = data;
+  const { specializationName, mainSpecialization, masteryLevel, hardSkills } = data;
 
   const flexValue =
     length === 1
@@ -14,7 +14,7 @@ const SkillsList = ({ data, length }) => {
         ? { flex: '0 1 100%' }
         : { flex: '0 1 calc(50% - 10px)' }
       : { flex: '0 1 100%' };
-  const level = masteryName || 'N/A';
+  const level = masteryLevel || 'N/A';
 
   return (
     <Box sx={styles.wrapper}>

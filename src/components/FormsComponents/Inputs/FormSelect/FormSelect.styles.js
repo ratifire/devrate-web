@@ -2,7 +2,7 @@ export const styles = {
   wrapper: (theme) => ({
     width: '100%',
     minWidth: 150,
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(5),
   }),
   input: (theme) => ({
     ' .MuiOutlinedInput-notchedOutline': {

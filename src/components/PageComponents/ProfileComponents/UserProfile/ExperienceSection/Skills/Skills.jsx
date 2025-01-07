@@ -17,11 +17,10 @@ import { styles } from './Skills.styles';
 
 const Skills = ({ id, tab }) => {
   const [specCurrent, setSpecCurrent] = useState('');
-  const { data: userAllSpecializations, isLoading } = useGetUserAllSpecializationQuery(id);
-
+  const { data: userAllSpecializations, isLoading } = useGetUserAllSpecializationQuery(id, { skip: !id });
   const updateAllSpecialization = userAllSpecializations ? updateAllSpecializations(userAllSpecializations) : [];
   const selectedSpecialization = updateAllSpecialization?.find((s) => s.specializationName === specCurrent);
-  const level = selectedSpecialization?.masteryName;
+  const level = selectedSpecialization?.masteryLevel;
   const skillVisible = selectedSpecialization?.hardSkills.filter((item) => item.hidden === true);
   const [filteredSkills, setFilteredSkills] = useState(skillVisible);
   const [open, setOpen] = useState(false);
