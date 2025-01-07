@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
 import {
-  useAddSkillsToMasteryMutation,
-  useCreateNewSpecializationMutation,
   useGetSpecializationByUserIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
+  useUpdateSpecializationByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetSpecializationListQuery } from '../../../../redux/specialization/specializationList/specializationListApiSlice';
+import { setActiveSpecialization } from '../../../../redux/specialization/specializationSlice';
 import useMergeState from '../../../../utils/hooks/useMergeState';
 import { SpecializationModalSchema } from '../../../../utils/validationSchemas/index';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
@@ -23,7 +23,7 @@ import { ErrorComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
 
-const SpecializationModal = () => {
+const SpecializationEditModal = () => {
   const [state, setState] = useMergeState({
     skills: [],
     specializationNameError: '',
@@ -34,15 +34,12 @@ const SpecializationModal = () => {
   const dispatch = useDispatch();
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
-  const [
-    createNewSpecialization,
-    { isError: isErrorCreateNewSpecialization, isLoading: isLoadingCreateNewSpecialization },
-  ] = useCreateNewSpecializationMutation();
+  const [updateSpecializationById, { isError: isErrorUpdateSpecialization, isLoading: isLoadingUpdateSpecialization }] =
+    useUpdateSpecializationByIdMutation();
   const [triggerRequest, { isError: isErrorGetMasteries, isFetching: isLoadingGetMasteries }] =
     useLazyGetMasteriesBySpecializationIdQuery();
   const [setNewMainMasteryBySpecIdAndMasteryId, { isError: isErrorSetNewMastery, isLoading: isLoadingSetNewMastery }] =
     useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
-  const [addSkills, { isError: isErrorAddSkill, isLoading: isLoadingAddSkill }] = useAddSkillsToMasteryMutation();
   const {
     data,
     isError: isErrorGetSpecialization,
@@ -50,19 +47,12 @@ const SpecializationModal = () => {
   } = useGetSpecializationListQuery('specialization-names.json');
 
   const isLoading =
-    isLoadingCreateNewSpecialization ||
-    isLoadingGetMasteries ||
-    isLoadingSetNewMastery ||
-    isLoadingAddSkill ||
-    isLoadingGetSpecialization;
+    isLoadingUpdateSpecialization || isLoadingGetMasteries || isLoadingSetNewMastery || isLoadingGetSpecialization;
   const isError =
-    isErrorCreateNewSpecialization ||
-    isErrorGetMasteries ||
-    isErrorSetNewMastery ||
-    isErrorAddSkill ||
-    isErrorGetSpecialization;
+    isErrorUpdateSpecialization || isErrorGetMasteries || isErrorSetNewMastery || isErrorGetSpecialization;
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
-  const handleClose = () => dispatch(closeModal({ modalType: 'specializationModal' }));
+  const { activeSpecialization } = useSelector((state) => state.specialization);
+  const handleClose = () => dispatch(closeModal({ modalType: 'specializationEditModal' }));
 
   const modalData = useSelector(selectModalData);
 
@@ -83,24 +73,53 @@ const SpecializationModal = () => {
     formik.setFieldValue('name', value);
   };
 
+  const updateSpecialization = async ({ id, name }) => {
+    try {
+      await updateSpecializationById({ id, name }).unwrap();
+      dispatch(setActiveSpecialization({ ...activeSpecialization, id, name }));
+      enqueueSnackbar(t('modalNotifyText.specialization.edit.success', { name }), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.specialization.edit.error'), { variant: 'error' });
+    }
+  };
+
   const onSubmit = async (values, { resetForm }) => {
     try {
-      const data = await createNewSpecialization({
-        userId,
-        name: values.name,
-        mainMasteryName: values.mastery,
-        main: false,
-      }).unwrap();
-      const masteries = await triggerRequest(data.id);
-      const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
-      await setNewMainMasteryBySpecIdAndMasteryId({
-        masteryId: resp.id,
-        specId: data.id,
-      }).unwrap();
-      await addSkills({ id: resp.id, skills });
-      enqueueSnackbar(t('modalNotifyText.specialization.create.success', { values: values.name }), {
-        variant: 'success',
-      });
+      if (modalData) {
+        let shouldUpdateSpecialization = false;
+        let shouldUpdateMastery = false;
+
+        if (values.name !== activeSpecialization.name) {
+          shouldUpdateSpecialization = true;
+        }
+
+        if (values.mastery !== activeSpecialization.mastery) {
+          shouldUpdateMastery = true;
+        }
+
+        if (shouldUpdateSpecialization) {
+          await updateSpecialization({ id: activeSpecialization.id, name: values.name });
+        }
+
+        if (shouldUpdateMastery) {
+          const masteries = await triggerRequest(activeSpecialization.id);
+          const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
+          await setNewMainMasteryBySpecIdAndMasteryId({
+            masteryId: resp.id,
+            specId: activeSpecialization.id,
+          }).unwrap();
+          dispatch(setActiveSpecialization({ ...activeSpecialization, mastery: values.mastery }));
+        }
+
+        return;
+      }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.specialization.create.error'), { variant: 'error' });
@@ -111,8 +130,8 @@ const SpecializationModal = () => {
   };
 
   const initialValues = {
-    name: '',
-    mastery: '',
+    name: modalData ? modalData?.name : '',
+    mastery: modalData ? modalData?.mastery : '',
     skills: '',
   };
 
@@ -228,4 +247,4 @@ const SpecializationModal = () => {
   );
 };
 
-export default SpecializationModal;
+export default SpecializationEditModal;

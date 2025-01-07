@@ -1,3 +1,4 @@
 import SpecializationModal from './SpecializationModal';
+import SpecializationEditModal from './SpecializationEditModal';
 
-export default SpecializationModal;
+export { SpecializationModal, SpecializationEditModal };

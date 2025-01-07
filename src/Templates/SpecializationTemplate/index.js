@@ -1,3 +1,3 @@
-import SpecializationTemplate from './SpecializationTemplate';
-
-export default SpecializationTemplate;
+// import SpecializationTemplate from './SpecializationTemplate';
+//
+// export default SpecializationTemplate;

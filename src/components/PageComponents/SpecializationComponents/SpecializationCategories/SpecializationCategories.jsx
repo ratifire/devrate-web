@@ -19,7 +19,6 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
-import modalSpecialization from '../../../../utils/constants/Specialization/modalSpecialization';
 import { CategoriesSkeleton } from '../../../UI/Skeleton';
 import { styles } from './SpecializationCategories.styles';
 
@@ -54,7 +53,6 @@ const SpecializationCategories = () => {
   const isError =
     isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization || isErrorDeleteSpecialization;
   const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
-  const { editSpecialization, addSpecialization } = modalSpecialization;
 
   useEffect(() => {
     if (!specializations || isLoading) {
@@ -85,7 +83,7 @@ const SpecializationCategories = () => {
 
   const handlerAddSpecializations = () => {
     if (specializations?.length >= 4) return;
-    dispatch(openModal({ modalName: 'openSpecialization', data: addSpecialization }));
+    dispatch(openModal({ modalType: 'specializationModal' }));
   };
 
   const handlerChangeMainSpecialization = async () => {
@@ -147,8 +145,8 @@ const SpecializationCategories = () => {
     }));
   };
 
-  const handleEditFeature = (id) => {
-    dispatch(openModal({ modalName: 'openSpecialization', data: editSpecialization }));
+  const handleEditFeature = ({ id, name, mastery }) => {
+    dispatch(openModal({ modalType: 'specializationEditModal', data: { id, name, mastery } }));
     handleCloseMenu(id);
   };
 
@@ -221,7 +219,7 @@ const SpecializationCategories = () => {
                 anchorEl={anchorEl[id]}
                 handleCloseMenu={() => handleCloseMenu(id)}
                 handleDeleteFeature={() => handlerDeleteSpecialization(id)}
-                handleEditFeature={() => handleEditFeature(id)}
+                handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
               />
             </Box>
           </Box>
