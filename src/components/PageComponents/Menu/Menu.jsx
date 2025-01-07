@@ -41,7 +41,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   };
 
   const handleOpenFeedbackModal = () => {
-    dispatch(openModal({ modalName: 'feedbackProjectModal' }));
+    dispatch(openModal({ modalType: 'feedbackProjectModal' }));
   };
 
   const handleLinkClick = async (link) => {

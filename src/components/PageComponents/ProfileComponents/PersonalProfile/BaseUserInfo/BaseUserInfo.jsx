@@ -34,12 +34,12 @@ const BaseUserInfo = () => {
 
   const handleOpenInfo = () => {
     dispatch(setStep(0));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: 'userInfoModal' }));
   };
 
   const handleOpenAvatar = () => {
     dispatch(setStep(2));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: 'userInfoModal' }));
   };
 
   return (

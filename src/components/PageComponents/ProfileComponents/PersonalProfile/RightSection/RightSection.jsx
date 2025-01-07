@@ -22,12 +22,12 @@ const RightSection = () => {
 
   const handleOpenInfo = () => {
     dispatch(setStep(1));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: 'userInfoModal' }));
   };
 
   const handleOpenLanguage = () => {
     dispatch(setStep(3));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: 'userInfoModal' }));
   };
 
   return (

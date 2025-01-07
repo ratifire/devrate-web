@@ -4,6 +4,7 @@ import { LoginModal } from './AuthModals/index.js';
 import AchievementEditModal from './ProfileModals/AchievementModal/AchievementEditModal.jsx';
 import WorkExperienceEditModal from './ProfileModals/WorkExperienceModal/WorkExperienceEditModal.jsx';
 import EducationEditModal from './ProfileModals/EducationModal/EducationEditModal.jsx';
+import FeedbackProjectModal from './FeedbackProjectModal/index.js';
 
 const modalEnum = {
   achievementModal: AchievementModal,
@@ -14,6 +15,7 @@ const modalEnum = {
   educationEditModal: EducationEditModal,
   userInfoModal: ModalUserInfo,
   loginModal: LoginModal,
+  feedbackProjectModal: FeedbackProjectModal,
 };
 
 const ModalContainer = ({ modalType }) => {
