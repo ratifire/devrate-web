@@ -111,8 +111,6 @@ const SpecializationEditModal = () => {
           }).unwrap();
           dispatch(setActiveSpecialization({ ...activeSpecialization, mastery: values.mastery }));
         }
-
-        return;
       }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
