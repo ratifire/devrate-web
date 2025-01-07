@@ -2,10 +2,9 @@ import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { useSnackbar } from 'notistack';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useAddSkillToMasteryMutation,
@@ -34,7 +33,6 @@ const HardSkillsModal = () => {
   const [state, updateState] = useMergeState(initialState);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const { masteryId, isError: isErrorMastery, isFetching: isFetchingMastery } = useGetMastery();
   const { enqueueSnackbar } = useSnackbar();
   const {
@@ -165,15 +163,11 @@ const HardSkillsModal = () => {
   };
 
   if (isError) {
-    return (
-      <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
-        <ErrorComponent />
-      </ModalLayoutProfile>
-    );
+    return <ErrorComponent />;
   }
 
   return (
-    <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='h6'>
         {t('specialization.modal.skills.title')}
       </Typography>
@@ -210,7 +204,7 @@ const HardSkillsModal = () => {
           variant='contained'
         />
       </form>
-    </ModalLayoutProfile>
+    </>
   );
 };
 

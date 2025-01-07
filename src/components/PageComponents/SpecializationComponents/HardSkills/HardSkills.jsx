@@ -4,11 +4,11 @@ import { useHardSkillData } from '../../../../utils/hooks/specialization';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
 
 const HardSkills = () => {
-  const { skills, isError, isFetching, activeMastery } = useHardSkillData();
+  const { skills, isError, isFetching } = useHardSkillData();
   const dispatch = useDispatch();
 
   const handleModalOpen = () => {
-    dispatch(openModal({ modalName: 'openSkillsModal', activeMastery }));
+    dispatch(openModal({ modalType: 'hardSkillsModal' }));
   };
 
   const averageMark =

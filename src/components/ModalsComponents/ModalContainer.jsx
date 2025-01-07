@@ -5,7 +5,8 @@ import AchievementEditModal from './ProfileModals/AchievementModal/AchievementEd
 import WorkExperienceEditModal from './ProfileModals/WorkExperienceModal/WorkExperienceEditModal.jsx';
 import EducationEditModal from './ProfileModals/EducationModal/EducationEditModal.jsx';
 import FeedbackProjectModal from './FeedbackProjectModal';
-import { SpecializationEditModal, SpecializationModal } from './SpecializationModals/SpecializationModal/index.js';
+import { SpecializationEditModal, SpecializationModal } from './SpecializationModals/SpecializationModal';
+import { HardSkillsModal } from './SpecializationModals';
 
 const modalEnum = {
   achievementModal: AchievementModal,
@@ -19,6 +20,7 @@ const modalEnum = {
   feedbackProjectModal: FeedbackProjectModal,
   specializationModal: SpecializationModal,
   specializationEditModal: SpecializationEditModal,
+  hardSkillsModal: HardSkillsModal,
 };
 
 const ModalContainer = ({ modalType }) => {
