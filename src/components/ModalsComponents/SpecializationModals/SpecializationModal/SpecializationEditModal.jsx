@@ -1,5 +1,4 @@
-import AddIcon from '@mui/icons-material/Add';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,17 +17,12 @@ import useMergeState from '../../../../utils/hooks/useMergeState';
 import { SpecializationModalSchema } from '../../../../utils/validationSchemas/index';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
-import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent } from '../../../UI/Exceptions';
-import Responsibility from '../../../UI/Responsibility';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationEditModal = () => {
-  const [state, setState] = useMergeState({
-    skills: [],
-    specializationNameError: '',
-  });
-  const { skills, specializationNameError } = state;
+  const [state, setState] = useMergeState({ specializationNameError: '' });
+  const { specializationNameError } = state;
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
@@ -132,7 +126,6 @@ const SpecializationEditModal = () => {
   const initialValues = {
     name: modalData ? modalData?.name : '',
     mastery: modalData ? modalData?.mastery : '',
-    skills: '',
   };
 
   const formik = useFormik({
@@ -141,24 +134,6 @@ const SpecializationEditModal = () => {
     validationSchema: SpecializationModalSchema,
     onSubmit,
   });
-
-  const createSkills = (newSkill) => {
-    if (newSkill.length === 0 || newSkill.length > 50) return;
-    const isSkill = skills.some((skill) => skill.name === newSkill);
-
-    if (isSkill) {
-      formik.setFieldTouched('skills', true, false);
-      formik.setErrors({ skills: 'specialization.modal.skills.errorDuplicate' });
-      return;
-    }
-
-    setState({ skills: [...skills, { name: newSkill, type: 'HARD_SKILL' }] });
-    formik.setFieldValue('skills', '');
-  };
-
-  const deleteSkillsHandler = (skillToDelete) => {
-    setState({ skills: skills.filter((item) => item.name !== skillToDelete) });
-  };
 
   if (isError) {
     return <ErrorComponent />;
@@ -199,40 +174,6 @@ const SpecializationEditModal = () => {
               variant='outlined'
             />
           </Box>
-          {modalData && (
-            <>
-              <Box sx={styles.input100}>
-                <FormInput
-                  error={formik.touched.skills && Boolean(formik.errors.skills)}
-                  handleBlur={formik.handleBlur}
-                  handleChange={formik.handleChange}
-                  helperText={formik.touched.skills && formik.errors.skills}
-                  label='specialization.modal.skills.title'
-                  name='skills'
-                  placeholder='specialization.modal.skills.placeholder'
-                  value={formik.values.skills}
-                />
-                <IconButton
-                  disabled={formik.touched.skills && Boolean(formik.errors.skills)}
-                  sx={styles.iconBtn}
-                  onClick={() => createSkills(formik.values.skills)}
-                >
-                  <AddIcon />
-                </IconButton>
-              </Box>
-              <Box sx={styles.skills}>
-                {skills.map(({ name }, index) => (
-                  <Responsibility
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={index}
-                    tobeDeleted
-                    responsibility={name}
-                    responsibilityDeleteHandler={deleteSkillsHandler}
-                  />
-                ))}
-              </Box>
-            </>
-          )}
           <ButtonDef
             disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
             label={t('profile.modal.btn')}

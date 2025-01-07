@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
+import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useAddSkillsToMasteryMutation,
   useCreateNewSpecializationMutation,
@@ -63,8 +63,6 @@ const SpecializationModal = () => {
     isErrorGetSpecialization;
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
   const handleClose = () => dispatch(closeModal({ modalType: 'specializationModal' }));
-
-  const modalData = useSelector(selectModalData);
 
   const handleChangeMastery = (e) => {
     const value = e.target.value;
@@ -180,40 +178,38 @@ const SpecializationModal = () => {
               variant='outlined'
             />
           </Box>
-          {modalData && (
-            <>
-              <Box sx={styles.input100}>
-                <FormInput
-                  error={formik.touched.skills && Boolean(formik.errors.skills)}
-                  handleBlur={formik.handleBlur}
-                  handleChange={formik.handleChange}
-                  helperText={formik.touched.skills && formik.errors.skills}
-                  label='specialization.modal.skills.title'
-                  name='skills'
-                  placeholder='specialization.modal.skills.placeholder'
-                  value={formik.values.skills}
+          <>
+            <Box sx={styles.input100}>
+              <FormInput
+                error={formik.touched.skills && Boolean(formik.errors.skills)}
+                handleBlur={formik.handleBlur}
+                handleChange={formik.handleChange}
+                helperText={formik.touched.skills && formik.errors.skills}
+                label='specialization.modal.skills.title'
+                name='skills'
+                placeholder='specialization.modal.skills.placeholder'
+                value={formik.values.skills}
+              />
+              <IconButton
+                disabled={formik.touched.skills && Boolean(formik.errors.skills)}
+                sx={styles.iconBtn}
+                onClick={() => createSkills(formik.values.skills)}
+              >
+                <AddIcon />
+              </IconButton>
+            </Box>
+            <Box sx={styles.skills}>
+              {skills.map(({ name }, index) => (
+                <Responsibility
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={index}
+                  tobeDeleted
+                  responsibility={name}
+                  responsibilityDeleteHandler={deleteSkillsHandler}
                 />
-                <IconButton
-                  disabled={formik.touched.skills && Boolean(formik.errors.skills)}
-                  sx={styles.iconBtn}
-                  onClick={() => createSkills(formik.values.skills)}
-                >
-                  <AddIcon />
-                </IconButton>
-              </Box>
-              <Box sx={styles.skills}>
-                {skills.map(({ name }, index) => (
-                  <Responsibility
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={index}
-                    tobeDeleted
-                    responsibility={name}
-                    responsibilityDeleteHandler={deleteSkillsHandler}
-                  />
-                ))}
-              </Box>
-            </>
-          )}
+              ))}
+            </Box>
+          </>
           <ButtonDef
             disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
             label={t('profile.modal.btn')}
