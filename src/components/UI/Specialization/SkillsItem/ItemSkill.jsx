@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import PropTypes from 'prop-types';
 import CustomTooltip from '../../../UI/CustomTooltip';
 import LinearProgressWithLabel from '../../../UI/LinearProgressWithLabel';
@@ -14,8 +14,8 @@ const ItemSkill = ({ name, value, grows }) => {
       <Box sx={styles.skillContainer}>
         <Box sx={styles.iconWrapper}>
           {icon}
-          <CustomTooltip title={name}>
-            <Typography variant='subtitle2'>{name}</Typography>
+          <CustomTooltip title={name} variant='subtitle2'>
+            {name}
           </CustomTooltip>
         </Box>
         <LinearProgressWithLabel orientation='horizontal' size='s' value={value} />

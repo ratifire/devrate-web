@@ -190,10 +190,8 @@ const SpecializationCategories = () => {
           >
             <Box sx={styles.specialization_title_star}>
               <Box sx={styles.specialization_title}>
-                <CustomTooltip title={name}>
-                  <Typography sx={styles.specialization_name} variant='h6'>
-                    {name}
-                  </Typography>
+                <CustomTooltip customStyles={styles.specialization_name} title={name} variant='h6'>
+                  {name}
                 </CustomTooltip>
                 <Typography variant='subtitle2'>Level {masteryData[id]?.level}</Typography>
               </Box>

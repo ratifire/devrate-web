@@ -24,17 +24,13 @@ const SkillsList = ({ data, length }) => {
             <CustomTooltip translate title='profile.experience.skills.star'>
               <StarIcon sx={styles.star} />
             </CustomTooltip>
-            <CustomTooltip title={specializationName}>
-              <Typography sx={styles.title} variant='h6'>
-                {specializationName}
-              </Typography>
+            <CustomTooltip customStyles={styles.title} title={specializationName} variant='h6'>
+              {specializationName}
             </CustomTooltip>
           </>
         ) : (
-          <CustomTooltip title={specializationName}>
-            <Typography sx={styles.title} variant='h6'>
-              {specializationName}
-            </Typography>
+          <CustomTooltip customStyles={styles.title} title={specializationName} variant='h6'>
+            {specializationName}
           </CustomTooltip>
         )}
       </Box>
