@@ -93,7 +93,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
 };
 
 WorkExperienceItem.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   startYear: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   endYear: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   position: PropTypes.string.isRequired,
