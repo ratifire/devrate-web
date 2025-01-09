@@ -17,7 +17,7 @@ const SoftSkills = () => {
   const skills = masteryId ? data : [];
 
   const handleModalOpen = () => {
-    dispatch(openModal({ modalName: 'openSoftSkillsModal' }));
+    dispatch(openModal({ modalType: 'softSkillsModal' }));
   };
 
   const isFetching = isFetchingMastery || isLoadingSoftSkill;
