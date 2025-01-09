@@ -7,7 +7,6 @@ import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useCreateInterviewRequestMutation,
@@ -25,10 +24,9 @@ import RenderTimeSlots from './components/RenderTimeSlots';
 import WeekNavigation from './components/WeekNavigation';
 
 const ScheduleInterviewModal = () => {
-  const { role } = useSelector((state) => state.modal.modalData);
+  const { role } = useSelector((state) => state.modal.data);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const isOpen = useSelector((state) => state.modal.scheduleInterview);
   const [checked, setChecked] = useState([]);
   const { masteryId, userId } = useGetMastery();
   const { enqueueSnackbar } = useSnackbar();
@@ -65,7 +63,6 @@ const ScheduleInterviewModal = () => {
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
   const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
-  const handleClose = () => dispatch(closeModal({ modalName: 'scheduleInterview' }));
   const handleTabChange = (newTab) => setTab(newTab);
 
   useLayoutEffect(() => {
@@ -100,7 +97,7 @@ const ScheduleInterviewModal = () => {
       });
       enqueueSnackbar(t('modalNotifyText.interview.create.success'), { variant: 'success' });
     }
-    handleClose();
+    dispatch(closeModal());
   };
 
   const formik = useFormik({
@@ -155,7 +152,7 @@ const ScheduleInterviewModal = () => {
   );
 
   return (
-    <ModalLayoutProfile open={isOpen} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='subtitle1'>
         {t('specialization.modal.scheduleModal.scheduleInterview')}
       </Typography>
@@ -172,7 +169,7 @@ const ScheduleInterviewModal = () => {
           />
         </Box>
       </form>
-    </ModalLayoutProfile>
+    </>
   );
 };
 

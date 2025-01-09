@@ -42,12 +42,12 @@ const Interviews = () => {
   };
 
   const createInterviewRequest = async () => {
-    dispatch(openModal({ modalName: 'scheduleInterview', data: { role: 'INTERVIEWER' } }));
+    dispatch(openModal({ modalType: 'scheduleInterviewModal', data: { role: 'INTERVIEWER' } }));
     closeHandler();
   };
 
   const createIncomeInterviewRequest = () => {
-    dispatch(openModal({ modalName: 'scheduleInterview', data: { role: 'CANDIDATE' } }));
+    dispatch(openModal({ modalType: 'scheduleInterviewModal', data: { role: 'CANDIDATE' } }));
     closeHandler();
   };
 

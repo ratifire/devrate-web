@@ -50,8 +50,6 @@ const HardSkillsModal = () => {
   const isError = isErrorMastery || isErrorSkills || isErrorAddSkill || isErrorDeleteSkill;
   const { error, helperText } = state;
 
-  const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
-
   useEffect(() => {
     updateState({ allSkills: skills });
   }, [isFetchingSkills]);
@@ -155,7 +153,7 @@ const HardSkillsModal = () => {
 
       await Promise.all([...addSkillPromises, ...deleteSkillPromises]);
       enqueueSnackbar(t('modalNotifyText.hardSkills.create.success'), { variant: 'success' });
-      handleClose();
+      dispatch(closeModal());
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.hardSkills.create.error'), { variant: 'success' });
