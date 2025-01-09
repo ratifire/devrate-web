@@ -76,7 +76,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
           handleEditFeature={handleEditFeature}
         />
       </Box>
-      <Typography>{description}</Typography>
+      <Typography sx={styles.text}>{description}</Typography>
       <Box sx={styles.workDutiesContainer}>
         <Typography sx={styles.workDutiesTitle} variant='h6'>
           {t('profile.experience.duties')}

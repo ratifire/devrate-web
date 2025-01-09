@@ -36,6 +36,10 @@ export const styles = {
 
   skillsRatingValue: () => ({
     marginRight: '10px',
+    fontSize: '24px',
+    '@media (min-width: 1536px)': {
+      fontSize: '30px',
+    },
   }),
 
   skillMark: {

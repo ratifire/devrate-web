@@ -7,6 +7,24 @@ export const styles = {
     borderRadius: 2,
     width: '100%',
   }),
+  accordion: {
+    position: 'relative',
+    cursor: 'pointer',
+    padding: '10px 0',
+    '@media (min-width: 1272px)': {
+      cursor: 'auto',
+    },
+  },
+  iconBtn: {
+    position: 'absolute',
+    top: 'calc(50% - 12px)',
+    right: 0,
+    borderRadius: 1,
+    transition: 'transform 0.2s ease-in-out',
+    '@media (min-width: 1272px)': {
+      display: 'none',
+    },
+  },
   star: (theme) => ({
     width: '18px',
     height: '18px',
@@ -48,26 +66,10 @@ export const styles = {
       },
     },
   }),
-  list: (theme) => ({
-    marginTop: '16px',
-    display: 'flex',
-    flexWrap: 'wrap',
-    gridGap: '0 20px',
-    '@media (max-width: 1272px)': {
-      overflowY: 'auto',
-      maxHeight: '135px',
-      paddingRight: theme.spacing(3),
-      '&::-webkit-scrollbar': {
-        width: 10,
-      },
-      '&::-webkit-scrollbar-track': () => ({
-        backgroundColor: '#303032',
-        borderRadius: 8,
-      }),
-      '&::-webkit-scrollbar-thumb': (theme) => ({
-        borderRadius: 6,
-        backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
-      }),
-    },
-  }),
+  flex100: {
+    flex: '0 1 100%',
+  },
+  flex50: {
+    flex: '0 1 calc(50% - 10px)',
+  },
 };

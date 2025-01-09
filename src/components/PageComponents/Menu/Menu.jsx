@@ -52,7 +52,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
 
   return (
     <>
-      <Drawer anchor='right' open={isDrawerOpen} onClose={toggleDrawer}>
+      <Drawer anchor='right' open={isDrawerOpen} sx={styles.bg} onClose={toggleDrawer}>
         <Box role='presentation' sx={styles.userMenuBox}>
           <Box sx={styles.upperMenu}>
             <Typography component='div' variant='h5'>

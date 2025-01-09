@@ -4,13 +4,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import StarIcon from '@mui/icons-material/Star';
 import PropTypes from 'prop-types';
 import SearchIcon from '@mui/icons-material/Search';
-import CustomTooltip from '../../../../../UI/CustomTooltip';
 import TextAreaSearch from '../../../../../FormsComponents/Inputs/TextAreaSearch';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { sortedSkills } from '../../../../../../utils/helpers/sortedSkills';
 import { sortSkillsByOriginal } from '../../../../../../utils/helpers/sortedSkillsByOriginal';
 import { useGetUserAllSpecializationQuery } from '../../../../../../redux/specialization/specializationApiSlice';
 import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
+import StarMainSpecialization from '../../../../../UI/StarMainSpecialization';
 import { updateAllSpecializations } from './updateAllSpecialization';
 import SkillsItem from './SkillsItem';
 import { styles } from './Skills.styles';
@@ -89,9 +89,7 @@ const Skills = ({ id, tab }) => {
         <Box sx={styles.info}>
           <Box sx={styles.wrapperSelect}>
             {selectedSpecialization?.mainSpecialization && (
-              <CustomTooltip translate title='profile.experience.skills.star'>
-                <StarIcon sx={styles.star} />
-              </CustomTooltip>
+              <StarMainSpecialization title='profile.experience.skills.star' />
             )}
             <Select
               IconComponent={KeyboardArrowDownIcon}

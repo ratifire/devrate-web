@@ -1,7 +1,12 @@
 const styles = {
-  userMenuBox: (theme) => ({
+  bg: (theme) => ({
+    ' > .MuiDrawer-paper': {
+      backgroundColor: theme.palette.background.level2,
+      backgroundImage: 'none',
+    },
+  }),
+  userMenuBox: () => ({
     width: 300,
-    background: theme.palette.background.level2,
     display: 'flex',
     flexDirection: 'column',
   }),
