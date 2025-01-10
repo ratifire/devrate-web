@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import TimeAgo from '../../../UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
-import { openFeedbackModal } from '../../../../redux/feedback/feedbackModalSlice';
+import { openModal } from '../../../../redux/modal/modalSlice.js';
 
 const InterviewFeedback = ({ createAt, payload }) => {
   const { t } = useTranslation();
@@ -13,7 +13,7 @@ const InterviewFeedback = ({ createAt, payload }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(openFeedbackModal(feedbackId));
+    dispatch(openModal({ modalType: 'feedbackInterviewModal', data: { feedbackId } }));
   };
 
   return (

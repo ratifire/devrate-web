@@ -1,8 +1,8 @@
 import { Box, IconButton, Modal, Zoom } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
-import { styles } from '../../layouts/ModalLayoutProfile/ModalLayoutProfile.styles.js';
 import { closeModal } from '../../redux/modal/modalSlice.js';
+import { styles } from './ModalLayout.styles.js';
 import ModalContainer from './ModalContainer.jsx';
 
 const ModalComponent = () => {

@@ -13,12 +13,13 @@ import UserAvatar from '../../UI/UserAvatar';
 import Menu from '../Menu';
 import Notification from '../Notification';
 import Chat from '../Chat';
+import { selectModalData } from '../../../redux/modal/modalSlice.js';
 import { InputSearch } from './InputSearch';
 import styles from './ProfileHeader.styles';
 
 const ProfileHeader = () => {
   const { data: info } = useSelector(selectCurrentUser);
-  const { open } = useSelector((state) => state.feedback);
+  const open = useSelector(selectModalData);
   const { id, firstName, lastName } = info;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { data: personalData } = useGetPersonalUserQuery(id);
@@ -59,7 +60,7 @@ const ProfileHeader = () => {
         </Button>
         <Menu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
-      {open && <FeedbackInterviewModal />}
+      {open?.feedbackId && <FeedbackInterviewModal />}
     </AppBar>
   );
 };

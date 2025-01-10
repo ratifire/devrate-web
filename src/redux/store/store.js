@@ -10,7 +10,6 @@ import chatSliceReducer from '../chat/chatSlice';
 import { apiSlice } from '../services/api/apiSlice';
 import { authReducer } from '../auth/authSlice';
 import tokenSlice from '../auth/tokenSlice';
-import feedbackSliceReducer from '../feedback/feedbackModalSlice';
 import specializationSliceReducer from '../specialization/specializationSlice';
 import emailSliceReducer from '../../redux/auth/emailSlice';
 import activeMasteryReducer from '../specialization/activeMasterySlice';
@@ -44,7 +43,6 @@ const rootReducer = {
   email: emailSliceReducer,
   activeMastery: activeMasteryReducer,
   button: buttonReducer,
-  feedback: feedbackSliceReducer,
   auth: persistReducer(authPersistConfig, authReducer),
   tokens: persistReducer(tokenPersistConfig, tokenSlice),
   theme: persistReducer(themePersistConfig, themeSliceReducer),
