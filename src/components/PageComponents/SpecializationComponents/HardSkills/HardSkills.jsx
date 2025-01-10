@@ -8,7 +8,9 @@ const HardSkills = () => {
   const dispatch = useDispatch();
 
   const handleModalOpen = () => {
-    dispatch(openModal({ modalType: 'hardSkillsModal' }));
+    skills.length === 0
+      ? dispatch(openModal({ modalType: 'hardSkillsModal' }))
+      : dispatch(openModal({ modalType: 'hardSkillsEditModal' }));
   };
 
   const averageMark =

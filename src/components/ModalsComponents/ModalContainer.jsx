@@ -7,6 +7,7 @@ import EducationEditModal from './ProfileModals/EducationModal/EducationEditModa
 import FeedbackProjectModal from './FeedbackProjectModal';
 import { SpecializationEditModal, SpecializationModal } from './SpecializationModals/SpecializationModal';
 import { HardSkillsModal, ScheduleInterviewModal, SoftSkillsModal } from './SpecializationModals';
+import HardSkillsEditModal from './SpecializationModals/HardSkillsModal/HardSkillsEditModal.jsx';
 
 const modalEnum = {
   achievementModal: AchievementModal,
@@ -21,6 +22,7 @@ const modalEnum = {
   specializationModal: SpecializationModal,
   specializationEditModal: SpecializationEditModal,
   hardSkillsModal: HardSkillsModal,
+  hardSkillsEditModal: HardSkillsEditModal,
   softSkillsModal: SoftSkillsModal,
   scheduleInterviewModal: ScheduleInterviewModal,
 };
