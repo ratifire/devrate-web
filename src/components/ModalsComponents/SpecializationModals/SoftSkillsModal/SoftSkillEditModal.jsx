@@ -8,7 +8,9 @@ import { useSnackbar } from 'notistack';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useAddSkillToMasteryMutation,
+  useDeleteSkillByIdMutation,
   useGetAvailableSoftSkillsQuery,
+  useGetSoftSkillsByMasteryIdQuery,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import useMergeState from '../../../../utils/hooks/useMergeState';
@@ -22,23 +24,24 @@ const initialState = {
   skill: '',
   helperText: '',
   error: false,
+  addSkill: [],
   allSkills: [],
   idDeletedSkills: [],
   availableSkills: [],
 };
 
-const SoftSkillsModal = () => {
+const SoftSkillsEditModal = () => {
   const [state, updateState] = useMergeState(initialState);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
   const { enqueueSnackbar } = useSnackbar();
-  // const {
-  //   data: skills,
-  //   isFetching: isFetchingSkills,
-  //   isError: isErrorSkills,
-  // } = useGetSoftSkillsByMasteryIdQuery({ masteryId }, { skip: !masteryId });
-  // const [deleteSkill, { isLoading: isLoadingDeleteSkill }] = useDeleteSkillByIdMutation();
+  const {
+    data: skills,
+    isFetching: isFetchingSkills,
+    isError: isErrorSkills,
+  } = useGetSoftSkillsByMasteryIdQuery({ masteryId }, { skip: !masteryId });
+  const [deleteSkill, { isLoading: isLoadingDeleteSkill }] = useDeleteSkillByIdMutation();
   const [addSkillToMastery, { isLoading: isLoadingAddSkill }] = useAddSkillToMasteryMutation();
   const {
     data,
@@ -46,18 +49,21 @@ const SoftSkillsModal = () => {
     isError: isErrorAvailableSkills,
   } = useGetAvailableSoftSkillsQuery();
 
-  const { skill, availableSkills, allSkills, idDeletedSkills } = state;
-  const isLoading = isFetchingMastery || isFetchingAvailableSkills || isLoadingAddSkill;
-  const isError = isErrorMastery || isErrorAvailableSkills;
+  const { skill, addSkill, availableSkills, allSkills, idDeletedSkills } = state;
+  const isLoading =
+    isFetchingMastery || isFetchingSkills || isFetchingAvailableSkills || isLoadingDeleteSkill || isLoadingAddSkill;
+  const isError = isErrorMastery || isErrorSkills || isErrorAvailableSkills;
   const { error, helperText } = state;
 
   useEffect(() => {
-    if (!isFetchingAvailableSkills || data) {
+    if (!isFetchingSkills || !isFetchingAvailableSkills || data) {
+      const filteredSkills = data?.filter((v) => !skills?.some((skill) => skill.name === v)) || [];
       updateState({
-        availableSkills: data,
+        availableSkills: filteredSkills,
+        allSkills: skills,
       });
     }
-  }, [isFetchingAvailableSkills, data]);
+  }, [isFetchingSkills, isFetchingAvailableSkills, data]);
 
   const handleChange = (e) => {
     updateState({
@@ -66,10 +72,10 @@ const SoftSkillsModal = () => {
       helperText: '',
     });
   };
-
   const handleAddSkill = () => {
     const isSkillExist = allSkills.find((v) => v.name === skill);
-    const id = uuidv4();
+    const isAddedSkill = skills.find((v) => v.name === skill);
+    const id = isAddedSkill?.id || uuidv4();
 
     if (!availableSkills.length) {
       updateState({ helperText: 'specialization.modal.skills.errorNoAvailable', error: true });
@@ -84,9 +90,13 @@ const SoftSkillsModal = () => {
     }
 
     if (!isSkillExist && skill) {
+      if (!isAddedSkill) {
+        updateState({ addSkill: [...addSkill, { id, name: isAddedSkill?.name || skill }] });
+      }
+
       updateState({
         skill: '',
-        allSkills: [...allSkills, { id, name: skill }],
+        allSkills: [...allSkills, { id, name: isAddedSkill?.name || skill }],
         availableSkills: availableSkills.filter((availableSkill) => availableSkill !== skill),
         idDeletedSkills: idDeletedSkills.filter((v) => v.id !== id),
       });
@@ -96,7 +106,7 @@ const SoftSkillsModal = () => {
   };
 
   const handleDeleteSkill = (skillId) => {
-    const isSkillExist = allSkills.find((v) => v.id === skillId);
+    const isSkillExist = skills.find((v) => v.id === skillId);
 
     if (isSkillExist) {
       updateState({
@@ -111,17 +121,20 @@ const SoftSkillsModal = () => {
       errorText: '',
       availableSkills: [...availableSkills, allSkills.find((skill) => skill.id === skillId).name],
       allSkills: allSkills.filter((skill) => skill.id !== skillId),
+      addSkill: addSkill.filter((skill) => skill.id !== skillId),
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const addSkillPromises = allSkills.map((skill) =>
+      const deleteSkillPromises = idDeletedSkills.map((v) => deleteSkill(v.id));
+
+      const addSkillPromises = addSkill.map((skill) =>
         addSkillToMastery({ masteryId, skill: { name: skill.name, type: 'SOFT_SKILL' } })
       );
 
-      await Promise.all([...addSkillPromises]);
+      await Promise.all([...addSkillPromises, ...deleteSkillPromises]);
       enqueueSnackbar(t('modalNotifyText.hardSkills.create.success'), { variant: 'success' });
       dispatch(closeModal());
       // eslint-disable-next-line no-unused-vars
@@ -172,7 +185,7 @@ const SoftSkillsModal = () => {
           </Box>
         </Box>
         <ButtonDef
-          disabled={allSkills.length === 0 && idDeletedSkills.length === 0}
+          disabled={addSkill.length === 0 && idDeletedSkills.length === 0}
           label={t('profile.modal.btn')}
           loading={isLoading}
           sx={styles.btn}
@@ -184,4 +197,4 @@ const SoftSkillsModal = () => {
   );
 };
 
-export default SoftSkillsModal;
+export default SoftSkillsEditModal;
