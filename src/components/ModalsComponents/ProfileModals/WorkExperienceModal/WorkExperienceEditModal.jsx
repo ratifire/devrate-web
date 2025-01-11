@@ -15,6 +15,7 @@ import { useUpdateWorkExperienceByIdMutation } from '../../../../redux/services/
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceEditModal = () => {
@@ -27,7 +28,7 @@ const WorkExperienceEditModal = () => {
 
   const selectYears = useMemo(() => generateYearsArray(), []);
   const handleClose = () => {
-    dispatch(closeModal({ modalType: 'workExperienceEditModal' }));
+    dispatch(closeModal({ modalType: modalNames.workExperienceEditModal }));
   };
 
   const initialValues = {

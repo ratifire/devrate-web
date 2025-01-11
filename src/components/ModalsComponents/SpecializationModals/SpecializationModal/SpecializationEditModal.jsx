@@ -18,6 +18,7 @@ import { SpecializationModalSchema } from '../../../../utils/validationSchemas/i
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
 import { ErrorComponent } from '../../../UI/Exceptions';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationEditModal = () => {
@@ -46,7 +47,7 @@ const SpecializationEditModal = () => {
     isErrorUpdateSpecialization || isErrorGetMasteries || isErrorSetNewMastery || isErrorGetSpecialization;
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
   const { activeSpecialization } = useSelector((state) => state.specialization);
-  const handleClose = () => dispatch(closeModal({ modalType: 'specializationEditModal' }));
+  const handleClose = () => dispatch(closeModal({ modalType: modalNames.specializationEditModal }));
 
   const modalData = useSelector(selectModalData);
 

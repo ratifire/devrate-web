@@ -12,6 +12,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useCreateEducationMutation } from '../../../../redux/services/educationApiSlice';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './EducationModal.styles';
 
 const EducationModal = () => {
@@ -25,7 +26,7 @@ const EducationModal = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = useCallback(() => {
-    dispatch(closeModal({ modalType: 'educationModal' }));
+    dispatch(closeModal({ modalType: modalNames.educationModal }));
   }, [dispatch]);
 
   useEffect(() => {

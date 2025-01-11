@@ -11,6 +11,7 @@ import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useUpdateEducationMutation } from '../../../../redux/services/educationApiSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './EducationModal.styles';
 
 const EducationEditModal = () => {
@@ -24,7 +25,7 @@ const EducationEditModal = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
-    dispatch(closeModal({ modalType: 'educationEditModal' }));
+    dispatch(closeModal({ modalType: modalNames.educationEditModal }));
   };
 
   useEffect(() => {

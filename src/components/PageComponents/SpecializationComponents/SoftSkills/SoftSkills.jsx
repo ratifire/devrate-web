@@ -3,6 +3,7 @@ import { openModal } from '../../../../redux/modal/modalSlice';
 import { useGetSoftSkillsQuery } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 
 const SoftSkills = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,8 @@ const SoftSkills = () => {
 
   const handleModalOpen = () => {
     skills.length === 0
-      ? dispatch(openModal({ modalType: 'softSkillsModal' }))
-      : dispatch(openModal({ modalType: 'softSkillsEditModal' }));
+      ? dispatch(openModal({ modalType: modalNames.softSkillsModal }))
+      : dispatch(openModal({ modalType: modalNames.softSkillsEditModal }));
   };
 
   const isFetching = isFetchingMastery || isLoadingSoftSkill;

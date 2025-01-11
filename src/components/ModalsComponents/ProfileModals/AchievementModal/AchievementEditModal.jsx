@@ -9,6 +9,7 @@ import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { AchievementModalSchema } from '../../../../utils/validationSchemas/index';
 import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice.js';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './AchievementModal.styles';
 
 const AchievementEditModal = () => {
@@ -40,7 +41,7 @@ const AchievementEditModal = () => {
       });
 
       resetForm();
-      dispatch(closeModal({ modalType: 'achievementEditModal' }));
+      dispatch(closeModal({ modalType: modalNames.achievementEditModal }));
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.achievement.edit.error'), {

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-// import AchievementEditModal from '../../../../../../ModalsComponents/ProfileModals/AchievementModal/AchievementEditModal';
 import { useDispatch } from 'react-redux';
 import { useDeleteAchievementMutation } from '../../../../../../../redux/services/achievementsApiSlice.js';
 import DropdownMenu from '../../DropdownMenu';
 import { openModal } from '../../../../../../../redux/modal/modalSlice.js';
+import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
 import styles from './AchievementItem.styles.js';
 
 const AchievementItem = ({ achievement, icon: IconComponent }) => {
@@ -30,7 +30,7 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
     handleCloseMenu();
     dispatch(
       openModal({
-        modalType: 'achievementEditModal',
+        modalType: modalNames.achievementEditModal,
         data: {
           id: achievement?.id,
           summary: achievement?.summary,

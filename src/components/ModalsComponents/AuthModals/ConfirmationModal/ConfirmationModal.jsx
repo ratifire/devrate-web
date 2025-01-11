@@ -17,7 +17,7 @@ const ConfirmationModal = () => {
   const inputRefs = useRef([]);
   const [codeError, setCodeError] = useState(false);
   const [confirmEmail] = useConfirmEmailMutation();
-  const email = useSelector((state) => state.modal.modalType);
+  const email = useSelector((state) => state.modal.data);
 
   const formik = useFormik({
     initialValues: {

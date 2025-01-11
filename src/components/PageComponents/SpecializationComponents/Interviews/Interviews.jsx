@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole.js';
 import { styles } from './Interviews.styles';
 
 const Interviews = () => {
@@ -42,12 +44,16 @@ const Interviews = () => {
   };
 
   const createInterviewRequest = async () => {
-    dispatch(openModal({ modalType: 'scheduleInterviewModal', data: { role: 'INTERVIEWER' } }));
+    dispatch(
+      openModal({ modalType: modalNames.scheduleInterviewModal, data: { role: feedbackInterviewRole.INTERVIEWER } })
+    );
     closeHandler();
   };
 
   const createIncomeInterviewRequest = () => {
-    dispatch(openModal({ modalType: 'scheduleInterviewModal', data: { role: 'CANDIDATE' } }));
+    dispatch(
+      openModal({ modalType: modalNames.scheduleInterviewModal, data: { role: feedbackInterviewRole.CANDIDATE } })
+    );
     closeHandler();
   };
 

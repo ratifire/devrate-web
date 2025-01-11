@@ -9,6 +9,7 @@ import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/services/workExperienceApiSlice.js';
 import { openModal } from '../../../../../../../redux/modal/modalSlice.js';
+import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
 import styles from './WorkExperienceItem.styles.js';
 
 const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
@@ -30,7 +31,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
     handleCloseMenu();
     dispatch(
       openModal({
-        modalType: 'workExperienceEditModal',
+        modalType: modalNames.workExperienceEditModal,
         data: {
           id: id,
           position: position,

@@ -9,6 +9,7 @@ import TextAreaInput from '../../FormsComponents/Inputs/TextAreaInput';
 import { closeModal } from '../../../redux/modal/modalSlice';
 import { FeedbackProjectModalSchema } from '../../../utils/validationSchemas/index';
 import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
+import { modalNames } from '../../../utils/constants/modalNames.js';
 import { feedbackOptions } from './constants';
 import { styles } from './FeedbackProjectModal.styles';
 
@@ -26,7 +27,7 @@ const FeedbackProjectModal = () => {
   const [createFeedback, { isLoading }] = useCreateFeedbackMutation();
 
   const handleClose = () => {
-    dispatch(closeModal({ modalType: 'feedbackProjectModal' }));
+    dispatch(closeModal({ modalType: modalNames.feedbackProjectModal }));
   };
 
   const onSubmit = async (values) => {

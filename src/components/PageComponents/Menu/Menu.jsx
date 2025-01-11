@@ -21,6 +21,7 @@ import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { openModal } from '../../../redux/modal/modalSlice';
+import { modalNames } from '../../../utils/constants/modalNames.js';
 import links from './profileRoutes';
 import styles from './Menu.styles';
 
@@ -41,7 +42,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   };
 
   const handleOpenFeedbackModal = () => {
-    dispatch(openModal({ modalType: 'feedbackProjectModal' }));
+    dispatch(openModal({ modalType: modalNames.feedbackProjectModal }));
   };
 
   const handleLinkClick = async (link) => {

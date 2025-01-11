@@ -8,6 +8,7 @@ import { useSnackbar } from 'notistack';
 import DropdownMenu from '../../DropdownMenu';
 import { useDeleteEducationByIdMutation } from '../../../../../../../redux/services/educationApiSlice';
 import { openModal } from '../../../../../../../redux/modal/modalSlice';
+import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
 import styles from './EducationItem.styles.js';
 
 const LENGTH_TO_COLLAPSE = 200;
@@ -34,7 +35,7 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
   const handleEditFeature = () => {
     dispatch(
       openModal({
-        modalType: 'educationEditModal',
+        openModal: modalNames.educationEditModal,
         data: {
           id: id,
           type: type,

@@ -21,6 +21,7 @@ import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Input
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationModal = () => {
@@ -62,7 +63,7 @@ const SpecializationModal = () => {
     isErrorAddSkill ||
     isErrorGetSpecialization;
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
-  const handleClose = () => dispatch(closeModal({ modalType: 'specializationModal' }));
+  const handleClose = () => dispatch(closeModal({ modalType: modalNames.specializationModal }));
 
   const handleChangeMastery = (e) => {
     const value = e.target.value;

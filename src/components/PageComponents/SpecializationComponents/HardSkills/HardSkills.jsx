@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { useHardSkillData } from '../../../../utils/hooks/specialization';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 
 const HardSkills = () => {
   const { skills, isError, isFetching } = useHardSkillData();
@@ -9,8 +10,8 @@ const HardSkills = () => {
 
   const handleModalOpen = () => {
     skills.length === 0
-      ? dispatch(openModal({ modalType: 'hardSkillsModal' }))
-      : dispatch(openModal({ modalType: 'hardSkillsEditModal' }));
+      ? dispatch(openModal({ modalType: modalNames.hardSkillsModal }))
+      : dispatch(openModal({ modalType: modalNames.hardSkillsEditModal }));
   };
 
   const averageMark =

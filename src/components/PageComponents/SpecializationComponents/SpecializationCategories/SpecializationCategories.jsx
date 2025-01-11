@@ -20,6 +20,7 @@ import CustomTooltip from '../../../UI/CustomTooltip';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
 import { CategoriesSkeleton } from '../../../UI/Skeleton';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
@@ -83,7 +84,7 @@ const SpecializationCategories = () => {
 
   const handlerAddSpecializations = () => {
     if (specializations?.length >= 4) return;
-    dispatch(openModal({ modalType: 'specializationModal' }));
+    dispatch(openModal({ modalType: modalNames.specializationModal }));
   };
 
   const handlerChangeMainSpecialization = async () => {
@@ -146,7 +147,7 @@ const SpecializationCategories = () => {
   };
 
   const handleEditFeature = ({ id, name, mastery }) => {
-    dispatch(openModal({ modalType: 'specializationEditModal', data: { id, name, mastery } }));
+    dispatch(openModal({ modalType: modalNames.specializationEditModal, data: { id, name, mastery } }));
     handleCloseMenu(id);
   };
 
