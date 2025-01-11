@@ -30,7 +30,7 @@ const CheckEmail = () => {
       resetForm();
       dispatch(setEmail(values.email));
       dispatch(closeModal());
-      dispatch(openModal({ modalType: modalNames.resetPassword }));
+      dispatch(openModal({ modalType: modalNames.resetPasswordModal }));
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar('Error sending email. Please try again.', { variant: 'error' });

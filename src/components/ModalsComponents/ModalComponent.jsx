@@ -12,6 +12,7 @@ const ModalComponent = () => {
   const handleClose = () => {
     dispatch(closeModal());
   };
+
   return (
     <Modal
       closeAfterTransition

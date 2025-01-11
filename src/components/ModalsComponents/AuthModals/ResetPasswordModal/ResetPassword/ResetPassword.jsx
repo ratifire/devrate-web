@@ -35,7 +35,7 @@ const ResetPassword = () => {
 
   const handleCloseAllModal = () => {
     dispatch(closeModal());
-    dispatch(openModal({ modalType: modalNames.checkEmail }));
+    dispatch(openModal({ modalType: modalNames.checkEmailModal }));
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

@@ -29,7 +29,7 @@ const LoginModal = () => {
   const navigate = useNavigate();
 
   const handleOpen = useCallback(() => {
-    dispatch(openModal({ modalType: modalNames.checkEmail }));
+    dispatch(openModal({ modalType: modalNames.checkEmailModal }));
   }, [dispatch]);
 
   const handleClose = useCallback(() => {

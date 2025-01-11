@@ -17,7 +17,7 @@ export const modalNames = {
   scheduleInterviewModal: 'scheduleInterviewModal',
   feedbackInterviewModal: 'feedbackInterviewModal',
   registrationModal: 'registrationModal',
-  checkEmail: 'checkEmailModal',
-  resetPassword: 'resetPasswordModal',
-  confirmation: 'ConfirmationModal',
+  checkEmailModal: 'checkEmailModal',
+  resetPasswordModal: 'resetPasswordModal',
+  confirmationModal: 'ConfirmationModal',
 };

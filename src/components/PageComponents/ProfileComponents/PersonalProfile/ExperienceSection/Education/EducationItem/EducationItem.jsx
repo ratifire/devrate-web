@@ -35,7 +35,7 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
   const handleEditFeature = () => {
     dispatch(
       openModal({
-        openModal: modalNames.educationEditModal,
+        modalType: modalNames.educationEditModal,
         data: {
           id: id,
           type: type,

@@ -41,9 +41,9 @@ const modalEnum = {
   [modalNames.scheduleInterviewModal]: ScheduleInterviewModal,
   [modalNames.feedbackInterviewModal]: FeedbackInterviewModal,
   [modalNames.registrationModal]: RegistrationModal,
-  [modalNames.checkEmail]: CheckEmail,
-  [modalNames.resetPassword]: ResetPassword,
-  [modalNames.confirmation]: ConfirmationModal,
+  [modalNames.checkEmailModal]: CheckEmail,
+  [modalNames.resetPasswordModal]: ResetPassword,
+  [modalNames.confirmationModal]: ConfirmationModal,
 };
 
 const ModalContainer = ({ modalType }) => {
