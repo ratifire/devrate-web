@@ -25,7 +25,7 @@ import { modalNames } from '../../../utils/constants/modalNames.js';
 import links from './profileRoutes';
 import styles from './Menu.styles';
 
-const Menu = ({ isDrawerOpen, toggleDrawer }) => {
+const Menu = ({ isDrawerOpen, toggleDrawer, closeMenu }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const feedbackProjectModal = useSelector((state) => state.modal.feedbackProjectModal);
@@ -49,6 +49,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
     if (link.name === 'profile.userMenu.logout') {
       await logoutHandler();
     }
+    closeMenu();
   };
 
   return (
@@ -107,6 +108,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
 Menu.propTypes = {
   isDrawerOpen: PropTypes.bool.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
 };
 
 export default Menu;

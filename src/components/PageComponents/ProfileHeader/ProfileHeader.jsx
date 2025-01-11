@@ -36,6 +36,10 @@ const ProfileHeader = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
+  const handleCloseMenu = () => {
+    setIsDrawerOpen(false);
+  };
+
   return (
     <AppBar component='header' position={'static'} sx={styles.header}>
       <Box sx={styles.logoBox}>
@@ -58,7 +62,7 @@ const ProfileHeader = () => {
             userName={`${getFirstName || firstName} ${getLastName || lastName}`}
           />
         </Button>
-        <Menu isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
+        <Menu closeMenu={handleCloseMenu} isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
       {open?.feedbackId && <FeedbackInterviewModal />}
     </AppBar>
