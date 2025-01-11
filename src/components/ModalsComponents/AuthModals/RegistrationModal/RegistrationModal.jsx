@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Box, Link, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router';
 import { RegistrationSchema } from '../../../../utils/validationSchemas/index';
 import { AdvancedFormSelector, FormCheckbox, FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import ModalLayout from '../../../../layouts/ModalLayout';
 import { useCreateUserMutation } from '../../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useGetCountryListQuery } from '../../../../redux/countryList/countryApiSlice';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import styles from './RegistrationModal.styles';
 
 const initialValues = {
@@ -31,13 +31,13 @@ const RegistrationModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [createUser, { isLoading: isLoadingCreating }] = useCreateUserMutation();
-  const openRegistration = useSelector((state) => state.modal.openRegistration);
-  const handleClose = () => dispatch(closeModal({ modalName: 'openRegistration' }));
   const { data: userCountries } = useGetCountryListQuery();
 
   const handleChangeCountry = (value) => {
     setCountry(value);
   };
+
+  const handleClose = () => dispatch(closeModal());
 
   const handleKeyDown = (e) => {
     if (e.key === ' ') {
@@ -62,8 +62,8 @@ const RegistrationModal = () => {
       }).unwrap();
 
       resetForm();
-      dispatch(closeModal({ modalName: 'openRegistration' }));
-      dispatch(openModal({ modalName: 'openConfirmation', data: email }));
+      dispatch(closeModal());
+      dispatch(openModal({ modalType: modalNames.confirmation, data: email }));
     } catch (error) {
       if (error.status === 409) setErrors({ email: 'This email is already in use' });
     }
@@ -90,7 +90,7 @@ const RegistrationModal = () => {
     formik.dirty;
 
   return (
-    <ModalLayout open={openRegistration} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='h5'>
         {changeColorOfLastTitleWord(t('modal.registration.title'))}
       </Typography>
@@ -204,13 +204,7 @@ const RegistrationModal = () => {
           />
         </Box>
         <Box sx={styles.policyTermsContainer}>
-          <Link
-            aria-disabled
-            component={RouterLink}
-            sx={styles.policyTermsLink}
-            to={'/privacy_policy'}
-            onClick={handleClose}
-          >
+          <Link component={RouterLink} sx={styles.policyTermsLink} to={'/privacy_policy'} onClick={handleClose}>
             {t('modal.registration.privacy_policy')}
           </Link>
           <Link component={RouterLink} sx={styles.policyTermsLink} to={'/terms_and_conditions'} onClick={handleClose}>
@@ -218,7 +212,7 @@ const RegistrationModal = () => {
           </Link>
         </Box>
       </form>
-    </ModalLayout>
+    </>
   );
 };
 
