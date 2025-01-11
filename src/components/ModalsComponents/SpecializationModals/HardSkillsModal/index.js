@@ -1,3 +1,4 @@
 import HardSkillsModal from './HardSkillsModal';
+import HardSkillsEditModal from './HardSkillsEditModal.jsx';
 
-export default HardSkillsModal;
+export { HardSkillsModal, HardSkillsEditModal };

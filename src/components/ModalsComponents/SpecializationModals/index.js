@@ -1,5 +1,14 @@
-import HardSkillsModal from './HardSkillsModal';
+import { HardSkillsEditModal, HardSkillsModal } from './HardSkillsModal';
 import ScheduleInterviewModal from './ScheduleInterviewModal';
-import SoftSkillsModal from './SoftSkillsModal';
+import { SoftSkillsEditModal, SoftSkillsModal } from './SoftSkillsModal';
+import { SpecializationEditModal, SpecializationModal } from './SpecializationModal';
 
-export { HardSkillsModal, ScheduleInterviewModal, SoftSkillsModal };
+export {
+  HardSkillsModal,
+  ScheduleInterviewModal,
+  SoftSkillsModal,
+  HardSkillsEditModal,
+  SpecializationEditModal,
+  SpecializationModal,
+  SoftSkillsEditModal,
+};

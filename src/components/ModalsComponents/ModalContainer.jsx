@@ -1,17 +1,26 @@
 import PropTypes from 'prop-types';
 import { modalNames } from '../../utils/constants/modalNames.js';
-import { EducationModal, WorkExperienceModal, AchievementModal, ModalUserInfo } from './ProfileModals';
-import { CheckEmail, LoginModal, RegistrationModal, ResetPassword } from './AuthModals/index.js';
-import AchievementEditModal from './ProfileModals/AchievementModal/AchievementEditModal.jsx';
-import WorkExperienceEditModal from './ProfileModals/WorkExperienceModal/WorkExperienceEditModal.jsx';
-import EducationEditModal from './ProfileModals/EducationModal/EducationEditModal.jsx';
+import {
+  EducationModal,
+  WorkExperienceModal,
+  AchievementModal,
+  ModalUserInfo,
+  WorkExperienceEditModal,
+  EducationEditModal,
+  AchievementEditModal,
+} from './ProfileModals';
+import { CheckEmail, LoginModal, RegistrationModal, ResetPassword, ConfirmationModal } from './AuthModals/index.js';
 import FeedbackProjectModal from './FeedbackProjectModal';
-import { SpecializationEditModal, SpecializationModal } from './SpecializationModals/SpecializationModal';
-import { HardSkillsModal, ScheduleInterviewModal, SoftSkillsModal } from './SpecializationModals';
-import HardSkillsEditModal from './SpecializationModals/HardSkillsModal/HardSkillsEditModal.jsx';
-import SoftSkillsEditModal from './SpecializationModals/SoftSkillsModal/SoftSkillEditModal.jsx';
+import {
+  SpecializationEditModal,
+  SpecializationModal,
+  HardSkillsEditModal,
+  HardSkillsModal,
+  ScheduleInterviewModal,
+  SoftSkillsModal,
+  SoftSkillsEditModal,
+} from './SpecializationModals';
 import { FeedbackInterviewModal } from './FeedbackModal/FeedbackInterviewModal/index.js';
-import ConfirmationModal from './AuthModals/ConfirmationModal/index.js';
 
 const modalEnum = {
   [modalNames.achievementModal]: AchievementModal,
