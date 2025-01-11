@@ -478,6 +478,13 @@ export const uk = {
           errorQuantity: 'Ви можете додати до 20 навичок',
           errorNotAvailable: 'Немає доступних навичок',
         },
+        confirmSpecializationDelete: {
+          title: 'Видалити спеціалізацію',
+          text1: 'Ви впевнені що хочете видалити спеціалізацію',
+          text2: 'Всі дані по цій спеціалізації та статистика будуть втрачені.',
+          refuseBtnText: 'Скасувати',
+          confirmBtnText: 'Видалити',
+        },
       },
       interview: {
         income: "Пройдено інтерв'ю",

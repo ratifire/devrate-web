@@ -7,17 +7,20 @@ import {
   ScheduleInterviewModal,
   SpecializationModal,
 } from '../../components/ModalsComponents/SpecializationModals';
+import ConfirmDeleteSpecializationModal from '../../components/ModalsComponents/SpecializationModals/ConfirmDeleteSpecializationModal/index.js';
 
 const MemoizedSpecializationModal = memo(SpecializationModal);
 const MemoizedScheduleInterviewModal = memo(ScheduleInterviewModal);
 const MemoizedSoftSkillsModal = memo(SoftSkillsModal);
 const MemoizedHardSkillsModal = memo(HardSkillsModal);
+const MemoConfirmDeleteSpecializationModal = memo(ConfirmDeleteSpecializationModal);
 
 const SpecializationTemplate = ({ children }) => {
   const openSpecialization = useSelector((state) => state.modal.openSpecialization);
   const scheduleInterviewIsOpen = useSelector((state) => state.modal.scheduleInterview);
   const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const openSoftSkillsModal = useSelector((state) => state.modal.openSoftSkillsModal);
+  const openConfirmDeleteSpecialization = useSelector((state) => state.modal.openConfirmDeleteSpecialization);
 
   return (
     <div className='specialization'>
@@ -26,6 +29,7 @@ const SpecializationTemplate = ({ children }) => {
       {scheduleInterviewIsOpen && <MemoizedScheduleInterviewModal />}
       {openSoftSkillsModal && <MemoizedSoftSkillsModal />}
       {openSkillsModal && <MemoizedHardSkillsModal />}
+      {openConfirmDeleteSpecialization && <MemoConfirmDeleteSpecializationModal />}
     </div>
   );
 };

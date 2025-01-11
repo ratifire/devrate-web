@@ -55,6 +55,17 @@ const SpecializationCategories = () => {
     isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization || isErrorDeleteSpecialization;
   const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
   const { editSpecialization, addSpecialization } = modalSpecialization;
+  const { modalData } = useSelector((state) => state.modal);
+
+  useEffect(() => {
+    if (modalData) {
+      if (modalData.shouldDelete) {
+        handlerDeleteSpecialization(modalData.id);
+      } else {
+        handleCloseMenu(modalData.id);
+      }
+    }
+  }, [modalData]);
 
   useEffect(() => {
     if (!specializations || isLoading) {
@@ -104,6 +115,11 @@ const SpecializationCategories = () => {
       enqueueSnackbar(t('modalNotifyText.specialization.change.error'), { variant: 'error' });
     }
   };
+
+  const handleOpenConfirmDeleteSpecializationModal = (id, specialization) => {
+    dispatch(openModal({ modalName: 'openConfirmDeleteSpecialization', data: { id, specialization } }));
+  };
+
   const handlerDeleteSpecialization = async (id) => {
     const findMainSpecialization = specializations.find((spec) => spec.main);
 
@@ -218,7 +234,7 @@ const SpecializationCategories = () => {
               <DropdownMenu
                 anchorEl={anchorEl[id]}
                 handleCloseMenu={() => handleCloseMenu(id)}
-                handleDeleteFeature={() => handlerDeleteSpecialization(id)}
+                handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
                 handleEditFeature={() => handleEditFeature(id)}
               />
             </Box>

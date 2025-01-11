@@ -18,6 +18,7 @@ const modalSlice = createSlice({
     scheduleInterview: false,
     feedbackProjectModal: false,
     openNotification: false,
+    openConfirmDeleteSpecialization: false,
   },
   reducers: {
     openModal: (state, action) => {
@@ -32,8 +33,15 @@ const modalSlice = createSlice({
       state[modalName] = false;
       state.modalData = null;
     },
+    closeConfirmDeleteModal: (state, action) => {
+      const { modalName, data } = action.payload;
+      state[modalName] = false;
+      if (data) {
+        state.modalData = data;
+      }
+    },
   },
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const { openModal, closeModal, closeConfirmDeleteModal } = modalSlice.actions;
 export default modalSlice.reducer;
