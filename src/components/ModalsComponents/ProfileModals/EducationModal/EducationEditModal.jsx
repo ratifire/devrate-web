@@ -21,7 +21,7 @@ const EducationEditModal = () => {
   const translatedNow = t('profile.modal.education.now');
   const [startYears, setStartYears] = useState([]);
   const [endYears, setEndYears] = useState([]);
-  const [updateEducation] = useUpdateEducationMutation();
+  const [updateEducation, { isLoading }] = useUpdateEducationMutation();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
@@ -181,7 +181,7 @@ const EducationEditModal = () => {
           </Box>
 
           <ButtonDef
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
             sx={styles.workExperienceBtn}
             type='submit'

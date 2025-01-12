@@ -33,17 +33,13 @@ const ConfirmationModal = () => {
       const code = Object.values(values).join('');
 
       try {
-        const response = await confirmEmail({
+        await confirmEmail({
           confirmationCode: code,
           email,
         }).unwrap();
         resetForm();
         dispatch(closeModal());
-        if (response) {
-          setTimeout(() => {
-            dispatch(openModal({ modalType: modalNames.loginModal }));
-          }, 500);
-        }
+        dispatch(openModal({ modalType: modalNames.loginModal }));
         // eslint-disable-next-line no-unused-vars
       } catch (error) {
         setCodeError(true);

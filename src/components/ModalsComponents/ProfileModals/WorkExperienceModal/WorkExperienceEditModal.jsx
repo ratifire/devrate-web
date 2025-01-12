@@ -215,7 +215,7 @@ const WorkExperienceEditModal = () => {
           )}
 
           <ButtonDef
-            disabled={!formik.isValid || formik.isSubmitting}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
             label={t('profile.modal.btn')}
             sx={styles.workExperienceBtn}
             type='submit'
