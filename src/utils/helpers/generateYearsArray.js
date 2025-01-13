@@ -1,7 +1,8 @@
 export const generateYearsArray = () => {
   const availableYears = [];
-  for (let i = 1950; i <= `${new Date().getFullYear()}`; i++) {
-    availableYears.push(`${i}`);
+  const currentYear = new Date().getFullYear();
+  for (let i = 1950; i <= currentYear; i++) {
+    availableYears.push(String(i));
   }
   return availableYears;
 };
