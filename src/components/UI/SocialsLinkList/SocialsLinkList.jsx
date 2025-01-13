@@ -7,6 +7,12 @@ import { ensureProtocol } from '../../../utils/helpers/ensureProtocol';
 import { DARK_THEME } from '../../../utils/constants/Theme/theme';
 import { SOCIAL_TYPES } from './SocialTypes';
 
+const handlers = {
+  [SOCIAL_TYPES.EMAIL]: (value) => `mailto:${value}`,
+  [SOCIAL_TYPES.PHONE_NUMBER]: (value) => `tel:${value}`,
+  default: (value) => ensureProtocol(value),
+};
+
 const SocialsLinkList = ({ socials, componentStyles }) => {
   const { mode } = useSelector((state) => state.theme);
   const icons = mode === DARK_THEME ? darkIcons : whiteIcons;
@@ -15,15 +21,7 @@ const SocialsLinkList = ({ socials, componentStyles }) => {
     <>
       {socials.map((social, index) => {
         const IconComponent = icons[social.type] || icons['DEFAULT'];
-        let href;
-
-        if (social.type === SOCIAL_TYPES.EMAIL) {
-          href = `mailto:${social.value}`;
-        } else if (social.type === SOCIAL_TYPES.PHONE_NUMBER) {
-          href = `tel:${social.value}`;
-        } else {
-          href = ensureProtocol(social.value);
-        }
+        const href = (handlers[social.type] || handlers.default)(social.value);
 
         return (
           // eslint-disable-next-line react/no-array-index-key
