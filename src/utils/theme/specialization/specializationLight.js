@@ -67,5 +67,12 @@ export const specializationLight = {
       color: '#FFFFFF',
       icon: '#444446',
     },
+    inputSelectSpec: {
+      backgroundColor: '#ECECED',
+      color: '#303032',
+    },
+    inputList: {
+      backgroundColor: '#fff',
+    },
   },
 };
