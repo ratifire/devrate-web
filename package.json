@@ -23,6 +23,7 @@
     "i18next": "^24.0.5",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.1",
+    "lodash": "^4.17.21",
     "luxon": "^3.5.0",
     "notistack": "^3.0.1",
     "prop-types": "^15.8.1",
@@ -36,9 +37,9 @@
     "recharts": "^2.14.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
+    "swiper": "^11.1.15",
     "uuid": "^11.0.3",
-    "yup": "^1.5.0",
-    "swiper": "^11.1.15"
+    "yup": "^1.5.0"
   },
   "scripts": {
     "dev": "vite",
