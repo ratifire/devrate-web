@@ -11,7 +11,7 @@ import { useChangePasswordMutation } from '../../../../../redux/auth/authApiSlic
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
-import { resetPasswordSchema } from '../../../../../utils/validationSchemas/index';
+import { resetPasswordSchema } from '../../../../../utils/validationSchemas';
 import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
 import { modalNames } from '../../../../../utils/constants/modalNames.js';
 import styles from './ResetPassword.styles';

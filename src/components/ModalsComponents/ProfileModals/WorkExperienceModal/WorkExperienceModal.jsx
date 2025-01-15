@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
-import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas/index';
+import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';

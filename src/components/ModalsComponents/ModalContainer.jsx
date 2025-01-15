@@ -9,7 +9,7 @@ import {
   EducationEditModal,
   AchievementEditModal,
 } from './ProfileModals';
-import { CheckEmail, LoginModal, RegistrationModal, ResetPassword, ConfirmationModal } from './AuthModals/index.js';
+import { CheckEmail, LoginModal, RegistrationModal, ResetPassword, ConfirmationModal } from './AuthModals';
 import FeedbackProjectModal from './FeedbackProjectModal';
 import {
   SpecializationEditModal,
@@ -20,7 +20,7 @@ import {
   SoftSkillsModal,
   SoftSkillsEditModal,
 } from './SpecializationModals';
-import { FeedbackInterviewModal } from './FeedbackModal/FeedbackInterviewModal/index.js';
+import { FeedbackInterviewModal } from './FeedbackModal/FeedbackInterviewModal';
 
 const modalEnum = {
   [modalNames.achievementModal]: AchievementModal,
