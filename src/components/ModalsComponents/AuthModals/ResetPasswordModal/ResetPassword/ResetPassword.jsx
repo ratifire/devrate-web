@@ -7,13 +7,13 @@ import { Link as RouterLink } from 'react-router';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useSnackbar } from 'notistack';
 import { useRef, useState } from 'react';
-import ModalLayout from '../../../../../layouts/ModalLayout';
 import { useChangePasswordMutation } from '../../../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
-import { resetPasswordSchema } from '../../../../../utils/valadationSchemas/index';
+import { resetPasswordSchema } from '../../../../../utils/validationSchemas';
 import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '../../../../../utils/constants/modalNames.js';
 import styles from './ResetPassword.styles';
 
 const initialValues = {
@@ -29,15 +29,13 @@ const ResetPassword = () => {
   const inputRefs = useRef([]);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const openResetPassword = useSelector((state) => state.modal.openResetPassword);
   const email = useSelector((state) => state.email.email);
   const { enqueueSnackbar } = useSnackbar();
   const [changePassword, { isError, isSuccess }] = useChangePasswordMutation();
 
-  const handleClose = () => dispatch(closeModal({ modalName: 'openResetPassword' }));
   const handleCloseAllModal = () => {
-    dispatch(closeModal({ modalName: 'openResetPassword' }));
-    dispatch(openModal({ modalName: 'openCheckEmail' }));
+    dispatch(closeModal());
+    dispatch(openModal({ modalType: modalNames.checkEmailModal }));
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -93,7 +91,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <ModalLayout open={openResetPassword} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='subtitle3'>
         {changeColorOfLastTitleWord(t('modal.resetPassword.title'))}
       </Typography>
@@ -243,7 +241,7 @@ const ResetPassword = () => {
           </Link>
         </Typography>
       </Box>
-    </ModalLayout>
+    </>
   );
 };
 

@@ -2,10 +2,9 @@ import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { useSnackbar } from 'notistack';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useAddSkillToMasteryMutation,
@@ -19,6 +18,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles as hardSkillsStyles } from './HardSkillsModal.styles';
 
 const initialState = {
@@ -34,7 +34,6 @@ const HardSkillsModal = () => {
   const [state, updateState] = useMergeState(initialState);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const openSkillsModal = useSelector((state) => state.modal.openSkillsModal);
   const { masteryId, isError: isErrorMastery, isFetching: isFetchingMastery } = useGetMastery();
   const { enqueueSnackbar } = useSnackbar();
   const {
@@ -52,7 +51,7 @@ const HardSkillsModal = () => {
   const isError = isErrorMastery || isErrorSkills || isErrorAddSkill || isErrorDeleteSkill;
   const { error, helperText } = state;
 
-  const handleClose = () => dispatch(closeModal({ modalName: 'openSkillsModal' }));
+  const handleClose = () => dispatch(closeModal({ modalName: modalNames.hardSkillsModal }));
 
   useEffect(() => {
     updateState({ allSkills: skills });
@@ -165,15 +164,11 @@ const HardSkillsModal = () => {
   };
 
   if (isError) {
-    return (
-      <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
-        <ErrorComponent />
-      </ModalLayoutProfile>
-    );
+    return <ErrorComponent />;
   }
 
   return (
-    <ModalLayoutProfile open={openSkillsModal} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='h6'>
         {t('specialization.modal.skills.title')}
       </Typography>
@@ -210,7 +205,7 @@ const HardSkillsModal = () => {
           variant='contained'
         />
       </form>
-    </ModalLayoutProfile>
+    </>
   );
 };
 

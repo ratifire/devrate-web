@@ -5,40 +5,40 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
-import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas/index';
+import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import Responsibility from '../../../UI/Responsibility';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useCreateNewWorkExperienceMutation } from '../../../../redux/services/workExperienceApiSlice.js';
+import { useUpdateWorkExperienceByIdMutation } from '../../../../redux/services/workExperienceApiSlice.js';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './WorkExperienceModal.styles';
 
-const WorkExperienceModal = () => {
+const WorkExperienceEditModal = () => {
   const dispatch = useDispatch();
-  const { id } = useSelector((state) => state.auth.user.data);
-  const [responsibilities, setResponsibilities] = useState([]);
+  const modalData = useSelector(selectModalData);
+  const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
   const { t } = useTranslation();
-  const [createNewWorkExperience, { isLoading }] = useCreateNewWorkExperienceMutation();
+  const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
   const { enqueueSnackbar } = useSnackbar();
 
   const selectYears = useMemo(() => generateYearsArray(), []);
   const handleClose = () => {
-    dispatch(closeModal({ modalType: modalNames.workExperienceModal }));
+    dispatch(closeModal({ modalType: modalNames.workExperienceEditModal }));
   };
 
   const initialValues = {
-    position: '',
-    companyName: '',
-    description: '',
+    position: modalData?.position || '',
+    companyName: modalData?.companyName || '',
+    description: modalData?.description || '',
     responsibilities: '',
-    startYear: '',
-    endYear: '',
-    currentDate: '',
+    startYear: modalData?.startYear || '',
+    endYear: modalData?.endYear || '',
+    currentDate: modalData?.endYear === '9999',
   };
   const onSubmit = async (values, { resetForm }) => {
     try {
@@ -51,14 +51,21 @@ const WorkExperienceModal = () => {
         responsibilities,
       };
 
-      await createNewWorkExperience({ userId: id, data }).unwrap();
-      enqueueSnackbar(t('modalNotifyText.workExperience.create.success'), { variant: 'success' });
+      await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
+      enqueueSnackbar(t('modalNotifyText.workExperience.edit.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+
       setResponsibilities([]);
       resetForm();
       handleClose();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.workExperience.create.error'), { variant: 'error' });
+      enqueueSnackbar(t('modalNotifyText.workExperience.edit.error'), { variant: 'error' });
     }
   };
 
@@ -208,9 +215,8 @@ const WorkExperienceModal = () => {
           )}
 
           <ButtonDef
-            disabled={!formik.isValid || formik.isSubmitting || isLoading}
+            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
             label={t('profile.modal.btn')}
-            loading={isLoading}
             sx={styles.workExperienceBtn}
             type='submit'
             variant='contained'
@@ -221,4 +227,4 @@ const WorkExperienceModal = () => {
   );
 };
 
-export default WorkExperienceModal;
+export default WorkExperienceEditModal;

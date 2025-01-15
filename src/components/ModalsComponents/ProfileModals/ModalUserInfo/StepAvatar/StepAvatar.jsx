@@ -9,7 +9,7 @@ import {
   useGetAvatarUserQuery,
   usePostAvatarUserMutation,
 } from '../../../../../redux/user/avatar/avatarApiSlice';
-import { StepAvatarSchema } from '../../../../../utils/valadationSchemas/index';
+import { StepAvatarSchema } from '../../../../../utils/validationSchemas/index';
 import LoadImages from '../../../../UI/LoadImages';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { StepAvatarSkeleton } from '../../../../UI/Skeleton';

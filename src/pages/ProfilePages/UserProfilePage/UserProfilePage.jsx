@@ -1,8 +1,6 @@
 import { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
 import { useParams, Navigate } from 'react-router';
-import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
-import UserProfileTemplate from '../../../Templates/ProfileTemplates/UserProfileTemplate';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import UserProfileSkeleton from '../../../components/UI/Skeleton/Pages/userProfileSkeleton';
 import { styles } from './UserProfilePage.styles';
@@ -20,7 +18,6 @@ const ExperienceSection = lazy(
   () => import('../../../components/PageComponents/ProfileComponents/UserProfile/ExperienceSection')
 );
 
-const MemoizedProfileHeader = memo(ProfileHeader);
 const MemoizedBaseUserInfo = memo(BaseUserInfo);
 const MemoizedSkillsSection = memo(SkillsSection);
 const MemoizedRightSection = memo(RightSection);
@@ -41,25 +38,22 @@ const UserProfilePage = () => {
 
   return (
     <Suspense fallback={<UserProfileSkeleton />}>
-      <UserProfileTemplate>
-        <MemoizedProfileHeader />
-        <Container maxWidth='xl' sx={styles.container}>
-          <Box sx={styles.contentWrapper}>
-            <Paper sx={styles.baseUserInfo}>
-              <MemoizedBaseUserInfo id={userId} />
-            </Paper>
-            <Paper sx={styles.skills}>
-              <MemoizedSkillsSection id={userId} />
-            </Paper>
-            <Paper sx={styles.right}>
-              <MemoizedRightSection id={userId} />
-            </Paper>
-            <Paper sx={styles.experience}>
-              <MemoizedExperienceSection id={userId} />
-            </Paper>
-          </Box>
-        </Container>
-      </UserProfileTemplate>
+      <Container maxWidth='xl' sx={styles.container}>
+        <Box sx={styles.contentWrapper}>
+          <Paper sx={styles.baseUserInfo}>
+            <MemoizedBaseUserInfo id={userId} />
+          </Paper>
+          <Paper sx={styles.skills}>
+            <MemoizedSkillsSection id={userId} />
+          </Paper>
+          <Paper sx={styles.right}>
+            <MemoizedRightSection id={userId} />
+          </Paper>
+          <Paper sx={styles.experience}>
+            <MemoizedExperienceSection id={userId} />
+          </Paper>
+        </Box>
+      </Container>
     </Suspense>
   );
 };

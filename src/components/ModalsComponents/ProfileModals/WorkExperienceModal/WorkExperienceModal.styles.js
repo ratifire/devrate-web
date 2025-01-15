@@ -51,6 +51,7 @@ export const styles = {
     alignItems: 'flex-start',
     flexWrap: 'wrap',
     gridGap: theme.spacing(3),
+    marginBottom: '24px',
   }),
   workExperienceBtn: {
     width: '228px',
