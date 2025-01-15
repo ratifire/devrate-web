@@ -14,11 +14,9 @@ import FeedbackProjectModal from './FeedbackProjectModal';
 import {
   SpecializationEditModal,
   SpecializationModal,
-  HardSkillsEditModal,
   HardSkillsModal,
   ScheduleInterviewModal,
   SoftSkillsModal,
-  SoftSkillsEditModal,
 } from './SpecializationModals';
 import { FeedbackInterviewModal } from './FeedbackModal/FeedbackInterviewModal';
 
@@ -35,9 +33,7 @@ const modalEnum = {
   [modalNames.specializationModal]: SpecializationModal,
   [modalNames.specializationEditModal]: SpecializationEditModal,
   [modalNames.hardSkillsModal]: HardSkillsModal,
-  [modalNames.hardSkillsEditModal]: HardSkillsEditModal,
   [modalNames.softSkillsModal]: SoftSkillsModal,
-  [modalNames.softSkillsEditModal]: SoftSkillsEditModal,
   [modalNames.scheduleInterviewModal]: ScheduleInterviewModal,
   [modalNames.feedbackInterviewModal]: FeedbackInterviewModal,
   [modalNames.registrationModal]: RegistrationModal,
@@ -48,6 +44,7 @@ const modalEnum = {
 
 const ModalContainer = ({ modalType }) => {
   const Modal = modalEnum[modalType];
+
   if (!Modal) return;
   return <Modal />;
 };

@@ -8,11 +8,7 @@ const HardSkills = () => {
   const { skills, isError, isFetching } = useHardSkillData();
   const dispatch = useDispatch();
 
-  const handleModalOpen = () => {
-    skills.length === 0
-      ? dispatch(openModal({ modalType: modalNames.hardSkillsModal }))
-      : dispatch(openModal({ modalType: modalNames.hardSkillsEditModal }));
-  };
+  const handleModalOpen = () => dispatch(openModal({ modalType: modalNames.hardSkillsModal }));
 
   const averageMark =
     skills.length > 0 ? (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) : '0';
