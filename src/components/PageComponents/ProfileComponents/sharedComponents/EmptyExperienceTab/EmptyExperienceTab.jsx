@@ -9,6 +9,7 @@ import { openModal } from '../../../../../redux/modal/modalSlice';
 import { setButtonState } from '../../../../../redux/addButton/addButtonSlice';
 import links from '../../../../../router/links';
 import { DARK_THEME } from '../../../../../utils/constants/Theme/theme';
+import { modalNames } from '../../../../../utils/constants/modalNames.js';
 import { styles } from './EmptyExperienceTab.styles';
 
 const ExperienceEmptyItem = ({ tab, profileType, imgUrl, isData }) => {
@@ -22,7 +23,16 @@ const ExperienceEmptyItem = ({ tab, profileType, imgUrl, isData }) => {
   }, [isData]);
 
   const handleOpenModal = () => {
-    dispatch(openModal({ modalName: tab }));
+    const modalTypeMap = {
+      workExperience: modalNames.workExperienceModal,
+      achievement: modalNames.achievementModal,
+      education: modalNames.educationModal,
+    };
+    const modalType = modalTypeMap[tab];
+    if (modalType) {
+      dispatch(openModal({ modalType }));
+    }
+    return;
   };
 
   return (
