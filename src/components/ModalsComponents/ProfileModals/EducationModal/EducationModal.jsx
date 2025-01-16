@@ -5,33 +5,28 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 import { closeModal } from '../../../../redux/modal/modalSlice';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
-import { EducationModalSchema } from '../../../../utils/valadationSchemas/index';
+import { EducationModalSchema } from '../../../../utils/validationSchemas/index';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useCreateEducationMutation, useUpdateEducationMutation } from '../../../../redux/services/educationApiSlice';
+import { useCreateEducationMutation } from '../../../../redux/services/educationApiSlice';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { selectEducationDataToEdit, clearEducationDataToEdit } from '../../../../redux/user/education/educationSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './EducationModal.styles';
 
 const EducationModal = () => {
   const dispatch = useDispatch();
-  const dataToEdit = useSelector(selectEducationDataToEdit);
-  const openEducation = useSelector((state) => state.modal.education);
   const { t } = useTranslation();
   const translatedNow = t('profile.modal.education.now');
   const [startYears, setStartYears] = useState([]);
   const [endYears, setEndYears] = useState([]);
   const [createEducation, { isLoading }] = useCreateEducationMutation();
-  const [updateEducation] = useUpdateEducationMutation();
   const currentUser = useSelector(selectCurrentUser);
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = useCallback(() => {
-    dispatch(closeModal({ modalName: 'education' }));
-    dispatch(clearEducationDataToEdit());
+    dispatch(closeModal({ modalType: modalNames.educationModal }));
   }, [dispatch]);
 
   useEffect(() => {
@@ -63,67 +58,29 @@ const EducationModal = () => {
         : new Date(values.endYear).getFullYear();
 
     try {
-      if (dataToEdit) {
-        await updateEducation({
-          id: dataToEdit.id,
-          payload: {
-            type: values.type,
-            name: values.name,
-            description: values.description,
-            startYear: values.startYear,
-            endYear: endYearEducation,
-          },
-        }).unwrap();
+      await createEducation({
+        userId: currentUser.data.id,
+        payload: { ...values, endYear: endYearEducation },
+      }).unwrap();
 
-        enqueueSnackbar(t('modalNotifyText.education.edit.success'), {
-          variant: 'success',
-          anchorOrigin: {
-            vertical: 'bottom',
-            horizontal: 'right',
-          },
-        });
-      } else {
-        await createEducation({
-          userId: currentUser.data.id,
-          payload: { ...values, endYear: endYearEducation },
-        }).unwrap();
+      enqueueSnackbar(t('modalNotifyText.education.create.success'), { variant: 'success' });
 
-        enqueueSnackbar(t('modalNotifyText.education.create.success'), { variant: 'success' });
-      }
       resetForm();
       handleClose();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      if (dataToEdit) {
-        enqueueSnackbar(t('modalNotifyText.education.edit.error'), {
-          variant: 'error',
-          anchorOrigin: {
-            vertical: 'bottom',
-            horizontal: 'right',
-          },
-        });
-      } else {
-        enqueueSnackbar(t('modalNotifyText.education.create.error'), { variant: 'error' });
-      }
+      enqueueSnackbar(t('modalNotifyText.education.create.error'), { variant: 'error' });
     }
   };
-
   const formik = useFormik({
-    initialValues: dataToEdit || emptyInitialValues,
+    initialValues: emptyInitialValues,
     validationSchema: EducationModalSchema,
     onSubmit,
     enableReinitialize: true,
   });
 
-  useEffect(() => {
-    if (!openEducation) {
-      formik.resetForm();
-      dispatch(clearEducationDataToEdit());
-    }
-  }, [openEducation, formik, dispatch]);
-
   return (
-    <ModalLayoutProfile open={openEducation} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='subtitle1'>
         {t('profile.modal.education.title')}
       </Typography>
@@ -214,7 +171,7 @@ const EducationModal = () => {
           />
         </Box>
       </form>
-    </ModalLayoutProfile>
+    </>
   );
 };
 

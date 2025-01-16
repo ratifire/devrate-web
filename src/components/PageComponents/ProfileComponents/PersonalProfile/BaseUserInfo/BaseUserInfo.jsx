@@ -9,6 +9,7 @@ import { setStep } from '../../../../../redux/modal/modalStepSlice';
 import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import { useGetAvatarUserQuery } from '../../../../../redux/user/avatar/avatarApiSlice';
+import { modalNames } from '../../../../../utils/constants/modalNames.js';
 import { styles } from './BaseUserInfo.styles';
 import { useProfileProgress } from './useProfileProgress';
 
@@ -34,12 +35,12 @@ const BaseUserInfo = () => {
 
   const handleOpenInfo = () => {
     dispatch(setStep(0));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: modalNames.userInfoModal }));
   };
 
   const handleOpenAvatar = () => {
     dispatch(setStep(2));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: modalNames.userInfoModal }));
   };
 
   return (

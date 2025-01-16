@@ -1,9 +1,9 @@
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
-import { closeFeedbackModal } from '../../../../../redux/feedback/feedbackModalSlice';
 import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '../../../../../redux/feedback/interviewApiSlice';
-import { FeedbackModalSchema } from '../../../../../utils/valadationSchemas';
+import { FeedbackModalSchema } from '../../../../../utils/validationSchemas';
+import { closeModal } from '../../../../../redux/modal/modalSlice.js';
 
 const useFeedbackForm = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const useFeedbackForm = () => {
     const result = await createInterview({ reviewerId: userId, body });
 
     if (!result.error) {
-      dispatch(closeFeedbackModal());
+      dispatch(closeModal());
     }
   };
 

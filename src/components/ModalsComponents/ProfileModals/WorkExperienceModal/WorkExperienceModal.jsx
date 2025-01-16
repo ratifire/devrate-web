@@ -5,44 +5,40 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
-import { WorkExperienceModalSchema } from '../../../../utils/valadationSchemas/index';
+import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas';
 import { closeModal } from '../../../../redux/modal/modalSlice';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import Responsibility from '../../../UI/Responsibility';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import {
-  useCreateNewWorkExperienceMutation,
-  useUpdateWorkExperienceByIdMutation,
-} from '../../../../redux/workExperience/workExperienceApiSlice';
+import { useCreateNewWorkExperienceMutation } from '../../../../redux/services/workExperienceApiSlice.js';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceModal = () => {
   const dispatch = useDispatch();
-  const { modalData } = useSelector((state) => state.modal);
-  const workExperience = useSelector((state) => state.modal.workExperience);
   const { id } = useSelector((state) => state.auth.user.data);
-  const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
+  const [responsibilities, setResponsibilities] = useState([]);
   const { t } = useTranslation();
   const [createNewWorkExperience, { isLoading }] = useCreateNewWorkExperienceMutation();
-  const [updateWorkExperienceById] = useUpdateWorkExperienceByIdMutation();
   const { enqueueSnackbar } = useSnackbar();
 
   const selectYears = useMemo(() => generateYearsArray(), []);
-  const handleClose = () => dispatch(closeModal({ modalName: 'workExperience' }));
+  const handleClose = () => {
+    dispatch(closeModal({ modalType: modalNames.workExperienceModal }));
+  };
 
   const initialValues = {
-    position: modalData?.position || '',
-    companyName: modalData?.companyName || '',
-    description: modalData?.description || '',
+    position: '',
+    companyName: '',
+    description: '',
     responsibilities: '',
-    startYear: modalData?.startYear || '',
-    endYear: modalData?.endYear || '',
-    currentDate: modalData?.endYear === '9999',
+    startYear: '',
+    endYear: '',
+    currentDate: '',
   };
   const onSubmit = async (values, { resetForm }) => {
     try {
@@ -55,34 +51,14 @@ const WorkExperienceModal = () => {
         responsibilities,
       };
 
-      const messageKey = modalData?.id
-        ? 'modalNotifyText.workExperience.edit.success'
-        : 'modalNotifyText.workExperience.create.success';
-
-      if (modalData?.id) {
-        await updateWorkExperienceById({ id: modalData.id, data }).unwrap();
-        enqueueSnackbar(t(messageKey), {
-          variant: 'success',
-          anchorOrigin: {
-            vertical: 'bottom',
-            horizontal: 'right',
-          },
-        });
-      } else {
-        await createNewWorkExperience({ userId: id, data }).unwrap();
-        enqueueSnackbar(t(messageKey), { variant: 'success' });
-      }
-
+      await createNewWorkExperience({ userId: id, data }).unwrap();
+      enqueueSnackbar(t('modalNotifyText.workExperience.create.success'), { variant: 'success' });
       setResponsibilities([]);
       resetForm();
       handleClose();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      const errorKey = modalData?.id
-        ? 'modalNotifyText.workExperience.edit.error'
-        : 'modalNotifyText.workExperience.create.error';
-
-      enqueueSnackbar(t(errorKey), { variant: 'error' });
+      enqueueSnackbar(t('modalNotifyText.workExperience.create.error'), { variant: 'error' });
     }
   };
 
@@ -110,7 +86,7 @@ const WorkExperienceModal = () => {
   };
 
   return (
-    <ModalLayoutProfile open={workExperience} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='subtitle1'>
         {t('profile.modal.workExperience.title')}
       </Typography>
@@ -233,7 +209,7 @@ const WorkExperienceModal = () => {
             )}
           </Box>
           <ButtonDef
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
+            disabled={!formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}
             loading={isLoading}
             sx={styles.workExperienceBtn}
@@ -242,7 +218,7 @@ const WorkExperienceModal = () => {
           />
         </Box>
       </form>
-    </ModalLayoutProfile>
+    </>
   );
 };
 

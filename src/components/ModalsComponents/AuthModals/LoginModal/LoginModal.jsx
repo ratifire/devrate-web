@@ -1,12 +1,11 @@
 import { useState, useCallback } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Box, Link, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
-import ModalLayout from '../../../../layouts/ModalLayout';
-import { LoginSchema } from '../../../../utils/valadationSchemas/index';
+import { LoginSchema } from '../../../../utils/validationSchemas';
 import { FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
@@ -14,6 +13,7 @@ import { useLoginMutation } from '../../../../redux/auth/authApiSlice';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
 import { setCredentials } from '../../../../redux/auth/authSlice';
 import { setTokens } from '../../../../redux/auth/tokenSlice';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import styles from './LoginModal.styles';
 
 const initialValues = {
@@ -26,16 +26,14 @@ const LoginModal = () => {
   const [loginError, setLoginError] = useState(null);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const openLogin = useSelector((state) => state.modal.openLogin);
   const navigate = useNavigate();
 
   const handleOpen = useCallback(() => {
-    dispatch(openModal({ modalName: 'openCheckEmail' }));
-    dispatch(closeModal({ modalName: 'openLogin' }));
+    dispatch(openModal({ modalType: modalNames.checkEmailModal }));
   }, [dispatch]);
 
   const handleClose = useCallback(() => {
-    dispatch(closeModal({ modalName: 'openLogin' }));
+    dispatch(closeModal());
   }, [dispatch]);
 
   const [login] = useLoginMutation();
@@ -92,7 +90,7 @@ const LoginModal = () => {
   );
 
   return (
-    <ModalLayout open={openLogin} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='h5'>
         {changeColorOfLastTitleWord(t('modal.login.title'))}
       </Typography>
@@ -185,7 +183,7 @@ const LoginModal = () => {
           </Box>
         </Box>
       </form>
-    </ModalLayout>
+    </>
   );
 };
 

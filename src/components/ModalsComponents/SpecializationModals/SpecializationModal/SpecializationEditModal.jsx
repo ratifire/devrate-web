@@ -1,49 +1,40 @@
-import AddIcon from '@mui/icons-material/Add';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
 import {
-  useAddSkillsToMasteryMutation,
-  useCreateNewSpecializationMutation,
   useGetSpecializationByUserIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
+  useUpdateSpecializationByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { useGetSpecializationListQuery } from '../../../../redux/specialization/specializationList/specializationListApiSlice';
+import { setActiveSpecialization } from '../../../../redux/specialization/specializationSlice';
 import useMergeState from '../../../../utils/hooks/useMergeState';
 import { SpecializationModalSchema } from '../../../../utils/validationSchemas/index';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
-import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent } from '../../../UI/Exceptions';
-import Responsibility from '../../../UI/Responsibility';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './SpecializationModal.styles';
 
-const SpecializationModal = () => {
-  const [state, setState] = useMergeState({
-    skills: [],
-    specializationNameError: '',
-  });
-  const { skills, specializationNameError } = state;
+const SpecializationEditModal = () => {
+  const [state, setState] = useMergeState({ specializationNameError: '' });
+  const { specializationNameError } = state;
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
-  const [
-    createNewSpecialization,
-    { isError: isErrorCreateNewSpecialization, isLoading: isLoadingCreateNewSpecialization },
-  ] = useCreateNewSpecializationMutation();
+  const [updateSpecializationById, { isError: isErrorUpdateSpecialization, isLoading: isLoadingUpdateSpecialization }] =
+    useUpdateSpecializationByIdMutation();
   const [triggerRequest, { isError: isErrorGetMasteries, isFetching: isLoadingGetMasteries }] =
     useLazyGetMasteriesBySpecializationIdQuery();
   const [setNewMainMasteryBySpecIdAndMasteryId, { isError: isErrorSetNewMastery, isLoading: isLoadingSetNewMastery }] =
     useSetNewMainMasteryBySpecIdAndMasteryIdMutation();
-  const [addSkills, { isError: isErrorAddSkill, isLoading: isLoadingAddSkill }] = useAddSkillsToMasteryMutation();
   const {
     data,
     isError: isErrorGetSpecialization,
@@ -51,19 +42,14 @@ const SpecializationModal = () => {
   } = useGetSpecializationListQuery('specialization-names.json');
 
   const isLoading =
-    isLoadingCreateNewSpecialization ||
-    isLoadingGetMasteries ||
-    isLoadingSetNewMastery ||
-    isLoadingAddSkill ||
-    isLoadingGetSpecialization;
+    isLoadingUpdateSpecialization || isLoadingGetMasteries || isLoadingSetNewMastery || isLoadingGetSpecialization;
   const isError =
-    isErrorCreateNewSpecialization ||
-    isErrorGetMasteries ||
-    isErrorSetNewMastery ||
-    isErrorAddSkill ||
-    isErrorGetSpecialization;
+    isErrorUpdateSpecialization || isErrorGetMasteries || isErrorSetNewMastery || isErrorGetSpecialization;
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
-  const handleClose = () => dispatch(closeModal({ modalType: modalNames.specializationModal }));
+  const { activeSpecialization } = useSelector((state) => state.specialization);
+  const handleClose = () => dispatch(closeModal({ modalType: modalNames.specializationEditModal }));
+
+  const modalData = useSelector(selectModalData);
 
   const handleChangeMastery = (e) => {
     const value = e.target.value;
@@ -82,24 +68,51 @@ const SpecializationModal = () => {
     formik.setFieldValue('name', value);
   };
 
+  const updateSpecialization = async ({ id, name }) => {
+    try {
+      await updateSpecializationById({ id, name }).unwrap();
+      dispatch(setActiveSpecialization({ ...activeSpecialization, id, name }));
+      enqueueSnackbar(t('modalNotifyText.specialization.edit.success', { name }), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.specialization.edit.error'), { variant: 'error' });
+    }
+  };
+
   const onSubmit = async (values, { resetForm }) => {
     try {
-      const data = await createNewSpecialization({
-        userId,
-        name: values.name,
-        mainMasteryName: values.mastery,
-        main: false,
-      }).unwrap();
-      const masteries = await triggerRequest(data.id);
-      const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
-      await setNewMainMasteryBySpecIdAndMasteryId({
-        masteryId: resp.id,
-        specId: data.id,
-      }).unwrap();
-      await addSkills({ id: resp.id, skills });
-      enqueueSnackbar(t('modalNotifyText.specialization.create.success', { values: values.name }), {
-        variant: 'success',
-      });
+      if (modalData) {
+        let shouldUpdateSpecialization = false;
+        let shouldUpdateMastery = false;
+
+        if (values.name !== activeSpecialization.name) {
+          shouldUpdateSpecialization = true;
+        }
+
+        if (values.mastery !== activeSpecialization.mastery) {
+          shouldUpdateMastery = true;
+        }
+
+        if (shouldUpdateSpecialization) {
+          await updateSpecialization({ id: activeSpecialization.id, name: values.name });
+        }
+
+        if (shouldUpdateMastery) {
+          const masteries = await triggerRequest(activeSpecialization.id);
+          const resp = masteries.data.find((item) => item.level.toLowerCase() === values.mastery.toLowerCase());
+          await setNewMainMasteryBySpecIdAndMasteryId({
+            masteryId: resp.id,
+            specId: activeSpecialization.id,
+          }).unwrap();
+          dispatch(setActiveSpecialization({ ...activeSpecialization, mastery: values.mastery }));
+        }
+      }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.specialization.create.error'), { variant: 'error' });
@@ -110,9 +123,8 @@ const SpecializationModal = () => {
   };
 
   const initialValues = {
-    name: '',
-    mastery: '',
-    skills: '',
+    name: modalData ? modalData?.name : '',
+    mastery: modalData ? modalData?.mastery : '',
   };
 
   const formik = useFormik({
@@ -121,24 +133,6 @@ const SpecializationModal = () => {
     validationSchema: SpecializationModalSchema,
     onSubmit,
   });
-
-  const createSkills = (newSkill) => {
-    if (newSkill.length === 0 || newSkill.length > 50) return;
-    const isSkill = skills.some((skill) => skill.name === newSkill);
-
-    if (isSkill) {
-      formik.setFieldTouched('skills', true, false);
-      formik.setErrors({ skills: 'specialization.modal.skills.errorDuplicate' });
-      return;
-    }
-
-    setState({ skills: [...skills, { name: newSkill, type: 'HARD_SKILL' }] });
-    formik.setFieldValue('skills', '');
-  };
-
-  const deleteSkillsHandler = (skillToDelete) => {
-    setState({ skills: skills.filter((item) => item.name !== skillToDelete) });
-  };
 
   if (isError) {
     return <ErrorComponent />;
@@ -179,38 +173,6 @@ const SpecializationModal = () => {
               variant='outlined'
             />
           </Box>
-          <>
-            <Box sx={styles.input100}>
-              <FormInput
-                error={formik.touched.skills && Boolean(formik.errors.skills)}
-                handleBlur={formik.handleBlur}
-                handleChange={formik.handleChange}
-                helperText={formik.touched.skills && formik.errors.skills}
-                label='specialization.modal.skills.title'
-                name='skills'
-                placeholder='specialization.modal.skills.placeholder'
-                value={formik.values.skills}
-              />
-              <IconButton
-                disabled={formik.touched.skills && Boolean(formik.errors.skills)}
-                sx={styles.iconBtn}
-                onClick={() => createSkills(formik.values.skills)}
-              >
-                <AddIcon />
-              </IconButton>
-            </Box>
-            <Box sx={styles.skills}>
-              {skills.map(({ name }, index) => (
-                <Responsibility
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={index}
-                  tobeDeleted
-                  responsibility={name}
-                  responsibilityDeleteHandler={deleteSkillsHandler}
-                />
-              ))}
-            </Box>
-          </>
           <ButtonDef
             disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
             label={t('profile.modal.btn')}
@@ -225,4 +187,4 @@ const SpecializationModal = () => {
   );
 };
 
-export default SpecializationModal;
+export default SpecializationEditModal;

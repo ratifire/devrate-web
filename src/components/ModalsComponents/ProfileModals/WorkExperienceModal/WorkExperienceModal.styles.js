@@ -72,6 +72,7 @@ export const styles = {
     flexWrap: 'wrap',
     gridGap: theme.spacing(3),
     paddingBottom: theme.spacing(4),
+    marginBottom: '24px',
   }),
   workExperienceBtn: {
     width: '228px',
