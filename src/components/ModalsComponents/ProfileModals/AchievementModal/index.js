@@ -1,3 +1,4 @@
 import AchievementModal from './AchievementModal';
+import AchievementEditModal from './AchievementEditModal';
 
-export default AchievementModal;
+export { AchievementModal, AchievementEditModal };

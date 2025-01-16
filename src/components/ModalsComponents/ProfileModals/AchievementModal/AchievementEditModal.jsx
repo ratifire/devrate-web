@@ -1,36 +1,35 @@
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { useUpdateAchievementMutation } from '../../../../redux/services/achievementsApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
-import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
+import { AchievementModalSchema } from '../../../../utils/validationSchemas/index';
+import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice.js';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './AchievementModal.styles';
 
-const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
-  const {
-    data: { id: userId },
-  } = useSelector(selectCurrentUser);
+const AchievementEditModal = () => {
+  const dispatch = useDispatch();
+  const { id: userId } = useSelector((state) => state.auth.user.data);
+  const modalData = useSelector(selectModalData);
   const { t } = useTranslation();
   const [updateAchievementApi, { isLoading }] = useUpdateAchievementMutation();
   const { enqueueSnackbar } = useSnackbar();
 
   const initialValues = {
     // link: achievement?.link || '',
-    summary: achievement?.summary || '',
-    description: achievement?.description || '',
+    summary: modalData?.summary || '',
+    description: modalData?.description || '',
   };
 
   const onSubmit = async (values, { resetForm }) => {
     try {
       await updateAchievementApi({
-        id: achievement.id,
+        id: modalData?.id,
         payload: { ...values, userId }, // Including userId in the payload
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.achievement.edit.success'), {
@@ -42,7 +41,7 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
       });
 
       resetForm();
-      onClose();
+      dispatch(closeModal({ modalType: modalNames.achievementEditModal }));
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.achievement.edit.error'), {
@@ -63,7 +62,7 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
   });
 
   return (
-    <ModalLayoutProfile open={isOpen} setOpen={onClose}>
+    <>
       <Typography sx={styles.title} variant='subtitle1'>
         {t('modal.achievement.title')}
       </Typography>
@@ -105,14 +104,8 @@ const AchievementEditModal = ({ isOpen, onClose, achievement }) => {
           />
         </Box>
       </form>
-    </ModalLayoutProfile>
+    </>
   );
-};
-
-AchievementEditModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  achievement: PropTypes.object.isRequired,
 };
 
 export default AchievementEditModal;
