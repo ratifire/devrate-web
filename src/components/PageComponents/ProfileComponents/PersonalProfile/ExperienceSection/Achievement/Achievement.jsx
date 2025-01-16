@@ -1,13 +1,14 @@
-import { Grid } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Box } from '@mui/material';
 import { iconsAchievement } from '../../../../../../utils/constants/Experience/iconsExperience';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { useFetchAchievementsQuery } from '../../../../../../redux/services/achievementsApiSlice';
 import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
 import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
 import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
+import { styles } from './Achievement.styles.js';
 import AchievementItem from './AchievementItem';
 
 const Achievement = ({ tab }) => {
@@ -34,15 +35,11 @@ const Achievement = ({ tab }) => {
   }
 
   return (
-    <>
-      <Grid container spacing={3}>
-        {achievementsData?.map((achievement) => (
-          <Grid key={achievement.id} item xs={6}>
-            <AchievementItem achievement={achievement} icon={getIcon()} />
-          </Grid>
-        ))}
-      </Grid>
-    </>
+    <Box sx={styles.list}>
+      {achievementsData?.map((achievement) => (
+        <AchievementItem key={achievement.id} achievement={achievement} icon={getIcon()} />
+      ))}
+    </Box>
   );
 };
 

@@ -87,78 +87,80 @@ const EducationModal = () => {
 
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
-          <Box sx={styles.input50}>
-            <FormInput
-              required
-              error={formik.touched.type && Boolean(formik.errors.type)}
-              handleBlur={formik.handleBlur}
-              handleChange={formik.handleChange}
-              helperText={formik.touched.type && formik.errors.type}
-              label='profile.modal.education.type'
-              name='type'
-              placeholder='profile.modal.education.speciality_placeholder'
-              type='text'
-              value={formik.values.type}
-            />
+          <Box sx={styles.inputWrapper}>
+            <Box sx={styles.input50}>
+              <FormInput
+                required
+                error={formik.touched.type && Boolean(formik.errors.type)}
+                handleBlur={formik.handleBlur}
+                handleChange={formik.handleChange}
+                helperText={formik.touched.type && formik.errors.type}
+                label='profile.modal.education.type'
+                name='type'
+                placeholder='profile.modal.education.speciality_placeholder'
+                type='text'
+                value={formik.values.type}
+              />
+            </Box>
+            <Box sx={styles.input50}>
+              <FormInput
+                required
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                handleBlur={formik.handleBlur}
+                handleChange={formik.handleChange}
+                helperText={formik.touched.name && formik.errors.name}
+                label='profile.modal.education.name'
+                name='name'
+                placeholder='profile.modal.education.edIstitution_placeholder'
+                value={formik.values.name}
+              />
+            </Box>
+            <Box sx={styles.input100}>
+              <FormSelect
+                required
+                s
+                countries={startYears}
+                error={formik.touched.startYear && Boolean(formik.errors.startYear)}
+                handleBlur={formik.handleBlur}
+                handleChange={formik.handleChange}
+                helperText={formik.touched.startYear && formik.errors.startYear}
+                label={t('profile.modal.education.startYear')}
+                name='startYear'
+                sx={styles.input50}
+                value={formik.values.startYear}
+                variant='outlined'
+                onChange={(value) => formik.setFieldValue('startYear', value)}
+              />
+              <FormSelect
+                countries={endYears}
+                error={formik.touched.endYear && Boolean(formik.errors.endYear)}
+                handleBlur={formik.handleBlur}
+                handleChange={formik.handleChange}
+                helperText={formik.touched.endYear && formik.errors.endYear}
+                label={t('profile.modal.education.endYear')}
+                name='endYear'
+                sx={styles.input50}
+                value={formik.values.endYear}
+                variant='outlined'
+                onChange={(value) => formik.setFieldValue('endYear', value)}
+              />
+            </Box>
+            <Box sx={styles.input100}>
+              <TextAreaInput
+                required
+                error={formik.touched.description && Boolean(formik.errors.description)}
+                handleBlur={formik.handleBlur}
+                handleChange={formik.handleChange}
+                helperText={formik.touched.description && formik.errors.description}
+                label='profile.modal.education.description'
+                name='description'
+                placeholder='profile.modal.education.description_placeholder'
+                rows={4}
+                type='text'
+                value={formik.values.description}
+              />
+            </Box>
           </Box>
-          <Box sx={styles.input50}>
-            <FormInput
-              required
-              error={formik.touched.name && Boolean(formik.errors.name)}
-              handleBlur={formik.handleBlur}
-              handleChange={formik.handleChange}
-              helperText={formik.touched.name && formik.errors.name}
-              label='profile.modal.education.name'
-              name='name'
-              placeholder='profile.modal.education.edIstitution_placeholder'
-              value={formik.values.name}
-            />
-          </Box>
-          <Box sx={styles.input100}>
-            <FormSelect
-              required
-              s
-              countries={startYears}
-              error={formik.touched.startYear && Boolean(formik.errors.startYear)}
-              handleBlur={formik.handleBlur}
-              handleChange={formik.handleChange}
-              helperText={formik.touched.startYear && formik.errors.startYear}
-              label={t('profile.modal.education.startYear')}
-              name='startYear'
-              sx={styles.input50}
-              value={formik.values.startYear}
-              variant='outlined'
-              onChange={(value) => formik.setFieldValue('startYear', value)}
-            />
-            <FormSelect
-              countries={endYears}
-              error={formik.touched.endYear && Boolean(formik.errors.endYear)}
-              handleBlur={formik.handleBlur}
-              handleChange={formik.handleChange}
-              helperText={formik.touched.endYear && formik.errors.endYear}
-              label={t('profile.modal.education.endYear')}
-              name='endYear'
-              sx={styles.input50}
-              value={formik.values.endYear}
-              variant='outlined'
-              onChange={(value) => formik.setFieldValue('endYear', value)}
-            />
-          </Box>
-          <Box sx={styles.input100}>
-            <TextAreaInput
-              required
-              error={formik.touched.description && Boolean(formik.errors.description)}
-              handleBlur={formik.handleBlur}
-              handleChange={formik.handleChange}
-              helperText={formik.touched.description && formik.errors.description}
-              label='profile.modal.education.description'
-              name='description'
-              placeholder='profile.modal.education.description_placeholder'
-              type='text'
-              value={formik.values.description}
-            />
-          </Box>
-
           <ButtonDef
             disabled={!formik.dirty || !formik.isValid || formik.isSubmitting || isLoading}
             label={t('profile.modal.btn')}

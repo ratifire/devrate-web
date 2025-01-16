@@ -51,5 +51,8 @@ const styles = {
       backgroundColor: theme.palette.iconBtn.burgerDot.hover.backgroundColor,
     },
   }),
+  text: {
+    wordWrap: 'break-word',
+  },
 };
 export default styles;
