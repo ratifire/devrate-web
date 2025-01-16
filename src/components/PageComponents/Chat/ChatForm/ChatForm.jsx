@@ -3,6 +3,7 @@ import { Box, IconButton, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Client } from '@stomp/stompjs';
 import UserAvatar from '../../../UI/UserAvatar';
 import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
@@ -18,6 +19,8 @@ const ChatForm = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [isUserAtBottom, setIsUserAtBottom] = useState(true);
   const [textFieldHeight, setTextFieldHeight] = useState(23); // Default minHeight
+  const [message, setMessage] = useState(''); // Для збереження тексту
+  const [isConnected, setIsConnected] = useState(false);
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(closeChat({ chatElement: 'chat' }));
@@ -58,13 +61,10 @@ const ChatForm = () => {
   };
 
   const handleTextFieldChange = (e) => {
+    setMessage(e.target.value);
     const height = e.target.scrollHeight;
     const maxHeight = 115;
-    if (height < maxHeight) {
-      setTextFieldHeight(height);
-    } else {
-      setTextFieldHeight(maxHeight);
-    }
+    setTextFieldHeight(height < maxHeight ? height : maxHeight);
   };
 
   useEffect(() => {
@@ -74,6 +74,62 @@ const ChatForm = () => {
       chatWrapperRef.current.style.maxHeight = `${newHeight}px`;
     }
   }, [textFieldHeight]);
+
+  // початок тестування чату
+  const [client, setClient] = useState(null);
+
+  useEffect(() => {
+    const newClient = new Client({
+      brokerURL: 'ws://localhost:8080/chat',
+      onConnect: () => {
+        setIsConnected(true);
+        newClient.subscribe('topic/messages/8882', (message) => {
+          JSON.parse(message.body);
+        });
+      },
+    });
+    setClient(newClient);
+    newClient.activate();
+  }, []);
+  // console.log(client);
+  // useEffect(() => {
+  // Ensure client.activate() only if client is properly initialized
+  // if (client.current && !isConnected) {
+  //   client.activate();
+  // }
+
+  // return () => {
+  //   if (client.current && client.current.connected) {
+  //     client.current.deactivate();
+  //   }
+  // };
+  // }, [isConnected]);
+
+  const handleSubmitMessages = (e) => {
+    e.preventDefault();
+    // console.log(!isConnected, isConnected);
+    // console.log(!client.current, client.current);
+    if (!isConnected) {
+      // console.error('STOMP client is not connected.');
+      return;
+    }
+    if (!message.trim()) return; // Don't send empty messages
+
+    const sender = id; // Current user ID
+    const recipient = 'bob'; // Recipient ID or topic name
+    const topicName = '8882'; // Topic name
+
+    client.publish({
+      destination: '/app/chat',
+      body: JSON.stringify({
+        sender,
+        content: message.trim(),
+        recipient,
+        topicName,
+      }),
+    });
+    setMessage('');
+  };
 
   return (
     <Box sx={styles.container}>
@@ -101,7 +157,7 @@ const ChatForm = () => {
           </IconButton>
         )}
       </Box>
-      <form>
+      <form onSubmit={handleSubmitMessages}>
         <Box sx={styles.chatForm}>
           <TextField
             ref={textFieldRef}
@@ -114,7 +170,7 @@ const ChatForm = () => {
             variant='outlined'
             onChange={handleTextFieldChange}
           />
-          <IconButton sx={styles.btnSend}>
+          <IconButton sx={styles.btnSend} type='submit'>
             <Send />
           </IconButton>
         </Box>

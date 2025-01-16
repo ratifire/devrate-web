@@ -4,7 +4,6 @@ import Message from '../../../assets/icons/message.svg?react';
 import { openChat } from '../../../redux/chat/chatSlice';
 import { styles } from './Chat.styles';
 import ChatForm from './ChatForm';
-
 const Chat = () => {
   const { chat } = useSelector((state) => state.chat);
 
@@ -12,7 +11,27 @@ const Chat = () => {
   const handleOpen = () => {
     dispatch(openChat({ chatElement: 'chat' }));
   };
+  //
 
+  // const stompClient = new Client({
+  //   // headers: { [header]: token },
+  //   brokerURL: "ws://host.docker.internal:8080/chat", // Змініть на ваш реальний WebSocket URL
+  //   connectHeaders: {},
+  //   onConnect: () => {
+  //     setConnected(true);
+  //     console.log("Connected");
+  //     // Підписка на повідомлення
+  //     // ws://localhost:8080/chat
+  //     stompClient.subscribe("user/queue/messages", (message) => {
+  //       // stompClient.subscribe("topic/messages/8881", (message) => {
+  //       showMessageOutput(JSON.parse(message.body));
+  //     });
+  //   },
+  //   onStompError: (error) => {
+  //     console.error("STOMP Error:", error);
+  //   },
+  // });
+  // stompClient.activate();
   return (
     <>
       <IconButton sx={styles.btnIcon} onClick={handleOpen}>
