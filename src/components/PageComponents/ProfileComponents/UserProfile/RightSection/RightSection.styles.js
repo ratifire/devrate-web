@@ -1,6 +1,9 @@
 export const styles = {
   wrapper: (theme) => ({
-    padding: theme.spacing(4),
+    padding: `20px ${theme.spacing(3)} ${theme.spacing(3)}`,
+    '@media (min-width: 1272px)': {
+      padding: theme.spacing(4),
+    },
   }),
   wrapperBox: (theme) => ({
     position: 'relative',
@@ -29,13 +32,31 @@ export const styles = {
   }),
   btnIcon: (theme) => ({
     flex: '1 0 44px',
-    color: theme.palette.neutral['100'],
+    color: theme.palette.action.hover,
     borderRadius: 1,
+    transition: 'background-color 0.3s, transform 0.3s',
     ':hover': {
-      backgroundColor: theme.palette.neutral['800'],
+      backgroundColor: `${theme.palette.primary['200']}29`,
+      color: theme.palette.action.active,
     },
     svg: {
       fontSize: '18px',
     },
   }),
+  box: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  link: {
+    display: 'inline-block',
+    ' svg': {
+      width: '34px',
+      height: '34px',
+      '@media (min-width: 1272px)': {
+        width: '44px',
+        height: '44px',
+      },
+    },
+  },
 };

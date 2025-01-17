@@ -94,6 +94,7 @@ const styles = {
     },
   }),
   confirmationLink: (theme) => ({
+    display: 'inline',
     textDecoration: 'underline',
     color: theme.palette.action.active,
     fontWeight: 600,

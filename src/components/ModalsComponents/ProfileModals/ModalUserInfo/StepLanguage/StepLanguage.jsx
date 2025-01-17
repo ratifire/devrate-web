@@ -14,6 +14,7 @@ import LanguageLevel from '../../../../UI/LanguageLevel';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { StepLanguageSkeleton } from '../../../../UI/Skeleton';
 import { styles } from './StepLanguage.styles';
+
 const StepLanguage = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();

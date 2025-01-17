@@ -1,3 +1,4 @@
 import WorkExperienceModal from './WorkExperienceModal';
+import WorkExperienceEditModal from './WorkExperienceEditModal';
 
-export default WorkExperienceModal;
+export { WorkExperienceEditModal, WorkExperienceModal };

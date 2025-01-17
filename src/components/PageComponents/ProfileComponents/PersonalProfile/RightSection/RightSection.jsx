@@ -10,6 +10,7 @@ import { useGetLanguageUserQuery } from '../../../../../redux/user/language/lang
 import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import LanguagesList from '../../../../UI/LanguagesList';
 import SocialsLinkList from '../../../../UI/SocialsLinkList';
+import { modalNames } from '../../../../../utils/constants/modalNames.js';
 import { styles } from './RightSection.styles';
 
 const RightSection = () => {
@@ -22,12 +23,12 @@ const RightSection = () => {
 
   const handleOpenInfo = () => {
     dispatch(setStep(1));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: modalNames.userInfoModal }));
   };
 
   const handleOpenLanguage = () => {
     dispatch(setStep(3));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: modalNames.userInfoModal }));
   };
 
   return (

@@ -1,7 +1,6 @@
 import { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import SpecializationTemplate from '../../Templates/SpecializationTemplate';
 import {
   CategoriesSkeleton,
   HardSkillsChartSkeleton,
@@ -12,7 +11,6 @@ import {
   SkillsSkeleton,
 } from '../../components/UI/Skeleton';
 import LevelChartSkeleton from '../../components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
-import ProfileHeader from '../../components/PageComponents/ProfileHeader';
 import { styles } from './SpecialisationPage.styles';
 
 const SpecializationLevel = lazy(
@@ -40,7 +38,6 @@ const LevelChart = lazy(
   () => import('../../components/PageComponents/SpecializationComponents/Statistics/LevelChart/LevelChart')
 );
 
-const MemoizedProfileHeader = memo(ProfileHeader);
 const MemoizedSpecializationLevel = memo(SpecializationLevel);
 const MemoizedHardSkills = memo(HardSkills);
 const MemoizedSpecialisationCategories = memo(SpecialisationCategories);
@@ -55,65 +52,62 @@ const SpecializationPage = () => {
   const { t } = useTranslation();
 
   return (
-    <SpecializationTemplate>
-      <MemoizedProfileHeader />
-      <Container maxWidth='xl' sx={styles.container}>
-        <Box sx={styles.contentWrapper}>
-          <Paper sx={styles.specialisationCategories}>
-            <Suspense fallback={<CategoriesSkeleton />}>
-              <MemoizedSpecialisationCategories />
-            </Suspense>
-          </Paper>
-          <Paper sx={styles.specialisationLevel}>
-            <Suspense fallback={<LevelSkeleton />}>
-              <MemoizedSpecializationLevel />
-            </Suspense>
-          </Paper>
-          <Paper sx={styles.specialisationInterviewParticipation}>
-            <Suspense fallback={<InterviewsSkeleton />}>
-              <MemoizedInterviews />
-            </Suspense>
-          </Paper>
-          <Paper sx={styles.specialisationHardSkills}>
-            <Suspense fallback={<SkillsSkeleton />}>
-              <MemoizedHardSkills />
-            </Suspense>
-          </Paper>
-          <Paper sx={styles.specialisationSoftSkills}>
-            <Suspense fallback={<SkillsSkeleton />}>
-              <MemoizedSoftSkills />
-            </Suspense>
-          </Paper>
-          <Paper sx={styles.specialisationStatistics}>
-            <Typography sx={styles.statisticTitle} variant='h6'>
-              {t('specialization.statistics.title')}
-            </Typography>
-            <Box sx={styles.statisticWrapper}>
-              <Paper sx={styles.level}>
-                <Suspense fallback={<LevelChartSkeleton />}>
-                  <MemoizedLevelChart />
-                </Suspense>
-              </Paper>
-              <Paper sx={styles.averageSkillsScore}>
-                <Suspense fallback={<SkillsAssessmentChartSkeleton />}>
-                  <MemoizedSkillsAssessmentChart />
-                </Suspense>
-              </Paper>
-              <Paper sx={styles.hardSkillsByProductivity}>
-                <Suspense fallback={<HardSkillsChartSkeleton />}>
-                  <MemoizedHardSkillsChart />
-                </Suspense>
-              </Paper>
-              <Paper sx={styles.interview}>
-                <Suspense fallback={<InterviewChartSkeleton />}>
-                  <MemoizedInterviewChart />
-                </Suspense>
-              </Paper>
-            </Box>
-          </Paper>
-        </Box>
-      </Container>
-    </SpecializationTemplate>
+    <Container maxWidth='xl' sx={styles.container}>
+      <Box sx={styles.contentWrapper}>
+        <Paper sx={styles.specialisationCategories}>
+          <Suspense fallback={<CategoriesSkeleton />}>
+            <MemoizedSpecialisationCategories />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.specialisationLevel}>
+          <Suspense fallback={<LevelSkeleton />}>
+            <MemoizedSpecializationLevel />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.specialisationInterviewParticipation}>
+          <Suspense fallback={<InterviewsSkeleton />}>
+            <MemoizedInterviews />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.specialisationHardSkills}>
+          <Suspense fallback={<SkillsSkeleton />}>
+            <MemoizedHardSkills />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.specialisationSoftSkills}>
+          <Suspense fallback={<SkillsSkeleton />}>
+            <MemoizedSoftSkills />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.specialisationStatistics}>
+          <Typography sx={styles.statisticTitle} variant='h6'>
+            {t('specialization.statistics.title')}
+          </Typography>
+          <Box sx={styles.statisticWrapper}>
+            <Paper sx={styles.level}>
+              <Suspense fallback={<LevelChartSkeleton />}>
+                <MemoizedLevelChart />
+              </Suspense>
+            </Paper>
+            <Paper sx={styles.averageSkillsScore}>
+              <Suspense fallback={<SkillsAssessmentChartSkeleton />}>
+                <MemoizedSkillsAssessmentChart />
+              </Suspense>
+            </Paper>
+            <Paper sx={styles.hardSkillsByProductivity}>
+              <Suspense fallback={<HardSkillsChartSkeleton />}>
+                <MemoizedHardSkillsChart />
+              </Suspense>
+            </Paper>
+            <Paper sx={styles.interview}>
+              <Suspense fallback={<InterviewChartSkeleton />}>
+                <MemoizedInterviewChart />
+              </Suspense>
+            </Paper>
+          </Box>
+        </Paper>
+      </Box>
+    </Container>
   );
 };
 

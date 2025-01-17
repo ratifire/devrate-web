@@ -1,9 +1,9 @@
 export const styles = {
   wrapper: (theme) => ({
-    display: 'flex',
-    flexWrap: 'wrap',
-    gridGap: `${theme.spacing(4)} ${theme.spacing(3)}`,
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(2),
+    ' form': {
+      width: '100%',
+    },
   }),
   input100: {
     flex: `0 1 100%`,

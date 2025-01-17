@@ -19,8 +19,9 @@ export const EducationModalSchema = Yup.object().shape({
     .required('profile.modal.education.required'),
   endYear: Yup.mixed().test('endDate', 'profile.modal.education.endDateMessage', function (value) {
     const { startYear } = this.parent;
+    const getFullStartYear = startYear?.getFullYear();
     if (!value) return true; // Allow empty value
-    const endYearDate = value === 'Now' || value === '' ? new Date('9999-01-01') : new Date(value);
-    return endYearDate > new Date(startYear);
+    const endYearDate = value === 'Now' || value === '' ? new Date('9999-01-01') : value;
+    return endYearDate > getFullStartYear;
   }),
 });

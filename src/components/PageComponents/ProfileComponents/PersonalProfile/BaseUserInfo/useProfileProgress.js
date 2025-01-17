@@ -1,6 +1,6 @@
 // useProfileProgress.js
 import { useState, useEffect } from 'react';
-import { useGetWorkExperienceByUserIdQuery } from '../../../../../redux/workExperience/workExperienceApiSlice';
+import { useGetWorkExperienceByUserIdQuery } from '../../../../../redux/services/workExperienceApiSlice.js';
 import { useFetchAchievementsQuery } from '../../../../../redux/services/achievementsApiSlice';
 import { useGetEducationByUserIdQuery } from '../../../../../redux/services/educationApiSlice';
 import { useGetSpecializationByUserIdQuery } from '../../../../../redux/specialization/specializationApiSlice';

@@ -13,6 +13,11 @@ Yup.addMethod(Yup.string, 'email', function (message) {
     if (!localPart || !domainPart) return false;
 
     if (localPart.length < 1 || localPart.length > 64) return false;
+
+    const domainPartsSegments = domainPart.split('.').some((v) => v.length < 1 || v.length > 63);
+
+    if (domainPartsSegments) return false;
+
     if (domainPart.length < 1 || domainPart.length > 255) return false;
 
     if (trimmedValue.length > 320) return false;
