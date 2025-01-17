@@ -8,14 +8,11 @@ const CustomTooltip = styled(({ translate, className, children, title, customSty
   const { textRef, isOverflowing } = useOverflowCheck(children);
 
   const renderChildren = () => {
-    if (translate && typeof children === 'string')
-      return (
-        <Typography ref={textRef} sx={customStyles} variant={variant}>
-          {t(children)}
-        </Typography>
-      );
-
-    return typeof children === 'string' ? (
+    return translate && typeof children === 'string' ? (
+      <Typography ref={textRef} sx={customStyles} variant={variant}>
+        {t(children)}
+      </Typography>
+    ) : typeof children === 'string' ? (
       <Typography ref={textRef} sx={customStyles} variant={variant}>
         {children}
       </Typography>
@@ -24,14 +21,10 @@ const CustomTooltip = styled(({ translate, className, children, title, customSty
     );
   };
 
+  const tooltipTitle = isOverflowing ? t(title) : '';
+
   return (
-    <Tooltip
-      arrow
-      classes={{ popper: className }}
-      placement='top-start'
-      title={isOverflowing ? t(title) : ''}
-      {...props}
-    >
+    <Tooltip arrow classes={{ popper: className }} placement='top-start' title={tooltipTitle} {...props}>
       {renderChildren()}
     </Tooltip>
   );
