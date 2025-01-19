@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Box, IconButton, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useSearchParams } from 'react-router';
-import { closeModal } from '../../../../redux/modal/modalSlice';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
+import { selectModalData } from '../../../../redux/modal/modalSlice.js';
 import { styles } from './ModalUserInfo.styles';
 import StepPersonal from './StepPersonal';
 import StepContacts from './StepContacts';
@@ -41,21 +40,11 @@ const steps = [
 ];
 
 const ModalUserInfo = () => {
-  const dispatch = useDispatch();
-  const openUserInfo = useSelector((state) => state.modal.openUserInfo);
-  // const handleClose = () => dispatch(closeModal({ modalName: 'openUserInfo' }));
+  const openUserInfo = selectModalData;
   const step = useSelector((state) => state.modalStep.step);
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeStep, setActiveStep] = useState(step);
-  const [tab] = useState();
-
-  const handleClose = () => {
-    dispatch(closeModal({ modalName: 'openUserInfo' }));
-    searchParams.delete('modal');
-    searchParams.delete('step');
-    setSearchParams(searchParams);
-  };
 
   const handleNext = () => {
     setActiveStep((nextActiveStep) => {
@@ -82,7 +71,6 @@ const ModalUserInfo = () => {
       searchParams.set('step', activeStep);
       setSearchParams(searchParams);
     } else {
-      searchParams.set('tab', tab);
       setSearchParams(searchParams);
     }
   }, [openUserInfo, activeStep, searchParams, setSearchParams]);
@@ -91,7 +79,7 @@ const ModalUserInfo = () => {
     return steps[stepIndex].component();
   };
   return (
-    <ModalLayoutProfile open={openUserInfo} setOpen={handleClose}>
+    <>
       <Box sx={styles.wrapper}>
         <Stepper activeStep={activeStep} connector={<StepConnector />} sx={styles.stepBorder}>
           {steps.map(({ title }) => (
@@ -120,7 +108,7 @@ const ModalUserInfo = () => {
           </Box>
         </Box>
       </Box>
-    </ModalLayoutProfile>
+    </>
   );
 };
 

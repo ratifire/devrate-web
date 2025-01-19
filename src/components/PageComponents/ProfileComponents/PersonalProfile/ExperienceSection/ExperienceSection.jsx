@@ -22,8 +22,8 @@ const ExperienceSection = () => {
     setSearchParams({ tab: newValue });
   };
 
-  const handleAddFeature = () => {
-    dispatch(openModal({ modalName: value }));
+  const handleAddFeature = (modal) => {
+    dispatch(openModal({ modalType: modal }));
   };
 
   useEffect(() => {
@@ -46,18 +46,18 @@ const ExperienceSection = () => {
 
   const tabButtonPlus = {
     workExperience: (
-      <IconButton sx={styles.iconBtn} onClick={handleAddFeature}>
+      <IconButton sx={styles.iconBtn} onClick={() => handleAddFeature('workExperienceModal')}>
         <Add />
       </IconButton>
     ),
     achievement: (
-      <IconButton sx={styles.iconBtn} onClick={handleAddFeature}>
+      <IconButton sx={styles.iconBtn} onClick={() => handleAddFeature('achievementModal')}>
         <Add />
       </IconButton>
     ),
     skills: <></>,
     education: (
-      <IconButton sx={styles.iconBtn} onClick={handleAddFeature}>
+      <IconButton sx={styles.iconBtn} onClick={() => handleAddFeature('educationModal')}>
         <Add />
       </IconButton>
     ),

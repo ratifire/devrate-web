@@ -7,8 +7,9 @@ import { useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
-import { openModal } from '../../../../../../../redux/modal/modalSlice';
-import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/workExperience/workExperienceApiSlice';
+import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/services/workExperienceApiSlice.js';
+import { openModal } from '../../../../../../../redux/modal/modalSlice.js';
+import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
 import styles from './WorkExperienceItem.styles.js';
 
 const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
@@ -27,13 +28,22 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
   };
 
   const handleEditFeature = () => {
+    handleCloseMenu();
     dispatch(
       openModal({
-        modalName: 'workExperience',
-        data: { id, position, companyName, description, responsibilities, startYear, endYear },
+        modalType: modalNames.workExperienceEditModal,
+        data: {
+          id: id,
+          position: position,
+          companyName: companyName,
+          description: description,
+          responsibilities: responsibilities,
+          startYear: startYear,
+          endYear: endYear,
+          currentDate: endYear,
+        },
       })
     );
-    handleCloseMenu();
   };
 
   const handleDeleteFeature = async () => {
@@ -76,7 +86,7 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
           handleEditFeature={handleEditFeature}
         />
       </Box>
-      <Typography>{description}</Typography>
+      <Typography sx={styles.text}>{description}</Typography>
       <Box sx={styles.workDutiesContainer}>
         <Typography sx={styles.workDutiesTitle} variant='h6'>
           {t('profile.experience.duties')}

@@ -3,13 +3,15 @@ import { Link, Link as RouterLink } from 'react-router';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import navigationsLinks from '../../../../router/links';
 import Arrow from '../../assets/iconArrow.svg?react';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import styles from './HeroSection.module.scss';
 
 const HeroSection = () => {
   const dispatch = useDispatch();
-  const handleOpenRegistration = () => dispatch(openModal({ modalName: 'openRegistration' }));
-  const handleOpenLogin = () => dispatch(openModal({ modalName: 'openLogin' }));
   const { isAuth } = useSelector((state) => state.tokens);
+
+  const handleOpenRegistration = () => dispatch(openModal({ modalType: modalNames.registrationModal }));
+  const handleOpenLogin = () => dispatch(openModal({ modalType: modalNames.loginModal }));
 
   const myProfile = () => {
     if (!isAuth)

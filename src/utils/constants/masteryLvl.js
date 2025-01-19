@@ -1,13 +1,15 @@
+import _ from 'lodash';
+
+const JUNIOR_KEY = 1;
+const MIDDLE_KEY = 2;
+const SENIOR_KEY = 3;
+
 const lvlMastery = {
-  1: 'Junior',
-  2: 'Middle',
-  3: 'Senior',
+  [JUNIOR_KEY]: 'Junior',
+  [MIDDLE_KEY]: 'Middle',
+  [SENIOR_KEY]: 'Senior',
 };
 
-const masteryLvl = {
-  Junior: 1,
-  Middle: 2,
-  Senior: 3,
-};
+const masteryLvl = _.invert(lvlMastery);
 
-export { lvlMastery, masteryLvl };
+export { masteryLvl, lvlMastery };
