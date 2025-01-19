@@ -319,6 +319,8 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#1D1D1D',
             color: '#69696B',
             progressBgColor: '#69696B',
+            cancelBtnTextColor: '#CEB0FA',
+            textColor: '#ECECED',
           },
           baseUserInfo: {
             city: {
@@ -839,6 +841,8 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#FFFFFF',
             color: '#69696B',
             progressBgColor: '#ECECED',
+            cancelBtnTextColor: '#5900D9',
+            textColor: '#1D1D1D',
           },
           baseUserInfo: {
             city: {
