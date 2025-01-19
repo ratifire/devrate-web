@@ -9,6 +9,10 @@ import FaqPage from '../pages/FaqPage';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import RootPage from '../pages/RootPage';
+import InterviewRootPage from '../pages/InterviewPages';
+import ScheduledInterviewsPage from '../pages/InterviewPages/ScheduledInterviewsPage';
+import PassedInterviewsPage from '../pages/InterviewPages/PassedInterviewsPage';
+import InterviewRequestsPage from '../pages/InterviewPages/InterviewRequestsPage';
 import UserProfileRoute from './UserProfileRoute.jsx';
 import navigationLinks from './links';
 
@@ -50,6 +54,28 @@ const router = createBrowserRouter([
               {
                 path: navigationLinks.specializations,
                 element: <SpecializationPage />,
+              },
+              {
+                path: navigationLinks.interviews,
+                element: <InterviewRootPage />,
+                children: [
+                  {
+                    index: true,
+                    element: <ScheduledInterviewsPage />,
+                  },
+                  {
+                    path: navigationLinks.scheduledInterviews,
+                    element: <ScheduledInterviewsPage />,
+                  },
+                  {
+                    path: navigationLinks.passedInterviews,
+                    element: <PassedInterviewsPage />,
+                  },
+                  {
+                    path: navigationLinks.interviewRequests,
+                    element: <InterviewRequestsPage />,
+                  },
+                ],
               },
               {
                 path: navigationLinks.faq,
