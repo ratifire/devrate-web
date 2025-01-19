@@ -1,9 +1,10 @@
 const styles = {
-  header: (theme) => ({
+  interviewHeader: (theme) => ({
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingY: '12px',
+    paddingY: '24px',
     paddingX: theme.spacing(3),
     width: '100%',
     backgroundImage: 'none',
@@ -11,6 +12,76 @@ const styles = {
     '@media (min-width: 1272px)': {
       paddingY: theme.spacing(3),
       paddingX: theme.spacing(4),
+    },
+  }),
+  interviewNavLinksBox: (theme) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: '40px',
+    borderBottom: '1px solid',
+    borderColor: theme.palette.neutral[400],
+    paddingBottom: '10px',
+    ':first-child': {
+      paddingLeft: '20px',
+    },
+  }),
+  interviewNavLink: (theme) => ({
+    display: 'inline-block',
+    textDecoration: 'none',
+    color: theme.palette.text.secondary,
+    textTransform: 'none',
+    fontSize: 20,
+    fontWeight: '500',
+    '&:selected': {
+      color: theme.palette.action.selected,
+    },
+    '&:hover': {
+      color: theme.palette.action.hover,
+    },
+  }),
+  buttonPrimary: (theme) => ({
+    fontSize: 14,
+    textTransform: 'none',
+    fontWeight: 500,
+    maxWidth: '330px',
+    letterSpacing: '0.1px',
+    gridGap: theme.spacing(2),
+    backgroundColor: theme.palette.scheduleInterview.area.btn.backgroundColor,
+    paddingY: '10px',
+    '&:disabled': {
+      backgroundColor: theme.palette.background.btnGroup,
+    },
+    '&[data-active="true"]': {
+      borderRadius: '4px 4px 0 0',
+    },
+  }),
+  popoverWrapper: (theme) => ({
+    padding: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
+  }),
+  popover: (theme) => ({
+    '>.MuiPaper-root': {
+      borderRadius: '0 0 4px 4px',
+      backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
+      boxShadow: 'none',
+      maxWidth: 600,
+      width: '100%',
+    },
+  }),
+  divider: (theme) => ({
+    borderColor: theme.palette.scheduleInterview.area.popover.borderColor,
+  }),
+  menuButton: (theme) => ({
+    color: theme.palette.scheduleInterview.area.popover.btn.color,
+    fontSize: 14,
+    textTransform: 'none',
+    fontWeight: 500,
+    display: 'flex',
+    ':hover': {
+      backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
     },
   }),
 };
