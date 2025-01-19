@@ -5,6 +5,7 @@ import ModalLayout from '../../../../../layouts/ModalLayout';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '../../../../../utils/constants/modalNames.js';
 import styles from './NotificationModal.styles';
 
 const NotificationModal = () => {
@@ -12,11 +13,11 @@ const NotificationModal = () => {
   const dispatch = useDispatch();
   const openNotification = useSelector((state) => state.modal.openNotification);
 
-  const handleClose = () => dispatch(closeModal({ modalName: 'openNotification' }));
+  const handleClose = () => dispatch(closeModal());
 
   const handleEnter = () => {
-    dispatch(closeModal({ modalName: 'openNotification' }));
-    dispatch(openModal({ modalName: 'openLogin' }));
+    dispatch(closeModal());
+    dispatch(openModal({ modalType: modalNames.loginModal }));
   };
 
   return (

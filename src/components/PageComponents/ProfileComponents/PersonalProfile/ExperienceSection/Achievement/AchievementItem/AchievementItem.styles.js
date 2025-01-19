@@ -1,11 +1,9 @@
 const styles = {
   achievementItemContainer: (theme) => ({
-    width: '100%',
     padding: theme.spacing(3),
     backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     borderRadius: 2,
     maxHeight: '184px',
-    height: '100%',
     alignItems: 'stretch',
     display: 'flex',
     border: theme.palette.sliderAssessment.border,
