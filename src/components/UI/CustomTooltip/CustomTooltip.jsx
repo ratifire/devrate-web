@@ -1,18 +1,30 @@
-import { tooltipClasses, Tooltip, styled } from '@mui/material';
+import { tooltipClasses, Tooltip, styled, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import useOverflowCheck from '../../../utils/hooks/useOverflowCheck.js';
 
-const CustomTooltip = styled(({ translate, className, children, title, ...props }) => {
+const CustomTooltip = styled(({ translate, className, children, title, customStyles, variant, ...props }) => {
   const { t } = useTranslation();
+  const { textRef, isOverflowing } = useOverflowCheck(children);
 
   const renderChildren = () => {
-    if (translate && typeof children === 'string') return <span>{t(children)}</span>;
-
-    return typeof children === 'string' ? <span>{children}</span> : children;
+    return translate && typeof children === 'string' ? (
+      <Typography ref={textRef} sx={customStyles} variant={variant}>
+        {t(children)}
+      </Typography>
+    ) : typeof children === 'string' ? (
+      <Typography ref={textRef} sx={customStyles} variant={variant}>
+        {children}
+      </Typography>
+    ) : (
+      children
+    );
   };
 
+  const tooltipTitle = isOverflowing ? t(title) : '';
+
   return (
-    <Tooltip arrow classes={{ popper: className }} placement='top-start' title={t(title)} {...props}>
+    <Tooltip arrow classes={{ popper: className }} placement='top-start' title={tooltipTitle} {...props}>
       {renderChildren()}
     </Tooltip>
   );
@@ -34,11 +46,15 @@ CustomTooltip.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   translate: PropTypes.bool,
+  variant: PropTypes.string,
+  customStyles: PropTypes.object,
 };
 
 CustomTooltip.defaultProps = {
   className: '',
   translate: false,
+  customStyles: {},
+  variant: 'body1',
 };
 
 export default CustomTooltip;
