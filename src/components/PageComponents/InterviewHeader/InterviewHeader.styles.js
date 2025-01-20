@@ -16,19 +16,18 @@ const styles = {
   }),
   interviewNavLinksBox: (theme) => ({
     display: 'flex',
+    position: 'relative',
     justifyContent: 'space-between',
-    gap: '40px',
     borderBottom: '1px solid',
     borderColor: theme.palette.neutral[400],
     paddingBottom: '10px',
-    ':first-child': {
-      paddingLeft: '20px',
-    },
   }),
   interviewNavLink: (theme) => ({
     display: 'inline-block',
     textDecoration: 'none',
     color: theme.palette.text.secondary,
+    paddingRight: '20px',
+    paddingLeft: '20px',
     textTransform: 'none',
     fontSize: 20,
     fontWeight: '500',
@@ -85,6 +84,13 @@ const styles = {
       backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
     },
   }),
+  indicator: {
+    position: 'absolute',
+    bottom: 0,
+    height: '2px',
+    backgroundColor: '#B78AF7',
+    transition: 'all 0.3s ease',
+  },
 };
 
 export default styles;

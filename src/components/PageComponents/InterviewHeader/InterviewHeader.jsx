@@ -1,13 +1,13 @@
 import { AppBar, Box, Button, Divider, Popover } from '@mui/material';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { useDispatch } from 'react-redux';
-import links from '../../../router/links';
 import { openModal } from '../../../redux/modal/modalSlice.js';
 import { modalNames } from '../../../utils/constants/modalNames.js';
 import { feedbackInterviewRole } from '../../../utils/constants/feedbackInterviewRole.js';
+import links from '../../../router/links.js';
 import styles from './InterviewHeader.styles';
 
 const InterviewHeader = () => {
@@ -17,6 +17,34 @@ const InterviewHeader = () => {
   const [createButton, setCreateButton] = useState(null);
   const [popoverWidth, setPopoverWidth] = useState(0);
   const open = Boolean(createButton);
+  const location = useLocation();
+
+  const getActiveTab = () => {
+    if (location.pathname.includes(links.scheduledInterviews)) {
+      return 0;
+    }
+    if (location.pathname.includes(links.passedInterviews)) {
+      return 1;
+    }
+    if (location.pathname.includes(links.interviewRequests)) {
+      return 2;
+    }
+    return 0;
+  };
+
+  const [activeTab, setActiveTab] = useState(getActiveTab());
+
+  useEffect(() => {
+    setActiveTab(getActiveTab());
+  }, [location.pathname]);
+
+  const getIndicatorStyle = (index) => {
+    const tabWidth = 100 / 3;
+    return {
+      width: `${tabWidth}%`,
+      left: `${tabWidth * index}%`,
+    };
+  };
 
   useEffect(() => {
     if (buttonRef.current) {
@@ -51,13 +79,37 @@ const InterviewHeader = () => {
   return (
     <AppBar component='header' position={'static'} sx={styles.interviewHeader}>
       <Box sx={styles.interviewNavLinksBox}>
-        <Box activeClassName='active' component={NavLink} sx={styles.interviewNavLink} to={links.scheduledInterviews}>
+        <Box
+          sx={{
+            ...styles.indicator,
+            ...getIndicatorStyle(activeTab),
+          }}
+        />
+        <Box
+          activeClassName='active'
+          component={NavLink}
+          sx={styles.interviewNavLink}
+          to={links.scheduledInterviews}
+          onClick={() => setActiveTab(0)}
+        >
           {t('interviews.navigationLinks.scheduled')}
         </Box>
-        <Box activeClassName='active' component={NavLink} sx={styles.interviewNavLink} to={links.passedInterviews}>
+        <Box
+          activeClassName='active'
+          component={NavLink}
+          sx={styles.interviewNavLink}
+          to={links.passedInterviews}
+          onClick={() => setActiveTab(1)}
+        >
           {t('interviews.navigationLinks.passed')}
         </Box>
-        <Box activeClassName='active' component={NavLink} sx={styles.interviewNavLink} to={links.interviewRequests}>
+        <Box
+          activeClassName='active'
+          component={NavLink}
+          sx={styles.interviewNavLink}
+          to={links.interviewRequests}
+          onClick={() => setActiveTab(2)}
+        >
           {t('interviews.navigationLinks.requests')}
         </Box>
       </Box>
