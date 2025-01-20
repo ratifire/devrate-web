@@ -1,0 +1,5 @@
+export const interviewDark = {
+  interviewPage: {
+    bgColor: '#1d1d1d',
+  },
+};

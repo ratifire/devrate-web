@@ -6,8 +6,10 @@ const styles = {
     alignItems: 'center',
     paddingY: '24px',
     paddingX: theme.spacing(3),
+    marginBottom: theme.spacing(5),
     width: '100%',
     backgroundImage: 'none',
+    backgroundColor: theme.palette.interviewPage.bgColor,
     boxShadow: 'none',
     '@media (min-width: 1272px)': {
       paddingY: theme.spacing(3),
