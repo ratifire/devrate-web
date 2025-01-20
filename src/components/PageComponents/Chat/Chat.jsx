@@ -1,5 +1,6 @@
 import { Badge, Box, IconButton, Fade } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+// import { StompSessionProvider } from 'react-stomp-hooks';
 import Message from '../../../assets/icons/message.svg?react';
 import { openChat } from '../../../redux/chat/chatSlice';
 import { styles } from './Chat.styles';
@@ -56,7 +57,14 @@ const Chat = () => {
       {/*</Popover>*/}
       <Fade in={chat}>
         <Box sx={styles.position}>
+          {/*<StompSessionProvider*/}
+          {/*  debug={(str) => console.log(str)}*/}
+          {/*  reconnectDelay={200} // Автопідключення після 200 мс*/}
+          {/*  url='ws://localhost:8080/chat' // Ваша URL WebSocket*/}
+          {/*  onConnect={() => console.log('Connected to WebSocket')}*/}
+          {/*>*/}
           <ChatForm />
+          {/*</StompSessionProvider>*/}
         </Box>
       </Fade>
     </>
