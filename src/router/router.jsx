@@ -81,11 +81,11 @@ const router = createBrowserRouter([
                     element: <InterviewRequestsPage />,
                   },
                   {
-                    path: `${navigationLinks.scheduledInterviews}/:inteviewId`,
+                    path: `${navigationLinks.scheduledInterviews}/:interviewId`,
                     element: <SingleScheduledInterviewPage />,
                   },
                   {
-                    path: `${navigationLinks.passedInterviews}/:inteviewId`,
+                    path: `${navigationLinks.passedInterviews}/:interviewId`,
                     element: <SinglePassedInterviewPage />,
                   },
                   {
