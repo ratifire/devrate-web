@@ -27,7 +27,6 @@ const styles = {
     textDecoration: 'none',
     color: theme.palette.text.secondary,
     paddingRight: '20px',
-    paddingLeft: '20px',
     textTransform: 'none',
     fontSize: 20,
     fontWeight: '500',
@@ -37,6 +36,9 @@ const styles = {
     },
     '&.active': {
       color: theme.palette.action.active,
+    },
+    '&:not(:first-of-type)': {
+      paddingLeft: '20px',
     },
   }),
   buttonPrimary: (theme) => ({
@@ -90,6 +92,11 @@ const styles = {
     height: '2px',
     backgroundColor: '#B78AF7',
     transition: 'all 0.3s ease',
+  },
+  greenEllipce: {
+    marginRight: '8px',
+    width: '13px',
+    height: '13px',
   },
 };
 

@@ -30,7 +30,6 @@ const ScheduleInterviewModal = () => {
   const [checked, setChecked] = useState([]);
   const { masteryId, userId } = useGetMastery();
   const { enqueueSnackbar } = useSnackbar();
-
   const shouldUpdate = useRef(false);
 
   const { data: currentDates } = useGetInterviewRequestQuery(

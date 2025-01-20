@@ -3,11 +3,12 @@ import { NavLink, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice.js';
 import { modalNames } from '../../../utils/constants/modalNames.js';
 import { feedbackInterviewRole } from '../../../utils/constants/feedbackInterviewRole.js';
 import links from '../../../router/links.js';
+import CircleIcon from '../../../assets/icons/InterviewPageIcons/green-ellipse.svg';
 import styles from './InterviewHeader.styles';
 
 const InterviewHeader = () => {
@@ -18,6 +19,10 @@ const InterviewHeader = () => {
   const [popoverWidth, setPopoverWidth] = useState(0);
   const open = Boolean(createButton);
   const location = useLocation();
+
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
+
+  const isDisabled = !activeSpecialization && !mainSpecialization;
 
   const getActiveTab = () => {
     if (location.pathname.includes(links.scheduledInterviews)) {
@@ -39,10 +44,12 @@ const InterviewHeader = () => {
   }, [location.pathname]);
 
   const getIndicatorStyle = (index) => {
-    const tabWidth = 100 / 3;
+    const tabWidths = [135, 115, 120];
+
+    const cumulativeWidth = tabWidths.slice(0, index).reduce((sum, width) => sum + width, 0);
     return {
-      width: `${tabWidth}%`,
-      left: `${tabWidth * index}%`,
+      width: `${tabWidths[index]}px`, // Width of the current tab
+      left: `${cumulativeWidth}px`, // Left position based on cumulative width of previous tabs
     };
   };
 
@@ -86,16 +93,17 @@ const InterviewHeader = () => {
           }}
         />
         <Box
-          activeClassName='active'
+          activeclassname='active'
           component={NavLink}
           sx={styles.interviewNavLink}
           to={links.scheduledInterviews}
           onClick={() => setActiveTab(0)}
         >
+          <Box alt='Circle' component='img' src={CircleIcon} sx={styles.greenEllipce} />{' '}
           {t('interviews.navigationLinks.scheduled')}
         </Box>
         <Box
-          activeClassName='active'
+          activeclassname='active'
           component={NavLink}
           sx={styles.interviewNavLink}
           to={links.passedInterviews}
@@ -104,7 +112,7 @@ const InterviewHeader = () => {
           {t('interviews.navigationLinks.passed')}
         </Box>
         <Box
-          activeClassName='active'
+          activeclassname='active'
           component={NavLink}
           sx={styles.interviewNavLink}
           to={links.interviewRequests}
@@ -117,6 +125,7 @@ const InterviewHeader = () => {
       <Button
         ref={buttonRef}
         color='primary'
+        disabled={isDisabled}
         sx={styles.buttonPrimary}
         type='button'
         variant='contained'
