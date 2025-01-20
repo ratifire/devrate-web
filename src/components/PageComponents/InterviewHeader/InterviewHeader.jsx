@@ -48,8 +48,8 @@ const InterviewHeader = () => {
 
     const cumulativeWidth = tabWidths.slice(0, index).reduce((sum, width) => sum + width, 0);
     return {
-      width: `${tabWidths[index]}px`, // Width of the current tab
-      left: `${cumulativeWidth}px`, // Left position based on cumulative width of previous tabs
+      width: `${tabWidths[index]}px`,
+      left: `${cumulativeWidth}px`,
     };
   };
 

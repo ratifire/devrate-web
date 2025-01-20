@@ -1,5 +1,5 @@
 export const interviewDark = {
   interviewPage: {
-    bgColor: '#1d1d1d',
+    bgColor: '#1D1D1D',
   },
 };
