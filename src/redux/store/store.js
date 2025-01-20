@@ -17,6 +17,7 @@ import emailSliceReducer from '../../redux/auth/emailSlice';
 import activeMasteryReducer from '../specialization/activeMasterySlice';
 import buttonReducer from '../addButton/addButtonSlice';
 import themeSliceReducer from '../theme/themeSlice';
+import updateTabSlice from '../updateTab/updateTabSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -50,6 +51,7 @@ const rootReducer = {
   auth: persistReducer(authPersistConfig, authReducer),
   tokens: persistReducer(tokenPersistConfig, tokenSlice),
   theme: persistReducer(themePersistConfig, themeSliceReducer),
+  skills: updateTabSlice,
 };
 
 const store = configureStore({

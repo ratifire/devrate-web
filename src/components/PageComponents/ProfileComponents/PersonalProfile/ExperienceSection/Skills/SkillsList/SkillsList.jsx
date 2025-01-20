@@ -7,7 +7,6 @@ import { styles } from './SkillsList.styles';
 
 const SkillsList = ({ data, length }) => {
   const { specializationName, mainSpecialization, masteryLevel, hardSkills } = data;
-
   const flexValue =
     length === 1
       ? hardSkills.length === 1

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useUpdateSkillsMutation } from '../../../../../../../redux/services/skillsApiSlice';
 import CustomTooltip from '../../../../../../UI/CustomTooltip';
+import { refetchSkills } from '../../../../../../../redux/updateTab/updateTabSlice.js';
 import { styles } from './SkillsItem.styles';
 
 const SkillsItem = ({ data, flex }) => {
@@ -12,10 +14,12 @@ const SkillsItem = ({ data, flex }) => {
   const [hiddenSkill, setHiddenSkill] = useState(hidden);
   const mark = Math.round(averageMark);
   const [updateSkills] = useUpdateSkillsMutation();
+  const dispatch = useDispatch();
 
   const handlerClick = async () => {
     setHiddenSkill((prevState) => !prevState);
     await updateSkills({ id, hide: !hidden }).unwrap();
+    dispatch(refetchSkills());
   };
 
   const iconEye = hiddenSkill ? (
