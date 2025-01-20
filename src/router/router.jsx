@@ -9,7 +9,7 @@ import FaqPage from '../pages/FaqPage';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import RootPage from '../pages/RootPage';
-import UserProfileRoute from './UserProfileRoute.jsx';
+import UserProfileGurard from './guards/UserProfileGurard.jsx';
 import navigationLinks from './links';
 
 const router = createBrowserRouter([
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
               },
               {
                 path: `${navigationLinks.profile}/:userId`,
-                element: <UserProfileRoute />,
+                element: <UserProfileGurard />,
               },
               {
                 path: navigationLinks.schedule,
