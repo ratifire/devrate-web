@@ -32,11 +32,12 @@ const styles = {
     textTransform: 'none',
     fontSize: 20,
     fontWeight: '500',
-    '&:selected': {
-      color: theme.palette.action.selected,
-    },
+    transition: 'color 0.5s ease',
     '&:hover': {
       color: theme.palette.action.hover,
+    },
+    '&.active': {
+      color: theme.palette.action.active,
     },
   }),
   buttonPrimary: (theme) => ({

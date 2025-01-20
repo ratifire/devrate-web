@@ -1,5 +1,5 @@
 import { AppBar, Box, Button, Divider, Popover } from '@mui/material';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
@@ -51,13 +51,13 @@ const InterviewHeader = () => {
   return (
     <AppBar component='header' position={'static'} sx={styles.interviewHeader}>
       <Box sx={styles.interviewNavLinksBox}>
-        <Box component={Link} sx={styles.interviewNavLink} to={links.scheduledInterviews}>
+        <Box activeClassName='active' component={NavLink} sx={styles.interviewNavLink} to={links.scheduledInterviews}>
           {t('interviews.navigationLinks.scheduled')}
         </Box>
-        <Box component={Link} sx={styles.interviewNavLink} to={links.passedInterviews}>
+        <Box activeClassName='active' component={NavLink} sx={styles.interviewNavLink} to={links.passedInterviews}>
           {t('interviews.navigationLinks.passed')}
         </Box>
-        <Box component={Link} sx={styles.interviewNavLink} to={links.interviewRequests}>
+        <Box activeClassName='active' component={NavLink} sx={styles.interviewNavLink} to={links.interviewRequests}>
           {t('interviews.navigationLinks.requests')}
         </Box>
       </Box>
