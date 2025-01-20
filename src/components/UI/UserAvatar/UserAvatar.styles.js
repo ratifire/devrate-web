@@ -1,4 +1,12 @@
 export const styles = {
+  s: {
+    width: '40px',
+    height: '40px',
+    fontSize: 16,
+    lineHeight: '28px',
+    letterSpacing: '0.15px',
+    fontWeight: 400,
+  },
   sm: {
     width: '44px',
     height: '44px',

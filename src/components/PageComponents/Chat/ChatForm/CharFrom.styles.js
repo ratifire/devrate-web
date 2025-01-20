@@ -1,4 +1,11 @@
 export const styles = {
+  position: () => ({
+    position: 'fixed',
+    bottom: 0,
+    right: '100px',
+    zIndex: 10000,
+    boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
+  }),
   container: {
     maxHeight: '100%',
     width: '480px',
@@ -24,7 +31,7 @@ export const styles = {
       backgroundColor: theme.palette.iconBtn.btnClose.hoverColor,
     },
     svg: {
-      fontSize: '18px',
+      fontSize: '20px',
     },
   }),
   btnIconScroll: {

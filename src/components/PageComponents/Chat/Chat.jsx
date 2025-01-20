@@ -1,18 +1,19 @@
-import { Badge, Box, IconButton, Fade } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { Badge, IconButton, Popover } from '@mui/material';
+import { useState } from 'react';
 import Message from '../../../assets/icons/message.svg?react';
-import { openChat } from '../../../redux/chat/chatSlice';
 import { styles } from './Chat.styles';
-import ChatForm from './ChatForm';
+import ChatListUsers from './ChatListUsers';
 
 const Chat = () => {
-  const { chat } = useSelector((state) => state.chat);
-
-  const dispatch = useDispatch();
-  const handleOpen = () => {
-    dispatch(openChat({ chatElement: 'chat' }));
+  const [bellButton, setBellButton] = useState(null);
+  const open = Boolean(bellButton);
+  const handleOpen = (event) => {
+    event.preventDefault();
+    setBellButton(event.currentTarget);
   };
-
+  const handleClose = () => {
+    setBellButton(null);
+  };
   return (
     <>
       <IconButton sx={styles.btnIcon} onClick={handleOpen}>
@@ -20,26 +21,21 @@ const Chat = () => {
           <Message />
         </Badge>
       </IconButton>
-      {/*<Popover*/}
-      {/*  anchorEl={bellButton}*/}
-      {/*  anchorOrigin={{*/}
-      {/*    vertical: 'bottom',*/}
-      {/*    horizontal: 'right',*/}
-      {/*  }}*/}
-      {/*  open={open}*/}
-      {/*  transformOrigin={{*/}
-      {/*    vertical: 'top',*/}
-      {/*    horizontal: 'right',*/}
-      {/*  }}*/}
-      {/*  onClose={chatClose}*/}
-      {/*>*/}
-      {/*  {elem}*/}
-      {/*</Popover>*/}
-      <Fade in={chat}>
-        <Box sx={styles.position}>
-          <ChatForm />
-        </Box>
-      </Fade>
+      <Popover
+        anchorEl={bellButton}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={open}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        onClose={handleClose}
+      >
+        <ChatListUsers />
+      </Popover>
     </>
   );
 };

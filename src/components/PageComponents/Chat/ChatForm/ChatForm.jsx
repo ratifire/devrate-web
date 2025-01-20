@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Box, IconButton, TextField, Typography } from '@mui/material';
+import { Box, Fade, IconButton, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -18,6 +18,7 @@ const ChatForm = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [isUserAtBottom, setIsUserAtBottom] = useState(true);
   const [textFieldHeight, setTextFieldHeight] = useState(23); // Default minHeight
+  const { chat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(closeChat({ chatElement: 'chat' }));
@@ -76,50 +77,47 @@ const ChatForm = () => {
   }, [textFieldHeight]);
 
   return (
-    <Box sx={styles.container}>
-      <Box sx={styles.wrapper}>
-        <UserAvatar
-          radius='circle'
-          size='m'
-          src={userPicture}
-          userFirstName={firstName}
-          userLastName={lastName}
-          userName={`${firstName} ${lastName}`}
-        />
-        <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
-        <IconButton aria-label='Close Сhat' sx={styles.btnIcon} type='button' onClick={handleClose}>
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <Box ref={chatWrapperRef} sx={styles.chatWrapper} onScroll={handleScroll}>
-        {array?.map((item) => (
-          <ChatMessage key={item.id} read={item.read} text={item.text} time={item.time} variant={item.type} />
-        ))}
-        {showScrollButton && (
-          <IconButton aria-label='Scroll to bottom' sx={styles.btnIconScroll} onClick={handleScrollToBottom}>
-            <KeyboardArrowDownIcon />
-          </IconButton>
-        )}
-      </Box>
-      <form>
-        <Box sx={styles.chatForm}>
-          <TextField
-            ref={textFieldRef}
-            fullWidth
-            multiline
-            maxRows={5}
-            minRows={1}
-            placeholder='Напишіть повідомлення'
-            sx={styles.textArea}
-            variant='outlined'
-            onChange={handleTextFieldChange}
-          />
-          <IconButton sx={styles.btnSend}>
-            <Send />
-          </IconButton>
+    <Fade in={chat}>
+      <Box sx={styles.position}>
+        <Box sx={styles.container}>
+          <Box sx={styles.wrapper}>
+            <UserAvatar radius='circle' size='m' src={userPicture} userFirstName={firstName} userLastName={lastName} />
+            <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
+            <IconButton aria-label='Close Сhat' sx={styles.btnIcon} type='button' onClick={handleClose}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          <Box ref={chatWrapperRef} sx={styles.chatWrapper} onScroll={handleScroll}>
+            {array?.map((item) => (
+              <ChatMessage key={item.id} read={item.read} text={item.text} time={item.time} variant={item.type} />
+            ))}
+            {showScrollButton && (
+              <IconButton aria-label='Scroll to bottom' sx={styles.btnIconScroll} onClick={handleScrollToBottom}>
+                <KeyboardArrowDownIcon />
+              </IconButton>
+            )}
+          </Box>
+          <form>
+            <Box sx={styles.chatForm}>
+              <TextField
+                ref={textFieldRef}
+                fullWidth
+                multiline
+                maxRows={5}
+                minRows={1}
+                placeholder='Напишіть повідомлення'
+                sx={styles.textArea}
+                variant='outlined'
+                onChange={handleTextFieldChange}
+              />
+              <IconButton sx={styles.btnSend}>
+                <Send />
+              </IconButton>
+            </Box>
+          </form>
         </Box>
-      </form>
-    </Box>
+      </Box>
+    </Fade>
   );
 };
 
