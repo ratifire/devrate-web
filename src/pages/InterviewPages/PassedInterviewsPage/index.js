@@ -1,3 +1,3 @@
-import PassedInterviewsPage from './PassedInterviewsPage.jsx';
+import PassedInterviewsPage from './PassedInterviewsPage';
 
 export default PassedInterviewsPage;

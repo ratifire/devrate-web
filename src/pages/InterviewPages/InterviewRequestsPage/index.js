@@ -1,3 +1,3 @@
-import InterviewRequestsPage from './InterviewRequestsPage.jsx';
+import InterviewRequestsPage from './InterviewRequestsPage';
 
 export default InterviewRequestsPage;

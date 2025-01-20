@@ -9,10 +9,15 @@ import FaqPage from '../pages/FaqPage';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import RootPage from '../pages/RootPage';
-import InterviewRootPage from '../pages/InterviewPages';
-import ScheduledInterviewsPage from '../pages/InterviewPages/ScheduledInterviewsPage';
-import PassedInterviewsPage from '../pages/InterviewPages/PassedInterviewsPage';
-import InterviewRequestsPage from '../pages/InterviewPages/InterviewRequestsPage';
+import {
+  InterviewRootPage,
+  ScheduledInterviewsPage,
+  PassedInterviewsPage,
+  InterviewRequestsPage,
+  SingleScheduledInterviewPage,
+  SinglePassedInterviewPage,
+  SingleRequestInterviewPage,
+} from '../pages/InterviewPages';
 import UserProfileRoute from './UserProfileRoute.jsx';
 import navigationLinks from './links';
 
@@ -74,6 +79,18 @@ const router = createBrowserRouter([
                   {
                     path: navigationLinks.interviewRequests,
                     element: <InterviewRequestsPage />,
+                  },
+                  {
+                    path: `${navigationLinks.scheduledInterviews}/:inteviewId`,
+                    element: <SingleScheduledInterviewPage />,
+                  },
+                  {
+                    path: `${navigationLinks.passedInterviews}/:inteviewId`,
+                    element: <SinglePassedInterviewPage />,
+                  },
+                  {
+                    path: `${navigationLinks.interviewRequests}/:requestId`,
+                    element: <SingleRequestInterviewPage />,
                   },
                 ],
               },
