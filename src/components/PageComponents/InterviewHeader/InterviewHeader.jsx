@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { openModal } from '../../../redux/modal/modalSlice.js';
 import { modalNames } from '../../../utils/constants/modalNames.js';
 import { feedbackInterviewRole } from '../../../utils/constants/feedbackInterviewRole.js';
@@ -19,10 +19,6 @@ const InterviewHeader = () => {
   const [popoverWidth, setPopoverWidth] = useState(0);
   const open = Boolean(createButton);
   const location = useLocation();
-
-  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
-
-  const isDisabled = !activeSpecialization && !mainSpecialization;
 
   const getActiveTab = () => {
     if (location.pathname.includes(links.scheduledInterviews)) {
@@ -125,7 +121,6 @@ const InterviewHeader = () => {
       <Button
         ref={buttonRef}
         color='primary'
-        disabled={isDisabled}
         sx={styles.buttonPrimary}
         type='button'
         variant='contained'
