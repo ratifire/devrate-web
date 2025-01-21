@@ -3,7 +3,7 @@ import { Link } from '@mui/material';
 import { useSelector } from 'react-redux';
 import darkIcons from '../../../utils/constants/RightSection/darkThemeIcons';
 import whiteIcons from '../../../utils/constants/RightSection/whiteThemeIcons';
-import { ensureProtocol } from '../../../utils/helpers/ensureProtocol';
+import { normaliseUrl } from '../../../utils/helpers/urlHelpers.js';
 import { DARK_THEME } from '../../../utils/constants/Theme/theme';
 import { SOCIAL_TYPES } from './SocialTypes';
 
@@ -22,7 +22,7 @@ const SocialsLinkList = ({ socials, componentStyles }) => {
         } else if (social.type === SOCIAL_TYPES.PHONE_NUMBER) {
           href = `tel:${social.value}`;
         } else {
-          href = ensureProtocol(social.value);
+          href = normaliseUrl(social.value);
         }
 
         return (
