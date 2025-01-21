@@ -10,7 +10,7 @@ export const styles = {
     position: 'absolute',
     width: '5px',
     height: '100%',
-    backgroundColor: 'transparent', // Можна змінити на видимий колір для тестування
+    backgroundColor: 'transparent',
     top: 0,
     right: -5,
     cursor: 'ew-resize',

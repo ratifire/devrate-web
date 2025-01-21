@@ -30,7 +30,7 @@ const ChatForm = () => {
   const { data } = useGetAvatarUserQuery(id);
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
-  const isDragging = useRef(false); // Для відстеження статусу перетягування
+  const isDragging = useRef(false);
   const [textFieldHeight, setTextFieldHeight] = useState(23);
 
   useEffect(() => {
@@ -80,7 +80,6 @@ const ChatForm = () => {
     }
   }, [textFieldHeight]);
 
-  // Логіка переміщення чату
   const handleMouseDown = (e) => {
     isDragging.current = true;
     initialMousePos.current = { x: e.clientX, y: e.clientY };
@@ -103,7 +102,6 @@ const ChatForm = () => {
     let newLeft = chatStartPos.current.left + dx;
     let newTop = chatStartPos.current.top + dy;
 
-    // Обмеження меж viewport
     newLeft = Math.max(0, Math.min(newLeft, viewportWidth - chatRect.width));
     newTop = Math.max(0, Math.min(newTop, viewportHeight - chatRect.height));
 
@@ -131,7 +129,6 @@ const ChatForm = () => {
     document.addEventListener('mouseup', handleResizeMouseUp);
   };
 
-  // Логіка зміни ширини без зміни висоти
   const handleResizeMouseMove = (e) => {
     if (!isResizing.current) return;
     const dx = e.clientX - resizeStartPos.current.x;
@@ -147,7 +144,7 @@ const ChatForm = () => {
 
   useEffect(() => {
     if (chatPositionRef.current) {
-      chatPositionRef.current.style.width = '480px'; // Встановлює стартову ширину
+      chatPositionRef.current.style.width = '480px';
     }
   }, []);
 
