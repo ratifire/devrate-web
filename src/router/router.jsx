@@ -18,7 +18,7 @@ import {
   SinglePassedInterviewPage,
   SingleRequestInterviewPage,
 } from '../pages/InterviewPages';
-import UserProfileGurard from './guards/UserProfileGurard.jsx';
+import UserProfileGuard from './guards/UserProfileGuard.jsx';
 import navigationLinks from './links';
 
 const router = createBrowserRouter([
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
               },
               {
                 path: `${navigationLinks.profile}/:userId`,
-                element: <UserProfileGurard />,
+                element: <UserProfileGuard />,
               },
               {
                 path: navigationLinks.schedule,
