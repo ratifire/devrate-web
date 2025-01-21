@@ -9,15 +9,17 @@ import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import Send from '../../../../assets/icons/send.svg?react';
 import { array } from '../../../../utils/constants/testMessages';
 import { closeChat } from '../../../../redux/chat/chatSlice';
-import { styles } from './CharFrom.styles';
+import { styles } from './ChatForm.styles.js';
 import ChatMessage from './ChatMessage';
 
 const ChatForm = () => {
   const chatWrapperRef = useRef(null);
+  const chatPositionRef = useRef(null);
+  const initialMousePos = useRef({ x: 0, y: 0 });
+  const chatStartPos = useRef({ top: 0, left: 0 });
   const textFieldRef = useRef(null);
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [isUserAtBottom, setIsUserAtBottom] = useState(true);
-  const [textFieldHeight, setTextFieldHeight] = useState(23); // Default minHeight
   const { chat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   const handleClose = () => {
@@ -28,6 +30,8 @@ const ChatForm = () => {
   const { data } = useGetAvatarUserQuery(id);
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
+  const isDragging = useRef(false); // Для відстеження статусу перетягування
+  const [textFieldHeight, setTextFieldHeight] = useState(23);
 
   useEffect(() => {
     if (isUserAtBottom && chatWrapperRef.current) {
@@ -76,13 +80,86 @@ const ChatForm = () => {
     }
   }, [textFieldHeight]);
 
+  // Логіка переміщення чату
+  const handleMouseDown = (e) => {
+    isDragging.current = true;
+    initialMousePos.current = { x: e.clientX, y: e.clientY };
+    const { top, left } = chatPositionRef.current.getBoundingClientRect();
+    chatStartPos.current = { top, left };
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging.current) return;
+
+    const dx = e.clientX - initialMousePos.current.x;
+    const dy = e.clientY - initialMousePos.current.y;
+
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const chatRect = chatPositionRef.current.getBoundingClientRect();
+
+    let newLeft = chatStartPos.current.left + dx;
+    let newTop = chatStartPos.current.top + dy;
+
+    // Обмеження меж viewport
+    newLeft = Math.max(0, Math.min(newLeft, viewportWidth - chatRect.width));
+    newTop = Math.max(0, Math.min(newTop, viewportHeight - chatRect.height));
+
+    chatPositionRef.current.style.left = `${newLeft}px`;
+    chatPositionRef.current.style.top = `${newTop}px`;
+  };
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+  };
+
+  const resizeStartPos = useRef({ width: 0, height: 0 });
+  const isResizing = useRef(false);
+
+  const handleResizeMouseDown = (e) => {
+    isResizing.current = true;
+    resizeStartPos.current = {
+      width: chatPositionRef.current.offsetWidth,
+      height: chatPositionRef.current.offsetHeight,
+      x: e.clientX,
+      y: e.clientY,
+    };
+    document.addEventListener('mousemove', handleResizeMouseMove);
+    document.addEventListener('mouseup', handleResizeMouseUp);
+  };
+
+  // Логіка зміни ширини без зміни висоти
+  const handleResizeMouseMove = (e) => {
+    if (!isResizing.current) return;
+    const dx = e.clientX - resizeStartPos.current.x;
+    const newWidth = Math.min(580, Math.max(380, resizeStartPos.current.width + dx)); // Обмеження ширини
+    chatPositionRef.current.style.width = `${newWidth}px`; // Зміна лише ширини
+  };
+
+  const handleResizeMouseUp = () => {
+    isResizing.current = false;
+    document.removeEventListener('mousemove', handleResizeMouseMove);
+    document.removeEventListener('mouseup', handleResizeMouseUp);
+  };
+
+  useEffect(() => {
+    if (chatPositionRef.current) {
+      chatPositionRef.current.style.width = '480px'; // Встановлює стартову ширину
+    }
+  }, []);
+
   return (
     <Fade in={chat}>
-      <Box sx={styles.position}>
+      <Box ref={chatPositionRef} sx={styles.position}>
         <Box sx={styles.container}>
           <Box sx={styles.wrapper}>
             <UserAvatar radius='circle' size='m' src={userPicture} userFirstName={firstName} userLastName={lastName} />
-            <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
+            <Box sx={styles.wrapperName} onMouseDown={handleMouseDown}>
+              <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
+            </Box>
             <IconButton aria-label='Close Сhat' sx={styles.btnIcon} type='button' onClick={handleClose}>
               <CloseIcon />
             </IconButton>
@@ -115,6 +192,7 @@ const ChatForm = () => {
               </IconButton>
             </Box>
           </form>
+          <Box sx={styles.resizeHandle} onMouseDown={handleResizeMouseDown} /> {/* [6] Додано елемент для ресайзу */}
         </Box>
       </Box>
     </Fade>

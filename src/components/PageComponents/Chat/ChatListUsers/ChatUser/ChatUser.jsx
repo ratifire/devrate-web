@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import UserAvatar from '../../../../UI/UserAvatar';
-import { openChat } from '../../../../../redux/chat/chatSlice.js';
+import { closeChat, openChat } from '../../../../../redux/chat/chatSlice.js';
 import { styles } from './ChatUser.styles';
 
 const ChatUser = ({ data }) => {
@@ -10,6 +10,7 @@ const ChatUser = ({ data }) => {
   const dispatch = useDispatch();
   const handlerOpenChat = () => {
     dispatch(openChat({ chatElement: 'chat' }));
+    dispatch(closeChat({ chatElement: 'list' }));
   };
   return (
     <Box sx={styles.bg}>

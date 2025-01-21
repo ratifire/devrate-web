@@ -6,7 +6,7 @@ export const styles = {
   sender: {
     backgroundColor: '#444446',
     borderRadius: '0 16px 16px 16px',
-    maxWidth: '290px',
+    maxWidth: 'calc(100% - 148px)',
     marginRight: 'auto',
     ' >.MuiTypography-body': {
       color: '#ffffff',
@@ -23,7 +23,7 @@ export const styles = {
   message: {
     backgroundColor: '#CEB0FA',
     borderRadius: '16px 0 16px 16px',
-    maxWidth: '290px',
+    maxWidth: 'calc(100% - 148px)',
     marginLeft: 'auto',
     ' >.MuiTypography-body': {
       color: '#1D1D1D',

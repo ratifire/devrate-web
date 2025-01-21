@@ -4,6 +4,7 @@ const chatSlice = createSlice({
   name: 'modal',
   initialState: {
     chat: false,
+    list: false,
   },
   reducers: {
     openChat: (state, action) => {

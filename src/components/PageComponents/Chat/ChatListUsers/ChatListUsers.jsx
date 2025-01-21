@@ -1,19 +1,22 @@
-import { Box, IconButton } from '@mui/material';
-// import { useSelector } from 'react-redux';
+import { Box, IconButton, InputAdornment, OutlinedInput, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-// import UserAvatar from '../../../UI/UserAvatar';
-// import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
-// import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice.js';
+import { useTranslation } from 'react-i18next';
+import UserAvatar from '../../../UI/UserAvatar';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
+import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice.js';
+import Loupe from '../../../../assets/icons/loupe.svg?react';
 import { styles } from './ChatListUsers.styles.js';
-import ChatUser from './ChatUser/index.js';
+import ChatUser from './ChatUser';
 
 const ChatListUsers = () => {
-  // const { data: info } = useSelector(selectCurrentUser);
-  // const { id, firstName, lastName } = info;
-  // const { data } = useGetAvatarUserQuery(id);
-  // const userAvatar = data || {};
-  // const { userPicture } = userAvatar;
-  // console.log(userPicture);
+  const { t } = useTranslation();
+  const { data: info } = useSelector(selectCurrentUser);
+  const { id, firstName, lastName } = info;
+  const { data } = useGetAvatarUserQuery(id);
+  const userAvatar = data || {};
+  const { userPicture } = userAvatar;
+
   const listUsers = [
     {
       id: 1,
@@ -110,14 +113,27 @@ const ChatListUsers = () => {
   return (
     <Box sx={styles.container}>
       <Box sx={styles.wrapper}>
-        {/*<UserAvatar radius='circle' size='s' userFirstName={firstName} userLastName={lastName} />*/}
-        {/*<Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>*/}
+        <UserAvatar radius='circle' size='s' src={userPicture} userFirstName={firstName} userLastName={lastName} />
+        <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
         <IconButton aria-label='Menu' sx={styles.btnIcon} type='button'>
           <MoreVertIcon />
         </IconButton>
       </Box>
       <Box sx={styles.search}>
-        <input type='text' />
+        <OutlinedInput
+          autoComplete='off'
+          endAdornment={
+            <InputAdornment position='end'>
+              <IconButton edge='end'>
+                <Loupe />
+              </IconButton>
+            </InputAdornment>
+          }
+          name='searchListChates'
+          placeholder={t('header.search')}
+          sx={styles.input}
+          type='text'
+        />
       </Box>
       <Box sx={styles.wrapperList}>
         <Box sx={styles.list}>
