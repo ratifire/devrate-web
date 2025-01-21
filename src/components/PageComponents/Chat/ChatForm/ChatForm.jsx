@@ -3,6 +3,8 @@ import { Box, Fade, IconButton, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import SockJS from 'sockjs-client';
+import { Client } from '@stomp/stompjs';
 import UserAvatar from '../../../UI/UserAvatar';
 import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
@@ -32,7 +34,8 @@ const ChatForm = () => {
   const { userPicture } = userAvatar;
   const isDragging = useRef(false);
   const [textFieldHeight, setTextFieldHeight] = useState(23);
-
+  const [isConnected, setIsConnected] = useState(false);
+  const [client, setClient] = useState(null);
   useEffect(() => {
     if (isUserAtBottom && chatWrapperRef.current) {
       chatWrapperRef.current.scrollTo({
@@ -148,6 +151,53 @@ const ChatForm = () => {
     }
   }, []);
 
+  const [message, setMessage] = useState(''); // Для збереження тексту
+  useEffect(() => {
+    const socket = new SockJS('http://localhost:8080/chat');
+    // const socket = new WebSocket('ws://localhost:8080/chat');
+    const newClient = new Client({
+      webSocketFactory: () => socket, // Використовуйте SockJS
+      // reconnectDelay: 5000, // Повторне підключення кожні 5 секунд у разі помилки
+      onConnect: () => {
+        // console.log('Connected to WebSocket');
+        setIsConnected(true);
+        newClient.subscribe('/topic/messages/8882', (message) => {
+          // console.log('Received message:', JSON.parse(message.body));
+          JSON.parse(message.body);
+        });
+      },
+    });
+
+    setClient(newClient);
+    newClient.activate();
+
+    return () => {
+      if (newClient.connected) {
+        newClient.deactivate();
+      }
+    };
+  }, []);
+
+  const handleSubmitMessages = (e) => {
+    e.preventDefault();
+    if (!isConnected || !message.trim()) {
+      // console.warn('STOMP client is not connected or message is empty');
+      return;
+    }
+
+    client.publish({
+      destination: '/app/chat', // Кінцева точка на сервері
+      body: JSON.stringify({
+        sender: id, // ID поточного користувача
+        content: message.trim(),
+        recipient: 'recipient-id', // ID отримувача
+        topicName: '8882', // Тема
+      }),
+    });
+
+    setMessage(''); // Очищення текстового поля після відправки
+  };
+
   return (
     <Fade in={chat}>
       <Box ref={chatPositionRef} sx={styles.position}>
@@ -171,7 +221,7 @@ const ChatForm = () => {
               </IconButton>
             )}
           </Box>
-          <form>
+          <form onClick={handleSubmitMessages}>
             <Box sx={styles.chatForm}>
               <TextField
                 ref={textFieldRef}
