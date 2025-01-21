@@ -1,6 +1,7 @@
 import { Box, IconButton, Modal, Zoom } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router';
 import { closeModal } from '../../redux/modal/modalSlice.js';
 import { styles } from './ModalLayout.styles.js';
 import ModalContainer from './ModalContainer.jsx';
@@ -8,9 +9,11 @@ import ModalContainer from './ModalContainer.jsx';
 const ModalComponent = () => {
   const { modalType, isOpen } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
+  const [, setSearchParams] = useSearchParams();
 
   const handleClose = () => {
     dispatch(closeModal());
+    setSearchParams('');
   };
 
   return (
