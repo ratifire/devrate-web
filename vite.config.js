@@ -6,11 +6,11 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   server: {
     host: 'dev.skillzzy.com',
-    port: 3000,
+    port: 443,
     open: true,
     https: {
-      key: fs.readFileSync('./dev.skillzzy.com+2-key.pem'),
-      cert: fs.readFileSync('./dev.skillzzy.com+2.pem'),
+      key: fs.readFileSync('/Users/vladyslavdykyi/dev.skillzzy.com+3-key.pem'),
+      cert: fs.readFileSync('/Users/vladyslavdykyi/dev.skillzzy.com+3.pem'),
     },
   },
   build: {

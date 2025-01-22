@@ -20,6 +20,8 @@ const ChatForm = () => {
   const initialMousePos = useRef({ x: 0, y: 0 });
   const chatStartPos = useRef({ top: 0, left: 0 });
   const textFieldRef = useRef(null);
+  const resizeStartPos = useRef({ width: 0, height: 0 });
+  const isResizing = useRef(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [isUserAtBottom, setIsUserAtBottom] = useState(true);
   const { chat } = useSelector((state) => state.chat);
@@ -36,6 +38,8 @@ const ChatForm = () => {
   const [textFieldHeight, setTextFieldHeight] = useState(23);
   const [isConnected, setIsConnected] = useState(false);
   const [client, setClient] = useState(null);
+  const [message, setMessage] = useState('');
+
   useEffect(() => {
     if (isUserAtBottom && chatWrapperRef.current) {
       chatWrapperRef.current.scrollTo({
@@ -68,6 +72,7 @@ const ChatForm = () => {
   const handleTextFieldChange = (e) => {
     const height = e.target.scrollHeight;
     const maxHeight = 115;
+    setMessage(e.target.value);
     if (height < maxHeight) {
       setTextFieldHeight(height);
     } else {
@@ -111,14 +116,12 @@ const ChatForm = () => {
     chatPositionRef.current.style.left = `${newLeft}px`;
     chatPositionRef.current.style.top = `${newTop}px`;
   };
+
   const handleMouseUp = () => {
     isDragging.current = false;
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('mouseup', handleMouseUp);
   };
-
-  const resizeStartPos = useRef({ width: 0, height: 0 });
-  const isResizing = useRef(false);
 
   const handleResizeMouseDown = (e) => {
     isResizing.current = true;
@@ -151,17 +154,19 @@ const ChatForm = () => {
     }
   }, []);
 
-  const [message, setMessage] = useState(''); // Для збереження тексту
   useEffect(() => {
-    const socket = new SockJS('http://localhost:8080/chat');
+    // const socket = new SockJS('https://server.skillzzy.com/chat');
+    const socket = new SockJS('https://server.skillzzy.com/chat');
     // const socket = new WebSocket('ws://localhost:8080/chat');
     const newClient = new Client({
       webSocketFactory: () => socket, // Використовуйте SockJS
       // reconnectDelay: 5000, // Повторне підключення кожні 5 секунд у разі помилки
+      // brokerURL: 'wss://server.skillzzy.com/chat',
       onConnect: () => {
         // console.log('Connected to WebSocket');
         setIsConnected(true);
         newClient.subscribe('/topic/messages/8882', (message) => {
+          // console.log('subscribe');
           // console.log('Received message:', JSON.parse(message.body));
           JSON.parse(message.body);
         });
@@ -190,7 +195,7 @@ const ChatForm = () => {
       body: JSON.stringify({
         sender: id, // ID поточного користувача
         content: message.trim(),
-        recipient: 'recipient-id', // ID отримувача
+        recipient: '8882', // ID отримувача
         topicName: '8882', // Тема
       }),
     });
