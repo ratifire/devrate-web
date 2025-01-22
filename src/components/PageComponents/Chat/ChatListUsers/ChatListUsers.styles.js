@@ -2,7 +2,7 @@ export const styles = {
   container: {
     maxHeight: '100%',
     width: '354px',
-    height: '684px',
+    height: '523px',
     backgroundColor: '#303032',
     borderRadius: 2,
   },
@@ -45,7 +45,7 @@ export const styles = {
   }),
   list: (theme) => ({
     padding: `${theme.spacing(0)} ${theme.spacing(0)}`,
-    maxHeight: '525px',
+    maxHeight: '364px',
     overflowX: 'hidden',
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
