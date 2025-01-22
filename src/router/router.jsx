@@ -1,14 +1,15 @@
 import { createBrowserRouter } from 'react-router';
 import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage/HomePage';
-import RequireAuth from '../redux/auth/RequireAuth.jsx';
+import PrivateRoutes from '../redux/auth/PrivateRoutes.jsx';
 import PersonalProfilePage from '../pages/ProfilePages/PersonalProfilePage';
 import SpecializationPage from '../pages/SpecializationPage';
-import SchedulePage from '../pages/ShedulePage';
+import SchedulePage from '../pages/SchedulePage';
 import FaqPage from '../pages/FaqPage';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsAndConditions from '../pages/TermsAndConditions';
-import UserProfileRoute from './UserProfileRoute.jsx';
+import RootPage from '../pages/RootPage';
+import UserProfileGurard from './guards/UserProfileGurard.jsx';
 import navigationLinks from './links';
 
 const router = createBrowserRouter([
@@ -29,27 +30,32 @@ const router = createBrowserRouter([
         element: <TermsAndConditions />,
       },
       {
-        element: <RequireAuth />,
+        element: <PrivateRoutes />,
         children: [
           {
-            path: navigationLinks.profile,
-            element: <PersonalProfilePage />,
-          },
-          {
-            path: `${navigationLinks.profile}/:userId`,
-            element: <UserProfileRoute />,
-          },
-          {
-            path: navigationLinks.schedule,
-            element: <SchedulePage />,
-          },
-          {
-            path: navigationLinks.specializations,
-            element: <SpecializationPage />,
-          },
-          {
-            path: navigationLinks.faq,
-            element: <FaqPage />,
+            element: <RootPage />,
+            children: [
+              {
+                path: navigationLinks.profile,
+                element: <PersonalProfilePage />,
+              },
+              {
+                path: `${navigationLinks.profile}/:userId`,
+                element: <UserProfileGurard />,
+              },
+              {
+                path: navigationLinks.schedule,
+                element: <SchedulePage />,
+              },
+              {
+                path: navigationLinks.specializations,
+                element: <SpecializationPage />,
+              },
+              {
+                path: navigationLinks.faq,
+                element: <FaqPage />,
+              },
+            ],
           },
         ],
       },

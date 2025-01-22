@@ -5,7 +5,7 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { useFormik } from 'formik';
 import { useUpdateSkillsMutation } from '../../../../../../../redux/services/skillsApiSlice';
-import { SkillsItemSchema } from '../../../../../../../utils/valadationSchemas/index';
+import { SkillsItemSchema } from '../../../../../../../utils/validationSchemas/index';
 import CustomTooltip from '../../../../../../UI/CustomTooltip';
 import { styles } from './SkillsItem.styles';
 

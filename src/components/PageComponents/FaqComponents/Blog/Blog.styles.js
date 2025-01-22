@@ -5,11 +5,11 @@ export const styles = {
     paddingBottom: theme.spacing(0),
   }),
   title: (theme) => ({
-    marginBottom: theme.spacing(4),
+    marginBottom: '20px',
     color: theme.palette.faq.blog.title,
   }),
   list: (theme) => ({
-    maxHeight: '586px',
+    maxHeight: 'calc(100vh - 193px);',
     height: '100%',
     overflowY: 'auto',
 
@@ -50,12 +50,16 @@ export const styles = {
   blogText: (theme) => ({
     color: theme.palette.faq.blog.blogItem.text,
     display: 'block',
+    fontSize: 16,
     fontWeight: 400,
     marginTop: theme.spacing(2),
-    '>span': {
-      marginLeft: theme.spacing(1),
+    '>button': {
+      marginLeft: '3px',
       color: theme.palette.faq.blog.blogItem.btn,
       cursor: 'pointer',
+      backgroundColor: 'inherit',
+      border: 'none',
+      padding: theme.spacing(0),
     },
   }),
 };
