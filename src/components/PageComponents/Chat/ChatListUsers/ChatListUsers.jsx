@@ -1,11 +1,11 @@
-import { Box, IconButton, InputAdornment, OutlinedInput, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
 import UserAvatar from '../../../UI/UserAvatar';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice.js';
-import Loupe from '../../../../assets/icons/loupe.svg?react';
+import FormInputSearch from '../../../FormsComponents/Inputs/FormInputSearch/index.js';
 import { styles } from './ChatListUsers.styles.js';
 import ChatUser from './ChatUser';
 
@@ -120,15 +120,8 @@ const ChatListUsers = () => {
         </IconButton>
       </Box>
       <Box sx={styles.search}>
-        <OutlinedInput
+        <FormInputSearch
           autoComplete='off'
-          endAdornment={
-            <InputAdornment position='end'>
-              <IconButton edge='end'>
-                <Loupe />
-              </IconButton>
-            </InputAdornment>
-          }
           name='searchListChates'
           placeholder={t('header.search')}
           sx={styles.input}

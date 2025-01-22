@@ -31,23 +31,14 @@ export const styles = {
   search: (theme) => ({
     padding: theme.spacing(3),
   }),
-  input: (theme) => ({
-    width: '300px',
+  input: {
+    width: '100%',
     transition: 'width 0.3s ease',
     '& .MuiOutlinedInput-input': {
-      paddingY: '8px!important',
-      paddingX: '12px!important',
+      paddingY: '8px',
+      paddingX: '12px',
     },
-    '&.Mui-focused': {
-      width: '400px',
-    },
-    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.search.inputActive,
-    },
-    '&.Mui-focused .MuiOutlinedInput-input + .MuiInputAdornment-root svg path ': {
-      fill: theme.palette.search.inputActive,
-    },
-  }),
+  },
   wrapperList: (theme) => ({
     paddingRight: theme.spacing(3),
     paddingBottom: theme.spacing(3),

@@ -155,19 +155,13 @@ const ChatForm = () => {
   }, []);
 
   useEffect(() => {
-    // const socket = new SockJS('https://server.skillzzy.com/chat');
     const socket = new SockJS('https://server.skillzzy.com/chat');
-    // const socket = new WebSocket('ws://localhost:8080/chat');
     const newClient = new Client({
-      webSocketFactory: () => socket, // Використовуйте SockJS
+      webSocketFactory: () => socket,
       // reconnectDelay: 5000, // Повторне підключення кожні 5 секунд у разі помилки
-      // brokerURL: 'wss://server.skillzzy.com/chat',
       onConnect: () => {
-        // console.log('Connected to WebSocket');
         setIsConnected(true);
-        newClient.subscribe('/topic/messages/8882', (message) => {
-          // console.log('subscribe');
-          // console.log('Received message:', JSON.parse(message.body));
+        newClient.subscribe('/queue/messages/8882', (message) => {
           JSON.parse(message.body);
         });
       },
@@ -175,7 +169,6 @@ const ChatForm = () => {
 
     setClient(newClient);
     newClient.activate();
-
     return () => {
       if (newClient.connected) {
         newClient.deactivate();
@@ -185,10 +178,7 @@ const ChatForm = () => {
 
   const handleSubmitMessages = (e) => {
     e.preventDefault();
-    if (!isConnected || !message.trim()) {
-      // console.warn('STOMP client is not connected or message is empty');
-      return;
-    }
+    if (!isConnected || !message.trim()) return;
 
     client.publish({
       destination: '/app/chat', // Кінцева точка на сервері

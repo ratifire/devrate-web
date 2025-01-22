@@ -6,7 +6,7 @@ export const styles = {
   sender: {
     backgroundColor: '#444446',
     borderRadius: '0 16px 16px 16px',
-    maxWidth: 'calc(100% - 148px)',
+    maxWidth: 'calc(100% - 28px)',
     marginRight: 'auto',
     ' >.MuiTypography-body': {
       color: '#ffffff',
@@ -19,11 +19,14 @@ export const styles = {
     ' span': {
       color: '#C5C5C6',
     },
+    '@media (min-width: 1272px)': {
+      maxWidth: 'calc(100% - 100px)',
+    },
   },
   message: {
     backgroundColor: '#CEB0FA',
     borderRadius: '16px 0 16px 16px',
-    maxWidth: 'calc(100% - 148px)',
+    maxWidth: 'calc(100% - 28px)',
     marginLeft: 'auto',
     ' >.MuiTypography-body': {
       color: '#1D1D1D',
@@ -36,6 +39,9 @@ export const styles = {
     },
     ' span': {
       color: '#290064',
+    },
+    '@media (min-width: 1272px)': {
+      maxWidth: 'calc(100% - 100px)',
     },
   },
   footer: {
