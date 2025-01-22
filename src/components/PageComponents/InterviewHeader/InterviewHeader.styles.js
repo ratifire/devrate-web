@@ -18,26 +18,27 @@ const styles = {
   }),
   interviewNavLinksBox: (theme) => ({
     display: 'flex',
-    position: 'relative',
     justifyContent: 'space-between',
     borderBottom: '1px solid',
     borderColor: theme.palette.neutral[400],
-    paddingBottom: '10px',
   }),
   interviewNavLink: (theme) => ({
     display: 'inline-block',
     textDecoration: 'none',
     color: theme.palette.text.secondary,
+    paddingBottom: '10px',
     paddingRight: '20px',
     textTransform: 'none',
     fontSize: 20,
     fontWeight: '500',
-    transition: 'color 0.5s ease',
+    borderBottom: '2px solid transparent',
+    transition: 'color 0.5s ease, border-bottom 0.5s ease',
     '&:hover': {
       color: theme.palette.action.hover,
     },
     '&.active': {
       color: theme.palette.action.active,
+      borderBottom: '2px solid ' + theme.palette.action.active,
     },
     '&:not(:first-of-type)': {
       paddingLeft: '20px',
@@ -88,15 +89,9 @@ const styles = {
       backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
     },
   }),
-  indicator: {
-    position: 'absolute',
-    bottom: 0,
-    height: '2px',
-    backgroundColor: '#B78AF7',
-    transition: 'all 0.3s ease',
-  },
   greenEllipce: {
     marginRight: '8px',
+    marginLeft: '8px',
     width: '13px',
     height: '13px',
   },

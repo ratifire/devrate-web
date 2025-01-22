@@ -1,5 +1,5 @@
 import { AppBar, Box, Button, Divider, Popover } from '@mui/material';
-import { NavLink, useLocation } from 'react-router';
+import { NavLink } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
@@ -18,36 +18,6 @@ const InterviewHeader = () => {
   const [createButton, setCreateButton] = useState(null);
   const [popoverWidth, setPopoverWidth] = useState(0);
   const open = Boolean(createButton);
-  const location = useLocation();
-
-  const getActiveTab = () => {
-    if (location.pathname.includes(links.scheduledInterviews)) {
-      return 0;
-    }
-    if (location.pathname.includes(links.passedInterviews)) {
-      return 1;
-    }
-    if (location.pathname.includes(links.interviewRequests)) {
-      return 2;
-    }
-    return 0;
-  };
-
-  const [activeTab, setActiveTab] = useState(getActiveTab());
-
-  useEffect(() => {
-    setActiveTab(getActiveTab());
-  }, [location.pathname]);
-
-  const getIndicatorStyle = (index) => {
-    const tabWidths = [135, 115, 120];
-
-    const cumulativeWidth = tabWidths.slice(0, index).reduce((sum, width) => sum + width, 0);
-    return {
-      width: `${tabWidths[index]}px`,
-      left: `${cumulativeWidth}px`,
-    };
-  };
 
   useEffect(() => {
     if (buttonRef.current) {
@@ -82,38 +52,14 @@ const InterviewHeader = () => {
   return (
     <AppBar component='header' position={'static'} sx={styles.interviewHeader}>
       <Box sx={styles.interviewNavLinksBox}>
-        <Box
-          sx={{
-            ...styles.indicator,
-            ...getIndicatorStyle(activeTab),
-          }}
-        />
-        <Box
-          activeclassname='active'
-          component={NavLink}
-          sx={styles.interviewNavLink}
-          to={links.scheduledInterviews}
-          onClick={() => setActiveTab(0)}
-        >
+        <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.scheduledInterviews}>
           <Box alt='Circle' component='img' src={CircleIcon} sx={styles.greenEllipce} />{' '}
           {t('interviews.navigationLinks.scheduled')}
         </Box>
-        <Box
-          activeclassname='active'
-          component={NavLink}
-          sx={styles.interviewNavLink}
-          to={links.passedInterviews}
-          onClick={() => setActiveTab(1)}
-        >
+        <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.passedInterviews}>
           {t('interviews.navigationLinks.passed')}
         </Box>
-        <Box
-          activeclassname='active'
-          component={NavLink}
-          sx={styles.interviewNavLink}
-          to={links.interviewRequests}
-          onClick={() => setActiveTab(2)}
-        >
+        <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.interviewRequests}>
           {t('interviews.navigationLinks.requests')}
         </Box>
       </Box>
