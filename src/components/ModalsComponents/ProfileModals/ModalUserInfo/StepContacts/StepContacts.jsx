@@ -11,7 +11,7 @@ import { StepContactsSchema } from '../../../../../utils/validationSchemas/index
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
 import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
-import { normaliseUrl, addPhone, addTelegram, getDataStepContacts } from '../../../../../utils/helpers/urlHelpers.js';
+import { normalizeUrl, addPhone, addTelegram, getDataStepContacts } from '../../../../../utils/helpers/urlHelpers.js';
 import { StepContactsSkeleton } from '../../../../UI/Skeleton';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { styles } from './StepContacts.styles';
@@ -46,9 +46,9 @@ const StepContacts = () => {
         body: [
           { type: SOCIAL_TYPES.TELEGRAM_LINK, value: addTelegram(telegram) },
           { type: SOCIAL_TYPES.EMAIL, value: mail },
-          { type: SOCIAL_TYPES.LINKEDIN_LINK, value: normaliseUrl(linkedIn) },
-          { type: SOCIAL_TYPES.GITHUB_LINK, value: normaliseUrl(gitHub) },
-          { type: SOCIAL_TYPES.BEHANCE_LINK, value: normaliseUrl(behance) },
+          { type: SOCIAL_TYPES.LINKEDIN_LINK, value: normalizeUrl(linkedIn) },
+          { type: SOCIAL_TYPES.GITHUB_LINK, value: normalizeUrl(gitHub) },
+          { type: SOCIAL_TYPES.BEHANCE_LINK, value: normalizeUrl(behance) },
           { type: SOCIAL_TYPES.PHONE_NUMBER, value: addPhone(phone) },
         ],
       }).unwrap();
