@@ -9,8 +9,8 @@ import {
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
 import { setActiveSpecialization, setMainSpecializations } from '../../../../redux/specialization/specializationSlice';
-import { CategoriesSkeleton } from '../../../UI/Skeleton/index.js';
-import { ErrorComponent } from '../../../UI/Exceptions/index.js';
+import { CategoriesSkeleton } from '../../../UI/Skeleton';
+import { ErrorComponent } from '../../../UI/Exceptions';
 import { styles } from './ConfirmDeleteSpecializationModal.styles';
 
 const ConfirmDeleteSpecializationModal = () => {
@@ -27,19 +27,26 @@ const ConfirmDeleteSpecializationModal = () => {
     useDeleteSpecializationByIdMutation();
   const modalData = useSelector(selectModalData);
 
-  const isLoading = isFetchingGetSpecialization || isLoadingDeleteSpecialization;
-  const isError = isErrorGetSpecialization || isErrorDeleteSpecialization;
-
-  if (isLoading) {
+  if (isFetchingGetSpecialization || isLoadingDeleteSpecialization) {
     return <CategoriesSkeleton />;
   }
-  if (isError) {
+  if (isErrorGetSpecialization || isErrorDeleteSpecialization) {
     return <ErrorComponent />;
   }
 
-  const handlerDeleteSpecialization = async (id) => {
+  const handleSpecializationUpdate = (id) => {
     const findMainSpecialization = specializations.find((spec) => spec.main);
 
+    dispatch(setActiveSpecialization(null));
+
+    if (findMainSpecialization?.id === id) {
+      dispatch(setMainSpecializations(null));
+    } else {
+      dispatch(setActiveSpecialization(mainSpecialization));
+    }
+  };
+
+  const handlerDeleteSpecialization = async (id) => {
     try {
       await deleteSpecialization(id).unwrap();
       enqueueSnackbar(t('modalNotifyText.specialization.delete.success', { name: activeSpecialization.name }), {
@@ -49,14 +56,8 @@ const ConfirmDeleteSpecializationModal = () => {
           horizontal: 'right',
         },
       });
-      dispatch(setActiveSpecialization(null));
 
-      if (findMainSpecialization?.id === id) {
-        dispatch(setActiveSpecialization(null));
-        dispatch(setMainSpecializations(null));
-      } else {
-        dispatch(setActiveSpecialization(mainSpecialization));
-      }
+      handleSpecializationUpdate(id);
     } catch (err) {
       if (err.status === 409) {
         enqueueSnackbar(t('specialization.errorDeleteSpec'), { variant: 'error' });

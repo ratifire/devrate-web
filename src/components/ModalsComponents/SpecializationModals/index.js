@@ -2,7 +2,7 @@ import HardSkillsModal from './HardSkillsModal';
 import ScheduleInterviewModal from './ScheduleInterviewModal';
 import SoftSkillsModal from './SoftSkillsModal';
 import { SpecializationEditModal, SpecializationModal } from './SpecializationModal';
-import ConfirmDeleteSpecializationModal from './ConfirmDeleteSpecializationModal/index.js';
+import ConfirmDeleteSpecializationModal from './ConfirmDeleteSpecializationModal';
 
 export {
   HardSkillsModal,
