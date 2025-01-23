@@ -301,7 +301,7 @@ export const en = {
         finish: 'Finish',
         userInfo: {
           personal: {
-            title: 'Personal information',
+            title: 'About me',
             firstName: 'Name',
             first_name_long: 'Name too long',
             first_name_short: 'Name too short',
@@ -327,7 +327,7 @@ export const en = {
             startYear_max: 'Date must be no later than the current year',
           },
           contact: {
-            title: 'Contact Information',
+            title: 'Contacts',
             telegram: 'Telegram',
             linkedIn: 'LinkedIn',
             gitHub: 'GitHub',
