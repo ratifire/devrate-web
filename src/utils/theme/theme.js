@@ -1,6 +1,7 @@
 import { DARK_THEME } from '../constants/Theme/theme';
 import { specializationDark, specializationLight } from './specialization';
 import { scheduleDark, scheduleLight } from './schedule';
+import { interviewDark, interviewLight } from './interview';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -319,6 +320,8 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#1D1D1D',
             color: '#69696B',
             progressBgColor: '#69696B',
+            cancelBtnTextColor: '#CEB0FA',
+            textColor: '#ECECED',
           },
           baseUserInfo: {
             city: {
@@ -621,10 +624,12 @@ const getDesignTokens = (mode) => ({
           },
           ...specializationDark,
           ...scheduleDark,
+          ...interviewDark,
         }
       : {
           ...specializationLight,
           ...scheduleLight,
+          ...interviewLight,
           faq: {
             title: '#1D1D1D',
             questions: {
@@ -839,6 +844,8 @@ const getDesignTokens = (mode) => ({
             backgroundColor: '#FFFFFF',
             color: '#69696B',
             progressBgColor: '#ECECED',
+            cancelBtnTextColor: '#5900D9',
+            textColor: '#1D1D1D',
           },
           baseUserInfo: {
             city: {
