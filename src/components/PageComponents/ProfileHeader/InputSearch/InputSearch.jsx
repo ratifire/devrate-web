@@ -1,10 +1,10 @@
-import { Box, IconButton, InputAdornment, OutlinedInput } from '@mui/material';
+import { Box } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import Loupe from '../../../../assets/icons/loupe.svg?react';
 import { useGetSearchQuery } from '../../../../redux/search/searchApiSlice';
 import useDebounce from '../../../../utils/hooks/useDebounce';
 import useMergeState from '../../../../utils/hooks/useMergeState';
+import { FormInputSearch } from '../../../FormsComponents/Inputs/index.js';
 import { styles } from './InputSearch.styles';
 import { ModalSearch } from './ModalSearch';
 import { formatSearchQuery } from './helpers';
@@ -72,15 +72,8 @@ const InputSearch = () => {
 
   return (
     <Box ref={boxRef}>
-      <OutlinedInput
+      <FormInputSearch
         autoComplete='off'
-        endAdornment={
-          <InputAdornment position='end'>
-            <IconButton edge='end'>
-              <Loupe />
-            </IconButton>
-          </InputAdornment>
-        }
         name='query'
         placeholder={t('header.search')}
         sx={styles.input}

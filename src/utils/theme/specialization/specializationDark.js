@@ -67,5 +67,12 @@ export const specializationDark = {
       color: '#FFFFFF',
       icon: '#FFFFFF',
     },
+    inputSelectSpec: {
+      backgroundColor: '#252527',
+      color: '#C5C5C6',
+    },
+    inputList: {
+      backgroundColor: '#1D1D1D',
+    },
   },
 };

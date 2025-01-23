@@ -16,8 +16,8 @@ export const styles = {
     fontWeight: 400,
   },
   l: {
-    width: '152px',
-    height: '152px',
+    width: '132px',
+    height: '132px',
     fontSize: 48,
     lineHeight: '56px',
     letterSpacing: '0px',

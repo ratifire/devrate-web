@@ -1,7 +1,5 @@
 import { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
-import PersonalProfileTemplate from '../../../Templates/ProfileTemplates/PersonalProfileTemplate';
-import ProfileHeader from '../../../components/PageComponents/ProfileHeader';
 import {
   BaseUserInfoSkeleton,
   ExperienceSectionSkeleton,
@@ -23,7 +21,6 @@ const ExperienceSection = lazy(
   () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/ExperienceSection')
 );
 
-const MemoizedProfileHeader = memo(ProfileHeader);
 const MemoizedBaseUserInfo = memo(BaseUserInfo);
 const MemoizedSkillsSection = memo(SkillsSection);
 const MemoizedRightSection = memo(RightSection);
@@ -31,8 +28,7 @@ const MemoizedExperienceSection = memo(ExperienceSection);
 
 const PersonalProfilePage = () => {
   return (
-    <PersonalProfileTemplate>
-      <MemoizedProfileHeader />
+    <>
       <Container maxWidth='xl' sx={styles.container}>
         <Box sx={styles.contentWrapper}>
           <Paper sx={styles.baseUserInfo}>
@@ -57,7 +53,7 @@ const PersonalProfilePage = () => {
           </Paper>
         </Box>
       </Container>
-    </PersonalProfileTemplate>
+    </>
   );
 };
 
