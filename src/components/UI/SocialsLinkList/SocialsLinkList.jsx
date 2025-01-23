@@ -3,14 +3,14 @@ import { Link } from '@mui/material';
 import { useSelector } from 'react-redux';
 import darkIcons from '../../../utils/constants/RightSection/darkThemeIcons';
 import whiteIcons from '../../../utils/constants/RightSection/whiteThemeIcons';
-import { ensureProtocol } from '../../../utils/helpers/ensureProtocol';
+import { normalizeUrl } from '../../../utils/helpers/urlHelpers.js';
 import { DARK_THEME } from '../../../utils/constants/Theme/theme';
 import { SOCIAL_TYPES } from './SocialTypes';
 
 const handlers = {
   [SOCIAL_TYPES.EMAIL]: (value) => `mailto:${value}`,
   [SOCIAL_TYPES.PHONE_NUMBER]: (value) => `tel:${value}`,
-  default: (value) => ensureProtocol(value),
+  default: (value) => normalizeUrl(value),
 };
 
 const SocialsLinkList = ({ socials, componentStyles }) => {
