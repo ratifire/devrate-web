@@ -1,49 +1,42 @@
 import PropTypes from 'prop-types';
-import { Link } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import darkIcons from '../../../utils/constants/RightSection/darkThemeIcons';
-import whiteIcons from '../../../utils/constants/RightSection/whiteThemeIcons';
-import { normalizeUrl } from '../../../utils/helpers/urlHelpers.js';
-import { DARK_THEME } from '../../../utils/constants/Theme/theme';
-import { SOCIAL_TYPES } from './SocialTypes';
-
-const SocialsLinkList = ({ socials, componentStyles }) => {
+import { t } from 'i18next';
+import { lightIcons, darkIcons, getIconsByType } from '../../../utils/constants/ProfileContacts/';
+import { useGetUserContactsQuery } from '../../../redux/user/contacts/contactsApiSlice.js';
+import { selectCurrentUser } from '../../../redux/auth/authSlice.js';
+import { styles } from '../../PageComponents/ProfileComponents/PersonalProfile/RightSection/RightSection.styles.js';
+import { constructUrlByType } from '../../../utils/helpers/urlHelpers.js';
+const icons = { dark: darkIcons, light: lightIcons };
+const SocialsLinkList = ({ gap = 2, componentStyles }) => {
   const { mode } = useSelector((state) => state.theme);
-  const icons = mode === DARK_THEME ? darkIcons : whiteIcons;
+  const {
+    data: { id: userId },
+  } = useSelector(selectCurrentUser);
+  const { data: userContacts } = useGetUserContactsQuery(userId);
 
-  return socials ? (
-    <>
-      {socials.map((social, index) => {
-        const IconComponent = icons[social.type] || icons['DEFAULT'];
-        let href;
+  return (
+    <Box gap={gap} sx={styles.wrapperLink}>
+      {userContacts && userContacts.length ? (
+        userContacts.map(({ type, value, id }) => {
+          const IconComponent = getIconsByType(type, icons[mode]);
+          const href = constructUrlByType(type, value);
 
-        if (social.type === SOCIAL_TYPES.EMAIL) {
-          href = `mailto:${social.value}`;
-        } else if (social.type === SOCIAL_TYPES.PHONE_NUMBER) {
-          href = `tel:${social.value}`;
-        } else {
-          href = normalizeUrl(social.value);
-        }
-
-        return (
-          // eslint-disable-next-line react/no-array-index-key
-          <Link key={`${social.id}-${index}`} href={href} sx={componentStyles.link} target='_blank'>
-            <IconComponent />
-          </Link>
-        );
-      })}
-    </>
-  ) : null;
+          return (
+            <Link key={id} href={href} sx={componentStyles.link} target='_blank'>
+              <IconComponent />
+            </Link>
+          );
+        })
+      ) : (
+        <Typography variant='body1'>{t('profile.right.empty.emptyContacts')}</Typography>
+      )}
+    </Box>
+  );
 };
 
 SocialsLinkList.propTypes = {
-  socials: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      value: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-    })
-  ),
+  gap: PropTypes.number,
   componentStyles: PropTypes.object.isRequired,
 };
 
