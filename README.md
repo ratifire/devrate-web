@@ -90,3 +90,7 @@ To run the application locally, follow these steps:
 3. Navigate to the project directory.
 4. Run `npm install --legacy-peer-deps` to install dependencies.
 5. Run `npm dev` to start the development server.
+
+
+## development outer swagger link
+https://server.skillzzy.com/swagger-ui/index.html#/

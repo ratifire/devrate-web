@@ -1,0 +1,1 @@
+В випадку якщо ваш guard зручніше винести в хук, він повинен лежанти в router/sharedGuards/hooks/useExampleGuard.js
