@@ -1,13 +1,25 @@
-import { SOCIAL_TYPES } from '../../components/UI/SocialsLinkList/SocialTypes';
+export const linkTypes = Object.freeze({
+  EMAIL: 'EMAIL',
+  PHONE_NUMBER: 'PHONE_NUMBER',
+  TELEGRAM_LINK: 'TELEGRAM_LINK',
+  LINKEDIN_LINK: 'LINKEDIN_LINK',
+  GITHUB_LINK: 'GITHUB_LINK',
+  BEHANCE_LINK: 'BEHANCE_LINK',
+});
 
-const typeNameMap = {
-  [SOCIAL_TYPES.TELEGRAM_LINK]: 'telegram',
-  [SOCIAL_TYPES.EMAIL]: 'mail',
-  [SOCIAL_TYPES.LINKEDIN_LINK]: 'linkedIn',
-  [SOCIAL_TYPES.GITHUB_LINK]: 'gitHub',
-  [SOCIAL_TYPES.BEHANCE_LINK]: 'behance',
-  [SOCIAL_TYPES.PHONE_NUMBER]: 'phone',
-};
+export const urlPrefixes = Object.freeze({
+  [linkTypes.PHONE_NUMBER]: 'tel:',
+  [linkTypes.EMAIL]: 'mailto:',
+});
+
+const typeNameMap = Object.freeze({
+  [linkTypes.TELEGRAM_LINK]: 'telegram',
+  [linkTypes.EMAIL]: 'mail',
+  [linkTypes.LINKEDIN_LINK]: 'linkedIn',
+  [linkTypes.GITHUB_LINK]: 'gitHub',
+  [linkTypes.BEHANCE_LINK]: 'behance',
+  [linkTypes.PHONE_NUMBER]: 'phone',
+});
 
 export const normalizeUrl = (input) => {
   // 1. Ensure that "input" is a string
@@ -64,4 +76,18 @@ export const getDataStepContacts = (data) => {
   if (!Array.isArray(data)) return {};
 
   return Object.fromEntries(data.map((contact) => [typeNameMap[contact.type], contact.value]));
+};
+
+export const constructUrlByType = (type, href) => {
+  const [key, value] = Object.entries(linkTypes).find(([, value]) => value === type);
+
+  if (!linkTypes[key]) {
+    return normalizeUrl(href);
+  }
+
+  if (Object.keys(urlPrefixes).includes(type)) {
+    return urlPrefixes[value] + href;
+  }
+
+  return normalizeUrl(href);
 };
