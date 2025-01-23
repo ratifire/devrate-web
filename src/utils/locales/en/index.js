@@ -829,5 +829,12 @@ export const en = {
         },
       },
     },
+    interviews: {
+      navigationLinks: {
+        scheduled: 'Scheduled',
+        passed: 'Passed',
+        requests: 'Requests',
+      },
+    },
   },
 };
