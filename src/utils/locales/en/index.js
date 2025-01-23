@@ -493,6 +493,13 @@ export const en = {
           skill_long: 'Company too long',
           skill_short: 'Company too short',
         },
+        confirmSpecializationDelete: {
+          title: 'Remove specialization',
+          text1: 'Are you sure you want to delete the specialization',
+          text2: 'All data and statistics for this specialization will be lost.',
+          refuseBtnText: 'Cancel',
+          confirmBtnText: 'Delete',
+        },
       },
       language: {
         level: {
@@ -827,6 +834,13 @@ export const en = {
           success: 'Deleted successfully',
           error: 'Something went wrong',
         },
+      },
+    },
+    interviews: {
+      navigationLinks: {
+        scheduled: 'Scheduled',
+        passed: 'Passed',
+        requests: 'Requests',
       },
     },
   },

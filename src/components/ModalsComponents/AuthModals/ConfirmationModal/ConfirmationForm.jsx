@@ -75,6 +75,9 @@ const ConfirmationForm = ({
         event.preventDefault();
       }
     } else {
+      if (key === 'Enter' && index === fieldCount - 1) {
+        handleClick();
+      }
       event.preventDefault();
     }
   };
@@ -106,7 +109,8 @@ const ConfirmationForm = ({
   };
 
   const handleClick = () => {
-    handleSubmit();
+    // handleSubmit();
+    formik.handleSubmit();
     handleCode();
   };
 
