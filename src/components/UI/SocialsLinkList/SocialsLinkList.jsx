@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from '@mui/material';
 import { useSelector } from 'react-redux';
 import darkIcons from '../../../utils/constants/RightSection/darkThemeIcons';
-import whiteIcons from '../../../utils/constants/RightSection/whiteThemeIcons';
+import lightIcons from '../../../utils/constants/RightSection/lightThemeIcons.js';
 import { normalizeUrl } from '../../../utils/helpers/urlHelpers.js';
 import { DARK_THEME } from '../../../utils/constants/Theme/theme';
 import { SOCIAL_TYPES } from './SocialTypes';
@@ -15,7 +15,7 @@ const handlers = {
 
 const SocialsLinkList = ({ socials, componentStyles }) => {
   const { mode } = useSelector((state) => state.theme);
-  const icons = mode === DARK_THEME ? darkIcons : whiteIcons;
+  const icons = mode === DARK_THEME ? darkIcons : lightIcons;
 
   return socials ? (
     <>
