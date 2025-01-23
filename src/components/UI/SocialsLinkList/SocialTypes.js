@@ -1,3 +1,5 @@
+// Todo refactor this and put to constants
+
 export const SOCIAL_TYPES = {
   EMAIL: 'EMAIL',
   PHONE_NUMBER: 'PHONE_NUMBER',

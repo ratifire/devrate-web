@@ -4,9 +4,13 @@ export default {
   schedule: '/schedule',
   specializations: '/specializations',
   interviews: '/interviews',
+  scheduledInterviews: '/interviews/scheduled',
+  passedInterviews: '/interviews/passed',
+  interviewRequests: '/interviews/requests',
   settings: '/settings',
   bookmark: '/bookmark',
   faq: '/faq',
   privacy_policy: '/privacy_policy',
   terms_and_conditions: '/terms_and_conditions',
+  error_404: '/ErrorPage',
 };

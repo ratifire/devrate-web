@@ -3,7 +3,7 @@ import { decorators } from '../../../../../../.storybook/preview';
 import RightSection from './RightSection';
 
 export default {
-  title: 'ProfileComponents/RightSection',
+  title: 'ProfileComponents/ProfileContacts',
   component: RightSection,
   argTypes: {
     width: { control: 'text' },
