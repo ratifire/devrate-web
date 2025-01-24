@@ -161,7 +161,7 @@ const ChatForm = () => {
       // reconnectDelay: 5000, // Повторне підключення кожні 5 секунд у разі помилки
       onConnect: () => {
         setIsConnected(true);
-        newClient.subscribe('/queue/messages/8882', (message) => {
+        newClient.subscribe('/topic/messages/8882', (message) => {
           JSON.parse(message.body);
         });
       },
