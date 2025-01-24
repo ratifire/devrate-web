@@ -14,9 +14,9 @@ import {
   useUpdateInterviewRequestMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { getDatesInWeek } from '../../../../utils/helpers/dateHandlers.js';
+import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
-import { getUserUTC } from '../../../../utils/helpers/index.js';
+import { getUserUTC } from '../../../../utils/helpers';
 import { styles } from './ScheduleInterviewModal.styles';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
 import RenderTabs from './components/TabsRender';
