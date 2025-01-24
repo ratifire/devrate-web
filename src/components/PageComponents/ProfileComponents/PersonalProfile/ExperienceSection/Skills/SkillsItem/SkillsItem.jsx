@@ -2,7 +2,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useUpdateSkillsMutation } from '../../../../../../../redux/services/skillsApiSlice';
 import CustomTooltip from '../../../../../../UI/CustomTooltip';
@@ -16,8 +16,12 @@ const SkillsItem = ({ data, flex }) => {
   const [updateSkills] = useUpdateSkillsMutation();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    setHiddenSkill(hidden);
+  }, [data]);
+
   const handlerClick = async () => {
-    setHiddenSkill((prevState) => !prevState);
+    setHiddenSkill(!hiddenSkill);
     await updateSkills({ id, hide: !hidden }).unwrap();
     dispatch(refetchSkills());
   };

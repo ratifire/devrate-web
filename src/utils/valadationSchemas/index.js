@@ -10,6 +10,5 @@ export { ConfirmationSchema } from './ConfirmationSchema';
 export { EducationModalSchema } from './EducationModalSchema';
 export { LoginSchema } from './LoginSchema';
 export { RegistrationSchema } from './RegistrationSchema';
-export { SkillsItemSchema } from './SkillsItemSchema';
 export { FeedbackModalSchema } from './FeedbackModalSchema';
 export { FeedbackProjectModalSchema } from './FeedbackProjectModalSchema';

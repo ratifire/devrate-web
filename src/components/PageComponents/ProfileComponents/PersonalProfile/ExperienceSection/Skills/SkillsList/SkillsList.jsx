@@ -14,7 +14,6 @@ const SkillsList = ({ data, length }) => {
         : { flex: '0 1 calc(50% - 10px)' }
       : { flex: '0 1 100%' };
   const level = masteryLevel || 'N/A';
-
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.titleWrapper}>

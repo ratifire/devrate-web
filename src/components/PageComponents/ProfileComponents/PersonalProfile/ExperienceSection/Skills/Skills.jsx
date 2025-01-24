@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { selectCurrentUser } from '../../../../../../redux/auth/authSlice';
 import { addMount, resetRefetch } from '../../../../../../redux/updateTab/updateTabSlice.js';
@@ -17,7 +17,6 @@ const Skills = ({ tab }) => {
   const { data: user } = useSelector(selectCurrentUser);
 
   const { data: userAllSpecializations, isLoading, refetch } = useGetUserAllSpecializationQuery(user.id);
-
   useEffect(() => {
     if (shouldRefetch && hasMount) {
       refetch();
@@ -26,7 +25,7 @@ const Skills = ({ tab }) => {
     return () => {
       dispatch(addMount());
     };
-  }, [hasMount, refetch]);
+  }, []);
 
   if (isLoading || !userAllSpecializations || userAllSpecializations.length === 0) {
     return <EmptyExperienceTab imgUrl={emptyPersonalTabsPictures.emptySkillsPic} profileType='personal' tab={tab} />;
@@ -44,4 +43,4 @@ const Skills = ({ tab }) => {
 Skills.propTypes = {
   tab: PropTypes.string.isRequired,
 };
-export default memo(Skills);
+export default Skills;
