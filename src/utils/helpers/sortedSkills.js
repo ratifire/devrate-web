@@ -1,12 +1,10 @@
 export const sortedSkills = (skills, searchStr) => {
   if (typeof searchStr === 'string') {
-    searchStr = searchStr
-      .split(',')
-      .map((item) => item.trim())
-      .filter((item) => item.match(/[a-zA-Zа-яА-ЯіІїЇєЄґҐ0-9]/));
+    searchStr = searchStr.split(',').reduce((acc, item) => {
+      const trimmed = item.trim();
+      return trimmed.match(/[a-zA-Zа-яА-ЯіІїЇєЄґҐ0-9]/) ? [...acc, trimmed] : acc;
+    }, []);
   }
-
-  if (!Array.isArray(searchStr) || searchStr.length === 0) return [];
 
   return skills
     .filter((item) => searchStr.some((searchTerm) => item.name.toLowerCase().includes(searchTerm.toLowerCase())))
