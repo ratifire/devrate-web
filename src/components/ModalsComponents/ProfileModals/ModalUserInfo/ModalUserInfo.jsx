@@ -37,6 +37,16 @@ const steps = [
     title: 'profile.modal.userInfo.languages.title',
     component: () => <StepLanguage />,
   },
+  {
+    name: 'languages',
+    title: 'profile.modal.userInfo.languages.title',
+    component: () => <StepLanguage />,
+  },
+  {
+    name: 'languages',
+    title: 'profile.modal.userInfo.languages.title',
+    component: () => <StepLanguage />,
+  },
 ];
 
 const ModalUserInfo = () => {
