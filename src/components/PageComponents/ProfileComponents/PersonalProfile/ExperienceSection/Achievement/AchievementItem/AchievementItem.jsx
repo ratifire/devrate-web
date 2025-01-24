@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import AchievementEditModal from '../../../../../../ModalsComponents/ProfileModals/AchievementModal/AchievementEditModal';
+import { useDispatch } from 'react-redux';
 import { useDeleteAchievementMutation } from '../../../../../../../redux/services/achievementsApiSlice.js';
 import DropdownMenu from '../../DropdownMenu';
+import { openModal } from '../../../../../../../redux/modal/modalSlice.js';
+import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
 import styles from './AchievementItem.styles.js';
 
 const AchievementItem = ({ achievement, icon: IconComponent }) => {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteAchievement] = useDeleteAchievementMutation();
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
@@ -26,7 +28,16 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
 
   const handleEditFeature = () => {
     handleCloseMenu();
-    setIsModalOpen(true);
+    dispatch(
+      openModal({
+        modalType: modalNames.achievementEditModal,
+        data: {
+          id: achievement?.id,
+          summary: achievement?.summary,
+          description: achievement?.description,
+        },
+      })
+    );
   };
 
   const handleDeleteFeature = async () => {
@@ -68,7 +79,7 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
             <IconButton sx={styles.iconBtnModal} onClick={(event) => handleMenuOpen(event)}>
               <MoreVertIcon />
             </IconButton>
-          </Box>{' '}
+          </Box>
           <DropdownMenu
             anchorEl={anchorEl}
             handleCloseMenu={handleCloseMenu}
@@ -87,7 +98,6 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
           <Typography variant='body1'>{achievement.description}</Typography>
         </Box>
       </Box>
-      <AchievementEditModal achievement={achievement} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </Box>
   );
 };

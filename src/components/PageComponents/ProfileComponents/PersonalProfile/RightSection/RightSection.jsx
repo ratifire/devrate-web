@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import { openModal } from '../../../../../redux/modal/modalSlice';
 import { setStep } from '../../../../../redux/modal/modalStepSlice';
-import { useGetUserContactsQuery } from '../../../../../redux/user/contacts/contactsApiSlice';
 import { useGetLanguageUserQuery } from '../../../../../redux/user/language/languageApiSlice';
 import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import LanguagesList from '../../../../UI/LanguagesList';
 import SocialsLinkList from '../../../../UI/SocialsLinkList';
+import { modalNames } from '../../../../../utils/constants/modalNames.js';
 import { styles } from './RightSection.styles';
 
 const RightSection = () => {
@@ -17,17 +17,16 @@ const RightSection = () => {
   const currentUser = useSelector(selectCurrentUser);
   const languages = useGetLanguageUserQuery(currentUser.data.id);
   const dispatch = useDispatch();
-  const { data: userContacts } = useGetUserContactsQuery(currentUser.data.id);
   const { data: personalData } = useGetPersonalUserQuery(currentUser.data.id);
 
   const handleOpenInfo = () => {
     dispatch(setStep(1));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: modalNames.userInfoModal }));
   };
 
   const handleOpenLanguage = () => {
     dispatch(setStep(3));
-    dispatch(openModal({ modalName: 'openUserInfo' }));
+    dispatch(openModal({ modalType: modalNames.userInfoModal }));
   };
 
   return (
@@ -43,13 +42,7 @@ const RightSection = () => {
             </IconButton>
           </Box>
         </Box>
-        <Box gap={2} sx={styles.wrapperLink}>
-          {userContacts && userContacts.length > 0 ? (
-            <SocialsLinkList componentStyles={styles} socials={userContacts} />
-          ) : (
-            <Typography variant='body1'>{t('profile.right.empty.emptyContacts')}</Typography>
-          )}
-        </Box>
+        <SocialsLinkList componentStyles={styles} />
       </Box>
       <Box sx={styles.wrapperBox}>
         <Box sx={styles.box}>

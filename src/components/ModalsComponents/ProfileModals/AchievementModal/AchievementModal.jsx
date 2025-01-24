@@ -3,27 +3,21 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import ModalLayoutProfile from '../../../../layouts/ModalLayoutProfile';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import { useCreateAchievementMutation } from '../../../../redux/services/achievementsApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
-import { AchievementModalSchema } from '../../../../utils/valadationSchemas/index';
+import { AchievementModalSchema } from '../../../../utils/validationSchemas/index';
+import { closeModal } from '../../../../redux/modal/modalSlice.js';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './AchievementModal.styles';
 
 const AchievementModal = () => {
   const dispatch = useDispatch();
-  const openAchievement = useSelector((state) => state.modal.achievement);
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
   const [createAchievement, { isLoading }] = useCreateAchievementMutation();
   const { enqueueSnackbar } = useSnackbar();
-
-  const handleClose = () => {
-    formik.resetForm();
-    dispatch(closeModal({ modalName: 'achievement' }));
-  };
 
   const initialValues = {
     // link: '',
@@ -31,14 +25,15 @@ const AchievementModal = () => {
     description: '',
   };
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { resetForm }) => {
     try {
       await createAchievement({
         userId: id,
         payload: values,
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.achievement.create.success'), { variant: 'success' });
-      handleClose();
+      resetForm();
+      dispatch(closeModal({ modalType: modalNames.achievementModal }));
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.achievement.create.error'), { variant: 'error' });
@@ -56,7 +51,7 @@ const AchievementModal = () => {
   }
 
   return (
-    <ModalLayoutProfile open={openAchievement} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='subtitle1'>
         {t('modal.achievement.title')}
       </Typography>
@@ -102,7 +97,7 @@ const AchievementModal = () => {
           />
         </Box>
       </form>
-    </ModalLayoutProfile>
+    </>
   );
 };
 

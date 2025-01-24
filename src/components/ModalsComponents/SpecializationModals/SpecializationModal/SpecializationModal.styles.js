@@ -28,33 +28,37 @@ export const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     gridGap: theme.spacing(3),
+    color: theme.palette.specialization.inputSelectSpec.color,
     '& .base-Popper-root .MuiBox-root': {
       padding: `${theme.spacing(2)} 0 ${theme.spacing(2)} 0`,
     },
-    '& .base-Popper-root .MuiAutocomplete-listbox ': {
-      maxHeight: '250px',
-      marginRight: theme.spacing(2),
-      marginLeft: theme.spacing(2),
+    '& .MuiAutocomplete-listbox ': {
+      backgroundColor: theme.palette.specialization.inputList.backgroundColor,
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      borderRadius: '4px',
+      maxHeight: '200px',
+
       '&::-webkit-scrollbar': {
-        paddingRight: theme.spacing(2),
-        width: 10,
+        width: 0,
       },
-      '&::-webkit-scrollbar-track': {
-        backgroundColor: theme.palette.scroll.scrollWrapp.backgroundColor,
-        borderRadius: 8,
+      '& .MuiAutocomplete-option.Mui-focused': {
+        color: theme.palette.specialization.inputSelectSpec.color,
+        backgroundColor: 'transparent',
+
+        '&:hover': {
+          backgroundColor: theme.palette.specialization.inputSelectSpec.backgroundColor,
+        },
       },
-      '&::-webkit-scrollbar-thumb': {
-        borderRadius: 6,
-        backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
+      '& .MuiAutocomplete-option': {
+        backgroundColor: theme.palette.specialization.inputList.backgroundColor,
+      },
+      '& .MuiAutocomplete-option[aria-selected="true"]': {
+        backgroundColor: `${theme.palette.specialization.inputSelectSpec.backgroundColor} !important`,
       },
     },
     '& .base-Popper-root .MuiBox-root .MuiAutocomplete-option.Mui-focused': {
       backgroundColor: 'transparent',
       marginRight: theme.spacing(2),
-      '&:hover': {
-        backgroundColor: theme.palette.specialization.inputAddSpec.backgroundColor,
-        color: theme.palette.specialization.inputAddSpec.color,
-      },
     },
   }),
 

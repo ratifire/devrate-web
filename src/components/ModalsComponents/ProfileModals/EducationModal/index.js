@@ -1,3 +1,4 @@
 import EducationModal from './EducationModal';
+import EducationEditModal from './EducationEditModal';
 
-export default EducationModal;
+export { EducationModal, EducationEditModal };

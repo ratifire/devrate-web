@@ -1,5 +1,6 @@
+import './styles/scss/homePage.scss';
 import { memo } from 'react';
-import { HomeTemplate } from '../../Templates';
+import ModalComponent from '../../components/ModalsComponents/ModalComponent.jsx';
 import { AboutUsSection, FaqSection, Footer, HowItWorksSection } from './../HomePage/sections';
 import './styles/reset.css';
 import './styles/index.css';
@@ -16,14 +17,15 @@ const MemoizedFooter = memo(Footer);
 
 const HomePage = () => {
   return (
-    <HomeTemplate>
+    <>
       <MemoizedHeader />
       <MemoizedHeroSection />
       <MemoizedHowItWorksSection />
       <MemoizedAboutSection />
       <MemoizedFqaSection />
       <MemoizedFooter />
-    </HomeTemplate>
+      <ModalComponent />
+    </>
   );
 };
 
