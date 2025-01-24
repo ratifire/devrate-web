@@ -79,6 +79,7 @@ const ConfirmationModal = () => {
         buttonLabel={t('modal.confirmation.btn_confirm')}
         formik={formik}
         handleCodeChange={handleCodeChange}
+        handleSubmit={formik.handleSubmit}
         helperTextContent={codeError}
         inputRefs={inputRefs}
       />

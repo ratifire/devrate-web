@@ -14,9 +14,9 @@ import {
   useUpdateInterviewRequestMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
+import { getDatesInWeek } from '../../../../utils/helpers/dateHandlers.js';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
-import { getUserUTC } from '../../../../utils/helpers';
+import { getUserUTC } from '../../../../utils/helpers/index.js';
 import { styles } from './ScheduleInterviewModal.styles';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
 import RenderTabs from './components/TabsRender';
@@ -30,7 +30,6 @@ const ScheduleInterviewModal = () => {
   const [checked, setChecked] = useState([]);
   const { masteryId, userId } = useGetMastery();
   const { enqueueSnackbar } = useSnackbar();
-
   const shouldUpdate = useRef(false);
 
   const { data: currentDates } = useGetInterviewRequestQuery(

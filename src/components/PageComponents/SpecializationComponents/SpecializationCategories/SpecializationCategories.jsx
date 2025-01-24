@@ -9,7 +9,6 @@ import { useSnackbar } from 'notistack';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 import {
-  useDeleteSpecializationByIdMutation,
   useGetSpecializationByUserIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
@@ -20,7 +19,7 @@ import CustomTooltip from '../../../UI/CustomTooltip';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
 import { CategoriesSkeleton } from '../../../UI/Skeleton';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { modalNames } from '../../../../utils/constants/modalNames';
 import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
@@ -29,7 +28,7 @@ const SpecializationCategories = () => {
   const [anchorEl, setAnchorEl] = useState({});
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useSelector((state) => state.auth.user.data);
-  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
+  const { activeSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
 
   const {
@@ -43,16 +42,9 @@ const SpecializationCategories = () => {
     updateSpecializationAsMainById,
     { isLoading: isLoadingUpdateSpecialization, isError: isErrorUpdateSpecialization },
   ] = useUpdateSpecializationAsMainByIdMutation();
-  const [deleteSpecialization, { isLoading: isLoadingDeleteSpecialization, isErrorDeleteSpecialization }] =
-    useDeleteSpecializationByIdMutation();
 
-  const isLoading =
-    isFetchingGetSpecialization ||
-    isLoadingGetMainMastery ||
-    isLoadingUpdateSpecialization ||
-    isLoadingDeleteSpecialization;
-  const isError =
-    isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization || isErrorDeleteSpecialization;
+  const isLoading = isFetchingGetSpecialization || isLoadingGetMainMastery || isLoadingUpdateSpecialization;
+  const isError = isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization;
   const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
 
   useEffect(() => {
@@ -103,33 +95,10 @@ const SpecializationCategories = () => {
       enqueueSnackbar(t('modalNotifyText.specialization.change.error'), { variant: 'error' });
     }
   };
-  const handlerDeleteSpecialization = async (id) => {
-    const findMainSpecialization = specializations.find((spec) => spec.main);
 
-    try {
-      await deleteSpecialization(id).unwrap();
-      enqueueSnackbar(t('modalNotifyText.specialization.delete.success', { name: activeSpecialization.name }), {
-        variant: 'success',
-        anchorOrigin: {
-          vertical: 'bottom',
-          horizontal: 'right',
-        },
-      });
-      dispatch(setActiveSpecialization(null));
-
-      if (findMainSpecialization?.id === id) {
-        dispatch(setActiveSpecialization(null));
-        dispatch(setMainSpecializations(null));
-      } else {
-        dispatch(setActiveSpecialization(mainSpecialization));
-      }
-    } catch (err) {
-      if (err.status === 409) {
-        enqueueSnackbar(t('specialization.errorDeleteSpec'), { variant: 'error' });
-      }
-    } finally {
-      handleCloseMenu(id);
-    }
+  const handleOpenConfirmDeleteSpecializationModal = (id, specialization) => {
+    dispatch(openModal({ modalType: modalNames.confirmDeleteSpecialization, data: { id, specialization } }));
+    handleCloseMenu(id);
   };
 
   const handleCloseMenu = (id) => {
@@ -217,7 +186,7 @@ const SpecializationCategories = () => {
               <DropdownMenu
                 anchorEl={anchorEl[id]}
                 handleCloseMenu={() => handleCloseMenu(id)}
-                handleDeleteFeature={() => handlerDeleteSpecialization(id)}
+                handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
                 handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
               />
             </Box>

@@ -14,7 +14,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useUpdateWorkExperienceByIdMutation } from '../../../../redux/services/workExperienceApiSlice.js';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
-import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
+import { generateYearsArray } from '../../../../utils/helpers/dateHandlers.js';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './WorkExperienceModal.styles';
 

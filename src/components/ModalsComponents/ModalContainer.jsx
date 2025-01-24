@@ -17,6 +17,7 @@ import {
   HardSkillsModal,
   ScheduleInterviewModal,
   SoftSkillsModal,
+  ConfirmDeleteSpecializationModal,
 } from './SpecializationModals';
 import { FeedbackInterviewModal } from './FeedbackModal/FeedbackInterviewModal';
 
@@ -40,6 +41,7 @@ const modalEnum = {
   [modalNames.checkEmailModal]: CheckEmail,
   [modalNames.resetPasswordModal]: ResetPassword,
   [modalNames.confirmationModal]: ConfirmationModal,
+  [modalNames.confirmDeleteSpecialization]: ConfirmDeleteSpecializationModal,
 };
 
 const ModalContainer = ({ modalType }) => {

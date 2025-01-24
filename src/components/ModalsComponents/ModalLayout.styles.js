@@ -13,6 +13,9 @@ export const styles = {
     width: '100%',
     maxWidth: '732px',
   }),
+  confirmDeleteModalWrapper: {
+    maxWidth: '431px',
+  },
   btnIcon: (theme) => ({
     position: 'absolute',
     top: '24px',

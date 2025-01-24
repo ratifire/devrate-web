@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, IconButton, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useSearchParams } from 'react-router';
-import { selectModalData } from '../../../../redux/modal/modalSlice.js';
 import { styles } from './ModalUserInfo.styles';
 import StepPersonal from './StepPersonal';
 import StepContacts from './StepContacts';
@@ -14,82 +12,53 @@ import StepLanguage from './StepLanguage';
 import CustomStepIcon from './StepIconComponent';
 
 const steps = [
-  {
-    name: 'personal',
-    title: 'profile.modal.userInfo.personal.title',
-    component: () => <StepPersonal />,
-  },
-
-  {
-    name: 'contact',
-    title: 'profile.modal.userInfo.contact.title',
-    component: () => <StepContacts />,
-  },
-
-  {
-    name: 'photo',
-    title: 'profile.modal.userInfo.photo.title',
-    component: () => <StepAvatar />,
-  },
-
-  {
-    name: 'languages',
-    title: 'profile.modal.userInfo.languages.title',
-    component: () => <StepLanguage />,
-  },
+  'profile.modal.userInfo.personal.title',
+  'profile.modal.userInfo.contact.title',
+  'profile.modal.userInfo.photo.title',
+  'profile.modal.userInfo.languages.title',
 ];
 
 const ModalUserInfo = () => {
-  const openUserInfo = selectModalData;
   const step = useSelector((state) => state.modalStep.step);
   const { t } = useTranslation();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [activeStep, setActiveStep] = useState(step);
 
+  const title = steps.find((title, index) => index === activeStep);
+
   const handleNext = () => {
-    setActiveStep((nextActiveStep) => {
-      const updatedStep = nextActiveStep + 1;
-      searchParams.set('step', updatedStep);
-      setSearchParams(searchParams);
-      return updatedStep;
-    });
+    setActiveStep((nextActiveStep) => nextActiveStep + 1);
   };
 
   const handlePrev = () => {
-    setActiveStep((prevActiveStep) => {
-      const updatedStep = prevActiveStep - 1;
-      searchParams.set('step', updatedStep);
-      setSearchParams(searchParams);
-      return updatedStep;
-    });
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  useEffect(() => {
-    if (openUserInfo) {
-      searchParams.delete('tab');
-      searchParams.set('modal', 'userInfo');
-      searchParams.set('step', activeStep);
-      setSearchParams(searchParams);
-    } else {
-      setSearchParams(searchParams);
-    }
-  }, [openUserInfo, activeStep, searchParams, setSearchParams]);
-
   const getStepContent = (stepIndex) => {
-    return steps[stepIndex].component();
+    switch (stepIndex) {
+      case 0:
+        return <StepPersonal />;
+      case 1:
+        return <StepContacts />;
+      case 2:
+        return <StepAvatar />;
+      case 3:
+        return <StepLanguage />;
+    }
   };
   return (
     <>
       <Box sx={styles.wrapper}>
-        <Stepper activeStep={activeStep} connector={<StepConnector />} sx={styles.stepBorder}>
-          {steps.map(({ title }) => (
-            <Step key={title} sx={styles.step}>
+        <Typography key={activeStep} sx={styles.title} variant={'h6'}>
+          {t(title)}
+        </Typography>
+
+        <Stepper alternativeLabel activeStep={activeStep} connector={<StepConnector />} sx={styles.stepBorder}>
+          {steps.map((label) => (
+            <Step key={label} sx={styles.step}>
               <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label} />
-              {steps[activeStep] === title && (
-                <Typography sx={styles.title} variant='subtitle1'>
-                  {t(title)}
-                </Typography>
-              )}
+              <Typography textAlign={'center'} variant='subtitle2'>
+                {t(label)}
+              </Typography>
             </Step>
           ))}
         </Stepper>

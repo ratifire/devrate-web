@@ -9,7 +9,16 @@ import FaqPage from '../pages/FaqPage';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import RootPage from '../pages/RootPage';
-import UserProfileGurard from './guards/UserProfileGurard.jsx';
+import {
+  InterviewRootPage,
+  ScheduledInterviewsPage,
+  PassedInterviewsPage,
+  InterviewRequestsPage,
+  SingleScheduledInterviewPage,
+  SinglePassedInterviewPage,
+  SingleRequestInterviewPage,
+} from '../pages/InterviewPages';
+import UserProfileGuard from './guards/UserProfileGuard.jsx';
 import navigationLinks from './links';
 
 const router = createBrowserRouter([
@@ -41,7 +50,7 @@ const router = createBrowserRouter([
               },
               {
                 path: `${navigationLinks.profile}/:userId`,
-                element: <UserProfileGurard />,
+                element: <UserProfileGuard />,
               },
               {
                 path: navigationLinks.schedule,
@@ -50,6 +59,40 @@ const router = createBrowserRouter([
               {
                 path: navigationLinks.specializations,
                 element: <SpecializationPage />,
+              },
+              {
+                path: navigationLinks.interviews,
+                element: <InterviewRootPage />,
+                children: [
+                  {
+                    index: true,
+                    element: <ScheduledInterviewsPage />,
+                  },
+                  {
+                    path: navigationLinks.scheduledInterviews,
+                    element: <ScheduledInterviewsPage />,
+                  },
+                  {
+                    path: navigationLinks.passedInterviews,
+                    element: <PassedInterviewsPage />,
+                  },
+                  {
+                    path: navigationLinks.interviewRequests,
+                    element: <InterviewRequestsPage />,
+                  },
+                  {
+                    path: `${navigationLinks.scheduledInterviews}/:interviewId`,
+                    element: <SingleScheduledInterviewPage />,
+                  },
+                  {
+                    path: `${navigationLinks.passedInterviews}/:interviewId`,
+                    element: <SinglePassedInterviewPage />,
+                  },
+                  {
+                    path: `${navigationLinks.interviewRequests}/:requestId`,
+                    element: <SingleRequestInterviewPage />,
+                  },
+                ],
               },
               {
                 path: navigationLinks.faq,

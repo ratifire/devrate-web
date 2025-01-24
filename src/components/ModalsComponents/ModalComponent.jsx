@@ -3,6 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router';
 import { closeModal } from '../../redux/modal/modalSlice.js';
+import { modalNames } from '../../utils/constants/modalNames.js';
 import { styles } from './ModalLayout.styles.js';
 import ModalContainer from './ModalContainer.jsx';
 
@@ -16,6 +17,8 @@ const ModalComponent = () => {
     setSearchParams('');
   };
 
+  const isConfirmDeleteModal = modalType === modalNames.confirmDeleteSpecialization;
+
   return (
     <Modal
       closeAfterTransition
@@ -26,7 +29,7 @@ const ModalComponent = () => {
       onClose={handleClose}
     >
       <Zoom in={isOpen}>
-        <Box sx={styles.wrapper}>
+        <Box style={isConfirmDeleteModal && styles.confirmDeleteModalWrapper} sx={styles.wrapper}>
           <IconButton aria-label='Close modal' sx={styles.btnIcon} type='button' onClick={handleClose}>
             <CloseIcon />
           </IconButton>
