@@ -12,9 +12,7 @@ const InterviewSideBar = ({ data }) => {
         {t('interviews.sideBar.title')}
       </Typography>
       <Box sx={styles.scrollContainer}>
-        <Box sx={styles.sidebarSection}>
-          {data.length > 0 && data.map((event) => <InterviewSideBarEvent key={event.id} event={event} />)}
-        </Box>
+        {data.length > 0 && data.map((event) => <InterviewSideBarEvent key={event.id} event={event} />)}
       </Box>
     </Box>
   );

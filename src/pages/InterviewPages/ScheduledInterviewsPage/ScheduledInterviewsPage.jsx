@@ -31,6 +31,15 @@ const data = [
     hostId: '8881',
     host: 'Masha Okoli',
   },
+  {
+    eventTypeId: 4,
+    eventTitle: 'Full Suck Developer',
+    level: 'Middle',
+    date: '15/12/2024 09:00',
+    role: 'Інтерв’ювер',
+    hostId: '8881',
+    host: 'Masha Okoli',
+  },
 ];
 
 const SideBar = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar'));

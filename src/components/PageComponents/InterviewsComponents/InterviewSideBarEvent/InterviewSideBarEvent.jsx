@@ -2,6 +2,7 @@ import { Link as RouterLink } from 'react-router';
 import PropTypes from 'prop-types';
 import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import getLevelColor from '../../../../utils/helpers/getLevelColor.js';
 import { styles } from './InterviewSideBarEvent.styles';
 
 const InterviewSideBarEvent = ({ event }) => {
@@ -10,24 +11,24 @@ const InterviewSideBarEvent = ({ event }) => {
 
   return (
     <Paper key={eventTypeId} sx={styles.sideBarEventContainer}>
-      <Box sx={styles.titleDateTimeBox}>
+      <Box sx={styles.titleLevelBox}>
         <Typography component='div' sx={styles.title} variant='h6'>
           {eventTitle}
         </Typography>
-        <Typography component='div' sx={styles.dateAndTime} variant='body2'>
+        <Typography component='div' sx={{ color: getLevelColor(level) }} variant='subtitle2'>
           {level}
         </Typography>
       </Box>
-      <Typography component='div' sx={styles.hostTitle} variant='caption3'>
+      <Typography component='div' sx={styles.eventDate} variant='body2'>
         {date}
       </Typography>
-      <Typography component='div' sx={styles.participant} variant='body2'>
-        {t('schedule.participant')}: {role}
+      <Typography component='div' sx={styles.role} variant='body2'>
+        {t('interviews.sideBar.event.role')}: {role}
       </Typography>
       <Typography component='div' sx={styles.host} variant='body2'>
-        {t('schedule.host')}:{' '}
+        {t('interviews.sideBar.event.host')}:{' '}
         <Link component={RouterLink} sx={styles.host_link} to={`/profile/${hostId}`}>
-          {name} {host}
+          {host}
         </Link>
       </Typography>
     </Paper>

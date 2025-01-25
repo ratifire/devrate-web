@@ -687,6 +687,10 @@ export const uk = {
       },
       sideBar: {
         title: 'Інтерв’ю',
+        event: {
+          role: 'Роль',
+          host: 'Хост',
+        },
       },
     },
   },

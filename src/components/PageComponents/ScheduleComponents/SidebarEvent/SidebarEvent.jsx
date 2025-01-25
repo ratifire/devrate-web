@@ -58,7 +58,7 @@ const SidebarEvent = ({ event }) => {
         </Link>
       </Typography>
       <Typography component='div' sx={styles.participant} variant='body2'>
-        {t('schedule.participant')}:{' '}
+        {t('schedule.role')}:{' '}
         <Link component={RouterLink} sx={styles.participant_link} to={`/profile/${participantDtos[0].id}`}>
           {participantDtos[0].name} {participantDtos[0].surname}
         </Link>
