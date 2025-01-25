@@ -1,6 +1,6 @@
 export const styles = {
   container: (theme) => ({
-    paddingY: theme.spacing(4),
+    paddingY: theme.spacing(3),
     paddingX: theme.spacing(2),
     '@media (min-width: 1272px)': {
       maxWidth: '1536px',
