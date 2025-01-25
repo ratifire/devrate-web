@@ -23,6 +23,13 @@ export const styles = {
     letterSpacing: '0px',
     fontWeight: 400,
   },
+  xs: {
+    width: '24px',
+    height: '24px',
+    fontSize: 12,
+    fontWeight: 400,
+    letterSpacing: '0.15px',
+  },
   circle: {
     borderRadius: 50,
   },

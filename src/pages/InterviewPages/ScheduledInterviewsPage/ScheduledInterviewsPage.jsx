@@ -1,5 +1,7 @@
+import ScheduledMeeting from '../../../components/PageComponents/InterviewSummary/ScheduledMeeting';
+
 const ScheduledInterviewsPage = () => {
-  return <div>Here you can see the scheduled interviews page.</div>;
+  return <ScheduledMeeting />;
 };
 
 export default ScheduledInterviewsPage;
