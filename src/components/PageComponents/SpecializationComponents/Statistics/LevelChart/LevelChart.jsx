@@ -35,6 +35,10 @@ const LevelChart = () => {
               grad2={grad2}
               grad3={grad3}
               grad4={grad4}
+              offset1='0.04%'
+              offset2='26.65%'
+              offset3='57.07%'
+              offset4='90.86%'
               text={({ value }) => `${value}%`}
               value={averageMark}
             />
