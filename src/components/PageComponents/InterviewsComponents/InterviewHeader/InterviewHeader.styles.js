@@ -6,7 +6,6 @@ const styles = {
     alignItems: 'center',
     paddingY: '24px',
     paddingX: theme.spacing(3),
-    marginBottom: theme.spacing(5),
     width: '100%',
     backgroundImage: 'none',
     backgroundColor: theme.palette.interviewPage.bgColor,

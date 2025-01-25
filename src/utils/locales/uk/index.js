@@ -685,6 +685,9 @@ export const uk = {
         passed: 'Пройдені',
         requests: 'Запити',
       },
+      sideBar: {
+        title: 'Інтерв’ю',
+      },
     },
   },
 };

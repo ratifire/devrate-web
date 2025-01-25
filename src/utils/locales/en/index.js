@@ -842,6 +842,9 @@ export const en = {
         passed: 'Passed',
         requests: 'Requests',
       },
+      sideBar: {
+        title: 'Interview',
+      },
     },
   },
 };
