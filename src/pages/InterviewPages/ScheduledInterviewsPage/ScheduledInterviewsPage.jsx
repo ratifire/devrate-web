@@ -1,6 +1,6 @@
 import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense } from 'react';
-import { SkillsSkeleton } from '../../../components/UI/Skeleton/index.js';
+import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton/index.js';
 import { styles } from './ScheduledInterviewsPage.styles.js';
 
 const data = [
@@ -42,7 +42,7 @@ const ScheduledInterviewsPage = () => {
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
         <Paper sx={styles.interviewSideBar}>
-          <Suspense fallback={<SkillsSkeleton />}>
+          <Suspense fallback={<InterviewsSkeleton />}>
             <MemoizedSideBar data={data} />
           </Suspense>
         </Paper>
