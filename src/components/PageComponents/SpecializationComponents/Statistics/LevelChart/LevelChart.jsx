@@ -31,14 +31,14 @@ const LevelChart = () => {
         <Box sx={{ position: 'relative' }}>
           <Box sx={styles.chartWrapper}>
             <LevelGauge
-              grad1={grad1}
-              grad2={grad2}
-              grad3={grad3}
-              grad4={grad4}
-              offset1='0.04%'
-              offset2='26.65%'
-              offset3='57.07%'
-              offset4='90.86%'
+              gradient={
+                <linearGradient id='gradient' x1='0%' x2='100%' y1='0%' y2='0%'>
+                  <stop offset='0.04%' style={{ stopColor: grad1, stopOpacity: 1 }} />
+                  <stop offset='26.65%' style={{ stopColor: grad2, stopOpacity: 1 }} />
+                  <stop offset='57.07%' style={{ stopColor: grad3, stopOpacity: 1 }} />
+                  <stop offset='90.86%' style={{ stopColor: grad4, stopOpacity: 1 }} />
+                </linearGradient>
+              }
               text={({ value }) => `${value}%`}
               value={averageMark}
             />
