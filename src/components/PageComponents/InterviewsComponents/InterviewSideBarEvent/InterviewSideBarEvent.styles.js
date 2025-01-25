@@ -6,6 +6,11 @@ export const styles = {
     paddingRight: theme.spacing(3),
     marginBottom: theme.spacing(3),
   }),
+  status: (theme) => ({
+    display: 'flex',
+    alignItems: 'center',
+    color: theme.palette.text.secondary,
+  }),
   title: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.titleColor,
     '&::first-letter': {
@@ -37,5 +42,10 @@ export const styles = {
     '&:hover': {
       color: theme.palette.primary[300],
     },
+  }),
+  ellipse: (theme) => ({
+    marginRight: theme.spacing(2),
+    width: '14px',
+    height: '14px',
   }),
 };

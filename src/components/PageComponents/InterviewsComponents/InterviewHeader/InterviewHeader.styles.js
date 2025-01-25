@@ -89,7 +89,7 @@ const styles = {
       backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
     },
   }),
-  greenEllipce: {
+  greenEllipse: {
     marginRight: '8px',
     marginLeft: '8px',
     width: '13px',

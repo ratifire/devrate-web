@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import getLevelColor from '../../../../utils/helpers/getLevelColor.js';
+import LimeCircleIcon from '../../../../assets/icons/InterviewPageIcons/lime-ellipse.svg';
+// import OrangeCircleIcon from '../../../../assets/icons/InterviewPageIcons/orange-ellipse.svg';
 import { styles } from './InterviewSideBarEvent.styles';
 
 const InterviewSideBarEvent = ({ event }) => {
@@ -11,6 +13,13 @@ const InterviewSideBarEvent = ({ event }) => {
 
   return (
     <Paper key={eventTypeId} sx={styles.sideBarEventContainer}>
+      <Typography component='div' sx={styles.status} variant='subtitle2'>
+        {/*//TODO need to implement logic that would render needed part based on date and time*/}
+        <Box alt='Circle' component='img' src={LimeCircleIcon} sx={styles.ellipse} />{' '}
+        {t('interviews.sideBar.event.statusInProcess')}
+        {/*<Box alt='Circle' component='img' src={OrangeCircleIcon} sx={styles.ellipse} />{' '}*/}
+        {/*{t('interviews.sideBar.event.statusAwaitingFeedback')}*/}
+      </Typography>
       <Box sx={styles.titleLevelBox}>
         <Typography component='div' sx={styles.title} variant='h6'>
           {eventTitle}

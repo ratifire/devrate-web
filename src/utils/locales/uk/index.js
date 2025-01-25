@@ -690,6 +690,8 @@ export const uk = {
         event: {
           role: 'Роль',
           host: 'Хост',
+          statusInProcess: 'В процесі',
+          statusAwaitingFeedback: 'Очікується фітбек',
         },
       },
     },

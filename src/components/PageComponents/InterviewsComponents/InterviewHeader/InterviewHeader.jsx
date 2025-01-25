@@ -53,7 +53,7 @@ const InterviewHeader = () => {
     <AppBar component='header' position={'static'} sx={styles.interviewHeader}>
       <Box sx={styles.interviewNavLinksBox}>
         <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.scheduledInterviews}>
-          <Box alt='Circle' component='img' src={CircleIcon} sx={styles.greenEllipce} />{' '}
+          <Box alt='Circle' component='img' src={CircleIcon} sx={styles.greenEllipse} />{' '}
           {t('interviews.navigationLinks.scheduled')}
         </Box>
         <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.passedInterviews}>

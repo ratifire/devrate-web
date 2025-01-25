@@ -847,6 +847,8 @@ export const en = {
         event: {
           role: 'Role',
           host: 'Host',
+          statusInProcess: 'In Process',
+          statusAwaitingFeedback: 'Awaiting Feedback',
         },
       },
     },
