@@ -8,4 +8,8 @@ export const interviewLight = {
     awaiting: '#FCA728',
     link: '#CEB0FA',
   },
+  interviewSkills: {
+    leftCircle: '#8133F1',
+    rightCircle: '#FCA728',
+  },
 };

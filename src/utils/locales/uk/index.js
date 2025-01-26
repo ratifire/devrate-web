@@ -685,6 +685,8 @@ export const uk = {
         passed: 'Пройдені',
         requests: 'Запити',
       },
+    },
+    interviewsSummary: {
       scheduledMeeting: {
         title: 'Запланована зустріч',
         participants: 'Учасники',
@@ -698,6 +700,9 @@ export const uk = {
         joinMeeting: 'Доєднатись до інтерв’ю',
         notHappenedMeeting: 'Співбесіда не відбулася',
         leaveFeedbackMeeting: 'Залишити відгук',
+      },
+      interviewSkills: {
+        skills: 'Навички',
       },
     },
   },

@@ -842,6 +842,8 @@ export const en = {
         passed: 'Passed',
         requests: 'Requests',
       },
+    },
+    interviewsSummary: {
       scheduledMeeting: {
         title: 'Scheduled Meeting',
         participants: 'Participants',
@@ -854,6 +856,9 @@ export const en = {
         notHappenedMeeting: 'Interview did not happen',
         leaveFeedbackMeeting: 'Leave Feedback',
       },
+    },
+    interviewSkills: {
+      skills: 'Skills',
     },
   },
 };

@@ -2,6 +2,7 @@ import ScheduledMeeting from '../../../components/PageComponents/InterviewSummar
 
 const ScheduledInterviewsPage = () => {
   return <ScheduledMeeting />;
+  // return <InterviewSkills />;
 };
 
 export default ScheduledInterviewsPage;
