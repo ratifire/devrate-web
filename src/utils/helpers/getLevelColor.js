@@ -5,7 +5,7 @@ const getLevelColor = (level) => {
     case 'Middle':
       return '#16FFB9';
     case 'Senior':
-      return '#FF0000'; //TODO adjust before commit per design reply
+      return '#DAFE22';
     default:
       return 'inherit';
   }

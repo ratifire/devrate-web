@@ -1,5 +1,11 @@
+import { useParams } from 'react-router';
+import { useGetScheduledInterviewByIdQuery } from '../../../redux/interviews/scheduledInterviewsApiSlice.js';
+
 const SinglePassedInterviewPage = () => {
-  return <div>Сторінка списку сінгл пройденого інтервью - /interviews/passed/inteviewId</div>;
+  const { interviewId } = useParams();
+  const { data } = useGetScheduledInterviewByIdQuery({ interviewId });
+
+  return <div>Сторінка списку сінгл пройденого інтервʼю - /interviews/passed/inteviewId {data}</div>;
 };
 
 export default SinglePassedInterviewPage;
