@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, IconButton, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useSearchParams } from 'react-router';
-import { selectModalData } from '../../../../redux/modal/modalSlice.js';
 import { styles } from './ModalUserInfo.styles';
 import StepPersonal from './StepPersonal';
 import StepContacts from './StepContacts';
@@ -40,10 +38,8 @@ const steps = [
 ];
 
 const ModalUserInfo = () => {
-  const openUserInfo = selectModalData;
   const step = useSelector((state) => state.modalStep.step);
   const { t } = useTranslation();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [activeStep, setActiveStep] = useState(step);
 
   const title = steps.find((title, index) => index === activeStep);
@@ -51,8 +47,6 @@ const ModalUserInfo = () => {
   const handleNext = () => {
     setActiveStep((nextActiveStep) => {
       const updatedStep = nextActiveStep + 1;
-      searchParams.set('step', updatedStep);
-      setSearchParams(searchParams);
       return updatedStep;
     });
   };
@@ -60,22 +54,9 @@ const ModalUserInfo = () => {
   const handlePrev = () => {
     setActiveStep((prevActiveStep) => {
       const updatedStep = prevActiveStep - 1;
-      searchParams.set('step', updatedStep);
-      setSearchParams(searchParams);
       return updatedStep;
     });
   };
-
-  useEffect(() => {
-    if (openUserInfo) {
-      searchParams.delete('tab');
-      searchParams.set('modal', 'userInfo');
-      searchParams.set('step', activeStep);
-      setSearchParams(searchParams);
-    } else {
-      setSearchParams(searchParams);
-    }
-  }, [openUserInfo, activeStep, searchParams, setSearchParams]);
 
   const getStepContent = (stepIndex) => {
     return steps[stepIndex].component();

@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { Box, IconButton, Tab, Tabs } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Add } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router';
-import { openModal } from '../../../../../redux/modal/modalSlice';
+// import { openModal } from '../../../../../redux/modal/modalSlice';
+import { useModalQueryParams } from '../../../../../utils/hooks/useModalQueryParams.js';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
 import Skills from './Skills';
@@ -14,7 +16,7 @@ import WorkExperience from './WorkExperience/WorkExperience';
 const ExperienceSection = () => {
   const { t } = useTranslation();
   const buttonStates = useSelector((state) => state.button);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [value, setValue] = useState('workExperience');
   const [searchParams, setSearchParams] = useSearchParams();
   const handleChange = (event, newValue) => {
@@ -22,19 +24,17 @@ const ExperienceSection = () => {
     setSearchParams({ tab: newValue });
   };
 
-  const handleAddFeature = (modal) => {
-    dispatch(openModal({ modalType: modal }));
+  const { openModal } = useModalQueryParams();
+
+  const handleAddFeature = (modalType) => {
+    // dispatch(openModal({ modalType: modal }));
+    openModal(modalType);
   };
 
   useEffect(() => {
     const tab = searchParams.get('tab');
-    const modal = searchParams.get('modal');
 
     setValue(tab ? tab : 'workExperience');
-
-    if (modal && modal === tab) {
-      dispatch(openModal({ modalName: modal }));
-    }
   }, []);
 
   const tab = {
