@@ -1,13 +1,20 @@
 import * as Yup from 'yup';
 
+const isStartYearBeforeEndYear = (startYear, endYear) => {
+  if (startYear && endYear) {
+    return startYear.getTime() <= endYear.getTime();
+  }
+  return true;
+};
+
 export const EducationModalSchema = Yup.object().shape({
   type: Yup.string()
     .min(2, 'profile.modal.education.speciality_short')
     .max(50, 'profile.modal.education.speciality_long')
     .required('profile.modal.education.required'),
   name: Yup.string()
-    .min(2, 'profile.modal.education.edIstitution_short')
-    .max(100, 'profile.modal.education.edIstitution_long')
+    .min(2, 'profile.modal.education.edInstitution_short')
+    .max(100, 'profile.modal.education.edInstitution_long')
     .required('profile.modal.education.required'),
   description: Yup.string()
     .min(40, 'profile.modal.education.description_short')
@@ -17,11 +24,16 @@ export const EducationModalSchema = Yup.object().shape({
     .min(new Date(1950, 0, 1), 'profile.modal.education.startDateMinMessage')
     .max(new Date(), 'profile.modal.education.startDateMaxMessage')
     .required('profile.modal.education.required'),
-  endYear: Yup.mixed().test('endDate', 'profile.modal.education.endDateMessage', function (value) {
-    const { startYear } = this.parent;
-    const getFullStartYear = startYear?.getFullYear();
-    if (!value) return true; // Allow empty value
-    const endYearDate = value === 'Now' || value === '' ? new Date('9999-01-01') : value;
-    return endYearDate > getFullStartYear;
-  }),
+  endYear: Yup.date()
+    .min(Yup.ref('startYear'), 'profile.modal.education.endDateMessage')
+    .when('currentDate', {
+      is: (currentDate) => !currentDate,
+      then: (schema) => schema.required('profile.modal.education.required'),
+      otherwise: (schema) => schema.nullable(),
+    })
+    .test('endYear', 'profile.modal.education.endDateMessage', function (value) {
+      const startYear = this.resolve(Yup.ref('startYear'));
+      return isStartYearBeforeEndYear(startYear, value);
+    }),
+  currentDate: Yup.boolean(),
 });
