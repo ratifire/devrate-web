@@ -69,4 +69,9 @@ export const styles = {
   workExperienceBtn: {
     width: '228px',
   },
+  checkBoxContainer: (theme) => ({
+    display: 'flex',
+    alignItems: 'center',
+    flex: ` calc(90% - ${theme.spacing(2)})`,
+  }),
 };
