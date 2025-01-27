@@ -46,7 +46,7 @@ const ModalUserInfo = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeStep, setActiveStep] = useState(step);
 
-  const title = steps.find((title, index) => index === activeStep);
+  const currentStep = steps.find((step, index) => index === activeStep);
 
   const handleNext = () => {
     setActiveStep((nextActiveStep) => {
@@ -84,15 +84,15 @@ const ModalUserInfo = () => {
     <>
       <Box sx={styles.wrapper}>
         <Typography key={activeStep} sx={styles.title} variant={'h6'}>
-          {t(title)}
+          {t(currentStep.title)}
         </Typography>
 
         <Stepper alternativeLabel activeStep={activeStep} connector={<StepConnector />} sx={styles.stepBorder}>
-          {steps.map((label) => (
-            <Step key={label} sx={styles.step}>
+          {steps.map((step) => (
+            <Step key={step.name} sx={styles.step}>
               <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label} />
               <Typography textAlign={'center'} variant='subtitle2'>
-                {t(label)}
+                {t(step.title)}
               </Typography>
             </Step>
           ))}
