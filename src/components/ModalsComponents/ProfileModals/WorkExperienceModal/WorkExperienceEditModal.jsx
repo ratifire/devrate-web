@@ -1,12 +1,14 @@
 import { useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
 import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas/index';
-import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
+// import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
+import { selectModalData } from '../../../../redux/modal/modalSlice';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import Responsibility from '../../../UI/Responsibility';
@@ -16,10 +18,11 @@ import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceEditModal = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const modalData = useSelector(selectModalData);
   const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
   const { t } = useTranslation();
@@ -27,9 +30,11 @@ const WorkExperienceEditModal = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const selectYears = useMemo(() => generateYearsArray(), []);
-  const handleClose = () => {
-    dispatch(closeModal({ modalType: modalNames.workExperienceEditModal }));
-  };
+  const { closeModal } = useModalController();
+
+  // const handleClose = () => {
+  //   dispatch(closeModal({ modalType: modalNames.workExperienceEditModal }));
+  // };
 
   const initialValues = {
     position: modalData?.position || '',
@@ -62,7 +67,7 @@ const WorkExperienceEditModal = () => {
 
       setResponsibilities([]);
       resetForm();
-      handleClose();
+      closeModal(modalNames.workExperienceEditModal);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.workExperience.edit.error'), { variant: 'error' });

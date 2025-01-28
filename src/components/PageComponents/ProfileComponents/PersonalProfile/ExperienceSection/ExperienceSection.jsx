@@ -2,11 +2,9 @@ import { useEffect, useState } from 'react';
 import { Box, IconButton, Tab, Tabs } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Add } from '@mui/icons-material';
-// import { useDispatch, useSelector } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router';
-// import { openModal } from '../../../../../redux/modal/modalSlice';
-import { useModalQueryParams } from '../../../../../utils/hooks/useModalQueryParams.js';
+import { useModalController } from '../../../../../utils/hooks/useModalController.js';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
 import Skills from './Skills';
@@ -16,7 +14,6 @@ import WorkExperience from './WorkExperience/WorkExperience';
 const ExperienceSection = () => {
   const { t } = useTranslation();
   const buttonStates = useSelector((state) => state.button);
-  // const dispatch = useDispatch();
   const [value, setValue] = useState('workExperience');
   const [searchParams, setSearchParams] = useSearchParams();
   const handleChange = (event, newValue) => {
@@ -24,12 +21,7 @@ const ExperienceSection = () => {
     setSearchParams({ tab: newValue });
   };
 
-  const { openModal } = useModalQueryParams();
-
-  const handleAddFeature = (modalType) => {
-    // dispatch(openModal({ modalType: modal }));
-    openModal(modalType);
-  };
+  const { openModal } = useModalController();
 
   useEffect(() => {
     const tab = searchParams.get('tab');
@@ -46,18 +38,18 @@ const ExperienceSection = () => {
 
   const tabButtonPlus = {
     workExperience: (
-      <IconButton sx={styles.iconBtn} onClick={() => handleAddFeature('workExperienceModal')}>
+      <IconButton sx={styles.iconBtn} onClick={() => openModal('workExperienceModal')}>
         <Add />
       </IconButton>
     ),
     achievement: (
-      <IconButton sx={styles.iconBtn} onClick={() => handleAddFeature('achievementModal')}>
+      <IconButton sx={styles.iconBtn} onClick={() => openModal('achievementModal')}>
         <Add />
       </IconButton>
     ),
     skills: <></>,
     education: (
-      <IconButton sx={styles.iconBtn} onClick={() => handleAddFeature('educationModal')}>
+      <IconButton sx={styles.iconBtn} onClick={() => openModal('educationModal')}>
         <Add />
       </IconButton>
     ),

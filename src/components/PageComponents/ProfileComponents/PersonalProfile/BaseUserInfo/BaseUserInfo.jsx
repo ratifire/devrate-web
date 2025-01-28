@@ -1,15 +1,14 @@
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, Button, IconButton, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import LinearProgressWithLabel from '../../../../UI/LinearProgressWithLabel';
 import UserAvatar from '../../../../UI/UserAvatar';
-import { openModal } from '../../../../../redux/modal/modalSlice';
-import { setStep } from '../../../../../redux/modal/modalStepSlice';
 import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import { useGetAvatarUserQuery } from '../../../../../redux/user/avatar/avatarApiSlice';
 import { modalNames } from '../../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../../utils/hooks/useModalController.js';
 import { styles } from './BaseUserInfo.styles';
 import { useProfileProgress } from './useProfileProgress';
 
@@ -25,22 +24,20 @@ const BaseUserInfo = () => {
     city: getCity,
     status: getStatus,
   } = userData;
+  const { openModal } = useModalController();
 
   const { data } = useGetAvatarUserQuery(id);
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
 
   const progress = useProfileProgress(id);
-  const dispatch = useDispatch();
 
-  const handleOpenInfo = () => {
-    dispatch(setStep(0));
-    dispatch(openModal({ modalType: modalNames.userInfoModal }));
+  const handleOpenUserInfo = () => {
+    openModal(modalNames.userInfoModal, 0);
   };
 
   const handleOpenAvatar = () => {
-    dispatch(setStep(2));
-    dispatch(openModal({ modalType: modalNames.userInfoModal }));
+    openModal(modalNames.userInfoModal, 2);
   };
 
   return (
@@ -70,7 +67,7 @@ const BaseUserInfo = () => {
           {`${getCity ? getCity + ',' : ''} ${getCountry || country}`}
         </Typography>
         <Box sx={styles.wrapperTextBtn}>
-          <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenInfo}>
+          <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenUserInfo}>
             <EditIcon />
           </IconButton>
         </Box>

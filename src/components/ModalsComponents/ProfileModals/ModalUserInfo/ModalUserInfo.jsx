@@ -4,6 +4,7 @@ import { Box, IconButton, Step, StepConnector, StepLabel, Stepper, Typography } 
 import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './ModalUserInfo.styles';
 import StepPersonal from './StepPersonal';
 import StepContacts from './StepContacts';
@@ -41,12 +42,13 @@ const ModalUserInfo = () => {
   const step = useSelector((state) => state.modalStep.step);
   const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState(step);
-
   const title = steps.find((title, index) => index === activeStep);
+  const { stepHadler } = useModalController();
 
   const handleNext = () => {
     setActiveStep((nextActiveStep) => {
       const updatedStep = nextActiveStep + 1;
+      stepHadler(updatedStep);
       return updatedStep;
     });
   };
@@ -54,6 +56,7 @@ const ModalUserInfo = () => {
   const handlePrev = () => {
     setActiveStep((prevActiveStep) => {
       const updatedStep = prevActiveStep - 1;
+      stepHadler(updatedStep);
       return updatedStep;
     });
   };

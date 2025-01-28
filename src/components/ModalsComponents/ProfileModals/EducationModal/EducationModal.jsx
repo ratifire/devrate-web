@@ -1,10 +1,9 @@
-import { useEffect, useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import { EducationModalSchema } from '../../../../utils/validationSchemas/index';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
@@ -13,10 +12,10 @@ import { useCreateEducationMutation } from '../../../../redux/services/education
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './EducationModal.styles';
 
 const EducationModal = () => {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const translatedNow = t('profile.modal.education.now');
   const [startYears, setStartYears] = useState([]);
@@ -24,10 +23,7 @@ const EducationModal = () => {
   const [createEducation, { isLoading }] = useCreateEducationMutation();
   const currentUser = useSelector(selectCurrentUser);
   const { enqueueSnackbar } = useSnackbar();
-
-  const handleClose = useCallback(() => {
-    dispatch(closeModal({ modalType: modalNames.educationModal }));
-  }, [dispatch]);
+  const { closeModal } = useModalController();
 
   useEffect(() => {
     const startYearsOpts = [];
@@ -66,7 +62,7 @@ const EducationModal = () => {
       enqueueSnackbar(t('modalNotifyText.education.create.success'), { variant: 'success' });
 
       resetForm();
-      handleClose();
+      closeModal(modalNames.educationModal);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.education.create.error'), { variant: 'error' });

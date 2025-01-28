@@ -14,20 +14,18 @@ import { useCreateNewWorkExperienceMutation } from '../../../../redux/services/w
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
-// import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalQueryParams } from '../../../../utils/hooks/useModalQueryParams.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceModal = () => {
-  // const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth.user.data);
   const [responsibilities, setResponsibilities] = useState([]);
   const { t } = useTranslation();
   const [createNewWorkExperience, { isLoading }] = useCreateNewWorkExperienceMutation();
   const { enqueueSnackbar } = useSnackbar();
 
-  // const { isOpen, openModal, closeModal } = useModalQueryParams();
-  const { closeModal } = useModalQueryParams();
+  const { closeModal } = useModalController();
 
   const selectYears = useMemo(() => generateYearsArray(), []);
 
@@ -55,7 +53,7 @@ const WorkExperienceModal = () => {
       enqueueSnackbar(t('modalNotifyText.workExperience.create.success'), { variant: 'success' });
       setResponsibilities([]);
       resetForm();
-      closeModal();
+      closeModal(modalNames.workExperienceModal);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.workExperience.create.error'), { variant: 'error' });
