@@ -20,21 +20,43 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
   },
-  boxChart: {
+  junior: (theme) => ({
+    color: theme.palette.userCard.lvl.junior,
+  }),
+  middle: (theme) => ({
+    color: theme.palette.userCard.lvl.middle,
+  }),
+  senior: (theme) => ({
+    color: theme.palette.userCard.lvl.senior,
+  }),
+  boxChart: (theme) => ({
     width: '100%',
     height: '400px',
+    padding: '16px',
+    borderRadius: '4px',
+    backgroundColor: theme.palette.interviewSkills.skillsBox,
 
     '& .recharts-default-legend': {
       fontSize: '14px',
       display: 'flex',
       justifyContent: 'space-between',
+      flexDirection: 'row-reverse',
       paddingBottom: '16px !important',
+      marginLeft: '45px !important',
     },
     '& .legend-item-0': {
       paddingLeft: '30px',
+
+      '& svg > path': {
+        fill: theme.palette.interviewSkills.rightCircle,
+      },
     },
     '& .legend-item-1': {
       marginRight: '0 !important',
+
+      '& svg > path': {
+        fill: theme.palette.interviewSkills.leftCircle,
+      },
     },
-  },
+  }),
 };

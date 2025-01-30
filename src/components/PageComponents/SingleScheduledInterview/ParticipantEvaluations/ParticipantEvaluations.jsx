@@ -3,27 +3,29 @@ import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAx
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart.js';
 import { styles } from './ParticipantEvaluations.styles.js';
+import { useColorPartEvalChart } from './hooks';
 
 const data = [
   {
     name: 'Soft Skills',
-    'Оксана Іващенко': 5,
-    'Олена Бондаренко': 6,
+    'Оксана Іващенко': 9,
+    'Олена Бондаренко': 2,
   },
   {
     name: 'Hard Skills',
-    'Оксана Іващенко': 7,
-    'Олена Бондаренко': 9,
+    'Оксана Іващенко': 8,
+    'Олена Бондаренко': 4,
   },
   {
     name: 'Over All',
-    'Оксана Іващенко': 1,
-    'Олена Бондаренко': 2,
+    'Оксана Іващенко': 9,
+    'Олена Бондаренко': 5,
   },
 ];
 
 const ParticipantEvaluations = () => {
   const { itemStyle, contentStyle } = useTooltipColorChart();
+  const { leftGrad1, leftGrad2, leftGrad3, rightGrad1, rightGrad2, rightGrad3 } = useColorPartEvalChart();
 
   return (
     <Box sx={styles.wrapper}>
@@ -38,7 +40,7 @@ const ParticipantEvaluations = () => {
           <Typography component='p' variant='subtitle2'>
             Оксана Іващенко
           </Typography>
-          <Typography component='p' variant='subtitle2'>
+          <Typography component='p' sx={styles['middle']} variant='subtitle2'>
             Level Middle
           </Typography>
         </Box>
@@ -46,7 +48,7 @@ const ParticipantEvaluations = () => {
           <Typography component='p' variant='subtitle2'>
             Олена Бондаренко
           </Typography>
-          <Typography component='p' variant='subtitle2'>
+          <Typography component='p' sx={styles['junior']} variant='subtitle2'>
             Level Junior
           </Typography>
         </Box>
@@ -65,13 +67,25 @@ const ParticipantEvaluations = () => {
             }}
             width={500}
           >
+            <defs>
+              <linearGradient id='left' x1='0' x2='0' y1='0' y2='1'>
+                <stop offset='0%' stopColor={leftGrad1} stopOpacity={1} />
+                <stop offset='29.8%' stopColor={leftGrad2} stopOpacity={1} />
+                <stop offset='100%' stopColor={leftGrad3} stopOpacity={1} />
+              </linearGradient>
+              <linearGradient id='right' x1='0' x2='0' y1='0' y2='1'>
+                <stop offset='0%' stopColor={rightGrad1} stopOpacity={1} />
+                <stop offset='36.8%' stopColor={rightGrad2} stopOpacity={1} />
+                <stop offset='100%' stopColor={rightGrad3} stopOpacity={1} />
+              </linearGradient>
+            </defs>
             <XAxis dataKey='name' />
             <YAxis domain={[0, 10]} interval={0} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
             <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
             <Legend align='center' iconType='circle' layout='horizontal' verticalAlign='top' />
             <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
-            <Bar dataKey='Оксана Іващенко' fill='red' radius={[2, 2, 0, 0]} />
-            <Bar dataKey='Олена Бондаренко' fill='blue' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='Оксана Іващенко' fill='url(#left)' radius={[2, 2, 0, 0]} />
+            <Bar dataKey='Олена Бондаренко' fill='url(#right)' radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Box>

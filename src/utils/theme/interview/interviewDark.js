@@ -26,4 +26,12 @@ export const interviewDark = {
     rightCircle: '#FCA728',
     skillsBox: '#3E3E40',
   },
+  partEvalChart: {
+    leftGrad1: '#FFC061',
+    leftGrad2: '#F39E37',
+    leftGrad3: '#8D5C20',
+    rightGrad1: '#B07AFD',
+    rightGrad2: '#8133F1',
+    rightGrad3: '#4A1D8B',
+  },
 };
