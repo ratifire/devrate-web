@@ -13,7 +13,7 @@ const ScheduledMeeting = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.boxTitle}>
         <Typography component='h6' variant='h6'>
-          {t('interviewsSummary.scheduledMeeting.title')}
+          {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.title')}
         </Typography>
         <Typography component='p' sx={styles['upcoming']} variant='subtitle2'>
           UPCOMING
@@ -40,7 +40,7 @@ const ScheduledMeeting = () => {
           />
         </Box>
         <Typography component='p' sx={styles.boxInfoText} variant='subtitle2'>
-          {t('interviewsSummary.scheduledMeeting.participants')}:
+          {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.participants')}:
           <Typography component='span' variant='body'>
             Олена Король; Дарина Бондаренко
           </Typography>
@@ -49,7 +49,7 @@ const ScheduledMeeting = () => {
       <Box sx={styles.boxParameters}>
         <Box sx={styles.boxParametersInfo}>
           <Typography component='p' variant='subtitle2'>
-            {t('interviewsSummary.scheduledMeeting.language')}
+            {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.language')}
           </Typography>
           <Typography component='p' variant='body'>
             Англійська
@@ -57,7 +57,7 @@ const ScheduledMeeting = () => {
         </Box>
         <Box sx={styles.boxParametersInfo}>
           <Typography component='p' variant='subtitle2'>
-            {t('interviewsSummary.scheduledMeeting.duration')}
+            {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.duration')}
           </Typography>
           <Typography component='p' variant='body'>
             60 хв.
@@ -65,7 +65,7 @@ const ScheduledMeeting = () => {
         </Box>
         <Box sx={styles.boxParametersInfo}>
           <Typography component='p' variant='subtitle2'>
-            {t('interviewsSummary.scheduledMeeting.platform')}
+            {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.platform')}
           </Typography>
           <Typography component='p' sx={styles.platformIcon} variant='body'>
             <Box component='img' src={zoom} sx={styles.icon} /> Zoom
@@ -77,12 +77,20 @@ const ScheduledMeeting = () => {
           components={{
             a: <Link component={RouterLink} sx={styles.link} to='/' />,
           }}
-          i18nKey='interviewsSummary.scheduledMeeting.link'
+          i18nKey='singleScheduledInterview.interviewsSummary.scheduledMeeting.link'
         />
       </Typography>
       <Box sx={styles.boxBtn}>
-        <ButtonDef label={t('interviewsSummary.scheduledMeeting.canceledMeeting')} sx={styles.btn} variant='outlined' />
-        <ButtonDef label={t('interviewsSummary.scheduledMeeting.joinMeeting')} sx={styles.btn} variant='contained' />
+        <ButtonDef
+          label={t('singleScheduledInterview.interviewsSummary.scheduledMeeting.canceledMeeting')}
+          sx={styles.btn}
+          variant='outlined'
+        />
+        <ButtonDef
+          label={t('singleScheduledInterview.interviewsSummary.scheduledMeeting.joinMeeting')}
+          sx={styles.btn}
+          variant='contained'
+        />
       </Box>
     </Box>
   );
