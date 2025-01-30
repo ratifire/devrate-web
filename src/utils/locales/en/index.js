@@ -864,6 +864,9 @@ export const en = {
       userCardScheduledInterview: {
         btn: 'Write a message',
       },
+      participantEvaluations: {
+        title: 'Participant evaluations',
+      },
     },
   },
 };

@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { useTranslation } from 'react-i18next';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart.js';
 import { styles } from './ParticipantEvaluations.styles.js';
@@ -24,6 +25,7 @@ const data = [
 ];
 
 const ParticipantEvaluations = () => {
+  const { t } = useTranslation();
   const { itemStyle, contentStyle } = useTooltipColorChart();
   const { leftGrad1, leftGrad2, leftGrad3, rightGrad1, rightGrad2, rightGrad3 } = useColorPartEvalChart();
 
@@ -31,7 +33,7 @@ const ParticipantEvaluations = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.boxTitle}>
         <Typography component='h6' variant='h6'>
-          Оцінка учасників
+          {t('singleScheduledInterview.participantEvaluations.title')}
         </Typography>
         <InfoIcon />
       </Box>
@@ -56,7 +58,7 @@ const ParticipantEvaluations = () => {
       <Box sx={styles.boxChart}>
         <ResponsiveContainer height='100%' width='100%'>
           <BarChart
-            barGap={-80}
+            barGap={-35}
             data={data}
             height={300}
             margin={{
@@ -84,8 +86,8 @@ const ParticipantEvaluations = () => {
             <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
             <Legend align='center' iconType='circle' layout='horizontal' verticalAlign='top' />
             <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
-            <Bar dataKey='Оксана Іващенко' fill='url(#left)' radius={[2, 2, 0, 0]} />
-            <Bar dataKey='Олена Бондаренко' fill='url(#right)' radius={[2, 2, 0, 0]} />
+            <Bar barSize={50} dataKey='Оксана Іващенко' fill='url(#left)' radius={[2, 2, 0, 0]} />
+            <Bar barSize={50} dataKey='Олена Бондаренко' fill='url(#right)' radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Box>

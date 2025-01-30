@@ -708,6 +708,9 @@ export const uk = {
         userCardScheduledInterview: {
           btn: 'Написати повідомлення',
         },
+        participantEvaluations: {
+          title: 'Оцінка учасників',
+        },
       },
     },
   },
