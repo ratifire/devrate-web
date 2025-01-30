@@ -53,7 +53,7 @@ const InterviewSkills = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.boxTitle}>
         <Typography component='h6' variant='h6'>
-          {t('interviewSkills.skills')}
+          {t('singleScheduledInterview.interviewSkills.skills')}
         </Typography>
         <InfoIcon />
       </Box>
