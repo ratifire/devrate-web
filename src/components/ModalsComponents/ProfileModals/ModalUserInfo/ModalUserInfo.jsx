@@ -7,11 +7,11 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useSearchParams } from 'react-router';
 import { selectModalData } from '../../../../redux/modal/modalSlice.js';
 import { styles } from './ModalUserInfo.styles';
-import StepPersonal from './StepPersonal';
-import StepContacts from './StepContacts';
-import StepAvatar from './StepAvatar';
-import StepLanguage from './StepLanguage';
 import CustomStepIcon from './StepIconComponent';
+import StepPersonal from './StepPersonal/index.js';
+import StepContacts from './StepContacts/index.js';
+import StepAvatar from './StepAvatar/index.js';
+import StepLanguage from './StepLanguage/index.js';
 
 const steps = [
   {
@@ -46,8 +46,7 @@ const ModalUserInfo = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeStep, setActiveStep] = useState(step);
 
-  const currentStep = steps.find((step, index) => index === activeStep);
-
+  const currentStep = steps[activeStep];
   const handleNext = () => {
     setActiveStep((nextActiveStep) => {
       const updatedStep = nextActiveStep + 1;
