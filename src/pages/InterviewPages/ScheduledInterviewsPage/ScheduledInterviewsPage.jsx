@@ -1,10 +1,7 @@
-import ParticipantEvaluations from '../../../components/PageComponents/SingleScheduledInterview/ParticipantEvaluations';
+import UserCardScheduledInterview from '../../../components/PageComponents/SingleScheduledInterview/UserCardScheduledInterview';
 
 const ScheduledInterviewsPage = () => {
-  // return <ScheduledMeeting />;
-  // return <InterviewSkills />;
-
-  return <ParticipantEvaluations />;
+  return <UserCardScheduledInterview />;
 };
 
 export default ScheduledInterviewsPage;
