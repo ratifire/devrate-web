@@ -1,6 +1,6 @@
 import { useTheme } from '@mui/material/styles';
 
-const useTooltip = () => {
+const useTooltipColorChart = () => {
   const theme = useTheme();
 
   const itemStyle = {
@@ -21,4 +21,4 @@ const useTooltip = () => {
   };
 };
 
-export default useTooltip;
+export default useTooltipColorChart;
