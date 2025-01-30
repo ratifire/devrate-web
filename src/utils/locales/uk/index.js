@@ -686,23 +686,28 @@ export const uk = {
         requests: 'Запити',
       },
     },
-    interviewsSummary: {
-      scheduledMeeting: {
-        title: 'Запланована зустріч',
-        participants: 'Учасники',
-        language: 'Мова',
-        duration: 'Тривалість',
-        platform: 'Платформа',
-        link:
-          'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
-          ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
-        canceledMeeting: 'Скасувати зустріч',
-        joinMeeting: 'Доєднатись до інтерв’ю',
-        notHappenedMeeting: 'Співбесіда не відбулася',
-        leaveFeedbackMeeting: 'Залишити відгук',
-      },
-      interviewSkills: {
-        skills: 'Навички',
+    singleScheduledInterview: {
+      interviewsSummary: {
+        scheduledMeeting: {
+          title: 'Запланована зустріч',
+          participants: 'Учасники',
+          language: 'Мова',
+          duration: 'Тривалість',
+          platform: 'Платформа',
+          link:
+            'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
+            ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
+          canceledMeeting: 'Скасувати зустріч',
+          joinMeeting: 'Доєднатись до інтерв’ю',
+          notHappenedMeeting: 'Співбесіда не відбулася',
+          leaveFeedbackMeeting: 'Залишити відгук',
+        },
+        interviewSkills: {
+          skills: 'Навички',
+        },
+        userCardScheduledInterview: {
+          btn: 'Написати повідомлення',
+        },
       },
     },
   },
