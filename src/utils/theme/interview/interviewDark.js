@@ -13,4 +13,17 @@ export const interviewDark = {
     rightCircle: '#FCA728',
     skillsBox: '#3E3E40',
   },
+  userCard: {
+    role: {
+      color: '#C5C5C6',
+    },
+    date: {
+      color: '#EFE6FD',
+    },
+    lvl: {
+      junior: '#25CBFF',
+      middle: '#16FFB9',
+      senior: '#FFB916',
+    },
+  },
 };
