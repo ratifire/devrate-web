@@ -14,6 +14,7 @@ export const styles = {
   boxTitle: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   boxParticipants: {
     display: 'flex',
