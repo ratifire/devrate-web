@@ -1,10 +1,10 @@
 const getLevelColor = (level) => {
   switch (level) {
-    case 'Junior':
+    case 0:
       return '#25CBFF';
-    case 'Middle':
+    case 1:
       return '#16FFB9';
-    case 'Senior':
+    case 2:
       return '#DAFE22';
     default:
       return 'inherit';
