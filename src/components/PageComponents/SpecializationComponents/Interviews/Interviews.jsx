@@ -3,19 +3,19 @@ import Mood from '@mui/icons-material/Mood';
 import { Box, Button, Divider, Popover, Typography } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../../../redux/modal/modalSlice';
+import { useSelector } from 'react-redux';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './Interviews.styles';
 
 const Interviews = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const buttonRef = useRef(null);
   const [popoverWidth, setPopoverWidth] = useState(0);
   const [createButton, setCreateButton] = useState(null);
   const open = Boolean(createButton);
+  const { openModal } = useModalController();
 
   const { activeSpecialization, mainSpecialization, fullSpecializations } = useSelector(
     (state) => state.specialization
@@ -44,16 +44,13 @@ const Interviews = () => {
   };
 
   const createInterviewRequest = async () => {
-    dispatch(
-      openModal({ modalType: modalNames.scheduleInterviewModal, data: { role: feedbackInterviewRole.INTERVIEWER } })
-    );
+    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.INTERVIEWER });
     closeHandler();
   };
 
   const createIncomeInterviewRequest = () => {
-    dispatch(
-      openModal({ modalType: modalNames.scheduleInterviewModal, data: { role: feedbackInterviewRole.CANDIDATE } })
-    );
+    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.CANDIDATE });
+
     closeHandler();
   };
 

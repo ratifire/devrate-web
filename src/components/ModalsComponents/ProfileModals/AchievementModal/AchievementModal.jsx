@@ -1,23 +1,23 @@
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useCreateAchievementMutation } from '../../../../redux/services/achievementsApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { AchievementModalSchema } from '../../../../utils/validationSchemas/index';
-import { closeModal } from '../../../../redux/modal/modalSlice.js';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './AchievementModal.styles';
 
 const AchievementModal = () => {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const { id } = useSelector((state) => state.auth.user.data);
   const [createAchievement, { isLoading }] = useCreateAchievementMutation();
   const { enqueueSnackbar } = useSnackbar();
+  const { closeModal } = useModalController();
 
   const initialValues = {
     // link: '',
@@ -33,7 +33,7 @@ const AchievementModal = () => {
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.achievement.create.success'), { variant: 'success' });
       resetForm();
-      dispatch(closeModal({ modalType: modalNames.achievementModal }));
+      closeModal(modalNames.achievementModal);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.achievement.create.error'), { variant: 'error' });

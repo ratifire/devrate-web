@@ -3,21 +3,20 @@ import { Box, IconButton, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/services/workExperienceApiSlice.js';
-import { openModal } from '../../../../../../../redux/modal/modalSlice.js';
 import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../../../../utils/hooks/useModalController.js';
 import styles from './WorkExperienceItem.styles.js';
 
 const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {
   const [deleteWorkExperienceMutation] = useDeleteWorkExperienceByIdMutation();
   const [anchorEl, setAnchorEl] = useState(null);
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
+  const { openModal } = useModalController();
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
@@ -29,21 +28,16 @@ const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, des
 
   const handleEditFeature = () => {
     handleCloseMenu();
-    dispatch(
-      openModal({
-        modalType: modalNames.workExperienceEditModal,
-        data: {
-          id: id,
-          position: position,
-          companyName: companyName,
-          description: description,
-          responsibilities: responsibilities,
-          startYear: startYear,
-          endYear: endYear,
-          currentDate: endYear,
-        },
-      })
-    );
+    openModal(modalNames.workExperienceEditModal, {
+      id: id,
+      position: position,
+      companyName: companyName,
+      description: description,
+      responsibilities: responsibilities,
+      startYear: startYear,
+      endYear: endYear,
+      currentDate: endYear,
+    });
   };
 
   const handleDeleteFeature = async () => {

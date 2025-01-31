@@ -1,32 +1,29 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
-import { openModal } from '../../../../../redux/modal/modalSlice';
-import { setStep } from '../../../../../redux/modal/modalStepSlice';
 import { useGetLanguageUserQuery } from '../../../../../redux/user/language/languageApiSlice';
 import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
 import LanguagesList from '../../../../UI/LanguagesList';
 import SocialsLinkList from '../../../../UI/SocialsLinkList';
 import { modalNames } from '../../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../../utils/hooks/useModalController.js';
 import { styles } from './RightSection.styles';
 
 const RightSection = () => {
   const { t } = useTranslation();
   const currentUser = useSelector(selectCurrentUser);
   const languages = useGetLanguageUserQuery(currentUser.data.id);
-  const dispatch = useDispatch();
   const { data: personalData } = useGetPersonalUserQuery(currentUser.data.id);
+  const { openModal } = useModalController();
 
-  const handleOpenInfo = () => {
-    dispatch(setStep(1));
-    dispatch(openModal({ modalType: modalNames.userInfoModal }));
+  const handleOpenContactInfo = () => {
+    openModal(modalNames.userInfoModal, null, 1);
   };
 
   const handleOpenLanguage = () => {
-    dispatch(setStep(3));
-    dispatch(openModal({ modalType: modalNames.userInfoModal }));
+    openModal(modalNames.userInfoModal, null, 3);
   };
 
   return (
@@ -37,7 +34,7 @@ const RightSection = () => {
             {t('profile.right.contact')}
           </Typography>
           <Box>
-            <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenInfo}>
+            <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenContactInfo}>
               <EditIcon />
             </IconButton>
           </Box>

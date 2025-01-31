@@ -3,19 +3,17 @@ import { Box, IconButton, Link, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import DropdownMenu from '../../DropdownMenu';
 import { useDeleteEducationByIdMutation } from '../../../../../../../redux/services/educationApiSlice';
-import { openModal } from '../../../../../../../redux/modal/modalSlice';
 import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../../../../utils/hooks/useModalController.js';
 import styles from './EducationItem.styles.js';
 
 const LENGTH_TO_COLLAPSE = 200;
 
 const EducationItem = ({ id, type, name, description, startYear, endYear, icon: IconComponent }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const dispatch = useDispatch();
   const [deleteEducationById] = useDeleteEducationByIdMutation();
   const { t } = useTranslation();
   const excerpt = useMemo(() => description.slice(0, LENGTH_TO_COLLAPSE), [description]);
@@ -23,6 +21,7 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
   const { enqueueSnackbar } = useSnackbar();
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const { openModal } = useModalController();
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
@@ -33,20 +32,14 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
   };
 
   const handleEditFeature = () => {
-    dispatch(
-      openModal({
-        modalType: modalNames.educationEditModal,
-        data: {
-          id: id,
-          type: type,
-          name: name,
-          description: description,
-          startYear: startYear,
-          endYear: endYear,
-        },
-      })
-    );
-    handleCloseMenu();
+    openModal(modalNames.educationEditModal, {
+      id: id,
+      type: type,
+      name: name,
+      description: description,
+      startYear: startYear,
+      endYear: endYear,
+    });
   };
 
   const handleDeleteFeature = async () => {

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
+import { selectModalData } from '../../../../redux/modal/modalSlice';
 import { EducationModalSchema } from '../../../../utils/validationSchemas/index';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
@@ -12,10 +12,10 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useUpdateEducationMutation } from '../../../../redux/services/educationApiSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './EducationModal.styles';
 
 const EducationEditModal = () => {
-  const dispatch = useDispatch();
   const modalData = useSelector(selectModalData);
   const { t } = useTranslation();
   const translatedNow = t('profile.modal.education.now');
@@ -23,10 +23,7 @@ const EducationEditModal = () => {
   const [endYears, setEndYears] = useState([]);
   const [updateEducation, { isLoading }] = useUpdateEducationMutation();
   const { enqueueSnackbar } = useSnackbar();
-
-  const handleClose = () => {
-    dispatch(closeModal({ modalType: modalNames.educationEditModal }));
-  };
+  const { closeModal } = useModalController();
 
   useEffect(() => {
     const startYearsOpts = [];
@@ -78,7 +75,7 @@ const EducationEditModal = () => {
         });
       }
       resetForm();
-      handleClose();
+      closeModal(modalNames.educationEditModal);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       if (modalData) {

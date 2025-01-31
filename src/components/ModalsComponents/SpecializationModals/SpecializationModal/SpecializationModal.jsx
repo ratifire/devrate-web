@@ -3,7 +3,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
@@ -32,7 +32,6 @@ const SpecializationModal = () => {
   const { skills, specializationNameError } = state;
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const dispatch = useDispatch();
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
   const [
@@ -63,7 +62,8 @@ const SpecializationModal = () => {
     isErrorAddSkill ||
     isErrorGetSpecialization;
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
-  const handleClose = () => dispatch(closeModal({ modalType: modalNames.specializationModal }));
+  // const handleClose = () => dispatch(closeModal({ modalType: modalNames.specializationModal }));
+  const handleClose = () => closeModal({ modalType: modalNames.specializationEditModal });
 
   const handleChangeMastery = (e) => {
     const value = e.target.value;

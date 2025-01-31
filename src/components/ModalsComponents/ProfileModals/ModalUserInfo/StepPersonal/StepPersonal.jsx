@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
+import _ from 'lodash';
 import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { StepPersonalSchema } from '../../../../../utils/validationSchemas/index';
 import {
@@ -34,15 +35,23 @@ const StepPersonal = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
 
-  const { firstName, lastName, city, country, status, description } = dataPutPersonalUser || dataGetPersonal;
+  const personalData = dataPutPersonalUser || dataGetPersonal || {};
+  const { firstName, lastName, city, country, status, description } = _.defaults(personalData, {
+    firstName: userData.firstName || '',
+    lastName: userData.lastName || '',
+    city: userData.city || '',
+    country: userData.country || '',
+    status: userData.status || '',
+    description: '',
+  });
 
   const initialValues = {
-    firstName: firstName || userData.firstName || '',
-    lastName: lastName || userData.lastName || '',
-    city: city || userData.city || '',
-    country: country || userData.country || '',
-    status: status || userData.status || '',
-    description: description || '',
+    firstName,
+    lastName,
+    city,
+    country,
+    status,
+    description,
   };
 
   const onSubmit = async ({ firstName, lastName, city, country, status, description }) => {

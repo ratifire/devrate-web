@@ -4,19 +4,18 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { useDeleteAchievementMutation } from '../../../../../../../redux/services/achievementsApiSlice.js';
 import DropdownMenu from '../../DropdownMenu';
-import { openModal } from '../../../../../../../redux/modal/modalSlice.js';
 import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../../../../utils/hooks/useModalController.js';
 import styles from './AchievementItem.styles.js';
 
 const AchievementItem = ({ achievement, icon: IconComponent }) => {
-  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const [deleteAchievement] = useDeleteAchievementMutation();
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
+  const { openModal } = useModalController();
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
@@ -28,16 +27,11 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
 
   const handleEditFeature = () => {
     handleCloseMenu();
-    dispatch(
-      openModal({
-        modalType: modalNames.achievementEditModal,
-        data: {
-          id: achievement?.id,
-          summary: achievement?.summary,
-          description: achievement?.description,
-        },
-      })
-    );
+    openModal(modalNames.achievementEditModal, {
+      id: achievement?.id,
+      summary: achievement?.summary,
+      description: achievement?.description,
+    });
   };
 
   const handleDeleteFeature = async () => {

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const modalStepSlice = createSlice({
   name: 'modalStep',
   initialState: {
-    step: 'personal',
+    step: 0,
   },
   reducers: {
     setStep: (state, action) => {
