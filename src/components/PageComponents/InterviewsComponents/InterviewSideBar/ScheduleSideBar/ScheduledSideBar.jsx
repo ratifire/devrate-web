@@ -9,21 +9,28 @@ const ScheduledSideBar = () => {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [interviews, setInterviews] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
   const { data: scheduledInterviews, isFetching } = useGetAllScheduledInterviewsQuery({ page, size: 5 });
   const lastEventRef = useRef(null); // Ref for the last InterviewSideBarEvent
 
   useEffect(() => {
     if (scheduledInterviews?.content) {
       setInterviews((prevInterviews) => [...prevInterviews, ...scheduledInterviews.content]);
+      if (scheduledInterviews.totalPages === page) {
+        setHasMore(false);
+      }
     }
   }, [scheduledInterviews]);
 
-  const handleObserver = useCallback((entries) => {
-    const target = entries[0];
-    if (target.isIntersecting && !isFetching) {
-      setPage((prevPage) => prevPage + 1); // Load the next page
-    }
-  });
+  const handleObserver = useCallback(
+    (entries) => {
+      const target = entries[0];
+      if (target.isIntersecting && !isFetching) {
+        setPage((prevPage) => prevPage + 1); // Load the next page
+      }
+    },
+    [isFetching, hasMore]
+  );
 
   const options = {
     root: null,

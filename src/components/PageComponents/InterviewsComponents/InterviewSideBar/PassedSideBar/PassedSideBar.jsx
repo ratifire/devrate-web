@@ -66,7 +66,6 @@ const PassedInterviewSideBar = () => {
               event={event}
             />
           ))}
-        {!hasMore && <Typography>No more data to load</Typography>}
       </Box>
     </Box>
   );
