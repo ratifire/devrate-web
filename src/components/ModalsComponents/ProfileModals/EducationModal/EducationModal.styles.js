@@ -69,4 +69,12 @@ export const styles = {
   workExperienceBtn: {
     width: '228px',
   },
+  checkBoxContainer: () => ({
+    display: 'flex',
+    alignItems: 'center',
+    flex: 'calc(100% - 10.66667px)',
+    ' label.MuiFormControlLabel-root': {
+      marginRight: 0,
+    },
+  }),
 };
