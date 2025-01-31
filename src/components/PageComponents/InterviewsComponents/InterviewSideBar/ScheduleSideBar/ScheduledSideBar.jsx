@@ -32,18 +32,18 @@ const ScheduledSideBar = () => {
   };
 
   useEffect(() => {
+    if (!lastEventRef.current) return;
+
     const observer = new IntersectionObserver(handleObserver, options);
 
-    if (lastEventRef.current) {
-      observer.observe(lastEventRef.current);
-    }
+    observer.observe(lastEventRef.current);
 
     return () => {
       if (lastEventRef.current) {
         observer.unobserve(lastEventRef.current);
       }
     };
-  }, [lastEventRef.current, handleObserver, interviews, options]);
+  }, [lastEventRef.current, interviews]);
 
   return (
     <Box sx={styles.container}>

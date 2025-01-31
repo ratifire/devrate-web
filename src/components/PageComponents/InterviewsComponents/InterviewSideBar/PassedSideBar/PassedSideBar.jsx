@@ -17,7 +17,7 @@ const PassedInterviewSideBar = () => {
   useEffect(() => {
     if (passedInterviews?.content) {
       setInterviews((prevInterviews) => [...prevInterviews, ...passedInterviews.content]);
-      if (passedInterviews.totalPages < page) {
+      if (passedInterviews.totalPages === page) {
         setHasMore(false);
       }
     }
@@ -27,7 +27,7 @@ const PassedInterviewSideBar = () => {
     (entries) => {
       const target = entries[0];
       if (target.isIntersecting && !isFetching && hasMore) {
-        setPage((prevPage) => prevPage + 1); // Load the next page
+        setPage((prevPage) => prevPage + 1);
       }
     },
     [isFetching, hasMore]
@@ -40,18 +40,17 @@ const PassedInterviewSideBar = () => {
   };
 
   useEffect(() => {
+    if (!lastEventRef.current) return;
     const observer = new IntersectionObserver(handleObserver, options);
 
-    if (lastEventRef.current) {
-      observer.observe(lastEventRef.current);
-    }
+    observer.observe(lastEventRef.current);
 
     return () => {
       if (lastEventRef.current) {
         observer.unobserve(lastEventRef.current);
       }
     };
-  }, [lastEventRef.current, handleObserver, interviews, options]);
+  }, [lastEventRef.current, interviews]);
 
   return (
     <Box sx={styles.container}>
