@@ -59,7 +59,6 @@ const ProfileHeader = () => {
             src={userPicture}
             userFirstName={getFirstName || firstName}
             userLastName={getLastName || lastName}
-            userName={`${getFirstName || firstName} ${getLastName || lastName}`}
           />
         </Button>
         <Menu closeMenu={handleCloseMenu} isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />

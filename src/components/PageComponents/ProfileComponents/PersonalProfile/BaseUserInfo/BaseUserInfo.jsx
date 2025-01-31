@@ -54,7 +54,6 @@ const BaseUserInfo = () => {
             src={userPicture}
             userFirstName={getFirstName || firstName}
             userLastName={getLastName || lastName}
-            userName={`${getFirstName || firstName} ${getLastName || lastName}`}
           />
         </Button>
       </Box>

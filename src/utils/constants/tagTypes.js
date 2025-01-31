@@ -17,6 +17,7 @@ export const TAG_TYPES = {
   ContactList: 'ContactList',
   LanguageUser: 'LanguageUser',
   WorkExperience: 'WorkExperience',
+  Chat: 'Chat',
 };
 
 export const TAG_TYPES_ARRAY = Object.values(TAG_TYPES);

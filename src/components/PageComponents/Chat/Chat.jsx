@@ -1,18 +1,23 @@
-import { Badge, Box, IconButton, Fade } from '@mui/material';
+import { Badge, IconButton, Popover } from '@mui/material';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../../assets/icons/message.svg?react';
-import { openChat } from '../../../redux/chat/chatSlice';
+import { closeChat, openChat } from '../../../redux/chat/chatSlice.js';
 import { styles } from './Chat.styles';
-import ChatForm from './ChatForm';
+import ChatListUsers from './ChatListUsers';
 
 const Chat = () => {
-  const { chat } = useSelector((state) => state.chat);
-
+  const [bellButton, setBellButton] = useState(null);
+  const { list } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
-  const handleOpen = () => {
-    dispatch(openChat({ chatElement: 'chat' }));
+  const handleOpen = (event) => {
+    event.preventDefault();
+    setBellButton(event.currentTarget);
+    dispatch(openChat({ chatElement: 'list' }));
   };
-
+  const handleClose = () => {
+    dispatch(closeChat({ chatElement: 'list' }));
+  };
   return (
     <>
       <IconButton sx={styles.btnIcon} onClick={handleOpen}>
@@ -20,26 +25,21 @@ const Chat = () => {
           <Message />
         </Badge>
       </IconButton>
-      {/*<Popover*/}
-      {/*  anchorEl={bellButton}*/}
-      {/*  anchorOrigin={{*/}
-      {/*    vertical: 'bottom',*/}
-      {/*    horizontal: 'right',*/}
-      {/*  }}*/}
-      {/*  open={open}*/}
-      {/*  transformOrigin={{*/}
-      {/*    vertical: 'top',*/}
-      {/*    horizontal: 'right',*/}
-      {/*  }}*/}
-      {/*  onClose={chatClose}*/}
-      {/*>*/}
-      {/*  {elem}*/}
-      {/*</Popover>*/}
-      <Fade in={chat}>
-        <Box sx={styles.position}>
-          <ChatForm />
-        </Box>
-      </Fade>
+      <Popover
+        anchorEl={bellButton}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={list}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        onClose={handleClose}
+      >
+        <ChatListUsers />
+      </Popover>
     </>
   );
 };
