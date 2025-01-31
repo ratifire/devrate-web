@@ -19,11 +19,11 @@ const RightSection = () => {
   const { openModal } = useModalController();
 
   const handleOpenContactInfo = () => {
-    openModal(modalNames.userInfoModal, 1);
+    openModal(modalNames.userInfoModal, null, 1);
   };
 
   const handleOpenLanguage = () => {
-    openModal(modalNames.userInfoModal, 3);
+    openModal(modalNames.userInfoModal, null, 3);
   };
 
   return (

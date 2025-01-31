@@ -10,40 +10,28 @@ export function useModalController() {
 
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modal.isOpen);
+  const modalData = useSelector((state) => state.modal.data);
 
   useEffect(() => {
     const modal = searchParams.get('modal');
     const step = Number(searchParams.get('step'));
 
     if (Object.values(modalNames).includes(modal)) {
-      openModalHandler(modal);
+      openModalHandler(modal, modalData);
       if (step) openModalStepHandler(step);
     }
   }, [searchParams]);
 
-  // const openModalHandler = (modalType, step = null) => {
-  //   const updatedParams = new URLSearchParams();
-  //   updatedParams.set('modal', modalType);
-  //   updatedParams.set('open', true);
-  //   if (step !== null) updatedParams.set('step', step);
-  //
-  //   setSearchParams(updatedParams);
-  //
-  //   dispatch(openModal({ modalType, data: null }));
-  //   if (step !== null) {
-  //     dispatch(setStep(step));
-  //   }
-  // };
-  const openModalHandler = (modalType, step = null) => {
+  const openModalHandler = (modalType, data = null, step = null) => {
     setSearchParams((prev) => {
-      const updatedParams = new URLSearchParams(prev); // Сохраняем существующие параметры
+      const updatedParams = new URLSearchParams(prev);
       updatedParams.set('modal', modalType);
-      updatedParams.set('open', true);
       if (step !== null) updatedParams.set('step', step);
+      if (data?.role) updatedParams.set('role', data.role);
       return updatedParams;
     });
 
-    dispatch(openModal({ modalType, data: null }));
+    dispatch(openModal({ modalType, data }));
     if (step !== null) {
       dispatch(setStep(step));
     }
@@ -66,6 +54,8 @@ export function useModalController() {
       const updatedParams = new URLSearchParams(prev);
       updatedParams.delete('modal');
       updatedParams.delete('step');
+      updatedParams.delete('role');
+
       return updatedParams;
     });
   };

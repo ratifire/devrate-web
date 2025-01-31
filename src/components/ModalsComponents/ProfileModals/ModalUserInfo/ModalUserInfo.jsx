@@ -11,7 +11,6 @@ import StepContacts from './StepContacts';
 import StepAvatar from './StepAvatar';
 import StepLanguage from './StepLanguage';
 import CustomStepIcon from './StepIconComponent';
-
 const steps = [
   {
     name: 'personal',
@@ -37,7 +36,6 @@ const steps = [
     component: () => <StepLanguage />,
   },
 ];
-
 const ModalUserInfo = () => {
   const step = useSelector((state) => state.modalStep.step);
   const { t } = useTranslation();

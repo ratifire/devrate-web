@@ -3,7 +3,7 @@ import { Box, IconButton, Tab, Tabs } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Add } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router';
+import { useLocation, useSearchParams } from 'react-router';
 import { useModalController } from '../../../../../utils/hooks/useModalController.js';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
@@ -16,14 +16,19 @@ const ExperienceSection = () => {
   const buttonStates = useSelector((state) => state.button);
   const [value, setValue] = useState('workExperience');
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const { openModal } = useModalController();
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setSearchParams({ tab: newValue });
   };
 
-  const { openModal } = useModalController();
-
   useEffect(() => {
+    if (location.pathname === '/profile' && location.search === '') {
+      setSearchParams({ tab: value });
+    }
+
     const tab = searchParams.get('tab');
 
     setValue(tab ? tab : 'workExperience');

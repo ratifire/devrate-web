@@ -33,11 +33,11 @@ const BaseUserInfo = () => {
   const progress = useProfileProgress(id);
 
   const handleOpenUserInfo = () => {
-    openModal(modalNames.userInfoModal, 0);
+    openModal(modalNames.userInfoModal, null, 0);
   };
 
   const handleOpenAvatar = () => {
-    openModal(modalNames.userInfoModal, 2);
+    openModal(modalNames.userInfoModal, null, 2);
   };
 
   return (
