@@ -4,9 +4,9 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingY: '24px',
+    paddingTop: '24px',
+    paddingBottom: '12px',
     paddingX: theme.spacing(3),
-    marginBottom: theme.spacing(5),
     width: '100%',
     backgroundImage: 'none',
     backgroundColor: theme.palette.interviewPage.bgColor,
@@ -89,7 +89,7 @@ const styles = {
       backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
     },
   }),
-  greenEllipce: {
+  greenEllipse: {
     marginRight: '8px',
     marginLeft: '8px',
     width: '13px',
