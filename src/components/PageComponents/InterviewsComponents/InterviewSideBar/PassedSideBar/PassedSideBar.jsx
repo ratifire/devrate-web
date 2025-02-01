@@ -41,6 +41,7 @@ const PassedInterviewSideBar = () => {
 
   useEffect(() => {
     if (!lastEventRef.current) return;
+
     const observer = new IntersectionObserver(handleObserver, options);
 
     observer.observe(lastEventRef.current);
