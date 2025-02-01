@@ -8,7 +8,7 @@ import getSpecLevel from '../../../../../utils/helpers/getSpecLevel.js';
 import { styles } from '../InterviewSideBarEvent.styles.js';
 
 const ScheduledSideBarEvent = ({ event, ref }) => {
-  const { id, specializationName, masteryLevel, startTime, role, hostId } = event;
+  const { id, specializationName, masteryLevel, startTime, role, hostId, hostFirstName, hostLastName } = event;
   const { t } = useTranslation();
   return (
     <Paper key={id} ref={ref} sx={styles.sideBarEventContainer}>
@@ -34,7 +34,7 @@ const ScheduledSideBarEvent = ({ event, ref }) => {
       <Typography component='div' sx={styles.host} variant='body2'>
         {t('interviews.sideBar.event.host')}:{' '}
         <Link component={RouterLink} sx={styles.host_link} to={`/profile/${hostId}`}>
-          {hostId}
+          {hostFirstName} {hostLastName}
         </Link>
       </Typography>
     </Paper>
@@ -49,6 +49,8 @@ ScheduledSideBarEvent.propTypes = {
     startTime: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     hostId: PropTypes.number.isRequired,
+    hostFirstName: PropTypes.string.isRequired,
+    hostLastName: PropTypes.string.isRequired,
   }).isRequired,
   ref: PropTypes.object,
 };
