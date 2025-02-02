@@ -867,6 +867,9 @@ export const en = {
       participantEvaluations: {
         title: 'Participant evaluations',
       },
+      statistic: {
+        title: 'Statistic',
+      },
     },
   },
 };

@@ -1,13 +1,7 @@
-// import UserCardScheduledInterview from '../../../components/PageComponents/SingleScheduledInterview/UserCardScheduledInterview';
-// import InterviewSkills from '../../../components/PageComponents/SingleScheduledInterview/InterviewSkills/index.js';
-
-// import ParticipantEvaluations from '../../../components/PageComponents/SingleScheduledInterview/ParticipantEvaluations/index.js';
-import ScheduledMeeting from '../../../components/PageComponents/SingleScheduledInterview/ScheduledMeeting/index.js';
+import Statistic from '../../../components/PageComponents/SingleScheduledInterview/Statistic';
 
 const ScheduledInterviewsPage = () => {
-  // return <UserCardScheduledInterview />;
-  // return <InterviewSkills />;
-  return <ScheduledMeeting />;
+  return <Statistic />;
 };
 
 export default ScheduledInterviewsPage;

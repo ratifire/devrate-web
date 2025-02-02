@@ -711,6 +711,9 @@ export const uk = {
         participantEvaluations: {
           title: 'Оцінка учасників',
         },
+        statistic: {
+          title: 'Статистика',
+        },
       },
     },
   },
