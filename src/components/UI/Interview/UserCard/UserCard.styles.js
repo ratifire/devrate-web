@@ -1,10 +1,6 @@
 export const styles = {
   wrapper: (theme) => ({
     padding: theme.spacing(4),
-    borderRadius: 2,
-    backgroundColor: theme.palette.pagesSections.backgroundColor,
-    boxShadow: 'none',
-    backgroundImage: 'none',
     maxWidth: '480px',
     width: '100%',
     display: 'flex',

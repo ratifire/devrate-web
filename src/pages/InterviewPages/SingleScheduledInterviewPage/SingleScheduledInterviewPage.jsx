@@ -1,5 +1,59 @@
+import { lazy, memo, Suspense } from 'react';
+import { Box, Container, Paper } from '@mui/material';
+import { styles } from './SingleScheduledInterviewPage.styles.js';
+
+const UserCardScheduledInterview = lazy(
+  () => import('../../../components/PageComponents/SingleScheduledInterview/UserCardScheduledInterview')
+);
+const ParticipantEvaluations = lazy(
+  () => import('../../../components/PageComponents/SingleScheduledInterview/ParticipantEvaluations')
+);
+const Statistic = lazy(() => import('../../../components/PageComponents/SingleScheduledInterview/Statistic'));
+const ScheduledMeeting = lazy(
+  () => import('../../../components/PageComponents/SingleScheduledInterview/ScheduledMeeting')
+);
+const InterviewSkills = lazy(
+  () => import('../../../components/PageComponents/SingleScheduledInterview/InterviewSkills')
+);
+
+const MemoizedUserCardScheduledInterview = memo(UserCardScheduledInterview);
+const MemoizedParticipantEvaluations = memo(ParticipantEvaluations);
+const MemoizedStatistic = memo(Statistic);
+const MemoizedScheduledMeeting = memo(ScheduledMeeting);
+const MemoizedInterviewSkills = memo(InterviewSkills);
+
 const SingleScheduledInterviewPage = () => {
-  return <div>Сторінка списку сінгл заплановного інтервью - /interviews/scheduled/inteviewId</div>;
+  return (
+    <Container sx={styles.container}>
+      <Box sx={styles.contentWrapper}>
+        <Paper sx={styles.userCardScheduledInterview}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <MemoizedUserCardScheduledInterview />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.scheduledMeeting}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <MemoizedScheduledMeeting />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.statistic}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <MemoizedStatistic />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.participantEvaluations}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <MemoizedParticipantEvaluations />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.interviewSkills}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <MemoizedInterviewSkills />
+          </Suspense>
+        </Paper>
+      </Box>
+    </Container>
+  );
 };
 
 export default SingleScheduledInterviewPage;

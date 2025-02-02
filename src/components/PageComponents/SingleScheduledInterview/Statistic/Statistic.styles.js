@@ -1,12 +1,8 @@
 export const styles = {
   wrapper: (theme) => ({
-    backgroundColor: theme.palette.pagesSections.backgroundColor,
-    backgroundImage: 'none',
-    boxShadow: 'none',
     padding: theme.spacing(3, 4),
-    maxWidth: '606px',
+    maxWidth: '480px',
     width: '100%',
-    borderRadius: 2,
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',
