@@ -17,6 +17,7 @@ export const styles = {
   },
   boxInfo: {
     display: 'flex',
+    alignItems: 'center',
   },
   boxImg: {
     display: 'flex',
