@@ -1,7 +1,5 @@
-import Statistic from '../../../components/PageComponents/SingleScheduledInterview/Statistic';
-
 const ScheduledInterviewsPage = () => {
-  return <Statistic />;
+  return <div>Сторінка списку заплановного інтервью - /interviews/scheduled</div>;
 };
 
 export default ScheduledInterviewsPage;
