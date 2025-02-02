@@ -1,7 +1,6 @@
 export const styles = {
   wrapper: (theme) => ({
     padding: theme.spacing(3, 4),
-    maxWidth: '480px',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
