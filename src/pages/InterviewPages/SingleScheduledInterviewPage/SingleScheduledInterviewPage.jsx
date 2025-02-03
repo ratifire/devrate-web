@@ -1,6 +1,10 @@
 import { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
-import { UserCardScheduledInterviewSkeleton, ScheduledMeetingSkeleton } from '../../../components/UI/Skeleton';
+import {
+  UserCardScheduledInterviewSkeleton,
+  ScheduledMeetingSkeleton,
+  StatisticSkeleton,
+} from '../../../components/UI/Skeleton';
 import { styles } from './SingleScheduledInterviewPage.styles.js';
 
 const UserCardScheduledInterview = lazy(
@@ -38,7 +42,7 @@ const SingleScheduledInterviewPage = () => {
           </Suspense>
         </Paper>
         <Paper sx={styles.statistic}>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<StatisticSkeleton />}>
             <MemoizedStatistic />
           </Suspense>
         </Paper>

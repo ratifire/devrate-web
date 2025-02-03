@@ -1,4 +1,5 @@
 import UserCardScheduledInterviewSkeleton from './UserCardScheduledInterviewSkeleton';
 import ScheduledMeetingSkeleton from './ScheduledMeetingSkeleton';
+import StatisticSkeleton from './StatisticSkeleton';
 
-export { UserCardScheduledInterviewSkeleton, ScheduledMeetingSkeleton };
+export { UserCardScheduledInterviewSkeleton, ScheduledMeetingSkeleton, StatisticSkeleton };
