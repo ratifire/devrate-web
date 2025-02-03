@@ -2,7 +2,7 @@ import { Badge, IconButton, Popover } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../../assets/icons/message.svg?react';
-import { closeChat, openChat } from '../../../redux/chat/chatSlice.js';
+import { openList, closeList } from '../../../redux/chat/chatSlice.js';
 import { styles } from './Chat.styles';
 import ChatListUsers from './ChatListUsers';
 
@@ -13,10 +13,10 @@ const Chat = () => {
   const handleOpen = (event) => {
     event.preventDefault();
     setBellButton(event.currentTarget);
-    dispatch(openChat({ chatElement: 'list' }));
+    dispatch(openList());
   };
   const handleClose = () => {
-    dispatch(closeChat({ chatElement: 'list' }));
+    dispatch(closeList());
   };
   return (
     <>

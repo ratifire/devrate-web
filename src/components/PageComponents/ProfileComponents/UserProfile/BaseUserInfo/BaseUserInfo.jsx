@@ -29,13 +29,13 @@ const BaseUserInfo = ({ id }) => {
   const { data } = useGetAvatarUserQuery(id);
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
-
   const handleToggleBookmark = (newValue) => {
     setIsBookmarked(newValue);
   };
 
   const handleWriteMessage = () => {
-    dispatch(openChat({ chatElement: 'chat' }));
+    dispatch(openChat({ opponentUserId: id }));
+    console.log(id, 'id BaseUserInfo');
   };
 
   const handleBookInterview = () => {

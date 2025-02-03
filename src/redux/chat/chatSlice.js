@@ -3,20 +3,27 @@ import { createSlice } from '@reduxjs/toolkit';
 const chatSlice = createSlice({
   name: 'modal',
   initialState: {
+    opponentUserId: null,
     chat: false,
     list: false,
   },
   reducers: {
-    openChat: (state, action) => {
-      const { chatElement } = action.payload;
-      state[chatElement] = true;
+    openList: (state) => {
+      state.list = true;
     },
-    closeChat: (state, action) => {
-      const { chatElement } = action.payload;
-      state[chatElement] = false;
+    closeList: (state) => {
+      state.list = false;
+    },
+    openChat: (state, action) => {
+      const { opponentUserId } = action.payload;
+      state.chat = true;
+      state.opponentUserId = Number(opponentUserId);
+    },
+    closeChat: (state) => {
+      state.chat = false;
     },
   },
 });
 
-export const { openChat, closeChat } = chatSlice.actions;
+export const { openChat, closeChat, openList, closeList } = chatSlice.actions;
 export default chatSlice.reducer;

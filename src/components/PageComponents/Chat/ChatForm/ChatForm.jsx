@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { Box, Fade, IconButton, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
@@ -11,6 +11,7 @@ import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import Send from '../../../../assets/icons/send.svg?react';
 import { array } from '../../../../utils/constants/testMessages';
 import { closeChat } from '../../../../redux/chat/chatSlice';
+// import { useGetChatHistoryQuery } from '../../../../redux/services/chatApiSlice.js';
 import { styles } from './ChatForm.styles.js';
 import ChatMessage from './ChatMessage';
 
@@ -27,11 +28,11 @@ const ChatForm = () => {
   const { chat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   const handleClose = () => {
-    dispatch(closeChat({ chatElement: 'chat' }));
+    dispatch(closeChat());
   };
   const { data: info } = useSelector(selectCurrentUser);
   const { id, firstName, lastName } = info;
-  const { data } = useGetAvatarUserQuery(id);
+
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
   const isDragging = useRef(false);
@@ -39,6 +40,9 @@ const ChatForm = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [client, setClient] = useState(null);
   const [message, setMessage] = useState('');
+  const { data } = useGetAvatarUserQuery(id);
+  const { data: dataChats } = useGetChatHistoryQuery(opponentUserId, { skip: !opponentUserId });
+  // console.log(dataChats, 'dataChats', opponentUserId, 'opponentUserId');
 
   useEffect(() => {
     if (isUserAtBottom && chatWrapperRef.current) {
@@ -161,7 +165,7 @@ const ChatForm = () => {
       // reconnectDelay: 5000, // Повторне підключення кожні 5 секунд у разі помилки
       onConnect: () => {
         setIsConnected(true);
-        newClient.subscribe('/topic/messages/8882', (message) => {
+        newClient.subscribe('/topic/messages/8881', (message) => {
           JSON.parse(message.body);
         });
       },
@@ -241,4 +245,4 @@ const ChatForm = () => {
   );
 };
 
-export default ChatForm;
+export default memo(ChatForm);

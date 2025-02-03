@@ -2,16 +2,19 @@ import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import UserAvatar from '../../../../UI/UserAvatar';
-import { closeChat, openChat } from '../../../../../redux/chat/chatSlice.js';
+import { closeList, openChat } from '../../../../../redux/chat/chatSlice.js';
 import { styles } from './ChatUser.styles';
 
 const ChatUser = ({ data }) => {
-  const { firstName, lastName, userPicture, time, lastMessages } = data;
+  const { firstName, lastName, userPicture, time, lastMessages, userId } = data;
+
   const dispatch = useDispatch();
   const handlerOpenChat = () => {
-    dispatch(openChat({ chatElement: 'chat' }));
-    dispatch(closeChat({ chatElement: 'list' }));
+    dispatch(closeList());
+    dispatch(openChat({ opponentUserId: userId }));
+    console.log(userId, 'id ChatUser');
   };
+
   return (
     <Box sx={styles.bg}>
       <Box sx={styles.wrapper} onClick={handlerOpenChat}>
