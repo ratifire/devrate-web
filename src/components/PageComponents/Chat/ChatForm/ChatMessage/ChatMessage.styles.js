@@ -3,7 +3,7 @@ export const styles = {
     padding: '8px 16px',
     marginBottom: '16px',
   },
-  sender: {
+  receiver: {
     backgroundColor: '#444446',
     borderRadius: '0 16px 16px 16px',
     maxWidth: 'calc(100% - 28px)',
@@ -23,7 +23,7 @@ export const styles = {
       maxWidth: 'calc(100% - 100px)',
     },
   },
-  message: {
+  sender: {
     backgroundColor: '#CEB0FA',
     borderRadius: '16px 0 16px 16px',
     maxWidth: 'calc(100% - 28px)',

@@ -53,6 +53,11 @@ export const styles = {
       fontSize: '20px',
     },
   }),
+  linkAvatar: {
+    textDecoration: 'none',
+    display: 'block',
+    borderRadius: '50%',
+  },
   btnIconScroll: {
     position: 'sticky',
     width: '44px',

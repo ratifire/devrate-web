@@ -11,7 +11,7 @@ const ChatUser = ({ data }) => {
   const dispatch = useDispatch();
   const handlerOpenChat = () => {
     dispatch(closeList());
-    dispatch(openChat({ opponentUserId: userId }));
+    dispatch(openChat({ id: userId, firstName: firstName, lastName: lastName, userPicture: userPicture }));
     console.log(userId, 'id ChatUser');
   };
 
