@@ -6,6 +6,7 @@ import UserAvatar from '../../../UI/UserAvatar';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice.js';
 import FormInputSearch from '../../../FormsComponents/Inputs/FormInputSearch/index.js';
+import { useGetChatsQuery } from '../../../../redux/services/chatApiSlice.js';
 import { styles } from './ChatListUsers.styles.js';
 import ChatUser from './ChatUser';
 
@@ -17,98 +18,102 @@ const ChatListUsers = () => {
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
 
-  const listUsers = [
-    {
-      id: 1,
-      userId: 1231,
-      firstName: 'Name',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-    {
-      id: 2,
-      userId: 1211,
-      firstName: 'Name',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-    {
-      id: 3,
-      userId: 2231,
-      firstName: 'Name',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-    {
-      id: 4,
-      userId: 3211,
-      firstName: 'Name',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-    {
-      id: 5,
-      userId: 5231,
-      firstName: 'NameNameNameName ',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-    {
-      id: 6,
-      userId: 6211,
-      firstName: 'Name',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-    {
-      id: 7,
-      userId: 7231,
-      firstName: 'Name',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-    {
-      id: 8,
-      userId: 8211,
-      firstName: 'Name',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-    {
-      id: 9,
-      userId: 9231,
-      firstName: 'Name',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-    {
-      id: 10,
-      userId: 3311,
-      firstName: 'Name',
-      lastName: 'Surname',
-      time: '23113',
-      lastMessages: 'Привіт а ти робиш дуже гарний фронт',
-      userPicture: null,
-    },
-  ];
+  const { data: dataListChats } = useGetChatsQuery();
+  // const { opponentUserId, opponentFirstName, opponentLastName, opponentPicture, lastMessage } = dataListChats;
+  console.log(dataListChats, 'dataListChats');
+
+  // const listUsers = [
+  //   {
+  //     id: 1,
+  //     userId: 1231,
+  //     firstName: 'Name',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  //   {
+  //     id: 2,
+  //     userId: 1211,
+  //     firstName: 'Name',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  //   {
+  //     id: 3,
+  //     userId: 2231,
+  //     firstName: 'Name',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  //   {
+  //     id: 4,
+  //     userId: 3211,
+  //     firstName: 'Name',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  //   {
+  //     id: 5,
+  //     userId: 5231,
+  //     firstName: 'NameNameNameName ',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  //   {
+  //     id: 6,
+  //     userId: 6211,
+  //     firstName: 'Name',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  //   {
+  //     id: 7,
+  //     userId: 7231,
+  //     firstName: 'Name',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  //   {
+  //     id: 8,
+  //     userId: 8211,
+  //     firstName: 'Name',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  //   {
+  //     id: 9,
+  //     userId: 9231,
+  //     firstName: 'Name',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  //   {
+  //     id: 10,
+  //     userId: 3311,
+  //     firstName: 'Name',
+  //     lastName: 'Surname',
+  //     time: '23113',
+  //     lastMessages: 'Привіт а ти робиш дуже гарний фронт',
+  //     userPicture: null,
+  //   },
+  // ];
 
   return (
     <Box sx={styles.container}>
@@ -130,9 +135,14 @@ const ChatListUsers = () => {
       </Box>
       <Box sx={styles.wrapperList}>
         <Box sx={styles.list}>
-          {listUsers?.map((user) => (
-            <ChatUser key={user.id} data={user} />
-          ))}
+          {dataListChats && dataListChats.length > 0 ? (
+            dataListChats.map((item) => <ChatUser key={item.opponentUserId} data={item} />)
+          ) : (
+            <Typography sx={{ textAlign: 'center', marginTop: 2 }} variant='body1'>
+              {/*{t('chat.noChatsAvailable')}*/}
+              {'немає чатів'}
+            </Typography>
+          )}
         </Box>
       </Box>
     </Box>

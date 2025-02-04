@@ -6,25 +6,43 @@ import { closeList, openChat } from '../../../../../redux/chat/chatSlice.js';
 import { styles } from './ChatUser.styles';
 
 const ChatUser = ({ data }) => {
-  const { firstName, lastName, userPicture, time, lastMessages, userId } = data;
-
   const dispatch = useDispatch();
+
+  if (data.length === 0) {
+    return null; // Нічого не рендеримо
+  }
+
+  const { opponentUserId, opponentFirstName, opponentLastName, opponentPicture, lastMessage, lastMessageDate } = data;
+
   const handlerOpenChat = () => {
     dispatch(closeList());
-    dispatch(openChat({ id: userId, firstName: firstName, lastName: lastName, userPicture: userPicture }));
-    console.log(userId, 'id ChatUser');
+    dispatch(
+      openChat({
+        id: opponentUserId,
+        firstName: opponentFirstName,
+        lastName: opponentLastName,
+        userPicture: opponentPicture,
+      })
+    );
+    console.log(opponentUserId, 'id ChatUser');
   };
 
   return (
     <Box sx={styles.bg}>
       <Box sx={styles.wrapper} onClick={handlerOpenChat}>
-        <UserAvatar radius='circle' size='s' src={userPicture} userFirstName={firstName} userLastName={lastName} />
+        <UserAvatar
+          radius='circle'
+          size='s'
+          src={opponentPicture}
+          userFirstName={opponentFirstName}
+          userLastName={opponentLastName}
+        />
         <Box sx={styles.text}>
           <Box sx={styles.info}>
-            <Typography variant='subtitle2'>{`${firstName} ${lastName}`}</Typography>
-            <Typography variant='caption3'>{time}</Typography>
+            <Typography variant='subtitle2'>{`${opponentFirstName} ${opponentLastName}`}</Typography>
+            <Typography variant='caption3'>{lastMessageDate}</Typography>
           </Box>
-          <Typography variant='caption3'>{lastMessages}</Typography>
+          <Typography variant='caption3'>{lastMessage}</Typography>
         </Box>
         <Typography sx={styles.badge} variant='caption3'>
           22

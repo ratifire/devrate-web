@@ -8,10 +8,11 @@ import { Client } from '@stomp/stompjs';
 import { Link as RouterLink } from 'react-router';
 import UserAvatar from '../../../UI/UserAvatar';
 import Send from '../../../../assets/icons/send.svg?react';
-import { array } from '../../../../utils/constants/testMessages';
+// import { array } from '../../../../utils/constants/testMessages';
 import { closeChat } from '../../../../redux/chat/chatSlice';
 import { useGetChatHistoryQuery } from '../../../../redux/services/chatApiSlice.js';
 import { useMoveChat, useResizeChat, useResizeTextarea, useScrollChat } from '../hooks';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { styles } from './ChatForm.styles.js';
 import ChatMessage from './ChatMessage';
 
@@ -22,7 +23,10 @@ const ChatForm = () => {
   const { showScrollButton, handleScroll, handleScrollToBottom } = useScrollChat(chatWrapperRef);
   const { message, setMessage, textFieldRef, handleTextFieldChange } = useResizeTextarea(chatWrapperRef);
   const handleMouseDown = useMoveChat(chatPositionRef);
-  const handleResizeMouseDown /**/ = useResizeChat(chatPositionRef);
+  const handleResizeMouseDown = useResizeChat(chatPositionRef);
+
+  const { data: info } = useSelector(selectCurrentUser);
+  const { id: currentUserId } = info;
 
   const dispatch = useDispatch();
   const handleClose = () => {
@@ -35,11 +39,11 @@ const ChatForm = () => {
 
   const {
     chat,
-    opponentUserInfo: { id, firstName, lastName, userPicture },
+    opponentUserInfo: { id: opponentUserId, firstName, lastName, userPicture },
   } = useSelector((state) => state.chat);
 
-  const { data: dataChats } = useGetChatHistoryQuery(id, { skip: !id });
-  console.log(dataChats, 'dataChats', id, 'opponentUserId');
+  const { data: dataChats } = useGetChatHistoryQuery(opponentUserId, { skip: !opponentUserId });
+  console.log(dataChats?.content, 'dataChats', opponentUserId, 'opponentUserId');
 
   useEffect(() => {
     const socket = new SockJS('https://server.skillzzy.com/chat');
@@ -48,7 +52,7 @@ const ChatForm = () => {
       // reconnectDelay: 5000, // Повторне підключення кожні 5 секунд у разі помилки
       onConnect: () => {
         setIsConnected(true);
-        newClient.subscribe('/topic/messages/8881', (message) => {
+        newClient.subscribe(`/topic/messages/${currentUserId}`, (message) => {
           JSON.parse(message.body);
         });
       },
@@ -70,10 +74,12 @@ const ChatForm = () => {
     client.publish({
       destination: '/app/chat', // Кінцева точка на сервері
       body: JSON.stringify({
-        sender: id, // ID поточного користувача
-        content: message.trim(),
-        recipient: '8882', // ID отримувача
-        topicName: '8882', // Тема
+        senderId: currentUserId, // ID поточного користувача
+        payload: message.trim(),
+        receiverId: opponentUserId, // ID отримувача
+        status: '',
+        dateTime: '',
+        readMessageId: '',
       }),
     });
 
@@ -85,7 +91,7 @@ const ChatForm = () => {
       <Box ref={chatPositionRef} sx={styles.position}>
         <Box sx={styles.container}>
           <Box sx={styles.wrapper}>
-            <Link component={RouterLink} sx={styles.linkAvatar} to={`/profile/${id}`}>
+            <Link component={RouterLink} sx={styles.linkAvatar} to={`/profile/${opponentUserId}`}>
               <UserAvatar
                 radius='circle'
                 size='m'
@@ -102,7 +108,7 @@ const ChatForm = () => {
             </IconButton>
           </Box>
           <Box ref={chatWrapperRef} sx={styles.chatWrapper} onScroll={handleScroll}>
-            {array?.map((item) => (
+            {dataChats?.content.map((item) => (
               <ChatMessage key={item.dateTime} data={item} />
             ))}
             {showScrollButton && (
