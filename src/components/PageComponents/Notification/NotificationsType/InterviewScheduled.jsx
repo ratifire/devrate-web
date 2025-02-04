@@ -4,7 +4,7 @@ import { InfoOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import TimeAgo from '../../../UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
-import { formatToLocalDate } from '../../../../utils/helpers/dateHandlers.js';
+import { formatToLocalDate } from '../../../../utils/helpers/formatToLocalDate';
 
 const InterviewScheduled = ({ createAt, payload }) => {
   const { t } = useTranslation();
