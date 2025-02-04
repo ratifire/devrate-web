@@ -11,30 +11,27 @@ import Send from '../../../../assets/icons/send.svg?react';
 import { array } from '../../../../utils/constants/testMessages';
 import { closeChat } from '../../../../redux/chat/chatSlice';
 import { useGetChatHistoryQuery } from '../../../../redux/services/chatApiSlice.js';
-import { useMoveChat } from '../hooks';
+import { useMoveChat, useResizeChat, useResizeTextarea, useScrollChat } from '../hooks';
 import { styles } from './ChatForm.styles.js';
 import ChatMessage from './ChatMessage';
 
 const ChatForm = () => {
   const chatWrapperRef = useRef(null);
+  const chatPositionRef = useRef(null);
 
-  const textFieldRef = useRef(null);
-  const resizeStartPos = useRef({ width: 0, height: 0 });
-  const isResizing = useRef(false);
-  const [showScrollButton, setShowScrollButton] = useState(false);
-  const [isUserAtBottom, setIsUserAtBottom] = useState(true);
+  const { showScrollButton, handleScroll, handleScrollToBottom } = useScrollChat(chatWrapperRef);
+  const { message, setMessage, textFieldRef, handleTextFieldChange } = useResizeTextarea(chatWrapperRef);
+  const handleMouseDown = useMoveChat(chatPositionRef);
+  const handleResizeMouseDown /**/ = useResizeChat(chatPositionRef);
 
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(closeChat());
   };
 
-  const [textFieldHeight, setTextFieldHeight] = useState(23);
-
   // logic chat
   const [isConnected, setIsConnected] = useState(false);
   const [client, setClient] = useState(null);
-  const [message, setMessage] = useState('');
 
   const {
     chat,
@@ -43,89 +40,7 @@ const ChatForm = () => {
 
   const { data: dataChats } = useGetChatHistoryQuery(id, { skip: !id });
   console.log(dataChats, 'dataChats', id, 'opponentUserId');
-  // logic chat
 
-  useEffect(() => {
-    if (isUserAtBottom && chatWrapperRef.current) {
-      chatWrapperRef.current.scrollTo({
-        top: chatWrapperRef.current.scrollHeight,
-        behavior: 'smooth',
-      });
-    }
-  }, [array, isUserAtBottom]);
-
-  const handleScroll = () => {
-    if (chatWrapperRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = chatWrapperRef.current;
-
-      const isAtBottom = scrollHeight - (scrollTop + clientHeight) <= 100;
-      setShowScrollButton(!isAtBottom);
-      setIsUserAtBottom(isAtBottom);
-    }
-  };
-
-  const handleScrollToBottom = () => {
-    if (chatWrapperRef.current) {
-      chatWrapperRef.current.scrollTo({
-        top: chatWrapperRef.current.scrollHeight,
-        behavior: 'smooth',
-      });
-      setIsUserAtBottom(true);
-    }
-  };
-
-  const handleTextFieldChange = (e) => {
-    const height = e.target.scrollHeight;
-    const maxHeight = 115;
-    setMessage(e.target.value);
-    if (height < maxHeight) {
-      setTextFieldHeight(height);
-    } else {
-      setTextFieldHeight(maxHeight);
-    }
-  };
-
-  useEffect(() => {
-    if (textFieldRef.current && chatWrapperRef.current) {
-      const textFieldExtraHeight = textFieldHeight - 23;
-      const newHeight = 532 - textFieldExtraHeight;
-      chatWrapperRef.current.style.maxHeight = `${newHeight}px`;
-    }
-  }, [textFieldHeight]);
-
-  const { chatPositionRef, handleMouseDown } = useMoveChat();
-
-  const handleResizeMouseDown = (e) => {
-    isResizing.current = true;
-    resizeStartPos.current = {
-      width: chatPositionRef.current.offsetWidth,
-      height: chatPositionRef.current.offsetHeight,
-      x: e.clientX,
-      y: e.clientY,
-    };
-    document.addEventListener('mousemove', handleResizeMouseMove);
-    document.addEventListener('mouseup', handleResizeMouseUp);
-  };
-
-  const handleResizeMouseMove = (e) => {
-    if (!isResizing.current) return;
-    const dx = e.clientX - resizeStartPos.current.x;
-    const newWidth = Math.min(580, Math.max(380, resizeStartPos.current.width + dx)); // Обмеження ширини
-    chatPositionRef.current.style.width = `${newWidth}px`; // Зміна лише ширини
-  };
-
-  const handleResizeMouseUp = () => {
-    isResizing.current = false;
-    document.removeEventListener('mousemove', handleResizeMouseMove);
-    document.removeEventListener('mouseup', handleResizeMouseUp);
-  };
-
-  useEffect(() => {
-    if (chatPositionRef.current) {
-      chatPositionRef.current.style.width = '480px';
-    }
-  }, []);
-  // logic chat
   useEffect(() => {
     const socket = new SockJS('https://server.skillzzy.com/chat');
     const newClient = new Client({
@@ -214,7 +129,7 @@ const ChatForm = () => {
               </IconButton>
             </Box>
           </form>
-          <Box sx={styles.resizeHandle} onMouseDown={handleResizeMouseDown} /> {/* [6] Додано елемент для ресайзу */}
+          <Box sx={styles.resizeHandle} onMouseDown={handleResizeMouseDown} />
         </Box>
       </Box>
     </Fade>

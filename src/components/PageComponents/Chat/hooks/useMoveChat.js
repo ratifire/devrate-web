@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
-const useMoveChat = () => {
-  const chatPositionRef = useRef(null);
+const useMoveChat = (chatPositionRef) => {
+
   const chatStartPos = useRef({ top: 0, left: 0 });
   const initialMousePos = useRef({ x: 0, y: 0 });
   const isDragging = useRef(false);
@@ -41,10 +41,7 @@ const useMoveChat = () => {
     document.removeEventListener('mouseup', handleMouseUp);
   };
 
-  return {
-    chatPositionRef,
-    handleMouseDown,
-  };
+  return handleMouseDown;
 };
 
 export default useMoveChat;
