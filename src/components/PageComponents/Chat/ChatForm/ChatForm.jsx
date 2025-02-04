@@ -43,6 +43,7 @@ const ChatForm = () => {
   } = useSelector((state) => state.chat);
 
   const { data: dataChats } = useGetChatHistoryQuery(opponentUserId, { skip: !opponentUserId });
+
   console.log(dataChats?.content, 'dataChats', opponentUserId, 'opponentUserId');
 
   useEffect(() => {
