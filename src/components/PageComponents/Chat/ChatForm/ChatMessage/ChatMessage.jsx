@@ -16,7 +16,7 @@ const ChatMessage = ({ data }) => {
   const { data: info } = useSelector(selectCurrentUser);
   const { id } = info;
 
-  const variant = receiverId === id ? 'sender' : 'receiver';
+  const variant = receiverId === id ? 'receiver' : 'sender';
 
   // const icons = {
   //   message: true ? <DoneAllIcon /> : <DoneIcon />,

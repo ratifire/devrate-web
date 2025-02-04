@@ -15,6 +15,7 @@ import { useMoveChat, useResizeChat, useResizeTextarea, useScrollChat } from '..
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { styles } from './ChatForm.styles.js';
 import ChatMessage from './ChatMessage';
+import { DateTime } from 'luxon';
 
 const ChatForm = () => {
   const chatWrapperRef = useRef(null);
@@ -79,7 +80,7 @@ const ChatForm = () => {
         payload: message.trim(),
         receiverId: opponentUserId, // ID отримувача
         status: '',
-        dateTime: '',
+        dateTime: DateTime.utc().toISO(),
         readMessageId: '',
       }),
     });
