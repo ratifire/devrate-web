@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { Outlet } from 'react-router';
 import ProfileHeader from '../../components/PageComponents/ProfileHeader';
 import ModalComponent from '../../components/ModalsComponents/ModalComponent.jsx';
-import ChatForm from '../../components/PageComponents/Chat/ChatForm';
+import ChatFormTemplate from '../../components/PageComponents/Chat/ChatFormTemplate';
 
 const MemoizedProfileHeader = memo(ProfileHeader);
 
@@ -12,7 +12,7 @@ const RootPage = () => {
       <MemoizedProfileHeader />
       <Outlet />
       <ModalComponent />
-      <ChatForm />
+      <ChatFormTemplate />
     </>
   );
 };
