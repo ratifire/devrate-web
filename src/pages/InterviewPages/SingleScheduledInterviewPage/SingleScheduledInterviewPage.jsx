@@ -4,6 +4,7 @@ import {
   UserCardScheduledInterviewSkeleton,
   ScheduledMeetingSkeleton,
   StatisticSkeleton,
+  ParticipantEvaluationsSkeleton,
 } from '../../../components/UI/Skeleton';
 import { styles } from './SingleScheduledInterviewPage.styles.js';
 
@@ -47,7 +48,7 @@ const SingleScheduledInterviewPage = () => {
           </Suspense>
         </Paper>
         <Paper sx={styles.participantEvaluations}>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<ParticipantEvaluationsSkeleton />}>
             <MemoizedParticipantEvaluations />
           </Suspense>
         </Paper>
