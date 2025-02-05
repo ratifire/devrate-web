@@ -30,6 +30,16 @@ export const styles = {
   role: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.participant,
     marginBottom: theme.spacing(2),
+    textTransform: 'lowercase',
+    '&:first-letter': {
+      textTransform: 'uppercase',
+    },
+    ' span': {
+      display: 'inline-block',
+      '&:first-letter': {
+        textTransform: 'uppercase',
+      },
+    },
   }),
   eventDate: (theme) => ({
     lineHeight: '20.02px',
