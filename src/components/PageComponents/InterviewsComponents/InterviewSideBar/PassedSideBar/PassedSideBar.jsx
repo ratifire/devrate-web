@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { styles } from '../InterviewSideBar.styles.js';
 import { useGetAllPassedInterviewsQuery } from '../../../../../redux/interviews/passedInterviewsApiSlice.js';
@@ -13,7 +13,6 @@ const PassedInterviewSideBar = () => {
   const [hasMore, setHasMore] = useState(true);
   const { data: passedInterviews, isFetching } = useGetAllPassedInterviewsQuery({ page, size: 5 });
   const lastEventRef = useRef(null);
-
   useEffect(() => {
     if (passedInterviews?.content) {
       setInterviews((prevInterviews) => [...prevInterviews, ...passedInterviews.content]);
@@ -33,11 +32,14 @@ const PassedInterviewSideBar = () => {
     [isFetching, hasMore]
   );
 
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 1.0,
-  };
+  const options = useMemo(
+    () => ({
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0,
+    }),
+    []
+  );
 
   useEffect(() => {
     if (!lastEventRef.current) return;

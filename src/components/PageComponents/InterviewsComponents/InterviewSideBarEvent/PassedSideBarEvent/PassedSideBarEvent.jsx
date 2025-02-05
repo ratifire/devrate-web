@@ -7,7 +7,7 @@ import { formatDateAndTime } from '../../../../../utils/helpers/index.js';
 import { styles } from './../InterviewSideBarEvent.styles.js';
 
 const PasseddSideBarEvent = ({ event, ref }) => {
-  const { id, title, dateTime, role, attendeeId } = event;
+  const { id, attendeeSpecialization, dateTime, role, attendeeId } = event;
   const { t } = useTranslation();
   return (
     <Paper key={id} ref={ref} sx={styles.sideBarEventContainer}>
@@ -18,14 +18,14 @@ const PasseddSideBarEvent = ({ event, ref }) => {
       </Typography>
       <Box sx={styles.titleLevelBox}>
         <Typography component='div' sx={styles.title} variant='h6'>
-          {title}
+          {attendeeSpecialization}
         </Typography>
       </Box>
       <Typography component='div' sx={styles.eventDate} variant='body2'>
         {formatDateAndTime(dateTime)}
       </Typography>
       <Typography component='div' sx={styles.role} variant='body2'>
-        {t('interviews.sideBar.event.role')}: {role}
+        {t('interviews.sideBar.event.role')}: <span>{role}</span>
       </Typography>
       <Typography component='div' sx={styles.host} variant='body2'>
         {t('interviews.sideBar.event.host')}:{' '}
@@ -40,8 +40,7 @@ const PasseddSideBarEvent = ({ event, ref }) => {
 PasseddSideBarEvent.propTypes = {
   event: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    masteryLevel: PropTypes.string.isRequired,
+    attendeeSpecialization: PropTypes.string.isRequired,
     dateTime: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     attendeeId: PropTypes.number.isRequired,

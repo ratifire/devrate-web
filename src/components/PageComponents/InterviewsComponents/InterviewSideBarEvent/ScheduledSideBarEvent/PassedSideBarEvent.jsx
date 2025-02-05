@@ -2,10 +2,10 @@ import { Link as RouterLink } from 'react-router';
 import PropTypes from 'prop-types';
 import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { getLevelColor, formatDateAndTime } from '../../../../../utils/helpers/index.js';
+import { formatDateAndTime } from '../../../../../utils/helpers/index.js';
 // import LimeCircleIcon from '../../../../assets/icons/InterviewPageIcons/lime-ellipse.svg';
-import getSpecLevel from '../../../../../utils/helpers/getSpecLevel.js';
 import { styles } from '../InterviewSideBarEvent.styles.js';
+import { lvlMastery, lvlMasteryColor } from '../../../../../utils/constants/masteryLvl.js';
 
 const ScheduledSideBarEvent = ({ event, ref }) => {
   const { id, specializationName, masteryLevel, startTime, role, hostId, hostFirstName, hostLastName } = event;
@@ -21,15 +21,15 @@ const ScheduledSideBarEvent = ({ event, ref }) => {
         <Typography component='div' sx={styles.title} variant='h6'>
           {specializationName}
         </Typography>
-        <Typography component='div' sx={{ color: getLevelColor(masteryLevel) }} variant='subtitle2'>
-          {getSpecLevel(masteryLevel)}
+        <Typography component='div' sx={{ color: lvlMasteryColor[masteryLevel] || 'inherit' }} variant='subtitle2'>
+          {lvlMastery[masteryLevel]}
         </Typography>
       </Box>
       <Typography component='div' sx={styles.eventDate} variant='body2'>
         {formatDateAndTime(startTime)}
       </Typography>
       <Typography component='div' sx={styles.role} variant='body2'>
-        {t('interviews.sideBar.event.role')}: {role}
+        {t('interviews.sideBar.event.role')}: <span>{role}</span>
       </Typography>
       <Typography component='div' sx={styles.host} variant='body2'>
         {t('interviews.sideBar.event.host')}:{' '}
