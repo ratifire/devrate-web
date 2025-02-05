@@ -6,7 +6,8 @@ import { clearTokens, setTokens } from '../../auth/tokenSlice';
 import { getTokenInHeaders } from '../../../utils/helpers';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_DEV_URL,
+  // baseUrl: import.meta.env.VITE_API_DEV_URL,
+  baseUrl: import.meta.env.VITE_API_URL,
   prepareHeaders: (headers, { getState, endpoint }) => {
     if (PUBLIC_ENDPOINTS_ARRAY.includes(endpoint)) return;
 
