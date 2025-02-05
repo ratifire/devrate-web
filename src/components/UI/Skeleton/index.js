@@ -29,6 +29,7 @@ import {
   ScheduledMeetingSkeleton,
   StatisticSkeleton,
   ParticipantEvaluationsSkeleton,
+  InterviewSkillsSkeleton,
 } from './Pages/scheduledInterviewSkeleton';
 
 export {
@@ -57,4 +58,5 @@ export {
   ScheduledMeetingSkeleton,
   StatisticSkeleton,
   ParticipantEvaluationsSkeleton,
+  InterviewSkillsSkeleton,
 };
