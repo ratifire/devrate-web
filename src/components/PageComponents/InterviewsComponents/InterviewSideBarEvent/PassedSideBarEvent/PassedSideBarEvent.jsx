@@ -6,8 +6,8 @@ import { formatDateAndTime } from '../../../../../utils/helpers/index.js';
 // import OrangeCircleIcon from '../../../../../assets/icons/InterviewPageIcons/orange-ellipse.svg';
 import { styles } from './../InterviewSideBarEvent.styles.js';
 
-const PasseddSideBarEvent = ({ event, ref }) => {
-  const { id, attendeeSpecialization, dateTime, role, attendeeId } = event;
+const PassedSideBarEvent = ({ event, ref }) => {
+  const { id, attendeeSpecialization, dateTime, role, attendeeId, attendeeFirstName, attendeeLastName } = event;
   const { t } = useTranslation();
   return (
     <Paper key={id} ref={ref} sx={styles.sideBarEventContainer}>
@@ -30,22 +30,24 @@ const PasseddSideBarEvent = ({ event, ref }) => {
       <Typography component='div' sx={styles.host} variant='body2'>
         {t('interviews.sideBar.event.host')}:{' '}
         <Link component={RouterLink} sx={styles.host_link} to={`/profile/${attendeeId}`}>
-          {attendeeId}
+          {attendeeFirstName} {attendeeLastName}
         </Link>
       </Typography>
     </Paper>
   );
 };
 
-PasseddSideBarEvent.propTypes = {
+PassedSideBarEvent.propTypes = {
   event: PropTypes.shape({
     id: PropTypes.number.isRequired,
     attendeeSpecialization: PropTypes.string.isRequired,
     dateTime: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     attendeeId: PropTypes.number.isRequired,
+    attendeeFirstName: PropTypes.string.isRequired,
+    attendeeLastName: PropTypes.string.isRequired,
   }).isRequired,
   ref: PropTypes.object,
 };
 
-export default PasseddSideBarEvent;
+export default PassedSideBarEvent;
