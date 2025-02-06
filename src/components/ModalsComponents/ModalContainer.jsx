@@ -6,7 +6,6 @@ import {
   AchievementModal,
   ModalUserInfo,
   WorkExperienceEditModal,
-  EducationEditModal,
   AchievementEditModal,
 } from './ProfileModals';
 import { CheckEmail, LoginModal, RegistrationModal, ResetPassword, ConfirmationModal } from './AuthModals';
@@ -27,7 +26,6 @@ const modalEnum = {
   [modalNames.workExperienceModal]: WorkExperienceModal,
   [modalNames.workExperienceEditModal]: WorkExperienceEditModal,
   [modalNames.educationModal]: EducationModal,
-  [modalNames.educationEditModal]: EducationEditModal,
   [modalNames.userInfoModal]: ModalUserInfo,
   [modalNames.loginModal]: LoginModal,
   [modalNames.feedbackProjectModal]: FeedbackProjectModal,
