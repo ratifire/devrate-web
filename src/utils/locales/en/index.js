@@ -681,6 +681,7 @@ export const en = {
         create: {
           success: 'Added successfully',
           error: 'Something went wrong',
+          duplicateResponsibility: 'This responsibility already exist',
         },
         edit: {
           success: 'Edited successfully',
