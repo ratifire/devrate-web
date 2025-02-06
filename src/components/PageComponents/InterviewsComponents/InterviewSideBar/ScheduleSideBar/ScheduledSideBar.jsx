@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetAllScheduledInterviewsQuery } from '../../../../../redux/interviews/scheduledInterviewsApiSlice.js';
 import { styles } from '../InterviewSideBar.styles';
-import ScheduledSideBarEvent from '../../InterviewSideBarEvent/ScheduledSideBarEvent/index.js';
+import SideBarEvent from '../../InterviewSideBarEvent/index.js';
 
 const ScheduledSideBar = () => {
   const { t } = useTranslation();
@@ -60,11 +60,7 @@ const ScheduledSideBar = () => {
       <Box sx={styles.scrollContainer}>
         {interviews?.length > 0 &&
           interviews.map((event, index) => (
-            <ScheduledSideBarEvent
-              key={event.id}
-              ref={index === interviews.length - 1 ? lastEventRef : null}
-              event={event}
-            />
+            <SideBarEvent key={event.id} ref={index === interviews.length - 1 ? lastEventRef : null} event={event} />
           ))}
       </Box>
     </Box>

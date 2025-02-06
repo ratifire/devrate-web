@@ -9,6 +9,20 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         result?.content
           ? [...result.content.map(({ id }) => ({ type: 'ScheduledInterview', id })), 'ScheduledInterview']
           : ['ScheduledInterviews'],
+      transformResponse: (result) => {
+        const transformedContent = result?.content.map((event) => {
+          return {
+            ...event,
+            title: event.specializationName,
+            date: event.startTime,
+          };
+        });
+
+        return {
+          ...result,
+          content: transformedContent,
+        };
+      },
     }),
     getScheduledInterviewById: builder.query({
       query: ({ interviewId }) => `/interviews/events/${interviewId}`,

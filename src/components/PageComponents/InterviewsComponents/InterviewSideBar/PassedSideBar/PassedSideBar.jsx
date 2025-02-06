@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { styles } from '../InterviewSideBar.styles.js';
 import { useGetAllPassedInterviewsQuery } from '../../../../../redux/interviews/passedInterviewsApiSlice.js';
-import PassedSideBarEvent from '../../InterviewSideBarEvent/PassedSideBarEvent';
+import SideBarEvent from '../../InterviewSideBarEvent/index.js';
 
 const PassedInterviewSideBar = () => {
   const { t } = useTranslation();
@@ -63,11 +63,7 @@ const PassedInterviewSideBar = () => {
       <Box sx={styles.scrollContainer}>
         {interviews?.length > 0 &&
           interviews.map((event, index) => (
-            <PassedSideBarEvent
-              key={event.id}
-              ref={index === interviews.length - 1 ? lastEventRef : null}
-              event={event}
-            />
+            <SideBarEvent key={event.id} ref={index === interviews.length - 1 ? lastEventRef : null} event={event} />
           ))}
       </Box>
     </Box>
