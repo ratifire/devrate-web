@@ -1,13 +1,18 @@
 import { Box, Typography, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import zoom from '../../../../assets/icons/InterviewPageIcons/zoom.png';
 import UserAvatar from '../../../UI/UserAvatar/index.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { styles } from './ScheduledMeeting.styles';
 
 const ScheduledMeeting = () => {
   const { t } = useTranslation();
+  const {
+    data: { firstName, lastName },
+  } = useSelector(selectCurrentUser);
 
   return (
     <Box sx={styles.wrapper}>
@@ -29,20 +34,26 @@ const ScheduledMeeting = () => {
       </Box>
       <Box sx={styles.boxInfo}>
         <Box sx={styles.boxImg}>
-          <UserAvatar radius='circle' size='xs' userFirstName='Олена' userLastName='Король' userName='Олена' />
+          <UserAvatar
+            radius='circle'
+            size='xs'
+            userFirstName={firstName}
+            userLastName={lastName}
+            userName={firstName}
+          />
           <UserAvatar
             correctStyle={styles.activeImg}
             radius='circle'
             size='xs'
-            userFirstName='Дарина'
-            userLastName='Бондаренко'
-            userName='Дарина'
+            userFirstName='Олена'
+            userLastName='Король'
+            userName='Олена'
           />
         </Box>
         <Typography component='p' sx={styles.boxInfoText} variant='subtitle2'>
           {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.participants')}:
           <Typography component='span' variant='body'>
-            Олена Король; Дарина Бондаренко
+            Олена Король; {firstName} {lastName}
           </Typography>
         </Typography>
       </Box>
