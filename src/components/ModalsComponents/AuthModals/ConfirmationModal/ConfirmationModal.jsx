@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import ModalLayout from '../../../../layouts/ModalLayout';
 import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
 import { useConfirmEmailMutation } from '../../../../redux/auth/authApiSlice';
-import { ConfirmationSchema } from '../../../../utils/valadationSchemas/index';
+import { ConfirmationSchema } from '../../../../utils/validationSchemas';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import ConfirmationForm from './ConfirmationForm';
 import styles from './ConfirmationModal.styles';
 
@@ -17,11 +17,7 @@ const ConfirmationModal = () => {
   const inputRefs = useRef([]);
   const [codeError, setCodeError] = useState(false);
   const [confirmEmail] = useConfirmEmailMutation();
-  const openConfirmation = useSelector((state) => state.modal.openConfirmation);
-  const email = useSelector((state) => state.modal.modalData);
-  const handleClose = () => {
-    dispatch(closeModal({ modalName: 'openConfirmation' }));
-  };
+  const email = useSelector((state) => state.modal.data);
 
   const formik = useFormik({
     initialValues: {
@@ -37,17 +33,13 @@ const ConfirmationModal = () => {
       const code = Object.values(values).join('');
 
       try {
-        const response = await confirmEmail({
+        await confirmEmail({
           confirmationCode: code,
           email,
         }).unwrap();
         resetForm();
-        handleClose();
-        if (response) {
-          setTimeout(() => {
-            dispatch(openModal({ modalName: 'openLogin' }));
-          }, 500);
-        }
+        dispatch(closeModal());
+        dispatch(openModal({ modalType: modalNames.loginModal }));
         // eslint-disable-next-line no-unused-vars
       } catch (error) {
         setCodeError(true);
@@ -66,7 +58,7 @@ const ConfirmationModal = () => {
   };
 
   return (
-    <ModalLayout open={openConfirmation} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='subtitle2'>
         {changeColorOfLastTitleWord(t('modal.confirmation.title'))}
       </Typography>
@@ -87,10 +79,11 @@ const ConfirmationModal = () => {
         buttonLabel={t('modal.confirmation.btn_confirm')}
         formik={formik}
         handleCodeChange={handleCodeChange}
+        handleSubmit={formik.handleSubmit}
         helperTextContent={codeError}
         inputRefs={inputRefs}
       />
-    </ModalLayout>
+    </>
   );
 };
 

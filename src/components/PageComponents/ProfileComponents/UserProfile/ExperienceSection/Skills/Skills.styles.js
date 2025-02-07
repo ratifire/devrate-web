@@ -3,6 +3,7 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     gridGap: '20px',
+    height: '100%',
   }),
   info: (theme) => ({
     display: 'flex',
@@ -41,8 +42,12 @@ export const styles = {
   }),
   wrapperSearch: {
     flex: '0 1 max(333px)',
-    height: '280px',
+    minHeight: '280px',
+    height: '100%',
     position: 'relative',
+    '@media (min-width: 1536px)': {
+      flex: '0 1 max(636px)',
+    },
   },
   search: {
     position: 'sticky',

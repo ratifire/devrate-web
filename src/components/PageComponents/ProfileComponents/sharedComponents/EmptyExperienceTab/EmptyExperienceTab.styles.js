@@ -6,7 +6,13 @@ export const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center bottom',
+    backgroundPosition: 'center 100px',
+    backgroundSize: '567px 192px',
+    '@media (min-width: 1272px)': {
+      backgroundPosition: 'center calc(50% - -100px)',
+      backgroundSize: '681px 230px',
+      justifyContent: 'center',
+    },
   },
 
   title: {

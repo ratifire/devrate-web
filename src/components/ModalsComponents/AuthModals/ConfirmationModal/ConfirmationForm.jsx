@@ -4,8 +4,9 @@ import { Box, Link, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
+import { openModal } from '../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import styles from './ConfirmationModal.styles';
 
 const ConfirmationForm = ({
@@ -23,8 +24,7 @@ const ConfirmationForm = ({
   const dispatch = useDispatch();
 
   const handleCloseAllModal = () => {
-    dispatch(closeModal({ modalName: 'openConfirmation' }));
-    dispatch(openModal({ modalName: 'openRegistration' }));
+    dispatch(openModal({ modalType: modalNames.registrationModal }));
   };
 
   useEffect(() => {
@@ -75,6 +75,9 @@ const ConfirmationForm = ({
         event.preventDefault();
       }
     } else {
+      if (key === 'Enter' && index === fieldCount - 1) {
+        handleClick();
+      }
       event.preventDefault();
     }
   };
@@ -106,7 +109,8 @@ const ConfirmationForm = ({
   };
 
   const handleClick = () => {
-    handleSubmit();
+    // handleSubmit();
+    formik.handleSubmit();
     handleCode();
   };
 
@@ -184,9 +188,9 @@ const ConfirmationForm = ({
             {' '}
             {t('modal.confirmation.repeat_request_text2')}{' '}
           </Typography>
-          <Link sx={styles.confirmationLink} to={'/'} onClick={handleCloseAllModal}>
+          <Typography sx={styles.confirmationLink} onClick={handleCloseAllModal}>
             {t('modal.confirmation.change_email_link')}
-          </Link>
+          </Typography>
         </Typography>
         <Typography />
       </Box>

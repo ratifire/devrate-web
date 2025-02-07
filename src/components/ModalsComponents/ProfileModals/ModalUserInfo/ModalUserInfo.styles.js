@@ -46,6 +46,7 @@ export const styles = {
   }),
   wrapperStepContent: (theme) => ({
     paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(3),
   }),
   wrapperBottom: {
     display: 'flex',

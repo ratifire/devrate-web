@@ -21,10 +21,11 @@ import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { openModal } from '../../../redux/modal/modalSlice';
+import { modalNames } from '../../../utils/constants/modalNames.js';
 import links from './profileRoutes';
 import styles from './Menu.styles';
 
-const Menu = ({ isDrawerOpen, toggleDrawer }) => {
+const Menu = ({ isDrawerOpen, toggleDrawer, closeMenu }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const feedbackProjectModal = useSelector((state) => state.modal.feedbackProjectModal);
@@ -41,18 +42,19 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
   };
 
   const handleOpenFeedbackModal = () => {
-    dispatch(openModal({ modalName: 'feedbackProjectModal' }));
+    dispatch(openModal({ modalType: modalNames.feedbackProjectModal }));
   };
 
   const handleLinkClick = async (link) => {
     if (link.name === 'profile.userMenu.logout') {
       await logoutHandler();
     }
+    closeMenu();
   };
 
   return (
     <>
-      <Drawer anchor='right' open={isDrawerOpen} onClose={toggleDrawer}>
+      <Drawer anchor='right' open={isDrawerOpen} sx={styles.bg} onClose={toggleDrawer}>
         <Box role='presentation' sx={styles.userMenuBox}>
           <Box sx={styles.upperMenu}>
             <Typography component='div' variant='h5'>
@@ -106,6 +108,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer }) => {
 Menu.propTypes = {
   isDrawerOpen: PropTypes.bool.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
 };
 
 export default Menu;

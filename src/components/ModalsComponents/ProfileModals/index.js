@@ -1,6 +1,14 @@
 import ModalUserInfo from './ModalUserInfo';
-import WorkExperienceModal from './WorkExperienceModal';
-import AchievementModal from './AchievementModal';
-import EducationModal from './EducationModal';
+import { WorkExperienceModal, WorkExperienceEditModal } from './WorkExperienceModal';
+import { AchievementEditModal, AchievementModal } from './AchievementModal';
+import { EducationModal, EducationEditModal } from './EducationModal';
 
-export { ModalUserInfo, WorkExperienceModal, AchievementModal, EducationModal };
+export {
+  ModalUserInfo,
+  WorkExperienceModal,
+  AchievementModal,
+  EducationModal,
+  AchievementEditModal,
+  EducationEditModal,
+  WorkExperienceEditModal,
+};

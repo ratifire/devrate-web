@@ -7,6 +7,24 @@ export const styles = {
     borderRadius: 2,
     width: '100%',
   }),
+  accordion: {
+    position: 'relative',
+    cursor: 'pointer',
+    padding: '10px 0',
+    '@media (min-width: 1272px)': {
+      cursor: 'auto',
+    },
+  },
+  iconBtn: {
+    position: 'absolute',
+    top: 'calc(50% - 12px)',
+    right: 0,
+    borderRadius: 1,
+    transition: 'transform 0.2s ease-in-out',
+    '@media (min-width: 1272px)': {
+      display: 'none',
+    },
+  },
   star: (theme) => ({
     width: '18px',
     height: '18px',
@@ -48,10 +66,10 @@ export const styles = {
       },
     },
   }),
-  list: {
-    marginTop: '16px',
-    display: 'flex',
-    flexWrap: 'wrap',
-    gridGap: '0 20px',
+  flex100: {
+    flex: '0 1 100%',
+  },
+  flex50: {
+    flex: '0 1 calc(50% - 10px)',
   },
 };

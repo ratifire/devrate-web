@@ -6,10 +6,10 @@ import { useSnackbar } from 'notistack';
 import ButtonDef from '../../FormsComponents/Buttons/ButtonDef';
 import FormSelect from '../../FormsComponents/Inputs/FormSelect';
 import TextAreaInput from '../../FormsComponents/Inputs/TextAreaInput';
-import ModalLayoutProfile from '../../../layouts/ModalLayoutProfile';
 import { closeModal } from '../../../redux/modal/modalSlice';
-import { FeedbackProjectModalSchema } from '../../../utils/valadationSchemas/index';
+import { FeedbackProjectModalSchema } from '../../../utils/validationSchemas/index';
 import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
+import { modalNames } from '../../../utils/constants/modalNames.js';
 import { feedbackOptions } from './constants';
 import { styles } from './FeedbackProjectModal.styles';
 
@@ -22,27 +22,27 @@ const FeedbackProjectModal = () => {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const openFeedback = useSelector((state) => state.modal.feedbackProjectModal);
   const { id } = useSelector((state) => state.auth.user.data);
 
   const [createFeedback, { isLoading }] = useCreateFeedbackMutation();
 
   const handleClose = () => {
-    dispatch(closeModal({ modalName: 'feedbackProjectModal' }));
+    dispatch(closeModal({ modalType: modalNames.feedbackProjectModal }));
   };
 
   const onSubmit = async (values) => {
-    const result = await createFeedback({
-      userId: id,
-      type: values.select,
-      text: values.feedbackText,
-    });
-
-    if (result.error) {
-      enqueueSnackbar(t('modal.feedbackProjectModal.error_429'), { variant: 'error' });
-    } else {
+    try {
+      await createFeedback({
+        userId: id,
+        type: values.select,
+        text: values.feedbackText,
+      });
       enqueueSnackbar(t('modal.feedbackProjectModal.success'), { variant: 'success' });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('modal.feedbackProjectModal.error_429'), { variant: 'error' });
     }
+    handleClose();
   };
 
   const formik = useFormik({
@@ -52,7 +52,7 @@ const FeedbackProjectModal = () => {
   });
 
   return (
-    <ModalLayoutProfile open={openFeedback} setOpen={handleClose}>
+    <>
       <Typography sx={styles.title} variant='h6'>
         {t('modal.feedbackProjectModal.title')}
       </Typography>
@@ -90,7 +90,7 @@ const FeedbackProjectModal = () => {
           variant='contained'
         />
       </form>
-    </ModalLayoutProfile>
+    </>
   );
 };
 
