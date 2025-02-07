@@ -7,31 +7,21 @@ import { styles } from './PassedInterviewsPage.styles';
 
 const SideBar = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar'));
 
-const MemoizedPassedSideBar = memo(SideBar);
+const MemoizedSideBar = memo(SideBar);
 
 const PassedInterviewsPage = () => {
   const [page, setPage] = useState(1);
-  const [interviews, setInterviews] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-  const { data: passedInterviews, isFetching } = useGetAllPassedInterviewsQuery({ page, size: 5 });
+  const { data: passedInterviews, isFetching, isLoading } = useGetAllPassedInterviewsQuery({ page, size: 5 });
   const lastEventRef = useRef(null);
-  useEffect(() => {
-    if (passedInterviews?.content) {
-      setInterviews((prevInterviews) => [...prevInterviews, ...passedInterviews.content]);
-      if (passedInterviews.totalPages === page) {
-        setHasMore(false);
-      }
-    }
-  }, [passedInterviews]);
 
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
-      if (target.isIntersecting && !isFetching && hasMore) {
+      if (target.isIntersecting && !isFetching && !isLoading && passedInterviews?.totalPages !== page) {
         setPage((prevPage) => prevPage + 1);
       }
     },
-    [isFetching, hasMore]
+    [isFetching, isLoading, passedInterviews?.totalPages, page]
   );
 
   const options = useMemo(
@@ -55,14 +45,14 @@ const PassedInterviewsPage = () => {
         observer.unobserve(lastEventRef.current);
       }
     };
-  }, [lastEventRef.current, interviews]);
+  }, [lastEventRef.current, passedInterviews?.content, handleObserver]);
 
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
         <Paper sx={styles.interviewSideBar}>
           <Suspense fallback={<InterviewsSkeleton />}>
-            <MemoizedPassedSideBar interviews={interviews} lastEventRef={lastEventRef} />
+            <MemoizedSideBar interviews={passedInterviews?.content} lastEventRef={lastEventRef} />
           </Suspense>
         </Paper>
         <Outlet />

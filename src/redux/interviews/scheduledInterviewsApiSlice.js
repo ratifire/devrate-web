@@ -9,6 +9,23 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         result?.content
           ? [...result.content.map(({ id }) => ({ type: 'ScheduledInterview', id })), 'ScheduledInterview']
           : ['ScheduledInterviews'],
+
+      // Merge new data with existing data
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        // Use a consistent key for the cache, ignoring `page` and `size`
+        return `${endpointName}-${queryArgs.size}`;
+      },
+      merge: (currentCache, newData) => {
+        // Merge the `content` arrays from the current cache and new data
+        if (currentCache.content && newData.content) {
+          currentCache.content.push(...newData.content);
+        }
+      },
+      forceRefetch: ({ currentArg, previousArg }) => {
+        // Force a refetch if the `page` changes
+        return currentArg?.page !== previousArg?.page;
+      },
+
       transformResponse: (result) => {
         const transformedContent = result?.content.map((event) => {
           return {
