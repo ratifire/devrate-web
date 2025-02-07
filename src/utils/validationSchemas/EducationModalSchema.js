@@ -26,8 +26,8 @@ export const EducationModalSchema = Yup.object().shape({
     .required('profile.modal.education.required'),
   endYear: Yup.date()
     .min(Yup.ref('startYear'), 'profile.modal.education.endDateMessage')
-    .when('currentDate', {
-      is: (currentDate) => !currentDate,
+    .when('isCurrentDate', {
+      is: (isCurrentDate) => !isCurrentDate,
       then: (schema) => schema.required('profile.modal.education.required'),
       otherwise: (schema) => schema.nullable(),
     })
@@ -35,5 +35,5 @@ export const EducationModalSchema = Yup.object().shape({
       const startYear = this.resolve(Yup.ref('startYear'));
       return isStartYearBeforeEndYear(startYear, value);
     }),
-  currentDate: Yup.boolean(),
+  isCurrentDate: Yup.boolean(),
 });

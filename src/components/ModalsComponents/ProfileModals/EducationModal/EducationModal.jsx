@@ -19,7 +19,6 @@ import { styles } from './EducationModal.styles';
 const EducationModal = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const translatedNow = t('profile.modal.education.now');
   const [startYears, setStartYears] = useState([]);
   const [endYears, setEndYears] = useState([]);
   const [createEducation, { isLoading: isCreating }] = useCreateEducationMutation();
@@ -59,7 +58,7 @@ const EducationModal = () => {
     description: '',
     startYear: '',
     endYear: '',
-    currentDate: false,
+    isCurrentDate: false,
   };
 
   const initialValues = isEditMode
@@ -69,15 +68,12 @@ const EducationModal = () => {
         description: modalData.description || '',
         startYear: modalData.startYear || '',
         endYear: modalData.endYear || '',
-        currentDate: modalData.endYear === '9999',
+        isCurrentDate: modalData.endYear === 'Now',
       }
     : emptyInitialValues;
 
   const onSubmit = async (values, { resetForm }) => {
-    const endYearEducation =
-      values.currentDate || values.endYear === null || values.endYear === translatedNow || values.endYear === ''
-        ? '9999'
-        : new Date(values.endYear).getFullYear();
+    const endYearEducation = values.isCurrentDate ? '9999' : new Date(values.endYear).getFullYear();
 
     try {
       if (isEditMode) {
@@ -101,7 +97,6 @@ const EducationModal = () => {
           userId: currentUser.data.id,
           payload: { ...values, endYear: endYearEducation },
         }).unwrap();
-
         enqueueSnackbar(t('modalNotifyText.education.create.success'), { variant: 'success' });
       }
       resetForm();
@@ -124,7 +119,7 @@ const EducationModal = () => {
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
-    formik.setFieldValue('currentDate', isChecked);
+    formik.setFieldValue('isCurrentDate', isChecked);
     formik.setFieldValue('endYear', isChecked ? '' : formik.values.endYear || '');
   };
 
@@ -183,7 +178,7 @@ const EducationModal = () => {
               />
               <FormSelect
                 countries={endYears}
-                disabled={formik.values.currentDate}
+                disabled={formik.values.isCurrentDate}
                 error={formik.touched.endYear && Boolean(formik.errors.endYear)}
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -191,18 +186,18 @@ const EducationModal = () => {
                 label={t('profile.modal.education.endYear')}
                 name='endYear'
                 sx={styles.input50}
-                value={formik.values.currentDate ? '' : formik.values.endYear}
+                value={formik.values.isCurrentDate ? '' : formik.values.endYear}
                 variant='outlined'
                 onChange={(value) => formik.setFieldValue('endYear', value)}
               />
               <Box sx={styles.checkBoxContainer}>
                 <FormCheckbox
                   changeHandler={handleCheckboxChange}
-                  checked={formik.values.currentDate}
-                  error={formik.touched.currentDate && Boolean(formik.errors.currentDate)}
-                  helperText={formik.touched.currentDate && formik.errors.currentDate}
+                  checked={formik.values.isCurrentDate}
+                  error={formik.touched.isCurrentDate && Boolean(formik.errors.isCurrentDate)}
+                  helperText={formik.touched.isCurrentDate && formik.errors.isCurrentDate}
                   label={t('profile.modal.education.currentDate')}
-                  name='currentDate'
+                  name='isCurrentDate'
                 />
               </Box>
             </Box>
