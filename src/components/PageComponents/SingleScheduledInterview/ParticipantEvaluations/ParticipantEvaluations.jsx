@@ -1,8 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart.js';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { styles } from './ParticipantEvaluations.styles.js';
 import { useColorPartEvalChart } from './hooks';
 
@@ -28,6 +30,9 @@ const ParticipantEvaluations = () => {
   const { t } = useTranslation();
   const { itemStyle, contentStyle } = useTooltipColorChart();
   const { leftGrad1, leftGrad2, leftGrad3, rightGrad1, rightGrad2, rightGrad3 } = useColorPartEvalChart();
+  const {
+    data: { firstName, lastName },
+  } = useSelector(selectCurrentUser);
 
   return (
     <Box sx={styles.wrapper}>
@@ -48,7 +53,7 @@ const ParticipantEvaluations = () => {
         </Box>
         <Box>
           <Typography component='p' variant='subtitle2'>
-            Олена Бондаренко
+            {firstName} {lastName}
           </Typography>
           <Typography component='p' sx={styles['junior']} variant='subtitle2'>
             Level Junior
