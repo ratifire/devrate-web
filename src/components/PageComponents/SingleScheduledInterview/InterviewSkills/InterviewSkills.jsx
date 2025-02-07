@@ -1,6 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { styles } from './InterviewSkills.styles';
 import { SkillsParticipant } from './components';
 
@@ -48,6 +50,9 @@ const SoftSkills = [
 
 const InterviewSkills = () => {
   const { t } = useTranslation();
+  const {
+    data: { firstName, lastName },
+  } = useSelector(selectCurrentUser);
 
   return (
     <Box sx={styles.wrapper}>
@@ -61,7 +66,7 @@ const InterviewSkills = () => {
         <Box sx={styles.boxParticipant}>
           <Box sx={styles.leftCircle} />
           <Typography component='p' variant='subtitle2'>
-            Олена Бондаренко
+            {firstName} {lastName}
           </Typography>
         </Box>
         <Box sx={styles.boxParticipant}>
