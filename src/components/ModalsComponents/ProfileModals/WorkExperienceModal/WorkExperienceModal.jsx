@@ -16,6 +16,7 @@ import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { addUniqueItem } from '../../../../utils/helpers/ProfileWorkExperience/addUniqueItem.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceModal = () => {
@@ -34,7 +35,7 @@ const WorkExperienceModal = () => {
   const initialValues = {
     position: '',
     companyName: '',
-    description: '',
+    description: [],
     responsibilities: '',
     startYear: '',
     endYear: '',
@@ -50,7 +51,6 @@ const WorkExperienceModal = () => {
         endYear: formattedEndYear,
         responsibilities,
       };
-
       await createNewWorkExperience({ userId: id, data }).unwrap();
       enqueueSnackbar(t('modalNotifyText.workExperience.create.success'), { variant: 'success' });
       setResponsibilities([]);
@@ -70,8 +70,15 @@ const WorkExperienceModal = () => {
   });
 
   const createResponsibility = (newResponsibility) => {
-    if (newResponsibility.length < 2 || newResponsibility.length > 50) return;
-    setResponsibilities([...responsibilities, newResponsibility]);
+    const updatedResponsibilities = addUniqueItem(responsibilities, newResponsibility);
+
+    if (updatedResponsibilities.length === responsibilities.length) {
+      enqueueSnackbar(t('modalNotifyText.workExperience.create.duplicateResponsibility'), { variant: 'warning' });
+      formik.setFieldValue('responsibilities', '');
+      return;
+    }
+
+    setResponsibilities(updatedResponsibilities);
     formik.setFieldValue('responsibilities', '');
   };
 
@@ -209,7 +216,7 @@ const WorkExperienceModal = () => {
             )}
           </Box>
           <ButtonDef
-            disabled={!formik.isValid || formik.isSubmitting || isLoading}
+            disabled={!formik.isValid || formik.isSubmitting || isLoading || responsibilities.length === 0}
             label={t('profile.modal.btn')}
             loading={isLoading}
             sx={styles.workExperienceBtn}

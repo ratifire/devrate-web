@@ -18,4 +18,5 @@ export const modalNames = {
   checkEmailModal: 'checkEmailModal',
   resetPasswordModal: 'resetPasswordModal',
   confirmationModal: 'ConfirmationModal',
+  confirmDeleteSpecialization: 'confirmDeleteSpecialization',
 };

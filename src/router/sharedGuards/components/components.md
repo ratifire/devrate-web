@@ -1,0 +1,1 @@
+В випадку якщо ваш guard зручніше винести в компонент, він повинен лежанти в router/sharedGuards/components/ExampleGuard.jsx

@@ -143,6 +143,18 @@ export const en = {
         repeat_request_text1: 'request',
         repeat_request_text2: 'or',
         change_email_link: 'change email',
+        text1: 'Text 1 must be exactly one character',
+        required_text1: 'Text 1 is required',
+        text2: 'Text 2 must be exactly one character',
+        required_text2: 'Text 2 is required',
+        text3: 'Text 3 must be exactly one character',
+        required_text3: 'Text 3 is required',
+        text4: 'Text 4 must be exactly one character',
+        required_text4: 'Text 4 is required',
+        text5: 'Text 5 must be exactly one character',
+        required_text5: 'Text 5 is required',
+        text6: 'Text 6 must be exactly one character',
+        required_text6: 'Text 6 is required',
         // return_on: 'Back to ',
         // home_page: 'Home',
       },
@@ -301,7 +313,7 @@ export const en = {
         finish: 'Finish',
         userInfo: {
           personal: {
-            title: 'Personal information',
+            title: 'About me',
             firstName: 'Name',
             first_name_long: 'Name too long',
             first_name_short: 'Name too short',
@@ -327,13 +339,17 @@ export const en = {
             startYear_max: 'Date must be no later than the current year',
           },
           contact: {
-            title: 'Contact Information',
+            title: 'Contacts',
             telegram: 'Telegram',
             linkedIn: 'LinkedIn',
             gitHub: 'GitHub',
             behance: 'Behance',
             mail: 'Email',
             phone: 'Phone',
+            validation: {
+              url: 'Please enter correct URL',
+              phone: 'Please enter correct phone number',
+            },
           },
           photo: {
             title: 'Photo',
@@ -492,6 +508,13 @@ export const en = {
           scheduleInterview: 'Schedule Interview',
           skill_long: 'Company too long',
           skill_short: 'Company too short',
+        },
+        confirmSpecializationDelete: {
+          title: 'Remove specialization',
+          text1: 'Are you sure you want to delete the specialization',
+          text2: 'All data and statistics for this specialization will be lost.',
+          refuseBtnText: 'Cancel',
+          confirmBtnText: 'Delete',
         },
       },
       language: {
@@ -674,6 +697,7 @@ export const en = {
         create: {
           success: 'Added successfully',
           error: 'Something went wrong',
+          duplicateResponsibility: 'This responsibility already exist',
         },
         edit: {
           success: 'Edited successfully',
@@ -827,6 +851,13 @@ export const en = {
           success: 'Deleted successfully',
           error: 'Something went wrong',
         },
+      },
+    },
+    interviews: {
+      navigationLinks: {
+        scheduled: 'Scheduled',
+        passed: 'Passed',
+        requests: 'Requests',
       },
     },
   },
