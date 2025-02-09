@@ -12,18 +12,20 @@ export const styles = {
       backgroundImage: 'none',
     },
   }),
-  userInfo: (theme) => ({
+  userInfo: () => ({
     gridColumn: '1/12',
-    gridRow: '1/5',
+    gridRow: '1/4',
     boxShadow: 'none',
-    paddingY: theme.spacing(3),
-    paddingX: theme.spacing(4),
-    backgroundColor: '#303032',
+    height: '100%',
+    ' > div': {
+      maxWidth: '1000px',
+    },
   }),
   interviewersAssessment: {
     gridColumn: '1/12',
     gridRow: '5/26',
     padding: '16px',
+    marginTop: '10px',
   },
   interviewersAssessmentTitle: (theme) => ({
     marginBottom: theme.spacing(3),
@@ -59,14 +61,15 @@ export const styles = {
     gridRow: '1/6  ',
   }),
 
-  statistics: (theme) => ({
+  statistics: () => ({
     gridColumn: '12/25',
-    gridRow: '6/10',
-    paddingY: theme.spacing(3),
-    paddingX: theme.spacing(4),
+    gridRow: '6/11',
+    minHeight: '225px',
   }),
   interviewFeedback: () => ({
+    marginTop: '10px',
     gridColumn: '12/25',
-    gridRow: '10/15',
+    gridRow: '11/12',
+    minHeight: '300px',
   }),
 };

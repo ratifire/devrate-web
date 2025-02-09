@@ -25,6 +25,13 @@ import {
   StepLanguageSkeleton,
 } from './Modal/UserInfoModalSkeleton';
 
+import {
+  StatisticsSkeleton,
+  InterviewInfoSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
+} from './Pages/interviewSkeleton';
+
 export {
   BlogSkeleton,
   CategoriesSkeleton,
@@ -47,4 +54,8 @@ export {
   StepPersonalSkeleton,
   StepAvatarSkeleton,
   StepLanguageSkeleton,
+  InterviewInfoSkeleton,
+  StatisticsSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
 };

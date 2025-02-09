@@ -1,11 +1,8 @@
 import { Box, Paper } from '@mui/material';
 import { styles } from './PassedInterviewsPage.styles';
-// import { useParams } from 'react-router';
 import PassedInterview from './PassedInterview/PassedInterview.jsx';
 
 const PassedInterviewsPage = () => {
-  // let params = useParams();
-
   return (
     <Box sx={styles.container}>
       <Box sx={styles.contentWrapper}>

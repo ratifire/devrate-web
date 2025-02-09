@@ -9,20 +9,17 @@ export const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  // interviewInfoTitle: () => ({
-  //   // color: theme.palette.c
-  // }),
-  yearsAgo: {
-    color: '#EFE6FD',
-  },
-  date: {
+  yearsAgo: (theme) => ({
+    color: theme.palette.interviewInfo.yearsAgoColor,
+  }),
+  date: (theme) => ({
     display: 'block',
     width: '100%',
-    color: '#EFE6FD',
-    paddingBottom: '7px',
-    borderBottom: 'solid 1px #69696B',
-    marginBottom: '8px',
-  },
+    color: theme.palette.interviewInfo.dateColor,
+    paddingBottom: theme.spacing(2),
+    borderBottom: `solid 1px ${theme.palette.interviewInfo.borderBottomColor}`,
+    marginBottom: theme.spacing(2),
+  }),
   interviewSpecializationTitleWrapper: (theme) => ({
     display: 'flex',
     flexDirection: 'row',
@@ -31,12 +28,20 @@ export const styles = {
     marginBottom: theme.spacing(1),
   }),
   interviewSpecialization: {},
-  level: () => ({
-    color: '#25CBFF',
+
+  junior: (theme) => ({
+    color: theme.palette.userCard.lvl.junior,
+  }),
+  middle: (theme) => ({
+    color: theme.palette.userCard.lvl.middle,
+  }),
+  senior: (theme) => ({
+    color: theme.palette.userCard.lvl.senior,
   }),
   role: (theme) => ({
-    color: '#ECECED',
+    color: theme.palette.interviewInfo.roleColor,
     marginBottom: theme.spacing(1),
+    textTransform: 'capitalize',
   }),
   hostWrapper: (theme) => ({
     display: 'flex',
@@ -47,8 +52,8 @@ export const styles = {
   host: (theme) => ({
     marginRight: theme.spacing(1),
   }),
-  hostName: {
-    color: '#CEB0FA',
-  },
+  hostName: (theme) => ({
+    color: theme.palette.interviewInfo.hostNameColor,
+  }),
   hostSpecialization: {},
 };
