@@ -5,7 +5,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSnackbar } from 'notistack';
+import Mood from '@mui/icons-material/Mood';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 import {
@@ -14,7 +14,6 @@ import {
   useUpdateSpecializationAsMainByIdMutation,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { setActiveSpecialization, setMainSpecializations } from '../../../../redux/specialization/specializationSlice';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
@@ -26,10 +25,15 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState({});
-  const { enqueueSnackbar } = useSnackbar();
   const { id } = useSelector((state) => state.auth.user.data);
-  const { activeSpecialization } = useSelector((state) => state.specialization);
+  const { activeSpecialization, mainSpecialization, fullSpecializations } = useSelector(
+    (state) => state.specialization
+  );
   const [masteryData, setMasteryData] = useState({});
+
+  const mainSpec = activeSpecialization || mainSpecialization;
+
+  const activeInterviews = fullSpecializations?.find((spec) => spec.id === mainSpec?.id);
 
   const {
     data: specializations,
@@ -38,10 +42,8 @@ const SpecializationCategories = () => {
   } = useGetSpecializationByUserIdQuery(id, { skip: !id });
   const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery, isError: isErrorGetMainMastery }] =
     useLazyGetMainMasteryBySpecializationIdQuery();
-  const [
-    updateSpecializationAsMainById,
-    { isLoading: isLoadingUpdateSpecialization, isError: isErrorUpdateSpecialization },
-  ] = useUpdateSpecializationAsMainByIdMutation();
+  const { isLoading: isLoadingUpdateSpecialization, isError: isErrorUpdateSpecialization } =
+    useUpdateSpecializationAsMainByIdMutation();
 
   const isLoading = isFetchingGetSpecialization || isLoadingGetMainMastery || isLoadingUpdateSpecialization;
   const isError = isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization;
@@ -77,23 +79,6 @@ const SpecializationCategories = () => {
   const handlerAddSpecializations = () => {
     if (specializations?.length >= 4) return;
     dispatch(openModal({ modalType: modalNames.specializationModal }));
-  };
-
-  const handlerChangeMainSpecialization = async () => {
-    try {
-      if (specializations?.length === 0 || !activeSpecialization) return;
-      await updateSpecializationAsMainById(
-        { ...activeSpecialization, main: true },
-        { skip: !activeSpecialization }
-      ).unwrap();
-      dispatch(setMainSpecializations(activeSpecialization));
-      enqueueSnackbar(t('modalNotifyText.specialization.change.success', { name: activeSpecialization.name }), {
-        variant: 'success',
-      });
-      // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.specialization.change.error'), { variant: 'error' });
-    }
   };
 
   const handleOpenConfirmDeleteSpecializationModal = (id, specialization) => {
@@ -134,14 +119,20 @@ const SpecializationCategories = () => {
         <Typography sx={styles.page_title} variant='h5'>
           {t('specialization.specialization_title')}
         </Typography>
-        <ButtonDef
-          disabled={specializations?.length === 0}
-          label={t('specialization.specialization_btn_make_main')}
-          sx={styles.make_main_btn}
-          type='button'
-          variant='outlined'
-          onClick={handlerChangeMainSpecialization}
-        />
+        <Box sx={styles.interviewItemOutcome}>
+          <Mood />
+          <Typography sx={styles.interviewType} variant='body1'>
+            {t('specialization.modal.interview.outcome')}
+          </Typography>
+          <Typography variant='body1'>{activeInterviews?.conductedInterviews}</Typography>
+        </Box>
+        <Box sx={styles.interviewItemIncome}>
+          <Mood />
+          <Typography sx={styles.interviewType} variant='body1'>
+            {t('specialization.modal.interview.income')}
+          </Typography>
+          <Typography variant='body1'>{activeInterviews?.completedInterviews}</Typography>
+        </Box>
       </Box>
       <Box sx={styles.specialization_right_box}>
         {specializations?.length < 4 && (

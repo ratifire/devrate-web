@@ -33,21 +33,13 @@ export const styles = {
     flexDirection: 'column',
     flexShrink: 1,
   },
-  specialisationLevel: {
-    gridColumn: '5/9',
-    gridRow: '2/3',
-  },
-  specialisationInterviewParticipation: {
-    gridColumn: '9/13',
-    gridRow: '2/3',
-  },
   specialisationSoftSkills: {
     gridColumn: '1/5',
     gridRow: '4/5',
   },
   specialisationStatistics: {
     gridColumn: '5/13',
-    gridRow: '3/6',
+    gridRow: '2/6',
   },
   statisticWrapper: (theme) => ({
     padding: theme.spacing(4),

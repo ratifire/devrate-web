@@ -35,10 +35,21 @@ export const styles = {
     marginBottom: theme.spacing(5),
     fontSize: 34,
   }),
-  make_main_btn: {
-    minWidth: '216px',
-    padding: '12px 16px',
-    textTransform: 'none',
+  interviewItemOutcome: (theme) => ({
+    display: 'flex',
+    gap: theme.spacing(1),
+    color: theme.palette.scheduleInterview.area.outcome,
+    marginBottom: theme.spacing(2),
+  }),
+  interviewItemIncome: (theme) => ({
+    display: 'flex',
+    gap: theme.spacing(1),
+    color: theme.palette.scheduleInterview.area.income,
+  }),
+  interviewType: {
+    display: 'flex',
+    marginRight: '16px',
+    whiteSpace: 'nowrap',
   },
   add_specialization_btn: (theme) => ({
     width: '134px',
