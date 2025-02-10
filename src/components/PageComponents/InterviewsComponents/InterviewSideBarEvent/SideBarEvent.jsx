@@ -7,11 +7,11 @@ import { formatDateAndTime } from '../../../../utils/helpers';
 import { lvlMastery, lvlMasteryColor } from '../../../../utils/constants/masteryLvl.js';
 import { styles } from './SideBarEvent.styles.js';
 
-const SideBarEvent = ({ event, ref }) => {
+const SideBarEvent = ({ event, refHandler }) => {
   const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName } = event;
   const { t } = useTranslation();
   return (
-    <Paper key={id} ref={ref} sx={styles.sideBarEventContainer}>
+    <Paper key={id} ref={refHandler} sx={styles.sideBarEventContainer}>
       <Typography component='div' sx={styles.status} variant='subtitle2'>
         {/*//TODO need to implement logic that would render needed part based on date and time*/}
         {/*<Box alt='Circle' component='img' src={LimeCircleIcon} sx={styles.ellipse} />{' '}*/}
@@ -52,7 +52,7 @@ SideBarEvent.propTypes = {
     hostFirstName: PropTypes.string.isRequired,
     hostLastName: PropTypes.string.isRequired,
   }).isRequired,
-  ref: PropTypes.object,
+  refHandler: PropTypes.func,
 };
 
 export default SideBarEvent;

@@ -1,5 +1,5 @@
 import { Box, Container, Paper } from '@mui/material';
-import { lazy, memo, Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
 import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { useGetAllScheduledInterviewsQuery } from '../../../redux/interviews/scheduledInterviewsApiSlice.js';
@@ -14,7 +14,11 @@ const MemoizedSideBar = memo(SideBar);
 const ScheduledInterviewsPage = () => {
   const [page, setPage] = useState(1);
   const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 10 });
-  const lastEventRef = useRef(null);
+  const [lastEventRef, setLastEventRef] = useState(null);
+
+  const refHandler = (el) => {
+    setLastEventRef(el);
+  };
 
   const handleObserver = useCallback(
     (entries) => {
@@ -33,25 +37,25 @@ const ScheduledInterviewsPage = () => {
   };
 
   useEffect(() => {
-    if (!lastEventRef.current) return;
+    if (!lastEventRef) return;
 
     const observer = new IntersectionObserver(handleObserver, options);
 
-    observer.observe(lastEventRef.current);
+    observer.observe(lastEventRef);
 
     return () => {
-      if (lastEventRef.current) {
-        observer.unobserve(lastEventRef.current);
+      if (lastEventRef) {
+        observer.unobserve(lastEventRef);
       }
     };
-  }, [lastEventRef.current, scheduledInterviews?.content, handleObserver]);
+  }, [lastEventRef, scheduledInterviews?.content, handleObserver]);
 
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
         <Paper sx={styles.interviewSideBar}>
           <Suspense fallback={<InterviewsSkeleton />}>
-            <MemoizedSideBar interviews={scheduledInterviews?.content} lastEventRef={lastEventRef} />
+            <MemoizedSideBar interviews={scheduledInterviews?.content} refHandler={refHandler} />
           </Suspense>
         </Paper>
         <Outlet />

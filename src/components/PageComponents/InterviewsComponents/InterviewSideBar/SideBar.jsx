@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import SideBarEvent from '../InterviewSideBarEvent';
 import { styles } from './SideBar.styles.js';
 
-const SideBar = ({ interviews, lastEventRef }) => {
+const SideBar = ({ interviews, refHandler }) => {
   const { t } = useTranslation();
   return (
     <Box sx={styles.container}>
@@ -14,7 +14,11 @@ const SideBar = ({ interviews, lastEventRef }) => {
       <Box sx={styles.scrollContainer}>
         {interviews?.length > 0 &&
           interviews.map((event, index) => (
-            <SideBarEvent key={event.id} ref={index === interviews.length - 1 ? lastEventRef : null} event={event} />
+            <SideBarEvent
+              key={event.id}
+              event={event}
+              refHandler={index === interviews.length - 1 ? refHandler : null}
+            />
           ))}
       </Box>
     </Box>
@@ -23,7 +27,7 @@ const SideBar = ({ interviews, lastEventRef }) => {
 
 SideBar.propTypes = {
   interviews: PropTypes.array,
-  lastEventRef: PropTypes.object,
+  refHandler: PropTypes.func,
 };
 
 export default SideBar;

@@ -1,5 +1,5 @@
 import { Box, Container, Paper } from '@mui/material';
-import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { Outlet } from 'react-router';
 import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { useGetAllPassedInterviewsQuery } from '../../../redux/interviews/passedInterviewsApiSlice.js';
@@ -12,7 +12,11 @@ const MemoizedSideBar = memo(SideBar);
 const PassedInterviewsPage = () => {
   const [page, setPage] = useState(1);
   const { data: passedInterviews, isFetching, isLoading } = useGetAllPassedInterviewsQuery({ page, size: 5 });
-  const lastEventRef = useRef(null);
+  const [lastEventRef, setLastEventRef] = useState(null);
+
+  const refHandler = (el) => {
+    setLastEventRef(el);
+  };
 
   const handleObserver = useCallback(
     (entries) => {
@@ -34,25 +38,25 @@ const PassedInterviewsPage = () => {
   );
 
   useEffect(() => {
-    if (!lastEventRef.current) return;
+    if (!lastEventRef) return;
 
     const observer = new IntersectionObserver(handleObserver, options);
 
-    observer.observe(lastEventRef.current);
+    observer.observe(lastEventRef);
 
     return () => {
-      if (lastEventRef.current) {
-        observer.unobserve(lastEventRef.current);
+      if (lastEventRef) {
+        observer.unobserve(lastEventRef);
       }
     };
-  }, [lastEventRef.current, passedInterviews?.content, handleObserver]);
+  }, [lastEventRef, passedInterviews?.content, handleObserver]);
 
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
         <Paper sx={styles.interviewSideBar}>
           <Suspense fallback={<InterviewsSkeleton />}>
-            <MemoizedSideBar interviews={passedInterviews?.content} lastEventRef={lastEventRef} />
+            <MemoizedSideBar interviews={passedInterviews?.content} refHandler={refHandler} />
           </Suspense>
         </Paper>
         <Outlet />
