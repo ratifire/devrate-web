@@ -16,6 +16,7 @@ import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { addUniqueItem } from '../../../../utils/helpers/ProfileWorkExperience/addUniqueItem.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceEditModal = () => {
@@ -35,7 +36,6 @@ const WorkExperienceEditModal = () => {
     position: modalData?.position || '',
     companyName: modalData?.companyName || '',
     description: modalData?.description || '',
-    responsibilities: '',
     startYear: modalData?.startYear || '',
     endYear: modalData?.endYear || '',
     currentDate: modalData?.endYear === '9999',
@@ -77,13 +77,30 @@ const WorkExperienceEditModal = () => {
   });
 
   const createResponsibility = (newResponsibility) => {
-    if (newResponsibility.length < 2 || newResponsibility.length > 50) return;
-    setResponsibilities([...responsibilities, newResponsibility]);
+    if (!newResponsibility || newResponsibility.trim() === '') return;
+
+    setResponsibilities((prev) => {
+      const updatedResponsibilities = addUniqueItem(prev, newResponsibility);
+
+      if (updatedResponsibilities.length === prev.length) {
+        enqueueSnackbar(t('modalNotifyText.workExperience.create.duplicateResponsibility'), { variant: 'warning' });
+        return prev;
+      }
+
+      formik.setFieldValue('responsibilities', updatedResponsibilities);
+      formik.setFieldTouched('responsibilities', true);
+
+      return updatedResponsibilities;
+    });
+
     formik.setFieldValue('responsibilities', '');
   };
 
   const responsibilityDeleteHandler = (responsibilityToDelete) => {
     setResponsibilities(responsibilities.filter((item) => item !== responsibilityToDelete));
+
+    formik.setFieldTouched('responsibilities', true);
+    formik.setFieldValue('responsibilities', '');
   };
 
   const handleCheckboxChange = (e) => {

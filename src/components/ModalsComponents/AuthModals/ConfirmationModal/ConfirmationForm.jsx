@@ -27,6 +27,8 @@ const ConfirmationForm = ({
     dispatch(openModal({ modalType: modalNames.registrationModal }));
   };
 
+  const isActiveButton = () => Object.values(formik.values).some((value) => value === '');
+
   useEffect(() => {
     const allFieldsFilled = Object.keys(formik.values)
       .filter((key) => key.startsWith('text'))
@@ -40,13 +42,9 @@ const ConfirmationForm = ({
   const handleKeyDown = (event, index) => {
     const { key, ctrlKey, metaKey } = event;
 
-    if ((ctrlKey || metaKey) && key === 'v') {
-      return;
-    }
+    if ((ctrlKey || metaKey) && key === 'v') return;
+    if (key === 'Tab') return;
 
-    if (key === 'Tab') {
-      return;
-    }
     if ((key >= '0' && key <= '9') || key === 'Backspace' || key === 'Delete') {
       const { value } = event.target;
 
@@ -74,10 +72,8 @@ const ConfirmationForm = ({
       } else {
         event.preventDefault();
       }
-    } else {
-      if (key === 'Enter' && index === fieldCount - 1) {
-        handleClick();
-      }
+     } else if (key === 'Enter' && index === fieldCount - 1) {
+      formik.handleSubmit();
       event.preventDefault();
     }
   };
@@ -198,7 +194,7 @@ const ConfirmationForm = ({
       {showButton && (
         <Box sx={styles.btnWrapper}>
           <ButtonDef
-            disabled={!formik.isValid}
+            disabled={isActiveButton()}
             label={buttonLabel || 'modal.confirmation.btn_confirm'}
             loading={formik.isSubmitting}
             sx={styles.submitBtn}
