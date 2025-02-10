@@ -65,6 +65,10 @@ const router = createBrowserRouter([
                 element: <InterviewRootPage />,
                 children: [
                   {
+                    index: true,
+                    element: <ScheduledInterviewsPage />,
+                  },
+                  {
                     path: navigationLinks.scheduledInterviews,
                     element: <ScheduledInterviewsPage />,
                     children: [
