@@ -1,11 +1,7 @@
 import * as Yup from 'yup';
 
-const isStartYearBeforeEndYear = (startYear, endYear) => {
-  if (startYear && endYear) {
-    return startYear.getTime() <= endYear.getTime();
-  }
-  return true;
-};
+const isStartYearBeforeEndYear = (startYear, endYear) =>
+  !startYear || !endYear || startYear.getTime() <= endYear.getTime();
 
 export const EducationModalSchema = Yup.object().shape({
   type: Yup.string()
