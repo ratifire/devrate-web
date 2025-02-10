@@ -5,19 +5,19 @@ export const styles = {
     height: '100vh',
     borderTopLeftRadius: theme.spacing(2),
     borderBottomLeftRadius: theme.spacing(2),
-    paddingRight: theme.spacing(2),
   }),
   interviewTitle: (theme) => ({
+    marginBottom: theme.spacing(3),
     fontFamily: theme.typography.fontFamily,
     fontWeight: 500,
     lineHeight: '41.99px',
     letterSpacing: '0.25px',
   }),
   scrollContainer: (theme) => ({
-    overflow: 'auto',
+    overflowY: 'auto',
     minWidth: '100%',
-    paddingTop: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    height: 'calc(100vh - 100px)',
+    paddingRight: theme.spacing(3),
     '&::-webkit-scrollbar': {
       width: 10,
     },
