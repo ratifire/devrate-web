@@ -121,6 +121,7 @@ const EducationModal = () => {
     const isChecked = e.target.checked;
     formik.setFieldValue('isCurrentDate', isChecked);
     formik.setFieldValue('endYear', isChecked ? '' : formik.values.endYear || '');
+    formik.setFieldTouched('isCurrentDate', true, true);
   };
 
   const isLoading = isEditMode ? isUpdating : isCreating;
