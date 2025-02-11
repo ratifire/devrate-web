@@ -4,16 +4,24 @@ import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { formatDateAndTime } from '../../../../utils/helpers';
 // import LimeCircleIcon from '../../../../assets/icons/InterviewPageIcons/lime-ellipse.svg';
+import OrangeCircleIcon from '../../../../assets/icons/InterviewPageIcons/orange-ellipse.svg';
 import { lvlMastery, lvlMasteryColor } from '../../../../utils/constants/masteryLvl.js';
+import navigationLinks from '../../../../router/links.js';
 import { styles } from './SideBarEvent.styles.js';
 
 const SideBarEvent = ({ event, refHandler }) => {
-  const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName } = event;
+  const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName, feedback } = event;
   const { t } = useTranslation();
   return (
     <Paper key={id} ref={refHandler} sx={styles.sideBarEventContainer}>
       <Typography component='div' sx={styles.status} variant='subtitle2'>
-        {/*//TODO need to implement logic that would render needed part based on date and time*/}
+        {/*//TODO in progress status still pending. To be discussed with back*/}
+        {feedback?.length === 0 && (
+          <>
+            <Box alt='Circle' component='img' src={OrangeCircleIcon} sx={styles.ellipse} />
+            {t('interviews.sideBar.event.statusAwaitingFeedback')}
+          </>
+        )}
         {/*<Box alt='Circle' component='img' src={LimeCircleIcon} sx={styles.ellipse} />{' '}*/}
         {/*{t('interviews.sideBar.event.statusInProcess')}*/}
       </Typography>
@@ -28,12 +36,12 @@ const SideBarEvent = ({ event, refHandler }) => {
       <Typography component='div' sx={styles.eventDate} variant='body2'>
         {formatDateAndTime(date)}
       </Typography>
-      <Typography component='div' sx={styles.role} variant='body2'>
+      <Typography component='div' sx={styles.role} variant='body'>
         {t('interviews.sideBar.event.role')}: <span>{role}</span>
       </Typography>
-      <Typography component='div' sx={styles.host} variant='body2'>
+      <Typography component='div' sx={styles.host} variant='body'>
         {t('interviews.sideBar.event.host')}:{' '}
-        <Link component={RouterLink} sx={styles.host_link} to={`/profile/${hostId}`}>
+        <Link component={RouterLink} sx={styles.host_link} to={`${navigationLinks.profile}/${hostId}`}>
           {hostFirstName} {hostLastName}
         </Link>
       </Typography>
@@ -51,6 +59,7 @@ SideBarEvent.propTypes = {
     hostId: PropTypes.number.isRequired,
     hostFirstName: PropTypes.string.isRequired,
     hostLastName: PropTypes.string.isRequired,
+    feedback: PropTypes.string,
   }).isRequired,
   refHandler: PropTypes.func,
 };

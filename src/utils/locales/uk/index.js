@@ -691,7 +691,7 @@ export const uk = {
           role: 'Роль',
           host: 'Хост',
           statusInProcess: 'В процесі',
-          statusAwaitingFeedback: 'Очікується фітбек',
+          statusAwaitingFeedback: 'Очікується відгук',
         },
       },
     },

@@ -29,7 +29,6 @@ export const styles = {
   }),
   role: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.participant,
-    marginBottom: theme.spacing(2),
     textTransform: 'lowercase',
     '&:first-letter': {
       textTransform: 'uppercase',
