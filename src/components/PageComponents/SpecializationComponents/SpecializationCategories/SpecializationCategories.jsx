@@ -25,6 +25,7 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState({});
+  const [isDefault, setIsDefault] = useState(true);
   const { id } = useSelector((state) => state.auth.user.data);
   const { activeSpecialization, mainSpecialization, fullSpecializations } = useSelector(
     (state) => state.specialization
@@ -62,10 +63,12 @@ const SpecializationCategories = () => {
         ...prev,
         [specialization.id]: data,
       }));
+      specialization.main && dispatch(setActiveMastery(data?.level));
     });
   }, [specializations, activeSpecialization]);
 
   const handlerChangeSpecialization = (specialization) => {
+    setIsDefault(false);
     if (masteryData[specialization.id]) {
       const spec = { ...specialization, mastery: masteryData[specialization.id].level };
       dispatch(setActiveMastery(spec.mastery));
@@ -75,7 +78,6 @@ const SpecializationCategories = () => {
       }
     }
   };
-
   const handlerAddSpecializations = () => {
     if (specializations?.length >= 4) return;
     dispatch(openModal({ modalType: modalNames.specializationModal }));
@@ -143,7 +145,7 @@ const SpecializationCategories = () => {
         {specializationsSorted?.map(({ id, name, main }) => (
           <Box
             key={id}
-            className={`figure ${activeSpecialization?.id === id ? 'active' : ''}`}
+            className={`figure ${isDefault && main ? 'active' : activeSpecialization?.id === id ? 'active' : ''}`}
             sx={styles.figure}
             onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
           >
