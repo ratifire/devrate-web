@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import { useSearchParams } from 'react-router';
 import { closeModal, openModal } from '../../redux/modal/modalSlice.js';
 import { modalNames } from '../constants/modalNames.js';
@@ -7,72 +7,84 @@ import { setStep } from '../../redux/modal/modalStepSlice.js';
 
 export function useModalController() {
   const [searchParams, setSearchParams] = useSearchParams();
-
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modal.isOpen);
   const modalData = useSelector((state) => state.modal.data);
+  const isClosingRef = useRef(false);
+
+  const openModalHandler = useCallback(
+    (modalType, data = null, step = null) => {
+      setSearchParams((prev) => {
+        const updatedParams = new URLSearchParams(prev);
+        updatedParams.set('modal', modalType);
+        if (step !== null) updatedParams.set('step', step);
+        if (data?.role) updatedParams.set('role', data.role);
+        return updatedParams;
+      });
+
+      dispatch(openModal({ modalType, data }));
+      if (step !== null) dispatch(setStep(step));
+    },
+    [dispatch, setSearchParams]
+  );
+
+  const openModalStepHandler = useCallback(
+    (modalStep) => {
+      dispatch(setStep(modalStep));
+
+      setSearchParams((prev) => {
+        const updatedParams = new URLSearchParams(prev);
+        updatedParams.set('step', modalStep);
+        return updatedParams;
+      });
+    },
+    [dispatch, setSearchParams]
+  );
+
+  const closeModalHandler = useCallback(
+    (modalType) => {
+      isClosingRef.current = true;
+      dispatch(closeModal(modalType));
+
+      setSearchParams((prev) => {
+        const updatedParams = new URLSearchParams(prev);
+        updatedParams.delete('modal');
+        updatedParams.delete('step');
+        updatedParams.delete('role');
+        return updatedParams;
+      });
+
+      setTimeout(() => {
+        isClosingRef.current = false;
+      }, 100);
+    },
+    [dispatch, setSearchParams]
+  );
+
+  const toggleModalHandler = useCallback(
+    (modalType, step = null) => {
+      isOpen ? closeModalHandler(modalType) : openModalHandler(modalType, step);
+    },
+    [isOpen, closeModalHandler, openModalHandler]
+  );
 
   useEffect(() => {
     const modal = searchParams.get('modal');
-    const step = Number(searchParams.get('step'));
+    const stepParam = searchParams.get('step');
+    const step = Number(stepParam);
 
     if (Object.values(modalNames).includes(modal)) {
       openModalHandler(modal, modalData);
-      if (step) openModalStepHandler(step);
+
+      if (stepParam !== null && !isNaN(step)) openModalStepHandler(step);
     }
   }, [searchParams]);
-
-  const openModalHandler = (modalType, data = null, step = null) => {
-    setSearchParams((prev) => {
-      const updatedParams = new URLSearchParams(prev);
-      updatedParams.set('modal', modalType);
-      if (step !== null) updatedParams.set('step', step);
-      if (data?.role) updatedParams.set('role', data.role);
-      return updatedParams;
-    });
-
-    dispatch(openModal({ modalType, data }));
-    if (step !== null) {
-      dispatch(setStep(step));
-    }
-  };
-
-  const openModalStepHandler = (modalStep) => {
-    dispatch(setStep(modalStep));
-
-    setSearchParams((prev) => {
-      const updatedParams = new URLSearchParams(prev);
-      updatedParams.set('step', modalStep);
-      return updatedParams;
-    });
-  };
-
-  const closeModalHandler = (modalType) => {
-    dispatch(closeModal(modalType));
-
-    setSearchParams((prev) => {
-      const updatedParams = new URLSearchParams(prev);
-      updatedParams.delete('modal');
-      updatedParams.delete('step');
-      updatedParams.delete('role');
-
-      return updatedParams;
-    });
-  };
-
-  const toggleModalHandler = (modalType, step = null) => {
-    if (isOpen) {
-      closeModalHandler(modalType);
-    } else {
-      openModalHandler(modalType, step);
-    }
-  };
 
   return {
     isOpen,
     openModal: openModalHandler,
     closeModal: closeModalHandler,
-    stepHadler: openModalStepHandler,
+    stepHandler: openModalStepHandler,
     toggleModal: toggleModalHandler,
   };
 }

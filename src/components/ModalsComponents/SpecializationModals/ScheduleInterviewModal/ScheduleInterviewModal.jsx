@@ -25,7 +25,8 @@ import RenderTimeSlots from './components/RenderTimeSlots';
 import WeekNavigation from './components/WeekNavigation';
 
 const ScheduleInterviewModal = () => {
-  const { role } = useSelector((state) => state.modal.data);
+  const user = useSelector((state) => state.auth.user) || {};
+  const { role } = user;
   const { t } = useTranslation();
   const [checked, setChecked] = useState([]);
   const { masteryId, userId } = useGetMastery();

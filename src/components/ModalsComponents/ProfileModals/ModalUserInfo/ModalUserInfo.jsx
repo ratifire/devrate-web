@@ -40,13 +40,13 @@ const ModalUserInfo = () => {
   const step = useSelector((state) => state.modalStep.step);
   const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState(step);
-  const { stepHadler } = useModalController();
+  const { stepHandler } = useModalController();
 
   const currentStep = steps[activeStep];
   const handleNext = () => {
     setActiveStep((nextActiveStep) => {
       const updatedStep = nextActiveStep + 1;
-      stepHadler(updatedStep);
+      stepHandler(updatedStep);
       return updatedStep;
     });
   };
@@ -54,7 +54,7 @@ const ModalUserInfo = () => {
   const handlePrev = () => {
     setActiveStep((prevActiveStep) => {
       const updatedStep = prevActiveStep - 1;
-      stepHadler(updatedStep);
+      stepHandler(updatedStep);
       return updatedStep;
     });
   };
