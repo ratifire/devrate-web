@@ -2,10 +2,10 @@
 import * as Yup from 'yup';
 
 export const ConfirmationSchema = Yup.object().shape({
-  text0: Yup.string().matches(/^.$/, 'Text 1 must be exactly one character').required('Text 1 is required'),
-  text1: Yup.string().matches(/^.$/, 'Text 2 must be exactly one character').required('Text 2 is required'),
-  text2: Yup.string().matches(/^.$/, 'Text 3 must be exactly one character').required('Text 3 is required'),
-  text3: Yup.string().matches(/^.$/, 'Text 4 must be exactly one character').required('Text 4 is required'),
-  text4: Yup.string().matches(/^.$/, 'Text 5 must be exactly one character').required('Text 5 is required'),
-  text5: Yup.string().matches(/^.$/, 'Text 6 must be exactly one character').required('Text 6 is required'),
+  text0: Yup.string().matches(/^.$/, 'modal.confirmation.text1').required('modal.confirmation.required_text1'),
+  text1: Yup.string().matches(/^.$/, 'modal.confirmation.text2').required('modal.confirmation.required_text2'),
+  text2: Yup.string().matches(/^.$/, 'modal.confirmation.text3').required('modal.confirmation.required_text3'),
+  text3: Yup.string().matches(/^.$/, 'modal.confirmation.text4').required('modal.confirmation.required_text4'),
+  text4: Yup.string().matches(/^.$/, 'modal.confirmation.text5').required('modal.confirmation.required_text5'),
+  text5: Yup.string().matches(/^.$/, 'modal.confirmation.text6').required('modal.confirmation.required_text6'),
 });
