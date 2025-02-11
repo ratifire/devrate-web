@@ -32,7 +32,7 @@ const EducationItem = ({ id, type, name, description, startYear, endYear, icon: 
   };
 
   const handleEditFeature = () => {
-    openModal(modalNames.educationEditModal, {
+    openModal(modalNames.educationModal, {
       id: id,
       type: type,
       name: name,
