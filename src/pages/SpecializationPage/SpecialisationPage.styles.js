@@ -12,7 +12,7 @@ export const styles = {
   contentWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: 'auto auto auto',
+    gridTemplateRows: 'auto 50px minmax(0,auto)',
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
@@ -27,20 +27,22 @@ export const styles = {
     minHeight: 202,
   },
   specialisationHardSkills: {
-    gridColumn: '1/5',
-    gridRow: '2/3',
     display: 'flex',
     flexDirection: 'column',
     flexShrink: 1,
+    gridRow: '2/6',
+    gridColumn: '1/5',
+    height: '29.5rem',
   },
   specialisationSoftSkills: {
+    gridRow: '6/8',
     gridColumn: '1/5',
-    gridRow: '3/4',
+    height: '17.25rem',
   },
   specialisationStatistics: {
     gridColumn: '5/13',
-    gridRow: '2/4',
-    maxHeight: '765px',
+    gridRow: '2/8',
+    maxHeight: '48.3125rem',
   },
   statisticWrapper: (theme) => ({
     padding: theme.spacing(4),
