@@ -403,6 +403,7 @@ export const en = {
           name: 'Educational institution',
           startYear: 'Start year',
           endYear: 'End year',
+          currentDate: 'I am currently studying at this institution',
           speciality_long: 'Speciality too long',
           speciality_short: 'Speciality too short',
           speciality_placeholder: 'Software Engineer',
