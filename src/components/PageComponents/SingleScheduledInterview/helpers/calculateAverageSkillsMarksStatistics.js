@@ -1,6 +1,6 @@
 import { totalSkillsMarks } from './index.js';
 
-const calculateAverageSkillMarksStatistics = (allSkills) => {
+const calculateAverageSkillsMarksStatistics = (allSkills) => {
   if (!allSkills) {
     return {
       hardSkillsAverage: 0,
@@ -11,9 +11,8 @@ const calculateAverageSkillMarksStatistics = (allSkills) => {
 
   const { hardSkills, softSkills } = allSkills;
 
-  const totalHardMarks = totalSkillsMarks(hardSkills);
-
-  const totalSoftMarks = totalSkillsMarks(softSkills);
+  const totalHardMarks = totalSkillsMarks(hardSkills, 10);
+  const totalSoftMarks = totalSkillsMarks(softSkills, 10);
 
   return {
     hardSkillsAverage: totalHardMarks,
@@ -22,4 +21,4 @@ const calculateAverageSkillMarksStatistics = (allSkills) => {
   };
 };
 
-export default calculateAverageSkillMarksStatistics;
+export default calculateAverageSkillsMarksStatistics;

@@ -2,29 +2,16 @@ import { Box, Typography } from '@mui/material';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart.js';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
+import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice.js';
+import { ParticipantEvaluationsSkeleton } from '../../../UI/Skeleton';
+import { ErrorComponent } from '../../../UI/Exceptions';
+import { calculateAverageSkillsMarkParticipantEvaluations } from '../helpers/index.js';
 import { styles } from './ParticipantEvaluations.styles.js';
 import { useColorPartEvalChart } from './hooks';
-
-const data = [
-  {
-    name: 'Soft Skills',
-    'Оксана Іващенко': 9,
-    'Олена Бондаренко': 2,
-  },
-  {
-    name: 'Hard Skills',
-    'Оксана Іващенко': 8,
-    'Олена Бондаренко': 4,
-  },
-  {
-    name: 'Over All',
-    'Оксана Іващенко': 9,
-    'Олена Бондаренко': 5,
-  },
-];
 
 const ParticipantEvaluations = () => {
   const { t } = useTranslation();
@@ -33,6 +20,35 @@ const ParticipantEvaluations = () => {
   const {
     data: { firstName, lastName },
   } = useSelector(selectCurrentUser);
+  const {
+    data: allSkillsHost,
+    isFetching: isFetchingAllSkillsHost,
+    isError: isErrorAllSkillsHost,
+  } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10009 });
+  const {
+    data: allSkills,
+    isFetching: isFetchingAllSkills,
+    isError: isErrorAllSkills,
+  } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10001 });
+
+  const data = useMemo(
+    () =>
+      calculateAverageSkillsMarkParticipantEvaluations({
+        hostSkills: allSkillsHost,
+        userSkills: allSkills,
+        hostName: 'Олена Король',
+        userName: `${firstName} ${lastName}`,
+      }),
+    [allSkillsHost, allSkills]
+  );
+
+  if (isErrorAllSkills || isErrorAllSkillsHost) {
+    return <ErrorComponent />;
+  }
+
+  if (isFetchingAllSkills || isFetchingAllSkillsHost) {
+    return <ParticipantEvaluationsSkeleton />;
+  }
 
   return (
     <Box sx={styles.wrapper}>
@@ -45,7 +61,7 @@ const ParticipantEvaluations = () => {
       <Box sx={styles.boxParticipants}>
         <Box>
           <Typography component='p' variant='subtitle2'>
-            Оксана Іващенко
+            Олена Король
           </Typography>
           <Typography component='p' sx={styles['middle']} variant='subtitle2'>
             Level Middle
@@ -91,8 +107,8 @@ const ParticipantEvaluations = () => {
             <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
             <Legend align='center' iconType='circle' layout='horizontal' verticalAlign='top' />
             <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
-            <Bar barSize={50} dataKey='Оксана Іващенко' fill='url(#left)' radius={[2, 2, 0, 0]} />
-            <Bar barSize={50} dataKey='Олена Бондаренко' fill='url(#right)' radius={[2, 2, 0, 0]} />
+            <Bar barSize={50} dataKey='Олена Король' fill='url(#left)' radius={[2, 2, 0, 0]} />
+            <Bar barSize={50} dataKey={`${firstName} ${lastName}`} fill='url(#right)' radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Box>
