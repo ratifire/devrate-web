@@ -1,12 +1,35 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useMemo } from 'react';
 import { LevelGauge } from '../../../UI/Chart';
+import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice.js';
+import { StatisticSkeleton } from '../../../UI/Skeleton';
+import { ErrorComponent } from '../../../UI/Exceptions';
+import { calculateAverageSkillMarks } from '../helpers';
 import { styles } from './Statistic.styles.js';
 import { useStatisticChartColor } from './hooks';
 
 const Statistic = () => {
   const { t } = useTranslation();
-  const { hardSkills, softSkills, overall } = useStatisticChartColor();
+  const { hardSkillsColors, softSkillsColors, overallColors } = useStatisticChartColor();
+  const {
+    data: allSkills,
+    isFetching: isFetchingAllSkills,
+    isError: isErrorAllSkills,
+  } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10009 });
+
+  const { hardSkillsAverage, softSkillsAverage, allSkillsAverage } = useMemo(
+    () => calculateAverageSkillMarks(allSkills),
+    [allSkills]
+  );
+
+  if (isErrorAllSkills) {
+    return <ErrorComponent />;
+  }
+
+  if (isFetchingAllSkills) {
+    return <StatisticSkeleton />;
+  }
 
   return (
     <Box sx={styles.wrapper}>
@@ -23,15 +46,15 @@ const Statistic = () => {
             fz={16}
             gradient={
               <linearGradient id='gradientSoftSkills' x1='0%' x2='100%' y1='0%' y2='0%'>
-                <stop offset='0%' style={{ stopColor: softSkills.grad1, stopOpacity: 1 }} />
-                <stop offset='50%' style={{ stopColor: softSkills.grad2, stopOpacity: 1 }} />
-                <stop offset='100%' style={{ stopColor: softSkills.grad3, stopOpacity: 1 }} />
+                <stop offset='0%' style={{ stopColor: softSkillsColors.grad1, stopOpacity: 1 }} />
+                <stop offset='50%' style={{ stopColor: softSkillsColors.grad2, stopOpacity: 1 }} />
+                <stop offset='100%' style={{ stopColor: softSkillsColors.grad3, stopOpacity: 1 }} />
               </linearGradient>
             }
             height={81}
             text={({ value }) => `${value / 10}/10`}
             transformX={-15}
-            value={80}
+            value={softSkillsAverage}
           />
         </Box>
         <Box sx={styles.chart}>
@@ -43,15 +66,15 @@ const Statistic = () => {
             fz={16}
             gradient={
               <linearGradient id='gradientHardSkills' x1='0%' x2='100%' y1='0%' y2='0%'>
-                <stop offset='0%' style={{ stopColor: hardSkills.grad1, stopOpacity: 1 }} />
-                <stop offset='50%' style={{ stopColor: hardSkills.grad2, stopOpacity: 1 }} />
-                <stop offset='100%' style={{ stopColor: hardSkills.grad3, stopOpacity: 1 }} />
+                <stop offset='0%' style={{ stopColor: hardSkillsColors.grad1, stopOpacity: 1 }} />
+                <stop offset='50%' style={{ stopColor: hardSkillsColors.grad2, stopOpacity: 1 }} />
+                <stop offset='100%' style={{ stopColor: hardSkillsColors.grad3, stopOpacity: 1 }} />
               </linearGradient>
             }
             height={61}
             text={({ value }) => `${value / 10}/10`}
             transformX={-15}
-            value={90}
+            value={hardSkillsAverage}
           />
         </Box>
         <Box sx={styles.chart}>
@@ -63,16 +86,16 @@ const Statistic = () => {
             fz={16}
             gradient={
               <linearGradient id='gradientOverall' x1='0%' x2='100%' y1='0%' y2='0%'>
-                <stop offset='0%' style={{ stopColor: overall.grad1, stopOpacity: 1 }} />
-                <stop offset='25%' style={{ stopColor: overall.grad2, stopOpacity: 1 }} />
-                <stop offset='75%' style={{ stopColor: overall.grad3, stopOpacity: 1 }} />
-                <stop offset='100%' style={{ stopColor: overall.grad3, stopOpacity: 1 }} />
+                <stop offset='0%' style={{ stopColor: overallColors.grad1, stopOpacity: 1 }} />
+                <stop offset='25%' style={{ stopColor: overallColors.grad2, stopOpacity: 1 }} />
+                <stop offset='75%' style={{ stopColor: overallColors.grad3, stopOpacity: 1 }} />
+                <stop offset='100%' style={{ stopColor: overallColors.grad3, stopOpacity: 1 }} />
               </linearGradient>
             }
             height={61}
             text={({ value }) => `${value / 10}/10`}
             transformX={-15}
-            value={80}
+            value={allSkillsAverage}
           />
         </Box>
       </Box>
