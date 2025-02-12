@@ -9,9 +9,7 @@ import { styles } from './ChatUser.styles';
 const ChatUser = ({ data }) => {
   const dispatch = useDispatch();
 
-  if (data.length === 0) {
-    return null; // Нічого не рендеримо
-  }
+  if (data.length === 0) return null;
 
   const { opponentUserId, opponentFirstName, opponentLastName, opponentPicture, lastMessage, lastMessageDate } = data;
 
@@ -27,7 +25,6 @@ const ChatUser = ({ data }) => {
         userPicture: opponentPicture,
       })
     );
-    console.log(opponentUserId, 'id ChatUser');
   };
 
   return (

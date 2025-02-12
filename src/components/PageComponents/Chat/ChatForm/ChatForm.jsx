@@ -7,7 +7,6 @@ import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 import { Link as RouterLink } from 'react-router';
 import { DateTime } from 'luxon';
-// import PropTypes from 'prop-types';
 import UserAvatar from '../../../UI/UserAvatar';
 import Send from '../../../../assets/icons/send.svg?react';
 import { closeChat } from '../../../../redux/chat/chatSlice';
@@ -22,28 +21,31 @@ const ChatForm = () => {
   const { id: opponentUserId, firstName, lastName, userPicture } = opponentUserInfo;
   const chatWrapperRef = useRef(null);
   const chatPositionRef = useRef(null);
-
-  const { message, setMessage, textFieldRef, handleTextFieldChange } = useResizeTextarea(chatWrapperRef);
-  const { showScrollButton, handleScroll, handleScrollToBottom } = useScrollChat(chatWrapperRef, opponentUserId);
-  const handleMouseDown = useMoveChat(chatPositionRef);
-  const handleResizeMouseDown = useResizeChat(chatPositionRef);
-
-  const { data: info } = useSelector(selectCurrentUser);
-  const { id: currentUserId } = info;
-
-  const dispatch = useDispatch();
-
-  const handleClose = () => dispatch(closeChat());
-
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [client, setClient] = useState(null);
 
+  // внутрішні хукі
+  const { message, setMessage, textFieldRef, handleTextFieldChange } = useResizeTextarea(chatWrapperRef);
+  const { showScrollButton, handleScrollToBottom } = useScrollChat(chatWrapperRef, opponentUserId);
+  const handleMouseDown = useMoveChat(chatPositionRef);
+  const handleResizeMouseDown = useResizeChat(chatPositionRef);
+
+  // закриття чату
+  const dispatch = useDispatch();
+  const handleClose = () => dispatch(closeChat());
+
+  const { data: info } = useSelector(selectCurrentUser);
+  const { id: currentUserId } = info;
   const { data: dataChats } = useGetChatHistoryQuery(opponentUserId, { skip: !opponentUserId });
 
   const [chatMessages, setChatMessages] = useState(dataChats?.content || []);
 
   useEffect(() => {
-    if (dataChats?.content) setChatMessages(dataChats.content);
+    if (dataChats?.content) {
+      const normalize = [...dataChats.content].reverse();
+      setChatMessages(normalize);
+    }
   }, [dataChats]);
 
   useEffect(() => {
@@ -55,10 +57,12 @@ const ChatForm = () => {
         newClient.subscribe(`/topic/messages/${currentUserId}`, (message) => {
           const newMessage = JSON.parse(message.body);
           setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+          if (!isScrolledUp && chatWrapperRef.current) {
+            chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
+          }
         });
       },
     });
-
     setClient(newClient);
     newClient.activate();
     return () => {
@@ -69,21 +73,38 @@ const ChatForm = () => {
   const handleSubmitMessages = (e) => {
     e.preventDefault();
     if (!isConnected || !message.trim()) return;
-    const newData = DateTime.utc().toISO();
+
     client.publish({
-      destination: '/app/chat', // Кінцева точка на сервері
+      destination: '/app/chat',
       body: JSON.stringify({
-        senderId: currentUserId, // ID поточного користувача
-        receiverId: opponentUserId, // ID отримувача
+        senderId: currentUserId,
+        receiverId: opponentUserId,
         payload: message.trim(),
         status: '',
-        dateTime: newData,
+        dateTime: DateTime.utc().toISO(),
       }),
     });
 
-    setMessage(''); // Очищення текстового поля після відправки
+    setMessage('');
+    if (chatWrapperRef.current) chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
   };
 
+  useEffect(() => {
+    if (!isScrolledUp && chatWrapperRef.current) {
+      chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
+    }
+  }, [chatMessages, isScrolledUp]);
+
+  const handleScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    const isNearBottom = scrollHeight - (scrollTop + clientHeight) < 50;
+
+    if (!isNearBottom) {
+      setIsScrolledUp(true);
+    } else {
+      setIsScrolledUp(false);
+    }
+  };
   return (
     <Fade in={chat}>
       <Box ref={chatPositionRef} sx={styles.position}>
@@ -107,7 +128,9 @@ const ChatForm = () => {
           </Box>
           <Box ref={chatWrapperRef} sx={styles.chatWrapper} onScroll={handleScroll}>
             {chatMessages?.map((item) => (
-              <ChatMessage key={item.dateTime} data={item} />
+              <Box key={item.dateTime}>
+                <ChatMessage data={item} />
+              </Box>
             ))}
             {showScrollButton && (
               <IconButton aria-label='Scroll to bottom' sx={styles.btnIconScroll} onClick={handleScrollToBottom}>
@@ -140,9 +163,5 @@ const ChatForm = () => {
     </Fade>
   );
 };
-
-// ChatForm.propTypes = {
-//   opponentUserInfo: PropTypes.object.isRequired,
-// };
 
 export default ChatForm;
