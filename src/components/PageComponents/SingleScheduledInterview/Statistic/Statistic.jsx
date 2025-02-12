@@ -5,7 +5,7 @@ import { LevelGauge } from '../../../UI/Chart';
 import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice.js';
 import { StatisticSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
-import { calculateAverageSkillMarks } from '../helpers';
+import { calculateAverageSkillMarksStatistics } from '../helpers';
 import { styles } from './Statistic.styles.js';
 import { useStatisticChartColor } from './hooks';
 
@@ -19,7 +19,7 @@ const Statistic = () => {
   } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10009 });
 
   const { hardSkillsAverage, softSkillsAverage, allSkillsAverage } = useMemo(
-    () => calculateAverageSkillMarks(allSkills),
+    () => calculateAverageSkillMarksStatistics(allSkills),
     [allSkills]
   );
 

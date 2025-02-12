@@ -1,4 +1,4 @@
-import calculateAverageSkillMarks from './calculateAverageSkillMarks.js';
+import calculateAverageSkillMarksStatistics from './calculateAverageSkillMarksStatistics.js';
 import totalSkillsMarks from './totalSkillsMarks.js';
 
-export { calculateAverageSkillMarks, totalSkillsMarks };
+export { calculateAverageSkillMarksStatistics, totalSkillsMarks };
