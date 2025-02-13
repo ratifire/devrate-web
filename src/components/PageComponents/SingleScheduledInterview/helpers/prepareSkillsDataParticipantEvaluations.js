@@ -1,4 +1,4 @@
-import { totalSkillsMarks } from './index.js';
+import { totalSkillsMarks } from './index';
 
 const prepareSkillsDataParticipantEvaluations = ({ hostSkills, userSkills, hostName, userName }) => {
   if (!hostSkills || !userSkills) {

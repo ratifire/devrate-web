@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
-import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart.js';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
-import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice.js';
+import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
 import { ParticipantEvaluationsSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
-import { prepareSkillsDataParticipantEvaluations } from '../helpers/index.js';
-import { styles } from './ParticipantEvaluations.styles.js';
+import { prepareSkillsDataParticipantEvaluations } from '../helpers/index';
+import { styles } from './ParticipantEvaluations.styles';
 import { useColorPartEvalChart } from './hooks';
 
 const ParticipantEvaluations = () => {

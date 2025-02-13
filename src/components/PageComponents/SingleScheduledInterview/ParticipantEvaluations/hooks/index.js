@@ -1,3 +1,3 @@
-import useColorPartEvalChart from './useColorPartEvalChart.js';
+import useColorPartEvalChart from './useColorPartEvalChart';
 
 export { useColorPartEvalChart };

@@ -3,9 +3,9 @@ import { Link as RouterLink } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import zoom from '../../../../assets/icons/InterviewPageIcons/zoom.png';
-import UserAvatar from '../../../UI/UserAvatar/index.js';
-import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
+import UserAvatar from '../../../UI/UserAvatar';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { styles } from './ScheduledMeeting.styles';
 
 const ScheduledMeeting = () => {

@@ -2,11 +2,11 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
 import { LevelGauge } from '../../../UI/Chart';
-import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice.js';
+import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
 import { StatisticSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { prepareSkillsDataStatistics } from '../helpers';
-import { styles } from './Statistic.styles.js';
+import { styles } from './Statistic.styles';
 import { useStatisticChartColor } from './hooks';
 
 const Statistic = () => {

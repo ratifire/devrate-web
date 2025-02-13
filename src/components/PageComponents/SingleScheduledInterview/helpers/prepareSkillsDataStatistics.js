@@ -1,4 +1,4 @@
-import { totalSkillsMarks } from './index.js';
+import { totalSkillsMarks } from './index';
 
 const prepareSkillsDataStatistics = (allSkills) => {
   if (!allSkills) {

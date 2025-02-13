@@ -7,7 +7,7 @@ import {
   ParticipantEvaluationsSkeleton,
   InterviewSkillsSkeleton,
 } from '../../../components/UI/Skeleton';
-import { styles } from './SingleScheduledInterviewPage.styles.js';
+import { styles } from './SingleScheduledInterviewPage.styles';
 
 const UserCardScheduledInterview = lazy(
   () => import('../../../components/PageComponents/SingleScheduledInterview/UserCardScheduledInterview')

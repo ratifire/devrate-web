@@ -1,6 +1,6 @@
 import { Box, Divider, LinearProgress, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import CustomTooltip from '../../../../../UI/CustomTooltip/index.js';
+import CustomTooltip from '../../../../../UI/CustomTooltip';
 import { styles } from './SkillsParticipantItem.styles';
 
 const SkillsParticipantItem = ({ name, leftGrade, rightGrade }) => {

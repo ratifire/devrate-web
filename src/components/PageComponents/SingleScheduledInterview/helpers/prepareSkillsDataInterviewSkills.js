@@ -1,4 +1,4 @@
-import matchSkills from './matchSkills.js';
+import matchSkills from './matchSkills';
 
 const prepareSkillsDataInterviewSkills = ({ hostSkills, userSkills }) => {
   if (!hostSkills || !userSkills) return;

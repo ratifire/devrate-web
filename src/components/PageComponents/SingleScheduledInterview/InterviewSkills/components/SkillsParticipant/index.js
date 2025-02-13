@@ -1,3 +1,3 @@
-import SkillsParticipant from './SkillsParticipant.jsx';
+import SkillsParticipant from './SkillsParticipant';
 
 export default SkillsParticipant;
