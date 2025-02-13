@@ -28,10 +28,10 @@ export const styles = {
   }),
   host: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.hostColor,
-    marginBottom: theme.spacing(2),
   }),
   role: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.participant,
+    marginBottom: theme.spacing(2),
     textTransform: 'lowercase',
     '&:first-letter': {
       textTransform: 'uppercase',
