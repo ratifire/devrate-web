@@ -48,7 +48,7 @@ const SpecializationCategories = () => {
 
   const isLoading = isFetchingGetSpecialization || isLoadingGetMainMastery || isLoadingUpdateSpecialization;
   const isError = isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization;
-  const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
+  const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : 0));
 
   useEffect(() => {
     if (!specializations || isLoading) {

@@ -12,7 +12,7 @@ export const styles = {
   contentWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: 'auto 50px minmax(0,auto)',
+    gridTemplateRows: 'auto auto auto auto',
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
@@ -30,26 +30,26 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     flexShrink: 1,
-    gridRow: '2/6',
+    gridRow: '2/4',
     gridColumn: '1/5',
-    height: '29.5rem',
+    height: '31rem',
   },
   specialisationSoftSkills: {
-    gridRow: '6/8',
+    gridRow: '4/5',
     gridColumn: '1/5',
     height: '17.25rem',
   },
   specialisationStatistics: {
     gridColumn: '5/13',
-    gridRow: '2/8',
-    maxHeight: '48.3125rem',
+    gridRow: '2/5',
+    maxHeight: '50.6875rem',
   },
   statisticWrapper: (theme) => ({
-    padding: theme.spacing(4),
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
     gridTemplateRows: 'auto auto',
-    gridGap: theme.spacing(4),
+    gridGap: theme.spacing(3),
+    padding: '16px 24px 24px',
 
     ' > div': {
       backgroundImage: 'none',
@@ -58,7 +58,7 @@ export const styles = {
     },
   }),
   statisticTitle: (theme) => ({
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(3),
     marginLeft: theme.spacing(4),
   }),
   level: {

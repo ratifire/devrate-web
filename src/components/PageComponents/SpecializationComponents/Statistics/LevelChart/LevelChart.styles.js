@@ -2,16 +2,20 @@ export const styles = {
   levelChartContainer: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     padding: theme.spacing(3),
+    height: 317,
   }),
+  contentContainer: {
+    marginBottom: '30px',
+  },
   title: {
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    marginBottom: '11px',
+    marginBottom: '9px',
   },
   chartContainer: {
     width: '100%',
