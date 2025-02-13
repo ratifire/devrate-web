@@ -47,13 +47,12 @@ export function useModalController() {
 
       setSearchParams((prev) => {
         const updatedParams = new URLSearchParams(prev);
-        updatedParams.delete('modal');
-        updatedParams.delete('step');
-        updatedParams.delete('role');
+        const params = ['modal', 'step', 'role'];
+        params.forEach((param) => updatedParams.delete(param));
         return updatedParams;
       });
 
-      isClosingRef.current = false; // Убираем setTimeout
+      isClosingRef.current = false;
     },
     [dispatch, setSearchParams]
   );
