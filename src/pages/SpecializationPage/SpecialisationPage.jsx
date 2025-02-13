@@ -9,6 +9,7 @@ import {
   SkillsSkeleton,
 } from '../../components/UI/Skeleton';
 import LevelChartSkeleton from '../../components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
+import InterviewTracker from '../../components/PageComponents/SpecializationComponents/InterviewTracker/index.js';
 import { styles } from './SpecialisationPage.styles';
 
 const HardSkills = lazy(() => import('../../components/PageComponents/SpecializationComponents/HardSkills'));
@@ -65,6 +66,9 @@ const SpecializationPage = () => {
           <Typography sx={styles.statisticTitle} variant='h6'>
             {t('specialization.statistics.title')}
           </Typography>
+          <Box sx={styles.trackerWrapper}>
+            <InterviewTracker />
+          </Box>
           <Box sx={styles.statisticWrapper}>
             <Paper sx={styles.level}>
               <Suspense fallback={<LevelChartSkeleton />}>

@@ -30,7 +30,9 @@ const LevelChart = () => {
           <Typography sx={styles.title} variant='subtitle2'>
             {t('specialization.statistics.level_chart_title')}
           </Typography>
-          <Typography variant='subtitle3'>За результатами ми рекомендуємо вам перейти на наступний рівень!</Typography>
+          <Typography sx={styles.text} variant='subtitle3'>
+            За результатами ми рекомендуємо вам перейти на наступний рівень!
+          </Typography>
         </Box>
         <IconButton aria-label='level up' sx={styles.levelBtn}>
           <LevelUp />

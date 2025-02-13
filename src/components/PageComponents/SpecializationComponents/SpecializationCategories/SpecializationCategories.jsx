@@ -5,7 +5,6 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import Mood from '@mui/icons-material/Mood';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 import {
@@ -19,6 +18,7 @@ import { ErrorComponent } from '../../../UI/Exceptions';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
 import { CategoriesSkeleton } from '../../../UI/Skeleton';
 import { modalNames } from '../../../../utils/constants/modalNames';
+import InterviewTracker from '../InterviewTracker/index.js';
 import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
@@ -27,14 +27,8 @@ const SpecializationCategories = () => {
   const [anchorEl, setAnchorEl] = useState({});
   const [isDefault, setIsDefault] = useState(true);
   const { id } = useSelector((state) => state.auth.user.data);
-  const { activeSpecialization, mainSpecialization, fullSpecializations } = useSelector(
-    (state) => state.specialization
-  );
+  const { activeSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
-
-  const mainSpec = activeSpecialization || mainSpecialization;
-
-  const activeInterviews = fullSpecializations?.find((spec) => spec.id === mainSpec?.id);
 
   const {
     data: specializations,
@@ -63,7 +57,7 @@ const SpecializationCategories = () => {
         ...prev,
         [specialization.id]: data,
       }));
-      specialization.main && dispatch(setActiveMastery(data?.level));
+      if (specialization.main) dispatch(setActiveMastery(data?.level));
     });
   }, [specializations, activeSpecialization]);
 
@@ -121,19 +115,8 @@ const SpecializationCategories = () => {
         <Typography sx={styles.page_title} variant='h5'>
           {t('specialization.specialization_title')}
         </Typography>
-        <Box sx={styles.interviewItemOutcome}>
-          <Mood />
-          <Typography sx={styles.interviewType} variant='body1'>
-            {t('specialization.modal.interview.outcome')}
-          </Typography>
-          <Typography variant='body1'>{activeInterviews?.conductedInterviews}</Typography>
-        </Box>
-        <Box sx={styles.interviewItemIncome}>
-          <Mood />
-          <Typography sx={styles.interviewType} variant='body1'>
-            {t('specialization.modal.interview.income')}
-          </Typography>
-          <Typography variant='body1'>{activeInterviews?.completedInterviews}</Typography>
+        <Box sx={styles.trackerWrapper}>
+          <InterviewTracker />
         </Box>
       </Box>
       <Box sx={styles.specialization_right_box}>
