@@ -40,5 +40,14 @@ export const styles = {
   interviewSkills: {
     gridRow: '7/14',
     gridColumn: '6/13',
+    container: {
+      flex: ' 1 0 0',
+      '@media (min-width: 1272px)': {
+        flex: '1 0 0',
+      },
+      '@media (min-width: 1920px)': {
+        flex: '1 0 0',
+      },
+    },
   },
 };

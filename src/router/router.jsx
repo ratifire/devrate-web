@@ -71,26 +71,32 @@ const router = createBrowserRouter([
                   {
                     path: navigationLinks.scheduledInterviews,
                     element: <ScheduledInterviewsPage />,
+                    children: [
+                      {
+                        path: `${navigationLinks.scheduledInterviews}/:interviewId`,
+                        element: <SingleScheduledInterviewPage />,
+                      },
+                    ],
                   },
                   {
                     path: navigationLinks.passedInterviews,
                     element: <PassedInterviewsPage />,
+                    children: [
+                      {
+                        path: `${navigationLinks.passedInterviews}/:interviewId`,
+                        element: <SinglePassedInterviewPage />,
+                      },
+                    ],
                   },
                   {
                     path: navigationLinks.interviewRequests,
                     element: <InterviewRequestsPage />,
-                  },
-                  {
-                    path: `${navigationLinks.scheduledInterviews}/:interviewId`,
-                    element: <SingleScheduledInterviewPage />,
-                  },
-                  {
-                    path: `${navigationLinks.passedInterviews}/:interviewId`,
-                    element: <SinglePassedInterviewPage />,
-                  },
-                  {
-                    path: `${navigationLinks.interviewRequests}/:requestId`,
-                    element: <SingleRequestInterviewPage />,
+                    children: [
+                      {
+                        path: `${navigationLinks.interviewRequests}/:requestId`,
+                        element: <SingleRequestInterviewPage />,
+                      },
+                    ],
                   },
                 ],
               },

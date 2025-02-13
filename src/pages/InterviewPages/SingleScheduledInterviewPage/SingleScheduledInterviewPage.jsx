@@ -1,11 +1,11 @@
-import { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
+import { lazy, memo, Suspense } from 'react';
 import {
-  UserCardScheduledInterviewSkeleton,
+  InterviewSkillsSkeleton,
+  ParticipantEvaluationsSkeleton,
   ScheduledMeetingSkeleton,
   StatisticSkeleton,
-  ParticipantEvaluationsSkeleton,
-  InterviewSkillsSkeleton,
+  UserCardScheduledInterviewSkeleton,
 } from '../../../components/UI/Skeleton';
 import { styles } from './SingleScheduledInterviewPage.styles';
 
