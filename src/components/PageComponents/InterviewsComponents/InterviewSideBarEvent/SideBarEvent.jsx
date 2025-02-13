@@ -4,13 +4,13 @@ import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { formatDateAndTime } from '../../../../utils/helpers';
 // import LimeCircleIcon from '../../../../assets/icons/InterviewPageIcons/lime-ellipse.svg';
-import OrangeCircleIcon from '../../../../assets/icons/InterviewPageIcons/orange-ellipse.svg';
+// import OrangeCircleIcon from '../../../../assets/icons/InterviewPageIcons/orange-ellipse.svg';
 import { lvlMastery, lvlMasteryColor } from '../../../../utils/constants/masteryLvl.js';
 import navigationLinks from '../../../../router/links.js';
 import { styles } from './SideBarEvent.styles.js';
 
-const SideBarEvent = ({ event, refHandler, passedInterview }) => {
-  const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName, feedback } = event;
+const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, selectedPaperId }) => {
+  const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName } = event;
   const { t } = useTranslation();
 
   return (
@@ -19,15 +19,18 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
       sx={styles.interviewLink}
       to={`${passedInterview ? navigationLinks.passedInterviews : navigationLinks.scheduledInterviews}/${id}`}
     >
-      <Paper key={id} ref={refHandler} sx={styles.sideBarEventContainer}>
+      <Paper
+        key={id}
+        ref={refHandler}
+        sx={selectedPaperId === id ? styles.border : styles.sideBarEventContainer}
+        onClick={() => handlePaperClick(id)}
+      >
         <Typography component='div' sx={styles.status} variant='subtitle2'>
-          {/*//TODO in progress status still pending. To be discussed with back*/}
-          {feedback?.length === 0 && (
-            <>
-              <Box alt='Circle' component='img' src={OrangeCircleIcon} sx={styles.ellipse} />
-              {t('interviews.sideBar.event.statusAwaitingFeedback')}
-            </>
-          )}
+          {/*//TODO should be implemented based on sockets or as a temporary solution via setTimeout. TBC with TL. */}
+          {/*<>*/}
+          {/*  <Box alt='Circle' component='img' src={OrangeCircleIcon} sx={styles.ellipse} />*/}
+          {/*  {t('interviews.sideBar.event.statusAwaitingFeedback')}*/}
+          {/*</>*/}
           {/*<Box alt='Circle' component='img' src={LimeCircleIcon} sx={styles.ellipse} />{' '}*/}
           {/*{t('interviews.sideBar.event.statusInProcess')}*/}
         </Typography>
@@ -66,10 +69,11 @@ SideBarEvent.propTypes = {
     hostId: PropTypes.number.isRequired,
     hostFirstName: PropTypes.string.isRequired,
     hostLastName: PropTypes.string.isRequired,
-    feedback: PropTypes.string,
   }).isRequired,
   refHandler: PropTypes.func,
   passedInterview: PropTypes.bool,
+  handlePaperClick: PropTypes.func,
+  selectedPaperId: PropTypes.number,
 };
 
 export default SideBarEvent;
