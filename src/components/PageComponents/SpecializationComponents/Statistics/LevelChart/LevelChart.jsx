@@ -26,15 +26,15 @@ const LevelChart = () => {
   return (
     <Box sx={styles.levelChartContainer}>
       <Box sx={styles.contentContainer}>
-        <Typography sx={styles.title} variant='subtitle2'>
-          {t('specialization.statistics.level_chart_title')}
-        </Typography>
-        <Box alignItems='center' display='flex'>
+        <Box>
+          <Typography sx={styles.title} variant='subtitle2'>
+            {t('specialization.statistics.level_chart_title')}
+          </Typography>
           <Typography variant='subtitle3'>За результатами ми рекомендуємо вам перейти на наступний рівень!</Typography>
-          <IconButton aria-label='level up' sx={{ width: 44, height: 44, margin: 0 }}>
-            <LevelUp />
-          </IconButton>
         </Box>
+        <IconButton aria-label='level up' sx={styles.levelBtn}>
+          <LevelUp />
+        </IconButton>
       </Box>
       <Box sx={styles.chartContainer}>
         <Box sx={{ position: 'relative' }}>

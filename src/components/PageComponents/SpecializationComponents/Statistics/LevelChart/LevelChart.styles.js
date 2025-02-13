@@ -9,6 +9,8 @@ export const styles = {
   }),
   contentContainer: {
     marginBottom: '30px',
+    display: 'flex',
+    alignItems: 'flex-start',
   },
   title: {
     display: 'flex',
@@ -16,6 +18,13 @@ export const styles = {
     width: '100%',
     justifyContent: 'space-between',
     marginBottom: '9px',
+  },
+  levelBtn: {
+    width: 44,
+    height: 44,
+    margin: 0,
+    backgroundColor: ' #8133f1',
+    borderRadius: '4px',
   },
   chartContainer: {
     width: '100%',
