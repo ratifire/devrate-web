@@ -1,0 +1,33 @@
+export const styles = {
+  wrapper: (theme) => ({
+    width: '100%',
+    padding: theme.spacing(4),
+    paddingBottom: theme.spacing(0),
+  }),
+  interviewTitle: (theme) => ({
+    marginBottom: theme.spacing(3),
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: 500,
+    lineHeight: '41.99px',
+    letterSpacing: '0.25px',
+  }),
+  scrollContainer: (theme) => ({
+    maxHeight: 'calc(100vh - 193px);',
+    height: '100%',
+    overflowY: 'auto',
+    // width: 'calc(306px + 15px)',
+    // paddingRight: '10px',
+    '&::-webkit-scrollbar': {
+      paddingRight: theme.spacing(3),
+      width: 10,
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.palette.scroll.scrollWrapp.backgroundColor,
+      borderRadius: 8,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: 6,
+      backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
+    },
+  }),
+};

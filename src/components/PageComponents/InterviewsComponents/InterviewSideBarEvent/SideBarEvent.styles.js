@@ -1,11 +1,18 @@
 export const styles = {
+  interviewLink: {
+    textDecoration: 'none',
+  },
   sideBarEventContainer: (theme) => ({
-    height: '185px', //162px changed to 185px due to adding line of role
+    width: '100%',
     backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
-    borderRadius: 2,
+    borderRadius: 1,
     padding: theme.spacing(3),
-    paddingRight: theme.spacing(3),
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(3),
+  }),
+  status: (theme) => ({
+    display: 'flex',
+    alignItems: 'center',
+    color: theme.palette.text.secondary,
   }),
   title: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.titleColor,
@@ -13,44 +20,45 @@ export const styles = {
       textTransform: 'uppercase',
     },
   }),
-  titleDateTimeBox: (theme) => ({
+  titleLevelBox: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: theme.spacing(2),
-  }),
-  dateAndTime: (theme) => ({
-    color: theme.palette.schedule.sideBarEvent.dateAndTimeColor,
+    marginBottom: theme.spacing(1),
   }),
   host: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.hostColor,
-    marginBottom: theme.spacing(2),
   }),
-  participant: (theme) => ({
+  role: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.participant,
     marginBottom: theme.spacing(2),
+    textTransform: 'lowercase',
+    '&:first-letter': {
+      textTransform: 'uppercase',
+    },
+    ' span': {
+      display: 'inline-block',
+      '&:first-letter': {
+        textTransform: 'uppercase',
+      },
+    },
   }),
-  hostTitle: (theme) => ({
-    lineHeight: '19.92px',
-    letterSpacing: '0.4px',
+  eventDate: (theme) => ({
+    lineHeight: '20.02px',
     color: theme.palette.schedule.sideBarEvent.hostTitle,
     marginBottom: theme.spacing(2),
   }),
-  host_link: (theme) => ({
+  hostLink: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.hostLinkColor,
     textDecoration: 'none',
+    transition: 'color 0.2s',
     '&:hover': {
       color: theme.palette.primary[300],
     },
   }),
-  participant_link: (theme) => ({
-    color: theme.palette.schedule.sideBarEvent.participantlinkColor,
-    textDecoration: 'none',
-    '&:hover': {
-      color: theme.palette.primary[300],
-    },
-  }),
-  cancelEventBtn: (theme) => ({
-    color: theme.palette.schedule.sideBarEvent.cancelEventBtnColor,
+  ellipse: (theme) => ({
+    marginRight: theme.spacing(2),
+    width: '14px',
+    height: '14px',
   }),
 };

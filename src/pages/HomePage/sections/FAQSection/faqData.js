@@ -33,7 +33,7 @@ export const faqData = [
     id: 6,
     question: 'How long does a practice interview take?',
     answer:
-      'Answer: A practice interview typically lasts up to 40 minutes, depending on the interview type and format agreed upon by you and the participant.',
+      'Answer: A practice interview typically lasts up to 40 minutes, depending on the interview type and format agreed upon by you and the role.',
   },
   {
     id: 7,

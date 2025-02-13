@@ -551,7 +551,7 @@ export const en = {
       participant: 'Participant',
       cancelEventBtn: 'Cancel event',
       popupUserInfo: 'Info about you',
-      popupInterviewerInfo: 'Info about participant',
+      popupInterviewerInfo: 'Info about role',
       popupRole: 'Role:',
     },
     notifications: {
@@ -601,7 +601,7 @@ export const en = {
       question6: {
         question: 'Can I select my interviewer or candidate?',
         answer:
-          'Our system automatically selects the most suitable participant for you through our matching algorithms, taking your requests into account. This enables effective evaluation of your skills and ensures the best possible match.',
+          'Our system automatically selects the most suitable role for you through our matching algorithms, taking your requests into account. This enables effective evaluation of your skills and ensures the best possible match.',
       },
       question7: {
         question: 'How can I raise my level?',
@@ -621,12 +621,12 @@ export const en = {
       question10: {
         question: 'How long does an interview take?',
         answer:
-          'A practical interview typically lasts up to 40 minutes, depending on the interview type and agreed-upon format between you and the other participant.',
+          'A practical interview typically lasts up to 40 minutes, depending on the interview type and agreed-upon format between you and the other role.',
       },
       question11: {
         question: 'How is the evaluation conducted after the interview?',
         answer:
-          "After the interview, each participant will receive a notification to complete the results. If you were the interviewer, you'll need to evaluate the candidate's hard and soft skills and write a general comment. If you were the candidate, you need to rate the interviewer's soft skills and leave a general comment.",
+          "After the interview, each role will receive a notification to complete the results. If you were the interviewer, you'll need to evaluate the candidate's hard and soft skills and write a general comment. If you were the candidate, you need to rate the interviewer's soft skills and leave a general comment.",
       },
       question12: {
         question: 'Where can I view my interview schedule?',
@@ -666,7 +666,7 @@ export const en = {
       question19: {
         question: 'Can I invite a specific person to an interview?',
         answer:
-          'Currently, the participant selection is automated and doesn’t support inviting a specific person. We strive to ensure fairness and impartiality, so we rely on the automatic selection for an effective interview experience.',
+          'Currently, the role selection is automated and doesn’t support inviting a specific person. We strive to ensure fairness and impartiality, so we rely on the automatic selection for an effective interview experience.',
       },
     },
     blogText: {
@@ -859,6 +859,15 @@ export const en = {
         scheduled: 'Scheduled',
         passed: 'Passed',
         requests: 'Requests',
+      },
+      sideBar: {
+        title: 'Interview',
+        event: {
+          role: 'Role',
+          host: 'Host',
+          statusInProcess: 'In Process',
+          statusAwaitingFeedback: 'Awaiting Feedback',
+        },
       },
     },
   },

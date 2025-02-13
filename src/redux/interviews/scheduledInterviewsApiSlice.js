@@ -1,14 +1,14 @@
 import { apiSlice } from '../services/api/apiSlice';
 
-const passedInterviewApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['PassedInterview'],
+const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
+  tagTypes: ['ScheduledInterview'],
   endpoints: (builder) => ({
-    getAllPassedInterviews: builder.query({
-      query: ({ page, size }) => `/interview-histories?page=${page}&size=${size}`,
+    getAllScheduledInterviews: builder.query({
+      query: ({ page, size }) => `/interviews?page=${page}&size=${size}`,
       providesTags: (result) =>
         result?.content
-          ? [...result.content.map(({ id }) => ({ type: 'PassedInterview', id })), 'PassedInterview']
-          : ['PassedInterview'],
+          ? [...result.content.map(({ id }) => ({ type: 'ScheduledInterview', id })), 'ScheduledInterview']
+          : ['ScheduledInterviews'],
 
       // Merge new data with existing data
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -30,11 +30,8 @@ const passedInterviewApiSlice = apiSlice.injectEndpoints({
         const transformedContent = result?.content.map((event) => {
           return {
             ...event,
-            title: event.attendeeSpecialization,
-            date: event.dateTime,
-            hostId: event.attendeeId,
-            hostFirstName: event.attendeeFirstName,
-            hostLastName: event.attendeeLastName,
+            title: event.specializationName,
+            date: event.startTime,
           };
         });
 
@@ -44,10 +41,10 @@ const passedInterviewApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
-    getPassedInterviewById: builder.query({
-      query: ({ interviewId }) => `/interview-histories/${interviewId}`,
+    getScheduledInterviewById: builder.query({
+      query: ({ interviewId }) => `/interviews/events/${interviewId}`,
     }),
   }),
 });
 
-export const { useGetAllPassedInterviewsQuery, useGetPassedInterviewByIdQuery } = passedInterviewApiSlice;
+export const { useGetAllScheduledInterviewsQuery, useGetScheduledInterviewByIdQuery } = scheduledInterviewApiSlice;

@@ -31,21 +31,4 @@ export const styles = {
       flex: '0 0 354px',
     },
   },
-  interviews: {
-    gridColumn: '1/6',
-    gridRow: '1/9',
-    display: 'flex',
-    flexDirection: 'column',
-    flexShrink: 1,
-    height: '700px',
-    width: '100%',
-    backgroundColor: '#303032',
-  },
-  interview: (theme) => ({
-    gridColumn: '6/21',
-    gridRow: '1/9',
-    gridGap: theme.spacing(4),
-    boxShadow: 'none',
-    backgroundImage: 'none',
-  }),
 };

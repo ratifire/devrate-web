@@ -685,6 +685,15 @@ export const uk = {
         passed: 'Пройдені',
         requests: 'Запити',
       },
+      sideBar: {
+        title: 'Інтерв’ю',
+        event: {
+          role: 'Роль',
+          host: 'Хост',
+          statusInProcess: 'В процесі',
+          statusAwaitingFeedback: 'Очікується відгук',
+        },
+      },
     },
   },
 };
