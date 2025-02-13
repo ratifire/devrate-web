@@ -1,10 +1,10 @@
-import { useEffect, useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
+import { selectModalData } from '../../../../redux/modal/modalSlice';
 import { EducationModalSchema } from '../../../../utils/validationSchemas/index';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
@@ -14,10 +14,10 @@ import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './EducationModal.styles';
 
 const EducationModal = () => {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [startYears, setStartYears] = useState([]);
   const [endYears, setEndYears] = useState([]);
@@ -25,17 +25,9 @@ const EducationModal = () => {
   const [updateEducation, { isLoading: isUpdating }] = useUpdateEducationMutation();
   const currentUser = useSelector(selectCurrentUser);
   const { enqueueSnackbar } = useSnackbar();
+  const { closeModal } = useModalController();
   const modalData = useSelector(selectModalData);
-
   const isEditMode = Boolean(modalData);
-
-  const handleClose = useCallback(() => {
-    dispatch(
-      closeModal({
-        modalType: isEditMode ? modalNames.educationEditModal : modalNames.educationModal,
-      })
-    );
-  }, [dispatch, isEditMode]);
 
   useEffect(() => {
     const currentYear = new Date().getFullYear();
@@ -100,7 +92,7 @@ const EducationModal = () => {
         enqueueSnackbar(t('modalNotifyText.education.create.success'), { variant: 'success' });
       }
       resetForm();
-      handleClose();
+      closeModal(isEditMode ? modalNames.educationEditModal : modalNames.educationModal);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       const errorMsg = isEditMode

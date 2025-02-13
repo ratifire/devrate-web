@@ -2,10 +2,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { useSnackbar } from 'notistack';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useAddSkillToMasteryMutation,
   useDeleteSkillByIdMutation,
@@ -19,6 +17,7 @@ import { ErrorComponent } from '../../../UI/Exceptions';
 import { SkillChip } from '../../../UI/Specialization/SkillChip';
 import { styles } from '../styles/SkillsModal.styles';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles as hardSkillsStyles } from './HardSkillsModal.styles';
 
 const initialState = {
@@ -33,7 +32,6 @@ const initialState = {
 const HardSkillsModal = () => {
   const [state, updateState] = useMergeState(initialState);
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const { masteryId, isError: isErrorMastery, isFetching: isFetchingMastery } = useGetMastery();
   const { enqueueSnackbar } = useSnackbar();
   const {
@@ -50,8 +48,7 @@ const HardSkillsModal = () => {
   const isLoading = isFetchingMastery || isFetchingSkills || isLoadingAddSkill || isLoadingDeleteSkill;
   const isError = isErrorMastery || isErrorSkills || isErrorAddSkill || isErrorDeleteSkill;
   const { error, helperText } = state;
-
-  const handleClose = () => dispatch(closeModal({ modalName: modalNames.hardSkillsModal }));
+  const { closeModal } = useModalController();
 
   useEffect(() => {
     updateState({ allSkills: skills });
@@ -156,7 +153,7 @@ const HardSkillsModal = () => {
 
       await Promise.all([...addSkillPromises, ...deleteSkillPromises]);
       enqueueSnackbar(t('modalNotifyText.hardSkills.create.success'), { variant: 'success' });
-      handleClose();
+      closeModal(modalNames.hardSkillsModal);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.hardSkills.create.error'), { variant: 'success' });
