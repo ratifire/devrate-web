@@ -10,7 +10,21 @@ const SideBar = ({ interviews, refHandler, passedInterview }) => {
   const { t } = useTranslation();
   const containerRef = useRef(null);
 
-  useScrollPadding(containerRef, '16px');
+  useScrollPadding(containerRef, '9px');
+
+  const renderEventList = () => {
+    return (
+      interviews?.length > 0 &&
+      interviews.map((event, index) => (
+        <SideBarEvent
+          key={event.id}
+          event={event}
+          passedInterview={passedInterview}
+          refHandler={index === interviews.length - 1 ? refHandler : null}
+        />
+      ))
+    );
+  };
 
   return (
     <Box sx={styles.wrapper}>
@@ -18,15 +32,7 @@ const SideBar = ({ interviews, refHandler, passedInterview }) => {
         {t('interviews.sideBar.title')}
       </Typography>
       <Box ref={containerRef} sx={styles.scrollContainer}>
-        {interviews?.length > 0 &&
-          interviews.map((event, index) => (
-            <SideBarEvent
-              key={event.id}
-              event={event}
-              passedInterview={passedInterview}
-              refHandler={index === interviews.length - 1 ? refHandler : null}
-            />
-          ))}
+        {renderEventList()}
       </Box>
     </Box>
   );

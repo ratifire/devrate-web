@@ -12,11 +12,11 @@ export const styles = {
     letterSpacing: '0.25px',
   }),
   scrollContainer: (theme) => ({
+    paddingRight: '9px',
+    marginRight: '-17px',
     maxHeight: 'calc(100vh - 193px);',
     height: '100%',
     overflowY: 'auto',
-    // width: 'calc(306px + 15px)',
-    // paddingRight: '10px',
     '&::-webkit-scrollbar': {
       paddingRight: theme.spacing(3),
       width: 10,
