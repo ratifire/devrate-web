@@ -40,7 +40,6 @@ export function useModalController() {
     },
     [dispatch, setSearchParams]
   );
-
   const closeModalHandler = useCallback(
     (modalType) => {
       isClosingRef.current = true;
@@ -54,9 +53,7 @@ export function useModalController() {
         return updatedParams;
       });
 
-      setTimeout(() => {
-        isClosingRef.current = false;
-      }, 100);
+      isClosingRef.current = false; // Убираем setTimeout
     },
     [dispatch, setSearchParams]
   );
@@ -73,13 +70,12 @@ export function useModalController() {
     const stepParam = searchParams.get('step');
     const step = Number(stepParam);
 
-    if (Object.values(modalNames).includes(modal)) {
+    if (Object.values(modalNames).includes(modal) && isOpen) {
       openModalHandler(modal, modalData);
 
       if (stepParam !== null && !isNaN(step)) openModalStepHandler(step);
     }
-  }, [searchParams]);
-
+  }, [searchParams, isOpen]);
   return {
     isOpen,
     openModal: openModalHandler,
