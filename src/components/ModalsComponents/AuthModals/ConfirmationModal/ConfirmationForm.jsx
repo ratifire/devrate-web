@@ -72,7 +72,7 @@ const ConfirmationForm = ({
       } else {
         event.preventDefault();
       }
-     } else if (key === 'Enter' && index === fieldCount - 1) {
+    } else if (key === 'Enter' && index === fieldCount - 1) {
       formik.handleSubmit();
       event.preventDefault();
     }

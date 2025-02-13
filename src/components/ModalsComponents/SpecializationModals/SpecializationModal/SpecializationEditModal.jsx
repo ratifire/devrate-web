@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
+import { selectModalData } from '../../../../redux/modal/modalSlice';
 import {
   useGetSpecializationByUserIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
@@ -19,6 +19,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationEditModal = () => {
@@ -47,7 +48,9 @@ const SpecializationEditModal = () => {
     isErrorUpdateSpecialization || isErrorGetMasteries || isErrorSetNewMastery || isErrorGetSpecialization;
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
   const { activeSpecialization } = useSelector((state) => state.specialization);
-  const handleClose = () => dispatch(closeModal({ modalType: modalNames.specializationEditModal }));
+  const { closeModal } = useModalController();
+
+  const handleClose = () => closeModal({ modalType: modalNames.specializationEditModal });
 
   const modalData = useSelector(selectModalData);
 
