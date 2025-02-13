@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import SkillsParticipantItem from '../SkillsParticipantItem';
-import { styles } from './SkillsParticipant.styles.js';
+import { styles } from './SkillsParticipant.styles';
 
 const SkillsParticipant = ({ data, category }) => {
   return (

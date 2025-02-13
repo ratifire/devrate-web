@@ -13,7 +13,9 @@ const SkillsParticipantItem = ({ name, leftGrade, rightGrade }) => {
         <Box sx={styles.boxProgress}>
           <LinearProgress sx={[styles.leftProgress, styles.progress]} value={leftGrade * 10} variant='determinate' />
           <LinearProgress sx={[styles.rightProgress, styles.progress]} value={rightGrade * 10} variant='determinate' />
-          <Typography>5:8</Typography>
+          <Typography>
+            {leftGrade}:{rightGrade}
+          </Typography>
         </Box>
       </Box>
       <Divider sx={styles.divider} />
