@@ -1,10 +1,8 @@
 export const styles = {
-  container: (theme) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100vh',
-    borderTopLeftRadius: theme.spacing(2),
-    borderBottomLeftRadius: theme.spacing(2),
+  wrapper: (theme) => ({
+    width: '100%',
+    padding: theme.spacing(4),
+    paddingBottom: theme.spacing(0),
   }),
   interviewTitle: (theme) => ({
     marginBottom: theme.spacing(3),
@@ -14,20 +12,22 @@ export const styles = {
     letterSpacing: '0.25px',
   }),
   scrollContainer: (theme) => ({
+    maxHeight: 'calc(100vh - 193px);',
+    height: '100%',
     overflowY: 'auto',
-    minWidth: '100%',
-    height: 'calc(100vh - 100px)',
-    paddingRight: theme.spacing(3),
+    // width: 'calc(306px + 15px)',
+    // paddingRight: '10px',
     '&::-webkit-scrollbar': {
+      paddingRight: theme.spacing(3),
       width: 10,
     },
-    '&::-webkit-scrollbar-track': (theme) => ({
-      backgroundColor: theme.palette.background.level2,
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.palette.scroll.scrollWrapp.backgroundColor,
       borderRadius: 8,
-    }),
-    '&::-webkit-scrollbar-thumb': (theme) => ({
+    },
+    '&::-webkit-scrollbar-thumb': {
       borderRadius: 6,
-      backgroundColor: theme.palette.common.white,
-    }),
+      backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
+    },
   }),
 };

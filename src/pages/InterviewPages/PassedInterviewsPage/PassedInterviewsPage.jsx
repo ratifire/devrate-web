@@ -56,7 +56,7 @@ const PassedInterviewsPage = () => {
       <Box sx={styles.contentWrapper}>
         <Paper sx={styles.interviewSideBar}>
           <Suspense fallback={<InterviewsSkeleton />}>
-            <MemoizedSideBar interviews={passedInterviews?.content} refHandler={refHandler} />
+            <MemoizedSideBar passedInterview interviews={passedInterviews?.content} refHandler={refHandler} />
           </Suspense>
         </Paper>
         <Outlet />

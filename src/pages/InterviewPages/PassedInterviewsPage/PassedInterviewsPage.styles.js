@@ -1,37 +1,34 @@
 export const styles = {
   container: (theme) => ({
     paddingY: theme.spacing(3),
-    paddingX: theme.spacing(2),
-    '@media (min-width: 1272px)': {
-      maxWidth: '1536px',
-    },
+    paddingX: theme.spacing(3),
     '@media (min-width: 600px)': {
+      paddingY: theme.spacing(4),
       paddingX: theme.spacing(4),
+    },
+    '@media (min-width: 1272px)': {
+      maxWidth: '1920px',
     },
   }),
   contentWrapper: (theme) => ({
-    display: 'grid',
-    gridTemplateColumns: '354px 480px 606px',
-    gridTemplateRows: '900px 1fr',
-    gridColumnGap: theme.spacing(4),
-    gridRowGap: theme.spacing(4),
+    display: 'flex',
+    justifyContent: 'space-between',
+    gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
       backgroundColor: theme.palette.pagesSections.backgroundColor,
-      boxShadow: 'none',
       backgroundImage: 'none',
+      boxShadow: 'none',
     },
+    height: 'calc(100vh - 100px)',
   }),
   interviewSideBar: {
-    gridColumn: '1/2',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '24px',
+    flex: ' 0 0 354px',
+    '@media (min-width: 1272px)': {
+      flex: '0 0 354px',
+    },
+    '@media (min-width: 1920px)': {
+      flex: '0 0 354px',
+    },
   },
-  interviewTitle: (theme) => ({
-    fontFamily: theme.typography.fontFamily,
-    fontWeight: 500,
-    lineHeight: '41.99px',
-    letterSpacing: '0.25px',
-  }),
 };

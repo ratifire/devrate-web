@@ -13,7 +13,7 @@ const MemoizedSideBar = memo(SideBar);
 
 const ScheduledInterviewsPage = () => {
   const [page, setPage] = useState(1);
-  const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 10 });
+  const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 5 });
   const [lastEventRef, setLastEventRef] = useState(null);
 
   const refHandler = (el) => {

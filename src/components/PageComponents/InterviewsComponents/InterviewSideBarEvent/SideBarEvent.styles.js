@@ -1,9 +1,12 @@
 export const styles = {
+  interviewLink: {
+    textDecoration: 'none',
+  },
   sideBarEventContainer: (theme) => ({
+    width: '100%',
     backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
-    borderRadius: 2,
+    borderRadius: 1,
     padding: theme.spacing(3),
-    paddingRight: theme.spacing(3),
     marginBottom: theme.spacing(3),
   }),
   status: (theme) => ({
@@ -45,9 +48,10 @@ export const styles = {
     color: theme.palette.schedule.sideBarEvent.hostTitle,
     marginBottom: theme.spacing(2),
   }),
-  host_link: (theme) => ({
+  hostLink: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.hostLinkColor,
     textDecoration: 'none',
+    transition: 'color 0.2s',
     '&:hover': {
       color: theme.palette.primary[300],
     },
