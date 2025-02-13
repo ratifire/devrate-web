@@ -9,7 +9,7 @@ import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice.js';
 import { ParticipantEvaluationsSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
-import { calculateAverageSkillsMarkParticipantEvaluations } from '../helpers/index.js';
+import { prepareSkillsDataParticipantEvaluations } from '../helpers/index.js';
 import { styles } from './ParticipantEvaluations.styles.js';
 import { useColorPartEvalChart } from './hooks';
 
@@ -33,7 +33,7 @@ const ParticipantEvaluations = () => {
 
   const data = useMemo(
     () =>
-      calculateAverageSkillsMarkParticipantEvaluations({
+      prepareSkillsDataParticipantEvaluations({
         hostSkills: allSkillsHost,
         userSkills: allSkills,
         hostName: 'Олена Король',

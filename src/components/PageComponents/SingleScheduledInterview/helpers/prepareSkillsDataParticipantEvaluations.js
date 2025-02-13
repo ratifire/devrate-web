@@ -1,6 +1,6 @@
 import { totalSkillsMarks } from './index.js';
 
-const calculateAverageSkillsMarkParticipantEvaluations = ({ hostSkills, userSkills, hostName, userName }) => {
+const prepareSkillsDataParticipantEvaluations = ({ hostSkills, userSkills, hostName, userName }) => {
   if (!hostSkills || !userSkills) {
     return [
       {
@@ -51,4 +51,4 @@ const calculateAverageSkillsMarkParticipantEvaluations = ({ hostSkills, userSkil
   ];
 };
 
-export default calculateAverageSkillsMarkParticipantEvaluations;
+export default prepareSkillsDataParticipantEvaluations;

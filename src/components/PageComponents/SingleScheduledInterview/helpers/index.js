@@ -1,5 +1,11 @@
-import calculateAverageSkillsMarksStatistics from './calculateAverageSkillsMarksStatistics.js';
-import totalSkillsMarks from './totalSkillsMarks.js';
-import calculateAverageSkillsMarkParticipantEvaluations from './calculateAverageSkillsMarkParticipantEvaluations.js';
+import prepareSkillsDataStatistics from './prepareSkillsDataStatistics';
+import totalSkillsMarks from './totalSkillsMarks';
+import prepareSkillsDataParticipantEvaluations from './prepareSkillsDataParticipantEvaluations';
+import prepareSkillsDataInterviewSkills from './prepareSkillsDataInterviewSkills';
 
-export { calculateAverageSkillsMarksStatistics, totalSkillsMarks, calculateAverageSkillsMarkParticipantEvaluations };
+export {
+  prepareSkillsDataStatistics,
+  totalSkillsMarks,
+  prepareSkillsDataParticipantEvaluations,
+  prepareSkillsDataInterviewSkills,
+};

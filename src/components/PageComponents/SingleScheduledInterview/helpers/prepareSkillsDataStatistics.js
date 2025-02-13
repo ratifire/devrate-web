@@ -1,6 +1,6 @@
 import { totalSkillsMarks } from './index.js';
 
-const calculateAverageSkillsMarksStatistics = (allSkills) => {
+const prepareSkillsDataStatistics = (allSkills) => {
   if (!allSkills) {
     return {
       hardSkillsAverage: 0,
@@ -21,4 +21,4 @@ const calculateAverageSkillsMarksStatistics = (allSkills) => {
   };
 };
 
-export default calculateAverageSkillsMarksStatistics;
+export default prepareSkillsDataStatistics;
