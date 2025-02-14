@@ -7,6 +7,7 @@ import { useGetUserAllSpecializationQuery } from '../../../redux/specialization/
 import { selectCurrentUser } from '../../../redux/auth/authSlice.js';
 import Respondent from './Respondent/Respondent.jsx';
 import { styles } from './InterviewRequest.styles.js';
+import Interviewer from './Interviwer/index.js';
 
 const InterviewRequest = () => {
   const { data: info } = useSelector(selectCurrentUser);
@@ -78,6 +79,11 @@ const InterviewRequest = () => {
       <Box>
         {' '}
         <Respondent />
+      </Box>
+
+      <Box>
+        {' '}
+        <Interviewer />
       </Box>
     </Box>
   );

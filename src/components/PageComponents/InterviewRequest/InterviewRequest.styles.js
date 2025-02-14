@@ -6,6 +6,7 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: '18px',
   },
   select: (theme) => ({
     width: '224px',
