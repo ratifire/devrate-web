@@ -2,10 +2,16 @@ export const styles = {
   hardSkillsChartContainer: {
     width: '264px',
     height: '340px',
+    gap: '5px',
     '@media(max-width: 991px)': {
       display: 'flex',
       width: '100%',
       height: '100%',
+    },
+  },
+  contentWrapper: {
+    '@media(max-width: 991px)': {
+      maxWidth: '135px',
     },
   },
   title: {

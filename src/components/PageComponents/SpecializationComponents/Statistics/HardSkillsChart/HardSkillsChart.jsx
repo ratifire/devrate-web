@@ -25,7 +25,7 @@ const HardSkillsChart = () => {
 
   return (
     <Box sx={styles.hardSkillsChartContainer}>
-      <Box>
+      <Box sx={styles.contentWrapper}>
         <Typography sx={styles.title} variant='subtitle2'>
           {t('specialization.statistics.hard_skills_chart_title')}
         </Typography>
@@ -33,7 +33,13 @@ const HardSkillsChart = () => {
           {t('specialization.statistics.hard_skills_chart_text')}
         </Typography>
       </Box>
-      <RadarChart data={roundedSkills} height={264} outerRadius={130} width={264}>
+      <RadarChart
+        data={roundedSkills}
+        height={264}
+        outerRadius={130}
+        style={{ height: 'auto', width: 'auto', padding: '10px' }}
+        width={264}
+      >
         <PolarGrid />
         <PolarAngleAxis dataKey='name' tick={false} />
         {!!roundedSkills.length && <PolarRadiusAxis angle={30} axisLine={false} domain={[0, 10]} tick={false} />}
