@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, IconButton, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useSearchParams } from 'react-router';
-import { selectModalData } from '../../../../redux/modal/modalSlice.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './ModalUserInfo.styles';
 import StepPersonal from './StepPersonal';
 import StepContacts from './StepContacts';
 import StepAvatar from './StepAvatar';
 import StepLanguage from './StepLanguage';
 import CustomStepIcon from './StepIconComponent';
-
 const steps = [
   {
     name: 'personal',
@@ -38,21 +36,17 @@ const steps = [
     component: () => <StepLanguage />,
   },
 ];
-
 const ModalUserInfo = () => {
-  const openUserInfo = selectModalData;
   const step = useSelector((state) => state.modalStep.step);
   const { t } = useTranslation();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [activeStep, setActiveStep] = useState(step);
+  const { stepHandler } = useModalController();
 
-  const title = steps.find((title, index) => index === activeStep);
-
+  const currentStep = steps[activeStep];
   const handleNext = () => {
     setActiveStep((nextActiveStep) => {
       const updatedStep = nextActiveStep + 1;
-      searchParams.set('step', updatedStep);
-      setSearchParams(searchParams);
+      stepHandler(updatedStep);
       return updatedStep;
     });
   };
@@ -60,22 +54,10 @@ const ModalUserInfo = () => {
   const handlePrev = () => {
     setActiveStep((prevActiveStep) => {
       const updatedStep = prevActiveStep - 1;
-      searchParams.set('step', updatedStep);
-      setSearchParams(searchParams);
+      stepHandler(updatedStep);
       return updatedStep;
     });
   };
-
-  useEffect(() => {
-    if (openUserInfo) {
-      searchParams.delete('tab');
-      searchParams.set('modal', 'userInfo');
-      searchParams.set('step', activeStep);
-      setSearchParams(searchParams);
-    } else {
-      setSearchParams(searchParams);
-    }
-  }, [openUserInfo, activeStep, searchParams, setSearchParams]);
 
   const getStepContent = (stepIndex) => {
     return steps[stepIndex].component();
@@ -84,15 +66,15 @@ const ModalUserInfo = () => {
     <>
       <Box sx={styles.wrapper}>
         <Typography key={activeStep} sx={styles.title} variant={'h6'}>
-          {t(title)}
+          {t(currentStep.title)}
         </Typography>
 
         <Stepper alternativeLabel activeStep={activeStep} connector={<StepConnector />} sx={styles.stepBorder}>
-          {steps.map((label) => (
-            <Step key={label} sx={styles.step}>
+          {steps.map((step) => (
+            <Step key={step.name} sx={styles.step}>
               <StepLabel StepIconComponent={CustomStepIcon} sx={styles.label} />
               <Typography textAlign={'center'} variant='subtitle2'>
-                {t(label)}
+                {t(step.title)}
               </Typography>
             </Step>
           ))}

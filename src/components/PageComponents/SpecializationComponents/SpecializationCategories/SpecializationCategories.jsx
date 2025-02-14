@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { openModal } from '../../../../redux/modal/modalSlice';
 import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 import {
   useGetSpecializationByUserIdQuery,
@@ -20,6 +19,7 @@ import { ErrorComponent } from '../../../UI/Exceptions';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
 import { CategoriesSkeleton } from '../../../UI/Skeleton';
 import { modalNames } from '../../../../utils/constants/modalNames';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
@@ -46,6 +46,7 @@ const SpecializationCategories = () => {
   const isLoading = isFetchingGetSpecialization || isLoadingGetMainMastery || isLoadingUpdateSpecialization;
   const isError = isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization;
   const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
+  const { openModal } = useModalController();
 
   useEffect(() => {
     if (!specializations || isLoading) {
@@ -76,7 +77,7 @@ const SpecializationCategories = () => {
 
   const handlerAddSpecializations = () => {
     if (specializations?.length >= 4) return;
-    dispatch(openModal({ modalType: modalNames.specializationModal }));
+    openModal(modalNames.specializationModal);
   };
 
   const handlerChangeMainSpecialization = async () => {
@@ -97,7 +98,7 @@ const SpecializationCategories = () => {
   };
 
   const handleOpenConfirmDeleteSpecializationModal = (id, specialization) => {
-    dispatch(openModal({ modalType: modalNames.confirmDeleteSpecialization, data: { id, specialization } }));
+    openModal(modalNames.confirmDeleteSpecialization, { id, specialization });
     handleCloseMenu(id);
   };
 
@@ -116,7 +117,7 @@ const SpecializationCategories = () => {
   };
 
   const handleEditFeature = ({ id, name, mastery }) => {
-    dispatch(openModal({ modalType: modalNames.specializationEditModal, data: { id, name, mastery } }));
+    openModal(modalNames.specializationEditModal, { id, name, mastery });
     handleCloseMenu(id);
   };
 

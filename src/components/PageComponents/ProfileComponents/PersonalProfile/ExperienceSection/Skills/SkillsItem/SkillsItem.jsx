@@ -1,50 +1,43 @@
-import { useState } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import { useFormik } from 'formik';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useUpdateSkillsMutation } from '../../../../../../../redux/services/skillsApiSlice';
-import { SkillsItemSchema } from '../../../../../../../utils/validationSchemas/index';
 import CustomTooltip from '../../../../../../UI/CustomTooltip';
+import { refetchSkills } from '../../../../../../../redux/updateTab/updateTabSlice.js';
 import { styles } from './SkillsItem.styles';
 
 const SkillsItem = ({ data, flex }) => {
   const { id, name, averageMark, hidden } = data;
   const [hiddenSkill, setHiddenSkill] = useState(hidden);
   const mark = Math.round(averageMark);
-
   const [updateSkills] = useUpdateSkillsMutation();
+  const dispatch = useDispatch();
 
-  const onSubmit = () => {
-    updateSkills({
-      id,
-      hide: hiddenSkill,
-    });
+  useEffect(() => {
+    setHiddenSkill(hidden);
+  }, [data]);
+
+  const handlerClick = async () => {
+    setHiddenSkill(!hiddenSkill);
+    await updateSkills({ id, hide: !hidden }).unwrap();
+    dispatch(refetchSkills());
   };
-  const formik = useFormik({
-    initialValues: {
-      hidden: hiddenSkill,
-    },
-    validationSchema: SkillsItemSchema,
-    onSubmit,
-  });
+
   const iconEye = hiddenSkill ? (
     <VisibilityOutlinedIcon sx={styles.eye} />
   ) : (
     <VisibilityOffOutlinedIcon sx={styles.eyeHidden} />
   );
-  const handlerClick = () => {
-    setHiddenSkill(!hiddenSkill);
-  };
+
   return (
     <Box sx={[styles.wrapper, flex]}>
       <Box sx={styles.iconWrapper}>
-        <form onSubmit={formik.handleSubmit}>
-          <IconButton sx={styles.icon} type='submit' onClick={handlerClick}>
-            {iconEye}
-          </IconButton>
-        </form>
+        <IconButton sx={styles.icon} type='button' onClick={handlerClick}>
+          {iconEye}
+        </IconButton>
       </Box>
       <Typography sx={styles.text} variant='body1'>
         <CustomTooltip title={name}>{name}</CustomTooltip>

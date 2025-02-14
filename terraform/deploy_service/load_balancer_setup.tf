@@ -16,7 +16,7 @@ resource "aws_lb_target_group" "http_ecs_tg_front" {
   protocol             = "HTTP"
   vpc_id               = data.aws_vpcs.all_vpcs.ids[0]
   deregistration_delay = "30"
-  
+
   health_check {
     healthy_threshold   = 2
     unhealthy_threshold = 2
