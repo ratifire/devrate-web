@@ -18,10 +18,7 @@ const Statistic = () => {
     isError: isErrorAllSkills,
   } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10009 });
 
-  const { hardSkillsAverage, softSkillsAverage, allSkillsAverage } = useMemo(
-    () => prepareSkillsDataStatistics(allSkills),
-    [allSkills]
-  );
+  const data = useMemo(() => prepareSkillsDataStatistics(allSkills), [allSkills]);
 
   if (isErrorAllSkills) {
     return <ErrorComponent />;
@@ -30,6 +27,8 @@ const Statistic = () => {
   if (isFetchingAllSkills) {
     return <StatisticSkeleton />;
   }
+
+  const { hardSkillsAverage, softSkillsAverage, allSkillsAverage } = data;
 
   return (
     <Box sx={styles.wrapper}>

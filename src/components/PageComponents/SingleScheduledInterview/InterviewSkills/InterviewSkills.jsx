@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
@@ -21,15 +22,15 @@ const InterviewSkills = () => {
     isError: isErrorAllSkillsHost,
   } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10009 });
   const {
-    data: allSkills,
+    data: allSkillsUser,
     isFetching: isFetchingAllSkills,
     isError: isErrorAllSkills,
   } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10001 });
 
-  const { hardSkills, softSkills } = prepareSkillsDataInterviewSkills({
-    hostSkills: allSkillsHost,
-    userSkills: allSkills,
-  });
+  const data = useMemo(
+    () => prepareSkillsDataInterviewSkills({ hostSkills: allSkillsHost, userSkills: allSkillsUser }),
+    [allSkillsHost, allSkillsUser]
+  );
 
   if (isErrorAllSkillsHost || isErrorAllSkills) {
     return <ErrorComponent />;
@@ -38,6 +39,8 @@ const InterviewSkills = () => {
   if (isFetchingAllSkillsHost || isFetchingAllSkills) {
     return <InterviewSkillsSkeleton />;
   }
+
+  const { softSkills, hardSkills } = data;
 
   return (
     <Box sx={styles.wrapper}>
