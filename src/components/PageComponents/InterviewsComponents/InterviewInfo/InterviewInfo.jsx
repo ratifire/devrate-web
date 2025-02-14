@@ -6,7 +6,7 @@ import { formatToLocalDate } from '../../../../utils/helpers/formatToLocalDate.j
 import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice.js';
 import { lvlMastery } from '../../../../utils/constants/masteryLvl.js';
 import { convertMiliInYears } from '../../../../utils/helpers/converMiliInYears.js';
-import { styles } from './InterviewInfo.styles';
+import { styles } from './InterviewInfo.styles.js';
 
 const InterviewInfo = () => {
   const { interviewId } = useParams();

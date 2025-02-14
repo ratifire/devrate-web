@@ -4,8 +4,8 @@ export const styles = {
     paddingX: theme.spacing(4),
     ' > div': {
       padding: theme.spacing(3),
-      borderRadius: 2,
-      backgroundColor: '#3E3E40',
+      borderRadius: 1,
+      backgroundColor: theme.palette.interviewPage.innerBackground,
       boxShadow: 'none',
       backgroundImage: 'none',
     },
@@ -15,7 +15,7 @@ export const styles = {
     marginBottom: theme.spacing(3),
   }),
   interviewFeedbackText: (theme) => ({
-    minHeight: '176px',
+    minHeight: '128px',
     width: '100%',
     paddingY: theme.spacing(3),
     paddingX: theme.spacing(4),

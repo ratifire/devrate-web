@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import useOverflowCheck from '../../../../utils/hooks/useOverflowCheck.js';
-import { styles } from './InterviewFeedback.styles';
+import { styles } from './InterviewFeedback.styles.js';
 
 const MAX_FEEDBACK_LENGTH = 420;
 

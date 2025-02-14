@@ -1,8 +1,9 @@
 import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
-import { Outlet } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { useGetAllPassedInterviewsQuery } from '../../../redux/interviews/passedInterviewsApiSlice.js';
+import navigationLinks from '../../../router/links.js';
 import { styles } from './PassedInterviewsPage.styles';
 
 const SideBar = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar'));
@@ -13,7 +14,7 @@ const PassedInterviewsPage = () => {
   const [page, setPage] = useState(1);
   const { data: passedInterviews, isFetching, isLoading } = useGetAllPassedInterviewsQuery({ page, size: 5 });
   const [lastEventRef, setLastEventRef] = useState(null);
-
+  const navigate = useNavigate();
   const refHandler = (el) => {
     setLastEventRef(el);
   };
@@ -51,6 +52,13 @@ const PassedInterviewsPage = () => {
     };
   }, [lastEventRef, passedInterviews?.content, handleObserver]);
 
+  useEffect(() => {
+    if (passedInterviews?.content?.length > 0) {
+      const firstInterviewId = passedInterviews.content[0].id;
+      navigate(`${navigationLinks.passedInterviews}/${firstInterviewId}`, { replace: true });
+    }
+  }, [passedInterviews, navigate]);
+
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
@@ -59,7 +67,9 @@ const PassedInterviewsPage = () => {
             <MemoizedSideBar passedInterview interviews={passedInterviews?.content} refHandler={refHandler} />
           </Suspense>
         </Paper>
-        <Outlet />
+        <Paper sx={styles.interview}>
+          <Outlet />
+        </Paper>
       </Box>
     </Container>
   );
