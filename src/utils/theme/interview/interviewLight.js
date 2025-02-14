@@ -12,7 +12,7 @@ export const interviewLight = {
     lvl: {
       junior: '#25CBFF',
       middle: '#16FFB9',
-      senior: '#FFB916',
+      senior: '#DAFE22',
     },
   },
   scheduledMeeting: {

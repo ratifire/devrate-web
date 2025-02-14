@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 import SideBarEvent from '../InterviewSideBarEvent';
-import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding.js';
-import { styles } from './SideBar.styles.js';
+import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding';
+import { styles } from './SideBar.styles';
 
 const SideBar = ({ interviews, refHandler, passedInterview }) => {
   const { t } = useTranslation();
