@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useTranslation } from 'react-i18next';
-import AddIcon from '@mui/icons-material/Add';
+import { Box, Typography } from '@mui/material';
+// import { useTranslation } from 'react-i18next';
 import TimeSlotGroup from '../TimeSlotGroup/index.js';
-import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
+import RequestHeader from '../RequsestHeader';
 import { styles } from './Respondent.styles.js';
 
 const slotsByDay = [
@@ -26,7 +24,7 @@ const slotsByDay = [
 ];
 
 const Respondent = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const [stats] = useState({
     foundInterviews: 2,
@@ -34,45 +32,19 @@ const Respondent = () => {
     selectedTimeslots: 11,
   });
 
-  const handleAddTimeslot = () => {};
+  const handleAddTimeslot = () => {
+    // console.log('Додати таймслот');
+  };
 
   return (
     <Box sx={styles.container}>
-      <Box sx={styles.header}>
-        <Typography sx={styles.title}>Middle frontend developer interview as a Respondent</Typography>
-        <Box sx={styles.buttons}>
-          <IconButton aria-label='delete' sx={styles.iconDelete}>
-            <DeleteIcon />
-          </IconButton>
-          <ButtonDef
-            label={t('Add time slots')}
-            startIcon={<AddIcon />}
-            sx={styles.outlined}
-            type={'button'}
-            variant='outlined'
-            onClick={handleAddTimeslot}
-          />
-        </Box>
-      </Box>
-
-      <Box sx={styles.statsContainer}>
-        <Typography sx={styles.statItem}>
-          <strong>Знайдено інтерв’ю:</strong> {stats.foundInterviews}
-        </Typography>
-        <Typography sx={styles.statItem}>
-          <strong>Кількість інтерв’ю:</strong> {stats.totalInterviews}
-        </Typography>
-        <Typography sx={styles.statItem}>
-          <strong>Обрано таймслотів:</strong> {stats.selectedTimeslots}
-        </Typography>
-      </Box>
-
-      <Box>
-        <Typography>
-          Хочу отримати реалістичний досвід співбесіди, включно з технічними запитаннями, кодингом та фідбеком для
-          покращення своїх навичок. Ціль — підготуватися до реальних співбесід.
-        </Typography>
-      </Box>
+      <RequestHeader
+        description='Хочу отримати реалістичний досвід співбесіди, включно з технічними запитаннями, кодингом та фідбеком для покращення своїх навичок. Ціль — підготуватися до реальних співбесід.'
+        role='Respondent'
+        stats={stats}
+        title='Middle frontend developer interview'
+        onAddTimeslot={handleAddTimeslot}
+      />
 
       {slotsByDay.map((day, index) => (
         // eslint-disable-next-line react/no-array-index-key
