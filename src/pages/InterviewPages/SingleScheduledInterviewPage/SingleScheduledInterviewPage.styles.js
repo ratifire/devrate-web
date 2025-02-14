@@ -1,18 +1,9 @@
 export const styles = {
-  container: (theme) => ({
-    paddingX: theme.spacing(3),
-    '@media (min-width: 600px)': {
-      paddingX: theme.spacing(3),
-    },
-    '@media (min-width: 1272px)': {
-      maxWidth: '1920px',
-      paddingX: theme.spacing(4),
-    },
-  }),
   contentWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
     gridGap: theme.spacing(4),
+    width: '100%',
     gridTemplateRows: 'repeat(12, auto)',
     ' > div': {
       borderRadius: 2,
@@ -34,20 +25,11 @@ export const styles = {
     gridColumn: '1/6',
   },
   participantEvaluations: {
-    gridRow: '8/13',
+    gridRow: '8/14',
     gridColumn: '1/6',
   },
   interviewSkills: {
     gridRow: '7/14',
     gridColumn: '6/13',
-    container: {
-      flex: ' 1 0 0',
-      '@media (min-width: 1272px)': {
-        flex: '1 0 0',
-      },
-      '@media (min-width: 1920px)': {
-        flex: '1 0 0',
-      },
-    },
   },
 };

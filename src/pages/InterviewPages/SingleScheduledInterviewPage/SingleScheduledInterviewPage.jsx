@@ -1,4 +1,4 @@
-import { Box, Container, Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { lazy, memo, Suspense } from 'react';
 import {
   InterviewSkillsSkeleton,
@@ -31,35 +31,33 @@ const MemoizedInterviewSkills = memo(InterviewSkills);
 
 const SingleScheduledInterviewPage = () => {
   return (
-    <Container sx={styles.container}>
-      <Box sx={styles.contentWrapper}>
-        <Paper sx={styles.userCardScheduledInterview}>
-          <Suspense fallback={<UserCardScheduledInterviewSkeleton />}>
-            <MemoizedUserCardScheduledInterview />
-          </Suspense>
-        </Paper>
-        <Paper sx={styles.scheduledMeeting}>
-          <Suspense fallback={<ScheduledMeetingSkeleton />}>
-            <MemoizedScheduledMeeting />
-          </Suspense>
-        </Paper>
-        <Paper sx={styles.statistic}>
-          <Suspense fallback={<StatisticSkeleton />}>
-            <MemoizedStatistic />
-          </Suspense>
-        </Paper>
-        <Paper sx={styles.participantEvaluations}>
-          <Suspense fallback={<ParticipantEvaluationsSkeleton />}>
-            <MemoizedParticipantEvaluations />
-          </Suspense>
-        </Paper>
-        <Paper sx={styles.interviewSkills}>
-          <Suspense fallback={<InterviewSkillsSkeleton />}>
-            <MemoizedInterviewSkills />
-          </Suspense>
-        </Paper>
-      </Box>
-    </Container>
+    <Box sx={styles.contentWrapper}>
+      <Paper sx={styles.userCardScheduledInterview}>
+        <Suspense fallback={<UserCardScheduledInterviewSkeleton />}>
+          <MemoizedUserCardScheduledInterview />
+        </Suspense>
+      </Paper>
+      <Paper sx={styles.scheduledMeeting}>
+        <Suspense fallback={<ScheduledMeetingSkeleton />}>
+          <MemoizedScheduledMeeting />
+        </Suspense>
+      </Paper>
+      <Paper sx={styles.statistic}>
+        <Suspense fallback={<StatisticSkeleton />}>
+          <MemoizedStatistic />
+        </Suspense>
+      </Paper>
+      <Paper sx={styles.participantEvaluations}>
+        <Suspense fallback={<ParticipantEvaluationsSkeleton />}>
+          <MemoizedParticipantEvaluations />
+        </Suspense>
+      </Paper>
+      <Paper sx={styles.interviewSkills}>
+        <Suspense fallback={<InterviewSkillsSkeleton />}>
+          <MemoizedInterviewSkills />
+        </Suspense>
+      </Paper>
+    </Box>
   );
 };
 

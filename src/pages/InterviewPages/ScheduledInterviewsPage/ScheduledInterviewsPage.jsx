@@ -53,11 +53,13 @@ const ScheduledInterviewsPage = () => {
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
-        <Paper sx={styles.interviewSideBar}>
-          <Suspense fallback={<InterviewsSkeleton />}>
-            <MemoizedSideBar interviews={scheduledInterviews?.content} refHandler={refHandler} />
-          </Suspense>
-        </Paper>
+        <Box sx={styles.box}>
+          <Paper>
+            <Suspense fallback={<InterviewsSkeleton />}>
+              <MemoizedSideBar interviews={scheduledInterviews?.content} refHandler={refHandler} />
+            </Suspense>
+          </Paper>
+        </Box>
         <Outlet />
       </Box>
     </Container>
