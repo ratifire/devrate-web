@@ -24,6 +24,7 @@ import {
   StepAvatarSkeleton,
   StepLanguageSkeleton,
 } from './Modal/UserInfoModalSkeleton';
+import InterviewRequestSkeleton from './Pages/InterviewRequestSkeleton';
 
 export {
   BlogSkeleton,
@@ -47,4 +48,5 @@ export {
   StepPersonalSkeleton,
   StepAvatarSkeleton,
   StepLanguageSkeleton,
+  InterviewRequestSkeleton,
 };
