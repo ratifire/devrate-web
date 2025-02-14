@@ -110,6 +110,41 @@ const getDesignTokens = (mode) => ({
     mode,
     ...(mode === DARK_THEME
       ? {
+          requestInterviewe: {
+            role: {
+              respondent: '#25CBFF',
+              interviewer: '#16FFB9',
+            },
+            interviewCount: {
+              foundInterviews: '#CEB0FA',
+              totalInterviews: '#CEB0FA',
+              selectedTimeslots: '#CEB0FA',
+            },
+            statItem: {
+              color: '#ECECED',
+            },
+            description: {
+              color: '#FFFFFF',
+            },
+            buttons: {
+              delete: {
+                color: '#FF2E2E',
+                hover: {
+                  color: '#D32F2F',
+                  backgroundColor: 'transparent',
+                },
+              },
+              addTimeslot: '',
+              openMenuDots: {
+                color: '#CEB0FA',
+                backgroundColor: 'transparent',
+                hover: {
+                  color: '#8133F1',
+                  backgroundColor: '#B78AF7',
+                },
+              },
+            },
+          },
           faq: {
             title: '#FFFFFF',
             questions: {
