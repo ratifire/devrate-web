@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { useDispatch } from 'react-redux';
-import { openModal } from '../../../redux/modal/modalSlice.js';
-import { modalNames } from '../../../utils/constants/modalNames.js';
-import { feedbackInterviewRole } from '../../../utils/constants/feedbackInterviewRole.js';
-import links from '../../../router/links.js';
-import CircleIcon from '../../../assets/icons/InterviewPageIcons/green-ellipse.svg';
-import styles from './InterviewHeader.styles';
+import { openModal } from '../../../../redux/modal/modalSlice.js';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole.js';
+import links from '../../../../router/links.js';
+import CircleIcon from '../../../../assets/icons/InterviewPageIcons/green-ellipse.svg';
+import styles from './InterviewHeader.styles.js';
 
 const InterviewHeader = () => {
   const { t } = useTranslation();
@@ -53,7 +53,7 @@ const InterviewHeader = () => {
     <AppBar component='header' position={'static'} sx={styles.interviewHeader}>
       <Box sx={styles.interviewNavLinksBox}>
         <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.scheduledInterviews}>
-          <Box alt='Circle' component='img' src={CircleIcon} sx={styles.greenEllipce} />{' '}
+          <Box alt='Circle' component='img' src={CircleIcon} sx={styles.greenEllipse} />{' '}
           {t('interviews.navigationLinks.scheduled')}
         </Box>
         <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.passedInterviews}>

@@ -1,6 +1,6 @@
 export const styles = {
   sideBarEventContainer: (theme) => ({
-    height: '185px', //162px changed to 185px due to adding line of participant
+    height: '185px', //162px changed to 185px due to adding line of role
     backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
     borderRadius: 2,
     padding: theme.spacing(3),
