@@ -719,6 +719,7 @@ export const uk = {
         },
         userCardScheduledInterview: {
           btn: 'Написати повідомлення',
+          interviewLvl: 'Рівень співбесіди:',
         },
         participantEvaluations: {
           title: 'Оцінка учасників',

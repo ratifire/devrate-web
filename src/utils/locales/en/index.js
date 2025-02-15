@@ -892,6 +892,7 @@ export const en = {
       },
       userCardScheduledInterview: {
         btn: 'Write a message',
+        interviewLvl: 'Interview level:',
       },
       participantEvaluations: {
         title: 'Participant evaluations',
