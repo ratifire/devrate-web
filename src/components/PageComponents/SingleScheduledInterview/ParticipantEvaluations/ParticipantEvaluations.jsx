@@ -20,7 +20,7 @@ const ParticipantEvaluations = () => {
   const { itemStyle, contentStyle } = useTooltipColorChart();
   const { leftGrad1, leftGrad2, leftGrad3, rightGrad1, rightGrad2, rightGrad3 } = useColorPartEvalChart();
   const location = useLocation();
-  const { hostFirstName, hostLastName, masteryLevel } = location.state.event;
+  const { hostFirstName, hostLastName, masteryLevel, hostMasteryId, masteryId } = location.state.event;
 
   const {
     data: { firstName, lastName },
@@ -30,23 +30,23 @@ const ParticipantEvaluations = () => {
     data: allSkillsHost,
     isFetching: isFetchingAllSkillsHost,
     isError: isErrorAllSkillsHost,
-  } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10009 });
+  } = useGetAllSkillsForMasteryIdQuery({ masteryId: hostMasteryId });
   const {
     data: allSkills,
     isFetching: isFetchingAllSkills,
     isError: isErrorAllSkills,
-  } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10001 });
+  } = useGetAllSkillsForMasteryIdQuery({ masteryId });
 
-  const hostName = `${hostFirstName} ${hostLastName}`;
-  const userName = `${firstName} ${lastName}`;
+  const hostFullName = `${hostFirstName} ${hostLastName}`;
+  const userFullName = `${firstName} ${lastName}`;
 
   const data = useMemo(
     () =>
       prepareSkillsDataParticipantEvaluations({
         hostSkills: allSkillsHost,
         userSkills: allSkills,
-        hostName,
-        userName,
+        hostName: hostFullName,
+        userName: userFullName,
       }),
     [allSkillsHost, allSkills]
   );
@@ -70,7 +70,7 @@ const ParticipantEvaluations = () => {
       <Box sx={styles.boxParticipants}>
         <Box>
           <Typography component='p' variant='subtitle2'>
-            {hostName}
+            {hostFullName}
           </Typography>
           <Typography component='p' sx={styles[lvlMastery[masteryLevel]]} variant='subtitle2'>
             Level {lvlMastery[masteryLevel]}
@@ -78,7 +78,7 @@ const ParticipantEvaluations = () => {
         </Box>
         <Box>
           <Typography component='p' variant='subtitle2'>
-            {firstName} {lastName}
+            {userFullName}
           </Typography>
           <Typography component='p' sx={styles['Junior']} variant='subtitle2'>
             Level Junior
@@ -116,8 +116,8 @@ const ParticipantEvaluations = () => {
             <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
             <Legend align='center' iconType='circle' layout='horizontal' verticalAlign='top' />
             <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
-            <Bar barSize={50} dataKey={hostName} fill='url(#left)' radius={[2, 2, 0, 0]} />
-            <Bar barSize={50} dataKey={userName} fill='url(#right)' radius={[2, 2, 0, 0]} />
+            <Bar barSize={50} dataKey={hostFullName} fill='url(#left)' radius={[2, 2, 0, 0]} />
+            <Bar barSize={50} dataKey={userFullName} fill='url(#right)' radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Box>

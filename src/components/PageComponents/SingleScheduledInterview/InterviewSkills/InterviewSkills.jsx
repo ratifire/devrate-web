@@ -17,18 +17,19 @@ const InterviewSkills = () => {
   const {
     data: { firstName, lastName },
   } = useSelector(selectCurrentUser);
+  const location = useLocation();
+  const { hostFirstName, hostLastName, hostMasteryId, masteryId } = location.state.event;
+
   const {
     data: allSkillsHost,
     isFetching: isFetchingAllSkillsHost,
     isError: isErrorAllSkillsHost,
-  } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10009 });
+  } = useGetAllSkillsForMasteryIdQuery({ masteryId: hostMasteryId });
   const {
     data: allSkillsUser,
     isFetching: isFetchingAllSkills,
     isError: isErrorAllSkills,
-  } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10001 });
-  const location = useLocation();
-  const { hostFirstName, hostLastName } = location.state.event;
+  } = useGetAllSkillsForMasteryIdQuery({ masteryId });
 
   const data = useMemo(
     () => prepareSkillsDataInterviewSkills({ hostSkills: allSkillsHost, userSkills: allSkillsUser }),
@@ -45,6 +46,7 @@ const InterviewSkills = () => {
 
   const { softSkills, hardSkills } = data;
   const hostFullName = `${hostFirstName} ${hostLastName}`;
+  const userFullName = `${firstName} ${lastName}`;
 
   return (
     <Box sx={styles.wrapper}>
@@ -58,7 +60,7 @@ const InterviewSkills = () => {
         <Box sx={styles.boxParticipant}>
           <Box sx={styles.leftCircle} />
           <Typography component='p' variant='subtitle2'>
-            {firstName} {lastName}
+            {userFullName}
           </Typography>
         </Box>
         <Box sx={styles.boxParticipant}>
