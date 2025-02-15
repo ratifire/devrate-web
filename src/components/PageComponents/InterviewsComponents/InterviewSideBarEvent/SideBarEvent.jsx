@@ -1,4 +1,4 @@
-import { Link as RouterLink, useNavigate } from 'react-router';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router';
 import PropTypes from 'prop-types';
 import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,8 @@ const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, se
   const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName } = event;
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { interviewId } = useParams();
+  const paramsId = selectedPaperId || interviewId;
 
   const handleClick = () => {
     navigate(`${passedInterview ? navigationLinks.passedInterviews : navigationLinks.scheduledInterviews}/${id}`, {
@@ -25,7 +27,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, se
       <Paper
         key={id}
         ref={refHandler}
-        sx={selectedPaperId === id ? styles.border : styles.sideBarEventContainer}
+        sx={+paramsId === id ? styles.border : styles.sideBarEventContainer}
         onClick={() => handlePaperClick(id)}
       >
         <Typography component='div' sx={styles.status} variant='subtitle2'>
