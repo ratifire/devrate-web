@@ -2,12 +2,11 @@ import { Box, Typography } from '@mui/material';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useMemo } from 'react';
 import { useLocation } from 'react-router';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
+import { useGetMasteriesQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
 import { ParticipantEvaluationsSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { prepareSkillsDataParticipantEvaluations } from '../helpers';
@@ -20,44 +19,43 @@ const ParticipantEvaluations = () => {
   const { itemStyle, contentStyle } = useTooltipColorChart();
   const { leftGrad1, leftGrad2, leftGrad3, rightGrad1, rightGrad2, rightGrad3 } = useColorPartEvalChart();
   const location = useLocation();
-  const { hostFirstName, hostLastName, masteryLevel, hostMasteryId, masteryId } = location.state.event;
+  const { hostFirstName, hostLastName, hostMasteryId, masteryId } = location.state.event;
+
+  const {
+    data: hostMastery,
+    isFetching: isFetchingHostMastery,
+    isError: isErrorHostMastery,
+  } = useGetMasteriesQuery(hostMasteryId, { skip: !hostMasteryId });
+  const {
+    data: userMastery,
+    isFetching: isFetchingUserMastery,
+    isError: isErrorUserMastery,
+  } = useGetMasteriesQuery(masteryId, { skip: !masteryId });
 
   const {
     data: { firstName, lastName },
   } = useSelector(selectCurrentUser);
 
-  const {
-    data: allSkillsHost,
-    isFetching: isFetchingAllSkillsHost,
-    isError: isErrorAllSkillsHost,
-  } = useGetAllSkillsForMasteryIdQuery({ masteryId: hostMasteryId });
-  const {
-    data: allSkills,
-    isFetching: isFetchingAllSkills,
-    isError: isErrorAllSkills,
-  } = useGetAllSkillsForMasteryIdQuery({ masteryId });
-
   const hostFullName = `${hostFirstName} ${hostLastName}`;
   const userFullName = `${firstName} ${lastName}`;
 
-  const data = useMemo(
-    () =>
-      prepareSkillsDataParticipantEvaluations({
-        hostSkills: allSkillsHost,
-        userSkills: allSkills,
-        hostName: hostFullName,
-        userName: userFullName,
-      }),
-    [allSkillsHost, allSkills]
-  );
+  const data = prepareSkillsDataParticipantEvaluations({
+    hostSkills: hostMastery,
+    userSkills: userMastery,
+    hostName: hostFullName,
+    userName: userFullName,
+  });
 
-  if (isErrorAllSkills || isErrorAllSkillsHost) {
+  if (isErrorHostMastery || isErrorUserMastery) {
     return <ErrorComponent />;
   }
 
-  if (isFetchingAllSkills || isFetchingAllSkillsHost) {
+  if (isFetchingHostMastery || isFetchingUserMastery) {
     return <ParticipantEvaluationsSkeleton />;
   }
+
+  const { level: hostLevel } = hostMastery;
+  const { level: userLevel } = userMastery;
 
   return (
     <Box sx={styles.wrapper}>
@@ -72,16 +70,16 @@ const ParticipantEvaluations = () => {
           <Typography component='p' variant='subtitle2'>
             {hostFullName}
           </Typography>
-          <Typography component='p' sx={styles[lvlMastery[masteryLevel]]} variant='subtitle2'>
-            Level {lvlMastery[masteryLevel]}
+          <Typography component='p' sx={styles[lvlMastery[hostLevel]]} variant='subtitle2'>
+            Level {lvlMastery[hostLevel]}
           </Typography>
         </Box>
         <Box>
           <Typography component='p' variant='subtitle2'>
             {userFullName}
           </Typography>
-          <Typography component='p' sx={styles['Junior']} variant='subtitle2'>
-            Level Junior
+          <Typography component='p' sx={styles[lvlMastery[userLevel]]} variant='subtitle2'>
+            Level {lvlMastery[userLevel]}
           </Typography>
         </Box>
       </Box>

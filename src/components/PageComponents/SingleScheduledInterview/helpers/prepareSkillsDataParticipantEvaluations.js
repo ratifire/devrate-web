@@ -1,5 +1,3 @@
-import { totalSkillsMarks } from './index';
-
 const prepareSkillsDataParticipantEvaluations = ({ hostSkills, userSkills, hostName, userName }) => {
   if (!hostSkills || !userSkills) {
     return [
@@ -21,32 +19,24 @@ const prepareSkillsDataParticipantEvaluations = ({ hostSkills, userSkills, hostN
     ];
   }
 
-  const { hardSkills: hardSkillsHost, softSkills: softSkillsHost } = hostSkills;
-  const { hardSkills: hardSkillsUser, softSkills: softSkillsUser } = userSkills;
-
-  const totalHardMarksHost = totalSkillsMarks(hardSkillsHost);
-  const totalSoftMarksHost = totalSkillsMarks(softSkillsHost);
-  const totalHardMarksUser = totalSkillsMarks(hardSkillsUser);
-  const totalSoftMarksUser = totalSkillsMarks(softSkillsUser);
-
-  const totalMarksHost = (totalHardMarksHost + totalSoftMarksHost) / 2;
-  const totalMarksUser = (totalHardMarksUser + totalSoftMarksUser) / 2;
+  const { hardSkillMark: hardSkillsHost, softSkillMark: softSkillsHost } = hostSkills;
+  const { hardSkillMark: hardSkillsUser, softSkillMark: softSkillsUser } = userSkills;
 
   return [
     {
       name: 'Soft Skills',
-      [hostName]: totalSoftMarksHost,
-      [userName]: totalSoftMarksUser,
+      [hostName]: Math.round(softSkillsHost),
+      [userName]: Math.round(softSkillsUser),
     },
     {
       name: 'Hard Skills',
-      [hostName]: totalHardMarksHost,
-      [userName]: totalHardMarksUser,
+      [hostName]: Math.round(hardSkillsHost),
+      [userName]: Math.round(hardSkillsUser),
     },
     {
       name: 'Over All',
-      [hostName]: totalMarksHost,
-      [userName]: totalMarksUser,
+      [hostName]: Math.round((hardSkillsHost + softSkillsHost) / 2),
+      [userName]: Math.round((hardSkillsUser + softSkillsUser) / 2),
     },
   ];
 };
