@@ -3,13 +3,15 @@ import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAx
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
+import { useLocation } from 'react-router';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
 import { ParticipantEvaluationsSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
-import { prepareSkillsDataParticipantEvaluations } from '../helpers/index';
+import { prepareSkillsDataParticipantEvaluations } from '../helpers';
+import { lvlMastery } from '../../../../utils/constants/masteryLvl';
 import { styles } from './ParticipantEvaluations.styles';
 import { useColorPartEvalChart } from './hooks';
 
@@ -17,9 +19,13 @@ const ParticipantEvaluations = () => {
   const { t } = useTranslation();
   const { itemStyle, contentStyle } = useTooltipColorChart();
   const { leftGrad1, leftGrad2, leftGrad3, rightGrad1, rightGrad2, rightGrad3 } = useColorPartEvalChart();
+  const location = useLocation();
+  const { hostFirstName, hostLastName, masteryLevel } = location.state.event;
+
   const {
     data: { firstName, lastName },
   } = useSelector(selectCurrentUser);
+
   const {
     data: allSkillsHost,
     isFetching: isFetchingAllSkillsHost,
@@ -31,13 +37,16 @@ const ParticipantEvaluations = () => {
     isError: isErrorAllSkills,
   } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10001 });
 
+  const hostName = `${hostFirstName} ${hostLastName}`;
+  const userName = `${firstName} ${lastName}`;
+
   const data = useMemo(
     () =>
       prepareSkillsDataParticipantEvaluations({
         hostSkills: allSkillsHost,
         userSkills: allSkills,
-        hostName: 'Олена Король',
-        userName: `${firstName} ${lastName}`,
+        hostName,
+        userName,
       }),
     [allSkillsHost, allSkills]
   );
@@ -61,17 +70,17 @@ const ParticipantEvaluations = () => {
       <Box sx={styles.boxParticipants}>
         <Box>
           <Typography component='p' variant='subtitle2'>
-            Олена Король
+            {hostName}
           </Typography>
-          <Typography component='p' sx={styles['middle']} variant='subtitle2'>
-            Level Middle
+          <Typography component='p' sx={styles[lvlMastery[masteryLevel]]} variant='subtitle2'>
+            Level {lvlMastery[masteryLevel]}
           </Typography>
         </Box>
         <Box>
           <Typography component='p' variant='subtitle2'>
             {firstName} {lastName}
           </Typography>
-          <Typography component='p' sx={styles['junior']} variant='subtitle2'>
+          <Typography component='p' sx={styles['Junior']} variant='subtitle2'>
             Level Junior
           </Typography>
         </Box>
@@ -107,8 +116,8 @@ const ParticipantEvaluations = () => {
             <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
             <Legend align='center' iconType='circle' layout='horizontal' verticalAlign='top' />
             <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
-            <Bar barSize={50} dataKey='Олена Король' fill='url(#left)' radius={[2, 2, 0, 0]} />
-            <Bar barSize={50} dataKey={`${firstName} ${lastName}`} fill='url(#right)' radius={[2, 2, 0, 0]} />
+            <Bar barSize={50} dataKey={hostName} fill='url(#left)' radius={[2, 2, 0, 0]} />
+            <Bar barSize={50} dataKey={userName} fill='url(#right)' radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Box>

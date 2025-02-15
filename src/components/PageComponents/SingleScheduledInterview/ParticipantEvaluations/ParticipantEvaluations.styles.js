@@ -15,13 +15,13 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
   },
-  junior: (theme) => ({
+  Junior: (theme) => ({
     color: theme.palette.userCard.lvl.junior,
   }),
-  middle: (theme) => ({
+  Middle: (theme) => ({
     color: theme.palette.userCard.lvl.middle,
   }),
-  senior: (theme) => ({
+  Senior: (theme) => ({
     color: theme.palette.userCard.lvl.senior,
   }),
   boxChart: (theme) => ({
