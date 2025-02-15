@@ -1,14 +1,17 @@
 import { apiSlice } from '../services/api/apiSlice';
+import { TAG_TYPES } from '../../utils/constants/tagTypes.js';
 
 const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['ScheduledInterview'],
   endpoints: (builder) => ({
     getAllScheduledInterviews: builder.query({
       query: ({ page, size }) => `/interviews?page=${page}&size=${size}`,
       providesTags: (result) =>
         result?.content
-          ? [...result.content.map(({ id }) => ({ type: 'ScheduledInterview', id })), 'ScheduledInterview']
-          : ['ScheduledInterviews'],
+          ? [
+              ...result.content.map(({ id }) => ({ type: TAG_TYPES.ScheduledInterview, id })),
+              TAG_TYPES.ScheduledInterview,
+            ]
+          : [TAG_TYPES.ScheduledInterview],
 
       // Merge new data with existing data
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
