@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+import { useLocation } from 'react-router';
 import { LevelGauge } from '../../../UI/Chart';
 import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
 import { StatisticSkeleton } from '../../../UI/Skeleton';
@@ -12,11 +13,14 @@ import { useStatisticChartColor } from './hooks';
 const Statistic = () => {
   const { t } = useTranslation();
   const { hardSkillsColors, softSkillsColors, overallColors } = useStatisticChartColor();
+  const location = useLocation();
+  const { hostMasteryId } = location.state.event;
+
   const {
     data: allSkills,
     isFetching: isFetchingAllSkills,
     isError: isErrorAllSkills,
-  } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10009 });
+  } = useGetAllSkillsForMasteryIdQuery({ masteryId: hostMasteryId });
 
   const data = useMemo(() => prepareSkillsDataStatistics(allSkills), [allSkills]);
 
