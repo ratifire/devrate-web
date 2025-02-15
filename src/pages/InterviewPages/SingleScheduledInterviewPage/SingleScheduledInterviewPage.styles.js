@@ -2,6 +2,7 @@ export const styles = {
   contentWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
+    alignSelf: 'start',
     gridGap: theme.spacing(4),
     width: '100%',
     gridTemplateRows: 'repeat(12, auto)',

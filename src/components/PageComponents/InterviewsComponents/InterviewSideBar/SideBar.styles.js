@@ -11,10 +11,9 @@ export const styles = {
     lineHeight: '41.99px',
     letterSpacing: '0.25px',
   }),
-  scrollContainer: (theme) => ({
+  scrollContainer: (theme, heightParent) => ({
     paddingRight: '9px',
-    marginRight: '-17px',
-    maxHeight: 'calc(100vh - 193px);',
+    maxHeight: `calc(${heightParent}px - 80px)`,
     height: '100%',
     overflowY: 'auto',
     '&::-webkit-scrollbar': {

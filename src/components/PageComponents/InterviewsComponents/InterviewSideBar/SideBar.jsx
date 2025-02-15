@@ -1,21 +1,31 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 import SideBarEvent from '../InterviewSideBarEvent';
 import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding';
 import { styles } from './SideBar.styles';
 
 const SideBar = ({ interviews, refHandler, passedInterview }) => {
   const { t } = useTranslation();
+  const theme = useTheme();
   const [selectedPaperId, setSelectedPaperId] = useState(null);
   const containerRef = useRef(null);
+  const heightRef = useRef(null);
 
   const handlePaperClick = (paperId) => {
     setSelectedPaperId(paperId);
   };
 
   useScrollPadding(containerRef, '9px');
+
+  useEffect(() => {
+    if (!heightRef.current) {
+      const parentNode = document.querySelector('.ScheduledInterviewsPage');
+      heightRef.current = parentNode?.clientHeight;
+    }
+  }, []);
 
   const renderEventList = () => {
     return (
@@ -38,7 +48,7 @@ const SideBar = ({ interviews, refHandler, passedInterview }) => {
       <Typography sx={styles.interviewTitle} variant='h4'>
         {t('interviews.sideBar.title')}
       </Typography>
-      <Box ref={containerRef} sx={styles.scrollContainer}>
+      <Box ref={containerRef} sx={styles.scrollContainer(theme, heightRef.current)}>
         {renderEventList()}
       </Box>
     </Box>
