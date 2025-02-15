@@ -6,26 +6,35 @@ import formatDateAndTime from '../../../../utils/helpers/formatDateAndTime';
 import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { UserCardScheduledInterviewSkeleton } from '../../../UI/Skeleton';
+import { useGetMasteriesQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice.js';
 
 const UserCardScheduledInterview = () => {
   const { t } = useTranslation();
   const location = useLocation();
-  const { hostFirstName, hostLastName, masteryLevel, startTime, title, hostId } = location.state.event;
+  const { hostFirstName, hostLastName, hostMasteryId, startTime, title, hostId } = location.state.event;
   const {
     data: avatar,
     isLoading: isLoadingAvatar,
     isError: isErrorAvatar,
   } = useGetAvatarUserQuery(hostId, { skip: !hostId });
 
+  const {
+    data: mastery,
+    isFetching: isFetchingMastery,
+    isError: isErrorMastery,
+  } = useGetMasteriesQuery(hostMasteryId, { skip: !hostMasteryId });
+
   const date = formatDateAndTime(startTime);
 
-  if (isErrorAvatar) {
+  if (isErrorAvatar || isErrorMastery) {
     return <ErrorComponent />;
   }
 
-  if (isLoadingAvatar) {
+  if (isLoadingAvatar || isFetchingMastery) {
     return <UserCardScheduledInterviewSkeleton />;
   }
+
+  const { level } = mastery;
 
   return (
     <UserCard
@@ -35,7 +44,7 @@ const UserCardScheduledInterview = () => {
       firstName={hostFirstName}
       label={t('singleScheduledInterview.userCardScheduledInterview.btn')}
       lastName={hostLastName}
-      lvl={lvlMastery[masteryLevel]}
+      lvl={lvlMastery[level]}
       role={title}
       src={avatar}
     />
