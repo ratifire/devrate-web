@@ -25,18 +25,18 @@ const prepareSkillsDataParticipantEvaluations = ({ hostSkills, userSkills, hostN
   return [
     {
       name: 'Soft Skills',
-      [hostName]: Math.round(softSkillsHost),
-      [userName]: Math.round(softSkillsUser),
+      [hostName]: Math.round(softSkillsHost * 10) / 10,
+      [userName]: Math.round(softSkillsUser * 10) / 10,
     },
     {
       name: 'Hard Skills',
-      [hostName]: Math.round(hardSkillsHost),
-      [userName]: Math.round(hardSkillsUser),
+      [hostName]: Math.round(hardSkillsHost * 10) / 10,
+      [userName]: Math.round(hardSkillsUser * 10) / 10,
     },
     {
       name: 'Over All',
-      [hostName]: Math.round((hardSkillsHost + softSkillsHost) / 2),
-      [userName]: Math.round((hardSkillsUser + softSkillsUser) / 2),
+      [hostName]: Math.round((hardSkillsHost * 10 + softSkillsHost * 10) / 2) / 10,
+      [userName]: Math.round((hardSkillsUser * 10 + softSkillsUser * 10) / 2) / 10,
     },
   ];
 };
