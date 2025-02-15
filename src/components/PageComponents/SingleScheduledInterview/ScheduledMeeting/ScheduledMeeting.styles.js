@@ -67,13 +67,13 @@ export const styles = {
     letterSpacing: '0.17px',
     textTransform: 'none',
   },
-  upcoming: (theme) => ({
+  ['UPCOMING']: (theme) => ({
     color: theme.palette.scheduledMeeting.upcoming,
   }),
-  progress: (theme) => ({
+  ['IN PROCESS']: (theme) => ({
     color: theme.palette.scheduledMeeting.progress,
   }),
-  waiting: (theme) => ({
+  ['AWAITING FEEDBACK']: (theme) => ({
     color: theme.palette.scheduledMeeting.waiting,
   }),
   link: (theme) => ({

@@ -883,6 +883,8 @@ export const en = {
           joinMeeting: 'Join Interview',
           notHappenedMeeting: 'Interview did not happen',
           leaveFeedbackMeeting: 'Leave Feedback',
+          languageType: 'English',
+          durationType: 'min.',
         },
       },
       interviewSkills: {

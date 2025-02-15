@@ -1,18 +1,51 @@
 import { Box, Typography, Link } from '@mui/material';
-import { Link as RouterLink } from 'react-router';
+import { Link as RouterLink, useLocation } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import zoom from '../../../../assets/icons/InterviewPageIcons/zoom.png';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
+import { ErrorComponent } from '../../../UI/Exceptions';
+import { ScheduledMeetingSkeleton } from '../../../UI/Skeleton';
+import { formatTimeToUtc, formatTimeWithOffset } from '../../../../utils/helpers';
+import { getStatusByTime } from '../helpers';
 import { styles } from './ScheduledMeeting.styles';
 
 const ScheduledMeeting = () => {
   const { t } = useTranslation();
   const {
-    data: { firstName, lastName },
+    data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
+  const location = useLocation();
+  const { hostFirstName, hostLastName, hostId, startTime } = location.state.event;
+
+  const {
+    data: hostAvatar,
+    isLoading: isLoadingHostAvatar,
+    isError: isErrorHostAvatar,
+  } = useGetAvatarUserQuery(hostId, { skip: !hostId });
+
+  const {
+    data: userAvatar,
+    isLoading: isLoadingUserAvatar,
+    isError: isErrorUserAvatar,
+  } = useGetAvatarUserQuery(id, { skip: !id });
+
+  if (isErrorHostAvatar || isErrorUserAvatar) {
+    return <ErrorComponent />;
+  }
+
+  if (isLoadingHostAvatar || isLoadingUserAvatar) {
+    return <ScheduledMeetingSkeleton />;
+  }
+
+  const hostFullName = `${hostFirstName} ${hostLastName}`;
+  const userFullName = `${firstName} ${lastName}`;
+  const time = formatTimeToUtc(startTime);
+  const startAndTime = formatTimeWithOffset(startTime);
+  const status = getStatusByTime('2025-02-15T17:00:00Z');
 
   return (
     <Box sx={styles.wrapper}>
@@ -20,16 +53,16 @@ const ScheduledMeeting = () => {
         <Typography component='h6' variant='h6'>
           {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.title')}
         </Typography>
-        <Typography component='p' sx={styles['upcoming']} variant='subtitle2'>
-          UPCOMING
+        <Typography component='p' sx={styles[status]} variant='subtitle2'>
+          {status}
         </Typography>
       </Box>
       <Box sx={styles.boxDataTime}>
         <Typography component='p' variant='subtitle3'>
-          26/02/2025 (UTC+01:00)
+          {time}
         </Typography>
         <Typography component='h4' variant='h4'>
-          15:30 / 16:30
+          {startAndTime}
         </Typography>
       </Box>
       <Box sx={styles.boxInfo}>
@@ -37,6 +70,7 @@ const ScheduledMeeting = () => {
           <UserAvatar
             radius='circle'
             size='xs'
+            src={userAvatar}
             userFirstName={firstName}
             userLastName={lastName}
             userName={firstName}
@@ -45,15 +79,16 @@ const ScheduledMeeting = () => {
             correctStyle={styles.activeImg}
             radius='circle'
             size='xs'
-            userFirstName='Олена'
-            userLastName='Король'
-            userName='Олена'
+            src={hostAvatar}
+            userFirstName={hostFirstName}
+            userLastName={hostLastName}
+            userName={hostFirstName}
           />
         </Box>
         <Typography component='p' sx={styles.boxInfoText} variant='subtitle2'>
           {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.participants')}:
           <Typography component='span' variant='body'>
-            Олена Король; {firstName} {lastName}
+            {hostFullName}; {userFullName}
           </Typography>
         </Typography>
       </Box>
@@ -63,7 +98,7 @@ const ScheduledMeeting = () => {
             {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.language')}
           </Typography>
           <Typography component='p' variant='body'>
-            Англійська
+            {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.languageType')}
           </Typography>
         </Box>
         <Box sx={styles.boxParametersInfo}>
@@ -71,7 +106,7 @@ const ScheduledMeeting = () => {
             {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.duration')}
           </Typography>
           <Typography component='p' variant='body'>
-            60 хв.
+            60 {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.durationType')}
           </Typography>
         </Box>
         <Box sx={styles.boxParametersInfo}>
