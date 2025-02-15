@@ -13,7 +13,7 @@ import { formatTimeToUtc, formatTimeWithOffset } from '../../../../utils/helpers
 import { getStatusByTime } from '../helpers';
 import { styles } from './ScheduledMeeting.styles';
 import { btnStatus, leftBtnStatus } from './constants';
-import rightBtnStatus from './constants/rigthBtnStatus.js';
+import rightBtnStatus from './constants/rigthBtnStatus';
 
 const ScheduledMeeting = () => {
   const { t } = useTranslation();

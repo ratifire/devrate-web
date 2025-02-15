@@ -5,7 +5,10 @@ const singleScheduledInterviewApiSlice = apiSlice.injectEndpoints({
     getAllSkillsForMasteryId: builder.query({
       query: ({ masteryId }) => `/masteries/${masteryId}/skills/all`,
     }),
+    getMasteries: builder.query({
+      query: (masteryId) => `/masteries/${masteryId}`,
+    }),
   }),
 });
 
-export const { useGetAllSkillsForMasteryIdQuery } = singleScheduledInterviewApiSlice;
+export const { useGetAllSkillsForMasteryIdQuery, useGetMasteriesQuery } = singleScheduledInterviewApiSlice;

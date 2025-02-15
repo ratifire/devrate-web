@@ -1,9 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
 import { useLocation } from 'react-router';
 import { LevelGauge } from '../../../UI/Chart';
-import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
+import { useGetMasteriesQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
 import { StatisticSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { prepareSkillsDataStatistics } from '../helpers';
@@ -20,9 +19,7 @@ const Statistic = () => {
     data: allSkills,
     isFetching: isFetchingAllSkills,
     isError: isErrorAllSkills,
-  } = useGetAllSkillsForMasteryIdQuery({ masteryId: hostMasteryId });
-
-  const data = useMemo(() => prepareSkillsDataStatistics(allSkills), [allSkills]);
+  } = useGetMasteriesQuery(hostMasteryId, { skip: !hostMasteryId });
 
   if (isErrorAllSkills) {
     return <ErrorComponent />;
@@ -32,7 +29,11 @@ const Statistic = () => {
     return <StatisticSkeleton />;
   }
 
-  const { hardSkillsAverage, softSkillsAverage, allSkillsAverage } = data;
+  const { hardSkillMark, softSkillMark } = allSkills;
+  const { allSkillsAverage, hardSkillsAverage, softSkillsAverage } = prepareSkillsDataStatistics({
+    hardSkillMark,
+    softSkillMark,
+  });
 
   return (
     <Box sx={styles.wrapper}>

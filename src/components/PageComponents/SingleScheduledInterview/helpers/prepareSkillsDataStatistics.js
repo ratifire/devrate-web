@@ -1,23 +1,10 @@
-import { totalSkillsMarks } from './index';
-
 const prepareSkillsDataStatistics = (allSkills) => {
-  if (!allSkills) {
-    return {
-      hardSkillsAverage: 0,
-      softSkillsAverage: 0,
-      allSkillsAverage: 0,
-    };
-  }
-
-  const { hardSkills, softSkills } = allSkills;
-
-  const totalHardMarks = totalSkillsMarks(hardSkills, 10);
-  const totalSoftMarks = totalSkillsMarks(softSkills, 10);
+  const { hardSkillMark, softSkillMark } = allSkills;
 
   return {
-    hardSkillsAverage: totalHardMarks,
-    softSkillsAverage: totalSoftMarks,
-    allSkillsAverage: (totalHardMarks + totalSoftMarks) / 2,
+    hardSkillsAverage: Math.round(hardSkillMark * 10),
+    softSkillsAverage: Math.round(softSkillMark * 10),
+    allSkillsAverage: Math.round(((hardSkillMark + softSkillMark) / 2) * 10),
   };
 };
 
