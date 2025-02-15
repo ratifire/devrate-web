@@ -1,15 +1,40 @@
 export const styles = {
+  position: () => ({
+    position: 'fixed',
+    top: 'calc(100% - 684px)',
+    left: 'calc(100% - 580px)',
+    zIndex: 1500,
+    boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
+    height: '100%',
+    maxHeight: '683px',
+  }),
+  resizeHandle: {
+    position: 'absolute',
+    width: '5px',
+    height: '100%',
+    backgroundColor: 'transparent',
+    top: 0,
+    right: -5,
+    cursor: 'ew-resize',
+    zIndex: 10,
+  },
   container: {
-    maxHeight: '100%',
-    width: '480px',
-    height: '684px',
+    maxHeight: '683px',
+    width: '100%',
+    height: '100%',
   },
   wrapper: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'stretch',
     padding: '13px 16px',
     borderRadius: '4px 4px 0 0',
     backgroundColor: '#252527',
+  },
+  wrapperName: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'grab',
   },
   name: {
     color: '#FFFFFF',
@@ -18,15 +43,23 @@ export const styles = {
     marginLeft: '8px',
   },
   btnIcon: (theme) => ({
+    width: '44px',
+    height: '44px',
+    marginTop: '4px',
     color: '#CEB0FA',
     borderRadius: 1,
     ':hover': {
       backgroundColor: theme.palette.iconBtn.btnClose.hoverColor,
     },
     svg: {
-      fontSize: '18px',
+      fontSize: '20px',
     },
   }),
+  linkAvatar: {
+    textDecoration: 'none',
+    display: 'block',
+    borderRadius: '50%',
+  },
   btnIconScroll: {
     position: 'sticky',
     width: '44px',
@@ -53,7 +86,8 @@ export const styles = {
     flexDirection: 'column',
     backgroundColor: '#303032',
     padding: '16px 16px 0 16px',
-    maxHeight: '532px',
+    maxHeight: '100%',
+    height: '100%',
     overflowX: 'hidden',
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
