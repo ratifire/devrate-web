@@ -22,7 +22,7 @@ const SideBar = ({ interviews, refHandler, passedInterview }) => {
       interviews?.length > 0 &&
       interviews.map((event, index) => (
         <SideBarEvent
-          key={event.id}
+          key={`${event.id}-${event.roomUrl}`}
           event={event}
           handlePaperClick={handlePaperClick}
           passedInterview={passedInterview}
