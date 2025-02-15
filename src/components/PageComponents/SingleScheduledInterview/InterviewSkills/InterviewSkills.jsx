@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
+import { useLocation } from 'react-router';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
@@ -26,6 +27,8 @@ const InterviewSkills = () => {
     isFetching: isFetchingAllSkills,
     isError: isErrorAllSkills,
   } = useGetAllSkillsForMasteryIdQuery({ masteryId: 10001 });
+  const location = useLocation();
+  const { hostFirstName, hostLastName } = location.state.event;
 
   const data = useMemo(
     () => prepareSkillsDataInterviewSkills({ hostSkills: allSkillsHost, userSkills: allSkillsUser }),
@@ -41,6 +44,7 @@ const InterviewSkills = () => {
   }
 
   const { softSkills, hardSkills } = data;
+  const hostFullName = `${hostFirstName} ${hostLastName}`;
 
   return (
     <Box sx={styles.wrapper}>
@@ -60,7 +64,7 @@ const InterviewSkills = () => {
         <Box sx={styles.boxParticipant}>
           <Box sx={styles.rightCircle} />
           <Typography component='p' variant='subtitle2'>
-            Олена Король
+            {hostFullName}
           </Typography>
         </Box>
       </Box>
