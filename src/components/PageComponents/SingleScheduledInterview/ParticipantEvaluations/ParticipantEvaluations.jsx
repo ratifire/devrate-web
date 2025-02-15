@@ -6,7 +6,7 @@ import { useLocation } from 'react-router';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { useGetMasteriesQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
+import { useGetMasteriesQuery } from '../../../../redux/interviews/singleScheduledInterviewApiSlice.js';
 import { ParticipantEvaluationsSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { prepareSkillsDataParticipantEvaluations } from '../helpers';

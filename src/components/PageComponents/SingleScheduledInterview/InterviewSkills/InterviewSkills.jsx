@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import { useLocation } from 'react-router';
 import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/singleScheduledInterview/singleScheduledInterviewApiSlice';
+import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/interviews/singleScheduledInterviewApiSlice.js';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { InterviewSkillsSkeleton } from '../../../UI/Skeleton';
 import prepareSkillsDataInterviewSkills from '../helpers/prepareSkillsDataInterviewSkills';
