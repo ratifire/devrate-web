@@ -6,7 +6,7 @@ import navigationLinks from '../links';
 const ScheduledInterviewsGuard = () => {
   const { data: scheduledInterviews } = useGetAllScheduledInterviewsQuery({ page: 1, size: 5 });
   const navigate = useNavigate();
-  const firstInterviewId = scheduledInterviews?.content[0].id;
+  const firstInterviewId = scheduledInterviews?.content[0]?.id;
   const event = scheduledInterviews?.content[0];
 
   useEffect(() => {

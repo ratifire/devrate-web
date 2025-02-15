@@ -11,6 +11,12 @@ const SideBar = lazy(
 
 const MemoizedSideBar = memo(SideBar);
 
+const options = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 1.0,
+};
+
 const ScheduledInterviewsPage = () => {
   const [page, setPage] = useState(1);
   const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 5 });
@@ -29,12 +35,6 @@ const ScheduledInterviewsPage = () => {
     },
     [isFetching, isLoading, scheduledInterviews?.totalPages, page]
   );
-
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 1.0,
-  };
 
   useEffect(() => {
     if (!lastEventRef) return;
