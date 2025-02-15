@@ -12,6 +12,8 @@ import { ScheduledMeetingSkeleton } from '../../../UI/Skeleton';
 import { formatTimeToUtc, formatTimeWithOffset } from '../../../../utils/helpers';
 import { getStatusByTime } from '../helpers';
 import { styles } from './ScheduledMeeting.styles';
+import { btnStatus, leftBtnStatus } from './constants';
+import rightBtnStatus from './constants/rigthBtnStatus.js';
 
 const ScheduledMeeting = () => {
   const { t } = useTranslation();
@@ -45,7 +47,7 @@ const ScheduledMeeting = () => {
   const userFullName = `${firstName} ${lastName}`;
   const time = formatTimeToUtc(startTime);
   const startAndTime = formatTimeWithOffset(startTime);
-  const status = getStatusByTime('2025-02-15T17:00:00Z');
+  const status = getStatusByTime(startTime);
 
   return (
     <Box sx={styles.wrapper}>
@@ -128,15 +130,12 @@ const ScheduledMeeting = () => {
       </Typography>
       <Box sx={styles.boxBtn}>
         <ButtonDef
-          label={t('singleScheduledInterview.interviewsSummary.scheduledMeeting.canceledMeeting')}
+          disabled={status === btnStatus['IN PROCESS']}
+          label={t(leftBtnStatus[status])}
           sx={styles.btn}
           variant='outlined'
         />
-        <ButtonDef
-          label={t('singleScheduledInterview.interviewsSummary.scheduledMeeting.joinMeeting')}
-          sx={styles.btn}
-          variant='contained'
-        />
+        <ButtonDef label={t(rightBtnStatus[status])} sx={styles.btn} variant='contained' />
       </Box>
     </Box>
   );

@@ -1,19 +1,20 @@
 import { DateTime } from 'luxon';
+import { btnStatus } from '../ScheduledMeeting/constants';
 
 const getStatusByTime = (startTime) => {
-  const now = DateTime.now();
+  const now = DateTime.now().toUTC();
   const start = DateTime.fromISO(startTime).toUTC();
   const end = start.plus({ hours: 1 });
 
   if (now < start) {
-    return 'UPCOMING';
+    return btnStatus['UPCOMING'];
   }
 
   if (now < end) {
-    return 'IN PROCESS';
+    return btnStatus['IN PROCESS'];
   }
 
-  return 'AWAITING FEEDBACK';
+  return btnStatus['AWAITING FEEDBACK'];
 };
 
 export default getStatusByTime;

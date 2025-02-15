@@ -1,3 +1,5 @@
+import { btnStatus } from './constants';
+
 export const styles = {
   wrapper: (theme) => ({
     padding: theme.spacing(4),
@@ -67,14 +69,14 @@ export const styles = {
     letterSpacing: '0.17px',
     textTransform: 'none',
   },
-  ['UPCOMING']: (theme) => ({
+  [btnStatus.UPCOMING]: (theme) => ({
     color: theme.palette.scheduledMeeting.upcoming,
   }),
-  ['IN PROCESS']: (theme) => ({
+  [btnStatus['IN PROCESS']]: (theme) => ({
     color: theme.palette.scheduledMeeting.progress,
   }),
-  ['AWAITING FEEDBACK']: (theme) => ({
-    color: theme.palette.scheduledMeeting.waiting,
+  [btnStatus['AWAITING FEEDBACK']]: (theme) => ({
+    color: theme.palette.scheduledMeeting.awaiting,
   }),
   link: (theme) => ({
     pointerEvents: 'none',
