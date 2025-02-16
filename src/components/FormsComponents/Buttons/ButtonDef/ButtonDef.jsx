@@ -14,7 +14,7 @@ const ButtonDef = ({ sx: style, label, variant, useSkeleton, loading = false, st
       variant={variant}
       {...props}
     >
-      {label}
+      <span className='loadingBtnText'>{label}</span>
     </LoadingButton>
   );
 };
