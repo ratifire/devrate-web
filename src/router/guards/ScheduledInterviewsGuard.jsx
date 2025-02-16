@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router';
+import { Outlet, useLocation, useNavigate } from 'react-router';
 import { useEffect } from 'react';
 import { useGetAllScheduledInterviewsQuery } from '../../redux/interviews/scheduledInterviewsApiSlice';
 import navigationLinks from '../links';
@@ -6,16 +6,18 @@ import navigationLinks from '../links';
 const ScheduledInterviewsGuard = () => {
   const { data: scheduledInterviews } = useGetAllScheduledInterviewsQuery({ page: 1, size: 5 });
   const navigate = useNavigate();
+  const location = useLocation();
   const firstInterviewId = scheduledInterviews?.content[0]?.id;
   const event = scheduledInterviews?.content[0];
+  const patchName = location.pathname.split('/')[3];
 
   useEffect(() => {
-    if (firstInterviewId) {
+    if (firstInterviewId && !patchName) {
       navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
         state: { event },
       });
     }
-  }, [firstInterviewId]);
+  }, [firstInterviewId, patchName]);
 
   return <Outlet />;
 };

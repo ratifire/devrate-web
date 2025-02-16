@@ -9,12 +9,11 @@ import { lvlMastery, lvlMasteryColor } from '../../../../utils/constants/mastery
 import navigationLinks from '../../../../router/links';
 import { styles } from './SideBarEvent.styles';
 
-const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, selectedPaperId }) => {
+const SideBarEvent = ({ event, refHandler, passedInterview }) => {
   const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName } = event;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { interviewId } = useParams();
-  const paramsId = selectedPaperId || interviewId;
 
   const handleClick = (e) => {
     if (e.target.tagName !== 'A') {
@@ -26,12 +25,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, se
 
   return (
     <Box sx={styles.interviewLink} onClick={handleClick}>
-      <Paper
-        key={id}
-        ref={refHandler}
-        sx={+paramsId === id ? styles.border : styles.sideBarEventContainer}
-        onClick={() => handlePaperClick(id)}
-      >
+      <Paper key={id} ref={refHandler} sx={+interviewId === id ? styles.border : styles.sideBarEventContainer}>
         <Typography component='div' sx={styles.status} variant='subtitle2'>
           {/*//TODO should be implemented based on sockets or as a temporary solution via setTimeout. TBC with TL. */}
           {/*<>*/}
