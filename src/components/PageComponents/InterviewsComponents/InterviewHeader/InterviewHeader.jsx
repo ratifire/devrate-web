@@ -3,20 +3,19 @@ import { NavLink } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import { useDispatch } from 'react-redux';
-import { openModal } from '../../../../redux/modal/modalSlice.js';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole.js';
+import { modalNames } from '../../../../utils/constants/modalNames';
+import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole';
 import links from '../../../../router/links.js';
 import CircleIcon from '../../../../assets/icons/InterviewPageIcons/green-ellipse.svg';
-import styles from './InterviewHeader.styles.js';
+import { useModalController } from '../../../../utils/hooks/useModalController';
+import styles from './InterviewHeader.styles';
 
 const InterviewHeader = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const buttonRef = useRef(null);
   const [createButton, setCreateButton] = useState(null);
   const [popoverWidth, setPopoverWidth] = useState(0);
+  const { openModal } = useModalController();
   const open = Boolean(createButton);
 
   useEffect(() => {
@@ -36,16 +35,12 @@ const InterviewHeader = () => {
   };
 
   const createInterviewRequest = async () => {
-    dispatch(
-      openModal({ modalType: modalNames.scheduleInterviewModal, data: { role: feedbackInterviewRole.INTERVIEWER } })
-    );
+    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.INTERVIEWER });
     closeHandler();
   };
 
   const createIncomeInterviewRequest = () => {
-    dispatch(
-      openModal({ modalType: modalNames.scheduleInterviewModal, data: { role: feedbackInterviewRole.CANDIDATE } })
-    );
+    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.CANDIDATE });
     closeHandler();
   };
 
