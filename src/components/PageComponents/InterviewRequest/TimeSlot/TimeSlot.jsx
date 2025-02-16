@@ -1,27 +1,37 @@
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
-import { FormCheckbox } from '../../../FormsComponents/Inputs/index.js';
+import { Box, Checkbox, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { DateTime } from 'luxon';
 import { styles } from './TimeSlot.styles.js';
-const TimeSlot = ({ time, status, date }) => {
+
+const TimeSlot = ({ day, data, currentDate }) => {
+  const { t } = useTranslation();
+  const dateTime = DateTime.fromISO(data.date);
+
+  const formattedTime = dateTime.toFormat('HH:mm');
+
   return (
     <Box sx={styles.timeSlot}>
-      <Box sx={styles.timeStatusContainer}>
-        <Box sx={styles.time}>{time}</Box>
-        <Box sx={styles.date}>{date}</Box>
+      <Box sx={styles.timeDateContainer}>
+        <Typography sx={styles.date}>{`${day} ${currentDate}`}</Typography>
+        <Typography sx={styles.time}>{formattedTime}</Typography>
       </Box>
 
-      <Box sx={styles.dateCheckboxContainer}>
-        <Box sx={status === 'Scheduled' ? { ...styles.status, ...styles.completed } : styles.status}>{status}</Box>
-        <FormCheckbox />
+      <Box sx={styles.statusCheckboxContainer}>
+        <Box sx={data.type === 'assigned' ? { ...styles.status, ...styles.completed } : styles.status}>
+          <Typography sx={styles.statusText}>{t('Status: ')}</Typography>
+          {t(`interviewRequest.timeSlot.status.${data.type}`)}
+        </Box>
+        <Checkbox sx={styles.checkBox} />
       </Box>
     </Box>
   );
 };
 
 TimeSlot.propTypes = {
-  time: PropTypes.string.isRequired,
-  status: PropTypes.oneOf(['Pending', 'Scheduled']).isRequired,
-  date: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  currentDate: PropTypes.string.isRequired,
+  day: PropTypes.string.isRequired,
 };
 
 export default TimeSlot;

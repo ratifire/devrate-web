@@ -72,14 +72,15 @@ export const styles = {
     width: '216px',
     marginLeft: '16px',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    gridGap: theme.spacing(2),
     paddingY: '13px',
     paddingX: '22px',
     color: theme.palette.iconBtn.bookInterview.color,
     fontFamily: theme.typography.fontFamily,
     border: `1px solid ${theme.palette.iconBtn.bookInterview.borderColor}`,
     textTransform: 'lowercase',
-    '&::first-letter': {
+    '& .loadingBtnText::first-letter': {
       textTransform: 'uppercase',
     },
     '&:hover': {

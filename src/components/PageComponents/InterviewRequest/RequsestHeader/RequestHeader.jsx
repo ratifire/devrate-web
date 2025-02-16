@@ -4,11 +4,29 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useState } from 'react';
 import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
+import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu/index.js';
+// import { useCreateInterviewRequestMutation } from '../../../../redux/services/interviewRequestApiSlice.js';
 import { styles } from './RequestHeader.styles.js';
 
-const RequestHeader = ({ title, role, description, stats, onAddTimeslot }) => {
+const RequestHeader = ({ title, role, description, foundInterviews, totalInterviews, selectedTimeSlots }) => {
   const { t } = useTranslation();
+  const [anchorEl, setAnchorEl] = useState(null);
+  // const [createInterviweRequset] = useCreateInterviewRequestMutation();
+  // console.log(createInterviweRequset, 'createInterviweRequset');
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCreateInterviweRequest = () => {
+    //Open modal to creeate interview
+  };
 
   return (
     <Box sx={styles.container}>
@@ -26,26 +44,29 @@ const RequestHeader = ({ title, role, description, stats, onAddTimeslot }) => {
         </Typography>
 
         <Box sx={styles.buttons}>
-          {role === 'Respondent' && (
-            <IconButton aria-label='delete' sx={styles.iconDelete}>
-              <DeleteIcon />
-            </IconButton>
-          )}
+          <IconButton aria-label='delete' sx={styles.iconDelete}>
+            <DeleteIcon />
+          </IconButton>
           <ButtonDef
             label={t('Аdd time slots')}
             startIcon={<AddIcon />}
             sx={styles.outlined}
             type={'button'}
             variant='outlined'
-            onClick={onAddTimeslot}
+            onClick={handleCreateInterviweRequest}
           />
 
           <Box sx={styles.menuIcon}>
-            {/*<IconButton sx={styles.openMenuDots} onClick={(event) => handleMenuOpen(event)}>*/}
-            <IconButton sx={styles.openMenuDots}>
+            <IconButton sx={styles.openMenuDots} onClick={(event) => handleMenuOpen(event)}>
               <MoreVertIcon />
             </IconButton>
           </Box>
+          <DropdownMenu
+            anchorEl={anchorEl}
+            handleCloseMenu={handleCloseMenu}
+            // handleDeleteFeature={handleDeleteFeature}
+            // handleEditFeature={handleEditFeature}
+          />
         </Box>
       </Box>
 
@@ -53,19 +74,19 @@ const RequestHeader = ({ title, role, description, stats, onAddTimeslot }) => {
         <Typography component={'strong'} sx={styles.statItem} variant={'subtitle3'}>
           Знайдено інтерв’ю:{' '}
           <Typography component='strong' sx={styles.foundInterviews} variant={'subtitle3'}>
-            {stats.foundInterviews}
+            {foundInterviews}
           </Typography>
         </Typography>
         <Typography component={'strong'} sx={styles.statItem} variant={'subtitle3'}>
           Кількість інтерв’ю:{' '}
           <Typography component='strong' sx={styles.totalInterviews} variant={'subtitle3'}>
-            {stats.totalInterviews}
+            {totalInterviews}
           </Typography>
         </Typography>
         <Typography component={'strong'} sx={styles.statItem} variant={'subtitle3'}>
           Обрано таймслотів:{' '}
           <Typography component='strong' sx={styles.selectedTimeslots} variant={'subtitle3'}>
-            {stats.selectedTimeslots}
+            {selectedTimeSlots}
           </Typography>
         </Typography>
       </Box>
@@ -81,11 +102,9 @@ RequestHeader.propTypes = {
   title: PropTypes.string.isRequired,
   role: PropTypes.oneOf(['Respondent', 'Interviewer']).isRequired,
   description: PropTypes.string.isRequired,
-  stats: PropTypes.shape({
-    foundInterviews: PropTypes.number.isRequired,
-    totalInterviews: PropTypes.number.isRequired,
-    selectedTimeslots: PropTypes.number.isRequired,
-  }).isRequired,
+  foundInterviews: PropTypes.number.isRequired,
+  totalInterviews: PropTypes.number.isRequired,
+  selectedTimeSlots: PropTypes.number.isRequired,
   onAddTimeslot: PropTypes.func.isRequired,
 };
 

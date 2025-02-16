@@ -1,27 +1,25 @@
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import TimeSlot from '../TimeSlot';
 import { styles } from './TimeSlotGroup.styles.js';
 
 const TimeSlotsGroup = ({ timeSlots }) => {
+  const { items, date, dayOfWeek } = timeSlots;
+
   return (
     <Box sx={styles.timeSlotGroup}>
-      {timeSlots.map((slot, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <TimeSlot key={index} date={slot.date} status={slot.status} time={slot.time} />
-      ))}
+      <Typography sx={styles.dayTitle}>{`${dayOfWeek} ${date}`}</Typography>
+      <Box sx={styles.dayGroup}>
+        {items?.map((item) => (
+          <TimeSlot key={item.date} currentDate={date} data={item} day={dayOfWeek} />
+        ))}
+      </Box>
     </Box>
   );
 };
 
 TimeSlotsGroup.propTypes = {
-  timeSlots: PropTypes.arrayOf(
-    PropTypes.shape({
-      time: PropTypes.number.isRequired,
-      status: PropTypes.string.isRequired,
-      date: PropTypes.number.isRequired,
-    })
-  ).isRequired,
+  timeSlots: PropTypes.object.isRequired,
 };
 
 export default TimeSlotsGroup;
