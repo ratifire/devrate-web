@@ -24,6 +24,7 @@ const styles = {
 
     '& span': {
       cursor: 'pointer',
+      userSelect: 'none',
       color: theme.palette.action.active,
       borderBottom: '2px solid ' + theme.palette.action.active,
       display: 'inline-block',
