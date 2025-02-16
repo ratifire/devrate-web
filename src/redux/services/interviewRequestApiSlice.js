@@ -5,23 +5,19 @@ export const interviewRequestApiSlice = apiSlice.injectEndpoints({
     // Получить запросы на интервью по masteryId
     getInterviewRequestByMasteryId: builder.query({
       query: (masteryId) => `/interview-requests/masteries/${masteryId}`,
-      transformResponse: (response) => {
-        // Обработка ответа, если нужно
-        return response;
-      },
     }),
 
     // Создать новый запрос на интервью
     createInterviewRequest: builder.mutation({
-      query: (payload) => ({
+      query: ({ role, availableDates, comment, desiredInterviewDate, desiredNumberOfInterviews }) => ({
         url: `/interview-requests`,
         method: 'POST',
         body: {
-          role: payload.role,
-          availableDates: payload.availableDates,
-          comment: payload.comment,
-          desiredInterviewDate: payload.desiredInterviewDate,
-          desiredNumberOfInterviews: payload.desiredNumberOfInterviews,
+          role,
+          availableDates,
+          comment,
+          desiredInterviewDate,
+          desiredNumberOfInterviews,
         },
       }),
       // invalidatesTags: [TAG_TYPES.InterviewRequest],
@@ -29,15 +25,15 @@ export const interviewRequestApiSlice = apiSlice.injectEndpoints({
 
     // Обновить запрос на интервью
     updateInterviewRequest: builder.mutation({
-      query: ({ id, ...payload }) => ({
+      query: ({ id, role, availableDates, comment, desiredInterviewDate, desiredNumberOfInterviews }) => ({
         url: `/interview-requests/${id}`,
         method: 'PUT',
         body: {
-          role: payload.role,
-          availableDates: payload.availableDates,
-          comment: payload.comment,
-          desiredInterviewDate: payload.desiredInterviewDate,
-          desiredNumberOfInterviews: payload.desiredNumberOfInterviews,
+          role,
+          availableDates,
+          comment,
+          desiredInterviewDate,
+          desiredNumberOfInterviews,
         },
       }),
       // invalidatesTags: [TAG_TYPES.InterviewRequest],
