@@ -1,15 +1,15 @@
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import ButtonDef from '../../FormsComponents/Buttons/ButtonDef';
 import FormSelect from '../../FormsComponents/Inputs/FormSelect';
 import TextAreaInput from '../../FormsComponents/Inputs/TextAreaInput';
-import { closeModal } from '../../../redux/modal/modalSlice';
 import { FeedbackProjectModalSchema } from '../../../utils/validationSchemas/index';
 import { useCreateFeedbackMutation } from '../../../redux/services/feedbackProjectModalApiSlice';
 import { modalNames } from '../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../utils/hooks/useModalController.js';
 import { feedbackOptions } from './constants';
 import { styles } from './FeedbackProjectModal.styles';
 
@@ -21,14 +21,10 @@ const initialValues = {
 const FeedbackProjectModal = () => {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth.user.data);
+  const { closeModal } = useModalController();
 
   const [createFeedback, { isLoading }] = useCreateFeedbackMutation();
-
-  const handleClose = () => {
-    dispatch(closeModal({ modalType: modalNames.feedbackProjectModal }));
-  };
 
   const onSubmit = async (values) => {
     try {
@@ -42,7 +38,7 @@ const FeedbackProjectModal = () => {
     } catch (error) {
       enqueueSnackbar(t('modal.feedbackProjectModal.error_429'), { variant: 'error' });
     }
-    handleClose();
+    closeModal(modalNames.feedbackProjectModal);
   };
 
   const formik = useFormik({

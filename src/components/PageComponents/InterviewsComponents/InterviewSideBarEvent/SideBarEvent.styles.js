@@ -8,6 +8,15 @@ export const styles = {
     borderRadius: 1,
     padding: theme.spacing(3),
     marginBottom: theme.spacing(3),
+    border: '1px solid transparent',
+  }),
+  border: (theme) => ({
+    width: '100%',
+    backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
+    borderRadius: 1,
+    padding: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    border: '1px solid #8133F1',
   }),
   status: (theme) => ({
     display: 'flex',

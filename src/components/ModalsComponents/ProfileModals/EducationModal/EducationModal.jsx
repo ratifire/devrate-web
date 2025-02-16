@@ -1,37 +1,38 @@
-import { useEffect, useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { selectModalData } from '../../../../redux/modal/modalSlice';
 import { EducationModalSchema } from '../../../../utils/validationSchemas/index';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useCreateEducationMutation } from '../../../../redux/services/educationApiSlice';
+import { useCreateEducationMutation, useUpdateEducationMutation } from '../../../../redux/services/educationApiSlice';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
+import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './EducationModal.styles';
 
 const EducationModal = () => {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
-  const translatedNow = t('profile.modal.education.now');
   const [startYears, setStartYears] = useState([]);
   const [endYears, setEndYears] = useState([]);
-  const [createEducation, { isLoading }] = useCreateEducationMutation();
+  const [createEducation, { isLoading: isCreating }] = useCreateEducationMutation();
+  const [updateEducation, { isLoading: isUpdating }] = useUpdateEducationMutation();
   const currentUser = useSelector(selectCurrentUser);
   const { enqueueSnackbar } = useSnackbar();
-
-  const handleClose = useCallback(() => {
-    dispatch(closeModal({ modalType: modalNames.educationModal }));
-  }, [dispatch]);
+  const { closeModal } = useModalController();
+  const modalData = useSelector(selectModalData);
+  const isEditMode = Boolean(modalData);
 
   useEffect(() => {
+    const currentYear = new Date().getFullYear();
     const startYearsOpts = [];
-    for (let i = 1950; i <= `${new Date().getFullYear()}`; i++) {
+    for (let i = 1950; i <= currentYear; i++) {
       startYearsOpts.push(`${i}`);
     }
     setStartYears(startYearsOpts);
@@ -49,35 +50,73 @@ const EducationModal = () => {
     description: '',
     startYear: '',
     endYear: '',
+    isCurrentDate: false,
   };
+
+  const initialValues = isEditMode
+    ? {
+        type: modalData.type || '',
+        name: modalData.name || '',
+        description: modalData.description || '',
+        startYear: modalData.startYear || '',
+        endYear: modalData.endYear || '',
+        isCurrentDate: modalData.endYear === 'Now',
+      }
+    : emptyInitialValues;
 
   const onSubmit = async (values, { resetForm }) => {
-    const endYearEducation =
-      values.endYear === null || values.endYear === translatedNow || values.endYear === ''
-        ? new Date('9999-01-01').getFullYear()
-        : new Date(values.endYear).getFullYear();
+    const endYearEducation = values.isCurrentDate ? '9999' : new Date(values.endYear).getFullYear();
 
     try {
-      await createEducation({
-        userId: currentUser.data.id,
-        payload: { ...values, endYear: endYearEducation },
-      }).unwrap();
+      if (isEditMode) {
+        await updateEducation({
+          id: modalData.id,
+          payload: {
+            type: values.type,
+            name: values.name,
+            description: values.description,
+            startYear: values.startYear,
+            endYear: endYearEducation,
+          },
+        }).unwrap();
 
-      enqueueSnackbar(t('modalNotifyText.education.create.success'), { variant: 'success' });
-
+        enqueueSnackbar(t('modalNotifyText.education.edit.success'), {
+          variant: 'success',
+          anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+        });
+      } else {
+        await createEducation({
+          userId: currentUser.data.id,
+          payload: { ...values, endYear: endYearEducation },
+        }).unwrap();
+        enqueueSnackbar(t('modalNotifyText.education.create.success'), { variant: 'success' });
+      }
       resetForm();
-      handleClose();
+      closeModal(isEditMode ? modalNames.educationEditModal : modalNames.educationModal);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.education.create.error'), { variant: 'error' });
+      const errorMsg = isEditMode
+        ? t('modalNotifyText.education.edit.error')
+        : t('modalNotifyText.education.create.error');
+      enqueueSnackbar(errorMsg, { variant: 'error' });
     }
   };
+
   const formik = useFormik({
-    initialValues: emptyInitialValues,
+    initialValues,
     validationSchema: EducationModalSchema,
     onSubmit,
     enableReinitialize: true,
   });
+
+  const handleCheckboxChange = (e) => {
+    const isChecked = e.target.checked;
+    formik.setFieldValue('isCurrentDate', isChecked);
+    formik.setFieldValue('endYear', isChecked ? '' : formik.values.endYear || '');
+    formik.setFieldTouched('isCurrentDate', true, true);
+  };
+
+  const isLoading = isEditMode ? isUpdating : isCreating;
 
   return (
     <>
@@ -118,7 +157,6 @@ const EducationModal = () => {
             <Box sx={styles.input100}>
               <FormSelect
                 required
-                s
                 countries={startYears}
                 error={formik.touched.startYear && Boolean(formik.errors.startYear)}
                 handleBlur={formik.handleBlur}
@@ -133,6 +171,7 @@ const EducationModal = () => {
               />
               <FormSelect
                 countries={endYears}
+                disabled={formik.values.isCurrentDate}
                 error={formik.touched.endYear && Boolean(formik.errors.endYear)}
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -140,10 +179,20 @@ const EducationModal = () => {
                 label={t('profile.modal.education.endYear')}
                 name='endYear'
                 sx={styles.input50}
-                value={formik.values.endYear}
+                value={formik.values.isCurrentDate ? '' : formik.values.endYear}
                 variant='outlined'
                 onChange={(value) => formik.setFieldValue('endYear', value)}
               />
+              <Box sx={styles.checkBoxContainer}>
+                <FormCheckbox
+                  changeHandler={handleCheckboxChange}
+                  checked={formik.values.isCurrentDate}
+                  error={formik.touched.isCurrentDate && Boolean(formik.errors.isCurrentDate)}
+                  helperText={formik.touched.isCurrentDate && formik.errors.isCurrentDate}
+                  label={t('profile.modal.education.currentDate')}
+                  name='isCurrentDate'
+                />
+              </Box>
             </Box>
             <Box sx={styles.input100}>
               <TextAreaInput
