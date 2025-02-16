@@ -861,5 +861,13 @@ export const en = {
         requests: 'Requests',
       },
     },
+    interviewRequest: {
+      timeSlot: {
+        status: {
+          available: 'Pending',
+          assigned: 'Scheduled',
+        },
+      },
+    },
   },
 };
