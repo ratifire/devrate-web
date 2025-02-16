@@ -21,6 +21,23 @@ const styles = {
     justifyContent: 'space-between',
     borderBottom: '1px solid',
     borderColor: theme.palette.neutral[400],
+
+    '& span': {
+      cursor: 'pointer',
+      color: theme.palette.action.active,
+      borderBottom: '2px solid ' + theme.palette.action.active,
+      display: 'inline-block',
+      textDecoration: 'none',
+      paddingBottom: '10px',
+      paddingRight: '20px',
+      textTransform: 'none',
+      fontSize: 20,
+      fontWeight: '500',
+      transition: 'color 0.5s ease, border-bottom 0.5s ease',
+      '& + *': {
+        paddingLeft: '20px',
+      },
+    },
   }),
   interviewNavLink: (theme) => ({
     display: 'inline-block',

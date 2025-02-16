@@ -17,6 +17,7 @@ const InterviewHeader = () => {
   const [popoverWidth, setPopoverWidth] = useState(0);
   const { openModal } = useModalController();
   const open = Boolean(createButton);
+  const isActiveSchedule = location.pathname.includes(links.scheduledInterviews);
 
   useEffect(() => {
     if (buttonRef.current) {
@@ -47,14 +48,18 @@ const InterviewHeader = () => {
   return (
     <AppBar component='header' position={'static'} sx={styles.interviewHeader}>
       <Box sx={styles.interviewNavLinksBox}>
-        <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.scheduledInterviews}>
+        <Box
+          component={isActiveSchedule ? 'span' : NavLink}
+          sx={styles.interviewNavLink}
+          to={links.scheduledInterviews}
+        >
           <Box alt='Circle' component='img' src={CircleIcon} sx={styles.greenEllipse} />{' '}
           {t('interviews.navigationLinks.scheduled')}
         </Box>
-        <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.passedInterviews}>
+        <Box component={NavLink} sx={styles.interviewNavLink} to={links.passedInterviews}>
           {t('interviews.navigationLinks.passed')}
         </Box>
-        <Box activeclassname='active' component={NavLink} sx={styles.interviewNavLink} to={links.interviewRequests}>
+        <Box component={NavLink} sx={styles.interviewNavLink} to={links.interviewRequests}>
           {t('interviews.navigationLinks.requests')}
         </Box>
       </Box>
