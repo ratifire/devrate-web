@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
 import SideBarEvent from '../InterviewSideBarEvent';
 import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding';
@@ -15,10 +15,10 @@ const SideBar = ({ interviews, refHandler, passedInterview }) => {
 
   useScrollPadding(containerRef, '9px');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!heightRef.current) {
       const parentNode = document.querySelector('.ScheduledInterviewsPage');
-      heightRef.current = parentNode?.clientHeight;
+      heightRef.current = parentNode?.clientHeight || 1068;
     }
   }, []);
 
