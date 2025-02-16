@@ -6,7 +6,7 @@ export const styles = {
     gridGap: theme.spacing(4),
     height: '100%',
     ' > div': {
-      borderRadius: 2,
+      borderRadius: theme.spacing(2),
       boxShadow: 'none',
       backgroundImage: 'none',
     },

@@ -21,6 +21,7 @@ export const styles = {
     height: '100%',
     boxShadow: 'none',
     flex: ' 0 0 354px',
+    borderRadius: theme.spacing(2),
     '@media (min-width: 1272px)': {
       flex: '0 0 354px',
     },

@@ -10,7 +10,7 @@ import {
   SkillsSkeleton,
   StatisticsSkeleton,
   UserCardSkeleton,
-} from '../../../components/UI/Skeleton/index.js';
+} from '../../../components/UI/Skeleton';
 import { formatToLocalDate } from '../../../utils/helpers/formatToLocalDate.js';
 import { styles } from './SingleIPassednterviewPage.styles.js';
 
@@ -21,7 +21,7 @@ const InterviewHardSkills = lazy(
 const InterviewSoftSkills = lazy(
   () => import('../../../components/PageComponents/InterviewsComponents/InterviewSoftSkills')
 );
-const Statistics = lazy(() => import('../PassedInterviewsPage/Statistics'));
+const Statistics = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewStatistics'));
 const InterviewFeedback = lazy(
   () => import('../../../components/PageComponents/InterviewsComponents/InterviewFeedback')
 );

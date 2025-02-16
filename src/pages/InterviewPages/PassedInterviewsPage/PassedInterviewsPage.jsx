@@ -1,5 +1,5 @@
 import { Box, Container, Paper } from '@mui/material';
-import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState, useLayoutEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { useGetAllPassedInterviewsQuery } from '../../../redux/interviews/passedInterviewsApiSlice.js';
@@ -52,12 +52,16 @@ const PassedInterviewsPage = () => {
     };
   }, [lastEventRef, passedInterviews?.content, handleObserver]);
 
-  useEffect(() => {
-    if (passedInterviews?.content?.length > 0) {
+  const redirectToFirstInterview = useCallback(() => {
+    if (!isLoading && passedInterviews?.content?.length > 0) {
       const firstInterviewId = passedInterviews.content[0].id;
       navigate(`${navigationLinks.passedInterviews}/${firstInterviewId}`, { replace: true });
     }
-  }, [passedInterviews, navigate]);
+  }, [isLoading, passedInterviews, navigate]);
+
+  useLayoutEffect(() => {
+    redirectToFirstInterview();
+  }, [redirectToFirstInterview]);
 
   return (
     <Container maxWidth='xl' sx={styles.container}>

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills/index.js';
+import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
 
 const InterviewSoftSkills = ({ softSkills, averageSoftSkillsMark }) => {
   return (

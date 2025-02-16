@@ -1,12 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { LevelGauge } from '../../../../components/UI/Chart';
-import { styles } from './Statistics.styles';
+import { LevelGauge } from '../../../UI/Chart/index.js';
+import { styles } from './InterviewStatistics.styles.js';
 import useThemeHardSkillsChart from './useThemeHardSkillsChart.js';
 import useThemeSoftSkillsChart from './useThemeSoftSkillsChart.js';
 import useThemeAverageSkillsChart from './useThemeAverageSkillsChart.js';
 
-const Statistics = ({ hardSkillMark, softSkillMark }) => {
+const InterviewStatistics = ({ hardSkillMark, softSkillMark }) => {
   const PERCENT_MULTIPLIER = 10;
   const SKILLS_NUMBER = 2;
   const softSkillMarkPercent = softSkillMark * PERCENT_MULTIPLIER;
@@ -87,14 +87,14 @@ const Statistics = ({ hardSkillMark, softSkillMark }) => {
     </Box>
   );
 };
-export default Statistics;
+export default InterviewStatistics;
 
-Statistics.propTypes = {
+InterviewStatistics.propTypes = {
   hardSkillMark: PropTypes.number.isRequired,
   softSkillMark: PropTypes.number.isRequired,
 };
 
-Statistics.defaultProps = {
+InterviewStatistics.defaultProps = {
   hardSkillMark: 0,
   softSkillMark: 0,
 };
