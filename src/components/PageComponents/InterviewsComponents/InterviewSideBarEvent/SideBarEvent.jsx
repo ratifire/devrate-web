@@ -16,10 +16,12 @@ const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, se
   const { interviewId } = useParams();
   const paramsId = selectedPaperId || interviewId;
 
-  const handleClick = () => {
-    navigate(`${passedInterview ? navigationLinks.passedInterviews : navigationLinks.scheduledInterviews}/${id}`, {
-      state: { event },
-    });
+  const handleClick = (e) => {
+    if (e.target.tagName !== 'A') {
+      navigate(`${passedInterview ? navigationLinks.passedInterviews : navigationLinks.scheduledInterviews}/${id}`, {
+        state: { event },
+      });
+    }
   };
 
   return (
