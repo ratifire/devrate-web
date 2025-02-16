@@ -1,34 +1,34 @@
 import { Box, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetUserAllSpecializationQuery } from '../../../redux/specialization/specializationApiSlice.js';
+import {
+  useGetSpecializationByUserIdQuery,
+  // useGetUserAllSpecializationQuery,
+} from '../../../redux/specialization/specializationApiSlice.js';
 import { selectCurrentUser } from '../../../redux/auth/authSlice.js';
-import Respondent from './Respondent/Respondent.jsx';
+// import { useGetInterviewRequestByMasteryIdQuery } from '../../../redux/services/interviewRequestApiSlice.js';
+import Participant from './Participant';
 import { styles } from './InterviewRequest.styles.js';
-import Interviewer from './Interviwer/index.js';
+import { respondent } from './mockData.js';
 
 const InterviewRequest = () => {
   const { data: info } = useSelector(selectCurrentUser);
   const { id } = info;
-  const { data: userAllSpecializations } = useGetUserAllSpecializationQuery(id, { skip: !id });
-  const [specCurrent, setSpecCurrent] = useState('');
+  const { data: userAllSpecializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
+  const [mastery, setMastery] = useState('');
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (userAllSpecializations && userAllSpecializations.length > 0) {
-      const mainSpecialization = userAllSpecializations.find((item) => item.mainSpecialization);
-      if (mainSpecialization) {
-        setSpecCurrent(mainSpecialization.specializationName);
-      }
-    }
-  }, [userAllSpecializations]);
+  // const { data: roles } = useGetInterviewRequestByMasteryIdQuery(mastery.id);
+  // console.log(roles, 'roles');
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setSpecCurrent(value);
+  const candidate = respondent.find((item) => item.role === 'CANDIDATE');
+  const interviewer = respondent.find((item) => item.role === 'INTERVIEWER');
+
+  const handleChange = ({ target: { value } }) => {
+    setMastery(value);
   };
 
   const handleOpen = () => {
@@ -60,15 +60,15 @@ const InterviewRequest = () => {
               label={'Specializations'}
               open={open}
               sx={styles.select}
-              value={specCurrent}
+              value={mastery}
               variant='outlined'
               onChange={handleChange}
               onClose={handleClose}
               onOpen={handleOpen}
             >
               {userAllSpecializations?.map((item) => (
-                <MenuItem key={item.specializationName} sx={styles.selectItem} value={item.specializationName}>
-                  {item.specializationName}
+                <MenuItem key={item.id} sx={styles.selectItem} value={item}>
+                  {item.name}
                 </MenuItem>
               ))}
             </Select>
@@ -76,15 +76,8 @@ const InterviewRequest = () => {
         </Box>
       </Box>
 
-      <Box>
-        {' '}
-        <Respondent />
-      </Box>
-
-      <Box>
-        {' '}
-        <Interviewer />
-      </Box>
+      <Box>{mastery && <Participant data={candidate} />}</Box>
+      <Box>{mastery && <Participant data={interviewer} />}</Box>
     </Box>
   );
 };
