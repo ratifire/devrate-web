@@ -862,6 +862,10 @@ export const en = {
       },
     },
     interviewRequest: {
+      role: {
+        candidate: 'Respondent',
+        interviewer: 'Interviewer',
+      },
       timeSlot: {
         status: {
           available: 'Pending',
