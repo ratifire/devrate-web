@@ -19,7 +19,7 @@ const options = {
 
 const ScheduledInterviewsPage = () => {
   const [page, setPage] = useState(1);
-  const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 5 });
+  const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 6 });
   const [lastEventRef, setLastEventRef] = useState(null);
 
   const refHandler = (el) => {

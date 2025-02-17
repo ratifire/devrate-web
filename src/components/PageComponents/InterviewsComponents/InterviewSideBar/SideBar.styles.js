@@ -13,6 +13,7 @@ export const styles = {
   }),
   scrollContainer: (theme, heightParent) => ({
     paddingRight: '9px',
+    marginRight: '-17px',
     maxHeight: `calc(${heightParent}px - 80px)`,
     height: '100%',
     overflowY: 'auto',

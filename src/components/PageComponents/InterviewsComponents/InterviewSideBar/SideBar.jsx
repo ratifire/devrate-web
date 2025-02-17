@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
 import SideBarEvent from '../InterviewSideBarEvent';
 import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding';
-import useGetHeightElement from '../../../../utils/hooks/useGetHeightElement.js';
+import useGetHeightElement from '../../../../utils/hooks/useGetHeightElement';
 import { styles } from './SideBar.styles';
 
 const SideBar = ({ interviews, refHandler, passedInterview }) => {
