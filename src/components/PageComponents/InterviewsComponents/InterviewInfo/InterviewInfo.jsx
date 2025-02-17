@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useParams } from 'react-router';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useGetPassedInterviewByIdQuery } from '../../../../redux/interviews/passedInterviewsApiSlice.js';
 import { formatToLocalDate } from '../../../../utils/helpers/formatToLocalDate.js';
 import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice.js';
@@ -9,6 +10,7 @@ import { convertMiliInYears } from '../../../../utils/helpers/converMiliInYears.
 import { styles } from './InterviewInfo.styles.js';
 
 const InterviewInfo = () => {
+  const { t } = useTranslation();
   const { interviewId } = useParams();
   const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId });
 
@@ -32,10 +34,10 @@ const InterviewInfo = () => {
     <Box sx={styles.interviewInfoWrapper}>
       <Box sx={styles.interviewInfoTitleWrapper}>
         <Typography sx={styles.interviewInfoTitle} variant='h6'>
-          Interview info
+          {t('interviews.passedInterviews.interviewInfoTitle')}
         </Typography>
         <Typography sx={styles.yearsAgo} variant='caption1'>
-          {yearsAgo} years ago
+          {yearsAgo} {t('interviews.passedInterviews.interviewInfoText')}
         </Typography>
       </Box>
       <Typography sx={styles.date} variant='caption1'>
@@ -50,11 +52,11 @@ const InterviewInfo = () => {
         </Typography>
       </Box>
       <Typography sx={styles.role} variant='body1'>
-        Your role: {role}
+        {t('interviews.passedInterviews.interviewInfoRole')}: {role}
       </Typography>
       <Box sx={styles.hostWrapper}>
         <Typography sx={styles.host} variant='body1'>
-          Host:
+          {t('interviews.passedInterviews.interviewInfoHost')}:
         </Typography>
         <Typography sx={styles.hostName} variant='body1'>
           {fullName}

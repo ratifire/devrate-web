@@ -1,6 +1,7 @@
 import { useParams } from 'react-router';
 import { Box, Paper, Typography } from '@mui/material';
 import { lazy, memo, Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useGetPassedInterviewByIdQuery } from '../../../redux/interviews/passedInterviewsApiSlice.js';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice.js';
 import { lvlMastery } from '../../../utils/constants/masteryLvl.js';
@@ -37,6 +38,7 @@ const MemoizedStatistics = memo(Statistics);
 const MemoizedInterviewFeedback = memo(InterviewFeedback);
 const MemoizedUserCard = memo(UserCard);
 const SinglePassedInterviewPage = () => {
+  const { t } = useTranslation();
   const { interviewId } = useParams();
   const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId });
   const attendeeId = interviewData?.attendeeId ?? '';
@@ -93,7 +95,7 @@ const SinglePassedInterviewPage = () => {
       </Paper>
       <Paper sx={styles.interviewersAssessment}>
         <Typography sx={styles.interviewersAssessmentTitle} variant='h6'>
-          Interviewer&#39;s assessment
+          {t('interviews.passedInterviews.interviewersAssessmentTitle')}
         </Typography>
         <Box sx={styles.skillsWrapper}>
           <Paper sx={styles.hardSkills}>

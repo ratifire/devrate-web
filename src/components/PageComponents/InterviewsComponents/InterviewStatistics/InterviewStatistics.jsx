@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { LevelGauge } from '../../../UI/Chart/index.js';
 import { styles } from './InterviewStatistics.styles.js';
 import useThemeHardSkillsChart from './useThemeHardSkillsChart.js';
@@ -7,6 +8,7 @@ import useThemeSoftSkillsChart from './useThemeSoftSkillsChart.js';
 import useThemeAverageSkillsChart from './useThemeAverageSkillsChart.js';
 
 const InterviewStatistics = ({ hardSkillMark, softSkillMark }) => {
+  const { t } = useTranslation();
   const PERCENT_MULTIPLIER = 10;
   const SKILLS_NUMBER = 2;
   const softSkillMarkPercent = softSkillMark * PERCENT_MULTIPLIER;
@@ -19,12 +21,12 @@ const InterviewStatistics = ({ hardSkillMark, softSkillMark }) => {
   return (
     <Box sx={styles.statisticsWrapper}>
       <Typography sx={styles.statisticsTitle} variant='h6'>
-        Statistics
+        {t('interviews.passedInterviews.interviewStatisticsTitle')}
       </Typography>
       <Box sx={styles.statisticsCharts}>
         <Box sx={styles.skillContainer}>
           <Typography sx={styles.skillTitle} variant='subtitle3'>
-            Soft Skills
+            {t('interviews.passedInterviews.interviewStatisticsSoftSkills')}
           </Typography>
           <LevelGauge
             colorGrad='gradient-green'
@@ -44,7 +46,7 @@ const InterviewStatistics = ({ hardSkillMark, softSkillMark }) => {
         </Box>
         <Box sx={styles.skillContainer}>
           <Typography sx={styles.skillTitle} variant='subtitle3'>
-            Hard Skills
+            {t('interviews.passedInterviews.interviewStatisticsHardSkills')}
           </Typography>
           <LevelGauge
             colorGrad='gradient-red'
@@ -64,7 +66,7 @@ const InterviewStatistics = ({ hardSkillMark, softSkillMark }) => {
         </Box>
         <Box sx={styles.skillContainer}>
           <Typography sx={styles.skillTitle} variant='subtitle3'>
-            Over All
+            {t('interviews.passedInterviews.interviewStatisticsOverall')}
           </Typography>
           <LevelGauge
             colorGrad='gradient-purple'
