@@ -10,6 +10,7 @@ export const respondent = [
       ' Ціль — підготуватися до реальних співбесід.',
     availableDates: [
       '2025-02-15T11:45:23.913Z',
+      '2025-02-15T13:45:23.913Z',
       '2025-02-15T12:45:23.913Z',
       '2025-02-15T14:45:23.913Z',
       '2025-02-16T16:45:23.913Z',
@@ -41,14 +42,25 @@ export const respondent = [
       '2025-02-17T21:45:23.913Z',
       '2025-02-17T09:45:23.913Z',
     ],
-    assignedDates: ['2025-02-15T13:45:23.913Z', '2025-02-16T15:45:23.913Z', '2025-02-16T10:45:23.913Z'],
+    assignedDates: [
+      '2025-02-15T13:45:23.913Z',
+      '2025-02-16T15:45:23.913Z',
+      '2025-02-16T10:45:23.913Z',
+      '2025-02-17T09:45:23.913Z',
+    ],
   },
 ];
 
 import { DateTime } from 'luxon';
 
 export const getSortedDatesWithLabel = (respondent) => {
-  const availableDatesWithLabel = respondent.availableDates.map((date) => ({
+  const filteredAvailableDates = respondent.availableDates.filter((availableDate) => {
+    return !respondent.assignedDates.some((assignedDate) => {
+      return DateTime.fromISO(availableDate).equals(DateTime.fromISO(assignedDate));
+    });
+  });
+
+  const availableDatesWithLabel = filteredAvailableDates.map((date) => ({
     date: DateTime.fromISO(date),
     type: 'available',
   }));
