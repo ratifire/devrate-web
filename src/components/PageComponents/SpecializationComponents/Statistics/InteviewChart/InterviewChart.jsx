@@ -10,10 +10,10 @@ import {
   createTenMonthsInterviewData,
   getCurrentAndLastMonths,
   useHandleChange,
-  useTooltip,
 } from '../utils';
 import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
 import InterviewChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/InterviewChartSkeleton';
+import useTooltipColorChart from '../../../../../utils/hooks/useTooltipColorChart.js';
 import { styles } from './InterviewChart.styles';
 import useThemeInterviewChart from './useThemeInterviewChart';
 
@@ -24,7 +24,7 @@ const InterviewChart = () => {
   const { t } = useTranslation();
   const dataMonths = useMemo(() => createTenMonthsInterviewData({ t, data }), [data]);
   const dataDays = useMemo(() => createTenDaysInterviewData({ data }), [data]);
-  const { itemStyle, contentStyle } = useTooltip();
+  const { itemStyle, contentStyle } = useTooltipColorChart();
   const { conductedGrad1, conductedGrad2, conductedGrad3, passedGrad1, passedGrad2, passedGrad3 } =
     useThemeInterviewChart();
 

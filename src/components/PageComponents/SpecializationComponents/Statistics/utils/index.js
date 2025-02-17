@@ -7,7 +7,6 @@ import getCurrentAndLastMonths from './helpers/getCurrentAndLastMonths';
 import getLevel from './helpers/getLevel';
 import useGetHistoryData from './hooks/useGetHistoryData';
 import useHandleChange from './hooks/useHandleChange';
-import useTooltip from './hooks/useTooltip';
 import roundData from './helpers/roundData';
 
 export {
@@ -20,6 +19,5 @@ export {
   getLevel,
   useGetHistoryData,
   useHandleChange,
-  useTooltip,
   roundData,
 };

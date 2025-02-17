@@ -13,7 +13,7 @@ export const updateAllSpecializations = (specializations) => {
   const allSkillsSpecialization = {
     // це залишається під питанням
     // specializationName: "profile.experience.skills.allSkills",
-    specializationName: 'All Skills',
+    specializationName: 'All SkillsParticipant',
     masteryName: '',
     hardSkills: Array.from(skillsMap.values()),
     mainSpecialization: false,

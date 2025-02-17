@@ -14,15 +14,10 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     gridGap: theme.spacing(4),
-    ' > div': {
-      borderRadius: 2,
-      backgroundColor: theme.palette.pagesSections.backgroundColor,
-      backgroundImage: 'none',
-      boxShadow: 'none',
-    },
-    height: 'calc(100vh - 100px)',
+    minHeight: 'calc(100vh - 100px)',
   }),
-  interviewSideBar: {
+  box: (theme) => ({
+    height: '100%',
     flex: ' 0 0 354px',
     '@media (min-width: 1272px)': {
       flex: '0 0 354px',
@@ -30,5 +25,12 @@ export const styles = {
     '@media (min-width: 1920px)': {
       flex: '0 0 354px',
     },
-  },
+    ' > div': {
+      borderRadius: 2,
+      backgroundColor: theme.palette.pagesSections.backgroundColor,
+      backgroundImage: 'none',
+      boxShadow: 'none',
+      height: '100%',
+    },
+  }),
 };

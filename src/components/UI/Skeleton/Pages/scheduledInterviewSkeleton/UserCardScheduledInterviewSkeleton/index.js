@@ -1,0 +1,3 @@
+import UserCardScheduledInterviewSkeleton from './UserCardScheduledInterviewSkeleton';
+
+export default UserCardScheduledInterviewSkeleton;
