@@ -13,7 +13,7 @@ const ItemSkill = ({ name, value, grows }) => {
     <>
       <Box sx={styles.skillContainer}>
         <Box sx={styles.iconWrapper}>
-          {icon}
+          {grows !== undefined && icon}
           <CustomTooltip title={name} variant='subtitle2'>
             {name}
           </CustomTooltip>

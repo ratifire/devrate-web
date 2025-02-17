@@ -1,16 +1,16 @@
 import { gaugeClasses } from '@mui/x-charts';
 
 export const styles = {
-  gauge: {
+  gauge: ({ colorGrad, fz, transformX, height }) => ({
     padding: 0,
-    height: '150px',
+    height: `${height}px`,
     '.MuiGauge-valueArc': {
-      fill: 'url(#gradient)',
+      fill: `url(#${colorGrad})`,
       strokeWidth: 12,
     },
     [`& .${gaugeClasses.valueText}`]: {
-      fontSize: 48,
-      transform: 'translate(0px, -30px)',
+      fontSize: `${fz}px`,
+      transform: `translate(0px, ${transformX}px)`,
     },
-  },
+  }),
 };

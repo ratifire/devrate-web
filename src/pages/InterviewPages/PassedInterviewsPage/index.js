@@ -1,3 +1,3 @@
-import PassedInterviewsPage from './PassedInterviewsPage';
+import PassedInterviewsPageStyles from './PassedInterviewsPage.jsx';
 
-export default PassedInterviewsPage;
+export default PassedInterviewsPageStyles;

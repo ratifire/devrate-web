@@ -11,7 +11,6 @@ import { styles } from './SpecializationSkills.styles';
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { t } = useTranslation();
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
-
   const isDisabled = !activeSpecialization && !mainSpecialization;
 
   if (isFetching) {
@@ -26,9 +25,11 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
     <Box sx={styles.wrapper}>
       <Box sx={styles.title}>
         <Typography variant='h6'>{t(title)}</Typography>
-        <IconButton aria-label='Edit user information' disabled={isDisabled} sx={styles.btnIcon} onClick={openModal}>
-          <EditIcon />
-        </IconButton>
+        {openModal && (
+          <IconButton aria-label='Edit user information' disabled={isDisabled} sx={styles.btnIcon} onClick={openModal}>
+            <EditIcon />
+          </IconButton>
+        )}
       </Box>
       <Box sx={styles.skillsContainer}>
         {skills?.map((skill) => (
@@ -49,8 +50,8 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
 };
 
 SpecializationSkills.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
-  isError: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool,
+  isError: PropTypes.bool,
   skills: PropTypes.arrayOf(
     PropTypes.shape({
       averageMark: PropTypes.number.isRequired,
@@ -61,7 +62,7 @@ SpecializationSkills.propTypes = {
     })
   ),
   averageMark: PropTypes.string.isRequired,
-  openModal: PropTypes.func.isRequired,
+  openModal: PropTypes.func,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
 };
