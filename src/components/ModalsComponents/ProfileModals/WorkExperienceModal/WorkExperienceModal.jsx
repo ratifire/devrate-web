@@ -1,12 +1,11 @@
 import { useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
 import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import Responsibility from '../../../UI/Responsibility';
@@ -15,26 +14,26 @@ import { useCreateNewWorkExperienceMutation } from '../../../../redux/services/w
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { addUniqueItem } from '../../../../utils/helpers/ProfileWorkExperience/addUniqueItem.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceModal = () => {
-  const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth.user.data);
   const [responsibilities, setResponsibilities] = useState([]);
   const { t } = useTranslation();
   const [createNewWorkExperience, { isLoading }] = useCreateNewWorkExperienceMutation();
   const { enqueueSnackbar } = useSnackbar();
 
+  const { closeModal } = useModalController();
+
   const selectYears = useMemo(() => generateYearsArray(), []);
-  const handleClose = () => {
-    dispatch(closeModal({ modalType: modalNames.workExperienceModal }));
-  };
 
   const initialValues = {
     position: '',
     companyName: '',
-    description: '',
+    description: [],
     responsibilities: '',
     startYear: '',
     endYear: '',
@@ -50,12 +49,11 @@ const WorkExperienceModal = () => {
         endYear: formattedEndYear,
         responsibilities,
       };
-
       await createNewWorkExperience({ userId: id, data }).unwrap();
       enqueueSnackbar(t('modalNotifyText.workExperience.create.success'), { variant: 'success' });
       setResponsibilities([]);
       resetForm();
-      handleClose();
+      closeModal(modalNames.workExperienceModal);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.workExperience.create.error'), { variant: 'error' });
@@ -70,8 +68,15 @@ const WorkExperienceModal = () => {
   });
 
   const createResponsibility = (newResponsibility) => {
-    if (newResponsibility.length < 2 || newResponsibility.length > 50) return;
-    setResponsibilities([...responsibilities, newResponsibility]);
+    const updatedResponsibilities = addUniqueItem(responsibilities, newResponsibility);
+
+    if (updatedResponsibilities.length === responsibilities.length) {
+      enqueueSnackbar(t('modalNotifyText.workExperience.create.duplicateResponsibility'), { variant: 'warning' });
+      formik.setFieldValue('responsibilities', '');
+      return;
+    }
+
+    setResponsibilities(updatedResponsibilities);
     formik.setFieldValue('responsibilities', '');
   };
 
@@ -209,7 +214,7 @@ const WorkExperienceModal = () => {
             )}
           </Box>
           <ButtonDef
-            disabled={!formik.isValid || formik.isSubmitting || isLoading}
+            disabled={!formik.isValid || formik.isSubmitting || isLoading || responsibilities.length === 0}
             label={t('profile.modal.btn')}
             loading={isLoading}
             sx={styles.workExperienceBtn}

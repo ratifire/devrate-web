@@ -391,6 +391,7 @@ export const uk = {
           name: 'Навчальний заклад',
           startYear: 'Рік початку',
           endYear: 'Рік закінчення',
+          currentDate: 'На даний момент вчуся у цьому закладі',
           speciality_long: 'Спеціальність занадто довга',
           speciality_short: 'Спеціальність занадто коротка',
           speciality_placeholder: 'Облік та аудит',
@@ -684,6 +685,15 @@ export const uk = {
         scheduled: 'Заплановані',
         passed: 'Пройдені',
         requests: 'Запити',
+      },
+      sideBar: {
+        title: 'Інтерв’ю',
+        event: {
+          role: 'Роль',
+          host: 'Хост',
+          statusInProcess: 'В процесі',
+          statusAwaitingFeedback: 'Очікується відгук',
+        },
       },
     },
   },

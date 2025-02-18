@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Typography } from '@mui/material';
@@ -7,7 +7,6 @@ import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useCreateInterviewRequestMutation,
   useGetInterviewRequestQuery,
@@ -17,6 +16,8 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import { getUserUTC } from '../../../../utils/helpers';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './ScheduleInterviewModal.styles';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
 import RenderTabs from './components/TabsRender';
@@ -24,13 +25,14 @@ import RenderTimeSlots from './components/RenderTimeSlots';
 import WeekNavigation from './components/WeekNavigation';
 
 const ScheduleInterviewModal = () => {
-  const { role } = useSelector((state) => state.modal.data);
-  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user) || {};
+  const { role } = user;
   const { t } = useTranslation();
   const [checked, setChecked] = useState([]);
   const { masteryId, userId } = useGetMastery();
   const { enqueueSnackbar } = useSnackbar();
   const shouldUpdate = useRef(false);
+  const { closeModal } = useModalController();
 
   const { data: currentDates } = useGetInterviewRequestQuery(
     {
@@ -96,7 +98,7 @@ const ScheduleInterviewModal = () => {
       });
       enqueueSnackbar(t('modalNotifyText.interview.create.success'), { variant: 'success' });
     }
-    dispatch(closeModal());
+    closeModal(modalNames.scheduleInterviewModal);
   };
 
   const formik = useFormik({
