@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const chatSlice = createSlice({
-  name: 'modal',
+  name: 'chat',
   initialState: {
     opponentUserInfo: {
       id: null,
@@ -11,7 +11,7 @@ const chatSlice = createSlice({
     },
     chat: false,
     list: false,
-    message: [],
+    messages: [],
     isConnected: false,
   },
   reducers: {
@@ -39,9 +39,8 @@ const chatSlice = createSlice({
       state.isConnected = false;
     },
     addMessage: (state, action) => {
-      state.message.push(action.payload);
+      state.messages.push(action.payload);
     },
-    sendMessage: (state, action) => {},
   },
 });
 

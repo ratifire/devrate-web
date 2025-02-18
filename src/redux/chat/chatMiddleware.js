@@ -5,6 +5,10 @@ import { addMessage } from './chatSlice.js';
 let client = null;
 
 const chatMiddleware = (store) => (next) => (action) => {
+  // console.log('connectToChat');
+  // if() {
+  //
+  // }
   if (action.type === 'chat/connectToChat') {
     const { userId } = action.payload;
 
@@ -12,7 +16,6 @@ const chatMiddleware = (store) => (next) => (action) => {
     client = new Client({
       webSocketFactory: () => socket,
       onConnect: () => {
-        console.info('client connected');
         client.subscribe(`/topic/messages/${userId}`, (message) => {
           const newMessage = JSON.parse(message.body);
           store.dispatch(addMessage(newMessage));
@@ -27,8 +30,9 @@ const chatMiddleware = (store) => (next) => (action) => {
   }
 
   if (action.type === 'chat/sendMessage') {
-    const { message } = action.payload;
+    const message = action.payload;
     if (client && client.connected) {
+      console.log(client);
       client.publish({
         destination: 'app/chat',
         body: JSON.stringify(message),

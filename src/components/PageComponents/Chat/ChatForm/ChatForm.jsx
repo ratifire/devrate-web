@@ -3,13 +3,11 @@ import { Box, IconButton, TextField, Typography, Link, Fade } from '@mui/materia
 import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import SockJS from 'sockjs-client';
-import { Client } from '@stomp/stompjs';
 import { Link as RouterLink } from 'react-router';
 import { DateTime } from 'luxon';
 import UserAvatar from '../../../UI/UserAvatar';
 import Send from '../../../../assets/icons/send.svg?react';
-import { closeChat } from '../../../../redux/chat/chatSlice';
+import { addMessage, closeChat, connectToChat, disconnectFromChat } from '../../../../redux/chat/chatSlice';
 import { useGetChatHistoryQuery } from '../../../../redux/services/chatApiSlice.js';
 import { useMoveChat, useResizeChat, useResizeTextarea, useScrollChat } from '../hooks';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
@@ -17,13 +15,11 @@ import { styles } from './ChatForm.styles.js';
 import ChatMessage from './ChatMessage';
 
 const ChatForm = () => {
-  const { chat, opponentUserInfo } = useSelector((state) => state.chat);
+  const { chat, opponentUserInfo, messages } = useSelector((state) => state.chat);
   const { id: opponentUserId, firstName, lastName, userPicture } = opponentUserInfo;
   const chatWrapperRef = useRef(null);
   const chatPositionRef = useRef(null);
   const [isScrolledUp, setIsScrolledUp] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
-  const [client, setClient] = useState(null);
 
   // внутрішні хукі
   const { message, setMessage, textFieldRef, handleTextFieldChange } = useResizeTextarea(chatWrapperRef);
@@ -39,50 +35,33 @@ const ChatForm = () => {
   const { id: currentUserId } = info;
   const { data: dataChats } = useGetChatHistoryQuery(opponentUserId, { skip: !opponentUserId });
 
-  const [chatMessages, setChatMessages] = useState(dataChats?.content || []);
-
   useEffect(() => {
     if (dataChats?.content) {
       const normalize = [...dataChats.content].reverse();
-      setChatMessages(normalize);
+      normalize.forEach((item) => dispatch(addMessage(item)));
     }
-  }, [dataChats]);
+  }, [dataChats, dispatch]);
 
-  useEffect(() => {
-    const socket = new SockJS('https://server.skillzzy.com/chat');
-    const newClient = new Client({
-      webSocketFactory: () => socket,
-      onConnect: () => {
-        setIsConnected(true);
-        newClient.subscribe(`/topic/messages/${currentUserId}`, (message) => {
-          const newMessage = JSON.parse(message.body);
-          setChatMessages((prevMessages) => [...prevMessages, newMessage]);
-          if (!isScrolledUp && chatWrapperRef.current) {
-            chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
-          }
-        });
-      },
-    });
-    setClient(newClient);
-    newClient.activate();
-    return () => {
-      if (newClient.connected) newClient.deactivate();
-    };
-  }, [currentUserId]);
+  // useEffect(() => {
+  //   dispatch(connectToChat({ userId: currentUserId }));
+  //   return () => {
+  //     dispatch(disconnectFromChat());
+  //   };
+  // }, [currentUserId, dispatch]);
 
   const handleSubmitMessages = (e) => {
     e.preventDefault();
-    if (!isConnected || !message.trim()) return;
+    if (!message.trim()) return;
 
-    client.publish({
-      destination: '/app/chat',
-      body: JSON.stringify({
+    dispatch({
+      type: 'chat/sendMessage',
+      payload: {
         senderId: currentUserId,
         receiverId: opponentUserId,
         payload: message.trim(),
         status: '',
         dateTime: DateTime.utc().toISO(),
-      }),
+      },
     });
 
     setMessage('');
@@ -93,7 +72,7 @@ const ChatForm = () => {
     if (!isScrolledUp && chatWrapperRef.current) {
       chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
     }
-  }, [chatMessages, isScrolledUp]);
+  }, [messages, isScrolledUp]);
 
   const handleScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
@@ -129,7 +108,7 @@ const ChatForm = () => {
           </Box>
           <Box ref={chatWrapperRef} sx={styles.chatWrapper} onScroll={handleScroll}>
             <div>lorem</div>
-            {chatMessages?.map((item) => (
+            {messages?.map((item) => (
               <Box key={item.dateTime}>
                 <ChatMessage data={item} />
               </Box>
