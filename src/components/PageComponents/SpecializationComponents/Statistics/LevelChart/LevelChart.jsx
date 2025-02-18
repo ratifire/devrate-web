@@ -31,7 +31,7 @@ const LevelChart = () => {
             {t('specialization.statistics.level_chart_title')}
           </Typography>
           <Typography sx={styles.text} variant='subtitle3'>
-            За результатами ми рекомендуємо вам перейти на наступний рівень!
+            {t('specialization.statistics.levelUp')}
           </Typography>
         </Box>
         <IconButton aria-label='level up' sx={styles.levelBtn}>

@@ -1,11 +1,14 @@
 export const styles = {
   container: (theme) => ({
-    paddingY: theme.spacing(4),
-    paddingX: theme.spacing(2),
-    '@media (min-width: 1272px)': {
-      maxWidth: '1536px',
-    },
+    paddingTop: theme.spacing(3),
+    paddingX: theme.spacing(3),
     '@media (min-width: 600px)': {
+      paddingTop: theme.spacing(3),
+      paddingX: theme.spacing(3),
+    },
+    '@media (min-width: 1272px)': {
+      maxWidth: '1920px',
+      paddingTop: theme.spacing(4),
       paddingX: theme.spacing(4),
     },
   }),
@@ -36,6 +39,9 @@ export const styles = {
     gridRow: '2/4',
     gridColumn: '1/5',
     height: '31rem',
+    '@media (min-width: 1536px)': {
+      height: '29.5625rem',
+    },
     '@media (max-width: 991px)': {
       gridColumn: '1/6',
     },
@@ -57,11 +63,14 @@ export const styles = {
       gridRow: '2/6',
       maxHeight: '100%',
     },
+    '@media(min-width: 1536px)': {
+      maxHeight: '48.3125rem',
+    },
   },
   statisticWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: 'auto auto',
+    gridTemplateRows: '317px 390px',
     gridGap: theme.spacing(3),
     padding: '16px 24px 24px',
 
@@ -69,6 +78,9 @@ export const styles = {
       backgroundImage: 'none',
       borderRadius: 2,
       backgroundColor: theme.palette.sliderAssessment.backgroundColor,
+    },
+    '@media(min-width: 1536px)': {
+      gridTemplateRows: '302px 375px',
     },
     '@media(max-width: 991px)': {
       gridTemplateRows: '1/4',
@@ -87,6 +99,7 @@ export const styles = {
       display: 'flex',
       flexWrap: 'wrap',
       transform: 'translateX(24px)',
+      marginTop: '16px',
     },
   },
   level: {

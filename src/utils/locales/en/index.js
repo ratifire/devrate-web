@@ -456,6 +456,7 @@ export const en = {
         interview_chart_days: '10 days',
         interview_chart_months: 'Months',
         skills_assessment_chart_title: 'Average skill assessment',
+        levelUp: 'Based on the results, we recommend that you move to the next level!',
       },
       interviewsChart: {
         conducted: 'Conducted',

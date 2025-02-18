@@ -5,7 +5,6 @@ export const styles = {
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: theme.spacing(3),
-    height: 317,
   }),
   contentContainer: {
     marginBottom: '15px',
