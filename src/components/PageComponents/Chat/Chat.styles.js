@@ -5,7 +5,7 @@ export const styles = {
   },
   btnIcon: (theme) => ({
     borderRadius: 1,
-    color: theme.palette.notifications.badge.fill,
+    color: theme.palette.chat.badge.fill,
   }),
   badge: (theme) => ({
     position: 'relative',
@@ -13,11 +13,11 @@ export const styles = {
       transform: 'none',
       top: 0,
       right: 0,
-      backgroundColor: theme.palette.notifications.badge.backgroundColor,
-      boxShadow: `0 0 2px 0 ${theme.palette.notifications.badge.boxShadow}`,
+      backgroundColor: theme.palette.chat.badge.backgroundColor,
+      boxShadow: `0 0 2px 0 ${theme.palette.chat.badge.boxShadow}`,
     },
     '>svg path': {
-      fill: theme.palette.notifications.badge.fill,
+      fill: theme.palette.chat.badge.fill,
     },
   }),
   position: () => ({

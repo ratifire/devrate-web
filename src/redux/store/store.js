@@ -16,6 +16,7 @@ import activeMasteryReducer from '../specialization/activeMasterySlice';
 import buttonReducer from '../addButton/addButtonSlice';
 import themeSliceReducer from '../theme/themeSlice';
 import updateTabSlice from '../updateTab/updateTabSlice';
+import chatMiddleware from '../chat/chatMiddleware.js';
 
 const authPersistConfig = {
   key: 'auth',
@@ -57,7 +58,9 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(apiSlice.middleware),
+    })
+      .concat(apiSlice.middleware)
+      .concat(chatMiddleware),
   devTools: true,
 });
 

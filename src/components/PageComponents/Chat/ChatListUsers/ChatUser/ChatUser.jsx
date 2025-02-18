@@ -13,7 +13,7 @@ const ChatUser = ({ data }) => {
 
   const { opponentUserId, opponentFirstName, opponentLastName, opponentPicture, lastMessage, lastMessageDate } = data;
 
-  const formattedDate = DateTime.fromISO(lastMessageDate).toFormat('d MMM', { locale: 'uk' });
+  const formattedDate = DateTime.fromISO(lastMessageDate).toFormat('d MMM', { locale: navigator.language });
 
   const handlerOpenChat = () => {
     dispatch(closeList());
@@ -40,7 +40,7 @@ const ChatUser = ({ data }) => {
         <Box sx={styles.text}>
           <Box sx={styles.info}>
             <Typography variant='subtitle2'>{`${opponentFirstName} ${opponentLastName}`}</Typography>
-            <Typography variant='caption3'>{formattedDate}</Typography>
+            <Typography sx={styles.time} variant='caption3'>{formattedDate}</Typography>
           </Box>
           <Typography variant='caption3'>{lastMessage}</Typography>
         </Box>

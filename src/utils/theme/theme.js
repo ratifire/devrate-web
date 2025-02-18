@@ -2,6 +2,7 @@ import { DARK_THEME } from '../constants/Theme/theme';
 import { specializationDark, specializationLight } from './specialization';
 import { scheduleDark, scheduleLight } from './schedule';
 import { interviewDark, interviewLight } from './interview';
+import { chatDark, chatLight } from './chat';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -625,11 +626,13 @@ const getDesignTokens = (mode) => ({
           ...specializationDark,
           ...scheduleDark,
           ...interviewDark,
+          ...chatDark,
         }
       : {
           ...specializationLight,
           ...scheduleLight,
           ...interviewLight,
+          ...chatLight,
           faq: {
             title: '#1D1D1D',
             questions: {

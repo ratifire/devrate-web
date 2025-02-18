@@ -4,7 +4,7 @@ export const styles = {
     transition: 'all .1s linear',
     cursor: 'pointer',
     ':hover': {
-      backgroundColor: '#3E3E40',
+      backgroundColor: theme.palette.chatUser.bg.hover.backgroundColor,
     },
   }),
   wrapper: (theme) => ({
@@ -20,7 +20,7 @@ export const styles = {
     overflow: 'hidden',
     '>span': {
       display: 'block',
-      color: '#FFFFFF',
+      color: theme.palette.chatUser.text.color,
       lineHeight: '20px',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
@@ -34,20 +34,23 @@ export const styles = {
     marginBottom: theme.spacing(1),
     ' > h6': {
       lineHeight: '24px',
-      color: '#FFFFFF',
+      color: theme.palette.chatUser.info.color,
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
       overflow: 'hidden',
       paddingRight: theme.spacing(1),
     },
   }),
+  time: (theme) => ({
+    color: theme.palette.chatUser.time.color,
+  }),
   badge: (theme) => ({
     marginLeft: theme.spacing(2),
     letterSpacing: '0.4px',
     lineHeight: '20px',
     padding: '0 3px',
-    backgroundColor: '#9654F4',
-    color: '#ECECED',
+    backgroundColor: theme.palette.chatUser.badge.backgroundColor,
+    color: theme.palette.chatUser.badge.color,
     borderRadius: '20px',
     display: 'block',
   }),

@@ -870,5 +870,10 @@ export const en = {
         },
       },
     },
+    chat: {
+      search: 'Search',
+      emptyChatLstUsers: 'No chats yet',
+      enterMessages: 'Enter message',
+    },
   },
 };

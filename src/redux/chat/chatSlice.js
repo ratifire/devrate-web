@@ -11,6 +11,8 @@ const chatSlice = createSlice({
     },
     chat: false,
     list: false,
+    message: [],
+    isConnected: false,
   },
   reducers: {
     openList: (state) => {
@@ -30,8 +32,19 @@ const chatSlice = createSlice({
     closeChat: (state) => {
       state.chat = false;
     },
+    connectToChat: (state) => {
+      state.isConnected = true;
+    },
+    disconnectFromChat: (state) => {
+      state.isConnected = false;
+    },
+    addMessage: (state, action) => {
+      state.message.push(action.payload);
+    },
+    sendMessage: (state, action) => {},
   },
 });
 
-export const { openChat, closeChat, openList, closeList } = chatSlice.actions;
+export const { openChat, closeChat, openList, closeList, connectToChat, disconnectFromChat, addMessage } =
+  chatSlice.actions;
 export default chatSlice.reducer;

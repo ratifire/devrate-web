@@ -1,28 +1,29 @@
 export const styles = {
-  container: {
+  container: (theme) => ({
     maxHeight: '100%',
     width: '354px',
     height: '523px',
-    backgroundColor: '#303032',
+    backgroundColor: theme.palette.chatListUsers.container.backgroundColor,
+    boxShadow: theme.palette.chatListUsers.container.boxShadow,
     borderRadius: 2,
-  },
+  }),
   wrapper: {
     display: 'flex',
     alignItems: 'center',
     padding: '16px',
     borderRadius: '8px 8px 0 0',
   },
-  name: {
-    color: '#FFFFFF',
+  name: (theme) => ({
+    color: theme.palette.chatListUsers.name.color,
     fontSize: '14px',
     marginRight: 'auto',
     marginLeft: '8px',
-  },
+  }),
   btnIcon: (theme) => ({
-    color: '#CEB0FA',
+    color: theme.palette.chatListUsers.icon.color,
     borderRadius: 1,
     ':hover': {
-      backgroundColor: theme.palette.iconBtn.btnClose.hoverColor,
+      backgroundColor: theme.palette.chatListUsers.icon.hover.backgroundColor,
     },
     svg: {
       fontSize: '18px',

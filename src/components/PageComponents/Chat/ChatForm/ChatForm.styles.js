@@ -23,33 +23,33 @@ export const styles = {
     width: '100%',
     height: '100%',
   },
-  wrapper: {
+  wrapper: (theme) => ({
     display: 'flex',
     alignItems: 'stretch',
     padding: '13px 16px',
     borderRadius: '4px 4px 0 0',
-    backgroundColor: '#252527',
-  },
+    backgroundColor: theme.palette.chatForm.wrapper.backgroundColor,
+  }),
   wrapperName: {
     width: '100%',
     display: 'flex',
     alignItems: 'center',
     cursor: 'grab',
   },
-  name: {
-    color: '#FFFFFF',
+  name: (theme) => ({
+    color: theme.palette.chatForm.name.color,
     fontSize: '14px',
     marginRight: 'auto',
     marginLeft: '8px',
-  },
+  }),
   btnIcon: (theme) => ({
     width: '44px',
     height: '44px',
     marginTop: '4px',
-    color: '#CEB0FA',
+    color: theme.palette.chatForm.icon.color,
     borderRadius: 1,
     ':hover': {
-      backgroundColor: theme.palette.iconBtn.btnClose.hoverColor,
+      backgroundColor: theme.palette.chatForm.icon.hover.backgroundColor,
     },
     svg: {
       fontSize: '20px',
@@ -60,7 +60,7 @@ export const styles = {
     display: 'block',
     borderRadius: '50%',
   },
-  btnIconScroll: {
+  btnIconScroll: (theme) => ({
     position: 'sticky',
     width: '44px',
     height: '44px',
@@ -68,23 +68,23 @@ export const styles = {
     left: 'auto',
     marginLeft: 'auto',
     zIndex: 10,
-    color: '#FFFFFF',
+    color: theme.palette.chatForm.btnIconScroll.color,
     borderRadius: 1,
-    backgroundColor: '#8133F1',
+    backgroundColor: theme.palette.chatForm.btnIconScroll.backgroundColor,
     transition: 'all .2s ease-in-out',
     ':hover': {
       transform: 'scale(1.05)',
-      backgroundColor: '#444446',
+      backgroundColor: theme.palette.chatForm.btnIconScroll.hover.backgroundColor,
     },
     svg: {
       fontSize: '18px',
     },
-  },
-  chatWrapper: {
+  }),
+  chatWrapper: (theme) => ({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#303032',
+    backgroundColor: theme.palette.chatForm.chatWrapper.backgroundColor,
     padding: '16px 16px 0 16px',
     maxHeight: '100%',
     height: '100%',
@@ -93,22 +93,22 @@ export const styles = {
     '&::-webkit-scrollbar': {
       width: 10,
     },
-    '&::-webkit-scrollbar-track': (theme) => ({
+    '&::-webkit-scrollbar-track': {
       backgroundColor: theme.palette.scroll.scrollWrapp.backgroundColor,
       borderRadius: 0,
-    }),
-    '&::-webkit-scrollbar-thumb': (theme) => ({
+    },
+    '&::-webkit-scrollbar-thumb': {
       borderRadius: 6,
       backgroundColor: theme.palette.scroll.scrollEl.backgroundColor,
-    }),
-  },
-  chatForm: {
-    backgroundColor: '#252527',
+    },
+  }),
+  chatForm: (theme) => ({
+    backgroundColor: theme.palette.chatForm.chatForm.backgroundColor,
     padding: '16px',
     position: 'relative',
-  },
-  textArea: {
-    backgroundColor: '#252527',
+  }),
+  textArea: (theme) => ({
+    backgroundColor: theme.palette.chatForm.textarea.backgroundColor,
     border: 'none',
     minHeight: '40px',
     ' >.MuiOutlinedInput-root': {
@@ -126,7 +126,7 @@ export const styles = {
         backgroundColor: 'transparent',
       },
     },
-  },
+  }),
   btnSend: {
     position: 'absolute',
     top: '24px',

@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Skeleton, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +18,9 @@ const ChatListUsers = () => {
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
 
-  const { data: dataListChats } = useGetChatsQuery();
+  const { data: dataListChats, isLoading } = useGetChatsQuery();
+
+  if (isLoading) return <Skeleton height={523} variant='rounded' width={354} />;
 
   return (
     <Box sx={styles.container}>
@@ -33,7 +35,7 @@ const ChatListUsers = () => {
         <FormInputSearch
           autoComplete='off'
           name='searchListChates'
-          placeholder={t('header.search')}
+          placeholder={t('chat.search')}
           sx={styles.input}
           type='text'
         />
@@ -44,8 +46,7 @@ const ChatListUsers = () => {
             dataListChats.map((item) => <ChatUser key={item.opponentUserId} data={item} />)
           ) : (
             <Typography sx={{ textAlign: 'center', marginTop: 2 }} variant='body1'>
-              {/*{t('chat.noChatsAvailable')}*/}
-              {'немає чатів'}
+              {t('chat.enterMessages')}
             </Typography>
           )}
         </Box>

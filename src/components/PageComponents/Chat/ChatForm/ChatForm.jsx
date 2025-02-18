@@ -105,6 +105,7 @@ const ChatForm = () => {
       setIsScrolledUp(false);
     }
   };
+
   return (
     <Fade in={chat}>
       <Box ref={chatPositionRef} sx={styles.position}>
@@ -127,6 +128,7 @@ const ChatForm = () => {
             </IconButton>
           </Box>
           <Box ref={chatWrapperRef} sx={styles.chatWrapper} onScroll={handleScroll}>
+            <div>lorem</div>
             {chatMessages?.map((item) => (
               <Box key={item.dateTime}>
                 <ChatMessage data={item} />
