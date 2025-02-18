@@ -6,13 +6,13 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
+import { setActiveMastery } from '@redux/slices/specialization/activeMasterySlice.js';
 import {
   useGetSpecializationByUserIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
-} from '../../../../redux/specialization/specializationApiSlice';
-import { setActiveSpecialization, setMainSpecializations } from '../../../../redux/specialization/specializationSlice';
+} from '@redux/api/slices/specialization/specializationApiSlice';
+import { setActiveSpecialization, setMainSpecializations } from '@redux/slices/specialization/specializationSlice.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import CustomTooltip from '../../../UI/CustomTooltip';
 import { ErrorComponent } from '../../../UI/Exceptions';

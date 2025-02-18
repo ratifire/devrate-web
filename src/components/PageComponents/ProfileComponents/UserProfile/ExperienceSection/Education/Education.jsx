@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useGetEducationByUserIdQuery } from '../../../../../../redux/services/educationApiSlice';
+import { useGetEducationByUserIdQuery } from '@redux/api/slices/educationApiSlice.js';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
 import { iconsEducation } from '../../../../../../utils/constants/Experience/iconsExperience';

@@ -1,8 +1,8 @@
 import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
+import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
-import { useGetAllScheduledInterviewsQuery } from '../../../redux/interviews/scheduledInterviewsApiSlice.js';
 import { styles } from './ScheduledInterviewsPage.styles.js';
 
 const SideBar = lazy(

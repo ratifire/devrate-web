@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useCallback, useRef } from 'react';
 import { useSearchParams } from 'react-router';
-import { closeModal, openModal } from '../../redux/modal/modalSlice.js';
+import { closeModal, openModal } from '@redux/slices/modal/modalSlice.js';
+import { setStep } from '@redux/slices/modal/modalStepSlice.js';
 import { modalNames } from '../constants/modalNames.js';
-import { setStep } from '../../redux/modal/modalStepSlice.js';
 
 export function useModalController() {
   const [searchParams, setSearchParams] = useSearchParams();

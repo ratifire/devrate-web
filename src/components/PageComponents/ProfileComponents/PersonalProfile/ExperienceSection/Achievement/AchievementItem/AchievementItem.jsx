@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { useDeleteAchievementMutation } from '../../../../../../../redux/services/achievementsApiSlice.js';
+import { useDeleteAchievementMutation } from '@redux/api/slices/achievementsApiSlice.js';
 import DropdownMenu from '../../DropdownMenu';
 import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
 import { useModalController } from '../../../../../../../utils/hooks/useModalController.js';

@@ -4,15 +4,12 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
 import _ from 'lodash';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '@redux/api/slices/user/personal/personalApiSlice';
+import { useGetCountryListQuery } from '@redux/api/slices/countryList/countryApiSlice';
 import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
 import { StepPersonalSchema } from '../../../../../utils/validationSchemas/index';
-import {
-  useGetPersonalUserQuery,
-  usePutPersonalUserMutation,
-} from '../../../../../redux/user/personal/personalApiSlice';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { useGetCountryListQuery } from '../../../../../redux/countryList/countryApiSlice';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
 import { StepPersonalSkeleton } from '../../../../UI/Skeleton';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { styles } from './StepPersonal.styles';

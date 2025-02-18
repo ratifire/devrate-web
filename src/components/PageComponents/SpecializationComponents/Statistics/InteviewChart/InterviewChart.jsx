@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { useGetInterviewSummariesStatisticQuery } from '../../../../../redux/chart/chartApiSlice';
+import { useGetInterviewSummariesStatisticQuery } from '@redux/api/slices/chart/chartApiSlice';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import {
   createTenDaysInterviewData,

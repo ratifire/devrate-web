@@ -3,12 +3,12 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import {
   useDeleteAvatarUserMutation,
   useGetAvatarUserQuery,
   usePostAvatarUserMutation,
-} from '../../../../../redux/user/avatar/avatarApiSlice';
+} from '@redux/api/slices/user/avatar/avatarApiSlice';
 import { StepAvatarSchema } from '../../../../../utils/validationSchemas/index';
 import LoadImages from '../../../../UI/LoadImages';
 import { ErrorComponent } from '../../../../UI/Exceptions';

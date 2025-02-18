@@ -8,7 +8,7 @@ import {
   useAddSkillToMasteryMutation,
   useDeleteSkillByIdMutation,
   useGetHardSkillsByMasteryIdQuery,
-} from '../../../../redux/specialization/specializationApiSlice';
+} from '@redux/api/slices/specialization/specializationApiSlice';
 import MAX_SKILLS from '../../../../utils/constants/Specialization/maxSkills';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import useMergeState from '../../../../utils/hooks/useMergeState';

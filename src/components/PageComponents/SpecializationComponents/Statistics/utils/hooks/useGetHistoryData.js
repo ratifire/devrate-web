@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { useGetMasteriesHistoryStatisticQuery } from '../../../../../../redux/chart/chartApiSlice';
-import { useGetMasteriesBySpecializationIdQuery } from '../../../../../../redux/specialization/specializationApiSlice';
+import { useGetMasteriesHistoryStatisticQuery } from '@redux/api/slices/chart/chartApiSlice';
+import { useGetMasteriesBySpecializationIdQuery } from '@redux/api/slices/specialization/specializationApiSlice';
 import { useGetSpecializationId } from '../../../../../../utils/hooks/specialization';
 
 const useGetHistoryData = ({ from, to }) => {

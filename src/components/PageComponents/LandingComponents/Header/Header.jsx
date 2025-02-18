@@ -3,11 +3,11 @@ import { AppBar, Box, Container, Divider, Drawer, IconButton, Link, Toolbar } fr
 import MenuIcon from '@mui/icons-material/Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router';
+import { openModal } from '@redux/slices/modal/modalSlice';
 import LinkList from '../../../UI/LinkList';
 import navLinks from '../../../../utils/constants/navLinks';
 import Logo from '../../../UI/Logo';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { openModal } from '../../../../redux/modal/modalSlice';
 import navigationsLinks from '../../../../router/links';
 import styles from './Header.styles';
 

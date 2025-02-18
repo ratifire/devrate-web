@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 import { Box } from '@mui/material';
-import { useGetScheduledInterviewByIdQuery } from '../../../redux/interviews/scheduledInterviewsApiSlice.js';
+import { useGetScheduledInterviewByIdQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import { styles } from './SingleScheduledInterviewPage.styles.js';
 
 const SingleScheduledInterviewPage = () => {

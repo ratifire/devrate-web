@@ -3,10 +3,7 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import {
-  useGetUserContactsQuery,
-  usePostContactsUserMutation,
-} from '../../../../../redux/user/contacts/contactsApiSlice';
+import { useGetUserContactsQuery, usePostContactsUserMutation } from '@redux/api/slices/user/contacts/contactsApiSlice';
 import { StepContactsSchema } from '../../../../../utils/validationSchemas/index';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';

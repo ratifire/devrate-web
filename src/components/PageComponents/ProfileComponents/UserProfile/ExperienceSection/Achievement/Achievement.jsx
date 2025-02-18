@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useFetchAchievementsQuery } from '../../../../../../redux/services/achievementsApiSlice';
+import { useFetchAchievementsQuery } from '@redux/api/slices/achievementsApiSlice.js';
 import { iconsAchievement } from '../../../../../../utils/constants/Experience/iconsExperience';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';

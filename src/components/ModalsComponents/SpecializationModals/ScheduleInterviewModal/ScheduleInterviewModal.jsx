@@ -11,7 +11,7 @@ import {
   useCreateInterviewRequestMutation,
   useGetInterviewRequestQuery,
   useUpdateInterviewRequestMutation,
-} from '../../../../redux/specialization/specializationApiSlice';
+} from '@redux/api/slices/specialization/specializationApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { getDatesInWeek } from '../../../../utils/helpers/getWeekDates';
 import { useGetMastery } from '../../../../utils/hooks/specialization';

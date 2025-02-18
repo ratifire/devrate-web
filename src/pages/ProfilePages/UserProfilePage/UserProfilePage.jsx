@@ -1,7 +1,7 @@
 import { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
 import { useParams, Navigate } from 'react-router';
-import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
 import UserProfileSkeleton from '../../../components/UI/Skeleton/Pages/userProfileSkeleton';
 import { styles } from './UserProfilePage.styles';
 

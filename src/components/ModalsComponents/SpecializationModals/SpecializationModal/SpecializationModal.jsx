@@ -5,15 +5,15 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { closeModal } from '@redux/slices/modal/modalSlice';
 import {
   useAddSkillsToMasteryMutation,
   useCreateNewSpecializationMutation,
   useGetSpecializationByUserIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
-} from '../../../../redux/specialization/specializationApiSlice';
-import { useGetSpecializationListQuery } from '../../../../redux/specialization/specializationList/specializationListApiSlice';
+} from '@redux/api/slices/specialization/specializationApiSlice';
+import { useGetSpecializationListQuery } from '@redux/api/slices/specializationList/specializationListApiSlice';
 import useMergeState from '../../../../utils/hooks/useMergeState';
 import { SpecializationModalSchema } from '../../../../utils/validationSchemas/index';
 import { ButtonDef } from '../../../FormsComponents/Buttons';

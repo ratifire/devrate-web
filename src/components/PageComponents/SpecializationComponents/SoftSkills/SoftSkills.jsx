@@ -1,4 +1,4 @@
-import { useGetSoftSkillsQuery } from '../../../../redux/specialization/specializationApiSlice';
+import { useGetSoftSkillsQuery } from '@redux/api/slices/specialization/specializationApiSlice';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
 import { modalNames } from '../../../../utils/constants/modalNames.js';

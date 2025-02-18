@@ -11,7 +11,7 @@ import {
   useGetClosestEventByUserIdQuery,
   useGetEventByUserIdQuery,
   useLazyGetEventByUserIdQuery,
-} from '../../../redux/schedule/scheduleApiSlice';
+} from '@redux/api/slices/schedule/scheduleApiSlice';
 import { ScheduleSkeleton } from '../../UI/Skeleton';
 import EventPopup from './EventPopup';
 import { styles } from './Schedule.styles';

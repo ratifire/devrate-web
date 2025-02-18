@@ -3,11 +3,8 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
-import {
-  useGetLanguageUserQuery,
-  usePostLanguageUserMutation,
-} from '../../../../../redux/user/language/languageApiSlice';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { useGetLanguageUserQuery, usePostLanguageUserMutation } from '@redux/api/slices/user/language/languageApiSlice';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { SelectLanguage } from '../../../../FormsComponents/Inputs';
 import LanguageLevel from '../../../../UI/LanguageLevel';

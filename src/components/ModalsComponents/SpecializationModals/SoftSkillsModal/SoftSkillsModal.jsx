@@ -9,7 +9,7 @@ import {
   useDeleteSkillByIdMutation,
   useGetAvailableSoftSkillsQuery,
   useGetSoftSkillsByMasteryIdQuery,
-} from '../../../../redux/specialization/specializationApiSlice';
+} from '@redux/api/slices/specialization/specializationApiSlice';
 import { useGetMastery } from '../../../../utils/hooks/specialization';
 import useMergeState from '../../../../utils/hooks/useMergeState';
 import { ButtonDef } from '../../../FormsComponents/Buttons';

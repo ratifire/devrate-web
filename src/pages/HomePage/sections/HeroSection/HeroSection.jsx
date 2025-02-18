@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Link as RouterLink } from 'react-router';
-import { openModal } from '../../../../redux/modal/modalSlice';
+import { openModal } from '@redux/slices/modal/modalSlice';
 import navigationsLinks from '../../../../router/links';
 import Arrow from '../../assets/iconArrow.svg?react';
 import { modalNames } from '../../../../utils/constants/modalNames.js';

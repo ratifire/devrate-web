@@ -1,8 +1,8 @@
 import { Box, Container, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { openModal } from '@redux/slices/modal/modalSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { openModal } from '../../../../redux/modal/modalSlice';
 import { styles } from './HeroSection.styles';
 
 const HeroSection = () => {

@@ -18,7 +18,7 @@ import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
-import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
+import { useLogoutMutation } from '@redux/api/slices/auth/authApiSlice.js';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { modalNames } from '../../../utils/constants/modalNames.js';
 import { useModalController } from '../../../utils/hooks/useModalController.js';

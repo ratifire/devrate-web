@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { useDispatch } from 'react-redux';
-import { openModal } from '../../../../redux/modal/modalSlice.js';
+import { openModal } from '@redux/slices/modal/modalSlice.js';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole.js';
 import links from '../../../../router/links.js';

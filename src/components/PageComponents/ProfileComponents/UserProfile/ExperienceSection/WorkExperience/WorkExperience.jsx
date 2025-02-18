@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useGetWorkExperienceByUserIdQuery } from '@redux/api/slices/workExperienceApiSlice.js';
 import WorkExperienceItem from '../../ExperienceSection/WorkExperience/WorkExperienceItem';
-import { useGetWorkExperienceByUserIdQuery } from '../../../../../../redux/services/workExperienceApiSlice.js';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 

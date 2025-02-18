@@ -4,12 +4,12 @@ import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
+import { openChat } from '@redux/slices/chat/chatSlice.js';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
+import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
 import UserAvatar from '../../../../UI/UserAvatar';
-import { useGetAvatarUserQuery } from '../../../../../redux/user/avatar/avatarApiSlice';
 import Bookmark from '../../../../UI/Bookmark';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { openChat } from '../../../../../redux/chat/chatSlice';
 import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = ({ id }) => {

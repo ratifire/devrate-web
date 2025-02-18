@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { useCreateAchievementMutation } from '../../../../redux/services/achievementsApiSlice';
+import { useCreateAchievementMutation } from '@redux/api/slices/achievementsApiSlice.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';

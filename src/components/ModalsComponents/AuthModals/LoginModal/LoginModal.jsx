@@ -5,14 +5,14 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Box, Link, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { setCredentials } from '@redux/slices/auth/authSlice.js';
+import { setTokens } from '@redux/slices/auth/tokenSlice.js';
+import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
+import { useLoginMutation } from '@redux/api/slices/auth/authApiSlice.js';
 import { LoginSchema } from '../../../../utils/validationSchemas';
 import { FormInput } from '../../../FormsComponents/Inputs';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { closeModal, openModal } from '../../../../redux/modal/modalSlice';
-import { useLoginMutation } from '../../../../redux/auth/authApiSlice';
 import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
-import { setCredentials } from '../../../../redux/auth/authSlice';
-import { setTokens } from '../../../../redux/auth/tokenSlice';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
 import styles from './LoginModal.styles';
 
