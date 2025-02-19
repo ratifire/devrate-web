@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Box, IconButton, TextField, Typography, Link, Fade } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
@@ -7,7 +7,7 @@ import { Link as RouterLink } from 'react-router';
 import { DateTime } from 'luxon';
 import UserAvatar from '../../../UI/UserAvatar';
 import Send from '../../../../assets/icons/send.svg?react';
-import { addMessage, closeChat, connectToChat, disconnectFromChat } from '../../../../redux/chat/chatSlice';
+import { addMessage, closeChat } from '../../../../redux/chat/chatSlice';
 import { useGetChatHistoryQuery } from '../../../../redux/services/chatApiSlice.js';
 import { useMoveChat, useResizeChat, useResizeTextarea, useScrollChat } from '../hooks';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
@@ -19,15 +19,12 @@ const ChatForm = () => {
   const { id: opponentUserId, firstName, lastName, userPicture } = opponentUserInfo;
   const chatWrapperRef = useRef(null);
   const chatPositionRef = useRef(null);
-  const [isScrolledUp, setIsScrolledUp] = useState(false);
 
-  // внутрішні хукі
   const { message, setMessage, textFieldRef, handleTextFieldChange } = useResizeTextarea(chatWrapperRef);
-  const { showScrollButton, handleScrollToBottom } = useScrollChat(chatWrapperRef, opponentUserId);
+  const { showScrollButton, isScrolledUp, handleScrollToBottom } = useScrollChat(chatWrapperRef);
   const handleMouseDown = useMoveChat(chatPositionRef);
   const handleResizeMouseDown = useResizeChat(chatPositionRef);
 
-  // закриття чату
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeChat());
 
@@ -41,13 +38,6 @@ const ChatForm = () => {
       normalize.forEach((item) => dispatch(addMessage(item)));
     }
   }, [dataChats, dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(connectToChat({ userId: currentUserId }));
-  //   return () => {
-  //     dispatch(disconnectFromChat());
-  //   };
-  // }, [currentUserId, dispatch]);
 
   const handleSubmitMessages = (e) => {
     e.preventDefault();
@@ -68,22 +58,17 @@ const ChatForm = () => {
     if (chatWrapperRef.current) chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmitMessages(e);
+    }
+  };
   useEffect(() => {
     if (!isScrolledUp && chatWrapperRef.current) {
       chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
     }
   }, [messages, isScrolledUp]);
-
-  const handleScroll = (e) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.target;
-    const isNearBottom = scrollHeight - (scrollTop + clientHeight) < 50;
-
-    if (!isNearBottom) {
-      setIsScrolledUp(true);
-    } else {
-      setIsScrolledUp(false);
-    }
-  };
 
   return (
     <Fade in={chat}>
@@ -106,7 +91,7 @@ const ChatForm = () => {
               <CloseIcon />
             </IconButton>
           </Box>
-          <Box ref={chatWrapperRef} sx={styles.chatWrapper} onScroll={handleScroll}>
+          <Box ref={chatWrapperRef} sx={styles.chatWrapper}>
             <div>lorem</div>
             {messages?.map((item) => (
               <Box key={item.dateTime}>
@@ -119,25 +104,24 @@ const ChatForm = () => {
               </IconButton>
             )}
           </Box>
-          <form onClick={handleSubmitMessages}>
-            <Box sx={styles.chatForm}>
-              <TextField
-                ref={textFieldRef}
-                fullWidth
-                multiline
-                maxRows={5}
-                minRows={1}
-                placeholder='Напишіть повідомлення'
-                sx={styles.textArea}
-                value={message}
-                variant='outlined'
-                onChange={handleTextFieldChange}
-              />
-              <IconButton sx={styles.btnSend}>
-                <Send />
-              </IconButton>
-            </Box>
-          </form>
+          <Box sx={styles.chatForm}>
+            <TextField
+              ref={textFieldRef}
+              fullWidth
+              multiline
+              maxRows={5}
+              minRows={1}
+              placeholder='Напишіть повідомлення'
+              sx={styles.textArea}
+              value={message}
+              variant='outlined'
+              onChange={handleTextFieldChange}
+              onKeyDown={handleKeyDown}
+            />
+            <IconButton sx={styles.btnSend} onClick={handleSubmitMessages}>
+              <Send />
+            </IconButton>
+          </Box>
           <Box sx={styles.resizeHandle} onMouseDown={handleResizeMouseDown} />
         </Box>
       </Box>

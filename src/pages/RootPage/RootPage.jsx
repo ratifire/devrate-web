@@ -19,7 +19,6 @@ const RootPage = () => {
       <MemoizedProfileHeader />
       <Outlet />
       <ModalComponent />
-      {/*<ChatFormTemplate />*/}
       <ChatForm />
     </>
   );

@@ -5,12 +5,22 @@ const useResizeTextarea = (chatWrapperRef) => {
   const [message, setMessage] = useState('');
   const [textFieldHeight, setTextFieldHeight] = useState(23);
 
+  const minHeight = 23;
+  const maxHeight = 115;
+
   const handleTextFieldChange = (e) => {
+    const value = e.target.value;
+    setMessage(value);
+
+    if (value.trim() === '') {
+      setTextFieldHeight(minHeight);
+      return;
+    }
+
     const height = e.target.scrollHeight;
-    const maxHeight = 115;
-    setMessage(e.target.value);
+
     if (height < maxHeight) {
-      setTextFieldHeight(height);
+      setTextFieldHeight(Math.max(height, minHeight));
     } else {
       setTextFieldHeight(maxHeight);
     }
@@ -18,9 +28,11 @@ const useResizeTextarea = (chatWrapperRef) => {
 
   useEffect(() => {
     if (textFieldRef.current && chatWrapperRef.current) {
-      const textFieldExtraHeight = textFieldHeight - 23;
+      const textFieldExtraHeight = textFieldHeight - minHeight;
       const newHeight = 532 - textFieldExtraHeight;
-      chatWrapperRef.current.style.maxHeight = `${newHeight}px`;
+
+      chatWrapperRef.current.style.maxHeight = `${newHeight + minHeight}px`;
+      chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
     }
   }, [textFieldHeight]);
 

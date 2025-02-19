@@ -2,49 +2,47 @@ import { useEffect, useState } from 'react';
 
 const useScrollChat = (chatWrapperRef) => {
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const [isUserAtBottom, setIsUserAtBottom] = useState(true);
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
 
-  // Функція для обробки скролу
   const handleScroll = () => {
     if (chatWrapperRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = chatWrapperRef.current;
 
-      // Визначаємо, чи користувач знаходиться біля нижньої частини чату
       const isAtBottom = scrollHeight - (scrollTop + clientHeight) <= 100;
       setShowScrollButton(!isAtBottom);
-      setIsUserAtBottom(isAtBottom);
+      setIsScrolledUp(!isAtBottom);
     }
   };
 
-  // Функція для прокрутки до низу
   const handleScrollToBottom = () => {
     if (chatWrapperRef.current) {
       chatWrapperRef.current.scrollTo({
         top: chatWrapperRef.current.scrollHeight,
         behavior: 'smooth',
       });
-      setIsUserAtBottom(true);
+      setIsScrolledUp(false);
     }
   };
 
-  // Автоматична прокрутка до низу при монтуванні
   useEffect(() => {
     if (chatWrapperRef.current) {
-      handleScrollToBottom();
+      chatWrapperRef.current.addEventListener('scroll', handleScroll);
+      return () => {
+        chatWrapperRef.current.removeEventListener('scroll', handleScroll);
+      };
     }
-  }, []); // Пустий масив залежностей, щоб викликати лише при монтуванні
+  }, []);
 
-  // Автоматична прокрутка до низу, якщо користувач знаходиться біля нижньої частини
   useEffect(() => {
-    if (isUserAtBottom && chatWrapperRef.current) {
+    if (!isScrolledUp && chatWrapperRef.current) {
       chatWrapperRef.current.scrollTo({
         top: chatWrapperRef.current.scrollHeight,
         behavior: 'smooth',
       });
     }
-  }, [isUserAtBottom]);
+  }, [isScrolledUp]);
 
-  return { showScrollButton, handleScroll, handleScrollToBottom };
+  return { showScrollButton, isScrolledUp, handleScrollToBottom };
 };
 
 export default useScrollChat;

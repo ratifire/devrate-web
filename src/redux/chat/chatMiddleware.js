@@ -5,10 +5,6 @@ import { addMessage } from './chatSlice.js';
 let client = null;
 
 const chatMiddleware = (store) => (next) => (action) => {
-  // console.log('connectToChat');
-  // if() {
-  //
-  // }
   if (action.type === 'chat/connectToChat') {
     const { userId } = action.payload;
 
@@ -32,7 +28,6 @@ const chatMiddleware = (store) => (next) => (action) => {
   if (action.type === 'chat/sendMessage') {
     const message = action.payload;
     if (client && client.connected) {
-      console.log(client);
       client.publish({
         destination: 'app/chat',
         body: JSON.stringify(message),

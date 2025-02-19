@@ -27,6 +27,13 @@ export const chatDark = {
         backgroundColor: '#3E3E40',
       },
     },
+    wrapper: {
+      borderColor: '#69696B',
+      searched: {
+        borderColor: '#CEB0FA',
+        color: '#CEB0FA',
+      },
+    },
     text: {
       color: '#FFFFFF',
     },
@@ -42,6 +49,8 @@ export const chatDark = {
     },
   },
   chatForm: {
+    borderColor: 'transparent',
+    backgroundColor: '#303032',
     wrapper: {
       backgroundColor: '#252527',
     },
@@ -63,8 +72,9 @@ export const chatDark = {
     },
     chatWrapper: {
       backgroundColor: '#303032',
+      borderColor: 'transparent',
     },
-    chatForm: {
+    chatTextarea: {
       backgroundColor: '#252527',
     },
     textarea: {

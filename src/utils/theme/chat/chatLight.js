@@ -27,6 +27,13 @@ export const chatLight = {
         backgroundColor: '#CEB0FA2A',
       },
     },
+    wrapper: {
+      borderColor: '#C5C5C6',
+      searched: {
+        borderColor: '#8133F1',
+        color: '#8133F1',
+      },
+    },
     text: {
       color: '#1D1D1D',
     },
@@ -43,58 +50,62 @@ export const chatLight = {
   },
   // нище доробити тему
   chatForm: {
+    borderColor: '#C5C5C6',
+    backgroundColor: '#FFFFFF',
     wrapper: {
-      backgroundColor: '#252527',
+      backgroundColor: '#FFFFFF',
     },
     name: {
-      color: '#FFFFFF',
+      color: '#1D1D1D',
     },
     icon: {
-      color: '#CEB0FA',
+      color: '#8133F1',
       hover: {
-        backgroundColor: '#A9A9AA',
+        backgroundColor: '#CEB0FA29',
       },
     },
     btnIconScroll: {
       color: '#FFFFFF',
-      backgroundColor: '#8133F1',
+      backgroundColor: '#5900D9',
       hover: {
-        backgroundColor: '#444446',
+        backgroundColor: '#360083',
       },
     },
     chatWrapper: {
-      backgroundColor: '#303032',
+      backgroundColor: '#FFFFFF',
     },
-    chatForm: {
-      backgroundColor: '#252527',
+    chatTextarea: {
+      backgroundColor: '#FFFFFF',
+      borderColor: '#C5C5C6',
     },
     textarea: {
-      backgroundColor: '#252527',
+      backgroundColor: '#FFFFFF',
     },
   },
   chatMessage: {
     receiver: {
-      backgroundColor: '#444446',
-      text: {
-        color: '#ffffff',
-      },
-      icon: {
-        color: '#290064',
-      },
-      time: {
-        color: '#C5C5C6',
-      },
-    },
-    sender: {
-      backgroundColor: '#CEB0FA',
+      backgroundColor: '#F8F8F8',
+      boxShadow: '#C5C5C6',
       text: {
         color: '#1D1D1D',
       },
       icon: {
-        color: '#290064',
+        color: '#EFE6FD',
       },
       time: {
-        color: '#290064',
+        color: '#69696B',
+      },
+    },
+    sender: {
+      backgroundColor: '#5900D9',
+      text: {
+        color: '#FFFFFF',
+      },
+      icon: {
+        color: '#EFE6FD',
+      },
+      time: {
+        color: '#EFE6FD',
       },
     },
   },

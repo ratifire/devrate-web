@@ -8,6 +8,7 @@ export const styles = {
     borderRadius: '0 16px 16px 16px',
     maxWidth: 'calc(100% - 28px)',
     marginRight: 'auto',
+    boxShadow: `inset 0 0 0 1px ${theme.palette.chatMessage.receiver.boxShadow}`,
     ' >.MuiTypography-body': {
       color: theme.palette.chatMessage.receiver.text.color,
       wordWrap: 'break-word',

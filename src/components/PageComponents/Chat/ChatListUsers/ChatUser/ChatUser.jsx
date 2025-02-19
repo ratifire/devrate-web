@@ -11,7 +11,15 @@ const ChatUser = ({ data }) => {
 
   if (data.length === 0) return null;
 
-  const { opponentUserId, opponentFirstName, opponentLastName, opponentPicture, lastMessage, lastMessageDate } = data;
+  const {
+    opponentUserId,
+    opponentFirstName,
+    opponentLastName,
+    opponentPicture,
+    lastMessage,
+    lastMessageDate,
+    isMatch,
+  } = data;
 
   const formattedDate = DateTime.fromISO(lastMessageDate).toFormat('d MMM', { locale: navigator.language });
 
@@ -29,7 +37,7 @@ const ChatUser = ({ data }) => {
 
   return (
     <Box sx={styles.bg}>
-      <Box sx={styles.wrapper} onClick={handlerOpenChat}>
+      <Box sx={isMatch ? styles.wrapperSearched : styles.wrapper} onClick={handlerOpenChat}>
         <UserAvatar
           radius='circle'
           size='s'
@@ -40,7 +48,9 @@ const ChatUser = ({ data }) => {
         <Box sx={styles.text}>
           <Box sx={styles.info}>
             <Typography variant='subtitle2'>{`${opponentFirstName} ${opponentLastName}`}</Typography>
-            <Typography sx={styles.time} variant='caption3'>{formattedDate}</Typography>
+            <Typography sx={styles.time} variant='caption3'>
+              {formattedDate}
+            </Typography>
           </Box>
           <Typography variant='caption3'>{lastMessage}</Typography>
         </Box>

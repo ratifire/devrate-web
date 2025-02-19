@@ -12,7 +12,17 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingBottom: theme.spacing(3),
-    borderBottom: `1px solid #69696B`,
+    borderBottom: `1px solid ${theme.palette.chatUser.wrapper.borderColor}`,
+  }),
+  wrapperSearched: (theme) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: theme.spacing(3),
+    borderBottom: `1px solid ${theme.palette.chatUser.wrapper.searched.borderColor}`,
+    ' h6': {
+      color: theme.palette.chatUser.wrapper.searched.color,
+    },
   }),
   text: (theme) => ({
     marginLeft: theme.spacing(2),

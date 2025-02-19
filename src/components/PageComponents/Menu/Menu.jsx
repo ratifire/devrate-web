@@ -22,7 +22,7 @@ import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { modalNames } from '../../../utils/constants/modalNames.js';
 import { useModalController } from '../../../utils/hooks/useModalController.js';
-import { disconnectFromChat } from '../../../redux/chat/chatSlice.js';
+import { closeChat, disconnectFromChat } from '../../../redux/chat/chatSlice.js';
 import links from './profileRoutes';
 import styles from './Menu.styles';
 
@@ -49,6 +49,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer, closeMenu }) => {
   const handleLinkClick = async (link) => {
     if (link.name === 'profile.userMenu.logout') {
       dispatch(disconnectFromChat());
+      dispatch(closeChat());
       await logoutHandler();
     }
     closeMenu();

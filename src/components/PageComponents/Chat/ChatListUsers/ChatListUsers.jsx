@@ -2,11 +2,13 @@ import { Box, IconButton, Skeleton, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react'; // Додаємо useEffect
 import UserAvatar from '../../../UI/UserAvatar';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice.js';
 import FormInputSearch from '../../../FormsComponents/Inputs/FormInputSearch/index.js';
 import { useGetChatsQuery } from '../../../../redux/services/chatApiSlice.js';
+import { searchUser } from '../hooks';
 import { styles } from './ChatListUsers.styles.js';
 import ChatUser from './ChatUser';
 
@@ -19,6 +21,19 @@ const ChatListUsers = () => {
   const { userPicture } = userAvatar;
 
   const { data: dataListChats, isLoading } = useGetChatsQuery();
+  const [dataFilter, setDataFilter] = useState([]);
+
+  useEffect(() => {
+    if (dataListChats) {
+      setDataFilter(dataListChats);
+    }
+  }, [dataListChats]);
+
+  const handlerChangeSearch = ({ target: { value } }) => {
+    if (dataListChats) {
+      setDataFilter(searchUser(dataListChats, value));
+    }
+  };
 
   if (isLoading) return <Skeleton height={523} variant='rounded' width={354} />;
 
@@ -38,12 +53,13 @@ const ChatListUsers = () => {
           placeholder={t('chat.search')}
           sx={styles.input}
           type='text'
+          onChange={handlerChangeSearch}
         />
       </Box>
       <Box sx={styles.wrapperList}>
         <Box sx={styles.list}>
-          {dataListChats && dataListChats.length > 0 ? (
-            dataListChats.map((item) => <ChatUser key={item.opponentUserId} data={item} />)
+          {dataFilter && dataFilter.length > 0 ? (
+            dataFilter.map((item) => <ChatUser key={item.opponentUserId} data={item} />)
           ) : (
             <Typography sx={{ textAlign: 'center', marginTop: 2 }} variant='body1'>
               {t('chat.enterMessages')}
@@ -54,4 +70,5 @@ const ChatListUsers = () => {
     </Box>
   );
 };
+
 export default ChatListUsers;

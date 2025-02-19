@@ -1,12 +1,15 @@
 export const styles = {
-  position: () => ({
+  position: (theme) => ({
     position: 'fixed',
     top: 'calc(100% - 684px)',
     left: 'calc(100% - 580px)',
     zIndex: 1500,
-    boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
+    boxShadow: `0 5px 5px -3px rgba(0,0,0,0.2),0 8px 10px 1px rgba(0,0,0,0.14),0 3px 14px 2px rgba(0,0,0,0.12)`,
+    border: `1px solid ${theme.palette.chatForm.borderColor}`,
     height: '100%',
     maxHeight: '683px',
+    backgroundColor: theme.palette.chatForm.backgroundColor,
+    borderRadius: 1,
   }),
   resizeHandle: {
     position: 'absolute',
@@ -22,6 +25,9 @@ export const styles = {
     maxHeight: '683px',
     width: '100%',
     height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   wrapper: (theme) => ({
     display: 'flex',
@@ -81,6 +87,7 @@ export const styles = {
     },
   }),
   chatWrapper: (theme) => ({
+    flex: '1 1 100%',
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -103,7 +110,8 @@ export const styles = {
     },
   }),
   chatForm: (theme) => ({
-    backgroundColor: theme.palette.chatForm.chatForm.backgroundColor,
+    borderTop: `1px solid ${theme.palette.chatForm.chatTextarea.borderColor}`,
+    backgroundColor: theme.palette.chatForm.chatTextarea.backgroundColor,
     padding: '16px',
     position: 'relative',
   }),

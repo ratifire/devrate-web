@@ -20,7 +20,7 @@ const useResizeChat = (chatPositionRef) => {
     if (!isResizing.current) return;
     const dx = e.clientX - resizeStartPos.current.x;
     const newWidth = Math.min(580, Math.max(380, resizeStartPos.current.width + dx)); // Обмеження ширини
-    chatPositionRef.current.style.width = `${newWidth}px`; // Зміна лише ширини
+    chatPositionRef.current.style.width = `${newWidth}px`;
   };
 
   const handleResizeMouseUp = () => {

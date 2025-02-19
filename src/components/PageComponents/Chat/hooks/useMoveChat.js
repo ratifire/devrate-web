@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 
 const useMoveChat = (chatPositionRef) => {
-
   const chatStartPos = useRef({ top: 0, left: 0 });
   const initialMousePos = useRef({ x: 0, y: 0 });
   const isDragging = useRef(false);
