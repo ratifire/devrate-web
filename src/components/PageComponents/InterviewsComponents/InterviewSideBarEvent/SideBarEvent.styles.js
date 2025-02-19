@@ -1,6 +1,7 @@
 export const styles = {
   interviewLink: {
     textDecoration: 'none',
+    cursor: 'pointer',
   },
   sideBarEventContainer: (theme) => ({
     width: '100%',

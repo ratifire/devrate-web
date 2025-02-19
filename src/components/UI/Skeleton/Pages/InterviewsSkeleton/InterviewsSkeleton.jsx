@@ -4,9 +4,13 @@ import { styles } from './InterviewsSkeleton.styles';
 const InterviewsSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton height={152} variant='rounded' />
-      <Skeleton height={152} variant='rounded' />
-      <Skeleton height={152} variant='rounded' />
+      <Skeleton height={58} variant='rounded' />
+      <Skeleton height={147} variant='rounded' />
+      <Skeleton height={147} variant='rounded' />
+      <Skeleton height={147} variant='rounded' />
+      <Skeleton height={147} variant='rounded' />
+      <Skeleton height={147} variant='rounded' />
+      <Skeleton height={147} variant='rounded' />
     </Box>
   );
 };

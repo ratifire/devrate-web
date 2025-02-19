@@ -24,6 +24,13 @@ import {
   StepAvatarSkeleton,
   StepLanguageSkeleton,
 } from './Modal/UserInfoModalSkeleton';
+import {
+  UserCardScheduledInterviewSkeleton,
+  ScheduledMeetingSkeleton,
+  StatisticSkeleton,
+  ParticipantEvaluationsSkeleton,
+  InterviewSkillsSkeleton,
+} from './Pages/scheduledInterviewSkeleton';
 
 export {
   BlogSkeleton,
@@ -47,4 +54,9 @@ export {
   StepPersonalSkeleton,
   StepAvatarSkeleton,
   StepLanguageSkeleton,
+  UserCardScheduledInterviewSkeleton,
+  ScheduledMeetingSkeleton,
+  StatisticSkeleton,
+  ParticipantEvaluationsSkeleton,
+  InterviewSkillsSkeleton,
 };
