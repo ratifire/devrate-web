@@ -4,9 +4,9 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingY: '24px',
+    paddingTop: '24px',
+    paddingBottom: '12px',
     paddingX: theme.spacing(3),
-    marginBottom: theme.spacing(5),
     width: '100%',
     backgroundImage: 'none',
     backgroundColor: theme.palette.interviewPage.bgColor,
@@ -21,6 +21,24 @@ const styles = {
     justifyContent: 'space-between',
     borderBottom: '1px solid',
     borderColor: theme.palette.neutral[400],
+
+    '& span': {
+      cursor: 'pointer',
+      userSelect: 'none',
+      color: theme.palette.action.active,
+      borderBottom: '2px solid ' + theme.palette.action.active,
+      display: 'inline-block',
+      textDecoration: 'none',
+      paddingBottom: '10px',
+      paddingRight: '20px',
+      textTransform: 'none',
+      fontSize: 20,
+      fontWeight: '500',
+      transition: 'color 0.5s ease, border-bottom 0.5s ease',
+      '& + *': {
+        paddingLeft: '20px',
+      },
+    },
   }),
   interviewNavLink: (theme) => ({
     display: 'inline-block',
@@ -89,7 +107,7 @@ const styles = {
       backgroundColor: theme.palette.scheduleInterview.area.popover.backgroundColor,
     },
   }),
-  greenEllipce: {
+  greenEllipse: {
     marginRight: '8px',
     marginLeft: '8px',
     width: '13px',

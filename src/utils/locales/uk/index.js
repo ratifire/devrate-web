@@ -391,6 +391,7 @@ export const uk = {
           name: 'Навчальний заклад',
           startYear: 'Рік початку',
           endYear: 'Рік закінчення',
+          currentDate: 'На даний момент вчуся у цьому закладі',
           speciality_long: 'Спеціальність занадто довга',
           speciality_short: 'Спеціальність занадто коротка',
           speciality_placeholder: 'Облік та аудит',
@@ -684,6 +685,48 @@ export const uk = {
         scheduled: 'Заплановані',
         passed: 'Пройдені',
         requests: 'Запити',
+      },
+      sideBar: {
+        title: 'Інтерв’ю',
+        event: {
+          role: 'Роль',
+          host: 'Хост',
+          statusInProcess: 'В процесі',
+          statusAwaitingFeedback: 'Очікується відгук',
+        },
+      },
+    },
+    singleScheduledInterview: {
+      interviewsSummary: {
+        scheduledMeeting: {
+          title: 'Запланована зустріч',
+          participants: 'Учасники',
+          language: 'Мова',
+          duration: 'Тривалість',
+          platform: 'Платформа',
+          link:
+            'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
+            ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
+          canceledMeeting: 'Скасувати зустріч',
+          joinMeeting: 'Доєднатись до інтерв’ю',
+          notHappenedMeeting: 'Співбесіда не відбулася',
+          leaveFeedbackMeeting: 'Залишити відгук',
+          languageType: 'Англійська',
+          durationType: 'хв.',
+        },
+        interviewSkills: {
+          skills: 'Навички',
+        },
+        userCardScheduledInterview: {
+          btn: 'Написати повідомлення',
+          interviewLvl: 'Рівень співбесіди:',
+        },
+        participantEvaluations: {
+          title: 'Оцінка учасників',
+        },
+        statistic: {
+          title: 'Статистика',
+        },
       },
     },
   },
