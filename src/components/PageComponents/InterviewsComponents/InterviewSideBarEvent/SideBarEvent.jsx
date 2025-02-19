@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { formatDateAndTime } from '../../../../utils/helpers';
-// import LimeCircleIcon from '../../../../assets/icons/InterviewPageIcons/lime-ellipse.svg';
-// import OrangeCircleIcon from '../../../../assets/icons/InterviewPageIcons/orange-ellipse.svg';
 import { lvlMastery, lvlMasteryColor } from '../../../../utils/constants/masteryLvl';
 import navigationLinks from '../../../../router/links';
 import { styles } from './SideBarEvent.styles';
