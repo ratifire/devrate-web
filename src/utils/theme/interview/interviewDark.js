@@ -8,7 +8,7 @@ export const interviewDark = {
       color: '#C5C5C6',
     },
     date: {
-      color: '#EFE6FD',
+      color: '#fff',
     },
     lvl: {
       junior: '#25CBFF',

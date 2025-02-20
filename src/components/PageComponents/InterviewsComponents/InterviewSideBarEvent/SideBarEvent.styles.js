@@ -66,9 +66,13 @@ export const styles = {
       color: theme.palette.primary[300],
     },
   }),
-  ellipse: (theme) => ({
-    marginRight: theme.spacing(2),
-    width: '14px',
-    height: '14px',
+  Junior: (theme) => ({
+    color: theme.palette.userCard.lvl.junior,
+  }),
+  Middle: (theme) => ({
+    color: theme.palette.userCard.lvl.middle,
+  }),
+  Senior: (theme) => ({
+    color: theme.palette.userCard.lvl.senior,
   }),
 };
