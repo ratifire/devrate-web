@@ -1,6 +1,6 @@
 import { IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import PropTypes from 'prop-types';
-import Loupe from '../../../../assets/icons/loupe.svg?react';
+import Loupe from '@assets/icons/loupe.svg?react';
 import { styles } from './FormInputSearch.styles.js';
 
 const FormInputSearch = ({ sx, ...props }) => {

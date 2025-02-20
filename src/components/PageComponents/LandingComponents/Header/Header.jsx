@@ -4,11 +4,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router';
 import { openModal } from '@redux/slices/modal/modalSlice';
-import LinkList from '../../../UI/LinkList';
-import navLinks from '../../../../utils/constants/navLinks';
-import Logo from '../../../UI/Logo';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import navigationsLinks from '../../../../router/links';
+import navLinks from '@utils/constants/navLinks';
+import LinkList from '@components/UI/LinkList';
+import Logo from '@components/UI/Logo';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import navigationsLinks from '@router/links';
 import styles from './Header.styles';
 
 const Header = () => {

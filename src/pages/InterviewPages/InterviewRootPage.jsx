@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Outlet } from 'react-router';
-import InterviewHeader from '../../components/PageComponents/InterviewsComponents/InterviewHeader';
+import InterviewHeader from '@components/PageComponents/InterviewsComponents/InterviewHeader';
 
 const MemoizedInterviewHeader = memo(InterviewHeader);
 

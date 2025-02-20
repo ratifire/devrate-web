@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setButtonState } from '@redux/slices/addButton/addButtonSlice.js';
 import { useGetWorkExperienceByUserIdQuery } from '@redux/api/slices/workExperienceApiSlice.js';
+import { emptyPersonalTabsPictures } from '@utils/constants/emptyTabsPictures';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
-import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 import WorkExperienceItem from './WorkExperienceItem/WorkExperienceItem';
 
 const WorkExperience = ({ tab }) => {

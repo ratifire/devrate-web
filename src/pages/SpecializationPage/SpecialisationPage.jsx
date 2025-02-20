@@ -9,33 +9,31 @@ import {
   LevelSkeleton,
   SkillsAssessmentChartSkeleton,
   SkillsSkeleton,
-} from '../../components/UI/Skeleton';
-import LevelChartSkeleton from '../../components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
+} from '@components/UI/Skeleton';
+import LevelChartSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 import { styles } from './SpecialisationPage.styles';
 
 const SpecializationLevel = lazy(
-  () => import('../../components/PageComponents/SpecializationComponents/SpecializationLevel')
+  () => import('@components/PageComponents/SpecializationComponents/SpecializationLevel')
 );
-const HardSkills = lazy(() => import('../../components/PageComponents/SpecializationComponents/HardSkills'));
+const HardSkills = lazy(() => import('@components/PageComponents/SpecializationComponents/HardSkills'));
 const SpecialisationCategories = lazy(
-  () => import('../../components/PageComponents/SpecializationComponents/SpecializationCategories')
+  () => import('@components/PageComponents/SpecializationComponents/SpecializationCategories')
 );
-const Interviews = lazy(() => import('../../components/PageComponents/SpecializationComponents/Interviews'));
-const SoftSkills = lazy(() => import('../../components/PageComponents/SpecializationComponents/SoftSkills'));
+const Interviews = lazy(() => import('@components/PageComponents/SpecializationComponents/Interviews'));
+const SoftSkills = lazy(() => import('@components/PageComponents/SpecializationComponents/SoftSkills'));
 const InterviewChart = lazy(
-  () => import('../../components/PageComponents/SpecializationComponents/Statistics/InteviewChart/InterviewChart')
+  () => import('@components/PageComponents/SpecializationComponents/Statistics/InteviewChart/InterviewChart')
 );
 const SkillsAssessmentChart = lazy(
   () =>
-    import(
-      '../../components/PageComponents/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart'
-    )
+    import('@components/PageComponents/SpecializationComponents/Statistics/SkillAssessmentChart/SkillsAssessmentChart')
 );
 const HardSkillsChart = lazy(
-  () => import('../../components/PageComponents/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart')
+  () => import('@components/PageComponents/SpecializationComponents/Statistics/HardSkillsChart/HardSkillsChart')
 );
 const LevelChart = lazy(
-  () => import('../../components/PageComponents/SpecializationComponents/Statistics/LevelChart/LevelChart')
+  () => import('@components/PageComponents/SpecializationComponents/Statistics/LevelChart/LevelChart')
 );
 
 const MemoizedSpecializationLevel = memo(SpecializationLevel);

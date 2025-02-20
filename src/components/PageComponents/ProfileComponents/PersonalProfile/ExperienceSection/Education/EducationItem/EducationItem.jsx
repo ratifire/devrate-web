@@ -5,9 +5,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
 import { useDeleteEducationByIdMutation } from '@redux/api/slices/educationApiSlice.js';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import DropdownMenu from '../../DropdownMenu';
-import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../../../../utils/hooks/useModalController.js';
 import styles from './EducationItem.styles.js';
 
 const LENGTH_TO_COLLAPSE = 200;

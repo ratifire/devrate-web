@@ -5,9 +5,10 @@
       "@redux/*": ["redux/*"],
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
-      "@styles/*": ["styles/*"],
-      "@hooks/*": ["hooks/*"],
-      "@shared/*": ["shared/*"]
+      "@assets/*": ["assets/*"],
+      "@layouts/*": ["layouts/*"],
+      "@pages/*": ["pages/*"],
+      "@router/*": ["router/*"]
     },
     "target": "es2021",
     "module": "ESNext",

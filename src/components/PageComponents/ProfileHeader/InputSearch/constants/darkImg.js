@@ -1,4 +1,4 @@
-import DarkNotFound from '../../../../../assets/pictures/SearchModal/notFoundDark.svg';
+import DarkNotFound from '@assets/pictures/SearchModal/notFoundDark.svg';
 
 const DARK_NOT_FOUND = DarkNotFound;
 

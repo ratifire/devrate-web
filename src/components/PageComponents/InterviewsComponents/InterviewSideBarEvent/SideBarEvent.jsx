@@ -2,11 +2,11 @@ import { Link as RouterLink } from 'react-router';
 import PropTypes from 'prop-types';
 import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { formatDateAndTime } from '../../../../utils/helpers';
+import { formatDateAndTime } from '@utils/helpers';
 // import LimeCircleIcon from '../../../../assets/icons/InterviewPageIcons/lime-ellipse.svg';
 // import OrangeCircleIcon from '../../../../assets/icons/InterviewPageIcons/orange-ellipse.svg';
-import { lvlMastery, lvlMasteryColor } from '../../../../utils/constants/masteryLvl.js';
-import navigationLinks from '../../../../router/links.js';
+import { lvlMastery, lvlMasteryColor } from '@utils/constants/masteryLvl.js';
+import navigationLinks from '@router/links.js';
 import { styles } from './SideBarEvent.styles.js';
 
 const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, selectedPaperId }) => {

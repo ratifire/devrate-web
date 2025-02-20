@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
-import useHardSkillData from '../../../../../utils/hooks/specialization/useHardSkillData';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import useHardSkillData from '@utils/hooks/specialization/useHardSkillData';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import HardSkillsChartSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/HardSkillsChartSkeleton';
 import { roundData, useTooltip } from '../utils';
-import HardSkillsChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/HardSkillsChartSkeleton';
 import { styles } from './HardSkillsChart.styles.js';
 import useThemeHardSkillsChart from './useThemeHardSkillsChart';
 

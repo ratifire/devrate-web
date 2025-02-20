@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router';
 import { setButtonState } from '@redux/slices/addButton/addButtonSlice.js';
 import { openModal } from '@redux/slices/modal/modalSlice';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import links from '../../../../../router/links';
-import { DARK_THEME } from '../../../../../utils/constants/Theme/theme';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import links from '@router/links';
+import { DARK_THEME } from '@utils/constants/Theme/theme';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { styles } from './EmptyExperienceTab.styles';
 
 const ExperienceEmptyItem = ({ tab, profileType, imgUrl, isData }) => {

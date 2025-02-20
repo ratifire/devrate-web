@@ -4,9 +4,9 @@ import InfoIcon from '@mui/icons-material/Info';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { openModal } from '@redux/slices/modal/modalSlice.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import TimeAgo from '../../../UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
 
 const InterviewFeedback = ({ createAt, payload }) => {
   const { t } = useTranslation();

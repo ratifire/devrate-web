@@ -1,5 +1,5 @@
 import { Skeleton } from '@mui/material';
-import { ButtonDef } from '../../../../../FormsComponents/Buttons';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { styles } from './StepContactsSkeleton.styles';
 
 const StepContactsSkeleton = () => {

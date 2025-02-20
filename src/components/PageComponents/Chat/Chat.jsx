@@ -1,7 +1,7 @@
 import { Badge, Box, IconButton, Fade } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { openChat } from '@redux/slices/chat/chatSlice.js';
-import Message from '../../../assets/icons/message.svg?react';
+import Message from '@assets/icons/message.svg?react';
 import { styles } from './Chat.styles';
 import ChatForm from './ChatForm';
 

@@ -9,11 +9,11 @@ import { setCredentials } from '@redux/slices/auth/authSlice.js';
 import { setTokens } from '@redux/slices/auth/tokenSlice.js';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
 import { useLoginMutation } from '@redux/api/slices/auth/authApiSlice.js';
-import { LoginSchema } from '../../../../utils/validationSchemas';
-import { FormInput } from '../../../FormsComponents/Inputs';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { LoginSchema } from '@utils/validationSchemas';
+import { FormInput } from '@components/FormsComponents/Inputs';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '@utils/constants/modalNames.js';
 import styles from './LoginModal.styles';
 
 const initialValues = {

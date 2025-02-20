@@ -7,7 +7,7 @@ import React, { useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
-import { ButtonDef } from '../../FormsComponents/Buttons';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { styles } from './LoadImages.styles';
 
 const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled, onChange }) => {

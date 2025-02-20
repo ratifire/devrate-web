@@ -6,9 +6,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { closeChat } from '@redux/slices/chat/chatSlice.js';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
-import UserAvatar from '../../../UI/UserAvatar';
-import Send from '../../../../assets/icons/send.svg?react';
-import { array } from '../../../../utils/constants/testMessages';
+import { array } from '@utils/constants/testMessages';
+import Send from '@assets/icons/send.svg?react';
+import UserAvatar from '@components/UI/UserAvatar';
 import { styles } from './CharFrom.styles';
 import ChatMessage from './ChatMessage';
 

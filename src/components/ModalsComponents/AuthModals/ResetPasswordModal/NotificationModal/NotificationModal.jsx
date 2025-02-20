@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Typography, Box } from '@mui/material';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
-import ModalLayout from '../../../../../layouts/ModalLayout';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
+import ModalLayout from '@layouts/ModalLayout';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '@utils/constants/modalNames.js';
 import styles from './NotificationModal.styles';
 
 const NotificationModal = () => {

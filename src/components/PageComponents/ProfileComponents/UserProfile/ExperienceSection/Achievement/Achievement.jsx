@@ -1,10 +1,10 @@
 import { Grid } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useFetchAchievementsQuery } from '@redux/api/slices/achievementsApiSlice.js';
-import { iconsAchievement } from '../../../../../../utils/constants/Experience/iconsExperience';
+import { iconsAchievement } from '@utils/constants/Experience/iconsExperience';
+import { loopedObjValues } from '@utils/helpers/loopedObjValues';
+import { emptyUserTabsPictures } from '@utils/constants/emptyTabsPictures';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
-import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
-import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 import AchievementItem from './AchievementItem';
 
 const Achievement = ({ id, tab }) => {

@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { useGetLanguageUserQuery } from '@redux/api/slices/user/language/languageApiSlice';
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import LanguagesList from '../../../../UI/LanguagesList';
 import SocialsLinkList from '../../../../UI/SocialsLinkList';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../../utils/hooks/useModalController.js';
 import { styles } from './RightSection.styles';
 
 const RightSection = () => {

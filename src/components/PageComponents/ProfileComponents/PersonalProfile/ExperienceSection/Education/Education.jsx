@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setButtonState } from '@redux/slices/addButton/addButtonSlice.js';
 import { useGetEducationByUserIdQuery } from '@redux/api/slices/educationApiSlice.js';
-import { iconsEducation } from '../../../../../../utils/constants/Experience/iconsExperience';
+import { iconsEducation } from '@utils/constants/Experience/iconsExperience';
+import { loopedObjValues } from '@utils/helpers/loopedObjValues';
+import { emptyPersonalTabsPictures } from '@utils/constants/emptyTabsPictures';
 import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
-import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
-import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
 import EducationItem from './EducationItem';
 
 const Education = ({ tab }) => {

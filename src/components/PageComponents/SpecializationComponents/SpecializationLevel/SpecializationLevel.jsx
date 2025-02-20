@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveMastery } from '@redux/slices/specialization/activeMasterySlice.js';
 import { useGetMainMasteryBySpecializationIdQuery } from '@redux/api/slices/specialization/specializationApiSlice';
-import { useGetSpecializationId } from '../../../../utils/hooks/specialization';
-import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import LevelSkeleton from '../../../UI/Skeleton/Pages/specializationSkeleton/LevelSkeleton';
+import { useGetSpecializationId } from '@utils/hooks/specialization';
+import ButtonDef from '@components/FormsComponents/Buttons/ButtonDef';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import LevelSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/LevelSkeleton';
 import { styles } from './SpecializationLevel.styles';
 
 const SpecializationLevel = () => {

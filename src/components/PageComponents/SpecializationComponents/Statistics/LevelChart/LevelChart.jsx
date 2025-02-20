@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useHardSkillData } from '../../../../../utils/hooks/specialization';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { useHardSkillData } from '@utils/hooks/specialization';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import LevelChartSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
+import { LevelGauge } from '@components/UI/Chart';
 import { getLevel } from '../utils';
-import LevelChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
-import { LevelGauge } from '../../../../UI/Chart';
 import { styles } from './LevelChart.styles.js';
 import useThemeLevelChart from './useThemeLevelChart';
 

@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useGetInterviewSummariesStatisticQuery } from '@redux/api/slices/chart/chartApiSlice';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { ChartDropDown } from '@components/UI/Specialization/ChartDropDown';
+import InterviewChartSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/InterviewChartSkeleton';
 import {
   createTenDaysInterviewData,
   createTenMonthsInterviewData,
@@ -12,8 +14,6 @@ import {
   useHandleChange,
   useTooltip,
 } from '../utils';
-import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
-import InterviewChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/InterviewChartSkeleton';
 import { styles } from './InterviewChart.styles';
 import useThemeInterviewChart from './useThemeInterviewChart';
 

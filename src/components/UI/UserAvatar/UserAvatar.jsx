@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material';
 import PropTypes from 'prop-types';
-import { bgFromString, checkContrastColor } from '../../../utils/helpers';
+import { bgFromString, checkContrastColor } from '@utils/helpers';
 import { styles } from './UserAvatar.styles';
 
 const UserAvatar = ({ userName, userFirstName, userLastName, src, size, correctStyle, radius }) => {
