@@ -6,7 +6,7 @@ import { useGetPassedInterviewByIdQuery } from '../../../../redux/interviews/pas
 import { formatToLocalDate } from '../../../../utils/helpers/formatToLocalDate.js';
 import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice.js';
 import { lvlMastery } from '../../../../utils/constants/masteryLvl.js';
-import { convertMiliInYears } from '../../../../utils/helpers/convertMilliInYears.js';
+import { convertMilliInYears } from '../../../../utils/helpers/convertMilliInYears.js';
 import { styles } from './InterviewInfo.styles.js';
 
 const InterviewInfo = () => {
@@ -28,7 +28,7 @@ const InterviewInfo = () => {
 
   const fullName = `${attendeeContacts?.firstName ?? ''} ${attendeeContacts?.lastName ?? ''}`;
 
-  const yearsAgo = useMemo(() => convertMiliInYears(Date.now() - new Date(dateTime)), [dateTime]);
+  const yearsAgo = useMemo(() => convertMilliInYears(Date.now() - new Date(dateTime)), [dateTime]);
 
   return (
     <Box sx={styles.interviewInfoWrapper}>
