@@ -14,14 +14,14 @@ import {
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
 } from '@redux/api/slices/specialization/specializationApiSlice';
 import { useGetSpecializationListQuery } from '@redux/api/slices/specializationList/specializationListApiSlice';
-import useMergeState from '../../../../utils/hooks/useMergeState';
-import { SpecializationModalSchema } from '../../../../utils/validationSchemas/index';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
-import FormInput from '../../../FormsComponents/Inputs/FormInput';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import Responsibility from '../../../UI/Responsibility';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
+import useMergeState from '@utils/hooks/useMergeState';
+import { SpecializationModalSchema } from '@utils/validationSchemas/index';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { AdvancedFormSelector, FormSelect } from '@components/FormsComponents/Inputs';
+import FormInput from '@components/FormsComponents/Inputs/FormInput';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import Responsibility from '@components/UI/Responsibility';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationModal = () => {

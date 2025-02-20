@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { useGetLanguageUserQuery } from '@redux/api/slices/user/language/languageApiSlice';
 import { useGetUserContactsQuery } from '@redux/api/slices/user/contacts/contactsApiSlice';
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
-import SocialsLinkList from '../../../../UI/SocialsLinkList';
-import LanguagesList from '../../../../UI/LanguagesList';
+import SocialsLinkList from '@components/UI/SocialsLinkList';
+import LanguagesList from '@components/UI/LanguagesList';
 import { styles } from './RightSection.styles';
 
 const RightSection = ({ id }, profileType) => {

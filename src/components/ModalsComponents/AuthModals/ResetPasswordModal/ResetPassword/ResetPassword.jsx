@@ -9,11 +9,11 @@ import { useSnackbar } from 'notistack';
 import { useRef, useState } from 'react';
 import { useChangePasswordMutation } from '@redux/api/slices/auth/authApiSlice.js';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { FormInput } from '../../../../FormsComponents/Inputs';
-import { resetPasswordSchema } from '../../../../../utils/validationSchemas';
-import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { FormInput } from '@components/FormsComponents/Inputs';
+import { resetPasswordSchema } from '@utils/validationSchemas';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '@utils/constants/modalNames.js';
 import styles from './ResetPassword.styles';
 
 const initialValues = {

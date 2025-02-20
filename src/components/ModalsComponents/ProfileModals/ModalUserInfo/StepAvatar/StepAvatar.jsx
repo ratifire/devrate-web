@@ -9,10 +9,10 @@ import {
   useGetAvatarUserQuery,
   usePostAvatarUserMutation,
 } from '@redux/api/slices/user/avatar/avatarApiSlice';
-import { StepAvatarSchema } from '../../../../../utils/validationSchemas/index';
-import LoadImages from '../../../../UI/LoadImages';
-import { ErrorComponent } from '../../../../UI/Exceptions';
-import { StepAvatarSkeleton } from '../../../../UI/Skeleton';
+import { StepAvatarSchema } from '@utils/validationSchemas/index';
+import LoadImages from '@components/UI/LoadImages';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { StepAvatarSkeleton } from '@components/UI/Skeleton';
 import { styles } from './StepAvatar.styles';
 
 const StepAvatar = () => {

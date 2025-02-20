@@ -10,15 +10,15 @@ import {
   useGetAvailableSoftSkillsQuery,
   useGetSoftSkillsByMasteryIdQuery,
 } from '@redux/api/slices/specialization/specializationApiSlice';
-import { useGetMastery } from '../../../../utils/hooks/specialization';
-import useMergeState from '../../../../utils/hooks/useMergeState';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { FormSelect } from '../../../FormsComponents/Inputs';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import { SkillChip } from '../../../UI/Specialization/SkillChip';
+import { useGetMastery } from '@utils/hooks/specialization';
+import useMergeState from '@utils/hooks/useMergeState';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { FormSelect } from '@components/FormsComponents/Inputs';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { SkillChip } from '@components/UI/Specialization/SkillChip';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import { styles } from '../styles/SkillsModal.styles';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
 
 const initialState = {
   skill: '',

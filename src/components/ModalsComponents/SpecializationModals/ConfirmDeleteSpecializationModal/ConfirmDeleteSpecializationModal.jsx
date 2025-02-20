@@ -8,9 +8,9 @@ import {
 } from '@redux/api/slices/specialization/specializationApiSlice';
 import { closeModal, selectModalData } from '@redux/slices/modal/modalSlice';
 import { setActiveSpecialization, setMainSpecializations } from '@redux/slices/specialization/specializationSlice.js';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { CategoriesSkeleton } from '../../../UI/Skeleton';
-import { ErrorComponent } from '../../../UI/Exceptions';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { CategoriesSkeleton } from '@components/UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
 import { styles } from './ConfirmDeleteSpecializationModal.styles';
 
 const ConfirmDeleteSpecializationModal = () => {

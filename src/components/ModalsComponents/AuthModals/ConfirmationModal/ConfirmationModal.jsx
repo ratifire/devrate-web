@@ -5,9 +5,9 @@ import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
 import { useConfirmEmailMutation } from '@redux/api/slices/auth/authApiSlice.js';
-import { ConfirmationSchema } from '../../../../utils/validationSchemas';
-import changeColorOfLastTitleWord from '../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { ConfirmationSchema } from '@utils/validationSchemas';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '@utils/constants/modalNames.js';
 import ConfirmationForm from './ConfirmationForm';
 import styles from './ConfirmationModal.styles';
 

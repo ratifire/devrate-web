@@ -2,7 +2,9 @@ import { Box, Typography } from '@mui/material';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { ChartDropDown } from '@components/UI/Specialization/ChartDropDown';
+import { SkillsAssessmentChartSkeleton } from '@components/UI/Skeleton';
 import {
   arithmeticAverageSkillValue,
   createTenDaysHistoryData,
@@ -12,8 +14,6 @@ import {
   useHandleChange,
   useTooltip,
 } from '../utils';
-import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
-import { SkillsAssessmentChartSkeleton } from '../../../../UI/Skeleton';
 import { styles } from './SkillsAssessmentChart.styles';
 import useSkillsAssessmentChart from './useSkillsAssessmentChart';
 

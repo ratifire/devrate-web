@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { InfoOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { formatToLocalDate } from '@utils/helpers/formatToLocalDate';
-import TimeAgo from '../../../UI/TimeAgo';
+import TimeAgo from '@components/UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
 
 const InterviewScheduled = ({ createAt, payload }) => {

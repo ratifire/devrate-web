@@ -1,5 +1,5 @@
 import { TAG_TYPES } from '@utils/constants/tagTypes.js';
-import { apiSlice } from '../apiSlice.js';
+import { apiSlice } from '@redux/api/apiSlice.js';
 
 export const achievementsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

@@ -8,17 +8,17 @@ import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
 import { selectModalData } from '@redux/slices/modal/modalSlice';
 import { useUpdateWorkExperienceByIdMutation } from '@redux/api/slices/workExperienceApiSlice.js';
-import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas/index';
-import FormInput from '../../../FormsComponents/Inputs/FormInput';
-import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
-import Responsibility from '../../../UI/Responsibility';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
-import { FormSelect } from '../../../FormsComponents/Inputs';
-import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { addUniqueItem } from '../../../../utils/helpers/ProfileWorkExperience/addUniqueItem.js';
+import { WorkExperienceModalSchema } from '@utils/validationSchemas/index';
+import FormInput from '@components/FormsComponents/Inputs/FormInput';
+import TextAreaInput from '@components/FormsComponents/Inputs/TextAreaInput';
+import Responsibility from '@components/UI/Responsibility';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import FormCheckbox from '@components/FormsComponents/Inputs/FormCheckbox';
+import { FormSelect } from '@components/FormsComponents/Inputs';
+import { generateYearsArray } from '@utils/helpers/generateYearsArray';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { addUniqueItem } from '@utils/helpers/ProfileWorkExperience/addUniqueItem.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceEditModal = () => {

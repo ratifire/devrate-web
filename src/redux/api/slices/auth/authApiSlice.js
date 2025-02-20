@@ -2,7 +2,7 @@ import { logOut } from '@redux/slices/auth/authSlice.js';
 import { clearTokens } from '@redux/slices/auth/tokenSlice.js';
 import { setDarkTheme } from '@redux/slices/theme/themeSlice.js';
 import { getTokenInHeaders } from '@utils/helpers/index.js';
-import { apiSlice } from '../../apiSlice.js';
+import { apiSlice } from '@redux/api/apiSlice.js';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

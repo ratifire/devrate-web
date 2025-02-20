@@ -8,9 +8,9 @@ import { useGetUserAllSpecializationQuery } from '@redux/api/slices/specializati
 import { sortedSkills } from '@utils/helpers/sortedSkills';
 import { sortSkillsByOriginal } from '@utils/helpers/sortedSkillsByOriginal';
 import { emptyUserTabsPictures } from '@utils/constants/emptyTabsPictures';
-import TextAreaSearch from '../../../../../FormsComponents/Inputs/TextAreaSearch';
-import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
-import StarMainSpecialization from '../../../../../UI/StarMainSpecialization';
+import TextAreaSearch from '@components/FormsComponents/Inputs/TextAreaSearch';
+import EmptyExperienceTab from '@components/PageComponents/ProfileComponents/sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
+import StarMainSpecialization from '@components/UI/StarMainSpecialization';
 import { updateAllSpecializations } from './updateAllSpecialization';
 import SkillsItem from './SkillsItem';
 import { styles } from './Skills.styles';

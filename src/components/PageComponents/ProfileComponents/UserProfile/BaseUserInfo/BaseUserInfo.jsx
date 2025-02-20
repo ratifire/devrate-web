@@ -7,9 +7,9 @@ import { useDispatch } from 'react-redux';
 import { openChat } from '@redux/slices/chat/chatSlice.js';
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
-import UserAvatar from '../../../../UI/UserAvatar';
-import Bookmark from '../../../../UI/Bookmark';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import UserAvatar from '@components/UI/UserAvatar';
+import Bookmark from '@components/UI/Bookmark';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = ({ id }) => {

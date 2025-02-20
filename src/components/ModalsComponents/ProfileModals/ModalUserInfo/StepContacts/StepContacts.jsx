@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import { useGetUserContactsQuery, usePostContactsUserMutation } from '@redux/api/slices/user/contacts/contactsApiSlice';
-import { StepContactsSchema } from '../../../../../utils/validationSchemas/index';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { FormInput } from '../../../../FormsComponents/Inputs';
-import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
-import { normalizeUrl, addPhone, addTelegram, getDataStepContacts } from '../../../../../utils/helpers/urlHelpers.js';
-import { StepContactsSkeleton } from '../../../../UI/Skeleton';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { StepContactsSchema } from '@utils/validationSchemas/index';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { FormInput } from '@components/FormsComponents/Inputs';
+import { SOCIAL_TYPES } from '@components/UI/SocialsLinkList/SocialTypes';
+import { normalizeUrl, addPhone, addTelegram, getDataStepContacts } from '@utils/helpers/urlHelpers.js';
+import { StepContactsSkeleton } from '@components/UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
 import { styles } from './StepContacts.styles';
 
 const StepContacts = () => {

@@ -5,9 +5,7 @@ import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/
 import InterviewsSkeleton from '@components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { styles } from './ScheduledInterviewsPage.styles.js';
 
-const SideBar = lazy(
-  () => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar.jsx')
-);
+const SideBar = lazy(() => import('@components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar.jsx'));
 
 const MemoizedSideBar = memo(SideBar);
 

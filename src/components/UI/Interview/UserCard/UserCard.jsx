@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
+import { ButtonDef } from '@components/FormsComponents/Buttons/index.js';
 import UserAvatar from '../../UserAvatar/index.js';
 import { styles } from './UserCard.styles.js';
 

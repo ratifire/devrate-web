@@ -5,7 +5,7 @@ import { useGetEducationByUserIdQuery } from '@redux/api/slices/educationApiSlic
 import { loopedObjValues } from '@utils/helpers/loopedObjValues';
 import { iconsEducation } from '@utils/constants/Experience/iconsExperience';
 import { emptyUserTabsPictures } from '@utils/constants/emptyTabsPictures';
-import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
+import EmptyExperienceTab from '@components/PageComponents/ProfileComponents/sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import EducationItem from './EducationItem';
 
 const Education = ({ id, tab }) => {

@@ -7,8 +7,8 @@ import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/persona
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
-import LinearProgressWithLabel from '../../../../UI/LinearProgressWithLabel';
-import UserAvatar from '../../../../UI/UserAvatar';
+import LinearProgressWithLabel from '@components/UI/LinearProgressWithLabel';
+import UserAvatar from '@components/UI/UserAvatar';
 import { styles } from './BaseUserInfo.styles';
 import { useProfileProgress } from './useProfileProgress';
 

@@ -6,7 +6,7 @@ import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { useGetUserContactsQuery } from '@redux/api/slices/user/contacts/contactsApiSlice.js';
 import { lightIcons, darkIcons, getIconsByType } from '@utils/constants/ProfileContacts/';
 import { constructUrlByType } from '@utils/helpers/urlHelpers.js';
-import { styles } from '../../PageComponents/ProfileComponents/PersonalProfile/RightSection/RightSection.styles.js';
+import { styles } from '@components/PageComponents/ProfileComponents/PersonalProfile/RightSection/RightSection.styles.js';
 const icons = { dark: darkIcons, light: lightIcons };
 const SocialsLinkList = ({ gap = 2, componentStyles }) => {
   const { mode } = useSelector((state) => state.theme);

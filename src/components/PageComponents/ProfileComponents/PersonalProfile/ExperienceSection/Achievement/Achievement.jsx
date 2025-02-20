@@ -7,7 +7,7 @@ import { useFetchAchievementsQuery } from '@redux/api/slices/achievementsApiSlic
 import { iconsAchievement } from '@utils/constants/Experience/iconsExperience';
 import { loopedObjValues } from '@utils/helpers/loopedObjValues';
 import { emptyPersonalTabsPictures } from '@utils/constants/emptyTabsPictures';
-import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
+import EmptyExperienceTab from '@components/PageComponents/ProfileComponents/sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { styles } from './Achievement.styles.js';
 import AchievementItem from './AchievementItem';
 

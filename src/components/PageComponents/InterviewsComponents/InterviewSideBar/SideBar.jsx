@@ -2,8 +2,8 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import { useScrollPadding } from '@utils/helpers/useScrollPadding.js';
 import SideBarEvent from '../InterviewSideBarEvent';
-import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding.js';
 import { styles } from './SideBar.styles.js';
 
 const SideBar = ({ interviews, refHandler, passedInterview }) => {

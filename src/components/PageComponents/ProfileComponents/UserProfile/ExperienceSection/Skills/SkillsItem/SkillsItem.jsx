@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import CustomTooltip from '../../../../../../UI/CustomTooltip';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { styles } from './SkillsItem.styles';
 
 const SkillsItem = ({ data, isSorted }) => {

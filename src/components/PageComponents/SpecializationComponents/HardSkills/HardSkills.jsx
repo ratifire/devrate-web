@@ -1,7 +1,7 @@
-import { useHardSkillData } from '../../../../utils/hooks/specialization';
-import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { useHardSkillData } from '@utils/hooks/specialization';
+import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 
 const HardSkills = () => {
   const { skills, isError, isFetching } = useHardSkillData();

@@ -2,8 +2,8 @@ import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useGetWorkExperienceByUserIdQuery } from '@redux/api/slices/workExperienceApiSlice.js';
 import { emptyUserTabsPictures } from '@utils/constants/emptyTabsPictures';
+import EmptyExperienceTab from '@components/PageComponents/ProfileComponents/sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import WorkExperienceItem from '../../ExperienceSection/WorkExperience/WorkExperienceItem';
-import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 
 const WorkExperience = ({ id, tab }) => {
   const { data: workExperiencesData } = useGetWorkExperienceByUserIdQuery(id);

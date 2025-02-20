@@ -5,12 +5,12 @@ import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { selectModalData } from '@redux/slices/modal/modalSlice.js';
 import { useUpdateAchievementMutation } from '@redux/api/slices/achievementsApiSlice.js';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import FormInput from '../../../FormsComponents/Inputs/FormInput';
-import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
-import { AchievementModalSchema } from '../../../../utils/validationSchemas/index';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import FormInput from '@components/FormsComponents/Inputs/FormInput';
+import TextAreaInput from '@components/FormsComponents/Inputs/TextAreaInput';
+import { AchievementModalSchema } from '@utils/validationSchemas/index';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import { styles } from './AchievementModal.styles';
 
 const AchievementEditModal = () => {

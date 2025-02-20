@@ -13,13 +13,13 @@ import {
 } from '@redux/api/slices/specialization/specializationApiSlice';
 import { useGetSpecializationListQuery } from '@redux/api/slices/specializationList/specializationListApiSlice';
 import { setActiveSpecialization } from '@redux/slices/specialization/specializationSlice.js';
-import useMergeState from '../../../../utils/hooks/useMergeState';
-import { SpecializationModalSchema } from '../../../../utils/validationSchemas/index';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import useMergeState from '@utils/hooks/useMergeState';
+import { SpecializationModalSchema } from '@utils/validationSchemas/index';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { AdvancedFormSelector, FormSelect } from '@components/FormsComponents/Inputs';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationEditModal = () => {

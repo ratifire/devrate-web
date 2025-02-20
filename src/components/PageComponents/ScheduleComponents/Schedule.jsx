@@ -12,7 +12,7 @@ import {
   useGetEventByUserIdQuery,
   useLazyGetEventByUserIdQuery,
 } from '@redux/api/slices/schedule/scheduleApiSlice';
-import { ScheduleSkeleton } from '../../UI/Skeleton';
+import { ScheduleSkeleton } from '@components/UI/Skeleton';
 import EventPopup from './EventPopup';
 import { styles } from './Schedule.styles';
 import Sidebar from './Sidebar';

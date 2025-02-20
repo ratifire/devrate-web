@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { openModal } from '@redux/slices/modal/modalSlice.js';
 import { modalNames } from '@utils/constants/modalNames.js';
-import TimeAgo from '../../../UI/TimeAgo';
+import TimeAgo from '@components/UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
 
 const InterviewFeedback = ({ createAt, payload }) => {

@@ -4,9 +4,9 @@ import { Box, Button, Divider, Popover, Typography } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import { styles } from './Interviews.styles';
 
 const Interviews = () => {

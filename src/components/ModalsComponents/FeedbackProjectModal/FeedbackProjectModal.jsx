@@ -4,12 +4,12 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useCreateFeedbackMutation } from '@redux/api/slices/feedbackProjectModalApiSlice.js';
-import ButtonDef from '../../FormsComponents/Buttons/ButtonDef';
-import FormSelect from '../../FormsComponents/Inputs/FormSelect';
-import TextAreaInput from '../../FormsComponents/Inputs/TextAreaInput';
-import { FeedbackProjectModalSchema } from '../../../utils/validationSchemas/index';
-import { modalNames } from '../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../utils/hooks/useModalController.js';
+import ButtonDef from '@components/FormsComponents/Buttons/ButtonDef';
+import FormSelect from '@components/FormsComponents/Inputs/FormSelect';
+import TextAreaInput from '@components/FormsComponents/Inputs/TextAreaInput';
+import { FeedbackProjectModalSchema } from '@utils/validationSchemas/index';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import { feedbackOptions } from './constants';
 import { styles } from './FeedbackProjectModal.styles';
 

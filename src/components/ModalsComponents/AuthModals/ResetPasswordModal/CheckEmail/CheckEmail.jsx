@@ -6,11 +6,11 @@ import { useSnackbar } from 'notistack';
 import { setEmail } from '@redux/slices/auth/emailSlice.js';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
 import { useResetPasswordMutation } from '@redux/api/slices/auth/authApiSlice.js';
-import { CheckResetEmailSchema } from '../../../../../utils/validationSchemas';
-import { FormInput } from '../../../../FormsComponents/Inputs';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
+import { CheckResetEmailSchema } from '@utils/validationSchemas';
+import { FormInput } from '@components/FormsComponents/Inputs';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '@utils/constants/modalNames.js';
 import styles from './CheckEmail.styles';
 
 const initialValues = {

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useUpdateSkillsMutation } from '@redux/api/slices/skillsApiSlice.js';
 import { refetchSkills } from '@redux/slices/updateTab/updateTabSlice.js';
-import CustomTooltip from '../../../../../../UI/CustomTooltip';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { styles } from './SkillsItem.styles';
 
 const SkillsItem = ({ data, flex }) => {

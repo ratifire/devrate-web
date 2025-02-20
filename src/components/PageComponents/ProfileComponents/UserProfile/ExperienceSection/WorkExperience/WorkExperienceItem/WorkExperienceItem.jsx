@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
+import Responsibility from '@components/UI/Responsibility/Responsibility';
 import styles from './WorkExperienceItem.styles';
 
 const WorkExperienceItem = ({ startYear, endYear, position, companyName, description, responsibilities }) => {

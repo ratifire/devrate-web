@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '@redux/api/slices/feedback/interviewApiSlice';
 import { closeModal } from '@redux/slices/modal/modalSlice.js';
-import { FeedbackModalSchema } from '../../../../../utils/validationSchemas';
+import { FeedbackModalSchema } from '@utils/validationSchemas';
 
 const useFeedbackForm = () => {
   const dispatch = useDispatch();

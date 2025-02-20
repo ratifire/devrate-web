@@ -1,4 +1,4 @@
-import { apiSlice } from '../../apiSlice.js';
+import { apiSlice } from '@redux/api/apiSlice.js';
 
 const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
   tagTypes: ['ScheduledInterview'],

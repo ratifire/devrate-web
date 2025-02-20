@@ -13,13 +13,13 @@ import {
   useUpdateSpecializationAsMainByIdMutation,
 } from '@redux/api/slices/specialization/specializationApiSlice';
 import { setActiveSpecialization, setMainSpecializations } from '@redux/slices/specialization/specializationSlice.js';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import CustomTooltip from '../../../UI/CustomTooltip';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
-import { CategoriesSkeleton } from '../../../UI/Skeleton';
-import { modalNames } from '../../../../utils/constants/modalNames';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import CustomTooltip from '@components/UI/CustomTooltip';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import DropdownMenu from '@components/PageComponents/ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
+import { CategoriesSkeleton } from '@components/UI/Skeleton';
+import { modalNames } from '@utils/constants/modalNames';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {

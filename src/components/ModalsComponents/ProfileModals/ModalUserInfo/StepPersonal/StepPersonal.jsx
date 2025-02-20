@@ -7,11 +7,11 @@ import _ from 'lodash';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '@redux/api/slices/user/personal/personalApiSlice';
 import { useGetCountryListQuery } from '@redux/api/slices/countryList/countryApiSlice';
-import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
-import { StepPersonalSchema } from '../../../../../utils/validationSchemas/index';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { StepPersonalSkeleton } from '../../../../UI/Skeleton';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { FormInput, FormSelect, TextAreaInput } from '@components/FormsComponents/Inputs';
+import { StepPersonalSchema } from '@utils/validationSchemas/index';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { StepPersonalSkeleton } from '@components/UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
 import { styles } from './StepPersonal.styles';
 
 const StepPersonal = () => {
