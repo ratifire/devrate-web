@@ -17,6 +17,7 @@ export const TAG_TYPES = {
   ContactList: 'ContactList',
   LanguageUser: 'LanguageUser',
   WorkExperience: 'WorkExperience',
+  InterviewRequest: 'InterviewRequest',
   ScheduledInterview: 'ScheduledInterview',
   PassedInterview: 'PassedInterview',
 };
