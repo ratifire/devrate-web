@@ -912,6 +912,18 @@ export const en = {
           assigned: 'Scheduled',
         },
       },
+      notifications: {
+        delete: {
+          oneTimeSlot: {
+            success: 'Deleted slot successfully',
+            error: 'Something went wrong',
+          },
+          allTimeSlots: {
+            success: 'Deleted all successfully',
+            error: 'Something went wrong',
+          },
+        },
+      },
     },
   },
 };
