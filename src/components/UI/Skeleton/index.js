@@ -32,6 +32,13 @@ import {
   InterviewSkillsSkeleton,
 } from './Pages/scheduledInterviewSkeleton';
 
+import {
+  StatisticsSkeleton,
+  InterviewInfoSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
+} from './Pages/interviewSkeleton';
+
 export {
   BlogSkeleton,
   CategoriesSkeleton,
@@ -54,9 +61,13 @@ export {
   StepPersonalSkeleton,
   StepAvatarSkeleton,
   StepLanguageSkeleton,
+  InterviewInfoSkeleton,
+  StatisticsSkeleton,
+  StatisticSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
   UserCardScheduledInterviewSkeleton,
   ScheduledMeetingSkeleton,
-  StatisticSkeleton,
   ParticipantEvaluationsSkeleton,
   InterviewSkillsSkeleton,
-};
+ };
