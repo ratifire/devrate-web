@@ -33,6 +33,13 @@ import {
 } from './Pages/scheduledInterviewSkeleton';
 import InterviewRequestSkeleton from './Pages/InterviewRequestSkeleton';
 
+import {
+  StatisticsSkeleton,
+  InterviewInfoSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
+} from './Pages/interviewSkeleton';
+
 export {
   BlogSkeleton,
   CategoriesSkeleton,
@@ -55,9 +62,13 @@ export {
   StepPersonalSkeleton,
   StepAvatarSkeleton,
   StepLanguageSkeleton,
+  InterviewInfoSkeleton,
+  StatisticsSkeleton,
+  StatisticSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
   UserCardScheduledInterviewSkeleton,
   ScheduledMeetingSkeleton,
-  StatisticSkeleton,
   ParticipantEvaluationsSkeleton,
   InterviewSkillsSkeleton,
   InterviewRequestSkeleton,

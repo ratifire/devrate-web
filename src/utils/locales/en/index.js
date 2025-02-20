@@ -468,6 +468,7 @@ export const en = {
       },
       softSkills: {
         title: 'Soft skills',
+        averageMark: 'Average mark:',
       },
       modal: {
         specialization: {
@@ -868,6 +869,20 @@ export const en = {
           statusInProcess: 'In Process',
           statusAwaitingFeedback: 'Awaiting Feedback',
         },
+      },
+      passedInterviews: {
+        interviewersAssessmentTitle: "Interviewer's assessment",
+        interviewInfoTitle: 'Interview info',
+        interviewInfoText: 'years ago',
+        interviewInfoRole: 'Your role',
+        interviewInfoHost: 'Host',
+        interviewFeedbackTitle: "Interviewee's feedback",
+        interviewFeedbackReadLess: 'Read more',
+        interviewFeedbackReadMore: 'Read less',
+        interviewStatisticsTitle: 'Statistics',
+        interviewStatisticsHardSkills: 'Hard Skills',
+        interviewStatisticsSoftSkills: 'Soft Skills',
+        interviewStatisticsOverall: 'Over All',
       },
     },
     singleScheduledInterview: {

@@ -695,6 +695,19 @@ export const uk = {
           statusAwaitingFeedback: 'Очікується відгук',
         },
       },
+      passedInterviews: {
+        interviewersAssessmentTitle: 'Оцінки співбесідника',
+        interviewInfoTitle: 'Інформація про співбесіду',
+        interviewInfoText: 'рок(ів) тому',
+        interviewInfoRole: 'Ваша роль',
+        interviewInfoHost: 'Хост',
+        interviewFeedbackTitle: 'Відгук співбесідника',
+        interviewFeedbackReadLess: 'Читати менше',
+        interviewFeedbackReadMore: 'Читати більше',
+        interviewStatisticsHardSkills: 'Hard Skills',
+        interviewStatisticsSoftSkills: 'Soft Skills',
+        interviewStatisticsOverall: 'Over All',
+      },
     },
     singleScheduledInterview: {
       interviewsSummary: {

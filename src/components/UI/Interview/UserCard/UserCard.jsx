@@ -28,8 +28,8 @@ const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClic
           <Typography component='p' sx={styles.data} variant='body'>
             {date}
           </Typography>
-          <Typography component='p' sx={styles[lvl]} variant='subtitle2'>
-            {lvl}
+          <Typography component='p' sx={styles[lvl?.toLowerCase()]} variant='subtitle2'>
+            {`Level ${lvl}`}
           </Typography>
         </Box>
       </Box>
