@@ -133,6 +133,9 @@ const getDesignTokens = (mode) => ({
                   color: '#D32F2F',
                   backgroundColor: 'transparent',
                 },
+                disable: {
+                  color: '#303032',
+                },
               },
               addTimeslot: '',
               openMenuDots: {
