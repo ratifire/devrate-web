@@ -67,6 +67,9 @@ export const styles = {
       color: theme.palette.requestInterviewe.buttons.delete.hover.color,
       backgroundColor: theme.palette.requestInterviewe.buttons.delete.hover.backgroundColor,
     },
+    '&.Mui-disabled': {
+      color: theme.palette.requestInterviewe.buttons.delete.disable.color,
+    },
   }),
   outlined: (theme) => ({
     width: '216px',

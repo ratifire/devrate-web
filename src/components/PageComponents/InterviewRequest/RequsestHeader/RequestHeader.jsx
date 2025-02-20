@@ -7,14 +7,21 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
 import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu/index.js';
-// import { useCreateInterviewRequestMutation } from '../../../../redux/services/interviewRequestApiSlice.js';
 import { styles } from './RequestHeader.styles.js';
 
-const RequestHeader = ({ title, role, description, foundInterviews, totalInterviews, selectedTimeSlots }) => {
+const RequestHeader = ({
+  title,
+  role,
+  description,
+  foundInterviews,
+  totalInterviews,
+  selectedTimeSlots,
+  onDeleteSelected,
+  hasSelectedSlots,
+  handleUpdateSlots,
+}) => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
-  // const [createInterviweRequset] = useCreateInterviewRequestMutation();
-  // console.log(createInterviweRequset, 'createInterviweRequset');
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
@@ -24,9 +31,9 @@ const RequestHeader = ({ title, role, description, foundInterviews, totalIntervi
     setAnchorEl(event.currentTarget);
   };
 
-  const handleCreateInterviweRequest = () => {
-    //Open modal to creeate interview
-  };
+  // const handleCreateInterviweRequest = (event) => {
+  //   console.log(event);
+  // };
 
   return (
     <Box sx={styles.container}>
@@ -44,16 +51,21 @@ const RequestHeader = ({ title, role, description, foundInterviews, totalIntervi
         </Typography>
 
         <Box sx={styles.buttons}>
-          <IconButton aria-label='delete' sx={styles.iconDelete}>
+          <IconButton
+            aria-label='delete'
+            disabled={!hasSelectedSlots}
+            sx={styles.iconDelete}
+            onClick={handleUpdateSlots}
+          >
             <DeleteIcon />
           </IconButton>
           <ButtonDef
+            // handleClick={handleCreateInterviweRequest}
             label={t('Аdd time slots')}
             startIcon={<AddIcon />}
             sx={styles.outlined}
             type={'button'}
             variant='outlined'
-            onClick={handleCreateInterviweRequest}
           />
 
           <Box sx={styles.menuIcon}>
@@ -64,7 +76,7 @@ const RequestHeader = ({ title, role, description, foundInterviews, totalIntervi
           <DropdownMenu
             anchorEl={anchorEl}
             handleCloseMenu={handleCloseMenu}
-            // handleDeleteFeature={handleDeleteFeature}
+            handleDeleteFeature={onDeleteSelected}
             // handleEditFeature={handleEditFeature}
           />
         </Box>
@@ -105,7 +117,9 @@ RequestHeader.propTypes = {
   foundInterviews: PropTypes.number.isRequired,
   totalInterviews: PropTypes.number.isRequired,
   selectedTimeSlots: PropTypes.number.isRequired,
-  onAddTimeslot: PropTypes.func.isRequired,
+  onDeleteSelected: PropTypes.func.isRequired,
+  handleUpdateSlots: PropTypes.func.isRequired,
+  hasSelectedSlots: PropTypes.bool.isRequired,
 };
 
 export default RequestHeader;
