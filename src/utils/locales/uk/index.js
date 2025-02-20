@@ -709,5 +709,38 @@ export const uk = {
         interviewStatisticsOverall: 'Over All',
       },
     },
+    singleScheduledInterview: {
+      interviewsSummary: {
+        scheduledMeeting: {
+          title: 'Запланована зустріч',
+          participants: 'Учасники',
+          language: 'Мова',
+          duration: 'Тривалість',
+          platform: 'Платформа',
+          link:
+            'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
+            ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
+          canceledMeeting: 'Скасувати зустріч',
+          joinMeeting: 'Доєднатись до інтерв’ю',
+          notHappenedMeeting: 'Співбесіда не відбулася',
+          leaveFeedbackMeeting: 'Залишити відгук',
+          languageType: 'Англійська',
+          durationType: 'хв.',
+        },
+        interviewSkills: {
+          skills: 'Навички',
+        },
+        userCardScheduledInterview: {
+          btn: 'Написати повідомлення',
+          interviewLvl: 'Рівень співбесіди:',
+        },
+        participantEvaluations: {
+          title: 'Оцінка учасників',
+        },
+        statistic: {
+          title: 'Статистика',
+        },
+      },
+    },
   },
 };
