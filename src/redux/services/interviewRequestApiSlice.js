@@ -1,13 +1,13 @@
+import { TAG_TYPES } from '../../utils/constants/tagTypes.js';
 import { apiSlice } from './api/apiSlice';
 
 export const interviewRequestApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // Получить запросы на интервью по masteryId
     getInterviewRequestByMasteryId: builder.query({
       query: (masteryId) => `/interview-requests/masteries/${masteryId}`,
+      providesTags: [TAG_TYPES.InterviewRequest],
     }),
 
-    // Создать новый запрос на интервью
     createInterviewRequest: builder.mutation({
       query: ({ role, availableDates, comment, desiredInterviewDate, desiredNumberOfInterviews }) => ({
         url: `/interview-requests`,
@@ -20,32 +20,26 @@ export const interviewRequestApiSlice = apiSlice.injectEndpoints({
           desiredNumberOfInterviews,
         },
       }),
-      // invalidatesTags: [TAG_TYPES.InterviewRequest],
+      invalidatesTags: [TAG_TYPES.InterviewRequest],
     }),
 
-    // Обновить запрос на интервью
-    updateInterviewRequest: builder.mutation({
-      query: ({ id, role, availableDates, comment, desiredInterviewDate, desiredNumberOfInterviews }) => ({
-        url: `/interview-requests/${id}`,
-        method: 'PUT',
-        body: {
-          role,
-          availableDates,
-          comment,
-          desiredInterviewDate,
-          desiredNumberOfInterviews,
-        },
-      }),
-      // invalidatesTags: [TAG_TYPES.InterviewRequest],
+    updateTimeSlots: builder.mutation({
+      query: ({ id, data }) => {
+        return {
+          url: `/interview-requests/${id}`,
+          method: 'PUT',
+          body: { ...data },
+        };
+      },
+      invalidatesTags: [TAG_TYPES.InterviewRequest],
     }),
 
-    // Удалить запрос на интервью
     deleteInterviewRequest: builder.mutation({
       query: (id) => ({
         url: `/interview-requests/${id}`,
         method: 'DELETE',
       }),
-      // invalidatesTags: [TAG_TYPES.InterviewRequest],
+      invalidatesTags: [TAG_TYPES.InterviewRequest],
     }),
   }),
 });
@@ -53,6 +47,6 @@ export const interviewRequestApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetInterviewRequestByMasteryIdQuery,
   useCreateInterviewRequestMutation,
-  useUpdateInterviewRequestMutation,
+  useUpdateTimeSlotsMutation,
   useDeleteInterviewRequestMutation,
 } = interviewRequestApiSlice;
