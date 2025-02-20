@@ -10,10 +10,10 @@ import {
   getCurrentAndLastMonths,
   useGetHistoryData,
   useHandleChange,
-  useTooltip,
 } from '../utils';
 import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
 import { SkillsAssessmentChartSkeleton } from '../../../../UI/Skeleton';
+import useTooltipColorChart from '../../../../../utils/hooks/useTooltipColorChart.js';
 import { styles } from './SkillsAssessmentChart.styles';
 import useSkillsAssessmentChart from './useSkillsAssessmentChart';
 
@@ -21,7 +21,7 @@ const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
   const { data: dataHistory, isError, isFetching } = useGetHistoryData({ to, from });
   const { t } = useTranslation();
-  const { itemStyle, contentStyle } = useTooltip();
+  const { itemStyle, contentStyle } = useTooltipColorChart();
   const arithmeticAverage = arithmeticAverageSkillValue({
     data: dataHistory,
     secondValue: 'hardSkillMark',
