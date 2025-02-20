@@ -14,7 +14,6 @@ const LevelChart = () => {
   const { t } = useTranslation();
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
   const { grad1, grad2, grad3, grad4 } = useThemeLevelChart();
-
   if (isFetching) {
     return <LevelChartSkeleton />;
   }

@@ -544,6 +544,7 @@ export const en = {
     dropDownMenu: {
       delete: 'Delete',
       edit: 'Edit',
+      main: 'Make main',
     },
     schedule: {
       deleteEventSuccessMessage: 'Event was deleted',

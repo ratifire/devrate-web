@@ -5,6 +5,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { enqueueSnackbar } from 'notistack';
 import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 import {
   useGetSpecializationByUserIdQuery,
@@ -37,12 +38,14 @@ const SpecializationCategories = () => {
   } = useGetSpecializationByUserIdQuery(id, { skip: !id });
   const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery, isError: isErrorGetMainMastery }] =
     useLazyGetMainMasteryBySpecializationIdQuery();
-  const { isLoading: isLoadingUpdateSpecialization, isError: isErrorUpdateSpecialization } =
-    useUpdateSpecializationAsMainByIdMutation();
+  const [
+    updateSpecializationAsMainById,
+    { isLoading: isLoadingUpdateSpecialization, isError: isErrorUpdateSpecialization },
+  ] = useUpdateSpecializationAsMainByIdMutation();
 
   const isLoading = isFetchingGetSpecialization || isLoadingGetMainMastery || isLoadingUpdateSpecialization;
   const isError = isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization;
-  const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : 0));
+  const specializationsSorted = specializations?.toSorted((a, b) => b.main - a.main);
   const { openModal } = useModalController();
 
   useEffect(() => {
@@ -76,6 +79,24 @@ const SpecializationCategories = () => {
   const handlerAddSpecializations = () => {
     if (specializations?.length >= 4) return;
     openModal(modalNames.specializationModal);
+  };
+
+  const handlerChangeMainSpecialization = async (id) => {
+    try {
+      if (specializations?.length === 0 || !activeSpecialization) return;
+      await updateSpecializationAsMainById(
+        { ...activeSpecialization, main: true },
+        { skip: !activeSpecialization }
+      ).unwrap();
+      dispatch(setMainSpecializations(activeSpecialization));
+      enqueueSnackbar(t('modalNotifyText.specialization.change.success', { name: activeSpecialization.name }), {
+        variant: 'success',
+      });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('modalNotifyText.specialization.change.error'), { variant: 'error' });
+    }
+    handleCloseMenu(id);
   };
 
   const handleOpenConfirmDeleteSpecializationModal = (id, specialization) => {
@@ -165,6 +186,7 @@ const SpecializationCategories = () => {
                 handleCloseMenu={() => handleCloseMenu(id)}
                 handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
                 handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
+                handleMainFeature={() => handlerChangeMainSpecialization(id)}
               />
             </Box>
           </Box>
