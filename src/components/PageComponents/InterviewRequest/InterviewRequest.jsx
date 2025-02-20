@@ -1,31 +1,39 @@
 import { Box, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  useGetSpecializationByUserIdQuery,
-  // useGetUserAllSpecializationQuery,
-} from '../../../redux/specialization/specializationApiSlice.js';
+import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice.js';
 import { selectCurrentUser } from '../../../redux/auth/authSlice.js';
-// import { useGetInterviewRequestByMasteryIdQuery } from '../../../redux/services/interviewRequestApiSlice.js';
+import { useGetInterviewRequestByMasteryIdQuery } from '../../../redux/services/interviewRequestApiSlice.js';
 import Participant from './Participant';
 import { styles } from './InterviewRequest.styles.js';
-import { respondent } from './mockData.js';
 
 const InterviewRequest = () => {
   const { data: info } = useSelector(selectCurrentUser);
   const { id } = info;
-  const { data: userAllSpecializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
   const [mastery, setMastery] = useState('');
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
+  const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
 
-  // const { data: roles } = useGetInterviewRequestByMasteryIdQuery(mastery.id);
-  // console.log(roles, 'roles');
+  const { data: userData } = useGetInterviewRequestByMasteryIdQuery(mastery?.mainMasteryId, {
+    skip: !mastery.mainMasteryId,
+  });
 
-  const candidate = respondent.find((item) => item.role === 'CANDIDATE');
-  const interviewer = respondent.find((item) => item.role === 'INTERVIEWER');
+  const getUserByRole = (userData, role) => userData?.filter((item) => item.role === role).at(0) || null;
+
+  const candidate = getUserByRole(userData, 'CANDIDATE');
+  const interviewer = getUserByRole(userData, 'INTERVIEWER');
+
+  useEffect(() => {
+    if (specializations && specializations.length > 0) {
+      const mainSpecialization = specializations.find((item) => item.main);
+      if (mainSpecialization) {
+        setMastery(mainSpecialization);
+      }
+    }
+  }, [specializations]);
 
   const handleChange = ({ target: { value } }) => {
     setMastery(value);
@@ -66,9 +74,14 @@ const InterviewRequest = () => {
               onClose={handleClose}
               onOpen={handleOpen}
             >
-              {userAllSpecializations?.map((item) => (
+              {specializations?.map((item) => (
                 <MenuItem key={item.id} sx={styles.selectItem} value={item}>
-                  {item.name}
+                  {item.name}{' '}
+                  {item.main && (
+                    <Typography component='span' sx={{ color: 'gold' }}>
+                      ★
+                    </Typography>
+                  )}{' '}
                 </MenuItem>
               ))}
             </Select>
@@ -76,8 +89,8 @@ const InterviewRequest = () => {
         </Box>
       </Box>
 
-      <Box>{mastery && <Participant data={candidate} />}</Box>
-      <Box>{mastery && <Participant data={interviewer} />}</Box>
+      <Box>{candidate && <Participant data={candidate} specialization={mastery} userId={userData} />}</Box>
+      <Box>{interviewer && <Participant data={interviewer} specialization={mastery} userId={userData} />}</Box>
     </Box>
   );
 };
