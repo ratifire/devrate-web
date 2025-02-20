@@ -1,7 +1,6 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
@@ -9,7 +8,6 @@ import { SkillsSkeleton } from '../../Skeleton';
 import { styles } from './SpecializationSkills.styles';
 
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
-  const { t } = useTranslation();
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
 
@@ -24,7 +22,7 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.title}>
-        <Typography variant='h6'>{t(title)}</Typography>
+        <Typography variant='h6'>{title}</Typography>
         {openModal && (
           <IconButton aria-label='Edit user information' disabled={isDisabled} sx={styles.btnIcon} onClick={openModal}>
             <EditIcon />
@@ -42,7 +40,7 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
         ))}
       </Box>
       <Box sx={styles.markWrapper}>
-        <Typography variant='h6'>{t(subTitle)}</Typography>
+        <Typography variant='h6'>{subTitle}</Typography>
         <Typography sx={styles.mark} variant='h6'>{`${averageMark}/10`}</Typography>
       </Box>
     </Box>

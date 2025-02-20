@@ -6,7 +6,7 @@ import { useGetPassedInterviewByIdQuery } from '../../../../redux/interviews/pas
 import { formatToLocalDate } from '../../../../utils/helpers/formatToLocalDate.js';
 import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice.js';
 import { lvlMastery } from '../../../../utils/constants/masteryLvl.js';
-import { convertMiliInYears } from '../../../../utils/helpers/converMiliInYears.js';
+import { convertMiliInYears } from '../../../../utils/helpers/convertMilliInYears.js';
 import { styles } from './InterviewInfo.styles.js';
 
 const InterviewInfo = () => {

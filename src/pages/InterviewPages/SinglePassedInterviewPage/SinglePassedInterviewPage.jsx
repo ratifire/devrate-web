@@ -54,24 +54,21 @@ const SinglePassedInterviewPage = () => {
     attendeeSpecialization = '',
   } = interviewData ?? {};
 
-  const hardSkillsArray = Object.entries(hardSkills).map(([name, averageMark]) => ({
-    name,
-    averageMark,
-  }));
-  const averageHardSkillsMark =
-    hardSkillsArray.length > 0
+  const getSkillsArray = (skillsArray) =>
+    Object.entries(skillsArray).map(([name, averageMark]) => ({
+      name,
+      averageMark,
+    }));
+  const getAverageSkillsMark = (skillsArray) =>
+    skillsArray.length > 0
       ? (hardSkillsArray.reduce((acc, skill) => acc + skill.averageMark, 0) / hardSkillsArray.length).toFixed(1)
       : '0';
 
-  const softSkillsArray = Object.entries(softSkills).map(([name, averageMark]) => ({
-    name,
-    averageMark,
-  }));
+  const hardSkillsArray = getSkillsArray(hardSkills);
+  const softSkillsArray = getSkillsArray(softSkills);
 
-  const averageSoftSkillsMark =
-    softSkillsArray.length > 0
-      ? (softSkillsArray.reduce((acc, skill) => acc + skill.averageMark, 0) / softSkillsArray.length).toFixed(1)
-      : '0';
+  const averageHardSkillsMark = getAverageSkillsMark(hardSkillsArray);
+  const averageSoftSkillsMark = getAverageSkillsMark(softSkillsArray);
 
   const { firstName = '', lastName = '' } = userContacts ?? {};
   const role = lvlMastery[attendeeMasteryLevel] + ' ' + attendeeSpecialization;

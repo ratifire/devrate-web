@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
 
 const InterviewSoftSkills = ({ softSkills, averageSoftSkillsMark }) => {
+  const { t } = useTranslation();
+
   return (
     <SpecializationSkills
       averageMark={averageSoftSkillsMark}
       skills={softSkills}
-      subTitle='specialization.softSkills.averageMark'
-      title='specialization.softSkills.title'
+      subTitle={t('specialization.softSkills.averageMark')}
+      title={t('specialization.softSkills.title')}
     />
   );
 };

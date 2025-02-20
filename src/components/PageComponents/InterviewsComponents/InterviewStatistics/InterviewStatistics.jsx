@@ -14,9 +14,18 @@ const InterviewStatistics = ({ hardSkillMark, softSkillMark }) => {
   const softSkillMarkPercent = softSkillMark * PERCENT_MULTIPLIER;
   const hardSkillMarkPercent = Math.ceil(hardSkillMark * PERCENT_MULTIPLIER);
   const averageMarkPercent = Math.ceil((softSkillMarkPercent + hardSkillMarkPercent) / SKILLS_NUMBER);
-  const { gradHard1, gradHard2, gradHard3 } = useThemeHardSkillsChart();
-  const { gradSoft1, gradSoft2, gradSoft3 } = useThemeSoftSkillsChart();
-  const { gradAver1, gradAver2, gradAver3, gradAver4 } = useThemeAverageSkillsChart();
+  const { hardSkillsGradientStartColor, hardSkillsGradientMiddleColor, hardSkillsGradientEndColor } =
+    useThemeHardSkillsChart();
+  const { softSkillsGradientStartColor, softSkillsGradientMiddleColor, softSkillsGradientEndColor } =
+    useThemeSoftSkillsChart();
+  const {
+    averageSkillsGradientStartColor,
+    averageSkillsGradientMiddleColor,
+    averageSkillsGradientEndColor,
+    averageSkillsGradientExtraColor,
+  } = useThemeAverageSkillsChart();
+
+  const getPercentageRepresentation = (value) => `${value / PERCENT_MULTIPLIER}/${PERCENT_MULTIPLIER}`;
 
   return (
     <Box sx={styles.statisticsWrapper}>
@@ -33,13 +42,13 @@ const InterviewStatistics = ({ hardSkillMark, softSkillMark }) => {
             fz={16}
             gradient={
               <linearGradient id='gradient-green' x1='0%' x2='100%' y1='0%' y2='0%'>
-                <stop offset='0%' style={{ stopColor: gradHard1, stopOpacity: 1 }} />
-                <stop offset='54%' style={{ stopColor: gradHard2, stopOpacity: 1 }} />
-                <stop offset='100%' style={{ stopColor: gradHard3, stopOpacity: 1 }} />
+                <stop offset='0%' style={{ stopColor: hardSkillsGradientStartColor, stopOpacity: 1 }} />
+                <stop offset='54%' style={{ stopColor: hardSkillsGradientMiddleColor, stopOpacity: 1 }} />
+                <stop offset='100%' style={{ stopColor: hardSkillsGradientEndColor, stopOpacity: 1 }} />
               </linearGradient>
             }
             height={82}
-            text={({ value }) => `${value / PERCENT_MULTIPLIER}/${PERCENT_MULTIPLIER}`}
+            text={({ value }) => getPercentageRepresentation(value)}
             transformX={-18}
             value={softSkillMarkPercent}
           />
@@ -53,13 +62,13 @@ const InterviewStatistics = ({ hardSkillMark, softSkillMark }) => {
             fz={16}
             gradient={
               <linearGradient id='gradient-red' x1='0%' x2='100%' y1='0%' y2='0%'>
-                <stop offset='0%' style={{ stopColor: gradSoft1, stopOpacity: 1 }} />
-                <stop offset='59.61%' style={{ stopColor: gradSoft2, stopOpacity: 1 }} />
-                <stop offset='100%' style={{ stopColor: gradSoft3, stopOpacity: 1 }} />
+                <stop offset='0%' style={{ stopColor: softSkillsGradientStartColor, stopOpacity: 1 }} />
+                <stop offset='59.61%' style={{ stopColor: softSkillsGradientMiddleColor, stopOpacity: 1 }} />
+                <stop offset='100%' style={{ stopColor: softSkillsGradientEndColor, stopOpacity: 1 }} />
               </linearGradient>
             }
             height={82}
-            text={({ value }) => `${value / PERCENT_MULTIPLIER}/${PERCENT_MULTIPLIER}`}
+            text={({ value }) => getPercentageRepresentation(value)}
             transformX={-18}
             value={hardSkillMarkPercent}
           />
@@ -73,14 +82,14 @@ const InterviewStatistics = ({ hardSkillMark, softSkillMark }) => {
             fz={16}
             gradient={
               <linearGradient id='gradient-purple' x1='0%' x2='100%' y1='0%' y2='0%'>
-                <stop offset='0%' style={{ stopColor: gradAver1, stopOpacity: 1 }} />
-                <stop offset='29%' style={{ stopColor: gradAver2, stopOpacity: 1 }} />
-                <stop offset='63%' style={{ stopColor: gradAver3, stopOpacity: 1 }} />
-                <stop offset='100%' style={{ stopColor: gradAver4, stopOpacity: 1 }} />
+                <stop offset='0%' style={{ stopColor: averageSkillsGradientStartColor, stopOpacity: 1 }} />
+                <stop offset='29%' style={{ stopColor: averageSkillsGradientMiddleColor, stopOpacity: 1 }} />
+                <stop offset='63%' style={{ stopColor: averageSkillsGradientEndColor, stopOpacity: 1 }} />
+                <stop offset='100%' style={{ stopColor: averageSkillsGradientExtraColor, stopOpacity: 1 }} />
               </linearGradient>
             }
             height={82}
-            text={({ value }) => `${value / PERCENT_MULTIPLIER}/${PERCENT_MULTIPLIER}`}
+            text={({ value }) => getPercentageRepresentation(value)}
             transformX={-18}
             value={averageMarkPercent}
           />
