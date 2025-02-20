@@ -2,16 +2,34 @@ export const styles = {
   levelChartContainer: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     padding: theme.spacing(3),
   }),
+  contentContainer: {
+    marginBottom: '15px',
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '16px',
+  },
   title: {
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    marginBottom: '11px',
+    marginBottom: '9px',
+  },
+  text: {
+    '@media (max-width: 991px)': {
+      fontSize: '12px',
+    },
+  },
+  levelBtn: {
+    width: 44,
+    height: 44,
+    margin: 0,
+    backgroundColor: ' #8133f1',
+    borderRadius: '4px',
   },
   chartContainer: {
     width: '100%',
@@ -23,7 +41,7 @@ export const styles = {
   leftCaption: {
     position: 'absolute',
     bottom: '-20%',
-    right: '1%',
+    right: 'calc(50% - 170px)',
     transform: 'translateX(-50%)',
     textTransform: 'lowercase',
 
@@ -34,7 +52,7 @@ export const styles = {
   rightCaption: {
     position: 'absolute',
     bottom: '-20%',
-    left: '8%',
+    left: 'calc(50% - 135px)',
     transform: 'translateX(-50%)',
     textTransform: 'lowercase',
 
