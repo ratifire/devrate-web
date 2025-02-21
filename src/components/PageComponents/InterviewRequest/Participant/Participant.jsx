@@ -5,9 +5,10 @@ import { useMemo, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { DateTime } from 'luxon';
-import TimeSlotGroup from '../TimeSlotGroup/index.js';
+import TimeSlotsGroup from '../TimeSlotsGroup';
 import RequestHeader from '../RequsestHeader';
-import { getSortedDatesWithLabel, groupDatesByDay } from '../interviewRequestsManageData.js';
+// import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
+import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
 
 import {
   useDeleteInterviewRequestMutation,
@@ -32,6 +33,13 @@ const Participant = ({ data, specialization, userId }) => {
 
   const sortedDatesWithLabel = useMemo(() => getSortedDatesWithLabel(data), [data]);
   const sortedDatesByDay = useMemo(() => groupDatesByDay(sortedDatesWithLabel), [sortedDatesWithLabel]);
+  const slotsByDay = {};
+  sortedDatesByDay.forEach((day) => {
+    slotsByDay[day.date] = day.items;
+  });
+  // Объединяем их в ряды по 6 слотов
+  const mergedSlots = mergeTimeSlotsByRows(slotsByDay, 6);
+  // console.log(mergedSlots, 'mergedSlots');
 
   const selectedTimeSlots = availableDates.length;
   const foundTimeSlots = assignedDates.length;
@@ -142,8 +150,13 @@ const Participant = ({ data, specialization, userId }) => {
         </DialogActions>
       </Dialog>
 
-      {sortedDatesByDay.map((item) => (
-        <TimeSlotGroup key={item.date} selectedSlots={selectedSlots} timeSlots={item} onSelectSlot={handleSelectSlot} />
+      {mergedSlots.map((item) => (
+        <TimeSlotsGroup
+          key={item.date}
+          selectedSlots={selectedSlots}
+          timeSlots={item}
+          onSelectSlot={handleSelectSlot}
+        />
       ))}
     </Box>
   );

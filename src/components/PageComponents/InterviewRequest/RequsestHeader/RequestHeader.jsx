@@ -7,6 +7,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
 import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu/index.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './RequestHeader.styles.js';
 
 const RequestHeader = ({
@@ -22,6 +24,7 @@ const RequestHeader = ({
 }) => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
+  const { openModal } = useModalController();
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
@@ -31,9 +34,9 @@ const RequestHeader = ({
     setAnchorEl(event.currentTarget);
   };
 
-  // const handleCreateInterviweRequest = (event) => {
-  //   console.log(event);
-  // };
+  const handleAddTimeSlots = () => {
+    openModal(modalNames.scheduleInterviewModal, { role });
+  };
 
   return (
     <Box sx={styles.container}>
@@ -60,12 +63,12 @@ const RequestHeader = ({
             <DeleteIcon />
           </IconButton>
           <ButtonDef
-            // handleClick={handleCreateInterviweRequest}
             label={t('Аdd time slots')}
             startIcon={<AddIcon />}
             sx={styles.outlined}
             type={'button'}
             variant='outlined'
+            onClick={handleAddTimeSlots}
           />
 
           <Box sx={styles.menuIcon}>

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
 import TimeSlot from '../TimeSlot';
-import { styles } from './TimeSlotGroup.styles.js';
+import { styles } from './TimeSlotsGroup.styles.js';
 
 const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
   const { items, date, dayOfWeek } = timeSlots;
