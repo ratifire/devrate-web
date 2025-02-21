@@ -1,10 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useHardSkillData } from '../../../../../utils/hooks/specialization';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { getLevel } from '../utils';
 import LevelChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 import { LevelGauge } from '../../../../UI/Chart';
+import LevelUp from '../../../../../assets/icons/levelUp.svg?react';
 import { styles } from './LevelChart.styles.js';
 import useThemeLevelChart from './useThemeLevelChart';
 
@@ -24,13 +25,25 @@ const LevelChart = () => {
 
   return (
     <Box sx={styles.levelChartContainer}>
-      <Typography sx={styles.title} variant='subtitle2'>
-        {t('specialization.statistics.level_chart_title')}
-      </Typography>
+      <Box sx={styles.contentContainer}>
+        <Box>
+          <Typography sx={styles.title} variant='subtitle2'>
+            {t('specialization.statistics.level_chart_title')}
+          </Typography>
+          <Typography sx={styles.text} variant='subtitle3'>
+            {t('specialization.statistics.levelUp')}
+          </Typography>
+        </Box>
+        <IconButton aria-label='level up' sx={styles.levelBtn}>
+          <LevelUp />
+        </IconButton>
+      </Box>
       <Box sx={styles.chartContainer}>
         <Box sx={{ position: 'relative' }}>
           <Box sx={styles.chartWrapper}>
             <LevelGauge
+              colorGrad='gradient'
+              fz={48}
               gradient={
                 <linearGradient id='gradient' x1='0%' x2='100%' y1='0%' y2='0%'>
                   <stop offset='0.04%' style={{ stopColor: grad1, stopOpacity: 1 }} />
@@ -39,7 +52,9 @@ const LevelChart = () => {
                   <stop offset='90.86%' style={{ stopColor: grad4, stopOpacity: 1 }} />
                 </linearGradient>
               }
+              height={150}
               text={({ value }) => `${value}%`}
+              transformX={-30}
               value={averageMark}
             />
           </Box>

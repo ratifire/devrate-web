@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
-import UserAvatar from '../../UserAvatar/index.js';
-import { styles } from './UserCard.styles.js';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import UserAvatar from '../../UserAvatar';
+import { styles } from './UserCard.styles';
 
-const UserCard = ({ firstName, lastName, src, role, data, time, lvl, isViewBtn, onClick, label }) => {
+const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClick, label }) => {
   const fullName = `${firstName} ${lastName}`;
 
   return (
@@ -26,10 +26,10 @@ const UserCard = ({ firstName, lastName, src, role, data, time, lvl, isViewBtn, 
             {role}
           </Typography>
           <Typography component='p' sx={styles.data} variant='body'>
-            {data} {time}
+            {date}
           </Typography>
-          <Typography component='p' sx={styles['middle']} variant='subtitle2'>
-            {lvl}
+          <Typography component='p' sx={styles[lvl?.toLowerCase()]} variant='subtitle2'>
+            {`Level ${lvl}`}
           </Typography>
         </Box>
       </Box>
@@ -43,8 +43,7 @@ UserCard.propTypes = {
   lastName: PropTypes.string,
   src: PropTypes.string,
   role: PropTypes.string,
-  data: PropTypes.string,
-  time: PropTypes.string,
+  date: PropTypes.string,
   lvl: PropTypes.string,
   isViewBtn: PropTypes.bool,
   label: PropTypes.string,

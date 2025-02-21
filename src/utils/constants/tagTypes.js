@@ -18,6 +18,8 @@ export const TAG_TYPES = {
   LanguageUser: 'LanguageUser',
   WorkExperience: 'WorkExperience',
   Chat: 'Chat',
+  ScheduledInterview: 'ScheduledInterview',
+  PassedInterview: 'PassedInterview',
 };
 
 export const TAG_TYPES_ARRAY = Object.values(TAG_TYPES);

@@ -24,6 +24,20 @@ import {
   StepAvatarSkeleton,
   StepLanguageSkeleton,
 } from './Modal/UserInfoModalSkeleton';
+import {
+  UserCardScheduledInterviewSkeleton,
+  ScheduledMeetingSkeleton,
+  StatisticSkeleton,
+  ParticipantEvaluationsSkeleton,
+  InterviewSkillsSkeleton,
+} from './Pages/scheduledInterviewSkeleton';
+
+import {
+  StatisticsSkeleton,
+  InterviewInfoSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
+} from './Pages/interviewSkeleton';
 
 export {
   BlogSkeleton,
@@ -47,4 +61,13 @@ export {
   StepPersonalSkeleton,
   StepAvatarSkeleton,
   StepLanguageSkeleton,
+  InterviewInfoSkeleton,
+  StatisticsSkeleton,
+  StatisticSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
+  UserCardScheduledInterviewSkeleton,
+  ScheduledMeetingSkeleton,
+  ParticipantEvaluationsSkeleton,
+  InterviewSkillsSkeleton,
 };

@@ -31,7 +31,7 @@ const UserAvatar = ({ userFirstName, userLastName, src, size, correctStyle, radi
 UserAvatar.propTypes = {
   userFirstName: PropTypes.string.isRequired,
   userLastName: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['s', 'sm', 'm', 'l']).isRequired,
+  size: PropTypes.oneOf(['s', 'sm', 'm', 'l', 'xs']).isRequired,
   radius: PropTypes.oneOf(['square', 'circle']).isRequired,
   src: PropTypes.string,
   correctStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),

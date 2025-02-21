@@ -457,6 +457,7 @@ export const en = {
         interview_chart_days: '10 days',
         interview_chart_months: 'Months',
         skills_assessment_chart_title: 'Average skill assessment',
+        levelUp: 'Based on the results, we recommend that you move to the next level!',
       },
       interviewsChart: {
         conducted: 'Conducted',
@@ -468,6 +469,7 @@ export const en = {
       },
       softSkills: {
         title: 'Soft skills',
+        averageMark: 'Average mark:',
       },
       modal: {
         specialization: {
@@ -868,6 +870,51 @@ export const en = {
           statusInProcess: 'In Process',
           statusAwaitingFeedback: 'Awaiting Feedback',
         },
+      },
+      passedInterviews: {
+        interviewersAssessmentTitle: "Interviewer's assessment",
+        interviewInfoTitle: 'Interview info',
+        interviewInfoText: 'years ago',
+        interviewInfoRole: 'Your role',
+        interviewInfoHost: 'Host',
+        interviewFeedbackTitle: "Interviewee's feedback",
+        interviewFeedbackReadLess: 'Read more',
+        interviewFeedbackReadMore: 'Read less',
+        interviewStatisticsTitle: 'Statistics',
+        interviewStatisticsHardSkills: 'Hard Skills',
+        interviewStatisticsSoftSkills: 'Soft Skills',
+        interviewStatisticsOverall: 'Over All',
+      },
+    },
+    singleScheduledInterview: {
+      interviewsSummary: {
+        scheduledMeeting: {
+          title: 'Scheduled Meeting',
+          participants: 'Participants',
+          language: 'Language',
+          duration: 'Duration',
+          platform: 'Platform',
+          link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
+          canceledMeeting: 'Cancel Meeting',
+          joinMeeting: 'Join Interview',
+          notHappenedMeeting: 'Interview did not happen',
+          leaveFeedbackMeeting: 'Leave Feedback',
+          languageType: 'English',
+          durationType: 'min.',
+        },
+      },
+      interviewSkills: {
+        skills: 'Skills',
+      },
+      userCardScheduledInterview: {
+        btn: 'Write a message',
+        interviewLvl: 'Interview level:',
+      },
+      participantEvaluations: {
+        title: 'Participant evaluations',
+      },
+      statistic: {
+        title: 'Statistic',
       },
     },
     chat: {

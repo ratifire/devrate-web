@@ -695,6 +695,52 @@ export const uk = {
           statusAwaitingFeedback: 'Очікується відгук',
         },
       },
+      passedInterviews: {
+        interviewersAssessmentTitle: 'Оцінки співбесідника',
+        interviewInfoTitle: 'Інформація про співбесіду',
+        interviewInfoText: 'рок(ів) тому',
+        interviewInfoRole: 'Ваша роль',
+        interviewInfoHost: 'Хост',
+        interviewFeedbackTitle: 'Відгук співбесідника',
+        interviewFeedbackReadLess: 'Читати менше',
+        interviewFeedbackReadMore: 'Читати більше',
+        interviewStatisticsHardSkills: 'Hard Skills',
+        interviewStatisticsSoftSkills: 'Soft Skills',
+        interviewStatisticsOverall: 'Over All',
+      },
+    },
+    singleScheduledInterview: {
+      interviewsSummary: {
+        scheduledMeeting: {
+          title: 'Запланована зустріч',
+          participants: 'Учасники',
+          language: 'Мова',
+          duration: 'Тривалість',
+          platform: 'Платформа',
+          link:
+            'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
+            ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
+          canceledMeeting: 'Скасувати зустріч',
+          joinMeeting: 'Доєднатись до інтерв’ю',
+          notHappenedMeeting: 'Співбесіда не відбулася',
+          leaveFeedbackMeeting: 'Залишити відгук',
+          languageType: 'Англійська',
+          durationType: 'хв.',
+        },
+        interviewSkills: {
+          skills: 'Навички',
+        },
+        userCardScheduledInterview: {
+          btn: 'Написати повідомлення',
+          interviewLvl: 'Рівень співбесіди:',
+        },
+        participantEvaluations: {
+          title: 'Оцінка учасників',
+        },
+        statistic: {
+          title: 'Статистика',
+        },
+      },
     },
     chat: {
       search: 'Пошук',

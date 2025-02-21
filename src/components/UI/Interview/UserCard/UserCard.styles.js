@@ -1,11 +1,6 @@
 export const styles = {
   wrapper: (theme) => ({
     padding: theme.spacing(4),
-    borderRadius: 2,
-    backgroundColor: theme.palette.pagesSections.backgroundColor,
-    boxShadow: 'none',
-    backgroundImage: 'none',
-    maxWidth: '480px',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -26,13 +21,13 @@ export const styles = {
   data: (theme) => ({
     color: theme.palette.userCard.date.color,
   }),
-  junior: (theme) => ({
+  Junior: (theme) => ({
     color: theme.palette.userCard.lvl.junior,
   }),
-  middle: (theme) => ({
+  Middle: (theme) => ({
     color: theme.palette.userCard.lvl.middle,
   }),
-  senior: (theme) => ({
+  Senior: (theme) => ({
     color: theme.palette.userCard.lvl.senior,
   }),
   btn: {
@@ -41,7 +36,6 @@ export const styles = {
     lineHeight: '20px',
     letterSpacing: '0.17px',
     textTransform: 'none',
-    maxWidth: '432px',
     width: '100%',
     padding: '12px 16px',
   },
