@@ -6,6 +6,7 @@ export const styles = {
   sideBarEventContainer: (theme) => ({
     width: '100%',
     backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
+    backgroundImage: 'none',
     borderRadius: 1,
     padding: theme.spacing(3),
     marginBottom: theme.spacing(3),
@@ -14,6 +15,7 @@ export const styles = {
   border: (theme) => ({
     width: '100%',
     backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
+    backgroundImage: 'none',
     borderRadius: 1,
     padding: theme.spacing(3),
     marginBottom: theme.spacing(3),
