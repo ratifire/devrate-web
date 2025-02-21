@@ -1,22 +1,51 @@
 import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
+import { DateTime } from 'luxon';
 import TimeSlot from '../TimeSlot';
 import { styles } from './TimeSlotsGroup.styles.js';
 
 const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
-  const { items, date, dayOfWeek } = timeSlots;
+  const { slots, date, dates } = timeSlots;
+
+  const getTitle = () => {
+    let result = null;
+
+    if (dates.length > 1) {
+      const startDate = DateTime.fromFormat(dates[0], 'dd.MM.yyyy');
+      const endDate = DateTime.fromFormat(dates.at(-1), 'dd.MM.yyyy');
+
+      const start = {
+        date: startDate.toFormat('dd.MM.yyyy'),
+        dayTitle: startDate.setLocale('en').toFormat('EEEE'), // Todo change locale according to redux state
+      };
+
+      const end = {
+        date: endDate.toFormat('dd.MM.yyyy'),
+        dayTitle: endDate.setLocale('en').toFormat('EEEE'), // Todo change locale according to redux state
+      };
+
+      result = (
+        <Typography sx={styles.dayTitle}>{`${start.date} ${start.dayTitle} - ${end.date} ${end.dayTitle}`}</Typography>
+      );
+    } else {
+      const date = DateTime.fromFormat(dates[0], 'dd.MM.yyyy');
+      const dayTitle = date.setLocale('en').toFormat('EEEE'); // Todo change locale according to redux state
+      result = <Typography sx={styles.dayTitle}>{`${date} ${dayTitle}`}</Typography>;
+    }
+
+    return result;
+  };
 
   return (
     <Box sx={styles.timeSlotGroup}>
-      <Typography sx={styles.dayTitle}>{`${dayOfWeek} ${date}`}</Typography>
+      {getTitle()}
       <Box sx={styles.dayGroup}>
-        {items?.map((item) => (
+        {slots?.map((slot) => (
           <TimeSlot
-            key={item.date}
+            key={slot.date}
             currentDate={date}
-            data={item}
-            day={dayOfWeek}
-            isSelected={selectedSlots.includes(item.date)}
+            data={slot}
+            isSelected={selectedSlots.includes(slot.date)}
             onSelect={onSelectSlot}
           />
         ))}

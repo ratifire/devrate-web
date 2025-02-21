@@ -152,7 +152,7 @@ const Participant = ({ data, specialization, userId }) => {
 
       {mergedSlots.map((item) => (
         <TimeSlotsGroup
-          key={item.date}
+          key={item.dateRange}
           selectedSlots={selectedSlots}
           timeSlots={item}
           onSelectSlot={handleSelectSlot}
