@@ -72,7 +72,7 @@ const ScheduledMeeting = () => {
           <UserAvatar
             radius='circle'
             size='xs'
-            src={userAvatar}
+            src={userAvatar?.userPicture}
             userFirstName={firstName}
             userLastName={lastName}
             userName={firstName}
@@ -81,7 +81,7 @@ const ScheduledMeeting = () => {
             correctStyle={styles.activeImg}
             radius='circle'
             size='xs'
-            src={hostAvatar}
+            src={hostAvatar?.userPicture}
             userFirstName={hostFirstName}
             userLastName={hostLastName}
             userName={hostFirstName}
