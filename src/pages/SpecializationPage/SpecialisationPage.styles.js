@@ -98,7 +98,7 @@ export const styles = {
     '@media (max-width: 991px)': {
       display: 'flex',
       flexWrap: 'wrap',
-      transform: 'translateX(24px)',
+      paddingLeft: '22px',
       marginTop: '16px',
     },
   },

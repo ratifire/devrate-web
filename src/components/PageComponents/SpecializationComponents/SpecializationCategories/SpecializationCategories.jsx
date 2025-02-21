@@ -5,8 +5,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { enqueueSnackbar } from 'notistack';
-import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
+import { findAndSetMastery, setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
 import {
   useGetSpecializationByUserIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
@@ -26,10 +25,10 @@ const SpecializationCategories = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState({});
-  const [isDefault, setIsDefault] = useState(true);
   const { id } = useSelector((state) => state.auth.user.data);
-  const { activeSpecialization } = useSelector((state) => state.specialization);
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
+  const activeSpec = activeSpecialization || mainSpecialization;
 
   const {
     data: specializations,
@@ -38,10 +37,8 @@ const SpecializationCategories = () => {
   } = useGetSpecializationByUserIdQuery(id, { skip: !id });
   const [getMainMasteryBySpecId, { isLoading: isLoadingGetMainMastery, isError: isErrorGetMainMastery }] =
     useLazyGetMainMasteryBySpecializationIdQuery();
-  const [
-    updateSpecializationAsMainById,
-    { isLoading: isLoadingUpdateSpecialization, isError: isErrorUpdateSpecialization },
-  ] = useUpdateSpecializationAsMainByIdMutation();
+  const { isLoading: isLoadingUpdateSpecialization, isError: isErrorUpdateSpecialization } =
+    useUpdateSpecializationAsMainByIdMutation();
 
   const isLoading = isFetchingGetSpecialization || isLoadingGetMainMastery || isLoadingUpdateSpecialization;
   const isError = isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization;
@@ -55,6 +52,8 @@ const SpecializationCategories = () => {
 
     dispatch(setMainSpecializations(specializations));
 
+    dispatch(findAndSetMastery(specializations));
+
     specializations.forEach(async (specialization) => {
       const { data } = await getMainMasteryBySpecId(specialization.id);
       setMasteryData((prev) => ({
@@ -62,9 +61,9 @@ const SpecializationCategories = () => {
         [specialization.id]: data,
       }));
     });
-  }, [specializations, activeSpecialization]);
+  }, [specializations]);
+
   const handlerChangeSpecialization = (specialization) => {
-    setIsDefault(false);
     if (masteryData[specialization.id]) {
       const spec = { ...specialization, mastery: masteryData[specialization.id].level };
       dispatch(setActiveMastery(spec.mastery));
@@ -79,43 +78,22 @@ const SpecializationCategories = () => {
     openModal(modalNames.specializationModal);
   };
 
-  const handlerChangeMainSpecialization = async (id) => {
-    try {
-      if (specializations?.length === 0 || !activeSpecialization) return;
-      await updateSpecializationAsMainById(
-        { ...activeSpecialization, main: true },
-        { skip: !activeSpecialization }
-      ).unwrap();
-      dispatch(setMainSpecializations(activeSpecialization));
-      enqueueSnackbar(t('modalNotifyText.specialization.change.success', { name: activeSpecialization.name }), {
-        variant: 'success',
-      });
-      // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.specialization.change.error'), { variant: 'error' });
-    }
-    handleCloseMenu(id);
-  };
-
   const handleOpenConfirmDeleteSpecializationModal = (id, specialization) => {
     openModal(modalNames.confirmDeleteSpecialization, { id, specialization });
     handleCloseMenu(id);
   };
-
   const handleCloseMenu = (id) => {
     setAnchorEl((prev) => ({
       ...prev,
       [id]: null,
     }));
   };
-
   const handleMenuOpen = (event, id) => {
     setAnchorEl((prev) => ({
       ...prev,
       [id]: event.currentTarget,
     }));
   };
-
   const handleEditFeature = ({ id, name, mastery }) => {
     openModal(modalNames.specializationEditModal, { id, name, mastery });
     handleCloseMenu(id);
@@ -148,7 +126,7 @@ const SpecializationCategories = () => {
         {specializationsSorted?.map(({ id, name, main }) => (
           <Box
             key={id}
-            className={`figure ${isDefault && main ? 'active' : activeSpecialization?.id === id ? 'active' : ''}`}
+            className={`figure ${activeSpec?.id === id ? 'active' : ''}`}
             sx={styles.figure}
             onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
           >
@@ -184,7 +162,6 @@ const SpecializationCategories = () => {
                 handleCloseMenu={() => handleCloseMenu(id)}
                 handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
                 handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
-                handleMainFeature={() => handlerChangeMainSpecialization(id)}
               />
             </Box>
           </Box>
