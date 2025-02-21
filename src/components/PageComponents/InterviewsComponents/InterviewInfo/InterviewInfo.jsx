@@ -3,10 +3,10 @@ import { useParams } from 'react-router';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetPassedInterviewByIdQuery } from '../../../../redux/interviews/passedInterviewsApiSlice.js';
-import { formatToLocalDate } from '../../../../utils/helpers/formatToLocalDate.js';
+import { formatToLocalDate } from '../../../../utils/helpers/dateHandlers.js';
 import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice.js';
 import { lvlMastery } from '../../../../utils/constants/masteryLvl.js';
-import { convertMilliInYears } from '../../../../utils/helpers/convertMilliInYears.js';
+import { convertMilliInYears } from '../../../../utils/helpers/dateHandlers.js';
 import { styles } from './InterviewInfo.styles.js';
 
 const InterviewInfo = () => {
