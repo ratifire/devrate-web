@@ -20,6 +20,9 @@ export const styles = {
     padding: theme.spacing(4),
     backgroundColor: theme.palette.background.level2,
     borderRadius: 2,
+    '@media(min-width: 1536px)': {
+      maxWidth: '100%',
+    },
   }),
   title: (theme) => ({
     display: 'flex',

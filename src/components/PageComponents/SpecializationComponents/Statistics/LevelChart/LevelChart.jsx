@@ -1,10 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useHardSkillData } from '../../../../../utils/hooks/specialization';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { getLevel } from '../utils';
 import LevelChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 import { LevelGauge } from '../../../../UI/Chart';
+import LevelUp from '../../../../../assets/icons/levelUp.svg?react';
 import { styles } from './LevelChart.styles.js';
 import useThemeLevelChart from './useThemeLevelChart';
 
@@ -24,9 +25,19 @@ const LevelChart = () => {
 
   return (
     <Box sx={styles.levelChartContainer}>
-      <Typography sx={styles.title} variant='subtitle2'>
-        {t('specialization.statistics.level_chart_title')}
-      </Typography>
+      <Box sx={styles.contentContainer}>
+        <Box>
+          <Typography sx={styles.title} variant='subtitle2'>
+            {t('specialization.statistics.level_chart_title')}
+          </Typography>
+          <Typography sx={styles.text} variant='subtitle3'>
+            {t('specialization.statistics.levelUp')}
+          </Typography>
+        </Box>
+        <IconButton aria-label='level up' sx={styles.levelBtn}>
+          <LevelUp />
+        </IconButton>
+      </Box>
       <Box sx={styles.chartContainer}>
         <Box sx={{ position: 'relative' }}>
           <Box sx={styles.chartWrapper}>
