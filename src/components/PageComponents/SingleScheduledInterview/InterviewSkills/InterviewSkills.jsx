@@ -58,15 +58,15 @@ const InterviewSkills = () => {
       </Box>
       <Box sx={styles.boxParticipants}>
         <Box sx={styles.boxParticipant}>
-          <Box sx={styles.leftCircle} />
-          <Typography component='p' variant='subtitle2'>
-            {userFullName}
-          </Typography>
-        </Box>
-        <Box sx={styles.boxParticipant}>
           <Box sx={styles.rightCircle} />
           <Typography component='p' variant='subtitle2'>
             {hostFullName}
+          </Typography>
+        </Box>
+        <Box sx={styles.boxParticipant}>
+          <Box sx={styles.leftCircle} />
+          <Typography component='p' variant='subtitle2'>
+            {userFullName}
           </Typography>
         </Box>
       </Box>
