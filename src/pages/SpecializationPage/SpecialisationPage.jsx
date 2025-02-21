@@ -1,6 +1,7 @@
-import { lazy, memo, Suspense } from 'react';
+import { lazy, memo, Suspense, useEffect } from 'react';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   CategoriesSkeleton,
   HardSkillsChartSkeleton,
@@ -10,6 +11,8 @@ import {
 } from '../../components/UI/Skeleton';
 import LevelChartSkeleton from '../../components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 import InterviewTracker from '../../components/PageComponents/SpecializationComponents/InterviewTracker/index.js';
+import { useGetSpecializationByUserIdQuery } from '../../redux/specialization/specializationApiSlice.js';
+import { setActiveMastery } from '../../redux/specialization/activeMasterySlice.js';
 import { styles } from './SpecialisationPage.styles';
 
 const HardSkills = lazy(() => import('../../components/PageComponents/SpecializationComponents/HardSkills'));
@@ -43,6 +46,15 @@ const MemoizedLevelChart = memo(LevelChart);
 
 const SpecializationPage = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.auth.user.data);
+  const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
+
+  useEffect(() => {
+    specializations?.forEach(async (specialization) => {
+      if (specialization.main) dispatch(setActiveMastery(specialization.mainMasteryLevel));
+    });
+  }, []);
 
   return (
     <Container maxWidth='xl' sx={styles.container}>

@@ -61,10 +61,8 @@ const SpecializationCategories = () => {
         ...prev,
         [specialization.id]: data,
       }));
-      if (specialization.main) dispatch(setActiveMastery(data?.level));
     });
   }, [specializations, activeSpecialization]);
-
   const handlerChangeSpecialization = (specialization) => {
     setIsDefault(false);
     if (masteryData[specialization.id]) {
