@@ -34,6 +34,7 @@ export const interviewDark = {
     rightGrad1: '#B07AFD',
     rightGrad2: '#8133F1',
     rightGrad3: '#4A1D8B',
+    color: '#C5C5C6',
   },
   statisticChart: {
     softSkills: {

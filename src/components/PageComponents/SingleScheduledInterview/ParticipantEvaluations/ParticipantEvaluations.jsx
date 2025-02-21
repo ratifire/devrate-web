@@ -17,7 +17,7 @@ import { useColorPartEvalChart } from './hooks';
 const ParticipantEvaluations = () => {
   const { t } = useTranslation();
   const { itemStyle, contentStyle } = useTooltipColorChart();
-  const { leftGrad1, leftGrad2, leftGrad3, rightGrad1, rightGrad2, rightGrad3 } = useColorPartEvalChart();
+  const { leftGrad1, leftGrad2, leftGrad3, rightGrad1, rightGrad2, rightGrad3, color } = useColorPartEvalChart();
   const location = useLocation();
   const { hostFirstName, hostLastName, hostMasteryId, masteryId } = location.state.event;
 
@@ -109,8 +109,8 @@ const ParticipantEvaluations = () => {
                 <stop offset='100%' stopColor={rightGrad3} stopOpacity={1} />
               </linearGradient>
             </defs>
-            <XAxis dataKey='name' />
-            <YAxis domain={[0, 10]} interval={0} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+            <XAxis dataKey='name' tick={{ fill: color }} />
+            <YAxis domain={[0, 10]} interval={0} tick={{ fill: color }} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
             <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
             <Legend align='center' iconType='circle' layout='horizontal' verticalAlign='top' />
             <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
