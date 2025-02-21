@@ -358,6 +358,9 @@ export const en = {
               second: 'or',
               third: ' download from your device',
             },
+            incorrectAvatar: 'This file can not be used as avatar',
+            failedLoad: 'Failed to load image',
+            imageSize: 'Image dimensions must be at least 98x98 pixels',
           },
           languages: {
             title: 'Languages',
