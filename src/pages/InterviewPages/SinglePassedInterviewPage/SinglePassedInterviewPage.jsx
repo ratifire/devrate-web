@@ -12,7 +12,7 @@ import {
   StatisticsSkeleton,
   UserCardSkeleton,
 } from '../../../components/UI/Skeleton';
-import { formatToLocalDate } from '../../../utils/helpers/formatToLocalDate.js';
+import { formatToLocalDateInterview } from '../../../utils/helpers/formatToLocalDateInterview.js';
 import { styles } from './SingleIPassednterviewPage.styles.js';
 
 const InterviewInfo = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewInfo'));
@@ -75,10 +75,11 @@ const SinglePassedInterviewPage = () => {
   const level = lvlMastery[attendeeMasteryLevel];
 
   return (
-    <Box sx={styles.mainContent}>
+    <Box className='InterviewsP age' sx={styles.mainContent}>
       <Paper sx={styles.userInfo}>
         <Suspense fallback={<UserCardSkeleton />}>
           <MemoizedUserCard
+            date={formatToLocalDateInterview(dateTime)}
             firstName={firstName}
             isViewBtn={false}
             label='label'
@@ -86,7 +87,6 @@ const SinglePassedInterviewPage = () => {
             lvl={level}
             role={role}
             src=''
-            time={formatToLocalDate(dateTime)}
           />
         </Suspense>
       </Paper>

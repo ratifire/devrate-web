@@ -698,7 +698,11 @@ export const uk = {
       passedInterviews: {
         interviewersAssessmentTitle: 'Оцінки співбесідника',
         interviewInfoTitle: 'Інформація про співбесіду',
-        interviewInfoText: 'рок(ів) тому',
+        interviewInfoYearAgo: 'рік(ів) тому назад',
+        interviewInfoMonthAgo: 'місяць(місяців) тому назад',
+        interviewInfoWeekAgo: 'тиждень(ів) тому назад',
+        interviewInfoDayAgo: 'день(днів) тому назад',
+        interviewInfoToday: 'Пройдено сьогодні',
         interviewInfoRole: 'Ваша роль',
         interviewInfoHost: 'Хост',
         interviewFeedbackTitle: 'Відгук співбесідника',

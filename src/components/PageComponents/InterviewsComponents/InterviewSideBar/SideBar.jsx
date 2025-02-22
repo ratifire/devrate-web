@@ -12,7 +12,7 @@ const SideBar = ({ interviews, refHandler, passedInterview }) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const containerRef = useRef(null);
-  const ref = useGetHeightElement('.ScheduledInterviewsPage');
+  const ref = useGetHeightElement('.InterviewsPage');
 
   useScrollPadding(containerRef, '9px');
 

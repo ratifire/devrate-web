@@ -873,7 +873,11 @@ export const en = {
       passedInterviews: {
         interviewersAssessmentTitle: "Interviewer's assessment",
         interviewInfoTitle: 'Interview info',
-        interviewInfoText: 'years ago',
+        interviewInfoYearAgo: 'year(s) ago',
+        interviewInfoMonthAgo: 'months ago',
+        interviewInfoWeekAgo: 'weeks ago',
+        interviewInfoDayAgo: 'days ago',
+        interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
         interviewInfoHost: 'Host',
         interviewFeedbackTitle: "Interviewee's feedback",
