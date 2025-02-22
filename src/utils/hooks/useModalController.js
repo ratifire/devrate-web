@@ -9,7 +9,7 @@ export const useModalController = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isOpen = useSelector((state) => state.modal.isOpen);
+  const { isOpen, data: modalData } = useSelector((state) => state.modal);
   const isClosingRef = useRef(false);
 
   const openModalHandler = useCallback(
@@ -67,16 +67,15 @@ export const useModalController = () => {
     const modal = searchParams.get('modal');
     const stepParam = searchParams.get('step');
     const step = Number(stepParam);
-    const role = searchParams.get('role');
 
     if (Object.values(modalNames).includes(modal)) {
-      dispatch(openModal({ modalType: modal, data: { role } }));
+      dispatch(openModal({ modalType: modal, data: modalData }));
 
       if (stepParam !== null && !isNaN(step)) {
         dispatch(setStep(step));
       }
     }
-  }, [location.search]);
+  }, []);
 
   return {
     isOpen,
