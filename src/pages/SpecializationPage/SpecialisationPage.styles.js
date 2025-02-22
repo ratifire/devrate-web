@@ -32,11 +32,19 @@ export const styles = {
     gridRow: '1/2',
     minHeight: 202,
   },
+  specialisationLevel: {
+    maxHeight: '144px',
+    gridColumn: '1/5',
+    gridRow: '2/3',
+    '@media (max-width: 991px)': {
+      gridColumn: '1/6',
+    },
+  },
   specialisationHardSkills: {
     display: 'flex',
     flexDirection: 'column',
     flexShrink: 1,
-    gridRow: '2/4',
+    gridRow: '3/4',
     gridColumn: '1/5',
     height: '31rem',
     '@media (min-width: 1536px)': {

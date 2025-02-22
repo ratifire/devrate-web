@@ -15,11 +15,13 @@ const DropdownMenu = ({ anchorEl, handleCloseMenu, handleEditFeature, handleDele
         <EditIcon sx={styles.itemIcon} />
         <Typography variant='caption1'>{t('dropDownMenu.edit')}</Typography>
       </MenuItem>
-      <Divider sx={styles.divider} />
-      <MenuItem sx={styles.menuItem} onClick={handleMainFeature}>
-        <StarIcon sx={styles.itemIcon} />
-        <Typography variant='caption1'>{t('dropDownMenu.main')}</Typography>
-      </MenuItem>
+      {handleMainFeature && [
+        <Divider key='divider-main' sx={styles.divider} />,
+        <MenuItem key='menu-main' sx={styles.menuItem} onClick={handleMainFeature}>
+          <StarIcon sx={styles.itemIcon} />
+          <Typography variant='caption1'>{t('dropDownMenu.main')}</Typography>
+        </MenuItem>,
+      ]}
       <Divider sx={styles.divider} />
       <MenuItem sx={styles.menuItem} onClick={handleDeleteFeature}>
         <DeleteIcon sx={styles.itemIcon} />
