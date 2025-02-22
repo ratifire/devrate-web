@@ -13,7 +13,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { useCreateNewWorkExperienceMutation } from '../../../../redux/services/workExperienceApiSlice.js';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
-import { generateYearsArray } from '../../../../utils/helpers/generateYearsArray';
+import { generateYearsArray } from '../../../../utils/helpers/dateHandlers.js';
 import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { addUniqueItem } from '../../../../utils/helpers/ProfileWorkExperience/addUniqueItem.js';
