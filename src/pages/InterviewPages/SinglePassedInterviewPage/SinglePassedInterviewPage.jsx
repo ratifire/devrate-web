@@ -12,7 +12,7 @@ import {
   StatisticsSkeleton,
   UserCardSkeleton,
 } from '../../../components/UI/Skeleton';
-import { formatToLocalDate } from '../../../utils/helpers/formatToLocalDate.js';
+import { formatToLocalDate } from '../../../utils/helpers/dateHandlers.js';
 import { styles } from './SingleIPassednterviewPage.styles.js';
 
 const InterviewInfo = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewInfo'));
