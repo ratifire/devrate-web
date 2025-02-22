@@ -111,7 +111,7 @@ const ParticipantEvaluations = () => {
             </defs>
             <XAxis dataKey='name' tick={{ fill: color }} />
             <YAxis domain={[0, 10]} interval={0} tick={{ fill: color }} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
-            <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
+            <Tooltip contentStyle={contentStyle} cursor={{ fill: 'transparent' }} itemStyle={itemStyle} />
             <Legend align='center' iconType='circle' layout='horizontal' verticalAlign='top' />
             <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
             <Bar barSize={50} dataKey={hostFullName} fill='url(#left)' radius={[2, 2, 0, 0]} />
