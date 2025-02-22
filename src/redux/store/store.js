@@ -39,7 +39,7 @@ const themePersistConfig = {
 const modalPersistConfig = {
   key: 'modal',
   storage: session,
-  whitelist: ['data'],
+  whitelist: ['data', 'isOpen', 'modalType'],
 };
 
 const rootReducer = {
