@@ -80,7 +80,7 @@ const SpecializationCategories = () => {
     openModal(modalNames.specializationModal);
   };
 
-  const handleMainFeature = async (id) => {
+  const handleMakeMainFeature = async (id) => {
     try {
       if (specializations?.length === 0 || !activeSpecialization) return;
       await updateSpecializationAsMainById(
@@ -185,7 +185,7 @@ const SpecializationCategories = () => {
                 handleCloseMenu={() => handleCloseMenu(id)}
                 handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
                 handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
-                handleMainFeature={() => handleMainFeature(id)}
+                handleMainFeature={() => handleMakeMainFeature(id)}
               />
             </Box>
           </Box>

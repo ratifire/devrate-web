@@ -512,6 +512,9 @@ export const en = {
           skill_long: 'Company too long',
           skill_short: 'Company too short',
         },
+        specializationEdit: {
+          error_message: 'First, complete all open interviews at carrent level!',
+        },
         confirmSpecializationDelete: {
           title: 'Remove specialization',
           text1: 'Are you sure you want to delete the specialization',
