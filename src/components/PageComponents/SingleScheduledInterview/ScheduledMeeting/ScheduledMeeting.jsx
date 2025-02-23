@@ -21,7 +21,7 @@ const ScheduledMeeting = () => {
     data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
   const location = useLocation();
-  const { hostFirstName, hostLastName, hostId, startTime } = location.state.event;
+  const { hostFirstName, hostLastName, hostId, startTime, languageCode } = location.state.event;
 
   const {
     data: hostAvatar,
@@ -100,7 +100,7 @@ const ScheduledMeeting = () => {
             {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.language')}
           </Typography>
           <Typography component='p' variant='body'>
-            {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.languageType')}
+            {t(`specialization.language.name.${languageCode}`)}
           </Typography>
         </Box>
         <Box sx={styles.boxParametersInfo}>
