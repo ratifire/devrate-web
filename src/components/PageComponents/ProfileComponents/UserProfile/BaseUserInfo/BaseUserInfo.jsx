@@ -35,7 +35,6 @@ const BaseUserInfo = ({ id }) => {
 
   const handleWriteMessage = () => {
     dispatch(openChat({ id, firstName: getFirstName, lastName: getLastName, userPicture: userPicture }));
-    console.log(id, 'id BaseUserInfo');
   };
 
   const handleBookInterview = () => {

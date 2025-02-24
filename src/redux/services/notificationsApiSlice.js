@@ -1,6 +1,5 @@
 import { TAG_TYPES } from '../../utils/constants/tagTypes';
 import { apiSlice } from './api/apiSlice';
-import { urlWS } from './api/socketsEndpoints';
 
 export const notificationsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

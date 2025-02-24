@@ -41,6 +41,5 @@ const chatSlice = createSlice({
   },
 });
 
-export const { openBadge, closeBadge, openChat, closeChat, openList, closeList, disconnectFromChat } =
-  chatSlice.actions;
+export const { openBadge, closeBadge, openChat, closeChat, openList, closeList } = chatSlice.actions;
 export default chatSlice.reducer;

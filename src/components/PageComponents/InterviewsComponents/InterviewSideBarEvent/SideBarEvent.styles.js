@@ -5,23 +5,23 @@ export const styles = {
   },
   sideBarEventContainer: (theme) => ({
     width: '100%',
-    backgroundColor: theme.palette.interviewSidebarEvent.backgroundColor,
+    backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
+    backgroundImage: 'none',
+    boxShadow: 'none',
     borderRadius: 1,
     padding: theme.spacing(3),
     marginBottom: theme.spacing(3),
     border: '1px solid transparent',
-    boxShadow: 'none',
-    backgroundImage: 'none',
   }),
   border: (theme) => ({
     width: '100%',
-    backgroundColor: theme.palette.interviewSidebarEvent.backgroundColor,
+    backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
+    backgroundImage: 'none',
+    boxShadow: 'none',
     borderRadius: 1,
     padding: theme.spacing(3),
     marginBottom: theme.spacing(3),
     border: '1px solid #8133F1',
-    boxShadow: 'none',
-    backgroundImage: 'none',
   }),
   status: (theme) => ({
     display: 'flex',
@@ -70,9 +70,13 @@ export const styles = {
       color: theme.palette.primary[300],
     },
   }),
-  ellipse: (theme) => ({
-    marginRight: theme.spacing(2),
-    width: '14px',
-    height: '14px',
+  Junior: (theme) => ({
+    color: theme.palette.userCard.lvl.junior,
+  }),
+  Middle: (theme) => ({
+    color: theme.palette.userCard.lvl.middle,
+  }),
+  Senior: (theme) => ({
+    color: theme.palette.userCard.lvl.senior,
   }),
 };

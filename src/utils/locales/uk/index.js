@@ -731,7 +731,6 @@ export const uk = {
           joinMeeting: 'Доєднатись до інтерв’ю',
           notHappenedMeeting: 'Співбесіда не відбулася',
           leaveFeedbackMeeting: 'Залишити відгук',
-          languageType: 'Англійська',
           durationType: 'хв.',
         },
         interviewSkills: {

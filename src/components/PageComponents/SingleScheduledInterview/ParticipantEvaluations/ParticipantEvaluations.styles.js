@@ -36,9 +36,7 @@ export const styles = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      flexDirection: 'row-reverse',
       paddingBottom: '16px !important',
-      marginLeft: '45px !important',
     },
     '& .legend-item-0': {
       display: 'flex !important',
