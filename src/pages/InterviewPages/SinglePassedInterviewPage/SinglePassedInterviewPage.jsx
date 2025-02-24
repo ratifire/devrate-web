@@ -75,7 +75,7 @@ const SinglePassedInterviewPage = () => {
   const level = lvlMastery[attendeeMasteryLevel];
 
   return (
-    <Box className='InterviewsP age' sx={styles.mainContent}>
+    <Box className='InterviewsPage' sx={styles.mainContent}>
       <Paper sx={styles.userInfo}>
         <Suspense fallback={<UserCardSkeleton />}>
           <MemoizedUserCard
