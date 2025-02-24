@@ -65,7 +65,7 @@ export const styles = {
     color: theme.palette.specialization.mark.color,
   }),
 
-  defaultHardsContainer: {
+  emptyHardSkills: {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
@@ -74,21 +74,21 @@ export const styles = {
       flexDirection: 'column-reverse',
     },
   },
-  defaultSoftsContainer: {
+  emptySoftSkills: {
     display: 'flex',
     gap: '16px',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  mascotHardsBox: {
+    width: '180px',
+    height: '120px',
+  },
   mascotSoftsBox: {
     width: '120px',
     height: '80px',
   },
-  defaultHardsText: {
+  emptyHardsText: {
     maxWidth: '20.125rem',
-  },
-
-  defaultSoftText: {
-    maxWidth: '18.5rem',
   },
 };

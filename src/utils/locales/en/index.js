@@ -466,10 +466,13 @@ export const en = {
       hardSkills: {
         title: 'Hard skills',
         averageMark: 'Average mark:',
+        emptySkills:
+          "You don't have any skills on your profile right now. Add them to upgrade yourself and track your progress",
       },
       softSkills: {
         title: 'Soft skills',
         averageMark: 'Average mark:',
+        emptySkills: 'Pass an interview to have users evaluate your Soft Skills',
       },
       modal: {
         specialization: {

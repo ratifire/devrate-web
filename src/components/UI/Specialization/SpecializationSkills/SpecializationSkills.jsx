@@ -2,6 +2,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
 import { SkillsSkeleton } from '../../Skeleton';
@@ -12,6 +13,7 @@ import { styles } from './SpecializationSkills.styles';
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
+  const { t } = useTranslation();
 
   if (isFetching) {
     return <SkillsSkeleton />;
@@ -20,6 +22,30 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
   if (isError) {
     return <ErrorComponent />;
   }
+  const EmptySkills = ({ title }) => {
+    if (title === 'Hard skills') {
+      return (
+        <Box sx={styles.emptyHardSkills}>
+          <Box sx={styles.mascotHardsBox}>
+            <HardMascot />
+          </Box>
+          <Typography sx={styles.emptyHardsText} variant={'subtitle2'}>
+            {t('specialization.hardSkills.emptySkills')}
+          </Typography>
+        </Box>
+      );
+    }
+    if (title === 'Soft skills') {
+      return (
+        <Box sx={styles.emptySoftSkills}>
+          <Box sx={styles.mascotSoftsBox}>
+            <SoftMascot />
+          </Box>
+          <Typography variant={'subtitle2'}>{t('specialization.softSkills.emptySkills')}</Typography>
+        </Box>
+      );
+    }
+  };
 
   return (
     <Box sx={styles.wrapper}>
@@ -32,7 +58,7 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
         )}
       </Box>
       <Box>
-        {skills.length > 0 && (
+        {skills.length > 0 ? (
           <Box sx={[styles.skillsContainer, title === 'Hard skills' ? styles.hardSkills : styles.softSkills]}>
             {skills.map((skill) => (
               <ItemSkill
@@ -43,24 +69,8 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
               />
             ))}
           </Box>
-        )}
-
-        {skills.length === 0 && title === 'Hard skills' && (
-          <Box sx={styles.defaultHardsContainer}>
-            <HardMascot />
-            <Typography sx={styles.defaultHardsText} variant={'subtitle2'}>
-              Зараз у вашому профілі немає жодной навички. Додайте їх, щоб прокачати себе і відстежувати свій прогрес
-            </Typography>
-          </Box>
-        )}
-
-        {skills.length === 0 && title === 'Soft skills' && (
-          <Box sx={styles.defaultSoftsContainer}>
-            <Box sx={styles.mascotSoftsBox}>
-              <SoftMascot />
-            </Box>
-            <Typography variant={'subtitle2'}>Пройдіть інтерв’ю щоб користувачі оцінили ваші Soft Skills</Typography>
-          </Box>
+        ) : (
+          <EmptySkills title={title} />
         )}
       </Box>
       <Box sx={styles.markWrapper}>
