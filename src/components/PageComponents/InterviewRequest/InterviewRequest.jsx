@@ -36,7 +36,7 @@ const InterviewRequest = () => {
   }, [specializations, masteryFromUrl, isLoading, isError]);
 
   const { data: userData } = useGetInterviewRequestByMasteryIdQuery(
-    specializations?.find((item) => item.id === mastery)?.mainMasteryId || '',
+    { masteryId: specializations?.find((item) => item.id === mastery)?.mainMasteryId || '' },
     { skip: !mastery }
   );
 
