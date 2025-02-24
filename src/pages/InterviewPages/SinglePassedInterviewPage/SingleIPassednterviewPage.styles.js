@@ -3,6 +3,7 @@ export const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
     gridTemplateRows: 'repeat(12, 25px)',
+    width: '100%',
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: theme.spacing(2),
