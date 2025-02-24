@@ -66,14 +66,14 @@ const PassedInterviewsPage = () => {
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
-        <Paper sx={styles.interviewSideBar}>
-          <Suspense fallback={<InterviewsSkeleton />}>
-            <MemoizedSideBar passedInterview interviews={passedInterviews?.content} refHandler={refHandler} />
-          </Suspense>
-        </Paper>
-        <Paper sx={styles.interview}>
-          <Outlet />
-        </Paper>
+        <Box sx={styles.box}>
+          <Paper>
+            <Suspense fallback={<InterviewsSkeleton />}>
+              <MemoizedSideBar passedInterview interviews={passedInterviews?.content} refHandler={refHandler} />
+            </Suspense>
+          </Paper>
+        </Box>
+        <Outlet />
       </Box>
     </Container>
   );

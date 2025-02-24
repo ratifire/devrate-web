@@ -1,6 +1,7 @@
 export const TAG_TYPES = {
   Specialization: 'Specialization',
   Masteries: 'Masteries',
+  InterviewRequest: 'InterviewRequest',
   MainMastery: 'MainMastery',
   HardSkills: 'HardSkills',
   SoftSkills: 'SoftSkills',

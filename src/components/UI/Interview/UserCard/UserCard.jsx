@@ -6,7 +6,6 @@ import { styles } from './UserCard.styles';
 
 const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClick, label }) => {
   const fullName = `${firstName} ${lastName}`;
-
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.box}>
@@ -28,7 +27,7 @@ const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClic
           <Typography component='p' sx={styles.data} variant='body'>
             {date}
           </Typography>
-          <Typography component='p' sx={styles[lvl?.toLowerCase()]} variant='subtitle2'>
+          <Typography component='p' sx={styles[lvl]} variant='subtitle2'>
             {`Level ${lvl}`}
           </Typography>
         </Box>

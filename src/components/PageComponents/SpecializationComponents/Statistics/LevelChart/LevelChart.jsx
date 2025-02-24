@@ -1,11 +1,14 @@
 import { Box, Typography, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useHardSkillData } from '../../../../../utils/hooks/specialization';
 import { ErrorComponent } from '../../../../UI/Exceptions';
 import { getLevel } from '../utils';
 import LevelChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 import { LevelGauge } from '../../../../UI/Chart';
 import LevelUp from '../../../../../assets/icons/levelUp.svg?react';
+import { modalNames } from '../../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../../utils/hooks/useModalController.js';
 import { styles } from './LevelChart.styles.js';
 import useThemeLevelChart from './useThemeLevelChart';
 
@@ -14,6 +17,13 @@ const LevelChart = () => {
   const { t } = useTranslation();
   const averageMark = (skills.reduce((acc, skill) => acc + skill.averageMark, 0) / skills.length).toFixed(1) * 10 || 0;
   const { grad1, grad2, grad3, grad4 } = useThemeLevelChart();
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
+  const currentSpecialization = activeSpecialization || mainSpecialization;
+  const { openModal } = useModalController();
+
+  const handlerUpLevel = (id, name, mastery) => {
+    openModal(modalNames.specializationEditModal, { id, name, mastery });
+  };
 
   if (isFetching) {
     return <LevelChartSkeleton />;
@@ -22,7 +32,6 @@ const LevelChart = () => {
   if (isError) {
     return <ErrorComponent />;
   }
-
   return (
     <Box sx={styles.levelChartContainer}>
       <Box sx={styles.contentContainer}>
@@ -34,9 +43,21 @@ const LevelChart = () => {
             {t('specialization.statistics.levelUp')}
           </Typography>
         </Box>
-        <IconButton aria-label='level up' sx={styles.levelBtn}>
-          <LevelUp />
-        </IconButton>
+        {averageMark > 60 && (
+          <IconButton
+            aria-label='level up'
+            sx={styles.levelBtn}
+            onClick={() =>
+              handlerUpLevel(
+                currentSpecialization?.id,
+                currentSpecialization?.name,
+                currentSpecialization?.mastery || currentSpecialization.mainMasteryLevel
+              )
+            }
+          >
+            <LevelUp />
+          </IconButton>
+        )}
       </Box>
       <Box sx={styles.chartContainer}>
         <Box sx={{ position: 'relative' }}>

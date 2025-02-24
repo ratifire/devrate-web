@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { styles } from './DropdownMenu.styles';
 
-const DropdownMenu = ({ anchorEl, handleCloseMenu, handleEditFeature, handleDeleteFeature }) => {
+const DropdownMenu = ({ anchorEl, handleCloseMenu, handleEditFeature, handleDeleteFeature, handleMainFeature }) => {
   const { t } = useTranslation();
 
   return (
@@ -15,11 +15,13 @@ const DropdownMenu = ({ anchorEl, handleCloseMenu, handleEditFeature, handleDele
         <EditIcon sx={styles.itemIcon} />
         <Typography variant='caption1'>{t('dropDownMenu.edit')}</Typography>
       </MenuItem>
-      <Divider sx={styles.divider} />
-      <MenuItem sx={styles.menuItem} onClick={handleDeleteFeature}>
-        <StarIcon sx={styles.itemIcon} />
-        <Typography variant='caption1'>Make main</Typography>
-      </MenuItem>
+      {handleMainFeature && [
+        <Divider key='divider-main' sx={styles.divider} />,
+        <MenuItem key='menu-main' sx={styles.menuItem} onClick={handleMainFeature}>
+          <StarIcon sx={styles.itemIcon} />
+          <Typography variant='caption1'>{t('dropDownMenu.main')}</Typography>
+        </MenuItem>,
+      ]}
       <Divider sx={styles.divider} />
       <MenuItem sx={styles.menuItem} onClick={handleDeleteFeature}>
         <DeleteIcon sx={styles.itemIcon} />
@@ -36,6 +38,7 @@ DropdownMenu.propTypes = {
   handleCloseMenu: PropTypes.func,
   handleEditFeature: PropTypes.func,
   handleDeleteFeature: PropTypes.func,
+  handleMainFeature: PropTypes.func,
 };
 DropdownMenu.defaultProps = {
   anchorEl: false,
@@ -43,4 +46,5 @@ DropdownMenu.defaultProps = {
   handleCloseMenu: null,
   handleEditFeature: null,
   handleDeleteFeature: null,
+  handleMainFeature: null,
 };

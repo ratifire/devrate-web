@@ -5,6 +5,7 @@ import {
   CategoriesSkeleton,
   HardSkillsChartSkeleton,
   InterviewChartSkeleton,
+  LevelSkeleton,
   SkillsAssessmentChartSkeleton,
   SkillsSkeleton,
 } from '../../components/UI/Skeleton';
@@ -12,6 +13,9 @@ import LevelChartSkeleton from '../../components/UI/Skeleton/Pages/specializatio
 import InterviewTracker from '../../components/PageComponents/SpecializationComponents/InterviewTracker/index.js';
 import { styles } from './SpecialisationPage.styles';
 
+const SpecializationLevel = lazy(
+  () => import('../../components/PageComponents/SpecializationComponents/SpecializationLevel')
+);
 const HardSkills = lazy(() => import('../../components/PageComponents/SpecializationComponents/HardSkills'));
 const SpecialisationCategories = lazy(
   () => import('../../components/PageComponents/SpecializationComponents/SpecializationCategories')
@@ -33,6 +37,7 @@ const LevelChart = lazy(
   () => import('../../components/PageComponents/SpecializationComponents/Statistics/LevelChart/LevelChart')
 );
 
+const MemoizedSpecializationLevel = memo(SpecializationLevel);
 const MemoizedHardSkills = memo(HardSkills);
 const MemoizedSpecialisationCategories = memo(SpecialisationCategories);
 const MemoizedSoftSkills = memo(SoftSkills);
@@ -50,6 +55,11 @@ const SpecializationPage = () => {
         <Paper sx={styles.specialisationCategories}>
           <Suspense fallback={<CategoriesSkeleton />}>
             <MemoizedSpecialisationCategories />
+          </Suspense>
+        </Paper>
+        <Paper sx={styles.specialisationLevel}>
+          <Suspense fallback={<LevelSkeleton />}>
+            <MemoizedSpecializationLevel />
           </Suspense>
         </Paper>
         <Paper sx={styles.specialisationHardSkills}>

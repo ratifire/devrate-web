@@ -512,6 +512,9 @@ export const en = {
           skill_long: 'Company too long',
           skill_short: 'Company too short',
         },
+        specializationEdit: {
+          error_message: 'First, complete all open interviews at carrent level!',
+        },
         confirmSpecializationDelete: {
           title: 'Remove specialization',
           text1: 'Are you sure you want to delete the specialization',
@@ -544,6 +547,7 @@ export const en = {
     dropDownMenu: {
       delete: 'Delete',
       edit: 'Edit',
+      main: 'Make main',
     },
     schedule: {
       deleteEventSuccessMessage: 'Event was deleted',
@@ -874,7 +878,11 @@ export const en = {
       passedInterviews: {
         interviewersAssessmentTitle: "Interviewer's assessment",
         interviewInfoTitle: 'Interview info',
-        interviewInfoText: 'years ago',
+        interviewInfoYearAgo: 'year(s) ago',
+        interviewInfoMonthAgo: 'months ago',
+        interviewInfoWeekAgo: 'weeks ago',
+        interviewInfoDayAgo: 'days ago',
+        interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
         interviewInfoHost: 'Host',
         interviewFeedbackTitle: "Interviewee's feedback",

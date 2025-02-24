@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { closeModal, openModal } from '../../redux/modal/modalSlice.js';
 import { modalNames } from '../constants/modalNames.js';
@@ -9,8 +9,7 @@ export const useModalController = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isOpen = useSelector((state) => state.modal.isOpen);
-  const isClosingRef = useRef(false);
+  const { isOpen, data: modalData } = useSelector((state) => state.modal);
 
   const openModalHandler = useCallback(
     (modalType, data = null, step = null) => {
@@ -41,7 +40,6 @@ export const useModalController = () => {
 
   const closeModalHandler = useCallback(
     (modalType) => {
-      isClosingRef.current = true;
       dispatch(closeModal(modalType));
 
       const searchParams = new URLSearchParams(location.search);
@@ -49,8 +47,6 @@ export const useModalController = () => {
       params.forEach((param) => searchParams.delete(param));
 
       navigate({ search: searchParams.toString() }, { state: location.state });
-
-      isClosingRef.current = false;
     },
     [location.search, location.state]
   );
@@ -67,16 +63,15 @@ export const useModalController = () => {
     const modal = searchParams.get('modal');
     const stepParam = searchParams.get('step');
     const step = Number(stepParam);
-    const role = searchParams.get('role');
 
-    if (Object.values(modalNames).includes(modal)) {
-      dispatch(openModal({ modalType: modal, data: { role } }));
+    if (isOpen && Object.values(modalNames).includes(modal)) {
+      dispatch(openModal({ modalType: modal, data: modalData }));
 
       if (stepParam !== null && !isNaN(step)) {
         dispatch(setStep(step));
       }
     }
-  }, [location.search]);
+  }, []);
 
   return {
     isOpen,
