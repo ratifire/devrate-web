@@ -50,54 +50,41 @@ export const groupDatesByDay = (dates) => {
   );
 };
 
-// Todo refactor
 function mergeDaysRecursive(days, slotsByDay, maxPerRow, i = 0, result = []) {
-  // Якщо індекс вийшов за межі довжини масиву днів — повертаємо результат
   if (i >= days.length) {
     return result;
   }
 
-  const mergedInfo = gatherSlots(days, slotsByDay, maxPerRow, i);
+  const { mergedDays, mergedSlots, nextIndex } = gatherSlots(days, slotsByDay, maxPerRow, i);
 
-  const { mergedDays, mergedSlots, nextIndex } = mergedInfo;
+  if (mergedDays.length === 0) {
+    return result;
+  }
 
-  // Формуємо "зліплений" рядок з дат (наприклад, "day1_day2_day3")
-  const dateRange = mergedDays.length > 1 ? mergedDays[0] + ' - ' + mergedDays.at(-1) : mergedDays[0];
-
-  // Кладемо в результат новий об'єкт
+  const dateRange = mergedDays.length > 1 ? `${mergedDays[0]} - ${mergedDays[mergedDays.length - 1]}` : mergedDays[0];
   result.push({
     dateRange,
     dates: mergedDays,
     slots: mergedSlots,
   });
 
-  // Рекурсивно викликаємо функцію від наступного індексу
   return mergeDaysRecursive(days, slotsByDay, maxPerRow, nextIndex, result);
 }
 
-/**
- * Допоміжна функція, яка збирає слоти, починаючи з індексу `startIndex`,
- * доки сума слотів не досягне maxPerRow або не закінчаться дні.
- */
 function gatherSlots(days, slotsByDay, maxPerRow, startIndex) {
   let mergedDays = [];
   let mergedSlots = [];
-  let totalSlots = 0;
-
   let currentIndex = startIndex;
 
   while (currentIndex < days.length) {
     const day = days[currentIndex];
     const daySlots = slotsByDay[day] || [];
 
-    // Якщо додавання слотів наступного дня не перевищує maxPerRow, додаємо
-    if (totalSlots + daySlots.length <= maxPerRow) {
-      mergedDays.push(day);
-      mergedSlots = [...mergedSlots, ...daySlots];
-      totalSlots += daySlots.length;
-      currentIndex++;
-    } else {
-      // Якщо перевищує, припиняємо мерджити
+    mergedDays.push(day);
+    mergedSlots = [...mergedSlots, ...daySlots];
+    currentIndex++;
+
+    if (mergedSlots.length >= maxPerRow) {
       break;
     }
   }
