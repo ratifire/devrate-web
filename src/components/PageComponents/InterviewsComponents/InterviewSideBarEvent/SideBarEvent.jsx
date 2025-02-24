@@ -2,8 +2,8 @@ import { Link as RouterLink, useNavigate, useParams } from 'react-router';
 import PropTypes from 'prop-types';
 import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { formatDateAndTime } from '../../../../utils/helpers/index.js';
-import { lvlMastery, lvlMasteryColor } from '../../../../utils/constants/masteryLvl';
+import { formatDateAndTime } from '../../../../utils/helpers';
+import { lvlMastery } from '../../../../utils/constants/masteryLvl';
 import navigationLinks from '../../../../router/links';
 import { styles } from './SideBarEvent.styles';
 
@@ -35,10 +35,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
         </Typography>
         <Box sx={styles.titleLevelBox}>
           <Typography component='div' sx={styles.title} variant='h6'>
-            {title}
-          </Typography>
-          <Typography component='div' sx={{ color: lvlMasteryColor[masteryLevel] || 'inherit' }} variant='subtitle2'>
-            {lvlMastery[masteryLevel]}
+            {lvlMastery[masteryLevel]} {title}
           </Typography>
         </Box>
         <Typography component='div' sx={styles.eventDate} variant='body2'>
