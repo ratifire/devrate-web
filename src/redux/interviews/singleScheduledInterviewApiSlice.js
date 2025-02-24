@@ -1,4 +1,5 @@
 import { apiSlice } from '../services/api/apiSlice.js';
+import { TAG_TYPES } from '../../utils/constants/tagTypes.js';
 
 const singleScheduledInterviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -13,6 +14,7 @@ const singleScheduledInterviewApiSlice = apiSlice.injectEndpoints({
         url: `/interviews/${eventId}`,
         method: 'DELETE',
       }),
+      invalidatesTags: [TAG_TYPES.ScheduledInterview],
     }),
   }),
 });

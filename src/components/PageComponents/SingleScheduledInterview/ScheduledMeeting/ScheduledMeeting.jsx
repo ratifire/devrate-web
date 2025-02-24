@@ -37,7 +37,8 @@ const ScheduledMeeting = () => {
     isLoading: isLoadingUserAvatar,
     isError: isErrorUserAvatar,
   } = useGetAvatarUserQuery(id, { skip: !id });
-  const [cancelMeeting, { isError: isErrorCancelMeeting }] = useDeleteInterviewMutation();
+  const [cancelMeeting, { isError: isErrorCancelMeeting, isLoading: isLoadingCancelMeeting }] =
+    useDeleteInterviewMutation();
 
   const handleClickLeftBtn = () => {
     if (status === btnStatus['UPCOMING']) {
@@ -146,7 +147,7 @@ const ScheduledMeeting = () => {
       </Typography>
       <Box sx={styles.boxBtn}>
         <ButtonDef
-          disabled={status === btnStatus['IN PROCESS']}
+          disabled={status === btnStatus['IN PROCESS'] || isLoadingCancelMeeting}
           label={t(leftBtnStatus[status])}
           sx={styles.btn}
           variant='outlined'

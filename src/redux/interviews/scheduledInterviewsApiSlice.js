@@ -9,9 +9,9 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         result?.content
           ? [
               ...result.content.map(({ id }) => ({ type: TAG_TYPES.ScheduledInterview, id })),
-              TAG_TYPES.ScheduledInterview,
+              { type: TAG_TYPES.ScheduledInterview, id: 'LIST' },
             ]
-          : [TAG_TYPES.ScheduledInterview],
+          : [{ type: TAG_TYPES.ScheduledInterview, id: 'LIST' }],
 
       // Merge new data with existing data
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
