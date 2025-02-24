@@ -1,12 +1,11 @@
 import { Box, Typography } from '@mui/material';
 import { useParams } from 'react-router';
-import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetPassedInterviewByIdQuery } from '../../../../redux/interviews/passedInterviewsApiSlice.js';
-import { formatToLocalDate } from '../../../../utils/helpers/formatToLocalDate.js';
+import { formatToLocalDateInterview } from '../../../../utils/helpers/formatToLocalDateInterview.js';
 import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice.js';
 import { lvlMastery } from '../../../../utils/constants/masteryLvl.js';
-import { convertMilliInYears } from '../../../../utils/helpers/convertMilliInYears.js';
+import { ConvertMilliInYears } from '../../../../utils/helpers/convertMilliInYears.js';
 import { styles } from './InterviewInfo.styles.js';
 
 const InterviewInfo = () => {
@@ -28,7 +27,7 @@ const InterviewInfo = () => {
 
   const fullName = `${attendeeContacts?.firstName ?? ''} ${attendeeContacts?.lastName ?? ''}`;
 
-  const yearsAgo = useMemo(() => convertMilliInYears(Date.now() - new Date(dateTime)), [dateTime]);
+  const timeAgo = ConvertMilliInYears(Date.now() - new Date(dateTime));
 
   return (
     <Box sx={styles.interviewInfoWrapper}>
@@ -37,11 +36,11 @@ const InterviewInfo = () => {
           {t('interviews.passedInterviews.interviewInfoTitle')}
         </Typography>
         <Typography sx={styles.yearsAgo} variant='caption1'>
-          {yearsAgo} {t('interviews.passedInterviews.interviewInfoText')}
+          {timeAgo}
         </Typography>
       </Box>
       <Typography sx={styles.date} variant='caption1'>
-        {formatToLocalDate(dateTime)}
+        {formatToLocalDateInterview(dateTime)}
       </Typography>
       <Box sx={styles.interviewSpecializationTitleWrapper}>
         <Typography sx={styles.interviewSpecialization} variant='h6'>

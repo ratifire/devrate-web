@@ -6,7 +6,6 @@ import { styles } from './UserCard.styles';
 
 const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClick, label }) => {
   const fullName = `${firstName} ${lastName}`;
-
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.box}>

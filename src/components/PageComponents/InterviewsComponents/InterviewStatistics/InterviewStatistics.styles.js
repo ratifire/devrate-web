@@ -4,7 +4,7 @@ export const styles = {
     paddingX: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
-      backgroundColor: theme.palette.statistics.innerBackground,
+      backgroundColor: theme.palette.interviewPage.innerBackground,
       boxShadow: 'none',
       backgroundImage: 'none',
     },

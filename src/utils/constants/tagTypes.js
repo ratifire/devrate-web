@@ -1,6 +1,7 @@
 export const TAG_TYPES = {
   Specialization: 'Specialization',
   Masteries: 'Masteries',
+  InterviewRequest: 'InterviewRequest',
   MainMastery: 'MainMastery',
   HardSkills: 'HardSkills',
   SoftSkills: 'SoftSkills',
@@ -17,6 +18,8 @@ export const TAG_TYPES = {
   ContactList: 'ContactList',
   LanguageUser: 'LanguageUser',
   WorkExperience: 'WorkExperience',
+  Chat: 'Chat',
+  ChatHistory: 'ChatHistory',
   ScheduledInterview: 'ScheduledInterview',
   PassedInterview: 'PassedInterview',
 };

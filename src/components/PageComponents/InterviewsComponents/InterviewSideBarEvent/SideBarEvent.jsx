@@ -38,7 +38,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
             {title}
           </Typography>
           <Typography component='div' sx={styles[lvlMastery[masteryLevel]]} variant='subtitle2'>
-            {lvlMastery[masteryLevel]}
+            {lvlMastery[masteryLevel]} {title}
           </Typography>
         </Box>
         <Typography component='div' sx={styles.eventDate} variant='body2'>

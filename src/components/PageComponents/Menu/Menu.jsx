@@ -16,12 +16,13 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router';
 import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
 import { modalNames } from '../../../utils/constants/modalNames.js';
 import { useModalController } from '../../../utils/hooks/useModalController.js';
+import { closeChat, disconnectFromChat } from '../../../redux/chat/chatSlice.js';
 import links from './profileRoutes';
 import styles from './Menu.styles';
 
@@ -31,7 +32,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer, closeMenu }) => {
   const { openModal } = useModalController();
 
   const [logout] = useLogoutMutation();
-
+  const dispatch = useDispatch();
   const logoutHandler = async () => {
     try {
       await logout().unwrap();
@@ -47,6 +48,8 @@ const Menu = ({ isDrawerOpen, toggleDrawer, closeMenu }) => {
 
   const handleLinkClick = async (link) => {
     if (link.name === 'profile.userMenu.logout') {
+      dispatch(disconnectFromChat());
+      dispatch(closeChat());
       await logoutHandler();
     }
     closeMenu();

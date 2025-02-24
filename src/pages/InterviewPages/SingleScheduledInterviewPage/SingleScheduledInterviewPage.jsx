@@ -31,7 +31,7 @@ const MemoizedInterviewSkills = memo(InterviewSkills);
 
 const SingleScheduledInterviewPage = () => {
   return (
-    <Box className='ScheduledInterviewsPage' sx={styles.contentWrapper}>
+    <Box className='InterviewsPage' sx={styles.contentWrapper}>
       <Paper sx={styles.userCardScheduledInterview}>
         <Suspense fallback={<UserCardScheduledInterviewSkeleton />}>
           <MemoizedUserCardScheduledInterview />

@@ -2,7 +2,12 @@ export const interviewDark = {
   interviewPage: {
     bgColor: '#1D1D1D',
     innerBackground: '#3E3E40',
+    innerBorderColor: 'transparent',
   },
+  interviewSidebarEvent: {
+    backgroundColor: '#3E3E40',
+  },
+
   userCard: {
     role: {
       color: '#C5C5C6',
@@ -55,8 +60,10 @@ export const interviewDark = {
     },
   },
   interviewInfo: {
+    interviewInfoTitleColor: '#FFFFFF',
     yearsAgoColor: '#EFE6FD',
     dateColor: '#EFE6FD',
+    interviewSpecializationTextColor: '#FFFFFF',
     borderBottomColor: '#69696B',
     roleColor: '#ECECED',
     hostNameColor: '#CEB0FA',

@@ -31,7 +31,6 @@ const Notification = () => {
   };
 
   const open = Boolean(bellButton);
-
   const elem =
     notifications?.length === 0 ? (
       <NotificationEmpty icons={icons} />
