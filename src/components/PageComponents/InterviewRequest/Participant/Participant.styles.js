@@ -12,28 +12,68 @@ export const styles = {
     alignItems: 'center',
     marginBottom: theme.spacing(3),
   }),
-  title: {
-    fontSize: '20px',
-    fontWeight: 'bold',
-  },
-  dayGroup: {
-    marginBottom: '16px',
-  },
-  dayTitle: {
-    fontSize: '16px',
-    fontWeight: '500',
-    marginBottom: '8px',
-  },
-  buttons: {
+  text: (theme) => ({
+    color: theme.palette.modals.textColor,
+    ':first-letter': {
+      textTransform: 'uppercase',
+    },
+  }),
+  dialogWrapper: (theme) => ({
+    ' > div > div ': {
+      padding: theme.spacing(4),
+      borderRadius: 2,
+      backgroundColor: theme.palette.modals.backgroundColor,
+      position: 'relative',
+      boxShadow: 'none',
+      backgroundImage: 'none',
+      maxWidth: '451px',
+      margin: 0,
+    },
+  }),
+  title: (theme) => ({
+    padding: 0,
+    color: theme.palette.text.primary,
+    marginBottom: theme.spacing(4),
+    ':first-letter': {
+      textTransform: 'uppercase',
+    },
+  }),
+  dialogContent: (theme) => ({
+    borderRadius: 2,
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    padding: 0,
+    marginBottom: theme.spacing(4),
+  }),
+  dialogActions: { padding: 0 },
+  buttonWrapper: (theme) => ({
+    marginTop: theme.spacing(4),
     display: 'flex',
+    gap: theme.spacing(3),
+    width: '100%',
+  }),
+  refuseBtn: (theme) => ({
+    width: '100%',
+    color: theme.palette.modals.cancelBtnTextColor,
+    padding: '12px 16px',
+  }),
+  confirmBtn: {
+    width: '100%',
+    textTransform: 'capitalize',
+    padding: '12px 16px',
   },
-  statItem: {
-    fontSize: '14px',
-    color: '#ECECED',
-  },
-  statsContainer: {
-    display: 'flex',
-    gap: '16px',
-    marginBottom: '16px',
-  },
+  btnIcon: (theme) => ({
+    position: 'absolute',
+    top: theme.spacing(4),
+    right: 'theme.spacing(4)',
+    color: theme.palette.iconBtn.btnClose.color,
+    borderRadius: 1,
+    ':hover': {
+      backgroundColor: theme.palette.iconBtn.btnClose.hoverColor,
+    },
+    svg: {
+      fontSize: '18px',
+    },
+  }),
 };
