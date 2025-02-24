@@ -922,10 +922,29 @@ export const en = {
         candidate: 'Respondent',
         interviewer: 'Interviewer',
       },
+      requestHeader: {
+        foundInterviews: 'Interview found:',
+        totalInterviews: 'Number of interviews:',
+        selectedTimeSlots: 'Selected timeslots:',
+        interviewLanguage: 'Interview language:',
+      },
+      buttons: {
+        addTimeSlot: 'Аdd time slots',
+      },
       timeSlot: {
         status: {
+          status: 'Status:',
           available: 'Pending',
           assigned: 'Scheduled',
+        },
+        daysOfWeek: {
+          monday: 'Monday',
+          tuesday: 'Tuesday',
+          wednesday: 'Wednesday',
+          thursday: 'Thursday',
+          friday: 'Friday',
+          saturday: 'Saturday',
+          sunday: 'Sunday',
         },
       },
       notifications: {
@@ -939,6 +958,11 @@ export const en = {
             error: 'Something went wrong',
           },
         },
+      },
+      deleteAllRequests: {
+        cancel: 'Cancel',
+        approve: 'Remove',
+        question: 'Are you sure you want to delete the {{mastery}} interview request as a {{role}}?',
       },
     },
   },
