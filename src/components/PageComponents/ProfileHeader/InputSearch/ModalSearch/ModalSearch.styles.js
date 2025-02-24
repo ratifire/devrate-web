@@ -68,11 +68,6 @@ export const styles = {
       gap: '33px',
     },
   }),
-  img: {
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%',
-  },
   divider: (theme) => ({
     backgroundColor: theme.palette.search.color,
   }),

@@ -749,5 +749,10 @@ export const uk = {
         },
       },
     },
+    chat: {
+      search: 'Пошук',
+      emptyChatLstUsers: 'Ще немає чатів',
+      enterMessages: 'Напишіть повідомлення',
+    },
   },
 };

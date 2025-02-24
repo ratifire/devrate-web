@@ -11,7 +11,8 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
         return response;
       },
       async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
-        const ws = new WebSocket(`${import.meta.env.VITE_WS_URL}${urlWS.notification}`);
+        // const ws = new WebSocket(`${import.meta.env.VITE_WS_URL}${urlWS.notification}`);
+        const ws = new WebSocket('wss://server.skillzzy.com/ws/notifications');
         try {
           await cacheDataLoaded;
           const listener = ({ data }) => {

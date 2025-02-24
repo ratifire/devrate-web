@@ -18,6 +18,8 @@ export const TAG_TYPES = {
   ContactList: 'ContactList',
   LanguageUser: 'LanguageUser',
   WorkExperience: 'WorkExperience',
+  Chat: 'Chat',
+  ChatHistory: 'ChatHistory',
   ScheduledInterview: 'ScheduledInterview',
   PassedInterview: 'PassedInterview',
 };

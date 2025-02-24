@@ -1,5 +1,6 @@
 const styles = {
   bg: (theme) => ({
+    zIndex: 1500,
     ' > .MuiDrawer-paper': {
       backgroundColor: theme.palette.background.level2,
       backgroundImage: 'none',

@@ -1,45 +1,46 @@
-import { Badge, Box, IconButton, Fade } from '@mui/material';
+import { Badge, IconButton, Popover } from '@mui/material';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../../assets/icons/message.svg?react';
-import { openChat } from '../../../redux/chat/chatSlice';
+import { openList, closeList, closeBadge } from '../../../redux/chat/chatSlice.js';
 import { styles } from './Chat.styles';
-import ChatForm from './ChatForm';
+import ChatHistory from './ChatHistory';
 
 const Chat = () => {
-  const { chat } = useSelector((state) => state.chat);
-
+  const [bellButton, setBellButton] = useState(null);
+  const { list, badge } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
-  const handleOpen = () => {
-    dispatch(openChat({ chatElement: 'chat' }));
+  const handleOpen = (event) => {
+    event.preventDefault();
+    setBellButton(event.currentTarget);
+    dispatch(openList());
+    dispatch(closeBadge());
   };
-
+  const handleClose = () => {
+    dispatch(closeList());
+  };
   return (
     <>
       <IconButton sx={styles.btnIcon} onClick={handleOpen}>
-        <Badge invisible color='error' overlap='circular' sx={styles.badge} variant='dot'>
+        <Badge color='error' invisible={badge} overlap='circular' sx={styles.badge} variant='dot'>
           <Message />
         </Badge>
       </IconButton>
-      {/*<Popover*/}
-      {/*  anchorEl={bellButton}*/}
-      {/*  anchorOrigin={{*/}
-      {/*    vertical: 'bottom',*/}
-      {/*    horizontal: 'right',*/}
-      {/*  }}*/}
-      {/*  open={open}*/}
-      {/*  transformOrigin={{*/}
-      {/*    vertical: 'top',*/}
-      {/*    horizontal: 'right',*/}
-      {/*  }}*/}
-      {/*  onClose={chatClose}*/}
-      {/*>*/}
-      {/*  {elem}*/}
-      {/*</Popover>*/}
-      <Fade in={chat}>
-        <Box sx={styles.position}>
-          <ChatForm />
-        </Box>
-      </Fade>
+      <Popover
+        anchorEl={bellButton}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={list}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        onClose={handleClose}
+      >
+        <ChatHistory />
+      </Popover>
     </>
   );
 };
