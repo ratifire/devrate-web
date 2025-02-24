@@ -4,7 +4,9 @@ import { apiSlice } from './api/apiSlice';
 export const interviewRequestApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getInterviewRequestByMasteryId: builder.query({
-      query: (masteryId) => `/interview-requests/masteries/${masteryId}`,
+      query: ({ masteryId }) => ({
+        url: `interview-requests/masteries/${masteryId}`,
+      }),
       providesTags: [TAG_TYPES.InterviewRequest],
     }),
 

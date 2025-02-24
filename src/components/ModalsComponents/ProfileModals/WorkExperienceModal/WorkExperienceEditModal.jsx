@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +6,6 @@ import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
 import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas/index';
-// import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
 import { selectModalData } from '../../../../redux/modal/modalSlice';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
@@ -23,7 +21,6 @@ import { addUniqueItem } from '../../../../utils/helpers/ProfileWorkExperience/a
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceEditModal = () => {
-  // const dispatch = useDispatch();
   const modalData = useSelector(selectModalData);
   const [responsibilities, setResponsibilities] = useState(modalData?.responsibilities || []);
   const { t } = useTranslation();
@@ -32,10 +29,6 @@ const WorkExperienceEditModal = () => {
 
   const selectYears = useMemo(() => generateYearsArray(), []);
   const { closeModal } = useModalController();
-
-  // const handleClose = () => {
-  //   dispatch(closeModal({ modalType: modalNames.workExperienceEditModal }));
-  // };
 
   const initialValues = {
     position: modalData?.position || '',
