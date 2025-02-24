@@ -8,7 +8,14 @@ const singleScheduledInterviewApiSlice = apiSlice.injectEndpoints({
     getMasteries: builder.query({
       query: (masteryId) => `/masteries/${masteryId}`,
     }),
+    deleteInterview: builder.mutation({
+      query: ({ eventId }) => ({
+        url: `/interviews/${eventId}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useGetAllSkillsForMasteryIdQuery, useGetMasteriesQuery } = singleScheduledInterviewApiSlice;
+export const { useGetAllSkillsForMasteryIdQuery, useGetMasteriesQuery, useDeleteInterviewMutation } =
+  singleScheduledInterviewApiSlice;

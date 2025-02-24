@@ -1,5 +1,5 @@
 import { Box, Typography, Link } from '@mui/material';
-import { Link as RouterLink, useLocation } from 'react-router';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import zoom from '../../../../assets/icons/InterviewPageIcons/zoom.png';
@@ -11,6 +11,8 @@ import { ErrorComponent } from '../../../UI/Exceptions';
 import { ScheduledMeetingSkeleton } from '../../../UI/Skeleton';
 import { formatTimeToUtc, formatTimeWithOffset } from '../../../../utils/helpers';
 import { getStatusByTime } from '../helpers';
+import { useDeleteInterviewMutation } from '../../../../redux/interviews/singleScheduledInterviewApiSlice.js';
+import navigationLinks from '../../../../router/links.js';
 import { styles } from './ScheduledMeeting.styles';
 import { btnStatus, leftBtnStatus } from './constants';
 import rightBtnStatus from './constants/rigthBtnStatus';
@@ -21,7 +23,8 @@ const ScheduledMeeting = () => {
     data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
   const location = useLocation();
-  const { hostFirstName, hostLastName, hostId, startTime, languageCode } = location.state.event;
+  const navigate = useNavigate();
+  const { hostFirstName, hostLastName, hostId, startTime, languageCode, id: eventId } = location.state.event;
 
   const {
     data: hostAvatar,
@@ -34,8 +37,14 @@ const ScheduledMeeting = () => {
     isLoading: isLoadingUserAvatar,
     isError: isErrorUserAvatar,
   } = useGetAvatarUserQuery(id, { skip: !id });
+  const [cancelMeeting, { isError: isErrorCancelMeeting }] = useDeleteInterviewMutation();
 
-  if (isErrorHostAvatar || isErrorUserAvatar) {
+  const handleCancelMeeting = async () => {
+    await cancelMeeting({ eventId }).unwrap();
+    navigate(navigationLinks.interviews);
+  };
+
+  if (isErrorHostAvatar || isErrorUserAvatar || isErrorCancelMeeting) {
     return <ErrorComponent />;
   }
 
@@ -134,6 +143,7 @@ const ScheduledMeeting = () => {
           label={t(leftBtnStatus[status])}
           sx={styles.btn}
           variant='outlined'
+          onClick={handleCancelMeeting}
         />
         <ButtonDef label={t(rightBtnStatus[status])} sx={styles.btn} variant='contained' />
       </Box>
