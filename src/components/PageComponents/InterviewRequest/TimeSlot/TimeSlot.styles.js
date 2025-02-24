@@ -1,6 +1,8 @@
 export const styles = {
   timeSlot: (theme) => ({
-    width: 209,
+    maxWidth: 209,
+    minWidth: 209,
+    width: '100%',
     height: 70,
     display: 'flex',
     flexDirection: 'column',
@@ -36,43 +38,11 @@ export const styles = {
     color: 'white',
     marginRight: '8px',
   },
-  // checkBox: (theme) => ({
-  //   color: theme.palette.disabled,
-  //   '&:hover': {
-  //     backgroundColor: 'transparent',
-  //   },
-  //   '&.Mui-checked': {
-  //     color: theme.palette.disabled,
-  //     backgroundColor: 'white',
-  //   },
-  //   '& .MuiSvgIcon-root': {
-  //     fontSize: 20,
-  //     border: '1px',
-  //   },
-  //   '&.MuiCheckbox-root': {
-  //     borderRadius: 0,
-  //     padding: 0,
-  //   },
-  //   '& svg': {
-  //     height: '24px',
-  //     width: '24px',
-  //     color: '#C5C5C6',
-  //   },
-  // }),
-  checkBox: (theme) => ({
-    color: theme.palette.disabled,
-
-    '& .MuiSvgIcon-root': {
-      fontSize: 20,
-      border: '1px',
-    },
-    '&.Mui-checked': {
-      color: theme.palette.disabled,
-    },
-    '& svg': {
-      height: '24px',
-      width: '24px',
-      backgroundColor: theme.palette.sliderAssessment.violet,
+  checkBox: () => ({
+    color: 'transparent',
+    padding: 0,
+    '&:hover': {
+      backgroundColor: 'transparent',
     },
   }),
   statusCircle: (type) => ({

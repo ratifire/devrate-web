@@ -91,5 +91,16 @@ export const styles = {
       borderColor: theme.palette.iconBtn.bookInterview.hover.borderColor,
       color: theme.palette.iconBtn.bookInterview.hover.color,
     },
+    '&.Mui-disabled': {
+      backgroundColor: '#252527',
+      '& .MuiButton-startIcon': {
+        '& .MuiSvgIcon-root': {
+          color: '#828283',
+        },
+      },
+      '& .loadingBtnText': {
+        color: '#828283',
+      },
+    },
   }),
 };

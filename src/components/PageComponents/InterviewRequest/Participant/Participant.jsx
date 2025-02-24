@@ -1,48 +1,75 @@
 import { Box, Button, DialogActions, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { DateTime } from 'luxon';
 import TimeSlotsGroup from '../TimeSlotsGroup';
 import RequestHeader from '../RequsestHeader';
-// import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
 import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
-
 import {
   useDeleteInterviewRequestMutation,
   useUpdateTimeSlotsMutation,
 } from '../../../../redux/services/interviewRequestApiSlice.js';
 import { styles } from './Participant.styles.js';
 
-const Participant = ({ data, specialization, userId }) => {
+const Participant = ({ data, specialization }) => {
   const { t } = useTranslation();
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [deleteRequest] = useDeleteInterviewRequestMutation();
   const [updateTimeslots] = useUpdateTimeSlotsMutation();
+  const containerRef = useRef(null);
+  const [slotsPerRow, setSlotsPerRow] = useState(0);
 
-  const userIdValue = Array.isArray(userId) ? userId[0]?.id : userId?.id;
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const timeSlotWidth = 209;
+        const calculatedSlots = Math.floor(containerWidth / timeSlotWidth) || 1;
+        setSlotsPerRow(calculatedSlots);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const mainMasteryLevelWithName = useMemo(() => {
-    return specialization ? `${specialization.mainMasteryLevel} ${specialization.name}` : 'No specialization';
+    if (!specialization || typeof specialization !== 'object') {
+      return 'No specialization';
+    }
+    const level = specialization.mainMasteryLevel || 'No level';
+    const name = specialization.name || 'No name';
+    return `${level} ${name}`;
   }, [specialization]);
 
-  const { role, desiredInterview, comment, availableDates, assignedDates } = data;
+  const languageCode = data?.languageCode?.toLowerCase() || null;
 
-  const sortedDatesWithLabel = useMemo(() => getSortedDatesWithLabel(data), [data]);
+  const languageName = useMemo(() => {
+    if (!languageCode) return null;
+    return t(`specialization.language.name.${languageCode}`) || 'Unknown Language';
+  }, [languageCode, t]);
+
+  const { role, desiredInterview, comment, availableDates, assignedDates } = data || {};
+
+  const sortedDatesWithLabel = useMemo(() => getSortedDatesWithLabel(data || {}), [data]);
   const sortedDatesByDay = useMemo(() => groupDatesByDay(sortedDatesWithLabel), [sortedDatesWithLabel]);
+
   const slotsByDay = {};
   sortedDatesByDay.forEach((day) => {
     slotsByDay[day.date] = day.items;
   });
-  // Объединяем их в ряды по 6 слотов
-  const mergedSlots = mergeTimeSlotsByRows(slotsByDay, 6);
-  // console.log(mergedSlots, 'mergedSlots');
-
-  const selectedTimeSlots = availableDates.length;
-  const foundTimeSlots = assignedDates.length;
+  const mergedSlots = useMemo(() => {
+    if (slotsPerRow === 0) return [];
+    return mergeTimeSlotsByRows(slotsByDay, slotsPerRow);
+  }, [slotsByDay, slotsPerRow]);
+  const selectedTimeSlots = (availableDates || []).length + (assignedDates || []).length;
+  const foundTimeSlots = (assignedDates || []).length;
 
   const handleSelectSlot = (date) => {
     setSelectedSlots((prev) => (prev.includes(date) ? prev.filter((d) => d !== date) : [...prev, date]));
@@ -53,16 +80,33 @@ const Participant = ({ data, specialization, userId }) => {
       const normalizedSelectedDates = selectedSlots.map((slot) =>
         DateTime.fromISO(slot, { zone: 'utc' }).toFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
       );
-      const updatedAvailableDates = data.availableDates.filter((date) => !normalizedSelectedDates.includes(date));
+      const updatedAvailableDates = (data?.availableDates || []).filter(
+        (date) => !normalizedSelectedDates.includes(date)
+      );
+
+      const updatedAssignedDates = (data?.assignedDates || []).filter(
+        (date) => !normalizedSelectedDates.includes(date)
+      );
+
+      if (desiredInterview > updatedAvailableDates.length) {
+        enqueueSnackbar(t('The number of timeslots must be greater than or equal to the number of interviews'), {
+          variant: 'warning',
+          anchorOrigin: { vertical: 'top', horizontal: 'center' },
+          autoHideDuration: 3000,
+        });
+        return;
+      }
 
       updateTimeslots({
-        id: userIdValue,
+        id: data.id,
         data: {
-          role,
-          desiredInterview,
-          comment,
+          role: role,
+          desiredInterview: desiredInterview,
+          comment: comment,
           availableDates: updatedAvailableDates,
+          assignedDates: updatedAssignedDates,
           masteryId: specialization.mainMasteryId,
+          languageCode: languageCode,
         },
       });
 
@@ -74,7 +118,7 @@ const Participant = ({ data, specialization, userId }) => {
       });
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.success'), {
+      enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.error') || 'Error updating time slots', {
         variant: 'error',
         anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
       });
@@ -83,7 +127,7 @@ const Participant = ({ data, specialization, userId }) => {
 
   const handleDeleteAllSlots = async () => {
     try {
-      await deleteRequest(data.id).unwrap();
+      await deleteRequest(data?.id).unwrap();
       enqueueSnackbar(t('interviewRequest.notifications.delete.allTimeSlots.success'), {
         variant: 'success',
         anchorOrigin: {
@@ -114,17 +158,18 @@ const Participant = ({ data, specialization, userId }) => {
   };
 
   const formatRole = (role, capitalize = true) => {
-    const translatedRole = t(`interviewRequest.role.${role.toLowerCase()}`);
+    const translatedRole = t(`interviewRequest.role.${role?.toLowerCase() || 'candidate'}`);
     return capitalize ? translatedRole : translatedRole.toLowerCase();
   };
 
   return (
-    <Box sx={styles.container}>
+    <Box ref={containerRef} sx={styles.container}>
       <RequestHeader
         description={comment}
         foundInterviews={foundTimeSlots}
         handleUpdateSlots={handleDeleteSelected}
         hasSelectedSlots={selectedSlots.length > 0}
+        languageName={languageName}
         role={formatRole(role, true)}
         selectedTimeSlots={selectedTimeSlots}
         title={mainMasteryLevelWithName}
@@ -136,16 +181,16 @@ const Participant = ({ data, specialization, userId }) => {
         <DialogTitle>{t('Видалити запит')}</DialogTitle>
         <DialogContent>
           <Typography>
-            {t('Ви впевнені, що хочете видалити запит на {{mastery}} interview у ролі {{role}}?', {
+            {t('interviewRequest.deleteAllRequests.question', {
               mastery: mainMasteryLevelWithName,
               role: role ? formatRole(role, false) : '',
             })}
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDeleteDialog}>{t('Скасувати')}</Button>
+          <Button onClick={handleCloseDeleteDialog}>{t('interviewRequest.deleteAllRequests.cancel')}</Button>
           <Button color='error' onClick={handleDeleteAllSlots}>
-            {t('Видалити')}
+            {t('interviewRequest.deleteAllRequests.approve')}
           </Button>
         </DialogActions>
       </Dialog>
@@ -154,6 +199,7 @@ const Participant = ({ data, specialization, userId }) => {
         <TimeSlotsGroup
           key={item.dateRange}
           selectedSlots={selectedSlots}
+          slotsPerRow={slotsPerRow}
           timeSlots={item}
           onSelectSlot={handleSelectSlot}
         />
@@ -161,11 +207,9 @@ const Participant = ({ data, specialization, userId }) => {
     </Box>
   );
 };
-
 Participant.propTypes = {
   data: PropTypes.object,
   specialization: PropTypes.object,
-  userId: PropTypes.array,
 };
 
 export default Participant;

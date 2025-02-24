@@ -4,6 +4,7 @@ export const styles = {
   },
   dayGroup: {
     display: 'flex',
+    flexWrap: 'wrap',
     gridGap: '16px',
     marginBottom: '16px',
   },

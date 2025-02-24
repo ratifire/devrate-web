@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Box, Checkbox, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { DateTime } from 'luxon';
+import { CustomCheckboxIcon, CustomCheckedIcon } from '../../../UI/CustomCheckbox/CustomCheckbox.js';
 import { styles } from './TimeSlot.styles.js';
 
 const TimeSlot = ({ data, isSelected, onSelect }) => {
@@ -9,7 +10,9 @@ const TimeSlot = ({ data, isSelected, onSelect }) => {
   const dateTime = DateTime.fromISO(data.date);
 
   const time = dateTime.toFormat('HH:mm');
-  const day = dateTime.setLocale('uk').toFormat('EEEE');
+
+  const dayKey = dateTime.setLocale('en').toFormat('EEEE').toLowerCase();
+  const day = t(`interviewRequest.timeSlot.daysOfWeek.${dayKey}`);
   const date = dateTime.toFormat('dd.MM.yyyy');
 
   return (
@@ -24,14 +27,15 @@ const TimeSlot = ({ data, isSelected, onSelect }) => {
       <Box sx={styles.statusCheckboxContainer}>
         <Box sx={data.type === 'assigned' ? { ...styles.status, ...styles.completed } : styles.status}>
           <Typography sx={styles.statusText} variant={'subtitle3'}>
-            {t('Status: ')}
+            {t('interviewRequest.timeSlot.status.status')}{' '}
           </Typography>
           {t(`interviewRequest.timeSlot.status.${data.type}`)}
           <Box sx={styles.statusCircle(data.type)} />
         </Box>
         <Checkbox
           checked={isSelected}
-          disabled={data.type === 'assigned'}
+          checkedIcon={<CustomCheckedIcon />}
+          icon={<CustomCheckboxIcon />}
           sx={styles.checkBox}
           onChange={() => onSelect(data.date)}
         />
@@ -43,7 +47,6 @@ const TimeSlot = ({ data, isSelected, onSelect }) => {
 TimeSlot.propTypes = {
   data: PropTypes.object.isRequired,
   currentDate: PropTypes.string.isRequired,
-  day: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
   onSelect: PropTypes.func.isRequired,
 };

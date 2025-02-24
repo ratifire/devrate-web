@@ -21,6 +21,7 @@ const RequestHeader = ({
   onDeleteSelected,
   hasSelectedSlots,
   handleUpdateSlots,
+  languageName,
 }) => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -63,7 +64,8 @@ const RequestHeader = ({
             <DeleteIcon />
           </IconButton>
           <ButtonDef
-            label={t('Аdd time slots')}
+            disabled={hasSelectedSlots}
+            label={t('interviewRequest.buttons.addTimeSlot')}
             startIcon={<AddIcon />}
             sx={styles.outlined}
             type={'button'}
@@ -72,7 +74,7 @@ const RequestHeader = ({
           />
 
           <Box sx={styles.menuIcon}>
-            <IconButton sx={styles.openMenuDots} onClick={(event) => handleMenuOpen(event)}>
+            <IconButton disabled={hasSelectedSlots} sx={styles.openMenuDots} onClick={(event) => handleMenuOpen(event)}>
               <MoreVertIcon />
             </IconButton>
           </Box>
@@ -87,21 +89,27 @@ const RequestHeader = ({
 
       <Box sx={styles.statsContainer}>
         <Typography component={'strong'} sx={styles.statItem} variant={'subtitle3'}>
-          Знайдено інтерв’ю:{' '}
+          {t('interviewRequest.requestHeader.foundInterviews')}{' '}
           <Typography component='strong' sx={styles.foundInterviews} variant={'subtitle3'}>
             {foundInterviews}
           </Typography>
         </Typography>
         <Typography component={'strong'} sx={styles.statItem} variant={'subtitle3'}>
-          Кількість інтерв’ю:{' '}
+          {t('interviewRequest.requestHeader.totalInterviews')}{' '}
           <Typography component='strong' sx={styles.totalInterviews} variant={'subtitle3'}>
             {totalInterviews}
           </Typography>
         </Typography>
         <Typography component={'strong'} sx={styles.statItem} variant={'subtitle3'}>
-          Обрано таймслотів:{' '}
+          {t('interviewRequest.requestHeader.selectedTimeSlots')}{' '}
           <Typography component='strong' sx={styles.selectedTimeslots} variant={'subtitle3'}>
             {selectedTimeSlots}
+          </Typography>
+        </Typography>
+        <Typography component={'strong'} sx={styles.statItem} variant={'subtitle3'}>
+          {t('interviewRequest.requestHeader.interviewLanguage')}{' '}
+          <Typography component='strong' sx={styles.selectedTimeslots} variant={'subtitle3'}>
+            {languageName}
           </Typography>
         </Typography>
       </Box>
@@ -123,6 +131,7 @@ RequestHeader.propTypes = {
   onDeleteSelected: PropTypes.func.isRequired,
   handleUpdateSlots: PropTypes.func.isRequired,
   hasSelectedSlots: PropTypes.bool.isRequired,
+  languageName: PropTypes.string.isRequired,
 };
 
 export default RequestHeader;

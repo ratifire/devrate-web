@@ -9,7 +9,6 @@ const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
 
   const getTitle = () => {
     let result = null;
-
     if (dates.length > 1) {
       const startDate = DateTime.fromFormat(dates[0], 'dd.MM.yyyy');
       const endDate = DateTime.fromFormat(dates.at(-1), 'dd.MM.yyyy');
@@ -28,8 +27,10 @@ const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
         <Typography sx={styles.dayTitle}>{`${start.date} ${start.dayTitle} - ${end.date} ${end.dayTitle}`}</Typography>
       );
     } else {
-      const date = DateTime.fromFormat(dates[0], 'dd.MM.yyyy');
-      const dayTitle = date.setLocale('en').toFormat('EEEE'); // Todo change locale according to redux state
+      const originalDate = DateTime.fromFormat(dates[0], 'dd.MM.yyyy');
+      const dayTitle = originalDate.setLocale('en').toFormat('EEEE'); // Todo change locale according to redux state
+      const date = originalDate.toFormat('dd.MM.yyyy');
+
       result = <Typography sx={styles.dayTitle}>{`${date} ${dayTitle}`}</Typography>;
     }
 
