@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 
+const minHeight = 23;
+const maxHeight = 115;
+
 const useResizeTextarea = (chatWrapperRef) => {
   const textFieldRef = useRef(null);
   const [message, setMessage] = useState('');
-  const [textFieldHeight, setTextFieldHeight] = useState(23);
+  const [textFieldHeight, setTextFieldHeight] = useState(minHeight);
 
-  const minHeight = 23;
-  const maxHeight = 115;
+  const textFieldExtraHeight = textFieldHeight - minHeight;
+  const newHeight = 532 - textFieldExtraHeight;
 
   const handleTextFieldChange = (e) => {
     const value = e.target.value;
@@ -28,9 +31,6 @@ const useResizeTextarea = (chatWrapperRef) => {
 
   useEffect(() => {
     if (textFieldRef.current && chatWrapperRef.current) {
-      const textFieldExtraHeight = textFieldHeight - minHeight;
-      const newHeight = 532 - textFieldExtraHeight;
-
       chatWrapperRef.current.style.maxHeight = `${newHeight + minHeight}px`;
       chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
     }

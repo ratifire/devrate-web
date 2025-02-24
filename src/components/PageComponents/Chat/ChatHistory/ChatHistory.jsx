@@ -2,23 +2,22 @@ import { Box, IconButton, Skeleton, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
-import { useState, useEffect } from 'react'; // Додаємо useEffect
+import { useState, useEffect } from 'react';
 import UserAvatar from '../../../UI/UserAvatar';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice.js';
 import FormInputSearch from '../../../FormsComponents/Inputs/FormInputSearch/index.js';
 import { useGetChatsQuery } from '../../../../redux/services/chatApiSlice.js';
 import { searchUser } from '../hooks';
-import { styles } from './ChatListUsers.styles.js';
-import ChatUser from './ChatUser';
+import { styles } from './ChatHistory.styles.js';
+import ChatHistoryItem from './ChatHistoryItem';
 
-const ChatListUsers = () => {
+const ChatHistory = () => {
   const { t } = useTranslation();
   const { data: info } = useSelector(selectCurrentUser);
   const { id, firstName, lastName } = info;
-  const { data } = useGetAvatarUserQuery(id);
-  const userAvatar = data || {};
-  const { userPicture } = userAvatar;
+  const { data: userAvatar } = useGetAvatarUserQuery(id);
+  const userPicture = userAvatar?.userPicture || null;
 
   const { data: dataListChats, isLoading } = useGetChatsQuery();
   const [dataFilter, setDataFilter] = useState([]);
@@ -33,6 +32,17 @@ const ChatListUsers = () => {
     if (dataListChats) {
       setDataFilter(searchUser(dataListChats, value));
     }
+  };
+
+  const renderChatList = () => {
+    if (dataFilter && dataFilter.length > 0) {
+      return dataFilter.map((item) => <ChatHistoryItem key={item.opponentUserId} data={item} />);
+    }
+    return (
+      <Typography sx={{ textAlign: 'center', marginTop: 2 }} variant='body1'>
+        {t('chat.enterMessages')}
+      </Typography>
+    );
   };
 
   if (isLoading) return <Skeleton height={523} variant='rounded' width={354} />;
@@ -57,18 +67,10 @@ const ChatListUsers = () => {
         />
       </Box>
       <Box sx={styles.wrapperList}>
-        <Box sx={styles.list}>
-          {dataFilter && dataFilter.length > 0 ? (
-            dataFilter.map((item) => <ChatUser key={item.opponentUserId} data={item} />)
-          ) : (
-            <Typography sx={{ textAlign: 'center', marginTop: 2 }} variant='body1'>
-              {t('chat.enterMessages')}
-            </Typography>
-          )}
-        </Box>
+        <Box sx={styles.list}>{renderChatList()}</Box>
       </Box>
     </Box>
   );
 };
 
-export default ChatListUsers;
+export default ChatHistory;

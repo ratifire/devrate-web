@@ -2,18 +2,19 @@ import { Badge, IconButton, Popover } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../../assets/icons/message.svg?react';
-import { openList, closeList } from '../../../redux/chat/chatSlice.js';
+import { openList, closeList, closeBadge } from '../../../redux/chat/chatSlice.js';
 import { styles } from './Chat.styles';
-import ChatListUsers from './ChatListUsers';
+import ChatHistory from './ChatHistory';
 
 const Chat = () => {
   const [bellButton, setBellButton] = useState(null);
-  const { list } = useSelector((state) => state.chat);
+  const { list, badge } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   const handleOpen = (event) => {
     event.preventDefault();
     setBellButton(event.currentTarget);
     dispatch(openList());
+    dispatch(closeBadge());
   };
   const handleClose = () => {
     dispatch(closeList());
@@ -21,7 +22,7 @@ const Chat = () => {
   return (
     <>
       <IconButton sx={styles.btnIcon} onClick={handleOpen}>
-        <Badge invisible color='error' overlap='circular' sx={styles.badge} variant='dot'>
+        <Badge color='error' invisible={badge} overlap='circular' sx={styles.badge} variant='dot'>
           <Message />
         </Badge>
       </IconButton>
@@ -38,7 +39,7 @@ const Chat = () => {
         }}
         onClose={handleClose}
       >
-        <ChatListUsers />
+        <ChatHistory />
       </Popover>
     </>
   );

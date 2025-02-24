@@ -25,12 +25,17 @@ const useScrollChat = (chatWrapperRef) => {
   };
 
   useEffect(() => {
-    if (chatWrapperRef.current) {
-      chatWrapperRef.current.addEventListener('scroll', handleScroll);
-      return () => {
-        chatWrapperRef.current.removeEventListener('scroll', handleScroll);
-      };
+    const chatWrapper = chatWrapperRef.current;
+
+    if (chatWrapper) {
+      chatWrapper.addEventListener('scroll', handleScroll);
     }
+
+    return () => {
+      if (chatWrapper) {
+        chatWrapper.removeEventListener('scroll', handleScroll);
+      }
+    };
   }, []);
 
   useEffect(() => {

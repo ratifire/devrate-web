@@ -11,10 +11,16 @@ const chatSlice = createSlice({
     },
     chat: false,
     list: false,
-    messages: [],
-    isConnected: false,
+    badge: true,
   },
   reducers: {
+    openBadge: (state) => {
+      state.badge = false;
+    },
+    closeBadge: (state) => {
+      state.badge = true;
+    },
+
     openList: (state) => {
       state.list = true;
     },
@@ -32,18 +38,9 @@ const chatSlice = createSlice({
     closeChat: (state) => {
       state.chat = false;
     },
-    connectToChat: (state) => {
-      state.isConnected = true;
-    },
-    disconnectFromChat: (state) => {
-      state.isConnected = false;
-    },
-    addMessage: (state, action) => {
-      state.messages.push(action.payload);
-    },
   },
 });
 
-export const { openChat, closeChat, openList, closeList, connectToChat, disconnectFromChat, addMessage } =
+export const { openBadge, closeBadge, openChat, closeChat, openList, closeList, disconnectFromChat } =
   chatSlice.actions;
 export default chatSlice.reducer;

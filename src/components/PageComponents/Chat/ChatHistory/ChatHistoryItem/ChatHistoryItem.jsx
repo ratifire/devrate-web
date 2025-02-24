@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { DateTime } from 'luxon';
 import UserAvatar from '../../../../UI/UserAvatar';
 import { closeList, openChat } from '../../../../../redux/chat/chatSlice.js';
-import { styles } from './ChatUser.styles';
+import { getLocaleFormattedDate } from '../../../../../utils/helpers/dateHandlers.js';
+import { styles } from './ChatHistoryItem.styles.js';
 
-const ChatUser = ({ data }) => {
+const ChatHistoryItem = ({ data }) => {
   const dispatch = useDispatch();
 
   if (data.length === 0) return null;
@@ -21,7 +21,7 @@ const ChatUser = ({ data }) => {
     isMatch,
   } = data;
 
-  const formattedDate = DateTime.fromISO(lastMessageDate).toFormat('d MMM', { locale: navigator.language });
+  const formattedDate = getLocaleFormattedDate(lastMessageDate);
 
   const handlerOpenChat = () => {
     dispatch(closeList());
@@ -54,16 +54,13 @@ const ChatUser = ({ data }) => {
           </Box>
           <Typography variant='caption3'>{lastMessage}</Typography>
         </Box>
-        {/*<Typography sx={styles.badge} variant='caption3'>*/}
-        {/*  22*/}
-        {/*</Typography>*/}
       </Box>
     </Box>
   );
 };
 
-ChatUser.propTypes = {
+ChatHistoryItem.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default ChatUser;
+export default ChatHistoryItem;

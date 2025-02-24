@@ -2,7 +2,7 @@ function useSearchUser(data, searchString) {
   const searchTerms = searchString
     .toLowerCase()
     .split(' ')
-    .filter((term) => term.trim() !== ''); // Видаляємо порожні рядки
+    .filter((term) => term.trim() !== '');
 
   if (searchTerms.length === 0) {
     return data.map((user) => ({ ...user, isMatch: false }));

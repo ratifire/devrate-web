@@ -1,24 +1,35 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box, IconButton, TextField, Typography, Link, Fade } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
+import { Client } from '@stomp/stompjs';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link as RouterLink } from 'react-router';
 import { DateTime } from 'luxon';
+import SockJS from 'sockjs-client';
+import { useTranslation } from 'react-i18next';
 import UserAvatar from '../../../UI/UserAvatar';
 import Send from '../../../../assets/icons/send.svg?react';
-import { addMessage, closeChat } from '../../../../redux/chat/chatSlice';
-import { useGetChatHistoryQuery } from '../../../../redux/services/chatApiSlice.js';
+import { closeChat, openBadge } from '../../../../redux/chat/chatSlice';
+import { chatApiSlice, useGetChatHistoryQuery } from '../../../../redux/services/chatApiSlice.js';
 import { useMoveChat, useResizeChat, useResizeTextarea, useScrollChat } from '../hooks';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
+import { TAG_TYPES } from '../../../../utils/constants/tagTypes.js';
 import { styles } from './ChatForm.styles.js';
 import ChatMessage from './ChatMessage';
 
+const chatAppearDelay = 100;
+const pageSize = 13;
+
 const ChatForm = () => {
-  const { chat, opponentUserInfo, messages } = useSelector((state) => state.chat);
+  const { t } = useTranslation();
+  const { chat, opponentUserInfo } = useSelector((state) => state.chat);
   const { id: opponentUserId, firstName, lastName, userPicture } = opponentUserInfo;
   const chatWrapperRef = useRef(null);
   const chatPositionRef = useRef(null);
+
+  const [isConnected, setIsConnected] = useState(false);
+  const [client, setClient] = useState(null);
 
   const { message, setMessage, textFieldRef, handleTextFieldChange } = useResizeTextarea(chatWrapperRef);
   const { showScrollButton, isScrolledUp, handleScrollToBottom } = useScrollChat(chatWrapperRef);
@@ -28,34 +39,116 @@ const ChatForm = () => {
   const dispatch = useDispatch();
   const handleClose = () => dispatch(closeChat());
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
   const { data: info } = useSelector(selectCurrentUser);
   const { id: currentUserId } = info;
-  const { data: dataChats } = useGetChatHistoryQuery(opponentUserId, { skip: !opponentUserId });
+  const { data: dataChats, isLoading: isChatHistoryLoading } = useGetChatHistoryQuery(
+    { opponentUserId, page: currentPage, size: pageSize },
+    { skip: !opponentUserId }
+  );
+
+  const [chatMessages, setChatMessages] = useState([]);
+
+  useEffect(() => {
+    setTimeout(handleScrollToBottom, chatAppearDelay + 100);
+  }, [chat]);
+  const loadMoreRef = useRef(null);
 
   useEffect(() => {
     if (dataChats?.content) {
-      const normalize = [...dataChats.content].reverse();
-      normalize.forEach((item) => dispatch(addMessage(item)));
+      const normalizedMessages = [...dataChats.content].reverse();
+
+      if (currentPage === 0) {
+        setChatMessages(normalizedMessages);
+      } else {
+        setChatMessages((prevMessages) => [...normalizedMessages, ...prevMessages]);
+      }
+
+      if (dataChats.last) {
+        setTotalPages(currentPage);
+      } else {
+        setTotalPages(dataChats.totalPages);
+      }
+
+      setIsLoadingMore(false);
     }
-  }, [dataChats, dispatch]);
+  }, [dataChats]);
+
+  useEffect(() => {
+    const socket = new SockJS('https://server.skillzzy.com/chat');
+    const newClient = new Client({
+      webSocketFactory: () => socket,
+      onConnect: () => {
+        setIsConnected(true);
+        newClient.subscribe(`/topic/messages/${currentUserId}`, (message) => {
+          const newMessage = JSON.parse(message.body);
+          setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+          dispatch(chatApiSlice.util.invalidateTags([TAG_TYPES.ChatHistory]));
+          if (newMessage.senderId !== currentUserId) dispatch(openBadge());
+          if (!isScrolledUp) handleScrollToBottom();
+        });
+      },
+    });
+    setClient(newClient);
+    newClient.activate();
+    return () => {
+      if (newClient.connected) newClient.deactivate();
+    };
+  }, [currentUserId]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+
+        if (
+          entry.isIntersecting &&
+          currentPage < totalPages &&
+          totalPages > 1 &&
+          !isLoadingMore &&
+          !isChatHistoryLoading
+        ) {
+          setIsLoadingMore(true);
+          setCurrentPage((prevPage) => prevPage + 1);
+        }
+      },
+      {
+        root: chatWrapperRef.current,
+        rootMargin: '0px',
+        threshold: 0.01,
+      }
+    );
+    const idTimer = setTimeout(() => {
+      if (loadMoreRef.current) {
+        observer.observe(loadMoreRef.current);
+      }
+    }, chatAppearDelay + 150);
+    return () => {
+      clearTimeout(idTimer);
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
+    };
+  }, [currentPage, totalPages, isLoadingMore, isChatHistoryLoading, dataChats?.last]);
 
   const handleSubmitMessages = (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
-
-    dispatch({
-      type: 'chat/sendMessage',
-      payload: {
+    if (!isConnected || !message.trim()) return;
+    client.publish({
+      destination: '/app/chat',
+      body: JSON.stringify({
         senderId: currentUserId,
         receiverId: opponentUserId,
         payload: message.trim(),
         status: '',
         dateTime: DateTime.utc().toISO(),
-      },
+      }),
     });
-
+    setTimeout(handleScrollToBottom, chatAppearDelay + 50);
     setMessage('');
-    if (chatWrapperRef.current) chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
   };
 
   const handleKeyDown = (e) => {
@@ -64,14 +157,8 @@ const ChatForm = () => {
       handleSubmitMessages(e);
     }
   };
-  useEffect(() => {
-    if (!isScrolledUp && chatWrapperRef.current) {
-      chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
-    }
-  }, [messages, isScrolledUp]);
-
   return (
-    <Fade in={chat}>
+    <Fade in={chat} timeout={chatAppearDelay}>
       <Box ref={chatPositionRef} sx={styles.position}>
         <Box sx={styles.container}>
           <Box sx={styles.wrapper}>
@@ -92,8 +179,8 @@ const ChatForm = () => {
             </IconButton>
           </Box>
           <Box ref={chatWrapperRef} sx={styles.chatWrapper}>
-            <div>lorem</div>
-            {messages?.map((item) => (
+            <Box ref={loadMoreRef} />
+            {chatMessages?.map((item) => (
               <Box key={item.dateTime}>
                 <ChatMessage data={item} />
               </Box>
@@ -111,7 +198,7 @@ const ChatForm = () => {
               multiline
               maxRows={5}
               minRows={1}
-              placeholder='Напишіть повідомлення'
+              placeholder={t('chat.enterMessages')}
               sx={styles.textArea}
               value={message}
               variant='outlined'
