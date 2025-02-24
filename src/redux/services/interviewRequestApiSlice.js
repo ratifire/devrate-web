@@ -24,11 +24,22 @@ export const interviewRequestApiSlice = apiSlice.injectEndpoints({
     }),
 
     updateTimeSlots: builder.mutation({
-      query: ({ id, data }) => {
+      query: ({
+        id,
+        data: { role, desiredInterview, comment, availableDates, assignedDates, masteryId, languageCode },
+      }) => {
         return {
           url: `/interview-requests/${id}`,
           method: 'PUT',
-          body: { ...data },
+          body: {
+            role: role,
+            desiredInterview: desiredInterview,
+            comment: comment,
+            availableDates: availableDates,
+            assignedDates: assignedDates,
+            masteryId: masteryId,
+            languageCode: languageCode,
+          },
         };
       },
       invalidatesTags: [TAG_TYPES.InterviewRequest],

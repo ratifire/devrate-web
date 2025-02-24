@@ -9,88 +9,105 @@ import { useGetInterviewRequestByMasteryIdQuery } from '../../../redux/services/
 import Participant from './Participant';
 import { styles } from './InterviewRequest.styles.js';
 
+const useQueryParams = () => new URLSearchParams(window.location.search);
+
 const InterviewRequest = () => {
   const { data: info } = useSelector(selectCurrentUser);
-  const { id } = info;
+  const userId = info?.id;
   const [mastery, setMastery] = useState('');
-  const [open, setOpen] = useState(false);
+  const [, setOpen] = useState(false);
   const { t } = useTranslation();
-  const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
+  const query = useQueryParams();
+  const masteryFromUrl = query.get('mastery');
 
-  const { data: userData } = useGetInterviewRequestByMasteryIdQuery(mastery?.mainMasteryId, {
-    skip: !mastery.mainMasteryId,
-  });
-
-  const getUserByRole = (userData, role) => userData?.filter((item) => item.role === role).at(0) || null;
-
-  const candidate = getUserByRole(userData, 'CANDIDATE');
-  const interviewer = getUserByRole(userData, 'INTERVIEWER');
+  const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
 
   useEffect(() => {
-    if (specializations && specializations.length > 0) {
-      const mainSpecialization = specializations.find((item) => item.main);
-      if (mainSpecialization) {
-        setMastery(mainSpecialization);
-      }
+    if (isLoading || isError || !specializations?.length) {
+      setMastery('');
+      return;
     }
-  }, [specializations]);
 
-  const handleChange = ({ target: { value } }) => {
-    setMastery(value);
+    const foundMastery = specializations.find(({ id }) => String(id) === masteryFromUrl);
+    const defaultMastery =
+      foundMastery?.id || specializations.find(({ main }) => main)?.id || specializations[0]?.id || '';
+    setMastery(defaultMastery);
+    addQueryParamToUrl(defaultMastery);
+  }, [specializations, masteryFromUrl, isLoading, isError]);
+
+  const { data: userData } = useGetInterviewRequestByMasteryIdQuery(
+    specializations?.find((item) => item.id === mastery)?.mainMasteryId || '',
+    { skip: !mastery }
+  );
+
+  const addQueryParamToUrl = (mastery) => {
+    const params = new URLSearchParams(window.location.search);
+    mastery ? params.set('mastery', mastery) : params.delete('mastery');
+    window.history.pushState({}, '', `${window.location.pathname}?${params.toString()}`);
   };
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleChange = (event) => {
+    const newMastery = event.target.value;
+    setMastery(newMastery);
+    addQueryParamToUrl(newMastery);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const specializationObject = specializations?.find((item) => item.id === mastery) || null;
 
+  const getUserByRole = (role) => {
+    return userData?.find(({ role: userRole }) => userRole === role) || null;
+  };
   return (
     <Box sx={styles.container}>
       <Box sx={styles.header}>
-        <Typography variant={'h4'}> Requests </Typography>
-        <Box>
+        <Typography variant='h4'>Requests</Typography>
+        {isLoading ? (
+          <Typography sx={styles.loading}>Loading specializations...</Typography>
+        ) : isError || !specializations?.length ? (
+          <Typography sx={styles.noSpecializations}>No specializations available</Typography>
+        ) : (
           <FormControl>
-            <InputLabel htmlFor={id} sx={styles.label}>
-              {t('Specializations')}
-            </InputLabel>
+            <InputLabel sx={styles.label}>{t('Specializations')}</InputLabel>
             <Select
               IconComponent={KeyboardArrowDownIcon}
-              inputProps={{
-                MenuProps: {
-                  PaperProps: {
-                    sx: styles.selectPaper,
-                  },
-                },
-              }}
-              label={'Specializations'}
-              open={open}
+              MenuProps={{ PaperProps: { sx: styles.selectPaper } }}
               sx={styles.select}
               value={mastery}
-              variant='outlined'
               onChange={handleChange}
-              onClose={handleClose}
-              onOpen={handleOpen}
+              onClose={() => setOpen(false)}
+              onOpen={() => setOpen(true)}
             >
-              {specializations?.map((item) => (
-                <MenuItem key={item.id} sx={styles.selectItem} value={item}>
-                  {item.name}{' '}
-                  {item.main && (
+              {specializations.map(({ id, name, main }) => (
+                <MenuItem key={id} sx={styles.selectItem} value={id}>
+                  {name}{' '}
+                  {main && (
                     <Typography component='span' sx={{ color: 'gold' }}>
                       ★
                     </Typography>
-                  )}{' '}
+                  )}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-        </Box>
+        )}
       </Box>
 
-      <Box>{candidate && <Participant data={candidate} specialization={mastery} userId={userData} />}</Box>
-      <Box>{interviewer && <Participant data={interviewer} specialization={mastery} userId={userData} />}</Box>
+      <Box>
+        {getUserByRole('CANDIDATE') && (
+          <Participant
+            data={getUserByRole('CANDIDATE')}
+            specialization={specializationObject}
+            userId={getUserByRole('CANDIDATE')?.id}
+          />
+        )}
+        {getUserByRole('INTERVIEWER') && (
+          <Participant
+            data={getUserByRole('INTERVIEWER')}
+            specialization={specializationObject}
+            userId={getUserByRole('INTERVIEWER')?.id}
+          />
+        )}
+      </Box>
     </Box>
   );
 };
