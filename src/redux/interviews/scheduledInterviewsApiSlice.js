@@ -20,7 +20,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
       },
       merge: (currentCache, newData, { arg }) => {
         // Merge the `content` arrays from the current cache and new data
-        if (arg.page === 1) {
+        if (arg.page === 0) {
           currentCache.content = newData.content;
         } else {
           currentCache.content.push(...newData.content);
