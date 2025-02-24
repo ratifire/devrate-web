@@ -24,7 +24,7 @@ const ScheduledMeeting = () => {
   } = useSelector(selectCurrentUser);
   const location = useLocation();
   const navigate = useNavigate();
-  const { hostFirstName, hostLastName, hostId, startTime, languageCode, id: eventId } = location.state.event;
+  const { hostFirstName, hostLastName, hostId, startTime, languageCode, id: eventId, roomUrl } = location.state.event;
 
   const {
     data: hostAvatar,
@@ -39,9 +39,16 @@ const ScheduledMeeting = () => {
   } = useGetAvatarUserQuery(id, { skip: !id });
   const [cancelMeeting, { isError: isErrorCancelMeeting }] = useDeleteInterviewMutation();
 
-  const handleCancelMeeting = async () => {
-    await cancelMeeting({ eventId }).unwrap();
-    navigate(navigationLinks.interviews);
+  const handleClickLeftBtn = () => {
+    if (status === btnStatus['UPCOMING']) {
+      cancelMeeting({ eventId }).then(() => navigate(navigationLinks.interviews));
+    }
+  };
+
+  const handleClickRightBtn = () => {
+    if (status === btnStatus['UPCOMING'] || status === btnStatus['IN PROCESS']) {
+      window.open(roomUrl, '_blank');
+    }
   };
 
   if (isErrorHostAvatar || isErrorUserAvatar || isErrorCancelMeeting) {
@@ -143,9 +150,14 @@ const ScheduledMeeting = () => {
           label={t(leftBtnStatus[status])}
           sx={styles.btn}
           variant='outlined'
-          onClick={handleCancelMeeting}
+          onClick={handleClickLeftBtn}
         />
-        <ButtonDef label={t(rightBtnStatus[status])} sx={styles.btn} variant='contained' />
+        <ButtonDef
+          label={t(rightBtnStatus[status])}
+          sx={styles.btn}
+          variant='contained'
+          onClick={handleClickRightBtn}
+        />
       </Box>
     </Box>
   );
