@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
 import { SkillsSkeleton } from '../../Skeleton';
+import HardMascot from '../../../../assets/icons/skillsMascot/hardSkillsMascot.svg?react';
+import SoftMascot from '../../../../assets/icons/skillsMascot/softSkillsMascot.svg?react';
 import { styles } from './SpecializationSkills.styles';
 
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
@@ -29,15 +31,37 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
           </IconButton>
         )}
       </Box>
-      <Box sx={styles.skillsContainer}>
-        {skills?.map((skill) => (
-          <ItemSkill
-            key={skill.id}
-            grows={skill.grows}
-            name={skill.name}
-            value={Math.round(skill.averageMark * 10) / 10}
-          />
-        ))}
+      <Box>
+        {skills.length > 0 && (
+          <Box sx={[styles.skillsContainer, title === 'Hard skills' ? styles.hardSkills : styles.softSkills]}>
+            {skills.map((skill) => (
+              <ItemSkill
+                key={skill.id}
+                grows={skill.grows}
+                name={skill.name}
+                value={Math.round(skill.averageMark * 10) / 10}
+              />
+            ))}
+          </Box>
+        )}
+
+        {skills.length === 0 && title === 'Hard skills' && (
+          <Box sx={styles.defaultHardsContainer}>
+            <HardMascot />
+            <Typography sx={styles.defaultHardsText} variant={'subtitle2'}>
+              Зараз у вашому профілі немає жодной навички. Додайте їх, щоб прокачати себе і відстежувати свій прогрес
+            </Typography>
+          </Box>
+        )}
+
+        {skills.length === 0 && title === 'Soft skills' && (
+          <Box sx={styles.defaultSoftsContainer}>
+            <Box sx={styles.mascotSoftsBox}>
+              <SoftMascot />
+            </Box>
+            <Typography variant={'subtitle2'}>Пройдіть інтерв’ю щоб користувачі оцінили ваші Soft Skills</Typography>
+          </Box>
+        )}
       </Box>
       <Box sx={styles.markWrapper}>
         <Typography variant='h6'>{subTitle}</Typography>

@@ -432,7 +432,7 @@ export const en = {
       errorDeleteSpec: "You can't delete a specialisation",
       level: {
         title: 'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.',
+        description: 'Switch between levels to see your statistics relative to another level.',
       },
       interviewChartMonths: {
         '01': 'Jan',

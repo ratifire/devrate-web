@@ -46,7 +46,7 @@ export const styles = {
     flexShrink: 1,
     gridRow: '3/4',
     gridColumn: '1/5',
-    height: '31rem',
+    height: '31.9375rem',
     '@media (min-width: 1536px)': {
       height: '29.5625rem',
     },
@@ -57,7 +57,7 @@ export const styles = {
   specialisationSoftSkills: {
     gridRow: '4/5',
     gridColumn: '1/5',
-    height: '17.25rem',
+    height: '18.25rem',
     '@media (max-width: 991px)': {
       gridColumn: '1/6',
     },

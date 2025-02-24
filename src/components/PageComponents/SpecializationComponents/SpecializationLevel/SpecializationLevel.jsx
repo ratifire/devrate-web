@@ -66,7 +66,7 @@ const SpecializationLevel = () => {
           {isVisiblePopup && (
             <Box id='popup-description' sx={styles.popupContent}>
               <Typography sx={styles.popupText} variant={'caption2'}>
-                Перемикайтесь між рівнями, щоб побачити Вашу статистику відносно іншого рівня.
+                {t('specialization.level.description')}
               </Typography>
             </Box>
           )}
