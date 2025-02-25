@@ -3,7 +3,7 @@ import { apiSlice } from '../services/api/apiSlice';
 const interviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getInterviewById: builder.query({
-      query: ({ id }) => `/feedback-details/${id}`,
+      query: ({ id }) => `/interview-feedbacks/${id}`,
     }),
     createInterview: builder.mutation({
       query: ({ reviewerId, body }) => ({
