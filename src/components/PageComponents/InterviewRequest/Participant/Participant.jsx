@@ -1,10 +1,11 @@
-import { Box, Button, DialogActions, Typography } from '@mui/material';
+import { Box, DialogActions, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { DateTime } from 'luxon';
+import CloseIcon from '@mui/icons-material/Close';
 import TimeSlotsGroup from '../TimeSlotsGroup';
 import RequestHeader from '../RequsestHeader';
 import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
@@ -12,6 +13,7 @@ import {
   useDeleteInterviewRequestMutation,
   useUpdateTimeSlotsMutation,
 } from '../../../../redux/services/interviewRequestApiSlice.js';
+import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import { styles } from './Participant.styles.js';
 
 const Participant = ({ data, specialization }) => {
@@ -177,21 +179,36 @@ const Participant = ({ data, specialization }) => {
         onDeleteSelected={handleOpenDeleteDialog}
       />
 
-      <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
-        <DialogTitle>{t('Видалити запит')}</DialogTitle>
-        <DialogContent>
-          <Typography>
+      <Dialog open={openDeleteDialog} sx={styles.dialogWrapper} onClose={handleCloseDeleteDialog}>
+        <IconButton aria-label='Close modal' sx={styles.btnIcon} type='button'>
+          <CloseIcon />
+        </IconButton>
+        <DialogTitle sx={styles.title}>{t('Видалити запит')}</DialogTitle>
+        <DialogContent sx={styles.dialogContent}>
+          <Typography sx={styles.text}>
             {t('interviewRequest.deleteAllRequests.question', {
               mastery: mainMasteryLevelWithName,
               role: role ? formatRole(role, false) : '',
             })}
           </Typography>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDeleteDialog}>{t('interviewRequest.deleteAllRequests.cancel')}</Button>
-          <Button color='error' onClick={handleDeleteAllSlots}>
-            {t('interviewRequest.deleteAllRequests.approve')}
-          </Button>
+        <DialogActions sx={styles.dialogActions}>
+          <Box sx={styles.buttonWrapper}>
+            <ButtonDef
+              label={t('interviewRequest.deleteAllRequests.cancel')}
+              sx={styles.refuseBtn}
+              type='button'
+              variant='text'
+              onClick={handleCloseDeleteDialog}
+            />
+            <ButtonDef
+              label={t('interviewRequest.deleteAllRequests.approve')}
+              sx={styles.confirmBtn}
+              type='button'
+              variant='contained'
+              onClick={handleDeleteAllSlots}
+            />
+          </Box>
         </DialogActions>
       </Dialog>
 
