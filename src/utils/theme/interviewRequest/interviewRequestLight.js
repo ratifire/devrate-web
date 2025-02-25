@@ -59,6 +59,16 @@ export const interviewRequestLight = {
           backgroundColor: '#CEB0FA29',
         },
       },
+      deleteAllTimeslots: {
+        cancel: {
+          color: '#6200EE',
+          hover: {
+            color: '#360083',
+            backgroundColor: '#CEB0FA29',
+          },
+        },
+        remove: {},
+      },
     },
   },
 };

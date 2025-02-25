@@ -180,10 +180,10 @@ const Participant = ({ data, specialization }) => {
       />
 
       <Dialog open={openDeleteDialog} sx={styles.dialogWrapper} onClose={handleCloseDeleteDialog}>
-        <IconButton aria-label='Close modal' sx={styles.btnIcon} type='button'>
+        <IconButton aria-label='Close modal' sx={styles.btnIcon} type='button' onClick={handleCloseDeleteDialog}>
           <CloseIcon />
         </IconButton>
-        <DialogTitle sx={styles.title}>{t('Видалити запит')}</DialogTitle>
+        <DialogTitle sx={styles.title}>{t('interviewRequest.deleteAllRequests.title')}</DialogTitle>
         <DialogContent sx={styles.dialogContent}>
           <Typography sx={styles.text}>
             {t('interviewRequest.deleteAllRequests.question', {

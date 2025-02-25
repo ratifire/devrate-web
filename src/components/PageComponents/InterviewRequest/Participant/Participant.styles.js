@@ -55,8 +55,12 @@ export const styles = {
   }),
   refuseBtn: (theme) => ({
     width: '100%',
-    color: theme.palette.modals.cancelBtnTextColor,
+    color: theme.palette.requestInterview.buttons.deleteAllTimeslots.cancel.color,
     padding: '12px 16px',
+    ':hover': {
+      color: theme.palette.requestInterview.buttons.deleteAllTimeslots.cancel.hover.color,
+      backgroundColor: theme.palette.requestInterview.buttons.deleteAllTimeslots.cancel.hover.backgroundColor,
+    },
   }),
   confirmBtn: {
     width: '100%',

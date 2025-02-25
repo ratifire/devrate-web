@@ -972,6 +972,7 @@ export const en = {
         },
       },
       deleteAllRequests: {
+        title: 'Delete request',
         cancel: 'Cancel',
         approve: 'Remove',
         question: 'Are you sure you want to delete the {{mastery}} interview request as a {{role}}?',
