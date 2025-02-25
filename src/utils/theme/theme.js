@@ -2,6 +2,7 @@ import { DARK_THEME } from '../constants/Theme/theme';
 import { specializationDark, specializationLight } from './specialization';
 import { scheduleDark, scheduleLight } from './schedule';
 import { interviewDark, interviewLight } from './interview';
+import { interviewRequestLight, interviewRequestDark } from './interviewRequest/index.js';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -110,44 +111,6 @@ const getDesignTokens = (mode) => ({
     mode,
     ...(mode === DARK_THEME
       ? {
-          requestInterviewe: {
-            role: {
-              respondent: '#25CBFF',
-              interviewer: '#16FFB9',
-            },
-            interviewCount: {
-              foundInterviews: '#CEB0FA',
-              totalInterviews: '#CEB0FA',
-              selectedTimeslots: '#CEB0FA',
-            },
-            statItem: {
-              color: '#ECECED',
-            },
-            description: {
-              color: '#FFFFFF',
-            },
-            buttons: {
-              delete: {
-                color: '#FF2E2E',
-                hover: {
-                  color: '#D32F2F',
-                  backgroundColor: 'transparent',
-                },
-                disable: {
-                  color: '#303032',
-                },
-              },
-              addTimeslot: '',
-              openMenuDots: {
-                color: '#CEB0FA',
-                backgroundColor: 'transparent',
-                hover: {
-                  color: '#8133F1',
-                  backgroundColor: '#B78AF7',
-                },
-              },
-            },
-          },
           faq: {
             title: '#FFFFFF',
             questions: {
@@ -663,11 +626,13 @@ const getDesignTokens = (mode) => ({
           ...specializationDark,
           ...scheduleDark,
           ...interviewDark,
+          ...interviewRequestDark,
         }
       : {
           ...specializationLight,
           ...scheduleLight,
           ...interviewLight,
+          ...interviewRequestLight,
           faq: {
             title: '#1D1D1D',
             questions: {
