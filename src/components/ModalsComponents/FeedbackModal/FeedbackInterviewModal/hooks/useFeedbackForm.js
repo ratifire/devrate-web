@@ -24,7 +24,7 @@ const useFeedbackForm = () => {
     const body = {
       interviewFeedbackDetailId: feedbackId,
       comment: values.comment,
-      skills: values.skills.map(({ id, value }) => ({ id, mark: value })),
+      skills: values.skills.map(({ value, ...items }) => ({ mark: value, ...items })),
     };
 
     const result = await createInterview({ body });
