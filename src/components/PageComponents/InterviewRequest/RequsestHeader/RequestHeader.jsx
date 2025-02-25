@@ -67,9 +67,9 @@ const RequestHeader = ({
             disabled={hasSelectedSlots}
             label={t('interviewRequest.buttons.addTimeSlot')}
             startIcon={<AddIcon />}
-            sx={styles.outlined}
+            sx={styles.refuseBtn}
             type={'button'}
-            variant='outlined'
+            variant='text'
             onClick={handleAddTimeSlots}
           />
 
@@ -108,7 +108,7 @@ const RequestHeader = ({
         </Typography>
         <Typography component={'strong'} sx={styles.statItem} variant={'subtitle3'}>
           {t('interviewRequest.requestHeader.interviewLanguage')}{' '}
-          <Typography component='strong' sx={styles.selectedTimeslots} variant={'subtitle3'}>
+          <Typography component='strong' sx={styles.languageName} variant={'subtitle3'}>
             {languageName}
           </Typography>
         </Typography>

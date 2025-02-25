@@ -25,12 +25,11 @@ const TimeSlot = ({ data, isSelected, onSelect }) => {
       </Box>
 
       <Box sx={styles.statusCheckboxContainer}>
-        <Box sx={data.type === 'assigned' ? { ...styles.status, ...styles.completed } : styles.status}>
+        <Box sx={data.type === 'assigned' ? styles.assigned : styles.panding}>
           <Typography sx={styles.statusText} variant={'subtitle3'}>
             {t('interviewRequest.timeSlot.status.status')}{' '}
           </Typography>
           {t(`interviewRequest.timeSlot.status.${data.type}`)}
-          <Box sx={styles.statusCircle(data.type)} />
         </Box>
         <Checkbox
           checked={isSelected}

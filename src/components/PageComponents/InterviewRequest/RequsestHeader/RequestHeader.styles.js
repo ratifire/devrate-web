@@ -12,17 +12,24 @@ export const styles = {
     fontWeight: 'bold',
     marginBottom: '8px',
   },
-  respondentColor: (theme) => theme.palette.requestInterviewe.role.respondent,
-  interviewerColor: (theme) => theme.palette.requestInterviewe.role.interviewer,
+  respondentColor: (theme) => theme.palette.requestInterview.role.respondent,
+  interviewerColor: (theme) => theme.palette.requestInterview.role.interviewer,
 
   foundInterviews: (theme) => ({
-    color: theme.palette.requestInterviewe.interviewCount.foundInterviews,
+    color: theme.palette.requestInterview.interviewCount.foundInterviews,
+    marginLeft: '8px',
   }),
   totalInterviews: (theme) => ({
-    color: theme.palette.requestInterviewe.interviewCount.totalInterviews,
+    color: theme.palette.requestInterview.interviewCount.totalInterviews,
+    marginLeft: '8px',
   }),
   selectedTimeslots: (theme) => ({
-    color: theme.palette.requestInterviewe.interviewCount.selectedTimeslots,
+    color: theme.palette.requestInterview.interviewCount.selectedTimeslots,
+    marginLeft: '8px',
+  }),
+  languageName: (theme) => ({
+    color: theme.palette.requestInterview.interviewCount.languageName,
+    marginLeft: '8px',
   }),
 
   menuIcon: (theme) => ({
@@ -30,28 +37,31 @@ export const styles = {
   }),
   openMenuDots: (theme) => ({
     flex: '1 0 35px',
-    color: theme.palette.requestInterviewe.buttons.openMenuDots.color,
+    color: theme.palette.requestInterview.buttons.openMenuDots.color,
     borderRadius: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'background-color 0.5s, transform 0.5s',
     '&:hover': {
-      color: theme.palette.requestInterviewe.buttons.openMenuDots.hover.color,
-      backgroundColor: theme.palette.requestInterviewe.buttons.openMenuDots.hover.backgroundColor,
+      color: theme.palette.requestInterview.buttons.openMenuDots.hover.color,
+      backgroundColor: theme.palette.requestInterview.buttons.openMenuDots.hover.backgroundColor,
+    },
+    '&.Mui-disabled': {
+      color: theme.palette.requestInterview.buttons.openMenuDots.disable.color,
     },
   }),
 
   statsContainer: {
     display: 'flex',
-    gap: '16px',
+    gap: '32px',
     marginBottom: '16px',
   },
   statItem: (theme) => ({
-    color: theme.palette.requestInterviewe.statItem.color,
+    color: theme.palette.requestInterview.statItem.color,
   }),
   description: (theme) => ({
-    color: theme.palette.requestInterviewe.description.color,
+    color: theme.palette.requestInterview.description.color,
     marginBottom: '16px',
   }),
   buttons: {
@@ -62,44 +72,29 @@ export const styles = {
   iconDelete: (theme) => ({
     flex: '1 0 35px',
     borderRadius: 1,
-    color: theme.palette.requestInterviewe.buttons.delete.color,
+    color: theme.palette.requestInterview.buttons.delete.color,
     '&:hover': {
-      color: theme.palette.requestInterviewe.buttons.delete.hover.color,
-      backgroundColor: theme.palette.requestInterviewe.buttons.delete.hover.backgroundColor,
+      color: theme.palette.requestInterview.buttons.delete.hover.color,
+      backgroundColor: theme.palette.requestInterview.buttons.delete.hover.backgroundColor,
     },
     '&.Mui-disabled': {
-      color: theme.palette.requestInterviewe.buttons.delete.disable.color,
+      color: theme.palette.requestInterview.buttons.delete.disable.color,
     },
   }),
-  outlined: (theme) => ({
+  refuseBtn: (theme) => ({
     width: '216px',
-    marginLeft: '16px',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    gridGap: theme.spacing(2),
-    paddingY: '13px',
-    paddingX: '22px',
-    color: theme.palette.iconBtn.bookInterview.color,
-    fontFamily: theme.typography.fontFamily,
-    border: `1px solid ${theme.palette.iconBtn.bookInterview.borderColor}`,
-    textTransform: 'lowercase',
-    '& .loadingBtnText::first-letter': {
-      textTransform: 'uppercase',
-    },
+    color: theme.palette.requestInterview.buttons.addTimeslot.color,
+    padding: '12px 16px',
     '&:hover': {
-      backgroundColor: theme.palette.iconBtn.bookInterview.hover.backgroundColor,
-      borderColor: theme.palette.iconBtn.bookInterview.hover.borderColor,
-      color: theme.palette.iconBtn.bookInterview.hover.color,
+      backgroundColor: theme.palette.requestInterview.buttons.addTimeslot.hover.backgroundColor,
+      color: theme.palette.requestInterview.buttons.addTimeslot.hover.color,
     },
     '&.Mui-disabled': {
-      backgroundColor: '#252527',
+      color: theme.palette.requestInterview.buttons.addTimeslot.disable,
       '& .MuiButton-startIcon': {
         '& .MuiSvgIcon-root': {
-          color: '#828283',
+          color: theme.palette.requestInterview.buttons.addTimeslot.disable,
         },
-      },
-      '& .loadingBtnText': {
-        color: '#828283',
       },
     },
   }),

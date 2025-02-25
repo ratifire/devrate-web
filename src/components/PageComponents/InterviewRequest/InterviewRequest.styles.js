@@ -1,7 +1,4 @@
 export const styles = {
-  container: {
-    // maxWidth: '1488px',
-  },
   header: {
     display: 'flex',
     alignItems: 'center',
@@ -19,29 +16,46 @@ export const styles = {
       letterSpacing: 0.15,
       backgroundColor: 'transparent',
     },
-    ' div>svg': {
-      display: 'none',
+    ' .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.modals.select.border.default,
     },
-    ':not(.Mui-disabled, .Mui-error):hover:before': {
-      borderBottom: 'none',
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.modals.select.border.hover,
     },
-    ':not(.Mui-disabled, .Mui-error):before': {
-      borderBottom: 'none',
-    },
-    ':after': {
-      borderBottom: 'none',
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.modals.select.border.focused,
+      borderWidth: '2px',
     },
   }),
-  selectPaper: (theme) => ({
-    backgroundColor: theme.palette.modals.select.selectedField.backgroundColor,
-    paddingX: theme.spacing(2),
-    ' .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected': {
-      backgroundColor: theme.palette.modals.select.selectedField.selected.backgroundColor,
-      ':hover': {
-        backgroundColor: theme.palette.modals.select.selectedField.hover,
+  selectField: (theme) => ({
+    ' .MuiMenu-paper': {
+      backgroundColor: theme.palette.modals.select.selectedField.selected,
+      '&::-webkit-scrollbar': {
+        width: '1px',
+        backgroundColor: theme.palette.modals.select.selectedField.backgroundColor,
       },
     },
+    '.MuiList-root': {
+      backgroundColor: theme.palette.modals.select.selectedField.backgroundColor,
+      borderRadius: 0,
+    },
+    '.Mui-selected': {
+      backgroundColor: `${theme.palette.modals.select.selectedField.selected.backgroundColor} !important`,
+      color: `${theme.palette.modals.select.selectedField.selected.color} !important`,
+    },
+    '.MuiMenuItem-root.Mui-focusVisible': {
+      backgroundColor: `${theme.palette.modals.select.selectedField.selected.backgroundColor}`,
+    },
   }),
+  label: (theme) => ({
+    '&.Mui-focused': {
+      color: theme.palette.modals.select.labelColor.focused,
+    },
+  }),
+  dropdownPaper: {
+    maxHeight: '200px',
+    overflowY: 'auto',
+  },
   selectItem: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',

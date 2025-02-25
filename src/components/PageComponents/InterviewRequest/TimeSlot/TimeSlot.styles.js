@@ -8,7 +8,7 @@ export const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     padding: '8px',
-    border: '1px solid grey',
+    border: `1px solid ${theme.palette.requestInterview.timeSlot.borderColor}`,
     borderRadius: theme.spacing(2),
   }),
   timeDateContainer: () => ({
@@ -16,40 +16,54 @@ export const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   }),
-  time: {},
-  date: {},
+
   statusCheckboxContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  status: () => ({
+  panding: (theme) => ({
     display: 'flex',
     alignItems: 'center',
-    color: 'orange',
+    color: theme.palette.requestInterview.timeSlot.statusCircle.panding,
+    position: 'relative',
+    '&::after': {
+      content: '" "',
+      width: '12px',
+      height: '12px',
+      borderRadius: '50%',
+      backgroundColor: theme.palette.requestInterview.timeSlot.statusCircle.panding,
+      marginLeft: '4px',
+      display: 'inline-block',
+      verticalAlign: 'middle',
+    },
   }),
-  completed: {
+  assigned: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    color: 'green',
-  },
-  statusText: {
-    color: 'white',
+    color: theme.palette.requestInterview.timeSlot.statusCircle.assigned,
+    position: 'relative',
+    '&::after': {
+      content: '" "',
+      width: '12px',
+      height: '12px',
+      borderRadius: '50%',
+      backgroundColor: theme.palette.requestInterview.timeSlot.statusCircle.assigned,
+      marginLeft: '4px',
+      display: 'inline-block',
+      verticalAlign: 'middle',
+    },
+  }),
+  statusText: (theme) => ({
+    color: theme.palette.requestInterview.timeSlot.statusText,
     marginRight: '8px',
-  },
+  }),
   checkBox: () => ({
     color: 'transparent',
     padding: 0,
     '&:hover': {
       backgroundColor: 'transparent',
     },
-  }),
-  statusCircle: (type) => ({
-    width: '12px',
-    height: '12px',
-    borderRadius: '50%',
-    backgroundColor: type === 'assigned' ? 'green' : 'orange',
-    marginLeft: '4px',
   }),
 };

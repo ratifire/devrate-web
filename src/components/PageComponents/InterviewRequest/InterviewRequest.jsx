@@ -15,7 +15,6 @@ const InterviewRequest = () => {
   const { data: info } = useSelector(selectCurrentUser);
   const userId = info?.id;
   const [mastery, setMastery] = useState('');
-  const [, setOpen] = useState(false);
   const { t } = useTranslation();
   const query = useQueryParams();
   const masteryFromUrl = query.get('mastery');
@@ -58,30 +57,39 @@ const InterviewRequest = () => {
     return userData?.find(({ role: userRole }) => userRole === role) || null;
   };
   return (
-    <Box sx={styles.container}>
+    <Box>
       <Box sx={styles.header}>
         <Typography variant='h4'>Requests</Typography>
         {isLoading ? (
-          <Typography sx={styles.loading}>Loading specializations...</Typography>
+          <Typography>Loading specializations...</Typography>
         ) : isError || !specializations?.length ? (
-          <Typography sx={styles.noSpecializations}>No specializations available</Typography>
+          <Typography>No specializations available</Typography>
         ) : (
           <FormControl>
-            <InputLabel sx={styles.label}>{t('Specializations')}</InputLabel>
+            <InputLabel shrink sx={styles.label}>
+              {t('interviewRequest.selectSpecializations')}
+            </InputLabel>
             <Select
               IconComponent={KeyboardArrowDownIcon}
-              MenuProps={{ PaperProps: { sx: styles.selectPaper } }}
+              inputProps={{
+                MenuProps: {
+                  PaperProps: {
+                    sx: styles.dropdownPaper,
+                  },
+                  sx: styles.selectField,
+                },
+              }}
+              label={t('interviewRequest.selectSpecializations')}
               sx={styles.select}
               value={mastery}
+              variant='outlined'
               onChange={handleChange}
-              onClose={() => setOpen(false)}
-              onOpen={() => setOpen(true)}
             >
               {specializations.map(({ id, name, main }) => (
                 <MenuItem key={id} sx={styles.selectItem} value={id}>
                   {name}{' '}
                   {main && (
-                    <Typography component='span' sx={{ color: 'gold' }}>
+                    <Typography component='span' sx={{ color: '#B78AF7' }}>
                       ★
                     </Typography>
                   )}
