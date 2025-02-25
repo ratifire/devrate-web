@@ -6,20 +6,17 @@ import { selectCurrentUser } from '../../../redux/auth/authSlice';
 import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice';
 import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
 import links from '../../../router/links';
-import { FeedbackInterviewModal } from '../../ModalsComponents/FeedbackModal/FeedbackInterviewModal';
 import Logo from '../../UI/Logo';
 import ThemeSwitch from '../../UI/ThemeSwitch/ThemeSwitch';
 import UserAvatar from '../../UI/UserAvatar';
 import Menu from '../Menu';
 import Notification from '../Notification';
 import Chat from '../Chat';
-import { selectModalData } from '../../../redux/modal/modalSlice.js';
 import { InputSearch } from './InputSearch';
 import styles from './ProfileHeader.styles';
 
 const ProfileHeader = () => {
   const { data: info } = useSelector(selectCurrentUser);
-  const open = useSelector(selectModalData);
   const { id, firstName, lastName } = info;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { data: personalData } = useGetPersonalUserQuery(id);
@@ -63,7 +60,6 @@ const ProfileHeader = () => {
         </Button>
         <Menu closeMenu={handleCloseMenu} isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       </Box>
-      {open?.feedbackId && <FeedbackInterviewModal />}
     </AppBar>
   );
 };
