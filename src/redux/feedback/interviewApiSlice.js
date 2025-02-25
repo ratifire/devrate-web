@@ -6,9 +6,9 @@ const interviewApiSlice = apiSlice.injectEndpoints({
       query: ({ id }) => `/interview-feedbacks/${id}`,
     }),
     createInterview: builder.mutation({
-      query: ({ reviewerId, body }) => ({
+      query: ({ body }) => ({
         method: 'POST',
-        url: `/users/${reviewerId}/feedbacks`,
+        url: '/interview-feedbacks',
         body: { ...body },
       }),
     }),
