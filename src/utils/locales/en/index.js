@@ -929,6 +929,7 @@ export const en = {
       },
     },
     interviewRequest: {
+      selectSpecializations: 'Specializations',
       role: {
         candidate: 'Respondent',
         interviewer: 'Interviewer',
