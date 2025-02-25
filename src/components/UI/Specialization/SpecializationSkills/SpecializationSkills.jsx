@@ -2,18 +2,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
 import { SkillsSkeleton } from '../../Skeleton';
-import HardMascot from '../../../../assets/icons/skillsMascot/hardSkillsMascot.svg?react';
-import SoftMascot from '../../../../assets/icons/skillsMascot/softSkillsMascot.svg?react';
+import EmptySkills from '../EmptySkills/index.js';
 import { styles } from './SpecializationSkills.styles';
 
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
-  const { t } = useTranslation();
 
   if (isFetching) {
     return <SkillsSkeleton />;
@@ -22,30 +19,6 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
   if (isError) {
     return <ErrorComponent />;
   }
-  const EmptySkills = ({ title }) => {
-    if (title === 'Hard skills') {
-      return (
-        <Box sx={styles.emptyHardSkills}>
-          <Box sx={styles.mascotHardsBox}>
-            <HardMascot />
-          </Box>
-          <Typography sx={styles.emptyHardsText} variant={'subtitle2'}>
-            {t('specialization.hardSkills.emptySkills')}
-          </Typography>
-        </Box>
-      );
-    }
-    if (title === 'Soft skills') {
-      return (
-        <Box sx={styles.emptySoftSkills}>
-          <Box sx={styles.mascotSoftsBox}>
-            <SoftMascot />
-          </Box>
-          <Typography variant={'subtitle2'}>{t('specialization.softSkills.emptySkills')}</Typography>
-        </Box>
-      );
-    }
-  };
 
   return (
     <Box sx={styles.wrapper}>

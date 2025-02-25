@@ -113,6 +113,9 @@ export const styles = {
   level: {
     gridColumn: '1/5',
     gridRow: '1/2',
+    '@media(min-width: 1536px)': {
+      gridColumn: '1/4',
+    },
     '@media(max-width: 991px)': {
       gridColumn: '1/13',
     },
@@ -120,6 +123,9 @@ export const styles = {
   averageSkillsScore: {
     gridColumn: '5/13',
     gridRow: '1/2',
+    '@media(min-width: 1536px)': {
+      gridColumn: '4/13',
+    },
     '@media(max-width: 991px)': {
       gridColumn: '1/13',
       gridRow: '2/3',
@@ -130,6 +136,9 @@ export const styles = {
     gridRow: '2/3',
     width: '300px',
     padding: '18px',
+    '@media(min-width: 1536px)': {
+      width: '360px',
+    },
     '@media(max-width: 991px)': {
       gridColumn: '1/13',
       gridRow: '3/4',
