@@ -4,12 +4,11 @@ export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
     gap: theme.spacing(4),
     '@media (max-width: 991px)': {
       flexDirection: 'column',
       gap: theme.spacing(3),
-      padding: theme.spacing(3),
     },
   }),
   specialization_left_box: {
