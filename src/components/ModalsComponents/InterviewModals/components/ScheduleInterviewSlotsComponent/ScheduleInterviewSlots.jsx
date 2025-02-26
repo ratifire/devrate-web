@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
-// import { getDatesInWeek } from '../../../../../utils/helpers/getWeekDates.js';
+import { getDatesInWeek } from '../../../../../utils/helpers/getWeekDates.js';
 import { getUserUTC } from '../../../../../utils/helpers/index.js';
 import { useGetInterviewRequestQuery } from '../../../../../redux/interviews/interviewRequestsApiSlice.js';
 import { styles } from './ScheduleInterviewSlots.styles';
@@ -47,8 +47,6 @@ const ScheduleInterviewSlots = ({ formik }) => {
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
   // const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
   const handleTabChange = (newTab) => setTab(newTab);
-
-  const getDatesInWeek = () => {};
 
   useLayoutEffect(() => {
     setWeekDates(getDatesInWeek(date));
