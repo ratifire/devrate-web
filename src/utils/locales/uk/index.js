@@ -737,6 +737,10 @@ export const uk = {
           notHappenedMeeting: 'Співбесіда не відбулася',
           leaveFeedbackMeeting: 'Залишити відгук',
           durationType: 'хв.',
+          canceled: {
+            success: 'Meeting canceled successfully',
+            error: 'Something went wrong',
+          },
         },
         interviewSkills: {
           skills: 'Навички',

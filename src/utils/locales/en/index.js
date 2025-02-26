@@ -906,19 +906,21 @@ export const en = {
       },
     },
     singleScheduledInterview: {
-      interviewsSummary: {
-        scheduledMeeting: {
-          title: 'Scheduled Meeting',
-          participants: 'Participants',
-          language: 'Language',
-          duration: 'Duration',
-          platform: 'Platform',
-          link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
-          canceledMeeting: 'Cancel Meeting',
-          joinMeeting: 'Join Interview',
-          notHappenedMeeting: 'Interview did not happen',
-          leaveFeedbackMeeting: 'Leave Feedback',
-          durationType: 'min.',
+      scheduledMeeting: {
+        title: 'Scheduled Meeting',
+        participants: 'Participants',
+        language: 'Language',
+        duration: 'Duration',
+        platform: 'Platform',
+        link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
+        canceledMeeting: 'Cancel Meeting',
+        joinMeeting: 'Join Interview',
+        notHappenedMeeting: 'Interview did not happen',
+        leaveFeedbackMeeting: 'Leave Feedback',
+        durationType: 'min.',
+        canceled: {
+          success: 'Meeting canceled successfully',
+          error: 'Something went wrong',
         },
       },
       interviewSkills: {
