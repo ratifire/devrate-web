@@ -1,4 +1,4 @@
-const getCurrentAndLastMonths = () => {
+export const getCurrentAndLastMonths = () => {
   const currentDate = new Date();
   const to = currentDate.toISOString().split('T')[0];
 
@@ -9,4 +9,13 @@ const getCurrentAndLastMonths = () => {
   return { to, from };
 };
 
-export default getCurrentAndLastMonths;
+export const getCurrentAndLastMonthsHistory = () => {
+  const currentDate = new Date();
+  const to = currentDate.toISOString();
+
+  const previousDate = new Date();
+  previousDate.setMonth(previousDate.getMonth() - 10);
+  const from = previousDate.toISOString();
+
+  return { to, from };
+};

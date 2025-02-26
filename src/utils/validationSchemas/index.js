@@ -1,6 +1,5 @@
 export { default as resetPasswordSchema } from './ResetPasswordSchema';
 export { CheckResetEmailSchema } from './CheckResetEmailSchema';
-export { StepAvatarSchema } from './StepAvatarSchema';
 export { StepContactsSchema } from './StepContactsSchema';
 export { StepPersonalSchema } from './StepPersonalSchema';
 export { WorkExperienceModalSchema } from './WorkExperienceModalSchema';

@@ -21,7 +21,7 @@ export const scheduleLight = {
       iconColor: '#5900D9',
     },
     sideBarEvent: {
-      backgroundColor: '#F8F8F8',
+      backgroundColor: '#ECECED',
       titleColor: '#1D1D1D',
       dateAndTimeColor: '#303032',
       participant: '#444446',

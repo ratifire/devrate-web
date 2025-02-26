@@ -21,5 +21,9 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    '@media(min-width: 1536px)': {
+      height: '11.5rem',
+      marginTop: 'auto',
+    },
   },
 };

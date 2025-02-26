@@ -56,13 +56,11 @@ const ModalSearch = ({ users, isError, isSpinner, onClose }) => {
                 </Typography>
               </Box>
               <UserAvatar
-                correctStyle={styles.img}
                 radius={'circle'}
-                size={'sm'}
+                size={'s'}
                 src={picture}
                 userFirstName={firstName}
                 userLastName={lastName}
-                userName={firstName}
               />
             </Box>
             <Divider sx={styles.divider} />

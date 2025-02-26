@@ -49,19 +49,19 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled
       const img = new Image();
       img.onload = () => {
         if (img.width < 98 || img.height < 98) {
-          reject(new Error('Image dimensions must be at least 98x98 pixels'));
+          reject(new Error(t('profile.modal.userInfo.photo.imageSize')));
         } else {
           resolve();
         }
       };
-      img.onerror = () => reject(new Error('Failed to load image'));
+      img.onerror = () => reject(new Error(t('profile.modal.userInfo.photo.failedLoad')));
       img.src = URL.createObjectURL(file);
     });
   };
 
   const onDrop = async (acceptedFiles, fileRejections) => {
     if (fileRejections.length > 0) {
-      setError(t('This file can not be used as avatar'));
+      setError(t('profile.modal.userInfo.photo.incorrectAvatar'));
       return;
     }
 

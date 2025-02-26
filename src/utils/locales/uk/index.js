@@ -346,6 +346,9 @@ export const uk = {
               second: 'або',
               third: ' завантажити зі свого пристрою',
             },
+            incorrectAvatar: 'Некоректний формат фото',
+            failedLoad: 'Не вдалося завантажити фото',
+            imageSize: 'Розміри зображення повинні бути не менше 98x98 пікселів',
           },
           languages: {
             title: 'Мови',
@@ -697,7 +700,11 @@ export const uk = {
       passedInterviews: {
         interviewersAssessmentTitle: 'Оцінки співбесідника',
         interviewInfoTitle: 'Інформація про співбесіду',
-        interviewInfoText: 'рок(ів) тому',
+        interviewInfoYearAgo: 'рік(ів) тому назад',
+        interviewInfoMonthAgo: 'місяць(місяців) тому назад',
+        interviewInfoWeekAgo: 'тиждень(ів) тому назад',
+        interviewInfoDayAgo: 'день(днів) тому назад',
+        interviewInfoToday: 'Пройдено сьогодні',
         interviewInfoRole: 'Ваша роль',
         interviewInfoHost: 'Хост',
         interviewFeedbackTitle: 'Відгук співбесідника',
@@ -739,7 +746,6 @@ export const uk = {
           joinMeeting: 'Доєднатись до інтерв’ю',
           notHappenedMeeting: 'Співбесіда не відбулася',
           leaveFeedbackMeeting: 'Залишити відгук',
-          languageType: 'Англійська',
           durationType: 'хв.',
         },
         interviewSkills: {
@@ -756,6 +762,11 @@ export const uk = {
           title: 'Статистика',
         },
       },
+    },
+    chat: {
+      search: 'Пошук',
+      emptyChatLstUsers: 'Ще немає чатів',
+      enterMessages: 'Напишіть повідомлення',
     },
   },
 };

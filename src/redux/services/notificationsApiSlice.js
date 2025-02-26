@@ -1,6 +1,5 @@
 import { TAG_TYPES } from '../../utils/constants/tagTypes';
 import { apiSlice } from './api/apiSlice';
-import { urlWS } from './api/socketsEndpoints';
 
 export const notificationsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,7 +10,8 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
         return response;
       },
       async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
-        const ws = new WebSocket(`${import.meta.env.VITE_WS_URL}${urlWS.notification}`);
+        // const ws = new WebSocket(`${import.meta.env.VITE_WS_URL}${urlWS.notification}`);
+        const ws = new WebSocket('wss://server.skillzzy.com/ws/notifications');
         try {
           await cacheDataLoaded;
           const listener = ({ data }) => {

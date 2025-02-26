@@ -11,6 +11,13 @@ export const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     gap: '16px',
+    '@media(min-width: 1536px)': {
+      marginBottom: '7px',
+    },
+    '@media(max-width: 991px)': {
+      marginBottom: 0,
+      minHeight: '5.3125rem',
+    },
   },
   title: {
     display: 'flex',
