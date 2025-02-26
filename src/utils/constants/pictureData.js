@@ -1,5 +1,5 @@
-import logoLight from '../../assets/icons/LogoHeader/WhiteThemeIcon/logoHeader.svg';
-import logoDark from '../../assets/icons/LogoHeader/BlackThemeIcon/BlackLogoHeader.svg';
+import logoLight from '@assets/icons/LogoHeader/WhiteThemeIcon/logoHeader.svg';
+import logoDark from '@assets/icons/LogoHeader/BlackThemeIcon/BlackLogoHeader.svg';
 
 export const pictureData = [
   {

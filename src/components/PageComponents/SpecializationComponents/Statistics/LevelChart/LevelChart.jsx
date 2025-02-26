@@ -1,14 +1,14 @@
 import { Box, Typography, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useHardSkillData } from '../../../../../utils/hooks/specialization';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { useHardSkillData } from '@utils/hooks/specialization';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import LevelChartSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
+import { LevelGauge } from '@components/UI/Chart';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import LevelUp from '@assets/icons/levelUp.svg?react';
 import { getLevel } from '../utils';
-import LevelChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
-import { LevelGauge } from '../../../../UI/Chart';
-import LevelUp from '../../../../../assets/icons/levelUp.svg?react';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../../utils/hooks/useModalController.js';
 import { styles } from './LevelChart.styles.js';
 import useThemeLevelChart from './useThemeLevelChart';
 
@@ -32,6 +32,7 @@ const LevelChart = () => {
   if (isError) {
     return <ErrorComponent />;
   }
+
   return (
     <Box sx={styles.levelChartContainer}>
       <Box sx={styles.contentContainer}>

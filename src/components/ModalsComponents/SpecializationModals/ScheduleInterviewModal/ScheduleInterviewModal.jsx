@@ -11,13 +11,13 @@ import {
   useCreateInterviewRequestMutation,
   useGetInterviewRequestQuery,
   useUpdateInterviewRequestMutation,
-} from '../../../../redux/specialization/specializationApiSlice';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { getDatesInWeek } from '../../../../utils/helpers/dateHandlers.js';
-import { useGetMastery } from '../../../../utils/hooks/specialization';
-import { getUserUTC } from '../../../../utils/helpers/index.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
+} from '@redux/api/slices/specialization/specializationApiSlice';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { getDatesInWeek } from '@utils/helpers/dateHandlers.js';
+import { useGetMastery } from '@utils/hooks/specialization';
+import { getUserUTC } from '@utils/helpers/index.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { styles } from './ScheduleInterviewModal.styles';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
 import RenderTabs from './components/TabsRender';

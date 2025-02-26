@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { UserCard } from '../../../UI/Interview';
-import { lvlMastery } from '../../../../utils/constants/masteryLvl';
-import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import { UserCardScheduledInterviewSkeleton } from '../../../UI/Skeleton';
-import { openChat } from '../../../../redux/chat/chatSlice';
+import { UserCard } from '@components/UI/Interview';
+import { lvlMastery } from '@utils/constants/masteryLvl';
+import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { UserCardScheduledInterviewSkeleton } from '@components/UI/Skeleton';
+import { openChat } from '@redux/slices/chat/chatSlice';
 
 const UserCardScheduledInterview = () => {
   const { t } = useTranslation();

@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useGetWorkExperienceByUserIdQuery } from '../../../../../../redux/services/workExperienceApiSlice.js';
-import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
-import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
-import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
+import { setButtonState } from '@redux/slices/addButton/addButtonSlice.js';
+import { useGetWorkExperienceByUserIdQuery } from '@redux/api/slices/workExperienceApiSlice.js';
+import { emptyPersonalTabsPictures } from '@utils/constants/emptyTabsPictures';
+import EmptyExperienceTab from '@components/PageComponents/ProfileComponents/sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import WorkExperienceItem from './WorkExperienceItem/WorkExperienceItem';
 
 const WorkExperience = ({ tab }) => {

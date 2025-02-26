@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { LevelGauge } from '../../../UI/Chart/index.js';
+import { LevelGauge } from '@components//UI/Chart/index.js';
 import { styles } from './InterviewStatistics.styles.js';
 import useThemeHardSkillsChart from './useThemeHardSkillsChart.js';
 import useThemeSoftSkillsChart from './useThemeSoftSkillsChart.js';

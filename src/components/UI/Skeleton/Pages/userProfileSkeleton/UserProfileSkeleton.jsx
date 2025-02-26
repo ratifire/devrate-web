@@ -1,5 +1,5 @@
 import { Box, Container, Paper } from '@mui/material';
-import { styles } from '../../../../../pages/ProfilePages/UserProfilePage/UserProfilePage.styles';
+import { styles } from '@pages/ProfilePages/UserProfilePage/UserProfilePage.styles';
 import { SkillsSectionSkeleton } from '../personalProfileSkeleton';
 import { UserExperienceSectionSkeleton } from '../../index';
 import UserBaseUserInfoSkeleton from './UserBaseUserInfoSkeleton';

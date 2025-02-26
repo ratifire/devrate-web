@@ -1,14 +1,14 @@
 import { createBrowserRouter } from 'react-router';
-import ErrorPage from '../pages/ErrorPage';
-import HomePage from '../pages/HomePage/HomePage';
-import PrivateRoutes from '../redux/auth/PrivateRoutes.jsx';
-import PersonalProfilePage from '../pages/ProfilePages/PersonalProfilePage';
-import SpecializationPage from '../pages/SpecializationPage';
-import SchedulePage from '../pages/SchedulePage';
-import FaqPage from '../pages/FaqPage';
-import PrivacyPolicy from '../pages/PrivacyPolicy';
-import TermsAndConditions from '../pages/TermsAndConditions';
-import RootPage from '../pages/RootPage';
+import ErrorPage from '@pages/ErrorPage';
+import HomePage from '@pages/HomePage/HomePage';
+import PrivateRoutes from '@redux/auth/PrivateRoutes.jsx';
+import PersonalProfilePage from '@pages/ProfilePages/PersonalProfilePage';
+import SpecializationPage from '@pages/SpecializationPage';
+import SchedulePage from '@pages/SchedulePage';
+import FaqPage from '@pages/FaqPage';
+import PrivacyPolicy from '@pages/PrivacyPolicy';
+import TermsAndConditions from '@pages/TermsAndConditions';
+import RootPage from '@pages/RootPage';
 import {
   InterviewRootPage,
   ScheduledInterviewsPage,
@@ -17,7 +17,7 @@ import {
   SingleScheduledInterviewPage,
   SinglePassedInterviewPage,
   SingleRequestInterviewPage,
-} from '../pages/InterviewPages';
+} from '@pages/InterviewPages';
 import UserProfileGuard from './guards/UserProfileGuard.jsx';
 import navigationLinks from './links';
 import ScheduledInterviewsGuard from './guards/ScheduledInterviewsGuard.jsx';

@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { CardMedia } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import logoLight from '../../../assets/icons/LogoHeader/WhiteThemeIcon/logoHeader.svg';
-import logo from '../../../assets/icons/LogoHeader/BlackThemeIcon/BlackLogoHeader.svg';
-import { pictureData } from '../../../utils/constants/pictureData';
-import { DARK_THEME } from '../../../utils/constants/Theme/theme';
+import { pictureData } from '@utils/constants/pictureData';
+import { DARK_THEME } from '@utils/constants/Theme/theme';
+import logoLight from '@assets/icons/LogoHeader/WhiteThemeIcon/logoHeader.svg';
+import logo from '@assets/icons/LogoHeader/BlackThemeIcon/BlackLogoHeader.svg';
 
 const Logo = ({ width, height }) => {
   const theme = useTheme();

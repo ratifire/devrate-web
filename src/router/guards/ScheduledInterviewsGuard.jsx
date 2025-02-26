@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import { useEffect } from 'react';
-import { useGetAllScheduledInterviewsQuery } from '../../redux/interviews/scheduledInterviewsApiSlice';
+import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import navigationLinks from '../links';
 
 const ScheduledInterviewsGuard = () => {

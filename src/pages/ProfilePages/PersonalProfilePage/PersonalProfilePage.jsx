@@ -5,20 +5,14 @@ import {
   ExperienceSectionSkeleton,
   RightSectionSkeleton,
   SkillsSectionSkeleton,
-} from '../../../components/UI/Skeleton';
+} from '@components/UI/Skeleton';
 import { styles } from './PersonalProfilePage.styles';
 
-const SkillsSection = lazy(
-  () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/SkillsSection')
-);
-const BaseUserInfo = lazy(
-  () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/BaseUserInfo')
-);
-const RightSection = lazy(
-  () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/RightSection')
-);
+const SkillsSection = lazy(() => import('@components/PageComponents/ProfileComponents/PersonalProfile/SkillsSection'));
+const BaseUserInfo = lazy(() => import('@components/PageComponents/ProfileComponents/PersonalProfile/BaseUserInfo'));
+const RightSection = lazy(() => import('@components/PageComponents/ProfileComponents/PersonalProfile/RightSection'));
 const ExperienceSection = lazy(
-  () => import('../../../components/PageComponents/ProfileComponents/PersonalProfile/ExperienceSection')
+  () => import('@components/PageComponents/ProfileComponents/PersonalProfile/ExperienceSection')
 );
 
 const MemoizedBaseUserInfo = memo(BaseUserInfo);

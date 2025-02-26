@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { TextAreaInput } from '../../../../../FormsComponents/Inputs';
+import { TextAreaInput } from '@components/FormsComponents/Inputs';
 import { SliderAssessment, SliderAssessmentBox } from '../index';
 import { styles } from './StepSoftSkills.styles';
 

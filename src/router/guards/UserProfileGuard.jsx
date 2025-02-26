@@ -1,6 +1,6 @@
 import { useParams, Navigate } from 'react-router';
 import { useSelector } from 'react-redux';
-import UserProfilePage from '../../pages/ProfilePages/UserProfilePage/index.js';
+import UserProfilePage from '@pages/ProfilePages/UserProfilePage/index.js';
 
 const UserProfileGuard = () => {
   const { userId } = useParams();

@@ -5,23 +5,23 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { closeModal } from '../../../../redux/modal/modalSlice';
+import { closeModal } from '@redux/slices/modal/modalSlice';
 import {
   useAddSkillsToMasteryMutation,
   useCreateNewSpecializationMutation,
   useGetSpecializationByUserIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
-} from '../../../../redux/specialization/specializationApiSlice';
-import { useGetSpecializationListQuery } from '../../../../redux/specialization/specializationList/specializationListApiSlice';
-import useMergeState from '../../../../utils/hooks/useMergeState';
-import { SpecializationModalSchema } from '../../../../utils/validationSchemas/index';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
-import FormInput from '../../../FormsComponents/Inputs/FormInput';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import Responsibility from '../../../UI/Responsibility';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
+} from '@redux/api/slices/specialization/specializationApiSlice';
+import { useGetSpecializationListQuery } from '@redux/api/slices/specializationList/specializationListApiSlice';
+import useMergeState from '@utils/hooks/useMergeState';
+import { SpecializationModalSchema } from '@utils/validationSchemas/index';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { AdvancedFormSelector, FormSelect } from '@components/FormsComponents/Inputs';
+import FormInput from '@components/FormsComponents/Inputs/FormInput';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import Responsibility from '@components/UI/Responsibility';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationModal = () => {

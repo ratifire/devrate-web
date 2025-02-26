@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
+import { useScrollPadding } from '@utils/helpers/useScrollPadding';
+import useGetHeightElement from '@utils/hooks/useGetHeightElement';
 import SideBarEvent from '../InterviewSideBarEvent';
-import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding';
-import useGetHeightElement from '../../../../utils/hooks/useGetHeightElement';
 import { styles } from './SideBar.styles';
 
 const SideBar = ({ interviews, refHandler, passedInterview }) => {

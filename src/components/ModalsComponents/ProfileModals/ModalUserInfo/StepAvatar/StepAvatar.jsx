@@ -3,15 +3,15 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import {
   useDeleteAvatarUserMutation,
   useGetAvatarUserQuery,
   usePostAvatarUserMutation,
-} from '../../../../../redux/user/avatar/avatarApiSlice';
-import LoadImages from '../../../../UI/LoadImages';
-import { ErrorComponent } from '../../../../UI/Exceptions';
-import { StepAvatarSkeleton } from '../../../../UI/Skeleton';
+} from '@redux/api/slices/user/avatar/avatarApiSlice';
+import LoadImages from '@components/UI/LoadImages';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { StepAvatarSkeleton } from '@components/UI/Skeleton';
 import { styles } from './StepAvatar.styles';
 
 const StepAvatar = () => {

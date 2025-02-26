@@ -4,11 +4,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
-import Responsibility from '../../../../../../UI/Responsibility/Responsibility';
+import { useDeleteWorkExperienceByIdMutation } from '@redux/api/slices/workExperienceApiSlice.js';
+import Responsibility from '@components/UI/Responsibility/Responsibility';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
-import { useDeleteWorkExperienceByIdMutation } from '../../../../../../../redux/services/workExperienceApiSlice.js';
-import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../../../../utils/hooks/useModalController.js';
 import styles from './WorkExperienceItem.styles.js';
 
 const WorkExperienceItem = ({ id, startYear, endYear, position, companyName, description, responsibilities }) => {

@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
+import { store } from '@redux/store/config.js';
 import { decorators } from '../../../../../.storybook/preview';
-import { store } from '../../../../redux/store/store';
 import HeroSection from './HeroSection';
 
 export default {

@@ -3,15 +3,17 @@ import { NavLink } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import { modalNames } from '../../../../utils/constants/modalNames';
-import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole';
-import links from '../../../../router/links.js';
-import CircleIcon from '../../../../assets/icons/InterviewPageIcons/green-ellipse.svg';
-import { useModalController } from '../../../../utils/hooks/useModalController';
+import { modalNames } from '@utils/constants/modalNames';
+import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
+import links from '@router/links.js';
+import CircleIcon from '@assets/icons/InterviewPageIcons/green-ellipse.svg';
+import { useModalController } from '@utils/hooks/useModalController';
+// import { useDispatch } from 'react-redux';
 import styles from './InterviewHeader.styles';
 
 const InterviewHeader = () => {
   const { t } = useTranslation();
+  // const dispatch = useDispatch();
   const buttonRef = useRef(null);
   const [createButton, setCreateButton] = useState(null);
   const [popoverWidth, setPopoverWidth] = useState(0);

@@ -2,9 +2,9 @@ import { Box, Typography, useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useRef, useState } from 'react';
+import CustomTooltip from '@components/UI/CustomTooltip';
+import StarMainSpecialization from '@components/UI/StarMainSpecialization';
 import SkillsItem from '../SkillsItem';
-import CustomTooltip from '../../../../../../UI/CustomTooltip';
-import StarMainSpecialization from '../../../../../../UI/StarMainSpecialization';
 import { styles } from './SkillsList.styles';
 
 const SkillsList = ({ data, length }) => {

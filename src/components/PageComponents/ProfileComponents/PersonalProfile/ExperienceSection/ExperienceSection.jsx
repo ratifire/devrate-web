@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Add } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { useLocation, useSearchParams } from 'react-router';
-import { useModalController } from '../../../../../utils/hooks/useModalController.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
 import Skills from './Skills';

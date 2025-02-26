@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { useGetSoftSkillsQuery } from '../../../../redux/specialization/specializationApiSlice';
-import { useGetMastery } from '../../../../utils/hooks/specialization';
-import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { useGetSoftSkillsQuery } from '@redux/api/slices/specialization/specializationApiSlice';
+import { useGetMastery } from '@utils/hooks/specialization';
+import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 
 const SoftSkills = () => {
   const { t } = useTranslation();

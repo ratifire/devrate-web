@@ -1,8 +1,8 @@
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '../../../../../redux/feedback/interviewApiSlice';
-import { FeedbackModalSchema } from '../../../../../utils/validationSchemas';
-import { closeModal, selectModalData } from '../../../../../redux/modal/modalSlice.js';
+import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '@redux/api/slices/feedback/interviewApiSlice';
+import { FeedbackModalSchema } from '@utils/validationSchemas';
+import { closeModal, selectModalData } from '@redux/slices/modal/modalSlice.js';
 
 const useFeedbackForm = () => {
   const dispatch = useDispatch();

@@ -1,10 +1,10 @@
 import { lazy, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
-import { BlogSkeleton, FaqSkeleton } from '../../components/UI/Skeleton';
+import { BlogSkeleton, FaqSkeleton } from '@components/UI/Skeleton';
 import { styles } from './FaqPage.styles';
 
-const Blog = lazy(() => import('../../components/PageComponents/FaqComponents/Blog'));
-const Faq = lazy(() => import('../../components/PageComponents/FaqComponents/Faq'));
+const Blog = lazy(() => import('@components/PageComponents/FaqComponents/Blog'));
+const Faq = lazy(() => import('@components/PageComponents/FaqComponents/Faq'));
 
 const FaqPage = () => {
   return (

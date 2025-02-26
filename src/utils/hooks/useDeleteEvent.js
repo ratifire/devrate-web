@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
-import { useDeleteEventByIdMutation } from '../../redux/schedule/scheduleApiSlice';
+import { useDeleteEventByIdMutation } from '@redux/api/slices/schedule/scheduleApiSlice';
 
 export const useDeleteEvent = () => {
   const [deleteEventById] = useDeleteEventByIdMutation();

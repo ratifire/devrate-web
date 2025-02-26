@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding';
+import { useScrollPadding } from '@utils/helpers/useScrollPadding';
 import { styles } from './Blog.styles';
 import { blogArr } from './blogArr';
 

@@ -2,9 +2,9 @@ import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { InfoOutlined } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import TimeAgo from '../../../UI/TimeAgo';
+import TimeAgo from '@components/UI/TimeAgo';
+import { formatToLocalDate } from '@utils/helpers/dateHandlers.js';
 import styles from '../NotificationItem/NotificationItem.styles';
-import { formatToLocalDate } from '../../../../utils/helpers/dateHandlers.js';
 
 const InterviewScheduled = ({ createAt, payload }) => {
   const { t } = useTranslation();

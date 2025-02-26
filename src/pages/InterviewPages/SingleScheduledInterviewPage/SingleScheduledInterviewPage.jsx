@@ -6,22 +6,18 @@ import {
   ScheduledMeetingSkeleton,
   StatisticSkeleton,
   UserCardScheduledInterviewSkeleton,
-} from '../../../components/UI/Skeleton';
+} from '@components/UI/Skeleton';
 import { styles } from './SingleScheduledInterviewPage.styles';
 
 const UserCardScheduledInterview = lazy(
-  () => import('../../../components/PageComponents/SingleScheduledInterview/UserCardScheduledInterview')
+  () => import('@components/PageComponents/SingleScheduledInterview/UserCardScheduledInterview')
 );
 const ParticipantEvaluations = lazy(
-  () => import('../../../components/PageComponents/SingleScheduledInterview/ParticipantEvaluations')
+  () => import('@components/PageComponents/SingleScheduledInterview/ParticipantEvaluations')
 );
-const Statistic = lazy(() => import('../../../components/PageComponents/SingleScheduledInterview/Statistic'));
-const ScheduledMeeting = lazy(
-  () => import('../../../components/PageComponents/SingleScheduledInterview/ScheduledMeeting')
-);
-const InterviewSkills = lazy(
-  () => import('../../../components/PageComponents/SingleScheduledInterview/InterviewSkills')
-);
+const Statistic = lazy(() => import('@components/PageComponents/SingleScheduledInterview/Statistic'));
+const ScheduledMeeting = lazy(() => import('@components/PageComponents/SingleScheduledInterview/ScheduledMeeting'));
+const InterviewSkills = lazy(() => import('@components/PageComponents/SingleScheduledInterview/InterviewSkills'));
 
 const MemoizedUserCardScheduledInterview = memo(UserCardScheduledInterview);
 const MemoizedParticipantEvaluations = memo(ParticipantEvaluations);

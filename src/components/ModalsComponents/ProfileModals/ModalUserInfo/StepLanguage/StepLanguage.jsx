@@ -3,16 +3,13 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
-import {
-  useGetLanguageUserQuery,
-  usePostLanguageUserMutation,
-} from '../../../../../redux/user/language/languageApiSlice';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { SelectLanguage } from '../../../../FormsComponents/Inputs';
-import LanguageLevel from '../../../../UI/LanguageLevel';
-import { ErrorComponent } from '../../../../UI/Exceptions';
-import { StepLanguageSkeleton } from '../../../../UI/Skeleton';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { useGetLanguageUserQuery, usePostLanguageUserMutation } from '@redux/api/slices/user/language/languageApiSlice';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { SelectLanguage } from '@components/FormsComponents/Inputs';
+import LanguageLevel from '@components/UI/LanguageLevel';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { StepLanguageSkeleton } from '@components/UI/Skeleton';
 import { styles } from './StepLanguage.styles';
 
 const StepLanguage = () => {

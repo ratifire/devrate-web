@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetSearchQuery } from '../../../../redux/search/searchApiSlice';
-import useDebounce from '../../../../utils/hooks/useDebounce';
-import useMergeState from '../../../../utils/hooks/useMergeState';
-import { FormInputSearch } from '../../../FormsComponents/Inputs/index.js';
+import { useGetSearchQuery } from '@redux/api/slices/search/searchApiSlice';
+import useDebounce from '@utils/hooks/useDebounce';
+import useMergeState from '@utils/hooks/useMergeState';
+import { FormInputSearch } from '@components/FormsComponents/Inputs/index.js';
 import { styles } from './InputSearch.styles';
 import { ModalSearch } from './ModalSearch';
 import { formatSearchQuery } from './helpers';

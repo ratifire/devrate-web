@@ -1,13 +1,11 @@
 import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
-import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
-import { useGetAllScheduledInterviewsQuery } from '../../../redux/interviews/scheduledInterviewsApiSlice';
+import InterviewsSkeleton from '@components/UI/Skeleton/Pages/InterviewsSkeleton';
+import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { styles } from './ScheduledInterviewsPage.styles';
 
-const SideBar = lazy(
-  () => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar.jsx')
-);
+const SideBar = lazy(() => import('@components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar.jsx'));
 
 const MemoizedSideBar = memo(SideBar);
 

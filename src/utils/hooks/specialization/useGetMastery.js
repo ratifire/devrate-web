@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useGetMasteriesBySpecializationIdQuery } from '../../../redux/specialization/specializationApiSlice';
+import { useGetMasteriesBySpecializationIdQuery } from '@redux/api/slices/specialization/specializationApiSlice';
 import { useGetSpecializationId } from './index';
 
 const useGetMastery = () => {

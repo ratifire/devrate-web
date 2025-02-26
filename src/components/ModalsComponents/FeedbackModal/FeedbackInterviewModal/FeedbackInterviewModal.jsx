@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { useGetInterviewByIdQuery } from '../../../../redux/feedback/interviewApiSlice';
-import { selectModalData } from '../../../../redux/modal/modalSlice.js';
+import { useGetInterviewByIdQuery } from '@redux/api/slices/feedback/interviewApiSlice';
+import { selectModalData } from '@redux/slices/modal/modalSlice.js';
 import { RoleBasedFeedbackModal } from './components';
 
 const FeedbackInterviewModal = () => {

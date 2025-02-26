@@ -2,32 +2,26 @@ import { useParams } from 'react-router';
 import { Box, Paper, Typography } from '@mui/material';
 import { lazy, memo, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetPassedInterviewByIdQuery } from '../../../redux/interviews/passedInterviewsApiSlice.js';
-import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice.js';
-import { lvlMastery } from '../../../utils/constants/masteryLvl.js';
+import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice.js';
+import { lvlMastery } from '@utils/constants/masteryLvl.js';
 import {
   InterviewFeedbackSkeleton,
   InterviewInfoSkeleton,
   SkillsSkeleton,
   StatisticsSkeleton,
   UserCardSkeleton,
-} from '../../../components/UI/Skeleton';
-import { formatToLocalDateInterview } from '../../../utils/helpers/formatToLocalDateInterview.js';
+} from '@components/UI/Skeleton';
+import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInterview.js';
 import { styles } from './SingleIPassednterviewPage.styles.js';
 
-const InterviewInfo = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewInfo'));
-const InterviewHardSkills = lazy(
-  () => import('../../../components/PageComponents/InterviewsComponents/InterviewHardSkills')
-);
-const InterviewSoftSkills = lazy(
-  () => import('../../../components/PageComponents/InterviewsComponents/InterviewSoftSkills')
-);
-const Statistics = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewStatistics'));
-const InterviewFeedback = lazy(
-  () => import('../../../components/PageComponents/InterviewsComponents/InterviewFeedback')
-);
+const InterviewInfo = lazy(() => import('@components/PageComponents/InterviewsComponents/InterviewInfo'));
+const InterviewHardSkills = lazy(() => import('@components/PageComponents/InterviewsComponents/InterviewHardSkills'));
+const InterviewSoftSkills = lazy(() => import('@components/PageComponents/InterviewsComponents/InterviewSoftSkills'));
+const Statistics = lazy(() => import('@components/PageComponents/InterviewsComponents/InterviewStatistics'));
+const InterviewFeedback = lazy(() => import('@components/PageComponents/InterviewsComponents/InterviewFeedback'));
 const UserCard = lazy(async () => {
-  const module = await import('../../../components/UI/Interview');
+  const module = await import('@components/UI/Interview');
   return { default: module.UserCard };
 });
 

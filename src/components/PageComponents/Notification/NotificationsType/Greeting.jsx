@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import Sms from '@mui/icons-material/SmsOutlined';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import TimeAgo from '../../../UI/TimeAgo';
+import TimeAgo from '@components/UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
 
 const Greeting = ({ createAt }) => {

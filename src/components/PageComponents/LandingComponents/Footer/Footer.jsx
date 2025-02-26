@@ -2,10 +2,10 @@ import { Link as RouterLink } from 'react-router';
 import { Box, Container, Icon, Link, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { Instagram, LinkedIn } from '@mui/icons-material';
-import { ReactComponent as LogoBoy } from '../../../../assets/icons/logo-boy.svg';
-import Logo from '../../../UI/Logo';
-import LinkList from '../../../UI/LinkList';
-import legalInfoLinks from '../../../../utils/constants/legalInfoLinks';
+import legalInfoLinks from '@utils/constants/legalInfoLinks';
+import { ReactComponent as LogoBoy } from '@assets/icons/logo-boy.svg';
+import Logo from '@components/UI/Logo';
+import LinkList from '@components/UI/LinkList';
 import styles from './Footer.styles';
 
 const Footer = () => {

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router';
-import { DARK_THEME } from '../../../../../utils/constants/Theme/theme';
-import { ErrorComponent, LoaderComponent } from '../../../../UI/Exceptions';
-import UserAvatar from '../../../../UI/UserAvatar';
+import { DARK_THEME } from '@utils/constants/Theme/theme';
+import { ErrorComponent, LoaderComponent } from '@components/UI/Exceptions';
+import UserAvatar from '@components/UI/UserAvatar';
 import { DARK_NOT_FOUND, LIGHT_NOT_FOUND } from '../constants';
 import { styles } from './ModalSearch.styles';
 

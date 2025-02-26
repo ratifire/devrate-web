@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import {
   useGetDefLanguageLevelQuery,
   useGetDefLanguageQuery,
-} from '../../../../redux/services/defaultLanguage/defaultLanguageApiSlice';
+} from '@redux/api/slices/defaultLanguage/defaultLanguageApiSlice';
 import { styles } from './SelectLanguage.styles';
 
 const SelectLanguage = ({ variant = 'outlined', onSubmit, prohibitedValues = null }) => {

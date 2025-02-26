@@ -6,8 +6,8 @@ import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material'
 import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';
-import useCheckTimeDifference from '../../../../utils/hooks/schedule/useCheckTimeDifference.js';
+import { useDeleteEvent } from '@utils/hooks/useDeleteEvent';
+import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference.js';
 import { styles } from './SidebarEvent.styles';
 
 const SidebarEvent = ({ event }) => {

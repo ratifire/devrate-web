@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { modalNames } from '../../utils/constants/modalNames.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import {
   EducationModal,
   WorkExperienceModal,

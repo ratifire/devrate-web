@@ -1,4 +1,4 @@
-import { useGetHardSkillsByMasteryIdQuery } from '../../../redux/specialization/specializationApiSlice';
+import { useGetHardSkillsByMasteryIdQuery } from '@redux/api/slices/specialization/specializationApiSlice';
 import { useGetMastery } from './index';
 
 const useHardSkillData = () => {

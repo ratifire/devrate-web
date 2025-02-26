@@ -2,18 +2,18 @@ import { Box, Typography } from '@mui/material';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { useGetInterviewSummariesStatisticQuery } from '../../../../../redux/chart/chartApiSlice';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { useGetInterviewSummariesStatisticQuery } from '@redux/api/slices/chart/chartApiSlice';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { ChartDropDown } from '@components/UI/Specialization/ChartDropDown';
+import InterviewChartSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/InterviewChartSkeleton';
+import useTooltipColorChart from '@utils/hooks/useTooltipColorChart.js';
+
 import {
   createTenDaysInterviewData,
   createTenMonthsInterviewData,
   useHandleChange,
   getCurrentAndLastMonthsHistory,
 } from '../utils';
-
-import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
-import InterviewChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/InterviewChartSkeleton';
-import useTooltipColorChart from '../../../../../utils/hooks/useTooltipColorChart.js';
 import { styles } from './InterviewChart.styles';
 import useThemeInterviewChart from './useThemeInterviewChart';
 

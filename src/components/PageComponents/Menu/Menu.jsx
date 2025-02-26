@@ -18,11 +18,11 @@ import EastIcon from '@mui/icons-material/East';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
-import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
-import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
-import { modalNames } from '../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../utils/hooks/useModalController.js';
-import { closeChat } from '../../../redux/chat/chatSlice.js';
+import { useLogoutMutation } from '@redux/api/slices/auth/authApiSlice';
+import FeedbackProjectModal from '@components/ModalsComponents/FeedbackProjectModal';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { closeChat } from '@redux/slices/chat/chatSlice.js';
 import links from './profileRoutes';
 import styles from './Menu.styles';
 

@@ -5,14 +5,14 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { DateTime } from 'luxon';
 import CloseIcon from '@mui/icons-material/Close';
+import {
+  useDeleteInterviewRequestMutation,
+  useUpdateTimeSlotsMutation,
+} from '@redux/api/slices/interviewRequestApiSlice.js';
 import { isEmpty } from 'lodash';
 import TimeSlotsGroup from '../TimeSlotsGroup';
 import RequestHeader from '../RequsestHeader';
 import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
-import {
-  useDeleteInterviewRequestMutation,
-  useUpdateTimeSlotsMutation,
-} from '../../../../redux/services/interviewRequestApiSlice.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import { styles } from './Participant.styles.js';
 

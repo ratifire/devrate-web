@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { useHardSkillData } from '../../../../utils/hooks/specialization';
-import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { useHardSkillData } from '@utils/hooks/specialization';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
 
 const HardSkills = () => {
   const { t } = useTranslation();

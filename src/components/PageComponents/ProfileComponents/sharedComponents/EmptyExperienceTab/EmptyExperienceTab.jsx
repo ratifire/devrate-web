@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { openModal } from '../../../../../redux/modal/modalSlice';
-import { setButtonState } from '../../../../../redux/addButton/addButtonSlice';
-import links from '../../../../../router/links';
-import { DARK_THEME } from '../../../../../utils/constants/Theme/theme';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
+import { setButtonState } from '@redux/slices/addButton/addButtonSlice.js';
+import { openModal } from '@redux/slices/modal/modalSlice';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import links from '@router/links';
+import { DARK_THEME } from '@utils/constants/Theme/theme';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { styles } from './EmptyExperienceTab.styles';
 
 const ExperienceEmptyItem = ({ tab, profileType, imgUrl, isData }) => {

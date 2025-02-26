@@ -1,4 +1,4 @@
-import humanLightSvg from '../../../assets/icons/emptyNotificationLight.svg';
+import humanLightSvg from '@assets/icons/emptyNotificationLight.svg';
 
 const emptyNotificationLight = humanLightSvg;
 

@@ -4,9 +4,9 @@ import { Box, Link, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { openModal } from '../../../../redux/modal/modalSlice';
-import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { openModal } from '@redux/slices/modal/modalSlice';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { modalNames } from '@utils/constants/modalNames.js';
 import styles from './ConfirmationModal.styles';
 
 const ConfirmationForm = ({

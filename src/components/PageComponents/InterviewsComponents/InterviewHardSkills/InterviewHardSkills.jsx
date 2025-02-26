@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { SpecializationSkills } from '../../../UI/Specialization/SpecializationSkills';
+import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
 
 const InterviewHardSkills = ({ hardSkills, averageHardSkillsMark }) => {
   const { t } = useTranslation();

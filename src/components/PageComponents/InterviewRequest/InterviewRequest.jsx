@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice.js';
-import { selectCurrentUser } from '../../../redux/auth/authSlice.js';
-import { useGetInterviewRequestByMasteryIdQuery } from '../../../redux/services/interviewRequestApiSlice.js';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { useGetInterviewRequestByMasteryIdQuery } from '@redux/api/slices/interviewRequestApiSlice.js';
 import Participant from './Participant';
 import { styles } from './InterviewRequest.styles.js';
 
