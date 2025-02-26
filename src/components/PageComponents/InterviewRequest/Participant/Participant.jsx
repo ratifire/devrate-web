@@ -1,11 +1,11 @@
-import { Box, DialogActions, IconButton, Typography } from '@mui/material';
+import { Box, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
-import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { DateTime } from 'luxon';
 import CloseIcon from '@mui/icons-material/Close';
+import { isEmpty } from 'lodash';
 import TimeSlotsGroup from '../TimeSlotsGroup';
 import RequestHeader from '../RequsestHeader';
 import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
@@ -29,8 +29,12 @@ const Participant = ({ data, specialization }) => {
     const handleResize = () => {
       if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
+        const innerOffset = 16 * 2;
+        const innerGap = 16 * 5;
         const timeSlotWidth = 209;
-        const calculatedSlots = Math.floor(containerWidth / timeSlotWidth) || 1;
+        const calculatedSlots = Math.floor((containerWidth - (innerOffset + innerGap)) / timeSlotWidth);
+        // const calculatedGap = 16 * (calculatedSlots - 1);
+        // calculatedSlots -= calculatedGap;
         setSlotsPerRow(calculatedSlots);
       }
     };
@@ -40,6 +44,26 @@ const Participant = ({ data, specialization }) => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (containerRef.current) {
+  //       const containerWidth = containerRef.current.offsetWidth;
+  //       const innerOffset = 16 * 2; // Внутренние отступы контейнера (padding)
+  //       const timeSlotWidth = 209; // Ширина одного слота
+  //
+  //       // Рассчитываем количество слотов с учетом отступов и промежутков
+  //       const calculatedSlots = Math.floor((containerWidth - innerOffset) / (timeSlotWidth + 16)); // 16 - промежуток между слотами
+  //
+  //       // Убедимся, что slotsPerRow не меньше 1
+  //       setSlotsPerRow(Math.max(1, calculatedSlots));
+  //     }
+  //   };
+  //
+  //   handleResize(); // Вызываем сразу при монтировании
+  //   window.addEventListener('resize', handleResize);
+  //
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
 
   const mainMasteryLevelWithName = useMemo(() => {
     if (!specialization || typeof specialization !== 'object') {
@@ -66,10 +90,12 @@ const Participant = ({ data, specialization }) => {
   sortedDatesByDay.forEach((day) => {
     slotsByDay[day.date] = day.items;
   });
+
   const mergedSlots = useMemo(() => {
     if (slotsPerRow === 0) return [];
     return mergeTimeSlotsByRows(slotsByDay, slotsPerRow);
   }, [slotsByDay, slotsPerRow]);
+
   const selectedTimeSlots = (availableDates || []).length + (assignedDates || []).length;
   const foundTimeSlots = (assignedDates || []).length;
 
@@ -212,15 +238,16 @@ const Participant = ({ data, specialization }) => {
         </DialogActions>
       </Dialog>
 
-      {mergedSlots.map((item) => (
-        <TimeSlotsGroup
-          key={item.dateRange}
-          selectedSlots={selectedSlots}
-          slotsPerRow={slotsPerRow}
-          timeSlots={item}
-          onSelectSlot={handleSelectSlot}
-        />
-      ))}
+      {!isEmpty(mergedSlots) &&
+        mergedSlots.map((item) => (
+          <TimeSlotsGroup
+            key={item.dateRange}
+            selectedSlots={selectedSlots}
+            slotsPerRow={slotsPerRow}
+            timeSlots={item}
+            onSelectSlot={handleSelectSlot}
+          />
+        ))}
     </Box>
   );
 };

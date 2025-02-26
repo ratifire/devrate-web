@@ -38,7 +38,6 @@ const InterviewRequest = () => {
     { masteryId: specializations?.find((item) => item.id === mastery)?.mainMasteryId || '' },
     { skip: !mastery }
   );
-
   const addQueryParamToUrl = (mastery) => {
     const params = new URLSearchParams(window.location.search);
     mastery ? params.set('mastery', mastery) : params.delete('mastery');
