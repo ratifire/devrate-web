@@ -5,13 +5,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllScheduledInterviews: builder.query({
       query: ({ page, size }) => `/interviews?page=${page}&size=${size}`,
-      providesTags: (result) =>
-        result?.content
-          ? [
-              ...result.content.map(({ id }) => ({ type: TAG_TYPES.ScheduledInterview, id })),
-              { type: TAG_TYPES.ScheduledInterview, id: 'LIST' },
-            ]
-          : [{ type: TAG_TYPES.ScheduledInterview, id: 'LIST' }],
+      providesTags: [TAG_TYPES.ScheduledInterview],
 
       // Merge new data with existing data
       serializeQueryArgs: ({ endpointName, queryArgs }) => {

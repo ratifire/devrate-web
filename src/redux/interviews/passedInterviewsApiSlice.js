@@ -5,10 +5,7 @@ const passedInterviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllPassedInterviews: builder.query({
       query: ({ page, size }) => `/interview-histories?page=${page}&size=${size}`,
-      providesTags: (result) =>
-        result?.content
-          ? [...result.content.map(({ id }) => ({ type: TAG_TYPES.PassedInterview, id })), TAG_TYPES.PassedInterview]
-          : [TAG_TYPES.PassedInterview],
+      providesTags: [TAG_TYPES.PassedInterview],
 
       // Merge new data with existing data
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
