@@ -1,5 +1,5 @@
-import { TAG_TYPES } from '@utils/constants/tagTypes.js';
 import { apiSlice } from '@redux/api/apiSlice.js';
+import { TAG_TYPES } from '@utils/constants/tagTypes.js';
 
 export const skillsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
