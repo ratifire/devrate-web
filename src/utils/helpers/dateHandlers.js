@@ -65,3 +65,7 @@ export function convertMilliInYears(mSeconds) {
   const { MILLISECONDS_IN_YEAR } = datesConfig;
   return Math.floor(mSeconds / MILLISECONDS_IN_YEAR);
 }
+
+export const getLocaleFormattedDate = (date) => DateTime.fromISO(date).toFormat('d MMM', 'en');
+
+export const formattedTime = (dateTime) => DateTime.fromISO(dateTime).toFormat('HH:mm');

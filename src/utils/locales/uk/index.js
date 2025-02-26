@@ -731,7 +731,6 @@ export const uk = {
           joinMeeting: 'Доєднатись до інтерв’ю',
           notHappenedMeeting: 'Співбесіда не відбулася',
           leaveFeedbackMeeting: 'Залишити відгук',
-          languageType: 'Англійська',
           durationType: 'хв.',
         },
         interviewSkills: {
@@ -748,6 +747,11 @@ export const uk = {
           title: 'Статистика',
         },
       },
+    },
+    chat: {
+      search: 'Пошук',
+      emptyChatLstUsers: 'Ще немає чатів',
+      enterMessages: 'Напишіть повідомлення',
     },
   },
 };

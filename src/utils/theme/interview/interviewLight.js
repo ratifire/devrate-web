@@ -15,21 +15,21 @@ export const interviewLight = {
       color: '#303032',
     },
     lvl: {
-      junior: '#25CBFF',
-      middle: '#007CA3',
+      junior: '#007CA3',
+      middle: '#00855D',
       senior: '#D31772',
     },
   },
   scheduledMeeting: {
-    upcoming: '#25CBFF',
-    progress: '#DAFE22',
-    awaiting: '#FCA728',
-    link: '#CEB0FA',
+    upcoming: '#007CA3',
+    progress: '#D31772',
+    awaiting: '#EE7538',
+    link: '#5900D9',
   },
   interviewSkills: {
     leftCircle: '#8133F1',
-    rightCircle: '#FCA728',
-    skillsBox: '#3E3E40',
+    rightCircle: '#EE7538',
+    skillsBox: '#F8F8F8',
   },
   partEvalChart: {
     leftGrad1: '#FFC061',
@@ -38,12 +38,13 @@ export const interviewLight = {
     rightGrad1: '#B07AFD',
     rightGrad2: '#8133F1',
     rightGrad3: '#4A1D8B',
+    color: '#444446',
   },
   statisticChart: {
     softSkills: {
-      grad1: '#DAFE22',
-      grad2: '#82FE66',
-      grad3: '#16FFB9',
+      grad1: '#16FFB9',
+      grad2: '#0BC48C',
+      grad3: '#00855D',
     },
     hardSkills: {
       grad1: '#EE7538',

@@ -910,7 +910,6 @@ export const en = {
           joinMeeting: 'Join Interview',
           notHappenedMeeting: 'Interview did not happen',
           leaveFeedbackMeeting: 'Leave Feedback',
-          languageType: 'English',
           durationType: 'min.',
         },
       },
@@ -927,6 +926,11 @@ export const en = {
       statistic: {
         title: 'Statistic',
       },
+    },
+    chat: {
+      search: 'Search',
+      emptyChatLstUsers: 'No chats yet',
+      enterMessages: 'Enter message',
     },
     interviewRequest: {
       selectSpecializations: 'Specializations',
