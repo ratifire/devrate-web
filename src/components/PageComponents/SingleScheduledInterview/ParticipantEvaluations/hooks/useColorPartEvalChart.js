@@ -10,6 +10,7 @@ const useColorPartEvalChart = () => {
     rightGrad1: theme.palette.partEvalChart.rightGrad1,
     rightGrad2: theme.palette.partEvalChart.rightGrad2,
     rightGrad3: theme.palette.partEvalChart.rightGrad3,
+    color: theme.palette.partEvalChart.color,
   };
 };
 

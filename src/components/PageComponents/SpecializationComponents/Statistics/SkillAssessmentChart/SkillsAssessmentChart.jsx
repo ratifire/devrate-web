@@ -7,10 +7,11 @@ import {
   arithmeticAverageSkillValue,
   createTenDaysHistoryData,
   createTenMonthsHistoryData,
-  getCurrentAndLastMonths,
   useGetHistoryData,
   useHandleChange,
+  getCurrentAndLastMonths,
 } from '../utils';
+
 import { ChartDropDown } from '../../../../UI/Specialization/ChartDropDown';
 import { SkillsAssessmentChartSkeleton } from '../../../../UI/Skeleton';
 import useTooltipColorChart from '../../../../../utils/hooks/useTooltipColorChart.js';

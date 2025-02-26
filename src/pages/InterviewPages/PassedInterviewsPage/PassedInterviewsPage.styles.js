@@ -14,30 +14,23 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     gridGap: theme.spacing(4),
+    minHeight: 'calc(100vh - 100px)',
   }),
-  interviewSideBar: (theme) => ({
-    backgroundColor: theme.palette.pagesSections.backgroundColor,
-    backgroundImage: 'none',
+  box: (theme) => ({
     height: '100%',
-    boxShadow: 'none',
     flex: ' 0 0 354px',
-    borderRadius: theme.spacing(2),
     '@media (min-width: 1272px)': {
       flex: '0 0 354px',
     },
     '@media (min-width: 1920px)': {
       flex: '0 0 354px',
     },
-  }),
-
-  interview: (theme) => ({
-    backgroundColor: theme.palette.interviewPage.bgColor,
-    backgroundImage: 'none',
-    width: '100%',
-    minHeight: '100vh',
-    gridColumn: '6/21',
-    gridRow: '1/9',
-    gridGap: theme.spacing(4),
-    boxShadow: 'none',
+    ' > div': {
+      borderRadius: 2,
+      backgroundColor: theme.palette.pagesSections.backgroundColor,
+      backgroundImage: 'none',
+      boxShadow: 'none',
+      height: '100%',
+    },
   }),
 };

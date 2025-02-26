@@ -358,6 +358,9 @@ export const en = {
               second: 'or',
               third: ' download from your device',
             },
+            incorrectAvatar: 'This file can not be used as avatar',
+            failedLoad: 'Failed to load image',
+            imageSize: 'Image dimensions must be at least 98x98 pixels',
           },
           languages: {
             title: 'Languages',
@@ -432,7 +435,7 @@ export const en = {
       errorDeleteSpec: "You can't delete a specialisation",
       level: {
         title: 'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.',
+        description: 'Switch between levels to see your statistics relative to another level.',
       },
       interviewChartMonths: {
         '01': 'Jan',
@@ -466,10 +469,13 @@ export const en = {
       hardSkills: {
         title: 'Hard skills',
         averageMark: 'Average mark:',
+        emptySkills:
+          "You don't have any skills on your profile right now. Add them to upgrade yourself and track your progress",
       },
       softSkills: {
         title: 'Soft skills',
         averageMark: 'Average mark:',
+        emptySkills: 'Pass an interview to have users evaluate your Soft Skills',
       },
       modal: {
         specialization: {
@@ -878,7 +884,11 @@ export const en = {
       passedInterviews: {
         interviewersAssessmentTitle: "Interviewer's assessment",
         interviewInfoTitle: 'Interview info',
-        interviewInfoText: 'years ago',
+        interviewInfoYearAgo: 'year(s) ago',
+        interviewInfoMonthAgo: 'months ago',
+        interviewInfoWeekAgo: 'weeks ago',
+        interviewInfoDayAgo: 'days ago',
+        interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
         interviewInfoHost: 'Host',
         interviewFeedbackTitle: "Interviewee's feedback",
@@ -903,7 +913,6 @@ export const en = {
           joinMeeting: 'Join Interview',
           notHappenedMeeting: 'Interview did not happen',
           leaveFeedbackMeeting: 'Leave Feedback',
-          languageType: 'English',
           durationType: 'min.',
         },
       },
@@ -919,6 +928,61 @@ export const en = {
       },
       statistic: {
         title: 'Statistic',
+      },
+    },
+    chat: {
+      search: 'Search',
+      emptyChatLstUsers: 'No chats yet',
+      enterMessages: 'Enter message',
+    },
+    interviewRequest: {
+      selectSpecializations: 'Specializations',
+      role: {
+        candidate: 'Respondent',
+        interviewer: 'Interviewer',
+      },
+      requestHeader: {
+        foundInterviews: 'Interview found:',
+        totalInterviews: 'Number of interviews:',
+        selectedTimeSlots: 'Selected timeslots:',
+        interviewLanguage: 'Interview language:',
+      },
+      buttons: {
+        addTimeSlot: 'Аdd time slots',
+      },
+      timeSlot: {
+        status: {
+          status: 'Status:',
+          available: 'Pending',
+          assigned: 'Scheduled',
+        },
+        daysOfWeek: {
+          monday: 'Monday',
+          tuesday: 'Tuesday',
+          wednesday: 'Wednesday',
+          thursday: 'Thursday',
+          friday: 'Friday',
+          saturday: 'Saturday',
+          sunday: 'Sunday',
+        },
+      },
+      notifications: {
+        delete: {
+          oneTimeSlot: {
+            success: 'Deleted slot successfully',
+            error: 'Something went wrong',
+          },
+          allTimeSlots: {
+            success: 'Deleted all successfully',
+            error: 'Something went wrong',
+          },
+        },
+      },
+      deleteAllRequests: {
+        title: 'Delete request',
+        cancel: 'Cancel',
+        approve: 'Remove',
+        question: 'Are you sure you want to delete the {{mastery}} interview request as a {{role}}?',
       },
     },
   },
