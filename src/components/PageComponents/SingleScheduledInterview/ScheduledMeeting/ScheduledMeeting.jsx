@@ -12,7 +12,7 @@ import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/singleS
 import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { openModal } from '@redux/slices/modal/modalSlice.js';
-import zoom from '../../../../assets/icons/InterviewPageIcons/zoom.png';
+import zoom from '@assets/icons/InterviewPageIcons/zoom.png';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { getStatusByTime } from '../helpers';
 import { styles } from './ScheduledMeeting.styles';
