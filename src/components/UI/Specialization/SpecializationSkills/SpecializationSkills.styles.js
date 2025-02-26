@@ -16,10 +16,14 @@ export const styles = {
     maxWidth: '480px',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-between',
     gap: theme.spacing(3),
     padding: theme.spacing(4),
     backgroundColor: theme.palette.background.level2,
     borderRadius: 2,
+    '@media(min-width: 1536px)': {
+      maxWidth: '100%',
+    },
   }),
   title: (theme) => ({
     display: 'flex',
@@ -28,7 +32,6 @@ export const styles = {
     paddingBottom: theme.spacing(2),
   }),
   skillsContainer: (theme) => ({
-    maxHeight: '312px',
     overflowY: 'auto',
     paddingRight: '10px',
     '&::-webkit-scrollbar': {
@@ -43,11 +46,19 @@ export const styles = {
       backgroundColor: theme.palette.scroll.scrollEl,
     },
   }),
+  hardSkills: {
+    height: '22.9375rem',
+    '@media(min-width: 1536px)': {
+      height: '20.5625rem',
+    },
+  },
+  softSkills: {
+    height: '7.25rem',
+  },
   markWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 'auto',
     paddingRight: '10px',
   },
   mark: (theme) => ({

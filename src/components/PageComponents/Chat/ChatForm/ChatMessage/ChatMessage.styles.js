@@ -3,41 +3,48 @@ export const styles = {
     padding: '8px 16px',
     marginBottom: '16px',
   },
-  sender: {
-    backgroundColor: '#444446',
+  receiver: (theme) => ({
+    backgroundColor: theme.palette.chatMessage.receiver.backgroundColor,
     borderRadius: '0 16px 16px 16px',
-    maxWidth: '290px',
+    maxWidth: 'calc(100% - 28px)',
     marginRight: 'auto',
+    boxShadow: `inset 0 0 0 1px ${theme.palette.chatMessage.receiver.boxShadow}`,
     ' >.MuiTypography-body': {
-      color: '#ffffff',
+      color: theme.palette.chatMessage.receiver.text.color,
       wordWrap: 'break-word',
     },
     ' svg': {
       fontSize: '24px',
-      color: '#290064',
+      color: theme.palette.chatMessage.receiver.icon.color,
     },
     ' span': {
-      color: '#C5C5C6',
+      color: theme.palette.chatMessage.receiver.time.color,
     },
-  },
-  message: {
-    backgroundColor: '#CEB0FA',
+    '@media (min-width: 1272px)': {
+      maxWidth: 'calc(100% - 100px)',
+    },
+  }),
+  sender: (theme) => ({
+    backgroundColor: theme.palette.chatMessage.sender.backgroundColor,
     borderRadius: '16px 0 16px 16px',
-    maxWidth: '290px',
+    maxWidth: 'calc(100% - 28px)',
     marginLeft: 'auto',
     ' >.MuiTypography-body': {
-      color: '#1D1D1D',
+      color: theme.palette.chatMessage.sender.text.color,
       wordWrap: 'break-word',
     },
     ' svg': {
       fontSize: '24px',
-      color: '#290064',
+      color: theme.palette.chatMessage.sender.icon.color,
       marginLeft: '8px',
     },
     ' span': {
-      color: '#290064',
+      color: theme.palette.chatMessage.sender.time.color,
     },
-  },
+    '@media (min-width: 1272px)': {
+      maxWidth: 'calc(100% - 100px)',
+    },
+  }),
   footer: {
     display: 'flex',
     alignItems: 'center',

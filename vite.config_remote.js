@@ -9,8 +9,8 @@ export default defineConfig({
     port: 443,
     open: true,
     https: {
-      key: fs.readFileSync('/Users/alinamytsa/certs/dev.skillzzy.com-key.pem'), // path to your ssl certificate key
-      cert: fs.readFileSync('/Users/alinamytsa/certs/dev.skillzzy.com.pem'), // path to your ssl certificate key
+      key: fs.readFileSync('C:\\Windows\\System32\\dev.skillzzy.com+3-key.pem'),
+      cert: fs.readFileSync('C:\\Windows\\System32\\dev.skillzzy.com+3.pem'),
     },
   },
   build: {

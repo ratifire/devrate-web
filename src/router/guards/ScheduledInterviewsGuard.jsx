@@ -4,7 +4,7 @@ import { useGetAllScheduledInterviewsQuery } from '../../redux/interviews/schedu
 import navigationLinks from '../links';
 
 const ScheduledInterviewsGuard = () => {
-  const { data: scheduledInterviews } = useGetAllScheduledInterviewsQuery({ page: 1, size: 5 });
+  const { data: scheduledInterviews } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
   const navigate = useNavigate();
   const location = useLocation();
   const firstInterviewId = scheduledInterviews?.content[0]?.id;

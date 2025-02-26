@@ -31,6 +31,7 @@ import {
   ParticipantEvaluationsSkeleton,
   InterviewSkillsSkeleton,
 } from './Pages/scheduledInterviewSkeleton';
+import InterviewRequestSkeleton from './Pages/InterviewRequestSkeleton';
 
 import {
   StatisticsSkeleton,
@@ -70,4 +71,5 @@ export {
   ScheduledMeetingSkeleton,
   ParticipantEvaluationsSkeleton,
   InterviewSkillsSkeleton,
- };
+  InterviewRequestSkeleton,
+};

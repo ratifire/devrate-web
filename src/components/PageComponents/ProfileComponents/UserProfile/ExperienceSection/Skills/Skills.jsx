@@ -29,7 +29,6 @@ const Skills = ({ id, tab }) => {
     ...item,
     name: item.name.toLowerCase(),
   }));
-
   useEffect(() => {
     if (userAllSpecializations && userAllSpecializations.length > 0) {
       const mainSpecialization = userAllSpecializations.find((item) => item.mainSpecialization);

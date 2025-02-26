@@ -4,8 +4,12 @@ export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
     gap: theme.spacing(4),
+    '@media (max-width: 991px)': {
+      flexDirection: 'column',
+      gap: theme.spacing(3),
+    },
   }),
   specialization_left_box: {
     display: 'flex',
@@ -34,11 +38,17 @@ export const styles = {
   page_title: (theme) => ({
     marginBottom: theme.spacing(5),
     fontSize: 34,
+    '@media (max-width: 991px)': {
+      marginBottom: 0,
+    },
   }),
-  make_main_btn: {
-    minWidth: '216px',
-    padding: '12px 16px',
-    textTransform: 'none',
+  trackerWrapper: {
+    '@media (max-width: 991px)': {
+      display: 'none',
+    },
+    '@media (min-width: 992px)': {
+      display: 'block',
+    },
   },
   add_specialization_btn: (theme) => ({
     width: '134px',
