@@ -1,11 +1,14 @@
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '../../../../../redux/feedback/interviewApiSlice';
 import { FeedbackModalSchema } from '../../../../../utils/validationSchemas';
 import { closeModal, selectModalData } from '../../../../../redux/modal/modalSlice.js';
+import navigationLinks from '../../../../../router/links.js';
 
 const useFeedbackForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { feedbackId } = useSelector(selectModalData);
   const { data } = useGetInterviewByIdQuery({ id: feedbackId }, { skip: !feedbackId });
   const [createInterview, { isError, isLoading }] = useCreateInterviewMutation();
@@ -31,6 +34,7 @@ const useFeedbackForm = () => {
 
     if (!result.error) {
       dispatch(closeModal());
+      navigate(navigationLinks.interviews);
     }
   };
 
