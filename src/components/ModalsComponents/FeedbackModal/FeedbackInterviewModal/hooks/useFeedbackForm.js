@@ -22,8 +22,8 @@ const useFeedbackForm = () => {
 
   const onSubmit = async (values) => {
     const body = {
-      interviewFeedbackDetailId: feedbackId,
-      comment: values.comment,
+      interviewId: feedbackId,
+      feedback: values.comment,
       skills: values.skills.map(({ value, ...items }) => ({ mark: value, ...items })),
     };
 
