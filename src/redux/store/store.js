@@ -42,7 +42,7 @@ const modalPersistConfig = {
   whitelist: ['data', 'isOpen', 'modalType'],
 };
 
-const rootReducer = {
+export const rootReducer = {
   chat: chatSliceReducer,
   modal: persistReducer(modalPersistConfig, modalSliceReducer),
   modalStep: modalStepReducer,

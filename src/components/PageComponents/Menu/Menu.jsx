@@ -20,9 +20,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import { useLogoutMutation } from '../../../redux/auth/authApiSlice';
 import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackProjectModal';
-import { modalNames } from '../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../utils/hooks/useModalController.js';
-import { closeChat } from '../../../redux/chat/chatSlice.js';
+import { modalNames } from '../../../utils/constants/modalNames';
+import { useModalController } from '../../../utils/hooks/useModalController';
+import { closeChat } from '../../../redux/chat/chatSlice';
+import { store } from '../../../redux/store/store';
+import rootReducerWithReset from '../../../redux/store/rootReducerWithReset';
 import links from './profileRoutes';
 import styles from './Menu.styles';
 
@@ -30,12 +32,18 @@ const Menu = ({ isDrawerOpen, toggleDrawer, closeMenu }) => {
   const { t } = useTranslation();
   const feedbackProjectModal = useSelector((state) => state.modal.feedbackProjectModal);
   const { openModal } = useModalController();
-
   const [logout] = useLogoutMutation();
   const dispatch = useDispatch();
+
+  const handleClearAllState = () => {
+    store.replaceReducer(rootReducerWithReset);
+    dispatch({ type: 'RESET' });
+  };
+
   const logoutHandler = async () => {
     try {
       await logout().unwrap();
+      handleClearAllState();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log('Logout failed:', error);
