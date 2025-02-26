@@ -3,13 +3,12 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import {
   useDeleteAvatarUserMutation,
   useGetAvatarUserQuery,
   usePostAvatarUserMutation,
 } from '@redux/api/slices/user/avatar/avatarApiSlice';
-import { StepAvatarSchema } from '@utils/validationSchemas/index';
 import LoadImages from '@components/UI/LoadImages';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { StepAvatarSkeleton } from '@components/UI/Skeleton';
@@ -53,7 +52,6 @@ const StepAvatar = () => {
     initialValues: {
       avatar: avatarValue,
     },
-    validationSchema: StepAvatarSchema,
     onSubmit,
   });
 

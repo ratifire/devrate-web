@@ -1,9 +1,12 @@
-import { useHardSkillData } from '@utils/hooks/specialization';
-import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
-import { modalNames } from '@utils/constants/modalNames.js';
+import { useTranslation } from 'react-i18next';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import { useHardSkillData } from '@utils/hooks/specialization';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
 
 const HardSkills = () => {
+  const { t } = useTranslation();
+
   const { skills, isError, isFetching } = useHardSkillData();
   const { openModal } = useModalController();
 
@@ -19,8 +22,8 @@ const HardSkills = () => {
       isFetching={isFetching}
       openModal={handleModalOpen}
       skills={skills}
-      subTitle='specialization.hardSkills.averageMark'
-      title='specialization.hardSkills.title'
+      subTitle={t('specialization.hardSkills.averageMark')}
+      title={t('specialization.hardSkills.title')}
     />
   );
 };

@@ -3,7 +3,7 @@ import { Link, Link as RouterLink } from 'react-router';
 import { openModal } from '@redux/slices/modal/modalSlice';
 import { modalNames } from '@utils/constants/modalNames.js';
 import navigationsLinks from '@router/links';
-import Arrow from '@assets/iconArrow.svg?react';
+import Arrow from '../../assets/iconArrow.svg?react';
 import styles from './HeroSection.module.scss';
 
 const HeroSection = () => {

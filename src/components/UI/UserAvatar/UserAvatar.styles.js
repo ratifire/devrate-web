@@ -1,4 +1,12 @@
 export const styles = {
+  s: {
+    width: '40px',
+    height: '40px',
+    fontSize: 16,
+    lineHeight: '28px',
+    letterSpacing: '0.15px',
+    fontWeight: 400,
+  },
   sm: {
     width: '44px',
     height: '44px',
@@ -22,6 +30,13 @@ export const styles = {
     lineHeight: '56px',
     letterSpacing: '0px',
     fontWeight: 400,
+  },
+  xs: {
+    width: '24px',
+    height: '24px',
+    fontSize: 12,
+    fontWeight: 400,
+    letterSpacing: '0.15px',
   },
   circle: {
     borderRadius: 50,

@@ -20,6 +20,7 @@ import {
 } from '@pages/InterviewPages';
 import UserProfileGuard from './guards/UserProfileGuard.jsx';
 import navigationLinks from './links';
+import ScheduledInterviewsGuard from './guards/ScheduledInterviewsGuard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -65,16 +66,18 @@ const router = createBrowserRouter([
                 element: <InterviewRootPage />,
                 children: [
                   {
-                    index: true,
-                    element: <ScheduledInterviewsPage />,
-                  },
-                  {
-                    path: navigationLinks.scheduledInterviews,
-                    element: <ScheduledInterviewsPage />,
+                    path: navigationLinks.interviews,
+                    element: <ScheduledInterviewsGuard />,
                     children: [
                       {
-                        path: `${navigationLinks.scheduledInterviews}/:interviewId`,
-                        element: <SingleScheduledInterviewPage />,
+                        path: navigationLinks.scheduledInterviews,
+                        element: <ScheduledInterviewsPage />,
+                        children: [
+                          {
+                            path: `${navigationLinks.scheduledInterviews}/:interviewId`,
+                            element: <SingleScheduledInterviewPage />,
+                          },
+                        ],
                       },
                     ],
                   },

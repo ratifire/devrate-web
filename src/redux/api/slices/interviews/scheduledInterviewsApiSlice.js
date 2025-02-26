@@ -1,23 +1,28 @@
-import { apiSlice } from '@redux/api/apiSlice.js';
+import { TAG_TYPES } from '@utils/constants/tagTypes.js';
+import { apiSlice } from '@redux/api/apiSlice';
 
 const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['ScheduledInterview'],
   endpoints: (builder) => ({
     getAllScheduledInterviews: builder.query({
       query: ({ page, size }) => `/interviews?page=${page}&size=${size}`,
       providesTags: (result) =>
         result?.content
-          ? [...result.content.map(({ id }) => ({ type: 'ScheduledInterview', id })), 'ScheduledInterview']
-          : ['ScheduledInterviews'],
+          ? [
+              ...result.content.map(({ id }) => ({ type: TAG_TYPES.ScheduledInterview, id })),
+              { type: TAG_TYPES.ScheduledInterview, id: 'LIST' },
+            ]
+          : [{ type: TAG_TYPES.ScheduledInterview, id: 'LIST' }],
 
       // Merge new data with existing data
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         // Use a consistent key for the cache, ignoring `page` and `size`
         return `${endpointName}-${queryArgs.size}`;
       },
-      merge: (currentCache, newData) => {
+      merge: (currentCache, newData, { arg }) => {
         // Merge the `content` arrays from the current cache and new data
-        if (currentCache.content && newData.content) {
+        if (arg.page === 0) {
+          currentCache.content = newData.content;
+        } else {
           currentCache.content.push(...newData.content);
         }
       },

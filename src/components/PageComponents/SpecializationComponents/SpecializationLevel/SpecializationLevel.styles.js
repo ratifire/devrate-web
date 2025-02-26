@@ -3,13 +3,25 @@ export const styles = {
     padding: theme.spacing(4),
   }),
 
-  title: (theme) => ({
-    marginBottom: theme.spacing(2),
+  popupContainer: {
+    position: 'relative',
+  },
+
+  popupContent: (theme) => ({
+    padding: '12px 16px',
+    width: '16.75rem',
+    height: 'auto',
+    backgroundColor: theme.palette.specialization.level.btnGroup,
+    position: 'absolute',
+    bottom: '40px',
+    right: '7px',
   }),
 
-  description: (theme) => ({
-    marginBottom: theme.spacing(3),
-  }),
+  popupText: {
+    fontWeight: 400,
+    lineHeight: '166%',
+    letterSpacing: '0.03em',
+  },
 
   buttonGroup: (theme) => ({
     width: '100%',

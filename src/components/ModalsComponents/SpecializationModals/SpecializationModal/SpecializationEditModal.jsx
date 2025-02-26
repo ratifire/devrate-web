@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -12,23 +12,27 @@ import {
   useUpdateSpecializationByIdMutation,
 } from '@redux/api/slices/specialization/specializationApiSlice';
 import { useGetSpecializationListQuery } from '@redux/api/slices/specializationList/specializationListApiSlice';
-import { setActiveSpecialization } from '@redux/slices/specialization/specializationSlice.js';
+import { setActiveSpecialization } from '@redux/slices/specialization/specializationSlice';
 import useMergeState from '@utils/hooks/useMergeState';
 import { SpecializationModalSchema } from '@utils/validationSchemas/index';
-import { ButtonDef } from '@components/FormsComponents/Buttons';
-import { AdvancedFormSelector, FormSelect } from '@components/FormsComponents/Inputs';
-import { ErrorComponent } from '@components/UI/Exceptions';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import { useGetMastery } from '@utils/hooks/specialization/index.js';
+import { useGetInterviewRequestByMasteryIdQuery } from '@redux/api/slices/interviewRequestApiSlice.js';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationEditModal = () => {
   const [state, setState] = useMergeState({ specializationNameError: '' });
+  const [isInterviewList, setIsInterviewList] = useState(false);
   const { specializationNameError } = state;
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const { id: userId } = useSelector((state) => state.auth.user.data);
+  const { masteryId } = useGetMastery();
   const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
   const [updateSpecializationById, { isError: isErrorUpdateSpecialization, isLoading: isLoadingUpdateSpecialization }] =
     useUpdateSpecializationByIdMutation();
@@ -41,6 +45,13 @@ const SpecializationEditModal = () => {
     isError: isErrorGetSpecialization,
     isLoading: isLoadingGetSpecialization,
   } = useGetSpecializationListQuery('specialization-names.json');
+
+  const { data: interviewList } = useGetInterviewRequestByMasteryIdQuery(
+    {
+      masteryId,
+    },
+    { skip: !masteryId }
+  );
 
   const isLoading =
     isLoadingUpdateSpecialization || isLoadingGetMasteries || isLoadingSetNewMastery || isLoadingGetSpecialization;
@@ -56,7 +67,15 @@ const SpecializationEditModal = () => {
 
   const handleChangeMastery = (e) => {
     const value = e.target.value;
+    const mainMastery = modalData.mastery;
     formik.setFieldValue('mastery', value);
+    if (interviewList.length > 0) {
+      setIsInterviewList(true);
+    }
+
+    if (mainMastery === value) {
+      setIsInterviewList(false);
+    }
   };
   const handleChangeSpecialization = (value) => {
     const isSpecialization = mySpecialization.some((spec) => spec.name === value);
@@ -164,11 +183,14 @@ const SpecializationEditModal = () => {
           <Box sx={styles.mastery_input}>
             <FormSelect
               countries={['Junior', 'Middle', 'Senior']}
-              error={formik.touched.mastery && Boolean(formik.errors.mastery)}
+              error={(formik.touched.mastery && Boolean(formik.errors.mastery)) || isInterviewList}
               handleBlur={formik.handleBlur}
               handleChange={handleChangeMastery}
               helperDescription={t('specialization.modal.specialization.mastery_helper_text')}
-              helperText={formik.touched.mastery && formik.errors.mastery}
+              helperText={
+                (formik.touched.mastery && formik.errors.mastery) ||
+                (isInterviewList && t('specialization.modal.specializationEdit.error_message'))
+              }
               id='mastery'
               label={t('specialization.modal.specialization.mastery')}
               name='mastery'
@@ -177,7 +199,13 @@ const SpecializationEditModal = () => {
             />
           </Box>
           <ButtonDef
-            disabled={formik.isSubmitting || !formik.isValid || !formik.dirty || Boolean(specializationNameError)}
+            disabled={
+              formik.isSubmitting ||
+              !formik.isValid ||
+              !formik.dirty ||
+              Boolean(specializationNameError) ||
+              isInterviewList
+            }
             label={t('profile.modal.btn')}
             loading={isLoading}
             sx={styles.specializationBtn}

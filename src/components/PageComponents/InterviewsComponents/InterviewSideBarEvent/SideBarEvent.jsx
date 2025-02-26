@@ -1,30 +1,29 @@
-import { Link as RouterLink } from 'react-router';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router';
 import PropTypes from 'prop-types';
 import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { formatDateAndTime } from '@utils/helpers';
-// import LimeCircleIcon from '../../../../assets/icons/InterviewPageIcons/lime-ellipse.svg';
-// import OrangeCircleIcon from '../../../../assets/icons/InterviewPageIcons/orange-ellipse.svg';
-import { lvlMastery, lvlMasteryColor } from '@utils/constants/masteryLvl.js';
-import navigationLinks from '@router/links.js';
-import { styles } from './SideBarEvent.styles.js';
+import { lvlMastery } from '@utils/constants/masteryLvl';
+import navigationLinks from '@router/links';
+import { styles } from './SideBarEvent.styles';
 
-const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, selectedPaperId }) => {
+const SideBarEvent = ({ event, refHandler, passedInterview }) => {
   const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName } = event;
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { interviewId } = useParams();
+
+  const handleClick = (e) => {
+    if (e.target.tagName !== 'A') {
+      navigate(`${passedInterview ? navigationLinks.passedInterviews : navigationLinks.scheduledInterviews}/${id}`, {
+        state: { event },
+      });
+    }
+  };
 
   return (
-    <Link
-      component={RouterLink}
-      sx={styles.interviewLink}
-      to={`${passedInterview ? navigationLinks.passedInterviews : navigationLinks.scheduledInterviews}/${id}`}
-    >
-      <Paper
-        key={id}
-        ref={refHandler}
-        sx={selectedPaperId === id ? styles.border : styles.sideBarEventContainer}
-        onClick={() => handlePaperClick(id)}
-      >
+    <Box sx={styles.interviewLink} onClick={handleClick}>
+      <Paper key={id} ref={refHandler} sx={+interviewId === id ? styles.border : styles.sideBarEventContainer}>
         <Typography component='div' sx={styles.status} variant='subtitle2'>
           {/*//TODO should be implemented based on sockets or as a temporary solution via setTimeout. TBC with TL. */}
           {/*<>*/}
@@ -38,7 +37,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, se
           <Typography component='div' sx={styles.title} variant='h6'>
             {title}
           </Typography>
-          <Typography component='div' sx={{ color: lvlMasteryColor[masteryLevel] || 'inherit' }} variant='subtitle2'>
+          <Typography component='div' sx={styles[lvlMastery[masteryLevel]]} variant='subtitle2'>
             {lvlMastery[masteryLevel]}
           </Typography>
         </Box>
@@ -55,7 +54,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview, handlePaperClick, se
           </Link>
         </Typography>
       </Paper>
-    </Link>
+    </Box>
   );
 };
 

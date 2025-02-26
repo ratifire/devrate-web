@@ -6,30 +6,31 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { setActiveMastery } from '@redux/slices/specialization/activeMasterySlice.js';
 import {
   useGetSpecializationByUserIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
 } from '@redux/api/slices/specialization/specializationApiSlice';
-import { setActiveSpecialization, setMainSpecializations } from '@redux/slices/specialization/specializationSlice.js';
-import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { setActiveSpecialization, setMainSpecializations } from '@redux/slices/specialization/specializationSlice';
 import CustomTooltip from '@components/UI/CustomTooltip';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import DropdownMenu from '@components/PageComponents/ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
 import { CategoriesSkeleton } from '@components/UI/Skeleton';
 import { modalNames } from '@utils/constants/modalNames';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import { setActiveMastery } from '@redux/slices/specialization/activeMasterySlice.js';
+import InterviewTracker from '../InterviewTracker/index.js';
 import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState({});
-  const { enqueueSnackbar } = useSnackbar();
   const { id } = useSelector((state) => state.auth.user.data);
-  const { activeSpecialization } = useSelector((state) => state.specialization);
+  const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
+  const activeSpec = activeSpecialization || mainSpecialization;
 
   const {
     data: specializations,
@@ -45,7 +46,7 @@ const SpecializationCategories = () => {
 
   const isLoading = isFetchingGetSpecialization || isLoadingGetMainMastery || isLoadingUpdateSpecialization;
   const isError = isErrorGetSpecialization || isErrorGetMainMastery || isErrorUpdateSpecialization;
-  const specializationsSorted = specializations?.toSorted((a, b) => (a.main === b.main ? 0 : a.main ? 1 : -1));
+  const specializationsSorted = specializations?.toSorted((a, b) => b.main - a.main);
   const { openModal } = useModalController();
 
   useEffect(() => {
@@ -62,7 +63,7 @@ const SpecializationCategories = () => {
         [specialization.id]: data,
       }));
     });
-  }, [specializations, activeSpecialization]);
+  }, [specializations]);
 
   const handlerChangeSpecialization = (specialization) => {
     if (masteryData[specialization.id]) {
@@ -74,13 +75,12 @@ const SpecializationCategories = () => {
       }
     }
   };
-
   const handlerAddSpecializations = () => {
     if (specializations?.length >= 4) return;
     openModal(modalNames.specializationModal);
   };
 
-  const handlerChangeMainSpecialization = async () => {
+  const handleMakeMainFeature = async (id) => {
     try {
       if (specializations?.length === 0 || !activeSpecialization) return;
       await updateSpecializationAsMainById(
@@ -95,27 +95,28 @@ const SpecializationCategories = () => {
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.specialization.change.error'), { variant: 'error' });
     }
-  };
-
-  const handleOpenConfirmDeleteSpecializationModal = (id, specialization) => {
-    openModal(modalNames.confirmDeleteSpecialization, { id, specialization });
-    handleCloseMenu(id);
-  };
-
-  const handleCloseMenu = (id) => {
     setAnchorEl((prev) => ({
       ...prev,
       [id]: null,
     }));
   };
 
+  const handleOpenConfirmDeleteSpecializationModal = (id, specialization) => {
+    openModal(modalNames.confirmDeleteSpecialization, { id, specialization });
+    handleCloseMenu(id);
+  };
+  const handleCloseMenu = (id) => {
+    setAnchorEl((prev) => ({
+      ...prev,
+      [id]: null,
+    }));
+  };
   const handleMenuOpen = (event, id) => {
     setAnchorEl((prev) => ({
       ...prev,
       [id]: event.currentTarget,
     }));
   };
-
   const handleEditFeature = ({ id, name, mastery }) => {
     openModal(modalNames.specializationEditModal, { id, name, mastery });
     handleCloseMenu(id);
@@ -135,14 +136,9 @@ const SpecializationCategories = () => {
         <Typography sx={styles.page_title} variant='h5'>
           {t('specialization.specialization_title')}
         </Typography>
-        <ButtonDef
-          disabled={specializations?.length === 0}
-          label={t('specialization.specialization_btn_make_main')}
-          sx={styles.make_main_btn}
-          type='button'
-          variant='outlined'
-          onClick={handlerChangeMainSpecialization}
-        />
+        <Box sx={styles.trackerWrapper}>
+          <InterviewTracker />
+        </Box>
       </Box>
       <Box sx={styles.specialization_right_box}>
         {specializations?.length < 4 && (
@@ -153,7 +149,7 @@ const SpecializationCategories = () => {
         {specializationsSorted?.map(({ id, name, main }) => (
           <Box
             key={id}
-            className={`figure ${activeSpecialization?.id === id ? 'active' : ''}`}
+            className={`figure ${activeSpec?.id === id ? 'active' : ''}`}
             sx={styles.figure}
             onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
           >
@@ -189,6 +185,7 @@ const SpecializationCategories = () => {
                 handleCloseMenu={() => handleCloseMenu(id)}
                 handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
                 handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
+                handleMainFeature={() => handleMakeMainFeature(id)}
               />
             </Box>
           </Box>

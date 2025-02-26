@@ -1,10 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import { useGetSoftSkillsQuery } from '@redux/api/slices/specialization/specializationApiSlice';
-import { modalNames } from '@utils/constants/modalNames.js';
-import { useModalController } from '@utils/hooks/useModalController.js';
 import { useGetMastery } from '@utils/hooks/specialization';
 import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 
 const SoftSkills = () => {
+  const { t } = useTranslation();
+
   const { openModal } = useModalController();
 
   const { isFetching: isFetchingMastery, isError: isErrorMastery, masteryId } = useGetMastery();
@@ -32,8 +35,8 @@ const SoftSkills = () => {
       isFetching={isFetching}
       openModal={handleModalOpen}
       skills={skills}
-      subTitle='specialization.hardSkills.averageMark'
-      title='specialization.softSkills.title'
+      subTitle={t('specialization.softSkills.averageMark')}
+      title={t('specialization.softSkills.title')}
     />
   );
 };

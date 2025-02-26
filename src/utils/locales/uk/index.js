@@ -346,6 +346,9 @@ export const uk = {
               second: 'або',
               third: ' завантажити зі свого пристрою',
             },
+            incorrectAvatar: 'Некоректний формат фото',
+            failedLoad: 'Не вдалося завантажити фото',
+            imageSize: 'Розміри зображення повинні бути не менше 98x98 пікселів',
           },
           languages: {
             title: 'Мови',
@@ -695,6 +698,60 @@ export const uk = {
           statusAwaitingFeedback: 'Очікується відгук',
         },
       },
+      passedInterviews: {
+        interviewersAssessmentTitle: 'Оцінки співбесідника',
+        interviewInfoTitle: 'Інформація про співбесіду',
+        interviewInfoYearAgo: 'рік(ів) тому назад',
+        interviewInfoMonthAgo: 'місяць(місяців) тому назад',
+        interviewInfoWeekAgo: 'тиждень(ів) тому назад',
+        interviewInfoDayAgo: 'день(днів) тому назад',
+        interviewInfoToday: 'Пройдено сьогодні',
+        interviewInfoRole: 'Ваша роль',
+        interviewInfoHost: 'Хост',
+        interviewFeedbackTitle: 'Відгук співбесідника',
+        interviewFeedbackReadLess: 'Читати менше',
+        interviewFeedbackReadMore: 'Читати більше',
+        interviewStatisticsHardSkills: 'Hard Skills',
+        interviewStatisticsSoftSkills: 'Soft Skills',
+        interviewStatisticsOverall: 'Over All',
+      },
+    },
+    singleScheduledInterview: {
+      interviewsSummary: {
+        scheduledMeeting: {
+          title: 'Запланована зустріч',
+          participants: 'Учасники',
+          language: 'Мова',
+          duration: 'Тривалість',
+          platform: 'Платформа',
+          link:
+            'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
+            ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
+          canceledMeeting: 'Скасувати зустріч',
+          joinMeeting: 'Доєднатись до інтерв’ю',
+          notHappenedMeeting: 'Співбесіда не відбулася',
+          leaveFeedbackMeeting: 'Залишити відгук',
+          durationType: 'хв.',
+        },
+        interviewSkills: {
+          skills: 'Навички',
+        },
+        userCardScheduledInterview: {
+          btn: 'Написати повідомлення',
+          interviewLvl: 'Рівень співбесіди:',
+        },
+        participantEvaluations: {
+          title: 'Оцінка учасників',
+        },
+        statistic: {
+          title: 'Статистика',
+        },
+      },
+    },
+    chat: {
+      search: 'Пошук',
+      emptyChatLstUsers: 'Ще немає чатів',
+      enterMessages: 'Напишіть повідомлення',
     },
   },
 };

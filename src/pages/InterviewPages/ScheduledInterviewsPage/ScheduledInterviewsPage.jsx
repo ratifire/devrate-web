@@ -1,17 +1,23 @@
 import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
-import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import InterviewsSkeleton from '@components/UI/Skeleton/Pages/InterviewsSkeleton';
-import { styles } from './ScheduledInterviewsPage.styles.js';
+import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
+import { styles } from './ScheduledInterviewsPage.styles';
 
 const SideBar = lazy(() => import('@components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar.jsx'));
 
 const MemoizedSideBar = memo(SideBar);
 
+const options = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 1.0,
+};
+
 const ScheduledInterviewsPage = () => {
-  const [page, setPage] = useState(1);
-  const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 5 });
+  const [page, setPage] = useState(0);
+  const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 6 });
   const [lastEventRef, setLastEventRef] = useState(null);
 
   const refHandler = (el) => {
@@ -27,12 +33,6 @@ const ScheduledInterviewsPage = () => {
     },
     [isFetching, isLoading, scheduledInterviews?.totalPages, page]
   );
-
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 1.0,
-  };
 
   useEffect(() => {
     if (!lastEventRef) return;
@@ -51,11 +51,13 @@ const ScheduledInterviewsPage = () => {
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
-        <Paper sx={styles.interviewSideBar}>
-          <Suspense fallback={<InterviewsSkeleton />}>
-            <MemoizedSideBar interviews={scheduledInterviews?.content} refHandler={refHandler} />
-          </Suspense>
-        </Paper>
+        <Box sx={styles.box}>
+          <Paper>
+            <Suspense fallback={<InterviewsSkeleton />}>
+              <MemoizedSideBar interviews={scheduledInterviews?.content} refHandler={refHandler} />
+            </Suspense>
+          </Paper>
+        </Box>
         <Outlet />
       </Box>
     </Container>

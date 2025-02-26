@@ -13,9 +13,9 @@ import {
   useUpdateInterviewRequestMutation,
 } from '@redux/api/slices/specialization/specializationApiSlice';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
-import { getDatesInWeek } from '@utils/helpers/getWeekDates';
+import { getDatesInWeek } from '@utils/helpers/dateHandlers.js';
 import { useGetMastery } from '@utils/hooks/specialization';
-import { getUserUTC } from '@utils/helpers';
+import { getUserUTC } from '@utils/helpers/index.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { styles } from './ScheduleInterviewModal.styles';

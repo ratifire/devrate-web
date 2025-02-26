@@ -358,6 +358,9 @@ export const en = {
               second: 'or',
               third: ' download from your device',
             },
+            incorrectAvatar: 'This file can not be used as avatar',
+            failedLoad: 'Failed to load image',
+            imageSize: 'Image dimensions must be at least 98x98 pixels',
           },
           languages: {
             title: 'Languages',
@@ -457,6 +460,7 @@ export const en = {
         interview_chart_days: '10 days',
         interview_chart_months: 'Months',
         skills_assessment_chart_title: 'Average skill assessment',
+        levelUp: 'Based on the results, we recommend that you move to the next level!',
       },
       interviewsChart: {
         conducted: 'Conducted',
@@ -468,6 +472,7 @@ export const en = {
       },
       softSkills: {
         title: 'Soft skills',
+        averageMark: 'Average mark:',
       },
       modal: {
         specialization: {
@@ -510,6 +515,9 @@ export const en = {
           skill_long: 'Company too long',
           skill_short: 'Company too short',
         },
+        specializationEdit: {
+          error_message: 'First, complete all open interviews at carrent level!',
+        },
         confirmSpecializationDelete: {
           title: 'Remove specialization',
           text1: 'Are you sure you want to delete the specialization',
@@ -542,6 +550,7 @@ export const en = {
     dropDownMenu: {
       delete: 'Delete',
       edit: 'Edit',
+      main: 'Make main',
     },
     schedule: {
       deleteEventSuccessMessage: 'Event was deleted',
@@ -869,6 +878,59 @@ export const en = {
           statusAwaitingFeedback: 'Awaiting Feedback',
         },
       },
+      passedInterviews: {
+        interviewersAssessmentTitle: "Interviewer's assessment",
+        interviewInfoTitle: 'Interview info',
+        interviewInfoYearAgo: 'year(s) ago',
+        interviewInfoMonthAgo: 'months ago',
+        interviewInfoWeekAgo: 'weeks ago',
+        interviewInfoDayAgo: 'days ago',
+        interviewInfoToday: 'Passed today',
+        interviewInfoRole: 'Your role',
+        interviewInfoHost: 'Host',
+        interviewFeedbackTitle: "Interviewee's feedback",
+        interviewFeedbackReadLess: 'Read more',
+        interviewFeedbackReadMore: 'Read less',
+        interviewStatisticsTitle: 'Statistics',
+        interviewStatisticsHardSkills: 'Hard Skills',
+        interviewStatisticsSoftSkills: 'Soft Skills',
+        interviewStatisticsOverall: 'Over All',
+      },
+    },
+    singleScheduledInterview: {
+      interviewsSummary: {
+        scheduledMeeting: {
+          title: 'Scheduled Meeting',
+          participants: 'Participants',
+          language: 'Language',
+          duration: 'Duration',
+          platform: 'Platform',
+          link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
+          canceledMeeting: 'Cancel Meeting',
+          joinMeeting: 'Join Interview',
+          notHappenedMeeting: 'Interview did not happen',
+          leaveFeedbackMeeting: 'Leave Feedback',
+          durationType: 'min.',
+        },
+      },
+      interviewSkills: {
+        skills: 'Skills',
+      },
+      userCardScheduledInterview: {
+        btn: 'Write a message',
+        interviewLvl: 'Interview level:',
+      },
+      participantEvaluations: {
+        title: 'Participant evaluations',
+      },
+      statistic: {
+        title: 'Statistic',
+      },
+    },
+    chat: {
+      search: 'Search',
+      emptyChatLstUsers: 'No chats yet',
+      enterMessages: 'Enter message',
     },
   },
 };

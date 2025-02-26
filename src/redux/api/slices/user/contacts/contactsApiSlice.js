@@ -2,7 +2,6 @@ import { apiSlice } from '@redux/api/apiSlice.js';
 import { TAG_TYPES } from '@utils/constants/tagTypes.js';
 
 export const userApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['ContactList'],
   endpoints: (builder) => ({
     postContactsUser: builder.mutation({
       query: ({ userId, body }) => ({

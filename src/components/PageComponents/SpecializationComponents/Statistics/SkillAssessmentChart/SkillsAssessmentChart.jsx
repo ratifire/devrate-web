@@ -5,6 +5,7 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { ChartDropDown } from '@components/UI/Specialization/ChartDropDown';
 import { SkillsAssessmentChartSkeleton } from '@components/UI/Skeleton';
+import useTooltipColorChart from '@utils/hooks/useTooltipColorChart.js';
 import {
   arithmeticAverageSkillValue,
   createTenDaysHistoryData,
@@ -12,7 +13,6 @@ import {
   getCurrentAndLastMonths,
   useGetHistoryData,
   useHandleChange,
-  useTooltip,
 } from '../utils';
 import { styles } from './SkillsAssessmentChart.styles';
 import useSkillsAssessmentChart from './useSkillsAssessmentChart';
@@ -21,7 +21,7 @@ const SkillsAssessmentChart = () => {
   const { to, from } = useMemo(() => getCurrentAndLastMonths(), []);
   const { data: dataHistory, isError, isFetching } = useGetHistoryData({ to, from });
   const { t } = useTranslation();
-  const { itemStyle, contentStyle } = useTooltip();
+  const { itemStyle, contentStyle } = useTooltipColorChart();
   const arithmeticAverage = arithmeticAverageSkillValue({
     data: dataHistory,
     secondValue: 'hardSkillMark',

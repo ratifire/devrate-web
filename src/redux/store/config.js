@@ -2,6 +2,7 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
+import session from 'redux-persist/lib/storage/session';
 import { persistReducer, persistStore } from 'redux-persist';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants';
 import buttonReducer from '@redux/slices/addButton/addButtonSlice.js';
@@ -35,9 +36,15 @@ const themePersistConfig = {
   whitelist: ['mode'],
 };
 
+const modalPersistConfig = {
+  key: 'modal',
+  storage: session,
+  whitelist: ['data', 'isOpen', 'modalType'],
+};
+
 const rootReducer = {
   chat: chatSliceReducer,
-  modal: modalSliceReducer,
+  modal: persistReducer(modalPersistConfig, modalSliceReducer),
   modalStep: modalStepReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   specialization: specializationSliceReducer,
@@ -52,6 +59,7 @@ const rootReducer = {
 
 const store = configureStore({
   reducer: rootReducer,
+
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

@@ -16,6 +16,9 @@ export default defineConfig({
   build: {
     outDir: 'build',
   },
+  define: {
+    global: 'globalThis',
+  },
   plugins: [react(), svgr()],
   resolve: {
     alias: {

@@ -6,7 +6,7 @@ import { PUBLIC_ENDPOINTS_ARRAY } from '@utils/constants/publicEndpoints.js';
 import { getTokenInHeaders } from '@utils/helpers/index.js';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_URL,
+  baseUrl: import.meta.env.VITE_API_DEV_URL || import.meta.env.VITE_API_URL,
   prepareHeaders: (headers, { getState, endpoint }) => {
     if (PUBLIC_ENDPOINTS_ARRAY.includes(endpoint)) return;
 
@@ -21,6 +21,12 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   const result = await baseQuery(args, api, extraOptions);
+
+  if (result.error && result.error.status === 401) {
+    api.dispatch(logOut());
+    api.dispatch(clearTokens());
+    return result;
+  }
 
   if (result.error && result.error.status === 498) {
     try {

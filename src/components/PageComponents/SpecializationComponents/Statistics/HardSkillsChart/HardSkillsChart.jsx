@@ -4,12 +4,13 @@ import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip 
 import useHardSkillData from '@utils/hooks/specialization/useHardSkillData';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import HardSkillsChartSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/HardSkillsChartSkeleton';
-import { roundData, useTooltip } from '../utils';
+import useTooltipColorChart from '@utils/hooks/useTooltipColorChart.js';
+import { roundData } from '../utils';
 import { styles } from './HardSkillsChart.styles.js';
 import useThemeHardSkillsChart from './useThemeHardSkillsChart';
 
 const HardSkillsChart = () => {
-  const { itemStyle, contentStyle } = useTooltip();
+  const { itemStyle, contentStyle } = useTooltipColorChart();
   const { skills, isFetching, isError } = useHardSkillData();
   const { t } = useTranslation();
   const { grad1, grad2 } = useThemeHardSkillsChart();
@@ -25,13 +26,21 @@ const HardSkillsChart = () => {
 
   return (
     <Box sx={styles.hardSkillsChartContainer}>
-      <Typography sx={styles.title} variant='subtitle2'>
-        {t('specialization.statistics.hard_skills_chart_title')}
-      </Typography>
-      <Typography sx={styles.text} variant='subtitle3'>
-        {t('specialization.statistics.hard_skills_chart_text')}
-      </Typography>
-      <RadarChart data={roundedSkills} height={264} outerRadius={130} width={264}>
+      <Box sx={styles.contentWrapper}>
+        <Typography sx={styles.title} variant='subtitle2'>
+          {t('specialization.statistics.hard_skills_chart_title')}
+        </Typography>
+        <Typography sx={styles.text} variant='subtitle3'>
+          {t('specialization.statistics.hard_skills_chart_text')}
+        </Typography>
+      </Box>
+      <RadarChart
+        data={roundedSkills}
+        height={264}
+        outerRadius={130}
+        style={{ height: 'auto', width: 'auto', padding: '10px' }}
+        width={264}
+      >
         <PolarGrid />
         <PolarAngleAxis dataKey='name' tick={false} />
         {!!roundedSkills.length && <PolarRadiusAxis angle={30} axisLine={false} domain={[0, 10]} tick={false} />}

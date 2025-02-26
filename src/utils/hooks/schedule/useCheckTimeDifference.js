@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { checkTimeDifference } from '../../helpers/checkTimeDifference.js';
+import { checkTimeDifference } from '../../helpers/dateHandlers.js';
 
 const useCheckTimeDifference = (startTime) => {
   const [showCancelButton, setShowCancelButton] = useState(true);
