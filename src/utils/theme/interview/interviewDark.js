@@ -84,4 +84,12 @@ export const interviewDark = {
       grad3: '#FCA728',
     },
   },
+  infoIcon: {
+    color: '#C5C5C6',
+    backgroundColor: 'transparent',
+    hover: {
+      color: '#B78AF7',
+      backgroundColor: 'transparent',
+    },
+  },
 };

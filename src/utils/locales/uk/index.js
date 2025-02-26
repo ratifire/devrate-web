@@ -503,7 +503,6 @@ export const uk = {
         endTime: 'Час закінчення',
         socialLinks: 'Додати посилання на соцмережі',
         schedule: 'Запланувати',
-        scheduleInterview: "Запланувати інтерв'ю",
       },
     },
     language: {
@@ -707,6 +706,22 @@ export const uk = {
         interviewStatisticsHardSkills: 'Hard Skills',
         interviewStatisticsSoftSkills: 'Soft Skills',
         interviewStatisticsOverall: 'Over All',
+      },
+      scheduleInterviewModal: {
+        title: 'Запланувати співбесіду',
+        scheduleBtn: 'Запланувати',
+        specializationInputTitle: 'Спеціалізація',
+        languageInputTitle: 'Мова',
+        interviewCountTooltip:
+          'Виберіть максимальну кількість інтерв’ю, які можна призначити для обраних таймслотів. Цей параметр дозволяє обмежити кількість інтерв’ю в межах ваших часових можливостей',
+        interviewCountTitle: "Кількість інтерв'ю для обраних таймслотів",
+        commentTitle: 'Коментар',
+        commentPlaceholder: 'Опишіть, що ви очікуєте від інтерв’ю',
+        required: "Це обов'язкове поле",
+        comment_min: 'Коментар має бути більше 5 символів',
+        comment_max: 'Коментар має бути менше 100 символів',
+        interviewCount_min: 'Вибери хоча б 1 таймслот',
+        interviewCount_max: 'Перестарався. Забагато вибрано',
       },
     },
     singleScheduledInterview: {
