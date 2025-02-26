@@ -935,5 +935,55 @@ export const en = {
       emptyChatLstUsers: 'No chats yet',
       enterMessages: 'Enter message',
     },
+    interviewRequest: {
+      selectSpecializations: 'Specializations',
+      role: {
+        candidate: 'Respondent',
+        interviewer: 'Interviewer',
+      },
+      requestHeader: {
+        foundInterviews: 'Interview found:',
+        totalInterviews: 'Number of interviews:',
+        selectedTimeSlots: 'Selected timeslots:',
+        interviewLanguage: 'Interview language:',
+      },
+      buttons: {
+        addTimeSlot: 'Аdd time slots',
+      },
+      timeSlot: {
+        status: {
+          status: 'Status:',
+          available: 'Pending',
+          assigned: 'Scheduled',
+        },
+        daysOfWeek: {
+          monday: 'Monday',
+          tuesday: 'Tuesday',
+          wednesday: 'Wednesday',
+          thursday: 'Thursday',
+          friday: 'Friday',
+          saturday: 'Saturday',
+          sunday: 'Sunday',
+        },
+      },
+      notifications: {
+        delete: {
+          oneTimeSlot: {
+            success: 'Deleted slot successfully',
+            error: 'Something went wrong',
+          },
+          allTimeSlots: {
+            success: 'Deleted all successfully',
+            error: 'Something went wrong',
+          },
+        },
+      },
+      deleteAllRequests: {
+        title: 'Delete request',
+        cancel: 'Cancel',
+        approve: 'Remove',
+        question: 'Are you sure you want to delete the {{mastery}} interview request as a {{role}}?',
+      },
+    },
   },
 };
