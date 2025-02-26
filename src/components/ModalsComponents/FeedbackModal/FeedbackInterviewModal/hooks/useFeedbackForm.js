@@ -18,7 +18,7 @@ const useFeedbackForm = () => {
   const [createInterview, { isError, isLoading }] = useCreateInterviewMutation();
   const {
     interviewStartTime,
-    participant: { name, status, surname },
+    participant: { name, surname, role, specializationName, masteryLevel },
     skills,
   } = data;
 
@@ -60,8 +60,10 @@ const useFeedbackForm = () => {
     isLoading,
     name,
     surname,
-    status,
     interviewStartTime,
+    role,
+    specializationName,
+    masteryLevel,
   };
 };
 

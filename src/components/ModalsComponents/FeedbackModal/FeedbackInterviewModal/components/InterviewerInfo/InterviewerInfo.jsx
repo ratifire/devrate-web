@@ -6,14 +6,14 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { styles } from './InterviewerInfo.styles';
 
-const InterviewerInfo = memo(({ name, position, date, time }) => {
+const InterviewerInfo = memo(({ name, position, date, time, role }) => {
   const { t } = useTranslation();
 
   return (
     <Box sx={styles.container}>
       <Box sx={styles.box}>
         <Typography variant='subtitle2'>
-          {t('modal.interview.interviewer')}: {name}
+          {t(`modal.interview.${role}`)}: {name}
         </Typography>
         <Typography variant='caption2'>{position}</Typography>
       </Box>
@@ -38,6 +38,7 @@ InterviewerInfo.propTypes = {
   position: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default InterviewerInfo;
