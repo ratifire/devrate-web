@@ -1,8 +1,7 @@
 import { Box, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import zoom from '@assets/icons/InterviewPageIcons/zoom.png';
+import { useDispatch, useSelector } from 'react-redux';
 import UserAvatar from '@components/UI/UserAvatar';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
@@ -11,6 +10,9 @@ import { ScheduledMeetingSkeleton } from '@components/UI/Skeleton';
 import { formatTimeToUtc, formatTimeWithOffset } from '@utils/helpers';
 import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
 import navigationLinks from '@router/links.js';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { openModal } from '@redux/slices/modal/modalSlice.js';
+import zoom from '../../../../assets/icons/InterviewPageIcons/zoom.png';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { getStatusByTime } from '../helpers';
 import { styles } from './ScheduledMeeting.styles';
@@ -22,9 +24,19 @@ const ScheduledMeeting = () => {
   const {
     data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const { hostFirstName, hostLastName, hostId, startTime, languageCode, id: eventId, roomUrl } = location.state.event;
+  const {
+    hostFirstName,
+    hostLastName,
+    hostId,
+    startTime,
+    languageCode,
+    id: eventId,
+    roomUrl,
+    role,
+  } = location.state.event;
 
   const {
     data: hostAvatar,
@@ -49,6 +61,10 @@ const ScheduledMeeting = () => {
   const handleClickRightBtn = () => {
     if (status === btnStatus['UPCOMING'] || status === btnStatus['IN PROCESS']) {
       window.open(roomUrl, '_blank');
+    }
+
+    if (status === btnStatus['AWAITING FEEDBACK']) {
+      dispatch(openModal({ modalType: modalNames.feedbackInterviewModal, data: { feedbackId: eventId, role } }));
     }
   };
 

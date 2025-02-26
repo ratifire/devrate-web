@@ -4,11 +4,8 @@ import { selectModalData } from '@redux/slices/modal/modalSlice.js';
 import { RoleBasedFeedbackModal } from './components';
 
 const FeedbackInterviewModal = () => {
-  const modalData = useSelector(selectModalData);
-  const { data, isError, isFetching } = useGetInterviewByIdQuery(
-    { id: modalData?.feedbackId },
-    { skip: !modalData?.feedbackId }
-  );
+  const { feedbackId } = useSelector(selectModalData);
+  const { data, isError, isFetching } = useGetInterviewByIdQuery({ id: feedbackId }, { skip: !feedbackId });
 
   const role = data?.participant?.role || '';
 

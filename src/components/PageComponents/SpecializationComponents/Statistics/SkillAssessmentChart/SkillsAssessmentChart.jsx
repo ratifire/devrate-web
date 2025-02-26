@@ -6,13 +6,14 @@ import { ErrorComponent } from '@components/UI/Exceptions';
 import { ChartDropDown } from '@components/UI/Specialization/ChartDropDown';
 import { SkillsAssessmentChartSkeleton } from '@components/UI/Skeleton';
 import useTooltipColorChart from '@utils/hooks/useTooltipColorChart.js';
+
 import {
   arithmeticAverageSkillValue,
   createTenDaysHistoryData,
   createTenMonthsHistoryData,
-  getCurrentAndLastMonths,
   useGetHistoryData,
   useHandleChange,
+  getCurrentAndLastMonths,
 } from '../utils';
 import { styles } from './SkillsAssessmentChart.styles';
 import useSkillsAssessmentChart from './useSkillsAssessmentChart';

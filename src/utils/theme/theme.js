@@ -3,6 +3,7 @@ import { specializationDark, specializationLight } from './specialization';
 import { scheduleDark, scheduleLight } from './schedule';
 import { interviewDark, interviewLight } from './interview';
 import { chatDark, chatLight } from './chat';
+import { interviewRequestLight, interviewRequestDark } from './interviewRequest/index.js';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -627,12 +628,14 @@ const getDesignTokens = (mode) => ({
           ...scheduleDark,
           ...interviewDark,
           ...chatDark,
+          ...interviewRequestDark,
         }
       : {
           ...specializationLight,
           ...scheduleLight,
           ...interviewLight,
           ...chatLight,
+          ...interviewRequestLight,
           faq: {
             title: '#1D1D1D',
             questions: {

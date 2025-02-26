@@ -3,7 +3,8 @@ import createTenDaysHistoryData from './helpers/createTenDaysHistoryData';
 import createTenDaysInterviewData from './helpers/createTenDaysInterviewData';
 import createTenMonthsHistoryData from './helpers/createTenMonthsHistoryData';
 import createTenMonthsInterviewData from './helpers/createTenMonthsInterviewData';
-import getCurrentAndLastMonths from './helpers/getCurrentAndLastMonths';
+import { getCurrentAndLastMonths } from './helpers/getCurrentAndLastMonths';
+import { getCurrentAndLastMonthsHistory } from './helpers/getCurrentAndLastMonths';
 import getLevel from './helpers/getLevel';
 import useGetHistoryData from './hooks/useGetHistoryData';
 import useHandleChange from './hooks/useHandleChange';
@@ -16,6 +17,7 @@ export {
   createTenMonthsHistoryData,
   createTenMonthsInterviewData,
   getCurrentAndLastMonths,
+  getCurrentAndLastMonthsHistory,
   getLevel,
   useGetHistoryData,
   useHandleChange,

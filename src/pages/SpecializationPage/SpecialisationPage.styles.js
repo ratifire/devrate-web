@@ -1,13 +1,13 @@
 export const styles = {
   container: (theme) => ({
-    paddingTop: theme.spacing(3),
+    paddingY: theme.spacing(3),
     paddingX: theme.spacing(3),
     '@media (min-width: 600px)': {
       paddingTop: theme.spacing(3),
       paddingX: theme.spacing(3),
     },
     '@media (min-width: 1272px)': {
-      maxWidth: '1920px',
+      maxWidth: '120rem',
       paddingTop: theme.spacing(4),
       paddingX: theme.spacing(4),
     },
@@ -46,7 +46,7 @@ export const styles = {
     flexShrink: 1,
     gridRow: '3/4',
     gridColumn: '1/5',
-    height: '31rem',
+    height: '31.9375rem',
     '@media (min-width: 1536px)': {
       height: '29.5625rem',
     },
@@ -57,7 +57,7 @@ export const styles = {
   specialisationSoftSkills: {
     gridRow: '4/5',
     gridColumn: '1/5',
-    height: '17.25rem',
+    height: '18.25rem',
     '@media (max-width: 991px)': {
       gridColumn: '1/6',
     },
@@ -78,7 +78,7 @@ export const styles = {
   statisticWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: '317px 390px',
+    gridTemplateRows: '19.8125rem 24.375rem',
     gridGap: theme.spacing(3),
     padding: '16px 24px 24px',
 
@@ -88,10 +88,10 @@ export const styles = {
       backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     },
     '@media(min-width: 1536px)': {
-      gridTemplateRows: '302px 375px',
+      gridTemplateRows: '18.875rem 23.4375rem',
     },
     '@media(max-width: 991px)': {
-      gridTemplateRows: '1/4',
+      gridTemplateRows: '18.625rem 15.625rem 23.4375rem auto',
       padding: theme.spacing(3),
     },
   }),
@@ -113,6 +113,9 @@ export const styles = {
   level: {
     gridColumn: '1/5',
     gridRow: '1/2',
+    '@media(min-width: 1536px)': {
+      gridColumn: '1/4',
+    },
     '@media(max-width: 991px)': {
       gridColumn: '1/13',
     },
@@ -120,6 +123,9 @@ export const styles = {
   averageSkillsScore: {
     gridColumn: '5/13',
     gridRow: '1/2',
+    '@media(min-width: 1536px)': {
+      gridColumn: '4/13',
+    },
     '@media(max-width: 991px)': {
       gridColumn: '1/13',
       gridRow: '2/3',
@@ -128,11 +134,14 @@ export const styles = {
   hardSkillsByProductivity: {
     gridColumn: '1/4',
     gridRow: '2/3',
-    width: '300px',
+    width: '18.75rem',
     padding: '18px',
+    '@media(min-width: 1536px)': {
+      width: '22.5rem',
+    },
     '@media(max-width: 991px)': {
       gridColumn: '1/13',
-      gridRow: '3/4',
+      gridRow: '4/5',
       width: '100%',
     },
   },
@@ -141,7 +150,7 @@ export const styles = {
     gridRow: '2/3',
     '@media(max-width: 991px)': {
       gridColumn: '1/13',
-      gridRow: '4/5',
+      gridRow: '3/4',
     },
   },
 };

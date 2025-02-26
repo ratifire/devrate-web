@@ -1,16 +1,12 @@
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '@redux/api/slices/feedback/interviewApiSlice';
-import { closeModal } from '@redux/slices/modal/modalSlice.js';
 import { FeedbackModalSchema } from '@utils/validationSchemas';
+import { closeModal, selectModalData } from '@redux/slices/modal/modalSlice.js';
 
 const useFeedbackForm = () => {
   const dispatch = useDispatch();
-  const { feedbackId } = useSelector((state) => state.feedback);
-  const {
-    data: { id: userId },
-  } = useSelector(selectCurrentUser);
+  const { feedbackId } = useSelector(selectModalData);
   const { data } = useGetInterviewByIdQuery({ id: feedbackId }, { skip: !feedbackId });
   const [createInterview, { isError, isLoading }] = useCreateInterviewMutation();
   const {
@@ -28,10 +24,10 @@ const useFeedbackForm = () => {
     const body = {
       interviewFeedbackDetailId: feedbackId,
       comment: values.comment,
-      skills: values.skills.map(({ id, value }) => ({ id, mark: value })),
+      skills: values.skills.map(({ value, ...items }) => ({ mark: value, ...items })),
     };
 
-    const result = await createInterview({ reviewerId: userId, body });
+    const result = await createInterview({ body });
 
     if (!result.error) {
       dispatch(closeModal());
