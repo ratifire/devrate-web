@@ -40,11 +40,11 @@ const useFeedbackForm = () => {
       if (!result.error) {
         dispatch(closeModal());
         navigate(navigationLinks.interviews);
-        enqueueSnackbar(t('modal.feedbackProjectModal.success'), { variant: 'success' });
+        enqueueSnackbar(t('modal.interview.submit.success'), { variant: 'success' });
       }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      enqueueSnackbar(t('modal.feedbackProjectModal.error_429'), { variant: 'error' });
+      enqueueSnackbar(t('modal.interview.submit.error'), { variant: 'error' });
     }
   };
 

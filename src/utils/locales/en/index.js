@@ -43,6 +43,10 @@ export const en = {
         required: 'This is a required field',
         long: 'This field is too long',
         short: 'This field is too short',
+        submit: {
+          success: 'Submit successfully',
+          error: 'Something went wrong',
+        },
       },
       achievement: {
         title: 'Achievement',
