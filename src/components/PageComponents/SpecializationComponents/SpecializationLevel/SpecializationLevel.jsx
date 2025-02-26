@@ -55,21 +55,25 @@ const SpecializationLevel = () => {
 
   return (
     <Box sx={styles.contentWrapper}>
-      <Box alignItems={'center'} display='flex' justifyContent={'space-between'} marginBottom='16px'>
+      <Box sx={styles.descriptionBox}>
         <Typography sx={styles.title} variant='h6'>
           {t('specialization.level.title')}
         </Typography>
         <Box sx={styles.popupContainer}>
-          <IconButton aria-describedby='popup-description' onMouseOut={handlerHidePopup} onMouseOver={handlerShowPopup}>
+          <IconButton
+            disableRipple
+            aria-describedby='popup-description'
+            sx={{ color: '#FFFFFF' }}
+            onMouseOut={handlerHidePopup}
+            onMouseOver={handlerShowPopup}
+          >
             <InfoOutlinedIcon />
           </IconButton>
-          {isVisiblePopup && (
-            <Box id='popup-description' sx={styles.popupContent}>
-              <Typography sx={styles.popupText} variant={'caption2'}>
-                Перемикайтесь між рівнями, щоб побачити Вашу статистику відносно іншого рівня.
-              </Typography>
-            </Box>
-          )}
+          <Box id='popup-description' sx={[styles.popupContent, isVisiblePopup && styles.visiblePopup]}>
+            <Typography sx={styles.popupText} variant={'caption2'}>
+              {t('specialization.level.description')}
+            </Typography>
+          </Box>
         </Box>
       </Box>
       <Box>

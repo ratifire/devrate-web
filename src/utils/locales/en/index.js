@@ -435,7 +435,7 @@ export const en = {
       errorDeleteSpec: "You can't delete a specialisation",
       level: {
         title: 'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.',
+        description: 'Switch between levels to see your statistics relative to another level.',
       },
       interviewChartMonths: {
         '01': 'Jan',
@@ -469,10 +469,13 @@ export const en = {
       hardSkills: {
         title: 'Hard skills',
         averageMark: 'Average mark:',
+        emptySkills:
+          "You don't have any skills on your profile right now. Add them to upgrade yourself and track your progress",
       },
       softSkills: {
         title: 'Soft skills',
         averageMark: 'Average mark:',
+        emptySkills: 'Pass an interview to have users evaluate your Soft Skills',
       },
       modal: {
         specialization: {
