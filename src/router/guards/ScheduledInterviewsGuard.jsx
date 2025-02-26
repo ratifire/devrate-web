@@ -7,11 +7,16 @@ const ScheduledInterviewsGuard = () => {
   const { data: scheduledInterviews } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
   const navigate = useNavigate();
   const location = useLocation();
-  const firstInterviewId = scheduledInterviews?.content[0]?.id;
-  const event = scheduledInterviews?.content[0];
+  const content = scheduledInterviews?.content;
+  const firstInterviewId = content?.[0]?.id;
+  const event = content?.[0];
   const patchName = location.pathname.split('/')[3];
 
   useEffect(() => {
+    if (!content?.length) {
+      navigate(navigationLinks.scheduledInterviews);
+    }
+
     if (firstInterviewId && !patchName) {
       navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
         state: { event },
