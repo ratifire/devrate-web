@@ -117,34 +117,6 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
       ],
     }),
 
-    getInterviewRequest: builder.query({
-      query: ({ userId, role, masteryId }) => ({
-        url: `/users/${userId}/interview-requests`,
-        params: { role, masteryId },
-      }),
-      providesTags: [TAG_TYPES.Specialization],
-    }),
-
-    createInterviewRequest: builder.mutation({
-      query({ userId, masteryId, role, availableDates }) {
-        return {
-          url: `/users/${userId}/interview-requests`,
-          method: 'POST',
-          body: { role, masteryId, availableDates },
-        };
-      },
-      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPES.Specialization, id: arg.id }],
-    }),
-    updateInterviewRequest: builder.mutation({
-      query({ userId, masteryId, role, availableDates }) {
-        return {
-          url: `/users/${userId}/interview-requests`,
-          method: 'PUT',
-          body: { role, masteryId, availableDates },
-        };
-      },
-      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPES.Specialization, id: arg.id }],
-    }),
     addSkillToMastery: builder.mutation({
       query: ({ masteryId, skill }) => ({
         url: `/masteries/${masteryId}/skills`,
@@ -186,9 +158,6 @@ export const {
   useGetAvailableSoftSkillsQuery,
   useCreateNewSpecializationMutation,
   useUpdateSpecializationByIdMutation,
-  useGetInterviewRequestQuery,
-  useCreateInterviewRequestMutation,
-  useUpdateInterviewRequestMutation,
   useDeleteSpecializationByIdMutation,
   useGetMasteriesBySpecializationIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,

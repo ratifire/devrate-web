@@ -1,7 +1,7 @@
 import { Box, IconButton, Typography } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import PropTypes from 'prop-types';
-import { styles } from './styles';
+import { styles } from './styles.js';
 
 const WeekNavigation = ({ onWeekNav, weekTitle }) => {
   return (
