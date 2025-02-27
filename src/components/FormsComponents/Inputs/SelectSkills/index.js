@@ -1,3 +1,3 @@
-import SelectSkills from './SelectSkills';
+import SelectInterviewLanguage from './SelectInterviewLanguage.jsx';
 
-export default SelectSkills;
+export default SelectInterviewLanguage;

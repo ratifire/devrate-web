@@ -1,0 +1,79 @@
+import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { ErrorComponent } from '../../../UI/Exceptions';
+import { InterviewStepper } from '../../FeedbackModal/FeedbackInterviewModal/components/InterviewStepper';
+import SliderComponent from '../components/SliderComponent';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { FIRST_STEP, LAST_STEP } from '../../FeedbackModal/FeedbackInterviewModal/constants';
+import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice.js';
+import { FeedbackModalSkeleton } from '../../../UI/Skeleton';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
+import useScheduleInterviewForm from '../hooks';
+import { styles } from './ScheduleInterviewModal.styles';
+
+const ScheduleInterviewModal = () => {
+  const [activeStep, setActiveStep] = useState(FIRST_STEP);
+  const { t } = useTranslation();
+  const {
+    data: { id: userId },
+  } = useSelector(selectCurrentUser);
+  const { data: mySpecialization, isFetching } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
+  const { formik, isError, isLoading } = useScheduleInterviewForm(mySpecialization);
+
+  const handleNextStep = () => setActiveStep(LAST_STEP);
+  const handlePrevStep = () => setActiveStep(FIRST_STEP);
+
+  if (isFetching) {
+    return <FeedbackModalSkeleton />;
+  }
+
+  if (isError) {
+    return <ErrorComponent />;
+  }
+
+  return (
+    <Box sx={styles.container}>
+      <Typography variant='h6'>{t('interviews.scheduleInterviewModal.title')}</Typography>
+      <InterviewStepper activeStep={activeStep} />
+      <form onSubmit={formik.handleSubmit}>
+        <Box sx={styles.formBox}>
+          <SliderComponent formik={formik} mySpecialization={mySpecialization} slide={activeStep} />
+          <Box sx={styles.sendBox}>
+            <ButtonDef
+              disabled={activeStep === 1}
+              label={t('modal.interview.btnBack')}
+              sx={styles.btn}
+              type={'button'}
+              variant={'contained'}
+              onClick={handlePrevStep}
+            />
+            {activeStep === FIRST_STEP && (
+              <ButtonDef
+                disabled={!formik.isValid}
+                label={t('modal.interview.btnNext')}
+                sx={styles.btn}
+                type={'button'}
+                variant={'contained'}
+                onClick={handleNextStep}
+              />
+            )}
+            {activeStep === LAST_STEP && (
+              <ButtonDef
+                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+                label={t('interviews.scheduleInterviewModal.scheduleBtn')}
+                loading={isLoading}
+                sx={styles.btn}
+                type={'submit'}
+                variant={'contained'}
+              />
+            )}
+          </Box>
+        </Box>
+      </form>
+    </Box>
+  );
+};
+
+export default ScheduleInterviewModal;

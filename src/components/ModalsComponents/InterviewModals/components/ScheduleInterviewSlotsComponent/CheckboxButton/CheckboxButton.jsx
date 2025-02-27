@@ -1,6 +1,6 @@
 import { Checkbox, FormControlLabel, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { styles } from './CheckboxButton.styles';
+import { styles } from './CheckboxButton.styles.js';
 
 export const CheckboxButton = ({ label, value, isChecked, onChange, disabled }) => {
   return (

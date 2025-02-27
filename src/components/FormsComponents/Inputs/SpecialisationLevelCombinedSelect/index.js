@@ -1,0 +1,2 @@
+import SpecialisationLevelCombinedSelect from './SpecialisationLevelCombinedSelect';
+export default SpecialisationLevelCombinedSelect;
