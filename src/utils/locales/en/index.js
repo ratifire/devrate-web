@@ -38,10 +38,15 @@ export const en = {
         btnSend: 'Send',
         btnNext: 'Next',
         btnBack: 'Back',
-        interviewer: 'Candidate',
+        INTERVIEWER: 'Interviewer',
+        CANDIDATE: 'Candidate',
         required: 'This is a required field',
         long: 'This field is too long',
         short: 'This field is too short',
+        submit: {
+          success: 'Submit successfully',
+          error: 'Something went wrong',
+        },
       },
       achievement: {
         title: 'Achievement',
@@ -916,19 +921,21 @@ export const en = {
       },
     },
     singleScheduledInterview: {
-      interviewsSummary: {
-        scheduledMeeting: {
-          title: 'Scheduled Meeting',
-          participants: 'Participants',
-          language: 'Language',
-          duration: 'Duration',
-          platform: 'Platform',
-          link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
-          canceledMeeting: 'Cancel Meeting',
-          joinMeeting: 'Join Interview',
-          notHappenedMeeting: 'Interview did not happen',
-          leaveFeedbackMeeting: 'Leave Feedback',
-          durationType: 'min.',
+      scheduledMeeting: {
+        title: 'Scheduled Meeting',
+        participants: 'Participants',
+        language: 'Language',
+        duration: 'Duration',
+        platform: 'Platform',
+        link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
+        canceledMeeting: 'Cancel Meeting',
+        joinMeeting: 'Join Interview',
+        notHappenedMeeting: 'Interview did not happen',
+        leaveFeedbackMeeting: 'Leave Feedback',
+        durationType: 'min.',
+        canceled: {
+          success: 'Meeting canceled successfully',
+          error: 'Something went wrong',
         },
       },
       interviewSkills: {

@@ -39,10 +39,15 @@ export const uk = {
         btnSend: 'Надіслати',
         btnNext: 'Далі',
         btnBack: 'Назад',
-        interviewer: 'Кандидат',
+        INTERVIEWER: 'Інтерв’юер',
+        CANDIDATE: 'Кандидат',
         required: "Це поле обов'язкове до заповнення",
         long: 'Це поле занадто довге',
         short: 'Це поле занадто коротке',
+        submit: {
+          success: 'Ваш відгук успішно надіслано',
+          error: 'Помилка відправки відгуку',
+        },
       },
       achievement: {
         title: 'Досягнення',
@@ -747,6 +752,10 @@ export const uk = {
           notHappenedMeeting: 'Співбесіда не відбулася',
           leaveFeedbackMeeting: 'Залишити відгук',
           durationType: 'хв.',
+          canceled: {
+            success: 'Meeting canceled successfully',
+            error: 'Something went wrong',
+          },
         },
         interviewSkills: {
           skills: 'Навички',
