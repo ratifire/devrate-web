@@ -72,9 +72,10 @@ export const styles = {
       }),
     },
   }),
-  interviewInfo: () => ({
+  interviewInfo: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '1/6  ',
+    gridRow: '1/6',
+    backgroundColor: theme.palette.pagesSections.backgroundColor,
   }),
 
   statistics: (theme) => ({
