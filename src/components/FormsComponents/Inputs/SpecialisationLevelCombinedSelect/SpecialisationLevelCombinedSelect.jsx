@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { styles } from './FormSelect.styles';
+import StarIcon from '@mui/icons-material/Star';
+import { styles } from './SpecialisationLevelCombinedSelect.styles';
 
-const FormSelect = ({
+const SpecialisationLevelCombinedSelect = ({
   variant,
   name,
   value,
@@ -15,16 +16,16 @@ const FormSelect = ({
   required,
   error,
   helperText,
-  countries,
+  arrayObj,
   disabled,
-  isTranslated,
 }) => {
   const id = uuid();
   const { t } = useTranslation();
+
   return (
     <FormControl fullWidth disabled={disabled} error={error} sx={styles.wrapper} variant={variant}>
       <InputLabel htmlFor={id} required={required} sx={styles.label}>
-        {t(label)}
+        {label}
       </InputLabel>
       <Select
         IconComponent={KeyboardArrowDownIcon}
@@ -38,16 +39,16 @@ const FormSelect = ({
             sx: styles.selectField,
           },
         }}
-        label={t(label)}
+        label={label}
         name={name}
         sx={styles.input}
         value={value}
         onBlur={handleBlur}
         onChange={handleChange}
       >
-        {countries.map((country) => (
-          <MenuItem key={country} sx={styles.menuItem} value={country}>
-            {isTranslated ? t(`modal.feedbackProjectModal.type_of_feedback.${country}`) : country}
+        {arrayObj?.map(({ name, mainMasteryLevel, mainMasteryId, main }) => (
+          <MenuItem key={mainMasteryId} sx={styles.menuItem} value={mainMasteryId}>
+            {`${mainMasteryLevel} ${name}`} {main && <StarIcon sx={styles.icon} />}
           </MenuItem>
         ))}
       </Select>
@@ -60,7 +61,7 @@ const FormSelect = ({
   );
 };
 
-FormSelect.propTypes = {
+SpecialisationLevelCombinedSelect.propTypes = {
   variant: PropTypes.oneOf(['standard', 'filled', 'outlined']).isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.number.isRequired, PropTypes.string.isRequired]).isRequired,
@@ -70,11 +71,10 @@ FormSelect.propTypes = {
   required: PropTypes.bool,
   helperText: PropTypes.string,
   error: PropTypes.bool,
-  countries: PropTypes.array.isRequired,
+  arrayObj: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
-  isTranslated: PropTypes.bool,
 };
-FormSelect.defaultProps = {
+SpecialisationLevelCombinedSelect.defaultProps = {
   variant: 'outlined',
   name: '',
   value: '',
@@ -84,7 +84,6 @@ FormSelect.defaultProps = {
   required: false,
   helperText: '',
   error: false,
-  countries: [],
-  isTranslated: false,
+  arrayObj: [],
 };
-export default FormSelect;
+export default SpecialisationLevelCombinedSelect;

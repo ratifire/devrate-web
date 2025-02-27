@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { styles } from './styles';
+import { styles } from './styles.js';
 
 const RenderTimeSlots = ({ weekDates, tab, timeButtons }) => {
   const generateTimeButtons = (day) => {

@@ -1,7 +1,7 @@
 import { Tab, Tabs } from '@mui/material';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
-import { styles } from './styles';
+import { styles } from './styles.js';
 
 const RenderTabs = ({ weekDates, onChange, tab }) => {
   const handleTabChange = (event, newTab) => {
