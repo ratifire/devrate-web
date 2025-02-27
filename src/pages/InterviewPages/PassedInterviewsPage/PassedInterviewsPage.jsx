@@ -12,7 +12,7 @@ const SideBar = lazy(() => import('../../../components/PageComponents/Interviews
 const MemoizedSideBar = memo(SideBar);
 
 const PassedInterviewsPage = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const { data: passedInterviews, isFetching, isLoading } = useGetAllPassedInterviewsQuery({ page, size: 5 });
   const [lastEventRef, setLastEventRef] = useState(null);
   const navigate = useNavigate();
