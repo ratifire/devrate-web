@@ -10,10 +10,6 @@ import { modalNames } from '../../../../utils/constants/modalNames.js';
 
 const useScheduleInterviewForm = (mySpecialization) => {
   const { t } = useTranslation();
-  // const {
-  //   data: { id: userId },
-  // } = useSelector(selectCurrentUser);
-
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
   // const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
 
@@ -51,7 +47,7 @@ const useScheduleInterviewForm = (mySpecialization) => {
       enqueueSnackbar(t('modalNotifyText.interview.create.success'), { variant: 'success' });
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.achievement.create.error'), { variant: 'error' });
+      enqueueSnackbar(t('modalNotifyText.interview.create.error'), { variant: 'error' });
     }
 
     closeModal(modalNames.scheduleInterviewModal);

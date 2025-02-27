@@ -1,12 +1,12 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
 import { getDatesInWeek } from '../../../../../utils/helpers/getWeekDates.js';
 import { getUserUTC } from '../../../../../utils/helpers/index.js';
-import { useGetInterviewRequestQuery } from '../../../../../redux/interviews/interviewRequestsApiSlice.js';
+import { useGetInterviewsByMasteryIdQuery } from '../../../../../redux/interviews/interviewRequestsApiSlice.js';
 import { styles } from './ScheduleInterviewSlots.styles';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton.jsx';
 import RenderTabs from './components/TabsRender.jsx';
@@ -16,10 +16,15 @@ import WeekNavigation from './components/WeekNavigation.jsx';
 const ScheduleInterviewSlots = ({ formik }) => {
   const { t } = useTranslation();
   const shouldUpdate = useRef(false);
+  // const { data: currentDates } = useGetInterviewRequestQuery();
 
-  const { data: currentDates } = useGetInterviewRequestQuery();
-  const availableDatesMergedArray = currentDates?.map((v) => v.availableDates).flat();
-  // const { data: interviewsByMastery } = useGetInterviewsByMasteryIdQuery(masteryId);
+  // Filter currentDates by the selected role in formik
+  // const filteredDates = currentDates?.filter((item) => item.role === formik.values.role);
+  const { data: interviewsByMasteryId } = useGetInterviewsByMasteryIdQuery(formik.values.specialization, {
+    skip: !formik.values.specialization,
+  });
+
+  const availableDatesMergedArray = interviewsByMasteryId?.map((v) => v.availableDates).flat();
 
   useLayoutEffect(() => {
     if (availableDatesMergedArray) {
@@ -32,14 +37,13 @@ const ScheduleInterviewSlots = ({ formik }) => {
           return d.setZone(timeZone).toISO();
         });
       }
-      //TODO add logic related to assignedDates. Make sure that time slots disabled
-      // setChecked(Array.from(new Set([...checked, ...availableDates]))); // Запобігаємо дублюванню
+
       formik.setValues((prevValues) => ({
         ...prevValues,
         availableDates: Array.from(new Set([...prevValues.availableDates, ...availableDates])), // Запобігаємо дублюванню
       }));
     }
-  }, [currentDates]);
+  }, [interviewsByMasteryId]);
 
   const [date, setDate] = useState(DateTime.now().startOf('day'));
   const [weekDates, setWeekDates] = useState([]);
@@ -53,7 +57,7 @@ const ScheduleInterviewSlots = ({ formik }) => {
   }, [date]);
 
   // const onSubmit = async () => {
-  //   //TODO should be adjusted in useSchduleInterview.js
+  //   //TODO should be adjusted in useScheduleInterview.js
   //   if (shouldUpdate.current) {
   //     await updateInterviewRequest({
   //       userId: userId,
@@ -85,11 +89,6 @@ const ScheduleInterviewSlots = ({ formik }) => {
   };
 
   const handleTimeClick = (isoTime) => {
-    //TODO should be used formik only. SetChecked to be removed
-    // setChecked((prevChecked) =>
-    //   prevChecked.includes(isoTime) ? prevChecked.filter((time) => time !== isoTime) : [...prevChecked, isoTime]
-    // );
-
     formik.setValues((prevState) => ({
       ...prevState,
       availableDates: prevState.availableDates.includes(isoTime)
@@ -107,7 +106,6 @@ const ScheduleInterviewSlots = ({ formik }) => {
         <CheckboxButton
           key={timeIso}
           disabled={isPastDate}
-          // isChecked={checked.includes(timeIso)}
           isChecked={formik.values.availableDates.includes(timeIso)}
           label={time.toFormat('HH:mm')}
           name='dates'
@@ -128,13 +126,27 @@ const ScheduleInterviewSlots = ({ formik }) => {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
-        <Box sx={styles.wrapper}>
-          <WeekNavigation weekTitle={weekTitle} onWeekNav={handleWeekNavigation} />
-          <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
-          <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
-        </Box>
-      </form>
+      <Box sx={styles.wrapper}>
+        <WeekNavigation weekTitle={weekTitle} onWeekNav={handleWeekNavigation} />
+        <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
+        <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
+        {formik.values.availableDates.length >= formik.values.interviewCount ? (
+          <Typography sx={styles.timeslotDescription} variant='body'>
+            {t('interviews.scheduleInterviewModal.timeslotDescription1')}
+            {formik.values.interviewCount}
+            {'. '}
+            {t('interviews.scheduleInterviewModal.timeslotDescription2')}
+            {formik.values.interviewCount}
+            {'. '}
+          </Typography>
+        ) : (
+          <Typography sx={styles.timeslotDescriptionError} variant='body'>
+            {t('interviews.scheduleInterviewModal.timeslotDescriptionError')}
+            {formik.values.interviewCount}
+            {'. '}
+          </Typography>
+        )}
+      </Box>
     </>
   );
 };

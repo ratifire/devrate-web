@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { enqueueSnackbar } from 'notistack';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { InterviewStepper } from '../../FeedbackModal/FeedbackInterviewModal/components/InterviewStepper';
 import SliderComponent from '../components/SliderComponent';
@@ -11,6 +12,7 @@ import { useGetSpecializationByUserIdQuery } from '../../../../redux/specializat
 import { FeedbackModalSkeleton } from '../../../UI/Skeleton';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import useScheduleInterviewForm from '../hooks';
+import { useGetInterviewsByMasteryIdQuery } from '../../../../redux/interviews/interviewRequestsApiSlice.js';
 import { styles } from './ScheduleInterviewModal.styles';
 
 const ScheduleInterviewModal = () => {
@@ -22,10 +24,28 @@ const ScheduleInterviewModal = () => {
   const { data: mySpecialization, isFetching } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
   const { formik, isError, isLoading } = useScheduleInterviewForm(mySpecialization);
 
-  const handleNextStep = () => setActiveStep(LAST_STEP);
+  // Fetch interview requests for the selected specialization
+  const { data: interviewsByMasteryId, isFetching: fetchingInterviews } = useGetInterviewsByMasteryIdQuery(
+    formik.values.specialization,
+    { skip: !formik.values.specialization }
+  );
+
+  // Check if the selected role has any availableDates in the backend response.If yes, block the button Next and show warning
+  const selectedRoleHasAvailableDates = interviewsByMasteryId?.some(
+    (item) => item.role === formik.values.role && item.availableDates.length > 0
+  );
+
+  const handleNextStep = () => {
+    if (selectedRoleHasAvailableDates) {
+      enqueueSnackbar(t('modalNotifyText.interview.warning'), { variant: 'warning' });
+      return;
+    }
+
+    setActiveStep(LAST_STEP);
+  };
   const handlePrevStep = () => setActiveStep(FIRST_STEP);
 
-  if (isFetching) {
+  if (isFetching || fetchingInterviews) {
     return <FeedbackModalSkeleton />;
   }
 

@@ -729,6 +729,9 @@ export const uk = {
         comment_max: 'Коментар має бути менше 100 символів',
         interviewCount_min: 'Вибери хоча б 1 таймслот',
         interviewCount_max: 'Перестарався. Забагато вибрано',
+        timeslotDescription1: 'Обрана кількість інтерв’ю — ',
+        timeslotDescription2: 'Таймслотів має бути обрано не менше ',
+        timeslotDescriptionError: 'Ви обрали недостатню кількість таймслотів. Додайте щонайменше ',
       },
     },
     singleScheduledInterview: {

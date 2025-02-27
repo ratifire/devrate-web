@@ -863,6 +863,7 @@ export const en = {
           success: 'Deleted successfully',
           error: 'Something went wrong',
         },
+        warning: 'This specialization already has scheduled appointments. Please choose another specialization or role',
       },
     },
     interviews: {
@@ -913,6 +914,9 @@ export const en = {
         comment_max: 'Comment should be shorter than 100 characters',
         interviewCount_min: 'Choose at least 1 timeslot',
         interviewCount_max: 'Too much. Please decrease value',
+        timeslotDescription1: 'The selected number of interviews - ',
+        timeslotDescription2: 'Minimum number of interviews - ',
+        timeslotDescriptionError: 'You have not selected enough timeslots. You need to select at least - ',
       },
     },
     singleScheduledInterview: {
