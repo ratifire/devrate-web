@@ -1,8 +1,12 @@
 import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
+import { useSelector } from 'react-redux';
 import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { useGetAllScheduledInterviewsQuery } from '../../../redux/interviews/scheduledInterviewsApiSlice';
+import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice.js';
+import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
+import { emptyInterviewTabsPictures } from '../../../utils/constants/emptyTabsPictures.js';
 import { styles } from './ScheduledInterviewsPage.styles';
 
 const SideBar = lazy(
@@ -21,6 +25,9 @@ const ScheduledInterviewsPage = () => {
   const [page, setPage] = useState(0);
   const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 6 });
   const [lastEventRef, setLastEventRef] = useState(null);
+  const { id } = useSelector((state) => state.auth.user.data);
+  const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
+  const isSpecializations = !!specializations;
 
   const refHandler = (el) => {
     setLastEventRef(el);
@@ -50,7 +57,17 @@ const ScheduledInterviewsPage = () => {
     };
   }, [lastEventRef, scheduledInterviews?.content, handleObserver]);
 
-  return (
+  return !scheduledInterviews ? (
+    <EmptyInterviewTab
+      isSpecializations
+      svg={
+        isSpecializations
+          ? emptyInterviewTabsPictures.emptyScheduledPic
+          : emptyInterviewTabsPictures.emptySpecialization.scheduled
+      }
+      tab='Passed'
+    />
+  ) : (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
         <Box sx={styles.box}>

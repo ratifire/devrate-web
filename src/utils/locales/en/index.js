@@ -871,6 +871,16 @@ export const en = {
       },
     },
     interviews: {
+      emptyInterviewTabs: {
+        emptyScheduled:
+          "You don't have any interviews scheduled yet. This is a great opportunity to take the first step! Make an appointment to test your knowledge, gain useful experience, and move towards your goals with confidence.",
+        emptyPassed:
+          'At the moment, you have no interviews completed. Create a request and take the first step towards new opportunities! Find an interviewer who will help you assess your knowledge and prepare for challenges.',
+        emptyRequest:
+          'There is nothing here yet. Create an interview request and take a step towards development! Find an interviewer who will help you test your knowledge and prepare for future challenges. Each conversation is a new experience and an opportunity to become more confident in your abilities.',
+        emptySpecialization:
+          'You do not have a chosen specialization yet. Define your area of interest to get access to interviews. Choose an area that interests you and discover new opportunities. This will help you find an interviewer or respondent, test your knowledge, and better prepare for future challenges.',
+      },
       navigationLinks: {
         scheduled: 'Scheduled',
         passed: 'Passed',

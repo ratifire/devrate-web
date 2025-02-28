@@ -5,7 +5,6 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { closeModal } from '../../../../redux/modal/modalSlice';
 import {
   useAddSkillsToMasteryMutation,
   useCreateNewSpecializationMutation,
@@ -22,6 +21,7 @@ import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import Responsibility from '../../../UI/Responsibility';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationModal = () => {
@@ -29,6 +29,7 @@ const SpecializationModal = () => {
     skills: [],
     specializationNameError: '',
   });
+  const { closeModal } = useModalController();
   const { skills, specializationNameError } = state;
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
@@ -63,7 +64,7 @@ const SpecializationModal = () => {
     isErrorGetSpecialization;
   const specializations = useMemo(() => data?.toSorted((a, b) => a.localeCompare(b)), [data]);
   // const handleClose = () => dispatch(closeModal({ modalType: modalNames.specializationModal }));
-  const handleClose = () => closeModal({ modalType: modalNames.specializationEditModal });
+  const handleClose = () => closeModal(modalNames.specializationEditModal);
 
   const handleChangeMastery = (e) => {
     const value = e.target.value;
