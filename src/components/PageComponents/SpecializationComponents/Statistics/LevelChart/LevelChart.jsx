@@ -43,7 +43,7 @@ const LevelChart = () => {
             {t('specialization.statistics.levelUp')}
           </Typography>
         </Box>
-        {averageMark > 60 && (
+        {averageMark >= 90 && (
           <IconButton
             aria-label='level up'
             sx={styles.levelBtn}

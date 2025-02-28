@@ -7,10 +7,12 @@ import {
   useGetSpecializationByUserIdQuery,
 } from '../../../../redux/specialization/specializationApiSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { closeModal, selectModalData } from '../../../../redux/modal/modalSlice';
+import { selectModalData } from '../../../../redux/modal/modalSlice';
 import { setActiveSpecialization, setMainSpecializations } from '../../../../redux/specialization/specializationSlice';
 import { CategoriesSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
+import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './ConfirmDeleteSpecializationModal.styles';
 
 const ConfirmDeleteSpecializationModal = () => {
@@ -18,6 +20,7 @@ const ConfirmDeleteSpecializationModal = () => {
   const dispatch = useDispatch();
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const { id } = useSelector((state) => state.auth.user.data);
+  const { closeModal } = useModalController();
   const {
     data: specializations,
     isFetching: isFetchingGetSpecialization,
@@ -63,10 +66,10 @@ const ConfirmDeleteSpecializationModal = () => {
         enqueueSnackbar(t('specialization.errorDeleteSpec'), { variant: 'error' });
       }
     } finally {
-      dispatch(closeModal());
+      closeModal(modalNames.confirmDeleteSpecialization);
     }
   };
-  const handleCancelDeletion = () => dispatch(closeModal());
+  const handleCancelDeletion = () => closeModal(modalNames.confirmDeleteSpecialization);
 
   return (
     <>
