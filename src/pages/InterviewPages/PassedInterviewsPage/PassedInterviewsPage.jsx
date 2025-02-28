@@ -5,6 +5,7 @@ import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/Interviews
 import { useGetAllPassedInterviewsQuery } from '../../../redux/interviews/passedInterviewsApiSlice.js';
 import navigationLinks from '../../../router/links.js';
 import { styles } from './PassedInterviewsPage.styles';
+import EmptyPassedInterviewsPage from './EmptyPassedInterviewsPage.jsx';
 
 const SideBar = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar'));
 
@@ -63,7 +64,9 @@ const PassedInterviewsPage = () => {
     redirectToFirstInterview();
   }, [redirectToFirstInterview]);
 
-  return (
+  return !passedInterviews ? (
+    <EmptyPassedInterviewsPage />
+  ) : (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
         <Box sx={styles.box}>
