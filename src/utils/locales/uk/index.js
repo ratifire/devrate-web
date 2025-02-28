@@ -737,6 +737,7 @@ export const uk = {
         timeslotDescription1: 'Обрана кількість інтерв’ю — ',
         timeslotDescription2: 'Таймслотів має бути обрано не менше ',
         timeslotDescriptionError: 'Ви обрали недостатню кількість таймслотів. Додайте щонайменше ',
+        warning: 'Для обраної спеціалізації вже є запит в ролі',
       },
     },
     singleScheduledInterview: {

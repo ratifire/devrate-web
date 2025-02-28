@@ -16,15 +16,15 @@ import WeekNavigation from './components/WeekNavigation.jsx';
 const ScheduleInterviewSlots = ({ formik }) => {
   const { t } = useTranslation();
   const shouldUpdate = useRef(false);
-  // const { data: currentDates } = useGetInterviewRequestQuery();
 
-  // Filter currentDates by the selected role in formik
-  // const filteredDates = currentDates?.filter((item) => item.role === formik.values.role);
   const { data: interviewsByMasteryId } = useGetInterviewsByMasteryIdQuery(formik.values.specialization, {
     skip: !formik.values.specialization,
   });
 
-  const availableDatesMergedArray = interviewsByMasteryId?.map((v) => v.availableDates).flat();
+  // Filter interviewsByMasteryId by the selected role in formik
+  const filteredDates = interviewsByMasteryId?.filter((item) => item.role === formik.values.role);
+
+  const availableDatesMergedArray = filteredDates?.map((v) => v.availableDates).flat();
 
   useLayoutEffect(() => {
     if (availableDatesMergedArray) {

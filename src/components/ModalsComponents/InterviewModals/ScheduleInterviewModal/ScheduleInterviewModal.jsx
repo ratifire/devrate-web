@@ -2,7 +2,6 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { enqueueSnackbar } from 'notistack';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { InterviewStepper } from '../../FeedbackModal/FeedbackInterviewModal/components/InterviewStepper';
 import SliderComponent from '../components/SliderComponent';
@@ -36,11 +35,6 @@ const ScheduleInterviewModal = () => {
   );
 
   const handleNextStep = () => {
-    if (selectedRoleHasAvailableDates) {
-      enqueueSnackbar(t('modalNotifyText.interview.warning'), { variant: 'warning' });
-      return;
-    }
-
     setActiveStep(LAST_STEP);
   };
   const handlePrevStep = () => setActiveStep(FIRST_STEP);
@@ -60,6 +54,11 @@ const ScheduleInterviewModal = () => {
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.formBox}>
           <SliderComponent formik={formik} mySpecialization={mySpecialization} slide={activeStep} />
+          {selectedRoleHasAvailableDates && (
+            <Typography sx={styles.errorMessage} variant='body'>
+              {t('interviews.scheduleInterviewModal.warning')} {formik.values.role.toLowerCase()}
+            </Typography>
+          )}
           <Box sx={styles.sendBox}>
             <ButtonDef
               disabled={activeStep === 1}
@@ -71,7 +70,7 @@ const ScheduleInterviewModal = () => {
             />
             {activeStep === FIRST_STEP && (
               <ButtonDef
-                disabled={!formik.isValid}
+                disabled={!formik.isValid || selectedRoleHasAvailableDates}
                 label={t('modal.interview.btnNext')}
                 sx={styles.btn}
                 type={'button'}
