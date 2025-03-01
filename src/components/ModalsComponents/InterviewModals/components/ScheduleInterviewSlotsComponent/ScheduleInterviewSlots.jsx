@@ -54,7 +54,6 @@ const ScheduleInterviewSlots = ({ formik }) => {
   const [weekDates, setWeekDates] = useState([]);
 
   const [tab, setTab] = useState(date.toFormat('EEE, d'));
-  // const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
   const handleTabChange = (newTab) => setTab(newTab);
 
   useLayoutEffect(() => {
