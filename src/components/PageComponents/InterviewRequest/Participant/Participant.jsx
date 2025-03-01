@@ -197,6 +197,7 @@ const Participant = ({ data, specialization }) => {
         foundInterviews={foundTimeSlots}
         handleUpdateSlots={handleDeleteSelected}
         hasSelectedSlots={selectedSlots.length > 0}
+        interviewRequestObj={data}
         languageName={languageName}
         role={formatRole(role, true)}
         selectedSpecialization={specialization}

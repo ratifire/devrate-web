@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Typography } from '@mui/material';
 import range from 'lodash/range';
@@ -15,7 +15,6 @@ import WeekNavigation from './components/WeekNavigation.jsx';
 
 const ScheduleInterviewSlots = ({ formik }) => {
   const { t } = useTranslation();
-  const shouldUpdate = useRef(false);
 
   const { data: interviewsByMasteryId } = useGetInterviewsByMasteryIdQuery(formik.values.specialization, {
     skip: !formik.values.specialization,
@@ -25,34 +24,29 @@ const ScheduleInterviewSlots = ({ formik }) => {
   const filteredDatesByRole = interviewsByMasteryId?.filter((item) => item.role === formik.values.role);
 
   const availableDatesMergedArray = filteredDatesByRole?.map((v) => v.availableDates).flat();
-  // const assignedDatesMergedArray = filteredDatesByRole?.map((v) => v.assignedDates).flat();
+  const assignedDatesMergedArray = filteredDatesByRole?.map((v) => v.assignedDates).flat();
 
   useLayoutEffect(() => {
-    if (availableDatesMergedArray) {
+    if (availableDatesMergedArray || assignedDatesMergedArray) {
       let availableDates = [];
-      // let assignedDates = [];
-      if (Array.isArray(availableDatesMergedArray)) {
+      let assignedDates = [];
+      if (Array.isArray(availableDatesMergedArray || assignedDatesMergedArray)) {
         const timeZone = getUserUTC();
-        shouldUpdate.current = true;
         availableDates = availableDatesMergedArray.map((item) => {
           let d = DateTime.fromISO(item, { zone: 'utc' });
           return d.setZone(timeZone).toISO();
         });
-        // assignedDates = assignedDatesMergedArray.map((item) => {
-        //   let d = DateTime.fromISO(item, { zone: 'utc' });
-        //   return d.setZone(timeZone).toISO();
-        // });
+        assignedDates = assignedDatesMergedArray.map((item) => {
+          let d = DateTime.fromISO(item, { zone: 'utc' });
+          return d.setZone(timeZone).toISO();
+        });
       }
 
       formik.setValues((prevValues) => ({
         ...prevValues,
         availableDates: Array.from(new Set([...prevValues.availableDates, ...availableDates])), // Запобігаємо дублюванню
+        assignedDates: Array.from(new Set([...prevValues.assignedDates, ...assignedDates])), // Запобігаємо дублюванню
       }));
-
-      // formik.setValues((prevValues) => ({
-      //   ...prevValues,
-      //   assignedDates: Array.from(new Set([...prevValues.assignedDates, ...assignedDates])), // Запобігаємо дублюванню
-      // }));
     }
   }, [interviewsByMasteryId]);
 
@@ -66,25 +60,6 @@ const ScheduleInterviewSlots = ({ formik }) => {
   useLayoutEffect(() => {
     setWeekDates(getDatesInWeek(date));
   }, [date]);
-
-  // const onSubmit = async () => {
-  //   //TODO should be adjusted in useScheduleInterview.js
-  //   if (shouldUpdate.current) {
-  //     await updateInterviewRequest({
-  //       userId: userId,
-  //       masteryId,
-  //       role,
-  //       availableDates: checked,
-  //     });
-  //     enqueueSnackbar(t('modalNotifyText.interview.edit.success'), {
-  //       variant: 'success',
-  //       anchorOrigin: {
-  //         vertical: 'bottom',
-  //         horizontal: 'right',
-  //       },
-  //     });
-  //   }
-  // };
 
   const handleWeekNavigation = (direction) => {
     setDate((prevDate) => {
@@ -100,30 +75,51 @@ const ScheduleInterviewSlots = ({ formik }) => {
   };
 
   const handleTimeClick = (isoTime) => {
-    formik.setValues((prevState) => ({
-      ...prevState,
-      availableDates: prevState.availableDates.includes(isoTime)
-        ? prevState.availableDates.filter((time) => time !== isoTime)
-        : [...prevState.availableDates, isoTime],
-    }));
-    // formik.setValues((prevState) => ({
-    //   ...prevState,
-    //   assignedDates: prevState.assignedDates.includes(isoTime)
-    //     ? prevState.assignedDates.filter((time) => time !== isoTime)
-    //     : [...prevState.assignedDates, isoTime],
-    // }));
+    const isAvailable = formik.values.availableDates.includes(isoTime);
+    const isAssigned = formik.values.assignedDates.includes(isoTime);
+
+    if (isAvailable) {
+      // If the time is in availableDates, toggle it (add/remove) in availableDates
+      formik.setValues((prevState) => ({
+        ...prevState,
+        availableDates: prevState.availableDates.includes(isoTime)
+          ? prevState.availableDates.filter((time) => time !== isoTime) // Remove if already exists
+          : [...prevState.availableDates, isoTime], // Add if it doesn't exist
+      }));
+    } else if (isAssigned) {
+      // If the time is in assignedDates, toggle it (add/remove) in assignedDates
+      formik.setValues((prevState) => ({
+        ...prevState,
+        assignedDates: prevState.assignedDates.includes(isoTime)
+          ? prevState.assignedDates.filter((time) => time !== isoTime) // Remove if already exists
+          : [...prevState.assignedDates, isoTime], // Add if it doesn't exist
+      }));
+    } else {
+      // If the time is not in either array, add it to availableDates by default
+      formik.setValues((prevState) => ({
+        ...prevState,
+        availableDates: [...prevState.availableDates, isoTime],
+      }));
+    }
   };
+
   const generateTimeButtons = (day) => {
     return range(0, 24).map((hour) => {
       const time = day.set({ hour });
       const timeIso = time.toISO();
       const isPastDate = DateTime.now() > time;
 
+      const isAvailable = formik.values.availableDates.includes(timeIso);
+      const isAssigned = formik.values.assignedDates.includes(timeIso);
+
+      // Determine if the checkbox should be checked
+      const isChecked = isAvailable || isAssigned;
+
       return (
         <CheckboxButton
           key={timeIso}
           disabled={isPastDate}
-          isChecked={formik.values.availableDates.includes(timeIso)}
+          isChecked={isChecked}
           label={time.toFormat('HH:mm')}
           name='dates'
           value={timeIso}

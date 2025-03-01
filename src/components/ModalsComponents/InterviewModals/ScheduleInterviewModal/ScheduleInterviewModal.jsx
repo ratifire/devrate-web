@@ -26,9 +26,9 @@ const ScheduleInterviewModal = () => {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
   const { data: allSpecializations, isFetching } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
-  const selectedSpecialization = useSelector((state) => state.modal.data.selectedSpecialization);
+  // const selectedSpecialization = useSelector((state) => state.modal.data.selectedSpecialization);
 
-  const { formik, isError, isLoading } = useScheduleInterviewForm(allSpecializations);
+  const { formik, isError, isLoading, selectedSpecialization } = useScheduleInterviewForm(allSpecializations);
 
   //Needed in order to set up (block) correct masteryID in dropdown(select) of Step 1
   const [spec, setSpec] = useState(allSpecializations);
