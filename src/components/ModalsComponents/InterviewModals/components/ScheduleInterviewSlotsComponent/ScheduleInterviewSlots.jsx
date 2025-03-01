@@ -22,13 +22,15 @@ const ScheduleInterviewSlots = ({ formik }) => {
   });
 
   // Filter interviewsByMasteryId by the selected role in formik
-  const filteredDates = interviewsByMasteryId?.filter((item) => item.role === formik.values.role);
+  const filteredDatesByRole = interviewsByMasteryId?.filter((item) => item.role === formik.values.role);
 
-  const availableDatesMergedArray = filteredDates?.map((v) => v.availableDates).flat();
+  const availableDatesMergedArray = filteredDatesByRole?.map((v) => v.availableDates).flat();
+  // const assignedDatesMergedArray = filteredDatesByRole?.map((v) => v.assignedDates).flat();
 
   useLayoutEffect(() => {
     if (availableDatesMergedArray) {
       let availableDates = [];
+      // let assignedDates = [];
       if (Array.isArray(availableDatesMergedArray)) {
         const timeZone = getUserUTC();
         shouldUpdate.current = true;
@@ -36,12 +38,21 @@ const ScheduleInterviewSlots = ({ formik }) => {
           let d = DateTime.fromISO(item, { zone: 'utc' });
           return d.setZone(timeZone).toISO();
         });
+        // assignedDates = assignedDatesMergedArray.map((item) => {
+        //   let d = DateTime.fromISO(item, { zone: 'utc' });
+        //   return d.setZone(timeZone).toISO();
+        // });
       }
 
       formik.setValues((prevValues) => ({
         ...prevValues,
         availableDates: Array.from(new Set([...prevValues.availableDates, ...availableDates])), // Запобігаємо дублюванню
       }));
+
+      // formik.setValues((prevValues) => ({
+      //   ...prevValues,
+      //   assignedDates: Array.from(new Set([...prevValues.assignedDates, ...assignedDates])), // Запобігаємо дублюванню
+      // }));
     }
   }, [interviewsByMasteryId]);
 
@@ -95,6 +106,12 @@ const ScheduleInterviewSlots = ({ formik }) => {
         ? prevState.availableDates.filter((time) => time !== isoTime)
         : [...prevState.availableDates, isoTime],
     }));
+    // formik.setValues((prevState) => ({
+    //   ...prevState,
+    //   assignedDates: prevState.assignedDates.includes(isoTime)
+    //     ? prevState.assignedDates.filter((time) => time !== isoTime)
+    //     : [...prevState.assignedDates, isoTime],
+    // }));
   };
   const generateTimeButtons = (day) => {
     return range(0, 24).map((hour) => {

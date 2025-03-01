@@ -199,6 +199,7 @@ const Participant = ({ data, specialization }) => {
         hasSelectedSlots={selectedSlots.length > 0}
         languageName={languageName}
         role={formatRole(role, true)}
+        selectedSpecialization={specialization}
         selectedTimeSlots={selectedTimeSlots}
         title={mainMasteryLevelWithName}
         totalInterviews={desiredInterview}

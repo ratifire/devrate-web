@@ -13,6 +13,7 @@ import { styles } from './RequestHeader.styles.js';
 
 const RequestHeader = ({
   title,
+  selectedSpecialization,
   role,
   description,
   foundInterviews,
@@ -36,7 +37,13 @@ const RequestHeader = ({
   };
 
   const handleAddTimeSlots = () => {
-    openModal(modalNames.scheduleInterviewModal, { role });
+    const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
+    openModal(modalNames.scheduleInterviewModal, { role: formattedRole, selectedSpecialization }, 1);
+  };
+
+  const handleEditFeature = () => {
+    const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
+    openModal(modalNames.scheduleInterviewModal, { role: formattedRole, selectedSpecialization }, 3);
   };
 
   return (
@@ -82,7 +89,7 @@ const RequestHeader = ({
             anchorEl={anchorEl}
             handleCloseMenu={handleCloseMenu}
             handleDeleteFeature={onDeleteSelected}
-            // handleEditFeature={handleEditFeature}
+            handleEditFeature={handleEditFeature}
           />
         </Box>
       </Box>
@@ -123,6 +130,7 @@ const RequestHeader = ({
 
 RequestHeader.propTypes = {
   title: PropTypes.string.isRequired,
+  selectedSpecialization: PropTypes.object.isRequired,
   role: PropTypes.oneOf(['Respondent', 'Interviewer']).isRequired,
   description: PropTypes.string.isRequired,
   foundInterviews: PropTypes.number.isRequired,
