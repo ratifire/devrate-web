@@ -18,24 +18,30 @@ export const interviewRequestsApiSlice = apiSlice.injectEndpoints({
           body,
         };
       },
-      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPES.InterviewRequest, id: arg.id }],
+      invalidatesTags: (result, error, arg) => [
+        { type: TAG_TYPES.InterviewRequest },
+        { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.masteryId },
+      ],
     }),
     updateInterviewRequest: builder.mutation({
-      query(id, body) {
+      query({ id, body }) {
         return {
           url: `/interview-requests/${id}`,
           method: 'PUT',
           body,
         };
       },
-      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPES.InterviewRequest, id: arg.id }],
+      invalidatesTags: (result, error, arg) => [
+        { type: TAG_TYPES.InterviewRequest },
+        { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.body.masteryId },
+      ],
     }),
 
     getInterviewsByMasteryId: builder.query({
       query: (masteryId) => ({
         url: `/interview-requests/masteries/${masteryId}`,
       }),
-      // providesTags: [TAG_TYPES.InterviewRequest],
+      providesTags: (result, error, arg) => [{ type: TAG_TYPES.InterviewRequestByMasteryId, id: arg }],
     }),
   }),
 });

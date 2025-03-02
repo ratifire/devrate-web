@@ -18,4 +18,9 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
   },
+  errorMessage: (theme) => ({
+    color: theme.palette.error.main,
+    marginTop: '-18px',
+    marginBottom: '15px',
+  }),
 };

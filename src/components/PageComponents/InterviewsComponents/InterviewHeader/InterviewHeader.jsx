@@ -40,12 +40,12 @@ const InterviewHeader = () => {
   };
 
   const createInterviewRequest = async () => {
-    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.INTERVIEWER });
+    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.INTERVIEWER }, 1);
     closeHandler();
   };
 
   const createIncomeInterviewRequest = () => {
-    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.CANDIDATE });
+    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.CANDIDATE }, 1);
     closeHandler();
   };
 
