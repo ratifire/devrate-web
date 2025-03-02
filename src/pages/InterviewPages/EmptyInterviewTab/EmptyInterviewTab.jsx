@@ -11,8 +11,12 @@ const EmptyPassedInterviewsPage = ({ tab, svg, isSpecializations }) => {
   const { t } = useTranslation();
   const { openModal } = useModalController();
   const { mode } = useSelector((state) => state.theme);
-  const SvgComponent = mode === DARK_THEME ? svg.dark : svg.light;
-  const SvgComponentSpec = svg;
+  let SvgComponent = null;
+  if (isSpecializations) {
+    SvgComponent = mode === DARK_THEME ? svg.dark : svg.light;
+  } else {
+    SvgComponent = svg;
+  }
 
   const handlerCreateSpecialization = () => {
     openModal(modalNames.specializationModal);
@@ -33,7 +37,7 @@ const EmptyPassedInterviewsPage = ({ tab, svg, isSpecializations }) => {
   return (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={[styles.contentWrapper, styles.emptySpec]}>
-        <SvgComponentSpec />
+        <SvgComponent />
         <Box sx={styles.contentBox}>
           <Typography sx={[styles.text, styles.textSpec]} variant='subtitle1'>
             {t(`interviews.emptyInterviewTabs.emptySpecialization`)}
