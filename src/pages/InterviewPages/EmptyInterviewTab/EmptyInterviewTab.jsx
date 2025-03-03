@@ -12,10 +12,13 @@ const EmptyPassedInterviewsPage = ({ tab, svg, isSpecializations }) => {
   const { openModal } = useModalController();
   const { mode } = useSelector((state) => state.theme);
   let SvgComponent = null;
-  if (isSpecializations) {
+  if (isSpecializations && svg?.dark && svg?.light) {
     SvgComponent = mode === DARK_THEME ? svg.dark : svg.light;
-  } else {
+  } else if (svg) {
     SvgComponent = svg;
+  } else {
+    // eslint-disable-next-line react/display-name
+    SvgComponent = () => <></>;
   }
 
   const handlerCreateSpecialization = () => {
