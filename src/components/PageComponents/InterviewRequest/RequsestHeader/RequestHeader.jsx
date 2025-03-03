@@ -13,6 +13,7 @@ import { styles } from './RequestHeader.styles.js';
 
 const RequestHeader = ({
   title,
+  selectedSpecialization,
   role,
   description,
   foundInterviews,
@@ -22,6 +23,7 @@ const RequestHeader = ({
   hasSelectedSlots,
   handleUpdateSlots,
   languageName,
+  interviewRequestObj,
 }) => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -36,7 +38,24 @@ const RequestHeader = ({
   };
 
   const handleAddTimeSlots = () => {
-    openModal(modalNames.scheduleInterviewModal, { role });
+    const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
+    const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
+
+    openModal(
+      modalNames.scheduleInterviewModal,
+      { role: formattedRole, selectedSpecialization, interviewRequestId },
+      1
+    );
+  };
+
+  const handleEditFeature = () => {
+    const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
+    const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
+    openModal(
+      modalNames.scheduleInterviewModal,
+      { role: formattedRole, selectedSpecialization, interviewRequestId },
+      3
+    );
   };
 
   return (
@@ -82,7 +101,7 @@ const RequestHeader = ({
             anchorEl={anchorEl}
             handleCloseMenu={handleCloseMenu}
             handleDeleteFeature={onDeleteSelected}
-            // handleEditFeature={handleEditFeature}
+            handleEditFeature={handleEditFeature}
           />
         </Box>
       </Box>
@@ -123,6 +142,7 @@ const RequestHeader = ({
 
 RequestHeader.propTypes = {
   title: PropTypes.string.isRequired,
+  selectedSpecialization: PropTypes.object.isRequired,
   role: PropTypes.oneOf(['Respondent', 'Interviewer']).isRequired,
   description: PropTypes.string.isRequired,
   foundInterviews: PropTypes.number.isRequired,
@@ -132,6 +152,7 @@ RequestHeader.propTypes = {
   handleUpdateSlots: PropTypes.func.isRequired,
   hasSelectedSlots: PropTypes.bool.isRequired,
   languageName: PropTypes.string.isRequired,
+  interviewRequestObj: PropTypes.object.isRequired,
 };
 
 export default RequestHeader;

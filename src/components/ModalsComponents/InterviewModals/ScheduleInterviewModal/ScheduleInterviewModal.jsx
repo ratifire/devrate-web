@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { InterviewStepper } from '../../FeedbackModal/FeedbackInterviewModal/components/InterviewStepper';
@@ -11,21 +11,50 @@ import { useGetSpecializationByUserIdQuery } from '../../../../redux/specializat
 import { FeedbackModalSkeleton } from '../../../UI/Skeleton';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
 import useScheduleInterviewForm from '../hooks';
+import { useGetInterviewsByMasteryIdQuery } from '../../../../redux/interviews/interviewRequestsApiSlice.js';
 import { styles } from './ScheduleInterviewModal.styles';
 
 const ScheduleInterviewModal = () => {
-  const [activeStep, setActiveStep] = useState(FIRST_STEP);
   const { t } = useTranslation();
+
+  //Include step into URL in order to open correct modal on create and edit
+  const searchParams = new URLSearchParams(location.search);
+  const stepParam = searchParams.get('step');
+  const [activeStep, setActiveStep] = useState(+stepParam || FIRST_STEP);
+
   const {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
-  const { data: mySpecialization, isFetching } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
-  const { formik, isError, isLoading } = useScheduleInterviewForm(mySpecialization);
+  const { data: allSpecializations, isFetching } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
+  const { formik, isError, isLoading, selectedSpecialization } = useScheduleInterviewForm(allSpecializations);
 
-  const handleNextStep = () => setActiveStep(LAST_STEP);
+  //Needed in order to set up (block) correct masteryID in dropdown(select) of Step 1
+  const [spec, setSpec] = useState(allSpecializations);
+
+  useEffect(() => {
+    if (selectedSpecialization) {
+      setSpec([selectedSpecialization]);
+      formik.setFieldValue('specialization', selectedSpecialization.mainMasteryId);
+    }
+  }, [selectedSpecialization]);
+
+  // Fetch interview requests for the selected specialization
+  const { data: interviewsByMasteryId, isFetching: fetchingInterviews } = useGetInterviewsByMasteryIdQuery(
+    formik.values.specialization,
+    { skip: !formik.values.specialization }
+  );
+
+  // Check if the selected role has any availableDates in the backend response.If yes, block the button Next and show warning
+  const selectedRoleHasAvailableDates = interviewsByMasteryId?.some(
+    (item) => item.role === formik.values.role && item.availableDates.length > 0
+  );
+
+  const handleNextStep = () => {
+    setActiveStep(LAST_STEP);
+  };
   const handlePrevStep = () => setActiveStep(FIRST_STEP);
 
-  if (isFetching) {
+  if (isFetching || fetchingInterviews) {
     return <FeedbackModalSkeleton />;
   }
 
@@ -39,7 +68,12 @@ const ScheduleInterviewModal = () => {
       <InterviewStepper activeStep={activeStep} />
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.formBox}>
-          <SliderComponent formik={formik} mySpecialization={mySpecialization} slide={activeStep} />
+          <SliderComponent formik={formik} mySpecialization={spec} slide={activeStep} />
+          {selectedRoleHasAvailableDates && !selectedSpecialization && (
+            <Typography sx={styles.errorMessage} variant='body'>
+              {t('interviews.scheduleInterviewModal.warning')} {formik.values.role.toLowerCase()}
+            </Typography>
+          )}
           <Box sx={styles.sendBox}>
             <ButtonDef
               disabled={activeStep === 1}
@@ -51,7 +85,7 @@ const ScheduleInterviewModal = () => {
             />
             {activeStep === FIRST_STEP && (
               <ButtonDef
-                disabled={!formik.isValid}
+                disabled={!formik.isValid || (selectedRoleHasAvailableDates && !selectedSpecialization)}
                 label={t('modal.interview.btnNext')}
                 sx={styles.btn}
                 type={'button'}

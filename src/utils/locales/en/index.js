@@ -871,6 +871,16 @@ export const en = {
       },
     },
     interviews: {
+      emptyInterviewTabs: {
+        emptyScheduled:
+          "You don't have any interviews scheduled yet. This is a great opportunity to take the first step! Make an appointment to test your knowledge, gain useful experience, and move towards your goals with confidence.",
+        emptyPassed:
+          'At the moment, you have no interviews completed. Create a request and take the first step towards new opportunities! Find an interviewer who will help you assess your knowledge and prepare for challenges.',
+        emptyRequest:
+          'There is nothing here yet. Create an interview request and take a step towards development! Find an interviewer who will help you test your knowledge and prepare for future challenges. Each conversation is a new experience and an opportunity to become more confident in your abilities.',
+        emptySpecialization:
+          'You do not have a chosen specialization yet. Define your area of interest to get access to interviews. Choose an area that interests you and discover new opportunities. This will help you find an interviewer or respondent, test your knowledge, and better prepare for future challenges.',
+      },
       navigationLinks: {
         scheduled: 'Scheduled',
         passed: 'Passed',
@@ -918,6 +928,10 @@ export const en = {
         comment_max: 'Comment should be shorter than 100 characters',
         interviewCount_min: 'Choose at least 1 timeslot',
         interviewCount_max: 'Too much. Please decrease value',
+        timeslotDescription1: 'The selected number of interviews - ',
+        timeslotDescription2: 'Minimum number of interviews - ',
+        timeslotDescriptionError: 'You have not selected enough timeslots. You need to select at least - ',
+        warning: 'For the selected specialization, there is already a request in the role',
       },
     },
     singleScheduledInterview: {

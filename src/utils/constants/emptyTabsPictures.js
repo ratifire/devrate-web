@@ -55,3 +55,36 @@ export const emptyUserTabsPictures = {
     white: EducationUserPicWhite,
   },
 };
+
+import EmptySceduledPicDark from '../../assets/pictures/emptyInterviewTabsPictures/scheduledInterview/scheduledDark.svg?react';
+import EmptySceduledPicLight from '../../assets/pictures/emptyInterviewTabsPictures/scheduledInterview/scheduledLight.svg?react';
+
+import EmptyPassedPicDark from '../../assets/pictures/emptyInterviewTabsPictures/passedInterview/passedDark.svg?react';
+import EmptyPassedPicLight from '../../assets/pictures/emptyInterviewTabsPictures/passedInterview/passedLight.svg?react';
+
+import EmptyRequestPicDark from '../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
+import EmptyRequestPicLight from '../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestLight.svg?react';
+
+import EmptySpecializationSceduledPic from '../../assets/pictures/emptyInterviewTabsPictures/noSpecializations/scheduled.svg?react';
+import EmptySpecializationPassedPic from '../../assets/pictures/emptyInterviewTabsPictures/noSpecializations/passed.svg?react';
+import EmptySpecializatioRequestPic from '../../assets/pictures/emptyInterviewTabsPictures/noSpecializations/reqest.svg?react';
+
+export const emptyInterviewTabsPictures = {
+  emptyScheduledPic: {
+    dark: EmptySceduledPicDark,
+    light: EmptySceduledPicLight,
+  },
+  emptyPassedPic: {
+    dark: EmptyPassedPicDark,
+    light: EmptyPassedPicLight,
+  },
+  emptyReqestPic: {
+    dark: EmptyRequestPicDark,
+    light: EmptyRequestPicLight,
+  },
+  emptySpecialization: {
+    scheduled: EmptySpecializationSceduledPic,
+    passed: EmptySpecializationPassedPic,
+    request: EmptySpecializatioRequestPic,
+  },
+};

@@ -1,21 +1,27 @@
 import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState, useLayoutEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { useGetAllPassedInterviewsQuery } from '../../../redux/interviews/passedInterviewsApiSlice.js';
 import navigationLinks from '../../../router/links.js';
+import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
+import { emptyInterviewTabsPictures } from '../../../utils/constants/emptyTabsPictures.js';
+import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice.js';
 import { styles } from './PassedInterviewsPage.styles';
-import EmptyPassedInterviewsPage from './EmptyPassedInterviewsPage.jsx';
 
 const SideBar = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar'));
 
 const MemoizedSideBar = memo(SideBar);
 
 const PassedInterviewsPage = () => {
+  const { id } = useSelector((state) => state.auth.user.data);
   const [page, setPage] = useState(0);
   const { data: passedInterviews, isFetching, isLoading } = useGetAllPassedInterviewsQuery({ page, size: 5 });
   const [lastEventRef, setLastEventRef] = useState(null);
   const navigate = useNavigate();
+  const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
+  const isSpecializations = !!specializations;
   const refHandler = (el) => {
     setLastEventRef(el);
   };
@@ -65,7 +71,15 @@ const PassedInterviewsPage = () => {
   }, [redirectToFirstInterview]);
 
   return !passedInterviews ? (
-    <EmptyPassedInterviewsPage />
+    <EmptyInterviewTab
+      isSpecializations
+      svg={
+        isSpecializations
+          ? emptyInterviewTabsPictures.emptyPassedPic
+          : emptyInterviewTabsPictures.emptySpecialization.passed
+      }
+      tab='Passed'
+    />
   ) : (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
