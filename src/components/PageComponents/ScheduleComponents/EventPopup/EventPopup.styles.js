@@ -112,11 +112,17 @@ export const styles = {
     height: '100%',
   },
   icon: (theme) => ({
-    width: '24px',
-    height: '24px',
+    color: theme.palette.schedule.userLinksEvent.color,
     display: 'block',
-    color: theme.palette.schedule.popup.iconColor,
+    textTransform: 'none',
     padding: 0,
+
+    '&:hover': {
+      color: theme.palette.schedule.userLinksEvent.hover.color,
+    },
+    '&:active': {
+      color: theme.palette.schedule.userLinksEvent.active.color,
+    },
   }),
   outlined: (theme) => ({
     display: 'block',

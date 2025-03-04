@@ -5,14 +5,17 @@ export const ScheduleApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getEventByUserId: builder.query({
       query: ({ from, to }) => `events?from=${from}&to=${to}`,
-      providesTags: (result) =>
-        result ? [...result.map(({ id }) => ({ type: TAG_TYPES.Event, id })), TAG_TYPES.Event] : [TAG_TYPES.Event],
+      providesTags: [TAG_TYPES.Event],
     }),
 
     getClosestEventByUserId: builder.query({
       query: ({ fromTime }) => `interviews/events/closest?from=${fromTime}`,
-      providesTags: (result) =>
-        result ? [...result.map(({ id }) => ({ type: TAG_TYPES.Event, id })), TAG_TYPES.Event] : [TAG_TYPES.Event],
+      providesTags: [TAG_TYPES.Event],
+    }),
+
+    getEventById: builder.query({
+      query: ({ id }) => `interviews/events/${id}`,
+      providesTags: [TAG_TYPES.Event],
     }),
 
     deleteEventById: builder.mutation({
@@ -22,7 +25,7 @@ export const ScheduleApiSlice = apiSlice.injectEndpoints({
           method: 'DELETE',
         };
       },
-      invalidatesTags: (result, error, { id }) => [{ type: TAG_TYPES.Event, id }],
+      invalidatesTags: [TAG_TYPES.Event],
     }),
   }),
 });
@@ -32,4 +35,5 @@ export const {
   useLazyGetEventByUserIdQuery,
   useGetClosestEventByUserIdQuery,
   useDeleteEventByIdMutation,
+  useGetEventByIdQuery,
 } = ScheduleApiSlice;

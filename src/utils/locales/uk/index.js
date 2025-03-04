@@ -547,6 +547,9 @@ export const uk = {
       popupUserInfo: 'Інформація про вас',
       popupInterviewerInfo: 'Інформація про співбесідника',
       popupRole: 'Роль:',
+      CANDIDATE: 'Кандидат',
+      INTERVIEWER: 'Інтерв’юер',
+      link: "Доєднатись до інтерв'ю",
     },
     notifications: {
       empty: 'На даний момент у вас ще немає нових сповіщень',
