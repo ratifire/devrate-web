@@ -19,6 +19,7 @@ import Sidebar from './Sidebar';
 const Schedule = () => {
   const theme = useTheme();
   const calendarRef = useRef(null);
+  const firstRender = useRef(false);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
   const [event, setEvent] = useState([]);
@@ -32,9 +33,14 @@ const Schedule = () => {
   const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
 
   const { data: eventsForSelectedWeek, isFetching: isFetchingGetEvent } = useGetEventByUserIdQuery({ from, to });
-  const { data: currentClosestEvents } = useGetClosestEventByUserIdQuery({ fromTime });
+  const { data: currentClosestEvents } = useGetClosestEventByUserIdQuery({ fromTime }, { skip: firstRender.current });
 
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
+
+  // Fixed multiple requests when re-rendering in useGetClosestEventByUserIdQuery endpoint
+  useEffect(() => {
+    firstRender.current = true;
+  }, []);
 
   useEffect(() => {
     const waitForCalendarRef = () => {
