@@ -4,7 +4,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Box } from '@mui/material';
-import { useSelector } from 'react-redux';
 import { DateTime } from 'luxon';
 import { useTheme } from '@mui/material/styles';
 import {
@@ -28,15 +27,15 @@ const Schedule = () => {
   const [eventUpdated, setEventUpdated] = useState(false);
   const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
-  const fromTime = encodeURIComponent(`${DateTime.local().toFormat('yyyy-MM-dd')}T00:00:00+03:00`);
-
-  const { id: userId } = useSelector((state) => state.auth.user.data);
+  const fromTime = DateTime.utc().toISO();
   const [events, setEvents] = useState([]);
   const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
 
-  const { data: eventsForSelectedWeek, isLoading, isFetching } = useGetEventByUserIdQuery({ userId, from, to });
-  const { data: currentClosestEvents, isLoading: loading } = useGetClosestEventByUserIdQuery({ userId, fromTime });
+  const { data: eventsForSelectedWeek, isFetching: isFetchingGetEvent } = useGetEventByUserIdQuery({ from, to });
+  const { data: currentClosestEvents } = useGetClosestEventByUserIdQuery({ fromTime });
+
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
+
   useEffect(() => {
     const waitForCalendarRef = () => {
       if (calendarRef.current) {
@@ -65,7 +64,7 @@ const Schedule = () => {
     };
 
     waitForCalendarRef();
-  }, [eventsForSelectedWeek, isFetching, theme, eventUpdated]);
+  }, [eventsForSelectedWeek, isFetchingGetEvent, theme, eventUpdated]);
 
   const findEventTimeForChosenDay = (newDate, resp) => {
     const luxonDate = DateTime.fromISO(newDate);
@@ -108,7 +107,7 @@ const Schedule = () => {
     setFrom(startOfWeek);
     setTo(endOfWeek);
 
-    const { data: resp } = await triggerEvents({ userId, from: startOfWeek, to: endOfWeek });
+    const { data: resp } = await triggerEvents({ from: startOfWeek, to: endOfWeek });
     const startTime = findEventTimeForChosenDay(newDate, resp);
     setEventStartTime(startTime);
   };
@@ -191,9 +190,10 @@ const Schedule = () => {
     }));
   };
 
-  if (isLoading || loading) {
+  if (isFetchingGetEvent) {
     return <ScheduleSkeleton />;
   }
+
   return (
     <Box sx={styles.demoApp}>
       <Sidebar

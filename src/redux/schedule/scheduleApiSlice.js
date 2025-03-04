@@ -4,21 +4,21 @@ import { TAG_TYPES } from '../../utils/constants/tagTypes';
 export const ScheduleApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getEventByUserId: builder.query({
-      query: ({ userId, from, to }) => `users/${userId}/events?from=${from}&to=${to}`,
+      query: ({ from, to }) => `events?from=${from}&to=${to}`,
       providesTags: (result) =>
         result ? [...result.map(({ id }) => ({ type: TAG_TYPES.Event, id })), TAG_TYPES.Event] : [TAG_TYPES.Event],
     }),
 
     getClosestEventByUserId: builder.query({
-      query: ({ userId, fromTime }) => `/users/${userId}/events/closest?from=${fromTime}`,
+      query: ({ fromTime }) => `interviews/events/closest?from=${fromTime}`,
       providesTags: (result) =>
         result ? [...result.map(({ id }) => ({ type: TAG_TYPES.Event, id })), TAG_TYPES.Event] : [TAG_TYPES.Event],
     }),
 
     deleteEventById: builder.mutation({
-      query: ({ userId, id }) => {
+      query: ({ id }) => {
         return {
-          url: `/users/${userId}/interviews/${id}`,
+          url: `interviews/${id}`,
           method: 'DELETE',
         };
       },
