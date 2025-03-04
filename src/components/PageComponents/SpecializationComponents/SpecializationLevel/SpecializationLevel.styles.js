@@ -3,6 +3,12 @@ export const styles = {
     padding: theme.spacing(4),
   }),
 
+  descriptionBox: (theme) => ({
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(3),
+  }),
   popupContainer: {
     position: 'relative',
   },
@@ -15,12 +21,23 @@ export const styles = {
     position: 'absolute',
     bottom: '40px',
     right: '7px',
+    opacity: 0,
+    transition: 'opacity .5s ease-out',
+
+    '* > svg': {
+      fill: '#FFFFFF !important',
+    },
   }),
 
   popupText: {
     fontWeight: 400,
     lineHeight: '166%',
     letterSpacing: '0.03em',
+    fontSize: '16px',
+  },
+
+  visiblePopup: {
+    opacity: 1,
   },
 
   buttonGroup: (theme) => ({

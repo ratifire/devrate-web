@@ -39,10 +39,15 @@ export const uk = {
         btnSend: 'Надіслати',
         btnNext: 'Далі',
         btnBack: 'Назад',
-        interviewer: 'Кандидат',
+        INTERVIEWER: 'Інтерв’юер',
+        CANDIDATE: 'Кандидат',
         required: "Це поле обов'язкове до заповнення",
         long: 'Це поле занадто довге',
         short: 'Це поле занадто коротке',
+        submit: {
+          success: 'Ваш відгук успішно надіслано',
+          error: 'Помилка відправки відгуку',
+        },
       },
       achievement: {
         title: 'Досягнення',
@@ -506,7 +511,6 @@ export const uk = {
         endTime: 'Час закінчення',
         socialLinks: 'Додати посилання на соцмережі',
         schedule: 'Запланувати',
-        scheduleInterview: "Запланувати інтерв'ю",
       },
     },
     language: {
@@ -715,6 +719,26 @@ export const uk = {
         interviewStatisticsSoftSkills: 'Soft Skills',
         interviewStatisticsOverall: 'Over All',
       },
+      scheduleInterviewModal: {
+        title: 'Запланувати співбесіду',
+        scheduleBtn: 'Запланувати',
+        specializationInputTitle: 'Спеціалізація',
+        languageInputTitle: 'Мова',
+        interviewCountTooltip:
+          'Виберіть максимальну кількість інтерв’ю, які можна призначити для обраних таймслотів. Цей параметр дозволяє обмежити кількість інтерв’ю в межах ваших часових можливостей',
+        interviewCountTitle: "Кількість інтерв'ю для обраних таймслотів",
+        commentTitle: 'Коментар',
+        commentPlaceholder: 'Опишіть, що ви очікуєте від інтерв’ю',
+        required: "Це обов'язкове поле",
+        comment_min: 'Коментар має бути більше 5 символів',
+        comment_max: 'Коментар має бути менше 100 символів',
+        interviewCount_min: 'Вибери хоча б 1 таймслот',
+        interviewCount_max: 'Перестарався. Забагато вибрано',
+        timeslotDescription1: 'Обрана кількість інтерв’ю — ',
+        timeslotDescription2: 'Таймслотів має бути обрано не менше ',
+        timeslotDescriptionError: 'Ви обрали недостатню кількість таймслотів. Додайте щонайменше ',
+        warning: 'Для обраної спеціалізації вже є запит в ролі',
+      },
     },
     singleScheduledInterview: {
       interviewsSummary: {
@@ -732,6 +756,10 @@ export const uk = {
           notHappenedMeeting: 'Співбесіда не відбулася',
           leaveFeedbackMeeting: 'Залишити відгук',
           durationType: 'хв.',
+          canceled: {
+            success: 'Meeting canceled successfully',
+            error: 'Something went wrong',
+          },
         },
         interviewSkills: {
           skills: 'Навички',

@@ -45,9 +45,8 @@ const FormSelect = ({
         onBlur={handleBlur}
         onChange={handleChange}
       >
-        {countries.map((country, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <MenuItem key={index} sx={styles.menuItem} value={country}>
+        {countries.map((country) => (
+          <MenuItem key={country} sx={styles.menuItem} value={country}>
             {isTranslated ? t(`modal.feedbackProjectModal.type_of_feedback.${country}`) : country}
           </MenuItem>
         ))}

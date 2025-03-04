@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
 import { SkillsSkeleton } from '../../Skeleton';
+import EmptySkills from '../EmptySkills/index.js';
 import { styles } from './SpecializationSkills.styles';
 
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
@@ -29,15 +30,21 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
           </IconButton>
         )}
       </Box>
-      <Box sx={styles.skillsContainer}>
-        {skills?.map((skill) => (
-          <ItemSkill
-            key={skill.id}
-            grows={skill.grows}
-            name={skill.name}
-            value={Math.round(skill.averageMark * 10) / 10}
-          />
-        ))}
+      <Box>
+        {skills.length > 0 ? (
+          <Box sx={[styles.skillsContainer, title === 'Hard skills' ? styles.hardSkills : styles.softSkills]}>
+            {skills.map((skill) => (
+              <ItemSkill
+                key={skill.id}
+                grows={skill.grows}
+                name={skill.name}
+                value={Math.round(skill.averageMark * 10) / 10}
+              />
+            ))}
+          </Box>
+        ) : (
+          <EmptySkills title={title} />
+        )}
       </Box>
       <Box sx={styles.markWrapper}>
         <Typography variant='h6'>{subTitle}</Typography>

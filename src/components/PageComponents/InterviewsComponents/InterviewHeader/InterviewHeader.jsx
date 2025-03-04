@@ -3,14 +3,18 @@ import { NavLink } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import { useSelector } from 'react-redux';
 import { modalNames } from '../../../../utils/constants/modalNames';
 import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole';
 import links from '../../../../router/links.js';
 import CircleIcon from '../../../../assets/icons/InterviewPageIcons/green-ellipse.svg';
 import { useModalController } from '../../../../utils/hooks/useModalController';
+import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice.js';
 import styles from './InterviewHeader.styles';
 
 const InterviewHeader = () => {
+  const { id: userId } = useSelector((state) => state.auth.user.data);
+  const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
   const { t } = useTranslation();
   const buttonRef = useRef(null);
   const [createButton, setCreateButton] = useState(null);
@@ -36,12 +40,12 @@ const InterviewHeader = () => {
   };
 
   const createInterviewRequest = async () => {
-    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.INTERVIEWER });
+    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.INTERVIEWER }, 1);
     closeHandler();
   };
 
   const createIncomeInterviewRequest = () => {
-    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.CANDIDATE });
+    openModal(modalNames.scheduleInterviewModal, { role: feedbackInterviewRole.CANDIDATE }, 1);
     closeHandler();
   };
 
@@ -67,6 +71,7 @@ const InterviewHeader = () => {
       <Button
         ref={buttonRef}
         color='primary'
+        disabled={mySpecialization?.length === 0}
         sx={styles.buttonPrimary}
         type='button'
         variant='contained'
@@ -75,6 +80,7 @@ const InterviewHeader = () => {
         {t('specialization.modal.interview.makeIncome')}
         <KeyboardArrowDown />
       </Button>
+
       <Popover
         disableScrollLock
         anchorEl={createButton}

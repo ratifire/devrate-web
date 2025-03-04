@@ -38,10 +38,15 @@ export const en = {
         btnSend: 'Send',
         btnNext: 'Next',
         btnBack: 'Back',
-        interviewer: 'Candidate',
+        INTERVIEWER: 'Interviewer',
+        CANDIDATE: 'Candidate',
         required: 'This is a required field',
         long: 'This field is too long',
         short: 'This field is too short',
+        submit: {
+          success: 'Submit successfully',
+          error: 'Something went wrong',
+        },
       },
       achievement: {
         title: 'Achievement',
@@ -435,7 +440,7 @@ export const en = {
       errorDeleteSpec: "You can't delete a specialisation",
       level: {
         title: 'Level',
-        description: 'Improve your skills to move onto the next level of in-line specialisation.',
+        description: 'Switch between levels to see your statistics relative to another level.',
       },
       interviewChartMonths: {
         '01': 'Jan',
@@ -469,10 +474,13 @@ export const en = {
       hardSkills: {
         title: 'Hard skills',
         averageMark: 'Average mark:',
+        emptySkills:
+          "You don't have any skills on your profile right now. Add them to upgrade yourself and track your progress",
       },
       softSkills: {
         title: 'Soft skills',
         averageMark: 'Average mark:',
+        emptySkills: 'Pass an interview to have users evaluate your Soft Skills',
       },
       modal: {
         specialization: {
@@ -511,7 +519,6 @@ export const en = {
           endTime: 'End Time',
           socialLinks: 'Social Links',
           schedule: 'Schedule',
-          scheduleInterview: 'Schedule Interview',
           skill_long: 'Company too long',
           skill_short: 'Company too short',
         },
@@ -864,6 +871,16 @@ export const en = {
       },
     },
     interviews: {
+      emptyInterviewTabs: {
+        emptyScheduled:
+          "You don't have any interviews scheduled yet. This is a great opportunity to take the first step! Make an appointment to test your knowledge, gain useful experience, and move towards your goals with confidence.",
+        emptyPassed:
+          'At the moment, you have no interviews completed. Create a request and take the first step towards new opportunities! Find an interviewer who will help you assess your knowledge and prepare for challenges.',
+        emptyRequest:
+          'There is nothing here yet. Create an interview request and take a step towards development! Find an interviewer who will help you test your knowledge and prepare for future challenges. Each conversation is a new experience and an opportunity to become more confident in your abilities.',
+        emptySpecialization:
+          'You do not have a chosen specialization yet. Define your area of interest to get access to interviews. Choose an area that interests you and discover new opportunities. This will help you find an interviewer or respondent, test your knowledge, and better prepare for future challenges.',
+      },
       navigationLinks: {
         scheduled: 'Scheduled',
         passed: 'Passed',
@@ -896,21 +913,43 @@ export const en = {
         interviewStatisticsSoftSkills: 'Soft Skills',
         interviewStatisticsOverall: 'Over All',
       },
+      scheduleInterviewModal: {
+        title: 'Schedule Interview',
+        scheduleBtn: 'Schedule',
+        specializationInputTitle: 'Specialization',
+        languageInputTitle: 'Language',
+        interviewCountTooltip:
+          'Select the maximum number of interviews that can be assigned to the selected timeslots. This option allows you to limit the number of interviews within your time availability',
+        interviewCountTitle: 'Number of interviews for the selected timeslots',
+        commentTitle: 'Comment',
+        commentPlaceholder: 'Describe what you expect from the interview',
+        required: 'This is a required field',
+        comment_min: 'Comment should be longer than 5 characters',
+        comment_max: 'Comment should be shorter than 100 characters',
+        interviewCount_min: 'Choose at least 1 timeslot',
+        interviewCount_max: 'Too much. Please decrease value',
+        timeslotDescription1: 'The selected number of interviews - ',
+        timeslotDescription2: 'Minimum number of interviews - ',
+        timeslotDescriptionError: 'You have not selected enough timeslots. You need to select at least - ',
+        warning: 'For the selected specialization, there is already a request in the role',
+      },
     },
     singleScheduledInterview: {
-      interviewsSummary: {
-        scheduledMeeting: {
-          title: 'Scheduled Meeting',
-          participants: 'Participants',
-          language: 'Language',
-          duration: 'Duration',
-          platform: 'Platform',
-          link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
-          canceledMeeting: 'Cancel Meeting',
-          joinMeeting: 'Join Interview',
-          notHappenedMeeting: 'Interview did not happen',
-          leaveFeedbackMeeting: 'Leave Feedback',
-          durationType: 'min.',
+      scheduledMeeting: {
+        title: 'Scheduled Meeting',
+        participants: 'Participants',
+        language: 'Language',
+        duration: 'Duration',
+        platform: 'Platform',
+        link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
+        canceledMeeting: 'Cancel Meeting',
+        joinMeeting: 'Join Interview',
+        notHappenedMeeting: 'Interview did not happen',
+        leaveFeedbackMeeting: 'Leave Feedback',
+        durationType: 'min.',
+        canceled: {
+          success: 'Meeting canceled successfully',
+          error: 'Something went wrong',
         },
       },
       interviewSkills: {

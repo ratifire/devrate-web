@@ -1,16 +1,18 @@
 import { apiSlice } from '../services/api/apiSlice';
+import { TAG_TYPES } from '../../utils/constants/tagTypes.js';
 
 const interviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getInterviewById: builder.query({
-      query: ({ id }) => `/feedback-details/${id}`,
+      query: ({ id }) => `/interview-feedbacks/${id}`,
     }),
     createInterview: builder.mutation({
-      query: ({ reviewerId, body }) => ({
+      query: ({ body }) => ({
         method: 'POST',
-        url: `/users/${reviewerId}/feedbacks`,
+        url: '/interview-feedbacks',
         body: { ...body },
       }),
+      invalidatesTags: [TAG_TYPES.ScheduledInterview],
     }),
   }),
 });

@@ -3,9 +3,9 @@ import { apiSlice } from '../services/api/apiSlice';
 const chartApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getInterviewSummariesStatistic: builder.query({
-      query: ({ userId, from, to }) => {
+      query: ({ from, to }) => {
         const params = new URLSearchParams({ from, to });
-        return `/users/${userId}/interview-summaries/statistics?${params.toString()}`;
+        return `/interview-histories/statistics?${params.toString()}`;
       },
     }),
     getMasteriesHistoryStatistic: builder.query({

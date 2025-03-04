@@ -1,6 +1,7 @@
 import { apiSlice } from '../services/api/apiSlice';
 import { setDarkTheme } from '../theme/themeSlice';
 import { getTokenInHeaders } from '../../utils/helpers';
+import { TAG_TYPES_ARRAY } from '../../utils/constants/tagTypes';
 import { logOut } from './authSlice';
 import { clearTokens } from './tokenSlice';
 
@@ -58,6 +59,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
         responseHandler: (response) => response.text(),
       }),
+      invalidatesTags: TAG_TYPES_ARRAY,
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         await queryFulfilled;
         dispatch(logOut());
