@@ -61,8 +61,15 @@ export const styles = {
     top: 0,
     color: theme.palette.schedule.popup.closeIconColor,
   }),
+  modalTitle: {
+    position: 'absolute',
+    left: '16px',
+    top: '16px',
+    fontSize: '16px',
+  },
   infoContainer: (theme) => ({
     display: 'flex',
+    paddingTop: '12px',
     marginBottom: theme.spacing(2),
   }),
   userInfo: (theme) => ({

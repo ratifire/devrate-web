@@ -59,9 +59,12 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
 
       {event.type === 'INTERVIEW' && (
         <Box sx={styles.infoContainer}>
-          <IconButton sx={styles.closeIcon} onClick={handleClosePopup}>
-            <CloseIcon />
-          </IconButton>
+          <Box>
+            <Typography sx={styles.modalTitle}>{event.title}</Typography>
+            <IconButton sx={styles.closeIcon} onClick={handleClosePopup}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
           <Box sx={styles.userInfo}>
             <Typography sx={styles.title} variant='caption2'>
               {t('schedule.popupUserInfo')}
