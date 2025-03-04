@@ -1,8 +1,11 @@
 import { Box, Container, Paper } from '@mui/material';
-import { Suspense } from 'react';
-import InterviewRequest from '../../../components/PageComponents/InterviewRequest';
+import { lazy, memo, Suspense } from 'react';
 import InterviewRequestSkeleton from '../../../components/UI/Skeleton/Pages/InterviewRequestSkeleton/InterviewRequestSkeleton.jsx';
 import { styles } from './InterviewRequestsPage.styles.js';
+
+const InterviewRequest = lazy(() => import('../../../components/PageComponents/InterviewRequest'));
+
+const MemoizedInterviewRequest = memo(InterviewRequest);
 
 const InterviewRequestsPage = () => {
   return (
@@ -10,7 +13,7 @@ const InterviewRequestsPage = () => {
       <Box sx={styles.contentWrapper}>
         <Paper sx={styles.interviewRequest}>
           <Suspense fallback={<InterviewRequestSkeleton />}>
-            <InterviewRequest />
+            <MemoizedInterviewRequest />
           </Suspense>
         </Paper>
       </Box>
