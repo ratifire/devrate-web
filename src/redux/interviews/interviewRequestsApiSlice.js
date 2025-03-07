@@ -41,7 +41,10 @@ export const interviewRequestsApiSlice = apiSlice.injectEndpoints({
       query: (masteryId) => ({
         url: `/interview-requests/masteries/${masteryId}`,
       }),
-      providesTags: (result, error, arg) => [{ type: TAG_TYPES.InterviewRequestByMasteryId, id: arg }],
+      providesTags: (result, error, arg) => [
+        { type: TAG_TYPES.InterviewRequest },
+        { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg },
+      ],
     }),
   }),
 });
