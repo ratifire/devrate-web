@@ -13,6 +13,8 @@ import {
   UserCardSkeleton,
 } from '../../../components/UI/Skeleton';
 import { formatToLocalDateInterview } from '../../../utils/helpers/formatToLocalDateInterview.js';
+import { useGetAvatarUserQuery } from '../../../redux/user/avatar/avatarApiSlice.js';
+import { ErrorComponent } from '../../../components/UI/Exceptions/index.js';
 import { styles } from './SingleIPassednterviewPage.styles.js';
 
 const InterviewInfo = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewInfo'));
@@ -46,6 +48,12 @@ const SinglePassedInterviewPage = () => {
   const { data: userContacts } = useGetPersonalUserQuery(attendeeId);
 
   const {
+    data: avatar,
+    isLoading: isLoadingAvatar,
+    isError: isErrorAvatar,
+  } = useGetAvatarUserQuery(attendeeId, { skip: !attendeeId });
+
+  const {
     dateTime = new Date(),
     hardSkills = {},
     softSkills = {},
@@ -74,6 +82,14 @@ const SinglePassedInterviewPage = () => {
   const role = lvlMastery[attendeeMasteryLevel] + ' ' + attendeeSpecialization;
   const level = lvlMastery[attendeeMasteryLevel];
 
+  if (isErrorAvatar) {
+    return <ErrorComponent />;
+  }
+
+  if (isLoadingAvatar) {
+    return <UserCardSkeleton />;
+  }
+
   return (
     <Box className='InterviewsPage' sx={styles.mainContent}>
       <Paper sx={styles.userInfo}>
@@ -86,7 +102,7 @@ const SinglePassedInterviewPage = () => {
             lastName={lastName}
             lvl={level}
             role={role}
-            src=''
+            src={avatar}
           />
         </Suspense>
       </Paper>
