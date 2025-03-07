@@ -49,6 +49,9 @@ const ScheduleInterviewModal = () => {
     (item) => item.role === formik.values.role && item.availableDates.length > 0
   );
 
+  // Needed to enable Schedule btn in Step 2
+  const hasEnoughAvailableDates = formik.values.availableDates.length >= formik.values.interviewCount;
+
   const handleNextStep = () => {
     setActiveStep(LAST_STEP);
   };
@@ -95,7 +98,7 @@ const ScheduleInterviewModal = () => {
             )}
             {activeStep === LAST_STEP && (
               <ButtonDef
-                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting || !hasEnoughAvailableDates}
                 label={t('interviews.scheduleInterviewModal.scheduleBtn')}
                 loading={isLoading}
                 sx={styles.btn}
