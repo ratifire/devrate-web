@@ -365,7 +365,8 @@ export const en = {
             },
             incorrectAvatar: 'This file can not be used as avatar',
             failedLoad: 'Failed to load image',
-            imageSize: 'Image dimensions must be at least 98x98 pixels',
+            imageFileSize: 'Your image is {{size}}MB and should not exceed 5 MB.',
+            imageSize: 'Image dimension is {{width}}x{{height}} pixels must be at least 98x98 pixels',
           },
           languages: {
             title: 'Languages',
