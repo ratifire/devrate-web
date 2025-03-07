@@ -61,8 +61,15 @@ export const styles = {
     top: 0,
     color: theme.palette.schedule.popup.closeIconColor,
   }),
+  modalTitle: {
+    position: 'absolute',
+    left: '16px',
+    top: '16px',
+    fontSize: '16px',
+  },
   infoContainer: (theme) => ({
     display: 'flex',
+    paddingTop: '12px',
     marginBottom: theme.spacing(2),
   }),
   userInfo: (theme) => ({
@@ -112,11 +119,17 @@ export const styles = {
     height: '100%',
   },
   icon: (theme) => ({
-    width: '24px',
-    height: '24px',
+    color: theme.palette.schedule.userLinksEvent.color,
     display: 'block',
-    color: theme.palette.schedule.popup.iconColor,
+    textTransform: 'none',
     padding: 0,
+
+    '&:hover': {
+      color: theme.palette.schedule.userLinksEvent.hover.color,
+    },
+    '&:active': {
+      color: theme.palette.schedule.userLinksEvent.active.color,
+    },
   }),
   outlined: (theme) => ({
     display: 'block',

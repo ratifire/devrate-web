@@ -567,8 +567,11 @@ export const en = {
       participant: 'Participant',
       cancelEventBtn: 'Cancel event',
       popupUserInfo: 'Info about you',
-      popupInterviewerInfo: 'Info about role',
+      popupInterviewerInfo: 'Info about interviewer',
       popupRole: 'Role:',
+      CANDIDATE: 'Candidate',
+      INTERVIEWER: 'Interviewer',
+      link: 'Connect to meeting',
     },
     notifications: {
       empty: 'You currently have no new notifications',

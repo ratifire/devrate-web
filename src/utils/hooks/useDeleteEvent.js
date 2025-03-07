@@ -7,16 +7,7 @@ export const useDeleteEvent = () => {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
 
-  return async ({ userId, eventId, onSuccess, onError, onFinally }) => {
-    if (!userId) {
-      if (!onError) {
-        enqueueSnackbar(t('schedule.missingUserIdErrorMessage'), { variant: 'error' });
-      } else {
-        onError(t('schedule.missingUserIdErrorMessage'));
-      }
-      return;
-    }
-
+  return async ({ eventId, onSuccess, onError, onFinally }) => {
     if (!eventId) {
       if (!onError) {
         enqueueSnackbar(t('schedule.missingEventIdErrorMessage'), { variant: 'error' });
@@ -27,7 +18,7 @@ export const useDeleteEvent = () => {
     }
 
     try {
-      await deleteEventById({ userId, id: eventId }).unwrap();
+      await deleteEventById({ id: eventId }).unwrap();
       enqueueSnackbar(t('schedule.deleteEventSuccessMessage'), { variant: 'success' });
       onSuccess?.();
       // eslint-disable-next-line no-unused-vars
