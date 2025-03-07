@@ -150,7 +150,7 @@ const EducationModal = () => {
                 helperText={formik.touched.name && formik.errors.name}
                 label='profile.modal.education.name'
                 name='name'
-                placeholder='profile.modal.education.edIstitution_placeholder'
+                placeholder='profile.modal.education.edInstitution_placeholder'
                 value={formik.values.name}
               />
             </Box>
