@@ -2,7 +2,7 @@ region = "eu-north-1"
 
 instance_type = "t3.small"
 
-ecs_ex_role_frontend = "ecs_ex_role_frontend_prod"
+ecs_ex_role_frontend = "ecs-ex-role-frontend-prod"
 
 ecs-inst-role-frontend = "ecs-inst-role-frontend-prod"
 
