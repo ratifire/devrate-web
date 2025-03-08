@@ -35,3 +35,5 @@ instance_profile_frontend = "ecs-instance-profile-frontend-prod"
 ecs_ex_role_frontend = "ecs-ex-role-frontend-prod"
 
 ecs-inst-role-frontend = "ecs-inst-role-frontend-prod"
+
+deploy_profile = "prod"
