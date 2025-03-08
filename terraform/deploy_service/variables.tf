@@ -109,5 +109,5 @@ variable "ecs-inst-role-frontend" {
 
 variable "deploy_profile" {
   description = "Deployment environment (prod or dev)"
-  default = "dev"
+  default     = "dev"
 }
