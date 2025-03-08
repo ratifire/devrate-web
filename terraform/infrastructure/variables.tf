@@ -48,3 +48,7 @@ variable "instance_profile_frontend" {
 variable "frontend_security_group_name" {
   default = "Security_group_for_frontend_project"
 }
+
+variable "front_key" {
+  default = "terraform_ec2_front_key_pair"
+}

@@ -78,3 +78,7 @@ variable "front_capacity_provider" {
 variable "front_capacity_provider_tag" {
   default = "front_capacity_provider"
 }
+
+variable "front_key" {
+  default = "terraform_ec2_front_key_pair"
+}
