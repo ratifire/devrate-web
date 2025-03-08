@@ -1,5 +1,5 @@
 resource "aws_security_group" "frontend_security_group" {
-  name        = "Security_group_for_frontend_project"
+  name        = var.frontend_security_group_name
   description = "Allow tcp inbound traffic and all outbound traffic"
   vpc_id      = aws_default_vpc.default_vpc.id
 

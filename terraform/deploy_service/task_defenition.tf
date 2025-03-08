@@ -1,10 +1,10 @@
 resource "aws_ecs_task_definition" "task_definition_front" {
 
-  family = "frontend_td"
+  family = var.td_family
 
   container_definitions = jsonencode([
     {
-      name              = "front-container",
+      name              = var.front_container_name,
       image             = "${data.aws_caller_identity.current_user.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.front_repository_name}:${var.image_tag}",
       cpu               = 0,
       memory            = 1900,
@@ -27,10 +27,6 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       ],
       essential = true,
       environment = [
-        {
-          name  = "ACTIVE_PROFILE",
-          value = "production"
-        },
         {
           name  = "REACT_APP_API_URL",
           value = "https://${var.back_subdomain_name}"

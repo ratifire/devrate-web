@@ -1,5 +1,5 @@
 resource "aws_lb" "front_ecs_alb" {
-  name               = "ecs-alb-front"
+  name               = var.front_ecs_alb
   internal           = false
   load_balancer_type = "application"
   security_groups    = [data.aws_security_group.vpc_frontend_security_group.id]
@@ -11,7 +11,7 @@ resource "aws_lb" "front_ecs_alb" {
 }
 
 resource "aws_lb_target_group" "http_ecs_tg_front" {
-  name                 = "http-ecs-tg-front"
+  name                 = var.http_ecs_tg_front
   port                 = var.front_port
   protocol             = "HTTP"
   vpc_id               = data.aws_vpcs.all_vpcs.ids[0]

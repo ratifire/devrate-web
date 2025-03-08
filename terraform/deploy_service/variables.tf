@@ -44,7 +44,7 @@ variable "bucket_name_logs" {
 }
 
 variable "subdomain_name" {
-  default = "server.devrate.org"
+  default = "server.skillzzy.com"
 }
 
 variable "back_subdomain_name" {
@@ -53,4 +53,61 @@ variable "back_subdomain_name" {
 
 variable "vpc" {
   default = "vpc-0032e90317069a534"
+}
+
+variable "td_family" {
+  default = "frontend_td"
+}
+
+variable "front_ecs_alb" {
+  default = "ecs-alb-front"
+}
+
+variable "http_ecs_tg_front" {
+  default = "http-ecs-tg-front"
+}
+
+variable "ecs_front_launch" {
+  default = "ecs_front_launch"
+}
+
+variable "front_capacity_provider" {
+  default = "front_capacity_provider"
+}
+
+variable "front_capacity_provider_tag" {
+  default = "front_capacity_provider"
+}
+
+variable "front_key" {
+  default = "terraform_ec2_front_key_pair"
+}
+
+variable "ecs_front_instance_tag" {
+  default = "Ecs-Front-Instance-ASG"
+}
+
+variable "front_service_name" {
+  default = "frontend-service"
+}
+
+variable "vpc_frontend_security_group" {
+  default = "Security_group_for_frontend_project"
+}
+
+variable "instance_profile_frontend" {
+  default = "ecs-instance-profile-frontend"
+}
+
+variable "ecs_ex_role_frontend" {
+  default = "ecs-ex-role-frontend"
+}
+
+variable "ecs-inst-role-frontend" {
+  default = "ecs-inst-role-frontend"
+}
+
+variable "deploy_profile" {
+  description = "Deployment environment (prod or dev)"
+  default     = "dev"
 }
