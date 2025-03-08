@@ -85,7 +85,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
   }
   dynamic "tag" {
     for_each = {
-      Name  = "Ecs-Front-Instance-ASG"
+      Name  = var.ecs_front_instance_tag
       Owner = "Max Matveichuk"
     }
     content {

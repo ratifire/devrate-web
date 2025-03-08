@@ -55,7 +55,7 @@ data "aws_ami" "aws_linux_latest_ecs" {
 data "aws_instances" "filtered_instances" {
   filter {
     name   = "tag:Name"
-    values = ["Ecs-Front-Instance-ASG"]
+    values = [var.ecs_front_instance_tag]
   }
 }
 

@@ -82,3 +82,7 @@ variable "front_capacity_provider_tag" {
 variable "front_key" {
   default = "terraform_ec2_front_key_pair"
 }
+
+variable "ecs_front_instance_tag" {
+  default = "Ecs-Front-Instance-ASG"
+}

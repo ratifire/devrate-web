@@ -23,3 +23,5 @@ front_capacity_provider = "frontend-ec2-capacity-provider-prod"
 front_capacity_provider_tag = "back-ec2-capacity-provider-prod"
 
 front_key = "terraform_ec2_front_key_pair_prod"
+
+ecs_front_instance_tag = "Ecs-Front-Instance-ASG-prod"
