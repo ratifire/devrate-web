@@ -21,7 +21,7 @@ export const formatToLocalDate = (dateString) => {
 
   const localDate = utcDate.setZone('local');
 
-  return localDate.toLocaleString(DateTime.DATETIME_MED);
+  return localDate.toFormat('yyyy.MM.dd HH:mm');
 };
 
 export const generateYearsArray = () => {
