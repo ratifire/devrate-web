@@ -52,3 +52,7 @@ variable "frontend_security_group_name" {
 variable "front_key" {
   default = "terraform_ec2_front_key_pair"
 }
+
+variable "front_service_name" {
+  default = "frontend-service"
+}
