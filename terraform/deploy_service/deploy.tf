@@ -104,7 +104,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
 }
 
 resource "aws_ecs_service" "front_services" {
-  name                               = var.front_repository_name
+  name                               = var.front_service_name
   cluster                            = var.front_cluster_name
   task_definition                    = aws_ecs_task_definition.task_definition_front.arn
   scheduling_strategy                = "REPLICA"

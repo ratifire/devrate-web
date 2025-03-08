@@ -86,3 +86,23 @@ variable "front_key" {
 variable "ecs_front_instance_tag" {
   default = "Ecs-Front-Instance-ASG"
 }
+
+variable "front_service_name" {
+  default = "frontend-service"
+}
+
+variable "vpc_frontend_security_group" {
+  default = "Security_group_for_frontend_project"
+}
+
+variable "instance_profile_frontend" {
+  default = "ecs-instance-profile-frontend"
+}
+
+variable "ecs_ex_role_frontend" {
+  default = "ecs-ex-role-frontend"
+}
+
+variable "ecs-inst-role-frontend" {
+  default = "ecs-inst-role-frontend"
+}

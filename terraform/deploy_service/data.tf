@@ -5,15 +5,15 @@ data "aws_caller_identity" "current_user" {}
 data "aws_availability_zones" "availability_zones" {}
 
 data "aws_security_group" "vpc_frontend_security_group" {
-  name = "Security_group_for_frontend_project"
+  name = var.vpc_frontend_security_group
 }
 
 data "aws_key_pair" "keypair" {
-  key_name = "terraform_ec2_front_key_pair"
+  key_name = var.front_key
 }
 
 data "aws_iam_instance_profile" "aws_iam_instance_profile_frontend" {
-  name = "ecs-instance-profile-frontend"
+  name = var.instance_profile_frontend
 }
 
 data "aws_vpcs" "all_vpcs" {}
@@ -37,10 +37,10 @@ data "aws_subnets" "default_subnets" {
 }
 
 data "aws_iam_role" "ecs_task_execution_role_arn" {
-  name = "ecs-ex-role-frontend"
+  name = var.ecs_ex_role_frontend
 }
 data "aws_iam_role" "ecs_instance_role" {
-  name = "ecs-inst-role-frontend"
+  name = var.ecs-inst-role-frontend
 }
 
 data "aws_ami" "aws_linux_latest_ecs" {

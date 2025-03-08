@@ -25,3 +25,13 @@ front_capacity_provider_tag = "back-ec2-capacity-provider-prod"
 front_key = "terraform_ec2_front_key_pair_prod"
 
 ecs_front_instance_tag = "Ecs-Front-Instance-ASG-prod"
+
+front_service_name = "frontend-service-prod"
+
+vpc_frontend_security_group = "Security_group_for_frontend_project_prod"
+
+instance_profile_frontend = "ecs-instance-profile-frontend-prod"
+
+ecs_ex_role_frontend = "ecs-ex-role-frontend-prod"
+
+ecs-inst-role-frontend = "ecs-inst-role-frontend-prod"
