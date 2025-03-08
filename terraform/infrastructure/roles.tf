@@ -18,7 +18,7 @@ locals {
 }
 
 resource "aws_iam_role" "ecs_ex_role_frontend" {
-  name = "ecs-ex-role-frontend"
+  name = var.ecs_ex_role_frontend
   assume_role_policy = jsonencode({
     "Version" : "2008-10-17",
     "Statement" : [
@@ -42,7 +42,7 @@ resource "aws_iam_role_policy_attachment" "ecs_policy_attachments_ex_frontend_ro
 }
 
 resource "aws_iam_role" "ecs_inst_role_frontend" {
-  name = "ecs-inst-role-frontend"
+  name = var.ecs-inst-role-frontend
   assume_role_policy = jsonencode({
     "Version" : "2008-10-17",
     "Statement" : [
@@ -67,6 +67,6 @@ resource "aws_iam_role_policy_attachment" "ecs_policy_attachments_inst_backend_r
 }
 
 resource "aws_iam_instance_profile" "instance_profile_frontend" {
-  name = "ecs-instance-profile-frontend"
+  name = var.instance_profile_frontend
   role = aws_iam_role.ecs_inst_role_frontend.name
 }

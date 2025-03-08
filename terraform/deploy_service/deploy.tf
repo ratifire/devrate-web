@@ -3,7 +3,7 @@ resource "aws_ecs_cluster" "frontend_cluster" {
 }
 
 resource "aws_launch_template" "ecs_front_launch" {
-  name_prefix            = "ecs_front_launch"
+  name_prefix            = var.http_ecs_tg_front
   image_id               = data.aws_ami.aws_linux_latest_ecs.image_id
   instance_type          = var.instance_type
   vpc_security_group_ids = [data.aws_security_group.vpc_frontend_security_group.id]
@@ -34,7 +34,7 @@ resource "aws_launch_template" "ecs_front_launch" {
 }
 
 resource "aws_ecs_capacity_provider" "front_capacity_provider" {
-  name = "frontend-ec2-capacity-provider"
+  name = var.front_capacity_provider
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.ecs_front_asg.arn
@@ -48,7 +48,7 @@ resource "aws_ecs_capacity_provider" "front_capacity_provider" {
   }
 
   tags = {
-    Name = "back-ec2-capacity-provider"
+    Name = var.front_capacity_provider_tag
   }
 }
 
@@ -104,7 +104,7 @@ resource "aws_autoscaling_group" "ecs_front_asg" {
 }
 
 resource "aws_ecs_service" "front_services" {
-  name                               = "front-service"
+  name                               = var.front_repository_name
   cluster                            = var.front_cluster_name
   task_definition                    = aws_ecs_task_definition.task_definition_front.arn
   scheduling_strategy                = "REPLICA"
