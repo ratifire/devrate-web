@@ -8,7 +8,7 @@ subdomain_name = "skillzzy.com"
 
 vpc = "vpc-0032e90317069a534"
 
-back_subdomain_name = "server.skillzzy.com"
+back_subdomain_name = "server-prod.skillzzy.com"
 
 instance_type = "t3.small"
 
