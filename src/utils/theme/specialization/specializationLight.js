@@ -29,6 +29,7 @@ export const specializationLight = {
       passedGrad1: '#B07AFD',
       passedGrad2: '#8838FA',
       passedGrad3: '#5B08D3',
+      cursorHover: 'rgb(204, 204, 204)',
     },
     assessmentChart: {
       grad1: '#EE7538',
