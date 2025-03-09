@@ -15,6 +15,7 @@ import { FormSelect } from '../../../FormsComponents/Inputs';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { fillEndYear } from '../../../../utils/helpers/index.js';
 import { styles } from './EducationModal.styles';
 
 const EducationModal = () => {
@@ -32,7 +33,7 @@ const EducationModal = () => {
   useEffect(() => {
     const currentYear = new Date().getFullYear();
     const startYearsOpts = [];
-    for (let i = 1950; i <= currentYear; i++) {
+    for (let i = currentYear; i >= 1950; i--) {
       startYearsOpts.push(`${i}`);
     }
     setStartYears(startYearsOpts);
@@ -182,6 +183,7 @@ const EducationModal = () => {
                 value={formik.values.isCurrentDate ? '' : formik.values.endYear}
                 variant='outlined'
                 onChange={(value) => formik.setFieldValue('endYear', value)}
+                onOpen={() => fillEndYear(formik, endYears)}
               />
               <Box sx={styles.checkBoxContainer}>
                 <FormCheckbox
