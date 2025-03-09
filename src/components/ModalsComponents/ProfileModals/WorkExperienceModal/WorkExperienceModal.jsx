@@ -17,6 +17,7 @@ import { generateYearsArray } from '../../../../utils/helpers/dateHandlers.js';
 import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { addUniqueItem } from '../../../../utils/helpers/ProfileWorkExperience/addUniqueItem.js';
+import fillEndYear from '../../../../utils/helpers/fillEndYear.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceModal = () => {
@@ -152,6 +153,7 @@ const WorkExperienceModal = () => {
                 sx={styles.input50}
                 value={formik.values.currentDate ? '' : formik.values.endYear}
                 variant='outlined'
+                onOpen={() => fillEndYear(formik, selectYears)}
               />
               <Box sx={styles.checkBoxContainer}>
                 <FormCheckbox
