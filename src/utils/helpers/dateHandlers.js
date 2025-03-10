@@ -25,10 +25,13 @@ export const formatToLocalDate = (dateString) => {
 };
 
 export const generateYearsArray = () => {
+  const currentYear = new Date().getFullYear();
   const availableYears = [];
-  for (let i = 1950; i <= `${new Date().getFullYear()}`; i++) {
+
+  for (let i = currentYear; i >= 1950; i--) {
     availableYears.push(`${i}`);
   }
+
   return availableYears;
 };
 

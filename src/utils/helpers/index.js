@@ -5,8 +5,10 @@ import getTokenInHeaders from './getTokenInHeaders';
 import { formatDateAndTime } from './dateHandlers.js';
 import formatTimeToUtc from './formatTimeToUtc';
 import formatTimeWithOffset from './formatTimeWithOffset';
+import fillEndYear from './fillEndYear';
 
 export {
+  fillEndYear,
   bgFromString,
   checkContrastColor,
   getUserUTC,
