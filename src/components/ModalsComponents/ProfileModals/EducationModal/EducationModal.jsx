@@ -144,6 +144,7 @@ const EducationModal = () => {
             <Box sx={styles.input50}>
               <FormInput
                 required
+                autoComplete='off'
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
