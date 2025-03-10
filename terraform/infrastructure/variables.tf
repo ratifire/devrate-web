@@ -32,3 +32,27 @@ variable "front_port" {
   description = "Port number on which back service is listening"
   default     = 3000
 }
+
+variable "ecs_ex_role_frontend" {
+  default = "ecs-ex-role-frontend"
+}
+
+variable "ecs-inst-role-frontend" {
+  default = "ecs-inst-role-frontend"
+}
+
+variable "instance_profile_frontend" {
+  default = "ecs-instance-profile-frontend"
+}
+
+variable "frontend_security_group_name" {
+  default = "Security_group_for_frontend_project"
+}
+
+variable "front_key" {
+  default = "terraform_ec2_front_key_pair"
+}
+
+variable "front_service_name" {
+  default = "frontend-service"
+}
