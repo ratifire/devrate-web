@@ -580,13 +580,13 @@ export const en = {
       hourAgo: 'hours ago',
       lessThanHourAgo: 'Less than an hour ago',
       interviewScheduled:
-        'Your interview for the {{roleLower}} role has been scheduled for {{date}} (UTC). Please be prepared and available at that time.',
+        'Your interview for the {{roleLower}} role has been scheduled for {{date}}. Please be prepared and available at that time.',
       greeting:
         "Welcome aboard! We're excited to have you join Skillzzy, where developers share expertise, learn, and connect.",
       interviewFeedback:
         "Congratulations on completing the interview! Please fill out a short form and evaluate your conversation partner's skills.",
       interviewRejected:
-        "The interview with {{rejectionUserFirstName}} scheduled for {{scheduleTime}} has been canceled. We'll arrange a new one soon and keep you updated.",
+        "The interview with {{rejectionUserFirstName}} scheduled for {{date}} has been canceled. We'll arrange a new one soon and keep you updated.",
       interviewRequestExpired:
         'Dear {{userFirstName}}, Your interview request has expired. Please submit a new one to proceed.',
       feedbackBtn: 'Leave feedback',

@@ -15,9 +15,13 @@ const useTooltipColorChart = () => {
     border: 'transparent',
   };
 
+  const customCursor = {
+    fill: theme.palette.specialization.interviewChart.cursorHover,
+  };
   return {
     itemStyle,
     contentStyle,
+    customCursor,
   };
 };
 
