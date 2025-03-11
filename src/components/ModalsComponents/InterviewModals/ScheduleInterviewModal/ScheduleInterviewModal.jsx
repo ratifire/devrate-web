@@ -7,11 +7,11 @@ import { InterviewStepper } from '../../FeedbackModal/FeedbackInterviewModal/com
 import SliderComponent from '../components/SliderComponent';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { FIRST_STEP, LAST_STEP } from '../../FeedbackModal/FeedbackInterviewModal/constants';
-import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice.js';
+import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 import { FeedbackModalSkeleton } from '../../../UI/Skeleton';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import useScheduleInterviewForm from '../hooks';
-import { useGetInterviewsByMasteryIdQuery } from '../../../../redux/interviews/interviewRequestsApiSlice.js';
+import { useGetInterviewsByMasteryIdQuery } from '../../../../redux/interviews/interviewRequestsApiSlice';
 import { styles } from './ScheduleInterviewModal.styles';
 
 const ScheduleInterviewModal = () => {
@@ -46,11 +46,11 @@ const ScheduleInterviewModal = () => {
 
   // Check if the selected role has any availableDates in the backend response.If yes, block the button Next and show warning
   const selectedRoleHasAvailableDates = interviewsByMasteryId?.some(
-    (item) => item.role === formik.values.role && item.availableDates.length > 0
+    (item) => item.role === formik.values.role && item.timeSlots?.length > 0
   );
 
   // Needed to enable Schedule btn in Step 2
-  const hasEnoughAvailableDates = formik.values.availableDates.length >= formik.values.interviewCount;
+  const hasEnoughAvailableDates = formik.values.timeSlots.length >= formik.values.interviewCount;
 
   const handleNextStep = () => {
     setActiveStep(LAST_STEP);

@@ -4,14 +4,14 @@ import { Box, Typography } from '@mui/material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
-import { getDatesInWeek } from '../../../../../utils/helpers/getWeekDates.js';
-import { getUserUTC } from '../../../../../utils/helpers/index.js';
-import { useGetInterviewsByMasteryIdQuery } from '../../../../../redux/interviews/interviewRequestsApiSlice.js';
+import { getDatesInWeek } from '../../../../../utils/helpers/getWeekDates';
+import { getUserUTC } from '../../../../../utils/helpers';
+import { useGetInterviewsByMasteryIdQuery } from '../../../../../redux/interviews/interviewRequestsApiSlice';
 import { styles } from './ScheduleInterviewSlots.styles';
-import { CheckboxButton } from './CheckboxButton/CheckboxButton.jsx';
-import RenderTabs from './components/TabsRender.jsx';
-import RenderTimeSlots from './components/RenderTimeSlots.jsx';
-import WeekNavigation from './components/WeekNavigation.jsx';
+import { CheckboxButton } from './CheckboxButton/CheckboxButton';
+import RenderTabs from './components/TabsRender';
+import RenderTimeSlots from './components/RenderTimeSlots';
+import WeekNavigation from './components/WeekNavigation';
 
 const ScheduleInterviewSlots = ({ formik }) => {
   const { t } = useTranslation();
@@ -23,20 +23,14 @@ const ScheduleInterviewSlots = ({ formik }) => {
   // Filter interviewsByMasteryId by the selected role in formik
   const filteredDatesByRole = interviewsByMasteryId?.filter((item) => item.role === formik.values.role);
 
-  const availableDatesMergedArray = filteredDatesByRole?.map((v) => v.availableDates).flat();
-  const assignedDatesMergedArray = filteredDatesByRole?.map((v) => v.assignedDates).flat();
+  const availableDatesMergedArray = filteredDatesByRole?.map((v) => v.timeSlots).flat();
 
   useLayoutEffect(() => {
-    if (availableDatesMergedArray || assignedDatesMergedArray) {
+    if (availableDatesMergedArray) {
       let availableDates = [];
-      let assignedDates = [];
-      if (Array.isArray(availableDatesMergedArray || assignedDatesMergedArray)) {
+      if (Array.isArray(availableDatesMergedArray)) {
         const timeZone = getUserUTC();
         availableDates = availableDatesMergedArray.map((item) => {
-          let d = DateTime.fromISO(item, { zone: 'utc' });
-          return d.setZone(timeZone).toISO();
-        });
-        assignedDates = assignedDatesMergedArray.map((item) => {
           let d = DateTime.fromISO(item, { zone: 'utc' });
           return d.setZone(timeZone).toISO();
         });
@@ -44,8 +38,7 @@ const ScheduleInterviewSlots = ({ formik }) => {
 
       formik.setValues((prevValues) => ({
         ...prevValues,
-        availableDates: Array.from(new Set([...prevValues.availableDates, ...availableDates])), // Запобігаємо дублюванню
-        assignedDates: Array.from(new Set([...prevValues.assignedDates, ...assignedDates])), // Запобігаємо дублюванню
+        timeSlots: Array.from(new Set([...prevValues.timeSlots, ...availableDates])),
       }));
     }
   }, [interviewsByMasteryId]);
@@ -74,30 +67,21 @@ const ScheduleInterviewSlots = ({ formik }) => {
   };
 
   const handleTimeClick = (isoTime) => {
-    const isAvailable = formik.values.availableDates.includes(isoTime);
-    const isAssigned = formik.values.assignedDates.includes(isoTime);
+    const isAvailable = formik.values.timeSlots.includes(isoTime);
 
     if (isAvailable) {
       // If the time is in availableDates, toggle it (add/remove) in availableDates
       formik.setValues((prevState) => ({
         ...prevState,
-        availableDates: prevState.availableDates.includes(isoTime)
-          ? prevState.availableDates.filter((time) => time !== isoTime) // Remove if already exists
-          : [...prevState.availableDates, isoTime], // Add if it doesn't exist
-      }));
-    } else if (isAssigned) {
-      // If the time is in assignedDates, toggle it (add/remove) in assignedDates
-      formik.setValues((prevState) => ({
-        ...prevState,
-        assignedDates: prevState.assignedDates.includes(isoTime)
-          ? prevState.assignedDates.filter((time) => time !== isoTime) // Remove if already exists
-          : [...prevState.assignedDates, isoTime], // Add if it doesn't exist
+        timeSlots: prevState.timeSlots.includes(isoTime)
+          ? prevState.timeSlots.filter((time) => time !== isoTime) // Remove if already exists
+          : [...prevState.timeSlots, isoTime], // Add if it doesn't exist
       }));
     } else {
       // If the time is not in either array, add it to availableDates by default
       formik.setValues((prevState) => ({
         ...prevState,
-        availableDates: [...prevState.availableDates, isoTime],
+        timeSlots: [...prevState.timeSlots, isoTime],
       }));
     }
   };
@@ -108,11 +92,7 @@ const ScheduleInterviewSlots = ({ formik }) => {
       const timeIso = time.toISO();
       const isPastDate = DateTime.now() > time;
 
-      const isAvailable = formik.values.availableDates.includes(timeIso);
-      const isAssigned = formik.values.assignedDates.includes(timeIso);
-
-      // Determine if the checkbox should be checked
-      const isChecked = isAvailable || isAssigned;
+      const isChecked = formik.values.timeSlots.includes(timeIso);
 
       return (
         <CheckboxButton
@@ -142,7 +122,7 @@ const ScheduleInterviewSlots = ({ formik }) => {
         <WeekNavigation weekTitle={weekTitle} onWeekNav={handleWeekNavigation} />
         <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
         <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
-        {formik.values.availableDates.length >= formik.values.interviewCount ? (
+        {formik.values.timeSlots.length >= formik.values.interviewCount ? (
           <Typography sx={styles.timeslotDescription} variant='body'>
             {t('interviews.scheduleInterviewModal.timeslotDescription1')}
             {formik.values.interviewCount}

@@ -6,10 +6,10 @@ import { enqueueSnackbar } from 'notistack';
 import {
   useCreateInterviewRequestMutation,
   useUpdateInterviewRequestMutation,
-} from '../../../../redux/interviews/interviewRequestsApiSlice.js';
+} from '../../../../redux/interviews/interviewRequestsApiSlice';
 import { ScheduleInterviewSchema } from '../../../../utils/validationSchemas';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController';
+import { modalNames } from '../../../../utils/constants/modalNames';
 
 const useScheduleInterviewForm = (mySpecialization) => {
   const { t } = useTranslation();
@@ -31,8 +31,7 @@ const useScheduleInterviewForm = (mySpecialization) => {
     language: 'ua',
     interviewCount: 1,
     comment: '',
-    availableDates: [],
-    assignedDates: [],
+    timeSlots: [],
   };
 
   const onSubmit = async (values) => {
@@ -42,9 +41,8 @@ const useScheduleInterviewForm = (mySpecialization) => {
       languageCode: values.language,
       comment: values.comment,
       desiredInterview: Number(values.interviewCount),
-      availableDates: values.availableDates, //availableDates.length >= desiredInterview
-      assignedDates: values.assignedDates, //always empty array on post request (create)
-      expiredAt: values.availableDates.toSorted().at(-1),
+      timeSlots: values.timeSlots,
+      expiredAt: values.timeSlots.toSorted().at(-1),
     };
 
     try {
@@ -64,8 +62,9 @@ const useScheduleInterviewForm = (mySpecialization) => {
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.interview.create.error'), { variant: 'error' });
+    } finally {
+      closeModal(modalNames.scheduleInterviewModal);
     }
-    closeModal(modalNames.scheduleInterviewModal);
   };
 
   const formik = useFormik({
