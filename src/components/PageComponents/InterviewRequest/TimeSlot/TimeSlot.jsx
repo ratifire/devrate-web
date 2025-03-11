@@ -15,6 +15,12 @@ const TimeSlot = ({ data, isSelected, onSelect }) => {
   const day = t(`interviewRequest.timeSlot.daysOfWeek.${dayKey}`);
   const date = dateTime.toFormat('dd.MM.yyyy');
 
+  const statusStyles = {
+    booked: styles.booked,
+    expired: styles.expired,
+    pending: styles.pending,
+  };
+
   return (
     <Box sx={styles.timeSlot}>
       <Box sx={styles.timeDateContainer}>
@@ -25,7 +31,7 @@ const TimeSlot = ({ data, isSelected, onSelect }) => {
       </Box>
 
       <Box sx={styles.statusCheckboxContainer}>
-        <Box sx={data.type === 'assigned' ? styles.assigned : styles.panding}>
+        <Box sx={statusStyles[data.type] || styles.pending}>
           <Typography sx={styles.statusText} variant={'subtitle3'}>
             {t('interviewRequest.timeSlot.status.status')}{' '}
           </Typography>
@@ -36,7 +42,7 @@ const TimeSlot = ({ data, isSelected, onSelect }) => {
           checkedIcon={<CustomCheckedIcon />}
           icon={<CustomCheckboxIcon />}
           sx={styles.checkBox}
-          onChange={() => onSelect(data.date)}
+          onChange={() => onSelect({ date: data.date, status: data.type })}
         />
       </Box>
     </Box>
