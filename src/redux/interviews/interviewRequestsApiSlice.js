@@ -36,7 +36,6 @@ export const interviewRequestsApiSlice = apiSlice.injectEndpoints({
         { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.body.masteryId },
       ],
     }),
-
     getInterviewsByMasteryId: builder.query({
       query: (masteryId) => ({
         url: `/interview-requests/masteries/${masteryId}`,
@@ -44,6 +43,49 @@ export const interviewRequestsApiSlice = apiSlice.injectEndpoints({
       providesTags: (result, error, arg) => [
         { type: TAG_TYPES.InterviewRequest },
         { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg },
+      ],
+    }),
+    useUpdateInterviewById: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `/interview-requests/${id}`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: TAG_TYPES.InterviewRequest },
+        { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.body.masteryId },
+      ],
+    }),
+    deleteInterviewRequestById: builder.mutation({
+      query: ({ id }) => ({
+        url: `/interview-requests/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: TAG_TYPES.InterviewRequest },
+        { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.body.masteryId },
+      ],
+    }),
+    addTimeSlots: builder.mutation({
+      query: ({ id, timeSlots }) => ({
+        url: `/interview-requests/${id}/add-timeslots`,
+        method: 'POST',
+        body: { timeSlots },
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: TAG_TYPES.InterviewRequest },
+        { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.masteryId },
+      ],
+    }),
+    deleteTimeSlots: builder.mutation({
+      query: ({ id, timeSlots }) => ({
+        url: `/interview-requests/${id}/add-timeslots`,
+        method: 'DELETE',
+        body: { timeSlots },
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: TAG_TYPES.InterviewRequest },
+        { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.masteryId },
       ],
     }),
   }),
@@ -54,4 +96,8 @@ export const {
   useCreateInterviewRequestMutation,
   useUpdateInterviewRequestMutation,
   useGetInterviewsByMasteryIdQuery,
+  useGetInterviewByIdMutation,
+  useDeleteInterviewRequestByIdMutation,
+  useAddTimeSlotsMutation,
+  useDeleteTimeSlotsMutation,
 } = interviewRequestsApiSlice;
