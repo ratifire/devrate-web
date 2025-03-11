@@ -44,7 +44,7 @@ const RequestHeader = ({
     openModal(
       modalNames.scheduleInterviewModal,
       { role: formattedRole, selectedSpecialization, interviewRequestId },
-      1
+      3
     );
   };
 
@@ -54,8 +54,9 @@ const RequestHeader = ({
     openModal(
       modalNames.scheduleInterviewModal,
       { role: formattedRole, selectedSpecialization, interviewRequestId },
-      3
+      1
     );
+    handleCloseMenu();
   };
 
   return (
