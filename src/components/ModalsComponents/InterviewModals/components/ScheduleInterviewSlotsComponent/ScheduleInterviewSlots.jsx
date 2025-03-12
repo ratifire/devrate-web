@@ -31,7 +31,7 @@ const ScheduleInterviewSlots = ({ formik }) => {
       if (Array.isArray(availableDatesMergedArray)) {
         const timeZone = getUserUTC();
         availableDates = availableDatesMergedArray.map((item) => {
-          let d = DateTime.fromISO(item, { zone: 'utc' });
+          let d = DateTime.fromISO(item.dateTime, { zone: 'utc' });
           return d.setZone(timeZone).toISO();
         });
       }
@@ -97,7 +97,7 @@ const ScheduleInterviewSlots = ({ formik }) => {
       return (
         <CheckboxButton
           key={timeIso}
-          disabled={isPastDate}
+          disabled={isPastDate || isChecked}
           isChecked={isChecked}
           label={time.toFormat('HH:mm')}
           name='dates'

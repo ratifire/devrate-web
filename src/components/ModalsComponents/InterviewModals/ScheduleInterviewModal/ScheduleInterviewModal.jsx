@@ -13,9 +13,11 @@ import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import useScheduleInterviewForm from '../hooks';
 import { useGetInterviewsByMasteryIdQuery } from '../../../../redux/interviews/interviewRequestsApiSlice';
 import { styles } from './ScheduleInterviewModal.styles';
+// import InterviewModalRole from '../../../../utils/constants/InterviewModalRole.js';
 
 const ScheduleInterviewModal = () => {
   const { t } = useTranslation();
+  // const modalRole = useSelector((state) => state.modal.data?.modalRole);
 
   //Include step into URL in order to open correct modal on create and edit
   const searchParams = new URLSearchParams(location.search);

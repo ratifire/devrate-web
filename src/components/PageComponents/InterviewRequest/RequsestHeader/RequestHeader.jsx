@@ -9,6 +9,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu/index.js';
 import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import InterviewModalRole from '../../../../utils/constants/InterviewModalRole.js';
 import { styles } from './RequestHeader.styles.js';
 
 const RequestHeader = ({
@@ -43,7 +44,7 @@ const RequestHeader = ({
 
     openModal(
       modalNames.scheduleInterviewModal,
-      { role: formattedRole, selectedSpecialization, interviewRequestId },
+      { role: formattedRole, selectedSpecialization, interviewRequestId, modalRole: 'AddTimeSlots' },
       3
     );
   };
@@ -53,7 +54,7 @@ const RequestHeader = ({
     const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
     openModal(
       modalNames.scheduleInterviewModal,
-      { role: formattedRole, selectedSpecialization, interviewRequestId },
+      { role: formattedRole, selectedSpecialization, interviewRequestId, modalRole: InterviewModalRole.EditFeature },
       1
     );
     handleCloseMenu();
