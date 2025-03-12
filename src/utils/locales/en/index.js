@@ -524,7 +524,7 @@ export const en = {
           skill_short: 'Company too short',
         },
         specializationEdit: {
-          error_message: 'First, complete all open interviews at carrent level!',
+          error_message: 'First, complete all open interviews at current level!',
         },
         confirmSpecializationDelete: {
           title: 'Remove specialization',
