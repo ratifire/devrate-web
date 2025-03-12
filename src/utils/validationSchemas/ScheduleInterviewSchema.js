@@ -7,5 +7,5 @@ export const ScheduleInterviewSchema = Yup.object().shape({
     .min(1, 'interviews.scheduleInterviewModal.interviewCount_min')
     .max(50, 'interviews.scheduleInterviewModal.interviewCount_max')
     .required('interviews.scheduleInterviewModal.required'),
-  comment: Yup.string().max(100, 'interviews.scheduleInterviewModal.comment_max'),
+  comment: Yup.string().max(170, 'interviews.scheduleInterviewModal.comment_max'),
 });
