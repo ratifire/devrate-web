@@ -7,6 +7,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { openModal } from '../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useRegistrationResendCodeMutation } from '../../../../redux/auth/authApiSlice.js';
 import styles from './ConfirmationModal.styles';
 
 const ConfirmationForm = ({
@@ -19,12 +20,19 @@ const ConfirmationForm = ({
   handleSubmit,
   fieldCount = 6,
   showButton = true,
+  email,
 }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [sendResetCode] = useRegistrationResendCodeMutation();
 
   const handleCloseAllModal = () => {
     dispatch(openModal({ modalType: modalNames.registrationModal }));
+  };
+
+  const handleResendCode = async (e) => {
+    e.preventDefault();
+    await sendResetCode({ email });
   };
 
   const isActiveButton = () => Object.values(formik.values).some((value) => value === '');
@@ -105,7 +113,6 @@ const ConfirmationForm = ({
   };
 
   const handleClick = () => {
-    // handleSubmit();
     formik.handleSubmit();
     handleCode();
   };
@@ -173,7 +180,7 @@ const ConfirmationForm = ({
           {t('modal.confirmation.spam_check_text')}
         </Typography>
         <Typography sx={{ textAlign: 'center' }}>
-          <Link sx={styles.confirmationLink} to={'/'}>
+          <Link sx={styles.confirmationLink} to={'/'} onClick={handleResendCode}>
             {t('modal.confirmation.repeat_request_link')}
           </Link>
           <Typography sx={styles.mainText} variant='subtitle3'>
@@ -218,6 +225,7 @@ ConfirmationForm.propTypes = {
   fieldCount: PropTypes.number,
   showButton: PropTypes.bool,
   handleCodeChange: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 export default ConfirmationForm;
