@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Typography } from '@mui/material';
 import range from 'lodash/range';
@@ -25,7 +25,7 @@ const ScheduleInterviewSlots = ({ formik }) => {
 
   const availableDatesMergedArray = filteredDatesByRole?.map((v) => v.timeSlots).flat();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (availableDatesMergedArray) {
       let availableDates = [];
       if (Array.isArray(availableDatesMergedArray)) {
