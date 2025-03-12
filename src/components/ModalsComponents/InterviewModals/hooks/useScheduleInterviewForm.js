@@ -35,7 +35,7 @@ const useScheduleInterviewForm = (mySpecialization) => {
     role,
     specialization: masteryLevelId || '',
     language: 'ua',
-    interviewCount: totalInterviews || 1,
+    interviewCount: +totalInterviews || 1,
     comment: comment || '',
     timeSlots: [],
     addedTimeSlots: [],
