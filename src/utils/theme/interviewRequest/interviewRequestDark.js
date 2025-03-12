@@ -8,6 +8,7 @@ export const interviewRequestDark = {
       borderColor: '#828283',
       statusText: '#FFFFFF',
       statusCircle: {
+        expired: '#F44336',
         assigned: '#64FF2E',
         panding: '#FCA728',
       },

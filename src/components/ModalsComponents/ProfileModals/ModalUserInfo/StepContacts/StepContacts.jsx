@@ -73,7 +73,6 @@ const StepContacts = () => {
   if (isFetching || isLoading) {
     return <StepContactsSkeleton />;
   }
-
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.wrapper}>
@@ -152,7 +151,7 @@ const StepContacts = () => {
         </Box>
       </Box>
       <ButtonDef
-        disabled={!formik.dirty || formik.isSubmitting || !formik.isValid}
+        disabled={!formik.isValid || formik.isSubmitting || !formik.dirty}
         label={t('profile.modal.btn')}
         loading={isLoading}
         sx={styles.btn}
