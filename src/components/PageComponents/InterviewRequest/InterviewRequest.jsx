@@ -22,7 +22,7 @@ const InterviewRequest = () => {
   const masteryFromUrl = query.get('mastery');
 
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
-  const isSpecializations = !!specializations;
+  const isSpecializations = Boolean(specializations.length);
 
   useEffect(() => {
     if (isLoading || isError || !specializations?.length) {
@@ -58,14 +58,10 @@ const InterviewRequest = () => {
   const getUserByRole = (role) => {
     return userData?.find(({ role: userRole }) => userRole === role) || null;
   };
-  return !userData ? (
+  return !isSpecializations ? (
     <EmptyInterviewTab
-      isSpecializations
-      svg={
-        isSpecializations
-          ? emptyInterviewTabsPictures.emptyReqestPic
-          : emptyInterviewTabsPictures.emptySpecialization.request
-      }
+      isSpecializations={isSpecializations}
+      svg={emptyInterviewTabsPictures.emptySpecialization.request}
       tab='Request'
     />
   ) : (

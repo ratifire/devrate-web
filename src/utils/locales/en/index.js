@@ -485,6 +485,7 @@ export const en = {
       },
       modal: {
         specialization: {
+          create: 'Create specialization',
           modal_title: 'Specialization',
           name: 'Specialization name',
           name_placeholder: 'Front-End Developer',

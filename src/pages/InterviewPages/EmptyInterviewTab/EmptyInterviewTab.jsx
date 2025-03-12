@@ -52,7 +52,7 @@ const EmptyPassedInterviewsPage = ({ tab, svg, isSpecializations }) => {
             variant='contained'
             onClick={handlerCreateSpecialization}
           >
-            {t('specialization.modal.interview.makeIncome')}
+            {t('specialization.modal.specialization.create')}
           </Button>
         </Box>
       </Box>
