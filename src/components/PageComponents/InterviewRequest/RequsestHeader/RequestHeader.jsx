@@ -54,7 +54,13 @@ const RequestHeader = ({
     const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
     openModal(
       modalNames.scheduleInterviewModal,
-      { role: formattedRole, selectedSpecialization, interviewRequestId, modalRole: InterviewModalRole.EditFeature },
+      {
+        role: formattedRole,
+        selectedSpecialization,
+        totalInterviews,
+        interviewRequestId,
+        modalRole: InterviewModalRole.EditFeature,
+      },
       1
     );
     handleCloseMenu();

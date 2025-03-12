@@ -18,8 +18,9 @@ const useScheduleInterviewForm = (mySpecialization) => {
 
   const { closeModal } = useModalController();
   const role = useSelector((state) => state.modal.data.role);
-  const selectedSpecialization = useSelector((state) => state.modal.data.selectedSpecialization);
-  const interviewRequestId = useSelector((state) => state.modal.data.interviewRequestId);
+  const selectedSpecialization = useSelector((state) => state.modal.data?.selectedSpecialization);
+  const interviewRequestId = useSelector((state) => state.modal.data?.interviewRequestId);
+  const totalInterviews = useSelector((state) => state.modal.data?.totalInterviews);
 
   //These two lines we need to preselect main mastery level in Step 1
   const mainSpecialization = mySpecialization?.find((item) => item.main === true);
@@ -29,7 +30,7 @@ const useScheduleInterviewForm = (mySpecialization) => {
     role,
     specialization: masteryLevelId || '',
     language: 'ua',
-    interviewCount: 1,
+    interviewCount: totalInterviews || 1,
     comment: '',
     timeSlots: [],
   };
