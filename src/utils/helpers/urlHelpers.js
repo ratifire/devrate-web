@@ -22,25 +22,20 @@ const typeNameMap = Object.freeze({
 });
 
 export const normalizeUrl = (input) => {
-  // 1. Ensure that "input" is a string
   if (typeof input !== 'string') {
     throw new TypeError('Argument "input" must be a string.');
   }
 
-  // 2. Trim whitespace
   let url = input.trim();
 
-  // 3. Check if it's an empty string
   if (!url) {
-    throw new Error('URL cannot be an empty string.');
+    return '';
   }
 
-  // 4. If the string does not start with http:// or https://, prepend http://
   if (!/^https?:\/\//i.test(url)) {
     url = `http://${url}`;
   }
 
-  // 5. Validate and normalize via the URL constructor
   let parsed;
   try {
     parsed = new URL(url);
@@ -48,13 +43,14 @@ export const normalizeUrl = (input) => {
     throw new Error(`URL "${url}" is invalid. Error: ${err.message}`);
   }
 
-  // 6. Return the canonical string (e.g., https://example.com/ becomes canonical)
   return parsed.toString();
 };
 
 export const addTelegram = (url) => {
+  if (!url) return '';
+
   let result = url;
-  if (url && !/^https?:\/\/t\.me\//i.test(url)) {
+  if (!/^https?:\/\/t\.me\//i.test(url)) {
     if (url.startsWith('@')) {
       result = `https://t.me/${url.replace(/^@/, '')}`;
     } else {
