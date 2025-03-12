@@ -67,21 +67,21 @@ const ScheduleInterviewSlots = ({ formik }) => {
   };
 
   const handleTimeClick = (isoTime) => {
-    const isAvailable = formik.values.timeSlots.includes(isoTime);
+    const isAvailable = formik.values.addedTimeSlots.includes(isoTime);
 
     if (isAvailable) {
       // If the time is in availableDates, toggle it (add/remove) in availableDates
       formik.setValues((prevState) => ({
         ...prevState,
-        timeSlots: prevState.timeSlots.includes(isoTime)
-          ? prevState.timeSlots.filter((time) => time !== isoTime) // Remove if already exists
-          : [...prevState.timeSlots, isoTime], // Add if it doesn't exist
+        addedTimeSlots: prevState.addedTimeSlots.includes(isoTime)
+          ? prevState.addedTimeSlots.filter((time) => time !== isoTime) // Remove if already exists
+          : [...prevState.addedTimeSlots, isoTime], // Add if it doesn't exist
       }));
     } else {
       // If the time is not in either array, add it to availableDates by default
       formik.setValues((prevState) => ({
         ...prevState,
-        timeSlots: [...prevState.timeSlots, isoTime],
+        addedTimeSlots: [...prevState.addedTimeSlots, isoTime],
       }));
     }
   };
@@ -92,12 +92,13 @@ const ScheduleInterviewSlots = ({ formik }) => {
       const timeIso = time.toISO();
       const isPastDate = DateTime.now() > time;
 
-      const isChecked = formik.values.timeSlots.includes(timeIso);
+      const isDisabled = formik.values.timeSlots.includes(timeIso);
+      const isChecked = formik.values.addedTimeSlots.includes(timeIso);
 
       return (
         <CheckboxButton
           key={timeIso}
-          disabled={isPastDate || isChecked}
+          disabled={isPastDate || isDisabled}
           isChecked={isChecked}
           label={time.toFormat('HH:mm')}
           name='dates'

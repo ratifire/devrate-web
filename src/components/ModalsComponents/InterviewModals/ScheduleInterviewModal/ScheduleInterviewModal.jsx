@@ -66,7 +66,8 @@ const ScheduleInterviewModal = () => {
     return <ErrorComponent />;
   }
 
-  const isVisibleSaveBtn = modalRole === InterviewModalRole.EditFeature;
+  const isVisibleSaveBtn =
+    modalRole === InterviewModalRole.EditFeature || modalRole === InterviewModalRole.AddTimeSlots;
 
   return (
     <Box sx={styles.container}>
@@ -82,37 +83,37 @@ const ScheduleInterviewModal = () => {
           )}
           <Box sx={styles.sendBox}>
             {!isVisibleSaveBtn && (
-              <ButtonDef
-                disabled={activeStep === 1}
-                label={t('modal.interview.btnBack')}
-                sx={styles.btn}
-                type={'button'}
-                variant={'contained'}
-                onClick={handlePrevStep}
-              />
-            )}
-            {isVisibleSaveBtn ||
-              (activeStep === FIRST_STEP && (
+              <>
                 <ButtonDef
-                  disabled={!formik.isValid || (selectedRoleHasAvailableDates && !selectedSpecialization)}
-                  label={t('modal.interview.btnNext')}
+                  disabled={activeStep === 1}
+                  label={t('modal.interview.btnBack')}
                   sx={styles.btn}
                   type={'button'}
                   variant={'contained'}
-                  onClick={handleNextStep}
+                  onClick={handlePrevStep}
                 />
-              ))}
-            {!isVisibleSaveBtn ||
-              (activeStep === LAST_STEP && (
-                <ButtonDef
-                  disabled={!formik.isValid || !formik.dirty || formik.isSubmitting || !hasEnoughAvailableDates}
-                  label={t('interviews.scheduleInterviewModal.scheduleBtn')}
-                  loading={isLoading}
-                  sx={styles.btn}
-                  type={'submit'}
-                  variant={'contained'}
-                />
-              ))}
+                {activeStep === FIRST_STEP && (
+                  <ButtonDef
+                    disabled={!formik.isValid || (selectedRoleHasAvailableDates && !selectedSpecialization)}
+                    label={t('modal.interview.btnNext')}
+                    sx={styles.btn}
+                    type={'button'}
+                    variant={'contained'}
+                    onClick={handleNextStep}
+                  />
+                )}
+                {activeStep === LAST_STEP && (
+                  <ButtonDef
+                    disabled={!formik.isValid || !formik.dirty || formik.isSubmitting || !hasEnoughAvailableDates}
+                    label={t('interviews.scheduleInterviewModal.scheduleBtn')}
+                    loading={isLoading}
+                    sx={styles.btn}
+                    type={'submit'}
+                    variant={'contained'}
+                  />
+                )}
+              </>
+            )}
             {isVisibleSaveBtn && (
               <ButtonDef
                 disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}

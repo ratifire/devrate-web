@@ -38,6 +38,7 @@ const useScheduleInterviewForm = (mySpecialization) => {
     interviewCount: totalInterviews || 1,
     comment: comment || '',
     timeSlots: [],
+    addedTimeSlots: [],
   };
 
   const onSubmit = async (values) => {
@@ -53,9 +54,7 @@ const useScheduleInterviewForm = (mySpecialization) => {
         desiredInterview: Number(values.interviewCount),
       };
     } else if (modalRole === interviewModalRole.AddTimeSlots) {
-      body = {
-        timeSlots: values.timeSlots,
-      };
+      body = values.addedTimeSlots;
     } else {
       body = {
         role,
@@ -64,7 +63,7 @@ const useScheduleInterviewForm = (mySpecialization) => {
         languageCode: values.language,
         expiredAt: values.timeSlots.toSorted().at(-1),
         desiredInterview: Number(values.interviewCount),
-        timeSlots: values.timeSlots,
+        timeSlots: values.addedTimeSlots,
       };
     }
 
@@ -73,7 +72,7 @@ const useScheduleInterviewForm = (mySpecialization) => {
         if (modalRole === interviewModalRole.EditFeature) {
           await updateInterviewRequest({ id: interviewRequestId, body });
         } else if (modalRole === interviewModalRole.AddTimeSlots) {
-          await addTimeSlots({ id: interviewRequestId, timeSlots: body.timeSlots });
+          await addTimeSlots({ id: interviewRequestId, body });
         }
         enqueueSnackbar(t('modalNotifyText.interview.edit.success'), {
           variant: 'success',
