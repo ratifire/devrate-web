@@ -1,15 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { InterviewStepper } from '../../FeedbackModal/FeedbackInterviewModal/components/InterviewStepper';
 import SliderComponent from '../components/SliderComponent';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { FIRST_STEP, LAST_STEP } from '../../FeedbackModal/FeedbackInterviewModal/constants';
-import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 import { FeedbackModalSkeleton } from '../../../UI/Skeleton';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import useScheduleInterviewForm from '../hooks';
 import { useGetInterviewsByMasteryIdQuery } from '../../../../redux/interviews/interviewRequestsApiSlice';
 import InterviewModalRole from '../../../../utils/constants/InterviewModalRole';
@@ -22,25 +20,10 @@ const ScheduleInterviewModal = () => {
   const searchParams = new URLSearchParams(location.search);
   const stepParam = searchParams.get('step');
   const [activeStep, setActiveStep] = useState(+stepParam || FIRST_STEP);
-
-  const {
-    data: { id: userId },
-  } = useSelector(selectCurrentUser);
-  const { data: allSpecializations, isFetching } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
-  const { formik, isError, isLoading, selectedSpecialization } = useScheduleInterviewForm(allSpecializations);
-
-  //Needed in order to set up (block) correct masteryID in dropdown(select) of Step 1
-  const [spec, setSpec] = useState(allSpecializations);
-
-  useEffect(() => {
-    if (selectedSpecialization) {
-      setSpec([selectedSpecialization]);
-      formik.setFieldValue('specialization', selectedSpecialization.mainMasteryId);
-    }
-  }, [selectedSpecialization]);
+  const { formik, isError, isFetching, selectedSpecialization, spec } = useScheduleInterviewForm();
 
   // Fetch interview requests for the selected specialization
-  const { data: interviewsByMasteryId, isFetching: fetchingInterviews } = useGetInterviewsByMasteryIdQuery(
+  const { data: interviewsByMasteryId, isFetching: isFetchingInterviews } = useGetInterviewsByMasteryIdQuery(
     formik.values.specialization,
     { skip: !formik.values.specialization }
   );
@@ -58,7 +41,7 @@ const ScheduleInterviewModal = () => {
   };
   const handlePrevStep = () => setActiveStep(FIRST_STEP);
 
-  if (isFetching || fetchingInterviews) {
+  if (isFetching || isFetchingInterviews) {
     return <FeedbackModalSkeleton />;
   }
 
@@ -68,6 +51,8 @@ const ScheduleInterviewModal = () => {
 
   const isVisibleSaveBtn =
     modalRole === InterviewModalRole.EditFeature || modalRole === InterviewModalRole.AddTimeSlots;
+
+  const isLoading = isFetching || isFetchingInterviews;
 
   return (
     <Box sx={styles.container}>

@@ -12,12 +12,22 @@ import { ScheduleInterviewSchema } from '../../../../utils/validationSchemas';
 import { useModalController } from '../../../../utils/hooks/useModalController';
 import { modalNames } from '../../../../utils/constants/modalNames';
 import interviewModalRole from '../../../../utils/constants/InterviewModalRole';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
+import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice.js';
 
-const useScheduleInterviewForm = (mySpecialization) => {
+const useScheduleInterviewForm = () => {
   const { t } = useTranslation();
+  const {
+    data: { id: userId },
+  } = useSelector(selectCurrentUser);
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
   const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
   const [addTimeSlots] = useAddTimeSlotsMutation();
+  const {
+    data: allSpecializations,
+    isFetching,
+    isError,
+  } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
 
   const { closeModal } = useModalController();
   const role = useSelector((state) => state.modal.data.role);
@@ -29,12 +39,12 @@ const useScheduleInterviewForm = (mySpecialization) => {
   const language = useSelector((state) => state.modal.data?.language);
 
   //These two lines we need to preselect main mastery level in Step 1
-  const mainSpecialization = mySpecialization?.find((item) => item.main === true);
-  const masteryLevelId = mainSpecialization?.mainMasteryId;
+  const mainSpecialization = allSpecializations?.find((item) => item.main === true);
+  const mainMasteryLevelId = mainSpecialization?.mainMasteryId;
 
   const initialValues = {
     role,
-    specialization: masteryLevelId || '',
+    specialization: selectedSpecialization?.mainMasteryId || mainMasteryLevelId || '',
     language: language || 'ua',
     interviewCount: +totalInterviews || 1,
     comment: comment || '',
@@ -102,7 +112,10 @@ const useScheduleInterviewForm = (mySpecialization) => {
 
   return {
     formik,
+    isFetching,
+    isError,
     selectedSpecialization,
+    spec: selectedSpecialization ? [selectedSpecialization] : allSpecializations,
   };
 };
 useScheduleInterviewForm.propTypes = {
