@@ -742,6 +742,7 @@ export const uk = {
         timeslotDescription2: 'Таймслотів має бути обрано не менше ',
         timeslotDescriptionError: 'Ви обрали недостатню кількість таймслотів. Додайте щонайменше ',
         warning: 'Для обраної спеціалізації вже є запит в ролі',
+        thisWeek: 'Цей тиждень',
       },
     },
     singleScheduledInterview: {

@@ -111,7 +111,7 @@ const ScheduleInterviewSlots = ({ formik }) => {
   const weekTitle = useMemo(
     () =>
       DateTime.now().toFormat('W') === date.toFormat('W')
-        ? t('This week')
+        ? t('interviews.scheduleInterviewModal.thisWeek')
         : `${weekDates[0].toFormat('MMMM, d')} - ${weekDates.at(-1).toFormat('MMMM, d')}`,
     [weekDates, date]
   );
