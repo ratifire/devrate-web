@@ -993,8 +993,9 @@ export const en = {
       timeSlot: {
         status: {
           status: 'Status:',
-          available: 'Pending',
-          assigned: 'Scheduled',
+          pending: 'Pending',
+          booked: 'Scheduled',
+          expired: 'Expired',
         },
         daysOfWeek: {
           monday: 'Monday',

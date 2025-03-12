@@ -22,7 +22,7 @@ export const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  panding: (theme) => ({
+  pending: (theme) => ({
     display: 'flex',
     alignItems: 'center',
     color: theme.palette.requestInterview.timeSlot.statusCircle.panding,
@@ -38,7 +38,7 @@ export const styles = {
       verticalAlign: 'middle',
     },
   }),
-  assigned: (theme) => ({
+  booked: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -50,6 +50,23 @@ export const styles = {
       height: '12px',
       borderRadius: '50%',
       backgroundColor: theme.palette.requestInterview.timeSlot.statusCircle.assigned,
+      marginLeft: '4px',
+      display: 'inline-block',
+      verticalAlign: 'middle',
+    },
+  }),
+
+  expired: (theme) => ({
+    display: 'flex',
+    alignItems: 'center',
+    color: theme.palette.requestInterview.timeSlot.statusCircle.expired,
+    position: 'relative',
+    '&::after': {
+      content: '" "',
+      width: '12px',
+      height: '12px',
+      borderRadius: '50%',
+      backgroundColor: theme.palette.requestInterview.timeSlot.statusCircle.expired,
       marginLeft: '4px',
       display: 'inline-block',
       verticalAlign: 'middle',

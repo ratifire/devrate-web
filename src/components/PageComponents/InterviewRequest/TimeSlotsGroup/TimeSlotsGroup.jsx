@@ -46,8 +46,8 @@ const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
             key={slot.date}
             currentDate={date}
             data={slot}
-            isSelected={selectedSlots.includes(slot.date)}
-            onSelect={onSelectSlot}
+            isSelected={selectedSlots.some((selected) => selected.date === slot.date)}
+            onSelect={() => onSelectSlot({ date: slot.date, status: slot.type })}
           />
         ))}
       </Box>

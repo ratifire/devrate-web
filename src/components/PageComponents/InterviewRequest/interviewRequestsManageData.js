@@ -1,23 +1,33 @@
 import { DateTime } from 'luxon';
 
 export const getSortedDatesWithLabel = (respondent) => {
-  const filteredAvailableDates = respondent.availableDates.filter((availableDate) => {
-    return !respondent.assignedDates.some((assignedDate) => {
-      return DateTime.fromISO(availableDate).equals(DateTime.fromISO(assignedDate));
-    });
-  });
+  const timeSlots = respondent.timeSlots || [];
 
-  const availableDatesWithLabel = filteredAvailableDates.map((date) => ({
-    date: DateTime.fromISO(date),
-    type: 'available',
-  }));
+  // Доступные слоты (PENDING)
+  const availableDatesWithLabel = timeSlots
+    .filter((slot) => slot.status === 'PENDING')
+    .map((slot) => ({
+      date: DateTime.fromISO(slot.dateTime),
+      type: 'pending',
+    }));
 
-  const assignedDatesWithLabel = respondent.assignedDates.map((date) => ({
-    date: DateTime.fromISO(date),
-    type: 'assigned',
-  }));
+  // Назначенные слоты (BOOKED)
+  const assignedDatesWithLabel = timeSlots
+    .filter((slot) => slot.status === 'BOOKED')
+    .map((slot) => ({
+      date: DateTime.fromISO(slot.dateTime),
+      type: 'booked',
+    }));
 
-  const allDates = [...availableDatesWithLabel, ...assignedDatesWithLabel];
+  // Просроченные слоты (EXPIRED)
+  const expiredDatesWithLabel = timeSlots
+    .filter((slot) => slot.status === 'EXPIRED')
+    .map((slot) => ({
+      date: DateTime.fromISO(slot.dateTime),
+      type: 'expired',
+    }));
+
+  const allDates = [...availableDatesWithLabel, ...assignedDatesWithLabel, ...expiredDatesWithLabel];
   const sortedDates = allDates.sort((a, b) => a.date - b.date);
 
   return sortedDates.map((item) => ({

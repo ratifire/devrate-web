@@ -8,6 +8,7 @@ export const interviewRequestLight = {
       borderColor: '#69696B',
       statusText: '#1D1D1D',
       statusCircle: {
+        expired: '#F44336',
         assigned: '#3AB310',
         panding: '#EE7538',
       },
