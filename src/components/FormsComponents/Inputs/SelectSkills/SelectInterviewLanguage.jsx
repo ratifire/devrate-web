@@ -34,9 +34,9 @@ const SelectInterviewLanguage = ({ languagesArray, variant, label, error, helper
         value={language}
         onChange={handleChange}
       >
-        {languagesArray?.map(({ id, name }) => (
-          <MenuItem key={id} sx={styles.menuItem} value={id}>
-            {name}
+        {languagesArray?.map((v) => (
+          <MenuItem key={v} sx={styles.menuItem} value={v}>
+            {t(`specialization.language.name.${v}`)}
           </MenuItem>
         ))}
       </Select>

@@ -24,6 +24,7 @@ const RequestHeader = ({
   hasSelectedSlots,
   handleUpdateSlots,
   languageName,
+  languageCode,
   interviewRequestObj,
 }) => {
   const { t } = useTranslation();
@@ -62,6 +63,7 @@ const RequestHeader = ({
         interviewRequestId,
         comment: description,
         modalRole: InterviewModalRole.EditFeature,
+        language: languageCode,
       },
       1
     );
@@ -162,6 +164,7 @@ RequestHeader.propTypes = {
   handleUpdateSlots: PropTypes.func.isRequired,
   hasSelectedSlots: PropTypes.bool.isRequired,
   languageName: PropTypes.string.isRequired,
+  languageCode: PropTypes.string.isRequired,
   interviewRequestObj: PropTypes.object.isRequired,
 };
 
