@@ -4,23 +4,28 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { enqueueSnackbar } from 'notistack';
 import {
+  useAddTimeSlotsMutation,
   useCreateInterviewRequestMutation,
   useUpdateInterviewRequestMutation,
 } from '../../../../redux/interviews/interviewRequestsApiSlice';
 import { ScheduleInterviewSchema } from '../../../../utils/validationSchemas';
 import { useModalController } from '../../../../utils/hooks/useModalController';
 import { modalNames } from '../../../../utils/constants/modalNames';
+import interviewModalRole from '../../../../utils/constants/InterviewModalRole';
 
 const useScheduleInterviewForm = (mySpecialization) => {
   const { t } = useTranslation();
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
   const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
+  const [addTimeSlots] = useAddTimeSlotsMutation();
 
   const { closeModal } = useModalController();
   const role = useSelector((state) => state.modal.data.role);
   const selectedSpecialization = useSelector((state) => state.modal.data?.selectedSpecialization);
   const interviewRequestId = useSelector((state) => state.modal.data?.interviewRequestId);
   const totalInterviews = useSelector((state) => state.modal.data?.totalInterviews);
+  const comment = useSelector((state) => state.modal.data?.comment);
+  const modalRole = useSelector((state) => state.modal.data?.modalRole);
 
   //These two lines we need to preselect main mastery level in Step 1
   const mainSpecialization = mySpecialization?.find((item) => item.main === true);
@@ -31,24 +36,45 @@ const useScheduleInterviewForm = (mySpecialization) => {
     specialization: masteryLevelId || '',
     language: 'ua',
     interviewCount: totalInterviews || 1,
-    comment: '',
+    comment: comment || '',
     timeSlots: [],
   };
 
   const onSubmit = async (values) => {
-    const body = {
-      role,
-      masteryId: values.specialization,
-      languageCode: values.language,
-      comment: values.comment,
-      desiredInterview: Number(values.interviewCount),
-      timeSlots: values.timeSlots,
-      expiredAt: values.timeSlots.toSorted().at(-1),
-    };
+    let body;
+
+    if (modalRole === interviewModalRole.EditFeature) {
+      body = {
+        role,
+        masteryId: values.specialization,
+        comment: values.comment,
+        languageCode: values.language,
+        expiredAt: values.timeSlots.toSorted().at(-1),
+        desiredInterview: Number(values.interviewCount),
+      };
+    } else if (modalRole === interviewModalRole.AddTimeSlots) {
+      body = {
+        timeSlots: values.timeSlots,
+      };
+    } else {
+      body = {
+        role,
+        masteryId: values.specialization,
+        comment: values.comment,
+        languageCode: values.language,
+        expiredAt: values.timeSlots.toSorted().at(-1),
+        desiredInterview: Number(values.interviewCount),
+        timeSlots: values.timeSlots,
+      };
+    }
 
     try {
       if (selectedSpecialization) {
-        await updateInterviewRequest({ id: interviewRequestId, body });
+        if (modalRole === interviewModalRole.EditFeature) {
+          await updateInterviewRequest({ id: interviewRequestId, body });
+        } else if (modalRole === interviewModalRole.AddTimeSlots) {
+          await addTimeSlots({ id: interviewRequestId, timeSlots: body.timeSlots });
+        }
         enqueueSnackbar(t('modalNotifyText.interview.edit.success'), {
           variant: 'success',
           anchorOrigin: {

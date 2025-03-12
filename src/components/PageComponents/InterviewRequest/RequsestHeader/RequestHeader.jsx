@@ -44,7 +44,7 @@ const RequestHeader = ({
 
     openModal(
       modalNames.scheduleInterviewModal,
-      { role: formattedRole, selectedSpecialization, interviewRequestId, modalRole: 'AddTimeSlots' },
+      { role: formattedRole, selectedSpecialization, interviewRequestId, modalRole: InterviewModalRole.AddTimeSlots },
       3
     );
   };
@@ -52,6 +52,7 @@ const RequestHeader = ({
   const handleEditFeature = () => {
     const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
     const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
+
     openModal(
       modalNames.scheduleInterviewModal,
       {
@@ -59,6 +60,7 @@ const RequestHeader = ({
         selectedSpecialization,
         totalInterviews,
         interviewRequestId,
+        comment: description,
         modalRole: InterviewModalRole.EditFeature,
       },
       1

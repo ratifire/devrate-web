@@ -12,13 +12,12 @@ import { FeedbackModalSkeleton } from '../../../UI/Skeleton';
 import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import useScheduleInterviewForm from '../hooks';
 import { useGetInterviewsByMasteryIdQuery } from '../../../../redux/interviews/interviewRequestsApiSlice';
+import InterviewModalRole from '../../../../utils/constants/InterviewModalRole';
 import { styles } from './ScheduleInterviewModal.styles';
-// import InterviewModalRole from '../../../../utils/constants/InterviewModalRole.js';
 
 const ScheduleInterviewModal = () => {
   const { t } = useTranslation();
-  // const modalRole = useSelector((state) => state.modal.data?.modalRole);
-
+  const modalRole = useSelector((state) => state.modal.data?.modalRole);
   //Include step into URL in order to open correct modal on create and edit
   const searchParams = new URLSearchParams(location.search);
   const stepParam = searchParams.get('step');
@@ -67,6 +66,8 @@ const ScheduleInterviewModal = () => {
     return <ErrorComponent />;
   }
 
+  const isVisibleSaveBtn = modalRole === InterviewModalRole.EditFeature;
+
   return (
     <Box sx={styles.container}>
       <Typography variant='h6'>{t('interviews.scheduleInterviewModal.title')}</Typography>
@@ -80,28 +81,42 @@ const ScheduleInterviewModal = () => {
             </Typography>
           )}
           <Box sx={styles.sendBox}>
-            <ButtonDef
-              disabled={activeStep === 1}
-              label={t('modal.interview.btnBack')}
-              sx={styles.btn}
-              type={'button'}
-              variant={'contained'}
-              onClick={handlePrevStep}
-            />
-            {activeStep === FIRST_STEP && (
+            {!isVisibleSaveBtn && (
               <ButtonDef
-                disabled={!formik.isValid || (selectedRoleHasAvailableDates && !selectedSpecialization)}
-                label={t('modal.interview.btnNext')}
+                disabled={activeStep === 1}
+                label={t('modal.interview.btnBack')}
                 sx={styles.btn}
                 type={'button'}
                 variant={'contained'}
-                onClick={handleNextStep}
+                onClick={handlePrevStep}
               />
             )}
-            {activeStep === LAST_STEP && (
+            {isVisibleSaveBtn ||
+              (activeStep === FIRST_STEP && (
+                <ButtonDef
+                  disabled={!formik.isValid || (selectedRoleHasAvailableDates && !selectedSpecialization)}
+                  label={t('modal.interview.btnNext')}
+                  sx={styles.btn}
+                  type={'button'}
+                  variant={'contained'}
+                  onClick={handleNextStep}
+                />
+              ))}
+            {!isVisibleSaveBtn ||
+              (activeStep === LAST_STEP && (
+                <ButtonDef
+                  disabled={!formik.isValid || !formik.dirty || formik.isSubmitting || !hasEnoughAvailableDates}
+                  label={t('interviews.scheduleInterviewModal.scheduleBtn')}
+                  loading={isLoading}
+                  sx={styles.btn}
+                  type={'submit'}
+                  variant={'contained'}
+                />
+              ))}
+            {isVisibleSaveBtn && (
               <ButtonDef
-                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting || !hasEnoughAvailableDates}
-                label={t('interviews.scheduleInterviewModal.scheduleBtn')}
+                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+                label={t('interviews.scheduleInterviewModal.save')}
                 loading={isLoading}
                 sx={styles.btn}
                 type={'submit'}

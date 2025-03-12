@@ -937,6 +937,7 @@ export const en = {
         timeslotDescriptionError: 'You have not selected enough timeslots. You need to select at least - ',
         warning: 'For the selected specialization, there is already a request in the role',
         thisWeek: 'This week',
+        save: 'Save',
       },
     },
     singleScheduledInterview: {

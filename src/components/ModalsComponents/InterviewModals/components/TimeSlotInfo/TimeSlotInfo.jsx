@@ -35,6 +35,7 @@ const TimeSlotInfo = ({ formik, mySpecialization }) => {
         <SelectInterviewLanguage
           defaultValue={formik.values.language || ''}
           error={formik.touched.language && Boolean(formik.errors.language)}
+          formik={formik}
           helperText={formik.touched.language && formik.errors.language}
           id='language'
           label={t('interviews.scheduleInterviewModal.languageInputTitle')}
