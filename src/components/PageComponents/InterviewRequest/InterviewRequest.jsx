@@ -58,7 +58,7 @@ const InterviewRequest = () => {
   const getUserByRole = (role) => {
     return userData?.find(({ role: userRole }) => userRole === role) || null;
   };
-  return !userData ? (
+  return !userData?.length ? (
     <EmptyInterviewTab
       isSpecializations
       svg={
