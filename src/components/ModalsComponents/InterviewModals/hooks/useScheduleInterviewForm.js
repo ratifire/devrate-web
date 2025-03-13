@@ -72,6 +72,7 @@ const useScheduleInterviewForm = (mySpecialization) => {
     initialValues,
     validationSchema: ScheduleInterviewSchema,
     onSubmit,
+    validateOnMount: true,
   });
 
   return {
