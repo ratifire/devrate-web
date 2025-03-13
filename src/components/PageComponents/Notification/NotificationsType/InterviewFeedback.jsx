@@ -17,7 +17,7 @@ const InterviewFeedback = ({ createAt, payload }) => {
       <Box sx={styles.textWrapper}>
         <Typography variant='body'>
           {t('notifications.interviewFeedback')} {feedbackId}
-          <Typography sx={[styles.btn, { opacity: 0.3 }]} variant='body'>
+          <Typography sx={[styles.btn, { opacity: 0.3, color: '#828283' }]} variant='body'>
             {t('notifications.feedbackBtn')}
           </Typography>
         </Typography>
