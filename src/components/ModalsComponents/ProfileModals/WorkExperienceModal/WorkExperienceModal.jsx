@@ -34,7 +34,7 @@ const WorkExperienceModal = () => {
   const initialValues = {
     position: '',
     companyName: '',
-    description: [],
+    description: '',
     responsibilities: '',
     startYear: '',
     endYear: '',
@@ -90,7 +90,6 @@ const WorkExperienceModal = () => {
     formik.setFieldValue('currentDate', isChecked);
     formik.setFieldValue('endYear', isChecked ? '9999' : formik.values.endYear || '');
   };
-
   return (
     <>
       <Typography sx={styles.title} variant='subtitle1'>
