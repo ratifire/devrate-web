@@ -7,10 +7,10 @@ import { InterviewStepper } from '../../FeedbackModal/FeedbackInterviewModal/com
 import SliderComponent from '../components/SliderComponent';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { FIRST_STEP, LAST_STEP } from '../../FeedbackModal/FeedbackInterviewModal/constants';
-import { FeedbackModalSkeleton } from '../../../UI/Skeleton';
 import useScheduleInterviewForm from '../hooks';
 import { useGetInterviewsByMasteryIdQuery } from '../../../../redux/interviews/interviewRequestsApiSlice';
 import InterviewModalRole from '../../../../utils/constants/InterviewModalRole';
+import ScheduleInterviewModalSkeleton from '../../../UI/Skeleton/Modal/ScheduleInterviewModalSkeleton';
 import { styles } from './ScheduleInterviewModal.styles';
 
 const ScheduleInterviewModal = () => {
@@ -42,7 +42,7 @@ const ScheduleInterviewModal = () => {
   const handlePrevStep = () => setActiveStep(FIRST_STEP);
 
   if (isFetching || isFetchingInterviews) {
-    return <FeedbackModalSkeleton />;
+    return <ScheduleInterviewModalSkeleton />;
   }
 
   if (isError) {
