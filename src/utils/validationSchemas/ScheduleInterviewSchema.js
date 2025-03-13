@@ -12,6 +12,11 @@ export const ScheduleInterviewSchema = Yup.object().shape({
       'interviews.scheduleInterviewModal.interviewCount_exceeds_pendingSlots',
       function (value) {
         const { pendingSlots } = this.parent;
+
+        if (pendingSlots === undefined || pendingSlots === null) {
+          return true;
+        }
+
         return value <= pendingSlots;
       }
     ),

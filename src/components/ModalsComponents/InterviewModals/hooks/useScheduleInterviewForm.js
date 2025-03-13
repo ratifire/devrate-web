@@ -51,7 +51,7 @@ const useScheduleInterviewForm = () => {
     comment: comment || '',
     timeSlots: [],
     addedTimeSlots: [],
-    pendingSlots: pendingSlots || 1,
+    pendingSlots: pendingSlots || '',
   };
 
   const onSubmit = async (values) => {
