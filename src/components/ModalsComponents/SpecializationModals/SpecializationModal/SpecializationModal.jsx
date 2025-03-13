@@ -141,6 +141,13 @@ const SpecializationModal = () => {
     setState({ skills: skills.filter((item) => item.name !== skillToDelete) });
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      createSkills(e.target.value);
+    }
+  };
+
   if (isError) {
     return <ErrorComponent />;
   }
@@ -150,7 +157,7 @@ const SpecializationModal = () => {
       <Typography sx={styles.title} variant='subtitle1'>
         {t('specialization.modal.specialization.modal_title')}
       </Typography>
-      <form onSubmit={formik.handleSubmit}>
+      <form onKeyDown={handleKeyDown} onSubmit={formik.handleSubmit}>
         <Box sx={styles.wrapper}>
           <Box sx={styles.input100}>
             <AdvancedFormSelector

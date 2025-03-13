@@ -23,6 +23,7 @@ import FeedbackProjectModal from '../../../components/ModalsComponents/FeedbackP
 import { modalNames } from '../../../utils/constants/modalNames.js';
 import { useModalController } from '../../../utils/hooks/useModalController.js';
 import { closeChat } from '../../../redux/chat/chatSlice.js';
+import linksPath from '../../../router/links';
 import links from './profileRoutes';
 import styles from './Menu.styles';
 
@@ -71,7 +72,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer, closeMenu }) => {
             <React.Fragment key={link.path}>
               <Link
                 component={RouterLink}
-                sx={styles.menuLink}
+                sx={link.path === linksPath.settings ? styles.menuDisableLink : styles.menuLink}
                 target={link.target}
                 to={link.path}
                 onClick={() => handleLinkClick(link)}
