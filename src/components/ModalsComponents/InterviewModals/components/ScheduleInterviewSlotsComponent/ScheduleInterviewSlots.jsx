@@ -4,9 +4,11 @@ import { Box, Typography } from '@mui/material';
 import range from 'lodash/range';
 import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { getDatesInWeek } from '../../../../../utils/helpers/getWeekDates';
 import { getUserUTC } from '../../../../../utils/helpers';
 import { useGetInterviewsByMasteryIdQuery } from '../../../../../redux/interviews/interviewRequestsApiSlice';
+import ScheduleInterviewModalRole from '../../../../../utils/constants/InterviewModalRole.js';
 import { styles } from './ScheduleInterviewSlots.styles';
 import { CheckboxButton } from './CheckboxButton/CheckboxButton';
 import RenderTabs from './components/TabsRender';
@@ -15,6 +17,7 @@ import WeekNavigation from './components/WeekNavigation';
 
 const ScheduleInterviewSlots = ({ formik }) => {
   const { t } = useTranslation();
+  const modalRole = useSelector((state) => state.modal.data?.modalRole);
 
   const { data: interviewsByMasteryId } = useGetInterviewsByMasteryIdQuery(formik.values.specialization, {
     skip: !formik.values.specialization,
@@ -122,21 +125,25 @@ const ScheduleInterviewSlots = ({ formik }) => {
       <WeekNavigation weekTitle={weekTitle} onWeekNav={handleWeekNavigation} />
       <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
       <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
-      {formik.values.addedTimeSlots.length >= formik.values.interviewCount ? (
-        <Typography sx={styles.timeslotDescription} variant='body'>
-          {t('interviews.scheduleInterviewModal.timeslotDescription1')}
-          {formik.values.interviewCount}
-          {'. '}
-          {t('interviews.scheduleInterviewModal.timeslotDescription2')}
-          {formik.values.interviewCount}
-          {'. '}
-        </Typography>
-      ) : (
-        <Typography sx={styles.timeslotDescriptionError} variant='body'>
-          {t('interviews.scheduleInterviewModal.timeslotDescriptionError')}
-          {formik.values.interviewCount}
-          {'. '}
-        </Typography>
+      {modalRole !== ScheduleInterviewModalRole.AddTimeSlots && (
+        <>
+          {formik.values.addedTimeSlots.length >= formik.values.interviewCount ? (
+            <Typography sx={styles.timeslotDescription} variant='body'>
+              {t('interviews.scheduleInterviewModal.timeslotDescription1')}
+              {formik.values.interviewCount}
+              {'. '}
+              {t('interviews.scheduleInterviewModal.timeslotDescription2')}
+              {formik.values.interviewCount}
+              {'. '}
+            </Typography>
+          ) : (
+            <Typography sx={styles.timeslotDescriptionError} variant='body'>
+              {t('interviews.scheduleInterviewModal.timeslotDescriptionError')}
+              {formik.values.interviewCount}
+              {'. '}
+            </Typography>
+          )}
+        </>
       )}
     </Box>
   );

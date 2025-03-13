@@ -12,8 +12,8 @@ import { ScheduleInterviewSchema } from '../../../../utils/validationSchemas';
 import { useModalController } from '../../../../utils/hooks/useModalController';
 import { modalNames } from '../../../../utils/constants/modalNames';
 import interviewModalRole from '../../../../utils/constants/InterviewModalRole';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
-import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice.js';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 
 const useScheduleInterviewForm = () => {
   const { t } = useTranslation();
@@ -120,6 +120,7 @@ const useScheduleInterviewForm = () => {
     spec: selectedSpecialization ? [selectedSpecialization] : allSpecializations,
   };
 };
+
 useScheduleInterviewForm.propTypes = {
   mySpecialization: PropTypes.arrayOf(
     PropTypes.shape({

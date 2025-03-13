@@ -79,7 +79,7 @@ const ScheduleInterviewModal = () => {
                 />
                 {activeStep === FIRST_STEP && (
                   <ButtonDef
-                    disabled={!formik.isValid || (selectedRoleHasAvailableDates && !selectedSpecialization)}
+                    disabled={!formik.isValid || selectedRoleHasAvailableDates}
                     label={t('modal.interview.btnNext')}
                     sx={styles.btn}
                     type={'button'}
