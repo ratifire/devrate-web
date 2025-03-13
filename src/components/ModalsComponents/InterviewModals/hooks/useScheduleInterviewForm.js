@@ -37,6 +37,7 @@ const useScheduleInterviewForm = () => {
   const comment = useSelector((state) => state.modal.data?.comment);
   const modalRole = useSelector((state) => state.modal.data?.modalRole);
   const language = useSelector((state) => state.modal.data?.language);
+  const pendingSlots = useSelector((state) => state.modal.data?.pendingSlots);
 
   //These two lines we need to preselect main mastery level in Step 1
   const mainSpecialization = allSpecializations?.find((item) => item.main === true);
@@ -50,6 +51,7 @@ const useScheduleInterviewForm = () => {
     comment: comment || '',
     timeSlots: [],
     addedTimeSlots: [],
+    pendingSlots: pendingSlots || 1,
   };
 
   const onSubmit = async (values) => {

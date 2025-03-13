@@ -744,6 +744,7 @@ export const uk = {
         warning: 'Для обраної спеціалізації вже є запит в ролі',
         thisWeek: 'Цей тиждень',
         save: 'Зберегти',
+        interviewCount_exceeds_pendingSlots: 'Кількість співбесід не може перевищувати доступні слоти.',
       },
     },
     singleScheduledInterview: {

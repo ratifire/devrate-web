@@ -195,6 +195,8 @@ const Participant = ({ data, specialization }) => {
     return capitalize ? translatedRole : translatedRole.toLowerCase();
   };
 
+  const pendingSlots = data.timeSlots.filter((slot) => slot.status === 'PENDING').length;
+
   return (
     <Box ref={containerRef} sx={styles.container}>
       <RequestHeader
@@ -205,6 +207,7 @@ const Participant = ({ data, specialization }) => {
         interviewRequestObj={data}
         languageCode={languageCode}
         languageName={languageName}
+        pendingSlots={pendingSlots}
         role={formatRole(role, true)}
         selectedSpecialization={specialization}
         selectedTimeSlots={selectedTimeSlots}

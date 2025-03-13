@@ -938,6 +938,7 @@ export const en = {
         warning: 'For the selected specialization, there is already a request in the role',
         thisWeek: 'This week',
         save: 'Save',
+        interviewCount_exceeds_pendingSlots: 'The number of interviews cannot exceed the available slots.',
       },
     },
     singleScheduledInterview: {

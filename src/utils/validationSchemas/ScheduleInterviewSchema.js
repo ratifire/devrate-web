@@ -6,6 +6,14 @@ export const ScheduleInterviewSchema = Yup.object().shape({
   interviewCount: Yup.number()
     .min(1, 'interviews.scheduleInterviewModal.interviewCount_min')
     .max(50, 'interviews.scheduleInterviewModal.interviewCount_max')
-    .required('interviews.scheduleInterviewModal.required'),
+    .required('interviews.scheduleInterviewModal.required')
+    .test(
+      'is-less-than-pendingSlots',
+      'interviews.scheduleInterviewModal.interviewCount_exceeds_pendingSlots',
+      function (value) {
+        const { pendingSlots } = this.parent;
+        return value <= pendingSlots;
+      }
+    ),
   comment: Yup.string().max(300, 'interviews.scheduleInterviewModal.comment_max'),
 });

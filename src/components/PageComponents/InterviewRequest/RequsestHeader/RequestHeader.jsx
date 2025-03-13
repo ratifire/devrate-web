@@ -26,6 +26,7 @@ const RequestHeader = ({
   languageName,
   languageCode,
   interviewRequestObj,
+  pendingSlots,
 }) => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -64,6 +65,7 @@ const RequestHeader = ({
         comment: description,
         modalRole: InterviewModalRole.EditFeature,
         language: languageCode,
+        pendingSlots,
       },
       1
     );
@@ -166,6 +168,7 @@ RequestHeader.propTypes = {
   languageName: PropTypes.string.isRequired,
   languageCode: PropTypes.string.isRequired,
   interviewRequestObj: PropTypes.object.isRequired,
+  pendingSlots: PropTypes.number.isRequired,
 };
 
 export default RequestHeader;
