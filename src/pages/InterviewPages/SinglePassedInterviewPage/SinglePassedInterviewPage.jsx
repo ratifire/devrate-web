@@ -102,7 +102,7 @@ const SinglePassedInterviewPage = () => {
             lastName={lastName}
             lvl={level}
             role={role}
-            src={avatar}
+            src={avatar?.userPicture}
           />
         </Suspense>
       </Paper>
