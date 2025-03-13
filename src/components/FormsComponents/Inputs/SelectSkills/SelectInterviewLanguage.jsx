@@ -3,16 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import { styles } from './SelectInterviewLanguage.styles';
 
-const SelectInterviewLanguage = ({ languagesArray, variant, label, error, helperText, defaultValue }) => {
+const SelectInterviewLanguage = ({ languagesArray, variant, label, error, helperText, formik }) => {
   const id = uuid();
   const { t } = useTranslation();
-  const [value, setValue] = useState(defaultValue);
+  const language = formik.values.language;
 
   const handleChange = (event) => {
-    setValue(event.target.value); // Update the state with the new value
+    formik.setValues({ ...formik.values, language: event.target.value });
   };
 
   return (
@@ -32,12 +31,12 @@ const SelectInterviewLanguage = ({ languagesArray, variant, label, error, helper
         label={label}
         name='language'
         sx={styles.input}
-        value={value}
+        value={language}
         onChange={handleChange}
       >
-        {languagesArray?.map(({ id, name }) => (
-          <MenuItem key={id} sx={styles.menuItem} value={id}>
-            {name}
+        {languagesArray?.map((v) => (
+          <MenuItem key={v} sx={styles.menuItem} value={v}>
+            {t(`specialization.language.name.${v}`)}
           </MenuItem>
         ))}
       </Select>
@@ -52,6 +51,7 @@ const SelectInterviewLanguage = ({ languagesArray, variant, label, error, helper
 
 SelectInterviewLanguage.propTypes = {
   variant: PropTypes.oneOf(['standard', 'filled', 'outlined']).isRequired,
+  formik: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
   helperText: PropTypes.string,
   error: PropTypes.bool,
@@ -61,7 +61,6 @@ SelectInterviewLanguage.propTypes = {
       name: PropTypes.string.isRequired,
     }).isRequired
   ),
-  defaultValue: PropTypes.string,
 };
 
 export default SelectInterviewLanguage;

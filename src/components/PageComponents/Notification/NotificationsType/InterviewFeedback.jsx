@@ -2,20 +2,12 @@ import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import InfoIcon from '@mui/icons-material/Info';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import TimeAgo from '../../../UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
-import { openModal } from '../../../../redux/modal/modalSlice.js';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
 
 const InterviewFeedback = ({ createAt, payload }) => {
   const { t } = useTranslation();
   const { feedbackId } = JSON.parse(payload);
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    dispatch(openModal({ modalType: modalNames.feedbackInterviewModal, data: { feedbackId } }));
-  };
 
   return (
     <>
@@ -25,7 +17,7 @@ const InterviewFeedback = ({ createAt, payload }) => {
       <Box sx={styles.textWrapper}>
         <Typography variant='body'>
           {t('notifications.interviewFeedback')} {feedbackId}
-          <Typography sx={styles.btn} variant='body' onClick={handleClick}>
+          <Typography sx={[styles.btn, { opacity: 0.3, color: '#828283' }]} variant='body'>
             {t('notifications.feedbackBtn')}
           </Typography>
         </Typography>
