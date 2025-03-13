@@ -52,6 +52,11 @@ const ScheduleInterviewModal = () => {
   const isVisibleSaveBtn =
     modalRole === InterviewModalRole.EditFeature || modalRole === InterviewModalRole.AddTimeSlots;
 
+  const isDisabledAddedTimeSlots =
+    modalRole === InterviewModalRole.AddTimeSlots &&
+    formik.values.addedTimeSlots.length === 0 &&
+    modalRole !== InterviewModalRole.EditFeature;
+
   const isLoading = isFetching || isFetchingInterviews;
 
   return (
@@ -101,7 +106,7 @@ const ScheduleInterviewModal = () => {
             )}
             {isVisibleSaveBtn && (
               <ButtonDef
-                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+                disabled={!formik.isValid || !formik.dirty || formik.isSubmitting || isDisabledAddedTimeSlots}
                 label={t('interviews.scheduleInterviewModal.save')}
                 loading={isLoading}
                 sx={styles.btn}
