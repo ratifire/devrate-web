@@ -24,19 +24,16 @@ export const interviewRequestsApiSlice = apiSlice.injectEndpoints({
       ],
     }),
     updateInterviewRequest: builder.mutation({
-      query({ id, body }) {
-        return {
-          url: `/interview-requests/${id}`,
-          method: 'PUT',
-          body,
-        };
-      },
+      query: ({ id, body }) => ({
+        url: `/interview-requests/${id}`,
+        method: 'PATCH',
+        body,
+      }),
       invalidatesTags: (result, error, arg) => [
         { type: TAG_TYPES.InterviewRequest },
         { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.body.masteryId },
       ],
     }),
-
     getInterviewsByMasteryId: builder.query({
       query: (masteryId) => ({
         url: `/interview-requests/masteries/${masteryId}`,
@@ -44,6 +41,27 @@ export const interviewRequestsApiSlice = apiSlice.injectEndpoints({
       providesTags: (result, error, arg) => [
         { type: TAG_TYPES.InterviewRequest },
         { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg },
+      ],
+    }),
+    deleteInterviewRequestById: builder.mutation({
+      query: ({ id }) => ({
+        url: `/interview-requests/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: TAG_TYPES.InterviewRequest },
+        { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.body.masteryId },
+      ],
+    }),
+    addTimeSlots: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `/interview-requests/${id}/add-timeslots`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: TAG_TYPES.InterviewRequest },
+        { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg.masteryId },
       ],
     }),
   }),
@@ -54,4 +72,6 @@ export const {
   useCreateInterviewRequestMutation,
   useUpdateInterviewRequestMutation,
   useGetInterviewsByMasteryIdQuery,
+  useDeleteInterviewRequestByIdMutation,
+  useAddTimeSlotsMutation,
 } = interviewRequestsApiSlice;

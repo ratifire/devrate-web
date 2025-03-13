@@ -11,7 +11,7 @@ import { styles } from './TimeSlotInfo.styles';
 const TimeSlotInfo = ({ formik, mySpecialization }) => {
   const { t } = useTranslation();
   const { data: language } = useGetDefLanguageQuery('language-proficiency-names.json');
-  const languagesArray = language ? Object.entries(language).map(([name, id]) => ({ id, name })) : [];
+  const languagesArray = language ? Object.entries(language).map(([_, id]) => id) : [];
 
   return (
     <Box sx={styles.wrapper}>
@@ -35,6 +35,7 @@ const TimeSlotInfo = ({ formik, mySpecialization }) => {
         <SelectInterviewLanguage
           defaultValue={formik.values.language || ''}
           error={formik.touched.language && Boolean(formik.errors.language)}
+          formik={formik}
           helperText={formik.touched.language && formik.errors.language}
           id='language'
           label={t('interviews.scheduleInterviewModal.languageInputTitle')}

@@ -9,6 +9,7 @@ import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu/index.js';
 import { useModalController } from '../../../../utils/hooks/useModalController.js';
 import { modalNames } from '../../../../utils/constants/modalNames.js';
+import InterviewModalRole from '../../../../utils/constants/InterviewModalRole.js';
 import { styles } from './RequestHeader.styles.js';
 
 const RequestHeader = ({
@@ -23,7 +24,9 @@ const RequestHeader = ({
   hasSelectedSlots,
   handleUpdateSlots,
   languageName,
+  languageCode,
   interviewRequestObj,
+  pendingSlots,
 }) => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -43,19 +46,37 @@ const RequestHeader = ({
 
     openModal(
       modalNames.scheduleInterviewModal,
-      { role: formattedRole, selectedSpecialization, interviewRequestId },
-      1
+      {
+        role: formattedRole,
+        selectedSpecialization,
+        totalInterviews,
+        interviewRequestId,
+        pendingSlots,
+        modalRole: InterviewModalRole.AddTimeSlots,
+      },
+      3
     );
   };
 
   const handleEditFeature = () => {
     const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
     const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
+
     openModal(
       modalNames.scheduleInterviewModal,
-      { role: formattedRole, selectedSpecialization, interviewRequestId },
-      3
+      {
+        role: formattedRole,
+        selectedSpecialization,
+        totalInterviews,
+        interviewRequestId,
+        comment: description,
+        modalRole: InterviewModalRole.EditFeature,
+        language: languageCode,
+        pendingSlots,
+      },
+      1
     );
+    handleCloseMenu();
   };
 
   return (
@@ -152,7 +173,9 @@ RequestHeader.propTypes = {
   handleUpdateSlots: PropTypes.func.isRequired,
   hasSelectedSlots: PropTypes.bool.isRequired,
   languageName: PropTypes.string.isRequired,
+  languageCode: PropTypes.string.isRequired,
   interviewRequestObj: PropTypes.object.isRequired,
+  pendingSlots: PropTypes.number.isRequired,
 };
 
 export default RequestHeader;

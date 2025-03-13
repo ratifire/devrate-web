@@ -32,7 +32,7 @@ const InterviewRequest = () => {
       foundMastery?.id || specializations.find(({ main }) => main)?.id || specializations[0]?.id || '';
     setMastery(defaultMastery);
     addQueryParamToUrl(defaultMastery);
-  }, [specializations, masteryFromUrl, isLoading, isError]);
+  }, []);
 
   const { data: userData } = useGetInterviewRequestByMasteryIdQuery(
     { masteryId: specializations?.find((item) => item.id === mastery)?.mainMasteryId || '' },

@@ -4,52 +4,89 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { enqueueSnackbar } from 'notistack';
 import {
+  useAddTimeSlotsMutation,
   useCreateInterviewRequestMutation,
   useUpdateInterviewRequestMutation,
-} from '../../../../redux/interviews/interviewRequestsApiSlice.js';
+} from '../../../../redux/interviews/interviewRequestsApiSlice';
 import { ScheduleInterviewSchema } from '../../../../utils/validationSchemas';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
+import { useModalController } from '../../../../utils/hooks/useModalController';
+import { modalNames } from '../../../../utils/constants/modalNames';
+import interviewModalRole from '../../../../utils/constants/InterviewModalRole';
+import { selectCurrentUser } from '../../../../redux/auth/authSlice';
+import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
 
-const useScheduleInterviewForm = (mySpecialization) => {
+const useScheduleInterviewForm = () => {
   const { t } = useTranslation();
+  const {
+    data: { id: userId },
+  } = useSelector(selectCurrentUser);
   const [createInterviewRequest] = useCreateInterviewRequestMutation();
   const [updateInterviewRequest] = useUpdateInterviewRequestMutation();
+  const [addTimeSlots] = useAddTimeSlotsMutation();
+  const {
+    data: allSpecializations,
+    isFetching,
+    isError,
+  } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
 
   const { closeModal } = useModalController();
   const role = useSelector((state) => state.modal.data.role);
-  const selectedSpecialization = useSelector((state) => state.modal.data.selectedSpecialization);
-  const interviewRequestId = useSelector((state) => state.modal.data.interviewRequestId);
+  const selectedSpecialization = useSelector((state) => state.modal.data?.selectedSpecialization);
+  const interviewRequestId = useSelector((state) => state.modal.data?.interviewRequestId);
+  const totalInterviews = useSelector((state) => state.modal.data?.totalInterviews);
+  const comment = useSelector((state) => state.modal.data?.comment);
+  const modalRole = useSelector((state) => state.modal.data?.modalRole);
+  const language = useSelector((state) => state.modal.data?.language);
+  const pendingSlots = useSelector((state) => state.modal.data?.pendingSlots);
 
   //These two lines we need to preselect main mastery level in Step 1
-  const mainSpecialization = mySpecialization?.find((item) => item.main === true);
-  const masteryLevelId = mainSpecialization?.mainMasteryId;
+  const mainSpecialization = allSpecializations?.find((item) => item.main === true);
+  const mainMasteryLevelId = mainSpecialization?.mainMasteryId;
 
   const initialValues = {
     role,
-    specialization: masteryLevelId || '',
-    language: 'ua',
-    interviewCount: 1,
-    comment: '',
-    availableDates: [],
-    assignedDates: [],
+    specialization: selectedSpecialization?.mainMasteryId || mainMasteryLevelId || '',
+    language: language || 'ua',
+    interviewCount: +totalInterviews || 1,
+    comment: comment || '',
+    timeSlots: [],
+    addedTimeSlots: [],
+    pendingSlots: pendingSlots || '',
   };
 
   const onSubmit = async (values) => {
-    const body = {
-      role,
-      masteryId: values.specialization,
-      languageCode: values.language,
-      comment: values.comment,
-      desiredInterview: Number(values.interviewCount),
-      availableDates: values.availableDates, //availableDates.length >= desiredInterview
-      assignedDates: values.assignedDates, //always empty array on post request (create)
-      expiredAt: values.availableDates.toSorted().at(-1),
-    };
+    let body;
+
+    if (modalRole === interviewModalRole.EditFeature) {
+      body = {
+        role,
+        masteryId: values.specialization,
+        comment: values.comment,
+        languageCode: values.language,
+        expiredAt: values.timeSlots.toSorted().at(-1),
+        desiredInterview: Number(values.interviewCount),
+      };
+    } else if (modalRole === interviewModalRole.AddTimeSlots) {
+      body = values.addedTimeSlots;
+    } else {
+      body = {
+        role,
+        masteryId: values.specialization,
+        comment: values.comment,
+        languageCode: values.language,
+        expiredAt: values.timeSlots.toSorted().at(-1),
+        desiredInterview: Number(values.interviewCount),
+        timeSlots: values.addedTimeSlots,
+      };
+    }
 
     try {
       if (selectedSpecialization) {
-        await updateInterviewRequest({ id: interviewRequestId, body });
+        if (modalRole === interviewModalRole.EditFeature) {
+          await updateInterviewRequest({ id: interviewRequestId, body });
+        } else if (modalRole === interviewModalRole.AddTimeSlots) {
+          await addTimeSlots({ id: interviewRequestId, body });
+        }
         enqueueSnackbar(t('modalNotifyText.interview.edit.success'), {
           variant: 'success',
           anchorOrigin: {
@@ -64,8 +101,9 @@ const useScheduleInterviewForm = (mySpecialization) => {
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.interview.create.error'), { variant: 'error' });
+    } finally {
+      closeModal(modalNames.scheduleInterviewModal);
     }
-    closeModal(modalNames.scheduleInterviewModal);
   };
 
   const formik = useFormik({
@@ -76,9 +114,13 @@ const useScheduleInterviewForm = (mySpecialization) => {
 
   return {
     formik,
+    isFetching,
+    isError,
     selectedSpecialization,
+    spec: selectedSpecialization ? [selectedSpecialization] : allSpecializations,
   };
 };
+
 useScheduleInterviewForm.propTypes = {
   mySpecialization: PropTypes.arrayOf(
     PropTypes.shape({
