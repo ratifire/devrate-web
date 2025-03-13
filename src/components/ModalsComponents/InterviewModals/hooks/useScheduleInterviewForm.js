@@ -110,6 +110,7 @@ const useScheduleInterviewForm = () => {
     initialValues,
     validationSchema: ScheduleInterviewSchema,
     onSubmit,
+    validateOnMount: true,
   });
 
   return {
