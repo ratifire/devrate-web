@@ -878,7 +878,7 @@ export const en = {
     interviews: {
       emptyInterviewTabs: {
         emptyScheduled:
-          "You don't have any interviews scheduled yet. This is a great opportunity to take the first step! Make an appointment to test your knowledge, gain useful experience, and move towards your goals with confidence.",
+          "You don't have any scheduled interviews yet. A great opportunity to take the first step! Sign up for a meeting to test your knowledge, gain valuable experience, and confidently move toward your goals.",
         emptyPassed:
           'At the moment, you have no interviews completed. Create a request and take the first step towards new opportunities! Find an interviewer who will help you assess your knowledge and prepare for challenges.',
         emptyRequest:

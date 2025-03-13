@@ -71,13 +71,13 @@ const PassedInterviewsPage = () => {
     redirectToFirstInterview();
   }, [redirectToFirstInterview]);
 
-  return !isSpecializations || !isPassedInterviewList ? (
+  return !isPassedInterviewList ? (
     <EmptyInterviewTab
       isSpecializations={isSpecializations}
       svg={
-        isSpecializations
-          ? emptyInterviewTabsPictures.emptyPassedPic
-          : emptyInterviewTabsPictures.emptySpecialization.passed
+        !isSpecializations
+          ? emptyInterviewTabsPictures.emptySpecialization.passed
+          : emptyInterviewTabsPictures.emptyPassedPic
       }
       tab='Passed'
     />

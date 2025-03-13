@@ -66,7 +66,7 @@ const ScheduledInterviewsPage = () => {
           ? emptyInterviewTabsPictures.emptyScheduledPic
           : emptyInterviewTabsPictures.emptySpecialization.scheduled
       }
-      tab='Passed'
+      tab='Scheduled'
     />
   ) : (
     <Container maxWidth='xl' sx={styles.container}>
