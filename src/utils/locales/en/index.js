@@ -439,6 +439,8 @@ export const en = {
       specialization_softSkills: 'SoftSkills',
       error: 'Something went wrong...',
       errorDeleteSpec: "You can't delete a specialisation",
+      conflictDeleteSpec:
+        'You cannot delete a specialization because of an existing interview or interview requests for that specialization.',
       level: {
         title: 'Level',
         description: 'Switch between levels to see your statistics relative to another level.',
