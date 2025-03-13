@@ -21,11 +21,12 @@ const PassedInterviewsPage = () => {
   const [lastEventRef, setLastEventRef] = useState(null);
   const navigate = useNavigate();
   const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
-  const isSpecializations = !!specializations;
+
+  const isPassedInterviewList = Boolean(passedInterviews?.content.length);
+  const isSpecializations = Boolean(specializations?.length);
   const refHandler = (el) => {
     setLastEventRef(el);
   };
-
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
@@ -70,13 +71,13 @@ const PassedInterviewsPage = () => {
     redirectToFirstInterview();
   }, [redirectToFirstInterview]);
 
-  return !passedInterviews ? (
+  return !isPassedInterviewList ? (
     <EmptyInterviewTab
-      isSpecializations
+      isSpecializations={isSpecializations}
       svg={
-        isSpecializations
-          ? emptyInterviewTabsPictures.emptyPassedPic
-          : emptyInterviewTabsPictures.emptySpecialization.passed
+        !isSpecializations
+          ? emptyInterviewTabsPictures.emptySpecialization.passed
+          : emptyInterviewTabsPictures.emptyPassedPic
       }
       tab='Passed'
     />

@@ -7,7 +7,7 @@ import { Link as RouterLink } from 'react-router';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useSnackbar } from 'notistack';
 import { useRef, useState } from 'react';
-import { useChangePasswordMutation } from '../../../../../redux/auth/authApiSlice';
+import { useChangePasswordMutation, useResetPasswordMutation } from '../../../../../redux/auth/authApiSlice';
 import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
@@ -32,10 +32,16 @@ const ResetPassword = () => {
   const email = useSelector((state) => state.email.email);
   const { enqueueSnackbar } = useSnackbar();
   const [changePassword, { isError, isSuccess }] = useChangePasswordMutation();
+  const [sendResetEmail] = useResetPasswordMutation();
 
   const handleCloseAllModal = () => {
     dispatch(closeModal());
     dispatch(openModal({ modalType: modalNames.checkEmailModal }));
+  };
+
+  const handleResendCode = async (e) => {
+    e.preventDefault();
+    await sendResetEmail({ email });
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -232,7 +238,7 @@ const ResetPassword = () => {
         </Typography>
 
         <Typography sx={styles.bottom_subtitle} variant='subtitle3'>
-          <Link component={RouterLink} sx={styles.link} to={'/'} variant='subtitle3'>
+          <Link component={RouterLink} sx={styles.link} to={'/'} variant='subtitle3' onClick={handleResendCode}>
             {t('modal.checkEmailResetPassword.resend_link')}
           </Link>{' '}
           {t('modal.checkEmailResetPassword.middle_text')}

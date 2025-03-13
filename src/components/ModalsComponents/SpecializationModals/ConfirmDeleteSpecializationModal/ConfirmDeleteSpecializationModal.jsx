@@ -62,9 +62,15 @@ const ConfirmDeleteSpecializationModal = () => {
 
       handleSpecializationUpdate(id);
     } catch (err) {
-      if (err.status === 409) {
+      if (err.status === 400 || err.status === 404) {
         enqueueSnackbar(t('specialization.errorDeleteSpec'), { variant: 'error' });
+      } else if (err.status === 409) {
+        enqueueSnackbar(t('specialization.conflictDeleteSpec'), { variant: 'error' });
       }
+
+      // if (err.status === 409) {
+      //   enqueueSnackbar(t('specialization.errorDeleteSpec'), { variant: 'error' });
+      // }
     } finally {
       closeModal(modalNames.confirmDeleteSpecialization);
     }
