@@ -123,7 +123,7 @@ const ScheduleInterviewSlots = ({ formik }) => {
         <WeekNavigation weekTitle={weekTitle} onWeekNav={handleWeekNavigation} />
         <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
         <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
-        {formik.values.timeSlots.length >= formik.values.interviewCount ? (
+        {formik.values.addedTimeSlots.length >= formik.values.interviewCount ? (
           <Typography sx={styles.timeslotDescription} variant='body'>
             {t('interviews.scheduleInterviewModal.timeslotDescription1')}
             {formik.values.interviewCount}

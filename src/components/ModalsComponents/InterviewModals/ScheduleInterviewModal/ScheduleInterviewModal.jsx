@@ -34,7 +34,7 @@ const ScheduleInterviewModal = () => {
   );
 
   // Needed to enable Schedule btn in Step 2
-  const hasEnoughAvailableDates = formik.values.timeSlots.length >= formik.values.interviewCount;
+  const hasEnoughAvailableDates = formik.values.addedTimeSlots.length >= formik.values.interviewCount;
 
   const handleNextStep = () => {
     setActiveStep(LAST_STEP);
