@@ -78,7 +78,7 @@ const ChatForm = () => {
   }, [dataChats]);
 
   useEffect(() => {
-    const socket = new SockJS('https://server.skillzzy.com/chat');
+    const socket = new SockJS('https://server-prod.skillzzy.com/chat');
     const newClient = new Client({
       webSocketFactory: () => socket,
       onConnect: () => {
