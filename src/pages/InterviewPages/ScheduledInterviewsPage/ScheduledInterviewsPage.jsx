@@ -27,7 +27,8 @@ const ScheduledInterviewsPage = () => {
   const [lastEventRef, setLastEventRef] = useState(null);
   const { id } = useSelector((state) => state.auth.user.data);
   const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
-  const isSpecializations = !!specializations;
+  const isSpecializations = Boolean(specializations?.length);
+  const isScheduledInterviewList = Boolean(scheduledInterviews?.content.length);
 
   const refHandler = (el) => {
     setLastEventRef(el);
@@ -57,15 +58,15 @@ const ScheduledInterviewsPage = () => {
     };
   }, [lastEventRef, scheduledInterviews?.content, handleObserver]);
 
-  return !scheduledInterviews ? (
+  return !isSpecializations || !isScheduledInterviewList ? (
     <EmptyInterviewTab
-      isSpecializations
+      isSpecializations={isSpecializations}
       svg={
         isSpecializations
           ? emptyInterviewTabsPictures.emptyScheduledPic
           : emptyInterviewTabsPictures.emptySpecialization.scheduled
       }
-      tab='Passed'
+      tab='Scheduled'
     />
   ) : (
     <Container maxWidth='xl' sx={styles.container}>
