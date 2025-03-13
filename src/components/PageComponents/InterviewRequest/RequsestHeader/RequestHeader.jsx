@@ -46,7 +46,14 @@ const RequestHeader = ({
 
     openModal(
       modalNames.scheduleInterviewModal,
-      { role: formattedRole, selectedSpecialization, interviewRequestId, modalRole: InterviewModalRole.AddTimeSlots },
+      {
+        role: formattedRole,
+        selectedSpecialization,
+        totalInterviews,
+        interviewRequestId,
+        pendingSlots,
+        modalRole: InterviewModalRole.AddTimeSlots,
+      },
       3
     );
   };

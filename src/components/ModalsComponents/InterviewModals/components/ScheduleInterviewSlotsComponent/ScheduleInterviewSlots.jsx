@@ -118,29 +118,27 @@ const ScheduleInterviewSlots = ({ formik }) => {
   );
 
   return (
-    <>
-      <Box sx={styles.wrapper}>
-        <WeekNavigation weekTitle={weekTitle} onWeekNav={handleWeekNavigation} />
-        <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
-        <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
-        {formik.values.addedTimeSlots.length >= formik.values.interviewCount ? (
-          <Typography sx={styles.timeslotDescription} variant='body'>
-            {t('interviews.scheduleInterviewModal.timeslotDescription1')}
-            {formik.values.interviewCount}
-            {'. '}
-            {t('interviews.scheduleInterviewModal.timeslotDescription2')}
-            {formik.values.interviewCount}
-            {'. '}
-          </Typography>
-        ) : (
-          <Typography sx={styles.timeslotDescriptionError} variant='body'>
-            {t('interviews.scheduleInterviewModal.timeslotDescriptionError')}
-            {formik.values.interviewCount}
-            {'. '}
-          </Typography>
-        )}
-      </Box>
-    </>
+    <Box sx={styles.wrapper}>
+      <WeekNavigation weekTitle={weekTitle} onWeekNav={handleWeekNavigation} />
+      <RenderTabs tab={tab} weekDates={weekDates} onChange={handleTabChange} />
+      <RenderTimeSlots tab={tab} timeButtons={generateTimeButtons} weekDates={weekDates} />
+      {formik.values.addedTimeSlots.length >= formik.values.interviewCount ? (
+        <Typography sx={styles.timeslotDescription} variant='body'>
+          {t('interviews.scheduleInterviewModal.timeslotDescription1')}
+          {formik.values.interviewCount}
+          {'. '}
+          {t('interviews.scheduleInterviewModal.timeslotDescription2')}
+          {formik.values.interviewCount}
+          {'. '}
+        </Typography>
+      ) : (
+        <Typography sx={styles.timeslotDescriptionError} variant='body'>
+          {t('interviews.scheduleInterviewModal.timeslotDescriptionError')}
+          {formik.values.interviewCount}
+          {'. '}
+        </Typography>
+      )}
+    </Box>
   );
 };
 
