@@ -6,8 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice.js';
 import { selectCurrentUser } from '../../../redux/auth/authSlice.js';
 import { useGetInterviewRequestByMasteryIdQuery } from '../../../redux/services/interviewRequestApiSlice.js';
-import { emptyInterviewTabsPictures } from '../../../utils/constants/emptyTabsPictures.js';
-import EmptyInterviewTab from '../../../pages/InterviewPages/EmptyInterviewTab/index.js';
 import Participant from './Participant';
 import { styles } from './InterviewRequest.styles.js';
 
@@ -22,7 +20,6 @@ const InterviewRequest = () => {
   const masteryFromUrl = query.get('mastery');
 
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
-  const isSpecializations = !!specializations;
 
   useEffect(() => {
     if (isLoading || isError || !specializations?.length) {
@@ -58,17 +55,8 @@ const InterviewRequest = () => {
   const getUserByRole = (role) => {
     return userData?.find(({ role: userRole }) => userRole === role) || null;
   };
-  return !userData ? (
-    <EmptyInterviewTab
-      isSpecializations
-      svg={
-        isSpecializations
-          ? emptyInterviewTabsPictures.emptyReqestPic
-          : emptyInterviewTabsPictures.emptySpecialization.request
-      }
-      tab='Request'
-    />
-  ) : (
+
+  return (
     <Box>
       <Box sx={styles.header}>
         <Typography variant='h4'>Requests</Typography>
