@@ -589,7 +589,7 @@ export const en = {
       interviewFeedback:
         "Congratulations on completing the interview! Please fill out a short form and evaluate your conversation partner's skills.",
       interviewRejected:
-        "The interview with {{rejectionUserFirstName}} scheduled for {{date}} has been canceled. We'll arrange a new one soon and keep you updated.",
+        "The interview with {{rejectionName}} scheduled for {{date}} has been canceled. We'll arrange a new one soon and keep you updated.",
       interviewRequestExpired:
         'Dear {{userFirstName}}, Your interview request has expired. Please submit a new one to proceed.',
       feedbackBtn: 'Leave feedback',
@@ -909,6 +909,7 @@ export const en = {
         interviewInfoMonthAgo: 'months ago',
         interviewInfoWeekAgo: 'weeks ago',
         interviewInfoDayAgo: 'days ago',
+        interviewInfoHourAgo: 'hour(s) ago',
         interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
         interviewInfoHost: 'Host',

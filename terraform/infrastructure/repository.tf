@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "frontend-service" {
-  name = "frontend-service"
+  name = var.front_service_name
 
   image_scanning_configuration {
     scan_on_push = true

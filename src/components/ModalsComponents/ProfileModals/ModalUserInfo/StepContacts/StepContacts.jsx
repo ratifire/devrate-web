@@ -52,6 +52,7 @@ const StepContacts = () => {
           { type: SOCIAL_TYPES.PHONE_NUMBER, value: addPhone(phone) },
         ],
       }).unwrap();
+
       enqueueSnackbar(t('modalNotifyText.contacts.create.success'), { variant: 'success' });
       formik.resetForm();
       // eslint-disable-next-line no-unused-vars

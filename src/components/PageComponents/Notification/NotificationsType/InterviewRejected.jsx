@@ -8,15 +8,15 @@ import { formatToLocalDate } from '../../../../utils/helpers/dateHandlers.js';
 
 const InterviewRejected = ({ createAt, payload }) => {
   const { t } = useTranslation();
-  const { rejectionUserFirstName, scheduleTime } = JSON.parse(payload);
-  const date = formatToLocalDate(scheduleTime);
+  const { rejectionName, scheduledDateTime } = JSON.parse(payload);
+  const date = formatToLocalDate(scheduledDateTime);
   return (
     <>
       <Box sx={styles.iconWrapper}>
         <InfoOutlined />
       </Box>
       <Box sx={styles.textWrapper}>
-        <Typography variant='body'>{t('notifications.interviewRejected', { rejectionUserFirstName, date })}</Typography>
+        <Typography variant='body'>{t('notifications.interviewRejected', { rejectionName, date })}</Typography>
         <Typography sx={styles.date} variant='body2'>
           <TimeAgo data={createAt} />
         </Typography>

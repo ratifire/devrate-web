@@ -78,7 +78,7 @@ const ChatForm = () => {
   }, [dataChats]);
 
   useEffect(() => {
-    const socket = new SockJS('https://server.skillzzy.com/chat');
+    const socket = new SockJS(`${import.meta.env.VITE_API_DEV_URL}/chat`);
     const newClient = new Client({
       webSocketFactory: () => socket,
       onConnect: () => {
@@ -205,7 +205,7 @@ const ChatForm = () => {
               onChange={handleTextFieldChange}
               onKeyDown={handleKeyDown}
             />
-            <IconButton sx={styles.btnSend} onClick={handleSubmitMessages}>
+            <IconButton disabled={!message.trim()} sx={styles.btnSend} onClick={handleSubmitMessages}>
               <Send />
             </IconButton>
           </Box>

@@ -81,6 +81,12 @@ export const chatLight = {
     textarea: {
       backgroundColor: '#FFFFFF',
     },
+    btnSend: {
+      fill: '#8133F1',
+      disabled: {
+        fill: '#C5C5C6',
+      },
+    },
   },
   chatMessage: {
     receiver: {
