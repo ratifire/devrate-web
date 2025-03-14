@@ -38,7 +38,12 @@ const Footer = () => {
                     <img alt='ratifire' src={ratifire} />
                   </a>
                 </div>
-                <a className={styles.footer__developerLink} href='#' target='_blank'>
+                <a
+                  className={styles.footer__developerLink}
+                  href='https://ratifire.org/'
+                  rel='noreferrer noopener'
+                  target='_blank'
+                >
                   ratifire.org
                 </a>
                 <div className={styles.footer__policies}>
@@ -51,7 +56,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className={styles.footer__copyright}>
-                <p className={styles.footer__copyrightYear}>© 2024 Devrate, Inc. All rights reserved.</p>
+                <p className={styles.footer__copyrightYear}>© 2024 Skillzzy, Inc. All rights reserved.</p>
                 <p className={styles.footer__trademarks}>
                   All trademarks, logos, and brand names are the property of their respective owners.
                 </p>

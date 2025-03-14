@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import TimeAgo from '../../../UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
 
-const InterviewFeedback = ({ createAt, payload }) => {
+const InterviewFeedback = ({ createAt }) => {
   const { t } = useTranslation();
-  const { feedbackId } = JSON.parse(payload);
+  // const { interviewId } = JSON.parse(payload);
 
   return (
     <>
@@ -16,7 +16,7 @@ const InterviewFeedback = ({ createAt, payload }) => {
       </Box>
       <Box sx={styles.textWrapper}>
         <Typography variant='body'>
-          {t('notifications.interviewFeedback')} {feedbackId}
+          {t('notifications.interviewFeedback')}
           <Typography sx={[styles.btn, { opacity: 0.3, color: '#828283' }]} variant='body'>
             {t('notifications.feedbackBtn')}
           </Typography>
@@ -31,6 +31,6 @@ const InterviewFeedback = ({ createAt, payload }) => {
 
 InterviewFeedback.propTypes = {
   createAt: PropTypes.string.isRequired,
-  payload: PropTypes.string.isRequired,
+  payload: PropTypes.string,
 };
 export default InterviewFeedback;
