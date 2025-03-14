@@ -50,7 +50,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           masteryLevel: lvlMastery[mastery.masteryLevel],
         }));
       },
-      providesTags: [TAG_TYPES.HardSkills, TAG_TYPES.Specialization],
+      providesTags: [TAG_TYPES.HardSkills, TAG_TYPES.Specialization, TAG_TYPES.PersonalUser],
     }),
     getMasteriesBySpecializationId: builder.query({
       query: (id) => `/specializations/${id}/masteries`,
@@ -72,7 +72,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
         url: `/specializations/${specId}/set-main-mastery/${masteryId}`,
         method: 'PUT',
       }),
-      invalidatesTags: (result, error, { masteryId }) => [{ type: TAG_TYPES.MainMastery, id: masteryId }],
+      invalidatesTags: [TAG_TYPES.MainMastery, TAG_TYPES.PersonalUser],
     }),
 
     updateSpecializationById: builder.mutation({
@@ -83,7 +83,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           body: { id, name },
         };
       },
-      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPES.Specialization, id: arg.id }],
+      invalidatesTags: [TAG_TYPES.Specialization, TAG_TYPES.PersonalUser],
     }),
 
     getHardSkillsByMasteryId: builder.query({
@@ -111,10 +111,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: { id, name, main },
       }),
-      invalidatesTags: (result, error, arg) => [
-        { type: TAG_TYPES.Specialization, id: arg.id },
-        { type: TAG_TYPES.PersonalUser, id: arg.userId },
-      ],
+      invalidatesTags: [TAG_TYPES.Specialization, TAG_TYPES.PersonalUser],
     }),
 
     addSkillToMastery: builder.mutation({
