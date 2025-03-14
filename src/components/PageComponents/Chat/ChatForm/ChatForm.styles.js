@@ -135,7 +135,7 @@ export const styles = {
       },
     },
   }),
-  btnSend: {
+  btnSend: (theme) => ({
     position: 'absolute',
     top: '24px',
     right: '28px',
@@ -143,8 +143,18 @@ export const styles = {
     width: '24px',
     padding: 0,
     borderRadius: 1,
+    '&:disabled': {
+      '> svg': {
+        ' path': {
+          fill: theme.palette.chatForm.btnSend.disabled.fill,
+        },
+      },
+    },
     '> svg': {
       fontSize: '24px',
+      ' path': {
+        fill: theme.palette.chatForm.btnSend.fill,
+      },
     },
-  },
+  }),
 };

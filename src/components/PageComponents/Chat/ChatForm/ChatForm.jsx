@@ -205,7 +205,7 @@ const ChatForm = () => {
               onChange={handleTextFieldChange}
               onKeyDown={handleKeyDown}
             />
-            <IconButton sx={styles.btnSend} onClick={handleSubmitMessages}>
+            <IconButton disabled={!message.trim()} sx={styles.btnSend} onClick={handleSubmitMessages}>
               <Send />
             </IconButton>
           </Box>

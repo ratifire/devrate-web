@@ -8,17 +8,20 @@ import { selectCurrentUser } from '../../../redux/auth/authSlice.js';
 import { styles } from '../../PageComponents/ProfileComponents/PersonalProfile/RightSection/RightSection.styles.js';
 import { constructUrlByType } from '../../../utils/helpers/urlHelpers.js';
 const icons = { dark: darkIcons, light: lightIcons };
-const SocialsLinkList = ({ gap = 2, componentStyles }) => {
+
+const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
   const { mode } = useSelector((state) => state.theme);
   const {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
   const { data: userContacts } = useGetUserContactsQuery(userId);
 
+  const arr = id ? socials : userContacts;
+
   return (
     <Box gap={gap} sx={styles.wrapperLink}>
-      {userContacts && userContacts.length ? (
-        userContacts.map(({ type, value, id }) => {
+      {arr && arr.length ? (
+        arr.map(({ type, value, id }) => {
           const IconComponent = getIconsByType(type, icons[mode]);
           const href = constructUrlByType(type, value);
 
@@ -38,6 +41,8 @@ const SocialsLinkList = ({ gap = 2, componentStyles }) => {
 SocialsLinkList.propTypes = {
   gap: PropTypes.number,
   componentStyles: PropTypes.object.isRequired,
+  socials: PropTypes.array.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default SocialsLinkList;

@@ -29,7 +29,7 @@ const RightSection = ({ id }, profileType) => {
           </Typography>
         </Box>
         <Box gap={2} sx={styles.wrapperLink}>
-          <SocialsLinkList componentStyles={styles} socials={userContacts} />
+          <SocialsLinkList componentStyles={styles} id={id} socials={userContacts} />
         </Box>
       </Box>
       {Boolean(languages.data?.length) && profileType !== 'user' && (
