@@ -14,6 +14,7 @@ import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
 import { normalizeUrl, addPhone, addTelegram, getDataStepContacts } from '../../../../../utils/helpers/urlHelpers.js';
 import { StepContactsSkeleton } from '../../../../UI/Skeleton';
 import { ErrorComponent } from '../../../../UI/Exceptions';
+import { MuiPhone } from '../../../../FormsComponents/Inputs/PhoneInput/PhoneInput.jsx';
 import { styles } from './StepContacts.styles';
 
 const StepContacts = () => {
@@ -66,6 +67,10 @@ const StepContacts = () => {
     onSubmit,
     enableReinitialize: true,
   });
+
+  const handlePhoneChange = (phone) => {
+    formik.setFieldValue('phone', phone); // Обновляем значение телефона в Formik
+  };
 
   if (isErrorGetUseContacts || isErrorPostContacts) {
     return <ErrorComponent />;
@@ -139,16 +144,22 @@ const StepContacts = () => {
           />
         </Box>
         <Box sx={styles.input100}>
-          <FormInput
-            error={formik.touched.phone && Boolean(formik.errors.phone)}
-            handleBlur={formik.handleBlur}
-            handleChange={formik.handleChange}
-            helperText={formik.touched.phone && formik.errors.phone}
-            label='profile.modal.userInfo.contact.phone'
-            name='phone'
-            type='text'
-            value={formik.values.phone}
-          />
+          {/*<FormInput*/}
+          {/*  error={formik.touched.phone && Boolean(formik.errors.phone)}*/}
+          {/*  handleBlur={formik.handleBlur}*/}
+          {/*  handleChange={formik.handleChange}*/}
+          {/*  helperText={formik.touched.phone && formik.errors.phone}*/}
+          {/*  label='profile.modal.userInfo.contact.phone'*/}
+          {/*  name='phone'*/}
+          {/*  type='text'*/}
+          {/*  value={formik.values.phone}*/}
+          {/*/>*/}
+          <MuiPhone
+            defaultCountry='ua' // Устанавливаем страну по умолчанию (Украина)
+            inputStyle={{ width: '100%' }} // Стили для input
+            value={formik.values.phone} // Значение из Formik
+            onChange={handlePhoneChange} // Обработчик изменения
+          />{' '}
         </Box>
       </Box>
       <ButtonDef
