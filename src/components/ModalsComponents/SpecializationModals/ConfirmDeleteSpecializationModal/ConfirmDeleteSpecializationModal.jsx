@@ -6,11 +6,13 @@ import {
   useDeleteSpecializationByIdMutation,
   useGetSpecializationByUserIdQuery,
 } from '@redux/api/slices/specialization/specializationApiSlice';
-import { closeModal, selectModalData } from '@redux/slices/modal/modalSlice';
-import { setActiveSpecialization, setMainSpecializations } from '@redux/slices/specialization/specializationSlice.js';
-import { ButtonDef } from '@components/FormsComponents/Buttons';
-import { CategoriesSkeleton } from '@components/UI/Skeleton';
-import { ErrorComponent } from '@components/UI/Exceptions';
+import { selectModalData } from '@redux/slices/modal/modalSlice';
+import { setActiveSpecialization, setMainSpecializations } from '@redux/slices/specialization/specializationSlice';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { CategoriesSkeleton } from '../../../UI/Skeleton';
+import { ErrorComponent } from '../../../UI/Exceptions';
 import { styles } from './ConfirmDeleteSpecializationModal.styles';
 
 const ConfirmDeleteSpecializationModal = () => {
@@ -18,6 +20,7 @@ const ConfirmDeleteSpecializationModal = () => {
   const dispatch = useDispatch();
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const { id } = useSelector((state) => state.auth.user.data);
+  const { closeModal } = useModalController();
   const {
     data: specializations,
     isFetching: isFetchingGetSpecialization,
@@ -59,14 +62,20 @@ const ConfirmDeleteSpecializationModal = () => {
 
       handleSpecializationUpdate(id);
     } catch (err) {
-      if (err.status === 409) {
+      if (err.status === 400 || err.status === 404) {
         enqueueSnackbar(t('specialization.errorDeleteSpec'), { variant: 'error' });
+      } else if (err.status === 409) {
+        enqueueSnackbar(t('specialization.conflictDeleteSpec'), { variant: 'error' });
       }
+
+      // if (err.status === 409) {
+      //   enqueueSnackbar(t('specialization.errorDeleteSpec'), { variant: 'error' });
+      // }
     } finally {
-      dispatch(closeModal());
+      closeModal(modalNames.confirmDeleteSpecialization);
     }
   };
-  const handleCancelDeletion = () => dispatch(closeModal());
+  const handleCancelDeletion = () => closeModal(modalNames.confirmDeleteSpecialization);
 
   return (
     <>

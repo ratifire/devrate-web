@@ -2,28 +2,29 @@ import { Box, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import UserAvatar from '@components/UI/UserAvatar';
+import { useSnackbar } from 'notistack';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
-import { ErrorComponent } from '@components/UI/Exceptions';
-import { ScheduledMeetingSkeleton } from '@components/UI/Skeleton';
 import { formatTimeToUtc, formatTimeWithOffset } from '@utils/helpers';
-import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
+import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice';
 import navigationLinks from '@router/links.js';
-import { modalNames } from '@utils/constants/modalNames.js';
-import { openModal } from '@redux/slices/modal/modalSlice.js';
-import zoom from '@assets/icons/InterviewPageIcons/zoom.png';
+import { modalNames } from '@utils/constants/modalNames';
+import { openModal } from '@redux/slices/modal/modalSlice';
+import zoom from '../../../../assets/icons/InterviewPageIcons/zoom.png';
+import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { ErrorComponent } from '../../../UI/Exceptions';
+import { ScheduledMeetingSkeleton } from '../../../UI/Skeleton';
 import { getStatusByTime } from '../helpers';
 import { styles } from './ScheduledMeeting.styles';
-import { btnStatus, leftBtnStatus } from './constants';
-import rightBtnStatus from './constants/rigthBtnStatus';
+import { btnStatus, leftBtnStatus, rightBtnStatus } from './constants';
 
 const ScheduledMeeting = () => {
   const { t } = useTranslation();
   const {
     data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -54,7 +55,20 @@ const ScheduledMeeting = () => {
 
   const handleClickLeftBtn = () => {
     if (status === btnStatus['UPCOMING']) {
-      cancelMeeting({ eventId }).then(() => navigate(navigationLinks.interviews));
+      cancelMeeting({ eventId })
+        .then(() => {
+          enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.success'), {
+            variant: 'success',
+            anchorOrigin: {
+              vertical: 'bottom',
+              horizontal: 'right',
+            },
+          });
+          navigate(navigationLinks.interviews);
+        })
+        .catch(() => {
+          enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.success'), { variant: 'success' });
+        });
     }
   };
 
@@ -86,7 +100,7 @@ const ScheduledMeeting = () => {
     <Box sx={styles.wrapper}>
       <Box sx={styles.boxTitle}>
         <Typography component='h6' variant='h6'>
-          {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.title')}
+          {t('singleScheduledInterview.scheduledMeeting.title')}
         </Typography>
         <Typography component='p' sx={styles[status]} variant='subtitle2'>
           {status}
@@ -121,7 +135,7 @@ const ScheduledMeeting = () => {
           />
         </Box>
         <Typography component='p' sx={styles.boxInfoText} variant='subtitle2'>
-          {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.participants')}:
+          {t('singleScheduledInterview.scheduledMeeting.participants')}:
           <Typography component='span' variant='body'>
             {hostFullName}; {userFullName}
           </Typography>
@@ -130,7 +144,7 @@ const ScheduledMeeting = () => {
       <Box sx={styles.boxParameters}>
         <Box sx={styles.boxParametersInfo}>
           <Typography component='p' variant='subtitle2'>
-            {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.language')}
+            {t('singleScheduledInterview.scheduledMeeting.language')}
           </Typography>
           <Typography component='p' variant='body'>
             {t(`specialization.language.name.${languageCode}`)}
@@ -138,15 +152,15 @@ const ScheduledMeeting = () => {
         </Box>
         <Box sx={styles.boxParametersInfo}>
           <Typography component='p' variant='subtitle2'>
-            {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.duration')}
+            {t('singleScheduledInterview.scheduledMeeting.duration')}
           </Typography>
           <Typography component='p' variant='body'>
-            60 {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.durationType')}
+            60 {t('singleScheduledInterview.scheduledMeeting.durationType')}
           </Typography>
         </Box>
         <Box sx={styles.boxParametersInfo}>
           <Typography component='p' variant='subtitle2'>
-            {t('singleScheduledInterview.interviewsSummary.scheduledMeeting.platform')}
+            {t('singleScheduledInterview.scheduledMeeting.platform')}
           </Typography>
           <Typography component='p' sx={styles.platformIcon} variant='body'>
             <Box component='img' src={zoom} sx={styles.icon} /> Zoom
@@ -158,7 +172,7 @@ const ScheduledMeeting = () => {
           components={{
             a: <Link component={RouterLink} sx={styles.link} to='/' />,
           }}
-          i18nKey='singleScheduledInterview.interviewsSummary.scheduledMeeting.link'
+          i18nKey='singleScheduledInterview.scheduledMeeting.link'
         />
       </Typography>
       <Box sx={styles.boxBtn}>

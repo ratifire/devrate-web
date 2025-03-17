@@ -1,8 +1,9 @@
-import { logOut } from '@redux/slices/auth/authSlice.js';
-import { clearTokens } from '@redux/slices/auth/tokenSlice.js';
-import { setDarkTheme } from '@redux/slices/theme/themeSlice.js';
-import { getTokenInHeaders } from '@utils/helpers/index.js';
-import { apiSlice } from '@redux/api/apiSlice.js';
+import { apiSlice } from '@redux/api/apiSlice';
+import { getTokenInHeaders } from '@utils/helpers';
+import { TAG_TYPES_ARRAY } from '@utils/constants/tagTypes';
+import { setDarkTheme } from '@redux/slices/theme/themeSlice';
+import { logOut } from '@redux/slices/auth/authSlice';
+import { clearTokens } from '@redux/slices/auth/tokenSlice';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,6 +19,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: `/auth/signup/confirm`,
         method: 'PUT',
         body: { confirmationCode, email },
+      }),
+    }),
+    registrationResendCode: builder.mutation({
+      query: ({ email }) => ({
+        url: `/auth/signup/resend-code`,
+        method: 'POST',
+        body: { email },
       }),
     }),
     resetPassword: builder.mutation({
@@ -58,6 +66,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
         responseHandler: (response) => response.text(),
       }),
+      invalidatesTags: TAG_TYPES_ARRAY,
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         await queryFulfilled;
         dispatch(logOut());
@@ -71,6 +80,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateUserMutation,
   useConfirmEmailMutation,
+  useRegistrationResendCodeMutation,
   useResetPasswordMutation,
   useChangePasswordMutation,
   useLoginMutation,

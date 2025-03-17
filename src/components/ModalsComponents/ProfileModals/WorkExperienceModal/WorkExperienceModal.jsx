@@ -6,17 +6,18 @@ import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
 import { WorkExperienceModalSchema } from '@utils/validationSchemas';
-import FormInput from '@components/FormsComponents/Inputs/FormInput';
-import TextAreaInput from '@components/FormsComponents/Inputs/TextAreaInput';
-import Responsibility from '@components//UI/Responsibility';
-import { ButtonDef } from '@components/FormsComponents/Buttons';
-import { useCreateNewWorkExperienceMutation } from '@redux/api/slices/workExperienceApiSlice.js';
-import FormCheckbox from '@components/FormsComponents/Inputs/FormCheckbox';
-import { FormSelect } from '@components/FormsComponents/Inputs';
 import { generateYearsArray } from '@utils/helpers/dateHandlers.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { addUniqueItem } from '@utils/helpers/ProfileWorkExperience/addUniqueItem.js';
+import fillEndYear from '@utils/helpers/fillEndYear.js';
+import { useCreateNewWorkExperienceMutation } from '@redux/api/slices/workExperienceApiSlice.js';
+import FormInput from '../../../FormsComponents/Inputs/FormInput';
+import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
+import Responsibility from '../../../UI/Responsibility';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
+import { FormSelect } from '../../../FormsComponents/Inputs';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceModal = () => {
@@ -33,7 +34,7 @@ const WorkExperienceModal = () => {
   const initialValues = {
     position: '',
     companyName: '',
-    description: [],
+    description: '',
     responsibilities: '',
     startYear: '',
     endYear: '',
@@ -89,7 +90,6 @@ const WorkExperienceModal = () => {
     formik.setFieldValue('currentDate', isChecked);
     formik.setFieldValue('endYear', isChecked ? '9999' : formik.values.endYear || '');
   };
-
   return (
     <>
       <Typography sx={styles.title} variant='subtitle1'>
@@ -152,6 +152,7 @@ const WorkExperienceModal = () => {
                 sx={styles.input50}
                 value={formik.values.currentDate ? '' : formik.values.endYear}
                 variant='outlined'
+                onOpen={() => fillEndYear(formik, selectYears)}
               />
               <Box sx={styles.checkBoxContainer}>
                 <FormCheckbox

@@ -7,10 +7,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Client } from '@stomp/stompjs';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import UserAvatar from '@components/UI/UserAvatar';
-// import { useGetAvatarUserQuery } from '@redux/user/avatar/avatarApiSlice';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import Send from '@assets/icons/send.svg?react';
-// import { array } from '@utils/constants/testMessages';
 import { closeChat, openBadge } from '@redux/slices/chat/chatSlice';
 import { useTranslation } from 'react-i18next';
 import {
@@ -85,7 +83,7 @@ const ChatForm = () => {
   }, [dataChats]);
 
   useEffect(() => {
-    const socket = new SockJS('https://server.skillzzy.com/chat');
+    const socket = new SockJS(`${import.meta.env.VITE_API_DEV_URL}/chat`);
     const newClient = new Client({
       webSocketFactory: () => socket,
       onConnect: () => {
@@ -212,7 +210,7 @@ const ChatForm = () => {
               onChange={handleTextFieldChange}
               onKeyDown={handleKeyDown}
             />
-            <IconButton sx={styles.btnSend} onClick={handleSubmitMessages}>
+            <IconButton disabled={!message.trim()} sx={styles.btnSend} onClick={handleSubmitMessages}>
               <Send />
             </IconButton>
           </Box>

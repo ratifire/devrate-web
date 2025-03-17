@@ -20,6 +20,7 @@ export const TAG_TYPES = {
   Chat: 'Chat',
   ChatHistory: 'ChatHistory',
   InterviewRequest: 'InterviewRequest',
+  InterviewRequestByMasteryId: 'InterviewRequestByMasteryId',
   ScheduledInterview: 'ScheduledInterview',
   PassedInterview: 'PassedInterview',
 };

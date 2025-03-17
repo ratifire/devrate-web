@@ -85,13 +85,15 @@ export const styles = {
     maxWidth: '228px',
     width: '100%',
   },
-  error: {
+  error: (theme) => ({
     textAlign: 'center',
     position: 'absolute',
     bottom: 60,
     left: 0,
     width: '100%',
-  },
+    paddingLeft: theme.spacing(3),
+    paddingRight: theme.spacing(3),
+  }),
   btnIcon: (theme) => ({
     flex: '1 0 44px',
     color: theme.palette.neutral[200],

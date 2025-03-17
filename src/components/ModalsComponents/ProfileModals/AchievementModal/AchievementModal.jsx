@@ -61,6 +61,7 @@ const AchievementModal = () => {
           <Box sx={styles.input100}>
             <FormInput
               required
+              autoComplete='off'
               error={formik.touched.summary && Boolean(formik.errors.summary)}
               handleBlur={formik.handleBlur}
               handleChange={formik.handleChange}

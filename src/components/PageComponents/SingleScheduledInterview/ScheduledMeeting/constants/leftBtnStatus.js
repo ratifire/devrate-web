@@ -1,9 +1,9 @@
 import { btnStatus } from './index';
 
 const leftBtnStatus = {
-  [btnStatus.UPCOMING]: 'singleScheduledInterview.interviewsSummary.scheduledMeeting.canceledMeeting',
-  [btnStatus['IN PROCESS']]: 'singleScheduledInterview.interviewsSummary.scheduledMeeting.canceledMeeting',
-  [btnStatus['AWAITING FEEDBACK']]: 'singleScheduledInterview.interviewsSummary.scheduledMeeting.notHappenedMeeting',
+  [btnStatus.UPCOMING]: 'singleScheduledInterview.scheduledMeeting.canceledMeeting',
+  [btnStatus['IN PROCESS']]: 'singleScheduledInterview.scheduledMeeting.canceledMeeting',
+  [btnStatus['AWAITING FEEDBACK']]: 'singleScheduledInterview.scheduledMeeting.notHappenedMeeting',
 };
 
 export default leftBtnStatus;

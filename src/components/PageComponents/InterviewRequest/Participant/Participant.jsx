@@ -5,11 +5,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { DateTime } from 'luxon';
 import CloseIcon from '@mui/icons-material/Close';
+import { isEmpty } from 'lodash';
 import {
   useDeleteInterviewRequestMutation,
-  useUpdateTimeSlotsMutation,
+  useDeleteTimeSlotsMutation,
 } from '@redux/api/slices/interviewRequestApiSlice.js';
-import { isEmpty } from 'lodash';
 import TimeSlotsGroup from '../TimeSlotsGroup';
 import RequestHeader from '../RequsestHeader';
 import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
@@ -21,7 +21,7 @@ const Participant = ({ data, specialization }) => {
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [deleteRequest] = useDeleteInterviewRequestMutation();
-  const [updateTimeslots] = useUpdateTimeSlotsMutation();
+  const [deleteTimeSlots] = useDeleteTimeSlotsMutation();
   const containerRef = useRef(null);
   const [slotsPerRow, setSlotsPerRow] = useState(0);
 
@@ -81,8 +81,9 @@ const Participant = ({ data, specialization }) => {
     return t(`specialization.language.name.${languageCode}`) || 'Unknown Language';
   }, [languageCode, t]);
 
-  const { role, desiredInterview, comment, availableDates, assignedDates } = data || {};
+  const { role, desiredInterview, comment, timeSlots, matchedInterview } = data || {};
 
+  const pandingTimeSlots = timeSlots.filter((slot) => slot.status === 'PENDING').length;
   const sortedDatesWithLabel = useMemo(() => getSortedDatesWithLabel(data || {}), [data]);
   const sortedDatesByDay = useMemo(() => groupDatesByDay(sortedDatesWithLabel), [sortedDatesWithLabel]);
 
@@ -96,27 +97,38 @@ const Participant = ({ data, specialization }) => {
     return mergeTimeSlotsByRows(slotsByDay, slotsPerRow);
   }, [slotsByDay, slotsPerRow]);
 
-  const selectedTimeSlots = (availableDates || []).length + (assignedDates || []).length;
-  const foundTimeSlots = (assignedDates || []).length;
+  const selectedTimeSlots = timeSlots.length;
+  const foundTimeSlots = matchedInterview;
 
-  const handleSelectSlot = (date) => {
-    setSelectedSlots((prev) => (prev.includes(date) ? prev.filter((d) => d !== date) : [...prev, date]));
+  const handleSelectSlot = ({ date, status }) => {
+    setSelectedSlots((prev) => {
+      const slotExists = prev.some((slot) => slot.date === date);
+      if (slotExists) {
+        return prev.filter((slot) => slot.date !== date);
+      }
+      return [...prev, { date, status }];
+    });
   };
 
   const handleDeleteSelected = () => {
     try {
-      const normalizedSelectedDates = selectedSlots.map((slot) =>
-        DateTime.fromISO(slot, { zone: 'utc' }).toFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-      );
-      const updatedAvailableDates = (data?.availableDates || []).filter(
-        (date) => !normalizedSelectedDates.includes(date)
-      );
-
-      const updatedAssignedDates = (data?.assignedDates || []).filter(
-        (date) => !normalizedSelectedDates.includes(date)
+      // Фильтруем PENDING слоты из выбранных
+      const pendingSelectedSlots = selectedSlots.filter((slot) => slot.status === 'pending');
+      const normalizedSelectedDates = pendingSelectedSlots.map((slot) =>
+        DateTime.fromISO(slot.date, { zone: 'utc' }).toFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
       );
 
-      if (desiredInterview > updatedAvailableDates.length) {
+      // Все выбранные даты для удаления
+      const selectedDates = selectedSlots.map((slot) =>
+        DateTime.fromISO(slot.date, { zone: 'utc' }).toFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+      );
+
+      // Если есть PENDING слоты среди выбранных, проверяем условие
+      if (
+        normalizedSelectedDates.length > 0 &&
+        pandingTimeSlots &&
+        desiredInterview > pandingTimeSlots - normalizedSelectedDates.length
+      ) {
         enqueueSnackbar(t('The number of timeslots must be greater than or equal to the number of interviews'), {
           variant: 'warning',
           anchorOrigin: { vertical: 'top', horizontal: 'center' },
@@ -125,17 +137,10 @@ const Participant = ({ data, specialization }) => {
         return;
       }
 
-      updateTimeslots({
+      // Если PENDING слотов нет или их достаточно, удаляем выбранные слоты
+      deleteTimeSlots({
         id: data.id,
-        data: {
-          role: role,
-          desiredInterview: desiredInterview,
-          comment: comment,
-          availableDates: updatedAvailableDates,
-          assignedDates: updatedAssignedDates,
-          masteryId: specialization.mainMasteryId,
-          languageCode: languageCode,
-        },
+        timeSlots: selectedDates,
       });
 
       setSelectedSlots([]);
@@ -146,7 +151,7 @@ const Participant = ({ data, specialization }) => {
       });
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.error') || 'Error updating time slots', {
+      enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.error') || 'Error deleting time slots', {
         variant: 'error',
         anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
       });
@@ -190,6 +195,8 @@ const Participant = ({ data, specialization }) => {
     return capitalize ? translatedRole : translatedRole.toLowerCase();
   };
 
+  const pendingSlots = data.timeSlots.filter((slot) => slot.status === 'PENDING').length;
+
   return (
     <Box ref={containerRef} sx={styles.container}>
       <RequestHeader
@@ -197,8 +204,12 @@ const Participant = ({ data, specialization }) => {
         foundInterviews={foundTimeSlots}
         handleUpdateSlots={handleDeleteSelected}
         hasSelectedSlots={selectedSlots.length > 0}
+        interviewRequestObj={data}
+        languageCode={languageCode}
         languageName={languageName}
+        pendingSlots={pendingSlots}
         role={formatRole(role, true)}
+        selectedSpecialization={specialization}
         selectedTimeSlots={selectedTimeSlots}
         title={mainMasteryLevelWithName}
         totalInterviews={desiredInterview}

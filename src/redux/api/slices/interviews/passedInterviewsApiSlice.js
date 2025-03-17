@@ -7,17 +7,22 @@ const passedInterviewApiSlice = apiSlice.injectEndpoints({
       query: ({ page, size }) => `/interview-histories?page=${page}&size=${size}`,
       providesTags: (result) =>
         result?.content
-          ? [...result.content.map(({ id }) => ({ type: TAG_TYPES.PassedInterview, id })), TAG_TYPES.PassedInterview]
-          : [TAG_TYPES.PassedInterview],
+          ? [
+              ...result.content.map(({ id }) => ({ type: TAG_TYPES.PassedInterview, id })),
+              { type: TAG_TYPES.PassedInterview, id: ' LIST' },
+            ]
+          : [{ type: TAG_TYPES.PassedInterview, id: 'LIST' }],
 
       // Merge new data with existing data
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         // Use a consistent key for the cache, ignoring `page` and `size`
         return `${endpointName}-${queryArgs.size}`;
       },
-      merge: (currentCache, newData) => {
+      merge: (currentCache, newData, { arg }) => {
         // Merge the `content` arrays from the current cache and new data
-        if (currentCache.content && newData.content) {
+        if (arg.page === 0) {
+          currentCache.content = newData.content;
+        } else {
           currentCache.content.push(...newData.content);
         }
       },

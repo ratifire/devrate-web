@@ -23,7 +23,7 @@ const InterviewChart = () => {
   const { t } = useTranslation();
   const dataMonths = useMemo(() => createTenMonthsInterviewData({ t, data }), [data]);
   const dataDays = useMemo(() => createTenDaysInterviewData({ data }), [data]);
-  const { itemStyle, contentStyle } = useTooltipColorChart();
+  const { itemStyle, contentStyle, customCursor } = useTooltipColorChart();
   const { conductedGrad1, conductedGrad2, conductedGrad3, passedGrad1, passedGrad2, passedGrad3 } =
     useThemeInterviewChart();
 
@@ -68,7 +68,7 @@ const InterviewChart = () => {
             <CartesianGrid strokeDasharray='7 7' strokeWidth={0.5} vertical={false} />
             <XAxis dataKey='name' />
             <YAxis domain={[0, 10]} interval={0} ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
-            <Tooltip contentStyle={contentStyle} itemStyle={itemStyle} />
+            <Tooltip contentStyle={contentStyle} cursor={{ fill: customCursor.fill }} itemStyle={itemStyle} />
             <Bar
               dataKey='conducted'
               fill='url(#colorConducted)'

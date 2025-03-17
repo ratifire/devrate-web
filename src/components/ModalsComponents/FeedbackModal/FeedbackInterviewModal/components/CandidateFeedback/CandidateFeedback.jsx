@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { ErrorComponent } from '@components/UI/Exceptions';
+import { lvlMastery } from '@utils/constants/masteryLvl';
 import { FIRST_STEP, LAST_STEP } from '../../constants';
 import { formatDateTime } from '../../helpers';
 import useFeedbackForm from '../../hooks';
@@ -13,7 +14,8 @@ import { styles } from './CandidateFeedback.styles';
 const CandidateFeedback = () => {
   const [activeStep, setActiveStep] = useState(FIRST_STEP);
   const { t } = useTranslation();
-  const { formik, isError, interviewStartTime, surname, name, status, isLoading } = useFeedbackForm();
+  const { formik, isError, interviewStartTime, surname, name, isLoading, specializationName, masteryLevel, role } =
+    useFeedbackForm();
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
   const handleNextStep = () => setActiveStep(LAST_STEP);
@@ -27,7 +29,13 @@ const CandidateFeedback = () => {
     <Box sx={styles.container}>
       <Typography variant='h6'>{t('modal.interview.title')}</Typography>
       <InterviewStepper activeStep={activeStep} />
-      <InterviewerInfo date={date} name={`${name} ${surname}`} position={status} time={time} />
+      <InterviewerInfo
+        date={date}
+        name={`${name} ${surname}`}
+        position={`${lvlMastery[masteryLevel]} ${specializationName}`}
+        role={role}
+        time={time}
+      />
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.formBox}>
           <SliderComponent formik={formik} slide={activeStep} />

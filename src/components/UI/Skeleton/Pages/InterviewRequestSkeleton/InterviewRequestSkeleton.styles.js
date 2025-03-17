@@ -1,25 +1,35 @@
 export const styles = {
-  wrapper: (theme) => ({
-    padding: theme.spacing(4),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '20px',
-  }),
-  boxAvatar: {
+  container: {
+    padding: '20px',
+  },
+  header: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '20px',
   },
-  boxInfo: {
-    maxWidth: '390px',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '4px',
+  heading: {
+    width: '200px',
+    height: '40px',
   },
-  boxName: {
+  select: {
+    width: '200px',
+    height: '56px',
+  },
+  participant: {
+    marginBottom: '20px',
+  },
+  requestHeader: {
+    marginBottom: '20px',
+  },
+  timeSlotGroup: {
+    marginBottom: '20px',
+  },
+  dayTitle: {
+    marginBottom: '10px',
+  },
+  dayGroup: {
     display: 'flex',
-    justifyContent: 'space-between',
-    gap: '20px',
+    flexWrap: 'wrap',
   },
 };

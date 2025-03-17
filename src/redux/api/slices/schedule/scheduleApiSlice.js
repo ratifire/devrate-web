@@ -4,25 +4,28 @@ import { TAG_TYPES } from '@utils/constants/tagTypes.js';
 export const ScheduleApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getEventByUserId: builder.query({
-      query: ({ userId, from, to }) => `users/${userId}/events?from=${from}&to=${to}`,
-      providesTags: (result) =>
-        result ? [...result.map(({ id }) => ({ type: TAG_TYPES.Event, id })), TAG_TYPES.Event] : [TAG_TYPES.Event],
+      query: ({ from, to }) => `events?from=${from}&to=${to}`,
+      providesTags: [TAG_TYPES.Event],
     }),
 
     getClosestEventByUserId: builder.query({
-      query: ({ userId, fromTime }) => `/users/${userId}/events/closest?from=${fromTime}`,
-      providesTags: (result) =>
-        result ? [...result.map(({ id }) => ({ type: TAG_TYPES.Event, id })), TAG_TYPES.Event] : [TAG_TYPES.Event],
+      query: ({ fromTime }) => `interviews/events/closest?from=${fromTime}`,
+      providesTags: [TAG_TYPES.Event],
+    }),
+
+    getEventById: builder.query({
+      query: ({ id }) => `interviews/events/${id}`,
+      providesTags: [TAG_TYPES.Event],
     }),
 
     deleteEventById: builder.mutation({
-      query: ({ userId, id }) => {
+      query: ({ id }) => {
         return {
-          url: `/users/${userId}/interviews/${id}`,
+          url: `interviews/${id}`,
           method: 'DELETE',
         };
       },
-      invalidatesTags: (result, error, { id }) => [{ type: TAG_TYPES.Event, id }],
+      invalidatesTags: [TAG_TYPES.Event],
     }),
   }),
 });
@@ -32,4 +35,5 @@ export const {
   useLazyGetEventByUserIdQuery,
   useGetClosestEventByUserIdQuery,
   useDeleteEventByIdMutation,
+  useGetEventByIdQuery,
 } = ScheduleApiSlice;

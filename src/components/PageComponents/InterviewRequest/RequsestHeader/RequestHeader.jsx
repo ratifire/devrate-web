@@ -4,15 +4,17 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
+import InterviewModalRole from '@utils/constants/InterviewModalRole.js';
 import { useState } from 'react';
 import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu/index.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './RequestHeader.styles.js';
 
 const RequestHeader = ({
   title,
+  selectedSpecialization,
   role,
   description,
   foundInterviews,
@@ -22,6 +24,9 @@ const RequestHeader = ({
   hasSelectedSlots,
   handleUpdateSlots,
   languageName,
+  languageCode,
+  interviewRequestObj,
+  pendingSlots,
 }) => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -36,7 +41,42 @@ const RequestHeader = ({
   };
 
   const handleAddTimeSlots = () => {
-    openModal(modalNames.scheduleInterviewModal, { role });
+    const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
+    const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
+
+    openModal(
+      modalNames.scheduleInterviewModal,
+      {
+        role: formattedRole,
+        selectedSpecialization,
+        totalInterviews,
+        interviewRequestId,
+        pendingSlots,
+        modalRole: InterviewModalRole.AddTimeSlots,
+      },
+      3
+    );
+  };
+
+  const handleEditFeature = () => {
+    const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
+    const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
+
+    openModal(
+      modalNames.scheduleInterviewModal,
+      {
+        role: formattedRole,
+        selectedSpecialization,
+        totalInterviews,
+        interviewRequestId,
+        comment: description,
+        modalRole: InterviewModalRole.EditFeature,
+        language: languageCode,
+        pendingSlots,
+      },
+      1
+    );
+    handleCloseMenu();
   };
 
   return (
@@ -82,7 +122,7 @@ const RequestHeader = ({
             anchorEl={anchorEl}
             handleCloseMenu={handleCloseMenu}
             handleDeleteFeature={onDeleteSelected}
-            // handleEditFeature={handleEditFeature}
+            handleEditFeature={handleEditFeature}
           />
         </Box>
       </Box>
@@ -123,6 +163,7 @@ const RequestHeader = ({
 
 RequestHeader.propTypes = {
   title: PropTypes.string.isRequired,
+  selectedSpecialization: PropTypes.object.isRequired,
   role: PropTypes.oneOf(['Respondent', 'Interviewer']).isRequired,
   description: PropTypes.string.isRequired,
   foundInterviews: PropTypes.number.isRequired,
@@ -132,6 +173,9 @@ RequestHeader.propTypes = {
   handleUpdateSlots: PropTypes.func.isRequired,
   hasSelectedSlots: PropTypes.bool.isRequired,
   languageName: PropTypes.string.isRequired,
+  languageCode: PropTypes.string.isRequired,
+  interviewRequestObj: PropTypes.object.isRequired,
+  pendingSlots: PropTypes.number.isRequired,
 };
 
 export default RequestHeader;

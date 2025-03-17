@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { ErrorComponent } from '@components/UI/Exceptions';
+import { lvlMastery } from '@utils/constants/masteryLvl';
 import { formatDateTime } from '../../helpers';
 import useFeedbackForm from '../../hooks';
 import { InterviewerInfo, StepSoftSkills } from '../index';
@@ -10,7 +11,8 @@ import { styles } from './InterviewerFeedback.styles';
 
 const InterviewerFeedback = () => {
   const { t } = useTranslation();
-  const { interviewStartTime, name, status, surname, isError, formik, isLoading } = useFeedbackForm();
+  const { interviewStartTime, name, surname, isError, formik, isLoading, specializationName, masteryLevel, role } =
+    useFeedbackForm();
 
   const { date, time } = useMemo(() => formatDateTime(interviewStartTime), [interviewStartTime]);
 
@@ -21,7 +23,13 @@ const InterviewerFeedback = () => {
   return (
     <Box sx={styles.container}>
       <Typography variant='h6'>{t('modal.interview.title')}</Typography>
-      <InterviewerInfo date={date} name={`${name} ${surname}`} position={status} time={time} />
+      <InterviewerInfo
+        date={date}
+        name={`${name} ${surname}`}
+        position={`${lvlMastery[masteryLevel]} ${specializationName}`}
+        role={role}
+        time={time}
+      />
       <form onSubmit={formik.handleSubmit}>
         <Box sx={styles.formBox}>
           <StepSoftSkills formik={formik} />

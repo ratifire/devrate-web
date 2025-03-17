@@ -38,10 +38,15 @@ export const en = {
         btnSend: 'Send',
         btnNext: 'Next',
         btnBack: 'Back',
-        interviewer: 'Candidate',
+        INTERVIEWER: 'Interviewer',
+        CANDIDATE: 'Candidate',
         required: 'This is a required field',
         long: 'This field is too long',
         short: 'This field is too short',
+        submit: {
+          success: 'Submit successfully',
+          error: 'Something went wrong',
+        },
       },
       achievement: {
         title: 'Achievement',
@@ -360,7 +365,8 @@ export const en = {
             },
             incorrectAvatar: 'This file can not be used as avatar',
             failedLoad: 'Failed to load image',
-            imageSize: 'Image dimensions must be at least 98x98 pixels',
+            imageFileSize: 'Your image is {{size}}MB and should not exceed 5 MB.',
+            imageSize: 'Image dimension is {{width}}x{{height}} pixels must be at least 98x98 pixels',
           },
           languages: {
             title: 'Languages',
@@ -410,10 +416,10 @@ export const en = {
           speciality_long: 'Speciality too long',
           speciality_short: 'Speciality too short',
           speciality_placeholder: 'Software Engineer',
-          edIstitution: 'Educational Institution',
-          edIstitution_long: 'Educational Institution too long',
-          edIstitution_short: 'Educational Institution too short',
-          edIstitution_placeholder: 'Oxford',
+          edInstitution: 'Educational Institution',
+          edInstitution_long: 'Educational Institution too long',
+          edInstitution_short: 'Educational Institution too short',
+          edInstitution_placeholder: 'Oxford',
           description: 'Description',
           description_long: 'Description too long',
           description_short: 'Description too short',
@@ -433,6 +439,8 @@ export const en = {
       specialization_softSkills: 'SoftSkills',
       error: 'Something went wrong...',
       errorDeleteSpec: "You can't delete a specialisation",
+      conflictDeleteSpec:
+        'You cannot delete a specialization because of an existing interview or interview requests for that specialization.',
       level: {
         title: 'Level',
         description: 'Switch between levels to see your statistics relative to another level.',
@@ -479,6 +487,7 @@ export const en = {
       },
       modal: {
         specialization: {
+          create: 'Create specialization',
           modal_title: 'Specialization',
           name: 'Specialization name',
           name_placeholder: 'Front-End Developer',
@@ -514,12 +523,11 @@ export const en = {
           endTime: 'End Time',
           socialLinks: 'Social Links',
           schedule: 'Schedule',
-          scheduleInterview: 'Schedule Interview',
           skill_long: 'Company too long',
           skill_short: 'Company too short',
         },
         specializationEdit: {
-          error_message: 'First, complete all open interviews at carrent level!',
+          error_message: 'First, complete all open interviews at current level!',
         },
         confirmSpecializationDelete: {
           title: 'Remove specialization',
@@ -563,8 +571,11 @@ export const en = {
       participant: 'Participant',
       cancelEventBtn: 'Cancel event',
       popupUserInfo: 'Info about you',
-      popupInterviewerInfo: 'Info about role',
+      popupInterviewerInfo: 'Info about interviewer',
       popupRole: 'Role:',
+      CANDIDATE: 'Candidate',
+      INTERVIEWER: 'Interviewer',
+      link: 'Connect to meeting',
     },
     notifications: {
       empty: 'You currently have no new notifications',
@@ -572,13 +583,13 @@ export const en = {
       hourAgo: 'hours ago',
       lessThanHourAgo: 'Less than an hour ago',
       interviewScheduled:
-        'Your interview for the {{roleLower}} role has been scheduled for {{date}} (UTC). Please be prepared and available at that time.',
+        'Your interview for the {{roleLower}} role has been scheduled for {{date}}. Please be prepared and available at that time.',
       greeting:
         "Welcome aboard! We're excited to have you join Skillzzy, where developers share expertise, learn, and connect.",
       interviewFeedback:
         "Congratulations on completing the interview! Please fill out a short form and evaluate your conversation partner's skills.",
       interviewRejected:
-        "The interview with {{rejectionUserFirstName}} scheduled for {{scheduleTime}} has been canceled. We'll arrange a new one soon and keep you updated.",
+        "The interview with {{rejectionName}} scheduled for {{date}} has been canceled. We'll arrange a new one soon and keep you updated.",
       interviewRequestExpired:
         'Dear {{userFirstName}}, Your interview request has expired. Please submit a new one to proceed.',
       feedbackBtn: 'Leave feedback',
@@ -867,6 +878,16 @@ export const en = {
       },
     },
     interviews: {
+      emptyInterviewTabs: {
+        emptyScheduled:
+          "You don't have any scheduled interviews yet. A great opportunity to take the first step! Sign up for a meeting to test your knowledge, gain valuable experience, and confidently move toward your goals.",
+        emptyPassed:
+          'At the moment, you have no interviews completed. Create a request and take the first step towards new opportunities! Find an interviewer who will help you assess your knowledge and prepare for challenges.',
+        emptyRequest:
+          'There is nothing here yet. Create an interview request and take a step towards development! Find an interviewer who will help you test your knowledge and prepare for future challenges. Each conversation is a new experience and an opportunity to become more confident in your abilities.',
+        emptySpecialization:
+          'You do not have a chosen specialization yet. Define your area of interest to get access to interviews. Choose an area that interests you and discover new opportunities. This will help you find an interviewer or respondent, test your knowledge, and better prepare for future challenges.',
+      },
       navigationLinks: {
         scheduled: 'Scheduled',
         passed: 'Passed',
@@ -888,6 +909,7 @@ export const en = {
         interviewInfoMonthAgo: 'months ago',
         interviewInfoWeekAgo: 'weeks ago',
         interviewInfoDayAgo: 'days ago',
+        interviewInfoHourAgo: 'hour(s) ago',
         interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
         interviewInfoHost: 'Host',
@@ -899,21 +921,46 @@ export const en = {
         interviewStatisticsSoftSkills: 'Soft Skills',
         interviewStatisticsOverall: 'Over All',
       },
+      scheduleInterviewModal: {
+        title: 'Schedule Interview',
+        scheduleBtn: 'Schedule',
+        specializationInputTitle: 'Specialization',
+        languageInputTitle: 'Language',
+        interviewCountTooltip:
+          'Select the maximum number of interviews that can be assigned to the selected timeslots. This option allows you to limit the number of interviews within your time availability',
+        interviewCountTitle: 'Number of interviews for the selected timeslots',
+        commentTitle: 'Comment',
+        commentPlaceholder: 'Describe what you expect from the interview',
+        required: 'This is a required field',
+        comment_min: 'Comment should be longer than 5 characters',
+        comment_max: 'Comment should be shorter than 100 characters',
+        interviewCount_min: 'Choose at least 1 timeslot',
+        interviewCount_max: 'Too much. Please decrease value',
+        timeslotDescription1: 'The selected number of interviews - ',
+        timeslotDescription2: 'Minimum number of interviews - ',
+        timeslotDescriptionError: 'You have not selected enough timeslots. You need to select at least - ',
+        warning: 'For the selected specialization, there is already a request in the role',
+        thisWeek: 'This week',
+        save: 'Save',
+        interviewCount_exceeds_pendingSlots: 'The number of interviews cannot exceed the available slots.',
+      },
     },
     singleScheduledInterview: {
-      interviewsSummary: {
-        scheduledMeeting: {
-          title: 'Scheduled Meeting',
-          participants: 'Participants',
-          language: 'Language',
-          duration: 'Duration',
-          platform: 'Platform',
-          link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
-          canceledMeeting: 'Cancel Meeting',
-          joinMeeting: 'Join Interview',
-          notHappenedMeeting: 'Interview did not happen',
-          leaveFeedbackMeeting: 'Leave Feedback',
-          durationType: 'min.',
+      scheduledMeeting: {
+        title: 'Scheduled Meeting',
+        participants: 'Participants',
+        language: 'Language',
+        duration: 'Duration',
+        platform: 'Platform',
+        link: 'Your lesson will start at the scheduled time. You can cancel or reschedule it 24 hours before the start. Please review our <a>cancellation policy</a> for details.',
+        canceledMeeting: 'Cancel Meeting',
+        joinMeeting: 'Join Interview',
+        notHappenedMeeting: 'Interview did not happen',
+        leaveFeedbackMeeting: 'Leave Feedback',
+        durationType: 'min.',
+        canceled: {
+          success: 'Meeting canceled successfully',
+          error: 'Something went wrong',
         },
       },
       interviewSkills: {
@@ -953,8 +1000,9 @@ export const en = {
       timeSlot: {
         status: {
           status: 'Status:',
-          available: 'Pending',
-          assigned: 'Scheduled',
+          pending: 'Pending',
+          booked: 'Scheduled',
+          expired: 'Expired',
         },
         daysOfWeek: {
           monday: 'Monday',

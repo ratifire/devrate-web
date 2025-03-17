@@ -14,11 +14,11 @@ import {
   SpecializationEditModal,
   SpecializationModal,
   HardSkillsModal,
-  ScheduleInterviewModal,
   SoftSkillsModal,
   ConfirmDeleteSpecializationModal,
 } from './SpecializationModals';
 import { FeedbackInterviewModal } from './FeedbackModal/FeedbackInterviewModal';
+import ScheduleInterviewModal from './InterviewModals/ScheduleInterviewModal';
 
 const modalEnum = {
   [modalNames.achievementModal]: AchievementModal,

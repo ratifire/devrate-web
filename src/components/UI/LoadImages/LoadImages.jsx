@@ -10,6 +10,8 @@ import { useTranslation } from 'react-i18next';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { styles } from './LoadImages.styles';
 
+const maxSizeMB = 5;
+
 const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled, onChange }) => {
   const editor = useRef(null);
   const { t } = useTranslation();
@@ -48,12 +50,17 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
-        if (img.width < 98 || img.height < 98) {
-          reject(new Error(t('profile.modal.userInfo.photo.imageSize')));
+        if (img.naturalWidth < 98 || img.naturalHeight < 98) {
+          reject(
+            new Error(
+              t('profile.modal.userInfo.photo.imageSize', { width: img.naturalWidth, height: img.naturalHeight })
+            )
+          );
         } else {
           resolve();
         }
       };
+
       img.onerror = () => reject(new Error(t('profile.modal.userInfo.photo.failedLoad')));
       img.src = URL.createObjectURL(file);
     });
@@ -61,6 +68,12 @@ const LoadImages = ({ handleChange, handleBlur, handlerDelete, value, isDisabled
 
   const onDrop = async (acceptedFiles, fileRejections) => {
     if (fileRejections.length > 0) {
+      const fileSizeInMB = fileRejections[0].file.size / (1024 * 1024);
+      if (fileSizeInMB > maxSizeMB) {
+        setError(t('profile.modal.userInfo.photo.imageFileSize', { size: fileSizeInMB.toFixed(2) }));
+        return;
+      }
+
       setError(t('profile.modal.userInfo.photo.incorrectAvatar'));
       return;
     }

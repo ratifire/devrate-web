@@ -7,12 +7,11 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to deploy (prod, dev_old, dev)'
+        description: 'Select environment to deploy (prod, dev)'
         required: true
         default: 'dev'
         type: choice
         options:
-          - dev_old
           - prod
           - dev
   push:
@@ -43,6 +42,7 @@ jobs:
         run: |
           VITE_API_URL=${{ vars.REACT_APP_API_URL }} \
           VITE_WS_URL=${{ vars.REACT_APP_WS_URL }} \
+          VITE_API_DEV_URL=${{ vars.REACT_APP_API_URL }} \
           npm run server-build
 
       - name: Configure AWS credentials

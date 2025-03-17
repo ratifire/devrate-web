@@ -21,14 +21,17 @@ export const formatToLocalDate = (dateString) => {
 
   const localDate = utcDate.setZone('local');
 
-  return localDate.toLocaleString(DateTime.DATETIME_MED);
+  return localDate.toFormat('yyyy.MM.dd HH:mm');
 };
 
 export const generateYearsArray = () => {
+  const currentYear = new Date().getFullYear();
   const availableYears = [];
-  for (let i = 1950; i <= `${new Date().getFullYear()}`; i++) {
+
+  for (let i = currentYear; i >= 1950; i--) {
     availableYears.push(`${i}`);
   }
+
   return availableYears;
 };
 

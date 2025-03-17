@@ -1,24 +1,32 @@
 import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState, useLayoutEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 import InterviewsSkeleton from '@components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { useGetAllPassedInterviewsQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
 import navigationLinks from '@router/links.js';
+import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
+import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
 import { styles } from './PassedInterviewsPage.styles';
 
-const SideBar = lazy(() => import('@components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar'));
+const SideBar = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar'));
 
 const MemoizedSideBar = memo(SideBar);
 
 const PassedInterviewsPage = () => {
-  const [page, setPage] = useState(1);
+  const { id } = useSelector((state) => state.auth.user.data);
+  const [page, setPage] = useState(0);
   const { data: passedInterviews, isFetching, isLoading } = useGetAllPassedInterviewsQuery({ page, size: 5 });
   const [lastEventRef, setLastEventRef] = useState(null);
   const navigate = useNavigate();
+  const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
+
+  const isPassedInterviewList = Boolean(passedInterviews?.content.length);
+  const isSpecializations = Boolean(specializations?.length);
   const refHandler = (el) => {
     setLastEventRef(el);
   };
-
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
@@ -63,7 +71,17 @@ const PassedInterviewsPage = () => {
     redirectToFirstInterview();
   }, [redirectToFirstInterview]);
 
-  return (
+  return !isPassedInterviewList ? (
+    <EmptyInterviewTab
+      isSpecializations={isSpecializations}
+      svg={
+        !isSpecializations
+          ? emptyInterviewTabsPictures.emptySpecialization.passed
+          : emptyInterviewTabsPictures.emptyPassedPic
+      }
+      tab='Passed'
+    />
+  ) : (
     <Container maxWidth='xl' sx={styles.container}>
       <Box sx={styles.contentWrapper}>
         <Box sx={styles.box}>

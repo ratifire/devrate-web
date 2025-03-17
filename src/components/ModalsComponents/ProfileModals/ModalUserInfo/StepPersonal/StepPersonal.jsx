@@ -162,6 +162,7 @@ const StepPersonal = () => {
             helperText={formik.touched.description && formik.errors.description}
             label='profile.modal.userInfo.personal.about_me'
             name='description'
+            rows={4}
             type='text'
             value={formik.values.description}
           />

@@ -29,7 +29,7 @@ export default [
   },
   {
     name: 'profile.userMenu.interviews',
-    path: links.interviews,
+    path: links.scheduledInterviews,
     icon: VideoCameraFrontIcon,
     target: '_self',
   },

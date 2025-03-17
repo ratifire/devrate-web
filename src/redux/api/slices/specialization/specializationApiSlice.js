@@ -50,7 +50,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           masteryLevel: lvlMastery[mastery.masteryLevel],
         }));
       },
-      providesTags: [TAG_TYPES.HardSkills, TAG_TYPES.Specialization],
+      providesTags: [TAG_TYPES.HardSkills, TAG_TYPES.Specialization, TAG_TYPES.PersonalUser],
     }),
     getMasteriesBySpecializationId: builder.query({
       query: (id) => `/specializations/${id}/masteries`,
@@ -72,7 +72,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
         url: `/specializations/${specId}/set-main-mastery/${masteryId}`,
         method: 'PUT',
       }),
-      invalidatesTags: (result, error, { masteryId }) => [{ type: TAG_TYPES.MainMastery, id: masteryId }],
+      invalidatesTags: [TAG_TYPES.MainMastery, TAG_TYPES.PersonalUser],
     }),
 
     updateSpecializationById: builder.mutation({
@@ -83,7 +83,7 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
           body: { id, name },
         };
       },
-      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPES.Specialization, id: arg.id }],
+      invalidatesTags: [TAG_TYPES.Specialization, TAG_TYPES.PersonalUser],
     }),
 
     getHardSkillsByMasteryId: builder.query({
@@ -111,40 +111,9 @@ export const SpecializationApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: { id, name, main },
       }),
-      invalidatesTags: (result, error, arg) => [
-        { type: TAG_TYPES.Specialization, id: arg.id },
-        { type: TAG_TYPES.PersonalUser, id: arg.userId },
-      ],
+      invalidatesTags: [TAG_TYPES.Specialization, TAG_TYPES.PersonalUser],
     }),
 
-    getInterviewRequest: builder.query({
-      query: ({ userId, role, masteryId }) => ({
-        url: `/users/${userId}/interview-requests`,
-        params: { role, masteryId },
-      }),
-      providesTags: [TAG_TYPES.Specialization],
-    }),
-
-    createInterviewRequest: builder.mutation({
-      query({ userId, masteryId, role, availableDates }) {
-        return {
-          url: `/users/${userId}/interview-requests`,
-          method: 'POST',
-          body: { role, masteryId, availableDates },
-        };
-      },
-      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPES.Specialization, id: arg.id }],
-    }),
-    updateInterviewRequest: builder.mutation({
-      query({ userId, masteryId, role, availableDates }) {
-        return {
-          url: `/users/${userId}/interview-requests`,
-          method: 'PUT',
-          body: { role, masteryId, availableDates },
-        };
-      },
-      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPES.Specialization, id: arg.id }],
-    }),
     addSkillToMastery: builder.mutation({
       query: ({ masteryId, skill }) => ({
         url: `/masteries/${masteryId}/skills`,
@@ -186,9 +155,6 @@ export const {
   useGetAvailableSoftSkillsQuery,
   useCreateNewSpecializationMutation,
   useUpdateSpecializationByIdMutation,
-  useGetInterviewRequestQuery,
-  useCreateInterviewRequestMutation,
-  useUpdateInterviewRequestMutation,
   useDeleteSpecializationByIdMutation,
   useGetMasteriesBySpecializationIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,

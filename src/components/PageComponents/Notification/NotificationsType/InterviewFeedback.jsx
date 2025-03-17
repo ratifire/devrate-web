@@ -2,20 +2,12 @@ import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import InfoIcon from '@mui/icons-material/Info';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { openModal } from '@redux/slices/modal/modalSlice.js';
-import { modalNames } from '@utils/constants/modalNames.js';
-import TimeAgo from '@components/UI/TimeAgo';
+import TimeAgo from '../../../UI/TimeAgo';
 import styles from '../NotificationItem/NotificationItem.styles';
 
-const InterviewFeedback = ({ createAt, payload }) => {
+const InterviewFeedback = ({ createAt }) => {
   const { t } = useTranslation();
-  const { feedbackId } = JSON.parse(payload);
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    dispatch(openModal({ modalType: modalNames.feedbackInterviewModal, data: { feedbackId } }));
-  };
+  // const { interviewId } = JSON.parse(payload);
 
   return (
     <>
@@ -24,8 +16,8 @@ const InterviewFeedback = ({ createAt, payload }) => {
       </Box>
       <Box sx={styles.textWrapper}>
         <Typography variant='body'>
-          {t('notifications.interviewFeedback')} {feedbackId}
-          <Typography sx={styles.btn} variant='body' onClick={handleClick}>
+          {t('notifications.interviewFeedback')}
+          <Typography sx={[styles.btn, { opacity: 0.3, color: '#828283' }]} variant='body'>
             {t('notifications.feedbackBtn')}
           </Typography>
         </Typography>
@@ -39,6 +31,6 @@ const InterviewFeedback = ({ createAt, payload }) => {
 
 InterviewFeedback.propTypes = {
   createAt: PropTypes.string.isRequired,
-  payload: PropTypes.string.isRequired,
+  payload: PropTypes.string,
 };
 export default InterviewFeedback;

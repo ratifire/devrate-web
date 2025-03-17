@@ -18,6 +18,7 @@ const FormSelect = ({
   countries,
   disabled,
   isTranslated,
+  onOpen,
 }) => {
   const id = uuid();
   const { t } = useTranslation();
@@ -44,10 +45,10 @@ const FormSelect = ({
         value={value}
         onBlur={handleBlur}
         onChange={handleChange}
+        onOpen={onOpen}
       >
-        {countries.map((country, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <MenuItem key={index} sx={styles.menuItem} value={country}>
+        {countries.map((country) => (
+          <MenuItem key={country} sx={styles.menuItem} value={country}>
             {isTranslated ? t(`modal.feedbackProjectModal.type_of_feedback.${country}`) : country}
           </MenuItem>
         ))}
@@ -74,6 +75,7 @@ FormSelect.propTypes = {
   countries: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
   isTranslated: PropTypes.bool,
+  onOpen: PropTypes.func,
 };
 FormSelect.defaultProps = {
   variant: 'outlined',
@@ -87,5 +89,6 @@ FormSelect.defaultProps = {
   error: false,
   countries: [],
   isTranslated: false,
+  onOpen: () => {},
 };
 export default FormSelect;

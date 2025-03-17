@@ -47,6 +47,15 @@ export const interviewRequestApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: [TAG_TYPES.InterviewRequest],
     }),
 
+    deleteTimeSlots: builder.mutation({
+      query: ({ id, timeSlots }) => ({
+        url: `/interview-requests/${id}/delete-timeslots`,
+        method: 'DELETE',
+        body: timeSlots,
+      }),
+      invalidatesTags: [TAG_TYPES.InterviewRequest],
+    }),
+
     deleteInterviewRequest: builder.mutation({
       query: (id) => ({
         url: `/interview-requests/${id}`,
@@ -61,5 +70,6 @@ export const {
   useGetInterviewRequestByMasteryIdQuery,
   useCreateInterviewRequestMutation,
   useUpdateTimeSlotsMutation,
+  useDeleteTimeSlotsMutation,
   useDeleteInterviewRequestMutation,
 } = interviewRequestApiSlice;

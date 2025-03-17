@@ -49,6 +49,7 @@ const StepContacts = () => {
           { type: SOCIAL_TYPES.PHONE_NUMBER, value: addPhone(phone) },
         ],
       }).unwrap();
+
       enqueueSnackbar(t('modalNotifyText.contacts.create.success'), { variant: 'success' });
       formik.resetForm();
       // eslint-disable-next-line no-unused-vars
@@ -70,7 +71,6 @@ const StepContacts = () => {
   if (isFetching || isLoading) {
     return <StepContactsSkeleton />;
   }
-
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.wrapper}>
@@ -149,7 +149,7 @@ const StepContacts = () => {
         </Box>
       </Box>
       <ButtonDef
-        disabled={!formik.dirty || formik.isSubmitting || !formik.isValid}
+        disabled={!formik.isValid || formik.isSubmitting || !formik.dirty}
         label={t('profile.modal.btn')}
         loading={isLoading}
         sx={styles.btn}

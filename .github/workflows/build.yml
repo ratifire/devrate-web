@@ -1,19 +1,18 @@
 name: Build
 
 env:
-  ECR_REPOSITORY: frontend-service
+  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
   IMAGE_TAG: ${{ github.sha }}
 
 on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to deploy (prod, dev_old, dev)'
+        description: 'Select environment to deploy (prod, dev)'
         required: true
         default: 'dev'
         type: choice
         options:
-          - dev_old
           - prod
           - dev
 

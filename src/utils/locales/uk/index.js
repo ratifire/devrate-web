@@ -39,10 +39,15 @@ export const uk = {
         btnSend: 'Надіслати',
         btnNext: 'Далі',
         btnBack: 'Назад',
-        interviewer: 'Кандидат',
+        INTERVIEWER: 'Інтерв’юер',
+        CANDIDATE: 'Кандидат',
         required: "Це поле обов'язкове до заповнення",
         long: 'Це поле занадто довге',
         short: 'Це поле занадто коротке',
+        submit: {
+          success: 'Ваш відгук успішно надіслано',
+          error: 'Помилка відправки відгуку',
+        },
       },
       achievement: {
         title: 'Досягнення',
@@ -348,7 +353,8 @@ export const uk = {
             },
             incorrectAvatar: 'Некоректний формат фото',
             failedLoad: 'Не вдалося завантажити фото',
-            imageSize: 'Розміри зображення повинні бути не менше 98x98 пікселів',
+            imageFileSize: 'Ваше зображення має розмір {{size}}МБ і не повинно перевищувати 5 МБ.',
+            imageSize: 'Розмір зображення {{width}}x{{height}} пікселів має бути не менше 98x98 пікселів',
           },
           languages: {
             title: 'Мови',
@@ -398,10 +404,10 @@ export const uk = {
           speciality_long: 'Спеціальність занадто довга',
           speciality_short: 'Спеціальність занадто коротка',
           speciality_placeholder: 'Облік та аудит',
-          edIstitution: 'Навчальний заклад',
-          edIstitution_long: 'Назва навчального закладу занадто довга',
-          edIstitution_short: 'Назва инавчального закладу занадто коротка',
-          edIstitution_placeholder: 'Окфорд',
+          edInstitution: 'Навчальний заклад',
+          edInstitution_long: 'Назва навчального закладу занадто довга',
+          edInstitution_short: 'Назва инавчального закладу занадто коротка',
+          edInstitution_placeholder: 'Окфорд',
           description: 'Опис',
           description_long: 'Опис занадто довгий',
           description_short: 'Опис занадто короткий',
@@ -421,6 +427,8 @@ export const uk = {
       specialization_softSkills: 'SoftSkills',
       error: 'Щось пішло не так...',
       errorDeleteSpec: 'Ви не можете видалити спеціалізацію',
+      conflictDeleteSpec:
+        'Ви не можете видалити спеціалізацію через наявну співбесіду або запити на співбесіду по цій спеціалізації.',
       level: {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
@@ -506,7 +514,6 @@ export const uk = {
         endTime: 'Час закінчення',
         socialLinks: 'Додати посилання на соцмережі',
         schedule: 'Запланувати',
-        scheduleInterview: "Запланувати інтерв'ю",
       },
     },
     language: {
@@ -543,6 +550,9 @@ export const uk = {
       popupUserInfo: 'Інформація про вас',
       popupInterviewerInfo: 'Інформація про співбесідника',
       popupRole: 'Роль:',
+      CANDIDATE: 'Кандидат',
+      INTERVIEWER: 'Інтерв’юер',
+      link: "Доєднатись до інтерв'ю",
     },
     notifications: {
       empty: 'На даний момент у вас ще немає нових сповіщень',
@@ -550,13 +560,13 @@ export const uk = {
       hourAgo: 'годин тому',
       lessThanHourAgo: 'Менше години тому',
       interviewScheduled:
-        'Вашу співбесіду на роль {{roleLower}} заплановано на {{date}} (UTC). Будьте готові та доступні в зазначений час.',
+        'Вашу співбесіду на роль {{roleLower}} заплановано на {{date}}. Будьте готові та доступні в зазначений час.',
       greeting:
-        'Ласкаво просимо! Ми раді вітати вас у DevRate — спільноті, де розробники діляться досвідом, навчаються та знаходять нові можливості',
+        'Ласкаво просимо! Ми раді вітати вас у Skillzzy — спільноті, де розробники діляться досвідом, навчаються та знаходять нові можливості',
       interviewFeedback:
         'Вітаємо із завершенням співбесіди! Будь ласка, заповніть коротку форму та оцініть навички співрозмовника. Залишити вiдгук',
       interviewRejected:
-        'Співбесіду з {{rejectionUserFirstName}}, заплановану на {{scheduleTime}}, скасовано. Ми вже працюємо над пошуком нового співрозмовника та скоро повідомимо Вас',
+        'Співбесіду з {{rejectionName}}, заплановану на {{date}}, скасовано. Ми вже працюємо над пошуком нового співрозмовника та скоро повідомимо Вас',
       interviewRequestExpired:
         'Шановний(а) {{userFirstName}}, Ваш запит на співбесіду сплив. Будь ласка, створіть новий, якщо бажаєте продовжити.',
       feedbackBtn: 'Залишити відгук',
@@ -705,6 +715,7 @@ export const uk = {
         interviewInfoMonthAgo: 'місяць(місяців) тому назад',
         interviewInfoWeekAgo: 'тиждень(ів) тому назад',
         interviewInfoDayAgo: 'день(днів) тому назад',
+        interviewInfoHourAgo: 'година(годин) тому назад',
         interviewInfoToday: 'Пройдено сьогодні',
         interviewInfoRole: 'Ваша роль',
         interviewInfoHost: 'Хост',
@@ -714,6 +725,29 @@ export const uk = {
         interviewStatisticsHardSkills: 'Hard Skills',
         interviewStatisticsSoftSkills: 'Soft Skills',
         interviewStatisticsOverall: 'Over All',
+      },
+      scheduleInterviewModal: {
+        title: 'Запланувати співбесіду',
+        scheduleBtn: 'Запланувати',
+        specializationInputTitle: 'Спеціалізація',
+        languageInputTitle: 'Мова',
+        interviewCountTooltip:
+          'Виберіть максимальну кількість інтерв’ю, які можна призначити для обраних таймслотів. Цей параметр дозволяє обмежити кількість інтерв’ю в межах ваших часових можливостей',
+        interviewCountTitle: "Кількість інтерв'ю для обраних таймслотів",
+        commentTitle: 'Коментар',
+        commentPlaceholder: 'Опишіть, що ви очікуєте від інтерв’ю',
+        required: "Це обов'язкове поле",
+        comment_min: 'Коментар має бути більше 5 символів',
+        comment_max: 'Коментар має бути менше 100 символів',
+        interviewCount_min: 'Вибери хоча б 1 таймслот',
+        interviewCount_max: 'Перестарався. Забагато вибрано',
+        timeslotDescription1: 'Обрана кількість інтерв’ю — ',
+        timeslotDescription2: 'Таймслотів має бути обрано не менше ',
+        timeslotDescriptionError: 'Ви обрали недостатню кількість таймслотів. Додайте щонайменше ',
+        warning: 'Для обраної спеціалізації вже є запит в ролі',
+        thisWeek: 'Цей тиждень',
+        save: 'Зберегти',
+        interviewCount_exceeds_pendingSlots: 'Кількість співбесід не може перевищувати доступні слоти.',
       },
     },
     singleScheduledInterview: {
@@ -732,6 +766,10 @@ export const uk = {
           notHappenedMeeting: 'Співбесіда не відбулася',
           leaveFeedbackMeeting: 'Залишити відгук',
           durationType: 'хв.',
+          canceled: {
+            success: 'Meeting canceled successfully',
+            error: 'Something went wrong',
+          },
         },
         interviewSkills: {
           skills: 'Навички',

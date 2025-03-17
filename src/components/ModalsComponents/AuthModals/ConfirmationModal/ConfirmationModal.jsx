@@ -77,6 +77,7 @@ const ConfirmationModal = () => {
 
       <ConfirmationForm
         buttonLabel={t('modal.confirmation.btn_confirm')}
+        email={email}
         formik={formik}
         handleCodeChange={handleCodeChange}
         handleSubmit={formik.handleSubmit}

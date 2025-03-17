@@ -4,17 +4,18 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { selectModalData } from '@redux/slices/modal/modalSlice';
-import { useCreateEducationMutation, useUpdateEducationMutation } from '@redux/api/slices/educationApiSlice.js';
 import { EducationModalSchema } from '@utils/validationSchemas/index';
-import FormInput from '@components/FormsComponents/Inputs/FormInput';
-import TextAreaInput from '@components/FormsComponents/Inputs/TextAreaInput';
-import { ButtonDef } from '@components/FormsComponents/Buttons';
-import { FormSelect } from '@components/FormsComponents/Inputs';
-import FormCheckbox from '@components/FormsComponents/Inputs/FormCheckbox';
+import { useCreateEducationMutation, useUpdateEducationMutation } from '@redux/api/slices/educationApiSlice';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import { fillEndYear } from '@utils/helpers/index.js';
+import FormInput from '../../../FormsComponents/Inputs/FormInput';
+import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
+import { ButtonDef } from '../../../FormsComponents/Buttons';
+import { FormSelect } from '../../../FormsComponents/Inputs';
+import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { styles } from './EducationModal.styles';
 
 const EducationModal = () => {
@@ -32,7 +33,7 @@ const EducationModal = () => {
   useEffect(() => {
     const currentYear = new Date().getFullYear();
     const startYearsOpts = [];
-    for (let i = 1950; i <= currentYear; i++) {
+    for (let i = currentYear; i >= 1950; i--) {
       startYearsOpts.push(`${i}`);
     }
     setStartYears(startYearsOpts);
@@ -144,13 +145,14 @@ const EducationModal = () => {
             <Box sx={styles.input50}>
               <FormInput
                 required
+                autoComplete='off'
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
                 helperText={formik.touched.name && formik.errors.name}
                 label='profile.modal.education.name'
                 name='name'
-                placeholder='profile.modal.education.edIstitution_placeholder'
+                placeholder='profile.modal.education.edInstitution_placeholder'
                 value={formik.values.name}
               />
             </Box>
@@ -182,6 +184,7 @@ const EducationModal = () => {
                 value={formik.values.isCurrentDate ? '' : formik.values.endYear}
                 variant='outlined'
                 onChange={(value) => formik.setFieldValue('endYear', value)}
+                onOpen={() => fillEndYear(formik, endYears)}
               />
               <Box sx={styles.checkBoxContainer}>
                 <FormCheckbox
