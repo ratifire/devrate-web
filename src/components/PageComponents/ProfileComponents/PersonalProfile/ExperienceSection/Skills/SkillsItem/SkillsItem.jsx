@@ -26,7 +26,7 @@ const SkillsItem = ({ data, flex }) => {
     dispatch(refetchSkills());
   };
 
-  const iconEye = hiddenSkill ? (
+  const iconEye = !hiddenSkill ? (
     <VisibilityOutlinedIcon sx={styles.eye} />
   ) : (
     <VisibilityOffOutlinedIcon sx={styles.eyeHidden} />
