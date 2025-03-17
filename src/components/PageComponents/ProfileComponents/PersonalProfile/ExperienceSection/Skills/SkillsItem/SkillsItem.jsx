@@ -22,7 +22,7 @@ const SkillsItem = ({ data, flex }) => {
 
   const handlerClick = async () => {
     setHiddenSkill(!hiddenSkill);
-    await updateSkills({ id, hide: !hidden }).unwrap();
+    await updateSkills({ id, hide: !hiddenSkill }).unwrap();
     dispatch(refetchSkills());
   };
 
