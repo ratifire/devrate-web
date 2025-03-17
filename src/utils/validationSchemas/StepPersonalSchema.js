@@ -17,6 +17,6 @@ export const StepPersonalSchema = Yup.object().shape({
     .max(25, 'profile.modal.userInfo.personal.city_long')
     .required('profile.modal.userInfo.personal.required'),
   country: Yup.string().required('profile.modal.userInfo.personal.required'),
-  status: Yup.string().max(50, 'profile.modal.userInfo.personal.status_too_long'),
-  description: Yup.string().max(480, 'profile.modal.userInfo.personal.about_me_too_long'),
+  status: Yup.string().nullable().max(50, 'profile.modal.userInfo.personal.status_too_long'),
+  description: Yup.string().nullable().max(480, 'profile.modal.userInfo.personal.about_me_too_long'),
 });
