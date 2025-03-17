@@ -94,6 +94,7 @@ const styles = {
     },
   }),
   confirmationLink: (theme) => ({
+    cursor: 'pointer',
     display: 'inline',
     textDecoration: 'underline',
     color: theme.palette.action.active,
