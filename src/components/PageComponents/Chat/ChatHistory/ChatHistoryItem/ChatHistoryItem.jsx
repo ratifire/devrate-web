@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import UserAvatar from '../../../../UI/UserAvatar';
-import { closeList, openChat } from '../../../../../redux/chat/chatSlice.js';
-import { getLocaleFormattedDate } from '../../../../../utils/helpers/dateHandlers.js';
+import UserAvatar from '@components/UI/UserAvatar';
+import { closeList, openChat } from '@redux/slices/chat/chatSlice.js';
+import { getLocaleFormattedDate } from '@utils/helpers/dateHandlers.js';
 import { styles } from './ChatHistoryItem.styles.js';
 
 const ChatHistoryItem = ({ data }) => {

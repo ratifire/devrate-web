@@ -4,7 +4,7 @@ import { Box, IconButton, Step, StepConnector, StepLabel, Stepper, Typography } 
 import { useTranslation } from 'react-i18next';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import { styles } from './ModalUserInfo.styles';
 import StepPersonal from './StepPersonal';
 import StepContacts from './StepContacts';

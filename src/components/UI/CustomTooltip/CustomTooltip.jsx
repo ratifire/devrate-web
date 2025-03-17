@@ -1,7 +1,7 @@
 import { tooltipClasses, Tooltip, styled, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import useOverflowCheck from '../../../utils/hooks/useOverflowCheck.js';
+import useOverflowCheck from '@utils/hooks/useOverflowCheck.js';
 
 const CustomTooltip = styled(({ translate, className, children, title, customStyles, variant, ...props }) => {
   const { t } = useTranslation();

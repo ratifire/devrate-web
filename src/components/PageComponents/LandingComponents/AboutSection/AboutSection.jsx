@@ -1,7 +1,7 @@
 import { Box, Card, Container, Grid, List, ListItem, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import YoutubeEmbed from '../../../UI/YoutubeEmbed/YoutubeEmbed';
-import ConfirmationModal from '../../../ModalsComponents/AuthModals/ConfirmationModal';
+import YoutubeEmbed from '@components/UI/YoutubeEmbed/YoutubeEmbed';
+import ConfirmationModal from '@components/ModalsComponents/AuthModals/ConfirmationModal';
 import { styles } from './AboutSection.styles';
 
 const AboutSection = () => {

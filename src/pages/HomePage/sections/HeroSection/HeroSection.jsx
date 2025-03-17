@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Link as RouterLink } from 'react-router';
-import { openModal } from '../../../../redux/modal/modalSlice';
-import navigationsLinks from '../../../../router/links';
+import { openModal } from '@redux/slices/modal/modalSlice';
+import { modalNames } from '@utils/constants/modalNames.js';
+import navigationsLinks from '@router/links';
 import Arrow from '../../assets/iconArrow.svg?react';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
 import styles from './HeroSection.module.scss';
 
 const HeroSection = () => {
@@ -46,13 +46,8 @@ const HeroSection = () => {
               </div>
 
               <div className={styles.h1Phone}>
-                Prepare for <br />
-                <span className={styles.emphasis}>Experts and Peers!</span> <br />
-                <span className={styles.highlight}>
-                  Technical
-                  <br /> Interviews <br />
-                </span>
-                with support from
+                Unfortunately, we don&#39;t have a mobile version yet ;(
+                <span className={styles.emphasis}>But that&#39;s just for now!</span>
               </div>
             </h1>
           </div>
@@ -65,15 +60,7 @@ const HeroSection = () => {
                   feedback, objective evaluations, and in-depth insights to confidently prepare for success in any
                   interview!
                 </p>
-                <p className={styles.heroTextTablet}>
-                  Master your interview skills with real-world practice alongside experts and peers. Get personalized
-                  feedback, objective evaluations, and in-depth insights to confidently prepare for success in any
-                  interview!
-                </p>
-                <p className={styles.heroTextMobile}>
-                  Master your interview skills, get personalized feedback, objective evaluations to confidently prepare
-                  for success in any interview!
-                </p>
+                <p className={styles.heroTextMobile}>To register, open the website via a computer</p>
               </div>
 
               <div className={styles.btnContainer}>
@@ -82,7 +69,6 @@ const HeroSection = () => {
                   <Arrow />
                 </button>
                 {myProfile()}
-                <button className={`btn btn-primary btn-xl ${styles.join}`}>Join Us</button>
               </div>
             </div>
           </div>

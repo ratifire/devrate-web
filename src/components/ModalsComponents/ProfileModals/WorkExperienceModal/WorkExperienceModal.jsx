@@ -5,19 +5,19 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
-import { WorkExperienceModalSchema } from '../../../../utils/validationSchemas';
+import { WorkExperienceModalSchema } from '@utils/validationSchemas';
+import { generateYearsArray } from '@utils/helpers/dateHandlers.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { addUniqueItem } from '@utils/helpers/ProfileWorkExperience/addUniqueItem.js';
+import fillEndYear from '@utils/helpers/fillEndYear.js';
+import { useCreateNewWorkExperienceMutation } from '@redux/api/slices/workExperienceApiSlice.js';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import Responsibility from '../../../UI/Responsibility';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useCreateNewWorkExperienceMutation } from '../../../../redux/services/workExperienceApiSlice.js';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
 import { FormSelect } from '../../../FormsComponents/Inputs';
-import { generateYearsArray } from '../../../../utils/helpers/dateHandlers.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { addUniqueItem } from '../../../../utils/helpers/ProfileWorkExperience/addUniqueItem.js';
-import fillEndYear from '../../../../utils/helpers/fillEndYear.js';
 import { styles } from './WorkExperienceModal.styles';
 
 const WorkExperienceModal = () => {

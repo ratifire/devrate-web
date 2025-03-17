@@ -2,14 +2,14 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useGetInterviewsByMasteryIdQuery } from '@redux/api/slices/interviews/interviewRequestsApiSlice';
+import InterviewModalRole from '@utils/constants/InterviewModalRole';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { InterviewStepper } from '../../FeedbackModal/FeedbackInterviewModal/components/InterviewStepper';
 import SliderComponent from '../components/SliderComponent';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { FIRST_STEP, LAST_STEP } from '../../FeedbackModal/FeedbackInterviewModal/constants';
 import useScheduleInterviewForm from '../hooks';
-import { useGetInterviewsByMasteryIdQuery } from '../../../../redux/interviews/interviewRequestsApiSlice';
-import InterviewModalRole from '../../../../utils/constants/InterviewModalRole';
 import ScheduleInterviewModalSkeleton from '../../../UI/Skeleton/Modal/ScheduleInterviewModalSkeleton';
 import { styles } from './ScheduleInterviewModal.styles';
 

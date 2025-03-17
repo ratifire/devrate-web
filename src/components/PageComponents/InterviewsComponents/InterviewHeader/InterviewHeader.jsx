@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { useSelector } from 'react-redux';
-import { modalNames } from '../../../../utils/constants/modalNames';
-import { feedbackInterviewRole } from '../../../../utils/constants/feedbackInterviewRole';
-import links from '../../../../router/links.js';
-import CircleIcon from '../../../../assets/icons/InterviewPageIcons/green-ellipse.svg';
-import { useModalController } from '../../../../utils/hooks/useModalController';
-import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice.js';
+import { modalNames } from '@utils/constants/modalNames';
+import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
+import links from '@router/links.js';
+import CircleIcon from '@assets/icons/InterviewPageIcons/green-ellipse.svg';
+import { useModalController } from '@utils/hooks/useModalController';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
 import styles from './InterviewHeader.styles';
 
 const InterviewHeader = () => {

@@ -1,14 +1,14 @@
 import { Box, Typography } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ButtonDef } from '../../../../../FormsComponents/Buttons';
-import { ErrorComponent } from '../../../../../UI/Exceptions';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { lvlMastery } from '@utils/constants/masteryLvl';
 import { FIRST_STEP, LAST_STEP } from '../../constants';
 import { formatDateTime } from '../../helpers';
 import useFeedbackForm from '../../hooks';
 import { InterviewerInfo, SliderComponent } from '../index';
 import { InterviewStepper } from '../InterviewStepper';
-import { lvlMastery } from '../../../../../../utils/constants/masteryLvl';
 import { styles } from './CandidateFeedback.styles';
 
 const CandidateFeedback = () => {

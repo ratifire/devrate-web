@@ -3,14 +3,14 @@ import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAx
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
-import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
-import useTooltipColorChart from '../../../../utils/hooks/useTooltipColorChart';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { useGetMasteriesQuery } from '../../../../redux/interviews/singleScheduledInterviewApiSlice.js';
-import { ParticipantEvaluationsSkeleton } from '../../../UI/Skeleton';
-import { ErrorComponent } from '../../../UI/Exceptions';
+import InfoIcon from '@assets/icons/InterviewPageIcons/info.svg?react';
+import useTooltipColorChart from '@utils/hooks/useTooltipColorChart';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
+import { useGetMasteriesQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
+import { ParticipantEvaluationsSkeleton } from '@components/UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { lvlMastery } from '@utils/constants/masteryLvl';
 import { prepareSkillsDataParticipantEvaluations } from '../helpers';
-import { lvlMastery } from '../../../../utils/constants/masteryLvl';
 import { styles } from './ParticipantEvaluations.styles';
 import { useColorPartEvalChart } from './hooks';
 

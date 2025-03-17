@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router';
-import cancelEventIcon from '../../../../assets/icons/cancel-event.svg';
+import cancelEventIcon from '@assets/icons/cancel-event.svg';
+import links from '@router/links';
+import { useDeleteEvent } from '@utils/hooks/useDeleteEvent';
+import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
+import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
+import { lvlMastery } from '@utils/constants/masteryLvl';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import links from '../../../../router/links';
-import { useDeleteEvent } from '../../../../utils/hooks/useDeleteEvent';
-import useCheckTimeDifference from '../../../../utils/hooks/schedule/useCheckTimeDifference';
-import { useGetEventByIdQuery } from '../../../../redux/schedule/scheduleApiSlice';
-import { lvlMastery } from '../../../../utils/constants/masteryLvl';
 import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpdated }) => {
@@ -24,6 +24,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
 
   const handleCancelInterview = async () => {
     await deleteEvent({
+      // userId,
       eventId: event?.eventTypeId,
       onSuccess: () => {
         handleClosePopup();

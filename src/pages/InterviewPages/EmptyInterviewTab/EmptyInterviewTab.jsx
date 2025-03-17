@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { DARK_THEME } from '../../../utils/constants/Theme/theme.js';
-import { useModalController } from '../../../utils/hooks/useModalController.js';
-import { modalNames } from '../../../utils/constants/modalNames.js';
+import { DARK_THEME } from '@utils/constants/Theme/theme.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { styles } from './EmptyInterviewTab.styles.js';
 
 const EmptyPassedInterviewsPage = ({ tab, svg, isSpecializations }) => {

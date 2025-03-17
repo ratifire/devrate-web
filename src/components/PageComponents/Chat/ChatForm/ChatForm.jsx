@@ -1,21 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import { Box, IconButton, TextField, Typography, Link, Fade } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
+import SockJS from 'sockjs-client';
 import CloseIcon from '@mui/icons-material/Close';
 import { Client } from '@stomp/stompjs';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Link as RouterLink } from 'react-router';
-import { DateTime } from 'luxon';
-import SockJS from 'sockjs-client';
+import UserAvatar from '@components/UI/UserAvatar';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
+import Send from '@assets/icons/send.svg?react';
+import { closeChat, openBadge } from '@redux/slices/chat/chatSlice';
 import { useTranslation } from 'react-i18next';
-import UserAvatar from '../../../UI/UserAvatar';
-import Send from '../../../../assets/icons/send.svg?react';
-import { closeChat, openBadge } from '../../../../redux/chat/chatSlice';
-import { chatApiSlice, useGetChatHistoryQuery } from '../../../../redux/services/chatApiSlice.js';
-import { useMoveChat, useResizeChat, useResizeTextarea, useScrollChat } from '../hooks';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
-import { TAG_TYPES } from '../../../../utils/constants/tagTypes.js';
-import { styles } from './ChatForm.styles.js';
+import {
+  useResizeTextarea,
+  useScrollChat,
+  useMoveChat,
+  useResizeChat,
+} from '@components/PageComponents/Chat/hooks/index.js';
+import { chatApiSlice, useGetChatHistoryQuery } from '@redux/api/slices/chatApiSlice.js';
+import { TAG_TYPES } from '@utils/constants/tagTypes.js';
+import { DateTime } from 'luxon';
+import { styles } from './ChatForm.styles';
 import ChatMessage from './ChatMessage';
 
 const chatAppearDelay = 100;

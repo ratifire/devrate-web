@@ -4,18 +4,18 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { selectModalData } from '../../../../redux/modal/modalSlice';
-import { EducationModalSchema } from '../../../../utils/validationSchemas/index';
+import { selectModalData } from '@redux/slices/modal/modalSlice';
+import { EducationModalSchema } from '@utils/validationSchemas/index';
+import { useCreateEducationMutation, useUpdateEducationMutation } from '@redux/api/slices/educationApiSlice';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { fillEndYear } from '@utils/helpers/index.js';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
 import TextAreaInput from '../../../FormsComponents/Inputs/TextAreaInput';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { useCreateEducationMutation, useUpdateEducationMutation } from '../../../../redux/services/educationApiSlice';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
 import { FormSelect } from '../../../FormsComponents/Inputs';
 import FormCheckbox from '../../../FormsComponents/Inputs/FormCheckbox';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { fillEndYear } from '../../../../utils/helpers/index.js';
 import { styles } from './EducationModal.styles';
 
 const EducationModal = () => {

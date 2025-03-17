@@ -6,13 +6,13 @@ import { enqueueSnackbar } from 'notistack';
 import { DateTime } from 'luxon';
 import CloseIcon from '@mui/icons-material/Close';
 import { isEmpty } from 'lodash';
-import TimeSlotsGroup from '../TimeSlotsGroup';
-import RequestHeader from '../RequsestHeader';
-import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
 import {
   useDeleteInterviewRequestMutation,
   useDeleteTimeSlotsMutation,
-} from '../../../../redux/services/interviewRequestApiSlice.js';
+} from '@redux/api/slices/interviewRequestApiSlice.js';
+import TimeSlotsGroup from '../TimeSlotsGroup';
+import RequestHeader from '../RequsestHeader';
+import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import { styles } from './Participant.styles.js';
 

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Badge, IconButton, Popover } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useGetNotificationsQuery } from '../../../redux/services/notificationsApiSlice';
-import BellNotification from '../../../assets/icons/bell.svg?react';
-import { selectCurrentUser } from '../../../redux/auth/authSlice';
-import emptyNotificationLight from '../../../utils/constants/notification/whiteThemeIcons';
-import emptyNotificationDark from '../../../utils/constants/notification/darkThemeIcons';
-import { DARK_THEME } from '../../../utils/constants/Theme/theme';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { useGetNotificationsQuery } from '@redux/api/slices/notificationsApiSlice.js';
+import emptyNotificationLight from '@utils/constants/notification/whiteThemeIcons';
+import emptyNotificationDark from '@utils/constants/notification/darkThemeIcons';
+import { DARK_THEME } from '@utils/constants/Theme/theme';
+import BellNotification from '@assets/icons/bell.svg?react';
 import styles from './Notification.styles';
 import NotificationEmpty from './NotificationEmpty';
 import NotificationList from './NotificationList';
