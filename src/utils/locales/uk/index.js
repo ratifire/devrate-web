@@ -150,8 +150,20 @@ export const uk = {
         repeat_request_text1: 'запит',
         repeat_request_text2: 'або',
         change_email_link: 'змініть електронну адресу',
-        // return_on: 'Повернутися на ',
-        // home_page: 'Головну сторінку',
+        text1: 'Текст 1 має містити рівно один символ',
+        required_text1: "Текст 1 обов'язковий",
+        text2: 'Текст 2 має містити рівно один символ',
+        required_text2: "Текст 2 обов'язковий",
+        text3: 'Текст 3 має містити рівно один символ',
+        required_text3: 'Текст 3 має містити рівно один символ',
+        text4: 'Текст 4 має містити рівно один символ',
+        required_text4: "Текст 4 обов'язковий",
+        text5: 'Tекст 5 має містити рівно один символ',
+        required_text5: "Текст 5 обов'язковий",
+        text6: 'Текст 6 має містити рівно один символ',
+        required_text6: "Текст 6 обов'язковий",
+        // return_on: 'Back to ',
+        // home_page: 'Home',
       },
       notificationModal: {
         title: 'Скинути пароль',
@@ -272,23 +284,21 @@ export const uk = {
               title: 'Користувач ще не додав інформацію про освіту',
             },
           },
-          duties: 'Обовʼязки',
-          endYear: 'Теп. час',
         },
-        right: {
-          empty: {
-            emptyContacts: 'Ви ще не додали жодного контакту',
-            emptyLanguages: 'Ви ще не додали жодної мови.',
-            emptyAboutMe:
-              'Ви ще не додали інформацію про себе.\n' +
-              'Для того, щоб редагувати інформацію про себе, зайдіть в налаштування профілю.',
-          },
+        duties: 'Обовʼязки',
+        endYear: 'Теп. час',
+      },
+      right: {
+        empty: {
+          emptyContacts: 'Ви ще не додали жодного контакту',
+          emptyLanguages: 'Ви ще не додали жодної мови.',
+          emptyAboutMe:
+            'Ви ще не додали інформацію про себе.\n' +
+            'Для того, щоб редагувати інформацію про себе, зайдіть в налаштування профілю.',
         },
         contact: 'Контактна інформація',
         languages: 'Мови',
         aboutMe: 'Про мене',
-        duties: "Обов'язки",
-        endYear: 'Поточний',
       },
       userMenu: {
         profile: 'Профіль',
@@ -343,6 +353,10 @@ export const uk = {
             behance: 'Behance',
             mail: 'Електронна пошта',
             phone: 'Мобільний телефон',
+            validation: {
+              url: 'Введіть коректний URL',
+              phone: 'Введіть коректний телефонний номер',
+            },
           },
           photo: {
             title: 'Фотографія',
@@ -433,10 +447,6 @@ export const uk = {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
       },
-      interviewsChart: {
-        conducted: 'Проведено',
-        passed: 'Пройдено',
-      },
       interviewChartMonths: {
         '01': 'Січ',
         '02': 'Лют',
@@ -460,16 +470,26 @@ export const uk = {
         interview_chart_days: '10 днів',
         interview_chart_months: 'Місяці',
         skills_assessment_chart_title: 'Середня оцінка навичок',
+        levelUp: 'За результатами рекомендуємо переходити на наступний рівень!',
+      },
+      interviewsChart: {
+        conducted: 'Проведено',
+        passed: 'Пройдено',
       },
       hardSkills: {
         title: 'Хард скіли',
         averageMark: 'Середня оцінка:',
+        emptySkills:
+          'Зараз у вашому профілі немає жодних навичок. Додайте їх, щоб покращити себе та відстежувати свій прогрес',
       },
       softSkills: {
-        title: 'Софт скіли',
+        title: 'Soft skills',
+        averageMark: 'Середня оцінка:',
+        emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші Soft Skills',
       },
       modal: {
         specialization: {
+          create: 'Створити спеціалізацію',
           modal_title: 'Спеціалізація',
           name: 'Назва спеціалізації',
           name_placeholder: 'Front-End Розробник',
@@ -490,55 +510,62 @@ export const uk = {
           errorQuantity: 'Ви можете додати до 20 навичок',
           errorNotAvailable: 'Немає доступних навичок',
         },
+        interview: {
+          income: "Пройдено інтерв'ю",
+          outcome: "Проведено інтерв'ю",
+          planInterview: 'Запланувати інтерв’ю',
+          makeIncome: 'Запланувати інтерв’ю',
+          makeOutcome: "Стати інтерв'юером",
+        },
+        scheduleModal: {
+          name: "Ім'я",
+          specialization: 'Спеціалізація',
+          level: 'Рівень',
+          role: 'Роль',
+          date: 'Дата',
+          startTime: 'Час початку',
+          endTime: 'Час закінчення',
+          socialLinks: 'Додати посилання на соцмережі',
+          schedule: 'Запланувати',
+          skill_long: 'Назва задовга',
+          skill_short: 'Назва закоротка',
+        },
+        specializationEdit: {
+          error_message: 'По-перше, пройдіть усі відкриті співбесіди на поточному рівні!',
+        },
         confirmSpecializationDelete: {
           title: 'Видалити спеціалізацію',
-          text1: 'Ви впевнені що хочете видалити спеціалізацію',
-          text2: 'Всі дані по цій спеціалізації та статистика будуть втрачені.',
-          refuseBtnText: 'Скасувати',
+          text1: 'Ви впевнені, що хочете видалити спеціалізацію',
+          text2: 'Усі дані та статистику для цієї спеціалізації буде втрачено.',
+          refuseBtnText: 'Відмінити',
           confirmBtnText: 'Видалити',
         },
       },
-      interview: {
-        income: "Пройдено інтерв'ю",
-        outcome: "Проведено інтерв'ю",
-        makeIncome: 'Запланувати інтерв’ю',
-        makeOutcome: "Стати інтерв'юером",
-      },
-      scheduleModal: {
-        name: "Ім'я",
-        specialization: 'Спеціалізація',
-        level: 'Рівень',
-        role: 'Роль',
-        date: 'Дата',
-        startTime: 'Час початку',
-        endTime: 'Час закінчення',
-        socialLinks: 'Додати посилання на соцмережі',
-        schedule: 'Запланувати',
-      },
-    },
-    language: {
-      level: {
-        a1: 'Початковий рівень: A1',
-        a2: 'Базовий рівень: A2',
-        b1: 'Рубіжний рівень: B1',
-        b2: 'Середній рівень: B2',
-        c1: 'Високий рівень: C1',
-        c2: 'Вільне володіння: C2',
-      },
-      name: {
-        ua: 'Українська',
-        en: 'Англійська',
-        fr: 'Французька',
-        it: 'Італійська',
-        de: 'Німецька',
-        es: 'Іспанська',
-        pl: 'Польська',
-        cs: 'Чеська',
+      language: {
+        level: {
+          a1: 'Початковий рівень: A1',
+          a2: 'Базовий рівень: A2',
+          b1: 'Рубіжний рівень: B1',
+          b2: 'Середній рівень: B2',
+          c1: 'Високий рівень: C1',
+          c2: 'Вільне володіння: C2',
+        },
+        name: {
+          ua: 'Українська',
+          en: 'Англійська',
+          fr: 'Французька',
+          it: 'Італійська',
+          de: 'Німецька',
+          es: 'Іспанська',
+          pl: 'Польська',
+          cs: 'Чеська',
+        },
       },
     },
     dropDownMenu: {
       delete: 'Видалити',
       edit: 'Редагувати',
+      main: 'Зробити головною',
     },
     schedule: {
       deleteEventSuccessMessage: 'Подія видалена',
@@ -693,7 +720,178 @@ export const uk = {
         text: "Оновлений дизайн з покращеною кольоровою гамою, а також додано форму зворотного зв'язку та контактні дані для зручного спілкування з нами. Додали основну інформацію про можливості та переваги платформи, для кращого розуміння її роботи. Створено розділ FAQ із найчастішими запитаннями для вашої зручності. Ми також оновили візуальний вигляд форм реєстрації, входу та підтвердження електронної пошти. Усі ці зміни спрямовані на покращення вашого досвіду та комфорту на нашій платформі",
       },
     },
+    modalNotifyText: {
+      workExperience: {
+        create: {
+          success: 'Успішно додано',
+          error: 'Щось пішло не так',
+          duplicateResponsibility: 'Ця відповідальність вже існує',
+        },
+        edit: {
+          success: 'Успішно відредаговано',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+      education: {
+        create: {
+          success: 'Успішно додано',
+          error: 'Щось пішло не так',
+        },
+        edit: {
+          success: 'Успішно відредаговано',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+      achievement: {
+        create: {
+          success: 'Успішно додано',
+          error: 'Щось пішло не так',
+        },
+        edit: {
+          success: 'Успішно відредаговано',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+      personal: {
+        create: {
+          success: 'Успішно відправлено',
+          error: 'Щось пішло не так',
+        },
+        edit: {
+          success: 'Успішно відредаговано',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+      avatar: {
+        create: {
+          success: 'Успішно додано',
+          error: 'Щось пішло не так',
+        },
+        edit: {
+          success: 'Успішно відредаговано',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+      contacts: {
+        create: {
+          success: 'Успішно відправлено',
+          error: 'Щось пішло не так',
+        },
+        edit: {
+          success: 'Успішно відредаговано',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+      language: {
+        add: {
+          success: 'Успішно додано',
+          error: 'Щось пішло не так',
+        },
+        create: {
+          success: 'Успішно відправлено',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+      hardSkills: {
+        add: {
+          success: 'Успішно додано',
+          error: 'Щось пішло не так',
+        },
+        create: {
+          success: 'Успішно відправлено',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+      softSkills: {
+        add: {
+          success: 'Успішно додано',
+          error: 'Щось пішло не так',
+        },
+        create: {
+          success: 'Успішно відправлено',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+      specialization: {
+        create: {
+          success: 'Спеціалізацію {{values}} успішно додано',
+          error: 'Не вдалося створити спеціалізацію',
+        },
+        edit: {
+          success: 'Успішно відредаговано на {{name}}',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: '{{name}} успішно видалено',
+          error: 'Щось пішло не так',
+        },
+        change: {
+          success: '{{name}} успішно встановлено як основну спеціалізацію',
+          error: 'Не вдалося встановити {{name}} як основну спеціалізацію',
+        },
+      },
+      interview: {
+        create: {
+          success: 'Успішно відправлено',
+          error: 'Щось пішло не так',
+        },
+        edit: {
+          success: 'Успішно відредаговано',
+          error: 'Щось пішло не так',
+        },
+        delete: {
+          success: 'Успішно видалено',
+          error: 'Щось пішло не так',
+        },
+      },
+    },
     interviews: {
+      emptyInterviewTabs: {
+        emptyScheduled:
+          'У вас ще немає запланованих співбесід. Чудова можливість зробити перший крок! Запишіться на зустріч, щоб перевірити свої знання, отримати цінний досвід і впевнено рухатися до своїх цілей.',
+        emptyPassed:
+          'На даний момент у вас немає завершених співбесід. Створіть запит і зробіть перший крок до нових можливостей! Знайдіть інтерв’юера, який допоможе вам оцінити знання та підготуватися до викликів.',
+        emptyRequest:
+          'Тут поки що нічого немає. Створіть запит на співбесіду і зробіть крок до розвитку! Знайдіть інтерв’юера, який допоможе вам перевірити свої знання та підготуватися до майбутніх викликів. Кожна розмова – це новий досвід і можливість стати впевненішим у своїх силах.',
+        emptySpecialization:
+          'У вас ще немає обраної спеціалізації. Визначте сферу своїх інтересів, щоб отримати доступ до співбесід. Оберіть напрямок, який вас цікавить, і відкрийте нові можливості. Це допоможе вам знайти інтерв’юера чи респондента, перевірити свої знання та краще підготуватися до майбутніх викликів.',
+      },
       navigationLinks: {
         scheduled: 'Заплановані',
         passed: 'Пройдені',
@@ -722,6 +920,7 @@ export const uk = {
         interviewFeedbackTitle: 'Відгук співбесідника',
         interviewFeedbackReadLess: 'Читати менше',
         interviewFeedbackReadMore: 'Читати більше',
+        interviewStatisticsTitle: 'Статистика',
         interviewStatisticsHardSkills: 'Hard Skills',
         interviewStatisticsSoftSkills: 'Soft Skills',
         interviewStatisticsOverall: 'Over All',
@@ -751,45 +950,94 @@ export const uk = {
       },
     },
     singleScheduledInterview: {
-      interviewsSummary: {
-        scheduledMeeting: {
-          title: 'Запланована зустріч',
-          participants: 'Учасники',
-          language: 'Мова',
-          duration: 'Тривалість',
-          platform: 'Платформа',
-          link:
-            'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
-            ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
-          canceledMeeting: 'Скасувати зустріч',
-          joinMeeting: 'Доєднатись до інтерв’ю',
-          notHappenedMeeting: 'Співбесіда не відбулася',
-          leaveFeedbackMeeting: 'Залишити відгук',
-          durationType: 'хв.',
-          canceled: {
-            success: 'Meeting canceled successfully',
-            error: 'Something went wrong',
-          },
+      scheduledMeeting: {
+        title: 'Запланована зустріч',
+        participants: 'Учасники',
+        language: 'Мова',
+        duration: 'Тривалість',
+        platform: 'Платформа',
+        link:
+          'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
+          ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
+        canceledMeeting: 'Скасувати зустріч',
+        joinMeeting: 'Доєднатись до інтерв’ю',
+        notHappenedMeeting: 'Співбесіда не відбулася',
+        leaveFeedbackMeeting: 'Залишити відгук',
+        durationType: 'хв.',
+        canceled: {
+          success: 'Зустріч успішно скасована',
+          error: 'Щось пішло не так',
         },
-        interviewSkills: {
-          skills: 'Навички',
-        },
-        userCardScheduledInterview: {
-          btn: 'Написати повідомлення',
-          interviewLvl: 'Рівень співбесіди:',
-        },
-        participantEvaluations: {
-          title: 'Оцінка учасників',
-        },
-        statistic: {
-          title: 'Статистика',
-        },
+      },
+      interviewSkills: {
+        skills: 'Навички',
+      },
+      userCardScheduledInterview: {
+        btn: 'Написати повідомлення',
+        interviewLvl: 'Рівень співбесіди:',
+      },
+      participantEvaluations: {
+        title: 'Оцінка учасників',
+      },
+      statistic: {
+        title: 'Статистика',
       },
     },
     chat: {
-      search: 'Пошук',
-      emptyChatLstUsers: 'Ще немає чатів',
-      enterMessages: 'Напишіть повідомлення',
+      search: 'Search',
+      emptyChatLstUsers: 'No chats yet',
+      enterMessages: 'Enter message',
+    },
+    interviewRequest: {
+      selectSpecializations: 'Specializations',
+      role: {
+        candidate: 'Respondent',
+        interviewer: 'Interviewer',
+      },
+      requestHeader: {
+        foundInterviews: 'Interview found:',
+        totalInterviews: 'Number of interviews:',
+        selectedTimeSlots: 'Selected timeslots:',
+        interviewLanguage: 'Interview language:',
+      },
+      buttons: {
+        addTimeSlot: 'Аdd time slots',
+      },
+      timeSlot: {
+        status: {
+          status: 'Status:',
+          pending: 'Pending',
+          booked: 'Scheduled',
+          expired: 'Expired',
+        },
+        daysOfWeek: {
+          monday: 'Monday',
+          tuesday: 'Tuesday',
+          wednesday: 'Wednesday',
+          thursday: 'Thursday',
+          friday: 'Friday',
+          saturday: 'Saturday',
+          sunday: 'Sunday',
+        },
+      },
+      notifications: {
+        delete: {
+          oneTimeSlot: {
+            success: 'Deleted slot successfully',
+            error: 'Something went wrong',
+          },
+          allTimeSlots: {
+            success: 'Deleted all successfully',
+            error: 'Something went wrong',
+          },
+        },
+      },
+      deleteAllRequests: {
+        title: 'Delete request',
+        cancel: 'Cancel',
+        approve: 'Remove',
+        question: 'Are you sure you want to delete the {{mastery}} interview request as a {{role}}?',
+      },
     },
   },
 };
