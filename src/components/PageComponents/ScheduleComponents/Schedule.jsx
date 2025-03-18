@@ -6,11 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { Box } from '@mui/material';
 import { DateTime } from 'luxon';
 import { useTheme } from '@mui/material/styles';
-import {
-  useGetClosestEventByUserIdQuery,
-  useGetEventByUserIdQuery,
-  useLazyGetEventByUserIdQuery,
-} from '@redux/api/slices/schedule/scheduleApiSlice';
+import { useGetEventByUserIdQuery, useLazyGetEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { ScheduleSkeleton } from '@components/UI/Skeleton';
 import EventPopup from './EventPopup';
 import { styles } from './Schedule.styles';
@@ -19,7 +15,6 @@ import Sidebar from './Sidebar';
 const Schedule = () => {
   const theme = useTheme();
   const calendarRef = useRef(null);
-  const firstRender = useRef(false);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
   const [event, setEvent] = useState([]);
@@ -28,19 +23,11 @@ const Schedule = () => {
   const [eventUpdated, setEventUpdated] = useState(false);
   const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
-  const fromTime = DateTime.utc().toISO();
   const [events, setEvents] = useState([]);
   const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
 
   const { data: eventsForSelectedWeek, isFetching: isFetchingGetEvent } = useGetEventByUserIdQuery({ from, to });
-  const { data: currentClosestEvents } = useGetClosestEventByUserIdQuery({ fromTime }, { skip: firstRender.current });
-
   const [triggerEvents] = useLazyGetEventByUserIdQuery();
-
-  // Fixed multiple requests when re-rendering in useGetClosestEventByUserIdQuery endpoint
-  useEffect(() => {
-    firstRender.current = true;
-  }, []);
 
   useEffect(() => {
     const waitForCalendarRef = () => {
@@ -202,12 +189,7 @@ const Schedule = () => {
 
   return (
     <Box sx={styles.demoApp}>
-      <Sidebar
-        currentEvents={currentClosestEvents}
-        handleDateChange={handleDateChange}
-        selectedDate={selectedDate}
-        setEventUpdated={setEventUpdated}
-      />
+      <Sidebar handleDateChange={handleDateChange} selectedDate={selectedDate} setEventUpdated={setEventUpdated} />
       <Box sx={styles.demoAppMain}>
         {
           <FullCalendar
