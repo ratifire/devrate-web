@@ -603,7 +603,7 @@ export const uk = {
       question1: {
         question: 'Як подати заявку на співбесіду?',
         answer:
-          'To apply for an interview, go to the Interviews page. In the upper right corner of the screen, click the ‘Schedule an interview’ button. Select your role from the drop-down list: ‘Become an interviewer’ if you want to assess candidates, or “Schedule an interview” if you want to be assessed. Next, select your specialisation from the drop-down list, the language you want to conduct the interview in, and the number of interviews for the selected time slots. Next, select the days and times convenient for you in the form and click the ‘Schedule’ button. Your application will be created, and you will receive an email and an interview notification as soon as an interviewee is found',
+          "Щоб подати заявку на співбесіду, перейдіть на сторінку «Співбесіди». У верхньому правому куті екрана натисніть кнопку «Запланувати співбесіду». У випадаючому списку оберіть вашу роль: «Стати інтерв'юером», якщо ви хочете оцінювати кандидатів, або «Запланувати співбесіду», якщо ви хочете пройти оцінювання. Наступним кроком виберіть вашу спеціалізацію з запропонованого списку, мову, якою ви бажаєте провести інтерв'ю, та кількість інтерв'ю для обраних часових слотів. Далі, у формі оберіть зручні для вас дні та час і натисніть кнопку «Запланувати». Ваша заявка буде створена, і ви отримаєте електронний лист та сповіщення про співбесіду, як тільки буде знайдено співрозмовника.",
       },
       question2: {
         question: 'Який вибрати рівень під час створення спеціалізації (Junior, Middle, Senior)?',
