@@ -21,7 +21,7 @@ const Skills = ({ id, tab }) => {
   const updateAllSpecialization = userAllSpecializations ? updateAllSpecializations(userAllSpecializations) : [];
   const selectedSpecialization = updateAllSpecialization?.find((s) => s.specializationName === specCurrent);
   const level = selectedSpecialization?.masteryLevel;
-  const skillVisible = selectedSpecialization?.hardSkills.filter((item) => item.hidden === true);
+  const skillVisible = selectedSpecialization?.hardSkills.filter((item) => item.hidden === false);
   const [filteredSkills, setFilteredSkills] = useState(skillVisible);
   const [open, setOpen] = useState(false);
   const [strSearch, setStrSearch] = useState('');

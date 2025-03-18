@@ -22,11 +22,11 @@ const SkillsItem = ({ data, flex }) => {
 
   const handlerClick = async () => {
     setHiddenSkill(!hiddenSkill);
-    await updateSkills({ id, hide: !hidden }).unwrap();
+    await updateSkills({ id, hide: !hiddenSkill }).unwrap();
     dispatch(refetchSkills());
   };
 
-  const iconEye = hiddenSkill ? (
+  const iconEye = !hiddenSkill ? (
     <VisibilityOutlinedIcon sx={styles.eye} />
   ) : (
     <VisibilityOffOutlinedIcon sx={styles.eyeHidden} />
