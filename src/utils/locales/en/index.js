@@ -510,8 +510,9 @@ export const en = {
         interview: {
           income: 'An interview has been completed ',
           outcome: 'An interview was conducted',
-          makeIncome: 'Schedule an interview',
-          makeOutcome: 'Become an interviewer',
+          planInterview: 'Schedule an interview',
+          makeIncome: 'As Candidate',
+          makeOutcome: 'As Interviewer',
         },
         scheduleModal: {
           name: 'Name',
