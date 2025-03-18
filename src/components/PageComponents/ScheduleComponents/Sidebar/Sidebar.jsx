@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { Settings } from 'luxon';
 import { Box } from '@mui/material';
+import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice.js';
+import { ErrorComponent } from '@components/UI/Exceptions/index.js';
 import SidebarEvent from '../SidebarEvent/SidebarEvent';
 import { styles } from './Sidebar.styles';
 import SmallCalendar from './SmallCalendar';
@@ -11,7 +13,17 @@ Settings.defaultWeekSettings = {
   weekend: [6, 7], // Set weekend days
 };
 
-const Sidebar = ({ currentEvents, selectedDate, handleDateChange }) => {
+const Sidebar = ({ selectedDate, handleDateChange }) => {
+  const { data: closestEvent, isLoading, isError } = useGetClosestEventByUserIdQuery();
+
+  if (isLoading) {
+    return null;
+  }
+
+  if (isError) {
+    return <ErrorComponent />;
+  }
+
   return (
     <Box sx={styles.container}>
       <Box>
@@ -19,7 +31,7 @@ const Sidebar = ({ currentEvents, selectedDate, handleDateChange }) => {
       </Box>
       <Box sx={styles.scrollContainer}>
         <Box sx={styles.sidebarSection}>
-          {currentEvents && currentEvents.map((event) => <SidebarEvent key={event.id} event={event} />)}
+          {closestEvent && closestEvent.map((event) => <SidebarEvent key={event.id} event={event} />)}
         </Box>
       </Box>
     </Box>
@@ -27,7 +39,6 @@ const Sidebar = ({ currentEvents, selectedDate, handleDateChange }) => {
 };
 
 Sidebar.propTypes = {
-  currentEvents: PropTypes.array,
   selectedDate: PropTypes.object,
   handleDateChange: PropTypes.func,
 };
