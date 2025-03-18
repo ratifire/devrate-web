@@ -9,6 +9,7 @@ export const styles = {
   }),
   title: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.titleColor,
+    textTransform: 'lowercase',
     '&::first-letter': {
       textTransform: 'uppercase',
     },
