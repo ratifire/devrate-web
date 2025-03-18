@@ -609,12 +609,12 @@ export const en = {
       question3: {
         question: 'How long does it take to wait for an interview?',
         answer:
-          "From the moment you submit an interview request, we immediately begin searching for a match that meets your criteria (specialization, skills, level, availability, etc.). As soon as a match is found, you'll receive a notification with further steps. If no suitable match is found within 30 days, you will be notified about the next steps.",
+          "From the moment you submit an interview request, we immediately begin searching for a match that meets your criteria (specialization, skills, level, availability, etc.). As soon as a match is found, you'll receive a notification with further steps. If no suitable match is found within 30 days, you will be notified about the recommended steps.",
       },
       question4: {
         question: 'How can I cancel or reschedule an interview?',
         answer:
-          "We apologize, but at this time, rescheduling an interview is unavailable. This feature will be implemented in future versions. For now, you can cancel the interview, which will restart the search process for a new match. To cancel, go to the 'Schedule' page, find the interview, select it, and click 'Cancel Event.'",
+          "At this time, rescheduling an interview is unavailable. This feature will be implemented in future versions. For now, you can cancel the interview, which will restart the search process for a new match. To cancel, go to the 'Schedule' page, find the interview, select it, and click 'Cancel Event'. You can also delete interviews on the Interviews page> Requests tab.",
       },
       question5: {
         question: 'Where can I view my interview results?',
@@ -654,7 +654,7 @@ export const en = {
       question12: {
         question: 'Where can I view my interview schedule?',
         answer:
-          "The interview schedule is available on the 'Schedule' screen. You can access it through the right-hand menu by clicking on the 'Schedule' section.",
+          "The interview schedule is available on the 'Schedule' page. You can access it through the right-hand menu by clicking on the 'Schedule' section.",
       },
       question13: {
         question: "What if I don't receive an interview invitation within 30 days?",
