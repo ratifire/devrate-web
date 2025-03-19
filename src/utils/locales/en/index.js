@@ -655,7 +655,7 @@ export const en = {
       question12: {
         question: 'Where can I view my interview schedule?',
         answer:
-          "The interview schedule is available on the 'Schedule' page. You can access it through the right-hand menu by clicking on the 'Schedule' section.",
+          "The interview calendar is available on the 'Schedule' page. You can access it through the right-hand menu by clicking on the 'Schedule' section.",
       },
       question13: {
         question: "What if I don't receive an interview invitation within 30 days?",
