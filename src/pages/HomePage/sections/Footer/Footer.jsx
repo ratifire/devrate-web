@@ -56,7 +56,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className={styles.footer__copyright}>
-                <p className={styles.footer__copyrightYear}>© 2024 Skillzzy, Inc. All rights reserved.</p>
+                <p className={styles.footer__copyrightYear}>© 2025 Skillzzy, Inc. All rights reserved.</p>
                 <p className={styles.footer__trademarks}>
                   All trademarks, logos, and brand names are the property of their respective owners.
                 </p>
