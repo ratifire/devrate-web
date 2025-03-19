@@ -600,7 +600,7 @@ export const en = {
       question1: {
         question: 'How can I request an interview?',
         answer:
-          "To request an interview, you need to go to the Specialization screen, choose one of your specializations for which the interview will be conducted, then click on the 'Schedule an interview' button and select your role. If you wish to conduct the interview, select 'Become an interviewer.' If you want to be evaluated, choose 'Schedule an interview.' Then, fill out the form, select convenient dates and times, and confirm by clicking 'Schedule.' After that, your request will be submitted, and you'll be notified when the interview is scheduled.",
+          'To apply for an interview, go to the Interviews page. In the upper right corner of the screen, click the ‘Schedule an interview’ button. Select your role from the drop-down list: ‘As Interviewer’ if you want to assess candidates, or “As Candidate” if you want to be assessed. Next, select your specialisation from the drop-down list, the language you want to conduct the interview in, and the number of interviews for the selected time slots. Next, select the days and times convenient for you in the form and click the ‘Schedule’ button. Your application will be created, and you will receive an email and interview notification as soon as an interviewee is found.',
       },
       question2: {
         question: 'When creating a specialization (Junior, Middle, Senior), how do you choose the appropriate level?',
@@ -610,12 +610,12 @@ export const en = {
       question3: {
         question: 'How long does it take to wait for an interview?',
         answer:
-          "From the moment you submit an interview request, we immediately begin searching for a match that meets your criteria (specialization, skills, level, availability, etc.). As soon as a match is found, you'll receive a notification with further steps. If no suitable match is found within 30 days, you will be notified about the next steps.",
+          "From the moment you submit an interview request, we immediately begin searching for a match that meets your criteria (specialization, skills, level, availability, etc.). As soon as a match is found, you'll receive a notification with further steps. If no suitable match is found within 30 days, you will be notified about the recommended steps.",
       },
       question4: {
         question: 'How can I cancel or reschedule an interview?',
         answer:
-          "We apologize, but at this time, rescheduling an interview is unavailable. This feature will be implemented in future versions. For now, you can cancel the interview, which will restart the search process for a new match. To cancel, go to the 'Schedule' page, find the interview, select it, and click 'Cancel Event.'",
+          "At this time, rescheduling an interview is unavailable. This feature will be implemented in future versions. For now, you can cancel the interview, which will restart the search process for a new match. To cancel, go to the 'Schedule' page, find the interview, select it, and click 'Cancel Event'. You can also delete interviews on the Interviews page > Requests tab.",
       },
       question5: {
         question: 'Where can I view my interview results?',
@@ -655,7 +655,7 @@ export const en = {
       question12: {
         question: 'Where can I view my interview schedule?',
         answer:
-          "The interview schedule is available on the 'Schedule' screen. You can access it through the right-hand menu by clicking on the 'Schedule' section.",
+          "The interview calendar is available on the 'Schedule' page. You can access it through the right-hand menu by clicking on the 'Schedule' section.",
       },
       question13: {
         question: "What if I don't receive an interview invitation within 30 days?",
@@ -670,7 +670,7 @@ export const en = {
       question15: {
         question: 'What do I need to prepare for an interview?',
         answer:
-          "All you need is a basic preparation for your selected skills. The interview is conducted online via Zoom, so it's essential to find a quiet place, ensure a stable internet connection, and be ready for the experience.",
+          "All you need is a basic preparation for your selected skills. The interview is conducted online via our custom service, so it's essential to find a quiet place, ensure a stable internet connection, and be ready for the experience.",
       },
       question16: {
         question: 'How can I report a bug on the site?',
