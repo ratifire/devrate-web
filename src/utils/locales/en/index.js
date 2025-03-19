@@ -670,7 +670,7 @@ export const en = {
       question15: {
         question: 'What do I need to prepare for an interview?',
         answer:
-          "All you need is a basic preparation for your selected skills. The interview is conducted online via Zoom, so it's essential to find a quiet place, ensure a stable internet connection, and be ready for the experience.",
+          "All you need is a basic preparation for your selected skills. The interview is conducted online via our custom service, so it's essential to find a quiet place, ensure a stable internet connection, and be ready for the experience.",
       },
       question16: {
         question: 'How can I report a bug on the site?',
