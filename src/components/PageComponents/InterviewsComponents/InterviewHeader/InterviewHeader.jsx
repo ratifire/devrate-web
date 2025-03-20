@@ -77,7 +77,7 @@ const InterviewHeader = () => {
         variant='contained'
         onClick={scheduleClickHandler}
       >
-        {t('specialization.modal.interview.makeIncome')}
+        {t('specialization.modal.interview.planInterview')}
         <KeyboardArrowDown />
       </Button>
 

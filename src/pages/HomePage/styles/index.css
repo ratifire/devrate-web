@@ -2,10 +2,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  background-color: #161616 !important;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -16,6 +12,10 @@ body {
   padding: 0 15px;
   margin: 0 auto;
   overflow: hidden;
+}
+
+.homePage {
+  background-color: #161616 !important;
 }
 
 .btn {
