@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router';
 import cancelEventIcon from '@assets/icons/cancel-event.svg';
 import links from '@router/links';
-import { useDeleteEvent } from '@utils/hooks/useDeleteEvent';
+import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
 import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { lvlMastery } from '@utils/constants/masteryLvl';
@@ -24,16 +24,11 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
 
   const handleCancelInterview = async () => {
     await deleteEvent({
-      // userId,
-      eventId: event?.eventTypeId,
+      eventId: event?.id,
       onSuccess: () => {
         handleClosePopup();
         setEventUpdated((prev) => !prev);
       },
-      // eslint-disable-next-line no-console
-      onError: (error) => console.error('EventPopup: Error deleting event', error),
-      // eslint-disable-next-line no-console
-      onFinally: () => console.log('EventPopup: Deletion process complete'),
     });
   };
 
