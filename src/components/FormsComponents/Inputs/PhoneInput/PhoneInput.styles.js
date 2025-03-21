@@ -12,9 +12,6 @@ export const styles = {
     top: '-196px',
     left: '114px',
     fieldset: { display: 'none' },
-    '> .react-international-phone-flag-emoji': {
-      width: '100px !important',
-    },
     '&.Mui-focused:has(div[aria-expanded="false"])': {
       fieldset: { display: 'block' },
     },
@@ -119,6 +116,10 @@ export const styles = {
     color: theme.palette.modals.select.textColor.default,
   }),
   select: {
+    '& > .MuiSelect-select.MuiSelect-outlined.MuiInputBase-input': {
+      padding: '11px 35px 6px 0',
+    },
+
     '& .MuiOutlinedInput-notchedOutline': {
       border: 'none',
     },
