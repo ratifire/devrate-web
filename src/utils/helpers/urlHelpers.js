@@ -1,3 +1,6 @@
+import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
+const phoneUtil = PhoneNumberUtil.getInstance();
+
 export const linkTypes = Object.freeze({
   EMAIL: 'EMAIL',
   PHONE_NUMBER: 'PHONE_NUMBER',
@@ -61,11 +64,21 @@ export const addTelegram = (url) => {
   return normalizeUrl(result);
 };
 
-export const addPhone = (phone) => {
+export const addPhone = (phone, countryCode = 'UA') => {
   if (!phone) return '';
 
-  const cleanedPhone = phone.replace(/\D/g, '');
-  return phone.trim().startsWith('+') ? phone : `+${cleanedPhone}`;
+  try {
+    const phoneNumber = phoneUtil.parseAndKeepRawInput(phone, countryCode.toUpperCase());
+
+    if (!phoneUtil.isValidNumber(phoneNumber)) {
+      return '';
+    }
+
+    return phoneUtil.format(phoneNumber, PhoneNumberFormat.E164);
+    // eslint-disable-next-line no-unused-vars
+  } catch (error) {
+    return '';
+  }
 };
 
 export const getDataStepContacts = (data) => {
