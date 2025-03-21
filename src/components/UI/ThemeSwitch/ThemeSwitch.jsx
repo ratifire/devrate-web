@@ -1,8 +1,8 @@
 import { FormControlLabel, FormGroup, styled, Switch } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleTheme } from '../../../redux/theme/themeSlice';
-import { DARK_THEME } from '../../../utils/constants/Theme/theme';
-import { darkIcon, lightIcon } from '../../../utils/constants/Theme/themeIcons';
+import { toggleTheme } from '@redux/slices/theme/themeSlice';
+import { DARK_THEME } from '@utils/constants/Theme/theme';
+import { darkIcon, lightIcon } from '@utils/constants/Theme/themeIcons';
 
 const ThemeSwitch = () => {
   const dispatch = useDispatch();

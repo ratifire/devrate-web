@@ -2,9 +2,9 @@ import { Box, IconButton, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import PropTypes from 'prop-types';
+import { useGetDefLanguageQuery } from '@redux/api/slices/defaultLanguage/defaultLanguageApiSlice.js';
 import FormInput from '../../../../FormsComponents/Inputs/FormInput';
 import SpecialisationLevelCombinedSelect from '../../../../FormsComponents/Inputs/SpecialisationLevelCombinedSelect/index.js';
-import { useGetDefLanguageQuery } from '../../../../../redux/services/defaultLanguage/defaultLanguageApiSlice.js';
 import SelectInterviewLanguage from '../../../../FormsComponents/Inputs/SelectSkills/index.js';
 import { styles } from './TimeSlotInfo.styles';
 

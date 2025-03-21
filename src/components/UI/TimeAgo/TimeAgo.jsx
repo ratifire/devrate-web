@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { ConvertMilliInYears } from '../../../utils/helpers/convertMilliInYears.js';
+import { ConvertMilliInYears } from '@utils/helpers/convertMilliInYears.js';
 
 const TimeAgo = ({ data }) => {
   const localTime = new Date(data);

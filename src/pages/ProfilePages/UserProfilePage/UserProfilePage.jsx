@@ -1,21 +1,17 @@
 import { lazy, memo, Suspense } from 'react';
 import { Box, Container, Paper } from '@mui/material';
 import { useParams, Navigate } from 'react-router';
-import { useGetPersonalUserQuery } from '../../../redux/user/personal/personalApiSlice';
-import UserProfileSkeleton from '../../../components/UI/Skeleton/Pages/userProfileSkeleton';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
+import UserProfileSkeleton from '@components/UI/Skeleton/Pages/userProfileSkeleton';
 import { styles } from './UserProfilePage.styles';
 
 const SkillsSection = lazy(
-  () => import('../../../components/PageComponents/ProfileComponents/UserProfile/SkillsSection/SkillsSection')
+  () => import('@components/PageComponents/ProfileComponents/UserProfile/SkillsSection/SkillsSection')
 );
-const BaseUserInfo = lazy(
-  () => import('../../../components/PageComponents/ProfileComponents/UserProfile/BaseUserInfo')
-);
-const RightSection = lazy(
-  () => import('../../../components/PageComponents/ProfileComponents/UserProfile/RightSection')
-);
+const BaseUserInfo = lazy(() => import('@components/PageComponents/ProfileComponents/UserProfile/BaseUserInfo'));
+const RightSection = lazy(() => import('@components/PageComponents/ProfileComponents/UserProfile/RightSection'));
 const ExperienceSection = lazy(
-  () => import('../../../components/PageComponents/ProfileComponents/UserProfile/ExperienceSection')
+  () => import('@components/PageComponents/ProfileComponents/UserProfile/ExperienceSection')
 );
 
 const MemoizedBaseUserInfo = memo(BaseUserInfo);

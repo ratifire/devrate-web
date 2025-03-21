@@ -1,8 +1,8 @@
 import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
 import { styles } from './SkillsSection.styles';
 
 const SkillsSection = () => {

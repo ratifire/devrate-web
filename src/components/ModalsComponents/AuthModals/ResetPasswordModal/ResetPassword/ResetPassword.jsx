@@ -7,13 +7,13 @@ import { Link as RouterLink } from 'react-router';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useSnackbar } from 'notistack';
 import { useRef, useState } from 'react';
-import { useChangePasswordMutation, useResetPasswordMutation } from '../../../../../redux/auth/authApiSlice';
-import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
+import { useChangePasswordMutation, useResetPasswordMutation } from '@redux/api/slices/auth/authApiSlice';
+import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
+import { resetPasswordSchema } from '@utils/validationSchemas';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
-import { resetPasswordSchema } from '../../../../../utils/validationSchemas';
-import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
 import styles from './ResetPassword.styles';
 
 const initialValues = {

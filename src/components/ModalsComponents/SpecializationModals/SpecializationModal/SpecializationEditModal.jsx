@@ -4,24 +4,24 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { selectModalData } from '../../../../redux/modal/modalSlice';
+import { selectModalData } from '@redux/slices/modal/modalSlice';
 import {
   useGetSpecializationByUserIdQuery,
   useLazyGetMasteriesBySpecializationIdQuery,
   useSetNewMainMasteryBySpecIdAndMasteryIdMutation,
   useUpdateSpecializationByIdMutation,
-} from '../../../../redux/specialization/specializationApiSlice';
-import { useGetSpecializationListQuery } from '../../../../redux/specialization/specializationList/specializationListApiSlice';
-import { setActiveSpecialization } from '../../../../redux/specialization/specializationSlice';
-import useMergeState from '../../../../utils/hooks/useMergeState';
-import { SpecializationModalSchema } from '../../../../utils/validationSchemas/index';
+} from '@redux/api/slices/specialization/specializationApiSlice';
+import { useGetSpecializationListQuery } from '@redux/api/slices/specializationList/specializationListApiSlice';
+import { setActiveSpecialization } from '@redux/slices/specialization/specializationSlice';
+import useMergeState from '@utils/hooks/useMergeState';
+import { SpecializationModalSchema } from '@utils/validationSchemas/index';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { useGetMastery } from '@utils/hooks/specialization/index.js';
+import { useGetInterviewRequestByMasteryIdQuery } from '@redux/api/slices/interviewRequestApiSlice.js';
+import { ErrorComponent } from '@components/UI/Exceptions';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { useGetMastery } from '../../../../utils/hooks/specialization/index.js';
-import { useGetInterviewRequestByMasteryIdQuery } from '../../../../redux/services/interviewRequestApiSlice.js';
 import { styles } from './SpecializationModal.styles';
 
 const SpecializationEditModal = () => {

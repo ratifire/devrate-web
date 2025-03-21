@@ -1,10 +1,10 @@
 import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense } from 'react';
 import { useSelector } from 'react-redux';
-import InterviewRequestSkeleton from '../../../components/UI/Skeleton/Pages/InterviewRequestSkeleton/InterviewRequestSkeleton.jsx';
+import InterviewRequestSkeleton from '@components/UI/Skeleton/Pages/InterviewRequestSkeleton/InterviewRequestSkeleton.jsx';
+import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
 import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
-import { emptyInterviewTabsPictures } from '../../../utils/constants/emptyTabsPictures.js';
-import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice.js';
 import { styles } from './InterviewRequestsPage.styles.js';
 
 const InterviewRequest = lazy(() => import('../../../components/PageComponents/InterviewRequest'));

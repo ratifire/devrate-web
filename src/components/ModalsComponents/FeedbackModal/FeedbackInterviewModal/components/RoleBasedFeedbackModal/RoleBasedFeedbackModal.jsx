@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { ErrorComponent } from '../../../../../UI/Exceptions';
-import { FeedbackModalSkeleton } from '../../../../../UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { FeedbackModalSkeleton } from '@components/UI/Skeleton';
 import { CandidateFeedback } from '../CandidateFeedback';
 import { InterviewerFeedback } from '../InterviewerFeedback';
 

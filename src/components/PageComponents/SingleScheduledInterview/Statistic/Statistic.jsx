@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
-import { LevelGauge } from '../../../UI/Chart';
-import { useGetMasteriesQuery } from '../../../../redux/interviews/singleScheduledInterviewApiSlice.js';
-import { StatisticSkeleton } from '../../../UI/Skeleton';
-import { ErrorComponent } from '../../../UI/Exceptions';
+import { LevelGauge } from '@components/UI/Chart';
+import { useGetMasteriesQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
+import { StatisticSkeleton } from '@components/UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
 import { prepareSkillsDataStatistics } from '../helpers';
 import { styles } from './Statistic.styles';
 import { useStatisticChartColor } from './hooks';

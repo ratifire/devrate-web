@@ -1,14 +1,15 @@
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import getDesignTokens from '../src/utils/theme/theme';
-import i18n from '../src/utils/i18n';
-import React, { Suspense, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { DARK_THEME, LIGHT_THEME } from '../src/utils/constants/Theme/theme';
+import { DARK_THEME, LIGHT_THEME } from '@utils/constants/Theme/theme';
+import getDesignTokens from '@utils/theme/theme';
+import i18n from '@utils/i18n';
 
 const withI18next = (Story, context) => {
   const { locale } = context.globals;
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     i18n.changeLanguage(locale);
   }, [locale]);

@@ -1,9 +1,9 @@
 import { BrowserRouter as Router } from 'react-router';
+import navLinks from '@utils/constants/navLinks';
+import legalInfoLinks from '@utils/constants/legalInfoLinks';
+import headerStyles from '@components/PageComponents/LandingComponents/Header/Header.styles';
+import footerStyles from '@components/PageComponents/LandingComponents/Footer/Footer.styles';
 import { decorators } from '../../../../.storybook/preview';
-import navLinks from '../../../utils/constants/navLinks';
-import legalInfoLinks from '../../../utils/constants/legalInfoLinks';
-import headerStyles from '../..//PageComponents/LandingComponents/Header/Header.styles';
-import footerStyles from '../..//PageComponents/LandingComponents/Footer/Footer.styles';
 import LinkList from './LinkList';
 
 export default {

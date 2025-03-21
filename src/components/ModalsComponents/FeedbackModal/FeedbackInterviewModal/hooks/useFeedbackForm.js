@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '../../../../../redux/feedback/interviewApiSlice';
-import { FeedbackModalSchema } from '../../../../../utils/validationSchemas';
-import { closeModal, selectModalData } from '../../../../../redux/modal/modalSlice';
-import navigationLinks from '../../../../../router/links';
+import { useCreateInterviewMutation, useGetInterviewByIdQuery } from '@redux/api/slices/feedback/interviewApiSlice';
+import { FeedbackModalSchema } from '@utils/validationSchemas';
+import { closeModal, selectModalData } from '@redux/slices/modal/modalSlice';
+import navigationLinks from '@router/links';
 
 const useFeedbackForm = () => {
   const dispatch = useDispatch();

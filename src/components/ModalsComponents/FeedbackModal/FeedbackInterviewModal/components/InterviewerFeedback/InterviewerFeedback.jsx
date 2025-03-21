@@ -1,12 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ButtonDef } from '../../../../../FormsComponents/Buttons';
-import { ErrorComponent } from '../../../../../UI/Exceptions';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { lvlMastery } from '@utils/constants/masteryLvl';
 import { formatDateTime } from '../../helpers';
 import useFeedbackForm from '../../hooks';
 import { InterviewerInfo, StepSoftSkills } from '../index';
-import { lvlMastery } from '../../../../../../utils/constants/masteryLvl';
 import { styles } from './InterviewerFeedback.styles';
 
 const InterviewerFeedback = () => {

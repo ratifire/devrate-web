@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
-import PasswordVisibilityToggle from '../../PasswordVisibilityToggle';
+import PasswordVisibilityToggle from '@components/FormsComponents/PasswordVisibilityToggle';
 import { styles } from './FormInput.styles';
 import HelperTextComponent from './FormHelperText';
 

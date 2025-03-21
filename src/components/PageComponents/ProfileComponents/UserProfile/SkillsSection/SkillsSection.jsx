@@ -1,7 +1,7 @@
 import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
 import { styles } from './SkillsSection.styles';
 
 const SkillsSection = ({ id }) => {

@@ -7,13 +7,13 @@ import {
   useAddTimeSlotsMutation,
   useCreateInterviewRequestMutation,
   useUpdateInterviewRequestMutation,
-} from '../../../../redux/interviews/interviewRequestsApiSlice';
-import { ScheduleInterviewSchema } from '../../../../utils/validationSchemas';
-import { useModalController } from '../../../../utils/hooks/useModalController';
-import { modalNames } from '../../../../utils/constants/modalNames';
-import interviewModalRole from '../../../../utils/constants/InterviewModalRole';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { useGetSpecializationByUserIdQuery } from '../../../../redux/specialization/specializationApiSlice';
+} from '@redux/api/slices/interviews/interviewRequestsApiSlice';
+import { ScheduleInterviewSchema } from '@utils/validationSchemas';
+import { useModalController } from '@utils/hooks/useModalController';
+import { modalNames } from '@utils/constants/modalNames';
+import interviewModalRole from '@utils/constants/InterviewModalRole';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice';
 
 const useScheduleInterviewForm = () => {
   const { t } = useTranslation();

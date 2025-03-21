@@ -45,7 +45,7 @@ export const faqData = [
     id: 8,
     question: 'What do I need to prepare for an interview?',
     answer:
-      'Answer: All you need is basic training in your chosen skills. The interview takes place online via Zoom, so it is important to find a quiet place, make sure you have stable internet, and be ready for a new experience.',
+      'Answer: All you need is basic training in your chosen skills. The interview takes place online via our custom service, so it is important to find a quiet place, make sure you have stable internet, and be ready for a new experience.',
   },
   {
     id: 9,

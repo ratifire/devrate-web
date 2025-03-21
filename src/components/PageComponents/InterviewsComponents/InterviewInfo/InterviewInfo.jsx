@@ -1,11 +1,11 @@
 import { Box, Typography } from '@mui/material';
 import { useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { useGetPassedInterviewByIdQuery } from '../../../../redux/interviews/passedInterviewsApiSlice.js';
-import { formatToLocalDateInterview } from '../../../../utils/helpers/formatToLocalDateInterview.js';
-import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice.js';
-import { lvlMastery } from '../../../../utils/constants/masteryLvl.js';
-import { ConvertMilliInYears } from '../../../../utils/helpers/convertMilliInYears.js';
+import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
+import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInterview.js';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice.js';
+import { lvlMastery } from '@utils/constants/masteryLvl.js';
+import { ConvertMilliInYears } from '@utils/helpers/convertMilliInYears.js';
 import { styles } from './InterviewInfo.styles.js';
 
 const InterviewInfo = () => {

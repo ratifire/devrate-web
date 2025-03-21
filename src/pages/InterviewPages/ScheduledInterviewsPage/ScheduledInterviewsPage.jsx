@@ -2,11 +2,11 @@ import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
 import { useSelector } from 'react-redux';
-import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
-import { useGetAllScheduledInterviewsQuery } from '../../../redux/interviews/scheduledInterviewsApiSlice';
-import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice.js';
+import InterviewsSkeleton from '@components/UI/Skeleton/Pages/InterviewsSkeleton';
+import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
+import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
 import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
-import { emptyInterviewTabsPictures } from '../../../utils/constants/emptyTabsPictures.js';
 import { styles } from './ScheduledInterviewsPage.styles';
 
 const SideBar = lazy(

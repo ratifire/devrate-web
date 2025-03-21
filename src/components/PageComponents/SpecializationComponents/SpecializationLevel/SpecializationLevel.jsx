@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice';
-import { useGetMainMasteryBySpecializationIdQuery } from '../../../../redux/specialization/specializationApiSlice';
-import { useGetSpecializationId } from '../../../../utils/hooks/specialization';
-import ButtonDef from '../../../FormsComponents/Buttons/ButtonDef';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import LevelSkeleton from '../../../UI/Skeleton/Pages/specializationSkeleton/LevelSkeleton';
+import { setActiveMastery } from '@redux/slices/specialization/activeMasterySlice';
+import { useGetMainMasteryBySpecializationIdQuery } from '@redux/api/slices/specialization/specializationApiSlice';
+import { useGetSpecializationId } from '@utils/hooks/specialization';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import LevelSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/LevelSkeleton';
+import ButtonDef from '@components/FormsComponents/Buttons/ButtonDef';
 import { styles } from './SpecializationLevel.styles';
 
 const SpecializationLevel = () => {
