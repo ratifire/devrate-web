@@ -1,84 +1,116 @@
 import 'react-international-phone/style.css';
 
-import { InputAdornment, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { FormControl, InputAdornment, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { defaultCountries, FlagImage, parseCountry, usePhoneInput } from 'react-international-phone';
+import { useMemo } from 'react';
+import { v4 as uuid } from 'uuid';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { styles } from './PhoneInput.styles.js';
+import PhoneHelperText from './PhoneHelperText/index.js';
 
-// export const MuiPhone = ({ value, onChange, ...restProps }) => {
-export const MuiPhone = ({ ...restProps }) => {
+const MuiPhone = ({
+  value,
+  onChange,
+  handleBlur,
+  placeholder,
+  error,
+  helperText,
+  label = 'profile.modal.userInfo.contact.phone',
+  defaultCountry = 'ua',
+  ...restProps
+}) => {
+  const id = useMemo(() => uuid(), []);
+  const { t } = useTranslation();
+
   const { inputValue, handlePhoneValueChange, inputRef, country, setCountry } = usePhoneInput({
-    defaultCountry: 'us',
-    // value,
+    defaultCountry,
+    value,
     countries: defaultCountries,
-    // onChange: (data) => {
-    //   onChange(data.phone);
-    // },
+    onChange: (data) => {
+      onChange(data.phone, country.iso2);
+    },
   });
 
   return (
-    <TextField
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position='start' style={{ marginRight: '2px', marginLeft: '-8px' }}>
-            <Select
-              MenuProps={{
-                style: {
-                  height: '300px',
-                  width: '360px',
-                  top: '-60px',
-                  left: '-34px',
-                },
-                transformOrigin: {
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                },
-              }}
-              renderValue={(value) => <FlagImage iso2={value} style={{ display: 'flex' }} />}
-              sx={{
-                width: 'max-content',
-                // Remove default outline (display only on focus)
-                fieldset: {
-                  display: 'none',
-                },
-                '&.Mui-focused:has(div[aria-expanded="false"])': {
-                  fieldset: {
-                    display: 'block',
+    <FormControl error={error} sx={styles.inputWrapper} variant='outlined'>
+      <TextField
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position={'start'}>
+              <Select
+                IconComponent={KeyboardArrowDownIcon}
+                inputProps={{
+                  MenuProps: {
+                    PaperProps: {
+                      sx: styles.dropdownPaper,
+                    },
+                    sx: styles.selectField,
                   },
-                },
-                // Update default spacing
-                '.MuiSelect-select': {
-                  padding: '8px',
-                  paddingRight: '24px !important',
-                },
-                svg: {
-                  right: 0,
-                },
-              }}
-              value={country.iso2}
-              onChange={(e) => setCountry(e.target.value)}
-            >
-              {defaultCountries.map((c) => {
-                const country = parseCountry(c);
-                return (
-                  <MenuItem key={country.iso2} value={country.iso2}>
-                    <FlagImage iso2={country.iso2} style={{ marginRight: '8px' }} />
-                    <Typography marginRight='8px'>{country.name}</Typography>
-                    <Typography color='gray'>+{country.dialCode}</Typography>
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </InputAdornment>
-        ),
-      }}
-      color='primary'
-      inputRef={inputRef}
-      label='Phone number'
-      placeholder='Phone number'
-      type='tel'
-      value={inputValue}
-      variant='outlined'
-      onChange={handlePhoneValueChange}
-      {...restProps}
-    />
+                }}
+                renderValue={(value) => <FlagImage iso2={value} />}
+                sx={styles.select}
+                value={country.iso2}
+                onChange={(e) => setCountry(e.target.value)}
+              >
+                {defaultCountries.map((c) => {
+                  const country = parseCountry(c);
+                  return (
+                    <MenuItem key={country.iso2} sx={styles.menuItem} value={country.iso2}>
+                      <FlagImage iso2={country.iso2} style={styles.flagImage} />
+                      <Typography sx={styles.countryName}>{country.name}</Typography>
+                      <Typography sx={styles.dialCode}>+{country.dialCode}</Typography>
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </InputAdornment>
+          ),
+        }}
+        error={error}
+        id={id}
+        inputRef={inputRef}
+        label={t(label)}
+        placeholder={t(placeholder)}
+        sx={styles.textField}
+        type='tel'
+        value={inputValue}
+        variant='outlined'
+        onBlur={() => {
+          handleBlur({ target: { name: 'phone' } });
+        }}
+        onChange={handlePhoneValueChange}
+        {...restProps}
+      />
+
+      <PhoneHelperText error={error} helperText={helperText} id={id} />
+    </FormControl>
   );
 };
+
+MuiPhone.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func,
+  error: PropTypes.bool,
+  helperText: PropTypes.string,
+  label: PropTypes.string,
+  required: PropTypes.bool,
+  defaultCountry: PropTypes.string,
+  placeholder: PropTypes.string,
+};
+
+MuiPhone.defaultProps = {
+  value: '',
+  onChange: () => {},
+  handleBlur: () => {},
+  error: false,
+  helperText: '',
+  label: 'profile.modal.userInfo.contact.phone',
+  placeholder: 'profile.modal.userInfo.contact.phone',
+  required: false,
+  defaultCountry: 'ua',
+};
+
+export default MuiPhone;
