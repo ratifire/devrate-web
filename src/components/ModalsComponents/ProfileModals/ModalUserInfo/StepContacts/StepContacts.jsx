@@ -14,7 +14,7 @@ import { SOCIAL_TYPES } from '../../../../UI/SocialsLinkList/SocialTypes';
 import { normalizeUrl, addPhone, addTelegram, getDataStepContacts } from '../../../../../utils/helpers/urlHelpers.js';
 import { StepContactsSkeleton } from '../../../../UI/Skeleton';
 import { ErrorComponent } from '../../../../UI/Exceptions';
-import { MuiPhone } from '../../../../FormsComponents/Inputs/PhoneInput/PhoneInput.jsx';
+import MuiPhone from '../../../../FormsComponents/Inputs/PhoneInput';
 import { styles } from './StepContacts.styles';
 
 const StepContacts = () => {
@@ -37,9 +37,9 @@ const StepContacts = () => {
     behance: '',
     mail: '',
     phone: '',
+    countryCode: 'ua',
     ...valuesMap,
   };
-
   const onSubmit = async ({ telegram, mail, linkedIn, gitHub, behance, phone }) => {
     try {
       await postContactsUser({
@@ -55,7 +55,6 @@ const StepContacts = () => {
       }).unwrap();
 
       enqueueSnackbar(t('modalNotifyText.contacts.create.success'), { variant: 'success' });
-      formik.resetForm();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.contacts.create.error'), { variant: 'error' });
@@ -66,12 +65,14 @@ const StepContacts = () => {
     validationSchema: StepContactsSchema,
     onSubmit,
     enableReinitialize: true,
+    validateOnChange: false,
+    validateOnBlur: true,
   });
 
-  const handlePhoneChange = (phone) => {
-    formik.setFieldValue('phone', phone); // Обновляем значение телефона в Formik
+  const handlePhoneChange = (phone, countryCode) => {
+    formik.setFieldValue('phone', phone);
+    formik.setFieldValue('countryCode', countryCode);
   };
-
   if (isErrorGetUseContacts || isErrorPostContacts) {
     return <ErrorComponent />;
   }
@@ -88,8 +89,9 @@ const StepContacts = () => {
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
             helperText={formik.touched.telegram && formik.errors.telegram}
-            label='profile.modal.userInfo.contact.telegram'
+            label='profile.modal.userInfo.contact.telegram.label'
             name='telegram'
+            placeholder='profile.modal.userInfo.contact.telegram.placeholder'
             type='text'
             value={formik.values.telegram}
           />
@@ -100,8 +102,9 @@ const StepContacts = () => {
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
             helperText={formik.touched.linkedIn && formik.errors.linkedIn}
-            label='profile.modal.userInfo.contact.linkedIn'
+            label='profile.modal.userInfo.contact.linkedIn.label'
             name='linkedIn'
+            placeholder='profile.modal.userInfo.contact.linkedIn.placeholder'
             type='text'
             value={formik.values.linkedIn}
           />
@@ -112,8 +115,9 @@ const StepContacts = () => {
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
             helperText={formik.touched.gitHub && formik.errors.gitHub}
-            label='profile.modal.userInfo.contact.gitHub'
+            label='profile.modal.userInfo.contact.gitHub.label'
             name='gitHub'
+            placeholder='profile.modal.userInfo.contact.gitHub.placeholder'
             type='text'
             value={formik.values.gitHub}
           />
@@ -124,8 +128,9 @@ const StepContacts = () => {
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
             helperText={formik.touched.behance && formik.errors.behance}
-            label='profile.modal.userInfo.contact.behance'
+            label='profile.modal.userInfo.contact.behance.label'
             name='behance'
+            placeholder='profile.modal.userInfo.contact.behance.placeholder'
             type='text'
             value={formik.values.behance}
           />
@@ -137,29 +142,24 @@ const StepContacts = () => {
             handleBlur={formik.handleBlur}
             handleChange={formik.handleChange}
             helperText={formik.touched.mail && formik.errors.mail}
-            label='profile.modal.userInfo.contact.mail'
+            label='profile.modal.userInfo.contact.mail.label'
             name='mail'
+            placeholder='profile.modal.userInfo.contact.mail.placeholder'
             type='text'
             value={formik.values.mail}
           />
         </Box>
         <Box sx={styles.input100}>
-          {/*<FormInput*/}
-          {/*  error={formik.touched.phone && Boolean(formik.errors.phone)}*/}
-          {/*  handleBlur={formik.handleBlur}*/}
-          {/*  handleChange={formik.handleChange}*/}
-          {/*  helperText={formik.touched.phone && formik.errors.phone}*/}
-          {/*  label='profile.modal.userInfo.contact.phone'*/}
-          {/*  name='phone'*/}
-          {/*  type='text'*/}
-          {/*  value={formik.values.phone}*/}
-          {/*/>*/}
           <MuiPhone
-            defaultCountry='ua' // Устанавливаем страну по умолчанию (Украина)
-            inputStyle={{ width: '100%' }} // Стили для input
-            value={formik.values.phone} // Значение из Formik
-            onChange={handlePhoneChange} // Обработчик изменения
-          />{' '}
+            defaultCountry='ua'
+            error={formik.touched.phone && Boolean(formik.errors.phone)}
+            handleBlur={formik.handleBlur}
+            helperText={formik.touched.phone && formik.errors.phone}
+            label='profile.modal.userInfo.contact.phone'
+            placeholder='profile.modal.userInfo.contact.phone'
+            value={formik.values.phone}
+            onChange={handlePhoneChange}
+          />
         </Box>
       </Box>
       <ButtonDef
