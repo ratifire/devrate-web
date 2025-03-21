@@ -337,11 +337,26 @@ export const uk = {
           },
           contact: {
             title: 'Контактна інформація',
-            telegram: 'Telegram',
-            linkedIn: 'LinkedIn',
-            gitHub: 'GitHub',
-            behance: 'Behance',
-            mail: 'Електронна пошта',
+            telegram: {
+              label: 'Telegram',
+              placeholder: '@username',
+            },
+            linkedIn: {
+              label: 'LinkedIn',
+              placeholder: 'https://www.linkedin.com/in/',
+            },
+            gitHub: {
+              label: 'GitHub',
+              placeholder: 'https://github.com/',
+            },
+            behance: {
+              label: 'Behance',
+              placeholder: 'https://www.behance.net/',
+            },
+            mail: {
+              label: 'Електронна пошта',
+              placeholder: 'example@gmail.com',
+            },
             phone: 'Мобільний телефон',
           },
           photo: {
