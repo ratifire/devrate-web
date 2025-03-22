@@ -7,11 +7,10 @@ import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference.js';
-import { lvlMastery } from '@utils/constants/masteryLvl.js';
 import { styles } from './SidebarEvent.styles';
 
 const SidebarEvent = ({ event }) => {
-  const { hostName, hostSurname, roomUrl, id, startTime, type, masteryLevel, specializationName } = event;
+  const { hostName, hostSurname, roomUrl, id, startTime, type, title, hostId } = event;
   const { t } = useTranslation();
   const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric', separator: '/', localeMatcher: 'lookup' };
   const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: false };
@@ -44,12 +43,12 @@ const SidebarEvent = ({ event }) => {
       </Box>
       <Typography component='div' sx={styles.host} variant='body2'>
         {t('schedule.host')}:{' '}
-        <Link component={RouterLink} sx={styles.host_link} to={`/profile/${id}`}>
+        <Link component={RouterLink} sx={styles.host_link} to={`/profile/${hostId}`}>
           {hostName} {hostSurname}
         </Link>
       </Typography>
       <Typography component='div' sx={styles.hostTitle} variant='caption3'>
-        {lvlMastery[masteryLevel]} {specializationName}
+        {title}
       </Typography>
       <Box sx={styles.titleDateTimeBox}>
         <IconButton component='a' disabled={disableLink} href={roomUrl} target='_blank'>
@@ -70,11 +69,11 @@ SidebarEvent.propTypes = {
     hostName: PropTypes.string.isRequired,
     hostSurname: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    masteryLevel: PropTypes.number.isRequired,
     roomUrl: PropTypes.string.isRequired,
-    specializationName: PropTypes.string.isRequired,
     startTime: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    hostId: PropTypes.number.isRequired,
   }).isRequired,
 };
 
