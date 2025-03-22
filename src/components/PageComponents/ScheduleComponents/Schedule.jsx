@@ -8,7 +8,12 @@ import { DateTime } from 'luxon';
 import { useTheme } from '@mui/material/styles';
 import { useGetEventByUserIdQuery, useLazyGetEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { ScheduleSkeleton } from '@components/UI/Skeleton';
-import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants/index';
+import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
+import {
+  findEventTimeForChosenDay,
+  getOffsetTopWithScroll,
+  getWeekStartAndEnd,
+} from '@components/PageComponents/ScheduleComponents/helpers';
 import EventPopup from './EventPopup';
 import { styles } from './Schedule.styles';
 import Sidebar from './Sidebar';
@@ -21,7 +26,6 @@ const Schedule = () => {
   const [event, setEvent] = useState([]);
   const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
   const [popupPosition, setPopupPosition] = useState(PopupPosition.TOP_RIGHT);
-  const [eventUpdated, setEventUpdated] = useState(false);
   const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
   const [events, setEvents] = useState([]);
@@ -43,7 +47,7 @@ const Schedule = () => {
     };
 
     waitForCalendarRef();
-  }, [selectedWeek, eventStartTime, from, theme, eventUpdated]);
+  }, [selectedWeek, eventStartTime, from, theme]);
 
   useEffect(() => {
     setEvents(transformEvents(eventsForSelectedWeek || []));
@@ -58,35 +62,7 @@ const Schedule = () => {
     };
 
     waitForCalendarRef();
-  }, [eventsForSelectedWeek, isFetchingGetEvent, theme, eventUpdated]);
-
-  const findEventTimeForChosenDay = (newDate, resp) => {
-    const luxonDate = DateTime.fromISO(newDate);
-    if (!luxonDate.isValid) {
-      return;
-    }
-
-    const targetDay = luxonDate.day;
-    const targetMonth = luxonDate.month;
-    const targetYear = luxonDate.year;
-
-    const matchingEvents = resp.filter((event) => {
-      const eventDate = DateTime.fromISO(event.startTime);
-      const eventDay = eventDate.day;
-      const eventMonth = eventDate.month;
-      const eventYear = eventDate.year;
-      return eventDay === targetDay && eventMonth === targetMonth && eventYear === targetYear;
-    });
-
-    if (matchingEvents.length === 0) {
-      return DateTime.now().toFormat('HH:mm:ss');
-    }
-
-    const startTime = DateTime.fromISO(matchingEvents[0].startTime).toLocal();
-    const adjustedTime = startTime.minus({ hours: 1 });
-
-    return adjustedTime.toFormat('HH:mm:ss');
-  };
+  }, [eventsForSelectedWeek, isFetchingGetEvent, theme]);
 
   const handleDateChange = async (newDate) => {
     handleClosePopup();
@@ -105,18 +81,7 @@ const Schedule = () => {
     const startTime = findEventTimeForChosenDay(newDate, resp);
     setEventStartTime(startTime);
   };
-  function getOffsetTopWithScroll(element) {
-    let offsetTop = 0;
-    let currentElement = element;
-    while (currentElement) {
-      offsetTop += currentElement.offsetTop;
-      if (currentElement.offsetParent && currentElement.offsetParent.scrollTop) {
-        offsetTop -= currentElement.offsetParent.scrollTop;
-      }
-      currentElement = currentElement.offsetParent;
-    }
-    return offsetTop;
-  }
+
   const handleEventClick = (info) => {
     if (info) {
       if (calendarRef.current) {
@@ -197,7 +162,7 @@ const Schedule = () => {
 
   return (
     <Box sx={styles.demoApp}>
-      <Sidebar handleDateChange={handleDateChange} selectedDate={selectedDate} setEventUpdated={setEventUpdated} />
+      <Sidebar handleDateChange={handleDateChange} selectedDate={selectedDate} />
       <Box sx={styles.demoAppMain}>
         {
           <FullCalendar
@@ -236,17 +201,6 @@ const Schedule = () => {
       </Box>
     </Box>
   );
-};
-
-const getWeekStartAndEnd = (year, weekNumber) => {
-  const firstDayOfYear = DateTime.local(year).startOf('year');
-  const firstDayOfWeek = firstDayOfYear.plus({ weeks: weekNumber - 1 }).startOf('week');
-  const lastDayOfWeek = firstDayOfWeek.endOf('week');
-
-  return {
-    startOfWeek: firstDayOfWeek.toISODate(),
-    endOfWeek: lastDayOfWeek.toISODate(),
-  };
 };
 
 const applyRequiredStyles = (calendarApi, theme) => {

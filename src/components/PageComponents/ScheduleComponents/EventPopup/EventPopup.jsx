@@ -13,7 +13,7 @@ import { PopupPosition } from '@components/PageComponents/ScheduleComponents/con
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
-const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpdated }) => {
+const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const { t } = useTranslation();
   const { data, isFetching } = useGetEventByIdQuery({ id: event.id }, { skip: !event.id });
 
@@ -26,7 +26,6 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
       eventId: event?.id,
       onSuccess: () => {
         handleClosePopup();
-        setEventUpdated((prev) => !prev);
       },
     });
   };
@@ -112,12 +111,10 @@ EventPopup.propTypes = {
   event: PropTypes.object.isRequired,
   popup: PropTypes.object.isRequired,
   popupPosition: PropTypes.string,
-  setEventUpdated: PropTypes.func.isRequired,
 };
 EventPopup.defaultProps = {
   handleClosePopup: () => {},
   event: {},
   popup: {},
   popupPosition: 'TOPRIGHT',
-  setEventUpdated: () => {},
 };
