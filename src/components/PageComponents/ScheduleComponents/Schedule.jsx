@@ -8,6 +8,7 @@ import { DateTime } from 'luxon';
 import { useTheme } from '@mui/material/styles';
 import { useGetEventByUserIdQuery, useLazyGetEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { ScheduleSkeleton } from '@components/UI/Skeleton';
+import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants/index';
 import EventPopup from './EventPopup';
 import { styles } from './Schedule.styles';
 import Sidebar from './Sidebar';
@@ -19,7 +20,7 @@ const Schedule = () => {
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
   const [event, setEvent] = useState([]);
   const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
-  const [popupPosition, setPopupPosition] = useState('TOPRIGHT');
+  const [popupPosition, setPopupPosition] = useState(PopupPosition.TOP_RIGHT);
   const [eventUpdated, setEventUpdated] = useState(false);
   const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
@@ -125,24 +126,31 @@ const Schedule = () => {
           scroller.style.overflow = 'hidden';
         }
       }
+
       const rect = info.el.getBoundingClientRect();
+
       setEvent(eventsForSelectedWeek.find((event) => event.id.toString() === info.event._def.publicId));
 
       const dimensions = { popupWidth: 413, arrowWidth: 10, popupHeight: 200, rectWidth: 120, rectHeight: 70 };
+
       let xoffset = rect.left - (dimensions.popupWidth + dimensions.arrowWidth);
       let yoffset = getOffsetTopWithScroll(info.el);
-      setPopupPosition('TOPRIGHT');
+
+      setPopupPosition(PopupPosition.TOP_RIGHT);
+
       if (rect.left < window.innerWidth / 2) {
         xoffset = rect.left + dimensions.rectWidth + 3 * dimensions.arrowWidth;
-        setPopupPosition('TOPLEFT');
+        setPopupPosition(PopupPosition.TOP_LEFT);
       }
+
       if (rect.left > window.innerWidth / 2 && rect.top > window.innerHeight / 2) {
         yoffset = yoffset - dimensions.popupHeight;
-        setPopupPosition('BOTTOMRIGHT');
+        setPopupPosition(PopupPosition.BOTTOM_RIGHT);
       }
+
       if (rect.left < window.innerWidth / 2 && rect.top > window.innerHeight / 2) {
         yoffset = yoffset - dimensions.popupHeight;
-        setPopupPosition('BOTTOMLEFT');
+        setPopupPosition(PopupPosition.BOTTOM_LEFT);
       }
 
       const eventDetails = {

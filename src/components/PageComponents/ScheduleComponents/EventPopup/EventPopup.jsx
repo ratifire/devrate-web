@@ -9,6 +9,7 @@ import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
 import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { lvlMastery } from '@utils/constants/masteryLvl';
+import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
@@ -43,11 +44,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
         left: popup.x,
       })}
     >
-      {popupPosition === 'TOPLEFT' && <Box sx={styles.popupTriangularTopLeft} />}
-      {popupPosition === 'BOTTOMLEFT' && <Box sx={styles.popupTriangularBottomLeft} />}
-      {popupPosition === 'TOPRIGHT' && <Box sx={styles.popupTriangularTopRight} />}
-      {popupPosition === 'BOTTOMRIGHT' && <Box sx={styles.popupTriangularBottomRight} />}
-
+      <Box sx={styles.popupTriangular[PopupPosition[popupPosition]]} />
       {event.type === 'INTERVIEW' && (
         <Box sx={styles.infoContainer}>
           <Box>
