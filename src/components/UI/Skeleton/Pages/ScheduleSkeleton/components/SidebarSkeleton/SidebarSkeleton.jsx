@@ -1,11 +1,12 @@
-import { Box, Skeleton } from '@mui/material';
+import { SidebarEventSkeleton, SidebarCalendarSkeleton } from '@components/UI/Skeleton/Pages/ScheduleSkeleton/index';
+import { Box } from '@mui/material';
 import { styles } from './SidebarSkeleton.styles';
 
 const SidebarSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Skeleton height={30} sx={styles.title} variant='rounded' />
-      <Skeleton height={280} variant='rounded' />
+      <SidebarCalendarSkeleton />
+      <SidebarEventSkeleton />
     </Box>
   );
 };

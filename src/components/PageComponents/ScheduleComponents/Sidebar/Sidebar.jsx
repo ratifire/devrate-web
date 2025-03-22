@@ -3,6 +3,7 @@ import { Settings } from 'luxon';
 import { Box } from '@mui/material';
 import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice.js';
 import { ErrorComponent } from '@components/UI/Exceptions/index.js';
+import { SidebarSkeleton } from '@components/UI/Skeleton/Pages/ScheduleSkeleton/index';
 import SidebarEvent from '../SidebarEvent/SidebarEvent';
 import { styles } from './Sidebar.styles';
 import SmallCalendar from './SmallCalendar';
@@ -14,10 +15,14 @@ Settings.defaultWeekSettings = {
 };
 
 const Sidebar = ({ selectedDate, handleDateChange }) => {
-  const { data: closestEvent, isLoading, isError } = useGetClosestEventByUserIdQuery();
+  const { data: closestEvent, isFetching, isError } = useGetClosestEventByUserIdQuery();
 
-  if (isLoading) {
-    return null;
+  if (isFetching) {
+    return (
+      <Box sx={styles.skeleton}>
+        <SidebarSkeleton />
+      </Box>
+    );
   }
 
   if (isError) {

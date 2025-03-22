@@ -2,10 +2,14 @@ export const styles = {
   sideBarEventContainer: (theme) => ({
     height: '185px', //162px changed to 185px due to adding line of role
     backgroundColor: theme.palette.schedule.sideBarEvent.backgroundColor,
+    boxShadow: 'none',
+    backgroundImage: 'none',
     borderRadius: 2,
     padding: theme.spacing(3),
     paddingRight: theme.spacing(3),
     marginBottom: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
   }),
   title: (theme) => ({
     color: theme.palette.schedule.sideBarEvent.titleColor,

@@ -21,7 +21,7 @@ export const scheduleDark = {
       iconColor: '#E0CCFF',
     },
     sideBarEvent: {
-      backgroundColor: '#3E3E40',
+      backgroundColor: '#444446',
       titleColor: '#FFFFFF',
       dateAndTimeColor: '#EFE6FD',
       participant: '#ECECED',
