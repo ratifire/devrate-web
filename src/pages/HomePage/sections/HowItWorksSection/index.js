@@ -1,3 +1,3 @@
-import howItWorksSection from './HowItWorksSection';
+import HowItWorksSection from './HowItWorksSection';
 
-export default howItWorksSection;
+export default HowItWorksSection;

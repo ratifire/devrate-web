@@ -1,10 +1,13 @@
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import logo from '../../assets/logo.svg';
 import linkdin from '../../assets/linkdin.svg';
 import mail from '../../assets/mail.svg';
 import styles from './Header.module.scss';
 
 const Header = () => {
+  const { t } = useTranslation();
+
   return (
     <header className={styles.header__bg} id='home'>
       <div className='container'>
@@ -16,16 +19,16 @@ const Header = () => {
           <nav className={styles.header__nav}>
             <ul className={styles.header__nav__links}>
               <li>
-                <a href='#howItWorks'>How It Works</a>
+                <a href='#howItWorks'> {t('home.header.howItWorks')}</a>
               </li>
               <li>
-                <a href='#about'>About us</a>
+                <a href='#about'>{t('home.header.aboutUs')}</a>
               </li>
               <li>
-                <a href='#faq'>FAQ</a>
+                <a href='#faq'>{t('home.header.faq')}</a>
               </li>
               <li>
-                <a href='#contacts'>Contacts</a>
+                <a href='#contacts'>{t('home.header.contacts')}</a>
               </li>
             </ul>
           </nav>
