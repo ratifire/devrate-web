@@ -2,7 +2,6 @@ import { Box, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router';
 import cancelEventIcon from '@assets/icons/cancel-event.svg';
 import links from '@router/links';
@@ -15,7 +14,6 @@ import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpdated }) => {
   const { t } = useTranslation();
-  const theme = useTheme();
   const { data, isFetching } = useGetEventByIdQuery({ id: event.id }, { skip: !event.id });
 
   const { showCancelButton, disableLink } = useCheckTimeDifference(event.startTime);
@@ -39,14 +37,11 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition, setEventUpd
   return (
     <Box
       id='popup'
-      sx={{
-        ...styles.popup,
+      sx={(theme) => ({
+        ...styles.popup(theme),
         top: popup.y,
         left: popup.x,
-        backgroundColor: theme.palette.mode === 'dark' ? theme.palette.neutral[800] : theme.palette.neutral[50],
-        boxShadow:
-          theme.palette.mode === 'dark' ? 'box-shadow: 2px 4px 6px 0px #00000000' : '2px 4px 6px 0px #00000040',
-      }}
+      })}
     >
       {popupPosition === 'TOPLEFT' && <Box sx={styles.popupTriangularTopLeft} />}
       {popupPosition === 'BOTTOMLEFT' && <Box sx={styles.popupTriangularBottomLeft} />}

@@ -1,5 +1,5 @@
 export const styles = {
-  popup: {
+  popup: (theme) => ({
     width: '413px',
     height: '200px',
     padding: '18px',
@@ -8,9 +8,10 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    backgroundColor: '#252527',
+    backgroundColor: theme.palette.schedule.popup.backgroundColor,
+    boxShadow: theme.palette.schedule.popup.boxShadow,
     zIndex: 1000,
-  },
+  }),
   popupTriangularBottomLeft: (theme) => ({
     position: 'absolute',
     bottom: '0px',

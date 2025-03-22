@@ -19,6 +19,7 @@ export const scheduleLight = {
       userInfoBorderColor: '#C5C5C6',
       titleColor: '#1D1D1D',
       iconColor: '#5900D9',
+      boxShadow: '2px 4px 6px 0px #00000040',
     },
     sideBarEvent: {
       backgroundColor: '#ECECED',

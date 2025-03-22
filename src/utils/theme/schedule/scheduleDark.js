@@ -19,6 +19,7 @@ export const scheduleDark = {
       userInfoBorderColor: '#A9A9AA',
       titleColor: '#A9A9AA',
       iconColor: '#E0CCFF',
+      boxShadow: '2px 4px 6px 0px #00000000',
     },
     sideBarEvent: {
       backgroundColor: '#444446',
