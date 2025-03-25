@@ -31,8 +31,12 @@ const scheduleSlice = createSlice({
     setSelectedDate: (state, { payload }) => {
       state.selectedDate = payload;
     },
+    setDate: (state, { payload }) => {
+      state.from = payload.from;
+      state.to = payload.to;
+    },
   },
 });
 
 export default scheduleSlice.reducer;
-export const { setOpenPopup, setClosePopup, setSelectedDate } = scheduleSlice.actions;
+export const { setOpenPopup, setClosePopup, setSelectedDate, setDate } = scheduleSlice.actions;

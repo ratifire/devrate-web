@@ -15,20 +15,18 @@ import {
   getWeekStartAndEnd,
 } from '@components/PageComponents/ScheduleComponents/helpers';
 import { useDispatch, useSelector } from 'react-redux';
-import { setClosePopup, setOpenPopup, setSelectedDate } from '@redux/slices/schedule/scheduleSlice.js';
+import { setClosePopup, setDate, setOpenPopup, setSelectedDate } from '@redux/slices/schedule/scheduleSlice.js';
 import EventPopup from './EventPopup';
 import { styles } from './Schedule.styles';
 import Sidebar from './Sidebar';
 
 const Schedule = () => {
-  const { popup, selectedDate } = useSelector((state) => state.schedule);
+  const { popup, selectedDate, from, to } = useSelector((state) => state.schedule);
   const dispatch = useDispatch();
   const theme = useTheme();
   const calendarRef = useRef(null);
   const [event, setEvent] = useState([]);
   const [popupPosition, setPopupPosition] = useState(PopupPosition.TOP_RIGHT);
-  const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
-  const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
   const [events, setEvents] = useState([]);
 
   const { data: eventsForSelectedWeek, isFetching: isFetchingGetEvent } = useGetEventByUserIdQuery({ from, to });
@@ -78,8 +76,7 @@ const Schedule = () => {
     const year = chosenDay.year;
 
     const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
-    setFrom(startOfWeek);
-    setTo(endOfWeek);
+    dispatch(setDate({ from: startOfWeek, to: endOfWeek }));
   };
 
   const handleEventClick = (info) => {
