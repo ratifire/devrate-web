@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { DateTime } from 'luxon';
 
 const initialState = {
   popup: {
@@ -7,6 +8,9 @@ const initialState = {
     x: 100,
     y: 100,
   },
+  from: DateTime.local().startOf('week').toFormat('yyyy-MM-dd'),
+  to: DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'),
+  selectedDate: DateTime.local().toISO(),
 };
 
 const scheduleSlice = createSlice({
@@ -24,8 +28,11 @@ const scheduleSlice = createSlice({
     setClosePopup: (state) => {
       state.popup = initialState.popup;
     },
+    setSelectedDate: (state, { payload }) => {
+      state.selectedDate = payload;
+    },
   },
 });
 
 export default scheduleSlice.reducer;
-export const { setOpenPopup, setClosePopup } = scheduleSlice.actions;
+export const { setOpenPopup, setClosePopup, setSelectedDate } = scheduleSlice.actions;

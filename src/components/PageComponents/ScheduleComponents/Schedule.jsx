@@ -6,7 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { Box } from '@mui/material';
 import { DateTime } from 'luxon';
 import { useTheme } from '@mui/material/styles';
-import { useGetEventByUserIdQuery, useLazyGetEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
+import { useGetEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { ScheduleSkeleton } from '@components/UI/Skeleton';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
 import {
@@ -15,27 +15,29 @@ import {
   getWeekStartAndEnd,
 } from '@components/PageComponents/ScheduleComponents/helpers';
 import { useDispatch, useSelector } from 'react-redux';
-import { setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice.js';
+import { setClosePopup, setOpenPopup, setSelectedDate } from '@redux/slices/schedule/scheduleSlice.js';
 import EventPopup from './EventPopup';
 import { styles } from './Schedule.styles';
 import Sidebar from './Sidebar';
 
 const Schedule = () => {
-  const { popup } = useSelector((state) => state.schedule);
+  const { popup, selectedDate } = useSelector((state) => state.schedule);
   const dispatch = useDispatch();
   const theme = useTheme();
   const calendarRef = useRef(null);
-  const [selectedDate, setSelectedDate] = useState(DateTime.local());
-  const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
   const [event, setEvent] = useState([]);
   const [popupPosition, setPopupPosition] = useState(PopupPosition.TOP_RIGHT);
   const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
   const [events, setEvents] = useState([]);
-  const [eventStartTime, setEventStartTime] = useState(DateTime.now().toFormat('HH:mm:ss'));
 
   const { data: eventsForSelectedWeek, isFetching: isFetchingGetEvent } = useGetEventByUserIdQuery({ from, to });
-  const [triggerEvents] = useLazyGetEventByUserIdQuery();
+
+  const restoreSelectedDate = DateTime.fromISO(selectedDate);
+
+  const startTime = eventsForSelectedWeek
+    ? findEventTimeForChosenDay(restoreSelectedDate, eventsForSelectedWeek)
+    : DateTime.now().toFormat('HH:mm:ss');
 
   useEffect(() => {
     const waitForCalendarRef = () => {
@@ -43,14 +45,14 @@ const Schedule = () => {
         const calendarApi = calendarRef.current.getApi();
         applyRequiredStyles(calendarApi, theme);
         calendarApi.gotoDate(from);
-        calendarApi.scrollToTime(eventStartTime);
+        calendarApi.scrollToTime(startTime);
       } else {
         requestAnimationFrame(waitForCalendarRef);
       }
     };
 
     waitForCalendarRef();
-  }, [selectedWeek, eventStartTime, from, theme]);
+  }, [from, theme, startTime]);
 
   useEffect(() => {
     setEvents(transformEvents(eventsForSelectedWeek || []));
@@ -69,9 +71,8 @@ const Schedule = () => {
 
   const handleDateChange = async (newDate) => {
     dispatch(setClosePopup());
-    setSelectedDate(newDate);
+    dispatch(setSelectedDate(newDate.toISO()));
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
-    setSelectedWeek(weekNumber);
 
     const chosenDay = DateTime.fromISO(newDate);
     const year = chosenDay.year;
@@ -79,10 +80,6 @@ const Schedule = () => {
     const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
     setFrom(startOfWeek);
     setTo(endOfWeek);
-
-    const { data: resp } = await triggerEvents({ from: startOfWeek, to: endOfWeek });
-    const startTime = findEventTimeForChosenDay(newDate, resp);
-    setEventStartTime(startTime);
   };
 
   const handleEventClick = (info) => {
@@ -148,7 +145,7 @@ const Schedule = () => {
 
   return (
     <Box sx={styles.demoApp}>
-      <Sidebar handleDateChange={handleDateChange} selectedDate={selectedDate} />
+      <Sidebar handleDateChange={handleDateChange} selectedDate={restoreSelectedDate} />
       <Box sx={styles.demoAppMain}>
         {
           <FullCalendar

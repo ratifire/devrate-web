@@ -38,7 +38,6 @@ export const ScheduleApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetEventByUserIdQuery,
-  useLazyGetEventByUserIdQuery,
   useGetClosestEventByUserIdQuery,
   useDeleteEventByIdMutation,
   useGetEventByIdQuery,

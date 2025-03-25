@@ -16,6 +16,24 @@ Settings.defaultWeekSettings = {
 const SmallCalendar = ({ selectedDate, handleDateChange }) => {
   const [hoveredDay, setHoveredDay] = useState(null);
 
+  // const handleDateChange = async (newDate) => {
+  //   dispatch(setClosePopup());
+  //   setSelectedDate(newDate);
+  //   const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
+  //   setSelectedWeek(weekNumber);
+  //
+  //   const chosenDay = DateTime.fromISO(newDate);
+  //   const year = chosenDay.year;
+  //
+  //   const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
+  //   setFrom(startOfWeek);
+  //   setTo(endOfWeek);
+  //
+  //   const { data: resp } = await triggerEvents({ from: startOfWeek, to: endOfWeek });
+  //   const startTime = findEventTimeForChosenDay(newDate, resp);
+  //   setEventStartTime(startTime);
+  // };
+
   return (
     <LocalizationProvider dateAdapter={AdapterLuxon}>
       <DateCalendar
