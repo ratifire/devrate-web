@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice.js';
 import { ErrorComponent } from '@components/UI/Exceptions/index.js';
@@ -7,7 +6,7 @@ import SidebarEvent from '../SidebarEvent/SidebarEvent';
 import { styles } from './Sidebar.styles';
 import SmallCalendar from './SmallCalendar';
 
-const Sidebar = ({ selectedDate, handleDateChange }) => {
+const Sidebar = () => {
   const { data: closestEvent, isFetching, isError } = useGetClosestEventByUserIdQuery();
 
   if (isFetching) {
@@ -25,7 +24,7 @@ const Sidebar = ({ selectedDate, handleDateChange }) => {
   return (
     <Box sx={styles.container}>
       <Box>
-        <SmallCalendar handleDateChange={handleDateChange} selectedDate={selectedDate} />
+        <SmallCalendar />
       </Box>
       <Box sx={styles.scrollContainer}>
         <Box sx={styles.sidebarSection}>
@@ -34,11 +33,6 @@ const Sidebar = ({ selectedDate, handleDateChange }) => {
       </Box>
     </Box>
   );
-};
-
-Sidebar.propTypes = {
-  selectedDate: PropTypes.object,
-  handleDateChange: PropTypes.func,
 };
 
 export default Sidebar;

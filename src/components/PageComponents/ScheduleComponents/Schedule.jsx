@@ -12,10 +12,9 @@ import { PopupPosition } from '@components/PageComponents/ScheduleComponents/con
 import {
   findEventTimeForChosenDay,
   getOffsetTopWithScroll,
-  getWeekStartAndEnd,
 } from '@components/PageComponents/ScheduleComponents/helpers';
 import { useDispatch, useSelector } from 'react-redux';
-import { setClosePopup, setDate, setOpenPopup, setSelectedDate } from '@redux/slices/schedule/scheduleSlice.js';
+import { setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice.js';
 import EventPopup from './EventPopup';
 import { styles } from './Schedule.styles';
 import Sidebar from './Sidebar';
@@ -66,18 +65,6 @@ const Schedule = () => {
 
     waitForCalendarRef();
   }, [eventsForSelectedWeek, isFetchingGetEvent, theme]);
-
-  const handleDateChange = async (newDate) => {
-    dispatch(setClosePopup());
-    dispatch(setSelectedDate(newDate.toISO()));
-    const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
-
-    const chosenDay = DateTime.fromISO(newDate);
-    const year = chosenDay.year;
-
-    const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
-    dispatch(setDate({ from: startOfWeek, to: endOfWeek }));
-  };
 
   const handleEventClick = (info) => {
     if (info) {
@@ -142,7 +129,7 @@ const Schedule = () => {
 
   return (
     <Box sx={styles.demoApp}>
-      <Sidebar handleDateChange={handleDateChange} selectedDate={restoreSelectedDate} />
+      <Sidebar />
       <Box sx={styles.demoAppMain}>
         {
           <FullCalendar

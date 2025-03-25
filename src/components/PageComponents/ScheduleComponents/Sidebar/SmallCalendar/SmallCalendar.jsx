@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { DateCalendar } from '@mui/x-date-pickers';
-import PropTypes from 'prop-types';
-import { Settings } from 'luxon';
+import { DateTime, Settings } from 'luxon';
+import { setClosePopup, setDate, setSelectedDate } from '@redux/slices/schedule/scheduleSlice.js';
+import { getWeekStartAndEnd } from '@components/PageComponents/ScheduleComponents/helpers/index.js';
+import { useDispatch, useSelector } from 'react-redux';
 import DayPicker from './DayPicker';
 import { styles } from './SmallCalendar.styles';
 
@@ -13,34 +15,33 @@ Settings.defaultWeekSettings = {
   weekend: [6, 7], // Set weekend days
 };
 
-const SmallCalendar = ({ selectedDate, handleDateChange }) => {
+const SmallCalendar = () => {
   const [hoveredDay, setHoveredDay] = useState(null);
+  const { selectedDate } = useSelector((state) => state.schedule);
+  const dispatch = useDispatch();
 
-  // const handleDateChange = async (newDate) => {
-  //   dispatch(setClosePopup());
-  //   setSelectedDate(newDate);
-  //   const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
-  //   setSelectedWeek(weekNumber);
-  //
-  //   const chosenDay = DateTime.fromISO(newDate);
-  //   const year = chosenDay.year;
-  //
-  //   const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
-  //   setFrom(startOfWeek);
-  //   setTo(endOfWeek);
-  //
-  //   const { data: resp } = await triggerEvents({ from: startOfWeek, to: endOfWeek });
-  //   const startTime = findEventTimeForChosenDay(newDate, resp);
-  //   setEventStartTime(startTime);
-  // };
+  const restoreSelectedDate = useMemo(() => DateTime.fromISO(selectedDate), [selectedDate]);
+
+  const handleDateChange = (newDate) => {
+    dispatch(setClosePopup());
+    dispatch(setSelectedDate(newDate.toISO()));
+    const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
+
+    const chosenDay = DateTime.fromISO(newDate);
+    const year = chosenDay.year;
+
+    const { startOfWeek, endOfWeek } = getWeekStartAndEnd(year, weekNumber);
+    dispatch(setDate({ from: startOfWeek, to: endOfWeek }));
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterLuxon}>
       <DateCalendar
         showDaysOutsideCurrentMonth
+        defaultValue={restoreSelectedDate}
         slotProps={{
           day: (ownerState) => ({
-            selectedDay: selectedDate,
+            selectedDay: restoreSelectedDate,
             hoveredDay,
             onPointerEnter: () => setHoveredDay(ownerState.day),
             onPointerLeave: () => setHoveredDay(null),
@@ -48,16 +49,12 @@ const SmallCalendar = ({ selectedDate, handleDateChange }) => {
         }}
         slots={{ day: DayPicker }}
         sx={styles.switcher}
-        value={selectedDate}
+        value={restoreSelectedDate}
+        // value={restoreSelectedDate}
         onChange={handleDateChange}
       />
     </LocalizationProvider>
   );
-};
-
-SmallCalendar.propTypes = {
-  selectedDate: PropTypes.object,
-  handleDateChange: PropTypes.func,
 };
 
 export default SmallCalendar;
