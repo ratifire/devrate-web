@@ -68,7 +68,7 @@ const Schedule = () => {
   }, [eventsForSelectedWeek, isFetchingGetEvent, theme]);
 
   const handleDateChange = async (newDate) => {
-    handleClosePopup();
+    dispatch(setClosePopup());
     setSelectedDate(newDate);
     const weekNumber = DateTime.fromJSDate(newDate.toJSDate()).weekNumber;
     setSelectedWeek(weekNumber);
