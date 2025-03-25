@@ -14,12 +14,11 @@ import {
   getOffsetTopWithScroll,
 } from '@components/PageComponents/ScheduleComponents/helpers';
 import { useDispatch, useSelector } from 'react-redux';
-import { setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice.js';
-import EventPopup from './Calendar/EventPopup';
-import { styles } from './Schedule.styles';
-import Sidebar from './Sidebar';
+import { setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice';
+import EventPopup from '@components/PageComponents/ScheduleComponents/Calendar/EventPopup';
+import { styles } from './Calendar.styles';
 
-const Schedule = () => {
+const Calendar = () => {
   const { popup, selectedDate, from, to } = useSelector((state) => state.schedule);
   const dispatch = useDispatch();
   const theme = useTheme();
@@ -128,44 +127,39 @@ const Schedule = () => {
   }
 
   return (
-    <Box sx={styles.demoApp}>
-      <Sidebar />
-      <Box sx={styles.demoAppMain}>
-        {
-          <FullCalendar
-            ref={calendarRef}
-            dayMaxEvents
-            expandRows
-            selectMirror
-            weekends
-            allDaySlot={false}
-            dayHeaderFormat={{
-              weekday: 'short',
-            }}
-            displayEventTime={false}
-            editable={false}
-            eventClick={handleEventClick}
-            events={events}
-            firstDay={1}
-            headerToolbar={false}
-            initialView='timeGridWeek'
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            selectable={false}
-            slotDuration='01:00:00'
-            slotLabelFormat={[
-              {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false,
-              },
-            ]}
-            slotLabelInterval={{ hours: 1 }}
-          />
-        }
-        {popup.visible && event && (
-          <EventPopup event={event} handleClosePopup={handleClosePopup} popup={popup} popupPosition={popupPosition} />
-        )}
-      </Box>
+    <Box sx={styles.demoAppMain}>
+      <FullCalendar
+        ref={calendarRef}
+        dayMaxEvents
+        expandRows
+        selectMirror
+        weekends
+        allDaySlot={false}
+        dayHeaderFormat={{
+          weekday: 'short',
+        }}
+        displayEventTime={false}
+        editable={false}
+        eventClick={handleEventClick}
+        events={events}
+        firstDay={1}
+        headerToolbar={false}
+        initialView='timeGridWeek'
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        selectable={false}
+        slotDuration='01:00:00'
+        slotLabelFormat={[
+          {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+          },
+        ]}
+        slotLabelInterval={{ hours: 1 }}
+      />
+      {popup.visible && event && (
+        <EventPopup event={event} handleClosePopup={handleClosePopup} popup={popup} popupPosition={popupPosition} />
+      )}
     </Box>
   );
 };
@@ -215,4 +209,4 @@ const applyRequiredStyles = (calendarApi, theme) => {
   }
 };
 
-export default Schedule;
+export default Calendar;

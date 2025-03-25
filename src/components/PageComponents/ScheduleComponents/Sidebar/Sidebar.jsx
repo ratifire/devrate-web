@@ -2,9 +2,9 @@ import { Box } from '@mui/material';
 import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice.js';
 import { ErrorComponent } from '@components/UI/Exceptions/index.js';
 import { SidebarSkeleton } from '@components/UI/Skeleton/Pages/ScheduleSkeleton/index';
-import SidebarEvent from '../SidebarEvent/SidebarEvent';
+import SidebarEvent from '@components/PageComponents/ScheduleComponents/ClosestEvents/SidebarEvent/SidebarEvent';
+import SmallCalendar from '../SmallCalendar';
 import { styles } from './Sidebar.styles';
-import SmallCalendar from './SmallCalendar';
 
 const Sidebar = () => {
   const { data: closestEvent, isFetching, isError } = useGetClosestEventByUserIdQuery();

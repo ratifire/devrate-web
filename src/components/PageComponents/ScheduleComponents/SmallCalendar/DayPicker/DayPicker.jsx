@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import { DateTime } from 'luxon';
-import { DARK_THEME } from '@utils/constants/Theme/theme';
+import { DARK_THEME } from '@utils/constants/Theme/theme.js';
 
 const CustomPickersDay = styled(PickersDay, {
   shouldForwardProp: (prop) => prop !== 'isSelected' && prop !== 'isHovered',

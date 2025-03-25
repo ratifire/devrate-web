@@ -5,9 +5,9 @@ import { useMemo } from 'react';
 import { Box, Button, IconButton, Paper, Typography, Link } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
-import useDeleteEvent from '@utils/hooks/useDeleteEvent';
+import useDeleteEvent from '@utils/hooks/useDeleteEvent.js';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference.js';
-import { styles } from './SidebarEvent.styles';
+import { styles } from './SidebarEvent.styles.js';
 
 const SidebarEvent = ({ event }) => {
   const { hostName, hostSurname, roomUrl, id, startTime, type, title, hostId } = event;

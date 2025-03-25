@@ -6,8 +6,8 @@ import { DateTime, Settings } from 'luxon';
 import { setClosePopup, setDate, setSelectedDate } from '@redux/slices/schedule/scheduleSlice.js';
 import { getWeekStartAndEnd } from '@components/PageComponents/ScheduleComponents/helpers/index.js';
 import { useDispatch, useSelector } from 'react-redux';
-import DayPicker from './DayPicker';
-import { styles } from './SmallCalendar.styles';
+import DayPicker from './DayPicker/index.js';
+import { styles } from './SmallCalendar.styles.js';
 
 Settings.defaultWeekSettings = {
   firstDay: 1, // Set the first day of the week
