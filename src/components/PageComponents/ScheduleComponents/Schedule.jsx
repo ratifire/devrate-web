@@ -14,17 +14,20 @@ import {
   getOffsetTopWithScroll,
   getWeekStartAndEnd,
 } from '@components/PageComponents/ScheduleComponents/helpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice.js';
 import EventPopup from './EventPopup';
 import { styles } from './Schedule.styles';
 import Sidebar from './Sidebar';
 
 const Schedule = () => {
+  const { popup } = useSelector((state) => state.schedule);
+  const dispatch = useDispatch();
   const theme = useTheme();
   const calendarRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(DateTime.local());
   const [selectedWeek, setSelectedWeek] = useState(DateTime.local().weekNumber);
   const [event, setEvent] = useState([]);
-  const [popup, setPopup] = useState({ visible: false, event: null, x: 100, y: 100 });
   const [popupPosition, setPopupPosition] = useState(PopupPosition.TOP_RIGHT);
   const [from, setFrom] = useState(DateTime.local().startOf('week').toFormat('yyyy-MM-dd'));
   const [to, setTo] = useState(DateTime.local().startOf('week').plus({ days: 6 }).toFormat('yyyy-MM-dd'));
@@ -118,29 +121,12 @@ const Schedule = () => {
         setPopupPosition(PopupPosition.BOTTOM_LEFT);
       }
 
-      const eventDetails = {
-        title: info.event.title,
-        start: info.event.start, // Event start date and time
-        end: info.event.end, // Event end date and time
-        extendedProps: info.event.extendedProps, // Custom event properties, if any
-      };
-
-      setPopup({
-        visible: true,
-        event: eventDetails,
-        x: xoffset,
-        y: yoffset,
-      });
+      dispatch(setOpenPopup({ title: info.event.title, x: xoffset, y: yoffset }));
     }
   };
 
   const handleClosePopup = () => {
-    setPopup({
-      visible: false,
-      event: null,
-      x: 0,
-      y: 0,
-    });
+    dispatch(setClosePopup());
     const calendarApi = calendarRef.current.getApi();
     const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
     scroller.style.overflow = 'auto';
