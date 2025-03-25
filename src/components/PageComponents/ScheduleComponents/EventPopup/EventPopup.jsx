@@ -112,9 +112,3 @@ EventPopup.propTypes = {
   popup: PropTypes.object.isRequired,
   popupPosition: PropTypes.string,
 };
-EventPopup.defaultProps = {
-  handleClosePopup: () => {},
-  event: {},
-  popup: {},
-  popupPosition: 'TOPRIGHT',
-};
