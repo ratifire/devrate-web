@@ -1,7 +1,7 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './FullCalendarSkeleton.styles';
+import { styles } from './CalendarSkeleton.styles.js';
 
-const FullCalendarSkeleton = () => {
+const CalendarSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
       <Skeleton sx={styles.calendar} variant='rectangular' />
@@ -9,4 +9,4 @@ const FullCalendarSkeleton = () => {
   );
 };
 
-export default FullCalendarSkeleton;
+export default CalendarSkeleton;

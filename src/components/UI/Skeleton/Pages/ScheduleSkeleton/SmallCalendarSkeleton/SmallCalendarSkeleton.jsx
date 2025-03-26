@@ -1,7 +1,7 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './SidebarCalendarSkeleton.styles';
+import { styles } from './SmallCalendarSkeleton.styles.js';
 
-const SidebarCalendarSkeleton = () => {
+const SmallCalendarSkeleton = () => {
   return (
     <Box>
       <Skeleton height={30} sx={styles.title} variant='rounded' />
@@ -10,4 +10,4 @@ const SidebarCalendarSkeleton = () => {
   );
 };
 
-export default SidebarCalendarSkeleton;
+export default SmallCalendarSkeleton;

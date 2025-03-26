@@ -1,6 +1,7 @@
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { lazy, Suspense, memo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { CalendarSkeleton, ClosestEventSkeleton, SmallCalendarSkeleton } from '@components/UI/Skeleton/index.js';
 import { styles } from './SchedulePage.styles';
 
 const SmallCalendar = lazy(() =>
@@ -29,14 +30,14 @@ const SchedulePage = () => {
           </Typography>
           <Paper sx={styles.calendarWrapper}>
             <Box sx={styles.sidebar}>
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<SmallCalendarSkeleton />}>
                 <MemoizedSmallCalendar />
               </Suspense>
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<ClosestEventSkeleton />}>
                 <MemoizedClosestEvents />
               </Suspense>
             </Box>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<CalendarSkeleton />}>
               <MemoizedCalendar />
             </Suspense>
           </Paper>

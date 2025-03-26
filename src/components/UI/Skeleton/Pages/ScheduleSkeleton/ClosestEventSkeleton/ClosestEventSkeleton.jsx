@@ -1,7 +1,7 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './SidebarEventSkeleton.styles';
+import { styles } from './ClosestEventSkeleton.styles.js';
 
-const SidebarEventSkeleton = () => {
+const ClosestEventSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.box}>
@@ -18,4 +18,4 @@ const SidebarEventSkeleton = () => {
   );
 };
 
-export default SidebarEventSkeleton;
+export default ClosestEventSkeleton;

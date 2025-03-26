@@ -7,7 +7,6 @@ import { Box } from '@mui/material';
 import { DateTime } from 'luxon';
 import { useTheme } from '@mui/material/styles';
 import { useGetEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
-import { ScheduleSkeleton } from '@components/UI/Skeleton';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
 import {
   findEventTimeForChosenDay,
@@ -16,6 +15,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice';
 import EventPopup from '@components/PageComponents/ScheduleComponents/Calendar/EventPopup';
+import { CalendarSkeleton } from '@components/UI/Skeleton/index.js';
 import { styles } from './Calendar.styles';
 
 const Calendar = () => {
@@ -123,7 +123,7 @@ const Calendar = () => {
   };
 
   if (isFetchingGetEvent) {
-    return <ScheduleSkeleton />;
+    return <CalendarSkeleton />;
   }
 
   return (
