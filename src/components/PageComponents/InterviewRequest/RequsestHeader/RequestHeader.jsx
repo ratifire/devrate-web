@@ -83,7 +83,7 @@ const RequestHeader = ({
     <Box sx={styles.container}>
       <Box sx={styles.header}>
         <Typography sx={styles.title}>
-          {title} as a{' '}
+          {title} {t('interviewRequest.requestHeader.titleLauncher')}{' '}
           <Box
             component='span'
             sx={{

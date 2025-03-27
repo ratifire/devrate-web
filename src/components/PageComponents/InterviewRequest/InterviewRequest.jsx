@@ -59,11 +59,11 @@ const InterviewRequest = () => {
   return (
     <Box>
       <Box sx={styles.header}>
-        <Typography variant='h4'>Requests</Typography>
+        <Typography variant='h4'>{t('interviewRequest.title')}</Typography>
         {isLoading ? (
-          <Typography>Loading specializations...</Typography>
+          <Typography>{t('interviewRequest.loading')}</Typography>
         ) : isError || !specializations?.length ? (
-          <Typography>No specializations available</Typography>
+          <Typography>{t('interviewRequest.noSpecializationsAvailable')}</Typography>
         ) : (
           <FormControl>
             <InputLabel shrink sx={styles.label}>

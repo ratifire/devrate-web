@@ -1,9 +1,11 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { styles } from './styles.js';
 
 const RenderTimeSlots = ({ weekDates, tab, timeButtons }) => {
+  const { t } = useTranslation();
   const generateTimeButtons = (day) => {
     return timeButtons(day);
   };
@@ -16,7 +18,7 @@ const RenderTimeSlots = ({ weekDates, tab, timeButtons }) => {
     return (
       <React.Fragment key={`tab-panel-${day.toISO()}`}>
         <Box sx={styles.texts}>
-          <Typography variant='subtitle2'>Choose a comfortable time</Typography>
+          <Typography variant='subtitle2'>{t('interviews.scheduleInterviewModal.chooseTimeslot')}</Typography>
           <Typography variant='body'>{`${city} (UTC ${utcOffset})`}</Typography>
         </Box>
         <Box sx={styles.timeGrid}>{generateTimeButtons(day)}</Box>
