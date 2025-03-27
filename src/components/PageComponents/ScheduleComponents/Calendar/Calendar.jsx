@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice';
 import EventPopup from '@components/PageComponents/ScheduleComponents/Calendar/EventPopup';
 import { CalendarSkeleton } from '@components/UI/Skeleton/index.js';
+import { ErrorComponent } from '@components/UI/Exceptions/index.js';
 import { styles } from './Calendar.styles';
 
 const Calendar = () => {
@@ -27,28 +28,17 @@ const Calendar = () => {
   const [popupPosition, setPopupPosition] = useState(PopupPosition.TOP_RIGHT);
   const [events, setEvents] = useState([]);
 
-  const { data: eventsForSelectedWeek, isFetching: isFetchingGetEvent } = useGetEventByUserIdQuery({ from, to });
+  const {
+    data: eventsForSelectedWeek,
+    isFetching: isFetchingGetEvent,
+    isError: isErrorGetEvent,
+  } = useGetEventByUserIdQuery({ from, to });
 
   const restoreSelectedDate = DateTime.fromISO(selectedDate);
 
   const startTime = eventsForSelectedWeek
     ? findEventTimeForChosenDay(restoreSelectedDate, eventsForSelectedWeek)
     : DateTime.now().toFormat('HH:mm:ss');
-
-  useEffect(() => {
-    const waitForCalendarRef = () => {
-      if (calendarRef.current) {
-        const calendarApi = calendarRef.current.getApi();
-        applyRequiredStyles(calendarApi, theme);
-        calendarApi.gotoDate(from);
-        calendarApi.scrollToTime(startTime);
-      } else {
-        requestAnimationFrame(waitForCalendarRef);
-      }
-    };
-
-    waitForCalendarRef();
-  }, [from, theme, startTime]);
 
   useEffect(() => {
     setEvents(transformEvents(eventsForSelectedWeek || []));
@@ -119,8 +109,19 @@ const Calendar = () => {
     }));
   };
 
+  if (isErrorGetEvent) {
+    return <ErrorComponent />;
+  }
+
   if (isFetchingGetEvent) {
     return <CalendarSkeleton />;
+  }
+
+  if (calendarRef.current) {
+    const calendarApi = calendarRef.current.getApi();
+    applyRequiredStyles(calendarApi, theme);
+    calendarApi.gotoDate(from);
+    calendarApi.scrollToTime(startTime);
   }
 
   if (calendarRef.current && !popup.visible) {
