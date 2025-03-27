@@ -1,6 +1,6 @@
 import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { Box } from '@mui/material';
-import SidebarEvent from '@components/PageComponents/ScheduleComponents/ClosestEvents/SidebarEvent';
+import Event from 'components/PageComponents/ScheduleComponents/ClosestEvents/Event';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { ClosestEventSkeleton } from '@components/UI/Skeleton';
 import { styles } from './ClosestEvents.styles';
@@ -23,7 +23,7 @@ const ClosestEvents = () => {
   return (
     <Box sx={styles.scrollContainer}>
       <Box sx={styles.sidebarSection}>
-        {closestEvent && closestEvent.map((event) => <SidebarEvent key={event.id} event={event} />)}
+        {closestEvent && closestEvent.map((event) => <Event key={event.id} event={event} />)}
       </Box>
     </Box>
   );

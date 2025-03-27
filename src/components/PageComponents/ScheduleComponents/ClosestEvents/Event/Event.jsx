@@ -7,9 +7,9 @@ import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
-import { styles } from './SidebarEvent.styles';
+import { styles } from './Event.styles';
 
-const SidebarEvent = ({ event }) => {
+const Event = ({ event }) => {
   const { hostName, hostSurname, roomUrl, id, startTime, type, title, hostId } = event;
   const { t } = useTranslation();
   const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric', separator: '/', localeMatcher: 'lookup' };
@@ -64,7 +64,7 @@ const SidebarEvent = ({ event }) => {
   );
 };
 
-SidebarEvent.propTypes = {
+Event.propTypes = {
   event: PropTypes.shape({
     hostName: PropTypes.string.isRequired,
     hostSurname: PropTypes.string.isRequired,
@@ -77,4 +77,4 @@ SidebarEvent.propTypes = {
   }).isRequired,
 };
 
-export default SidebarEvent;
+export default Event;
