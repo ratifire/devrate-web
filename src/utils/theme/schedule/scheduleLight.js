@@ -12,6 +12,13 @@ export const scheduleLight = {
       arrowSwitcherColor: '#000000',
       arrowSwitcherBackgroundColor: '#CEB0FA',
     },
+    dayPicker: {
+      selectDay: '#6200EE',
+      text: '#1D1D1D',
+      selectedText: '#FFFFFF',
+      hovered: '#CEB0FA',
+      selectedWeek: '#CEB0FA',
+    },
     popup: {
       backgroundColor: '#ECECED',
       popupBorderColor: '#ECECED',
