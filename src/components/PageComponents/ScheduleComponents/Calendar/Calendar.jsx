@@ -107,9 +107,6 @@ const Calendar = () => {
 
   const handleClosePopup = () => {
     dispatch(setClosePopup());
-    const calendarApi = calendarRef.current.getApi();
-    const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
-    scroller.style.overflow = 'auto';
   };
 
   const transformEvents = (events) => {
@@ -124,6 +121,12 @@ const Calendar = () => {
 
   if (isFetchingGetEvent) {
     return <CalendarSkeleton />;
+  }
+
+  if (calendarRef.current && !popup.visible) {
+    const calendarApi = calendarRef.current.getApi();
+    const scroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+    scroller.style.overflow = 'auto';
   }
 
   return (
