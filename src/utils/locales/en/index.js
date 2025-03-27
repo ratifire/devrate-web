@@ -285,6 +285,9 @@ export const en = {
         complete: 'Congratulations! Your profile is completely filled out',
         messageBtn: 'Write a message',
         interviewBtn: 'Book an interview',
+        editAvatar: 'Edit avatar',
+        editUserInfo: 'Edit user information',
+        editBtn: 'Edit',
       },
       experience: {
         workExperience: {
