@@ -17,7 +17,7 @@ const MemoizedFooter = memo(Footer);
 
 const HomePage = () => {
   return (
-    <>
+    <div className='homePage'>
       <MemoizedHeader />
       <MemoizedHeroSection />
       <MemoizedHowItWorksSection />
@@ -25,7 +25,7 @@ const HomePage = () => {
       <MemoizedFqaSection />
       <MemoizedFooter />
       <ModalComponent />
-    </>
+    </div>
   );
 };
 

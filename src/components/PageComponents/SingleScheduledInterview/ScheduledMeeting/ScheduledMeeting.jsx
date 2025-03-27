@@ -10,7 +10,7 @@ import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/singleS
 import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import { openModal } from '@redux/slices/modal/modalSlice';
-import zoom from '../../../../assets/icons/InterviewPageIcons/zoom.png';
+import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
@@ -163,7 +163,7 @@ const ScheduledMeeting = () => {
             {t('singleScheduledInterview.scheduledMeeting.platform')}
           </Typography>
           <Typography component='p' sx={styles.platformIcon} variant='body'>
-            <Box component='img' src={zoom} sx={styles.icon} /> Zoom
+            <VideoCameraFrontIcon sx={styles.icon} /> Meeting Service
           </Typography>
         </Box>
       </Box>
