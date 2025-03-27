@@ -1,11 +1,11 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './SmallCalendarSkeleton.styles.js';
+import { styles } from './SmallCalendarSkeleton.styles';
 
 const SmallCalendarSkeleton = () => {
   return (
-    <Box>
-      <Skeleton height={30} sx={styles.title} variant='rounded' />
-      <Skeleton height={280} variant='rounded' />
+    <Box sx={styles.wrapper}>
+      <Skeleton height={40} sx={styles.title} variant='rounded' />
+      <Skeleton height={255} variant='rounded' />
     </Box>
   );
 };
