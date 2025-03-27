@@ -1021,6 +1021,7 @@ export const uk = {
         thisWeek: 'Цей тиждень',
         save: 'Зберегти',
         interviewCount_exceeds_pendingSlots: 'Кількість співбесід не може перевищувати доступні слоти.',
+        chooseTimeslot: 'Оберіть зручний час',
       },
     },
     singleScheduledInterview: {

@@ -1017,6 +1017,7 @@ export const en = {
         thisWeek: 'This week',
         save: 'Save',
         interviewCount_exceeds_pendingSlots: 'The number of interviews cannot exceed the available slots.',
+        chooseTimeslot: 'Choose a comfortable time',
       },
     },
     singleScheduledInterview: {
