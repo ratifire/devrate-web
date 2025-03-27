@@ -9,7 +9,7 @@ const DayPicker = ({ day, selectedDay, hoveredDay, ...other }) => {
 
   const style = isHovered ? styles.hovered : isSelected ? styles.selected : styles.pickers;
 
-  return <PickersDay {...other} disableMargin day={day} selected={false} sx={[styles.pickers, style]} />;
+  return <PickersDay {...other} disableMargin day={day} sx={[styles.pickers, style]} />;
 };
 
 DayPicker.propTypes = {
