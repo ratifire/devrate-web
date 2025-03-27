@@ -171,6 +171,7 @@ const Calendar = () => {
 const applyRequiredStyles = (calendarApi, theme) => {
   if (calendarApi) {
     const fcScroller = calendarApi.el.querySelector('.fc-scroller-liquid-absolute');
+
     if (fcScroller) {
       Object.assign(fcScroller.style, {
         '::-webkit-scrollbar': '10px',
@@ -180,9 +181,11 @@ const applyRequiredStyles = (calendarApi, theme) => {
     }
 
     const fcHeaderScroller = calendarApi.el.querySelector('.fc-scroller');
+
     if (fcHeaderScroller) {
       fcHeaderScroller.style.overflow = 'hidden';
     }
+
     const timeGridSlotElements = calendarApi.el.querySelectorAll('.fc-theme-standard td');
     const timeGridTodayElements = calendarApi.el.querySelectorAll('.fc .fc-timegrid-col.fc-day-today');
     const timeGridHeadElements = calendarApi.el.querySelectorAll(

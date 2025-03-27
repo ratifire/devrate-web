@@ -3,6 +3,6 @@ export const styles = {
     width: '100%',
   },
   calendar: {
-    height: '100vh',
+    minHeight: 'calc(100vh - 246px)',
   },
 };

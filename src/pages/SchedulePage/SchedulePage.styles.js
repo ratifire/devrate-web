@@ -1,6 +1,7 @@
 export const styles = {
   container: (theme) => ({
     paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
     paddingX: theme.spacing(2),
     '@media (min-width: 1272px)': {
       maxWidth: '1536px',
@@ -10,10 +11,6 @@ export const styles = {
     },
   }),
   contentWrapper: (theme) => ({
-    display: 'grid',
-    gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: 'auto auto auto auto',
-    gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
       backgroundColor: theme.palette.schedule.contentWrapper.backgroundColor,
@@ -21,8 +18,6 @@ export const styles = {
     },
   }),
   scheduleWrapper: {
-    gridColumn: '1/13',
-    gridRow: '1/2',
     padding: '24px',
     backgroundImage: 'none',
     boxShadow: 'none',
