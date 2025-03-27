@@ -1057,12 +1057,16 @@ export const en = {
       enterMessages: 'Enter message',
     },
     interviewRequest: {
+      title: 'Requests',
+      loading: 'Loading specializations...',
+      noSpecializationsAvailable: 'No specializations available',
       selectSpecializations: 'Specializations',
       role: {
         candidate: 'Respondent',
         interviewer: 'Interviewer',
       },
       requestHeader: {
+        titleLauncher: 'as a',
         foundInterviews: 'Interview found:',
         totalInterviews: 'Number of interviews:',
         selectedTimeSlots: 'Selected timeslots:',
