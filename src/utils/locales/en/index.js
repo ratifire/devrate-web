@@ -400,11 +400,26 @@ export const en = {
           },
           contact: {
             title: 'Contacts',
-            telegram: 'Telegram',
-            linkedIn: 'LinkedIn',
-            gitHub: 'GitHub',
-            behance: 'Behance',
-            mail: 'Email',
+            telegram: {
+              label: 'Telegram',
+              placeholder: '@username',
+            },
+            linkedIn: {
+              label: 'LinkedIn',
+              placeholder: 'https://www.linkedin.com/in/',
+            },
+            gitHub: {
+              label: 'GitHub',
+              placeholder: 'https://github.com/',
+            },
+            behance: {
+              label: 'Behance',
+              placeholder: 'https://www.behance.net/',
+            },
+            mail: {
+              label: 'Mail',
+              placeholder: 'example@gmail.com',
+            },
             phone: 'Phone',
             validation: {
               url: 'Please enter correct URL',
