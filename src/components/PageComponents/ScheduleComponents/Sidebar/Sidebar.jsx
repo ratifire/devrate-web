@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
-import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice.js';
-import { ErrorComponent } from '@components/UI/Exceptions/index.js';
-import { SidebarSkeleton } from '@components/UI/Skeleton/Pages/scheduleSkeleton/index';
+import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { SidebarSkeleton } from '@components/UI/Skeleton/Pages/scheduleSkeleton';
 import SidebarEvent from '@components/PageComponents/ScheduleComponents/ClosestEvents/SidebarEvent/SidebarEvent';
 import SmallCalendar from '../SmallCalendar';
 import { styles } from './Sidebar.styles';

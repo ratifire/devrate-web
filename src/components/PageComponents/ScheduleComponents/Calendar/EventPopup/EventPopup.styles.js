@@ -1,4 +1,4 @@
-import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants/index.js';
+import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
 
 export const styles = {
   popup: (theme) => ({

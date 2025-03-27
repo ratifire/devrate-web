@@ -1,3 +1,3 @@
-import SmallCalendar from './SmallCalendar.jsx';
+import SmallCalendar from './SmallCalendar';
 
 export default SmallCalendar;

@@ -1,3 +1,3 @@
-import SidebarEvent from './SidebarEvent.jsx';
+import SidebarEvent from './SidebarEvent';
 
 export default SidebarEvent;

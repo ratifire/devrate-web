@@ -1,3 +1,3 @@
-import DayPicker from './DayPicker.jsx';
+import DayPicker from './DayPicker';
 
 export default DayPicker;

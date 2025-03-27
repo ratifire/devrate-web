@@ -1,8 +1,8 @@
-import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice.js';
+import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { Box } from '@mui/material';
-import SidebarEvent from '@components/PageComponents/ScheduleComponents/ClosestEvents/SidebarEvent/index';
-import { ErrorComponent } from '@components/UI/Exceptions/index';
-import { ClosestEventSkeleton } from '@components/UI/Skeleton/index';
+import SidebarEvent from '@components/PageComponents/ScheduleComponents/ClosestEvents/SidebarEvent';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { ClosestEventSkeleton } from '@components/UI/Skeleton';
 import { styles } from './ClosestEvents.styles';
 
 const ClosestEvents = () => {

@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import cancelEventIcon from '@assets/icons/cancel-event.svg';
-import links from '@router/links.js';
-import useDeleteEvent from '@utils/hooks/useDeleteEvent.js';
-import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference.js';
-import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice.js';
-import { lvlMastery } from '@utils/constants/masteryLvl.js';
-import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants/index.js';
-import { ButtonDef } from '../../../../FormsComponents/Buttons/index.js';
-import { styles } from './EventPopup.styles.js';
+import links from '@router/links';
+import useDeleteEvent from '@utils/hooks/useDeleteEvent';
+import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
+import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
+import { lvlMastery } from '@utils/constants/masteryLvl';
+import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
+import { ButtonDef } from '../../../../FormsComponents/Buttons';
+import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const { t } = useTranslation();

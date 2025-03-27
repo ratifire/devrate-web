@@ -3,11 +3,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { DateCalendar } from '@mui/x-date-pickers';
 import { DateTime, Settings } from 'luxon';
-import { setClosePopup, setDate, setSelectedDate } from '@redux/slices/schedule/scheduleSlice.js';
-import { getWeekStartAndEnd } from '@components/PageComponents/ScheduleComponents/helpers/index.js';
+import { setClosePopup, setDate, setSelectedDate } from '@redux/slices/schedule/scheduleSlice';
+import { getWeekStartAndEnd } from '@components/PageComponents/ScheduleComponents/helpers';
 import { useDispatch, useSelector } from 'react-redux';
-import DayPicker from './DayPicker/index.js';
-import { styles } from './SmallCalendar.styles.js';
+import DayPicker from './DayPicker';
+import { styles } from './SmallCalendar.styles';
 
 Settings.defaultWeekSettings = {
   firstDay: 1, // Set the first day of the week

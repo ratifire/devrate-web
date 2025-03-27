@@ -15,8 +15,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice';
 import EventPopup from '@components/PageComponents/ScheduleComponents/Calendar/EventPopup';
-import { CalendarSkeleton } from '@components/UI/Skeleton/index.js';
-import { ErrorComponent } from '@components/UI/Exceptions/index.js';
+import { CalendarSkeleton } from '@components/UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
 import { styles } from './Calendar.styles';
 
 const Calendar = () => {

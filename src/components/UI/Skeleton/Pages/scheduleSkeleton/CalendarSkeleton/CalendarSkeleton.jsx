@@ -1,5 +1,5 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './CalendarSkeleton.styles.js';
+import { styles } from './CalendarSkeleton.styles';
 
 const CalendarSkeleton = () => {
   return (

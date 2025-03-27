@@ -1,5 +1,5 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './ClosestEventSkeleton.styles.js';
+import { styles } from './ClosestEventSkeleton.styles';
 
 const ClosestEventSkeleton = () => {
   return (
