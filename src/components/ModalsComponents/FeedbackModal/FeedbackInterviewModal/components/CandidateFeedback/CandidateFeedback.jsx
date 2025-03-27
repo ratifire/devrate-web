@@ -50,6 +50,7 @@ const CandidateFeedback = () => {
             />
             {activeStep === FIRST_STEP && (
               <ButtonDef
+                disabled={formik.values.comment.length < 2}
                 label={t('modal.interview.btnNext')}
                 sx={styles.btn}
                 type={'button'}

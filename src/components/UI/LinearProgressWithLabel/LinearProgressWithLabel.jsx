@@ -6,38 +6,31 @@ import { styles } from './LinearProgressWithLabel.styles';
 
 const LinearProgressWithLabel = ({ value, size, orientation }) => {
   const { t } = useTranslation();
-  const style = size === 's' ? styles.s : styles.m;
+
+  const progressStyle = size === 's' ? styles.s : styles.m;
   const orientationStyle = orientation === 'horizontal' ? styles.horizontal : styles.vertical;
 
   const isComplete = value >= 100;
+  const progressValue = orientation === 'horizontal' ? value * 10 : value;
+  const labelText =
+    orientation === 'horizontal' ? `${value}/10` : `${t('profile.baseUserInfo.loading')} ${Math.round(value)}%`;
 
   return (
     <Box sx={[styles.wrapper, orientationStyle]}>
       {isComplete ? (
         <Box sx={styles.completeContainer}>
-          <Box>
-            <Typography sx={styles.completeText} variant='subtitle2'>
-              {t('profile.baseUserInfo.complete')}
-            </Typography>
-          </Box>
-
-          <Box>
-            <CheckCircleOutlineIcon fontSize={'medium'} sx={styles.completeIcon} />
-          </Box>
+          <Typography sx={styles.completeText} variant='subtitle2'>
+            {t('profile.baseUserInfo.complete')}
+          </Typography>
+          <CheckCircleOutlineIcon fontSize='medium' sx={styles.completeIcon} />
         </Box>
       ) : (
         <>
           <Typography sx={styles.text} variant='subtitle2'>
-            {orientation === 'horizontal'
-              ? `${value}/10`
-              : `${t('profile.baseUserInfo.loading')} ${Math.round(value)}%`}
+            {labelText}
           </Typography>
           <Box sx={styles.wrapperProgress}>
-            <LinearProgress
-              sx={style}
-              value={orientation === 'horizontal' ? value * 10 : value}
-              variant='determinate'
-            />
+            <LinearProgress sx={progressStyle} value={progressValue} variant='determinate' />
           </Box>
         </>
       )}
