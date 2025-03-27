@@ -1,7 +1,7 @@
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { lazy, Suspense, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CalendarSkeleton, ClosestEventSkeleton, SmallCalendarSkeleton } from '@components/UI/Skeleton/index.js';
+import { CalendarSkeleton, ClosestEventSkeleton, SmallCalendarSkeleton } from '@components/UI/Skeleton';
 import { styles } from './SchedulePage.styles';
 
 const SmallCalendar = lazy(() =>

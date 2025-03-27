@@ -38,6 +38,7 @@ export const styles = {
   },
   timeGridTableHeadDark: {
     borderColor: '#303032',
+    borderTop: '0px',
     color: '#C5C5C6',
     fontSize: '14px',
     lineHeight: '20.02px',
