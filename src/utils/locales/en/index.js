@@ -339,6 +339,7 @@ export const en = {
             userProfile: {
               title: 'The user has not yet added information about education',
             },
+            endYearNow: 'Ongoing',
           },
         },
         duties: 'Duties',
