@@ -19,10 +19,4 @@ export const styles = {
   sidebarSection: (theme) => ({
     marginLeft: theme.spacing(2),
   }),
-  skeleton: (theme) => ({
-    maxWidth: '320px',
-    width: '100%',
-    paddingTop: theme.spacing(4),
-    paddingLeft: theme.spacing(4),
-  }),
 };

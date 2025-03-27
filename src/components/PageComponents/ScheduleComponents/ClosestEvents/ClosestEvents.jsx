@@ -1,19 +1,15 @@
 import { useGetClosestEventByUserIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { Box } from '@mui/material';
-import Event from 'components/PageComponents/ScheduleComponents/ClosestEvents/Event';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { ClosestEventSkeleton } from '@components/UI/Skeleton';
+import Event from '@components/PageComponents/ScheduleComponents/ClosestEvents/Event';
 import { styles } from './ClosestEvents.styles';
 
 const ClosestEvents = () => {
   const { data: closestEvent, isFetching, isError } = useGetClosestEventByUserIdQuery();
 
   if (isFetching) {
-    return (
-      <Box sx={styles.skeleton}>
-        <ClosestEventSkeleton />
-      </Box>
-    );
+    return <ClosestEventSkeleton />;
   }
 
   if (isError) {
