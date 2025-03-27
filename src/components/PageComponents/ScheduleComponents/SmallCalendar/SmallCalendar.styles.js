@@ -16,5 +16,21 @@ export const styles = {
         borderRadius: 1,
       },
     },
+    '& .MuiYearCalendar-root': {
+      maxWidth: '290px',
+      width: '100%',
+
+      '&::-webkit-scrollbar': {
+        width: 10,
+      },
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: theme.palette.schedule.scroll.track,
+        borderRadius: 8,
+      },
+      '&::-webkit-scrollbar-thumb': {
+        borderRadius: 6,
+        backgroundColor: theme.palette.schedule.scroll.thumb,
+      },
+    },
   }),
 };
