@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
-import { DateTime } from 'luxon';
 import { DARK_THEME } from '@utils/constants/Theme/theme';
+import { isInSameWeek } from '@components/PageComponents/ScheduleComponents/helpers';
 
 const CustomPickersDay = styled(PickersDay, {
   shouldForwardProp: (prop) => prop !== 'isSelected' && prop !== 'isHovered',
@@ -31,18 +31,7 @@ const CustomPickersDay = styled(PickersDay, {
   }),
 }));
 
-const isInSameWeek = (dayA, dayB) => {
-  if (dayB == null) {
-    return false;
-  }
-  const dayALuxon = DateTime.fromJSDate(dayA.toJSDate());
-  const dayBLuxon = DateTime.fromJSDate(dayB.toJSDate());
-  return dayALuxon.weekNumber === dayBLuxon.weekNumber && dayALuxon.weekday !== 8;
-};
-
-const DayPicker = (props) => {
-  const { day, selectedDay, hoveredDay, ...other } = props;
-
+const DayPicker = ({ day, selectedDay, hoveredDay, ...other }) => {
   return (
     <CustomPickersDay
       {...other}
