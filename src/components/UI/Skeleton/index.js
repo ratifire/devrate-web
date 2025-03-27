@@ -1,6 +1,6 @@
 import FeedbackModalSkeleton from './Modal/FeedbackModalSkeleton';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
-import { CalendarSkeleton, SmallCalendarSkeleton, ClosestEventSkeleton } from './Pages/ScheduleSkeleton';
+import { CalendarSkeleton, SmallCalendarSkeleton, ClosestEventSkeleton } from './Pages/scheduleSkeleton';
 import {
   CategoriesSkeleton,
   HardSkillsChartSkeleton,

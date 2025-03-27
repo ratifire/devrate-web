@@ -36,11 +36,21 @@ export const styles = {
     letterSpacing: '0.25px',
   }),
   calendarWrapper: (theme) => ({
+    maxWidth: '100%',
+    width: '100%',
     backgroundColor: theme.palette.schedule.backgroundColor,
     boxShadow: 'none',
     borderRadius: 2,
     backgroundImage: 'none',
     display: 'flex',
+    gap: theme.spacing(3),
   }),
-  sidebar: {},
+  sidebar: {
+    padding: '0 8px',
+    maxWidth: '290px',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  },
 };

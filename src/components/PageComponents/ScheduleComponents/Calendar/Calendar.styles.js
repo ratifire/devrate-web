@@ -6,7 +6,6 @@ export const styles = {
   },
   demoAppMain: (theme) => ({
     flexGrow: '1',
-    padding: theme.spacing(4),
     '& .fc-scroller.fc-scroller-liquid-absolute': {
       '&::-webkit-scrollbar': {
         width: 10,

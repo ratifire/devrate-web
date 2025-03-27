@@ -50,7 +50,6 @@ const SmallCalendar = () => {
         slots={{ day: DayPicker }}
         sx={styles.switcher}
         value={restoreSelectedDate}
-        // value={restoreSelectedDate}
         onChange={handleDateChange}
       />
     </LocalizationProvider>
