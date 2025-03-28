@@ -1,6 +1,7 @@
 export const styles = {
   container: (theme) => ({
     paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
     paddingX: theme.spacing(2),
     '@media (min-width: 1272px)': {
       maxWidth: '1536px',
@@ -10,10 +11,6 @@ export const styles = {
     },
   }),
   contentWrapper: (theme) => ({
-    display: 'grid',
-    gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: 'auto auto auto auto',
-    gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: 2,
       backgroundColor: theme.palette.schedule.contentWrapper.backgroundColor,
@@ -21,8 +18,6 @@ export const styles = {
     },
   }),
   scheduleWrapper: {
-    gridColumn: '1/13',
-    gridRow: '1/2',
     padding: '24px',
     backgroundImage: 'none',
     boxShadow: 'none',
@@ -36,9 +31,21 @@ export const styles = {
     letterSpacing: '0.25px',
   }),
   calendarWrapper: (theme) => ({
+    maxWidth: '100%',
+    width: '100%',
     backgroundColor: theme.palette.schedule.backgroundColor,
     boxShadow: 'none',
     borderRadius: 2,
     backgroundImage: 'none',
+    display: 'flex',
+    gap: theme.spacing(3),
   }),
+  sidebar: {
+    padding: '0 8px',
+    maxWidth: '290px',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  },
 };

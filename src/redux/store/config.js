@@ -16,6 +16,7 @@ import themeSliceReducer from '@redux/slices/theme/themeSlice';
 import updateTabSlice from '@redux/slices/updateTab/updateTabSlice';
 import modalSliceReducer from '@redux/slices/modal/modalSlice';
 import modalStepReducer from '@redux/slices/modal/modalStepSlice';
+import scheduleReducer from '@redux/slices/schedule/scheduleSlice';
 import { apiSlice } from '@redux/api/apiSlice.js';
 
 const authPersistConfig = {
@@ -51,6 +52,7 @@ const rootReducer = {
   email: emailSliceReducer,
   activeMastery: activeMasteryReducer,
   button: buttonReducer,
+  schedule: scheduleReducer,
   auth: persistReducer(authPersistConfig, authReducer),
   tokens: persistReducer(tokenPersistConfig, tokenSlice),
   theme: persistReducer(themePersistConfig, themeSliceReducer),
