@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -34,7 +34,7 @@ const Calendar = () => {
     isError: isErrorGetEvent,
   } = useGetEventByUserIdQuery({ from, to });
 
-  const restoreSelectedDate = DateTime.fromISO(selectedDate);
+  const restoreSelectedDate = useMemo(() => DateTime.fromISO(selectedDate), [selectedDate]);
 
   const startTime = eventsForSelectedWeek
     ? findEventTimeForChosenDay(restoreSelectedDate, eventsForSelectedWeek)
@@ -53,7 +53,7 @@ const Calendar = () => {
     };
 
     waitForCalendarRef();
-  }, [eventsForSelectedWeek, isFetchingGetEvent, theme]);
+  }, [eventsForSelectedWeek, restoreSelectedDate, theme]);
 
   const handleEventClick = (info) => {
     if (info) {
