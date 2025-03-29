@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
-import { styles } from './AdvancedFormSelector.styles'; // Import styles // Import styles
+import { styles } from './AdvancedFormSelector.styles';
 
 const AdvancedFormSelector = ({
   variant,
@@ -23,7 +23,12 @@ const AdvancedFormSelector = ({
   const { t } = useTranslation();
 
   const handleChangeCountry = (event, value) => {
-    handleChange(value);
+    handleChange({
+      target: {
+        name: name,
+        value: value || '',
+      },
+    });
   };
 
   const handleBlurCountry = () => {
@@ -42,7 +47,20 @@ const AdvancedFormSelector = ({
         forcePopupIcon // Hides the warning from the MUI, adds the dropdown icon
         freeSolo // Hides the warning from the MUI
         PaperComponent={({ children }) => <Box sx={styles.dropdownPaper}>{children}</Box>}
+        getOptionLabel={(option) => {
+          if (!option || option === '') {
+            return t(label);
+          }
+          if (typeof option === 'string') {
+            return t(`countriesList.${option}`);
+          }
+          if (option.target.value) {
+            return t(`countriesList.${option.target.value}`);
+          }
+          return '';
+        }}
         id={id}
+        isOptionEqualToValue={(option, value) => option === value}
         name={name}
         options={countries}
         popupIcon={<KeyboardArrowDownIcon sx={styles.icon} />}

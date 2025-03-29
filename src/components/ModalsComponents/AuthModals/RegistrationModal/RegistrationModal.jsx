@@ -56,7 +56,7 @@ const RegistrationModal = () => {
         email,
         firstName,
         lastName,
-        country,
+        country: country.target.value,
         subscribed: news,
         password,
       }).unwrap();
@@ -133,6 +133,7 @@ const RegistrationModal = () => {
             />
           </Box>
           <AdvancedFormSelector
+            required
             autoComplete='off'
             countries={userCountries}
             error={formik.touched.country && Boolean(formik.errors.country)}
