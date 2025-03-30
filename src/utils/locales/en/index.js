@@ -520,6 +520,7 @@ export const en = {
         title: 'Level',
         description: 'Switch between levels to see your statistics relative to another level.',
       },
+      levelOfCategory: 'Level {{level}}',
       interviewChartMonths: {
         '01': 'Jan',
         '02': 'Feb',

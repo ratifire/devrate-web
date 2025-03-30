@@ -513,8 +513,8 @@ export const uk = {
     specialization: {
       specialization_title: 'Спеціалізації',
       specialization_btn_make_main: 'Зробити основною',
-      specialization_hardSkills: 'HardSkills',
-      specialization_softSkills: 'SoftSkills',
+      specialization_hardSkills: 'Хард скіли',
+      specialization_softSkills: 'Софт скіли',
       error: 'Щось пішло не так...',
       errorDeleteSpec: 'Ви не можете видалити спеціалізацію',
       conflictDeleteSpec:
@@ -523,6 +523,7 @@ export const uk = {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
       },
+      levelOfCategory: 'Рівень {{level}}',
       interviewChartMonths: {
         '01': 'Січ',
         '02': 'Лют',
@@ -540,7 +541,7 @@ export const uk = {
       statistics: {
         title: 'Статистика',
         level_chart_title: 'Рівень',
-        hard_skills_chart_title: 'Hard Skills за продуктивністю',
+        hard_skills_chart_title: 'Хард скіли за продуктивністю',
         hard_skills_chart_text: 'Цей графік відображає оцінки ваших навичок від 0 до 10.',
         interview_chart_title: 'Інтерв’ю',
         interview_chart_days: '10 днів',
@@ -559,9 +560,9 @@ export const uk = {
           'Зараз у вашому профілі немає жодних навичок. Додайте їх, щоб покращити себе та відстежувати свій прогрес',
       },
       softSkills: {
-        title: 'Soft skills',
+        title: 'Софт скіли',
         averageMark: 'Середня оцінка:',
-        emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші Soft Skills',
+        emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші софт скіли',
       },
       modal: {
         specialization: {

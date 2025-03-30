@@ -15,7 +15,7 @@ const EmptySkills = ({ title }) => {
   const { t } = useTranslation();
   const { mode } = useSelector((state) => state.theme);
 
-  if (title === 'Hard skills') {
+  if (title === 'Hard skills' || title === 'Хард скіли') {
     return (
       <Box sx={styles.emptyHardSkills}>
         <Box sx={styles.mascotHardsBox}>{mode === DARK_THEME ? <HardSkillsDarkSvg /> : <HardSkillsLightSvg />}</Box>
@@ -25,7 +25,7 @@ const EmptySkills = ({ title }) => {
       </Box>
     );
   }
-  if (title === 'Soft skills') {
+  if (title === 'Soft skills' || title === 'Софт скіли') {
     return (
       <Box sx={styles.emptySoftSkills}>
         <Box sx={styles.mascotSoftsBox}>{mode === DARK_THEME ? <SoftSkillsDarkSvg /> : <SoftSkillsLightSvg />}</Box>
