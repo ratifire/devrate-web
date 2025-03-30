@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Badge, IconButton, Popover } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
@@ -12,14 +13,18 @@ import NotificationEmpty from './NotificationEmpty';
 import NotificationList from './NotificationList';
 
 const Notification = () => {
+  const location = useLocation();
   const { data: info } = useSelector(selectCurrentUser);
   const [bellButton, setBellButton] = useState(null);
-
   const { data: notifications, isLoading } = useGetNotificationsQuery(info.id);
   const newNotification = notifications?.every((item) => item.read) ?? true;
 
   const { mode } = useSelector((state) => state.theme);
   const icons = mode === DARK_THEME ? emptyNotificationDark : emptyNotificationLight;
+
+  useEffect(() => {
+    if (location.pathname !== '/profile') setBellButton(null);
+  }, [location.pathname]);
 
   const bellButtonClickHandler = (event) => {
     event.preventDefault();

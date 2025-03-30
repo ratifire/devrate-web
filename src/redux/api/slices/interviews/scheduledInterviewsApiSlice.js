@@ -55,5 +55,8 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetAllScheduledInterviewsQuery, useGetScheduledInterviewByIdQuery, useGetSingleInterviewByIdQuery } =
-  scheduledInterviewApiSlice;
+export const {
+  useGetAllScheduledInterviewsQuery,
+  useGetScheduledInterviewByIdQuery,
+  useLazyGetSingleInterviewByIdQuery,
+} = scheduledInterviewApiSlice;

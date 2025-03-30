@@ -667,6 +667,7 @@ export const en = {
       interviewRequestExpired:
         'Dear {{userFirstName}}, Your interview request has expired. Please submit a new one to proceed.',
       feedbackBtn: 'Leave feedback',
+      feedbackSnackBarText: 'You have already left feedback!',
     },
     faqText: {
       title: 'FAQ – Frequently Asked Question',
