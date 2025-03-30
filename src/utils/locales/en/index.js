@@ -243,6 +243,8 @@ export const en = {
         code_length_max: 'Code must be exactly 6 digits long',
         error: 'The code is incorrect or the term has passed.',
         success: 'Password changed successfully!',
+        new_password: 'New Password',
+        repeat_new_password: 'Repeat New Password',
       },
       editPage: {
         personalInformation: {

@@ -249,6 +249,8 @@ export const uk = {
         code_length_max: 'Code must be exactly 6 digits long',
         error: 'Невірний код. Спробуйте ще раз.',
         success: 'Пароль успішно змінено!',
+        new_password: 'Новий пароль',
+        repeat_new_password: 'Повторіть новий пароль',
       },
       editPage: {
         personalInformation: {
@@ -1058,9 +1060,9 @@ export const uk = {
       },
     },
     chat: {
-      search: 'Search',
-      emptyChatLstUsers: 'No chats yet',
-      enterMessages: 'Enter message',
+      search: 'Пошук',
+      emptyChatLstUsers: 'Ще немає чатів',
+      enterMessages: 'Введіть повідомлення',
     },
     interviewRequest: {
       selectSpecializations: 'Specializations',
