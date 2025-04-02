@@ -19,6 +19,11 @@ export const styles = {
         backgroundColor: theme.palette.schedule.scroll.thumb,
       },
     },
+
+    '& .fc-v-event': {
+      boxShadow: 'none',
+      borderColor: 'transparent',
+    },
   }),
   fc: {
     margin: '0 auto',
@@ -26,7 +31,6 @@ export const styles = {
   timeGridSlot: {
     height: '70px', // Adjust this value to change the width of the time-axis slots
     borderColor: '#303032',
-    backgroundColor: 'red',
   },
   timeGridTableDataDark: {
     height: '70px', // Adjust this value to change the width of the time-axis slots

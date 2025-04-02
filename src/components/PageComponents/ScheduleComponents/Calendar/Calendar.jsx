@@ -56,16 +56,9 @@ const Calendar = () => {
     };
 
     waitForCalendarRef();
-  }, [eventsForSelectedWeek, restoreSelectedDate, theme]);
+  }, [eventsForSelectedWeek, theme]);
 
   useEffect(() => {
-    if (calendarRef.current) {
-      const calendarApi = calendarRef.current.getApi();
-      applyRequiredStyles(calendarApi, theme);
-      calendarApi.gotoDate(from);
-      calendarApi.scrollToTime(startTime);
-    }
-
     return () => dispatch(clearState());
   }, []);
 
@@ -129,13 +122,6 @@ const Calendar = () => {
 
   if (isFetchingGetEvent) {
     return <CalendarSkeleton />;
-  }
-
-  if (calendarRef.current) {
-    const calendarApi = calendarRef.current.getApi();
-    applyRequiredStyles(calendarApi, theme);
-    calendarApi.gotoDate(from);
-    calendarApi.scrollToTime(startTime);
   }
 
   if (calendarRef.current && !popup.visible) {
