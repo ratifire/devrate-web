@@ -13,7 +13,7 @@ import {
   getOffsetTopWithScroll,
 } from '@components/PageComponents/ScheduleComponents/helpers';
 import { useDispatch, useSelector } from 'react-redux';
-import { setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice';
+import { clearState, setClosePopup, setOpenPopup } from '@redux/slices/schedule/scheduleSlice';
 import EventPopup from '@components/PageComponents/ScheduleComponents/Calendar/EventPopup';
 import { CalendarSkeleton } from '@components/UI/Skeleton';
 import { ErrorComponent } from '@components/UI/Exceptions';
@@ -47,6 +47,9 @@ const Calendar = () => {
       if (calendarRef.current) {
         const calendarApi = calendarRef.current.getApi();
         applyRequiredStyles(calendarApi, theme);
+        calendarApi.gotoDate(from);
+        calendarApi.scrollToTime(startTime);
+        applyRequiredStyles(calendarApi, theme);
       } else {
         requestAnimationFrame(waitForCalendarRef);
       }
@@ -54,6 +57,17 @@ const Calendar = () => {
 
     waitForCalendarRef();
   }, [eventsForSelectedWeek, restoreSelectedDate, theme]);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      const calendarApi = calendarRef.current.getApi();
+      applyRequiredStyles(calendarApi, theme);
+      calendarApi.gotoDate(from);
+      calendarApi.scrollToTime(startTime);
+    }
+
+    return () => dispatch(clearState());
+  }, []);
 
   const handleEventClick = (info) => {
     if (info) {

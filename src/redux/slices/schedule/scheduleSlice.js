@@ -35,8 +35,11 @@ const scheduleSlice = createSlice({
       state.from = payload.from;
       state.to = payload.to;
     },
+    clearState: (state) => {
+      Object.assign(state, initialState);
+    },
   },
 });
 
 export default scheduleSlice.reducer;
-export const { setOpenPopup, setClosePopup, setSelectedDate, setDate } = scheduleSlice.actions;
+export const { setOpenPopup, setClosePopup, setSelectedDate, setDate, clearState } = scheduleSlice.actions;
