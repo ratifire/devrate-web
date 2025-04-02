@@ -1,9 +1,9 @@
 export const styles = {
-  scrollContainer: (theme) => ({
+  scrollContainer: (theme, height) => ({
     overflow: 'auto',
     minWidth: '100%',
-    paddingTop: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    height: `calc(${height}px - 368px)`,
+    marginLeft: theme.spacing(2),
     '&::-webkit-scrollbar': {
       width: 10,
     },
@@ -15,8 +15,5 @@ export const styles = {
       borderRadius: 6,
       backgroundColor: theme.palette.common.white,
     }),
-  }),
-  sidebarSection: (theme) => ({
-    marginLeft: theme.spacing(2),
   }),
 };

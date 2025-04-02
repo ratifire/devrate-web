@@ -145,7 +145,7 @@ const Calendar = () => {
   }
 
   return (
-    <Box sx={styles.demoAppMain}>
+    <Box className={'calendar'} sx={styles.demoAppMain}>
       <FullCalendar
         ref={calendarRef}
         dayMaxEvents
