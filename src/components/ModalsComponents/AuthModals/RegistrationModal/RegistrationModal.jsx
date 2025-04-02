@@ -8,7 +8,7 @@ import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice.js';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
 import { useGetCountryListQuery } from '@redux/api/slices/countryList/countryApiSlice';
 import { RegistrationSchema } from '@utils/validationSchemas';
-import { AdvancedFormSelector, FormCheckbox, FormInput } from '@components/FormsComponents/Inputs';
+import { CountryFormSelector, FormCheckbox, FormInput } from '@components/FormsComponents/Inputs';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
 import { modalNames } from '@utils/constants/modalNames.js';
@@ -132,7 +132,7 @@ const RegistrationModal = () => {
               value={formik.values.lastName}
             />
           </Box>
-          <AdvancedFormSelector
+          <CountryFormSelector
             required
             autoComplete='off'
             countries={userCountries}
