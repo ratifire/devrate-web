@@ -3,12 +3,14 @@ import { Link, Link as RouterLink } from 'react-router';
 import { openModal } from '@redux/slices/modal/modalSlice';
 import { modalNames } from '@utils/constants/modalNames.js';
 import navigationsLinks from '@router/links';
+import { useTranslation } from 'react-i18next';
 import Arrow from '../../assets/iconArrow.svg?react';
 import styles from './HeroSection.module.scss';
 
 const HeroSection = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector((state) => state.tokens);
+  const { t } = useTranslation();
 
   const handleOpenRegistration = () => dispatch(openModal({ modalType: modalNames.registrationModal }));
   const handleOpenLogin = () => dispatch(openModal({ modalType: modalNames.loginModal }));
@@ -17,7 +19,7 @@ const HeroSection = () => {
     if (!isAuth)
       return (
         <button className={`btn btn-secondary btn-xl ${styles.login}`} onClick={handleOpenLogin}>
-          <span>Login</span>
+          <span>{t('home.hero.login')}</span>
           <Arrow />
         </button>
       );
@@ -55,17 +57,13 @@ const HeroSection = () => {
           <div className={styles.hero__right}>
             <div className={styles.heroWrapper}>
               <div>
-                <p className={styles.heroText}>
-                  Master your interview skills with real-world practice alongside experts and peers. Get personalized
-                  feedback, objective evaluations, and in-depth insights to confidently prepare for success in any
-                  interview!
-                </p>
-                <p className={styles.heroTextMobile}>To register, open the website via a computer</p>
+                <p className={styles.heroText}>{t('home.hero.secondaryText')}</p>
+                <p className={styles.heroTextMobile}>{t('home.hero.secondaryTextMobile')}</p>
               </div>
 
               <div className={styles.btnContainer}>
                 <button className={`btn btn-primary btn-xl ${styles.registration}`} onClick={handleOpenRegistration}>
-                  <span>Registration</span>
+                  <span>{t('home.hero.registration')}</span>
                   <Arrow />
                 </button>
                 {myProfile()}

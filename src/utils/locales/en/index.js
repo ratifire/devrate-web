@@ -5,10 +5,54 @@ export const en = {
       notFound: 'There are no matches for this request',
     },
     home: {
+      header: {
+        howItWorks: 'How It Works',
+        aboutUs: 'About us',
+        faq: 'FAQ',
+        contacts: 'Contacts',
+      },
       hero: {
         title: 'A multifunctional platform from developers for developers',
         text: 'Interview. Ratings. Summary',
         button_text: 'Registration',
+        mainText1: 'Prepare for',
+        mainText2: 'Technical',
+        mainText3: 'Interviews',
+        mainText4: ' with support',
+        mainText5: 'from',
+        mainText6: 'Experts and Peers!',
+        secondaryText:
+          'Master your interview skills with real-world practice alongside experts and peers. Get personalized\n' +
+          '                  feedback, objective evaluations, and in-depth insights to confidently prepare for success in any\n' +
+          '                  interview!',
+        secondaryTextMobile: 'To register, open the website via a computer',
+        registration: 'Registration',
+        login: 'Login',
+      },
+      howItWorks: {
+        titleText1: 'How It',
+        titleText2: 'Works?',
+        card1Title: 'Register your profile',
+        card1Text:
+          ' Create your profile and fill in information about your work experience, hard skills, achievements and education.',
+        card2Title: 'Join the Interview',
+        card2Text:
+          'Choose whether you want to practice as a respondent or as an interviewer. Pick a convenient time and format.',
+        card3Title: 'Receive Feedback',
+        card3Text:
+          ' Get detailed feedback to help you improve your soft and hard skills in your area of your specialization.',
+      },
+      aboutUs: {
+        article1Title: 'Real Experience',
+        article1Text:
+          'We provide a realistic environment for technical interviews, helping you prepare for challenging tasks and questions.',
+        article2Title: 'Community of Peers',
+        article2Text: 'Engage with other developers who are ready to share their knowledge and help.',
+        article3Title: 'Beginner-Friendly',
+        article3Text: 'Practice in a space where mistakes are part of the learning process, not failures.',
+        article4Title: 'Detailed Feedback',
+        article4Text:
+          ' You’ll receive a detailed analysis of your answers to help you prepare more effectively for real technical interviews.',
       },
       about: {
         title: 'How it works',
@@ -19,6 +63,17 @@ export const en = {
       footer: {
         copyright: '© 2023 SKILLZZY, Inc. All rights reserved.',
         trademarks: 'All trademarks, logos and brand names are <br/> the property of their respective owners.',
+        footerText:
+          'Technical interview training platform: elevate your skills with both beginners and experienced professionals. Our platform is designed to make the interview preparation process smoother and less stressful for everyone.',
+        developedText: 'Developed By',
+        termsAndConditions: 'Terms and conditions',
+        privacyPolicy: 'Privacy Policy',
+        allRightsReserved: 'All rights reserved.',
+        allTrademarks: 'All trademarks, logos, and brand names are the property of their respective owners.',
+        placeholderName: 'Name Surname',
+        placeholderEmail: 'Enter your email',
+        placeholderRequest: 'Enter your request...',
+        buttonText: 'SEND',
       },
       links: {
         home_page: 'Home',
@@ -230,6 +285,9 @@ export const en = {
         complete: 'Congratulations! Your profile is completely filled out',
         messageBtn: 'Write a message',
         interviewBtn: 'Book an interview',
+        editAvatar: 'Edit avatar',
+        editUserInfo: 'Edit user information',
+        editBtn: 'Edit',
       },
       experience: {
         workExperience: {
@@ -281,6 +339,7 @@ export const en = {
             userProfile: {
               title: 'The user has not yet added information about education',
             },
+            endYearNow: 'Ongoing',
           },
         },
         duties: 'Duties',
@@ -345,11 +404,26 @@ export const en = {
           },
           contact: {
             title: 'Contacts',
-            telegram: 'Telegram',
-            linkedIn: 'LinkedIn',
-            gitHub: 'GitHub',
-            behance: 'Behance',
-            mail: 'Email',
+            telegram: {
+              label: 'Telegram',
+              placeholder: '@username',
+            },
+            linkedIn: {
+              label: 'LinkedIn',
+              placeholder: 'https://www.linkedin.com/in/',
+            },
+            gitHub: {
+              label: 'GitHub',
+              placeholder: 'https://github.com/',
+            },
+            behance: {
+              label: 'Behance',
+              placeholder: 'https://www.behance.net/',
+            },
+            mail: {
+              label: 'Mail',
+              placeholder: 'example@gmail.com',
+            },
             phone: 'Phone',
             validation: {
               url: 'Please enter correct URL',
@@ -600,7 +674,7 @@ export const en = {
       question1: {
         question: 'How can I request an interview?',
         answer:
-          "To request an interview, you need to go to the Specialization screen, choose one of your specializations for which the interview will be conducted, then click on the 'Schedule an interview' button and select your role. If you wish to conduct the interview, select 'Become an interviewer.' If you want to be evaluated, choose 'Schedule an interview.' Then, fill out the form, select convenient dates and times, and confirm by clicking 'Schedule.' After that, your request will be submitted, and you'll be notified when the interview is scheduled.",
+          'To apply for an interview, go to the Interviews page. In the upper right corner of the screen, click the ‘Schedule an interview’ button. Select your role from the drop-down list: ‘As Interviewer’ if you want to assess candidates, or “As Candidate” if you want to be assessed. Next, select your specialisation from the drop-down list, the language you want to conduct the interview in, and the number of interviews for the selected time slots. Next, select the days and times convenient for you in the form and click the ‘Schedule’ button. Your application will be created, and you will receive an email and interview notification as soon as an interviewee is found.',
       },
       question2: {
         question: 'When creating a specialization (Junior, Middle, Senior), how do you choose the appropriate level?',
@@ -610,12 +684,12 @@ export const en = {
       question3: {
         question: 'How long does it take to wait for an interview?',
         answer:
-          "From the moment you submit an interview request, we immediately begin searching for a match that meets your criteria (specialization, skills, level, availability, etc.). As soon as a match is found, you'll receive a notification with further steps. If no suitable match is found within 30 days, you will be notified about the next steps.",
+          "From the moment you submit an interview request, we immediately begin searching for a match that meets your criteria (specialization, skills, level, availability, etc.). As soon as a match is found, you'll receive a notification with further steps. If no suitable match is found within 30 days, you will be notified about the recommended steps.",
       },
       question4: {
         question: 'How can I cancel or reschedule an interview?',
         answer:
-          "We apologize, but at this time, rescheduling an interview is unavailable. This feature will be implemented in future versions. For now, you can cancel the interview, which will restart the search process for a new match. To cancel, go to the 'Schedule' page, find the interview, select it, and click 'Cancel Event.'",
+          "At this time, rescheduling an interview is unavailable. This feature will be implemented in future versions. For now, you can cancel the interview, which will restart the search process for a new match. To cancel, go to the 'Schedule' page, find the interview, select it, and click 'Cancel Event'. You can also delete interviews on the Interviews page > Requests tab.",
       },
       question5: {
         question: 'Where can I view my interview results?',
@@ -655,7 +729,7 @@ export const en = {
       question12: {
         question: 'Where can I view my interview schedule?',
         answer:
-          "The interview schedule is available on the 'Schedule' screen. You can access it through the right-hand menu by clicking on the 'Schedule' section.",
+          "The interview calendar is available on the 'Schedule' page. You can access it through the right-hand menu by clicking on the 'Schedule' section.",
       },
       question13: {
         question: "What if I don't receive an interview invitation within 30 days?",
@@ -670,7 +744,7 @@ export const en = {
       question15: {
         question: 'What do I need to prepare for an interview?',
         answer:
-          "All you need is a basic preparation for your selected skills. The interview is conducted online via Zoom, so it's essential to find a quiet place, ensure a stable internet connection, and be ready for the experience.",
+          "All you need is a basic preparation for your selected skills. The interview is conducted online via our custom service, so it's essential to find a quiet place, ensure a stable internet connection, and be ready for the experience.",
       },
       question16: {
         question: 'How can I report a bug on the site?',
@@ -944,6 +1018,7 @@ export const en = {
         thisWeek: 'This week',
         save: 'Save',
         interviewCount_exceeds_pendingSlots: 'The number of interviews cannot exceed the available slots.',
+        chooseTimeslot: 'Choose a comfortable time',
       },
     },
     singleScheduledInterview: {
@@ -984,12 +1059,16 @@ export const en = {
       enterMessages: 'Enter message',
     },
     interviewRequest: {
+      title: 'Requests',
+      loading: 'Loading specializations...',
+      noSpecializationsAvailable: 'No specializations available',
       selectSpecializations: 'Specializations',
       role: {
         candidate: 'Respondent',
         interviewer: 'Interviewer',
       },
       requestHeader: {
+        titleLauncher: 'as a',
         foundInterviews: 'Interview found:',
         totalInterviews: 'Number of interviews:',
         selectedTimeSlots: 'Selected timeslots:',

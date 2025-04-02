@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import logo from '../../assets/logo.svg';
 import linkdin from '../../assets/linkdin.svg';
 import mail from '../../assets/mail.svg';
@@ -5,6 +6,8 @@ import ratifire from '../../assets/fstirier.svg';
 import styles from './footer.module.scss';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className={styles.footer} id='contacts'>
       <div className='container'>
@@ -24,16 +27,12 @@ const Footer = () => {
                   </a>
                 </div>
               </div>
-              <p className={styles.footer__descriptions}>
-                Technical interview training platform: elevate your skills with both beginners and experienced
-                professionals. Our platform is designed to make the interview preparation process smoother and less
-                stressful for everyone.
-              </p>
+              <p className={styles.footer__descriptions}>{t('home.footer.footerText')}</p>
             </div>
             <div>
               <div className={styles.footer__developer}>
                 <div className={styles.footer__developerName}>
-                  <p>Developed By</p>
+                  <p>{t('home.footer.developedText')}</p>
                   <a aria-label='ratifire'>
                     <img alt='ratifire' src={ratifire} />
                   </a>
@@ -48,18 +47,18 @@ const Footer = () => {
                 </a>
                 <div className={styles.footer__policies}>
                   <a className={styles.footer__policyLink} href='#'>
-                    Terms and conditions
+                    {t('home.footer.termsAndConditions')}
                   </a>
                   <a className={styles.footer__policyLink} href='#'>
-                    Privacy Policy
+                    {t('home.footer.privacyPolicy')}
                   </a>
                 </div>
               </div>
               <div className={styles.footer__copyright}>
-                <p className={styles.footer__copyrightYear}>© 2024 Skillzzy, Inc. All rights reserved.</p>
-                <p className={styles.footer__trademarks}>
-                  All trademarks, logos, and brand names are the property of their respective owners.
+                <p className={styles.footer__copyrightYear}>
+                  © {new Date().getFullYear()} Skillzzy, Inc. {t('home.footer.allRightsReserved')}
                 </p>
+                <p className={styles.footer__trademarks}>{t('home.footer.allTrademarks')}</p>
               </div>
             </div>
           </div>
@@ -82,11 +81,15 @@ const Footer = () => {
               </div>
             </div>
             <form className={styles.contactForm__form}>
-              <input className={styles.contactForm__input} placeholder='Name Surname' type='text' />
-              <input className={styles.contactForm__input} placeholder='Enter your email' type='email' />
-              <textarea className={styles.contactForm__textarea} placeholder='Enter your request...' />
+              <input className={styles.contactForm__input} placeholder={t('home.footer.placeholderName')} type='text' />
+              <input
+                className={styles.contactForm__input}
+                placeholder={t('home.footer.placeholderEmail')}
+                type='email'
+              />
+              <textarea className={styles.contactForm__textarea} placeholder={t('home.footer.placeholderRequest')} />
               <button className={`btn btn-primary btn-m ${styles.contactForm__button}`} type='submit'>
-                SEND
+                {t('home.footer.buttonText')}{' '}
               </button>
             </form>
           </div>
