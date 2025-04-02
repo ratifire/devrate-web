@@ -16,7 +16,7 @@ export const ScheduleApiSlice = apiSlice.injectEndpoints({
           url: `interviews/events/closest?from=${fromTime}`,
         };
       },
-      providesTags: [TAG_TYPES.Event],
+      providesTags: [TAG_TYPES.Event, TAG_TYPES.ScheduledInterview],
     }),
 
     getEventById: builder.query({
