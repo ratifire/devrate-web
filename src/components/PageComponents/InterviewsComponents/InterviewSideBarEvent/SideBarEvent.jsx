@@ -20,6 +20,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
       });
     }
   };
+  const translatedRole = t(`interviewRequest.role.${role?.toLowerCase() || 'candidate'}`);
 
   return (
     <Box sx={styles.interviewLink} onClick={handleClick}>
@@ -45,7 +46,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
           {formatDateAndTime(date)}
         </Typography>
         <Typography component='div' sx={styles.role} variant='body'>
-          {t('interviews.sideBar.event.role')}: <span>{role}</span>
+          {t('interviews.sideBar.event.role')}: <span>{translatedRole}</span>
         </Typography>
         <Typography component='div' sx={styles.host} variant='body'>
           {t('interviews.sideBar.event.host')}:{' '}
