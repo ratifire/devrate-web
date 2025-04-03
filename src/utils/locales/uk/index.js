@@ -1034,7 +1034,7 @@ export const uk = {
         duration: 'Тривалість',
         platform: 'Платформа',
         link:
-          'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
+          'Ваша співбесіда розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
           ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
         canceledMeeting: 'Скасувати зустріч',
         joinMeeting: 'Доєднатись до інтерв’ю',
@@ -1066,19 +1066,20 @@ export const uk = {
       enterMessages: 'Введіть повідомлення',
     },
     interviewRequest: {
-      selectSpecializations: 'Specializations',
+      title: 'Запити',
+      selectSpecializations: 'Спеціалізації',
       role: {
-        candidate: 'Respondent',
-        interviewer: 'Interviewer',
+        candidate: 'Респондент',
+        interviewer: 'Інтерв’юер',
       },
       requestHeader: {
-        foundInterviews: 'Interview found:',
-        totalInterviews: 'Number of interviews:',
-        selectedTimeSlots: 'Selected timeslots:',
-        interviewLanguage: 'Interview language:',
+        foundInterviews: 'Знайдено співбесіду:',
+        totalInterviews: 'Кількість співбесід:',
+        selectedTimeSlots: 'Обрані часові слоти:',
+        interviewLanguage: 'Мова співбесіди:',
       },
       buttons: {
-        addTimeSlot: 'Аdd time slots',
+        addTimeSlot: 'Додати таймслоти',
       },
       timeSlot: {
         status: {
@@ -1088,32 +1089,32 @@ export const uk = {
           expired: 'Expired',
         },
         daysOfWeek: {
-          monday: 'Monday',
-          tuesday: 'Tuesday',
-          wednesday: 'Wednesday',
-          thursday: 'Thursday',
-          friday: 'Friday',
-          saturday: 'Saturday',
-          sunday: 'Sunday',
+          monday: 'Понеділок',
+          tuesday: 'Вівторок',
+          wednesday: 'Середа',
+          thursday: 'Четвер',
+          friday: 'П’ятниця',
+          saturday: 'Субота',
+          sunday: 'Неділя',
         },
       },
       notifications: {
         delete: {
           oneTimeSlot: {
-            success: 'Deleted slot successfully',
-            error: 'Something went wrong',
+            success: 'Часовий слот успішно видалено',
+            error: 'Щось пішло не так',
           },
           allTimeSlots: {
-            success: 'Deleted all successfully',
-            error: 'Something went wrong',
+            success: 'Усі часові слоти успішно видалено',
+            error: 'Щось пішло не так',
           },
         },
       },
       deleteAllRequests: {
-        title: 'Delete request',
-        cancel: 'Cancel',
-        approve: 'Remove',
-        question: 'Are you sure you want to delete the {{mastery}} interview request as a {{role}}?',
+        title: 'Видалення запиту',
+        cancel: 'Скасувати',
+        approve: 'Видалити',
+        question: 'Ви впевнені, що хочете видалити запит на співбесіду {{mastery}} як {{role}}?',
       },
     },
   },

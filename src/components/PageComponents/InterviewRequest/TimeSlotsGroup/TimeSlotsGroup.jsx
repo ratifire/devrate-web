@@ -6,21 +6,33 @@ import { styles } from './TimeSlotsGroup.styles.js';
 
 const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
   const { slots, date, dates } = timeSlots;
+  const locale = 'ua';
+
+  const capitalizeFirstLetter = (text) => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
 
   const getTitle = () => {
     let result = null;
+
     if (dates.length > 1) {
       const startDate = DateTime.fromFormat(dates[0], 'dd.MM.yyyy');
       const endDate = DateTime.fromFormat(dates.at(-1), 'dd.MM.yyyy');
 
       const start = {
         date: startDate.toFormat('dd.MM.yyyy'),
-        dayTitle: startDate.setLocale('en').toFormat('EEEE'), // Todo change locale according to redux state
+        dayTitle:
+          locale === 'ua'
+            ? capitalizeFirstLetter(startDate.setLocale(locale).toFormat('EEEE'))
+            : startDate.setLocale(locale).toFormat('EEEE'), // Todo change locale according to redux state
       };
 
       const end = {
         date: endDate.toFormat('dd.MM.yyyy'),
-        dayTitle: endDate.setLocale('en').toFormat('EEEE'), // Todo change locale according to redux state
+        dayTitle:
+          locale === 'ua'
+            ? capitalizeFirstLetter(endDate.setLocale(locale).toFormat('EEEE'))
+            : endDate.setLocale(locale).toFormat('EEEE'), // Todo change locale according to redux state
       };
 
       result = (
@@ -28,7 +40,10 @@ const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
       );
     } else {
       const originalDate = DateTime.fromFormat(dates[0], 'dd.MM.yyyy');
-      const dayTitle = originalDate.setLocale('en').toFormat('EEEE'); // Todo change locale according to redux state
+      const dayTitle =
+        locale === 'ua'
+          ? capitalizeFirstLetter(originalDate.setLocale(locale).toFormat('EEEE'))
+          : originalDate.setLocale(locale).toFormat('EEEE'); // Todo change locale according to redux state
       const date = originalDate.toFormat('dd.MM.yyyy');
 
       result = <Typography sx={styles.dayTitle}>{`${date} ${dayTitle}`}</Typography>;

@@ -1060,6 +1060,7 @@ export const en = {
       enterMessages: 'Enter message',
     },
     interviewRequest: {
+      title: 'Requests',
       selectSpecializations: 'Specializations',
       role: {
         candidate: 'Respondent',

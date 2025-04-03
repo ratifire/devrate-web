@@ -59,7 +59,7 @@ const InterviewRequest = () => {
   return (
     <Box>
       <Box sx={styles.header}>
-        <Typography variant='h4'>Requests</Typography>
+        <Typography variant='h4'>{t('interviewRequest.title')}</Typography>
         {isLoading ? (
           <Typography>Loading specializations...</Typography>
         ) : isError || !specializations?.length ? (
