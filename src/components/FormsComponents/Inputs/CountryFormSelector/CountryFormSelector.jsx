@@ -40,6 +40,19 @@ const CountryFormSelector = ({
     });
   };
 
+  const handleOptionLabel = (option) => {
+    if (!option || option === '') {
+      return t(label);
+    }
+    if (typeof option === 'string') {
+      return t(`countriesList.${option}`);
+    }
+    if (option.target.value) {
+      return t(`countriesList.${option.target.value}`);
+    }
+    return '';
+  };
+
   return (
     <FormControl fullWidth error={error} sx={styles.wrapper} variant={variant}>
       <Autocomplete
@@ -47,18 +60,7 @@ const CountryFormSelector = ({
         forcePopupIcon // Hides the warning from the MUI, adds the dropdown icon
         freeSolo // Hides the warning from the MUI
         PaperComponent={({ children }) => <Box sx={styles.dropdownPaper}>{children}</Box>}
-        getOptionLabel={(option) => {
-          if (!option || option === '') {
-            return t(label);
-          }
-          if (typeof option === 'string') {
-            return t(`countriesList.${option}`);
-          }
-          if (option.target.value) {
-            return t(`countriesList.${option.target.value}`);
-          }
-          return '';
-        }}
+        getOptionLabel={(option) => handleOptionLabel(option)}
         id={id}
         isOptionEqualToValue={(option, value) => option === value}
         name={name}
