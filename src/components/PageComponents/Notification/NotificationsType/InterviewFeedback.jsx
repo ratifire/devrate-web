@@ -1,35 +1,39 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import InfoIcon from '@mui/icons-material/Info';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useLazyGetSingleInterviewByIdQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import { useNavigate } from 'react-router';
 import navigationLinks from '@router/links';
 import { enqueueSnackbar } from 'notistack';
+import { closePopup } from '@redux/slices/notification/popupSlice.js';
 import styles from '../NotificationItem/NotificationItem.styles';
 import TimeAgo from '../../../UI/TimeAgo';
 
 const InterviewFeedback = ({ createAt, payload }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { interviewId } = JSON.parse(payload);
-  const [getSingleInterview, { isLoading }] = useLazyGetSingleInterviewByIdQuery();
+  const [getSingleInterview] = useLazyGetSingleInterviewByIdQuery();
 
   const handleClick = async () => {
-    if (isLoading) return;
-
     try {
-      const response = await getSingleInterview({ interviewId });
-      if (response.error?.status === 404) {
-        throw Error(t('notifications.feedbackSnackBarText'));
-        // eslint-disable-next-line no-unreachable
+      const event = await getSingleInterview({ interviewId }).unwrap();
+
+      navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, { state: { event } });
+      dispatch(closePopup());
+    } catch (error) {
+      if (error.status === 404) {
+        enqueueSnackbar(t('notifications.feedbackSnackBarText'), {
+          variant: 'warning',
+          autoHideDuration: 3000,
+        });
         return;
       }
-      const event = response.data;
-      navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, { state: { event } });
-    } catch (error) {
-      enqueueSnackbar(`${error.message}`, {
-        variant: 'warning',
+      enqueueSnackbar(t('notifications.somethingWrong'), {
+        variant: 'error',
         autoHideDuration: 3000,
       });
     }
