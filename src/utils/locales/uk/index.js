@@ -558,7 +558,7 @@ export const uk = {
           'Зараз у вашому профілі немає жодних навичок. Додайте їх, щоб покращити себе та відстежувати свій прогрес',
       },
       softSkills: {
-        title: 'Soft skills',
+        title: 'Софт скіли',
         averageMark: 'Середня оцінка:',
         emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші Soft Skills',
       },
@@ -996,9 +996,9 @@ export const uk = {
         interviewFeedbackReadLess: 'Читати менше',
         interviewFeedbackReadMore: 'Читати більше',
         interviewStatisticsTitle: 'Статистика',
-        interviewStatisticsHardSkills: 'Hard Skills',
-        interviewStatisticsSoftSkills: 'Soft Skills',
-        interviewStatisticsOverall: 'Over All',
+        interviewStatisticsHardSkills: 'Хард скіли',
+        interviewStatisticsSoftSkills: 'Софт скіли',
+        interviewStatisticsOverall: 'Загалом',
       },
       scheduleInterviewModal: {
         title: 'Запланувати співбесіду',
