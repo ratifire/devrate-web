@@ -10,6 +10,7 @@ import {
   useDeleteInterviewRequestMutation,
   useDeleteTimeSlotsMutation,
 } from '@redux/api/slices/interviewRequestApiSlice.js';
+import { formatRoleLetterCase } from '@utils/helpers';
 import TimeSlotsGroup from '../TimeSlotsGroup';
 import RequestHeader from '../RequsestHeader';
 import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
@@ -190,11 +191,6 @@ const Participant = ({ data, specialization }) => {
     setOpenDeleteDialog(false);
   };
 
-  const formatRole = (role, capitalize = true) => {
-    const translatedRole = t(`interviewRequest.role.${role?.toLowerCase() || 'candidate'}`);
-    return capitalize ? translatedRole : translatedRole.toLowerCase();
-  };
-
   const pendingSlots = data.timeSlots.filter((slot) => slot.status === 'PENDING').length;
 
   return (
@@ -208,7 +204,7 @@ const Participant = ({ data, specialization }) => {
         languageCode={languageCode}
         languageName={languageName}
         pendingSlots={pendingSlots}
-        role={formatRole(role, true)}
+        role={formatRoleLetterCase(role, t, false)}
         selectedSpecialization={specialization}
         selectedTimeSlots={selectedTimeSlots}
         title={mainMasteryLevelWithName}
@@ -225,7 +221,7 @@ const Participant = ({ data, specialization }) => {
           <Typography sx={styles.text}>
             {t('interviewRequest.deleteAllRequests.question', {
               mastery: mainMasteryLevelWithName,
-              role: role ? formatRole(role, false) : '',
+              role: role ? formatRoleLetterCase(role, t, false) : '',
             })}
           </Typography>
         </DialogContent>
