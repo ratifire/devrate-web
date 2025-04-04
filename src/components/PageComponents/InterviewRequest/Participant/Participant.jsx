@@ -192,7 +192,6 @@ const Participant = ({ data, specialization }) => {
   };
 
   const pendingSlots = data.timeSlots.filter((slot) => slot.status === 'PENDING').length;
-
   return (
     <Box ref={containerRef} sx={styles.container}>
       <RequestHeader
@@ -204,7 +203,7 @@ const Participant = ({ data, specialization }) => {
         languageCode={languageCode}
         languageName={languageName}
         pendingSlots={pendingSlots}
-        role={formatRoleLetterCase(role, t, false)}
+        role={formatRoleLetterCase(role, t)}
         selectedSpecialization={specialization}
         selectedTimeSlots={selectedTimeSlots}
         title={mainMasteryLevelWithName}
@@ -221,7 +220,7 @@ const Participant = ({ data, specialization }) => {
           <Typography sx={styles.text}>
             {t('interviewRequest.deleteAllRequests.question', {
               mastery: mainMasteryLevelWithName,
-              role: role ? formatRoleLetterCase(role, t, false) : '',
+              role: role ? formatRoleLetterCase(role, t) : '',
             })}
           </Typography>
         </DialogContent>

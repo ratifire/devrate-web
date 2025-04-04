@@ -1070,8 +1070,8 @@ export const uk = {
       noSpecializationsAvailable: 'No specializations available',
       selectSpecializations: 'Спеціалізації',
       role: {
-        candidate: 'Кандидат',
-        interviewer: "Інтерв'юер",
+        CANDIDATE: 'Респондент',
+        INTERVIEWER: "Інтерв'юер",
       },
       requestHeader: {
         titleLauncher: 'як',

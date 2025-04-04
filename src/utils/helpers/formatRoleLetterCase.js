@@ -1,6 +1,6 @@
-const formatRoleLetterCase = (role, t, capitalize = true) => {
-  const translatedRole = t(`interviewRequest.role.${role?.toLowerCase() || 'candidate'}`);
-  return capitalize ? translatedRole.toUpperCase() : translatedRole;
+const formatRoleLetterCase = (role, t) => {
+  const translatedRole = t(`interviewRequest.role.${role || 'candidate'}`);
+  return translatedRole;
 };
 
 export default formatRoleLetterCase;

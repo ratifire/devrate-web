@@ -20,8 +20,6 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
       });
     }
   };
-  const translatedRole = t(`interviewRequest.role.${role?.toLowerCase() || 'candidate'}`);
-
   return (
     <Box sx={styles.interviewLink} onClick={handleClick}>
       <Paper key={id} ref={refHandler} sx={+interviewId === id ? styles.border : styles.sideBarEventContainer}>
@@ -46,7 +44,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
           {formatDateAndTime(date)}
         </Typography>
         <Typography component='div' sx={styles.role} variant='body'>
-          {t('interviews.sideBar.event.role')}: <span>{translatedRole}</span>
+          {t('interviews.sideBar.event.role')}: <span>{t(`interviewRequest.role.${role}`)}</span>
         </Typography>
         <Typography component='div' sx={styles.host} variant='body'>
           {t('interviews.sideBar.event.host')}:{' '}
