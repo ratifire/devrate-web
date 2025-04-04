@@ -82,6 +82,11 @@
     }
   }
 
+  &__social_login {
+    display: flex;
+    gap: 24px;
+  }
+
   &__socialIcons {
     display: flex;
     gap: 15px;
@@ -111,5 +116,16 @@
     & > a:first-child {
       margin-left: 0;
     }
+  }
+
+  .login {
+    width: 13.18rem;
+    display: flex;
+    align-items: center;
+    border: 2px solid #fca728;
+    border-radius: 1000px;
+    font-size: 18px !important;
+    line-height: 150% !important;
+    padding: 12px 0 !important;
   }
 }

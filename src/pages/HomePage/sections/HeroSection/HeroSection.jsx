@@ -1,36 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, Link as RouterLink } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { openModal } from '@redux/slices/modal/modalSlice';
 import { modalNames } from '@utils/constants/modalNames.js';
-import navigationsLinks from '@router/links';
 import { useTranslation } from 'react-i18next';
 import Arrow from '../../assets/iconArrow.svg?react';
 import styles from './HeroSection.module.scss';
 
 const HeroSection = () => {
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.tokens);
   const { t } = useTranslation();
 
   const handleOpenRegistration = () => dispatch(openModal({ modalType: modalNames.registrationModal }));
-  const handleOpenLogin = () => dispatch(openModal({ modalType: modalNames.loginModal }));
-
-  const myProfile = () => {
-    if (!isAuth)
-      return (
-        <button className={`btn btn-secondary btn-xl ${styles.login}`} onClick={handleOpenLogin}>
-          <span>{t('home.hero.login')}</span>
-          <Arrow />
-        </button>
-      );
-    return (
-      <Link className={`btn btn-secondary btn-xl ${styles.login}`} component={RouterLink} to={navigationsLinks.profile}>
-        Profile
-        <Arrow />
-      </Link>
-    );
-  };
-
   return (
     <section className={styles.hero__bg}>
       <div className='container'>
@@ -66,7 +45,6 @@ const HeroSection = () => {
                   <span>{t('home.hero.registration')}</span>
                   <Arrow />
                 </button>
-                {myProfile()}
               </div>
             </div>
           </div>

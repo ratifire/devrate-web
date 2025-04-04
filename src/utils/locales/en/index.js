@@ -10,6 +10,8 @@ export const en = {
         aboutUs: 'About us',
         faq: 'FAQ',
         contacts: 'Contacts',
+        login: 'Login',
+        profile: 'Profile',
       },
       hero: {
         title: 'A multifunctional platform from developers for developers',
@@ -27,7 +29,6 @@ export const en = {
           '                  interview!',
         secondaryTextMobile: 'To register, open the website via a computer',
         registration: 'Registration',
-        login: 'Login',
       },
       howItWorks: {
         titleText1: 'How It',
