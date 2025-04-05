@@ -8,52 +8,15 @@
   background-color: #161616;
   position: relative;
   z-index: 10;
-
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -2px;
-    right: 0;
-    background-image: url('../../assets/BackgroundImages/Background_2-01_howitworks.svg');
-    background-repeat: no-repeat;
-    background-position: bottom right;
-    background-size: cover;
-    width: 100%;
-    height: 969px;
-
-    @include desktop-macbook {
-      height: 828px;
-    }
-
-    @include tablet-large {
-      height: 1039px;
-    }
-
-    @include tablet {
-      display: none;
-    }
-  }
-
-  &::after {
-    content: '';
-    display: block;
-    width: 100%;
-    position: absolute;
-    bottom: 940px;
-    left: 0;
-    background-image: linear-gradient(180deg, #161616 10%, rgb(0 0 0 / 0%) 50%);
-    z-index: 2;
-
-    @include tablet {
-      display: none;
-    }
-  }
 }
 
 .works {
   position: relative;
   z-index: 10;
+  background-image: url('../../assets/howItWorks/coloredBalls.svg');
+  background-repeat: no-repeat;
+  background-position: right 74%;
+  background-size: contain;
 
   &__block {
     display: flex;
@@ -100,7 +63,7 @@
 }
 
 .mainTitle {
-  font-family: 'Zen Dots', sans-serif;
+  font-family: Tektur, sans-serif;
   font-weight: 400;
   font-size: 48px;
   line-height: 150%;
@@ -283,7 +246,7 @@
   }
 
   &__wrapper {
-    background-color: transparent;
+    background-color: rgb(29 29 29 / 80%);
     border-radius: 16px;
     padding: 24px;
     width: 553px;
@@ -299,42 +262,20 @@
       margin-bottom: 0;
     }
 
-    &::before {
-      content: '';
-      display: block;
-      background-image: url('../../assets/border.svg');
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 100% 100%;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 3;
-
-      @include tablet {
-        display: none;
-      }
-    }
-
     &::after {
       content: '';
       display: block;
-      background-color: #1d1d1d;
       width: 100%;
       height: 100%;
       border-radius: 16px;
+      border: 2px solid #84340b;
       position: absolute;
-      bottom: -14px;
-      left: -15px;
+      bottom: 0;
+      left: 0;
       z-index: 2;
 
-      @include desktop {
-        bottom: -8px;
-      }
-
       @include tablet {
+        border: none;
         max-width: 277px;
         height: 380px;
         top: 25px;
