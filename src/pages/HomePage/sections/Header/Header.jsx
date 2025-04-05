@@ -23,7 +23,7 @@ const Header = () => {
       );
     return (
       <Link className={`btn btn-secondary btn-xl ${styles.login}`} component={RouterLink} to={navigationsLinks.profile}>
-        {t('home.header.profile')}
+        {t('home.header.login')}
       </Link>
     );
   };

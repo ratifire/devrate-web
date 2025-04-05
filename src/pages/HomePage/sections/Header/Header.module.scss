@@ -27,17 +27,17 @@
   }
 
   &__logo img {
-    width: 214px;
+    width: 13.375rem;
     height: auto;
 
     @include tablet-large {
-      width: 161px;
-      height: 36px;
+      width: 10.0625rem;
+      height: 2.25rem;
     }
 
     @include tablet {
-      width: 142px;
-      height: 33px;
+      width: 8.875rem;
+      height: 2rem;
     }
   }
 
@@ -104,6 +104,11 @@
           border-radius: 4px;
           transform: scale(1.1);
         }
+
+        @include tablet {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
       }
     }
 
@@ -127,5 +132,14 @@
     font-size: 18px !important;
     line-height: 150% !important;
     padding: 12px 0 !important;
+
+    @include tablet-large {
+      width: 8rem;
+    }
+
+    @include tablet {
+      width: 5rem;
+      padding: 8px 0 !important;
+    }
   }
 }

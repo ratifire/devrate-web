@@ -3,6 +3,7 @@ import { openModal } from '@redux/slices/modal/modalSlice';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { useTranslation } from 'react-i18next';
 import Arrow from '../../assets/iconArrow.svg?react';
+import heroMascot from '../../assets/hero/mascotHero.svg';
 import styles from './HeroSection.module.scss';
 
 const HeroSection = () => {
@@ -15,25 +16,20 @@ const HeroSection = () => {
       <div className='container'>
         <div className={styles.hero}>
           <div className={styles.hero__left}>
+            <img alt='' src={heroMascot} />
+          </div>
+
+          <div className={styles.hero__right}>
             <h1>
               <div className={styles.h1Desktop}>
-                Prepare for
-                <span className={styles.highlight}>
-                  Technical
-                  <br /> Interviews
-                </span>
-                with support
-                <br /> from <span className={styles.emphasis}>Experts and Peers!</span>
+                <span className={styles.highlight}>{t('home.hero.mainText1')}</span> <br />
+                {t('home.hero.mainText2')} <span className={styles.emphasis}>{t('home.hero.mainText3')}</span>
               </div>
-
               <div className={styles.h1Phone}>
                 Unfortunately, we don&#39;t have a mobile version yet ;(
                 <span className={styles.emphasis}>But that&#39;s just for now!</span>
               </div>
             </h1>
-          </div>
-
-          <div className={styles.hero__right}>
             <div className={styles.heroWrapper}>
               <div>
                 <p className={styles.heroText}>{t('home.hero.secondaryText')}</p>

@@ -11,18 +11,14 @@ export const en = {
         faq: 'FAQ',
         contacts: 'Contacts',
         login: 'Login',
-        profile: 'Profile',
       },
       hero: {
         title: 'A multifunctional platform from developers for developers',
         text: 'Interview. Ratings. Summary',
         button_text: 'Registration',
-        mainText1: 'Prepare for',
-        mainText2: 'Technical',
-        mainText3: 'Interviews',
-        mainText4: ' with support',
-        mainText5: 'from',
-        mainText6: 'Experts and Peers!',
+        mainText1: 'Technical Interviews',
+        mainText2: ' with support from',
+        mainText3: 'Experts and Peers!',
         secondaryText:
           'Master your interview skills with real-world practice alongside experts and peers. Get personalized\n' +
           '                  feedback, objective evaluations, and in-depth insights to confidently prepare for success in any\n' +
