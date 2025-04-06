@@ -26,13 +26,17 @@
 
   @include tablet {
     flex-direction: column;
-    align-items: center;
     grid-gap: 0;
     background-image: none;
+    background-image: url('../../assets/hero/coloredBallsTablet1.svg');
   }
 
   @include phone {
     align-items: flex-start;
+  }
+
+  @media screen and (width > 535px) {
+    align-items: center;
   }
 
   &__bg {
@@ -110,7 +114,7 @@
 
       .heroWrapper {
         width: 100vw;
-        height: 69px;
+        height: 4.3125rem;
         box-shadow: 0 -4px 10px 0 rgb(0 0 0 / 25%);
         background: linear-gradient(180deg, #2a2145 0%, #211b37 51.4%, #161616 100%);
         border: 2px solid #6853ac;
@@ -119,7 +123,7 @@
         position: relative;
 
         @include tablet {
-          padding: 0;
+          height: 3.75rem;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -171,6 +175,10 @@
     @include phone {
       font-size: 24px;
       text-align: left;
+    }
+
+    @media screen and (width > 535px) and (width < 991) {
+      text-align: center;
     }
 
     .highlight {

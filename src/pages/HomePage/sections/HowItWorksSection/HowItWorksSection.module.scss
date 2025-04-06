@@ -12,6 +12,10 @@
   background-position: right 74%;
   background-size: contain;
 
+  @include tablet {
+    background-image: none;
+  }
+
   &__block {
     display: flex;
     justify-content: space-between;

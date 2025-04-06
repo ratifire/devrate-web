@@ -26,8 +26,8 @@ const HeroSection = () => {
                 {t('home.hero.mainText2')} <span className={styles.emphasis}>{t('home.hero.mainText3')}</span>
               </div>
               <div className={styles.h1Phone}>
-                Unfortunately, we don&#39;t have a mobile version yet ;(
-                <span className={styles.emphasis}>But that&#39;s just for now!</span>
+                {t('home.hero.mainTextMobile1')}
+                <span className={styles.emphasis}>{t('home.hero.mainTextMobile2')}</span>
               </div>
             </h1>
             <div className={styles.heroWrapper}>

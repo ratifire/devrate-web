@@ -1,10 +1,10 @@
 @use '../../styles/scss/mediaBreakpoints.scss' as *;
 
 .faq {
-  margin-bottom: 200px;
+  margin-bottom: 26.875rem;
 
   @include desktop {
-    margin-bottom: 180px;
+    margin-bottom: 24.125rem;
   }
 
   @include tablet-large {
@@ -23,25 +23,26 @@
     color: #fff;
     width: fit-content;
     text-shadow: 2px 2px 4px rgba(29 29 29 / 0.25%);
-    margin-bottom: 72px;
+    margin-bottom: 37px;
     position: relative;
 
     @include desktop {
       font-size: 30px;
-      margin-bottom: 76px;
+      margin-bottom: 40px;
     }
 
     @include tablet-large {
       font-size: 32px;
+      margin-bottom: 37px;
     }
 
     @include tablet {
       font-size: 24px;
-      margin-bottom: 60px;
+      margin-bottom: 37px;
     }
 
     @include phone {
-      margin-bottom: 32px;
+      margin-bottom: 33px;
     }
 
     &::before {

@@ -20,10 +20,12 @@
   @include tablet {
     background-image: none;
     margin-top: 100px;
+    padding-bottom: 100px;
   }
 
   @include phone {
     margin-top: 80px;
+    padding-bottom: 33px;
   }
 }
 
@@ -115,6 +117,9 @@
     grid-gap: 80px 2px;
     position: relative;
     z-index: 10;
+    background-image: url('../../assets/aboutUsMascot/mascotCenter.svg');
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   @include phone {

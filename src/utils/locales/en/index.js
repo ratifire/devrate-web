@@ -19,6 +19,8 @@ export const en = {
         mainText1: 'Technical Interviews',
         mainText2: ' with support from',
         mainText3: 'Experts and Peers!',
+        mainTextMobile1: 'Unfortunately, we don&#39;t have a mobile version yet ;(',
+        mainTextMobile2: 'But that&#39;s just for now!',
         secondaryText:
           'Master your interview skills with real-world practice alongside experts and peers. Get personalized\n' +
           '                  feedback, objective evaluations, and in-depth insights to confidently prepare for success in any\n' +
