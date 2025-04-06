@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { DARK_THEME } from '../../../../utils/constants/Theme/theme.js';
+import { DARK_THEME } from '@utils/constants/Theme/theme.js';
 
 import HardSkillsDarkSvg from '../../../../assets/pictures/emptySkillsAndLayersPictures/skillsMascot/hardSkillsMascotDark.svg?react';
 import SoftSkillsDarkSvg from '../../../../assets/pictures/emptySkillsAndLayersPictures/skillsMascot/softSkillsMascotDark.svg?react';
@@ -15,7 +15,7 @@ const EmptySkills = ({ title }) => {
   const { t } = useTranslation();
   const { mode } = useSelector((state) => state.theme);
 
-  if (title === 'Hard skills' || title === 'Хард скіли') {
+  if (title === 'Hard skills') {
     return (
       <Box sx={styles.emptyHardSkills}>
         <Box sx={styles.mascotHardsBox}>{mode === DARK_THEME ? <HardSkillsDarkSvg /> : <HardSkillsLightSvg />}</Box>
@@ -25,7 +25,7 @@ const EmptySkills = ({ title }) => {
       </Box>
     );
   }
-  if (title === 'Soft skills' || title === 'Софт скіли') {
+  if (title === 'Soft skills') {
     return (
       <Box sx={styles.emptySoftSkills}>
         <Box sx={styles.mascotSoftsBox}>{mode === DARK_THEME ? <SoftSkillsDarkSvg /> : <SoftSkillsLightSvg />}</Box>

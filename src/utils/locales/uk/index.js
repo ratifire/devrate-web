@@ -513,8 +513,8 @@ export const uk = {
     specialization: {
       specialization_title: 'Спеціалізації',
       specialization_btn_make_main: 'Зробити основною',
-      specialization_hardSkills: 'Хард скіли',
-      specialization_softSkills: 'Софт скіли',
+      specialization_hardSkills: 'HardSkills',
+      specialization_softSkills: 'SoftSkills',
       error: 'Щось пішло не так...',
       errorDeleteSpec: 'Ви не можете видалити спеціалізацію',
       conflictDeleteSpec:
@@ -554,13 +554,13 @@ export const uk = {
         passed: 'Пройдено',
       },
       hardSkills: {
-        title: 'Хард скіли',
+        title: 'Hard skills',
         averageMark: 'Середня оцінка:',
         emptySkills:
           'Зараз у вашому профілі немає жодних навичок. Додайте їх, щоб покращити себе та відстежувати свій прогрес',
       },
       softSkills: {
-        title: 'Софт скіли',
+        title: 'Soft skills',
         averageMark: 'Середня оцінка:',
         emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші софт скіли',
       },

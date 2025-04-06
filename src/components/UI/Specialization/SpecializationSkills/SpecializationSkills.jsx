@@ -31,12 +31,7 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
       </Box>
       <Box>
         {skills.length > 0 ? (
-          <Box
-            sx={[
-              styles.skillsContainer,
-              title === 'Hard skills' || title === 'Хард скіли' ? styles.hardSkills : styles.softSkills,
-            ]}
-          >
+          <Box sx={[styles.skillsContainer, title === 'Hard skills' ? styles.hardSkills : styles.softSkills]}>
             {skills.map((skill) => (
               <ItemSkill
                 key={skill.id}
