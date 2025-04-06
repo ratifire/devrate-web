@@ -341,6 +341,7 @@ export const en = {
             userProfile: {
               title: 'The user has not yet added information about education',
             },
+            endYearNow: 'Ongoing',
           },
         },
         duties: 'Duties',
@@ -1020,6 +1021,7 @@ export const en = {
         thisWeek: 'This week',
         save: 'Save',
         interviewCount_exceeds_pendingSlots: 'The number of interviews cannot exceed the available slots.',
+        chooseTimeslot: 'Choose a comfortable time',
       },
     },
     singleScheduledInterview: {
@@ -1061,12 +1063,15 @@ export const en = {
     },
     interviewRequest: {
       title: 'Requests',
+      loading: 'Loading specializations...',
+      noSpecializationsAvailable: 'No specializations available',
       selectSpecializations: 'Specializations',
       role: {
         candidate: 'Respondent',
         interviewer: 'Interviewer',
       },
       requestHeader: {
+        titleLauncher: 'as a',
         foundInterviews: 'Interview found:',
         totalInterviews: 'Number of interviews:',
         selectedTimeSlots: 'Selected timeslots:',

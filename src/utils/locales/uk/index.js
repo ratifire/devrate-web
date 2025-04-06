@@ -345,6 +345,7 @@ export const uk = {
               title: 'Користувач ще не додав інформацію про освіту',
             },
           },
+          endYearNow: 'Теперішній час',
         },
         duties: 'Обовʼязки',
         endYear: 'Теп. час',
@@ -1024,6 +1025,7 @@ export const uk = {
         thisWeek: 'Цей тиждень',
         save: 'Зберегти',
         interviewCount_exceeds_pendingSlots: 'Кількість співбесід не може перевищувати доступні слоти.',
+        chooseTimeslot: 'Оберіть зручний час',
       },
     },
     singleScheduledInterview: {
@@ -1067,15 +1069,18 @@ export const uk = {
     },
     interviewRequest: {
       title: 'Запити',
+      loading: 'Завантаження спеціалізацій...',
+      noSpecializationsAvailable: 'No specializations available',
       selectSpecializations: 'Спеціалізації',
       role: {
-        candidate: 'Респондент',
-        interviewer: 'Інтерв’юер',
+        candidate: 'Кандидат',
+        interviewer: "Інтерв'юер",
       },
       requestHeader: {
-        foundInterviews: 'Знайдено співбесіду:',
-        totalInterviews: 'Кількість співбесід:',
-        selectedTimeSlots: 'Обрані часові слоти:',
+        titleLauncher: 'як',
+        foundInterviews: "Знайдено інтерв'ю:",
+        totalInterviews: "Кількість інтерв'ю:",
+        selectedTimeSlots: "Вибрана кількість інтерв'ю:",
         interviewLanguage: 'Мова співбесіди:',
       },
       buttons: {
@@ -1083,10 +1088,10 @@ export const uk = {
       },
       timeSlot: {
         status: {
-          status: 'Status:',
-          pending: 'Pending',
-          booked: 'Scheduled',
-          expired: 'Expired',
+          status: 'Статус:',
+          pending: 'Очікує',
+          booked: 'Намічено',
+          expired: 'Минув',
         },
         daysOfWeek: {
           monday: 'Понеділок',

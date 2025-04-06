@@ -1,38 +1,28 @@
 import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
+import i18n from '../../../../utils/i18n.js';
 import TimeSlot from '../TimeSlot';
 import { styles } from './TimeSlotsGroup.styles.js';
 
 const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
   const { slots, date, dates } = timeSlots;
-  const locale = 'ua';
-
-  const capitalizeFirstLetter = (text) => {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  };
+  const currentLocale = i18n.language; // Get current language from i18n
 
   const getTitle = () => {
     let result = null;
-
     if (dates.length > 1) {
       const startDate = DateTime.fromFormat(dates[0], 'dd.MM.yyyy');
       const endDate = DateTime.fromFormat(dates.at(-1), 'dd.MM.yyyy');
 
       const start = {
         date: startDate.toFormat('dd.MM.yyyy'),
-        dayTitle:
-          locale === 'ua'
-            ? capitalizeFirstLetter(startDate.setLocale(locale).toFormat('EEEE'))
-            : startDate.setLocale(locale).toFormat('EEEE'), // Todo change locale according to redux state
+        dayTitle: startDate.setLocale(currentLocale).toFormat('EEEE'), // Todo change locale according to redux state
       };
 
       const end = {
         date: endDate.toFormat('dd.MM.yyyy'),
-        dayTitle:
-          locale === 'ua'
-            ? capitalizeFirstLetter(endDate.setLocale(locale).toFormat('EEEE'))
-            : endDate.setLocale(locale).toFormat('EEEE'), // Todo change locale according to redux state
+        dayTitle: endDate.setLocale(currentLocale).toFormat('EEEE'), // Todo change locale according to redux state
       };
 
       result = (
@@ -40,10 +30,7 @@ const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
       );
     } else {
       const originalDate = DateTime.fromFormat(dates[0], 'dd.MM.yyyy');
-      const dayTitle =
-        locale === 'ua'
-          ? capitalizeFirstLetter(originalDate.setLocale(locale).toFormat('EEEE'))
-          : originalDate.setLocale(locale).toFormat('EEEE'); // Todo change locale according to redux state
+      const dayTitle = originalDate.setLocale(currentLocale).toFormat('EEEE'); // Todo change locale according to redux state
       const date = originalDate.toFormat('dd.MM.yyyy');
 
       result = <Typography sx={styles.dayTitle}>{`${date} ${dayTitle}`}</Typography>;
