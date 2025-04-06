@@ -69,6 +69,8 @@ export const en = {
         privacyPolicy: 'Privacy Policy',
         allRightsReserved: 'All rights reserved.',
         allTrademarks: 'All trademarks, logos, and brand names are the property of their respective owners.',
+        formPart1: 'Get',
+        formPart2: 'In Touch',
         placeholderName: 'Name Surname',
         placeholderEmail: 'Enter your email',
         placeholderRequest: 'Enter your request...',
