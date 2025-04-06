@@ -672,6 +672,8 @@ export const uk = {
       interviewRequestExpired:
         'Шановний(а) {{userFirstName}}, Ваш запит на співбесіду сплив. Будь ласка, створіть новий, якщо бажаєте продовжити.',
       feedbackBtn: 'Залишити відгук',
+      feedbackSnackBarText: 'Ви вже зашили відгук!',
+      somethingWrong: 'Щось пішло не так!',
     },
     faqText: {
       title: 'FAQ – Питання, що часто задають',

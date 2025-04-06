@@ -16,6 +16,7 @@ import themeSliceReducer from '@redux/slices/theme/themeSlice';
 import updateTabSlice from '@redux/slices/updateTab/updateTabSlice';
 import modalSliceReducer from '@redux/slices/modal/modalSlice';
 import modalStepReducer from '@redux/slices/modal/modalStepSlice';
+import popupReducer from '@redux/slices/notification/popupSlice.js';
 import { apiSlice } from '@redux/api/apiSlice.js';
 
 const authPersistConfig = {
@@ -55,6 +56,7 @@ const rootReducer = {
   tokens: persistReducer(tokenPersistConfig, tokenSlice),
   theme: persistReducer(themePersistConfig, themeSliceReducer),
   skills: updateTabSlice,
+  popup: popupReducer,
 };
 
 const store = configureStore({
