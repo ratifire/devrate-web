@@ -40,6 +40,8 @@ export const en = {
           ' Get detailed feedback to help you improve your soft and hard skills in your area of your specialization.',
       },
       aboutUs: {
+        title1Part: 'About',
+        title2Part: 'Us',
         article1Title: 'Real Experience',
         article1Text:
           'We provide a realistic environment for technical interviews, helping you prepare for challenging tasks and questions.',

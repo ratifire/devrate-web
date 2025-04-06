@@ -9,7 +9,7 @@ const HowItWorksSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className={styles.bg} id='howItWorks'>
+    <section id='howItWorks'>
       <div className='container'>
         <h2 className={`${styles.titleMobile} ${styles.mainTitle}`}>
           How It <span>Works?</span>
