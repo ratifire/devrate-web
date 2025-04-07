@@ -10,6 +10,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
           ? [
               ...result.content.map(({ id }) => ({ type: TAG_TYPES.ScheduledInterview, id })),
               { type: TAG_TYPES.ScheduledInterview, id: 'LIST' },
+              { type: TAG_TYPES.Event, id: 'LIST' },
             ]
           : [{ type: TAG_TYPES.ScheduledInterview, id: 'LIST' }],
 

@@ -12,6 +12,13 @@ export const scheduleLight = {
       arrowSwitcherColor: '#000000',
       arrowSwitcherBackgroundColor: '#CEB0FA',
     },
+    dayPicker: {
+      selectDay: '#6200EE',
+      text: '#1D1D1D',
+      selectedText: '#FFFFFF',
+      hovered: '#CEB0FA',
+      selectedWeek: '#CEB0FA',
+    },
     popup: {
       backgroundColor: '#ECECED',
       popupBorderColor: '#ECECED',
@@ -19,6 +26,7 @@ export const scheduleLight = {
       userInfoBorderColor: '#C5C5C6',
       titleColor: '#1D1D1D',
       iconColor: '#5900D9',
+      boxShadow: '2px 4px 6px 0px #00000040',
     },
     sideBarEvent: {
       backgroundColor: '#ECECED',

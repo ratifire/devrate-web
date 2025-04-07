@@ -1,5 +1,6 @@
 import { apiSlice } from '@redux/api/apiSlice.js';
 import { TAG_TYPES } from '@utils/constants/tagTypes.js';
+import { DateTime } from 'luxon';
 
 export const ScheduleApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,8 +10,13 @@ export const ScheduleApiSlice = apiSlice.injectEndpoints({
     }),
 
     getClosestEventByUserId: builder.query({
-      query: ({ fromTime }) => `interviews/events/closest?from=${fromTime}`,
-      providesTags: [TAG_TYPES.Event],
+      query: () => {
+        const fromTime = DateTime.utc().toISO();
+        return {
+          url: `interviews/events/closest?from=${fromTime}`,
+        };
+      },
+      providesTags: [TAG_TYPES.Event, TAG_TYPES.ScheduledInterview, TAG_TYPES.InterviewRequest],
     }),
 
     getEventById: builder.query({
@@ -32,7 +38,6 @@ export const ScheduleApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetEventByUserIdQuery,
-  useLazyGetEventByUserIdQuery,
   useGetClosestEventByUserIdQuery,
   useDeleteEventByIdMutation,
   useGetEventByIdQuery,
