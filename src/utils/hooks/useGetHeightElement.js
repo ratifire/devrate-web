@@ -1,13 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 const useGetHeightElement = (element) => {
-  const ref = useRef(null);
+  const [height, setHeight] = useState(null);
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
       const parentNode = document.querySelector(element);
       if (parentNode) {
-        ref.current = parentNode.clientHeight;
+        setHeight(parentNode.clientHeight);
         observer.disconnect();
       }
     });
@@ -17,7 +17,7 @@ const useGetHeightElement = (element) => {
     return () => observer.disconnect();
   }, []);
 
-  return ref;
+  return height;
 };
 
 export default useGetHeightElement;
