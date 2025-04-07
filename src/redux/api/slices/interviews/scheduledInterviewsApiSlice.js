@@ -47,10 +47,17 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+    getSingleInterviewById: builder.query({
+      query: ({ interviewId }) => `/interviews/${interviewId}/visible`,
+    }),
     getScheduledInterviewById: builder.query({
       query: ({ interviewId }) => `/interviews/events/${interviewId}`,
     }),
   }),
 });
 
-export const { useGetAllScheduledInterviewsQuery, useGetScheduledInterviewByIdQuery } = scheduledInterviewApiSlice;
+export const {
+  useGetAllScheduledInterviewsQuery,
+  useGetScheduledInterviewByIdQuery,
+  useLazyGetSingleInterviewByIdQuery,
+} = scheduledInterviewApiSlice;

@@ -81,13 +81,6 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
             handleEditFeature={handleEditFeature}
           />
         </Box>
-        {/*commented out <Link> in case if its need it's needed in the future*/}
-
-        {/*{achievement.link && (*/}
-        {/*  <Link href={achievement.link} target='_blank' sx={styles.link}>*/}
-        {/*    <Typography variant='subtitle3'>{achievement.link}</Typography>*/}
-        {/*  </Link>*/}
-        {/*)}*/}
         <Box sx={styles.achievementItemText}>
           <Typography variant='body1'>{achievement.description}</Typography>
         </Box>
