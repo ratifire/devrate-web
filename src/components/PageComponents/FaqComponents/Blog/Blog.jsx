@@ -23,7 +23,7 @@ const Blog = () => {
         </Typography>
         <Typography sx={styles.blogText} variant='caption2'>
           {t(blog.text)}
-          <button>{t('blogText.readNext')}</button>
+          {/*<button>{t('blogText.readNext')}</button>*/}
         </Typography>
       </Box>
     ));
