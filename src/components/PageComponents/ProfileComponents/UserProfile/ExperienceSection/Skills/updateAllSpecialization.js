@@ -11,9 +11,7 @@ export const updateAllSpecializations = (specializations) => {
   });
 
   const allSkillsSpecialization = {
-    // це залишається під питанням
-    // specializationName: "profile.experience.skills.allSkills",
-    specializationName: 'All SkillsParticipant',
+    specializationName: 'profile.experience.skills.allSkills',
     masteryName: '',
     hardSkills: Array.from(skillsMap.values()),
     mainSpecialization: false,
