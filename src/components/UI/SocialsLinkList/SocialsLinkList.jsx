@@ -24,9 +24,11 @@ const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
         arr.map(({ type, value, id }) => {
           const IconComponent = getIconsByType(type, icons[mode]);
           const href = constructUrlByType(type, value);
+          const linkProps =
+            type !== 'EMAIL' && type !== 'PHONE_NUMBER' ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
           return (
-            <Link key={id} href={href} sx={componentStyles.link} target='_blank'>
+            <Link key={id} href={href} sx={componentStyles.link} {...linkProps}>
               <IconComponent />
             </Link>
           );
