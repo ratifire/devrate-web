@@ -12,6 +12,19 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
 
+  const getSkillsContainerStyle = () => {
+    if (skills.length === 0) return styles.skillsContainer;
+
+    const firstType = skills[0]?.type;
+    const allSameType = skills.every((skill) => skill.type === firstType);
+
+    if (allSameType) {
+      return [styles.skillsContainer, firstType === 'HARD_SKILL' ? styles.hardSkills : styles.softSkills];
+    }
+
+    return styles.skillsContainer;
+  };
+
   if (isFetching) {
     return <SkillsSkeleton />;
   }
@@ -32,7 +45,7 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
       </Box>
       <Box>
         {skills.length > 0 ? (
-          <Box sx={[styles.skillsContainer, title === 'Hard skills' ? styles.hardSkills : styles.softSkills]}>
+          <Box sx={getSkillsContainerStyle()}>
             {skills.map((skill) => (
               <ItemSkill
                 key={skill.id}
