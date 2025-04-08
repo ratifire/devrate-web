@@ -42,6 +42,9 @@ export const styles = {
     alignItems: 'center',
     cursor: 'grab',
   },
+  linkName: {
+    textDecoration: 'none',
+  },
   name: (theme) => ({
     color: theme.palette.chatForm.name.color,
     fontSize: '14px',
