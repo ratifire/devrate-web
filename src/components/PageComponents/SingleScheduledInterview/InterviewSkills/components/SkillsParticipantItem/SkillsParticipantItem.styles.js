@@ -8,6 +8,7 @@ export const styles = {
     width: '100%',
     gap: '8px',
     alignItems: 'center',
+    justifyContent: 'flex-end',
     display: 'flex',
   },
   divider: (theme) => ({
@@ -34,4 +35,8 @@ export const styles = {
       backgroundColor: theme.palette.interviewSkills.rightCircle,
     },
   }),
+  grade: {
+    maxWidth: '40px',
+    width: '100%',
+  },
 };

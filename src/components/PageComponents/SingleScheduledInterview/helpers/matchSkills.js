@@ -19,7 +19,7 @@ const matchSkills = ({ skillsHost, skillsUser }) => {
       otherSkills.push({
         id: i,
         name: skillsHost[i]?.name,
-        leftGrade: 0,
+        leftGrade: null,
         rightGrade: Math.round(skillsHost[i]?.averageMark),
       });
     }
@@ -29,7 +29,7 @@ const matchSkills = ({ skillsHost, skillsUser }) => {
         id: i,
         name: skillsUser[i]?.name,
         leftGrade: Math.round(skillsUser[i]?.averageMark),
-        rightGrade: 0,
+        rightGrade: null,
       });
     }
 

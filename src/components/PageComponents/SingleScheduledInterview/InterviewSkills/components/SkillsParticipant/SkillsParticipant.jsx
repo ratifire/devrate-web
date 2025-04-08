@@ -18,7 +18,9 @@ const SkillsParticipant = ({ data, matching, other }) => {
       {!!otherSkills.length && (
         <Accordion sx={styles.accordion}>
           <AccordionSummary aria-controls='panel-all-content' expandIcon={<ExpandMoreIcon />} id='panel-all-header'>
-            <Typography>{other}</Typography>
+            <Typography component='h6' sx={styles.title} variant='h6'>
+              {other}
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             {otherSkills.map((v) => (
