@@ -167,7 +167,7 @@ const ChatForm = () => {
       <Box ref={chatPositionRef} sx={styles.position}>
         <Box sx={styles.container}>
           <Box sx={styles.wrapper}>
-            <Link component={RouterLink} sx={styles.linkAvatar} to={`/profile/${opponentUserId}`}>
+            <Link component={RouterLink} sx={styles.linkAvatar}>
               <UserAvatar
                 radius='circle'
                 size='m'
@@ -177,7 +177,9 @@ const ChatForm = () => {
               />
             </Link>
             <Box sx={styles.wrapperName} onMouseDown={handleMouseDown}>
-              <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
+              <Link component={RouterLink} sx={styles.linkName} to={`/profile/${opponentUserId}`}>
+                <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
+              </Link>
             </Box>
             <IconButton aria-label='Close Сhat' sx={styles.btnIcon} type='button' onClick={handleClose}>
               <CloseIcon />
