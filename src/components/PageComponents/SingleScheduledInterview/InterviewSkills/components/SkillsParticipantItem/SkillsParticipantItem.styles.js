@@ -36,6 +36,7 @@ export const styles = {
     },
   }),
   grade: {
+    textAlign: 'right',
     maxWidth: '40px',
     width: '100%',
   },

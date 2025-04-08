@@ -28,8 +28,8 @@ export const interviewDark = {
     link: '#CEB0FA',
   },
   interviewSkills: {
-    leftCircle: '#8133F1',
-    rightCircle: '#FCA728',
+    rightCircle: '#8133F1',
+    leftCircle: '#FCA728',
     skillsBox: '#3E3E40',
   },
   partEvalChart: {
