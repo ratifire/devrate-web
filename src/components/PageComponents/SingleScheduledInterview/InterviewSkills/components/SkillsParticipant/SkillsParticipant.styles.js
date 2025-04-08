@@ -15,5 +15,17 @@ export const styles = {
     backgroundColor: 'transparent',
     backgroundImage: 'none',
     boxShadow: 'none',
+    '.MuiButtonBase-root.Mui-expanded': {
+      minHeight: '32px',
+      height: '32px',
+    },
   },
+  accordionSummary: (theme) => ({
+    minHeight: '32px',
+    height: '32px',
+    padding: 0,
+    '>.MuiAccordionSummary-expandIconWrapper': {
+      color: theme.palette.faq.questions.icon.color,
+    },
+  }),
 };

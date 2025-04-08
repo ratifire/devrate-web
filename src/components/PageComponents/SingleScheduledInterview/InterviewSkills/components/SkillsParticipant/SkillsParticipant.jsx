@@ -17,7 +17,12 @@ const SkillsParticipant = ({ data, matching, other }) => {
       ))}
       {!!otherSkills.length && (
         <Accordion sx={styles.accordion}>
-          <AccordionSummary aria-controls='panel-all-content' expandIcon={<ExpandMoreIcon />} id='panel-all-header'>
+          <AccordionSummary
+            aria-controls='panel-all-content'
+            expandIcon={<ExpandMoreIcon />}
+            id='panel-all-header'
+            sx={styles.accordionSummary}
+          >
             <Typography component='h6' sx={styles.title} variant='h6'>
               {other}
             </Typography>
