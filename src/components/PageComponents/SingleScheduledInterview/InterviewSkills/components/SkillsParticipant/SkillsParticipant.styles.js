@@ -11,4 +11,9 @@ export const styles = {
     marginY: theme.spacing(2),
     backgroundColor: theme.palette.background.level3,
   }),
+  accordion: {
+    backgroundColor: 'transparent',
+    backgroundImage: 'none',
+    boxShadow: 'none',
+  },
 };

@@ -15,16 +15,18 @@ const SkillsParticipant = ({ data, category }) => {
       {skills.map((v) => (
         <SkillsParticipantItem key={v.id} leftGrade={v.leftGrade} name={v.name} rightGrade={v.rightGrade} />
       ))}
-      <Accordion>
-        <AccordionSummary aria-controls='panel-all-content' expandIcon={<ExpandMoreIcon />} id='panel-all-header'>
-          <Typography>Все навыки ({otherSkills.length})</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {otherSkills.map((v) => (
-            <SkillsParticipantItem key={v.id} leftGrade={v.leftGrade} name={v.name} rightGrade={v.rightGrade} />
-          ))}
-        </AccordionDetails>
-      </Accordion>
+      {!!otherSkills.length && (
+        <Accordion sx={styles.accordion}>
+          <AccordionSummary aria-controls='panel-all-content' expandIcon={<ExpandMoreIcon />} id='panel-all-header'>
+            <Typography>Все навыки</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            {otherSkills.map((v) => (
+              <SkillsParticipantItem key={v.id} leftGrade={v.leftGrade} name={v.name} rightGrade={v.rightGrade} />
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      )}
     </Box>
   );
 };
