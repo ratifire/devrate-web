@@ -1,11 +1,20 @@
 import { IconButton, InputAdornment, OutlinedInput } from '@mui/material';
 import PropTypes from 'prop-types';
 import Loupe from '@assets/icons/loupe.svg?react';
-import { styles } from './FormInputSearch.styles.js';
+import { useTheme } from '@mui/material/styles';
 
 const FormInputSearch = ({ sx, ...props }) => {
-  const style = { ...styles.input, ...sx };
-
+  const theme = useTheme();
+  const style = {
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.modals.inputs.border.focused,
+      borderWidth: '1px',
+    },
+    '&.Mui-focused .MuiOutlinedInput-input + .MuiInputAdornment-root svg path': {
+      fill: theme.palette.search.inputActive,
+    },
+    ...sx,
+  };
   return (
     <OutlinedInput
       {...props}
