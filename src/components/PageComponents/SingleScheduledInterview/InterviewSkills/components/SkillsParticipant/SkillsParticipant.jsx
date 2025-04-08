@@ -4,13 +4,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SkillsParticipantItem from '../SkillsParticipantItem';
 import { styles } from './SkillsParticipant.styles';
 
-const SkillsParticipant = ({ data, category }) => {
+const SkillsParticipant = ({ data, matching, other }) => {
   const { skills, otherSkills } = data;
 
   return (
     <Box sx={styles.wrapper}>
       <Typography component='h6' sx={styles.title} variant='h6'>
-        {category}
+        {matching}
       </Typography>
       {skills.map((v) => (
         <SkillsParticipantItem key={v.id} leftGrade={v.leftGrade} name={v.name} rightGrade={v.rightGrade} />
@@ -18,7 +18,7 @@ const SkillsParticipant = ({ data, category }) => {
       {!!otherSkills.length && (
         <Accordion sx={styles.accordion}>
           <AccordionSummary aria-controls='panel-all-content' expandIcon={<ExpandMoreIcon />} id='panel-all-header'>
-            <Typography>Все навыки</Typography>
+            <Typography>{other}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             {otherSkills.map((v) => (
@@ -36,7 +36,8 @@ SkillsParticipant.propTypes = {
     skills: PropTypes.array.isRequired,
     otherSkills: PropTypes.array.isRequired,
   }),
-  category: PropTypes.string.isRequired,
+  matching: PropTypes.string.isRequired,
+  other: PropTypes.string.isRequired,
 };
 
 export default SkillsParticipant;

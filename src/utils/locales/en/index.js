@@ -1043,6 +1043,10 @@ export const en = {
       },
       interviewSkills: {
         skills: 'Skills',
+        matchingSoftSkills: 'Matching soft skills',
+        otherSoftSkills: 'Other soft skills',
+        matchingHardSkills: 'Matching hard skills',
+        otherHardSkills: 'Other hard skills',
       },
       userCardScheduledInterview: {
         btn: 'Write a message',

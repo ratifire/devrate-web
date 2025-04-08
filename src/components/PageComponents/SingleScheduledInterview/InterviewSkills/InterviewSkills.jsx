@@ -70,8 +70,16 @@ const InterviewSkills = () => {
           </Typography>
         </Box>
       </Box>
-      <SkillsParticipant category={'Soft Skills'} data={softSkills} />
-      <SkillsParticipant category={'Hard Skills'} data={hardSkills} />
+      <SkillsParticipant
+        data={softSkills}
+        matching={t('singleScheduledInterview.interviewSkills.matchingSoftSkills')}
+        other={t('singleScheduledInterview.interviewSkills.otherSoftSkills')}
+      />
+      <SkillsParticipant
+        data={hardSkills}
+        matching={t('singleScheduledInterview.interviewSkills.matchingHardSkills')}
+        other={t('singleScheduledInterview.interviewSkills.otherHardSkills')}
+      />
     </Box>
   );
 };

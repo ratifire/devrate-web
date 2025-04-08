@@ -1049,6 +1049,10 @@ export const uk = {
       },
       interviewSkills: {
         skills: 'Навички',
+        matchingSoftSkills: 'Співпадаючі soft skills',
+        otherSoftSkills: 'Інші soft skills',
+        matchingHardSkills: 'Співпадаючі hard skills',
+        otherHardSkills: 'Інші hard skills',
       },
       userCardScheduledInterview: {
         btn: 'Написати повідомлення',
