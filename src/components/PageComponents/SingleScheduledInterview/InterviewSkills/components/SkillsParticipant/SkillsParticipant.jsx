@@ -9,7 +9,7 @@ const SkillsParticipant = ({ data, category }) => {
       <Typography component='h6' sx={styles.title} variant='h6'>
         {category}
       </Typography>
-      {data.map((v) => (
+      {data.skills.map((v) => (
         <SkillsParticipantItem key={v.id} leftGrade={v.leftGrade} name={v.name} rightGrade={v.rightGrade} />
       ))}
     </Box>
