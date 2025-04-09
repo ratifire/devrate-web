@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import CustomTooltip from '@components/UI/CustomTooltip';
 import { styles } from './SkillsParticipantItem.styles';
 
-const SkillsParticipantItem = ({ name, leftGrade, rightGrade }) => {
-  const isGradesDefined = rightGrade !== null && leftGrade !== null;
-  const isUserGradeDefined = leftGrade === null;
-  const isHostGradeDefined = rightGrade === null;
+const SkillsParticipantItem = ({ name, userGrade, hostGrade }) => {
+  const isGradesDefined = hostGrade !== null && userGrade !== null;
+  const isUserGradeDefined = userGrade === null;
+  const isHostGradeDefined = hostGrade === null;
 
   return (
     <>
@@ -19,30 +19,30 @@ const SkillsParticipantItem = ({ name, leftGrade, rightGrade }) => {
             <>
               <LinearProgress
                 sx={[styles.userProgress, styles.progress]}
-                value={rightGrade * 10}
+                value={hostGrade * 10}
                 variant='determinate'
               />
               <LinearProgress
                 sx={[styles.hostProgress, styles.progress]}
-                value={leftGrade * 10}
+                value={userGrade * 10}
                 variant='determinate'
               />
             </>
           )}
           {isHostGradeDefined && (
-            <LinearProgress sx={[styles.userProgress, styles.progress]} value={leftGrade * 10} variant='determinate' />
+            <LinearProgress sx={[styles.userProgress, styles.progress]} value={userGrade * 10} variant='determinate' />
           )}
           {isUserGradeDefined && (
-            <LinearProgress sx={[styles.hostProgress, styles.progress]} value={rightGrade * 10} variant='determinate' />
+            <LinearProgress sx={[styles.hostProgress, styles.progress]} value={hostGrade * 10} variant='determinate' />
           )}
           <Typography sx={styles.grade}>
             {isGradesDefined && (
               <>
-                {rightGrade}:{leftGrade}
+                {hostGrade}:{userGrade}
               </>
             )}
-            {isHostGradeDefined && <>{leftGrade}/10</>}
-            {isUserGradeDefined && <>{rightGrade}/10</>}
+            {isHostGradeDefined && <>{userGrade}/10</>}
+            {isUserGradeDefined && <>{hostGrade}/10</>}
           </Typography>
         </Box>
       </Box>
@@ -53,8 +53,8 @@ const SkillsParticipantItem = ({ name, leftGrade, rightGrade }) => {
 
 SkillsParticipantItem.propTypes = {
   name: PropTypes.string.isRequired,
-  leftGrade: PropTypes.number.isRequired,
-  rightGrade: PropTypes.number.isRequired,
+  userGrade: PropTypes.number.isRequired,
+  hostGrade: PropTypes.number.isRequired,
 };
 
 export default SkillsParticipantItem;

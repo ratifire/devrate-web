@@ -15,7 +15,7 @@ const SkillsParticipant = ({ data, matching, other }) => {
             {matching}
           </Typography>
           {skills.map((v) => (
-            <SkillsParticipantItem key={v.id} leftGrade={v.leftGrade} name={v.name} rightGrade={v.rightGrade} />
+            <SkillsParticipantItem key={v.id} hostGrade={v.hostGrade} name={v.name} userGrade={v.userGrade} />
           ))}
         </>
       )}
@@ -33,7 +33,7 @@ const SkillsParticipant = ({ data, matching, other }) => {
           </AccordionSummary>
           <AccordionDetails>
             {otherSkills.map((v) => (
-              <SkillsParticipantItem key={v.id} leftGrade={v.leftGrade} name={v.name} rightGrade={v.rightGrade} />
+              <SkillsParticipantItem key={v.id} hostGrade={v.hostGrade} name={v.name} userGrade={v.userGrade} />
             ))}
           </AccordionDetails>
         </Accordion>
