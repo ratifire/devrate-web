@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '@redux/api/slices/user/personal/personalApiSlice';
 import { useGetCountryListQuery } from '@redux/api/slices/countryList/countryApiSlice';
-import { FormInput, FormSelect, TextAreaInput } from '@components/FormsComponents/Inputs';
+import { CountryFormSelector, FormInput, TextAreaInput } from '@components/FormsComponents/Inputs';
 import { StepPersonalSchema } from '@utils/validationSchemas/index';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { StepPersonalSkeleton } from '@components/UI/Skeleton';
@@ -70,7 +70,6 @@ const StepPersonal = () => {
     }
     formik.resetForm();
   };
-
   const formik = useFormik({
     initialValues,
     validationSchema: StepPersonalSchema,
@@ -85,7 +84,6 @@ const StepPersonal = () => {
   if (isFetchingGetCountry || isFetchingGetPersonal || isLoadingPutPersonal) {
     return <StepPersonalSkeleton />;
   }
-
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.wrapper}>
@@ -129,8 +127,9 @@ const StepPersonal = () => {
           />
         </Box>
         <Box sx={styles.input50}>
-          <FormSelect
+          <CountryFormSelector
             required
+            autoComplete='off'
             countries={userCountries}
             error={formik.touched.country && Boolean(formik.errors.country)}
             handleBlur={formik.handleBlur}

@@ -44,6 +44,7 @@ const Menu = ({ isDrawerOpen, toggleDrawer, closeMenu }) => {
   };
 
   const handleOpenFeedbackModal = () => {
+    closeMenu();
     openModal(modalNames.feedbackProjectModal);
   };
 

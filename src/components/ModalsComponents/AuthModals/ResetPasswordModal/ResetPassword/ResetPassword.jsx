@@ -191,7 +191,7 @@ const ResetPassword = () => {
               handleChange={formik.handleChange}
               helperText={formik.touched.newPassword && formik.errors.newPassword}
               iconStyle={styles.iconStyle}
-              label='New Password'
+              label={t('modal.resetPassword.new_password')}
               mouseDownHandler={handleMouseDownPassword}
               name='newPassword'
               showPassword={showPassword}
@@ -210,7 +210,7 @@ const ResetPassword = () => {
               handleChange={formik.handleChange}
               helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
               iconStyle={styles.iconStyle}
-              label='Repeat New Password'
+              label={t('modal.resetPassword.repeat_new_password')}
               mouseDownHandler={handleMouseDownPassword}
               name='repeatPassword'
               showPassword={showPassword}

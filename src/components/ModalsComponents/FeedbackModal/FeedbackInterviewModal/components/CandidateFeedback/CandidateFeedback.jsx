@@ -21,6 +21,9 @@ const CandidateFeedback = () => {
   const handleNextStep = () => setActiveStep(LAST_STEP);
   const handlePrevStep = () => setActiveStep(FIRST_STEP);
 
+  const skills = formik.values.skills;
+  const hardSkills = skills.filter(({ type }) => type === 'HARD_SKILL');
+
   if (isError) {
     return <ErrorComponent />;
   }
@@ -48,7 +51,7 @@ const CandidateFeedback = () => {
               variant={'contained'}
               onClick={handlePrevStep}
             />
-            {activeStep === FIRST_STEP && (
+            {activeStep === FIRST_STEP && hardSkills.length > 0 && (
               <ButtonDef
                 disabled={formik.values.comment.length < 2}
                 label={t('modal.interview.btnNext')}
@@ -58,7 +61,7 @@ const CandidateFeedback = () => {
                 onClick={handleNextStep}
               />
             )}
-            {activeStep === LAST_STEP && (
+            {(activeStep === LAST_STEP || hardSkills.length === 0) && (
               <ButtonDef
                 disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
                 label={t('modal.interview.btnSend')}

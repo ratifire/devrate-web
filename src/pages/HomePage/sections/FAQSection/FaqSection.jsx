@@ -23,21 +23,19 @@ const FaqSection = memo(() => {
   };
 
   return (
-    <section className={styles.faq__bg} id='faq'>
+    <section className={styles.faq} id='faq'>
       <div className='container'>
-        <div className={styles.faq}>
-          <h2 className={styles.faq__title}>FAQ</h2>
-          <div className={styles.faq__columns}>
-            <div className={styles.faq__column}>
-              {localisationDataToBeDisplayed.slice(0, 5).map((item) => (
-                <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
-              ))}
-            </div>
-            <div className={styles.faq__column}>
-              {localisationDataToBeDisplayed.slice(5, 10).map((item) => (
-                <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
-              ))}
-            </div>
+        <h2 className={styles.faq__title}>FAQ</h2>
+        <div className={styles.faq__columns}>
+          <div className={styles.faq__column}>
+            {localisationDataToBeDisplayed.slice(0, 5).map((item) => (
+              <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
+            ))}
+          </div>
+          <div className={styles.faq__column}>
+            {localisationDataToBeDisplayed.slice(5, 10).map((item) => (
+              <ItemFaq key={item.id} handleOnClick={handleOnClick} item={item} openId={openId} />
+            ))}
           </div>
         </div>
       </div>
