@@ -17,7 +17,7 @@ const matchSkills = ({ skillsHost, skillsUser }) => {
 
     if (!skillsUserMatch && skillsHost[i]) {
       otherSkills.push({
-        id: i,
+        id: skillsHost[i]?.id,
         name: skillsHost[i]?.name,
         hostGrade: Math.round(skillsHost[i]?.averageMark),
         userGrade: null,
@@ -26,7 +26,7 @@ const matchSkills = ({ skillsHost, skillsUser }) => {
 
     if (!skillsHostMatch && skillsUser[i]) {
       otherSkills.unshift({
-        id: i,
+        id: skillsUser[i]?.id,
         name: skillsUser[i]?.name,
         hostGrade: null,
         userGrade: Math.round(skillsUser[i]?.averageMark),
@@ -35,7 +35,7 @@ const matchSkills = ({ skillsHost, skillsUser }) => {
 
     if (skillsHostMatch && skillsUserMatch) {
       skills.push({
-        id: i,
+        id: `${skillsHostMatch?.id}-${skillsUserMatch?.id}`,
         name: skillsHostMatch.name,
         hostGrade: Math.round(skillsHost[i]?.averageMark),
         userGrade: Math.round(skillsUser[i]?.averageMark),
