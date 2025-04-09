@@ -253,6 +253,8 @@ export const uk = {
         code_length_max: 'Code must be exactly 6 digits long',
         error: 'Невірний код. Спробуйте ще раз.',
         success: 'Пароль успішно змінено!',
+        new_password: 'Новий пароль',
+        repeat_new_password: 'Повторіть новий пароль',
       },
       editPage: {
         personalInformation: {
@@ -526,6 +528,7 @@ export const uk = {
         title: 'Рівень',
         description: 'Покращуйте свої навички, щоб перейти на наступний рівень поточної спеціалізації.',
       },
+      levelOfCategory: 'Рівень {{level}}',
       interviewChartMonths: {
         '01': 'Січ',
         '02': 'Лют',
@@ -543,7 +546,7 @@ export const uk = {
       statistics: {
         title: 'Статистика',
         level_chart_title: 'Рівень',
-        hard_skills_chart_title: 'Hard Skills за продуктивністю',
+        hard_skills_chart_title: 'Хард скіли за продуктивністю',
         hard_skills_chart_text: 'Цей графік відображає оцінки ваших навичок від 0 до 10.',
         interview_chart_title: 'Інтерв’ю',
         interview_chart_days: '10 днів',
@@ -564,7 +567,7 @@ export const uk = {
       softSkills: {
         title: 'Soft skills',
         averageMark: 'Середня оцінка:',
-        emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші Soft Skills',
+        emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші софт скіли',
       },
       modal: {
         specialization: {
@@ -1039,7 +1042,7 @@ export const uk = {
         duration: 'Тривалість',
         platform: 'Платформа',
         link:
-          'Ваш урок розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
+          'Ваша співбесіда розпочнеться в запланований час. Скасувати або перенести його можна за 24 години до початку.' +
           ' Ознайомтесь з нашою <a>політикою скасування</a> для деталей.',
         canceledMeeting: 'Скасувати зустріч',
         joinMeeting: 'Доєднатись до інтерв’ю',
@@ -1070,7 +1073,7 @@ export const uk = {
     },
     chat: {
       search: 'Пошук',
-      emptyChatLstUsers: 'Поки немає чатів',
+      emptyChatLstUsers: 'Ще немає чатів',
       enterMessages: 'Введіть повідомлення',
     },
     interviewRequest: {
@@ -1090,7 +1093,7 @@ export const uk = {
         interviewLanguage: 'Мова співбесіди:',
       },
       buttons: {
-        addTimeSlot: 'Додати час',
+        addTimeSlot: 'Додати таймслоти',
       },
       timeSlot: {
         status: {
@@ -1104,7 +1107,7 @@ export const uk = {
           tuesday: 'Вівторок',
           wednesday: 'Середа',
           thursday: 'Четвер',
-          friday: 'Пятниця',
+          friday: 'П’ятниця',
           saturday: 'Субота',
           sunday: 'Неділя',
         },
@@ -1112,20 +1115,20 @@ export const uk = {
       notifications: {
         delete: {
           oneTimeSlot: {
-            success: 'Deleted slot successfully',
-            error: 'Something went wrong',
+            success: 'Часовий слот успішно видалено',
+            error: 'Щось пішло не так',
           },
           allTimeSlots: {
-            success: 'Deleted all successfully',
-            error: 'Something went wrong',
+            success: 'Усі часові слоти успішно видалено',
+            error: 'Щось пішло не так',
           },
         },
       },
       deleteAllRequests: {
-        title: 'Delete request',
-        cancel: 'Cancel',
-        approve: 'Remove',
-        question: 'Are you sure you want to delete the {{mastery}} interview request as a {{role}}?',
+        title: 'Видалення запиту',
+        cancel: 'Скасувати',
+        approve: 'Видалити',
+        question: 'Ви впевнені, що хочете видалити запит на співбесіду {{mastery}} як {{role}}?',
       },
     },
     countriesList: {
