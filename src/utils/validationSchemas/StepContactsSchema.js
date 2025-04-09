@@ -24,7 +24,7 @@ export const StepContactsSchema = Yup.object().shape({
     .nullable()
     .notRequired()
     .test('is-valid-phone', 'profile.modal.userInfo.contact.validation.phone', function (value) {
-      if (!value || value.trim() === '' || value.length < 6 || value === '+') return true;
+      if (!value || value.trim().length < 6 || value === '+') return true;
       const countryCode = this.parent.countryCode || 'UA';
       try {
         const phoneNumber = phoneUtil.parseAndKeepRawInput(value, countryCode.toUpperCase());

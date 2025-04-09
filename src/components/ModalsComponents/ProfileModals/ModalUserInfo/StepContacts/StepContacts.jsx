@@ -160,7 +160,7 @@ const StepContacts = () => {
         </Box>
       </Box>
       <ButtonDef
-        disabled={!formik.isValid || formik.isSubmitting || !formik.dirty} // Убрали !formik.dirty
+        disabled={!formik.isValid || formik.isSubmitting || !formik.dirty}
         label={t('profile.modal.btn')}
         loading={isLoading}
         sx={styles.btn}
