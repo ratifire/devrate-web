@@ -5,8 +5,8 @@ import { styles } from './SkillsParticipantItem.styles';
 
 const SkillsParticipantItem = ({ name, userGrade, hostGrade }) => {
   const isGradesDefined = hostGrade !== null && userGrade !== null;
-  const isUserGradeDefined = userGrade === null;
-  const isHostGradeDefined = hostGrade === null;
+  const isHostGradeDefined = userGrade === null;
+  const isUserGradeDefined = hostGrade === null;
 
   return (
     <>
@@ -19,30 +19,30 @@ const SkillsParticipantItem = ({ name, userGrade, hostGrade }) => {
             <>
               <LinearProgress
                 sx={[styles.userProgress, styles.progress]}
-                value={hostGrade * 10}
+                value={userGrade * 10}
                 variant='determinate'
               />
               <LinearProgress
                 sx={[styles.hostProgress, styles.progress]}
-                value={userGrade * 10}
+                value={hostGrade * 10}
                 variant='determinate'
               />
             </>
           )}
           {isHostGradeDefined && (
-            <LinearProgress sx={[styles.userProgress, styles.progress]} value={userGrade * 10} variant='determinate' />
+            <LinearProgress sx={[styles.hostProgress, styles.progress]} value={hostGrade * 10} variant='determinate' />
           )}
           {isUserGradeDefined && (
-            <LinearProgress sx={[styles.hostProgress, styles.progress]} value={hostGrade * 10} variant='determinate' />
+            <LinearProgress sx={[styles.userProgress, styles.progress]} value={userGrade * 10} variant='determinate' />
           )}
           <Typography sx={styles.grade}>
             {isGradesDefined && (
               <>
-                {hostGrade}:{userGrade}
+                {userGrade}:{hostGrade}
               </>
             )}
-            {isHostGradeDefined && <>{userGrade}/10</>}
-            {isUserGradeDefined && <>{hostGrade}/10</>}
+            {isUserGradeDefined && <>{userGrade}/10</>}
+            {isHostGradeDefined && <>{hostGrade}/10</>}
           </Typography>
         </Box>
       </Box>
