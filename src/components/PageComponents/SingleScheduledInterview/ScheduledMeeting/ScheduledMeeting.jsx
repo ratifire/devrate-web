@@ -95,7 +95,6 @@ const ScheduledMeeting = () => {
   const time = formatTimeToUtc(startTime);
   const startAndTime = formatTimeWithOffset(startTime);
   const status = getStatusByTime(startTime);
-
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.boxTitle}>
@@ -103,7 +102,7 @@ const ScheduledMeeting = () => {
           {t('singleScheduledInterview.scheduledMeeting.title')}
         </Typography>
         <Typography component='p' sx={styles[status]} variant='subtitle2'>
-          {status}
+          {t(`singleScheduledInterview.scheduledMeeting.${status}`).toUpperCase()}
         </Typography>
       </Box>
       <Box sx={styles.boxDataTime}>

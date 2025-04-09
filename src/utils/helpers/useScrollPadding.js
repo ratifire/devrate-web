@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import debounce from 'lodash/debounce';
 
-export const useScrollPadding = (elementRef, size) => {
+export const useScrollPadding = (elementRef, size, data) => {
   useEffect(() => {
     const element = elementRef.current;
     if (!element) return;
@@ -20,5 +20,5 @@ export const useScrollPadding = (elementRef, size) => {
       window.removeEventListener('resize', checkScroll);
       checkScroll.cancel();
     };
-  }, [elementRef, size]);
+  }, [elementRef, size, data]);
 };

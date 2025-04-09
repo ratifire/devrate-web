@@ -1,6 +1,6 @@
 import FeedbackModalSkeleton from './Modal/FeedbackModalSkeleton';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
-import { ScheduleSkeleton } from './Pages/ScheduleSkeleton';
+import { CalendarSkeleton, SmallCalendarSkeleton, ClosestEventSkeleton } from './Pages/scheduleSkeleton';
 import {
   CategoriesSkeleton,
   HardSkillsChartSkeleton,
@@ -50,7 +50,6 @@ export {
   InterviewsSkeleton,
   LevelChartSkeleton,
   LevelSkeleton,
-  ScheduleSkeleton,
   SkillsAssessmentChartSkeleton,
   SkillsSkeleton,
   BaseUserInfoSkeleton,
@@ -72,4 +71,7 @@ export {
   ParticipantEvaluationsSkeleton,
   InterviewSkillsSkeleton,
   InterviewRequestSkeleton,
+  CalendarSkeleton,
+  ClosestEventSkeleton,
+  SmallCalendarSkeleton,
 };

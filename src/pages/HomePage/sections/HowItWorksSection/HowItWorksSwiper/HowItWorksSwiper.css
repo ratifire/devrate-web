@@ -15,7 +15,6 @@
 .swiper-slide {
   display: flex !important;
   align-items: center !important;
-  height: 431px !important;
 }
 
 .swiper-slide-active,
