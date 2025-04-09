@@ -998,9 +998,9 @@ export const uk = {
         interviewFeedbackReadLess: 'Читати менше',
         interviewFeedbackReadMore: 'Читати більше',
         interviewStatisticsTitle: 'Статистика',
-        interviewStatisticsHardSkills: 'Hard Skills',
-        interviewStatisticsSoftSkills: 'Soft Skills',
-        interviewStatisticsOverall: 'Over All',
+        interviewStatisticsHardSkills: 'Hard skills',
+        interviewStatisticsSoftSkills: 'Soft skills',
+        interviewStatisticsOverall: 'Загалом',
       },
       scheduleInterviewModal: {
         title: 'Запланувати співбесіду',
