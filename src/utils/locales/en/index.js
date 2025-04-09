@@ -1040,6 +1040,9 @@ export const en = {
           success: 'Meeting canceled successfully',
           error: 'Something went wrong',
         },
+        UPCOMING: 'Upcoming',
+        'IN PROCESS': 'In Process',
+        'AWAITING FEEDBACK': 'Awaiting Feedback',
       },
       interviewSkills: {
         skills: 'Skills',

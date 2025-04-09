@@ -1046,6 +1046,9 @@ export const uk = {
           success: 'Зустріч успішно скасована',
           error: 'Щось пішло не так',
         },
+        UPCOMING: 'Майбутня',
+        'IN PROCESS': 'У процесі',
+        'AWAITING FEEDBACK': 'Очікує на відгук',
       },
       interviewSkills: {
         skills: 'Навички',
