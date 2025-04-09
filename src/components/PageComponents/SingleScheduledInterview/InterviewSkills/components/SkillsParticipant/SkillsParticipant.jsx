@@ -9,12 +9,16 @@ const SkillsParticipant = ({ data, matching, other }) => {
 
   return (
     <Box sx={styles.wrapper}>
-      <Typography component='h6' sx={styles.title} variant='h6'>
-        {matching}
-      </Typography>
-      {skills.map((v) => (
-        <SkillsParticipantItem key={v.id} leftGrade={v.leftGrade} name={v.name} rightGrade={v.rightGrade} />
-      ))}
+      {!!skills.length && (
+        <>
+          <Typography component='h6' sx={styles.title} variant='h6'>
+            {matching}
+          </Typography>
+          {skills.map((v) => (
+            <SkillsParticipantItem key={v.id} leftGrade={v.leftGrade} name={v.name} rightGrade={v.rightGrade} />
+          ))}
+        </>
+      )}
       {!!otherSkills.length && (
         <Accordion sx={styles.accordion}>
           <AccordionSummary
@@ -23,7 +27,7 @@ const SkillsParticipant = ({ data, matching, other }) => {
             id='panel-all-header'
             sx={styles.accordionSummary}
           >
-            <Typography component='h6' sx={styles.title} variant='h6'>
+            <Typography component='h6' variant='h6'>
               {other}
             </Typography>
           </AccordionSummary>

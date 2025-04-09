@@ -25,14 +25,14 @@ export const styles = {
       borderRadius: '3px',
     },
   }),
-  leftProgress: (theme) => ({
+  userProgress: (theme) => ({
     '& > span': {
-      backgroundColor: theme.palette.interviewSkills.leftCircle,
+      backgroundColor: theme.palette.interviewSkills.userCircle,
     },
   }),
-  rightProgress: (theme) => ({
+  hostProgress: (theme) => ({
     '& > span': {
-      backgroundColor: theme.palette.interviewSkills.rightCircle,
+      backgroundColor: theme.palette.interviewSkills.hostCircle,
     },
   }),
   grade: {

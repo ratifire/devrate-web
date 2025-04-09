@@ -5,8 +5,8 @@ import { styles } from './SkillsParticipantItem.styles';
 
 const SkillsParticipantItem = ({ name, leftGrade, rightGrade }) => {
   const isGradesDefined = rightGrade !== null && leftGrade !== null;
-  const isLeftGradeDefined = leftGrade === null;
-  const isRightGradeDefined = rightGrade === null;
+  const isUserGradeDefined = leftGrade === null;
+  const isHostGradeDefined = rightGrade === null;
 
   return (
     <>
@@ -18,35 +18,31 @@ const SkillsParticipantItem = ({ name, leftGrade, rightGrade }) => {
           {isGradesDefined && (
             <>
               <LinearProgress
-                sx={[styles.leftProgress, styles.progress]}
-                value={leftGrade * 10}
+                sx={[styles.userProgress, styles.progress]}
+                value={rightGrade * 10}
                 variant='determinate'
               />
               <LinearProgress
-                sx={[styles.rightProgress, styles.progress]}
-                value={rightGrade * 10}
+                sx={[styles.hostProgress, styles.progress]}
+                value={leftGrade * 10}
                 variant='determinate'
               />
             </>
           )}
-          {isRightGradeDefined && (
-            <LinearProgress sx={[styles.leftProgress, styles.progress]} value={leftGrade * 10} variant='determinate' />
+          {isHostGradeDefined && (
+            <LinearProgress sx={[styles.userProgress, styles.progress]} value={leftGrade * 10} variant='determinate' />
           )}
-          {isLeftGradeDefined && (
-            <LinearProgress
-              sx={[styles.rightProgress, styles.progress]}
-              value={rightGrade * 10}
-              variant='determinate'
-            />
+          {isUserGradeDefined && (
+            <LinearProgress sx={[styles.hostProgress, styles.progress]} value={rightGrade * 10} variant='determinate' />
           )}
           <Typography sx={styles.grade}>
             {isGradesDefined && (
               <>
-                {leftGrade}:{rightGrade}
+                {rightGrade}:{leftGrade}
               </>
             )}
-            {isRightGradeDefined && <>{leftGrade}/10</>}
-            {isLeftGradeDefined && <>{rightGrade}/10</>}
+            {isHostGradeDefined && <>{leftGrade}/10</>}
+            {isUserGradeDefined && <>{rightGrade}/10</>}
           </Typography>
         </Box>
       </Box>
