@@ -1,8 +1,13 @@
 export const styles = {
-  wrapper: {
+  wrapper: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
-  },
+    paddingY: theme.spacing(2),
+    borderBottom: `1px solid ${theme.palette.background.level3}`,
+    '&:last-child': {
+      borderBottom: 'none',
+    },
+  }),
   boxProgress: {
     maxWidth: '188px',
     width: '100%',

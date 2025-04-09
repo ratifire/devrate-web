@@ -1,4 +1,4 @@
-import { Box, Divider, LinearProgress, Typography } from '@mui/material';
+import { Box, LinearProgress, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import CustomTooltip from '@components/UI/CustomTooltip';
 import { styles } from './SkillsParticipantItem.styles';
@@ -9,45 +9,34 @@ const SkillsParticipantItem = ({ name, userGrade, hostGrade }) => {
   const isUserGradeDefined = hostGrade === null;
 
   return (
-    <>
-      <Box sx={styles.wrapper}>
-        <CustomTooltip title={name} variant='body'>
-          {name}
-        </CustomTooltip>
-        <Box sx={styles.boxProgress}>
+    <Box sx={styles.wrapper}>
+      <CustomTooltip title={name} variant='body'>
+        {name}
+      </CustomTooltip>
+      <Box sx={styles.boxProgress}>
+        {isGradesDefined && (
+          <>
+            <LinearProgress sx={[styles.userProgress, styles.progress]} value={userGrade * 10} variant='determinate' />
+            <LinearProgress sx={[styles.hostProgress, styles.progress]} value={hostGrade * 10} variant='determinate' />
+          </>
+        )}
+        {isHostGradeDefined && (
+          <LinearProgress sx={[styles.hostProgress, styles.progress]} value={hostGrade * 10} variant='determinate' />
+        )}
+        {isUserGradeDefined && (
+          <LinearProgress sx={[styles.userProgress, styles.progress]} value={userGrade * 10} variant='determinate' />
+        )}
+        <Typography sx={styles.grade}>
           {isGradesDefined && (
             <>
-              <LinearProgress
-                sx={[styles.userProgress, styles.progress]}
-                value={userGrade * 10}
-                variant='determinate'
-              />
-              <LinearProgress
-                sx={[styles.hostProgress, styles.progress]}
-                value={hostGrade * 10}
-                variant='determinate'
-              />
+              {userGrade}:{hostGrade}
             </>
           )}
-          {isHostGradeDefined && (
-            <LinearProgress sx={[styles.hostProgress, styles.progress]} value={hostGrade * 10} variant='determinate' />
-          )}
-          {isUserGradeDefined && (
-            <LinearProgress sx={[styles.userProgress, styles.progress]} value={userGrade * 10} variant='determinate' />
-          )}
-          <Typography sx={styles.grade}>
-            {isGradesDefined && (
-              <>
-                {userGrade}:{hostGrade}
-              </>
-            )}
-            {isUserGradeDefined && <>{userGrade}/10</>}
-            {isHostGradeDefined && <>{hostGrade}/10</>}
-          </Typography>
-        </Box>
+          {isUserGradeDefined && <>{userGrade}/10</>}
+          {isHostGradeDefined && <>{hostGrade}/10</>}
+        </Typography>
       </Box>
-      <Divider sx={styles.divider} />
-    </>
+    </Box>
   );
 };
 

@@ -7,10 +7,6 @@ export const styles = {
   title: {
     paddingBottom: 4,
   },
-  divider: (theme) => ({
-    marginY: theme.spacing(2),
-    backgroundColor: theme.palette.background.level3,
-  }),
   accordion: {
     backgroundColor: 'transparent',
     backgroundImage: 'none',
