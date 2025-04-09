@@ -7,10 +7,10 @@ import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
 import { modalNames } from '@utils/constants/modalNames.js';
-import { useModalController } from '@hooks/useModalController.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import LinearProgressWithLabel from '@components/UI/LinearProgressWithLabel';
 import UserAvatar from '@components/UI/UserAvatar';
-import { useProfileProgress } from '@hooks/useProfileProgress';
+import { useProfileProgress } from '@utils/hooks/useProfileProgress';
 import { useTranslation } from 'react-i18next';
 import { styles } from './BaseUserInfo.styles';
 
