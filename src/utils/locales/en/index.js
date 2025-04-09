@@ -1066,8 +1066,8 @@ export const en = {
       noSpecializationsAvailable: 'No specializations available',
       selectSpecializations: 'Specializations',
       role: {
-        candidate: 'Respondent',
-        interviewer: 'Interviewer',
+        CANDIDATE: 'Respondent',
+        INTERVIEWER: 'Interviewer',
       },
       requestHeader: {
         titleLauncher: 'as a',

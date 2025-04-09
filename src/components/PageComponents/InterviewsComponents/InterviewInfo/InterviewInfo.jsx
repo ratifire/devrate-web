@@ -6,6 +6,7 @@ import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInte
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice.js';
 import { lvlMastery } from '@utils/constants/masteryLvl.js';
 import { ConvertMilliInYears } from '@utils/helpers/convertMilliInYears.js';
+import formatRoleLetterCase from '../../../../utils/helpers/formatRoleLetterCase.js';
 import { styles } from './InterviewInfo.styles.js';
 
 const InterviewInfo = () => {
@@ -51,7 +52,7 @@ const InterviewInfo = () => {
         </Typography>
       </Box>
       <Typography sx={styles.role} variant='body1'>
-        {t('interviews.passedInterviews.interviewInfoRole')}: {role}
+        {t('interviews.passedInterviews.interviewInfoRole')}: {formatRoleLetterCase(role, t)}
       </Typography>
       <Box sx={styles.hostWrapper}>
         <Typography sx={styles.host} variant='body1'>
