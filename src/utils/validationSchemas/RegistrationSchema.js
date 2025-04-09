@@ -4,14 +4,6 @@ import { emailValidationSchema } from './EmailValidationSchema';
 
 export const RegistrationSchema = Yup.object().shape({
   email: emailValidationSchema,
-  country: Yup.string()
-    .transform((value, originalValue) => {
-      if (typeof originalValue === 'object' && originalValue?.target?.value) {
-        return originalValue.target.value;
-      }
-      return value;
-    })
-    .required('modal.registration.required'),
   firstName: Yup.string()
     .min(2, 'modal.registration.first_name_short')
     .max(50, 'modal.registration.first_name_long')
