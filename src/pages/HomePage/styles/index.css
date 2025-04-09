@@ -18,6 +18,20 @@ html {
   background-color: #161616 !important;
 }
 
+@media screen and (width > 1440px) {
+  .homePage {
+    background-image: url('../assets/purpleBallBottom.svg');
+    background-repeat: no-repeat;
+    background-position: 100% 92%;
+  }
+}
+
+@media screen and (width > 1730px) {
+  .homePage {
+    background-position: 95% 92%;
+  }
+}
+
 .btn {
   display: flex;
   align-items: baseline;

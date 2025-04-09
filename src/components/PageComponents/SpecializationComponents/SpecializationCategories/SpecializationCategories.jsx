@@ -158,7 +158,9 @@ const SpecializationCategories = () => {
                 <CustomTooltip customStyles={styles.specialization_name} title={name} variant='h6'>
                   {name}
                 </CustomTooltip>
-                <Typography variant='subtitle2'>Level {masteryData[id]?.level}</Typography>
+                <Typography variant='subtitle2'>
+                  {t('specialization.levelOfCategory', { level: masteryData[id]?.level })}
+                </Typography>
               </Box>
               {main && <StarIcon sx={styles.star} />}
             </Box>

@@ -12,6 +12,13 @@ export const scheduleDark = {
       arrowSwitcherColor: '#A9A9AA',
       arrowSwitcherBackgroundColor: '#CEB0FA',
     },
+    dayPicker: {
+      selectDay: '#6200EE',
+      text: '#1D1D1D',
+      selectedText: '#FFFFFF',
+      hovered: '#8133F1',
+      selectedWeek: '#CEB0FA',
+    },
     popup: {
       backgroundColor: '#252527',
       popupBorderColor: '#252527',
@@ -19,9 +26,10 @@ export const scheduleDark = {
       userInfoBorderColor: '#A9A9AA',
       titleColor: '#A9A9AA',
       iconColor: '#E0CCFF',
+      boxShadow: '2px 4px 6px 0px #00000000',
     },
     sideBarEvent: {
-      backgroundColor: '#3E3E40',
+      backgroundColor: '#444446',
       titleColor: '#FFFFFF',
       dateAndTimeColor: '#EFE6FD',
       participant: '#ECECED',

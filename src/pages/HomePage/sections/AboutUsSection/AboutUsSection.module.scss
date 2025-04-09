@@ -3,84 +3,37 @@
 .about {
   display: flex;
   align-items: center;
-  padding-bottom: 100px;
+  padding-bottom: 200px;
+  background-image: url('../../assets/aboutUsMascot/coloredBells.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @include desktop {
+    padding-bottom: 180px;
+  }
+
+  @include tablet-large {
+    padding-bottom: 120px;
+    background-image: url('../../assets/aboutUsMascot/coloredTabletL.svg');
+  }
 
   @include tablet {
+    background-image: none;
     margin-top: 100px;
+    padding-bottom: 100px;
   }
 
   @include phone {
     margin-top: 80px;
-  }
-
-  &__bg {
-    padding-bottom: 136px;
-    position: relative;
-    z-index: 10;
-
-    @include tablet-large {
-      padding-bottom: 0;
-    }
-
-    @include phone {
-      padding-bottom: 0;
-    }
-
-    &::before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      background-image: url('../../assets/BackgroundImages/Background_3-01_aboutus.svg');
-      background-repeat: no-repeat;
-      background-position: top right;
-      background-size: cover;
-      width: 100%;
-      height: 100%;
-
-      @include tablet {
-        background-image: url('../../assets/BackgroundImages/Background_2-01.png');
-        background-position: bottom left;
-        top: 0;
-      }
-
-      @include phone {
-        background-image: url('../../assets/BackgroundImages/Background_2-01.png');
-        background-position: top right;
-        background-size: 100% 600px;
-        top: 0;
-      }
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      background-image: linear-gradient(0deg, #161616 10%, rgb(0 0 0 / 0%) 50%);
-
-      @include tablet {
-        background-image: none;
-      }
-
-      @include phone {
-        background-image: url('../../assets/BackgroundImages/Background_3-01.png');
-        background-size: 100% 600px;
-        height: 600px;
-        top: 600px;
-      }
-    }
+    padding-bottom: 33px;
   }
 }
 
 .heading {
-  font-family: 'Zen Dots', sans-serif;
+  font-family: Tektur, sans-serif;
   text-align: center;
   font-size: 48px;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.01em;
   color: #fff;
   text-shadow: 2px 2px 4px rgb(29 29 29 / 25%);
@@ -88,8 +41,13 @@
   position: relative;
   z-index: 10;
 
-  @include desktop-macbook {
+  @include desktop {
     font-size: 30px;
+    margin-bottom: 60px;
+  }
+
+  @include tablet-large {
+    margin-bottom: 56px;
   }
 
   @include tablet {
@@ -113,23 +71,6 @@
   }
 }
 
-.backgroundImg {
-  display: none;
-
-  @include phone {
-    display: block;
-    width: 268px;
-    height: 320px;
-    margin: 0 auto;
-    background-image: url('../../assets/aboutUsImg.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    z-index: 10;
-  }
-}
-
 .gridContainer {
   align-self: center;
   justify-content: space-between;
@@ -139,7 +80,7 @@
     'topLeft . topRight'
     'botLeft . botRight';
   grid-gap: 80px 2px;
-  background-image: url('../../assets/aboutUsImg.svg');
+  background-image: url('../../assets/aboutUsMascot/mascotCenter.svg');
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
@@ -176,6 +117,9 @@
     grid-gap: 80px 2px;
     position: relative;
     z-index: 10;
+    background-image: url('../../assets/aboutUsMascot/mascotCenter.svg');
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   @include phone {
@@ -232,26 +176,32 @@
 .card {
   position: relative;
   z-index: 1;
-  padding: 24px 36px 26px;
+  padding: 24px 36px;
   max-width: 571px;
   height: 245px;
-  background-color: transparent;
+  background-color: #1d1d1dcc;
   display: flex;
   justify-content: center;
   flex-direction: column;
+
+  &:nth-child(odd) {
+    border: 1px solid #360083;
+  }
+
+  &:nth-child(even) {
+    border: 1px solid #84340b;
+  }
 
   @include desktop {
     justify-self: center;
     max-width: 452px;
     height: 194px;
-    padding: 18px 16px;
   }
 
   @include tablet {
     justify-self: center;
     max-width: 452px;
     height: 194px;
-    padding: 18px 16px;
   }
 
   @include phone {
@@ -261,56 +211,13 @@
     height: 100%;
   }
 
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    background-repeat: no-repeat;
-    background-position: top left;
-    background-size: 100% 100%;
-
-    @include desktop {
-      max-width: 452px;
-    }
-
-    @include phone {
-      width: 328px;
-    }
-  }
-
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    max-width: 555px;
-    height: calc(100% - 20px);
-    background-color: #1d1d1dcc;
-
-    @include desktop-macbook {
-      height: calc(100% - 10px);
-    }
-
-    @include tablet-large {
-      background-color: transparent;
-      display: none;
-    }
-  }
-
   &.topLeft {
     grid-area: topLeft;
 
     &::before {
       background-image: url('../../assets/AbouSectionBorder/topLeftBorder.svg');
 
-      @include desktop-macbook {
+      @include desktop {
         max-width: 452px;
       }
 
@@ -331,7 +238,7 @@
     &::before {
       background-image: url('../../assets/AbouSectionBorder/botLeftBorder.svg');
 
-      @include desktop-macbook {
+      @include desktop {
         max-width: 452px;
       }
 
@@ -348,7 +255,7 @@
     &::before {
       background-image: url('../../assets/AbouSectionBorder/topRightBorder.svg');
 
-      @include desktop-macbook {
+      @include desktop {
         max-width: 452px;
       }
 
@@ -365,7 +272,7 @@
     &::before {
       background-image: url('../../assets/AbouSectionBorder/botRightBorder.svg');
 
-      @include desktop-macbook {
+      @include desktop {
         max-width: 452px;
       }
 
@@ -386,7 +293,7 @@
     position: relative;
     z-index: 3;
 
-    @include desktop-macbook {
+    @include desktop {
       width: fit-content;
       font-size: 24px;
       font-weight: 800;
@@ -461,7 +368,7 @@
     position: relative;
     z-index: 3;
 
-    @include desktop-macbook {
+    @include desktop {
       font-size: 18px;
       line-height: 1.5;
       letter-spacing: 0;

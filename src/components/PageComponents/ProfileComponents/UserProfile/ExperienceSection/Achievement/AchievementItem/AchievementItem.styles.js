@@ -1,6 +1,6 @@
 const styles = {
   achievementItemContainer: (theme) => ({
-    width: '100%',
+    width: `calc(50% - ${theme.spacing(2)})`,
     padding: theme.spacing(3),
     backgroundColor: theme.palette.sliderAssessment.backgroundColor,
     border: theme.palette.sliderAssessment.border,

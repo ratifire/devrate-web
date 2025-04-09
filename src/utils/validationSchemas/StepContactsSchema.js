@@ -9,14 +9,22 @@ const behanceRegex = /^https:\/\/www\.behance\.net\/[a-zA-Z0-9-]+\/?$/;
 const telegramRegex = /^(https:\/\/t\.me\/[a-zA-Z0-9_]+\/?|@[a-zA-Z0-9_]+)$/;
 
 export const StepContactsSchema = Yup.object().shape({
-  telegram: Yup.string().matches(telegramRegex, 'profile.modal.userInfo.contact.validation.url').optional(),
-  linkedIn: Yup.string().matches(linkedinRegex, 'profile.modal.userInfo.contact.validation.url').optional(),
-  gitHub: Yup.string().matches(githubRegex, 'profile.modal.userInfo.contact.validation.url').optional(),
-  behance: Yup.string().matches(behanceRegex, 'profile.modal.userInfo.contact.validation.url').optional(),
+  telegram: Yup.string()
+    .nullable()
+    .notRequired()
+    .matches(telegramRegex, 'profile.modal.userInfo.contact.validation.url'),
+  linkedIn: Yup.string()
+    .nullable()
+    .notRequired()
+    .matches(linkedinRegex, 'profile.modal.userInfo.contact.validation.url'),
+  gitHub: Yup.string().nullable().notRequired().matches(githubRegex, 'profile.modal.userInfo.contact.validation.url'),
+  behance: Yup.string().nullable().notRequired().matches(behanceRegex, 'profile.modal.userInfo.contact.validation.url'),
   mail: emailValidationSchema,
   phone: Yup.string()
+    .nullable()
+    .notRequired()
     .test('is-valid-phone', 'profile.modal.userInfo.contact.validation.phone', function (value) {
-      if (!value) return true;
+      if (!value || value.trim().length < 6 || value === '+') return true;
       const countryCode = this.parent.countryCode || 'UA';
       try {
         const phoneNumber = phoneUtil.parseAndKeepRawInput(value, countryCode.toUpperCase());
@@ -25,6 +33,5 @@ export const StepContactsSchema = Yup.object().shape({
       } catch (error) {
         return false;
       }
-    })
-    .optional(),
+    }),
 });

@@ -43,7 +43,7 @@ const Statistic = () => {
       <Box sx={styles.boxCharts}>
         <Box sx={styles.chart}>
           <Typography component='p' variant='subtitle3'>
-            Soft Skills
+            {t('interviews.passedInterviews.interviewStatisticsSoftSkills')}
           </Typography>
           <LevelGauge
             colorGrad='gradientSoftSkills'
@@ -63,7 +63,7 @@ const Statistic = () => {
         </Box>
         <Box sx={styles.chart}>
           <Typography component='p' variant='subtitle3'>
-            Hard Skills
+            {t('interviews.passedInterviews.interviewStatisticsHardSkills')}
           </Typography>
           <LevelGauge
             colorGrad='gradientHardSkills'
@@ -83,7 +83,7 @@ const Statistic = () => {
         </Box>
         <Box sx={styles.chart}>
           <Typography component='p' variant='subtitle3'>
-            Over All
+            {t('interviews.passedInterviews.interviewStatisticsOverall')}
           </Typography>
           <LevelGauge
             colorGrad='gradientOverall'

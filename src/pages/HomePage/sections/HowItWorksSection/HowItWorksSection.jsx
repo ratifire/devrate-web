@@ -9,7 +9,7 @@ const HowItWorksSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className={styles.bg} id='howItWorks'>
+    <section id='howItWorks'>
       <div className='container'>
         <h2 className={`${styles.titleMobile} ${styles.mainTitle}`}>
           How It <span>Works?</span>
@@ -19,7 +19,7 @@ const HowItWorksSection = () => {
           <div className={styles.works__block}>
             <div className={`${styles.works__left} ${styles.left1}`}>
               <h3 className={styles.mainTitle}>
-                How It <span>Works?</span>
+                {t('home.howItWorks.titleText1')} <span>{t('home.howItWorks.titleText2')}</span>
               </h3>
               <div className={`${styles.card__wrapper} ${styles.m1}`}>
                 <div className={styles.card__title__wrapper}>

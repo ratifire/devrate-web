@@ -10,6 +10,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
           ? [
               ...result.content.map(({ id }) => ({ type: TAG_TYPES.ScheduledInterview, id })),
               { type: TAG_TYPES.ScheduledInterview, id: 'LIST' },
+              { type: TAG_TYPES.Event, id: 'LIST' },
             ]
           : [{ type: TAG_TYPES.ScheduledInterview, id: 'LIST' }],
 
@@ -46,10 +47,17 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+    getSingleInterviewById: builder.query({
+      query: ({ interviewId }) => `/interviews/${interviewId}/visible`,
+    }),
     getScheduledInterviewById: builder.query({
       query: ({ interviewId }) => `/interviews/events/${interviewId}`,
     }),
   }),
 });
 
-export const { useGetAllScheduledInterviewsQuery, useGetScheduledInterviewByIdQuery } = scheduledInterviewApiSlice;
+export const {
+  useGetAllScheduledInterviewsQuery,
+  useGetScheduledInterviewByIdQuery,
+  useLazyGetSingleInterviewByIdQuery,
+} = scheduledInterviewApiSlice;
