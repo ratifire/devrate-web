@@ -552,13 +552,13 @@ export const uk = {
         passed: 'Пройдено',
       },
       hardSkills: {
-        title: 'Хард скіли',
+        title: 'Hard skills',
         averageMark: 'Середня оцінка:',
         emptySkills:
           'Зараз у вашому профілі немає жодних навичок. Додайте їх, щоб покращити себе та відстежувати свій прогрес',
       },
       softSkills: {
-        title: 'Софт скіли',
+        title: 'Soft skills',
         averageMark: 'Середня оцінка:',
         emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші Soft Skills',
       },
@@ -996,8 +996,8 @@ export const uk = {
         interviewFeedbackReadLess: 'Читати менше',
         interviewFeedbackReadMore: 'Читати більше',
         interviewStatisticsTitle: 'Статистика',
-        interviewStatisticsHardSkills: 'Хард скіли',
-        interviewStatisticsSoftSkills: 'Софт скіли',
+        interviewStatisticsHardSkills: 'Hard skills',
+        interviewStatisticsSoftSkills: 'Soft skills',
         interviewStatisticsOverall: 'Загалом',
       },
       scheduleInterviewModal: {
