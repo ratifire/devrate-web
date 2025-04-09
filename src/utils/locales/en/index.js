@@ -10,24 +10,23 @@ export const en = {
         aboutUs: 'About us',
         faq: 'FAQ',
         contacts: 'Contacts',
+        login: 'Login',
       },
       hero: {
         title: 'A multifunctional platform from developers for developers',
         text: 'Interview. Ratings. Summary',
         button_text: 'Registration',
-        mainText1: 'Prepare for',
-        mainText2: 'Technical',
-        mainText3: 'Interviews',
-        mainText4: ' with support',
-        mainText5: 'from',
-        mainText6: 'Experts and Peers!',
+        mainText1: 'Technical Interviews',
+        mainText2: ' with support from',
+        mainText3: 'Experts and Peers!',
+        mainTextMobile1: 'Unfortunately, we don&#39;t have a mobile version yet ;(',
+        mainTextMobile2: 'But that&#39;s just for now!',
         secondaryText:
           'Master your interview skills with real-world practice alongside experts and peers. Get personalized\n' +
           '                  feedback, objective evaluations, and in-depth insights to confidently prepare for success in any\n' +
           '                  interview!',
         secondaryTextMobile: 'To register, open the website via a computer',
         registration: 'Registration',
-        login: 'Login',
       },
       howItWorks: {
         titleText1: 'How It',
@@ -43,6 +42,8 @@ export const en = {
           ' Get detailed feedback to help you improve your soft and hard skills in your area of your specialization.',
       },
       aboutUs: {
+        title1Part: 'About',
+        title2Part: 'Us',
         article1Title: 'Real Experience',
         article1Text:
           'We provide a realistic environment for technical interviews, helping you prepare for challenging tasks and questions.',
@@ -70,6 +71,8 @@ export const en = {
         privacyPolicy: 'Privacy Policy',
         allRightsReserved: 'All rights reserved.',
         allTrademarks: 'All trademarks, logos, and brand names are the property of their respective owners.',
+        formPart1: 'Get',
+        formPart2: 'In Touch',
         placeholderName: 'Name Surname',
         placeholderEmail: 'Enter your email',
         placeholderRequest: 'Enter your request...',

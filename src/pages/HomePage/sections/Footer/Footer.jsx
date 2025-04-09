@@ -65,7 +65,8 @@ const Footer = () => {
           <div className={styles.contactForm}>
             <div className={styles.contactForm__titleContainer}>
               <h2 className={styles.contactForm__title}>
-                <span className={styles.contactForm__titleFocus}>Get</span> In Touch
+                <span className={styles.contactForm__titleFocus}>{t('home.footer.formPart1')} </span>
+                {t('home.footer.formPart2')}
               </h2>
               <div className={styles.contactForm__socialIcons}>
                 <a
