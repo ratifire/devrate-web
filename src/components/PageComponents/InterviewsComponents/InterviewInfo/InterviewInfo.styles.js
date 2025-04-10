@@ -65,8 +65,13 @@ export const styles = {
     color: theme.palette.interviewInfo.roleColor,
     marginRight: theme.spacing(1),
   }),
-  hostName: (theme) => ({
+  hostLink: (theme) => ({
     color: theme.palette.interviewInfo.hostNameColor,
+    textDecoration: 'none',
+    transition: 'color 0.2s',
+    '&:hover': {
+      color: theme.palette.primary[300],
+    },
   }),
   hostSpecialization: (theme) => ({
     color: theme.palette.interviewInfo.roleColor,
