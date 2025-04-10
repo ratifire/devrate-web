@@ -1014,6 +1014,7 @@ export const en = {
         interviewCountTitle: 'Number of interviews for the selected timeslots',
         commentTitle: 'Comment',
         commentPlaceholder: 'Describe what you expect from the interview',
+        agree: 'I agree to record the interview and publish',
         required: 'This is a required field',
         comment_min: 'Comment should be longer than 5 characters',
         comment_max: 'Comment should be shorter than 100 characters',

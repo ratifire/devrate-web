@@ -41,6 +41,12 @@ export const styles = {
       marginRight: theme.spacing(2),
     },
   }),
+  checkbox: (theme) => ({
+    maxWidth: '100%',
+    width: '100%',
+    marginBottom: theme.spacing(5),
+    marginLeft: theme.spacing(1),
+  }),
   iconBtn: (theme) => ({
     marginTop: theme.spacing(1),
     padding: '12px',

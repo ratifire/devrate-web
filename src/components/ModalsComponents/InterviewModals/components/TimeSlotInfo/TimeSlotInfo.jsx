@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import PropTypes from 'prop-types';
 import { useGetDefLanguageQuery } from '@redux/api/slices/defaultLanguage/defaultLanguageApiSlice.js';
+import { FormCheckbox } from '@components/FormsComponents/Inputs/index.js';
 import FormInput from '../../../../FormsComponents/Inputs/FormInput';
 import SpecialisationLevelCombinedSelect from '../../../../FormsComponents/Inputs/SpecialisationLevelCombinedSelect/index.js';
 import SelectInterviewLanguage from '../../../../FormsComponents/Inputs/SelectSkills/index.js';
@@ -72,6 +73,16 @@ const TimeSlotInfo = ({ formik, mySpecialization }) => {
           name='comment'
           placeholder={t('interviews.scheduleInterviewModal.commentPlaceholder')}
           value={formik.values.comment}
+        />
+      </Box>
+      <Box sx={styles.checkbox}>
+        <FormCheckbox
+          changeHandler={formik.handleChange}
+          checked={formik.values.isChecked}
+          error={formik.touched.isChecked && Boolean(formik.errors.isChecked)}
+          helperText={formik.touched.isChecked && formik.errors.isChecked}
+          label='interviews.scheduleInterviewModal.agree'
+          name='isChecked'
         />
       </Box>
     </Box>
