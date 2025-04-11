@@ -43,8 +43,8 @@ const defaultHardSkills = {
   ['Marketing Specialist']: ['Creativity', 'Analytical skills', 'Communicational skills', 'Marketing plan & strategy'],
   ['Data Analyst']: ['SQL', 'Excel', 'Tableau / Power BI'],
   ['iOS/macOS Engineer']: ['Swift', 'Core Data'],
-  ['Golang Engineer']: ['Go,'],
-  ['Database Engineer']: ['SQL, ERD'],
+  ['Golang Engineer']: ['Go'],
+  ['Database Engineer']: ['SQL', 'ERD'],
 };
 
 export default defaultHardSkills;
