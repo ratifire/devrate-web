@@ -79,6 +79,10 @@ const styles = {
     lineHeight: '24px',
     fontWeight: 400,
     cursor: 'pointer',
+    transition: 'color 0.2s',
+    '&:hover': {
+      color: theme.palette.primary[300],
+    },
   }),
 };
 
