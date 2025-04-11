@@ -52,6 +52,7 @@ const useScheduleInterviewForm = () => {
     timeSlots: [],
     addedTimeSlots: [],
     pendingSlots: pendingSlots || '',
+    consentStatus: false,
   };
 
   const onSubmit = async (values) => {
@@ -77,6 +78,7 @@ const useScheduleInterviewForm = () => {
         expiredAt: values.timeSlots.toSorted().at(-1),
         desiredInterview: Number(values.interviewCount),
         timeSlots: values.addedTimeSlots,
+        consentStatus: values.consentStatus,
       };
     }
 
