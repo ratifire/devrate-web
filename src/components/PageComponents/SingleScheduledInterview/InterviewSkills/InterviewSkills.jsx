@@ -58,20 +58,28 @@ const InterviewSkills = () => {
       </Box>
       <Box sx={styles.boxParticipants}>
         <Box sx={styles.boxParticipant}>
-          <Box sx={styles.rightCircle} />
-          <Typography component='p' variant='subtitle2'>
-            {hostFullName}
-          </Typography>
-        </Box>
-        <Box sx={styles.boxParticipant}>
-          <Box sx={styles.leftCircle} />
+          <Box sx={styles.userCircle} />
           <Typography component='p' variant='subtitle2'>
             {userFullName}
           </Typography>
         </Box>
+        <Box sx={styles.boxParticipant}>
+          <Box sx={styles.hostCircle} />
+          <Typography component='p' variant='subtitle2'>
+            {hostFullName}
+          </Typography>
+        </Box>
       </Box>
-      <SkillsParticipant category={'Soft Skills'} data={softSkills} />
-      <SkillsParticipant category={'Hard Skills'} data={hardSkills} />
+      <SkillsParticipant
+        data={softSkills}
+        matching={t('singleScheduledInterview.interviewSkills.matchingSoftSkills')}
+        other={t('singleScheduledInterview.interviewSkills.otherSoftSkills')}
+      />
+      <SkillsParticipant
+        data={hardSkills}
+        matching={t('singleScheduledInterview.interviewSkills.matchingHardSkills')}
+        other={t('singleScheduledInterview.interviewSkills.otherHardSkills')}
+      />
     </Box>
   );
 };
