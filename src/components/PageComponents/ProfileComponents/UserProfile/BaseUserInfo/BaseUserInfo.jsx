@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -8,7 +8,7 @@ import { openChat } from '@redux/slices/chat/chatSlice.js';
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
 import UserAvatar from '@components/UI/UserAvatar';
-import Bookmark from '@components/UI/Bookmark';
+// import Bookmark from '@components/UI/Bookmark';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { styles } from './BaseUserInfo.styles';
 
@@ -16,7 +16,7 @@ const BaseUserInfo = ({ id }) => {
   const dispatch = useDispatch();
   const { data: personalData } = useGetPersonalUserQuery(id);
   const { t } = useTranslation();
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  // const [isBookmarked, setIsBookmarked] = useState(false);
   const userData = personalData || {};
   const {
     firstName: getFirstName,
@@ -29,9 +29,9 @@ const BaseUserInfo = ({ id }) => {
   const { data } = useGetAvatarUserQuery(id);
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
-  const handleToggleBookmark = (newValue) => {
-    setIsBookmarked(newValue);
-  };
+  // const handleToggleBookmark = (newValue) => {
+  //   setIsBookmarked(newValue);
+  // };
 
   const handleWriteMessage = () => {
     dispatch(openChat({ id, firstName: getFirstName, lastName: getLastName, userPicture: userPicture }));
@@ -60,7 +60,7 @@ const BaseUserInfo = ({ id }) => {
       <Box sx={styles.wrapperText}>
         <Typography sx={styles.userName} variant='h5'>
           {`${getFirstName} ${getLastName}`}
-          <Bookmark isBookmarked={isBookmarked} onToggle={handleToggleBookmark} />
+          {/*<Bookmark isBookmarked={isBookmarked} onToggle={handleToggleBookmark} />*/}
         </Typography>
         <Typography sx={styles.speciality} variant='subtitle1'>
           {getStatus || ''}

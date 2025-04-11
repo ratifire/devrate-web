@@ -7,6 +7,8 @@ import { useGetUserContactsQuery } from '@redux/api/slices/user/contacts/contact
 import { lightIcons, darkIcons, getIconsByType } from '@utils/constants/ProfileContacts/';
 import { constructUrlByType } from '@utils/helpers/urlHelpers.js';
 import { styles } from '@components/PageComponents/ProfileComponents/PersonalProfile/RightSection/RightSection.styles.js';
+import CustomTooltip from '@components/UI/CustomTooltip/index.js';
+
 const icons = { dark: darkIcons, light: lightIcons };
 
 const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
@@ -29,7 +31,9 @@ const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
 
           return (
             <Link key={id} href={href} sx={componentStyles.link} {...linkProps}>
-              <IconComponent />
+              <CustomTooltip title={type}>
+                <IconComponent />
+              </CustomTooltip>
             </Link>
           );
         })
