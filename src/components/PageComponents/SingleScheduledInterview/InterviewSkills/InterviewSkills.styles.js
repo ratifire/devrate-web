@@ -21,16 +21,16 @@ export const styles = {
     alignItems: 'center',
     gap: '8px',
   },
-  rightCircle: (theme) => ({
+  userCircle: (theme) => ({
     width: '14px',
     height: '14px',
     borderRadius: '50%',
-    backgroundColor: theme.palette.interviewSkills.rightCircle,
+    backgroundColor: theme.palette.interviewSkills.userCircle,
   }),
-  leftCircle: (theme) => ({
+  hostCircle: (theme) => ({
     width: '14px',
     height: '14px',
     borderRadius: '50%',
-    backgroundColor: theme.palette.interviewSkills.leftCircle,
+    backgroundColor: theme.palette.interviewSkills.hostCircle,
   }),
 };
