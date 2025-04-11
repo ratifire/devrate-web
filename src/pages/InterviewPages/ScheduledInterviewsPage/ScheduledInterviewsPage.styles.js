@@ -14,7 +14,7 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     gridGap: theme.spacing(4),
-    minHeight: 'calc(100vh - 100px)',
+    minHeight: 'calc(100vh - 200px)',
   }),
   box: (theme) => ({
     height: '100%',
