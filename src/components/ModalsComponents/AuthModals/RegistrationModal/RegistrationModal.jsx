@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Box, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice.js';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
@@ -144,6 +144,11 @@ const RegistrationModal = () => {
             type='password'
             value={formik.values.repeatPassword}
           />
+        </Box>
+        <Box sx={styles.selectingAuth}>
+          <Divider sx={styles.divider} />
+          <Typography>{t('modal.registration.selecting_auth')}</Typography>
+          <Divider sx={styles.divider} />
         </Box>
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
