@@ -29,14 +29,15 @@ const styles = {
     justifyContent: 'spaceBetween',
     gridGap: '10px',
   },
-  selectingAuth: (theme) => ({
+  selectingAuth: {
     maxWidth: '100%',
     width: '100%',
     display: 'flex',
-    gap: theme.spacing(1),
+    gap: '8px',
     justifyContent: 'space-between',
     alignItems: 'center',
-  }),
+    marginBottom: '24px',
+  },
   subtitle: {
     maxWidth: '5%',
     fontSize: '18px',
@@ -76,6 +77,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     gap: '16px',
+    marginBottom: '24px',
   },
   authLink: {
     maxWidth: '50%',
