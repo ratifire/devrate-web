@@ -36,7 +36,6 @@ const styles = {
     gap: '8px',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '24px',
   },
   subtitle: {
     maxWidth: '5%',
@@ -77,7 +76,6 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     gap: '16px',
-    marginBottom: '24px',
   },
   authLink: {
     maxWidth: '50%',
@@ -99,6 +97,12 @@ const styles = {
     '&:hover': {
       backgroundColor: 'rgba(68, 68, 70, 0.30)',
     },
+  },
+  boxOAuth: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '24px',
+    marginBottom: '24px',
   },
 };
 
