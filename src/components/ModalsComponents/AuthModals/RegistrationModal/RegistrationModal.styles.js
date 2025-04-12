@@ -72,6 +72,26 @@ const styles = {
     borderRadius: theme.spacing(2),
     padding: '12px',
   }),
+  authLinks: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  authLink: {
+    maxWidth: '241px',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '8px',
+    textDecoration: 'none',
+    fontSize: '18px',
+    color: '#FFF',
+    fontFamily: 'Open Sans, sans-serif',
+    padding: '12px 24px',
+    borderRadius: '86px',
+    backgroundColor: 'rgba(68, 68, 70, 0.20)',
+    border: '1px solid #444446',
+  },
 };
 
 export default styles;
