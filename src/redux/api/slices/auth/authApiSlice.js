@@ -20,6 +20,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     oAuthAuthorize: builder.mutation({
       query: ({ code, state }) => ({
         url: '/auth/oauth/authorize',
+        method: 'POST',
         body: {
           authorizationCode: code,
           state,
