@@ -11,19 +11,19 @@ const OAuth = ({ children }) => {
   const state = params.get('state');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data } = useOAuthAuthorizeMutation({ code, state }, { skip: !code || !state });
+  const [authorization] = useOAuthAuthorizeMutation();
 
   useEffect(() => {
-    if (!data) return;
+    if (!code || !state) return;
 
-    const { userData, idToken, authToken } = data;
+    const { userData, idToken, authToken } = authorization({ code, state }).unwrap();
     dispatch(setCredentials({ data: userData }));
 
     if (idToken && authToken) {
       dispatch(setTokens({ idToken, authToken }));
       navigate('/profile', { replace: true });
     }
-  }, [data]);
+  }, [code, state]);
 
   return children;
 };
