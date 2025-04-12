@@ -7,16 +7,6 @@ import { clearTokens } from '@redux/slices/auth/tokenSlice';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    oAuthAuthorize: builder.mutation({
-      query: ({ code, state }) => ({
-        url: '/auth/oauth/authorize',
-        method: 'POST',
-        body: {
-          authorizationCode: code,
-          state,
-        },
-      }),
-    }),
     createUser: builder.mutation({
       query: (body) => ({
         url: '/auth/signup',
@@ -57,6 +47,26 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { email, password },
         credentials: 'include',
+      }),
+      transformResponse: (response, meta) => {
+        const headers = meta?.response?.headers;
+        if (headers) {
+          const { authToken, idToken } = getTokenInHeaders({ headers });
+
+          if (authToken && idToken) {
+            return { authToken, idToken, userData: { ...response } };
+          }
+        }
+      },
+    }),
+    oAuthAuthorize: builder.mutation({
+      query: ({ code, state }) => ({
+        url: '/auth/oauth/authorize',
+        method: 'POST',
+        body: {
+          authorizationCode: code,
+          state,
+        },
       }),
       transformResponse: (response, meta) => {
         const headers = meta?.response?.headers;
