@@ -12,9 +12,11 @@ import { StepPersonalSchema } from '@utils/validationSchemas/index';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { StepPersonalSkeleton } from '@components/UI/Skeleton';
 import { ErrorComponent } from '@components/UI/Exceptions';
+import useStepHandler from '@utils/hooks/useStepHandler.js';
 import { styles } from './StepPersonal.styles';
 
 const StepPersonal = () => {
+  const { handleNext } = useStepHandler();
   const {
     data: userCountries,
     isFetching: isFetchingGetCountry,
@@ -64,6 +66,7 @@ const StepPersonal = () => {
         description: description,
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.personal.create.success'), { variant: 'success' });
+      handleNext();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.personal.create.error'), { variant: 'error' });
