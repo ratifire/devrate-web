@@ -36,14 +36,12 @@ const RegistrationModal = () => {
   };
 
   const onSubmit = async (values, { resetForm, setErrors }) => {
-    const { email, firstName, lastName, country, news, password } = values;
+    const { email, firstName, lastName, password } = values;
     try {
       await createUser({
         email,
         firstName,
         lastName,
-        country: country.target.value,
-        subscribed: news,
         password,
       }).unwrap();
 
