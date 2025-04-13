@@ -2,6 +2,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
+import { useParams } from 'react-router';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
 import { SkillsSkeleton } from '../../Skeleton';
@@ -11,6 +13,9 @@ import { styles } from './SpecializationSkills.styles';
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
+  const { interviewId } = useParams();
+  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId });
+  const role = interviewData?.role;
 
   const getSkillsContainerStyle = () => {
     if (skills.length === 0) return styles.skillsContainer;
@@ -18,15 +23,21 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
     const firstType = skills[0]?.type;
     const allSameType = skills.every((skill) => skill.type === firstType);
 
-    if (allSameType) {
-      return [styles.skillsContainer, firstType === 'HARD_SKILL' ? styles.hardSkills : styles.softSkills];
+    if (!allSameType || !firstType) return styles.skillsContainer;
+
+    if (role === 'INTERVIEWER') {
+      return [styles.skillsContainer, firstType === 'SOFT_SKILL' ? styles.passedSoftSkills : styles.passedHardSkills];
     }
 
-    return styles.skillsContainer;
+    return [styles.skillsContainer, firstType === 'HARD_SKILL' ? styles.hardSkills : styles.softSkills];
   };
 
   if (isFetching) {
     return <SkillsSkeleton />;
+  }
+
+  if (role === 'INTERVIEWER' && title === 'Hard skills') {
+    return null;
   }
 
   if (isError) {

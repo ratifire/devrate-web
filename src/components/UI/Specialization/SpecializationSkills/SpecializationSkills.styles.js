@@ -55,6 +55,14 @@ export const styles = {
   softSkills: {
     height: '7.25rem',
   },
+
+  passedHardSkills: {
+    height: '100%',
+  },
+
+  passedSoftSkills: {
+    height: '100%',
+  },
   markWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
