@@ -104,6 +104,11 @@ const styles = {
     gap: '24px',
     marginBottom: '24px',
   },
+  link: {
+    pointerEvents: 'none',
+    color: '#B78AF7',
+    textDecoration: 'none',
+  },
 };
 
 export default styles;
