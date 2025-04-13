@@ -18,20 +18,15 @@ const withAuth = (Component) => {
       if (!code || !state) return;
 
       const submit = async () => {
-        try {
-          const { userData, idToken, authToken } = await authorization({ code, state }).unwrap();
+        const { userData, idToken, authToken } = await authorization({ code, state }).unwrap();
 
-          if (userData) {
-            dispatch(setCredentials({ data: userData }));
-          }
+        if (userData) {
+          dispatch(setCredentials({ data: userData }));
+        }
 
-          if (idToken && authToken) {
-            dispatch(setTokens({ idToken, authToken }));
-            navigate('/profile', { replace: true });
-          }
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.error('Authorization failed:', error);
+        if (idToken && authToken) {
+          dispatch(setTokens({ idToken, authToken }));
+          navigate('/profile', { replace: true });
         }
       };
 
