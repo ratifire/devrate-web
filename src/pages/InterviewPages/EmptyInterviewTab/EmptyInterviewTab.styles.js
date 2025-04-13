@@ -16,7 +16,7 @@ export const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     gridGap: theme.spacing(3),
-    minHeight: 'calc(100vh - 185px)',
+    minHeight: 'calc(100vh - 192px)',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     marginTop: '-8px',
     padding: theme.spacing(4),

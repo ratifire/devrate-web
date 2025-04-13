@@ -673,7 +673,7 @@ export const uk = {
       greeting:
         'Ласкаво просимо! Ми раді вітати вас у Skillzzy — спільноті, де розробники діляться досвідом, навчаються та знаходять нові можливості',
       interviewFeedback:
-        'Вітаємо із завершенням співбесіди! Будь ласка, заповніть коротку форму та оцініть навички співрозмовника. Залишити вiдгук',
+        'Вітаємо із завершенням співбесіди! Будь ласка, заповніть коротку форму та оцініть навички співрозмовника.',
       interviewRejected:
         'Співбесіду з {{rejectionName}}, заплановану на {{date}}, скасовано. Ми вже працюємо над пошуком нового співрозмовника та скоро повідомимо Вас',
       interviewRequestExpired:
@@ -1019,6 +1019,7 @@ export const uk = {
         interviewCountTitle: "Кількість інтерв'ю для обраних таймслотів",
         commentTitle: 'Коментар',
         commentPlaceholder: 'Опишіть, що ви очікуєте від інтерв’ю',
+        consentStatus: 'Я погоджуюсь на запис співбесіди та її публікацію',
         required: "Це обов'язкове поле",
         comment_min: 'Коментар має бути більше 5 символів',
         comment_max: 'Коментар має бути менше 100 символів',
@@ -1059,6 +1060,10 @@ export const uk = {
       },
       interviewSkills: {
         skills: 'Навички',
+        matchingSoftSkills: 'Співпадаючі soft skills',
+        otherSoftSkills: 'Інші soft skills',
+        matchingHardSkills: 'Співпадаючі hard skills',
+        otherHardSkills: 'Інші hard skills',
       },
       userCardScheduledInterview: {
         btn: 'Написати повідомлення',
