@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { Trans, useTranslation } from 'react-i18next';
-import { Box, Divider, Link, Typography } from '@mui/material';
-import googleIcon from '@assets/icons/AuthLogo/google.svg';
-import linkedInIcon from '@assets/icons/AuthLogo/linkedin.svg';
+import { Box, Link, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice.js';
+import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
 import { RegistrationSchema } from '@utils/validationSchemas';
 import { FormCheckbox, FormInput } from '@components/FormsComponents/Inputs';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
-import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '@utils/constants/modalNames.js';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord';
+import { modalNames } from '@utils/constants/modalNames';
 import { Link as RouterLink } from 'react-router';
+import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
 import styles from './RegistrationModal.styles';
 
 const initialValues = {
@@ -29,7 +28,6 @@ const RegistrationModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [createUser, { isLoading: isLoadingCreating }] = useCreateUserMutation();
-  const url = import.meta.env.VITE_API_DEV_URL || import.meta.env.VITE_API_URL;
 
   const handleKeyDown = (e) => {
     if (e.key === ' ') {
@@ -150,39 +148,23 @@ const RegistrationModal = () => {
             value={formik.values.repeatPassword}
           />
         </Box>
-        <Box sx={styles.boxOAuth}>
-          <Box sx={styles.selectingAuth}>
-            <Divider sx={styles.divider} />
-            <Typography sx={styles.subtitle}>{t('modal.registration.selecting_auth')}</Typography>
-            <Divider sx={styles.divider} />
-          </Box>
-          <Box sx={styles.authLinks}>
-            <Link href={`${url}/auth/oauth/redirect/linkedIn`} sx={styles.authLink}>
-              <Box alt='LinkedIn' component={'img'} src={linkedInIcon} />
-              LinkedIn
-            </Link>
-            <Link href={`${url}/auth/oauth/redirect/google`} sx={styles.authLink}>
-              <Box alt='Google' component={'img'} src={googleIcon} />
-              Google
-            </Link>
-          </Box>
-          <FormCheckbox
-            isLink
-            changeHandler={formik.handleChange}
-            checked={formik.values.agreement}
-            error={formik.touched.agreement && Boolean(formik.errors.agreement)}
-            helperText={formik.touched.agreement && formik.errors.agreement}
-            label={
-              <Trans
-                components={{
-                  a: <Link component={RouterLink} sx={styles.link} to='/' />,
-                }}
-                i18nKey='modal.registration.agreement'
-              />
-            }
-            name='agreement'
-          />
-        </Box>
+        <OAuthSection />
+        <FormCheckbox
+          isLink
+          changeHandler={formik.handleChange}
+          checked={formik.values.agreement}
+          error={formik.touched.agreement && Boolean(formik.errors.agreement)}
+          helperText={formik.touched.agreement && formik.errors.agreement}
+          label={
+            <Trans
+              components={{
+                a: <Link component={RouterLink} sx={styles.link} to='/' />,
+              }}
+              i18nKey='modal.registration.agreement'
+            />
+          }
+          name='agreement'
+        />
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
             disabled={!isFormValid}
