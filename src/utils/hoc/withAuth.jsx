@@ -4,6 +4,9 @@ import { useOAuthAuthorizeMutation } from '@redux/api/slices/auth/authApiSlice.j
 import { useEffect } from 'react';
 import { setCredentials } from '@redux/slices/auth/authSlice.js';
 import { setTokens } from '@redux/slices/auth/tokenSlice.js';
+import { closeModal } from '@redux/slices/modal/modalSlice.js';
+import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 
 const withAuth = (Component) => {
   return function AuthComponent(props) {
@@ -12,21 +15,32 @@ const withAuth = (Component) => {
     const state = params.get('state');
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
+    const { t } = useTranslation();
     const [authorization] = useOAuthAuthorizeMutation();
 
     useEffect(() => {
       if (!code || !state) return;
 
       const submit = async () => {
-        const { userData, idToken, authToken } = await authorization({ code, state }).unwrap();
+        try {
+          const { userData, idToken, authToken } = await authorization({ code, state }).unwrap();
 
-        if (userData) {
-          dispatch(setCredentials({ data: userData }));
-        }
+          if (userData) {
+            dispatch(setCredentials({ data: userData }));
+          }
 
-        if (idToken && authToken) {
-          dispatch(setTokens({ idToken, authToken }));
-          navigate('/profile', { replace: true });
+          if (idToken && authToken) {
+            dispatch(setTokens({ idToken, authToken }));
+            navigate('/profile', { replace: true });
+          }
+          // eslint-disable-next-line no-unused-vars
+        } catch (err) {
+          enqueueSnackbar(t('modal.registration.sso_error'), {
+            variant: 'error',
+          });
+        } finally {
+          dispatch(closeModal());
         }
       };
 
