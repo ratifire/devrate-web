@@ -1,13 +1,19 @@
 export const styles = {
-  wrapper: {
+  wrapper: (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
-  },
+    paddingY: theme.spacing(2),
+    borderBottom: `1px solid ${theme.palette.background.level3}`,
+    '&:last-child': {
+      borderBottom: 'none',
+    },
+  }),
   boxProgress: {
     maxWidth: '188px',
     width: '100%',
     gap: '8px',
     alignItems: 'center',
+    justifyContent: 'flex-end',
     display: 'flex',
   },
   divider: (theme) => ({
@@ -24,14 +30,19 @@ export const styles = {
       borderRadius: '3px',
     },
   }),
-  leftProgress: (theme) => ({
+  userProgress: (theme) => ({
     '& > span': {
-      backgroundColor: theme.palette.interviewSkills.leftCircle,
+      backgroundColor: theme.palette.interviewSkills.userCircle,
     },
   }),
-  rightProgress: (theme) => ({
+  hostProgress: (theme) => ({
     '& > span': {
-      backgroundColor: theme.palette.interviewSkills.rightCircle,
+      backgroundColor: theme.palette.interviewSkills.hostCircle,
     },
   }),
+  grade: {
+    textAlign: 'right',
+    maxWidth: '40px',
+    width: '100%',
+  },
 };

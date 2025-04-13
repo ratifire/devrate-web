@@ -1017,6 +1017,7 @@ export const en = {
         interviewCountTitle: 'Number of interviews for the selected timeslots',
         commentTitle: 'Comment',
         commentPlaceholder: 'Describe what you expect from the interview',
+        consentStatus: 'I agree to record the interview and publish it',
         required: 'This is a required field',
         comment_min: 'Comment should be longer than 5 characters',
         comment_max: 'Comment should be shorter than 100 characters',
@@ -1055,6 +1056,10 @@ export const en = {
       },
       interviewSkills: {
         skills: 'Skills',
+        matchingSoftSkills: 'Matching soft skills',
+        otherSoftSkills: 'Other soft skills',
+        matchingHardSkills: 'Matching hard skills',
+        otherHardSkills: 'Other hard skills',
       },
       userCardScheduledInterview: {
         btn: 'Write a message',

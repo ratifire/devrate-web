@@ -9,6 +9,7 @@ import { modalNames } from '@utils/constants/modalNames.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
 import LanguagesList from '@components/UI/LanguagesList';
 import SocialsLinkList from '@components/UI/SocialsLinkList';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { styles } from './RightSection.styles';
 
 const RightSection = () => {
@@ -34,9 +35,11 @@ const RightSection = () => {
             {t('profile.right.contact')}
           </Typography>
           <Box>
-            <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenContactInfo}>
-              <EditIcon />
-            </IconButton>
+            <CustomTooltip title={t('profile.baseUserInfo.editBtn')}>
+              <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenContactInfo}>
+                <EditIcon />
+              </IconButton>
+            </CustomTooltip>
           </Box>
         </Box>
         <SocialsLinkList componentStyles={styles} />
@@ -47,9 +50,11 @@ const RightSection = () => {
             {t('profile.right.languages')}
           </Typography>
           <Box>
-            <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenLanguage}>
-              <EditIcon />
-            </IconButton>
+            <CustomTooltip title={t('profile.baseUserInfo.editBtn')}>
+              <IconButton aria-label='Edit user information' sx={styles.btnIcon} onClick={handleOpenLanguage}>
+                <EditIcon />
+              </IconButton>
+            </CustomTooltip>
           </Box>
         </Box>
         <Box gap={2} sx={styles.wrapperLanguages}>
