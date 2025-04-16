@@ -508,7 +508,7 @@ export const uk = {
           description_short: 'Опис занадто короткий',
           description_placeholder:
             'Мої навички у програмуванні на PHP, використанні ООП та підходу MVC підтримуються значним досвідом роботи з базами даних, такими як MySQL та PostgreSQL. Я ефективно використовую фреймворк Laravel 5.3 для розробки масштабованих веб-додатків та володію базовими знаннями Symfony 3, зокрема Sonata.',
-          required: 'This field is required',
+          required: "Це обов'язкове поле",
           startDateMinMessage: 'Стартова дата має бути пізніше 01/01/1950',
           startDateMaxMessage: 'Кінцева дата має бути не пізніше за поточку',
           endDateMessage: 'Кінцева дата має буди пізнішою за стартову дату',
