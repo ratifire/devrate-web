@@ -27,11 +27,12 @@
   @include tablet {
     flex-direction: column;
     grid-gap: 0;
-    background-image: none;
-    background-image: url('../../assets/hero/coloredBallsTablet1.svg');
+    background-position: center top;
+    background-image: url('../../assets/hero/coloredBallsTablet.svg');
   }
 
   @include phone {
+    background-image: none;
     align-items: flex-start;
   }
 
