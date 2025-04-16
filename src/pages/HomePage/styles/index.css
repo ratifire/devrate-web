@@ -32,6 +32,20 @@ html {
   }
 }
 
+@media screen and (width < 992px) {
+  .homePage {
+    background: url('../assets/purpleBallBottomTablet.svg') 90% 97% no-repeat;
+  }
+}
+
+@media screen and (width < 768px) {
+  .homePage {
+    background:
+      url('../assets/hero/coloredBallsMobil.svg') top center / contain no-repeat,
+      url('../assets/purpleBallBottomMobile.svg') 100% 96% no-repeat;
+  }
+}
+
 .btn {
   display: flex;
   align-items: baseline;
