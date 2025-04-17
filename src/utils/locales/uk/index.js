@@ -72,7 +72,7 @@ export const uk = {
         trademarks: 'Усі торгові марки, логотипи та назви брендів є <br/> власністю Ratifire Company.',
         footerText:
           'Вдосконалюйте свої навички як з початківцями, так і з досвідченими професіоналами. Наша платформа розроблена, щоб зробити процес підготовки до співбесіди більш плавним і менш напруженим для всіх.',
-        developedText: 'Розроблено компанією',
+        developedText: 'Розроблено',
         termsAndConditions: 'Terms and conditions',
         privacyPolicy: 'Privacy Policy',
         allRightsReserved: 'Всі права захищені.',
