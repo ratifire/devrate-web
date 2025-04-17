@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Box, Link, Typography } from '@mui/material';
@@ -26,7 +26,6 @@ const initialValues = {
 };
 
 const RegistrationModal = () => {
-  const [country, setCountry] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -34,7 +33,7 @@ const RegistrationModal = () => {
   const { data: userCountries } = useGetCountryListQuery();
 
   const handleChangeCountry = (value) => {
-    setCountry(value);
+    formik.setFieldValue('country', value);
   };
 
   const handleClose = () => dispatch(closeModal());
@@ -44,10 +43,6 @@ const RegistrationModal = () => {
       e.preventDefault();
     }
   };
-
-  useEffect(() => {
-    formik.setFieldValue('country', country);
-  }, [country]);
 
   const onSubmit = async (values, { resetForm, setErrors }) => {
     const { email, firstName, lastName, country, news, password } = values;
