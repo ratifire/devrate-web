@@ -7,8 +7,6 @@ import { useSelector } from 'react-redux';
 import { modalNames } from '@utils/constants/modalNames';
 import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
 import links from '@router/links.js';
-import awaitingIcon from '@assets/icons/InterviewPageIcons/green-ellipse.svg';
-import inProgressIcon from '@assets/icons/InterviewPageIcons/inProgress-ellipse.svg';
 import { useModalController } from '@utils/hooks/useModalController';
 import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
 import { useGetInterviewStatusQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
@@ -27,6 +25,7 @@ const InterviewHeader = () => {
   const { openModal } = useModalController();
   const open = Boolean(createButton);
   const isActiveSchedule = location.pathname.includes(links.scheduledInterviews);
+
   useEffect(() => {
     if (buttonRef.current) {
       setPopoverWidth(buttonRef.current.offsetWidth);
@@ -58,22 +57,10 @@ const InterviewHeader = () => {
       <Box sx={styles.interviewNavLinksBox}>
         <Box
           component={isActiveSchedule ? 'span' : NavLink}
-          sx={[styles.interviewNavLink, interviewStatus ? { pl: 0 } : { pl: '20px' }]}
+          sx={(theme) => styles.interviewNavLink(theme, interviewStatus?.status)}
           to={links.scheduledInterviews}
         >
-          {interviewStatus ? (
-            <>
-              <Box
-                alt='Green icon showing there is a scheduled interview'
-                component='img'
-                src={interviewStatus === 'IN_PROGRESS' ? inProgressIcon : awaitingIcon}
-                sx={styles.greenEllipse}
-              />
-              {t('interviews.navigationLinks.scheduled')}
-            </>
-          ) : (
-            <>{t('interviews.navigationLinks.scheduled')}</>
-          )}
+          {t('interviews.navigationLinks.scheduled')}
         </Box>
         <Box component={NavLink} sx={styles.interviewNavLink} to={links.passedInterviews}>
           {t('interviews.navigationLinks.passed')}

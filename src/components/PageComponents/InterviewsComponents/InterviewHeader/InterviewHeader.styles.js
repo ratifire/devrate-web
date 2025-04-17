@@ -40,12 +40,14 @@ const styles = {
       },
     },
   }),
-  interviewNavLink: (theme) => ({
+  interviewNavLink: (theme, interviewStatus) => ({
+    position: 'relative',
     display: 'inline-block',
     textDecoration: 'none',
     color: theme.palette.text.secondary,
     paddingBottom: '10px',
     paddingRight: '20px',
+    paddingLeft: interviewStatus ? '42px' : '20px',
     textTransform: 'none',
     fontSize: 20,
     fontWeight: '500',
@@ -61,6 +63,19 @@ const styles = {
     '&:not(:first-of-type)': {
       paddingLeft: '20px',
     },
+    ...(!!interviewStatus && {
+      '&::before': {
+        content: "''",
+        position: 'absolute',
+        top: '8px',
+        left: '20px',
+        width: '14px',
+        height: '14px',
+        backgroundColor: interviewStatus === 'IN_PROGRESS' ? '#DAFE22' : '#64FF2E',
+        borderRadius: '50%',
+        cursor: 'default',
+      },
+    }),
   }),
   buttonPrimary: (theme) => ({
     fontSize: 14,
