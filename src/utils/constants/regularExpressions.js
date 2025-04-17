@@ -1,1 +1,1 @@
-export default { passwordValidationRegex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*?])[A-Za-z\d!@#$&*?]{8,}$/ };
+export default { passwordValidationRegex: /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])(?!.*\s).{6,}$/ };
