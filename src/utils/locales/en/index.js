@@ -175,7 +175,8 @@ export const en = {
         last_name: 'Surname',
         password: 'Password',
         password_repeat: 'Repeat password',
-        password_tooltip: '8+ characters,\n' + 'at least 1 number, 1 uppercase and 1 lowercase letter, 1 symbol',
+        password_tooltip:
+          'Password must contain 6 characters, 1 uppercase letter, 1 digit, 1 special character no spaces',
         password_invalid: 'Incorrect password',
         news_letter: 'Send me news, surveys and special offers from SKILLZZY',
         agreement: 'I have read and agree to the Terms and conditions',
@@ -1014,6 +1015,7 @@ export const en = {
         interviewCountTitle: 'Number of interviews for the selected timeslots',
         commentTitle: 'Comment',
         commentPlaceholder: 'Describe what you expect from the interview',
+        consentStatus: 'I agree to record the interview and publish it',
         required: 'This is a required field',
         comment_min: 'Comment should be longer than 5 characters',
         comment_max: 'Comment should be shorter than 100 characters',

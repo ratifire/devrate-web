@@ -17,6 +17,7 @@ import useMergeState from '@utils/hooks/useMergeState';
 import { SpecializationModalSchema } from '@utils/validationSchemas/index';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import defaultHardSkills from '@utils/constants/Specialization/defaultHardSkills.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { AdvancedFormSelector, FormSelect } from '../../../FormsComponents/Inputs';
 import FormInput from '../../../FormsComponents/Inputs/FormInput';
@@ -71,6 +72,20 @@ const SpecializationModal = () => {
     formik.setFieldValue('mastery', value);
   };
   const handleChangeSpecialization = (value) => {
+    if (!value) {
+      setState({
+        skills: [],
+      });
+      return;
+    }
+    setState({
+      skills: (skills.length = 0),
+    });
+
+    const defaultSkills = defaultHardSkills[value].map((skill) => {
+      return { name: skill, type: 'HARD_SKILL' };
+    });
+    setState({ skills: [...skills, ...defaultSkills] });
     const isSpecialization = mySpecialization.some((spec) => spec.name === value);
 
     if (isSpecialization) {
@@ -208,7 +223,7 @@ const SpecializationModal = () => {
               </IconButton>
             </Box>
             <Box sx={styles.skills}>
-              {skills.map(({ name }, index) => (
+              {skills?.map(({ name }, index) => (
                 <Responsibility
                   // eslint-disable-next-line react/no-array-index-key
                   key={index}

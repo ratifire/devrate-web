@@ -15,7 +15,7 @@ const AboutUsSection = () => {
             <h3 className={styles.topLeft}>{t('home.aboutUs.article1Title')}</h3>
             <p>{t('home.aboutUs.article1Text')}</p>
           </div>
-          <div className={`${styles.card} ${styles.topRight}`}>
+          <div className={`${styles.card} ${styles.topRight} ${styles.dnMobile}`}>
             <h3 className={styles.topRight}>{t('home.aboutUs.article2Title')}</h3>
             <p>{t('home.aboutUs.article2Text')}</p>
           </div>

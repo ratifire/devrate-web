@@ -2,6 +2,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import CustomTooltip from '@components/UI/CustomTooltip/index.js';
+import { useTranslation } from 'react-i18next';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
 import { SkillsSkeleton } from '../../Skeleton';
@@ -11,6 +13,7 @@ import { styles } from './SpecializationSkills.styles';
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
+  const { t } = useTranslation();
 
   const getSkillsContainerStyle = () => {
     if (skills.length === 0) return styles.skillsContainer;
@@ -38,9 +41,16 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
       <Box sx={styles.title}>
         <Typography variant='h6'>{title}</Typography>
         {openModal && (
-          <IconButton aria-label='Edit user information' disabled={isDisabled} sx={styles.btnIcon} onClick={openModal}>
-            <EditIcon />
-          </IconButton>
+          <CustomTooltip title={t('profile.experience.skills.emptyTabName.title')}>
+            <IconButton
+              aria-label='Edit user information'
+              disabled={isDisabled}
+              sx={styles.btnIcon}
+              onClick={openModal}
+            >
+              <EditIcon />
+            </IconButton>
+          </CustomTooltip>
         )}
       </Box>
       <Box>
