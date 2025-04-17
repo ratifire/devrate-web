@@ -25,7 +25,8 @@
 
   @include phone {
     margin-top: 80px;
-    padding-bottom: 33px;
+    padding-bottom: 400px;
+    background: url('../../assets/aboutUsMascot/mascotMobile.svg') bottom center no-repeat;
   }
 }
 
@@ -183,6 +184,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  border-radius: 8px;
 
   &:nth-child(odd) {
     border: 1px solid #360083;
@@ -211,76 +213,16 @@
     height: 100%;
   }
 
-  &.topLeft {
-    grid-area: topLeft;
-
-    &::before {
-      background-image: url('../../assets/AbouSectionBorder/topLeftBorder.svg');
-
-      @include desktop {
-        max-width: 452px;
-      }
-
-      @include tablet {
-        min-width: 327px;
-      }
-
-      @include phone {
-        width: 328px;
-        background-image: url('../../assets/AbouSectionBorder/topLeftBorderMobile.png');
-      }
-    }
-  }
-
   &.botLeft {
     grid-area: botLeft;
-
-    &::before {
-      background-image: url('../../assets/AbouSectionBorder/botLeftBorder.svg');
-
-      @include desktop {
-        max-width: 452px;
-      }
-
-      @include phone {
-        width: 328px;
-        background-image: url('../../assets/AbouSectionBorder/botLeftBorderMobile.png');
-      }
-    }
   }
 
   &.topRight {
     grid-area: topRight;
-
-    &::before {
-      background-image: url('../../assets/AbouSectionBorder/topRightBorder.svg');
-
-      @include desktop {
-        max-width: 452px;
-      }
-
-      @include phone {
-        width: 328px;
-        background-image: url('../../assets/AbouSectionBorder/botLeftBorderMobile.png');
-      }
-    }
   }
 
   &.botRight {
     grid-area: botRight;
-
-    &::before {
-      background-image: url('../../assets/AbouSectionBorder/botRightBorder.svg');
-
-      @include desktop {
-        max-width: 452px;
-      }
-
-      @include phone {
-        width: 328px;
-        background-image: url('../../assets/AbouSectionBorder/topLeftBorderMobile.png');
-      }
-    }
   }
 
   & h3 {
@@ -395,5 +337,11 @@
     padding: 18px 16px;
     width: 100%;
     height: 100%;
+  }
+}
+
+.dnMobile {
+  @include phone {
+    display: none;
   }
 }
