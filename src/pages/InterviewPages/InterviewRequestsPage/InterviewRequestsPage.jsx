@@ -15,7 +15,7 @@ const InterviewRequestsPage = () => {
   const { id } = useSelector((state) => state.auth.user.data);
 
   const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
-  const isSpecializations = Boolean(specializations?.length);
+  const isSpecializations = !!specializations?.length;
 
   return !isSpecializations ? (
     <EmptyInterviewTab
