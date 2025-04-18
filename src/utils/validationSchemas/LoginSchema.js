@@ -30,7 +30,7 @@ export const LoginSchema = Yup.object().shape({
       return re.test(String(value).toLowerCase());
     }),
   password: Yup.string()
-    .min(8, 'modal.login.password_short')
+    .min(6, 'modal.login.password_short')
     .max(50, 'modal.login.password_long')
     .matches(regEx.passwordValidationRegex, 'modal.login.password_invalid')
     .required('modal.login.required'),
