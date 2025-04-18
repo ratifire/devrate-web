@@ -9,6 +9,8 @@ export const styles = {
     },
   },
   emptySoftSkills: {
+    height: '150px',
+    padding: '15px',
     display: 'flex',
     gap: '16px',
     justifyContent: 'space-between',

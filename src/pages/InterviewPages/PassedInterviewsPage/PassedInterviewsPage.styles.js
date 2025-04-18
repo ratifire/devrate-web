@@ -11,6 +11,7 @@ export const styles = {
     },
   }),
   contentWrapper: (theme) => ({
+    alignItems: 'flex-start',
     display: 'flex',
     justifyContent: 'space-between',
     gridGap: theme.spacing(4),
