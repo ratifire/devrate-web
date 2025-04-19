@@ -9,8 +9,10 @@ import { formatTimeToUtc, formatTimeWithOffset } from '@utils/helpers';
 import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice';
 import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
-import { openModal } from '@redux/slices/modal/modalSlice';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { openModal as modalOpen } from '@redux/slices/modal/modalSlice.js';
+import { useEffect } from 'react';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
@@ -25,6 +27,7 @@ const ScheduledMeeting = () => {
     data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
   const { enqueueSnackbar } = useSnackbar();
+  const { openModal } = useModalController();
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -53,6 +56,25 @@ const ScheduledMeeting = () => {
   const [cancelMeeting, { isError: isErrorCancelMeeting, isLoading: isLoadingCancelMeeting }] =
     useDeleteInterviewMutation();
 
+  const searchParams = new URLSearchParams(location.search);
+
+  useEffect(() => {
+    const modalParam = searchParams.get('modal');
+    const roleParam = searchParams.get('role');
+
+    if (modalParam === 'feedbackInterviewModal') {
+      dispatch(
+        modalOpen({
+          modalType: modalNames.feedbackInterviewModal,
+          data: {
+            feedbackId: eventId,
+            role: roleParam || role, // Fallback to prop/state role if query param not provided
+          },
+        })
+      );
+    }
+  }, []);
+
   const handleClickLeftBtn = () => {
     if (status === btnStatus['UPCOMING']) {
       cancelMeeting({ eventId })
@@ -74,11 +96,17 @@ const ScheduledMeeting = () => {
 
   const handleClickRightBtn = () => {
     if (status === btnStatus['UPCOMING'] || status === btnStatus['IN PROCESS']) {
-      window.open(roomUrl, '_blank');
+      // Create URL with query params to use in mirotalk in a survey later
+      const url = new URL(roomUrl);
+      if (eventId && role) {
+        url.searchParams.append('eventId', eventId);
+        url.searchParams.append('role', role);
+      }
+      window.open(url, '_blank');
     }
 
     if (status === btnStatus['AWAITING FEEDBACK']) {
-      dispatch(openModal({ modalType: modalNames.feedbackInterviewModal, data: { feedbackId: eventId, role } }));
+      openModal(modalNames.feedbackInterviewModal, { feedbackId: eventId, role });
     }
   };
 
