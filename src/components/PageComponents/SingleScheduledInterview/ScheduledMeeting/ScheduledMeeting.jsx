@@ -1,7 +1,7 @@
 import { Box, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
@@ -11,8 +11,6 @@ import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import { useModalController } from '@utils/hooks/useModalController.js';
-import { openModal as modalOpen } from '@redux/slices/modal/modalSlice.js';
-import { useEffect } from 'react';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
@@ -28,7 +26,6 @@ const ScheduledMeeting = () => {
   } = useSelector(selectCurrentUser);
   const { enqueueSnackbar } = useSnackbar();
   const { openModal } = useModalController();
-  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -55,25 +52,6 @@ const ScheduledMeeting = () => {
   } = useGetAvatarUserQuery(id, { skip: !id });
   const [cancelMeeting, { isError: isErrorCancelMeeting, isLoading: isLoadingCancelMeeting }] =
     useDeleteInterviewMutation();
-
-  const searchParams = new URLSearchParams(location.search);
-
-  useEffect(() => {
-    const modalParam = searchParams.get('modal');
-    const roleParam = searchParams.get('role');
-
-    if (modalParam === 'feedbackInterviewModal') {
-      dispatch(
-        modalOpen({
-          modalType: modalNames.feedbackInterviewModal,
-          data: {
-            feedbackId: eventId,
-            role: roleParam || role, // Fallback to prop/state role if query param not provided
-          },
-        })
-      );
-    }
-  }, []);
 
   const handleClickLeftBtn = () => {
     if (status === btnStatus['UPCOMING']) {
