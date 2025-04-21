@@ -366,6 +366,14 @@ export const uk = {
         contact: 'Контактна інформація',
         languages: 'Мови',
         aboutMe: 'Про мене',
+        tooltips: {
+          EMAIL: 'Email',
+          PHONE_NUMBER: 'Номер телефону',
+          TELEGRAM_LINK: 'Telegram',
+          LINKEDIN_LINK: 'LinkedIn',
+          GITHUB_LINK: 'GitHub',
+          BEHANCE_LINK: 'Behance',
+        },
       },
       userMenu: {
         profile: 'Профіль',
