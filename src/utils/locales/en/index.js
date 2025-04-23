@@ -1054,6 +1054,8 @@ export const en = {
       },
       interviewSkills: {
         skills: 'Skills',
+        tooltipInfo:
+          "Visual comparison of your skills (purple) versus your opponent's skills (yellow). The chart displays proficiency levels for both soft skills (communication, teamwork) and hard skills (technical professional abilities). Overlapping sections indicate where your skill levels match.",
         matchingSoftSkills: 'Matching soft skills',
         otherSoftSkills: 'Other soft skills',
         matchingHardSkills: 'Matching hard skills',
@@ -1065,6 +1067,8 @@ export const en = {
       },
       participantEvaluations: {
         title: 'Participant evaluations',
+        tooltipInfo:
+          "Comparison of participants' skill levels. The taller the bar, the more advanced the skill. Scale: 0 (none) to 10 (expert level)",
       },
       statistic: {
         title: 'Statistic',

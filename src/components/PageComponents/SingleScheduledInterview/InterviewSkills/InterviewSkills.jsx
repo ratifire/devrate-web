@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useLocation } from 'react-router';
-import InfoIcon from '@assets/icons/InterviewPageIcons/info.svg?react';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { useGetAllSkillsForMasteryIdQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { InterviewSkillsSkeleton } from '@components/UI/Skeleton';
+import InfoTooltip from '@components/UI/InfoTooltip/index.js';
 import prepareSkillsDataInterviewSkills from '../helpers/prepareSkillsDataInterviewSkills';
 import { styles } from './InterviewSkills.styles';
 import { SkillsParticipant } from './components';
@@ -54,7 +54,7 @@ const InterviewSkills = () => {
         <Typography component='h6' variant='h6'>
           {t('singleScheduledInterview.interviewSkills.skills')}
         </Typography>
-        <InfoIcon />
+        <InfoTooltip title='singleScheduledInterview.interviewSkills.tooltipInfo' />
       </Box>
       <Box sx={styles.boxParticipants}>
         <Box sx={styles.boxParticipant}>
