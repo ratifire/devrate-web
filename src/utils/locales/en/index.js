@@ -362,6 +362,14 @@ export const en = {
         contact: 'Contact Information',
         languages: 'Languages',
         aboutMe: 'About me',
+        tooltips: {
+          EMAIL: 'Email',
+          PHONE_NUMBER: 'Phone number',
+          TELEGRAM_LINK: 'Telegram',
+          LINKEDIN_LINK: 'LinkedIn',
+          GITHUB_LINK: 'GitHub',
+          BEHANCE_LINK: 'Behance',
+        },
       },
       userMenu: {
         profile: 'Profile',
