@@ -1,10 +1,10 @@
+import InterviewRequestSkeleton from '@components/UI/Skeleton/Pages/InterviewRequestSkeleton/InterviewRequestSkeleton.jsx';
 import { Box, Container, Paper } from '@mui/material';
+import { useGetInterviewRequestByMasteryIdQuery } from '@redux/api/slices/interviewRequestApiSlice.js';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
+import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
 import { lazy, memo, Suspense, useState } from 'react';
 import { useSelector } from 'react-redux';
-import InterviewRequestSkeleton from '@components/UI/Skeleton/Pages/InterviewRequestSkeleton/InterviewRequestSkeleton.jsx';
-import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
-import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
-import { useGetInterviewRequestByMasteryIdQuery } from '@redux/api/slices/interviewRequestApiSlice.js';
 import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
 import { styles } from './InterviewRequestsPage.styles.js';
 

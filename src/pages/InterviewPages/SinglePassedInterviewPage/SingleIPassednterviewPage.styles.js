@@ -27,7 +27,6 @@ export const styles = {
     marginTop: '2px',
     gridColumn: '1/6',
     gridRow: '2/5',
-    maxHeight: '1000px',
     padding: theme.spacing(4),
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     ' > div div': {
