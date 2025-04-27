@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Box, Divider, Link, Typography } from '@mui/material';
 import googleIcon from '@assets/icons/AuthLogo/google.svg';
 import linkedInIcon from '@assets/icons/AuthLogo/linkedin.svg';
@@ -8,11 +8,10 @@ import { useDispatch } from 'react-redux';
 import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice.js';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
 import { RegistrationSchema } from '@utils/validationSchemas';
-import { FormCheckbox, FormInput } from '@components/FormsComponents/Inputs';
+import { FormInput } from '@components/FormsComponents/Inputs';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
 import { modalNames } from '@utils/constants/modalNames.js';
-import { Link as RouterLink } from 'react-router';
 import styles from './RegistrationModal.styles';
 
 const initialValues = {
@@ -21,7 +20,6 @@ const initialValues = {
   lastName: '',
   password: '',
   repeatPassword: '',
-  agreement: false,
 };
 
 const RegistrationModal = () => {
@@ -165,22 +163,6 @@ const RegistrationModal = () => {
             Google
           </Link>
         </Box>
-        <FormCheckbox
-          isLink
-          changeHandler={formik.handleChange}
-          checked={formik.values.agreement}
-          error={formik.touched.agreement && Boolean(formik.errors.agreement)}
-          helperText={formik.touched.agreement && formik.errors.agreement}
-          label={
-            <Trans
-              components={{
-                a: <Link component={RouterLink} sx={styles.link} to='/' />,
-              }}
-              i18nKey='modal.registration.agreement'
-            />
-          }
-          name='agreement'
-        />
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
             disabled={!isFormValid}
