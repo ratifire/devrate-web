@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Box, Divider, Link, Typography } from '@mui/material';
 import googleIcon from '@assets/icons/AuthLogo/google.svg';
-import linkedInIcon from '@assets/icons/AuthLogo/linkedin.svg';
+import linkedInIcon from '@assets/icons/AuthLogo/linkedIn.svg';
 import { useDispatch } from 'react-redux';
 import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice.js';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
