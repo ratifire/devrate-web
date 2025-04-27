@@ -162,7 +162,7 @@ const RegistrationModal = () => {
         </Box>
         <Box sx={styles.selectingAuth}>
           <Divider sx={styles.divider} />
-          <Typography sx={styles.subtitle}>{t('modal.registration.selecting_auth')}</Typography>
+          <Typography>{t('modal.registration.selecting_auth')}</Typography>
           <Divider sx={styles.divider} />
         </Box>
         <Button onClick={handleClickLinkedIn}>Linkedin</Button>
