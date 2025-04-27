@@ -59,26 +59,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
-    oAuthAuthorize: builder.mutation({
-      query: ({ code, state }) => ({
-        url: '/auth/oauth/authorize',
-        method: 'POST',
-        body: {
-          authorizationCode: code,
-          state,
-        },
-      }),
-      transformResponse: (response, meta) => {
-        const headers = meta?.response?.headers;
-        if (headers) {
-          const { authToken, idToken } = getTokenInHeaders({ headers });
-
-          if (authToken && idToken) {
-            return { authToken, idToken, userData: { ...response } };
-          }
-        }
-      },
-    }),
     logout: builder.mutation({
       query: () => ({
         url: '/auth/logout',
@@ -98,7 +78,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useOAuthAuthorizeMutation,
   useCreateUserMutation,
   useConfirmEmailMutation,
   useRegistrationResendCodeMutation,
