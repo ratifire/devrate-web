@@ -5,7 +5,7 @@ import './assets/fonts/fonts.css';
 import './styles/reset.css';
 import './styles/index.css';
 import './styles/scss/index.scss';
-import { withAuth } from '@utils/hoc/index';
+import { OAuth } from '@components/PageComponents/SSO';
 import { AboutUsSection, FaqSection, Footer, HowItWorksSection } from './../HomePage/sections';
 import { Header, HeroSection } from './sections';
 
@@ -15,19 +15,22 @@ const MemoizedHowItWorksSection = memo(HowItWorksSection);
 const MemoizedAboutSection = memo(AboutUsSection);
 const MemoizedFqaSection = memo(FaqSection);
 const MemoizedFooter = memo(Footer);
+const MemoizedOAuth = memo(OAuth);
 
-const HomePage = withAuth(() => {
+const HomePage = () => {
   return (
-    <div className='homePage'>
-      <MemoizedHeader />
-      <MemoizedHeroSection />
-      <MemoizedHowItWorksSection />
-      <MemoizedAboutSection />
-      <MemoizedFqaSection />
-      <MemoizedFooter />
-      <ModalComponent />
-    </div>
+    <MemoizedOAuth>
+      <div className='homePage'>
+        <MemoizedHeader />
+        <MemoizedHeroSection />
+        <MemoizedHowItWorksSection />
+        <MemoizedAboutSection />
+        <MemoizedFqaSection />
+        <MemoizedFooter />
+        <ModalComponent />
+      </div>
+    </MemoizedOAuth>
   );
-});
+};
 
 export default HomePage;
