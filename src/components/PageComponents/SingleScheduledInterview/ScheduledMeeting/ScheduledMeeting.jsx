@@ -1,7 +1,7 @@
 import { Box, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
@@ -9,8 +9,8 @@ import { formatTimeToUtc, formatTimeWithOffset } from '@utils/helpers';
 import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice';
 import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
-import { openModal } from '@redux/slices/modal/modalSlice';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
@@ -25,7 +25,7 @@ const ScheduledMeeting = () => {
     data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
   const { enqueueSnackbar } = useSnackbar();
-  const dispatch = useDispatch();
+  const { openModal } = useModalController();
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -74,11 +74,17 @@ const ScheduledMeeting = () => {
 
   const handleClickRightBtn = () => {
     if (status === btnStatus['UPCOMING'] || status === btnStatus['IN PROCESS']) {
-      window.open(roomUrl, '_blank');
+      // Create URL with query params to use in mirotalk in a survey later
+      const url = new URL(roomUrl);
+      if (eventId && role) {
+        url.searchParams.append('eventId', eventId);
+        url.searchParams.append('role', role);
+      }
+      window.open(url, '_blank');
     }
 
     if (status === btnStatus['AWAITING FEEDBACK']) {
-      dispatch(openModal({ modalType: modalNames.feedbackInterviewModal, data: { feedbackId: eventId, role } }));
+      openModal(modalNames.feedbackInterviewModal, { feedbackId: eventId, role });
     }
   };
 

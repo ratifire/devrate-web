@@ -84,8 +84,6 @@ export const en = {
         community: 'Community',
         contacts: 'Contacts',
         login: 'log in',
-        terms_and_conditions: 'Terms and Conditions',
-        privacy_policy: 'Privacy Policy',
       },
     },
     modal: {
@@ -178,12 +176,11 @@ export const en = {
         password_tooltip:
           'Password must contain 6 characters, 1 uppercase letter, 1 digit, 1 special character no spaces',
         password_invalid: 'Incorrect password',
-        news_letter: 'Send me news, surveys and special offers from SKILLZZY',
-        agreement: 'I have read and agree to the Terms and conditions',
         agreement_error: 'To use our service, you must agree to the terms of use',
+        agreement: 'I have read and agree to the Terms of Use and Privacy Policy',
         btn_register: 'Sign Up',
-        privacy_policy: 'Privacy Policy',
-        terms_and_conditions: 'Terms and Conditions',
+        sso_error: 'A server error occurred. Please try again later.',
+        selecting_auth: 'or',
         email_invalid: 'Invalid email',
         required: 'This is a required field',
         first_name_long: 'Name too long',
@@ -558,6 +555,7 @@ export const en = {
         interview_chart_months: 'Months',
         skills_assessment_chart_title: 'Average skill assessment',
         levelUp: 'Based on the results, we recommend that you move to the next level!',
+        emptyStatistic: 'You currently have no statistics.',
       },
       interviewsChart: {
         conducted: 'Conducted',
@@ -979,6 +977,8 @@ export const en = {
           'There is nothing here yet. Create an interview request and take a step towards development! Find an interviewer who will help you test your knowledge and prepare for future challenges. Each conversation is a new experience and an opportunity to become more confident in your abilities.',
         emptySpecialization:
           'You do not have a chosen specialization yet. Define your area of interest to get access to interviews. Choose an area that interests you and discover new opportunities. This will help you find an interviewer or respondent, test your knowledge, and better prepare for future challenges.',
+        emptyStatistics:
+          'Your analytics on this interview will be here soon. Stay tuned for feedback from another user!',
       },
       navigationLinks: {
         scheduled: 'Scheduled',
@@ -1062,6 +1062,8 @@ export const en = {
       },
       interviewSkills: {
         skills: 'Skills',
+        tooltipInfo:
+          "Visual comparison of your skills (purple) versus your opponent's skills (yellow). The chart displays proficiency levels for both soft skills (communication, teamwork) and hard skills (technical professional abilities). Overlapping sections indicate where your skill levels match.",
         matchingSoftSkills: 'Matching soft skills',
         otherSoftSkills: 'Other soft skills',
         matchingHardSkills: 'Matching hard skills',
@@ -1073,6 +1075,8 @@ export const en = {
       },
       participantEvaluations: {
         title: 'Participant evaluations',
+        tooltipInfo:
+          "Comparison of participants' skill levels. The taller the bar, the more advanced the skill. Scale: 0 (none) to 10 (expert level)",
       },
       statistic: {
         title: 'Statistic',

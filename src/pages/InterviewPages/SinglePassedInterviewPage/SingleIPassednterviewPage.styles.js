@@ -1,8 +1,9 @@
 export const styles = {
   mainContent: (theme) => ({
+    minHeight: 'calc(100vh - 200px)',
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: 'repeat(12, 25px)',
+    gridTemplateRows: '180px 12px 225px auto',
     width: '100%',
     gridGap: theme.spacing(4),
     ' > div': {
@@ -13,7 +14,7 @@ export const styles = {
   }),
   userInfo: (theme) => ({
     gridColumn: '1/6',
-    gridRow: '1/5',
+    gridRow: '1/2',
     ' > div': {
       maxWidth: '100%',
       boxShadow: 'none',
@@ -25,8 +26,7 @@ export const styles = {
   interviewersAssessment: (theme) => ({
     marginTop: '2px',
     gridColumn: '1/6',
-    gridRow: '5/26',
-    maxHeight: '1000px',
+    gridRow: '2/5',
     padding: theme.spacing(4),
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     ' > div div': {
@@ -40,7 +40,18 @@ export const styles = {
     marginBottom: theme.spacing(3),
   }),
 
+  skillsWrapper: (theme, role) =>
+    role === 'INTERVIEWER'
+      ? {
+          height: 'calc(100% - 48px)',
+          '& > div': {
+            height: '100%',
+          },
+        }
+      : {},
+
   hardSkills: (theme) => ({
+    height: '100%',
     width: '100%',
     marginBottom: theme.spacing(3),
     borderRadius: theme.spacing(1),
@@ -74,14 +85,14 @@ export const styles = {
   }),
   interviewInfo: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '1/6',
+    gridRow: '1/3',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
   }),
 
   statistics: (theme) => ({
     marginTop: '-6px',
     gridColumn: '6/13',
-    gridRow: '6/11',
+    gridRow: '3/4',
     maxHeight: '225px',
     ' > div': {
       height: '225px',
@@ -94,9 +105,10 @@ export const styles = {
   interviewFeedback: (theme) => ({
     marginTop: '-8px',
     gridColumn: '6/13',
-    gridRow: '11/12',
+    gridRow: '4/5',
     minHeight: '216px',
     '> div': {
+      height: '100%',
       minHeight: '216px',
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
@@ -108,5 +120,35 @@ export const styles = {
         }),
       },
     },
+  }),
+  emptyStatistics: (theme) => ({
+    position: 'relative',
+    gridColumn: '1/13',
+    gridRow: '3/5',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: theme.spacing(6),
+    textAlign: 'center',
+    backgroundColor: theme.palette.pagesSections.backgroundColor,
+    '& .emptyTitle': {
+      position: 'absolute',
+      left: '24px',
+      top: '-44px',
+      marginBottom: 0,
+    },
+  }),
+
+  mascotStatsBox: {
+    maxWidth: '610px',
+    width: '100%',
+    height: '352px',
+    marginBottom: (theme) => theme.spacing(3),
+  },
+
+  emptyStatsText: (theme) => ({
+    marginTop: (theme) => theme.spacing(3),
+    color: theme.palette.titleColor,
   }),
 };

@@ -1,14 +1,13 @@
-import { Box, Container, Paper } from '@mui/material';
-import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState, useLayoutEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router';
+import { lazy, memo, Suspense, useCallback, useEffect, useState, useLayoutEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import InterviewsSkeleton from '@components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { useGetAllPassedInterviewsQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
 import navigationLinks from '@router/links.js';
 import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
 import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
+import { InterviewContainer } from '@components/UI/Interview/index.js';
 import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
-import { styles } from './PassedInterviewsPage.styles';
 
 const SideBar = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar'));
 
@@ -22,11 +21,18 @@ const PassedInterviewsPage = () => {
   const navigate = useNavigate();
   const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
 
-  const isPassedInterviewList = Boolean(passedInterviews?.content.length);
-  const isSpecializations = Boolean(specializations?.length);
-  const refHandler = (el) => {
-    setLastEventRef(el);
-  };
+  const isSpecializations = !!specializations?.length;
+  const refHandler = useCallback(
+    (el) => {
+      if (el && passedInterviews?.totalPages > page) {
+        setLastEventRef(el);
+      } else if (!el) {
+        setLastEventRef(null);
+      }
+    },
+    [passedInterviews?.totalPages, page]
+  );
+
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
@@ -71,29 +77,34 @@ const PassedInterviewsPage = () => {
     redirectToFirstInterview();
   }, [redirectToFirstInterview]);
 
-  return !isPassedInterviewList ? (
-    <EmptyInterviewTab
-      isSpecializations={isSpecializations}
-      svg={
-        !isSpecializations
-          ? emptyInterviewTabsPictures.emptySpecialization.passed
-          : emptyInterviewTabsPictures.emptyPassedPic
-      }
-      tab='Passed'
-    />
-  ) : (
-    <Container maxWidth='xl' sx={styles.container}>
-      <Box sx={styles.contentWrapper}>
-        <Box sx={styles.box}>
-          <Paper>
-            <Suspense fallback={<InterviewsSkeleton />}>
-              <MemoizedSideBar passedInterview interviews={passedInterviews?.content} refHandler={refHandler} />
-            </Suspense>
-          </Paper>
-        </Box>
-        <Outlet />
-      </Box>
-    </Container>
+  if (isLoading) {
+    return (
+      <InterviewContainer>
+        <InterviewsSkeleton />
+      </InterviewContainer>
+    );
+  }
+
+  if (!passedInterviews?.content?.length || !isSpecializations) {
+    return (
+      <EmptyInterviewTab
+        isSpecializations={isSpecializations}
+        svg={
+          !isSpecializations
+            ? emptyInterviewTabsPictures.emptySpecialization.passed
+            : emptyInterviewTabsPictures.emptyPassedPic
+        }
+        tab='Passed'
+      />
+    );
+  }
+
+  return (
+    <InterviewContainer>
+      <Suspense fallback={<InterviewsSkeleton />}>
+        <MemoizedSideBar passedInterview interviews={passedInterviews?.content} refHandler={refHandler} />
+      </Suspense>
+    </InterviewContainer>
   );
 };
 

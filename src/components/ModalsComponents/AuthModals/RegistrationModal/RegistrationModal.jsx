@@ -1,27 +1,25 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Box, Link, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { Link as RouterLink } from 'react-router';
-import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice.js';
+import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
-import { useGetCountryListQuery } from '@redux/api/slices/countryList/countryApiSlice';
 import { RegistrationSchema } from '@utils/validationSchemas';
-import { CountryFormSelector, FormCheckbox, FormInput } from '@components/FormsComponents/Inputs';
+import { FormCheckbox, FormInput } from '@components/FormsComponents/Inputs';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
-import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '@utils/constants/modalNames.js';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord';
+import { modalNames } from '@utils/constants/modalNames';
+import { Link as RouterLink } from 'react-router';
+import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
 import styles from './RegistrationModal.styles';
 
 const initialValues = {
   email: '',
-  country: '',
   firstName: '',
   lastName: '',
   password: '',
   repeatPassword: '',
-  news: false,
   agreement: false,
 };
 
@@ -30,13 +28,6 @@ const RegistrationModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [createUser, { isLoading: isLoadingCreating }] = useCreateUserMutation();
-  const { data: userCountries } = useGetCountryListQuery();
-
-  const handleChangeCountry = (value) => {
-    formik.setFieldValue('country', value);
-  };
-
-  const handleClose = () => dispatch(closeModal());
 
   const handleKeyDown = (e) => {
     if (e.key === ' ') {
@@ -45,14 +36,12 @@ const RegistrationModal = () => {
   };
 
   const onSubmit = async (values, { resetForm, setErrors }) => {
-    const { email, firstName, lastName, country, news, password } = values;
+    const { email, firstName, lastName, password } = values;
     try {
       await createUser({
         email,
         firstName,
         lastName,
-        country: country.target.value,
-        subscribed: news,
         password,
       }).unwrap();
 
@@ -75,12 +64,10 @@ const RegistrationModal = () => {
 
   const isFormValid =
     formik.values.email &&
-    formik.values.country &&
     formik.values.firstName &&
     formik.values.lastName &&
     formik.values.password &&
     formik.values.repeatPassword &&
-    formik.values.agreement &&
     formik.isValid &&
     formik.dirty;
 
@@ -127,19 +114,6 @@ const RegistrationModal = () => {
               value={formik.values.lastName}
             />
           </Box>
-          <CountryFormSelector
-            required
-            autoComplete='off'
-            countries={userCountries}
-            error={formik.touched.country && Boolean(formik.errors.country)}
-            handleBlur={formik.handleBlur}
-            handleChange={handleChangeCountry}
-            helperText={formik.touched.country && formik.errors.country}
-            label='modal.registration.country'
-            name='country'
-            value={formik.values.country}
-            variant='outlined'
-          />
           <FormInput
             signupPassword
             autoComplete='new-password'
@@ -172,20 +146,21 @@ const RegistrationModal = () => {
             value={formik.values.repeatPassword}
           />
         </Box>
+        <OAuthSection />
         <FormCheckbox
-          changeHandler={formik.handleChange}
-          checked={formik.values.news}
-          error={formik.touched.news && Boolean(formik.errors.news)}
-          helperText={formik.touched.news && formik.errors.news}
-          label='modal.registration.news_letter'
-          name='news'
-        />
-        <FormCheckbox
+          isLink
           changeHandler={formik.handleChange}
           checked={formik.values.agreement}
           error={formik.touched.agreement && Boolean(formik.errors.agreement)}
           helperText={formik.touched.agreement && formik.errors.agreement}
-          label='modal.registration.agreement'
+          label={
+            <Trans
+              components={{
+                a: <Link component={RouterLink} sx={styles.link} to='/' />,
+              }}
+              i18nKey='modal.registration.agreement'
+            />
+          }
           name='agreement'
         />
         <Box sx={styles.wrapperBtn}>
@@ -198,14 +173,6 @@ const RegistrationModal = () => {
             variant='contained'
             onClick={formik.handleSubmit}
           />
-        </Box>
-        <Box sx={styles.policyTermsContainer}>
-          <Link component={RouterLink} sx={styles.policyTermsLink} to={'/privacy_policy'} onClick={handleClose}>
-            {t('modal.registration.privacy_policy')}
-          </Link>
-          <Link component={RouterLink} sx={styles.policyTermsLink} to={'/terms_and_conditions'} onClick={handleClose}>
-            {t('modal.registration.terms_and_conditions')}
-          </Link>
         </Box>
       </form>
     </>

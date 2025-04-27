@@ -125,8 +125,8 @@ const ResetPassword = () => {
             await changePassword(requestData).unwrap();
             enqueueSnackbar('Password changed successfully!', { variant: 'success' });
             resetForm();
-            dispatch(closeModal({ modalName: 'openResetPassword' }));
-            dispatch(openModal({ modalName: 'openNotification' }));
+            dispatch(closeModal());
+            dispatch(openModal({ modalType: modalNames.notificationModal }));
             // eslint-disable-next-line no-unused-vars
           } catch (error) {
             enqueueSnackbar('Invalid code. Please try again.', { variant: 'error' });

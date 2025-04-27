@@ -1,9 +1,9 @@
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import PropTypes from 'prop-types';
 import { useGetDefLanguageQuery } from '@redux/api/slices/defaultLanguage/defaultLanguageApiSlice.js';
 import { FormCheckbox } from '@components/FormsComponents/Inputs/index.js';
+import InfoTooltip from '@components/UI/InfoTooltip/index.js';
 import FormInput from '../../../../FormsComponents/Inputs/FormInput';
 import SpecialisationLevelCombinedSelect from '../../../../FormsComponents/Inputs/SpecialisationLevelCombinedSelect/index.js';
 import SelectInterviewLanguage from '../../../../FormsComponents/Inputs/SelectSkills/index.js';
@@ -57,11 +57,10 @@ const TimeSlotInfo = ({ formik, mySpecialization }) => {
           placeholder={formik.initialValues.interviewCount || ''}
           value={formik.values.interviewCount}
         />
-        <Tooltip placement='top-end' title={t('interviews.scheduleInterviewModal.interviewCountTooltip')}>
-          <IconButton sx={styles.iconBtn}>
-            <InfoOutlinedIcon />
-          </IconButton>
-        </Tooltip>
+        <InfoTooltip
+          additionalStyles={styles.iconPosition}
+          title='interviews.scheduleInterviewModal.interviewCountTooltip'
+        />
       </Box>
       <Box sx={styles.input100}>
         <FormInput

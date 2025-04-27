@@ -3,13 +3,13 @@ import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAx
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
-import InfoIcon from '@assets/icons/InterviewPageIcons/info.svg?react';
 import useTooltipColorChart from '@utils/hooks/useTooltipColorChart';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { useGetMasteriesQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
 import { ParticipantEvaluationsSkeleton } from '@components/UI/Skeleton';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { lvlMastery } from '@utils/constants/masteryLvl';
+import InfoTooltip from '@components/UI/InfoTooltip/index.js';
 import { prepareSkillsDataParticipantEvaluations } from '../helpers';
 import { styles } from './ParticipantEvaluations.styles';
 import { useColorPartEvalChart } from './hooks';
@@ -63,7 +63,7 @@ const ParticipantEvaluations = () => {
         <Typography component='h6' variant='h6'>
           {t('singleScheduledInterview.participantEvaluations.title')}
         </Typography>
-        <InfoIcon />
+        <InfoTooltip title='singleScheduledInterview.participantEvaluations.tooltipInfo' />
       </Box>
       <Box sx={styles.boxParticipants}>
         <Box>
