@@ -150,39 +150,37 @@ const RegistrationModal = () => {
             value={formik.values.repeatPassword}
           />
         </Box>
-        <Box sx={styles.boxOAuth}>
-          <Box sx={styles.selectingAuth}>
-            <Divider sx={styles.divider} />
-            <Typography sx={styles.subtitle}>{t('modal.registration.selecting_auth')}</Typography>
-            <Divider sx={styles.divider} />
-          </Box>
-          <Box sx={styles.authLinks}>
-            <Link href={`${url}/auth/oauth/redirect/linkedIn`} sx={styles.authLink}>
-              <Box alt='LinkedIn' component={'img'} src={linkedInIcon} />
-              LinkedIn
-            </Link>
-            <Link href={`${url}/auth/oauth/redirect/google`} sx={styles.authLink}>
-              <Box alt='Google' component={'img'} src={googleIcon} />
-              Google
-            </Link>
-          </Box>
-          <FormCheckbox
-            isLink
-            changeHandler={formik.handleChange}
-            checked={formik.values.agreement}
-            error={formik.touched.agreement && Boolean(formik.errors.agreement)}
-            helperText={formik.touched.agreement && formik.errors.agreement}
-            label={
-              <Trans
-                components={{
-                  a: <Link component={RouterLink} sx={styles.link} to='/' />,
-                }}
-                i18nKey='modal.registration.agreement'
-              />
-            }
-            name='agreement'
-          />
+        <Box sx={styles.selectingAuth}>
+          <Divider sx={styles.divider} />
+          <Typography sx={styles.subtitle}>{t('modal.registration.selecting_auth')}</Typography>
+          <Divider sx={styles.divider} />
         </Box>
+        <Box sx={styles.authLinks}>
+          <Link href={`${url}/auth/oauth/redirect/linkedIn`} sx={styles.authLink}>
+            <Box alt='LinkedIn' component={'img'} src={linkedInIcon} />
+            LinkedIn
+          </Link>
+          <Link href={`${url}/auth/oauth/redirect/google`} sx={styles.authLink}>
+            <Box alt='Google' component={'img'} src={googleIcon} />
+            Google
+          </Link>
+        </Box>
+        <FormCheckbox
+          isLink
+          changeHandler={formik.handleChange}
+          checked={formik.values.agreement}
+          error={formik.touched.agreement && Boolean(formik.errors.agreement)}
+          helperText={formik.touched.agreement && formik.errors.agreement}
+          label={
+            <Trans
+              components={{
+                a: <Link component={RouterLink} sx={styles.link} to='/' />,
+              }}
+              i18nKey='modal.registration.agreement'
+            />
+          }
+          name='agreement'
+        />
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
             disabled={!isFormValid}
