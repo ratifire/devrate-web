@@ -230,7 +230,7 @@ export const uk = {
         // home_page: 'Home',
       },
       notificationModal: {
-        title: 'Скинути пароль',
+        title: 'Новий пароль',
         message: 'Ваш пароль було успішно змінено',
         btn_enter: 'УВІЙТИ',
       },
