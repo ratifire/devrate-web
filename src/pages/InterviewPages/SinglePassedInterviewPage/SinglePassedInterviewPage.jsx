@@ -1,12 +1,4 @@
-import { useParams } from 'react-router';
-import { Box, Paper, Typography } from '@mui/material';
-import { lazy, memo, Suspense } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
-import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice.js';
-import { lvlMastery } from '@utils/constants/masteryLvl.js';
-import { DARK_THEME } from '@utils/constants/Theme/theme.js';
+import { ErrorComponent } from '@components/UI/Exceptions/index.js';
 import {
   InterviewFeedbackSkeleton,
   InterviewInfoSkeleton,
@@ -14,9 +6,17 @@ import {
   StatisticsSkeleton,
   UserCardSkeleton,
 } from '@components/UI/Skeleton';
-import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInterview.js';
+import { Box, Paper, Typography } from '@mui/material';
+import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice.js';
-import { ErrorComponent } from '@components/UI/Exceptions/index.js';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice.js';
+import { lvlMastery } from '@utils/constants/masteryLvl.js';
+import { DARK_THEME } from '@utils/constants/Theme/theme.js';
+import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInterview.js';
+import { lazy, memo, Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import EmptySkills from '../../../components/UI/Specialization/EmptySkills';
 
 import EmptyRequestPicDark from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
@@ -49,12 +49,13 @@ const MemoizedUserCard = memo(UserCard);
 const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
   const { interviewId } = useParams();
-  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId });
   const { mode } = useSelector((state) => state.theme);
+  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
+
   const attendeeId = interviewData?.attendeeId ?? '';
   const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
 
-  const { data: userContacts } = useGetPersonalUserQuery(attendeeId);
+  const { data: userContacts } = useGetPersonalUserQuery(attendeeId, { skip: !attendeeId });
 
   const {
     data: avatar,

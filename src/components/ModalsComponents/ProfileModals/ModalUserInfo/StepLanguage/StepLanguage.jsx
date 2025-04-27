@@ -10,11 +10,14 @@ import { SelectLanguage } from '@components/FormsComponents/Inputs';
 import LanguageLevel from '@components/UI/LanguageLevel';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { StepLanguageSkeleton } from '@components/UI/Skeleton';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { styles } from './StepLanguage.styles';
 
 const StepLanguage = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
+  const { closeModal } = useModalController();
 
   const { data: user } = useSelector(selectCurrentUser);
   const {
@@ -31,6 +34,7 @@ const StepLanguage = () => {
         body: values.languages,
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.language.create.success'), { variant: 'success' });
+      closeModal(modalNames.userInfoModal);
       formik.resetForm();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
