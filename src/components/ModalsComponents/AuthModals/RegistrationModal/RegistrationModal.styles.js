@@ -75,10 +75,9 @@ const styles = {
   authLinks: {
     display: 'flex',
     justifyContent: 'space-between',
-    gap: '16px',
   },
   authLink: {
-    maxWidth: '50%',
+    maxWidth: '241px',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
@@ -92,11 +91,6 @@ const styles = {
     borderRadius: '86px',
     backgroundColor: 'rgba(68, 68, 70, 0.20)',
     border: '1px solid #444446',
-    transition: 'background-color 0.3s ease',
-
-    '&:hover': {
-      backgroundColor: 'rgba(68, 68, 70, 0.30)',
-    },
   },
 };
 

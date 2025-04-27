@@ -155,11 +155,11 @@ const RegistrationModal = () => {
         </Box>
         <Box sx={styles.authLinks}>
           <Link href={`${url}/auth/oauth/redirect/linkedIn`} sx={styles.authLink}>
-            <Box alt='LinkedIn' component={'img'} src={linkedInIcon} />
+            <img alt='LinkedIn' src={linkedInIcon} />
             LinkedIn
           </Link>
           <Link href={`${url}/auth/oauth/redirect/google`} sx={styles.authLink}>
-            <Box alt='Google' component={'img'} src={googleIcon} />
+            <img alt='Google' src={googleIcon} />
             Google
           </Link>
         </Box>
