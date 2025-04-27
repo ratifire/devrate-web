@@ -31,7 +31,7 @@ const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
 
           return (
             <Link key={id} href={href} sx={componentStyles.link} {...linkProps}>
-              <CustomTooltip title={type}>
+              <CustomTooltip title={t(`profile.right.tooltips.${type}`)}>
                 <IconComponent />
               </CustomTooltip>
             </Link>
