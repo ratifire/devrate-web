@@ -72,16 +72,7 @@ const SpecializationModal = () => {
     formik.setFieldValue('mastery', value);
   };
   const handleChangeSpecialization = (value) => {
-    if (!value) {
-      setState({
-        skills: [],
-      });
-      return;
-    }
-    setState({
-      skills: (skills.length = 0),
-    });
-
+    setState({ skills: (skills.length = 0) });
     const defaultSkills = defaultHardSkills[value].map((skill) => {
       return { name: skill, type: 'HARD_SKILL' };
     });
@@ -223,7 +214,7 @@ const SpecializationModal = () => {
               </IconButton>
             </Box>
             <Box sx={styles.skills}>
-              {skills?.map(({ name }, index) => (
+              {skills.map(({ name }, index) => (
                 <Responsibility
                   // eslint-disable-next-line react/no-array-index-key
                   key={index}
