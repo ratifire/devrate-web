@@ -12,9 +12,11 @@ import { normalizeUrl, addPhone, addTelegram, getDataStepContacts } from '@utils
 import { StepContactsSkeleton } from '@components/UI/Skeleton';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import MuiPhone from '@components/FormsComponents/Inputs/PhoneInput';
+import useStepHandler from '@utils/hooks/useStepHandler.js';
 import { styles } from './StepContacts.styles';
 
 const StepContacts = () => {
+  const { handleNext } = useStepHandler();
   const [postContactsUser, { isLoading, isError: isErrorPostContacts, data: dataPost }] = usePostContactsUserMutation();
   const userId = useSelector((state) => state.auth.user.data.id);
   const {
@@ -52,6 +54,7 @@ const StepContacts = () => {
       }).unwrap();
 
       enqueueSnackbar(t('modalNotifyText.contacts.create.success'), { variant: 'success' });
+      handleNext();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.contacts.create.error'), { variant: 'error' });

@@ -72,7 +72,7 @@ export const uk = {
         trademarks: 'Усі торгові марки, логотипи та назви брендів є <br/> власністю Ratifire Company.',
         footerText:
           'Вдосконалюйте свої навички як з початківцями, так і з досвідченими професіоналами. Наша платформа розроблена, щоб зробити процес підготовки до співбесіди більш плавним і менш напруженим для всіх.',
-        developedText: 'Розроблено компанією',
+        developedText: 'Розроблено',
         termsAndConditions: 'Terms and conditions',
         privacyPolicy: 'Privacy Policy',
         allRightsReserved: 'Всі права захищені.',
@@ -180,7 +180,8 @@ export const uk = {
         last_name: 'Прізвище',
         password: 'Пароль',
         password_repeat: 'Повторити пароль',
-        password_tooltip: 'Паролі повинні містити 8 + символів, принаймні 1 цифру, принаймні 1 літеру та без пробілів.',
+        password_tooltip:
+          'Пароль повинен містити 6 символів, 1 велику літеру, 1 цифру, 1 спеціальний символ та не містити пробілів',
         password_invalid: 'Неприпустимий пароль',
         agreement_error: 'Для використання нашого сервісу вам необхідно погодитися з умовами користування',
         agreement: 'Я прочитав(ла) і погоджуюся з <a>Умовами використання</a> та <a>Політикою конфіденційності</a>',
@@ -226,7 +227,7 @@ export const uk = {
         // home_page: 'Home',
       },
       notificationModal: {
-        title: 'Скинути пароль',
+        title: 'Новий пароль',
         message: 'Ваш пароль було успішно змінено',
         btn_enter: 'УВІЙТИ',
       },
@@ -362,6 +363,14 @@ export const uk = {
         contact: 'Контактна інформація',
         languages: 'Мови',
         aboutMe: 'Про мене',
+        tooltips: {
+          EMAIL: 'Email',
+          PHONE_NUMBER: 'Номер телефону',
+          TELEGRAM_LINK: 'Telegram',
+          LINKEDIN_LINK: 'LinkedIn',
+          GITHUB_LINK: 'GitHub',
+          BEHANCE_LINK: 'Behance',
+        },
       },
       userMenu: {
         profile: 'Профіль',
@@ -505,7 +514,7 @@ export const uk = {
           description_short: 'Опис занадто короткий',
           description_placeholder:
             'Мої навички у програмуванні на PHP, використанні ООП та підходу MVC підтримуються значним досвідом роботи з базами даних, такими як MySQL та PostgreSQL. Я ефективно використовую фреймворк Laravel 5.3 для розробки масштабованих веб-додатків та володію базовими знаннями Symfony 3, зокрема Sonata.',
-          required: 'This field is required',
+          required: "Це обов'язкове поле",
           startDateMinMessage: 'Стартова дата має бути пізніше 01/01/1950',
           startDateMaxMessage: 'Кінцева дата має бути не пізніше за поточку',
           endDateMessage: 'Кінцева дата має буди пізнішою за стартову дату',
@@ -670,7 +679,7 @@ export const uk = {
       greeting:
         'Ласкаво просимо! Ми раді вітати вас у Skillzzy — спільноті, де розробники діляться досвідом, навчаються та знаходять нові можливості',
       interviewFeedback:
-        'Вітаємо із завершенням співбесіди! Будь ласка, заповніть коротку форму та оцініть навички співрозмовника. Залишити вiдгук',
+        'Вітаємо із завершенням співбесіди! Будь ласка, заповніть коротку форму та оцініть навички співрозмовника.',
       interviewRejected:
         'Співбесіду з {{rejectionName}}, заплановану на {{date}}, скасовано. Ми вже працюємо над пошуком нового співрозмовника та скоро повідомимо Вас',
       interviewRequestExpired:
@@ -1016,6 +1025,7 @@ export const uk = {
         interviewCountTitle: "Кількість інтерв'ю для обраних таймслотів",
         commentTitle: 'Коментар',
         commentPlaceholder: 'Опишіть, що ви очікуєте від інтерв’ю',
+        consentStatus: 'Я погоджуюсь на запис співбесіди та її публікацію',
         required: "Це обов'язкове поле",
         comment_min: 'Коментар має бути більше 5 символів',
         comment_max: 'Коментар має бути менше 100 символів',
@@ -1056,6 +1066,12 @@ export const uk = {
       },
       interviewSkills: {
         skills: 'Навички',
+        tooltipInfo:
+          'Візуальне порівняння ваших навичок (фіолетовий) з навичками опонента (жовтий). Графік відображає рівень володіння софт-скілами (комунікація, робота в команді) та хард-скілами (професійні технічні вміння). Спільні ділянки показують збіги у рівнях розвитку навичок.',
+        matchingSoftSkills: 'Співпадаючі soft skills',
+        otherSoftSkills: 'Інші soft skills',
+        matchingHardSkills: 'Співпадаючі hard skills',
+        otherHardSkills: 'Інші hard skills',
       },
       userCardScheduledInterview: {
         btn: 'Написати повідомлення',
@@ -1063,6 +1079,8 @@ export const uk = {
       },
       participantEvaluations: {
         title: 'Оцінка учасників',
+        tooltipInfo:
+          'Порівняння рівнів навичок учасників. Чим вище стовпчик, тим краще розвинена навичка. Шкала: 0 — відсутня, 10 — експертний рівень.',
       },
       statistic: {
         title: 'Статистика',
@@ -1080,7 +1098,7 @@ export const uk = {
       selectSpecializations: 'Спеціалізації',
       role: {
         CANDIDATE: 'Респондент',
-        INTERVIEWER: "Інтерв'юер",
+        INTERVIEWER: 'Інтерв’юер',
       },
       requestHeader: {
         titleLauncher: 'як',

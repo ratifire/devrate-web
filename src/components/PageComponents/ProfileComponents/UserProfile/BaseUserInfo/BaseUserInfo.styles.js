@@ -43,6 +43,7 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     color: theme.palette.baseUserInfo.city.color,
+    textTransform: 'capitalize',
   }),
   icon: (theme) => ({
     fontSize: 18,

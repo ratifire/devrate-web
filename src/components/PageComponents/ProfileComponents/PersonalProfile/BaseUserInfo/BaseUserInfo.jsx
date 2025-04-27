@@ -12,6 +12,7 @@ import LinearProgressWithLabel from '@components/UI/LinearProgressWithLabel';
 import UserAvatar from '@components/UI/UserAvatar';
 import { useProfileProgress } from '@utils/hooks/useProfileProgress';
 import { useTranslation } from 'react-i18next';
+import CustomTooltip from '@components/UI/CustomTooltip/index.js';
 import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = () => {
@@ -93,14 +94,15 @@ const BaseUserInfo = () => {
         )}
 
         <Box sx={styles.wrapperTextBtn}>
-          <IconButton
-            aria-label={t('profile.baseUserInfo.editUserInfo')}
-            sx={styles.btnIcon}
-            title={t('profile.baseUserInfo.editBtn')}
-            onClick={handleOpenModal(0)}
-          >
-            <EditIcon />
-          </IconButton>
+          <CustomTooltip title={t('profile.baseUserInfo.editBtn')}>
+            <IconButton
+              aria-label={t('profile.baseUserInfo.editUserInfo')}
+              sx={styles.btnIcon}
+              onClick={handleOpenModal(0)}
+            >
+              <EditIcon />
+            </IconButton>
+          </CustomTooltip>
         </Box>
       </Box>
 

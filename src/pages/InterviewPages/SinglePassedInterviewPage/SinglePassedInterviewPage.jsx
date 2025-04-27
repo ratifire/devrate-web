@@ -42,10 +42,10 @@ const MemoizedUserCard = memo(UserCard);
 const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
   const { interviewId } = useParams();
-  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId });
+  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
   const attendeeId = interviewData?.attendeeId ?? '';
 
-  const { data: userContacts } = useGetPersonalUserQuery(attendeeId);
+  const { data: userContacts } = useGetPersonalUserQuery(attendeeId, { skip: !attendeeId });
 
   const {
     data: avatar,

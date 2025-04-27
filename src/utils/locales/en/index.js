@@ -173,7 +173,8 @@ export const en = {
         last_name: 'Surname',
         password: 'Password',
         password_repeat: 'Repeat password',
-        password_tooltip: '8+ characters,\n' + 'at least 1 number, 1 uppercase and 1 lowercase letter, 1 symbol',
+        password_tooltip:
+          'Password must contain 6 characters, 1 uppercase letter, 1 digit, 1 special character no spaces',
         password_invalid: 'Incorrect password',
         agreement_error: 'To use our service, you must agree to the terms of use',
         agreement: 'I have read and agree to the Terms of Use and Privacy Policy',
@@ -358,6 +359,14 @@ export const en = {
         contact: 'Contact Information',
         languages: 'Languages',
         aboutMe: 'About me',
+        tooltips: {
+          EMAIL: 'Email',
+          PHONE_NUMBER: 'Phone number',
+          TELEGRAM_LINK: 'Telegram',
+          LINKEDIN_LINK: 'LinkedIn',
+          GITHUB_LINK: 'GitHub',
+          BEHANCE_LINK: 'Behance',
+        },
       },
       userMenu: {
         profile: 'Profile',
@@ -1011,6 +1020,7 @@ export const en = {
         interviewCountTitle: 'Number of interviews for the selected timeslots',
         commentTitle: 'Comment',
         commentPlaceholder: 'Describe what you expect from the interview',
+        consentStatus: 'I agree to record the interview and publish it',
         required: 'This is a required field',
         comment_min: 'Comment should be longer than 5 characters',
         comment_max: 'Comment should be shorter than 100 characters',
@@ -1049,6 +1059,12 @@ export const en = {
       },
       interviewSkills: {
         skills: 'Skills',
+        tooltipInfo:
+          "Visual comparison of your skills (purple) versus your opponent's skills (yellow). The chart displays proficiency levels for both soft skills (communication, teamwork) and hard skills (technical professional abilities). Overlapping sections indicate where your skill levels match.",
+        matchingSoftSkills: 'Matching soft skills',
+        otherSoftSkills: 'Other soft skills',
+        matchingHardSkills: 'Matching hard skills',
+        otherHardSkills: 'Other hard skills',
       },
       userCardScheduledInterview: {
         btn: 'Write a message',
@@ -1056,6 +1072,8 @@ export const en = {
       },
       participantEvaluations: {
         title: 'Participant evaluations',
+        tooltipInfo:
+          "Comparison of participants' skill levels. The taller the bar, the more advanced the skill. Scale: 0 (none) to 10 (expert level)",
       },
       statistic: {
         title: 'Statistic',

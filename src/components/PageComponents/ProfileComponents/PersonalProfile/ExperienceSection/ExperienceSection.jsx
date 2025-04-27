@@ -5,6 +5,7 @@ import { Add } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { useLocation, useSearchParams } from 'react-router';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import CustomTooltip from '@components/UI/CustomTooltip/index.js';
 import styles from './ExperienceSection.styles';
 import Education from './Education/Education';
 import Skills from './Skills';
@@ -43,9 +44,11 @@ const ExperienceSection = () => {
 
   const tabButtonPlus = {
     workExperience: (
-      <IconButton sx={styles.iconBtn} onClick={() => openModal('workExperienceModal')}>
-        <Add />
-      </IconButton>
+      <CustomTooltip title={t('profile.experience.workExperience.emptyTabName.button')}>
+        <IconButton sx={styles.iconBtn} onClick={() => openModal('workExperienceModal')}>
+          <Add />
+        </IconButton>
+      </CustomTooltip>
     ),
     achievement: (
       <IconButton sx={styles.iconBtn} onClick={() => openModal('achievementModal')}>

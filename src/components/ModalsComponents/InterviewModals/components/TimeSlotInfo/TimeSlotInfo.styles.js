@@ -41,16 +41,15 @@ export const styles = {
       marginRight: theme.spacing(2),
     },
   }),
-  iconBtn: (theme) => ({
+  checkbox: (theme) => ({
+    maxWidth: '100%',
+    width: '100%',
+    marginBottom: theme.spacing(5),
+    marginLeft: theme.spacing(1),
+  }),
+  iconPosition: (theme) => ({
     marginTop: theme.spacing(1),
     padding: '12px',
     borderRadius: 1,
-    color: theme.palette.infoIcon.color,
-    backgroundColor: theme.palette.infoIcon.backgroundColor,
-    transition: 'background-color 0.3s, transform 0.3s',
-    ':hover': {
-      color: theme.palette.infoIcon.hover.color,
-      backgroundColor: theme.palette.infoIcon.hover.backgroundColor,
-    },
   }),
 };

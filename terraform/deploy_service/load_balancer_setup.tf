@@ -39,3 +39,19 @@ resource "aws_lb_listener" "https_ecs_listener" {
   }
 }
 
+resource "aws_lb_listener" "http_ecs_front_listener_80_to_443" {
+  load_balancer_arn = aws_lb.front_ecs_alb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
