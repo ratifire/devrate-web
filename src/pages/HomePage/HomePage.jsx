@@ -2,11 +2,10 @@ import './styles/scss/homePage.scss';
 import { memo } from 'react';
 import ModalComponent from '@components/ModalsComponents/ModalComponent.jsx';
 import './assets/fonts/fonts.css';
+import { AboutUsSection, FaqSection, Footer, HowItWorksSection } from './../HomePage/sections';
 import './styles/reset.css';
 import './styles/index.css';
 import './styles/scss/index.scss';
-import { withAuth } from '@utils/hoc/index';
-import { AboutUsSection, FaqSection, Footer, HowItWorksSection } from './../HomePage/sections';
 import { Header, HeroSection } from './sections';
 
 const MemoizedHeader = memo(Header);
@@ -16,7 +15,7 @@ const MemoizedAboutSection = memo(AboutUsSection);
 const MemoizedFqaSection = memo(FaqSection);
 const MemoizedFooter = memo(Footer);
 
-const HomePage = withAuth(() => {
+const HomePage = () => {
   return (
     <div className='homePage'>
       <MemoizedHeader />
@@ -28,6 +27,6 @@ const HomePage = withAuth(() => {
       <ModalComponent />
     </div>
   );
-});
+};
 
 export default HomePage;

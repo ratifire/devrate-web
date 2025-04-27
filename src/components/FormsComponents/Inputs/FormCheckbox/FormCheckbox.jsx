@@ -4,12 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { CustomCheckboxIcon, CustomCheckedIcon } from '@components/UI/CustomCheckbox/CustomCheckbox';
 import { styles } from './FormCheckbox.styles';
 
-const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, workExperience, isLink }) => {
+const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, workExperience }) => {
   const { t } = useTranslation();
 
   const textStyles = workExperience ? styles.newsAgreementTextWorkExperience : styles.newsAgreementText;
-  const labelContent = isLink ? label : t(label);
-
   return (
     <FormControl error={error} variant='standard'>
       <FormControlLabel
@@ -22,7 +20,7 @@ const FormCheckbox = ({ checked, changeHandler, name, label, helperText, error, 
             onChange={changeHandler}
           />
         }
-        label={<Typography sx={textStyles}>{labelContent}</Typography>}
+        label={<Typography sx={textStyles}>{t(label)}</Typography>}
       />
       <FormHelperText>{t(helperText)}</FormHelperText>
     </FormControl>
@@ -37,9 +35,7 @@ FormCheckbox.propTypes = {
   helperText: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   workExperience: PropTypes.bool,
-  isLink: PropTypes.bool,
 };
-
 FormCheckbox.defaultProps = {
   checked: false,
   changeHandler: null,
@@ -47,7 +43,6 @@ FormCheckbox.defaultProps = {
   label: '',
   helperText: '',
   error: false,
-  isLink: false,
 };
 
 export default FormCheckbox;
