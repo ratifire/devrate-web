@@ -179,7 +179,6 @@ export const en = {
         agreement_error: 'To use our service, you must agree to the terms of use',
         agreement: 'I have read and agree to the Terms of Use and Privacy Policy',
         btn_register: 'Sign Up',
-        sso_error: 'A server error occurred. Please try again later.',
         selecting_auth: 'or',
         email_invalid: 'Invalid email',
         required: 'This is a required field',
