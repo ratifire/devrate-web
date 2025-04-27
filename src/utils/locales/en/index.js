@@ -555,6 +555,7 @@ export const en = {
         interview_chart_months: 'Months',
         skills_assessment_chart_title: 'Average skill assessment',
         levelUp: 'Based on the results, we recommend that you move to the next level!',
+        emptyStatistic: 'You currently have no statistics.',
       },
       interviewsChart: {
         conducted: 'Conducted',
@@ -976,6 +977,8 @@ export const en = {
           'There is nothing here yet. Create an interview request and take a step towards development! Find an interviewer who will help you test your knowledge and prepare for future challenges. Each conversation is a new experience and an opportunity to become more confident in your abilities.',
         emptySpecialization:
           'You do not have a chosen specialization yet. Define your area of interest to get access to interviews. Choose an area that interests you and discover new opportunities. This will help you find an interviewer or respondent, test your knowledge, and better prepare for future challenges.',
+        emptyStatistics:
+          'Your analytics on this interview will be here soon. Stay tuned for feedback from another user!',
       },
       navigationLinks: {
         scheduled: 'Scheduled',
