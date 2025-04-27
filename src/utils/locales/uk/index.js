@@ -185,7 +185,6 @@ export const uk = {
         password_invalid: 'Неприпустимий пароль',
         agreement_error: 'Для використання нашого сервісу вам необхідно погодитися з умовами користування',
         btn_register: 'Зареєструватись',
-        selecting_auth: 'або',
         privacy_policy: 'Політика конфіденційності',
         terms_and_conditions: 'Правила та умови',
         email_invalid: 'Недійсна електронна пошта',

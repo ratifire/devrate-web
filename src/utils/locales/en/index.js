@@ -178,7 +178,6 @@ export const en = {
         password_invalid: 'Incorrect password',
         agreement_error: 'To use our service, you must agree to the terms of use',
         btn_register: 'Sign Up',
-        selecting_auth: 'or',
         privacy_policy: 'Privacy Policy',
         terms_and_conditions: 'Terms and Conditions',
         email_invalid: 'Invalid email',

@@ -29,18 +29,6 @@ const styles = {
     justifyContent: 'spaceBetween',
     gridGap: '10px',
   },
-  selectingAuth: (theme) => ({
-    maxWidth: '100%',
-    width: '100%',
-    display: 'flex',
-    gap: theme.spacing(4),
-    justifyContent: 'center',
-    alignItems: 'center',
-  }),
-  divider: {
-    maxWidth: '100%',
-    width: '44%',
-  },
   wrapperBtn: {
     marginTop: '24px',
     marginBottom: '24px',
