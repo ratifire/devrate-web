@@ -12,9 +12,11 @@ import {
 import LoadImages from '@components/UI/LoadImages';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { StepAvatarSkeleton } from '@components/UI/Skeleton';
+import useStepHandler from '@utils/hooks/useStepHandler.js';
 import { styles } from './StepAvatar.styles';
 
 const StepAvatar = () => {
+  const { handleNext } = useStepHandler();
   const { data: user } = useSelector(selectCurrentUser);
   const [postAvatarUser, { isError: isErrorPostAvatar, isLoading: isLoadingPostAvatar }] = usePostAvatarUserMutation();
   const [deleteAvatarUser, { isError: isErrorDeleteAvatar, isLoading: isLoadingDeleteAvatar }] =
@@ -39,6 +41,7 @@ const StepAvatar = () => {
       const messageKey = avatarValue ? 'modalNotifyText.avatar.edit.success' : 'modalNotifyText.avatar.create.success';
 
       enqueueSnackbar(t(messageKey), { variant: 'success' });
+      handleNext();
       formik.resetForm();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {

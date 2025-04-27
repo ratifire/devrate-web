@@ -98,7 +98,6 @@ const BaseUserInfo = () => {
             <IconButton
               aria-label={t('profile.baseUserInfo.editUserInfo')}
               sx={styles.btnIcon}
-              title={t('profile.baseUserInfo.editBtn')}
               onClick={handleOpenModal(0)}
             >
               <EditIcon />

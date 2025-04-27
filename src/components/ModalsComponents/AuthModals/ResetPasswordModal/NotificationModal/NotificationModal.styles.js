@@ -1,6 +1,11 @@
 const styles = {
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+  },
   title: (theme) => ({
-    fontFamily: 'Zen Dots, sans-serif',
+    fontFamily: 'Tektur, sans-serif',
     marginBottom: theme.spacing(2),
     color: theme.palette.text.primary,
     fontWeight: 400,

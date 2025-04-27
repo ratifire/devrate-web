@@ -90,8 +90,6 @@ export const uk = {
         community: "Ком'юніті",
         contacts: 'Контакти',
         login: 'Увійти',
-        terms_and_conditions: 'Правила та умови',
-        privacy_policy: 'Політика конфіденційності',
       },
     },
     modal: {
@@ -185,12 +183,11 @@ export const uk = {
         password_tooltip:
           'Пароль повинен містити 6 символів, 1 велику літеру, 1 цифру, 1 спеціальний символ та не містити пробілів',
         password_invalid: 'Неприпустимий пароль',
-        news_letter: 'Надсилати мені новини, опитування та спеціальні пропозиції від SKILLZZY',
-        agreement: 'Я прочитав (ла) та погоджуюсь з умовами користування',
         agreement_error: 'Для використання нашого сервісу вам необхідно погодитися з умовами користування',
+        agreement: 'Я прочитав(ла) і погоджуюся з <a>Умовами використання</a> та <a>Політикою конфіденційності</a>',
         btn_register: 'Зареєструватись',
-        privacy_policy: 'Політика конфіденційності',
-        terms_and_conditions: 'Правила та умови',
+        sso_error: 'На сервері сталася помилка. Спробуйте пізніше.',
+        selecting_auth: 'або',
         email_invalid: 'Недійсна електронна пошта',
         required: "Це обов'язкове поле",
         first_name_long: 'Імʼя занадто довге',
@@ -230,7 +227,7 @@ export const uk = {
         // home_page: 'Home',
       },
       notificationModal: {
-        title: 'Скинути пароль',
+        title: 'Новий пароль',
         message: 'Ваш пароль було успішно змінено',
         btn_enter: 'УВІЙТИ',
       },
@@ -366,6 +363,14 @@ export const uk = {
         contact: 'Контактна інформація',
         languages: 'Мови',
         aboutMe: 'Про мене',
+        tooltips: {
+          EMAIL: 'Email',
+          PHONE_NUMBER: 'Номер телефону',
+          TELEGRAM_LINK: 'Telegram',
+          LINKEDIN_LINK: 'LinkedIn',
+          GITHUB_LINK: 'GitHub',
+          BEHANCE_LINK: 'Behance',
+        },
       },
       userMenu: {
         profile: 'Профіль',
@@ -509,7 +514,7 @@ export const uk = {
           description_short: 'Опис занадто короткий',
           description_placeholder:
             'Мої навички у програмуванні на PHP, використанні ООП та підходу MVC підтримуються значним досвідом роботи з базами даних, такими як MySQL та PostgreSQL. Я ефективно використовую фреймворк Laravel 5.3 для розробки масштабованих веб-додатків та володію базовими знаннями Symfony 3, зокрема Sonata.',
-          required: 'This field is required',
+          required: "Це обов'язкове поле",
           startDateMinMessage: 'Стартова дата має бути пізніше 01/01/1950',
           startDateMaxMessage: 'Кінцева дата має бути не пізніше за поточку',
           endDateMessage: 'Кінцева дата має буди пізнішою за стартову дату',
@@ -1064,6 +1069,8 @@ export const uk = {
       },
       interviewSkills: {
         skills: 'Навички',
+        tooltipInfo:
+          'Візуальне порівняння ваших навичок (фіолетовий) з навичками опонента (жовтий). Графік відображає рівень володіння софт-скілами (комунікація, робота в команді) та хард-скілами (професійні технічні вміння). Спільні ділянки показують збіги у рівнях розвитку навичок.',
         matchingSoftSkills: 'Співпадаючі soft skills',
         otherSoftSkills: 'Інші soft skills',
         matchingHardSkills: 'Співпадаючі hard skills',
@@ -1075,6 +1082,8 @@ export const uk = {
       },
       participantEvaluations: {
         title: 'Оцінка учасників',
+        tooltipInfo:
+          'Порівняння рівнів навичок учасників. Чим вище стовпчик, тим краще розвинена навичка. Шкала: 0 — відсутня, 10 — експертний рівень.',
       },
       statistic: {
         title: 'Статистика',
@@ -1092,7 +1101,7 @@ export const uk = {
       selectSpecializations: 'Спеціалізації',
       role: {
         CANDIDATE: 'Респондент',
-        INTERVIEWER: "Інтерв'юер",
+        INTERVIEWER: 'Інтерв’юер',
       },
       requestHeader: {
         titleLauncher: 'як',
