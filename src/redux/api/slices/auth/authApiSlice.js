@@ -7,22 +7,6 @@ import { clearTokens } from '@redux/slices/auth/tokenSlice';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    oAuthLinkedIn: builder.query({
-      query: () => ({
-        url: '/auth/oauth/redirect/linkedIn',
-      }),
-    }),
-    oAuthGoogle: builder.query({
-      query: () => ({
-        url: '/auth/oauth/redirect/google',
-      }),
-    }),
-    oAuthAuthorize: builder.mutation({
-      query: ({ code, state }) => ({
-        url: '/auth/oauth/authorize',
-        body: { code, state },
-      }),
-    }),
     createUser: builder.mutation({
       query: (body) => ({
         url: '/auth/signup',
@@ -94,9 +78,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useOAuthLinkedInQuery,
-  useOAuthGoogleQuery,
-  useOAuthAuthorizeMutation,
   useCreateUserMutation,
   useConfirmEmailMutation,
   useRegistrationResendCodeMutation,
