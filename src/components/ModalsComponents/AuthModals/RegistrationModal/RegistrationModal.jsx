@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Box, Divider, Link, Typography } from '@mui/material';
-import googleIcon from '@assets/icons/AuthLogo/google.svg';
-import linkedInIcon from '@assets/icons/AuthLogo/linkedIn.svg';
+import { Box, Divider, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice.js';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
@@ -153,16 +151,8 @@ const RegistrationModal = () => {
           <Typography sx={styles.subtitle}>{t('modal.registration.selecting_auth')}</Typography>
           <Divider sx={styles.divider} />
         </Box>
-        <Box sx={styles.authLinks}>
-          <Link href={`${url}/auth/oauth/redirect/linkedIn`} sx={styles.authLink}>
-            <img alt='LinkedIn' src={linkedInIcon} />
-            LinkedIn
-          </Link>
-          <Link href={`${url}/auth/oauth/redirect/google`} sx={styles.authLink}>
-            <img alt='Google' src={googleIcon} />
-            Google
-          </Link>
-        </Box>
+        <a href={`${url}/auth/oauth/redirect/linkedIn`}>LinkedIn Link</a>
+        <a href={`${url}/auth/oauth/redirect/google`}>Google link</a>
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
             disabled={!isFormValid}
