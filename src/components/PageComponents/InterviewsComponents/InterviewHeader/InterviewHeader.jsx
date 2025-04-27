@@ -7,14 +7,17 @@ import { useSelector } from 'react-redux';
 import { modalNames } from '@utils/constants/modalNames';
 import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
 import links from '@router/links.js';
-import CircleIcon from '@assets/icons/InterviewPageIcons/green-ellipse.svg';
 import { useModalController } from '@utils/hooks/useModalController';
 import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
+import { useGetInterviewStatusQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
+import { DateTime } from 'luxon';
 import styles from './InterviewHeader.styles';
 
 const InterviewHeader = () => {
+  const userTimeZone = DateTime.local().zoneName;
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: mySpecialization } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
+  const { data: interviewStatus } = useGetInterviewStatusQuery(userTimeZone);
   const { t } = useTranslation();
   const buttonRef = useRef(null);
   const [createButton, setCreateButton] = useState(null);
@@ -54,10 +57,9 @@ const InterviewHeader = () => {
       <Box sx={styles.interviewNavLinksBox}>
         <Box
           component={isActiveSchedule ? 'span' : NavLink}
-          sx={styles.interviewNavLink}
+          sx={(theme) => styles.interviewNavLink(theme, interviewStatus?.status)}
           to={links.scheduledInterviews}
         >
-          <Box alt='Circle' component='img' src={CircleIcon} sx={styles.greenEllipse} />{' '}
           {t('interviews.navigationLinks.scheduled')}
         </Box>
         <Box component={NavLink} sx={styles.interviewNavLink} to={links.passedInterviews}>
