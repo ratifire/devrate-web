@@ -77,11 +77,11 @@ const TimeSlotInfo = ({ formik, mySpecialization }) => {
       <Box sx={styles.checkbox}>
         <FormCheckbox
           changeHandler={formik.handleChange}
-          checked={formik.values.isChecked}
-          error={formik.touched.isChecked && Boolean(formik.errors.isChecked)}
-          helperText={formik.touched.isChecked && formik.errors.isChecked}
-          label='interviews.scheduleInterviewModal.agree'
-          name='isChecked'
+          checked={formik.values.consentStatus}
+          error={formik.touched.consentStatus && Boolean(formik.errors.consentStatus)}
+          helperText={formik.touched.consentStatus && formik.errors.consentStatus}
+          label='interviews.scheduleInterviewModal.consentStatus'
+          name='consentStatus'
         />
       </Box>
     </Box>
