@@ -84,6 +84,8 @@ export const en = {
         community: 'Community',
         contacts: 'Contacts',
         login: 'log in',
+        terms_and_conditions: 'Terms and Conditions',
+        privacy_policy: 'Privacy Policy',
       },
     },
     modal: {
@@ -176,6 +178,8 @@ export const en = {
         password_tooltip:
           'Password must contain 6 characters, 1 uppercase letter, 1 digit, 1 special character no spaces',
         password_invalid: 'Incorrect password',
+        news_letter: 'Send me news, surveys and special offers from SKILLZZY',
+        agreement: 'I have read and agree to the Terms and conditions',
         agreement_error: 'To use our service, you must agree to the terms of use',
         btn_register: 'Sign Up',
         privacy_policy: 'Privacy Policy',
