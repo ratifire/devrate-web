@@ -6,11 +6,17 @@ const modalStepSlice = createSlice({
     step: 0,
   },
   reducers: {
+    nextStep: (state) => {
+      state.step += 1;
+    },
+    prevStep: (state) => {
+      state.step -= 1;
+    },
     setStep: (state, action) => {
       state.step = action.payload;
     },
   },
 });
 
-export const { setStep } = modalStepSlice.actions;
+export const { nextStep, prevStep, setStep } = modalStepSlice.actions;
 export default modalStepSlice.reducer;
