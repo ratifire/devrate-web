@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Box, Button, Divider, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import {
-  useCreateUserMutation,
-  useLazyOAuthGoogleQuery,
-  useLazyOAuthLinkedInQuery,
-} from '@redux/api/slices/auth/authApiSlice.js';
+import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice.js';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
 import { RegistrationSchema } from '@utils/validationSchemas';
 import { FormInput } from '@components/FormsComponents/Inputs';
@@ -29,17 +25,6 @@ const RegistrationModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [createUser, { isLoading: isLoadingCreating }] = useCreateUserMutation();
-  const [oAuthLinkedIn] = useLazyOAuthLinkedInQuery();
-  const [oAuthGoogle] = useLazyOAuthGoogleQuery();
-  const url = import.meta.env.VITE_API_DEV_URL || import.meta.env.VITE_API_URL;
-
-  const handleClickLinkedIn = async () => {
-    oAuthLinkedIn();
-  };
-
-  const handleClickGoogle = async () => {
-    oAuthGoogle();
-  };
 
   const handleKeyDown = (e) => {
     if (e.key === ' ') {
@@ -165,10 +150,6 @@ const RegistrationModal = () => {
           <Typography>{t('modal.registration.selecting_auth')}</Typography>
           <Divider sx={styles.divider} />
         </Box>
-        <Button onClick={handleClickLinkedIn}>Linkedin</Button>
-        <Button onClick={handleClickGoogle}>Google</Button>
-        <a href={`${url}/auth/oauth/redirect/linkedIn`}>LinkedIn Link</a>
-        <a href={`${url}/auth/oauth/redirect/google`}>Google link</a>
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
             disabled={!isFormValid}

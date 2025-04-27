@@ -94,8 +94,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useLazyOAuthLinkedInQuery,
-  useLazyOAuthGoogleQuery,
+  useOAuthLinkedInQuery,
+  useOAuthGoogleQuery,
   useOAuthAuthorizeMutation,
   useCreateUserMutation,
   useConfirmEmailMutation,
