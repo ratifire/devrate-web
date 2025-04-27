@@ -33,6 +33,7 @@ const StepPersonal = () => {
   const { t } = useTranslation();
 
   const personalData = dataPutPersonalUser || dataGetPersonal || {};
+
   const { firstName, lastName, city, country, status, description } = _.defaults(personalData, {
     firstName: userData.firstName || '',
     lastName: userData.lastName || '',
@@ -46,7 +47,7 @@ const StepPersonal = () => {
     firstName,
     lastName,
     city,
-    country,
+    country: country.toLowerCase(),
     status,
     description,
   };
@@ -84,6 +85,7 @@ const StepPersonal = () => {
   if (isFetchingGetCountry || isFetchingGetPersonal || isLoadingPutPersonal) {
     return <StepPersonalSkeleton />;
   }
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={styles.wrapper}>
