@@ -77,7 +77,7 @@ export const uk = {
         privacyPolicy: 'Privacy Policy',
         allRightsReserved: 'Всі права захищені.',
         allTrademarks: 'Усі товарні знаки, логотипи та торгові найменування є власністю їхніх відповідних власників.',
-        formPart1: 'Зв’яжиться',
+        formPart1: 'Зв’яжіться',
         formPart2: 'з нами',
         placeholderName: 'Ім’я Прізвище',
         placeholderEmail: 'Введіть вашу email адресу',
