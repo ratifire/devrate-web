@@ -1,6 +1,5 @@
 import { Box, Skeleton, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-// import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import UserAvatar from '@components/UI/UserAvatar';

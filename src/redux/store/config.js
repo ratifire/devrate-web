@@ -19,6 +19,7 @@ import modalStepReducer from '@redux/slices/modal/modalStepSlice';
 import scheduleReducer from '@redux/slices/schedule/scheduleSlice';
 import popupReducer from '@redux/slices/notification/popupSlice.js';
 import { apiSlice } from '@redux/api/apiSlice.js';
+import chatMiddleware from '@redux/slices/chat/chatMiddleware.js';
 
 const authPersistConfig = {
   key: 'auth',
@@ -69,7 +70,9 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(apiSlice.middleware),
+    })
+      .concat(chatMiddleware)
+      .concat(apiSlice.middleware),
   devTools: true,
 });
 

@@ -2,13 +2,17 @@ import { Badge, IconButton, Popover } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '@assets/icons/message.svg?react';
-import { openList, closeList, closeBadge } from '@redux/slices/chat/chatSlice.js';
+import { openList, closeList, closeBadge, setCurrentUser } from '@redux/slices/chat/chatSlice.js';
+import { connectChat } from '@redux/slices/chat/chatMiddleware.js';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { styles } from './Chat.styles';
 import ChatHistory from './ChatHistory';
 
 const Chat = () => {
   const [bellButton, setBellButton] = useState(null);
   const { list, badge } = useSelector((state) => state.chat);
+  const currentUser = useSelector(selectCurrentUser) || {};
+  const { id } = currentUser.data;
   const dispatch = useDispatch();
   const handleOpen = (event) => {
     event.preventDefault();
@@ -19,6 +23,13 @@ const Chat = () => {
   const handleClose = () => {
     dispatch(closeList());
   };
+  const handleConnect = () => {
+    dispatch(setCurrentUser(id));
+    dispatch(connectChat());
+  };
+
+  handleConnect();
+
   return (
     <>
       <IconButton sx={styles.btnIcon} onClick={handleOpen}>

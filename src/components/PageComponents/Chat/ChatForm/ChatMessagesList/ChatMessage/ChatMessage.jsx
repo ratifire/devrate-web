@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { formattedTime } from '@utils/helpers/dateHandlers.js';
-import { styles } from './ChatMessage.styles';
+import { styles } from './ChatMessage.styles.js';
 
 const sender = 'sender';
 const receiver = 'receiver';
