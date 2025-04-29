@@ -54,7 +54,7 @@ const Header = () => {
           </nav>
           <div className={styles.header__social_login}>
             <div className={styles.header__socialIcons}>
-              <a aria-label='LinkedIn' href='https://www.linkedin.com'>
+              <a aria-label='LinkedIn' href='https://www.linkedin.com/company/ratifire/'>
                 <img alt='LinkedIn Icon' src={linkdin} />
               </a>
               <a aria-label='Email' className={styles.header__socialIcons__dn} href='mailto:info@skillzzy.com'>
