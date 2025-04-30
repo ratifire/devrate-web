@@ -72,7 +72,15 @@ const SpecializationModal = () => {
     formik.setFieldValue('mastery', value);
   };
   const handleChangeSpecialization = (value) => {
-    setState({ skills: (skills.length = 0) });
+    if (!value) {
+      setState({
+        skills: [],
+      });
+      return;
+    }
+    setState({
+      skills: (skills.length = 0),
+    });
     const defaultSkills = defaultHardSkills[value].map((skill) => {
       return { name: skill, type: 'HARD_SKILL' };
     });
