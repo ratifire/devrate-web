@@ -5,12 +5,15 @@ import PropTypes from 'prop-types';
 import { DARK_THEME } from '@utils/constants/Theme/theme.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
 import { modalNames } from '@utils/constants/modalNames.js';
+import { useTheme } from '@mui/material/styles';
 import { styles } from './EmptyInterviewTab.styles.js';
 
 const EmptyPassedInterviewsPage = ({ tab, svg, isSpecializations }) => {
   const { t } = useTranslation();
   const { openModal } = useModalController();
   const { mode } = useSelector((state) => state.theme);
+  const theme = useTheme();
+  const isRequestTab = tab === 'Request';
   let SvgComponent = null;
   if (svg && typeof svg === 'object' && svg.dark && svg.light) {
     SvgComponent = mode === DARK_THEME ? svg.dark : svg.light;
@@ -27,8 +30,8 @@ const EmptyPassedInterviewsPage = ({ tab, svg, isSpecializations }) => {
 
   if (isSpecializations) {
     return (
-      <Container maxWidth='xl' sx={styles.container}>
-        <Box sx={styles.contentWrapper}>
+      <Container maxWidth='xl' sx={styles.container(theme, isRequestTab)}>
+        <Box sx={styles.contentWrapper(theme, isRequestTab)}>
           <SvgComponent />
           <Typography sx={styles.text} variant='subtitle1'>
             {t(`interviews.emptyInterviewTabs.empty${tab}`)}

@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { useGetInterviewRequestByMasteryIdQuery } from '@redux/api/slices/interviewRequestApiSlice.js';
+import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
+import EmptyInterviewTab from '@pages/InterviewPages/EmptyInterviewTab/index.js';
 import Participant from './Participant';
 import { styles } from './InterviewRequest.styles.js';
 
@@ -20,13 +22,16 @@ const InterviewRequest = () => {
   const masteryFromUrl = query.get('mastery');
 
   const { data: specializations, isLoading, isError } = useGetSpecializationByUserIdQuery(userId, { skip: !userId });
+  const { data: userData, isLoading: isUserDataLoading } = useGetInterviewRequestByMasteryIdQuery(
+    { masteryId: specializations?.find((item) => item.id === mastery)?.mainMasteryId || '' },
+    { skip: !mastery }
+  );
 
   useEffect(() => {
     if (isLoading || isError || !specializations?.length) {
       setMastery('');
       return;
     }
-
     const foundMastery = specializations.find(({ id }) => String(id) === masteryFromUrl);
     const defaultMastery =
       foundMastery?.id || specializations.find(({ main }) => main)?.id || specializations[0]?.id || '';
@@ -34,10 +39,6 @@ const InterviewRequest = () => {
     addQueryParamToUrl(defaultMastery);
   }, []);
 
-  const { data: userData } = useGetInterviewRequestByMasteryIdQuery(
-    { masteryId: specializations?.find((item) => item.id === mastery)?.mainMasteryId || '' },
-    { skip: !mastery }
-  );
   const addQueryParamToUrl = (mastery) => {
     const params = new URLSearchParams(window.location.search);
     mastery ? params.set('mastery', mastery) : params.delete('mastery');
@@ -99,23 +100,26 @@ const InterviewRequest = () => {
           </FormControl>
         )}
       </Box>
-
-      <Box>
-        {getUserByRole('CANDIDATE') && (
-          <Participant
-            data={getUserByRole('CANDIDATE')}
-            specialization={specializationObject}
-            userId={getUserByRole('CANDIDATE')?.id}
-          />
-        )}
-        {getUserByRole('INTERVIEWER') && (
-          <Participant
-            data={getUserByRole('INTERVIEWER')}
-            specialization={specializationObject}
-            userId={getUserByRole('INTERVIEWER')?.id}
-          />
-        )}
-      </Box>
+      {(!userData || !userData?.length) && !isUserDataLoading ? (
+        <EmptyInterviewTab isSpecializations svg={emptyInterviewTabsPictures.emptyReqestPic} tab='Request' />
+      ) : (
+        <Box>
+          {getUserByRole('CANDIDATE') && (
+            <Participant
+              data={getUserByRole('CANDIDATE')}
+              specialization={specializationObject}
+              userId={getUserByRole('CANDIDATE')?.id}
+            />
+          )}
+          {getUserByRole('INTERVIEWER') && (
+            <Participant
+              data={getUserByRole('INTERVIEWER')}
+              specialization={specializationObject}
+              userId={getUserByRole('INTERVIEWER')?.id}
+            />
+          )}
+        </Box>
+      )}
     </Box>
   );
 };
