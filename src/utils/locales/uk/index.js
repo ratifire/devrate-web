@@ -1100,11 +1100,11 @@ export const uk = {
     interviewRequest: {
       title: 'Запити',
       loading: 'Завантаження спеціалізацій...',
-      noSpecializationsAvailable: 'No specializations available',
+      noSpecializationsAvailable: 'Немає доступних спеціалізацій',
       selectSpecializations: 'Спеціалізації',
       role: {
         CANDIDATE: 'Респондент',
-        INTERVIEWER: "Інтерв'юер",
+        INTERVIEWER: 'Інтерв’юер',
       },
       requestHeader: {
         titleLauncher: 'як',
