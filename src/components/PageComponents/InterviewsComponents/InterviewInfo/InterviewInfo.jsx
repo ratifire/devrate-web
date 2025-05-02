@@ -1,18 +1,20 @@
-import { Box, Typography } from '@mui/material';
-import { useParams } from 'react-router';
+import { Box, Typography, Link } from '@mui/material';
+import { Link as RouterLink, useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { useGetPassedInterviewByIdQuery } from '../../../../redux/interviews/passedInterviewsApiSlice.js';
-import { formatToLocalDateInterview } from '../../../../utils/helpers/formatToLocalDateInterview.js';
-import { useGetPersonalUserQuery } from '../../../../redux/user/personal/personalApiSlice.js';
-import { lvlMastery } from '../../../../utils/constants/masteryLvl.js';
-import { ConvertMilliInYears } from '../../../../utils/helpers/convertMilliInYears.js';
+import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
+import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInterview.js';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice.js';
+import { lvlMastery } from '@utils/constants/masteryLvl.js';
+import { ConvertMilliInYears } from '@utils/helpers/convertMilliInYears.js';
+import links from '@router/links';
+import formatRoleLetterCase from '../../../../utils/helpers/formatRoleLetterCase.js';
+
 import { styles } from './InterviewInfo.styles.js';
 
 const InterviewInfo = () => {
   const { t } = useTranslation();
   const { interviewId } = useParams();
   const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId });
-
   const {
     dateTime = new Date(),
     attendeeId = null,
@@ -51,15 +53,15 @@ const InterviewInfo = () => {
         </Typography>
       </Box>
       <Typography sx={styles.role} variant='body1'>
-        {t('interviews.passedInterviews.interviewInfoRole')}: {role}
+        {t('interviews.passedInterviews.interviewInfoRole')}: {formatRoleLetterCase(role, t)}
       </Typography>
       <Box sx={styles.hostWrapper}>
         <Typography sx={styles.host} variant='body1'>
           {t('interviews.passedInterviews.interviewInfoHost')}:
         </Typography>
-        <Typography sx={styles.hostName} variant='body1'>
+        <Link component={RouterLink} sx={styles.hostLink} to={`${links.profile}/${attendeeId}`}>
           {fullName}
-        </Typography>
+        </Link>
       </Box>
       <Typography sx={styles.hostSpecialization} variant='caption1'>
         {lvlMastery[attendeeMasteryLevel] + ' ' + attendeeSpecialization}

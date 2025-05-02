@@ -1,11 +1,11 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import SocialsLinkList from '../../../../UI/SocialsLinkList';
-import LanguagesList from '../../../../UI/LanguagesList';
-import { useGetLanguageUserQuery } from '../../../../../redux/user/language/languageApiSlice';
-import { useGetUserContactsQuery } from '../../../../../redux/user/contacts/contactsApiSlice';
-import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
+import { useGetLanguageUserQuery } from '@redux/api/slices/user/language/languageApiSlice';
+import { useGetUserContactsQuery } from '@redux/api/slices/user/contacts/contactsApiSlice';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
+import SocialsLinkList from '@components/UI/SocialsLinkList';
+import LanguagesList from '@components/UI/LanguagesList';
 import { styles } from './RightSection.styles';
 
 const RightSection = ({ id }, profileType) => {
@@ -29,7 +29,7 @@ const RightSection = ({ id }, profileType) => {
           </Typography>
         </Box>
         <Box gap={2} sx={styles.wrapperLink}>
-          <SocialsLinkList componentStyles={styles} socials={userContacts} />
+          <SocialsLinkList componentStyles={styles} id={id} socials={userContacts} />
         </Box>
       </Box>
       {Boolean(languages.data?.length) && profileType !== 'user' && (

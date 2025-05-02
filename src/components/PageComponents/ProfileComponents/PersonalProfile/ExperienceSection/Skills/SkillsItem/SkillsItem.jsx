@@ -4,9 +4,9 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useUpdateSkillsMutation } from '../../../../../../../redux/services/skillsApiSlice';
-import CustomTooltip from '../../../../../../UI/CustomTooltip';
-import { refetchSkills } from '../../../../../../../redux/updateTab/updateTabSlice.js';
+import { useUpdateSkillsMutation } from '@redux/api/slices/skillsApiSlice.js';
+import { refetchSkills } from '@redux/slices/updateTab/updateTabSlice.js';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { styles } from './SkillsItem.styles';
 
 const SkillsItem = ({ data, flex }) => {
@@ -22,11 +22,11 @@ const SkillsItem = ({ data, flex }) => {
 
   const handlerClick = async () => {
     setHiddenSkill(!hiddenSkill);
-    await updateSkills({ id, hide: !hidden }).unwrap();
+    await updateSkills({ id, hide: !hiddenSkill }).unwrap();
     dispatch(refetchSkills());
   };
 
-  const iconEye = hiddenSkill ? (
+  const iconEye = !hiddenSkill ? (
     <VisibilityOutlinedIcon sx={styles.eye} />
   ) : (
     <VisibilityOffOutlinedIcon sx={styles.eyeHidden} />

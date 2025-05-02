@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
+import InterviewModalRole from '@utils/constants/InterviewModalRole.js';
 import { useState } from 'react';
 import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu/index.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
-import InterviewModalRole from '../../../../utils/constants/InterviewModalRole.js';
 import { styles } from './RequestHeader.styles.js';
 
 const RequestHeader = ({
@@ -83,7 +83,7 @@ const RequestHeader = ({
     <Box sx={styles.container}>
       <Box sx={styles.header}>
         <Typography sx={styles.title}>
-          {title} as a{' '}
+          {title} {t('interviewRequest.requestHeader.titleLauncher')}{' '}
           <Box
             component='span'
             sx={{

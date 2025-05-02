@@ -12,5 +12,6 @@ export const styles = {
     fontSize: '16px',
     fontWeight: '500',
     marginBottom: '8px',
+    textTransform: 'capitalize',
   },
 };

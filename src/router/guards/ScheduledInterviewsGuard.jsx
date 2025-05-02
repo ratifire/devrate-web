@@ -1,23 +1,52 @@
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { Outlet, useNavigate, useParams } from 'react-router';
 import { useEffect } from 'react';
-import { useGetAllScheduledInterviewsQuery } from '../../redux/interviews/scheduledInterviewsApiSlice';
+import {
+  useGetAllScheduledInterviewsQuery,
+  useLazyGetSingleInterviewByIdQuery,
+} from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
+import { useDispatch } from 'react-redux';
+import { openModal as modalOpen } from '@redux/slices/modal/modalSlice.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import navigationLinks from '../links';
 
 const ScheduledInterviewsGuard = () => {
   const { data: scheduledInterviews } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
+  const [getSingleInterview] = useLazyGetSingleInterviewByIdQuery();
   const navigate = useNavigate();
-  const location = useLocation();
+  const { interviewId } = useParams();
+  const dispatch = useDispatch();
+
   const firstInterviewId = scheduledInterviews?.content[0]?.id;
   const event = scheduledInterviews?.content[0];
-  const patchName = location.pathname.split('/')[3];
+  const searchParams = new URLSearchParams(location.search);
+  const modalParam = searchParams.get('modal');
+  const roleParam = searchParams.get('role');
 
   useEffect(() => {
-    if (firstInterviewId && !patchName) {
+    if (modalParam && roleParam) {
+      getSingleInterview({ interviewId }).then((response) => {
+        dispatch(
+          modalOpen({
+            modalType: modalNames.feedbackInterviewModal,
+            data: {
+              feedbackId: interviewId,
+              role: roleParam,
+            },
+          })
+        );
+
+        navigate(`${navigationLinks.scheduledInterviews}/${interviewId}?modal=${modalParam}&role=${roleParam}`, {
+          state: { event: response.data },
+        });
+      });
+    }
+
+    if (firstInterviewId) {
       navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
         state: { event },
       });
     }
-  }, [firstInterviewId, patchName]);
+  }, [firstInterviewId, event, scheduledInterviews]);
 
   return <Outlet />;
 };

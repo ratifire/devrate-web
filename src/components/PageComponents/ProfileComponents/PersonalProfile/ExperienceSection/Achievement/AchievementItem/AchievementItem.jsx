@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { useDeleteAchievementMutation } from '../../../../../../../redux/services/achievementsApiSlice.js';
+import { useDeleteAchievementMutation } from '@redux/api/slices/achievementsApiSlice.js';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import DropdownMenu from '../../DropdownMenu';
-import { modalNames } from '../../../../../../../utils/constants/modalNames.js';
-import { useModalController } from '../../../../../../../utils/hooks/useModalController.js';
 import styles from './AchievementItem.styles.js';
 
 const AchievementItem = ({ achievement, icon: IconComponent }) => {
@@ -81,13 +81,6 @@ const AchievementItem = ({ achievement, icon: IconComponent }) => {
             handleEditFeature={handleEditFeature}
           />
         </Box>
-        {/*commented out <Link> in case if its need it's needed in the future*/}
-
-        {/*{achievement.link && (*/}
-        {/*  <Link href={achievement.link} target='_blank' sx={styles.link}>*/}
-        {/*    <Typography variant='subtitle3'>{achievement.link}</Typography>*/}
-        {/*  </Link>*/}
-        {/*)}*/}
         <Box sx={styles.achievementItemText}>
           <Typography variant='body1'>{achievement.description}</Typography>
         </Box>

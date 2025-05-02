@@ -27,8 +27,8 @@ export const interviewLight = {
     link: '#5900D9',
   },
   interviewSkills: {
-    leftCircle: '#8133F1',
-    rightCircle: '#EE7538',
+    userCircle: '#8133F1',
+    hostCircle: '#EE7538',
     skillsBox: '#F8F8F8',
   },
   partEvalChart: {

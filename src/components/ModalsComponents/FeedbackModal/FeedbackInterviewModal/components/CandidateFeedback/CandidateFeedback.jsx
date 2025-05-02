@@ -1,14 +1,14 @@
 import { Box, Typography } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ButtonDef } from '../../../../../FormsComponents/Buttons';
-import { ErrorComponent } from '../../../../../UI/Exceptions';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { lvlMastery } from '@utils/constants/masteryLvl';
 import { FIRST_STEP, LAST_STEP } from '../../constants';
 import { formatDateTime } from '../../helpers';
 import useFeedbackForm from '../../hooks';
 import { InterviewerInfo, SliderComponent } from '../index';
 import { InterviewStepper } from '../InterviewStepper';
-import { lvlMastery } from '../../../../../../utils/constants/masteryLvl';
 import { styles } from './CandidateFeedback.styles';
 
 const CandidateFeedback = () => {
@@ -20,6 +20,9 @@ const CandidateFeedback = () => {
 
   const handleNextStep = () => setActiveStep(LAST_STEP);
   const handlePrevStep = () => setActiveStep(FIRST_STEP);
+
+  const skills = formik.values.skills;
+  const hardSkills = skills.filter(({ type }) => type === 'HARD_SKILL');
 
   if (isError) {
     return <ErrorComponent />;
@@ -48,8 +51,9 @@ const CandidateFeedback = () => {
               variant={'contained'}
               onClick={handlePrevStep}
             />
-            {activeStep === FIRST_STEP && (
+            {activeStep === FIRST_STEP && hardSkills.length > 0 && (
               <ButtonDef
+                disabled={formik.values.comment.length < 2}
                 label={t('modal.interview.btnNext')}
                 sx={styles.btn}
                 type={'button'}
@@ -57,7 +61,7 @@ const CandidateFeedback = () => {
                 onClick={handleNextStep}
               />
             )}
-            {activeStep === LAST_STEP && (
+            {(activeStep === LAST_STEP || hardSkills.length === 0) && (
               <ButtonDef
                 disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
                 label={t('modal.interview.btnSend')}

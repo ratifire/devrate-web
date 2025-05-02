@@ -30,7 +30,6 @@ export const styles = {
   specialisationCategories: {
     gridColumn: '1/13',
     gridRow: '1/2',
-    minHeight: 202,
   },
   specialisationLevel: {
     maxHeight: '144px',

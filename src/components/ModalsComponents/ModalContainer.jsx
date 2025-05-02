@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { modalNames } from '../../utils/constants/modalNames.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import {
   EducationModal,
   WorkExperienceModal,
@@ -8,7 +8,14 @@ import {
   WorkExperienceEditModal,
   AchievementEditModal,
 } from './ProfileModals';
-import { CheckEmail, LoginModal, RegistrationModal, ResetPassword, ConfirmationModal } from './AuthModals';
+import {
+  CheckEmail,
+  LoginModal,
+  RegistrationModal,
+  ResetPassword,
+  ConfirmationModal,
+  NotificationModal,
+} from './AuthModals';
 import FeedbackProjectModal from './FeedbackProjectModal';
 import {
   SpecializationEditModal,
@@ -40,6 +47,7 @@ const modalEnum = {
   [modalNames.resetPasswordModal]: ResetPassword,
   [modalNames.confirmationModal]: ConfirmationModal,
   [modalNames.confirmDeleteSpecialization]: ConfirmDeleteSpecializationModal,
+  [modalNames.notificationModal]: NotificationModal,
 };
 
 const ModalContainer = ({ modalType }) => {

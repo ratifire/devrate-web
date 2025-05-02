@@ -1,10 +1,10 @@
 import './styles/scss/homePage.scss';
 import { memo } from 'react';
-import ModalComponent from '../../components/ModalsComponents/ModalComponent.jsx';
+import ModalComponent from '@components/ModalsComponents/ModalComponent.jsx';
+import './assets/fonts/fonts.css';
 import { AboutUsSection, FaqSection, Footer, HowItWorksSection } from './../HomePage/sections';
 import './styles/reset.css';
 import './styles/index.css';
-import './assets/fonts/fonts.css';
 import './styles/scss/index.scss';
 import { Header, HeroSection } from './sections';
 
@@ -17,7 +17,7 @@ const MemoizedFooter = memo(Footer);
 
 const HomePage = () => {
   return (
-    <>
+    <div className='homePage'>
       <MemoizedHeader />
       <MemoizedHeroSection />
       <MemoizedHowItWorksSection />
@@ -25,7 +25,7 @@ const HomePage = () => {
       <MemoizedFqaSection />
       <MemoizedFooter />
       <ModalComponent />
-    </>
+    </div>
   );
 };
 

@@ -5,14 +5,14 @@ import { enqueueSnackbar } from 'notistack';
 import {
   useDeleteSpecializationByIdMutation,
   useGetSpecializationByUserIdQuery,
-} from '../../../../redux/specialization/specializationApiSlice';
+} from '@redux/api/slices/specialization/specializationApiSlice';
+import { selectModalData } from '@redux/slices/modal/modalSlice';
+import { setActiveSpecialization, setMainSpecializations } from '@redux/slices/specialization/specializationSlice';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { selectModalData } from '../../../../redux/modal/modalSlice';
-import { setActiveSpecialization, setMainSpecializations } from '../../../../redux/specialization/specializationSlice';
 import { CategoriesSkeleton } from '../../../UI/Skeleton';
 import { ErrorComponent } from '../../../UI/Exceptions';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { modalNames } from '../../../../utils/constants/modalNames.js';
 import { styles } from './ConfirmDeleteSpecializationModal.styles';
 
 const ConfirmDeleteSpecializationModal = () => {

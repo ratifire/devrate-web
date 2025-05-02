@@ -4,7 +4,14 @@ import { emailValidationSchema } from './EmailValidationSchema';
 
 export const RegistrationSchema = Yup.object().shape({
   email: emailValidationSchema,
-  country: Yup.string().required('modal.registration.required'),
+  country: Yup.string()
+    .transform((value, originalValue) => {
+      if (typeof originalValue === 'object' && originalValue?.target?.value) {
+        return originalValue.target.value;
+      }
+      return value;
+    })
+    .required('modal.registration.required'),
   firstName: Yup.string()
     .min(2, 'modal.registration.first_name_short')
     .max(50, 'modal.registration.first_name_long')
@@ -16,7 +23,7 @@ export const RegistrationSchema = Yup.object().shape({
     .matches(/^[\p{L}\s\-'’]+$/u, 'modal.registration.last_name_invalid_characters')
     .required('modal.registration.required'),
   password: Yup.string()
-    .min(8, 'modal.registration.password_short')
+    .min(6, 'modal.registration.password_short')
     .max(50, 'modal.registration.password_long')
     .matches(regEx.passwordValidationRegex, 'modal.registration.password_invalid')
     .required('modal.registration.required'),

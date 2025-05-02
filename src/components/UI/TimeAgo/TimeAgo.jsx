@@ -1,19 +1,16 @@
 import PropTypes from 'prop-types';
-import { DateTime } from 'luxon';
-import { useTranslation } from 'react-i18next';
+import { ConvertMilliInYears } from '@utils/helpers/convertMilliInYears.js';
 
 const TimeAgo = ({ data }) => {
-  const { t } = useTranslation();
-  const date = DateTime.fromISO(data);
-  const now = DateTime.now();
-
-  const diffInHours = now.diff(date, 'hours').hours;
-
-  const timeAgo =
-    diffInHours >= 1 ? `${Math.floor(diffInHours)} ${t('notifications.hourAgo')}` : t('notifications.lessThanHourAgo');
+  const utcCreationDate = new Date(data);
+  const timezoneOffset = utcCreationDate.getTimezoneOffset();
+  const localCreationDate = utcCreationDate.setMinutes(utcCreationDate.getMinutes() - timezoneOffset);
+  const timeAgo = ConvertMilliInYears(Date.now() - localCreationDate);
   return <>{timeAgo}</>;
 };
+
 TimeAgo.propTypes = {
   data: PropTypes.string.isRequired,
 };
+
 export default TimeAgo;

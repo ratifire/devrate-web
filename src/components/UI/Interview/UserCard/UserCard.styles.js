@@ -14,6 +14,7 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '4px',
+    overflowX: 'hidden',
   },
   role: (theme) => ({
     color: theme.palette.userCard.role.color,

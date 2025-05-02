@@ -1,21 +1,21 @@
 import { Box, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import zoom from '../../../../assets/icons/InterviewPageIcons/zoom.png';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
+import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
+import { formatTimeToUtc, formatTimeWithOffset } from '@utils/helpers';
+import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice';
+import navigationLinks from '@router/links.js';
+import { modalNames } from '@utils/constants/modalNames';
+import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { ScheduledMeetingSkeleton } from '../../../UI/Skeleton';
-import { formatTimeToUtc, formatTimeWithOffset } from '../../../../utils/helpers';
 import { getStatusByTime } from '../helpers';
-import { useDeleteInterviewMutation } from '../../../../redux/interviews/singleScheduledInterviewApiSlice';
-import navigationLinks from '../../../../router/links.js';
-import { modalNames } from '../../../../utils/constants/modalNames';
-import { openModal } from '../../../../redux/modal/modalSlice';
 import { styles } from './ScheduledMeeting.styles';
 import { btnStatus, leftBtnStatus, rightBtnStatus } from './constants';
 
@@ -25,7 +25,7 @@ const ScheduledMeeting = () => {
     data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
   const { enqueueSnackbar } = useSnackbar();
-  const dispatch = useDispatch();
+  const { openModal } = useModalController();
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -74,11 +74,17 @@ const ScheduledMeeting = () => {
 
   const handleClickRightBtn = () => {
     if (status === btnStatus['UPCOMING'] || status === btnStatus['IN PROCESS']) {
-      window.open(roomUrl, '_blank');
+      // Create URL with query params to use in mirotalk in a survey later
+      const url = new URL(roomUrl);
+      if (eventId && role) {
+        url.searchParams.append('eventId', eventId);
+        url.searchParams.append('role', role);
+      }
+      window.open(url, '_blank');
     }
 
     if (status === btnStatus['AWAITING FEEDBACK']) {
-      dispatch(openModal({ modalType: modalNames.feedbackInterviewModal, data: { feedbackId: eventId, role } }));
+      openModal(modalNames.feedbackInterviewModal, { feedbackId: eventId, role });
     }
   };
 
@@ -95,7 +101,6 @@ const ScheduledMeeting = () => {
   const time = formatTimeToUtc(startTime);
   const startAndTime = formatTimeWithOffset(startTime);
   const status = getStatusByTime(startTime);
-
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.boxTitle}>
@@ -103,7 +108,7 @@ const ScheduledMeeting = () => {
           {t('singleScheduledInterview.scheduledMeeting.title')}
         </Typography>
         <Typography component='p' sx={styles[status]} variant='subtitle2'>
-          {status}
+          {t(`singleScheduledInterview.scheduledMeeting.${status}`).toUpperCase()}
         </Typography>
       </Box>
       <Box sx={styles.boxDataTime}>
@@ -163,7 +168,7 @@ const ScheduledMeeting = () => {
             {t('singleScheduledInterview.scheduledMeeting.platform')}
           </Typography>
           <Typography component='p' sx={styles.platformIcon} variant='body'>
-            <Box component='img' src={zoom} sx={styles.icon} /> Zoom
+            <VideoCameraFrontIcon sx={styles.icon} /> Meeting Service
           </Typography>
         </Box>
       </Box>

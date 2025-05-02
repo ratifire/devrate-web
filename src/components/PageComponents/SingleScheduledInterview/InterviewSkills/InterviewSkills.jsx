@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useLocation } from 'react-router';
-import InfoIcon from '../../../../assets/icons/InterviewPageIcons/info.svg?react';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice';
-import { useGetAllSkillsForMasteryIdQuery } from '../../../../redux/interviews/singleScheduledInterviewApiSlice.js';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import { InterviewSkillsSkeleton } from '../../../UI/Skeleton';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
+import { useGetAllSkillsForMasteryIdQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { InterviewSkillsSkeleton } from '@components/UI/Skeleton';
+import InfoTooltip from '@components/UI/InfoTooltip/index.js';
 import prepareSkillsDataInterviewSkills from '../helpers/prepareSkillsDataInterviewSkills';
 import { styles } from './InterviewSkills.styles';
 import { SkillsParticipant } from './components';
@@ -54,24 +54,32 @@ const InterviewSkills = () => {
         <Typography component='h6' variant='h6'>
           {t('singleScheduledInterview.interviewSkills.skills')}
         </Typography>
-        <InfoIcon />
+        <InfoTooltip title='singleScheduledInterview.interviewSkills.tooltipInfo' />
       </Box>
       <Box sx={styles.boxParticipants}>
         <Box sx={styles.boxParticipant}>
-          <Box sx={styles.rightCircle} />
-          <Typography component='p' variant='subtitle2'>
-            {hostFullName}
-          </Typography>
-        </Box>
-        <Box sx={styles.boxParticipant}>
-          <Box sx={styles.leftCircle} />
+          <Box sx={styles.userCircle} />
           <Typography component='p' variant='subtitle2'>
             {userFullName}
           </Typography>
         </Box>
+        <Box sx={styles.boxParticipant}>
+          <Box sx={styles.hostCircle} />
+          <Typography component='p' variant='subtitle2'>
+            {hostFullName}
+          </Typography>
+        </Box>
       </Box>
-      <SkillsParticipant category={'Soft Skills'} data={softSkills} />
-      <SkillsParticipant category={'Hard Skills'} data={hardSkills} />
+      <SkillsParticipant
+        data={softSkills}
+        matching={t('singleScheduledInterview.interviewSkills.matchingSoftSkills')}
+        other={t('singleScheduledInterview.interviewSkills.otherSoftSkills')}
+      />
+      <SkillsParticipant
+        data={hardSkills}
+        matching={t('singleScheduledInterview.interviewSkills.matchingHardSkills')}
+        other={t('singleScheduledInterview.interviewSkills.otherHardSkills')}
+      />
     </Box>
   );
 };

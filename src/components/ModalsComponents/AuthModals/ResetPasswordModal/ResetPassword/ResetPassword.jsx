@@ -7,13 +7,13 @@ import { Link as RouterLink } from 'react-router';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useSnackbar } from 'notistack';
 import { useRef, useState } from 'react';
-import { useChangePasswordMutation, useResetPasswordMutation } from '../../../../../redux/auth/authApiSlice';
-import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
+import { useChangePasswordMutation, useResetPasswordMutation } from '@redux/api/slices/auth/authApiSlice';
+import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
+import { resetPasswordSchema } from '@utils/validationSchemas';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '@utils/constants/modalNames.js';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { FormInput } from '../../../../FormsComponents/Inputs';
-import { resetPasswordSchema } from '../../../../../utils/validationSchemas';
-import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
 import styles from './ResetPassword.styles';
 
 const initialValues = {
@@ -125,8 +125,8 @@ const ResetPassword = () => {
             await changePassword(requestData).unwrap();
             enqueueSnackbar('Password changed successfully!', { variant: 'success' });
             resetForm();
-            dispatch(closeModal({ modalName: 'openResetPassword' }));
-            dispatch(openModal({ modalName: 'openNotification' }));
+            dispatch(closeModal());
+            dispatch(openModal({ modalType: modalNames.notificationModal }));
             // eslint-disable-next-line no-unused-vars
           } catch (error) {
             enqueueSnackbar('Invalid code. Please try again.', { variant: 'error' });
@@ -191,7 +191,7 @@ const ResetPassword = () => {
               handleChange={formik.handleChange}
               helperText={formik.touched.newPassword && formik.errors.newPassword}
               iconStyle={styles.iconStyle}
-              label='New Password'
+              label={t('modal.resetPassword.new_password')}
               mouseDownHandler={handleMouseDownPassword}
               name='newPassword'
               showPassword={showPassword}
@@ -210,7 +210,7 @@ const ResetPassword = () => {
               handleChange={formik.handleChange}
               helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
               iconStyle={styles.iconStyle}
-              label='Repeat New Password'
+              label={t('modal.resetPassword.repeat_new_password')}
               mouseDownHandler={handleMouseDownPassword}
               name='repeatPassword'
               showPassword={showPassword}

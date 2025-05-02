@@ -1,15 +1,15 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, Tooltip } from 'recharts';
+import useHardSkillData from '@utils/hooks/specialization/useHardSkillData';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import HardSkillsChartSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/HardSkillsChartSkeleton';
+import useTooltipColorChart from '@utils/hooks/useTooltipColorChart.js';
 import { useSelector } from 'react-redux';
-import useHardSkillData from '../../../../../utils/hooks/specialization/useHardSkillData';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { DARK_THEME } from '@utils/constants/Theme/theme.js';
 import { roundData } from '../utils';
-import HardSkillsChartSkeleton from '../../../../UI/Skeleton/Pages/specializationSkeleton/HardSkillsChartSkeleton';
-import useTooltipColorChart from '../../../../../utils/hooks/useTooltipColorChart.js';
 import EmptyLayerSvgDark from '../../../../../assets/pictures/emptySkillsAndLayersPictures/emptyHardSkillsLayerDark.svg?react';
 import EmptyLayerSvgLight from '../../../../../assets/pictures/emptySkillsAndLayersPictures/emptyHardSkillsLayerLight.svg?react';
-import { DARK_THEME } from '../../../../../utils/constants/Theme/theme.js';
 import { styles } from './HardSkillsChart.styles.js';
 import useThemeHardSkillsChart from './useThemeHardSkillsChart';
 

@@ -1,8 +1,8 @@
 import { Badge, IconButton, Popover } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../../../assets/icons/message.svg?react';
-import { openList, closeList, closeBadge } from '../../../redux/chat/chatSlice.js';
+import Message from '@assets/icons/message.svg?react';
+import { openList, closeList, closeBadge } from '@redux/slices/chat/chatSlice.js';
 import { styles } from './Chat.styles';
 import ChatHistory from './ChatHistory';
 

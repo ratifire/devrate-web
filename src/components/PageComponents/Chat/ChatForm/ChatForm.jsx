@@ -1,21 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import { Box, IconButton, TextField, Typography, Link, Fade } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
+import SockJS from 'sockjs-client';
 import CloseIcon from '@mui/icons-material/Close';
 import { Client } from '@stomp/stompjs';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Link as RouterLink } from 'react-router';
-import { DateTime } from 'luxon';
-import SockJS from 'sockjs-client';
+import UserAvatar from '@components/UI/UserAvatar';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
+import Send from '@assets/icons/send.svg?react';
+import { closeChat, openBadge } from '@redux/slices/chat/chatSlice';
 import { useTranslation } from 'react-i18next';
-import UserAvatar from '../../../UI/UserAvatar';
-import Send from '../../../../assets/icons/send.svg?react';
-import { closeChat, openBadge } from '../../../../redux/chat/chatSlice';
-import { chatApiSlice, useGetChatHistoryQuery } from '../../../../redux/services/chatApiSlice.js';
-import { useMoveChat, useResizeChat, useResizeTextarea, useScrollChat } from '../hooks';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
-import { TAG_TYPES } from '../../../../utils/constants/tagTypes.js';
-import { styles } from './ChatForm.styles.js';
+import {
+  useResizeTextarea,
+  useScrollChat,
+  useMoveChat,
+  useResizeChat,
+} from '@components/PageComponents/Chat/hooks/index.js';
+import { chatApiSlice, useGetChatHistoryQuery } from '@redux/api/slices/chatApiSlice.js';
+import { TAG_TYPES } from '@utils/constants/tagTypes.js';
+import { DateTime } from 'luxon';
+import { styles } from './ChatForm.styles';
 import ChatMessage from './ChatMessage';
 
 const chatAppearDelay = 100;
@@ -78,7 +83,7 @@ const ChatForm = () => {
   }, [dataChats]);
 
   useEffect(() => {
-    const socket = new SockJS('https://server-prod.skillzzy.com/chat');
+    const socket = new SockJS(`${import.meta.env.VITE_API_DEV_URL}/chat`);
     const newClient = new Client({
       webSocketFactory: () => socket,
       onConnect: () => {
@@ -162,7 +167,7 @@ const ChatForm = () => {
       <Box ref={chatPositionRef} sx={styles.position}>
         <Box sx={styles.container}>
           <Box sx={styles.wrapper}>
-            <Link component={RouterLink} sx={styles.linkAvatar} to={`/profile/${opponentUserId}`}>
+            <Link component={RouterLink} sx={styles.linkAvatar}>
               <UserAvatar
                 radius='circle'
                 size='m'
@@ -172,7 +177,9 @@ const ChatForm = () => {
               />
             </Link>
             <Box sx={styles.wrapperName} onMouseDown={handleMouseDown}>
-              <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
+              <Link component={RouterLink} sx={styles.linkName} to={`/profile/${opponentUserId}`}>
+                <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
+              </Link>
             </Box>
             <IconButton aria-label='Close Сhat' sx={styles.btnIcon} type='button' onClick={handleClose}>
               <CloseIcon />
@@ -205,7 +212,7 @@ const ChatForm = () => {
               onChange={handleTextFieldChange}
               onKeyDown={handleKeyDown}
             />
-            <IconButton sx={styles.btnSend} onClick={handleSubmitMessages}>
+            <IconButton disabled={!message.trim()} sx={styles.btnSend} onClick={handleSubmitMessages}>
               <Send />
             </IconButton>
           </Box>

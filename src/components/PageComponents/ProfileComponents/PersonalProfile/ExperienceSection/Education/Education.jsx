@@ -2,18 +2,20 @@ import { useEffect, useMemo } from 'react';
 import { Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useGetEducationByUserIdQuery } from '../../../../../../redux/services/educationApiSlice';
-import { iconsEducation } from '../../../../../../utils/constants/Experience/iconsExperience';
-import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
-import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
-import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
-import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
+import { setButtonState } from '@redux/slices/addButton/addButtonSlice.js';
+import { useGetEducationByUserIdQuery } from '@redux/api/slices/educationApiSlice.js';
+import { iconsEducation } from '@utils/constants/Experience/iconsExperience';
+import { loopedObjValues } from '@utils/helpers/loopedObjValues';
+import { emptyPersonalTabsPictures } from '@utils/constants/emptyTabsPictures';
+import EmptyExperienceTab from '@components/PageComponents/ProfileComponents/sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
+import { useTranslation } from 'react-i18next';
 import EducationItem from './EducationItem';
 
 const Education = ({ tab }) => {
   const { id: userId } = useSelector((state) => state.auth.user.data);
   const { data: educationsData, isLoading } = useGetEducationByUserIdQuery(userId, { skip: !userId });
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const getIcon = loopedObjValues(iconsEducation);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const Education = ({ tab }) => {
           <EducationItem
             key={id}
             description={description}
-            endYear={endYear === 9999 ? 'Now' : endYear}
+            endYear={endYear === 9999 ? t('profile.experience.education.endYearNow') : endYear}
             icon={getIcon()}
             id={id}
             name={name}

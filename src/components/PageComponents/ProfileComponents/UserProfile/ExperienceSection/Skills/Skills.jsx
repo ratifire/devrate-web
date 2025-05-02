@@ -4,24 +4,26 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import StarIcon from '@mui/icons-material/Star';
 import PropTypes from 'prop-types';
 import SearchIcon from '@mui/icons-material/Search';
-import TextAreaSearch from '../../../../../FormsComponents/Inputs/TextAreaSearch';
-import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
-import { sortedSkills } from '../../../../../../utils/helpers/sortedSkills';
-import { sortSkillsByOriginal } from '../../../../../../utils/helpers/sortedSkillsByOriginal';
-import { useGetUserAllSpecializationQuery } from '../../../../../../redux/specialization/specializationApiSlice';
-import { emptyUserTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
-import StarMainSpecialization from '../../../../../UI/StarMainSpecialization';
+import { useGetUserAllSpecializationQuery } from '@redux/api/slices/specialization/specializationApiSlice';
+import { sortedSkills } from '@utils/helpers/sortedSkills';
+import { sortSkillsByOriginal } from '@utils/helpers/sortedSkillsByOriginal';
+import { emptyUserTabsPictures } from '@utils/constants/emptyTabsPictures';
+import TextAreaSearch from '@components/FormsComponents/Inputs/TextAreaSearch';
+import EmptyExperienceTab from '@components/PageComponents/ProfileComponents/sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
+import StarMainSpecialization from '@components/UI/StarMainSpecialization';
+import { useTranslation } from 'react-i18next';
 import { updateAllSpecializations } from './updateAllSpecialization';
 import SkillsItem from './SkillsItem';
 import { styles } from './Skills.styles';
 
 const Skills = ({ id, tab }) => {
+  const { t } = useTranslation();
   const [specCurrent, setSpecCurrent] = useState('');
   const { data: userAllSpecializations, isLoading } = useGetUserAllSpecializationQuery(id, { skip: !id });
   const updateAllSpecialization = userAllSpecializations ? updateAllSpecializations(userAllSpecializations) : [];
   const selectedSpecialization = updateAllSpecialization?.find((s) => s.specializationName === specCurrent);
   const level = selectedSpecialization?.masteryLevel;
-  const skillVisible = selectedSpecialization?.hardSkills.filter((item) => item.hidden === true);
+  const skillVisible = selectedSpecialization?.hardSkills.filter((item) => item.hidden === false);
   const [filteredSkills, setFilteredSkills] = useState(skillVisible);
   const [open, setOpen] = useState(false);
   const [strSearch, setStrSearch] = useState('');
@@ -82,6 +84,10 @@ const Skills = ({ id, tab }) => {
     return <EmptyExperienceTab imgUrl={emptyUserTabsPictures.emptySkillsPic} profileType='user' tab={tab} />;
   }
 
+  const renderSkills = (item) => {
+    return item.masteryName === '' ? t(item.specializationName) : item.specializationName;
+  };
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={open ? styles.skillBg : styles.skill}>
@@ -109,7 +115,7 @@ const Skills = ({ id, tab }) => {
             >
               {updateAllSpecialization?.map((item) => (
                 <MenuItem key={item.specializationName} sx={styles.selectItem} value={item.specializationName}>
-                  {item.specializationName}
+                  {renderSkills(item)}
                   {item.mainSpecialization && <StarIcon sx={styles.selectItemStar} />}
                 </MenuItem>
               ))}

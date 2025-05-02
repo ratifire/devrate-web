@@ -6,6 +6,7 @@ import { formatDateAndTime } from './dateHandlers.js';
 import formatTimeToUtc from './formatTimeToUtc';
 import formatTimeWithOffset from './formatTimeWithOffset';
 import fillEndYear from './fillEndYear';
+import formatRoleLetterCase from './formatRoleLetterCase';
 
 export {
   fillEndYear,
@@ -16,4 +17,5 @@ export {
   formatDateAndTime,
   formatTimeToUtc,
   formatTimeWithOffset,
+  formatRoleLetterCase,
 };

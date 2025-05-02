@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useScrollPadding } from '../../../../utils/helpers/useScrollPadding';
+import { useScrollPadding } from '@utils/helpers/useScrollPadding';
 import { styles } from './Blog.styles';
 import { blogArr } from './blogArr';
 
@@ -23,7 +23,7 @@ const Blog = () => {
         </Typography>
         <Typography sx={styles.blogText} variant='caption2'>
           {t(blog.text)}
-          <button>{t('blogText.readNext')}</button>
+          {/*<button>{t('blogText.readNext')}</button>*/}
         </Typography>
       </Box>
     ));

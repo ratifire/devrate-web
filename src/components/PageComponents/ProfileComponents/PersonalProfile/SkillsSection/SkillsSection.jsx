@@ -1,8 +1,8 @@
 import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useGetPersonalUserQuery } from '../../../../../redux/user/personal/personalApiSlice';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
 import { styles } from './SkillsSection.styles';
 
 const SkillsSection = () => {
@@ -52,11 +52,11 @@ const SkillsSection = () => {
       </Box>
       <Box sx={styles.interviewHistory}>
         <Box sx={[styles.skillsInterviewBtn, styles.doneInterviewsBtn]}>
-          <Typography variant='subtitle1'>{conductedInterviews}</Typography>
+          <Typography variant='subtitle1'>{completedInterviews}</Typography>
           <Typography variant='caption3'>{t('profile.skills.doneInterviews')}</Typography>
         </Box>
         <Box sx={[styles.skillsInterviewBtn, styles.completedInterviewsBtn]}>
-          <Typography variant='subtitle1'>{completedInterviews}</Typography>
+          <Typography variant='subtitle1'>{conductedInterviews}</Typography>
           <Typography variant='caption3'>{t('profile.skills.completedInterviews')}</Typography>
         </Box>
       </Box>

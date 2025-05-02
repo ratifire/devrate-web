@@ -10,16 +10,16 @@ import {
   useGetSpecializationByUserIdQuery,
   useLazyGetMainMasteryBySpecializationIdQuery,
   useUpdateSpecializationAsMainByIdMutation,
-} from '../../../../redux/specialization/specializationApiSlice';
-import { setActiveSpecialization, setMainSpecializations } from '../../../../redux/specialization/specializationSlice';
-import CustomTooltip from '../../../UI/CustomTooltip';
-import { ErrorComponent } from '../../../UI/Exceptions';
-import DropdownMenu from '../../ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
-import { CategoriesSkeleton } from '../../../UI/Skeleton';
-import { modalNames } from '../../../../utils/constants/modalNames';
+} from '@redux/api/slices/specialization/specializationApiSlice';
+import { setActiveSpecialization, setMainSpecializations } from '@redux/slices/specialization/specializationSlice';
+import CustomTooltip from '@components/UI/CustomTooltip';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import DropdownMenu from '@components/PageComponents/ProfileComponents/PersonalProfile/ExperienceSection/DropdownMenu';
+import { CategoriesSkeleton } from '@components/UI/Skeleton';
+import { modalNames } from '@utils/constants/modalNames';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { setActiveMastery } from '@redux/slices/specialization/activeMasterySlice.js';
 import InterviewTracker from '../InterviewTracker/index.js';
-import { useModalController } from '../../../../utils/hooks/useModalController.js';
-import { setActiveMastery } from '../../../../redux/specialization/activeMasterySlice.js';
 import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
@@ -158,7 +158,9 @@ const SpecializationCategories = () => {
                 <CustomTooltip customStyles={styles.specialization_name} title={name} variant='h6'>
                   {name}
                 </CustomTooltip>
-                <Typography variant='subtitle2'>Level {masteryData[id]?.level}</Typography>
+                <Typography variant='subtitle2'>
+                  {t('specialization.levelOfCategory', { level: masteryData[id]?.level })}
+                </Typography>
               </Box>
               {main && <StarIcon sx={styles.star} />}
             </Box>

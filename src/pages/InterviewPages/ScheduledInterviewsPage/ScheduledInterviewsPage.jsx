@@ -1,13 +1,11 @@
-import { Box, Container, Paper } from '@mui/material';
 import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react';
-import { Outlet } from 'react-router';
 import { useSelector } from 'react-redux';
-import InterviewsSkeleton from '../../../components/UI/Skeleton/Pages/InterviewsSkeleton';
-import { useGetAllScheduledInterviewsQuery } from '../../../redux/interviews/scheduledInterviewsApiSlice';
-import { useGetSpecializationByUserIdQuery } from '../../../redux/specialization/specializationApiSlice.js';
+import InterviewsSkeleton from '@components/UI/Skeleton/Pages/InterviewsSkeleton';
+import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
+import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
+import { InterviewContainer } from '../../../components/UI/Interview';
 import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
-import { emptyInterviewTabsPictures } from '../../../utils/constants/emptyTabsPictures.js';
-import { styles } from './ScheduledInterviewsPage.styles';
 
 const SideBar = lazy(
   () => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar.jsx')
@@ -27,12 +25,16 @@ const ScheduledInterviewsPage = () => {
   const [lastEventRef, setLastEventRef] = useState(null);
   const { id } = useSelector((state) => state.auth.user.data);
   const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
-  const isSpecializations = Boolean(specializations?.length);
-  const isScheduledInterviewList = Boolean(scheduledInterviews?.content.length);
+  const isSpecializations = !!specializations?.length;
 
-  const refHandler = (el) => {
-    setLastEventRef(el);
-  };
+  const refHandler = useCallback(
+    (el) => {
+      if (el !== lastEventRef) {
+        setLastEventRef(el);
+      }
+    },
+    [lastEventRef]
+  );
 
   const handleObserver = useCallback(
     (entries) => {
@@ -58,29 +60,34 @@ const ScheduledInterviewsPage = () => {
     };
   }, [lastEventRef, scheduledInterviews?.content, handleObserver]);
 
-  return !isSpecializations || !isScheduledInterviewList ? (
-    <EmptyInterviewTab
-      isSpecializations={isSpecializations}
-      svg={
-        isSpecializations
-          ? emptyInterviewTabsPictures.emptyScheduledPic
-          : emptyInterviewTabsPictures.emptySpecialization.scheduled
-      }
-      tab='Scheduled'
-    />
-  ) : (
-    <Container maxWidth='xl' sx={styles.container}>
-      <Box sx={styles.contentWrapper}>
-        <Box sx={styles.box}>
-          <Paper>
-            <Suspense fallback={<InterviewsSkeleton />}>
-              <MemoizedSideBar interviews={scheduledInterviews?.content} refHandler={refHandler} />
-            </Suspense>
-          </Paper>
-        </Box>
-        <Outlet />
-      </Box>
-    </Container>
+  if (isLoading) {
+    return (
+      <InterviewContainer>
+        <InterviewsSkeleton />
+      </InterviewContainer>
+    );
+  }
+
+  if (!scheduledInterviews?.content?.length || !specializations?.length) {
+    return (
+      <EmptyInterviewTab
+        isSpecializations={isSpecializations}
+        svg={
+          isSpecializations
+            ? emptyInterviewTabsPictures.emptyScheduledPic
+            : emptyInterviewTabsPictures.emptySpecialization.scheduled
+        }
+        tab='Scheduled'
+      />
+    );
+  }
+
+  return (
+    <InterviewContainer>
+      <Suspense fallback={<InterviewsSkeleton />}>
+        <MemoizedSideBar interviews={scheduledInterviews?.content} refHandler={refHandler} />
+      </Suspense>
+    </InterviewContainer>
   );
 };
 

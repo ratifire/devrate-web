@@ -2,9 +2,9 @@ import { Link as RouterLink, useNavigate, useParams } from 'react-router';
 import PropTypes from 'prop-types';
 import { Box, Paper, Typography, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { formatDateAndTime } from '../../../../utils/helpers';
-import { lvlMastery } from '../../../../utils/constants/masteryLvl';
-import navigationLinks from '../../../../router/links';
+import { formatDateAndTime } from '@utils/helpers';
+import { lvlMastery } from '@utils/constants/masteryLvl';
+import navigationLinks from '@router/links';
 import { styles } from './SideBarEvent.styles';
 
 const SideBarEvent = ({ event, refHandler, passedInterview }) => {
@@ -20,7 +20,6 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
       });
     }
   };
-
   return (
     <Box sx={styles.interviewLink} onClick={handleClick}>
       <Paper key={id} ref={refHandler} sx={+interviewId === id ? styles.border : styles.sideBarEventContainer}>
@@ -45,7 +44,7 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
           {formatDateAndTime(date)}
         </Typography>
         <Typography component='div' sx={styles.role} variant='body'>
-          {t('interviews.sideBar.event.role')}: <span>{role}</span>
+          {t('interviews.sideBar.event.role')}: <span>{t(`interviewRequest.role.${role}`)}</span>
         </Typography>
         <Typography component='div' sx={styles.host} variant='body'>
           {t('interviews.sideBar.event.host')}:{' '}

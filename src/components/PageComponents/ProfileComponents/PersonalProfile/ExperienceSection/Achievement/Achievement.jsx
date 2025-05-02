@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
-import { iconsAchievement } from '../../../../../../utils/constants/Experience/iconsExperience';
-import EmptyExperienceTab from '../../../sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
-import { useFetchAchievementsQuery } from '../../../../../../redux/services/achievementsApiSlice';
-import { setButtonState } from '../../../../../../redux/addButton/addButtonSlice';
-import { loopedObjValues } from '../../../../../../utils/helpers/loopedObjValues';
-import { emptyPersonalTabsPictures } from '../../../../../../utils/constants/emptyTabsPictures';
+import { setButtonState } from '@redux/slices/addButton/addButtonSlice.js';
+import { useFetchAchievementsQuery } from '@redux/api/slices/achievementsApiSlice.js';
+import { iconsAchievement } from '@utils/constants/Experience/iconsExperience';
+import { loopedObjValues } from '@utils/helpers/loopedObjValues';
+import { emptyPersonalTabsPictures } from '@utils/constants/emptyTabsPictures';
+import EmptyExperienceTab from '@components/PageComponents/ProfileComponents/sharedComponents/EmptyExperienceTab/EmptyExperienceTab';
 import { styles } from './Achievement.styles.js';
 import AchievementItem from './AchievementItem';
 

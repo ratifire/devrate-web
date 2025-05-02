@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
-import { LevelGauge } from '../../../UI/Chart';
-import { useGetMasteriesQuery } from '../../../../redux/interviews/singleScheduledInterviewApiSlice.js';
-import { StatisticSkeleton } from '../../../UI/Skeleton';
-import { ErrorComponent } from '../../../UI/Exceptions';
+import { LevelGauge } from '@components/UI/Chart';
+import { useGetMasteriesQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
+import { StatisticSkeleton } from '@components/UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
 import { prepareSkillsDataStatistics } from '../helpers';
 import { styles } from './Statistic.styles';
 import { useStatisticChartColor } from './hooks';
@@ -43,7 +43,7 @@ const Statistic = () => {
       <Box sx={styles.boxCharts}>
         <Box sx={styles.chart}>
           <Typography component='p' variant='subtitle3'>
-            Soft Skills
+            {t('interviews.passedInterviews.interviewStatisticsSoftSkills')}
           </Typography>
           <LevelGauge
             colorGrad='gradientSoftSkills'
@@ -63,7 +63,7 @@ const Statistic = () => {
         </Box>
         <Box sx={styles.chart}>
           <Typography component='p' variant='subtitle3'>
-            Hard Skills
+            {t('interviews.passedInterviews.interviewStatisticsHardSkills')}
           </Typography>
           <LevelGauge
             colorGrad='gradientHardSkills'
@@ -83,7 +83,7 @@ const Statistic = () => {
         </Box>
         <Box sx={styles.chart}>
           <Typography component='p' variant='subtitle3'>
-            Over All
+            {t('interviews.passedInterviews.interviewStatisticsOverall')}
           </Typography>
           <LevelGauge
             colorGrad='gradientOverall'

@@ -4,20 +4,19 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
 import _ from 'lodash';
-import { FormInput, FormSelect, TextAreaInput } from '../../../../FormsComponents/Inputs';
-import { StepPersonalSchema } from '../../../../../utils/validationSchemas/index';
-import {
-  useGetPersonalUserQuery,
-  usePutPersonalUserMutation,
-} from '../../../../../redux/user/personal/personalApiSlice';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { useGetCountryListQuery } from '../../../../../redux/countryList/countryApiSlice';
-import { selectCurrentUser } from '../../../../../redux/auth/authSlice';
-import { StepPersonalSkeleton } from '../../../../UI/Skeleton';
-import { ErrorComponent } from '../../../../UI/Exceptions';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { useGetPersonalUserQuery, usePutPersonalUserMutation } from '@redux/api/slices/user/personal/personalApiSlice';
+import { useGetCountryListQuery } from '@redux/api/slices/countryList/countryApiSlice';
+import { CountryFormSelector, FormInput, TextAreaInput } from '@components/FormsComponents/Inputs';
+import { StepPersonalSchema } from '@utils/validationSchemas/index';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { StepPersonalSkeleton } from '@components/UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import useStepHandler from '@utils/hooks/useStepHandler.js';
 import { styles } from './StepPersonal.styles';
 
 const StepPersonal = () => {
+  const { handleNext } = useStepHandler();
   const {
     data: userCountries,
     isFetching: isFetchingGetCountry,
@@ -36,6 +35,7 @@ const StepPersonal = () => {
   const { t } = useTranslation();
 
   const personalData = dataPutPersonalUser || dataGetPersonal || {};
+
   const { firstName, lastName, city, country, status, description } = _.defaults(personalData, {
     firstName: userData.firstName || '',
     lastName: userData.lastName || '',
@@ -49,7 +49,7 @@ const StepPersonal = () => {
     firstName,
     lastName,
     city,
-    country,
+    country: country.toLowerCase(),
     status,
     description,
   };
@@ -67,13 +67,13 @@ const StepPersonal = () => {
         description: description,
       }).unwrap();
       enqueueSnackbar(t('modalNotifyText.personal.create.success'), { variant: 'success' });
+      handleNext();
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('modalNotifyText.personal.create.error'), { variant: 'error' });
     }
     formik.resetForm();
   };
-
   const formik = useFormik({
     initialValues,
     validationSchema: StepPersonalSchema,
@@ -132,8 +132,9 @@ const StepPersonal = () => {
           />
         </Box>
         <Box sx={styles.input50}>
-          <FormSelect
+          <CountryFormSelector
             required
+            autoComplete='off'
             countries={userCountries}
             error={formik.touched.country && Boolean(formik.errors.country)}
             handleBlur={formik.handleBlur}

@@ -1,6 +1,6 @@
 const styles = {
   title: (theme) => ({
-    fontFamily: 'Zen Dots, sans-serif',
+    fontFamily: 'Tektur, sans-serif',
     marginBottom: theme.spacing(4),
     color: theme.palette.text.primary,
     '@media (max-width: 1280px)': {

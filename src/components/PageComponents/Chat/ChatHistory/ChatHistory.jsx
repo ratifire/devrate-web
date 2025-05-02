@@ -1,13 +1,13 @@
-import { Box, IconButton, Skeleton, Typography } from '@mui/material';
+import { Box, Skeleton, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+// import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import UserAvatar from '../../../UI/UserAvatar';
-import { selectCurrentUser } from '../../../../redux/auth/authSlice.js';
-import { useGetAvatarUserQuery } from '../../../../redux/user/avatar/avatarApiSlice.js';
-import FormInputSearch from '../../../FormsComponents/Inputs/FormInputSearch/index.js';
-import { useGetChatsQuery } from '../../../../redux/services/chatApiSlice.js';
+import UserAvatar from '@components/UI/UserAvatar';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
+import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice.js';
+import FormInputSearch from '@components/FormsComponents/Inputs/FormInputSearch/index.js';
+import { useGetChatsQuery } from '@redux/api/slices/chatApiSlice.js';
 import { searchUser } from '../hooks';
 import { styles } from './ChatHistory.styles.js';
 import ChatHistoryItem from './ChatHistoryItem';
@@ -52,9 +52,9 @@ const ChatHistory = () => {
       <Box sx={styles.wrapper}>
         <UserAvatar radius='circle' size='s' src={userPicture} userFirstName={firstName} userLastName={lastName} />
         <Typography sx={styles.name} variant='h6'>{`${firstName} ${lastName}`}</Typography>
-        <IconButton aria-label='Menu' sx={styles.btnIcon} type='button'>
-          <MoreVertIcon />
-        </IconButton>
+        {/*<IconButton aria-label='Menu' sx={styles.btnIcon} type='button'>*/}
+        {/*  <MoreVertIcon />*/}
+        {/*</IconButton>*/}
       </Box>
       <Box sx={styles.search}>
         <FormInputSearch

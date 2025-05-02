@@ -1,19 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Typography, Box } from '@mui/material';
-import ModalLayout from '../../../../../layouts/ModalLayout';
-import { ButtonDef } from '../../../../FormsComponents/Buttons';
-import { closeModal, openModal } from '../../../../../redux/modal/modalSlice';
-import changeColorOfLastTitleWord from '../../../../../utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '../../../../../utils/constants/modalNames.js';
+import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
+import { ButtonDef } from '@components/FormsComponents/Buttons';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
+import { modalNames } from '@utils/constants/modalNames.js';
 import styles from './NotificationModal.styles';
 
 const NotificationModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const openNotification = useSelector((state) => state.modal.openNotification);
-
-  const handleClose = () => dispatch(closeModal());
 
   const handleEnter = () => {
     dispatch(closeModal());
@@ -21,12 +17,12 @@ const NotificationModal = () => {
   };
 
   return (
-    <ModalLayout open={openNotification} setOpen={handleClose}>
+    <Box sx={styles.wrapper}>
       <Typography sx={styles.title} variant='subtitle3'>
         {changeColorOfLastTitleWord(t('modal.notificationModal.title'))}
       </Typography>
       <Typography sx={styles.message} variant='subtitle3'>
-        {t('modal.notificationModal.message')}
+        {t('modal.notificationModal.message')}!
       </Typography>
       <Box sx={styles.wrapperBtn}>
         <ButtonDef
@@ -37,7 +33,7 @@ const NotificationModal = () => {
           onClick={handleEnter}
         />
       </Box>
-    </ModalLayout>
+    </Box>
   );
 };
 

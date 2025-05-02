@@ -6,13 +6,14 @@ import { enqueueSnackbar } from 'notistack';
 import { DateTime } from 'luxon';
 import CloseIcon from '@mui/icons-material/Close';
 import { isEmpty } from 'lodash';
-import TimeSlotsGroup from '../TimeSlotsGroup';
-import RequestHeader from '../RequsestHeader';
-import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
 import {
   useDeleteInterviewRequestMutation,
   useDeleteTimeSlotsMutation,
-} from '../../../../redux/services/interviewRequestApiSlice.js';
+} from '@redux/api/slices/interviewRequestApiSlice.js';
+import { formatRoleLetterCase } from '@utils/helpers';
+import TimeSlotsGroup from '../TimeSlotsGroup';
+import RequestHeader from '../RequsestHeader';
+import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons/index.js';
 import { styles } from './Participant.styles.js';
 
@@ -190,13 +191,7 @@ const Participant = ({ data, specialization }) => {
     setOpenDeleteDialog(false);
   };
 
-  const formatRole = (role, capitalize = true) => {
-    const translatedRole = t(`interviewRequest.role.${role?.toLowerCase() || 'candidate'}`);
-    return capitalize ? translatedRole : translatedRole.toLowerCase();
-  };
-
   const pendingSlots = data.timeSlots.filter((slot) => slot.status === 'PENDING').length;
-
   return (
     <Box ref={containerRef} sx={styles.container}>
       <RequestHeader
@@ -208,7 +203,7 @@ const Participant = ({ data, specialization }) => {
         languageCode={languageCode}
         languageName={languageName}
         pendingSlots={pendingSlots}
-        role={formatRole(role, true)}
+        role={formatRoleLetterCase(role, t)}
         selectedSpecialization={specialization}
         selectedTimeSlots={selectedTimeSlots}
         title={mainMasteryLevelWithName}
@@ -225,7 +220,7 @@ const Participant = ({ data, specialization }) => {
           <Typography sx={styles.text}>
             {t('interviewRequest.deleteAllRequests.question', {
               mastery: mainMasteryLevelWithName,
-              role: role ? formatRole(role, false) : '',
+              role: role ? formatRoleLetterCase(role, t) : '',
             })}
           </Typography>
         </DialogContent>

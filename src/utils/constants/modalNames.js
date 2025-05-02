@@ -19,4 +19,5 @@ export const modalNames = {
   userInfoModal: 'userInfoModal',
   workExperienceEditModal: 'workExperienceEditModal',
   workExperienceModal: 'workExperienceModal',
+  notificationModal: 'notificationModal',
 };
