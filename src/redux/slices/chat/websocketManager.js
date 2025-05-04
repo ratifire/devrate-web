@@ -11,20 +11,22 @@ export const initializeWebSocket = (currentUserId, onMessageReceived) => {
 
   const socket = new SockJS(`${import.meta.env.VITE_API_DEV_URL}/chat`);
   client = new Client({
-    webSocketFactory: () => socket,
     reconnectDelay: 5000,
     heartbeatIncoming: 10000,
     heartbeatOutgoing: 10000,
+    webSocketFactory: () => socket,
     onConnect: () => {
-      subscriptions.messages = client.subscribe(`/queue/messages/${currentUserId}`, (message) => {
+      subscriptions.messages = client.subscribe(`/topic/messages/${currentUserId}`, (message) => {
         onMessageReceived(JSON.parse(message.body));
       });
     },
     onDisconnect: () => {
       client = null;
     },
+    onStompError: (frame) => {
+      new Error('STOMP error:', frame.headers.message);
+    },
   });
-
   client.activate();
   return client;
 };

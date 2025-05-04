@@ -8,7 +8,6 @@ import { styles } from './ChatForm.styles';
 import ChatTextarea from './ChatTextarea';
 
 const chatAppearDelay = 100;
-// const pageSize = 13;
 
 const ChatForm = () => {
   const { chat } = useSelector((state) => state.chat);
