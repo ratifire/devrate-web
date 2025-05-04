@@ -85,6 +85,9 @@ const ChatForm = () => {
   useEffect(() => {
     const socket = new SockJS(`${import.meta.env.VITE_API_DEV_URL}/chat`);
     const newClient = new Client({
+      reconnectDelay: 5000,
+      heartbeatIncoming: 10000,
+      heartbeatOutgoing: 10000,
       webSocketFactory: () => socket,
       onConnect: () => {
         setIsConnected(true);
