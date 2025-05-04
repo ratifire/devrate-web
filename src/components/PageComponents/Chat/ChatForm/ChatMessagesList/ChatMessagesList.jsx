@@ -14,10 +14,7 @@ const ChatMessagesList = ({ showScrollButton }) => {
 
   const { messages } = useSelector((state) => state.chat);
   // const { id } = opponentUserInfo;
-  // const { data, isLoading } = useGetChatHistoryQuery(
-  //   { opponentUserId: id, page: currentPage, size: pageSize },
-  //   { skip: !id }
-  // );
+  // const { data } = useGetChatHistoryQuery({ opponentUserId: id, page: currentPage, size: pageSize }, { skip: !id });
 
   return (
     <>
