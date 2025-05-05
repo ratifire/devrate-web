@@ -18,6 +18,7 @@ import {
   SinglePassedInterviewPage,
   SingleRequestInterviewPage,
 } from '@pages/InterviewPages';
+import SettingsPage from '@pages/SettingsPage/index.js';
 import UserProfileGuard from './guards/UserProfileGuard.jsx';
 import navigationLinks from './links';
 import ScheduledInterviewsGuard from './guards/ScheduledInterviewsGuard.jsx';
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
               {
                 path: navigationLinks.specializations,
                 element: <SpecializationPage />,
+              },
+              {
+                path: navigationLinks.settings,
+                element: <SettingsPage />,
               },
               {
                 path: navigationLinks.interviews,
