@@ -653,6 +653,10 @@ export const en = {
       sideBar: {
         title: 'Settings',
         search: 'Search settings',
+        links: {
+          generalSettings: 'General settings',
+          notificationsSettings: 'Notifications',
+        },
       },
     },
     dropDownMenu: {

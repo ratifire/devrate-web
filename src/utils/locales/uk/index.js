@@ -658,6 +658,10 @@ export const uk = {
       sideBar: {
         title: 'Налаштування',
         search: 'Пошук налаштувань',
+        links: {
+          generalSettings: 'Загальні налаштування',
+          notificationsSettings: 'Сповіщення',
+        },
       },
     },
     dropDownMenu: {

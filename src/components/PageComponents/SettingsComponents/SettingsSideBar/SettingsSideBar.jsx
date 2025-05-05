@@ -1,8 +1,9 @@
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Link, List, ListItem, Typography } from '@mui/material';
 import { FormInputSearch } from '@components/FormsComponents/Inputs/index.js';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink } from 'react-router';
+import { NavLink } from 'react-router';
 import navigationLinks from '@router/links.js';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { styles } from './SettingsSideBar.styles';
 
 const SettingsSideBar = () => {
@@ -23,14 +24,20 @@ const SettingsSideBar = () => {
         // onBlur={handleBlur}
         // onChange={handleChange}
       />
-      <Box>
-        <Link component={RouterLink} to={navigationLinks.generalSettings}>
-          Загальні налаштування
-        </Link>
-        <Link component={RouterLink} to={navigationLinks.notificationsSettings}>
-          Сповіщення
-        </Link>
-      </Box>
+      <List sx={styles.list}>
+        <ListItem sx={styles.listItem}>
+          <Link component={NavLink} to={navigationLinks.generalSettings}>
+            {t('settings.sideBar.links.generalSettings')}
+            <KeyboardArrowRightIcon />
+          </Link>
+        </ListItem>
+        <ListItem sx={styles.listItem}>
+          <Link component={NavLink} to={navigationLinks.notificationsSettings}>
+            {t('settings.sideBar.links.notificationsSettings')}
+            <KeyboardArrowRightIcon />
+          </Link>
+        </ListItem>
+      </List>
     </Box>
   );
 };
