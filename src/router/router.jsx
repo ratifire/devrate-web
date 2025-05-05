@@ -64,7 +64,6 @@ const router = createBrowserRouter([
                 element: <SpecializationPage />,
               },
               {
-                path: navigationLinks.settings,
                 element: <SettingsPage />,
                 children: [
                   {

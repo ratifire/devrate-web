@@ -7,7 +7,6 @@ export default {
   scheduledInterviews: '/interviews/scheduled',
   passedInterviews: '/interviews/passed',
   interviewRequests: '/interviews/requests',
-  settings: '/settings',
   generalSettings: '/settings/general',
   notificationsSettings: '/settings/notifications',
   bookmark: '/bookmark',
