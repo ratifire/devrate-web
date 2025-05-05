@@ -649,6 +649,12 @@ export const en = {
         },
       },
     },
+    settings: {
+      sideBar: {
+        title: 'Settings',
+        search: 'Search settings',
+      },
+    },
     dropDownMenu: {
       delete: 'Delete',
       edit: 'Edit',

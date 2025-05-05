@@ -654,6 +654,12 @@ export const uk = {
         },
       },
     },
+    settings: {
+      sideBar: {
+        title: 'Налаштування',
+        search: 'Пошук налаштувань',
+      },
+    },
     dropDownMenu: {
       delete: 'Видалити',
       edit: 'Редагувати',
