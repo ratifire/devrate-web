@@ -8,6 +8,8 @@ export default {
   passedInterviews: '/interviews/passed',
   interviewRequests: '/interviews/requests',
   settings: '/settings',
+  generalSettings: '/settings/general',
+  notificationsSettings: '/settings/notifications',
   bookmark: '/bookmark',
   faq: '/faq',
   privacy_policy: '/privacy_policy',
