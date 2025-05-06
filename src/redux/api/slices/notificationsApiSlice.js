@@ -22,6 +22,7 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
           await cacheDataLoaded;
 
           const socket = new SockJS(`${import.meta.env.VITE_API_DEV_URL}${urlWS.notification}`);
+
           stompClient = new Client({
             webSocketFactory: () => socket,
             reconnectDelay: 5000,
