@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next';
-import { Box, Switch, Typography } from '@mui/material';
+import { Trans, useTranslation } from 'react-i18next';
+import { Box, Link, Switch, Typography } from '@mui/material';
 import { styles } from './SettingsNotifications.styles';
 
 const SettingsNotifications = () => {
@@ -26,7 +26,12 @@ const SettingsNotifications = () => {
           {t('settings.notifications.telegram.title')}
         </Typography>
         <Typography component='p' variant='body'>
-          {t('settings.notifications.telegram.text')}
+          <Trans
+            components={{
+              a: <Link href='#' sx={styles.link} target='_blank' />,
+            }}
+            i18nKey={'settings.notifications.telegram.text'}
+          />
         </Typography>
       </Box>
     </Box>

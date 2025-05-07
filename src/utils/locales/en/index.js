@@ -664,6 +664,10 @@ export const en = {
           title: 'Email notifications',
           text: 'Receive emails that notify you of events when you are not in Skillzzy. You can turn them off at any time.',
         },
+        telegram: {
+          title: 'Telegram Bot Notifications',
+          text: 'To receive convenient notifications about scheduled interviews and more, subscribe to our <a>Telegram Assistant</a>',
+        },
       },
     },
     dropDownMenu: {

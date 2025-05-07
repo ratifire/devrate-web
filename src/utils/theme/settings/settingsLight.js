@@ -17,6 +17,9 @@ export const settingsLight = {
           border: '#C5C5C6',
         },
       },
+      link: {
+        color: '#6200EE',
+      },
     },
   },
 };

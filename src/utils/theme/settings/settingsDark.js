@@ -17,6 +17,9 @@ export const settingsDark = {
           border: 'transparent',
         },
       },
+      link: {
+        color: '#CEB0FA',
+      },
     },
   },
 };

@@ -19,6 +19,16 @@ export const styles = {
     border: `1px solid ${theme.palette.settings.notifications.section.border}`,
     backgroundColor: theme.palette.settings.notifications.section.backgroundColor,
   }),
+  link: (theme) => ({
+    color: theme.palette.settings.notifications.link.color,
+    textDecoration: 'underline',
+    transition: 'opacity 0.3s ease-in-out',
+    cursor: 'pointer',
+
+    '&:hover': {
+      opacity: 0.8,
+    },
+  }),
   switchBox: {
     display: 'flex',
     justifyContent: 'space-between',
