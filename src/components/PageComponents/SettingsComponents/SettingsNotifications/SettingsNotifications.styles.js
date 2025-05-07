@@ -4,6 +4,7 @@ export const styles = {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    alignSelf: 'flex-start',
     gap: theme.spacing(4),
     borderRadius: theme.spacing(2),
     padding: theme.spacing(4),
