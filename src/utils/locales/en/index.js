@@ -658,6 +658,13 @@ export const en = {
           notificationsSettings: 'Notifications',
         },
       },
+      notifications: {
+        title: 'Notifications',
+        email: {
+          title: 'Email notifications',
+          text: 'Receive emails that notify you of events when you are not in Skillzzy. You can turn them off at any time.',
+        },
+      },
     },
     dropDownMenu: {
       delete: 'Delete',
