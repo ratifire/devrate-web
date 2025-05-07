@@ -658,6 +658,41 @@ export const en = {
           notificationsSettings: 'Notifications',
         },
       },
+      general: {
+        title: 'General Settings',
+        common: {
+          save: 'Save',
+          cancel: 'Cancel',
+          deactivate: 'Deactivate',
+        },
+        changeEmail: {
+          title: 'Change Email Address',
+          oldEmailLabel: 'Current Email',
+          oldEmailPlaceholder: 'Enter your current email',
+          newEmailLabel: 'New Email',
+          newEmailPlaceholder: 'Enter your new email',
+        },
+        changePassword: {
+          title: 'Change Password',
+        },
+        changeLanguage: {
+          title: 'Platform Language',
+          languageLabel: 'Select Language',
+          ua: 'Ukrainian',
+          en: 'English',
+        },
+        deactivated: {
+          title: 'Profile Deactivation',
+          subtitle: 'Learn how you can deactivate your profile',
+          list: {
+            title: 'Your profile will be deactivated',
+            text: 'You are about to start the process of deactivating your Skillzzy profile. Your public profile will no longer be visible on the platform, all your data will be hidden from other users, and personal messages will be frozen.',
+            subtitle: 'Other Important Information',
+            subText:
+              'You can restore your deactivated profile within 30 days of deactivation. To do this, you will need to enter your email and password, as when logging into the platform, after which you will receive a code to reactivate your profile.',
+          },
+        },
+      },
       notifications: {
         title: 'Notifications',
         email: {
