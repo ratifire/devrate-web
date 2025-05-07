@@ -8,6 +8,15 @@ export const settingsLight = {
         border: '#C5C5C6',
         backgroundColor: '#F8F8F8',
       },
+      switch: {
+        circle: {
+          backgroundColor: '#8133F1',
+        },
+        track: {
+          backgroundColor: '#ECECED',
+          border: '#C5C5C6',
+        },
+      },
     },
   },
 };
