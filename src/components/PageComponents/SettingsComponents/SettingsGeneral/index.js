@@ -1,3 +1,3 @@
-import SettingsGeneral from '@components/PageComponents/SettingsComponents/SettingsGeneral/SettingsGeneral';
+import GeneralTitle from '@components/PageComponents/SettingsComponents/SettingsGeneral/GeneralTitle';
 
-export default SettingsGeneral;
+export { GeneralTitle };

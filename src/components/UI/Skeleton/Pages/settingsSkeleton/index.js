@@ -1,13 +1,8 @@
 import {
-  NotificationTitleSkeleton,
   EmailNotificationsSkeleton,
   TelegramNotificationsSkeleton,
 } from '@components/UI/Skeleton/Pages/settingsSkeleton/notificationSkeleton';
 import SettingsSideBarSkeleton from '@components/UI/Skeleton/Pages/settingsSkeleton/SettingsSideBarSkeleton';
+import TitleSettingSkeleton from '@components/UI/Skeleton/Pages/settingsSkeleton/TitleSettingSkeleton/index.js';
 
-export {
-  NotificationTitleSkeleton,
-  EmailNotificationsSkeleton,
-  TelegramNotificationsSkeleton,
-  SettingsSideBarSkeleton,
-};
+export { EmailNotificationsSkeleton, TelegramNotificationsSkeleton, SettingsSideBarSkeleton, TitleSettingSkeleton };

@@ -1,5 +1,5 @@
 import {
-  NotificationTitleSkeleton,
+  TitleSettingSkeleton,
   EmailNotificationsSkeleton,
   TelegramNotificationsSkeleton,
   SettingsSideBarSkeleton,
@@ -80,7 +80,7 @@ export {
   CalendarSkeleton,
   ClosestEventSkeleton,
   SmallCalendarSkeleton,
-  NotificationTitleSkeleton,
+  TitleSettingSkeleton,
   EmailNotificationsSkeleton,
   TelegramNotificationsSkeleton,
   SettingsSideBarSkeleton,

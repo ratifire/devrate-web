@@ -1,7 +1,7 @@
 import { lazy, memo, Suspense } from 'react';
 import { Box } from '@mui/material';
 import {
-  NotificationTitleSkeleton,
+  TitleSettingSkeleton,
   EmailNotificationsSkeleton,
   TelegramNotificationsSkeleton,
 } from '@components/UI/Skeleton';
@@ -32,7 +32,7 @@ const MemoizedTelegramNotifications = memo(TelegramNotifications);
 const NotificationsPage = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Suspense fallback={<NotificationTitleSkeleton />}>
+      <Suspense fallback={<TitleSettingSkeleton />}>
         <MemoizedTitleNotifications />
       </Suspense>
       <Box sx={styles.section}>

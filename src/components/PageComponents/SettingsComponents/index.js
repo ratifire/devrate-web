@@ -4,6 +4,6 @@ import {
   EmailNotifications,
   TelegramNotifications,
 } from '@components/PageComponents/SettingsComponents/SettingsNotifications';
-import SettingsGeneral from '@components/PageComponents/SettingsComponents/SettingsGeneral';
+import { GeneralTitle } from '@components/PageComponents/SettingsComponents/SettingsGeneral';
 
-export { SettingsSideBar, TitleNotifications, SettingsGeneral, EmailNotifications, TelegramNotifications };
+export { SettingsSideBar, TitleNotifications, EmailNotifications, TelegramNotifications, GeneralTitle };

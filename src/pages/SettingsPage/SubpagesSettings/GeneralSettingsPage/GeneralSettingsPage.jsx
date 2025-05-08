@@ -1,18 +1,23 @@
 import { lazy, memo, Suspense } from 'react';
+import { Box } from '@mui/material';
+import { styles } from '@pages/SettingsPage/SubpagesSettings/SubpagesSettingsPages.styles';
+import { TitleSettingSkeleton } from '@components/UI/Skeleton';
 
-const SettingsGeneral = lazy(() =>
+const GeneralTitle = lazy(() =>
   import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
-    default: module.SettingsGeneral,
+    default: module.GeneralTitle,
   }))
 );
 
-const MemoizedSettingsGeneral = memo(SettingsGeneral);
+const MemoizedGeneralTitle = memo(GeneralTitle);
 
 const GeneralSettingsPage = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <MemoizedSettingsGeneral />
-    </Suspense>
+    <Box sx={styles.wrapper}>
+      <Suspense fallback={<TitleSettingSkeleton />}>
+        <MemoizedGeneralTitle />
+      </Suspense>
+    </Box>
   );
 };
 
