@@ -1,3 +1,8 @@
+import {
+  NotificationTitleSkeleton,
+  EmailNotificationsSkeleton,
+  TelegramNotificationsSkeleton,
+} from '@components/UI/Skeleton/Pages/settingsSkeleton';
 import FeedbackModalSkeleton from './Modal/FeedbackModalSkeleton';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
 import { CalendarSkeleton, SmallCalendarSkeleton, ClosestEventSkeleton } from './Pages/scheduleSkeleton';
@@ -74,4 +79,7 @@ export {
   CalendarSkeleton,
   ClosestEventSkeleton,
   SmallCalendarSkeleton,
+  NotificationTitleSkeleton,
+  EmailNotificationsSkeleton,
+  TelegramNotificationsSkeleton,
 };
