@@ -21,5 +21,14 @@ export const settingsDark = {
         color: '#CEB0FA',
       },
     },
+    deactivateModal: {
+      cancel: {
+        color: '#CEB0FA',
+      },
+      deactivate: {
+        backgroundColor: '#A70000',
+        color: '#FFFFFF',
+      },
+    },
   },
 };

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { modalNames } from '@utils/constants/modalNames.js';
+import { DeactivateProfileModal } from '@components/ModalsComponents/SettingModal';
 import {
   EducationModal,
   WorkExperienceModal,
@@ -48,6 +49,7 @@ const modalEnum = {
   [modalNames.confirmationModal]: ConfirmationModal,
   [modalNames.confirmDeleteSpecialization]: ConfirmDeleteSpecializationModal,
   [modalNames.notificationModal]: NotificationModal,
+  [modalNames.deactivateProfileModal]: DeactivateProfileModal,
 };
 
 const ModalContainer = ({ modalType }) => {

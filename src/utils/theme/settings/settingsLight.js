@@ -21,5 +21,14 @@ export const settingsLight = {
         color: '#6200EE',
       },
     },
+    deactivateModal: {
+      cancel: {
+        color: '#6200EE',
+      },
+      deactivate: {
+        backgroundColor: '#A70000',
+        color: '#FFFFFF',
+      },
+    },
   },
 };

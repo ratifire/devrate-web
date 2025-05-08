@@ -198,9 +198,16 @@ export const en = {
       },
       activation: {
         title: 'Want to activate your profile?',
-        text: 'Your profile was deactivated on 03.03.2025. Until 02.04.2025 inclusive, you can activate it and make it visible to other users on the platform again. To complete the profile activation process, you need to enter a security code. Check your email.',
+        description:
+          'Your profile was deactivated on 03.03.2025. Until 02.04.2025 inclusive, you can activate it and make it visible to other users on the platform again. To complete the profile activation process, you need to enter a security code. Check your email.',
         subtitle: 'Didn’t receive the letter? Check your spam folder.',
         resend: 'Please resend request.',
+      },
+      deactivated: {
+        title: 'Deactivate Profile',
+        description:
+          'Are you sure you want to deactivate your Skillzzy profile? Your public profile will no longer be visible on the platform, all your data will be hidden from other users, and personal messages will be frozen. All scheduled interviews will also be canceled.',
+        agree: 'I have read and agree to the Terms of Account Deactivation',
       },
       confirmation: {
         title: 'Confirm your email',
