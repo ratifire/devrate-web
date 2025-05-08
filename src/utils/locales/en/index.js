@@ -199,9 +199,9 @@ export const en = {
       activation: {
         title: 'Want to activate your profile?',
         description:
-          'Your profile was deactivated on 03.03.2025. Until 02.04.2025 inclusive, you can activate it and make it visible to other users on the platform again. To complete the profile activation process, you need to enter a security code. Check your email.',
+          'Your profile was deactivated. You can activate it and make it visible to other users on the platform again. To complete the profile activation process, you need to enter a security code. Check your email.',
         subtitle: 'Didn’t receive the letter? Check your spam folder.',
-        resend: 'Please resend request.',
+        resend: '<button>Please resend<button/> the request.',
       },
       deactivated: {
         title: 'Deactivate Profile',
@@ -677,6 +677,7 @@ export const en = {
           save: 'Save',
           cancel: 'Cancel',
           deactivate: 'Deactivate',
+          send: 'Send',
         },
         changeEmail: {
           title: 'Change Email Address',

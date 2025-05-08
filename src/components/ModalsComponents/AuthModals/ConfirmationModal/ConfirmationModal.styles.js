@@ -54,10 +54,12 @@ const styles = {
   }),
   spamCheckContainer: (theme) => ({
     marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4),
     color: theme.palette.text.secondary,
     textAlign: 'center',
     [theme.breakpoints.down('xl')]: {
       marginBottom: '16px',
+      marginTop: '16px',
     },
   }),
   turnBackText: (theme) => ({

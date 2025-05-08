@@ -16,6 +16,7 @@ import {
   ResetPassword,
   ConfirmationModal,
   NotificationModal,
+  ActivationModal,
 } from './AuthModals';
 import FeedbackProjectModal from './FeedbackProjectModal';
 import {
@@ -50,6 +51,7 @@ const modalEnum = {
   [modalNames.confirmDeleteSpecialization]: ConfirmDeleteSpecializationModal,
   [modalNames.notificationModal]: NotificationModal,
   [modalNames.deactivateProfileModal]: DeactivateProfileModal,
+  [modalNames.activationModal]: ActivationModal,
 };
 
 const ModalContainer = ({ modalType }) => {

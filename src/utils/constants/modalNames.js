@@ -21,4 +21,5 @@ export const modalNames = {
   workExperienceModal: 'workExperienceModal',
   notificationModal: 'notificationModal',
   deactivateProfileModal: 'deactivateProfileModal',
+  activationModal: 'activationModal',
 };
