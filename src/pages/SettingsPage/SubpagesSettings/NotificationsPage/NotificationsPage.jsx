@@ -5,7 +5,7 @@ import {
   EmailNotificationsSkeleton,
   TelegramNotificationsSkeleton,
 } from '@components/UI/Skeleton';
-import { styles } from './NotificationsPage.styles';
+import { styles } from '@pages/SettingsPage/SubpagesSettings/SubpagesSettingsPages.styles';
 
 const EmailNotifications = lazy(() =>
   import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
