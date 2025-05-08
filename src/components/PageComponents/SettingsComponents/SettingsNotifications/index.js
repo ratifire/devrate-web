@@ -1,3 +1,5 @@
-import SettingsNotifications from '@components/PageComponents/SettingsComponents/SettingsNotifications/SettingsNotifications';
+import EmailNotifications from '@components/PageComponents/SettingsComponents/SettingsNotifications/EmailNotifications';
+import TelegramNotifications from '@components/PageComponents/SettingsComponents/SettingsNotifications/TelegramNotifications';
+import TitleNotifications from '@components/PageComponents/SettingsComponents/SettingsNotifications/TitleNotifications';
 
-export default SettingsNotifications;
+export { EmailNotifications, TelegramNotifications, TitleNotifications };
