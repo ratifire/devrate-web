@@ -67,7 +67,7 @@ const ConfirmCode = ({ formik, fieldCount = 6, inputRefs, helperTextContent }) =
         <TextField
           // eslint-disable-next-line react/no-array-index-key
           key={index}
-          autocomplete={false}
+          autoComplete='off'
           inputProps={{
             style: { textAlign: 'center' },
             maxLength: 1,

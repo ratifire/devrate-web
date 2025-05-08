@@ -80,19 +80,19 @@ const ConfirmationForm = ({
         <Typography sx={styles.mainText} variant='subtitle3'>
           {t('modal.confirmation.spam_check_text')}
         </Typography>
-        <Typography sx={{ textAlign: 'center' }}>
+        <Typography component='p' sx={{ textAlign: 'center' }}>
           <Link sx={styles.confirmationLink} to={'/'} onClick={handleResendCode}>
             {t('modal.confirmation.repeat_request_link')}
           </Link>
-          <Typography sx={styles.mainText} variant='subtitle3'>
+          <Typography component='span' sx={styles.mainText} variant='subtitle3'>
             {' '}
             {t('modal.confirmation.repeat_request_text1')}
           </Typography>
-          <Typography sx={styles.mainText} variant='subtitle3'>
+          <Typography component='span' sx={styles.mainText} variant='subtitle3'>
             {' '}
             {t('modal.confirmation.repeat_request_text2')}{' '}
           </Typography>
-          <Typography sx={styles.confirmationLink} onClick={handleCloseAllModal}>
+          <Typography component='span' sx={styles.confirmationLink} onClick={handleCloseAllModal}>
             {t('modal.confirmation.change_email_link')}
           </Typography>
         </Typography>
