@@ -1,8 +1,19 @@
 export const styles = {
-  wrapper: {
-    padding: '24px',
+  wrapper: (theme) => ({
+    padding: theme.spacing(4),
     display: 'flex',
     justifyContent: 'space-between',
-    gap: '24px',
-  },
+    gap: theme.spacing(4),
+  }),
+  sideBar: (theme) => ({
+    maxWidth: '354px',
+    width: '100%',
+    padding: theme.spacing(4),
+    display: 'flex',
+    borderRadius: theme.spacing(2),
+    flexDirection: 'column',
+    gap: theme.spacing(4),
+    backgroundColor: theme.palette.pagesSections.backgroundColor,
+    minHeight: 'calc(100vh - 124px)',
+  }),
 };

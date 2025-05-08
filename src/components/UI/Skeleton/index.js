@@ -2,6 +2,7 @@ import {
   NotificationTitleSkeleton,
   EmailNotificationsSkeleton,
   TelegramNotificationsSkeleton,
+  SettingsSideBarSkeleton,
 } from '@components/UI/Skeleton/Pages/settingsSkeleton';
 import FeedbackModalSkeleton from './Modal/FeedbackModalSkeleton';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
@@ -82,4 +83,5 @@ export {
   NotificationTitleSkeleton,
   EmailNotificationsSkeleton,
   TelegramNotificationsSkeleton,
+  SettingsSideBarSkeleton,
 };

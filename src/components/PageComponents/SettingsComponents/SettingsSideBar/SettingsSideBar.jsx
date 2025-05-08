@@ -1,4 +1,4 @@
-import { Box, Link, List, ListItem, Typography } from '@mui/material';
+import { Link, List, ListItem, Typography } from '@mui/material';
 import { FormInputSearch } from '@components/FormsComponents/Inputs/index.js';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router';
@@ -10,7 +10,7 @@ const SettingsSideBar = () => {
   const { t } = useTranslation();
 
   return (
-    <Box sx={styles.wrapper}>
+    <>
       <Typography component='h4' variant='h4'>
         {t('settings.sideBar.title')}
       </Typography>
@@ -38,7 +38,7 @@ const SettingsSideBar = () => {
           </Link>
         </ListItem>
       </List>
-    </Box>
+    </>
   );
 };
 

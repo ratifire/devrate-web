@@ -1,6 +1,7 @@
 import { lazy, memo, Suspense } from 'react';
 import { Outlet } from 'react-router';
 import { Box } from '@mui/material';
+import { SettingsSideBarSkeleton } from '@components/UI/Skeleton';
 import { styles } from './SettingsPage.styles';
 
 const SettingsSideBar = lazy(() =>
@@ -14,9 +15,11 @@ const MemoizedSettingsSideBar = memo(SettingsSideBar);
 const SettingsPage = () => {
   return (
     <Box sx={styles.wrapper}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <MemoizedSettingsSideBar />
-      </Suspense>
+      <Box sx={styles.sideBar}>
+        <Suspense fallback={<SettingsSideBarSkeleton />}>
+          <MemoizedSettingsSideBar />
+        </Suspense>
+      </Box>
       <Outlet />
     </Box>
   );
