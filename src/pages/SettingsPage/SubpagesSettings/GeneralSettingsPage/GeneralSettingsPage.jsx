@@ -9,7 +9,14 @@ const SettingsTitle = lazy(() =>
   }))
 );
 
+const ChangeEmail = lazy(() =>
+  import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
+    default: module.ChangeEmail,
+  }))
+);
+
 const MemoizedSettingsTitle = memo(SettingsTitle);
+const MemoizedChangeEmail = memo(ChangeEmail);
 
 const GeneralSettingsPage = () => {
   return (
@@ -17,6 +24,11 @@ const GeneralSettingsPage = () => {
       <Suspense fallback={<TitleSettingSkeleton />}>
         <MemoizedSettingsTitle title='settings.general.title' />
       </Suspense>
+      <Box sx={styles.section}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <MemoizedChangeEmail />
+        </Suspense>
+      </Box>
     </Box>
   );
 };

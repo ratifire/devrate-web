@@ -30,5 +30,10 @@ export const settingsDark = {
         color: '#FFFFFF',
       },
     },
+    general: {
+      input: {
+        border: '#828283',
+      },
+    },
   },
 };

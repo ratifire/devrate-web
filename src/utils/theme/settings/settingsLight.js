@@ -30,5 +30,10 @@ export const settingsLight = {
         color: '#FFFFFF',
       },
     },
+    general: {
+      input: {
+        border: '#828283',
+      },
+    },
   },
 };

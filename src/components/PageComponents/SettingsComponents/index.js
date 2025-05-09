@@ -4,5 +4,6 @@ import {
   TelegramNotifications,
 } from '@components/PageComponents/SettingsComponents/SettingsNotifications';
 import SettingsTitle from '@components/PageComponents/SettingsComponents/SettingsTitle';
+import { ChangeEmail } from '@components/PageComponents/SettingsComponents/SettingsGeneral';
 
-export { SettingsSideBar, EmailNotifications, TelegramNotifications, SettingsTitle };
+export { SettingsSideBar, EmailNotifications, TelegramNotifications, SettingsTitle, ChangeEmail };
