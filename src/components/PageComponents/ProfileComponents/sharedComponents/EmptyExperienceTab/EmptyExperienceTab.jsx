@@ -37,36 +37,38 @@ const ExperienceEmptyItem = ({ tab, profileType, imgUrl, isData }) => {
 
   return (
     <Box sx={{ ...styles.emptyContainer, backgroundImage: `url(${img})` }}>
-      {profileType === 'personal' ? (
-        <Typography sx={styles.title} variant='h6'>
-          {t(`profile.experience.${tab}.emptyTabName.title`)}
-        </Typography>
-      ) : profileType === 'user' ? (
-        <Typography sx={styles.title} variant='h6'>
-          {t(`profile.experience.${tab}.emptyTabName.userProfile.title`)}
-        </Typography>
-      ) : null}
-
-      {profileType === 'personal' && (
-        <>
-          <Typography sx={styles.description} variant='body'>
-            {t(`profile.experience.${tab}.emptyTabName.subTitle`)}
+      <Box sx={styles.contentBox}>
+        {profileType === 'personal' ? (
+          <Typography sx={styles.title} variant='h6'>
+            {t(`profile.experience.${tab}.emptyTabName.title`)}
           </Typography>
-          {tab !== 'skills' ? (
-            <ButtonDef
-              label={t(`profile.experience.${tab}.emptyTabName.button`)}
-              sx={styles.button}
-              type='button'
-              variant='contained'
-              onClick={handleOpenModal}
-            />
-          ) : (
-            <Box sx={styles.linkWrapper}>
-              <Link to={links.specializations}>{t(`profile.experience.${tab}.emptyTabName.button`)}</Link>
-            </Box>
-          )}
-        </>
-      )}
+        ) : profileType === 'user' ? (
+          <Typography sx={styles.title} variant='h6'>
+            {t(`profile.experience.${tab}.emptyTabName.userProfile.title`)}
+          </Typography>
+        ) : null}
+
+        {profileType === 'personal' && (
+          <>
+            <Typography sx={styles.description} variant='body'>
+              {t(`profile.experience.${tab}.emptyTabName.subTitle`)}
+            </Typography>
+            {tab !== 'skills' ? (
+              <ButtonDef
+                label={t(`profile.experience.${tab}.emptyTabName.button`)}
+                sx={styles.button}
+                type='button'
+                variant='contained'
+                onClick={handleOpenModal}
+              />
+            ) : (
+              <Box sx={styles.linkWrapper}>
+                <Link to={links.specializations}>{t(`profile.experience.${tab}.emptyTabName.button`)}</Link>
+              </Box>
+            )}
+          </>
+        )}
+      </Box>
     </Box>
   );
 };

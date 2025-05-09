@@ -67,19 +67,19 @@ const BaseUserInfo = ({ id }) => {
         </Typography>
         <Typography sx={styles.city} variant='subtitle2'>
           <LocationOnIcon sx={styles.icon} />
-          {`${getCity ? getCity + ',' : ''} ${getCountry}`}
+          {`${getCity ? getCity + ',' : ''} ${t(`countriesList.${getCountry}`)}`}
         </Typography>
       </Box>
       <Box sx={styles.buttons}>
         <ButtonDef
-          label={t('Write a message')}
+          label={t('profile.baseUserInfo.writeMessage')}
           sx={styles.contained}
           type={'button'}
           variant='contained'
           onClick={handleWriteMessage}
         />
         <ButtonDef
-          label={t('Book an interview')}
+          label={t('profile.baseUserInfo.bookInterview')}
           sx={styles.outlined}
           type={'button'}
           variant='outlined'
