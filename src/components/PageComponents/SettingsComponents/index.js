@@ -1,9 +1,8 @@
 import SettingsSideBar from '@components/PageComponents/SettingsComponents/SettingsSideBar';
 import {
-  TitleNotifications,
   EmailNotifications,
   TelegramNotifications,
 } from '@components/PageComponents/SettingsComponents/SettingsNotifications';
-import { GeneralTitle } from '@components/PageComponents/SettingsComponents/SettingsGeneral';
+import SettingsTitle from '@components/PageComponents/SettingsComponents/SettingsTitle';
 
-export { SettingsSideBar, TitleNotifications, EmailNotifications, TelegramNotifications, GeneralTitle };
+export { SettingsSideBar, EmailNotifications, TelegramNotifications, SettingsTitle };

@@ -3,19 +3,19 @@ import { Box } from '@mui/material';
 import { styles } from '@pages/SettingsPage/SubpagesSettings/SubpagesSettingsPages.styles';
 import { TitleSettingSkeleton } from '@components/UI/Skeleton';
 
-const GeneralTitle = lazy(() =>
+const SettingsTitle = lazy(() =>
   import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
-    default: module.GeneralTitle,
+    default: module.SettingsTitle,
   }))
 );
 
-const MemoizedGeneralTitle = memo(GeneralTitle);
+const MemoizedSettingsTitle = memo(SettingsTitle);
 
 const GeneralSettingsPage = () => {
   return (
     <Box sx={styles.wrapper}>
       <Suspense fallback={<TitleSettingSkeleton />}>
-        <MemoizedGeneralTitle />
+        <MemoizedSettingsTitle title='settings.general.title' />
       </Suspense>
     </Box>
   );

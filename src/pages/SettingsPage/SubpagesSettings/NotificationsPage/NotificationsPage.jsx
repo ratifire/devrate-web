@@ -13,9 +13,9 @@ const EmailNotifications = lazy(() =>
   }))
 );
 
-const TitleNotifications = lazy(() =>
+const SettingsTitle = lazy(() =>
   import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
-    default: module.TitleNotifications,
+    default: module.SettingsTitle,
   }))
 );
 
@@ -25,7 +25,7 @@ const TelegramNotifications = lazy(() =>
   }))
 );
 
-const MemoizedTitleNotifications = memo(TitleNotifications);
+const MemoizedSettingsTitle = memo(SettingsTitle);
 const MemoizedEmailNotifications = memo(EmailNotifications);
 const MemoizedTelegramNotifications = memo(TelegramNotifications);
 
@@ -33,7 +33,7 @@ const NotificationsPage = () => {
   return (
     <Box sx={styles.wrapper}>
       <Suspense fallback={<TitleSettingSkeleton />}>
-        <MemoizedTitleNotifications />
+        <MemoizedSettingsTitle title='settings.notifications.title' />
       </Suspense>
       <Box sx={styles.section}>
         <Suspense fallback={<EmailNotificationsSkeleton />}>

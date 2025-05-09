@@ -1,14 +1,19 @@
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
-const TitleNotifications = () => {
+const SettingsTitle = ({ title }) => {
   const { t } = useTranslation();
 
   return (
     <Typography component='h4' variant='h4'>
-      {t('settings.notifications.title')}
+      {t(title)}
     </Typography>
   );
 };
 
-export default TitleNotifications;
+SettingsTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+
+export default SettingsTitle;
