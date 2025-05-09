@@ -299,6 +299,8 @@ export const en = {
         editAvatar: 'Edit avatar',
         editUserInfo: 'Edit user information',
         editBtn: 'Edit',
+        writeMessage: 'Write a message',
+        bookInterview: 'Book an interview',
       },
       experience: {
         workExperience: {

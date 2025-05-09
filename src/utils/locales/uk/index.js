@@ -303,6 +303,11 @@ export const uk = {
         complete: 'Вітаємо! Ваш профіль повністю заповнений',
         messageBtn: 'Написати повідомлення',
         interviewBtn: 'Забронювати співбесіду',
+        editAvatar: 'Редагувати аватар',
+        editUserInfo: 'Редагувати інформацію користувача',
+        editBtn: 'Редагувати',
+        writeMessage: 'Написати повідомлення',
+        bookInterview: 'Запланувати співбесіду',
       },
       experience: {
         workExperience: {
