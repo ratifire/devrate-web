@@ -5,6 +5,7 @@ import {
   SettingsSideBarSkeleton,
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
+  ChangeLanguageSkeleton,
 } from '@components/UI/Skeleton/Pages/settingsSkeleton';
 import FeedbackModalSkeleton from './Modal/FeedbackModalSkeleton';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
@@ -88,4 +89,5 @@ export {
   SettingsSideBarSkeleton,
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
+  ChangeLanguageSkeleton,
 };

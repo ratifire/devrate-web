@@ -7,6 +7,7 @@ import TitleSettingSkeleton from '@components/UI/Skeleton/Pages/settingsSkeleton
 import {
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
+  ChangeLanguageSkeleton,
 } from '@components/UI/Skeleton/Pages/settingsSkeleton/generalSkeleton';
 
 export {
@@ -16,4 +17,5 @@ export {
   TitleSettingSkeleton,
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
+  ChangeLanguageSkeleton,
 };
