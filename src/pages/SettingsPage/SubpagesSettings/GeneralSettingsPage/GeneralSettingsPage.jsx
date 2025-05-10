@@ -1,7 +1,7 @@
 import { lazy, memo, Suspense } from 'react';
 import { Box } from '@mui/material';
-import { styles } from '@pages/SettingsPage/SubpagesSettings/SubpagesSettingsPages.styles';
-import { TitleSettingSkeleton } from '@components/UI/Skeleton';
+import { ChangeEmailSkeleton, TitleSettingSkeleton } from '@components/UI/Skeleton';
+import { styles } from './GeneralSettingsPage.styles';
 
 const SettingsTitle = lazy(() =>
   import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
@@ -24,10 +24,12 @@ const GeneralSettingsPage = () => {
       <Suspense fallback={<TitleSettingSkeleton />}>
         <MemoizedSettingsTitle title='settings.general.title' />
       </Suspense>
-      <Box sx={styles.section}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <MemoizedChangeEmail />
-        </Suspense>
+      <Box sx={styles.container}>
+        <Box sx={styles.section}>
+          <Suspense fallback={<ChangeEmailSkeleton />}>
+            <MemoizedChangeEmail />
+          </Suspense>
+        </Box>
       </Box>
     </Box>
   );
