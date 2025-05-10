@@ -21,9 +21,16 @@ const ChangePassword = lazy(() =>
   }))
 );
 
+const ChangeLanguage = lazy(() =>
+  import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
+    default: module.ChangeLanguage,
+  }))
+);
+
 const MemoizedSettingsTitle = memo(SettingsTitle);
 const MemoizedChangeEmail = memo(ChangeEmail);
 const MemoizedChangePassword = memo(ChangePassword);
+const MemoizedChangeLanguage = memo(ChangeLanguage);
 
 const GeneralSettingsPage = () => {
   return (
@@ -40,6 +47,11 @@ const GeneralSettingsPage = () => {
         <Box sx={styles.section}>
           <Suspense fallback={<ChangePasswordSkeleton />}>
             <MemoizedChangePassword />
+          </Suspense>
+        </Box>
+        <Box sx={styles.section}>
+          <Suspense fallback={<ChangePasswordSkeleton />}>
+            <MemoizedChangeLanguage />
           </Suspense>
         </Box>
       </Box>
