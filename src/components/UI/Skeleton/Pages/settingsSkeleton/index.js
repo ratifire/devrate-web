@@ -4,7 +4,10 @@ import {
 } from '@components/UI/Skeleton/Pages/settingsSkeleton/notificationSkeleton';
 import SettingsSideBarSkeleton from '@components/UI/Skeleton/Pages/settingsSkeleton/SettingsSideBarSkeleton';
 import TitleSettingSkeleton from '@components/UI/Skeleton/Pages/settingsSkeleton/TitleSettingSkeleton/index.js';
-import { ChangeEmailSkeleton } from '@components/UI/Skeleton/Pages/settingsSkeleton/generalSkeleton';
+import {
+  ChangeEmailSkeleton,
+  ChangePasswordSkeleton,
+} from '@components/UI/Skeleton/Pages/settingsSkeleton/generalSkeleton';
 
 export {
   EmailNotificationsSkeleton,
@@ -12,4 +15,5 @@ export {
   SettingsSideBarSkeleton,
   TitleSettingSkeleton,
   ChangeEmailSkeleton,
+  ChangePasswordSkeleton,
 };

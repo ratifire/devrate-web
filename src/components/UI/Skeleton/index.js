@@ -4,6 +4,7 @@ import {
   TelegramNotificationsSkeleton,
   SettingsSideBarSkeleton,
   ChangeEmailSkeleton,
+  ChangePasswordSkeleton,
 } from '@components/UI/Skeleton/Pages/settingsSkeleton';
 import FeedbackModalSkeleton from './Modal/FeedbackModalSkeleton';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
@@ -86,4 +87,5 @@ export {
   TelegramNotificationsSkeleton,
   SettingsSideBarSkeleton,
   ChangeEmailSkeleton,
+  ChangePasswordSkeleton,
 };

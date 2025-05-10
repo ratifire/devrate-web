@@ -1,4 +1,4 @@
-export const styles = {
+const styles = {
   container: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -13,3 +13,5 @@ export const styles = {
     width: '100%',
   },
 };
+
+export default styles;

@@ -1,5 +1,5 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './ChangeEmailSkeleton.styles.js';
+import { ChangeEmailAndPasswordSkeletonStyles as styles } from '@components/UI/Skeleton/Pages/settingsSkeleton/generalSkeleton/styles';
 
 const ChangeEmailSkeleton = () => {
   return (

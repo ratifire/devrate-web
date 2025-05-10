@@ -1,6 +1,6 @@
 import { lazy, memo, Suspense } from 'react';
 import { Box } from '@mui/material';
-import { ChangeEmailSkeleton, TitleSettingSkeleton } from '@components/UI/Skeleton';
+import { ChangeEmailSkeleton, TitleSettingSkeleton, ChangePasswordSkeleton } from '@components/UI/Skeleton';
 import { styles } from './GeneralSettingsPage.styles';
 
 const SettingsTitle = lazy(() =>
@@ -38,7 +38,7 @@ const GeneralSettingsPage = () => {
           </Suspense>
         </Box>
         <Box sx={styles.section}>
-          <Suspense fallback={<ChangeEmailSkeleton />}>
+          <Suspense fallback={<ChangePasswordSkeleton />}>
             <MemoizedChangePassword />
           </Suspense>
         </Box>
