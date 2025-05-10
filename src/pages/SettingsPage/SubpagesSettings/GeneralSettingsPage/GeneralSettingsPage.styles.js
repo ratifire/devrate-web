@@ -13,7 +13,7 @@ export const styles = {
   section: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.spacing(4),
+    gap: theme.spacing(3),
     borderRadius: theme.spacing(1),
     padding: theme.spacing(3),
     border: `1px solid ${theme.palette.settings.notifications.section.border}`,
