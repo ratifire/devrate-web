@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Box, Typography } from '@mui/material';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { FormInput } from '@components/FormsComponents/Inputs/index.js';
-import { styles } from './ChangeEmail.styles';
+import { changeEmailAndPasswordStyles as styles } from '@components/PageComponents/SettingsComponents/SettingsGeneral/styles';
 
 const ChangeEmail = () => {
   const { t } = useTranslation();
@@ -15,6 +15,7 @@ const ChangeEmail = () => {
       <Box component='form'>
         <Box sx={styles.inputBox}>
           <FormInput
+            required
             autoComplete='off'
             label='settings.general.changeEmail.oldEmailLabel'
             name='email'
@@ -24,6 +25,7 @@ const ChangeEmail = () => {
         </Box>
         <Box sx={styles.inputBox}>
           <FormInput
+            required
             autoComplete='off'
             label='settings.general.changeEmail.newEmailLabel'
             name='email'

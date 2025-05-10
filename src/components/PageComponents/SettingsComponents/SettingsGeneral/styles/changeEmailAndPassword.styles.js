@@ -1,4 +1,4 @@
-export const styles = {
+const changeEmailAndPassword = {
   inputBox: (theme) => ({
     '& .MuiOutlinedInput-notchedOutline': {
       borderColor: `${theme.palette.settings.general.input.border} !important`,
@@ -14,3 +14,5 @@ export const styles = {
     },
   }),
 };
+
+export default changeEmailAndPassword;

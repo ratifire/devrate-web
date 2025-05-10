@@ -688,6 +688,12 @@ export const en = {
         },
         changePassword: {
           title: 'Change Password',
+          oldPasswordLabel: 'Current Password',
+          oldPasswordPlaceholder: 'Enter your current password',
+          newPasswordLabel: 'New Password',
+          newPasswordPlaceholder: 'Enter your new password',
+          repeatNewPasswordLabel: 'Confirm Password',
+          repeatNewPasswordPlaceholder: 'Confirm your new password',
         },
         changeLanguage: {
           title: 'Platform Language',

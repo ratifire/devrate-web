@@ -694,6 +694,12 @@ export const uk = {
         },
         changePassword: {
           title: 'Змінити пароль',
+          oldPasswordLabel: 'Поточний пароль',
+          oldPasswordPlaceholder: 'Введіть поточний пароль',
+          newPasswordLabel: 'Новий пароль',
+          newPasswordPlaceholder: 'Введіть новий пароль',
+          repeatNewPasswordLabel: 'Підтвердіть пароль',
+          repeatNewPasswordPlaceholder: 'Підтвердіть новий пароль',
         },
         changeLanguage: {
           title: 'Мова платформи',
