@@ -1,26 +1,33 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link } from '@mui/material';
 import PropTypes from 'prop-types';
+import { Link as RouterLink } from 'react-router';
+import links from '@router/links.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import UserAvatar from '../../UserAvatar';
 import { styles } from './UserCard.styles';
 
-const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClick, label }) => {
+const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClick, label, id }) => {
   const fullName = `${firstName} ${lastName}`;
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.box}>
-        <UserAvatar
-          radius='square'
-          size='l'
-          src={src}
-          userFirstName={firstName}
-          userLastName={lastName}
-          userName={fullName}
-        />
+        <Link component={RouterLink} sx={styles.avatarLink} to={`${links.profile}/${id}`}>
+          <UserAvatar
+            radius='square'
+            size='l'
+            src={src}
+            userFirstName={firstName}
+            userLastName={lastName}
+            userName={fullName}
+          />
+        </Link>
         <Box sx={styles.boxInfo}>
-          <Typography component='h5' variant='h5'>
-            {fullName}
-          </Typography>
+          <Link component={RouterLink} sx={styles.fullNameLink} to={`${links.profile}/${id}`}>
+            <Typography component='h5' variant='h5'>
+              {fullName}
+            </Typography>
+          </Link>
           <Typography component='p' sx={styles.role} variant='body'>
             {role}
           </Typography>
@@ -47,6 +54,7 @@ UserCard.propTypes = {
   isViewBtn: PropTypes.bool,
   label: PropTypes.string,
   onClick: PropTypes.func,
+  id: PropTypes.number,
 };
 
 export default UserCard;

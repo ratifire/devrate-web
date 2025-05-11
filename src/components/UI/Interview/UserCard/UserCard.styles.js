@@ -16,6 +16,21 @@ export const styles = {
     gap: '4px',
     overflowX: 'hidden',
   },
+  avatarLink: {
+    textDecoration: 'none',
+    transition: 'transform .2s',
+    '&:hover': {
+      transform: 'scale(1.04)',
+    },
+  },
+  fullNameLink: (theme) => ({
+    color: theme.palette.interviewInfo.hostNameColor,
+    textDecoration: 'none',
+    transition: 'color 0.2s',
+    '&:hover': {
+      color: theme.palette.primary[300],
+    },
+  }),
   role: (theme) => ({
     color: theme.palette.userCard.role.color,
   }),
