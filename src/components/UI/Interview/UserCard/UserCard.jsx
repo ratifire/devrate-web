@@ -2,6 +2,7 @@ import { Box, Typography, Link } from '@mui/material';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router';
 import links from '@router/links.js';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import UserAvatar from '../../UserAvatar';
 import { styles } from './UserCard.styles';
@@ -27,6 +28,7 @@ const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClic
             <Typography component='h5' variant='h5'>
               {fullName}
             </Typography>
+            <ArrowForwardIosIcon fontSize={'small'} />
           </Link>
           <Typography component='p' sx={styles.role} variant='body'>
             {role}

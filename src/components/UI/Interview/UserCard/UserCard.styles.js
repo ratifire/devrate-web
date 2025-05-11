@@ -24,11 +24,22 @@ export const styles = {
     },
   },
   fullNameLink: (theme) => ({
+    display: 'flex',
+    alignItems: 'center',
+    gap: '18px',
     color: theme.palette.interviewInfo.hostNameColor,
     textDecoration: 'none',
-    transition: 'color 0.2s',
+    transition: 'color gap 0.2s',
     '&:hover': {
       color: theme.palette.primary[300],
+    },
+    '&:active': {
+      gap: '30px',
+    },
+    '@media screen and (max-width: 1288px)': {
+      '& svg': {
+        display: 'none',
+      },
     },
   }),
   role: (theme) => ({
