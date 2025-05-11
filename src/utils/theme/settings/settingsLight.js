@@ -34,6 +34,9 @@ export const settingsLight = {
       input: {
         border: '#828283',
       },
+      deactivateBtn: {
+        color: '#A70000',
+      },
     },
   },
 };

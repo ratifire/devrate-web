@@ -34,6 +34,9 @@ export const settingsDark = {
       input: {
         border: '#828283',
       },
+      deactivateBtn: {
+        color: '#FF2F2F',
+      },
     },
   },
 };

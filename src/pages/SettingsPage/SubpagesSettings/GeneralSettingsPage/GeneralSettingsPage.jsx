@@ -32,10 +32,17 @@ const ChangeLanguage = lazy(() =>
   }))
 );
 
+const DeactivatedAccount = lazy(() =>
+  import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
+    default: module.DeactivatedAccount,
+  }))
+);
+
 const MemoizedSettingsTitle = memo(SettingsTitle);
 const MemoizedChangeEmail = memo(ChangeEmail);
 const MemoizedChangePassword = memo(ChangePassword);
 const MemoizedChangeLanguage = memo(ChangeLanguage);
+const MemoizedDeactivatedAccount = memo(DeactivatedAccount);
 
 const GeneralSettingsPage = () => {
   return (
@@ -57,6 +64,11 @@ const GeneralSettingsPage = () => {
         <Box sx={styles.section}>
           <Suspense fallback={<ChangeLanguageSkeleton />}>
             <MemoizedChangeLanguage />
+          </Suspense>
+        </Box>
+        <Box sx={styles.section}>
+          <Suspense fallback={<ChangeLanguageSkeleton />}>
+            <MemoizedDeactivatedAccount />
           </Suspense>
         </Box>
       </Box>

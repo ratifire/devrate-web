@@ -1,8 +1,9 @@
 export const styles = {
   contained: (theme) => ({
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 500,
-    lineHeight: '16px',
+    lineHeight: '20px',
+    letterSpacing: '0.17px',
     color: theme.palette.iconBtn.btnSave.color.default,
     textAlign: 'center',
     textTransform: 'capitalize',
@@ -20,7 +21,7 @@ export const styles = {
     },
   }),
   text: (theme) => ({
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 500,
     lineHeight: '24px',
     color: theme.palette.text.secondary,
@@ -36,9 +37,10 @@ export const styles = {
     },
   }),
   outlined: (theme) => ({
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 500,
-    lineHeight: '24px',
+    lineHeight: '20px',
+    letterSpacing: '0.17px',
     color: theme.palette.text.primary,
     textAlign: 'center',
     textTransform: 'capitalize',

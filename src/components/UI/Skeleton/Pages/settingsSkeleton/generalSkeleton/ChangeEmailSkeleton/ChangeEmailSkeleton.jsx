@@ -9,8 +9,8 @@ const ChangeEmailSkeleton = () => {
         <Skeleton height={56} variant='rounded' />
         <Skeleton height={56} variant='rounded' />
         <Box sx={styles.box}>
-          <Skeleton height={50} sx={styles.btn} variant='rounded' />
-          <Skeleton height={50} sx={styles.btn} variant='rounded' />
+          <Skeleton height={45} sx={styles.btn} variant='rounded' />
+          <Skeleton height={45} sx={styles.btn} variant='rounded' />
         </Box>
       </Box>
     </>
