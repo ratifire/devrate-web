@@ -5,6 +5,7 @@ import {
   TitleSettingSkeleton,
   ChangePasswordSkeleton,
   ChangeLanguageSkeleton,
+  DeactivateAccountSkeleton,
 } from '@components/UI/Skeleton';
 import { styles } from './GeneralSettingsPage.styles';
 
@@ -67,7 +68,7 @@ const GeneralSettingsPage = () => {
           </Suspense>
         </Box>
         <Box sx={styles.section}>
-          <Suspense fallback={<ChangeLanguageSkeleton />}>
+          <Suspense fallback={<DeactivateAccountSkeleton />}>
             <MemoizedDeactivatedAccount />
           </Suspense>
         </Box>

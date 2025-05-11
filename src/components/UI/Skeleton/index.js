@@ -6,6 +6,7 @@ import {
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
   ChangeLanguageSkeleton,
+  DeactivateAccountSkeleton,
 } from '@components/UI/Skeleton/Pages/settingsSkeleton';
 import FeedbackModalSkeleton from './Modal/FeedbackModalSkeleton';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
@@ -90,4 +91,5 @@ export {
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
   ChangeLanguageSkeleton,
+  DeactivateAccountSkeleton,
 };
