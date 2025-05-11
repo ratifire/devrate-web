@@ -5,15 +5,15 @@ export const styles = {
     gap: theme.spacing(2),
   }),
   subTitle: {
-    transition: 'opacity 0.3s ease-in-out',
+    transition: 'opacity 0.2s ease-in-out',
   },
   accordion: {
     backgroundColor: 'transparent',
     backgroundImage: 'none',
     boxShadow: 'none',
     '.MuiButtonBase-root.Mui-expanded': {
-      minHeight: '72px',
-      height: '72px',
+      minHeight: '42px',
+      height: '42px',
     },
   },
   btn: (theme) => ({
@@ -34,7 +34,6 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(3),
-    marginTop: '-30px',
   }),
   accordionSummary: (theme) => ({
     minHeight: '72px',
