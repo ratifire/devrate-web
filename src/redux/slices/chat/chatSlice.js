@@ -37,12 +37,13 @@ const chatSlice = createSlice({
       const { id, firstName, lastName, userPicture } = action.payload;
       state.chat = true;
       state.opponentUserInfo = { id: +id, firstName, lastName, userPicture };
+      state.messages = [];
     },
     closeChat: (state) => {
       state.chat = false;
     },
     messagesList: (state, action) => {
-      state.messages.push(action.payload.newMessages);
+      state.messages.push(...action.payload.newMessages);
       chatApiSlice.util.invalidateTags([TAG_TYPES.ChatHistory]);
     },
     connectWebsocket: (state) => {
