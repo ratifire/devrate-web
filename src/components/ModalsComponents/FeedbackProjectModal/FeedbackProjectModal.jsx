@@ -62,6 +62,7 @@ const FeedbackProjectModal = () => {
           handleChange={formik.handleChange}
           label={t('modal.feedbackProjectModal.formSelectLabel')}
           name='select'
+          translatedKey='modal.feedbackProjectModal.type_of_feedback'
           value={formik.values.select}
           variant='outlined'
         />
