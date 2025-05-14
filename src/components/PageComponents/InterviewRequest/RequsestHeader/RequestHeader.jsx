@@ -25,7 +25,7 @@ const RequestHeader = ({
   handleUpdateSlots,
   languageName,
   languageCode,
-  interviewRequestObj,
+  interviewRequestId,
   pendingSlots,
 }) => {
   const { t } = useTranslation();
@@ -41,13 +41,10 @@ const RequestHeader = ({
   };
 
   const handleAddTimeSlots = () => {
-    const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
-    const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
-
     openModal(
       modalNames.scheduleInterviewModal,
       {
-        role: formattedRole,
+        role,
         selectedSpecialization,
         totalInterviews,
         interviewRequestId,
@@ -59,13 +56,10 @@ const RequestHeader = ({
   };
 
   const handleEditFeature = () => {
-    const formattedRole = role === 'Interviewer' ? 'INTERVIEWER' : role === 'Respondent' ? 'CANDIDATE' : role;
-    const interviewRequestId = interviewRequestObj?.role === formattedRole ? interviewRequestObj.id : null;
-
     openModal(
       modalNames.scheduleInterviewModal,
       {
-        role: formattedRole,
+        role,
         selectedSpecialization,
         totalInterviews,
         interviewRequestId,
@@ -79,6 +73,14 @@ const RequestHeader = ({
     handleCloseMenu();
   };
 
+  // TODO: Remove the handleUpdateSlots function. Move the modal window to the other modal windows. Create enum for
+  //  interview roles.
+
+  const handleDeleteFeature = () => {
+    onDeleteSelected();
+    handleCloseMenu();
+  };
+
   return (
     <Box sx={styles.container}>
       <Box sx={styles.header}>
@@ -87,10 +89,10 @@ const RequestHeader = ({
           <Box
             component='span'
             sx={{
-              color: role === 'Respondent' ? styles.respondentColor : styles.interviewerColor,
+              color: role === 'CANDIDATE' ? styles.respondentColor : styles.interviewerColor,
             }}
           >
-            {role}
+            {t(`interviewRequest.role.${role}`)}
           </Box>
         </Typography>
 
@@ -121,7 +123,7 @@ const RequestHeader = ({
           <DropdownMenu
             anchorEl={anchorEl}
             handleCloseMenu={handleCloseMenu}
-            handleDeleteFeature={onDeleteSelected}
+            handleDeleteFeature={handleDeleteFeature}
             handleEditFeature={handleEditFeature}
           />
         </Box>
@@ -164,7 +166,7 @@ const RequestHeader = ({
 RequestHeader.propTypes = {
   title: PropTypes.string.isRequired,
   selectedSpecialization: PropTypes.object.isRequired,
-  role: PropTypes.oneOf(['Respondent', 'Interviewer']).isRequired,
+  role: PropTypes.oneOf(['CANDIDATE', 'INTERVIEWER']).isRequired,
   description: PropTypes.string.isRequired,
   foundInterviews: PropTypes.number.isRequired,
   totalInterviews: PropTypes.number.isRequired,
@@ -174,7 +176,7 @@ RequestHeader.propTypes = {
   hasSelectedSlots: PropTypes.bool.isRequired,
   languageName: PropTypes.string.isRequired,
   languageCode: PropTypes.string.isRequired,
-  interviewRequestObj: PropTypes.object.isRequired,
+  interviewRequestId: PropTypes.number.isRequired,
   pendingSlots: PropTypes.number.isRequired,
 };
 
