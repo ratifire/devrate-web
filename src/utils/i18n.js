@@ -5,13 +5,21 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { en } from './locales/en';
 import { uk } from './locales/uk';
 
-i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init({
-  resources: {
-    en,
-    uk,
-  },
-  debug: false,
-  fallbackLng: 'en',
-  lng: 'uk',
-});
+i18n
+  .use(Backend)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources: {
+      en,
+      uk,
+    },
+    debug: false,
+    fallbackLng: 'en',
+    lng: 'uk',
+    detection: {
+      order: ['navigator', 'localStorage', 'htmlTag', 'path', 'subdomain'],
+      caches: ['localStorage'],
+    },
+  });
 export default i18n;

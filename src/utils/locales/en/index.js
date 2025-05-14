@@ -698,7 +698,7 @@ export const en = {
         changeLanguage: {
           title: 'Platform Language',
           languageLabel: 'Select Language',
-          ua: 'Ukrainian',
+          uk: 'Ukrainian',
           en: 'English',
         },
         deactivated: {

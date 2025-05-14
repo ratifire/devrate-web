@@ -704,7 +704,7 @@ export const uk = {
         changeLanguage: {
           title: 'Мова платформи',
           languageLabel: 'Оберіть мову',
-          ua: 'Українська',
+          uk: 'Українська',
           en: 'Англійська',
         },
         deactivated: {
