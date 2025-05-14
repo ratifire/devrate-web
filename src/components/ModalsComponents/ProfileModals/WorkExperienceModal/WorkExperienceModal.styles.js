@@ -80,9 +80,10 @@ export const styles = {
   error: {
     transform: 'translate(-13px, -5px)',
   },
-  checkBoxContainer: (theme) => ({
+  checkBoxContainer: () => ({
     display: 'flex',
     alignItems: 'center',
-    flex: ` calc(90% - ${theme.spacing(2)})`,
+    flex: 1,
+    marginTop: '5px',
   }),
 };
