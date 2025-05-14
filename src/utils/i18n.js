@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { Languages } from '@utils/constants/languages';
 import { en } from './locales/en';
 import { uk } from './locales/uk';
 
@@ -15,11 +16,12 @@ i18n
       uk,
     },
     debug: false,
-    fallbackLng: 'en',
-    lng: 'uk',
+    fallbackLng: Languages.en,
+    fallbackNS: Languages.en,
     detection: {
-      order: ['navigator', 'localStorage', 'htmlTag', 'path', 'subdomain'],
+      order: ['localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
       caches: ['localStorage'],
     },
   });
+
 export default i18n;
