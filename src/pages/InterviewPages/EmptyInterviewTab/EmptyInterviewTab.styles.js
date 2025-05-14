@@ -1,22 +1,25 @@
 export const styles = {
-  container: (theme) => ({
-    paddingY: theme.spacing(3),
-    paddingX: theme.spacing(3),
-    '@media (min-width: 600px)': {
-      paddingY: theme.spacing(4),
-      paddingX: theme.spacing(4),
-    },
-    '@media (min-width: 1272px)': {
-      maxWidth: '120rem',
-    },
-  }),
-  contentWrapper: (theme) => ({
+  container: (theme, isRequestTab) =>
+    isRequestTab
+      ? {}
+      : {
+          paddingY: theme.spacing(3),
+          paddingX: theme.spacing(3),
+          '@media (min-width: 600px)': {
+            paddingY: theme.spacing(4),
+            paddingX: theme.spacing(4),
+          },
+          '@media (min-width: 1272px)': {
+            maxWidth: '120rem',
+          },
+        },
+  contentWrapper: (theme, isRequestTab) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     gridGap: theme.spacing(3),
-    minHeight: 'calc(100vh - 192px)',
+    minHeight: isRequestTab ? 'calc(100vh - 305px)' : 'calc(100vh - 192px)',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     marginTop: '-8px',
     padding: theme.spacing(4),
