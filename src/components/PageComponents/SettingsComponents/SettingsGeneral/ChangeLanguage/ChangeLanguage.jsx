@@ -2,12 +2,13 @@ import { useTranslation } from 'react-i18next';
 import { Box, Typography } from '@mui/material';
 import { FormSelect } from '@components/FormsComponents/Inputs';
 import { useState } from 'react';
-import { Languages, LanguagesList } from '@utils/constants/languages';
+import { LanguagesList, Languages } from '@utils/constants/languages';
 import { styles } from './ChangeLanguage.styles';
 
 const ChangeLanguage = () => {
   const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState(Languages.uk);
+  const systemLang = LanguagesList.find((lang) => lang === i18n.language) || Languages.en;
+  const [language, setLanguage] = useState(systemLang);
 
   const handleChangeLanguage = (e) => {
     const selectedLanguage = e.target.value;
