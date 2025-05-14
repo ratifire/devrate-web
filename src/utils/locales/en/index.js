@@ -166,6 +166,11 @@ export const en = {
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_invalid: 'Incorrect password',
+        something_wrong: 'Something went wrong',
+        pasword_or_email_invalid: 'Invalid email or password',
+        missing_userName_or_password: 'Missing Username or Password',
+        unauthorized: 'Unauthorized',
+        login_failed: 'Login Failed',
       },
       registration: {
         title: 'Sign Up',
@@ -294,6 +299,8 @@ export const en = {
         editAvatar: 'Edit avatar',
         editUserInfo: 'Edit user information',
         editBtn: 'Edit',
+        writeMessage: 'Write a message',
+        bookInterview: 'Book an interview',
       },
       experience: {
         workExperience: {

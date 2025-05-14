@@ -173,6 +173,11 @@ export const uk = {
         password_short: 'Пароль занадто короткий',
         password_long: 'Пароль занадто довгий',
         password_invalid: 'Неприпустимий пароль',
+        something_wrong: 'Щось пішло не так',
+        pasword_or_email_invalid: 'Невірна електронна адреса або пароль',
+        missing_userName_or_password: 'Не вказано ім’я користувача або пароль',
+        unauthorized: 'Немає дозволу на доступ',
+        login_failed: 'Помилка входу',
       },
       registration: {
         title: 'Реєстрація',
@@ -298,6 +303,11 @@ export const uk = {
         complete: 'Вітаємо! Ваш профіль повністю заповнений',
         messageBtn: 'Написати повідомлення',
         interviewBtn: 'Забронювати співбесіду',
+        editAvatar: 'Редагувати аватар',
+        editUserInfo: 'Редагувати інформацію користувача',
+        editBtn: 'Редагувати',
+        writeMessage: 'Написати повідомлення',
+        bookInterview: 'Запланувати співбесіду',
       },
       experience: {
         workExperience: {
