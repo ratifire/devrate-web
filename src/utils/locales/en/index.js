@@ -1341,5 +1341,8 @@ export const en = {
       zambia: 'Zambia',
       zimbabwe: 'Zimbabwe',
     },
+    notification: {
+      error: 'Something went wrong... Try again later',
+    },
   },
 };
