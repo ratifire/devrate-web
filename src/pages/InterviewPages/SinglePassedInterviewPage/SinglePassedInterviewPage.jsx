@@ -50,7 +50,7 @@ const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
   const { interviewId } = useParams();
   const { mode } = useSelector((state) => state.theme);
-  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
+  const { data: interviewData, isLoading } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
 
   const attendeeId = interviewData?.attendeeId ?? '';
   const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
@@ -126,7 +126,7 @@ const SinglePassedInterviewPage = () => {
           <MemoizedInterviewInfo />
         </Suspense>
       </Paper>
-      {hasStatistics ? (
+      {hasStatistics || isLoading ? (
         <>
           <Paper sx={styles.interviewersAssessment}>
             <Typography sx={styles.interviewersAssessmentTitle} variant='h6'>
@@ -136,7 +136,7 @@ const SinglePassedInterviewPage = () => {
               {role === 'CANDIDATE' && (
                 <Paper sx={styles.hardSkills}>
                   <Suspense fallback={<SkillsSkeleton />}>
-                    {hardSkillsArray.length > 0 ? (
+                    {hardSkillsArray.length > 0 || isLoading ? (
                       <MemoizedInterviewHardSkills
                         averageHardSkillsMark={averageHardSkillsMark}
                         hardSkills={hardSkillsArray}
@@ -150,7 +150,7 @@ const SinglePassedInterviewPage = () => {
 
               <Paper sx={styles.sortSkills}>
                 <Suspense fallback={<SkillsSkeleton />}>
-                  {softSkillsArray.length > 0 ? (
+                  {softSkillsArray.length > 0 || isLoading ? (
                     <MemoizedInterviewSoftSkills
                       averageSoftSkillsMark={averageSoftSkillsMark}
                       softSkills={softSkillsArray}

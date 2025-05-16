@@ -2,12 +2,6 @@ export const styles = {
   statisticsWrapper: (theme) => ({
     paddingY: theme.spacing(3),
     paddingX: theme.spacing(4),
-    ' > div': {
-      borderRadius: 2,
-      backgroundColor: theme.palette.statistics.innerBackground,
-      boxShadow: 'none',
-      backgroundImage: 'none',
-    },
   }),
 
   statisticsTitle: (theme) => ({
