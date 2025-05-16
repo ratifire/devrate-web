@@ -715,6 +715,10 @@ export const en = {
         email: {
           title: 'Email notifications',
           text: 'Receive emails that notify you of events when you are not in Skillzzy. You can turn them off at any time.',
+          change: {
+            success: 'Notifications settings have been changed',
+            error: 'Error changing notifications settings',
+          },
         },
         telegram: {
           title: 'Telegram Bot Notifications',
