@@ -3,26 +3,36 @@ import { Box, Typography } from '@mui/material';
 import { FormSelect } from '@components/FormsComponents/Inputs';
 import { useState } from 'react';
 import { LanguagesList, Languages } from '@utils/constants/languages';
+import { useSnackbar } from 'notistack';
 import { styles } from './ChangeLanguage.styles';
 
 const ChangeLanguage = () => {
   const { t, i18n } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
   const systemLang = LanguagesList.find((lang) => lang === i18n.language) || Languages.en;
   const [language, setLanguage] = useState(systemLang);
 
-  const handleChangeLanguage = (e) => {
-    const selectedLanguage = e.target.value;
+  const handleChangeLanguage = ({ target }) => {
+    const selectedLanguage = target.value;
 
-    if (!selectedLanguage) return;
+    i18n
+      .changeLanguage(selectedLanguage)
+      .then(() => {
+        const html = document.querySelector('html');
 
-    i18n.changeLanguage(selectedLanguage).then(() => {
-      const html = document.querySelector('html');
+        if (!html) return;
 
-      if (!html) return;
-
-      html.setAttribute('lang', selectedLanguage);
-      setLanguage(selectedLanguage);
-    });
+        html.setAttribute('lang', selectedLanguage);
+        setLanguage(selectedLanguage);
+        enqueueSnackbar(t('settings.general.changeLanguage.change.success'), {
+          variant: 'success',
+        });
+      })
+      .catch(() => {
+        enqueueSnackbar(t('settings.general.changeLanguage.change.error'), {
+          variant: 'error',
+        });
+      });
   };
 
   return (

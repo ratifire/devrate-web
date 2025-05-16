@@ -696,6 +696,10 @@ export const en = {
           languageLabel: 'Select Language',
           uk: 'Ukrainian',
           en: 'English',
+          change: {
+            success: 'Language changed successfully',
+            error: 'Error changing language',
+          },
         },
         deactivated: {
           title: 'Profile Deactivation',

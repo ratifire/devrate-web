@@ -702,6 +702,10 @@ export const uk = {
           languageLabel: 'Оберіть мову',
           uk: 'Українська',
           en: 'Англійська',
+          change: {
+            success: 'Мову успішно змінено',
+            error: 'Помилка зміни мови',
+          },
         },
         deactivated: {
           title: 'Деактивація профілю',
