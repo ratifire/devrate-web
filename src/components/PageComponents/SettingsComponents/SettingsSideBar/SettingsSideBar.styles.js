@@ -1,13 +1,4 @@
 export const styles = {
-  input: {
-    maxWidth: '306px',
-    width: '100%',
-    '& .MuiOutlinedInput-input': {
-      paddingY: '8px!important',
-      paddingX: '12px!important',
-    },
-  },
-  list: {},
   listItem: (theme) => ({
     padding: '8px 0',
     fontSize: '20px',

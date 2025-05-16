@@ -1,5 +1,4 @@
 import { Link, List, ListItem, Typography } from '@mui/material';
-import { FormInputSearch } from '@components/FormsComponents/Inputs/index.js';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router';
 import navigationLinks from '@router/links.js';
@@ -14,17 +13,7 @@ const SettingsSideBar = () => {
       <Typography component='h4' variant='h4'>
         {t('settings.sideBar.title')}
       </Typography>
-      <FormInputSearch
-        autoComplete='off'
-        name='query'
-        placeholder={'Пошук налаштувань'}
-        sx={styles.input}
-        type='text'
-        // value={query}
-        // onBlur={handleBlur}
-        // onChange={handleChange}
-      />
-      <List sx={styles.list}>
+      <List>
         <ListItem sx={styles.listItem}>
           <Link component={NavLink} to={navigationLinks.generalSettings}>
             {t('settings.sideBar.links.generalSettings')}

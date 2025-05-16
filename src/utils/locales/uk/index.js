@@ -668,7 +668,6 @@ export const uk = {
     settings: {
       sideBar: {
         title: 'Налаштування',
-        search: 'Пошук налаштувань',
         links: {
           generalSettings: 'Загальні налаштування',
           notificationsSettings: 'Сповіщення',

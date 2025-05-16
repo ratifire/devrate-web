@@ -662,7 +662,6 @@ export const en = {
     settings: {
       sideBar: {
         title: 'Settings',
-        search: 'Search settings',
         links: {
           generalSettings: 'General settings',
           notificationsSettings: 'Notifications',
