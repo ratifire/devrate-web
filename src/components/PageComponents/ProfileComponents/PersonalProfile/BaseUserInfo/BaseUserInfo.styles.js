@@ -3,14 +3,15 @@ export const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     padding: theme.spacing(3),
+    height: '100%',
     '@media (min-width: 1272px)': {
       padding: theme.spacing(4),
     },
   }),
-  wrapperAvatar: (theme) => ({
-    flex: '1 0 132px',
-    marginRight: theme.spacing(0),
-    marginBottom: theme.spacing(1),
+  wrapperAvatar: (theme, isProgressCompleted) => ({
+    flex: isProgressCompleted ? '0 0 212px' : '1 0 132px',
+    marginRight: isProgressCompleted ? theme.spacing(3) : theme.spacing(0),
+    marginBottom: isProgressCompleted ? '0px' : theme.spacing(1),
     '> button': {
       padding: theme.spacing(0),
       borderRadius: 1,
@@ -18,9 +19,9 @@ export const styles = {
       height: '100%',
     },
     '@media (min-width: 1272px)': {
-      flex: '1 0 152px',
+      flex: isProgressCompleted ? '0 0 212px' : '1 0 152px',
       marginRight: theme.spacing(3),
-      marginBottom: theme.spacing(0),
+      marginBottom: isProgressCompleted ? '0px' : theme.spacing(0),
     },
   }),
   avatar: {
@@ -29,10 +30,14 @@ export const styles = {
       height: '152px',
     },
   },
-  wrapperText: {
-    flex: '1 0 calc(100% - 168px)',
-    position: 'relative',
+  avatarBig: {
+    width: '212px',
+    height: '212px',
   },
+  wrapperText: (isProgressCompleted) => ({
+    flex: isProgressCompleted ? '1' : '1 0 calc(100% - 168px)',
+    position: 'relative',
+  }),
   wrapperTextBtn: {
     position: 'absolute',
     top: 0,

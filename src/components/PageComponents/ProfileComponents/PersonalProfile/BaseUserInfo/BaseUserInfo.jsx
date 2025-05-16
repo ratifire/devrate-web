@@ -13,16 +13,19 @@ import UserAvatar from '@components/UI/UserAvatar';
 import { useProfileProgress } from '@utils/hooks/useProfileProgress';
 import { useTranslation } from 'react-i18next';
 import CustomTooltip from '@components/UI/CustomTooltip/index.js';
+import { useTheme } from '@mui/material/styles';
 import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = () => {
   const { t } = useTranslation();
+  const theme = useTheme();
   const currentUser = useSelector(selectCurrentUser) || {};
   const { id, firstName: authFirstName, lastName: authLastName, country: authCountry } = currentUser.data;
 
   const { data: personalData } = useGetPersonalUserQuery(id, { skip: !id });
   const { data: avatarData } = useGetAvatarUserQuery(id, { skip: !id });
   const { animatedProgress } = useProfileProgress(id);
+  const isProgressCompleted = animatedProgress >= 100;
 
   const {
     firstName: personalFirstName,
@@ -57,7 +60,7 @@ const BaseUserInfo = () => {
 
   return (
     <Box sx={styles.wrapper}>
-      <Box sx={styles.wrapperAvatar}>
+      <Box sx={styles.wrapperAvatar(theme, isProgressCompleted)}>
         <Box
           aria-label={t('profile.baseUserInfo.editAvatar')}
           component='button'
@@ -65,7 +68,7 @@ const BaseUserInfo = () => {
           onClick={handleOpenModal(2)}
         >
           <UserAvatar
-            correctStyle={styles.avatar}
+            correctStyle={isProgressCompleted ? styles.avatarBig : styles.avatar}
             radius='square'
             size='l'
             src={userPicture}
@@ -75,7 +78,7 @@ const BaseUserInfo = () => {
         </Box>
       </Box>
 
-      <Box sx={styles.wrapperText}>
+      <Box sx={styles.wrapperText(isProgressCompleted)}>
         <Typography sx={styles.userName} variant='h5'>
           {`${displayData.firstName} ${displayData.lastName}`}
         </Typography>
@@ -106,7 +109,7 @@ const BaseUserInfo = () => {
         </Box>
       </Box>
 
-      {animatedProgress ? (
+      {animatedProgress && !isProgressCompleted ? (
         <Box sx={styles.buttons}>
           <LinearProgressWithLabel orientation='vertical' size='m' value={animatedProgress} />
         </Box>
