@@ -4,6 +4,7 @@ export const styles = {
     textDecoration: 'underline',
     transition: 'opacity 0.3s ease-in-out',
     cursor: 'pointer',
+    pointerEvents: 'none',
 
     '&:hover': {
       opacity: 0.8,
