@@ -1,9 +1,11 @@
+import serviceWorkerNotificationApiSlice from '/src/redux/api/slices/serviceWorkerNotification/serviceWorkerNotification.js';
+
 export const requestNotificationPermission = async () => {
   if (!('Notification' in window)) return 'not-supported';
   return await Notification.requestPermission();
 };
 
-export const subscribeToPush = async () => {
+export const subscribeToPush = async (store) => {
   if (!('serviceWorker' in navigator)) return null;
 
   const reg = await navigator.serviceWorker.ready;
@@ -14,14 +16,13 @@ export const subscribeToPush = async () => {
     ),
   });
 
-  // Send subscription to your server
-  await fetch('http://localhost:5001/subscribe', {
-    method: 'POST',
-    body: JSON.stringify(sub),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  //  Send a subscription to your server.
+  //  Dispatch the mutation manually through the store because cannot use a mutation outside React component
+  const result = await store.dispatch(serviceWorkerNotificationApiSlice.endpoints.subscribeToPush.initiate(sub));
+
+  if ('error' in result) {
+    throw new Error(result.error);
+  }
 
   return sub;
 };

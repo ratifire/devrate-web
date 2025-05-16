@@ -7,11 +7,13 @@ import { requestNotificationPermission, subscribeToPush } from '@utils/serviceWo
 import { registerServiceWorker } from '@utils/serviceWorker/registerServiceWorker.js';
 import { enqueueSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
+import { store } from '@redux/store/config.js';
 
 const MemoizedProfileHeader = memo(ProfileHeader);
 
 const RootPage = () => {
   const { t } = useTranslation();
+
   useEffect(() => {
     const startPushService = async () => {
       try {
@@ -19,7 +21,7 @@ const RootPage = () => {
         if (registration) {
           const permission = await requestNotificationPermission();
           if (permission === 'granted') {
-            await subscribeToPush();
+            await subscribeToPush(store);
           }
         }
         // eslint-disable-next-line no-unused-vars
