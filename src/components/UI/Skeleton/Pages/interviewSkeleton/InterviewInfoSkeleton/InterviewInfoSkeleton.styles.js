@@ -1,9 +1,4 @@
 export const styles = {
-  interviewInfo: (theme) => ({
-    padding: theme.spacing(3),
-    borderRadius: theme.shape.borderRadius,
-    boxShadow: theme.shadows[2],
-  }),
   interviewInfoWrapper: (theme) => ({
     paddingY: theme.spacing(3),
     paddingX: theme.spacing(4),

@@ -14,7 +14,6 @@ export const styles = {
     paddingY: theme.spacing(3),
     paddingX: theme.spacing(4),
     borderRadius: 2,
-    backgroundColor: '#3E3E40',
     boxShadow: 'none',
   }),
 };
