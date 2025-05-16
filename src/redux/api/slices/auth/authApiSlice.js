@@ -50,13 +50,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       transformResponse: (response, meta) => {
         const headers = meta?.response?.headers;
-        if (headers) {
-          const { authToken, idToken } = getTokenInHeaders({ headers });
+        const statusAuth = response?.status;
+        const userInfo = response?.userInfo;
+        const { authToken, idToken } = getTokenInHeaders({ headers });
 
-          if (authToken && idToken) {
-            return { authToken, idToken, userData: { ...response } };
-          }
+        if (!headers || !statusAuth || !userInfo || !authToken || !idToken) {
+          throw new Error();
         }
+
+        return { authToken, idToken, userData: { statusAuth, ...userInfo } };
       },
     }),
     oAuthAuthorize: builder.mutation({
@@ -70,13 +72,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       transformResponse: (response, meta) => {
         const headers = meta?.response?.headers;
-        if (headers) {
-          const { authToken, idToken } = getTokenInHeaders({ headers });
+        const statusAuth = response?.status;
+        const userInfo = response?.userInfo;
+        const { authToken, idToken } = getTokenInHeaders({ headers });
 
-          if (authToken && idToken) {
-            return { authToken, idToken, userData: { ...response } };
-          }
+        if (!headers || !statusAuth || !userInfo || !authToken || !idToken) {
+          throw new Error();
         }
+
+        return { authToken, idToken, userData: { statusAuth, ...userInfo } };
       },
     }),
     logout: builder.mutation({
