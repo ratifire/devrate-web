@@ -687,6 +687,14 @@ export const uk = {
           oldEmailPlaceholder: 'Введіть поточну адресу',
           newEmailLabel: 'Новий e-mail',
           newEmailPlaceholder: 'Введіть нову адресу',
+          newEmailError: {
+            different: 'Нова електронна адреса повинна відрізнятися від поточної.',
+          },
+          notification: {
+            success: 'E-mail успішно змінено',
+            error: 'Помилка зміни e-mail',
+            userAlreadyExists: 'Користувач з такою електронною адресою вже існує',
+          },
         },
         changePassword: {
           title: 'Змінити пароль',
@@ -702,7 +710,7 @@ export const uk = {
           languageLabel: 'Оберіть мову',
           uk: 'Українська',
           en: 'Англійська',
-          change: {
+          notification: {
             success: 'Мову успішно змінено',
             error: 'Помилка зміни мови',
           },
@@ -725,7 +733,7 @@ export const uk = {
         email: {
           title: 'Сповіщення електронною поштою',
           text: 'Отримуйте електронні листи, що сповіщатимуть про події, коли вас немає в Skillzzy. Ви можете вимкнути їх будь-коли.',
-          change: {
+          notification: {
             success: 'Сповіщення електронною поштою успішно змінено',
             error: 'Помилка зміни сповіщень email',
           },

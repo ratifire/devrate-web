@@ -8,7 +8,14 @@ const profileSettingsApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
       }),
     }),
+    updateEmail: builder.mutation({
+      query: ({ currentEmail, newEmail }) => ({
+        url: '/profile-settings/change-email',
+        method: 'PATCH',
+        body: { currentEmail, newEmail },
+      }),
+    }),
   }),
 });
 
-export const { useUpdateEmailSubscriptionMutation } = profileSettingsApiSlice;
+export const { useUpdateEmailSubscriptionMutation, useUpdateEmailMutation } = profileSettingsApiSlice;

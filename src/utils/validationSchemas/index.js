@@ -13,3 +13,4 @@ export { FeedbackModalSchema } from './FeedbackModalSchema';
 export { FeedbackProjectModalSchema } from './FeedbackProjectModalSchema';
 export { ScheduleInterviewSchema } from './ScheduleInterviewSchema';
 export { DeactivateProfileModalSchema } from './DeactivateProfileModalSchema';
+export { ChangeEmailSchema } from './ChangeEmailSchema';

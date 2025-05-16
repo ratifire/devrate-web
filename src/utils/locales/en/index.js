@@ -681,6 +681,14 @@ export const en = {
           oldEmailPlaceholder: 'Enter your current email',
           newEmailLabel: 'New Email',
           newEmailPlaceholder: 'Enter your new email',
+          newEmailError: {
+            different: 'The new email address must be different from the current email address',
+          },
+          notification: {
+            success: 'Email changed successfully',
+            error: 'Error changing email',
+            userAlreadyExists: 'User with this email already exists',
+          },
         },
         changePassword: {
           title: 'Change Password',
@@ -696,7 +704,7 @@ export const en = {
           languageLabel: 'Select Language',
           uk: 'Ukrainian',
           en: 'English',
-          change: {
+          notification: {
             success: 'Language changed successfully',
             error: 'Error changing language',
           },
@@ -719,7 +727,7 @@ export const en = {
         email: {
           title: 'Email notifications',
           text: 'Receive emails that notify you of events when you are not in Skillzzy. You can turn them off at any time.',
-          change: {
+          notification: {
             success: 'Notifications settings have been changed',
             error: 'Error changing notifications settings',
           },

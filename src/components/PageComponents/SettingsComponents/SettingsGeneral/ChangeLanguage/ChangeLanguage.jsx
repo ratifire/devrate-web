@@ -24,12 +24,12 @@ const ChangeLanguage = () => {
 
         html.setAttribute('lang', selectedLanguage);
         setLanguage(selectedLanguage);
-        enqueueSnackbar(t('settings.general.changeLanguage.change.success'), {
+        enqueueSnackbar(t('settings.general.changeLanguage.notification.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('settings.general.changeLanguage.change.error'), {
+        enqueueSnackbar(t('settings.general.changeLanguage.notification.error'), {
           variant: 'error',
         });
       });

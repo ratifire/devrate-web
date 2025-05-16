@@ -19,13 +19,13 @@ const EmailNotifications = () => {
     updateEmailSubscription(target.checked)
       .unwrap()
       .then(() => {
-        enqueueSnackbar(t('settings.notifications.email.change.success'), {
+        enqueueSnackbar(t('settings.notifications.email.notification.success'), {
           variant: 'success',
         });
         dispatch(toggleSubscribedEmailNotification());
       })
       .catch(() => {
-        enqueueSnackbar(t('settings.notifications.email.change.error'), {
+        enqueueSnackbar(t('settings.notifications.email.notification.error'), {
           variant: 'error',
         });
       });
