@@ -2,10 +2,17 @@ import { useTranslation } from 'react-i18next';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { useModalController } from '@utils/hooks/useModalController';
+import { modalNames } from '@utils/constants/modalNames';
 import { styles } from './DeactivatedAccount.styles';
 
 const DeactivatedAccount = () => {
   const { t } = useTranslation();
+  const { openModal } = useModalController();
+
+  const handleOpenModal = () => {
+    openModal(modalNames.deactivateProfileModal);
+  };
 
   return (
     <>
@@ -42,7 +49,12 @@ const DeactivatedAccount = () => {
               {t('settings.general.deactivated.list.subDescription')}
             </Typography>
           </Box>
-          <ButtonDef label={t('settings.general.common.deactivate')} sx={styles.btn} variant='outlined' />
+          <ButtonDef
+            label={t('settings.general.common.deactivate')}
+            sx={styles.btn}
+            variant='outlined'
+            onClick={handleOpenModal}
+          />
         </AccordionDetails>
       </Accordion>
     </>
