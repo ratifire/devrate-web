@@ -27,7 +27,7 @@ const ChangeEmail = () => {
       });
     } catch (error) {
       if (error?.status === 409) {
-        enqueueSnackbar(t('settings.general.changeEmail.notification.userAlreadyExists'), {
+        return enqueueSnackbar(t('settings.general.changeEmail.notification.userAlreadyExists'), {
           variant: 'error',
         });
       }

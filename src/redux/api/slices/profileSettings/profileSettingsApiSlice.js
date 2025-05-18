@@ -15,7 +15,25 @@ const profileSettingsApiSlice = apiSlice.injectEndpoints({
         body: { currentEmail, newEmail },
       }),
     }),
+    updatePassword: builder.mutation({
+      query: ({ currentPassword, newPassword }) => ({
+        url: '/profile-settings/change-password',
+        method: 'PATCH',
+        body: { currentPassword, newPassword },
+      }),
+    }),
+    deactivatedAccount: builder.mutation({
+      query: () => ({
+        url: '/profile-settings/profile-deactivation',
+        method: 'PATCH',
+      }),
+    }),
   }),
 });
 
-export const { useUpdateEmailSubscriptionMutation, useUpdateEmailMutation } = profileSettingsApiSlice;
+export const {
+  useUpdateEmailSubscriptionMutation,
+  useUpdateEmailMutation,
+  useUpdatePasswordMutation,
+  useDeactivatedAccountMutation,
+} = profileSettingsApiSlice;

@@ -183,6 +183,7 @@ export const uk = {
         password_tooltip:
           'Пароль повинен містити 6 символів, 1 велику літеру, 1 цифру, 1 спеціальний символ та не містити пробілів',
         password_invalid: 'Неприпустимий пароль',
+        password_must_differ: 'Паролі повинні відрізнятися',
         agreement_error: 'Для використання нашого сервісу вам необхідно погодитися з умовами користування',
         agreement: 'Я прочитав(ла) і погоджуюся з <a>Умовами використання</a> та <a>Політикою конфіденційності</a>',
         btn_register: 'Зареєструватись',
@@ -704,6 +705,11 @@ export const uk = {
           newPasswordPlaceholder: 'Введіть новий пароль',
           repeatNewPasswordLabel: 'Підтвердіть пароль',
           repeatNewPasswordPlaceholder: 'Підтвердіть новий пароль',
+          notification: {
+            success: 'Пароль успішно змінено',
+            error: 'Помилка зміни пароля',
+            errorServer: 'Помилка сервера',
+          },
         },
         changeLanguage: {
           title: 'Мова платформи',

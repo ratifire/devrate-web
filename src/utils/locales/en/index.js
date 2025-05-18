@@ -176,6 +176,7 @@ export const en = {
         password_tooltip:
           'Password must contain 6 characters, 1 uppercase letter, 1 digit, 1 special character no spaces',
         password_invalid: 'Incorrect password',
+        password_must_differ: 'Password must be different from the current password',
         agreement_error: 'To use our service, you must agree to the terms of use',
         agreement: 'I have read and agree to the Terms of Use and Privacy Policy',
         btn_register: 'Sign Up',
@@ -698,6 +699,11 @@ export const en = {
           newPasswordPlaceholder: 'Enter your new password',
           repeatNewPasswordLabel: 'Confirm Password',
           repeatNewPasswordPlaceholder: 'Confirm your new password',
+          notification: {
+            success: 'Password successfully changed',
+            error: 'Password change error',
+            errorServer: 'Server error',
+          },
         },
         changeLanguage: {
           title: 'Platform Language',
