@@ -7,6 +7,8 @@ import {
   ChangeLanguageSkeleton,
   DeactivateAccountSkeleton,
 } from '@components/UI/Skeleton';
+import { useSelector } from 'react-redux';
+import authMethod from '@utils/constants/authMethod.js';
 import { styles } from './GeneralSettingsPage.styles';
 
 const SettingsTitle = lazy(() =>
@@ -46,22 +48,30 @@ const MemoizedChangeLanguage = memo(ChangeLanguage);
 const MemoizedDeactivatedAccount = memo(DeactivatedAccount);
 
 const GeneralSettingsPage = () => {
+  const {
+    data: { registrationSource },
+  } = useSelector((state) => state.auth.user);
+
   return (
     <Box sx={styles.wrapper}>
       <Suspense fallback={<TitleSettingSkeleton />}>
         <MemoizedSettingsTitle title='settings.general.title' />
       </Suspense>
       <Box sx={styles.container}>
-        <Box sx={styles.section}>
-          <Suspense fallback={<ChangeEmailSkeleton />}>
-            <MemoizedChangeEmail />
-          </Suspense>
-        </Box>
-        <Box sx={styles.section}>
-          <Suspense fallback={<ChangePasswordSkeleton />}>
-            <MemoizedChangePassword />
-          </Suspense>
-        </Box>
+        {registrationSource !== authMethod.FEDERATED_IDENTITY && (
+          <>
+            <Box sx={styles.section}>
+              <Suspense fallback={<ChangeEmailSkeleton />}>
+                <MemoizedChangeEmail />
+              </Suspense>
+            </Box>
+            <Box sx={styles.section}>
+              <Suspense fallback={<ChangePasswordSkeleton />}>
+                <MemoizedChangePassword />
+              </Suspense>
+            </Box>
+          </>
+        )}
         <Box sx={styles.section}>
           <Suspense fallback={<ChangeLanguageSkeleton />}>
             <MemoizedChangeLanguage />
