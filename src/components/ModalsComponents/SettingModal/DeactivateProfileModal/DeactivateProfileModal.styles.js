@@ -12,10 +12,16 @@ export const styles = {
   description: {
     lineHeight: '166%',
   },
-  cancel: {
+  cancel: (theme) => ({
     maxWidth: '100%',
     width: '100%',
-  },
+    color: theme.palette.modals.cancelBtnTextColor,
+    transition: 'opacity 0.3s ease-in-out',
+
+    '&:hover': {
+      opacity: 0.8,
+    },
+  }),
   form: (theme) => ({
     display: 'flex',
     flexDirection: 'column',

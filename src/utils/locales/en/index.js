@@ -206,6 +206,10 @@ export const en = {
         description:
           'Are you sure you want to deactivate your Skillzzy profile? Your public profile will no longer be visible on the platform, all your data will be hidden from other users, and personal messages will be frozen. All scheduled interviews will also be canceled.',
         agree: 'I have read and agree to the Terms of Account Deactivation',
+        notification: {
+          success: 'Your profile has been successfully deactivated',
+          error: 'Profile deactivation error',
+        },
       },
       confirmation: {
         title: 'Confirm your email',
