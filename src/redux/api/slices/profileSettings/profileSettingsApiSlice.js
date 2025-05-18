@@ -8,6 +8,12 @@ const profileSettingsApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
       }),
     }),
+    updateLanguage: builder.mutation({
+      query: (language) => ({
+        url: `/profile-settings/account-language?language=${language}`,
+        method: 'PATCH',
+      }),
+    }),
     updateEmail: builder.mutation({
       query: ({ currentEmail, newEmail }) => ({
         url: '/profile-settings/change-email',
@@ -36,4 +42,5 @@ export const {
   useUpdateEmailMutation,
   useUpdatePasswordMutation,
   useDeactivatedAccountMutation,
+  useUpdateLanguageMutation,
 } = profileSettingsApiSlice;
