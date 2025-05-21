@@ -4,6 +4,7 @@ import { TAG_TYPES_ARRAY } from '@utils/constants/tagTypes';
 import { setDarkTheme } from '@redux/slices/theme/themeSlice';
 import { logOut } from '@redux/slices/auth/authSlice';
 import { clearTokens } from '@redux/slices/auth/tokenSlice';
+import accountStatus from '@utils/constants/accountStatus.js';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -49,12 +50,17 @@ export const authApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
       }),
       transformResponse: (response, meta) => {
-        const headers = meta?.response?.headers;
         const statusAuth = response?.status;
+
+        if (statusAuth === accountStatus.INACTIVE) {
+          return { userData: { statusAuth } };
+        }
+
+        const headers = meta?.response?.headers;
         const userInfo = response?.userInfo;
         const { authToken, idToken } = getTokenInHeaders({ headers });
 
-        if (!headers || !statusAuth || !userInfo || !authToken || !idToken) {
+        if (!headers || !statusAuth || !authToken || !idToken) {
           throw new Error();
         }
 
@@ -71,17 +77,29 @@ export const authApiSlice = apiSlice.injectEndpoints({
         },
       }),
       transformResponse: (response, meta) => {
-        const headers = meta?.response?.headers;
         const statusAuth = response?.status;
+
+        if (statusAuth === accountStatus.INACTIVE) {
+          return { userData: { statusAuth } };
+        }
+
+        const headers = meta?.response?.headers;
         const userInfo = response?.userInfo;
         const { authToken, idToken } = getTokenInHeaders({ headers });
 
-        if (!headers || !statusAuth || !userInfo || !authToken || !idToken) {
+        if (!headers || !statusAuth || !authToken || !idToken) {
           throw new Error();
         }
 
         return { authToken, idToken, userData: { statusAuth, ...userInfo } };
       },
+    }),
+    activateAccount: builder.mutation({
+      query: ({ activationCode, password }) => ({
+        url: '/auth/confirm-activation-account',
+        method: 'POST',
+        body: { activationCode, password },
+      }),
     }),
     logout: builder.mutation({
       query: () => ({
@@ -109,5 +127,6 @@ export const {
   useResetPasswordMutation,
   useChangePasswordMutation,
   useLoginMutation,
+  useActivateAccountMutation,
   useLogoutMutation,
 } = authApiSlice;

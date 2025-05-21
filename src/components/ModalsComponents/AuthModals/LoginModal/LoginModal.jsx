@@ -7,7 +7,7 @@ import { Box, Link, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { setCredentials } from '@redux/slices/auth/authSlice';
 import { setTokens } from '@redux/slices/auth/tokenSlice';
-import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
+import { closeModal } from '@redux/slices/modal/modalSlice';
 import { useLoginMutation } from '@redux/api/slices/auth/authApiSlice';
 import { LoginSchema } from '@utils/validationSchemas';
 import { FormInput } from '@components/FormsComponents/Inputs';
@@ -15,6 +15,8 @@ import { ButtonDef } from '@components/FormsComponents/Buttons';
 import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord';
 import { modalNames } from '@utils/constants/modalNames';
 import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
+import accountStatus from '@utils/constants/accountStatus';
+import { useModalController } from '@utils/hooks/useModalController';
 import styles from './LoginModal.styles';
 
 const initialValues = {
@@ -25,6 +27,8 @@ const initialValues = {
 const LoginModal = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  const { openModal } = useModalController();
+  const [login] = useLoginMutation();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,8 +41,6 @@ const LoginModal = () => {
     dispatch(closeModal());
   }, [dispatch]);
 
-  const [login] = useLoginMutation();
-
   const onSubmit = useCallback(
     async (values, { setSubmitting }) => {
       setLoginError(null);
@@ -47,6 +49,14 @@ const LoginModal = () => {
           email: values.email,
           password: values.password,
         }).unwrap();
+
+        const { statusAuth } = userData;
+
+        if (statusAuth === accountStatus.INACTIVE) {
+          openModal(modalNames.activationModal, { email: values.email, password: values.password });
+          return;
+        }
+
         dispatch(setCredentials({ data: userData }));
 
         if (idToken && authToken) {

@@ -197,9 +197,12 @@ export const en = {
       activation: {
         title: 'Want to activate your profile?',
         description:
-          'Your profile was deactivated. You can activate it and make it visible to other users on the platform again. To complete the profile activation process, you need to enter a security code. Check your email.',
+          'Your profile was deactivated. You can activate it and make it visible to other users on the platform again. To complete the profile activation process, you need to enter a security code. Check your email',
         subtitle: 'Didn’t receive the letter? Check your spam folder.',
-        resend: '<button>Please resend<button/> the request.',
+        resend: '<button>Please resend</button> the request.',
+        errors: {
+          code_error_text: 'The code is incorrect or the term has passed',
+        },
       },
       deactivated: {
         title: 'Deactivate Profile',

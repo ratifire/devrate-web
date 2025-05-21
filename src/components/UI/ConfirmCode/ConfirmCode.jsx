@@ -81,10 +81,8 @@ const ConfirmCode = ({ formik, fieldCount = 6, inputRefs, helperTextContent }) =
               backgroundColor: 'transparent',
             },
             ...(helperTextContent && {
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: '#ED0E0E',
-                },
+              '& .MuiOutlinedInput-root fieldset': {
+                borderColor: '#ED0E0E !important',
               },
             }),
             '& .MuiOutlinedInput-root': {

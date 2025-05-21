@@ -5,10 +5,28 @@ import { useEffect, useRef } from 'react';
 import ConfirmCode from '@components/UI/ConfirmCode';
 import { ConfirmationSchema } from '@utils/validationSchemas';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { useSelector } from 'react-redux';
+import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useActivateAccountMutation, useLoginMutation } from '@redux/api/slices/auth/authApiSlice';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { styles } from './ActivationModal.styles';
 
 const ActivationModal = () => {
   const { t } = useTranslation();
+  const { closeModal } = useModalController();
+  const {
+    data: { email, password },
+  } = useSelector((state) => state.modal);
+  const [activateAccount, { isLoading, isError: isErrorActivateAccount }] = useActivateAccountMutation();
+  const [resend, { isError: isErrorResend }] = useLoginMutation();
+
+  const onSubmit = async (data) => {
+    const confirmationCode = Object.values(data).join('');
+
+    await activateAccount({ password, confirmationCode });
+  };
+
   const inputRefs = useRef([]);
   const formik = useFormik({
     initialValues: {
@@ -20,6 +38,7 @@ const ActivationModal = () => {
       text5: '',
     },
     validationSchema: ConfirmationSchema,
+    onSubmit,
   });
 
   useEffect(() => {
@@ -32,32 +51,61 @@ const ActivationModal = () => {
     }
   }, [formik.values]);
 
+  const handleCancel = () => {
+    closeModal(modalNames.activationModal);
+  };
+
+  const handleResend = async () => {
+    await resend({ email, password }).unwrap();
+  };
+
+  const isDisabled = !formik.dirty || !formik.isValid || formik.isSubmitting || isLoading;
+  const isErrorCode = isErrorResend || isErrorActivateAccount;
+
   return (
-    <Box sx={styles.wrapper}>
+    <Box component='form' sx={styles.wrapper} onSubmit={formik.handleSubmit}>
       <Typography component='h6' variant='h6'>
         {t('modal.activation.title')}
       </Typography>
       <Typography component='p' variant='body'>
         {t('modal.activation.description')}{' '}
         <Box component='span' sx={styles.email}>
-          user@mail.com.
+          {email}
         </Box>
       </Typography>
-      <ConfirmCode formik={formik} inputRefs={inputRefs} />
+      <Box sx={styles.codeBox}>
+        <ConfirmCode formik={formik} helperTextContent={isErrorCode} inputRefs={inputRefs} />
+        {isErrorCode && (
+          <Typography sx={styles.error}>
+            <CancelIcon sx={styles.codeErrorIcon} />
+            {t('modal.activation.errors.code_error_text')}
+          </Typography>
+        )}
+      </Box>
       <Box sx={styles.box}>
         <Typography>{t('modal.activation.subtitle')}</Typography>
-        <Typography>
+        <Box>
           <Trans
             components={{
-              button: <Button disableRipple sx={styles.btnResend} />,
+              button: <Button sx={styles.btnResend} type='button' onClick={handleResend} />,
             }}
             i18nKey={'modal.activation.resend'}
           />
-        </Typography>
+        </Box>
       </Box>
       <Box sx={styles.btnBox}>
-        <ButtonDef label={t('settings.general.common.send')} variant='contained' />
-        <ButtonDef label={t('settings.general.common.cancel')} variant={'outlined'} />
+        <ButtonDef
+          disabled={isDisabled}
+          label={t('settings.general.common.send')}
+          type={'submit'}
+          variant='contained'
+        />
+        <ButtonDef
+          label={t('settings.general.common.cancel')}
+          type='button'
+          variant={'outlined'}
+          onClick={handleCancel}
+        />
       </Box>
     </Box>
   );

@@ -10,10 +10,28 @@ export const styles = {
     gap: theme.spacing(2),
     alignItems: 'center',
   }),
+  codeErrorIcon: (theme) => ({
+    width: '20px',
+    height: '20px',
+    color: theme.palette.error.mainConcentrated,
+  }),
+  codeBox: {
+    position: 'relative',
+  },
+  error: (theme) => ({
+    position: 'absolute',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    color: theme.palette.error.mainConcentrated,
+  }),
   btnResend: (theme) => ({
     textTransform: 'none',
     backgroundColor: 'transparent',
     fontSize: '16px',
+    lineHeight: '0',
     padding: 0,
     verticalAlign: 'baseline',
     transition: 'opacity 0.3s ease-in-out',
