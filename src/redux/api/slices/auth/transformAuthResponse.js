@@ -1,5 +1,5 @@
-import accountStatus from '@utils/constants/accountStatus.js';
-import { getTokenInHeaders } from '@utils/helpers/index.js';
+import accountStatus from '@utils/constants/accountStatus';
+import { getTokenInHeaders } from '@utils/helpers';
 
 const transformAuthResponse = ({ response, meta }) => {
   const statusAuth = response?.status;
