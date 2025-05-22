@@ -1,30 +1,48 @@
 import { Box, Button, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ConfirmCode from '@components/UI/ConfirmCode';
 import { ConfirmationSchema } from '@utils/validationSchemas';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useModalController } from '@utils/hooks/useModalController.js';
 import { modalNames } from '@utils/constants/modalNames.js';
-import { useActivateAccountMutation, useLoginMutation } from '@redux/api/slices/auth/authApiSlice';
+import { useActivateAccountMutation, useResendCodeMutation } from '@redux/api/slices/auth/authApiSlice';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { setCredentials } from '@redux/slices/auth/authSlice.js';
+import { setTokens } from '@redux/slices/auth/tokenSlice.js';
+import { useNavigate } from 'react-router';
 import { styles } from './ActivationModal.styles';
 
 const ActivationModal = () => {
+  const [isErrorAuth, setIsErrorAuth] = useState(false);
   const { t } = useTranslation();
   const { closeModal } = useModalController();
   const {
     data: { email, password },
   } = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [activateAccount, { isLoading, isError: isErrorActivateAccount }] = useActivateAccountMutation();
-  const [resend, { isError: isErrorResend }] = useLoginMutation();
+  const [resend, { isError: isErrorResend }] = useResendCodeMutation();
 
   const onSubmit = async (data) => {
-    const confirmationCode = Object.values(data).join('');
+    const activationCode = Object.values(data).join('');
 
-    await activateAccount({ password, confirmationCode });
+    try {
+      const { userData, idToken, authToken } = await activateAccount({ password, activationCode }).unwrap();
+
+      if (idToken && authToken && userData) {
+        dispatch(setCredentials({ data: userData }));
+        dispatch(setTokens({ idToken, authToken }));
+        navigate('/profile', { replace: true });
+        closeModal();
+      }
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      setIsErrorAuth(true);
+    }
   };
 
   const inputRefs = useRef([]);
@@ -56,7 +74,7 @@ const ActivationModal = () => {
   };
 
   const handleResend = async () => {
-    await resend({ email, password }).unwrap();
+    await resend({ email }).unwrap();
   };
 
   const isDisabled = !formik.dirty || !formik.isValid || formik.isSubmitting || isLoading;
@@ -75,6 +93,12 @@ const ActivationModal = () => {
       </Typography>
       <Box sx={styles.codeBox}>
         <ConfirmCode formik={formik} helperTextContent={isErrorCode} inputRefs={inputRefs} />
+        {isErrorAuth && (
+          <Typography sx={styles.error}>
+            <CancelIcon sx={styles.codeErrorIcon} />
+            {t('modal.activation.errors.server_error')}
+          </Typography>
+        )}
         {isErrorCode && (
           <Typography sx={styles.error}>
             <CancelIcon sx={styles.codeErrorIcon} />
