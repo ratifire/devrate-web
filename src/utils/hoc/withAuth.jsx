@@ -1,12 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { useOAuthAuthorizeMutation } from '@redux/api/slices/auth/authApiSlice.js';
+import { useOAuthAuthorizeMutation } from '@redux/api/slices/auth/authApiSlice';
 import { useEffect } from 'react';
-import { setCredentials } from '@redux/slices/auth/authSlice.js';
-import { setTokens } from '@redux/slices/auth/tokenSlice.js';
-import { closeModal } from '@redux/slices/modal/modalSlice.js';
+import { setCredentials } from '@redux/slices/auth/authSlice';
+import { setTokens } from '@redux/slices/auth/tokenSlice';
+import { closeModal } from '@redux/slices/modal/modalSlice';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
+import accountStatus from '@utils/constants/accountStatus';
+import { modalNames } from '@utils/constants/modalNames';
+import { useModalController } from '@utils/hooks/useModalController';
 
 const withAuth = (Component) => {
   return function AuthComponent(props) {
@@ -17,6 +20,7 @@ const withAuth = (Component) => {
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
     const { t } = useTranslation();
+    const { openModal } = useModalController();
     const [authorization] = useOAuthAuthorizeMutation();
 
     useEffect(() => {
@@ -26,13 +30,20 @@ const withAuth = (Component) => {
         try {
           const { userData, idToken, authToken } = await authorization({ code, state }).unwrap();
 
+          const { statusAuth } = userData;
+
           if (userData) {
             dispatch(setCredentials({ data: userData }));
           }
 
           if (idToken && authToken) {
             dispatch(setTokens({ idToken, authToken }));
-            navigate('/profile', { replace: true });
+
+            if (statusAuth === accountStatus.ACTIVE) {
+              return navigate('/profile', { replace: true });
+            }
+
+            openModal(modalNames.activationModal, { email: '', password: code });
           }
           // eslint-disable-next-line no-unused-vars
         } catch (err) {
