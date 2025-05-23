@@ -109,6 +109,7 @@ const ActivationModal = () => {
         <ButtonDef
           disabled={isDisabled}
           label={t('settings.general.common.send')}
+          loading={isLoading}
           type={'submit'}
           variant='contained'
         />
