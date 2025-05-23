@@ -34,7 +34,7 @@ const LoginModal = () => {
   const navigate = useNavigate();
 
   const handleOpen = useCallback(() => {
-    dispatch(openModal({ modalType: modalNames.checkEmailModal }));
+    dispatch(openModal(modalNames.checkEmailModal));
   }, [dispatch]);
 
   const handleClose = useCallback(() => {
