@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ConfirmCode from '@components/UI/ConfirmCode';
 import { ConfirmationSchema } from '@utils/validationSchemas';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router';
 import { styles } from './ActivationModal.styles';
 
 const ActivationModal = () => {
-  const [isErrorAuth, setIsErrorAuth] = useState(false);
   const inputRefs = useRef([]);
   const { t } = useTranslation();
   const { closeModal } = useModalController();
@@ -30,18 +29,13 @@ const ActivationModal = () => {
   const onSubmit = async (data) => {
     const activationCode = Object.values(data).join('');
 
-    try {
-      const { userData, idToken, authToken } = await activateAccount({ password, activationCode }).unwrap();
+    const { userData, idToken, authToken } = await activateAccount({ password, activationCode }).unwrap();
 
-      if (idToken && authToken && userData) {
-        dispatch(setCredentials({ data: userData }));
-        dispatch(setTokens({ idToken, authToken }));
-        navigate('/profile', { replace: true });
-        closeModal();
-      }
-      // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      setIsErrorAuth(true);
+    if (idToken && authToken && userData) {
+      dispatch(setCredentials({ data: userData }));
+      dispatch(setTokens({ idToken, authToken }));
+      navigate('/profile', { replace: true });
+      closeModal();
     }
   };
 
@@ -77,8 +71,7 @@ const ActivationModal = () => {
   };
 
   const isDisabled = !formik.dirty || !formik.isValid || formik.isSubmitting || isLoading;
-  const isErrorCode = isErrorResend || isErrorActivateAccount || isErrorAuth;
-  const errorText = isErrorCode ? 'modal.activation.errors.code_error_text' : 'modal.activation.errors.server_error';
+  const isErrorCode = isErrorResend || isErrorActivateAccount;
 
   return (
     <Box component='form' sx={styles.wrapper} onSubmit={formik.handleSubmit}>
@@ -92,7 +85,12 @@ const ActivationModal = () => {
         </Box>
       </Typography>
       <Box sx={styles.codeBox}>
-        <ConfirmCode formik={formik} helperTextContent={t(errorText)} inputRefs={inputRefs} isError={isErrorCode} />
+        <ConfirmCode
+          formik={formik}
+          helperTextContent={t('modal.activation.errors.code_error_text')}
+          inputRefs={inputRefs}
+          isError={isErrorCode}
+        />
       </Box>
       <Box sx={styles.box}>
         <Typography>{t('modal.activation.subtitle')}</Typography>

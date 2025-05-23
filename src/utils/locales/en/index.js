@@ -207,7 +207,6 @@ export const en = {
         resend: '<button>Please resend</button> the request.',
         errors: {
           code_error_text: 'The code is incorrect or the term has passed',
-          server_error: 'Something went wrong. Please try again later.',
         },
       },
       deactivated: {
