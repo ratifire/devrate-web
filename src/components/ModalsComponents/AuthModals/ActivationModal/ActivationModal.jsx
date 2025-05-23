@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ConfirmCode from '@components/UI/ConfirmCode';
 import { ConfirmationSchema } from '@utils/validationSchemas';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
@@ -16,6 +16,7 @@ import { styles } from './ActivationModal.styles';
 
 const ActivationModal = () => {
   const inputRefs = useRef([]);
+  const [errorText, setErrorText] = useState('');
   const { t } = useTranslation();
   const { closeModal } = useModalController();
   const {
@@ -23,19 +24,28 @@ const ActivationModal = () => {
   } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [activateAccount, { isLoading, isError: isErrorActivateAccount }] = useActivateAccountMutation();
-  const [resend, { isError: isErrorResend }] = useResendCodeMutation();
+  const [activateAccount, { isLoading }] = useActivateAccountMutation();
+  const [resend] = useResendCodeMutation();
 
   const onSubmit = async (data) => {
     const activationCode = Object.values(data).join('');
 
-    const { userData, idToken, authToken } = await activateAccount({ password, activationCode }).unwrap();
+    try {
+      const { userData, idToken, authToken } = await activateAccount({ password, activationCode }).unwrap();
 
-    if (idToken && authToken && userData) {
-      dispatch(setCredentials({ data: userData }));
-      dispatch(setTokens({ idToken, authToken }));
-      navigate('/profile', { replace: true });
-      closeModal();
+      if (idToken && authToken && userData) {
+        dispatch(setCredentials({ data: userData }));
+        dispatch(setTokens({ idToken, authToken }));
+        navigate('/profile', { replace: true });
+        closeModal();
+      }
+    } catch (error) {
+      if (error.status === 400) {
+        return setErrorText(t('modal.activation.errors.code_error_text'));
+      }
+      if (error.status === 401) {
+        setErrorText(t('modal.activation.errors.invalid_token'));
+      }
     }
   };
 
@@ -67,11 +77,16 @@ const ActivationModal = () => {
   };
 
   const handleResend = async () => {
-    await resend({ email }).unwrap();
+    try {
+      await resend({ email }).unwrap();
+    } catch (error) {
+      if (error.originalStatus === 500) {
+        setErrorText(t('modal.activation.errors.server_error'));
+      }
+    }
   };
 
   const isDisabled = !formik.dirty || !formik.isValid || formik.isSubmitting || isLoading;
-  const isErrorCode = isErrorResend || isErrorActivateAccount;
 
   return (
     <Box component='form' sx={styles.wrapper} onSubmit={formik.handleSubmit}>
@@ -85,12 +100,7 @@ const ActivationModal = () => {
         </Box>
       </Typography>
       <Box sx={styles.codeBox}>
-        <ConfirmCode
-          formik={formik}
-          helperTextContent={t('modal.activation.errors.code_error_text')}
-          inputRefs={inputRefs}
-          isError={isErrorCode}
-        />
+        <ConfirmCode formik={formik} helperTextContent={t(errorText)} inputRefs={inputRefs} isError={!!errorText} />
       </Box>
       <Box sx={styles.box}>
         <Typography>{t('modal.activation.subtitle')}</Typography>

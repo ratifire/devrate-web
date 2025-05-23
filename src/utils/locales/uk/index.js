@@ -215,6 +215,8 @@ export const uk = {
         resend: 'Будь ласка, <button>надішліть запит</button> повторно.',
         errors: {
           code_error_text: 'Код невірний або термін дії минув',
+          server_error: 'На сервері сталася помилка. Спробуйте пізніше.',
+          invalid_token: 'Недійсний токен. Спробуйте ще раз.',
         },
       },
       deactivated: {
