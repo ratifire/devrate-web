@@ -6,12 +6,21 @@ export const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center 100px',
+    backgroundPosition: 'center bottom',
     backgroundSize: '567px 192px',
-    '@media (min-width: 1272px)': {
-      backgroundPosition: 'center calc(50% - -100px)',
+    '@media (min-width: 1750px)': {
+      backgroundPosition: 'center',
       backgroundSize: '681px 230px',
       justifyContent: 'center',
+    },
+  },
+  contentBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '@media (min-width: 1750px)': {
+      transform: 'translateY(calc(50% - 200px))',
     },
   },
 

@@ -65,15 +65,15 @@ const LoginModal = () => {
         }
         handleClose();
       } catch (error) {
-        let errorMessage = 'Something went wrong';
+        let errorMessage = t('modal.login.something_wrong');
         if (!error?.originalStatus) {
-          errorMessage = 'Invalid email or password';
+          errorMessage = t('modal.login.pasword_or_email_invalid');
         } else if (error.originalStatus === 400) {
-          errorMessage = 'Missing Username or Password';
+          errorMessage = t('modal.login.missing_userName_or_password');
         } else if (error.originalStatus === 401) {
-          errorMessage = 'Unauthorized';
+          errorMessage = t('modal.login.unauthorized');
         } else if (error.originalStatus === 500) {
-          errorMessage = 'Login Failed';
+          errorMessage = t('modal.login.login_failed');
         }
         setLoginError(errorMessage);
       } finally {

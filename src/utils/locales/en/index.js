@@ -164,6 +164,11 @@ export const en = {
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_invalid: 'Incorrect password',
+        something_wrong: 'Something went wrong',
+        pasword_or_email_invalid: 'Invalid email or password',
+        missing_userName_or_password: 'Missing Username or Password',
+        unauthorized: 'Unauthorized',
+        login_failed: 'Login Failed',
       },
       registration: {
         title: 'Sign Up',
@@ -313,6 +318,8 @@ export const en = {
         editAvatar: 'Edit avatar',
         editUserInfo: 'Edit user information',
         editBtn: 'Edit',
+        writeMessage: 'Write a message',
+        bookInterview: 'Book an interview',
       },
       experience: {
         workExperience: {
@@ -505,7 +512,7 @@ export const en = {
           responsibilities_placeholder: 'BackEnd development',
           startDate: 'Start Date',
           endDate: 'End Date',
-          currentDate: 'Currently at this position',
+          currentDate: 'Present',
           required: 'This is a required field',
           startDateMinMessage: 'Date must be later than 01/01/1950',
           startDateMaxMessage: 'Date must be earlier than today',
@@ -519,7 +526,7 @@ export const en = {
           name: 'Educational institution',
           startYear: 'Start year',
           endYear: 'End year',
-          currentDate: 'I am currently studying at this institution',
+          currentDate: 'Present',
           speciality_long: 'Speciality too long',
           speciality_short: 'Speciality too short',
           speciality_placeholder: 'Software Engineer',

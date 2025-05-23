@@ -182,6 +182,11 @@ const getDesignTokens = (mode) => ({
                 },
               },
             },
+            statusColors: {
+              inProgress: '#DAFE22',
+              awaitingFeedback: '#FCA728',
+              activeScheduledInterviews: '#64FF2E',
+            },
           },
           notifications: {
             backgroundColor: '#252527',
@@ -710,6 +715,11 @@ const getDesignTokens = (mode) => ({
                   color: '#444446',
                 },
               },
+            },
+            statusColors: {
+              inProgress: '#D31772',
+              awaitingFeedback: '#EE7538',
+              activeScheduledInterviews: '#3AB310',
             },
           },
           notifications: {

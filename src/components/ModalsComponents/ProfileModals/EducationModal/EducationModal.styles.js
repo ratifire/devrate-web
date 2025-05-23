@@ -72,7 +72,8 @@ export const styles = {
   checkBoxContainer: () => ({
     display: 'flex',
     alignItems: 'center',
-    flex: 'calc(100% - 10.66667px)',
+    flex: 1,
+    marginTop: '5px',
     ' label.MuiFormControlLabel-root': {
       marginRight: 0,
     },

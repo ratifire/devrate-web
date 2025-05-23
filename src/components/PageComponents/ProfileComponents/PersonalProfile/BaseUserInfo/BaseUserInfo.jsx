@@ -89,7 +89,7 @@ const BaseUserInfo = () => {
         {(displayData.city || displayData.country) && (
           <Typography sx={styles.city} variant='subtitle2'>
             <LocationOnIcon sx={styles.icon} />
-            {`${displayData.city ? `${displayData.city}, ` : ''}${displayData.country}`}
+            {`${displayData.city ? `${displayData.city}, ` : ''}${t(`countriesList.${displayData.country}`)}`}
           </Typography>
         )}
 
