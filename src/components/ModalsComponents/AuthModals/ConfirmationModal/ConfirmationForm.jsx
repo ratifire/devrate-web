@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Box, Link, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { openModal } from '@redux/slices/modal/modalSlice';
 import { modalNames } from '@utils/constants/modalNames.js';
@@ -65,17 +64,12 @@ const ConfirmationForm = ({
       style={{ width: '100%' }}
       onSubmit={handleSubmit || formik.handleSubmit}
     >
-      <ConfirmCode formik={formik} inputRefs={inputRefs} />
-
-      {helperTextContent && (
-        <Box sx={styles.codeErrorWrapper}>
-          <CancelIcon sx={styles.codeErrorIcon} />
-          <Typography sx={styles.codeErrorText} variant='subtitle2'>
-            {t('modal.confirmation.code_error_text')}
-          </Typography>
-        </Box>
-      )}
-
+      <ConfirmCode
+        formik={formik}
+        helperTextContent={t('modal.confirmation.code_error_text')}
+        inputRefs={inputRefs}
+        isError={helperTextContent}
+      />
       <Box sx={styles.spamCheckContainer} variant='subtitle3'>
         <Typography sx={styles.mainText} variant='subtitle3'>
           {t('modal.confirmation.spam_check_text')}

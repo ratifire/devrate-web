@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useModalController } from '@utils/hooks/useModalController';
 import { modalNames } from '@utils/constants/modalNames';
 import { useActivateAccountMutation, useResendCodeMutation } from '@redux/api/slices/auth/authApiSlice';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { setCredentials } from '@redux/slices/auth/authSlice';
 import { setTokens } from '@redux/slices/auth/tokenSlice';
 import { useNavigate } from 'react-router';
@@ -17,6 +16,7 @@ import { styles } from './ActivationModal.styles';
 
 const ActivationModal = () => {
   const [isErrorAuth, setIsErrorAuth] = useState(false);
+  const inputRefs = useRef([]);
   const { t } = useTranslation();
   const { closeModal } = useModalController();
   const {
@@ -45,7 +45,6 @@ const ActivationModal = () => {
     }
   };
 
-  const inputRefs = useRef([]);
   const formik = useFormik({
     initialValues: {
       text0: '',
@@ -78,7 +77,8 @@ const ActivationModal = () => {
   };
 
   const isDisabled = !formik.dirty || !formik.isValid || formik.isSubmitting || isLoading;
-  const isErrorCode = isErrorResend || isErrorActivateAccount;
+  const isErrorCode = isErrorResend || isErrorActivateAccount || isErrorAuth;
+  const errorText = isErrorCode ? 'modal.activation.errors.code_error_text' : 'modal.activation.errors.server_error';
 
   return (
     <Box component='form' sx={styles.wrapper} onSubmit={formik.handleSubmit}>
@@ -92,19 +92,7 @@ const ActivationModal = () => {
         </Box>
       </Typography>
       <Box sx={styles.codeBox}>
-        <ConfirmCode formik={formik} helperTextContent={isErrorCode} inputRefs={inputRefs} />
-        {isErrorAuth && (
-          <Typography sx={styles.error}>
-            <CancelIcon sx={styles.codeErrorIcon} />
-            {t('modal.activation.errors.server_error')}
-          </Typography>
-        )}
-        {isErrorCode && (
-          <Typography sx={styles.error}>
-            <CancelIcon sx={styles.codeErrorIcon} />
-            {t('modal.activation.errors.code_error_text')}
-          </Typography>
-        )}
+        <ConfirmCode formik={formik} helperTextContent={t(errorText)} inputRefs={inputRefs} isError={isErrorCode} />
       </Box>
       <Box sx={styles.box}>
         <Typography>{t('modal.activation.subtitle')}</Typography>

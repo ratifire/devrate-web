@@ -1,8 +1,9 @@
-import { Box, TextField } from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { styles } from './ConfirmCode.styles';
 
-const ConfirmCode = ({ formik, fieldCount = 6, inputRefs, helperTextContent }) => {
+const ConfirmCode = ({ formik, fieldCount = 6, inputRefs, isError, helperTextContent }) => {
   const handleKeyDown = (event, index) => {
     const { key, ctrlKey, metaKey } = event;
 
@@ -62,50 +63,59 @@ const ConfirmCode = ({ formik, fieldCount = 6, inputRefs, helperTextContent }) =
   };
 
   return (
-    <Box sx={styles.formInput}>
-      {[...Array(fieldCount)].map((_, index) => (
-        <TextField
-          // eslint-disable-next-line react/no-array-index-key
-          key={index}
-          autoComplete='off'
-          inputProps={{
-            style: { textAlign: 'center' },
-            maxLength: 1,
-          }}
-          inputRef={(ele) => {
-            inputRefs.current[index] = ele;
-          }}
-          sx={{
-            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#B78AF7',
-              backgroundColor: 'transparent',
-            },
-            ...(helperTextContent && {
-              '& .MuiOutlinedInput-root fieldset': {
-                borderColor: '#ED0E0E !important',
+    <Box sx={styles.wrapper}>
+      <Box sx={styles.formInput}>
+        {[...Array(fieldCount)].map((_, index) => (
+          <TextField
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+            autoComplete='off'
+            inputProps={{
+              style: { textAlign: 'center' },
+              maxLength: 1,
+            }}
+            inputRef={(ele) => {
+              inputRefs.current[index] = ele;
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#B78AF7',
+                backgroundColor: 'transparent',
               },
-            }),
-            '& .MuiOutlinedInput-root': {
-              '& input:-webkit-autofill': {
-                WebkitBoxShadow: '0 0 0 100px transparent inset',
-                WebkitTextFillColor: 'inherit',
-                transition: 'background-color 5000s ease-in-out 0s',
+              ...(isError && {
+                '& .MuiOutlinedInput-root fieldset': {
+                  borderColor: '#ED0E0E !important',
+                },
+              }),
+              '& .MuiOutlinedInput-root': {
+                '& input:-webkit-autofill': {
+                  WebkitBoxShadow: '0 0 0 100px transparent inset',
+                  WebkitTextFillColor: 'inherit',
+                  transition: 'background-color 5000s ease-in-out 0s',
+                },
               },
-            },
-          }}
-          type='text'
-          value={formik.values[`text${index}`] ?? ''}
-          variant='outlined'
-          onKeyDown={(event) => handleKeyDown(event, index)}
-          onPaste={handlePaste}
-        />
-      ))}
+            }}
+            type='text'
+            value={formik.values[`text${index}`] ?? ''}
+            variant='outlined'
+            onKeyDown={(event) => handleKeyDown(event, index)}
+            onPaste={handlePaste}
+          />
+        ))}
+      </Box>
+      {isError && (
+        <Typography sx={styles.error}>
+          <CancelIcon sx={styles.codeErrorIcon} />
+          {helperTextContent}
+        </Typography>
+      )}
     </Box>
   );
 };
 
 ConfirmCode.propTypes = {
-  helperTextContent: PropTypes.bool,
+  isError: PropTypes.bool,
+  helperTextContent: PropTypes.string,
   inputRefs: PropTypes.object.isRequired,
   formik: PropTypes.object.isRequired,
   fieldCount: PropTypes.number,

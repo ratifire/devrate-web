@@ -15,9 +15,6 @@ export const styles = {
     height: '20px',
     color: theme.palette.error.mainConcentrated,
   }),
-  codeBox: {
-    position: 'relative',
-  },
   error: (theme) => ({
     position: 'absolute',
     width: '100%',
@@ -27,6 +24,9 @@ export const styles = {
     gap: '8px',
     color: theme.palette.error.mainConcentrated,
   }),
+  codeBox: {
+    position: 'relative',
+  },
   btnResend: (theme) => ({
     textTransform: 'none',
     backgroundColor: 'transparent',
