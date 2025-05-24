@@ -23,7 +23,6 @@ export const TAG_TYPES = {
   InterviewRequestByMasteryId: 'InterviewRequestByMasteryId',
   ScheduledInterview: 'ScheduledInterview',
   PassedInterview: 'PassedInterview',
-  ServiceWorkerNotification: 'ServiceWorkerNotification',
 };
 
 export const TAG_TYPES_ARRAY = Object.values(TAG_TYPES);
