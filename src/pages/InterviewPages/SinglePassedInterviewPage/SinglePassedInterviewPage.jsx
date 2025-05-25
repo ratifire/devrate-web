@@ -173,7 +173,7 @@ const SinglePassedInterviewPage = () => {
             </Suspense>
           </Paper>
 
-          {feedback && (
+          {(feedback || isLoading) && (
             <Paper sx={styles.interviewFeedback}>
               <Suspense fallback={<InterviewFeedbackSkeleton />}>
                 <MemoizedInterviewFeedback feedbackText={feedback} />

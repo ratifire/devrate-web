@@ -5,19 +5,22 @@ const InterviewInfoSkeleton = () => {
   return (
     <Box sx={styles.interviewInfoWrapper}>
       <Box sx={styles.interviewInfoTitleWrapper}>
-        <Skeleton height={24} variant='text' width={120} />
-        <Skeleton height={16} variant='text' width={80} />
+        <Box width='50%'>
+          <Skeleton height={32} variant='text' width='100%' />
+          <Skeleton height={24} width='45%' />
+        </Box>
+        <Skeleton height={24} variant='text' width='35%' />
       </Box>
-      <Skeleton height={16} sx={{ marginBottom: 2 }} variant='text' width={100} />
+      <Skeleton height={1} sx={{ marginBlock: 2 }} variant='text' width='100%' />
       <Box sx={styles.interviewSpecializationTitleWrapper}>
-        <Skeleton height={24} variant='text' width={150} />
-        <Skeleton height={20} variant='text' width={80} />
+        <Skeleton height={32} variant='text' width='40%' />
+        <Skeleton height={28} variant='text' width='18%' />
       </Box>
-      <Skeleton height={20} sx={{ marginBottom: 1 }} variant='text' width={180} />
+      <Skeleton height={24} sx={{ marginBottom: 1 }} variant='text' width='40%' />
       <Box sx={styles.hostWrapper}>
-        <Skeleton height={20} variant='text' width={120} />
+        <Skeleton height={24} variant='text' width='40%' />
       </Box>
-      <Skeleton height={16} variant='text' width={200} />
+      <Skeleton height={17} variant='text' width='40%' />
     </Box>
   );
 };

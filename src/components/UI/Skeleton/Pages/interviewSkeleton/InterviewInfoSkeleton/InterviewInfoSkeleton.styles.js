@@ -5,9 +5,8 @@ export const styles = {
   }),
   interviewInfoTitleWrapper: {
     display: 'flex',
-    flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'start',
   },
   interviewSpecializationTitleWrapper: (theme) => ({
     display: 'flex',
