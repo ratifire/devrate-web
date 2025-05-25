@@ -10,7 +10,6 @@ import {
   useDeleteInterviewRequestMutation,
   useDeleteTimeSlotsMutation,
 } from '@redux/api/slices/interviewRequestApiSlice.js';
-import { formatRoleLetterCase } from '@utils/helpers';
 import TimeSlotsGroup from '../TimeSlotsGroup';
 import RequestHeader from '../RequsestHeader';
 import { getSortedDatesWithLabel, groupDatesByDay, mergeTimeSlotsByRows } from '../interviewRequestsManageData.js';
@@ -199,11 +198,11 @@ const Participant = ({ data, specialization }) => {
         foundInterviews={foundTimeSlots}
         handleUpdateSlots={handleDeleteSelected}
         hasSelectedSlots={selectedSlots.length > 0}
-        interviewRequestObj={data}
+        interviewRequestId={data.id}
         languageCode={languageCode}
         languageName={languageName}
         pendingSlots={pendingSlots}
-        role={formatRoleLetterCase(role, t)}
+        role={role}
         selectedSpecialization={specialization}
         selectedTimeSlots={selectedTimeSlots}
         title={mainMasteryLevelWithName}
@@ -220,7 +219,7 @@ const Participant = ({ data, specialization }) => {
           <Typography sx={styles.text}>
             {t('interviewRequest.deleteAllRequests.question', {
               mastery: mainMasteryLevelWithName,
-              role: role ? formatRoleLetterCase(role, t) : '',
+              role: t(`interviewRequest.role.${role}`),
             })}
           </Typography>
         </DialogContent>

@@ -1,3 +1,3 @@
 export const urlWS = {
-  notification: '/ws/notifications',
+  notification: '/notifications-ws',
 };
