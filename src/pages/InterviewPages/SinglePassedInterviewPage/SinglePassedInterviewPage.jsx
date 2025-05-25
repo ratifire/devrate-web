@@ -3,7 +3,7 @@ import {
   InterviewFeedbackSkeleton,
   InterviewInfoSkeleton,
   SkillsSkeleton,
-  StatisticsSkeleton,
+  StatisticSkeleton,
   UserCardSkeleton,
 } from '@components/UI/Skeleton';
 import { Box, Paper, Typography } from '@mui/material';
@@ -101,26 +101,27 @@ const SinglePassedInterviewPage = () => {
     return <ErrorComponent />;
   }
 
-  if (isLoadingAvatar) {
-    return <UserCardSkeleton />;
-  }
-
   return (
     <Box className='InterviewsPage' sx={styles.mainContent}>
       <Paper sx={styles.userInfo}>
-        <Suspense fallback={<UserCardSkeleton />}>
-          <MemoizedUserCard
-            date={formatToLocalDateInterview(dateTime)}
-            firstName={firstName}
-            isViewBtn={false}
-            label='label'
-            lastName={lastName}
-            lvl={level}
-            role={userRole}
-            src={avatar?.userPicture}
-          />
-        </Suspense>
+        {isLoadingAvatar || !avatar ? (
+          <UserCardSkeleton />
+        ) : (
+          <Suspense fallback={<UserCardSkeleton />}>
+            <MemoizedUserCard
+              date={formatToLocalDateInterview(dateTime)}
+              firstName={firstName}
+              isViewBtn={false}
+              label='label'
+              lastName={lastName}
+              lvl={level}
+              role={userRole}
+              src={avatar?.userPicture}
+            />
+          </Suspense>
+        )}
       </Paper>
+
       <Paper sx={styles.interviewInfo}>
         <Suspense fallback={<InterviewInfoSkeleton />}>
           <MemoizedInterviewInfo />
@@ -164,7 +165,7 @@ const SinglePassedInterviewPage = () => {
           </Paper>
 
           <Paper sx={styles.statistics}>
-            <Suspense fallback={<StatisticsSkeleton />}>
+            <Suspense fallback={<StatisticSkeleton />}>
               <MemoizedStatistics
                 hardSkillMark={role === 'CANDIDATE' ? averageHardSkillsMark : 0}
                 softSkillMark={averageSoftSkillsMark}
