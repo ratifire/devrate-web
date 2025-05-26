@@ -50,16 +50,21 @@ const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
   const { interviewId } = useParams();
   const { mode } = useSelector((state) => state.theme);
-  const { data: interviewData, isLoading } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
+  const { data: interviewData, isFetching: isFetchingPassedInterview } = useGetPassedInterviewByIdQuery(
+    { interviewId },
+    { skip: !interviewId }
+  );
 
   const attendeeId = interviewData?.attendeeId ?? '';
   const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
 
-  const { data: userContacts } = useGetPersonalUserQuery(attendeeId, { skip: !attendeeId });
+  const { data: userContacts, isFetching: isFetchingContacts } = useGetPersonalUserQuery(attendeeId, {
+    skip: !attendeeId,
+  });
 
   const {
     data: avatar,
-    isLoading: isLoadingAvatar,
+    isFetching: isFetchingAvatar,
     isError: isErrorAvatar,
   } = useGetAvatarUserQuery(attendeeId, { skip: !attendeeId });
 
@@ -97,6 +102,8 @@ const SinglePassedInterviewPage = () => {
 
   const hasStatistics = (role === 'CANDIDATE' && averageHardSkillsMark > 0) || averageSoftSkillsMark > 0;
 
+  const isFetchingUserCard = isFetchingContacts || isFetchingAvatar || isFetchingPassedInterview;
+
   if (isErrorAvatar) {
     return <ErrorComponent />;
   }
@@ -104,7 +111,7 @@ const SinglePassedInterviewPage = () => {
   return (
     <Box className='InterviewsPage' sx={styles.mainContent}>
       <Paper sx={styles.userInfo}>
-        {isLoadingAvatar || !avatar ? (
+        {isFetchingUserCard ? (
           <UserCardSkeleton />
         ) : (
           <Suspense fallback={<UserCardSkeleton />}>
@@ -127,7 +134,7 @@ const SinglePassedInterviewPage = () => {
           <MemoizedInterviewInfo />
         </Suspense>
       </Paper>
-      {hasStatistics || isLoading ? (
+      {hasStatistics || isFetchingPassedInterview ? (
         <>
           <Paper sx={styles.interviewersAssessment}>
             <Typography sx={styles.interviewersAssessmentTitle} variant='h6'>
@@ -137,7 +144,7 @@ const SinglePassedInterviewPage = () => {
               {role === 'CANDIDATE' && (
                 <Paper sx={styles.hardSkills}>
                   <Suspense fallback={<SkillsSkeleton />}>
-                    {hardSkillsArray.length > 0 || isLoading ? (
+                    {hardSkillsArray.length > 0 || isFetchingPassedInterview ? (
                       <MemoizedInterviewHardSkills
                         averageHardSkillsMark={averageHardSkillsMark}
                         hardSkills={hardSkillsArray}
@@ -151,7 +158,7 @@ const SinglePassedInterviewPage = () => {
 
               <Paper sx={styles.sortSkills}>
                 <Suspense fallback={<SkillsSkeleton />}>
-                  {softSkillsArray.length > 0 || isLoading ? (
+                  {softSkillsArray.length > 0 || isFetchingPassedInterview ? (
                     <MemoizedInterviewSoftSkills
                       averageSoftSkillsMark={averageSoftSkillsMark}
                       softSkills={softSkillsArray}
@@ -165,19 +172,27 @@ const SinglePassedInterviewPage = () => {
           </Paper>
 
           <Paper sx={styles.statistics}>
-            <Suspense fallback={<StatisticSkeleton />}>
-              <MemoizedStatistics
-                hardSkillMark={role === 'CANDIDATE' ? averageHardSkillsMark : 0}
-                softSkillMark={averageSoftSkillsMark}
-              />
-            </Suspense>
+            {isFetchingPassedInterview ? (
+              <StatisticSkeleton />
+            ) : (
+              <Suspense fallback={<StatisticSkeleton />}>
+                <MemoizedStatistics
+                  hardSkillMark={role === 'CANDIDATE' ? averageHardSkillsMark : 0}
+                  softSkillMark={averageSoftSkillsMark}
+                />
+              </Suspense>
+            )}
           </Paper>
 
-          {(feedback || isLoading) && (
+          {(feedback || isFetchingPassedInterview) && (
             <Paper sx={styles.interviewFeedback}>
-              <Suspense fallback={<InterviewFeedbackSkeleton />}>
-                <MemoizedInterviewFeedback feedbackText={feedback} />
-              </Suspense>
+              {isFetchingPassedInterview ? (
+                <InterviewFeedbackSkeleton />
+              ) : (
+                <Suspense fallback={<InterviewFeedbackSkeleton />}>
+                  <MemoizedInterviewFeedback feedbackText={feedback} />
+                </Suspense>
+              )}
             </Paper>
           )}
         </>
