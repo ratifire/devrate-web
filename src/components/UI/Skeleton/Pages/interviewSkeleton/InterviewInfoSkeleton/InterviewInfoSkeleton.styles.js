@@ -8,11 +8,17 @@ export const styles = {
     justifyContent: 'space-between',
     alignItems: 'start',
   },
+  line: (theme) => ({
+    marginY: theme.spacing(2),
+  }),
   interviewSpecializationTitleWrapper: (theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: theme.spacing(1),
+  }),
+  interviewRole: (theme) => ({
     marginBottom: theme.spacing(1),
   }),
   hostWrapper: (theme) => ({

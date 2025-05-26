@@ -11,12 +11,12 @@ const InterviewInfoSkeleton = () => {
         </Box>
         <Skeleton height={24} variant='text' width='35%' />
       </Box>
-      <Skeleton height={1} sx={{ marginBlock: 2 }} variant='text' width='100%' />
+      <Skeleton height={1} sx={styles.line} variant='text' width='100%' />
       <Box sx={styles.interviewSpecializationTitleWrapper}>
         <Skeleton height={32} variant='text' width='40%' />
         <Skeleton height={28} variant='text' width='18%' />
       </Box>
-      <Skeleton height={24} sx={{ marginBottom: 1 }} variant='text' width='40%' />
+      <Skeleton height={24} sx={styles.interviewRole} variant='text' width='40%' />
       <Box sx={styles.hostWrapper}>
         <Skeleton height={24} variant='text' width='40%' />
       </Box>
