@@ -3,7 +3,7 @@ import {
   InterviewFeedbackSkeleton,
   InterviewInfoSkeleton,
   SkillsSkeleton,
-  StatisticsSkeleton,
+  StatisticSkeleton,
   UserCardSkeleton,
 } from '@components/UI/Skeleton';
 import { Box, Paper, Typography } from '@mui/material';
@@ -50,16 +50,21 @@ const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
   const { interviewId } = useParams();
   const { mode } = useSelector((state) => state.theme);
-  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
+  const { data: interviewData, isFetching: isFetchingPassedInterview } = useGetPassedInterviewByIdQuery(
+    { interviewId },
+    { skip: !interviewId }
+  );
 
   const attendeeId = interviewData?.attendeeId ?? '';
   const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
 
-  const { data: userContacts } = useGetPersonalUserQuery(attendeeId, { skip: !attendeeId });
+  const { data: userContacts, isFetching: isFetchingContacts } = useGetPersonalUserQuery(attendeeId, {
+    skip: !attendeeId,
+  });
 
   const {
     data: avatar,
-    isLoading: isLoadingAvatar,
+    isFetching: isFetchingAvatar,
     isError: isErrorAvatar,
   } = useGetAvatarUserQuery(attendeeId, { skip: !attendeeId });
 
@@ -97,36 +102,39 @@ const SinglePassedInterviewPage = () => {
 
   const hasStatistics = (role === 'CANDIDATE' && averageHardSkillsMark > 0) || averageSoftSkillsMark > 0;
 
+  const isFetchingUserCard = isFetchingContacts || isFetchingAvatar || isFetchingPassedInterview;
+
   if (isErrorAvatar) {
     return <ErrorComponent />;
-  }
-
-  if (isLoadingAvatar) {
-    return <UserCardSkeleton />;
   }
 
   return (
     <Box className='InterviewsPage' sx={styles.mainContent}>
       <Paper sx={styles.userInfo}>
-        <Suspense fallback={<UserCardSkeleton />}>
-          <MemoizedUserCard
-            date={formatToLocalDateInterview(dateTime)}
-            firstName={firstName}
-            isViewBtn={false}
-            label='label'
-            lastName={lastName}
-            lvl={level}
-            role={userRole}
-            src={avatar?.userPicture}
-          />
-        </Suspense>
+        {isFetchingUserCard ? (
+          <UserCardSkeleton />
+        ) : (
+          <Suspense fallback={<UserCardSkeleton />}>
+            <MemoizedUserCard
+              date={formatToLocalDateInterview(dateTime)}
+              firstName={firstName}
+              isViewBtn={false}
+              label='label'
+              lastName={lastName}
+              lvl={level}
+              role={userRole}
+              src={avatar?.userPicture}
+            />
+          </Suspense>
+        )}
       </Paper>
+
       <Paper sx={styles.interviewInfo}>
         <Suspense fallback={<InterviewInfoSkeleton />}>
           <MemoizedInterviewInfo />
         </Suspense>
       </Paper>
-      {hasStatistics ? (
+      {hasStatistics || isFetchingPassedInterview ? (
         <>
           <Paper sx={styles.interviewersAssessment}>
             <Typography sx={styles.interviewersAssessmentTitle} variant='h6'>
@@ -136,7 +144,7 @@ const SinglePassedInterviewPage = () => {
               {role === 'CANDIDATE' && (
                 <Paper sx={styles.hardSkills}>
                   <Suspense fallback={<SkillsSkeleton />}>
-                    {hardSkillsArray.length > 0 ? (
+                    {hardSkillsArray.length > 0 || isFetchingPassedInterview ? (
                       <MemoizedInterviewHardSkills
                         averageHardSkillsMark={averageHardSkillsMark}
                         hardSkills={hardSkillsArray}
@@ -150,7 +158,7 @@ const SinglePassedInterviewPage = () => {
 
               <Paper sx={styles.sortSkills}>
                 <Suspense fallback={<SkillsSkeleton />}>
-                  {softSkillsArray.length > 0 ? (
+                  {softSkillsArray.length > 0 || isFetchingPassedInterview ? (
                     <MemoizedInterviewSoftSkills
                       averageSoftSkillsMark={averageSoftSkillsMark}
                       softSkills={softSkillsArray}
@@ -164,19 +172,27 @@ const SinglePassedInterviewPage = () => {
           </Paper>
 
           <Paper sx={styles.statistics}>
-            <Suspense fallback={<StatisticsSkeleton />}>
-              <MemoizedStatistics
-                hardSkillMark={role === 'CANDIDATE' ? averageHardSkillsMark : 0}
-                softSkillMark={averageSoftSkillsMark}
-              />
-            </Suspense>
+            {isFetchingPassedInterview ? (
+              <StatisticSkeleton />
+            ) : (
+              <Suspense fallback={<StatisticSkeleton />}>
+                <MemoizedStatistics
+                  hardSkillMark={role === 'CANDIDATE' ? averageHardSkillsMark : 0}
+                  softSkillMark={averageSoftSkillsMark}
+                />
+              </Suspense>
+            )}
           </Paper>
 
-          {feedback && (
+          {(feedback || isFetchingPassedInterview) && (
             <Paper sx={styles.interviewFeedback}>
-              <Suspense fallback={<InterviewFeedbackSkeleton />}>
-                <MemoizedInterviewFeedback feedbackText={feedback} />
-              </Suspense>
+              {isFetchingPassedInterview ? (
+                <InterviewFeedbackSkeleton />
+              ) : (
+                <Suspense fallback={<InterviewFeedbackSkeleton />}>
+                  <MemoizedInterviewFeedback feedbackText={feedback} />
+                </Suspense>
+              )}
             </Paper>
           )}
         </>
