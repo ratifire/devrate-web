@@ -1114,7 +1114,7 @@ export const uk = {
       selectSpecializations: 'Спеціалізації',
       role: {
         CANDIDATE: 'Респондент',
-        INTERVIEWER: 'Інтерв’юер',
+        INTERVIEWER: "Інтерв'юер",
       },
       requestHeader: {
         titleLauncher: 'як',

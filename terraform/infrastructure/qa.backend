@@ -1,0 +1,4 @@
+bucket  = "skillzzy-front-terraform-qa"
+encrypt = true
+key     = "AWS/skillzzy-front-terraform-qa-infrastructure/terraform.tfstate"
+region  = "eu-north-1"
