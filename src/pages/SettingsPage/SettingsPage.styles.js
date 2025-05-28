@@ -15,5 +15,13 @@ export const styles = {
     gap: theme.spacing(4),
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     minHeight: 'calc(100vh - 124px)',
+
+    '@media (min-width: 1920px)': {
+      maxWidth: '450px',
+    },
+
+    '@media (max-width: 992px)': {
+      maxWidth: '300px',
+    },
   }),
 };
