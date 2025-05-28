@@ -30,8 +30,6 @@ const withAuth = (Component) => {
         try {
           const { userData, idToken, authToken } = await authorization({ code, state }).unwrap();
 
-          const { statusAuth } = userData;
-
           if (userData) {
             dispatch(setCredentials({ data: userData }));
           }
@@ -39,11 +37,13 @@ const withAuth = (Component) => {
           if (idToken && authToken) {
             dispatch(setTokens({ idToken, authToken }));
 
+            const { statusAuth } = userData;
+
             if (statusAuth === accountStatus.ACTIVE) {
               return navigate('/profile', { replace: true });
             }
 
-            openModal(modalNames.activationModal, { email: '', password: code });
+            openModal(modalNames.activationModal, { email: '', password: '' });
           }
           // eslint-disable-next-line no-unused-vars
         } catch (err) {
