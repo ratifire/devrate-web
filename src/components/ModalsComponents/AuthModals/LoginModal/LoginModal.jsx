@@ -5,15 +5,16 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Box, Link, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { setCredentials } from '@redux/slices/auth/authSlice.js';
-import { setTokens } from '@redux/slices/auth/tokenSlice.js';
+import { setCredentials } from '@redux/slices/auth/authSlice';
+import { setTokens } from '@redux/slices/auth/tokenSlice';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
-import { useLoginMutation } from '@redux/api/slices/auth/authApiSlice.js';
+import { useLoginMutation } from '@redux/api/slices/auth/authApiSlice';
 import { LoginSchema } from '@utils/validationSchemas';
 import { FormInput } from '@components/FormsComponents/Inputs';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
-import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '@utils/constants/modalNames.js';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord';
+import { modalNames } from '@utils/constants/modalNames';
+import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
 import styles from './LoginModal.styles';
 
 const initialValues = {
@@ -144,6 +145,7 @@ const LoginModal = () => {
             onClick={handleOpen}
           />
         </Box>
+        <OAuthSection />
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
             disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}
