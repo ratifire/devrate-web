@@ -17,7 +17,6 @@ const FormSelect = ({
   helperText,
   countries,
   disabled,
-  isTranslated,
   translatedKey,
   onOpen,
 }) => {
@@ -50,7 +49,7 @@ const FormSelect = ({
       >
         {countries.map((country) => (
           <MenuItem key={country} sx={styles.menuItem} value={country}>
-            {isTranslated ? t(`${translatedKey}.${country}`) : country}
+            {translatedKey ? t(`${translatedKey}.${country}`) : country}
           </MenuItem>
         ))}
       </Select>
@@ -75,7 +74,6 @@ FormSelect.propTypes = {
   error: PropTypes.bool,
   countries: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
-  isTranslated: PropTypes.bool,
   translatedKey: PropTypes.string,
   onOpen: PropTypes.func,
 };

@@ -55,7 +55,6 @@ const FeedbackProjectModal = () => {
 
       <form onSubmit={formik.handleSubmit}>
         <FormSelect
-          isTranslated
           required
           countries={feedbackOptions}
           handleBlur={formik.handleBlur}

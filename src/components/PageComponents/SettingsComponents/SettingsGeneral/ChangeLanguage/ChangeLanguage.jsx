@@ -51,7 +51,6 @@ const ChangeLanguage = () => {
       </Typography>
       <Box sx={styles.inputSelect}>
         <FormSelect
-          isTranslated
           required
           countries={LanguagesList}
           handleChange={handleChangeLanguage}
