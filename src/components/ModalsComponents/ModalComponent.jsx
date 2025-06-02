@@ -11,7 +11,7 @@ const ModalComponent = () => {
   const { closeModal } = useModalController();
 
   const handleClose = () => closeModal(modalType);
-  const modalSmallStyle = styles[modalNames[modalType]] || '';
+  const modalSmallStyle = styles[modalNames[modalType]] || {};
 
   return (
     <Modal
