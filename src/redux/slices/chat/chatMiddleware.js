@@ -4,16 +4,35 @@ import { initializeWebSocket, deactivateWebSocket, sendMessage } from './websock
 
 const chatMiddleware = (store) => (next) => (action) => {
   const state = store.getState().chat;
+  let isDispatchAllowed = true;
+
+  const safeDispatch = (action) => {
+    if (isDispatchAllowed) {
+      setTimeout(() => store.dispatch(action), 0);
+    }
+  };
 
   switch (action.type) {
-    case CHAT_ACTIONS.CONNECT:
-      initializeWebSocket(state.currentUserId, (newMessages) => {
-        store.dispatch(messagesList({ newMessages }));
-        if (newMessages.senderId !== state.currentUserId) store.dispatch(openBadge());
-      });
+    case CHAT_ACTIONS.CONNECT: {
+      const messageHandler = (newMessages) => {
+        if (!isDispatchAllowed) return;
+
+        try {
+          safeDispatch(messagesList({ newMessages }));
+          if (newMessages.senderId !== state.currentUserId) {
+            safeDispatch(openBadge());
+          }
+        } catch (error) {
+          console.error('Error handling message:', error);
+        }
+      };
+
+      initializeWebSocket(state.currentUserId, messageHandler);
       return next(connectWebsocket());
+    }
 
     case CHAT_ACTIONS.DISCONNECT:
+      isDispatchAllowed = false;
       deactivateWebSocket();
       return next(disconnectWebsocket());
 
@@ -26,12 +45,11 @@ const chatMiddleware = (store) => (next) => (action) => {
   }
 };
 
-export default chatMiddleware;
-
-// Action creators
 export const connectChat = () => ({ type: CHAT_ACTIONS.CONNECT });
 export const disconnectChat = () => ({ type: CHAT_ACTIONS.DISCONNECT });
 export const sendChatMessage = (message) => ({
   type: CHAT_ACTIONS.SEND_MESSAGE,
   payload: { message },
 });
+
+export default chatMiddleware;

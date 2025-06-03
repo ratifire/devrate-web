@@ -1,5 +1,5 @@
 import { Badge, IconButton, Popover } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '@assets/icons/message.svg?react';
 import { openList, closeList, closeBadge, setCurrentUser } from '@redux/slices/chat/chatSlice.js';
@@ -14,21 +14,23 @@ const Chat = () => {
   const currentUser = useSelector(selectCurrentUser) || {};
   const { id } = currentUser.data;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Викликаємо підключення чату після монтування компонента
+    dispatch(setCurrentUser(id));
+    dispatch(connectChat());
+  }, [dispatch, id]);
+
   const handleOpen = (event) => {
     event.preventDefault();
     setBellButton(event.currentTarget);
     dispatch(openList());
     dispatch(closeBadge());
   };
+
   const handleClose = () => {
     dispatch(closeList());
   };
-  const handleConnect = () => {
-    dispatch(setCurrentUser(id));
-    dispatch(connectChat());
-  };
-
-  handleConnect();
 
   return (
     <>

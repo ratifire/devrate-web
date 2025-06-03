@@ -43,8 +43,17 @@ const chatSlice = createSlice({
       state.chat = false;
     },
     messagesList: (state, action) => {
-      state.messages.push(...action.payload.newMessages);
-      chatApiSlice.util.invalidateTags([TAG_TYPES.ChatHistory]);
+      try {
+        const newMessages = Array.isArray(action.payload?.newMessages) ? action.payload.newMessages : [];
+
+        if (newMessages.length > 0) {
+          state.messages = [...state.messages, ...newMessages];
+        }
+
+        chatApiSlice.util.invalidateTags([TAG_TYPES.ChatHistory]);
+      } catch (error) {
+        console.error('Error in messagesList reducer:', error);
+      }
     },
     connectWebsocket: (state) => {
       state.isConnected = true;

@@ -2,55 +2,44 @@ import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 let client = null;
-let subscriptions = {};
 
-export const getWebSocketClient = () => client;
-
-export const initializeWebSocket = (currentUserId, onMessageReceived) => {
-  if (client) return client;
-
+export const initializeWebSocket = (userId, onMessage) => {
   const socket = new SockJS(`${import.meta.env.VITE_API_DEV_URL}/chat`);
+
   client = new Client({
-    reconnectDelay: 5000,
-    heartbeatIncoming: 10000,
-    heartbeatOutgoing: 10000,
     webSocketFactory: () => socket,
+    reconnectDelay: 5000,
     onConnect: () => {
-      subscriptions.messages = client.subscribe(`/topic/messages/${currentUserId}`, (message) => {
-        onMessageReceived(JSON.parse(message.body));
+      client.subscribe(`/topic/messages/${userId}`, (message) => {
+        const parsedMessage = JSON.parse(message.body);
+        onMessage(parsedMessage);
       });
     },
-    onDisconnect: () => {
-      client = null;
-    },
     onStompError: (frame) => {
-      new Error('STOMP error:', frame.headers.message);
+      console.error('STOMP error:', frame.headers.message);
     },
   });
+
   client.activate();
-  return client;
 };
 
-export const deactivateWebSocket = () => {
-  if (client) {
-    Object.values(subscriptions).forEach((sub) => sub.unsubscribe());
-    subscriptions = {};
-    client.deactivate();
-    client = null;
-  }
-};
-
-export const sendMessage = (message, receiverId, senderId) => {
-  if (!client) return;
+export const sendMessage = (content, receiverId, senderId) => {
+  if (!client?.connected) return;
 
   client.publish({
     destination: '/app/chat',
     body: JSON.stringify({
       senderId,
       receiverId,
-      payload: message.trim(),
-      status: '',
+      payload: content,
       dateTime: new Date().toISOString(),
     }),
   });
+};
+
+export const deactivateWebSocket = () => {
+  if (client) {
+    client.deactivate();
+    client = null;
+  }
 };

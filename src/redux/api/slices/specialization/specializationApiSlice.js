@@ -1,5 +1,3 @@
-// In specializationApiSlice.js
-
 import { apiSlice } from '@redux/api/apiSlice.js';
 import { TAG_TYPES } from '@utils/constants/tagTypes.js';
 import { lvlMastery, masteryLvl } from '@utils/constants/masteryLvl.js';
