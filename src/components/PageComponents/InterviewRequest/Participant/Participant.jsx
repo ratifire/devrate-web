@@ -24,6 +24,7 @@ const Participant = ({ data, specialization }) => {
   const [deleteTimeSlots] = useDeleteTimeSlotsMutation();
   const containerRef = useRef(null);
   const [slotsPerRow, setSlotsPerRow] = useState(0);
+  const { role, desiredInterview, comment, timeSlots, matchedInterview } = data || {};
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,8 +34,6 @@ const Participant = ({ data, specialization }) => {
         const innerGap = 16 * 5;
         const timeSlotWidth = 209;
         const calculatedSlots = Math.floor((containerWidth - (innerOffset + innerGap)) / timeSlotWidth);
-        // const calculatedGap = 16 * (calculatedSlots - 1);
-        // calculatedSlots -= calculatedGap;
         setSlotsPerRow(calculatedSlots);
       }
     };
@@ -44,26 +43,6 @@ const Participant = ({ data, specialization }) => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     if (containerRef.current) {
-  //       const containerWidth = containerRef.current.offsetWidth;
-  //       const innerOffset = 16 * 2; // Внутренние отступы контейнера (padding)
-  //       const timeSlotWidth = 209; // Ширина одного слота
-  //
-  //       // Рассчитываем количество слотов с учетом отступов и промежутков
-  //       const calculatedSlots = Math.floor((containerWidth - innerOffset) / (timeSlotWidth + 16)); // 16 - промежуток между слотами
-  //
-  //       // Убедимся, что slotsPerRow не меньше 1
-  //       setSlotsPerRow(Math.max(1, calculatedSlots));
-  //     }
-  //   };
-  //
-  //   handleResize(); // Вызываем сразу при монтировании
-  //   window.addEventListener('resize', handleResize);
-  //
-  //   return () => window.removeEventListener('resize', handleResize);
-  // }, []);
 
   const mainMasteryLevelWithName = useMemo(() => {
     if (!specialization || typeof specialization !== 'object') {
@@ -81,9 +60,7 @@ const Participant = ({ data, specialization }) => {
     return t(`specialization.language.name.${languageCode}`) || 'Unknown Language';
   }, [languageCode, t]);
 
-  const { role, desiredInterview, comment, timeSlots, matchedInterview } = data || {};
-
-  const pandingTimeSlots = timeSlots.filter((slot) => slot.status === 'PENDING').length;
+  const pendingTimeSlots = timeSlots.filter((slot) => slot.status === 'PENDING').length;
   const sortedDatesWithLabel = useMemo(() => getSortedDatesWithLabel(data || {}), [data]);
   const sortedDatesByDay = useMemo(() => groupDatesByDay(sortedDatesWithLabel), [sortedDatesWithLabel]);
 
@@ -100,17 +77,30 @@ const Participant = ({ data, specialization }) => {
   const selectedTimeSlots = timeSlots.length;
   const foundTimeSlots = matchedInterview;
 
-  const handleSelectSlot = ({ date, status }) => {
-    setSelectedSlots((prev) => {
-      const slotExists = prev.some((slot) => slot.date === date);
-      if (slotExists) {
-        return prev.filter((slot) => slot.date !== date);
-      }
-      return [...prev, { date, status }];
-    });
+  const deleteAllSlots = async () => {
+    try {
+      await deleteRequest(data?.id).unwrap();
+      enqueueSnackbar(t('interviewRequest.notifications.delete.allTimeSlots.success'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+      setSelectedSlots([]);
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('interviewRequest.notifications.delete.allTimeSlots.error'), {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'right',
+        },
+      });
+    }
   };
 
-  const handleDeleteSelected = () => {
+  const handleDeleteSelected = async () => {
     try {
       // Фильтруем PENDING слоты из выбранных
       const pendingSelectedSlots = selectedSlots.filter((slot) => slot.status === 'pending');
@@ -126,15 +116,19 @@ const Participant = ({ data, specialization }) => {
       // Если есть PENDING слоты среди выбранных, проверяем условие
       if (
         normalizedSelectedDates.length > 0 &&
-        pandingTimeSlots &&
-        desiredInterview > pandingTimeSlots - normalizedSelectedDates.length
+        pendingTimeSlots &&
+        desiredInterview > pendingTimeSlots - normalizedSelectedDates.length
       ) {
-        enqueueSnackbar(t('The number of timeslots must be greater than or equal to the number of interviews'), {
+        enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.warning'), {
           variant: 'warning',
           anchorOrigin: { vertical: 'top', horizontal: 'center' },
           autoHideDuration: 3000,
         });
         return;
+      }
+
+      if (selectedSlots.length === timeSlots.length) {
+        return deleteAllSlots();
       }
 
       // Если PENDING слотов нет или их достаточно, удаляем выбранные слоты
@@ -158,27 +152,18 @@ const Participant = ({ data, specialization }) => {
     }
   };
 
+  const handleSelectSlot = ({ date, status }) => {
+    setSelectedSlots((prev) => {
+      const slotExists = prev.some((slot) => slot.date === date);
+      if (slotExists) {
+        return prev.filter((slot) => slot.date !== date);
+      }
+      return [...prev, { date, status }];
+    });
+  };
+
   const handleDeleteAllSlots = async () => {
-    try {
-      await deleteRequest(data?.id).unwrap();
-      enqueueSnackbar(t('interviewRequest.notifications.delete.allTimeSlots.success'), {
-        variant: 'success',
-        anchorOrigin: {
-          vertical: 'bottom',
-          horizontal: 'right',
-        },
-      });
-      setSelectedSlots([]);
-      // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      enqueueSnackbar(t('interviewRequest.notifications.delete.allTimeSlots.error'), {
-        variant: 'error',
-        anchorOrigin: {
-          vertical: 'bottom',
-          horizontal: 'right',
-        },
-      });
-    }
+    await deleteAllSlots();
     setOpenDeleteDialog(false);
   };
 
