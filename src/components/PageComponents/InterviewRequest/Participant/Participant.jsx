@@ -24,6 +24,7 @@ const Participant = ({ data, specialization }) => {
   const [deleteTimeSlots] = useDeleteTimeSlotsMutation();
   const containerRef = useRef(null);
   const [slotsPerRow, setSlotsPerRow] = useState(0);
+  const { role, desiredInterview, comment, timeSlots, matchedInterview } = data || {};
 
   useEffect(() => {
     const handleResize = () => {
@@ -81,8 +82,6 @@ const Participant = ({ data, specialization }) => {
     return t(`specialization.language.name.${languageCode}`) || 'Unknown Language';
   }, [languageCode, t]);
 
-  const { role, desiredInterview, comment, timeSlots, matchedInterview } = data || {};
-
   const pandingTimeSlots = timeSlots.filter((slot) => slot.status === 'PENDING').length;
   const sortedDatesWithLabel = useMemo(() => getSortedDatesWithLabel(data || {}), [data]);
   const sortedDatesByDay = useMemo(() => groupDatesByDay(sortedDatesWithLabel), [sortedDatesWithLabel]);
@@ -110,54 +109,6 @@ const Participant = ({ data, specialization }) => {
     });
   };
 
-  const handleDeleteSelected = () => {
-    try {
-      // Фильтруем PENDING слоты из выбранных
-      const pendingSelectedSlots = selectedSlots.filter((slot) => slot.status === 'pending');
-      const normalizedSelectedDates = pendingSelectedSlots.map((slot) =>
-        DateTime.fromISO(slot.date, { zone: 'utc' }).toFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-      );
-
-      // Все выбранные даты для удаления
-      const selectedDates = selectedSlots.map((slot) =>
-        DateTime.fromISO(slot.date, { zone: 'utc' }).toFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-      );
-
-      // Если есть PENDING слоты среди выбранных, проверяем условие
-      if (
-        normalizedSelectedDates.length > 0 &&
-        pandingTimeSlots &&
-        desiredInterview > pandingTimeSlots - normalizedSelectedDates.length
-      ) {
-        enqueueSnackbar(t('The number of timeslots must be greater than or equal to the number of interviews'), {
-          variant: 'warning',
-          anchorOrigin: { vertical: 'top', horizontal: 'center' },
-          autoHideDuration: 3000,
-        });
-        return;
-      }
-
-      // Если PENDING слотов нет или их достаточно, удаляем выбранные слоты
-      deleteTimeSlots({
-        id: data.id,
-        timeSlots: selectedDates,
-      });
-
-      setSelectedSlots([]);
-
-      enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.success'), {
-        variant: 'success',
-        anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
-      });
-      // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.error') || 'Error deleting time slots', {
-        variant: 'error',
-        anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
-      });
-    }
-  };
-
   const handleDeleteAllSlots = async () => {
     try {
       await deleteRequest(data?.id).unwrap();
@@ -180,6 +131,58 @@ const Participant = ({ data, specialization }) => {
       });
     }
     setOpenDeleteDialog(false);
+  };
+
+  const handleDeleteSelected = async () => {
+    try {
+      // Фильтруем PENDING слоты из выбранных
+      const pendingSelectedSlots = selectedSlots.filter((slot) => slot.status === 'pending');
+      const normalizedSelectedDates = pendingSelectedSlots.map((slot) =>
+        DateTime.fromISO(slot.date, { zone: 'utc' }).toFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+      );
+
+      // Все выбранные даты для удаления
+      const selectedDates = selectedSlots.map((slot) =>
+        DateTime.fromISO(slot.date, { zone: 'utc' }).toFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+      );
+
+      // Если есть PENDING слоты среди выбранных, проверяем условие
+      if (
+        normalizedSelectedDates.length > 0 &&
+        pandingTimeSlots &&
+        desiredInterview > pandingTimeSlots - normalizedSelectedDates.length
+      ) {
+        enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.warning'), {
+          variant: 'warning',
+          anchorOrigin: { vertical: 'top', horizontal: 'center' },
+          autoHideDuration: 3000,
+        });
+        return;
+      }
+
+      if (selectedSlots.length === timeSlots.length) {
+        return handleDeleteAllSlots();
+      }
+
+      // Если PENDING слотов нет или их достаточно, удаляем выбранные слоты
+      deleteTimeSlots({
+        id: data.id,
+        timeSlots: selectedDates,
+      });
+
+      setSelectedSlots([]);
+
+      enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.success'), {
+        variant: 'success',
+        anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+      });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('interviewRequest.notifications.delete.oneTimeSlot.error') || 'Error deleting time slots', {
+        variant: 'error',
+        anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+      });
+    }
   };
 
   const handleOpenDeleteDialog = () => {
