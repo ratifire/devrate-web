@@ -53,10 +53,6 @@ const InterviewRequest = () => {
 
   const specializationObject = specializations?.find((item) => item.id === mastery) || null;
 
-  const getUserByRole = (role) => {
-    return userData?.find(({ role: userRole }) => userRole === role) || null;
-  };
-
   return (
     <Box>
       <Box sx={styles.header}>
@@ -103,22 +99,12 @@ const InterviewRequest = () => {
       {(!userData || !userData?.length) && !isUserDataLoading ? (
         <EmptyInterviewTab isSpecializations svg={emptyInterviewTabsPictures.emptyReqestPic} tab='Request' />
       ) : (
-        <Box>
-          {getUserByRole('CANDIDATE') && (
-            <Participant
-              data={getUserByRole('CANDIDATE')}
-              specialization={specializationObject}
-              userId={getUserByRole('CANDIDATE')?.id}
-            />
-          )}
-          {getUserByRole('INTERVIEWER') && (
-            <Participant
-              data={getUserByRole('INTERVIEWER')}
-              specialization={specializationObject}
-              userId={getUserByRole('INTERVIEWER')?.id}
-            />
-          )}
-        </Box>
+        <>
+          {userData &&
+            userData.map((data) => (
+              <Participant key={data.id} data={data} specialization={specializationObject} userId={data.id} />
+            ))}
+        </>
       )}
     </Box>
   );
