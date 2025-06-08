@@ -1,10 +1,12 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import { Link as RouterLink } from 'react-router';
+import navigationLinks from '@router/links.js';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import UserAvatar from '../../UserAvatar';
 import { styles } from './UserCard.styles';
 
-const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClick, label }) => {
+const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClick, label, hostId }) => {
   const fullName = `${firstName} ${lastName}`;
   return (
     <Box sx={styles.wrapper}>
@@ -18,9 +20,11 @@ const UserCard = ({ firstName, lastName, src, role, date, lvl, isViewBtn, onClic
           userName={fullName}
         />
         <Box sx={styles.boxInfo}>
-          <Typography component='h5' variant='h5'>
-            {fullName}
-          </Typography>
+          <Link color='inherit' component={RouterLink} to={`${navigationLinks.profile}/${hostId}`} underline='none'>
+            <Typography component='h5' variant='h5'>
+              {fullName}
+            </Typography>
+          </Link>
           <Typography component='p' sx={styles.role} variant='body'>
             {role}
           </Typography>
@@ -47,6 +51,7 @@ UserCard.propTypes = {
   isViewBtn: PropTypes.bool,
   label: PropTypes.string,
   onClick: PropTypes.func,
+  hostId: PropTypes.number,
 };
 
 export default UserCard;

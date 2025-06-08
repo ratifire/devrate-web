@@ -5,13 +5,21 @@ import { useTranslation } from 'react-i18next';
 import { formatDateAndTime } from '@utils/helpers';
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import navigationLinks from '@router/links';
+import { useGetMasteriesQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
 import { styles } from './SideBarEvent.styles';
 
 const SideBarEvent = ({ event, refHandler, passedInterview }) => {
-  const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName } = event;
+  const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName, hostMasteryId } = event;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { interviewId } = useParams();
+  let userMasteryLevel = masteryLevel;
+
+  const { data: allSkills } = useGetMasteriesQuery(hostMasteryId, { skip: !hostMasteryId });
+
+  if (event.role === 'INTERVIEWER') {
+    userMasteryLevel = allSkills.level;
+  }
 
   const handleClick = (e) => {
     if (e.target.tagName !== 'A') {
@@ -36,8 +44,8 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
           <Typography component='div' sx={styles.title} variant='h6'>
             {title}
           </Typography>
-          <Typography component='div' sx={styles[lvlMastery[masteryLevel]]} variant='subtitle2'>
-            {lvlMastery[masteryLevel]}
+          <Typography component='div' sx={styles[lvlMastery[userMasteryLevel]]} variant='subtitle2'>
+            {lvlMastery[userMasteryLevel]}
           </Typography>
         </Box>
         <Typography component='div' sx={styles.eventDate} variant='body2'>
@@ -67,6 +75,7 @@ SideBarEvent.propTypes = {
     hostId: PropTypes.number.isRequired,
     hostFirstName: PropTypes.string.isRequired,
     hostLastName: PropTypes.string.isRequired,
+    hostMasteryId: PropTypes.number.isRequired,
   }).isRequired,
   refHandler: PropTypes.func,
   passedInterview: PropTypes.bool,
