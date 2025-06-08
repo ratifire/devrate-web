@@ -1133,6 +1133,7 @@ export const en = {
       notifications: {
         delete: {
           oneTimeSlot: {
+            warning: 'The number of timeslots must be greater than or equal to the number of interviews',
             success: 'Deleted slot successfully',
             error: 'Something went wrong',
           },
