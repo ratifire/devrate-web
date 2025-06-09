@@ -14,7 +14,7 @@ import { FormInput } from '@components/FormsComponents/Inputs';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord';
 import { modalNames } from '@utils/constants/modalNames';
-import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
+// import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
 import styles from './LoginModal.styles';
 
 const initialValues = {
@@ -145,7 +145,7 @@ const LoginModal = () => {
             onClick={handleOpen}
           />
         </Box>
-        <OAuthSection />
+        {/*<OAuthSection />*/}
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
             disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}

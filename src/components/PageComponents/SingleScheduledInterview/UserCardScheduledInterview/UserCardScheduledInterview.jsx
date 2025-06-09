@@ -7,18 +7,25 @@ import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSl
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { UserCardScheduledInterviewSkeleton } from '@components/UI/Skeleton';
 import { openChat } from '@redux/slices/chat/chatSlice';
+import { useGetMasteriesQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
 
 const UserCardScheduledInterview = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { hostFirstName, hostLastName, title, hostId, masteryLevel } = location.state.event;
+  const { hostFirstName, hostLastName, title, hostId, masteryLevel, hostMasteryId } = location.state.event;
+  let userMasteryLevel = masteryLevel;
 
   const {
     data: avatar,
     isLoading: isLoadingAvatar,
     isError: isErrorAvatar,
   } = useGetAvatarUserQuery(hostId, { skip: !hostId });
+
+  const { data: allSkills } = useGetMasteriesQuery(hostMasteryId, { skip: !hostMasteryId });
+  if (location.state.event.role === 'INTERVIEWER') {
+    userMasteryLevel = allSkills.level;
+  }
 
   const handleMessage = () => {
     dispatch(
@@ -40,9 +47,10 @@ const UserCardScheduledInterview = () => {
       data='03/06/2023'
       date={t('singleScheduledInterview.userCardScheduledInterview.interviewLvl')}
       firstName={hostFirstName}
+      hostId={hostId}
       label={t('singleScheduledInterview.userCardScheduledInterview.btn')}
       lastName={hostLastName}
-      lvl={lvlMastery[masteryLevel]}
+      lvl={lvlMastery[userMasteryLevel]}
       role={title}
       src={avatar?.userPicture}
       onClick={handleMessage}

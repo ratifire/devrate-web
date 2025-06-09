@@ -142,7 +142,13 @@ const ScheduledMeeting = () => {
         <Typography component='p' sx={styles.boxInfoText} variant='subtitle2'>
           {t('singleScheduledInterview.scheduledMeeting.participants')}:
           <Typography component='span' variant='body'>
-            {hostFullName}; {userFullName}
+            <Link color='inherit' component={RouterLink} to={`${navigationLinks.profile}/${hostId}`} underline='none'>
+              {hostFullName}
+            </Link>
+            {'; '}
+            <Link color='inherit' component={RouterLink} to={`${navigationLinks.profile}/${id}`} underline='none'>
+              {userFullName}
+            </Link>
           </Typography>
         </Typography>
       </Box>
@@ -175,7 +181,10 @@ const ScheduledMeeting = () => {
       <Typography component='p' variant='body2'>
         <Trans
           components={{
-            a: <Link component={RouterLink} sx={styles.link} to='/' />,
+            a: (
+              // <Link component={RouterLink} sx={styles.link} to='/faq' />,
+              <Link component={RouterLink} sx={styles.link} to='/faq#19' />
+            ),
           }}
           i18nKey='singleScheduledInterview.scheduledMeeting.link'
         />
