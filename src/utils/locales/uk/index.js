@@ -1356,5 +1356,8 @@ export const uk = {
       zambia: 'Замбія',
       zimbabwe: 'Зімбабве',
     },
+    notification: {
+      error: 'Щось пішло не так... Спробуйте ще раз!',
+    },
   },
 };
