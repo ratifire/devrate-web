@@ -118,6 +118,7 @@ const SinglePassedInterviewPage = () => {
             <MemoizedUserCard
               date={formatToLocalDateInterview(dateTime)}
               firstName={firstName}
+              id={attendeeId}
               isViewBtn={false}
               label='label'
               lastName={lastName}
