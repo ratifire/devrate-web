@@ -100,4 +100,7 @@ export const interviewDark = {
       backgroundColor: 'transparent',
     },
   },
+  feedback: {
+    feedbackBox: '#3E3E40',
+  },
 };

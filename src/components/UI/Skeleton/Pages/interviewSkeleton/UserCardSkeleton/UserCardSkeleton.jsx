@@ -5,15 +5,14 @@ const UserCardSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.box}>
-        <Skeleton height={64} sx={{ borderRadius: 2 }} variant='rectangular' width={64} />
+        <Skeleton height={'132px'} sx={{ borderRadius: 2 }} variant='rectangular' width={'132px'} />
         <Box sx={styles.boxInfo}>
-          <Skeleton height={24} variant='text' width={120} />
-          <Skeleton height={20} variant='text' width={100} />
-          <Skeleton height={20} variant='text' width={80} />
-          <Skeleton height={18} variant='text' width={60} />
+          <Skeleton height={32} variant='rounded' />
+          <Skeleton height={24} variant='rounded' />
+          <Skeleton height={24} variant='rounded' />
+          <Skeleton height={28} variant='rounded' />
         </Box>
       </Box>
-      <Skeleton height={40} sx={styles.btn} variant='rounded' />
     </Box>
   );
 };

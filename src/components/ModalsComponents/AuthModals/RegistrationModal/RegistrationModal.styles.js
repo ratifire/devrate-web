@@ -37,23 +37,6 @@ const styles = {
       marginBottom: '16px',
     },
   },
-  policyTermsContainer: {
-    textAlign: 'center',
-    fontSize: '14px',
-    lineHeight: 1.43,
-  },
-  policyTermsLink: (theme) => ({
-    pointerEvents: 'none', //Remove it to enable links
-    fontFamily: 'Open Sans, sans-serif',
-    fontSize: '16px',
-    lineHeight: 1.5,
-    marginRight: '24px',
-    color: theme.palette.action.active,
-    textDecoration: 'underline',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  }),
   tooltip: (theme) => ({
     fontSize: '14px',
     fontWeight: 300,
@@ -70,6 +53,11 @@ const styles = {
     borderRadius: theme.spacing(2),
     padding: '12px',
   }),
+  link: {
+    pointerEvents: 'none',
+    color: '#B78AF7',
+    textDecoration: 'none',
+  },
 };
 
 export default styles;
