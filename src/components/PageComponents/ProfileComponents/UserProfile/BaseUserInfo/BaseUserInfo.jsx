@@ -10,6 +10,7 @@ import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSl
 import UserAvatar from '@components/UI/UserAvatar';
 // import Bookmark from '@components/UI/Bookmark';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
+import { makeCorrectCountryCase } from '@utils/helpers/caseHandler.js';
 import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = ({ id }) => {
@@ -67,7 +68,7 @@ const BaseUserInfo = ({ id }) => {
         </Typography>
         <Typography sx={styles.city} variant='subtitle2'>
           <LocationOnIcon sx={styles.icon} />
-          {`${getCity ? getCity + ',' : ''} ${t(`countriesList.${getCountry}`)}`}
+          {`${getCity ? getCity + ',' : ''} ${t(`countriesList.${makeCorrectCountryCase(getCountry)}`)}`}
         </Typography>
       </Box>
       <Box sx={styles.buttons}>
