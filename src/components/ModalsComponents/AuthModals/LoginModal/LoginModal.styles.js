@@ -8,9 +8,6 @@ const styles = {
     fontFamily: 'Open Sans, sans-serif',
     color: theme.palette.neutral[100],
     marginBottom: theme.spacing(4),
-    [theme.breakpoints.down('xl')]: {
-      marginBottom: theme.spacing(2),
-    },
   }),
   textLink: (theme) => ({
     fontSize: '14px',
