@@ -49,7 +49,7 @@ const StepPersonal = () => {
     firstName,
     lastName,
     city,
-    country: country.toLowerCase(),
+    country: country?.toLowerCase(),
     status,
     description,
   };
