@@ -80,9 +80,9 @@ export const uk = {
         formPart1: 'Зв’яжіться',
         formPart2: 'з нами',
         placeholderName: 'Ім’я Прізвище',
-        placeholderEmail: 'Введіть вашу email адресу',
-        placeholderRequest: 'Введіть ваш запит...',
-        buttonText: 'НАДІСЛАТИ',
+        placeholderEmail: 'Введіть свою e-mail адресу',
+        placeholderRequest: 'Опишіть свій запит...',
+        buttonText: 'Надіслати',
       },
       links: {
         home_page: 'Головну сторінку',
