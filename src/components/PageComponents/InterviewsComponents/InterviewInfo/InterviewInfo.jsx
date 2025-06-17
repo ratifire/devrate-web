@@ -19,7 +19,6 @@ const InterviewInfo = () => {
     attendeeId = null,
     role = '',
     specialization = '',
-    masteryLevel = 1,
     attendeeMasteryLevel = '',
     attendeeSpecialization = '',
   } = interviewData ?? {};
@@ -47,8 +46,8 @@ const InterviewInfo = () => {
         <Typography sx={styles.interviewSpecialization} variant='h6'>
           {specialization}
         </Typography>
-        <Typography sx={styles[lvlMastery[masteryLevel]?.toLowerCase()]} variant='subtitle2'>
-          {`Level ${lvlMastery[masteryLevel]}`}
+        <Typography sx={styles[lvlMastery[attendeeMasteryLevel]?.toLowerCase()]} variant='subtitle2'>
+          {`Level ${lvlMastery[attendeeMasteryLevel]}`}
         </Typography>
       </Box>
       <Typography sx={styles.role} variant='body1'>
