@@ -31,10 +31,8 @@ const styles = {
   },
   wrapperBtn: {
     marginTop: '24px',
-    marginBottom: '24px',
     '@media( max-width: 1280px )': {
       marginTop: '16px',
-      marginBottom: '16px',
     },
   },
   tooltip: (theme) => ({

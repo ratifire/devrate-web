@@ -40,6 +40,7 @@ const UserCardScheduledInterview = () => {
       data='03/06/2023'
       date={t('singleScheduledInterview.userCardScheduledInterview.interviewLvl')}
       firstName={hostFirstName}
+      id={hostId}
       label={t('singleScheduledInterview.userCardScheduledInterview.btn')}
       lastName={hostLastName}
       lvl={lvlMastery[masteryLevel]}
