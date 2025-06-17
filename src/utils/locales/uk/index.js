@@ -1004,7 +1004,7 @@ export const uk = {
         title: 'Інтерв’ю',
         event: {
           role: 'Роль',
-          host: 'Хост',
+          host: "Інтерв'юер",
           statusInProcess: 'В процесі',
           statusAwaitingFeedback: 'Очікується відгук',
         },
@@ -1019,7 +1019,7 @@ export const uk = {
         interviewInfoHourAgo: 'година (годин) тому',
         interviewInfoToday: 'Пройдено сьогодні',
         interviewInfoRole: 'Ваша роль',
-        interviewInfoHost: 'Хост',
+        interviewInfoHost: "Інтерв'юер",
         interviewFeedbackTitle: 'Відгук співбесідника',
         interviewFeedbackReadLess: 'Читати менше',
         interviewFeedbackReadMore: 'Читати більше',
