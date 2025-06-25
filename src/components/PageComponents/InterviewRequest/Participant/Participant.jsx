@@ -68,7 +68,6 @@ const Participant = ({ data, specialization }) => {
   sortedDatesByDay.forEach((day) => {
     slotsByDay[day.date] = day.items;
   });
-
   const mergedSlots = useMemo(() => {
     if (slotsPerRow === 0) return [];
     return mergeTimeSlotsByRows(slotsByDay, slotsPerRow);
@@ -232,6 +231,7 @@ const Participant = ({ data, specialization }) => {
         mergedSlots.map((item) => (
           <TimeSlotsGroup
             key={item.dateRange}
+            role={data.role}
             selectedSlots={selectedSlots}
             slotsPerRow={slotsPerRow}
             timeSlots={item}

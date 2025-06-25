@@ -5,7 +5,7 @@ import i18n from '../../../../utils/i18n.js';
 import TimeSlot from '../TimeSlot';
 import { styles } from './TimeSlotsGroup.styles.js';
 
-const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
+const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot, role }) => {
   const { slots, date, dates } = timeSlots;
   const currentLocale = i18n.language; // Get current language from i18n
 
@@ -47,8 +47,10 @@ const TimeSlotsGroup = ({ timeSlots, selectedSlots, onSelectSlot }) => {
           <TimeSlot
             key={slot.date}
             currentDate={date}
+            currentLocale={currentLocale}
             data={slot}
             isSelected={selectedSlots.some((selected) => selected.date === slot.date)}
+            role={role}
             onSelect={() => onSelectSlot({ date: slot.date, status: slot.type })}
           />
         ))}
@@ -61,6 +63,7 @@ TimeSlotsGroup.propTypes = {
   timeSlots: PropTypes.object.isRequired,
   selectedSlots: PropTypes.array.isRequired,
   onSelectSlot: PropTypes.func.isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default TimeSlotsGroup;

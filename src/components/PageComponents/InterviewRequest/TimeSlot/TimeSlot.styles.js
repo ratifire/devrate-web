@@ -1,6 +1,6 @@
 export const styles = {
-  timeSlot: (theme) => ({
-    maxWidth: 209,
+  timeSlot: (theme, currentLocale) => ({
+    maxWidth: currentLocale === 'uk' ? 225 : 209,
     minWidth: 209,
     width: '100%',
     height: 70,
@@ -27,6 +27,7 @@ export const styles = {
     alignItems: 'center',
     color: theme.palette.requestInterview.timeSlot.statusCircle.panding,
     position: 'relative',
+    cursor: 'default',
     '&::after': {
       content: '" "',
       width: '12px',

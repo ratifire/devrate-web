@@ -1113,6 +1113,10 @@ export const uk = {
         CANDIDATE: 'Респондент',
         INTERVIEWER: 'Інтерв’юер',
       },
+      pendingTooltip: {
+        CANDIDATE: 'Відбувається пошук респондента',
+        INTERVIEWER: 'Відбувається пошук інтерв’юера',
+      },
       requestHeader: {
         titleLauncher: 'як',
         foundInterviews: "Знайдено інтерв'ю:",
@@ -1126,8 +1130,8 @@ export const uk = {
       timeSlot: {
         status: {
           status: 'Статус:',
-          pending: 'Очікує',
-          booked: 'Намічено',
+          pending: 'Пошук',
+          booked: 'Заплановано',
           expired: 'Минув',
         },
         daysOfWeek: {
