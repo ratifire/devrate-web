@@ -996,7 +996,7 @@ export const en = {
         title: 'Interview',
         event: {
           role: 'Role',
-          host: 'Host',
+          host: 'Interviewer',
           statusInProcess: 'In Process',
           statusAwaitingFeedback: 'Awaiting Feedback',
         },
@@ -1011,7 +1011,7 @@ export const en = {
         interviewInfoHourAgo: 'hour(s) ago',
         interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
-        interviewInfoHost: 'Host',
+        interviewInfoHost: 'Interviewer',
         interviewFeedbackTitle: "Interviewee's feedback",
         interviewFeedbackReadLess: 'Read more',
         interviewFeedbackReadMore: 'Read less',

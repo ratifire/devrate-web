@@ -8,7 +8,7 @@ import navigationLinks from '@router/links';
 import { styles } from './SideBarEvent.styles';
 
 const SideBarEvent = ({ event, refHandler, passedInterview }) => {
-  const { id, title, masteryLevel, date, role, hostId, hostFirstName, hostLastName } = event;
+  const { id, title, attendeeMasteryLevel, date, role, hostId, hostFirstName, hostLastName } = event;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { interviewId } = useParams();
@@ -36,8 +36,8 @@ const SideBarEvent = ({ event, refHandler, passedInterview }) => {
           <Typography component='div' sx={styles.title} variant='h6'>
             {title}
           </Typography>
-          <Typography component='div' sx={styles[lvlMastery[masteryLevel]]} variant='subtitle2'>
-            {lvlMastery[masteryLevel]}
+          <Typography component='div' sx={styles[lvlMastery[attendeeMasteryLevel]]} variant='subtitle2'>
+            {lvlMastery[attendeeMasteryLevel]}
           </Typography>
         </Box>
         <Typography component='div' sx={styles.eventDate} variant='body2'>
@@ -61,7 +61,7 @@ SideBarEvent.propTypes = {
   event: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    masteryLevel: PropTypes.string,
+    attendeeMasteryLevel: PropTypes.number,
     date: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     hostId: PropTypes.number.isRequired,
