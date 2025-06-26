@@ -19,10 +19,32 @@ self.addEventListener('push', (event) => {
     };
   }
 
+  const { type, payload } = notificationData;
+
+  let parsedPayload = payload;
+  if (typeof parsedPayload === 'string') {
+    try {
+      parsedPayload = JSON.parse(parsedPayload);
+    } catch {
+      //console.log('Received payload', e);
+    }
+  }
+
+  let url;
+  switch (type) {
+    case 'INTERVIEW_SCHEDULED': {
+      const interviewId = parsedPayload?.interviewId;
+      url = interviewId ? `/interviews/scheduled/${interviewId}` : '/';
+      break;
+    }
+    default:
+      url = '/';
+  }
+
   const options = {
     body: notificationData.body,
     icon: notificationData.icon || '/assets/favicon.ico',
-    data: notificationData.data || { url: '/' },
+    data: { url },
   };
 
   event.waitUntil(self.registration.showNotification(notificationData.title || 'New Notification', options));

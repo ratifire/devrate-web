@@ -14,7 +14,7 @@ export const subscribeToPush = async (store) => {
   const sub = await reg.pushManager.subscribe({
     userVisibleOnly: true,
     applicationServerKey: urlBase64ToUint8Array(
-      'BPWrpWWIY2apsKVP_6OcBaE1fPK5p3HhHGc9I49xYkMLZN1gDaNQTtNLKCRbyZGUwFYXvODKexO-27OiVqFno8Q'
+      'BLxTVw4ldyA_jWHqxVyR2w-o3LZ5z_S1IMwyz7ZQ2dsNq0aqsaNVk7C2x4F0K8GO28FR5r_apta-JJLkivHc81A'
     ),
   });
 
