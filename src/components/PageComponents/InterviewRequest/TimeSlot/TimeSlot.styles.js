@@ -27,7 +27,6 @@ export const styles = {
     alignItems: 'center',
     color: theme.palette.requestInterview.timeSlot.statusCircle.panding,
     position: 'relative',
-    cursor: 'default',
     '&::after': {
       content: '" "',
       width: '12px',
@@ -55,6 +54,9 @@ export const styles = {
       display: 'inline-block',
       verticalAlign: 'middle',
     },
+    '& > :last-child:hover': {
+      textDecoration: 'underline',
+    },
   }),
 
   expired: (theme) => ({
@@ -76,6 +78,10 @@ export const styles = {
   statusText: (theme) => ({
     color: theme.palette.requestInterview.timeSlot.statusText,
     marginRight: '8px',
+    opacity: 1,
+  }),
+  statusState: (type) => ({
+    cursor: type === 'booked' ? 'pointer' : 'default',
   }),
   checkBox: () => ({
     color: 'transparent',

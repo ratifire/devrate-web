@@ -4,12 +4,20 @@ import { useTranslation } from 'react-i18next';
 import { DateTime } from 'luxon';
 import { useTheme } from '@mui/material/styles';
 import { Tooltip } from '@mui/material';
+import { useLazyGetInterviewIdBySlotIdQuery } from '@redux/api/slices/interviews/interviewRequestsApiSlice.js';
+import { useLazyGetSingleInterviewByIdQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
+import navigationLinks from '@router/links';
+import { useNavigate } from 'react-router';
+import { enqueueSnackbar } from 'notistack';
 import { CustomCheckboxIcon, CustomCheckedIcon } from '../../../UI/CustomCheckbox/CustomCheckbox.js';
 import { styles } from './TimeSlot.styles.js';
 
 const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
   const { t } = useTranslation();
   const theme = useTheme();
+  const navigate = useNavigate();
+  const [getInterviewIdBySlotId] = useLazyGetInterviewIdBySlotIdQuery();
+  const [getSingleInterview] = useLazyGetSingleInterviewByIdQuery();
   const dateTime = DateTime.fromISO(data.date);
   const time = dateTime.toFormat('HH:mm');
 
@@ -20,6 +28,21 @@ const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
     booked: styles.booked,
     expired: styles.expired,
     pending: styles.pending,
+  };
+
+  const shiftToSpecificInterview = async () => {
+    if (data.type !== 'booked') return;
+    try {
+      const interviewId = await getInterviewIdBySlotId(data.id).unwrap();
+      const event = await getSingleInterview({ interviewId }).unwrap();
+      navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, { state: { event } });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('notifications.somethingWrong'), {
+        variant: 'error',
+        autoHideDuration: 3000,
+      });
+    }
   };
 
   return (
@@ -40,7 +63,9 @@ const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
             placement='top-start'
             title={data.type === 'pending' ? t(`interviewRequest.pendingTooltip.${role}`) : null}
           >
-            <Typography variant={'body1'}>{t(`interviewRequest.timeSlot.status.${data.type}`)}</Typography>
+            <Typography sx={styles.statusState(data.type)} variant={'body1'} onClick={shiftToSpecificInterview}>
+              {t(`interviewRequest.timeSlot.status.${data.type}`)}
+            </Typography>
           </Tooltip>
         </Box>
         <Checkbox
