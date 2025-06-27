@@ -83,7 +83,7 @@ const ConfirmDeleteSpecializationModal = () => {
         {t('specialization.modal.confirmSpecializationDelete.title')}
       </Typography>
       <Typography sx={styles.text} variant='caption2'>
-        {t('specialization.modal.confirmSpecializationDelete.text1')} {modalData.specialization}?{' '}
+        {t('specialization.modal.confirmSpecializationDelete.text1')} {modalData?.specialization}?{' '}
         {t('specialization.modal.confirmSpecializationDelete.text2')}
       </Typography>
       <Box sx={styles.buttonWrapper}>
