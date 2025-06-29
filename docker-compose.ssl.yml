@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.ssl
+    container_name: skillzy-https
+    ports:
+      - "443:443"
+    volumes:
+      - ./src:/app/src
+    extra_hosts:
+      - "dev.skillzzy.com:127.0.0.1"

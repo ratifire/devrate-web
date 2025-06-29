@@ -49,7 +49,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "dev::remote": "vite --config vite.config_remote.js",
+    "dev:remote": "vite --config vite.config_remote.js",
     "build": "vite build",
     "server-build": "node build-script.js",
     "serve-build": "node ./server-build/server.js",
