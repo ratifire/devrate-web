@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, IconButton, Link, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { t } from 'i18next';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
@@ -28,6 +28,15 @@ const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
           const href = constructUrlByType(type, value);
           const linkProps =
             type !== 'EMAIL' && type !== 'PHONE_NUMBER' ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+          if (type === 'EMAIL') {
+            return (
+              <IconButton key={id} disableRipple sx={[componentStyles.link, { padding: 0 }]}>
+                <CustomTooltip title={t(`profile.right.tooltips.${type}`)}>
+                  <IconComponent />
+                </CustomTooltip>
+              </IconButton>
+            );
+          }
 
           return (
             <Link key={id} href={href} sx={componentStyles.link} {...linkProps}>
