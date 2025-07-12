@@ -8,6 +8,7 @@ import { lightIcons, darkIcons, getIconsByType } from '@utils/constants/ProfileC
 import { constructUrlByType } from '@utils/helpers/urlHelpers.js';
 import { styles } from '@components/PageComponents/ProfileComponents/PersonalProfile/RightSection/RightSection.styles.js';
 import CustomTooltip from '@components/UI/CustomTooltip/index.js';
+import { useSnackbar } from 'notistack';
 
 const icons = { dark: darkIcons, light: lightIcons };
 
@@ -17,8 +18,18 @@ const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
     data: { id: userId },
   } = useSelector(selectCurrentUser);
   const { data: userContacts } = useGetUserContactsQuery(userId);
+  const { enqueueSnackbar } = useSnackbar();
 
   const arr = id ? socials : userContacts;
+  const handleCopy = async (dataToCopy) => {
+    try {
+      await navigator.clipboard.writeText(dataToCopy);
+      enqueueSnackbar(t('clipboardMessage.success'), { variant: 'success' });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('clipboardMessage.error'), { variant: 'error' });
+    }
+  };
 
   return (
     <Box gap={gap} sx={styles.wrapperLink}>
@@ -30,7 +41,12 @@ const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
             type !== 'EMAIL' && type !== 'PHONE_NUMBER' ? { target: '_blank', rel: 'noopener noreferrer' } : {};
           if (type === 'EMAIL') {
             return (
-              <IconButton key={id} disableRipple sx={[componentStyles.link, { padding: 0 }]}>
+              <IconButton
+                key={id}
+                disableRipple
+                sx={[componentStyles.link, { padding: 0 }]}
+                onClick={() => handleCopy(value)}
+              >
                 <CustomTooltip title={t(`profile.right.tooltips.${type}`)}>
                   <IconComponent />
                 </CustomTooltip>

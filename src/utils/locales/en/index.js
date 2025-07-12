@@ -1350,5 +1350,9 @@ export const en = {
       zambia: 'Zambia',
       zimbabwe: 'Zimbabwe',
     },
+    clipboardMessage: {
+      success: 'Copied!',
+      error: 'Failed to copy.',
+    },
   },
 };
