@@ -1361,5 +1361,9 @@ export const uk = {
       zambia: 'Замбія',
       zimbabwe: 'Зімбабве',
     },
+    clipboardMessage: {
+      success: 'Скопійовано!',
+      error: 'Помилка копіювання.',
+    },
   },
 };
