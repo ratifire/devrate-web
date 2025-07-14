@@ -194,6 +194,7 @@ export const uk = {
         sso_error: 'На сервері сталася помилка. Спробуйте пізніше.',
         selecting_auth: 'або',
         email_invalid: 'Недійсна електронна пошта',
+        exist_email: 'Ця електронна пошта вже використовується',
         required: "Це обов'язкове поле",
         first_name_long: 'Імʼя занадто довге',
         first_name_short: 'Імʼя занадто коротке',

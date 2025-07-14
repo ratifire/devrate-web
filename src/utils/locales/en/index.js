@@ -187,6 +187,7 @@ export const en = {
         sso_error: 'A server error occurred. Please try again later.',
         selecting_auth: 'or',
         email_invalid: 'Invalid email',
+        exist_email: 'This email is already in use',
         required: 'This is a required field',
         first_name_long: 'Name too long',
         first_name_short: 'Name too short',
