@@ -194,6 +194,7 @@ export const uk = {
         sso_error: 'На сервері сталася помилка. Спробуйте пізніше.',
         selecting_auth: 'або',
         email_invalid: 'Недійсна електронна пошта',
+        exist_email: 'Ця електронна пошта вже використовується',
         required: "Це обов'язкове поле",
         first_name_long: 'Імʼя занадто довге',
         first_name_short: 'Імʼя занадто коротке',
@@ -1113,6 +1114,10 @@ export const uk = {
         CANDIDATE: 'Респондент',
         INTERVIEWER: 'Інтерв’юер',
       },
+      pendingTooltip: {
+        CANDIDATE: 'Відбувається пошук респондента',
+        INTERVIEWER: 'Відбувається пошук інтерв’юера',
+      },
       requestHeader: {
         titleLauncher: 'як',
         foundInterviews: "Знайдено інтерв'ю:",
@@ -1126,8 +1131,8 @@ export const uk = {
       timeSlot: {
         status: {
           status: 'Статус:',
-          pending: 'Очікує',
-          booked: 'Намічено',
+          pending: 'Пошук',
+          booked: 'Заплановано',
           expired: 'Минув',
         },
         daysOfWeek: {
@@ -1355,6 +1360,10 @@ export const uk = {
       yemen: 'Ємен',
       zambia: 'Замбія',
       zimbabwe: 'Зімбабве',
+    },
+    clipboardMessage: {
+      success: 'Скопійовано!',
+      error: 'Помилка копіювання.',
     },
   },
 };

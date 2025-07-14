@@ -49,7 +49,7 @@ const RegistrationModal = () => {
       dispatch(closeModal());
       dispatch(openModal({ modalType: modalNames.confirmationModal, data: email }));
     } catch (error) {
-      if (error.status === 409) setErrors({ email: 'This email is already in use' });
+      if (error.status === 409) setErrors({ email: t('modal.registration.exist_email') });
     }
   };
 

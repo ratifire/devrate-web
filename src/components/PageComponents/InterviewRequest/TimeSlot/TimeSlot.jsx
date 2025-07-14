@@ -2,27 +2,51 @@ import PropTypes from 'prop-types';
 import { Box, Checkbox, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { DateTime } from 'luxon';
+import { useTheme } from '@mui/material/styles';
+import { Tooltip } from '@mui/material';
+import { useLazyGetInterviewIdBySlotIdQuery } from '@redux/api/slices/interviews/interviewRequestsApiSlice.js';
+import { useLazyGetSingleInterviewByIdQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
+import navigationLinks from '@router/links';
+import { useNavigate } from 'react-router';
+import { enqueueSnackbar } from 'notistack';
 import { CustomCheckboxIcon, CustomCheckedIcon } from '../../../UI/CustomCheckbox/CustomCheckbox.js';
 import { styles } from './TimeSlot.styles.js';
 
-const TimeSlot = ({ data, isSelected, onSelect }) => {
+const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
   const { t } = useTranslation();
+  const theme = useTheme();
+  const navigate = useNavigate();
+  const [getInterviewIdBySlotId] = useLazyGetInterviewIdBySlotIdQuery();
+  const [getSingleInterview] = useLazyGetSingleInterviewByIdQuery();
   const dateTime = DateTime.fromISO(data.date);
-
   const time = dateTime.toFormat('HH:mm');
 
   const dayKey = dateTime.setLocale('en').toFormat('EEEE').toLowerCase();
   const day = t(`interviewRequest.timeSlot.daysOfWeek.${dayKey}`);
   const date = dateTime.toFormat('dd.MM.yyyy');
-
   const statusStyles = {
     booked: styles.booked,
     expired: styles.expired,
     pending: styles.pending,
   };
 
+  const shiftToSpecificInterview = async () => {
+    if (data.type !== 'booked') return;
+    try {
+      const interviewId = await getInterviewIdBySlotId(data.id).unwrap();
+      const event = await getSingleInterview({ interviewId }).unwrap();
+      navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, { state: { event } });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('notifications.somethingWrong'), {
+        variant: 'error',
+        autoHideDuration: 3000,
+      });
+    }
+  };
+
   return (
-    <Box sx={styles.timeSlot}>
+    <Box sx={styles.timeSlot(theme, currentLocale)}>
       <Box sx={styles.timeDateContainer}>
         <Typography sx={styles.date} variant={'subtitle3'}>{`${day} ${date}`}</Typography>
         <Typography sx={styles.time} variant={'subtitle3'}>
@@ -35,7 +59,14 @@ const TimeSlot = ({ data, isSelected, onSelect }) => {
           <Typography sx={styles.statusText} variant={'subtitle3'}>
             {t('interviewRequest.timeSlot.status.status')}{' '}
           </Typography>
-          {t(`interviewRequest.timeSlot.status.${data.type}`)}
+          <Tooltip
+            placement='top-start'
+            title={data.type === 'pending' ? t(`interviewRequest.pendingTooltip.${role}`) : null}
+          >
+            <Typography sx={styles.statusState(data.type)} variant={'body1'} onClick={shiftToSpecificInterview}>
+              {t(`interviewRequest.timeSlot.status.${data.type}`)}
+            </Typography>
+          </Tooltip>
         </Box>
         <Checkbox
           checked={isSelected}
@@ -54,6 +85,8 @@ TimeSlot.propTypes = {
   currentDate: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
   onSelect: PropTypes.func.isRequired,
+  currentLocale: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default TimeSlot;

@@ -9,6 +9,7 @@ export const getSortedDatesWithLabel = (respondent) => {
     .map((slot) => ({
       date: DateTime.fromISO(slot.dateTime),
       type: 'pending',
+      id: slot.id,
     }));
 
   // Назначенные слоты (BOOKED)
@@ -17,6 +18,7 @@ export const getSortedDatesWithLabel = (respondent) => {
     .map((slot) => ({
       date: DateTime.fromISO(slot.dateTime),
       type: 'booked',
+      id: slot.id,
     }));
 
   // Просроченные слоты (EXPIRED)
@@ -25,6 +27,7 @@ export const getSortedDatesWithLabel = (respondent) => {
     .map((slot) => ({
       date: DateTime.fromISO(slot.dateTime),
       type: 'expired',
+      id: slot.id,
     }));
 
   const allDates = [...availableDatesWithLabel, ...assignedDatesWithLabel, ...expiredDatesWithLabel];
@@ -33,6 +36,7 @@ export const getSortedDatesWithLabel = (respondent) => {
   return sortedDates.map((item) => ({
     date: item.date.toISO(),
     type: item.type,
+    id: item.id,
   }));
 };
 

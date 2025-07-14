@@ -187,6 +187,7 @@ export const en = {
         sso_error: 'A server error occurred. Please try again later.',
         selecting_auth: 'or',
         email_invalid: 'Invalid email',
+        exist_email: 'This email is already in use',
         required: 'This is a required field',
         first_name_long: 'Name too long',
         first_name_short: 'Name too short',
@@ -1103,6 +1104,10 @@ export const en = {
         CANDIDATE: 'Respondent',
         INTERVIEWER: 'Interviewer',
       },
+      pendingTooltip: {
+        CANDIDATE: 'The respondent is being searched',
+        INTERVIEWER: 'The interviewer is being searched',
+      },
       requestHeader: {
         titleLauncher: 'as a',
         foundInterviews: 'Interview found:',
@@ -1345,6 +1350,10 @@ export const en = {
       yemen: 'Yemen',
       zambia: 'Zambia',
       zimbabwe: 'Zimbabwe',
+    },
+    clipboardMessage: {
+      success: 'Copied!',
+      error: 'Failed to copy.',
     },
   },
 };
