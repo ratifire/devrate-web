@@ -56,6 +56,12 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
     getInterviewStatus: builder.query({
       query: (zoneName) => `/interviews/status-indicator?userTimeZone=${zoneName}`,
     }),
+    getInterviewMeetingUrl: builder.query({
+      query: (interviewId) => ({
+        url: `/interviews/${interviewId}/meeting`,
+        responseHandler: (response) => response.text(),
+      }),
+    }),
   }),
 });
 
@@ -64,4 +70,5 @@ export const {
   useGetScheduledInterviewByIdQuery,
   useLazyGetSingleInterviewByIdQuery,
   useGetInterviewStatusQuery,
+  useLazyGetInterviewMeetingUrlQuery,
 } = scheduledInterviewApiSlice;
