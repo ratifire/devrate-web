@@ -16,8 +16,19 @@ const singleScheduledInterviewApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [TAG_TYPES.ScheduledInterview],
     }),
+    deleteNotConductedInterview: builder.mutation({
+      query: ({ eventId }) => ({
+        url: `/interviews/${eventId}/not-conducted`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [TAG_TYPES.ScheduledInterview],
+    }),
   }),
 });
 
-export const { useGetAllSkillsForMasteryIdQuery, useGetMasteriesQuery, useDeleteInterviewMutation } =
-  singleScheduledInterviewApiSlice;
+export const {
+  useGetAllSkillsForMasteryIdQuery,
+  useGetMasteriesQuery,
+  useDeleteInterviewMutation,
+  useDeleteNotConductedInterviewMutation,
+} = singleScheduledInterviewApiSlice;

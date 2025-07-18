@@ -6,7 +6,10 @@ import { useSnackbar } from 'notistack';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
 import { formatTimeToUtc, formatTimeWithOffset } from '@utils/helpers';
-import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice';
+import {
+  useDeleteNotConductedInterviewMutation,
+  useDeleteInterviewMutation,
+} from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice';
 import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
@@ -52,22 +55,38 @@ const ScheduledMeeting = () => {
   } = useGetAvatarUserQuery(id, { skip: !id });
   const [cancelMeeting, { isError: isErrorCancelMeeting, isLoading: isLoadingCancelMeeting }] =
     useDeleteInterviewMutation();
+  const [cancelNotConductedMeeting, { isError: isErrorNotConductedMeeting, isLoading: isLoadingNotConductedMeeting }] =
+    useDeleteNotConductedInterviewMutation();
+
+  const showSnackbar = (status) => {
+    enqueueSnackbar(t(`singleScheduledInterview.scheduledMeeting.canceled.${status}`), {
+      variant: status,
+      anchorOrigin: {
+        vertical: 'bottom',
+        horizontal: 'right',
+      },
+    });
+  };
 
   const handleClickLeftBtn = () => {
     if (status === btnStatus['UPCOMING']) {
       cancelMeeting({ eventId })
         .then(() => {
-          enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.success'), {
-            variant: 'success',
-            anchorOrigin: {
-              vertical: 'bottom',
-              horizontal: 'right',
-            },
-          });
+          showSnackbar('success');
           navigate(navigationLinks.interviews);
         })
         .catch(() => {
-          enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.success'), { variant: 'success' });
+          showSnackbar('error');
+        });
+    }
+    if (status === btnStatus['AWAITING FEEDBACK']) {
+      cancelNotConductedMeeting({ eventId })
+        .then(() => {
+          showSnackbar('success');
+          navigate(navigationLinks.interviews);
+        })
+        .catch(() => {
+          showSnackbar('error');
         });
     }
   };
@@ -88,7 +107,7 @@ const ScheduledMeeting = () => {
     }
   };
 
-  if (isErrorHostAvatar || isErrorUserAvatar || isErrorCancelMeeting) {
+  if (isErrorHostAvatar || isErrorUserAvatar || isErrorCancelMeeting || isErrorNotConductedMeeting) {
     return <ErrorComponent />;
   }
 
@@ -188,7 +207,7 @@ const ScheduledMeeting = () => {
       </Typography>
       <Box sx={styles.boxBtn}>
         <ButtonDef
-          disabled={status === btnStatus['IN PROCESS'] || isLoadingCancelMeeting}
+          disabled={status === btnStatus['IN PROCESS'] || isLoadingCancelMeeting || isLoadingNotConductedMeeting}
           label={t(leftBtnStatus[status])}
           sx={styles.btn}
           variant='outlined'
