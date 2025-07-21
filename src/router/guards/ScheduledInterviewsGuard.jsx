@@ -41,7 +41,7 @@ const ScheduledInterviewsGuard = () => {
       });
     }
 
-    if (firstInterviewId && !interviewId) {
+    if (firstInterviewId) {
       navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
         state: { event },
       });

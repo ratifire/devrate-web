@@ -14,6 +14,7 @@ import { useProfileProgress } from '@utils/hooks/useProfileProgress';
 import { useTranslation } from 'react-i18next';
 import CustomTooltip from '@components/UI/CustomTooltip/index.js';
 import { useTheme } from '@mui/material/styles';
+import { makeCorrectCountryCase } from '@utils/helpers/caseHandler.js';
 import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = () => {
@@ -92,7 +93,7 @@ const BaseUserInfo = () => {
         {(displayData.city || displayData.country) && (
           <Typography sx={styles.city} variant='subtitle2'>
             <LocationOnIcon sx={styles.icon} />
-            {displayData.city && `${displayData.city},`} {t(`countriesList.${displayData.country}`)}
+            {`${displayData.city ? `${displayData.city}, ` : ''}${t(`countriesList.${makeCorrectCountryCase(displayData.country)}`)}`}
           </Typography>
         )}
 
