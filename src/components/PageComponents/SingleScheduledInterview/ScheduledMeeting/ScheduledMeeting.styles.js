@@ -79,6 +79,7 @@ export const styles = {
     color: theme.palette.scheduledMeeting.awaiting,
   }),
   link: (theme) => ({
+    pointerEvents: 'none',
     color: theme.palette.scheduledMeeting.link,
     textDecoration: 'none',
   }),
