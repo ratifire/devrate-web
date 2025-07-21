@@ -4,12 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to deploy (prod, dev, or qa)'
+        description: 'Select environment to deploy (prod, dev)'
         required: true
-        default: 'qa'
+        default: 'dev'
         type: choice
         options:
-          - qa
           - dev
           - prod
 
@@ -21,7 +20,7 @@ jobs:
   terraform:
     name: Down_infrastructure
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment || 'qa' }}
+    environment: ${{ github.event.inputs.environment || 'dev' }}
     env:
       working-directory: terraform/infrastructure
     defaults:
