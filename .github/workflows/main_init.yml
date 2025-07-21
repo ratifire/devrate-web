@@ -1,24 +1,23 @@
 name: Main_init
 
 on:
-  schedule:
-    - cron: '00 08 * * *'
+#  schedule:
+#    - cron: '00 08 * * *'
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to deploy (prod, dev or qa)'
+        description: 'Select environment to deploy (prod, dev)'
         required: true
-        default: 'qa'
+        default: 'dev'
         type: choice
         options:
           - dev
           - prod
-          - qa
 
 jobs:
   main_init:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment || 'qa' }}
+    environment: ${{ github.event.inputs.environment || 'dev' }}
 
     steps:
       - name: Checkout code
