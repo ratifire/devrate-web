@@ -11,7 +11,6 @@ import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import { useModalController } from '@utils/hooks/useModalController.js';
-import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
@@ -29,7 +28,16 @@ const ScheduledMeeting = () => {
   const { openModal } = useModalController();
   const location = useLocation();
   const navigate = useNavigate();
-  const { hostFirstName, hostLastName, hostId, startTime, languageCode, id: eventId, role } = location.state.event;
+  const {
+    hostFirstName,
+    hostLastName,
+    hostId,
+    startTime,
+    languageCode,
+    id: eventId,
+    roomUrl,
+    role,
+  } = location.state.event;
 
   const {
     data: hostAvatar,
@@ -44,8 +52,6 @@ const ScheduledMeeting = () => {
   } = useGetAvatarUserQuery(id, { skip: !id });
   const [cancelMeeting, { isError: isErrorCancelMeeting, isLoading: isLoadingCancelMeeting }] =
     useDeleteInterviewMutation();
-
-  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
 
   const handleClickLeftBtn = () => {
     if (status === btnStatus['UPCOMING']) {
@@ -66,22 +72,15 @@ const ScheduledMeeting = () => {
     }
   };
 
-  const handleClickRightBtn = async () => {
+  const handleClickRightBtn = () => {
     if (status === btnStatus['UPCOMING'] || status === btnStatus['IN PROCESS']) {
       // Create URL with query params to use in mirotalk in a survey later
-      try {
-        const meetingUrl = await getMeetingUrl(eventId).unwrap();
-        const urlWithParams = new URL(meetingUrl);
-
-        if (eventId && role) {
-          urlWithParams.searchParams.append('eventId', eventId);
-          urlWithParams.searchParams.append('role', role);
-        }
-        window.open(urlWithParams, '_blank');
-        // eslint-disable-next-line no-unused-vars
-      } catch (error) {
-        enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
+      const url = new URL(roomUrl);
+      if (eventId && role) {
+        url.searchParams.append('eventId', eventId);
+        url.searchParams.append('role', role);
       }
+      window.open(url, '_blank');
     }
 
     if (status === btnStatus['AWAITING FEEDBACK']) {
@@ -143,13 +142,7 @@ const ScheduledMeeting = () => {
         <Typography component='p' sx={styles.boxInfoText} variant='subtitle2'>
           {t('singleScheduledInterview.scheduledMeeting.participants')}:
           <Typography component='span' variant='body'>
-            <Link color='inherit' component={RouterLink} to={`${navigationLinks.profile}/${hostId}`} underline='none'>
-              {hostFullName}
-            </Link>
-            {'; '}
-            <Link color='inherit' component={RouterLink} to={`${navigationLinks.profile}/${id}`} underline='none'>
-              {userFullName}
-            </Link>
+            {hostFullName}; {userFullName}
           </Typography>
         </Typography>
       </Box>
@@ -182,7 +175,7 @@ const ScheduledMeeting = () => {
       <Typography component='p' variant='body2'>
         <Trans
           components={{
-            a: <Link component={RouterLink} sx={styles.link} to='/faq#4' />,
+            a: <Link component={RouterLink} sx={styles.link} to='/' />,
           }}
           i18nKey='singleScheduledInterview.scheduledMeeting.link'
         />
@@ -196,7 +189,6 @@ const ScheduledMeeting = () => {
           onClick={handleClickLeftBtn}
         />
         <ButtonDef
-          disabled={isLoadingMeetingUrl}
           label={t(rightBtnStatus[status])}
           sx={styles.btn}
           variant='contained'
