@@ -14,6 +14,7 @@ import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
@@ -31,16 +32,7 @@ const ScheduledMeeting = () => {
   const { openModal } = useModalController();
   const location = useLocation();
   const navigate = useNavigate();
-  const {
-    hostFirstName,
-    hostLastName,
-    hostId,
-    startTime,
-    languageCode,
-    id: eventId,
-    roomUrl,
-    role,
-  } = location.state.event;
+  const { hostFirstName, hostLastName, hostId, startTime, languageCode, id: eventId, role } = location.state.event;
 
   const {
     data: hostAvatar,
@@ -68,6 +60,8 @@ const ScheduledMeeting = () => {
     });
   };
 
+  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
+
   const handleClickLeftBtn = () => {
     if (status === btnStatus['UPCOMING']) {
       cancelMeeting({ eventId })
@@ -91,15 +85,22 @@ const ScheduledMeeting = () => {
     }
   };
 
-  const handleClickRightBtn = () => {
+  const handleClickRightBtn = async () => {
     if (status === btnStatus['UPCOMING'] || status === btnStatus['IN PROCESS']) {
       // Create URL with query params to use in mirotalk in a survey later
-      const url = new URL(roomUrl);
-      if (eventId && role) {
-        url.searchParams.append('eventId', eventId);
-        url.searchParams.append('role', role);
+      try {
+        const meetingUrl = await getMeetingUrl(eventId).unwrap();
+        const urlWithParams = new URL(meetingUrl);
+
+        if (eventId && role) {
+          urlWithParams.searchParams.append('eventId', eventId);
+          urlWithParams.searchParams.append('role', role);
+        }
+        window.open(urlWithParams, '_blank');
+        // eslint-disable-next-line no-unused-vars
+      } catch (error) {
+        enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
       }
-      window.open(url, '_blank');
     }
 
     if (status === btnStatus['AWAITING FEEDBACK']) {
@@ -214,6 +215,7 @@ const ScheduledMeeting = () => {
           onClick={handleClickLeftBtn}
         />
         <ButtonDef
+          disabled={isLoadingMeetingUrl}
           label={t(rightBtnStatus[status])}
           sx={styles.btn}
           variant='contained'
