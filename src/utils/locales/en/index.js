@@ -1105,8 +1105,8 @@ export const en = {
         INTERVIEWER: 'Interviewer',
       },
       pendingTooltip: {
-        CANDIDATE: 'The respondent is being searched',
-        INTERVIEWER: 'The interviewer is being searched',
+        CANDIDATE: 'The interviewer is being searched',
+        INTERVIEWER: 'The respondent is being searched',
       },
       requestHeader: {
         titleLauncher: 'as a',
