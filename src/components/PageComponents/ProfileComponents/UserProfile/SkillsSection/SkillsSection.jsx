@@ -48,11 +48,11 @@ const SkillsSection = ({ id }) => {
       </Box>
       <Box sx={styles.interviewHistory}>
         <Box sx={[styles.skillsInterviewBtn, styles.doneInterviewsBtn]}>
-          <Typography variant='subtitle1'>{conductedInterviews}</Typography>
+          <Typography variant='subtitle1'>{completedInterviews}</Typography>
           <Typography variant='caption3'>{t('profile.skills.doneInterviews')}</Typography>
         </Box>
         <Box sx={[styles.skillsInterviewBtn, styles.completedInterviewsBtn]}>
-          <Typography variant='subtitle1'>{completedInterviews}</Typography>
+          <Typography variant='subtitle1'>{conductedInterviews}</Typography>
           <Typography variant='caption3'>{t('profile.skills.completedInterviews')}</Typography>
         </Box>
       </Box>
