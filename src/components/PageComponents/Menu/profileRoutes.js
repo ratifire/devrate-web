@@ -35,7 +35,7 @@ export default [
   },
   {
     name: 'profile.userMenu.settings',
-    path: links.settings,
+    path: links.generalSettings,
     icon: SettingsIcon,
     target: '_self',
   },

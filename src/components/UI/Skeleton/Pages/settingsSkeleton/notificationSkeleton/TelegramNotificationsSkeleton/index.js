@@ -1,0 +1,3 @@
+import TelegramNotificationsSkeleton from '@components/UI/Skeleton/Pages/settingsSkeleton/notificationSkeleton/TelegramNotificationsSkeleton/TelegramNotificationsSkeleton';
+
+export default TelegramNotificationsSkeleton;
