@@ -8,7 +8,6 @@ import {
   ChangeEmail,
   ChangePassword,
   ChangeLanguage,
-  DeactivatedAccount,
 } from '@components/PageComponents/SettingsComponents/SettingsGeneral';
 
 export {
@@ -19,5 +18,4 @@ export {
   ChangeEmail,
   ChangePassword,
   ChangeLanguage,
-  DeactivatedAccount,
 };

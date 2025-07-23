@@ -5,7 +5,6 @@ import {
   TitleSettingSkeleton,
   ChangePasswordSkeleton,
   ChangeLanguageSkeleton,
-  DeactivateAccountSkeleton,
 } from '@components/UI/Skeleton';
 import { useSelector } from 'react-redux';
 import authMethod from '@utils/constants/authMethod.js';
@@ -35,17 +34,10 @@ const ChangeLanguage = lazy(() =>
   }))
 );
 
-const DeactivatedAccount = lazy(() =>
-  import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
-    default: module.DeactivatedAccount,
-  }))
-);
-
 const MemoizedSettingsTitle = memo(SettingsTitle);
 const MemoizedChangeEmail = memo(ChangeEmail);
 const MemoizedChangePassword = memo(ChangePassword);
 const MemoizedChangeLanguage = memo(ChangeLanguage);
-const MemoizedDeactivatedAccount = memo(DeactivatedAccount);
 
 const GeneralSettingsPage = () => {
   const {
@@ -75,11 +67,6 @@ const GeneralSettingsPage = () => {
         <Box sx={styles.section}>
           <Suspense fallback={<ChangeLanguageSkeleton />}>
             <MemoizedChangeLanguage />
-          </Suspense>
-        </Box>
-        <Box sx={styles.section}>
-          <Suspense fallback={<DeactivateAccountSkeleton />}>
-            <MemoizedDeactivatedAccount />
           </Suspense>
         </Box>
       </Box>

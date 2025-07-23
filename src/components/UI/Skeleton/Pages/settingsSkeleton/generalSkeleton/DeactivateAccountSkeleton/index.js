@@ -1,3 +1,0 @@
-import DeactivateAccountSkeleton from '@components/UI/Skeleton/Pages/settingsSkeleton/generalSkeleton/DeactivateAccountSkeleton/DeactivateAccountSkeleton';
-
-export default DeactivateAccountSkeleton;

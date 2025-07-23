@@ -28,12 +28,6 @@ const profileSettingsApiSlice = apiSlice.injectEndpoints({
         body: { currentPassword, newPassword },
       }),
     }),
-    deactivatedAccount: builder.mutation({
-      query: () => ({
-        url: '/profile-settings/profile-deactivation',
-        method: 'PATCH',
-      }),
-    }),
   }),
 });
 
@@ -41,6 +35,5 @@ export const {
   useUpdateEmailSubscriptionMutation,
   useUpdateEmailMutation,
   useUpdatePasswordMutation,
-  useDeactivatedAccountMutation,
   useUpdateLanguageMutation,
 } = profileSettingsApiSlice;

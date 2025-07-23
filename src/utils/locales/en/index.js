@@ -200,28 +200,6 @@ export const en = {
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
       },
-      activation: {
-        title: 'Want to activate your profile?',
-        description:
-          'Your profile was deactivated. You can activate it and make it visible to other users on the platform again. To complete the profile activation process, you need to enter a security code. Check your email',
-        subtitle: 'Didn’t receive the letter? Check your spam folder.',
-        resend: '<button>Please resend</button> the request.',
-        errors: {
-          code_error_text: 'The code is incorrect or the term has passed',
-          server_error: 'Something went wrong. Please try again later.',
-          invalid_token: 'Invalid token. Please try again later.',
-        },
-      },
-      deactivated: {
-        title: 'Deactivate Profile',
-        description:
-          'Are you sure you want to deactivate your Skillzzy profile? Your public profile will no longer be visible on the platform, all your data will be hidden from other users, and personal messages will be frozen. All scheduled interviews will also be canceled.',
-        agree: 'I have read and agree to the Terms of Account Deactivation',
-        notification: {
-          success: 'Your profile has been successfully deactivated',
-          error: 'Profile deactivation error',
-        },
-      },
       confirmation: {
         title: 'Confirm your email',
         code_error_text: 'The code is incorrect or the term has passed',
@@ -690,7 +668,6 @@ export const en = {
         common: {
           save: 'Save',
           cancel: 'Cancel',
-          deactivate: 'Deactivate',
           send: 'Send',
         },
         changeEmail: {
@@ -730,18 +707,6 @@ export const en = {
           notification: {
             success: 'Language changed successfully',
             error: 'Error changing language',
-          },
-        },
-        deactivated: {
-          title: 'Profile Deactivation',
-          subTitle: 'Learn how you can deactivate your profile',
-          list: {
-            title: 'Your profile will be deactivated',
-            description:
-              'You are about to start the process of deactivating your Skillzzy profile. Your public profile will no longer be visible on the platform, all your data will be hidden from other users, and personal messages will be frozen.',
-            subTitle: 'Other Important Information',
-            subDescription:
-              'You can restore your deactivated profile within 30 days of deactivation. To do this, you will need to enter your email and password, as when logging into the platform, after which you will receive a code to reactivate your profile.',
           },
         },
       },

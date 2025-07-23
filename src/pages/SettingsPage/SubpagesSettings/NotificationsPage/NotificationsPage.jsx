@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import {
   TitleSettingSkeleton,
   EmailNotificationsSkeleton,
-  TelegramNotificationsSkeleton,
+  // TelegramNotificationsSkeleton,
 } from '@components/UI/Skeleton';
 import { styles } from './NotificationsPage.styles';
 
@@ -19,15 +19,15 @@ const SettingsTitle = lazy(() =>
   }))
 );
 
-const TelegramNotifications = lazy(() =>
-  import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
-    default: module.TelegramNotifications,
-  }))
-);
+// const TelegramNotifications = lazy(() =>
+//   import('@components/PageComponents/SettingsComponents/index.js').then((module) => ({
+//     default: module.TelegramNotifications,
+//   }))
+// );
 
 const MemoizedSettingsTitle = memo(SettingsTitle);
 const MemoizedEmailNotifications = memo(EmailNotifications);
-const MemoizedTelegramNotifications = memo(TelegramNotifications);
+// const MemoizedTelegramNotifications = memo(TelegramNotifications);
 
 const NotificationsPage = () => {
   return (
@@ -40,11 +40,11 @@ const NotificationsPage = () => {
           <MemoizedEmailNotifications />
         </Suspense>
       </Box>
-      <Box sx={styles.section}>
-        <Suspense fallback={<TelegramNotificationsSkeleton />}>
-          <MemoizedTelegramNotifications />
-        </Suspense>
-      </Box>
+      {/*<Box sx={styles.section}>*/}
+      {/*  <Suspense fallback={<TelegramNotificationsSkeleton />}>*/}
+      {/*    <MemoizedTelegramNotifications />*/}
+      {/*  </Suspense>*/}
+      {/*</Box>*/}
     </Box>
   );
 };

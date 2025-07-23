@@ -8,7 +8,6 @@ import {
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
   ChangeLanguageSkeleton,
-  DeactivateAccountSkeleton,
 } from '@components/UI/Skeleton/Pages/settingsSkeleton/generalSkeleton';
 
 export {
@@ -19,5 +18,4 @@ export {
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
   ChangeLanguageSkeleton,
-  DeactivateAccountSkeleton,
 };
