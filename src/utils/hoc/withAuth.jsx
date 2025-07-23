@@ -7,9 +7,6 @@ import { setTokens } from '@redux/slices/auth/tokenSlice';
 import { closeModal } from '@redux/slices/modal/modalSlice';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import accountStatus from '@utils/constants/accountStatus';
-import { modalNames } from '@utils/constants/modalNames';
-import { useModalController } from '@utils/hooks/useModalController';
 
 const withAuth = (Component) => {
   return function AuthComponent(props) {
@@ -20,7 +17,6 @@ const withAuth = (Component) => {
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
     const { t } = useTranslation();
-    const { openModal } = useModalController();
     const [authorization] = useOAuthAuthorizeMutation();
 
     useEffect(() => {
@@ -37,13 +33,7 @@ const withAuth = (Component) => {
           if (idToken && authToken) {
             dispatch(setTokens({ idToken, authToken }));
 
-            const { statusAuth } = userData;
-
-            if (statusAuth === accountStatus.ACTIVE) {
-              return navigate('/profile', { replace: true });
-            }
-
-            openModal(modalNames.activationModal, { email: '', password: '' });
+            return navigate('/profile', { replace: true });
           }
           // eslint-disable-next-line no-unused-vars
         } catch (err) {

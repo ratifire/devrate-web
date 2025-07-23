@@ -14,7 +14,6 @@ import { ButtonDef } from '@components/FormsComponents/Buttons';
 import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord';
 import { modalNames } from '@utils/constants/modalNames';
 import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
-import accountStatus from '@utils/constants/accountStatus';
 import { useModalController } from '@utils/hooks/useModalController';
 import styles from './LoginModal.styles';
 
@@ -48,13 +47,6 @@ const LoginModal = () => {
           email: values.email,
           password: values.password,
         }).unwrap();
-
-        const { statusAuth } = userData;
-
-        if (statusAuth === accountStatus.INACTIVE) {
-          openModal(modalNames.activationModal, { email: values.email, password: values.password });
-          return;
-        }
 
         dispatch(setCredentials({ data: userData }));
 
