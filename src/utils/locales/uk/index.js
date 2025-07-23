@@ -80,9 +80,9 @@ export const uk = {
         formPart1: 'Зв’яжіться',
         formPart2: 'з нами',
         placeholderName: 'Ім’я Прізвище',
-        placeholderEmail: 'Введіть вашу email адресу',
-        placeholderRequest: 'Введіть ваш запит...',
-        buttonText: 'НАДІСЛАТИ',
+        placeholderEmail: 'Введіть свою e-mail адресу',
+        placeholderRequest: 'Опишіть свій запит...',
+        buttonText: 'Надіслати',
       },
       links: {
         home_page: 'Головну сторінку',
@@ -153,7 +153,7 @@ export const uk = {
         required: "Це обов'язкове поле",
       },
       login: {
-        title: 'Увійдіть в аккаунт',
+        title: 'Вхід',
         subtitle: 'Увійдіть в обліковий запис SKILLZZY',
         email: 'Електронна пошта',
         password: 'Пароль',
@@ -184,7 +184,7 @@ export const uk = {
         first_name: 'Імʼя',
         last_name: 'Прізвище',
         password: 'Пароль',
-        password_repeat: 'Повторити пароль',
+        password_repeat: 'Повторіть пароль',
         password_tooltip:
           'Пароль повинен містити 6 символів, 1 велику літеру, 1 цифру, 1 спеціальний символ та не містити пробілів',
         password_invalid: 'Неприпустимий пароль',
@@ -195,6 +195,7 @@ export const uk = {
         sso_error: 'На сервері сталася помилка. Спробуйте пізніше.',
         selecting_auth: 'або',
         email_invalid: 'Недійсна електронна пошта',
+        exist_email: 'Ця електронна пошта вже використовується',
         required: "Це обов'язкове поле",
         first_name_long: 'Імʼя занадто довге',
         first_name_short: 'Імʼя занадто коротке',
@@ -235,8 +236,8 @@ export const uk = {
         main_text1: 'Щоб завершити налаштування облікового запису, необхідно підтвердити свою електронну пошту',
         main_text2: 'Перевірте свою електронну пошту та введіть код нижче.',
         btn_confirm: 'Зареєструватись',
-        spam_check_text: 'Неотримали листа? Перевірте папку спам.',
-        repeat_request_link: 'Повторно надішліть',
+        spam_check_text: 'Не отримали листа? Перевірте папку зі спамом.',
+        repeat_request_link: 'Надішліть повторно',
         repeat_request_text1: 'запит',
         repeat_request_text2: 'або',
         change_email_link: 'змініть електронну адресу',
@@ -264,7 +265,7 @@ export const uk = {
         title: 'Скинути пароль',
         password: 'Пароль',
         password_tooltip: 'Паролі повинні містити 8 + символів, принаймні 1 цифру, принаймні 1 літеру та без пробілів.',
-        password_repeat: 'Повторити пароль',
+        password_repeat: 'Повторіть пароль',
         btn_change_password: 'Змінити пароль',
         text_privacy: 'Продовжуючи, Ви погоджуєтеся з нашою політикою конфіденційності і умовами користування.',
         return_on: 'Повернутися на ',
@@ -1112,7 +1113,7 @@ export const uk = {
         title: 'Інтерв’ю',
         event: {
           role: 'Роль',
-          host: 'Хост',
+          host: "Інтерв'юер",
           statusInProcess: 'В процесі',
           statusAwaitingFeedback: 'Очікується відгук',
         },
@@ -1120,14 +1121,14 @@ export const uk = {
       passedInterviews: {
         interviewersAssessmentTitle: 'Оцінки співбесідника',
         interviewInfoTitle: 'Інформація про співбесіду',
-        interviewInfoYearAgo: 'рік(ів) тому назад',
-        interviewInfoMonthAgo: 'місяць(місяців) тому назад',
-        interviewInfoWeekAgo: 'тиждень(ів) тому назад',
-        interviewInfoDayAgo: 'день(днів) тому назад',
-        interviewInfoHourAgo: 'година(годин) тому назад',
+        interviewInfoYearAgo: 'рік(ів) тому',
+        interviewInfoMonthAgo: 'місяць (місяців) тому',
+        interviewInfoWeekAgo: 'тиждень(ів) тому',
+        interviewInfoDayAgo: 'день (днів) тому',
+        interviewInfoHourAgo: 'година (годин) тому',
         interviewInfoToday: 'Пройдено сьогодні',
         interviewInfoRole: 'Ваша роль',
-        interviewInfoHost: 'Хост',
+        interviewInfoHost: "Інтерв'юер",
         interviewFeedbackTitle: 'Відгук співбесідника',
         interviewFeedbackReadLess: 'Читати менше',
         interviewFeedbackReadMore: 'Читати більше',
@@ -1221,6 +1222,10 @@ export const uk = {
         CANDIDATE: 'Респондент',
         INTERVIEWER: 'Інтерв’юер',
       },
+      pendingTooltip: {
+        CANDIDATE: 'Відбувається пошук інтерв’юера',
+        INTERVIEWER: 'Відбувається пошук респондента',
+      },
       requestHeader: {
         titleLauncher: 'як',
         foundInterviews: "Знайдено інтерв'ю:",
@@ -1234,8 +1239,8 @@ export const uk = {
       timeSlot: {
         status: {
           status: 'Статус:',
-          pending: 'Очікує',
-          booked: 'Намічено',
+          pending: 'Пошук',
+          booked: 'Заплановано',
           expired: 'Минув',
         },
         daysOfWeek: {
@@ -1251,6 +1256,7 @@ export const uk = {
       notifications: {
         delete: {
           oneTimeSlot: {
+            warning: 'Кількість часових слотів повинна бути більшою або дорівнювати кількості інтерв’ю',
             success: 'Часовий слот успішно видалено',
             error: 'Щось пішло не так',
           },
@@ -1462,6 +1468,10 @@ export const uk = {
       yemen: 'Ємен',
       zambia: 'Замбія',
       zimbabwe: 'Зімбабве',
+    },
+    clipboardMessage: {
+      success: 'Скопійовано!',
+      error: 'Помилка копіювання.',
     },
   },
 };

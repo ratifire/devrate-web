@@ -43,12 +43,7 @@ import {
 } from './Pages/scheduledInterviewSkeleton';
 import InterviewRequestSkeleton from './Pages/InterviewRequestSkeleton';
 
-import {
-  StatisticsSkeleton,
-  InterviewInfoSkeleton,
-  InterviewFeedbackSkeleton,
-  UserCardSkeleton,
-} from './Pages/interviewSkeleton';
+import { InterviewInfoSkeleton, InterviewFeedbackSkeleton, UserCardSkeleton } from './Pages/interviewSkeleton';
 
 export {
   BlogSkeleton,
@@ -72,7 +67,6 @@ export {
   StepAvatarSkeleton,
   StepLanguageSkeleton,
   InterviewInfoSkeleton,
-  StatisticsSkeleton,
   StatisticSkeleton,
   InterviewFeedbackSkeleton,
   UserCardSkeleton,

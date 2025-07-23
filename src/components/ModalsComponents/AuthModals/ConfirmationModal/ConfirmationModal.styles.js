@@ -1,6 +1,6 @@
 const styles = {
   title: (theme) => ({
-    fontFamily: 'Zen Dots',
+    fontFamily: 'Tektur',
     fontSize: '24px',
     lineHeight: 1.5,
     marginBottom: theme.spacing(2),

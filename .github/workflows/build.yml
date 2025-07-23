@@ -13,8 +13,8 @@ on:
         default: 'dev'
         type: choice
         options:
+          - qa
           - prod
-          - dev
 
 permissions:
   id-token: write

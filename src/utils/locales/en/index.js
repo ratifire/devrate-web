@@ -188,6 +188,7 @@ export const en = {
         sso_error: 'A server error occurred. Please try again later.',
         selecting_auth: 'or',
         email_invalid: 'Invalid email',
+        exist_email: 'This email is already in use',
         required: 'This is a required field',
         first_name_long: 'Name too long',
         first_name_short: 'Name too short',
@@ -1103,7 +1104,7 @@ export const en = {
         title: 'Interview',
         event: {
           role: 'Role',
-          host: 'Host',
+          host: 'Interviewer',
           statusInProcess: 'In Process',
           statusAwaitingFeedback: 'Awaiting Feedback',
         },
@@ -1118,7 +1119,7 @@ export const en = {
         interviewInfoHourAgo: 'hour(s) ago',
         interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
-        interviewInfoHost: 'Host',
+        interviewInfoHost: 'Interviewer',
         interviewFeedbackTitle: "Interviewee's feedback",
         interviewFeedbackReadLess: 'Read more',
         interviewFeedbackReadMore: 'Read less',
@@ -1210,6 +1211,10 @@ export const en = {
         CANDIDATE: 'Respondent',
         INTERVIEWER: 'Interviewer',
       },
+      pendingTooltip: {
+        CANDIDATE: 'The interviewer is being searched',
+        INTERVIEWER: 'The respondent is being searched',
+      },
       requestHeader: {
         titleLauncher: 'as a',
         foundInterviews: 'Interview found:',
@@ -1240,6 +1245,7 @@ export const en = {
       notifications: {
         delete: {
           oneTimeSlot: {
+            warning: 'The number of timeslots must be greater than or equal to the number of interviews',
             success: 'Deleted slot successfully',
             error: 'Something went wrong',
           },
@@ -1451,6 +1457,10 @@ export const en = {
       yemen: 'Yemen',
       zambia: 'Zambia',
       zimbabwe: 'Zimbabwe',
+    },
+    clipboardMessage: {
+      success: 'Copied!',
+      error: 'Failed to copy.',
     },
   },
 };

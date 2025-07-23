@@ -1,6 +1,6 @@
 export const styles = {
   mainContent: (theme) => ({
-    minHeight: 'calc(100vh - 200px)',
+    maxHeight: 'calc(100vh - 80px)',
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
     gridTemplateRows: '180px 12px 225px auto',

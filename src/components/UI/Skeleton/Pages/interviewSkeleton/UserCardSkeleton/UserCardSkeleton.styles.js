@@ -5,18 +5,18 @@ export const styles = {
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     boxShadow: 'none',
     backgroundImage: 'none',
-    maxWidth: '480px',
     width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
+    height: '100%',
   }),
   box: {
     display: 'flex',
     gap: '16px',
+    alignItems: 'center',
   },
   boxInfo: {
     display: 'flex',
     flexDirection: 'column',
     gap: '4px',
+    flex: '1',
   },
 };

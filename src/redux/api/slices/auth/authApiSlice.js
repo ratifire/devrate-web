@@ -58,6 +58,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
           authorizationCode: code,
           state,
         },
+        credentials: 'include',
       }),
       transformResponse: (response, meta) => transformAuthResponse({ response, meta }),
     }),
