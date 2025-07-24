@@ -10,7 +10,7 @@ import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference
 import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
-import CustomTooltip from '@components/UI/CustomTooltip/index.js';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
