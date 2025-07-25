@@ -10,16 +10,34 @@ import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference
 import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
+import { enqueueSnackbar } from 'notistack';
+import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const { t } = useTranslation();
   const { data, isFetching } = useGetEventByIdQuery({ id: event.id }, { skip: !event.id });
-
-  const { showCancelButton, disableLink } = useCheckTimeDifference(event.startTime);
+  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
+  const { showCancelButton } = useCheckTimeDifference(event.startTime);
 
   const deleteEvent = useDeleteEvent();
+
+  const joinToInterview = async () => {
+    try {
+      const meetingUrl = await getMeetingUrl(event.id).unwrap();
+      const urlWithParams = new URL(meetingUrl);
+
+      if (event.id && event.role) {
+        urlWithParams.searchParams.append('eventId', event.id);
+        urlWithParams.searchParams.append('role', event.role);
+      }
+      window.open(urlWithParams, '_blank');
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
+    }
+  };
 
   const handleCancelInterview = async () => {
     await deleteEvent({
@@ -91,11 +109,10 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       <Box sx={styles.buttonsContainer}>
         <ButtonDef
           component='a'
-          disabled={disableLink}
-          href={event.roomLink}
+          disabled={isLoadingMeetingUrl}
           label={t('schedule.link')}
           sx={styles.icon}
-          target='_blank'
+          onClick={joinToInterview}
         />
         {showCancelButton && (
           <Box alt='Cancel Event' component='img' src={cancelEventIcon} onClick={handleCancelInterview} />
