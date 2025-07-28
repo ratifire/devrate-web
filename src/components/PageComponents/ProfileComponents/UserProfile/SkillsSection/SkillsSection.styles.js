@@ -92,14 +92,14 @@ export const styles = {
       padding: '12px 0 16px',
     },
   }),
-  doneInterviewsBtn: (theme) => ({
-    color: theme.palette.skillsSection.doneInterviews.color,
-    borderColor: theme.palette.skillsSection.doneInterviews.borderColor,
-    backgroundColor: theme.palette.skillsSection.doneInterviews.backgroundColor,
-  }),
-  completedInterviewsBtn: (theme) => ({
+  conductedInterviewsBtn: (theme) => ({
     color: theme.palette.skillsSection.completedInterviews.color,
     borderColor: theme.palette.skillsSection.completedInterviews.borderColor,
     backgroundColor: theme.palette.skillsSection.completedInterviews.backgroundColor,
+  }),
+  completedInterviewsBtn: (theme) => ({
+    color: theme.palette.skillsSection.doneInterviews.color,
+    borderColor: theme.palette.skillsSection.doneInterviews.borderColor,
+    backgroundColor: theme.palette.skillsSection.doneInterviews.backgroundColor,
   }),
 };

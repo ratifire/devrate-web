@@ -153,17 +153,17 @@ const SpecializationCategories = () => {
             sx={styles.figure}
             onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
           >
-            <Box sx={styles.specialization_title_star}>
-              <Box sx={styles.specialization_title}>
-                <CustomTooltip customStyles={styles.specialization_name} title={name} variant='h6'>
-                  {name}
-                </CustomTooltip>
-                <Typography variant='subtitle2'>
-                  {t('specialization.levelOfCategory', { level: masteryData[id]?.level })}
-                </Typography>
-              </Box>
-              {main && <StarIcon sx={styles.star} />}
+            <Box sx={styles.specialization_title}>
+              <CustomTooltip customStyles={styles.specialization_name} title={name} variant='h6'>
+                {name}
+              </CustomTooltip>
+              <Typography variant='subtitle2'>
+                {t('specialization.levelOfCategory', { level: masteryData[id]?.level })}
+              </Typography>
             </Box>
+
+            {main && <StarIcon sx={styles.star} />}
+
             <Box sx={styles.hardAndSoftSkills}>
               <Box sx={styles.softSkills}>
                 <Typography sx={styles.skillsStatistic} variant='caption3'>
@@ -178,18 +178,18 @@ const SpecializationCategories = () => {
                 <Typography variant='body'>{masteryData[id]?.hardSkillMark}</Typography>
               </Box>
             </Box>
-            <Box className='figure__deco' sx={styles.figure_deco}>
-              <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event, id)}>
-                <MoreVertIcon sx={styles.editSpecialization} />
-              </IconButton>{' '}
-              <DropdownMenu
-                anchorEl={anchorEl[id]}
-                handleCloseMenu={() => handleCloseMenu(id)}
-                handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
-                handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
-                handleMainFeature={() => handleMakeMainFeature(id)}
-              />
-            </Box>
+
+            <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event, id)}>
+              <MoreVertIcon sx={styles.editSpecialization} />
+            </IconButton>
+
+            <DropdownMenu
+              anchorEl={anchorEl[id]}
+              handleCloseMenu={() => handleCloseMenu(id)}
+              handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
+              handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
+              handleMainFeature={() => handleMakeMainFeature(id)}
+            />
           </Box>
         ))}
       </Box>

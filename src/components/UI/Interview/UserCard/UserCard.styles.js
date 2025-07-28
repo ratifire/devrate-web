@@ -16,6 +16,32 @@ export const styles = {
     gap: '4px',
     overflowX: 'hidden',
   },
+  avatarLink: {
+    textDecoration: 'none',
+    transition: 'transform .2s',
+    '&:hover': {
+      transform: 'scale(1.04)',
+    },
+  },
+  fullNameLink: (theme) => ({
+    display: 'flex',
+    alignItems: 'center',
+    gap: '18px',
+    color: theme.palette.interviewInfo.hostNameColor,
+    textDecoration: 'none',
+    transition: 'color gap 0.2s',
+    '&:hover': {
+      color: theme.palette.primary[300],
+    },
+    '&:active': {
+      gap: '30px',
+    },
+    '@media screen and (max-width: 1288px)': {
+      '& svg': {
+        display: 'none',
+      },
+    },
+  }),
   role: (theme) => ({
     color: theme.palette.userCard.role.color,
   }),

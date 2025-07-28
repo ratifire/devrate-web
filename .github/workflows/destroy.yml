@@ -1,17 +1,16 @@
 name: Destroy
 
 on:
-  # schedule:
-  #   - cron: '00 01 * * *'
+#  schedule:
+#    - cron: '00 21 * * *'
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to deploy (prod, dev or qa)'
+        description: 'Select environment to deploy (prod, dev)'
         required: true
         default: 'dev'
         type: choice
         options:
-          - qa
           - dev
           - prod
 

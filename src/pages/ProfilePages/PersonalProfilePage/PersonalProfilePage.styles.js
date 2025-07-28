@@ -15,9 +15,10 @@ export const styles = {
   contentWrapper: (theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: 'auto 0 auto auto',
+    gridTemplateRows: 'minmax(auto, 244px) 0 auto auto auto',
     gridGap: `${theme.spacing(0)} ${theme.spacing(3)}`,
     '@media (min-width: 1272px)': {
+      gridTemplateRows: 'minmax(auto, 260px) 0 auto auto auto',
       gridGap: theme.spacing(4),
     },
     ' > div': {

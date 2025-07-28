@@ -1,6 +1,6 @@
 export const styles = {
-  timeSlot: (theme) => ({
-    maxWidth: 209,
+  timeSlot: (theme, currentLocale) => ({
+    maxWidth: currentLocale === 'uk' ? 225 : 209,
     minWidth: 209,
     width: '100%',
     height: 70,
@@ -54,6 +54,9 @@ export const styles = {
       display: 'inline-block',
       verticalAlign: 'middle',
     },
+    '& > :last-child:hover': {
+      textDecoration: 'underline',
+    },
   }),
 
   expired: (theme) => ({
@@ -75,6 +78,10 @@ export const styles = {
   statusText: (theme) => ({
     color: theme.palette.requestInterview.timeSlot.statusText,
     marginRight: '8px',
+    opacity: 1,
+  }),
+  statusState: (type) => ({
+    cursor: type === 'booked' ? 'pointer' : 'default',
   }),
   checkBox: () => ({
     color: 'transparent',

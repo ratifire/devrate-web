@@ -11,7 +11,7 @@ import { ButtonDef } from '@components/FormsComponents/Buttons';
 import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord';
 import { modalNames } from '@utils/constants/modalNames';
 import { Link as RouterLink } from 'react-router';
-// import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
+import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
 import styles from './RegistrationModal.styles';
 
 const initialValues = {
@@ -49,7 +49,7 @@ const RegistrationModal = () => {
       dispatch(closeModal());
       dispatch(openModal({ modalType: modalNames.confirmationModal, data: email }));
     } catch (error) {
-      if (error.status === 409) setErrors({ email: 'This email is already in use' });
+      if (error.status === 409) setErrors({ email: t('modal.registration.exist_email') });
     }
   };
 
@@ -146,7 +146,7 @@ const RegistrationModal = () => {
             value={formik.values.repeatPassword}
           />
         </Box>
-        {/*<OAuthSection />*/}
+        <OAuthSection />
         <FormCheckbox
           isLink
           changeHandler={formik.handleChange}
