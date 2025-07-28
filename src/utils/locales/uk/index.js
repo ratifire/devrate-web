@@ -1115,8 +1115,8 @@ export const uk = {
         INTERVIEWER: 'Інтерв’юер',
       },
       pendingTooltip: {
-        CANDIDATE: 'Відбувається пошук респондента',
-        INTERVIEWER: 'Відбувається пошук інтерв’юера',
+        CANDIDATE: 'Відбувається пошук інтерв’юера',
+        INTERVIEWER: 'Відбувається пошук респондента',
       },
       requestHeader: {
         titleLauncher: 'як',

@@ -10,7 +10,11 @@ import { modalNames } from '@utils/constants/modalNames.js';
 import navigationLinks from '../links';
 
 const ScheduledInterviewsGuard = () => {
-  const { data: scheduledInterviews } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
+  const {
+    data: scheduledInterviews,
+    isLoading: isLoadingAllInterviews,
+    isFatching: isFatchingAllInterviews,
+  } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
   const [getSingleInterview] = useLazyGetSingleInterviewByIdQuery();
   const navigate = useNavigate();
   const { interviewId } = useParams();
@@ -23,6 +27,8 @@ const ScheduledInterviewsGuard = () => {
   const roleParam = searchParams.get('role');
 
   useEffect(() => {
+    if (isFatchingAllInterviews || isLoadingAllInterviews) return;
+
     if (modalParam && roleParam) {
       getSingleInterview({ interviewId }).then((response) => {
         dispatch(
@@ -41,7 +47,7 @@ const ScheduledInterviewsGuard = () => {
       });
     }
 
-    if (firstInterviewId) {
+    if (firstInterviewId && !interviewId) {
       navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
         state: { event },
       });

@@ -15,6 +15,8 @@ const styles = {
       paddingY: theme.spacing(3),
       paddingX: theme.spacing(4),
     },
+    maxWidth: '1920px',
+    margin: '0 auto',
   }),
   interviewNavLinksBox: (theme) => ({
     display: 'flex',
