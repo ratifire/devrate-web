@@ -24,7 +24,6 @@ export const styles = {
     },
   }),
   interviewersAssessment: (theme) => ({
-    // marginTop: '2px',
     gridColumn: '1/6',
     gridRow: '2/7',
     padding: theme.spacing(4),
@@ -90,12 +89,9 @@ export const styles = {
   }),
 
   statistics: (theme) => ({
-    // marginTop: '-6px',
     gridColumn: '6/13',
     gridRow: '3/4',
-    // maxHeight: '225px',
     ' > div': {
-      // height: '225px',
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
       boxShadow: 'none',
@@ -103,7 +99,6 @@ export const styles = {
     },
   }),
   interviewFeedback: (theme) => ({
-    // marginTop: '-8px',
     gridColumn: '6/13',
     gridRow: '4/5',
     minHeight: '216px',
@@ -122,7 +117,6 @@ export const styles = {
     },
   }),
   interviewPreviewVideo: (theme) => ({
-    // marginTop: '-8px',
     gridColumn: '6/13',
     gridRow: '5/6',
     minHeight: '372px',

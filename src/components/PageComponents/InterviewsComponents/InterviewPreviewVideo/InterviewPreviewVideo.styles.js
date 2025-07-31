@@ -11,6 +11,8 @@ export const styles = {
 
   content: (theme) => ({
     width: '100%',
+    borderRadius: 1,
+    boxShadow: '0 0 0 1px #1D1D1D',
     aspectRatio: '16/9',
     position: 'relative',
     padding: theme.spacing(3),
