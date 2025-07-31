@@ -1020,6 +1020,13 @@ export const en = {
         interviewStatisticsHardSkills: 'Hard Skills',
         interviewStatisticsSoftSkills: 'Soft Skills',
         interviewStatisticsOverall: 'Over All',
+        interviewPreviewVideo: {
+          headerTitle: 'Video',
+          interviewLevel: 'Interview Level:',
+          specialization: 'Specialization:',
+          candidateName: 'Candidate:',
+          interviewerName: 'Interviewer:',
+        },
       },
       scheduleInterviewModal: {
         title: 'Schedule Interview',

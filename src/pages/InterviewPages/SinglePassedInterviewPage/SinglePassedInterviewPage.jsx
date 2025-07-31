@@ -17,6 +17,7 @@ import { lazy, memo, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import InterviewPreviewVideo from '@components/PageComponents/InterviewsComponents/InterviewPreviewVideo/index.js';
 import EmptySkills from '../../../components/UI/Specialization/EmptySkills';
 
 import EmptyRequestPicDark from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
@@ -54,12 +55,16 @@ const SinglePassedInterviewPage = () => {
     { interviewId },
     { skip: !interviewId }
   );
-
   const attendeeId = interviewData?.attendeeId ?? '';
+  const interviewerId = interviewData?.userId ?? '';
   const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
 
   const { data: userContacts, isFetching: isFetchingContacts } = useGetPersonalUserQuery(attendeeId, {
     skip: !attendeeId,
+  });
+
+  const { data: candidateContacts } = useGetPersonalUserQuery(interviewerId, {
+    skip: !interviewerId,
   });
 
   const {
@@ -67,6 +72,10 @@ const SinglePassedInterviewPage = () => {
     isFetching: isFetchingAvatar,
     isError: isErrorAvatar,
   } = useGetAvatarUserQuery(attendeeId, { skip: !attendeeId });
+
+  const { data: interviewerAvatar, isError: isErrorInterviewerAvatar } = useGetAvatarUserQuery(interviewerId, {
+    skip: !interviewerId,
+  });
 
   const {
     dateTime = new Date(),
@@ -95,6 +104,7 @@ const SinglePassedInterviewPage = () => {
   const averageSoftSkillsMark = getAverageSkillsMark(softSkillsArray);
 
   const { firstName = '', lastName = '' } = userContacts ?? {};
+  const { firstName: candidateFirstName = '', lastName: candidateLastName = '' } = candidateContacts ?? {};
   const userRole = lvlMastery[attendeeMasteryLevel] + ' ' + attendeeSpecialization;
   const level = lvlMastery[attendeeMasteryLevel];
 
@@ -104,7 +114,7 @@ const SinglePassedInterviewPage = () => {
 
   const isFetchingUserCard = isFetchingContacts || isFetchingAvatar || isFetchingPassedInterview;
 
-  if (isErrorAvatar) {
+  if (isErrorAvatar || isErrorInterviewerAvatar) {
     return <ErrorComponent />;
   }
 
@@ -196,6 +206,29 @@ const SinglePassedInterviewPage = () => {
               )}
             </Paper>
           )}
+
+          <Paper sx={styles.interviewPreviewVideo}>
+            <Box sx={styles.container}>
+              <Box sx={styles.header}>
+                <Typography sx={styles.title}>
+                  {t('interviews.passedInterviews.interviewPreviewVideo.headerTitle')}
+                </Typography>
+              </Box>
+              <InterviewPreviewVideo
+                shouldShowVisibilityControl
+                candidateFirstName={candidateFirstName}
+                candidateLastName={candidateLastName}
+                candidateSrc={interviewerAvatar?.userPicture}
+                interviewLevel={level}
+                interviewerFirstName={firstName}
+                interviewerLastName={lastName}
+                interviewerSrc={avatar?.userPicture}
+                role={role}
+                specialization={attendeeSpecialization}
+                // onPlayPressed={() => console.log('Play pressed')}
+              />
+            </Box>
+          </Paper>
         </>
       ) : (
         <Paper sx={styles.emptyStatistics}>
