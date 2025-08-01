@@ -20,10 +20,11 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
+  const currentUrl = window.location.href;
   const result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    api.dispatch(logOut());
+    api.dispatch(logOut(currentUrl));
     api.dispatch(clearTokens());
     return result;
   }
@@ -41,7 +42,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       );
 
       if (refreshToken.error && refreshToken.error.status === 497) {
-        api.dispatch(logOut());
+        api.dispatch(logOut(currentUrl));
         api.dispatch(clearTokens());
         return result;
       }
@@ -60,7 +61,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      api.dispatch(logOut());
+      api.dispatch(logOut(currentUrl));
       api.dispatch(clearTokens());
       return result;
     }
