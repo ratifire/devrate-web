@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { user: null };
+const initialState = { user: null, returnUrl: null };
 
 const authSlice = createSlice({
   name: 'auth',
@@ -9,8 +9,9 @@ const authSlice = createSlice({
     setCredentials: (state, { payload }) => {
       state.user = { ...state.user, ...payload };
     },
-    logOut: (state) => {
+    logOut: (state, { payload }) => {
       state.user = null;
+      state.returnUrl = payload?.returnUrl || null;
     },
   },
 });
