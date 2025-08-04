@@ -7,7 +7,8 @@ import cancelEventIcon from '@assets/icons/cancel-event.svg';
 import links from '@router/links';
 import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
-import { useGetEventByIdQuery, useLazyGetMeetingUrlByEventIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
+import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
+import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
 import { enqueueSnackbar } from 'notistack';
@@ -17,15 +18,21 @@ import { styles } from './EventPopup.styles';
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const { t } = useTranslation();
   const { data, isFetching } = useGetEventByIdQuery({ id: event.id }, { skip: !event.id });
-  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetMeetingUrlByEventIdQuery();
+  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
   const { showCancelButton } = useCheckTimeDifference(event.startTime);
 
   const deleteEvent = useDeleteEvent();
 
   const joinToInterview = async () => {
     try {
-      const meetingUrl = await getMeetingUrl({ eventId: event.id }).unwrap();
-      window.open(meetingUrl, '_blank');
+      const meetingUrl = await getMeetingUrl(event.interviewId).unwrap();
+      const urlWithParams = new URL(meetingUrl);
+
+      if (event.interviewId && event.role) {
+        urlWithParams.searchParams.append('eventId', event.interviewId);
+        urlWithParams.searchParams.append('role', event.role);
+      }
+      window.open(urlWithParams, '_blank');
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });

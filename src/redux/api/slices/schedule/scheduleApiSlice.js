@@ -24,13 +24,6 @@ export const ScheduleApiSlice = apiSlice.injectEndpoints({
       providesTags: [TAG_TYPES.Event],
     }),
 
-    getMeetingUrlByEventId: builder.query({
-      query: ({ eventId }) => ({
-        url: `interviews/events/${eventId}/meeting`,
-        responseHandler: (response) => response.text(),
-      }),
-    }),
-
     deleteEventById: builder.mutation({
       query: ({ id }) => {
         return {
@@ -48,5 +41,4 @@ export const {
   useGetClosestEventByUserIdQuery,
   useDeleteEventByIdMutation,
   useGetEventByIdQuery,
-  useLazyGetMeetingUrlByEventIdQuery,
 } = ScheduleApiSlice;
