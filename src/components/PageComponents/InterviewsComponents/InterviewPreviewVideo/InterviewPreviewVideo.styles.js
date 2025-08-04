@@ -1,4 +1,4 @@
-import videChatBgLight from '@assets/pictures/videChatBgLight.jpg';
+import videoChatBgLight from '@assets/pictures/videoChatBgLight.webp';
 
 export const styles = {
   label: (theme) => ({
@@ -17,7 +17,7 @@ export const styles = {
     position: 'relative',
     padding: theme.spacing(3),
     height: '100%',
-    background: `url(${videChatBgLight})`,
+    background: `url(${videoChatBgLight})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -62,11 +62,11 @@ export const styles = {
     transform: 'translate(-50%, -50%)',
     width: '60px',
     height: '60px',
-    backgroundColor: theme.palette.iconBtn.playButton,
+    backgroundColor: theme.palette.interviewPreviewVideo.playButton.backgroundColor,
     borderRadius: '100px',
     padding: 0,
     '&:hover': {
-      background: theme.palette.iconBtn.playButton.hover.backgroundColor,
+      background: theme.palette.interviewPreviewVideo.playButton.hover.backgroundColor,
     },
   }),
   userIcon: (theme) => ({

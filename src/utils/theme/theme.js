@@ -112,9 +112,6 @@ const getDesignTokens = (mode) => ({
     mode,
     ...(mode === DARK_THEME
       ? {
-          interviewPreviewVideo: {
-            color: '#FFFFFF',
-          },
           faq: {
             title: '#FFFFFF',
             questions: {
@@ -451,12 +448,6 @@ const getDesignTokens = (mode) => ({
               color: '#C5C5C6',
               backgroundColor: '#CEB0FA29',
             },
-            playButton: {
-              backgroundColor: '#30303266',
-              hover: {
-                backgroundColor: 'rgba(84,84,87,0.4)',
-              },
-            },
           },
 
           tabsEl: {
@@ -654,9 +645,6 @@ const getDesignTokens = (mode) => ({
           ...interviewLight,
           ...chatLight,
           ...interviewRequestLight,
-          interviewPreviewVideo: {
-            color: '#FFFFFF',
-          },
           faq: {
             title: '#1D1D1D',
             questions: {
@@ -1008,12 +996,6 @@ const getDesignTokens = (mode) => ({
             dehazeIcon: {
               color: '#444446',
               backgroundColor: '#ECECED',
-            },
-            playButton: {
-              backgroundColor: '#30303266',
-              hover: {
-                backgroundColor: 'rgba(84,84,87,0.4)',
-              },
             },
           },
           skillsSection: {

@@ -13,11 +13,10 @@ import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/persona
 import { lvlMastery } from '@utils/constants/masteryLvl.js';
 import { DARK_THEME } from '@utils/constants/Theme/theme.js';
 import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInterview.js';
-import { lazy, memo, Suspense } from 'react';
+import { lazy, memo, Suspense, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import InterviewPreviewVideo from '@components/PageComponents/InterviewsComponents/InterviewPreviewVideo/index.js';
 import EmptySkills from '../../../components/UI/Specialization/EmptySkills';
 
 import EmptyRequestPicDark from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
@@ -40,12 +39,17 @@ const UserCard = lazy(async () => {
   return { default: module.UserCard };
 });
 
+const InterviewPreviewVideo = lazy(
+  () => import('../../../components/PageComponents/InterviewsComponents/InterviewPreviewVideo')
+);
+
 const MemoizedInterviewInfo = memo(InterviewInfo);
 const MemoizedInterviewHardSkills = memo(InterviewHardSkills);
 const MemoizedInterviewSoftSkills = memo(InterviewSoftSkills);
 const MemoizedStatistics = memo(Statistics);
 const MemoizedInterviewFeedback = memo(InterviewFeedback);
 const MemoizedUserCard = memo(UserCard);
+const MemoizedInterviewPreviewVideo = memo(InterviewPreviewVideo);
 
 const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
@@ -55,6 +59,9 @@ const SinglePassedInterviewPage = () => {
     { interviewId },
     { skip: !interviewId }
   );
+  const handlePlayPressed = useCallback(() => {
+    // console.log('Play pressed');
+  }, []);
   const attendeeId = interviewData?.attendeeId ?? '';
   const interviewerId = interviewData?.userId ?? '';
   const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
@@ -214,7 +221,7 @@ const SinglePassedInterviewPage = () => {
                   {t('interviews.passedInterviews.interviewPreviewVideo.headerTitle')}
                 </Typography>
               </Box>
-              <InterviewPreviewVideo
+              <MemoizedInterviewPreviewVideo
                 shouldShowVisibilityControl
                 candidateFirstName={candidateFirstName}
                 candidateLastName={candidateLastName}
@@ -225,7 +232,7 @@ const SinglePassedInterviewPage = () => {
                 interviewerSrc={avatar?.userPicture}
                 role={role}
                 specialization={attendeeSpecialization}
-                // onPlayPressed={() => console.log('Play pressed')}
+                onPlayPressed={handlePlayPressed}
               />
             </Box>
           </Paper>

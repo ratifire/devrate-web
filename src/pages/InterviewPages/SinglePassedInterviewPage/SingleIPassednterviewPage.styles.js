@@ -145,7 +145,7 @@ export const styles = {
   title: (theme) => ({
     fontWeight: 500,
     fontSize: '1rem',
-    color: theme.palette.interviewPreviewVideo.color,
+    color: theme.palette.interviewPreviewVideo.interviewPreviewVideoTitleColor,
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
   }),
