@@ -12,6 +12,7 @@ import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
 import { enqueueSnackbar } from 'notistack';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
@@ -51,6 +52,8 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   if (isFetching) return null;
 
   const { counterpartUser, currentUser } = data;
+  const currentUserName = `${currentUser.name} ${currentUser.surname}`;
+  const counterpartUserName = `${counterpartUser.name} ${counterpartUser.surname}`;
 
   return (
     <Box
@@ -75,9 +78,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
               {t('schedule.popupUserInfo')}
             </Typography>
             <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${currentUser.id}`}>
-              <Typography sx={styles.name} variant='subtitle2'>
-                {currentUser.name} {currentUser.surname}
-              </Typography>
+              <CustomTooltip customStyles={styles.name} title={currentUserName} variant='subtitle2'>
+                {currentUserName}
+              </CustomTooltip>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
               {lvlMastery[currentUser.masteryLevel]} {currentUser.specializationName}
@@ -92,9 +95,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
               {t('schedule.popupInterviewerInfo')}
             </Typography>
             <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${counterpartUser.id}`}>
-              <Typography sx={styles.name} variant='subtitle2'>
-                {counterpartUser.name} {counterpartUser.surname}
-              </Typography>
+              <CustomTooltip customStyles={styles.name} title={counterpartUserName} variant='subtitle2'>
+                {counterpartUserName}
+              </CustomTooltip>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
               {lvlMastery[counterpartUser.masteryLevel]} {counterpartUser.specializationName}
