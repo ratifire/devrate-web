@@ -26,11 +26,17 @@ const styles = {
     alignItems: 'center',
     gap: theme.spacing(4),
   }),
-  userPhoto: {
+  userPhoto: (theme) => ({
     minWidth: 44,
     width: 44,
     height: 44,
     padding: 0,
-  },
+    '&:hover': {
+      backgroundColor: theme.palette.iconBtn.dehazeIcon.backgroundColor,
+    },
+  }),
+  dehazeIcon: (theme) => ({
+    color: theme.palette.iconBtn.dehazeIcon.color,
+  }),
 };
 export default styles;

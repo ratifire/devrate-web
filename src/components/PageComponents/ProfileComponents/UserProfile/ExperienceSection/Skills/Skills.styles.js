@@ -121,11 +121,11 @@ export const styles = {
     fontSize: '14px',
   }),
   list: {
-    overflowY: 'auto',
+    overflow: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
     gridGap: '0 32px',
-    maxHeight: '200px',
+    maxHeight: 'calc(100% - 64px)',
     paddingRight: '16px',
     '>div': {
       flex: '0 1 calc(50% - 16px)',
