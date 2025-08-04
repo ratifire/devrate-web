@@ -35,8 +35,7 @@ const ScheduledInterviewsPage = () => {
     },
     [lastEventRef]
   );
-  /* eslint-disable */
-  console.log('data', scheduledInterviews);
+
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
