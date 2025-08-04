@@ -35,7 +35,8 @@ const ScheduledInterviewsPage = () => {
     },
     [lastEventRef]
   );
-
+  /* eslint-disable-next-line no-console */
+  console.log('scheduledInterviews', scheduledInterviews);
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];

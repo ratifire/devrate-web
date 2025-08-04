@@ -23,7 +23,7 @@ const ProfileHeader = () => {
       dispatch(apiSlice.util.invalidateTags([TAG_TYPES.ScheduledInterview]));
     }, 5000);
 
-    return () => clearImmediate(id);
+    return () => clearInterval(id);
   }, []);
 
   const toggleDrawer = (event) => {
