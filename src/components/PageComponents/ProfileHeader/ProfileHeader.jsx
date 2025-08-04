@@ -1,10 +1,13 @@
 import { AppBar, Box, Button } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import links from '@router/links';
 import Logo from '@components/UI/Logo';
 import ThemeSwitch from '@components/UI/ThemeSwitch/ThemeSwitch';
 import DehazeIcon from '@mui/icons-material/Dehaze';
+import { useDispatch } from 'react-redux';
+import { apiSlice } from '@redux/api/apiSlice.js';
+import { TAG_TYPES } from '@utils/constants/tagTypes.js';
 import Menu from '../Menu';
 import Notification from '../Notification';
 import Chat from '../Chat';
@@ -13,6 +16,15 @@ import styles from './ProfileHeader.styles';
 
 const ProfileHeader = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      dispatch(apiSlice.util.invalidateTags([TAG_TYPES.ScheduledInterview]));
+    }, 5000);
+
+    return () => clearImmediate(id);
+  }, []);
 
   const toggleDrawer = (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
