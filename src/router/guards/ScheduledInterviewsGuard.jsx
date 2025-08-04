@@ -13,7 +13,7 @@ const ScheduledInterviewsGuard = () => {
   const {
     data: scheduledInterviews,
     isLoading: isLoadingAllInterviews,
-    isFatching: isFatchingAllInterviews,
+    isFetching: isFetchingAllInterviews,
   } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
   const [getSingleInterview] = useLazyGetSingleInterviewByIdQuery();
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const ScheduledInterviewsGuard = () => {
   const roleParam = searchParams.get('role');
 
   useEffect(() => {
-    if (isFatchingAllInterviews || isLoadingAllInterviews) return;
+    if (isFetchingAllInterviews || isLoadingAllInterviews) return;
 
     if (modalParam && roleParam) {
       getSingleInterview({ interviewId }).then((response) => {
@@ -44,6 +44,12 @@ const ScheduledInterviewsGuard = () => {
         navigate(`${navigationLinks.scheduledInterviews}/${interviewId}?modal=${modalParam}&role=${roleParam}`, {
           state: { event: response.data },
         });
+      });
+    }
+
+    if (interviewId) {
+      navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, {
+        state: { event },
       });
     }
 
