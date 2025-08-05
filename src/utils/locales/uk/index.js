@@ -581,11 +581,13 @@ export const uk = {
         averageMark: 'Середня оцінка:',
         emptySkills:
           'Зараз у вашому профілі немає жодних навичок. Додайте їх, щоб покращити себе та відстежувати свій прогрес',
+        validationWarn: 'Кількість hard skills(навичок) має бути не менше 3 і не більше 20.',
       },
       softSkills: {
         title: 'Soft skills',
         averageMark: 'Середня оцінка:',
         emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші софт скіли',
+        validationWarn: 'Кількість soft skills має бути від 3 до 20.',
       },
       modal: {
         specialization: {
