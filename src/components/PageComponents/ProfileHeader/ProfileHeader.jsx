@@ -8,6 +8,7 @@ import DehazeIcon from '@mui/icons-material/Dehaze';
 import { useDispatch } from 'react-redux';
 import { apiSlice } from '@redux/api/apiSlice.js';
 import { TAG_TYPES } from '@utils/constants/tagTypes.js';
+import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import Menu from '../Menu';
 import Notification from '../Notification';
 import Chat from '../Chat';
@@ -16,12 +17,14 @@ import styles from './ProfileHeader.styles';
 
 const ProfileHeader = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { refetch } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
   const dispatch = useDispatch();
 
   useEffect(() => {
     const id = setInterval(() => {
+      refetch();
       dispatch(apiSlice.util.invalidateTags([TAG_TYPES.ScheduledInterview]));
-    }, 5000);
+    }, 2000);
 
     return () => clearInterval(id);
   }, []);
