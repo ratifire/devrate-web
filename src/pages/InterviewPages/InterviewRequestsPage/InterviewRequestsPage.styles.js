@@ -1,9 +1,9 @@
 export const styles = {
   container: (theme) => ({
-    paddingTop: theme.spacing(4),
+    paddingY: theme.spacing(4),
     paddingX: theme.spacing(3),
     '@media (min-width: 600px)': {
-      paddingTop: theme.spacing(3),
+      paddingY: theme.spacing(3),
       paddingX: theme.spacing(3),
     },
     '@media (min-width: 1272px)': {

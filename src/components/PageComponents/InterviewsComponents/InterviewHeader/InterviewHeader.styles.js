@@ -15,6 +15,8 @@ const styles = {
       paddingY: theme.spacing(3),
       paddingX: theme.spacing(4),
     },
+    maxWidth: '1920px',
+    margin: '0 auto',
   }),
   interviewNavLinksBox: (theme) => ({
     display: 'flex',
@@ -40,12 +42,14 @@ const styles = {
       },
     },
   }),
-  interviewNavLink: (theme) => ({
+  interviewNavLink: (theme, interviewStatus) => ({
+    position: 'relative',
     display: 'inline-block',
     textDecoration: 'none',
     color: theme.palette.text.secondary,
     paddingBottom: '10px',
     paddingRight: '20px',
+    paddingLeft: interviewStatus ? '42px' : '20px',
     textTransform: 'none',
     fontSize: 20,
     fontWeight: '500',
@@ -61,6 +65,22 @@ const styles = {
     '&:not(:first-of-type)': {
       paddingLeft: '20px',
     },
+    ...(!!interviewStatus && {
+      '&::before': {
+        content: "''",
+        position: 'absolute',
+        top: '8px',
+        left: '20px',
+        width: '14px',
+        height: '14px',
+        backgroundColor:
+          interviewStatus === 'IN_PROGRESS'
+            ? theme.palette.scheduleInterview.statusColors.inProgress
+            : theme.palette.scheduleInterview.statusColors.activeScheduledInterviews,
+        borderRadius: '50%',
+        cursor: 'default',
+      },
+    }),
   }),
   buttonPrimary: (theme) => ({
     fontSize: 14,

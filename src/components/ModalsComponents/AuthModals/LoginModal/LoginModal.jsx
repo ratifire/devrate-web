@@ -5,15 +5,16 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Box, Link, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { setCredentials } from '@redux/slices/auth/authSlice.js';
-import { setTokens } from '@redux/slices/auth/tokenSlice.js';
+import { setCredentials } from '@redux/slices/auth/authSlice';
+import { setTokens } from '@redux/slices/auth/tokenSlice';
 import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
-import { useLoginMutation } from '@redux/api/slices/auth/authApiSlice.js';
+import { useLoginMutation } from '@redux/api/slices/auth/authApiSlice';
 import { LoginSchema } from '@utils/validationSchemas';
 import { FormInput } from '@components/FormsComponents/Inputs';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
-import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord.jsx';
-import { modalNames } from '@utils/constants/modalNames.js';
+import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord';
+import { modalNames } from '@utils/constants/modalNames';
+import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
 import styles from './LoginModal.styles';
 
 const initialValues = {
@@ -27,6 +28,8 @@ const LoginModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = new URLSearchParams(window.location.search);
+  const returnUrl = params.get('returnUrl');
 
   const handleOpen = useCallback(() => {
     dispatch(openModal({ modalType: modalNames.checkEmailModal }));
@@ -50,19 +53,19 @@ const LoginModal = () => {
 
         if (idToken && authToken) {
           dispatch(setTokens({ idToken, authToken }));
-          navigate('/profile', { replace: true });
+          navigate(returnUrl || '/profile', { replace: true });
         }
         handleClose();
       } catch (error) {
-        let errorMessage = 'Something went wrong';
+        let errorMessage = t('modal.login.something_wrong');
         if (!error?.originalStatus) {
-          errorMessage = 'Invalid email or password';
+          errorMessage = t('modal.login.pasword_or_email_invalid');
         } else if (error.originalStatus === 400) {
-          errorMessage = 'Missing Username or Password';
+          errorMessage = t('modal.login.missing_userName_or_password');
         } else if (error.originalStatus === 401) {
-          errorMessage = 'Unauthorized';
+          errorMessage = t('modal.login.unauthorized');
         } else if (error.originalStatus === 500) {
-          errorMessage = 'Login Failed';
+          errorMessage = t('modal.login.login_failed');
         }
         setLoginError(errorMessage);
       } finally {
@@ -144,6 +147,7 @@ const LoginModal = () => {
             onClick={handleOpen}
           />
         </Box>
+        <OAuthSection />
         <Box sx={styles.wrapperBtn}>
           <ButtonDef
             disabled={formik.isSubmitting || !formik.isValid || !formik.values.email || !formik.values.password}

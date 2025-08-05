@@ -7,7 +7,6 @@ import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/persona
 import { lvlMastery } from '@utils/constants/masteryLvl.js';
 import { ConvertMilliInYears } from '@utils/helpers/convertMilliInYears.js';
 import links from '@router/links';
-import formatRoleLetterCase from '../../../../utils/helpers/formatRoleLetterCase.js';
 
 import { styles } from './InterviewInfo.styles.js';
 
@@ -20,7 +19,6 @@ const InterviewInfo = () => {
     attendeeId = null,
     role = '',
     specialization = '',
-    masteryLevel = 1,
     attendeeMasteryLevel = '',
     attendeeSpecialization = '',
   } = interviewData ?? {};
@@ -48,12 +46,12 @@ const InterviewInfo = () => {
         <Typography sx={styles.interviewSpecialization} variant='h6'>
           {specialization}
         </Typography>
-        <Typography sx={styles[lvlMastery[masteryLevel]?.toLowerCase()]} variant='subtitle2'>
-          {`Level ${lvlMastery[masteryLevel]}`}
+        <Typography sx={styles[lvlMastery[attendeeMasteryLevel]?.toLowerCase()]} variant='subtitle2'>
+          {`Level ${lvlMastery[attendeeMasteryLevel]}`}
         </Typography>
       </Box>
       <Typography sx={styles.role} variant='body1'>
-        {t('interviews.passedInterviews.interviewInfoRole')}: {formatRoleLetterCase(role, t)}
+        {t('interviews.passedInterviews.interviewInfoRole')}: {t(`interviewRequest.role.${role}`)}
       </Typography>
       <Box sx={styles.hostWrapper}>
         <Typography sx={styles.host} variant='body1'>

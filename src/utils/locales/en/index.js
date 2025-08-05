@@ -84,8 +84,6 @@ export const en = {
         community: 'Community',
         contacts: 'Contacts',
         login: 'log in',
-        terms_and_conditions: 'Terms and Conditions',
-        privacy_policy: 'Privacy Policy',
       },
     },
     modal: {
@@ -166,6 +164,11 @@ export const en = {
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_invalid: 'Incorrect password',
+        something_wrong: 'Something went wrong',
+        pasword_or_email_invalid: 'Invalid email or password',
+        missing_userName_or_password: 'Missing Username or Password',
+        unauthorized: 'Unauthorized',
+        login_failed: 'Login Failed',
       },
       registration: {
         title: 'Sign Up',
@@ -178,13 +181,13 @@ export const en = {
         password_tooltip:
           'Password must contain 6 characters, 1 uppercase letter, 1 digit, 1 special character no spaces',
         password_invalid: 'Incorrect password',
-        news_letter: 'Send me news, surveys and special offers from SKILLZZY',
-        agreement: 'I have read and agree to the Terms and conditions',
         agreement_error: 'To use our service, you must agree to the terms of use',
+        agreement: 'I have read and agree to the Terms of Use and Privacy Policy',
         btn_register: 'Sign Up',
-        privacy_policy: 'Privacy Policy',
-        terms_and_conditions: 'Terms and Conditions',
+        sso_error: 'A server error occurred. Please try again later.',
+        selecting_auth: 'or',
         email_invalid: 'Invalid email',
+        exist_email: 'This email is already in use',
         required: 'This is a required field',
         first_name_long: 'Name too long',
         first_name_short: 'Name too short',
@@ -294,6 +297,8 @@ export const en = {
         editAvatar: 'Edit avatar',
         editUserInfo: 'Edit user information',
         editBtn: 'Edit',
+        writeMessage: 'Write a message',
+        bookInterview: 'Book an interview',
       },
       experience: {
         workExperience: {
@@ -486,7 +491,7 @@ export const en = {
           responsibilities_placeholder: 'BackEnd development',
           startDate: 'Start Date',
           endDate: 'End Date',
-          currentDate: 'Currently at this position',
+          currentDate: 'Present',
           required: 'This is a required field',
           startDateMinMessage: 'Date must be later than 01/01/1950',
           startDateMaxMessage: 'Date must be earlier than today',
@@ -500,7 +505,7 @@ export const en = {
           name: 'Educational institution',
           startYear: 'Start year',
           endYear: 'End year',
-          currentDate: 'I am currently studying at this institution',
+          currentDate: 'Present',
           speciality_long: 'Speciality too long',
           speciality_short: 'Speciality too short',
           speciality_placeholder: 'Software Engineer',
@@ -992,7 +997,7 @@ export const en = {
         title: 'Interview',
         event: {
           role: 'Role',
-          host: 'Host',
+          host: 'Interviewer',
           statusInProcess: 'In Process',
           statusAwaitingFeedback: 'Awaiting Feedback',
         },
@@ -1007,7 +1012,7 @@ export const en = {
         interviewInfoHourAgo: 'hour(s) ago',
         interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
-        interviewInfoHost: 'Host',
+        interviewInfoHost: 'Interviewer',
         interviewFeedbackTitle: "Interviewee's feedback",
         interviewFeedbackReadLess: 'Read more',
         interviewFeedbackReadMore: 'Read less',
@@ -1026,7 +1031,7 @@ export const en = {
         interviewCountTitle: 'Number of interviews for the selected timeslots',
         commentTitle: 'Comment',
         commentPlaceholder: 'Describe what you expect from the interview',
-        agree: 'I agree to record the interview and publish',
+        consentStatus: 'I agree to record the interview and publish it',
         required: 'This is a required field',
         comment_min: 'Comment should be longer than 5 characters',
         comment_max: 'Comment should be shorter than 100 characters',
@@ -1099,6 +1104,10 @@ export const en = {
         CANDIDATE: 'Respondent',
         INTERVIEWER: 'Interviewer',
       },
+      pendingTooltip: {
+        CANDIDATE: 'The interviewer is being searched',
+        INTERVIEWER: 'The respondent is being searched',
+      },
       requestHeader: {
         titleLauncher: 'as a',
         foundInterviews: 'Interview found:',
@@ -1129,6 +1138,7 @@ export const en = {
       notifications: {
         delete: {
           oneTimeSlot: {
+            warning: 'The number of timeslots must be greater than or equal to the number of interviews',
             success: 'Deleted slot successfully',
             error: 'Something went wrong',
           },
@@ -1343,6 +1353,10 @@ export const en = {
     },
     notification: {
       error: 'Something went wrong... Try again later',
+    },
+    clipboardMessage: {
+      success: 'Copied!',
+      error: 'Failed to copy.',
     },
   },
 };

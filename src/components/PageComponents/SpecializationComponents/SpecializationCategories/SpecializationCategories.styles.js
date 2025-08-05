@@ -1,5 +1,3 @@
-const DECO_SIZE = 50;
-
 export const styles = {
   wrapper: (theme) => ({
     display: 'flex',
@@ -11,17 +9,19 @@ export const styles = {
       gap: theme.spacing(3),
     },
   }),
+
   specialization_left_box: {
     display: 'flex',
     flexDirection: 'column',
   },
+
   specialization_right_box: (theme) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     gap: theme.spacing(4),
     overflowX: 'auto',
     overflowY: 'visible',
-    paddingBottom: '15px', // for scroll size compensation
+    paddingBottom: '15px',
 
     '&::-webkit-scrollbar': {
       height: 10,
@@ -35,6 +35,7 @@ export const styles = {
       backgroundColor: theme.palette.scroll.scrollEl,
     },
   }),
+
   page_title: (theme) => ({
     marginBottom: theme.spacing(5),
     fontSize: 34,
@@ -42,6 +43,7 @@ export const styles = {
       marginBottom: 0,
     },
   }),
+
   trackerWrapper: {
     '@media (max-width: 991px)': {
       display: 'none',
@@ -50,138 +52,59 @@ export const styles = {
       display: 'block',
     },
   },
+
   add_specialization_btn: (theme) => ({
     width: '134px',
     backgroundColor: theme.palette.specialization.addSpec.color,
     borderRadius: 4,
   }),
 
-  figure: (theme) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    minWidth: '228px',
-    borderRadius: 4,
+  figure: (url) => ({
     position: 'relative',
+    minWidth: '228px',
+    height: '138px',
+    borderRadius: '4px',
     cursor: 'pointer',
-
-    '&.active': {
-      '&::before': {
-        borderColor: theme.palette.specialization.activeSpec.color,
-      },
-      '&::after': {
-        borderColor: theme.palette.specialization.activeSpec.color,
-      },
-      '.figure__deco::after': {
-        borderColor: theme.palette.specialization.activeSpec.color,
-      },
-    },
-
-    '&::before': {
-      content: '""',
-      display: 'flex',
-      position: 'absolute',
-      border: `1px solid ${theme.palette.specialization.addSpec.border}`,
-      borderTop: 'none',
-      transition: 'border-color .2s easy-in-out',
-      backgroundColor: theme.palette.specialization.addSpec.color,
-      top: `calc(100% - ${DECO_SIZE + 1}px)`,
-      left: 0,
-      height: DECO_SIZE,
-      width: `calc(100% - ${DECO_SIZE}px)`,
-      borderRadius: '0 0 16px 16px',
-      zIndex: 1,
-    },
-    '&::after': {
-      content: '""',
-      display: 'flex',
-      position: 'absolute',
-      border: `1px solid ${theme.palette.specialization.addSpec.border}`,
-      borderBottom: 'none',
-      transition: 'border-color .2s easy-in-out',
-      backgroundColor: theme.palette.specialization.addSpec.color,
-      top: 0,
-      left: 0,
-      height: `calc(100% - ${DECO_SIZE}px)`,
-      width: '100%',
-      borderRadius: '16px 16px 16px 0',
-    },
+    backgroundImage: url,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   }),
-  figure_deco: (theme) => ({
-    position: 'absolute',
-    height: 48,
-    width: 52,
-    bottom: '2px',
-    right: 0,
-    borderRadius: '0 0 16px 0',
-    backgroundColor: theme.palette.specialization.addSpec.deco,
 
-    '&::before': {
-      content: '""',
-      display: 'flex',
-      position: 'absolute',
-      top: '-1px',
-      zIndex: 2,
-      left: 0,
-      height: '50%',
-      width: '50%',
-      backgroundColor: theme.palette.specialization.addSpec.color,
-    },
-    '&::after': {
-      content: '""',
-      display: 'flex',
-      position: 'absolute',
-      backgroundColor: theme.palette.specialization.addSpec.deco,
-      left: '2px',
-      top: '0px',
-      zIndex: 2,
-      height: '50%',
-      width: '50%',
-      borderTopLeftRadius: '16px',
-      transition: 'border-color .2s easy-in-out',
-      borderTop: '1px solid ' + theme.palette.specialization.addSpec.border,
-      borderLeft: '1px solid ' + theme.palette.specialization.addSpec.border,
-    },
-  }),
-  specialization_title_star: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '228px',
-  },
   specialization_title: (theme) => ({
+    position: 'absolute',
+    top: theme.spacing(2),
+    left: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
-    marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(1),
-    marginBottom: '23px',
-    zIndex: 1,
+    zIndex: 2,
     overflow: 'hidden',
-    maxWidth: '178px',
+    maxWidth: '150px',
   }),
 
   specialization_name: {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
+    display: 'inline-block',
+    maxWidth: '100%',
   },
 
   star: (theme) => ({
-    marginTop: '12px',
-    marginRight: '16px',
+    position: 'absolute',
+    top: '14px',
+    right: '15px',
     color: theme.palette.specialization.star.color,
-    position: 'relative',
-    zIndex: 1,
+    zIndex: 2,
   }),
 
   hardAndSoftSkills: (theme) => ({
-    gap: theme.spacing(3),
-    paddingLeft: theme.spacing(3),
-    paddingBottom: '6px',
+    position: 'absolute',
+    bottom: '6px',
+    left: theme.spacing(3),
     display: 'flex',
     flexDirection: 'row',
-    position: 'relative',
-    zIndex: 1,
+    gap: theme.spacing(3),
+    zIndex: 2,
   }),
 
   softSkills: () => ({
@@ -193,23 +116,27 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
   },
+
   skillsStatistic: {
     textTransform: 'uppercase',
     lineHeight: '18px',
     letterSpacing: '0.16px',
     fontSize: '10px',
   },
+
   editSpecialization_btn: {
+    position: 'absolute',
+    bottom: '2px',
+    right: '2px',
     padding: 0,
     height: '38px',
     width: '38px',
-    marginTop: '7px',
-    marginLeft: '11px',
-    position: 'relative',
     zIndex: 3,
+    backgroundColor: 'transparent',
+    borderRadius: '50%',
   },
+
   editSpecialization: (theme) => ({
-    zIndex: 1,
     border: `1px solid ${theme.palette.specialization.btnEditSpec.border}`,
     borderRadius: '50%',
     display: 'flex',

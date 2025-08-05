@@ -71,7 +71,6 @@ const ConfirmationModal = () => {
             {'.'}
           </Typography>{' '}
           {t('modal.confirmation.main_text2')}
-          {'.'}
         </Typography>
       </Box>
 

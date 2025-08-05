@@ -12,8 +12,8 @@ on:
         default: 'dev'
         type: choice
         options:
-          - prod
           - dev
+          - prod
   push:
     branches:
       - main

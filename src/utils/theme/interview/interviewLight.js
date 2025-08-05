@@ -99,4 +99,7 @@ export const interviewLight = {
       backgroundColor: 'transparent',
     },
   },
+  feedback: {
+    feedbackBox: '#F8F8F8',
+  },
 };

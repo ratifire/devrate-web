@@ -1,18 +1,18 @@
 name: Main_init
 
 on:
-  # schedule:
-  #   - cron: '00 05 * * *'
+#  schedule:
+#    - cron: '00 08 * * *'
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to main_init (prod, dev)'
+        description: 'Select environment to deploy (prod, dev)'
         required: true
         default: 'dev'
         type: choice
         options:
-          - prod
           - dev
+          - prod
 
 jobs:
   main_init:

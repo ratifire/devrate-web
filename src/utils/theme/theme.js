@@ -181,6 +181,11 @@ const getDesignTokens = (mode) => ({
                 },
               },
             },
+            statusColors: {
+              inProgress: '#DAFE22',
+              awaitingFeedback: '#FCA728',
+              activeScheduledInterviews: '#64FF2E',
+            },
           },
           notifications: {
             backgroundColor: '#252527',
@@ -438,6 +443,10 @@ const getDesignTokens = (mode) => ({
             },
             loadingIcon: {
               color: '#A9A9AA',
+            },
+            dehazeIcon: {
+              color: '#C5C5C6',
+              backgroundColor: '#CEB0FA29',
             },
           },
 
@@ -707,6 +716,11 @@ const getDesignTokens = (mode) => ({
                   color: '#444446',
                 },
               },
+            },
+            statusColors: {
+              inProgress: '#D31772',
+              awaitingFeedback: '#EE7538',
+              activeScheduledInterviews: '#3AB310',
             },
           },
           notifications: {
@@ -978,6 +992,10 @@ const getDesignTokens = (mode) => ({
             },
             loadingIcon: {
               color: '#303032',
+            },
+            dehazeIcon: {
+              color: '#444446',
+              backgroundColor: '#ECECED',
             },
           },
           skillsSection: {
