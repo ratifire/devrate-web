@@ -587,7 +587,7 @@ export const uk = {
         title: 'Soft skills',
         averageMark: 'Середня оцінка:',
         emptySkills: 'Пройдіть співбесіду, щоб користувачі оцінили ваші софт скіли',
-        validationWarn: 'Кількість soft skills має бути від 3 до 20.',
+        validationWarn: 'Кількість soft skills має бути не менше 3 і не більше 20.',
       },
       modal: {
         specialization: {
