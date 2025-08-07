@@ -13,7 +13,7 @@ import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/persona
 import { lvlMastery } from '@utils/constants/masteryLvl.js';
 import { DARK_THEME } from '@utils/constants/Theme/theme.js';
 import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInterview.js';
-import { lazy, memo, Suspense } from 'react';
+import { lazy, memo, Suspense, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
@@ -39,12 +39,17 @@ const UserCard = lazy(async () => {
   return { default: module.UserCard };
 });
 
+const InterviewPreviewVideo = lazy(
+  () => import('../../../components/PageComponents/InterviewsComponents/InterviewPreviewVideo')
+);
+
 const MemoizedInterviewInfo = memo(InterviewInfo);
 const MemoizedInterviewHardSkills = memo(InterviewHardSkills);
 const MemoizedInterviewSoftSkills = memo(InterviewSoftSkills);
 const MemoizedStatistics = memo(Statistics);
 const MemoizedInterviewFeedback = memo(InterviewFeedback);
 const MemoizedUserCard = memo(UserCard);
+const MemoizedInterviewPreviewVideo = memo(InterviewPreviewVideo);
 
 const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
@@ -54,12 +59,19 @@ const SinglePassedInterviewPage = () => {
     { interviewId },
     { skip: !interviewId }
   );
-
+  const handlePlayPressed = useCallback(() => {
+    // console.log('Play pressed');
+  }, []);
   const attendeeId = interviewData?.attendeeId ?? '';
+  const interviewerId = interviewData?.userId ?? '';
   const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
 
   const { data: userContacts, isFetching: isFetchingContacts } = useGetPersonalUserQuery(attendeeId, {
     skip: !attendeeId,
+  });
+
+  const { data: candidateContacts } = useGetPersonalUserQuery(interviewerId, {
+    skip: !interviewerId,
   });
 
   const {
@@ -67,6 +79,10 @@ const SinglePassedInterviewPage = () => {
     isFetching: isFetchingAvatar,
     isError: isErrorAvatar,
   } = useGetAvatarUserQuery(attendeeId, { skip: !attendeeId });
+
+  const { data: interviewerAvatar, isError: isErrorInterviewerAvatar } = useGetAvatarUserQuery(interviewerId, {
+    skip: !interviewerId,
+  });
 
   const {
     dateTime = new Date(),
@@ -95,6 +111,7 @@ const SinglePassedInterviewPage = () => {
   const averageSoftSkillsMark = getAverageSkillsMark(softSkillsArray);
 
   const { firstName = '', lastName = '' } = userContacts ?? {};
+  const { firstName: candidateFirstName = '', lastName: candidateLastName = '' } = candidateContacts ?? {};
   const userRole = lvlMastery[attendeeMasteryLevel] + ' ' + attendeeSpecialization;
   const level = lvlMastery[attendeeMasteryLevel];
 
@@ -104,7 +121,7 @@ const SinglePassedInterviewPage = () => {
 
   const isFetchingUserCard = isFetchingContacts || isFetchingAvatar || isFetchingPassedInterview;
 
-  if (isErrorAvatar) {
+  if (isErrorAvatar || isErrorInterviewerAvatar) {
     return <ErrorComponent />;
   }
 
@@ -196,6 +213,29 @@ const SinglePassedInterviewPage = () => {
               )}
             </Paper>
           )}
+
+          <Paper sx={styles.interviewPreviewVideo}>
+            <Box sx={styles.container}>
+              <Box sx={styles.header}>
+                <Typography sx={styles.title}>
+                  {t('interviews.passedInterviews.interviewPreviewVideo.headerTitle')}
+                </Typography>
+              </Box>
+              <MemoizedInterviewPreviewVideo
+                shouldShowVisibilityControl
+                candidateFirstName={candidateFirstName}
+                candidateLastName={candidateLastName}
+                candidateSrc={interviewerAvatar?.userPicture}
+                interviewLevel={level}
+                interviewerFirstName={firstName}
+                interviewerLastName={lastName}
+                interviewerSrc={avatar?.userPicture}
+                role={role}
+                specialization={attendeeSpecialization}
+                onPlayPressed={handlePlayPressed}
+              />
+            </Box>
+          </Paper>
         </>
       ) : (
         <Paper sx={styles.emptyStatistics}>

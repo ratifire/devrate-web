@@ -103,4 +103,14 @@ export const interviewDark = {
   feedback: {
     feedbackBox: '#3E3E40',
   },
+  interviewPreviewVideo: {
+    color: '#FFFFFF',
+    interviewPreviewVideoTitleColor: '#FFFFFF',
+    playButton: {
+      backgroundColor: '#30303266',
+      hover: {
+        backgroundColor: 'rgba(84,84,87,0.4)',
+      },
+    },
+  },
 };
