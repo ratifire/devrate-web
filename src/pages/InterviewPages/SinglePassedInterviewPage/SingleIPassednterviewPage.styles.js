@@ -126,6 +126,9 @@ export const styles = {
       boxShadow: 'none',
     },
   }),
+  interviewVideo: (theme) => ({
+    borderRadius: theme.spacing(2),
+  }),
   container: (theme) => ({
     position: 'relative',
     paddingBottom: '16px',
