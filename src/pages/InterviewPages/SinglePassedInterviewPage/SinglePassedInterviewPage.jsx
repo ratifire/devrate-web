@@ -93,7 +93,7 @@ const SinglePassedInterviewPage = () => {
     feedback = '',
     attendeeMasteryLevel = '',
     attendeeSpecialization = '',
-    videoUrl = 'https://www.youtube.com/embed/jMZwTLM93Yo',
+    videoUrl = 'https://www.youtube.com/watch?v=Z-JzryWEBYQ',
   } = interviewData ?? {};
   const getSkillsArray = (skillsArray) =>
     Object.entries(skillsArray).map(([name, averageMark]) => ({
@@ -260,16 +260,17 @@ const SinglePassedInterviewPage = () => {
                   onPlayPressed={handlePlayPressed}
                 />
               ) : (
-                <ReactPlayer
-                  controls
-                  height='auto'
-                  playing={isPlaying}
-                  src={videoUrl}
-                  style={styles.interviewVideo.borderRadius}
-                  // url={videoUrl}
-                  width='100%'
-                  onEnded={() => setIsPlaying(false)}
-                />
+                <Box sx={styles.playerWrapper}>
+                  <ReactPlayer
+                    controls
+                    height='100%'
+                    playing={isPlaying}
+                    src={videoUrl}
+                    style={styles.interviewVideo}
+                    width='100%'
+                    onEnded={() => setIsPlaying(false)}
+                  />
+                </Box>
               )}
             </Box>
           </Paper>
