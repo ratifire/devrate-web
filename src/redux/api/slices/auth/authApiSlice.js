@@ -4,6 +4,7 @@ import { setDarkTheme } from '@redux/slices/theme/themeSlice';
 import { logOut } from '@redux/slices/auth/authSlice';
 import { clearTokens } from '@redux/slices/auth/tokenSlice';
 import transformAuthResponse from '@redux/api/slices/auth/transformAuthResponse';
+import setLanguageI18n from '@redux/api/slices/auth/setLanguageI18n.js';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -49,6 +50,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
       }),
       transformResponse: (response, meta) => transformAuthResponse({ response, meta }),
+      async onQueryStarted(arg, { _dispatch, queryFulfilled }) {
+        await setLanguageI18n(queryFulfilled);
+      },
     }),
     oAuthAuthorize: builder.mutation({
       query: ({ code, state }) => ({
@@ -61,14 +65,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
       }),
       transformResponse: (response, meta) => transformAuthResponse({ response, meta }),
-    }),
-    activateAccount: builder.mutation({
-      query: ({ activationCode, password }) => ({
-        url: '/auth/confirm-activation-account',
-        method: 'POST',
-        body: { activationCode, password },
-      }),
-      transformResponse: (response, meta) => transformAuthResponse({ response, meta }),
+      async onQueryStarted(arg, { _dispatch, queryFulfilled }) {
+        await setLanguageI18n(queryFulfilled);
+      },
     }),
     resendCode: builder.mutation({
       query: ({ email }) => ({
@@ -103,7 +102,5 @@ export const {
   useResetPasswordMutation,
   useChangePasswordMutation,
   useLoginMutation,
-  useActivateAccountMutation,
-  useResendCodeMutation,
   useLogoutMutation,
 } = authApiSlice;
