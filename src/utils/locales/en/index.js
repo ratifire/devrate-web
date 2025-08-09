@@ -1358,6 +1358,9 @@ export const en = {
       zambia: 'Zambia',
       zimbabwe: 'Zimbabwe',
     },
+    notification: {
+      error: 'Something went wrong... Try again later',
+    },
     clipboardMessage: {
       success: 'Copied!',
       error: 'Failed to copy.',
