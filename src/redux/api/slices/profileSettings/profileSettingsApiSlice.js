@@ -19,6 +19,7 @@ const profileSettingsApiSlice = apiSlice.injectEndpoints({
         url: '/profile-settings/change-email',
         method: 'PATCH',
         body: { currentEmail, newEmail },
+        credentials: 'include',
       }),
     }),
     updatePassword: builder.mutation({
