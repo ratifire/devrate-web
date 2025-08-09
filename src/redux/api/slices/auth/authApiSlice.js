@@ -1,9 +1,10 @@
 import { apiSlice } from '@redux/api/apiSlice';
-import { getTokenInHeaders } from '@utils/helpers';
 import { TAG_TYPES_ARRAY } from '@utils/constants/tagTypes';
 import { setDarkTheme } from '@redux/slices/theme/themeSlice';
 import { logOut } from '@redux/slices/auth/authSlice';
 import { clearTokens } from '@redux/slices/auth/tokenSlice';
+import transformAuthResponse from '@redux/api/slices/auth/transformAuthResponse';
+import setLanguageI18n from '@redux/api/slices/auth/setLanguageI18n.js';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -48,15 +49,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { email, password },
         credentials: 'include',
       }),
-      transformResponse: (response, meta) => {
-        const headers = meta?.response?.headers;
-        if (headers) {
-          const { authToken, idToken } = getTokenInHeaders({ headers });
-
-          if (authToken && idToken) {
-            return { authToken, idToken, userData: { ...response } };
-          }
-        }
+      transformResponse: (response, meta) => transformAuthResponse({ response, meta }),
+      async onQueryStarted(arg, { _dispatch, queryFulfilled }) {
+        await setLanguageI18n(queryFulfilled);
       },
     }),
     oAuthAuthorize: builder.mutation({
@@ -69,16 +64,17 @@ export const authApiSlice = apiSlice.injectEndpoints({
         },
         credentials: 'include',
       }),
-      transformResponse: (response, meta) => {
-        const headers = meta?.response?.headers;
-        if (headers) {
-          const { authToken, idToken } = getTokenInHeaders({ headers });
-
-          if (authToken && idToken) {
-            return { authToken, idToken, userData: { ...response } };
-          }
-        }
+      transformResponse: (response, meta) => transformAuthResponse({ response, meta }),
+      async onQueryStarted(arg, { _dispatch, queryFulfilled }) {
+        await setLanguageI18n(queryFulfilled);
       },
+    }),
+    resendCode: builder.mutation({
+      query: ({ email }) => ({
+        url: '/auth/activation-account/resend-code',
+        method: 'POST',
+        body: { email },
+      }),
     }),
     logout: builder.mutation({
       query: () => ({

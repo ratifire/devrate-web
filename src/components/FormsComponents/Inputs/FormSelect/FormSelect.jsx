@@ -17,7 +17,7 @@ const FormSelect = ({
   helperText,
   countries,
   disabled,
-  isTranslated,
+  translatedKey,
   onOpen,
 }) => {
   const id = uuid();
@@ -49,7 +49,7 @@ const FormSelect = ({
       >
         {countries.map((country) => (
           <MenuItem key={country} sx={styles.menuItem} value={country}>
-            {isTranslated ? t(`modal.feedbackProjectModal.type_of_feedback.${country}`) : country}
+            {translatedKey ? t(`${translatedKey}.${country}`) : country}
           </MenuItem>
         ))}
       </Select>
@@ -74,7 +74,7 @@ FormSelect.propTypes = {
   error: PropTypes.bool,
   countries: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
-  isTranslated: PropTypes.bool,
+  translatedKey: PropTypes.string,
   onOpen: PropTypes.func,
 };
 FormSelect.defaultProps = {
@@ -89,6 +89,7 @@ FormSelect.defaultProps = {
   error: false,
   countries: [],
   isTranslated: false,
+  translatedKey: '',
   onOpen: () => {},
 };
 export default FormSelect;

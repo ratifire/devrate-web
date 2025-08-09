@@ -31,17 +31,6 @@ const styles = {
       order: 2,
     },
   }),
-  menuDisableLink: (theme) => ({
-    textDecoration: 'none',
-    color: theme.palette.text.secondary,
-    cursor: 'not-allowed',
-    pointerEvents: 'none',
-    display: 'block',
-    borderRadius: 1,
-    '&:last-of-type': {
-      order: 2,
-    },
-  }),
   listItemButton: (theme) => ({
     '& .MuiListItemIcon-root': {
       color: theme.palette.text.secondary,
