@@ -25,6 +25,7 @@ const ChangeEmail = () => {
       enqueueSnackbar(t('settings.general.changeEmail.notification.success'), {
         variant: 'success',
       });
+      formik.resetForm();
     } catch (error) {
       if (error?.status === 409) {
         return enqueueSnackbar(t('settings.general.changeEmail.notification.userAlreadyExists'), {

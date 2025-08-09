@@ -32,6 +32,7 @@ const ChangePassword = () => {
       enqueueSnackbar(t('settings.general.changePassword.notification.success'), {
         variant: 'success',
       });
+      formik.resetForm();
     } catch (err) {
       if (err?.status === 400) {
         return enqueueSnackbar(t('settings.general.changePassword.notification.error'), {
