@@ -574,13 +574,11 @@ export const en = {
         averageMark: 'Average mark:',
         emptySkills:
           "You don't have any skills on your profile right now. Add them to upgrade yourself and track your progress",
-        validationWarn: 'You must have min 3 hard skills and max 20',
       },
       softSkills: {
         title: 'Soft skills',
         averageMark: 'Average mark:',
         emptySkills: 'Pass an interview to have users evaluate your Soft Skills',
-        validationWarn: 'You must have min 3 soft skills and max 20',
       },
       modal: {
         specialization: {
@@ -966,6 +964,7 @@ export const en = {
         create: {
           success: 'Submitted successfully',
           error: 'Something went wrong',
+          skillsValidation: 'Add at least 3 hard skills on the specializations page.',
         },
         edit: {
           success: 'Edited successfully',

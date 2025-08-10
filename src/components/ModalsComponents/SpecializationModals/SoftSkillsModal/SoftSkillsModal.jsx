@@ -131,11 +131,6 @@ const SoftSkillsModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (state.allSkills.length < 3 || state.allSkills.length > 20) {
-      return enqueueSnackbar(t('specialization.softSkills.validationWarn'), {
-        variant: 'error',
-      });
-    }
 
     try {
       const deleteSkillPromises = idDeletedSkills.map((v) => deleteSkill(v.id));
