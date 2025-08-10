@@ -1029,6 +1029,13 @@ export const uk = {
         interviewStatisticsHardSkills: 'Hard skills',
         interviewStatisticsSoftSkills: 'Soft skills',
         interviewStatisticsOverall: 'Загалом',
+        interviewPreviewVideo: {
+          headerTitle: 'Відео',
+          interviewLevel: 'Рівень співбесіди:',
+          specialization: 'Спеціалізація:',
+          candidateName: 'Кандидат:',
+          interviewerName: "Інтерв'юер:",
+        },
       },
       scheduleInterviewModal: {
         title: 'Запланувати співбесіду',
