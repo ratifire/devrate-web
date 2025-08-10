@@ -1,3 +1,12 @@
+import {
+  TitleSettingSkeleton,
+  EmailNotificationsSkeleton,
+  TelegramNotificationsSkeleton,
+  SettingsSideBarSkeleton,
+  ChangeEmailSkeleton,
+  ChangePasswordSkeleton,
+  ChangeLanguageSkeleton,
+} from '@components/UI/Skeleton/Pages/settingsSkeleton';
 import FeedbackModalSkeleton from './Modal/FeedbackModalSkeleton';
 import { BlogSkeleton, FaqSkeleton } from './Pages/faqSkeleton';
 import { CalendarSkeleton, SmallCalendarSkeleton, ClosestEventSkeleton } from './Pages/scheduleSkeleton';
@@ -68,4 +77,11 @@ export {
   CalendarSkeleton,
   ClosestEventSkeleton,
   SmallCalendarSkeleton,
+  TitleSettingSkeleton,
+  EmailNotificationsSkeleton,
+  TelegramNotificationsSkeleton,
+  SettingsSideBarSkeleton,
+  ChangeEmailSkeleton,
+  ChangePasswordSkeleton,
+  ChangeLanguageSkeleton,
 };

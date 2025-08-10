@@ -70,6 +70,7 @@ const ScheduledMeeting = () => {
           navigate(navigationLinks.interviews);
         })
         .catch(() => {
+          enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'success' });
           showSnackbar('error');
         });
     }
