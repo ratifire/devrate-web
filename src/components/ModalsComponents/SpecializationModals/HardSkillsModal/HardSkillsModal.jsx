@@ -143,6 +143,11 @@ const HardSkillsModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (state.allSkills.length < 3 || state.allSkills.length > 20) {
+      return enqueueSnackbar(t('modalNotifyText.hardSkills.create.validationWarn'), {
+        variant: 'error',
+      });
+    }
 
     try {
       const addSkillPromises = addSkills.map((skill) =>

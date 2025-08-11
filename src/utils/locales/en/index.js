@@ -922,6 +922,7 @@ export const en = {
         create: {
           success: 'Submitted successfully',
           error: 'Something went wrong',
+          validationWarn: 'You must have min 3 hard skills and max 20',
         },
         delete: {
           success: 'Deleted successfully',
@@ -936,6 +937,7 @@ export const en = {
         create: {
           success: 'Submitted successfully',
           error: 'Something went wrong',
+          validationWarn: 'You must have min 3 soft skills',
         },
         delete: {
           success: 'Deleted successfully',
@@ -946,6 +948,7 @@ export const en = {
         create: {
           success: 'Specialization {{values}} added successfully',
           error: 'Failed to create Specialization',
+          validationWarn: 'You must have min 3 hard skills and max 20',
         },
         edit: {
           success: 'Edited successfully to {{name}}',
