@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Badge, IconButton, Popover } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
@@ -8,19 +8,36 @@ import emptyNotificationLight from '@utils/constants/notification/whiteThemeIcon
 import emptyNotificationDark from '@utils/constants/notification/darkThemeIcons';
 import { DARK_THEME } from '@utils/constants/Theme/theme';
 import BellNotification from '@assets/icons/bell.svg?react';
+import { resetPage } from '@redux/slices/scheduledInterview/scheduledInterviewSlice.js';
+import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import styles from './Notification.styles';
 import NotificationEmpty from './NotificationEmpty';
 import NotificationList from './NotificationList';
 
 const Notification = () => {
-  const { data: info } = useSelector(selectCurrentUser);
   const [bellButton, setBellButton] = useState(null);
-  const { data: notifications, isLoading } = useGetNotificationsQuery(info.id);
-  const newNotification = notifications?.every((item) => item.read) ?? true;
-
-  const { mode } = useSelector((state) => state.theme);
-  const icons = mode === DARK_THEME ? emptyNotificationDark : emptyNotificationLight;
   const dispatch = useDispatch();
+  const { data: info } = useSelector(selectCurrentUser);
+  const { mode } = useSelector((state) => state.theme);
+  const { refetch } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
+
+  const { data: notifications, isLoading } = useGetNotificationsQuery(info.id);
+
+  const newNotification = notifications?.every((item) => item.read) ?? true;
+  const icons = mode === DARK_THEME ? emptyNotificationDark : emptyNotificationLight;
+
+  useEffect(() => {
+    if (Array.isArray(notifications) && notifications.length > 0) {
+      const hasUpdated = notifications.find(
+        (v) => v.type === 'INTERVIEW_SCHEDULED' || v.type === 'INTERVIEW_RESCHEDULED'
+      );
+
+      if (hasUpdated) {
+        dispatch(resetPage());
+        refetch();
+      }
+    }
+  }, [notifications]);
 
   const bellButtonClickHandler = (event) => {
     event.preventDefault();

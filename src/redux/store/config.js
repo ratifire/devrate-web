@@ -1,5 +1,3 @@
-// src/app/config.js
-
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import session from 'redux-persist/lib/storage/session';
@@ -18,6 +16,7 @@ import modalSliceReducer from '@redux/slices/modal/modalSlice';
 import modalStepReducer from '@redux/slices/modal/modalStepSlice';
 import scheduleReducer from '@redux/slices/schedule/scheduleSlice';
 import popupReducer from '@redux/slices/notification/popupSlice.js';
+import scheduledInterviewSlice from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
 import { apiSlice } from '@redux/api/apiSlice.js';
 
 const authPersistConfig = {
@@ -57,6 +56,7 @@ const rootReducer = {
   auth: persistReducer(authPersistConfig, authReducer),
   tokens: persistReducer(tokenPersistConfig, tokenSlice),
   theme: persistReducer(themePersistConfig, themeSliceReducer),
+  scheduledInterview: scheduledInterviewSlice,
   skills: updateTabSlice,
   popup: popupReducer,
 };

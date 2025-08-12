@@ -1,11 +1,12 @@
 import { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import InterviewsSkeleton from '@components/UI/Skeleton/Pages/InterviewsSkeleton';
 import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
-import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
-import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice';
+import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures';
+import { setPage } from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
 import { InterviewContainer } from '../../../components/UI/Interview';
-import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
+import EmptyInterviewTab from '../EmptyInterviewTab/index';
 
 const SideBar = lazy(
   () => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar.jsx')
@@ -20,11 +21,14 @@ const options = {
 };
 
 const ScheduledInterviewsPage = () => {
-  const [page, setPage] = useState(0);
-  const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 6 });
   const [lastEventRef, setLastEventRef] = useState(null);
+  const dispatch = useDispatch();
+  const { page } = useSelector((state) => state.scheduledInterview);
   const { id } = useSelector((state) => state.auth.user.data);
+
+  const { data: scheduledInterviews, isFetching, isLoading } = useGetAllScheduledInterviewsQuery({ page, size: 6 });
   const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
+
   const isSpecializations = !!specializations?.length;
 
   const refHandler = useCallback(
@@ -35,13 +39,12 @@ const ScheduledInterviewsPage = () => {
     },
     [lastEventRef]
   );
-  /* eslint-disable-next-line no-console */
-  console.log('scheduledInterviews', scheduledInterviews);
+
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
       if (target.isIntersecting && !isFetching && !isLoading && scheduledInterviews?.totalPages !== page) {
-        setPage((prevPage) => prevPage + 1);
+        dispatch(setPage());
       }
     },
     [isFetching, isLoading, scheduledInterviews?.totalPages, page]
