@@ -4,6 +4,7 @@ import { clearTokens, setTokens } from '@redux/slices/auth/tokenSlice.js';
 import { TAG_TYPES_ARRAY } from '@utils/constants/tagTypes.js';
 import { PUBLIC_ENDPOINTS_ARRAY } from '@utils/constants/publicEndpoints.js';
 import { getTokenInHeaders } from '@utils/helpers/index.js';
+import { closeModal } from '@redux/slices/modal/modalSlice.js';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_DEV_URL || import.meta.env.VITE_API_URL,
@@ -20,11 +21,13 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
+  const currentUrl = window.location.pathname + window.location.search;
   const result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    api.dispatch(logOut());
+    api.dispatch(logOut({ returnUrl: currentUrl }));
     api.dispatch(clearTokens());
+    api.dispatch(closeModal());
     return result;
   }
 
@@ -41,8 +44,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       );
 
       if (refreshToken.error && refreshToken.error.status === 497) {
-        api.dispatch(logOut());
+        api.dispatch(logOut({ returnUrl: currentUrl }));
         api.dispatch(clearTokens());
+        api.dispatch(closeModal());
         return result;
       }
 
@@ -60,8 +64,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      api.dispatch(logOut());
+      api.dispatch(logOut({ returnUrl: currentUrl }));
       api.dispatch(clearTokens());
+      api.dispatch(closeModal());
       return result;
     }
   }

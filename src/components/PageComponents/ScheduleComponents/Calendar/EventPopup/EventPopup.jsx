@@ -8,18 +8,37 @@ import links from '@router/links';
 import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
 import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
+import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
+import { enqueueSnackbar } from 'notistack';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const { t } = useTranslation();
   const { data, isFetching } = useGetEventByIdQuery({ id: event.id }, { skip: !event.id });
-
-  const { showCancelButton, disableLink } = useCheckTimeDifference(event.startTime);
+  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
+  const { showCancelButton } = useCheckTimeDifference(event.startTime);
 
   const deleteEvent = useDeleteEvent();
+
+  const joinToInterview = async () => {
+    try {
+      const meetingUrl = await getMeetingUrl(event.interviewId).unwrap();
+      const urlWithParams = new URL(meetingUrl);
+
+      if (event.interviewId && event.role) {
+        urlWithParams.searchParams.append('eventId', event.interviewId);
+        urlWithParams.searchParams.append('role', event.role);
+      }
+      window.open(urlWithParams, '_blank');
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
+    }
+  };
 
   const handleCancelInterview = async () => {
     await deleteEvent({
@@ -33,6 +52,8 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   if (isFetching) return null;
 
   const { counterpartUser, currentUser } = data;
+  const currentUserName = `${currentUser.name} ${currentUser.surname}`;
+  const counterpartUserName = `${counterpartUser.name} ${counterpartUser.surname}`;
 
   return (
     <Box
@@ -57,9 +78,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
               {t('schedule.popupUserInfo')}
             </Typography>
             <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${currentUser.id}`}>
-              <Typography sx={styles.name} variant='subtitle2'>
-                {currentUser.name} {currentUser.surname}
-              </Typography>
+              <CustomTooltip customStyles={styles.name} title={currentUserName} variant='subtitle2'>
+                {currentUserName}
+              </CustomTooltip>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
               {lvlMastery[currentUser.masteryLevel]} {currentUser.specializationName}
@@ -74,9 +95,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
               {t('schedule.popupInterviewerInfo')}
             </Typography>
             <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${counterpartUser.id}`}>
-              <Typography sx={styles.name} variant='subtitle2'>
-                {counterpartUser.name} {counterpartUser.surname}
-              </Typography>
+              <CustomTooltip customStyles={styles.name} title={counterpartUserName} variant='subtitle2'>
+                {counterpartUserName}
+              </CustomTooltip>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
               {lvlMastery[counterpartUser.masteryLevel]} {counterpartUser.specializationName}
@@ -91,11 +112,10 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       <Box sx={styles.buttonsContainer}>
         <ButtonDef
           component='a'
-          disabled={disableLink}
-          href={event.roomLink}
+          disabled={isLoadingMeetingUrl}
           label={t('schedule.link')}
           sx={styles.icon}
-          target='_blank'
+          onClick={joinToInterview}
         />
         {showCancelButton && (
           <Box alt='Cancel Event' component='img' src={cancelEventIcon} onClick={handleCancelInterview} />
