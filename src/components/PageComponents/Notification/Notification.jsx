@@ -33,9 +33,6 @@ const Notification = () => {
         (v) => v.type === NOTIFICATION_TYPES.INTERVIEW_SCHEDULED || v.type === NOTIFICATION_TYPES.INTERVIEW_REJECTED
       );
 
-      /* eslint-disable */
-      console.log('notifications', notifications);
-      console.log('hasUpdated', hasUpdated);
       if (hasUpdated) {
         dispatch(resetPage());
         refetch();
