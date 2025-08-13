@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Badge, IconButton, Popover } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
-import { openPopup, closePopup } from '@redux/slices/notification/popupSlice.js';
-import { useGetNotificationsQuery } from '@redux/api/slices/notificationsApiSlice.js';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
+import { openPopup, closePopup } from '@redux/slices/notification/popupSlice';
+import { useGetNotificationsQuery } from '@redux/api/slices/notificationsApiSlice';
 import emptyNotificationLight from '@utils/constants/notification/whiteThemeIcons';
 import emptyNotificationDark from '@utils/constants/notification/darkThemeIcons';
 import { DARK_THEME } from '@utils/constants/Theme/theme';
 import BellNotification from '@assets/icons/bell.svg?react';
-import { resetPage } from '@redux/slices/scheduledInterview/scheduledInterviewSlice.js';
-import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
+import { resetPage } from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
+import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
+import NOTIFICATION_TYPES from '@utils/constants/notificationTypes';
 import styles from './Notification.styles';
 import NotificationEmpty from './NotificationEmpty';
 import NotificationList from './NotificationList';
@@ -28,7 +29,10 @@ const Notification = () => {
 
   useEffect(() => {
     if (Array.isArray(notifications) && notifications.length > 0) {
-      const hasUpdated = notifications.find((v) => v.type === 'INTERVIEW_SCHEDULED' || v.type === 'INTERVIEW_REJECTED');
+      const hasUpdated = notifications.some(
+        (v) => v.type === NOTIFICATION_TYPES.INTERVIEW_SCHEDULED || v.type === NOTIFICATION_TYPES.INTERVIEW_REJECTED
+      );
+
       /* eslint-disable */
       console.log('notifications', notifications);
       console.log('hasUpdated', hasUpdated);
