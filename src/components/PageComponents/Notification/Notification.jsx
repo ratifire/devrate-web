@@ -28,10 +28,10 @@ const Notification = () => {
 
   useEffect(() => {
     if (Array.isArray(notifications) && notifications.length > 0) {
-      const hasUpdated = notifications.find(
-        (v) => v.type === 'INTERVIEW_SCHEDULED' || v.type === 'INTERVIEW_RESCHEDULED'
-      );
-
+      const hasUpdated = notifications.find((v) => v.type === 'INTERVIEW_SCHEDULED' || v.type === 'INTERVIEW_REJECTED');
+      /* eslint-disable */
+      console.log('notifications', notifications);
+      console.log('hasUpdated', hasUpdated);
       if (hasUpdated) {
         dispatch(resetPage());
         refetch();
