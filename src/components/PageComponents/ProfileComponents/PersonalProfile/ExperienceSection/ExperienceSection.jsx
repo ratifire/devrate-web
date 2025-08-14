@@ -11,6 +11,7 @@ import Education from './Education/Education';
 import Skills from './Skills';
 import Achievement from './Achievement';
 import WorkExperience from './WorkExperience/WorkExperience';
+import Video from './Video/index.js';
 
 const ExperienceSection = () => {
   const { t } = useTranslation();
@@ -38,6 +39,7 @@ const ExperienceSection = () => {
   const tab = {
     workExperience: <WorkExperience tab={'workExperience'} />,
     achievement: <Achievement tab={'achievement'} />,
+    video: <Video tab={'video'} />,
     skills: <Skills tab={'skills'} />,
     education: <Education tab={'education'} />,
   };
@@ -56,6 +58,7 @@ const ExperienceSection = () => {
       </IconButton>
     ),
     skills: <></>,
+    video: <></>,
     education: (
       <IconButton sx={styles.iconBtn} onClick={() => openModal('educationModal')}>
         <Add />
@@ -79,6 +82,7 @@ const ExperienceSection = () => {
             sx={styles.tabItem}
             value='achievement'
           />
+          <Tab disableRipple label={t('profile.experience.video.tabName')} sx={styles.tabItem} value='video' />
           <Tab disableRipple label={t('profile.experience.skills.tabName')} sx={styles.tabItem} value='skills' />
           <Tab disableRipple label={t('profile.experience.education.tabName')} sx={styles.tabItem} value='education' />
         </Tabs>

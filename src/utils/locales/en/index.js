@@ -325,6 +325,9 @@ export const en = {
             },
           },
         },
+        video: {
+          tabName: 'Співбесіди',
+        },
         skills: {
           tabName: 'Skills',
           emptyTabName: {
