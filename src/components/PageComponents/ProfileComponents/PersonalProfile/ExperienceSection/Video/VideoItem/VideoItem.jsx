@@ -27,7 +27,6 @@ const VideoItem = ({ data }) => {
       <iframe
         allowFullScreen
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-        frameBorder='0'
         referrerPolicy='strict-origin-when-cross-origin'
         src={url}
         title={name}

@@ -13,6 +13,7 @@ const styles = {
       borderRadius: 1,
     },
   },
+
   controlsInfo: {
     position: 'absolute',
     bottom: 0,
