@@ -53,8 +53,18 @@ const ScheduledInterviewsGuard = () => {
       const findEvent = scheduledInterviews?.content.find((event) => event.id === +interviewId);
 
       if (!findEvent) {
-        navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
-          state: { event },
+        getSingleInterview({ interviewId }).then((response) => {
+          if (!response.data) {
+            navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
+              state: { event },
+            });
+
+            return;
+          }
+
+          navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, {
+            state: { event: response.data },
+          });
         });
 
         return;
