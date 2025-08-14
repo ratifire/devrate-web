@@ -26,7 +26,7 @@ export const styles = {
     gridColumn: '1/6',
   },
   participantEvaluations: {
-    gridRow: '8/14',
+    gridRow: '8/13',
     gridColumn: '1/6',
   },
   interviewSkills: {
