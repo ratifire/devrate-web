@@ -45,12 +45,26 @@ const ScheduledInterviewsGuard = () => {
           state: { event: response.data },
         });
       });
+
+      return;
     }
 
     if (interviewId) {
+      const findEvent = scheduledInterviews?.content.find((event) => event.id === +interviewId);
+
+      if (!findEvent) {
+        navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
+          state: { event },
+        });
+
+        return;
+      }
+
       navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, {
-        state: { event },
+        state: { event: findEvent },
       });
+
+      return;
     }
 
     if (firstInterviewId && !interviewId) {
