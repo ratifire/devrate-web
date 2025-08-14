@@ -21,13 +21,20 @@ const ScheduledInterviewsGuard = () => {
   const dispatch = useDispatch();
 
   const firstInterviewId = scheduledInterviews?.content[0]?.id;
-  const event = scheduledInterviews?.content[0];
+  const content = scheduledInterviews?.content || [];
+  const event = content[0];
   const searchParams = new URLSearchParams(location.search);
   const modalParam = searchParams.get('modal');
   const roleParam = searchParams.get('role');
 
   useEffect(() => {
     if (isFetchingAllInterviews || isLoadingAllInterviews) return;
+
+    if (!content.length) {
+      navigate(`${navigationLinks.scheduledInterviews}`);
+
+      return;
+    }
 
     if (modalParam && roleParam) {
       getSingleInterview({ interviewId }).then((response) => {
@@ -82,7 +89,7 @@ const ScheduledInterviewsGuard = () => {
         state: { event },
       });
     }
-  }, [firstInterviewId, event, scheduledInterviews]);
+  }, [firstInterviewId, event, scheduledInterviews, isFetchingAllInterviews]);
 
   return <Outlet />;
 };
