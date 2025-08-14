@@ -930,6 +930,7 @@ export const uk = {
         create: {
           success: 'Успішно відправлено',
           error: 'Щось пішло не так',
+          validationWarn: 'Кількість hard skills має бути від 3 до 20',
         },
         delete: {
           success: 'Успішно видалено',
@@ -944,6 +945,7 @@ export const uk = {
         create: {
           success: 'Успішно відправлено',
           error: 'Щось пішло не так',
+          validationWarn: 'Кількість soft skills має бути не мене 3',
         },
         delete: {
           success: 'Успішно видалено',
@@ -954,6 +956,7 @@ export const uk = {
         create: {
           success: 'Спеціалізацію {{values}} успішно додано',
           error: 'Не вдалося створити спеціалізацію',
+          validationWarn: 'Кількість hard skills має бути від 3 до 20',
         },
         edit: {
           success: 'Успішно відредаговано на {{name}}',
@@ -972,6 +975,7 @@ export const uk = {
         create: {
           success: 'Успішно відправлено',
           error: 'Щось пішло не так',
+          skillsValidation: 'Додайте мінімум 3 hard skills на сторінці спеціалізацій.',
         },
         edit: {
           success: 'Успішно відредаговано',

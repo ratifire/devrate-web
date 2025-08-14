@@ -131,6 +131,12 @@ const SoftSkillsModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (state.allSkills.length < 3 || state.allSkills.length > 20) {
+      return enqueueSnackbar(t('modalNotifyText.softSkills.create.validationWarn'), {
+        variant: 'error',
+      });
+    }
+
     try {
       const deleteSkillPromises = idDeletedSkills.map((v) => deleteSkill(v.id));
 
@@ -146,7 +152,6 @@ const SoftSkillsModal = () => {
       enqueueSnackbar(t('modalNotifyText.hardSkills.create.error'), { variant: 'success' });
     }
   };
-
   const labelInput = availableSkills.length
     ? 'specialization.modal.skills.title'
     : 'specialization.modal.skills.no_skills';

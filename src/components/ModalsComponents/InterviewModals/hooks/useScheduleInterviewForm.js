@@ -97,12 +97,15 @@ const useScheduleInterviewForm = () => {
           },
         });
       } else {
-        await createInterviewRequest(body);
+        await createInterviewRequest(body).unwrap();
         enqueueSnackbar(t('modalNotifyText.interview.create.success'), { variant: 'success' });
       }
-      // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      enqueueSnackbar(t('modalNotifyText.interview.create.error'), { variant: 'error' });
+      if (error.status === 422) {
+        enqueueSnackbar(t('modalNotifyText.interview.create.skillsValidation'), { variant: 'error' });
+      } else {
+        enqueueSnackbar(t('modalNotifyText.interview.create.error'), { variant: 'error' });
+      }
     } finally {
       closeModal(modalNames.scheduleInterviewModal);
     }

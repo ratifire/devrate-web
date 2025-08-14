@@ -98,6 +98,11 @@ const SpecializationModal = () => {
   };
 
   const onSubmit = async (values, { resetForm }) => {
+    if (skills.length < 3 || skills.length > 20) {
+      return enqueueSnackbar(t('modalNotifyText.specialization.create.validationWarn'), {
+        variant: 'error',
+      });
+    }
     try {
       const data = await createNewSpecialization({
         userId,
