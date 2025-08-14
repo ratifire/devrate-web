@@ -13,6 +13,7 @@ import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
 import { enqueueSnackbar } from 'notistack';
 import CustomTooltip from '@components/UI/CustomTooltip';
+import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers/index.js';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
@@ -21,6 +22,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const { data, isFetching } = useGetEventByIdQuery({ id: event.id }, { skip: !event.id });
   const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
   const { showCancelButton } = useCheckTimeDifference(event.startTime);
+  const status = getStatusByTime(event?.startTime);
 
   const deleteEvent = useDeleteEvent();
 
@@ -34,9 +36,12 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
         urlWithParams.searchParams.append('role', event.role);
       }
       window.open(urlWithParams, '_blank');
-      // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
+      if (error.status === 403) {
+        enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.403'), { variant: 'error' });
+      } else {
+        enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
+      }
     }
   };
 
@@ -112,7 +117,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       <Box sx={styles.buttonsContainer}>
         <ButtonDef
           component='a'
-          disabled={isLoadingMeetingUrl}
+          disabled={status === 'UPCOMING' || isLoadingMeetingUrl}
           label={t('schedule.link')}
           sx={styles.icon}
           onClick={joinToInterview}
