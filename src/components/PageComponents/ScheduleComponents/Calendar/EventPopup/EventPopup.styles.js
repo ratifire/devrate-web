@@ -96,6 +96,9 @@ export const styles = {
     marginBottom: theme.spacing(2),
   }),
   name: (theme) => ({
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
     color: theme.palette.schedule.userLinksEvent.color,
     margin: theme.spacing(0),
     marginBottom: theme.spacing(2),

@@ -28,6 +28,8 @@ const LoginModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = new URLSearchParams(window.location.search);
+  const returnUrl = params.get('returnUrl');
 
   const handleOpen = useCallback(() => {
     dispatch(openModal({ modalType: modalNames.checkEmailModal }));
@@ -51,7 +53,7 @@ const LoginModal = () => {
 
         if (idToken && authToken) {
           dispatch(setTokens({ idToken, authToken }));
-          navigate('/profile', { replace: true });
+          navigate(returnUrl || '/profile', { replace: true });
         }
         handleClose();
       } catch (error) {

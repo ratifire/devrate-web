@@ -3,7 +3,7 @@ export const styles = {
     maxHeight: 'calc(100vh - 80px)',
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: '180px 12px 225px auto',
+    gridTemplateRows: '180px 12px 216px auto auto',
     width: '100%',
     gridGap: theme.spacing(4),
     ' > div': {
@@ -24,9 +24,8 @@ export const styles = {
     },
   }),
   interviewersAssessment: (theme) => ({
-    marginTop: '2px',
     gridColumn: '1/6',
-    gridRow: '2/5',
+    gridRow: '2/7',
     padding: theme.spacing(4),
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     ' > div div': {
@@ -90,12 +89,9 @@ export const styles = {
   }),
 
   statistics: (theme) => ({
-    marginTop: '-6px',
     gridColumn: '6/13',
     gridRow: '3/4',
-    maxHeight: '225px',
     ' > div': {
-      height: '225px',
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
       boxShadow: 'none',
@@ -103,7 +99,6 @@ export const styles = {
     },
   }),
   interviewFeedback: (theme) => ({
-    marginTop: '-8px',
     gridColumn: '6/13',
     gridRow: '4/5',
     minHeight: '216px',
@@ -121,6 +116,39 @@ export const styles = {
       },
     },
   }),
+  interviewPreviewVideo: (theme) => ({
+    gridColumn: '6/13',
+    gridRow: '5/6',
+    minHeight: '372px',
+    ' > div': {
+      borderRadius: theme.spacing(2),
+      backgroundColor: theme.palette.pagesSections.backgroundColor,
+      boxShadow: 'none',
+    },
+  }),
+  container: (theme) => ({
+    position: 'relative',
+    paddingBottom: '16px',
+    paddingLeft: '22px',
+    paddingRight: '22px',
+    borderRadius: theme.spacing(2),
+    color: theme.palette.interviewPreviewVideo.color,
+    display: 'flex',
+    flexDirection: 'column',
+  }),
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  title: (theme) => ({
+    fontWeight: 500,
+    fontSize: '1rem',
+    color: theme.palette.interviewPreviewVideo.interviewPreviewVideoTitleColor,
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+  }),
   emptyStatistics: (theme) => ({
     position: 'relative',
     gridColumn: '1/13',
@@ -129,7 +157,7 @@ export const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: theme.spacing(6),
+    padding: theme.spacing(5),
     textAlign: 'center',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     '& .emptyTitle': {
