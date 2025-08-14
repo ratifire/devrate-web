@@ -61,9 +61,11 @@ const SinglePassedInterviewPage = () => {
     { skip: !interviewId }
   );
   const [isPlaying, setIsPlaying] = useState(false);
+
   const handlePlayPressed = useCallback(() => {
     setIsPlaying(true);
   }, []);
+
   const attendeeId = interviewData?.attendeeId ?? '';
   const interviewerId = interviewData?.userId ?? '';
   const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
@@ -93,8 +95,9 @@ const SinglePassedInterviewPage = () => {
     feedback = '',
     attendeeMasteryLevel = '',
     attendeeSpecialization = '',
-    videoUrl = 'https://www.youtube.com/watch?v=Z-JzryWEBYQ',
+    videoUrl = 'https://www.youtube.com/watch?v=5mGuCdlCcNM',
   } = interviewData ?? {};
+  const showVideoSection = false;
   const getSkillsArray = (skillsArray) =>
     Object.entries(skillsArray).map(([name, averageMark]) => ({
       name,
@@ -215,65 +218,45 @@ const SinglePassedInterviewPage = () => {
               )}
             </Paper>
           )}
-
-          {/*<Paper sx={styles.interviewPreviewVideo}>*/}
-          {/*  <Box sx={styles.container}>*/}
-          {/*    <Box sx={styles.header}>*/}
-          {/*      <Typography sx={styles.title}>*/}
-          {/*        {t('interviews.passedInterviews.interviewPreviewVideo.headerTitle')}*/}
-          {/*      </Typography>*/}
-          {/*    </Box>*/}
-          {/*    <MemoizedInterviewPreviewVideo*/}
-          {/*      shouldShowVisibilityControl*/}
-          {/*      candidateFirstName={candidateFirstName}*/}
-          {/*      candidateLastName={candidateLastName}*/}
-          {/*      candidateSrc={interviewerAvatar?.userPicture}*/}
-          {/*      interviewLevel={level}*/}
-          {/*      interviewerFirstName={firstName}*/}
-          {/*      interviewerLastName={lastName}*/}
-          {/*      interviewerSrc={avatar?.userPicture}*/}
-          {/*      role={role}*/}
-          {/*      specialization={attendeeSpecialization}*/}
-          {/*      onPlayPressed={handlePlayPressed}*/}
-          {/*    />*/}
-          {/*  </Box>*/}
-          {/*</Paper>*/}
-          <Paper sx={styles.interviewPreviewVideo}>
-            <Box sx={styles.container}>
-              <Box sx={styles.header}>
-                <Typography sx={styles.title}>
-                  {t('interviews.passedInterviews.interviewPreviewVideo.headerTitle')}
-                </Typography>
-              </Box>
-              {!isPlaying ? (
-                <MemoizedInterviewPreviewVideo
-                  shouldShowVisibilityControl
-                  candidateFirstName={candidateFirstName}
-                  candidateLastName={candidateLastName}
-                  candidateSrc={interviewerAvatar?.userPicture}
-                  interviewLevel={level}
-                  interviewerFirstName={firstName}
-                  interviewerLastName={lastName}
-                  interviewerSrc={avatar?.userPicture}
-                  role={role}
-                  specialization={attendeeSpecialization}
-                  onPlayPressed={handlePlayPressed}
-                />
-              ) : (
-                <Box sx={styles.playerWrapper}>
-                  <ReactPlayer
-                    controls
-                    height='100%'
-                    playing={isPlaying}
-                    src={videoUrl}
-                    style={styles.interviewVideo}
-                    width='100%'
-                    onEnded={() => setIsPlaying(false)}
-                  />
+          {/* Временное скрытие видео-секции */}
+          {showVideoSection && (
+            <Paper sx={styles.interviewPreviewVideo}>
+              <Box sx={styles.container}>
+                <Box sx={styles.header}>
+                  <Typography sx={styles.title}>
+                    {t('interviews.passedInterviews.interviewPreviewVideo.headerTitle')}
+                  </Typography>
                 </Box>
-              )}
-            </Box>
-          </Paper>
+                {!isPlaying ? (
+                  <MemoizedInterviewPreviewVideo
+                    shouldShowVisibilityControl
+                    candidateFirstName={role === 'CANDIDATE' ? candidateFirstName : firstName}
+                    candidateLastName={role === 'CANDIDATE' ? candidateLastName : lastName}
+                    candidateSrc={role === 'CANDIDATE' ? avatar?.userPicture : interviewerAvatar?.userPicture}
+                    interviewLevel={level}
+                    interviewerFirstName={role === 'INTERVIEWER' ? candidateFirstName : firstName}
+                    interviewerLastName={role === 'INTERVIEWER' ? candidateLastName : lastName}
+                    interviewerSrc={role === 'INTERVIEWER' ? avatar?.userPicture : interviewerAvatar?.userPicture}
+                    role={role}
+                    specialization={attendeeSpecialization}
+                    onPlayPressed={handlePlayPressed}
+                  />
+                ) : (
+                  <Box sx={styles.playerWrapper}>
+                    <ReactPlayer
+                      controls
+                      height='100%'
+                      playing={isPlaying}
+                      src={videoUrl}
+                      style={styles.interviewVideo}
+                      width='100%'
+                      onEnded={() => setIsPlaying(false)}
+                    />
+                  </Box>
+                )}
+              </Box>
+            </Paper>
+          )}
         </>
       ) : (
         <Paper sx={styles.emptyStatistics}>

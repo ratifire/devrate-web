@@ -14,10 +14,11 @@ const InterviewInfo = () => {
   const { t } = useTranslation();
   const { interviewId } = useParams();
   const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId });
+  const role = interviewData?.role;
+
   const {
     dateTime = new Date(),
     attendeeId = null,
-    role = '',
     specialization = '',
     attendeeMasteryLevel = '',
     attendeeSpecialization = '',
@@ -55,7 +56,10 @@ const InterviewInfo = () => {
       </Typography>
       <Box sx={styles.hostWrapper}>
         <Typography sx={styles.host} variant='body1'>
-          {t('interviews.passedInterviews.interviewInfoHost')}:
+          {role === 'CANDIDATE'
+            ? t('interviews.passedInterviews.interviewInfoInterviewer')
+            : t('interviews.passedInterviews.interviewInfoRespondent')}
+          :
         </Typography>
         <Link component={RouterLink} sx={styles.hostLink} to={`${links.profile}/${attendeeId}`}>
           {fullName}
