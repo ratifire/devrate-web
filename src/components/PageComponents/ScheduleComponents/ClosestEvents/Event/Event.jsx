@@ -7,16 +7,15 @@ import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
-import { enqueueSnackbar } from 'notistack';
-import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers/index.js';
+import useJoinInterview from '@utils/hooks/useJoinInterview.jsx';
 import { styles } from './Event.styles';
 
 const Event = ({ event }) => {
   const { hostName, hostSurname, id, startTime, type, title, hostId, interviewId, role } = event;
   const { t } = useTranslation();
   const status = getStatusByTime(startTime);
-  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
+  const { joinInterview, isLoadingMeetingUrl } = useJoinInterview();
   const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric', separator: '/', localeMatcher: 'lookup' };
   const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: false };
 
@@ -30,23 +29,8 @@ const Event = ({ event }) => {
 
   const deleteEvent = useDeleteEvent();
 
-  const joinToInterview = async () => {
-    try {
-      const meetingUrl = await getMeetingUrl(interviewId).unwrap();
-      const urlWithParams = new URL(meetingUrl);
-
-      if (event.interviewId && event.role) {
-        urlWithParams.searchParams.append('eventId', interviewId);
-        urlWithParams.searchParams.append('role', role);
-      }
-      window.open(urlWithParams, '_blank');
-    } catch (error) {
-      if (error.status === 403) {
-        enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.403'), { variant: 'error' });
-      } else {
-        enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
-      }
-    }
+  const handleJoinClick = async () => {
+    await joinInterview(interviewId, role);
   };
 
   const handleCancelInterview = async () => {
@@ -78,7 +62,7 @@ const Event = ({ event }) => {
         <IconButton
           aria-label='Join to interview'
           disabled={status === 'UPCOMING' || disableLink || isLoadingMeetingUrl}
-          onClick={joinToInterview}
+          onClick={handleJoinClick}
         >
           <LinkIcon />
         </IconButton>
