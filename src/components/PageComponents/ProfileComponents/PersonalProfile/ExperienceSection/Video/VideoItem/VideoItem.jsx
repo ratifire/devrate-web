@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import styles from './VideoItem.styles.js';
 
 const VideoItem = ({ data }) => {
-  const { name, url, hide } = data;
+  const { name, hide } = data;
   const [hidden, setHidden] = useState(hide);
 
   useEffect(() => {
@@ -24,13 +24,7 @@ const VideoItem = ({ data }) => {
   );
   return (
     <Box sx={styles.wrapper}>
-      <iframe
-        allowFullScreen
-        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-        referrerPolicy='strict-origin-when-cross-origin'
-        src={url}
-        title={name}
-      />
+      <Box>nhfkfkf</Box>
       <Box sx={styles.controlsInfo}>
         <Typography variant='subtitle2'>{name}</Typography>
         <Box sx={styles.iconWrapper}>
