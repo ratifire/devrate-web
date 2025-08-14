@@ -97,9 +97,12 @@ const ScheduledMeeting = () => {
           urlWithParams.searchParams.append('role', role);
         }
         window.open(urlWithParams, '_blank');
-        // eslint-disable-next-line no-unused-vars
       } catch (error) {
-        enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
+        if (error.status === 403) {
+          enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.403'), { variant: 'error' });
+        } else {
+          enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
+        }
       }
     }
 
@@ -215,7 +218,7 @@ const ScheduledMeeting = () => {
           onClick={handleClickLeftBtn}
         />
         <ButtonDef
-          disabled={isLoadingMeetingUrl}
+          disabled={status === 'UPCOMING' || isLoadingMeetingUrl}
           label={t(rightBtnStatus[status])}
           sx={styles.btn}
           variant='contained'
