@@ -27,7 +27,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   if (result.error && result.error.status === 401) {
     api.dispatch(logOut({ returnUrl: currentUrl }));
     api.dispatch(clearTokens());
-    api.dispatch(closeModal());
     return result;
   }
 
