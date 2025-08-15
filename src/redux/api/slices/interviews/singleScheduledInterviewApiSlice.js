@@ -1,5 +1,4 @@
 import { apiSlice } from '@redux/api/apiSlice.js';
-import { TAG_TYPES } from '@utils/constants/tagTypes.js';
 
 const singleScheduledInterviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -14,14 +13,36 @@ const singleScheduledInterviewApiSlice = apiSlice.injectEndpoints({
         url: `/interviews/${eventId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: [TAG_TYPES.ScheduledInterview],
+      async onQueryStarted({ eventId }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
+            draft.content = draft.content.filter((item) => item.id !== eventId);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
     deleteNotConductedInterview: builder.mutation({
       query: ({ eventId }) => ({
         url: `/interviews/${eventId}/not-conducted`,
         method: 'DELETE',
       }),
-      invalidatesTags: [TAG_TYPES.ScheduledInterview],
+      async onQueryStarted({ eventId }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
+            draft.content = draft.content.filter((item) => item.id !== eventId);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
   }),
 });
