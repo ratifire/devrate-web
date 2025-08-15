@@ -77,12 +77,6 @@ export const uk = {
         privacyPolicy: 'Політика конфідеційності',
         allRightsReserved: 'Всі права захищені.',
         allTrademarks: 'Усі торгові марки, логотипи та торгові марки\n' + 'є власністю Ratifire Company.',
-        formPart1: 'Зв’яжіться',
-        formPart2: 'з нами',
-        placeholderName: 'Ім’я Прізвище',
-        placeholderEmail: 'Введіть свою e-mail адресу',
-        placeholderRequest: 'Опишіть свій запит...',
-        buttonText: 'Надіслати',
       },
       links: {
         home_page: 'Головну сторінку',
