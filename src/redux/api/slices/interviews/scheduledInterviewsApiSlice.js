@@ -1,5 +1,6 @@
 import { TAG_TYPES } from '@utils/constants/tagTypes.js';
 import { apiSlice } from '@redux/api/apiSlice';
+import { optimisticDeleteScheduledInterview } from '@redux/api/slices/interviews/helpers/index.js';
 
 const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -76,16 +77,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE',
       }),
       async onQueryStarted({ eventId }, { dispatch, queryFulfilled }) {
-        const patchResult = dispatch(
-          apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
-            draft.content = draft.content.filter((item) => item.id !== eventId);
-          })
-        );
-        try {
-          await queryFulfilled;
-        } catch {
-          patchResult.undo();
-        }
+        return optimisticDeleteScheduledInterview({ dispatch, eventId, queryFulfilled });
       },
     }),
     deleteNotConductedInterview: builder.mutation({
@@ -94,16 +86,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE',
       }),
       async onQueryStarted({ eventId }, { dispatch, queryFulfilled }) {
-        const patchResult = dispatch(
-          apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
-            draft.content = draft.content.filter((item) => item.id !== eventId);
-          })
-        );
-        try {
-          await queryFulfilled;
-        } catch {
-          patchResult.undo();
-        }
+        return optimisticDeleteScheduledInterview({ dispatch, eventId, queryFulfilled });
       },
     }),
   }),
