@@ -73,10 +73,10 @@ export const uk = {
         footerText:
           'Вдосконалюйте свої навички як з початківцями, так і з досвідченими професіоналами. Наша платформа розроблена, щоб зробити процес підготовки до співбесіди більш плавним і менш напруженим для всіх.',
         developedText: 'Розроблено',
-        termsAndConditions: 'Terms and conditions',
-        privacyPolicy: 'Privacy Policy',
+        termsAndConditions: 'Умови та правила',
+        privacyPolicy: 'Політика конфідеційності',
         allRightsReserved: 'Всі права захищені.',
-        allTrademarks: 'Усі товарні знаки, логотипи та торгові найменування є власністю їхніх відповідних власників.',
+        allTrademarks: 'Усі торгові марки, логотипи та торгові марки\n' + 'є власністю Ratifire Company.',
         formPart1: 'Зв’яжіться',
         formPart2: 'з нами',
         placeholderName: 'Ім’я Прізвище',
