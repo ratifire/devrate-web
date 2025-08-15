@@ -62,38 +62,6 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className={styles.contactForm}>
-            <div className={styles.contactForm__titleContainer}>
-              <h2 className={styles.contactForm__title}>
-                <span className={styles.contactForm__titleFocus}>{t('home.footer.formPart1')} </span>
-                {t('home.footer.formPart2')}
-              </h2>
-              <div className={styles.contactForm__socialIcons}>
-                <a
-                  aria-label='LinkedIn'
-                  className={styles.contactForm__socialLink}
-                  href='https://www.linkedin.com/company/ratifire/'
-                >
-                  <img alt='LinkedIn Icon' className={styles.contactForm__socialLink} src={linkdin} />
-                </a>
-                <a aria-label='Email' className={styles.contactForm__socialLink} href='mailto:info@skillzzy.com'>
-                  <img alt='Mail Icon' className={styles.contactForm__socialLink} src={mail} />
-                </a>
-              </div>
-            </div>
-            <form className={styles.contactForm__form}>
-              <input className={styles.contactForm__input} placeholder={t('home.footer.placeholderName')} type='text' />
-              <input
-                className={styles.contactForm__input}
-                placeholder={t('home.footer.placeholderEmail')}
-                type='email'
-              />
-              <textarea className={styles.contactForm__textarea} placeholder={t('home.footer.placeholderRequest')} />
-              <button className={`btn btn-primary btn-m ${styles.contactForm__button}`} type='submit'>
-                {t('home.footer.buttonText')}{' '}
-              </button>
-            </form>
-          </div>
         </div>
       </div>
     </footer>

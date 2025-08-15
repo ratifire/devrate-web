@@ -63,7 +63,7 @@ export const en = {
       },
       footer: {
         copyright: '© 2023 SKILLZZY, Inc. All rights reserved.',
-        trademarks: 'All trademarks, logos and brand names are <br/> the property of their respective owners.',
+        trademarks: 'All trademarks, logos and brand names are <br/> the property of Ratifire company.',
         footerText:
           'Technical interview training platform: elevate your skills with both beginners and experienced professionals. Our platform is designed to make the interview preparation process smoother and less stressful for everyone.',
         developedText: 'Developed By',
@@ -71,12 +71,6 @@ export const en = {
         privacyPolicy: 'Privacy Policy',
         allRightsReserved: 'All rights reserved.',
         allTrademarks: 'All trademarks, logos, and brand names are the property of their respective owners.',
-        formPart1: 'Get',
-        formPart2: 'In Touch',
-        placeholderName: 'Name Surname',
-        placeholderEmail: 'Enter your email',
-        placeholderRequest: 'Enter your request...',
-        buttonText: 'SEND',
       },
       links: {
         home_page: 'Home',
