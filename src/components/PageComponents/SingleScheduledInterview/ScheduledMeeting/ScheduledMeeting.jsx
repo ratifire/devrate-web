@@ -9,7 +9,7 @@ import { formatTimeToUtc, formatTimeWithOffset } from '@utils/helpers';
 import {
   useDeleteNotConductedInterviewMutation,
   useDeleteInterviewMutation,
-} from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice';
+} from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
