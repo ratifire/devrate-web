@@ -1,7 +1,7 @@
 import { Box, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
@@ -9,12 +9,14 @@ import { formatTimeToUtc, formatTimeWithOffset } from '@utils/helpers';
 import {
   useDeleteNotConductedInterviewMutation,
   useDeleteInterviewMutation,
+  useGetAllScheduledInterviewsQuery,
 } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import { useModalController } from '@utils/hooks/useModalController.js';
 import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
+import { setDeleteIdItem, clearDeleteIdItem } from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
@@ -28,27 +30,27 @@ const ScheduledMeeting = () => {
   const {
     data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
+  const { oldEvent, deleteIdItem } = useSelector((state) => state.scheduledInterview);
   const { enqueueSnackbar } = useSnackbar();
   const { openModal } = useModalController();
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const { hostFirstName, hostLastName, hostId, startTime, languageCode, id: eventId, role } = location.state.event;
-
+  const { data: scheduledInterviews } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
+  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
   const {
     data: hostAvatar,
     isLoading: isLoadingHostAvatar,
     isError: isErrorHostAvatar,
   } = useGetAvatarUserQuery(hostId, { skip: !hostId });
-
   const {
     data: userAvatar,
     isLoading: isLoadingUserAvatar,
     isError: isErrorUserAvatar,
   } = useGetAvatarUserQuery(id, { skip: !id });
-  const [cancelMeeting, { isError: isErrorCancelMeeting, isLoading: isLoadingCancelMeeting }] =
-    useDeleteInterviewMutation();
-  const [cancelNotConductedMeeting, { isError: isErrorNotConductedMeeting, isLoading: isLoadingNotConductedMeeting }] =
-    useDeleteNotConductedInterviewMutation();
+  const [cancelMeeting] = useDeleteInterviewMutation();
+  const [cancelNotConductedMeeting] = useDeleteNotConductedInterviewMutation();
 
   const showSnackbar = (status) => {
     enqueueSnackbar(t(`singleScheduledInterview.scheduledMeeting.canceled.${status}`), {
@@ -60,27 +62,48 @@ const ScheduledMeeting = () => {
     });
   };
 
-  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
-
   const handleClickLeftBtn = () => {
+    const content = scheduledInterviews?.content || [];
+    const idx = content.findIndex((item) => item.id === eventId);
+    const nextEvent = content[idx + 1] || content[idx - 1];
+
+    dispatch(setDeleteIdItem({ deleteIdItem: eventId, oldEvent: location.state.event }));
+
+    if (nextEvent) {
+      navigate(`${navigationLinks.scheduledInterviews}/${nextEvent.id}`, {
+        state: { event: nextEvent },
+      });
+    } else {
+      navigate(navigationLinks.scheduledInterviews);
+    }
+
     if (status === btnStatus['UPCOMING']) {
       cancelMeeting({ eventId })
+        .unwrap()
         .then(() => {
           showSnackbar('success');
-          navigate(navigationLinks.interviews);
         })
         .catch(() => {
           showSnackbar('error');
+          navigate(`${navigationLinks.scheduledInterviews}/${deleteIdItem}`, {
+            state: { event: oldEvent },
+          });
+          dispatch(clearDeleteIdItem());
         });
     }
+
     if (status === btnStatus['AWAITING FEEDBACK']) {
       cancelNotConductedMeeting({ eventId })
+        .unwrap()
         .then(() => {
           showSnackbar('success');
-          navigate(navigationLinks.interviews);
         })
         .catch(() => {
           showSnackbar('error');
+          navigate(`${navigationLinks.scheduledInterviews}/${deleteIdItem}`, {
+            state: { event: oldEvent },
+          });
+          dispatch(clearDeleteIdItem());
         });
     }
   };
@@ -108,7 +131,7 @@ const ScheduledMeeting = () => {
     }
   };
 
-  if (isErrorHostAvatar || isErrorUserAvatar || isErrorCancelMeeting || isErrorNotConductedMeeting) {
+  if (isErrorHostAvatar || isErrorUserAvatar) {
     return <ErrorComponent />;
   }
 
@@ -208,7 +231,7 @@ const ScheduledMeeting = () => {
       </Typography>
       <Box sx={styles.boxBtn}>
         <ButtonDef
-          disabled={status === btnStatus['IN PROCESS'] || isLoadingCancelMeeting || isLoadingNotConductedMeeting}
+          disabled={status === btnStatus['IN PROCESS']}
           label={t(leftBtnStatus[status])}
           sx={styles.btn}
           variant='outlined'
