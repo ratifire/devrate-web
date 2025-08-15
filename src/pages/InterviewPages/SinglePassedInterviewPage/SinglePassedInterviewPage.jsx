@@ -13,10 +13,11 @@ import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/persona
 import { lvlMastery } from '@utils/constants/masteryLvl.js';
 import { DARK_THEME } from '@utils/constants/Theme/theme.js';
 import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInterview.js';
-import { lazy, memo, Suspense, useCallback } from 'react';
+import { lazy, memo, Suspense, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import ReactPlayer from 'react-player';
 import EmptySkills from '../../../components/UI/Specialization/EmptySkills';
 
 import EmptyRequestPicDark from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
@@ -59,9 +60,12 @@ const SinglePassedInterviewPage = () => {
     { interviewId },
     { skip: !interviewId }
   );
+  const [isPlaying, setIsPlaying] = useState(false);
+
   const handlePlayPressed = useCallback(() => {
-    // console.log('Play pressed');
+    setIsPlaying(true);
   }, []);
+
   const attendeeId = interviewData?.attendeeId ?? '';
   const interviewerId = interviewData?.userId ?? '';
   const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
@@ -91,8 +95,9 @@ const SinglePassedInterviewPage = () => {
     feedback = '',
     attendeeMasteryLevel = '',
     attendeeSpecialization = '',
+    videoUrl = 'https://www.youtube.com/watch?v=5mGuCdlCcNM',
   } = interviewData ?? {};
-
+  const showVideoSection = false;
   const getSkillsArray = (skillsArray) =>
     Object.entries(skillsArray).map(([name, averageMark]) => ({
       name,
@@ -213,29 +218,45 @@ const SinglePassedInterviewPage = () => {
               )}
             </Paper>
           )}
-
-          <Paper sx={styles.interviewPreviewVideo}>
-            <Box sx={styles.container}>
-              <Box sx={styles.header}>
-                <Typography sx={styles.title}>
-                  {t('interviews.passedInterviews.interviewPreviewVideo.headerTitle')}
-                </Typography>
+          {/* Временное скрытие видео-секции */}
+          {showVideoSection && (
+            <Paper sx={styles.interviewPreviewVideo}>
+              <Box sx={styles.container}>
+                <Box sx={styles.header}>
+                  <Typography sx={styles.title}>
+                    {t('interviews.passedInterviews.interviewPreviewVideo.headerTitle')}
+                  </Typography>
+                </Box>
+                {!isPlaying ? (
+                  <MemoizedInterviewPreviewVideo
+                    shouldShowVisibilityControl
+                    candidateFirstName={role === 'CANDIDATE' ? candidateFirstName : firstName}
+                    candidateLastName={role === 'CANDIDATE' ? candidateLastName : lastName}
+                    candidateSrc={role === 'CANDIDATE' ? avatar?.userPicture : interviewerAvatar?.userPicture}
+                    interviewLevel={level}
+                    interviewerFirstName={role === 'INTERVIEWER' ? candidateFirstName : firstName}
+                    interviewerLastName={role === 'INTERVIEWER' ? candidateLastName : lastName}
+                    interviewerSrc={role === 'INTERVIEWER' ? avatar?.userPicture : interviewerAvatar?.userPicture}
+                    role={role}
+                    specialization={attendeeSpecialization}
+                    onPlayPressed={handlePlayPressed}
+                  />
+                ) : (
+                  <Box sx={styles.playerWrapper}>
+                    <ReactPlayer
+                      controls
+                      height='100%'
+                      playing={isPlaying}
+                      src={videoUrl}
+                      style={styles.interviewVideo}
+                      width='100%'
+                      onEnded={() => setIsPlaying(false)}
+                    />
+                  </Box>
+                )}
               </Box>
-              <MemoizedInterviewPreviewVideo
-                shouldShowVisibilityControl
-                candidateFirstName={candidateFirstName}
-                candidateLastName={candidateLastName}
-                candidateSrc={interviewerAvatar?.userPicture}
-                interviewLevel={level}
-                interviewerFirstName={firstName}
-                interviewerLastName={lastName}
-                interviewerSrc={avatar?.userPicture}
-                role={role}
-                specialization={attendeeSpecialization}
-                onPlayPressed={handlePlayPressed}
-              />
-            </Box>
-          </Paper>
+            </Paper>
+          )}
         </>
       ) : (
         <Paper sx={styles.emptyStatistics}>
