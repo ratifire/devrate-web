@@ -51,6 +51,18 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
     getScheduledInterviewById: builder.query({
       query: ({ interviewId }) => `/interviews/events/${interviewId}`,
     }),
+    getInterviewByIdBySocketUpdate: builder.query({
+      query: ({ interviewId }) => `/interviews/${interviewId}/visible`,
+      async onQueryStarted({ _interviewId }, { dispatch, queryFulfilled }) {
+        const { data: newInterviewData } = await queryFulfilled;
+        dispatch(
+          apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
+            draft.content = draft.content.filter((item) => item.id !== newInterviewData.id);
+            draft.content.unshift(newInterviewData);
+          })
+        );
+      },
+    }),
     getInterviewStatus: builder.query({
       query: (zoneName) => `/interviews/status-indicator?userTimeZone=${zoneName}`,
     }),
@@ -90,6 +102,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetAllScheduledInterviewsQuery,
   useGetScheduledInterviewByIdQuery,
+  useLazyGetInterviewByIdBySocketUpdateQuery,
   useLazyGetSingleInterviewByIdQuery,
   useGetInterviewStatusQuery,
   useLazyGetInterviewMeetingUrlQuery,

@@ -8,9 +8,9 @@ import emptyNotificationLight from '@utils/constants/notification/whiteThemeIcon
 import emptyNotificationDark from '@utils/constants/notification/darkThemeIcons';
 import { DARK_THEME } from '@utils/constants/Theme/theme';
 import BellNotification from '@assets/icons/bell.svg?react';
-import { resetPage } from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
-import { useGetAllScheduledInterviewsQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import NOTIFICATION_TYPES from '@utils/constants/notificationTypes';
+import { useLazyGetInterviewByIdBySocketUpdateQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
+// import { apiSlice } from '@redux/api/apiSlice';
 import styles from './Notification.styles';
 import NotificationEmpty from './NotificationEmpty';
 import NotificationList from './NotificationList';
@@ -20,7 +20,7 @@ const Notification = () => {
   const dispatch = useDispatch();
   const { data: info } = useSelector(selectCurrentUser);
   const { mode } = useSelector((state) => state.theme);
-  const { refetch } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
+  const [getInterviewById] = useLazyGetInterviewByIdBySocketUpdateQuery();
 
   const { data: notifications, isLoading } = useGetNotificationsQuery(info.id);
 
@@ -29,13 +29,26 @@ const Notification = () => {
 
   useEffect(() => {
     if (Array.isArray(notifications) && notifications.length > 0) {
-      const hasUpdated = notifications.some(
-        (v) => v.type === NOTIFICATION_TYPES.INTERVIEW_SCHEDULED || v.type === NOTIFICATION_TYPES.INTERVIEW_REJECTED
-      );
+      const interviewScheduled = notifications.find((v) => v.type === NOTIFICATION_TYPES.INTERVIEW_SCHEDULED);
+      const interviewRejected = notifications.find((v) => v.type === NOTIFICATION_TYPES.INTERVIEW_REJECTED);
 
-      if (hasUpdated) {
-        dispatch(resetPage());
-        refetch();
+      if (interviewScheduled) {
+        const { interviewId } = JSON.parse(interviewScheduled.payload);
+
+        return getInterviewById({ interviewId });
+      }
+
+      if (interviewRejected) {
+        // const { rejectionName, scheduledDateTime } = JSON.parse(interviewRejected.payload);
+        // console.log('rejectionName', rejectionName);
+        // console.log('sheduledDateTime', scheduledDateTime);
+        // hostFirstName
+        // dispatch(
+        //   apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
+        //     // console.log(draft);
+        //     // draft.content = draft.content.filter((item) => item.id !== interviewId);
+        //   })
+        // );
       }
     }
   }, [notifications]);
