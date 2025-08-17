@@ -8,14 +8,13 @@ import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSl
 import { formatTimeToUtc, formatTimeWithOffset } from '@utils/helpers';
 import {
   useDeleteNotConductedInterviewMutation,
-  useDeleteInterviewMutation,
   useGetAllScheduledInterviewsQuery,
 } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
-import { useModalController } from '@utils/hooks/useModalController.js';
-import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
+import { useModalController } from '@utils/hooks/useModalController';
+import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { setDeleteIdItem, clearDeleteIdItem } from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
@@ -49,7 +48,6 @@ const ScheduledMeeting = () => {
     isLoading: isLoadingUserAvatar,
     isError: isErrorUserAvatar,
   } = useGetAvatarUserQuery(id, { skip: !id });
-  const [cancelMeeting] = useDeleteInterviewMutation();
   const [cancelNotConductedMeeting] = useDeleteNotConductedInterviewMutation();
 
   const showSnackbar = (status) => {
@@ -69,34 +67,24 @@ const ScheduledMeeting = () => {
 
     dispatch(setDeleteIdItem({ deleteIdItem: eventId, oldEvent: location.state.event }));
 
-    if (nextEvent) {
-      navigate(`${navigationLinks.scheduledInterviews}/${nextEvent.id}`, {
-        state: { event: nextEvent },
-      });
-    } else {
-      navigate(navigationLinks.scheduledInterviews);
-    }
-
     if (status === btnStatus['UPCOMING']) {
-      cancelMeeting({ eventId })
-        .unwrap()
-        .then(() => {
-          showSnackbar('success');
-        })
-        .catch(() => {
-          showSnackbar('error');
-          navigate(`${navigationLinks.scheduledInterviews}/${deleteIdItem}`, {
-            state: { event: oldEvent },
-          });
-          dispatch(clearDeleteIdItem());
-        });
+      openModal(modalNames.confirmDeleteInterview, { eventId, oldEvent: location.state.event, nextEvent });
     }
 
     if (status === btnStatus['AWAITING FEEDBACK']) {
+      if (nextEvent) {
+        navigate(`${navigationLinks.scheduledInterviews}/${nextEvent.id}`, {
+          state: { event: nextEvent },
+        });
+      } else {
+        navigate(navigationLinks.scheduledInterviews);
+      }
+
       cancelNotConductedMeeting({ eventId })
         .unwrap()
         .then(() => {
           showSnackbar('success');
+          dispatch(clearDeleteIdItem());
         })
         .catch(() => {
           showSnackbar('error');

@@ -6,13 +6,15 @@ import { useModalController } from '@utils/hooks/useModalController.js';
 import { styles } from './ModalLayout.styles.js';
 import ModalContainer from './ModalContainer.jsx';
 
+const smallScreenModals = [modalNames.confirmDeleteSpecialization, modalNames.confirmDeleteInterview];
+
 const ModalComponent = () => {
   const { modalType, isOpen } = useSelector((state) => state.modal);
   const { closeModal } = useModalController();
 
   const handleClose = () => closeModal(modalType);
 
-  const isConfirmDeleteModal = modalType === modalNames.confirmDeleteSpecialization;
+  const isSmallScreenModal = smallScreenModals.includes(modalType);
 
   return (
     <Modal
@@ -24,7 +26,7 @@ const ModalComponent = () => {
       onClose={handleClose}
     >
       <Zoom in={isOpen}>
-        <Box style={isConfirmDeleteModal && styles.confirmDeleteModalWrapper} sx={styles.wrapper}>
+        <Box style={isSmallScreenModal && styles.confirmDeleteModalWrapper} sx={styles.wrapper}>
           <IconButton aria-label='Close modal' sx={styles.btnIcon} type='button' onClick={handleClose}>
             <CloseIcon />
           </IconButton>

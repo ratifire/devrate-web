@@ -280,6 +280,12 @@ export const en = {
         error_request: 'Request error',
         success: 'Feedback sent successfully',
       },
+      confirmDeleteInterview: {
+        title: 'Delete Interview',
+        text: 'Are you sure you want to delete the interview',
+        refuseBtnText: 'Cancel',
+        confirmBtnText: 'Delete',
+      },
     },
     profile: {
       skills: {

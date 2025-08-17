@@ -5,8 +5,8 @@ import {
   useLazyGetSingleInterviewByIdQuery,
 } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal as modalOpen } from '@redux/slices/modal/modalSlice.js';
-import { modalNames } from '@utils/constants/modalNames.js';
+import { openModal as modalOpen, selectModalData } from '@redux/slices/modal/modalSlice';
+import { modalNames } from '@utils/constants/modalNames';
 import navigationLinks from '../links';
 
 const ScheduledInterviewsGuard = () => {
@@ -19,6 +19,7 @@ const ScheduledInterviewsGuard = () => {
   const navigate = useNavigate();
   const { interviewId } = useParams();
   const dispatch = useDispatch();
+  const modalData = useSelector(selectModalData);
   const { deleteIdItem } = useSelector((state) => state.scheduledInterview);
 
   const firstInterviewId = scheduledInterviews?.content[0]?.id;
@@ -52,6 +53,16 @@ const ScheduledInterviewsGuard = () => {
         navigate(`${navigationLinks.scheduledInterviews}/${interviewId}?modal=${modalParam}&role=${roleParam}`, {
           state: { event: response.data },
         });
+      });
+
+      return;
+    }
+
+    if (modalParam) {
+      const { eventId, oldEvent } = modalData;
+
+      navigate(`${navigationLinks.scheduledInterviews}/${eventId}?modal=${modalParam}`, {
+        state: { event: oldEvent },
       });
 
       return;

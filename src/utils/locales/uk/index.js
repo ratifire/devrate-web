@@ -287,6 +287,12 @@ export const uk = {
         error_request: 'Помилка запиту',
         success: 'Відгук надіслано успішно',
       },
+      confirmDeleteInterview: {
+        title: 'Видалити співбесіду',
+        text: 'Ви впевнені, що хочете видалити співбесіду?',
+        refuseBtnText: 'Скасувати',
+        confirmBtnText: 'Видалити',
+      },
     },
     profile: {
       skills: {

@@ -1,0 +1,3 @@
+import ConfirmDeleteInterview from '@components/ModalsComponents/InterviewModals/ConfirmDeleteInterview/ConfirmDeleteInterview';
+
+export default ConfirmDeleteInterview;
