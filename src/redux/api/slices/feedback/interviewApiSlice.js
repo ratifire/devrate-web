@@ -12,7 +12,7 @@ const interviewApiSlice = apiSlice.injectEndpoints({
         url: '/interview-feedbacks',
         body: { ...body },
       }),
-      invalidatesTags: [TAG_TYPES.ScheduledInterview],
+      invalidatesTags: [TAG_TYPES.ScheduledInterview, TAG_TYPES.PassedInterview],
     }),
   }),
 });
