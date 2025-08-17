@@ -12,7 +12,7 @@ import { useSnackbar } from 'notistack';
 import { selectModalData } from '@redux/slices/modal/modalSlice';
 import { styles } from './ConfirmDeleteInterview.styles';
 
-const ConfirmDeleteInterview = () => {
+const ConfirmDeleteInterviewModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -88,4 +88,4 @@ const ConfirmDeleteInterview = () => {
   );
 };
 
-export default ConfirmDeleteInterview;
+export default ConfirmDeleteInterviewModal;

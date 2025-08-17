@@ -1,3 +1,3 @@
-import ConfirmDeleteInterview from '@components/ModalsComponents/InterviewModals/ConfirmDeleteInterview/ConfirmDeleteInterview';
+import ConfirmDeleteInterviewModal from '@components/ModalsComponents/InterviewModals/ConfirmDeleteInterview/ConfirmDeleteInterviewModal.jsx';
 
-export default ConfirmDeleteInterview;
+export default ConfirmDeleteInterviewModal;
