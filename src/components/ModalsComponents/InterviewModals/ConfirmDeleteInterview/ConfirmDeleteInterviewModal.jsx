@@ -32,6 +32,8 @@ const ConfirmDeleteInterviewModal = () => {
       navigate(navigationLinks.scheduledInterviews);
     }
 
+    handleCloseModal();
+
     cancelMeeting({ eventId })
       .unwrap()
       .then(() => {
@@ -56,8 +58,7 @@ const ConfirmDeleteInterviewModal = () => {
           state: { event: oldEvent },
         });
         dispatch(clearDeleteIdItem());
-      })
-      .finally(() => handleCloseModal());
+      });
   };
 
   return (
