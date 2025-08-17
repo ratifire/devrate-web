@@ -21,4 +21,4 @@ const scheduledInterviewSlice = createSlice({
 });
 
 export default scheduledInterviewSlice.reducer;
-export const { setPage, setDeleteIdItem, clearDeleteIdItem } = scheduledInterviewSlice.actions;
+export const { setDeleteIdItem, clearDeleteIdItem } = scheduledInterviewSlice.actions;
