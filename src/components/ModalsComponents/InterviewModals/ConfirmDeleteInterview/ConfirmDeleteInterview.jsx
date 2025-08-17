@@ -43,7 +43,6 @@ const ConfirmDeleteInterview = () => {
           },
         });
         dispatch(clearDeleteIdItem());
-        handleCloseModal();
       })
       .catch(() => {
         enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), {
@@ -57,8 +56,8 @@ const ConfirmDeleteInterview = () => {
           state: { event: oldEvent },
         });
         dispatch(clearDeleteIdItem());
-        handleCloseModal();
-      });
+      })
+      .finally(() => handleCloseModal());
   };
 
   return (
