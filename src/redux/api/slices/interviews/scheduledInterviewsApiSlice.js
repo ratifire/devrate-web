@@ -1,6 +1,7 @@
 import { TAG_TYPES } from '@utils/constants/tagTypes.js';
 import { apiSlice } from '@redux/api/apiSlice';
 import { optimisticDeleteScheduledInterview } from '@redux/api/slices/interviews/helpers/index.js';
+import mergePaginatedContent from './helpers/mergePaginatedContent.js';
 
 const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -22,13 +23,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
       },
       merge: (currentCache, newData, { arg }) => {
         // Merge the `content` arrays from the current cache and new data
-        if (arg.page === 0) {
-          currentCache.content = newData.content;
-        } else {
-          const existingIds = new Set(currentCache.content.map((item) => item.id));
-          const uniqueNew = newData.content.filter((item) => !existingIds.has(item.id));
-          currentCache.content.push(...uniqueNew);
-        }
+        return mergePaginatedContent({ arg, currentCache, newData });
       },
       forceRefetch: ({ currentArg, previousArg }) => {
         // Force a refetch if the `page` changes
