@@ -10,7 +10,7 @@ import { DARK_THEME } from '@utils/constants/Theme/theme';
 import BellNotification from '@assets/icons/bell.svg?react';
 import NOTIFICATION_TYPES from '@utils/constants/notificationTypes';
 import { useLazyGetInterviewByIdBySocketUpdateQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
-// import { apiSlice } from '@redux/api/apiSlice';
+import { apiSlice } from '@redux/api/apiSlice';
 import styles from './Notification.styles';
 import NotificationEmpty from './NotificationEmpty';
 import NotificationList from './NotificationList';
@@ -32,23 +32,20 @@ const Notification = () => {
       const interviewScheduled = notifications.find((v) => v.type === NOTIFICATION_TYPES.INTERVIEW_SCHEDULED);
       const interviewRejected = notifications.find((v) => v.type === NOTIFICATION_TYPES.INTERVIEW_REJECTED);
 
-      if (interviewScheduled) {
+      if (interviewScheduled && !interviewRejected) {
         const { interviewId } = JSON.parse(interviewScheduled.payload);
+        getInterviewById({ interviewId }).unwrap();
 
-        return getInterviewById({ interviewId });
+        return;
       }
 
-      if (interviewRejected) {
-        // const { rejectionName, scheduledDateTime } = JSON.parse(interviewRejected.payload);
-        // console.log('rejectionName', rejectionName);
-        // console.log('sheduledDateTime', scheduledDateTime);
-        // hostFirstName
-        // dispatch(
-        //   apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
-        //     // console.log(draft);
-        //     // draft.content = draft.content.filter((item) => item.id !== interviewId);
-        //   })
-        // );
+      if (interviewRejected && !interviewScheduled) {
+        const { rejectedInterviewId } = JSON.parse(interviewRejected.payload);
+        dispatch(
+          apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
+            draft.content = draft.content.filter((item) => item.id !== rejectedInterviewId);
+          })
+        );
       }
     }
   }, [notifications]);
