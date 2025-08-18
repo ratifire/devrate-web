@@ -36,11 +36,14 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
                     updateCachedData((draft) => {
                       if (Array.isArray(draft)) {
                         draft.unshift(notification);
+
                         console.log('notification', notification);
                         if (notification.type === 'INTERVIEW_SCHEDULED') {
                           console.log('notification.payload', notification.payload);
+
                           const { interviewId } = JSON.parse(notification.payload);
                           console.log('interviewId', interviewId);
+
                           dispatch(apiSlice.endpoints.getInterviewByIdBySocketUpdate.initiate({ interviewId }));
                         }
 
@@ -50,7 +53,9 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
                           console.log('rejectedInterviewId', rejectedInterviewId);
                           dispatch(
                             apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draftState) => {
-                              draftState.content = draftState.content.filter((item) => item.id !== rejectedInterviewId);
+                              draftState.content = draftState.content.filter(
+                                (item) => Number(item.id) !== Number(rejectedInterviewId)
+                              );
                             })
                           );
                         }
