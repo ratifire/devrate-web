@@ -102,7 +102,6 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetAllScheduledInterviewsQuery,
   useGetScheduledInterviewByIdQuery,
-  useLazyGetInterviewByIdBySocketUpdateQuery,
   useLazyGetSingleInterviewByIdQuery,
   useGetInterviewStatusQuery,
   useLazyGetInterviewMeetingUrlQuery,
@@ -111,3 +110,4 @@ export const {
   useDeleteInterviewMutation,
   useDeleteNotConductedInterviewMutation,
 } = scheduledInterviewApiSlice;
+export default scheduledInterviewApiSlice;

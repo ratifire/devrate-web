@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Badge, IconButton, Popover } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
@@ -8,9 +8,6 @@ import emptyNotificationLight from '@utils/constants/notification/whiteThemeIcon
 import emptyNotificationDark from '@utils/constants/notification/darkThemeIcons';
 import { DARK_THEME } from '@utils/constants/Theme/theme';
 import BellNotification from '@assets/icons/bell.svg?react';
-import NOTIFICATION_TYPES from '@utils/constants/notificationTypes';
-import { useLazyGetInterviewByIdBySocketUpdateQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
-import { apiSlice } from '@redux/api/apiSlice';
 import styles from './Notification.styles';
 import NotificationEmpty from './NotificationEmpty';
 import NotificationList from './NotificationList';
@@ -20,35 +17,11 @@ const Notification = () => {
   const dispatch = useDispatch();
   const { data: info } = useSelector(selectCurrentUser);
   const { mode } = useSelector((state) => state.theme);
-  const [getInterviewById] = useLazyGetInterviewByIdBySocketUpdateQuery();
 
   const { data: notifications, isLoading } = useGetNotificationsQuery(info.id);
 
   const newNotification = notifications?.every((item) => item.read) ?? true;
   const icons = mode === DARK_THEME ? emptyNotificationDark : emptyNotificationLight;
-
-  useEffect(() => {
-    if (Array.isArray(notifications) && notifications.length > 0) {
-      const interviewScheduled = notifications.find((v) => v.type === NOTIFICATION_TYPES.INTERVIEW_SCHEDULED);
-      const interviewRejected = notifications.find((v) => v.type === NOTIFICATION_TYPES.INTERVIEW_REJECTED);
-
-      if (interviewScheduled && !interviewRejected) {
-        const { interviewId } = JSON.parse(interviewScheduled.payload);
-        getInterviewById({ interviewId }).unwrap();
-
-        return;
-      }
-
-      if (interviewRejected && !interviewScheduled) {
-        const { rejectedInterviewId } = JSON.parse(interviewRejected.payload);
-        dispatch(
-          apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
-            draft.content = draft.content.filter((item) => item.id !== rejectedInterviewId);
-          })
-        );
-      }
-    }
-  }, [notifications]);
 
   const bellButtonClickHandler = (event) => {
     event.preventDefault();
