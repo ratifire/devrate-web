@@ -5,13 +5,13 @@ const serviceWorkerNotificationApiSlice = apiSlice.injectEndpoints({
     subscribeToPush: builder.mutation({
       query: (subscription) => ({
         method: 'POST',
-        url: 'http://localhost:8080/web-subscription/subscribe',
+        url: '/web-subscription/subscribe',
         body: subscription,
       }),
     }),
     unsubscribeFromPush: builder.mutation({
       query: (subscription) => ({
-        url: 'http://localhost:8080/web-subscription/unsubscribe',
+        url: '/web-subscription/unsubscribe',
         method: 'POST',
         body: subscription,
       }),

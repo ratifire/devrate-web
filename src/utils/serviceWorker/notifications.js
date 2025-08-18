@@ -13,9 +13,7 @@ export const subscribeToPush = async (store) => {
   const reg = await navigator.serviceWorker.ready;
   const sub = await reg.pushManager.subscribe({
     userVisibleOnly: true,
-    applicationServerKey: urlBase64ToUint8Array(
-      'BLxTVw4ldyA_jWHqxVyR2w-o3LZ5z_S1IMwyz7ZQ2dsNq0aqsaNVk7C2x4F0K8GO28FR5r_apta-JJLkivHc81A'
-    ),
+    applicationServerKey: urlBase64ToUint8Array(import.meta.env.VITE_VAPID_PUBLIC_KEY),
   });
 
   // Store the subscription to send it to the server. Otherwise, it will be null
@@ -23,6 +21,7 @@ export const subscribeToPush = async (store) => {
 
   //  Send a subscription to your server.
   //  Dispatch the mutation manually through the store because cannot use a mutation outside the React component
+
   const result = await store.dispatch(serviceWorkerNotificationApiSlice.endpoints.subscribeToPush.initiate(sub));
 
   if ('error' in result) {

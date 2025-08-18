@@ -1,14 +1,49 @@
+const createMessages = ({ scheduledDateTime, rejectionName }) => ({
+  en: {
+    title: {
+      INTERVIEW_SCHEDULED: 'The interview is scheduled',
+      INTERVIEW_REJECTED: 'The interview has been canceled',
+    },
+    body: {
+      INTERVIEW_SCHEDULED: {
+        INTERVIEWER: `The interview as an interviewer is scheduled for ${scheduledDateTime}`,
+        CANDIDATE: `The interview as a candidate is scheduled for ${scheduledDateTime}`,
+      },
+      INTERVIEW_REJECTED: `The interview with ${rejectionName} on ${scheduledDateTime} has been canceled.`,
+    },
+  },
+  uk: {
+    title: {
+      INTERVIEW_SCHEDULED: "Інтерв'ю заплановано",
+      INTERVIEW_REJECTED: "Інтерв'ю скасовано",
+    },
+    body: {
+      INTERVIEW_SCHEDULED: {
+        INTERVIEWER: `Інтерв'ю як інтерв'юер заплановано на ${scheduledDateTime}`,
+        CANDIDATE: `Інтерв'ю як кандидат заплановано на ${scheduledDateTime}`,
+      },
+      INTERVIEW_REJECTED: `Інтерв'ю з ${rejectionName} на ${scheduledDateTime} було скасовано.`,
+    },
+  },
+});
+
+const formatDate = (date) => date.replace('T', ' ').replace(/\.\d+$/, '');
+
 self.addEventListener('install', (event) => {
-  // console.log('Service Worker installed');
   event.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener('activate', (event) => {
-  // console.log('Service Worker activated');
   event.waitUntil(self.clients.claim());
 });
 
+self.addEventListener('message', (event) => {
+  self.lang = event.data.lang;
+});
+
 self.addEventListener('push', (event) => {
+  const lang = self.lang || 'en';
+
   let notificationData;
   try {
     notificationData = event.data.json();
@@ -20,7 +55,6 @@ self.addEventListener('push', (event) => {
   }
 
   const { type, payload } = notificationData;
-
   let parsedPayload = payload;
   if (typeof parsedPayload === 'string') {
     try {
@@ -30,24 +64,37 @@ self.addEventListener('push', (event) => {
     }
   }
 
-  let url;
+  const notificationPayload = JSON.parse(notificationData.payload);
+  let url, scheduledDateTime, rejectionName, role;
+
   switch (type) {
     case 'INTERVIEW_SCHEDULED': {
       const interviewId = parsedPayload?.interviewId;
       url = interviewId ? `/interviews/scheduled/${interviewId}` : '/';
+      scheduledDateTime = formatDate(notificationPayload.scheduledDateTime);
+      role = notificationPayload.role;
+      break;
+    }
+    case 'INTERVIEW_REJECTED': {
+      url = 'interviews/requests';
+      scheduledDateTime = formatDate(notificationPayload.scheduledDateTime);
+      rejectionName = notificationPayload.rejectionName;
       break;
     }
     default:
       url = '/';
   }
 
+  const messages = createMessages({ scheduledDateTime, rejectionName });
+
+  const currentMessage = messages[lang] || messages.en;
+
   const options = {
-    body: notificationData.body,
+    body: currentMessage.body[type][role] || currentMessage.body[type],
     icon: notificationData.icon || '/assets/favicon.ico',
     data: { url },
   };
-
-  event.waitUntil(self.registration.showNotification(notificationData.title || 'New Notification', options));
+  event.waitUntil(self.registration.showNotification(currentMessage.title[type] || 'New Notification', options));
 });
 
 self.addEventListener('notificationclick', (event) => {
