@@ -22,15 +22,16 @@ const ScheduledInterviewsGuard = () => {
   const modalData = useSelector(selectModalData);
   const { deleteIdItem } = useSelector((state) => state.scheduledInterview);
 
-  const firstInterviewId = scheduledInterviews?.content[0]?.id;
-  const content = scheduledInterviews?.content || [];
-  const event = content[0];
   const searchParams = new URLSearchParams(location.search);
   const modalParam = searchParams.get('modal');
   const roleParam = searchParams.get('role');
 
   useEffect(() => {
-    if (isFetchingAllInterviews || isLoadingAllInterviews) return;
+    if (isFetchingAllInterviews || isLoadingAllInterviews || !scheduledInterviews) return;
+
+    const firstInterviewId = scheduledInterviews?.content[0]?.id;
+    const content = scheduledInterviews?.content || [];
+    const event = content[0];
 
     if (!content.length) {
       navigate(`${navigationLinks.scheduledInterviews}`);
@@ -101,7 +102,7 @@ const ScheduledInterviewsGuard = () => {
         state: { event },
       });
     }
-  }, [firstInterviewId, event, content]);
+  }, [scheduledInterviews, modalData, modalParam, roleParam, interviewId]);
 
   return <Outlet />;
 };
