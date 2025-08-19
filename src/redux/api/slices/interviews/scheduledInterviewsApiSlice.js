@@ -1,7 +1,7 @@
-import { TAG_TYPES } from '@utils/constants/tagTypes.js';
+import { TAG_TYPES } from '@utils/constants/tagTypes';
 import { apiSlice } from '@redux/api/apiSlice';
-import { optimisticDeleteScheduledInterview } from '@redux/api/slices/interviews/helpers/index.js';
-import mergePaginatedContent from './helpers/mergePaginatedContent.js';
+import { optimisticDeleteScheduledInterview } from '@redux/api/slices/interviews/helpers';
+import mergePaginatedContent from './helpers/mergePaginatedContent';
 
 const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -110,4 +110,3 @@ export const {
   useDeleteInterviewMutation,
   useDeleteNotConductedInterviewMutation,
 } = scheduledInterviewApiSlice;
-export default scheduledInterviewApiSlice;
