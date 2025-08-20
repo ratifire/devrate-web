@@ -2,7 +2,7 @@ import { Outlet, useNavigate, useParams } from 'react-router';
 import { useEffect } from 'react';
 import {
   useGetAllScheduledInterviewsQuery,
-  useLazyGetSingleInterviewByIdQuery,
+  useLazyGetInterviewByIdBySocketUpdateQuery,
 } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal as modalOpen, selectModalData } from '@redux/slices/modal/modalSlice';
@@ -10,12 +10,11 @@ import { modalNames } from '@utils/constants/modalNames';
 import navigationLinks from '../links';
 
 const ScheduledInterviewsGuard = () => {
-  const {
-    data: scheduledInterviews,
-    isLoading: isLoadingAllInterviews,
-    isFetching: isFetchingAllInterviews,
-  } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
-  const [getSingleInterview] = useLazyGetSingleInterviewByIdQuery();
+  const { data: scheduledInterviews, isFetching: isFetchingInterviews } = useGetAllScheduledInterviewsQuery({
+    page: 0,
+    size: 6,
+  });
+  const [getSingleInterview, { isFetching: isFetchingLazyInterviews }] = useLazyGetInterviewByIdBySocketUpdateQuery();
   const navigate = useNavigate();
   const { interviewId } = useParams();
   const dispatch = useDispatch();
@@ -25,9 +24,10 @@ const ScheduledInterviewsGuard = () => {
   const searchParams = new URLSearchParams(location.search);
   const modalParam = searchParams.get('modal');
   const roleParam = searchParams.get('role');
+  const content = scheduledInterviews?.content || [];
 
   useEffect(() => {
-    if (isFetchingAllInterviews || isLoadingAllInterviews || !scheduledInterviews) return;
+    if (isFetchingInterviews || !scheduledInterviews || isFetchingLazyInterviews) return;
 
     const firstInterviewId = scheduledInterviews?.content[0]?.id;
     const content = scheduledInterviews?.content || [];
@@ -39,8 +39,12 @@ const ScheduledInterviewsGuard = () => {
       return;
     }
 
-    if (modalParam && roleParam) {
-      getSingleInterview({ interviewId }).then((response) => {
+    const getInterviews = async () => {
+      if (modalParam && roleParam) {
+        const response = await getSingleInterview({ interviewId });
+
+        if (!response.data) return;
+
         dispatch(
           modalOpen({
             modalType: modalNames.feedbackInterviewModal,
@@ -54,55 +58,45 @@ const ScheduledInterviewsGuard = () => {
         navigate(`${navigationLinks.scheduledInterviews}/${interviewId}?modal=${modalParam}&role=${roleParam}`, {
           state: { event: response.data },
         });
-      });
 
-      return;
-    }
+        return;
+      }
 
-    if (modalParam) {
-      const { eventId, oldEvent } = modalData;
+      if (modalParam) {
+        const { eventId, oldEvent } = modalData;
 
-      navigate(`${navigationLinks.scheduledInterviews}/${eventId}?modal=${modalParam}`, {
-        state: { event: oldEvent },
-      });
-
-      return;
-    }
-
-    if (interviewId && !deleteIdItem) {
-      const findEvent = scheduledInterviews?.content.find((event) => event.id === +interviewId);
-
-      if (!findEvent) {
-        getSingleInterview({ interviewId }).then((response) => {
-          if (!response.data) {
-            navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
-              state: { event },
-            });
-
-            return;
-          }
-
-          navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, {
-            state: { event: response.data },
-          });
+        navigate(`${navigationLinks.scheduledInterviews}/${eventId}?modal=${modalParam}`, {
+          state: { event: oldEvent },
         });
 
         return;
       }
 
-      navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, {
-        state: { event: findEvent },
-      });
+      if (interviewId && !deleteIdItem) {
+        const findEvent = scheduledInterviews?.content.find((event) => event.id === +interviewId);
 
-      return;
-    }
+        if (!findEvent) {
+          await getSingleInterview({ interviewId });
 
-    if (firstInterviewId && !interviewId) {
-      navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
-        state: { event },
-      });
-    }
-  }, [scheduledInterviews, modalData, modalParam, roleParam, interviewId]);
+          return;
+        }
+
+        navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, {
+          state: { event: findEvent },
+        });
+
+        return;
+      }
+
+      if (firstInterviewId && !interviewId) {
+        navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
+          state: { event },
+        });
+      }
+    };
+
+    getInterviews();
+  }, [content]);
 
   return <Outlet />;
 };
