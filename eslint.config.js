@@ -69,7 +69,7 @@ export default [
       'react/self-closing-comp': ['error', { component: true, html: true }],
       'react/no-array-index-key': 'warn',
       'react/jsx-boolean-value': ['error', 'never'],
-      // 'no-console': 'warn',
+      'no-console': 'warn',
       'react-hooks/exhaustive-deps': 'off',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
