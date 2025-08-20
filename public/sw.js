@@ -1,3 +1,16 @@
+const formatDateAndTime = (dateISO) => {
+  // console.log('dateISO', dateISO);
+  const date = new Date(dateISO);
+  // console.log('date', date);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  // console.log('`${day}/${month}/${year} ${hours}:${minutes}`', `${day}/${month}/${year} ${hours}:${minutes}`);
+  return `${day}/${month}/${year} ${hours}:${minutes}`;
+};
+
 const createMessages = ({ scheduledDateTime, rejectionName }) => ({
   en: {
     title: {
@@ -26,8 +39,6 @@ const createMessages = ({ scheduledDateTime, rejectionName }) => ({
     },
   },
 });
-
-const formatDate = (date) => date.replace('T', ' ').replace(/\.\d+$/, '');
 
 self.addEventListener('install', (event) => {
   event.waitUntil(self.skipWaiting());
@@ -71,13 +82,13 @@ self.addEventListener('push', (event) => {
     case 'INTERVIEW_SCHEDULED': {
       const interviewId = parsedPayload?.interviewId;
       url = interviewId ? `/interviews/scheduled/${interviewId}` : '/';
-      scheduledDateTime = formatDate(notificationPayload.scheduledDateTime);
+      scheduledDateTime = formatDateAndTime(notificationPayload.scheduledDateTime);
       role = notificationPayload.role;
       break;
     }
     case 'INTERVIEW_REJECTED': {
       url = 'interviews/requests';
-      scheduledDateTime = formatDate(notificationPayload.scheduledDateTime);
+      scheduledDateTime = formatDateAndTime(notificationPayload.scheduledDateTime);
       rejectionName = notificationPayload.rejectionName;
       break;
     }
