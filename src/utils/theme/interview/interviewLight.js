@@ -111,5 +111,6 @@ export const interviewLight = {
         backgroundColor: 'rgba(84,84,87,0.4)',
       },
     },
+    shadow: '#1D1D1D',
   },
 };

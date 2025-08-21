@@ -128,7 +128,7 @@ export const styles = {
   }),
   interviewVideo: (theme) => ({
     borderRadius: theme.spacing(2),
-    boxShadow: '0 0 0 1px #1D1D1D',
+    boxShadow: `0 0 0 1px ${theme.palette.interviewPreviewVideo.shadow}`,
     '& .react-player__preview': {
       borderRadius: theme.spacing(2),
     },
@@ -138,7 +138,7 @@ export const styles = {
     aspectRatio: '16/9',
     width: '100%',
     borderRadius: theme.spacing(2),
-    boxShadow: '0 0 0 1px #1D1D1D',
+    boxShadow: `0 0 0 1px ${theme.palette.interviewPreviewVideo.shadow}`,
     overflow: 'hidden',
   }),
   container: (theme) => ({
