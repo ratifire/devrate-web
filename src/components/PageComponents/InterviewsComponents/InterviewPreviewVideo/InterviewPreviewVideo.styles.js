@@ -77,6 +77,7 @@ export const styles = {
     '& .MuiAvatar-root': {
       width: '70px',
       height: '70px',
+      boxShadow: '6px 4px 10px 0px #29006459',
     },
   }),
 };
