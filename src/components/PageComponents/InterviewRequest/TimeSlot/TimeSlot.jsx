@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Box, Checkbox, Typography } from '@mui/material';
+import { Box, Button, Checkbox, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { DateTime } from 'luxon';
 import { useTheme } from '@mui/material/styles';
@@ -67,9 +67,15 @@ const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
             placement='top-start'
             title={data.type === 'pending' ? t(`interviewRequest.pendingTooltip.${role}`) : null}
           >
-            <Typography sx={styles.statusState(data.type)} variant={'body1'} onClick={shiftToSpecificInterview}>
-              {t(`interviewRequest.timeSlot.status.${data.type}`)}
-            </Typography>
+            {data.type === 'completed' || data.type === 'booked' ? (
+              <Button sx={styles.statusState(data.type)} variant={'statusButton'} onClick={shiftToSpecificInterview}>
+                {t(`interviewRequest.timeSlot.status.${data.type}`)}
+              </Button>
+            ) : (
+              <Typography sx={styles.statusState(data.type)} variant={'subtitle3'} onClick={shiftToSpecificInterview}>
+                {t(`interviewRequest.timeSlot.status.${data.type}`)}
+              </Typography>
+            )}
           </Tooltip>
         </Box>
         <Checkbox
