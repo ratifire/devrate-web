@@ -11,7 +11,7 @@ import Education from './Education/Education';
 import Skills from './Skills';
 import Achievement from './Achievement';
 import WorkExperience from './WorkExperience/WorkExperience';
-import Video from './Video/index.js';
+import Video from './Video';
 
 const ExperienceSection = () => {
   const { t } = useTranslation();

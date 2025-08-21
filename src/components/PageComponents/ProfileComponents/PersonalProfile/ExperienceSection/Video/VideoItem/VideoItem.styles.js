@@ -4,17 +4,8 @@ const styles = {
     flexWrap: 'wrap',
     gridGap: '16px',
     position: 'relative',
-    borderRadius: 1,
-    '& > iframe': {
-      aspectRatio: '16 / 9',
-      width: '100%',
-      display: 'block',
-      minHeight: '270px',
-      borderRadius: 1,
-    },
   },
-
-  controlsInfo: {
+  controlsInfo: (theme) => ({
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -23,10 +14,10 @@ const styles = {
     justifyContent: 'space-between',
     borderRadius: '0 0 4px 4px',
     width: '100%',
-    padding: '24px 12px',
+    padding: '18px 12px',
     backdropFilter: 'blur(60px)',
-    background: 'linear-gradient(0deg, #1d1d1d 0%, rgba(29, 29, 29, 0) 100%)',
-  },
+    background: theme.palette.profile.experience.video.controlsInfo.background,
+  }),
   eyeHidden: (theme) => ({
     fontSize: 14,
     fill: theme.palette.experienceSkillSect.eye.eyeHidden,
@@ -42,12 +33,12 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: {
-    backgroundColor: '#252527',
+  icon: (theme) => ({
+    backgroundColor: theme.palette.profile.experience.video.icon.backgroundColor,
     width: '34px',
     height: 34,
     borderRadius: 1,
-  },
+  }),
 };
 
 export default styles;
