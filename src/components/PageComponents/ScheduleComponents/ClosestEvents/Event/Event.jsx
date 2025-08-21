@@ -7,11 +7,15 @@ import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
+import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers/index.js';
+import useJoinInterview from '@utils/hooks/useJoinInterview.jsx';
 import { styles } from './Event.styles';
 
 const Event = ({ event }) => {
-  const { hostName, hostSurname, roomUrl, id, startTime, type, title, hostId } = event;
+  const { hostName, hostSurname, id, startTime, type, title, hostId, interviewId, role } = event;
   const { t } = useTranslation();
+  const status = getStatusByTime(startTime);
+  const { joinInterview, isLoadingMeetingUrl } = useJoinInterview();
   const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric', separator: '/', localeMatcher: 'lookup' };
   const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: false };
 
@@ -24,6 +28,10 @@ const Event = ({ event }) => {
   const { showCancelButton, disableLink } = useCheckTimeDifference(startTime);
 
   const deleteEvent = useDeleteEvent();
+
+  const handleJoinClick = async () => {
+    await joinInterview(interviewId, role);
+  };
 
   const handleCancelInterview = async () => {
     await deleteEvent({
@@ -51,7 +59,11 @@ const Event = ({ event }) => {
         {title}
       </Typography>
       <Box sx={styles.titleDateTimeBox}>
-        <IconButton component='a' disabled={disableLink} href={roomUrl} target='_blank'>
+        <IconButton
+          aria-label='Join to interview'
+          disabled={status === 'UPCOMING' || disableLink || isLoadingMeetingUrl}
+          onClick={handleJoinClick}
+        >
           <LinkIcon />
         </IconButton>
         {showCancelButton && (
@@ -74,6 +86,8 @@ Event.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     hostId: PropTypes.number.isRequired,
+    interviewId: PropTypes.number.isRequired,
+    role: PropTypes.string.isRequired,
   }).isRequired,
 };
 
