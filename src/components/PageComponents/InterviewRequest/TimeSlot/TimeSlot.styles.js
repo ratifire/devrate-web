@@ -44,7 +44,7 @@ export const styles = {
     opacity: 1,
   }),
   statusState: (type) => ({
-    cursor: type === 'booked' ? 'pointer' : 'default',
+    cursor: type === 'booked' || type === 'completed' ? 'pointer' : 'default',
   }),
   checkBox: () => ({
     color: 'transparent',

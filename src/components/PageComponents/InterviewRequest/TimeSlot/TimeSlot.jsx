@@ -4,7 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { DateTime } from 'luxon';
 import { useTheme } from '@mui/material/styles';
 import { Tooltip } from '@mui/material';
-import { useLazyGetInterviewIdBySlotIdQuery } from '@redux/api/slices/interviews/interviewRequestsApiSlice.js';
+import {
+  useLazyGetBookedInterviewIdBySlotIdQuery,
+  useLazyGetPassedInterviewIdBySlotIdQuery,
+} from '@redux/api/slices/interviews/interviewRequestsApiSlice.js';
 import { useLazyGetSingleInterviewByIdQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import navigationLinks from '@router/links';
 import { useNavigate } from 'react-router';
@@ -16,7 +19,8 @@ const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const navigate = useNavigate();
-  const [getInterviewIdBySlotId] = useLazyGetInterviewIdBySlotIdQuery();
+  const [getBookedInterviewIdBySlotId] = useLazyGetBookedInterviewIdBySlotIdQuery();
+  const [getPassedInterviewIdBySlotId] = useLazyGetPassedInterviewIdBySlotIdQuery();
   const [getSingleInterview] = useLazyGetSingleInterviewByIdQuery();
   const dateTime = DateTime.fromISO(data.date);
   const time = dateTime.toFormat('HH:mm');
@@ -25,11 +29,17 @@ const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
   const day = t(`interviewRequest.timeSlot.daysOfWeek.${dayKey}`);
   const date = dateTime.toFormat('dd.MM.yyyy');
   const shiftToSpecificInterview = async () => {
-    if (data.type !== 'booked') return;
     try {
-      const interviewId = await getInterviewIdBySlotId(data.id).unwrap();
-      const event = await getSingleInterview({ interviewId }).unwrap();
-      navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, { state: { event } });
+      let interviewId;
+
+      if (data.type === 'booked') {
+        interviewId = await getBookedInterviewIdBySlotId(data.id).unwrap();
+        const event = await getSingleInterview({ interviewId }).unwrap();
+        navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, { state: { event } });
+      } else if (data.type === 'completed') {
+        interviewId = await getPassedInterviewIdBySlotId(data.id).unwrap();
+        navigate(`${navigationLinks.passedInterviews}/${interviewId}`);
+      }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       enqueueSnackbar(t('notifications.somethingWrong'), {
