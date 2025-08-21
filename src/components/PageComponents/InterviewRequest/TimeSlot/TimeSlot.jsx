@@ -24,12 +24,6 @@ const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
   const dayKey = dateTime.setLocale('en').toFormat('EEEE').toLowerCase();
   const day = t(`interviewRequest.timeSlot.daysOfWeek.${dayKey}`);
   const date = dateTime.toFormat('dd.MM.yyyy');
-  const statusStyles = {
-    booked: styles.booked,
-    expired: styles.expired,
-    pending: styles.pending,
-  };
-
   const shiftToSpecificInterview = async () => {
     if (data.type !== 'booked') return;
     try {
@@ -55,7 +49,7 @@ const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
       </Box>
 
       <Box sx={styles.statusCheckboxContainer}>
-        <Box sx={statusStyles[data.type] || styles.pending}>
+        <Box sx={styles.status(theme, data.type)}>
           <Typography sx={styles.statusText} variant={'subtitle3'}>
             {t('interviewRequest.timeSlot.status.status')}{' '}
           </Typography>

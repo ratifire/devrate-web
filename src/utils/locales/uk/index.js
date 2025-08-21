@@ -1140,6 +1140,7 @@ export const uk = {
           pending: 'Пошук',
           booked: 'Заплановано',
           expired: 'Минув',
+          completed: 'Пройдено',
         },
         daysOfWeek: {
           monday: 'Понеділок',
