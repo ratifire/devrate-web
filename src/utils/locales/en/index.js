@@ -1075,6 +1075,7 @@ export const en = {
         canceled: {
           success: 'Meeting canceled successfully',
           error: 'Something went wrong',
+          403: "Your interview hasn't been started yet",
         },
         UPCOMING: 'Upcoming',
         'IN PROCESS': 'In Process',
