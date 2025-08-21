@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import ReactPlayer from 'react-player';
+import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole.js';
 import EmptySkills from '../../../components/UI/Specialization/EmptySkills';
 
 import EmptyRequestPicDark from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
@@ -71,7 +72,7 @@ const SinglePassedInterviewPage = () => {
   }, []);
   const attendeeId = interviewData?.attendeeId ?? '';
   const interviewerId = interviewData?.userId ?? '';
-  const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
+  const role = interviewData?.role;
 
   const { data: userContacts, isFetching: isFetchingContacts } = useGetPersonalUserQuery(attendeeId, {
     skip: !attendeeId,
@@ -128,12 +129,13 @@ const SinglePassedInterviewPage = () => {
 
   const EmptyInterviewSvg = mode === DARK_THEME ? EmptyRequestPicDark : EmptyRequestPicLight;
 
-  const hasStatistics = (role === 'CANDIDATE' && averageHardSkillsMark > 0) || averageSoftSkillsMark > 0;
+  const hasStatistics =
+    (role === feedbackInterviewRole.CANDIDATE && averageHardSkillsMark > 0) || averageSoftSkillsMark > 0;
 
   const isFetchingUserCard = isFetchingContacts || isFetchingAvatar || isFetchingPassedInterview;
 
   const previewData = useMemo(() => {
-    const isCandidateRole = role === 'CANDIDATE';
+    const isCandidateRole = role === feedbackInterviewRole.CANDIDATE;
 
     return {
       candidate: {
@@ -204,7 +206,7 @@ const SinglePassedInterviewPage = () => {
               {t('interviews.passedInterviews.interviewersAssessmentTitle')}
             </Typography>
             <Box sx={styles.skillsWrapper}>
-              {role === 'CANDIDATE' && (
+              {role === feedbackInterviewRole.CANDIDATE && (
                 <Paper sx={styles.hardSkills}>
                   <Suspense fallback={<SkillsSkeleton />}>
                     {hardSkillsArray.length > 0 || isFetchingPassedInterview ? (
@@ -240,7 +242,7 @@ const SinglePassedInterviewPage = () => {
             ) : (
               <Suspense fallback={<StatisticSkeleton />}>
                 <MemoizedStatistics
-                  hardSkillMark={role === 'CANDIDATE' ? averageHardSkillsMark : 0}
+                  hardSkillMark={role === feedbackInterviewRole.CANDIDATE ? averageHardSkillsMark : 0}
                   softSkillMark={averageSoftSkillsMark}
                 />
               </Suspense>
