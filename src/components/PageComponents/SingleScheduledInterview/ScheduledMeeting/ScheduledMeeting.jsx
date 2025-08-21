@@ -14,7 +14,7 @@ import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import { useModalController } from '@utils/hooks/useModalController.js';
-import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
+import useJoinInterview from '@utils/hooks/useJoinInterview.jsx';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
@@ -50,6 +50,8 @@ const ScheduledMeeting = () => {
   const [cancelNotConductedMeeting, { isError: isErrorNotConductedMeeting, isLoading: isLoadingNotConductedMeeting }] =
     useDeleteNotConductedInterviewMutation();
 
+  const { joinInterview, isLoadingMeetingUrl } = useJoinInterview();
+
   const showSnackbar = (status) => {
     enqueueSnackbar(t(`singleScheduledInterview.scheduledMeeting.canceled.${status}`), {
       variant: status,
@@ -59,8 +61,6 @@ const ScheduledMeeting = () => {
       },
     });
   };
-
-  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
 
   const handleClickLeftBtn = () => {
     if (status === btnStatus['UPCOMING']) {
@@ -87,20 +87,7 @@ const ScheduledMeeting = () => {
 
   const handleClickRightBtn = async () => {
     if (status === btnStatus['UPCOMING'] || status === btnStatus['IN PROCESS']) {
-      // Create URL with query params to use in mirotalk in a survey later
-      try {
-        const meetingUrl = await getMeetingUrl(eventId).unwrap();
-        const urlWithParams = new URL(meetingUrl);
-
-        if (eventId && role) {
-          urlWithParams.searchParams.append('eventId', eventId);
-          urlWithParams.searchParams.append('role', role);
-        }
-        window.open(urlWithParams, '_blank');
-        // eslint-disable-next-line no-unused-vars
-      } catch (error) {
-        enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
-      }
+      await joinInterview(eventId, role);
     }
 
     if (status === btnStatus['AWAITING FEEDBACK']) {
@@ -215,7 +202,7 @@ const ScheduledMeeting = () => {
           onClick={handleClickLeftBtn}
         />
         <ButtonDef
-          disabled={isLoadingMeetingUrl}
+          disabled={status === 'UPCOMING' || isLoadingMeetingUrl}
           label={t(rightBtnStatus[status])}
           sx={styles.btn}
           variant='contained'
