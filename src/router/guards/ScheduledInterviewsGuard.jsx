@@ -33,7 +33,7 @@ const ScheduledInterviewsGuard = () => {
       params[key] = value;
     }
 
-    const getRedirectData = async () => {
+    const redirectToValidInterview = async () => {
       const {
         data: { content },
       } = await getAllScheduled({ page: 0, size: 6 });
@@ -65,7 +65,7 @@ const ScheduledInterviewsGuard = () => {
       }
     };
 
-    getRedirectData();
+    redirectToValidInterview();
   }, []);
 
   // useEffect(() => {
