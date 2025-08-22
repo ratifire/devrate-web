@@ -17,7 +17,6 @@ const InterviewPreviewVideo = ({
   onPlayPressed,
 }) => {
   const { t } = useTranslation();
-
   const theme = useTheme();
 
   const candidateName = `${candidateFirstName} ${candidateLastName}`;
@@ -83,7 +82,6 @@ InterviewPreviewVideo.propTypes = {
   interviewerFirstName: PropTypes.string.isRequired,
   interviewerLastName: PropTypes.string.isRequired,
   interviewerSrc: PropTypes.string,
-  role: PropTypes.oneOf(['CANDIDATE', 'INTERVIEWER']).isRequired,
   onPlayPressed: PropTypes.func.isRequired,
 };
 
