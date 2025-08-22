@@ -1,18 +1,15 @@
 @use '../../styles/scss/mediaBreakpoints.scss' as *;
 
 .footer {
-  padding-bottom: 160px;
+  padding-block: 90px;
+  background-color: #1d1d1dcc;
 
-  @include desktop {
-    padding-bottom: 140px;
-  }
-
-  @include tablet-large {
-    padding-bottom: 72px;
+  @include tablet {
+    padding-block: 60px;
   }
 
   @include tablet {
-    padding-bottom: 60px;
+    padding-block: 40px;
   }
 
   &__container {
@@ -38,36 +35,22 @@
 
   &__content {
     display: flex;
-    flex: 1 1;
-    max-width: 571px;
-    flex-direction: column;
-    gap: 24px;
-
-    @include desktop-macbook {
-      max-width: 356px;
-    }
+    gap: 60px;
+    justify-content: space-between;
+    width: 100%;
 
     @include tablet-large {
-      flex: 1 1;
       gap: 24px;
       flex-direction: column;
     }
 
     @include tablet {
-      gap: 24px;
-      flex-direction: row;
       max-width: 100%;
     }
 
     @include phone {
       flex-direction: column;
       width: 100%;
-    }
-  }
-
-  &__socialContainer {
-    @include phone {
-      display: none;
     }
   }
 
@@ -78,10 +61,6 @@
 
     @include desktop-macbook {
       justify-content: space-between;
-    }
-
-    @include phone {
-      display: none;
     }
   }
 
@@ -100,8 +79,6 @@
     gap: 15px;
 
     & > a {
-      margin-left: 8px;
-
       img {
         width: 54px;
         height: 54px;
@@ -115,16 +92,8 @@
       }
     }
 
-    & > a:first-child {
-      margin-left: 0;
-    }
-
-    @include desktop-macbook {
-      padding-right: 16px;
-    }
-
     @include tablet {
-      display: none;
+      gap: 4px;
     }
   }
 
@@ -139,6 +108,10 @@
 
     @include desktop-macbook {
       font-size: 14px;
+    }
+
+    @include tablet-large {
+      max-width: 100%;
     }
 
     @include phone {
@@ -238,6 +211,7 @@
 
     @include desktop-macbook {
       font-size: 14px;
+      max-width: 444px;
     }
   }
 
@@ -252,162 +226,5 @@
     @include desktop {
       max-width: 100%;
     }
-  }
-}
-
-/* FORM */
-
-.contactForm {
-  border-radius: 16px;
-  padding: 36px;
-  background-color: rgb(29 29 29 / 60%);
-  width: 50%;
-
-  @media screen and (width > 1440px) {
-    opacity: 0.7;
-  }
-
-  @include tablet {
-    padding: 0;
-    width: 100%;
-    background-color: transparent;
-  }
-
-  @include phone {
-    border: none;
-    background-color: transparent;
-  }
-
-  &__titleContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-
-    @include desktop-macbook {
-      justify-content: space-between;
-    }
-
-    @include tablet {
-      &::before {
-        content: '';
-        background-image: url('../../assets/footerUnderlineMob.svg');
-        width: 100%;
-        height: 4px;
-        position: absolute;
-        left: 0;
-        bottom: -12px;
-        background-repeat: no-repeat;
-        background-position: top left;
-        background-size: cover;
-      }
-    }
-  }
-
-  &__title {
-    font-family: Tektur, sans-serif;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 150%;
-    text-shadow: 2px 2px 4px 0 rgb(29 29 29 / 25%);
-    color: #fff;
-    margin-bottom: 24px;
-
-    @include tablet {
-      margin-bottom: 0;
-    }
-  }
-
-  &__titleFocus {
-    color: #b78af7;
-  }
-
-  &__socialLink {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-  }
-
-  &__socialLink img {
-    width: 40px;
-    height: 40px;
-  }
-
-  &__socialIcons {
-    height: 100%;
-    align-items: center;
-    display: none;
-
-    @include tablet {
-      display: flex;
-      gap: 8px;
-    }
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    @include tablet {
-      margin-top: 35px;
-    }
-  }
-
-  &__input {
-    color: #fff;
-    border-radius: 4px;
-    padding: 16px 10px;
-    border: 1px solid #444446;
-    outline: none;
-    font-size: 18px;
-    background-color: #1d1d1d;
-  }
-
-  &__input::placeholder {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 150%;
-    letter-spacing: 0.01em;
-    color: #828283;
-
-    @include tablet-large {
-      font-size: 16px;
-    }
-  }
-
-  &__input:focus {
-    color: #fff;
-  }
-
-  &__textarea {
-    color: #fff;
-    border-radius: 4px;
-    padding: 12px;
-    font-size: 18px;
-    border: 1px solid #444446;
-    outline: none;
-    resize: none;
-    height: 126px;
-    background-color: #1d1d1d;
-  }
-
-  &__textarea::placeholder {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 150%;
-    letter-spacing: 0.01em;
-    color: #828283;
-  }
-
-  &__textarea:focus {
-    color: #fff;
-  }
-
-  &__button {
-    text-transform: uppercase;
-    margin-top: 8px;
   }
 }
