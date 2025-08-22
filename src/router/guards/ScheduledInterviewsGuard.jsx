@@ -1,7 +1,8 @@
+/* eslint-disable */
 import { Outlet, useNavigate, useParams } from 'react-router';
 import { useEffect } from 'react';
 import {
-  useGetAllScheduledInterviewsQuery,
+  useLazyGetAllScheduledInterviewsQuery,
   useLazyGetInterviewByIdBySocketUpdateQuery,
 } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,10 +11,8 @@ import { modalNames } from '@utils/constants/modalNames';
 import navigationLinks from '../links';
 
 const ScheduledInterviewsGuard = () => {
-  const { data: scheduledInterviews, isFetching: isFetchingInterviews } = useGetAllScheduledInterviewsQuery({
-    page: 0,
-    size: 6,
-  });
+  const [getAllScheduled, { data: scheduledInterviews, isFetching: isFetchingInterviews }] =
+    useLazyGetAllScheduledInterviewsQuery();
   const [getSingleInterview, { isFetching: isFetchingLazyInterviews }] = useLazyGetInterviewByIdBySocketUpdateQuery();
   const navigate = useNavigate();
   const { interviewId } = useParams();
@@ -27,76 +26,109 @@ const ScheduledInterviewsGuard = () => {
   const content = scheduledInterviews?.content || [];
 
   useEffect(() => {
-    if (isFetchingInterviews || !scheduledInterviews || isFetchingLazyInterviews) return;
+    const searchParams = new URLSearchParams(location.search);
 
-    const firstInterviewId = scheduledInterviews?.content[0]?.id;
-    const content = scheduledInterviews?.content || [];
-    const event = content[0];
-
-    if (!content.length) {
-      navigate(`${navigationLinks.scheduledInterviews}`);
-
-      return;
+    const params = {};
+    for (const [key, value] of searchParams.entries()) {
+      params[key] = value;
     }
 
-    const getInterviews = async () => {
-      if (modalParam && roleParam) {
-        const response = await getSingleInterview({ interviewId });
+    const getRedirectData = async () => {
+      const {
+        data: { content },
+      } = await getAllScheduled({ page: 0, size: 6 });
 
-        if (!response.data) return;
+      const findEventId = content.find((event) => event.id === +interviewId);
 
-        dispatch(
-          modalOpen({
-            modalType: modalNames.feedbackInterviewModal,
-            data: {
-              feedbackId: interviewId,
-              role: roleParam,
-            },
-          })
-        );
+      if (!findEventId) {
+        const { data } = await getSingleInterview({ interviewId });
 
-        navigate(`${navigationLinks.scheduledInterviews}/${interviewId}?modal=${modalParam}&role=${roleParam}`, {
-          state: { event: response.data },
-        });
+        const newData = {
+          ...data,
+          title: data.specializationName,
+          date: data.startTime,
+        };
 
-        return;
-      }
+        if (!data) {
+          const { id } = content[0];
 
-      if (modalParam) {
-        const { eventId, oldEvent } = modalData;
-
-        navigate(`${navigationLinks.scheduledInterviews}/${eventId}?modal=${modalParam}`, {
-          state: { event: oldEvent },
-        });
-
-        return;
-      }
-
-      if (interviewId && !deleteIdItem) {
-        const findEvent = scheduledInterviews?.content.find((event) => event.id === +interviewId);
-
-        if (!findEvent) {
-          await getSingleInterview({ interviewId });
-
-          return;
+          navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
+            state: { event: content[0] },
+          });
         }
 
-        navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, {
-          state: { event: findEvent },
-        });
+        const { id } = newData;
 
-        return;
-      }
-
-      if (firstInterviewId && !interviewId) {
-        navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
-          state: { event },
+        navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
+          state: { event: newData },
         });
       }
     };
 
-    getInterviews();
-  }, [content]);
+    getRedirectData();
+  }, []);
+
+  // useEffect(() => {
+  //   if (isFetchingInterviews || !scheduledInterviews || isFetchingLazyInterviews) return;
+  //
+  //   const firstInterviewId = scheduledInterviews?.content[0]?.id;
+  //   const content = scheduledInterviews?.content || [];
+  //   const event = content[0];
+  //
+  //   if (!content.length) {
+  //     navigate(`${navigationLinks.scheduledInterviews}`);
+  //
+  //     return;
+  //   }
+  //
+  //   if (modalParam && roleParam) {
+  //     const findEvent = scheduledInterviews?.content.find((event) => event.id === +interviewId);
+  //
+  //     if (!findEvent) return;
+  //
+  //     dispatch(
+  //       modalOpen({
+  //         modalType: modalNames.feedbackInterviewModal,
+  //         data: {
+  //           feedbackId: interviewId,
+  //           role: roleParam,
+  //         },
+  //       })
+  //     );
+  //
+  //     navigate(`${navigationLinks.scheduledInterviews}/${interviewId}?modal=${modalParam}&role=${roleParam}`, {
+  //       state: { event: findEvent },
+  //     });
+  //
+  //     return;
+  //   }
+  //
+  //   if (modalParam) {
+  //     const { eventId, oldEvent } = modalData;
+  //
+  //     navigate(`${navigationLinks.scheduledInterviews}/${eventId}?modal=${modalParam}`, {
+  //       state: { event: oldEvent },
+  //     });
+  //
+  //     return;
+  //   }
+  //
+  //   if (interviewId && !deleteIdItem) {
+  //     const findEvent = scheduledInterviews?.content.find((event) => event.id === +interviewId);
+  //
+  //     navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, {
+  //       state: { event: findEvent },
+  //     });
+  //
+  //     return;
+  //   }
+  //
+  //   if (firstInterviewId && !interviewId) {
+  //     navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
+  //       state: { event },
+  //     });
+  //   }
+  // }, [content]);
 
   return <Outlet />;
 };
