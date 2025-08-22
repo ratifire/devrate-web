@@ -12,10 +12,17 @@ export const styles = {
   text: {
     fontSize: '0.75rem',
   },
+  input: {
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: '#444446 !important',
+      },
+    },
+  },
   actions: (theme) => ({
     display: 'flex',
     gap: theme.spacing(3),
-    '> *': {
+    '> button': {
       fontSize: '0.875rem',
       textTransform: 'none',
     },

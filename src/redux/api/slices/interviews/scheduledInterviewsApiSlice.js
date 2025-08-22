@@ -62,6 +62,13 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         responseHandler: (response) => response.text(),
       }),
     }),
+    createPersonalMeetingUrl: builder.mutation({
+      query: () => ({
+        method: 'POST',
+        url: '/meetings',
+        responseHandler: (response) => response.text(),
+      }),
+    }),
   }),
 });
 
@@ -71,4 +78,5 @@ export const {
   useLazyGetSingleInterviewByIdQuery,
   useGetInterviewStatusQuery,
   useLazyGetInterviewMeetingUrlQuery,
+  useCreatePersonalMeetingUrlMutation,
 } = scheduledInterviewApiSlice;
