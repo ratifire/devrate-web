@@ -38,11 +38,14 @@ const ScheduledInterviewsGuard = () => {
         data: { content },
       } = await getAllScheduled({ page: 0, size: 6 });
 
+      // This is insurance in case the user entered the interview ID in the URL.
       const findEventId = content.find((event) => event.id === +interviewId);
 
+      // This block is needed if the user clicked on a push notification or navigated to the page via crl + c.
       if (!findEventId) {
         const { data } = await getSingleInterview({ interviewId });
 
+        // This part is for when there is no such id.
         if (!data) {
           const { id } = content[0];
 
