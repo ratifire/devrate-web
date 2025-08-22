@@ -43,12 +43,6 @@ const ScheduledInterviewsGuard = () => {
       if (!findEventId) {
         const { data } = await getSingleInterview({ interviewId });
 
-        const newData = {
-          ...data,
-          title: data.specializationName,
-          date: data.startTime,
-        };
-
         if (!data) {
           const { id } = content[0];
 
@@ -56,6 +50,12 @@ const ScheduledInterviewsGuard = () => {
             state: { event: content[0] },
           });
         }
+
+        const newData = {
+          ...data,
+          title: data.specializationName,
+          date: data.startTime,
+        };
 
         const { id } = newData;
 
