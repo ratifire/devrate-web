@@ -11,10 +11,13 @@ import UserAvatar from '@components/UI/UserAvatar';
 // import Bookmark from '@components/UI/Bookmark';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { useMemo } from 'react';
+import { modalNames } from '@utils/constants/modalNames.js';
+import { useModalController } from '@utils/hooks/useModalController.js';
 import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = ({ id }) => {
   const dispatch = useDispatch();
+  const { openModal } = useModalController();
   const { data: personalData } = useGetPersonalUserQuery(id);
   const { t } = useTranslation();
   // const [isBookmarked, setIsBookmarked] = useState(false);
@@ -45,8 +48,7 @@ const BaseUserInfo = ({ id }) => {
   };
 
   const handleBookInterview = () => {
-    // eslint-disable-next-line no-console
-    console.log('Book an interview');
+    openModal(modalNames.personalInterviewModal);
   };
 
   return (

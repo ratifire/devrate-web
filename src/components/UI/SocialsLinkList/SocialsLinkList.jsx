@@ -19,7 +19,6 @@ const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
   } = useSelector(selectCurrentUser);
   const { data: userContacts } = useGetUserContactsQuery(userId);
   const { enqueueSnackbar } = useSnackbar();
-
   const arr = id ? socials : userContacts;
   const handleCopy = async (dataToCopy) => {
     try {
