@@ -273,12 +273,11 @@ const SinglePassedInterviewPage = () => {
                   shouldShowVisibilityControl
                   candidateFirstName={previewData.candidate.firstName}
                   candidateLastName={previewData.candidate.lastName}
-                  candidateSrc={previewData.candidate.avatar}
+                  candidateSrc={previewData.interviewer.avatar}
                   interviewLevel={previewData.level}
                   interviewerFirstName={previewData.interviewer.firstName}
                   interviewerLastName={previewData.interviewer.lastName}
-                  interviewerSrc={previewData.interviewer.avatar}
-                  role={previewData.role}
+                  interviewerSrc={previewData.candidate.avatar}
                   specialization={previewData.specialization}
                   onPlayPressed={handlePlayPressed}
                 />
