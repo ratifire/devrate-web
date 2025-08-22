@@ -10,6 +10,19 @@ import { openModal as modalOpen, selectModalData } from '@redux/slices/modal/mod
 import { modalNames } from '@utils/constants/modalNames';
 import navigationLinks from '../links';
 
+const createUrl = ({ id, params }) => {
+  let url;
+
+  const feedbackModalKey = modalNames.feedbackInterviewModal;
+  const hasFeedbackModal = Object.prototype.hasOwnProperty.call(params, 'modal') && params.modal === feedbackModalKey;
+
+  url = hasFeedbackModal
+    ? `${navigationLinks.scheduledInterviews}/${id}?modal=${params.modal}&role=${params.role}`
+    : `${navigationLinks.scheduledInterviews}/${id}`;
+
+  return url;
+};
+
 const ScheduledInterviewsGuard = () => {
   const [getAllScheduled, { data: scheduledInterviews, isFetching: isFetchingInterviews }] =
     useLazyGetAllScheduledInterviewsQuery();
@@ -26,8 +39,6 @@ const ScheduledInterviewsGuard = () => {
   const content = scheduledInterviews?.content || [];
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-
     const params = {};
     for (const [key, value] of searchParams.entries()) {
       params[key] = value;
@@ -52,6 +63,8 @@ const ScheduledInterviewsGuard = () => {
           navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
             state: { event: content[0] },
           });
+
+          return;
         }
 
         const newData = {
