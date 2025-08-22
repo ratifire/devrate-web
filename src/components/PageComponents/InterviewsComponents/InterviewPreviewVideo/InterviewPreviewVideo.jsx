@@ -14,18 +14,14 @@ const InterviewPreviewVideo = ({
   interviewerFirstName,
   interviewerLastName,
   interviewerSrc,
-  role,
   onPlayPressed,
 }) => {
   const { t } = useTranslation();
 
   const theme = useTheme();
 
-  const isCandidate = role === 'CANDIDATE';
   const candidateName = `${candidateFirstName} ${candidateLastName}`;
-  const firstParticipantSrc = isCandidate ? candidateSrc : interviewerSrc;
   const interviewerName = `${interviewerFirstName} ${interviewerLastName}`;
-  const secondParticipantSrc = isCandidate ? interviewerSrc : candidateSrc;
 
   return (
     <Box sx={styles.content(theme)}>
@@ -53,14 +49,14 @@ const InterviewPreviewVideo = ({
           <UserAvatar
             radius='square'
             size='m'
-            src={firstParticipantSrc}
+            src={candidateSrc}
             userFirstName={candidateFirstName}
             userLastName={candidateLastName}
           />
           <UserAvatar
             radius='square'
             size='m'
-            src={secondParticipantSrc}
+            src={interviewerSrc}
             userFirstName={interviewerFirstName}
             userLastName={interviewerLastName}
           />
