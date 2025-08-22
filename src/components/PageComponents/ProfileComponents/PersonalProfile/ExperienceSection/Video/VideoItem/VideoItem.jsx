@@ -14,7 +14,7 @@ const VideoItem = ({ data }) => {
 
   const { openModal } = useModalController();
   const handlePlayPressed = useCallback(() => {
-    openModal('videoModal');
+    openModal('videoModal', { isPlaying });
     setIsPlaying(true);
   }, []);
   useEffect(() => {
