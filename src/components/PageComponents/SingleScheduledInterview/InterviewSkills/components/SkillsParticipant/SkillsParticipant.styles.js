@@ -23,5 +23,8 @@ export const styles = {
     '>.MuiAccordionSummary-expandIconWrapper': {
       color: theme.palette.faq.questions.icon.color,
     },
+    '& >.MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+      color: theme.palette.faq.questions.icon.expanded,
+    },
   }),
 };
