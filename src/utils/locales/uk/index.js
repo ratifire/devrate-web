@@ -73,16 +73,10 @@ export const uk = {
         footerText:
           'Вдосконалюйте свої навички як з початківцями, так і з досвідченими професіоналами. Наша платформа розроблена, щоб зробити процес підготовки до співбесіди більш плавним і менш напруженим для всіх.',
         developedText: 'Розроблено',
-        termsAndConditions: 'Terms and conditions',
-        privacyPolicy: 'Privacy Policy',
+        termsAndConditions: 'Умови та правила',
+        privacyPolicy: 'Політика конфідеційності',
         allRightsReserved: 'Всі права захищені.',
-        allTrademarks: 'Усі товарні знаки, логотипи та торгові найменування є власністю їхніх відповідних власників.',
-        formPart1: 'Зв’яжіться',
-        formPart2: 'з нами',
-        placeholderName: 'Ім’я Прізвище',
-        placeholderEmail: 'Введіть свою e-mail адресу',
-        placeholderRequest: 'Опишіть свій запит...',
-        buttonText: 'Надіслати',
+        allTrademarks: 'Усі торгові марки, логотипи та торгові марки\n' + 'є власністю Ratifire Company.',
       },
       links: {
         home_page: 'Головну сторінку',
@@ -1002,6 +996,7 @@ export const uk = {
         create: {
           success: 'Успішно відправлено',
           error: 'Щось пішло не так',
+          validationWarn: 'Кількість hard skills має бути від 3 до 20',
         },
         delete: {
           success: 'Успішно видалено',
@@ -1016,6 +1011,7 @@ export const uk = {
         create: {
           success: 'Успішно відправлено',
           error: 'Щось пішло не так',
+          validationWarn: 'Кількість soft skills має бути не мене 3',
         },
         delete: {
           success: 'Успішно видалено',
@@ -1026,6 +1022,7 @@ export const uk = {
         create: {
           success: 'Спеціалізацію {{values}} успішно додано',
           error: 'Не вдалося створити спеціалізацію',
+          validationWarn: 'Кількість hard skills має бути від 3 до 20',
         },
         edit: {
           success: 'Успішно відредаговано на {{name}}',
@@ -1044,6 +1041,7 @@ export const uk = {
         create: {
           success: 'Успішно відправлено',
           error: 'Щось пішло не так',
+          skillsValidation: 'Додайте мінімум 3 hard skills на сторінці спеціалізацій.',
         },
         edit: {
           success: 'Успішно відредаговано',
@@ -1092,7 +1090,8 @@ export const uk = {
         interviewInfoHourAgo: 'година (годин) тому',
         interviewInfoToday: 'Пройдено сьогодні',
         interviewInfoRole: 'Ваша роль',
-        interviewInfoHost: "Інтерв'юер",
+        interviewInfoInterviewer: "Інтерв'юер",
+        interviewInfoRespondent: 'Респондент',
         interviewFeedbackTitle: 'Відгук співбесідника',
         interviewFeedbackReadLess: 'Читати менше',
         interviewFeedbackReadMore: 'Читати більше',
@@ -1100,6 +1099,13 @@ export const uk = {
         interviewStatisticsHardSkills: 'Hard skills',
         interviewStatisticsSoftSkills: 'Soft skills',
         interviewStatisticsOverall: 'Загалом',
+        interviewPreviewVideo: {
+          headerTitle: 'Відео',
+          interviewLevel: 'Рівень співбесіди:',
+          specialization: 'Спеціалізація:',
+          candidateName: 'Респондент:',
+          interviewerName: "Інтерв'юер:",
+        },
       },
       scheduleInterviewModal: {
         title: 'Запланувати співбесіду',
@@ -1145,6 +1151,7 @@ export const uk = {
         canceled: {
           success: 'Зустріч успішно скасована',
           error: 'Щось пішло не так',
+          403: "Ваше інтерв'ю ще не почалося",
         },
         UPCOMING: 'Майбутня',
         'IN PROCESS': 'У процесі',

@@ -445,6 +445,10 @@ const getDesignTokens = (mode) => ({
             loadingIcon: {
               color: '#A9A9AA',
             },
+            dehazeIcon: {
+              color: '#C5C5C6',
+              backgroundColor: '#CEB0FA29',
+            },
           },
 
           tabsEl: {
@@ -991,6 +995,10 @@ const getDesignTokens = (mode) => ({
             },
             loadingIcon: {
               color: '#303032',
+            },
+            dehazeIcon: {
+              color: '#444446',
+              backgroundColor: '#ECECED',
             },
           },
           skillsSection: {

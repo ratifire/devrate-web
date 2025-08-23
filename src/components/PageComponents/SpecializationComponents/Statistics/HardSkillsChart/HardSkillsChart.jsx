@@ -57,7 +57,7 @@ const HardSkillsChart = () => {
           <Radar
             dataKey='averageMark'
             dot={({ cx, cy, index }) => <circle key={index} cx={cx} cy={cy} fill='url(#gradient2)' r={6} />}
-            fillOpacity={0.3}
+            fillOpacity={0}
             stroke='url(#gradient2)'
             strokeWidth={3}
           />

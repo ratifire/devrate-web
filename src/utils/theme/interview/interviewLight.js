@@ -102,4 +102,15 @@ export const interviewLight = {
   feedback: {
     feedbackBox: '#F8F8F8',
   },
+  interviewPreviewVideo: {
+    color: '#FFFFFF',
+    interviewPreviewVideoTitleColor: '#1D1D1D',
+    playButton: {
+      backgroundColor: '#30303266',
+      hover: {
+        backgroundColor: 'rgba(84,84,87,0.4)',
+      },
+    },
+    shadow: '#1D1D1D',
+  },
 };

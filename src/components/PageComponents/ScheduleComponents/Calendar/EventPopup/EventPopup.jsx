@@ -10,16 +10,24 @@ import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference
 import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
+import CustomTooltip from '@components/UI/CustomTooltip';
+import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers/index.js';
+import useJoinInterview from '@utils/hooks/useJoinInterview.jsx';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const { t } = useTranslation();
   const { data, isFetching } = useGetEventByIdQuery({ id: event.id }, { skip: !event.id });
-
-  const { showCancelButton, disableLink } = useCheckTimeDifference(event.startTime);
+  const { joinInterview, isLoadingMeetingUrl } = useJoinInterview();
+  const { showCancelButton } = useCheckTimeDifference(event.startTime);
+  const status = getStatusByTime(event?.startTime);
 
   const deleteEvent = useDeleteEvent();
+
+  const handleJoinClick = async () => {
+    await joinInterview(event.interviewId, event.role);
+  };
 
   const handleCancelInterview = async () => {
     await deleteEvent({
@@ -33,6 +41,8 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   if (isFetching) return null;
 
   const { counterpartUser, currentUser } = data;
+  const currentUserName = `${currentUser.name} ${currentUser.surname}`;
+  const counterpartUserName = `${counterpartUser.name} ${counterpartUser.surname}`;
 
   return (
     <Box
@@ -57,9 +67,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
               {t('schedule.popupUserInfo')}
             </Typography>
             <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${currentUser.id}`}>
-              <Typography sx={styles.name} variant='subtitle2'>
-                {currentUser.name} {currentUser.surname}
-              </Typography>
+              <CustomTooltip customStyles={styles.name} title={currentUserName} variant='subtitle2'>
+                {currentUserName}
+              </CustomTooltip>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
               {lvlMastery[currentUser.masteryLevel]} {currentUser.specializationName}
@@ -74,9 +84,9 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
               {t('schedule.popupInterviewerInfo')}
             </Typography>
             <Box component={Link} sx={{ textDecoration: 'none' }} to={`${links.profile}/${counterpartUser.id}`}>
-              <Typography sx={styles.name} variant='subtitle2'>
-                {counterpartUser.name} {counterpartUser.surname}
-              </Typography>
+              <CustomTooltip customStyles={styles.name} title={counterpartUserName} variant='subtitle2'>
+                {counterpartUserName}
+              </CustomTooltip>
             </Box>
             <Typography sx={styles.position} variant='caption2'>
               {lvlMastery[counterpartUser.masteryLevel]} {counterpartUser.specializationName}
@@ -91,11 +101,10 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       <Box sx={styles.buttonsContainer}>
         <ButtonDef
           component='a'
-          disabled={disableLink}
-          href={event.roomLink}
+          disabled={status === 'UPCOMING' || isLoadingMeetingUrl}
           label={t('schedule.link')}
           sx={styles.icon}
-          target='_blank'
+          onClick={handleJoinClick}
         />
         {showCancelButton && (
           <Box alt='Cancel Event' component='img' src={cancelEventIcon} onClick={handleCancelInterview} />

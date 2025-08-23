@@ -13,6 +13,7 @@ const withAuth = (Component) => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
     const state = params.get('state');
+    const returnUrl = params.get('returnUrl');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
@@ -32,8 +33,7 @@ const withAuth = (Component) => {
 
           if (idToken && authToken) {
             dispatch(setTokens({ idToken, authToken }));
-
-            return navigate('/profile', { replace: true });
+            navigate(returnUrl || '/profile', { replace: true });
           }
           // eslint-disable-next-line no-unused-vars
         } catch (err) {

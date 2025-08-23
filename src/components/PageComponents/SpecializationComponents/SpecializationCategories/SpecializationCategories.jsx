@@ -19,11 +19,14 @@ import { CategoriesSkeleton } from '@components/UI/Skeleton';
 import { modalNames } from '@utils/constants/modalNames';
 import { useModalController } from '@utils/hooks/useModalController.js';
 import { setActiveMastery } from '@redux/slices/specialization/activeMasterySlice.js';
+import { useTheme } from '@mui/material/styles';
+import { activeBackgroundUrls, backgroundUrls } from '@utils/constants/Specialization/specializationBackgroundUrls.js';
 import InterviewTracker from '../InterviewTracker/index.js';
 import { styles } from './SpecializationCategories.styles';
 
 const SpecializationCategories = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState({});
@@ -31,6 +34,7 @@ const SpecializationCategories = () => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const [masteryData, setMasteryData] = useState({});
   const activeSpec = activeSpecialization || mainSpecialization;
+  const currentMode = theme.palette.mode;
 
   const {
     data: specializations,
@@ -149,8 +153,9 @@ const SpecializationCategories = () => {
         {specializationsSorted?.map(({ id, name, main }) => (
           <Box
             key={id}
-            className={`figure ${activeSpec?.id === id ? 'active' : ''}`}
-            sx={styles.figure}
+            sx={styles.figure(
+              `${activeSpec?.id === id ? activeBackgroundUrls[currentMode] : backgroundUrls[currentMode]}`
+            )}
             onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
           >
             <Box sx={styles.specialization_title}>

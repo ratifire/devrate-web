@@ -63,7 +63,7 @@ export const en = {
       },
       footer: {
         copyright: '© 2023 SKILLZZY, Inc. All rights reserved.',
-        trademarks: 'All trademarks, logos and brand names are <br/> the property of their respective owners.',
+        trademarks: 'All trademarks, logos and brand names are <br/> the property of Ratifire company.',
         footerText:
           'Technical interview training platform: elevate your skills with both beginners and experienced professionals. Our platform is designed to make the interview preparation process smoother and less stressful for everyone.',
         developedText: 'Developed By',
@@ -71,12 +71,6 @@ export const en = {
         privacyPolicy: 'Privacy Policy',
         allRightsReserved: 'All rights reserved.',
         allTrademarks: 'All trademarks, logos, and brand names are the property of their respective owners.',
-        formPart1: 'Get',
-        formPart2: 'In Touch',
-        placeholderName: 'Name Surname',
-        placeholderEmail: 'Enter your email',
-        placeholderRequest: 'Enter your request...',
-        buttonText: 'SEND',
       },
       links: {
         home_page: 'Home',
@@ -994,6 +988,7 @@ export const en = {
         create: {
           success: 'Submitted successfully',
           error: 'Something went wrong',
+          validationWarn: 'You must have min 3 hard skills and max 20',
         },
         delete: {
           success: 'Deleted successfully',
@@ -1008,6 +1003,7 @@ export const en = {
         create: {
           success: 'Submitted successfully',
           error: 'Something went wrong',
+          validationWarn: 'You must have min 3 soft skills',
         },
         delete: {
           success: 'Deleted successfully',
@@ -1018,6 +1014,7 @@ export const en = {
         create: {
           success: 'Specialization {{values}} added successfully',
           error: 'Failed to create Specialization',
+          validationWarn: 'You must have min 3 hard skills and max 20',
         },
         edit: {
           success: 'Edited successfully to {{name}}',
@@ -1036,6 +1033,7 @@ export const en = {
         create: {
           success: 'Submitted successfully',
           error: 'Something went wrong',
+          skillsValidation: 'Add at least 3 hard skills on the specializations page.',
         },
         edit: {
           success: 'Edited successfully',
@@ -1084,7 +1082,8 @@ export const en = {
         interviewInfoHourAgo: 'hour(s) ago',
         interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
-        interviewInfoHost: 'Interviewer',
+        interviewInfoInterviewer: 'Interviewer',
+        interviewInfoRespondent: 'Respondent',
         interviewFeedbackTitle: "Interviewee's feedback",
         interviewFeedbackReadLess: 'Read more',
         interviewFeedbackReadMore: 'Read less',
@@ -1092,6 +1091,13 @@ export const en = {
         interviewStatisticsHardSkills: 'Hard Skills',
         interviewStatisticsSoftSkills: 'Soft Skills',
         interviewStatisticsOverall: 'Over All',
+        interviewPreviewVideo: {
+          headerTitle: 'Video',
+          interviewLevel: 'Interview Level:',
+          specialization: 'Specialization:',
+          candidateName: 'Respondent:',
+          interviewerName: 'Interviewer:',
+        },
       },
       scheduleInterviewModal: {
         title: 'Schedule Interview',
@@ -1135,6 +1141,7 @@ export const en = {
         canceled: {
           success: 'Meeting canceled successfully',
           error: 'Something went wrong',
+          403: "Your interview hasn't been started yet",
         },
         UPCOMING: 'Upcoming',
         'IN PROCESS': 'In Process',
