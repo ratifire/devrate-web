@@ -1,19 +1,13 @@
-import { Box, Typography } from '@mui/material';
-import PropTypes from 'prop-types';
-import { useCallback, useState } from 'react';
+import { Box } from '@mui/material';
 import InterviewPreviewVideo from '@components/PageComponents/InterviewsComponents/InterviewPreviewVideo/index.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import styles from './VideoItem.styles.js';
 
-const VideoItem = ({ data }) => {
-  const { name } = data;
-  const [isPlaying, setIsPlaying] = useState(false);
+const VideoItem = () => {
   const { openModal } = useModalController();
 
-  const handlePlayPressed = useCallback(() => {
-    openModal('videoModal', { isPlaying });
-    setIsPlaying(true);
-  }, []);
+  const handlePlayPressed = () => openModal(modalNames.videoModal, { isPlaying: true });
 
   return (
     <Box sx={styles.wrapper}>
@@ -30,15 +24,11 @@ const VideoItem = ({ data }) => {
         specialization={'Frontend Developer'}
         onPlayPressed={handlePlayPressed}
       />
-      <Box sx={styles.controlsInfo}>
-        <Typography variant='subtitle2'>{name}</Typography>
-      </Box>
+      {/*<Box sx={styles.controlsInfo}>*/}
+      {/*  <Typography variant='subtitle2'>{name}</Typography>*/}
+      {/*</Box>*/}
     </Box>
   );
-};
-
-VideoItem.propTypes = {
-  data: PropTypes.object.isRequired,
 };
 
 export default VideoItem;

@@ -1,24 +1,20 @@
-import { Box, Typography } from '@mui/material';
-import { styles } from '@pages/InterviewPages/SinglePassedInterviewPage/SingleIPassednterviewPage.styles.js';
+import { Box } from '@mui/material';
 import ReactPlayer from 'react-player';
 import { selectModalData } from '@redux/slices/modal/modalSlice.js';
 import { useSelector } from 'react-redux';
-// import { styles } from './VideoModal.styles.js';
+import { styles } from './VideoModal.styles.js';
 
 const VideoModal = () => {
-  const modalData = useSelector(selectModalData);
-  // eslint-disable-next-line no-console
-  console.log(modalData);
+  const { isPlaying } = useSelector(selectModalData);
+
   return (
     <>
-      <Typography variant='h6'>Назва відео</Typography>
       <Box sx={styles.playerWrapper}>
         <ReactPlayer
           controls
           height='100%'
-          // playing={isPlaying}
+          playing={isPlaying}
           src={'https://skillzzy-video.s3.eu-north-1.amazonaws.com/Bot+Recorder-1755588883235.mp4'}
-          style={styles.interviewVideo}
           width='100%'
           // onEnded={handleVideoEnded}
         />

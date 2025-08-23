@@ -1,35 +1,13 @@
-import { Box, IconButton, Typography } from '@mui/material';
-import PropTypes from 'prop-types';
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import { useCallback, useEffect, useState } from 'react';
+import { Box } from '@mui/material';
 import InterviewPreviewVideo from '@components/PageComponents/InterviewsComponents/InterviewPreviewVideo/index.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import { modalNames } from '@utils/constants/modalNames.js';
 import styles from './VideoItem.styles.js';
 
-const VideoItem = ({ data }) => {
-  const { name, hide } = data;
-  const [hidden, setHidden] = useState(hide);
-  const [isPlaying, setIsPlaying] = useState(false);
-
+const VideoItem = () => {
   const { openModal } = useModalController();
-  const handlePlayPressed = useCallback(() => {
-    openModal('videoModal', { isPlaying });
-    setIsPlaying(true);
-  }, []);
-  useEffect(() => {
-    setHidden(hide);
-  }, [data]);
 
-  const handlerClick = async () => {
-    setHidden(!hidden);
-  };
-
-  const iconEye = !hidden ? (
-    <VisibilityOutlinedIcon sx={styles.eye} />
-  ) : (
-    <VisibilityOffOutlinedIcon sx={styles.eyeHidden} />
-  );
+  const handlePlayPressed = () => openModal(modalNames.videoModal, { isPlaying: true });
 
   return (
     <Box sx={styles.wrapper}>
@@ -46,20 +24,11 @@ const VideoItem = ({ data }) => {
         specialization={'Frontend Developer'}
         onPlayPressed={handlePlayPressed}
       />
-      <Box sx={styles.controlsInfo}>
-        <Typography variant='subtitle2'>{name}</Typography>
-        <Box sx={styles.iconWrapper}>
-          <IconButton sx={styles.icon} type='button' onClick={handlerClick}>
-            {iconEye}
-          </IconButton>
-        </Box>
-      </Box>
+      {/*<Box sx={styles.controlsInfo}>*/}
+      {/*  <Typography variant='subtitle2'>{name}</Typography>*/}
+      {/*</Box>*/}
     </Box>
   );
-};
-
-VideoItem.propTypes = {
-  data: PropTypes.object.isRequired,
 };
 
 export default VideoItem;
