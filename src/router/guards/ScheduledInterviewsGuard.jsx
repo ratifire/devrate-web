@@ -49,9 +49,22 @@ const ScheduledInterviewsGuard = () => {
 
         if (!findExistEvent) {
           const { data } = await getSingleInterview({ interviewId });
+          if (!data) {
+            const { id } = content[0];
+
+            navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
+              state: { event: content[0] },
+            });
+          }
+
+          const newData = {
+            ...data,
+            title: data.specializationName,
+            date: data.startTime,
+          };
 
           navigate(`${navigationLinks.scheduledInterviews}/${data.id}`, {
-            state: { event: data },
+            state: { event: newData },
           });
 
           if (modalParam && roleParam) {
@@ -64,6 +77,10 @@ const ScheduledInterviewsGuard = () => {
                 },
               })
             );
+
+            navigate(`${navigationLinks.scheduledInterviews}/${data.id}?modal=${modalParam}&role=${roleParam}`, {
+              state: { event: newData },
+            });
           }
         }
       }
