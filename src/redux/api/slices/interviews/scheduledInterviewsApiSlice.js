@@ -93,6 +93,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
       async onQueryStarted({ eventId }, { dispatch, queryFulfilled }) {
         return optimisticDeleteScheduledInterview({ dispatch, eventId, queryFulfilled });
       },
+      invalidatesTags: [TAG_TYPES.Event],
     }),
     deleteNotConductedInterview: builder.mutation({
       query: ({ eventId }) => ({
