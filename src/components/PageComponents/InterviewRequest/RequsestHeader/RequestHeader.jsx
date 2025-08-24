@@ -89,7 +89,7 @@ const RequestHeader = ({
           <Box
             component='span'
             sx={{
-              color: role === 'CANDIDATE' ? styles.respondentColor : styles.interviewerColor,
+              color: role === 'CANDIDATE' ? styles.candidateColor : styles.interviewerColor,
             }}
           >
             {t(`interviewRequest.role.${role}`)}

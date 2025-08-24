@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 
-export const getSortedDatesWithLabel = (respondent) => {
-  const timeSlots = respondent.timeSlots || [];
+export const getSortedDatesWithLabel = (candidate) => {
+  const timeSlots = candidate.timeSlots || [];
 
   // Доступные слоты (PENDING)
   const availableDatesWithLabel = timeSlots

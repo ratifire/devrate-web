@@ -12,7 +12,7 @@ export const styles = {
     fontWeight: 'bold',
     marginBottom: '8px',
   },
-  respondentColor: (theme) => theme.palette.requestInterview.role.respondent,
+  candidateColor: (theme) => theme.palette.requestInterview.role.candidate,
   interviewerColor: (theme) => theme.palette.requestInterview.role.interviewer,
 
   foundInterviews: (theme) => ({
