@@ -7,7 +7,6 @@ import { Box, Link, Typography } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { setCredentials } from '@redux/slices/auth/authSlice';
 import { setTokens } from '@redux/slices/auth/tokenSlice';
-import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
 import { useLoginMutation } from '@redux/api/slices/auth/authApiSlice';
 import { LoginSchema } from '@utils/validationSchemas';
 import { FormInput } from '@components/FormsComponents/Inputs';
@@ -15,6 +14,7 @@ import { ButtonDef } from '@components/FormsComponents/Buttons';
 import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWord';
 import { modalNames } from '@utils/constants/modalNames';
 import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
+import { useModalController } from '@utils/hooks/useModalController';
 import styles from './LoginModal.styles';
 
 const initialValues = {
@@ -25,6 +25,8 @@ const initialValues = {
 const LoginModal = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  const { openModal, closeModal } = useModalController();
+  const [login] = useLoginMutation();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,14 +34,12 @@ const LoginModal = () => {
   const returnUrl = params.get('returnUrl');
 
   const handleOpen = useCallback(() => {
-    dispatch(openModal({ modalType: modalNames.checkEmailModal }));
-  }, [dispatch]);
+    openModal(modalNames.checkEmailModal);
+  }, []);
 
   const handleClose = useCallback(() => {
-    dispatch(closeModal());
-  }, [dispatch]);
-
-  const [login] = useLoginMutation();
+    closeModal();
+  }, []);
 
   const onSubmit = useCallback(
     async (values, { setSubmitting }) => {
@@ -49,6 +49,7 @@ const LoginModal = () => {
           email: values.email,
           password: values.password,
         }).unwrap();
+
         dispatch(setCredentials({ data: userData }));
 
         if (idToken && authToken) {

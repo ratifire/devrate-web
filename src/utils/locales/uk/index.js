@@ -73,16 +73,10 @@ export const uk = {
         footerText:
           'Вдосконалюйте свої навички як з початківцями, так і з досвідченими професіоналами. Наша платформа розроблена, щоб зробити процес підготовки до співбесіди більш плавним і менш напруженим для всіх.',
         developedText: 'Розроблено',
-        termsAndConditions: 'Terms and conditions',
-        privacyPolicy: 'Privacy Policy',
+        termsAndConditions: 'Умови та правила',
+        privacyPolicy: 'Політика конфідеційності',
         allRightsReserved: 'Всі права захищені.',
-        allTrademarks: 'Усі товарні знаки, логотипи та торгові найменування є власністю їхніх відповідних власників.',
-        formPart1: 'Зв’яжіться',
-        formPart2: 'з нами',
-        placeholderName: 'Ім’я Прізвище',
-        placeholderEmail: 'Введіть свою e-mail адресу',
-        placeholderRequest: 'Опишіть свій запит...',
-        buttonText: 'Надіслати',
+        allTrademarks: 'Усі торгові марки, логотипи та торгові марки\n' + 'є власністю Ratifire Company.',
       },
       links: {
         home_page: 'Головну сторінку',
@@ -188,6 +182,7 @@ export const uk = {
         password_tooltip:
           'Пароль повинен містити 6 символів, 1 велику літеру, 1 цифру, 1 спеціальний символ та не містити пробілів',
         password_invalid: 'Неприпустимий пароль',
+        password_must_differ: 'Паролі повинні відрізнятися',
         agreement_error: 'Для використання нашого сервісу вам необхідно погодитися з умовами користування',
         agreement: 'Я прочитав(ла) і погоджуюся з <a>Умовами використання</a> та <a>Політикою конфіденційності</a>',
         btn_register: 'Зареєструватись',
@@ -668,6 +663,77 @@ export const uk = {
         },
       },
     },
+    settings: {
+      sideBar: {
+        title: 'Налаштування',
+        links: {
+          generalSettings: 'Загальні налаштування',
+          notificationsSettings: 'Сповіщення',
+        },
+      },
+      general: {
+        title: 'Загальні налаштування',
+        common: {
+          save: 'Зберегти',
+          cancel: 'Скасувати',
+          send: 'Надіслати',
+        },
+        changeEmail: {
+          title: 'Змінити e-mail адресу',
+          oldEmailLabel: 'Поточний e-mail',
+          oldEmailPlaceholder: 'Введіть поточну адресу',
+          newEmailLabel: 'Новий e-mail',
+          newEmailPlaceholder: 'Введіть нову адресу',
+          newEmailError: {
+            different: 'Нова електронна адреса повинна відрізнятися від поточної.',
+          },
+          notification: {
+            success: 'E-mail успішно змінено',
+            error: 'Помилка зміни e-mail',
+            userAlreadyExists: 'Користувач з такою електронною адресою вже існує',
+          },
+        },
+        changePassword: {
+          title: 'Змінити пароль',
+          oldPasswordLabel: 'Поточний пароль',
+          oldPasswordPlaceholder: 'Введіть поточний пароль',
+          newPasswordLabel: 'Новий пароль',
+          newPasswordPlaceholder: 'Введіть новий пароль',
+          repeatNewPasswordLabel: 'Підтвердіть пароль',
+          repeatNewPasswordPlaceholder: 'Підтвердіть новий пароль',
+          notification: {
+            success: 'Пароль успішно змінено',
+            error: 'Помилка зміни пароля',
+            errorServer: 'Помилка сервера',
+          },
+        },
+        changeLanguage: {
+          title: 'Мова платформи',
+          languageLabel: 'Оберіть мову',
+          uk: 'Українська',
+          en: 'Англійська',
+          notification: {
+            success: 'Мову успішно змінено',
+            error: 'Помилка зміни мови',
+          },
+        },
+      },
+      notifications: {
+        title: 'Сповіщення',
+        email: {
+          title: 'Сповіщення електронною поштою',
+          text: 'Отримуйте електронні листи, що сповіщатимуть про події, коли вас немає в Skillzzy. Ви можете вимкнути їх будь-коли.',
+          notification: {
+            success: 'Сповіщення електронною поштою успішно змінено',
+            error: 'Помилка зміни сповіщень email',
+          },
+        },
+        telegram: {
+          title: 'Сповіщення Telegram-бот',
+          text: 'Щоб отримувати зручні сповіщення про заплановані співбесіди і не тільки — підпишіться на нашого <a>Telegram Помічника</a>',
+        },
+      },
+    },
     dropDownMenu: {
       delete: 'Видалити',
       edit: 'Редагувати',
@@ -1030,7 +1096,8 @@ export const uk = {
         interviewInfoHourAgo: 'година (годин) тому',
         interviewInfoToday: 'Пройдено сьогодні',
         interviewInfoRole: 'Ваша роль',
-        interviewInfoHost: "Інтерв'юер",
+        interviewInfoInterviewer: "Інтерв'юер",
+        interviewInfoRespondent: 'Респондент',
         interviewFeedbackTitle: 'Відгук співбесідника',
         interviewFeedbackReadLess: 'Читати менше',
         interviewFeedbackReadMore: 'Читати більше',
@@ -1042,7 +1109,7 @@ export const uk = {
           headerTitle: 'Відео',
           interviewLevel: 'Рівень співбесіди:',
           specialization: 'Спеціалізація:',
-          candidateName: 'Кандидат:',
+          candidateName: 'Респондент:',
           interviewerName: "Інтерв'юер:",
         },
       },
@@ -1090,6 +1157,7 @@ export const uk = {
         canceled: {
           success: 'Зустріч успішно скасована',
           error: 'Щось пішло не так',
+          403: "Ваше інтерв'ю ще не почалося",
         },
         UPCOMING: 'Майбутня',
         'IN PROCESS': 'У процесі',

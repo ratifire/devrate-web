@@ -15,6 +15,9 @@ export const styles = {
   confirmDeleteModalWrapper: {
     maxWidth: '431px',
   },
+  deactivateProfileModal: {
+    maxWidth: '451px',
+  },
   btnIcon: (theme) => ({
     position: 'absolute',
     top: '24px',

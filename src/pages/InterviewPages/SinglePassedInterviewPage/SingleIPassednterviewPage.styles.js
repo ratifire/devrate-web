@@ -126,6 +126,21 @@ export const styles = {
       boxShadow: 'none',
     },
   }),
+  interviewVideo: (theme) => ({
+    borderRadius: theme.spacing(2),
+    boxShadow: `0 0 0 1px ${theme.palette.interviewPreviewVideo.shadow}`,
+    '& .react-player__preview': {
+      borderRadius: theme.spacing(2),
+    },
+  }),
+  playerWrapper: (theme) => ({
+    position: 'relative',
+    aspectRatio: '16/9',
+    width: '100%',
+    borderRadius: theme.spacing(2),
+    boxShadow: `0 0 0 1px ${theme.palette.interviewPreviewVideo.shadow}`,
+    overflow: 'hidden',
+  }),
   container: (theme) => ({
     position: 'relative',
     paddingBottom: '16px',

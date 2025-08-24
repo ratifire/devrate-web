@@ -8,36 +8,25 @@ import links from '@router/links';
 import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
 import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlice';
-import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
-import { enqueueSnackbar } from 'notistack';
 import CustomTooltip from '@components/UI/CustomTooltip';
+import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers/index.js';
+import useJoinInterview from '@utils/hooks/useJoinInterview.js';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
 const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
   const { t } = useTranslation();
   const { data, isFetching } = useGetEventByIdQuery({ id: event.id }, { skip: !event.id });
-  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
+  const { joinInterview, isLoadingMeetingUrl } = useJoinInterview();
   const { showCancelButton } = useCheckTimeDifference(event.startTime);
+  const status = getStatusByTime(event?.startTime);
 
   const deleteEvent = useDeleteEvent();
 
-  const joinToInterview = async () => {
-    try {
-      const meetingUrl = await getMeetingUrl(event.interviewId).unwrap();
-      const urlWithParams = new URL(meetingUrl);
-
-      if (event.interviewId && event.role) {
-        urlWithParams.searchParams.append('eventId', event.interviewId);
-        urlWithParams.searchParams.append('role', event.role);
-      }
-      window.open(urlWithParams, '_blank');
-      // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
-    }
+  const handleJoinClick = async () => {
+    await joinInterview(event.interviewId, event.role);
   };
 
   const handleCancelInterview = async () => {
@@ -112,10 +101,10 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
       <Box sx={styles.buttonsContainer}>
         <ButtonDef
           component='a'
-          disabled={isLoadingMeetingUrl}
+          disabled={status === 'UPCOMING' || isLoadingMeetingUrl}
           label={t('schedule.link')}
           sx={styles.icon}
-          onClick={joinToInterview}
+          onClick={handleJoinClick}
         />
         {showCancelButton && (
           <Box alt='Cancel Event' component='img' src={cancelEventIcon} onClick={handleCancelInterview} />

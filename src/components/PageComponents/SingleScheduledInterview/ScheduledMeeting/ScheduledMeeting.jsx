@@ -14,8 +14,8 @@ import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import { useModalController } from '@utils/hooks/useModalController';
-import { useLazyGetInterviewMeetingUrlQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { setDeleteIdItem, clearDeleteIdItem } from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
+import useJoinInterview from '@utils/hooks/useJoinInterview';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
 import { ErrorComponent } from '../../../UI/Exceptions';
@@ -37,7 +37,6 @@ const ScheduledMeeting = () => {
   const navigate = useNavigate();
   const { hostFirstName, hostLastName, hostId, startTime, languageCode, id: eventId, role } = location.state.event;
   const { data: scheduledInterviews } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
-  const [getMeetingUrl, { isLoading: isLoadingMeetingUrl }] = useLazyGetInterviewMeetingUrlQuery();
   const {
     data: hostAvatar,
     isLoading: isLoadingHostAvatar,
@@ -49,6 +48,8 @@ const ScheduledMeeting = () => {
     isError: isErrorUserAvatar,
   } = useGetAvatarUserQuery(id, { skip: !id });
   const [cancelNotConductedMeeting] = useDeleteNotConductedInterviewMutation();
+
+  const { joinInterview, isLoadingMeetingUrl } = useJoinInterview();
 
   const showSnackbar = (status) => {
     enqueueSnackbar(t(`singleScheduledInterview.scheduledMeeting.canceled.${status}`), {
@@ -98,20 +99,7 @@ const ScheduledMeeting = () => {
 
   const handleClickRightBtn = async () => {
     if (status === btnStatus['UPCOMING'] || status === btnStatus['IN PROCESS']) {
-      // Create URL with query params to use in mirotalk in a survey later
-      try {
-        const meetingUrl = await getMeetingUrl(eventId).unwrap();
-        const urlWithParams = new URL(meetingUrl);
-
-        if (eventId && role) {
-          urlWithParams.searchParams.append('eventId', eventId);
-          urlWithParams.searchParams.append('role', role);
-        }
-        window.open(urlWithParams, '_blank');
-        // eslint-disable-next-line no-unused-vars
-      } catch (error) {
-        enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
-      }
+      await joinInterview(eventId, role);
     }
 
     if (status === btnStatus['AWAITING FEEDBACK']) {
@@ -132,6 +120,7 @@ const ScheduledMeeting = () => {
   const time = formatTimeToUtc(startTime);
   const startAndTime = formatTimeWithOffset(startTime);
   const status = getStatusByTime(startTime);
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.boxTitle}>
@@ -226,7 +215,7 @@ const ScheduledMeeting = () => {
           onClick={handleClickLeftBtn}
         />
         <ButtonDef
-          disabled={isLoadingMeetingUrl}
+          disabled={status === btnStatus.UPCOMING || isLoadingMeetingUrl}
           label={t(rightBtnStatus[status])}
           sx={styles.btn}
           variant='contained'
