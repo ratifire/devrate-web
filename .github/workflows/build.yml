@@ -42,6 +42,7 @@ jobs:
           VITE_API_URL=${{ vars.REACT_APP_API_URL }} \
           VITE_WS_URL=${{ vars.REACT_APP_WS_URL }} \
           VITE_API_DEV_URL=${{ vars.REACT_APP_API_URL }} \
+          VITE_VAPID_PUBLIC_KEY=${{ vars.VITE_VAPID_PUBLIC_KEY }} \
           npm run server-build
 
       - name: Configure aws credentials
