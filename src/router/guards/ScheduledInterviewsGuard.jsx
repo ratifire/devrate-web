@@ -25,10 +25,9 @@ const ScheduledInterviewsGuard = () => {
       const {
         data: { content },
       } = await getAllScheduled({ page: 0, size: 6 });
+      const { id } = content[0];
 
       if (!interviewId) {
-        const { id } = content[0];
-
         navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
           state: { event: content[0] },
         });
@@ -49,9 +48,8 @@ const ScheduledInterviewsGuard = () => {
 
         if (!findExistEvent) {
           const { data } = await getSingleInterview({ interviewId });
-          if (!data) {
-            const { id } = content[0];
 
+          if (!data) {
             navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
               state: { event: content[0] },
             });
@@ -63,7 +61,7 @@ const ScheduledInterviewsGuard = () => {
             date: data.startTime,
           };
 
-          navigate(`${navigationLinks.scheduledInterviews}/${data.id}`, {
+          navigate(`${navigationLinks.scheduledInterviews}/${newData.id}`, {
             state: { event: newData },
           });
 
