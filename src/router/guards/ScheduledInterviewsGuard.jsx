@@ -75,68 +75,6 @@ const ScheduledInterviewsGuard = () => {
     redirectToValidInterview();
   }, []);
 
-  // useEffect(() => {
-  //   if (isFetchingInterviews || !scheduledInterviews || isFetchingLazyInterviews) return;
-  //
-  //   const firstInterviewId = scheduledInterviews?.content[0]?.id;
-  //   const content = scheduledInterviews?.content || [];
-  //   const event = content[0];
-  //
-  //   if (!content.length) {
-  //     navigate(`${navigationLinks.scheduledInterviews}`);
-  //
-  //     return;
-  //   }
-  //
-  //   if (modalParam && roleParam) {
-  //     const findEvent = scheduledInterviews?.content.find((event) => event.id === +interviewId);
-  //
-  //     if (!findEvent) return;
-  //
-  //     dispatch(
-  //       modalOpen({
-  //         modalType: modalNames.feedbackInterviewModal,
-  //         data: {
-  //           feedbackId: interviewId,
-  //           role: roleParam,
-  //         },
-  //       })
-  //     );
-  //
-  //     navigate(`${navigationLinks.scheduledInterviews}/${interviewId}?modal=${modalParam}&role=${roleParam}`, {
-  //       state: { event: findEvent },
-  //     });
-  //
-  //     return;
-  //   }
-  //
-  //   if (modalParam) {
-  //     const { eventId, oldEvent } = modalData;
-  //
-  //     navigate(`${navigationLinks.scheduledInterviews}/${eventId}?modal=${modalParam}`, {
-  //       state: { event: oldEvent },
-  //     });
-  //
-  //     return;
-  //   }
-  //
-  //   if (interviewId && !deleteIdItem) {
-  //     const findEvent = scheduledInterviews?.content.find((event) => event.id === +interviewId);
-  //
-  //     navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, {
-  //       state: { event: findEvent },
-  //     });
-  //
-  //     return;
-  //   }
-  //
-  //   if (firstInterviewId && !interviewId) {
-  //     navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
-  //       state: { event },
-  //     });
-  //   }
-  // }, [content]);
-
   return <Outlet />;
 };
 
