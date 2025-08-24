@@ -3,10 +3,9 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { modalNames } from '@utils/constants/modalNames';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import navigationLinks from '@router/links';
 import { useDeleteInterviewMutation } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
-import { clearDeleteIdItem } from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
 import { useNavigate } from 'react-router';
 import { useSnackbar } from 'notistack';
 import { selectModalData } from '@redux/slices/modal/modalSlice';
@@ -14,25 +13,23 @@ import { styles } from './ConfirmDeleteInterview.styles';
 
 const ConfirmDeleteInterviewModal = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const { eventId, oldEvent, nextEvent } = useSelector(selectModalData);
   const [cancelMeeting] = useDeleteInterviewMutation();
   const { closeModal } = useModalController();
-
   const handleCloseModal = () => closeModal(modalNames.confirmDeleteInterview);
 
   const handleDeleteInterview = () => {
+    handleCloseModal();
     if (nextEvent) {
       navigate(`${navigationLinks.scheduledInterviews}/${nextEvent.id}`, {
         state: { event: nextEvent },
+        replace: true,
       });
     } else {
       navigate(navigationLinks.scheduledInterviews);
     }
-
-    handleCloseModal();
 
     cancelMeeting({ eventId })
       .unwrap()
@@ -44,7 +41,6 @@ const ConfirmDeleteInterviewModal = () => {
             horizontal: 'right',
           },
         });
-        dispatch(clearDeleteIdItem());
       })
       .catch(() => {
         enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), {
@@ -57,7 +53,6 @@ const ConfirmDeleteInterviewModal = () => {
         navigate(`${navigationLinks.scheduledInterviews}/${eventId}`, {
           state: { event: oldEvent },
         });
-        dispatch(clearDeleteIdItem());
       });
   };
 

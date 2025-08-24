@@ -16,7 +16,6 @@ import modalSliceReducer from '@redux/slices/modal/modalSlice';
 import modalStepReducer from '@redux/slices/modal/modalStepSlice';
 import scheduleReducer from '@redux/slices/schedule/scheduleSlice';
 import popupReducer from '@redux/slices/notification/popupSlice.js';
-import scheduledInterviewSlice from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
 import { apiSlice } from '@redux/api/apiSlice.js';
 
 const authPersistConfig = {
@@ -56,7 +55,6 @@ const rootReducer = {
   auth: persistReducer(authPersistConfig, authReducer),
   tokens: persistReducer(tokenPersistConfig, tokenSlice),
   theme: persistReducer(themePersistConfig, themeSliceReducer),
-  scheduledInterview: scheduledInterviewSlice,
   skills: updateTabSlice,
   popup: popupReducer,
 };

@@ -1,7 +1,7 @@
 import { Box, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 import { Trans, useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
@@ -14,7 +14,6 @@ import navigationLinks from '@router/links.js';
 import { modalNames } from '@utils/constants/modalNames';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import { useModalController } from '@utils/hooks/useModalController';
-import { setDeleteIdItem, clearDeleteIdItem } from '@redux/slices/scheduledInterview/scheduledInterviewSlice';
 import useJoinInterview from '@utils/hooks/useJoinInterview';
 import UserAvatar from '../../../UI/UserAvatar';
 import { ButtonDef } from '../../../FormsComponents/Buttons';
@@ -29,10 +28,8 @@ const ScheduledMeeting = () => {
   const {
     data: { firstName, lastName, id },
   } = useSelector(selectCurrentUser);
-  const { oldEvent, deleteIdItem } = useSelector((state) => state.scheduledInterview);
   const { enqueueSnackbar } = useSnackbar();
   const { openModal } = useModalController();
-  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const { hostFirstName, hostLastName, hostId, startTime, languageCode, id: eventId, role } = location.state.event;
@@ -65,8 +62,7 @@ const ScheduledMeeting = () => {
     const content = scheduledInterviews?.content || [];
     const idx = content.findIndex((item) => item.id === eventId);
     const nextEvent = content[idx + 1] || content[idx - 1];
-
-    dispatch(setDeleteIdItem({ deleteIdItem: eventId, oldEvent: location.state.event }));
+    const oldEvent = location.state.event;
 
     if (status === btnStatus['UPCOMING']) {
       openModal(modalNames.confirmDeleteInterview, { eventId, oldEvent: location.state.event, nextEvent });
@@ -85,14 +81,12 @@ const ScheduledMeeting = () => {
         .unwrap()
         .then(() => {
           showSnackbar('success');
-          dispatch(clearDeleteIdItem());
         })
         .catch(() => {
           showSnackbar('error');
-          navigate(`${navigationLinks.scheduledInterviews}/${deleteIdItem}`, {
+          navigate(`${navigationLinks.scheduledInterviews}/${eventId}`, {
             state: { event: oldEvent },
           });
-          dispatch(clearDeleteIdItem());
         });
     }
   };
