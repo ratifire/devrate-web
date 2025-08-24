@@ -10,23 +10,9 @@ import { openModal as modalOpen, selectModalData } from '@redux/slices/modal/mod
 import { modalNames } from '@utils/constants/modalNames';
 import navigationLinks from '../links';
 
-const createUrl = ({ id, params }) => {
-  let url;
-
-  const feedbackModalKey = modalNames.feedbackInterviewModal;
-  const hasFeedbackModal = Object.prototype.hasOwnProperty.call(params, 'modal') && params.modal === feedbackModalKey;
-
-  url = hasFeedbackModal
-    ? `${navigationLinks.scheduledInterviews}/${id}?modal=${params.modal}&role=${params.role}`
-    : `${navigationLinks.scheduledInterviews}/${id}`;
-
-  return url;
-};
-
 const ScheduledInterviewsGuard = () => {
-  const [getAllScheduled, { data: scheduledInterviews, isFetching: isFetchingInterviews }] =
-    useLazyGetAllScheduledInterviewsQuery();
-  const [getSingleInterview, { isFetching: isFetchingLazyInterviews }] = useLazyGetInterviewByIdBySocketUpdateQuery();
+  const [getAllScheduled] = useLazyGetAllScheduledInterviewsQuery();
+  const [getSingleInterview] = useLazyGetInterviewByIdBySocketUpdateQuery();
   const navigate = useNavigate();
   const { interviewId } = useParams();
   const dispatch = useDispatch();
@@ -36,48 +22,53 @@ const ScheduledInterviewsGuard = () => {
   const searchParams = new URLSearchParams(location.search);
   const modalParam = searchParams.get('modal');
   const roleParam = searchParams.get('role');
-  const content = scheduledInterviews?.content || [];
 
   useEffect(() => {
-    const params = {};
-    for (const [key, value] of searchParams.entries()) {
-      params[key] = value;
-    }
-
     const redirectToValidInterview = async () => {
       const {
         data: { content },
       } = await getAllScheduled({ page: 0, size: 6 });
 
-      // This is insurance in case the user entered the interview ID in the URL.
-      const findEventId = content.find((event) => event.id === +interviewId);
+      if (!interviewId) {
+        const { id } = content[0];
 
-      // This block is needed if the user clicked on a push notification or navigated to the page via crl + c.
-      if (!findEventId) {
-        const { data } = await getSingleInterview({ interviewId });
+        navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
+          state: { event: content[0] },
+        });
 
-        // This part is for when there is no such id.
-        if (!data) {
-          const { id } = content[0];
+        return;
+      }
 
-          navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
-            state: { event: content[0] },
+      if (interviewId) {
+        const findExistEvent = content.find((event) => event.id === +interviewId);
+
+        if (findExistEvent) {
+          navigate(`${navigationLinks.scheduledInterviews}/${findExistEvent.id}`, {
+            state: { event: findExistEvent },
           });
 
           return;
         }
 
-        const newData = {
-          ...data,
-          title: data.specializationName,
-          date: data.startTime,
-        };
+        if (!findExistEvent) {
+          const { data } = await getSingleInterview({ interviewId });
 
-        const { id } = newData;
+          navigate(`${navigationLinks.scheduledInterviews}/${data.id}`, {
+            state: { event: data },
+          });
 
-        navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
-          state: { event: newData },
-        });
+          if (modalParam && roleParam) {
+            dispatch(
+              modalOpen({
+                modalType: modalNames.feedbackInterviewModal,
+                data: {
+                  feedbackId: interviewId,
+                  role: roleParam,
+                },
+              })
+            );
+          }
+        }
       }
     };
 
