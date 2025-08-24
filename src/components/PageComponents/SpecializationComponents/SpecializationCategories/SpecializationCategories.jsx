@@ -21,6 +21,7 @@ import { useModalController } from '@utils/hooks/useModalController.js';
 import { setActiveMastery } from '@redux/slices/specialization/activeMasterySlice.js';
 import { useTheme } from '@mui/material/styles';
 import { activeBackgroundUrls, backgroundUrls } from '@utils/constants/Specialization/specializationBackgroundUrls.js';
+import floorToOneDecimal from '@utils/helpers/floorToOneDecimal';
 import InterviewTracker from '../InterviewTracker/index.js';
 import { styles } from './SpecializationCategories.styles';
 
@@ -150,56 +151,60 @@ const SpecializationCategories = () => {
             <AddIcon />
           </IconButton>
         )}
-        {specializationsSorted?.map(({ id, name, main }) => (
-          <Box
-            key={id}
-            sx={styles.figure(
-              `${activeSpec?.id === id ? activeBackgroundUrls[currentMode] : backgroundUrls[currentMode]}`
-            )}
-            onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
-          >
-            <Box sx={styles.specialization_title}>
-              <CustomTooltip customStyles={styles.specialization_name} title={name} variant='h6'>
-                {name}
-              </CustomTooltip>
-              <Typography variant='subtitle2'>
-                {t('specialization.levelOfCategory', { level: masteryData[id]?.level })}
-              </Typography>
-            </Box>
+        {specializationsSorted?.map(({ id, name, main }) => {
+          const hardSkillMarkFloored = floorToOneDecimal(masteryData[id]?.hardSkillMark || 0);
+          const softSkillMarkFloored = floorToOneDecimal(masteryData[id]?.softSkillMark || 0);
 
-            {main && <StarIcon sx={styles.star} />}
-
-            <Box sx={styles.hardAndSoftSkills}>
-              <Box sx={styles.softSkills}>
-                <Typography sx={styles.skillsStatistic} variant='caption3'>
-                  {t('specialization.specialization_softSkills')}
+          return (
+            <Box
+              key={id}
+              sx={styles.figure(
+                `${activeSpec?.id === id ? activeBackgroundUrls[currentMode] : backgroundUrls[currentMode]}`
+              )}
+              onClick={() => handlerChangeSpecialization({ id, name, main, mastery: masteryData[id]?.level })}
+            >
+              <Box sx={styles.specialization_title}>
+                <CustomTooltip customStyles={styles.specialization_name} title={name} variant='h6'>
+                  {name}
+                </CustomTooltip>
+                <Typography variant='subtitle2'>
+                  {t('specialization.levelOfCategory', { level: masteryData[id]?.level })}
                 </Typography>
-                <Typography variant='body'>{masteryData[id]?.softSkillMark}</Typography>
               </Box>
-              <Box sx={styles.hardSkills}>
-                <Typography sx={styles.skillsStatistic} variant='caption3'>
-                  {t('specialization.specialization_hardSkills')}
-                </Typography>
-                <Typography variant='body'>{masteryData[id]?.hardSkillMark}</Typography>
+
+              {main && <StarIcon sx={styles.star} />}
+
+              <Box sx={styles.hardAndSoftSkills}>
+                <Box sx={styles.softSkills}>
+                  <Typography sx={styles.skillsStatistic} variant='caption3'>
+                    {t('specialization.specialization_softSkills')}
+                  </Typography>
+                  <Typography variant='body'>{softSkillMarkFloored}</Typography>
+                </Box>
+                <Box sx={styles.hardSkills}>
+                  <Typography sx={styles.skillsStatistic} variant='caption3'>
+                    {t('specialization.specialization_hardSkills')}
+                  </Typography>
+                  <Typography variant='body'>{hardSkillMarkFloored}</Typography>
+                </Box>
               </Box>
+
+              <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event, id)}>
+                <MoreVertIcon sx={styles.editSpecialization} />
+              </IconButton>
+
+              <DropdownMenu
+                anchorEl={anchorEl[id]}
+                handleCloseMenu={() => handleCloseMenu(id)}
+                handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
+                handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
+                handleMainFeature={() => handleMakeMainFeature(id)}
+              />
             </Box>
-
-            <IconButton sx={styles.editSpecialization_btn} onClick={(event) => handleMenuOpen(event, id)}>
-              <MoreVertIcon sx={styles.editSpecialization} />
-            </IconButton>
-
-            <DropdownMenu
-              anchorEl={anchorEl[id]}
-              handleCloseMenu={() => handleCloseMenu(id)}
-              handleDeleteFeature={() => handleOpenConfirmDeleteSpecializationModal(id, name)}
-              handleEditFeature={() => handleEditFeature({ id, name, mastery: masteryData[id]?.level })}
-              handleMainFeature={() => handleMakeMainFeature(id)}
-            />
-          </Box>
-        ))}
+          );
+        })}
       </Box>
     </Box>
   );
 };
-
 export default SpecializationCategories;
