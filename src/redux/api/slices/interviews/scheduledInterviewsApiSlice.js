@@ -48,9 +48,6 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
     getSingleInterviewById: builder.query({
       query: ({ interviewId }) => `/interviews/${interviewId}/visible`,
     }),
-    getScheduledInterviewById: builder.query({
-      query: ({ interviewId }) => `/interviews/events/${interviewId}`,
-    }),
     getInterviewByIdBySocketUpdate: builder.query({
       query: ({ interviewId }) => `/interviews/${interviewId}/visible`,
       async onQueryStarted({ _interviewId }, { dispatch, queryFulfilled }) {
@@ -110,7 +107,6 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetAllScheduledInterviewsQuery,
   useLazyGetAllScheduledInterviewsQuery,
-  useGetScheduledInterviewByIdQuery,
   useLazyGetInterviewByIdBySocketUpdateQuery,
   useLazyGetSingleInterviewByIdQuery,
   useGetInterviewStatusQuery,
