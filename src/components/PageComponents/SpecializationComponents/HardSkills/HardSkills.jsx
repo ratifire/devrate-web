@@ -24,6 +24,7 @@ const HardSkills = () => {
       skills={skills}
       subTitle={t('specialization.hardSkills.averageMark')}
       title={t('specialization.hardSkills.title')}
+      type={'HARD_SKILL'}
     />
   );
 };

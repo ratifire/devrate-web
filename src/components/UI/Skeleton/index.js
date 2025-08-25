@@ -19,6 +19,7 @@ import {
   LevelSkeleton,
   SkillsAssessmentChartSkeleton,
   HardSkillsSkeleton,
+  SoftSkillsSkeleton,
 } from './Pages/specializationSkeleton';
 import {
   BaseUserInfoSkeleton,
@@ -84,4 +85,5 @@ export {
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
   ChangeLanguageSkeleton,
+  SoftSkillsSkeleton,
 };

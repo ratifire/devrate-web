@@ -8,11 +8,11 @@ import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/pas
 import { useParams } from 'react-router';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
-import { HardSkillsSkeleton } from '../../Skeleton';
+import { HardSkillsSkeleton, SoftSkillsSkeleton } from '../../Skeleton';
 import EmptySkills from '../EmptySkills/index.js';
 import { styles } from './SpecializationSkills.styles';
 
-const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
+const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle, type }) => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
   const { t } = useTranslation();
@@ -35,8 +35,12 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
     return [styles.skillsContainer, firstType === 'HARD_SKILL' ? styles.hardSkills : styles.softSkills];
   };
 
-  if (isFetching) {
+  if (isFetching && type === 'HARD_SKILL') {
     return <HardSkillsSkeleton />;
+  }
+
+  if (isFetching && type === 'SOFT_SKILL') {
+    return <SoftSkillsSkeleton />;
   }
 
   if (role === 'INTERVIEWER' && title === 'Hard skills') {
@@ -104,6 +108,7 @@ SpecializationSkills.propTypes = {
   openModal: PropTypes.func,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['SOFT_SKILL', 'HARD_SKILL']),
 };
 
 export default SpecializationSkills;

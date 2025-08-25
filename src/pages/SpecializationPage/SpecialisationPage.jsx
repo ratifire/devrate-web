@@ -8,6 +8,7 @@ import {
   LevelSkeleton,
   SkillsAssessmentChartSkeleton,
   HardSkillsSkeleton,
+  SoftSkillsSkeleton,
 } from '@components/UI/Skeleton';
 import LevelChartSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/LevelChartSkeleton';
 import InterviewTracker from '@components/PageComponents/SpecializationComponents/InterviewTracker/index.js';
@@ -66,7 +67,7 @@ const SpecializationPage = () => {
           </Suspense>
         </Paper>
         <Paper sx={styles.specialisationSoftSkills}>
-          <Suspense fallback={<HardSkillsSkeleton />}>
+          <Suspense fallback={<SoftSkillsSkeleton />}>
             <MemoizedSoftSkills />
           </Suspense>
         </Paper>

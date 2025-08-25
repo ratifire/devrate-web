@@ -1,3 +1,4 @@
+import SoftSkillsSkeleton from '@components/UI/Skeleton/Pages/specializationSkeleton/SoftSkillsSkeleton';
 import CategoriesSkeleton from './CategoriesSkeleton';
 import LevelSkeleton from './LevelSkeleton';
 import InterviewsSkeleton from './InterviewsSkeleton';
@@ -16,4 +17,5 @@ export {
   SkillsAssessmentChartSkeleton,
   HardSkillsChartSkeleton,
   InterviewChartSkeleton,
+  SoftSkillsSkeleton,
 };
