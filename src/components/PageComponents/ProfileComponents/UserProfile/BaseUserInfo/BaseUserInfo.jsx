@@ -37,18 +37,17 @@ const BaseUserInfo = ({ id }) => {
   const { data } = useGetAvatarUserQuery(id);
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
+  const chatData = { id, firstName: displayData.firstName, lastName: displayData.lastName, userPicture: userPicture };
   // const handleToggleBookmark = (newValue) => {
   //   setIsBookmarked(newValue);
   // };
 
   const handleWriteMessage = () => {
-    dispatch(
-      openChat({ id, firstName: displayData.firstName, lastName: displayData.lastName, userPicture: userPicture })
-    );
+    dispatch(openChat(chatData));
   };
 
   const handleBookInterview = () => {
-    openModal(modalNames.personalInterviewModal);
+    openModal(modalNames.personalInterviewModal, chatData);
   };
 
   return (
