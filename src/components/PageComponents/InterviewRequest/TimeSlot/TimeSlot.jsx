@@ -12,6 +12,7 @@ import { useLazyGetSingleInterviewByIdQuery } from '@redux/api/slices/interviews
 import navigationLinks from '@router/links';
 import { useNavigate } from 'react-router';
 import { enqueueSnackbar } from 'notistack';
+import interviewStatus from '@utils/constants/interviewStatus.js';
 import { CustomCheckboxIcon, CustomCheckedIcon } from '../../../UI/CustomCheckbox/CustomCheckbox.js';
 import { styles } from './TimeSlot.styles.js';
 
@@ -32,11 +33,11 @@ const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
     try {
       let interviewId;
 
-      if (data.type === 'booked') {
+      if (data.type === interviewStatus['booked']) {
         interviewId = await getBookedInterviewIdBySlotId(data.id).unwrap();
         const event = await getSingleInterview({ interviewId }).unwrap();
         navigate(`${navigationLinks.scheduledInterviews}/${interviewId}`, { state: { event } });
-      } else if (data.type === 'completed') {
+      } else if (data.type === interviewStatus['completed']) {
         interviewId = await getPassedInterviewIdBySlotId(data.id).unwrap();
         navigate(`${navigationLinks.passedInterviews}/${interviewId}`);
       }
@@ -65,9 +66,9 @@ const TimeSlot = ({ data, isSelected, onSelect, currentLocale, role }) => {
           </Typography>
           <Tooltip
             placement='top-start'
-            title={data.type === 'pending' ? t(`interviewRequest.pendingTooltip.${role}`) : null}
+            title={data.type === interviewStatus['pending'] ? t(`interviewRequest.pendingTooltip.${role}`) : null}
           >
-            {data.type === 'completed' || data.type === 'booked' ? (
+            {data.type === interviewStatus['completed'] || data.type === interviewStatus['booked'] ? (
               <Button sx={styles.statusState(data.type)} variant={'statusButton'} onClick={shiftToSpecificInterview}>
                 {t(`interviewRequest.timeSlot.status.${data.type}`)}
               </Button>
