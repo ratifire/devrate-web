@@ -1,0 +1,3 @@
+import EmailNotificationsSkeleton from '@components/UI/Skeleton/Pages/settingsSkeleton/notificationSkeleton/EmailNotificationsSkeleton/EmailNotificationsSkeleton';
+
+export default EmailNotificationsSkeleton;

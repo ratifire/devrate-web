@@ -6,22 +6,6 @@ const styles = {
     marginBottom: theme.spacing(2),
     color: theme.palette.text.primary,
   }),
-  codeErrorWrapper: (theme) => ({
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: theme.spacing(4),
-  }),
-  codeErrorIcon: (theme) => ({
-    width: '20px',
-    height: '20px',
-    color: theme.palette.error.mainConcentrated,
-  }),
-  codeErrorText: (theme) => ({
-    marginLeft: theme.spacing(3),
-    color: theme.palette.error.mainConcentrated,
-  }),
   mainTextWrapper: (theme) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -54,10 +38,12 @@ const styles = {
   }),
   spamCheckContainer: (theme) => ({
     marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4),
     color: theme.palette.text.secondary,
     textAlign: 'center',
     [theme.breakpoints.down('xl')]: {
       marginBottom: '16px',
+      marginTop: '16px',
     },
   }),
   turnBackText: (theme) => ({

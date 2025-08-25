@@ -12,3 +12,6 @@ export { RegistrationSchema } from './RegistrationSchema';
 export { FeedbackModalSchema } from './FeedbackModalSchema';
 export { FeedbackProjectModalSchema } from './FeedbackProjectModalSchema';
 export { ScheduleInterviewSchema } from './ScheduleInterviewSchema';
+export { DeactivateProfileModalSchema } from './DeactivateProfileModalSchema';
+export { ChangeEmailSchema } from './ChangeEmailSchema';
+export { ChangePasswordSchema } from './ChangePasswordSchema.js';

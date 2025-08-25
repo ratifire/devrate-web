@@ -13,9 +13,12 @@ const authSlice = createSlice({
       state.user = null;
       state.returnUrl = payload?.returnUrl || null;
     },
+    toggleSubscribedEmailNotification: (state) => {
+      state.user.data.subscribed = !state.user.data.subscribed;
+    },
   },
 });
-export const { setCredentials, logOut } = authSlice.actions;
+export const { setCredentials, logOut, toggleSubscribedEmailNotification } = authSlice.actions;
 export const authReducer = authSlice.reducer;
 
 export const selectCurrentUser = (state) => state.auth.user;

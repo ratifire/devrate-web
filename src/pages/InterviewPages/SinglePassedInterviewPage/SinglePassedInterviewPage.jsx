@@ -13,10 +13,12 @@ import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/persona
 import { lvlMastery } from '@utils/constants/masteryLvl.js';
 import { DARK_THEME } from '@utils/constants/Theme/theme.js';
 import { formatToLocalDateInterview } from '@utils/helpers/formatToLocalDateInterview.js';
-import { lazy, memo, Suspense, useCallback } from 'react';
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import ReactPlayer from 'react-player';
+import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole.js';
 import EmptySkills from '../../../components/UI/Specialization/EmptySkills';
 
 import EmptyRequestPicDark from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
@@ -59,12 +61,18 @@ const SinglePassedInterviewPage = () => {
     { interviewId },
     { skip: !interviewId }
   );
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    setIsPlaying(false);
+  }, [interviewId]);
+
   const handlePlayPressed = useCallback(() => {
-    // console.log('Play pressed');
+    setIsPlaying(true);
   }, []);
   const attendeeId = interviewData?.attendeeId ?? '';
   const interviewerId = interviewData?.userId ?? '';
-  const role = interviewData?.role; // 'CANDIDATE' или 'INTERVIEWER'
+  const role = interviewData?.role;
 
   const { data: userContacts, isFetching: isFetchingContacts } = useGetPersonalUserQuery(attendeeId, {
     skip: !attendeeId,
@@ -91,7 +99,11 @@ const SinglePassedInterviewPage = () => {
     feedback = '',
     attendeeMasteryLevel = '',
     attendeeSpecialization = '',
+    videoUrl = interviewData?.videoUrl,
   } = interviewData ?? {};
+
+  const hasVideoUrl = Boolean(videoUrl);
+  const showPreview = !isPlaying || !hasVideoUrl;
 
   const getSkillsArray = (skillsArray) =>
     Object.entries(skillsArray).map(([name, averageMark]) => ({
@@ -117,9 +129,44 @@ const SinglePassedInterviewPage = () => {
 
   const EmptyInterviewSvg = mode === DARK_THEME ? EmptyRequestPicDark : EmptyRequestPicLight;
 
-  const hasStatistics = (role === 'CANDIDATE' && averageHardSkillsMark > 0) || averageSoftSkillsMark > 0;
+  const hasStatistics =
+    (role === feedbackInterviewRole.CANDIDATE && averageHardSkillsMark > 0) || averageSoftSkillsMark > 0;
 
   const isFetchingUserCard = isFetchingContacts || isFetchingAvatar || isFetchingPassedInterview;
+
+  const previewData = useMemo(() => {
+    const isCandidateRole = role === feedbackInterviewRole.CANDIDATE;
+
+    return {
+      candidate: {
+        firstName: isCandidateRole ? candidateFirstName : firstName,
+        lastName: isCandidateRole ? candidateLastName : lastName,
+        avatar: isCandidateRole ? avatar?.userPicture : interviewerAvatar?.userPicture,
+      },
+      interviewer: {
+        firstName: isCandidateRole ? firstName : candidateFirstName,
+        lastName: isCandidateRole ? lastName : candidateLastName,
+        avatar: isCandidateRole ? interviewerAvatar?.userPicture : avatar?.userPicture,
+      },
+      level: level || '',
+      specialization: attendeeSpecialization || '',
+      role: role || '',
+    };
+  }, [
+    role,
+    candidateFirstName,
+    candidateLastName,
+    firstName,
+    lastName,
+    avatar,
+    interviewerAvatar,
+    level,
+    attendeeSpecialization,
+  ]);
+
+  const handleVideoEnded = useCallback(() => {
+    setIsPlaying(false);
+  }, []);
 
   if (isErrorAvatar || isErrorInterviewerAvatar) {
     return <ErrorComponent />;
@@ -159,7 +206,7 @@ const SinglePassedInterviewPage = () => {
               {t('interviews.passedInterviews.interviewersAssessmentTitle')}
             </Typography>
             <Box sx={styles.skillsWrapper}>
-              {role === 'CANDIDATE' && (
+              {role === feedbackInterviewRole.CANDIDATE && (
                 <Paper sx={styles.hardSkills}>
                   <Suspense fallback={<SkillsSkeleton />}>
                     {hardSkillsArray.length > 0 || isFetchingPassedInterview ? (
@@ -195,7 +242,7 @@ const SinglePassedInterviewPage = () => {
             ) : (
               <Suspense fallback={<StatisticSkeleton />}>
                 <MemoizedStatistics
-                  hardSkillMark={role === 'CANDIDATE' ? averageHardSkillsMark : 0}
+                  hardSkillMark={role === feedbackInterviewRole.CANDIDATE ? averageHardSkillsMark : 0}
                   softSkillMark={averageSoftSkillsMark}
                 />
               </Suspense>
@@ -221,19 +268,32 @@ const SinglePassedInterviewPage = () => {
                   {t('interviews.passedInterviews.interviewPreviewVideo.headerTitle')}
                 </Typography>
               </Box>
-              <MemoizedInterviewPreviewVideo
-                shouldShowVisibilityControl
-                candidateFirstName={candidateFirstName}
-                candidateLastName={candidateLastName}
-                candidateSrc={interviewerAvatar?.userPicture}
-                interviewLevel={level}
-                interviewerFirstName={firstName}
-                interviewerLastName={lastName}
-                interviewerSrc={avatar?.userPicture}
-                role={role}
-                specialization={attendeeSpecialization}
-                onPlayPressed={handlePlayPressed}
-              />
+              {showPreview ? (
+                <MemoizedInterviewPreviewVideo
+                  shouldShowVisibilityControl
+                  candidateFirstName={previewData.candidate.firstName}
+                  candidateLastName={previewData.candidate.lastName}
+                  candidateSrc={previewData.interviewer.avatar}
+                  interviewLevel={previewData.level}
+                  interviewerFirstName={previewData.interviewer.firstName}
+                  interviewerLastName={previewData.interviewer.lastName}
+                  interviewerSrc={previewData.candidate.avatar}
+                  specialization={previewData.specialization}
+                  onPlayPressed={handlePlayPressed}
+                />
+              ) : (
+                <Box sx={styles.playerWrapper}>
+                  <ReactPlayer
+                    controls
+                    height='100%'
+                    playing={isPlaying}
+                    src={videoUrl}
+                    style={styles.interviewVideo}
+                    width='100%'
+                    onEnded={handleVideoEnded}
+                  />
+                </Box>
+              )}
             </Box>
           </Paper>
         </>
