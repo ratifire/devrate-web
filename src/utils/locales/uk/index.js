@@ -388,6 +388,9 @@ export const uk = {
         faq: 'FAQ',
         logout: 'Вийти',
         leaveAFeedback: 'Залиште відгук',
+        tooltip: {
+          openMenu: 'Відкрити меню',
+        },
       },
       experienceSection: {
         readAll: 'Читати далі...',

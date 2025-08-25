@@ -9,14 +9,13 @@ const styles = {
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     backgroundImage: 'none',
     boxShadow: 'none',
+    flexShrink: 0,
+    paddingLeft: '21px',
     '@media (min-width: 1272px)': {
       paddingY: theme.spacing(3),
-      paddingX: theme.spacing(4),
+      paddingRight: theme.spacing(4),
     },
   }),
-  toolbar: {
-    justifyContent: 'space between',
-  },
   logoBox: {
     marginRight: 'auto',
     lineHeight: 0,
@@ -26,17 +25,6 @@ const styles = {
     alignItems: 'center',
     gap: theme.spacing(4),
   }),
-  userPhoto: (theme) => ({
-    minWidth: 44,
-    width: 44,
-    height: 44,
-    padding: 0,
-    '&:hover': {
-      backgroundColor: theme.palette.iconBtn.dehazeIcon.backgroundColor,
-    },
-  }),
-  dehazeIcon: (theme) => ({
-    color: theme.palette.iconBtn.dehazeIcon.color,
-  }),
 };
+
 export default styles;
