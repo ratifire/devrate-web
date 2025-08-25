@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import useTooltipColorChart from '@utils/hooks/useTooltipColorChart';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
-import { useGetMasteriesQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
+import { useGetMasteriesQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { ParticipantEvaluationsSkeleton } from '@components/UI/Skeleton';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { lvlMastery } from '@utils/constants/masteryLvl';

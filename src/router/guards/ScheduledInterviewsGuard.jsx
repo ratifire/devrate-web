@@ -1,58 +1,91 @@
 import { Outlet, useNavigate, useParams } from 'react-router';
 import { useEffect } from 'react';
 import {
-  useGetAllScheduledInterviewsQuery,
-  useLazyGetSingleInterviewByIdQuery,
+  useLazyGetAllScheduledInterviewsQuery,
+  useLazyGetInterviewByIdBySocketUpdateQuery,
 } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { useDispatch } from 'react-redux';
-import { openModal as modalOpen } from '@redux/slices/modal/modalSlice.js';
-import { modalNames } from '@utils/constants/modalNames.js';
+import { openModal } from '@redux/slices/modal/modalSlice';
+import { modalNames } from '@utils/constants/modalNames';
 import navigationLinks from '../links';
 
 const ScheduledInterviewsGuard = () => {
-  const {
-    data: scheduledInterviews,
-    isLoading: isLoadingAllInterviews,
-    isFatching: isFatchingAllInterviews,
-  } = useGetAllScheduledInterviewsQuery({ page: 0, size: 6 });
-  const [getSingleInterview] = useLazyGetSingleInterviewByIdQuery();
+  const [getAllScheduled] = useLazyGetAllScheduledInterviewsQuery();
+  const [getSingleInterview] = useLazyGetInterviewByIdBySocketUpdateQuery();
   const navigate = useNavigate();
   const { interviewId } = useParams();
   const dispatch = useDispatch();
 
-  const firstInterviewId = scheduledInterviews?.content[0]?.id;
-  const event = scheduledInterviews?.content[0];
   const searchParams = new URLSearchParams(location.search);
   const modalParam = searchParams.get('modal');
   const roleParam = searchParams.get('role');
 
+  const redirectToInterview = ({ event, modal, role }) => {
+    const { id } = event;
+    const extraSearch = modal && role ? `?modal=${modal}&role=${role}` : '';
+
+    navigate(`${navigationLinks.scheduledInterviews}/${id}${extraSearch}`, {
+      state: { event },
+    });
+
+    if (modal && role) {
+      dispatch(
+        openModal({
+          modalType: modalNames.feedbackInterviewModal,
+          data: {
+            feedbackId: id,
+            role,
+          },
+        })
+      );
+    }
+  };
+
   useEffect(() => {
-    if (isFatchingAllInterviews || isLoadingAllInterviews) return;
+    const init = async () => {
+      const {
+        data: { content },
+      } = await getAllScheduled({ page: 0, size: 6 });
 
-    if (modalParam && roleParam) {
-      getSingleInterview({ interviewId }).then((response) => {
-        dispatch(
-          modalOpen({
-            modalType: modalNames.feedbackInterviewModal,
-            data: {
-              feedbackId: interviewId,
-              role: roleParam,
-            },
-          })
-        );
+      if (Array.isArray(content) && content.length) {
+        if (!interviewId) {
+          redirectToInterview({ event: content[0], modal: modalParam, role: roleParam });
 
-        navigate(`${navigationLinks.scheduledInterviews}/${interviewId}?modal=${modalParam}&role=${roleParam}`, {
-          state: { event: response.data },
-        });
-      });
-    }
+          return;
+        }
 
-    if (firstInterviewId && !interviewId) {
-      navigate(`${navigationLinks.scheduledInterviews}/${firstInterviewId}`, {
-        state: { event },
-      });
-    }
-  }, [firstInterviewId, event, scheduledInterviews]);
+        if (interviewId) {
+          const findExistEvent = content.find((event) => event.id === +interviewId);
+
+          if (findExistEvent) {
+            redirectToInterview({ event: findExistEvent, modal: modalParam, role: roleParam });
+
+            return;
+          }
+
+          if (!findExistEvent) {
+            const { data } = await getSingleInterview({ interviewId });
+
+            if (!data) {
+              redirectToInterview({ event: content[0], modal: modalParam, role: roleParam });
+
+              return;
+            }
+
+            const newData = {
+              ...data,
+              title: data.specializationName,
+              date: data.startTime,
+            };
+
+            redirectToInterview({ event: newData, modal: modalParam, role: roleParam });
+          }
+        }
+      }
+    };
+
+    init();
+  }, []);
 
   return <Outlet />;
 };

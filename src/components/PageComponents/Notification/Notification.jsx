@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Badge, IconButton, Popover } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
-import { openPopup, closePopup } from '@redux/slices/notification/popupSlice.js';
-import { useGetNotificationsQuery } from '@redux/api/slices/notificationsApiSlice.js';
+import { selectCurrentUser } from '@redux/slices/auth/authSlice';
+import { openPopup, closePopup } from '@redux/slices/notification/popupSlice';
+import { useGetNotificationsQuery } from '@redux/api/slices/notificationsApiSlice';
 import emptyNotificationLight from '@utils/constants/notification/whiteThemeIcons';
 import emptyNotificationDark from '@utils/constants/notification/darkThemeIcons';
 import { DARK_THEME } from '@utils/constants/Theme/theme';
@@ -13,14 +13,15 @@ import NotificationEmpty from './NotificationEmpty';
 import NotificationList from './NotificationList';
 
 const Notification = () => {
-  const { data: info } = useSelector(selectCurrentUser);
   const [bellButton, setBellButton] = useState(null);
-  const { data: notifications, isLoading } = useGetNotificationsQuery(info.id);
-  const newNotification = notifications?.every((item) => item.read) ?? true;
-
-  const { mode } = useSelector((state) => state.theme);
-  const icons = mode === DARK_THEME ? emptyNotificationDark : emptyNotificationLight;
   const dispatch = useDispatch();
+  const { data: info } = useSelector(selectCurrentUser);
+  const { mode } = useSelector((state) => state.theme);
+
+  const { data: notifications, isLoading } = useGetNotificationsQuery(info.id);
+
+  const newNotification = notifications?.every((item) => item.read) ?? true;
+  const icons = mode === DARK_THEME ? emptyNotificationDark : emptyNotificationLight;
 
   const bellButtonClickHandler = (event) => {
     event.preventDefault();

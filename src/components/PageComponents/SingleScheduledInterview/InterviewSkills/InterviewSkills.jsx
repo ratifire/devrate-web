@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useLocation } from 'react-router';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice';
-import { useGetAllSkillsForMasteryIdQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
+import { useGetAllSkillsForMasteryIdQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { InterviewSkillsSkeleton } from '@components/UI/Skeleton';
 import InfoTooltip from '@components/UI/InfoTooltip/index.js';

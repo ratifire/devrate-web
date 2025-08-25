@@ -109,6 +109,7 @@ const SinglePassedInterviewPage = () => {
     Object.entries(skillsArray).map(([name, averageMark]) => ({
       name,
       averageMark,
+      id: name,
     }));
 
   const getAverageSkillsMark = (skillsArray) =>

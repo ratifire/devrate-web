@@ -1,5 +1,7 @@
-import { TAG_TYPES } from '@utils/constants/tagTypes.js';
+import { TAG_TYPES } from '@utils/constants/tagTypes';
 import { apiSlice } from '@redux/api/apiSlice';
+import { optimisticDeleteScheduledInterview } from '@redux/api/slices/interviews/helpers';
+import mergePaginatedContent from './helpers/mergePaginatedContent';
 
 const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -21,11 +23,7 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
       },
       merge: (currentCache, newData, { arg }) => {
         // Merge the `content` arrays from the current cache and new data
-        if (arg.page === 0) {
-          currentCache.content = newData.content;
-        } else {
-          currentCache.content.push(...newData.content);
-        }
+        return mergePaginatedContent({ arg, currentCache, newData });
       },
       forceRefetch: ({ currentArg, previousArg }) => {
         // Force a refetch if the `page` changes
@@ -50,8 +48,24 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
     getSingleInterviewById: builder.query({
       query: ({ interviewId }) => `/interviews/${interviewId}/visible`,
     }),
-    getScheduledInterviewById: builder.query({
-      query: ({ interviewId }) => `/interviews/events/${interviewId}`,
+    getInterviewByIdBySocketUpdate: builder.query({
+      query: ({ interviewId }) => `/interviews/${interviewId}/visible`,
+      async onQueryStarted({ _interviewId }, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled;
+
+        const newData = {
+          ...data,
+          title: data.specializationName,
+          date: data.startTime,
+        };
+
+        dispatch(
+          apiSlice.util.updateQueryData('getAllScheduledInterviews', { size: 6 }, (draft) => {
+            draft.content = draft.content.filter((item) => item.id !== data.id);
+            draft.content.unshift(newData);
+          })
+        );
+      },
     }),
     getInterviewStatus: builder.query({
       query: (zoneName) => `/interviews/status-indicator?userTimeZone=${zoneName}`,
@@ -62,13 +76,43 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         responseHandler: (response) => response.text(),
       }),
     }),
+    getAllSkillsForMasteryId: builder.query({
+      query: ({ masteryId }) => `/masteries/${masteryId}/skills/all`,
+    }),
+    getMasteries: builder.query({
+      query: (masteryId) => `/masteries/${masteryId}`,
+    }),
+    deleteInterview: builder.mutation({
+      query: ({ eventId }) => ({
+        url: `/interviews/${eventId}`,
+        method: 'DELETE',
+      }),
+      async onQueryStarted({ eventId }, { dispatch, queryFulfilled }) {
+        return optimisticDeleteScheduledInterview({ dispatch, eventId, queryFulfilled });
+      },
+      invalidatesTags: [TAG_TYPES.Event],
+    }),
+    deleteNotConductedInterview: builder.mutation({
+      query: ({ eventId }) => ({
+        url: `/interviews/${eventId}/not-conducted`,
+        method: 'DELETE',
+      }),
+      async onQueryStarted({ eventId }, { dispatch, queryFulfilled }) {
+        return optimisticDeleteScheduledInterview({ dispatch, eventId, queryFulfilled });
+      },
+    }),
   }),
 });
 
 export const {
   useGetAllScheduledInterviewsQuery,
-  useGetScheduledInterviewByIdQuery,
+  useLazyGetAllScheduledInterviewsQuery,
+  useLazyGetInterviewByIdBySocketUpdateQuery,
   useLazyGetSingleInterviewByIdQuery,
   useGetInterviewStatusQuery,
   useLazyGetInterviewMeetingUrlQuery,
+  useGetAllSkillsForMasteryIdQuery,
+  useGetMasteriesQuery,
+  useDeleteInterviewMutation,
+  useDeleteNotConductedInterviewMutation,
 } = scheduledInterviewApiSlice;
