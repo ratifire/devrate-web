@@ -12,7 +12,8 @@ import useJoinInterview from '@utils/hooks/useJoinInterview.jsx';
 import { styles } from './Event.styles';
 
 const Event = ({ event }) => {
-  const { hostName, hostSurname, id, startTime, type, title, hostId, interviewId, role } = event;
+  const { hostName, hostSurname, startTime, type, title, hostId, interviewId, role } = event;
+
   const { t } = useTranslation();
   const status = getStatusByTime(startTime);
   const { joinInterview, isLoadingMeetingUrl } = useJoinInterview();
@@ -35,7 +36,7 @@ const Event = ({ event }) => {
 
   const handleCancelInterview = async () => {
     await deleteEvent({
-      eventId: id,
+      eventId: interviewId,
     });
   };
 
@@ -67,7 +68,7 @@ const Event = ({ event }) => {
           <LinkIcon />
         </IconButton>
         {showCancelButton && (
-          <Button sx={styles.cancelEventBtn} variant='text' onClick={() => handleCancelInterview(id)}>
+          <Button sx={styles.cancelEventBtn} variant='text' onClick={handleCancelInterview}>
             {t('schedule.cancelEventBtn')}
           </Button>
         )}
