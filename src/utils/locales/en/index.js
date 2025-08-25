@@ -381,6 +381,9 @@ export const en = {
         faq: 'FAQ',
         logout: 'Logout',
         leaveAFeedback: 'Feedback',
+        tooltip: {
+          openMenu: 'Open menu',
+        },
       },
       experienceSection: {
         readAll: 'Read all...',
