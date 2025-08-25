@@ -20,71 +20,71 @@ const ScheduledInterviewsGuard = () => {
   const modalParam = searchParams.get('modal');
   const roleParam = searchParams.get('role');
 
+  const redirectToInterview = ({ event, modal, role }) => {
+    const { id } = event;
+    const extraSearch = modal && role ? `?modal=${modal}&role=${role}` : '';
+
+    navigate(`${navigationLinks.scheduledInterviews}/${id}${extraSearch}`, {
+      state: { event },
+    });
+
+    if (modal && role) {
+      dispatch(
+        openModal({
+          modalType: modalNames.feedbackInterviewModal,
+          data: {
+            feedbackId: id,
+            role,
+          },
+        })
+      );
+    }
+  };
+
   useEffect(() => {
-    const redirectToValidInterview = async () => {
+    const init = async () => {
       const {
         data: { content },
       } = await getAllScheduled({ page: 0, size: 6 });
-      const { id } = content[0];
 
-      if (!interviewId) {
-        navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
-          state: { event: content[0] },
-        });
-
-        return;
-      }
-
-      if (interviewId) {
-        const findExistEvent = content.find((event) => event.id === +interviewId);
-
-        if (findExistEvent) {
-          navigate(`${navigationLinks.scheduledInterviews}/${findExistEvent.id}`, {
-            state: { event: findExistEvent },
-          });
+      if (Array.isArray(content) && content.length) {
+        if (!interviewId) {
+          redirectToInterview({ event: content[0], modal: modalParam, role: roleParam });
 
           return;
         }
 
-        if (!findExistEvent) {
-          const { data } = await getSingleInterview({ interviewId });
+        if (interviewId) {
+          const findExistEvent = content.find((event) => event.id === +interviewId);
 
-          if (!data) {
-            navigate(`${navigationLinks.scheduledInterviews}/${id}`, {
-              state: { event: content[0] },
-            });
+          if (findExistEvent) {
+            redirectToInterview({ event: findExistEvent, modal: modalParam, role: roleParam });
+
+            return;
           }
 
-          const newData = {
-            ...data,
-            title: data.specializationName,
-            date: data.startTime,
-          };
+          if (!findExistEvent) {
+            const { data } = await getSingleInterview({ interviewId });
 
-          navigate(`${navigationLinks.scheduledInterviews}/${newData.id}`, {
-            state: { event: newData },
-          });
+            if (!data) {
+              redirectToInterview({ event: content[0], modal: modalParam, role: roleParam });
 
-          if (modalParam && roleParam) {
-            dispatch(
-              openModal({
-                modalType: modalNames.feedbackInterviewModal,
-                data: {
-                  feedbackId: interviewId,
-                  role: roleParam,
-                },
-              })
-            );
+              return;
+            }
 
-            navigate(`${navigationLinks.scheduledInterviews}/${data.id}?modal=${modalParam}&role=${roleParam}`, {
-              state: { event: newData },
-            });
+            const newData = {
+              ...data,
+              title: data.specializationName,
+              date: data.startTime,
+            };
+
+            redirectToInterview({ event: newData, modal: modalParam, role: roleParam });
           }
         }
       }
     };
 
-    redirectToValidInterview();
+    init();
   }, []);
 
   return <Outlet />;
