@@ -7,8 +7,8 @@ import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import useDeleteEvent from '@utils/hooks/useDeleteEvent';
 import useCheckTimeDifference from '@utils/hooks/schedule/useCheckTimeDifference';
-import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers/index.js';
-import useJoinInterview from '@utils/hooks/useJoinInterview.jsx';
+import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers';
+import useJoinInterview from '@utils/hooks/useJoinInterview';
 import { styles } from './Event.styles';
 
 const Event = ({ event }) => {
