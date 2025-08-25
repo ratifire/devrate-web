@@ -11,7 +11,7 @@ export const interviewRequestDark = {
         expired: '#F44336',
         booked: '#64FF2E',
         pending: '#FCA728',
-        completed: '#F44336',
+        completed: '#16FFB9',
       },
     },
     role: {

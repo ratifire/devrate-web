@@ -11,7 +11,7 @@ export const interviewRequestLight = {
         expired: '#F44336',
         booked: '#3AB310',
         pending: '#EE7538',
-        completed: '#F44336',
+        completed: '#00855D',
       },
     },
     role: {
