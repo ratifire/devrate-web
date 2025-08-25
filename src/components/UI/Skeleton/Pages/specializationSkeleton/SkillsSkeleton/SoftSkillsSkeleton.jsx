@@ -1,5 +1,5 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './SoftSkillsSkeleton.styles.js';
+import { styles } from './SkillsSkeleton.styles';
 
 const HardSkillsSkeleton = () => {
   return (
