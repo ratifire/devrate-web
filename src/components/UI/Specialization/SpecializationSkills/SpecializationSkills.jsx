@@ -8,7 +8,7 @@ import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/pas
 import { useParams } from 'react-router';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
-import { SkillsSkeleton } from '../../Skeleton';
+import { HardSkillsSkeleton } from '../../Skeleton';
 import EmptySkills from '../EmptySkills/index.js';
 import { styles } from './SpecializationSkills.styles';
 
@@ -36,7 +36,7 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
   };
 
   if (isFetching) {
-    return <SkillsSkeleton />;
+    return <HardSkillsSkeleton />;
   }
 
   if (role === 'INTERVIEWER' && title === 'Hard skills') {

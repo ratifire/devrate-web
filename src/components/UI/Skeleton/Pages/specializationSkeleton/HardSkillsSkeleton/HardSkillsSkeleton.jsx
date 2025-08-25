@@ -1,7 +1,7 @@
 import { Box, Skeleton } from '@mui/material';
-import { styles } from './SkillsSkeleton.styles';
+import { styles } from './HardSkillsSkeleton.styles.js';
 
-const SkillsSkeleton = () => {
+const HardSkillsSkeleton = () => {
   return (
     <Box sx={styles.wrapper}>
       <Skeleton height={34} variant='rounded' />
@@ -11,4 +11,4 @@ const SkillsSkeleton = () => {
   );
 };
 
-export default SkillsSkeleton;
+export default HardSkillsSkeleton;
