@@ -9,8 +9,9 @@ export const interviewRequestDark = {
       statusText: '#FFFFFF',
       statusCircle: {
         expired: '#F44336',
-        assigned: '#64FF2E',
-        panding: '#FCA728',
+        booked: '#64FF2E',
+        pending: '#FCA728',
+        completed: '#16FFB9',
       },
     },
     role: {
