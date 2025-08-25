@@ -1,0 +1,3 @@
+import TelegramNotifications from '@components/PageComponents/SettingsComponents/SettingsNotifications/TelegramNotifications/TelegramNotifications';
+
+export default TelegramNotifications;

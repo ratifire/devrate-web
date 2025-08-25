@@ -182,6 +182,7 @@ export const en = {
         password_tooltip:
           'Password must contain 6 characters, 1 uppercase letter, 1 digit, 1 special character no spaces',
         password_invalid: 'Incorrect password',
+        password_must_differ: 'Password must be different from the current password',
         agreement_error: 'To use our service, you must agree to the terms of use',
         agreement: 'I have read and agree to the Terms of Use and Privacy Policy',
         btn_register: 'Sign Up',
@@ -652,6 +653,77 @@ export const en = {
           es: 'Spanish',
           pl: 'Poland',
           cs: 'Czech',
+        },
+      },
+    },
+    settings: {
+      sideBar: {
+        title: 'Settings',
+        links: {
+          generalSettings: 'General settings',
+          notificationsSettings: 'Notifications',
+        },
+      },
+      general: {
+        title: 'General Settings',
+        common: {
+          save: 'Save',
+          cancel: 'Cancel',
+          send: 'Send',
+        },
+        changeEmail: {
+          title: 'Change Email Address',
+          oldEmailLabel: 'Current Email',
+          oldEmailPlaceholder: 'Enter your current email',
+          newEmailLabel: 'New Email',
+          newEmailPlaceholder: 'Enter your new email',
+          newEmailError: {
+            different: 'The new email address must be different from the current email address',
+          },
+          notification: {
+            success: 'Email changed successfully',
+            error: 'Error changing email',
+            userAlreadyExists: 'User with this email already exists',
+          },
+        },
+        changePassword: {
+          title: 'Change Password',
+          oldPasswordLabel: 'Current Password',
+          oldPasswordPlaceholder: 'Enter your current password',
+          newPasswordLabel: 'New Password',
+          newPasswordPlaceholder: 'Enter your new password',
+          repeatNewPasswordLabel: 'Confirm Password',
+          repeatNewPasswordPlaceholder: 'Confirm your new password',
+          notification: {
+            success: 'Password successfully changed',
+            error: 'Password change error',
+            errorServer: 'Server error',
+          },
+        },
+        changeLanguage: {
+          title: 'Platform Language',
+          languageLabel: 'Select Language',
+          uk: 'Ukrainian',
+          en: 'English',
+          notification: {
+            success: 'Language changed successfully',
+            error: 'Error changing language',
+          },
+        },
+      },
+      notifications: {
+        title: 'Notifications',
+        email: {
+          title: 'Email notifications',
+          text: 'Receive emails that notify you of events when you are not in Skillzzy. You can turn them off at any time.',
+          notification: {
+            success: 'Notifications settings have been changed',
+            error: 'Error changing notifications settings',
+          },
+        },
+        telegram: {
+          title: 'Telegram Bot Notifications',
+          text: 'To receive convenient notifications about scheduled interviews and more, subscribe to our <a>Telegram Assistant</a>',
         },
       },
     },
