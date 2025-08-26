@@ -13,13 +13,17 @@ import { ButtonDef } from '@components/FormsComponents/Buttons';
 import { useMemo } from 'react';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import { useCreatePersonalMeetingUrlMutation } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice.js';
+import { useSnackbar } from 'notistack';
 import { styles } from './BaseUserInfo.styles';
 
 const BaseUserInfo = ({ id }) => {
   const dispatch = useDispatch();
   const { openModal } = useModalController();
   const { data: personalData } = useGetPersonalUserQuery(id);
+  const [createPersonalMeetingUrl, { isLoading: isLoadingUrl }] = useCreatePersonalMeetingUrlMutation();
   const { t } = useTranslation();
+  const enqueueSnackbar = useSnackbar();
   const userData = personalData || {};
   const { firstName: userFirstName, lastName: userLastName, country, city, status } = userData;
 
@@ -41,9 +45,14 @@ const BaseUserInfo = ({ id }) => {
   const handleWriteMessage = () => {
     dispatch(openChat(chatData));
   };
-
-  const handleBookInterview = () => {
-    openModal(modalNames.personalInterviewModal, chatData);
+  const handleBookInterview = async () => {
+    try {
+      const meetingUrl = await createPersonalMeetingUrl().unwrap();
+      openModal(modalNames.personalInterviewModal, { chatData, meetingUrl });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      enqueueSnackbar(t('singleScheduledInterview.scheduledMeeting.canceled.error'), { variant: 'error' });
+    }
   };
 
   return (
@@ -87,6 +96,7 @@ const BaseUserInfo = ({ id }) => {
         />
         <ButtonDef
           label={t('profile.baseUserInfo.bookInterview')}
+          loading={isLoadingUrl}
           sx={styles.outlined}
           type={'button'}
           variant='outlined'
