@@ -21,10 +21,14 @@ export const styles = {
   },
   actions: (theme) => ({
     display: 'flex',
+    flexDirection: 'row-reverse',
     gap: theme.spacing(3),
     '> button': {
       fontSize: '0.875rem',
       textTransform: 'none',
+    },
+    '& button:last-child': {
+      visibility: 'hidden',
     },
   }),
   copyButton: (theme) => ({

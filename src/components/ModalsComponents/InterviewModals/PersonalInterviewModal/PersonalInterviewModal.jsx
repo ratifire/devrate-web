@@ -63,11 +63,11 @@ const PersonalInterviewModal = () => {
         )}
       </Box>
       <Box sx={styles.actions}>
-        <Button sx={styles.copyButton} variant='text' onClick={handleCopy}>
+        <Button disabled={isLoading} sx={styles.copyButton} variant='text' onClick={handleCopy}>
           <ContentCopyIcon sx={styles.copyIcon} />
           {t('modal.personaInterview.btnCopy')}
         </Button>
-        <Button variant='contained' onClick={handleSendLink}>
+        <Button disabled={isLoading} variant='contained' onClick={handleSendLink}>
           {t('modal.personaInterview.btnSendMessage')}
         </Button>
       </Box>
