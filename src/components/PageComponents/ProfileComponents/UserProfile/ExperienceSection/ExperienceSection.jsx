@@ -7,6 +7,7 @@ import Skills from '../../UserProfile/ExperienceSection/Skills';
 import Achievement from '../../UserProfile/ExperienceSection/Achievement';
 import styles from './ExperienceSection.styles';
 import WorkExperience from './WorkExperience';
+import Video from './Video';
 
 const ExperienceSection = ({ id }) => {
   const [value, setValue] = React.useState('openExperience');
@@ -19,6 +20,7 @@ const ExperienceSection = ({ id }) => {
   const tab = {
     openExperience: <WorkExperience id={id} tab={'workExperience'} />,
     achievement: <Achievement id={id} tab={'achievement'} />,
+    video: <Video tab={'video'} />,
     skills: <Skills id={id} tab={'skills'} />,
     education: <Education id={id} tab={'education'} />,
   };
@@ -59,6 +61,7 @@ const ExperienceSection = ({ id }) => {
             value='openExperience'
           />
           <StyledTab label={t('profile.experience.achievement.tabName')} sx={styles.tabItem} value='achievement' />
+          <StyledTab label={t('profile.experience.video.tabName')} sx={styles.tabItem} value='video' />
           <StyledTab label={t('profile.experience.skills.tabName')} sx={styles.tabItem} value='skills' />
           <StyledTab label={t('profile.experience.education.tabName')} sx={styles.tabItem} value='education' />
         </StyledTabs>
