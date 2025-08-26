@@ -4,6 +4,7 @@ import { useGetMastery } from '@utils/hooks/specialization';
 import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { useModalController } from '@utils/hooks/useModalController.js';
+import { SKILLS_TYPE } from '@components/UI/Specialization/SpecializationSkills/constants';
 
 const SoftSkills = () => {
   const { t } = useTranslation();
@@ -37,6 +38,7 @@ const SoftSkills = () => {
       skills={skills}
       subTitle={t('specialization.softSkills.averageMark')}
       title={t('specialization.softSkills.title')}
+      type={SKILLS_TYPE.SOFT_SKILL}
     />
   );
 };

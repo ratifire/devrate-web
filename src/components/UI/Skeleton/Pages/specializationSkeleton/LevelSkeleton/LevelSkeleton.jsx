@@ -6,7 +6,6 @@ const LevelSkeleton = () => {
     <Box sx={styles.wrapper}>
       <Skeleton height={30} variant='rounded' />
       <Skeleton height={50} variant='rounded' />
-      <Skeleton height={40} variant='rounded' />
     </Box>
   );
 };

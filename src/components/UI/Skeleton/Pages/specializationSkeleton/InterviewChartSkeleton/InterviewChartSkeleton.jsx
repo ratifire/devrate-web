@@ -9,7 +9,7 @@ const InterviewChartSkeleton = () => {
         <Skeleton height={21} variant='rounded' width={100} />
         <Skeleton height={21} variant='rounded' width={100} />
       </Box>
-      <Skeleton height={309} variant='rounded' />
+      <Skeleton height={270} variant='rounded' />
     </Box>
   );
 };
