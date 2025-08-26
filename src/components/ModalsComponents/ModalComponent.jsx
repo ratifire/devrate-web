@@ -13,8 +13,7 @@ const ModalComponent = () => {
   const { closeModal } = useModalController();
 
   const handleClose = () => closeModal(modalType);
-
-  const isConfirmDeleteModal = modalType === modalNames.confirmDeleteSpecialization;
+  const modalSmallStyle = styles[modalNames[modalType]] || {};
 
   const isVideoModal = disableBackdropEscModals.includes(modalType);
 
@@ -34,7 +33,7 @@ const ModalComponent = () => {
       onClose={handleIsBlockCloseModal}
     >
       <Zoom in={isOpen}>
-        <Box style={isConfirmDeleteModal && styles.confirmDeleteModalWrapper} sx={styles.wrapper}>
+        <Box style={modalSmallStyle} sx={styles.wrapper}>
           <IconButton aria-label='Close modal' sx={styles.btnIcon} type='button' onClick={handleClose}>
             <CloseIcon />
           </IconButton>

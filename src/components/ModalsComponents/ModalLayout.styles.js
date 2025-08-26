@@ -12,8 +12,11 @@ export const styles = {
     width: '100%',
     maxWidth: '732px',
   }),
-  confirmDeleteModalWrapper: {
+  confirmDeleteSpecialization: {
     maxWidth: '431px',
+  },
+  deactivateProfileModal: {
+    maxWidth: '451px',
   },
   btnIcon: (theme) => ({
     position: 'absolute',

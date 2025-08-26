@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { useOAuthAuthorizeMutation } from '@redux/api/slices/auth/authApiSlice.js';
+import { useOAuthAuthorizeMutation } from '@redux/api/slices/auth/authApiSlice';
 import { useEffect } from 'react';
-import { setCredentials } from '@redux/slices/auth/authSlice.js';
-import { setTokens } from '@redux/slices/auth/tokenSlice.js';
-import { closeModal } from '@redux/slices/modal/modalSlice.js';
+import { setCredentials } from '@redux/slices/auth/authSlice';
+import { setTokens } from '@redux/slices/auth/tokenSlice';
+import { closeModal } from '@redux/slices/modal/modalSlice';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 

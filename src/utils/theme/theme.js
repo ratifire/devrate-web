@@ -1,3 +1,4 @@
+import { settingsDark, settingsLight } from '@utils/theme/settings/index.js';
 import { DARK_THEME } from '../constants/Theme/theme';
 import { specializationDark, specializationLight } from './specialization';
 import { scheduleDark, scheduleLight } from './schedule';
@@ -640,6 +641,7 @@ const getDesignTokens = (mode) => ({
           ...interviewDark,
           ...chatDark,
           ...interviewRequestDark,
+          ...settingsDark,
           ...profileDark,
         }
       : {
@@ -649,6 +651,7 @@ const getDesignTokens = (mode) => ({
           ...interviewLight,
           ...chatLight,
           ...interviewRequestLight,
+          ...settingsLight,
           faq: {
             title: '#1D1D1D',
             questions: {

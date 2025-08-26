@@ -182,6 +182,7 @@ export const uk = {
         password_tooltip:
           'Пароль повинен містити 6 символів, 1 велику літеру, 1 цифру, 1 спеціальний символ та не містити пробілів',
         password_invalid: 'Неприпустимий пароль',
+        password_must_differ: 'Паролі повинні відрізнятися',
         agreement_error: 'Для використання нашого сервісу вам необхідно погодитися з умовами користування',
         agreement: 'Я прочитав(ла) і погоджуюся з <a>Умовами використання</a> та <a>Політикою конфіденційності</a>',
         btn_register: 'Зареєструватись',
@@ -656,6 +657,77 @@ export const uk = {
           es: 'Іспанська',
           pl: 'Польська',
           cs: 'Чеська',
+        },
+      },
+    },
+    settings: {
+      sideBar: {
+        title: 'Налаштування',
+        links: {
+          generalSettings: 'Загальні налаштування',
+          notificationsSettings: 'Сповіщення',
+        },
+      },
+      general: {
+        title: 'Загальні налаштування',
+        common: {
+          save: 'Зберегти',
+          cancel: 'Скасувати',
+          send: 'Надіслати',
+        },
+        changeEmail: {
+          title: 'Змінити e-mail адресу',
+          oldEmailLabel: 'Поточний e-mail',
+          oldEmailPlaceholder: 'Введіть поточну адресу',
+          newEmailLabel: 'Новий e-mail',
+          newEmailPlaceholder: 'Введіть нову адресу',
+          newEmailError: {
+            different: 'Нова електронна адреса повинна відрізнятися від поточної.',
+          },
+          notification: {
+            success: 'E-mail успішно змінено',
+            error: 'Помилка зміни e-mail',
+            userAlreadyExists: 'Користувач з такою електронною адресою вже існує',
+          },
+        },
+        changePassword: {
+          title: 'Змінити пароль',
+          oldPasswordLabel: 'Поточний пароль',
+          oldPasswordPlaceholder: 'Введіть поточний пароль',
+          newPasswordLabel: 'Новий пароль',
+          newPasswordPlaceholder: 'Введіть новий пароль',
+          repeatNewPasswordLabel: 'Підтвердіть пароль',
+          repeatNewPasswordPlaceholder: 'Підтвердіть новий пароль',
+          notification: {
+            success: 'Пароль успішно змінено',
+            error: 'Помилка зміни пароля',
+            errorServer: 'Помилка сервера',
+          },
+        },
+        changeLanguage: {
+          title: 'Мова платформи',
+          languageLabel: 'Оберіть мову',
+          uk: 'Українська',
+          en: 'Англійська',
+          notification: {
+            success: 'Мову успішно змінено',
+            error: 'Помилка зміни мови',
+          },
+        },
+      },
+      notifications: {
+        title: 'Сповіщення',
+        email: {
+          title: 'Сповіщення електронною поштою',
+          text: 'Отримуйте електронні листи, що сповіщатимуть про події, коли вас немає в Skillzzy. Ви можете вимкнути їх будь-коли.',
+          notification: {
+            success: 'Сповіщення електронною поштою успішно змінено',
+            error: 'Помилка зміни сповіщень email',
+          },
+        },
+        telegram: {
+          title: 'Сповіщення Telegram-бот',
+          text: 'Щоб отримувати зручні сповіщення про заплановані співбесіди і не тільки — підпишіться на нашого <a>Telegram Помічника</a>',
         },
       },
     },
