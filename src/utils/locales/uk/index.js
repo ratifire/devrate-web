@@ -200,6 +200,8 @@ export const uk = {
         password_short: 'Пароль занадто короткий',
         password_long: 'Пароль занадто довгий',
         password_must_match: 'Паролі мають збігатися',
+        your_have_acc: 'Вже маєте аккаунт?',
+        login: 'Увійти',
       },
       confirmation: {
         title: 'Підтвердіть Свою Електронну Адресу',

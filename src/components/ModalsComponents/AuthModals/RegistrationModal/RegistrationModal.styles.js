@@ -56,6 +56,26 @@ const styles = {
     color: '#B78AF7',
     textDecoration: 'none',
   },
+  textWrapper: (theme) => ({
+    display: 'flex',
+    alignItems: 'baseline',
+    justifyContent: 'center',
+    marginTop: theme.spacing(3),
+  }),
+  text: {
+    display: 'inline-flex',
+    fontSize: '18px',
+    color: '#C5C5C6',
+    letterSpacing: 0,
+    marginRight: '4px',
+  },
+  textLink: {
+    fontSize: '18px',
+    fontWeight: 600,
+    lineHeight: 1.5,
+    color: '#B78AF7',
+    letterSpacing: 0,
+  },
 };
 
 export default styles;
