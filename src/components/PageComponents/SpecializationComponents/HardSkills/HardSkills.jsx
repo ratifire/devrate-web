@@ -3,6 +3,7 @@ import { useModalController } from '@utils/hooks/useModalController.js';
 import { useHardSkillData } from '@utils/hooks/specialization';
 import { modalNames } from '@utils/constants/modalNames.js';
 import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
+import { SKILLS_TYPE } from '@components/UI/Specialization/SpecializationSkills/constants/index.js';
 
 const HardSkills = () => {
   const { t } = useTranslation();
@@ -24,7 +25,7 @@ const HardSkills = () => {
       skills={skills}
       subTitle={t('specialization.hardSkills.averageMark')}
       title={t('specialization.hardSkills.title')}
-      type={'HARD_SKILL'}
+      type={SKILLS_TYPE.HARD_SKILL}
     />
   );
 };
