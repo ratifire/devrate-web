@@ -20,7 +20,6 @@ const BaseUserInfo = ({ id }) => {
   const { openModal } = useModalController();
   const { data: personalData } = useGetPersonalUserQuery(id);
   const { t } = useTranslation();
-  // const [isBookmarked, setIsBookmarked] = useState(false);
   const userData = personalData || {};
   const { firstName: userFirstName, lastName: userLastName, country, city, status } = userData;
 
@@ -38,9 +37,6 @@ const BaseUserInfo = ({ id }) => {
   const userAvatar = data || {};
   const { userPicture } = userAvatar;
   const chatData = { id, firstName: displayData.firstName, lastName: displayData.lastName, userPicture: userPicture };
-  // const handleToggleBookmark = (newValue) => {
-  //   setIsBookmarked(newValue);
-  // };
 
   const handleWriteMessage = () => {
     dispatch(openChat(chatData));
