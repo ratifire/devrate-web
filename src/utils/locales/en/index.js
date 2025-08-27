@@ -1119,6 +1119,10 @@ export const en = {
         timeslotDescription2: 'Minimum number of interviews - ',
         timeslotDescriptionError: 'You have not selected enough timeslots. You need to select at least - ',
         warning: 'For the selected specialization, there is already a request in the role',
+        warningRole: {
+          CANDIDATE: 'respondent',
+          INTERVIEWER: 'interviewer',
+        },
         thisWeek: 'This week',
         save: 'Save',
         interviewCount_exceeds_pendingSlots: 'The number of interviews cannot exceed the available slots.',

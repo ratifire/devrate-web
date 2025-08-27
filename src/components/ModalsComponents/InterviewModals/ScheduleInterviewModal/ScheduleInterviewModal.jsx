@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetInterviewsByMasteryIdQuery } from '@redux/api/slices/interviews/interviewRequestsApiSlice';
 import InterviewModalRole from '@utils/constants/InterviewModalRole';
+import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole.js';
 import { ErrorComponent } from '../../../UI/Exceptions';
 import { InterviewStepper } from '../../FeedbackModal/FeedbackInterviewModal/components/InterviewStepper';
 import SliderComponent from '../components/SliderComponent';
@@ -68,7 +69,10 @@ const ScheduleInterviewModal = () => {
           <SliderComponent formik={formik} mySpecialization={spec} slide={activeStep} />
           {selectedRoleHasAvailableDates && !selectedSpecialization && (
             <Typography sx={styles.errorMessage} variant='body'>
-              {t('interviews.scheduleInterviewModal.warning')} {formik.values.role.toLowerCase()}
+              {t('interviews.scheduleInterviewModal.warning')}{' '}
+              {formik.values.role === feedbackInterviewRole.CANDIDATE
+                ? t('interviews.scheduleInterviewModal.warningRole.CANDIDATE')
+                : t('interviews.scheduleInterviewModal.warningRole.INTERVIEWER')}
             </Typography>
           )}
           <Box sx={styles.sendBox}>
