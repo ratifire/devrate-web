@@ -19,6 +19,7 @@ import { styles } from './BaseUserInfo.styles';
 const BaseUserInfo = () => {
   const { t } = useTranslation();
   const theme = useTheme();
+  const { openModal } = useModalController();
   const currentUser = useSelector(selectCurrentUser) || {};
   const { id, firstName: authFirstName, lastName: authLastName, country: authCountry } = currentUser.data;
 
@@ -44,8 +45,6 @@ const BaseUserInfo = () => {
     }),
     [personalFirstName, personalLastName, personalCountry, authFirstName, authLastName, authCountry, city]
   );
-
-  const { openModal } = useModalController();
 
   const { userPicture } = avatarData || {};
 
