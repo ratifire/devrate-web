@@ -15,15 +15,19 @@ const SocialsLinkList = ({ gap = 2, componentStyles, socials, id }) => {
   const { data: userContacts } = useGetUserContactsQuery(userId);
   const arr = id ? socials : userContacts;
 
+  if (!arr || arr.length <= 0) {
+    return (
+      <Box gap={gap} sx={styles.wrapperLink}>
+        <Typography variant='body1'>{t('profile.right.empty.emptyContacts')}</Typography>
+      </Box>
+    );
+  }
+
   return (
     <Box gap={gap} sx={styles.wrapperLink}>
-      {arr && arr.length > 0 ? (
-        arr.map(({ type, value, id }) => (
-          <SocialLink key={id} componentStyles={componentStyles} type={type} value={value} />
-        ))
-      ) : (
-        <Typography variant='body1'>{t('profile.right.empty.emptyContacts')}</Typography>
-      )}
+      {arr.map(({ type, value, id }) => (
+        <SocialLink key={id} componentStyles={componentStyles} type={type} value={value} />
+      ))}
     </Box>
   );
 };
