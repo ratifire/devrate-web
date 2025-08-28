@@ -9,9 +9,8 @@ import navigationLinks from '@router/links';
 import { enqueueSnackbar } from 'notistack';
 import { closePopup } from '@redux/slices/notification/popupSlice.js';
 import styles from '../NotificationItem/NotificationItem.styles';
-import TimeAgo from '../../../UI/TimeAgo';
 
-const InterviewFeedback = ({ createAt, payload }) => {
+const InterviewFeedback = ({ formattedDate, payload }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -52,7 +51,7 @@ const InterviewFeedback = ({ createAt, payload }) => {
           </Typography>
         </Typography>
         <Typography sx={styles.date} variant='body2'>
-          <TimeAgo data={createAt} />
+          {formattedDate}
         </Typography>
       </Box>
     </>
@@ -60,7 +59,8 @@ const InterviewFeedback = ({ createAt, payload }) => {
 };
 
 InterviewFeedback.propTypes = {
-  createAt: PropTypes.string.isRequired,
+  formattedDate: PropTypes.string.isRequired,
   payload: PropTypes.string,
 };
+
 export default InterviewFeedback;
