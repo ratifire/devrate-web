@@ -93,6 +93,7 @@ const SinglePassedInterviewPage = () => {
   });
 
   const {
+    masteryLevel = {},
     dateTime = new Date(),
     hardSkills = {},
     softSkills = {},
@@ -125,7 +126,7 @@ const SinglePassedInterviewPage = () => {
   const { firstName = '', lastName = '' } = userContacts ?? {};
   const { firstName: candidateFirstName = '', lastName: candidateLastName = '' } = candidateContacts ?? {};
   const userRole = lvlMastery[attendeeMasteryLevel] + ' ' + attendeeSpecialization;
-  const level = lvlMastery[attendeeMasteryLevel];
+  const level = lvlMastery[masteryLevel];
 
   const EmptyInterviewSvg = mode === DARK_THEME ? EmptyRequestPicDark : EmptyRequestPicLight;
 
