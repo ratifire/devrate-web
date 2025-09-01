@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import { Trans, useTranslation } from 'react-i18next';
 import { Box, Link, Typography } from '@mui/material';
@@ -11,7 +11,7 @@ import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWor
 import { modalNames } from '@utils/constants/modalNames';
 import { Link as RouterLink } from 'react-router';
 import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
-import { useModalController } from '@utils/hooks/useModalController.js';
+import { closeModal, openModal } from '@redux/slices/modal/modalSlice.js';
 import styles from './RegistrationModal.styles';
 
 const initialValues = {
@@ -28,7 +28,6 @@ const RegistrationModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [createUser, { isLoading: isLoadingCreating }] = useCreateUserMutation();
-  const { openModal, closeModal } = useModalController();
   const handleKeyDown = (e) => {
     if (e.key === ' ') {
       e.preventDefault();
@@ -61,9 +60,9 @@ const RegistrationModal = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
-  const handleOpen = useCallback(() => {
-    openModal(modalNames.loginModal);
-  }, []);
+  const handleOpenLoginModal = () => {
+    dispatch(openModal({ modalType: modalNames.loginModal }));
+  };
   const isFormValid =
     formik.values.email &&
     formik.values.firstName &&
@@ -182,11 +181,10 @@ const RegistrationModal = () => {
           </Typography>
           <ButtonDef
             label={t('modal.registration.login')}
-            loading={formik.isSubmitting}
             sx={styles.textLink}
             type='button'
             variant='text'
-            onClick={handleOpen}
+            onClick={handleOpenLoginModal}
           />
         </Box>
       </form>
