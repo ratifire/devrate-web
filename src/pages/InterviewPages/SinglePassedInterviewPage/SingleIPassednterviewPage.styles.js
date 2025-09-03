@@ -8,8 +8,6 @@ export const styles = {
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: theme.spacing(2),
-      boxShadow: 'none',
-      backgroundImage: 'none',
     },
   }),
   userInfo: (theme) => ({
@@ -17,8 +15,6 @@ export const styles = {
     gridRow: '1/2',
     ' > div': {
       maxWidth: '100%',
-      boxShadow: 'none',
-      backgroundImage: 'none',
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
     },
@@ -54,8 +50,6 @@ export const styles = {
     width: '100%',
     marginBottom: theme.spacing(3),
     borderRadius: theme.spacing(1),
-    boxShadow: 'none',
-    backgroundImage: 'none',
     ' > div div ': {
       borderRadius: theme.spacing(1),
     },
@@ -69,8 +63,6 @@ export const styles = {
   }),
   sortSkills: (theme) => ({
     width: '100%',
-    boxShadow: 'none',
-    backgroundImage: 'none',
     ' > div': {
       borderRadius: theme.spacing(1),
     },
@@ -94,8 +86,6 @@ export const styles = {
     ' > div': {
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
-      boxShadow: 'none',
-      backgroundImage: 'none',
     },
   }),
   interviewFeedback: (theme) => ({
@@ -123,7 +113,6 @@ export const styles = {
     ' > div': {
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
-      boxShadow: 'none',
     },
   }),
   emptyStatistics: (theme) => ({
