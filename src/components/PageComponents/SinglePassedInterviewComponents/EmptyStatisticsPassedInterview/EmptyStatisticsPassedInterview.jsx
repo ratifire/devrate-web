@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { DARK_THEME } from '@utils/constants/Theme/theme.js';
+import { DARK_THEME } from '@utils/constants/Theme/theme';
 import { useSelector } from 'react-redux';
 import EmptyRequestPicDark from '../../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
 import EmptyRequestPicLight from '../../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestLight.svg?react';
