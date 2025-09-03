@@ -13,7 +13,7 @@ const EmptyStatisticsPassedInterview = () => {
   const EmptyInterviewSvg = mode === DARK_THEME ? EmptyRequestPicDark : EmptyRequestPicLight;
 
   return (
-    <Box sx={styles.emptyStatistics}>
+    <>
       <Typography className='emptyTitle' variant='h6'>
         {t('interviews.passedInterviews.interviewersAssessmentTitle')}
       </Typography>
@@ -23,7 +23,7 @@ const EmptyStatisticsPassedInterview = () => {
       <Typography sx={styles.emptyStatsText} variant='subtitle2'>
         {t('interviews.emptyInterviewTabs.emptyStatistics')}
       </Typography>
-    </Box>
+    </>
   );
 };
 
