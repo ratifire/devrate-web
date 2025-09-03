@@ -8,18 +8,15 @@ import {
 } from '@components/UI/Skeleton';
 import { Box, Typography } from '@mui/material';
 import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
-import { DARK_THEME } from '@utils/constants/Theme/theme';
 import { lazy, memo, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
 import {
   getAverageSkillsMark,
   getSkillsArray,
 } from '@components/PageComponents/SinglePassedInterviewComponents/helpers';
-import EmptyRequestPicDark from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
-import EmptyRequestPicLight from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestLight.svg?react';
+import EmptyStatisticsPassedInterview from '@components/PageComponents/SinglePassedInterviewComponents/EmptyStatisticsPassedInterview';
 import { styles } from './SinglePassedInterviewPage.styles';
 
 const UserCardSinglePassedInterview = lazy(
@@ -54,10 +51,10 @@ const MemoizedInterviewSoftSkillsSinglePassedInterview = memo(InterviewSoftSkill
 const MemoizedInterviewFeedback = memo(InterviewFeedback);
 const MemoizedUserCardSinglePassedInterview = memo(UserCardSinglePassedInterview);
 const MemoizedPreviewVideoPassedInterview = memo(PreviewVideoPassedInterview);
+const MemoizedEmptyStatisticsPassedInterview = memo(EmptyStatisticsPassedInterview);
 
 const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
-  const { mode } = useSelector((state) => state.theme);
   const { interviewId } = useParams();
   const { data: interviewData, isFetching: isFetchingPassedInterview } = useGetPassedInterviewByIdQuery(
     { interviewId },
@@ -73,8 +70,6 @@ const SinglePassedInterviewPage = () => {
 
   const averageHardSkillsMark = getAverageSkillsMark(hardSkillsArray);
   const averageSoftSkillsMark = getAverageSkillsMark(softSkillsArray);
-
-  const EmptyInterviewSvg = mode === DARK_THEME ? EmptyRequestPicDark : EmptyRequestPicLight;
 
   const hasStatistics =
     (role === feedbackInterviewRole.CANDIDATE && averageHardSkillsMark > 0) || averageSoftSkillsMark > 0;
@@ -129,19 +124,7 @@ const SinglePassedInterviewPage = () => {
           </Box>
         </>
       ) : (
-        <Box sx={styles.emptyStatistics}>
-          <Suspense fallback={<InterviewFeedbackSkeleton />}>
-            <Typography className='emptyTitle' sx={styles.interviewersAssessmentTitle} variant='h6'>
-              {t('interviews.passedInterviews.interviewersAssessmentTitle')}
-            </Typography>
-            <Box sx={styles.mascotStatsBox}>
-              <EmptyInterviewSvg />
-            </Box>
-            <Typography sx={styles.emptyStatsText} variant='subtitle2'>
-              {t('interviews.emptyInterviewTabs.emptyStatistics')}
-            </Typography>
-          </Suspense>
-        </Box>
+        <MemoizedEmptyStatisticsPassedInterview />
       )}
     </Box>
   );

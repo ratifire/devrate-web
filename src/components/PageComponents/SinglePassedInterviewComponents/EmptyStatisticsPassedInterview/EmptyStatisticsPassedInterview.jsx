@@ -1,0 +1,30 @@
+import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { DARK_THEME } from '@utils/constants/Theme/theme.js';
+import EmptyRequestPicDark from '@assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg';
+import EmptyRequestPicLight from '@assets/pictures/emptyInterviewTabsPictures/requestInterview/requestLight.svg';
+import { useSelector } from 'react-redux';
+import { styles } from './EmptyStatisticsPassedInterview.styles';
+
+const EmptyStatisticsPassedInterview = () => {
+  const { t } = useTranslation();
+  const { mode } = useSelector((state) => state.theme);
+
+  const EmptyInterviewSvg = mode === DARK_THEME ? EmptyRequestPicDark : EmptyRequestPicLight;
+
+  return (
+    <Box sx={styles.emptyStatistics}>
+      <Typography className='emptyTitle' variant='h6'>
+        {t('interviews.passedInterviews.interviewersAssessmentTitle')}
+      </Typography>
+      <Box sx={styles.mascotStatsBox}>
+        <EmptyInterviewSvg />
+      </Box>
+      <Typography sx={styles.emptyStatsText} variant='subtitle2'>
+        {t('interviews.emptyInterviewTabs.emptyStatistics')}
+      </Typography>
+    </Box>
+  );
+};
+
+export default EmptyStatisticsPassedInterview;

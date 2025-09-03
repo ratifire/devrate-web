@@ -1,0 +1,3 @@
+import EmptyStatisticsPassedInterview from '@components/PageComponents/SinglePassedInterviewComponents/EmptyStatisticsPassedInterview/EmptyStatisticsPassedInterview';
+
+export default EmptyStatisticsPassedInterview;
