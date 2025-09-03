@@ -89,9 +89,7 @@ const SinglePassedInterviewPage = () => {
       {hasStatistics || isFetchingPassedInterview ? (
         <>
           <Box sx={styles.interviewersAssessment}>
-            <Typography sx={styles.interviewersAssessmentTitle} variant='h6'>
-              {t('interviews.passedInterviews.interviewersAssessmentTitle')}
-            </Typography>
+            <Typography variant='h6'>{t('interviews.passedInterviews.interviewersAssessmentTitle')}</Typography>
             <Box sx={styles.skillsWrapper}>
               <Box sx={styles.hardSkills}>
                 {role === feedbackInterviewRole.CANDIDATE && (
