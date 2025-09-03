@@ -1,6 +1,7 @@
 import {
   InterviewFeedbackSkeleton,
   InterviewInfoSkeleton,
+  PreviewVideoPassedInterviewSkeleton,
   SkillsSkeleton,
   StatisticSkeleton,
   UserCardSkeleton,
@@ -129,7 +130,7 @@ const SinglePassedInterviewPage = () => {
             </Suspense>
           </Paper>
           <Paper sx={styles.interviewPreviewVideo}>
-            <Suspense fallback={'loading'}>
+            <Suspense fallback={<PreviewVideoPassedInterviewSkeleton />}>
               <MemoizedPreviewVideoPassedInterview />
             </Suspense>
           </Paper>

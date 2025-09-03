@@ -10,6 +10,7 @@ import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSl
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { useTranslation } from 'react-i18next';
+import { PreviewVideoPassedInterviewSkeleton } from '@components/UI/Skeleton';
 import { styles } from './PreviewVideoPassedInterview.styles';
 
 const PreviewVideoPassedInterview = () => {
@@ -67,7 +68,7 @@ const PreviewVideoPassedInterview = () => {
     isFetchingAvatar;
 
   if (isFetching) {
-    return <div>Loading...</div>;
+    return <PreviewVideoPassedInterviewSkeleton />;
   }
 
   if (isError) {
