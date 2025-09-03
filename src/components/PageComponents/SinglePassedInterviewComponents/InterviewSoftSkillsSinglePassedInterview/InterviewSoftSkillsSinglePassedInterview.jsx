@@ -4,12 +4,14 @@ import {
   getAverageSkillsMark,
   getSkillsArray,
 } from '@components/PageComponents/SinglePassedInterviewComponents/helpers';
-import InterviewSoftSkills from '@components/PageComponents/InterviewsComponents/InterviewSoftSkills';
 import { SkillsSkeleton } from '@components/UI/Skeleton';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import EmptySkills from '@components/UI/Specialization/EmptySkills';
+import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
+import { useTranslation } from 'react-i18next';
 
 const InterviewSoftSkillsSinglePassedInterview = () => {
+  const { t } = useTranslation();
   const { interviewId } = useParams();
   const {
     data: interviewData,
@@ -35,7 +37,14 @@ const InterviewSoftSkillsSinglePassedInterview = () => {
 
   const averageSoftSkillsMark = getAverageSkillsMark(softSkillsArray);
 
-  return <InterviewSoftSkills averageSoftSkillsMark={averageSoftSkillsMark} softSkills={softSkillsArray} />;
+  return (
+    <SpecializationSkills
+      averageMark={averageSoftSkillsMark}
+      skills={softSkillsArray}
+      subTitle={t('specialization.softSkills.averageMark')}
+      title={t('specialization.softSkills.title')}
+    />
+  );
 };
 
 export default InterviewSoftSkillsSinglePassedInterview;
