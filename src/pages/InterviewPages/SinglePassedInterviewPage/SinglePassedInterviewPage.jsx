@@ -1,4 +1,5 @@
 import {
+  EmptyStatisticsSkeleton,
   InterviewFeedbackSkeleton,
   InterviewInfoSkeleton,
   PreviewVideoPassedInterviewSkeleton,
@@ -16,11 +17,14 @@ import {
   getAverageSkillsMark,
   getSkillsArray,
 } from '@components/PageComponents/SinglePassedInterviewComponents/helpers';
-import EmptyStatisticsPassedInterview from '@components/PageComponents/SinglePassedInterviewComponents/EmptyStatisticsPassedInterview';
 import { styles } from './SinglePassedInterviewPage.styles';
 
 const UserCardSinglePassedInterview = lazy(
   () => import('@components/PageComponents/SinglePassedInterviewComponents/UserCardSinglePassedInterview')
+);
+
+const EmptyStatisticsPassedInterview = lazy(
+  () => import('@components/PageComponents/SinglePassedInterviewComponents/EmptyStatisticsPassedInterview')
 );
 
 const PreviewVideoPassedInterview = lazy(
@@ -122,7 +126,11 @@ const SinglePassedInterviewPage = () => {
           </Box>
         </>
       ) : (
-        <MemoizedEmptyStatisticsPassedInterview />
+        <Box sx={styles.emptyStatistics}>
+          <Suspense fallback={<EmptyStatisticsSkeleton />}>
+            <MemoizedEmptyStatisticsPassedInterview />
+          </Suspense>
+        </Box>
       )}
     </Box>
   );
