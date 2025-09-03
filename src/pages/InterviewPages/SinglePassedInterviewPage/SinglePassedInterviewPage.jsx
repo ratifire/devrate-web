@@ -20,7 +20,7 @@ import {
 } from '@components/PageComponents/SinglePassedInterviewComponents/helpers';
 import EmptyRequestPicDark from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
 import EmptyRequestPicLight from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestLight.svg?react';
-import { styles } from './SingleIPassednterviewPage.styles.js';
+import { styles } from './SinglePassedInterviewPage.styles.js';
 
 const UserCardSinglePassedInterview = lazy(
   () => import('@components/PageComponents/SinglePassedInterviewComponents/UserCardSinglePassedInterview')
