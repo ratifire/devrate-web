@@ -42,7 +42,12 @@ import {
 } from './Pages/scheduledInterviewSkeleton';
 import InterviewRequestSkeleton from './Pages/InterviewRequestSkeleton';
 
-import { InterviewInfoSkeleton, InterviewFeedbackSkeleton, UserCardSkeleton } from './Pages/interviewSkeleton';
+import {
+  InterviewInfoSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
+  PreviewVideoPassedInterviewSkeleton,
+} from './Pages/interviewSkeleton';
 
 export {
   BlogSkeleton,
@@ -84,4 +89,5 @@ export {
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
   ChangeLanguageSkeleton,
+  PreviewVideoPassedInterviewSkeleton,
 };

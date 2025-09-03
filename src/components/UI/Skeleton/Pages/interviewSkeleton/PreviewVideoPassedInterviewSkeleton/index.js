@@ -1,0 +1,3 @@
+import PreviewVideoPassedInterviewSkeleton from '@components/UI/Skeleton/Pages/interviewSkeleton/PreviewVideoPassedInterviewSkeleton/PreviewVideoPassedInterviewSkeleton';
+
+export default PreviewVideoPassedInterviewSkeleton;
