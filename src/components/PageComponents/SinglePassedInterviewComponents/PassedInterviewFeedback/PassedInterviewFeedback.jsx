@@ -6,11 +6,11 @@ import { useParams } from 'react-router';
 import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
 import { InterviewFeedbackSkeleton } from '@components/UI/Skeleton';
 import { ErrorComponent } from '@components/UI/Exceptions';
-import { styles } from './InterviewFeedback.styles';
+import { styles } from './PassedInterviewFeedback.styles.js';
 
 const MAX_FEEDBACK_LENGTH = 420;
 
-const InterviewFeedback = () => {
+const PassedInterviewFeedback = () => {
   const [expanded, setExpanded] = useState(false);
   const { t } = useTranslation();
   const { interviewId } = useParams();
@@ -56,4 +56,4 @@ const InterviewFeedback = () => {
   );
 };
 
-export default InterviewFeedback;
+export default PassedInterviewFeedback;
