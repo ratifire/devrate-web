@@ -7,20 +7,20 @@ import {
   UserCardSkeleton,
 } from '@components/UI/Skeleton';
 import { Box, Typography } from '@mui/material';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
-import { DARK_THEME } from '@utils/constants/Theme/theme.js';
+import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
+import { DARK_THEME } from '@utils/constants/Theme/theme';
 import { lazy, memo, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole.js';
+import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
 import {
   getAverageSkillsMark,
   getSkillsArray,
 } from '@components/PageComponents/SinglePassedInterviewComponents/helpers';
 import EmptyRequestPicDark from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestDark.svg?react';
 import EmptyRequestPicLight from '../../../assets/pictures/emptyInterviewTabsPictures/requestInterview/requestLight.svg?react';
-import { styles } from './SinglePassedInterviewPage.styles.js';
+import { styles } from './SinglePassedInterviewPage.styles';
 
 const UserCardSinglePassedInterview = lazy(
   () => import('@components/PageComponents/SinglePassedInterviewComponents/UserCardSinglePassedInterview')
