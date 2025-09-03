@@ -1,15 +1,17 @@
-import InterviewHardSkills from '@components/PageComponents/InterviewsComponents/InterviewHardSkills/index.js';
 import {
   getAverageSkillsMark,
   getSkillsArray,
-} from '@components/PageComponents/SinglePassedInterviewComponents/helpers/index.js';
+} from '@components/PageComponents/SinglePassedInterviewComponents/helpers';
 import { useParams } from 'react-router';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
-import EmptySkills from '@components/UI/Specialization/EmptySkills/index.js';
-import { SkillsSkeleton } from '@components/UI/Skeleton/index.js';
-import { ErrorComponent } from '@components/UI/Exceptions/index.js';
+import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
+import EmptySkills from '@components/UI/Specialization/EmptySkills';
+import { SkillsSkeleton } from '@components/UI/Skeleton';
+import { ErrorComponent } from '@components/UI/Exceptions';
+import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
+import { useTranslation } from 'react-i18next';
 
 const InterviewHardSkillsSinglePassedInterview = () => {
+  const { t } = useTranslation();
   const { interviewId } = useParams();
   const {
     data: interviewData,
@@ -35,7 +37,14 @@ const InterviewHardSkillsSinglePassedInterview = () => {
 
   const averageHardSkillsMark = getAverageSkillsMark(hardSkillsArray);
 
-  return <InterviewHardSkills averageHardSkillsMark={averageHardSkillsMark} hardSkills={hardSkillsArray} />;
+  return (
+    <SpecializationSkills
+      averageMark={averageHardSkillsMark}
+      skills={hardSkillsArray}
+      subTitle={t('specialization.hardSkills.averageMark')}
+      title={t('specialization.hardSkills.title')}
+    />
+  );
 };
 
 export default InterviewHardSkillsSinglePassedInterview;
