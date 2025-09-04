@@ -34,6 +34,7 @@ const StatisticPassedInterview = () => {
   return (
     <InterviewStatistics
       hardSkillMark={role === feedbackInterviewRole.CANDIDATE ? averageHardSkillsMark : 0}
+      role={role}
       softSkillMark={averageSoftSkillsMark}
     />
   );
