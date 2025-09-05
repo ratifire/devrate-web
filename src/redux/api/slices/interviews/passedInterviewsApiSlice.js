@@ -58,6 +58,5 @@ const passedInterviewApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetAllPassedInterviewsQuery,
   useLazyGetAllPassedInterviewsQuery,
-  useGetPassedInterviewByIdQuery,
   useLazyGetPassedInterviewByIdQuery,
 } = passedInterviewApiSlice;
