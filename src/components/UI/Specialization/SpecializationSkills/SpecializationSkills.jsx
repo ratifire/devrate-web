@@ -2,14 +2,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import CustomTooltip from '@components/UI/CustomTooltip/index.js';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { useTranslation } from 'react-i18next';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
+import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
 import { useParams } from 'react-router';
+import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
+import { SKILLS_TYPES } from '@utils/constants/skillsTypes';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
 import { SkillsSkeleton } from '../../Skeleton';
-import EmptySkills from '../EmptySkills/index.js';
+import EmptySkills from '../EmptySkills';
 import { styles } from './SpecializationSkills.styles';
 
 const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
@@ -28,19 +30,18 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
 
     if (!allSameType || !firstType) return styles.skillsContainer;
 
-    if (role === 'INTERVIEWER') {
-      return [styles.skillsContainer, firstType === 'SOFT_SKILL' ? styles.passedSoftSkills : styles.passedHardSkills];
+    if (role === feedbackInterviewRole.INTERVIEWER) {
+      return [
+        styles.skillsContainer,
+        firstType === SKILLS_TYPES.SOFT_SKILL ? styles.passedSoftSkills : styles.passedHardSkills,
+      ];
     }
 
-    return [styles.skillsContainer, firstType === 'HARD_SKILL' ? styles.hardSkills : styles.softSkills];
+    return [styles.skillsContainer, firstType === SKILLS_TYPES.HARD_SKILL ? styles.hardSkills : styles.softSkills];
   };
 
   if (isFetching) {
     return <SkillsSkeleton />;
-  }
-
-  if (role === 'INTERVIEWER' && title === 'Hard skills') {
-    return null;
   }
 
   if (isError) {
