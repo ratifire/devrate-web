@@ -48,6 +48,7 @@ import {
   UserCardSkeleton,
   PreviewVideoPassedInterviewSkeleton,
   EmptyStatisticsSkeleton,
+  SinglePassedInterviewSkeleton,
 } from './Pages/interviewSkeleton';
 
 export {
@@ -92,4 +93,5 @@ export {
   ChangeLanguageSkeleton,
   PreviewVideoPassedInterviewSkeleton,
   EmptyStatisticsSkeleton,
+  SinglePassedInterviewSkeleton,
 };

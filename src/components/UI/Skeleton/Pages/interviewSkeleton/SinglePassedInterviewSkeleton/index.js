@@ -1,0 +1,3 @@
+import SinglePassedInterviewSkeleton from '@components/UI/Skeleton/Pages/interviewSkeleton/SinglePassedInterviewSkeleton/SinglePassedInterviewSkeleton';
+
+export default SinglePassedInterviewSkeleton;

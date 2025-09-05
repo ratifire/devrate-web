@@ -3,6 +3,7 @@ import {
   InterviewFeedbackSkeleton,
   InterviewInfoSkeleton,
   PreviewVideoPassedInterviewSkeleton,
+  SinglePassedInterviewSkeleton,
   SkillsSkeleton,
   StatisticSkeleton,
   UserCardSkeleton,
@@ -78,6 +79,10 @@ const SinglePassedInterviewPage = () => {
   const hasStatistics =
     (role === feedbackInterviewRole.CANDIDATE && averageHardSkillsMark > 0) || averageSoftSkillsMark > 0;
 
+  if (isFetchingPassedInterview) {
+    return <SinglePassedInterviewSkeleton />;
+  }
+
   return (
     <Box className='InterviewsPage' sx={styles.mainContent}>
       <Box sx={styles.userInfo}>
@@ -93,7 +98,9 @@ const SinglePassedInterviewPage = () => {
       {hasStatistics || isFetchingPassedInterview ? (
         <>
           <Box sx={styles.interviewersAssessment}>
-            <Typography variant='h6'>{t('interviews.passedInterviews.interviewersAssessmentTitle')}</Typography>
+            <Typography sx={styles.title} variant='h6'>
+              {t('interviews.passedInterviews.interviewersAssessmentTitle')}
+            </Typography>
             <Box sx={styles.skillsWrapper}>
               <Box sx={styles.hardSkills}>
                 {role === feedbackInterviewRole.CANDIDATE && (

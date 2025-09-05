@@ -1,9 +1,9 @@
 export const styles = {
   mainContent: (theme) => ({
-    maxHeight: 'calc(100vh - 80px)',
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: '180px 12px 216px auto auto',
+    gridTemplateRows: 'repeat(10, auto)',
+    alignSelf: 'start',
     width: '100%',
     gridGap: theme.spacing(4),
     ' > div': {
@@ -12,7 +12,7 @@ export const styles = {
   }),
   userInfo: (theme) => ({
     gridColumn: '1/6',
-    gridRow: '1/2',
+    gridRow: '1/4',
     ' > div': {
       maxWidth: '100%',
       borderRadius: theme.spacing(2),
@@ -21,7 +21,7 @@ export const styles = {
   }),
   interviewersAssessment: (theme) => ({
     gridColumn: '1/6',
-    gridRow: '2/7',
+    gridRow: '4/10',
     padding: theme.spacing(4),
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     ' > div div': {
@@ -72,13 +72,13 @@ export const styles = {
   }),
   interviewInfo: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '1/3',
+    gridRow: '1/6',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
   }),
 
   statistics: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '3/4',
+    gridRow: '6/7',
     ' > div': {
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
@@ -86,11 +86,11 @@ export const styles = {
   }),
   interviewFeedback: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '4/5',
-    minHeight: '216px',
+    gridRow: '7/8',
+    // minHeight: '216px',
     '> div': {
       height: '100%',
-      minHeight: '216px',
+      // minHeight: '216px',
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
       '> div': {
@@ -104,7 +104,7 @@ export const styles = {
   }),
   interviewPreviewVideo: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '5/6',
+    gridRow: '8/10',
     minHeight: '372px',
     ' > div': {
       borderRadius: theme.spacing(2),
@@ -129,4 +129,7 @@ export const styles = {
       marginBottom: 0,
     },
   }),
+  title: {
+    marginBottom: '16px',
+  },
 };
