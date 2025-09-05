@@ -13,7 +13,7 @@ const InterviewHardSkillsSinglePassedInterview = () => {
 
   const interviewData = location.state.event;
 
-  const { hardSkills } = interviewData;
+  const { hardSkills, role } = interviewData;
 
   const hardSkillsArray = getSkillsArray(hardSkills);
 
@@ -26,6 +26,7 @@ const InterviewHardSkillsSinglePassedInterview = () => {
   return (
     <SpecializationSkills
       averageMark={averageHardSkillsMark}
+      role={role}
       skills={hardSkillsArray}
       subTitle={t('specialization.hardSkills.averageMark')}
       title={t('specialization.hardSkills.title')}

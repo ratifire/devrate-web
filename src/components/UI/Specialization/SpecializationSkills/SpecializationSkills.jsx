@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import CustomTooltip from '@components/UI/CustomTooltip';
 import { useTranslation } from 'react-i18next';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
-import { useParams } from 'react-router';
 import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
 import { SKILLS_TYPES } from '@utils/constants/skillsTypes';
 import { ItemSkill } from '../SkillsItem';
@@ -14,13 +12,10 @@ import { SkillsSkeleton } from '../../Skeleton';
 import EmptySkills from '../EmptySkills';
 import { styles } from './SpecializationSkills.styles';
 
-const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
+const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle, role }) => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
   const { t } = useTranslation();
-  const { interviewId } = useParams();
-  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
-  const role = interviewData?.role;
 
   const getSkillsContainerStyle = () => {
     if (skills.length === 0) return styles.skillsContainer;
@@ -105,6 +100,7 @@ SpecializationSkills.propTypes = {
   openModal: PropTypes.func,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
+  role: PropTypes.oneOf([feedbackInterviewRole.INTERVIEWER, feedbackInterviewRole.CANDIDATE]),
 };
 
 export default SpecializationSkills;
