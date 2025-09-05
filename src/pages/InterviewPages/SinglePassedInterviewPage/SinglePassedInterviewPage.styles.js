@@ -31,17 +31,6 @@ export const styles = {
       backgroundColor: theme.palette.interviewPage.innerBackground,
     },
   }),
-
-  skillsWrapper: (theme, role) =>
-    role === 'INTERVIEWER'
-      ? {
-          height: 'calc(100% - 48px)',
-          '& > div': {
-            height: '100%',
-          },
-        }
-      : {},
-
   hardSkills: (theme) => ({
     height: '100%',
     width: '100%',

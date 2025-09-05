@@ -101,7 +101,7 @@ const SinglePassedInterviewPage = () => {
             <Typography sx={styles.title} variant='h6'>
               {t('interviews.passedInterviews.interviewersAssessmentTitle')}
             </Typography>
-            <Box sx={styles.skillsWrapper}>
+            <Box>
               <Box sx={styles.hardSkills}>
                 {role === feedbackInterviewRole.CANDIDATE && (
                   <Suspense fallback={<SkillsSkeleton />}>

@@ -20,13 +20,11 @@ const SinglePassedInterviewSkeleton = () => {
       </Box>
       <Box sx={styles.interviewersAssessment}>
         <Skeleton height={32} sx={styles.title} variant={'rounded'} />
-        <Box sx={styles.skillsWrapper}>
-          <Box sx={styles.hardSkills}>
-            <SkillsSkeleton />
-          </Box>
-          <Box sx={styles.sortSkills}>
-            <SkillsSkeleton />
-          </Box>
+        <Box sx={styles.hardSkills}>
+          <SkillsSkeleton />
+        </Box>
+        <Box sx={styles.sortSkills}>
+          <SkillsSkeleton />
         </Box>
       </Box>
       <Box sx={styles.statistics}>
