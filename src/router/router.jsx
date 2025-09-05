@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 import ErrorPage from '@pages/ErrorPage';
 import HomePage from '@pages/HomePage/HomePage';
-import PrivateRoutes from '@redux/auth/PrivateRoutes.jsx';
+import PrivateRoutes from '@redux/auth/PrivateRoutes';
 import PersonalProfilePage from '@pages/ProfilePages/PersonalProfilePage';
 import SpecializationPage from '@pages/SpecializationPage';
 import SchedulePage from '@pages/SchedulePage';
@@ -18,11 +18,10 @@ import {
   SinglePassedInterviewPage,
   SingleRequestInterviewPage,
 } from '@pages/InterviewPages';
-import SettingsPage from '@pages/SettingsPage/index.js';
-import { GeneralSettingsPage, NotificationsPage } from '@pages/SettingsPage/SubpagesSettings/index.js';
-import UserProfileGuard from './guards/UserProfileGuard.jsx';
+import SettingsPage from '@pages/SettingsPage';
+import { GeneralSettingsPage, NotificationsPage } from '@pages/SettingsPage/SubpagesSettings';
+import { ScheduledInterviewsGuard, UserProfileGuard } from '@router/guards';
 import navigationLinks from './links';
-import ScheduledInterviewsGuard from './guards/ScheduledInterviewsGuard.jsx';
 
 const router = createBrowserRouter([
   {
