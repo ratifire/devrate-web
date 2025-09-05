@@ -23,6 +23,7 @@ export const styles = {
     gridColumn: '1/6',
     gridRow: '4/10',
     padding: theme.spacing(4),
+    alignSelf: 'baseline',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     ' > div div': {
       borderRadius: theme.spacing(1),
