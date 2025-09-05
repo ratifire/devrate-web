@@ -61,7 +61,7 @@ const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
   const location = useLocation();
 
-  const interviewData = location.state.event;
+  const interviewData = location.state?.event;
 
   if (!interviewData) {
     return <SinglePassedInterviewSkeleton />;
