@@ -3,19 +3,16 @@ import { UserCard } from '@components/UI/Interview';
 import { UserCardSkeleton } from '@components/UI/Skeleton';
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
-import { useParams } from 'react-router';
+import { useLocation } from 'react-router';
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { ErrorComponent } from '@components/UI/Exceptions';
 
 const UserCardSinglePassedInterview = () => {
-  const { interviewId } = useParams();
-  const {
-    data: interviewData,
-    isFetching: isFetchingPassedInterview,
-    isError: isErrorPassedInterview,
-  } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
+  const location = useLocation();
+
+  const interviewData = location.state.event;
   const attendeeId = interviewData?.attendeeId;
+
   const {
     data: userContacts,
     isFetching: isFetchingContacts,
@@ -29,8 +26,8 @@ const UserCardSinglePassedInterview = () => {
     isError: isErrorAvatar,
   } = useGetAvatarUserQuery(attendeeId, { skip: !attendeeId });
 
-  const isFetchingUserCard = isFetchingContacts || isFetchingAvatar || isFetchingPassedInterview;
-  const isError = isErrorPersonalUser || isErrorPersonalUser || isErrorAvatar | isErrorPassedInterview;
+  const isFetchingUserCard = isFetchingContacts || isFetchingAvatar;
+  const isError = isErrorPersonalUser || isErrorPersonalUser || isErrorAvatar;
 
   if (isFetchingUserCard) {
     return <UserCardSkeleton />;

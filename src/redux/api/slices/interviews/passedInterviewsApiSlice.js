@@ -55,4 +55,9 @@ const passedInterviewApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetAllPassedInterviewsQuery, useGetPassedInterviewByIdQuery } = passedInterviewApiSlice;
+export const {
+  useGetAllPassedInterviewsQuery,
+  useLazyGetAllPassedInterviewsQuery,
+  useGetPassedInterviewByIdQuery,
+  useLazyGetPassedInterviewByIdQuery,
+} = passedInterviewApiSlice;

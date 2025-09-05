@@ -3,8 +3,7 @@ import ReactPlayer from 'react-player';
 import { useState } from 'react';
 import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
-import { useParams } from 'react-router';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
+import { useLocation } from 'react-router';
 import InterviewPreviewVideo from '@components/PageComponents/InterviewsComponents/InterviewPreviewVideo';
 import { useGetAvatarUserQuery } from '@redux/api/slices/user/avatar/avatarApiSlice';
 import { lvlMastery } from '@utils/constants/masteryLvl';
@@ -15,14 +14,12 @@ import { styles } from './PreviewVideoPassedInterview.styles';
 
 const PreviewVideoPassedInterview = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const { interviewId } = useParams();
   const { t } = useTranslation();
-  const {
-    data: interviewData,
-    isFetching: isFetchingPassedInterview,
-    isError: isErrorPassedInterview,
-  } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
+  const location = useLocation();
+
+  const interviewData = location.state.event;
   const attendeeId = interviewData?.attendeeId;
+
   const {
     data: avatar,
     isFetching: isFetchingAvatar,
@@ -51,18 +48,9 @@ const PreviewVideoPassedInterview = () => {
     skip: !interviewerId,
   });
 
-  const isError =
-    isErrorPassedInterview ||
-    isErrorUserContacts ||
-    isErrorCandidateContacts ||
-    isErrorAvatar ||
-    isErrorInterviewerAvatar;
+  const isError = isErrorUserContacts || isErrorCandidateContacts || isErrorAvatar || isErrorInterviewerAvatar;
   const isFetching =
-    isFetchingPassedInterview ||
-    isFetchingUserContacts ||
-    isFetchingCandidateContacts ||
-    isFetchingInterviewerAvatar ||
-    isFetchingAvatar;
+    isFetchingUserContacts || isFetchingCandidateContacts || isFetchingInterviewerAvatar || isFetchingAvatar;
 
   if (isFetching) {
     return <PreviewVideoPassedInterviewSkeleton />;

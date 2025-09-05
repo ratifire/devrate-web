@@ -9,10 +9,9 @@ import {
   UserCardSkeleton,
 } from '@components/UI/Skeleton';
 import { Box, Typography } from '@mui/material';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
 import { lazy, memo, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router';
+import { useLocation } from 'react-router';
 import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
 import {
   getAverageSkillsMark,
@@ -60,15 +59,15 @@ const MemoizedEmptyStatisticsPassedInterview = memo(EmptyStatisticsPassedIntervi
 
 const SinglePassedInterviewPage = () => {
   const { t } = useTranslation();
-  const { interviewId } = useParams();
-  const { data: interviewData, isFetching: isFetchingPassedInterview } = useGetPassedInterviewByIdQuery(
-    { interviewId },
-    { skip: !interviewId }
-  );
+  const location = useLocation();
 
-  const role = interviewData?.role;
+  const interviewData = location.state.event;
 
-  const { hardSkills = {}, softSkills = {} } = interviewData ?? {};
+  if (!interviewData) {
+    return <SinglePassedInterviewSkeleton />;
+  }
+
+  const { hardSkills, softSkills, role } = interviewData;
 
   const hardSkillsArray = getSkillsArray(hardSkills);
   const softSkillsArray = getSkillsArray(softSkills);
@@ -78,10 +77,6 @@ const SinglePassedInterviewPage = () => {
 
   const hasStatistics =
     (role === feedbackInterviewRole.CANDIDATE && averageHardSkillsMark > 0) || averageSoftSkillsMark > 0;
-
-  if (isFetchingPassedInterview) {
-    return <SinglePassedInterviewSkeleton />;
-  }
 
   return (
     <Box className='InterviewsPage' sx={styles.mainContent}>
@@ -95,7 +90,7 @@ const SinglePassedInterviewPage = () => {
           <MemoizedInterviewInfo />
         </Suspense>
       </Box>
-      {hasStatistics || isFetchingPassedInterview ? (
+      {hasStatistics ? (
         <>
           <Box sx={styles.interviewersAssessment}>
             <Typography sx={styles.title} variant='h6'>

@@ -20,7 +20,7 @@ import {
 } from '@pages/InterviewPages';
 import SettingsPage from '@pages/SettingsPage';
 import { GeneralSettingsPage, NotificationsPage } from '@pages/SettingsPage/SubpagesSettings';
-import { ScheduledInterviewsGuard, UserProfileGuard } from '@router/guards';
+import { PassedInterviewsGuard, ScheduledInterviewsGuard, UserProfileGuard } from '@router/guards';
 import navigationLinks from './links';
 
 const router = createBrowserRouter([
@@ -97,11 +97,17 @@ const router = createBrowserRouter([
                   },
                   {
                     path: navigationLinks.passedInterviews,
-                    element: <PassedInterviewsPage />,
+                    element: <PassedInterviewsGuard />,
                     children: [
                       {
-                        path: `${navigationLinks.passedInterviews}/:interviewId`,
-                        element: <SinglePassedInterviewPage />,
+                        path: navigationLinks.passedInterviews,
+                        element: <PassedInterviewsPage />,
+                        children: [
+                          {
+                            path: `${navigationLinks.passedInterviews}/:interviewId`,
+                            element: <SinglePassedInterviewPage />,
+                          },
+                        ],
                       },
                     ],
                   },

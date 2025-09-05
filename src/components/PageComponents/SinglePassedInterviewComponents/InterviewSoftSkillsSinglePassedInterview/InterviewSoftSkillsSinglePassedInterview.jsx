@@ -1,31 +1,17 @@
-import { useParams } from 'react-router';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
+import { useLocation } from 'react-router';
 import {
   getAverageSkillsMark,
   getSkillsArray,
 } from '@components/PageComponents/SinglePassedInterviewComponents/helpers';
-import { SkillsSkeleton } from '@components/UI/Skeleton';
-import { ErrorComponent } from '@components/UI/Exceptions';
 import EmptySkills from '@components/UI/Specialization/EmptySkills';
 import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
 import { useTranslation } from 'react-i18next';
 
 const InterviewSoftSkillsSinglePassedInterview = () => {
   const { t } = useTranslation();
-  const { interviewId } = useParams();
-  const {
-    data: interviewData,
-    isFetching: isFetchingPassedInterview,
-    isError: isErrorPassedInterview,
-  } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
+  const location = useLocation();
 
-  if (isErrorPassedInterview) {
-    return <ErrorComponent />;
-  }
-
-  if (isFetchingPassedInterview) {
-    return <SkillsSkeleton />;
-  }
+  const interviewData = location.state.event;
 
   const { softSkills } = interviewData;
 

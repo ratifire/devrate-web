@@ -4,26 +4,12 @@ import {
   getAverageSkillsMark,
   getSkillsArray,
 } from '@components/PageComponents/SinglePassedInterviewComponents/helpers';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
-import { useParams } from 'react-router';
-import { ErrorComponent } from '@components/UI/Exceptions';
-import { StatisticSkeleton } from '@components/UI/Skeleton';
+import { useLocation } from 'react-router';
 
 const StatisticPassedInterview = () => {
-  const { interviewId } = useParams();
-  const {
-    data: interviewData,
-    isFetching: isFetchingPassedInterview,
-    isError: isErrorPassedInterview,
-  } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
+  const location = useLocation();
 
-  if (isFetchingPassedInterview) {
-    return <StatisticSkeleton />;
-  }
-
-  if (isErrorPassedInterview) {
-    return <ErrorComponent />;
-  }
+  const interviewData = location.state.event;
 
   const { softSkills, hardSkills, role } = interviewData;
   const hardSkillsArray = getSkillsArray(hardSkills);
