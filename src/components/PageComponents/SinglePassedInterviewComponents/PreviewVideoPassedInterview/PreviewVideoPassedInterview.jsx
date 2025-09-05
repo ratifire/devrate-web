@@ -28,7 +28,6 @@ const PreviewVideoPassedInterview = () => {
     isFetching: isFetchingAvatar,
     isError: isErrorAvatar,
   } = useGetAvatarUserQuery(attendeeId, { skip: !attendeeId });
-  const { attendeeMasteryLevel, attendeeSpecialization, videoUrl = interviewData?.videoUrl } = interviewData;
   const interviewerId = interviewData?.userId;
   const {
     data: candidateContacts,
@@ -52,8 +51,6 @@ const PreviewVideoPassedInterview = () => {
     skip: !interviewerId,
   });
 
-  const showPreview = !isPlaying || !!videoUrl;
-
   const isError =
     isErrorPassedInterview ||
     isErrorUserContacts ||
@@ -75,7 +72,7 @@ const PreviewVideoPassedInterview = () => {
     return <ErrorComponent />;
   }
 
-  const role = interviewData?.role;
+  const { attendeeMasteryLevel, attendeeSpecialization, videoUrl = interviewData?.videoUrl, role } = interviewData;
   const level = lvlMastery[attendeeMasteryLevel];
   const { firstName, lastName } = userContacts;
   const { firstName: candidateFirstName, lastName: candidateLastName } = candidateContacts;
@@ -105,6 +102,8 @@ const PreviewVideoPassedInterview = () => {
   const handlePlayPressed = () => {
     setIsPlaying(true);
   };
+
+  const showPreview = !isPlaying || !videoUrl;
 
   return (
     <Box sx={styles.container}>
