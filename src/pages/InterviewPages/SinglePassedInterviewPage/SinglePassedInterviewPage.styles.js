@@ -1,3 +1,5 @@
+import { LIGHT_THEME } from '@utils/constants/Theme/theme';
+
 export const styles = {
   mainContent: (theme) => ({
     display: 'grid',
@@ -77,14 +79,12 @@ export const styles = {
   interviewFeedback: (theme) => ({
     gridColumn: '6/13',
     gridRow: '7/8',
-    // minHeight: '216px',
     '> div': {
       height: '100%',
-      // minHeight: '216px',
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
       '> div': {
-        ...(theme.palette.mode === 'light' && {
+        ...(theme.palette.mode === LIGHT_THEME && {
           borderColor: theme.palette.interviewPage.innerBorderColor,
           borderWidth: '1px',
           borderStyle: 'solid',
