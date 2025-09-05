@@ -64,13 +64,14 @@ export const styles = {
   }),
   interviewInfo: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '1/6',
+    gridRow: '1/5',
+    alignSelf: 'baseline',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
   }),
 
   statistics: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '6/7',
+    gridRow: '5/6',
     ' > div': {
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
@@ -78,7 +79,7 @@ export const styles = {
   }),
   interviewFeedback: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '7/8',
+    gridRow: '6/7',
     '> div': {
       height: '100%',
       borderRadius: theme.spacing(2),
@@ -94,7 +95,8 @@ export const styles = {
   }),
   interviewPreviewVideo: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '8/10',
+    gridRow: '7/8',
+    alignSelf: 'baseline',
     minHeight: '372px',
     ' > div': {
       borderRadius: theme.spacing(2),

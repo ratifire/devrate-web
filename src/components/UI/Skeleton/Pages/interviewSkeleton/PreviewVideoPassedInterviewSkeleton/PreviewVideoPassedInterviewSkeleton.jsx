@@ -5,7 +5,7 @@ const PreviewVideoPassedInterviewSkeleton = () => {
   return (
     <Box sx={styles.box}>
       <Skeleton height={24} variant='rounded' width={56} />
-      <Skeleton height={460} variant='rounded' width={'100%'} />
+      <Skeleton height={430} variant='rounded' width={'100%'} />
     </Box>
   );
 };
