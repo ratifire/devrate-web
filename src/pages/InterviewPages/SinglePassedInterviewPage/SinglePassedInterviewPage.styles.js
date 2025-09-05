@@ -49,7 +49,7 @@ export const styles = {
       }),
     },
   }),
-  sortSkills: (theme) => ({
+  softSkills: (theme) => ({
     width: '100%',
     ' > div': {
       borderRadius: theme.spacing(1),
