@@ -17,7 +17,7 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
   const isDisabled = !activeSpecialization && !mainSpecialization;
   const { t } = useTranslation();
   const { interviewId } = useParams();
-  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId });
+  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId }, { skip: !interviewId });
   const role = interviewData?.role;
 
   const getSkillsContainerStyle = () => {
