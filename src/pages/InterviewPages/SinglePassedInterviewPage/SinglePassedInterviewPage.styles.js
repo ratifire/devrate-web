@@ -106,7 +106,7 @@ export const styles = {
   emptyStatistics: (theme) => ({
     position: 'relative',
     gridColumn: '1/13',
-    gridRow: '3/5',
+    gridRow: '5/10',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
