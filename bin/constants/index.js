@@ -1,0 +1,3 @@
+import COMPONENT_TYPES from './COMPONENT_TYPES.js';
+
+export { COMPONENT_TYPES };
