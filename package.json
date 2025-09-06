@@ -67,6 +67,9 @@
     "lint": "eslint ./src/**/*.{js,jsx}",
     "lint:fix": "eslint ./src/**/*.{js,jsx} --fix"
   },
+  "bin": {
+    "generate": "./bin/generate.js"
+  },
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",
