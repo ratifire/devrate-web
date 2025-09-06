@@ -104,7 +104,7 @@ const SinglePassedInterviewPage = () => {
                   </Suspense>
                 )}
               </Box>
-              <Box sx={styles.sortSkills}>
+              <Box sx={styles.softSkills}>
                 <Suspense fallback={<SkillsSkeleton />}>
                   <MemoizedInterviewSoftSkillsSinglePassedInterview />
                 </Suspense>

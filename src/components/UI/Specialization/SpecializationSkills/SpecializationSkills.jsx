@@ -12,7 +12,17 @@ import { SkillsSkeleton } from '../../Skeleton';
 import EmptySkills from '../EmptySkills';
 import { styles } from './SpecializationSkills.styles';
 
-const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle, role }) => {
+const SpecializationSkills = ({
+  isFetching,
+  isError,
+  skills,
+  averageMark,
+  openModal,
+  title,
+  subTitle,
+  role,
+  skillType,
+}) => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
   const { t } = useTranslation();
@@ -43,6 +53,10 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
     return <ErrorComponent />;
   }
 
+  if (!skills.length) {
+    return <EmptySkills skillType={skillType} />;
+  }
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.title}>
@@ -61,20 +75,16 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
         )}
       </Box>
       <Box>
-        {skills.length > 0 ? (
-          <Box sx={getSkillsContainerStyle()}>
-            {skills.map((skill) => (
-              <ItemSkill
-                key={skill.id}
-                grows={skill.grows}
-                name={skill.name}
-                value={Math.round(skill.averageMark * 10) / 10}
-              />
-            ))}
-          </Box>
-        ) : (
-          <EmptySkills title={title} />
-        )}
+        <Box sx={getSkillsContainerStyle()}>
+          {skills.map((skill) => (
+            <ItemSkill
+              key={skill.id}
+              grows={skill.grows}
+              name={skill.name}
+              value={Math.round(skill.averageMark * 10) / 10}
+            />
+          ))}
+        </Box>
       </Box>
       <Box sx={styles.markWrapper}>
         <Typography variant='h6'>{subTitle}</Typography>
@@ -101,6 +111,7 @@ SpecializationSkills.propTypes = {
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
   role: PropTypes.oneOf([feedbackInterviewRole.INTERVIEWER, feedbackInterviewRole.CANDIDATE]),
+  skillType: PropTypes.oneOf([SKILLS_TYPES.SOFT_SKILL, SKILLS_TYPES.HARD_SKILL]),
 };
 
 export default SpecializationSkills;

@@ -3,6 +3,7 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
+    padding: '24px',
     gap: '16px',
     '@media(max-width: 991px)': {
       flexDirection: 'column-reverse',
@@ -10,7 +11,7 @@ export const styles = {
   },
   emptySoftSkills: {
     height: '150px',
-    padding: '15px',
+    padding: '24px',
     display: 'flex',
     gap: '16px',
     justifyContent: 'space-between',
