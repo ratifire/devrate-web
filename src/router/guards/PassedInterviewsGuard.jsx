@@ -24,13 +24,23 @@ const PassedInterviewsGuard = () => {
       const { content } = await getPassedInterview({ page: 0, size: 6 }).unwrap();
 
       if (Array.isArray(content) && content.length && !interviewId) {
-        const firstInterviewId = content[0].id;
-        const event = await getPassedInterviewById({ interviewId: firstInterviewId }).unwrap();
+        const firstEvent = content[0];
+        const { id } = firstEvent;
 
-        navigateToInterview({ event, id: firstInterviewId });
+        navigateToInterview({ event: firstEvent, id });
       }
 
       if (interviewId) {
+        const findEvent = content.find((event) => event.id === +interviewId);
+
+        if (findEvent) {
+          const { id } = findEvent;
+
+          navigateToInterview({ event: findEvent, id });
+
+          return;
+        }
+
         const event = await getPassedInterviewById({ interviewId: interviewId }).unwrap();
 
         navigateToInterview({ event, id: interviewId });
