@@ -27,7 +27,7 @@ const UserCardSinglePassedInterview = () => {
   } = useGetAvatarUserQuery(attendeeId, { skip: !attendeeId });
 
   const isFetchingUserCard = isFetchingContacts || isFetchingAvatar;
-  const isError = isErrorPersonalUser || isErrorPersonalUser || isErrorAvatar;
+  const isError = isErrorPersonalUser || isErrorAvatar;
 
   if (isFetchingUserCard) {
     return <UserCardSkeleton />;
