@@ -23,7 +23,7 @@ const SinglePassedInterviewSkeleton = () => {
         <Box sx={styles.hardSkills}>
           <SkillsSkeleton />
         </Box>
-        <Box sx={styles.sortSkills}>
+        <Box sx={styles.softSkills}>
           <SkillsSkeleton />
         </Box>
       </Box>
