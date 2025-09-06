@@ -1,7 +1,7 @@
 import { Box, Typography, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import UserAvatar from '@components/UI/UserAvatar/index.js';
+import UserAvatar from '@components/UI/UserAvatar';
 import { useTheme } from '@mui/material/styles';
 import { styles } from './InterviewPreviewVideo.styles';
 

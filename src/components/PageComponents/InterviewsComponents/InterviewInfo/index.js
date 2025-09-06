@@ -1,3 +1,3 @@
-import InterviewInfo from './InterviewInfo.jsx';
+import InterviewInfo from './InterviewInfo';
 
 export default InterviewInfo;

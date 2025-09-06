@@ -1,2 +1,3 @@
-import InterviewPreviewVideo from './InterviewPreviewVideo.jsx';
+import InterviewPreviewVideo from './InterviewPreviewVideo';
+
 export default InterviewPreviewVideo;

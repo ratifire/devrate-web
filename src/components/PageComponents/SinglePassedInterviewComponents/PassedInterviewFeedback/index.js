@@ -1,3 +1,3 @@
-import InterviewFeedBack from './PassedInterviewFeedback.jsx';
+import InterviewFeedBack from './PassedInterviewFeedback';
 
 export default InterviewFeedBack;
