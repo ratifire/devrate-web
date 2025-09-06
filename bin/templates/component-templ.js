@@ -1,7 +1,7 @@
 export const componentTemplate = ({ name }) =>
   `
     import { Box } from '@mui/material';
-    import { styles } from './${name}.styles.js';
+    import { styles } from './${name}.styles';
     
     const ${name} = () => {
       return (
@@ -23,7 +23,7 @@ export const stylesTemplate = () =>
 
 export const indexTemplate = ({ name }) =>
   `
-    import ${name} from './${name}.jsx';
+    import ${name} from './${name}';
     
     export default ${name};
   `;
