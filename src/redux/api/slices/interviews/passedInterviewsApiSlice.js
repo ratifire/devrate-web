@@ -51,6 +51,16 @@ const passedInterviewApiSlice = apiSlice.injectEndpoints({
     }),
     getPassedInterviewById: builder.query({
       query: ({ interviewId }) => `/interview-histories/${interviewId}`,
+      transformResponse: (event) => {
+        return {
+          ...event,
+          title: event.attendeeSpecialization,
+          date: event.dateTime,
+          hostId: event.attendeeId,
+          hostFirstName: event.attendeeFirstName,
+          hostLastName: event.attendeeLastName,
+        };
+      },
     }),
   }),
 });
