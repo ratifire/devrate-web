@@ -32,7 +32,7 @@ class ComponentGenerator {
     const componentDir = path.join(this.projectRoot, 'src', 'components', componentName);
 
     try {
-      await fs.mkdir(componentDir, { recursive: true });
+      await fs.mkdir(componentDir);
 
       await fs.writeFile(path.join(componentDir, `${componentName}.jsx`), component);
       await fs.writeFile(path.join(componentDir, 'index.js'), index);
@@ -53,7 +53,7 @@ class ComponentGenerator {
     const componentDir = path.join(this.projectRoot, 'src', 'pages', pageName);
 
     try {
-      await fs.mkdir(componentDir, { recursive: true });
+      await fs.mkdir(componentDir);
 
       await fs.writeFile(path.join(componentDir, `${pageName}.jsx`), component);
       await fs.writeFile(path.join(componentDir, 'index.js'), index);
@@ -73,7 +73,7 @@ class ComponentGenerator {
     const sliceDir = path.join(this.projectRoot, 'src', 'redux', 'slices', folderName);
 
     try {
-      await fs.mkdir(sliceDir, { recursive: true });
+      await fs.mkdir(sliceDir);
       await fs.writeFile(path.join(sliceDir, `${slice}.js`), sliceTemplate);
       logger.info(`Slice ${slice} was successfully created in ${sliceDir}`);
     } catch (error) {
@@ -89,7 +89,7 @@ class ComponentGenerator {
     const sliceDir = path.join(this.projectRoot, 'src', 'redux', 'api', 'slices', folderName);
 
     try {
-      await fs.mkdir(sliceDir, { recursive: true });
+      await fs.mkdir(sliceDir);
       await fs.writeFile(path.join(sliceDir, `${slice}.js`), sliceTemplate);
       logger.info(`API slice ${slice} was successfully created in ${sliceDir}`);
     } catch (error) {
