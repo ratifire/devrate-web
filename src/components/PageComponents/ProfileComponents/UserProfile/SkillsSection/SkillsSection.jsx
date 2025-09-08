@@ -2,6 +2,7 @@ import { Box, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
+import floorToOneDecimal from '@utils/helpers/floorToOneDecimal.js';
 import { styles } from './SkillsSection.styles';
 
 const SkillsSection = ({ id }) => {
@@ -11,6 +12,8 @@ const SkillsSection = ({ id }) => {
   const userData = personalData || {};
   const { hardSkillMark = 0, softSkillMark = 0, completedInterviews = 0, conductedInterviews = 0 } = userData;
 
+  const hardSkillMarkFloored = floorToOneDecimal(hardSkillMark);
+  const softSkillMarkFloored = floorToOneDecimal(softSkillMark);
   return (
     <Box sx={styles.skillsWrapper}>
       <Typography sx={styles.skillsTitle} variant='h6'>
@@ -28,7 +31,7 @@ const SkillsSection = ({ id }) => {
           value={hardSkillMark / 2}
         />
         <Typography sx={styles.skillMark} variant='subtitle2'>
-          {hardSkillMark}/10
+          {hardSkillMarkFloored}/10
         </Typography>
       </Box>
       <Box sx={styles.softSkills}>
@@ -43,7 +46,7 @@ const SkillsSection = ({ id }) => {
           value={softSkillMark / 2}
         />
         <Typography sx={styles.skillMark} variant='subtitle2'>
-          {softSkillMark}/10
+          {softSkillMarkFloored}/10
         </Typography>
       </Box>
       <Box sx={styles.interviewHistory}>
