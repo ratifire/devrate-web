@@ -1,5 +1,6 @@
 import { apiSlice } from '@redux/api/apiSlice';
 import { TAG_TYPES } from '@utils/constants/tagTypes.js';
+import mergePaginatedContent from './helpers/mergePaginatedContent.js';
 
 const passedInterviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -20,11 +21,7 @@ const passedInterviewApiSlice = apiSlice.injectEndpoints({
       },
       merge: (currentCache, newData, { arg }) => {
         // Merge the `content` arrays from the current cache and new data
-        if (arg.page === 0) {
-          currentCache.content = newData.content;
-        } else {
-          currentCache.content.push(...newData.content);
-        }
+        return mergePaginatedContent({ arg, currentCache, newData });
       },
       forceRefetch: ({ currentArg, previousArg }) => {
         // Force a refetch if the `page` changes

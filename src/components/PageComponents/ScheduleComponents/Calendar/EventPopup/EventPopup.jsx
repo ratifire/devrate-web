@@ -12,7 +12,7 @@ import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
 import CustomTooltip from '@components/UI/CustomTooltip';
 import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers/index.js';
-import useJoinInterview from '@utils/hooks/useJoinInterview.jsx';
+import useJoinInterview from '@utils/hooks/useJoinInterview.js';
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 

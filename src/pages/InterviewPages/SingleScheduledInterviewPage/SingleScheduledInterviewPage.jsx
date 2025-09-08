@@ -7,6 +7,7 @@ import {
   StatisticSkeleton,
   UserCardScheduledInterviewSkeleton,
 } from '@components/UI/Skeleton';
+import { useLocation } from 'react-router';
 import { styles } from './SingleScheduledInterviewPage.styles';
 
 const UserCardScheduledInterview = lazy(
@@ -26,6 +27,31 @@ const MemoizedScheduledMeeting = memo(ScheduledMeeting);
 const MemoizedInterviewSkills = memo(InterviewSkills);
 
 const SingleScheduledInterviewPage = () => {
+  const location = useLocation();
+  const event = location.state?.event;
+
+  if (!event) {
+    return (
+      <Box className='InterviewsPage' sx={styles.contentWrapper}>
+        <Paper sx={styles.userCardScheduledInterview}>
+          <UserCardScheduledInterviewSkeleton />
+        </Paper>
+        <Paper sx={styles.scheduledMeeting}>
+          <ScheduledMeetingSkeleton />
+        </Paper>
+        <Paper sx={styles.statistic}>
+          <StatisticSkeleton />
+        </Paper>
+        <Paper sx={styles.participantEvaluations}>
+          <ParticipantEvaluationsSkeleton />
+        </Paper>
+        <Paper sx={styles.interviewSkills}>
+          <InterviewSkillsSkeleton />
+        </Paper>
+      </Box>
+    );
+  }
+
   return (
     <Box className='InterviewsPage' sx={styles.contentWrapper}>
       <Paper sx={styles.userCardScheduledInterview}>
