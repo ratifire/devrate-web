@@ -107,6 +107,7 @@ export const styles = {
       flexWrap: 'wrap',
       paddingLeft: '22px',
       marginTop: '16px',
+      columnGap: '10px',
     },
   },
   level: {

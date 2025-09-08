@@ -1209,6 +1209,7 @@ export const en = {
           pending: 'Pending',
           booked: 'Scheduled',
           expired: 'Expired',
+          completed: 'Completed',
         },
         daysOfWeek: {
           monday: 'Monday',

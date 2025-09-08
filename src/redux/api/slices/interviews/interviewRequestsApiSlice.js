@@ -43,9 +43,14 @@ export const interviewRequestsApiSlice = apiSlice.injectEndpoints({
         { type: TAG_TYPES.InterviewRequestByMasteryId, id: arg },
       ],
     }),
-    getInterviewIdBySlotId: builder.query({
+    getBookedInterviewIdBySlotId: builder.query({
       query: (slotId) => ({
         url: `/interview-requests/timeslots/${slotId}/interview-id`,
+      }),
+    }),
+    getPassedInterviewIdBySlotId: builder.query({
+      query: (slotId) => ({
+        url: `/interview-requests/timeslots/${slotId}/interview-history-id`,
       }),
     }),
     deleteInterviewRequestById: builder.mutation({
@@ -77,7 +82,8 @@ export const {
   useCreateInterviewRequestMutation,
   useUpdateInterviewRequestMutation,
   useGetInterviewsByMasteryIdQuery,
-  useLazyGetInterviewIdBySlotIdQuery,
+  useLazyGetBookedInterviewIdBySlotIdQuery,
+  useLazyGetPassedInterviewIdBySlotIdQuery,
   useDeleteInterviewRequestByIdMutation,
   useAddTimeSlotsMutation,
 } = interviewRequestsApiSlice;

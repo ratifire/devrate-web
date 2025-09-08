@@ -30,7 +30,21 @@ export const getSortedDatesWithLabel = (respondent) => {
       id: slot.id,
     }));
 
-  const allDates = [...availableDatesWithLabel, ...assignedDatesWithLabel, ...expiredDatesWithLabel];
+  // Completed slots
+  const completedDatesWithLabel = timeSlots
+    .filter((slot) => slot.status === 'COMPLETED')
+    .map((slot) => ({
+      date: DateTime.fromISO(slot.dateTime),
+      type: 'completed',
+      id: slot.id,
+    }));
+
+  const allDates = [
+    ...availableDatesWithLabel,
+    ...assignedDatesWithLabel,
+    ...expiredDatesWithLabel,
+    ...completedDatesWithLabel,
+  ];
   const sortedDates = allDates.sort((a, b) => a.date - b.date);
 
   return sortedDates.map((item) => ({
