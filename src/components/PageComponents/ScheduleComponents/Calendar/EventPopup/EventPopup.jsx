@@ -11,8 +11,9 @@ import { useGetEventByIdQuery } from '@redux/api/slices/schedule/scheduleApiSlic
 import { lvlMastery } from '@utils/constants/masteryLvl';
 import { PopupPosition } from '@components/PageComponents/ScheduleComponents/constants';
 import CustomTooltip from '@components/UI/CustomTooltip';
-import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers/index.js';
-import useJoinInterview from '@utils/hooks/useJoinInterview.js';
+import { getStatusByTime } from '@components/PageComponents/SingleScheduledInterview/helpers';
+import useJoinInterview from '@utils/hooks/useJoinInterview';
+
 import { ButtonDef } from '../../../../FormsComponents/Buttons';
 import { styles } from './EventPopup.styles';
 
@@ -31,7 +32,7 @@ const EventPopup = ({ handleClosePopup, event, popup, popupPosition }) => {
 
   const handleCancelInterview = async () => {
     await deleteEvent({
-      eventId: event?.id,
+      eventId: event?.interviewId,
       onSuccess: () => {
         handleClosePopup();
       },
