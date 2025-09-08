@@ -275,6 +275,12 @@ export const en = {
         error_request: 'Request error',
         success: 'Feedback sent successfully',
       },
+      confirmDeleteInterview: {
+        title: 'Delete Interview',
+        text: 'Are you sure you want to delete the interview',
+        refuseBtnText: 'Cancel',
+        confirmBtnText: 'Delete',
+      },
     },
     profile: {
       skills: {
@@ -1429,6 +1435,9 @@ export const en = {
       yemen: 'Yemen',
       zambia: 'Zambia',
       zimbabwe: 'Zimbabwe',
+    },
+    notification: {
+      error: 'Something went wrong... Try again later',
     },
     clipboardMessage: {
       success: 'Copied!',

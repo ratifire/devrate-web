@@ -4,7 +4,8 @@ import {
   InterviewInfoSkeleton,
   PreviewVideoPassedInterviewSkeleton,
   SinglePassedInterviewSkeleton,
-  SkillsSkeleton,
+  SoftSkillsSkeleton,
+  HardSkillsSkeleton,
   StatisticSkeleton,
   UserCardSkeleton,
 } from '@components/UI/Skeleton';
@@ -99,13 +100,13 @@ const SinglePassedInterviewPage = () => {
             <Box>
               <Box sx={styles.hardSkills}>
                 {role === feedbackInterviewRole.CANDIDATE && (
-                  <Suspense fallback={<SkillsSkeleton />}>
+                  <Suspense fallback={<HardSkillsSkeleton />}>
                     <MemoizedInterviewHardSkillsSinglePassedInterview />
                   </Suspense>
                 )}
               </Box>
               <Box sx={styles.softSkills}>
-                <Suspense fallback={<SkillsSkeleton />}>
+                <Suspense fallback={<SoftSkillsSkeleton />}>
                   <MemoizedInterviewSoftSkillsSinglePassedInterview />
                 </Suspense>
               </Box>

@@ -6,9 +6,9 @@ import CustomTooltip from '@components/UI/CustomTooltip';
 import { useTranslation } from 'react-i18next';
 import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
 import { SKILLS_TYPES } from '@utils/constants/skillsTypes';
+import { HardSkillsSkeleton, SoftSkillsSkeleton } from '@components/UI/Skeleton';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
-import { SkillsSkeleton } from '../../Skeleton';
 import EmptySkills from '../EmptySkills';
 import { styles } from './SpecializationSkills.styles';
 
@@ -45,8 +45,12 @@ const SpecializationSkills = ({
     return [styles.skillsContainer, firstType === SKILLS_TYPES.HARD_SKILL ? styles.hardSkills : styles.softSkills];
   };
 
-  if (isFetching) {
-    return <SkillsSkeleton />;
+  if (isFetching && skillType === SKILLS_TYPES.HARD_SKILL) {
+    return <HardSkillsSkeleton />;
+  }
+
+  if (isFetching && skillType === SKILLS_TYPES.SOFT_SKILL) {
+    return <SoftSkillsSkeleton />;
   }
 
   if (isError) {
