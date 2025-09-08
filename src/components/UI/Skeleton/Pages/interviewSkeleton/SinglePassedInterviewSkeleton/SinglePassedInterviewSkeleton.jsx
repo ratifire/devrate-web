@@ -4,9 +4,10 @@ import {
   InterviewFeedbackSkeleton,
   InterviewInfoSkeleton,
   PreviewVideoPassedInterviewSkeleton,
-  SkillsSkeleton,
   StatisticSkeleton,
   UserCardSkeleton,
+  SoftSkillsSkeleton,
+  HardSkillsSkeleton,
 } from '@components/UI/Skeleton';
 
 const SinglePassedInterviewSkeleton = () => {
@@ -21,10 +22,10 @@ const SinglePassedInterviewSkeleton = () => {
       <Box sx={styles.interviewersAssessment}>
         <Skeleton height={32} sx={styles.title} variant={'rounded'} />
         <Box sx={styles.hardSkills}>
-          <SkillsSkeleton />
+          <HardSkillsSkeleton />
         </Box>
         <Box sx={styles.softSkills}>
-          <SkillsSkeleton />
+          <SoftSkillsSkeleton />
         </Box>
       </Box>
       <Box sx={styles.statistics}>
