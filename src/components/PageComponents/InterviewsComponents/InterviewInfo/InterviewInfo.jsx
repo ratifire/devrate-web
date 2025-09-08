@@ -50,7 +50,7 @@ const InterviewInfo = () => {
         <Typography sx={styles.host} variant='body1'>
           {interviewData?.role === feedbackInterviewRole.CANDIDATE
             ? t('interviews.passedInterviews.interviewInfoInterviewer')
-            : t('interviews.passedInterviews.interviewInfoRespondent')}
+            : t('interviews.passedInterviews.interviewInfoCandidate')}
           :
         </Typography>
         <Link component={RouterLink} sx={styles.hostLink} to={`${links.profile}/${attendeeId}`}>

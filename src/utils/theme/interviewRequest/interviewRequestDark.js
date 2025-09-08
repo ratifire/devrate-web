@@ -15,7 +15,7 @@ export const interviewRequestDark = {
       },
     },
     role: {
-      respondent: '#25CBFF',
+      candidate: '#25CBFF',
       interviewer: '#16FFB9',
     },
     interviewCount: {

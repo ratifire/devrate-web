@@ -15,7 +15,7 @@ export const interviewRequestLight = {
       },
     },
     role: {
-      respondent: '#007CA3',
+      candidate: '#007CA3',
       interviewer: '#00855D',
     },
     interviewCount: {
