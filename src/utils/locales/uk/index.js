@@ -333,6 +333,9 @@ export const uk = {
             },
           },
         },
+        video: {
+          tabName: 'Співбесіди',
+        },
         skills: {
           tabName: 'Навички',
           emptyTabName: {
