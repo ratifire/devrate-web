@@ -98,6 +98,13 @@ export const en = {
           error: 'Something went wrong',
         },
       },
+      personaInterview: {
+        title: 'Schedule a meeting',
+        text: 'Send the generated link to another user to start a meeting at any convenient time.',
+        label: 'Link',
+        btnCopy: 'Copy link',
+        btnSendMessage: 'Send to chat',
+      },
       achievement: {
         title: 'Achievement',
         summary: 'Achievement label',

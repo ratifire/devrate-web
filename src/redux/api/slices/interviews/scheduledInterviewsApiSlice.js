@@ -76,6 +76,13 @@ const scheduledInterviewApiSlice = apiSlice.injectEndpoints({
         responseHandler: (response) => response.text(),
       }),
     }),
+    createPersonalMeetingUrl: builder.mutation({
+      query: () => ({
+        method: 'POST',
+        url: '/meetings',
+        responseHandler: (response) => response.text(),
+      }),
+    }),
     getAllSkillsForMasteryId: builder.query({
       query: ({ masteryId }) => `/masteries/${masteryId}/skills/all`,
     }),
@@ -111,6 +118,7 @@ export const {
   useLazyGetSingleInterviewByIdQuery,
   useGetInterviewStatusQuery,
   useLazyGetInterviewMeetingUrlQuery,
+  useCreatePersonalMeetingUrlMutation,
   useGetAllSkillsForMasteryIdQuery,
   useGetMasteriesQuery,
   useDeleteInterviewMutation,

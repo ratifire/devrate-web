@@ -20,6 +20,7 @@ export const modalNames = {
   workExperienceEditModal: 'workExperienceEditModal',
   workExperienceModal: 'workExperienceModal',
   notificationModal: 'notificationModal',
+  personalInterviewModal: 'personalInterviewModal',
   videoModal: 'videoModal',
   confirmDeleteInterview: 'confirmDeleteInterview',
 };
