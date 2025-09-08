@@ -2,7 +2,7 @@ import { ErrorComponent } from '@components/UI/Exceptions/index.js';
 import {
   InterviewFeedbackSkeleton,
   InterviewInfoSkeleton,
-  SkillsSkeleton,
+  HardSkillsSkeleton,
   StatisticSkeleton,
   UserCardSkeleton,
 } from '@components/UI/Skeleton';
@@ -209,7 +209,7 @@ const SinglePassedInterviewPage = () => {
             <Box sx={styles.skillsWrapper}>
               {role === feedbackInterviewRole.CANDIDATE && (
                 <Paper sx={styles.hardSkills}>
-                  <Suspense fallback={<SkillsSkeleton />}>
+                  <Suspense fallback={<HardSkillsSkeleton />}>
                     {hardSkillsArray.length > 0 || isFetchingPassedInterview ? (
                       <MemoizedInterviewHardSkills
                         averageHardSkillsMark={averageHardSkillsMark}
@@ -223,7 +223,7 @@ const SinglePassedInterviewPage = () => {
               )}
 
               <Paper sx={styles.sortSkills}>
-                <Suspense fallback={<SkillsSkeleton />}>
+                <Suspense fallback={<HardSkillsSkeleton />}>
                   {softSkillsArray.length > 0 || isFetchingPassedInterview ? (
                     <MemoizedInterviewSoftSkills
                       averageSoftSkillsMark={averageSoftSkillsMark}

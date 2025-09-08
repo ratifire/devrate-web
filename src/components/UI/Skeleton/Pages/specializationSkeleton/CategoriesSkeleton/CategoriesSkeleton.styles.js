@@ -20,7 +20,7 @@ export const styles = {
     width: '100%',
     overflowX: 'auto',
     gap: theme.spacing(4),
-    paddingBottom: '15px',
+    paddingBottom: '10px',
     '& > span': {
       borderRadius: 4,
       flexShrink: 0,

@@ -2,17 +2,27 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import CustomTooltip from '@components/UI/CustomTooltip/index.js';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { useTranslation } from 'react-i18next';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
+import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
 import { useParams } from 'react-router';
+import { SKILLS_TYPE } from '@components/UI/Specialization/SpecializationSkills/constants';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
-import { SkillsSkeleton } from '../../Skeleton';
-import EmptySkills from '../EmptySkills/index.js';
+import { HardSkillsSkeleton, SoftSkillsSkeleton } from '../../Skeleton';
+import EmptySkills from '../EmptySkills';
 import { styles } from './SpecializationSkills.styles';
 
-const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
+const SpecializationSkills = ({
+  isFetching,
+  isError,
+  skills,
+  averageMark,
+  openModal,
+  title,
+  subTitle,
+  type = SKILLS_TYPE.HARD_SKILL,
+}) => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
   const { t } = useTranslation();
@@ -29,14 +39,21 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
     if (!allSameType || !firstType) return styles.skillsContainer;
 
     if (role === 'INTERVIEWER') {
-      return [styles.skillsContainer, firstType === 'SOFT_SKILL' ? styles.passedSoftSkills : styles.passedHardSkills];
+      return [
+        styles.skillsContainer,
+        firstType === SKILLS_TYPE.SOFT_SKILL ? styles.passedSoftSkills : styles.passedHardSkills,
+      ];
     }
 
-    return [styles.skillsContainer, firstType === 'HARD_SKILL' ? styles.hardSkills : styles.softSkills];
+    return [styles.skillsContainer, firstType === SKILLS_TYPE.HARD_SKILL ? styles.hardSkills : styles.softSkills];
   };
 
-  if (isFetching) {
-    return <SkillsSkeleton />;
+  if (isFetching && type === SKILLS_TYPE.HARD_SKILL) {
+    return <HardSkillsSkeleton />;
+  }
+
+  if (isFetching && type === SKILLS_TYPE.SOFT_SKILL) {
+    return <SoftSkillsSkeleton />;
   }
 
   if (role === 'INTERVIEWER' && title === 'Hard skills') {
@@ -104,6 +121,7 @@ SpecializationSkills.propTypes = {
   openModal: PropTypes.func,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([SKILLS_TYPE.HARD_SKILL, SKILLS_TYPE.SOFT_SKILL]),
 };
 
 export default SpecializationSkills;
