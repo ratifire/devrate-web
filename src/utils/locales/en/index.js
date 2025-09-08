@@ -193,6 +193,8 @@ export const en = {
         password_short: 'Password too short',
         password_long: 'Password too long',
         password_must_match: 'Passwords must match',
+        your_have_acc: 'Already have an account?',
+        login: 'Log in',
       },
       confirmation: {
         title: 'Confirm your email',

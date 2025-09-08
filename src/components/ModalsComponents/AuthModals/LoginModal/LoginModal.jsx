@@ -141,7 +141,6 @@ const LoginModal = () => {
         <Box sx={styles.textLink}>
           <ButtonDef
             label={t('modal.login.forgot_your_password')}
-            loading={formik.isSubmitting}
             sx={styles.turnBackLink}
             type='button'
             variant='text'
