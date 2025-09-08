@@ -21,4 +21,6 @@ export const modalNames = {
   workExperienceModal: 'workExperienceModal',
   notificationModal: 'notificationModal',
   personalInterviewModal: 'personalInterviewModal',
+  videoModal: 'videoModal',
+  confirmDeleteInterview: 'confirmDeleteInterview',
 };

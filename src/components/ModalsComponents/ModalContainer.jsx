@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { modalNames } from '@utils/constants/modalNames.js';
-import PersonalInterviewModal from './InterviewModals/PersonalInterviewModal';
+import VideoModal from '@components/ModalsComponents/VideoModal';
+import ConfirmDeleteInterviewModal from '@components/ModalsComponents/InterviewModals/ConfirmDeleteInterview';
+import PersonalInterviewModal from '@components/ModalsComponents/InterviewModals/PersonalInterviewModal';
 import {
   EducationModal,
   WorkExperienceModal,
@@ -50,6 +52,8 @@ const modalEnum = {
   [modalNames.confirmDeleteSpecialization]: ConfirmDeleteSpecializationModal,
   [modalNames.notificationModal]: NotificationModal,
   [modalNames.personalInterviewModal]: PersonalInterviewModal,
+  [modalNames.videoModal]: VideoModal,
+  [modalNames.confirmDeleteInterview]: ConfirmDeleteInterviewModal,
 };
 
 const ModalContainer = ({ modalType }) => {

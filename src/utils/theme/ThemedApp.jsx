@@ -9,6 +9,7 @@ const rootDom = document.getElementById('root');
 const ThemedApp = () => {
   const themeMode = useSelector((state) => state.theme);
   const darkModeTheme = createTheme(getDesignTokens(themeMode.mode));
+
   return (
     <ThemeProvider theme={darkModeTheme}>
       <CssBaseline />

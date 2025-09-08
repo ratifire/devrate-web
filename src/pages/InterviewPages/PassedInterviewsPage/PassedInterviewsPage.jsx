@@ -1,13 +1,11 @@
-import { lazy, memo, Suspense, useCallback, useEffect, useState, useLayoutEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router';
+import { lazy, memo, Suspense, useCallback, useEffect, useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import InterviewsSkeleton from '@components/UI/Skeleton/Pages/InterviewsSkeleton';
-import { useGetAllPassedInterviewsQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
-import navigationLinks from '@router/links.js';
-import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures.js';
-import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice.js';
-import { InterviewContainer } from '@components/UI/Interview/index.js';
-import EmptyInterviewTab from '../EmptyInterviewTab/index.js';
+import { useGetAllPassedInterviewsQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice';
+import { emptyInterviewTabsPictures } from '@utils/constants/emptyTabsPictures';
+import { useGetSpecializationByUserIdQuery } from '@redux/api/slices/specialization/specializationApiSlice';
+import { InterviewContainer } from '@components/UI/Interview';
+import EmptyInterviewTab from '../EmptyInterviewTab';
 
 const SideBar = lazy(() => import('../../../components/PageComponents/InterviewsComponents/InterviewSideBar/SideBar'));
 
@@ -18,7 +16,6 @@ const PassedInterviewsPage = () => {
   const [page, setPage] = useState(0);
   const { data: passedInterviews, isFetching, isLoading } = useGetAllPassedInterviewsQuery({ page, size: 5 });
   const [lastEventRef, setLastEventRef] = useState(null);
-  const navigate = useNavigate();
   const { data: specializations } = useGetSpecializationByUserIdQuery(id, { skip: !id });
 
   const isSpecializations = !!specializations?.length;
@@ -65,17 +62,6 @@ const PassedInterviewsPage = () => {
       }
     };
   }, [lastEventRef, passedInterviews?.content, handleObserver]);
-
-  const redirectToFirstInterview = useCallback(() => {
-    if (!isLoading && passedInterviews?.content?.length > 0) {
-      const firstInterviewId = passedInterviews.content[0].id;
-      navigate(`${navigationLinks.passedInterviews}/${firstInterviewId}`, { replace: true });
-    }
-  }, [isLoading, passedInterviews, navigate]);
-
-  useLayoutEffect(() => {
-    redirectToFirstInterview();
-  }, [redirectToFirstInterview]);
 
   if (isLoading) {
     return (

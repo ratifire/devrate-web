@@ -18,7 +18,8 @@ import {
   LevelChartSkeleton,
   LevelSkeleton,
   SkillsAssessmentChartSkeleton,
-  SkillsSkeleton,
+  HardSkillsSkeleton,
+  SoftSkillsSkeleton,
 } from './Pages/specializationSkeleton';
 import {
   BaseUserInfoSkeleton,
@@ -42,7 +43,14 @@ import {
 } from './Pages/scheduledInterviewSkeleton';
 import InterviewRequestSkeleton from './Pages/InterviewRequestSkeleton';
 
-import { InterviewInfoSkeleton, InterviewFeedbackSkeleton, UserCardSkeleton } from './Pages/interviewSkeleton';
+import {
+  InterviewInfoSkeleton,
+  InterviewFeedbackSkeleton,
+  UserCardSkeleton,
+  PreviewVideoPassedInterviewSkeleton,
+  EmptyStatisticsSkeleton,
+  SinglePassedInterviewSkeleton,
+} from './Pages/interviewSkeleton';
 
 export {
   BlogSkeleton,
@@ -55,7 +63,7 @@ export {
   LevelChartSkeleton,
   LevelSkeleton,
   SkillsAssessmentChartSkeleton,
-  SkillsSkeleton,
+  HardSkillsSkeleton,
   BaseUserInfoSkeleton,
   SkillsSectionSkeleton,
   RightSectionSkeleton,
@@ -84,4 +92,8 @@ export {
   ChangeEmailSkeleton,
   ChangePasswordSkeleton,
   ChangeLanguageSkeleton,
+  PreviewVideoPassedInterviewSkeleton,
+  EmptyStatisticsSkeleton,
+  SinglePassedInterviewSkeleton,
+  SoftSkillsSkeleton,
 };

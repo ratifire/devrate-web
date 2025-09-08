@@ -1,0 +1,44 @@
+import { Box, Skeleton } from '@mui/material';
+import { styles } from '@pages/InterviewPages/SinglePassedInterviewPage/SinglePassedInterviewPage.styles';
+import {
+  InterviewFeedbackSkeleton,
+  InterviewInfoSkeleton,
+  PreviewVideoPassedInterviewSkeleton,
+  StatisticSkeleton,
+  UserCardSkeleton,
+  SoftSkillsSkeleton,
+  HardSkillsSkeleton,
+} from '@components/UI/Skeleton';
+
+const SinglePassedInterviewSkeleton = () => {
+  return (
+    <Box className='InterviewsPage' sx={styles.mainContent}>
+      <Box sx={styles.userInfo}>
+        <UserCardSkeleton />
+      </Box>
+      <Box sx={styles.interviewInfo}>
+        <InterviewInfoSkeleton />
+      </Box>
+      <Box sx={styles.interviewersAssessment}>
+        <Skeleton height={32} sx={styles.title} variant={'rounded'} />
+        <Box sx={styles.hardSkills}>
+          <HardSkillsSkeleton />
+        </Box>
+        <Box sx={styles.softSkills}>
+          <SoftSkillsSkeleton />
+        </Box>
+      </Box>
+      <Box sx={styles.statistics}>
+        <StatisticSkeleton />
+      </Box>
+      <Box sx={styles.interviewFeedback}>
+        <InterviewFeedbackSkeleton />
+      </Box>
+      <Box sx={styles.interviewPreviewVideo}>
+        <PreviewVideoPassedInterviewSkeleton />
+      </Box>
+    </Box>
+  );
+};
+
+export default SinglePassedInterviewSkeleton;

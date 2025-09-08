@@ -1,0 +1,3 @@
+import StatisticPassedInterview from '@components/PageComponents/SinglePassedInterviewComponents/StatisticPassedInterview/StatisticPassedInterview';
+
+export default StatisticPassedInterview;

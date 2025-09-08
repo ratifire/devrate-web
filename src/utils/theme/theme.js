@@ -5,6 +5,8 @@ import { scheduleDark, scheduleLight } from './schedule';
 import { interviewDark, interviewLight } from './interview';
 import { chatDark, chatLight } from './chat';
 import { interviewRequestLight, interviewRequestDark } from './interviewRequest/index.js';
+import { profileDark } from './profile/profileDark.js';
+import { profileLight } from './profile/profileLight.js';
 
 const getDesignTokens = (mode) => ({
   spacing: [0, 4, 8, 16, 24, 32], //theme.spacing(1) = '4px' //theme.spacing(6) = '36px'
@@ -640,8 +642,10 @@ const getDesignTokens = (mode) => ({
           ...chatDark,
           ...interviewRequestDark,
           ...settingsDark,
+          ...profileDark,
         }
       : {
+          ...profileLight,
           ...specializationLight,
           ...scheduleLight,
           ...interviewLight,
@@ -1229,6 +1233,29 @@ const getDesignTokens = (mode) => ({
             padding: '12px 20px',
             width: '100%',
             backgroundColor: 'transparent',
+            '&:hover': {
+              backgroundColor: 'transparent',
+            },
+            '&:disabled': {
+              backgroundColor: 'transparent',
+              color: '#ECECED',
+            },
+          },
+        },
+        {
+          props: (props) => props.variant === 'statusButton',
+          style: {
+            fontSize: 14,
+            fontWeight: 500,
+            lineHeight: '157%',
+            letterSpacing: '0.01em',
+            textAlign: 'center',
+            marginY: 0,
+            padding: '0',
+            minWidth: 0,
+            backgroundColor: 'transparent',
+            textTransform: 'capitalize',
+            textDecoration: 'underline',
             '&:hover': {
               backgroundColor: 'transparent',
             },

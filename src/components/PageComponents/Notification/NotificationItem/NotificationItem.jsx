@@ -19,6 +19,23 @@ const NotificationItem = ({ data }) => {
   const [markAsRead] = useMarkAsReadMutation();
   const [deleteNotification] = useDeleteNotificationMutation();
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString + 'Z');
+    return date
+      .toLocaleString('uk-UA', {
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      })
+      .replace(/, /g, ' ');
+  };
+
+  const formattedDate = formatDate(createdAt);
+
   const markAsReadClickHandler = () => {
     markAsRead({
       notificationId: id,
@@ -34,11 +51,11 @@ const NotificationItem = ({ data }) => {
   };
 
   const typeMessages = {
-    GREETING: <Greeting createAt={createdAt} />,
-    INTERVIEW_FEEDBACK: <InterviewFeedback createAt={createdAt} payload={payload} />,
-    INTERVIEW_SCHEDULED: <InterviewScheduled createAt={createdAt} payload={payload} />,
-    INTERVIEW_REQUEST_EXPIRED: <InterviewRequestExpired createAt={createdAt} payload={payload} />,
-    INTERVIEW_REJECTED: <InterviewRejected createAt={createdAt} payload={payload} />,
+    GREETING: <Greeting formattedDate={formattedDate} />,
+    INTERVIEW_FEEDBACK: <InterviewFeedback formattedDate={formattedDate} payload={payload} />,
+    INTERVIEW_SCHEDULED: <InterviewScheduled formattedDate={formattedDate} payload={payload} />,
+    INTERVIEW_REQUEST_EXPIRED: <InterviewRequestExpired formattedDate={formattedDate} payload={payload} />,
+    INTERVIEW_REJECTED: <InterviewRejected formattedDate={formattedDate} payload={payload} />,
   };
 
   return (

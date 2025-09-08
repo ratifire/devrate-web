@@ -12,7 +12,7 @@ export const styles = {
     width: '100%',
     maxWidth: '732px',
   }),
-  confirmDeleteSpecialization: {
+  confirmDeleteModalWrapper: {
     maxWidth: '431px',
   },
   deactivateProfileModal: {

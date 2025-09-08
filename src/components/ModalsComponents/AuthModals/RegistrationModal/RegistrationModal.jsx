@@ -4,7 +4,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Box, Link, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useCreateUserMutation } from '@redux/api/slices/auth/authApiSlice';
-import { closeModal, openModal } from '@redux/slices/modal/modalSlice';
 import { RegistrationSchema } from '@utils/validationSchemas';
 import { FormCheckbox, FormInput } from '@components/FormsComponents/Inputs';
 import { ButtonDef } from '@components/FormsComponents/Buttons';
@@ -12,6 +11,7 @@ import changeColorOfLastTitleWord from '@utils/helpers/changeColorOfLastTitleWor
 import { modalNames } from '@utils/constants/modalNames';
 import { Link as RouterLink } from 'react-router';
 import OAuthSection from '@components/ModalsComponents/AuthModals/OAuthSection';
+import { closeModal, openModal } from '@redux/slices/modal/modalSlice.js';
 import styles from './RegistrationModal.styles';
 
 const initialValues = {
@@ -28,7 +28,6 @@ const RegistrationModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [createUser, { isLoading: isLoadingCreating }] = useCreateUserMutation();
-
   const handleKeyDown = (e) => {
     if (e.key === ' ') {
       e.preventDefault();
@@ -61,7 +60,9 @@ const RegistrationModal = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
-
+  const handleOpenLoginModal = () => {
+    dispatch(openModal({ modalType: modalNames.loginModal }));
+  };
   const isFormValid =
     formik.values.email &&
     formik.values.firstName &&
@@ -172,6 +173,18 @@ const RegistrationModal = () => {
             type='submit'
             variant='contained'
             onClick={formik.handleSubmit}
+          />
+        </Box>
+        <Box sx={styles.textWrapper}>
+          <Typography sx={styles.text} variant='body'>
+            {t('modal.registration.your_have_acc')}
+          </Typography>
+          <ButtonDef
+            label={t('modal.registration.login')}
+            sx={styles.textLink}
+            type='button'
+            variant='text'
+            onClick={handleOpenLoginModal}
           />
         </Box>
       </form>
