@@ -1,0 +1,3 @@
+import PreviewVideoPassedInterview from '@components/PageComponents/SinglePassedInterviewComponents/PreviewVideoPassedInterview/PreviewVideoPassedInterview';
+
+export default PreviewVideoPassedInterview;

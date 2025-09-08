@@ -2,23 +2,30 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import CustomTooltip from '@components/UI/CustomTooltip/index.js';
+import CustomTooltip from '@components/UI/CustomTooltip';
 import { useTranslation } from 'react-i18next';
-import { useGetPassedInterviewByIdQuery } from '@redux/api/slices/interviews/passedInterviewsApiSlice.js';
-import { useParams } from 'react-router';
+import { feedbackInterviewRole } from '@utils/constants/feedbackInterviewRole';
+import { SKILLS_TYPES } from '@utils/constants/skillsTypes';
+import { HardSkillsSkeleton, SoftSkillsSkeleton } from '@components/UI/Skeleton';
 import { ItemSkill } from '../SkillsItem';
 import { ErrorComponent } from '../../Exceptions';
-import { SkillsSkeleton } from '../../Skeleton';
-import EmptySkills from '../EmptySkills/index.js';
+import EmptySkills from '../EmptySkills';
 import { styles } from './SpecializationSkills.styles';
 
-const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openModal, title, subTitle }) => {
+const SpecializationSkills = ({
+  isFetching,
+  isError,
+  skills,
+  averageMark,
+  openModal,
+  title,
+  subTitle,
+  role,
+  skillType,
+}) => {
   const { activeSpecialization, mainSpecialization } = useSelector((state) => state.specialization);
   const isDisabled = !activeSpecialization && !mainSpecialization;
   const { t } = useTranslation();
-  const { interviewId } = useParams();
-  const { data: interviewData } = useGetPassedInterviewByIdQuery({ interviewId });
-  const role = interviewData?.role;
 
   const getSkillsContainerStyle = () => {
     if (skills.length === 0) return styles.skillsContainer;
@@ -28,23 +35,30 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
 
     if (!allSameType || !firstType) return styles.skillsContainer;
 
-    if (role === 'INTERVIEWER') {
-      return [styles.skillsContainer, firstType === 'SOFT_SKILL' ? styles.passedSoftSkills : styles.passedHardSkills];
+    if (role === feedbackInterviewRole.INTERVIEWER) {
+      return [
+        styles.skillsContainer,
+        firstType === SKILLS_TYPES.SOFT_SKILL ? styles.passedSoftSkills : styles.passedHardSkills,
+      ];
     }
 
-    return [styles.skillsContainer, firstType === 'HARD_SKILL' ? styles.hardSkills : styles.softSkills];
+    return [styles.skillsContainer, firstType === SKILLS_TYPES.HARD_SKILL ? styles.hardSkills : styles.softSkills];
   };
 
-  if (isFetching) {
-    return <SkillsSkeleton />;
+  if (isFetching && skillType === SKILLS_TYPES.HARD_SKILL) {
+    return <HardSkillsSkeleton />;
   }
 
-  if (role === 'INTERVIEWER' && title === 'Hard skills') {
-    return null;
+  if (isFetching && skillType === SKILLS_TYPES.SOFT_SKILL) {
+    return <SoftSkillsSkeleton />;
   }
 
   if (isError) {
     return <ErrorComponent />;
+  }
+
+  if (!skills.length) {
+    return <EmptySkills skillType={skillType} />;
   }
 
   return (
@@ -65,20 +79,16 @@ const SpecializationSkills = ({ isFetching, isError, skills, averageMark, openMo
         )}
       </Box>
       <Box>
-        {skills.length > 0 ? (
-          <Box sx={getSkillsContainerStyle()}>
-            {skills.map((skill) => (
-              <ItemSkill
-                key={skill.id}
-                grows={skill.grows}
-                name={skill.name}
-                value={Math.round(skill.averageMark * 10) / 10}
-              />
-            ))}
-          </Box>
-        ) : (
-          <EmptySkills title={title} />
-        )}
+        <Box sx={getSkillsContainerStyle()}>
+          {skills.map((skill) => (
+            <ItemSkill
+              key={skill.id}
+              grows={skill.grows}
+              name={skill.name}
+              value={Math.round(skill.averageMark * 10) / 10}
+            />
+          ))}
+        </Box>
       </Box>
       <Box sx={styles.markWrapper}>
         <Typography variant='h6'>{subTitle}</Typography>
@@ -104,6 +114,8 @@ SpecializationSkills.propTypes = {
   openModal: PropTypes.func,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
+  role: PropTypes.oneOf([feedbackInterviewRole.INTERVIEWER, feedbackInterviewRole.CANDIDATE]),
+  skillType: PropTypes.oneOf([SKILLS_TYPES.SOFT_SKILL, SKILLS_TYPES.HARD_SKILL]),
 };
 
 export default SpecializationSkills;

@@ -1,0 +1,3 @@
+import InterviewHardSkillsSinglePassedInterview from '@components/PageComponents/SinglePassedInterviewComponents/InterviewHardSkillsSinglePassedInterview/InterviewHardSkillsSinglePassedInterview';
+
+export default InterviewHardSkillsSinglePassedInterview;

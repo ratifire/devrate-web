@@ -1,32 +1,31 @@
+import { LIGHT_THEME } from '@utils/constants/Theme/theme';
+
 export const styles = {
   mainContent: (theme) => ({
-    maxHeight: 'calc(100vh - 80px)',
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridTemplateRows: '180px 12px 216px auto auto',
+    gridTemplateRows: 'repeat(10, auto)',
+    alignSelf: 'start',
     width: '100%',
     gridGap: theme.spacing(4),
     ' > div': {
       borderRadius: theme.spacing(2),
-      boxShadow: 'none',
-      backgroundImage: 'none',
     },
   }),
   userInfo: (theme) => ({
     gridColumn: '1/6',
-    gridRow: '1/2',
+    gridRow: '1/4',
     ' > div': {
       maxWidth: '100%',
-      boxShadow: 'none',
-      backgroundImage: 'none',
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
     },
   }),
   interviewersAssessment: (theme) => ({
     gridColumn: '1/6',
-    gridRow: '2/7',
+    gridRow: '4/10',
     padding: theme.spacing(4),
+    alignSelf: 'baseline',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
     ' > div div': {
       borderRadius: theme.spacing(1),
@@ -34,28 +33,11 @@ export const styles = {
       backgroundColor: theme.palette.interviewPage.innerBackground,
     },
   }),
-
-  interviewersAssessmentTitle: (theme) => ({
-    marginBottom: theme.spacing(3),
-  }),
-
-  skillsWrapper: (theme, role) =>
-    role === 'INTERVIEWER'
-      ? {
-          height: 'calc(100% - 48px)',
-          '& > div': {
-            height: '100%',
-          },
-        }
-      : {},
-
   hardSkills: (theme) => ({
     height: '100%',
     width: '100%',
     marginBottom: theme.spacing(3),
     borderRadius: theme.spacing(1),
-    boxShadow: 'none',
-    backgroundImage: 'none',
     ' > div div ': {
       borderRadius: theme.spacing(1),
     },
@@ -67,10 +49,8 @@ export const styles = {
       }),
     },
   }),
-  sortSkills: (theme) => ({
+  softSkills: (theme) => ({
     width: '100%',
-    boxShadow: 'none',
-    backgroundImage: 'none',
     ' > div': {
       borderRadius: theme.spacing(1),
     },
@@ -84,31 +64,28 @@ export const styles = {
   }),
   interviewInfo: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '1/3',
+    gridRow: '1/5',
+    alignSelf: 'baseline',
     backgroundColor: theme.palette.pagesSections.backgroundColor,
   }),
 
   statistics: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '3/4',
+    gridRow: '5/6',
     ' > div': {
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
-      boxShadow: 'none',
-      backgroundImage: 'none',
     },
   }),
   interviewFeedback: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '4/5',
-    minHeight: '216px',
+    gridRow: '6/7',
     '> div': {
       height: '100%',
-      minHeight: '216px',
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
       '> div': {
-        ...(theme.palette.mode === 'light' && {
+        ...(theme.palette.mode === LIGHT_THEME && {
           borderColor: theme.palette.interviewPage.innerBorderColor,
           borderWidth: '1px',
           borderStyle: 'solid',
@@ -118,56 +95,18 @@ export const styles = {
   }),
   interviewPreviewVideo: (theme) => ({
     gridColumn: '6/13',
-    gridRow: '5/6',
+    gridRow: '7/8',
+    alignSelf: 'baseline',
     minHeight: '372px',
     ' > div': {
       borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.pagesSections.backgroundColor,
-      boxShadow: 'none',
     },
-  }),
-  interviewVideo: (theme) => ({
-    borderRadius: theme.spacing(2),
-    boxShadow: `0 0 0 1px ${theme.palette.interviewPreviewVideo.shadow}`,
-    '& .react-player__preview': {
-      borderRadius: theme.spacing(2),
-    },
-  }),
-  playerWrapper: (theme) => ({
-    position: 'relative',
-    aspectRatio: '16/9',
-    width: '100%',
-    borderRadius: theme.spacing(2),
-    boxShadow: `0 0 0 1px ${theme.palette.interviewPreviewVideo.shadow}`,
-    overflow: 'hidden',
-  }),
-  container: (theme) => ({
-    position: 'relative',
-    paddingBottom: '16px',
-    paddingLeft: '22px',
-    paddingRight: '22px',
-    borderRadius: theme.spacing(2),
-    color: theme.palette.interviewPreviewVideo.color,
-    display: 'flex',
-    flexDirection: 'column',
-  }),
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  title: (theme) => ({
-    fontWeight: 500,
-    fontSize: '1rem',
-    color: theme.palette.interviewPreviewVideo.interviewPreviewVideoTitleColor,
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
   }),
   emptyStatistics: (theme) => ({
     position: 'relative',
     gridColumn: '1/13',
-    gridRow: '3/5',
+    gridRow: '5/10',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -182,16 +121,7 @@ export const styles = {
       marginBottom: 0,
     },
   }),
-
-  mascotStatsBox: {
-    maxWidth: '610px',
-    width: '100%',
-    height: '352px',
-    marginBottom: (theme) => theme.spacing(3),
+  title: {
+    marginBottom: '16px',
   },
-
-  emptyStatsText: (theme) => ({
-    marginTop: (theme) => theme.spacing(3),
-    color: theme.palette.titleColor,
-  }),
 };

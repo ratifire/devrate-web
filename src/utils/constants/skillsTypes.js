@@ -1,0 +1,4 @@
+export const SKILLS_TYPES = {
+  SOFT_SKILL: 'SOFT_SKILL',
+  HARD_SKILL: 'HARD_SKILL',
+};

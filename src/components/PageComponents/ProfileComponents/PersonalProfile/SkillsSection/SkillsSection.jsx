@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@redux/slices/auth/authSlice.js';
 import { useGetPersonalUserQuery } from '@redux/api/slices/user/personal/personalApiSlice';
+import floorToOneDecimal from '@utils/helpers/floorToOneDecimal';
 import { styles } from './SkillsSection.styles';
 
 const SkillsSection = () => {
@@ -13,6 +14,10 @@ const SkillsSection = () => {
   const { data: personalData } = useGetPersonalUserQuery(id);
   const userData = personalData || {};
   const { hardSkillMark = 0, softSkillMark = 0, completedInterviews = 0, conductedInterviews = 0 } = userData;
+
+  const hardSkillMarkFloored = floorToOneDecimal(hardSkillMark);
+  const softSkillMarkFloored = floorToOneDecimal(softSkillMark);
+
   return (
     <Box sx={styles.skillsWrapper}>
       <Typography sx={styles.skillsTitle} variant='h6'>
@@ -32,7 +37,7 @@ const SkillsSection = () => {
         />
 
         <Typography sx={styles.skillMark} variant='subtitle2'>
-          {hardSkillMark}/10
+          {hardSkillMarkFloored}/10
         </Typography>
       </Box>
       <Box sx={styles.softSkills}>
@@ -47,7 +52,7 @@ const SkillsSection = () => {
           value={softSkillMark / 2}
         />
         <Typography sx={styles.skillMark} variant='subtitle2'>
-          {softSkillMark}/10
+          {softSkillMarkFloored}/10
         </Typography>
       </Box>
       <Box sx={styles.interviewHistory}>

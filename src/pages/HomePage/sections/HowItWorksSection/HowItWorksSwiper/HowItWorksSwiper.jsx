@@ -50,7 +50,7 @@ const HowItWorksSwiper = () => {
               <img alt='mascot' src={mascot2} />
             </div>
             <p className={styles.card__text}>
-              Select format: as a respondent or as an interviewer. Pick a time and comfortable format.
+              Select format: as a candidate or as an interviewer. Pick a time and comfortable format.
             </p>
           </div>
         )}

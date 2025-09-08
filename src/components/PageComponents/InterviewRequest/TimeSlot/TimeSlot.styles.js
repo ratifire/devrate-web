@@ -16,60 +16,23 @@ export const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   }),
-
   statusCheckboxContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  pending: (theme) => ({
+  //status (booked,expired,pending,completed)
+  status: (theme, status) => ({
     display: 'flex',
     alignItems: 'center',
-    color: theme.palette.requestInterview.timeSlot.statusCircle.panding,
+    color: theme.palette.requestInterview.timeSlot.statusCircle[status],
     position: 'relative',
     '&::after': {
       content: '" "',
       width: '12px',
       height: '12px',
       borderRadius: '50%',
-      backgroundColor: theme.palette.requestInterview.timeSlot.statusCircle.panding,
-      marginLeft: '4px',
-      display: 'inline-block',
-      verticalAlign: 'middle',
-    },
-  }),
-  booked: (theme) => ({
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    color: theme.palette.requestInterview.timeSlot.statusCircle.assigned,
-    position: 'relative',
-    '&::after': {
-      content: '" "',
-      width: '12px',
-      height: '12px',
-      borderRadius: '50%',
-      backgroundColor: theme.palette.requestInterview.timeSlot.statusCircle.assigned,
-      marginLeft: '4px',
-      display: 'inline-block',
-      verticalAlign: 'middle',
-    },
-    '& > :last-child:hover': {
-      textDecoration: 'underline',
-    },
-  }),
-
-  expired: (theme) => ({
-    display: 'flex',
-    alignItems: 'center',
-    color: theme.palette.requestInterview.timeSlot.statusCircle.expired,
-    position: 'relative',
-    '&::after': {
-      content: '" "',
-      width: '12px',
-      height: '12px',
-      borderRadius: '50%',
-      backgroundColor: theme.palette.requestInterview.timeSlot.statusCircle.expired,
+      backgroundColor: theme.palette.requestInterview.timeSlot.statusCircle[status],
       marginLeft: '4px',
       display: 'inline-block',
       verticalAlign: 'middle',
@@ -81,7 +44,7 @@ export const styles = {
     opacity: 1,
   }),
   statusState: (type) => ({
-    cursor: type === 'booked' ? 'pointer' : 'default',
+    cursor: type === 'booked' || type === 'completed' ? 'pointer' : 'default',
   }),
   checkBox: () => ({
     color: 'transparent',

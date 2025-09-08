@@ -9,12 +9,13 @@ export const interviewRequestLight = {
       statusText: '#1D1D1D',
       statusCircle: {
         expired: '#F44336',
-        assigned: '#3AB310',
-        panding: '#EE7538',
+        booked: '#3AB310',
+        pending: '#EE7538',
+        completed: '#00855D',
       },
     },
     role: {
-      respondent: '#007CA3',
+      candidate: '#007CA3',
       interviewer: '#00855D',
     },
     interviewCount: {

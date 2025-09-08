@@ -36,7 +36,7 @@ export const en = {
           ' Create your profile and fill in information about your work experience, hard skills, achievements and education.',
         card2Title: 'Join the Interview',
         card2Text:
-          'Choose whether you want to practice as a respondent or as an interviewer. Pick a convenient time and format.',
+          'Choose whether you want to practice as a candidate or as an interviewer. Pick a convenient time and format.',
         card3Title: 'Receive Feedback',
         card3Text:
           ' Get detailed feedback to help you improve your soft and hard skills in your area of your specialization.',
@@ -58,7 +58,7 @@ export const en = {
       about: {
         title: 'How it works',
         text1: 'Book interviews whenever you want.',
-        text2: 'Conduct an interview with your interviewer and respondent.',
+        text2: 'Conduct an interview with your interviewer and candidate.',
         text3: 'Get detailed, actionable feedback on exactly what you need to work on to get the job you deserve.',
       },
       footer: {
@@ -274,6 +274,12 @@ export const en = {
         error_429: 'You have already sent feedback this month',
         error_request: 'Request error',
         success: 'Feedback sent successfully',
+      },
+      confirmDeleteInterview: {
+        title: 'Delete Interview',
+        text: 'Are you sure you want to delete the interview',
+        refuseBtnText: 'Cancel',
+        confirmBtnText: 'Delete',
       },
     },
     profile: {
@@ -1057,7 +1063,7 @@ export const en = {
         emptyRequest:
           'There is nothing here yet. Create an interview request and take a step towards development! Find an interviewer who will help you test your knowledge and prepare for future challenges. Each conversation is a new experience and an opportunity to become more confident in your abilities.',
         emptySpecialization:
-          'You do not have a chosen specialization yet. Define your area of interest to get access to interviews. Choose an area that interests you and discover new opportunities. This will help you find an interviewer or respondent, test your knowledge, and better prepare for future challenges.',
+          'You do not have a chosen specialization yet. Define your area of interest to get access to interviews. Choose an area that interests you and discover new opportunities. This will help you find an interviewer or candidate, test your knowledge, and better prepare for future challenges.',
         emptyStatistics:
           'Your analytics on this interview will be here soon. Stay tuned for feedback from another user!',
       },
@@ -1086,7 +1092,7 @@ export const en = {
         interviewInfoToday: 'Passed today',
         interviewInfoRole: 'Your role',
         interviewInfoInterviewer: 'Interviewer',
-        interviewInfoRespondent: 'Respondent',
+        interviewInfoCandidate: 'Candidate',
         interviewFeedbackTitle: "Interviewee's feedback",
         interviewFeedbackReadLess: 'Read more',
         interviewFeedbackReadMore: 'Read less',
@@ -1098,7 +1104,7 @@ export const en = {
           headerTitle: 'Video',
           interviewLevel: 'Interview Level:',
           specialization: 'Specialization:',
-          candidateName: 'Respondent:',
+          candidateName: 'Candidate:',
           interviewerName: 'Interviewer:',
         },
       },
@@ -1183,12 +1189,12 @@ export const en = {
       noSpecializationsAvailable: 'No specializations available',
       selectSpecializations: 'Specializations',
       role: {
-        CANDIDATE: 'Respondent',
+        CANDIDATE: 'Candidate',
         INTERVIEWER: 'Interviewer',
       },
       pendingTooltip: {
         CANDIDATE: 'The interviewer is being searched',
-        INTERVIEWER: 'The respondent is being searched',
+        INTERVIEWER: 'The candidate is being searched',
       },
       requestHeader: {
         titleLauncher: 'as a',
@@ -1206,6 +1212,7 @@ export const en = {
           pending: 'Pending',
           booked: 'Scheduled',
           expired: 'Expired',
+          completed: 'Completed',
         },
         daysOfWeek: {
           monday: 'Monday',
@@ -1432,6 +1439,9 @@ export const en = {
       yemen: 'Yemen',
       zambia: 'Zambia',
       zimbabwe: 'Zimbabwe',
+    },
+    notification: {
+      error: 'Something went wrong... Try again later',
     },
     clipboardMessage: {
       success: 'Copied!',

@@ -1,21 +1,25 @@
 import { Box, IconButton, Modal, Zoom } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector } from 'react-redux';
-import { modalNames } from '@utils/constants/modalNames.js';
-import { useModalController } from '@utils/hooks/useModalController.js';
-import { styles } from './ModalLayout.styles.js';
-import ModalContainer from './ModalContainer.jsx';
+import { modalNames } from '@utils/constants/modalNames';
+import { useModalController } from '@utils/hooks/useModalController';
+import { styles } from './ModalLayout.styles';
+import ModalContainer from './ModalContainer';
 
-const disableBackdropEscModals = [modalNames.videoModal];
+const smallScreenModals = [
+  modalNames.confirmDeleteSpecialization,
+  modalNames.confirmDeleteInterview,
+  modalNames.videoModal,
+];
 
 const ModalComponent = () => {
   const { modalType, isOpen } = useSelector((state) => state.modal);
   const { closeModal } = useModalController();
+  const isVideoModal = modalType === modalNames.videoModal;
 
   const handleClose = () => closeModal(modalType);
-  const modalSmallStyle = styles[modalNames[modalType]] || {};
 
-  const isVideoModal = disableBackdropEscModals.includes(modalType);
+  const isSmallScreenModal = smallScreenModals.includes(modalType);
 
   const handleIsBlockCloseModal = (event, reason) => {
     if (isVideoModal && (reason === 'backdropClick' || reason === 'escapeKeyDown')) return;
@@ -33,7 +37,7 @@ const ModalComponent = () => {
       onClose={handleIsBlockCloseModal}
     >
       <Zoom in={isOpen}>
-        <Box style={modalSmallStyle} sx={styles.wrapper}>
+        <Box style={isSmallScreenModal && styles.confirmDeleteModalWrapper} sx={styles.wrapper}>
           <IconButton aria-label='Close modal' sx={styles.btnIcon} type='button' onClick={handleClose}>
             <CloseIcon />
           </IconButton>

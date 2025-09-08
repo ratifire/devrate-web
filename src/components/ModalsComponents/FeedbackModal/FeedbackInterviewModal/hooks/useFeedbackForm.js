@@ -41,6 +41,7 @@ const useFeedbackForm = () => {
         dispatch(closeModal());
         navigate(navigationLinks.interviews);
         enqueueSnackbar(t('modal.interview.submit.success'), { variant: 'success' });
+        navigate(navigationLinks.passedInterviews);
       }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {

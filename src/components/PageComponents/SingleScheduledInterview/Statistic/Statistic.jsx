@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { LevelGauge } from '@components/UI/Chart';
-import { useGetMasteriesQuery } from '@redux/api/slices/interviews/singleScheduledInterviewApiSlice.js';
+import { useGetMasteriesQuery } from '@redux/api/slices/interviews/scheduledInterviewsApiSlice';
 import { StatisticSkeleton } from '@components/UI/Skeleton';
 import { ErrorComponent } from '@components/UI/Exceptions';
 import { prepareSkillsDataStatistics } from '../helpers';
