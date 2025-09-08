@@ -1,0 +1,3 @@
+import UserCardSinglePassedInterview from '@components/PageComponents/SinglePassedInterviewComponents/UserCardSinglePassedInterview/UserCardSinglePassedInterview';
+
+export default UserCardSinglePassedInterview;

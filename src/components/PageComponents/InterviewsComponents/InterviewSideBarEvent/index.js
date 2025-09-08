@@ -1,3 +1,3 @@
-import ScheduledSideBarEvent from './SideBarEvent.jsx';
+import ScheduledSideBarEvent from './SideBarEvent';
 
 export default ScheduledSideBarEvent;

@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next';
 import { useGetSoftSkillsQuery } from '@redux/api/slices/specialization/specializationApiSlice';
 import { useGetMastery } from '@utils/hooks/specialization';
 import { SpecializationSkills } from '@components/UI/Specialization/SpecializationSkills';
-import { modalNames } from '@utils/constants/modalNames.js';
-import { useModalController } from '@utils/hooks/useModalController.js';
-import { SKILLS_TYPE } from '@components/UI/Specialization/SpecializationSkills/constants';
+import { modalNames } from '@utils/constants/modalNames';
+import { useModalController } from '@utils/hooks/useModalController';
+import { SKILLS_TYPES } from '@utils/constants/skillsTypes';
 
 const SoftSkills = () => {
   const { t } = useTranslation();
@@ -35,10 +35,10 @@ const SoftSkills = () => {
       isError={isError}
       isFetching={isFetching}
       openModal={handleModalOpen}
+      skillType={SKILLS_TYPES.SOFT_SKILL}
       skills={skills}
       subTitle={t('specialization.softSkills.averageMark')}
       title={t('specialization.softSkills.title')}
-      type={SKILLS_TYPE.SOFT_SKILL}
     />
   );
 };
